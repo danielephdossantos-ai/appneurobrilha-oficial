@@ -1,10 +1,10 @@
-
 import React from 'react';
-import { EarlyChildhoodDashboard } from './components/early-childhood/EarlyChildhoodDashboard';
+import { RouterProvider } from '@tanstack/react-router';
+import { modularRouter } from './routes/modular-router';
 
 function App() {
   return (
-    <EarlyChildhoodDashboard />
+    <RouterProvider router={modularRouter} />
   );
 }
 
