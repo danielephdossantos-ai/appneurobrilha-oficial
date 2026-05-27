@@ -4,7 +4,7 @@ import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera
+  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +16,7 @@ const navCrianca = [
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
   { to: "/professor-ia", label: "Professor IA", icon: Camera },
+  { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
@@ -33,6 +34,7 @@ const navigationSequence = [
   "/neuro-treino",
   "/jornada-365",
   "/professor-ia",
+  "/amigo-virtual",
   "/rotina",
   "/painel-pais",
   "/terapeuta-brilha",
@@ -214,7 +216,8 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
-    { to: "/neuro-treino", icon: Brain, label: "Treino" },
+    { to: "/professor-ia", icon: Camera, label: "Professor" },
+    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
     { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
   return (

@@ -23,6 +23,7 @@ import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedur
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
@@ -99,6 +100,11 @@ const AnalyticsRoute = AnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AmigoVirtualRoute = AmigoVirtualRouteImport.update({
+  id: '/amigo-virtual',
+  path: '/amigo-virtual',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
   id: '/alfabetizacao',
   path: '/alfabetizacao',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -173,6 +181,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/alfabetizacao'
+    | '/amigo-virtual'
     | '/analytics'
     | '/auth'
     | '/escola-brilha'
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/alfabetizacao'
+    | '/amigo-virtual'
     | '/analytics'
     | '/auth'
     | '/escola-brilha'
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/alfabetizacao'
+    | '/amigo-virtual'
     | '/analytics'
     | '/auth'
     | '/escola-brilha'
@@ -260,6 +272,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
+  AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuthRoute: typeof AuthRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
@@ -378,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/amigo-virtual': {
+      id: '/amigo-virtual'
+      path: '/amigo-virtual'
+      fullPath: '/amigo-virtual'
+      preLoaderRoute: typeof AmigoVirtualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/alfabetizacao': {
       id: '/alfabetizacao'
       path: '/alfabetizacao'
@@ -420,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
   AlfabetizacaoRoute: AlfabetizacaoRoute,
+  AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuthRoute: AuthRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
