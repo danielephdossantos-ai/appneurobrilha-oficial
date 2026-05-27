@@ -17,13 +17,14 @@ export const LiteracyLayout: React.FC<LiteracyLayoutProps> = ({
   title,
   onBack 
 }) => {
-  const isDyslexic = profile?.condition === 'dyslexia';
-  const isTEA = profile?.condition === 'tea';
-  const isTDAH = profile?.condition === 'tdah';
+  const isDyslexic = profile === 'Dislexia';
+  const isTEA = profile === 'TEA';
+  const isTDAH = profile === 'TDAH';
 
   const adaptation = isDyslexic ? LITERACY_SYSTEM.adaptations.dyslexia : 
                    isTEA ? LITERACY_SYSTEM.adaptations.tea : 
                    isTDAH ? LITERACY_SYSTEM.adaptations.tdah : null;
+
 
   return (
     <div className={`min-h-screen bg-slate-50 p-4 md:p-8 ${isDyslexic ? 'font-dyslexic' : ''}`}
