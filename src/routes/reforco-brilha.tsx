@@ -81,7 +81,7 @@ function ReforcoBrilha() {
       }
 
       try {
-        const lesson = await ReforcoEngine.generateLesson(finalTopic, engine?.adaptive);
+        const lesson = await ReforcoEngine.generateLesson(finalTopic, engine?.adaptive as any);
         setLessonContent(lesson);
         setCurrentLevel("basic");
         if (lesson.category) {

@@ -34,7 +34,9 @@ export class AdaptiveEngine {
       animationIntensity: sensoryAdj.stimuliLevel === "none" ? "none" : neuroAdj.animationIntensity,
       animationSpeed: neuroAdj.animationSpeed * sensoryAdj.speedMultiplier,
       visualScale: neuroAdj.visualScale * sensoryAdj.visualScale,
+      instructionStyle: neuroAdj.instructionType
     };
+
 
   }
 }

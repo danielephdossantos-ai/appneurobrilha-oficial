@@ -25,7 +25,7 @@ export interface NeuroAdjustment {
   
   // New specific parameters
   animationSpeed: number; // velocidade (e.g., 0.5 slow, 1.5 fast)
-  stimuliLevel: "low" | "medium" | "high"; // estímulos
+  stimuliLevel: "none" | "low" | "medium" | "high"; // estímulos
   visualScale: number; // tamanho visual (e.g., 1.2 for 20% larger)
   maxItemsPerScreen: number; // quantidade de itens
   reinforcementIntensity: "subtle" | "standard" | "high"; // reforços
