@@ -1,4 +1,3 @@
-
 import { AdaptiveAnalysis } from "../adaptive/motor";
 
 export type Emotion = 
@@ -14,7 +13,7 @@ export type Emotion =
 
 export interface EmotionalState {
   current: Emotion;
-  intensity: number; // 0 to 1
+  intensity: number;
   history: { date: Date; emotion: Emotion; intensity: number }[];
 }
 
