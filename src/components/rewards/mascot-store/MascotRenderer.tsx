@@ -226,14 +226,21 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         viewBox="0 0 200 200" 
         width={size} 
         height={size} 
-        className="drop-shadow-[0_20px_20px_rgba(0,0,0,0.1)] transition-transform duration-300"
+        className="drop-shadow-[0_15px_15px_rgba(0,0,0,0.1)] transition-transform duration-300"
         style={{ transform: isClicked ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
       >
         {/* Shadow */}
-        <ellipse cx="100" cy="195" rx="60" ry="8" fill="rgba(26,26,64,0.1)" />
+        <motion.ellipse 
+          cx="100" cy="195" rx="50" ry="6" 
+          fill="rgba(26,26,64,0.1)" 
+          animate={isHovered ? { rx: 60, opacity: 0.2 } : { rx: 50, opacity: 0.1 }}
+        />
         
         {/* Mascot Body & Face */}
-        <motion.g animate={floatAnim}>
+        <motion.g 
+          animate={floatAnim}
+          whileHover={{ scale: 1.02 }}
+        >
           {renderBody()}
           <StandardFace mascot={mascot} isHovered={isHovered} isClicked={isClicked} />
           {renderAccessory(mascot)}
