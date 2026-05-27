@@ -438,6 +438,7 @@ export type Database = {
         Row: {
           adaptacoes: Json | null
           created_at: string | null
+          domain: string | null
           estrategia_pedagogica: string | null
           faixa_etaria: string | null
           habilidade_bncc: string | null
@@ -463,6 +464,7 @@ export type Database = {
         Insert: {
           adaptacoes?: Json | null
           created_at?: string | null
+          domain?: string | null
           estrategia_pedagogica?: string | null
           faixa_etaria?: string | null
           habilidade_bncc?: string | null
@@ -488,6 +490,7 @@ export type Database = {
         Update: {
           adaptacoes?: Json | null
           created_at?: string | null
+          domain?: string | null
           estrategia_pedagogica?: string | null
           faixa_etaria?: string | null
           habilidade_bncc?: string | null
