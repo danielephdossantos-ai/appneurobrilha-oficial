@@ -13,10 +13,11 @@ export function usePedagogicalEngine() {
     if (!activeChild) return null;
 
     // Map internal diagnostico to core engine profile
-    let neuroProfile: NeuroProfile = "neurotipico";
-    if (activeChild.diagnostico === "tea") neuroProfile = "autismo";
-    else if (activeChild.diagnostico === "tdah") neuroProfile = "tdah";
-    else if (activeChild.diagnostico === "dislexia") neuroProfile = "dislexia";
+    let neuroProfile: NeuroProfile = "Neurotipico";
+    if (activeChild.diagnostico === "tea") neuroProfile = "TEA";
+    else if (activeChild.diagnostico === "tdah") neuroProfile = "TDAH";
+    else if (activeChild.diagnostico === "dislexia") neuroProfile = "Dislexia";
+    else if (activeChild.diagnostico === "tod") neuroProfile = "TOD";
 
     // Mocking current performance and emotion for now
     // In a real app, these would come from state or recent activity logs
