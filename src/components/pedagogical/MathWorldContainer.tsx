@@ -149,7 +149,43 @@ const MathActivityRenderer = ({ activity, onAnswer, showFeedback }: any) => {
         </div>
       );
     
+    case 'comparison':
+      return (
+        <div className="space-y-12">
+          <div className="flex justify-center items-end gap-12">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              onClick={() => onAnswer(data.left > data.right)}
+              className="p-8 bg-emerald-50 rounded-3xl border-4 border-transparent hover:border-emerald-300"
+            >
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {Array.from({ length: data.left }).map((_, i) => (
+                  <span key={i} className="text-3xl">📦</span>
+                ))}
+              </div>
+              <p className="font-black text-emerald-600 text-xl">Vagão A</p>
+            </motion.button>
+
+            <div className="text-4xl font-black text-gray-300 mb-12">VS</div>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              onClick={() => onAnswer(data.right > data.left)}
+              className="p-8 bg-amber-50 rounded-3xl border-4 border-transparent hover:border-amber-300"
+            >
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {Array.from({ length: data.right }).map((_, i) => (
+                  <span key={i} className="text-3xl">📦</span>
+                ))}
+              </div>
+              <p className="font-black text-amber-600 text-xl">Vagão B</p>
+            </motion.button>
+          </div>
+        </div>
+      );
+
     case 'shapes':
+
       return (
         <div className="space-y-12">
           <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
