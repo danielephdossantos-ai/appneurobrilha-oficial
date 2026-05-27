@@ -24,7 +24,7 @@ export class NeuroAnalyticsService {
     }
   }
 
-  private static async getStoredEvents(): NeuroAnalyticsEvent[] {
+  private static async getStoredEvents(): Promise<NeuroAnalyticsEvent[]> {
     const stored = await get<NeuroAnalyticsEvent[]>(this.STORAGE_KEY);
     return stored || [];
   }
