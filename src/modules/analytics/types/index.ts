@@ -15,7 +15,7 @@ export const NeuroAnalyticsEventSchema = z.object({
     "overload_detected",
     "evolution_milestone"
   ]),
-  metadata: z.record(z.any()).default({}),
+  metadata: z.record(z.string(), z.any()).default({}),
   duration_ms: z.number().optional(),
   created_at: z.string().datetime().optional()
 });
