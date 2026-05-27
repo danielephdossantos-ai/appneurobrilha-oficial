@@ -26,6 +26,58 @@ const HAIR_COLORS: Record<HairColor, string> = {
   none: 'transparent',
 };
 
+// --- Standardized Visual DNA Components ---
+
+const Eye = ({ color = "#4A90E2", isHovered = false }) => (
+  <g className="eye">
+    {/* Eye Socket */}
+    <circle r="18" fill="white" />
+    {/* Iris */}
+    <motion.circle 
+      r="10" 
+      fill={color} 
+      animate={isHovered ? { scale: 1.15 } : { scale: 1 }}
+    />
+    {/* Pupil */}
+    <circle r="5" fill="#1A1A40" />
+    {/* Highlights */}
+    <circle cx="5" cy="-5" r="5" fill="white" fillOpacity="0.9" />
+    <circle cx="-3" cy="3" r="2" fill="white" fillOpacity="0.5" />
+  </g>
+);
+
+const StandardFace = ({ mascot, isHovered, isClicked }: { mascot: MascotData, isHovered: boolean, isClicked: boolean }) => {
+  const eyeColor = mascot.details?.eyeColor || "#4A90E2";
+  
+  return (
+    <g transform="translate(100, 95)">
+      {/* Blushing */}
+      <circle cx="-40" cy="15" r="12" fill="#FFB6C1" fillOpacity="0.4" />
+      <circle cx="40" cy="15" r="12" fill="#FFB6C1" fillOpacity="0.4" />
+
+      {/* Eyes */}
+      <motion.g animate={{ scaleY: [1, 1, 1, 0.1, 1] }} transition={{ duration: 3, repeat: Infinity }}>
+        <g transform="translate(-28, -5)">
+          <Eye color={eyeColor} isHovered={isHovered} />
+        </g>
+        <g transform="translate(28, -5)">
+          <Eye color={eyeColor} isHovered={isHovered} />
+        </g>
+      </motion.g>
+
+      {/* Mouth */}
+      <motion.path 
+        d={isClicked || isHovered ? "M-12 25 Q0 45 12 25" : "M-10 30 Q0 38 10 30"}
+        fill="none" 
+        stroke="#1A1A40" 
+        strokeWidth="5" 
+        strokeLinecap="round"
+        animate={isClicked ? { scale: 1.2 } : { scale: 1 }}
+      />
+    </g>
+  );
+};
+
 export const MascotRenderer: React.FC<MascotRendererProps> = ({ 
   mascot, 
   size = 200, 
@@ -35,22 +87,10 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  // --- Animation Variants ---
   const floatAnim = {
-    y: [0, -8, 0],
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" as const }
+    y: [0, -10, 0],
+    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
   };
-
-  const breatheAnim = {
-    scale: [1, 1.02, 1],
-    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" as const }
-  };
-
-  const blinkAnim = {
-    scaleY: [1, 1, 1, 0.1, 1],
-    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" as const }
-  };
-
 
   const handleClick = () => {
     if (!interactive) return;
@@ -58,173 +98,84 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
     setTimeout(() => setIsClicked(false), 600);
   };
 
-  // --- Rendering Logic ---
+  const getBaseColor = () => {
+    if (mascot.type === 'human') return SKIN_COLORS[mascot.skin || 'light'];
+    return getCostumeColor(mascot.costume);
+  };
 
-  const renderFace = (isHuman: boolean) => {
-    const eyeColor = mascot.details?.eyeColor || "#000";
-    
-    return (
-      <g transform="translate(100, 100)">
-        {/* Blushing Cheeks */}
-        <circle cx="-35" cy="15" r="10" fill="#FFB6C1" fillOpacity="0.5" />
-        <circle cx="35" cy="15" r="10" fill="#FFB6C1" fillOpacity="0.5" />
+  const renderBody = () => {
+    const color = getBaseColor();
+    const secondaryColor = getCostumeColor(mascot.costume);
 
-        {/* Eyes Container */}
-        <motion.g animate={blinkAnim}>
-          {/* Left Eye */}
-          <g transform="translate(-25, -10)">
-            <circle r="15" fill="#fff" />
-            <motion.circle 
-              r="8" 
-              fill={eyeColor} 
-              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-            />
-            <circle cx="4" cy="-4" r="4" fill="#fff" fillOpacity="0.8" />
-            <circle cx="-2" cy="2" r="1.5" fill="#fff" fillOpacity="0.5" />
+    // Standard "Premium Cartoon" Body: Rounded, clean shapes
+    switch (mascot.type) {
+      case 'human':
+        return (
+          <g>
+            {/* Body/Shirt */}
+            <path d="M50 185 Q100 140 150 185 Q100 210 50 185" fill={secondaryColor} />
+            {/* Arms */}
+            <motion.circle cx="45" cy="165" r="10" fill={color} animate={isHovered ? { x: [-2, 2, -2] } : {}} />
+            <motion.circle cx="155" cy="165" r="10" fill={color} animate={isHovered ? { x: [2, -2, 2] } : {}} />
+            {/* Head */}
+            <circle cx="100" cy="90" r="65" fill={color} />
+            {/* Hair */}
+            {mascot.hairColor !== 'none' && (
+              <g>
+                <path d="M35 90 Q35 25 100 25 Q165 25 165 90" fill={HAIR_COLORS[mascot.hairColor || 'brown']} />
+                <path d="M35 80 Q100 40 165 80 Q100 65 35 80" fill={HAIR_COLORS[mascot.hairColor || 'brown']} />
+              </g>
+            )}
           </g>
-          {/* Right Eye */}
-          <g transform="translate(25, -10)">
-            <circle r="15" fill="#fff" />
-            <motion.circle 
-              r="8" 
-              fill={eyeColor} 
-              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-            />
-            <circle cx="4" cy="-4" r="4" fill="#fff" fillOpacity="0.8" />
-            <circle cx="-2" cy="2" r="1.5" fill="#fff" fillOpacity="0.5" />
+        );
+      case 'animal':
+        return (
+          <g>
+            {/* Body */}
+            <circle cx="100" cy="150" r="45" fill={secondaryColor} />
+            {/* Ears/Details based on costume */}
+            {mascot.costume === 'dog' && (
+              <>
+                <ellipse cx="50" cy="70" rx="15" ry="30" fill={secondaryColor} transform="rotate(-15, 50, 70)" />
+                <ellipse cx="150" cy="70" rx="15" ry="30" fill={secondaryColor} transform="rotate(15, 150, 70)" />
+              </>
+            )}
+            {mascot.costume === 'bear' && (
+              <>
+                <circle cx="55" cy="45" r="22" fill={secondaryColor} />
+                <circle cx="145" cy="45" r="22" fill={secondaryColor} />
+              </>
+            )}
+            {mascot.costume === 'cat' && (
+              <>
+                <path d="M40 40 L75 80 L35 90 Z" fill={secondaryColor} />
+                <path d="M160 40 L125 80 L165 90 Z" fill={secondaryColor} />
+              </>
+            )}
+            {/* Head */}
+            <circle cx="100" cy="95" r="65" fill={secondaryColor} />
+            {/* Snout */}
+            <ellipse cx="100" cy="125" rx="20" ry="15" fill="white" fillOpacity="0.2" />
+            <circle cx="100" cy="120" r="6" fill="#1A1A40" />
           </g>
-        </motion.g>
-
-        {/* Mouth */}
-        <motion.path 
-          d={isClicked || isHovered ? "M-15 20 Q0 40 15 20" : "M-10 25 Q0 35 10 25"}
-          fill="none" 
-          stroke="#4A148C" 
-          strokeWidth="4" 
-          strokeLinecap="round" 
-          animate={isClicked ? { scale: 1.2 } : { scale: 1 }}
-        />
-      </g>
-    );
-  };
-
-  const renderHuman = () => {
-    const skin = SKIN_COLORS[mascot.skin || 'light'];
-    const hair = HAIR_COLORS[mascot.hairColor || 'none'];
-    
-    return (
-      <motion.g animate={floatAnim}>
-        {/* Body */}
-        <path d="M60 180 Q100 130 140 180 Q100 200 60 180" fill={getCostumeColor(mascot.costume)} />
-        
-        {/* Arms */}
-        <motion.path 
-          d="M55 155 Q35 165 45 185" 
-          stroke={getCostumeColor(mascot.costume)} 
-          strokeWidth="12" 
-          strokeLinecap="round" 
-          animate={isHovered ? { rotate: [0, -20, 0] } : {}}
-        />
-        <motion.path 
-          d="M145 155 Q165 165 155 185" 
-          stroke={getCostumeColor(mascot.costume)} 
-          strokeWidth="12" 
-          strokeLinecap="round"
-          animate={isHovered ? { rotate: [0, 20, 0] } : {}}
-        />
-
-        {/* Head Base */}
-        <circle cx="100" cy="95" r="55" fill={skin} />
-        
-        {/* Hair Back */}
-        {mascot.hairColor !== 'none' && (
-           <path d="M45 95 Q45 40 100 40 Q155 40 155 95" fill={hair} />
-        )}
-
-        {renderFace(true)}
-
-        {/* Hair Front/Bangs */}
-        {mascot.hairColor !== 'none' && (
-           <path d="M45 85 Q100 50 155 85 Q100 70 45 85" fill={hair} />
-        )}
-
-        {/* Accessories */}
-        {renderAccessory(mascot)}
-      </motion.g>
-    );
-  };
-
-  const renderAnimal = () => {
-    const color = getCostumeColor(mascot.costume);
-    return (
-      <motion.g animate={floatAnim}>
-        {/* Body */}
-        <circle cx="100" cy="140" r="50" fill={color} />
-        
-        {/* Head */}
-        <circle cx="100" cy="90" r="60" fill={color} />
-        
-        {/* Ears */}
-        {mascot.costume === 'dog' && (
-          <>
-            <ellipse cx="50" cy="70" rx="15" ry="30" fill={color} transform="rotate(-20, 50, 70)" />
-            <ellipse cx="150" cy="70" rx="15" ry="30" fill={color} transform="rotate(20, 150, 70)" />
-          </>
-        )}
-        {mascot.costume === 'cat' && (
-          <>
-            <path d="M50 50 L70 80 L40 90 Z" fill={color} />
-            <path d="M150 50 L130 80 L160 90 Z" fill={color} />
-          </>
-        )}
-        {mascot.costume === 'bear' && (
-          <>
-            <circle cx="60" cy="50" r="20" fill={color} />
-            <circle cx="140" cy="50" r="20" fill={color} />
-          </>
-        )}
-        {mascot.costume === 'dino' && (
-          <path d="M60 40 L80 60 L100 40 L120 60 L140 40" fill="#388E3C" />
-        )}
-
-        {renderFace(false)}
-        
-        {/* Snout for animals */}
-        <ellipse cx="100" cy="115" rx="15" ry="10" fill="#fff" fillOpacity="0.3" />
-        <circle cx="100" cy="110" r="5" fill="#333" />
-      </motion.g>
-    );
-  };
-
-  const renderRobot = () => {
-    return (
-      <motion.g animate={floatAnim}>
-        {/* Body */}
-        <rect x="60" y="120" width="80" height="60" rx="15" fill="#B0BEC5" />
-        <rect x="75" y="140" width="50" height="20" rx="5" fill="#546E7A" />
-        
-        {/* Head */}
-        <rect x="55" y="55" width="90" height="75" rx="20" fill="#CFD8DC" />
-        
-        {/* Eyes (glowy) */}
-        <g transform="translate(100, 90)">
-          <circle cx="-25" r="12" fill="#00D1FF" fillOpacity="0.3">
-            <animate attributeName="fillOpacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="-25" r="6" fill="#00D1FF" />
-          <circle cx="25" r="12" fill="#00D1FF" fillOpacity="0.3">
-            <animate attributeName="fillOpacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="25" r="6" fill="#00D1FF" />
-        </g>
-        
-        {/* Antenna */}
-        <line x1="100" y1="55" x2="100" y2="35" stroke="#546E7A" strokeWidth="4" />
-        <circle cx="100" cy="30" r="6" fill="#FF5252">
-           <animate attributeName="fill" values="#FF5252;#FFEB3B;#FF5252" dur="1s" repeatCount="indefinite" />
-        </circle>
-      </motion.g>
-    );
+        );
+      case 'robot':
+        return (
+          <g>
+            {/* Body */}
+            <rect x="65" y="130" width="70" height="50" rx="15" fill={secondaryColor} />
+            {/* Head */}
+            <rect x="50" y="50" width="100" height="85" rx="25" fill={secondaryColor} />
+            {/* Antenna */}
+            <line x1="100" y1="50" x2="100" y2="25" stroke="#1A1A40" strokeWidth="4" />
+            <circle cx="100" cy="20" r="8" fill="#FF5252">
+              <animate attributeName="fill" values="#FF5252;#FFEB3B;#FF5252" dur="2s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        );
+      default:
+        return <circle cx="100" cy="100" r="70" fill={secondaryColor} />;
+    }
   };
 
   return (
@@ -238,37 +189,30 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         viewBox="0 0 200 200" 
         width={size} 
         height={size} 
-        className="drop-shadow-2xl transition-transform duration-300"
-        style={{ transform: isClicked ? 'scale(1.1) rotate(5deg)' : 'scale(1)' }}
+        className="drop-shadow-[0_20px_20px_rgba(0,0,0,0.1)] transition-transform duration-300"
+        style={{ transform: isClicked ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
       >
-        {/* Global Shadow */}
-        <ellipse cx="100" cy="190" rx="50" ry="10" fill="rgba(0,0,0,0.1)" />
+        {/* Shadow */}
+        <ellipse cx="100" cy="195" rx="60" ry="8" fill="rgba(26,26,64,0.1)" />
         
-        {/* Back Accessories (Wings, etc.) */}
-        <AnimatePresence>
-          {mascot.details?.backAccessory === 'wings' && (
-            <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}>
-              <path d="M40 100 Q-20 60 40 140" fill="#E1BEE7" fillOpacity="0.7" />
-              <path d="M160 100 Q220 60 160 140" fill="#E1BEE7" fillOpacity="0.7" />
-            </motion.g>
-          )}
-        </AnimatePresence>
-
-        {mascot.type === 'human' && renderHuman()}
-        {mascot.type === 'animal' && renderAnimal()}
-        {mascot.type === 'robot' && renderRobot()}
+        {/* Mascot Body & Face */}
+        <motion.g animate={floatAnim}>
+          {renderBody()}
+          <StandardFace mascot={mascot} isHovered={isHovered} isClicked={isClicked} />
+          {renderAccessory(mascot)}
+        </motion.g>
       </svg>
       
-      {/* Reaction Particles */}
+      {/* Interactive Sparkles */}
       <AnimatePresence>
         {isClicked && (
           <motion.div 
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: 1, y: -50 }}
+            initial={{ opacity: 0, scale: 0.5, y: 0 }}
+            animate={{ opacity: 1, scale: 1.2, y: -60 }}
             exit={{ opacity: 0 }}
-            className="absolute top-0 text-2xl font-bold text-yellow-500 pointer-events-none"
+            className="absolute text-3xl pointer-events-none"
           >
-            ✨ {mascot.personality === 'Brincalhão e carinhoso' ? '❤' : '⭐'}
+            {['✨', '💖', '⭐', '🌈'][Math.floor(Math.random() * 4)]}
           </motion.div>
         )}
       </AnimatePresence>
@@ -276,23 +220,22 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
   );
 };
 
-// --- Helper Functions ---
-
 function getCostumeColor(costume?: string) {
-  switch (costume) {
-    case 'superhero': return '#E91E63';
-    case 'scientist': return '#4FC3F7';
-    case 'astronaut': return '#ECEFF1';
-    case 'fairy': return '#F06292';
-    case 'princess': return '#BA68C8';
-    case 'dino': return '#4CAF50';
-    case 'dog': return '#FFB74D';
-    case 'cat': return '#90A4AE';
-    case 'bear': return '#A1887F';
-    case 'robot': return '#CFD8DC';
-    case 'unicorn': return '#F8BBD0';
-    default: return '#90CAF9';
-  }
+  const colors: Record<string, string> = {
+    superhero: '#FF5252',
+    scientist: '#00BCD4',
+    astronaut: '#90A4AE',
+    fairy: '#F06292',
+    princess: '#BA68C8',
+    dino: '#8BC34A',
+    dog: '#FFB74D',
+    cat: '#78909C',
+    bear: '#8D6E63',
+    robot: '#CFD8DC',
+    unicorn: '#F48FB1',
+    default: '#81D4FA'
+  };
+  return colors[costume || 'default'];
 }
 
 function renderAccessory(mascot: MascotData) {
@@ -301,19 +244,19 @@ function renderAccessory(mascot: MascotData) {
 
   switch (acc) {
     case 'lightning-bolt':
-      return <path d="M95 140 L110 160 L100 160 L115 180" fill="#FFEB3B" stroke="#FBC02D" strokeWidth="2" />;
+      return <path d="M100 145 L115 165 L105 165 L120 185" fill="#FFEB3B" stroke="#1A1A40" strokeWidth="2" />;
     case 'glasses':
       return (
-        <g transform="translate(100, 90)">
-          <circle cx="-25" r="18" fill="none" stroke="#333" strokeWidth="3" />
-          <circle cx="25" r="18" fill="none" stroke="#333" strokeWidth="3" />
-          <line x1="-7" y1="0" x2="7" y2="0" stroke="#333" strokeWidth="3" />
+        <g transform="translate(100, 95)" opacity="0.8">
+          <circle cx="-28" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="3" />
+          <circle cx="28" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="3" />
+          <line x1="-6" y1="-5" x2="6" y2="-5" stroke="#1A1A40" strokeWidth="3" />
         </g>
       );
     case 'helmet':
-      return <circle cx="100" cy="95" r="65" fill="none" stroke="#fff" strokeWidth="4" strokeDasharray="10 5" />;
+      return <circle cx="100" cy="90" r="75" fill="none" stroke="white" strokeWidth="3" strokeDasharray="12 6" opacity="0.6" />;
     case 'tiara':
-      return <path d="M75 55 L100 35 L125 55 Z" fill="#FFD54F" stroke="#FBC02D" />;
+      return <path d="M75 40 L100 15 L125 40 Z" fill="#FFD54F" stroke="#1A1A40" strokeWidth="2" />;
     default:
       return null;
   }
