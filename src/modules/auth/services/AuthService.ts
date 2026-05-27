@@ -32,17 +32,32 @@ export class AuthService {
     analytics_consent?: boolean;
     data_usage_consent?: boolean;
   }) {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error("Usuário não autenticado. Por favor, faça login novamente.");
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
+    
+    if (!user) {
+      // Tentar getUser como fallback caso o session esteja instável
+      const { data: { user: freshUser } } = await supabase.auth.getUser();
+      if (!freshUser) throw new Error("Usuário não autenticado. Por favor, faça login novamente.");
+      return this.performUpdatePrivacy(freshUser.id, settings);
+    }
 
+    return this.performUpdatePrivacy(user.id, settings);
+  }
+
+  private static async performUpdatePrivacy(userId: string, settings: any) {
     const { data, error } = await supabase.from('user_privacy_settings')
       .upsert({
-        user_id: user.id,
+        user_id: userId,
         ...settings,
         updated_at: new Date().toISOString()
       })
       .select()
       .single();
+
+    if (error) throw error;
+    return data;
+  }
 
     if (error) throw error;
 
