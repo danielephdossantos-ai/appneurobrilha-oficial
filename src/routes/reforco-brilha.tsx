@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
-import { useState } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp } from "lucide-react";
 import { useAppState } from "@/lib/store";
 import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
+import { ProgressionService } from "@/core/progression/service";
+import { ProgressionEngine } from "@/core/progression/engine";
+import { ProgressionStats, SkillMastery } from "@/core/progression/types";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/reforco-brilha")({
   component: ReforcoBrilha,
@@ -22,6 +26,41 @@ function ReforcoBrilha() {
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
   const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
+  const [stats, setStats] = useState<ProgressionStats | null>(null);
+  const [skills, setSkills] = useState<SkillMastery[]>([]);
+  const [pendingReviews, setPendingReviews] = useState<any[]>([]);
+  const [isLoadingStats, setIsLoadingStats] = useState(false);
+
+  useEffect(() => {
+    if (activeChild) {
+      loadGeneralStats();
+    }
+  }, [activeChild]);
+
+  const loadGeneralStats = async () => {
+    if (!activeChild) return;
+    setIsLoadingStats(true);
+    try {
+      const reviews = await ProgressionService.getPendingReviews(activeChild.id);
+      setPendingReviews(reviews);
+    } catch (error) {
+      console.error("Erro ao carregar stats:", error);
+    } finally {
+      setIsLoadingStats(false);
+    }
+  };
+
+  const loadTopicStats = async (materia: string) => {
+    if (!activeChild) return;
+    try {
+      const topicStats = await ProgressionService.getStats(activeChild.id, materia);
+      const topicSkills = await ProgressionService.getSkillMastery(activeChild.id, materia);
+      setStats(topicStats);
+      setSkills(topicSkills);
+    } catch (error) {
+      console.error("Erro ao carregar stats do tópico:", error);
+    }
+  };
 
   const startLesson = (customTopic?: string) => {
     const finalTopic = customTopic || topic;
@@ -36,6 +75,9 @@ function ReforcoBrilha() {
         const lesson = await ReforcoEngine.generateLesson(finalTopic);
         setLessonContent(lesson);
         setCurrentLevel("basic");
+        if (lesson.category) {
+          loadTopicStats(lesson.category);
+        }
       } catch (error) {
         console.error("Erro ao carregar aula:", error);
         setIsTeaching(false);
@@ -43,6 +85,33 @@ function ReforcoBrilha() {
     };
 
     loadLesson();
+  };
+
+  const completeLesson = async () => {
+    if (!activeChild || !lessonContent) return;
+    
+    try {
+      // Mock de sucesso na atividade
+      const skillCode = lessonContent.topic.toUpperCase().replace(/\s/g, '_');
+      await ProgressionEngine.updateMastery(
+        activeChild.id, 
+        skillCode, 
+        lessonContent.category, 
+        true
+      );
+      
+      if (lessonContent.activityId) {
+        await ProgressionEngine.scheduleNextReview(activeChild.id, lessonContent.activityId, 5);
+      }
+      
+      toast.success("Parabéns! Sua evolução foi registrada.");
+      setIsTeaching(false);
+      setLessonContent(null);
+      loadGeneralStats();
+    } catch (error) {
+      console.error("Erro ao completar aula:", error);
+      toast.error("Erro ao salvar progresso.");
+    }
   };
 
   return (
@@ -82,7 +151,34 @@ function ReforcoBrilha() {
             </p>
           </Card>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {pendingReviews.length > 0 && (
+            <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
+              <h3 className="text-sm font-bold flex items-center gap-2 px-1 text-primary">
+                <RefreshCw className="h-4 w-4 animate-spin-slow" />
+                REVISÕES AGENDADAS (Repetição Espaçada)
+              </h3>
+              <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                {pendingReviews.map((review) => (
+                  <button
+                    key={review.id}
+                    onClick={() => startLesson(review.activity?.titulo || review.skill_code)}
+                    className="flex-shrink-0 w-48 p-4 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-left group"
+                  >
+                    <div className="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">Revisão Sugerida</div>
+                    <div className="font-bold text-sm line-clamp-1">{review.activity?.titulo || review.skill_code}</div>
+                    <div className="mt-3 flex items-center justify-between">
+                      <div className="h-1.5 flex-1 bg-primary/10 rounded-full overflow-hidden mr-2">
+                        <div className="h-full bg-primary" style={{ width: '100%' }}></div>
+                      </div>
+                      <PlayCircle className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {CATEGORIAS.map((cat) => (
                   <div key={cat.id} className="space-y-3">
                     <h4 className="font-bold flex items-center gap-2 px-1 text-base">
@@ -228,9 +324,12 @@ function ReforcoBrilha() {
                   ))}
                   
                   <div className="pt-4 flex gap-3">
-                    <button className="flex-1 bg-primary text-white font-black py-5 rounded-[2rem] shadow-glow hover:translate-y-[-2px] active:translate-y-[0px] transition-all flex items-center justify-center gap-2 text-lg">
-                      PRATICAR AGORA
-                      <ChevronRight className="h-6 w-6" />
+                    <button 
+                      onClick={completeLesson}
+                      className="flex-1 bg-primary text-white font-black py-5 rounded-[2rem] shadow-glow hover:translate-y-[-2px] active:translate-y-[0px] transition-all flex items-center justify-center gap-2 text-lg"
+                    >
+                      FINALIZAR E SALVAR PROGRESSO
+                      <CheckCircle2 className="h-6 w-6" />
                     </button>
                   </div>
                 </div>
