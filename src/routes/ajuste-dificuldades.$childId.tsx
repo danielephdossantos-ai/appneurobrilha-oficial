@@ -19,10 +19,10 @@ const materias = [
 
 function Ajuste() {
   const { childId } = Route.useParams();
-  const { state, updateChild } = useAppState();
-  const child = state.children.find((c) => c.id === childId);
+  const { children: allChildren, updateChild } = useAppState();
+  const child = allChildren.find((c: any) => c.id === childId);
   const [niveis, setNiveis] = useState(child?.niveis);
-  const [tempo, setTempo] = useState(child?.tempoAtencaoMin ?? 10);
+  const [tempo, setTempo] = useState(child?.tempo_atencao_min ?? 10);
   const [flags, setFlags] = useState(child?.flags);
   const [obs, setObs] = useState(child?.observacoes ?? "");
   const [saved, setSaved] = useState(false);
@@ -30,7 +30,7 @@ function Ajuste() {
   if (!child || !niveis || !flags) return <Shell><p>Criança não encontrada.</p></Shell>;
 
   const salvar = () => {
-    updateChild(childId, { niveis, tempoAtencaoMin: tempo, flags, observacoes: obs });
+    updateChild(childId, { niveis, tempo_atencao_min: tempo, flags, observacoes: obs });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -48,7 +48,7 @@ function Ajuste() {
               <div key={m.k}>
                 <div className="flex justify-between items-baseline mb-1">
                   <span className="font-bold">{m.label}</span>
-                  <span className="text-xs text-muted-foreground">{NIVEL_DESC[val].titulo}</span>
+                  <span className="text-xs text-muted-foreground">{NIVEL_DESC[val as 1|2|3|4].titulo}</span>
                 </div>
                 <div className="grid grid-cols-4 gap-1.5">
                   {[1, 2, 3, 4].map((n) => (
@@ -58,7 +58,7 @@ function Ajuste() {
                     </button>
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">{NIVEL_DESC[val].desc}</p>
+                <p className="text-xs text-muted-foreground mt-1">{NIVEL_DESC[val as 1|2|3|4].desc}</p>
               </div>
             );
           })}
