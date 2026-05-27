@@ -12,9 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
+import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
-import { Route as MundoBrilhaRouteImport } from './routes/mundo-brilha'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -38,6 +38,11 @@ const RelatorioRoute = RelatorioRouteImport.update({
   path: '/relatorio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
+  id: '/reforco-brilha',
+  path: '/reforco-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PainelPaisRoute = PainelPaisRouteImport.update({
   id: '/painel-pais',
   path: '/painel-pais',
@@ -46,11 +51,6 @@ const PainelPaisRoute = PainelPaisRouteImport.update({
 const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
   id: '/neuro-treino',
   path: '/neuro-treino',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MundoBrilhaRoute = MundoBrilhaRouteImport.update({
-  id: '/mundo-brilha',
-  path: '/mundo-brilha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Jornada365Route = Jornada365RouteImport.update({
@@ -96,9 +96,9 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
-  '/mundo-brilha': typeof MundoBrilhaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
@@ -111,9 +111,9 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
-  '/mundo-brilha': typeof MundoBrilhaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
@@ -127,9 +127,9 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
-  '/mundo-brilha': typeof MundoBrilhaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
@@ -144,9 +144,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
-    | '/mundo-brilha'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
@@ -159,9 +159,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
-    | '/mundo-brilha'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
@@ -174,9 +174,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
-    | '/mundo-brilha'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
@@ -190,9 +190,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   Jornada365Route: typeof Jornada365Route
-  MundoBrilhaRoute: typeof MundoBrilhaRoute
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
+  ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
   RotinaRoute: typeof RotinaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
@@ -223,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelatorioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reforco-brilha': {
+      id: '/reforco-brilha'
+      path: '/reforco-brilha'
+      fullPath: '/reforco-brilha'
+      preLoaderRoute: typeof ReforcoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/painel-pais': {
       id: '/painel-pais'
       path: '/painel-pais'
@@ -235,13 +242,6 @@ declare module '@tanstack/react-router' {
       path: '/neuro-treino'
       fullPath: '/neuro-treino'
       preLoaderRoute: typeof NeuroTreinoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mundo-brilha': {
-      id: '/mundo-brilha'
-      path: '/mundo-brilha'
-      fullPath: '/mundo-brilha'
-      preLoaderRoute: typeof MundoBrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jornada-365': {
@@ -302,9 +302,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   Jornada365Route: Jornada365Route,
-  MundoBrilhaRoute: MundoBrilhaRoute,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
+  ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
   RotinaRoute: RotinaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
