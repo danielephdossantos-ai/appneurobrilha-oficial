@@ -152,11 +152,33 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
                 <path d="M160 40 L125 80 L165 90 Z" fill={secondaryColor} />
               </>
             )}
+            {mascot.costume === 'penguin' && (
+              <>
+                <circle cx="100" cy="140" r="35" fill="white" />
+                <path d="M30 140 Q10 160 30 180" fill={secondaryColor} />
+                <path d="M170 140 Q190 160 170 180" fill={secondaryColor} />
+              </>
+            )}
+            {mascot.costume === 'monster' && (
+              <>
+                <path d="M40 40 L50 70 M150 40 L160 70" stroke={secondaryColor} strokeWidth="10" strokeLinecap="round" />
+                <circle cx="60" cy="40" r="10" fill={secondaryColor} />
+                <circle cx="140" cy="40" r="10" fill={secondaryColor} />
+              </>
+            )}
             {/* Head */}
             <circle cx="100" cy="95" r="65" fill={secondaryColor} />
+            {/* White belly/face for some animals */}
+            {(mascot.costume === 'penguin' || mascot.costume === 'panda') && (
+               <circle cx="100" cy="110" r="50" fill="white" fillOpacity="0.15" />
+            )}
             {/* Snout */}
-            <ellipse cx="100" cy="125" rx="20" ry="15" fill="white" fillOpacity="0.2" />
-            <circle cx="100" cy="120" r="6" fill="#1A1A40" />
+            {['dog', 'bear', 'cat', 'dino'].includes(mascot.costume || '') && (
+              <g>
+                <ellipse cx="100" cy="125" rx="20" ry="15" fill="white" fillOpacity="0.2" />
+                <circle cx="100" cy="120" r="6" fill="#1A1A40" />
+              </g>
+            )}
           </g>
         );
       case 'robot':
@@ -233,6 +255,8 @@ function getCostumeColor(costume?: string) {
     bear: '#8D6E63',
     robot: '#CFD8DC',
     unicorn: '#F48FB1',
+    penguin: '#263238',
+    monster: '#9C27B0',
     default: '#81D4FA'
   };
   return colors[costume || 'default'];
