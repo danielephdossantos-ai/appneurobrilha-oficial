@@ -99,13 +99,6 @@ export function Shell({ children }: { children?: ReactNode }) {
         </nav>
 
         <div className="mt-auto flex flex-col gap-1 pt-4">
-          <button
-            onClick={() => supabase.auth.signOut()}
-            className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-destructive/80 hover:bg-destructive/10 hover:text-destructive transition-colors btn-tap"
-          >
-            <LogOut className="h-5 w-5 shrink-0" />
-            <span className="text-sm font-bold">Sair</span>
-          </button>
           <div className="text-[11px] text-sidebar-foreground/50 px-3 py-2">
             v0.1 · protótipo navegável
           </div>
