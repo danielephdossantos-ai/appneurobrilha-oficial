@@ -36,7 +36,7 @@ export class ReforcoEngine {
       );
 
       if (match) {
-        return this.mapActivityToLesson(match);
+        return this.mapActivityToLesson(match, adjustment);
       }
     } catch (e) {
       console.error("Erro ao buscar no banco pedagógico:", e);
@@ -141,7 +141,7 @@ export class ReforcoEngine {
     return lesson;
   }
 
-  private static mapActivityToLesson(activity: PedagogicalActivity): ReforcoLesson {
+  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment): ReforcoLesson {
     const levels = {
       basic: [] as LessonStep[],
       intermediate: [] as LessonStep[],
