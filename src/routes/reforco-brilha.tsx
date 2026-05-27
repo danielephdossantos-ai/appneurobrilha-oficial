@@ -356,6 +356,46 @@ function ReforcoBrilha() {
                     ))}
                   </div>
                   
+                  {stats && (
+                    <Card className="bg-primary/5 border-primary/20 mt-4 overflow-hidden">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="text-sm font-bold flex items-center gap-2">
+                          <TrendingUp className="h-4 w-4" />
+                          Sua Evolução
+                        </h4>
+                        <span className="text-lg font-black text-primary">{Math.round(stats.evolution_percentage)}%</span>
+                      </div>
+                      <div className="h-3 w-full bg-primary/10 rounded-full overflow-hidden mb-2">
+                        <div 
+                          className="h-full bg-primary shadow-glow transition-all duration-1000" 
+                          style={{ width: `${stats.evolution_percentage}%` }}
+                        />
+                      </div>
+                      <p className="text-[10px] text-muted-foreground font-medium">
+                        {stats.activities_completed} atividades concluídas nesta matéria.
+                      </p>
+                    </Card>
+                  )}
+
+                  {skills.length > 0 && (
+                    <div className="mt-6 space-y-3">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1">Domínio por Habilidade</h4>
+                      <div className="space-y-2">
+                        {skills.map((skill) => (
+                          <div key={skill.id} className="bg-card border border-border/50 rounded-xl p-3 flex items-center justify-between">
+                            <span className="text-[10px] font-bold truncate max-w-[120px]">{skill.skill_code}</span>
+                            <div className="flex items-center gap-2">
+                              <div className="w-20 h-1.5 bg-secondary rounded-full overflow-hidden">
+                                <div className="h-full bg-success" style={{ width: `${skill.mastery_level}%` }} />
+                              </div>
+                              <span className="text-[10px] font-black">{Math.round(skill.mastery_level)}%</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <Card className="bg-amber-50 border-amber-200 mt-6">
                     <div className="flex gap-3">
                       <div className="text-2xl">👩‍🏫</div>
