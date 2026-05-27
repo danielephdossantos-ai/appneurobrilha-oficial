@@ -39,7 +39,7 @@ export const ChildProfileSchema = z.object({
     geografia: z.number().min(1).max(4),
   }),
   tempo_atencao_min: z.number(),
-  flags: z.record(z.boolean()),
+  flags: z.record(z.string(), z.boolean()),
   observacoes: z.string().optional(),
 });
 

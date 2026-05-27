@@ -27,7 +27,7 @@ export class ChildProfileRepository {
   async create(profile: Omit<ChildProfile, "id">): Promise<ChildProfile> {
     const { data, error } = await supabase
       .from("children")
-      .insert([profile])
+      .insert([profile as any])
       .select()
       .single();
 
@@ -38,7 +38,7 @@ export class ChildProfileRepository {
   async update(id: string, patch: Partial<ChildProfile>): Promise<void> {
     const { error } = await supabase
       .from("children")
-      .update(patch)
+      .update(patch as any)
       .eq("id", id);
 
     if (error) throw error;

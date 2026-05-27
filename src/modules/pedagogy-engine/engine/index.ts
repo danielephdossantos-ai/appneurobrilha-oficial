@@ -13,7 +13,7 @@ export class PedagogyEngine {
       cognitiveLoad: 0.5,
       sensoryProfile: {
         visualStimulus: profile.diagnostico === 'tea' ? 'low' : 'medium',
-        audioRequirement: profile.flags.preferAudio,
+        audioRequirement: Boolean(profile.flags.preferAudio),
         motorComplexity: 'low'
       }
     };
