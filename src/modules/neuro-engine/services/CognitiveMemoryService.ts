@@ -53,8 +53,6 @@ export class CognitiveMemoryService {
     await this.setCache(`profile_${childId}`, updatedProfile);
 
     if (typeof window !== 'undefined' && !navigator.onLine) {
-      console.log("Offline: Profile update queued locally.");
-      // In a real app, we'd add this to a sync queue
       return;
     }
 
