@@ -13,6 +13,9 @@ import { FocusChart } from "@/components/responsible/FocusChart";
 import { mockResponsibleData } from "@/data/responsible/mock-data";
 import { ResponsibleIntelligence } from "@/core/responsible/intelligence";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ChildProtection } from "@/modules/auth/components/ChildProtection";
+import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 
 export const Route = createFileRoute("/painel-pais")({
   component: PainelPremium,
@@ -20,12 +23,32 @@ export const Route = createFileRoute("/painel-pais")({
 
 function PainelPremium() {
   const { activeChild } = useAppState();
+  const [protected_access, setProtectedAccess] = useState(false);
   
-  // No mundo real, usaríamos os dados do activeChild para alimentar a inteligência
-  // Aqui estamos usando o mock premium para demonstração do sistema pedagógico
-  const analysis = ResponsibleIntelligence.analyzePerformance(mockResponsibleData);
+  useEffect(() => {
+    if (protected_access) {
+      AuditLogService.log({
+        action: 'ACCESS_PARENT_DASHBOARD',
+        module: 'RESPONSIBLE',
+        metadata: { childId: activeChild?.id }
+      });
+    }
+  }, [protected_access, activeChild]);
 
   if (!activeChild) return <Shell><p className="text-center py-10">Selecione uma criança para acessar o painel inteligente.</p></Shell>;
+
+  if (!protected_access) {
+    return (
+      <Shell>
+        <ChildProtection 
+          onSuccess={() => setProtectedAccess(true)} 
+          onCancel={() => window.history.back()} 
+        />
+      </Shell>
+    );
+  }
+
+  const analysis = ResponsibleIntelligence.analyzePerformance(mockResponsibleData);
 
   const containerVariants = {
     hidden: { opacity: 0 },

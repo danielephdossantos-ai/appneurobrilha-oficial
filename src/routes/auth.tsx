@@ -1,9 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { Card } from "@/components/Layout";
 import { toast } from "sonner";
-import { Sparkles, Loader2, Eye, EyeOff, User } from "lucide-react";
+import { Sparkles, Loader2, Eye, EyeOff, User, ShieldAlert } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   component: Auth,
@@ -26,20 +27,25 @@ function Auth() {
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error, data } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
+          await AuditLogService.log({
+            action: 'LOGIN_FAILURE',
+            module: 'AUTH',
+            metadata: { email, error: error.message }
+          });
           if (error.message.includes("Invalid login credentials")) {
             throw new Error("E-mail ou senha incorretos. Se ainda não tem conta, clique em 'Cadastrar'.");
           }
           throw error;
         }
-        toast.success("Bem-vindo(a) de volta!");
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { error, data } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -47,12 +53,23 @@ function Auth() {
           },
         });
         if (error) {
+          await AuditLogService.log({
+            action: 'REGISTER_FAILURE',
+            module: 'AUTH',
+            metadata: { email, error: error.message }
+          });
           if (error.message.includes("known to be weak")) {
             throw new Error("Esta senha é muito simples. Tente uma com pelo menos 6 letras ou números.");
           }
           throw error;
         }
         
+        await AuditLogService.log({
+          action: 'REGISTER_SUCCESS',
+          module: 'AUTH',
+          metadata: { email }
+        });
+
         // Ensure we try to sign in automatically if auto-confirm is on
         await supabase.auth.signInWithPassword({ email, password });
         toast.success("Conta criada com sucesso!");

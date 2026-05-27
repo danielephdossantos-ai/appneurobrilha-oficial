@@ -98,6 +98,39 @@ export type Database = {
           },
         ]
       }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          ip_address: string | null
+          metadata: Json | null
+          module: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          module: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          metadata?: Json | null
+          module?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       child_journey: {
         Row: {
           child_id: string
@@ -595,6 +628,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_privacy_settings: {
+        Row: {
+          analytics_consent: boolean | null
+          created_at: string
+          data_usage_consent: boolean | null
+          id: string
+          marketing_consent: boolean | null
+          terms_accepted: boolean | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analytics_consent?: boolean | null
+          created_at?: string
+          data_usage_consent?: boolean | null
+          id?: string
+          marketing_consent?: boolean | null
+          terms_accepted?: boolean | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analytics_consent?: boolean | null
+          created_at?: string
+          data_usage_consent?: boolean | null
+          id?: string
+          marketing_consent?: boolean | null
+          terms_accepted?: boolean | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
