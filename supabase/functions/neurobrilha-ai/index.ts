@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { mode, child, subject, topic, message, chatHistory } = await req.json()
+    const { mode, child, subject, topic, message, chatHistory, image } = await req.json()
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY')
 
     if (!LOVABLE_API_KEY) {
@@ -64,6 +64,49 @@ serve(async (req) => {
       - "reforco_positivo": Uma frase de incentivo citando o hiperfoco.`
 
       userPrompt = `Crie uma aula de ${subject} sobre o tema: ${topic || "conforme a BNCC da série"}.`
+    } else if (mode === "professor-foto") {
+      const diag = child.diagnostico?.toLowerCase() || "";
+      const isTDAH = diag.includes("tdah");
+      const isDislexia = diag.includes("dislexia");
+      const isTEA = diag.includes("tea") || diag.includes("autismo");
+
+      systemPrompt = `Você é o Professor IA do NeuroBrilha, um assistente lúdico e paciente que ajuda crianças a entenderem suas tarefas escolares.
+      
+      Perfil da Criança:
+      - Nome: ${child.nome}
+      - Idade: ${child.idade}
+      - Diagnóstico: ${child.diagnostico}
+      - Hiperfoco: ${child.hiperfoco} (USE O HIPERFOCO PARA EXPLICAR O CONCEITO!)
+      
+      Diretrizes de Adaptação:
+      ${isTDAH ? "- Respostas curtas, direto ao ponto, use negrito para destacar palavras-chave, divida em micro-passos." : ""}
+      ${isDislexia ? "- Linguagem simples, foco em sons e visual, evite blocos grandes de texto, use analogias fonológicas." : ""}
+      ${isTEA ? "- Seja literal, evite sarcasmo ou metáforas complexas, siga uma estrutura lógica rigorosa, use o hiperfoco como base da explicação." : ""}
+      
+      Seu objetivo é:
+      1. Identificar a matéria e o que deve ser feito.
+      2. Explicar o conceito por trás da tarefa de forma simples e lúdica.
+      3. Dar um passo a passo para resolver (NÃO DÊ A RESPOSTA DIRETAMENTE, ENSINE A CHEGAR LÁ).
+      4. Sugerir um exercício similar para praticar.
+      5. Sugerir que tipo de vídeo a criança pode procurar no YouTube para entender melhor.
+
+      Retorne EXCLUSIVAMENTE um JSON com as chaves:
+      - "materia": Nome da disciplina.
+      - "ocr_texto": Breve resumo do que foi lido na foto.
+      - "explicacao": Texto da explicação adaptada (pode conter markdown simples).
+      - "passos": Array de strings com o passo a passo.
+      - "exercicio_similar": Um novo desafio parecido.
+      - "video_tema": Termo de busca para vídeo educativo.`
+
+      userPrompt = [
+        { type: "text", text: "Ajude-me com esta tarefa da escola. Explique como eu faço." },
+        { 
+          type: "image_url", 
+          image_url: { 
+            url: image.startsWith('data:') ? image : `data:image/jpeg;base64,${image}` 
+          } 
+        }
+      ] as any;
     }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -80,12 +123,12 @@ serve(async (req) => {
           { role: "user", content: userPrompt }
         ],
         temperature: 0.7,
-        response_format: mode === "escola" ? { type: "json_object" } : { type: "text" }
+        response_format: (mode === "escola" || mode === "professor-foto") ? { type: "json_object" } : { type: "text" }
       }),
     })
 
     const data = await response.json()
-    const result = mode === "escola" 
+    const result = (mode === "escola" || mode === "professor-foto") 
       ? JSON.parse(data.choices[0].message.content)
       : data.choices[0].message.content
 
