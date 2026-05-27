@@ -32,8 +32,7 @@ export class AuthService {
     analytics_consent?: boolean;
     data_usage_consent?: boolean;
   }) {
-    const { data: { session } } = await supabase.auth.getSession();
-    const user = session?.user;
+    const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("Usuário não autenticado. Por favor, faça login novamente.");
 
     const { data, error } = await supabase.from('user_privacy_settings')
@@ -57,8 +56,7 @@ export class AuthService {
   }
 
   static async getPrivacySettings() {
-    const { data: { session } } = await supabase.auth.getSession();
-    const user = session?.user;
+    const { data: { user } } = await supabase.auth.getUser();
     if (!user) return null;
 
     const { data, error } = await supabase.from('user_privacy_settings')
