@@ -1,6 +1,6 @@
 
 import { CONTENT_DATABASE, ContentItem } from "./content";
-import { PRE1_DATA, PRE2_DATA } from "./index";
+import { PRE1_DATA, PRE2_DATA } from "../early-childhood/index";
 
 // Helper to generate massive activity content for Early Childhood
 export const generateEarlyChildhoodContent = () => {
