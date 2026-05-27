@@ -100,10 +100,13 @@ export class AdaptiveEngine {
 
   static detectFatigue(metrics: StudentBehaviorMetrics): boolean {
     // Detect fatigue based on response time variance and error clusters
-    const highResponseVariance = metrics.timeSpent > 30000; // Over 30s per task might indicate loss of focus
-    const errorSpike = metrics.errors > 3;
+    const avgResponse = metrics.responseTimeHistory.length > 0 
+      ? metrics.responseTimeHistory.reduce((a, b) => a + b, 0) / metrics.responseTimeHistory.length 
+      : 0;
+    const highResponseTime = avgResponse > 15000; // Over 15s avg might indicate fatigue
+    const errorSpike = metrics.totalErrors > 5;
     
-    return highResponseVariance || errorSpike;
+    return highResponseTime || errorSpike;
   }
 }
 
