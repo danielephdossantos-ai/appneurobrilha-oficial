@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState } from "react";
-import { Send, Sparkles } from "lucide-react";
+import { Send, Sparkles, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/terapeuta-brilha")({
   component: Terapeuta,
@@ -14,15 +15,38 @@ function Terapeuta() {
     { role: "ai", t: `Oi! Sou a Terapeuta Brilha 💚 Estou aqui pra te ajudar com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const send = () => {
-    if (!input.trim()) return;
+  const send = async () => {
+    if (!input.trim() || !activeChild || isLoading) return;
+    setIsLoading(true);
     const q = input;
-    setMsgs((m) => [...m, { role: "user", t: q }]);
+    const newMsgs = [...msgs, { role: "user" as const, t: q }];
+    setMsgs(newMsgs);
     setInput("");
-    setTimeout(() => {
-      setMsgs((m) => [...m, { role: "ai", t: `Considerando que ${activeChild?.nome} tem perfil ${activeChild?.diagnostico.toUpperCase()} e adora ${activeChild?.hiperfoco}, uma estratégia útil é começar pelo interesse dela. (Demo: aqui conectaríamos no IA Gateway com o perfil neuro como contexto.)` }]);
-    }, 700);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: { 
+          mode: "terapeuta", 
+          child: activeChild,
+          message: q,
+          chatHistory: msgs.map(m => ({ 
+            role: m.role === "ai" ? "assistant" : "user", 
+            content: m.t 
+          }))
+        }
+      });
+
+      if (error) throw error;
+      
+      setMsgs([...newMsgs, { role: "ai", t: data }]);
+    } catch (err) {
+      console.error(err);
+      setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes! 💚" }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const sugestoes = [
@@ -57,11 +81,20 @@ function Terapeuta() {
         </div>
 
         <div className="flex gap-2">
-          <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()}
+          <input 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            onKeyDown={(e) => e.key === "Enter" && send()}
+            disabled={isLoading}
             placeholder="Pergunte alguma coisa…"
-            className="flex-1 p-3 rounded-xl bg-input border border-border font-medium" />
-          <button onClick={send} className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 font-bold">
-            <Send className="h-5 w-5" />
+            className="flex-1 p-3 rounded-xl bg-input border border-border font-medium disabled:opacity-50" 
+          />
+          <button 
+            onClick={send} 
+            disabled={isLoading}
+            className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 font-bold disabled:opacity-50"
+          >
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
           </button>
         </div>
       </Card>

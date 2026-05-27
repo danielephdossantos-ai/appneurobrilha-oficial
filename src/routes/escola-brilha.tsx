@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { useState } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
@@ -18,9 +20,45 @@ const materias = [
 
 function Escola() {
   const { activeChild } = useAppState();
-  const [aula, setAula] = useState<null | { materia: string; nivel: number; etapa: "ensino" | "demo" | "opcoes" }>(null);
+  const [aula, setAula] = useState<null | any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const carregarAula = async (materiaId: string, topic?: string) => {
+    if (!activeChild) return;
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: {
+          mode: "escola",
+          child: activeChild,
+          subject: materiaId,
+          topic: topic || "conforme BNCC da série"
+        }
+      });
+
+      if (error) throw error;
+      setAula({ ...data, materia: materiaId, etapa: "ensino" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Erro ao gerar a aula. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+
+  if (loading) {
+    return (
+      <Shell>
+        <div className="h-full flex flex-col items-center justify-center p-12 text-center">
+          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
+          <h2 className="text-2xl font-bold">Preparando sua aula especial...</h2>
+          <p className="text-muted-foreground">O {activeChild.hiperfoco === 'dinossauros' ? 'dinossauro' : 'amigo'} está organizando tudo!</p>
+        </div>
+      </Shell>
+    );
+  }
 
   if (aula) return <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />;
 
@@ -38,7 +76,7 @@ function Escola() {
               <div className="h-full bg-primary" style={{ width: "37%" }} />
             </div>
           </div>
-          <button onClick={() => setAula({ materia: "portugues", nivel: activeChild.niveis.portugues, etapa: "ensino" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
             <Play className="h-4 w-4" /> Retomar
           </button>
         </div>
@@ -47,7 +85,7 @@ function Escola() {
       <h2 className="text-xl mb-4">Matérias</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materias.map((m) => (
-          <button key={m.id} onClick={() => setAula({ materia: m.id, nivel: 2, etapa: "ensino" })}
+          <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
@@ -59,9 +97,9 @@ function Escola() {
   );
 }
 
-function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: { materia: string; nivel: number; etapa: "ensino" | "demo" | "opcoes" }; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
+function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
-  const [tentativas, setTentativas] = useState(0);
+  const [tentativa, setTentativa] = useState<string | null>(null);
 
   const titulos: Record<string, string> = {
     ensino: "📖 Aula",
@@ -69,11 +107,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: { materia: st
     opcoes: "✨ Sua vez!",
   };
 
-  const tema = aula.materia === "portugues" ? "encontros vocálicos" : aula.materia === "matematica" ? "soma com reagrupamento" : "o ciclo da água";
-
   return (
     <Shell>
-      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${tema} · explicação no perfil dela`} />
+      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} />
 
       <Card className="mb-4">
         <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
@@ -85,68 +121,73 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: { materia: st
         {aula.etapa === "ensino" && (
           <div>
             <div className="aspect-video rounded-2xl bg-gradient-to-br from-sky/40 to-petal/30 grid place-items-center mb-4 relative overflow-hidden">
-              <div className="text-8xl animate-pulse">{hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : "🌟"}</div>
-              <button className="absolute bottom-4 left-4 btn-tap rounded-full bg-white/90 px-4 py-2 font-bold text-sm flex items-center gap-2">
-                <Volume2 className="h-4 w-4" /> Ouvir de novo
-              </button>
+              <div className="text-8xl animate-pulse">
+                {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
+              </div>
             </div>
-            <p className="text-lg leading-relaxed">
-              Olha, <strong>{childNome}</strong>! O {hiperfoco === "dinossauros" ? "dinossauro" : "amigo"} vai te ensinar sobre <strong>{tema}</strong>.
-              É quando duas vogais ficam juntinhas, tipo na palavra "céu" — c-é-u.
+            <p className="text-xl leading-relaxed font-medium">
+              {aula.ensino}
             </p>
-            <div className="mt-3 flex gap-2 flex-wrap">
-              <button className="btn-tap rounded-xl bg-muted px-4 py-2 font-bold text-sm flex items-center gap-2"><BookOpen className="h-4 w-4" /> Prefiro ler o texto</button>
-              <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-2 font-bold">Vamos ver! →</button>
+            <div className="mt-6 flex gap-2 flex-wrap">
+              <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                Continuar →
+              </button>
             </div>
           </div>
         )}
 
         {aula.etapa === "demo" && (
           <div>
-            <p className="text-lg mb-4">Olha como fica:</p>
-            <div className="rounded-2xl bg-secondary p-6 grid grid-cols-3 gap-4 text-center text-3xl mb-4">
-              <div>c <span className="text-primary">é</span> <span className="text-primary">u</span></div>
-              <div>p <span className="text-primary">a</span> <span className="text-primary">i</span></div>
-              <div>l <span className="text-primary">u</span> <span className="text-primary">a</span></div>
+            <h3 className="text-lg font-bold mb-4">Veja alguns exemplos:</h3>
+            <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
+              {aula.demo}
             </div>
-            <p className="text-muted-foreground">As letras coloridas são as vogais que ficam grudadinhas. 💚</p>
-            <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="mt-4 btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-2 font-bold">Quero tentar!</button>
+            <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+              Estou pronto para o desafio!
+            </button>
           </div>
         )}
 
         {aula.etapa === "opcoes" && (
           <div>
-            <p className="text-lg mb-4 font-bold">Qual palavra tem encontro vocálico?</p>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { p: "céu", ok: true },
-                { p: "casa", ok: false },
-                { p: "bola", ok: false },
-                { p: "pai", ok: true },
-              ].map((opt) => (
-                <button key={opt.p} onClick={() => { setAcertou(opt.ok); if (!opt.ok) setTentativas(tentativas + 1); }}
-                  disabled={acertou !== null}
-                  className={`btn-tap p-6 rounded-2xl text-2xl font-extrabold border-2 transition-all ${
-                    acertou === null ? "border-border bg-muted hover:border-primary" :
-                    opt.ok ? "border-success bg-success/15" :
-                    tentativas >= 1 && !opt.ok ? "opacity-30 border-border bg-muted" : "border-border bg-muted"
+            <p className="text-xl mb-6 font-bold">{aula.pergunta}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {aula.opcoes.map((opt: string) => (
+                <button 
+                  key={opt} 
+                  onClick={() => {
+                    setTentativa(opt);
+                    setAcertou(opt === aula.resposta_correta);
+                  }}
+                  disabled={acertou === true}
+                  className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
+                    tentativa === opt 
+                      ? (opt === aula.resposta_correta ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
+                      : "border-border bg-muted hover:border-primary"
                   }`}>
-                  {opt.p}
+                  {opt}
                 </button>
               ))}
             </div>
 
             {acertou === true && (
-              <div className="mt-4 p-4 rounded-2xl bg-success/15 text-success font-bold flex items-center gap-2">
-                <CheckCircle2 className="h-6 w-6" /> Mandou bem, {childNome}! O dinossauro adorou. ⭐
+              <div className="mt-6 p-6 rounded-2xl bg-success/15 border-2 border-success/30 text-success text-lg animate-bounce-short">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="h-8 w-8" />
+                  <div>
+                    <div className="font-extrabold">Incrível, {childNome}!</div>
+                    <div>{aula.reforco_positivo}</div>
+                  </div>
+                </div>
               </div>
             )}
+            
             {acertou === false && (
-              <div className="mt-4 p-4 rounded-2xl bg-sun/30 flex items-start gap-2">
-                <Lightbulb className="h-5 w-5 shrink-0 mt-0.5" />
+              <div className="mt-6 p-6 rounded-2xl bg-sun/20 border-2 border-sun/30 flex items-start gap-3">
+                <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-bold">Quase! Vou te ajudar:</div>
-                  <div className="text-sm">{tentativas >= 2 ? "A resposta é 'céu' — porque tem 'é' e 'u' juntas." : "Procura uma palavra onde duas vogais ficam grudadinhas."}</div>
+                  <div className="font-bold text-sun-foreground">Dica especial:</div>
+                  <div className="text-lg text-sun-foreground/90">{aula.dica}</div>
                 </div>
               </div>
             )}
