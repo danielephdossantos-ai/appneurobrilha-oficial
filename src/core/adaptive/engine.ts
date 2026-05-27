@@ -29,7 +29,17 @@ export class AdaptiveEngine {
       repetitionRate: neuroAdj.repetitionRate,
       autonomyLevel: neuroAdj.autonomyLevel,
       visualComplexity: neuroAdj.visualComplexity,
-      suggestedPath: activityType
+      suggestedPath: activityType,
+      
+      // New parameters mapped from neuroAdj
+      animationSpeed: neuroAdj.animationSpeed,
+      stimuliLevel: neuroAdj.stimuliLevel,
+      visualScale: neuroAdj.visualScale,
+      maxItemsPerScreen: neuroAdj.maxItemsPerScreen,
+      reinforcementIntensity: neuroAdj.reinforcementIntensity,
+      animationIntensity: neuroAdj.animationIntensity,
+      responseTimeLimit: neuroAdj.responseTimeLimit,
+      predictabilityLevel: neuroAdj.predictabilityLevel
     };
   }
 }
