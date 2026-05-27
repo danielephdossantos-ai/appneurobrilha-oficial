@@ -160,5 +160,27 @@ export const MASCOTS: MascotData[] = [
     rarity: 'lendario',
     personality: 'Aventureiro e ousado',
     details: { eyeColor: '#FFFFFF', accessory: 'helmet' }
+  },
+  {
+    id: 'animal-4',
+    name: 'Pinguim Gelado',
+    category: 'animais',
+    type: 'animal',
+    costume: 'penguin',
+    description: 'Ele adora deslizar no gelo e comer picolé de fruta.',
+    rarity: 'raro',
+    personality: 'Brincalhão e fresco',
+    details: { eyeColor: '#4A90E2' }
+  },
+  {
+    id: 'fantasia-1',
+    name: 'Monstrinho Zizi',
+    category: 'especiais',
+    type: 'animal',
+    costume: 'monster',
+    description: 'Um monstrinho que se esconde para te dar sustos de carinho!',
+    rarity: 'epico',
+    personality: 'Tímido e amável',
+    details: { eyeColor: '#9B51E0' }
   }
 ];
