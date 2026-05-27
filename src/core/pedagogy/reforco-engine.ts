@@ -1,5 +1,6 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
+import { NeuroAdjustment } from "../neuro/engine";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
@@ -23,7 +24,7 @@ export interface ReforcoLesson {
 }
 
 export class ReforcoEngine {
-  static async generateLesson(topic: string): Promise<ReforcoLesson> {
+  static async generateLesson(topic: string, adjustment?: NeuroAdjustment): Promise<ReforcoLesson> {
     const lowerTopic = topic.toLowerCase();
     
     // Tenta buscar no banco pedagógico primeiro
