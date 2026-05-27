@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight } from "lucide-react";
+import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity } from "lucide-react";
+import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { children: allChildren, activeChild, setActiveChild } = useAppState();
+  const engine = usePedagogicalEngine();
 
   return (
     <Shell>
@@ -70,6 +72,47 @@ function Index() {
             </Link>
           </div>
         </Card>
+      )}
+
+      {engine && (
+        <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="bg-primary/5 border-primary/20">
+            <div className="flex items-center gap-3 mb-3">
+              <Zap className="h-5 w-5 text-primary" />
+              <h3 className="font-extrabold text-sm uppercase tracking-wider">Adaptação Ativa (IA)</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground">Dificuldade BNCC:</span>
+                <span className="font-bold text-primary">x{engine.adaptive.difficulty.toFixed(1)}</span>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground">Frequência de Pausas:</span>
+                <span className="font-bold">Cada {engine.adaptive.breakFrequency} min</span>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground">Estilo de Instrução:</span>
+                <span className="font-bold capitalize">{engine.adaptive.instructionStyle}</span>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="bg-success/5 border-success/20">
+            <div className="flex items-center gap-3 mb-3">
+              <Activity className="h-5 w-5 text-success" />
+              <h3 className="font-extrabold text-sm uppercase tracking-wider">Configuração Sensorial</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Pill tone="success">Volume {engine.sensory.soundVolume * 100}%</Pill>
+              <Pill tone="info">Brilho {engine.sensory.brightness * 100}%</Pill>
+              <Pill tone="default">Fonte {engine.sensory.fontSize}px</Pill>
+              <Pill tone="warning">Paleta {engine.sensory.colorPalette}</Pill>
+            </div>
+            <p className="text-[10px] text-muted-foreground mt-4 italic">
+              * Ajustado automaticamente para o perfil de {activeChild?.diagnostico}
+            </p>
+          </Card>
+        </div>
       )}
 
       <h2 className="text-xl mb-4">Por onde quer ir?</h2>
