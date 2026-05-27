@@ -31,11 +31,18 @@ function ReforcoBrilha() {
     setLessonContent(null);
     
     // Generating structured lesson
-    setTimeout(() => {
-      const lesson = ReforcoEngine.generateLesson(finalTopic);
-      setLessonContent(lesson);
-      setCurrentLevel("basic");
-    }, 1200);
+    const loadLesson = async () => {
+      try {
+        const lesson = await ReforcoEngine.generateLesson(finalTopic);
+        setLessonContent(lesson);
+        setCurrentLevel("basic");
+      } catch (error) {
+        console.error("Erro ao carregar aula:", error);
+        setIsTeaching(false);
+      }
+    };
+
+    loadLesson();
   };
 
   return (
