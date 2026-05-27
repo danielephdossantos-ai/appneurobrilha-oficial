@@ -38,18 +38,19 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
   // --- Animation Variants ---
   const floatAnim = {
     y: [0, -8, 0],
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" as const }
   };
 
   const breatheAnim = {
     scale: [1, 1.02, 1],
-    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" as const }
   };
 
   const blinkAnim = {
     scaleY: [1, 1, 1, 0.1, 1],
-    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" as const }
   };
+
 
   const handleClick = () => {
     if (!interactive) return;
