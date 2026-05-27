@@ -1,6 +1,6 @@
 
 import { MATH_ACTIVITIES, MathActivity } from '@/data/math/activities';
-import { NeuroProfile } from '../neuro/engine';
+import { NeuroProfile, NeuroEngine } from '../neuro/engine';
 
 export class MathGenerator {
   static generateActivity(world: string, profile: NeuroProfile, difficulty: number): MathActivity {
@@ -16,38 +16,38 @@ export class MathGenerator {
 
   private static applyNeuroAdaptation(activity: MathActivity, profile: NeuroProfile): MathActivity {
     const adapted = { ...activity, data: { ...activity.data } };
+    const adjustments = NeuroEngine.getAdjustments(profile);
 
-    // TEA Adaptation: Predictability and focus
-    if (profile.type === 'tea') {
-      adapted.data.maxItems = Math.min(adapted.data.maxItems || 4, 3);
+    // Dynamic adaptation based on NeuroEngine rules
+    adapted.data.maxItems = Math.min(adapted.data.maxItems || 10, adjustments.maxItemsPerScreen);
+    adapted.data.animationSpeed = adjustments.animationSpeed;
+    
+    if (adjustments.predictabilityLevel === 'high') {
       adapted.data.showTimer = false;
+      adapted.data.stepByStep = true;
+    }
+
+    if (adjustments.stimuliLevel === 'low') {
       adapted.sensoryAdaptation = { lowStimulus: true, highContrast: false };
     }
 
-    // TDAH Adaptation: Fast feedback and short bursts
-    if (profile.type === 'tdah') {
-      adapted.data.maxItems = Math.min(adapted.data.maxItems || 6, 4);
-      adapted.data.rewardFrequency = 'high';
-    }
-
-    // Generic adaptive rules
-    if (activity.type === 'counting' && profile.supportLevel > 1) {
-      adapted.data.hasVisualAids = true; // Show numbers next to items being counted
+    // Specific rules for certain activity types
+    if (activity.type === 'counting' && adjustments.visualScale > 1.2) {
+      adapted.data.hasVisualAids = true;
     }
 
     return adapted;
   }
 
-  static generateSequence(count: number, difficulty: number): MathActivity[] {
-    // Generate a progressive learning path
+  static generateSequence(count: number, difficulty: number, profile: NeuroProfile = 'Neurotipico'): MathActivity[] {
     const sequence: MathActivity[] = [];
     for (let i = 0; i < count; i++) {
       const currentDifficulty = Math.min(difficulty + Math.floor(i / 3), 5);
-      // Pick a random world for the sequence
       const worlds = ['counting', 'comparison', 'shapes', 'logic'];
       const world = worlds[i % worlds.length];
-      sequence.push(this.generateActivity(world, { type: 'standard', supportLevel: 1 } as any, currentDifficulty));
+      sequence.push(this.generateActivity(world, profile, currentDifficulty));
     }
     return sequence;
   }
 }
+
