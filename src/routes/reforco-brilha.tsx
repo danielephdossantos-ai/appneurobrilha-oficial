@@ -71,6 +71,13 @@ function ReforcoBrilha() {
     
     // Generating structured lesson
     const loadLesson = async () => {
+      if (activeChild) {
+        const needsRecovery = await ProgressionEngine.checkNeedForRecovery(activeChild.id, finalTopic.toUpperCase().replace(/\s/g, '_'));
+        if (needsRecovery) {
+          toast.info("Identificamos que este tema precisa de reforço extra! Preparei uma aula especial de recuperação.");
+        }
+      }
+
       try {
         const lesson = await ReforcoEngine.generateLesson(finalTopic);
         setLessonContent(lesson);
