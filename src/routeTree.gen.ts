@@ -18,6 +18,7 @@ import { Route as ProfessorIaRouteImport } from './routes/professor-ia'
 import { Route as Pre2RouteImport } from './routes/pre-2'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
+import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
@@ -73,6 +74,11 @@ const PainelPaisRoute = PainelPaisRouteImport.update({
 const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
   id: '/neuro-treino',
   path: '/neuro-treino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LojaMascotesRoute = LojaMascotesRouteImport.update({
+  id: '/loja-mascotes',
+  path: '/loja-mascotes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Jornada365Route = Jornada365RouteImport.update({
@@ -142,6 +148,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
+  '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
@@ -164,6 +171,7 @@ export interface FileRoutesByTo {
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
+  '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
+  '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
+    | '/loja-mascotes'
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
@@ -233,6 +243,7 @@ export interface FileRouteTypes {
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
+    | '/loja-mascotes'
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
@@ -255,6 +266,7 @@ export interface FileRouteTypes {
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
+    | '/loja-mascotes'
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
@@ -278,6 +290,7 @@ export interface RootRouteChildren {
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   Jornada365Route: typeof Jornada365Route
+  LojaMascotesRoute: typeof LojaMascotesRoute
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
   Pre2Route: typeof Pre2Route
@@ -354,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/neuro-treino'
       fullPath: '/neuro-treino'
       preLoaderRoute: typeof NeuroTreinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loja-mascotes': {
+      id: '/loja-mascotes'
+      path: '/loja-mascotes'
+      fullPath: '/loja-mascotes'
+      preLoaderRoute: typeof LojaMascotesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jornada-365': {
@@ -446,6 +466,7 @@ const rootRouteChildren: RootRouteChildren = {
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
   Jornada365Route: Jornada365Route,
+  LojaMascotesRoute: LojaMascotesRoute,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
   Pre2Route: Pre2Route,
