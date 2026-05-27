@@ -26,10 +26,10 @@ export class NeuroAnalyticsService {
   private static detectPatterns(event: NeuroAnalyticsEvent) {
     // Lógica simplificada de detecção de hiperfoco ou sobrecarga
     if (event.event_type === "hyperfocus_detected") {
-      console.log("Insight: Hiperfoco detectado na atividade", event.activity_id);
+      
     }
     if (event.event_type === "overload_detected") {
-      console.log("Insight: Possível sobrecarga sensorial detectada");
+      
     }
   }
 
