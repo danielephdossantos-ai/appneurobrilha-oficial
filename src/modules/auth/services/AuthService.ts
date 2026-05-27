@@ -67,12 +67,22 @@ export class AuthService {
   }
 
   static async getPrivacySettings() {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return null;
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
+    if (!user) {
+      // Fallback para getUser caso o session não esteja disponível mas o user exista
+      const { data: { user: freshUser } } = await supabase.auth.getUser();
+      if (!freshUser) return null;
+      return this.fetchPrivacySettings(freshUser.id);
+    }
 
+    return this.fetchPrivacySettings(user.id);
+  }
+
+  private static async fetchPrivacySettings(userId: string) {
     const { data, error } = await supabase.from('user_privacy_settings')
       .select('*')
-      .eq('user_id', user.id)
+      .eq('user_id', userId)
       .maybeSingle();
     
     return data;
