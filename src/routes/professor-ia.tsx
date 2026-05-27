@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState, useRef } from "react";
-import { Camera, Upload, Loader2, BookOpen, CheckCircle2, Youtube, RotateCcw } from "lucide-react";
+import { Camera, Upload, Loader2, BookOpen, CheckCircle2, RotateCcw, Sparkles, Play, Youtube } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
