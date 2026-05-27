@@ -41,7 +41,7 @@ export class CognitiveMemoryService {
   /**
    * Records a new set of developmental scores for longitudinal tracking.
    */
-  async recordLongitudinalScores(childId: string, metrics: CognitiveMetrics): Promise<void> {
+  async recordLongitudinalScores(childId: string, metrics: CognitiveMetrics, date?: Date): Promise<void> {
     const { error } = await supabase
       .from("longitudinal_scores")
       .insert({
@@ -54,8 +54,9 @@ export class CognitiveMemoryService {
         coordination_score: metrics.coordination,
         reading_score: metrics.reading,
         math_score: metrics.math,
-        recorded_at: new Date().toISOString()
+        recorded_at: (date || new Date()).toISOString()
       });
+
 
     if (error) {
       console.error("Error recording longitudinal scores:", error);
