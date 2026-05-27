@@ -25,161 +25,162 @@ export interface MascotData {
 }
 
 export const MASCOT_CATEGORIES = [
-  { id: 'meninos', name: 'Meninos' },
-  { id: 'meninas', name: 'Meninas' },
+  { id: 'meninos', name: 'Heróis' },
+  { id: 'meninas', name: 'Fofuras' },
   { id: 'animais', name: 'Animais' },
-  { id: 'especiais', name: 'Especiais' }, // Super-heróis, Cientistas, Astronautas
-  { id: 'fantasia', name: 'Fantasia' }, // Fadinhas, Robôs, Monstros fofos
+  { id: 'especiais', name: 'Especiais' },
 ];
 
 export const MASCOTS: MascotData[] = [
-  // --- MENINOS ---
+  // --- HEROIS ---
   {
-    id: 'menino-heroi',
-    name: 'Herói Relâmpago',
+    id: 'heroi-1',
+    name: 'Flash Amigão',
     category: 'meninos',
     type: 'human',
     skin: 'white',
     hairColor: 'blonde',
     costume: 'superhero',
-    description: 'Um herói que corre na velocidade da luz para ajudar os amigos!',
+    description: 'Sempre pronto para ajudar com super velocidade!',
     rarity: 'raro',
-    personality: 'Corajoso e entusiasmado',
-    pose: 'heroic',
+    personality: 'Energético e prestativo',
     details: { eyeColor: '#4A90E2', accessory: 'lightning-bolt' }
   },
   {
-    id: 'menino-cientista',
-    name: 'Gênio Junior',
-    category: 'especiais',
-    type: 'human',
-    skin: 'light',
-    hairColor: 'brown',
-    costume: 'scientist',
-    description: 'Adora fazer experimentos e descobrir como o mundo funciona.',
-    rarity: 'epico',
-    personality: 'Curioso e inteligente',
-    pose: 'thinking',
-    details: { eyeColor: '#50E3C2', accessory: 'glasses' }
-  },
-  {
-    id: 'menino-astronauta',
-    name: 'Leo Estelar',
-    category: 'especiais',
+    id: 'heroi-2',
+    name: 'Capitão Brilho',
+    category: 'meninos',
     type: 'human',
     skin: 'dark',
     hairColor: 'black',
-    costume: 'astronaut',
-    description: 'Sua próxima missão é descobrir planetas feitos de doce!',
+    costume: 'superhero',
+    description: 'Protege o mundo com seu sorriso brilhante.',
     rarity: 'lendario',
-    personality: 'Sonhador e aventureiro',
-    pose: 'floating',
-    details: { eyeColor: '#9B51E0', accessory: 'helmet' }
+    personality: 'Líder nato',
+    details: { eyeColor: '#FFD700', accessory: 'lightning-bolt' }
   },
 
-  // --- MENINAS ---
+  // --- FOFURAS ---
   {
-    id: 'menina-fada',
-    name: 'Fada Flora',
-    category: 'fantasia',
+    id: 'fofura-1',
+    name: 'Fada Belinha',
+    category: 'meninas',
     type: 'human',
     skin: 'white',
     hairColor: 'red',
     costume: 'fairy',
-    description: 'Cuida de todas as flores e espalha brilho por onde passa.',
+    description: 'Espalha pó de pirlimpimpim por onde passa.',
     rarity: 'epico',
-    personality: 'Gentil e mágica',
-    pose: 'flying',
+    personality: 'Doce e sonhadora',
     details: { eyeColor: '#FF69B4', backAccessory: 'wings' }
   },
   {
-    id: 'menina-princesa',
-    name: 'Princesa Sofia',
+    id: 'fofura-2',
+    name: 'Princesa Luna',
     category: 'meninas',
     type: 'human',
     skin: 'brown',
     hairColor: 'black',
     costume: 'princess',
-    description: 'Uma princesa que ama livros e aventuras na floresta.',
+    description: 'Adora contar histórias sob a luz do luar.',
     rarity: 'raro',
-    personality: 'Educada e destemida',
-    pose: 'graceful',
-    details: { eyeColor: '#7ED321', accessory: 'tiara' }
+    personality: 'Serena e sábia',
+    details: { eyeColor: '#9B51E0', accessory: 'tiara' }
   },
 
   // --- ANIMAIS ---
   {
-    id: 'dino-baby',
-    name: 'Rexinho',
+    id: 'animal-1',
+    name: 'Rex Divertido',
     category: 'animais',
     type: 'animal',
     costume: 'dino',
-    description: 'O dinossauro mais fofo que você já viu. Ele adora abraços!',
+    description: 'O dinossauro que trocou rugidos por risadas!',
     rarity: 'comum',
-    personality: 'Brincalhão e carinhoso',
-    pose: 'sitting',
+    personality: 'Engraçado e leal',
     details: { eyeColor: '#4CAF50' }
   },
   {
-    id: 'cachorrinho-fofo',
-    name: 'Bidu',
-    category: 'animais',
-    type: 'animal',
-    costume: 'dog',
-    description: 'Um cachorrinho leal que sempre te espera com um sorriso.',
-    rarity: 'comum',
-    personality: 'Leal e feliz',
-    pose: 'standing',
-    details: { eyeColor: '#8B4513' }
-  },
-  {
-    id: 'gatinho-miau',
-    name: 'Lola',
+    id: 'animal-2',
+    name: 'Miau Melodia',
     category: 'animais',
     type: 'animal',
     costume: 'cat',
-    description: 'Ama dormir no sol e brincar com novelos de lã coloridos.',
+    description: 'Uma gatinha que ronrona músicas relaxantes.',
     rarity: 'comum',
-    personality: 'Tranquila e observadora',
-    pose: 'curled',
+    personality: 'Calma e musical',
     details: { eyeColor: '#F5A623' }
   },
   {
-    id: 'ursinho-polar',
-    name: 'Pipo',
+    id: 'animal-3',
+    name: 'Pipo Urso',
     category: 'animais',
     type: 'animal',
     costume: 'bear',
-    description: 'Vem do polo norte para te dar o abraço mais quentinho do mundo.',
+    description: 'Dá os abraços mais fofinhos do universo.',
     rarity: 'raro',
-    personality: 'Protetor e calmo',
-    pose: 'standing',
-    details: { eyeColor: '#4A90E2' }
+    personality: 'Acolhedor e protetor',
+    details: { eyeColor: '#795548' }
   },
 
-  // --- ESPECIAIS / FANTASIA ---
+  // --- ESPECIAIS ---
   {
-    id: 'robo-fofo',
-    name: 'Bit-Bot',
-    category: 'fantasia',
+    id: 'especial-1',
+    name: 'Cientista Cadu',
+    category: 'especiais',
+    type: 'human',
+    skin: 'light',
+    hairColor: 'brown',
+    costume: 'scientist',
+    description: 'Descobrindo as maravilhas da ciência com você!',
+    rarity: 'epico',
+    personality: 'Curioso e focado',
+    details: { eyeColor: '#00BCD4', accessory: 'glasses' }
+  },
+  {
+    id: 'especial-2',
+    name: 'Robô Bip',
+    category: 'especiais',
     type: 'robot',
     costume: 'robot',
-    description: 'Processa amizade em alta velocidade! Beep-boop!',
+    description: 'Calculando a melhor forma de te fazer sorrir.',
     rarity: 'raro',
-    personality: 'Lógico e prestativo',
-    pose: 'robotic',
+    personality: 'Lógico e divertido',
     details: { eyeColor: '#00D1FF' }
   },
   {
-    id: 'unicornio-magico',
-    name: 'Estrela Guia',
-    category: 'fantasia',
-    type: 'animal',
-    costume: 'unicorn',
-    description: 'Seu chifre brilha com as cores do arco-íris quando está feliz.',
+    id: 'especial-3',
+    name: 'Leo Astro',
+    category: 'especiais',
+    type: 'human',
+    skin: 'dark',
+    hairColor: 'black',
+    costume: 'astronaut',
+    description: 'Explorando planetas de alegria no espaço sideral.',
     rarity: 'lendario',
-    personality: 'Radiante e otimista',
-    pose: 'rearing',
-    details: { eyeColor: '#D0021B' }
+    personality: 'Aventureiro e ousado',
+    details: { eyeColor: '#FFFFFF', accessory: 'helmet' }
+  },
+  {
+    id: 'animal-4',
+    name: 'Pinguim Gelado',
+    category: 'animais',
+    type: 'animal',
+    costume: 'penguin',
+    description: 'Ele adora deslizar no gelo e comer picolé de fruta.',
+    rarity: 'raro',
+    personality: 'Brincalhão e fresco',
+    details: { eyeColor: '#4A90E2' }
+  },
+  {
+    id: 'fantasia-1',
+    name: 'Monstrinho Zizi',
+    category: 'especiais',
+    type: 'animal',
+    costume: 'monster',
+    description: 'Um monstrinho que se esconde para te dar sustos de carinho!',
+    rarity: 'epico',
+    personality: 'Tímido e amável',
+    details: { eyeColor: '#9B51E0' }
   }
 ];

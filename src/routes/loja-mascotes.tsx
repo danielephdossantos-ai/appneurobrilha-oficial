@@ -15,11 +15,11 @@ export const Route = createFileRoute('/loja-mascotes')({
   component: MascotStorePage,
 });
 
-const RARITY_CONFIG: Record<Rarity, { color: string, label: string, bg: string }> = {
-  comum: { color: 'text-gray-500', label: 'Comum', bg: 'bg-gray-100' },
-  raro: { color: 'text-blue-500', label: 'Raro', bg: 'bg-blue-100' },
-  epico: { color: 'text-purple-500', label: 'Épico', bg: 'bg-purple-100' },
-  lendario: { color: 'text-yellow-600', label: 'Lendário', bg: 'bg-yellow-100 shadow-[0_0_15px_rgba(250,204,21,0.5)]' },
+const RARITY_CONFIG: Record<Rarity, { color: string, label: string, bg: string, shadow: string }> = {
+  comum: { color: 'text-slate-500', label: 'Amigo', bg: 'bg-slate-100', shadow: 'shadow-slate-100' },
+  raro: { color: 'text-indigo-500', label: 'Especial', bg: 'bg-indigo-50', shadow: 'shadow-indigo-100' },
+  epico: { color: 'text-purple-600', label: 'Mágico', bg: 'bg-purple-50', shadow: 'shadow-purple-100' },
+  lendario: { color: 'text-amber-600', label: 'Lendário', bg: 'bg-amber-50', shadow: 'shadow-amber-200 shadow-[0_0_20px_rgba(251,191,36,0.3)]' },
 };
 
 function MascotStorePage() {
@@ -106,9 +106,9 @@ function MascotStorePage() {
                     transition={{ delay: index * 0.05 }}
                     whileHover={{ y: -10 }}
                   >
-                    <Card className="group relative overflow-hidden border-none rounded-[40px] shadow-xl hover:shadow-2xl transition-all duration-500 bg-white ring-1 ring-black/[0.03]">
+                    <Card className={`group relative overflow-hidden border-none rounded-[40px] shadow-xl hover:shadow-2xl transition-all duration-500 bg-white ring-1 ring-black/[0.03] ${RARITY_CONFIG[mascot.rarity].shadow}`}>
                       {/* Rarity Glow */}
-                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${mascot.rarity === 'lendario' ? 'bg-yellow-400' : 'bg-indigo-400'}`} />
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${mascot.rarity === 'lendario' ? 'bg-amber-400' : 'bg-indigo-400'}`} />
                       
                       {/* Visual Content */}
                       <div className="aspect-[4/5] bg-gradient-to-b from-slate-50 to-white relative flex flex-col items-center justify-center p-6 overflow-hidden">
