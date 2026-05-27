@@ -216,7 +216,8 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
-    { to: "/neuro-treino", icon: Brain, label: "Treino" },
+    { to: "/professor-ia", icon: Camera, label: "Professor" },
+    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
     { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
   return (
