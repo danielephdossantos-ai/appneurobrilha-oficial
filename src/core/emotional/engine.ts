@@ -82,6 +82,23 @@ export class EmotionalEngine {
           text: "Estou aqui com você! Vamos continuar?", 
           animation: "idle" 
         };
+  static getActivitySuggestion(emotion: Emotion): string {
+    switch (emotion) {
+      case "irritado":
+      case "frustrado":
+        return "Pausa para respiração guiada ou atividade de baixa pressão";
+      case "ansioso":
+        return "Atividade rítmica calma com feedback imediato";
+      case "cansado":
+        return "Pausa curta ou atividade lúdica leve";
+      case "orgulhoso":
+        return "Atividade de desafio (boss level)";
+      case "distraido":
+        return "Mini-game rápido para foco";
+      default:
+        return "Continuar jornada de aprendizado padrão";
     }
+  }
+}
   }
 }
