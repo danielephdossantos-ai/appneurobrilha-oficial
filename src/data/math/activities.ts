@@ -74,36 +74,49 @@ export const MATH_ACTIVITIES: MathActivity[] = [
   }
 ];
 
-// Adicionando mocks para chegar a 400+ variações (conceitualmente via gerador)
+// Adicionando gerador dinâmico para simular milhares de variações
 export const generateMathMocks = () => {
   const mocks: MathActivity[] = [...MATH_ACTIVITIES];
   
-  // Contagem 1-10 (100 variações)
-  for (let i = 1; i <= 10; i++) {
+  // Contagem 1-20 (100 variações)
+  const items = ['🍎', '⭐', '🎈', '🚗', '🦁', '🍦', '🐝'];
+  for (let i = 1; i <= 100; i++) {
+    const target = Math.floor(Math.random() * 10) + 1;
+    const item = items[Math.floor(Math.random() * items.length)];
     mocks.push({
       id: `math-cnt-gen-${i}`,
       world: 'counting',
       type: 'counting',
-      title: `Contando ${i}`,
-      instruction: `Encontre ${i} objetos`,
-      difficulty: Math.ceil(i / 3),
-      data: { target: i, pool: i + 2 }
+      title: `Contando ${item}`,
+      instruction: `Quantos ${item} você consegue contar?`,
+      difficulty: target > 5 ? 2 : 1,
+      data: { 
+        items: target, 
+        icon: item, 
+        options: [target, target + 1, Math.max(1, target - 1), target + 2].sort(() => Math.random() - 0.5)
+      }
     });
   }
   
-  // Shapes and Patterns (100 variações)
-  const shapes = ['circle', 'square', 'triangle', 'star'];
-  shapes.forEach(s => {
+  // Comparação (50 variações)
+  for (let i = 1; i <= 50; i++) {
+    const left = Math.floor(Math.random() * 8) + 1;
+    const right = Math.floor(Math.random() * 8) + 1;
+    if (left === right) continue;
     mocks.push({
-      id: `math-shp-gen-${s}`,
-      world: 'shapes',
-      type: 'shapes',
-      title: `Mundo dos ${s}s`,
-      instruction: `Identifique o ${s}`,
+      id: `math-cmp-gen-${i}`,
+      world: 'comparison',
+      type: 'comparison',
+      title: 'Desafio do Trem',
+      instruction: 'Qual vagão tem MAIS itens?',
       difficulty: 1,
-      data: { shape: s }
+      data: { left, right, comparison: 'more' }
     });
-  });
+  }
 
   return mocks;
 };
+
+// Exporting the full pool
+export const ALL_MATH_ACTIVITIES = generateMathMocks();
+
