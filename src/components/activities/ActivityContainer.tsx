@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GeneratedActivity } from '../../core/activity-engine/types';
-import { EmotionalEngine } from '../../core/emotional/engine';
+import { EmotionalEngine } from '../../modules/emotional-engine/engine/emotional-engine';
 import { RewardBadge } from '../rewards/RewardBadge';
 
 interface Props {

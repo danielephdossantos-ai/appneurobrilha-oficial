@@ -1,5 +1,6 @@
 
-import { Emotion } from "./engine";
+import { Emotion } from "../../modules/emotional-engine/engine/emotional-engine";
+
 
 export interface MascotState {
   name: string;

@@ -4,7 +4,7 @@ import { ActivityEngine } from '../core/activity-engine/engine';
 import { RewardSystem } from '../core/rewards/reward-system';
 import { ActivityContainer } from './activities/ActivityContainer';
 import { AdaptiveMotor, StudentBehaviorMetrics } from '../core/adaptive/motor';
-import { EmotionalEngine } from '../core/emotional/engine';
+import { EmotionalEngine } from '../modules/emotional-engine/engine/emotional-engine';
 
 export const pedagogicalSystem = {
   // Main entry point for the pedagogical system
