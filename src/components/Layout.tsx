@@ -61,7 +61,7 @@ export function Shell({ children }: { children?: ReactNode }) {
   const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row pb-24 md:pb-0">
+    <div className="min-h-screen flex flex-col md:flex-row">
       <aside className="hidden md:flex w-72 shrink-0 flex-col bg-sidebar border-r border-sidebar-border p-4 gap-2">
         <Link to="/" className="flex items-center gap-2 px-2 py-3">
           <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-2xl shadow-glow">
@@ -136,7 +136,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           )}
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 max-w-6xl w-full mx-auto relative">
+        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
           {children ?? <Outlet />}
           <MobileNav path={path} />
           
