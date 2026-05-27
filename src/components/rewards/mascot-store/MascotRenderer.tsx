@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion, Transition, Easing } from 'framer-motion';
+import { motion, Easing } from 'framer-motion';
 import { MascotData, SkinType, HairColor } from './catalog';
 
 interface MascotRendererProps {
@@ -39,7 +39,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
     transition: {
       duration: 2,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as Easing
     }
   };
 
@@ -65,7 +65,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         <motion.path 
           d="M60 180 Q100 120 140 180 Z" 
           fill={getCostumeColor(mascot.costume)} 
-          animate={animation === 'bounce' ? bounceAnimation : undefined}
+          animate={animation === 'bounce' ? (bounceAnimation as any) : undefined}
         />
         
         {/* Head */}
