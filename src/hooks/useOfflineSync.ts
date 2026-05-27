@@ -76,11 +76,8 @@ export const useOfflineSync = () => {
         const mutation = await get<PendingMutation>(key);
         if (!mutation) continue;
 
-        // Aqui você chamaria o serviço correspondente
-        // Exemplo: await processMutation(mutation);
-        console.log('Sincronizando mutação:', mutation);
+        // Process mutation...
         
-        // Simular processamento
         await new Promise(resolve => setTimeout(resolve, 500));
 
         await del(key);
