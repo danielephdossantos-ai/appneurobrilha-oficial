@@ -1,4 +1,5 @@
 import { NeuroAnalyticsEvent, EvolutionData, Insight } from "../types";
+import { get, set } from 'idb-keyval';
 
 export class NeuroAnalyticsService {
   private static STORAGE_KEY = "neuro_analytics_events";
@@ -10,17 +11,22 @@ export class NeuroAnalyticsService {
       created_at: new Date().toISOString(),
     };
 
-    const events = this.getStoredEvents();
+    const events = await this.getStoredEvents();
     events.push(newEvent);
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(events));
+    await set(this.STORAGE_KEY, events);
 
     // Analisar padrões para insights imediatos
     this.detectPatterns(newEvent);
+    
+    // Se estiver online, poderíamos disparar um sync imediato
+    if (typeof window !== 'undefined' && navigator.onLine) {
+      // Logic for immediate sync if available
+    }
   }
 
-  private static getStoredEvents(): NeuroAnalyticsEvent[] {
-    const stored = localStorage.getItem(this.STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+  private static async getStoredEvents(): Promise<NeuroAnalyticsEvent[]> {
+    const stored = await get<NeuroAnalyticsEvent[]>(this.STORAGE_KEY);
+    return stored || [];
   }
 
   private static detectPatterns(event: NeuroAnalyticsEvent) {

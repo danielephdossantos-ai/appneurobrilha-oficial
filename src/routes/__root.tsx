@@ -84,6 +84,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/pwa-192x192.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -113,6 +115,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
         <Outlet />
+        <ConnectivityStatus />
         <LGPDConsent />
       </AuthGuard>
       <Toaster position="top-center" richColors />
@@ -126,6 +129,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
+import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);

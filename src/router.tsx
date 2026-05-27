@@ -1,9 +1,27 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
+import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { routeTree } from "./routeTree.gen";
+import { persister } from "./lib/persistence";
 
 export const getRouter = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        gcTime: 1000 * 60 * 60 * 24, // 24 hours
+        staleTime: 1000 * 60 * 5, // 5 minutes
+      },
+    },
+  });
+
+  // Only persist on the client side
+  if (typeof window !== 'undefined') {
+    persistQueryClient({
+      queryClient,
+      persister,
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    });
+  }
 
   const router = createRouter({
     routeTree,
