@@ -127,7 +127,7 @@ function Index() {
             <div className="flex items-center gap-3 mb-3">
               <Activity className="h-5 w-5 text-success" />
               <h3 className="font-extrabold text-sm uppercase tracking-wider">
-                Sistema Sensorial: {engine.child.sensory_mode?.toUpperCase() || "FOCO"}
+                Sistema Sensorial: {activeChild?.sensory_mode?.toUpperCase() || "FOCO"}
               </h3>
             </div>
 
