@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/Layout";
 import { toast } from "sonner";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles, Loader2, Eye, EyeOff, User } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   component: Auth,
@@ -15,6 +15,7 @@ function Auth() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +47,39 @@ function Auth() {
       navigate({ to: "/" });
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDemoLogin = async () => {
+    setLoading(true);
+    try {
+      // Create or login to a demo account
+      const demoEmail = "demo@neurobrilha.com";
+      const demoPass = "123456";
+      
+      // Try to sign in
+      const { error: signInError } = await supabase.auth.signInWithPassword({ 
+        email: demoEmail, 
+        password: demoPass 
+      });
+      
+      if (signInError) {
+        // If demo user doesn't exist, sign up
+        const { error: signUpError } = await supabase.auth.signUp({
+          email: demoEmail,
+          password: demoPass,
+          options: { data: { full_name: "Visitante Brilhante" } }
+        });
+        if (signUpError) throw signUpError;
+        toast.success("Bem-vindo(a) ao modo demonstração!");
+      } else {
+        toast.success("Bem-vindo(a) de volta!");
+      }
+      navigate({ to: "/" });
+    } catch (error: any) {
+      toast.error("Erro ao acessar modo demo: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -102,14 +136,23 @@ function Auth() {
           </div>
           <div className="space-y-1.5">
             <label className="text-sm font-bold ml-1">Senha</label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              className="w-full p-3 rounded-xl bg-muted border border-border font-medium focus:border-primary outline-none"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={6}
+                className="w-full p-3 pr-10 rounded-xl bg-muted border border-border font-medium focus:border-primary outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <button
@@ -119,6 +162,25 @@ function Auth() {
             {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : isLogin ? "Entrar" : "Começar Agora"}
           </button>
         </form>
+
+        <div className="relative my-8">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border"></span>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">Ou</span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleDemoLogin}
+          disabled={loading}
+          className="w-full py-3 bg-secondary text-secondary-foreground rounded-2xl font-bold border border-border flex items-center justify-center gap-2 hover:bg-muted active:scale-[0.98] transition-all"
+        >
+          <User size={18} />
+          Acessar como Visitante
+        </button>
 
         <p className="text-center text-xs text-muted-foreground mt-6 px-4">
           Ao continuar, você concorda com nossos Termos de Uso e Política de Privacidade.
