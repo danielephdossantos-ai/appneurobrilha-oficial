@@ -76,7 +76,7 @@ function Escola() {
               <div className="h-full bg-primary" style={{ width: "37%" }} />
             </div>
           </div>
-          <button onClick={() => setAula({ materia: "portugues", nivel: activeChild.niveis.portugues, etapa: "ensino" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
             <Play className="h-4 w-4" /> Retomar
           </button>
         </div>
