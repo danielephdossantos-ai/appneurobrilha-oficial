@@ -10,7 +10,9 @@ export const ActivityTypeSchema = z.enum([
   'memory',
   'pairing',
   'visual-math',
-  'interpretation'
+  'interpretation',
+  'motor-coordination',
+  'writing-practice'
 ]);
 
 export const SensoryProfileSchema = z.object({
