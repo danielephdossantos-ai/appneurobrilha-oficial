@@ -46,7 +46,7 @@ export class EmotionalEngine {
     return {
       current,
       intensity,
-      history: [] // Em um cenário real, carregaríamos o histórico
+      history: [] 
     };
   }
 
@@ -82,6 +82,9 @@ export class EmotionalEngine {
           text: "Estou aqui com você! Vamos continuar?", 
           animation: "idle" 
         };
+    }
+  }
+
   static getActivitySuggestion(emotion: Emotion): string {
     switch (emotion) {
       case "irritado":
@@ -98,7 +101,5 @@ export class EmotionalEngine {
       default:
         return "Continuar jornada de aprendizado padrão";
     }
-  }
-}
   }
 }
