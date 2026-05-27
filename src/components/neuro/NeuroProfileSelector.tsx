@@ -37,7 +37,7 @@ const profiles: { value: NeuroProfile; icon: any; color: string; description: st
   },
   { 
     value: "DeficienciaIntelectual", 
-    icon: graduationCap, 
+    icon: GraduationCap, 
     color: "text-purple-500", 
     description: "Vocabulário simplificado, conceitos concretos e maior taxa de repetição." 
   },
@@ -55,9 +55,8 @@ const profiles: { value: NeuroProfile; icon: any; color: string; description: st
   },
 ];
 
-const graduationCap = GraduationCap; // Helper for consistency
-
 export const NeuroProfileSelector: React.FC<NeuroProfileSelectorProps> = ({ selected, onChange }) => {
+
   return (
     <Card className="w-full">
       <CardHeader>
