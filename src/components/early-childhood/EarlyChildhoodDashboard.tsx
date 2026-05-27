@@ -12,7 +12,10 @@ type Section = 'selection' | 'pre1' | 'pre2' | 'literacy' | 'math' | 'emotional'
 
 export const EarlyChildhoodDashboard = () => {
   const [activeSection, setActiveSection] = useState<Section>('selection');
+  const [selectedWorld, setSelectedWorld] = useState<string | null>(null);
   const [mood, setMood] = useState('happy');
+  const [neuroProfile, setNeuroProfile] = useState<any>('Neurotipico');
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
