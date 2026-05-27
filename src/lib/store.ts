@@ -104,7 +104,14 @@ export function useAppState() {
       localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
       toast.success("Criança cadastrada com sucesso!");
     },
-    onError: () => toast.error("Erro ao cadastrar criança"),
+    onError: (error: any) => {
+      if (error?.message?.includes("JWT") || error?.status === 401) {
+        supabase.auth.signOut();
+        toast.error("Sua sessão expirou. Por favor, entre novamente.");
+      } else {
+        toast.error("Erro ao cadastrar criança");
+      }
+    },
   });
 
   const updateChildMutation = useMutation({
@@ -120,16 +127,31 @@ export function useAppState() {
       queryClient.invalidateQueries({ queryKey: ["children"] });
       toast.success("Dados atualizados!");
     },
-    onError: () => toast.error("Erro ao atualizar dados"),
+    onError: (error: any) => {
+      if (error?.message?.includes("JWT") || error?.status === 401) {
+        supabase.auth.signOut();
+        toast.error("Sua sessão expirou. Por favor, entre novamente.");
+      } else {
+        toast.error("Erro ao atualizar dados");
+      }
+    },
   });
 
   const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
+
+  const logout = async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem(ACTIVE_CHILD_KEY);
+    queryClient.clear();
+    toast.info("Sessão encerrada");
+  };
 
   return {
     children,
     activeChild,
     isLoading,
     session,
+    logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);
       localStorage.setItem(ACTIVE_CHILD_KEY, id);

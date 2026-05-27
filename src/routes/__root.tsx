@@ -140,12 +140,17 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const checkSession = async () => {
+      // getUser() helps verify the token is still valid with the server
+      const { data: { user }, error } = await supabase.auth.getUser();
       const { data: { session } } = await supabase.auth.getSession();
+      
       setLoading(false);
       
-      if (!session && location.pathname !== "/auth") {
-        navigate({ to: "/auth" });
-      } else if (session && location.pathname === "/auth") {
+      if (error || !session || !user) {
+        if (location.pathname !== "/auth") {
+          navigate({ to: "/auth" });
+        }
+      } else if (location.pathname === "/auth") {
         navigate({ to: "/" });
       }
     };
@@ -161,6 +166,11 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
           module: 'AUTH',
           metadata: { method: 'password' }
         });
+      }
+
+      if (event === 'SIGNED_OUT') {
+        navigate({ to: "/auth" });
+        return;
       }
 
       if (!session && location.pathname !== "/auth") {

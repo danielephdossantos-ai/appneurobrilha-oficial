@@ -61,10 +61,11 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
 }
 
 export function Shell({ children }: { children?: ReactNode }) {
-  const { activeChild, children: allChildren, setActiveChild } = useAppState();
+  const { activeChild, children: allChildren, setActiveChild, logout } = useAppState();
   const engine = usePedagogicalEngine();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
+
 
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
@@ -138,10 +139,18 @@ export function Shell({ children }: { children?: ReactNode }) {
         </nav>
 
         <div className="mt-auto flex flex-col gap-1 pt-4">
+          <button
+            onClick={logout}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-destructive hover:bg-destructive/10 transition-colors btn-tap text-sm font-bold"
+          >
+            <LogOut className="h-5 w-5 shrink-0" />
+            Sair do App
+          </button>
           <div className="text-[11px] text-sidebar-foreground/50 px-3 py-2">
             v0.1 · protótipo navegável
           </div>
         </div>
+
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
