@@ -1,5 +1,5 @@
 
-import { ActivityTemplate } from "../core/activity-engine/types";
+import { ActivityTemplate } from "../../core/activity-engine/types";
 
 export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
   {
