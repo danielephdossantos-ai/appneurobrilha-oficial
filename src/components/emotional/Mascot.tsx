@@ -2,15 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { MascotState, MascotEngine } from '../../core/emotional/mascot';
 import { Emotion } from '../../modules/emotional-engine/engine/emotional-engine';
+import { MascotRenderer } from '../rewards/mascot-store/MascotRenderer';
+import { MASCOTS, MascotData } from '../rewards/mascot-store/catalog';
 
 import { 
-  Smile, 
-  Frown, 
-  Meh, 
-  Zap, 
-  Trophy, 
   MessageCircle,
-  AlertCircle
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +16,7 @@ interface MascotProps {
   customMessage?: string;
   className?: string;
 }
+
 
 export const Mascot: React.FC<MascotProps> = ({ 
   type = "amigo", 
@@ -42,37 +39,40 @@ export const Mascot: React.FC<MascotProps> = ({
     return () => clearTimeout(timer);
   }, [emotion, customMessage]);
 
-  const renderIcon = () => {
-    const iconSize = 48;
-    const commonProps = {
-      size: iconSize,
-      className: cn(
-        "transition-all duration-500",
-        isAnimating && "scale-110",
-        emotion === "orgulhoso" && "text-yellow-500 animate-bounce",
-        emotion === "frustrado" && "text-blue-400 animate-pulse",
-        emotion === "cansado" && "text-gray-400",
-        emotion === "focado" && "text-green-500"
-      )
-    };
-
-    switch (emotion) {
-      case "orgulhoso": return <Trophy {...commonProps} />;
-      case "frustrado": return <Frown {...commonProps} />;
-      case "distraido": return <Meh {...commonProps} />;
-      case "ansioso": return <AlertCircle {...commonProps} />;
-      case "focado": return <Zap {...commonProps} />;
-      default: return <Smile {...commonProps} />;
+  const getMascotVisual = (): MascotData => {
+    // Map the emotional engine types to specific catalog mascots
+    switch (type) {
+      case "mentor": 
+        return MASCOTS.find(m => m.id === 'astro-leo') || MASCOTS[0];
+      case "explorador":
+        return MASCOTS.find(m => m.id === 'robot-bip') || MASCOTS[1];
+      default:
+        return MASCOTS.find(m => m.id === 'dog-pipo') || MASCOTS[0];
     }
   };
+
+  const getAnimation = () => {
+    switch (emotion) {
+      case "orgulhoso": return "happy";
+      case "focado": return "bounce";
+      case "frustrado": return "idle";
+      default: return "idle";
+    }
+  };
+
 
   return (
     <div className={cn("flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl", className)}>
       <div className="relative">
         <div className="absolute -inset-2 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 rounded-full blur-xl opacity-50" />
-        <div className="relative z-10 p-4 bg-white/5 rounded-full border border-white/10 shadow-inner">
-          {renderIcon()}
+        <div className="relative z-10 p-0 bg-transparent rounded-full border-none shadow-none">
+          <MascotRenderer 
+            mascot={getMascotVisual()} 
+            size={120} 
+            animation={getAnimation()}
+          />
         </div>
+
         
         {state.isGuiding && (
           <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground p-1 rounded-full animate-pulse">
