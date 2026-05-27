@@ -132,10 +132,10 @@ export const EarlyChildhoodDashboard = () => {
           {activeSection === 'emotional' && (
             <motion.div key="emotional" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <EmotionalCheckIn onSelect={(id) => console.log('Emotion:', id)} />
+                <EmotionalCheckIn onSelect={(id) => {/* Emotion selected */}} />
                 <div className="space-y-8">
                   <h3 className="text-3xl font-black text-indigo-900">Hora de Relaxar</h3>
-                  <BreathingExercise onComplete={() => console.log('Finished')} />
+                  <BreathingExercise onComplete={() => {/* Finished */}} />
                 </div>
               </div>
             </motion.div>

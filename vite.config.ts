@@ -8,8 +8,14 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
     server: { entry: "server" },
+  },
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
+    optimizeDeps: {
+      include: ['framer-motion', 'recharts', 'lucide-react', '@tanstack/react-virtual'],
+    },
   },
 });

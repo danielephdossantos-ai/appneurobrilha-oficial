@@ -10,7 +10,6 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   Radar,
   BarChart,
   Bar,
@@ -22,6 +21,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useNeuroAnalytics } from '../hooks/useNeuroAnalytics';
 import { Brain, TrendingUp, Heart, Target, Zap, AlertCircle } from 'lucide-react';
 
+// Memoized Card components to reduce re-renders on weak devices
+const MemoCard = React.memo(Card);
+const MemoCardContent = React.memo(CardContent);
+const MemoResponsiveContainer = React.memo(ResponsiveContainer);
+
 interface NeuroAnalyticsDashboardProps {
   childId: string;
 }
@@ -29,31 +33,41 @@ interface NeuroAnalyticsDashboardProps {
 export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = ({ childId }) => {
   const { data, insights, loading } = useNeuroAnalytics(childId);
 
+  // Memoize data calculations
+  const radarData = React.useMemo(() => {
+    if (!data) return [];
+    return [
+      { subject: 'Atenção', A: data.cognitiveRadar.attention },
+      { subject: 'Memória', A: data.cognitiveRadar.memory },
+      { subject: 'Executivo', A: data.cognitiveRadar.executive },
+      { subject: 'Linguagem', A: data.cognitiveRadar.language },
+      { subject: 'Matemática', A: data.cognitiveRadar.math },
+      { subject: 'Autonomia', A: data.cognitiveRadar.autonomy },
+    ];
+  }, [data]);
+
+  const emotionalData = React.useMemo(() => {
+    if (!data) return [];
+    return [
+      { name: 'Engajamento', value: data.emotionalMap.engagement, color: '#4ade80' },
+      { name: 'Calma', value: data.emotionalMap.calm, color: '#60a5fa' },
+      { name: 'Alegria', value: data.emotionalMap.joy, color: '#facc15' },
+      { name: 'Frustração', value: data.emotionalMap.frustration, color: '#f87171' },
+    ];
+  }, [data]);
+
+  const executiveData = React.useMemo(() => {
+    if (!data) return [];
+    return [
+      { name: 'Controle Inibitório', score: data.executiveFunctions.inhibitoryControl },
+      { name: 'Memória de Trabalho', score: data.executiveFunctions.workingMemory },
+      { name: 'Flexibilidade', score: data.executiveFunctions.cognitiveFlexibility },
+    ];
+  }, [data]);
+
   if (loading || !data) {
-    return <div className="p-8 text-center">Carregando análise neuroeducacional...</div>;
+    return <div className="p-8 text-center animate-pulse text-slate-400">Carregando análise neuroeducacional...</div>;
   }
-
-  const radarData = [
-    { subject: 'Atenção', A: data.cognitiveRadar.attention },
-    { subject: 'Memória', A: data.cognitiveRadar.memory },
-    { subject: 'Executivo', A: data.cognitiveRadar.executive },
-    { subject: 'Linguagem', A: data.cognitiveRadar.language },
-    { subject: 'Matemática', A: data.cognitiveRadar.math },
-    { subject: 'Autonomia', A: data.cognitiveRadar.autonomy },
-  ];
-
-  const emotionalData = [
-    { name: 'Engajamento', value: data.emotionalMap.engagement, color: '#4ade80' },
-    { name: 'Calma', value: data.emotionalMap.calm, color: '#60a5fa' },
-    { name: 'Alegria', value: data.emotionalMap.joy, color: '#facc15' },
-    { name: 'Frustração', value: data.emotionalMap.frustration, color: '#f87171' },
-  ];
-
-  const executiveData = [
-    { name: 'Controle Inibitório', score: data.executiveFunctions.inhibitoryControl },
-    { name: 'Memória de Trabalho', score: data.executiveFunctions.workingMemory },
-    { name: 'Flexibilidade', score: data.executiveFunctions.cognitiveFlexibility },
-  ];
 
   return (
     <div className="space-y-6 p-4 md:p-8 bg-slate-50 min-h-screen">
@@ -76,11 +90,11 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
       {/* Insights Automáticos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {insights.map((insight) => (
-          <Card key={insight.id} className={`border-l-4 ${
+          <MemoCard key={insight.id} className={`border-l-4 ${
             insight.type === 'positive' ? 'border-l-green-500' : 
             insight.type === 'warning' ? 'border-l-amber-500' : 'border-l-blue-500'
           }`}>
-            <CardContent className="pt-4 flex gap-3">
+            <MemoCardContent className="pt-4 flex gap-3">
               <div className={`p-2 rounded-full h-fit ${
                 insight.type === 'positive' ? 'bg-green-100 text-green-600' : 
                 insight.type === 'warning' ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'
@@ -92,22 +106,22 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                 <p className="text-sm font-medium text-slate-700">{insight.message}</p>
                 <p className="text-xs text-slate-400 mt-1 capitalize">{insight.category} • agora</p>
               </div>
-            </CardContent>
-          </Card>
+            </MemoCardContent>
+          </MemoCard>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Radar Cognitivo */}
-        <Card>
+        <MemoCard>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Brain className="text-purple-500" /> Radar Cognitivo
             </CardTitle>
             <CardDescription>Distribuição de habilidades por domínio</CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
+          <MemoCardContent className="h-[300px]">
+            <MemoResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
                 <PolarGrid stroke="#e2e8f0" />
                 <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 12 }} />
@@ -119,20 +133,20 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                   fillOpacity={0.4}
                 />
               </RadarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+            </MemoResponsiveContainer>
+          </MemoCardContent>
+        </MemoCard>
 
         {/* Evolução Semanal */}
-        <Card>
+        <MemoCard>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="text-blue-500" /> Evolução de Desempenho
             </CardTitle>
             <CardDescription>Progresso semanal das atividades finalizadas</CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
+          <MemoCardContent className="h-[300px]">
+            <MemoResponsiveContainer width="100%" height="100%">
               <LineChart data={data.weekly}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                 <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8' }} />
@@ -149,21 +163,21 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                   activeDot={{ r: 6 }}
                 />
               </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+            </MemoResponsiveContainer>
+          </MemoCardContent>
+        </MemoCard>
 
         {/* Mapa Emocional */}
-        <Card>
+        <MemoCard>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Heart className="text-pink-500" /> Perfil de Engajamento
             </CardTitle>
             <CardDescription>Distribuição do estado emocional durante o aprendizado</CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col md:flex-row items-center justify-around h-[300px]">
+          <MemoCardContent className="flex flex-col md:flex-row items-center justify-around h-[300px]">
             <div className="w-full h-full max-w-[200px]">
-              <ResponsiveContainer width="100%" height="100%">
+              <MemoResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={emotionalData}
@@ -178,7 +192,7 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                   </Pie>
                   <Tooltip />
                 </PieChart>
-              </ResponsiveContainer>
+              </MemoResponsiveContainer>
             </div>
             <div className="grid grid-cols-2 gap-4 w-full max-w-xs mt-4 md:mt-0">
               {emotionalData.map((item) => (
@@ -191,19 +205,19 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </MemoCardContent>
+        </MemoCard>
 
         {/* Progresso Executivo */}
-        <Card>
+        <MemoCard>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="text-orange-500" /> Funções Executivas
             </CardTitle>
             <CardDescription>Capacidade de autorregulação e organização</CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
+          <MemoCardContent className="h-[300px]">
+            <MemoResponsiveContainer width="100%" height="100%">
               <BarChart data={executiveData} layout="vertical">
                 <XAxis type="number" hide domain={[0, 100]} />
                 <YAxis 
@@ -221,17 +235,17 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                   ))}
                 </Bar>
               </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+            </MemoResponsiveContainer>
+          </MemoCardContent>
+        </MemoCard>
 
         {/* Evolução BNCC */}
-        <Card className="lg:col-span-2">
+        <MemoCard className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Conformidade BNCC (Educação Infantil)</CardTitle>
             <CardDescription>Progresso nos campos de experiência definidos pela base curricular</CardDescription>
           </CardHeader>
-          <CardContent>
+          <MemoCardContent>
             <div className="space-y-4">
               {data.bnccProgress.map((item) => (
                 <div key={item.competence} className="space-y-1">
@@ -248,9 +262,11 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </MemoCardContent>
+        </MemoCard>
       </div>
     </div>
   );
 };
+
+export default React.memo(NeuroAnalyticsDashboard);
