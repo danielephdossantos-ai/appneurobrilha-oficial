@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect } from "react";
@@ -6,7 +8,7 @@ import { useAppState } from "@/lib/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
 import { ProgressionService } from "@/core/progression/service";
-import { ProgressionEngine } from "@/core/progression/engine";
+import { ProgressionEngine } from "@/modules/progression-system/engine/progression-engine";
 import { ProgressionStats, SkillMastery } from "@/core/progression/types";
 import { toast } from "sonner";
 
