@@ -30,9 +30,9 @@ const diagnosticos: { v: Diagnostico; label: string }[] = [
 
 function Anamnese() {
   const { childId } = Route.useParams();
-  const { state, updateChild, addChild } = useAppState();
+  const { children: allChildren, updateChild, addChild } = useAppState();
   const navigate = useNavigate();
-  const existing = state.children.find((c) => c.id === childId);
+  const existing = allChildren.find((c: any) => c.id === childId);
   const isNew = !existing;
 
   const [step, setStep] = useState(0);
@@ -48,7 +48,7 @@ function Anamnese() {
     preferAudio: existing?.flags.preferAudio ?? false,
     contaNosDedos: existing?.flags.contaNosDedos ?? false,
     apoioVisual: existing?.flags.apoioVisual ?? true,
-    tempoAtencao: existing?.tempoAtencaoMin ?? 10,
+    tempoAtencao: existing?.tempo_atencao_min ?? 10,
   });
 
   const blocos = ["Identidade", "Hiperfoco", "Diagnóstico", "Português", "Matemática", "Atenção", "Pronto!"];
@@ -61,8 +61,8 @@ function Anamnese() {
       hiperfoco: data.hiperfoco,
       diagnostico: data.diagnostico,
       avatar: data.avatar,
-      anamneseCompleta: true,
-      tempoAtencaoMin: data.tempoAtencao,
+      anamnese_completa: true,
+      tempo_atencao_min: data.tempoAtencao,
       flags: {
         apoioVisual: data.apoioVisual,
         passoAPasso: true,
