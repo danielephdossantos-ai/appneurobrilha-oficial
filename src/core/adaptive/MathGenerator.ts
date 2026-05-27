@@ -4,12 +4,13 @@ import { NeuroProfile, NeuroEngine } from '../neuro/engine';
 
 export class MathGenerator {
   static generateActivity(world: string, profile: NeuroProfile, difficulty: number): MathActivity {
-    const worldActivities = MATH_ACTIVITIES.filter(a => a.world === world || world === 'all');
-    const suitable = worldActivities.filter(a => a.difficulty <= difficulty);
+    const worldActivities = ALL_MATH_ACTIVITIES.filter((a: MathActivity) => a.world === world || world === 'all');
+    const suitable = worldActivities.filter((a: MathActivity) => a.difficulty <= difficulty);
     
     const base = suitable.length > 0 
       ? suitable[Math.floor(Math.random() * suitable.length)]
-      : MATH_ACTIVITIES[0];
+      : ALL_MATH_ACTIVITIES[0];
+
 
     return this.applyNeuroAdaptation(base, profile);
   }
