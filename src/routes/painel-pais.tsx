@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { AlertTriangle, TrendingUp, Star, Flame, Clock, ArrowRight } from "lucide-react";
+import { AlertTriangle, TrendingUp, Star, Flame, Clock, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { SensoryModeSwitcher } from "@/components/sensory/SensoryModeSwitcher";
+
 
 export const Route = createFileRoute("/painel-pais")({
   component: Painel,
@@ -76,6 +78,13 @@ function Painel() {
           </Link>
         </Card>
       </div>
+
+      <div className="mb-6">
+        <Card className="border-primary/20 bg-primary/5">
+          <SensoryModeSwitcher />
+        </Card>
+      </div>
+
 
       <h2 className="text-xl mb-3">Atalhos rápidos</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

@@ -238,6 +238,7 @@ export type Database = {
           nome: string
           observacoes: string | null
           perfil: Json | null
+          sensory_mode: string | null
           serie: string | null
           tempo_atencao_min: number | null
           updated_at: string
@@ -256,6 +257,7 @@ export type Database = {
           nome: string
           observacoes?: string | null
           perfil?: Json | null
+          sensory_mode?: string | null
           serie?: string | null
           tempo_atencao_min?: number | null
           updated_at?: string
@@ -274,6 +276,7 @@ export type Database = {
           nome?: string
           observacoes?: string | null
           perfil?: Json | null
+          sensory_mode?: string | null
           serie?: string | null
           tempo_atencao_min?: number | null
           updated_at?: string

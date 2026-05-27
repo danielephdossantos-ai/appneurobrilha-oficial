@@ -2,17 +2,20 @@
 import { PedagogyEngine } from "../pedagogy/engine";
 import { NeuroEngine, NeuroProfile, NeuroAdjustment } from "../neuro/engine";
 import { EmotionalEngine, Emotion } from "../emotional/engine";
-import { SensoryEngine } from "../sensory/engine";
+import { SensoryEngine, SensoryMode } from "../sensory/engine";
 
 export class AdaptiveEngine {
   static orchestrateActivity(
     studentId: string,
     profile: NeuroProfile,
     currentEmotion: Emotion,
-    performance: any
+    performance: any,
+    sensoryMode: SensoryMode = "foco"
   ) {
     const neuroAdj = NeuroEngine.getAdjustments(profile);
+    const sensoryAdj = SensoryEngine.getModeConfig(sensoryMode);
     const activityType = EmotionalEngine.getActivitySuggestion(currentEmotion);
+
     
     // Auto-reforço pedagógico
     let difficultyMultiplier = neuroAdj.complexityMultiplier;
@@ -24,10 +27,16 @@ export class AdaptiveEngine {
 
     return {
       ...neuroAdj,
+      ...sensoryAdj,
       difficulty: difficultyMultiplier,
       suggestedPath: activityType,
-      // Alias for backward compatibility if needed, but better to use the interface names
-      instructionStyle: neuroAdj.instructionType 
+      // Overwrite neuro adjustments with sensory mode specifics if they overlap
+      animationIntensity: sensoryAdj.stimuliLevel === "none" ? "none" : neuroAdj.animationIntensity,
+      animationSpeed: neuroAdj.animationSpeed * sensoryAdj.speedMultiplier,
+      visualScale: neuroAdj.visualScale * sensoryAdj.visualScale,
+      instructionStyle: neuroAdj.instructionType
     };
+
+
   }
 }

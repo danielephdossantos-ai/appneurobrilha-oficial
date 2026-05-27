@@ -30,8 +30,10 @@ export function usePedagogicalEngine() {
       activeChild.id,
       neuroProfile,
       currentEmotion,
-      performance
+      performance,
+      activeChild.sensory_mode || "foco"
     );
+
 
     const sensory = SensoryEngine.getDefaultPreferences(neuroProfile);
 
