@@ -353,6 +353,7 @@ export type Database = {
           created_at: string
           description: string | null
           difficulty_level: string | null
+          domain: string | null
           id: string
           materia: string
           name: string
@@ -364,6 +365,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           difficulty_level?: string | null
+          domain?: string | null
           id?: string
           materia: string
           name: string
@@ -375,6 +377,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           difficulty_level?: string | null
+          domain?: string | null
           id?: string
           materia?: string
           name?: string
