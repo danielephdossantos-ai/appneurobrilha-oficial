@@ -49,7 +49,7 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
   },
   {
     id: "tpl-logical-1",
-    type: "sequence",
+    type: "logic-sequence",
     title: "Sequência Lógica",
     instruction: "Coloque as cenas na ordem correta",
     baseDifficulty: "medium",
