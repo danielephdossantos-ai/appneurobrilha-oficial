@@ -26,7 +26,22 @@ export class ReforcoEngine {
   static async generateLesson(topic: string): Promise<ReforcoLesson> {
     const lowerTopic = topic.toLowerCase();
     
-    // Default structure
+    // Tenta buscar no banco pedagógico primeiro
+    try {
+      const activities = await PedagogyService.getActivities();
+      const match = activities.find(a => 
+        a.titulo.toLowerCase().includes(lowerTopic) || 
+        a.tags.some(t => t.toLowerCase().includes(lowerTopic))
+      );
+
+      if (match) {
+        return this.mapActivityToLesson(match);
+      }
+    } catch (e) {
+      console.error("Erro ao buscar no banco pedagógico:", e);
+    }
+    
+    // Fallback para geração estática
     let lesson: ReforcoLesson = {
       title: topic,
       topic: topic,
@@ -123,5 +138,60 @@ export class ReforcoEngine {
     }
 
     return lesson;
+  }
+
+  private static mapActivityToLesson(activity: PedagogicalActivity): ReforcoLesson {
+    const levels = {
+      basic: [] as LessonStep[],
+      intermediate: [] as LessonStep[],
+      advanced: [] as LessonStep[]
+    };
+
+    // Mapeia baseado no nível de dificuldade da atividade
+    const mainLevel = activity.nivelDificuldade === 'simples' ? 'basic' : 
+                      activity.nivelDificuldade === 'intermediario' ? 'intermediate' : 'advanced';
+
+    levels[mainLevel].push({
+      type: "explanation",
+      text: activity.objetivoPedagogico || activity.titulo
+    });
+
+    if (activity.estrategiaPedagogica) {
+      levels[mainLevel].push({
+        type: "example",
+        text: activity.estrategiaPedagogica
+      });
+    }
+
+    // Se houver variações, distribui entre os níveis
+    if (activity.variacoes && activity.variacoes.length > 0) {
+      activity.variacoes.forEach((v: any, i: number) => {
+        const targetLevel = i % 3 === 0 ? 'basic' : i % 3 === 1 ? 'intermediate' : 'advanced';
+        levels[targetLevel].push({
+          type: "exercise",
+          text: v.enunciado || v.titulo || "Desafio extra",
+          content: v
+        });
+      });
+    }
+
+    // Garante que nenhum nível fique vazio para a UI
+    if (levels.basic.length === 0) levels.basic.push({ type: "explanation", text: "Vamos começar com o básico." });
+    if (levels.intermediate.length === 0) levels.intermediate.push({ type: "explanation", text: "Subindo o nível agora." });
+    if (levels.advanced.length === 0) levels.advanced.push({ type: "explanation", text: "Desafio mestre para você!" });
+
+    return {
+      title: activity.titulo,
+      topic: activity.materia,
+      category: activity.materia,
+      levels,
+      premiumTips: [
+        activity.reforcoPositivo || "Excelente esforço!",
+        activity.reforcoErro || "Quase lá! Tente de novo com calma.",
+        `Adaptado para perfil sensorial: ${activity.tipoSensorial.join(", ")}`
+      ],
+      explanation: activity.objetivoPedagogico || "Aula personalizada do Banco Pedagógico.",
+      activityId: activity.id
+    };
   }
 }
