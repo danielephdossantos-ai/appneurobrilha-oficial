@@ -6,7 +6,8 @@ export class CognitiveMemoryService {
   private static CACHE_KEY_PREFIX = "cognitive_cache_";
 
   private async getCache<T>(key: string): Promise<T | null> {
-    return await get<T>(`${CognitiveMemoryService.CACHE_KEY_PREFIX}${key}`);
+    const data = await get<T>(`${CognitiveMemoryService.CACHE_KEY_PREFIX}${key}`);
+    return data ?? null;
   }
 
   private async setCache<T>(key: string, data: T): Promise<void> {
