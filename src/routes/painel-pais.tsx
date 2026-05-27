@@ -23,7 +23,7 @@ function Painel() {
     <Shell>
       <PageHeader emoji="🛡️" title="Painel dos Pais" subtitle={`Acompanhamento de ${activeChild.nome}`} />
 
-      {!activeChild.anamneseCompleta && (
+      {!activeChild.anamnese_completa && (
         <Card className="mb-6 bg-destructive/10 border-destructive/30">
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-6 w-6 text-destructive shrink-0 mt-0.5" />
