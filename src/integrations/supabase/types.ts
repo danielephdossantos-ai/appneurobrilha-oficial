@@ -133,6 +133,97 @@ export type Database = {
           },
         ]
       }
+      child_progression_stats: {
+        Row: {
+          activities_completed: number
+          child_id: string
+          created_at: string
+          current_streak: number
+          evolution_percentage: number
+          id: string
+          last_activity_at: string | null
+          materia: string
+          updated_at: string
+        }
+        Insert: {
+          activities_completed?: number
+          child_id: string
+          created_at?: string
+          current_streak?: number
+          evolution_percentage?: number
+          id?: string
+          last_activity_at?: string | null
+          materia: string
+          updated_at?: string
+        }
+        Update: {
+          activities_completed?: number
+          child_id?: string
+          created_at?: string
+          current_streak?: number
+          evolution_percentage?: number
+          id?: string
+          last_activity_at?: string | null
+          materia?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_progression_stats_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      child_skill_mastery: {
+        Row: {
+          child_id: string
+          created_at: string
+          id: string
+          last_attempt_at: string | null
+          mastery_level: number
+          materia: string
+          skill_code: string
+          success_rate: number
+          total_attempts: number
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          id?: string
+          last_attempt_at?: string | null
+          mastery_level?: number
+          materia: string
+          skill_code: string
+          success_rate?: number
+          total_attempts?: number
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          id?: string
+          last_attempt_at?: string | null
+          mastery_level?: number
+          materia?: string
+          skill_code?: string
+          success_rate?: number
+          total_attempts?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_skill_mastery_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       children: {
         Row: {
           anamnese_completa: boolean | null
@@ -197,6 +288,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      learning_trails: {
+        Row: {
+          created_at: string
+          description: string | null
+          difficulty_level: string | null
+          id: string
+          materia: string
+          name: string
+          serie: string | null
+          steps: Json
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          difficulty_level?: string | null
+          id?: string
+          materia: string
+          name: string
+          serie?: string | null
+          steps?: Json
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          difficulty_level?: string | null
+          id?: string
+          materia?: string
+          name?: string
+          serie?: string | null
+          steps?: Json
+          updated_at?: string
+        }
+        Relationships: []
       }
       pedagogical_activities_base: {
         Row: {
@@ -299,6 +426,60 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      spaced_repetition_schedule: {
+        Row: {
+          activity_id: string | null
+          child_id: string
+          created_at: string
+          ease_factor: number
+          id: string
+          interval_days: number
+          last_performance_score: number | null
+          next_review_at: string
+          skill_code: string | null
+          updated_at: string
+        }
+        Insert: {
+          activity_id?: string | null
+          child_id: string
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_performance_score?: number | null
+          next_review_at?: string
+          skill_code?: string | null
+          updated_at?: string
+        }
+        Update: {
+          activity_id?: string | null
+          child_id?: string
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_performance_score?: number | null
+          next_review_at?: string
+          skill_code?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "spaced_repetition_schedule_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "pedagogical_activities_base"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "spaced_repetition_schedule_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
