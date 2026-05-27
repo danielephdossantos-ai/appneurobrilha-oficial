@@ -186,10 +186,10 @@ function Auth() {
           type="button"
           onClick={handleDemoLogin}
           disabled={loading}
-          className="w-full py-3 bg-secondary text-secondary-foreground rounded-2xl font-bold border border-border flex items-center justify-center gap-2 hover:bg-muted active:scale-[0.98] transition-all"
+          className="w-full py-4 bg-secondary text-secondary-foreground rounded-2xl font-extrabold border-2 border-primary/20 flex items-center justify-center gap-3 hover:bg-muted active:scale-[0.98] transition-all shadow-soft"
         >
-          <User size={18} />
-          Acessar como Visitante
+          <Sparkles className="text-primary" size={20} />
+          Acessar como Visitante (Teste Rápido)
         </button>
 
         <p className="text-center text-xs text-muted-foreground mt-6 px-4">
