@@ -106,9 +106,9 @@ function MascotStorePage() {
                     transition={{ delay: index * 0.05 }}
                     whileHover={{ y: -10 }}
                   >
-                    <Card className="group relative overflow-hidden border-none rounded-[40px] shadow-xl hover:shadow-2xl transition-all duration-500 bg-white ring-1 ring-black/[0.03]">
+                    <Card className={`group relative overflow-hidden border-none rounded-[40px] shadow-xl hover:shadow-2xl transition-all duration-500 bg-white ring-1 ring-black/[0.03] ${RARITY_CONFIG[mascot.rarity].shadow}`}>
                       {/* Rarity Glow */}
-                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${mascot.rarity === 'lendario' ? 'bg-yellow-400' : 'bg-indigo-400'}`} />
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${mascot.rarity === 'lendario' ? 'bg-amber-400' : 'bg-indigo-400'}`} />
                       
                       {/* Visual Content */}
                       <div className="aspect-[4/5] bg-gradient-to-b from-slate-50 to-white relative flex flex-col items-center justify-center p-6 overflow-hidden">
