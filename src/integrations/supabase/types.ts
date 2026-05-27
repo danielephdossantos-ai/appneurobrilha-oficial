@@ -292,6 +292,62 @@ export type Database = {
           },
         ]
       }
+      cognitive_profile: {
+        Row: {
+          avg_focus_time: number | null
+          avg_response_speed: number | null
+          child_id: string
+          created_at: string
+          emotional_behavior_patterns: Json | null
+          fragile_skills: string[] | null
+          frequent_errors: Json | null
+          id: string
+          mastered_skills: string[] | null
+          pedagogical_evolution_score: number | null
+          preferred_stimuli: string[] | null
+          sensory_difficulty_level: number | null
+          updated_at: string
+        }
+        Insert: {
+          avg_focus_time?: number | null
+          avg_response_speed?: number | null
+          child_id: string
+          created_at?: string
+          emotional_behavior_patterns?: Json | null
+          fragile_skills?: string[] | null
+          frequent_errors?: Json | null
+          id?: string
+          mastered_skills?: string[] | null
+          pedagogical_evolution_score?: number | null
+          preferred_stimuli?: string[] | null
+          sensory_difficulty_level?: number | null
+          updated_at?: string
+        }
+        Update: {
+          avg_focus_time?: number | null
+          avg_response_speed?: number | null
+          child_id?: string
+          created_at?: string
+          emotional_behavior_patterns?: Json | null
+          fragile_skills?: string[] | null
+          frequent_errors?: Json | null
+          id?: string
+          mastered_skills?: string[] | null
+          pedagogical_evolution_score?: number | null
+          preferred_stimuli?: string[] | null
+          sensory_difficulty_level?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cognitive_profile_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       learning_trails: {
         Row: {
           created_at: string
@@ -327,6 +383,56 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      longitudinal_scores: {
+        Row: {
+          attention_score: number | null
+          autonomy_score: number | null
+          child_id: string
+          coordination_score: number | null
+          id: string
+          language_score: number | null
+          math_score: number | null
+          memory_score: number | null
+          reading_score: number | null
+          recorded_at: string
+          self_regulation_score: number | null
+        }
+        Insert: {
+          attention_score?: number | null
+          autonomy_score?: number | null
+          child_id: string
+          coordination_score?: number | null
+          id?: string
+          language_score?: number | null
+          math_score?: number | null
+          memory_score?: number | null
+          reading_score?: number | null
+          recorded_at?: string
+          self_regulation_score?: number | null
+        }
+        Update: {
+          attention_score?: number | null
+          autonomy_score?: number | null
+          child_id?: string
+          coordination_score?: number | null
+          id?: string
+          language_score?: number | null
+          math_score?: number | null
+          memory_score?: number | null
+          reading_score?: number | null
+          recorded_at?: string
+          self_regulation_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "longitudinal_scores_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       pedagogical_activities_base: {
         Row: {
