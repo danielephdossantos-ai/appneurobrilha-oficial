@@ -113,6 +113,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
         <Outlet />
+        <ConnectivityStatus />
         <LGPDConsent />
       </AuthGuard>
       <Toaster position="top-center" richColors />
@@ -126,6 +127,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
+import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
