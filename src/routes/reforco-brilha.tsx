@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 
-export const Route = createFileRoute("/mundo-brilha")({
+export const Route = createFileRoute("/reforco-brilha")({
   component: Mundo,
 });
 
