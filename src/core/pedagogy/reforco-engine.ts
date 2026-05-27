@@ -1,3 +1,5 @@
+import { PedagogyService } from "./service";
+import { PedagogicalActivity } from "./types";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
@@ -17,10 +19,11 @@ export interface ReforcoLesson {
   };
   premiumTips: string[];
   explanation: string;
+  activityId?: string;
 }
 
 export class ReforcoEngine {
-  static generateLesson(topic: string): ReforcoLesson {
+  static async generateLesson(topic: string): Promise<ReforcoLesson> {
     const lowerTopic = topic.toLowerCase();
     
     // Default structure
