@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle } from "lucide-react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy } from "lucide-react";
 import { useAppState } from "@/lib/store";
+import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
 
 export const Route = createFileRoute("/reforco-brilha")({
   component: ReforcoBrilha,
@@ -19,24 +20,22 @@ function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
-  const [lessonContent, setLessonContent] = useState<any>(null);
+  const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
+  const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
   const startLesson = (customTopic?: string) => {
     const finalTopic = customTopic || topic;
     if (!finalTopic) return;
     
     setIsTeaching(true);
-    // Simulating "Infinite" Database/AI response
+    setLessonContent(null);
+    
+    // Generating structured lesson
     setTimeout(() => {
-      setLessonContent({
-        title: `Aula de: ${finalTopic}`,
-        steps: [
-          { type: "explanation", text: `Olá ${activeChild?.nome}! Hoje vamos aprender tudo sobre ${finalTopic}.` },
-          { type: "example", text: "Veja como é simples: [Exemplo visual e concreto aqui]" },
-          { type: "exercise", text: `Agora é sua vez! Tente resolver este desafio de ${finalTopic}.` }
-        ]
-      });
-    }, 1500);
+      const lesson = ReforcoEngine.generateLesson(finalTopic);
+      setLessonContent(lesson);
+      setCurrentLevel("basic");
+    }, 1200);
   };
 
   return (
@@ -147,40 +146,123 @@ function ReforcoBrilha() {
             </div>
           ) : (
             <div className="space-y-6">
-              <Card className="bg-primary/5 border-primary/20 p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="h-20 w-20 rounded-full bg-white shadow-soft grid place-items-center text-5xl">👨‍🏫</div>
-                  <div>
-                    <h2 className="text-2xl font-black text-primary uppercase">{lessonContent.title}</h2>
-                    <div className="flex gap-2 mt-1">
-                      <Pill tone="success">Aula Personalizada</Pill>
-                      <Pill tone="info">Neuro-Adaptativo</Pill>
+              {/* Cabeçalho da Aula Premium */}
+              <div className="bg-gradient-to-br from-primary/20 via-primary/5 to-background rounded-[2.5rem] p-8 border border-primary/20 relative overflow-hidden shadow-premium">
+                <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                  <Star className="h-24 w-24 text-primary fill-primary" />
+                </div>
+                
+                <div className="flex flex-col md:flex-row md:items-center gap-6 relative z-10">
+                  <div className="h-24 w-24 rounded-3xl bg-white shadow-xl grid place-items-center text-5xl transform -rotate-3 border-2 border-primary/10">
+                    {lessonContent.category === "Matemática" ? "🧮" : lessonContent.category === "Português" ? "✍️" : "📚"}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Premium Brilha</span>
+                      <Pill tone="info" className="text-[10px]">{lessonContent.category}</Pill>
                     </div>
+                    <h2 className="text-3xl font-black text-foreground leading-none">{lessonContent.title}</h2>
+                    <p className="text-muted-foreground mt-2 font-medium">{lessonContent.explanation}</p>
                   </div>
                 </div>
 
-                <div className="space-y-8">
-                  {lessonContent.steps.map((step: any, idx: number) => (
-                    <div key={idx} className="bg-white rounded-2xl p-6 shadow-soft border border-border/50 animate-in fade-in slide-in-from-left-4" style={{ animationDelay: `${idx * 0.3}s` }}>
-                      <div className="flex items-start gap-4">
-                        <div className="h-8 w-8 rounded-full bg-secondary grid place-items-center text-xs font-bold shrink-0 mt-1">
-                          {idx + 1}
+                {/* Seletor de Nível de Progressão */}
+                <div className="flex p-1 bg-white/50 backdrop-blur-sm rounded-2xl mt-8 border border-white max-w-md">
+                  {(["basic", "intermediate", "advanced"] as const).map((lvl) => (
+                    <button
+                      key={lvl}
+                      onClick={() => setCurrentLevel(lvl)}
+                      className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                        currentLevel === lvl 
+                        ? "bg-primary text-white shadow-glow scale-105" 
+                        : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                      }`}
+                    >
+                      {lvl === "basic" && <Zap className="h-3 w-3" />}
+                      {lvl === "intermediate" && <Star className="h-3 w-3" />}
+                      {lvl === "advanced" && <Trophy className="h-3 w-3" />}
+                      {lvl === "basic" ? "Simples" : lvl === "intermediate" ? "Intermediário" : "Complexo"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Conteúdo da Aula */}
+                <div className="lg:col-span-2 space-y-4">
+                  <h3 className="text-lg font-bold flex items-center gap-2 px-2">
+                    <BookOpen className="h-5 w-5 text-primary" />
+                    Roteiro de Aprendizagem
+                  </h3>
+                  {lessonContent.levels[currentLevel].map((step, idx) => (
+                    <div 
+                      key={`${currentLevel}-${idx}`} 
+                      className="bg-card rounded-3xl p-6 border border-border/50 shadow-soft animate-in slide-in-from-bottom-4"
+                      style={{ animationDelay: `${idx * 0.1}s` }}
+                    >
+                      <div className="flex gap-4">
+                        <div className={`h-10 w-10 rounded-2xl shrink-0 grid place-items-center text-lg ${
+                          step.type === "explanation" ? "bg-blue-100 text-blue-600" :
+                          step.type === "example" ? "bg-purple-100 text-purple-600" :
+                          "bg-green-100 text-green-600"
+                        }`}>
+                          {step.type === "explanation" ? "💡" : step.type === "example" ? "📝" : "🎯"}
                         </div>
-                        <p className="text-lg leading-relaxed">{step.text}</p>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider">
+                            {step.type === "explanation" ? "Explicação" : step.type === "example" ? "Exemplo Prático" : "Desafio"}
+                          </span>
+                          <p className="text-lg font-medium leading-relaxed text-foreground">
+                            {step.text}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ))}
+                  
+                  <div className="pt-4 flex gap-3">
+                    <button className="flex-1 bg-primary text-white font-black py-5 rounded-[2rem] shadow-glow hover:translate-y-[-2px] active:translate-y-[0px] transition-all flex items-center justify-center gap-2 text-lg">
+                      PRATICAR AGORA
+                      <ChevronRight className="h-6 w-6" />
+                    </button>
+                  </div>
                 </div>
 
-                <div className="mt-10 flex gap-3">
-                  <button className="flex-1 bg-primary text-white font-bold py-4 rounded-2xl shadow-glow hover:opacity-90 transition-opacity">
-                    Fazer Atividades
-                  </button>
-                  <button className="bg-secondary text-foreground font-bold py-4 px-8 rounded-2xl hover:bg-secondary/80 transition-colors">
-                    Dúvida
-                  </button>
+                {/* Dicas Premium */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-bold flex items-center gap-2 px-2 text-primary">
+                    <Sparkles className="h-5 w-5" />
+                    Dicas Premium
+                  </h3>
+                  <div className="space-y-3">
+                    {lessonContent.premiumTips.map((tip, idx) => (
+                      <div 
+                        key={idx} 
+                        className="bg-gradient-to-br from-secondary/50 to-secondary/30 rounded-2xl p-4 border border-secondary/50 relative overflow-hidden group hover:border-primary/30 transition-colors"
+                      >
+                        <div className="absolute top-2 right-2 opacity-20 group-hover:scale-125 transition-transform">
+                          <Info className="h-4 w-4" />
+                        </div>
+                        <p className="text-sm font-medium leading-tight">
+                          {tip}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Card className="bg-amber-50 border-amber-200 mt-6">
+                    <div className="flex gap-3">
+                      <div className="text-2xl">👩‍🏫</div>
+                      <div>
+                        <h4 className="text-sm font-bold text-amber-900">Nota do Professor</h4>
+                        <p className="text-xs text-amber-800 leading-relaxed mt-1">
+                          Este conteúdo foi gerado para o nível de {activeChild?.nome}, adaptando a complexidade automaticamente.
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-              </Card>
+              </div>
             </div>
           )}
         </div>
