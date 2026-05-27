@@ -12,16 +12,16 @@ function Jornada() {
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
 
   const blocos = [
-    { tipo: "ativo", titulo: "Português · Sílabas", dur: activeChild.tempoAtencaoMin, status: "done" },
+    { tipo: "ativo", titulo: "Português · Sílabas", dur: activeChild.tempo_atencao_min, status: "done" },
     { tipo: "pausa", titulo: "Pausa ativa · Respiração", dur: 3, status: "done" },
-    { tipo: "ativo", titulo: "Matemática · Somar", dur: activeChild.tempoAtencaoMin, status: "now" },
+    { tipo: "ativo", titulo: "Matemática · Somar", dur: activeChild.tempo_atencao_min, status: "now" },
     { tipo: "pausa", titulo: "Pausa ativa · Alongamento", dur: 3, status: "next" },
-    { tipo: "ativo", titulo: "Ciências · Plantas", dur: activeChild.tempoAtencaoMin, status: "next" },
+    { tipo: "ativo", titulo: "Ciências · Plantas", dur: activeChild.tempo_atencao_min, status: "next" },
   ];
 
   return (
     <Shell>
-      <PageHeader emoji="🧭" title="Jornada 365" subtitle={`Dia 47 de 365 · perfil ajustado a ${activeChild.tempoAtencaoMin} min de foco`} />
+      <PageHeader emoji="🧭" title="Jornada 365" subtitle={`Dia 47 de 365 · perfil ajustado a ${activeChild.tempo_atencao_min} min de foco`} />
 
       <Card className="mb-6">
         <div className="flex items-center justify-between mb-2">
