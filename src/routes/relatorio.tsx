@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { Download } from "lucide-react";
+import { Download, BrainCircuit } from "lucide-react";
+import { ParentalEngine } from "@/core/parental/engine";
 
 export const Route = createFileRoute("/relatorio")({
   component: Relatorio,
@@ -10,6 +11,8 @@ export const Route = createFileRoute("/relatorio")({
 function Relatorio() {
   const { activeChild } = useAppState();
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+
+  const engineReport = ParentalEngine.generateDailyReport({}, { current: "feliz" });
 
   const semanas = [12, 18, 24, 30, 28, 35, 42];
 
@@ -46,6 +49,26 @@ function Relatorio() {
               <div className="text-xs text-muted-foreground">S{i + 1}</div>
             </div>
           ))}
+        </div>
+      </Card>
+
+      <Card className="mb-4 bg-primary/5 border-primary/20">
+        <div className="flex items-center gap-2 mb-3">
+          <BrainCircuit className="h-5 w-5 text-primary" />
+          <h3 className="font-extrabold">Observação Pedagógica (IA)</h3>
+        </div>
+        <p className="text-sm leading-relaxed italic text-muted-foreground">
+          "{engineReport.observation}"
+        </p>
+        <div className="mt-3 flex gap-4 text-xs font-bold">
+          <div className="flex flex-col">
+            <span className="text-muted-foreground uppercase">Habilidades:</span>
+            <span>+{engineReport.skillsGained} BNCC</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-muted-foreground uppercase">Humor médio:</span>
+            <span className="capitalize">{engineReport.mood}</span>
+          </div>
         </div>
       </Card>
 
