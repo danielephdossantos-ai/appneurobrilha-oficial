@@ -127,9 +127,10 @@ function Index() {
             <div className="flex items-center gap-3 mb-3">
               <Activity className="h-5 w-5 text-success" />
               <h3 className="font-extrabold text-sm uppercase tracking-wider">
-                Sistema Sensorial: {engine.activeChild.sensory_mode?.toUpperCase() || "FOCO"}
+                Sistema Sensorial: {engine.child.sensory_mode?.toUpperCase() || "FOCO"}
               </h3>
             </div>
+
 
             <div className="flex flex-wrap gap-2">
               <Pill tone="success">Volume {engine.sensory.soundVolume * 100}%</Pill>
