@@ -44,7 +44,7 @@ function LiteracyPage() {
         return (
           <PhonemeCard 
             phoneme={data.phonemes[currentActivityIndex]} 
-            onPlaySound={(s) => console.log('Playing', s)}
+            onPlaySound={(s) => {/* Playing sound */}}
             onComplete={handleActivityComplete}
             isTEA={profile === 'TEA'}
           />
