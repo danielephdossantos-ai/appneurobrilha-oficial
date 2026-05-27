@@ -1,4 +1,14 @@
 
+import { PHONEMES } from './phonemes';
+import { SYLLABLES } from './syllables';
+import { WORDS } from './words';
+import { SENTENCES } from './sentences';
+
+export * from './phonemes';
+export * from './syllables';
+export * from './words';
+export * from './sentences';
+
 export interface LiteracyModule {
   id: string;
   name: string;
@@ -14,22 +24,31 @@ export const LITERACY_SYSTEM = {
     { id: 'word-association', name: 'Associação Mágica', type: 'word', difficulty: 3, description: 'Palavra e Imagem' },
     { id: 'guided-reading', name: 'Leitura Guiada', type: 'reading', difficulty: 4, description: 'Frases simples' }
   ],
+  data: {
+    phonemes: PHONEMES,
+    syllables: SYLLABLES,
+    words: WORDS,
+    sentences: SENTENCES
+  },
   adaptations: {
     dyslexia: {
-      fontFamily: 'OpenDyslexic',
+      fontFamily: 'OpenDyslexic, sans-serif',
       letterSpacing: '0.15em',
       lineHeight: '2',
-      syllableHighlight: true
+      syllableHighlight: true,
+      contrast: 'high'
     },
     tea: {
       visualClutter: 'minimal',
       predictableTransitions: true,
-      directInstructions: true
+      directInstructions: true,
+      reducedAnimations: true
     },
     tdah: {
       fastFeedback: true,
       microActivities: true,
-      highRewardFrequency: true
+      highRewardFrequency: true,
+      focusMode: true
     }
   }
 };
