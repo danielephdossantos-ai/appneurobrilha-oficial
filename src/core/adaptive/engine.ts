@@ -53,7 +53,7 @@ export class AdaptiveEngine {
       // Sobrescrita inteligente
       animationSpeed: neuroAdj.animationSpeed * sensoryAdj.speedMultiplier * (analysis.fatigue > 0.7 ? 0.8 : 1),
       visualScale: neuroAdj.visualScale * sensoryAdj.visualScale * (analysis.distraction > 0.5 ? 1.1 : 1),
-      maxItems: analysis.fatigue > 0.6 ? Math.max(1, Math.floor(neuroAdj.maxItemsPerScreen / 2)) : neuroAdj.maxItemsPerScreen
+      maxItemsPerScreen: analysis.fatigue > 0.6 ? Math.max(1, Math.floor(neuroAdj.maxItemsPerScreen / 2)) : neuroAdj.maxItemsPerScreen
     };
   }
 }
