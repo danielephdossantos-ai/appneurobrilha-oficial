@@ -101,11 +101,11 @@ export class ActivityEngine {
       .slice(0, difficulty === "easy" ? 2 : 3);
 
     const options: ActivityOption[] = [
-      { id: "correct", content: correct.value, type: correct.type === "image" ? "image" : "text", isCorrect: true },
+      { id: "correct", content: correct.value, type: (correct.type === "image" ? "image" : "text") as "image" | "text", isCorrect: true },
       ...distractors.map((d, i) => ({ 
         id: `dist-${i}`, 
         content: d.value, 
-        type: d.type === "image" ? "image" : "text", 
+        type: (d.type === "image" ? "image" : "text") as "image" | "text", 
         isCorrect: false 
       }))
     ];
