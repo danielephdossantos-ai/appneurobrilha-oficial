@@ -47,7 +47,6 @@ function PainelPremium() {
       <div className="bg-slate-50/50 min-h-screen pb-20 -mx-4 md:-mx-8 -mt-6 md:-mt-10 px-4 md:px-8 pt-8">
         <DashboardHeader 
 
-        <DashboardHeader 
           studentName={activeChild.nome || mockResponsibleData.studentName} 
           grade={mockResponsibleData.grade} 
         />
