@@ -15,16 +15,16 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: {
-            'vendor-react': ['react', 'react-dom'],
-            'vendor-tanstack': ['@tanstack/react-router', '@tanstack/react-query'],
-            'vendor-ui': ['framer-motion', 'lucide-react', 'recharts'],
+            'charts': ['recharts'],
+            'icons': ['lucide-react'],
+            'animations': ['framer-motion'],
           },
         },
       },
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 800,
     },
     optimizeDeps: {
-      include: ['react', 'react-dom', 'framer-motion', 'recharts'],
+      include: ['framer-motion', 'recharts', 'lucide-react'],
     },
   },
 });
