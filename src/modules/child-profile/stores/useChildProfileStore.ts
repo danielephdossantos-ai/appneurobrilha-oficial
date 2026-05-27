@@ -11,11 +11,11 @@ interface ChildProfileState {
 
 export const useChildProfileStore = create<ChildProfileState>()(
   persist(
-    (set) => ({
+    (set: (state: Partial<ChildProfileState>) => void) => ({
       activeChildId: null,
       children: [],
-      setActiveChildId: (id) => set({ activeChildId: id }),
-      setChildren: (children) => set({ children }),
+      setActiveChildId: (id: string | null) => set({ activeChildId: id }),
+      setChildren: (children: ChildProfile[]) => set({ children }),
     }),
     {
       name: 'child-profile-storage',
