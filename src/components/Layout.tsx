@@ -1,9 +1,9 @@
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useAppState } from "@/lib/store";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut
+  ClipboardList, LogOut, ChevronLeft, ChevronRight
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,6 +24,19 @@ const navPais = [
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
 ] as const;
 
+const navigationSequence = [
+  "/",
+  "/escola-brilha",
+  "/mundo-brilha",
+  "/neuro-treino",
+  "/jornada-365",
+  "/rotina",
+  "/painel-pais",
+  "/terapeuta-brilha",
+  "/agenda",
+  "/relatorio",
+];
+
 function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: typeof Home }) {
   return (
     <Link
@@ -41,9 +54,14 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
 export function Shell({ children }: { children?: ReactNode }) {
   const { activeChild, children: allChildren, setActiveChild } = useAppState();
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+
+  const currentIndex = navigationSequence.indexOf(path);
+  const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
+  const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col md:flex-row">
       <aside className="hidden md:flex w-72 shrink-0 flex-col bg-sidebar border-r border-sidebar-border p-4 gap-2">
         <Link to="/" className="flex items-center gap-2 px-2 py-3">
           <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-2xl shadow-glow">
@@ -118,9 +136,59 @@ export function Shell({ children }: { children?: ReactNode }) {
           )}
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 max-w-6xl w-full mx-auto">
+        <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
           {children ?? <Outlet />}
           <MobileNav path={path} />
+          
+          <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
+            <div className="pointer-events-auto">
+              {prevPath && (
+                <button
+                  onClick={() => navigate({ to: prevPath })}
+                  className="h-14 w-14 rounded-full bg-white shadow-lg border-2 border-primary/20 flex items-center justify-center text-primary btn-tap"
+                  aria-label="Voltar"
+                >
+                  <ChevronLeft size={32} strokeWidth={3} />
+                </button>
+              )}
+            </div>
+            <div className="pointer-events-auto">
+              {nextPath && (
+                <button
+                  onClick={() => navigate({ to: nextPath })}
+                  className="h-14 w-14 rounded-full bg-primary shadow-glow flex items-center justify-center text-white btn-tap"
+                  aria-label="Seguir"
+                >
+                  <ChevronRight size={32} strokeWidth={3} />
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
+            <div className="pointer-events-auto">
+              {prevPath && (
+                <button
+                  onClick={() => navigate({ to: prevPath })}
+                  className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white shadow-xl border border-border text-foreground font-bold hover:bg-muted transition-colors btn-tap"
+                >
+                  <ChevronLeft size={20} />
+                  Voltar
+                </button>
+              )}
+            </div>
+            <div className="pointer-events-auto">
+              {nextPath && (
+                <button
+                  onClick={() => navigate({ to: nextPath })}
+                  className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary shadow-glow text-white font-bold hover:opacity-90 transition-opacity btn-tap"
+                >
+                  Seguir
+                  <ChevronRight size={20} />
+                </button>
+              )}
+            </div>
+          </div>
         </main>
       </div>
     </div>
