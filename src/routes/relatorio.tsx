@@ -1,11 +1,15 @@
+import React, { lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { Download, BrainCircuit, BarChart3 } from "lucide-react";
 import { ParentalEngine } from "@/core/parental/engine";
 import { CognitiveDashboard } from "@/modules/neuro-engine/components/CognitiveDashboard";
-import { NeuroAnalyticsDashboard } from "@/modules/analytics/components/NeuroAnalyticsDashboard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { VirtualizedList } from "@/components/ui/VirtualizedList";
+
+// Lazy load heavy analytics component
+const NeuroAnalyticsDashboard = lazy(() => import("@/modules/analytics/components/NeuroAnalyticsDashboard"));
 
 export const Route = createFileRoute("/relatorio")({
   component: Relatorio,
@@ -44,7 +48,9 @@ function Relatorio() {
         </TabsContent>
 
         <TabsContent value="neuro">
-          <NeuroAnalyticsDashboard childId={activeChild.id} />
+          <Suspense fallback={<div className="p-8 text-center text-slate-400 animate-pulse">Carregando analytics...</div>}>
+            <NeuroAnalyticsDashboard childId={activeChild.id} />
+          </Suspense>
         </TabsContent>
       </Tabs>
 

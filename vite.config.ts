@@ -12,19 +12,10 @@ export default defineConfig({
   },
   vite: {
     build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'charts': ['recharts'],
-            'icons': ['lucide-react'],
-            'animations': ['framer-motion'],
-          },
-        },
-      },
-      chunkSizeWarningLimit: 800,
+      chunkSizeWarningLimit: 1000,
     },
     optimizeDeps: {
-      include: ['framer-motion', 'recharts', 'lucide-react'],
+      include: ['framer-motion', 'recharts', 'lucide-react', '@tanstack/react-virtual'],
     },
   },
 });
