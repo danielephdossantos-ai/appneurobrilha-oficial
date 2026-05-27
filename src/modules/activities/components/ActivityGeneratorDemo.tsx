@@ -5,11 +5,31 @@ import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
+import { useNeuroAnalytics } from '../../analytics/hooks/useNeuroAnalytics';
+import { toast } from 'sonner';
 
 const ActivityGeneratorDemo = () => {
   const [difficulty, setDifficulty] = useState(0.5);
   const [activities, setActivities] = useState<GeneratedActivity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<GeneratedActivity | null>(null);
+  const { logEvent } = useNeuroAnalytics("child-123-abc");
+
+  const handleAction = async (type: "success" | "error" | "click" | "abandonment") => {
+    if (!selectedActivity) return;
+    
+    await logEvent({
+      event_type: type,
+      activity_id: selectedActivity.id,
+      metadata: {
+        domain: selectedActivity.metadata.domain,
+        difficulty: selectedActivity.difficulty,
+        seed: selectedActivity.metadata.seed
+      }
+    });
+    
+    if (type === "success") toast.success("Evento de sucesso registrado!");
+    if (type === "error") toast.error("Evento de erro registrado!");
+  };
 
   const generateNewSet = () => {
     const service = ActivityProceduralService.getInstance();
@@ -95,6 +115,28 @@ const ActivityGeneratorDemo = () => {
                     <p className="text-xs text-purple-800">Redução de Distração: Ativada</p>
                     <p className="text-xs text-purple-800">Reforço Auditivo: Disponível</p>
                   </div>
+                </div>
+
+                <div className="mt-8 flex gap-4 w-full">
+                  <Button 
+                    className="flex-1 bg-green-500 hover:bg-green-600" 
+                    onClick={() => handleAction("success")}
+                  >
+                    Simular Acerto
+                  </Button>
+                  <Button 
+                    className="flex-1 bg-red-500 hover:bg-red-600" 
+                    onClick={() => handleAction("error")}
+                  >
+                    Simular Erro
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => handleAction("abandonment")}
+                  >
+                    Simular Desistência
+                  </Button>
                 </div>
               </CardContent>
             </Card>
