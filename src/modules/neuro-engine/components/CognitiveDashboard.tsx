@@ -6,7 +6,11 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from "recharts";
-import { Brain, Target, Zap, Clock, Smile } from "lucide-react";
+import { Brain, Target, Zap, Clock, Smile, Database } from "lucide-react";
+import { seedCognitiveData } from "../services/SeedCognitiveData";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
 
 interface CognitiveDashboardProps {
   childId: string;
@@ -15,9 +19,20 @@ interface CognitiveDashboardProps {
 export const CognitiveDashboard: React.FC<CognitiveDashboardProps> = ({ childId }) => {
   const { profile, history, isLoadingProfile, isLoadingHistory } = useCognitiveMemory(childId);
 
+  const handleSeed = async () => {
+    try {
+      await seedCognitiveData(childId);
+      toast.success("Dados de demonstração gerados com sucesso!");
+      window.location.reload();
+    } catch (error) {
+      toast.error("Erro ao gerar dados.");
+    }
+  };
+
   if (isLoadingProfile || isLoadingHistory) {
     return <div className="p-8 text-center">Carregando perfil cognitivo...</div>;
   }
+
 
   // Prepare radar chart data
   const latestScores = history.length > 0 ? history[history.length - 1] : null;
@@ -32,10 +47,17 @@ export const CognitiveDashboard: React.FC<CognitiveDashboardProps> = ({ childId 
 
   return (
     <div className="space-y-6 p-6">
-      <h2 className="text-2xl font-bold flex items-center gap-2 text-primary">
-        <Brain className="h-6 w-6" />
-        Memória Cognitiva Persistente
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold flex items-center gap-2 text-primary">
+          <Brain className="h-6 w-6" />
+          Memória Cognitiva Persistente
+        </h2>
+        <Button variant="outline" size="sm" onClick={handleSeed} className="gap-2">
+          <Database className="h-4 w-4" />
+          Gerar Dados Demo
+        </Button>
+      </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="bg-blue-50/50 border-blue-100">
