@@ -56,10 +56,6 @@ export class AuthService {
       .single();
 
     if (error) throw error;
-    return data;
-  }
-
-    if (error) throw error;
 
     await AuditLogService.log({
       action: 'UPDATE_PRIVACY_SETTINGS',
