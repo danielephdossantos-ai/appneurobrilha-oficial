@@ -94,6 +94,32 @@ function Index() {
                 <span className="text-muted-foreground">Estilo de Instrução:</span>
                 <span className="font-bold capitalize">{engine.adaptive.instructionStyle}</span>
               </div>
+              <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-primary/10">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Velocidade</span>
+                  <span className="font-bold text-xs">{engine.adaptive.animationSpeed}x</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Estímulos</span>
+                  <span className="font-bold text-xs capitalize">{engine.adaptive.stimuliLevel}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Escala Visual</span>
+                  <span className="font-bold text-xs">{engine.adaptive.visualScale}x</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Itens/Tela</span>
+                  <span className="font-bold text-xs">{engine.adaptive.maxItemsPerScreen}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Reforços</span>
+                  <span className="font-bold text-xs capitalize">{engine.adaptive.reinforcementIntensity}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase">Previsibilidade</span>
+                  <span className="font-bold text-xs capitalize">{engine.adaptive.predictabilityLevel}</span>
+                </div>
+              </div>
             </div>
           </Card>
 
