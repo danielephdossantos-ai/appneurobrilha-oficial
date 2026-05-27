@@ -50,38 +50,52 @@ export class EmotionalEngine {
   }
 
   static getMascotReaction(emotion: Emotion): { text: string; animation: string } {
-    switch (emotion) {
-      case "frustrado":
-        return { 
-          text: "Tudo bem errar! Vamos tentar de um jeito diferente?", 
-          animation: "bounce-gentle" 
-        };
-      case "orgulhoso":
-        return { 
-          text: "Incrível! Você está evoluindo muito rápido!", 
-          animation: "celebrate" 
-        };
-      case "cansado":
-        return { 
-          text: "Que tal uma pequena pausa para esticar os braços?", 
-          animation: "yawn" 
-        };
-      case "distraido":
-        return { 
-          text: "Ei, olha aqui! Quase terminamos essa parte.", 
-          animation: "wave" 
-        };
-      case "focado":
-        return { 
-          text: "Adoro ver você concentrado assim!", 
-          animation: "nod" 
-        };
-      default:
-        return { 
-          text: "Estou aqui com você! Vamos continuar?", 
-          animation: "idle" 
-        };
-    }
+    const reactions: Record<Emotion, { text: string; animation: string }[]> = {
+      frustrado: [
+        { text: "Tudo bem errar! Vamos tentar de um jeito diferente?", animation: "bounce-gentle" },
+        { text: "Respire fundo comigo... pronto, vamos tentar de novo!", animation: "breathe" },
+        { text: "Eu também erro às vezes. O segredo é não desistir!", animation: "hug" }
+      ],
+      orgulhoso: [
+        { text: "Incrível! Você está evoluindo muito rápido!", animation: "celebrate" },
+        { text: "Uau! Suas estrelas estão brilhando muito!", animation: "jump" },
+        { text: "Você é um verdadeiro mestre das letras!", animation: "sparkle" }
+      ],
+      cansado: [
+        { text: "Que tal uma pequena pausa para esticar os braços?", animation: "yawn" },
+        { text: "Beber uma aguinha agora seria ótimo, né?", animation: "drink" },
+        { text: "Sua bateria está baixando. Vamos descansar um pouquinho?", animation: "rest" }
+      ],
+      distraido: [
+        { text: "Ei, olha aqui! Quase terminamos essa parte.", animation: "wave" },
+        { text: "Veja essa cor que legal! Vamos focar aqui?", animation: "point" },
+        { text: "Falta só um pouquinho para o próximo prêmio!", animation: "cheer" }
+      ],
+      focado: [
+        { text: "Adoro ver você concentrado assim!", animation: "nod" },
+        { text: "Seu cérebro está brilhando muito agora!", animation: "glow" },
+        { text: "Que foco maravilhoso! Continue assim!", animation: "steady" }
+      ],
+      feliz: [
+        { text: "Estou tão feliz de aprender com você!", animation: "happy-dance" },
+        { text: "Aprender é uma grande festa!", animation: "spin" }
+      ],
+      calmo: [
+        { text: "Estou aqui com você! Vamos continuar?", animation: "idle" },
+        { text: "No seu tempo, sem pressa.", animation: "soft-sway" }
+      ],
+      ansioso: [
+        { text: "Calma, amiguinho. Eu te ajudo se precisar.", animation: "reassure" },
+        { text: "Vamos fazer devagarzinho, um por um.", animation: "slow-step" }
+      ],
+      irritado: [
+        { text: "Estou aqui para te ouvir. Quer um abraço virtual?", animation: "soothe" },
+        { text: "Às vezes as coisas são difíceis, mas eu acredito em você.", animation: "stay-near" }
+      ]
+    };
+
+    const options = reactions[emotion] || reactions["calmo"];
+    return options[Math.floor(Math.random() * options.length)];
   }
 
   static getActivitySuggestion(emotion: Emotion): string {

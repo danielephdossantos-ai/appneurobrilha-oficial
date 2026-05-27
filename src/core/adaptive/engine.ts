@@ -86,5 +86,27 @@ export class AdaptiveEngine {
       analysis
     };
   }
+
+  static getSpacedRepetitionNeed(masteryLevel: string, lastSeen: Date, errors: number): boolean {
+    const daysSinceLastSeen = (new Date().getTime() - lastSeen.getTime()) / (1000 * 3600 * 24);
+    
+    // Spaced Repetition Logic (Leitner System simplified)
+    if (masteryLevel === "mastered" && daysSinceLastSeen > 30) return true;
+    if (masteryLevel === "in-progress" && daysSinceLastSeen > 7) return true;
+    if (errors > 3) return true; // Review needed if high error rate
+    
+    return false;
+  }
+
+  static detectFatigue(metrics: StudentBehaviorMetrics): boolean {
+    // Detect fatigue based on response time variance and error clusters
+    const avgResponse = metrics.responseTimeHistory.length > 0 
+      ? metrics.responseTimeHistory.reduce((a, b) => a + b, 0) / metrics.responseTimeHistory.length 
+      : 0;
+    const highResponseTime = avgResponse > 15000; // Over 15s avg might indicate fatigue
+    const errorSpike = metrics.totalErrors > 5;
+    
+    return highResponseTime || errorSpike;
+  }
 }
 
