@@ -130,7 +130,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setLoading(false);
       if (!session && location.pathname !== "/auth") {
         navigate({ to: "/auth" });
@@ -138,6 +138,8 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
         navigate({ to: "/" });
       }
     });
+
+    return () => subscription.unsubscribe();
   }, [location.pathname, navigate]);
 
   if (loading) return null; // Or a loading spinner

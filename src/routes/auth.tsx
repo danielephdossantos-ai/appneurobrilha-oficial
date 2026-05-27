@@ -52,6 +52,9 @@ function Auth() {
           }
           throw error;
         }
+        
+        // Ensure we try to sign in automatically if auto-confirm is on
+        await supabase.auth.signInWithPassword({ email, password });
         toast.success("Conta criada com sucesso!");
       }
       navigate({ to: "/" });
