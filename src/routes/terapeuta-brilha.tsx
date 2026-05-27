@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState } from "react";
-import { Send, Sparkles } from "lucide-react";
+import { Send, Sparkles, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/terapeuta-brilha")({
   component: Terapeuta,
