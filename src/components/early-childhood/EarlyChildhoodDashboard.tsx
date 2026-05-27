@@ -7,6 +7,8 @@ import { EmotionalCheckIn, BreathingExercise } from '../socioemotional/Emotional
 import { SimplifiedSequence } from '../activities/SimplifiedSequence';
 import { LITERACY_SYSTEM } from '../../data/literacy';
 import { MATH_SYSTEM } from '../../data/math';
+import { MathWorldContainer } from '../pedagogical/MathWorldContainer';
+
 
 type Section = 'selection' | 'pre1' | 'pre2' | 'literacy' | 'math' | 'emotional' | 'math-game';
 
