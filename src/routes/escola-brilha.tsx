@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { useState } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
