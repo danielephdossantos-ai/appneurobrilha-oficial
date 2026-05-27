@@ -76,41 +76,57 @@ function ReforcoBrilha() {
             </p>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CATEGORIAS.map((cat) => (
-              <div key={cat.id} className="space-y-3">
-                <h4 className="font-bold flex items-center gap-2 px-1">
-                  <cat.icon className={`h-5 w-5 ${cat.color}`} />
-                  {cat.label}
-                </h4>
-                <div className="grid grid-cols-1 gap-2">
-                  {cat.suggestions.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        setTopic(s);
-                        startLesson(s);
-                      }}
-                      className="text-left p-3 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 transition-all flex justify-between items-center group"
-                    >
-                      <span className="text-sm">{s}</span>
-                      <PlayCircle className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
-                    </button>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {CATEGORIAS.map((cat) => (
+                  <div key={cat.id} className="space-y-3">
+                    <h4 className="font-bold flex items-center gap-2 px-1 text-base">
+                      <cat.icon className={`h-5 w-5 ${cat.color}`} />
+                      {cat.label}
+                    </h4>
+                    <div className="grid grid-cols-1 gap-2">
+                      {cat.suggestions.map((s) => (
+                        <button
+                          key={s}
+                          onClick={() => {
+                            setTopic(s);
+                            startLesson(s);
+                          }}
+                          className="text-left p-3.5 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 hover:shadow-glow transition-all flex justify-between items-center group"
+                        >
+                          <div className="flex flex-col">
+                            <span className="text-sm font-bold">{s}</span>
+                            <span className="text-[10px] text-muted-foreground">Sistema Infinito · BNCC</span>
+                          </div>
+                          <div className="h-8 w-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                            <PlayCircle className="h-5 w-5" />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <Card className="bg-secondary/5 border-dashed">
-            <div className="flex items-center gap-4">
-              <div className="h-16 w-16 rounded-full bg-secondary grid place-items-center text-3xl">👨‍🏫</div>
-              <div>
-                <h4 className="font-bold">Banco de Dados Infinito</h4>
-                <p className="text-sm text-muted-foreground">O sistema cobre todo o conteúdo escolar do 1º ao 9º ano, adaptando a linguagem para a idade da criança.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="bg-success/5 border-success/20">
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 rounded-2xl bg-success/20 grid place-items-center text-2xl">📚</div>
+                    <div>
+                      <h4 className="font-bold text-sm">Base Pedagógica Completa</h4>
+                      <p className="text-[11px] text-muted-foreground">Tabuada, Verbos, Interpretação, Ortografia e mais.</p>
+                    </div>
+                  </div>
+                </Card>
+                <Card className="bg-primary/5 border-primary/20">
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 rounded-2xl bg-primary/20 grid place-items-center text-2xl">🧠</div>
+                    <div>
+                      <h4 className="font-bold text-sm">Neuro-Adaptação Ativa</h4>
+                      <p className="text-[11px] text-muted-foreground">O sistema ensina muito melhor que um professor comum.</p>
+                    </div>
+                  </div>
+                </Card>
               </div>
-            </div>
-          </Card>
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
@@ -136,7 +152,10 @@ function ReforcoBrilha() {
                   <div className="h-20 w-20 rounded-full bg-white shadow-soft grid place-items-center text-5xl">👨‍🏫</div>
                   <div>
                     <h2 className="text-2xl font-black text-primary uppercase">{lessonContent.title}</h2>
-                    <Pill tone="success">Aula Personalizada</Pill>
+                    <div className="flex gap-2 mt-1">
+                      <Pill tone="success">Aula Personalizada</Pill>
+                      <Pill tone="info">Neuro-Adaptativo</Pill>
+                    </div>
                   </div>
                 </div>
 
