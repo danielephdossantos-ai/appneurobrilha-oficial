@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState, useRef } from "react";
-import { Camera, Upload, Loader2, BookOpen, CheckCircle2, RotateCcw, Sparkles, Play, Video } from "lucide-react";
+import { Camera, Upload, Loader2, BookOpen, CheckCircle2, RotateCcw, Sparkles, Play, Video, Volume2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -61,6 +61,13 @@ function ProfessorIA() {
   };
 
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+
+  const lerTexto = () => {
+    if (!analise?.explicacao) return;
+    const utterance = new SpeechSynthesisUtterance(analise.explicacao);
+    utterance.lang = "pt-BR";
+    window.speechSynthesis.speak(utterance);
+  };
 
   return (
     <Shell>
@@ -153,10 +160,21 @@ function ProfessorIA() {
               </button>
             </div>
 
-            <Card className="bg-gradient-to-br from-primary/5 to-success/5 border-none shadow-soft">
-              <h4 className="font-bold flex items-center gap-2 mb-4 text-primary">
-                <BookOpen className="h-5 w-5" /> Explicação do Professor
-              </h4>
+            <Card className="bg-gradient-to-br from-primary/5 to-success/5 border-none shadow-soft relative">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-bold flex items-center gap-2 text-primary">
+                  <BookOpen className="h-5 w-5" /> Explicação do Professor
+                </h4>
+                {(activeChild.diagnostico === 'dislexia' || activeChild.flags?.preferAudio) && (
+                  <button 
+                    onClick={lerTexto}
+                    className="p-2 bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors"
+                    title="Ouvir explicação"
+                  >
+                    <Volume2 className="h-5 w-5" />
+                  </button>
+                )}
+              </div>
               <p className="text-lg leading-relaxed whitespace-pre-wrap">
                 {analise.explicacao}
               </p>
