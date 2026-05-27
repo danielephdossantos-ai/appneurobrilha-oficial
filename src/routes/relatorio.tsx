@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { Download, BrainCircuit } from "lucide-react";
+import { Download, BrainCircuit, BarChart3 } from "lucide-react";
 import { ParentalEngine } from "@/core/parental/engine";
 import { CognitiveDashboard } from "@/modules/neuro-engine/components/CognitiveDashboard";
-
+import { NeuroAnalyticsDashboard } from "@/modules/analytics/components/NeuroAnalyticsDashboard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const Route = createFileRoute("/relatorio")({
   component: Relatorio,
@@ -28,7 +29,24 @@ function Relatorio() {
         </button>
       </div>
 
-      <CognitiveDashboard childId={activeChild.id} />
+      <Tabs defaultValue="neuro" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="cognitive" className="flex items-center gap-2">
+            <BrainCircuit className="h-4 w-4" /> Perfil Clínico
+          </TabsTrigger>
+          <TabsTrigger value="neuro" className="flex items-center gap-2">
+            <BarChart3 className="h-4 w-4" /> Analytics Avançado
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="cognitive">
+          <CognitiveDashboard childId={activeChild.id} />
+        </TabsContent>
+
+        <TabsContent value="neuro">
+          <NeuroAnalyticsDashboard childId={activeChild.id} />
+        </TabsContent>
+      </Tabs>
 
 
 
