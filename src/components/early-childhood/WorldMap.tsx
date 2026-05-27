@@ -77,7 +77,11 @@ export const EarlyChildhoodWorldMap = ({ grade, onTrailSelect }: { grade: 'pre1'
                 {data.worlds.find(w => w.id === selectedWorld)?.trails.map(trailId => {
                   const trail = data.trails.find(t => t.id === trailId);
                   return trail ? (
-                    <button key={trail.id} className="p-6 bg-indigo-50 rounded-3xl text-left border-2 border-indigo-100 hover:bg-indigo-100 transition-colors group">
+                    <button 
+                      key={trail.id} 
+                      onClick={() => onTrailSelect?.(trail.id)}
+                      className="p-6 bg-indigo-50 rounded-3xl text-left border-2 border-indigo-100 hover:bg-indigo-100 transition-colors group"
+                    >
                       <p className="font-black text-indigo-900 mb-1 group-hover:text-indigo-700">{trail.name}</p>
                       <p className="text-sm text-indigo-600 font-medium">{trail.activitiesCount} atividades</p>
                     </button>
