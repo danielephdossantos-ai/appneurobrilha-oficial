@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { MascotState, MascotEngine } from '../../core/emotional/mascot';
-import { Emotion } from '../../core/emotional/engine';
+import { Emotion } from '../../modules/emotional-engine/engine/emotional-engine';
+
 import { 
   Smile, 
   Frown, 

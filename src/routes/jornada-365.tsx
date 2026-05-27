@@ -4,7 +4,8 @@ import { useAppState } from "@/lib/store";
 import { Play, Pause, CheckCircle2, Lock, ClipboardList, Loader2, Calendar } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { PedagogyEngine, JourneyBlock } from "@/core/pedagogy/engine";
+import { PedagogyEngine, JourneyBlock } from "@/modules/pedagogy-engine/engine/pedagogy-core";
+
 import { useState } from "react";
 
 export const Route = createFileRoute("/jornada-365")({

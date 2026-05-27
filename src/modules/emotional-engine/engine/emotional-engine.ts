@@ -1,4 +1,4 @@
-import { AdaptiveAnalysis } from "../adaptive/motor";
+import { AdaptiveMotor } from "@/core/adaptive/motor";
 
 export type Emotion = 
   | "feliz" 
