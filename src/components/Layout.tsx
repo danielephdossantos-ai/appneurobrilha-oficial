@@ -6,6 +6,7 @@ import {
   ClipboardList, LogOut
 } from "lucide-react";
 import { ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
