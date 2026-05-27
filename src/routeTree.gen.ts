@@ -13,6 +13,7 @@ import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
+import { Route as Pre2RouteImport } from './routes/pre-2'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
@@ -41,6 +42,11 @@ const RelatorioRoute = RelatorioRouteImport.update({
 const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
   id: '/reforco-brilha',
   path: '/reforco-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Pre2Route = Pre2RouteImport.update({
+  id: '/pre-2',
+  path: '/pre-2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PainelPaisRoute = PainelPaisRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/pre-2': typeof Pre2Route
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/pre-2': typeof Pre2Route
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
+  '/pre-2': typeof Pre2Route
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/pre-2'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/pre-2'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
+    | '/pre-2'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   Jornada365Route: typeof Jornada365Route
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
+  Pre2Route: typeof Pre2Route
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
   RotinaRoute: typeof RotinaRoute
@@ -228,6 +241,13 @@ declare module '@tanstack/react-router' {
       path: '/reforco-brilha'
       fullPath: '/reforco-brilha'
       preLoaderRoute: typeof ReforcoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pre-2': {
+      id: '/pre-2'
+      path: '/pre-2'
+      fullPath: '/pre-2'
+      preLoaderRoute: typeof Pre2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/painel-pais': {
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   Jornada365Route: Jornada365Route,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
+  Pre2Route: Pre2Route,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
   RotinaRoute: RotinaRoute,
