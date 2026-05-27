@@ -89,7 +89,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
 
   const floatAnim = {
     y: [0, -10, 0],
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" as const }
   };
 
   const handleClick = () => {
