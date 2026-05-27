@@ -14,6 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
+      activities: {
+        Row: {
+          bncc_code: string | null
+          category: string
+          content: Json | null
+          created_at: string
+          id: string
+          max_age: number | null
+          min_age: number | null
+          name: string
+          subcategory: string | null
+        }
+        Insert: {
+          bncc_code?: string | null
+          category: string
+          content?: Json | null
+          created_at?: string
+          id?: string
+          max_age?: number | null
+          min_age?: number | null
+          name: string
+          subcategory?: string | null
+        }
+        Update: {
+          bncc_code?: string | null
+          category?: string
+          content?: Json | null
+          created_at?: string
+          id?: string
+          max_age?: number | null
+          min_age?: number | null
+          name?: string
+          subcategory?: string | null
+        }
+        Relationships: []
+      }
+      activity_logs: {
+        Row: {
+          activity_id: string | null
+          child_id: string
+          created_at: string
+          day_number: number
+          duration_ms: number | null
+          id: string
+          metadata: Json | null
+          score: number | null
+        }
+        Insert: {
+          activity_id?: string | null
+          child_id: string
+          created_at?: string
+          day_number: number
+          duration_ms?: number | null
+          id?: string
+          metadata?: Json | null
+          score?: number | null
+        }
+        Update: {
+          activity_id?: string | null
+          child_id?: string
+          created_at?: string
+          day_number?: number
+          duration_ms?: number | null
+          id?: string
+          metadata?: Json | null
+          score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_logs_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "activities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "activity_logs_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      child_journey: {
+        Row: {
+          child_id: string
+          created_at: string
+          current_day: number
+          id: string
+          last_completed_day: number
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          current_day?: number
+          id?: string
+          last_completed_day?: number
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          current_day?: number
+          id?: string
+          last_completed_day?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_journey_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       children: {
         Row: {
           anamnese_completa: boolean | null
