@@ -31,31 +31,6 @@ function Relatorio() {
       <CognitiveDashboard childId={activeChild.id} />
 
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-        {[
-          { l: "Tempo total", v: "4h 32m", d: "+18% vs mês anterior" },
-          { l: "Taxa de acerto", v: "78%", d: "Era 71%" },
-          { l: "Subidas de nível", v: "3", d: "Português, Mat e Ciências" },
-        ].map((s) => (
-          <Card key={s.l} className="bg-gradient-to-br from-primary/10 to-success/5">
-            <div className="text-xs text-muted-foreground">{s.l}</div>
-            <div className="text-3xl font-extrabold mt-1">{s.v}</div>
-            <div className="text-xs text-success font-bold mt-1">{s.d}</div>
-          </Card>
-        ))}
-      </div>
-
-      <Card className="mb-4">
-        <h3 className="font-extrabold mb-4">Minutos por semana</h3>
-        <div className="flex items-end gap-2 h-40">
-          {semanas.map((v, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-1">
-              <div className="w-full bg-gradient-to-t from-primary to-success rounded-t-lg" style={{ height: `${(v / 45) * 100}%` }} />
-              <div className="text-xs text-muted-foreground">S{i + 1}</div>
-            </div>
-          ))}
-        </div>
-      </Card>
 
       <Card className="mb-4 bg-primary/5 border-primary/20">
         <div className="flex items-center gap-2 mb-3">
