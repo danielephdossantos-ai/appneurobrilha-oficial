@@ -169,3 +169,34 @@
   min-height: 48px;
   min-width: 48px;
 }
+
+/* Camada de Adaptação Neuro-Sistêmica */
+.neuro-adaptive-container {
+  /* Escala visual padrão */
+  --visual-scale: 1;
+  /* Multiplicador de velocidade (1 = normal, 0.5 = 2x mais lento, 2 = 2x mais rápido) */
+  --animation-speed-multiplier: 1;
+  /* Opacidade dos estímulos secundários */
+  --stimuli-opacity: 0.7;
+}
+
+/* Aplicação da velocidade em transições e animações */
+.neuro-adaptive-container * {
+  transition-duration: calc(300ms * var(--animation-speed-multiplier)) !important;
+  animation-duration: calc(500ms * var(--animation-speed-multiplier)) !important;
+}
+
+/* Controle de estímulos (ex: bordas muito fortes, sombras excessivas) */
+.neuro-adaptive-container .stimuli-sensitive {
+  opacity: var(--stimuli-opacity);
+}
+
+/* Tamanho de fontes e ícones baseado na escala */
+.neuro-adaptive-container .scalable-text {
+  font-size: calc(1em * var(--visual-scale));
+}
+
+.neuro-adaptive-container .scalable-icon {
+  width: calc(1.25rem * var(--visual-scale));
+  height: calc(1.25rem * var(--visual-scale));
+}

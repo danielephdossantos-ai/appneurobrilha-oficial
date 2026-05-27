@@ -1,5 +1,6 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
+import { NeuroAdjustment } from "../neuro/engine";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
@@ -23,7 +24,7 @@ export interface ReforcoLesson {
 }
 
 export class ReforcoEngine {
-  static async generateLesson(topic: string): Promise<ReforcoLesson> {
+  static async generateLesson(topic: string, adjustment?: NeuroAdjustment): Promise<ReforcoLesson> {
     const lowerTopic = topic.toLowerCase();
     
     // Tenta buscar no banco pedagógico primeiro
@@ -35,7 +36,7 @@ export class ReforcoEngine {
       );
 
       if (match) {
-        return this.mapActivityToLesson(match);
+        return this.mapActivityToLesson(match, adjustment);
       }
     } catch (e) {
       console.error("Erro ao buscar no banco pedagógico:", e);
@@ -140,7 +141,7 @@ export class ReforcoEngine {
     return lesson;
   }
 
-  private static mapActivityToLesson(activity: PedagogicalActivity): ReforcoLesson {
+  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment): ReforcoLesson {
     const levels = {
       basic: [] as LessonStep[],
       intermediate: [] as LessonStep[],
@@ -188,7 +189,8 @@ export class ReforcoEngine {
       premiumTips: [
         activity.reforcoPositivo || "Excelente esforço!",
         activity.reforcoErro || "Quase lá! Tente de novo com calma.",
-        `Adaptado para perfil sensorial: ${activity.tipoSensorial.join(", ")}`
+        `Adaptação: Reforços ${adjustment?.reinforcementIntensity || 'padrão'}, Previsibilidade ${adjustment?.predictabilityLevel || 'média'}.`,
+        adjustment?.responseTimeLimit ? `Tempo sugerido: ${adjustment.responseTimeLimit}s por atividade.` : "Tempo livre para resposta."
       ],
       explanation: activity.objetivoPedagogico || "Aula personalizada do Banco Pedagógico.",
       activityId: activity.id

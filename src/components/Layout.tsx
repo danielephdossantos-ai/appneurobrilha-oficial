@@ -1,5 +1,6 @@
 import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useAppState } from "@/lib/store";
+import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
@@ -53,6 +54,7 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
 
 export function Shell({ children }: { children?: ReactNode }) {
   const { activeChild, children: allChildren, setActiveChild } = useAppState();
+  const engine = usePedagogicalEngine();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
 
@@ -60,8 +62,19 @@ export function Shell({ children }: { children?: ReactNode }) {
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
   const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
 
+  // Apply neuro-adaptive CSS variables
+  const adaptiveStyles = engine?.adaptive ? {
+    "--visual-scale": engine.adaptive.visualScale,
+    "--animation-speed-multiplier": 1 / engine.adaptive.animationSpeed,
+    "--stimuli-opacity": engine.adaptive.stimuliLevel === "low" ? "0.3" : engine.adaptive.stimuliLevel === "high" ? "1" : "0.7",
+    fontSize: `${16 * (engine.adaptive.visualScale ?? 1)}px`
+  } as React.CSSProperties : {};
+
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div 
+      className="min-h-screen flex flex-col md:flex-row neuro-adaptive-container"
+      style={adaptiveStyles}
+    >
       <aside className="hidden md:flex w-72 shrink-0 flex-col bg-sidebar border-r border-sidebar-border p-4 gap-2">
         <Link to="/" className="flex items-center gap-2 px-2 py-3">
           <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-2xl shadow-glow">

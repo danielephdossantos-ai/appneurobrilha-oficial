@@ -3,6 +3,7 @@ import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect } from "react";
 import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp } from "lucide-react";
 import { useAppState } from "@/lib/store";
+import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
 import { ProgressionService } from "@/core/progression/service";
 import { ProgressionEngine } from "@/core/progression/engine";
@@ -22,6 +23,7 @@ const CATEGORIAS = [
 
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
+  const engine = usePedagogicalEngine();
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
@@ -79,7 +81,7 @@ function ReforcoBrilha() {
       }
 
       try {
-        const lesson = await ReforcoEngine.generateLesson(finalTopic);
+        const lesson = await ReforcoEngine.generateLesson(finalTopic, engine?.adaptive);
         setLessonContent(lesson);
         setCurrentLevel("basic");
         if (lesson.category) {
@@ -304,11 +306,13 @@ function ReforcoBrilha() {
                     <BookOpen className="h-5 w-5 text-primary" />
                     Roteiro de Aprendizagem
                   </h3>
-                  {lessonContent.levels[currentLevel].map((step, idx) => (
+                  {lessonContent.levels[currentLevel].slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6).map((step, idx) => (
                     <div 
                       key={`${currentLevel}-${idx}`} 
-                      className="bg-card rounded-3xl p-6 border border-border/50 shadow-soft animate-in slide-in-from-bottom-4"
-                      style={{ animationDelay: `${idx * 0.1}s` }}
+                      className="bg-card rounded-3xl p-6 border border-border/50 shadow-soft animate-in slide-in-from-bottom-4 stimuli-sensitive"
+                      style={{ 
+                        animationDelay: `${idx * (0.1 * (engine?.adaptive?.animationSpeed ?? 1))}s`,
+                      }}
                     >
                       <div className="flex gap-4">
                         <div className={`h-10 w-10 rounded-2xl shrink-0 grid place-items-center text-lg ${

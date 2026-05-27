@@ -23,13 +23,11 @@ export class AdaptiveEngine {
     }
 
     return {
+      ...neuroAdj,
       difficulty: difficultyMultiplier,
-      breakFrequency: neuroAdj.breakFrequency,
-      instructionStyle: neuroAdj.instructionType,
-      repetitionRate: neuroAdj.repetitionRate,
-      autonomyLevel: neuroAdj.autonomyLevel,
-      visualComplexity: neuroAdj.visualComplexity,
-      suggestedPath: activityType
+      suggestedPath: activityType,
+      // Alias for backward compatibility if needed, but better to use the interface names
+      instructionStyle: neuroAdj.instructionType 
     };
   }
 }
