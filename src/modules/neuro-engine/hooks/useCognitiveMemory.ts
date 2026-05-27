@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { cognitiveMemoryService } from "../services/CognitiveMemoryService";
 import { CognitiveMetrics, CognitiveProfile } from "../types";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 export const useCognitiveMemory = (childId?: string) => {
   const queryClient = useQueryClient();
-  const { toast } = useToast();
+
 
   const profileQuery = useQuery({
     queryKey: ["cognitive-profile", childId],
@@ -26,13 +26,10 @@ export const useCognitiveMemory = (childId?: string) => {
       queryClient.invalidateQueries({ queryKey: ["cognitive-profile", childId] });
     },
     onError: (error) => {
-      toast({
-        title: "Erro ao atualizar perfil cognitivo",
-        description: "Não foi possível salvar as alterações.",
-        variant: "destructive",
-      });
+      toast.error("Não foi possível salvar as alterações no perfil cognitivo.");
       console.error(error);
     }
+
   });
 
   const recordScoresMutation = useMutation({
