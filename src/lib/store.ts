@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { SensoryMode } from "@/core/sensory/engine";
 
 export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo" | "nenhum";
 export type Hiperfoco =
@@ -9,6 +10,7 @@ export type Hiperfoco =
   | "princesas" | "super-herois" | "robos" | "musica";
 
 export interface Child {
+
   id: string;
   user_id: string;
   nome: string;
@@ -18,7 +20,9 @@ export interface Child {
   diagnostico: Diagnostico;
   avatar: string; // emoji
   anamnese_completa: boolean;
+  sensory_mode: SensoryMode;
   perfil: {
+
     leitura: number;
     escrita: number;
     matematica: number;
