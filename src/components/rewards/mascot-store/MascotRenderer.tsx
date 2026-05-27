@@ -97,7 +97,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
             </motion.g>
             
             {/* Mouth */}
-            <motion.path animate={smileAnimation} fill="none" stroke="#D32F2F" strokeWidth="3" strokeLinecap="round" />
+            <motion.path animate={smileAnimation as any} fill="none" stroke="#D32F2F" strokeWidth="3" strokeLinecap="round" />
             
             {/* Cheeks */}
             <circle cx="-25" cy="10" r="5" fill="#FF80AB" fillOpacity="0.4" />
