@@ -1,12 +1,19 @@
+import { createFileRoute } from "@tanstack/react-router";
 import { NeuroAnalyticsDashboard } from "@/modules/analytics/components/NeuroAnalyticsDashboard";
+import { Shell } from "@/components/Layout";
 
-export default function AnalyticsPage() {
-  // Em uma aplicação real, o childId viria do contexto de autenticação ou rota
+export const Route = createFileRoute("/analytics")({
+  component: AnalyticsPage,
+});
+
+function AnalyticsPage() {
   const mockChildId = "child-123-abc";
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <NeuroAnalyticsDashboard childId={mockChildId} />
-    </div>
+    <Shell>
+      <div className="min-h-screen bg-slate-50 -m-4 md:-m-8">
+        <NeuroAnalyticsDashboard childId={mockChildId} />
+      </div>
+    </Shell>
   );
 }
