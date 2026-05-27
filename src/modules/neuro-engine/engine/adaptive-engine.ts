@@ -1,13 +1,25 @@
 import { PedagogyEngine } from '../../pedagogy-engine/engine/pedagogy-core';
 import { EmotionalEngine } from '../../emotional-engine/engine/emotional-engine';
+import { AdaptiveEngine as LegacyAdaptiveEngine } from "@/core/adaptive/engine";
 
 export type NeuroProfile = "Neurotipico" | "TEA" | "TDAH" | "Dislexia";
 
-export class AdaptiveEngine {
+export class AdaptiveEngine extends LegacyAdaptiveEngine {
   static analyze(profile: NeuroProfile, performance: any) {
     return {
        recommendedDifficulty: 1,
        cognitiveLoad: 0.5
     };
   }
+
+  // Adding legacy properties to satisfy TS during migration
+  static visualScale = 1;
+  static animationSpeed = 1;
+  static stimuliLevel = "standard";
+  static difficulty = 1;
+  static breakFrequency = "normal";
+  static instructionType = "visual";
+  static maxItemsPerScreen = 4;
+  static reinforcementIntensity = "standard";
+  static predictabilityLevel = "high";
 }
