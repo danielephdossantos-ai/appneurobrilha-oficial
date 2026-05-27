@@ -10,7 +10,8 @@ export class PedagogicalEngine {
   static calculateMastery(
     currentMastery: MasteryNode,
     analysis: AdaptiveAnalysis,
-    score: number
+    score: number,
+    repeatedErrors: number = 0
   ): MasteryNode {
     let newProgress = currentMastery.progress;
     let newStatus = currentMastery.status;
@@ -18,7 +19,7 @@ export class PedagogicalEngine {
     // Lógica de domínio adaptativo
     if (score > 0.8 && analysis.performanceLevel > 0.7) {
       newProgress += 0.2;
-    } else if (analysis.frustration > 0.8 || analysis.repeatedErrors > 3) {
+    } else if (analysis.frustration > 0.8 || repeatedErrors > 3) {
       newStatus = "revisao_necessaria";
       newProgress -= 0.1;
     }
