@@ -9,38 +9,249 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
+import { Route as RotinaRouteImport } from './routes/rotina'
+import { Route as RelatorioRouteImport } from './routes/relatorio'
+import { Route as PainelPaisRouteImport } from './routes/painel-pais'
+import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
+import { Route as MundoBrilhaRouteImport } from './routes/mundo-brilha'
+import { Route as Jornada365RouteImport } from './routes/jornada-365'
+import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
+import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
+import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 
+const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
+  id: '/terapeuta-brilha',
+  path: '/terapeuta-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RotinaRoute = RotinaRouteImport.update({
+  id: '/rotina',
+  path: '/rotina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatorioRoute = RelatorioRouteImport.update({
+  id: '/relatorio',
+  path: '/relatorio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelPaisRoute = PainelPaisRouteImport.update({
+  id: '/painel-pais',
+  path: '/painel-pais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
+  id: '/neuro-treino',
+  path: '/neuro-treino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MundoBrilhaRoute = MundoBrilhaRouteImport.update({
+  id: '/mundo-brilha',
+  path: '/mundo-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Jornada365Route = Jornada365RouteImport.update({
+  id: '/jornada-365',
+  path: '/jornada-365',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
+  id: '/escola-brilha',
+  path: '/escola-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendaRoute = AgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
+  id: '/anamnese/$childId',
+  path: '/anamnese/$childId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AjusteDificuldadesChildIdRoute =
+  AjusteDificuldadesChildIdRouteImport.update({
+    id: '/ajuste-dificuldades/$childId',
+    path: '/ajuste-dificuldades/$childId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agenda': typeof AgendaRoute
+  '/escola-brilha': typeof EscolaBrilhaRoute
+  '/jornada-365': typeof Jornada365Route
+  '/mundo-brilha': typeof MundoBrilhaRoute
+  '/neuro-treino': typeof NeuroTreinoRoute
+  '/painel-pais': typeof PainelPaisRoute
+  '/relatorio': typeof RelatorioRoute
+  '/rotina': typeof RotinaRoute
+  '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
+  '/anamnese/$childId': typeof AnamneseChildIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agenda': typeof AgendaRoute
+  '/escola-brilha': typeof EscolaBrilhaRoute
+  '/jornada-365': typeof Jornada365Route
+  '/mundo-brilha': typeof MundoBrilhaRoute
+  '/neuro-treino': typeof NeuroTreinoRoute
+  '/painel-pais': typeof PainelPaisRoute
+  '/relatorio': typeof RelatorioRoute
+  '/rotina': typeof RotinaRoute
+  '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
+  '/anamnese/$childId': typeof AnamneseChildIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agenda': typeof AgendaRoute
+  '/escola-brilha': typeof EscolaBrilhaRoute
+  '/jornada-365': typeof Jornada365Route
+  '/mundo-brilha': typeof MundoBrilhaRoute
+  '/neuro-treino': typeof NeuroTreinoRoute
+  '/painel-pais': typeof PainelPaisRoute
+  '/relatorio': typeof RelatorioRoute
+  '/rotina': typeof RotinaRoute
+  '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
+  '/anamnese/$childId': typeof AnamneseChildIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agenda'
+    | '/escola-brilha'
+    | '/jornada-365'
+    | '/mundo-brilha'
+    | '/neuro-treino'
+    | '/painel-pais'
+    | '/relatorio'
+    | '/rotina'
+    | '/terapeuta-brilha'
+    | '/ajuste-dificuldades/$childId'
+    | '/anamnese/$childId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agenda'
+    | '/escola-brilha'
+    | '/jornada-365'
+    | '/mundo-brilha'
+    | '/neuro-treino'
+    | '/painel-pais'
+    | '/relatorio'
+    | '/rotina'
+    | '/terapeuta-brilha'
+    | '/ajuste-dificuldades/$childId'
+    | '/anamnese/$childId'
+  id:
+    | '__root__'
+    | '/'
+    | '/agenda'
+    | '/escola-brilha'
+    | '/jornada-365'
+    | '/mundo-brilha'
+    | '/neuro-treino'
+    | '/painel-pais'
+    | '/relatorio'
+    | '/rotina'
+    | '/terapeuta-brilha'
+    | '/ajuste-dificuldades/$childId'
+    | '/anamnese/$childId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgendaRoute: typeof AgendaRoute
+  EscolaBrilhaRoute: typeof EscolaBrilhaRoute
+  Jornada365Route: typeof Jornada365Route
+  MundoBrilhaRoute: typeof MundoBrilhaRoute
+  NeuroTreinoRoute: typeof NeuroTreinoRoute
+  PainelPaisRoute: typeof PainelPaisRoute
+  RelatorioRoute: typeof RelatorioRoute
+  RotinaRoute: typeof RotinaRoute
+  TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
+  AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
+  AnamneseChildIdRoute: typeof AnamneseChildIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terapeuta-brilha': {
+      id: '/terapeuta-brilha'
+      path: '/terapeuta-brilha'
+      fullPath: '/terapeuta-brilha'
+      preLoaderRoute: typeof TerapeutaBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rotina': {
+      id: '/rotina'
+      path: '/rotina'
+      fullPath: '/rotina'
+      preLoaderRoute: typeof RotinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorio': {
+      id: '/relatorio'
+      path: '/relatorio'
+      fullPath: '/relatorio'
+      preLoaderRoute: typeof RelatorioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel-pais': {
+      id: '/painel-pais'
+      path: '/painel-pais'
+      fullPath: '/painel-pais'
+      preLoaderRoute: typeof PainelPaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neuro-treino': {
+      id: '/neuro-treino'
+      path: '/neuro-treino'
+      fullPath: '/neuro-treino'
+      preLoaderRoute: typeof NeuroTreinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mundo-brilha': {
+      id: '/mundo-brilha'
+      path: '/mundo-brilha'
+      fullPath: '/mundo-brilha'
+      preLoaderRoute: typeof MundoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jornada-365': {
+      id: '/jornada-365'
+      path: '/jornada-365'
+      fullPath: '/jornada-365'
+      preLoaderRoute: typeof Jornada365RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escola-brilha': {
+      id: '/escola-brilha'
+      path: '/escola-brilha'
+      fullPath: '/escola-brilha'
+      preLoaderRoute: typeof EscolaBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agenda': {
+      id: '/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AgendaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +259,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/anamnese/$childId': {
+      id: '/anamnese/$childId'
+      path: '/anamnese/$childId'
+      fullPath: '/anamnese/$childId'
+      preLoaderRoute: typeof AnamneseChildIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ajuste-dificuldades/$childId': {
+      id: '/ajuste-dificuldades/$childId'
+      path: '/ajuste-dificuldades/$childId'
+      fullPath: '/ajuste-dificuldades/$childId'
+      preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgendaRoute: AgendaRoute,
+  EscolaBrilhaRoute: EscolaBrilhaRoute,
+  Jornada365Route: Jornada365Route,
+  MundoBrilhaRoute: MundoBrilhaRoute,
+  NeuroTreinoRoute: NeuroTreinoRoute,
+  PainelPaisRoute: PainelPaisRoute,
+  RelatorioRoute: RelatorioRoute,
+  RotinaRoute: RotinaRoute,
+  TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
+  AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
+  AnamneseChildIdRoute: AnamneseChildIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
