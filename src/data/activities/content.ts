@@ -27,20 +27,28 @@ export const CONTENT_DATABASE: ContentItem[] = [
   { id: "i-004", value: "🐱", type: "text", category: "animal", difficulty: 1, tags: ["cat", "visual"] },
 
   // Add more mock items to simulate "thousands" of variations
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  ...Array.from({ length: 500 }).map((_, i) => ({
     id: `auto-math-${i}`,
-    value: `${Math.floor(Math.random() * 10)} + ${Math.floor(Math.random() * 10)}`,
+    value: `${Math.floor(Math.random() * 20)} + ${Math.floor(Math.random() * 10)}`,
     type: "math" as const,
     category: "math-operation",
-    difficulty: Math.floor(i / 25) + 1,
-    tags: ["addition"]
+    difficulty: Math.floor(i / 100) + 1,
+    tags: ["addition", "EF01MA01"]
   })),
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  ...Array.from({ length: 500 }).map((_, i) => ({
     id: `auto-word-${i}`,
-    value: ["Leão", "Zebra", "Elefante", "Girafa", "Macaco"][i % 5],
+    value: ["Gato", "Pato", "Rato", "Mato", "Sapo", "Lobo", "Tigre", "Urso", "Zebra", "Leão"][i % 10],
     type: "text" as const,
     category: "animals",
+    difficulty: Math.floor(i / 150) + 1,
+    tags: ["vocabulary", "EF01LP01"]
+  })),
+  ...Array.from({ length: 200 }).map((_, i) => ({
+    id: `logic-${i}`,
+    value: ["🔴", "🔵", "🟢", "🟡"][i % 4],
+    type: "text" as const,
+    category: "patterns",
     difficulty: 2,
-    tags: ["vocabulary"]
+    tags: ["logic", "sequence"]
   }))
 ];
