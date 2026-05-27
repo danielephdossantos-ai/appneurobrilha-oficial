@@ -1,111 +1,82 @@
-import React, { useState } from "react";
-import { ALL_SKILLS } from "./data/skills/mock-data";
-import { MasteryNode } from "./data/skills/types";
-import { LearningMap } from "./components/pedagogical/LearningMap";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Brain, GraduationCap, Map as MapIcon, BarChart } from "lucide-react";
-import { cn } from "@/lib/utils";
 
-const App = () => {
-  const [mastery, setMastery] = useState<Record<string, MasteryNode>>({
-    "lp-p1-01": { 
-      skillId: "lp-p1-01", 
-      status: "dominado", 
-      progress: 1.0, 
-      lastAttempt: new Date() 
-    },
-    "lp-1-01": { 
-      skillId: "lp-1-01", 
-      status: "em_progresso", 
-      progress: 0.45, 
-      lastAttempt: new Date() 
-    }
-  });
+import React from 'react';
+import { pedagogicalSystem } from './components/PedagogicalSystem';
 
+function App() {
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
-      <header className="bg-white border-b sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary p-2 rounded-xl">
-              <Brain className="w-6 h-6 text-white" />
-            </div>
-            <h1 className="font-bold text-xl tracking-tight">NeuroPedagógico</h1>
+    <div className="min-h-screen bg-indigo-50 p-4 md:p-8 font-sans">
+      <header className="max-w-6xl mx-auto mb-12 flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-black text-indigo-900 tracking-tight">NeuroSaber <span className="text-indigo-500">Pedagógico</span></h1>
+          <p className="text-indigo-600 font-medium italic">Sistema de Geração Dinâmica de Atividades</p>
+        </div>
+        
+        <div className="flex gap-4">
+          <div className="bg-white px-4 py-2 rounded-2xl shadow-sm border border-indigo-100 flex items-center gap-2">
+            <span className="text-yellow-500 text-xl">⭐</span>
+            <span className="font-bold text-indigo-900">125</span>
           </div>
-          
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
-            <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-white shadow-sm flex items-center gap-2">
-              <MapIcon className="w-4 h-4" /> Mapa
-            </button>
-            <button className="px-4 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:bg-white/50 flex items-center gap-2">
-              <GraduationCap className="w-4 h-4" /> Currículo
-            </button>
-            <button className="px-4 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:bg-white/50 flex items-center gap-2">
-              <BarChart className="w-4 h-4" /> Desempenho
-            </button>
-          </nav>
+          <div className="bg-white px-4 py-2 rounded-2xl shadow-sm border border-indigo-100 flex items-center gap-2">
+            <span className="text-yellow-600 text-xl">🪙</span>
+            <span className="font-bold text-indigo-900">450</span>
+          </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-black text-slate-900 mb-2">Sua Jornada de Aprendizado</h2>
-          <p className="text-slate-600">Baseado na BNCC com adaptação neurocognitiva em tempo real.</p>
-        </div>
-
-        <Tabs defaultValue="map" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <TabsList className="bg-slate-200">
-              <TabsTrigger value="map">Visualização em Mapa</TabsTrigger>
-              <TabsTrigger value="list">Lista de Habilidades</TabsTrigger>
-            </TabsList>
-            
-            <div className="flex gap-2">
-              <Card className="py-2 px-4 shadow-sm flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-sm font-medium">Perfil: Neurotípico</span>
-              </Card>
-            </div>
+      <main className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+             <PedagogicalDemo />
           </div>
-
-          <TabsContent value="map" className="mt-0">
-            <Card className="border-none shadow-none bg-transparent">
-              <LearningMap 
-                skills={ALL_SKILLS} 
-                mastery={mastery} 
-                onSkillClick={(s) => console.log("Skill selected:", s.title)}
-              />
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="list">
-            <div className="grid gap-4">
-              {ALL_SKILLS.map(skill => (
-                <Card key={skill.id} className="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
-                  <div>
-                    <span className="text-[10px] font-mono bg-slate-100 px-2 py-0.5 rounded border mb-1 inline-block">
-                      {skill.bnccCode}
-                    </span>
-                    <h4 className="font-bold text-slate-900">{skill.title}</h4>
-                    <p className="text-xs text-slate-500">{skill.grade} • {skill.estimatedTime} min</p>
+          
+          <aside className="space-y-6">
+            <div className="bg-white p-6 rounded-3xl shadow-lg border-2 border-indigo-50">
+              <h3 className="text-xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
+                <span className="w-2 h-8 bg-indigo-500 rounded-full" />
+                Motor Adaptativo
+              </h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600 font-medium">Performance</span>
+                  <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-400" style={{ width: '75%' }} />
                   </div>
-                  <div className="text-right">
-                    <span className={cn(
-                      "text-xs px-2 py-1 rounded-full font-medium",
-                      mastery[skill.id]?.status === "dominado" ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
-                    )}>
-                      {mastery[skill.id]?.status || "Não iniciado"}
-                    </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600 font-medium">Nível de Foco</span>
+                  <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-blue-400" style={{ width: '90%' }} />
                   </div>
-                </Card>
-              ))}
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600 font-medium">Fadiga</span>
+                  <div className="w-32 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-yellow-400" style={{ width: '15%' }} />
+                  </div>
+                </div>
+              </div>
             </div>
-          </TabsContent>
-        </Tabs>
+
+            <div className="bg-gradient-to-br from-indigo-600 to-purple-700 p-6 rounded-3xl shadow-lg text-white">
+              <h3 className="text-xl font-bold mb-4">Mascote do Nível 2</h3>
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">🦁</div>
+                <div>
+                  <p className="font-bold">Leo, o Corajoso</p>
+                  <p className="text-sm opacity-80">Faltam 12 ⭐ para o nível 3</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </main>
     </div>
   );
+}
+
+// Wrapper to use the render function in App
+const PedagogicalDemo = () => {
+  return pedagogicalSystem.renderActivity();
 };
 
 export default App;
