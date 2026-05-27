@@ -20,9 +20,45 @@ const materias = [
 
 function Escola() {
   const { activeChild } = useAppState();
-  const [aula, setAula] = useState<null | { materia: string; nivel: number; etapa: "ensino" | "demo" | "opcoes" }>(null);
+  const [aula, setAula] = useState<null | any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const carregarAula = async (materiaId: string, topic?: string) => {
+    if (!activeChild) return;
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: {
+          mode: "escola",
+          child: activeChild,
+          subject: materiaId,
+          topic: topic || "conforme BNCC da série"
+        }
+      });
+
+      if (error) throw error;
+      setAula({ ...data, materia: materiaId, etapa: "ensino" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Erro ao gerar a aula. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+
+  if (loading) {
+    return (
+      <Shell>
+        <div className="h-full flex flex-col items-center justify-center p-12 text-center">
+          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
+          <h2 className="text-2xl font-bold">Preparando sua aula especial...</h2>
+          <p className="text-muted-foreground">O {activeChild.hiperfoco === 'dinossauros' ? 'dinossauro' : 'amigo'} está organizando tudo!</p>
+        </div>
+      </Shell>
+    );
+  }
 
   if (aula) return <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />;
 
