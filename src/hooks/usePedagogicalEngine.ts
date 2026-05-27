@@ -18,6 +18,8 @@ export function usePedagogicalEngine() {
     else if (activeChild.diagnostico === "tdah") neuroProfile = "TDAH";
     else if (activeChild.diagnostico === "dislexia") neuroProfile = "Dislexia";
     else if (activeChild.diagnostico === "tod") neuroProfile = "TOD";
+    else if (activeChild.diagnostico === "deficiencia_intelectual") neuroProfile = "DeficienciaIntelectual";
+    else if (activeChild.diagnostico === "altas_habilidades") neuroProfile = "AltasHabilidades";
 
     // Mocking current performance and emotion for now
     // In a real app, these would come from state or recent activity logs

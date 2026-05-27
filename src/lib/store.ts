@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export type Diagnostico = "tdah" | "tea" | "dislexia" | "discalculia" | "multiplo" | "nenhum";
+export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo";
 export type Hiperfoco =
   | "animais" | "dinossauros" | "espaco" | "veiculos"
   | "princesas" | "super-herois" | "robos" | "musica";
