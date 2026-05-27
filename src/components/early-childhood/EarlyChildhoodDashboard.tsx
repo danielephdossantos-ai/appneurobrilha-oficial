@@ -8,7 +8,7 @@ import { SimplifiedSequence } from '../activities/SimplifiedSequence';
 import { LITERACY_SYSTEM } from '../../data/literacy';
 import { MATH_SYSTEM } from '../../data/math';
 
-type Section = 'selection' | 'pre1' | 'pre2' | 'literacy' | 'math' | 'emotional';
+type Section = 'selection' | 'pre1' | 'pre2' | 'literacy' | 'math' | 'emotional' | 'math-game';
 
 export const EarlyChildhoodDashboard = () => {
   const [activeSection, setActiveSection] = useState<Section>('selection');
