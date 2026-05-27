@@ -4,13 +4,14 @@ import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag
+  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
+  { to: "/historias", label: "Histórias", icon: BookOpen },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
@@ -30,6 +31,7 @@ const navPais = [
 
 const navigationSequence = [
   "/",
+  "/historias",
   "/escola-brilha",
   "/reforco-brilha",
   "/neuro-treino",

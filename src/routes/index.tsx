@@ -147,12 +147,14 @@ function Index() {
 
       <h2 className="text-xl mb-4">Por onde quer ir?</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <Tile to="/historias" emoji="📚" title="HISTÓRIAS" desc="Livrinho interativo" color="from-[#6C5CE7]/30 to-[#6C5CE7]/5" />
         <Tile to="/pre-2" emoji="🎈" title="INFANTIL MASTER" desc="Pré 1 e Pré 2" color="from-rose/30 to-rose/5" />
         <Tile to="/alfabetizacao" emoji="🔤" title="ALFABETIZAÇÃO" desc="Leitura adaptativa" color="from-indigo/30 to-indigo/5" />
         <Tile to="/escola-brilha" emoji="🎓" title="Escola Brilha" desc="BNCC 1º–9º" color="from-primary/20 to-primary/5" />
         <Tile to="/progressao" emoji="📊" title="PROGRESSÃO" desc="Mapa de evolução" color="from-emerald/30 to-emerald/5" />
         <Tile to="/reforco-brilha" emoji="✨" title="REFORÇO BRILHA" desc="Sistema de ensino infinito" color="from-petal/30 to-petal/5" />
         <Tile to="/neuro-treino" emoji="🧠" title="Neuro-Treino" desc="Reforço terapêutico" color="from-sky/30 to-sky/5" />
+        <Tile to="/loja-mascotes" emoji="🐶" title="Loja de Mascotes" desc="Adote um amigo" color="from-blue-400/30 to-blue-400/5" />
         <Tile to="/jornada-365" emoji="🧭" title="Jornada 365" desc="Rotina diária" color="from-sun/30 to-sun/5" />
         <Tile to="/painel-pais" emoji="🛡️" title="Painel dos Pais" desc="Evolução real" color="from-lilac/30 to-lilac/5" />
       </div>

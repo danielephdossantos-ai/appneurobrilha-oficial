@@ -20,6 +20,7 @@ import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
+import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -86,6 +87,11 @@ const Jornada365Route = Jornada365RouteImport.update({
   path: '/jornada-365',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoriasRoute = HistoriasRouteImport.update({
+  id: '/historias',
+  path: '/historias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
   id: '/gerador-procedural',
   path: '/gerador-procedural',
@@ -147,6 +153,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
@@ -194,6 +202,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/neuro-treino': typeof NeuroTreinoRoute
@@ -219,6 +228,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/gerador-procedural'
+    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/neuro-treino'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/gerador-procedural'
+    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/neuro-treino'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/escola-brilha'
     | '/gerador-procedural'
+    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/neuro-treino'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
+  HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
   NeuroTreinoRoute: typeof NeuroTreinoRoute
@@ -383,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Jornada365RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/historias': {
+      id: '/historias'
+      path: '/historias'
+      fullPath: '/historias'
+      preLoaderRoute: typeof HistoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gerador-procedural': {
       id: '/gerador-procedural'
       path: '/gerador-procedural'
@@ -465,6 +485,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
+  HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
   NeuroTreinoRoute: NeuroTreinoRoute,
