@@ -31,7 +31,12 @@ function Auth() {
     try {
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        if (error) {
+          if (error.message.includes("Invalid login credentials")) {
+            throw new Error("E-mail ou senha incorretos. Se ainda não tem conta, clique em 'Cadastrar'.");
+          }
+          throw error;
+        }
         toast.success("Bem-vindo(a) de volta!");
       } else {
         const { error } = await supabase.auth.signUp({
@@ -41,8 +46,13 @@ function Auth() {
             data: { full_name: name },
           },
         });
-        if (error) throw error;
-        toast.success("Conta criada! Verifique seu e-mail.");
+        if (error) {
+          if (error.message.includes("known to be weak")) {
+            throw new Error("Esta senha é muito simples. Tente uma com pelo menos 6 letras ou números.");
+          }
+          throw error;
+        }
+        toast.success("Conta criada com sucesso!");
       }
       navigate({ to: "/" });
     } catch (error: any) {
