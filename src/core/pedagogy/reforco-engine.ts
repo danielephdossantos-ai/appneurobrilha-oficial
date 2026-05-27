@@ -29,9 +29,18 @@ export class ReforcoEngine {
       topic: topic,
       category: "Geral",
       levels: {
-        basic: [],
-        intermediate: [],
-        advanced: []
+        basic: [
+          { type: "explanation", text: `Vamos começar com os conceitos fundamentais de ${topic}.` },
+          { type: "example", text: "Imagine o seguinte cenário prático: [Conceito Base]" }
+        ],
+        intermediate: [
+          { type: "explanation", text: `Agora que você já conhece o básico, vamos aprofundar em ${topic}.` },
+          { type: "example", text: "Aqui o desafio aumenta um pouco, mas você consegue!" }
+        ],
+        advanced: [
+          { type: "explanation", text: `Nível Mestre Brilha: Desafios complexos de ${topic}.` },
+          { type: "example", text: "Neste nível, usamos todo o conhecimento acumulado." }
+        ]
       },
       premiumTips: [
         "Use objetos concretos (como feijões ou tampinhas) para visualizar a quantidade.",
