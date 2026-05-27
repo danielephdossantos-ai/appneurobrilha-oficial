@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PRE1_DATA, PRE2_DATA } from '../../data/early-childhood';
 
-export const EarlyChildhoodWorldMap = ({ grade }: { grade: 'pre1' | 'pre2' }) => {
+export const EarlyChildhoodWorldMap = ({ grade, onTrailSelect }: { grade: 'pre1' | 'pre2', onTrailSelect?: (trailId: string) => void }) => {
   const data = grade === 'pre1' ? PRE1_DATA : PRE2_DATA;
   const [selectedWorld, setSelectedWorld] = useState<string | null>(null);
 
