@@ -1,6 +1,7 @@
-// Mock store via localStorage — protótipo navegável.
-// Será substituído por Supabase nas próximas iterações.
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export type Diagnostico = "tdah" | "tea" | "dislexia" | "discalculia" | "multiplo" | "nenhum";
 export type Hiperfoco =
@@ -9,13 +10,14 @@ export type Hiperfoco =
 
 export interface Child {
   id: string;
+  user_id: string;
   nome: string;
   idade: number;
   serie: string;
   hiperfoco: Hiperfoco;
   diagnostico: Diagnostico;
   avatar: string; // emoji
-  anamneseCompleta: boolean;
+  anamnese_completa: boolean;
   perfil: {
     leitura: number;
     escrita: number;
@@ -34,7 +36,7 @@ export interface Child {
     historia: 1 | 2 | 3 | 4;
     geografia: 1 | 2 | 3 | 4;
   };
-  tempoAtencaoMin: number;
+  tempo_atencao_min: number;
   flags: {
     apoioVisual: boolean;
     passoAPasso: boolean;
@@ -46,100 +48,90 @@ export interface Child {
   observacoes: string;
 }
 
-const KEY = "neurobrilha:state:v1";
-
-interface AppState {
-  children: Child[];
-  activeChildId: string | null;
-  pinSet: boolean;
-}
-
-const seed: AppState = {
-  children: [
-    {
-      id: "demo-1",
-      nome: "Lara",
-      idade: 7,
-      serie: "2º ano",
-      hiperfoco: "dinossauros",
-      diagnostico: "dislexia",
-      avatar: "🦕",
-      anamneseCompleta: true,
-      perfil: { leitura: 45, escrita: 50, matematica: 70, atencao: 60, linguagem: 75, autonomia: 65, emocional: 70, social: 80 },
-      niveis: { geral: 2, portugues: 2, matematica: 3, ciencias: 3, historia: 3, geografia: 3 },
-      tempoAtencaoMin: 12,
-      flags: { apoioVisual: true, passoAPasso: true, preferAudio: true, contaNosDedos: false, trocaLetras: true, palavrasLongas: true },
-      observacoes: "Ama dinossauros. Cansa rápido em leitura longa. Responde bem a áudio.",
-    },
-    {
-      id: "demo-2",
-      nome: "Théo",
-      idade: 5,
-      serie: "Pré II",
-      hiperfoco: "espaco",
-      diagnostico: "tea",
-      avatar: "🚀",
-      anamneseCompleta: false,
-      perfil: { leitura: 30, escrita: 25, matematica: 55, atencao: 40, linguagem: 50, autonomia: 45, emocional: 55, social: 40 },
-      niveis: { geral: 1, portugues: 1, matematica: 2, ciencias: 2, historia: 2, geografia: 2 },
-      tempoAtencaoMin: 8,
-      flags: { apoioVisual: true, passoAPasso: true, preferAudio: false, contaNosDedos: true, trocaLetras: false, palavrasLongas: false },
-      observacoes: "Foco em rotina estruturada e linguagem literal.",
-    },
-  ],
-  activeChildId: "demo-1",
-  pinSet: false,
-};
-
-function load(): AppState {
-  if (typeof window === "undefined") return seed;
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return seed;
-    return JSON.parse(raw);
-  } catch {
-    return seed;
-  }
-}
-
-function save(state: AppState) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(KEY, JSON.stringify(state));
-}
-
-const listeners = new Set<() => void>();
-let state: AppState | null = null;
-
-function get(): AppState {
-  if (!state) state = load();
-  return state;
-}
-
-function set(updater: (s: AppState) => AppState) {
-  state = updater(get());
-  save(state);
-  listeners.forEach((l) => l());
-}
+const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
 
 export function useAppState() {
-  const [, force] = useState(0);
-  useEffect(() => {
-    const l = () => force((n) => n + 1);
-    listeners.add(l);
-    return () => { listeners.delete(l); };
-  }, []);
+  const queryClient = useQueryClient();
+  const [activeChildId, setActiveChildId] = useState<string | null>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(ACTIVE_CHILD_KEY);
+    }
+    return null;
+  });
+
+  const { data: session } = useQuery({
+    queryKey: ["session"],
+    queryFn: async () => {
+      const { data } = await supabase.auth.getSession();
+      return data.session;
+    },
+  });
+
+  const { data: children = [], isLoading } = useQuery({
+    queryKey: ["children"],
+    queryFn: async () => {
+      if (!session?.user) return [];
+      const { data, error } = await supabase
+        .from("children")
+        .select("*")
+        .order("created_at", { ascending: true });
+      
+      if (error) throw error;
+      return data as unknown as Child[];
+    },
+    enabled: !!session?.user,
+  });
+
+  const addChildMutation = useMutation({
+    mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
+      if (!session?.user) throw new Error("Não autenticado");
+      const { data, error } = await supabase
+        .from("children")
+        .insert([{ ...newChild, user_id: session.user.id }])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["children"] });
+      setActiveChildId(data.id);
+      localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
+      toast.success("Criança cadastrada com sucesso!");
+    },
+    onError: () => toast.error("Erro ao cadastrar criança"),
+  });
+
+  const updateChildMutation = useMutation({
+    mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
+      const { error } = await supabase
+        .from("children")
+        .update(patch)
+        .eq("id", id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["children"] });
+      toast.success("Dados atualizados!");
+    },
+    onError: () => toast.error("Erro ao atualizar dados"),
+  });
+
+  const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
+
   return {
-    state: get(),
-    activeChild: get().children.find((c) => c.id === get().activeChildId) ?? null,
-    setActiveChild: (id: string) => set((s) => ({ ...s, activeChildId: id })),
-    addChild: (c: Omit<Child, "id">) =>
-      set((s) => ({ ...s, children: [...s.children, { ...c, id: crypto.randomUUID() }] })),
-    updateChild: (id: string, patch: Partial<Child>) =>
-      set((s) => ({
-        ...s,
-        children: s.children.map((c) => (c.id === id ? { ...c, ...patch } : c)),
-      })),
-    reset: () => set(() => seed),
+    children,
+    activeChild,
+    isLoading,
+    session,
+    setActiveChild: (id: string) => {
+      setActiveChildId(id);
+      localStorage.setItem(ACTIVE_CHILD_KEY, id);
+    },
+    addChild: addChildMutation.mutate,
+    updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
   };
 }
 

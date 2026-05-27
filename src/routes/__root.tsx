@@ -111,8 +111,36 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AuthGuard>
+        <Outlet />
+      </AuthGuard>
+      <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );
+}
+
+import { Toaster } from "sonner";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useLocation, useNavigate } from "@tanstack/react-router";
+
+function AuthGuard({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      setLoading(false);
+      if (!session && location.pathname !== "/auth") {
+        navigate({ to: "/auth" });
+      } else if (session && location.pathname === "/auth") {
+        navigate({ to: "/" });
+      }
+    });
+  }, [location.pathname, navigate]);
+
+  if (loading) return null; // Or a loading spinner
+
+  return <>{children}</>;
 }

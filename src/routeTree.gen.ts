@@ -17,6 +17,7 @@ import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MundoBrilhaRouteImport } from './routes/mundo-brilha'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
@@ -62,6 +63,11 @@ const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
   path: '/escola-brilha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AgendaRoute = AgendaRouteImport.update({
   id: '/agenda',
   path: '/agenda',
@@ -87,6 +93,7 @@ const AjusteDificuldadesChildIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
   '/mundo-brilha': typeof MundoBrilhaRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
   '/mundo-brilha': typeof MundoBrilhaRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/jornada-365': typeof Jornada365Route
   '/mundo-brilha': typeof MundoBrilhaRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agenda'
+    | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
     | '/mundo-brilha'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agenda'
+    | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
     | '/mundo-brilha'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agenda'
+    | '/auth'
     | '/escola-brilha'
     | '/jornada-365'
     | '/mundo-brilha'
@@ -175,6 +187,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
+  AuthRoute: typeof AuthRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   Jornada365Route: typeof Jornada365Route
   MundoBrilhaRoute: typeof MundoBrilhaRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/agenda': {
       id: '/agenda'
       path: '/agenda'
@@ -279,6 +299,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
+  AuthRoute: AuthRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   Jornada365Route: Jornada365Route,
   MundoBrilhaRoute: MundoBrilhaRoute,

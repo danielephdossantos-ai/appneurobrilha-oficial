@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      children: {
+        Row: {
+          anamnese_completa: boolean | null
+          avatar: string | null
+          created_at: string
+          diagnostico: string | null
+          flags: Json | null
+          hiperfoco: string | null
+          id: string
+          idade: number | null
+          niveis: Json | null
+          nome: string
+          observacoes: string | null
+          perfil: Json | null
+          serie: string | null
+          tempo_atencao_min: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          anamnese_completa?: boolean | null
+          avatar?: string | null
+          created_at?: string
+          diagnostico?: string | null
+          flags?: Json | null
+          hiperfoco?: string | null
+          id?: string
+          idade?: number | null
+          niveis?: Json | null
+          nome: string
+          observacoes?: string | null
+          perfil?: Json | null
+          serie?: string | null
+          tempo_atencao_min?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          anamnese_completa?: boolean | null
+          avatar?: string | null
+          created_at?: string
+          diagnostico?: string | null
+          flags?: Json | null
+          hiperfoco?: string | null
+          id?: string
+          idade?: number | null
+          niveis?: Json | null
+          nome?: string
+          observacoes?: string | null
+          perfil?: Json | null
+          serie?: string | null
+          tempo_atencao_min?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "children_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
