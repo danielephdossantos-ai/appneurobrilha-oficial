@@ -1,10 +1,13 @@
+
 import React from 'react';
 import { RouterProvider } from '@tanstack/react-router';
-import { modularRouter } from './routes/modular-router';
+import { getRouter } from './router';
+
+const router = getRouter();
 
 function App() {
   return (
-    <RouterProvider router={modularRouter} />
+    <RouterProvider router={router} />
   );
 }
 
