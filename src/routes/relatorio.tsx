@@ -77,19 +77,28 @@ function Relatorio() {
       </Card>
 
       <Card>
-        <h3 className="font-extrabold mb-3">Histórico de nível</h3>
-        <div className="space-y-2 text-sm">
-          {[
+        <h3 className="font-extrabold mb-3 text-slate-800">Histórico de Nível</h3>
+        <VirtualizedList
+          height={200}
+          items={[
             { d: "12/05", t: "Português subiu para nível 2 — 5 acertos seguidos" },
             { d: "08/05", t: "Matemática subiu para nível 3 — completou ciclo CRA" },
             { d: "01/05", t: "Tempo de atenção ajustado para 12 min — pediu pausa" },
-          ].map((h, i) => (
-            <div key={i} className="flex gap-3 p-2 rounded-lg bg-muted">
-              <span className="font-mono text-muted-foreground">{h.d}</span>
-              <span className="font-bold">{h.t}</span>
+            // Simulando histórico maior para demonstrar a virtualização
+            ...Array(20).fill(null).map((_, i) => ({ 
+              d: `${20-i}/04`, 
+              t: `Progresso contínuo em habilidades executivas ${i+1}` 
+            }))
+          ]}
+          renderItem={(h, i) => (
+            <div key={i} className="flex gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100 mb-2">
+              <span className="font-mono text-slate-400 text-xs mt-1 shrink-0">{h.d}</span>
+              <span className="font-medium text-slate-700 text-sm leading-tight">{h.t}</span>
             </div>
-          ))}
-        </div>
+          )}
+          estimateSize={60}
+          itemClassName="px-1"
+        />
       </Card>
     </Shell>
   );
