@@ -3,6 +3,8 @@ import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { Download, BrainCircuit } from "lucide-react";
 import { ParentalEngine } from "@/core/parental/engine";
+import { CognitiveDashboard } from "@/modules/neuro-engine/components/CognitiveDashboard";
+
 
 export const Route = createFileRoute("/relatorio")({
   component: Relatorio,
@@ -25,6 +27,9 @@ function Relatorio() {
           <Download className="h-4 w-4" /> Exportar PDF
         </button>
       </div>
+
+      <CognitiveDashboard childId={activeChild.id} />
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
         {[
