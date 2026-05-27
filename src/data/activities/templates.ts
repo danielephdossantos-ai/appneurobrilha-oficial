@@ -2,58 +2,58 @@
 import { ActivityTemplate } from "../../core/activity-engine/types";
 
 export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
+  // Educação Infantil
   {
-    id: "tpl-phonics-1",
+    id: "tpl-ei-count-1",
     type: "multiple-choice",
-    title: "Consciência Fonológica",
-    instruction: "Qual é a primeira letra da palavra?",
+    title: "Contagem Visual",
+    instruction: "Quantas frutas você vê?",
     baseDifficulty: "easy",
-    contentPool: ["p-001", "p-002", "p-003"],
-    requiredSkills: ["EF01LP01"]
+    contentPool: ["ei-001", "ei-002"],
+    requiredSkills: ["EI03ET07"]
   },
+  
+  // 1º Ano
   {
-    id: "tpl-math-visual-1",
-    type: "drag-drop",
-    title: "Matemática Visual",
-    instruction: "Arraste o número correto para a quantidade de frutas",
-    baseDifficulty: "easy",
-    contentPool: ["i-001", "i-002", "m-001", "m-002"],
-    requiredSkills: ["EF01MA01"]
-  },
-  {
-    id: "tpl-pairing-1",
-    type: "pairing",
-    title: "Percepção Visual",
-    instruction: "Encontre os pares de animais",
-    baseDifficulty: "medium",
-    contentPool: ["i-003", "i-004"],
-    requiredSkills: ["EF01CI04"]
-  },
-  {
-    id: "tpl-syllables-1",
+    id: "tpl-ef1-phonics-1",
     type: "multiple-choice",
-    title: "Consciência Silábica",
-    instruction: "Qual sílaba completa a palavra?",
-    baseDifficulty: "medium",
-    contentPool: ["s-001", "s-002"],
-    requiredSkills: ["EI03LP04"]
+    title: "Alfabetização Inicial",
+    instruction: "Qual é esta palavra?",
+    baseDifficulty: "easy",
+    contentPool: ["ef1-001", "ef1-002"],
+    requiredSkills: ["EF01LP02"]
   },
+
+  // 3º Ano
   {
-    id: "tpl-auditory-1",
-    type: "pairing",
-    title: "Memória Sonora",
-    instruction: "Ouça o som e encontre a imagem correspondente",
+    id: "tpl-ef3-reading-1",
+    type: "reading",
+    title: "Leitura Fluente",
+    instruction: "Leia a frase em voz alta",
+    baseDifficulty: "medium",
+    contentPool: ["ef3-001"],
+    requiredSkills: ["EF03LP01"]
+  },
+
+  // 5º Ano
+  {
+    id: "tpl-ef5-interpret-1",
+    type: "multiple-choice",
+    title: "Interpretação de Texto",
+    instruction: "Sobre o que fala o texto?",
     baseDifficulty: "hard",
-    contentPool: ["a-001", "a-002"],
-    requiredSkills: ["EI03LP03"]
+    contentPool: ["ef5-001"],
+    requiredSkills: ["EF05LP01"]
   },
+
+  // 9º Ano
   {
-    id: "tpl-logical-1",
-    type: "logic-sequence",
-    title: "Sequência Lógica",
-    instruction: "Coloque as cenas na ordem correta",
-    baseDifficulty: "medium",
-    contentPool: ["l-001", "l-002"],
-    requiredSkills: ["EI03ET01"]
+    id: "tpl-ef9-algebra-1",
+    type: "multiple-choice",
+    title: "Álgebra Avançada",
+    instruction: "Resolva a equação de segundo grau",
+    baseDifficulty: "hard",
+    contentPool: ["ef9-001"],
+    requiredSkills: ["EF09MA01"]
   }
 ];

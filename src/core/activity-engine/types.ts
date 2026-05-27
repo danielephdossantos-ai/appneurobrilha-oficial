@@ -12,7 +12,8 @@ export type ActivityType =
   | "interpretation"
   | "motor-coordination"
   | "phonological-awareness"
-  | "visual-perception";
+  | "visual-perception"
+  | "writing-practice";
 
 export type DifficultyLevel = "easy" | "medium" | "hard" | "expert";
 

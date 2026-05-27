@@ -150,6 +150,7 @@ function Index() {
         <Tile to="/pre-2" emoji="🎈" title="INFANTIL MASTER" desc="Pré 1 e Pré 2" color="from-rose/30 to-rose/5" />
         <Tile to="/alfabetizacao" emoji="🔤" title="ALFABETIZAÇÃO" desc="Leitura adaptativa" color="from-indigo/30 to-indigo/5" />
         <Tile to="/escola-brilha" emoji="🎓" title="Escola Brilha" desc="BNCC 1º–9º" color="from-primary/20 to-primary/5" />
+        <Tile to="/progressao" emoji="📊" title="PROGRESSÃO" desc="Mapa de evolução" color="from-emerald/30 to-emerald/5" />
         <Tile to="/reforco-brilha" emoji="✨" title="REFORÇO BRILHA" desc="Sistema de ensino infinito" color="from-petal/30 to-petal/5" />
         <Tile to="/neuro-treino" emoji="🧠" title="Neuro-Treino" desc="Reforço terapêutico" color="from-sky/30 to-sky/5" />
         <Tile to="/jornada-365" emoji="🧭" title="Jornada 365" desc="Rotina diária" color="from-sun/30 to-sun/5" />
