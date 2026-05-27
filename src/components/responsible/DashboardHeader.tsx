@@ -34,9 +34,15 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
         <Button variant="outline" size="icon" className="rounded-full">
           <Bell className="h-4 w-4" />
         </Button>
-        <Button variant="outline" size="sm" className="gap-2 hidden sm:flex">
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="gap-2 hidden sm:flex"
+          onClick={() => window.print()}
+        >
           <Download className="h-4 w-4" /> Exportar Relatório
         </Button>
+
         <Button variant="outline" size="sm" className="gap-2 hidden sm:flex">
           <Share2 className="h-4 w-4" /> Compartilhar com Terapeuta
         </Button>
