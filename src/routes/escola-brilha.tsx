@@ -85,7 +85,7 @@ function Escola() {
       <h2 className="text-xl mb-4">Matérias</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materias.map((m) => (
-          <button key={m.id} onClick={() => setAula({ materia: m.id, nivel: 2, etapa: "ensino" })}
+          <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
