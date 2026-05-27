@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { state, activeChild, setActiveChild } = useAppState();
+  const { children: allChildren, activeChild, setActiveChild } = useAppState();
 
   return (
     <Shell>
@@ -25,7 +25,7 @@ function Index() {
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        {state.children.map((c) => (
+        {allChildren.map((c: any) => (
           <button
             key={c.id}
             onClick={() => setActiveChild(c.id)}
@@ -42,7 +42,7 @@ function Index() {
                 <div className="text-sm text-muted-foreground">{c.idade} anos · {c.serie}</div>
                 <div className="mt-1 flex gap-1.5">
                   <Pill tone="info">{c.diagnostico.toUpperCase()}</Pill>
-                  {!c.anamneseCompleta && <Pill tone="warning">Anamnese</Pill>}
+                  {!c.anamnese_completa && <Pill tone="warning">Anamnese</Pill>}
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@ function Index() {
         </Link>
       </div>
 
-      {activeChild && !activeChild.anamneseCompleta && (
+      {activeChild && !activeChild.anamnese_completa && (
         <Card className="mb-8 bg-warning/15 border-warning/40">
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-6 w-6 text-warning-foreground shrink-0 mt-0.5" />

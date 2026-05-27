@@ -38,7 +38,7 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
 }
 
 export function Shell({ children }: { children?: ReactNode }) {
-  const { activeChild, state, setActiveChild } = useAppState();
+  const { activeChild, children: allChildren, setActiveChild } = useAppState();
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   return (
@@ -63,13 +63,13 @@ export function Shell({ children }: { children?: ReactNode }) {
                 <div className="text-xs text-muted-foreground">{activeChild.idade} anos · {activeChild.serie}</div>
               </div>
             </div>
-            {state.children.length > 1 && (
+            {allChildren.length > 1 && (
               <select
                 value={activeChild.id}
                 onChange={(e) => setActiveChild(e.target.value)}
                 className="mt-2 w-full text-xs rounded-lg bg-muted px-2 py-1.5"
               >
-                {state.children.map((c) => (
+                {allChildren.map((c: any) => (
                   <option key={c.id} value={c.id}>{c.avatar} {c.nome}</option>
                 ))}
               </select>
