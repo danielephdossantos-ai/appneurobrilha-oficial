@@ -1,4 +1,4 @@
-import { GeneratedActivity, GeneratorInput } from "../types/generator";
+import { GeneratedActivity, GeneratorInput } from "../../types/generator";
 import { v4 as uuidv4 } from "uuid";
 
 export abstract class BaseGenerator {
