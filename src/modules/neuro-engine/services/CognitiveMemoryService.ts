@@ -88,7 +88,6 @@ export class CognitiveMemoryService {
     await this.setCache(`history_${childId}`, [...history, scoreData]);
 
     if (typeof window !== 'undefined' && !navigator.onLine) {
-      console.log("Offline: Longitudinal scores queued locally.");
       return;
     }
 
