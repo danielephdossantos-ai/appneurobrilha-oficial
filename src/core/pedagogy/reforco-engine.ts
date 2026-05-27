@@ -189,7 +189,8 @@ export class ReforcoEngine {
       premiumTips: [
         activity.reforcoPositivo || "Excelente esforço!",
         activity.reforcoErro || "Quase lá! Tente de novo com calma.",
-        `Adaptado para perfil sensorial: ${activity.tipoSensorial.join(", ")}`
+        `Adaptação: Reforços ${adjustment?.reinforcementIntensity || 'padrão'}, Previsibilidade ${adjustment?.predictabilityLevel || 'média'}.`,
+        adjustment?.responseTimeLimit ? `Tempo sugerido: ${adjustment.responseTimeLimit}s por atividade.` : "Tempo livre para resposta."
       ],
       explanation: activity.objetivoPedagogico || "Aula personalizada do Banco Pedagógico.",
       activityId: activity.id
