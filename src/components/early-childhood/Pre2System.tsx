@@ -70,7 +70,10 @@ export const Pre2System = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
             >
-              <EarlyChildhoodWorldMap grade="pre2" />
+              <EarlyChildhoodWorldMap 
+                grade="pre2" 
+                onTrailSelect={handleStartActivity} 
+              />
               
               <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <MascotEvolutionCard level={stats.mascotLevel} />
