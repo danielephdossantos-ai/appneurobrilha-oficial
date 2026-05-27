@@ -31,7 +31,12 @@ function Auth() {
     try {
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        if (error) {
+          if (error.message.includes("Invalid login credentials")) {
+            throw new Error("E-mail ou senha incorretos. Se ainda não tem conta, clique em 'Cadastrar'.");
+          }
+          throw error;
+        }
         toast.success("Bem-vindo(a) de volta!");
       } else {
         const { error } = await supabase.auth.signUp({
@@ -41,8 +46,13 @@ function Auth() {
             data: { full_name: name },
           },
         });
-        if (error) throw error;
-        toast.success("Conta criada! Verifique seu e-mail.");
+        if (error) {
+          if (error.message.includes("known to be weak")) {
+            throw new Error("Esta senha é muito simples. Tente uma com pelo menos 6 letras ou números.");
+          }
+          throw error;
+        }
+        toast.success("Conta criada com sucesso!");
       }
       navigate({ to: "/" });
     } catch (error: any) {
@@ -148,9 +158,9 @@ function Auth() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/60 hover:text-primary transition-colors p-2"
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
               </button>
             </div>
           </div>
@@ -176,10 +186,10 @@ function Auth() {
           type="button"
           onClick={handleDemoLogin}
           disabled={loading}
-          className="w-full py-3 bg-secondary text-secondary-foreground rounded-2xl font-bold border border-border flex items-center justify-center gap-2 hover:bg-muted active:scale-[0.98] transition-all"
+          className="w-full py-4 bg-secondary text-secondary-foreground rounded-2xl font-extrabold border-2 border-primary/20 flex items-center justify-center gap-3 hover:bg-muted active:scale-[0.98] transition-all shadow-soft"
         >
-          <User size={18} />
-          Acessar como Visitante
+          <Sparkles className="text-primary" size={20} />
+          Acessar como Visitante (Teste Rápido)
         </button>
 
         <p className="text-center text-xs text-muted-foreground mt-6 px-4">
