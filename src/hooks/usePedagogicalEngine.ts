@@ -24,13 +24,24 @@ export function usePedagogicalEngine() {
     // Mocking current performance and emotion for now
     // In a real app, these would come from state or recent activity logs
     const currentEmotion: Emotion = "feliz"; 
-    const performance = { successRate: 0.85 };
+    const performanceMetrics = { 
+      repeatedErrors: 0,
+      consecutiveHits: 5,
+      totalErrors: 2,
+      totalHits: 15,
+      responseTimeHistory: [2000, 1500, 3000],
+      lastActionTime: Date.now(),
+      sessionStartTime: Date.now() - 300000, // 5 min atrás
+      abandoned: false,
+      rapidClicksCount: 0,
+      longPausesCount: 0
+    };
 
     const adaptive = AdaptiveEngine.orchestrateActivity(
       activeChild.id,
       neuroProfile,
       currentEmotion,
-      performance,
+      performanceMetrics,
       activeChild.sensory_mode || "foco"
     );
 
