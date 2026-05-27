@@ -18,6 +18,7 @@ import { Route as Pre2RouteImport } from './routes/pre-2'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
+import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
@@ -71,6 +72,11 @@ const Jornada365Route = Jornada365RouteImport.update({
   path: '/jornada-365',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
+  id: '/gerador-procedural',
+  path: '/gerador-procedural',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
   id: '/escola-brilha',
   path: '/escola-brilha',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/auth': typeof AuthRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/auth'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/auth'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/alfabetizacao'
     | '/auth'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AuthRoute: typeof AuthRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
+  GeradorProceduralRoute: typeof GeradorProceduralRoute
   Jornada365Route: typeof Jornada365Route
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
@@ -304,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Jornada365RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gerador-procedural': {
+      id: '/gerador-procedural'
+      path: '/gerador-procedural'
+      fullPath: '/gerador-procedural'
+      preLoaderRoute: typeof GeradorProceduralRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escola-brilha': {
       id: '/escola-brilha'
       path: '/escola-brilha'
@@ -362,6 +382,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AuthRoute: AuthRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
+  GeradorProceduralRoute: GeradorProceduralRoute,
   Jornada365Route: Jornada365Route,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
