@@ -15,9 +15,11 @@ function Terapeuta() {
     { role: "ai", t: `Oi! Sou a Terapeuta Brilha 💚 Estou aqui pra te ajudar com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const send = async () => {
-    if (!input.trim() || !activeChild) return;
+    if (!input.trim() || !activeChild || isLoading) return;
+    setIsLoading(true);
     const q = input;
     const newMsgs = [...msgs, { role: "user" as const, t: q }];
     setMsgs(newMsgs);
