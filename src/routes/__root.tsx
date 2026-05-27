@@ -163,6 +163,11 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
         });
       }
 
+      if (event === 'TOKEN_REFRESH_FAILED' || (event === 'SIGNED_OUT')) {
+        navigate({ to: "/auth" });
+        return;
+      }
+
       if (!session && location.pathname !== "/auth") {
         navigate({ to: "/auth" });
       } else if (session && location.pathname === "/auth") {

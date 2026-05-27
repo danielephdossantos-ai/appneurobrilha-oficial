@@ -125,11 +125,19 @@ export function useAppState() {
 
   const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
 
+  const logout = async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem(ACTIVE_CHILD_KEY);
+    queryClient.clear();
+    toast.info("Sessão encerrada");
+  };
+
   return {
     children,
     activeChild,
     isLoading,
     session,
+    logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);
       localStorage.setItem(ACTIVE_CHILD_KEY, id);
