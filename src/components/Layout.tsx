@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
-  { to: "/mundo-brilha", label: "Mundo Brilha", icon: Sparkles },
+  { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
@@ -27,7 +27,7 @@ const navPais = [
 const navigationSequence = [
   "/",
   "/escola-brilha",
-  "/mundo-brilha",
+  "/reforco-brilha",
   "/neuro-treino",
   "/jornada-365",
   "/rotina",
