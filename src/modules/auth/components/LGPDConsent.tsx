@@ -11,19 +11,35 @@ export const LGPDConsent: React.FC = () => {
 
   useEffect(() => {
     const checkConsent = async () => {
-      const { data: { session } } = await AuthService.getSession();
-      if (!session) {
-        setShow(false);
+      try {
+        // Verificar se já aceitou nesta sessão para evitar flickering ou checks excessivos
+        if (sessionStorage.getItem('lgpd_accepted')) {
+          setShow(false);
+          setLoading(false);
+          return;
+        }
+
+        const { data: { session } } = await AuthService.getSession();
+        if (!session) {
+          setShow(false);
+          setLoading(false);
+          return;
+        }
+        
+        const settings = await AuthService.getPrivacySettings();
+        if (!settings || !settings.terms_accepted) {
+          setShow(true);
+        } else {
+          // Se já aceitou no banco, marcar na sessão
+          sessionStorage.setItem('lgpd_accepted', 'true');
+        }
+      } catch (error) {
+        console.error("Erro ao verificar consentimento:", error);
+      } finally {
         setLoading(false);
-        return;
       }
-      
-      const settings = await AuthService.getPrivacySettings();
-      if (!settings || !settings.terms_accepted) {
-        setShow(true);
-      }
-      setLoading(false);
     };
+
     checkConsent();
 
     const { data: { subscription } } = AuthService.onAuthStateChange((event, session) => {
@@ -31,6 +47,7 @@ export const LGPDConsent: React.FC = () => {
         checkConsent();
       } else if (event === 'SIGNED_OUT') {
         setShow(false);
+        sessionStorage.removeItem('lgpd_accepted');
       }
     });
 
@@ -45,6 +62,7 @@ export const LGPDConsent: React.FC = () => {
         data_usage_consent: true,
         analytics_consent: true
       });
+      sessionStorage.setItem('lgpd_accepted', 'true');
       setShow(false);
     } catch (error: any) {
       console.error("Erro ao salvar consentimento LGPD:", error);
