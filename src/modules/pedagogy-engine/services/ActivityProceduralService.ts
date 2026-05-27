@@ -2,6 +2,8 @@ import { GeneratorInput, GeneratedActivity, GeneratorProvider } from "../types/g
 import { LinguisticsGenerator } from "../engine/generators/LinguisticsGenerator";
 import { MathGenerator } from "../engine/generators/MathGenerator";
 import { CognitiveGenerator } from "../engine/generators/CognitiveGenerator";
+import { MotorGenerator } from "../engine/generators/MotorGenerator";
+import { PerceptionGenerator } from "../engine/generators/PerceptionGenerator";
 
 export class ActivityProceduralService {
   private static instance: ActivityProceduralService;
@@ -12,7 +14,8 @@ export class ActivityProceduralService {
       new LinguisticsGenerator(),
       new MathGenerator(),
       new CognitiveGenerator(),
-      // More generators can be added here
+      new MotorGenerator(),
+      new PerceptionGenerator(),
     ];
   }
 
@@ -27,7 +30,6 @@ export class ActivityProceduralService {
     const generator = this.generators.find(g => g.supports(input.domain));
     
     if (!generator) {
-      // Fallback or default generator
       console.warn(`No generator found for domain: ${input.domain}. Using linguistics as fallback.`);
       return this.generators[0].generate(input);
     }
