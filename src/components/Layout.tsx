@@ -15,6 +15,7 @@ const navCrianca = [
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
+  { to: "/professor-ia", label: "Professor IA", icon: Camera },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
@@ -31,6 +32,7 @@ const navigationSequence = [
   "/reforco-brilha",
   "/neuro-treino",
   "/jornada-365",
+  "/professor-ia",
   "/rotina",
   "/painel-pais",
   "/terapeuta-brilha",
