@@ -240,7 +240,7 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
   );
 }
 
-export function Pill({ children, tone = "default" }: { children: ReactNode; tone?: "default" | "success" | "warning" | "info" | "danger" }) {
+export function Pill({ children, tone = "default", className = "" }: { children: ReactNode; tone?: "default" | "success" | "warning" | "info" | "danger"; className?: string }) {
   const tones: Record<string, string> = {
     default: "bg-muted text-muted-foreground",
     success: "bg-success/15 text-success",
@@ -248,5 +248,5 @@ export function Pill({ children, tone = "default" }: { children: ReactNode; tone
     info: "bg-sky/30 text-foreground",
     danger: "bg-destructive/15 text-destructive",
   };
-  return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]}`}>{children}</span>;
+  return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]} ${className}`}>{children}</span>;
 }
