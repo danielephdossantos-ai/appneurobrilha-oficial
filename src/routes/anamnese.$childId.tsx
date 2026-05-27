@@ -2,7 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState, type Hiperfoco, type Diagnostico } from "@/lib/store";
 import { useState } from "react";
-import { ChevronRight, CheckCircle2 } from "lucide-react";
+import { ChevronRight, CheckCircle2, Brain } from "lucide-react";
+import { NeuroProfileSelector } from "@/components/neuro/NeuroProfileSelector";
 
 export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
@@ -23,6 +24,10 @@ const diagnosticos: { v: Diagnostico; label: string }[] = [
   { v: "tdah", label: "TDAH" },
   { v: "tea", label: "TEA (autismo)" },
   { v: "dislexia", label: "Dislexia" },
+  { v: "tod", label: "TOD" },
+  { v: "deficiencia_intelectual", label: "Deficiência Intelectual" },
+  { v: "altas_habilidades", label: "Altas Habilidades" },
+  { v: "neurotipico", label: "Neurotípico" },
   { v: "discalculia", label: "Discalculia" },
   { v: "multiplo", label: "Múltiplo" },
   { v: "nenhum", label: "Nenhum / em investigação" },
@@ -136,16 +141,16 @@ function Anamnese() {
 
         {step === 2 && (
           <div className="space-y-4">
-            <h2>Diagnóstico clínico</h2>
-            <p className="text-sm text-muted-foreground">Pode ser diagnóstico fechado ou hipótese. Define qual protocolo (ABA, Orton-Gillingham, TEACCH, CRA) o app vai priorizar.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {diagnosticos.map((d) => (
-                <button key={d.v} onClick={() => setData({ ...data, diagnostico: d.v })}
-                  className={`rounded-xl p-3 border-2 text-left font-bold ${data.diagnostico === d.v ? "border-primary bg-primary/10" : "border-border bg-muted"}`}>
-                  {d.label}
-                </button>
-              ))}
+            <div className="flex items-center gap-2 mb-2">
+              <Brain className="w-5 h-5 text-primary" />
+              <h2 className="!m-0">Neuroperfil e Diagnóstico</h2>
             </div>
+            <p className="text-sm text-muted-foreground">Pode ser diagnóstico fechado ou hipótese. Define qual protocolo (ABA, Orton-Gillingham, TEACCH, CRA) o app vai priorizar.</p>
+            
+            <NeuroProfileSelector 
+              selected={data.diagnostico}
+              onChange={(v) => setData({ ...data, diagnostico: v })}
+            />
           </div>
         )}
 
