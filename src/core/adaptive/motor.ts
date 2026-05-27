@@ -74,13 +74,13 @@ export class AdaptiveMotor {
     };
   }
 
-  static getIntervention(analysis: AdaptiveAnalysis): string | null {
-    if (analysis.abandonmentRisk > 0.8) return "Sugerir pausa lúdica imediata";
-    if (analysis.frustration > 0.7) return "Reduzir dificuldade e oferecer dica visual";
-    if (analysis.fatigue > 0.6) return "Mudar para atividade de baixa estimulação";
-    if (analysis.impulsivity > 0.7) return "Inserir barreira de confirmação (pense antes de clicar)";
-    if (analysis.distraction > 0.6) return "Reforço sonoro de atenção ou mudança de estímulo";
-    if (analysis.performanceLevel > 0.9) return "Aumentar desafio e complexidade";
+  static getIntervention(analysis: AdaptiveAnalysis): { message: string; intensity: number; type: string } | null {
+    if (analysis.abandonmentRisk > 0.8) return { message: "Sugerir pausa lúdica imediata", intensity: 0.9, type: "pausa" };
+    if (analysis.frustration > 0.7) return { message: "Reduzir dificuldade e oferecer dica visual", intensity: 0.8, type: "ajuda" };
+    if (analysis.fatigue > 0.6) return { message: "Mudar para atividade de baixa estimulação", intensity: 0.7, type: "descanso" };
+    if (analysis.impulsivity > 0.7) return { message: "Inserir barreira de confirmação (pense antes de clicar)", intensity: 0.7, type: "foco" };
+    if (analysis.distraction > 0.6) return { message: "Reforço sonoro de atenção ou mudança de estímulo", intensity: 0.6, type: "alerta" };
+    if (analysis.performanceLevel > 0.9) return { message: "Aumentar desafio e complexidade", intensity: 0.5, type: "desafio" };
     
     return null;
   }
