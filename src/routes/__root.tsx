@@ -114,9 +114,11 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
-        <Outlet />
-        <ConnectivityStatus />
-        <LGPDConsent />
+        <div className="relative min-h-screen">
+          <Outlet />
+          <LGPDConsent />
+          <ConnectivityStatus />
+        </div>
       </AuthGuard>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>

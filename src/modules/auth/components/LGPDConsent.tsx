@@ -27,8 +27,10 @@ export const LGPDConsent: React.FC = () => {
         analytics_consent: true
       });
       setShow(false);
-    } catch (error) {
-      // Handle error
+    } catch (error: any) {
+      console.error("Erro ao salvar consentimento LGPD:", error);
+      const errorMessage = error?.message || "Erro desconhecido ao salvar consentimento.";
+      alert(`Não foi possível salvar o consentimento: ${errorMessage}. Por favor, tente novamente.`);
     }
   };
 
