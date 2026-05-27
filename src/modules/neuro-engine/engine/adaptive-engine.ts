@@ -22,4 +22,9 @@ export class AdaptiveEngine extends LegacyAdaptiveEngine {
   static maxItemsPerScreen = 4;
   static reinforcementIntensity = "standard";
   static predictabilityLevel = "high";
+  static animationIntensity = "standard";
+  static visualComplexity = "standard";
+  static complexityMultiplier = 1;
+  static responseTimeLimit = 30000;
+  static positiveReinforcementFrequency = "standard";
 }
