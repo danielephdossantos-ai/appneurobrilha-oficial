@@ -1,5 +1,5 @@
 
-import { BNCC_SKILLS, BNCCSkill } from "./bncc";
+import { BNCC_SKILLS, BNCCSkill } from "../../../core/pedagogy/bncc";
 
 export interface StudentProgress {
   skillId: string;
