@@ -198,6 +198,84 @@ export type Database = {
           },
         ]
       }
+      pedagogical_activities_base: {
+        Row: {
+          adaptacoes: Json | null
+          created_at: string | null
+          estrategia_pedagogica: string | null
+          faixa_etaria: string | null
+          habilidade_bncc: string | null
+          id: string
+          materia: string
+          micro_habilidade: string | null
+          neuro_perfil: Json | null
+          nivel_cognitivo: string | null
+          nivel_dificuldade: string | null
+          objetivo_pedagogico: string | null
+          pre_requisitos: string[] | null
+          reforco_erro: string | null
+          reforco_positivo: string | null
+          serie: string | null
+          tags: string[] | null
+          tempo_medio: number | null
+          tipo_resposta: string | null
+          tipo_sensorial: Json | null
+          titulo: string
+          updated_at: string | null
+          variacoes: Json | null
+        }
+        Insert: {
+          adaptacoes?: Json | null
+          created_at?: string | null
+          estrategia_pedagogica?: string | null
+          faixa_etaria?: string | null
+          habilidade_bncc?: string | null
+          id?: string
+          materia: string
+          micro_habilidade?: string | null
+          neuro_perfil?: Json | null
+          nivel_cognitivo?: string | null
+          nivel_dificuldade?: string | null
+          objetivo_pedagogico?: string | null
+          pre_requisitos?: string[] | null
+          reforco_erro?: string | null
+          reforco_positivo?: string | null
+          serie?: string | null
+          tags?: string[] | null
+          tempo_medio?: number | null
+          tipo_resposta?: string | null
+          tipo_sensorial?: Json | null
+          titulo: string
+          updated_at?: string | null
+          variacoes?: Json | null
+        }
+        Update: {
+          adaptacoes?: Json | null
+          created_at?: string | null
+          estrategia_pedagogica?: string | null
+          faixa_etaria?: string | null
+          habilidade_bncc?: string | null
+          id?: string
+          materia?: string
+          micro_habilidade?: string | null
+          neuro_perfil?: Json | null
+          nivel_cognitivo?: string | null
+          nivel_dificuldade?: string | null
+          objetivo_pedagogico?: string | null
+          pre_requisitos?: string[] | null
+          reforco_erro?: string | null
+          reforco_positivo?: string | null
+          serie?: string | null
+          tags?: string[] | null
+          tempo_medio?: number | null
+          tipo_resposta?: string | null
+          tipo_sensorial?: Json | null
+          titulo?: string
+          updated_at?: string | null
+          variacoes?: Json | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
