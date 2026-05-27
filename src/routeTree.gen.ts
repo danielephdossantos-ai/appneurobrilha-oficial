@@ -13,6 +13,7 @@ import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
+import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as Pre2RouteImport } from './routes/pre-2'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
@@ -43,6 +44,11 @@ const RelatorioRoute = RelatorioRouteImport.update({
 const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
   id: '/reforco-brilha',
   path: '/reforco-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressaoRoute = ProgressaoRouteImport.update({
+  id: '/progressao',
+  path: '/progressao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Pre2Route = Pre2RouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
+  '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
+  '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/pre-2': typeof Pre2Route
+  '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
+    | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
+    | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/pre-2'
+    | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
@@ -218,6 +230,7 @@ export interface RootRouteChildren {
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
   Pre2Route: typeof Pre2Route
+  ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
   RotinaRoute: typeof RotinaRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/reforco-brilha'
       fullPath: '/reforco-brilha'
       preLoaderRoute: typeof ReforcoBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progressao': {
+      id: '/progressao'
+      path: '/progressao'
+      fullPath: '/progressao'
+      preLoaderRoute: typeof ProgressaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pre-2': {
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
   Pre2Route: Pre2Route,
+  ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
   RotinaRoute: RotinaRoute,
