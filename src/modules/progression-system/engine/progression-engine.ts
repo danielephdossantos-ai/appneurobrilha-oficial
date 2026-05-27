@@ -2,13 +2,13 @@ export class ProgressionEngine {
   static calculateMastery(success: number, total: number) {
     return total > 0 ? success / total : 0;
   }
-  static checkNeedForRecovery(stats: any) {
+  static checkNeedForRecovery(...args: any[]) {
     return false;
   }
-  static updateMastery(stats: any, performance: any) {
-    return stats;
+  static updateMastery(...args: any[]) {
+    return args[0];
   }
-  static scheduleNextReview(skillId: string) {
+  static scheduleNextReview(...args: any[]) {
     return new Date();
   }
 }
