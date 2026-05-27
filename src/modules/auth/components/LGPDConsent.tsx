@@ -11,6 +11,13 @@ export const LGPDConsent: React.FC = () => {
 
   useEffect(() => {
     const checkConsent = async () => {
+      const { data: { session } } = await AuthService.getSession();
+      if (!session) {
+        setShow(false);
+        setLoading(false);
+        return;
+      }
+      
       const settings = await AuthService.getPrivacySettings();
       if (!settings || !settings.terms_accepted) {
         setShow(true);
@@ -18,6 +25,16 @@ export const LGPDConsent: React.FC = () => {
       setLoading(false);
     };
     checkConsent();
+
+    const { data: { subscription } } = AuthService.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        checkConsent();
+      } else if (event === 'SIGNED_OUT') {
+        setShow(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleAccept = async () => {
