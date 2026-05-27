@@ -141,6 +141,16 @@ export const EarlyChildhoodDashboard = () => {
             </motion.div>
           )}
 
+          {activeSection === 'math-game' && selectedWorld && (
+            <motion.div key="math-game" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
+               <MathWorldContainer 
+                 worldId={selectedWorld} 
+                 profile={neuroProfile} 
+                 onExit={() => setActiveSection('math')} 
+               />
+            </motion.div>
+          )}
+
           {(activeSection === 'math' || activeSection === 'literacy') && (
              <motion.div key="system-demo" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white p-12 rounded-[3.5rem] shadow-xl">
                 <div className="flex justify-between items-center mb-12">
@@ -148,18 +158,35 @@ export const EarlyChildhoodDashboard = () => {
                     {activeSection === 'math' ? 'Matemática Inicial' : 'Alfabetização Neuroadaptativa'}
                   </h2>
                   <div className="flex gap-2">
-                    <span className="px-4 py-2 bg-indigo-100 text-indigo-600 rounded-xl font-bold">TEA</span>
-                    <span className="px-4 py-2 bg-yellow-100 text-yellow-600 rounded-xl font-bold">TDAH</span>
-                    <span className="px-4 py-2 bg-blue-100 text-blue-600 rounded-xl font-bold">DISLEXIA</span>
+                    {['Neurotipico', 'TEA', 'TDAH', 'Dislexia'].map(p => (
+                      <button 
+                        key={p}
+                        onClick={() => setNeuroProfile(p)}
+                        className={`px-4 py-2 rounded-xl font-bold transition-all ${
+                          neuroProfile === p ? 'bg-indigo-600 text-white shadow-lg' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                   {(activeSection === 'math' ? MATH_SYSTEM.worlds : LITERACY_SYSTEM.modules).map((m: any) => (
-                    <button key={m.id} className="p-8 bg-gray-50 rounded-3xl border-4 border-transparent hover:border-indigo-200 hover:bg-white transition-all text-left">
-                      <span className="text-4xl mb-4 block">{m.icon || '📘'}</span>
+                    <button 
+                      key={m.id} 
+                      onClick={() => {
+                        if (activeSection === 'math') {
+                          setSelectedWorld(m.id);
+                          setActiveSection('math-game');
+                        }
+                      }}
+                      className="p-8 bg-gray-50 rounded-3xl border-4 border-transparent hover:border-indigo-200 hover:bg-white transition-all text-left group"
+                    >
+                      <span className="text-4xl mb-4 block group-hover:scale-125 transition-transform duration-300">{m.icon || '📘'}</span>
                       <p className="font-black text-indigo-950 text-xl mb-1">{m.name}</p>
-                      <p className="text-gray-500 font-medium">{m.description || 'Explorar módulo'}</p>
+                      <p className="text-gray-500 font-medium">{m.description || 'Explorar mundo'}</p>
                     </button>
                   ))}
                 </div>
@@ -167,19 +194,20 @@ export const EarlyChildhoodDashboard = () => {
                 <div className="bg-indigo-50/50 p-8 rounded-[2.5rem] border-2 border-dashed border-indigo-100">
                    <h3 className="text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
                      <span className="w-2 h-6 bg-indigo-500 rounded-full" />
-                     Atividade Sugerida
+                     Treino Rápido: {activeSection === 'math' ? 'Contagem Visual' : 'Fonemas Base'}
                    </h3>
                    <SimplifiedSequence 
                       items={[
-                        { id: '1', content: '🍎' },
-                        { id: '2', content: '🍊' },
-                        { id: '3', content: '🍋' }
+                        { id: '1', content: activeSection === 'math' ? '1️⃣' : 'A' },
+                        { id: '2', content: activeSection === 'math' ? '2️⃣' : 'E' },
+                        { id: '3', content: activeSection === 'math' ? '3️⃣' : 'I' }
                       ]} 
-                      onComplete={(s) => alert(s ? 'Incrível! 🎉' : 'Tente mais uma vez! ❤️')} 
+                      onComplete={(s) => s && alert('Pronto para o próximo desafio! 🎉')} 
                     />
                 </div>
              </motion.div>
           )}
+
         </AnimatePresence>
       </main>
     </div>
