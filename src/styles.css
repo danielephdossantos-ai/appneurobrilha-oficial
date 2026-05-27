@@ -200,3 +200,42 @@
   width: calc(1.25rem * var(--visual-scale));
   height: calc(1.25rem * var(--visual-scale));
 }
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes celebrate {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(1.2) rotate(5deg); }
+  75% { transform: scale(1.2) rotate(-5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes yawn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05) translateY(-2px); opacity: 0.8; }
+}
+
+@keyframes progress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-celebrate {
+  animation: celebrate 0.5s ease-in-out infinite;
+}
+
+.animate-yawn {
+  animation: yawn 3s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-out forwards;
+}
