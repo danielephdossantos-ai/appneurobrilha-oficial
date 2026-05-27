@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 import { PedagogicalActivity } from "./types";
 
 export class PedagogyService {
@@ -26,7 +26,7 @@ export class PedagogyService {
     if (error) throw error;
     
     // Map snake_case from DB to camelCase for the app
-    return (data || []).map(item => ({
+    return (data || []).map((item: any) => ({
       id: item.id,
       titulo: item.titulo,
       serie: item.serie,
