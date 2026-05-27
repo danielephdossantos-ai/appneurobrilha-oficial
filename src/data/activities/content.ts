@@ -24,7 +24,7 @@ export const CONTENT_DATABASE: ContentItem[] = [
 
   // 5º Ano (Level 5)
   { id: "ef5-001", value: "A Floresta Amazônica é a maior floresta tropical do mundo.", type: "text", category: "interpretation", difficulty: 6, tags: ["interpretacao", "EF05LP01"] },
-  { id: "ef5-002", (value: "150 / 5"), type: "math", category: "math-op", difficulty: 6, tags: ["matematica", "EF05MA07"] },
+  { id: "ef5-002", value: "150 / 5", type: "math", category: "math-op", difficulty: 6, tags: ["matematica", "EF05MA07"] },
 
   // 9º Ano (Level 9)
   { id: "ef9-001", value: "x² - 5x + 6 = 0", type: "math", category: "math-advanced", difficulty: 9, tags: ["matematica", "EF09MA01"] },
