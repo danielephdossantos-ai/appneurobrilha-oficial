@@ -1,5 +1,5 @@
 
-import { MATH_ACTIVITIES, MathActivity } from '@/data/math/activities';
+import { ALL_MATH_ACTIVITIES, MathActivity } from '@/data/math/activities';
 import { NeuroProfile, NeuroEngine } from '../neuro/engine';
 
 export class MathGenerator {
