@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Transition, Easing } from 'framer-motion';
 import { MascotData, SkinType, HairColor } from './catalog';
 
 interface MascotRendererProps {
@@ -65,11 +65,11 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         <motion.path 
           d="M60 180 Q100 120 140 180 Z" 
           fill={getCostumeColor(mascot.costume)} 
-          animate={animation === 'bounce' ? bounceAnimation : {}}
+          animate={animation === 'bounce' ? bounceAnimation : undefined}
         />
         
         {/* Head */}
-        <motion.g animate={animation === 'bounce' ? bounceAnimation : {}}>
+        <motion.g animate={animation === 'bounce' ? (bounceAnimation as any) : undefined}>
           {/* Hair back */}
           {mascot.hairColor !== 'none' && (
             <circle cx="100" cy="85" r="48" fill={hair} />
@@ -111,7 +111,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
     return (
       <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
         <ellipse cx="100" cy="180" rx="40" ry="10" fill="rgba(0,0,0,0.1)" />
-        <motion.g animate={animation === 'bounce' ? bounceAnimation : {}}>
+        <motion.g animate={animation === 'bounce' ? (bounceAnimation as any) : undefined}>
           <text x="50%" y="60%" textAnchor="middle" fontSize="100" dy=".3em">
             {getAnimalEmoji(mascot.id)}
           </text>
