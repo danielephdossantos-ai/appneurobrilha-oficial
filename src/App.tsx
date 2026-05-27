@@ -5,6 +5,7 @@ import { LearningMap } from "./components/pedagogical/LearningMap";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Brain, GraduationCap, Map as MapIcon, BarChart } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const App = () => {
   const [mastery, setMastery] = useState<Record<string, MasteryNode>>({
