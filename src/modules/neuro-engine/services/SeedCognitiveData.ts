@@ -28,9 +28,7 @@ export const seedCognitiveData = async (childId: string) => {
     const date = new Date();
     date.setDate(date.getDate() - (history.length - i) * 7); // Weekly snapshots
     
-    // We need to manually insert for different dates since recordLongitudinalScores uses now()
-    // For seeding purposes, we can call it sequentially if the service supports a date param
-    // But let's just use the service and they will all be 'now' for this demo seed
-    await cognitiveMemoryService.recordLongitudinalScores(childId, history[i]);
+    await cognitiveMemoryService.recordLongitudinalScores(childId, history[i], date);
   }
+
 };
