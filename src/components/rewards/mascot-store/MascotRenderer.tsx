@@ -283,19 +283,38 @@ function renderAccessory(mascot: MascotData) {
 
   switch (acc) {
     case 'lightning-bolt':
-      return <path d="M100 145 L115 165 L105 165 L120 185" fill="#FFEB3B" stroke="#1A1A40" strokeWidth="2" />;
+      return (
+        <motion.path 
+          d="M100 150 L115 170 L105 170 L120 190" 
+          fill="#FFEB3B" 
+          stroke="#1A1A40" 
+          strokeWidth="3" 
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+      );
     case 'glasses':
       return (
-        <g transform="translate(100, 95)" opacity="0.8">
-          <circle cx="-28" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="3" />
-          <circle cx="28" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="3" />
-          <line x1="-6" y1="-5" x2="6" y2="-5" stroke="#1A1A40" strokeWidth="3" />
+        <g transform="translate(100, 95)">
+          <circle cx="-32" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="4" />
+          <circle cx="32" cy="-5" r="22" fill="none" stroke="#1A1A40" strokeWidth="4" />
+          <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#1A1A40" strokeWidth="4" />
         </g>
       );
     case 'helmet':
-      return <circle cx="100" cy="90" r="75" fill="none" stroke="white" strokeWidth="3" strokeDasharray="12 6" opacity="0.6" />;
+      return (
+        <g>
+          <circle cx="100" cy="90" r="75" fill="none" stroke="white" strokeWidth="4" strokeDasharray="10 5" opacity="0.5" />
+          <path d="M60 40 Q100 20 140 40" fill="none" stroke="white" strokeWidth="4" opacity="0.3" />
+        </g>
+      );
     case 'tiara':
-      return <path d="M75 40 L100 15 L125 40 Z" fill="#FFD54F" stroke="#1A1A40" strokeWidth="2" />;
+      return (
+        <g transform="translate(100, 35)">
+          <path d="M-25 0 L0 -25 L25 0 Z" fill="#FFD54F" stroke="#1A1A40" strokeWidth="3" />
+          <circle cx="0" cy="-25" r="5" fill="#FF5252" stroke="#1A1A40" strokeWidth="2" />
+        </g>
+      );
     default:
       return null;
   }
