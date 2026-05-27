@@ -1,34 +1,22 @@
-import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { Persister } from '@tanstack/react-query-persist-client';
 import { get, set, del } from 'idb-keyval';
 
 /**
- * Custom storage engine for TanStack Query persistence using IndexedDB
+ * Async persister for TanStack Query using IndexedDB via idb-keyval
  */
-export const idbStorage = {
-  getItem: async (key: string) => {
-    return await get(key);
-  },
-  setItem: async (key: string, value: string) => {
-    await set(key, value);
-  },
-  removeItem: async (key: string) => {
-    await del(key);
-  },
+export const createIDBPersister = (idbKey: string = 'react-query-cache'): Persister => {
+  return {
+    persistClient: async (client) => {
+      await set(idbKey, client);
+    },
+    restoreClient: async () => {
+      return await get(idbKey);
+    },
+    removeClient: async () => {
+      await del(idbKey);
+    },
+  };
 };
 
-export const persister = createSyncStoragePersister({
-  storage: {
-    getItem: (key) => {
-      // IndexedDB is async, but createSyncStoragePersister expects sync
-      // However, we can use it with a custom persister if needed or just handle the promise
-      // Actually, for sync storage, we might need a workaround or use a different persister
-      return localStorage.getItem(key);
-    },
-    setItem: (key, value) => {
-      localStorage.setItem(key, value);
-    },
-    removeItem: (key) => {
-      localStorage.removeItem(key);
-    },
-  },
-});
+export const persister = createIDBPersister();
+
