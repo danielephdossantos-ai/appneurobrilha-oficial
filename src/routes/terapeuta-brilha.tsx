@@ -81,11 +81,20 @@ function Terapeuta() {
         </div>
 
         <div className="flex gap-2">
-          <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()}
+          <input 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            onKeyDown={(e) => e.key === "Enter" && send()}
+            disabled={isLoading}
             placeholder="Pergunte alguma coisa…"
-            className="flex-1 p-3 rounded-xl bg-input border border-border font-medium" />
-          <button onClick={send} className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 font-bold">
-            <Send className="h-5 w-5" />
+            className="flex-1 p-3 rounded-xl bg-input border border-border font-medium disabled:opacity-50" 
+          />
+          <button 
+            onClick={send} 
+            disabled={isLoading}
+            className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 font-bold disabled:opacity-50"
+          >
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
           </button>
         </div>
       </Card>
