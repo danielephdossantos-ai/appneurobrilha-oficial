@@ -15,14 +15,33 @@ function Terapeuta() {
   ]);
   const [input, setInput] = useState("");
 
-  const send = () => {
-    if (!input.trim()) return;
+  const send = async () => {
+    if (!input.trim() || !activeChild) return;
     const q = input;
-    setMsgs((m) => [...m, { role: "user", t: q }]);
+    const newMsgs = [...msgs, { role: "user" as const, t: q }];
+    setMsgs(newMsgs);
     setInput("");
-    setTimeout(() => {
-      setMsgs((m) => [...m, { role: "ai", t: `Considerando que ${activeChild?.nome} tem perfil ${activeChild?.diagnostico.toUpperCase()} e adora ${activeChild?.hiperfoco}, uma estratégia útil é começar pelo interesse dela. (Demo: aqui conectaríamos no IA Gateway com o perfil neuro como contexto.)` }]);
-    }, 700);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: { 
+          mode: "terapeuta", 
+          child: activeChild,
+          message: q,
+          chatHistory: msgs.map(m => ({ 
+            role: m.role === "ai" ? "assistant" : "user", 
+            content: m.t 
+          }))
+        }
+      });
+
+      if (error) throw error;
+      
+      setMsgs([...newMsgs, { role: "ai", t: data }]);
+    } catch (err) {
+      console.error(err);
+      setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes! 💚" }]);
+    }
   };
 
   const sugestoes = [
