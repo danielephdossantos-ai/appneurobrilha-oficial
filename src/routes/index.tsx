@@ -92,7 +92,7 @@ function Index() {
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-muted-foreground">Estilo de Instrução:</span>
-                <span className="font-bold capitalize">{engine.adaptive.instructionStyle}</span>
+                <span className="font-bold capitalize">{engine.adaptive.instructionType}</span>
               </div>
               <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-primary/10">
                 <div className="flex flex-col">
