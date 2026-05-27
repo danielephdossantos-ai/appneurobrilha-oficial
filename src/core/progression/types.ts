@@ -7,7 +7,7 @@ export interface SkillMastery {
   mastery_level: number;
   total_attempts: number;
   success_rate: number;
-  last_attempt_at: string;
+  last_attempt_at: string | null;
 }
 
 export interface LearningTrail {
@@ -38,5 +38,5 @@ export interface ProgressionStats {
   evolution_percentage: number;
   activities_completed: number;
   current_streak: number;
-  last_activity_at: string;
+  last_activity_at: string | null;
 }
