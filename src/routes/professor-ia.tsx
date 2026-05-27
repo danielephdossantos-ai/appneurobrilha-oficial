@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState, useRef } from "react";
-import { Camera, Upload, Loader2, BookOpen, CheckCircle2, RotateCcw, Sparkles, Play, Youtube } from "lucide-react";
+import { Camera, Upload, Loader2, BookOpen, CheckCircle2, RotateCcw, Sparkles, Play, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -193,7 +193,7 @@ function ProfessorIA() {
 
                 <div>
                   <h4 className="font-bold flex items-center gap-2 mb-3">
-                    <Youtube className="h-5 w-5 text-destructive" /> Aprenda com vídeo
+                    <Video className="h-5 w-5 text-destructive" /> Aprenda com vídeo
                   </h4>
                   <a 
                     href={`https://www.youtube.com/results?search_query=${encodeURIComponent(analise.video_tema + " para crianças")}`}
