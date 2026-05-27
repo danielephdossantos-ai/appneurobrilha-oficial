@@ -44,6 +44,8 @@ function Terapeuta() {
     } catch (err) {
       console.error(err);
       setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes! 💚" }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
