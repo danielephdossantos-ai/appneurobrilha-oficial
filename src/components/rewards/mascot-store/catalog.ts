@@ -41,9 +41,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'white',
     hairColor: 'blonde',
     costume: 'superhero',
-    description: 'Rápido como um trovão e amigável como um abraço!',
+    description: 'Rápido como um trovão e amigável como um abraço! Ele adora correr e ajudar todo mundo.',
     rarity: 'raro',
-    personality: 'Energético',
+    personality: 'Energético e Veloz',
     details: { eyeColor: '#4A90E2', accessory: 'lightning-bolt' }
   },
   {
@@ -54,9 +54,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'brown',
     hairColor: 'black',
     costume: 'superhero',
-    description: 'Ele protege a noite com muita coragem.',
+    description: 'Ele protege a noite com muita coragem e silêncio. Um mestre dos esconderijos!',
     rarity: 'epico',
-    personality: 'Corajoso',
+    personality: 'Corajoso e Misterioso',
     details: { eyeColor: '#9B51E0', accessory: 'lightning-bolt' }
   },
   {
@@ -67,9 +67,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'light',
     hairColor: 'red',
     costume: 'superhero',
-    description: 'Seu coração é quente e cheio de alegria!',
+    description: 'Seu coração é quente e cheio de alegria! Ele sempre tem uma ideia brilhante.',
     rarity: 'raro',
-    personality: 'Entusiasmado',
+    personality: 'Entusiasmado e Caliente',
     details: { eyeColor: '#FF5252', accessory: 'lightning-bolt' }
   },
   {
@@ -80,9 +80,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'dark',
     hairColor: 'black',
     costume: 'superhero',
-    description: 'Voando alto para espalhar sorrisos.',
+    description: 'Voando alto para espalhar sorrisos entre as nuvens. Ele vê o mundo lá de cima!',
     rarity: 'lendario',
-    personality: 'Sonhador',
+    personality: 'Sonhador e Gentil',
     details: { eyeColor: '#4A90E2', accessory: 'lightning-bolt' }
   },
 
@@ -95,9 +95,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'white',
     hairColor: 'blonde',
     costume: 'fairy',
-    description: 'Mágica, doce e adora flores!',
+    description: 'Mágica, doce e adora flores! Com sua varinha, ela faz o jardim brilhar.',
     rarity: 'epico',
-    personality: 'Gentil',
+    personality: 'Gentil e Encantadora',
     details: { eyeColor: '#FF69B4', accessory: 'tiara' }
   },
   {
@@ -108,9 +108,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'brown',
     hairColor: 'black',
     costume: 'princess',
-    description: 'Uma princesa que adora ler histórias.',
+    description: 'Uma princesa que adora ler histórias para seus súditos de pelúcia.',
     rarity: 'raro',
-    personality: 'Sábia',
+    personality: 'Sábia e Elegante',
     details: { eyeColor: '#9B51E0', accessory: 'tiara' }
   },
   {
@@ -121,9 +121,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'light',
     hairColor: 'red',
     costume: 'superhero',
-    description: 'Brilhando forte para ajudar a todos.',
+    description: 'Brilhando forte para ajudar a todos. Ela é a estrela guia dos seus amigos.',
     rarity: 'epico',
-    personality: 'Brilhante',
+    personality: 'Brilhante e Determinada',
     details: { eyeColor: '#FFD700', accessory: 'lightning-bolt' }
   },
   {
@@ -134,9 +134,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'dark',
     hairColor: 'black',
     costume: 'fairy',
-    description: 'Flutuando com alegria e paz.',
+    description: 'Flutuando com alegria e paz. Ela traz sonhos tranquilos para todas as crianças.',
     rarity: 'lendario',
-    personality: 'Calma',
+    personality: 'Calma e Serena',
     details: { eyeColor: '#4A90E2', accessory: 'tiara' }
   },
 
@@ -147,9 +147,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'dog',
-    description: 'O melhor amigo que você pode ter!',
+    description: 'O melhor amigo que você pode ter! Ele late de alegria sempre que te vê.',
     rarity: 'comum',
-    personality: 'Leal',
+    personality: 'Leal e Brincalhão',
     details: { eyeColor: '#795548' }
   },
   {
@@ -158,9 +158,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'cat',
-    description: 'Adora brincar com novelos de lã coloridos.',
+    description: 'Adora brincar com novelos de lã coloridos e tirar sonecas ao sol.',
     rarity: 'comum',
-    personality: 'Curiosa',
+    personality: 'Curiosa e Independente',
     details: { eyeColor: '#F5A623' }
   },
   {
@@ -169,9 +169,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'bear',
-    description: 'Seus abraços curam qualquer tristeza.',
+    description: 'Seus abraços curam qualquer tristeza. Ele é o mais fofinho da floresta.',
     rarity: 'raro',
-    personality: 'Acolhedor',
+    personality: 'Acolhedor e Carinhoso',
     details: { eyeColor: '#8D6E63' }
   },
   {
@@ -180,20 +180,20 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'dino',
-    description: 'Um dinossaurinho que adora frutas!',
+    description: 'Um dinossaurinho que adora frutas! Ele não é nada assustador, só quer brincar.',
     rarity: 'raro',
-    personality: 'Divertido',
+    personality: 'Divertido e Guloso',
     details: { eyeColor: '#4CAF50' }
   },
   {
     id: 'panda-pandi',
-    name: 'Pandi',
+    name: 'Pandi Panda',
     category: 'animais',
     type: 'animal',
     costume: 'bear',
-    description: 'Fofinho, gordinho e muito comilão.',
+    description: 'Fofinho, gordinho e muito comilão. Adora bambu e rolar na grama.',
     rarity: 'epico',
-    personality: 'Tranquilo',
+    personality: 'Tranquilo e Preguiçoso',
     details: { eyeColor: '#1A1A40' }
   },
   {
@@ -202,9 +202,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'cat',
-    description: 'Esperta e muito rápida nas brincadeiras.',
+    description: 'Esperta e muito rápida nas brincadeiras. Ela sempre encontra o melhor caminho.',
     rarity: 'epico',
-    personality: 'Esperta',
+    personality: 'Esperta e Ágil',
     details: { eyeColor: '#FF5252' }
   },
   {
@@ -213,9 +213,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'penguin',
-    description: 'Deslizando no gelo com muita alegria.',
+    description: 'Deslizando no gelo com muita alegria. Ele adora mergulhar e pescar peixinhos.',
     rarity: 'raro',
-    personality: 'Brincalhão',
+    personality: 'Brincalhão e Atrapalhado',
     details: { eyeColor: '#4A90E2' }
   },
   {
@@ -224,9 +224,9 @@ export const MASCOTS: MascotData[] = [
     category: 'animais',
     type: 'animal',
     costume: 'unicorn',
-    description: 'Um unicórnio que traz cores ao mundo.',
+    description: 'Um unicórnio que traz cores ao mundo. Onde ele passa, nasce um arco-íris!',
     rarity: 'lendario',
-    personality: 'Mágico',
+    personality: 'Mágico e Radiante',
     details: { eyeColor: '#BA68C8' }
   },
 
@@ -237,9 +237,9 @@ export const MASCOTS: MascotData[] = [
     category: 'especiais',
     type: 'robot',
     costume: 'robot',
-    description: 'Sempre pronto para calcular novas aventuras!',
+    description: 'Sempre pronto para calcular novas aventuras! Ele tem um processador de alegria.',
     rarity: 'raro',
-    personality: 'Inteligente',
+    personality: 'Inteligente e Lógico',
     details: { eyeColor: '#00D1FF' }
   },
   {
@@ -250,9 +250,9 @@ export const MASCOTS: MascotData[] = [
     skin: 'dark',
     hairColor: 'black',
     costume: 'astronaut',
-    description: 'Explorando as estrelas da imaginação.',
+    description: 'Explorando as estrelas da imaginação com seu traje espacial brilhante.',
     rarity: 'lendario',
-    personality: 'Aventureiro',
+    personality: 'Aventureiro e Curioso',
     details: { eyeColor: '#FFFFFF', accessory: 'helmet' }
   }
 ];
