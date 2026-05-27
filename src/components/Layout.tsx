@@ -4,7 +4,7 @@ import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera
+  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
