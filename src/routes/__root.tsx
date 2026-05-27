@@ -113,6 +113,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
         <Outlet />
+        <LGPDConsent />
       </AuthGuard>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
@@ -123,6 +124,8 @@ import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
+import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
@@ -130,8 +133,30 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setLoading(false);
+      
+      if (!session && location.pathname !== "/auth") {
+        navigate({ to: "/auth" });
+      } else if (session && location.pathname === "/auth") {
+        navigate({ to: "/" });
+      }
+    };
+
+    checkSession();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setLoading(false);
+      
+      if (event === 'SIGNED_IN' && session) {
+        AuditLogService.log({
+          action: 'LOGIN_SUCCESS',
+          module: 'AUTH',
+          metadata: { method: 'password' }
+        });
+      }
+
       if (!session && location.pathname !== "/auth") {
         navigate({ to: "/auth" });
       } else if (session && location.pathname === "/auth") {
@@ -142,7 +167,13 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [location.pathname, navigate]);
 
-  if (loading) return null; // Or a loading spinner
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-sidebar">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return <>{children}</>;
 }
