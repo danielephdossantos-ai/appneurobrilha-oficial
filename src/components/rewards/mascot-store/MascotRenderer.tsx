@@ -52,6 +52,15 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
     }
   };
 
+  const smileAnimation = {
+    d: ["M-10 15 Q0 25 10 15", "M-12 15 Q0 30 12 15", "M-10 15 Q0 25 10 15"],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   const renderHuman = () => {
     const skin = SKIN_COLORS[mascot.skin || 'light'];
     const hair = HAIR_COLORS[mascot.hairColor || 'none'];
@@ -88,7 +97,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
             </motion.g>
             
             {/* Mouth */}
-            <path d="M-10 15 Q0 25 10 15" fill="none" stroke="#D32F2F" strokeWidth="3" strokeLinecap="round" />
+            <motion.path animate={smileAnimation} fill="none" stroke="#D32F2F" strokeWidth="3" strokeLinecap="round" />
             
             {/* Cheeks */}
             <circle cx="-25" cy="10" r="5" fill="#FF80AB" fillOpacity="0.4" />
