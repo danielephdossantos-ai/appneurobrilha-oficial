@@ -15,7 +15,18 @@ interface DashboardHeaderProps {
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade, childId }) => {
-  return (
+  const { sendNotification } = useNotifications();
+
+  const handleStudyReminder = () => {
+    if (!childId) return;
+    sendNotification({
+      child_id: childId,
+      title: `${studentName}, hora de brilhar!`,
+      message: "Mamãe mandou um lembrete: que tal estudar um pouquinho agora?",
+      type: 'estudo'
+    });
+    toast.success("Lembrete enviado com sucesso!");
+  };
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
       <div className="flex items-center gap-4">
         <Avatar className="h-16 w-16 border-2 border-primary/20">
