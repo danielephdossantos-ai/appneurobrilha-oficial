@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp } from "lucide-react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar } from "lucide-react";
 import { useAppState } from "@/lib/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
@@ -11,6 +11,10 @@ import { ProgressionService } from "@/core/progression/service";
 import { ProgressionEngine } from "@/modules/progression-system/engine/progression-engine";
 import { ProgressionStats, SkillMastery } from "@/core/progression/types";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export const Route = createFileRoute("/reforco-brilha")({
   component: ReforcoBrilha,
@@ -34,6 +38,24 @@ function ReforcoBrilha() {
   const [skills, setSkills] = useState<SkillMastery[]>([]);
   const [pendingReviews, setPendingReviews] = useState<any[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
+  const queryClient = useQueryClient();
+
+  const { data: agenda = [] } = useQuery({
+    queryKey: ["study_agenda", activeChild?.id],
+    queryFn: async () => {
+      if (!activeChild) return [];
+      const { data, error } = await supabase
+        .from("study_agenda")
+        .select("*")
+        .eq("child_id", activeChild.id)
+        .eq("completed", false)
+        .order("exam_date", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!activeChild,
+  });
 
   useEffect(() => {
     if (activeChild) {
@@ -160,7 +182,45 @@ function ReforcoBrilha() {
             <p className="text-xs text-muted-foreground mt-3 italic">
               A mãe escreve o tema e a IA do Reforço Brilha cria a aula perfeita.
             </p>
-          </Card>
+            </Card>
+
+          {agenda.length > 0 && (
+            <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
+              <h3 className="text-sm font-bold flex items-center gap-2 px-1 text-indigo-600">
+                <Calendar className="h-4 w-4" />
+                PLANO DE ESTUDOS DA SEMANA (DEFINIDO PELA MÃE)
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {agenda.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => startLesson(item.topic)}
+                    className="p-5 rounded-[2rem] bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-100/50 transition-all text-left flex items-start gap-4 group"
+                  >
+                    <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      {item.type === 'prova' ? '🚩' : item.type === 'trabalho' ? '📝' : '📖'}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">
+                          {item.type}
+                        </span>
+                        {item.exam_date && (
+                          <span className="text-[10px] text-indigo-400 font-bold">
+                            {format(new Date(item.exam_date + 'T12:00:00'), "dd/MM", { locale: ptBR })}
+                          </span>
+                        )}
+                      </div>
+                      <div className="font-extrabold text-slate-800 text-lg">{item.topic}</div>
+                      <div className="mt-2 flex items-center gap-1.5 text-indigo-600 font-bold text-xs">
+                        ESTUDAR AGORA <ArrowRight className="h-3 w-3" />
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {pendingReviews.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
