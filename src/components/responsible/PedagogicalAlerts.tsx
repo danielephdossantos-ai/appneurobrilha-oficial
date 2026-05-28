@@ -1,10 +1,12 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight, ShieldAlert } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight, ShieldAlert, Bell } from "lucide-react";
 import { PedagogicalAlert } from "../../data/responsible/mock-data";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { supabase } from "@/integrations/supabase/client";
+import { useNotifications } from "@/hooks/useNotifications";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface PedagogicalAlertsProps {
   alerts: PedagogicalAlert[];
