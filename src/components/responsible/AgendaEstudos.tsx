@@ -7,6 +7,7 @@ import { Calendar, Plus, Trash2, CheckCircle2, AlertCircle, Clock, BookOpen, Cal
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useNotifications } from "@/hooks/useNotifications";
 
 interface AgendaEstudosProps {
   childId: string;
