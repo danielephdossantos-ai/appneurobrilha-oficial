@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { NotificationBell } from "./NotificationBell";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
