@@ -15,7 +15,6 @@ import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as ProfessorIaRouteImport } from './routes/professor-ia'
-import { Route as Pre2RouteImport } from './routes/pre-2'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
@@ -25,7 +24,6 @@ import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
-import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
@@ -59,11 +57,6 @@ const ProgressaoRoute = ProgressaoRouteImport.update({
 const ProfessorIaRoute = ProfessorIaRouteImport.update({
   id: '/professor-ia',
   path: '/professor-ia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Pre2Route = Pre2RouteImport.update({
-  id: '/pre-2',
-  path: '/pre-2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PainelPaisRoute = PainelPaisRouteImport.update({
@@ -111,11 +104,6 @@ const AmigoVirtualRoute = AmigoVirtualRouteImport.update({
   path: '/amigo-virtual',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
-  id: '/alfabetizacao',
-  path: '/alfabetizacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AgendaRoute = AgendaRouteImport.update({
   id: '/agenda',
   path: '/agenda',
@@ -141,7 +129,6 @@ const AjusteDificuldadesChildIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
@@ -151,7 +138,6 @@ export interface FileRoutesByFullPath {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/pre-2': typeof Pre2Route
   '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -164,7 +150,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
@@ -174,7 +159,6 @@ export interface FileRoutesByTo {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/pre-2': typeof Pre2Route
   '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -188,7 +172,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
@@ -198,7 +181,6 @@ export interface FileRoutesById {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/pre-2': typeof Pre2Route
   '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -213,7 +195,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agenda'
-    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auth'
@@ -223,7 +204,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/pre-2'
     | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
@@ -236,7 +216,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agenda'
-    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auth'
@@ -246,7 +225,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/pre-2'
     | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
@@ -259,7 +237,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agenda'
-    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auth'
@@ -269,7 +246,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/pre-2'
     | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
@@ -283,7 +259,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
-  AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuthRoute: typeof AuthRoute
@@ -293,7 +268,6 @@ export interface RootRouteChildren {
   Jornada365Route: typeof Jornada365Route
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
-  Pre2Route: typeof Pre2Route
   ProfessorIaRoute: typeof ProfessorIaRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
@@ -346,13 +320,6 @@ declare module '@tanstack/react-router' {
       path: '/professor-ia'
       fullPath: '/professor-ia'
       preLoaderRoute: typeof ProfessorIaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pre-2': {
-      id: '/pre-2'
-      path: '/pre-2'
-      fullPath: '/pre-2'
-      preLoaderRoute: typeof Pre2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/painel-pais': {
@@ -418,13 +385,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AmigoVirtualRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/alfabetizacao': {
-      id: '/alfabetizacao'
-      path: '/alfabetizacao'
-      fullPath: '/alfabetizacao'
-      preLoaderRoute: typeof AlfabetizacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/agenda': {
       id: '/agenda'
       path: '/agenda'
@@ -459,7 +419,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
-  AlfabetizacaoRoute: AlfabetizacaoRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuthRoute: AuthRoute,
@@ -469,7 +428,6 @@ const rootRouteChildren: RootRouteChildren = {
   Jornada365Route: Jornada365Route,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
-  Pre2Route: Pre2Route,
   ProfessorIaRoute: ProfessorIaRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
@@ -482,3 +440,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
