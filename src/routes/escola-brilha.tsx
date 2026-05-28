@@ -214,14 +214,42 @@ function AulaView({
 }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const [isReading, setIsReading] = useState(false);
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  const titulos: Record<string, string> = {
-    ensino: "📖 Aula",
-    demo: "🎨 Demonstração",
-    opcoes: "✨ Sua vez!",
+  const toggleReading = (text: string) => {
+    if (isReading) {
+      window.speechSynthesis.cancel();
+      setIsReading(false);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "pt-BR";
+    utterance.rate = 0.9; // Friendly slower pace
+    utterance.pitch = 1.2; // Friendly higher pitch
+    
+    utterance.onend = () => setIsReading(false);
+    utterance.onerror = () => setIsReading(false);
+    
+    speechRef.current = utterance;
+    setIsReading(true);
+    window.speechSynthesis.speak(utterance);
   };
 
-  // Se for sistema, pegamos o conteúdo do nível atual
+  useEffect(() => {
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const titulos: Record<string, string> = {
+    ensino: "📖 Vamos Aprender",
+    demo: "🎨 Exemplo Prático",
+    opcoes: "✨ Sua Vez!",
+  };
+
   const steps = (aula.isSystem && aula.levels) ? (aula.levels[currentLevel] || []) : [];
   const explanation = aula.isSystem ? steps.find((s: any) => s.type === "explanation")?.text : (aula.ensino || aula.explanation);
   const example = aula.isSystem ? steps.find((s: any) => s.type === "example")?.text : (aula.demo || "");
@@ -229,155 +257,163 @@ function AulaView({
 
   return (
     <Shell>
-      <PageHeader 
-        emoji="🎓" 
-        title={aula.isSystem ? aula.title : titulos[aula.etapa]} 
-        subtitle={aula.isSystem ? "Sistema BNCC Ativo" : `${(aula.materia || "Geral").charAt(0).toUpperCase() + (aula.materia || "Geral").slice(1)} · Adaptado para você`} 
-      />
-
-      {aula.isSystem && (
-        <div className="flex p-1 bg-white/50 backdrop-blur-sm rounded-2xl mb-6 border border-white max-w-md mx-auto">
-          {(["basic", "intermediate", "advanced"] as const).map((lvl) => (
-            <button
-              key={lvl}
-              onClick={() => {
-                setCurrentLevel(lvl);
-                setAcertou(null);
-                setTentativa(null);
-              }}
-              className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
-                currentLevel === lvl 
-                ? "bg-primary text-white shadow-glow scale-105" 
-                : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
-              }`}
+      <div className="max-w-4xl mx-auto pb-20">
+        <div className="flex justify-between items-center mb-6">
+          <button onClick={() => setAula(null)} className="btn-tap flex items-center gap-2 text-slate-500 font-bold hover:text-primary transition-colors">
+            ← Voltar
+          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => toggleReading(explanation + (example ? ". Exemplo: " + example : ""))}
+              className={`btn-tap h-12 w-12 rounded-2xl flex items-center justify-center transition-all ${isReading ? "bg-destructive text-white animate-pulse" : "bg-primary/10 text-primary hover:bg-primary/20"}`}
+              title={isReading ? "Parar leitura" : "Ouvir professor"}
             >
-              {lvl === "basic" && <Zap className="h-3 w-3" />}
-              {lvl === "intermediate" && <Star className="h-3 w-3" />}
-              {lvl === "advanced" && <Trophy className="h-3 w-3" />}
-              {lvl === "basic" ? "Fácil" : lvl === "intermediate" ? "Médio" : "Mestre"}
+              {isReading ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
             </button>
-          ))}
+            <div className="hidden sm:flex flex-col items-end">
+              <span className="text-[10px] font-black text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full mb-1">
+                SISTEMA BNCC ATIVO
+              </span>
+              <span className="text-xs text-muted-foreground font-medium">Modo Escola Adaptativa</span>
+            </div>
+          </div>
         </div>
-      )}
 
-      <Card className="mb-4">
-        {!aula.isSystem && (
-          <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
-            <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
-            <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
-            <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "opcoes" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>3. Opções</span>
+        <PageHeader 
+          emoji="🎓" 
+          title={aula.isSystem ? aula.title.replace("[ESCOLA BRILHA] ", "") : titulos[aula.etapa]} 
+          subtitle={aula.bnccCode ? `Habilidade ${aula.bnccCode}` : "Conteúdo Pedagógico Estruturado"} 
+        />
+
+        {aula.isSystem && (
+          <div className="flex p-1.5 bg-slate-100/50 backdrop-blur-md rounded-[2rem] mb-8 border border-white shadow-inner max-w-sm mx-auto overflow-hidden">
+            {(["basic", "intermediate", "advanced"] as const).map((lvl) => (
+              <button
+                key={lvl}
+                onClick={() => {
+                  setCurrentLevel(lvl);
+                  setAcertou(null);
+                  setTentativa(null);
+                  window.speechSynthesis.cancel();
+                  setIsReading(false);
+                }}
+                className={`flex-1 py-3 px-4 rounded-[1.5rem] text-xs font-black transition-all flex items-center justify-center gap-2 ${
+                  currentLevel === lvl 
+                  ? "bg-white text-primary shadow-soft scale-100" 
+                  : "text-slate-400 hover:text-slate-600"
+                }`}
+              >
+                {lvl === "basic" ? "FÁCIL" : lvl === "intermediate" ? "MÉDIO" : "MESTRE"}
+              </button>
+            ))}
           </div>
         )}
 
-        {(aula.etapa === "ensino" || aula.isSystem) && (
-          <div className="animate-in fade-in duration-500">
-            <div className="aspect-video rounded-3xl bg-gradient-to-br from-primary/20 via-sky/10 to-transparent grid place-items-center mb-6 relative overflow-hidden border-2 border-primary/5">
-              <div className="text-9xl animate-bounce-short">
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <Card className="overflow-hidden border-none shadow-soft-xl bg-white/80 backdrop-blur-md">
+            <div className="aspect-[21/9] bg-gradient-to-br from-primary/10 via-sky/5 to-transparent flex items-center justify-center relative">
+              <div className="text-8xl animate-bounce-short select-none">
                 {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
               </div>
-              <div className="absolute inset-0 bg-grid-slate-100/[0.05] bg-[center_top_-1px]"></div>
+              <div className="absolute inset-0 bg-grid-slate-900/[0.02] [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             </div>
             
-            <div className="bg-white/40 p-6 rounded-2xl border border-white/60 mb-6">
-              <h3 className="font-black text-primary uppercase tracking-widest text-xs mb-2">Explicação do Professor</h3>
-              <p className="text-2xl leading-relaxed font-black text-slate-800">
-                {explanation}
+            <div className="p-8 sm:p-10">
+              <div className="space-y-8">
+                <section>
+                  <h3 className="font-black text-primary uppercase tracking-[0.2em] text-[10px] mb-4 flex items-center gap-2">
+                    <BookOpen className="h-3 w-3" /> EXPLICAÇÃO DO PROFESSOR
+                  </h3>
+                  <p className="text-2xl sm:text-3xl leading-relaxed font-black text-slate-800">
+                    {explanation}
+                  </p>
+                </section>
+
+                {example && (
+                  <section className="bg-slate-50 p-6 sm:p-8 rounded-[2rem] border border-slate-100">
+                    <h3 className="font-black text-slate-400 uppercase tracking-[0.2em] text-[10px] mb-4">EXEMPLO PRÁTICO</h3>
+                    <div className="text-xl font-bold text-slate-600 italic leading-relaxed">
+                      "{example}"
+                    </div>
+                  </section>
+                )}
+              </div>
+            </div>
+          </Card>
+
+          {(aula.etapa === "opcoes" || (aula.isSystem && exercise)) && (
+            <Card className="p-8 sm:p-10 border-none shadow-soft-xl bg-white/80 backdrop-blur-md">
+              <h3 className="font-black text-primary uppercase tracking-[0.2em] text-[10px] mb-6 flex items-center gap-2">
+                <Zap className="h-3 w-3" /> DESAFIO DO BRILHO
+              </h3>
+              <p className="text-2xl mb-10 font-black text-slate-800 leading-tight">
+                {aula.isSystem ? (exercise?.text || "Qual a resposta correta?") : aula.pergunta}
               </p>
-            </div>
-
-            {example && (
-              <div className="bg-secondary/30 p-6 rounded-2xl border border-secondary/50 mb-6">
-                <h3 className="font-black text-secondary-foreground uppercase tracking-widest text-xs mb-2">Exemplo Prático</h3>
-                <div className="text-xl font-bold text-slate-700 italic">
-                  "{example}"
-                </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {(aula.isSystem ? (exercise?.content?.options || ["Opção A", "Opção B", "Opção C", "Opção D"]) : (aula.opcoes || [])).map((opt: string) => (
+                  <button 
+                    key={opt} 
+                    onClick={() => {
+                      setTentativa(opt);
+                      const isCorrect = aula.isSystem ? opt === (exercise?.content?.answer || "Opção B") : opt === aula.resposta_correta;
+                      setAcertou(isCorrect);
+                      if (isCorrect) {
+                        toast.success("Incrível! Você acertou!", { icon: "🌟" });
+                      }
+                    }}
+                    disabled={acertou === true}
+                    className={`btn-tap p-6 rounded-[2rem] text-xl font-black border-4 transition-all text-left shadow-soft ${
+                      tentativa === opt 
+                        ? (acertou ? "border-success bg-success/10 text-success shadow-glow-success" : "border-destructive bg-destructive/5 text-destructive")
+                        : "border-slate-50 bg-slate-50 hover:border-primary/20 hover:bg-white"
+                    }`}>
+                    {opt}
+                  </button>
+                ))}
               </div>
-            )}
 
-            {!aula.isSystem && (
-              <div className="mt-6 flex gap-2 flex-wrap">
-                <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg shadow-glow">
-                  Continuar →
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {(aula.etapa === "demo" && !aula.isSystem) && (
-          <div className="animate-in slide-in-from-right-4 duration-500">
-            <h3 className="text-lg font-bold mb-4">Veja alguns exemplos:</h3>
-            <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
-              {aula.demo}
-            </div>
-            <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg shadow-glow">
-              Estou pronto para o desafio!
-            </button>
-          </div>
-        )}
-
-        {(aula.etapa === "opcoes" || (aula.isSystem && exercise)) && (
-          <div className="animate-in slide-in-from-bottom-4 duration-500 mt-8 pt-8 border-t border-slate-100">
-            <p className="text-2xl mb-8 font-black text-slate-800">
-              {aula.isSystem ? exercise.text : aula.pergunta}
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(aula.isSystem ? ["Opção A", "Opção B", "Opção C", "Opção D"] : (aula.opcoes || [])).map((opt: string) => (
-                <button 
-                  key={opt} 
-                  onClick={() => {
-                    setTentativa(opt);
-                    // No modo sistema, vamos simular acerto na Opção B para teste ou se houver resposta_correta
-                    const isCorrect = aula.isSystem ? opt === "Opção B" : opt === aula.resposta_correta;
-                    setAcertou(isCorrect);
-                  }}
-                  disabled={acertou === true}
-                  className={`btn-tap p-6 rounded-[2rem] text-xl font-black border-4 transition-all text-left shadow-soft ${
-                    tentativa === opt 
-                      ? (acertou ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
-                      : "border-slate-100 bg-slate-50 hover:border-primary/40 hover:bg-white"
-                  }`}>
-                  {opt}
-                </button>
-              ))}
-            </div>
-
-            {acertou === true && (
-              <div className="mt-8 p-8 rounded-[2.5rem] bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-xl animate-bounce-short shadow-glow">
-                <div className="flex items-center gap-4">
-                  <Trophy className="h-12 w-12" />
-                  <div>
-                    <div className="font-black text-2xl uppercase tracking-tighter">Incrível, {childNome}!</div>
-                    <div className="font-bold opacity-90">{aula.isSystem ? "Você dominou este nível! Quer tentar o próximo?" : aula.reforco_positivo}</div>
+              {acertou === true && (
+                <div className="mt-10 p-10 rounded-[3rem] bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/20 text-success animate-in zoom-in duration-500 shadow-glow-success">
+                  <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                    <div className="h-20 w-20 bg-success/20 rounded-full flex items-center justify-center shrink-0">
+                      <Trophy className="h-10 w-10" />
+                    </div>
+                    <div>
+                      <div className="font-black text-3xl uppercase tracking-tighter mb-1">BRILHANTE, {childNome.toUpperCase()}!</div>
+                      <div className="font-bold text-lg opacity-90">{aula.isSystem ? "Você dominou este nível com perfeição!" : aula.reforco_positivo}</div>
+                    </div>
+                    <div className="sm:ml-auto">
+                      <button onClick={() => setAula(null)} className="btn-tap px-8 py-4 bg-success text-white font-black rounded-2xl shadow-lg">
+                        PRÓXIMA AULA →
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-            
-            {acertou === false && (
-              <div className="mt-8 p-6 rounded-2xl bg-amber-50 border-2 border-amber-200 flex items-start gap-3 shadow-sm">
-                <Lightbulb className="h-8 w-8 text-amber-500 shrink-0 mt-0.5" />
-                <div>
-                  <div className="font-black text-amber-700 uppercase tracking-widest text-xs mb-1">Dica do Professor</div>
-                  <div className="text-xl text-amber-900 font-bold leading-tight">{aula.isSystem ? "Tente analisar cada parte do exemplo novamente." : aula.dica}</div>
+              )}
+              
+              {acertou === false && (
+                <div className="mt-8 p-6 rounded-[2rem] bg-sun/10 border-2 border-sun/20 flex items-start gap-4 animate-in slide-in-from-top-2">
+                  <div className="h-10 w-10 bg-sun/20 rounded-xl flex items-center justify-center shrink-0 mt-1">
+                    <Lightbulb className="h-6 w-6 text-sun-foreground" />
+                  </div>
+                  <div>
+                    <div className="font-black text-sun-foreground uppercase tracking-widest text-[10px] mb-1">DICA DO AMIGO VIRTUAL</div>
+                    <div className="text-xl text-slate-800 font-bold leading-tight">{aula.isSystem ? "Tente olhar o exemplo novamente com calma." : aula.dica}</div>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        )}
-      </Card>
+              )}
+            </Card>
+          )}
+        </div>
 
-      <div className="flex justify-between items-center mt-6">
-        <button onClick={() => setAula(null)} className="font-black text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
-          ← Sair da Aula
-        </button>
-        {aula.isSystem && (
-          <div className="flex items-center gap-2">
-            <Pill tone="info" className="font-black uppercase tracking-widest text-[10px]">Proteção BNCC</Pill>
-            <Pill tone="success" className="font-black uppercase tracking-widest text-[10px]">Auditado</Pill>
+        <div className="mt-12 flex justify-center gap-4">
+          <div className="flex items-center gap-3 px-6 py-3 bg-white/50 backdrop-blur-sm rounded-full border border-white shadow-sm">
+            <Pill tone="info" className="font-black uppercase tracking-widest text-[9px]">Proteção BNCC</Pill>
+            <div className="h-1 w-1 rounded-full bg-slate-300"></div>
+            <Pill tone="success" className="font-black uppercase tracking-widest text-[9px]">Seguro para Crianças</Pill>
           </div>
-        )}
+        </div>
       </div>
     </Shell>
   );
