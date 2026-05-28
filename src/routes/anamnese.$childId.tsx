@@ -1,229 +1,558 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { useAppState, type Hiperfoco, type Diagnostico } from "@/lib/store";
-import { useState } from "react";
-import { ChevronRight, CheckCircle2, Brain } from "lucide-react";
-import { NeuroProfileSelector } from "@/components/neuro/NeuroProfileSelector";
+import { useAppState, AnamnesisData } from "@/lib/store";
+import { useState, useEffect } from "react";
+import { ChevronRight, CheckCircle2, Brain, Baby, BookOpen, MessageCircle, Heart, Calendar, Activity, Info } from "lucide-react";
+import { AnamnesisProcessor } from "@/modules/neuro-engine/engine/AnamnesisProcessor";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
 });
 
-const hiperfocos: { v: Hiperfoco; emoji: string; label: string }[] = [
-  { v: "animais", emoji: "🐶", label: "Animais" },
-  { v: "dinossauros", emoji: "🦕", label: "Dinossauros" },
-  { v: "espaco", emoji: "🚀", label: "Espaço" },
-  { v: "veiculos", emoji: "🚗", label: "Veículos" },
-  { v: "princesas", emoji: "👑", label: "Princesas" },
-  { v: "super-herois", emoji: "🦸", label: "Super-heróis" },
-  { v: "robos", emoji: "🤖", label: "Robôs" },
-  { v: "musica", emoji: "🎵", label: "Música" },
-];
-
-const diagnosticos: { v: Diagnostico; label: string }[] = [
-  { v: "tdah", label: "TDAH" },
-  { v: "tea", label: "TEA (autismo)" },
-  { v: "dislexia", label: "Dislexia" },
-  { v: "tod", label: "TOD" },
-  { v: "deficiencia_intelectual", label: "Deficiência Intelectual" },
-  { v: "altas_habilidades", label: "Altas Habilidades" },
-  { v: "neurotipico", label: "Neurotípico" },
-  { v: "discalculia", label: "Discalculia" },
-  { v: "multiplo", label: "Múltiplo" },
-  { v: "nenhum", label: "Nenhum / em investigação" },
-];
-
 function Anamnese() {
   const { childId } = Route.useParams();
-  const { children: allChildren, updateChild, addChild } = useAppState();
+  const { children: allChildren, updateChild, saveAnamnesis } = useAppState();
   const navigate = useNavigate();
-  const existing = allChildren.find((c: any) => c.id === childId);
-  const isNew = !existing;
-
+  const child = allChildren.find((c: any) => c.id === childId);
+  
   const [step, setStep] = useState(0);
-  const [data, setData] = useState({
-    nome: existing?.nome ?? "",
-    idade: existing?.idade ?? 6,
-    serie: existing?.serie ?? "1º ano",
-    hiperfoco: (existing?.hiperfoco ?? "animais") as Hiperfoco,
-    diagnostico: (existing?.diagnostico ?? "nenhum") as Diagnostico,
-    avatar: existing?.avatar ?? "🌟",
-    trocaLetras: existing?.flags.trocaLetras ?? false,
-    palavrasLongas: existing?.flags.palavrasLongas ?? false,
-    preferAudio: existing?.flags.preferAudio ?? false,
-    contaNosDedos: existing?.flags.contaNosDedos ?? false,
-    apoioVisual: existing?.flags.apoioVisual ?? true,
-    tempoAtencao: existing?.tempo_atencao_min ?? 10,
+  const [loading, setLoading] = useState(true);
+  const [editCount, setEditCount] = useState(0);
+
+  const [data, setData] = useState<AnamnesisData['responses']>({
+    dados_crianca: {
+      nome: child?.nome ?? "",
+      idade: child?.idade ?? 6,
+      sexo: "",
+    },
+    desenvolvimento: {
+      fala: "fala_bem",
+      leitura: "nao_sabe_ler",
+    },
+    comportamento: {
+      dificuldade_atencao: false,
+      distrai_facil: false,
+      frustrado_facil: false,
+    },
+    comunicacao: {
+      aponta_quer: true,
+      usa_gestos: true,
+      usa_palavras: true,
+    },
+    aprendizagem: {
+      dificuldade_letras: false,
+      dificuldade_numeros: false,
+    },
+    diagnostico_profissional: {
+      possui: false,
+      quais: "",
+      profissional: "",
+    },
+    preferencias: {
+      musica: true,
+      desenho: true,
+      jogos: true,
+      historias: true,
+    },
+    rotina: {
+      periodo_estudo: "manha",
+      tem_terapia: false,
+    },
   });
 
-  const blocos = ["Identidade", "Hiperfoco", "Diagnóstico", "Português", "Matemática", "Atenção", "Pronto!"];
+  useEffect(() => {
+    async function loadAnamnesis() {
+      if (!childId) return;
+      const { data: existing, error } = await supabase
+        .from("child_anamnesis")
+        .select("*")
+        .eq("child_id", childId)
+        .maybeSingle();
+      
+      if (existing) {
+        setData(existing.responses as any);
+        setEditCount(existing.edit_count ?? 0);
+      }
+      setLoading(false);
+    }
+    loadAnamnesis();
+  }, [childId]);
 
-  const finish = () => {
-    const payload = {
-      nome: data.nome || "Criança",
-      idade: data.idade,
-      serie: data.serie,
-      hiperfoco: data.hiperfoco,
-      diagnostico: data.diagnostico,
-      avatar: data.avatar,
-      anamnese_completa: true,
-      tempo_atencao_min: data.tempoAtencao,
-      flags: {
-        apoioVisual: data.apoioVisual,
-        passoAPasso: true,
-        preferAudio: data.preferAudio,
-        contaNosDedos: data.contaNosDedos,
-        trocaLetras: data.trocaLetras,
-        palavrasLongas: data.palavrasLongas,
-      },
-    };
-    if (isNew) {
-      addChild({
-        ...payload,
-        sensory_mode: "foco",
-        perfil: { leitura: 50, escrita: 50, matematica: 50, atencao: 50, linguagem: 50, autonomia: 50, emocional: 50, social: 50 },
-        niveis: { geral: 2, portugues: 2, matematica: 2, ciencias: 2, historia: 2, geografia: 2 },
-        observacoes: "",
+  const steps = [
+    { title: "Identidade", icon: <Baby className="w-5 h-5" /> },
+    { title: "Desenvolvimento", icon: <BookOpen className="w-5 h-5" /> },
+    { title: "Comportamento", icon: <Brain className="w-5 h-5" /> },
+    { title: "Comunicação", icon: <MessageCircle className="w-5 h-5" /> },
+    { title: "Aprendizagem", icon: <Activity className="w-5 h-5" /> },
+    { title: "Diagnóstico", icon: <Info className="w-5 h-5" /> },
+    { title: "Preferências", icon: <Heart className="w-5 h-5" /> },
+    { title: "Rotina", icon: <Calendar className="w-5 h-5" /> },
+  ];
+
+  const finish = async () => {
+    if (editCount >= 3) {
+      toast.error("Limite de 3 edições atingido.");
+      return;
+    }
+
+    try {
+      const internalProfile = AnamnesisProcessor.process(data);
+      const childPatch = AnamnesisProcessor.mapToChildPatch(internalProfile, data);
+      
+      await saveAnamnesis({
+        child_id: childId,
+        responses: data,
+        internal_profile: internalProfile,
       });
 
-    } else {
-      updateChild(childId, payload);
+      // Update child basic profile
+      await updateChild(childId, {
+        ...childPatch,
+        nome: data.dados_crianca.nome,
+        idade: data.dados_crianca.idade,
+        anamnese_completa: true,
+      });
+
+      toast.success("Anamnese salva com sucesso!");
+      navigate({ to: "/painel-pais" });
+    } catch (err: any) {
+      toast.error(err.message || "Erro ao salvar anamnese");
     }
-    navigate({ to: "/painel-pais" });
   };
+
+  if (loading) return <Shell><div className="p-8 text-center">Carregando...</div></Shell>;
 
   return (
     <Shell>
-      <PageHeader emoji="📋" title="Anamnese" subtitle={`Como ${data.nome || "essa criança"} aprende?`} />
+      <PageHeader 
+        emoji="🧠" 
+        title="Anamnese NeuroBrilha" 
+        subtitle="Personalize a jornada do seu pequeno" 
+      />
 
-      <div className="mb-6 flex gap-1.5 overflow-x-auto pb-2">
-        {blocos.map((b, i) => (
-          <div key={b} className={`flex items-center gap-1.5 text-xs whitespace-nowrap px-3 py-1.5 rounded-full font-bold ${i === step ? "bg-primary text-primary-foreground" : i < step ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"}`}>
-            {i < step && <CheckCircle2 className="h-3.5 w-3.5" />} {b}
-          </div>
+      <div className="mb-6 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+        {steps.map((s, i) => (
+          <button 
+            key={i} 
+            onClick={() => setStep(i)}
+            className={`flex items-center gap-2 text-xs whitespace-nowrap px-4 py-2 rounded-full font-bold transition-all ${
+              i === step 
+                ? "bg-primary text-white shadow-lg scale-105" 
+                : i < step 
+                  ? "bg-success/20 text-success" 
+                  : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {i < step ? <CheckCircle2 className="h-3.5 w-3.5" /> : s.icon}
+            {s.title}
+          </button>
         ))}
       </div>
 
-      <Card>
+      {editCount > 0 && (
+        <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-sm flex items-center gap-2">
+          <Info className="w-4 h-4" />
+          Você já editou esta anamnese {editCount} de 3 vezes permitidas.
+        </div>
+      )}
+
+      <Card className="max-w-2xl mx-auto">
         {step === 0 && (
-          <div className="space-y-4">
-            <h2>Quem é a criança?</h2>
-            <Field label="Nome">
-              <input className="input" value={data.nome} onChange={(e) => setData({ ...data, nome: e.target.value })} />
-            </Field>
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Idade"><input type="number" min={2} max={15} className="input" value={data.idade} onChange={(e) => setData({ ...data, idade: +e.target.value })} /></Field>
-              <Field label="Série"><input className="input" value={data.serie} onChange={(e) => setData({ ...data, serie: e.target.value })} /></Field>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-primary/10 p-3 rounded-full text-primary"><Baby /></div>
+              <div>
+                <h2 className="text-xl font-bold">Dados da Criança</h2>
+                <p className="text-sm text-muted-foreground">Informações básicas para identificação</p>
+              </div>
             </div>
-            <Field label="Avatar (emoji)">
-              <div className="flex flex-wrap gap-2">
-                {["🌟","🦕","🚀","🦊","🦄","🐢","🐝","🌈","🦖","🐳"].map((e) => (
-                  <button key={e} onClick={() => setData({ ...data, avatar: e })} className={`h-12 w-12 rounded-xl text-2xl border-2 ${data.avatar === e ? "border-primary bg-primary/10" : "border-border bg-muted"}`}>{e}</button>
-                ))}
+            
+            <Field label="Nome Completo">
+              <input 
+                className="input-premium" 
+                value={data.dados_crianca.nome} 
+                onChange={(e) => setData({ ...data, dados_crianca: { ...data.dados_crianca, nome: e.target.value } })}
+                placeholder="Ex: João Silva"
+              />
+            </Field>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Field label="Idade">
+                <input 
+                  type="number" 
+                  className="input-premium" 
+                  value={data.dados_crianca.idade} 
+                  onChange={(e) => setData({ ...data, dados_crianca: { ...data.dados_crianca, idade: +e.target.value } })}
+                />
+              </Field>
+              <Field label="Sexo (opcional)">
+                <select 
+                  className="input-premium"
+                  value={data.dados_crianca.sexo}
+                  onChange={(e) => setData({ ...data, dados_crianca: { ...data.dados_crianca, sexo: e.target.value } })}
+                >
+                  <option value="">Selecione...</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                  <option value="O">Outro</option>
+                </select>
+              </Field>
+            </div>
+          </div>
+        )}
+
+        {step === 1 && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-blue-100 p-3 rounded-full text-blue-600"><BookOpen /></div>
+              <div>
+                <h2 className="text-xl font-bold">Desenvolvimento</h2>
+                <p className="text-sm text-muted-foreground">Marcos de fala e alfabetização</p>
+              </div>
+            </div>
+
+            <Field label="Sobre a fala:">
+              <div className="grid grid-cols-1 gap-2">
+                <OptionButton 
+                  selected={data.desenvolvimento.fala === "nao_fala"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, fala: "nao_fala" } })}
+                  label="Não fala"
+                />
+                <OptionButton 
+                  selected={data.desenvolvimento.fala === "fala_pouco"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, fala: "fala_pouco" } })}
+                  label="Fala pouco / palavras isoladas"
+                />
+                <OptionButton 
+                  selected={data.desenvolvimento.fala === "fala_bem"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, fala: "fala_bem" } })}
+                  label="Fala bem / frases completas"
+                />
+              </div>
+            </Field>
+
+            <Field label="Sobre a leitura:">
+              <div className="grid grid-cols-1 gap-2">
+                <OptionButton 
+                  selected={data.desenvolvimento.leitura === "nao_sabe_ler"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, leitura: "nao_sabe_ler" } })}
+                  label="Não sabe ler"
+                />
+                <OptionButton 
+                  selected={data.desenvolvimento.leitura === "aprendendo"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, leitura: "aprendendo" } })}
+                  label="Está aprendendo"
+                />
+                <OptionButton 
+                  selected={data.desenvolvimento.leitura === "ja_le"} 
+                  onClick={() => setData({ ...data, desenvolvimento: { ...data.desenvolvimento, leitura: "ja_le" } })}
+                  label="Já lê fluentemente"
+                />
               </div>
             </Field>
           </div>
         )}
 
-        {step === 1 && (
-          <div className="space-y-4">
-            <h2>O que ela mais ama?</h2>
-            <p className="text-sm text-muted-foreground">O hiperfoco vira combustível pedagógico — abrirá atividades, dará reforço positivo e apoio emocional.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {hiperfocos.map((h) => (
-                <button key={h.v} onClick={() => setData({ ...data, hiperfoco: h.v })}
-                  className={`rounded-2xl p-4 border-2 text-center ${data.hiperfoco === h.v ? "border-primary bg-primary/10" : "border-border bg-muted hover:border-primary/40"}`}>
-                  <div className="text-3xl">{h.emoji}</div>
-                  <div className="text-sm font-bold mt-1">{h.label}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {step === 2 && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Brain className="w-5 h-5 text-primary" />
-              <h2 className="!m-0">Neuroperfil e Diagnóstico</h2>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-purple-100 p-3 rounded-full text-purple-600"><Brain /></div>
+              <div>
+                <h2 className="text-xl font-bold">Comportamento</h2>
+                <p className="text-sm text-muted-foreground">Foco e regulação emocional</p>
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">Pode ser diagnóstico fechado ou hipótese. Define qual protocolo (ABA, Orton-Gillingham, TEACCH, CRA) o app vai priorizar.</p>
-            
-            <NeuroProfileSelector 
-              selected={data.diagnostico}
-              onChange={(v) => setData({ ...data, diagnostico: v })}
+
+            <ToggleRow 
+              label="Tem dificuldade de atenção?" 
+              active={data.comportamento.dificuldade_atencao}
+              onToggle={(v) => setData({ ...data, comportamento: { ...data.comportamento, dificuldade_atencao: v } })}
+            />
+            <ToggleRow 
+              label="Se distrai fácil?" 
+              active={data.comportamento.distrai_facil}
+              onToggle={(v) => setData({ ...data, comportamento: { ...data.comportamento, distrai_facil: v } })}
+            />
+            <ToggleRow 
+              label="Fica frustrado fácil?" 
+              active={data.comportamento.frustrado_facil}
+              onToggle={(v) => setData({ ...data, comportamento: { ...data.comportamento, frustrado_facil: v } })}
             />
           </div>
         )}
 
         {step === 3 && (
-          <div className="space-y-3">
-            <h2>Português</h2>
-            <Toggle label="Troca letras parecidas (b/d, p/q)" v={data.trocaLetras} on={(v) => setData({ ...data, trocaLetras: v })} />
-            <Toggle label="Tem dificuldade com palavras longas" v={data.palavrasLongas} on={(v) => setData({ ...data, palavrasLongas: v })} />
-            <Toggle label="Prefere ouvir ao invés de ler" v={data.preferAudio} on={(v) => setData({ ...data, preferAudio: v })} />
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-green-100 p-3 rounded-full text-green-600"><MessageCircle /></div>
+              <div>
+                <h2 className="text-xl font-bold">Comunicação</h2>
+                <p className="text-sm text-muted-foreground">Como a criança expressa desejos</p>
+              </div>
+            </div>
+
+            <ToggleRow 
+              label="Aponta para o que quer?" 
+              active={data.comunicacao.aponta_quer}
+              onToggle={(v) => setData({ ...data, comunicacao: { ...data.comunicacao, aponta_quer: v } })}
+            />
+            <ToggleRow 
+              label="Usa gestos?" 
+              active={data.comunicacao.usa_gestos}
+              onToggle={(v) => setData({ ...data, comunicacao: { ...data.comunicacao, usa_gestos: v } })}
+            />
+            <ToggleRow 
+              label="Usa palavras?" 
+              active={data.comunicacao.usa_palavras}
+              onToggle={(v) => setData({ ...data, comunicacao: { ...data.comunicacao, usa_palavras: v } })}
+            />
           </div>
         )}
 
         {step === 4 && (
-          <div className="space-y-3">
-            <h2>Matemática</h2>
-            <Toggle label="Conta nos dedos" v={data.contaNosDedos} on={(v) => setData({ ...data, contaNosDedos: v })} />
-            <Toggle label="Precisa de apoio visual em todo exercício" v={data.apoioVisual} on={(v) => setData({ ...data, apoioVisual: v })} />
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-red-100 p-3 rounded-full text-red-600"><Activity /></div>
+              <div>
+                <h2 className="text-xl font-bold">Aprendizagem</h2>
+                <p className="text-sm text-muted-foreground">Desafios acadêmicos iniciais</p>
+              </div>
+            </div>
+
+            <ToggleRow 
+              label="Tem dificuldade com letras?" 
+              active={data.aprendizagem.dificuldade_letras}
+              onToggle={(v) => setData({ ...data, aprendizagem: { ...data.aprendizagem, dificuldade_letras: v } })}
+            />
+            <ToggleRow 
+              label="Tem dificuldade com números?" 
+              active={data.aprendizagem.dificuldade_numeros}
+              onToggle={(v) => setData({ ...data, aprendizagem: { ...data.aprendizagem, dificuldade_numeros: v } })}
+            />
           </div>
         )}
 
         {step === 5 && (
-          <div className="space-y-4">
-            <h2>Atenção</h2>
-            <Field label={`Tempo médio de foco em uma atividade: ${data.tempoAtencao} minutos`}>
-              <input type="range" min={3} max={45} value={data.tempoAtencao} onChange={(e) => setData({ ...data, tempoAtencao: +e.target.value })} className="w-full" />
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-amber-100 p-3 rounded-full text-amber-600"><Info /></div>
+              <div>
+                <h2 className="text-xl font-bold">Diagnóstico</h2>
+                <p className="text-sm text-muted-foreground">Acompanhamento profissional</p>
+              </div>
+            </div>
+
+            <Field label="A criança possui diagnóstico profissional?">
+              <div className="flex gap-4">
+                <OptionButton 
+                  selected={data.diagnostico_profissional.possui === false} 
+                  onClick={() => setData({ ...data, diagnostico_profissional: { ...data.diagnostico_profissional, possui: false } })}
+                  label="Não"
+                />
+                <OptionButton 
+                  selected={data.diagnostico_profissional.possui === true} 
+                  onClick={() => setData({ ...data, diagnostico_profissional: { ...data.diagnostico_profissional, possui: true } })}
+                  label="Sim"
+                />
+              </div>
             </Field>
-            <p className="text-sm text-muted-foreground">O app vai respeitar este tempo em todas as sessões — sem cronômetros visíveis para a criança.</p>
+
+            {data.diagnostico_profissional.possui && (
+              <div className="space-y-4 animate-in fade-in slide-in-from-top-2">
+                <Field label="Qual o diagnóstico? (Ex: TDAH, TEA, Dislexia)">
+                  <input 
+                    className="input-premium" 
+                    value={data.diagnostico_profissional.quais}
+                    onChange={(e) => setData({ ...data, diagnostico_profissional: { ...data.diagnostico_profissional, quais: e.target.value } })}
+                  />
+                </Field>
+                <Field label="Qual profissional realizou o diagnóstico?">
+                  <input 
+                    className="input-premium" 
+                    value={data.diagnostico_profissional.profissional}
+                    onChange={(e) => setData({ ...data, diagnostico_profissional: { ...data.diagnostico_profissional, profissional: e.target.value } })}
+                  />
+                </Field>
+              </div>
+            )}
           </div>
         )}
 
         {step === 6 && (
-          <div className="text-center space-y-4 py-6">
-            <div className="text-6xl">🎉</div>
-            <h2>Pronto!</h2>
-            <p className="text-muted-foreground">Perfil neuro-adaptativo de <strong>{data.nome}</strong> está sendo gerado. Cada explicação, exercício e feedback será ajustado automaticamente.</p>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-pink-100 p-3 rounded-full text-pink-600"><Heart /></div>
+              <div>
+                <h2 className="text-xl font-bold">Preferências</h2>
+                <p className="text-sm text-muted-foreground">O que motiva a criança</p>
+              </div>
+            </div>
+
+            <p className="text-sm font-bold text-foreground/70">A criança gosta de:</p>
+            <div className="grid grid-cols-2 gap-3">
+              <CheckboxCard 
+                label="Música" 
+                icon="🎵" 
+                checked={data.preferencias.musica}
+                onToggle={(v) => setData({ ...data, preferencias: { ...data.preferencias, musica: v } })}
+              />
+              <CheckboxCard 
+                label="Desenho" 
+                icon="🎨" 
+                checked={data.preferencias.desenho}
+                onToggle={(v) => setData({ ...data, preferencias: { ...data.preferencias, desenho: v } })}
+              />
+              <CheckboxCard 
+                label="Jogos" 
+                icon="🎮" 
+                checked={data.preferencias.jogos}
+                onToggle={(v) => setData({ ...data, preferencias: { ...data.preferencias, jogos: v } })}
+              />
+              <CheckboxCard 
+                label="Histórias" 
+                icon="📚" 
+                checked={data.preferencias.historias}
+                onToggle={(v) => setData({ ...data, preferencias: { ...data.preferencias, historias: v } })}
+              />
+            </div>
           </div>
         )}
 
-        <div className="mt-8 flex justify-between gap-3">
-          <button disabled={step === 0} onClick={() => setStep(step - 1)} className="btn-tap px-4 py-2 rounded-xl bg-muted font-bold disabled:opacity-30">Voltar</button>
-          {step < blocos.length - 1 ? (
-            <button onClick={() => setStep(step + 1)} className="btn-tap px-6 py-2 rounded-xl bg-primary text-primary-foreground font-bold flex items-center gap-1">
-              Continuar <ChevronRight className="h-4 w-4" />
+        {step === 7 && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b pb-4">
+              <div className="bg-indigo-100 p-3 rounded-full text-indigo-600"><Calendar /></div>
+              <div>
+                <h2 className="text-xl font-bold">Rotina</h2>
+                <p className="text-sm text-muted-foreground">Organização do dia a dia</p>
+              </div>
+            </div>
+
+            <Field label="Estuda em qual período?">
+              <select 
+                className="input-premium"
+                value={data.rotina.periodo_estudo}
+                onChange={(e) => setData({ ...data, rotina: { ...data.rotina, periodo_estudo: e.target.value } })}
+              >
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="integral">Integral</option>
+                <option value="nao_estuda">Ainda não estuda</option>
+              </select>
+            </Field>
+
+            <ToggleRow 
+              label="Tem terapia de acompanhamento?" 
+              active={data.rotina.tem_terapia}
+              onToggle={(v) => setData({ ...data, rotina: { ...data.rotina, tem_terapia: v } })}
+            />
+
+            <div className="mt-8 p-6 bg-primary/5 rounded-2xl text-center border-2 border-dashed border-primary/20">
+              <div className="text-4xl mb-3">🚀</div>
+              <h3 className="font-bold text-lg">Quase lá!</h3>
+              <p className="text-sm text-muted-foreground">Ao finalizar, o NeuroBrilha criará um plano adaptativo exclusivo para <strong>{data.dados_crianca.nome || 'seu filho'}</strong>.</p>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-10 flex justify-between gap-4">
+          <button 
+            disabled={step === 0} 
+            onClick={() => setStep(step - 1)} 
+            className="flex-1 px-6 py-4 rounded-2xl bg-muted font-bold transition-all hover:bg-muted/80 disabled:opacity-30 disabled:hover:bg-muted"
+          >
+            Anterior
+          </button>
+          
+          {step < steps.length - 1 ? (
+            <button 
+              onClick={() => setStep(step + 1)} 
+              className="flex-1 px-6 py-4 rounded-2xl bg-primary text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              Próximo <ChevronRight className="h-5 w-5" />
             </button>
           ) : (
-            <button onClick={finish} className="btn-tap px-6 py-2 rounded-xl bg-success text-success-foreground font-bold">Finalizar anamnese</button>
+            <button 
+              onClick={finish} 
+              className="flex-1 px-6 py-4 rounded-2xl bg-success text-white font-bold shadow-lg shadow-success/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              Salvar Anamnese
+            </button>
           )}
         </div>
       </Card>
 
-      <style>{`.input{width:100%;padding:.6rem .8rem;border-radius:.75rem;background:var(--color-input);border:1px solid var(--color-border);font-weight:600}`}</style>
+      <style>{`
+        .input-premium {
+          width: 100%;
+          padding: 0.8rem 1rem;
+          border-radius: 1rem;
+          background: var(--color-input, #f3f4f6);
+          border: 2px solid transparent;
+          font-weight: 600;
+          transition: all 0.2s;
+        }
+        .input-premium:focus {
+          border-color: var(--color-primary);
+          background: white;
+          outline: none;
+          box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </Shell>
   );
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label className="block">
-      <span className="text-sm font-bold text-foreground/80">{label}</span>
-      <div className="mt-1.5">{children}</div>
-    </label>
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-foreground/80 ml-1">{label}</label>
+      {children}
+    </div>
   );
 }
 
-function Toggle({ label, v, on }: { label: string; v: boolean; on: (b: boolean) => void }) {
+function OptionButton({ selected, onClick, label }: { selected: boolean; onClick: () => void; label: string }) {
   return (
-    <button onClick={() => on(!v)} className={`w-full flex items-center justify-between p-3 rounded-xl border-2 ${v ? "border-primary bg-primary/10" : "border-border bg-muted"}`}>
-      <span className="font-bold text-left">{label}</span>
-      <span className={`h-6 w-11 rounded-full relative transition-colors ${v ? "bg-primary" : "bg-border"}`}>
-        <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${v ? "left-5" : "left-0.5"}`} />
-      </span>
+    <button 
+      onClick={onClick}
+      className={`px-4 py-3 rounded-xl border-2 font-bold transition-all text-sm flex-1 ${
+        selected ? "border-primary bg-primary/5 text-primary" : "border-border bg-white text-muted-foreground hover:border-primary/30"
+      }`}
+    >
+      {label}
+    </button>
+  );
+}
+
+function ToggleRow({ label, active, onToggle }: { label: string; active: boolean; onToggle: (v: boolean) => void }) {
+  return (
+    <div className="flex items-center justify-between p-4 rounded-2xl bg-muted/30 border border-border">
+      <span className="font-bold text-foreground/80">{label}</span>
+      <button 
+        onClick={() => onToggle(!active)}
+        className={`w-14 h-8 rounded-full relative transition-all ${active ? "bg-primary" : "bg-muted-foreground/30"}`}
+      >
+        <div className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow-sm transition-all ${active ? "right-1" : "left-1"}`} />
+      </button>
+    </div>
+  );
+}
+
+function CheckboxCard({ label, icon, checked, onToggle }: { label: string; icon: string; checked: boolean; onToggle: (v: boolean) => void }) {
+  return (
+    <button 
+      onClick={() => onToggle(!checked)}
+      className={`p-4 rounded-2xl border-2 transition-all text-center flex flex-col items-center gap-2 ${
+        checked ? "border-primary bg-primary/5 shadow-md scale-[1.02]" : "border-border bg-white"
+      }`}
+    >
+      <div className="text-2xl">{icon}</div>
+      <div className="font-bold text-sm">{label}</div>
     </button>
   );
 }

@@ -3,15 +3,16 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Settings, Download, Share2 } from "lucide-react";
+import { Bell, Settings, Download, Share2, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DashboardHeaderProps {
   studentName: string;
   grade: string;
+  childId?: string;
 }
 
-export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade }) => {
+export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade, childId }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
       <div className="flex items-center gap-4">
@@ -30,7 +31,17 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
         </div>
       </div>
       
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
+        {childId && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-2 bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary"
+            onClick={() => window.location.href = `/anamnese/${childId}`}
+          >
+            <Brain className="h-4 w-4" /> Anamnese
+          </Button>
+        )}
         <Button variant="outline" size="icon" className="rounded-full">
           <Bell className="h-4 w-4" />
         </Button>

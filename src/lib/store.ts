@@ -10,7 +10,6 @@ export type Hiperfoco =
   | "princesas" | "super-herois" | "robos" | "musica";
 
 export interface Child {
-
   id: string;
   user_id: string;
   nome: string;
@@ -20,9 +19,10 @@ export interface Child {
   diagnostico: Diagnostico;
   avatar: string; // emoji
   anamnese_completa: boolean;
+  anamnesis_id?: string;
+  anamnesis_edit_count?: number;
   sensory_mode: SensoryMode;
   perfil: {
-
     leitura: number;
     escrita: number;
     matematica: number;
@@ -50,6 +50,53 @@ export interface Child {
     palavrasLongas: boolean;
   };
   observacoes: string;
+}
+
+export interface AnamnesisData {
+  id?: string;
+  child_id: string;
+  responses: {
+    dados_crianca: {
+      nome: string;
+      idade: number;
+      sexo?: string;
+    };
+    desenvolvimento: {
+      fala: "nao_fala" | "fala_pouco" | "fala_bem";
+      leitura: "nao_sabe_ler" | "aprendendo" | "ja_le";
+    };
+    comportamento: {
+      dificuldade_atencao: boolean;
+      distrai_facil: boolean;
+      frustrado_facil: boolean;
+    };
+    comunicacao: {
+      aponta_quer: boolean;
+      usa_gestos: boolean;
+      usa_palavras: boolean;
+    };
+    aprendizagem: {
+      dificuldade_letras: boolean;
+      dificuldade_numeros: boolean;
+    };
+    diagnostico_profissional: {
+      possui: boolean;
+      quais?: string;
+      profissional?: string;
+    };
+    preferencias: {
+      musica: boolean;
+      desenho: boolean;
+      jogos: boolean;
+      historias: boolean;
+    };
+    rotina: {
+      periodo_estudo: string;
+      tem_terapia: boolean;
+    };
+  };
+  internal_profile: any;
+  edit_count: number;
 }
 
 const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
@@ -158,6 +205,51 @@ export function useAppState() {
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
+    saveAnamnesis: async (anamnesis: Omit<AnamnesisData, "id" | "edit_count">) => {
+      const { data: existing } = await supabase
+        .from("child_anamnesis")
+        .select("id, edit_count")
+        .eq("child_id", anamnesis.child_id)
+        .maybeSingle();
+
+      if (existing) {
+        const count = existing.edit_count ?? 0;
+        if (count >= 3) {
+          throw new Error("Limite de 3 edições atingido para esta anamnese.");
+        }
+        const { error } = await supabase
+          .from("child_anamnesis")
+          .update({
+            responses: anamnesis.responses,
+            internal_profile: anamnesis.internal_profile,
+            edit_count: count + 1
+          })
+          .eq("id", existing.id);
+        if (error) throw error;
+        
+        await supabase
+          .from("children")
+          .update({ anamnesis_edit_count: count + 1 })
+          .eq("id", anamnesis.child_id);
+      } else {
+        const { data, error } = await supabase
+          .from("child_anamnesis")
+          .insert([{ ...anamnesis, edit_count: 1 }])
+          .select()
+          .single();
+        if (error) throw error;
+
+        await supabase
+          .from("children")
+          .update({ 
+            anamnesis_id: data.id, 
+            anamnesis_edit_count: 1,
+            anamnese_completa: true 
+          })
+          .eq("id", anamnesis.child_id);
+      }
+      queryClient.invalidateQueries({ queryKey: ["children"] });
+    }
   };
 }
 
