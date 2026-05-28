@@ -15,7 +15,12 @@ export function usePedagogicalEngine() {
     else if (activeChild.diagnostico === 'tdah') neuroProfile = "TDAH";
     else if (activeChild.diagnostico === 'dislexia') neuroProfile = "Dislexia";
 
-    return neuroProfile;
+    return {
+      base: neuroProfile,
+      flags: activeChild.flags,
+      levels: activeChild.niveis,
+      isAnamnesisComplete: activeChild.anamnese_completa
+    };
   }, [activeChild]);
 
   return {
