@@ -102,7 +102,16 @@ function Escola() {
     );
   }
 
-  if (aula) return <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />;
+  if (aula) return (
+    <AulaView 
+      aula={aula} 
+      setAula={setAula} 
+      childNome={activeChild.nome} 
+      hiperfoco={activeChild.hiperfoco}
+      currentLevel={currentLevel}
+      setCurrentLevel={setCurrentLevel}
+    />
+  );
 
   return (
     <Shell>
