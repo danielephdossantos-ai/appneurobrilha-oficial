@@ -6,7 +6,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
 } from "recharts";
 import { 
-  Brain, Lightbulb, AlertCircle, Info, CheckCircle2 
+  Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
 import { supabase } from "@/integrations/supabase/client";
