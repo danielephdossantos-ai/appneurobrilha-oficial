@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { MascotState, MascotEngine } from '../../core/emotional/mascot';
 import { Emotion } from '../../modules/emotional-engine/engine/emotional-engine';
-import { MascotRenderer } from '../rewards/mascot-store/MascotRenderer';
-import { MASCOTS, MascotData } from '../rewards/mascot-store/catalog';
+import { SimpleMascotRenderer } from '../rewards/SimpleMascotRenderer';
 
 import { 
   MessageCircle,
@@ -39,15 +38,14 @@ export const Mascot: React.FC<MascotProps> = ({
     return () => clearTimeout(timer);
   }, [emotion, customMessage]);
 
-  const getMascotVisual = (): MascotData => {
-    // Map the emotional engine types to specific catalog mascots
+  const getMascotEmoji = (): string => {
     switch (type) {
       case "mentor": 
-        return MASCOTS.find(m => m.id === 'astro-leo') || MASCOTS[0];
+        return "🦁";
       case "explorador":
-        return MASCOTS.find(m => m.id === 'robot-bip') || MASCOTS[1];
+        return "🤖";
       default:
-        return MASCOTS.find(m => m.id === 'dog-pipo') || MASCOTS[0];
+        return "🐶";
     }
   };
 
@@ -66,10 +64,9 @@ export const Mascot: React.FC<MascotProps> = ({
       <div className="relative">
         <div className="absolute -inset-2 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 rounded-full blur-xl opacity-50" />
         <div className="relative z-10 p-0 bg-transparent rounded-full border-none shadow-none">
-          <MascotRenderer 
-            mascot={getMascotVisual()} 
+          <SimpleMascotRenderer 
+            emoji={getMascotEmoji()} 
             size={120} 
-            animation={getAnimation()}
           />
         </div>
 
