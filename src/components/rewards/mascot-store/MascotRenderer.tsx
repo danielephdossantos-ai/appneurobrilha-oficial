@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MascotData } from './catalog';
 
-// Import existing high-quality assets
+// Local high-quality assets
 import heroiLightning from '@/assets/mascots/heroi-lightning.png';
 import heroiShadow from '@/assets/mascots/heroi-shadow.png';
 import heroiFire from '@/assets/mascots/heroi-fire.png';
@@ -23,55 +23,51 @@ import robotBip from '@/assets/mascots/robot-bip.png';
 import astroLeo from '@/assets/mascots/astro-leo.png';
 
 const MASCOT_IMAGES: Record<string, string> = {
-  // Mapping specific IDs to the best matching high-quality characters
-  'heroi-aranha': heroiShadow,
+  // Use unique local assets for primary spots
+  'heroi-flecha': heroiLightning,
   'heroi-morcego': heroiShadow,
   'heroi-ferro': heroiFire,
-  'heroi-hulk': dinoRex,
   'heroi-capitao': heroiSky,
-  'heroi-flecha': heroiLightning,
-  'heroi-lobo': heroiShadow,
-  
-  'menino-dino': dinoRex,
   'menino-urso': bearHug,
   'menino-cao': dogPipo,
   'menino-gato': catLuna,
-  'menino-dragao': dinoRex,
-  'menino-leao': heroiFire,
-  'menino-tigre': foxFoxy,
-  
-  'prof-medico': heroiSky,
-  'prof-bombeiro': heroiFire,
-  'prof-policial': heroiSky,
-  'prof-professor': heroiShadow,
-  'prof-cientista': robotBip,
-  'prof-jogador': heroiLightning,
-  
-  'prin-rapunzel': fadaLisa,
+  'menino-dino': dinoRex,
   'prin-neve': princesaNana,
   'prin-cinderela': fadaNuvem,
-  'prin-ariel': fadaLisa,
-  'prin-malevola': heroinaEstela,
-  'prin-moana': heroinaEstela,
-  
-  'heroina-alerquina': heroinaEstela,
   'heroina-maravilha': heroinaEstela,
-  'heroina-gato': fadaNuvem,
-  'heroina-viuva': heroiShadow,
-  
-  'fant-unicornio': unicornUni,
-  'fant-gatinha': catLuna,
-  'fant-coelhinha': catLuna,
   'fant-panda': pandaPandi,
-  
-  'pet-cao': dogPipo,
-  'pet-gato': catLuna,
-  'pet-urso': bearHug,
-  'pet-panda': pandaPandi,
-  'pet-coelho': catLuna,
-  'pet-dino': dinoRex,
-  'pet-raposa': foxFoxy,
   'pet-pinguim': penguinPingu,
+  'fant-unicornio': unicornUni,
+  'prof-cientista': robotBip,
+  'menino-leao': astroLeo,
+  'prin-malevola': fadaLisa,
+  'menino-tigre': foxFoxy,
+
+  // Use unique Icons8 Fluency icons for the rest to ensure variety
+  'heroi-aranha': 'https://img.icons8.com/fluency/200/spiderman-new.png',
+  'heroi-hulk': 'https://img.icons8.com/fluency/200/hulk.png',
+  'heroi-lobo': 'https://img.icons8.com/fluency/200/wolverine.png',
+  'menino-dragao': 'https://img.icons8.com/fluency/200/dragon.png',
+  'prof-medico': 'https://img.icons8.com/fluency/200/doctor-male.png',
+  'prof-bombeiro': 'https://img.icons8.com/fluency/200/fireman-male.png',
+  'prof-policial': 'https://img.icons8.com/fluency/200/police-officer.png',
+  'prof-professor': 'https://img.icons8.com/fluency/200/teacher.png',
+  'prof-jogador': 'https://img.icons8.com/fluency/200/soccer-player.png',
+  'prin-rapunzel': 'https://img.icons8.com/fluency/200/rapunzel.png',
+  'prin-ariel': 'https://img.icons8.com/fluency/200/mermaid.png',
+  'prin-moana': 'https://img.icons8.com/fluency/200/moana.png',
+  'heroina-alerquina': 'https://img.icons8.com/fluency/200/harley-quinn.png',
+  'heroina-gato': 'https://img.icons8.com/fluency/200/catwoman.png',
+  'heroina-viuva': 'https://img.icons8.com/fluency/200/black-widow.png',
+  'fant-gatinha': 'https://img.icons8.com/fluency/200/hello-kitty.png',
+  'fant-coelhinha': 'https://img.icons8.com/fluency/200/rabbit.png',
+  'pet-cao': 'https://img.icons8.com/fluency/200/bulldog.png',
+  'pet-gato': 'https://img.icons8.com/fluency/200/siamese-cat.png',
+  'pet-urso': 'https://img.icons8.com/fluency/200/teddy-bear.png',
+  'pet-panda': 'https://img.icons8.com/fluency/200/panda.png',
+  'pet-coelho': 'https://img.icons8.com/fluency/200/easter-rabbit.png',
+  'pet-dino': 'https://img.icons8.com/fluency/200/stegosaurus.png',
+  'pet-raposa': 'https://img.icons8.com/fluency/200/fox.png',
 };
 
 interface MascotRendererProps {
