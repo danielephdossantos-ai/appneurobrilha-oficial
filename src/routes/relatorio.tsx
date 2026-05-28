@@ -183,7 +183,7 @@ function RelatorioPremium() {
                     stroke="#059669" 
                     strokeWidth={4} 
                     dot={{ r: 6, fill: '#059669', strokeWidth: 2, stroke: '#fff' }}
-                    activeDot={{ r: 8, shadow: '0 0 10px rgba(5, 150, 105, 0.5)' }}
+                    activeDot={{ r: 8 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
