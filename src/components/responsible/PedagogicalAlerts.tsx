@@ -1,15 +1,53 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight, ShieldAlert } from "lucide-react";
 import { PedagogicalAlert } from "../../data/responsible/mock-data";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PedagogicalAlertsProps {
   alerts: PedagogicalAlert[];
+  childId?: string;
 }
 
-export const PedagogicalAlerts: React.FC<PedagogicalAlertsProps> = ({ alerts }) => {
+export const PedagogicalAlerts: React.FC<PedagogicalAlertsProps> = ({ alerts, childId }) => {
+  const [securityAlerts, setSecurityAlerts] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    if (childId) {
+      const fetchAlerts = async () => {
+        const { data, error } = await supabase
+          .from("child_security_alerts")
+          .select("*")
+          .eq("child_id", childId)
+          .order("created_at", { ascending: false })
+          .limit(10);
+        
+        if (!error && data) {
+          setSecurityAlerts(data);
+        }
+      };
+      
+      fetchAlerts();
+      
+      // Real-time subscription
+      const channel = supabase
+        .channel('schema-db-changes')
+        .on(
+          'postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'child_security_alerts', filter: `child_id=eq.${childId}` },
+          (payload) => {
+            setSecurityAlerts(prev => [payload.new, ...prev]);
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [childId]);
   const getIcon = (type: string) => {
     switch (type) {
       case 'success': return <CheckCircle2 className="h-5 w-5 text-green-500" />;
@@ -37,6 +75,30 @@ export const PedagogicalAlerts: React.FC<PedagogicalAlertsProps> = ({ alerts }) 
       <CardContent className="p-0">
         <ScrollArea className="h-[400px]">
           <div className="divide-y divide-slate-100">
+            {/* Alertas de Segurança em Tempo Real */}
+            {securityAlerts.map((alert) => (
+              <div 
+                key={alert.id} 
+                className="p-4 flex gap-4 items-start transition-colors hover:bg-red-50 cursor-pointer border-l-4 border-red-500 bg-red-50/30"
+              >
+                <div className="p-2 rounded-full bg-red-100">
+                  <ShieldAlert className="h-5 w-5 text-red-600" />
+                </div>
+                <div className="flex-1 space-y-1">
+                  <div className="flex justify-between">
+                    <h4 className="text-sm font-bold text-red-800">Alerta de Monitoramento</h4>
+                    <span className="text-[10px] text-red-400">
+                      {new Date(alert.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                  <p className="text-xs text-red-600 leading-relaxed font-medium">
+                    {alert.reason}: <span className="italic">"{alert.content}"</span>
+                  </p>
+                </div>
+                <ChevronRight className="h-4 w-4 text-red-300 self-center" />
+              </div>
+            ))}
+
             {alerts.map((alert) => (
               <div 
                 key={alert.id} 

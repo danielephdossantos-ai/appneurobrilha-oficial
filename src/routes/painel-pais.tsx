@@ -113,7 +113,7 @@ function PainelPremium() {
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <PedagogicalAlerts alerts={mockResponsibleData.alerts} />
+              <PedagogicalAlerts alerts={mockResponsibleData.alerts} childId={activeChild.id} />
             </motion.div>
 
             <motion.div variants={itemVariants} className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200">
