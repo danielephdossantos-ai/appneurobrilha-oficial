@@ -99,7 +99,7 @@ function Anamnese() {
 
     try {
       const internalProfile = AnamnesisProcessor.process(data);
-      const childPatch = AnamnesisProcessor.mapToChildPatch(internalProfile);
+      const childPatch = AnamnesisProcessor.mapToChildPatch(internalProfile, data);
       
       await saveAnamnesis({
         child_id: childId,
