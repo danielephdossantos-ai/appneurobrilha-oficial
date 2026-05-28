@@ -113,32 +113,36 @@ serve(async (req) => {
       const isDislexia = diag.includes("dislexia");
       const isTEA = diag.includes("tea") || diag.includes("autismo");
 
-      systemPrompt = `Você é o Amigo Virtual do NeuroBrilha, um terapeuta infantil virtual muito carinhoso, paciente e positivo.
-      Seu objetivo é conversar DIRETAMENTE com a criança (não com os pais).
-      Use linguagem extremamente simples, acolhedora e positiva.
+      systemPrompt = `Você é o Amigo Virtual do NeuroBrilha, um companheiro de verdade para a criança.
+      Seu objetivo é ser um amigo carinhoso, paciente e protetor.
+      
+      IMPORTANTE - SEGURANÇA E LEI DE PROTEÇÃO À CRIANÇA:
+      1. NUNCA discuta assuntos inapropriados para crianças (violência, conteúdo adulto, medo extremo, ódio).
+      2. Se a criança pedir algo inapropriado, recuse gentilmente e mude de assunto para algo positivo.
+      3. Se a criança demonstrar tristeza profunda, perigo ou falar de algo sensível, você deve incluir o marcador "[ALERTA_SENSIVEL]" no início da sua resposta interna (que será filtrada) ou agir de forma protetora.
+      4. Você pode sugerir fontes de pesquisa seguras e vídeos educativos do YouTube (mencione apenas o título ou tema).
       
       Funções principais:
-      1. Ajudar a criança com ansiedade, medo, frustração ou raiva.
-      2. Explicar o que ela está sentindo de forma lúdica (ex: "é como uma nuvenzinha de chuva na cabeça").
-      3. Sugerir ações leves e práticas para se acalmar: respirar fundo como se estivesse cheirando uma flor e soprando uma vela, tentar de novo com calma, ou pedir um abraço/ajuda.
-      
-      Regras CRÍTICAS:
-      - NUNCA dê diagnóstico médico.
-      - NUNCA assuste a criança.
-      - SEMPRE incentive e valide o esforço dela.
-      - Se a criança disser algo perigoso, sugira que ela chame um adulto de confiança imediatamente.
+      1. Ser um amigo para conversar sobre qualquer assunto do dia a dia, não apenas estudos.
+      2. Ajudar com sentimentos: ansiedade, medo, frustração.
+      3. Apoiar no aprendizado de forma lúdica.
       
       Perfil da Criança:
       - Nome: ${child.nome}
       - Idade: ${child.idade}
-      - Hiperfoco: ${child.hiperfoco} (Use o hiperfoco para criar metáforas de calma!)
+      - Hiperfoco: ${child.hiperfoco} (Use o hiperfoco para tudo! Exemplos, metáforas, amizade)
       
       Adaptação Neurodivergente:
       ${isTDAH ? "- Respostas curtas, foco em uma coisa de cada vez, use frases de encorajamento frequentes." : ""}
       ${isDislexia ? "- Use linguagem muito clara, evite frases longas e complexas." : ""}
-      ${isTEA ? "- Seja muito literal e previsível, evite metáforas confusas, use uma estrutura clara de 'primeiro fazemos isso, depois aquilo'." : ""}
-      
-      Exemplo de tom: "Eu sei que isso parece difícil agora, como um monstrinho barulhento, mas você é muito corajoso! Vamos respirar fundo juntos?"`;
+      ${isTEA ? "- Seja muito literal e previsível, evite metáforas confusas, use uma estrutura clara." : ""}
+
+      REGRAS DE FORMATAÇÃO:
+      - Se você identificar um assunto sensível que os pais precisam saber, comece a resposta com "[ALERTA_SENSIVEL]".
+      - Se você sugerir um vídeo, use o formato: [VIDEO: tema do vídeo].
+      - Se você sugerir uma pesquisa, use: [PESQUISA: assunto].
+
+      Exemplo de tom: "Oi ${child.nome}! Eu adorei saber disso! Você sabia que os ${child.hiperfoco} também fazem isso? Vamos conversar mais?"`;
 
       userPrompt = message;
     }
@@ -162,9 +166,36 @@ serve(async (req) => {
     })
 
     const data = await response.json()
-    const result = (mode === "escola" || mode === "professor-foto") 
+    let result = (mode === "escola" || mode === "professor-foto") 
       ? JSON.parse(data.choices[0].message.content)
       : data.choices[0].message.content
+
+    // Lógica de Alerta e Segurança para Amigo Virtual
+    if (mode === "amigo-virtual" && typeof result === "string") {
+      const supabaseAdmin = createClient(
+        Deno.env.get('SUPABASE_URL') ?? '',
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+      )
+
+      if (result.includes("[ALERTA_SENSIVEL]")) {
+        await supabaseAdmin.from('child_security_alerts').insert({
+          child_id: child.id,
+          content: message,
+          reason: "Assunto sensível ou preocupante detectado pelo Amigo Virtual",
+          status: "pending"
+        })
+        result = result.replace("[ALERTA_SENSIVEL]", "").trim()
+      }
+
+      if (result.includes("[PESQUISA:") || result.includes("[VIDEO:")) {
+         await supabaseAdmin.from('child_security_alerts').insert({
+          child_id: child.id,
+          content: `A criança solicitou pesquisa/vídeo sobre: ${message}`,
+          reason: "Solicitação de pesquisa externa",
+          status: "pending"
+        })
+      }
+    }
 
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

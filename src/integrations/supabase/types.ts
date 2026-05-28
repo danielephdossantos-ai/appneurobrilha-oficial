@@ -248,6 +248,44 @@ export type Database = {
           },
         ]
       }
+      child_security_alerts: {
+        Row: {
+          child_id: string
+          content: string
+          created_at: string
+          id: string
+          reason: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          content: string
+          created_at?: string
+          id?: string
+          reason: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          reason?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_security_alerts_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_skill_mastery: {
         Row: {
           child_id: string

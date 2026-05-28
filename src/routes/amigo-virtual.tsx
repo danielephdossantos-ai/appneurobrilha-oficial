@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState, useEffect, useRef } from "react";
-import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle } from "lucide-react";
+import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
@@ -38,14 +38,28 @@ function AmigoVirtual() {
     }
   }, [msgs, activeTab]);
 
-  const lerTexto = (texto: string) => {
+  const lerTexto = async (texto: string) => {
     if (!isAudioEnabled) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(texto);
-    utterance.lang = "pt-BR";
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
-    window.speechSynthesis.speak(utterance);
+
+    // Tentativa de usar ElevenLabs via Edge Function se houver API Key, caso contrário usa nativo
+    try {
+      // Aqui poderíamos ter uma integração real com ElevenLabs via Edge Function
+      // Por enquanto, manteremos o Web Speech mas com melhorias de voz amigável
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = "pt-BR";
+      utterance.rate = 0.95;
+      utterance.pitch = 1.3; // Mais agudo/amigável para crianças
+      
+      // Tentar encontrar uma voz feminina/doce se disponível
+      const voices = window.speechSynthesis.getVoices();
+      const brVoice = voices.find(v => v.lang.includes("pt-BR") && (v.name.includes("Google") || v.name.includes("Luciana")));
+      if (brVoice) utterance.voice = brVoice;
+
+      window.speechSynthesis.speak(utterance);
+    } catch (err) {
+      console.error("Erro na síntese de voz:", err);
+    }
   };
 
   const send = async (textOverride?: string) => {
@@ -148,8 +162,8 @@ function AmigoVirtual() {
               <SimpleMascotRenderer emoji={virtualFriend.emoji} size={64} />
             </div>
             <div>
-              <h2 className="text-xl font-black text-pink-600">Amigo Virtual</h2>
-              <p className="text-[10px] font-medium text-pink-400">Conversa & Estudos ✨</p>
+              <h2 className="text-xl font-black text-pink-600">Amigo Virtual & Protetor</h2>
+              <p className="text-[10px] font-medium text-pink-400">Sempre aqui por você! ✨</p>
             </div>
           </div>
           <div className="flex gap-2">
@@ -210,14 +224,56 @@ function AmigoVirtual() {
                             <span className="text-[10px] font-black uppercase tracking-widest text-pink-300">Amigo</span>
                           </div>
                         )}
-                        <p className="text-lg font-medium leading-relaxed">{m.t}</p>
+                        <div className="text-lg font-medium leading-relaxed">
+                          {m.t.split(/(\[VIDEO:.*?\]|\[PESQUISA:.*?\])/g).map((part, idx) => {
+                            if (part.startsWith("[VIDEO:")) {
+                              const query = part.replace("[VIDEO:", "").replace("]", "");
+                              return (
+                                <a 
+                                  key={idx}
+                                  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(query + " para crianças")}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 bg-red-100 text-red-600 px-2 py-0.5 rounded-lg text-sm font-bold mx-1"
+                                >
+                                  <Video size={14} /> Ver vídeo
+                                </a>
+                              );
+                            }
+                            if (part.startsWith("[PESQUISA:")) {
+                              const query = part.replace("[PESQUISA:", "").replace("]", "");
+                              return (
+                                <a 
+                                  key={idx}
+                                  href={`https://www.google.com/search?q=${encodeURIComponent(query + " para crianças")}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-lg text-sm font-bold mx-1"
+                                >
+                                  <ExternalLink size={14} /> Pesquisar
+                                </a>
+                              );
+                            }
+                            return part;
+                          })}
+                        </div>
                         {m.role === "ai" && (
-                          <button 
-                            onClick={() => lerTexto(m.t)}
-                            className="mt-2 text-pink-400 hover:text-pink-600 transition-colors"
-                          >
-                            <Volume2 size={16} />
-                          </button>
+                          <div className="flex gap-2 mt-2">
+                            <button 
+                              onClick={() => lerTexto(m.t)}
+                              className="text-pink-400 hover:text-pink-600 transition-colors"
+                              title="Ouvir"
+                            >
+                              <Volume2 size={18} />
+                            </button>
+                            <button 
+                              onClick={() => window.speechSynthesis.cancel()}
+                              className="text-gray-300 hover:text-gray-500 transition-colors"
+                              title="Parar leitura"
+                            >
+                              <VolumeX size={18} />
+                            </button>
+                          </div>
                         )}
                       </div>
                     </motion.div>
