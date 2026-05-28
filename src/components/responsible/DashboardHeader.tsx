@@ -31,7 +31,17 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
         </div>
       </div>
       
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
+        {childId && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-2 bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary"
+            onClick={() => window.location.href = `/anamnese/${childId}`}
+          >
+            <Brain className="h-4 w-4" /> Anamnese
+          </Button>
+        )}
         <Button variant="outline" size="icon" className="rounded-full">
           <Bell className="h-4 w-4" />
         </Button>
