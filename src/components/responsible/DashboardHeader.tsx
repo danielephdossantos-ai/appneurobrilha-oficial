@@ -48,6 +48,16 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
       <div className="flex flex-wrap items-center gap-2">
         {childId && (
           <Button 
+            variant="default" 
+            size="sm" 
+            className="gap-2 bg-indigo-600 hover:bg-indigo-700 shadow-glow animate-pulse hover:animate-none"
+            onClick={handleStudyReminder}
+          >
+            <Send className="h-4 w-4" /> Notificar Celular do Filho
+          </Button>
+        )}
+        {childId && (
+          <Button 
             variant="outline" 
             size="sm" 
             className="gap-2 bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary"
