@@ -31,6 +31,7 @@ const CATEGORIAS = [
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
+  const { sendNotification } = useNotifications();
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
