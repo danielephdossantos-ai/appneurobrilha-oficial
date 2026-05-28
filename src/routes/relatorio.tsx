@@ -19,17 +19,19 @@ function RelatorioPremium() {
   const { activeChild } = useAppState();
   const [anamnesis, setAnamnesis] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [dynamicStats, setDynamicStats] = useState<any[]>([]);
 
   useEffect(() => {
     async function loadData() {
       if (!activeChild?.id) return;
-      const { data } = await supabase
-        .from("child_anamnesis")
-        .select("*")
-        .eq("child_id", activeChild.id)
-        .maybeSingle();
       
-      setAnamnesis(data);
+      const [anamnesisRes, statsRes] = await Promise.all([
+        supabase.from("child_anamnesis").select("*").eq("child_id", activeChild.id).maybeSingle(),
+        supabase.from("activity_logs").select("*").eq("child_id", activeChild.id).limit(20)
+      ]);
+      
+      setAnamnesis(anamnesisRes.data);
+      setDynamicStats(statsRes.data || []);
       setLoading(false);
     }
     loadData();
@@ -37,8 +39,8 @@ function RelatorioPremium() {
 
   const report = useMemo(() => {
     if (!activeChild || !anamnesis) return null;
-    return ReportGenerator.generate(anamnesis.internal_profile, activeChild.nome);
-  }, [activeChild, anamnesis]);
+    return ReportGenerator.generate(anamnesis.internal_profile, activeChild.nome, dynamicStats);
+  }, [activeChild, anamnesis, dynamicStats]);
 
   if (loading) return <Shell><div className="p-10 text-center">Carregando análise...</div></Shell>;
 
