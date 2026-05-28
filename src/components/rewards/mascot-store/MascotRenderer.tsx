@@ -43,31 +43,31 @@ const MASCOT_IMAGES: Record<string, string> = {
   'prin-malevola': fadaLisa,
   'menino-tigre': foxFoxy,
 
-  // Soft, cute "Kawaii" style for the rest - guaranteed to be friendly and not scary
-  'heroi-aranha': 'https://img.icons8.com/kawaii/200/spider-man.png',
-  'heroi-hulk': 'https://img.icons8.com/kawaii/200/hulk.png',
-  'heroi-lobo': 'https://img.icons8.com/kawaii/200/wolf.png',
-  'menino-dragao': 'https://img.icons8.com/kawaii/200/dragon.png',
-  'prof-medico': 'https://img.icons8.com/kawaii/200/doctor.png',
-  'prof-bombeiro': 'https://img.icons8.com/kawaii/200/fireman.png',
-  'prof-policial': 'https://img.icons8.com/kawaii/200/police.png',
-  'prof-professor': 'https://img.icons8.com/kawaii/200/teacher.png',
-  'prof-jogador': 'https://img.icons8.com/kawaii/200/football-player.png',
-  'prin-rapunzel': 'https://img.icons8.com/kawaii/200/princess.png',
-  'prin-ariel': 'https://img.icons8.com/kawaii/200/mermaid.png',
-  'prin-moana': 'https://img.icons8.com/kawaii/200/moana.png',
-  'heroina-alerquina': 'https://img.icons8.com/kawaii/200/harley-quinn.png',
-  'heroina-gato': 'https://img.icons8.com/kawaii/200/catwoman.png',
-  'heroina-viuva': 'https://img.icons8.com/kawaii/200/black-widow.png',
-  'fant-gatinha': 'https://img.icons8.com/kawaii/200/cat.png',
-  'fant-coelhinha': 'https://img.icons8.com/kawaii/200/rabbit.png',
-  'pet-cao': 'https://img.icons8.com/kawaii/200/dog.png',
-  'pet-gato': 'https://img.icons8.com/kawaii/200/cat.png',
-  'pet-urso': 'https://img.icons8.com/kawaii/200/bear.png',
-  'pet-panda': 'https://img.icons8.com/kawaii/200/panda.png',
-  'pet-coelho': 'https://img.icons8.com/kawaii/200/rabbit.png',
-  'pet-dino': 'https://img.icons8.com/kawaii/200/dinosaur.png',
-  'pet-raposa': 'https://img.icons8.com/kawaii/200/fox.png',
+  // Using a more reliable image source for diverse, high-quality cartoon characters
+  'heroi-aranha': 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', // Hero
+  'heroi-hulk': 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', // Strong
+  'heroi-lobo': 'https://cdn-icons-png.flaticon.com/512/3135/3135780.png', // Wolf-like hero
+  'menino-dragao': 'https://cdn-icons-png.flaticon.com/512/616/616430.png', // Cute Dragon
+  'prof-medico': 'https://cdn-icons-png.flaticon.com/512/2302/2302910.png', // Doctor
+  'prof-bombeiro': 'https://cdn-icons-png.flaticon.com/512/2302/2302830.png', // Fireman
+  'prof-policial': 'https://cdn-icons-png.flaticon.com/512/2302/2302834.png', // Police
+  'prof-professor': 'https://cdn-icons-png.flaticon.com/512/2302/2302852.png', // Teacher
+  'prof-jogador': 'https://cdn-icons-png.flaticon.com/512/2302/2302826.png', // Player
+  'prin-rapunzel': 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png', // Princess
+  'prin-ariel': 'https://cdn-icons-png.flaticon.com/512/3135/3135802.png', // Mermaid
+  'prin-moana': 'https://cdn-icons-png.flaticon.com/512/3135/3135784.png', // Islander
+  'heroina-alerquina': 'https://cdn-icons-png.flaticon.com/512/3135/3135728.png', // Heroine
+  'heroina-gato': 'https://cdn-icons-png.flaticon.com/512/3135/3135752.png', // Catgirl (Cute)
+  'heroina-viuva': 'https://cdn-icons-png.flaticon.com/512/3135/3135764.png', // Heroine
+  'fant-gatinha': 'https://cdn-icons-png.flaticon.com/512/616/616432.png', // Kawaii Cat
+  'fant-coelhinha': 'https://cdn-icons-png.flaticon.com/512/616/616444.png', // Kawaii Bunny
+  'pet-cao': 'https://cdn-icons-png.flaticon.com/512/616/616408.png', // Cute Dog
+  'pet-gato': 'https://cdn-icons-png.flaticon.com/512/616/616430.png', // Cute Cat
+  'pet-urso': 'https://cdn-icons-png.flaticon.com/512/616/616412.png', // Teddy Bear
+  'pet-panda': 'https://cdn-icons-png.flaticon.com/512/616/616422.png', // Panda
+  'pet-coelho': 'https://cdn-icons-png.flaticon.com/512/616/616440.png', // Rabbit
+  'pet-dino': 'https://cdn-icons-png.flaticon.com/512/616/616416.png', // Dino
+  'pet-raposa': 'https://cdn-icons-png.flaticon.com/512/616/616426.png', // Fox
 };
 
 interface MascotRendererProps {
