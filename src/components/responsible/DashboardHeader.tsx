@@ -32,8 +32,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
       <div className="flex items-center gap-4">
         <Avatar className="h-16 w-16 border-2 border-primary/20">
           <AvatarImage src="/placeholder-avatar.png" />
-          <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl">
-            {studentName.split(' ').map(n => n[0]).join('')}
+          <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl uppercase">
+            {studentName.substring(0, 2)}
           </AvatarFallback>
         </Avatar>
         <div>
