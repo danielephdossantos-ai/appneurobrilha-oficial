@@ -718,6 +718,50 @@ export type Database = {
           },
         ]
       }
+      study_agenda: {
+        Row: {
+          child_id: string
+          completed: boolean | null
+          created_at: string
+          description: string | null
+          exam_date: string | null
+          id: string
+          topic: string
+          type: string | null
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          exam_date?: string | null
+          id?: string
+          topic: string
+          type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          exam_date?: string | null
+          id?: string
+          topic?: string
+          type?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_agenda_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_privacy_settings: {
         Row: {
           analytics_consent: boolean | null

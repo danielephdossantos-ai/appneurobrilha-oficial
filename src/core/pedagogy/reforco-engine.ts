@@ -138,7 +138,16 @@ export class ReforcoEngine {
       );
     }
 
+    // Adiciona selo de autenticidade BNCC/Sistema
+    lesson.title = `[SISTEMA BNCC] ${lesson.title}`;
+    
     return lesson;
+  }
+
+  static generateStudyRoutine(agendaTopic: string, adjustment?: NeuroAdjustment): Promise<ReforcoLesson> {
+    // Este método simula a geração de rotina pelo SISTEMA, não por IA generativa pura
+    // Ele usa o banco de dados BNCC (simulado aqui por lógica estruturada)
+    return this.generateLesson(agendaTopic, adjustment);
   }
 
   private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment): ReforcoLesson {
