@@ -27,6 +27,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
     });
     toast.success("Lembrete enviado com sucesso!");
   };
+  return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
       <div className="flex items-center gap-4">
         <Avatar className="h-16 w-16 border-2 border-primary/20">
