@@ -2,9 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { useState, useEffect } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, Calendar, ArrowRight, Star, Trophy, Zap, GraduationCap } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
+import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
