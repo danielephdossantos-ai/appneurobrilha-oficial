@@ -5,7 +5,7 @@ export interface BNCCSkill {
   description: string;
   field: "lingua-portuguesa" | "matematica" | "ciencias" | "geografia" | "historia" | "artes" | "educacao-fisica" | "psicomotricidade";
   level: number; // 0 (Preschool), 1 to 9 (year)
-  domain?: "alfabetizacao" | "matematica" | "leitura" | "interpretacao" | "coordenacao";
+  domain?: "alfabetizacao" | "matematica" | "leitura" | "interpretacao" | "coordenacao" | "ortografia";
 }
 
 export const BNCC_SKILLS: BNCCSkill[] = [
