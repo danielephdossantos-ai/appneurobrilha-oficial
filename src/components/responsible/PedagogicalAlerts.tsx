@@ -13,43 +13,9 @@ interface PedagogicalAlertsProps {
   childId?: string;
 }
 
-export const PedagogicalAlerts: React.FC<PedagogicalAlertsProps> = ({ alerts, childId }) => {
-  const [securityAlerts, setSecurityAlerts] = React.useState<any[]>([]);
+export const PedagogicalAlerts: React.FC<PedagogicalAlertsProps> = ({ alerts: mockAlerts, childId }) => {
+  const { notifications, unreadCount, markAsRead } = useNotifications();
 
-  React.useEffect(() => {
-    if (childId) {
-      const fetchAlerts = async () => {
-        const { data, error } = await supabase
-          .from("child_security_alerts")
-          .select("*")
-          .eq("child_id", childId)
-          .order("created_at", { ascending: false })
-          .limit(10);
-        
-        if (!error && data) {
-          setSecurityAlerts(data);
-        }
-      };
-      
-      fetchAlerts();
-      
-      // Real-time subscription
-      const channel = supabase
-        .channel('schema-db-changes')
-        .on(
-          'postgres_changes',
-          { event: 'INSERT', schema: 'public', table: 'child_security_alerts', filter: `child_id=eq.${childId}` },
-          (payload) => {
-            setSecurityAlerts(prev => [payload.new, ...prev]);
-          }
-        )
-        .subscribe();
-
-      return () => {
-        supabase.removeChannel(channel);
-      };
-    }
-  }, [childId]);
   const getIcon = (type: string) => {
     switch (type) {
       case 'success': return <CheckCircle2 className="h-5 w-5 text-green-500" />;
