@@ -25,24 +25,61 @@ const materias = [
 
 function Escola() {
   const { activeChild } = useAppState();
+  const { sendNotification } = useNotifications();
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
+  const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
-  const carregarAula = async (materiaId: string, topic?: string) => {
+  const { data: agenda = [] } = useQuery({
+    queryKey: ["study_agenda", activeChild?.id],
+    queryFn: async () => {
+      if (!activeChild) return [];
+      const { data, error } = await supabase
+        .from("study_agenda")
+        .select("*")
+        .eq("child_id", activeChild.id)
+        .eq("completed", false)
+        .order("exam_date", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!activeChild,
+  });
+
+  const carregarAula = async (materiaId: string, topic?: string, isSystemGenerated = false) => {
     if (!activeChild) return;
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: {
-          mode: "escola",
-          child: activeChild,
-          subject: materiaId,
-          topic: topic || "conforme BNCC da série"
-        }
-      });
+      if (isSystemGenerated && topic) {
+        // Geração via SISTEMA (BNCC Estruturada) como pedido pelo usuário
+        const lesson = await ReforcoEngine.generateLesson(topic);
+        setAula({
+          ...lesson,
+          materia: materiaId,
+          etapa: "ensino",
+          isSystem: true
+        });
+        
+        sendNotification({
+          title: "Hora de Estudar! 📚",
+          message: `${activeChild.nome} começou a rotina de estudos: ${topic}`,
+          type: 'estudo'
+        });
+      } else {
+        // Geração via IA para conteúdos dinâmicos
+        const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+          body: {
+            mode: "escola",
+            child: activeChild,
+            subject: materiaId,
+            topic: topic || "conforme BNCC da série"
+          }
+        });
 
-      if (error) throw error;
-      setAula({ ...data, materia: materiaId, etapa: "ensino" });
+        if (error) throw error;
+        setAula({ ...data, materia: materiaId, etapa: "ensino" });
+      }
     } catch (err) {
       console.error(err);
       toast.error("Erro ao gerar a aula. Tente novamente.");
