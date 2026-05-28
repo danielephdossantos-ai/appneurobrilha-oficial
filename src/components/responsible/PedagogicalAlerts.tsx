@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight, ShieldAlert, Bell } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, ChevronRight, ShieldAlert, Bell, BookOpen } from "lucide-react";
 import { PedagogicalAlert } from "../../data/responsible/mock-data";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useNotifications } from "@/hooks/useNotifications";
