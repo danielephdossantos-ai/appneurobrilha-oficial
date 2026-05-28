@@ -12,7 +12,7 @@ interface DashboardHeaderProps {
   childId?: string;
 }
 
-export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade }) => {
+export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade, childId }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
       <div className="flex items-center gap-4">
