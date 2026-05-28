@@ -148,8 +148,6 @@ function Index() {
       <h2 className="text-xl mb-4">Por onde quer ir?</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <Tile to="/historias" emoji="📚" title="HISTÓRIAS" desc="Livrinho interativo" color="from-[#6C5CE7]/30 to-[#6C5CE7]/5" />
-        <Tile to="/pre-2" emoji="🎈" title="INFANTIL MASTER" desc="Pré 1 e Pré 2" color="from-rose/30 to-rose/5" />
-        <Tile to="/alfabetizacao" emoji="🔤" title="ALFABETIZAÇÃO" desc="Leitura adaptativa" color="from-indigo/30 to-indigo/5" />
         <Tile to="/escola-brilha" emoji="🎓" title="Escola Brilha" desc="BNCC 1º–9º" color="from-primary/20 to-primary/5" />
         
         <Tile to="/reforco-brilha" emoji="✨" title="REFORÇO BRILHA" desc="Sistema de ensino infinito" color="from-petal/30 to-petal/5" />
