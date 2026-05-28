@@ -5,8 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, MessageCircle, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
-import { MascotRenderer } from "@/components/rewards/mascot-store/MascotRenderer";
-import { MASCOTS } from "@/components/rewards/mascot-store/catalog";
+import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
 
 export const Route = createFileRoute("/amigo-virtual")({
   component: AmigoVirtual,
@@ -14,7 +13,7 @@ export const Route = createFileRoute("/amigo-virtual")({
 
 function AmigoVirtual() {
   const { activeChild } = useAppState();
-  const virtualFriend = MASCOTS.find(m => m.id === 'especial-2') || MASCOTS[0];
+  const virtualFriend = { name: "Amigão", emoji: "🦄" };
   
   const [msgs, setMsgs] = useState<{ role: "ai" | "user"; t: string }[]>([
     { role: "ai", t: `Oi, ${activeChild?.nome ?? "amiguinho"}! 🌈 Eu sou o ${virtualFriend.name}. Estou aqui para te ouvir e te dar um abraço virtual gigante! Como você está se sentindo agora?` },
@@ -94,7 +93,7 @@ function AmigoVirtual() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="h-20 w-20 flex items-center justify-center">
-              <MascotRenderer mascot={virtualFriend} size={80} />
+              <SimpleMascotRenderer emoji={virtualFriend.emoji} size={80} />
             </div>
             <div>
               <h2 className="text-2xl font-black text-pink-600">Amigo Virtual</h2>
