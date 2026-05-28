@@ -2,107 +2,76 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MascotData } from './catalog';
 
-// Helper component for creating premium SVG mascots
-const PremiumMascotSVG = ({ mascot, size, isHovered, isClicked }: { mascot: MascotData, size: number, isHovered: boolean, isClicked: boolean }) => {
-  // Logic to determine colors and features based on mascot ID/category
-  const getColorScheme = () => {
-    if (mascot.category.includes('meninos-herois')) return { primary: '#4F46E5', secondary: '#818CF8', accent: '#F59E0B' };
-    if (mascot.category.includes('meninas-princesas')) return { primary: '#EC4899', secondary: '#F472B6', accent: '#FDE68A' };
-    if (mascot.category.includes('bichinhos')) return { primary: '#F97316', secondary: '#FB923C', accent: '#FEF3C7' };
-    if (mascot.category.includes('profissoes')) return { primary: '#06B6D4', secondary: '#22D3EE', accent: '#E0F2FE' };
-    return { primary: '#6366F1', secondary: '#818CF8', accent: '#C7D2FE' };
-  };
+// Import existing high-quality assets
+import heroiLightning from '@/assets/mascots/heroi-lightning.png';
+import heroiShadow from '@/assets/mascots/heroi-shadow.png';
+import heroiFire from '@/assets/mascots/heroi-fire.png';
+import heroiSky from '@/assets/mascots/heroi-sky.png';
+import fadaLisa from '@/assets/mascots/fada-lisa.png';
+import princesaNana from '@/assets/mascots/princesa-nana.png';
+import heroinaEstela from '@/assets/mascots/heroina-estela.png';
+import fadaNuvem from '@/assets/mascots/fada-nuvem.png';
+import dogPipo from '@/assets/mascots/dog-pipo.png';
+import catLuna from '@/assets/mascots/cat-luna.png';
+import bearHug from '@/assets/mascots/bear-hug.png';
+import dinoRex from '@/assets/mascots/dino-rex.png';
+import pandaPandi from '@/assets/mascots/panda-pandi.png';
+import foxFoxy from '@/assets/mascots/fox-foxy.png';
+import penguinPingu from '@/assets/mascots/penguin-pingu.png';
+import unicornUni from '@/assets/mascots/unicorn-uni.png';
+import robotBip from '@/assets/mascots/robot-bip.png';
+import astroLeo from '@/assets/mascots/astro-leo.png';
 
-  const colors = getColorScheme();
+const MASCOT_IMAGES: Record<string, string> = {
+  // Mapping specific IDs to the best matching high-quality characters
+  'heroi-aranha': heroiShadow,
+  'heroi-morcego': heroiShadow,
+  'heroi-ferro': heroiFire,
+  'heroi-hulk': dinoRex,
+  'heroi-capitao': heroiSky,
+  'heroi-flecha': heroiLightning,
+  'heroi-lobo': heroiShadow,
   
-  // Custom features based on ID
-  const isSuperHero = mascot.category.includes('herois') || mascot.category.includes('heroinas');
-  const isAnimal = mascot.category.includes('animais') || mascot.category.includes('bichinhos');
-  const isPrincess = mascot.category.includes('princesas');
-
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 200 200" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      className="drop-shadow-xl"
-    >
-      {/* Body/Head Base */}
-      <motion.ellipse 
-        cx="100" cy="110" rx="60" ry="70" 
-        fill={colors.primary} 
-        animate={{ rx: isHovered ? 62 : 60, ry: isHovered ? 72 : 70 }}
-      />
-      
-      {/* Face Area */}
-      <ellipse cx="100" cy="115" rx="50" ry="55" fill="white" fillOpacity="0.15" />
-
-      {/* Eyes (Premium Style: Large, Expressive) */}
-      <g>
-        {/* Left Eye */}
-        <motion.g animate={{ scaleY: isClicked ? 0.1 : 1 }}>
-          <circle cx="75" cy="105" r="15" fill="#1A1A40" />
-          <circle cx="80" cy="98" r="5" fill="white" /> {/* Reflection */}
-          <circle cx="70" cy="110" r="2" fill="white" fillOpacity="0.5" />
-        </motion.g>
-        
-        {/* Right Eye */}
-        <motion.g animate={{ scaleY: isClicked ? 0.1 : 1 }}>
-          <circle cx="125" cy="105" r="15" fill="#1A1A40" />
-          <circle cx="120" cy="98" r="5" fill="white" /> {/* Reflection */}
-          <circle cx="130" cy="110" r="2" fill="white" fillOpacity="0.5" />
-        </motion.g>
-      </g>
-
-      {/* Cheeks */}
-      <circle cx="60" cy="125" r="8" fill="#FFB6C1" fillOpacity="0.4" />
-      <circle cx="140" cy="125" r="8" fill="#FFB6C1" fillOpacity="0.4" />
-
-      {/* Mouth */}
-      <motion.path 
-        d={isHovered ? "M 85 140 Q 100 155 115 140" : "M 90 145 Q 100 150 110 145"} 
-        stroke="#1A1A40" 
-        strokeWidth="3" 
-        strokeLinecap="round"
-        fill="none"
-      />
-
-      {/* Accessories based on type */}
-      {isSuperHero && (
-        <g>
-          <path d="M 40 80 L 160 80 L 150 60 L 50 60 Z" fill={colors.accent} /> {/* Hero Mask/Band */}
-          <path d="M 100 40 L 110 60 L 90 60 Z" fill={colors.accent} /> {/* Hero Emblem/Top */}
-        </g>
-      )}
-
-      {isAnimal && (
-        <g>
-          {/* Ears */}
-          <circle cx="50" cy="60" r="20" fill={colors.secondary} />
-          <circle cx="150" cy="60" r="20" fill={colors.secondary} />
-          <circle cx="50" cy="60" r="12" fill="#FEE2E2" />
-          <circle cx="150" cy="60" r="12" fill="#FEE2E2" />
-        </g>
-      )}
-
-      {isPrincess && (
-        <g>
-          {/* Crown/Tiara */}
-          <path d="M 70 50 L 85 30 L 100 50 L 115 30 L 130 50 Z" fill={colors.accent} />
-          <circle cx="100" cy="25" r="5" fill="#FDE68A" />
-        </g>
-      )}
-      
-      {/* Interactive Sparkle effect */}
-      {isClicked && (
-        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <path d="M 20 20 L 30 30 M 170 20 L 160 30 M 20 180 L 30 170 M 170 180 L 160 170" stroke="gold" strokeWidth="2" />
-        </motion.g>
-      )}
-    </svg>
-  );
+  'menino-dino': dinoRex,
+  'menino-urso': bearHug,
+  'menino-cao': dogPipo,
+  'menino-gato': catLuna,
+  'menino-dragao': dinoRex,
+  'menino-leao': heroiFire,
+  'menino-tigre': foxFoxy,
+  
+  'prof-medico': heroiSky,
+  'prof-bombeiro': heroiFire,
+  'prof-policial': heroiSky,
+  'prof-professor': heroiShadow,
+  'prof-cientista': robotBip,
+  'prof-jogador': heroiLightning,
+  
+  'prin-rapunzel': fadaLisa,
+  'prin-neve': princesaNana,
+  'prin-cinderela': fadaNuvem,
+  'prin-ariel': fadaLisa,
+  'prin-malevola': heroinaEstela,
+  'prin-moana': heroinaEstela,
+  
+  'heroina-alerquina': heroinaEstela,
+  'heroina-maravilha': heroinaEstela,
+  'heroina-gato': fadaNuvem,
+  'heroina-viuva': heroiShadow,
+  
+  'fant-unicornio': unicornUni,
+  'fant-gatinha': catLuna,
+  'fant-coelhinha': catLuna,
+  'fant-panda': pandaPandi,
+  
+  'pet-cao': dogPipo,
+  'pet-gato': catLuna,
+  'pet-urso': bearHug,
+  'pet-panda': pandaPandi,
+  'pet-coelho': catLuna,
+  'pet-dino': dinoRex,
+  'pet-raposa': foxFoxy,
+  'pet-pinguim': penguinPingu,
 };
 
 interface MascotRendererProps {
@@ -119,6 +88,7 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const src = MASCOT_IMAGES[mascot.id];
 
   const handleClick = () => {
     if (!interactive) return;
@@ -150,22 +120,23 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Premium SVG Mascot */}
-      <motion.div
-        className="relative z-10"
+      {/* Mascot Image */}
+      <motion.img
+        src={src || bearHug}
+        alt={mascot.name}
+        className="relative z-10 object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"
+        style={{ width: size, height: size }}
         animate={{
           y: isHovered ? [0, -15, 0] : [0, -8, 0],
-          rotate: isClicked ? [0, -10, 10, -5, 0] : isHovered ? [0, 2, -2, 0] : 0,
+          rotate: isClicked ? [0, -10, 10, -5, 0] : 0,
           scale: isClicked ? [1, 1.15, 1] : isHovered ? 1.1 : 1,
         }}
         transition={{
           y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-          rotate: { duration: isClicked ? 0.6 : 4, repeat: isHovered ? Infinity : 0 },
+          rotate: { duration: 0.6 },
           scale: { duration: 0.3 },
         }}
-      >
-        <PremiumMascotSVG mascot={mascot} size={size} isHovered={isHovered} isClicked={isClicked} />
-      </motion.div>
+      />
 
       {/* Ground shadow */}
       <motion.div
