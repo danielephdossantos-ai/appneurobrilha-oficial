@@ -96,8 +96,20 @@ export class AnamnesisProcessor {
     return profile;
   }
 
-  static mapToChildPatch(internal: InternalProfile): Partial<Child> {
+  static mapToChildPatch(internal: InternalProfile, originalResponses: AnamnesisData['responses']): Partial<Child> {
+    // Try to map professional diagnosis to app's categories
+    let diagnostico: any = "nenhum";
+    if (originalResponses.diagnostico_profissional.possui && originalResponses.diagnostico_profissional.quais) {
+      const q = originalResponses.diagnostico_profissional.quais.toLowerCase();
+      if (q.includes("tea") || q.includes("autis")) diagnostico = "tea";
+      else if (q.includes("tdah")) diagnostico = "tdah";
+      else if (q.includes("dislexia")) diagnostico = "dislexia";
+      else if (q.includes("tod")) diagnostico = "tod";
+      else if (q.includes("discalc")) diagnostico = "discalculia";
+    }
+
     return {
+      diagnostico,
       perfil: {
         leitura: internal.leitura,
         escrita: 50,
