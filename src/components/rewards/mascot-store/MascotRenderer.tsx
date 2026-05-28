@@ -23,7 +23,7 @@ import robotBip from '@/assets/mascots/robot-bip.png';
 import astroLeo from '@/assets/mascots/astro-leo.png';
 
 const MASCOT_IMAGES: Record<string, string> = {
-  // Use unique local assets for primary spots (these were already called "beautiful")
+  // Local high-quality assets
   'heroi-flecha': heroiLightning,
   'heroi-morcego': heroiShadow,
   'heroi-ferro': heroiFire,
@@ -43,31 +43,31 @@ const MASCOT_IMAGES: Record<string, string> = {
   'prin-malevola': fadaLisa,
   'menino-tigre': foxFoxy,
 
-  // Using a more reliable image source for diverse, high-quality cartoon characters
-  'heroi-aranha': 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', // Hero
-  'heroi-hulk': 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', // Strong
-  'heroi-lobo': 'https://cdn-icons-png.flaticon.com/512/3135/3135780.png', // Wolf-like hero
-  'menino-dragao': 'https://cdn-icons-png.flaticon.com/512/616/616430.png', // Cute Dragon
-  'prof-medico': 'https://cdn-icons-png.flaticon.com/512/2302/2302910.png', // Doctor
-  'prof-bombeiro': 'https://cdn-icons-png.flaticon.com/512/2302/2302830.png', // Fireman
-  'prof-policial': 'https://cdn-icons-png.flaticon.com/512/2302/2302834.png', // Police
-  'prof-professor': 'https://cdn-icons-png.flaticon.com/512/2302/2302852.png', // Teacher
-  'prof-jogador': 'https://cdn-icons-png.flaticon.com/512/2302/2302826.png', // Player
-  'prin-rapunzel': 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png', // Princess
-  'prin-ariel': 'https://cdn-icons-png.flaticon.com/512/3135/3135802.png', // Mermaid
-  'prin-moana': 'https://cdn-icons-png.flaticon.com/512/3135/3135784.png', // Islander
-  'heroina-alerquina': 'https://cdn-icons-png.flaticon.com/512/3135/3135728.png', // Heroine
-  'heroina-gato': 'https://cdn-icons-png.flaticon.com/512/3135/3135752.png', // Catgirl (Cute)
-  'heroina-viuva': 'https://cdn-icons-png.flaticon.com/512/3135/3135764.png', // Heroine
-  'fant-gatinha': 'https://cdn-icons-png.flaticon.com/512/616/616432.png', // Kawaii Cat
-  'fant-coelhinha': 'https://cdn-icons-png.flaticon.com/512/616/616444.png', // Kawaii Bunny
-  'pet-cao': 'https://cdn-icons-png.flaticon.com/512/616/616408.png', // Cute Dog
-  'pet-gato': 'https://cdn-icons-png.flaticon.com/512/616/616430.png', // Cute Cat
-  'pet-urso': 'https://cdn-icons-png.flaticon.com/512/616/616412.png', // Teddy Bear
-  'pet-panda': 'https://cdn-icons-png.flaticon.com/512/616/616422.png', // Panda
-  'pet-coelho': 'https://cdn-icons-png.flaticon.com/512/616/616440.png', // Rabbit
-  'pet-dino': 'https://cdn-icons-png.flaticon.com/512/616/616416.png', // Dino
-  'pet-raposa': 'https://cdn-icons-png.flaticon.com/512/616/616426.png', // Fox
+  // Beautiful Avataaars & Big Ears (Modern, Soft, Child-friendly)
+  'heroi-aranha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Spider&backgroundColor=b6e3f4',
+  'heroi-hulk': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Hulk&backgroundColor=c0aede',
+  'heroi-lobo': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Wolf&backgroundColor=d1d4f9',
+  'menino-dragao': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dragon&backgroundColor=b6e3f4',
+  'prof-medico': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Doctor&backgroundColor=ffdfbf',
+  'prof-bombeiro': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fireman&backgroundColor=ffd5dc',
+  'prof-policial': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Police&backgroundColor=c0aede',
+  'prof-professor': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Teacher&backgroundColor=d1d4f9',
+  'prof-jogador': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Player&backgroundColor=b6e3f4',
+  'prin-rapunzel': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rapunzel&backgroundColor=ffdfbf',
+  'prin-ariel': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ariel&backgroundColor=ffd5dc',
+  'prin-moana': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Moana&backgroundColor=c0aede',
+  'heroina-alerquina': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harley&backgroundColor=d1d4f9',
+  'heroina-gato': 'https://api.dicebear.com/7.x/avataaars/svg?seed=CatGirl&backgroundColor=b6e3f4',
+  'heroina-viuva': 'https://api.dicebear.com/7.x/avataaars/svg?seed=BlackWidow&backgroundColor=ffdfbf',
+  'fant-gatinha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Kitty&backgroundColor=ffd5dc',
+  'fant-coelhinha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bunny&backgroundColor=c0aede',
+  'pet-cao': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dog&backgroundColor=d1d4f9',
+  'pet-gato': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Cat&backgroundColor=b6e3f4',
+  'pet-urso': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear&backgroundColor=ffdfbf',
+  'pet-panda': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Panda&backgroundColor=ffd5dc',
+  'pet-coelho': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Rabbit&backgroundColor=c0aede',
+  'pet-dino': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dino&backgroundColor=d1d4f9',
+  'pet-raposa': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Fox&backgroundColor=b6e3f4',
 };
 
 interface MascotRendererProps {
