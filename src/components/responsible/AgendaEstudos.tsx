@@ -56,6 +56,14 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
           completed: false
         }]);
       if (error) throw error;
+      
+      // Enviar notificação para a criança
+      sendNotification({
+        child_id: childId,
+        title: `Novo item na sua Agenda!`,
+        message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
+        type: 'estudo'
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
