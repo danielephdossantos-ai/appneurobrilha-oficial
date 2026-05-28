@@ -1,105 +1,207 @@
-import React, { lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import React, { useMemo, useEffect, useState } from "react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { Download, BrainCircuit, BarChart3 } from "lucide-react";
-import { ParentalEngine } from "@/core/parental/engine";
-import { CognitiveDashboard } from "@/modules/neuro-engine/components/CognitiveDashboard";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { VirtualizedList } from "@/components/ui/VirtualizedList";
-
-// Lazy load heavy analytics component
-const NeuroAnalyticsDashboard = lazy(() => import("@/modules/analytics/components/NeuroAnalyticsDashboard"));
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
+} from "recharts";
+import { 
+  Brain, Lightbulb, AlertCircle, Info, CheckCircle2 
+} from "lucide-react";
+import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/relatorio")({
-  component: Relatorio,
+  component: RelatorioPremium,
 });
 
-function Relatorio() {
+function RelatorioPremium() {
   const { activeChild } = useAppState();
-  if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+  const [anamnesis, setAnamnesis] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const engineReport = ParentalEngine.generateDailyReport({}, { current: "feliz" });
+  useEffect(() => {
+    async function loadData() {
+      if (!activeChild?.id) return;
+      const { data } = await supabase
+        .from("child_anamnesis")
+        .select("*")
+        .eq("child_id", activeChild.id)
+        .maybeSingle();
+      
+      setAnamnesis(data);
+      setLoading(false);
+    }
+    loadData();
+  }, [activeChild?.id]);
 
-  const semanas = [12, 18, 24, 30, 28, 35, 42];
+  const report = useMemo(() => {
+    if (!activeChild || !anamnesis) return null;
+    return ReportGenerator.generate(anamnesis.internal_profile, activeChild.nome);
+  }, [activeChild, anamnesis]);
+
+  if (loading) return <Shell><div className="p-10 text-center">Carregando análise...</div></Shell>;
+
+  if (!activeChild || !anamnesis) {
+    return (
+      <Shell>
+        <PageHeader emoji="📊" title="Relatório de Evolução" subtitle="Análise do Desenvolvimento" />
+        <Card className="text-center py-10">
+          <p className="text-muted-foreground mb-4">A anamnese ainda não foi concluída para gerar o relatório.</p>
+          <button 
+            onClick={() => window.location.href = `/anamnese/${activeChild?.id || 'nova'}`}
+            className="btn-tap px-6 py-2 bg-primary text-white rounded-xl font-bold"
+          >
+            Realizar Anamnese
+          </button>
+        </Card>
+      </Shell>
+    );
+  }
+
+  const COLORS = {
+    adequate: "#10b981", // Emerald-500
+    developing: "#f59e0b", // Amber-500
+    attention: "#ef4444", // Red-500
+  };
+
+  const STATUS_LABELS = {
+    adequate: "Adequado",
+    developing: "Em desenvolvimento",
+    attention: "Precisa de atenção"
+  };
 
   return (
     <Shell>
-      <PageHeader emoji="📊" title="Relatório de Evolução" subtitle={`Últimos 30 dias · ${activeChild.nome}`} />
-
-      <div className="flex justify-end mb-4">
-        <button className="btn-tap rounded-xl bg-primary text-primary-foreground px-4 py-2 font-bold flex items-center gap-1.5">
-          <Download className="h-4 w-4" /> Exportar PDF
-        </button>
-      </div>
-
-      <Tabs defaultValue="neuro" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="cognitive" className="flex items-center gap-2">
-            <BrainCircuit className="h-4 w-4" /> Perfil Clínico
-          </TabsTrigger>
-          <TabsTrigger value="neuro" className="flex items-center gap-2">
-            <BarChart3 className="h-4 w-4" /> Analytics Avançado
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="cognitive">
-          <CognitiveDashboard childId={activeChild.id} />
-        </TabsContent>
-
-        <TabsContent value="neuro">
-          <Suspense fallback={<div className="p-8 text-center text-slate-400 animate-pulse">Carregando analytics...</div>}>
-            <NeuroAnalyticsDashboard childId={activeChild.id} />
-          </Suspense>
-        </TabsContent>
-      </Tabs>
-
-
-
-      <Card className="mb-4 bg-primary/5 border-primary/20">
-        <div className="flex items-center gap-2 mb-3">
-          <BrainCircuit className="h-5 w-5 text-primary" />
-          <h3 className="font-extrabold">Observação Pedagógica (IA)</h3>
-        </div>
-        <p className="text-sm leading-relaxed italic text-muted-foreground">
-          "{engineReport.observation}"
-        </p>
-        <div className="mt-3 flex gap-4 text-xs font-bold">
-          <div className="flex flex-col">
-            <span className="text-muted-foreground uppercase">Habilidades:</span>
-            <span>+{engineReport.skillsGained} BNCC</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-muted-foreground uppercase">Humor médio:</span>
-            <span className="capitalize">{engineReport.mood}</span>
-          </div>
-        </div>
-      </Card>
-
-      <Card>
-        <h3 className="font-extrabold mb-3 text-slate-800">Histórico de Nível</h3>
-        <VirtualizedList
-          height={200}
-          items={[
-            { d: "12/05", t: "Português subiu para nível 2 — 5 acertos seguidos" },
-            { d: "08/05", t: "Matemática subiu para nível 3 — completou ciclo CRA" },
-            { d: "01/05", t: "Tempo de atenção ajustado para 12 min — pediu pausa" },
-            // Simulando histórico maior para demonstrar a virtualização
-            ...Array(20).fill(null).map((_, i) => ({ 
-              d: `${20-i}/04`, 
-              t: `Progresso contínuo em habilidades executivas ${i+1}` 
-            }))
-          ]}
-          renderItem={(h, i) => (
-            <div key={i} className="flex gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100 mb-2">
-              <span className="font-mono text-slate-400 text-xs mt-1 shrink-0">{h.d}</span>
-              <span className="font-medium text-slate-700 text-sm leading-tight">{h.t}</span>
-            </div>
-          )}
-          estimateSize={60}
-          itemClassName="px-1"
+      <div className="max-w-4xl mx-auto space-y-6 pb-20">
+        <PageHeader 
+          emoji="📊" 
+          title="Análise do Desenvolvimento" 
+          subtitle={`Perfil Neuro-Adaptativo · ${activeChild.nome}`} 
         />
-      </Card>
+
+        {/* 1. Visão Geral (Humanizada) */}
+        <Card className="bg-gradient-to-br from-indigo-50 to-white border-indigo-100">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-indigo-600 p-2 rounded-lg text-white"><Brain className="w-5 h-5" /></div>
+            <h3 className="text-xl font-bold text-indigo-900">Visão Geral</h3>
+          </div>
+          <p className="text-indigo-800 leading-relaxed font-medium italic">
+            "{report?.summary}"
+          </p>
+        </Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* 2. Gráfico de Barras Premium */}
+          <Card className="min-h-[400px]">
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <BarChart className="w-5 h-5 text-primary" /> Perfil de Desenvolvimento
+            </h3>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={report?.scores} layout="vertical" margin={{ left: 20, right: 30 }}>
+                  <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#e2e8f0" />
+                  <XAxis type="number" domain={[0, 100]} hide />
+                  <YAxis 
+                    dataKey="label" 
+                    type="category" 
+                    tick={{ fontWeight: 600, fontSize: 12 }}
+                    width={100}
+                  />
+                  <Tooltip 
+                    cursor={{ fill: '#f8fafc' }}
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        const data = payload[0].payload;
+                        return (
+                          <div className="bg-white p-3 shadow-xl rounded-xl border border-slate-100">
+                            <p className="font-bold text-slate-800">{data.label}</p>
+                            <p className="text-sm font-bold" style={{ color: COLORS[data.status as keyof typeof COLORS] }}>
+                              {STATUS_LABELS[data.status as keyof typeof STATUS_LABELS]}
+                            </p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={32}>
+                    {report?.scores.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[entry.status as keyof typeof COLORS]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            
+            <div className="mt-4 flex flex-wrap gap-4 justify-center text-[10px] font-bold uppercase tracking-wider">
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#10b981]" /> Adequado</div>
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#f59e0b]" /> Em desenvolvimento</div>
+              <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#ef4444]" /> Atenção</div>
+            </div>
+          </Card>
+
+          {/* 3. Pontos Fortes e Atenção */}
+          <div className="space-y-6">
+            <Card className="border-emerald-100 bg-emerald-50/30">
+              <h3 className="text-lg font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" /> Pontos Fortes
+              </h3>
+              <ul className="space-y-3">
+                {report?.strengths.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2 text-emerald-900 text-sm">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card className="border-amber-100 bg-amber-50/30">
+              <h3 className="text-lg font-bold text-amber-800 mb-4 flex items-center gap-2">
+                <AlertCircle className="w-5 h-5" /> Pontos de Atenção
+              </h3>
+              <ul className="space-y-3">
+                {report?.attentionPoints.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2 text-amber-900 text-sm">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </div>
+
+        {/* 4. Recomendações Inteligentes */}
+        <Card className="bg-slate-900 text-white border-slate-800 shadow-2xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-primary p-2 rounded-lg"><Lightbulb className="w-5 h-5 text-white" /></div>
+            <h3 className="text-xl font-bold">Recomendações NeuroBrilha</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {report?.recommendations.map((r, i) => (
+              <div key={i} className="p-4 bg-white/10 rounded-2xl border border-white/10 flex items-center gap-3">
+                <div className="text-2xl">💡</div>
+                <p className="text-sm font-medium">{r}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* 5. Rodapé Profissional */}
+        <div className="p-6 bg-slate-100 rounded-3xl border border-slate-200">
+          <div className="flex items-start gap-4">
+            <div className="bg-slate-200 p-3 rounded-full text-slate-500"><Info className="w-6 h-6" /></div>
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-800">Orientação Profissional</h4>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Este relatório é gerado por inteligência pedagógica baseada no desempenho e anamnese dentro do ambiente digital. Se houver dúvidas ou se você observar comportamentos persistentes fora do app, <strong>recomendamos buscar avaliação com um profissional especializado</strong> (psicólogo, neurologista ou fonoaudiólogo).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </Shell>
   );
 }

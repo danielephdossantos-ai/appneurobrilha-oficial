@@ -158,6 +158,17 @@ function Anamnese() {
         </div>
       )}
 
+      <Card className="max-w-2xl mx-auto mb-6 bg-blue-50/50 border-blue-200">
+        <div className="p-4 flex gap-3 text-sm text-blue-800">
+          <Info className="w-5 h-5 shrink-0" />
+          <div className="space-y-1">
+            <p className="font-bold">Aviso Importante:</p>
+            <p>Esta anamnese é uma triagem inteligente baseada nas respostas do responsável. Ela <strong>NÃO substitui uma avaliação clínica profissional</strong>.</p>
+            <p>O diagnóstico deve ser realizado por profissionais especializados, como psicólogos, fonoaudiólogos, psicopedagogos ou neurologistas. Este app auxilia no desenvolvimento e orienta os pais.</p>
+          </div>
+        </div>
+      </Card>
+
       <Card className="max-w-2xl mx-auto">
         {step === 0 && (
           <div className="space-y-6">
@@ -452,7 +463,11 @@ function Anamnese() {
             <div className="mt-8 p-6 bg-primary/5 rounded-2xl text-center border-2 border-dashed border-primary/20">
               <div className="text-4xl mb-3">🚀</div>
               <h3 className="font-bold text-lg">Quase lá!</h3>
-              <p className="text-sm text-muted-foreground">Ao finalizar, o NeuroBrilha criará um plano adaptativo exclusivo para <strong>{data.dados_crianca.nome || 'seu filho'}</strong>.</p>
+              <p className="text-sm text-muted-foreground mb-4">Ao finalizar, o NeuroBrilha criará uma <strong>Análise do Desenvolvimento</strong> adaptativa exclusiva para <strong>{data.dados_crianca.nome || 'seu filho'}</strong>.</p>
+              
+              <div className="p-4 bg-white/60 rounded-xl text-xs text-left text-muted-foreground space-y-2">
+                <p>⚠️ <strong>Lembrete:</strong> Esta triagem não substitui neurologistas, psicólogos ou outros especialistas. Se houver dúvidas, recomendamos buscar avaliação com um profissional especializado.</p>
+              </div>
             </div>
           </div>
         )}
