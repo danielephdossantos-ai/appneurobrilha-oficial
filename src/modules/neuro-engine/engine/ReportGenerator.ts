@@ -2,10 +2,15 @@ import { InternalProfile } from "./AnamnesisProcessor";
 
 export interface ReportData {
   summary: string;
-  scores: {
+  initialProfile: {
     label: string;
     value: number;
     status: 'adequate' | 'developing' | 'attention';
+  }[];
+  evolution: {
+    label: string;
+    description: string;
+    trend: 'up' | 'stable' | 'down';
   }[];
   strengths: string[];
   attentionPoints: string[];
