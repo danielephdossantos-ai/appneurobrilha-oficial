@@ -108,23 +108,51 @@ function Escola() {
     <Shell>
       <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
 
-      <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
-        <div className="flex items-center gap-4">
-          <div className="text-5xl">{activeChild.avatar}</div>
-          <div className="flex-1">
-            <div className="font-extrabold text-lg">Continue de onde parou</div>
-            <div className="text-sm text-muted-foreground">Português · Encontros vocálicos · Aula 3 de 8</div>
-            <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: "37%" }} />
-            </div>
+      {agenda.length > 0 && (
+        <div className="mb-10 space-y-4 animate-in slide-in-from-top-4 duration-500">
+          <h3 className="text-sm font-black flex items-center gap-2 px-1 text-primary uppercase tracking-widest">
+            <Calendar className="h-4 w-4" />
+            Agenda da Mamãe: Estudos da Semana
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {agenda.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => carregarAula(item.subject || "Geral", item.topic, true)}
+                className="p-6 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/10 hover:border-primary/30 hover:shadow-glow transition-all text-left flex items-start gap-4 group relative overflow-hidden"
+              >
+                <div className="h-14 w-14 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform text-3xl">
+                  {item.type === 'prova' ? '🚩' : item.type === 'trabalho' ? '📝' : '📖'}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-black text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full">
+                      {item.type}
+                    </span>
+                    {item.exam_date && (
+                      <span className="text-[10px] text-muted-foreground font-bold">
+                        {format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR })}
+                      </span>
+                    )}
+                  </div>
+                  <div className="font-black text-slate-800 text-xl leading-tight">{item.topic}</div>
+                  <div className="mt-3 flex items-center gap-1.5 text-primary font-bold text-xs">
+                    INICIAR ROTINA DE ESTUDO <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+                <div className="absolute -right-2 -bottom-2 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <GraduationCap className="h-20 w-20" />
+                </div>
+              </button>
+            ))}
           </div>
-          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
-            <Play className="h-4 w-4" /> Retomar
-          </button>
         </div>
-      </Card>
+      )}
 
-      <h2 className="text-xl mb-4">Matérias</h2>
+      <h2 className="text-xl font-black mb-4 flex items-center gap-2">
+        <BookOpen className="h-5 w-5 text-primary" />
+        Matérias Base
+      </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materias.map((m) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
