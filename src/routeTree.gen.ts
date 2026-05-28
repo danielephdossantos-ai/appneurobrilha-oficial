@@ -14,7 +14,6 @@ import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
-import { Route as ProfessorIaRouteImport } from './routes/professor-ia'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
@@ -52,11 +51,6 @@ const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
 const ProgressaoRoute = ProgressaoRouteImport.update({
   id: '/progressao',
   path: '/progressao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfessorIaRoute = ProfessorIaRouteImport.update({
-  id: '/professor-ia',
-  path: '/professor-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PainelPaisRoute = PainelPaisRouteImport.update({
@@ -138,7 +132,6 @@ export interface FileRoutesByFullPath {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -159,7 +152,6 @@ export interface FileRoutesByTo {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -181,7 +173,6 @@ export interface FileRoutesById {
   '/jornada-365': typeof Jornada365Route
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
-  '/professor-ia': typeof ProfessorIaRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
@@ -204,7 +195,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -225,7 +215,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -246,7 +235,6 @@ export interface FileRouteTypes {
     | '/jornada-365'
     | '/neuro-treino'
     | '/painel-pais'
-    | '/professor-ia'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
@@ -268,7 +256,6 @@ export interface RootRouteChildren {
   Jornada365Route: typeof Jornada365Route
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
-  ProfessorIaRoute: typeof ProfessorIaRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
@@ -313,13 +300,6 @@ declare module '@tanstack/react-router' {
       path: '/progressao'
       fullPath: '/progressao'
       preLoaderRoute: typeof ProgressaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/professor-ia': {
-      id: '/professor-ia'
-      path: '/professor-ia'
-      fullPath: '/professor-ia'
-      preLoaderRoute: typeof ProfessorIaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/painel-pais': {
@@ -428,7 +408,6 @@ const rootRouteChildren: RootRouteChildren = {
   Jornada365Route: Jornada365Route,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
-  ProfessorIaRoute: ProfessorIaRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
@@ -440,3 +419,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
