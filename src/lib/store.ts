@@ -213,7 +213,8 @@ export function useAppState() {
         .maybeSingle();
 
       if (existing) {
-        if (existing.edit_count >= 3) {
+        const count = existing.edit_count ?? 0;
+        if (count >= 3) {
           throw new Error("Limite de 3 edições atingido para esta anamnese.");
         }
         const { error } = await supabase
@@ -221,14 +222,14 @@ export function useAppState() {
           .update({
             responses: anamnesis.responses,
             internal_profile: anamnesis.internal_profile,
-            edit_count: existing.edit_count + 1
+            edit_count: count + 1
           })
           .eq("id", existing.id);
         if (error) throw error;
         
         await supabase
           .from("children")
-          .update({ anamnesis_edit_count: existing.edit_count + 1 })
+          .update({ anamnesis_edit_count: count + 1 })
           .eq("id", anamnesis.child_id);
       } else {
         const { data, error } = await supabase
