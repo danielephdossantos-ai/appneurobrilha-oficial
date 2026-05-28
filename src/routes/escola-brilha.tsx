@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { useState, useEffect } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, Calendar, ArrowRight, Star, Trophy, Zap, GraduationCap } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Play, BookOpen, Volume2, VolumeX, CheckCircle2, Lightbulb, Loader2, Calendar, ArrowRight, Star, Trophy, Zap, GraduationCap, Headphones } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
@@ -16,11 +16,11 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
+  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5" },
+  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5" },
+  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5" },
+  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5" },
+  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5" },
 ] as const;
 
 function Escola() {
@@ -51,19 +51,28 @@ function Escola() {
     if (!activeChild) return;
     setLoading(true);
     try {
-      if (isSystemGenerated && topic) {
-        // Geração via SISTEMA (BNCC Estruturada) como pedido pelo usuário
-        const lesson = await ReforcoEngine.generateLesson(topic);
+      // Obtém o mapeamento numérico da série para a BNCC
+      const serieNum = activeChild.serie ? (
+        activeChild.serie.includes('Educação Infantil') ? 0 : 
+        parseInt(activeChild.serie.match(/\d+/)?.[0] || "1")
+      ) : 1;
+
+      if (isSystemGenerated || !topic) {
+        // Geração via SISTEMA (BNCC Estruturada)
+        const lesson = await ReforcoEngine.generateLesson(
+          topic || materiaId, 
+          undefined, 
+          { ...activeChild, serie_num: serieNum }
+        );
         setAula({
           ...lesson,
           materia: materiaId,
-          etapa: "ensino",
-          isSystem: true
+          etapa: "ensino"
         });
         
         sendNotification({
           title: "Hora de Estudar! 📚",
-          message: `${activeChild.nome} começou a rotina de estudos: ${topic}`,
+          message: `${activeChild.nome} começou a rotina de estudos: ${topic || materiaId}`,
           type: 'estudo'
         });
       } else {
@@ -82,21 +91,26 @@ function Escola() {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Erro ao gerar a aula. Tente novamente.");
+      toast.error("Erro ao preparar sua aula. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+  if (!activeChild) return <Shell><p className="p-8 text-center font-bold">Por favor, selecione uma criança no menu principal.</p></Shell>;
 
   if (loading) {
     return (
       <Shell>
-        <div className="h-full flex flex-col items-center justify-center p-12 text-center">
-          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
-          <h2 className="text-2xl font-bold">Preparando sua aula especial...</h2>
-          <p className="text-muted-foreground">O {activeChild.hiperfoco === 'dinossauros' ? 'dinossauro' : 'amigo'} está organizando tudo!</p>
+        <div className="h-full flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
+          <div className="relative">
+            <Loader2 className="h-20 w-20 text-primary animate-spin mb-8 opacity-20" />
+            <div className="absolute inset-0 flex items-center justify-center text-4xl animate-bounce">
+              {activeChild.hiperfoco === 'dinossauros' ? '🦕' : '🌟'}
+            </div>
+          </div>
+          <h2 className="text-3xl font-black text-slate-800">Organizando seu Brilho...</h2>
+          <p className="text-muted-foreground mt-2 text-lg">Preparando uma aula incrível para você!</p>
         </div>
       </Shell>
     );
