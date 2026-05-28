@@ -141,7 +141,13 @@ function Escola() {
                     </span>
                     {item.exam_date && (
                       <span className="text-[10px] text-muted-foreground font-bold">
-                        {format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR })}
+                        {(() => {
+                          try {
+                            return format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR });
+                          } catch (e) {
+                            return item.exam_date;
+                          }
+                        })()}
                       </span>
                     )}
                   </div>
@@ -169,7 +175,7 @@ function Escola() {
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+            <Pill tone="info">Nível {activeChild.niveis ? (activeChild.niveis as any)[m.id] ?? 2 : 2}</Pill>
           </button>
         ))}
       </div>
@@ -202,9 +208,9 @@ function AulaView({
   };
 
   // Se for sistema, pegamos o conteúdo do nível atual
-  const steps = aula.isSystem ? aula.levels[currentLevel] : [];
-  const explanation = aula.isSystem ? steps.find((s: any) => s.type === "explanation")?.text : aula.ensino;
-  const example = aula.isSystem ? steps.find((s: any) => s.type === "example")?.text : aula.demo;
+  const steps = (aula.isSystem && aula.levels) ? (aula.levels[currentLevel] || []) : [];
+  const explanation = aula.isSystem ? steps.find((s: any) => s.type === "explanation")?.text : (aula.ensino || aula.explanation);
+  const example = aula.isSystem ? steps.find((s: any) => s.type === "example")?.text : (aula.demo || "");
   const exercise = aula.isSystem ? steps.find((s: any) => s.type === "exercise") : null;
 
   return (
@@ -212,7 +218,7 @@ function AulaView({
       <PageHeader 
         emoji="🎓" 
         title={aula.isSystem ? aula.title : titulos[aula.etapa]} 
-        subtitle={aula.isSystem ? "Sistema BNCC Ativo" : `${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} 
+        subtitle={aula.isSystem ? "Sistema BNCC Ativo" : `${(aula.materia || "Geral").charAt(0).toUpperCase() + (aula.materia || "Geral").slice(1)} · Adaptado para você`} 
       />
 
       {aula.isSystem && (
@@ -303,7 +309,7 @@ function AulaView({
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(aula.isSystem ? ["Opção A", "Opção B", "Opção C", "Opção D"] : aula.opcoes).map((opt: string) => (
+              {(aula.isSystem ? ["Opção A", "Opção B", "Opção C", "Opção D"] : (aula.opcoes || [])).map((opt: string) => (
                 <button 
                   key={opt} 
                   onClick={() => {

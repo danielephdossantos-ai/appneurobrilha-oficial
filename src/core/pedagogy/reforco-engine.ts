@@ -24,8 +24,8 @@ export interface ReforcoLesson {
 }
 
 export class ReforcoEngine {
-  static async generateLesson(topic: string, adjustment?: NeuroAdjustment): Promise<ReforcoLesson> {
-    const lowerTopic = topic.toLowerCase();
+  static async generateLesson(topic: string = "Geral", adjustment?: NeuroAdjustment): Promise<ReforcoLesson> {
+    const lowerTopic = (topic || "Geral").toLowerCase();
     
     // Tenta buscar no banco pedagógico primeiro
     try {
