@@ -3,10 +3,12 @@ import React, { useMemo, useEffect, useState } from "react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
+  LineChart, Line, Legend
 } from "recharts";
 import { 
-  Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3
+  Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
+  Calendar, ArrowUpRight, History, Sparkles
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
 import { supabase } from "@/integrations/supabase/client";
@@ -114,6 +116,85 @@ function RelatorioPremium() {
             ))}
           </div>
         </Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* BLOCO NOVO — COMPARAÇÃO SEMANAL */}
+          <Card className="shadow-lg border-slate-100 p-8">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+              <History className="w-6 h-6 text-indigo-600" /> Comparação Semanal
+            </h3>
+            <div className="space-y-6">
+              {report?.comparisons.map((comp, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <span className="font-bold text-slate-700">{comp.category}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-slate-400 font-bold">Semana passada: {comp.lastWeek}%</span>
+                      <span className="text-sm font-black text-indigo-600">{comp.current}%</span>
+                      {comp.change > 0 && (
+                        <span className="flex items-center text-[10px] font-black text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded">
+                          <ArrowUpRight className="w-3 h-3" /> +{comp.change}%
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
+                    <div 
+                      className="h-full bg-indigo-200 transition-all duration-1000" 
+                      style={{ width: `${comp.lastWeek}%` }}
+                    />
+                    <div 
+                      className="h-full bg-indigo-600 transition-all duration-1000" 
+                      style={{ width: `${comp.current - comp.lastWeek}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-xs font-bold text-indigo-600 bg-indigo-50 p-3 rounded-xl border border-indigo-100 italic">
+              "Houve evolução nas atividades de atenção e linguagem nos últimos 7 dias."
+            </p>
+          </Card>
+
+          {/* BLOCO NOVO — COMPARAÇÃO MENSAL (GRÁFICO DE LINHA) */}
+          <Card className="shadow-lg border-slate-100 p-8">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+              <Calendar className="w-6 h-6 text-emerald-600" /> Tendência Mensal
+            </h3>
+            <div className="h-[250px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={report?.monthlyTrend}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis 
+                    dataKey="day" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fontSize: 11, fontWeight: 700, fill: '#64748b' }} 
+                  />
+                  <YAxis hide domain={[0, 100]} />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                    itemStyle={{ fontWeight: 800, color: '#059669' }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="Progresso Geral"
+                    stroke="#059669" 
+                    strokeWidth={4} 
+                    dot={{ r: 6, fill: '#059669', strokeWidth: 2, stroke: '#fff' }}
+                    activeDot={{ r: 8, shadow: '0 0 10px rgba(5, 150, 105, 0.5)' }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-6 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+              <p className="text-sm font-black text-emerald-800 flex items-center gap-2">
+                <Sparkles className="w-4 h-4" /> Melhora consistente na atenção nas últimas semanas!
+              </p>
+            </div>
+          </Card>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* BLOCO 2 — GRÁFICO PRINCIPAL (FIXO) */}
