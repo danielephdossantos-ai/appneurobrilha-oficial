@@ -10,6 +10,7 @@ import { PedagogicalAlerts } from "@/components/responsible/PedagogicalAlerts";
 import { RoutineManager } from "@/components/responsible/RoutineManager";
 import { AdaptivePlan } from "@/components/responsible/AdaptivePlan";
 import { FocusChart } from "@/components/responsible/FocusChart";
+import { AgendaEstudos } from "@/components/responsible/AgendaEstudos";
 import { mockResponsibleData } from "@/data/responsible/mock-data";
 import { ResponsibleIntelligence } from "@/core/responsible/intelligence";
 import { motion } from "framer-motion";
@@ -108,6 +109,10 @@ function PainelPremium() {
 
           {/* Right Column - Intelligence and Alerts */}
           <div className="space-y-6">
+            <motion.div variants={itemVariants}>
+              <AgendaEstudos childId={activeChild.id} />
+            </motion.div>
+
             <motion.div variants={itemVariants}>
               <AdaptivePlan recommendations={analysis.recommendations} />
             </motion.div>
