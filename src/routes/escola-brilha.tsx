@@ -218,7 +218,7 @@ function AulaView({
       <PageHeader 
         emoji="🎓" 
         title={aula.isSystem ? aula.title : titulos[aula.etapa]} 
-        subtitle={aula.isSystem ? "Sistema BNCC Ativo" : `${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} 
+        subtitle={aula.isSystem ? "Sistema BNCC Ativo" : `${(aula.materia || "Geral").charAt(0).toUpperCase() + (aula.materia || "Geral").slice(1)} · Adaptado para você`} 
       />
 
       {aula.isSystem && (
@@ -309,7 +309,7 @@ function AulaView({
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(aula.isSystem ? ["Opção A", "Opção B", "Opção C", "Opção D"] : aula.opcoes).map((opt: string) => (
+              {(aula.isSystem ? ["Opção A", "Opção B", "Opção C", "Opção D"] : (aula.opcoes || [])).map((opt: string) => (
                 <button 
                   key={opt} 
                   onClick={() => {
