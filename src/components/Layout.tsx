@@ -16,7 +16,6 @@ const navCrianca = [
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
-  { to: "/professor-ia", label: "Professor IA", icon: Camera },
   { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
@@ -36,7 +35,6 @@ const navigationSequence = [
   "/reforco-brilha",
   "/neuro-treino",
   "/jornada-365",
-  "/professor-ia",
   "/amigo-virtual",
   "/rotina",
   "/painel-pais",
@@ -229,7 +227,7 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
-    { to: "/professor-ia", icon: Camera, label: "Professor" },
+    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
     { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
     { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
