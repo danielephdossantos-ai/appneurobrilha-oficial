@@ -72,6 +72,7 @@ function PainelPremium() {
 
           studentName={activeChild.nome || mockResponsibleData.studentName} 
           grade={mockResponsibleData.grade} 
+          childId={activeChild.id}
         />
 
         <motion.div 
