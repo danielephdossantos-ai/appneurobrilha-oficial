@@ -18,7 +18,7 @@ const navCrianca = [
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
   { to: "/professor-ia", label: "Professor IA", icon: Camera },
   { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
-  { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
+  
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
@@ -38,7 +38,7 @@ const navigationSequence = [
   "/jornada-365",
   "/professor-ia",
   "/amigo-virtual",
-  "/loja-mascotes",
+  
   "/rotina",
   "/painel-pais",
   "/terapeuta-brilha",
