@@ -73,7 +73,7 @@ function Anamnese() {
       
       if (existing) {
         setData(existing.responses as any);
-        setEditCount(existing.edit_count);
+        setEditCount(existing.edit_count ?? 0);
       }
       setLoading(false);
     }
