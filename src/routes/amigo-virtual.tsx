@@ -78,7 +78,7 @@ function AmigoVirtual() {
           mode: "amigo-virtual", 
           child: activeChild,
           message: q,
-          chatHistory: msgs.slice(-4).map(m => ({ 
+          chatHistory: msgs.slice(-6).map(m => ({ 
             role: m.role === "ai" ? "assistant" : "user", 
             content: m.t 
           }))
