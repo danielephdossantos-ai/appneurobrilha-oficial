@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 interface DashboardHeaderProps {
   studentName: string;
   grade: string;
+  childId?: string;
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade }) => {
