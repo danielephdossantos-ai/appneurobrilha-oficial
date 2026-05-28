@@ -2,95 +2,107 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MascotData } from './catalog';
 
-import heroiLightning from '@/assets/mascots/heroi-lightning.png';
-import heroiShadow from '@/assets/mascots/heroi-shadow.png';
-import heroiFire from '@/assets/mascots/heroi-fire.png';
-import heroiSky from '@/assets/mascots/heroi-sky.png';
-import fadaLisa from '@/assets/mascots/fada-lisa.png';
-import princesaNana from '@/assets/mascots/princesa-nana.png';
-import heroinaEstela from '@/assets/mascots/heroina-estela.png';
-import fadaNuvem from '@/assets/mascots/fada-nuvem.png';
-import dogPipo from '@/assets/mascots/dog-pipo.png';
-import catLuna from '@/assets/mascots/cat-luna.png';
-import bearHug from '@/assets/mascots/bear-hug.png';
-import dinoRex from '@/assets/mascots/dino-rex.png';
-import pandaPandi from '@/assets/mascots/panda-pandi.png';
-import foxFoxy from '@/assets/mascots/fox-foxy.png';
-import penguinPingu from '@/assets/mascots/penguin-pingu.png';
-import unicornUni from '@/assets/mascots/unicorn-uni.png';
-import robotBip from '@/assets/mascots/robot-bip.png';
-import astroLeo from '@/assets/mascots/astro-leo.png';
+// Helper component for creating premium SVG mascots
+const PremiumMascotSVG = ({ mascot, size, isHovered, isClicked }: { mascot: MascotData, size: number, isHovered: boolean, isClicked: boolean }) => {
+  // Logic to determine colors and features based on mascot ID/category
+  const getColorScheme = () => {
+    if (mascot.category.includes('meninos-herois')) return { primary: '#4F46E5', secondary: '#818CF8', accent: '#F59E0B' };
+    if (mascot.category.includes('meninas-princesas')) return { primary: '#EC4899', secondary: '#F472B6', accent: '#FDE68A' };
+    if (mascot.category.includes('bichinhos')) return { primary: '#F97316', secondary: '#FB923C', accent: '#FEF3C7' };
+    if (mascot.category.includes('profissoes')) return { primary: '#06B6D4', secondary: '#22D3EE', accent: '#E0F2FE' };
+    return { primary: '#6366F1', secondary: '#818CF8', accent: '#C7D2FE' };
+  };
 
-const MASCOT_IMAGES: Record<string, string> = {
-  // Mapping new IDs to existing assets where possible, or using placeholders
-  'heroi-aranha': heroiShadow, // Dark/Heroic
-  'heroi-morcego': heroiShadow,
-  'heroi-ferro': heroiFire, // Red/Tech
-  'heroi-hulk': dinoRex, // Green/Strong
-  'heroi-capitao': heroiSky, // Blue/Leader
-  'heroi-flecha': heroiLightning, // Fast/Lightning
-  'heroi-lobo': heroiShadow,
+  const colors = getColorScheme();
   
-  'menino-dino': dinoRex,
-  'menino-urso': bearHug,
-  'menino-cao': dogPipo,
-  'menino-gato': catLuna,
-  'menino-dragao': dinoRex,
-  'menino-leao': astroLeo,
-  'menino-tigre': foxFoxy,
-  
-  'prof-medico': heroiSky,
-  'prof-bombeiro': heroiFire,
-  'prof-policial': heroiSky,
-  'prof-professor': heroiShadow,
-  'prof-cientista': robotBip,
-  'prof-jogador': heroiLightning,
-  
-  'prin-rapunzel': fadaLisa,
-  'prin-neve': princesaNana,
-  'prin-cinderela': fadaNuvem,
-  'prin-ariel': fadaLisa,
-  'prin-malevola': heroinaEstela,
-  'prin-moana': heroinaEstela,
-  
-  'heroina-alerquina': heroinaEstela,
-  'heroina-maravilha': heroinaEstela,
-  'heroina-gato': fadaNuvem,
-  'heroina-viuva': heroiShadow,
-  
-  'fant-unicornio': unicornUni,
-  'fant-gatinha': catLuna,
-  'fant-coelhinha': catLuna,
-  'fant-panda': pandaPandi,
-  
-  'pet-cao': dogPipo,
-  'pet-gato': catLuna,
-  'pet-urso': bearHug,
-  'pet-panda': pandaPandi,
-  'pet-coelho': catLuna,
-  'pet-dino': dinoRex,
-  'pet-raposa': foxFoxy,
-  'pet-pinguim': penguinPingu,
-  
-  // Keep old ones for compatibility if needed
-  'heroi-lightning': heroiLightning,
-  'heroi-shadow': heroiShadow,
-  'heroi-fire': heroiFire,
-  'heroi-sky': heroiSky,
-  'fada-lisa': fadaLisa,
-  'princesa-nana': princesaNana,
-  'heroina-estela': heroinaEstela,
-  'fada-nuvem': fadaNuvem,
-  'dog-pipo': dogPipo,
-  'cat-luna': catLuna,
-  'bear-hug': bearHug,
-  'dino-rex': dinoRex,
-  'panda-pandi': pandaPandi,
-  'fox-foxy': foxFoxy,
-  'penguin-pingu': penguinPingu,
-  'unicorn-uni': unicornUni,
-  'robot-bip': robotBip,
-  'astro-leo': astroLeo,
+  // Custom features based on ID
+  const isSuperHero = mascot.category.includes('herois') || mascot.category.includes('heroinas');
+  const isAnimal = mascot.category.includes('animais') || mascot.category.includes('bichinhos');
+  const isPrincess = mascot.category.includes('princesas');
+
+  return (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 200 200" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      className="drop-shadow-xl"
+    >
+      {/* Body/Head Base */}
+      <motion.ellipse 
+        cx="100" cy="110" rx="60" ry="70" 
+        fill={colors.primary} 
+        animate={{ rx: isHovered ? 62 : 60, ry: isHovered ? 72 : 70 }}
+      />
+      
+      {/* Face Area */}
+      <ellipse cx="100" cy="115" rx="50" ry="55" fill="white" fillOpacity="0.15" />
+
+      {/* Eyes (Premium Style: Large, Expressive) */}
+      <g>
+        {/* Left Eye */}
+        <motion.g animate={{ scaleY: isClicked ? 0.1 : 1 }}>
+          <circle cx="75" cy="105" r="15" fill="#1A1A40" />
+          <circle cx="80" cy="98" r="5" fill="white" /> {/* Reflection */}
+          <circle cx="70" cy="110" r="2" fill="white" fillOpacity="0.5" />
+        </motion.g>
+        
+        {/* Right Eye */}
+        <motion.g animate={{ scaleY: isClicked ? 0.1 : 1 }}>
+          <circle cx="125" cy="105" r="15" fill="#1A1A40" />
+          <circle cx="120" cy="98" r="5" fill="white" /> {/* Reflection */}
+          <circle cx="130" cy="110" r="2" fill="white" fillOpacity="0.5" />
+        </motion.g>
+      </g>
+
+      {/* Cheeks */}
+      <circle cx="60" cy="125" r="8" fill="#FFB6C1" fillOpacity="0.4" />
+      <circle cx="140" cy="125" r="8" fill="#FFB6C1" fillOpacity="0.4" />
+
+      {/* Mouth */}
+      <motion.path 
+        d={isHovered ? "M 85 140 Q 100 155 115 140" : "M 90 145 Q 100 150 110 145"} 
+        stroke="#1A1A40" 
+        strokeWidth="3" 
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      {/* Accessories based on type */}
+      {isSuperHero && (
+        <g>
+          <path d="M 40 80 L 160 80 L 150 60 L 50 60 Z" fill={colors.accent} /> {/* Hero Mask/Band */}
+          <path d="M 100 40 L 110 60 L 90 60 Z" fill={colors.accent} /> {/* Hero Emblem/Top */}
+        </g>
+      )}
+
+      {isAnimal && (
+        <g>
+          {/* Ears */}
+          <circle cx="50" cy="60" r="20" fill={colors.secondary} />
+          <circle cx="150" cy="60" r="20" fill={colors.secondary} />
+          <circle cx="50" cy="60" r="12" fill="#FEE2E2" />
+          <circle cx="150" cy="60" r="12" fill="#FEE2E2" />
+        </g>
+      )}
+
+      {isPrincess && (
+        <g>
+          {/* Crown/Tiara */}
+          <path d="M 70 50 L 85 30 L 100 50 L 115 30 L 130 50 Z" fill={colors.accent} />
+          <circle cx="100" cy="25" r="5" fill="#FDE68A" />
+        </g>
+      )}
+      
+      {/* Interactive Sparkle effect */}
+      {isClicked && (
+        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <path d="M 20 20 L 30 30 M 170 20 L 160 30 M 20 180 L 30 170 M 170 180 L 160 170" stroke="gold" strokeWidth="2" />
+        </motion.g>
+      )}
+    </svg>
+  );
 };
 
 interface MascotRendererProps {
@@ -107,24 +119,12 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const src = MASCOT_IMAGES[mascot.id];
 
   const handleClick = () => {
     if (!interactive) return;
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 700);
   };
-
-  if (!src) {
-    return (
-      <div
-        className="flex items-center justify-center rounded-3xl bg-muted text-4xl"
-        style={{ width: size, height: size }}
-      >
-        ✨
-      </div>
-    );
-  }
 
   return (
     <div
@@ -137,76 +137,68 @@ export const MascotRenderer: React.FC<MascotRendererProps> = ({
     >
       {/* Soft glow halo */}
       <motion.div
-        className="absolute inset-0 rounded-full blur-2xl"
+        className="absolute inset-0 rounded-full blur-3xl"
         style={{
-          background:
-            'radial-gradient(circle, rgba(255,182,193,0.45) 0%, rgba(186,200,255,0.25) 45%, transparent 70%)',
+          background: mascot.category.includes('meninas') 
+            ? 'radial-gradient(circle, rgba(236,72,153,0.3) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(79,70,229,0.3) 0%, transparent 70%)',
         }}
         animate={{
-          scale: isHovered ? [1, 1.15, 1] : [1, 1.05, 1],
-          opacity: isHovered ? 0.9 : 0.55,
+          scale: isHovered ? [1, 1.2, 1] : [1, 1.05, 1],
+          opacity: isHovered ? 0.8 : 0.4,
         }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Ground shadow */}
+      {/* Premium SVG Mascot */}
       <motion.div
-        className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-[50%] bg-[rgba(26,26,64,0.18)] blur-[3px]"
-        style={{ width: size * 0.55, height: size * 0.06 }}
+        className="relative z-10"
         animate={{
-          scaleX: isHovered ? [1, 1.1, 1] : [1, 0.95, 1],
-          opacity: isHovered ? 0.35 : 0.25,
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Mascot image with floating animation */}
-      <motion.img
-        src={src}
-        alt={mascot.name}
-        loading="lazy"
-        draggable={false}
-        className="relative z-10 object-contain drop-shadow-[0_18px_22px_rgba(26,26,64,0.22)]"
-        style={{
-          width: size,
-          height: size,
-          cursor: interactive ? 'pointer' : 'default',
-        }}
-        animate={{
-          y: isHovered ? [0, -10, 0] : [0, -6, 0],
-          rotate: isClicked ? [0, -6, 6, -3, 0] : 0,
-          scale: isClicked ? [1, 1.12, 1] : isHovered ? 1.05 : 1,
+          y: isHovered ? [0, -15, 0] : [0, -8, 0],
+          rotate: isClicked ? [0, -10, 10, -5, 0] : isHovered ? [0, 2, -2, 0] : 0,
+          scale: isClicked ? [1, 1.15, 1] : isHovered ? 1.1 : 1,
         }}
         transition={{
           y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-          rotate: { duration: 0.6 },
+          rotate: { duration: isClicked ? 0.6 : 4, repeat: isHovered ? Infinity : 0 },
           scale: { duration: 0.3 },
         }}
+      >
+        <PremiumMascotSVG mascot={mascot} size={size} isHovered={isHovered} isClicked={isClicked} />
+      </motion.div>
+
+      {/* Ground shadow */}
+      <motion.div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-[50%] bg-black/10 blur-md"
+        style={{ width: size * 0.6, height: size * 0.08 }}
+        animate={{
+          scaleX: isHovered ? [1, 1.15, 1] : [1, 0.9, 1],
+          opacity: isHovered ? 0.4 : 0.2,
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Sparkles on click */}
       <AnimatePresence>
         {isClicked && (
-          <>
-            {['✨', '💖', '⭐', '🌟', '🌈'].map((emoji, i) => (
+          <div className="absolute inset-0 pointer-events-none">
+            {['✨', '⭐', '🌟', '💖'].map((emoji, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.4, x: 0, y: 0 }}
+                initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
                 animate={{
                   opacity: [0, 1, 0],
-                  scale: [0.4, 1.4, 0.8],
-                  x: Math.cos((i * Math.PI * 2) / 5) * size * 0.5,
-                  y: Math.sin((i * Math.PI * 2) / 5) * size * 0.5,
+                  scale: [0.5, 1.5, 0.5],
+                  x: (Math.random() - 0.5) * size,
+                  y: (Math.random() - 0.5) * size,
                 }}
-                exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute z-20 text-3xl pointer-events-none"
-                style={{ left: '50%', top: '50%' }}
+                className="absolute left-1/2 top-1/2 text-2xl"
               >
                 {emoji}
               </motion.div>
             ))}
-          </>
+          </div>
         )}
       </AnimatePresence>
     </div>
