@@ -20,7 +20,7 @@ export interface Child {
   avatar: string; // emoji
   anamnese_completa: boolean;
   anamnesis_id?: string;
-  anamnesis_edit_count: number;
+  anamnesis_edit_count?: number;
   sensory_mode: SensoryMode;
   perfil: {
     leitura: number;
