@@ -15,6 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/reforco-brilha")({
   component: ReforcoBrilha,
@@ -30,6 +31,7 @@ const CATEGORIAS = [
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
+  const { sendNotification } = useNotifications();
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
@@ -110,6 +112,15 @@ function ReforcoBrilha() {
         setCurrentLevel("basic");
         if (lesson.category) {
           loadTopicStats(lesson.category);
+        }
+
+        // Notificar a mãe que a criança começou a estudar
+        if (activeChild) {
+          sendNotification({
+            title: `${activeChild.nome} começou a estudar!`,
+            message: `${activeChild.nome} está brilhando agora no reforço de "${finalTopic}".`,
+            type: 'estudo'
+          });
         }
       } catch (error) {
         console.error("Erro ao carregar aula:", error);

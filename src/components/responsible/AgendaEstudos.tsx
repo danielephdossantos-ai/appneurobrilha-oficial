@@ -7,6 +7,7 @@ import { Calendar, Plus, Trash2, CheckCircle2, AlertCircle, Clock, BookOpen, Cal
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useNotifications } from "@/hooks/useNotifications";
 
 interface AgendaEstudosProps {
   childId: string;
@@ -27,6 +28,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [newTopic, setNewTopic] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newType, setNewType] = useState<AgendaItem['type']>('prova');
+  const { sendNotification } = useNotifications();
 
   const { data: agenda = [], isLoading } = useQuery({
     queryKey: ["study_agenda", childId],
@@ -54,6 +56,14 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
           completed: false
         }]);
       if (error) throw error;
+      
+      // Enviar notificação para a criança
+      sendNotification({
+        child_id: childId,
+        title: `Novo item na sua Agenda!`,
+        message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
+        type: 'estudo'
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });

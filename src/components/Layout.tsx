@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { NotificationBell } from "./NotificationBell";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
@@ -152,16 +153,28 @@ export function Shell({ children }: { children?: ReactNode }) {
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="md:hidden sticky top-0 z-10 backdrop-blur bg-background/80 border-b border-border px-4 py-3 flex items-center justify-between">
-          <Link to="/" className="font-extrabold flex items-center gap-2">
-            <span className="text-2xl">🌱</span> NeuroBrilha Kids
-          </Link>
-          {activeChild && (
-            <div className="text-sm flex items-center gap-1">
-              <span className="text-xl">{activeChild.avatar}</span>
-              <span className="font-bold">{activeChild.nome}</span>
-            </div>
-          )}
+        <header className="sticky top-0 z-20 backdrop-blur-md bg-background/80 border-b border-border px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link to="/" className="font-extrabold flex items-center gap-2 md:hidden">
+              <span className="text-2xl">🌱</span> NeuroBrilha
+            </Link>
+            {activeChild && (
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-muted/50">
+                <span className="text-xl">{activeChild.avatar}</span>
+                <span className="text-sm font-bold">{activeChild.nome}</span>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <NotificationBell />
+            {activeChild && (
+              <div className="md:hidden text-sm flex items-center gap-1">
+                <span className="text-xl">{activeChild.avatar}</span>
+                <span className="font-bold">{activeChild.nome}</span>
+              </div>
+            )}
+          </div>
         </header>
 
         <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
