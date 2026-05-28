@@ -28,6 +28,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [newTopic, setNewTopic] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newType, setNewType] = useState<AgendaItem['type']>('prova');
+  const { sendNotification } = useNotifications();
 
   const { data: agenda = [], isLoading } = useQuery({
     queryKey: ["study_agenda", childId],
