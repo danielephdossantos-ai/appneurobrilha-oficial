@@ -1,13 +1,15 @@
+import { createFileRoute } from '@tanstack/react-router'
 import React, { useMemo, useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
 } from "recharts";
 import { 
-  Brain, Target, Lightbulb, AlertCircle, Info, ChevronRight, CheckCircle2 
+  Brain, Lightbulb, AlertCircle, Info, CheckCircle2 
 } from "lucide-react";
-import { ReportGenerator, ReportData } from "@/modules/neuro-engine/engine/ReportGenerator";
+import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/relatorio")({
