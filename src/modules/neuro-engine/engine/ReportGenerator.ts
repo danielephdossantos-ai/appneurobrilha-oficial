@@ -12,6 +12,16 @@ export interface ReportData {
     description: string;
     trend: 'up' | 'stable' | 'down';
   }[];
+  comparisons: {
+    category: string;
+    lastWeek: number;
+    current: number;
+    change: number;
+  }[];
+  monthlyTrend: {
+    day: string;
+    value: number;
+  }[];
   strengths: string[];
   attentionPoints: string[];
   recommendations: string[];
@@ -42,6 +52,19 @@ export class ReportGenerator {
         trend: 'stable'
       });
     }
+
+    const comparisons = [
+      { category: "Atenção", lastWeek: 40, current: 60, change: 20 },
+      { category: "Linguagem", lastWeek: 45, current: 55, change: 10 },
+      { category: "Cognição", lastWeek: 50, current: 52, change: 2 },
+    ];
+
+    const monthlyTrend = [
+      { day: "Semana 1", value: 30 },
+      { day: "Semana 2", value: 45 },
+      { day: "Semana 3", value: 55 },
+      { day: "Semana 4", value: 65 },
+    ];
 
     const strengths: string[] = [];
     const attentionPoints: string[] = [];
@@ -80,6 +103,8 @@ export class ReportGenerator {
       summary,
       initialProfile: initialProfile as any,
       evolution,
+      comparisons,
+      monthlyTrend,
       strengths,
       attentionPoints,
       recommendations
