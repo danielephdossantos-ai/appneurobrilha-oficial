@@ -18,12 +18,12 @@ const navCrianca = [
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
   { to: "/professor-ia", label: "Professor IA", icon: Camera },
   { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
-  
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
 const navPais = [
   { to: "/painel-pais", label: "Painel dos Pais", icon: ShieldCheck },
+  { to: "/progressao", label: "Progressão", icon: FileBarChart2 },
   { to: "/terapeuta-brilha", label: "Terapeuta Brilha", icon: MessagesSquare },
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
@@ -38,9 +38,9 @@ const navigationSequence = [
   "/jornada-365",
   "/professor-ia",
   "/amigo-virtual",
-  
   "/rotina",
   "/painel-pais",
+  "/progressao",
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
