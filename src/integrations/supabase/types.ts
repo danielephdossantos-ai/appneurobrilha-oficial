@@ -131,6 +131,44 @@ export type Database = {
         }
         Relationships: []
       }
+      child_anamnesis: {
+        Row: {
+          child_id: string
+          created_at: string
+          edit_count: number | null
+          id: string
+          internal_profile: Json
+          responses: Json
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          edit_count?: number | null
+          id?: string
+          internal_profile: Json
+          responses: Json
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          edit_count?: number | null
+          id?: string
+          internal_profile?: Json
+          responses?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_anamnesis_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_journey: {
         Row: {
           child_id: string
@@ -260,6 +298,8 @@ export type Database = {
       children: {
         Row: {
           anamnese_completa: boolean | null
+          anamnesis_edit_count: number | null
+          anamnesis_id: string | null
           avatar: string | null
           created_at: string
           diagnostico: string | null
@@ -279,6 +319,8 @@ export type Database = {
         }
         Insert: {
           anamnese_completa?: boolean | null
+          anamnesis_edit_count?: number | null
+          anamnesis_id?: string | null
           avatar?: string | null
           created_at?: string
           diagnostico?: string | null
@@ -298,6 +340,8 @@ export type Database = {
         }
         Update: {
           anamnese_completa?: boolean | null
+          anamnesis_edit_count?: number | null
+          anamnesis_id?: string | null
           avatar?: string | null
           created_at?: string
           diagnostico?: string | null
@@ -316,6 +360,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "children_anamnesis_id_fkey"
+            columns: ["anamnesis_id"]
+            isOneToOne: false
+            referencedRelation: "child_anamnesis"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "children_user_id_fkey"
             columns: ["user_id"]
