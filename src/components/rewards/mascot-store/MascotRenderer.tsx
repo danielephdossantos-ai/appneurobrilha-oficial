@@ -22,6 +22,57 @@ import robotBip from '@/assets/mascots/robot-bip.png';
 import astroLeo from '@/assets/mascots/astro-leo.png';
 
 const MASCOT_IMAGES: Record<string, string> = {
+  // Mapping new IDs to existing assets where possible, or using placeholders
+  'heroi-aranha': heroiShadow, // Dark/Heroic
+  'heroi-morcego': heroiShadow,
+  'heroi-ferro': heroiFire, // Red/Tech
+  'heroi-hulk': dinoRex, // Green/Strong
+  'heroi-capitao': heroiSky, // Blue/Leader
+  'heroi-flecha': heroiLightning, // Fast/Lightning
+  'heroi-lobo': heroiShadow,
+  
+  'menino-dino': dinoRex,
+  'menino-urso': bearHug,
+  'menino-cao': dogPipo,
+  'menino-gato': catLuna,
+  'menino-dragao': dinoRex,
+  'menino-leao': astroLeo,
+  'menino-tigre': foxFoxy,
+  
+  'prof-medico': heroiSky,
+  'prof-bombeiro': heroiFire,
+  'prof-policial': heroiSky,
+  'prof-professor': heroiShadow,
+  'prof-cientista': robotBip,
+  'prof-jogador': heroiLightning,
+  
+  'prin-rapunzel': fadaLisa,
+  'prin-neve': princesaNana,
+  'prin-cinderela': fadaNuvem,
+  'prin-ariel': fadaLisa,
+  'prin-malevola': heroinaEstela,
+  'prin-moana': heroinaEstela,
+  
+  'heroina-alerquina': heroinaEstela,
+  'heroina-maravilha': heroinaEstela,
+  'heroina-gato': fadaNuvem,
+  'heroina-viuva': heroiShadow,
+  
+  'fant-unicornio': unicornUni,
+  'fant-gatinha': catLuna,
+  'fant-coelhinha': catLuna,
+  'fant-panda': pandaPandi,
+  
+  'pet-cao': dogPipo,
+  'pet-gato': catLuna,
+  'pet-urso': bearHug,
+  'pet-panda': pandaPandi,
+  'pet-coelho': catLuna,
+  'pet-dino': dinoRex,
+  'pet-raposa': foxFoxy,
+  'pet-pinguim': penguinPingu,
+  
+  // Keep old ones for compatibility if needed
   'heroi-lightning': heroiLightning,
   'heroi-shadow': heroiShadow,
   'heroi-fire': heroiFire,

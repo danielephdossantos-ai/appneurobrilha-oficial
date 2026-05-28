@@ -75,13 +75,13 @@ function MascotStorePage() {
 
       <main className="max-w-7xl mx-auto p-8 relative z-10">
         <Tabs defaultValue={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-          <div className="flex justify-center mb-10">
-            <TabsList className="bg-white/50 backdrop-blur-sm p-1.5 h-auto rounded-3xl border border-white/80 shadow-inner flex overflow-x-auto no-scrollbar max-w-full">
+          <div className="flex justify-center mb-10 overflow-hidden">
+            <TabsList className="bg-white/50 backdrop-blur-sm p-1.5 h-auto rounded-3xl border border-white/80 shadow-inner flex overflow-x-auto no-scrollbar max-w-full gap-2 px-4 py-2">
               {MASCOT_CATEGORIES.map(category => (
                 <TabsTrigger 
                   key={category.id} 
                   value={category.id}
-                  className="rounded-2xl px-8 py-3.5 text-base font-bold data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-lg transition-all duration-300"
+                  className="rounded-2xl px-6 py-3 text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-indigo-600 data-[state=active]:shadow-lg transition-all duration-300 whitespace-nowrap"
                 >
                   {category.name}
                 </TabsTrigger>

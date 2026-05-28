@@ -25,234 +25,405 @@ export interface MascotData {
 }
 
 export const MASCOT_CATEGORIES = [
-  { id: 'meninos', name: 'Heróis & Amigos' },
-  { id: 'meninas', name: 'Fofuras & Heroínas' },
-  { id: 'animais', name: 'Bichinhos Fofos' },
-  { id: 'especiais', name: 'Especiais & Robôs' },
+  { id: 'meninos-herois', name: 'Heróis Valentes' },
+  { id: 'meninos-animais', name: 'Amiguinhos Animais' },
+  { id: 'meninos-profissoes', name: 'Pequenos Profissionais' },
+  { id: 'meninas-princesas', name: 'Princesas Encantadas' },
+  { id: 'meninas-heroinas', name: 'Heroínas Poderosas' },
+  { id: 'meninas-fantasia', name: 'Mundo da Fantasia' },
+  { id: 'bichinhos-fofos', name: 'Bichinhos Fofos' },
 ];
 
 export const MASCOTS: MascotData[] = [
-  // --- MENINOS SUPER-HERÓIS (4) ---
+  // --- MENINOS SUPER-HERÓIS ---
   {
-    id: 'heroi-lightning',
-    name: 'Herói Relâmpago',
-    category: 'meninos',
+    id: 'heroi-aranha',
+    name: 'Araninha Amigo',
+    category: 'meninos-herois',
     type: 'human',
-    skin: 'white',
-    hairColor: 'blonde',
-    costume: 'superhero',
-    description: 'Rápido como um trovão e amigável como um abraço! Ele adora correr e ajudar todo mundo.',
+    description: 'Ele escala paredes e adora ajudar a todos com suas teias de alegria!',
     rarity: 'raro',
-    personality: 'Energético e Veloz',
-    details: { eyeColor: '#4A90E2', accessory: 'lightning-bolt' }
+    personality: 'Ágil e Atencioso'
   },
   {
-    id: 'heroi-shadow',
-    name: 'Herói Sombra',
-    category: 'meninos',
+    id: 'heroi-morcego',
+    name: 'Morceguinho Herói',
+    category: 'meninos-herois',
     type: 'human',
-    skin: 'brown',
-    hairColor: 'black',
-    costume: 'superhero',
-    description: 'Ele protege a noite com muita coragem e silêncio. Um mestre dos esconderijos!',
+    description: 'O guardião da noite que usa sua inteligência para resolver qualquer mistério.',
     rarity: 'epico',
-    personality: 'Corajoso e Misterioso',
-    details: { eyeColor: '#9B51E0', accessory: 'lightning-bolt' }
+    personality: 'Corajoso e Inteligente'
   },
   {
-    id: 'heroi-fire',
-    name: 'Herói Fogo',
-    category: 'meninos',
+    id: 'heroi-ferro',
+    name: 'Menino de Ferro',
+    category: 'meninos-herois',
     type: 'human',
-    skin: 'light',
-    hairColor: 'red',
-    costume: 'superhero',
-    description: 'Seu coração é quente e cheio de alegria! Ele sempre tem uma ideia brilhante.',
+    description: 'Com sua armadura brilhante, ele traz tecnologia e diversão para o time.',
+    rarity: 'epico',
+    personality: 'Genial e Criativo'
+  },
+  {
+    id: 'heroi-hulk',
+    name: 'Gigante Gentil',
+    category: 'meninos-herois',
+    type: 'human',
+    description: 'Ele é muito forte, mas seu coração é ainda maior e cheio de carinho.',
     rarity: 'raro',
-    personality: 'Entusiasmado e Caliente',
-    details: { eyeColor: '#FF5252', accessory: 'lightning-bolt' }
+    personality: 'Forte e Amigável'
   },
   {
-    id: 'heroi-sky',
-    name: 'Herói Céu',
-    category: 'meninos',
+    id: 'heroi-capitao',
+    name: 'Capitão Amizade',
+    category: 'meninos-herois',
     type: 'human',
-    skin: 'dark',
-    hairColor: 'black',
-    costume: 'superhero',
-    description: 'Voando alto para espalhar sorrisos entre as nuvens. Ele vê o mundo lá de cima!',
-    rarity: 'lendario',
-    personality: 'Sonhador e Gentil',
-    details: { eyeColor: '#4A90E2', accessory: 'lightning-bolt' }
+    description: 'Um líder nato que ensina a importância de trabalhar em equipe e ser honesto.',
+    rarity: 'raro',
+    personality: 'Líder e Justo'
+  },
+  {
+    id: 'heroi-flecha',
+    name: 'Flecha Veloz',
+    category: 'meninos-herois',
+    type: 'human',
+    description: 'Tão rápido que você mal consegue vê-lo! Ele adora corridas e desafios.',
+    rarity: 'raro',
+    personality: 'Energético e Veloz'
+  },
+  {
+    id: 'heroi-lobo',
+    name: 'Lobinho Valente',
+    category: 'meninos-herois',
+    type: 'human',
+    description: 'Com suas garras de coragem, ele protege a natureza e seus amigos.',
+    rarity: 'epico',
+    personality: 'Determinado e Protetor'
   },
 
-  // --- MENINAS FOFURAS (4) ---
+  // --- MENINOS ANIMAIS ---
   {
-    id: 'fada-lisa',
-    name: 'Fada Lisa',
-    category: 'meninas',
-    type: 'human',
-    skin: 'white',
-    hairColor: 'blonde',
-    costume: 'fairy',
-    description: 'Mágica, doce e adora flores! Com sua varinha, ela faz o jardim brilhar.',
-    rarity: 'epico',
-    personality: 'Gentil e Encantadora',
-    details: { eyeColor: '#FF69B4', accessory: 'tiara' }
+    id: 'menino-dino',
+    name: 'Menino Dino',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Um amiguinho com uma fantasia super fofa de dinossauro verde.',
+    rarity: 'comum',
+    personality: 'Divertido'
   },
   {
-    id: 'princesa-nana',
-    name: 'Princesa Nana',
-    category: 'meninas',
-    type: 'human',
-    skin: 'brown',
-    hairColor: 'black',
-    costume: 'princess',
-    description: 'Uma princesa que adora ler histórias para seus súditos de pelúcia.',
+    id: 'menino-urso',
+    name: 'Menino Ursinho',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Ele adora abraços e está sempre com sua fantasia de urso marrom.',
+    rarity: 'comum',
+    personality: 'Carinhoso'
+  },
+  {
+    id: 'menino-cao',
+    name: 'Menino Cão',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Sempre pronto para brincar de buscar com sua fantasia de cachorrinho.',
+    rarity: 'comum',
+    personality: 'Leal'
+  },
+  {
+    id: 'menino-gato',
+    name: 'Menino Gato',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Ágil e curioso, ele adora pular com sua fantasia de gatinho cinza.',
+    rarity: 'comum',
+    personality: 'Curioso'
+  },
+  {
+    id: 'menino-dragao',
+    name: 'Menino Dragão',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Um dragãozinho que solta bolhas de sabão em vez de fogo!',
     rarity: 'raro',
-    personality: 'Sábia e Elegante',
-    details: { eyeColor: '#9B51E0', accessory: 'tiara' }
+    personality: 'Mágico'
   },
   {
-    id: 'heroina-estela',
-    name: 'Heroína Estrela',
-    category: 'meninas',
-    type: 'human',
-    skin: 'light',
-    hairColor: 'red',
-    costume: 'superhero',
-    description: 'Brilhando forte para ajudar a todos. Ela é a estrela guia dos seus amigos.',
-    rarity: 'epico',
-    personality: 'Brilhante e Determinada',
-    details: { eyeColor: '#FFD700', accessory: 'lightning-bolt' }
+    id: 'menino-leao',
+    name: 'Leãozinho Corajoso',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'O rei da diversão com sua juba de pelúcia e rugido de alegria.',
+    rarity: 'raro',
+    personality: 'Majestoso'
   },
   {
-    id: 'fada-nuvem',
-    name: 'Fada Nuvem',
-    category: 'meninas',
-    type: 'human',
-    skin: 'dark',
-    hairColor: 'black',
-    costume: 'fairy',
-    description: 'Flutuando com alegria e paz. Ela traz sonhos tranquilos para todas as crianças.',
-    rarity: 'lendario',
-    personality: 'Calma e Serena',
-    details: { eyeColor: '#4A90E2', accessory: 'tiara' }
+    id: 'menino-tigre',
+    name: 'Tigre Fofo',
+    category: 'meninos-animais',
+    type: 'fantasy',
+    description: 'Listras laranjas e muita disposição para aventuras na selva.',
+    rarity: 'raro',
+    personality: 'Ativo'
   },
 
-  // --- BICHINHOS FOFOS (8) ---
+  // --- MENINOS PROFISSÕES ---
   {
-    id: 'dog-pipo',
-    name: 'Pipo Cão',
-    category: 'animais',
-    type: 'animal',
-    costume: 'dog',
-    description: 'O melhor amigo que você pode ter! Ele late de alegria sempre que te vê.',
-    rarity: 'comum',
-    personality: 'Leal e Brincalhão',
-    details: { eyeColor: '#795548' }
-  },
-  {
-    id: 'cat-luna',
-    name: 'Miau Luna',
-    category: 'animais',
-    type: 'animal',
-    costume: 'cat',
-    description: 'Adora brincar com novelos de lã coloridos e tirar sonecas ao sol.',
-    rarity: 'comum',
-    personality: 'Curiosa e Independente',
-    details: { eyeColor: '#F5A623' }
-  },
-  {
-    id: 'bear-hug',
-    name: 'Urso Abraço',
-    category: 'animais',
-    type: 'animal',
-    costume: 'bear',
-    description: 'Seus abraços curam qualquer tristeza. Ele é o mais fofinho da floresta.',
+    id: 'prof-medico',
+    name: 'Doutor Sorriso',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'Ele cuida de todos os brinquedos e amigos com muito carinho.',
     rarity: 'raro',
-    personality: 'Acolhedor e Carinhoso',
-    details: { eyeColor: '#8D6E63' }
+    personality: 'Cuidadoso'
   },
   {
-    id: 'dino-rex',
-    name: 'Rex Baby',
-    category: 'animais',
-    type: 'animal',
-    costume: 'dino',
-    description: 'Um dinossaurinho que adora frutas! Ele não é nada assustador, só quer brincar.',
+    id: 'prof-bombeiro',
+    name: 'Bombeiro Amigo',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'Sempre pronto para ajudar e ensinar sobre segurança com sua mangueira.',
     rarity: 'raro',
-    personality: 'Divertido e Guloso',
-    details: { eyeColor: '#4CAF50' }
+    personality: 'Heróico'
   },
   {
-    id: 'panda-pandi',
-    name: 'Pandi Panda',
-    category: 'animais',
-    type: 'animal',
-    costume: 'bear',
-    description: 'Fofinho, gordinho e muito comilão. Adora bambu e rolar na grama.',
+    id: 'prof-policial',
+    name: 'Policial Legal',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'Ele ajuda a organizar as brincadeiras e protege o parquinho.',
+    rarity: 'raro',
+    personality: 'Organizado'
+  },
+  {
+    id: 'prof-professor',
+    name: 'Professor Sabichão',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'Adora contar histórias e ensinar coisas novas para todo mundo.',
+    rarity: 'comum',
+    personality: 'Sábio'
+  },
+  {
+    id: 'prof-cientista',
+    name: 'Cientista Maluco',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'Faz experiências incríveis com cores e formas no seu laboratório.',
     rarity: 'epico',
-    personality: 'Tranquilo e Preguiçoso',
-    details: { eyeColor: '#1A1A40' }
+    personality: 'Curioso'
   },
   {
-    id: 'fox-foxy',
+    id: 'prof-jogador',
+    name: 'Craque de Bola',
+    category: 'meninos-profissoes',
+    type: 'human',
+    description: 'O melhor em campo! Ele ensina que o importante é se divertir jogando.',
+    rarity: 'raro',
+    personality: 'Atleta'
+  },
+
+  // --- MENINAS PRINCESAS ---
+  {
+    id: 'prin-rapunzel',
+    name: 'Princesa do Cabelo Longo',
+    category: 'meninas-princesas',
+    type: 'human',
+    description: 'Adora pintar e tem um cabelo mágico que brilha com a luz do sol.',
+    rarity: 'raro',
+    personality: 'Artista'
+  },
+  {
+    id: 'prin-neve',
+    name: 'Branca de Neve Doce',
+    category: 'meninas-princesas',
+    type: 'human',
+    description: 'Amiga de todos os animaizinhos da floresta e muito bondosa.',
+    rarity: 'raro',
+    personality: 'Bondosa'
+  },
+  {
+    id: 'prin-cinderela',
+    name: 'Cinderela Encantada',
+    category: 'meninas-princesas',
+    type: 'human',
+    description: 'Ela ensina que a gentileza é o maior de todos os encantos.',
+    rarity: 'raro',
+    personality: 'Gentil'
+  },
+  {
+    id: 'prin-ariel',
+    name: 'Sereia Alegria',
+    category: 'meninas-princesas',
+    type: 'fantasy',
+    description: 'Adora explorar os tesouros do fundo do mar e cantar com os peixes.',
+    rarity: 'epico',
+    personality: 'Exploradora'
+  },
+  {
+    id: 'prin-malevola',
+    name: 'Fada das Sombras',
+    category: 'meninas-princesas',
+    type: 'fantasy',
+    description: 'Uma fada incompreendida que no fundo só quer proteger seu reino.',
+    rarity: 'lendario',
+    personality: 'Poderosa'
+  },
+  {
+    id: 'prin-moana',
+    name: 'Moana do Mar',
+    category: 'meninas-princesas',
+    type: 'human',
+    description: 'Uma navegadora corajosa que segue a voz do seu coração e do oceano.',
+    rarity: 'epico',
+    personality: 'Aventureira'
+  },
+
+  // --- MENINAS SUPER-HEROÍNAS ---
+  {
+    id: 'heroina-alerquina',
+    name: 'Alerquina Divertida',
+    category: 'meninas-heroinas',
+    type: 'human',
+    description: 'Sempre com uma piada pronta e muita energia para as brincadeiras.',
+    rarity: 'epico',
+    personality: 'Engraçada'
+  },
+  {
+    id: 'heroina-maravilha',
+    name: 'Menina Maravilha',
+    category: 'meninas-heroinas',
+    type: 'human',
+    description: 'Com seu laço da verdade e força incrível, ela protege seus amigos.',
+    rarity: 'lendario',
+    personality: 'Forte'
+  },
+  {
+    id: 'heroina-gato',
+    name: 'Menina Gato Ágil',
+    category: 'meninas-heroinas',
+    type: 'human',
+    description: 'Rápida e silenciosa, ela adora resolver mistérios noturnos.',
+    rarity: 'raro',
+    personality: 'Ágil'
+  },
+  {
+    id: 'heroina-viuva',
+    name: 'Viuva Negra Mirim',
+    category: 'meninas-heroinas',
+    type: 'human',
+    description: 'Mestra em artes marciais e espionagem (de brincadeira, claro!).',
+    rarity: 'epico',
+    personality: 'Estrategista'
+  },
+
+  // --- MENINAS FANTASIA ---
+  {
+    id: 'fant-unicornio',
+    name: 'Menina Unicórnio',
+    category: 'meninas-fantasia',
+    type: 'fantasy',
+    description: 'Com um chifre mágico e cores de arco-íris por toda parte.',
+    rarity: 'lendario',
+    personality: 'Mágica'
+  },
+  {
+    id: 'fant-gatinha',
+    name: 'Menina Gatinha',
+    category: 'meninas-fantasia',
+    type: 'fantasy',
+    description: 'Orelhinhas de gato e muito charme para conquistar todo mundo.',
+    rarity: 'comum',
+    personality: 'Fofa'
+  },
+  {
+    id: 'fant-coelhinha',
+    name: 'Menina Coelhinha',
+    category: 'meninas-fantasia',
+    type: 'fantasy',
+    description: 'Adora pular e comer cenouras com sua fantasia de coelho.',
+    rarity: 'comum',
+    personality: 'Saltitante'
+  },
+  {
+    id: 'fant-panda',
+    name: 'Menina Panda',
+    category: 'meninas-fantasia',
+    type: 'fantasy',
+    description: 'A mais fofinha de todas com sua roupinha preta e branca.',
+    rarity: 'raro',
+    personality: 'Tranquila'
+  },
+
+  // --- BICHINHOS FOFOS ---
+  {
+    id: 'pet-cao',
+    name: 'Cachorrinho Pipo',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'O melhor amigo de quatro patas que você poderia ter!',
+    rarity: 'comum',
+    personality: 'Leal'
+  },
+  {
+    id: 'pet-gato',
+    name: 'Gatinha Luna',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'Elegante e ronronante, ela adora um carinho atrás da orelha.',
+    rarity: 'comum',
+    personality: 'Curiosa'
+  },
+  {
+    id: 'pet-urso',
+    name: 'Ursinho Teddy',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'Um urso de pelúcia que ganhou vida para te dar muitos abraços.',
+    rarity: 'raro',
+    personality: 'Carinhoso'
+  },
+  {
+    id: 'pet-panda',
+    name: 'Pandinha Pan',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'Adora rolar e comer bambu o dia todo com muita calma.',
+    rarity: 'epico',
+    personality: 'Tranquilo'
+  },
+  {
+    id: 'pet-coelho',
+    name: 'Coelhinho Saltitante',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'Orelhas longas e um narizinho que não para de mexer.',
+    rarity: 'comum',
+    personality: 'Ágil'
+  },
+  {
+    id: 'pet-dino',
+    name: 'Dino Baby Rex',
+    category: 'bichinhos-fofos',
+    type: 'animal',
+    description: 'Um dinossaurinho que ainda está aprendendo a rugir.',
+    rarity: 'raro',
+    personality: 'Brincalhão'
+  },
+  {
+    id: 'pet-raposa',
     name: 'Raposinha Foxy',
-    category: 'animais',
+    category: 'bichinhos-fofos',
     type: 'animal',
-    costume: 'cat',
-    description: 'Esperta e muito rápida nas brincadeiras. Ela sempre encontra o melhor caminho.',
+    description: 'Esperta e com uma cauda muito peluda e alaranjada.',
     rarity: 'epico',
-    personality: 'Esperta e Ágil',
-    details: { eyeColor: '#FF5252' }
+    personality: 'Esperta'
   },
   {
-    id: 'penguin-pingu',
-    name: 'Pingu Gelado',
-    category: 'animais',
+    id: 'pet-pinguim',
+    name: 'Pinguim Pingu',
+    category: 'bichinhos-fofos',
     type: 'animal',
-    costume: 'penguin',
-    description: 'Deslizando no gelo com muita alegria. Ele adora mergulhar e pescar peixinhos.',
+    description: 'Direto do gelo para aquecer seu coração com muita alegria.',
     rarity: 'raro',
-    personality: 'Brincalhão e Atrapalhado',
-    details: { eyeColor: '#4A90E2' }
-  },
-  {
-    id: 'unicorn-uni',
-    name: 'Uni Mágico',
-    category: 'animais',
-    type: 'animal',
-    costume: 'unicorn',
-    description: 'Um unicórnio que traz cores ao mundo. Onde ele passa, nasce um arco-íris!',
-    rarity: 'lendario',
-    personality: 'Mágico e Radiante',
-    details: { eyeColor: '#BA68C8' }
-  },
-
-  // --- ESPECIAIS ---
-  {
-    id: 'robot-bip',
-    name: 'Robô Bip',
-    category: 'especiais',
-    type: 'robot',
-    costume: 'robot',
-    description: 'Sempre pronto para calcular novas aventuras! Ele tem um processador de alegria.',
-    rarity: 'raro',
-    personality: 'Inteligente e Lógico',
-    details: { eyeColor: '#00D1FF' }
-  },
-  {
-    id: 'astro-leo',
-    name: 'Leo Astro',
-    category: 'especiais',
-    type: 'human',
-    skin: 'dark',
-    hairColor: 'black',
-    costume: 'astronaut',
-    description: 'Explorando as estrelas da imaginação com seu traje espacial brilhante.',
-    rarity: 'lendario',
-    personality: 'Aventureiro e Curioso',
-    details: { eyeColor: '#FFFFFF', accessory: 'helmet' }
+    personality: 'Atrapalhado'
   }
 ];
