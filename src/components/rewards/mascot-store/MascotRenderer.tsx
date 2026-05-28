@@ -23,7 +23,7 @@ import robotBip from '@/assets/mascots/robot-bip.png';
 import astroLeo from '@/assets/mascots/astro-leo.png';
 
 const MASCOT_IMAGES: Record<string, string> = {
-  // Use unique local assets for primary spots (these were already called "beautiful")
+  // Local high-quality assets
   'heroi-flecha': heroiLightning,
   'heroi-morcego': heroiShadow,
   'heroi-ferro': heroiFire,
@@ -43,11 +43,11 @@ const MASCOT_IMAGES: Record<string, string> = {
   'prin-malevola': fadaLisa,
   'menino-tigre': foxFoxy,
 
-  // Using much higher quality, hand-picked assets for the rest
-  'heroi-aranha': 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Spider&backgroundColor=b6e3f4',
-  'heroi-hulk': 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Hulk&backgroundColor=c0aede',
-  'heroi-lobo': 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=Wolf&backgroundColor=d1d4f9',
-  'menino-dragao': 'https://api.dicebear.com/7.x/avataaars/svg?seed=DragonBoy&backgroundColor=b6e3f4',
+  // Beautiful Avataaars & Big Ears (Modern, Soft, Child-friendly)
+  'heroi-aranha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Spider&backgroundColor=b6e3f4',
+  'heroi-hulk': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Hulk&backgroundColor=c0aede',
+  'heroi-lobo': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Wolf&backgroundColor=d1d4f9',
+  'menino-dragao': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dragon&backgroundColor=b6e3f4',
   'prof-medico': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Doctor&backgroundColor=ffdfbf',
   'prof-bombeiro': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fireman&backgroundColor=ffd5dc',
   'prof-policial': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Police&backgroundColor=c0aede',
@@ -57,17 +57,17 @@ const MASCOT_IMAGES: Record<string, string> = {
   'prin-ariel': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ariel&backgroundColor=ffd5dc',
   'prin-moana': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Moana&backgroundColor=c0aede',
   'heroina-alerquina': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Harley&backgroundColor=d1d4f9',
-  'heroina-gato': 'https://api.dicebear.com/7.x/avataaars/svg?seed=CatWoman&backgroundColor=b6e3f4',
+  'heroina-gato': 'https://api.dicebear.com/7.x/avataaars/svg?seed=CatGirl&backgroundColor=b6e3f4',
   'heroina-viuva': 'https://api.dicebear.com/7.x/avataaars/svg?seed=BlackWidow&backgroundColor=ffdfbf',
-  'fant-gatinha': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Kitty&backgroundColor=ffd5dc',
-  'fant-coelhinha': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Bunny&backgroundColor=c0aede',
-  'pet-cao': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Dog&backgroundColor=d1d4f9',
-  'pet-gato': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Cat&backgroundColor=b6e3f4',
-  'pet-urso': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Bear&backgroundColor=ffdfbf',
-  'pet-panda': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Panda&backgroundColor=ffd5dc',
-  'pet-coelho': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Rabbit&backgroundColor=c0aede',
-  'pet-dino': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Dino&backgroundColor=d1d4f9',
-  'pet-raposa': 'https://api.dicebear.com/7.x/big-ears-neutral/svg?seed=Fox&backgroundColor=b6e3f4',
+  'fant-gatinha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Kitty&backgroundColor=ffd5dc',
+  'fant-coelhinha': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bunny&backgroundColor=c0aede',
+  'pet-cao': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dog&backgroundColor=d1d4f9',
+  'pet-gato': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Cat&backgroundColor=b6e3f4',
+  'pet-urso': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear&backgroundColor=ffdfbf',
+  'pet-panda': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Panda&backgroundColor=ffd5dc',
+  'pet-coelho': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Rabbit&backgroundColor=c0aede',
+  'pet-dino': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Dino&backgroundColor=d1d4f9',
+  'pet-raposa': 'https://api.dicebear.com/7.x/adventurer/svg?seed=Fox&backgroundColor=b6e3f4',
 };
 
 interface MascotRendererProps {
