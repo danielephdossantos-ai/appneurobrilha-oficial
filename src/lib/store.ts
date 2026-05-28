@@ -205,6 +205,50 @@ export function useAppState() {
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
+    saveAnamnesis: async (anamnesis: Omit<AnamnesisData, "id" | "edit_count">) => {
+      const { data: existing } = await supabase
+        .from("child_anamnesis")
+        .select("id, edit_count")
+        .eq("child_id", anamnesis.child_id)
+        .maybeSingle();
+
+      if (existing) {
+        if (existing.edit_count >= 3) {
+          throw new Error("Limite de 3 edições atingido para esta anamnese.");
+        }
+        const { error } = await supabase
+          .from("child_anamnesis")
+          .update({
+            responses: anamnesis.responses,
+            internal_profile: anamnesis.internal_profile,
+            edit_count: existing.edit_count + 1
+          })
+          .eq("id", existing.id);
+        if (error) throw error;
+        
+        await supabase
+          .from("children")
+          .update({ anamnesis_edit_count: existing.edit_count + 1 })
+          .eq("id", anamnesis.child_id);
+      } else {
+        const { data, error } = await supabase
+          .from("child_anamnesis")
+          .insert([{ ...anamnesis, edit_count: 1 }])
+          .select()
+          .single();
+        if (error) throw error;
+
+        await supabase
+          .from("children")
+          .update({ 
+            anamnesis_id: data.id, 
+            anamnesis_edit_count: 1,
+            anamnese_completa: true 
+          })
+          .eq("id", anamnesis.child_id);
+      }
+      queryClient.invalidateQueries({ queryKey: ["children"] });
+    }
   };
 }
 
