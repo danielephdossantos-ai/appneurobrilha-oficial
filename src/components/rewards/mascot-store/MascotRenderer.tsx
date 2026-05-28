@@ -23,7 +23,7 @@ import robotBip from '@/assets/mascots/robot-bip.png';
 import astroLeo from '@/assets/mascots/astro-leo.png';
 
 const MASCOT_IMAGES: Record<string, string> = {
-  // Use unique local assets for primary spots
+  // Use unique local assets for primary spots (these were already called "beautiful")
   'heroi-flecha': heroiLightning,
   'heroi-morcego': heroiShadow,
   'heroi-ferro': heroiFire,
@@ -43,31 +43,31 @@ const MASCOT_IMAGES: Record<string, string> = {
   'prin-malevola': fadaLisa,
   'menino-tigre': foxFoxy,
 
-  // High-quality 3D / Premium Character illustrations from Icons8 (3D style for "Premium" feel)
-  'heroi-aranha': 'https://img.icons8.com/3d-fluency/200/spider-man.png',
-  'heroi-hulk': 'https://img.icons8.com/3d-fluency/200/hulk.png',
-  'heroi-lobo': 'https://img.icons8.com/3d-fluency/200/wolverine.png',
-  'menino-dragao': 'https://img.icons8.com/3d-fluency/200/dragon.png',
-  'prof-medico': 'https://img.icons8.com/3d-fluency/200/doctor.png',
-  'prof-bombeiro': 'https://img.icons8.com/3d-fluency/200/firefighter.png',
-  'prof-policial': 'https://img.icons8.com/3d-fluency/200/police-officer.png',
-  'prof-professor': 'https://img.icons8.com/3d-fluency/200/teacher.png',
-  'prof-jogador': 'https://img.icons8.com/3d-fluency/200/football-player.png',
-  'prin-rapunzel': 'https://img.icons8.com/3d-fluency/200/princess.png',
-  'prin-ariel': 'https://img.icons8.com/3d-fluency/200/mermaid.png',
-  'prin-moana': 'https://img.icons8.com/3d-fluency/200/islander.png',
-  'heroina-alerquina': 'https://img.icons8.com/3d-fluency/200/harley-quinn.png',
-  'heroina-gato': 'https://img.icons8.com/3d-fluency/200/catwoman.png',
-  'heroina-viuva': 'https://img.icons8.com/3d-fluency/200/black-widow.png',
-  'fant-gatinha': 'https://img.icons8.com/3d-fluency/200/cat.png',
-  'fant-coelhinha': 'https://img.icons8.com/3d-fluency/200/rabbit.png',
-  'pet-cao': 'https://img.icons8.com/3d-fluency/200/dog.png',
-  'pet-gato': 'https://img.icons8.com/3d-fluency/200/cat.png',
-  'pet-urso': 'https://img.icons8.com/3d-fluency/200/bear.png',
-  'pet-panda': 'https://img.icons8.com/3d-fluency/200/panda.png',
-  'pet-coelho': 'https://img.icons8.com/3d-fluency/200/rabbit.png',
-  'pet-dino': 'https://img.icons8.com/3d-fluency/200/dinosaur.png',
-  'pet-raposa': 'https://img.icons8.com/3d-fluency/200/fox.png',
+  // Soft, cute "Kawaii" style for the rest - guaranteed to be friendly and not scary
+  'heroi-aranha': 'https://img.icons8.com/kawaii/200/spider-man.png',
+  'heroi-hulk': 'https://img.icons8.com/kawaii/200/hulk.png',
+  'heroi-lobo': 'https://img.icons8.com/kawaii/200/wolf.png',
+  'menino-dragao': 'https://img.icons8.com/kawaii/200/dragon.png',
+  'prof-medico': 'https://img.icons8.com/kawaii/200/doctor.png',
+  'prof-bombeiro': 'https://img.icons8.com/kawaii/200/fireman.png',
+  'prof-policial': 'https://img.icons8.com/kawaii/200/police.png',
+  'prof-professor': 'https://img.icons8.com/kawaii/200/teacher.png',
+  'prof-jogador': 'https://img.icons8.com/kawaii/200/football-player.png',
+  'prin-rapunzel': 'https://img.icons8.com/kawaii/200/princess.png',
+  'prin-ariel': 'https://img.icons8.com/kawaii/200/mermaid.png',
+  'prin-moana': 'https://img.icons8.com/kawaii/200/moana.png',
+  'heroina-alerquina': 'https://img.icons8.com/kawaii/200/harley-quinn.png',
+  'heroina-gato': 'https://img.icons8.com/kawaii/200/catwoman.png',
+  'heroina-viuva': 'https://img.icons8.com/kawaii/200/black-widow.png',
+  'fant-gatinha': 'https://img.icons8.com/kawaii/200/cat.png',
+  'fant-coelhinha': 'https://img.icons8.com/kawaii/200/rabbit.png',
+  'pet-cao': 'https://img.icons8.com/kawaii/200/dog.png',
+  'pet-gato': 'https://img.icons8.com/kawaii/200/cat.png',
+  'pet-urso': 'https://img.icons8.com/kawaii/200/bear.png',
+  'pet-panda': 'https://img.icons8.com/kawaii/200/panda.png',
+  'pet-coelho': 'https://img.icons8.com/kawaii/200/rabbit.png',
+  'pet-dino': 'https://img.icons8.com/kawaii/200/dinosaur.png',
+  'pet-raposa': 'https://img.icons8.com/kawaii/200/fox.png',
 };
 
 interface MascotRendererProps {
