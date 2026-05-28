@@ -113,6 +113,15 @@ function ReforcoBrilha() {
         if (lesson.category) {
           loadTopicStats(lesson.category);
         }
+
+        // Notificar a mãe que a criança começou a estudar
+        if (activeChild) {
+          sendNotification({
+            title: `${activeChild.nome} começou a estudar!`,
+            message: `${activeChild.nome} está brilhando agora no reforço de "${finalTopic}".`,
+            type: 'estudo'
+          });
+        }
       } catch (error) {
         console.error("Erro ao carregar aula:", error);
         setIsTeaching(false);
