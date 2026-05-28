@@ -118,8 +118,9 @@ function Escola() {
             {agenda.map((item) => (
               <button
                 key={item.id}
-                onClick={() => carregarAula(item.subject || "Geral", item.topic, true)}
+                onClick={() => carregarAula("Geral", item.topic, true)}
                 className="p-6 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/10 hover:border-primary/30 hover:shadow-glow transition-all text-left flex items-start gap-4 group relative overflow-hidden"
+
               >
                 <div className="h-14 w-14 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform text-3xl">
                   {item.type === 'prova' ? '🚩' : item.type === 'trabalho' ? '📝' : '📖'}
