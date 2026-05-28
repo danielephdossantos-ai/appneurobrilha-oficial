@@ -332,8 +332,8 @@ function ReforcoBrilha() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Premium Brilha</span>
-                      <Pill tone="info" className="text-[10px]">{lessonContent.category}</Pill>
+                      <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Professor Particular IA</span>
+                      <Pill tone="success" className="text-[10px] font-black">SISTEMA BNCC ATIVO</Pill>
                     </div>
                     <h2 className="text-3xl font-black text-foreground leading-none">{lessonContent.title}</h2>
                     <p className="text-muted-foreground mt-2 font-medium">{lessonContent.explanation}</p>
@@ -366,8 +366,11 @@ function ReforcoBrilha() {
                 <div className="lg:col-span-2 space-y-4">
                   <h3 className="text-lg font-bold flex items-center gap-2 px-2">
                     <BookOpen className="h-5 w-5 text-primary" />
-                    Roteiro de Aprendizagem
+                    Roteiro de Estudos (Gerado pelo Sistema)
                   </h3>
+                  <div className="bg-indigo-600/10 border border-indigo-200 rounded-2xl p-4 mb-4 text-xs text-indigo-700 font-medium">
+                    ✨ O Professor IA está ensinando agora o roteiro que o sistema preparou baseado na BNCC.
+                  </div>
                   {lessonContent.levels[currentLevel].slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6).map((step, idx) => (
                     <div 
                       key={`${currentLevel}-${idx}`} 
