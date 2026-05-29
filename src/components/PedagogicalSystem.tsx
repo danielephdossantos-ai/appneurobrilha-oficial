@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
 import { ActivityEngine } from "@/engines/pedagogical-engine/engine";
-import { RewardSystem } from "@/engines/reward-engine/reward-system";
+import { RewardSystem, RewardEngine } from "@/engines/reward-engine/reward-system";
 import { ActivityContainer } from "./activities/ActivityContainer";
 import { AdaptiveMotor, StudentBehaviorMetrics } from "@/engines/adaptive-engine/motor";
 import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { SoftCelebration } from "./rewards/SoftCelebration";
 import { useGamification } from "@/hooks/useGamification";
+
 
 
 export const pedagogicalSystem = {
