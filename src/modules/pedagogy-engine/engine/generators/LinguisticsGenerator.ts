@@ -1,4 +1,3 @@
-
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
 import { LINGUISTICS_DATA } from "./PedagogyData";
@@ -37,46 +36,59 @@ export class LinguisticsGenerator extends BaseGenerator {
   }
 
   protected generateContent(input: GeneratorInput): any {
-    const type = this.getActivityType(input);
-    const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
+    try {
+      const type = this.getActivityType(input);
+      const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
 
-    if (type === "interpretation") {
-      const dataKey = gradeNum >= 9 ? 'grade9' : 'grade6';
-      const set = LINGUISTICS_DATA.texts[dataKey as keyof typeof LINGUISTICS_DATA.texts];
-      return this.pickRandom(set);
-    }
+      if (type === "interpretation") {
+        const dataKey = gradeNum >= 9 ? 'grade9' : 'grade6';
+        const set = LINGUISTICS_DATA.texts[dataKey as keyof typeof LINGUISTICS_DATA.texts];
+        if (!set || set.length === 0) throw new Error(`No texts found for ${dataKey}`);
+        return this.pickRandom(set);
+      }
 
-    const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
-    const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
-    const targetWord = this.pickRandom(words);
+      const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
+      const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
+      if (!words || words.length === 0) throw new Error(`No words found for level ${difficultyLevel}`);
+      
+      const targetWord = this.pickRandom(words);
 
-    if (type === "phonemes") {
-      const firstLetter = targetWord.word[0];
-      const options = this.shuffle([
-        firstLetter,
-        ...this.pickNRandom(LINGUISTICS_DATA.consonants.filter(c => c !== firstLetter), 3)
-      ]);
-      return { targetWord, firstLetter, options };
-    }
+      if (type === "phonemes") {
+        const firstLetter = targetWord.word[0];
+        const options = this.shuffle([
+          firstLetter,
+          ...this.pickNRandom(LINGUISTICS_DATA.consonants.filter(c => c !== firstLetter), 3)
+        ]);
+        return { targetWord, firstLetter, options };
+      }
 
-    if (type === "syllables") {
-      const missingSyllableIndex = Math.floor(Math.random() * targetWord.syllables.length);
-      const missingSyllable = targetWord.syllables[missingSyllableIndex];
-      const options = this.shuffle([
-        missingSyllable,
-        ...this.pickNRandom(LINGUISTICS_DATA.simpleSyllables.filter(s => s !== missingSyllable), 3)
-      ]);
-      return { 
-        targetWord, 
-        syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
-        missingSyllable,
-        options 
+      if (type === "syllables") {
+        const missingSyllableIndex = Math.floor(Math.random() * targetWord.syllables.length);
+        const missingSyllable = targetWord.syllables[missingSyllableIndex];
+        const options = this.shuffle([
+          missingSyllable,
+          ...this.pickNRandom(LINGUISTICS_DATA.simpleSyllables.filter(s => s !== missingSyllable), 3)
+        ]);
+        return { 
+          targetWord, 
+          syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
+          missingSyllable,
+          options 
+        };
+      }
+
+      // Reading
+      const distractors = this.pickNRandom(words.filter(w => w.word !== targetWord.word), 3);
+      const options = this.shuffle([targetWord, ...distractors]);
+      return { targetWord, options };
+    } catch (e) {
+      console.error("Error in LinguisticsGenerator:", e);
+      // Fallback robusto
+      return {
+        word: "BOLA",
+        options: ["BOLA", "CASA", "DADO", "FOCA"],
+        answer: "BOLA"
       };
     }
-
-    // Reading
-    const distractors = this.pickNRandom(words.filter(w => w.word !== targetWord.word), 3);
-    const options = this.shuffle([targetWord, ...distractors]);
-    return { targetWord, options };
   }
 }
