@@ -350,7 +350,7 @@ function AulaView({
                 {aula.isSystem ? (exercise?.text || "Qual a resposta correta?") : aula.pergunta}
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className={`grid gap-4 ${exercise?.content?.type === "visual_match" ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"}`}>
                 {(aula.isSystem ? (exercise?.content?.options || ["Opção A", "Opção B", "Opção C", "Opção D"]) : (aula.opcoes || [])).map((opt: string) => (
                   <button 
                     key={opt} 
@@ -363,7 +363,9 @@ function AulaView({
                       }
                     }}
                     disabled={acertou === true}
-                    className={`btn-tap p-6 rounded-[2rem] text-xl font-black border-4 transition-all text-left shadow-soft ${
+                    className={`btn-tap p-6 rounded-[2rem] font-black border-4 transition-all text-left shadow-soft ${
+                      exercise?.content?.type === "visual_match" ? "text-5xl sm:text-7xl flex items-center justify-center p-8" : "text-xl"
+                    } ${
                       tentativa === opt 
                         ? (acertou ? "border-success bg-success/10 text-success shadow-glow-success" : "border-destructive bg-destructive/5 text-destructive")
                         : "border-slate-50 bg-slate-50 hover:border-primary/20 hover:bg-white"
