@@ -36,41 +36,24 @@ export class PedagogyService {
     nivelDificuldade?: string;
     serie?: string;
   }): Promise<PedagogicalActivity[]> {
-    try {
-      let query = supabase
-        .from('pedagogical_activities_base')
-        .select('*');
+    let query = supabase
+      .from('pedagogical_activities_base')
+      .select('*');
 
-      if (filters?.materia) {
-        // Busca flexível para a matéria
-        const mat = filters.materia.toLowerCase();
-        if (mat.includes('portugu')) {
-          query = query.or('materia.ilike.%portugu%,materia.ilike.%língua-portuguesa%');
-        } else {
-          query = query.ilike('materia', `%${filters.materia}%`);
-        }
-      }
-      
-      if (filters?.nivelDificuldade) {
-        query = query.eq('nivel_dificuldade', filters.nivelDificuldade);
-      }
-      
-      if (filters?.serie) {
-        // Busca flexível para a série
-        query = query.ilike('serie', `%${filters.serie}%`);
-      }
-
-      const { data, error } = await query;
-      if (error) {
-        console.error("Erro na query de atividades:", error);
-        return [];
-      }
-      
-      return (data || []).map(item => this.mapFromDb(item));
-    } catch (e) {
-      console.error("Erro ao buscar atividades:", e);
-      return [];
+    if (filters?.materia) {
+      query = query.eq('materia', filters.materia);
     }
+    if (filters?.nivelDificuldade) {
+      query = query.eq('nivel_dificuldade', filters.nivelDificuldade);
+    }
+    if (filters?.serie) {
+      query = query.eq('serie', filters.serie);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+    
+    return (data || []).map(item => this.mapFromDb(item));
   }
 
   static async getActivityById(id: string): Promise<PedagogicalActivity | null> {

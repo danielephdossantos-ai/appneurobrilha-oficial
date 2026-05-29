@@ -1,464 +1,201 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/lib/store";
-import { useState, useEffect, useRef } from "react";
-import { Play, BookOpen, Volume2, VolumeX, CheckCircle2, Lightbulb, Loader2, Calendar, ArrowRight, Star, Trophy, Zap, GraduationCap, Headphones } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
-import { ReforcoEngine } from "@/core/pedagogy/reforco-engine";
-import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
 });
 
-const materiasBase = [
-  { id: "Português", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5", dbName: "Português" },
-  { id: "Matemática", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5", dbName: "Matemática" },
-  { id: "Ciências", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5", dbName: "Ciências" },
-  { id: "História", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5", dbName: "História" },
-  { id: "Geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5", dbName: "Geografia" },
+const materias = [
+  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5" },
+  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5" },
+  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5" },
+  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
+  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
 ] as const;
-
-const categoriasInfantil = [
-  { id: "Linguagem", nome: "Linguagem e Letras", emoji: "🔤", cor: "from-pink-200 to-pink-50" },
-  { id: "Números", nome: "Números e Quantidade", emoji: "🎲", cor: "from-blue-200 to-blue-50" },
-  { id: "Cores", nome: "Cores e Formas", emoji: "🎨", cor: "from-yellow-200 to-yellow-50" },
-  { id: "Emoções", nome: "Emoções e Sentimentos", emoji: "😊", cor: "from-green-200 to-green-50" },
-  { id: "Coordenação", nome: "Coordenação Visual", emoji: "🧩", cor: "from-purple-200 to-purple-50" },
-  { id: "Consciência Fonológica", nome: "Sons e Fonemas", emoji: "👂", cor: "from-orange-200 to-orange-50" },
-];
-
-const categoriasFundamental = [
-  { id: "Alfabetização", nome: "Alfabetização", emoji: "✍️", cor: "from-rose-200 to-rose-50" },
-  { id: "Leitura Inicial", nome: "Leitura Inicial", emoji: "📖", cor: "from-indigo-200 to-indigo-50" },
-  { id: "Escrita", nome: "Escrita Criativa", emoji: "🖋️", cor: "from-amber-200 to-amber-50" },
-  ...materiasBase
-];
-
 
 function Escola() {
   const { activeChild } = useAppState();
-  const notifications = useNotifications();
-  const sendNotification = notifications?.sendNotification;
-  
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
-  const { data: agenda = [], isError: agendaError, isLoading: isLoadingAgenda } = useQuery({
-    queryKey: ["study_agenda", activeChild?.id],
-    queryFn: async () => {
-      if (!activeChild?.id) return [];
-      try {
-        const { data, error } = await supabase
-          .from("study_agenda")
-          .select("*")
-          .eq("child_id", activeChild.id)
-          .eq("completed", false)
-          .order("exam_date", { ascending: true });
-        
-        if (error) {
-          console.error("Erro ao buscar agenda:", error);
-          return [];
-        }
-        return data || [];
-      } catch (err) {
-        console.error("Exceção ao buscar agenda:", err);
-        return [];
-      }
-    },
-    enabled: !!activeChild?.id,
-  });
-
-  const carregarAula = async (materiaId: string, topic?: string, isSystemGenerated = false) => {
+  const carregarAula = async (materiaId: string, topic?: string) => {
     if (!activeChild) return;
     setLoading(true);
     try {
-      const serie = activeChild.serie || "1º Ano";
-      const serieNum = serie.includes('Educação Infantil') ? 0 : 
-                       parseInt(serie.match(/\d+/)?.[0] || "1");
-
-      console.log(`Carregando aula para: ${materiaId}, Série: ${serie}`);
-
-      // Geração via SISTEMA (BNCC Estruturada + Banco Pedagógico)
-      const lesson = await ReforcoEngine.generateLesson(
-        topic || materiaId, 
-        undefined, 
-        { ...activeChild, serie_num: serieNum, serie: serie }
-      );
-      
-      setAula({
-        ...lesson,
-        materia: materiaId,
-        etapa: "ensino"
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: {
+          mode: "escola",
+          child: activeChild,
+          subject: materiaId,
+          topic: topic || "conforme BNCC da série"
+        }
       });
-      
-      if (sendNotification) {
-        sendNotification({
-          title: "Hora de Estudar! 📚",
-          message: `${activeChild.nome} começou a rotina de estudos: ${topic || materiaId}`,
-          type: 'estudo'
-        });
-      }
+
+      if (error) throw error;
+      setAula({ ...data, materia: materiaId, etapa: "ensino" });
     } catch (err) {
-      console.error("Erro ao carregar aula:", err);
-      toast.error("Erro ao preparar sua aula. Tente novamente.");
+      console.error(err);
+      toast.error("Erro ao gerar a aula. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (!activeChild) return <Shell><p className="p-8 text-center font-bold">Por favor, selecione uma criança no menu principal.</p></Shell>;
+  if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
 
   if (loading) {
     return (
       <Shell>
-        <div className="h-full flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
-          <div className="relative">
-            <Loader2 className="h-20 w-20 text-primary animate-spin mb-8 opacity-20" />
-            <div className="absolute inset-0 flex items-center justify-center text-4xl animate-bounce">
-              {activeChild.hiperfoco === 'dinossauros' ? '🦕' : '🌟'}
-            </div>
-          </div>
-          <h2 className="text-3xl font-black text-slate-800">Organizando seu Brilho...</h2>
-          <p className="text-muted-foreground mt-2 text-lg">Preparando uma aula incrível para você!</p>
+        <div className="h-full flex flex-col items-center justify-center p-12 text-center">
+          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
+          <h2 className="text-2xl font-bold">Preparando sua aula especial...</h2>
+          <p className="text-muted-foreground">O {activeChild.hiperfoco === 'dinossauros' ? 'dinossauro' : 'amigo'} está organizando tudo!</p>
         </div>
       </Shell>
     );
   }
 
-  if (aula) return (
-    <AulaViewWrapper 
-      aula={aula} 
-      setAula={setAula} 
-      childNome={activeChild.nome} 
-      hiperfoco={activeChild.hiperfoco}
-      currentLevel={currentLevel}
-      setCurrentLevel={setCurrentLevel}
-    />
-  );
+  if (aula) return <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />;
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild?.serie ?? "Ensino Fundamental"}`} />
+      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
 
-      {agenda.length > 0 && (
-        <div className="mb-10 space-y-4 animate-in slide-in-from-top-4 duration-500">
-          <h3 className="text-sm font-black flex items-center gap-2 px-1 text-primary uppercase tracking-widest">
-            <Calendar className="h-4 w-4" />
-            Agenda da Mamãe: Estudos da Semana
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {agenda.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => carregarAula("Geral", item.topic, true)}
-                className="p-6 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/10 hover:border-primary/30 hover:shadow-glow transition-all text-left flex items-start gap-4 group relative overflow-hidden"
-
-              >
-                <div className="h-14 w-14 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform text-3xl">
-                  {item.type === 'prova' ? '🚩' : item.type === 'trabalho' ? '📝' : '📖'}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full">
-                      {item.type}
-                    </span>
-                    {item.exam_date && (
-                      <span className="text-[10px] text-muted-foreground font-bold">
-                        {(() => {
-                          try {
-                            const date = new Date(item.exam_date + 'T12:00:00');
-                            return isNaN(date.getTime()) ? item.exam_date : format(date, "dd 'de' MMMM", { locale: ptBR });
-                          } catch (e) {
-                            return item.exam_date;
-                          }
-                        })()}
-                      </span>
-                    )}
-                  </div>
-                  <div className="font-black text-slate-800 text-xl leading-tight">{item.topic}</div>
-                  <div className="mt-3 flex items-center gap-1.5 text-primary font-bold text-xs">
-                    INICIAR ROTINA DE ESTUDO <ArrowRight className="h-3 w-3" />
-                  </div>
-                </div>
-                <div className="absolute -right-2 -bottom-2 opacity-5 group-hover:opacity-10 transition-opacity">
-                  <GraduationCap className="h-20 w-20" />
-                </div>
-              </button>
-            ))}
+      <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
+        <div className="flex items-center gap-4">
+          <div className="text-5xl">{activeChild.avatar}</div>
+          <div className="flex-1">
+            <div className="font-extrabold text-lg">Continue de onde parou</div>
+            <div className="text-sm text-muted-foreground">Português · Encontros vocálicos · Aula 3 de 8</div>
+            <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
+              <div className="h-full bg-primary" style={{ width: "37%" }} />
+            </div>
           </div>
+          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+            <Play className="h-4 w-4" /> Retomar
+          </button>
         </div>
-      )}
+      </Card>
 
-      <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-        <BookOpen className="h-5 w-5 text-primary" />
-        Áreas de Estudo - {activeChild?.serie}
-      </h2>
+      <h2 className="text-xl mb-4">Matérias</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {(activeChild?.serie?.toLowerCase().includes("infantil") || activeChild?.serie?.toLowerCase().includes("pré") 
-          ? categoriasInfantil 
-          : categoriasFundamental
-        ).map((m) => (
+        {materias.map((m) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left group`}>
-            <div className="text-4xl group-hover:scale-110 transition-transform">{m.emoji}</div>
-            <div className="font-extrabold text-lg mt-2 leading-tight">{m.nome}</div>
-            <Pill tone="info" className="mt-2">Inciar Brilho</Pill>
+            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
+            <div className="text-4xl">{m.emoji}</div>
+            <div className="font-extrabold text-lg mt-2">{m.nome}</div>
+            <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
           </button>
         ))}
       </div>
-
     </Shell>
   );
 }
 
-function AulaView({ 
-  aula, 
-  setAula, 
-  childNome, 
-  hiperfoco,
-  currentLevel,
-  setCurrentLevel
-}: { 
-  aula: any; 
-  setAula: (a: any) => void; 
-  childNome: string; 
-  hiperfoco: string;
-  currentLevel: "basic" | "intermediate" | "advanced";
-  setCurrentLevel: (l: "basic" | "intermediate" | "advanced") => void;
-}) {
+function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
-  const [isReading, setIsReading] = useState(false);
-  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
-
-  const toggleReading = (text: string) => {
-    if (isReading) {
-      window.speechSynthesis.cancel();
-      setIsReading(false);
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "pt-BR";
-    utterance.rate = 0.9; // Friendly slower pace
-    utterance.pitch = 1.2; // Friendly higher pitch
-    
-    utterance.onend = () => setIsReading(false);
-    utterance.onerror = () => setIsReading(false);
-    
-    speechRef.current = utterance;
-    setIsReading(true);
-    window.speechSynthesis.speak(utterance);
-  };
-
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, []);
 
   const titulos: Record<string, string> = {
-    ensino: "📖 Vamos Aprender",
-    demo: "🎨 Exemplo Prático",
-    opcoes: "✨ Sua Vez!",
+    ensino: "📖 Aula",
+    demo: "🎨 Demonstração",
+    opcoes: "✨ Sua vez!",
   };
-
-  const steps = (aula.isSystem && aula.levels) ? (aula.levels[currentLevel] || []) : [];
-  const explanation = aula.isSystem ? steps.find((s: any) => s.type === "explanation")?.text : (aula.ensino || aula.explanation);
-  const example = aula.isSystem ? steps.find((s: any) => s.type === "example")?.text : (aula.demo || "");
-  const exercise = aula.isSystem ? steps.find((s: any) => s.type === "exercise") : null;
 
   return (
     <Shell>
-      <div className="max-w-4xl mx-auto pb-20">
-        <div className="flex justify-between items-center mb-6">
-          <button onClick={() => setAula(null)} className="btn-tap flex items-center gap-2 text-slate-500 font-bold hover:text-primary transition-colors">
-            ← Voltar
-          </button>
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={() => toggleReading(explanation + (example ? ". Exemplo: " + example : ""))}
-              className={`btn-tap h-12 w-12 rounded-2xl flex items-center justify-center transition-all ${isReading ? "bg-destructive text-white animate-pulse" : "bg-primary/10 text-primary hover:bg-primary/20"}`}
-              title={isReading ? "Parar leitura" : "Ouvir professor"}
-            >
-              {isReading ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
-            </button>
-            <div className="hidden sm:flex flex-col items-end">
-              <span className="text-[10px] font-black text-primary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full mb-1">
-                SISTEMA BNCC ATIVO
-              </span>
-              <span className="text-xs text-muted-foreground font-medium">Modo Escola Adaptativa</span>
-            </div>
-          </div>
+      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} />
+
+      <Card className="mb-4">
+        <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
+          <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
+          <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
+          <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "opcoes" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>3. Opções</span>
         </div>
 
-        <PageHeader 
-          emoji="🎓" 
-          title={aula.isSystem ? aula.title.replace("[ESCOLA BRILHA] ", "") : titulos[aula.etapa]} 
-          subtitle={aula.bnccCode ? `Habilidade ${aula.bnccCode}` : "Conteúdo Pedagógico Estruturado"} 
-        />
-
-        {aula.isSystem && (
-          <div className="flex p-1.5 bg-slate-100/50 backdrop-blur-md rounded-[2rem] mb-8 border border-white shadow-inner max-w-sm mx-auto overflow-hidden">
-            {(["basic", "intermediate", "advanced"] as const).map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => {
-                  setCurrentLevel(lvl);
-                  setAcertou(null);
-                  setTentativa(null);
-                  window.speechSynthesis.cancel();
-                  setIsReading(false);
-                }}
-                className={`flex-1 py-3 px-4 rounded-[1.5rem] text-xs font-black transition-all flex items-center justify-center gap-2 ${
-                  currentLevel === lvl 
-                  ? "bg-white text-primary shadow-soft scale-100" 
-                  : "text-slate-400 hover:text-slate-600"
-                }`}
-              >
-                {lvl === "basic" ? "FÁCIL" : lvl === "intermediate" ? "MÉDIO" : "MESTRE"}
+        {aula.etapa === "ensino" && (
+          <div>
+            <div className="aspect-video rounded-2xl bg-gradient-to-br from-sky/40 to-petal/30 grid place-items-center mb-4 relative overflow-hidden">
+              <div className="text-8xl animate-pulse">
+                {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
+              </div>
+            </div>
+            <p className="text-xl leading-relaxed font-medium">
+              {aula.ensino}
+            </p>
+            <div className="mt-6 flex gap-2 flex-wrap">
+              <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                Continuar →
               </button>
-            ))}
+            </div>
           </div>
         )}
 
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <Card className="overflow-hidden border-none shadow-soft-xl bg-white/80 backdrop-blur-md">
-            <div className="aspect-[21/9] bg-gradient-to-br from-primary/10 via-sky/5 to-transparent flex items-center justify-center relative">
-              <div className="text-8xl animate-bounce-short select-none">
-                {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
-              </div>
-              <div className="absolute inset-0 bg-grid-slate-900/[0.02] [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+        {aula.etapa === "demo" && (
+          <div>
+            <h3 className="text-lg font-bold mb-4">Veja alguns exemplos:</h3>
+            <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
+              {aula.demo}
             </div>
-            
-            <div className="p-8 sm:p-10">
-              <div className="space-y-8">
-                <section>
-                  <h3 className="font-black text-primary uppercase tracking-[0.2em] text-[10px] mb-4 flex items-center gap-2">
-                    <BookOpen className="h-3 w-3" /> EXPLICAÇÃO DO PROFESSOR
-                  </h3>
-                  <p className="text-2xl sm:text-3xl leading-relaxed font-black text-slate-800">
-                    {explanation}
-                  </p>
-                </section>
-
-                {example && (
-                  <section className="bg-slate-50 p-6 sm:p-8 rounded-[2rem] border border-slate-100">
-                    <h3 className="font-black text-slate-400 uppercase tracking-[0.2em] text-[10px] mb-4">EXEMPLO PRÁTICO</h3>
-                    <div className="text-xl font-bold text-slate-600 italic leading-relaxed">
-                      "{example}"
-                    </div>
-                  </section>
-                )}
-              </div>
-            </div>
-          </Card>
-
-          {(aula.etapa === "opcoes" || (aula.isSystem && exercise)) && (
-            <Card className="p-8 sm:p-10 border-none shadow-soft-xl bg-white/80 backdrop-blur-md">
-              <h3 className="font-black text-primary uppercase tracking-[0.2em] text-[10px] mb-6 flex items-center gap-2">
-                <Zap className="h-3 w-3" /> DESAFIO DO BRILHO
-              </h3>
-              <p className="text-2xl mb-10 font-black text-slate-800 leading-tight">
-                {aula.isSystem ? (exercise?.text || "Qual a resposta correta?") : aula.pergunta}
-              </p>
-              
-              <div className={`grid gap-4 ${exercise?.content?.type === "visual_match" ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"}`}>
-                {(aula.isSystem ? (exercise?.content?.options || ["Opção A", "Opção B", "Opção C", "Opção D"]) : (aula.opcoes || [])).map((opt: string) => (
-                  <button 
-                    key={opt} 
-                    onClick={() => {
-                      setTentativa(opt);
-                      const isCorrect = aula.isSystem ? opt === (exercise?.content?.answer || "Opção B") : opt === aula.resposta_correta;
-                      setAcertou(isCorrect);
-                      if (isCorrect) {
-                        toast.success("Incrível! Você acertou!", { icon: "🌟" });
-                      }
-                    }}
-                    disabled={acertou === true}
-                    className={`btn-tap p-6 rounded-[2rem] font-black border-4 transition-all text-left shadow-soft ${
-                      exercise?.content?.type === "visual_match" ? "text-5xl sm:text-7xl flex items-center justify-center p-8" : "text-xl"
-                    } ${
-                      tentativa === opt 
-                        ? (acertou ? "border-success bg-success/10 text-success shadow-glow-success" : "border-destructive bg-destructive/5 text-destructive")
-                        : "border-slate-50 bg-slate-50 hover:border-primary/20 hover:bg-white"
-                    }`}>
-                    {opt}
-                  </button>
-                ))}
-              </div>
-
-              {acertou === true && (
-                <div className="mt-10 p-10 rounded-[3rem] bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/20 text-success animate-in zoom-in duration-500 shadow-glow-success">
-                  <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-                    <div className="h-20 w-20 bg-success/20 rounded-full flex items-center justify-center shrink-0">
-                      <Trophy className="h-10 w-10" />
-                    </div>
-                    <div>
-                      <div className="font-black text-3xl uppercase tracking-tighter mb-1">BRILHANTE, {childNome.toUpperCase()}!</div>
-                      <div className="font-bold text-lg opacity-90">{aula.isSystem ? "Você dominou este nível com perfeição!" : aula.reforco_positivo}</div>
-                    </div>
-                    <div className="sm:ml-auto">
-                      <button onClick={() => setAula(null)} className="btn-tap px-8 py-4 bg-success text-white font-black rounded-2xl shadow-lg">
-                        PRÓXIMA AULA →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              {acertou === false && (
-                <div className="mt-8 p-6 rounded-[2rem] bg-sun/10 border-2 border-sun/20 flex items-start gap-4 animate-in slide-in-from-top-2">
-                  <div className="h-10 w-10 bg-sun/20 rounded-xl flex items-center justify-center shrink-0 mt-1">
-                    <Lightbulb className="h-6 w-6 text-sun-foreground" />
-                  </div>
-                  <div>
-                    <div className="font-black text-sun-foreground uppercase tracking-widest text-[10px] mb-1">DICA DO AMIGO VIRTUAL</div>
-                    <div className="text-xl text-slate-800 font-bold leading-tight">
-                      {aula.isSystem ? "Tente novamente com calma! Você está quase lá." : (aula.reforco_erro || "Quase lá! Tente de novo.")}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </Card>
-          )}
-        </div>
-
-        <div className="mt-12 flex justify-center gap-4">
-          <div className="flex items-center gap-3 px-6 py-3 bg-white/50 backdrop-blur-sm rounded-full border border-white shadow-sm">
-            <Pill tone="info" className="font-black uppercase tracking-widest text-[9px]">Proteção BNCC</Pill>
-            <div className="h-1 w-1 rounded-full bg-slate-300"></div>
-            <Pill tone="success" className="font-black uppercase tracking-widest text-[9px]">Seguro para Crianças</Pill>
+            <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+              Estou pronto para o desafio!
+            </button>
           </div>
-        </div>
-      </div>
+        )}
+
+        {aula.etapa === "opcoes" && (
+          <div>
+            <p className="text-xl mb-6 font-bold">{aula.pergunta}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {aula.opcoes.map((opt: string) => (
+                <button 
+                  key={opt} 
+                  onClick={() => {
+                    setTentativa(opt);
+                    setAcertou(opt === aula.resposta_correta);
+                  }}
+                  disabled={acertou === true}
+                  className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
+                    tentativa === opt 
+                      ? (opt === aula.resposta_correta ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
+                      : "border-border bg-muted hover:border-primary"
+                  }`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+
+            {acertou === true && (
+              <div className="mt-6 p-6 rounded-2xl bg-success/15 border-2 border-success/30 text-success text-lg animate-bounce-short">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="h-8 w-8" />
+                  <div>
+                    <div className="font-extrabold">Incrível, {childNome}!</div>
+                    <div>{aula.reforco_positivo}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {acertou === false && (
+              <div className="mt-6 p-6 rounded-2xl bg-sun/20 border-2 border-sun/30 flex items-start gap-3">
+                <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold text-sun-foreground">Dica especial:</div>
+                  <div className="text-lg text-sun-foreground/90">{aula.dica}</div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </Card>
+
+      <button onClick={() => setAula(null)} className="text-sm text-muted-foreground hover:text-foreground">← Voltar para matérias</button>
     </Shell>
   );
 }
-
-function AulaViewWrapper(props: any) {
-  try {
-    return <AulaView {...props} />;
-  } catch (error) {
-    console.error("Erro no AulaView:", error);
-    return (
-      <Shell>
-        <div className="p-8 text-center">
-          <h2 className="text-2xl font-bold text-destructive">Ops! Algo deu errado.</h2>
-          <p className="mt-2">Não conseguimos carregar esta atividade. Por favor, tente outra ou volte mais tarde.</p>
-          <button onClick={() => props.setAula(null)} className="mt-4 btn-tap px-6 py-2 bg-primary text-white rounded-xl">
-            Voltar
-          </button>
-        </div>
-      </Shell>
-    );
-  }
-}
-

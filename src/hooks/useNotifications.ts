@@ -94,13 +94,10 @@ export function useNotifications() {
 
   // Real-time subscription
   useEffect(() => {
-    if (!session?.user?.id) return;
+    if (!session?.user) return;
 
-    let isMounted = true;
-    const channelId = `notifications-${session.user.id}`;
-    
     const channel = supabase
-      .channel(channelId)
+      .channel('schema-db-changes')
       .on(
         'postgres_changes',
         {
@@ -110,7 +107,6 @@ export function useNotifications() {
           filter: `user_id=eq.${session.user.id}`
         },
         (payload) => {
-          if (!isMounted) return;
           const newNotif = payload.new as Notification;
           toast(newNotif.title, {
             description: newNotif.message,
@@ -121,15 +117,13 @@ export function useNotifications() {
           });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });
         }
-      );
-
-    channel.subscribe();
+      )
+      .subscribe();
 
     return () => {
-      isMounted = false;
       supabase.removeChannel(channel);
     };
-  }, [session?.user?.id, queryClient]);
+  }, [session?.user, queryClient]);
 
   return {
     notifications,
