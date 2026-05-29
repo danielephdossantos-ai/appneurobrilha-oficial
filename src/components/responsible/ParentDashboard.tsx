@@ -111,7 +111,12 @@ export const ParentDashboard = () => {
           <EmotionalTimeline history={data.emotionalHistory} />
         </TabsContent>
 
+        <TabsContent value="routine">
+          <RoutineManager routine={data.dailyRoutine} />
+        </TabsContent>
+
         <TabsContent value="settings">
+
           <ParentalControlSettings />
         </TabsContent>
 
