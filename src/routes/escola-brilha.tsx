@@ -23,6 +23,13 @@ function Escola() {
   const { activeChild } = useAppState();
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
+
+  const grades = [
+    "Educação Infantil",
+    "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
+    "6º Ano", "7º Ano", "8º Ano", "9º Ano"
+  ];
 
   const carregarAula = async (materiaId: string, topic?: string) => {
     if (!activeChild) return;
