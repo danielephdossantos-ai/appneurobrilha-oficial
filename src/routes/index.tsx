@@ -5,6 +5,8 @@ import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, A
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
+import { cn } from "@/utils/utils";
+
 
 
 export const Route = createFileRoute("/")({
