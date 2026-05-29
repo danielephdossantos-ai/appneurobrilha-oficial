@@ -75,7 +75,7 @@ export class ActivityEngine {
         idadeMaxima: context.age + 1,
         dificuldade: this.calculateDifficulty(context.previousPerformance, adjustments),
         pesoCognitivo: 5,
-        tipoSensorial: adjustments.instructionType === "visual" ? "visual" : "mixed",
+        tipoSensorial: adjustments.visualComplexity === "low" ? "visual" : "mixed",
         recompensa: {
           stars: 10,
           coins: 20,
