@@ -53,17 +53,18 @@ serve(async (req) => {
       - Diagnóstico: ${child.diagnostico}
       - Nível de Adaptação: ${nivelDesc}
 
-      DADOS DO SISTEMA (NÃO ALTERE A PERGUNTA NEM AS OPÇÕES):
-      - Tema: ${topic}
-      - Instrução Original: ${instruction}
-      - Conteúdo da Atividade: ${JSON.stringify(activityData)}
+      DADOS DO SISTEMA (NÃO ALTERE):
+      - Pergunta/Desafio: ${systemQuestion}
+      - Opções: ${JSON.stringify(systemOptions)}
+      - Resposta Correta: ${systemAnswer}
+      - Instrução Base: ${instruction}
 
       Você deve retornar EXCLUSIVAMENTE um JSON com as seguintes chaves:
       - "ensino": Uma explicação curta, lúdica e adaptada do tema usando o hiperfoco.
       - "demo": Exemplos práticos ou visualização baseada no hiperfoco.
-      - "pergunta": Use exatamente a pergunta/desafio fornecido pelo sistema.
-      - "opcoes": Use exatamente as opções fornecidas pelo sistema.
-      - "resposta_correta": Use exatamente a resposta fornecida pelo sistema.
+      - "pergunta": "${systemQuestion}"
+      - "opcoes": ${JSON.stringify(systemOptions)}
+      - "resposta_correta": "${systemAnswer}"
       - "dica": Uma dica adaptada para caso a criança erre.
       - "reforco_positivo": Uma frase de incentivo citando o hiperfoco.`
 
