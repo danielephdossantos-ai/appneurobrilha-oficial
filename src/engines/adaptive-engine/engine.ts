@@ -34,7 +34,7 @@ export interface NeuroAdjustment {
   predictabilityLevel: "low" | "medium" | "high"; // nível de previsibilidade
 }
 
-export class NeuroEngine {
+export class AdaptiveEngine {
   static getAdjustments(profile: NeuroProfile): NeuroAdjustment {
     switch (profile) {
       case "TEA":
