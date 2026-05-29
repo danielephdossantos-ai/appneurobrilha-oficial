@@ -5,61 +5,47 @@ export const MascotEmotionSchema = z.enum(['happy', 'calm', 'sleepy', 'excited',
 export type MascotEmotion = z.infer<typeof MascotEmotionSchema>;
 
 export interface RewardState {
-  coins: number;
-  stars: number;
-  xp: number;
-  level: number;
-  streakDays: number;
+  totalStars: number;
+  totalCoins: number;
+  energy: number;
+  mascotLevel: number;
+  unlockedItems: string[];
 }
 
-export interface MascotState {
-  name: string;
-  type: string;
-  evolutionStage: number;
-  currentEmotion: MascotEmotion;
-  energyLevel: number;
-  affinityPoints: number;
-}
+export class RewardSystem {
+  private static state: RewardState = {
+    totalStars: 0,
+    totalCoins: 0,
+    energy: 100,
+    mascotLevel: 1,
+    unlockedItems: []
+  };
 
-export interface Achievement {
-  id: string;
-  code: string;
-  title: string;
-  description: string;
-  category: 'persistent' | 'calm' | 'learning' | 'social';
-  points: number;
-  iconUrl?: string;
-}
-
-export class RewardEngine {
   /**
    * Calcula recompensas baseadas em critérios neurocompatíveis.
    * Valoriza esforço, calma e persistência em vez de apenas velocidade.
    */
   static calculateRewards(params: {
     accuracy: number;
-    timeInZone: boolean; // Se a criança permaneceu regulada
+    timeInZone: boolean; 
     attempts: number;
     wasCalm: boolean;
   }) {
-    let coins = 10; // Base
+    let coins = 10;
     let stars = 1;
     let xp = 20;
 
-    // Bônus de Persistência (tentativas sem desistir)
     if (params.attempts > 1 && params.accuracy > 0.7) {
       coins += 5;
       xp += 10;
     }
 
-    // Bônus de Calma (essencial para neurodivergentes)
     if (params.wasCalm) {
       coins += 10;
       stars += 1;
       xp += 15;
     }
 
-    // Bônus de Precisão (com teto para não gerar frustração)
     if (params.accuracy >= 0.9) {
       coins += 5;
       xp += 10;
@@ -68,7 +54,24 @@ export class RewardEngine {
     return { coins, stars, xp };
   }
 
-  static getNextLevelXP(currentLevel: number): number {
-    return Math.floor(100 * Math.pow(1.5, currentLevel - 1));
+  static addRewards(stars: number, coins: number, energy: number) {
+    this.state.totalStars += stars;
+    this.state.totalCoins += coins;
+    this.state.energy = Math.min(100, this.state.energy + energy);
+    
+    this.checkLevelUp();
+    return { ...this.state };
+  }
+
+  private static checkLevelUp() {
+    const nextLevelThreshold = this.state.mascotLevel * 50;
+    if (this.state.totalStars >= nextLevelThreshold) {
+      this.state.mascotLevel++;
+      this.state.unlockedItems.push(`item-${this.state.mascotLevel}`);
+    }
+  }
+
+  static getState() {
+    return { ...this.state };
   }
 }
