@@ -16,8 +16,9 @@ import { EmotionalTimeline } from "./EmotionalTimeline";
 import { CognitiveRadar } from "./CognitiveRadar";
 import { RoutineManager } from "./RoutineManager";
 import { PedagogicalAlerts } from "./PedagogicalAlerts";
-import { DashboardHeader } from "./DashboardHeader";
+import { ParentalControlSettings } from "./ParentalControlSettings";
 import { mockResponsibleData } from "@/data/responsible/mock-data";
+
 
 export const ParentDashboard = () => {
   const data = mockResponsibleData;
