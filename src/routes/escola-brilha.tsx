@@ -41,7 +41,7 @@ function Escola() {
       const activity = service.generateActivity({
         domain,
         difficulty: 0.5,
-        grade: activeChild.serie,
+        grade: selectedGrade,
         childProfile: {
           neurodivergence: [activeChild.diagnostico],
           interests: [activeChild.hiperfoco],
