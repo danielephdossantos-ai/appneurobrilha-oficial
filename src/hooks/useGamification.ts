@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { RewardSystem, RewardState, MascotState } from '@/engines/reward-engine/reward-system';
 
 export function useGamification(childId?: string) {
@@ -35,10 +35,10 @@ export function useGamification(childId?: string) {
 
         if (profileData) {
           setProfile({
-            totalStars: profileData.total_stars,
-            totalCoins: profileData.coins,
-            energy: 100, // Temporário até integrar energia real
-            mascotLevel: profileData.level,
+            totalStars: profileData.total_stars ?? 0,
+            totalCoins: profileData.coins ?? 0,
+            energy: 100, 
+            mascotLevel: profileData.level ?? 1,
             unlockedItems: []
           });
         }
@@ -47,10 +47,10 @@ export function useGamification(childId?: string) {
           setMascot({
             name: mascotData.name,
             type: mascotData.type,
-            evolutionStage: mascotData.evolution_stage,
-            currentEmotion: mascotData.current_emotion,
-            energyLevel: mascotData.energy_level,
-            affinityPoints: mascotData.affinity_points
+            evolutionStage: mascotData.evolution_stage ?? 1,
+            currentEmotion: mascotData.current_emotion as any,
+            energyLevel: mascotData.energy_level ?? 100,
+            affinityPoints: mascotData.affinity_points ?? 0
           });
         }
       } catch (err) {
@@ -69,7 +69,7 @@ export function useGamification(childId?: string) {
     const newProfile = {
       totalStars: profile.totalStars + stars,
       totalCoins: profile.totalCoins + coins,
-      mascotLevel: profile.mascotLevel // Nível calculado via XP no backend ou local
+      mascotLevel: profile.mascotLevel 
     };
 
     try {
@@ -78,7 +78,7 @@ export function useGamification(childId?: string) {
         .update({
           total_stars: newProfile.totalStars,
           coins: newProfile.totalCoins,
-          xp: (profile as any).xp + xp, // Simplificação
+          xp: ((profile as any).xp || 0) + xp,
           updated_at: new Date().toISOString()
         })
         .eq('child_id', childId);
