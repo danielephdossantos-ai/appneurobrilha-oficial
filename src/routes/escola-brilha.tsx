@@ -23,6 +23,13 @@ function Escola() {
   const { activeChild } = useAppState();
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
+
+  const grades = [
+    "Educação Infantil",
+    "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
+    "6º Ano", "7º Ano", "8º Ano", "9º Ano"
+  ];
 
   const carregarAula = async (materiaId: string, topic?: string) => {
     if (!activeChild) return;
@@ -34,7 +41,7 @@ function Escola() {
       const activity = service.generateActivity({
         domain,
         difficulty: 0.5,
-        grade: activeChild.serie,
+        grade: selectedGrade,
         childProfile: {
           neurodivergence: [activeChild.diagnostico],
           interests: [activeChild.hiperfoco],
@@ -86,7 +93,7 @@ function Escola() {
       });
 
       if (error) throw error;
-      setAula({ ...data, materia: materiaId, etapa: "ensino" });
+      setAula({ ...data, materia: materiaId, etapa: "ensino", grade: selectedGrade });
     } catch (err) {
       console.error(err);
       toast.error("Erro ao gerar a aula. Tente novamente.");
@@ -113,20 +120,38 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
+      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+
+      <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-2 min-w-max">
+          {grades.map((grade) => (
+            <button
+              key={grade}
+              onClick={() => setSelectedGrade(grade)}
+              className={`px-4 py-2 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
+                selectedGrade === grade
+                  ? "bg-primary text-white shadow-glow scale-105"
+                  : "bg-muted text-muted-foreground hover:bg-primary/10"
+              }`}
+            >
+              {grade}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
           <div className="text-5xl">{activeChild.avatar}</div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">Continue de onde parou</div>
-            <div className="text-sm text-muted-foreground">Português · Encontros vocálicos · Aula 3 de 8</div>
+            <div className="font-extrabold text-lg">Pronto para brilhar?</div>
+            <div className="text-sm text-muted-foreground">Escolha uma matéria do {selectedGrade} e vamos começar!</div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: "37%" }} />
+              <div className="h-full bg-primary" style={{ width: "10%" }} />
             </div>
           </div>
-          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
-            <Play className="h-4 w-4" /> Retomar
+          <button onClick={() => carregarAula("matematica")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+            <Play className="h-4 w-4" /> Começar
           </button>
         </div>
       </Card>
@@ -158,7 +183,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} />
+      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · ${aula.grade} · Adaptado para você`} />
 
       <Card className="mb-4">
         <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
