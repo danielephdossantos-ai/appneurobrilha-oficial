@@ -1,5 +1,5 @@
-import { PedagogyEngine } from '../../pedagogy-engine/engine/pedagogy-core';
-import { EmotionalEngine } from '../../emotional-engine/engine/emotional-engine';
+import { PedagogyEngine } from '@/modules/escola-brilha/engine/pedagogy-core';
+import { EmotionalEngine } from '@/engines/regulation-engine/engine/emotional-engine';
 import { AdaptiveEngine as LegacyAdaptiveEngine } from "@/engines/adaptive-engine/engine";
 
 export type NeuroProfile = "Neurotipico" | "TEA" | "TDAH" | "Dislexia";

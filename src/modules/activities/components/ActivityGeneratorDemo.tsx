@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityProceduralService } from '../../pedagogy-engine/services/ActivityProceduralService';
-import { GeneratedActivity } from '../../pedagogy-engine/types/generator';
+import { ActivityProceduralService } from '@/modules/escola-brilha/services/ActivityProceduralService';
+import { GeneratedActivity } from '@/modules/escola-brilha/types/generator';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
-import { useNeuroAnalytics } from '../../analytics/hooks/useNeuroAnalytics';
+import { useNeuroAnalytics } from '@/modules/relatorios/hooks/useNeuroAnalytics';
 import { toast } from 'sonner';
 
 const ActivityGeneratorDemo = () => {

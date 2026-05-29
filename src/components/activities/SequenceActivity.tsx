@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GeneratedActivity } from '../../core/activity-engine/types';
-import { ActivityPerformance } from '../../core/activity-engine/types';
+import { GeneratedActivity } from '@/engines/pedagogical-engine/types';
+import { ActivityPerformance } from '@/engines/pedagogical-engine/types';
 
 interface Props {
   activity: GeneratedActivity;

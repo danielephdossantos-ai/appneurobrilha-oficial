@@ -1,5 +1,5 @@
 
-import { Emotion } from "../../modules/emotional-engine/engine/emotional-engine";
+import { Emotion } from "@/engines/regulation-engine/emotional-engine";
 import { SensoryMode } from "@/modules/sensorial/engine/sensory-engine";
 
 
