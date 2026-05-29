@@ -45,12 +45,8 @@ export class ActivityProceduralService {
       const activity = this.generateActivity({
         domain,
         difficulty,
-        childProfile: {
-          neurodivergence: [],
-          interests: [],
-          sensoryThreshold: 0.5,
-          lastErrors: [],
-        },
+        grade: input.grade,
+        childProfile: input.childProfile,
         previousActivityIds: activities.map(a => a.id),
       });
       activities.push(activity);
