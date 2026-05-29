@@ -12,7 +12,6 @@ import { OfflineEngine, ConflictEngine } from "@/engines/offline";
 import { db } from "@/engines/offline/database";
 import { useLiveQuery } from "dexie-react-hooks";
 
-
 interface AgendaEstudosProps {
   childId: string;
 }
@@ -24,6 +23,7 @@ export interface AgendaItem {
   exam_date: string;
   type: 'prova' | 'trabalho' | 'exercicio' | 'estudo' | 'outro';
   completed: boolean;
+  child_id?: string;
 }
 
 export function AgendaEstudos({ childId }: AgendaEstudosProps) {
@@ -34,40 +34,67 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [newType, setNewType] = useState<AgendaItem['type']>('prova');
   const { sendNotification } = useNotifications();
 
+  // Dados locais (Offline-first)
+  const localAgenda = useLiveQuery(
+    () => db.records.where({ type: 'study_agenda' }).toArray(),
+    [childId]
+  );
+
   const { data: agenda = [], isLoading } = useQuery({
     queryKey: ["study_agenda", childId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("study_agenda")
-        .select("*")
-        .eq("child_id", childId)
-        .order("exam_date", { ascending: true });
-      
-      if (error) throw error;
-      return data as AgendaItem[];
+      try {
+        const { data, error } = await supabase
+          .from("study_agenda")
+          .select("*")
+          .eq("child_id", childId)
+          .order("exam_date", { ascending: true });
+        
+        if (error) throw error;
+
+        // Sincronizar cache local com dados remotos
+        for (const item of (data || [])) {
+          await db.records.put({
+            id: item.id,
+            type: 'study_agenda',
+            data: item,
+            updatedAt: Date.now()
+          });
+        }
+
+        return data as AgendaItem[];
+      } catch (error) {
+        console.warn("[AgendaEstudos] Servidor inacessível, usando cache local.");
+        return (localAgenda || [])
+          .map(r => r.data)
+          .filter(d => d.child_id === childId) as AgendaItem[];
+      }
     },
   });
 
   const addMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("study_agenda")
-        .insert([{
-          child_id: childId,
-          topic: newTopic,
-          exam_date: newDate || new Date().toISOString().split('T')[0],
-          type: newType,
-          completed: false
-        }]);
-      if (error) throw error;
-      
-      // Enviar notificação para a criança
-      sendNotification({
+      const newItem = {
+        id: crypto.randomUUID(),
         child_id: childId,
-        title: `Novo item na sua Agenda!`,
-        message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
-        type: 'estudo'
-      });
+        topic: newTopic,
+        exam_date: newDate || new Date().toISOString().split('T')[0],
+        type: newType,
+        completed: false
+      };
+
+      // Persistência Offline Imediata
+      await OfflineEngine.queueAction('study_agenda_upsert', newItem);
+      
+      // Enviar notificação para a criança (se online)
+      if (navigator.onLine) {
+        sendNotification({
+          child_id: childId,
+          title: `Novo item na sua Agenda!`,
+          message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
+          type: 'estudo'
+        });
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
@@ -80,11 +107,13 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
 
   const toggleMutation = useMutation({
     mutationFn: async ({ id, completed }: { id: string, completed: boolean }) => {
-      const { error } = await supabase
-        .from("study_agenda")
-        .update({ completed })
-        .eq("id", id);
-      if (error) throw error;
+      const item = agenda.find(i => i.id === id);
+      if (!item) return;
+
+      const updatedItem = { ...item, completed };
+
+      // Persistência Offline Imediata
+      await OfflineEngine.queueAction('study_agenda_upsert', updatedItem);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
@@ -93,11 +122,16 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
+      // Nota: Para deleção offline, precisaríamos de um soft-delete ou um tipo de evento 'delete' na fila.
+      // Simplificando: o sync-engine poderia tratar delete se enviarmos um flag.
+      // Por agora, deletamos localmente e tentamos no remoto.
+      await db.records.delete(id);
+      
       const { error } = await supabase
         .from("study_agenda")
         .delete()
         .eq("id", id);
-      if (error) throw error;
+      if (error && navigator.onLine) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
