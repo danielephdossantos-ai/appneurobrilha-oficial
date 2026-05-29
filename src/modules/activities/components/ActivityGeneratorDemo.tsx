@@ -34,7 +34,12 @@ const ActivityGeneratorDemo = () => {
   const generateNewSet = () => {
     const service = ActivityProceduralService.getInstance();
     const domains = ['linguistics', 'math', 'cognitive', 'motor', 'perception'];
-    const newActivities = service.generateSession(domains, difficulty, 5);
+    const newActivities = service.generateSession(domains, difficulty, 5, {
+      neurodivergence: [],
+      interests: [],
+      sensoryThreshold: 0.5,
+      lastErrors: [],
+    }, "1º Ano");
     setActivities(newActivities);
     setSelectedActivity(newActivities[0]);
   };
