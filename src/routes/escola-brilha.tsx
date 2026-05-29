@@ -93,7 +93,7 @@ function Escola() {
       });
 
       if (error) throw error;
-      setAula({ ...data, materia: materiaId, etapa: "ensino" });
+      setAula({ ...data, materia: materiaId, etapa: "ensino", grade: selectedGrade });
     } catch (err) {
       console.error(err);
       toast.error("Erro ao gerar a aula. Tente novamente.");
