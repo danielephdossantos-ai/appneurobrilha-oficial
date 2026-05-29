@@ -20,8 +20,6 @@ import { DashboardHeader } from "./DashboardHeader";
 import { ParentalControlSettings } from "./ParentalControlSettings";
 import { mockResponsibleData } from "@/data/responsible/mock-data";
 
-
-
 export const ParentDashboard = () => {
   const data = mockResponsibleData;
 
@@ -41,7 +39,6 @@ export const ParentDashboard = () => {
           <TabsTrigger value="emotional" className="rounded-lg">Emocional</TabsTrigger>
           <TabsTrigger value="routine" className="rounded-lg">Rotina</TabsTrigger>
           <TabsTrigger value="settings" className="rounded-lg">Controle Parental</TabsTrigger>
-
         </TabsList>
 
         <TabsContent value="overview" className="space-y-8">
@@ -116,10 +113,8 @@ export const ParentDashboard = () => {
         </TabsContent>
 
         <TabsContent value="settings">
-
           <ParentalControlSettings />
         </TabsContent>
-
       </Tabs>
     </div>
   );
