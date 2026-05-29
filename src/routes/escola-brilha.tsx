@@ -129,7 +129,7 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
+      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild?.serie ?? "Ensino Fundamental"}`} />
 
       {agenda.length > 0 && (
         <div className="mb-10 space-y-4 animate-in slide-in-from-top-4 duration-500">
@@ -157,7 +157,8 @@ function Escola() {
                       <span className="text-[10px] text-muted-foreground font-bold">
                         {(() => {
                           try {
-                            return format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR });
+                            const date = new Date(item.exam_date + 'T12:00:00');
+                            return isNaN(date.getTime()) ? item.exam_date : format(date, "dd 'de' MMMM", { locale: ptBR });
                           } catch (e) {
                             return item.exam_date;
                           }
