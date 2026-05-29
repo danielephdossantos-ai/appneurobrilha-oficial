@@ -391,19 +391,27 @@ function AulaView({
               
               {acertou === false && (
                 <div className="mt-8 p-6 rounded-[2rem] bg-sun/10 border-2 border-sun/20 flex items-start gap-4 animate-in slide-in-from-top-2">
-                  <div className="h-10 w-10 bg-sun/20 rounded-full flex items-center justify-center shrink-0 text-xl">
-                    💡
+                  <div className="h-10 w-10 bg-sun/20 rounded-xl flex items-center justify-center shrink-0 mt-1">
+                    <Lightbulb className="h-6 w-6 text-sun-foreground" />
                   </div>
                   <div>
-                    <div className="font-black text-sun-dark">DICA DO PROFESSOR:</div>
-                    <div className="font-bold text-slate-600">
-                      {aula.isSystem ? "Tente novamente com calma! Você está quase lá." : aula.reforco_erro}
+                    <div className="font-black text-sun-foreground uppercase tracking-widest text-[10px] mb-1">DICA DO AMIGO VIRTUAL</div>
+                    <div className="text-xl text-slate-800 font-bold leading-tight">
+                      {aula.isSystem ? "Tente novamente com calma! Você está quase lá." : (aula.reforco_erro || "Quase lá! Tente de novo.")}
                     </div>
                   </div>
                 </div>
               )}
             </Card>
           )}
+        </div>
+
+        <div className="mt-12 flex justify-center gap-4">
+          <div className="flex items-center gap-3 px-6 py-3 bg-white/50 backdrop-blur-sm rounded-full border border-white shadow-sm">
+            <Pill tone="info" className="font-black uppercase tracking-widest text-[9px]">Proteção BNCC</Pill>
+            <div className="h-1 w-1 rounded-full bg-slate-300"></div>
+            <Pill tone="success" className="font-black uppercase tracking-widest text-[9px]">Seguro para Crianças</Pill>
+          </div>
         </div>
       </div>
     </Shell>
@@ -429,27 +437,3 @@ function AulaViewWrapper(props: any) {
   }
 }
 
-                  <div className="h-10 w-10 bg-sun/20 rounded-xl flex items-center justify-center shrink-0 mt-1">
-                    <Lightbulb className="h-6 w-6 text-sun-foreground" />
-                  </div>
-                  <div>
-                    <div className="font-black text-sun-foreground uppercase tracking-widest text-[10px] mb-1">DICA DO AMIGO VIRTUAL</div>
-                    <div className="text-xl text-slate-800 font-bold leading-tight">{aula.isSystem ? "Tente olhar o exemplo novamente com calma." : aula.dica}</div>
-                  </div>
-                </div>
-              )}
-            </Card>
-          )}
-        </div>
-
-        <div className="mt-12 flex justify-center gap-4">
-          <div className="flex items-center gap-3 px-6 py-3 bg-white/50 backdrop-blur-sm rounded-full border border-white shadow-sm">
-            <Pill tone="info" className="font-black uppercase tracking-widest text-[9px]">Proteção BNCC</Pill>
-            <div className="h-1 w-1 rounded-full bg-slate-300"></div>
-            <Pill tone="success" className="font-black uppercase tracking-widest text-[9px]">Seguro para Crianças</Pill>
-          </div>
-        </div>
-      </div>
-    </Shell>
-  );
-}
