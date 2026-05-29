@@ -59,8 +59,11 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --shadow-soft: 0 4px 20px -8px oklch(0.55 0.12 155 / 0.18);
+  --shadow-soft: 0 4px 0px 0px oklch(var(--primary-dark) / 0.2);
   --shadow-glow: 0 8px 40px -12px oklch(0.7 0.16 155 / 0.35);
+  --shadow-kid: 0 4px 0px 0px var(--shadow-color);
+  --shadow-kid-hover: 0 2px 0px 0px var(--shadow-color);
+  --shadow-kid-active: 0 0px 0px 0px var(--shadow-color);
 }
 
 :root {
@@ -114,6 +117,12 @@
   --sidebar-accent-foreground: oklch(0.3 0.08 165);
   --sidebar-border: oklch(0.88 0.04 155);
   --sidebar-ring: oklch(0.62 0.13 158);
+  
+  --primary-dark: 0.52 0.13 158;
+  --secondary-dark: 0.83 0.05 155;
+  --sun-dark: 0.75 0.13 85;
+  --sky-dark: 0.72 0.08 230;
+  --petal-dark: 0.76 0.08 350;
 }
 
 .dark {
