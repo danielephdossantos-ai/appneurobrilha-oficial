@@ -16,11 +16,11 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5" },
+  { id: "Português", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5" },
+  { id: "Matemática", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5" },
+  { id: "Ciências", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5" },
+  { id: "História", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5" },
+  { id: "Geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5" },
 ] as const;
 
 function Escola() {
@@ -51,46 +51,32 @@ function Escola() {
     if (!activeChild) return;
     setLoading(true);
     try {
-      // Obtém o mapeamento numérico da série para a BNCC
-      const serieNum = activeChild.serie ? (
-        activeChild.serie.includes('Educação Infantil') ? 0 : 
-        parseInt(activeChild.serie.match(/\d+/)?.[0] || "1")
-      ) : 1;
+      const serie = activeChild.serie || "1º Ano";
+      const serieNum = serie.includes('Educação Infantil') ? 0 : 
+                       parseInt(serie.match(/\d+/)?.[0] || "1");
 
-      if (isSystemGenerated || !topic) {
-        // Geração via SISTEMA (BNCC Estruturada)
-        const lesson = await ReforcoEngine.generateLesson(
-          topic || materiaId, 
-          undefined, 
-          { ...activeChild, serie_num: serieNum }
-        );
-        setAula({
-          ...lesson,
-          materia: materiaId,
-          etapa: "ensino"
-        });
-        
-        sendNotification({
-          title: "Hora de Estudar! 📚",
-          message: `${activeChild.nome} começou a rotina de estudos: ${topic || materiaId}`,
-          type: 'estudo'
-        });
-      } else {
-        // Geração via IA para conteúdos dinâmicos
-        const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-          body: {
-            mode: "escola",
-            child: activeChild,
-            subject: materiaId,
-            topic: topic || "conforme BNCC da série"
-          }
-        });
+      console.log(`Carregando aula para: ${materiaId}, Série: ${serie}`);
 
-        if (error) throw error;
-        setAula({ ...data, materia: materiaId, etapa: "ensino" });
-      }
+      // Geração via SISTEMA (BNCC Estruturada + Banco Pedagógico)
+      const lesson = await ReforcoEngine.generateLesson(
+        topic || materiaId, 
+        undefined, 
+        { ...activeChild, serie_num: serieNum, serie: serie }
+      );
+      
+      setAula({
+        ...lesson,
+        materia: materiaId,
+        etapa: "ensino"
+      });
+      
+      sendNotification({
+        title: "Hora de Estudar! 📚",
+        message: `${activeChild.nome} começou a rotina de estudos: ${topic || materiaId}`,
+        type: 'estudo'
+      });
     } catch (err) {
-      console.error(err);
+      console.error("Erro ao carregar aula:", err);
       toast.error("Erro ao preparar sua aula. Tente novamente.");
     } finally {
       setLoading(false);
