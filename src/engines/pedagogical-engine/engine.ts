@@ -12,8 +12,9 @@ export interface PedagogicalContext {
   previousPerformance: number;
 }
 
-export class PedagogicalEngine {
-  private static readonly FALLBACK_ID = "fallback-default";
+export class ActivityEngine {
+  private static usedContentIds: Set<string> = new Set();
+
 
   static generateActivity(context: PedagogicalContext): PedagogicalActivity {
     console.log(`[PedagogicalEngine] Iniciando geração para: ${context.childId}`, context);
@@ -103,4 +104,21 @@ export class PedagogicalEngine {
       }
     };
   }
+  private static readonly FALLBACK_ID = "fallback-default";
+
+  static gerarAtividade(
+    templateId?: string, 
+    analysis?: any,
+    preferredType?: string
+  ): any {
+    // Compatibilidade temporária para não quebrar o dashboard
+    return this.generateActivity({
+        childId: "anonymous",
+        age: 6,
+        grade: 1,
+        neuroProfile: "Neurotipico",
+        previousPerformance: 1
+    });
+  }
 }
+
