@@ -110,8 +110,9 @@ export const ParentDashboard = () => {
         </TabsContent>
 
         <TabsContent value="settings">
-          <RoutineManager routine={data.dailyRoutine} />
+          <ParentalControlSettings />
         </TabsContent>
+
       </Tabs>
     </div>
   );
