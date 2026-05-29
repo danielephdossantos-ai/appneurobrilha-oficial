@@ -30,7 +30,37 @@ export class ActivityEngine {
       const skill = suitableSkills[0];
 
       // 3. Ajustar Perfil Neuroadaptativo
-      const adjustments = AdaptiveEngine.getAdjustments(context.neuroProfile as any);
+      const { adjustment: adjustments } = NeuroAdaptiveCore.processState({
+        profile: context.neuroProfile as NeuroProfile,
+        attention: {
+          averageAttentionSpan: 60,
+          focusScore: 1.0,
+          distractionCount: 0,
+          impulsivityRate: 0.1,
+          hyperfocusDetected: false,
+        },
+        fatigue: {
+          cognitiveLoad: 0.5,
+          sessionDuration: 0,
+          lastBreakTime: 0,
+          needForBreak: false,
+          fatigueLevel: 0.1,
+        },
+        sensory: {
+          visualOverload: 0.1,
+          auditorySensitivity: 0.1,
+          sensoryTolerance: 1.0,
+          stimulusReactivity: 0.1,
+        },
+        performance: {
+          averageResponseTime: 5,
+          accuracyRate: context.previousPerformance,
+          errorFrequency: 0,
+          helpRequests: 0,
+        },
+        timestamp: Date.now(),
+      });
+
 
       // 4. Buscar Template Compatível
       const template = this.findTemplate(skill.code, context.age);
