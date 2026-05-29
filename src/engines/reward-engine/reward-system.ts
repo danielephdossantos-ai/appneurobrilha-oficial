@@ -12,6 +12,16 @@ export interface RewardState {
   unlockedItems: string[];
 }
 
+export interface MascotState {
+  name: string;
+  type: string;
+  evolutionStage: number;
+  currentEmotion: MascotEmotion;
+  energyLevel: number;
+  affinityPoints: number;
+}
+
+
 export class RewardSystem {
   private static state: RewardState = {
     totalStars: 0,
