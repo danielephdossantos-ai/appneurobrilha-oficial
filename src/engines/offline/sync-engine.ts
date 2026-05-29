@@ -53,7 +53,9 @@ export class SyncEngine {
       'adaptation_log': 'adaptation_logs',
       'progression_update': 'progression',
       'daily_session': 'daily_sessions',
-      'achievement_unlock': 'achievements'
+      'achievement_unlock': 'achievements',
+      'gamification_profile_update': 'gamification_profiles',
+      'mascot_state_update': 'mascot_states'
     };
 
     const table = typeToTable[type];
