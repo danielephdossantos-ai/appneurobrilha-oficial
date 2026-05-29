@@ -30,10 +30,10 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
-  const { data: agenda = [] } = useQuery({
+  const { data: agenda = [], isError: agendaError } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
     queryFn: async () => {
-      if (!activeChild) return [];
+      if (!activeChild?.id) return [];
       const { data, error } = await supabase
         .from("study_agenda")
         .select("*")
@@ -41,10 +41,13 @@ function Escola() {
         .eq("completed", false)
         .order("exam_date", { ascending: true });
       
-      if (error) throw error;
-      return data;
+      if (error) {
+        console.error("Erro ao buscar agenda:", error);
+        return []; // Não quebrar a página se a agenda falhar
+      }
+      return data || [];
     },
-    enabled: !!activeChild,
+    enabled: !!activeChild?.id,
   });
 
   const carregarAula = async (materiaId: string, topic?: string, isSystemGenerated = false) => {
