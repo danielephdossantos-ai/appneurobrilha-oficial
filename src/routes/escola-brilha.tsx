@@ -179,7 +179,7 @@ function Escola() {
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id] ?? 2 : 2}</Pill>
+            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id.toLowerCase()] ?? 2 : 2}</Pill>
           </button>
         ))}
       </div>
