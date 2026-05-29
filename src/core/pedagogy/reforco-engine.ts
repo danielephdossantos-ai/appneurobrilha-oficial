@@ -29,7 +29,8 @@ export interface ReforcoLesson {
 export class ReforcoEngine {
   static async generateLesson(topic: string = "Geral", adjustment?: NeuroAdjustment, childInfo?: any): Promise<ReforcoLesson> {
     const lowerTopic = (topic || "Geral").toLowerCase();
-    const childLevel = childInfo?.serie_num || 1; // Fallback to 1st year
+    const childLevel = childInfo?.serie_num || 0; 
+    const isInfantil = childLevel === 0 || (childInfo?.serie && childInfo.serie.toLowerCase().includes("infantil"));
     
     // Tenta buscar no banco pedagógico primeiro
     try {
@@ -37,11 +38,12 @@ export class ReforcoEngine {
       const match = activities.find(a => 
         (a.titulo.toLowerCase().includes(lowerTopic) || 
         a.tags.some(t => t.toLowerCase().includes(lowerTopic))) &&
-        (a.serie === childInfo?.serie || !a.serie)
+        ((isInfantil && (a.serie?.includes("Infantil") || a.faixaEtaria?.includes("ano"))) || 
+         (!isInfantil && a.serie === childInfo?.serie) || !a.serie)
       );
 
       if (match) {
-        return this.mapActivityToLesson(match, adjustment);
+        return this.mapActivityToLesson(match, adjustment, isInfantil);
       }
     } catch (e) {
       console.error("Erro ao buscar no banco pedagógico:", e);
@@ -94,7 +96,7 @@ export class ReforcoEngine {
 
   private static getExplanation(topic: string, diff: string, level: number, skill?: BNCCSkill): string {
     if (level === 0) {
-      return `Olá, amiguinho! Vamos brincar de descobrir ${topic}? É muito legal!`;
+      return `Olá, amiguinho! Vamos brincar de descobrir ${topic}? É muito legal! Observe as cores e as formas mágicas!`;
     }
     if (level >= 6) {
       return `Nesta unidade sobre ${topic}, analisaremos os fundamentos teóricos e aplicações práticas conforme a BNCC.`;
@@ -103,7 +105,7 @@ export class ReforcoEngine {
   }
 
   private static getExample(topic: string, diff: string, level: number): string {
-    if (level === 0) return "Olha só: se você tem 2 maçãs e ganha mais 1, agora tem 3! 🍎🍎 + 🍎 = 🍎🍎🍎";
+    if (level === 0) return "Olha só esses desenhos lindos! Vamos usar os olhos de detetive para encontrar os pares!";
     return `Exemplo de ${topic}: imagine que estamos organizando uma biblioteca escolar.`;
   }
 
@@ -136,7 +138,7 @@ export class ReforcoEngine {
     return this.generateLesson(agendaTopic, adjustment, childInfo);
   }
 
-  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment): ReforcoLesson {
+  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment, isInfantil: boolean = false): ReforcoLesson {
     const levels = {
       basic: [] as LessonStep[],
       intermediate: [] as LessonStep[],
@@ -163,15 +165,15 @@ export class ReforcoEngine {
         const targetLevel = i % 3 === 0 ? 'basic' : i % 3 === 1 ? 'intermediate' : 'advanced';
         levels[targetLevel].push({
           type: "exercise",
-          text: v.enunciado || v.titulo || "Desafio extra",
+          text: v.enunciado || v.titulo || (isInfantil ? "Desafio Visual" : "Desafio extra"),
           content: v
         });
       });
     }
 
-    if (levels.basic.length === 0) levels.basic.push({ type: "explanation", text: "Vamos começar com o básico." });
-    if (levels.intermediate.length === 0) levels.intermediate.push({ type: "explanation", text: "Subindo o nível agora." });
-    if (levels.advanced.length === 0) levels.advanced.push({ type: "explanation", text: "Desafio mestre para você!" });
+    if (levels.basic.length === 0) levels.basic.push({ type: "explanation", text: isInfantil ? "Vamos começar nossa brincadeira!" : "Vamos começar com o básico." });
+    if (levels.intermediate.length === 0) levels.intermediate.push({ type: "explanation", text: isInfantil ? "Olha só que legal!" : "Subindo o nível agora." });
+    if (levels.advanced.length === 0) levels.advanced.push({ type: "explanation", text: isInfantil ? "Você é um mestre!" : "Desafio mestre para você!" });
 
     return {
       title: activity.titulo,
