@@ -131,6 +131,203 @@ export type Database = {
           },
         ]
       }
+      activity_results: {
+        Row: {
+          activity_id: string | null
+          child_id: string | null
+          completion_data: Json | null
+          created_at: string | null
+          errors_count: number | null
+          help_requested_count: number | null
+          id: string
+          score: number | null
+          time_spent_seconds: number | null
+        }
+        Insert: {
+          activity_id?: string | null
+          child_id?: string | null
+          completion_data?: Json | null
+          created_at?: string | null
+          errors_count?: number | null
+          help_requested_count?: number | null
+          id?: string
+          score?: number | null
+          time_spent_seconds?: number | null
+        }
+        Update: {
+          activity_id?: string | null
+          child_id?: string | null
+          completion_data?: Json | null
+          created_at?: string | null
+          errors_count?: number | null
+          help_requested_count?: number | null
+          id?: string
+          score?: number | null
+          time_spent_seconds?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_results_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "activities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "activity_results_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      activity_templates: {
+        Row: {
+          base_difficulty: number | null
+          bncc_skill_code: string | null
+          category: string
+          cognitive_weight: Json | null
+          created_at: string | null
+          description: string | null
+          id: string
+          sensory_type: string | null
+          title: string
+        }
+        Insert: {
+          base_difficulty?: number | null
+          bncc_skill_code?: string | null
+          category: string
+          cognitive_weight?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          sensory_type?: string | null
+          title: string
+        }
+        Update: {
+          base_difficulty?: number | null
+          bncc_skill_code?: string | null
+          category?: string
+          cognitive_weight?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          sensory_type?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_templates_bncc_skill_code_fkey"
+            columns: ["bncc_skill_code"]
+            isOneToOne: false
+            referencedRelation: "bncc_skills"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      adaptation_logs: {
+        Row: {
+          action_taken: string | null
+          child_id: string | null
+          id: string
+          timestamp: string | null
+          trigger_reason: string | null
+        }
+        Insert: {
+          action_taken?: string | null
+          child_id?: string | null
+          id?: string
+          timestamp?: string | null
+          trigger_reason?: string | null
+        }
+        Update: {
+          action_taken?: string | null
+          child_id?: string | null
+          id?: string
+          timestamp?: string | null
+          trigger_reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "adaptation_logs_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      anamnesis: {
+        Row: {
+          child_id: string
+          created_at: string | null
+          history: string | null
+          id: string
+          milestones: Json | null
+          observations: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string | null
+          history?: string | null
+          id?: string
+          milestones?: Json | null
+          observations?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string | null
+          history?: string | null
+          id?: string
+          milestones?: Json | null
+          observations?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anamnesis_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attention_metrics: {
+        Row: {
+          distraction_events: number | null
+          focus_score: number | null
+          id: string
+          latency_ms: number | null
+          session_id: string | null
+          timestamp: string | null
+        }
+        Insert: {
+          distraction_events?: number | null
+          focus_score?: number | null
+          id?: string
+          latency_ms?: number | null
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Update: {
+          distraction_events?: number | null
+          focus_score?: number | null
+          id?: string
+          latency_ms?: number | null
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attention_metrics_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "daily_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_logs: {
         Row: {
           action: string
@@ -161,6 +358,51 @@ export type Database = {
           module?: string
           user_agent?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      bncc_levels: {
+        Row: {
+          id: number
+          max_age: number
+          min_age: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          max_age: number
+          min_age: number
+          name: string
+        }
+        Update: {
+          id?: number
+          max_age?: number
+          min_age?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      bncc_skills: {
+        Row: {
+          code: string
+          created_at: string | null
+          description: string
+          field_of_experience: string | null
+          segment: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          description: string
+          field_of_experience?: string | null
+          segment: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          description?: string
+          field_of_experience?: string | null
+          segment?: string
         }
         Relationships: []
       }
@@ -483,6 +725,53 @@ export type Database = {
           },
         ]
       }
+      children_profiles: {
+        Row: {
+          active: boolean | null
+          birth_date: string
+          created_at: string | null
+          diagnosis: string[] | null
+          first_name: string
+          gender: string | null
+          id: string
+          last_name: string | null
+          parent_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          birth_date: string
+          created_at?: string | null
+          diagnosis?: string[] | null
+          first_name: string
+          gender?: string | null
+          id?: string
+          last_name?: string | null
+          parent_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          birth_date?: string
+          created_at?: string | null
+          diagnosis?: string[] | null
+          first_name?: string
+          gender?: string | null
+          id?: string
+          last_name?: string | null
+          parent_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "children_profiles_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "parent_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cognitive_profile: {
         Row: {
           avg_focus_time: number | null
@@ -539,6 +828,44 @@ export type Database = {
           },
         ]
       }
+      cognitive_profiles: {
+        Row: {
+          attention_control: number | null
+          child_id: string
+          id: string
+          impulse_control: number | null
+          processing_speed: number | null
+          updated_at: string | null
+          working_memory: number | null
+        }
+        Insert: {
+          attention_control?: number | null
+          child_id: string
+          id?: string
+          impulse_control?: number | null
+          processing_speed?: number | null
+          updated_at?: string | null
+          working_memory?: number | null
+        }
+        Update: {
+          attention_control?: number | null
+          child_id?: string
+          id?: string
+          impulse_control?: number | null
+          processing_speed?: number | null
+          updated_at?: string | null
+          working_memory?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cognitive_profiles_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_routines: {
         Row: {
           child_id: string
@@ -567,6 +894,108 @@ export type Database = {
             columns: ["child_id"]
             isOneToOne: false
             referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      daily_sessions: {
+        Row: {
+          child_id: string | null
+          end_time: string | null
+          id: string
+          mood_end: string | null
+          mood_start: string | null
+          start_time: string | null
+          total_activities: number | null
+        }
+        Insert: {
+          child_id?: string | null
+          end_time?: string | null
+          id?: string
+          mood_end?: string | null
+          mood_start?: string | null
+          start_time?: string | null
+          total_activities?: number | null
+        }
+        Update: {
+          child_id?: string | null
+          end_time?: string | null
+          id?: string
+          mood_end?: string | null
+          mood_start?: string | null
+          start_time?: string | null
+          total_activities?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_sessions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      difficulty_rules: {
+        Row: {
+          config: Json
+          id: number
+          level: number
+          template_id: string | null
+        }
+        Insert: {
+          config: Json
+          id?: number
+          level: number
+          template_id?: string | null
+        }
+        Update: {
+          config?: Json
+          id?: number
+          level?: number
+          template_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "difficulty_rules_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "activity_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fatigue_metrics: {
+        Row: {
+          error_rate_spike: boolean | null
+          id: string
+          reaction_time_trend: string | null
+          recommended_pause: boolean | null
+          session_id: string | null
+          timestamp: string | null
+        }
+        Insert: {
+          error_rate_spike?: boolean | null
+          id?: string
+          reaction_time_trend?: string | null
+          recommended_pause?: boolean | null
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Update: {
+          error_rate_spike?: boolean | null
+          id?: string
+          reaction_time_trend?: string | null
+          recommended_pause?: boolean | null
+          session_id?: string | null
+          timestamp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fatigue_metrics_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "daily_sessions"
             referencedColumns: ["id"]
           },
         ]
@@ -789,6 +1218,44 @@ export type Database = {
           },
         ]
       }
+      neuro_profiles: {
+        Row: {
+          child_id: string
+          comorbidities: string[] | null
+          created_at: string | null
+          focus_duration_minutes: number | null
+          id: string
+          main_diagnosis: string
+          severity_level: number | null
+        }
+        Insert: {
+          child_id: string
+          comorbidities?: string[] | null
+          created_at?: string | null
+          focus_duration_minutes?: number | null
+          id?: string
+          main_diagnosis: string
+          severity_level?: number | null
+        }
+        Update: {
+          child_id?: string
+          comorbidities?: string[] | null
+          created_at?: string | null
+          focus_duration_minutes?: number | null
+          id?: string
+          main_diagnosis?: string
+          severity_level?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "neuro_profiles_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           child_id: string | null
@@ -879,6 +1346,44 @@ export type Database = {
             foreignKeyName: "parent_notifications_parent_id_fkey"
             columns: ["parent_id"]
             isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      parent_profiles: {
+        Row: {
+          consent_date: string | null
+          consent_given: boolean | null
+          cpf: string | null
+          created_at: string | null
+          id: string
+          phone: string | null
+          profile_id: string
+        }
+        Insert: {
+          consent_date?: string | null
+          consent_given?: boolean | null
+          cpf?: string | null
+          created_at?: string | null
+          id?: string
+          phone?: string | null
+          profile_id: string
+        }
+        Update: {
+          consent_date?: string | null
+          consent_given?: boolean | null
+          cpf?: string | null
+          created_at?: string | null
+          id?: string
+          phone?: string | null
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parent_profiles_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -1042,6 +1547,148 @@ export type Database = {
         }
         Relationships: []
       }
+      progression: {
+        Row: {
+          child_id: string | null
+          id: string
+          last_updated: string | null
+          mastery_level: number | null
+          skill_code: string | null
+        }
+        Insert: {
+          child_id?: string | null
+          id?: string
+          last_updated?: string | null
+          mastery_level?: number | null
+          skill_code?: string | null
+        }
+        Update: {
+          child_id?: string | null
+          id?: string
+          last_updated?: string | null
+          mastery_level?: number | null
+          skill_code?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progression_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "progression_skill_code_fkey"
+            columns: ["skill_code"]
+            isOneToOne: false
+            referencedRelation: "bncc_skills"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          child_id: string | null
+          data: Json | null
+          generated_at: string | null
+          id: string
+          period_end: string | null
+          period_start: string | null
+          type: string | null
+        }
+        Insert: {
+          child_id?: string | null
+          data?: Json | null
+          generated_at?: string | null
+          id?: string
+          period_end?: string | null
+          period_start?: string | null
+          type?: string | null
+        }
+        Update: {
+          child_id?: string | null
+          data?: Json | null
+          generated_at?: string | null
+          id?: string
+          period_end?: string | null
+          period_start?: string | null
+          type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reward_rules: {
+        Row: {
+          category: string
+          coins_reward: number
+          id: number
+          min_score: number
+          xp_reward: number
+        }
+        Insert: {
+          category: string
+          coins_reward: number
+          id?: number
+          min_score: number
+          xp_reward: number
+        }
+        Update: {
+          category?: string
+          coins_reward?: number
+          id?: number
+          min_score?: number
+          xp_reward?: number
+        }
+        Relationships: []
+      }
+      sensory_profiles: {
+        Row: {
+          auditory_sensitivity: number | null
+          child_id: string
+          id: string
+          preferred_colors: string[] | null
+          tactile_sensitivity: number | null
+          trigger_sounds: string[] | null
+          updated_at: string | null
+          visual_sensitivity: number | null
+        }
+        Insert: {
+          auditory_sensitivity?: number | null
+          child_id: string
+          id?: string
+          preferred_colors?: string[] | null
+          tactile_sensitivity?: number | null
+          trigger_sounds?: string[] | null
+          updated_at?: string | null
+          visual_sensitivity?: number | null
+        }
+        Update: {
+          auditory_sensitivity?: number | null
+          child_id?: string
+          id?: string
+          preferred_colors?: string[] | null
+          tactile_sensitivity?: number | null
+          trigger_sounds?: string[] | null
+          updated_at?: string | null
+          visual_sensitivity?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sensory_profiles_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       spaced_repetition_schedule: {
         Row: {
           activity_id: string | null
@@ -1136,6 +1783,38 @@ export type Database = {
             columns: ["child_id"]
             isOneToOne: false
             referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      therapist_profiles: {
+        Row: {
+          created_at: string | null
+          crp_crm: string | null
+          id: string
+          profile_id: string
+          specialty: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          crp_crm?: string | null
+          id?: string
+          profile_id: string
+          specialty?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          crp_crm?: string | null
+          id?: string
+          profile_id?: string
+          specialty?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "therapist_profiles_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
