@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { SkillProgressData } from "../../data/responsible/mock-data";
+import { SkillProgressData } from "@/data/responsible/mock-data";
 
 interface SkillProgressProps {
   skills: SkillProgressData[];

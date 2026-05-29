@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
-import { FocusSession } from "../../data/responsible/mock-data";
+import { FocusSession } from "@/data/responsible/mock-data";
 
 interface FocusChartProps {
   sessions: FocusSession[];

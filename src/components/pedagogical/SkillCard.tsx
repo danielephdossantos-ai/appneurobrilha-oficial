@@ -1,5 +1,5 @@
 import React from "react";
-import { Skill, DomainStatus } from "../../data/skills/types";
+import { Skill, DomainStatus } from "@/data/skills/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";

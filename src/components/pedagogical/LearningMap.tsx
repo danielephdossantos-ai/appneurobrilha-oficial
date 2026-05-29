@@ -1,5 +1,5 @@
 import React from "react";
-import { Skill, MasteryNode } from "../../data/skills/types";
+import { Skill, MasteryNode } from "@/data/skills/types";
 import { SkillCard } from "./SkillCard";
 import { cn } from "@/utils/utils";
 

@@ -7,8 +7,8 @@ import {
   ActivityPerformance,
   ActivityOption
 } from "./types";
-import { CONTENT_DATABASE, ContentItem } from "../../data/activities/content";
-import { ACTIVITY_TEMPLATES } from "../../data/activities/templates";
+import { CONTENT_DATABASE, ContentItem } from "@/data/activities/content";
+import { ACTIVITY_TEMPLATES } from "@/data/activities/templates";
 import { AdaptiveAnalysis } from "@/engines/adaptive-engine/motor";
 
 export class ActivityEngine {
@@ -64,7 +64,7 @@ export class ActivityEngine {
     return base;
   }
 
-  private static selecionarVariacao(template: ActivityTemplate, difficulty: DifficultyLevel): any {
+  private static selecionarVariacao(template: ActivityTemplate, difficulty: DifficultyLevel): GeneratedActivity["content"] {
     // Lógica para evitar repetição e selecionar itens do banco
     const availableContent = CONTENT_DATABASE.filter(item => 
       template.contentPool.includes(item.id) || 

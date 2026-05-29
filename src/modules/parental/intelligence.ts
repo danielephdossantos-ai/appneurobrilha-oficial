@@ -1,5 +1,5 @@
 
-import { MockResponsibleData, PedagogicalAlert } from "../../data/responsible/mock-data";
+import { MockResponsibleData, PedagogicalAlert } from "@/data/responsible/mock-data";
 
 export interface PedagogicalRecommendation {
   id: string;

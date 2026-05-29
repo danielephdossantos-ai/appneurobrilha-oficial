@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { EmotionalHistoryEntry } from "../../data/responsible/mock-data";
+import { EmotionalHistoryEntry } from "@/data/responsible/mock-data";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 interface EmotionalTimelineProps {
