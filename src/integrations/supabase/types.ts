@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          category: string
+          code: string
+          created_at: string | null
+          description: string | null
+          icon_url: string | null
+          id: string
+          points: number | null
+          title: string
+        }
+        Insert: {
+          category: string
+          code: string
+          created_at?: string | null
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          points?: number | null
+          title: string
+        }
+        Update: {
+          category?: string
+          code?: string
+          created_at?: string | null
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          points?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
       activities: {
         Row: {
           bncc_code: string | null
@@ -130,6 +163,42 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      child_achievements: {
+        Row: {
+          achievement_id: string
+          child_id: string
+          id: string
+          unlocked_at: string | null
+        }
+        Insert: {
+          achievement_id: string
+          child_id: string
+          id?: string
+          unlocked_at?: string | null
+        }
+        Update: {
+          achievement_id?: string
+          child_id?: string
+          id?: string
+          unlocked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_achievements_achievement_id_fkey"
+            columns: ["achievement_id"]
+            isOneToOne: false
+            referencedRelation: "achievements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "child_achievements_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       child_anamnesis: {
         Row: {
@@ -470,6 +539,120 @@ export type Database = {
           },
         ]
       }
+      daily_routines: {
+        Row: {
+          child_id: string
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          routine_code: string
+        }
+        Insert: {
+          child_id: string
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          routine_code: string
+        }
+        Update: {
+          child_id?: string
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          routine_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_routines_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gamification_profiles: {
+        Row: {
+          child_id: string
+          coins: number | null
+          created_at: string | null
+          id: string
+          last_activity_at: string | null
+          level: number | null
+          streak_days: number | null
+          total_stars: number | null
+          updated_at: string | null
+          xp: number | null
+        }
+        Insert: {
+          child_id: string
+          coins?: number | null
+          created_at?: string | null
+          id?: string
+          last_activity_at?: string | null
+          level?: number | null
+          streak_days?: number | null
+          total_stars?: number | null
+          updated_at?: string | null
+          xp?: number | null
+        }
+        Update: {
+          child_id?: string
+          coins?: number | null
+          created_at?: string | null
+          id?: string
+          last_activity_at?: string | null
+          level?: number | null
+          streak_days?: number | null
+          total_stars?: number | null
+          updated_at?: string | null
+          xp?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gamification_profiles_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inventory: {
+        Row: {
+          child_id: string
+          id: string
+          is_equipped: boolean | null
+          item_code: string
+          item_type: string
+          unlocked_at: string | null
+        }
+        Insert: {
+          child_id: string
+          id?: string
+          is_equipped?: boolean | null
+          item_code: string
+          item_type: string
+          unlocked_at?: string | null
+        }
+        Update: {
+          child_id?: string
+          id?: string
+          is_equipped?: boolean | null
+          item_code?: string
+          item_type?: string
+          unlocked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       learning_trails: {
         Row: {
           created_at: string
@@ -554,6 +737,53 @@ export type Database = {
             foreignKeyName: "longitudinal_scores_child_id_fkey"
             columns: ["child_id"]
             isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mascot_states: {
+        Row: {
+          affinity_points: number | null
+          child_id: string
+          current_emotion: Database["public"]["Enums"]["mascot_emotion"] | null
+          energy_level: number | null
+          evolution_stage: number | null
+          id: string
+          last_interaction_at: string | null
+          name: string
+          type: string
+          updated_at: string | null
+        }
+        Insert: {
+          affinity_points?: number | null
+          child_id: string
+          current_emotion?: Database["public"]["Enums"]["mascot_emotion"] | null
+          energy_level?: number | null
+          evolution_stage?: number | null
+          id?: string
+          last_interaction_at?: string | null
+          name?: string
+          type?: string
+          updated_at?: string | null
+        }
+        Update: {
+          affinity_points?: number | null
+          child_id?: string
+          current_emotion?: Database["public"]["Enums"]["mascot_emotion"] | null
+          energy_level?: number | null
+          evolution_stage?: number | null
+          id?: string
+          last_interaction_at?: string | null
+          name?: string
+          type?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mascot_states_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
             referencedRelation: "children"
             referencedColumns: ["id"]
           },
@@ -847,7 +1077,13 @@ export type Database = {
       get_auth_user_id: { Args: never; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      mascot_emotion:
+        | "happy"
+        | "calm"
+        | "sleepy"
+        | "excited"
+        | "focused"
+        | "proud"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -974,6 +1210,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      mascot_emotion: [
+        "happy",
+        "calm",
+        "sleepy",
+        "excited",
+        "focused",
+        "proud",
+      ],
+    },
   },
 } as const
