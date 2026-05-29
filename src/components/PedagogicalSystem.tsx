@@ -1,13 +1,13 @@
-
 import React, { useState } from 'react';
 import { ActivityEngine } from "@/engines/pedagogical-engine/engine";
 import { RewardSystem } from "@/engines/reward-engine/reward-system";
-
 import { ActivityContainer } from "./activities/ActivityContainer";
 import { AdaptiveMotor, StudentBehaviorMetrics } from "@/engines/adaptive-engine/motor";
 import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { SoftCelebration } from "./rewards/SoftCelebration";
 import { useGamification } from "@/hooks/useGamification";
+import { OfflineEngine } from "@/engines/offline";
+
 
 
 
@@ -58,6 +58,17 @@ export const pedagogicalSystem = {
         
         if (childId) {
           await updateRewards(rewards.stars, rewards.coins, rewards.xp);
+          
+          // Salvar resultado da atividade offline-first
+          await OfflineEngine.queueAction('activity_result', {
+            child_id: childId,
+            template_id: activity.id,
+            score: performance.accuracy || 1,
+            time_spent_seconds: Math.round(performance.timeSpent / 1000),
+            errors_count: performance.errors || 0,
+            completion_data: performance,
+            created_at: new Date().toISOString()
+          });
         }
       }
 
