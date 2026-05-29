@@ -126,12 +126,14 @@ export function useGamification(childId?: string) {
     if (!childId) return;
 
     try {
-      const { error } = await supabase
-        .from('mascot_states')
-        .update({ current_emotion: emotion })
-        .eq('child_id', childId);
+      const updateData = {
+        child_id: childId,
+        current_emotion: emotion,
+        updated_at: new Date().toISOString()
+      };
 
-      if (error) throw error;
+      await OfflineEngine.queueAction('mascot_state_update', updateData);
+      
       if (mascot) setMascot({ ...mascot, currentEmotion: emotion });
     } catch (err) {
       console.error('Erro ao atualizar emoção do mascote:', err);
