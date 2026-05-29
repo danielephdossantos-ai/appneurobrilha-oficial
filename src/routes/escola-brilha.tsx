@@ -120,20 +120,38 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
+      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+
+      <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-2 min-w-max">
+          {grades.map((grade) => (
+            <button
+              key={grade}
+              onClick={() => setSelectedGrade(grade)}
+              className={`px-4 py-2 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
+                selectedGrade === grade
+                  ? "bg-primary text-white shadow-glow scale-105"
+                  : "bg-muted text-muted-foreground hover:bg-primary/10"
+              }`}
+            >
+              {grade}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
           <div className="text-5xl">{activeChild.avatar}</div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">Continue de onde parou</div>
-            <div className="text-sm text-muted-foreground">Português · Encontros vocálicos · Aula 3 de 8</div>
+            <div className="font-extrabold text-lg">Pronto para brilhar?</div>
+            <div className="text-sm text-muted-foreground">Escolha uma matéria do {selectedGrade} e vamos começar!</div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: "37%" }} />
+              <div className="h-full bg-primary" style={{ width: "10%" }} />
             </div>
           </div>
-          <button onClick={() => carregarAula("portugues", "Encontros vocálicos")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
-            <Play className="h-4 w-4" /> Retomar
+          <button onClick={() => carregarAula("matematica")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+            <Play className="h-4 w-4" /> Começar
           </button>
         </div>
       </Card>
