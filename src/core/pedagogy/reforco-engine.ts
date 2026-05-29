@@ -7,7 +7,12 @@ export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
   text: string;
   difficulty?: "basic" | "intermediate" | "advanced";
-  content?: any;
+  content?: {
+    options?: string[];
+    answer?: string;
+    type?: string;
+    [key: string]: any;
+  };
 }
 
 export interface ReforcoLesson {
@@ -29,7 +34,7 @@ export interface ReforcoLesson {
 export class ReforcoEngine {
   static async generateLesson(topic: string = "Geral", adjustment?: NeuroAdjustment, childInfo?: any): Promise<ReforcoLesson> {
     const lowerTopic = (topic || "Geral").toLowerCase();
-    const childLevel = childInfo?.serie_num || 0; 
+    const childLevel = childInfo?.serie_num ?? 1; 
     const isInfantil = childLevel === 0 || (childInfo?.serie && childInfo.serie.toLowerCase().includes("infantil"));
     
     // Tenta buscar no banco pedagógico primeiro
@@ -94,10 +99,11 @@ export class ReforcoEngine {
 
   private static findBestSkill(topic: string, level: number): BNCCSkill | undefined {
     const lowerTopic = topic.toLowerCase();
-    return BNCC_SKILLS.find(s => 
+    const skill = BNCC_SKILLS.find(s => 
       s.level === level && 
-      (lowerTopic.includes(s.field) || lowerTopic.includes(s.domain || ""))
+      (lowerTopic.includes(s.field.toLowerCase()) || lowerTopic.includes(s.domain || ""))
     ) || BNCC_SKILLS.find(s => s.level === level);
+    return skill;
   }
 
   private static getExplanation(topic: string, diff: string, level: number, skill?: BNCCSkill): string {

@@ -30,10 +30,10 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
-  const { data: agenda = [] } = useQuery({
+  const { data: agenda = [], isError: agendaError } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
     queryFn: async () => {
-      if (!activeChild) return [];
+      if (!activeChild?.id) return [];
       const { data, error } = await supabase
         .from("study_agenda")
         .select("*")
@@ -41,10 +41,13 @@ function Escola() {
         .eq("completed", false)
         .order("exam_date", { ascending: true });
       
-      if (error) throw error;
-      return data;
+      if (error) {
+        console.error("Erro ao buscar agenda:", error);
+        return []; // Não quebrar a página se a agenda falhar
+      }
+      return data || [];
     },
-    enabled: !!activeChild,
+    enabled: !!activeChild?.id,
   });
 
   const carregarAula = async (materiaId: string, topic?: string, isSystemGenerated = false) => {
@@ -176,7 +179,7 @@ function Escola() {
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id] ?? 2 : 2}</Pill>
+            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id.toLowerCase()] ?? 2 : 2}</Pill>
           </button>
         ))}
       </div>
