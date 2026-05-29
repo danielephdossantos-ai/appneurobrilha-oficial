@@ -97,7 +97,7 @@ export function useNotifications() {
     if (!session?.user) return;
 
     const channel = supabase
-      .channel('schema-db-changes')
+      .channel(`notifications-${session.user.id}`)
       .on(
         'postgres_changes',
         {
@@ -123,7 +123,7 @@ export function useNotifications() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [session?.user, queryClient]);
+  }, [session?.user?.id, queryClient]);
 
   return {
     notifications,
