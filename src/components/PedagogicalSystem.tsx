@@ -46,11 +46,11 @@ export const pedagogicalSystem = {
       setMetrics(newMetrics);
 
       if (performance.success) {
-        const rewards = RewardEngine.calculateRewards({
+        const rewards = RewardSystem.calculateRewards({
           accuracy: performance.accuracy || 1,
-          timeInZone: !analysis.overload,
+          timeInZone: analysis.fatigue < 0.7,
           attempts: performance.attempts || 1,
-          wasCalm: analysis.engagement >= 0.7
+          wasCalm: analysis.frustration < 0.3
         });
         
         setLastReward({ stars: rewards.stars, coins: rewards.coins });
@@ -60,6 +60,7 @@ export const pedagogicalSystem = {
           await updateRewards(rewards.stars, rewards.coins, rewards.xp);
         }
       }
+
 
       const newAnalysis = AdaptiveMotor.analyze(newMetrics);
       setActivity(ActivityEngine.gerarAtividade(undefined, newAnalysis));
