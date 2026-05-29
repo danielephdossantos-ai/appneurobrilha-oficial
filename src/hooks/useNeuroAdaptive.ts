@@ -36,7 +36,14 @@ const INITIAL_METRICS = {
 export function useNeuroAdaptive() {
   const { activeChild } = useAppState();
   const [metrics, setMetrics] = useState(INITIAL_METRICS);
-  const [adjustment, setAdjustment] = useState<NeuroAdjustment | null>(null);
+  const [adjustment, setAdjustment] = useState<NeuroAdjustment>(() => 
+    NeuroAdaptiveCore.processState({
+      profile: "Tipico",
+      ...INITIAL_METRICS,
+      timestamp: Date.now(),
+    }).adjustment
+  );
+
 
   // Mapear diagnóstico do DB para Perfil Neuro
   const profile = useMemo((): NeuroProfile => {
