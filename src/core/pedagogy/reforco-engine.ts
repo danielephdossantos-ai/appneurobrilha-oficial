@@ -138,7 +138,7 @@ export class ReforcoEngine {
     return this.generateLesson(agendaTopic, adjustment, childInfo);
   }
 
-  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment): ReforcoLesson {
+  private static mapActivityToLesson(activity: PedagogicalActivity, adjustment?: NeuroAdjustment, isInfantil: boolean = false): ReforcoLesson {
     const levels = {
       basic: [] as LessonStep[],
       intermediate: [] as LessonStep[],
@@ -165,15 +165,15 @@ export class ReforcoEngine {
         const targetLevel = i % 3 === 0 ? 'basic' : i % 3 === 1 ? 'intermediate' : 'advanced';
         levels[targetLevel].push({
           type: "exercise",
-          text: v.enunciado || v.titulo || "Desafio extra",
+          text: v.enunciado || v.titulo || (isInfantil ? "Desafio Visual" : "Desafio extra"),
           content: v
         });
       });
     }
 
-    if (levels.basic.length === 0) levels.basic.push({ type: "explanation", text: "Vamos começar com o básico." });
-    if (levels.intermediate.length === 0) levels.intermediate.push({ type: "explanation", text: "Subindo o nível agora." });
-    if (levels.advanced.length === 0) levels.advanced.push({ type: "explanation", text: "Desafio mestre para você!" });
+    if (levels.basic.length === 0) levels.basic.push({ type: "explanation", text: isInfantil ? "Vamos começar nossa brincadeira!" : "Vamos começar com o básico." });
+    if (levels.intermediate.length === 0) levels.intermediate.push({ type: "explanation", text: isInfantil ? "Olha só que legal!" : "Subindo o nível agora." });
+    if (levels.advanced.length === 0) levels.advanced.push({ type: "explanation", text: isInfantil ? "Você é um mestre!" : "Desafio mestre para você!" });
 
     return {
       title: activity.titulo,
