@@ -22,7 +22,8 @@ export function usePedagogicalEngine() {
 
   const legacyCompatibility = useMemo(() => {
     const adj = neuroAdaptive.adjustment;
-    if (!adj) return { adaptive: null, sensory: null };
+    // Fallback para garantir que nunca seja null para o TS
+
 
     // Mapeamento completo para compatibilidade com o sistema antigo
     return {
