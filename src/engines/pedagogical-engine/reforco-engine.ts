@@ -1,6 +1,6 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
-import { NeuroAdjustment } from "../neuro/engine";
+import { NeuroAdjustment } from "@/engines/adaptive-engine/engine";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";

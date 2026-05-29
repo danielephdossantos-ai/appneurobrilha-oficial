@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { MascotState, MascotEngine } from '../../core/emotional/mascot';
-import { Emotion } from '../../modules/emotional-engine/engine/emotional-engine';
-import { SimpleMascotRenderer } from '../rewards/SimpleMascotRenderer';
+import { MascotState, MascotEngine } from "@/engines/regulation-engine/mascot";
+import { Emotion, EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
+import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
 
 import { 
   MessageCircle,

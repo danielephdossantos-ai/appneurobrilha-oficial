@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { ActivityEngine } from '../core/activity-engine/engine';
-import { RewardSystem } from '../core/rewards/reward-system';
-import { ActivityContainer } from './activities/ActivityContainer';
-import { AdaptiveMotor, StudentBehaviorMetrics } from '../core/adaptive/motor';
-import { EmotionalEngine } from '../modules/emotional-engine/engine/emotional-engine';
+import { ActivityEngine } from "@/engines/pedagogical-engine/engine";
+import { RewardSystem } from "@/engines/reward-engine/reward-system";
+import { ActivityContainer } from "./activities/ActivityContainer";
+import { AdaptiveMotor, StudentBehaviorMetrics } from "@/engines/adaptive-engine/motor";
+import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 
 export const pedagogicalSystem = {
   // Main entry point for the pedagogical system

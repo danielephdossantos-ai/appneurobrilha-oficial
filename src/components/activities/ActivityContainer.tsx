@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GeneratedActivity } from '../../core/activity-engine/types';
-import { EmotionalEngine } from '../../modules/emotional-engine/engine/emotional-engine';
-import { RewardBadge } from '../rewards/RewardBadge';
+import { GeneratedActivity } from "@/engines/pedagogical-engine/types";
+import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
+import { RewardBadge } from "@/components/rewards/RewardBadge";
 
 interface Props {
   activity: GeneratedActivity;
