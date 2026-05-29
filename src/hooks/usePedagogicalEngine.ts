@@ -6,11 +6,9 @@ export function usePedagogicalEngine() {
   const { activeChild } = useAppState();
   const neuroAdaptive = useNeuroAdaptive();
 
-  const profile = useMemo(() => {
+  const profileData = useMemo(() => {
     if (!activeChild) return null;
 
-    // Backward compatibility with the old engine structure
-    // But powered by the new deterministic core
     const adj = neuroAdaptive.adjustment;
 
     return {
@@ -19,21 +17,29 @@ export function usePedagogicalEngine() {
       levels: activeChild.niveis,
       isAnamnesisComplete: activeChild.anamnese_completa,
       adjustment: adj,
-      // Legacy compatibility properties
-      adaptive: adj ? {
-        visualScale: adj.difficultyScale, // approximate mapping
-        animationSpeed: adj.animationIntensity === "none" ? 0.1 : adj.animationIntensity === "low" ? 0.5 : 1.0,
-        stimuliLevel: adj.stimuliReduction ? "low" : "medium",
-      } : null,
-      sensory: adj ? {
-        visualScale: adj.difficultyScale,
-        stimuliLevel: adj.stimuliReduction ? "none" : "medium",
-      } : null
     };
   }, [activeChild, neuroAdaptive]);
 
+  const legacyCompatibility = useMemo(() => {
+    const adj = neuroAdaptive.adjustment;
+    if (!adj) return { adaptive: null, sensory: null };
+
+    return {
+      adaptive: {
+        visualScale: adj.difficultyScale,
+        animationSpeed: adj.animationIntensity === "none" ? 0.1 : adj.animationIntensity === "low" ? 0.5 : 1.0,
+        stimuliLevel: adj.stimuliReduction ? "low" : "medium",
+      },
+      sensory: {
+        visualScale: adj.difficultyScale,
+        stimuliLevel: adj.stimuliReduction ? "none" : "medium",
+      }
+    };
+  }, [neuroAdaptive.adjustment]);
+
   return {
-    profile,
+    profile: profileData,
     neuroAdaptive,
+    ...legacyCompatibility
   };
 }
