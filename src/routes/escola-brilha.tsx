@@ -16,11 +16,11 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "Português", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5" },
-  { id: "Matemática", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5" },
-  { id: "Ciências", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5" },
-  { id: "História", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5" },
-  { id: "Geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5" },
+  { id: "Português", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5", dbName: "Português" },
+  { id: "Matemática", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5", dbName: "Matemática" },
+  { id: "Ciências", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5", dbName: "Ciências" },
+  { id: "História", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5", dbName: "História" },
+  { id: "Geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5", dbName: "Geografia" },
 ] as const;
 
 function Escola() {
@@ -30,22 +30,27 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [currentLevel, setCurrentLevel] = useState<"basic" | "intermediate" | "advanced">("basic");
 
-  const { data: agenda = [], isError: agendaError } = useQuery({
+  const { data: agenda = [], isError: agendaError, isLoading: isLoadingAgenda } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
     queryFn: async () => {
       if (!activeChild?.id) return [];
-      const { data, error } = await supabase
-        .from("study_agenda")
-        .select("*")
-        .eq("child_id", activeChild.id)
-        .eq("completed", false)
-        .order("exam_date", { ascending: true });
-      
-      if (error) {
-        console.error("Erro ao buscar agenda:", error);
-        return []; // Não quebrar a página se a agenda falhar
+      try {
+        const { data, error } = await supabase
+          .from("study_agenda")
+          .select("*")
+          .eq("child_id", activeChild.id)
+          .eq("completed", false)
+          .order("exam_date", { ascending: true });
+        
+        if (error) {
+          console.error("Erro ao buscar agenda:", error);
+          return [];
+        }
+        return data || [];
+      } catch (err) {
+        console.error("Exceção ao buscar agenda:", err);
+        return [];
       }
-      return data || [];
     },
     enabled: !!activeChild?.id,
   });
@@ -106,7 +111,7 @@ function Escola() {
   }
 
   if (aula) return (
-    <AulaView 
+    <AulaViewWrapper 
       aula={aula} 
       setAula={setAula} 
       childNome={activeChild.nome} 
@@ -391,7 +396,9 @@ function AulaView({
                   </div>
                   <div>
                     <div className="font-black text-sun-foreground uppercase tracking-widest text-[10px] mb-1">DICA DO AMIGO VIRTUAL</div>
-                    <div className="text-xl text-slate-800 font-bold leading-tight">{aula.isSystem ? "Tente olhar o exemplo novamente com calma." : aula.dica}</div>
+                    <div className="text-xl text-slate-800 font-bold leading-tight">
+                      {aula.isSystem ? "Tente novamente com calma! Você está quase lá." : (aula.reforco_erro || "Quase lá! Tente de novo.")}
+                    </div>
                   </div>
                 </div>
               )}
@@ -410,3 +417,23 @@ function AulaView({
     </Shell>
   );
 }
+
+function AulaViewWrapper(props: any) {
+  try {
+    return <AulaView {...props} />;
+  } catch (error) {
+    console.error("Erro no AulaView:", error);
+    return (
+      <Shell>
+        <div className="p-8 text-center">
+          <h2 className="text-2xl font-bold text-destructive">Ops! Algo deu errado.</h2>
+          <p className="mt-2">Não conseguimos carregar esta atividade. Por favor, tente outra ou volte mais tarde.</p>
+          <button onClick={() => props.setAula(null)} className="mt-4 btn-tap px-6 py-2 bg-primary text-white rounded-xl">
+            Voltar
+          </button>
+        </div>
+      </Shell>
+    );
+  }
+}
+
