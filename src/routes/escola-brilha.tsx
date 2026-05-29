@@ -38,6 +38,9 @@ function Escola() {
       // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
       const service = ActivityProceduralService.getInstance();
       const domain = materiaId === "matematica" ? "math" : "linguistics";
+      
+      console.log("Generating activity for domain:", domain, "grade:", selectedGrade);
+      
       const activity = service.generateActivity({
         domain,
         difficulty: 0.5,
@@ -51,6 +54,8 @@ function Escola() {
         previousActivityIds: []
       });
 
+      console.log("Activity generated:", activity);
+
       // Pre-formatar os dados para a IA entender o que é pergunta, opções e resposta
       let systemQuestion = activity.instruction;
       let systemOptions = [];
@@ -62,9 +67,9 @@ function Escola() {
 
       if (activity.content.answer) {
         systemAnswer = String(activity.content.answer);
-      } else if (activity.content.targetCount) {
+      } else if (activity.content.targetCount !== undefined) {
         systemAnswer = String(activity.content.targetCount);
-      } else if (activity.content.a) {
+      } else if (activity.content.a !== undefined) {
         systemAnswer = String(activity.content.a);
       } else if (activity.content.firstLetter) {
         systemAnswer = String(activity.content.firstLetter);
@@ -77,6 +82,8 @@ function Escola() {
       } else if (activity.content.question) {
         systemQuestion = activity.content.question;
       }
+
+      console.log("Formatted data for AI:", { systemQuestion, systemOptions, systemAnswer });
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
