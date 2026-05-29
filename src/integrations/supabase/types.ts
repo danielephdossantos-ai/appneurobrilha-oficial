@@ -833,6 +833,110 @@ export type Database = {
           },
         ]
       }
+      parent_notifications: {
+        Row: {
+          child_id: string
+          content: string
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          metadata: Json | null
+          parent_id: string
+          title: string
+          type: string
+        }
+        Insert: {
+          child_id: string
+          content: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          metadata?: Json | null
+          parent_id: string
+          title: string
+          type: string
+        }
+        Update: {
+          child_id?: string
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          metadata?: Json | null
+          parent_id?: string
+          title?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parent_notifications_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "parent_notifications_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      parental_controls: {
+        Row: {
+          allowed_hours_end: string | null
+          allowed_hours_start: string | null
+          blocked_days: number[] | null
+          break_duration_minutes: number | null
+          break_interval_minutes: number | null
+          child_id: string
+          created_at: string | null
+          daily_time_limit_minutes: number | null
+          enforce_mandatory_breaks: boolean | null
+          id: string
+          is_active: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          allowed_hours_end?: string | null
+          allowed_hours_start?: string | null
+          blocked_days?: number[] | null
+          break_duration_minutes?: number | null
+          break_interval_minutes?: number | null
+          child_id: string
+          created_at?: string | null
+          daily_time_limit_minutes?: number | null
+          enforce_mandatory_breaks?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          allowed_hours_end?: string | null
+          allowed_hours_start?: string | null
+          blocked_days?: number[] | null
+          break_duration_minutes?: number | null
+          break_interval_minutes?: number | null
+          child_id?: string
+          created_at?: string | null
+          daily_time_limit_minutes?: number | null
+          enforce_mandatory_breaks?: boolean | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parental_controls_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pedagogical_activities_base: {
         Row: {
           adaptacoes: Json | null
