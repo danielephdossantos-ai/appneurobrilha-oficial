@@ -44,6 +44,33 @@ function Escola() {
         previousActivityIds: []
       });
 
+      // Pre-formatar os dados para a IA entender o que é pergunta, opções e resposta
+      let systemQuestion = activity.instruction;
+      let systemOptions = [];
+      let systemAnswer = "";
+
+      if (activity.content.options) {
+        systemOptions = activity.content.options.map(String);
+      }
+
+      if (activity.content.answer) {
+        systemAnswer = String(activity.content.answer);
+      } else if (activity.content.targetCount) {
+        systemAnswer = String(activity.content.targetCount);
+      } else if (activity.content.a) {
+        systemAnswer = String(activity.content.a);
+      } else if (activity.content.firstLetter) {
+        systemAnswer = String(activity.content.firstLetter);
+      } else if (activity.content.missingSyllable) {
+        systemAnswer = String(activity.content.missingSyllable);
+      }
+
+      if (activity.content.q) {
+        systemQuestion = activity.content.q;
+      } else if (activity.content.question) {
+        systemQuestion = activity.content.question;
+      }
+
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
@@ -51,7 +78,9 @@ function Escola() {
           child: activeChild,
           subject: materiaId,
           topic: activity.title,
-          activityData: activity.content, // Passa os dados estruturados do sistema para a IA explicar
+          systemQuestion,
+          systemOptions,
+          systemAnswer,
           instruction: activity.instruction
         }
       });
