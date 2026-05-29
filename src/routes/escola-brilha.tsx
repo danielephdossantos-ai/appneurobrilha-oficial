@@ -111,7 +111,7 @@ function Escola() {
   }
 
   if (aula) return (
-    <AulaView 
+    <AulaViewWrapper 
       aula={aula} 
       setAula={setAula} 
       childNome={activeChild.nome} 
@@ -391,6 +391,44 @@ function AulaView({
               
               {acertou === false && (
                 <div className="mt-8 p-6 rounded-[2rem] bg-sun/10 border-2 border-sun/20 flex items-start gap-4 animate-in slide-in-from-top-2">
+                  <div className="h-10 w-10 bg-sun/20 rounded-full flex items-center justify-center shrink-0 text-xl">
+                    💡
+                  </div>
+                  <div>
+                    <div className="font-black text-sun-dark">DICA DO PROFESSOR:</div>
+                    <div className="font-bold text-slate-600">
+                      {aula.isSystem ? "Tente novamente com calma! Você está quase lá." : aula.reforco_erro}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </Card>
+          )}
+        </div>
+      </div>
+    </Shell>
+  );
+}
+
+function AulaViewWrapper(props: any) {
+  try {
+    return <AulaView {...props} />;
+  } catch (error) {
+    console.error("Erro no AulaView:", error);
+    return (
+      <Shell>
+        <div className="p-8 text-center">
+          <h2 className="text-2xl font-bold text-destructive">Ops! Algo deu errado.</h2>
+          <p className="mt-2">Não conseguimos carregar esta atividade. Por favor, tente outra ou volte mais tarde.</p>
+          <button onClick={() => props.setAula(null)} className="mt-4 btn-tap px-6 py-2 bg-primary text-white rounded-xl">
+            Voltar
+          </button>
+        </div>
+      </Shell>
+    );
+  }
+}
+
                   <div className="h-10 w-10 bg-sun/20 rounded-xl flex items-center justify-center shrink-0 mt-1">
                     <Lightbulb className="h-6 w-6 text-sun-foreground" />
                   </div>
