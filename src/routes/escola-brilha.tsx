@@ -183,7 +183,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · Adaptado para você`} />
+      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · ${aula.grade} · Adaptado para você`} />
 
       <Card className="mb-4">
         <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
