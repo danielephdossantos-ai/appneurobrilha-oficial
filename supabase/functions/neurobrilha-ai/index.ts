@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { mode, child, subject, topic, message, chatHistory, image, activityData, instruction } = await req.json()
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction } = await req.json()
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY')
 
     if (!LOVABLE_API_KEY) {
