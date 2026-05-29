@@ -11,9 +11,12 @@ import { useGamification } from "@/hooks/useGamification";
 
 export const pedagogicalSystem = {
   // Main entry point for the pedagogical system
-  renderActivity: (onStateChange?: (state: any) => void) => {
-    // This would typically be inside a React component, but for the demo/instruction:
+  renderActivity: (childId?: string, onStateChange?: (state: any) => void) => {
     const [activity, setActivity] = useState(ActivityEngine.gerarAtividade());
+    const [showCelebration, setShowCelebration] = useState(false);
+    const [lastReward, setLastReward] = useState({ stars: 0, coins: 0 });
+    const { updateRewards } = useGamification(childId);
+    
     const [metrics, setMetrics] = useState<StudentBehaviorMetrics>({
       repeatedErrors: 0,
       consecutiveHits: 0,
@@ -30,8 +33,7 @@ export const pedagogicalSystem = {
     const analysis = AdaptiveMotor.analyze(metrics);
     const emotion = EmotionalEngine.detect(analysis);
 
-    const handleComplete = (performance: any) => {
-      // 1. Update Metrics
+    const handleComplete = async (performance: any) => {
       const newMetrics = {
         ...metrics,
         totalHits: metrics.totalHits + (performance.success ? 1 : 0),
@@ -41,12 +43,22 @@ export const pedagogicalSystem = {
       };
       setMetrics(newMetrics);
 
-      // 2. Add Rewards
       if (performance.success) {
-        RewardSystem.addRewards(activity.reward.stars, activity.reward.coins, activity.reward.energy);
+        const rewards = RewardEngine.calculateRewards({
+          accuracy: performance.accuracy || 1,
+          timeInZone: !analysis.overload,
+          attempts: performance.attempts || 1,
+          wasCalm: analysis.engagement >= 0.7
+        });
+        
+        setLastReward({ stars: rewards.stars, coins: rewards.coins });
+        setShowCelebration(true);
+        
+        if (childId) {
+          await updateRewards(rewards.stars, rewards.coins, rewards.xp);
+        }
       }
 
-      // 3. Generate Next Activity with adaptation
       const newAnalysis = AdaptiveMotor.analyze(newMetrics);
       setActivity(ActivityEngine.gerarAtividade(undefined, newAnalysis));
       
@@ -54,11 +66,20 @@ export const pedagogicalSystem = {
     };
 
     return (
-      <ActivityContainer 
-        activity={activity} 
-        onComplete={handleComplete} 
-        emotion={emotion}
-      />
+      <>
+        <ActivityContainer 
+          activity={activity} 
+          onComplete={handleComplete} 
+          emotion={emotion}
+        />
+        <SoftCelebration 
+          isVisible={showCelebration}
+          type="stars"
+          amount={lastReward.stars}
+          onComplete={() => setShowCelebration(false)}
+        />
+      </>
     );
   }
+
 };
