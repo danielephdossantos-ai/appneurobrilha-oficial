@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
+import { ReforcoEngine } from "@/core/pedagogy/reforco-engine";
 import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/escola-brilha")({
