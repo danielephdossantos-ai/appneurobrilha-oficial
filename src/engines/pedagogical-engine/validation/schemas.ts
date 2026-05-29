@@ -41,7 +41,7 @@ export const PedagogicalActivitySchema = z.object({
     question: z.string(),
     options: z.array(ActivityOptionSchema).optional(),
     answer: z.string().optional(),
-    metadata: z.record(z.any()).optional(),
+    metadata: z.record(z.string(), z.any()).optional(),
   }),
   fallback: z.string().optional(), // ID da atividade de fallback
 });

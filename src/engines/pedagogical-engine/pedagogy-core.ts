@@ -1,109 +1,130 @@
 
-import { PedagogicalActivity, PedagogicalActivitySchema } from "./validation/schemas";
-import { BNCC_SKILLS } from "./bncc";
-import { AdaptiveEngine, NeuroAdjustment } from "@/engines/adaptive-engine/engine";
-import { PEDAGOGICAL_TEMPLATES } from "./templates/activity_templates";
+import { 
+  ActivityType, 
+  DifficultyLevel, 
+  GeneratedActivity, 
+  ActivityTemplate, 
+  ActivityPerformance,
+  ActivityOption
+} from "./types";
+import { CONTENT_DATABASE, ContentItem } from "@/data/activities/content";
+import { ACTIVITY_TEMPLATES } from "@/data/activities/templates";
+import { AdaptiveAnalysis } from "@/engines/adaptive-engine/motor";
 
-export interface PedagogicalContext {
-  childId: string;
-  age: number;
-  grade: number;
-  neuroProfile: string;
-  previousPerformance: number;
-}
+export class ActivityEngine {
+  private static usedContentIds: Set<string> = new Set();
 
-export class PedagogicalEngine {
-  private static readonly FALLBACK_ID = "fallback-default";
+  static gerarAtividade(
+    templateId?: string, 
+    analysis?: AdaptiveAnalysis,
+    preferredType?: ActivityType
+  ): GeneratedActivity {
+    // 1. Selecionar Template
+    let template = ACTIVITY_TEMPLATES.find(t => t.id === templateId);
+    if (!template) {
+      const filtered = preferredType 
+        ? ACTIVITY_TEMPLATES.filter(t => t.type === preferredType)
+        : ACTIVITY_TEMPLATES;
+      template = filtered[Math.floor(Math.random() * filtered.length)];
+    }
 
-  static generateActivity(context: PedagogicalContext): PedagogicalActivity {
-    console.log(`[PedagogicalEngine] Iniciando geração para: ${context.childId}`, context);
+    // 2. Adaptar Dificuldade
+    const difficulty = this.adaptarDificuldade(template.baseDifficulty, analysis);
+
+    // 3. Selecionar Variação (Content)
+    const content = this.selecionarVariacao(template, difficulty);
+
+    // 4. Gerar Recompensa
+    const reward = this.aplicarReforco(difficulty, analysis);
+
+    return {
+      id: `act-${Math.random().toString(36).substr(2, 9)}`,
+      type: template.type,
+      title: template.title,
+      instruction: template.instruction,
+      difficulty,
+      content,
+      reward
+    };
+  }
+
+  static adaptarDificuldade(base: DifficultyLevel, analysis?: AdaptiveAnalysis): DifficultyLevel {
+    if (!analysis) return base;
+
+    // Se a performance for muito alta, sobe a dificuldade
+    if (analysis.performanceLevel > 0.8 && base === "easy") return "medium";
+    if (analysis.performanceLevel > 0.8 && base === "medium") return "hard";
     
-    try {
-      // 1. Filtrar Habilidades BNCC por Série
-      const suitableSkills = BNCC_SKILLS.filter(s => s.level === context.grade);
-      if (suitableSkills.length === 0) throw new Error("Nenhuma habilidade BNCC encontrada para esta série.");
+    // Se houver muita frustração ou fadiga, desce a dificuldade
+    if (analysis.frustration > 0.6 || analysis.fatigue > 0.7) {
+      if (base === "hard") return "medium";
+      if (base === "medium") return "easy";
+    }
 
-      // 2. Selecionar Habilidade (Determinístico baseado no contexto)
-      const skill = suitableSkills[0]; // Simplificado: pegando a primeira para o fluxo oficial
+    return base;
+  }
 
-      // 3. Ajustar Perfil Neuroadaptativo
-      const adjustments = AdaptiveEngine.getAdjustments(context.neuroProfile as any);
+  private static selecionarVariacao(template: ActivityTemplate, difficulty: DifficultyLevel): GeneratedActivity["content"] {
+    // Lógica para evitar repetição e selecionar itens do banco
+    const availableContent = CONTENT_DATABASE.filter(item => 
+      template.contentPool.includes(item.id) || 
+      (template.requiredSkills.some(s => item.tags.includes(s)) && !this.usedContentIds.has(item.id))
+    );
 
-      // 4. Buscar Template Compatível
-      const template = this.findTemplate(skill.code, context.age);
+    const selection = availableContent.length > 0 
+      ? availableContent[Math.floor(Math.random() * availableContent.length)]
+      : CONTENT_DATABASE[0];
 
-      // 5. Construir Atividade Final (Determinística)
-      const activityData: PedagogicalActivity = {
-        id: `act_${Date.now()}_${context.childId}`,
-        category: skill.field,
-        habilidadeBNCC: skill.code,
-        objetivo: skill.description,
-        idadeMinima: context.age - 1,
-        idadeMaxima: context.age + 1,
-        dificuldade: this.calculateDifficulty(context.previousPerformance, adjustments),
-        pesoCognitivo: 5,
-        tipoSensorial: adjustments.instructionType === "visual" ? "visual" : "mixed",
-        recompensa: {
-          stars: 10,
-          coins: 20,
-          energy: 5
-        },
-        content: {
-          question: `Vamos praticar ${skill.description}?`,
-          options: [
-            { id: "1", content: "Opção A", type: "text", isCorrect: true },
-            { id: "2", content: "Opção B", type: "text", isCorrect: false }
-          ]
-        },
-        fallback: this.FALLBACK_ID
-      };
+    this.usedContentIds.add(selection.id);
+    if (this.usedContentIds.size > 100) this.usedContentIds.clear(); // Reset simple memory
 
-      // 6. Validação Forte com Zod
-      const validatedActivity = PedagogicalActivitySchema.parse(activityData);
-      
-      this.logPedagogicalAction(context.childId, "activity_generated", validatedActivity.id);
-      
-      return validatedActivity;
-
-    } catch (error) {
-      console.error("[PedagogicalEngine] Falha na geração, acionando fallback:", error);
-      return this.getFallbackActivity();
+    // Gerar estrutura baseada no tipo
+    switch (template.type) {
+      case "multiple-choice":
+        return {
+          question: selection.value,
+          options: this.gerarOpcoes(selection, difficulty)
+        };
+      case "drag-drop":
+        return {
+          question: selection.value,
+          metadata: { target: selection.value }
+        };
+      default:
+        return { question: selection.value };
     }
   }
 
-  private static findTemplate(bnccCode: string, age: number) {
-     // Lógica de busca em templates estáticos
-     return Object.values(PEDAGOGICAL_TEMPLATES).find(t => 
-       t.habilidadeBNCC === bnccCode && age >= (t.idadeMinima || 0)
-     ) || PEDAGOGICAL_TEMPLATES["MAT_CONTAGEM_B"];
+  private static gerarOpcoes(correct: ContentItem, difficulty: DifficultyLevel): ActivityOption[] {
+    const distractors = CONTENT_DATABASE
+      .filter(item => item.id !== correct.id && item.category === correct.category)
+      .slice(0, difficulty === "easy" ? 2 : 3);
+
+    const options: ActivityOption[] = [
+      { id: "correct", content: correct.value, type: (correct.type === "image" ? "image" : "text") as "image" | "text", isCorrect: true },
+      ...distractors.map((d, i) => ({ 
+        id: `dist-${i}`, 
+        content: d.value, 
+        type: (d.type === "image" ? "image" : "text") as "image" | "text", 
+        isCorrect: false 
+      }))
+    ];
+
+    return options.sort(() => Math.random() - 0.5);
   }
 
-  private static calculateDifficulty(performance: number, adjustments: NeuroAdjustment): "easy" | "medium" | "hard" | "expert" {
-    if (performance > 0.8) return "medium";
-    if (adjustments.visualComplexity === "low") return "easy";
-    return "easy";
+  static detectarFadiga(performance: ActivityPerformance): boolean {
+    return performance.timeSpent > 300000 || performance.errors > 5;
   }
 
-  private static logPedagogicalAction(childId: string, action: string, metadata: any) {
-    // Aqui seria persistido no Supabase ou sistema de log local
-    console.log(`[PEDAGOGICAL_LOG] Child: ${childId} | Action: ${action} | Data:`, metadata);
-  }
+  static aplicarReforco(difficulty: DifficultyLevel, analysis?: AdaptiveAnalysis) {
+    const multiplier = difficulty === "expert" ? 3 : difficulty === "hard" ? 2 : 1;
+    const bonus = analysis?.performanceLevel ? Math.floor(analysis.performanceLevel * 5) : 0;
 
-  private static getFallbackActivity(): PedagogicalActivity {
     return {
-      id: this.FALLBACK_ID,
-      category: "Geral",
-      habilidadeBNCC: "FALLBACK",
-      objetivo: "Atividade de segurança para manter o engajamento",
-      idadeMinima: 0,
-      idadeMaxima: 99,
-      dificuldade: "easy",
-      pesoCognitivo: 1,
-      tipoSensorial: "visual",
-      recompensa: { stars: 1, coins: 1, energy: 1 },
-      content: {
-        question: "Tudo bem! Vamos fazer uma atividade bem simples?"
-      }
+      stars: (3 + bonus) * multiplier,
+      coins: (10 + bonus * 2) * multiplier,
+      energy: 5
     };
   }
 }
