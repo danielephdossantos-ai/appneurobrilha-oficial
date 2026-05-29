@@ -39,7 +39,9 @@ export const ParentDashboard = () => {
           <TabsTrigger value="pedagogical" className="rounded-lg">Pedagógico</TabsTrigger>
           <TabsTrigger value="cognitive" className="rounded-lg">Cognitivo</TabsTrigger>
           <TabsTrigger value="emotional" className="rounded-lg">Emocional</TabsTrigger>
+          <TabsTrigger value="routine" className="rounded-lg">Rotina</TabsTrigger>
           <TabsTrigger value="settings" className="rounded-lg">Controle Parental</TabsTrigger>
+
         </TabsList>
 
         <TabsContent value="overview" className="space-y-8">
