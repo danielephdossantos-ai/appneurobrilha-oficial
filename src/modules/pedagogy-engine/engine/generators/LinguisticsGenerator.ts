@@ -1,3 +1,4 @@
+
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
 import { LINGUISTICS_DATA } from "./PedagogyData";
@@ -6,6 +7,8 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected domain = "linguistics";
 
   protected getActivityType(input: GeneratorInput): string {
+    const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
+    if (gradeNum >= 6) return "interpretation";
     if (input.difficulty < 0.3) return "phonemes";
     if (input.difficulty < 0.6) return "syllables";
     return "reading";
@@ -17,6 +20,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
+      case "interpretation": return "Analista de Textos";
       default: return "Desafio de Linguagem";
     }
   }
@@ -27,13 +31,22 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
       case "reading": return "Leia a palavra e encontre a imagem correspondente.";
+      case "interpretation": return "Leia o trecho abaixo e responda à pergunta:";
       default: return "Siga as instruções.";
     }
   }
 
   protected generateContent(input: GeneratorInput): any {
     const type = this.getActivityType(input);
-    const difficultyLevel = input.difficulty < 0.5 ? 'beginner' : 'intermediate';
+    const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
+
+    if (type === "interpretation") {
+      const dataKey = gradeNum >= 9 ? 'grade9' : 'grade6';
+      const set = LINGUISTICS_DATA.texts[dataKey as keyof typeof LINGUISTICS_DATA.texts];
+      return this.pickRandom(set);
+    }
+
+    const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
     const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
     const targetWord = this.pickRandom(words);
 
@@ -55,7 +68,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       ]);
       return { 
         targetWord, 
-        syllables: targetWord.syllables.map((s, i) => i === missingSyllableIndex ? null : s),
+        syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
         missingSyllable,
         options 
       };
