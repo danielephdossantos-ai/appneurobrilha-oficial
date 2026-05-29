@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { routeTree } from "./routeTree.gen";
-import { persister } from "./lib/persistence";
+import { persister } from "@/utils/persistence";
 
 export const getRouter = () => {
   const queryClient = new QueryClient({
