@@ -1,6 +1,6 @@
 
 import { ALL_MATH_ACTIVITIES, MathActivity } from '@/data/math/activities';
-import { NeuroProfile, NeuroEngine } from '../neuro/engine';
+import { NeuroProfile, AdaptiveEngine } from './engine';
 
 export class MathGenerator {
   static generateActivity(world: string, profile: NeuroProfile, difficulty: number): MathActivity {
@@ -17,7 +17,7 @@ export class MathGenerator {
 
   private static applyNeuroAdaptation(activity: MathActivity, profile: NeuroProfile): MathActivity {
     const adapted = { ...activity, data: { ...activity.data } };
-    const adjustments = NeuroEngine.getAdjustments(profile);
+    const adjustments = AdaptiveEngine.getAdjustments(profile);
 
     // Dynamic adaptation based on NeuroEngine rules
     adapted.data.maxItems = Math.min(adapted.data.maxItems || 10, adjustments.maxItemsPerScreen);

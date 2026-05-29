@@ -2,7 +2,7 @@ import { useAppState } from "@/core/store";
 import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-treino/engine/adaptive-engine";
 import { SensoryEngine } from "@/modules/sensorial/engine/sensory-engine";
 import { useMemo } from "react";
-import { Emotion } from "@/engines/regulation-engine/emotional-engine";
+import { Emotion, EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 
 export function usePedagogicalEngine() {
   const { activeChild } = useAppState();
