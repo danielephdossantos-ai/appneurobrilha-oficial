@@ -2,32 +2,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Users, 
-  TrendingUp, 
-  Brain, 
-  Calendar, 
   Clock, 
-  Bell, 
+  Heart, 
   Target, 
-  Heart,
+  ShieldCheck,
   BarChart2,
-  Settings,
-  ShieldCheck
+  Bell
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SkillProgress from "./SkillProgress";
-import FocusChart from "./FocusChart";
-import EmotionalTimeline from "./EmotionalTimeline";
-import CognitiveRadar from "./CognitiveRadar";
-import RoutineManager from "./RoutineManager";
-import PedagogicalAlerts from "./PedagogicalAlerts";
-import DashboardHeader from "./DashboardHeader";
+import { SkillProgress } from "./SkillProgress";
+import { FocusChart } from "./FocusChart";
+import { EmotionalTimeline } from "./EmotionalTimeline";
+import { CognitiveRadar } from "./CognitiveRadar";
+import { RoutineManager } from "./RoutineManager";
+import { PedagogicalAlerts } from "./PedagogicalAlerts";
+import { DashboardHeader } from "./DashboardHeader";
 
 export const ParentDashboard = () => {
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-12 space-y-8">
-      <DashboardHeader />
+      <DashboardHeader 
+        studentName="Joãozinho" 
+        grade="1º Ano Fundamental" 
+        childId="demo-id" 
+      />
 
       <Tabs defaultValue="overview" className="space-y-8">
         <TabsList className="bg-white p-1 rounded-xl shadow-sm border border-slate-200">
@@ -59,7 +58,7 @@ export const ParentDashboard = () => {
               icon={<Target className="text-purple-500" />} 
             />
             <StatsCard 
-              title="Aletas de Atenção" 
+              title="Alertas de Atenção" 
               value="3" 
               trend="Baixo" 
               icon={<ShieldCheck className="text-green-500" />} 
