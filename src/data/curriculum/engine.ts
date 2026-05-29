@@ -1,5 +1,5 @@
 import { Skill, MasteryNode, DomainStatus } from "../skills/types";
-import { AdaptiveAnalysis } from "../../core/adaptive/motor";
+import { AdaptiveAnalysis } from "@/engines/adaptive-engine/motor";
 
 export interface CurriculumNode extends Skill {
   subSkills: string[]; // IDs of micro-skills

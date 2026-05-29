@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Brain, Zap, Heart, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PedagogicalRecommendation } from "../../core/responsible/intelligence";
+import { PedagogicalRecommendation } from "@/modules/parental/intelligence";
 
 interface AdaptivePlanProps {
   recommendations: PedagogicalRecommendation[];
