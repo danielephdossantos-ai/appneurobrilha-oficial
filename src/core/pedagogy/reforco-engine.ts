@@ -34,15 +34,21 @@ export class ReforcoEngine {
     
     // Tenta buscar no banco pedagógico primeiro
     try {
-      const activities = await PedagogyService.getActivities();
+      const activities = await PedagogyService.getActivities({
+        materia: topic === "Geral" ? undefined : topic,
+        serie: childInfo?.serie
+      });
+      
+      console.log(`Busca no banco: Encontradas ${activities.length} atividades para ${topic} / ${childInfo?.serie}`);
+
       const match = activities.find(a => 
-        (a.titulo.toLowerCase().includes(lowerTopic) || 
-        a.tags.some(t => t.toLowerCase().includes(lowerTopic))) &&
-        ((isInfantil && (a.serie?.includes("Infantil") || a.faixaEtaria?.includes("ano"))) || 
-         (!isInfantil && a.serie === childInfo?.serie) || !a.serie)
+        a.titulo.toLowerCase().includes(lowerTopic) || 
+        a.tags.some(t => t.toLowerCase().includes(lowerTopic)) ||
+        a.materia.toLowerCase() === lowerTopic
       );
 
       if (match) {
+        console.log("Atividade correspondente encontrada:", match.titulo);
         return this.mapActivityToLesson(match, adjustment, isInfantil);
       }
     } catch (e) {
