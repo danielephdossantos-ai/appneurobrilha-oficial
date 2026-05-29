@@ -2,9 +2,11 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { supabase } from "@/database/supabase/client";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
-import { Card } from "@/components/Layout";
+import { KidCard } from "@/components/ui/KidCard";
+import { KidButton } from "@/components/ui/KidButton";
 import { toast } from "sonner";
 import { Sparkles, Loader2, Eye, EyeOff, User, ShieldAlert } from "lucide-react";
+
 
 export const Route = createFileRoute("/auth")({
   component: Auth,
@@ -117,25 +119,25 @@ function Auth() {
 
   return (
     <div className="min-h-screen bg-sidebar grid place-items-center p-4">
-      <Card className="max-w-md w-full p-8">
-        <div className="flex flex-col items-center mb-8">
-          <div className="h-16 w-16 rounded-3xl bg-gradient-to-br from-primary to-success grid place-items-center text-4xl shadow-glow mb-4">
+      <KidCard variant="white" className="max-w-md w-full p-8 border-4 border-primary/20 shadow-glow">
+        <div className="flex flex-col items-center mb-10">
+          <div className="h-20 w-20 rounded-[2rem] bg-gradient-to-br from-primary to-success grid place-items-center text-5xl shadow-glow mb-6 transform -rotate-6">
             🌱
           </div>
-          <h1 className="text-3xl font-extrabold text-center">NeuroBrilha Kids</h1>
-          <p className="text-muted-foreground text-center mt-2">Aprendizagem adaptativa para crianças neurodivergentes</p>
+          <h1 className="text-4xl font-black text-center tracking-tight text-foreground">NeuroBrilha</h1>
+          <p className="text-muted-foreground font-bold text-center mt-2 uppercase tracking-widest text-xs">Aprendizagem Adaptativa</p>
         </div>
 
-        <div className="flex gap-2 p-1 bg-muted rounded-2xl mb-6">
+        <div className="flex gap-2 p-1.5 bg-muted rounded-3xl mb-8">
           <button
             onClick={() => setIsLogin(true)}
-            className={`flex-1 py-2 rounded-xl font-bold transition-all ${isLogin ? "bg-card shadow-soft" : "text-muted-foreground"}`}
+            className={`flex-1 py-3 rounded-2xl font-black transition-all ${isLogin ? "bg-white shadow-soft text-primary" : "text-muted-foreground"}`}
           >
             Entrar
           </button>
           <button
             onClick={() => setIsLogin(false)}
-            className={`flex-1 py-2 rounded-xl font-bold transition-all ${!isLogin ? "bg-card shadow-soft" : "text-muted-foreground"}`}
+            className={`flex-1 py-3 rounded-2xl font-black transition-all ${!isLogin ? "bg-white shadow-soft text-primary" : "text-muted-foreground"}`}
           >
             Cadastrar
           </button>
@@ -143,79 +145,81 @@ function Auth() {
 
         <form onSubmit={handleAuth} className="space-y-4">
           {!isLogin && (
-            <div className="space-y-1.5">
-              <label className="text-sm font-bold ml-1">Seu Nome</label>
+            <div className="space-y-2">
+              <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Seu Nome</label>
               <input
                 type="text"
                 required
-                className="w-full p-3 rounded-xl bg-muted border border-border font-medium focus:border-primary outline-none"
+                className="w-full p-4 rounded-2xl bg-muted border-2 border-transparent font-bold focus:border-primary focus:bg-white transition-all outline-none"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
           )}
-          <div className="space-y-1.5">
-            <label className="text-sm font-bold ml-1">E-mail</label>
+          <div className="space-y-2">
+            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">E-mail</label>
             <input
               type="email"
               required
-              className="w-full p-3 rounded-xl bg-muted border border-border font-medium focus:border-primary outline-none"
+              className="w-full p-4 rounded-2xl bg-muted border-2 border-transparent font-bold focus:border-primary focus:bg-white transition-all outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="space-y-1.5">
-            <label className="text-sm font-bold ml-1">Senha</label>
+          <div className="space-y-2">
+            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Senha</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 required
                 minLength={6}
-                className="w-full p-3 pr-10 rounded-xl bg-muted border border-border font-medium focus:border-primary outline-none"
+                className="w-full p-4 pr-12 rounded-2xl bg-muted border-2 border-transparent font-bold focus:border-primary focus:bg-white transition-all outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/60 hover:text-primary transition-colors p-2"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors p-1"
               >
-                {showPassword ? <EyeOff size={24} /> : <Eye size={24} />}
+                {showPassword ? <EyeOff size={24} strokeWidth={3} /> : <Eye size={24} strokeWidth={3} />}
               </button>
             </div>
           </div>
 
-          <button
+          <KidButton
             disabled={loading}
-            className="w-full py-4 bg-primary text-primary-foreground rounded-2xl font-extrabold text-lg shadow-glow hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+            size="lg"
+            className="w-full mt-4"
           >
-            {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : isLogin ? "Entrar" : "Começar Agora"}
-          </button>
+            {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : isLogin ? "ENTRAR" : "COMEÇAR AGORA"}
+          </KidButton>
         </form>
 
-        <div className="relative my-8">
+        <div className="relative my-10">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border"></span>
+            <span className="w-full border-t-2 border-border"></span>
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-card px-2 text-muted-foreground">Ou</span>
+          <div className="relative flex justify-center text-xs uppercase font-black tracking-[0.3em] text-muted-foreground">
+            <span className="bg-white px-4">Ou</span>
           </div>
         </div>
 
-        <button
+        <KidButton
           type="button"
+          variant="secondary"
           onClick={handleDemoLogin}
           disabled={loading}
-          className="w-full py-4 bg-secondary text-secondary-foreground rounded-2xl font-extrabold border-2 border-primary/20 flex items-center justify-center gap-3 hover:bg-muted active:scale-[0.98] transition-all shadow-soft"
+          className="w-full border-2 border-primary/10"
         >
-          <Sparkles className="text-primary" size={20} />
-          Acessar como Visitante (Teste Rápido)
-        </button>
+          <Sparkles className="text-primary" size={20} strokeWidth={3} />
+          MODO VISITANTE
+        </KidButton>
 
-        <p className="text-center text-xs text-muted-foreground mt-6 px-4">
-          Ao continuar, você concorda com nossos Termos de Uso e Política de Privacidade.
+        <p className="text-center text-[10px] font-bold text-muted-foreground mt-8 px-6 uppercase tracking-widest leading-relaxed">
+          Ao continuar, você concorda com nossos <br/> Termos de Uso e Privacidade.
         </p>
-      </Card>
+      </KidCard>
     </div>
   );
 }
