@@ -1,5 +1,5 @@
 
-import { MasteryLevel } from "../activity-engine/types";
+import { MasteryLevel } from "@/engines/pedagogical-engine/types";
 
 export interface RewardState {
   totalStars: number;

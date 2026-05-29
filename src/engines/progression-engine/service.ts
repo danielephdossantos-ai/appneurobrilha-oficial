@@ -1,6 +1,6 @@
 
 import { supabase } from "@/database/supabase/client";
-import { ProgressionStats, SkillMastery, ReviewSchedule } from "./types";
+import { ProgressionStats, SkillMastery, ReviewSchedule } from "@/engines/progression-engine/types";
 
 export class ProgressionService {
   static async getStats(childId: string, materia: string): Promise<ProgressionStats | null> {

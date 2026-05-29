@@ -9,7 +9,7 @@ import {
 } from "./types";
 import { CONTENT_DATABASE, ContentItem } from "../../data/activities/content";
 import { ACTIVITY_TEMPLATES } from "../../data/activities/templates";
-import { AdaptiveAnalysis } from "../adaptive/motor";
+import { AdaptiveAnalysis } from "@/engines/adaptive-engine/motor";
 
 export class ActivityEngine {
   private static usedContentIds: Set<string> = new Set();

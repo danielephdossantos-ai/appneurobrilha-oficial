@@ -1,6 +1,6 @@
 
 import { supabase } from "@/database/supabase/client";
-import { SkillMastery, ReviewSchedule, ProgressionStats } from "./types";
+import { SkillMastery, ReviewSchedule, ProgressionStats } from "@/engines/progression-engine/types";
 
 export class ProgressionEngine {
   /**
