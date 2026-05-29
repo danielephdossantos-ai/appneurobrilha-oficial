@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { useState, useEffect } from "react";
 import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
-import { ActivityProceduralService } from "@/modules/pedagogy-engine/services/ActivityProceduralService";
+import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,

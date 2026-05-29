@@ -1,11 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { useAppState, AnamnesisData } from "@/lib/store";
+import { useAppState, AnamnesisData } from "@/core/store";
 import { useState, useEffect } from "react";
 import { ChevronRight, CheckCircle2, Brain, Baby, BookOpen, MessageCircle, Heart, Calendar, Activity, Info } from "lucide-react";
-import { AnamnesisProcessor } from "@/modules/neuro-engine/engine/AnamnesisProcessor";
+import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,

@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MathGenerator } from '../../core/adaptive/MathGenerator';
+import { MathGenerator } from '@/engines/adaptive-engine/MathGenerator';
 import { MathActivity } from '../../data/math/activities';
-import { NeuroProfile } from '../../core/neuro/engine';
+import { NeuroProfile } from '@/engines/adaptive-engine/engine';
 
 interface MathWorldContainerProps {
   worldId: string;

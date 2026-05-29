@@ -1,5 +1,5 @@
 
-import { ActivityType, DifficultyLevel } from "../../core/activity-engine/types";
+import { ActivityType, DifficultyLevel } from "@/engines/pedagogical-engine/types";
 
 export interface EarlyChildhoodWorld {
   id: string;

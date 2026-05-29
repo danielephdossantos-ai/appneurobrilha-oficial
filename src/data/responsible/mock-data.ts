@@ -1,6 +1,6 @@
 
-import { Emotion } from "../../modules/emotional-engine/engine/emotional-engine";
-import { SensoryMode } from "../../modules/sensory-system/engine/sensory-engine";
+import { Emotion } from "@/engines/regulation-engine/emotional-engine";
+import { SensoryMode } from "@/modules/sensorial/engine/sensory-engine";
 
 
 export interface SkillProgressData {

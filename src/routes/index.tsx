@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity } from "lucide-react";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 

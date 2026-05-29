@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LITERACY_SYSTEM } from '@/data/literacy';
-import { NeuroProfile } from '@/core/neuro/engine';
+import { NeuroProfile } from '@/engines/adaptive-engine/engine';
 
 interface LiteracyLayoutProps {
   children: React.ReactNode;

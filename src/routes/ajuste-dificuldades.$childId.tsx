@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { useAppState, NIVEL_DESC } from "@/lib/store";
+import { useAppState, NIVEL_DESC } from "@/core/store";
 import { Save } from "lucide-react";
 import { useState } from "react";
 

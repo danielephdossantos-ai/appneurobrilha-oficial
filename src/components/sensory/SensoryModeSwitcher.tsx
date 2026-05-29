@@ -1,6 +1,6 @@
 
-import { SensoryMode, SensoryEngine } from "@/core/sensory/engine";
-import { useAppState } from "@/lib/store";
+import { SensoryMode, SensoryEngine } from "@/engines/regulation-engine/sensory-engine";
+import { useAppState } from "@/core/store";
 import { Card } from "../Layout";
 import { Moon, Zap, Target, VolumeX, Gift, Check } from "lucide-react";
 

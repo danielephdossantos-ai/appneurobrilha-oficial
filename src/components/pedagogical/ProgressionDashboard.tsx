@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, Calculator, PenTool, Lightbulb, Brain, ChevronRight, GraduationCap } from 'lucide-react';
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 
 interface Activity {
   id: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Diagnostico } from '@/lib/store';
+import { Diagnostico } from '@/core/store';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';

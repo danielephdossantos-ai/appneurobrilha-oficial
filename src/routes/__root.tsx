@@ -127,7 +127,7 @@ function RootComponent() {
 
 import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";

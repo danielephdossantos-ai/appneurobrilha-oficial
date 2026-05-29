@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 
 export interface AuditLogEntry {
   action: string;

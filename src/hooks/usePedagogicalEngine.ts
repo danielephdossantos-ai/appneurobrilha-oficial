@@ -1,8 +1,8 @@
-import { useAppState } from "@/lib/store";
-import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-engine/engine/adaptive-engine";
-import { SensoryEngine } from "@/modules/sensory-system/engine/sensory-engine";
+import { useAppState } from "@/core/store";
+import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-treino/engine/adaptive-engine";
+import { SensoryEngine } from "@/modules/sensorial/engine/sensory-engine";
 import { useMemo } from "react";
-import { Emotion } from "@/modules/emotional-engine/engine/emotional-engine";
+import { Emotion } from "@/engines/regulation-engine/emotional-engine";
 
 export function usePedagogicalEngine() {
   const { activeChild } = useAppState();

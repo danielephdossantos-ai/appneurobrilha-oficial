@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, Card } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { useState, useEffect, useRef } from "react";
 import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
 import { toast } from "sonner";

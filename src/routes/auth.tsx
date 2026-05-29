@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { Card } from "@/components/Layout";
 import { toast } from "sonner";

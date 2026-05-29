@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useMemo, useEffect, useState } from "react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
   LineChart, Line, Legend
@@ -10,8 +10,8 @@ import {
   Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
   Calendar, ArrowUpRight, History, Sparkles
 } from "lucide-react";
-import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
-import { supabase } from "@/integrations/supabase/client";
+import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
+import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/relatorio")({
   component: RelatorioPremium,
