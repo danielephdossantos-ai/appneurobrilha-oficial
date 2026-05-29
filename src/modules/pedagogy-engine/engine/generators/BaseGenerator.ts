@@ -34,7 +34,7 @@ export abstract class BaseGenerator {
     const seed = this.generateSeed();
     
     return {
-      id: `gen_${this.domain}_${uuidv4()}`,
+      id: `gen_${this.domain}_${Math.random().toString(36).substring(2, 15)}`,
       templateId: `tpl_${this.domain}`,
       type: this.getActivityType(input),
       title: this.getTitle(input),
