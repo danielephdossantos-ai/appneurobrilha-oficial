@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { Card, Pill } from "@/components/Layout";
 import { Calendar, Plus, Trash2, CheckCircle2, AlertCircle, Clock, BookOpen, Calculator, Pencil } from "lucide-react";
 import { toast } from "sonner";

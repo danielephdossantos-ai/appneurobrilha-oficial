@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/database/supabase/client';
 
 interface AuthGuardProps {
   children: React.ReactNode;

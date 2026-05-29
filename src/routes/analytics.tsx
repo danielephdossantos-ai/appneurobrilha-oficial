@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NeuroAnalyticsDashboard } from "@/modules/analytics/components/NeuroAnalyticsDashboard";
+import { NeuroAnalyticsDashboard } from "@/modules/relatorios/components/NeuroAnalyticsDashboard";
 import { Shell } from "@/components/Layout";
 
 export const Route = createFileRoute("/analytics")({

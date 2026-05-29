@@ -1,7 +1,7 @@
-import { PedagogyEngine } from "@/modules/pedagogy-engine/engine/pedagogy-core";
+import { PedagogyEngine } from "@/modules/escola-brilha/engine/pedagogy-core";
 import { NeuroEngine, NeuroProfile, NeuroAdjustment } from "../neuro/engine";
 import { EmotionalEngine, Emotion } from "@/modules/emotional-engine/engine/emotional-engine";
-import { SensoryEngine, SensoryMode } from "@/modules/sensory-system/engine/sensory-engine";
+import { SensoryEngine, SensoryMode } from "@/modules/sensorial/engine/sensory-engine";
 import { AdaptiveMotor, StudentBehaviorMetrics, AdaptiveAnalysis } from "./motor";
 
 export class AdaptiveEngine {

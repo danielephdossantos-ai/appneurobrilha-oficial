@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { CognitiveProfile, LongitudinalScore, CognitiveMetrics } from "../types";
 import { get, set } from 'idb-keyval';
 

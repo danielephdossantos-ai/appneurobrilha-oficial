@@ -1,7 +1,7 @@
 import React from "react";
 import { Skill, MasteryNode } from "../../data/skills/types";
 import { SkillCard } from "./SkillCard";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface LearningMapProps {
   skills: Skill[];

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/utils';
 
 interface VirtualizedListProps<T> {
   items: T[];

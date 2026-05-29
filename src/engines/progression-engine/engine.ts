@@ -1,5 +1,5 @@
 
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { SkillMastery, ReviewSchedule, ProgressionStats } from "./types";
 
 export class ProgressionEngine {

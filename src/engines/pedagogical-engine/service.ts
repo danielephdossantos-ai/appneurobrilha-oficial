@@ -1,5 +1,5 @@
 
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { PedagogicalActivity, NivelDificuldade } from "./types";
 
 export class PedagogyService {

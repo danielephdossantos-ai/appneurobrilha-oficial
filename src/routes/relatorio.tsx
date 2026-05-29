@@ -10,8 +10,8 @@ import {
   Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
   Calendar, ArrowUpRight, History, Sparkles
 } from "lucide-react";
-import { ReportGenerator } from "@/modules/neuro-engine/engine/ReportGenerator";
-import { supabase } from "@/integrations/supabase/client";
+import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
+import { supabase } from "@/database/supabase/client";
 
 export const Route = createFileRoute("/relatorio")({
   component: RelatorioPremium,

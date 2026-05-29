@@ -7,7 +7,7 @@ import { SimpleMascotRenderer } from '../rewards/SimpleMascotRenderer';
 import { 
   MessageCircle,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/utils';
 
 interface MascotProps {
   type?: "amigo" | "mentor" | "explorador";

@@ -1,6 +1,6 @@
 import { useAppState } from "@/lib/store";
-import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-engine/engine/adaptive-engine";
-import { SensoryEngine } from "@/modules/sensory-system/engine/sensory-engine";
+import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-treino/engine/adaptive-engine";
+import { SensoryEngine } from "@/modules/sensorial/engine/sensory-engine";
 import { useMemo } from "react";
 import { Emotion } from "@/modules/emotional-engine/engine/emotional-engine";
 

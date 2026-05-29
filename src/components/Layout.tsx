@@ -7,7 +7,7 @@ import {
   ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen
 } from "lucide-react";
 import { ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
 
 const navCrianca = [
