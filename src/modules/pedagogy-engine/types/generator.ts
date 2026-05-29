@@ -13,6 +13,7 @@ export const GeneratorInputSchema = z.object({
     lastErrors: z.array(z.string()),
   }),
   previousActivityIds: z.array(z.string()),
+  grade: z.string().optional(),
 });
 
 export type DifficultyLevel = z.infer<typeof DifficultyLevelSchema>;

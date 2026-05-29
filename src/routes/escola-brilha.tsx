@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { ActivityProceduralService } from "@/modules/pedagogy-engine/services/ActivityProceduralService";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
@@ -27,12 +28,60 @@ function Escola() {
     if (!activeChild) return;
     setLoading(true);
     try {
+      // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
+      const service = ActivityProceduralService.getInstance();
+      const domain = materiaId === "matematica" ? "math" : "linguistics";
+      const activity = service.generateActivity({
+        domain,
+        difficulty: 0.5,
+        grade: activeChild.serie,
+        childProfile: {
+          neurodivergence: [activeChild.diagnostico],
+          interests: [activeChild.hiperfoco],
+          sensoryThreshold: 0.5,
+          lastErrors: []
+        },
+        previousActivityIds: []
+      });
+
+      // Pre-formatar os dados para a IA entender o que é pergunta, opções e resposta
+      let systemQuestion = activity.instruction;
+      let systemOptions = [];
+      let systemAnswer = "";
+
+      if (activity.content.options) {
+        systemOptions = activity.content.options.map(String);
+      }
+
+      if (activity.content.answer) {
+        systemAnswer = String(activity.content.answer);
+      } else if (activity.content.targetCount) {
+        systemAnswer = String(activity.content.targetCount);
+      } else if (activity.content.a) {
+        systemAnswer = String(activity.content.a);
+      } else if (activity.content.firstLetter) {
+        systemAnswer = String(activity.content.firstLetter);
+      } else if (activity.content.missingSyllable) {
+        systemAnswer = String(activity.content.missingSyllable);
+      }
+
+      if (activity.content.q) {
+        systemQuestion = activity.content.q;
+      } else if (activity.content.question) {
+        systemQuestion = activity.content.question;
+      }
+
+      // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
           mode: "escola",
           child: activeChild,
           subject: materiaId,
-          topic: topic || "conforme BNCC da série"
+          topic: activity.title,
+          systemQuestion,
+          systemOptions,
+          systemAnswer,
+          instruction: activity.instruction
         }
       });
 

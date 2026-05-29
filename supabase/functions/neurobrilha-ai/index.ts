@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    const { mode, child, subject, topic, message, chatHistory, image } = await req.json()
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction } = await req.json()
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY')
 
     if (!LOVABLE_API_KEY) {
@@ -45,25 +45,30 @@ serve(async (req) => {
         4: "Abstrato: nível padrão da BNCC, mas ainda com linguagem clara e organizada."
       }[child.niveis[subject] || 2]
 
-      systemPrompt = `Você é a Professora IA do NeuroBrilha Kids. Sua tarefa é criar uma micro-aula adaptada.
+      systemPrompt = `Você é a Professora IA do NeuroBrilha Kids. Sua tarefa é ensinar um conteúdo gerado pelo sistema.
       Perfil da Criança:
       - Nome: ${child.nome}
       - Série: ${child.serie}
       - Hiperfoco: ${child.hiperfoco} (USE ISSO PARA EXPLICAR TUDO!)
       - Diagnóstico: ${child.diagnostico}
       - Nível de Adaptação: ${nivelDesc}
-      - Flags Clínicas: ${JSON.stringify(child.flags)}
+
+      DADOS DO SISTEMA (NÃO ALTERE):
+      - Pergunta/Desafio: ${systemQuestion}
+      - Opções: ${JSON.stringify(systemOptions)}
+      - Resposta Correta: ${systemAnswer}
+      - Instrução Base: ${instruction}
 
       Você deve retornar EXCLUSIVAMENTE um JSON com as seguintes chaves:
-      - "ensino": Uma explicação curta e lúdica do tema usando o hiperfoco.
-      - "demo": 3 exemplos curtos ou uma visualização em texto.
-      - "pergunta": Uma pergunta de múltipla escolha.
-      - "opcoes": Array de 4 strings.
-      - "resposta_correta": A string exata da opção correta.
-      - "dica": Uma dica para caso a criança erre.
+      - "ensino": Uma explicação curta, lúdica e adaptada do tema usando o hiperfoco.
+      - "demo": Exemplos práticos ou visualização baseada no hiperfoco.
+      - "pergunta": "${systemQuestion}"
+      - "opcoes": ${JSON.stringify(systemOptions)}
+      - "resposta_correta": "${systemAnswer}"
+      - "dica": Uma dica adaptada para caso a criança erre.
       - "reforco_positivo": Uma frase de incentivo citando o hiperfoco.`
 
-      userPrompt = `Crie uma aula de ${subject} sobre o tema: ${topic || "conforme a BNCC da série"}.`
+      userPrompt = `Ensine este conteúdo: ${topic}.`
     } else if (mode === "professor-foto") {
       const diag = child.diagnostico?.toLowerCase() || "";
       const isTDAH = diag.includes("tdah");

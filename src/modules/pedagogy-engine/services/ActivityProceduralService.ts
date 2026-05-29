@@ -37,7 +37,7 @@ export class ActivityProceduralService {
     return generator.generate(input);
   }
 
-  public generateSession(domains: string[], difficulty: number, count: number): GeneratedActivity[] {
+  public generateSession(domains: string[], difficulty: number, count: number, childProfile: any, grade?: string): GeneratedActivity[] {
     const activities: GeneratedActivity[] = [];
     
     for (let i = 0; i < count; i++) {
@@ -45,12 +45,8 @@ export class ActivityProceduralService {
       const activity = this.generateActivity({
         domain,
         difficulty,
-        childProfile: {
-          neurodivergence: [],
-          interests: [],
-          sensoryThreshold: 0.5,
-          lastErrors: [],
-        },
+        grade: grade,
+        childProfile: childProfile,
         previousActivityIds: activities.map(a => a.id),
       });
       activities.push(activity);
