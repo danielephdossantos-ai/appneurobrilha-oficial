@@ -1,31 +1,25 @@
 import { useAppState } from "@/core/store";
-import { AdaptiveEngine, NeuroProfile } from "@/modules/neuro-treino/engine/adaptive-engine";
-import { SensoryEngine } from "@/modules/sensorial/engine/sensory-engine";
 import { useMemo } from "react";
-import { Emotion, EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
+import { useNeuroAdaptive } from "./useNeuroAdaptive";
 
 export function usePedagogicalEngine() {
   const { activeChild } = useAppState();
+  const neuroAdaptive = useNeuroAdaptive();
 
   const profile = useMemo(() => {
     if (!activeChild) return null;
 
-    let neuroProfile: NeuroProfile = "Neurotipico";
-    if (activeChild.diagnostico === 'tea') neuroProfile = "TEA";
-    else if (activeChild.diagnostico === 'tdah') neuroProfile = "TDAH";
-    else if (activeChild.diagnostico === 'dislexia') neuroProfile = "Dislexia";
-
     return {
-      base: neuroProfile,
+      base: neuroAdaptive.profile,
       flags: activeChild.flags,
       levels: activeChild.niveis,
-      isAnamnesisComplete: activeChild.anamnese_completa
+      isAnamnesisComplete: activeChild.anamnese_completa,
+      adjustment: neuroAdaptive.adjustment
     };
-  }, [activeChild]);
+  }, [activeChild, neuroAdaptive]);
 
   return {
     profile,
-    adaptive: AdaptiveEngine,
-    sensory: SensoryEngine
+    neuroAdaptive,
   };
 }
