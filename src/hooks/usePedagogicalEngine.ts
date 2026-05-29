@@ -24,18 +24,40 @@ export function usePedagogicalEngine() {
     const adj = neuroAdaptive.adjustment;
     if (!adj) return { adaptive: null, sensory: null };
 
+    // Mapeamento completo para compatibilidade com o sistema antigo
     return {
       adaptive: {
         visualScale: adj.difficultyScale,
-        animationSpeed: adj.animationIntensity === "none" ? 0.1 : adj.animationIntensity === "low" ? 0.5 : 1.0,
+        animationSpeed: adj.animationIntensity === "none" ? 0.5 : adj.animationIntensity === "low" ? 0.8 : 1.2,
         stimuliLevel: adj.stimuliReduction ? "low" : "medium",
+        visualComplexity: adj.visualComplexity,
+        difficulty: adj.difficultyScale,
+        breakFrequency: adj.suggestBreak ? 5 : 15,
+        instructionType: "mixed",
+        repetitionRate: 1.0,
+        positiveReinforcementFrequency: adj.positiveReinforcementFrequency > 0.7 ? "high" : "standard",
+        autonomyLevel: "guided",
+        complexityMultiplier: adj.difficultyScale,
+        maxItemsPerScreen: adj.maxInformationDensity,
+        reinforcementIntensity: adj.positiveReinforcementFrequency > 0.8 ? "high" : "standard",
+        animationIntensity: adj.animationIntensity,
+        responseTimeLimit: null,
+        predictabilityLevel: "high"
       },
       sensory: {
         visualScale: adj.difficultyScale,
         stimuliLevel: adj.stimuliReduction ? "none" : "medium",
+        soundVolume: adj.audioAdaptation.volume,
+        brightness: 1.0,
+        contrast: 1.0,
+        fontSize: 16 * adj.difficultyScale,
+        colorPalette: "standard",
+        animationIntensity: adj.animationIntensity,
+        hapticFeedback: true
       }
     };
   }, [neuroAdaptive.adjustment]);
+
 
   return {
     profile: profileData,
