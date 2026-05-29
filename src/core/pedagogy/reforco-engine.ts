@@ -29,7 +29,8 @@ export interface ReforcoLesson {
 export class ReforcoEngine {
   static async generateLesson(topic: string = "Geral", adjustment?: NeuroAdjustment, childInfo?: any): Promise<ReforcoLesson> {
     const lowerTopic = (topic || "Geral").toLowerCase();
-    const childLevel = childInfo?.serie_num || 1; // Fallback to 1st year
+    const childLevel = childInfo?.serie_num || 0; 
+    const isInfantil = childLevel === 0 || (childInfo?.serie && childInfo.serie.toLowerCase().includes("infantil"));
     
     // Tenta buscar no banco pedagógico primeiro
     try {
@@ -37,11 +38,12 @@ export class ReforcoEngine {
       const match = activities.find(a => 
         (a.titulo.toLowerCase().includes(lowerTopic) || 
         a.tags.some(t => t.toLowerCase().includes(lowerTopic))) &&
-        (a.serie === childInfo?.serie || !a.serie)
+        ((isInfantil && (a.serie?.includes("Infantil") || a.faixaEtaria?.includes("ano"))) || 
+         (!isInfantil && a.serie === childInfo?.serie) || !a.serie)
       );
 
       if (match) {
-        return this.mapActivityToLesson(match, adjustment);
+        return this.mapActivityToLesson(match, adjustment, isInfantil);
       }
     } catch (e) {
       console.error("Erro ao buscar no banco pedagógico:", e);
@@ -94,7 +96,7 @@ export class ReforcoEngine {
 
   private static getExplanation(topic: string, diff: string, level: number, skill?: BNCCSkill): string {
     if (level === 0) {
-      return `Olá, amiguinho! Vamos brincar de descobrir ${topic}? É muito legal!`;
+      return `Olá, amiguinho! Vamos brincar de descobrir ${topic}? É muito legal! Observe as cores e as formas mágicas!`;
     }
     if (level >= 6) {
       return `Nesta unidade sobre ${topic}, analisaremos os fundamentos teóricos e aplicações práticas conforme a BNCC.`;
@@ -103,7 +105,7 @@ export class ReforcoEngine {
   }
 
   private static getExample(topic: string, diff: string, level: number): string {
-    if (level === 0) return "Olha só: se você tem 2 maçãs e ganha mais 1, agora tem 3! 🍎🍎 + 🍎 = 🍎🍎🍎";
+    if (level === 0) return "Olha só esses desenhos lindos! Vamos usar os olhos de detetive para encontrar os pares!";
     return `Exemplo de ${topic}: imagine que estamos organizando uma biblioteca escolar.`;
   }
 
