@@ -9,6 +9,10 @@ import {
 import { ReactNode } from "react";
 import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
+import { KidCard } from "./ui/KidCard";
+import { KidButton } from "./ui/KidButton";
+import KidLiveMascot from "./ui/KidLiveMascot";
+
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
@@ -49,8 +53,8 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
   return (
     <Link
       to={to}
-      className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors btn-tap"
-      activeProps={{ className: "bg-sidebar-accent text-sidebar-accent-foreground font-bold shadow-soft" }}
+      className="group flex items-center gap-3 rounded-2xl px-4 py-3 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all btn-tap font-bold"
+      activeProps={{ className: "bg-primary text-primary-foreground shadow-kid [--shadow-color:oklch(var(--primary-dark))] font-black" }}
       activeOptions={{ exact: to === "/" }}
     >
       <Icon className="h-5 w-5 shrink-0" />
@@ -83,49 +87,54 @@ export function Shell({ children }: { children?: ReactNode }) {
       className="min-h-screen flex flex-col md:flex-row neuro-adaptive-container"
       style={adaptiveStyles}
     >
-      <aside className="hidden md:flex w-72 shrink-0 flex-col bg-sidebar border-r border-sidebar-border p-4 gap-2">
-        <Link to="/" className="flex items-center gap-2 px-2 py-3">
-          <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-2xl shadow-glow">
+      <aside className="hidden md:flex w-80 shrink-0 flex-col bg-sidebar border-r-4 border-sidebar-border p-6 gap-4 overflow-y-auto">
+        <Link to="/" className="flex items-center gap-3 px-2 py-4 mb-2">
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-3xl shadow-glow transform -rotate-3">
             🌱
           </div>
           <div>
-            <div className="font-extrabold text-sidebar-foreground leading-tight">NeuroBrilha</div>
-            <div className="text-xs text-sidebar-foreground/60 -mt-0.5">Kids</div>
+            <div className="font-black text-2xl text-sidebar-foreground leading-none tracking-tight">NeuroBrilha</div>
+            <div className="text-xs font-bold text-primary/60 uppercase tracking-widest mt-1">Premium Kids</div>
           </div>
         </Link>
 
         {activeChild && (
-          <div className="mt-2 mb-3 rounded-2xl bg-card p-3 shadow-soft border border-sidebar-border">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-2xl bg-secondary grid place-items-center text-2xl">{activeChild.avatar}</div>
+          <KidCard variant="white" className="p-4 border-2 border-primary/20 hover:border-primary/40 transition-colors">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-secondary grid place-items-center text-3xl shadow-inner">{activeChild.avatar}</div>
               <div className="min-w-0">
-                <div className="font-bold truncate">{activeChild.nome}</div>
-                <div className="text-xs text-muted-foreground">{activeChild.idade} anos · {activeChild.serie}</div>
+                <div className="font-black text-lg truncate leading-tight">{activeChild.nome}</div>
+                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{activeChild.idade} anos · {activeChild.serie}</div>
               </div>
             </div>
             {allChildren.length > 1 && (
               <select
                 value={activeChild.id}
                 onChange={(e) => setActiveChild(e.target.value)}
-                className="mt-2 w-full text-xs rounded-lg bg-muted px-2 py-1.5"
+                className="mt-3 w-full text-xs font-bold rounded-xl bg-muted px-3 py-2 border-2 border-transparent focus:border-primary transition-all outline-none"
               >
                 {allChildren.map((c: any) => (
                   <option key={c.id} value={c.id}>{c.avatar} {c.nome}</option>
                 ))}
               </select>
             )}
-          </div>
+          </KidCard>
         )}
 
-        <div className="text-[11px] uppercase tracking-wider font-bold text-sidebar-foreground/50 px-3 mt-2">
-          Para a criança
+        <div className="mt-2">
+          <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />
+        </div>
+
+
+        <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-4 mb-2">
+          Explorar
         </div>
         <nav className="flex flex-col gap-1">
           {navCrianca.map((i) => <NavItem key={i.to} {...i} />)}
         </nav>
 
-        <div className="text-[11px] uppercase tracking-wider font-bold text-sidebar-foreground/50 px-3 mt-4">
-          Para os pais
+        <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2">
+          Responsáveis
         </div>
         <nav className="flex flex-col gap-1">
           {navPais.map((i) => <NavItem key={i.to} {...i} />)}
@@ -153,7 +162,7 @@ export function Shell({ children }: { children?: ReactNode }) {
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-20 backdrop-blur-md bg-background/80 border-b border-border px-4 py-3 flex items-center justify-between">
+        <header className="sticky top-0 z-20 backdrop-blur-xl bg-background/70 border-b-4 border-sidebar-border px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/" className="font-extrabold flex items-center gap-2 md:hidden">
               <span className="text-2xl">🌱</span> NeuroBrilha
@@ -178,7 +187,9 @@ export function Shell({ children }: { children?: ReactNode }) {
         </header>
 
         <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
-          {children ?? <Outlet />}
+          <div className="max-w-5xl w-full mx-auto">
+            {children ?? <Outlet />}
+          </div>
           <MobileNav path={path} />
           
           <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
