@@ -35,13 +35,30 @@ export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
 });
 
-const materias = [
+const materiasBase = [
   { id: "Português", nome: "Português", emoji: "📚", cor: "from-coral/20 to-coral/5", dbName: "Português" },
   { id: "Matemática", nome: "Matemática", emoji: "🔢", cor: "from-sky/20 to-sky/5", dbName: "Matemática" },
   { id: "Ciências", nome: "Ciências", emoji: "🔬", cor: "from-success/15 to-success/5", dbName: "Ciências" },
   { id: "História", nome: "História", emoji: "🏛️", cor: "from-sun/20 to-sun/5", dbName: "História" },
   { id: "Geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/20 to-lilac/5", dbName: "Geografia" },
 ] as const;
+
+const categoriasInfantil = [
+  { id: "Linguagem", nome: "Linguagem e Letras", emoji: "🔤", cor: "from-pink-200 to-pink-50" },
+  { id: "Números", nome: "Números e Quantidade", emoji: "🎲", cor: "from-blue-200 to-blue-50" },
+  { id: "Cores", nome: "Cores e Formas", emoji: "🎨", cor: "from-yellow-200 to-yellow-50" },
+  { id: "Emoções", nome: "Emoções e Sentimentos", emoji: "😊", cor: "from-green-200 to-green-50" },
+  { id: "Coordenação", nome: "Coordenação Visual", emoji: "🧩", cor: "from-purple-200 to-purple-50" },
+  { id: "Consciência Fonológica", nome: "Sons e Fonemas", emoji: "👂", cor: "from-orange-200 to-orange-50" },
+];
+
+const categoriasFundamental = [
+  { id: "Alfabetização", nome: "Alfabetização", emoji: "✍️", cor: "from-rose-200 to-rose-50" },
+  { id: "Leitura Inicial", nome: "Leitura Inicial", emoji: "📖", cor: "from-indigo-200 to-indigo-50" },
+  { id: "Escrita", nome: "Escrita Criativa", emoji: "🖋️", cor: "from-amber-200 to-amber-50" },
+  ...materiasBase
+];
+
 
 function Escola() {
   const { activeChild } = useAppState();
@@ -200,18 +217,22 @@ function Escola() {
 
       <h2 className="text-xl font-black mb-4 flex items-center gap-2">
         <BookOpen className="h-5 w-5 text-primary" />
-        Matérias Base
+        Áreas de Estudo - {activeChild?.serie}
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {materias.map((m) => (
+        {(activeChild?.serie?.toLowerCase().includes("infantil") || activeChild?.serie?.toLowerCase().includes("pré") 
+          ? categoriasInfantil 
+          : categoriasFundamental
+        ).map((m) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
-            <div className="text-4xl">{m.emoji}</div>
-            <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id.toLowerCase()] ?? 2 : 2}</Pill>
+            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left group`}>
+            <div className="text-4xl group-hover:scale-110 transition-transform">{m.emoji}</div>
+            <div className="font-extrabold text-lg mt-2 leading-tight">{m.nome}</div>
+            <Pill tone="info" className="mt-2">Inciar Brilho</Pill>
           </button>
         ))}
       </div>
+
     </Shell>
   );
 }
