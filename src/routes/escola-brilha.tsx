@@ -12,26 +12,6 @@ import { ReforcoEngine } from "@/core/pedagogy/reforco-engine";
 import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/escola-brilha")({
-  errorComponent: ({ error, reset }: { error: Error; reset: () => void }) => {
-    return (
-      <div className="flex h-screen items-center justify-center p-4">
-        <Card className="max-w-md text-center p-8 border-destructive/20 bg-destructive/5">
-          <h2 className="text-xl font-bold text-destructive mb-2">Ops! O Escola Brilha tropeçou.</h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Não conseguimos carregar a página devido a um erro técnico: {error.message}
-          </p>
-          <div className="flex gap-2 justify-center">
-            <button onClick={reset} className="btn-tap px-4 py-2 bg-primary text-white rounded-xl font-bold">
-              Tentar Novamente
-            </button>
-            <a href="/" className="btn-tap px-4 py-2 bg-white border border-border rounded-xl font-bold">
-              Voltar ao Início
-            </a>
-          </div>
-        </Card>
-      </div>
-    );
-  },
   component: Escola,
 });
 
