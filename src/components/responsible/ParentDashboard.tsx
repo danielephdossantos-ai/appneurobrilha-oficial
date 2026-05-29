@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
   Clock, 
   Heart, 
@@ -18,14 +17,17 @@ import { CognitiveRadar } from "./CognitiveRadar";
 import { RoutineManager } from "./RoutineManager";
 import { PedagogicalAlerts } from "./PedagogicalAlerts";
 import { DashboardHeader } from "./DashboardHeader";
+import { mockResponsibleData } from "@/data/responsible/mock-data";
 
 export const ParentDashboard = () => {
+  const data = mockResponsibleData;
+
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-12 space-y-8">
       <DashboardHeader 
-        studentName="Joãozinho" 
-        grade="1º Ano Fundamental" 
-        childId="demo-id" 
+        studentName={data.studentName} 
+        grade={data.grade} 
+        childId="demo-child-id" 
       />
 
       <Tabs defaultValue="overview" className="space-y-8">
@@ -74,7 +76,7 @@ export const ParentDashboard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <FocusChart />
+                <FocusChart sessions={data.focusSessions} />
               </CardContent>
             </Card>
 
@@ -86,26 +88,26 @@ export const ParentDashboard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <PedagogicalAlerts />
+                <PedagogicalAlerts alerts={data.alerts} childId="demo-child-id" />
               </CardContent>
             </Card>
           </div>
         </TabsContent>
 
         <TabsContent value="pedagogical">
-          <SkillProgress />
+          <SkillProgress skills={data.skills} />
         </TabsContent>
 
         <TabsContent value="cognitive">
-          <CognitiveRadar />
+          <CognitiveRadar data={data.cognitiveStats} />
         </TabsContent>
 
         <TabsContent value="emotional">
-          <EmotionalTimeline />
+          <EmotionalTimeline history={data.emotionalHistory} />
         </TabsContent>
 
         <TabsContent value="settings">
-          <RoutineManager />
+          <RoutineManager routine={data.dailyRoutine} />
         </TabsContent>
       </Tabs>
     </div>
