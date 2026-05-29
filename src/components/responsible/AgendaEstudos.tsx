@@ -8,6 +8,10 @@ import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
+import { OfflineEngine, ConflictEngine } from "@/engines/offline";
+import { db } from "@/engines/offline/database";
+import { useLiveQuery } from "dexie-react-hooks";
+
 
 interface AgendaEstudosProps {
   childId: string;
