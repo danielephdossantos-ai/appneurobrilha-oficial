@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { Play, Pause, CheckCircle2, Lock, ClipboardList, Loader2, Calendar } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { SensoryMode } from "@/core/sensory/engine";
+import { SensoryMode } from "@/engines/regulation-engine/engine";
 
 export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo" | "nenhum";
 export type Hiperfoco =

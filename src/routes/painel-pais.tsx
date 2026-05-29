@@ -1,7 +1,7 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { DashboardHeader } from "@/components/responsible/DashboardHeader";
 import { CognitiveRadar } from "@/components/responsible/CognitiveRadar";
 import { SkillProgress } from "@/components/responsible/SkillProgress";
@@ -12,7 +12,7 @@ import { AdaptivePlan } from "@/components/responsible/AdaptivePlan";
 import { FocusChart } from "@/components/responsible/FocusChart";
 import { AgendaEstudos } from "@/components/responsible/AgendaEstudos";
 import { mockResponsibleData } from "@/data/responsible/mock-data";
-import { ResponsibleIntelligence } from "@/core/responsible/intelligence";
+import { ResponsibleIntelligence } from "@/modules/parental/intelligence";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChildProtection } from "@/modules/auth/components/ChildProtection";

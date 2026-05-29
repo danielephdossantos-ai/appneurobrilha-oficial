@@ -1,4 +1,4 @@
-import { Child, AnamnesisData } from "@/lib/store";
+import { Child, AnamnesisData } from "@/core/store";
 
 export interface InternalProfile {
   leitura: number;

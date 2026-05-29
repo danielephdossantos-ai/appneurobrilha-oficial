@@ -1,5 +1,5 @@
 import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,

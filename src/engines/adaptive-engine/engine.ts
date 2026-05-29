@@ -1,113 +1,181 @@
-import { PedagogyEngine } from "@/modules/escola-brilha/engine/pedagogy-core";
-import { NeuroEngine, NeuroProfile, NeuroAdjustment } from "../neuro/engine";
-import { EmotionalEngine, Emotion } from "@/modules/emotional-engine/engine/emotional-engine";
-import { SensoryEngine, SensoryMode } from "@/modules/sensorial/engine/sensory-engine";
-import { AdaptiveMotor, StudentBehaviorMetrics, AdaptiveAnalysis } from "./motor";
 
-export class AdaptiveEngine {
-  static orchestrateActivity(
-    studentId: string,
-    profile: NeuroProfile,
-    currentEmotion: Emotion,
-    metrics: StudentBehaviorMetrics,
-    sensoryMode: SensoryMode = "visual"
-  ) {
-    const analysis = AdaptiveMotor.analyze(metrics);
-    const intervention = AdaptiveMotor.getIntervention(analysis);
-    
-    const neuroAdj = NeuroEngine.getAdjustments(profile);
-    const sensoryAdj = SensoryEngine.adapt({}); // Simplified for now
-    
-    // Default values to prevent TS errors in modular transition
-    const baseSensory = {
-      mode: "visual" as SensoryMode,
-      brightness: 1,
-      contrast: 1,
-      visualScale: 1,
-      speedMultiplier: 1,
-      stimuliLevel: "standard"
-    };
+export type NeuroProfile = 
+  | "TEA" 
+  | "TDAH" 
+  | "Dislexia" 
+  | "TOD" 
+  | "DeficienciaIntelectual" 
+  | "AltasHabilidades" 
+  | "Neurotipico";
 
-    // 1. Dificuldade (complexidade pedagógica)
-    let difficulty = neuroAdj.complexityMultiplier;
-    if (analysis.performanceLevel > 0.8) difficulty *= 1.25;
-    if (analysis.frustration > 0.5) difficulty *= 0.6;
-    if (analysis.fatigue > 0.6) difficulty *= 0.8;
+export interface CognitiveLoad {
+  attentionSpan: number; // minutes
+  workingMemory: number; // items
+  processingSpeed: number; // 0 to 1
+}
 
-    // 2. Quantidade (carga cognitiva por tela)
-    let maxItems = neuroAdj.maxItemsPerScreen;
-    if (analysis.fatigue > 0.5) maxItems = Math.max(1, Math.floor(maxItems * 0.5));
-    if (analysis.distraction > 0.6) maxItems = Math.max(1, Math.floor(maxItems * 0.7));
-    if (analysis.impulsivity > 0.7) maxItems = Math.max(1, Math.floor(maxItems * 0.6));
+export interface NeuroAdjustment {
+  breakFrequency: number;
+  visualComplexity: "low" | "medium" | "high";
+  instructionType: "visual" | "text" | "audio" | "mixed";
+  repetitionRate: number; // 1.0 is standard
+  positiveReinforcementFrequency: "high" | "standard";
+  autonomyLevel: "guided" | "collaborative" | "independent";
+  complexityMultiplier: number; // 1.0 is standard
+  
+  // New specific parameters
+  animationSpeed: number; // velocidade (e.g., 0.5 slow, 1.5 fast)
+  stimuliLevel: "none" | "low" | "medium" | "high"; // estímulos
+  visualScale: number; // tamanho visual (e.g., 1.2 for 20% larger)
+  maxItemsPerScreen: number; // quantidade de itens
+  reinforcementIntensity: "subtle" | "standard" | "high"; // reforços
+  animationIntensity: "none" | "low" | "standard" | "high"; // animações
+  responseTimeLimit: number | null; // tempo de resposta em segundos (null = ilimitado)
+  predictabilityLevel: "low" | "medium" | "high"; // nível de previsibilidade
+}
 
-    // 3. Visual (escala e clareza)
-    let visualScale = neuroAdj.visualScale * baseSensory.visualScale;
-    if (analysis.distraction > 0.4) visualScale *= 1.2;
-    if (analysis.fatigue > 0.7) visualScale *= 1.1;
-    
-    let visualComplexity = neuroAdj.visualComplexity;
-    if (analysis.distraction > 0.6 || analysis.fatigue > 0.6) visualComplexity = "low";
-
-    // 4. Velocidade (ritmo da interface e tempo de resposta)
-    let animationSpeed = neuroAdj.animationSpeed * baseSensory.speedMultiplier;
-    if (analysis.fatigue > 0.5) animationSpeed *= 0.8;
-    if (analysis.impulsivity > 0.6) animationSpeed *= 0.7;
-    if (analysis.performanceLevel > 0.9) animationSpeed *= 1.2;
-
-    let responseTimeLimit = neuroAdj.responseTimeLimit;
-    if (analysis.fatigue > 0.4 && responseTimeLimit) responseTimeLimit *= 1.5;
-    if (analysis.frustration > 0.5 && responseTimeLimit) responseTimeLimit = null;
-
-    // 5. Reforços (intensidade e frequência)
-    let reinforcementIntensity = neuroAdj.reinforcementIntensity;
-    if (analysis.frustration > 0.4) reinforcementIntensity = "high";
-    if (analysis.performanceLevel > 0.8 && reinforcementIntensity === "high") reinforcementIntensity = "standard";
-
-    let reinforcementFrequency = neuroAdj.positiveReinforcementFrequency;
-    if (analysis.frustration > 0.5 || analysis.fatigue > 0.5) reinforcementFrequency = "high";
-
-    // 6. Estímulos (nível de animação e sons)
-    let stimuliLevel = baseSensory.stimuliLevel;
-    if (analysis.distraction > 0.7) stimuliLevel = "high";
-    if (analysis.impulsivity > 0.6) stimuliLevel = "low";
-
-    let animationIntensity = neuroAdj.animationIntensity;
-    if (analysis.fatigue > 0.6) animationIntensity = "low";
-    if (analysis.distraction > 0.5) animationIntensity = "none";
-
-    return {
-      ...neuroAdj,
-      difficulty,
-      maxItemsPerScreen: maxItems,
-      visualScale,
-      visualComplexity,
-      animationSpeed,
-      responseTimeLimit,
-      reinforcementIntensity,
-      positiveReinforcementFrequency: reinforcementFrequency,
-      stimuliLevel,
-      animationIntensity,
-      intervention,
-      analysis,
-      predictabilityLevel: "high", // Default
-      instructionType: "visual" // Default
-    };
+export class NeuroEngine {
+  static getAdjustments(profile: NeuroProfile): NeuroAdjustment {
+    switch (profile) {
+      case "TEA":
+        return { 
+          breakFrequency: 15, 
+          visualComplexity: "low", 
+          instructionType: "visual",
+          repetitionRate: 1.5,
+          positiveReinforcementFrequency: "high",
+          autonomyLevel: "guided",
+          complexityMultiplier: 1.0,
+          animationSpeed: 0.8,
+          stimuliLevel: "low",
+          visualScale: 1.1,
+          maxItemsPerScreen: 3,
+          reinforcementIntensity: "high",
+          animationIntensity: "low",
+          responseTimeLimit: null,
+          predictabilityLevel: "high"
+        };
+      case "TDAH":
+        return { 
+          breakFrequency: 8, 
+          visualComplexity: "low", 
+          instructionType: "mixed",
+          repetitionRate: 1.2,
+          positiveReinforcementFrequency: "high",
+          autonomyLevel: "collaborative",
+          complexityMultiplier: 1.0,
+          animationSpeed: 1.2,
+          stimuliLevel: "medium",
+          visualScale: 1.0,
+          maxItemsPerScreen: 2,
+          reinforcementIntensity: "high",
+          animationIntensity: "low",
+          responseTimeLimit: 30,
+          predictabilityLevel: "medium"
+        };
+      case "Dislexia":
+        return { 
+          breakFrequency: 20, 
+          visualComplexity: "medium", 
+          instructionType: "audio",
+          repetitionRate: 1.3,
+          positiveReinforcementFrequency: "standard",
+          autonomyLevel: "collaborative",
+          complexityMultiplier: 1.0,
+          animationSpeed: 1.0,
+          stimuliLevel: "medium",
+          visualScale: 1.3, // Maior para facilitar leitura
+          maxItemsPerScreen: 4,
+          reinforcementIntensity: "standard",
+          animationIntensity: "standard",
+          responseTimeLimit: 60,
+          predictabilityLevel: "medium"
+        };
+      case "TOD":
+        return { 
+          breakFrequency: 12, 
+          visualComplexity: "medium", 
+          instructionType: "mixed",
+          repetitionRate: 1.0,
+          positiveReinforcementFrequency: "high",
+          autonomyLevel: "independent",
+          complexityMultiplier: 1.0,
+          animationSpeed: 1.1,
+          stimuliLevel: "medium",
+          visualScale: 1.0,
+          maxItemsPerScreen: 5,
+          reinforcementIntensity: "high",
+          animationIntensity: "standard",
+          responseTimeLimit: 45,
+          predictabilityLevel: "high"
+        };
+      case "DeficienciaIntelectual":
+        return { 
+          breakFrequency: 10, 
+          visualComplexity: "low", 
+          instructionType: "visual",
+          repetitionRate: 2.0,
+          positiveReinforcementFrequency: "high",
+          autonomyLevel: "guided",
+          complexityMultiplier: 0.7,
+          animationSpeed: 0.7, // Mais devagar
+          stimuliLevel: "low",
+          visualScale: 1.4,
+          maxItemsPerScreen: 2,
+          reinforcementIntensity: "high",
+          animationIntensity: "low",
+          responseTimeLimit: null,
+          predictabilityLevel: "high"
+        };
+      case "AltasHabilidades":
+        return { 
+          breakFrequency: 25, 
+          visualComplexity: "high", 
+          instructionType: "text",
+          repetitionRate: 0.5,
+          positiveReinforcementFrequency: "standard",
+          autonomyLevel: "independent",
+          complexityMultiplier: 1.5,
+          animationSpeed: 1.5, // Mais rápido
+          stimuliLevel: "high",
+          visualScale: 1.0,
+          maxItemsPerScreen: 8,
+          reinforcementIntensity: "subtle",
+          animationIntensity: "high",
+          responseTimeLimit: 15,
+          predictabilityLevel: "low"
+        };
+      default:
+        return { 
+          breakFrequency: 25, 
+          visualComplexity: "medium", 
+          instructionType: "mixed",
+          repetitionRate: 1.0,
+          positiveReinforcementFrequency: "standard",
+          autonomyLevel: "independent",
+          complexityMultiplier: 1.0,
+          animationSpeed: 1.0,
+          stimuliLevel: "medium",
+          visualScale: 1.0,
+          maxItemsPerScreen: 6,
+          reinforcementIntensity: "standard",
+          animationIntensity: "standard",
+          responseTimeLimit: null,
+          predictabilityLevel: "medium"
+        };
+    }
   }
 
-  static getSpacedRepetitionNeed(masteryLevel: string, lastSeen: Date, errors: number): boolean {
-    const daysSinceLastSeen = (new Date().getTime() - lastSeen.getTime()) / (1000 * 3600 * 24);
-    if (masteryLevel === "mastered" && daysSinceLastSeen > 30) return true;
-    if (masteryLevel === "in-progress" && daysSinceLastSeen > 7) return true;
-    if (errors > 3) return true;
-    return false;
-  }
-
-  static detectFatigue(metrics: StudentBehaviorMetrics): boolean {
-    const avgResponse = metrics.responseTimeHistory.length > 0 
-      ? metrics.responseTimeHistory.reduce((a, b) => a + b, 0) / metrics.responseTimeHistory.length 
-      : 0;
-    const highResponseTime = avgResponse > 15000;
-    const errorSpike = metrics.totalErrors > 5;
-    return highResponseTime || errorSpike;
+  static getProfileLabel(profile: NeuroProfile): string {
+    const labels: Record<NeuroProfile, string> = {
+      TEA: "TEA (Autismo)",
+      TDAH: "TDAH",
+      Dislexia: "Dislexia",
+      TOD: "TOD",
+      DeficienciaIntelectual: "Deficiência Intelectual",
+      AltasHabilidades: "Altas Habilidades / Superdotação",
+      Neurotipico: "Neurotípico"
+    };
+    return labels[profile];
   }
 }

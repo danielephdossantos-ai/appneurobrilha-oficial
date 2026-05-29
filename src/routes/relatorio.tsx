@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useMemo, useEffect, useState } from "react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { useAppState } from "@/lib/store";
+import { useAppState } from "@/core/store";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
   LineChart, Line, Legend
