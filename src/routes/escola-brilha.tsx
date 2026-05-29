@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { ReforcoEngine, ReforcoLesson } from "@/core/pedagogy/reforco-engine";
+import { ReforcoEngine } from "@/core/pedagogy/reforco-engine";
 import { useNotifications } from "@/hooks/useNotifications";
 
 export const Route = createFileRoute("/escola-brilha")({
@@ -129,7 +129,7 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild.serie}`} />
+      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · ${activeChild?.serie ?? "Ensino Fundamental"}`} />
 
       {agenda.length > 0 && (
         <div className="mb-10 space-y-4 animate-in slide-in-from-top-4 duration-500">
@@ -157,7 +157,8 @@ function Escola() {
                       <span className="text-[10px] text-muted-foreground font-bold">
                         {(() => {
                           try {
-                            return format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR });
+                            const date = new Date(item.exam_date + 'T12:00:00');
+                            return isNaN(date.getTime()) ? item.exam_date : format(date, "dd 'de' MMMM", { locale: ptBR });
                           } catch (e) {
                             return item.exam_date;
                           }
@@ -189,7 +190,7 @@ function Escola() {
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
             <div className="text-4xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {activeChild.niveis ? (activeChild.niveis as any)[m.id] ?? 2 : 2}</Pill>
+            <Pill tone="info">Nível {activeChild?.niveis ? (activeChild.niveis as any)[m.id] ?? 2 : 2}</Pill>
           </button>
         ))}
       </div>
