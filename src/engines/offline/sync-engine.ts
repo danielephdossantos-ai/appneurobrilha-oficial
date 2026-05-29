@@ -62,7 +62,7 @@ export class SyncEngine {
       return true; // Considera processado para não travar a fila
     }
 
-    const { error } = await supabase.from(table).upsert(data);
+    const { error } = await supabase.from(table as any).upsert(data);
     
     if (error) {
       console.error(`[SyncEngine] Erro no Supabase (${table}):`, error);
