@@ -4,7 +4,7 @@ import { useAppState } from "@/lib/store";
 import { useState, useEffect } from "react";
 import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { ActivityProceduralService } from "@/modules/pedagogy-engine/services/ActivityProceduralService";
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
@@ -27,12 +27,31 @@ function Escola() {
     if (!activeChild) return;
     setLoading(true);
     try {
+      // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
+      const service = ActivityProceduralService.getInstance();
+      const domain = materiaId === "matematica" ? "math" : "linguistics";
+      const activity = service.generateActivity({
+        domain,
+        difficulty: 0.5,
+        grade: activeChild.serie,
+        childProfile: {
+          neurodivergence: [activeChild.diagnostico],
+          interests: [activeChild.hiperfoco],
+          sensoryThreshold: 0.5,
+          lastErrors: []
+        },
+        previousActivityIds: []
+      });
+
+      // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
           mode: "escola",
           child: activeChild,
           subject: materiaId,
-          topic: topic || "conforme BNCC da série"
+          topic: activity.title,
+          activityData: activity.content, // Passa os dados estruturados do sistema para a IA explicar
+          instruction: activity.instruction
         }
       });
 
