@@ -59,33 +59,20 @@ export const MascotGlobalContainer: React.FC = () => {
       >
         <div className={cn(
           "transition-all duration-300",
-          isMinimized ? "w-12 h-12" : "w-32 h-32"
+          isMinimized ? "w-16 h-16" : "w-32 h-32"
         )}>
-           {/* SVG Mascote Pip / Active Mascote */}
-           <div className={cn(
-             "w-full h-full bg-primary rounded-full relative shadow-lg flex items-center justify-center border-4 border-white overflow-hidden",
-             emotion === 'happy' ? 'animate-bounce-gentle' : ''
-           )}>
-              {/* Se tiver imagem, usa imagem, senão usa o Pip base */}
-              {activeMascot.mascot.image_url && !activeMascot.mascot.image_url.includes('dicebear') ? (
-                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-              ) : (
-                <div className="relative w-full h-full p-2 flex items-center justify-center">
-                   <div className="w-3/4 h-3/4 bg-white/20 rounded-full relative">
-                      <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-white rounded-full" />
-                      <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-white rounded-full" />
-                      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-4 h-2 border-b-2 border-white rounded-full" />
-                   </div>
-                </div>
-              )}
-
-              {/* Badges de Level */}
-              {!isMinimized && (
-                <div className="absolute bottom-0 inset-x-0 bg-primary/80 py-0.5">
-                   <p className="text-[10px] font-black text-white text-center">NV {activeMascot.level}</p>
-                </div>
-              )}
-           </div>
+           <KidLiveMascot 
+             emotion={emotion} 
+             size={isMinimized ? "sm" : "md"}
+             className="cursor-pointer"
+           />
+           
+           {/* Badge de Nível Flutuante */}
+           {!isMinimized && (
+             <div className="absolute -bottom-2 right-4 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-lg">
+               LV {activeMascot.level}
+             </div>
+           )}
         </div>
       </motion.div>
     </div>
