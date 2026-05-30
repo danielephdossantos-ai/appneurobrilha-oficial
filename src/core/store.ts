@@ -22,6 +22,9 @@ export interface Child {
   anamnesis_id?: string;
   anamnesis_edit_count?: number;
   sensory_mode: SensoryMode;
+  coins: number;
+  earned_today: number;
+  total_earned: number;
   perfil: {
     leitura: number;
     escrita: number;
@@ -165,7 +168,7 @@ export function useAppState() {
     mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
       const { error } = await supabase
         .from("children")
-        .update(patch)
+        .update(patch as any)
         .eq("id", id);
       
       if (error) throw error;
@@ -181,6 +184,19 @@ export function useAppState() {
       } else {
         toast.error("Erro ao atualizar dados");
       }
+    },
+  });
+
+  const addCoinsMutation = useMutation({
+    mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
+      const { error } = await (supabase as any).rpc('add_brilhocoins', { 
+        child_id: childId, 
+        amount: amount 
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["children"] });
     },
   });
 
@@ -205,6 +221,9 @@ export function useAppState() {
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
+    addCoins: (amount: number) => {
+      if (activeChild) addCoinsMutation.mutate({ childId: activeChild.id, amount });
+    },
     saveAnamnesis: async (anamnesis: Omit<AnamnesisData, "id" | "edit_count">) => {
       const { data: existing } = await supabase
         .from("child_anamnesis")
