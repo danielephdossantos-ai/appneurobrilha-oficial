@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { Heart, Users, Shield, Zap, Smile, BookOpen } from "lucide-react";
+import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
+import { useState } from "react";
+import { useAppState } from "@/core/store";
+import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
+import { ActivityContainer } from "@/components/activities/ActivityContainer";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
@@ -42,6 +47,77 @@ const categorias = [
 ];
 
 function BrilhaVida() {
+  const { activeChild } = useAppState();
+  const [activeActivity, setActiveActivity] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const startLevel = async (tipo: string) => {
+    if (!activeChild) return;
+    setIsLoading(true);
+    
+    // Simular atraso para feedback visual lúdico
+    setTimeout(() => {
+      try {
+        const gradeLevel = activeChild.serie ? parseInt(activeChild.serie) || 1 : 1;
+        const activity = InfiniteActivityEngine.generate({
+          childId: activeChild.id,
+          age: activeChild.idade || 6,
+          grade: gradeLevel,
+          neuroProfile: activeChild.diagnostico || "Tipico",
+          previousPerformance: 0.7,
+          adjustments: (activeChild as any).adjustments || {
+            visualComplexity: "medium",
+            stimuliReduction: false,
+            audioAdaptation: { volume: 0.8, pacing: "normal" },
+            positiveReinforcementFrequency: 0.5
+          }
+        });
+
+        // Forçar tipo socioemocional se o motor sorteou algo genérico
+        if (!["social-story", "emotion-match"].includes(activity.content.type)) {
+           const isStory = Math.random() > 0.5;
+           activity.content.type = isStory ? "social-story" : "emotion-match";
+        }
+
+        setActiveActivity(activity);
+      } catch (error) {
+        console.error("Erro ao gerar atividade Brilha Vida:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 800);
+  };
+
+  if (activeActivity) {
+    return (
+      <Shell>
+        <div className="relative">
+          <button 
+            onClick={() => setActiveActivity(null)}
+            className="absolute -top-12 right-0 p-2 bg-white rounded-full shadow-lg border-2 border-slate-100 text-slate-400 hover:text-destructive transition-colors z-50"
+          >
+            <X size={24} />
+          </button>
+          <ActivityContainer 
+            activity={{
+              ...activeActivity,
+              // Adaptar para o formato que o Container espera se necessário
+              type: activeActivity.content.type === "emotion-match" || activeActivity.content.type === "social-story" 
+                ? "multiple-choice" 
+                : "multiple-choice",
+              instruction: activeActivity.content.question,
+              title: activeActivity.content.title
+            }} 
+            onComplete={() => {
+              setTimeout(() => setActiveActivity(null), 2000);
+            }}
+            emotion={{ current: "happy" }}
+          />
+        </div>
+      </Shell>
+    );
+  }
+
   return (
     <Shell>
       <PageHeader 
@@ -49,6 +125,20 @@ function BrilhaVida() {
         title="Brilha Vida" 
         subtitle="Educação socioemocional e regulação para brilhar na vida" 
       />
+
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm"
+          >
+            <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
+            <h2 className="text-2xl font-black text-primary animate-pulse">Preparando sua missão...</h2>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <Card className="bg-gradient-to-br from-emerald/10 to-emerald/5 border-emerald/20 flex items-start gap-4">
@@ -84,6 +174,7 @@ function BrilhaVida() {
               {cat.atividades.map((atv) => (
                 <button 
                   key={atv}
+                  onClick={() => startLevel(atv)}
                   className={`group relative overflow-hidden text-left p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap`}
                 >
                   <div className="font-extrabold text-slate-800 text-lg mb-1">{atv}</div>
