@@ -7,33 +7,33 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_sel_1",
     name: "Seleção Simples",
     type: "selection",
-    bnccCodes: ["EF01MA01", "EF01MA02"],
+    bnccCodes: ["EF01MA01", "EF01MA02", "EF04MA01", "EF05MA01"],
     baseDifficulty: "easy",
     cognitiveLoad: 2,
     minAge: 4,
-    maxAge: 7,
+    maxAge: 12,
     logic: "Escolha um objeto alvo entre várias opções."
   },
   {
     id: "temp_seq_1",
     name: "Sequência Lógica",
     type: "sequence",
-    bnccCodes: ["EF02MA01", "EF01MA10"],
+    bnccCodes: ["EF02MA01", "EF01MA10", "EF03MA03", "EF06MA01"],
     baseDifficulty: "medium",
     cognitiveLoad: 4,
     minAge: 6,
-    maxAge: 9,
+    maxAge: 14,
     logic: "Ordenar itens de acordo com uma regra."
   },
   {
     id: "temp_comp_1",
     name: "Comparação de Quantidades",
     type: "selection",
-    bnccCodes: ["EF01MA01", "EF02MA03"],
+    bnccCodes: ["EF01MA01", "EF02MA03", "EF07MA01", "EF08MA01", "EF09MA01"],
     baseDifficulty: "easy",
     cognitiveLoad: 3,
     minAge: 4,
-    maxAge: 8,
+    maxAge: 16,
     logic: "Identificar onde há mais ou menos objetos."
   },
   {
@@ -53,24 +53,36 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_match_1",
     name: "Pareamento Palavra-Imagem",
     type: "matching",
-    bnccCodes: ["EF01LP02", "EF02LP04"],
+    bnccCodes: ["EF01LP02", "EF02LP04", "EI03EF09", "EF03LP01"],
     baseDifficulty: "easy",
     cognitiveLoad: 3,
-    minAge: 5,
-    maxAge: 8,
+    minAge: 4,
+    maxAge: 10,
     logic: "Ligar imagem ao nome ou som correspondente."
   },
   {
     id: "temp_syll_1",
     name: "Formação de Sílabas",
     type: "sequence",
-    bnccCodes: ["EF01LP06", "EF01LP08"],
+    bnccCodes: ["EF01LP06", "EF01LP08", "EF04LP01", "EF07LP01"],
     baseDifficulty: "medium",
     cognitiveLoad: 4,
     minAge: 5,
-    maxAge: 7,
+    maxAge: 13,
     logic: "Ordenar sílabas para formar o nome do objeto."
   },
+  {
+    id: "temp_interp_1",
+    name: "Interpretação Básica",
+    type: "selection",
+    bnccCodes: ["EF05LP01", "EF06LP01", "EF08LP01", "EF09LP01"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 6,
+    minAge: 9,
+    maxAge: 16,
+    logic: "Escolher a resposta correta sobre um tema ou imagem."
+  },
+
 
   // CIÊNCIAS
   {
