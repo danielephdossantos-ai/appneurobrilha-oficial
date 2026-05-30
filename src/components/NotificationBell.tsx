@@ -2,6 +2,7 @@
 import { Bell, Check, Clock, AlertTriangle, BookOpen, User } from "lucide-react";
 import { useNotifications, Notification } from "@/hooks/useNotifications";
 import { useState } from "react";
+import { CoinDisplay } from "./rewards/CoinDisplay";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,7 +22,8 @@ export function NotificationBell() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center gap-3">
+      <CoinDisplay className="hidden sm:flex" />
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 rounded-xl bg-muted/50 hover:bg-muted transition-colors btn-tap"

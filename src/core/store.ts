@@ -22,6 +22,9 @@ export interface Child {
   anamnesis_id?: string;
   anamnesis_edit_count?: number;
   sensory_mode: SensoryMode;
+  coins: number;
+  earned_today: number;
+  total_earned: number;
   perfil: {
     leitura: number;
     escrita: number;
@@ -184,6 +187,19 @@ export function useAppState() {
     },
   });
 
+  const addCoinsMutation = useMutation({
+    mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
+      const { error } = await supabase.rpc('add_brilhocoins', { 
+        child_id: childId, 
+        amount: amount 
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["children"] });
+    },
+  });
+
   const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
 
   const logout = async () => {
@@ -205,6 +221,9 @@ export function useAppState() {
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
+    addCoins: (amount: number) => {
+      if (activeChild) addCoinsMutation.mutate({ childId: activeChild.id, amount });
+    },
     saveAnamnesis: async (anamnesis: Omit<AnamnesisData, "id" | "edit_count">) => {
       const { data: existing } = await supabase
         .from("child_anamnesis")

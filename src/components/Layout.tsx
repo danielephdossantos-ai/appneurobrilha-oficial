@@ -14,6 +14,7 @@ import { KidCard } from "./ui/KidCard";
 import { KidButton } from "./ui/KidButton";
 import KidLiveMascot from "./ui/KidLiveMascot";
 import { useMascot } from "@/contexts/MascotContext";
+import { CoinDisplay } from "./rewards/CoinDisplay";
 
 function SidebarMascot() {
   const { activeMascot } = useMascot();
@@ -150,6 +151,10 @@ export function Shell({ children }: { children?: ReactNode }) {
           </KidCard>
         )}
 
+        <div className="px-2 mt-4">
+          <CoinDisplay className="w-full justify-center py-3 bg-yellow-400/5 border-yellow-400/20" />
+        </div>
+
         <div className="mt-2 flex justify-center">
           <SidebarMascot />
         </div>
@@ -205,6 +210,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
           
           <div className="flex items-center gap-3">
+            <CoinDisplay className="md:hidden" />
             <NotificationBell />
             {activeChild && (
               <div className="md:hidden text-sm flex items-center gap-1">
