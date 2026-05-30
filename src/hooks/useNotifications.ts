@@ -97,8 +97,12 @@ export function useNotifications() {
     if (!session?.user) return;
 
     const channelId = `notifications-${session.user.id}`;
+    console.log(`[REALTIME DEBUG] Iniciando canal: ${channelId}`);
+    console.trace(`[REALTIME TRACE] Chamada do componente useNotifications para canal: ${channelId}`);
+    
     const channel = supabase.channel(channelId);
     
+    console.log(`[REALTIME DEBUG] Adicionando listener 'postgres_changes' para canal: ${channelId}`);
     channel
       .on(
         'postgres_changes',
@@ -109,6 +113,7 @@ export function useNotifications() {
           filter: `user_id=eq.${session.user.id}`
         },
         (payload) => {
+          console.log(`[REALTIME DEBUG] Notificação recebida via canal ${channelId}:`, payload);
           const newNotif = payload.new as Notification;
           toast(newNotif.title, {
             description: newNotif.message,
@@ -119,10 +124,15 @@ export function useNotifications() {
           });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });
         }
-      )
-      .subscribe();
+      );
+
+    console.log(`[REALTIME DEBUG] Executando subscribe() para canal: ${channelId}`);
+    channel.subscribe((status) => {
+      console.log(`[REALTIME DEBUG] Status da inscrição para canal ${channelId}:`, status);
+    });
 
     return () => {
+      console.log(`[REALTIME DEBUG] Removendo canal: ${channelId}`);
       supabase.removeChannel(channel);
     };
   }, [session?.user, queryClient]);
