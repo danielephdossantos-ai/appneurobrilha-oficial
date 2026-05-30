@@ -4,8 +4,10 @@ import { TemplateEngine } from "./template-engine";
 import { RandomizerEngine } from "./randomizer-engine";
 import { DifficultyEngine } from "./difficulty-engine";
 import { CognitiveAdaptationEngine } from "./cognitive-adaptation-engine";
+import { PedagogicalValidationEngine } from "./validation-engine";
 import { GeneratedActivity } from "./types";
 import { NeuroAdjustment } from "../neuro-engine/types";
+
 
 export interface InfiniteEngineContext {
   childId: string;
