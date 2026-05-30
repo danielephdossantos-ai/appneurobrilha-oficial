@@ -655,7 +655,9 @@ export type Database = {
           diagnostico: string | null
           earned_today: number | null
           flags: Json | null
+          has_hyperfocus: boolean | null
           hiperfoco: string | null
+          hyperfocus_list: string[] | null
           id: string
           idade: number | null
           niveis: Json | null
@@ -679,7 +681,9 @@ export type Database = {
           diagnostico?: string | null
           earned_today?: number | null
           flags?: Json | null
+          has_hyperfocus?: boolean | null
           hiperfoco?: string | null
+          hyperfocus_list?: string[] | null
           id?: string
           idade?: number | null
           niveis?: Json | null
@@ -703,7 +707,9 @@ export type Database = {
           diagnostico?: string | null
           earned_today?: number | null
           flags?: Json | null
+          has_hyperfocus?: boolean | null
           hiperfoco?: string | null
+          hyperfocus_list?: string[] | null
           id?: string
           idade?: number | null
           niveis?: Json | null

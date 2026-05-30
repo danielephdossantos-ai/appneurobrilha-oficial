@@ -7,7 +7,8 @@ import { SensoryMode } from "@/engines/regulation-engine/sensory-engine";
 export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo" | "nenhum";
 export type Hiperfoco =
   | "animais" | "dinossauros" | "espaco" | "veiculos"
-  | "princesas" | "super-herois" | "robos" | "musica";
+  | "princesas" | "super-herois" | "robos" | "musica"
+  | "minecraft" | "carros" | "trens" | "arte" | "fazendinha" | "outros";
 
 export interface Child {
   id: string;
@@ -16,6 +17,8 @@ export interface Child {
   idade: number;
   serie: string;
   hiperfoco: Hiperfoco;
+  has_hyperfocus: boolean;
+  hyperfocus_list: Hiperfoco[];
   diagnostico: Diagnostico;
   avatar: string; // emoji
   anamnese_completa: boolean;
