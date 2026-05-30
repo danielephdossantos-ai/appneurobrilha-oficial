@@ -10,6 +10,7 @@ export interface Mascot {
   image_url: string;
   category: string;
   base_stats: any;
+  skins?: Record<string, string>;
 }
 
 export interface UserMascot {
