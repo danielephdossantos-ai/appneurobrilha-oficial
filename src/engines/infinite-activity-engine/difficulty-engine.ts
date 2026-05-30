@@ -3,7 +3,7 @@ import { Difficulty } from "../infinite-activity-engine/types";
 import { NeuroAdjustment } from "../neuro-engine/types";
 
 export class DifficultyEngine {
-  static calculateDifficulty(performance: number, adjustments: RealNeuroAdjustment): "easy" | "medium" | "hard" | "expert" {
+  static calculateDifficulty(performance: number, adjustments: NeuroAdjustment): "easy" | "medium" | "hard" | "expert" {
     // Basic logic: if performance is high, increase difficulty
     // If neuro adjustments indicate high support needed, decrease or stabilize difficulty
     
