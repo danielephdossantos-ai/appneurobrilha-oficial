@@ -9,7 +9,7 @@ export const Route = createFileRoute('/mascotes')({
 
 function MascotesPage() {
   return (
-    <Layout>
+    <Shell>
       <div className="container mx-auto py-8">
         <header className="mb-8 text-center px-4">
           <motion.h1 
@@ -39,6 +39,6 @@ function MascotesPage() {
           </p>
         </div>
       </div>
-    </Layout>
+    </Shell>
   );
 }
