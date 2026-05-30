@@ -186,9 +186,10 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
 
-          <div className="relative z-10 w-40 h-40 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+          <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
-              <KidLiveMascot size="lg" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
+              <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
+
             ) : mascot.image_url ? (
               <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
             ) : (
