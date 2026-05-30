@@ -3,26 +3,29 @@ import { useMascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
 import { useLocation } from '@tanstack/react-router';
+import { useAppState } from '@/core/store';
+import { PipPedagogicalSystem } from '@/engines/pedagogical-engine/PipPedagogicalSystem';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 
 export const MascotGlobalContainer: React.FC = () => {
   const { activeMascot, isLoading } = useMascot();
+  const { activeChild } = useAppState();
   const [isMinimized, setIsMinimized] = useState(false);
   const [currentMessage, setCurrentMessage] = useState<string | null>(null);
-  const [emotion, setEmotion] = useState<'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud'>('happy');
+  const [emotion, setEmotion] = useState<any>('happy');
   const location = useLocation();
 
   useEffect(() => {
-    // Reagir a mudanças de rota
+    if (!activeChild) return;
+
+    // Reagir a mudanças de rota com o PipPedagogicalSystem
     if (location.pathname === '/') {
       setCurrentMessage("Bem-vindo de volta! Vamos brilhar hoje?");
       setEmotion('happy');
-    } else if (location.pathname.includes('neuro')) {
-      setCurrentMessage("Hora de treinar seu super cérebro!");
-      setEmotion('thinking');
-    } else if (location.pathname.includes('escola')) {
-      setCurrentMessage("O que vamos aprender hoje?");
-      setEmotion('happy');
+    } else {
+      const guidance = PipPedagogicalSystem.getEncouragement(activeChild);
+      setCurrentMessage(guidance.text);
+      setEmotion(guidance.emotion);
     }
     
     const timer = setTimeout(() => setCurrentMessage(null), 5000);
