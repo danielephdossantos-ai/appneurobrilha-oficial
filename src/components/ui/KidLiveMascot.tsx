@@ -63,6 +63,10 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
       return skins[firstHyperfocus];
     }
 
+    if (firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
+      return PIP_SKINS[firstHyperfocus];
+    }
+
     return pipMascot;
   };
 
