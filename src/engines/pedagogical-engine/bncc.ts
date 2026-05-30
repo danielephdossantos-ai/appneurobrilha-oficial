@@ -3,7 +3,7 @@ export interface BNCCSkill {
   id: string;
   code: string; // e.g., EF01MA01
   description: string;
-  field: "lingua-portuguesa" | "matematica" | "ciencias" | "geografia" | "historia" | "artes" | "educacao-fisica" | "psicomotricidade";
+  field: "lingua-portuguesa" | "matematica" | "ciencias" | "geografia" | "historia" | "artes" | "educacao-fisica" | "psicomotricidade" | "socioemocional";
   level: number; // 0 (Preschool), 1 to 9 (year)
   domain?: "alfabetizacao" | "matematica" | "leitura" | "interpretacao" | "coordenacao" | "gramatica" | "algebra" | "geometria";
 }

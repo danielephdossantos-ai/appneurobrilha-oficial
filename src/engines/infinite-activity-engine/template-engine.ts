@@ -202,6 +202,30 @@ export const TEMPLATES: ActivityTemplate[] = [
     minAge: 3,
     maxAge: 6,
     logic: "Seguir a ordem lógica de cores para completar o colar."
+  },
+
+  // BRILHA VIDA (SOCIOEMOCIONAL)
+  {
+    id: "temp_bv_emo",
+    name: "Termômetro das Emoções",
+    type: "emotion-match",
+    bnccCodes: ["BV-EMO", "BV-AUT"],
+    baseDifficulty: "easy",
+    cognitiveLoad: 2,
+    minAge: 3,
+    maxAge: 12,
+    logic: "Associar o rosto ou situação ao sentimento correspondente."
+  },
+  {
+    id: "temp_bv_story",
+    name: "História Social Brilha",
+    type: "social-story",
+    bnccCodes: ["BV-EMP", "BV-CON"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 4,
+    minAge: 4,
+    maxAge: 14,
+    logic: "Escolher a melhor atitude para uma situação de convivência."
   }
 ];
 

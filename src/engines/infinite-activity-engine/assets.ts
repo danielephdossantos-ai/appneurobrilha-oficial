@@ -71,8 +71,24 @@ export const CHARACTERS = [
   { id: "char_5", name: "Pajé Curumim", role: "nature", personality: "wise" },
   { id: "char_6", name: "Cientista Ester", role: "science", personality: "smart" },
   { id: "char_7", name: "Pintora Tarsila", role: "arts", personality: "creative" },
-  { id: "char_8", name: "Dino Guia", role: "history", personality: "friendly" }
+  { id: "char_8", name: "Dino Guia", role: "history", personality: "friendly" },
+  { id: "char_9", name: "Ursinho Calma", role: "emocional", personality: "peaceful" }
 ];
+
+export const EMOTIONS = [
+  { id: "emo_happy", name: "Feliz", emoji: "😊", color: "text-sun" },
+  { id: "emo_sad", name: "Triste", emoji: "😢", color: "text-sky" },
+  { id: "emo_angry", name: "Bravo", emoji: "😠", color: "text-coral" },
+  { id: "emo_calm", name: "Calmo", emoji: "😌", color: "text-success" },
+  { id: "emo_fear", name: "Medo", emoji: "😨", color: "text-lilac" }
+];
+
+export const SOCIAL_SITUATIONS = [
+  { id: "sit_friend", title: "Dividindo o Brinquedo", context: "Você tem um carrinho e seu amigo quer brincar também.", options: ["Emprestar", "Esconder", "Gritar"], correct: "Emprestar" },
+  { id: "sit_help", title: "Amigo Triste", context: "Seu amigo caiu e está chorando.", options: ["Rir", "Ajudar a levantar", "Ignorar"], correct: "Ajudar a levantar" },
+  { id: "sit_wait", title: "Hora de Esperar", context: "Você quer muito falar, mas a professora está conversando.", options: ["Interromper", "Esperar a vez", "Sair de perto"], correct: "Esperar a vez" }
+];
+
 
 export const CREATIVE_ASSETS = {
   colors: ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FFF333", "#33FFF3"],

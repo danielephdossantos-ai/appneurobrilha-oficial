@@ -1,6 +1,6 @@
 
 import { Difficulty, ActivityTemplate } from "./types";
-import { OBJECTS, SCENARIOS, CHARACTERS, CREATIVE_ASSETS } from "./assets";
+import { OBJECTS, SCENARIOS, CHARACTERS, CREATIVE_ASSETS, EMOTIONS, SOCIAL_SITUATIONS } from "./assets";
 import { DifficultyEngine } from "./difficulty-engine";
 
 export class RandomizerEngine {
@@ -20,10 +20,54 @@ export class RandomizerEngine {
         return this.generateSorting(itemsCount, scenario, character);
       case "creative":
         return this.generateCreative(itemsCount, scenario, character);
+      case "emotion-match":
+        return this.generateEmotionMatch(itemsCount, scenario, character);
+      case "social-story":
+        return this.generateSocialStory(itemsCount, scenario, character);
       default:
         return this.generateSelection(itemsCount, scenario, character);
     }
   }
+
+  private static generateEmotionMatch(count: number, scenario: any, character: any) {
+    const targetEmotion = this.getRandomItem(EMOTIONS);
+    const otherEmotions = EMOTIONS.filter(e => e.id !== targetEmotion.id);
+    const options = this.shuffle([targetEmotion, ...this.shuffle(otherEmotions).slice(0, count - 1)]);
+
+    return {
+      type: "emotion-match",
+      scenario: scenario.id,
+      character: character.id,
+      title: "Brilha Vida: Emoções",
+      question: `O ${character.name} está se sentindo ${targetEmotion.name}. Qual emoji combina com o que ele sente?`,
+      targetId: targetEmotion.id,
+      options: options.map(e => ({
+        id: e.id,
+        content: e.emoji,
+        type: "text",
+        isCorrect: e.id === targetEmotion.id
+      }))
+    };
+  }
+
+  private static generateSocialStory(count: number, scenario: any, character: any) {
+    const situation = this.getRandomItem(SOCIAL_SITUATIONS);
+    
+    return {
+      type: "social-story",
+      scenario: scenario.id,
+      character: character.id,
+      title: "Brilha Vida: Convivência",
+      question: `${situation.title}: ${situation.context} Qual a melhor coisa a fazer?`,
+      options: situation.options.map(opt => ({
+        id: opt,
+        content: opt,
+        type: "text",
+        isCorrect: opt === situation.correct
+      }))
+    };
+  }
+
 
   private static generateCreative(count: number, scenario: any, character: any) {
     const shapes = this.shuffle([...CREATIVE_ASSETS.shapes]).slice(0, 3);
