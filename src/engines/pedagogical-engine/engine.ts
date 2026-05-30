@@ -16,19 +16,11 @@ export interface PedagogicalContext {
 export class ActivityEngine {
   private static usedContentIds: Set<string> = new Set();
 
-
   static generateActivity(context: PedagogicalContext): PedagogicalActivity {
-    console.log(`[PedagogicalEngine] Iniciando geração para: ${context.childId}`, context);
+    console.log(`[PedagogicalEngine] Iniciando geração INFINITA para: ${context.childId}`, context);
     
     try {
-      // 1. Filtrar Habilidades BNCC por Série
-      const suitableSkills = BNCC_SKILLS.filter(s => s.level === context.grade);
-      if (suitableSkills.length === 0) throw new Error("Nenhuma habilidade BNCC encontrada para esta série.");
-
-      // 2. Selecionar Habilidade
-      const skill = suitableSkills[0];
-
-      // 3. Ajustar Perfil Neuroadaptativo
+      // 1. Obter Ajustes Neuroadaptativos
       const { adjustment: adjustments } = NeuroAdaptiveCore.processState({
         profile: context.neuroProfile as NeuroProfile,
         attention: {
@@ -60,58 +52,39 @@ export class ActivityEngine {
         timestamp: Date.now(),
       });
 
+      // 2. Chamar Motor Infinito (Offline & Baseado em Regras)
+      const infiniteActivity = InfiniteActivityEngine.generate({
+        ...context,
+        adjustments
+      });
 
-      // 4. Buscar Template Compatível
-      const template = this.findTemplate(skill.code, context.age);
-
-      // 5. Construir Atividade Final
+      // 3. Mapear para o schema legado (PedagogicalActivity) para manter compatibilidade
       const activityData: PedagogicalActivity = {
-        id: `act_${Date.now()}_${context.childId}`,
-        category: skill.field,
-        habilidadeBNCC: skill.code,
-        objetivo: skill.description,
+        id: infiniteActivity.id,
+        category: "Geral", // Pode ser refinado
+        habilidadeBNCC: infiniteActivity.bnccCode,
+        objetivo: "Atividade gerada estruturalmente",
         idadeMinima: context.age - 1,
         idadeMaxima: context.age + 1,
-        dificuldade: this.calculateDifficulty(context.previousPerformance, adjustments),
+        dificuldade: infiniteActivity.difficulty,
         pesoCognitivo: 5,
         tipoSensorial: adjustments.visualComplexity === "low" ? "visual" : "mixed",
-        recompensa: {
-          stars: 10,
-          coins: 20,
-          energy: 5
-        },
-        content: {
-          question: `Vamos praticar ${skill.description}?`,
-          options: [
-            { id: "1", content: "Opção A", type: "text", isCorrect: true },
-            { id: "2", content: "Opção B", type: "text", isCorrect: false }
-          ]
-        },
-        fallback: this.FALLBACK_ID
+        recompensa: infiniteActivity.reward,
+        content: infiniteActivity.content,
+        fallback: "fallback-default"
       };
 
-      // 6. Validação Forte
+      // 4. Validação
       const validatedActivity = PedagogicalActivitySchema.parse(activityData);
       
-      this.logPedagogicalAction(context.childId, "activity_generated", validatedActivity.id);
+      this.logPedagogicalAction(context.childId, "infinite_activity_generated", validatedActivity.id);
       
       return validatedActivity;
 
     } catch (error) {
-      console.error("[PedagogicalEngine] Falha na geração:", error);
+      console.error("[PedagogicalEngine] Falha na geração infinita:", error);
       return this.getFallbackActivity();
     }
-  }
-
-  private static findTemplate(bnccCode: string, age: number) {
-     return Object.values(PEDAGOGICAL_TEMPLATES).find(t => 
-       t.habilidadeBNCC === bnccCode && age >= (t.idadeMinima || 0)
-     ) || PEDAGOGICAL_TEMPLATES["MAT_CONTAGEM_B"];
-  }
-
-  private static calculateDifficulty(performance: number, adjustments: NeuroAdjustment): "easy" | "medium" | "hard" | "expert" {
-    if (performance > 0.8) return "medium";
-    return "easy";
   }
 
   private static logPedagogicalAction(childId: string, action: string, metadata: any) {
@@ -120,7 +93,7 @@ export class ActivityEngine {
 
   private static getFallbackActivity(): PedagogicalActivity {
     return {
-      id: this.FALLBACK_ID,
+      id: "fallback-default",
       category: "Geral",
       habilidadeBNCC: "FALLBACK",
       objetivo: "Manter o engajamento",
@@ -135,21 +108,20 @@ export class ActivityEngine {
       }
     };
   }
-  private static readonly FALLBACK_ID = "fallback-default";
 
   static gerarAtividade(
     templateId?: string, 
     analysis?: any,
     preferredType?: string
   ): any {
-    // Compatibilidade temporária para não quebrar o dashboard
     return this.generateActivity({
         childId: "anonymous",
         age: 6,
         grade: 1,
-        neuroProfile: "Neurotipico",
-        previousPerformance: 1
+        neuroProfile: "Tipico",
+        previousPerformance: 0.7
     });
   }
 }
+
 
