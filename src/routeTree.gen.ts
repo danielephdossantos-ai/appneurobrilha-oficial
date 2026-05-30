@@ -16,6 +16,7 @@ import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
+import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
@@ -63,6 +64,11 @@ const PainelPaisRoute = PainelPaisRouteImport.update({
 const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
   id: '/neuro-treino',
   path: '/neuro-treino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoProvaRoute = MissaoProvaRouteImport.update({
+  id: '/missao-prova',
+  path: '/missao-prova',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Jornada365Route = Jornada365RouteImport.update({
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
+  '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
+  '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
+  '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
@@ -213,6 +222,7 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
+    | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
     | '/progressao'
@@ -235,6 +245,7 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
+    | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
     | '/progressao'
@@ -257,6 +268,7 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
+    | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
     | '/progressao'
@@ -280,6 +292,7 @@ export interface RootRouteChildren {
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
+  MissaoProvaRoute: typeof MissaoProvaRoute
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
   ProgressaoRoute: typeof ProgressaoRoute
@@ -340,6 +353,13 @@ declare module '@tanstack/react-router' {
       path: '/neuro-treino'
       fullPath: '/neuro-treino'
       preLoaderRoute: typeof NeuroTreinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-prova': {
+      id: '/missao-prova'
+      path: '/missao-prova'
+      fullPath: '/missao-prova'
+      preLoaderRoute: typeof MissaoProvaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jornada-365': {
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
+  MissaoProvaRoute: MissaoProvaRoute,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
   ProgressaoRoute: ProgressaoRoute,

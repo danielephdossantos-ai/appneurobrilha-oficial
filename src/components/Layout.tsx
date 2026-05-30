@@ -4,7 +4,8 @@ import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck
+  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck,
+  Target
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/database/supabase/client";
@@ -16,6 +17,7 @@ import KidLiveMascot from "./ui/KidLiveMascot";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
+  { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
@@ -37,6 +39,7 @@ const navPais = [
 
 const navigationSequence = [
   "/",
+  "/missao-prova",
   "/historias",
   "/escola-brilha",
   "/reforco-brilha",
