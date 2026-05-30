@@ -74,4 +74,12 @@ export const CHARACTERS = [
   { id: "char_8", name: "Dino Guia", role: "history", personality: "friendly" }
 ];
 
+export const CREATIVE_ASSETS = {
+  colors: ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FFF333", "#33FFF3"],
+  shapes: ["square", "circle", "triangle", "star", "diamond"],
+  patterns: ["dots", "stripes", "grid", "zigzag"],
+  textures: ["silk", "wool", "cotton", "denim"]
+};
+
+
 
