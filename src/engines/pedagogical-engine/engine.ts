@@ -1,10 +1,9 @@
 
 import { PedagogicalActivity, PedagogicalActivitySchema } from "./validation/schemas";
-import { BNCC_SKILLS } from "./bncc";
 import { NeuroAdaptiveCore } from "@/engines/neuro-engine/core";
 import { NeuroProfile, NeuroAdjustment } from "@/engines/neuro-engine/types";
+import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 
-import { PEDAGOGICAL_TEMPLATES } from "./templates/activity_templates";
 
 export interface PedagogicalContext {
   childId: string;
