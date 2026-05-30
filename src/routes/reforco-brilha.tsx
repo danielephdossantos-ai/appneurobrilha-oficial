@@ -2,8 +2,8 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
-import { useState, useEffect } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar } from "lucide-react";
+import { useState, useEffect, Component, ReactNode } from "react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
@@ -17,8 +17,35 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 
+class ReforcoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error: Error) { return { hasError: true, error }; }
+  componentDidCatch(error: Error, errorInfo: any) { console.error("ReforcoErrorBoundary:", error, errorInfo); }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Shell>
+          <div className="flex flex-col items-center justify-center p-8 text-center bg-destructive/5 rounded-3xl border-2 border-dashed border-destructive/20">
+            <AlertCircle className="h-16 w-16 text-destructive mb-4" />
+            <h2 className="text-2xl font-bold text-destructive">Erro no Reforço Brilha</h2>
+            <p className="text-muted-foreground mt-2 mb-6"><b>Erro:</b> {this.state.error?.message}</p>
+          </div>
+        </Shell>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export const Route = createFileRoute("/reforco-brilha")({
-  component: ReforcoBrilha,
+  component: () => (
+    <ReforcoErrorBoundary>
+      <ReforcoBrilha />
+    </ReforcoErrorBoundary>
+  ),
 });
 
 const CATEGORIAS = [
@@ -191,7 +218,7 @@ function ReforcoBrilha() {
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              A mãe escreve o tema e a IA do Reforço Brilha cria a aula perfeita.
+              A mãe escreve o tema e o Sistema Brilha cria a aula perfeita.
             </p>
             </Card>
 
@@ -343,7 +370,7 @@ function ReforcoBrilha() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Professor Particular IA</span>
+                      <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">SISTEMA INFINITO</span>
                       <Pill tone="success" className="text-[10px] font-black">SISTEMA BNCC ATIVO</Pill>
                     </div>
                     <h2 className="text-3xl font-black text-foreground leading-none">{lessonContent.title}</h2>

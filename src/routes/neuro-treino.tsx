@@ -1,8 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
+import { Component, ReactNode } from "react";
+import { AlertCircle } from "lucide-react";
+
+class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error: Error) { return { hasError: true, error }; }
+  componentDidCatch(error: Error, errorInfo: any) { console.error("NeuroTreinoErrorBoundary:", error, errorInfo); }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Shell>
+          <div className="flex flex-col items-center justify-center p-8 text-center bg-destructive/5 rounded-3xl border-2 border-dashed border-destructive/20">
+            <AlertCircle className="h-16 w-16 text-destructive mb-4" />
+            <h2 className="text-2xl font-bold text-destructive">Erro no Neuro-Treino</h2>
+            <p className="text-muted-foreground mt-2 mb-6"><b>Erro:</b> {this.state.error?.message}</p>
+          </div>
+        </Shell>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export const Route = createFileRoute("/neuro-treino")({
-  component: Treino,
+  component: () => (
+    <NeuroTreinoErrorBoundary>
+      <Treino />
+    </NeuroTreinoErrorBoundary>
+  ),
 });
 
 const grupos = [
