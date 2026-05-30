@@ -4,6 +4,7 @@ import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
 import { motion } from 'framer-motion';
 import { Star, Heart, Zap } from 'lucide-react';
+import pipMascot from '@/assets/pip-mascot.png';
 
 export const MascotInventory: React.FC = () => {
   const { userMascots, activeMascot, setActiveMascot, isLoading } = useMascot();
