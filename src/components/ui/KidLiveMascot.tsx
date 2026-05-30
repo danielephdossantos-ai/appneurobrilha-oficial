@@ -4,6 +4,35 @@ import { cn } from '@/utils/utils';
 import { useAppState } from '@/core/store';
 import { useMascot } from '@/contexts/MascotContext';
 import pipMascot from '@/assets/pip-mascot.png';
+import pipDinossauros from '@/assets/pip-dinossauros.png';
+import pipEspaco from '@/assets/pip-espaco.png';
+import pipArte from '@/assets/pip-arte.png';
+import pipAnimais from '@/assets/pip-animais.png';
+import pipMusica from '@/assets/pip-musica.png';
+import pipFazendinha from '@/assets/pip-fazendinha.png';
+import pipSuperHerois from '@/assets/pip-super-herois.png';
+import pipPrincesas from '@/assets/pip-princesas.png';
+import pipMinecraft from '@/assets/pip-minecraft.png';
+import pipCarros from '@/assets/pip-carros.png';
+import pipTrens from '@/assets/pip-trens.png';
+import pipRobos from '@/assets/pip-robos.png';
+import pipVeiculos from '@/assets/pip-veiculos.png';
+
+export const PIP_SKINS: Record<string, string> = {
+  dinossauros: pipDinossauros,
+  espaco: pipEspaco,
+  arte: pipArte,
+  animais: pipAnimais,
+  musica: pipMusica,
+  fazendinha: pipFazendinha,
+  'super-herois': pipSuperHerois,
+  princesas: pipPrincesas,
+  minecraft: pipMinecraft,
+  carros: pipCarros,
+  trens: pipTrens,
+  robos: pipRobos,
+  veiculos: pipVeiculos,
+};
 import { Award, Puzzle } from 'lucide-react';
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'waving' | 'blinking';
