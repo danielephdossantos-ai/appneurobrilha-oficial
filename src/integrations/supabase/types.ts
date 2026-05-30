@@ -965,6 +965,117 @@ export type Database = {
           },
         ]
       }
+      exam_mission_contents: {
+        Row: {
+          bncc_code: string | null
+          completed: boolean
+          content_title: string
+          created_at: string
+          id: string
+          mission_id: string
+        }
+        Insert: {
+          bncc_code?: string | null
+          completed?: boolean
+          content_title: string
+          created_at?: string
+          id?: string
+          mission_id: string
+        }
+        Update: {
+          bncc_code?: string | null
+          completed?: boolean
+          content_title?: string
+          created_at?: string
+          id?: string
+          mission_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_mission_contents_mission_id_fkey"
+            columns: ["mission_id"]
+            isOneToOne: false
+            referencedRelation: "exam_missions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_missions: {
+        Row: {
+          child_id: string
+          created_at: string
+          exam_date: string
+          id: string
+          notes: string | null
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          exam_date: string
+          id?: string
+          notes?: string | null
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          exam_date?: string
+          id?: string
+          notes?: string | null
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_missions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_study_plans: {
+        Row: {
+          completed: boolean
+          created_at: string
+          description: string | null
+          id: string
+          mission_id: string
+          scheduled_date: string
+          title: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          mission_id: string
+          scheduled_date: string
+          title: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          mission_id?: string
+          scheduled_date?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_study_plans_mission_id_fkey"
+            columns: ["mission_id"]
+            isOneToOne: false
+            referencedRelation: "exam_missions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fatigue_metrics: {
         Row: {
           error_rate_spike: boolean | null
