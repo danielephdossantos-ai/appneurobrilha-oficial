@@ -59,9 +59,9 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
   const executiveData = React.useMemo(() => {
     if (!data) return [];
     return [
-      { name: 'Controle Inibitório', score: data.executiveFunctions.inhibitoryControl },
-      { name: 'Memória de Trabalho', score: data.executiveFunctions.workingMemory },
-      { name: 'Flexibilidade', score: data.executiveFunctions.cognitiveFlexibility },
+      { name: 'Controle Inibitório', score: data.cognitiveRadar.inhibitory_control },
+      { name: 'Memória de Trabalho', score: data.cognitiveRadar.working_memory },
+      { name: 'Flexibilidade', score: data.cognitiveRadar.cognitive_flexibility },
     ];
   }, [data]);
 
@@ -87,24 +87,56 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
         </div>
       </div>
 
+      {/* Resumo de Tendências */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <MemoCard className="bg-white">
+          <MemoCardContent className="pt-4">
+            <p className="text-xs text-slate-500 uppercase font-bold">Melhoria Geral</p>
+            <p className="text-2xl font-bold text-green-600">+{data.trends.improvement}%</p>
+          </MemoCardContent>
+        </MemoCard>
+        <MemoCard className="bg-white">
+          <MemoCardContent className="pt-4">
+            <p className="text-xs text-slate-500 uppercase font-bold">Pico de Foco</p>
+            <p className="text-lg font-bold text-slate-800">{data.trends.peak_performance_hour}</p>
+          </MemoCardContent>
+        </MemoCard>
+        <MemoCard className="bg-white md:col-span-2">
+          <MemoCardContent className="pt-4">
+            <p className="text-xs text-slate-500 uppercase font-bold">Principal Gargalo</p>
+            <p className="text-lg font-bold text-amber-600">{data.trends.main_bottleneck}</p>
+          </MemoCardContent>
+        </MemoCard>
+      </div>
+
       {/* Insights Automáticos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {insights.map((insight) => (
           <MemoCard key={insight.id} className={`border-l-4 ${
             insight.type === 'positive' ? 'border-l-green-500' : 
-            insight.type === 'warning' ? 'border-l-amber-500' : 'border-l-blue-500'
+            insight.type === 'warning' ? 'border-l-amber-500' : 
+            insight.type === 'alert' ? 'border-l-red-500' : 'border-l-blue-500'
           }`}>
             <MemoCardContent className="pt-4 flex gap-3">
               <div className={`p-2 rounded-full h-fit ${
                 insight.type === 'positive' ? 'bg-green-100 text-green-600' : 
-                insight.type === 'warning' ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'
+                insight.type === 'warning' ? 'bg-amber-100 text-amber-600' : 
+                insight.type === 'alert' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'
               }`}>
                 {insight.type === 'positive' ? <TrendingUp size={18} /> : 
-                 insight.type === 'warning' ? <AlertCircle size={18} /> : <Brain size={18} />}
+                 insight.type === 'warning' || insight.type === 'alert' ? <AlertCircle size={18} /> : <Brain size={18} />}
               </div>
               <div>
                 <p className="text-sm font-medium text-slate-700">{insight.message}</p>
-                <p className="text-xs text-slate-400 mt-1 capitalize">{insight.category} • agora</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase font-bold ${
+                    insight.severity === 'high' ? 'bg-red-100 text-red-600' :
+                    insight.severity === 'medium' ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-600'
+                  }`}>
+                    {insight.severity}
+                  </span>
+                  <p className="text-xs text-slate-400 capitalize">{insight.category}</p>
+                </div>
               </div>
             </MemoCardContent>
           </MemoCard>
@@ -248,9 +280,9 @@ export const NeuroAnalyticsDashboard: React.FC<NeuroAnalyticsDashboardProps> = (
           <MemoCardContent>
             <div className="space-y-4">
               {data.bnccProgress.map((item) => (
-                <div key={item.competence} className="space-y-1">
+                <div key={item.code} className="space-y-1">
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-700 font-medium">{item.competence}</span>
+                    <span className="text-slate-700 font-medium">{item.name}</span>
                     <span className="text-slate-500">{item.progress}%</span>
                   </div>
                   <div className="w-full bg-slate-100 rounded-full h-2">

@@ -1,5 +1,5 @@
 import { NeuroAnalyticsEvent, EvolutionData, Insight } from "../types";
-import { AnalyticsEngine } from "../../engines/analytics/AnalyticsEngine";
+import { AnalyticsEngine } from "../../../engines/analytics/AnalyticsEngine";
 
 export class NeuroAnalyticsService {
   static async logEvent(event: Omit<NeuroAnalyticsEvent, "id" | "created_at" | "timestamp">): Promise<void> {
