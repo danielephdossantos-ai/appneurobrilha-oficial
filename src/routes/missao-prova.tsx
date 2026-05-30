@@ -1,7 +1,9 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
+import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { useState, useEffect } from "react";
+
 import { 
   Target, 
   Sparkles, 
@@ -108,9 +110,16 @@ function MissaoProva() {
               <p className="font-bold animate-pulse">O Professor Brilha está preparando sua missão de estudo...</p>
             </div>
           ) : (
-            <div className="space-y-6">
-               <Card className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none p-8">
-                <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <div className="lg:col-span-3 space-y-6">
+                  <Card className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white border-none p-8 relative overflow-hidden">
+                    {/* Pip Commander Overlay */}
+                    <div className="absolute top-0 right-0 p-4 opacity-20 pointer-events-none">
+                      <KidLiveMascot size="lg" emotion="excited" showBadge={false} />
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row md:items-center gap-6 relative z-10">
+
                   <div className="h-20 w-20 rounded-2xl bg-white/20 backdrop-blur-md grid place-items-center text-4xl shadow-xl">
                     🚀
                   </div>
@@ -149,9 +158,26 @@ function MissaoProva() {
                   >
                     CONCLUÍDO! <CheckCircle2 className="h-6 w-6" />
                   </button>
+                  </Card>
                 </div>
-              </Card>
-            </div>
+
+                <div className="lg:col-span-1">
+                  <div className="sticky top-24 space-y-4">
+                    <KidCard className="p-6 border-indigo-200 bg-indigo-50/50">
+                      <KidLiveMascot 
+                        emotion="happy" 
+                        size="md" 
+                        message="Você consegue! Estou aqui para te ajudar a brilhar nessa prova!" 
+                      />
+                    </KidCard>
+                    <div className="p-4 rounded-2xl bg-white border-2 border-indigo-100 shadow-soft">
+                      <h4 className="font-black text-indigo-600 uppercase tracking-widest text-[10px] mb-2">Comando do Pip</h4>
+                      <p className="text-xs text-slate-500 italic">"Foque nos passos e respire fundo. O conhecimento é como um quebra-cabeça, vamos montar peça por peça!"</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
           )}
         </div>
       </Shell>

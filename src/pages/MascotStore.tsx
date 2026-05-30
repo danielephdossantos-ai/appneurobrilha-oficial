@@ -7,7 +7,9 @@ import { KidButton } from '@/components/ui/KidButton';
 import { ShoppingBag, Lock, Star, Search, Heart, Sparkles, ChevronRight } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
+import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
+
 
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
@@ -186,13 +188,14 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
 
           <div className="relative z-10 w-40 h-40 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
-              <img src={pipMascot} alt="Pip" className="w-full h-full object-contain drop-shadow-2xl" />
+              <KidLiveMascot size="lg" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
             ) : mascot.image_url ? (
               <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
             ) : (
               <span className="text-7xl">🧩</span>
             )}
           </div>
+
 
           <div className={cn(
             "absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest shadow-lg",

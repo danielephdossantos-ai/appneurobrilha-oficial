@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus } from "lucide-react";
+import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star } from "lucide-react";
+import KidLiveMascot from "@/components/ui/KidLiveMascot";
+
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
@@ -31,7 +33,40 @@ function Index() {
         subtitle="Sua jornada neuro-divertida começa aqui."
       />
 
+      <div className="flex flex-col lg:flex-row items-center gap-8 mb-12 bg-white/40 p-8 rounded-[3rem] border-2 border-primary/10 shadow-soft">
+        <div className="flex-shrink-0">
+          <KidLiveMascot 
+            size="xl" 
+            emotion="waving" 
+            message={`Olá, ${activeChild?.nome}! Pronto para brilhar hoje?`}
+          />
+        </div>
+        <div className="flex-1 text-center lg:text-left space-y-4">
+          <div className="inline-flex items-center gap-2 bg-sun/20 px-4 py-1.5 rounded-full text-primary font-black uppercase tracking-widest text-[10px] border border-sun/50">
+            <Star className="w-3 h-3 fill-sun" />
+            Mascote Oficial Ativo
+          </div>
+          <h2 className="text-3xl md:text-4xl font-black text-primary leading-tight">
+            Sou o Pip, seu Guia na Jornada NeuroBrilha!
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl">
+            Juntos vamos descobrir novos mundos, resolver desafios incríveis e aprender de um jeito super divertido.
+          </p>
+          <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+             <Pill tone="info" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Curioso</Pill>
+             <Pill tone="success" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Amigável</Pill>
+             <Pill tone="warning" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Inteligente</Pill>
+          </div>
+        </div>
+      </div>
+
+      <h2 className="text-2xl font-black mb-6 uppercase tracking-widest text-foreground/60 flex items-center gap-3">
+        <Sparkles size={24} className="text-sun" />
+        Quem vai brilhar hoje?
+      </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
         {allChildren.map((c: any) => (
           <button
             key={c.id}
