@@ -13,6 +13,7 @@ import { ShieldCheck, ShieldAlert, PieChart } from 'lucide-react';
 export const InfiniteActivityShowcase = () => {
   const [activity, setActivity] = useState<any>(null);
   const [sessionCount, setSessionCount] = useState(0);
+  const [validationStats, setValidationStats] = useState<any>(null);
 
   const generate = () => {
     const newActivity = InfiniteActivityEngine.generate({
@@ -35,6 +36,7 @@ export const InfiniteActivityShowcase = () => {
     });
     setActivity(newActivity);
     setSessionCount(prev => prev + 1);
+    setValidationStats(PedagogicalValidationEngine.getStats());
   };
 
   useEffect(() => {
@@ -42,6 +44,7 @@ export const InfiniteActivityShowcase = () => {
   }, []);
 
   if (!activity) return null;
+
 
   return (
     <div className="space-y-6">
