@@ -69,7 +69,7 @@ export class ActivityEngine {
         dificuldade: infiniteActivity.difficulty,
         pesoCognitivo: 5,
         tipoSensorial: adjustments.visualComplexity === "low" ? "visual" : "mixed",
-        recompensa: infiniteActivity.reward,
+        recompensa: { ...infiniteActivity.reward, energy: 5 },
         content: infiniteActivity.content,
         fallback: "fallback-default"
       };
