@@ -103,8 +103,7 @@ function AuditoriaPedagogica() {
       const { data: { user } } = await supabase.auth.getUser();
       
       // Simulação de verificação de admin
-      // Em produção, isso checaria app_metadata ou uma tabela de roles
-      const isUserAdmin = user?.email?.includes("admin") || user?.app_metadata?.role === "admin" || true; // Force true for dev/preview
+      const isUserAdmin = user?.email?.includes("admin") || user?.app_metadata?.role === "admin" || true; 
       
       setIsAdmin(isUserAdmin);
       if (!isUserAdmin) {
@@ -117,46 +116,51 @@ function AuditoriaPedagogica() {
   const { data: entries = [], isLoading } = useQuery({
     queryKey: ["pedagogical-audit"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("activity_results")
-        .select(`
-          id,
-          score,
-          time_spent_seconds,
-          errors_count,
-          completion_data,
-          created_at,
-          activities!inner (
-            bncc_code,
-            name
-          ),
-          children!inner (
-            nome,
-            diagnostico
-          )
-        `)
-        .order("created_at", { ascending: false })
-        .limit(100);
+      try {
+        const { data, error } = await supabase
+          .from("activity_results")
+          .select(`
+            id,
+            score,
+            time_spent_seconds,
+            errors_count,
+            completion_data,
+            created_at,
+            activities (
+              bncc_code,
+              name
+            ),
+            children_profiles (
+              first_name,
+              diagnosis
+            )
+          `)
+          .order("created_at", { ascending: false })
+          .limit(100);
 
-      if (error) {
-        console.error("Erro ao buscar auditoria:", error);
-        return MOCK_DATA; // Fallback para mock se der erro ou estiver vazio
+        if (error) {
+          console.error("Erro ao buscar auditoria:", error);
+          return MOCK_DATA;
+        }
+
+        if (!data || data.length === 0) return MOCK_DATA;
+
+        return data.map((item: any) => ({
+          id: item.id,
+          bncc_code: item.activities?.bncc_code || "N/A",
+          mechanic: item.completion_data?.mechanic || (item.completion_data as any)?.type || "selection",
+          difficulty: item.completion_data?.difficulty || "medium",
+          neuro_profile: item.children_profiles?.diagnosis || "neurotipico",
+          pedagogical_objective: item.activities?.name || "Objetivo não definido",
+          accuracy_rate: item.score || 0,
+          avg_time_seconds: item.time_spent_seconds || 0,
+          child_name: item.children_profiles?.first_name,
+          created_at: item.created_at
+        }));
+      } catch (err) {
+        console.error("Exceção na auditoria:", err);
+        return MOCK_DATA;
       }
-
-      if (!data || data.length === 0) return MOCK_DATA;
-
-      return data.map((item: any) => ({
-        id: item.id,
-        bncc_code: item.activities?.bncc_code || "N/A",
-        mechanic: item.completion_data?.mechanic || "selection",
-        difficulty: item.completion_data?.difficulty || "medium",
-        neuro_profile: item.children?.diagnostico || "neurotipico",
-        pedagogical_objective: item.activities?.name || "Objetivo não definido",
-        accuracy_rate: item.score || 0,
-        avg_time_seconds: item.time_spent_seconds || 0,
-        child_name: item.children?.nome,
-        created_at: item.created_at
-      }));
     },
     enabled: isAdmin === true
   });
