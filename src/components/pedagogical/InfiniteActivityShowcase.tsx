@@ -1,10 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { InfiniteActivityEngine } from '@/engines/infinite-activity-engine';
+import { PedagogicalValidationEngine } from '@/engines/infinite-activity-engine/validation-engine';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { ShieldCheck, ShieldAlert, PieChart } from 'lucide-react';
+
 
 export const InfiniteActivityShowcase = () => {
   const [activity, setActivity] = useState<any>(null);
