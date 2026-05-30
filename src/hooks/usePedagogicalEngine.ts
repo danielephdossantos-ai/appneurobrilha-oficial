@@ -21,8 +21,12 @@ export function usePedagogicalEngine() {
   }, [activeChild, neuroAdaptive]);
 
   const legacyCompatibility = useMemo(() => {
-    const adj = neuroAdaptive.adjustment;
-    // Fallback para garantir que nunca seja null para o TS
+    const adj = neuroAdaptive?.adjustment;
+    
+    if (!adj) {
+      console.warn("[usePedagogicalEngine] neuroAdaptive.adjustment is missing, using fallback.");
+    }
+
 
 
     // Mapeamento completo para compatibilidade com o sistema antigo
