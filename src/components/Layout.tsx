@@ -21,16 +21,16 @@ function SidebarMascot() {
   if (!activeMascot) return <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />;
 
   return (
-    <div className="relative group cursor-pointer" onClick={() => window.location.href = '/mascotes'}>
+    <Link to="/mascotes" className="relative group cursor-pointer">
       <KidLiveMascot 
         emotion="happy" 
         size="sm" 
         className="scale-75 -my-4 transition-transform group-hover:scale-90" 
       />
-      <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white">
+      <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white shadow-sm">
         LV {activeMascot.level}
       </div>
-    </div>
+    </Link>
   );
 }
 
