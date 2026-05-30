@@ -114,11 +114,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
-        <div className="relative min-h-screen">
-          <Outlet />
-          <LGPDConsent />
-          <ConnectivityStatus />
-        </div>
+        <MascotProvider>
+          <div className="relative min-h-screen">
+            <Outlet />
+            <LGPDConsent />
+            <ConnectivityStatus />
+            <MascotGlobalContainer />
+          </div>
+        </MascotProvider>
       </AuthGuard>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
@@ -132,6 +135,8 @@ import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { ConnectivityStatus } from "@/components/ConnectivityStatus";
+import { MascotProvider } from "@/contexts/MascotContext";
+import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);

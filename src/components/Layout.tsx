@@ -13,10 +13,31 @@ import { NotificationBell } from "./NotificationBell";
 import { KidCard } from "./ui/KidCard";
 import { KidButton } from "./ui/KidButton";
 import KidLiveMascot from "./ui/KidLiveMascot";
+import { useMascot } from "@/contexts/MascotContext";
+
+function SidebarMascot() {
+  const { activeMascot } = useMascot();
+  
+  if (!activeMascot) return <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />;
+
+  return (
+    <Link to="/mascotes" className="relative group cursor-pointer">
+      <KidLiveMascot 
+        emotion="happy" 
+        size="sm" 
+        className="scale-75 -my-4 transition-transform group-hover:scale-90" 
+      />
+      <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white shadow-sm">
+        LV {activeMascot.level}
+      </div>
+    </Link>
+  );
+}
 
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
+  { to: "/mascotes", label: "Meus Mascotes", icon: Heart },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
@@ -128,8 +149,8 @@ export function Shell({ children }: { children?: ReactNode }) {
           </KidCard>
         )}
 
-        <div className="mt-2">
-          <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />
+        <div className="mt-2 flex justify-center">
+          <SidebarMascot />
         </div>
 
 

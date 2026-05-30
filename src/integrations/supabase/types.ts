@@ -1329,6 +1329,36 @@ export type Database = {
           },
         ]
       }
+      mascots: {
+        Row: {
+          base_stats: Json | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+        }
+        Insert: {
+          base_stats?: Json | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+        }
+        Update: {
+          base_stats?: Json | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
       neuro_profiles: {
         Row: {
           child_id: string
@@ -1926,6 +1956,50 @@ export type Database = {
             columns: ["profile_id"]
             isOneToOne: true
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_mascots: {
+        Row: {
+          affinity: number
+          created_at: string
+          experience: number
+          id: string
+          is_active: boolean
+          level: number
+          mascot_id: string
+          metadata: Json | null
+          user_id: string
+        }
+        Insert: {
+          affinity?: number
+          created_at?: string
+          experience?: number
+          id?: string
+          is_active?: boolean
+          level?: number
+          mascot_id: string
+          metadata?: Json | null
+          user_id: string
+        }
+        Update: {
+          affinity?: number
+          created_at?: string
+          experience?: number
+          id?: string
+          is_active?: boolean
+          level?: number
+          mascot_id?: string
+          metadata?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_mascots_mascot_id_fkey"
+            columns: ["mascot_id"]
+            isOneToOne: false
+            referencedRelation: "mascots"
             referencedColumns: ["id"]
           },
         ]
