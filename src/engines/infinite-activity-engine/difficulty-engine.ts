@@ -1,6 +1,6 @@
 
-import { Difficulty, NeuroAdjustment } from "../infinite-activity-engine/types";
-import { NeuroAdjustment as RealNeuroAdjustment } from "../neuro-engine/types";
+import { Difficulty } from "../infinite-activity-engine/types";
+import { NeuroAdjustment } from "../neuro-engine/types";
 
 export class DifficultyEngine {
   static calculateDifficulty(performance: number, adjustments: RealNeuroAdjustment): "easy" | "medium" | "hard" | "expert" {
