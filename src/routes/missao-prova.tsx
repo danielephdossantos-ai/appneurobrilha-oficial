@@ -158,8 +158,10 @@ function MissaoProva() {
                   >
                     CONCLUÍDO! <CheckCircle2 className="h-6 w-6" />
                   </button>
-                  </Card>
                 </div>
+              </Card>
+            </div>
+
 
                 <div className="lg:col-span-1">
                   <div className="sticky top-24 space-y-4">
