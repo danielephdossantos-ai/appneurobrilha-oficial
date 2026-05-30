@@ -3,9 +3,9 @@ export interface BNCCSkill {
   id: string;
   code: string; // e.g., EF01MA01
   description: string;
-  field: "lingua-portuguesa" | "matematica" | "ciencias" | "geografia" | "historia" | "artes" | "educacao-fisica" | "psicomotricidade";
+  field: "lingua-portuguesa" | "matematica" | "ciencias" | "geografia" | "historia" | "artes" | "educacao-fisica" | "psicomotricidade" | "socioemocional";
   level: number; // 0 (Preschool), 1 to 9 (year)
-  domain?: "alfabetizacao" | "matematica" | "leitura" | "interpretacao" | "coordenacao" | "gramatica" | "algebra" | "geometria";
+  domain?: "alfabetizacao" | "matematica" | "leitura" | "interpretacao" | "coordenacao" | "gramatica" | "algebra" | "geometria" | "emocional" | "social" | "autonomia";
 }
 
 export const BNCC_SKILLS: BNCCSkill[] = [
@@ -60,7 +60,13 @@ export const BNCC_SKILLS: BNCCSkill[] = [
   { id: "ef08ma01", code: "EF08MA01", field: "matematica", level: 8, domain: "matematica", description: "Efetuar cálculos com potências de expoentes inteiros." },
   { id: "ef08lp01", code: "EF08LP01", field: "lingua-portuguesa", level: 8, domain: "interpretacao", description: "Identificar e comparar as ideias centrais de um texto." },
   { id: "ef09ma01", code: "EF09MA01", field: "matematica", level: 9, domain: "matematica", description: "Resolver e elaborar problemas com números reais." },
-  { id: "ef09lp01", code: "EF09LP01", field: "lingua-portuguesa", level: 9, domain: "interpretacao", description: "Analisar o funcionamento das linguagens nas práticas sociais." }
+  { id: "ef09lp01", code: "EF09LP01", field: "lingua-portuguesa", level: 9, domain: "interpretacao", description: "Analisar o funcionamento das linguagens nas práticas sociais." },
+
+  // SOCIOEMOCIONAL (Brilha Vida)
+  { id: "se_emo", code: "BV-EMO", field: "socioemocional", level: 0, domain: "emocional", description: "Identificar e expressar sentimentos e emoções próprias e dos outros." },
+  { id: "se_emp", code: "BV-EMP", field: "socioemocional", level: 1, domain: "social", description: "Praticar a empatia e o respeito às diferenças no convívio social." },
+  { id: "se_aut", code: "BV-AUT", field: "socioemocional", level: 2, domain: "autonomia", description: "Desenvolver estratégias de autocontrole e regulação emocional." },
+  { id: "se_con", code: "BV-CON", field: "socioemocional", level: 3, domain: "social", description: "Resolver conflitos por meio do diálogo e cooperação." }
 ];
 
 

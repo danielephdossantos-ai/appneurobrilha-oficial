@@ -20,7 +20,7 @@ export interface ActivityComponent {
 export interface ActivityTemplate {
   id: string;
   name: string;
-  type: "selection" | "sequence" | "matching" | "filling" | "sorting" | "creative" | "mosaic";
+  type: "selection" | "sequence" | "matching" | "filling" | "sorting" | "creative" | "mosaic" | "social-story" | "emotion-match";
   bnccCodes: string[];
   baseDifficulty: Difficulty;
   cognitiveLoad: number; // 1-10

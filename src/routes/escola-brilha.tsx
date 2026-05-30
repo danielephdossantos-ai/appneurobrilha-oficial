@@ -62,6 +62,7 @@ const materias = [
   { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
   { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
   { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
+  { id: "brilha-vida", nome: "Brilha Vida", emoji: "🌱", cor: "from-emerald/30 to-emerald/5" },
 ] as const;
 
 function Escola() {
