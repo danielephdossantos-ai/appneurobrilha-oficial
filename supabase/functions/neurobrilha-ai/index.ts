@@ -203,6 +203,8 @@ serve(async (req) => {
         response_format: (mode === "escola" || mode === "professor-foto") ? { type: "json_object" } : { type: "text" }
       }),
     })
+    
+    console.log("FINAL RESPONSE STATUS:", response.status)
 
     if (!response.ok) {
       const errorText = await response.text()
