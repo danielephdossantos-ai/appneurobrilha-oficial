@@ -4,7 +4,8 @@ import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
 import { motion } from 'framer-motion';
 import { Star, Heart, Zap } from 'lucide-react';
-import pipMascot from '@/assets/pip-mascot.png';
+import KidLiveMascot from '@/components/ui/KidLiveMascot';
+
 
 export const MascotInventory: React.FC = () => {
   const { userMascots, activeMascot, setActiveMascot, isLoading } = useMascot();
@@ -51,15 +52,16 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
       )}
       
       <div className="p-6 flex flex-col items-center gap-4">
-        <div className="w-28 h-28 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-full flex items-center justify-center border-2 border-primary/20 overflow-hidden">
+        <div className="w-28 h-28 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-full flex items-center justify-center border-2 border-primary/20 overflow-visible">
           {mascot.name === 'Pip' ? (
-            <img src={pipMascot} alt="Pip" className="w-full h-full object-contain drop-shadow-md" />
+            <KidLiveMascot size="sm" showBadge={false} emotion="happy" />
           ) : mascot.image_url ? (
             <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-cover rounded-full" />
           ) : (
             <span className="text-4xl">🧩</span>
           )}
         </div>
+
 
         <div className="text-center">
           <h3 className="text-xl font-black text-primary">{mascot.name}</h3>
