@@ -115,23 +115,29 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
         throw new Error("Adicione conteúdos antes de gerar o plano.");
       }
 
+      // Simular identificação automática de habilidades BNCC
+      const contentsWithBncc = contents.map((c: any) => ({
+        ...c,
+        bncc_code: mission.subject === "Matemática" ? "EF01MA01" : "EF01LP01" // Mock BNCC mapping
+      }));
+
       // Limpar plano anterior
       await (supabase as any).from("exam_study_plans").delete().eq("mission_id", mission.id);
 
       const studySessions = [];
-      const contentsPerDay = Math.ceil(contents.length / Math.min(daysUntilExam, 7)); // Distribui em até 7 dias
+      const contentsPerDay = Math.ceil(contentsWithBncc.length / Math.min(daysUntilExam, 7)); // Distribui em até 7 dias
 
       let contentIndex = 0;
       for (let i = 0; i < Math.min(daysUntilExam, 7); i++) {
         const sessionDate = addDays(startOfDay(new Date()), i + 1);
         if (isBefore(sessionDate, new Date(mission.exam_date + 'T12:00:00'))) {
-          const sessionContents = contents.slice(contentIndex, contentIndex + contentsPerDay);
+          const sessionContents = contentsWithBncc.slice(contentIndex, contentIndex + contentsPerDay);
           if (sessionContents.length > 0) {
             studySessions.push({
               mission_id: mission.id,
               scheduled_date: format(sessionDate, 'yyyy-MM-dd'),
               title: `Estudo: ${mission.subject}`,
-              description: `Revisar: ${sessionContents.map((c: any) => c.content_title).join(", ")}`
+              description: `Revisar: ${sessionContents.map((c: any) => c.content_title).join(", ")}. Habilidades: ${sessionContents.map((c: any) => c.bncc_code).join(", ")}`
             });
           }
           contentIndex += contentsPerDay;
