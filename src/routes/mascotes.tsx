@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { MascotInventory } from '@/components/rewards/MascotInventory';
-import { Layout } from '@/components/Layout';
+import { Shell } from '@/components/Layout';
 import { motion } from 'framer-motion';
 
 export const Route = createFileRoute('/mascotes')({
