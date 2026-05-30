@@ -22,6 +22,7 @@ import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedur
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
@@ -94,6 +95,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
+  id: '/auditoria-pedagogica',
+  path: '/auditoria-pedagogica',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByTo {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/escola-brilha'
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/escola-brilha'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/escola-brilha'
@@ -261,6 +273,7 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
@@ -371,6 +384,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auditoria-pedagogica': {
+      id: '/auditoria-pedagogica'
+      path: '/auditoria-pedagogica'
+      fullPath: '/auditoria-pedagogica'
+      preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/analytics': {
       id: '/analytics'
       path: '/analytics'
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
+  AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
@@ -440,13 +461,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
