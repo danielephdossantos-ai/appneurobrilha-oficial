@@ -1,6 +1,8 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
+import { KidCard } from "@/components/ui/KidCard";
+
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { useState, useEffect } from "react";
 
