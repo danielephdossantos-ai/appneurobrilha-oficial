@@ -96,7 +96,13 @@ export function useNotifications() {
   useEffect(() => {
     if (!session?.user) return;
 
-    const channelId = `notifications-${session.user.id}`;
+    // Usar um ID único por instância do hook para evitar colisões
+    // O erro 'cannot add postgres_changes callbacks... after subscribe()' ocorre quando
+    // o mesmo nome de canal é reutilizado e o subscribe() já foi chamado nele.
+    const instanceId = Math.random().toString(36).substring(7);
+    const channelId = `notifications-${session.user.id}-${instanceId}`;
+    
+    console.log(`[REALTIME DEBUG] Criando canal único: ${channelId}`);
     const channel = supabase.channel(channelId);
     
     channel
@@ -109,6 +115,7 @@ export function useNotifications() {
           filter: `user_id=eq.${session.user.id}`
         },
         (payload) => {
+          console.log(`[REALTIME DEBUG] Mensagem recebida no canal ${channelId}:`, payload);
           const newNotif = payload.new as Notification;
           toast(newNotif.title, {
             description: newNotif.message,
@@ -119,13 +126,23 @@ export function useNotifications() {
           });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });
         }
-      )
-      .subscribe();
+      );
+
+    console.log(`[REALTIME DEBUG] Inscrevendo no canal: ${channelId}`);
+    channel.subscribe((status) => {
+      if (status === 'SUBSCRIBED') {
+        console.log(`[REALTIME DEBUG] Inscrição confirmada para: ${channelId}`);
+      }
+      if (status === 'CHANNEL_ERROR') {
+        console.error(`[REALTIME DEBUG] Erro na inscrição para: ${channelId}`);
+      }
+    });
 
     return () => {
+      console.log(`[REALTIME DEBUG] Cleanup: Removendo canal ${channelId}`);
       supabase.removeChannel(channel);
     };
-  }, [session?.user, queryClient]);
+  }, [session?.user?.id, queryClient]); // Dependência específica no ID do usuário
 
   return {
     notifications,
