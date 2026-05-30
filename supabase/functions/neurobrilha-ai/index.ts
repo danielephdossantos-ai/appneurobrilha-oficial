@@ -80,19 +80,20 @@ serve(async (req) => {
       - Nível de Adaptação: ${nivelDesc}
 
       DADOS DO SISTEMA (NÃO ALTERE):
-      - Pergunta/Desafio: ${systemQuestion || "Nenhum"}
-      - Opções: ${JSON.stringify(systemOptions || [])}
+      - Pergunta/Desafio Atual: ${systemQuestion || "Nenhum"}
+      - Opções Disponíveis: ${JSON.stringify(systemOptions || [])}
       - Resposta Correta: ${systemAnswer || "Nenhuma"}
-      - Instrução Base: ${instruction || "Ensinar o tema de forma lúdica"}
+      - Instrução Pedagógica: ${instruction || "Ensinar o tema de forma lúdica"}
+
+      IMPORTANTE: Você NÃO deve criar a pergunta nem as opções. Elas já foram geradas pelo Motor Infinito.
+      Sua tarefa é EXPLICAR e contextualizar esses dados usando o hiperfoco.
 
       Você deve retornar EXCLUSIVAMENTE um JSON com as seguintes chaves:
       - "ensino": Uma explicação curta, lúdica e adaptada do tema usando o hiperfoco.
-      - "demo": Exemplos práticos ou visualização baseada no hiperfoco.
-      - "pergunta": "${systemQuestion || ""}"
-      - "opcoes": ${JSON.stringify(systemOptions || [])}
-      - "resposta_correta": "${systemAnswer || ""}"
-      - "dica": Uma dica adaptada para caso a criança erre.
+      - "demo": Exemplos práticos ou visualização baseada no hiperfoco para ajudar a entender o desafio.
+      - "dica": Uma dica adaptada para caso a criança erre o desafio atual.
       - "reforco_positivo": Uma frase de incentivo citando o hiperfoco.`
+
 
       userPrompt = `Ensine este conteúdo: ${topic || "Matéria escolar"}.`
     } else if (mode === "professor-foto") {
