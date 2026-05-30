@@ -96,8 +96,10 @@ export function useNotifications() {
   useEffect(() => {
     if (!session?.user) return;
 
-    const channel = supabase
-      .channel('schema-db-changes')
+    const channelId = `notifications-${session.user.id}`;
+    const channel = supabase.channel(channelId);
+    
+    channel
       .on(
         'postgres_changes',
         {
@@ -117,9 +119,8 @@ export function useNotifications() {
           });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });
         }
-      );
-
-    channel.subscribe();
+      )
+      .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
