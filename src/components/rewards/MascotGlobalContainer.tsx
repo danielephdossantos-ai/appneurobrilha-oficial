@@ -3,6 +3,7 @@ import { useMascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
 import { useLocation } from '@tanstack/react-router';
+import KidLiveMascot from '@/components/ui/KidLiveMascot';
 
 export const MascotGlobalContainer: React.FC = () => {
   const { activeMascot, isLoading } = useMascot();
