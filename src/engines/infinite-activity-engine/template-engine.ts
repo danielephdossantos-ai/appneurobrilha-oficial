@@ -89,7 +89,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_sci_body",
     name: "Corpo Humano",
     type: "selection",
-    bnccCodes: ["EF01CI02"],
+    bnccCodes: ["EF01CI02", "EI03ET03"],
     baseDifficulty: "easy",
     cognitiveLoad: 3,
     minAge: 5,
@@ -100,12 +100,23 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_sci_animals",
     name: "Classificação Animal",
     type: "sorting",
-    bnccCodes: ["EF02CI04"],
+    bnccCodes: ["EF02CI04", "EF04CI04"],
     baseDifficulty: "medium",
     cognitiveLoad: 4,
     minAge: 6,
-    maxAge: 9,
+    maxAge: 10,
     logic: "Separar animais por características (habitat, pele, alimentação)."
+  },
+  {
+    id: "temp_sci_matter",
+    name: "Estados Físicos",
+    type: "matching",
+    bnccCodes: ["EF03CI04", "EF05CI01"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 5,
+    minAge: 8,
+    maxAge: 12,
+    logic: "Associar materiais aos seus estados físicos (sólido, líquido, gasoso)."
   },
 
   // GEOGRAFIA
@@ -113,12 +124,23 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_geo_map",
     name: "Localização e Mapas",
     type: "selection",
-    bnccCodes: ["EF01GE09"],
+    bnccCodes: ["EF01GE09", "EF04GE05"],
     baseDifficulty: "easy",
     cognitiveLoad: 3,
     minAge: 5,
-    maxAge: 8,
+    maxAge: 12,
     logic: "Identificar pontos de referência em um mapa simples."
+  },
+  {
+    id: "temp_geo_landscape",
+    name: "Paisagens e Transformação",
+    type: "matching",
+    bnccCodes: ["EF02GE01", "EF03GE04", "EF05GE03"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 4,
+    minAge: 7,
+    maxAge: 12,
+    logic: "Comparar paisagens naturais e urbanas."
   },
 
   // HISTÓRIA
@@ -126,12 +148,23 @@ export const TEMPLATES: ActivityTemplate[] = [
     id: "temp_his_fam",
     name: "História da Família",
     type: "matching",
-    bnccCodes: ["EF01HI02"],
+    bnccCodes: ["EF01HI02", "EF02HI01"],
     baseDifficulty: "easy",
     cognitiveLoad: 2,
     minAge: 5,
-    maxAge: 7,
+    maxAge: 9,
     logic: "Identificar membros da família e graus de parentesco."
+  },
+  {
+    id: "temp_his_timeline",
+    name: "Patrimônio e História",
+    type: "sequence",
+    bnccCodes: ["EF03HI04", "EF04HI01", "EF05HI01"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 5,
+    minAge: 8,
+    maxAge: 13,
+    logic: "Ordenar fatos históricos ou identificar patrimônios culturais."
   },
 
   // ARTES
@@ -171,6 +204,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     logic: "Seguir a ordem lógica de cores para completar o colar."
   }
 ];
+
 
 
 
