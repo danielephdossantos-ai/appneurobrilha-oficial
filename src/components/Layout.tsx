@@ -129,8 +129,8 @@ export function Shell({ children }: { children?: ReactNode }) {
           </KidCard>
         )}
 
-        <div className="mt-2">
-          <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />
+        <div className="mt-2 flex justify-center">
+          <SidebarMascot />
         </div>
 
 
