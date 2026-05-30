@@ -4,7 +4,7 @@ import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen
+  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck
 } from "lucide-react";
 import { ReactNode } from "react";
 import { supabase } from "@/database/supabase/client";
@@ -32,6 +32,7 @@ const navPais = [
   { to: "/terapeuta-brilha", label: "Terapeuta Brilha", icon: MessagesSquare },
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
+  { to: "/auditoria-pedagogica", label: "Auditoria", icon: ClipboardCheck },
 ] as const;
 
 const navigationSequence = [
@@ -49,6 +50,7 @@ const navigationSequence = [
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
+  "/auditoria-pedagogica",
 ];
 
 function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: typeof Home }) {
