@@ -59,7 +59,7 @@ export class RandomizerEngine {
       character: character.id,
       title: "Brilha Vida: Convivência",
       question: `${situation.title}: ${situation.context} Qual a melhor coisa a fazer?`,
-      options: situation.options.map(opt => ({
+      options: situation.options.map((opt: string) => ({
         id: opt,
         content: opt,
         type: "text",
