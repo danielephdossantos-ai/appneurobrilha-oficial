@@ -44,7 +44,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       setIsLoading(true);
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('user_mascots')
         .select(`
           *,
@@ -72,7 +72,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!user) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('user_mascots')
         .update({ is_active: true })
         .eq('user_id', user.id)
@@ -81,16 +81,13 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       if (error) throw error;
 
       await fetchMascots();
-      toast({
-        title: "Mascote Alterado",
+      toast.success("Mascote Alterado", {
         description: "Seu novo companheiro está pronto!",
       });
     } catch (error) {
       console.error('Error setting active mascot:', error);
-      toast({
-        title: "Erro",
+      toast.error("Erro", {
         description: "Não foi possível trocar o mascote.",
-        variant: "destructive",
       });
     }
   };
@@ -106,14 +103,13 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (finalExp >= expToNextLevel) {
       newLevel += 1;
       finalExp -= expToNextLevel;
-      toast({
-        title: "Level Up!",
+      toast.success("Level Up!", {
         description: `${activeMascot.mascot.name} subiu para o nível ${newLevel}!`,
       });
     }
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('user_mascots')
         .update({ 
           experience: finalExp,
@@ -132,7 +128,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!activeMascot || !user) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('user_mascots')
         .update({ 
           affinity: Math.min(100, activeMascot.affinity + amount)
