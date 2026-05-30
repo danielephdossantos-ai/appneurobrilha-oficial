@@ -359,8 +359,9 @@ function ReforcoBrilha() {
               <p className="font-bold animate-pulse">O Professor Brilha está preparando sua aula...</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {/* Cabeçalho da Aula Premium */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div className="lg:col-span-3 space-y-6">
+                {/* Cabeçalho da Aula Premium */}
               <div className="bg-gradient-to-br from-primary/20 via-primary/5 to-background rounded-[2.5rem] p-8 border border-primary/20 relative overflow-hidden shadow-premium">
                 <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                   <Star className="h-24 w-24 text-primary fill-primary" />
@@ -523,6 +524,15 @@ function ReforcoBrilha() {
                       </div>
                     </div>
                   </Card>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-1">
+                <div className="sticky top-24">
+                  <PipPedagogicalGuidance 
+                    stage={lessonContent ? 'explanation' : 'idle'} 
+                    className="animate-in fade-in slide-in-from-right-4" 
+                  />
                 </div>
               </div>
             </div>
