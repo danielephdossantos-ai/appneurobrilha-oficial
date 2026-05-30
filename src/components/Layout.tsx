@@ -50,6 +50,7 @@ const navigationSequence = [
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
+  "/auditoria-pedagogica",
 ];
 
 function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: typeof Home }) {
