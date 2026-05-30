@@ -10,6 +10,12 @@ import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/refor
 import { ProgressionService } from "@/engines/progression-engine/service";
 import { ProgressionEngine } from "@/engines/progression-engine/engine/progression-engine";
 import { ProgressionStats, SkillMastery } from "@/engines/progression-engine/types";
+import { toast } from "sonner";
+import { supabase } from "@/database/supabase/client";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { useNotifications } from "@/hooks/useNotifications";
 
 class ReforcoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
