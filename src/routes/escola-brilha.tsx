@@ -46,7 +46,7 @@ class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => 
         </Shell>
       );
     }
-    return this.children;
+    return this.props.children;
   }
 }
 
