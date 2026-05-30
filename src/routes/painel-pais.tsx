@@ -98,6 +98,12 @@ function PainelPremium() {
               <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
             </motion.div>
 
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6">
+              <motion.div variants={itemVariants}>
+                <HyperfocusManager />
+              </motion.div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div variants={itemVariants}>
                 <SkillProgress skills={mockResponsibleData.skills} />
