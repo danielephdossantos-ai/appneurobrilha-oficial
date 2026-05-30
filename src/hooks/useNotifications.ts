@@ -117,8 +117,9 @@ export function useNotifications() {
           });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });
         }
-      )
-      .subscribe();
+      );
+
+    channel.subscribe();
 
     return () => {
       supabase.removeChannel(channel);
