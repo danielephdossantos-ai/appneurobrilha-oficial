@@ -1,3 +1,4 @@
+import { NeuroAdjustment } from "../neuro-engine/types";
 
 export interface BNCCSkill {
   code: string;
@@ -34,10 +35,11 @@ export interface GeneratedActivity {
   bnccCode: string;
   difficulty: Difficulty;
   content: any;
-  adaptation: any;
+  adaptation: NeuroAdjustment;
   reward: {
     stars: number;
     coins: number;
     xp: number;
   };
 }
+
