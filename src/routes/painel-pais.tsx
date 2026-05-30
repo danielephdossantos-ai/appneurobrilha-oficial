@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChildProtection } from "@/modules/auth/components/ChildProtection";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
+import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 
 export const Route = createFileRoute("/painel-pais")({
   component: PainelPremium,
@@ -97,6 +98,12 @@ function PainelPremium() {
             <motion.div variants={itemVariants}>
               <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
             </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6">
+              <motion.div variants={itemVariants}>
+                <HyperfocusManager />
+              </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div variants={itemVariants}>
