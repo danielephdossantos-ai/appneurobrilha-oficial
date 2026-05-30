@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState, useEffect, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle } from "lucide-react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
@@ -61,6 +61,7 @@ const materias = [
   { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5" },
   { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
   { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
 ] as const;
 
 function Escola() {

@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle } from "lucide-react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle, Palette } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
@@ -53,6 +53,7 @@ const CATEGORIAS = [
   { id: "portugues", label: "Português", icon: Pencil, color: "text-orange-500", suggestions: ["Verbos no passado", "Acentuação", "Ortografia do S e Z"] },
   { id: "problemas", label: "Problemas", icon: BookOpen, color: "text-purple-500", suggestions: ["Problemas de divisão", "Lógica matemática", "Sistema monetário"] },
   { id: "leitura", label: "Alfabetização", icon: MessageSquare, color: "text-green-500", suggestions: ["Leitura de sílabas", "Formação de frases", "Interpretação de texto"] },
+  { id: "oficina", label: "Oficina Criativa", icon: Palette, color: "text-pink-500", suggestions: ["Mosaico de Formas", "Sequência de Cores", "Artesanato Virtual"] },
 ];
 
 function ReforcoBrilha() {
