@@ -41,10 +41,10 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
   const sizes = {
     sm: 'w-24 h-24',
-    md: 'w-40 h-40',
-    lg: 'w-56 h-56',
-    xl: 'w-72 h-72',
-    '2xl': 'w-96 h-96',
+    md: 'w-48 h-48', // Aumentado de 40 para 48
+    lg: 'w-64 h-64', // Aumentado de 56 para 64
+    xl: 'w-80 h-80', // Aumentado de 72 para 80
+    '2xl': 'w-[450px] h-[450px]', // Aumentado significativamente
   };
 
   const getEmotionStyles = () => {
@@ -61,7 +61,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   };
 
   return (
-    <div className={cn("flex flex-col items-center gap-4", className)}>
+    <div className={cn("flex flex-col items-center gap-6", className)}>
       <AnimatePresence mode="wait">
         <motion.div
           key={`${emotion}-${mascotImage}`}
@@ -74,26 +74,29 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
             getEmotionStyles()
           )}
         >
+          {/* Expressões faciais via filtros ou sobreposições se necessário */}
+          {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
+          
           {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
           {isPip && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-              <div className="relative w-1/4 h-1/4 translate-y-2">
+              <div className="relative w-1/5 h-1/5 translate-y-4">
                 <Puzzle 
-                  className="w-full h-full text-sun animate-glow-puzzle fill-sun/20" 
+                  className="w-full h-full text-sun animate-glow-puzzle fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
                   strokeWidth={3}
                 />
               </div>
             </div>
           )}
 
-          {/* Selo Mascote Oficial */}
+          {/* Selo Mascote Oficial - Agora mais destacado */}
           {isPip && showBadge && (
             <motion.div 
-              initial={{ scale: 0, rotate: -20 }}
-              animate={{ scale: 1, rotate: -15 }}
-              className="absolute -top-2 -right-4 bg-sun text-primary font-black text-[10px] px-2 py-1 rounded-lg border-2 border-primary shadow-soft z-20 flex items-center gap-1 uppercase"
+              initial={{ scale: 0, rotate: -25 }}
+              animate={{ scale: 1.1, rotate: -15 }}
+              className="absolute -top-4 -right-8 bg-gradient-to-r from-sun to-warning text-primary font-black text-xs px-4 py-2 rounded-xl border-4 border-white shadow-xl z-20 flex items-center gap-2 uppercase tracking-tighter"
             >
-              <Award className="w-3 h-3" />
+              <Award className="w-4 h-4" />
               Mascote Oficial
             </motion.div>
           )}
@@ -101,7 +104,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
           <img
             src={mascotImage}
             alt="Pip - O Guardião dos Desafios"
-            className="w-full h-full object-contain drop-shadow-2xl select-none pointer-events-none"
+            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             draggable={false}
           />
         </motion.div>
@@ -109,12 +112,12 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
       
       {message && (
         <motion.div
-          initial={{ y: 10, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white px-6 py-3 rounded-2xl border-2 border-primary/20 shadow-soft relative max-w-xs"
+          className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm"
         >
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t-2 border-l-2 border-primary/20 rotate-45" />
-          <p className="text-primary font-bold text-center text-sm md:text-base">{message}</p>
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-t-4 border-l-4 border-primary/30 rotate-45" />
+          <p className="text-primary font-black text-center text-lg md:text-xl leading-snug">{message}</p>
         </motion.div>
       )}
     </div>
@@ -122,3 +125,4 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 };
 
 export default LiveMascot;
+
