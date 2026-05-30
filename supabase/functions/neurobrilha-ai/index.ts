@@ -185,26 +185,36 @@ serve(async (req) => {
       userPrompt = message || "Oi amigo!";
     }
 
-    console.log('Sending request to OpenAI...')
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    console.log('Sending request to Lovable AI Gateway...')
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${LOVABLE_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
           ...(chatHistory || []),
           { role: "user", content: userPrompt }
         ],
-        temperature: 0.7,
-        response_format: (mode === "escola" || mode === "professor-foto") ? { type: "json_object" } : { type: "text" }
+        response_format: (mode === "escola" || mode === "professor-foto") ? { type: "json_object" } : undefined
       }),
     })
     
     console.log("FINAL RESPONSE STATUS:", response.status)
+
+    if (response.status === 429) {
+      return new Response(JSON.stringify({ error: 'Muitas requisições. Aguarde um momento e tente novamente.' }), {
+        status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+    if (response.status === 402) {
+      return new Response(JSON.stringify({ error: 'Créditos de IA esgotados. Adicione créditos no painel Lovable.' }), {
+        status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
 
     if (!response.ok) {
       const errorText = await response.text()
