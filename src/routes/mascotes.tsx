@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { MascotInventory } from '@/components/rewards/MascotInventory';
 import { Shell } from '@/components/Layout';
 import { motion } from 'framer-motion';
+import { KidButton } from '@/components/ui/KidButton';
 
 export const Route = createFileRoute('/mascotes')({
   component: MascotesPage,
@@ -32,11 +33,15 @@ function MascotesPage() {
         <MascotInventory />
         
         <div className="mt-12 p-8 bg-primary/5 rounded-3xl border-2 border-dashed border-primary/20 text-center">
-          <h2 className="text-2xl font-bold text-primary mb-4">Em Breve: Loja de Mascotes</h2>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Novos amigos neuro-adaptativos estão sendo preparados para se juntar à sua jornada! 
-            Continue estudando para ganhar Moedas Brilha e desbloqueá-los.
+          <h2 className="text-2xl font-bold text-primary mb-4">Procurando mais amigos?</h2>
+          <p className="text-muted-foreground max-w-md mx-auto mb-6">
+            Novos amigos neuro-adaptativos estão esperando por você na Loja de Mascotes!
           </p>
+          <Link to="/loja-mascotes">
+            <KidButton variant="primary" size="lg" className="px-12">
+              Ir para a Loja 🏪
+            </KidButton>
+          </Link>
         </div>
       </div>
     </Shell>
