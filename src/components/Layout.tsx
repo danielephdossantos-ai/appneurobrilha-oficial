@@ -13,6 +13,26 @@ import { NotificationBell } from "./NotificationBell";
 import { KidCard } from "./ui/KidCard";
 import { KidButton } from "./ui/KidButton";
 import KidLiveMascot from "./ui/KidLiveMascot";
+import { useMascot } from "@/contexts/MascotContext";
+
+function SidebarMascot() {
+  const { activeMascot } = useMascot();
+  
+  if (!activeMascot) return <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />;
+
+  return (
+    <div className="relative group cursor-pointer" onClick={() => window.location.href = '/mascotes'}>
+      <KidLiveMascot 
+        emotion="happy" 
+        size="sm" 
+        className="scale-75 -my-4 transition-transform group-hover:scale-90" 
+      />
+      <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white">
+        LV {activeMascot.level}
+      </div>
+    </div>
+  );
+}
 
 
 const navCrianca = [
