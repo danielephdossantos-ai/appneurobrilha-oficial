@@ -1,11 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2 } from "lucide-react";
+import { useState, useEffect, Component, ReactNode } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
+
+// Error Boundary para capturar falhas na renderização da aula
+class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error("AulaErrorBoundary caught an error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Shell>
+          <div className="flex flex-col items-center justify-center p-8 text-center bg-destructive/5 rounded-3xl border-2 border-dashed border-destructive/20">
+            <AlertCircle className="h-16 w-16 text-destructive mb-4" />
+            <h2 className="text-2xl font-bold text-destructive">Ops! Algo deu errado na aula.</h2>
+            <p className="text-muted-foreground mt-2 mb-6">
+              Ocorreu um erro técnico ao renderizar esta atividade.<br/>
+              <b>Erro:</b> {this.state.error?.message}
+            </p>
+            <button 
+              onClick={() => {
+                this.setState({ hasError: false });
+                this.props.onReset();
+              }}
+              className="bg-primary text-white px-6 py-2 rounded-xl font-bold shadow-glow"
+            >
+              Tentar novamente
+            </button>
+          </div>
+        </Shell>
+      );
+    }
+    return this.children;
+  }
+}
+
 
 export const Route = createFileRoute("/escola-brilha")({
   component: Escola,
@@ -100,7 +144,22 @@ function Escola() {
       });
 
       if (error) throw error;
-      setAula({ ...data, materia: materiaId, etapa: "ensino", grade: selectedGrade });
+      
+      console.log("AI Response:", data);
+
+      const novaAula = { 
+        ...data, 
+        materia: materiaId, 
+        etapa: "ensino", 
+        grade: selectedGrade,
+        // Garantindo que os dados do Motor Infinito persistam para a terceira tela
+        pergunta: systemQuestion,
+        opcoes: systemOptions,
+        resposta_correta: systemAnswer
+      };
+
+      console.log("FINAL AULA STATE:", novaAula);
+      setAula(novaAula);
     } catch (err) {
       console.error(err);
       toast.error("Erro ao gerar a aula. Tente novamente.");
@@ -123,7 +182,13 @@ function Escola() {
     );
   }
 
-  if (aula) return <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />;
+  if (aula) {
+    return (
+      <AulaErrorBoundary onReset={() => setAula(null)}>
+        <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />
+      </AulaErrorBoundary>
+    );
+  }
 
   return (
     <Shell>
@@ -190,7 +255,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title={titulos[aula.etapa]} subtitle={`${aula.materia.charAt(0).toUpperCase() + aula.materia.slice(1)} · ${aula.grade} · Adaptado para você`} />
+      <PageHeader 
+        emoji="🎓" 
+        title={titulos[aula.etapa] || "Aula"} 
+        subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
+      />
 
       <Card className="mb-4">
         <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
@@ -198,6 +267,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
           <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
           <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "opcoes" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>3. Opções</span>
         </div>
+
 
         {aula.etapa === "ensino" && (
           <div>
@@ -231,25 +301,29 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
         {aula.etapa === "opcoes" && (
           <div>
-            <p className="text-xl mb-6 font-bold">{aula.pergunta}</p>
+            <p className="text-xl mb-6 font-bold">{aula.pergunta || "O que você acha?"}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {aula.opcoes.map((opt: string) => (
+              {(aula.opcoes || []).map((opt: string, index: number) => (
                 <button 
-                  key={opt} 
+                  key={`${opt}-${index}`} 
                   onClick={() => {
                     setTentativa(opt);
-                    setAcertou(opt === aula.resposta_correta);
+                    setAcertou(opt === (aula.resposta_correta || aula.answer));
                   }}
                   disabled={acertou === true}
                   className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
                     tentativa === opt 
-                      ? (opt === aula.resposta_correta ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
+                      ? (opt === (aula.resposta_correta || aula.answer) ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
                       : "border-border bg-muted hover:border-primary"
                   }`}>
                   {opt}
                 </button>
               ))}
             </div>
+            {(!aula.opcoes || aula.opcoes.length === 0) && (
+              <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
+            )}
+
 
             {acertou === true && (
               <div className="mt-6 p-6 rounded-2xl bg-success/15 border-2 border-success/30 text-success text-lg animate-bounce-short">
