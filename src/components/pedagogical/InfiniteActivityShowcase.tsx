@@ -1,14 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { InfiniteActivityEngine } from '@/engines/infinite-activity-engine';
+import { PedagogicalValidationEngine } from '@/engines/infinite-activity-engine/validation-engine';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { ShieldCheck, ShieldAlert, PieChart } from 'lucide-react';
+
 
 export const InfiniteActivityShowcase = () => {
   const [activity, setActivity] = useState<any>(null);
   const [sessionCount, setSessionCount] = useState(0);
+  const [validationStats, setValidationStats] = useState<any>(null);
 
   const generate = () => {
     const newActivity = InfiniteActivityEngine.generate({
@@ -31,6 +36,7 @@ export const InfiniteActivityShowcase = () => {
     });
     setActivity(newActivity);
     setSessionCount(prev => prev + 1);
+    setValidationStats(PedagogicalValidationEngine.getStats());
   };
 
   useEffect(() => {
@@ -38,6 +44,7 @@ export const InfiniteActivityShowcase = () => {
   }, []);
 
   if (!activity) return null;
+
 
   return (
     <div className="space-y-6">
@@ -79,14 +86,35 @@ export const InfiniteActivityShowcase = () => {
               ))}
             </div>
 
-            <div className="mt-12 p-4 bg-muted/30 rounded-lg border border-dashed">
-              <h4 className="text-[10px] font-bold uppercase text-muted-foreground mb-2">Meta-dados do Motor</h4>
-              <div className="grid grid-cols-3 gap-2 text-[10px]">
-                <div>Template: <span className="font-mono">{activity.templateId}</span></div>
-                <div>Cenário: <span className="font-mono">{activity.content.scenario}</span></div>
-                <div>Personagem: <span className="font-mono">{activity.content.character}</span></div>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-muted/30 rounded-lg border border-dashed">
+                <h4 className="text-[10px] font-bold uppercase text-muted-foreground mb-2">Meta-dados do Motor</h4>
+                <div className="grid grid-cols-1 gap-1 text-[10px]">
+                  <div>Template: <span className="font-mono">{activity.templateId}</span></div>
+                  <div>Cenário: <span className="font-mono">{activity.content.scenario}</span></div>
+                  <div>Personagem: <span className="font-mono">{activity.content.character}</span></div>
+                </div>
               </div>
+
+              {validationStats && (
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                  <h4 className="text-[10px] font-bold uppercase text-primary mb-2 flex items-center gap-1">
+                    <ShieldCheck size={10} /> Validador Pedagógico
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2 text-[10px]">
+                    <div className="flex justify-between">
+                      <span>Status:</span>
+                      <span className="text-success font-bold">VÁLIDO</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Aprovadas:</span>
+                      <span className="font-bold">{validationStats.approved}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
+
           </CardContent>
         </Card>
 
@@ -117,7 +145,7 @@ export const InfiniteActivityShowcase = () => {
           </Card>
 
           <Card className="bg-success/5 border-success/20">
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm uppercase tracking-wider text-success">Neuro-Adaptação Ativa</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -135,6 +163,33 @@ export const InfiniteActivityShowcase = () => {
               </div>
             </CardContent>
           </Card>
+
+          {validationStats && validationStats.rejectionRate > 0 && (
+            <Card className="bg-destructive/5 border-destructive/20">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm uppercase tracking-wider text-destructive flex items-center gap-2">
+                  <ShieldAlert size={14} /> Rejeições (Filtro)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-destructive">
+                  {validationStats.rejectionRate.toFixed(1)}%
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Atividades descartadas por falha nos critérios pedagógicos antes de chegar ao usuário.
+                </p>
+                {validationStats.logs.length > 0 && (
+                  <div className="mt-2 pt-2 border-t border-destructive/10">
+                    <p className="text-[10px] font-bold text-destructive uppercase mb-1">Último Motivo:</p>
+                    <p className="text-[9px] text-slate-600 italic">
+                      {validationStats.logs[validationStats.logs.length - 1].errors[0]}
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
         </div>
       </div>
     </div>

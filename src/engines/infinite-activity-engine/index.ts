@@ -4,8 +4,10 @@ import { TemplateEngine } from "./template-engine";
 import { RandomizerEngine } from "./randomizer-engine";
 import { DifficultyEngine } from "./difficulty-engine";
 import { CognitiveAdaptationEngine } from "./cognitive-adaptation-engine";
+import { PedagogicalValidationEngine } from "./validation-engine";
 import { GeneratedActivity } from "./types";
 import { NeuroAdjustment } from "../neuro-engine/types";
+
 
 export interface InfiniteEngineContext {
   childId: string;
@@ -17,7 +19,33 @@ export interface InfiniteEngineContext {
 }
 
 export class InfiniteActivityEngine {
+  private static MAX_ATTEMPTS = 5;
+
   static generate(context: InfiniteEngineContext): GeneratedActivity {
+    let attempts = 0;
+    let activity: GeneratedActivity;
+    let validation: any;
+
+    do {
+      attempts++;
+      activity = this.runGenerationCycle(context);
+      validation = PedagogicalValidationEngine.validate(activity, context);
+
+      if (!validation.isValid) {
+        console.warn(`[InfiniteActivityEngine] Rejeição pedagógica na tentativa ${attempts}:`, validation.errors);
+      }
+    } while (!validation.isValid && attempts < this.MAX_ATTEMPTS);
+
+    if (!validation.isValid) {
+      console.error("[InfiniteActivityEngine] Falha ao gerar atividade válida após 5 tentativas. Retornando fallback.");
+      // Fallback básico garantido
+      return activity; 
+    }
+
+    return activity;
+  }
+
+  private static runGenerationCycle(context: InfiniteEngineContext): GeneratedActivity {
     // 1. Get BNCC Skills for the grade
     const skills = BNCCEngine.getSkillsByLevel(context.grade);
     const skill = skills[Math.floor(Math.random() * skills.length)] || skills[0];
@@ -53,3 +81,4 @@ export class InfiniteActivityEngine {
     };
   }
 }
+
