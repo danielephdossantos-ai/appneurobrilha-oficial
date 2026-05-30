@@ -35,7 +35,6 @@ const MascotContext = createContext<MascotContextType | undefined>(undefined);
 
 export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth();
-  const { toast } = useToast();
   const [activeMascot, setActiveMascotState] = useState<UserMascot | null>(null);
   const [userMascots, setUserMascots] = useState<UserMascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
