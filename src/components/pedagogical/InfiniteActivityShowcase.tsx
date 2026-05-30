@@ -86,14 +86,35 @@ export const InfiniteActivityShowcase = () => {
               ))}
             </div>
 
-            <div className="mt-12 p-4 bg-muted/30 rounded-lg border border-dashed">
-              <h4 className="text-[10px] font-bold uppercase text-muted-foreground mb-2">Meta-dados do Motor</h4>
-              <div className="grid grid-cols-3 gap-2 text-[10px]">
-                <div>Template: <span className="font-mono">{activity.templateId}</span></div>
-                <div>Cenário: <span className="font-mono">{activity.content.scenario}</span></div>
-                <div>Personagem: <span className="font-mono">{activity.content.character}</span></div>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-muted/30 rounded-lg border border-dashed">
+                <h4 className="text-[10px] font-bold uppercase text-muted-foreground mb-2">Meta-dados do Motor</h4>
+                <div className="grid grid-cols-1 gap-1 text-[10px]">
+                  <div>Template: <span className="font-mono">{activity.templateId}</span></div>
+                  <div>Cenário: <span className="font-mono">{activity.content.scenario}</span></div>
+                  <div>Personagem: <span className="font-mono">{activity.content.character}</span></div>
+                </div>
               </div>
+
+              {validationStats && (
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                  <h4 className="text-[10px] font-bold uppercase text-primary mb-2 flex items-center gap-1">
+                    <ShieldCheck size={10} /> Validador Pedagógico
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2 text-[10px]">
+                    <div className="flex justify-between">
+                      <span>Status:</span>
+                      <span className="text-success font-bold">VÁLIDO</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Aprovadas:</span>
+                      <span className="font-bold">{validationStats.approved}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
+
           </CardContent>
         </Card>
 
