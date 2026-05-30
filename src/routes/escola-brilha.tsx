@@ -5,6 +5,7 @@ import { useState, useEffect, Component, ReactNode } from "react";
 import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
+import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 
 // Error Boundary para capturar falhas na renderização da aula
@@ -187,7 +188,12 @@ function Escola() {
   if (aula) {
     return (
       <AulaErrorBoundary onReset={() => setAula(null)}>
-        <AulaView aula={aula} setAula={setAula} childNome={activeChild.nome} hiperfoco={activeChild.hiperfoco} />
+        <AulaView 
+          aula={aula} 
+          setAula={setAula} 
+          childNome={activeChild.nome} 
+          hiperfoco={activeChild.hiperfoco} 
+        />
       </AulaErrorBoundary>
     );
   }
@@ -249,6 +255,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
 
+  const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
+    if (acertou === true) return 'celebration';
+    if (aula.etapa === 'ensino') return 'explanation';
+    if (aula.etapa === 'opcoes') return 'encouragement';
+    return 'idle';
+  };
+
+
   const titulos: Record<string, string> = {
     ensino: "📖 Aula",
     demo: "🎨 Demonstração",
@@ -263,7 +277,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
         subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
       />
 
-      <Card className="mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-3">
+          <Card className="mb-4">
         <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
           <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
           <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
