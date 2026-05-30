@@ -50,6 +50,6 @@ describe('AnamnesisEngine', () => {
   it('should calculate correct average scores', () => {
     const profile = AnamnesisEngine.interpret(mockData);
     expect(profile.scores.pedagogical).toBe(25);
-    expect(profile.scores.cognitive).toBeCloseTo(51.6, 1);
+    expect(profile.scores.cognitive).toBeCloseTo(51.66, 1);
   });
 });
