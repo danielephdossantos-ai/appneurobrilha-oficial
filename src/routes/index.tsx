@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star } from "lucide-react";
+import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star, Award, Heart, Puzzle } from "lucide-react";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
-
+import { motion } from "framer-motion";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
 import { cn } from "@/utils/utils";
+
 
 
 
@@ -33,32 +34,54 @@ function Index() {
         subtitle="Sua jornada neuro-divertida começa aqui."
       />
 
-      <div className="flex flex-col lg:flex-row items-center gap-8 mb-12 bg-white/40 p-8 rounded-[3rem] border-2 border-primary/10 shadow-soft">
+      <div className="flex flex-col lg:flex-row items-center gap-12 mb-16 bg-gradient-to-br from-primary/5 via-white to-secondary/5 p-12 rounded-[4rem] border-4 border-primary/20 shadow-glow relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+           <Puzzle size={120} className="text-primary rotate-12" />
+        </div>
+        <div className="absolute bottom-0 left-0 p-12 opacity-5 pointer-events-none">
+           <Star size={80} className="text-sun -rotate-12" />
+        </div>
+
         <div className="flex-shrink-0">
           <KidLiveMascot 
-            size="xl" 
+            size="2xl" 
             emotion="waving" 
-            message={`Olá, ${activeChild?.nome}! Pronto para brilhar hoje?`}
+            message={`E aí, ${activeChild?.nome}! Pronto para brilhar?`}
           />
         </div>
-        <div className="flex-1 text-center lg:text-left space-y-4">
-          <div className="inline-flex items-center gap-2 bg-sun/20 px-4 py-1.5 rounded-full text-primary font-black uppercase tracking-widest text-[10px] border border-sun/50">
-            <Star className="w-3 h-3 fill-sun" />
-            Mascote Oficial Ativo
+        <div className="flex-1 text-center lg:text-left space-y-6 relative z-10">
+          <div className="flex justify-center lg:justify-start">
+            <motion.div 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="inline-flex items-center gap-3 bg-sun px-6 py-2 rounded-2xl text-primary font-black uppercase tracking-widest text-xs border-4 border-white shadow-soft"
+            >
+              <Award className="w-5 h-5 fill-primary/20" />
+              Personagem Principal
+            </motion.div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-primary leading-tight">
-            Sou o Pip, seu Guia na Jornada NeuroBrilha!
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.1]">
+            Eu sou o Pip! <br/>
+            <span className="text-secondary">O Guardião dos Desafios</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-xl">
-            Juntos vamos descobrir novos mundos, resolver desafios incríveis e aprender de um jeito super divertido.
+          <p className="text-muted-foreground text-xl md:text-2xl max-w-2xl font-medium">
+            Juntos vamos transformar cada aprendizado em uma peça brilhante do seu quebra-cabeça do conhecimento!
           </p>
-          <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-             <Pill tone="info" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Curioso</Pill>
-             <Pill tone="success" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Amigável</Pill>
-             <Pill tone="warning" className="px-4 py-2 font-bold uppercase tracking-widest text-[10px]">Inteligente</Pill>
+          <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+             <div className="bg-primary/10 px-6 py-3 rounded-2xl font-black text-primary uppercase tracking-widest text-xs border-2 border-primary/20 flex items-center gap-2">
+               <Sparkles className="w-4 h-4" /> Curioso
+             </div>
+             <div className="bg-success/10 px-6 py-3 rounded-2xl font-black text-success uppercase tracking-widest text-xs border-2 border-success/20 flex items-center gap-2">
+               <Heart className="w-4 h-4" /> Amigável
+             </div>
+             <div className="bg-sun/10 px-6 py-3 rounded-2xl font-black text-warning-foreground uppercase tracking-widest text-xs border-2 border-sun/20 flex items-center gap-2">
+               <Brain className="w-4 h-4" /> Inteligente
+             </div>
           </div>
         </div>
       </div>
+
 
       <h2 className="text-2xl font-black mb-6 uppercase tracking-widest text-foreground/60 flex items-center gap-3">
         <Sparkles size={24} className="text-sun" />

@@ -52,9 +52,10 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
       )}
       
       <div className="p-6 flex flex-col items-center gap-4">
-        <div className="w-28 h-28 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-full flex items-center justify-center border-2 border-primary/20 overflow-visible">
+        <div className="w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-full flex items-center justify-center border-2 border-primary/20 overflow-visible relative">
           {mascot.name === 'Pip' ? (
-            <KidLiveMascot size="sm" showBadge={false} emotion="happy" />
+            <KidLiveMascot size="md" showBadge={false} emotion="happy" />
+
           ) : mascot.image_url ? (
             <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-cover rounded-full" />
           ) : (
