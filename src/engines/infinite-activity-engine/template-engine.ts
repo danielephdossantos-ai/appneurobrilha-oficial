@@ -133,8 +133,33 @@ export const TEMPLATES: ActivityTemplate[] = [
     minAge: 4,
     maxAge: 10,
     logic: "Agrupar objetos por cores primárias e secundárias."
+  },
+
+  // OFICINA CRIATIVA
+  {
+    id: "temp_cre_mosaic",
+    name: "Mosaico de Formas",
+    type: "creative",
+    bnccCodes: ["EI03ET05", "EF01AR02"],
+    baseDifficulty: "medium",
+    cognitiveLoad: 4,
+    minAge: 4,
+    maxAge: 10,
+    logic: "Completar um padrão visual usando formas e cores."
+  },
+  {
+    id: "temp_cre_patterns",
+    name: "Sequência de Cores",
+    type: "sequence",
+    bnccCodes: ["EI03ET07"],
+    baseDifficulty: "easy",
+    cognitiveLoad: 3,
+    minAge: 3,
+    maxAge: 6,
+    logic: "Seguir a ordem lógica de cores para completar o colar."
   }
 ];
+
 
 
 export class TemplateEngine {

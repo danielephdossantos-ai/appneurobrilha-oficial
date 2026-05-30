@@ -1,6 +1,6 @@
 
 import { Difficulty, ActivityTemplate } from "./types";
-import { OBJECTS, SCENARIOS, CHARACTERS } from "./assets";
+import { OBJECTS, SCENARIOS, CHARACTERS, CREATIVE_ASSETS } from "./assets";
 import { DifficultyEngine } from "./difficulty-engine";
 
 export class RandomizerEngine {
@@ -18,10 +18,35 @@ export class RandomizerEngine {
         return this.generateMatching(itemsCount, scenario, character);
       case "sorting":
         return this.generateSorting(itemsCount, scenario, character);
+      case "creative":
+        return this.generateCreative(itemsCount, scenario, character);
       default:
         return this.generateSelection(itemsCount, scenario, character);
     }
   }
+
+  private static generateCreative(count: number, scenario: any, character: any) {
+    const shapes = this.shuffle([...CREATIVE_ASSETS.shapes]).slice(0, 3);
+    const colors = this.shuffle([...CREATIVE_ASSETS.colors]).slice(0, count);
+    
+    return {
+      type: "creative",
+      scenario: scenario.id,
+      character: character.id,
+      title: "Oficina Criativa",
+      question: `Olá! Vamos criar algo lindo? Use as ${shapes[0]} coloridas para completar o padrão!`,
+      canvas: {
+        background: scenario.id,
+        elements: colors.map((color, i) => ({
+          id: `cre_${i}`,
+          type: shapes[i % shapes.length],
+          color: color,
+          position: { x: 10 * i, y: 50 }
+        }))
+      }
+    };
+  }
+
 
   private static generateSelection(count: number, scenario: any, character: any) {
     const allObjects = [...(OBJECTS || [])];
