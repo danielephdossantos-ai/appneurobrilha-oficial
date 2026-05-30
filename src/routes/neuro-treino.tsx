@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode } from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Palette } from "lucide-react";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
@@ -58,6 +58,12 @@ const grupos = [
     emoji: "💚",
     cor: "from-success/20 to-success/5",
     atividades: ["Respira Flor","Termômetro dos Sentimentos","Cantinho da Calma","Como Eu Estou"],
+  },
+  {
+    nome: "Oficina Criativa",
+    emoji: "🎨",
+    cor: "from-lilac/30 to-lilac/5",
+    atividades: ["Mosaico de Formas", "Sequência de Cores", "Simetria", "Decoração Criativa"],
   },
 ];
 
