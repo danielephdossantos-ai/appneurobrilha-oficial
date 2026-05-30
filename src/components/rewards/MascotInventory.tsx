@@ -51,17 +51,22 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
       )}
       
       <div className="p-6 flex flex-col items-center gap-4">
-        <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center border-2 border-primary/20">
-          {mascot.image_url ? (
+        <div className="w-28 h-28 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-full flex items-center justify-center border-2 border-primary/20 overflow-hidden">
+          {mascot.name === 'Pip' ? (
+            <img src={pipMascot} alt="Pip" className="w-full h-full object-contain drop-shadow-md" />
+          ) : mascot.image_url ? (
             <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-cover rounded-full" />
           ) : (
-            <span className="text-4xl">🤖</span>
+            <span className="text-4xl">🧩</span>
           )}
         </div>
 
         <div className="text-center">
           <h3 className="text-xl font-black text-primary">{mascot.name}</h3>
-          <p className="text-xs text-muted-foreground line-clamp-2">{mascot.description}</p>
+          {mascot.name === 'Pip' && (
+            <p className="text-[11px] font-bold text-secondary uppercase tracking-wider">Guardião dos Desafios</p>
+          )}
+          <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{mascot.description}</p>
         </div>
 
         <div className="grid grid-cols-3 gap-2 w-full">
