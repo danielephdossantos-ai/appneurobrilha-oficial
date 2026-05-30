@@ -38,6 +38,7 @@ function SidebarMascot() {
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/mascotes", label: "Meus Mascotes", icon: Heart },
+  { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
