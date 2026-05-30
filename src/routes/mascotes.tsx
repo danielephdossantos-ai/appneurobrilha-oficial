@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { MascotInventory } from '@/components/rewards/MascotInventory';
 import { Shell } from '@/components/Layout';
 import { motion } from 'framer-motion';
+import { KidButton } from '@/components/ui/KidButton';
 
 export const Route = createFileRoute('/mascotes')({
   component: MascotesPage,
