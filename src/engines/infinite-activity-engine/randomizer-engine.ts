@@ -9,7 +9,7 @@ export class RandomizerEngine {
     const scenario = this.getRandomItem(SCENARIOS);
     const character = this.getRandomItem(CHARACTERS);
     
-    switch (template.type) {
+    switch (template?.type) {
       case "selection":
         return this.generateSelection(itemsCount, scenario, character);
       case "sequence":
@@ -24,16 +24,18 @@ export class RandomizerEngine {
   }
 
   private static generateSelection(count: number, scenario: any, character: any) {
-    const allObjects = [...OBJECTS];
-    const selected = this.shuffle(allObjects).slice(0, count);
-    const target = selected[0];
+    const allObjects = [...(OBJECTS || [])];
+    if (allObjects.length === 0) return { type: "selection", question: "Objeto não encontrado" };
+    
+    const selected = this.shuffle(allObjects).slice(0, Math.max(1, count));
+    const target = selected[0] || allObjects[0];
     
     return {
       type: "selection",
-      scenario: scenario.id,
-      character: character.id,
-      title: `Missão com ${character.name}`,
-      question: `Olá! Eu sou o ${character.name}. Você pode me ajudar a encontrar o(a) ${target.name} aqui no(a) ${scenario.name}?`,
+      scenario: scenario?.id || "sc_default",
+      character: character?.id || "ch_default",
+      title: `Missão com ${character?.name || "seu amigo"}`,
+      question: `Olá! Eu sou o ${character?.name || "seu amigo"}. Você pode me ajudar a encontrar o(a) ${target?.name || "item"} aqui no(a) ${scenario?.name || "lugar"}?`,
       targetId: target.id,
       options: selected.map(obj => ({
         id: obj.id,
@@ -99,6 +101,7 @@ export class RandomizerEngine {
   }
 
   private static getRandomItem(array: any[]) {
+    if (!array || array.length === 0) return { id: "unknown", name: "desconhecido" };
     return array[Math.floor(Math.random() * array.length)];
   }
 

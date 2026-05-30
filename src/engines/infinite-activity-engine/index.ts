@@ -48,13 +48,18 @@ export class InfiniteActivityEngine {
   private static runGenerationCycle(context: InfiniteEngineContext): GeneratedActivity {
     // 1. Get BNCC Skills for the grade
     const skills = BNCCEngine.getSkillsByLevel(context.grade);
-    const skill = skills[Math.floor(Math.random() * skills.length)] || skills[0];
+    if (!skills || skills.length === 0) {
+      console.warn(`[InfiniteActivityEngine] No skills found for grade ${context.grade}, using fallback.`);
+    }
+    const skill = (skills && skills.length > 0) 
+      ? skills[Math.floor(Math.random() * skills.length)] 
+      : { code: "EF01MA01", description: "Contagem básica" };
 
     // 2. Find suitable templates
     const templates = TemplateEngine.findTemplatesBySkill(skill.code, context.age);
-    const template = templates.length > 0 
+    const template = (templates && templates.length > 0) 
       ? TemplateEngine.getRandomTemplate(templates) 
-      : TemplateEngine.findTemplatesBySkill("EF01MA01", context.age)[0];
+      : TemplateEngine.findTemplatesBySkill("EF01MA01", context.age)[0] || { id: "temp_fallback", type: "selection" };
 
     // 3. Calculate Difficulty
     const difficulty = DifficultyEngine.calculateDifficulty(context.previousPerformance, context.adjustments);
@@ -67,11 +72,11 @@ export class InfiniteActivityEngine {
 
     // 6. Assemble Final Activity
     return {
-      id: `inf_${Date.now()}_${context.childId}`,
-      templateId: template.id,
-      bnccCode: skill.code,
-      difficulty: difficulty,
-      content: adaptedContent,
+      id: `inf_${Date.now()}_${context.childId || "anon"}`,
+      templateId: template?.id || "temp_unknown",
+      bnccCode: skill?.code || "EF01MA01",
+      difficulty: difficulty || "easy",
+      content: adaptedContent || { question: "Vamos começar?" },
       adaptation: context.adjustments,
       reward: {
         stars: difficulty === "easy" ? 5 : difficulty === "medium" ? 10 : 20,
