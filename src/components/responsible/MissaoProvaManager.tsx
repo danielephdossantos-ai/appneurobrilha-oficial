@@ -13,8 +13,7 @@ import {
   Sparkles, 
   ChevronRight, 
   AlertTriangle,
-  Clock,
-  Layout
+  Clock
 } from "lucide-react";
 import { toast } from "sonner";
 import { format, differenceInDays, addDays, isBefore, startOfDay } from "date-fns";
@@ -30,12 +29,11 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
   const [newSubject, setNewSubject] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newNotes, setNewNotes] = useState("");
-  const [activeTab, setActiveTab] = useState<"active" | "completed">("active");
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions", childId],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("exam_missions")
         .select(`
           *,
@@ -46,13 +44,13 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
         .order("exam_date", { ascending: true });
       
       if (error) throw error;
-      return data;
+      return data as any[];
     },
   });
 
   const createMissionMutation = useMutation({
     mutationFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("exam_missions")
         .insert([{
           child_id: childId,
@@ -78,7 +76,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
 
   const deleteMissionMutation = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("exam_missions")
         .delete()
         .eq("id", id);
@@ -92,7 +90,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
 
   const addContentMutation = useMutation({
     mutationFn: async ({ missionId, title }: { missionId: string, title: string }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("exam_mission_contents")
         .insert([{
           mission_id: missionId,
@@ -118,7 +116,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       }
 
       // Limpar plano anterior
-      await supabase.from("exam_study_plans").delete().eq("mission_id", mission.id);
+      await (supabase as any).from("exam_study_plans").delete().eq("mission_id", mission.id);
 
       const studySessions = [];
       const contentsPerDay = Math.ceil(contents.length / Math.min(daysUntilExam, 7)); // Distribui em até 7 dias
@@ -140,7 +138,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
         }
       }
 
-      const { error } = await supabase.from("exam_study_plans").insert(studySessions);
+      const { error } = await (supabase as any).from("exam_study_plans").insert(studySessions);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -231,9 +229,9 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
             </div>
           )}
 
-          {missions.map((mission) => {
+          {missions.map((mission: any) => {
             const daysLeft = differenceInDays(new Date(mission.exam_date + 'T12:00:00'), startOfDay(new Date()));
-            const isCompleted = mission.contents.length > 0 && mission.contents.every((c: any) => c.completed);
+            const isCompleted = mission.contents && mission.contents.length > 0 && mission.contents.every((c: any) => c.completed);
             
             return (
               <div key={mission.id} className="bg-white border border-slate-200 rounded-3xl p-5 hover:border-indigo-200 transition-all group">
@@ -272,12 +270,12 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
                       <BookOpen className="h-3 w-3" /> Conteúdos da Prova
                     </span>
                     <span className="text-[10px] font-bold text-slate-400">
-                      {mission.contents.filter((c: any) => c.completed).length}/{mission.contents.length} Concluídos
+                      {mission.contents ? mission.contents.filter((c: any) => c.completed).length : 0}/{mission.contents ? mission.contents.length : 0} Concluídos
                     </span>
                   </div>
                   
                   <div className="flex flex-wrap gap-2">
-                    {mission.contents.map((content: any) => (
+                    {mission.contents?.map((content: any) => (
                       <div key={content.id} className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
                         content.completed 
                         ? 'bg-green-50 border-green-100 text-green-700' 
@@ -313,7 +311,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
                     )}
                   </div>
                   <button 
-                    disabled={mission.contents.length === 0 || generatePlanMutation.isPending}
+                    disabled={!mission.contents || mission.contents.length === 0 || generatePlanMutation.isPending}
                     onClick={() => generatePlanMutation.mutate(mission)}
                     className="flex items-center gap-1.5 text-indigo-600 font-black text-xs hover:bg-indigo-50 px-4 py-2 rounded-xl transition-all uppercase tracking-wider"
                   >
