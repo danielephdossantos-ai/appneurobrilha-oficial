@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star } from "lucide-react";
+import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star, Award, Heart, Puzzle } from "lucide-react";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
-
+import { motion } from "framer-motion";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
 import { cn } from "@/utils/utils";
+
 
 
 
