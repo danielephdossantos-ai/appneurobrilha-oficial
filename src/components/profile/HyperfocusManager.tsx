@@ -192,7 +192,7 @@ export const HyperfocusManager: React.FC = () => {
                 </div>
               </div>
               <div className="p-6 bg-muted/30 border-t border-border flex justify-end">
-                <KidButton variant="white" onClick={() => setIsAdding(false)}>Fechar</KidButton>
+                <KidButton variant="ghost" onClick={() => setIsAdding(false)}>Fechar</KidButton>
               </div>
             </motion.div>
           </div>
