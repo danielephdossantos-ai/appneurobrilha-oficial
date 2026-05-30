@@ -650,8 +650,10 @@ export type Database = {
           anamnesis_edit_count: number | null
           anamnesis_id: string | null
           avatar: string | null
+          coins: number | null
           created_at: string
           diagnostico: string | null
+          earned_today: number | null
           flags: Json | null
           hiperfoco: string | null
           id: string
@@ -663,6 +665,7 @@ export type Database = {
           sensory_mode: string | null
           serie: string | null
           tempo_atencao_min: number | null
+          total_earned: number | null
           updated_at: string
           user_id: string
         }
@@ -671,8 +674,10 @@ export type Database = {
           anamnesis_edit_count?: number | null
           anamnesis_id?: string | null
           avatar?: string | null
+          coins?: number | null
           created_at?: string
           diagnostico?: string | null
+          earned_today?: number | null
           flags?: Json | null
           hiperfoco?: string | null
           id?: string
@@ -684,6 +689,7 @@ export type Database = {
           sensory_mode?: string | null
           serie?: string | null
           tempo_atencao_min?: number | null
+          total_earned?: number | null
           updated_at?: string
           user_id: string
         }
@@ -692,8 +698,10 @@ export type Database = {
           anamnesis_edit_count?: number | null
           anamnesis_id?: string | null
           avatar?: string | null
+          coins?: number | null
           created_at?: string
           diagnostico?: string | null
+          earned_today?: number | null
           flags?: Json | null
           hiperfoco?: string | null
           id?: string
@@ -705,6 +713,7 @@ export type Database = {
           sensory_mode?: string | null
           serie?: string | null
           tempo_atencao_min?: number | null
+          total_earned?: number | null
           updated_at?: string
           user_id?: string
         }
@@ -2042,7 +2051,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_brilhocoins: {
+        Args: { amount: number; child_id: string }
+        Returns: undefined
+      }
       get_auth_user_id: { Args: never; Returns: string }
+      reset_daily_coins: { Args: never; Returns: undefined }
     }
     Enums: {
       mascot_emotion:
