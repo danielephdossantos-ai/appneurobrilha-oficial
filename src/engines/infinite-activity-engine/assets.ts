@@ -9,7 +9,17 @@ export const SCENARIOS = [
   { id: "school", name: "Escola Divertida", theme: "education", visualComplexity: "low" },
   { id: "garden", name: "Jardim das Flores", theme: "nature", visualComplexity: "low" },
   { id: "arctic", name: "Polo Norte", theme: "nature", visualComplexity: "medium" },
-  { id: "desert", name: "Deserto Quente", theme: "nature", visualComplexity: "low" }
+  { id: "desert", name: "Deserto Quente", theme: "nature", visualComplexity: "low" },
+  { id: "hospital", name: "Hospital da Saúde", theme: "health", visualComplexity: "low" },
+  { id: "museum", name: "Museu de História", theme: "culture", visualComplexity: "medium" },
+  { id: "park", name: "Parque das Cores", theme: "arts", visualComplexity: "low" },
+  { id: "laboratory", name: "Laboratório de Ciências", theme: "science", visualComplexity: "medium" },
+  { id: "mountain", name: "Montanha Alta", theme: "nature", visualComplexity: "medium" },
+  { id: "volcano", name: "Vulcão de Fogo", theme: "nature", visualComplexity: "high" },
+  { id: "supermarket", name: "Supermercado Brilha", theme: "economics", visualComplexity: "medium" },
+  { id: "beach", name: "Praia do Sol", theme: "nature", visualComplexity: "low" },
+  { id: "theater", name: "Teatro de Sombras", theme: "arts", visualComplexity: "medium" },
+  { id: "library", name: "Biblioteca Mágica", theme: "education", visualComplexity: "low" }
 ];
 
 export const OBJECTS = [
@@ -32,7 +42,25 @@ export const OBJECTS = [
   { id: "obj_17", name: "Elefante", category: "animal", tags: ["selvagem", "grande"] },
   { id: "obj_18", name: "Barco", category: "transport", tags: ["veiculo", "mar"] },
   { id: "obj_19", name: "Peteca", category: "toy", tags: ["esporte"] },
-  { id: "obj_20", name: "Caderno", category: "education", tags: ["escrita"] }
+  { id: "obj_20", name: "Caderno", category: "education", tags: ["escrita"] },
+  // Corpo Humano
+  { id: "sci_1", name: "Coração", category: "body", tags: ["saude", "interno"] },
+  { id: "sci_2", name: "Cérebro", category: "body", tags: ["saude", "pensar"] },
+  { id: "sci_3", name: "Mão", category: "body", tags: ["externo"] },
+  // Alimentação
+  { id: "sci_4", name: "Brócolis", category: "food", tags: ["saudavel", "verde"] },
+  { id: "sci_5", name: "Leite", category: "food", tags: ["calcio", "branco"] },
+  // Geografia
+  { id: "geo_1", name: "Mapa", category: "location", tags: ["orientacao"] },
+  { id: "geo_2", name: "Bússola", category: "location", tags: ["norte"] },
+  { id: "geo_3", name: "Bandeira", category: "culture", tags: ["brasil"] },
+  // História
+  { id: "his_1", name: "Coroa", category: "history", tags: ["rei", "passado"] },
+  { id: "his_2", name: "Pergaminho", category: "history", tags: ["escrita", "antigo"] },
+  // Artes
+  { id: "art_1", name: "Pincel", category: "arts", tags: ["pintura"] },
+  { id: "art_2", name: "Tinta Guache", category: "arts", tags: ["colorir"] },
+  { id: "art_3", name: "Flauta", category: "arts", tags: ["musica"] }
 ];
 
 export const CHARACTERS = [
@@ -40,6 +68,10 @@ export const CHARACTERS = [
   { id: "char_2", name: "Fada Lumi", role: "guide", personality: "kind" },
   { id: "char_3", name: "Pirata Barba-Azul", role: "adventure", personality: "brave" },
   { id: "char_4", name: "Astronauta Leo", role: "space", personality: "curious" },
-  { id: "char_5", name: "Pajé Curumim", role: "nature", personality: "wise" }
+  { id: "char_5", name: "Pajé Curumim", role: "nature", personality: "wise" },
+  { id: "char_6", name: "Cientista Ester", role: "science", personality: "smart" },
+  { id: "char_7", name: "Pintora Tarsila", role: "arts", personality: "creative" },
+  { id: "char_8", name: "Dino Guia", role: "history", personality: "friendly" }
 ];
+
 
