@@ -6,6 +6,7 @@ import { useState, useEffect, Component, ReactNode } from "react";
 import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle, Palette } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
+import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
 import { ProgressionService } from "@/engines/progression-engine/service";
 import { ProgressionEngine } from "@/engines/progression-engine/engine/progression-engine";
