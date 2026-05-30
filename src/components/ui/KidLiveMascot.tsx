@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
+import { useAppState } from '@/core/store';
+import { useMascot } from '@/contexts/MascotContext';
 import pipMascot from '@/assets/pip-mascot.png';
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud';
@@ -13,6 +15,26 @@ interface LiveMascotProps {
 }
 
 const LiveMascot = ({ emotion = 'happy', size = 'md', className, message }: LiveMascotProps) => {
+  const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
+
+  const getMascotImage = () => {
+    if (!activeMascot || activeMascot.mascot.name !== 'Pip') {
+      return activeMascot?.mascot.image_url || pipMascot;
+    }
+
+    const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
+    const skins = activeMascot.mascot.skins;
+
+    if (firstHyperfocus && skins && skins[firstHyperfocus]) {
+      return skins[firstHyperfocus];
+    }
+
+    return pipMascot;
+  };
+
+  const mascotImage = getMascotImage();
+
   const sizes = {
     sm: 'w-24 h-24',
     md: 'w-32 h-32',
@@ -46,7 +68,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message }: Live
           )}
         >
           <img
-            src={pipMascot}
+            src={mascotImage}
             alt="Pip - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-xl select-none pointer-events-none"
             draggable={false}

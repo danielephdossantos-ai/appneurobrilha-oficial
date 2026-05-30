@@ -1353,6 +1353,7 @@ export type Database = {
           id: string
           image_url: string | null
           name: string
+          skins: Json | null
         }
         Insert: {
           base_stats?: Json | null
@@ -1362,6 +1363,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           name: string
+          skins?: Json | null
         }
         Update: {
           base_stats?: Json | null
@@ -1371,6 +1373,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           name?: string
+          skins?: Json | null
         }
         Relationships: []
       }
