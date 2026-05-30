@@ -17,6 +17,7 @@ import KidLiveMascot from "./ui/KidLiveMascot";
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
+  { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
   { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
