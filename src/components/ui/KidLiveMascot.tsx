@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
+import pipMascot from '@/assets/pip-mascot.png';
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud';
 
