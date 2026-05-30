@@ -65,12 +65,6 @@ const grupos = [
     cor: "from-lilac/30 to-lilac/5",
     atividades: ["Mosaico de Formas", "Sequência de Cores", "Simetria", "Decoração Criativa"],
   },
-  {
-    nome: "Brilha Vida",
-    emoji: "🌱",
-    cor: "from-emerald/30 to-emerald/5",
-    atividades: ["Termômetro das Emoções", "Histórias Sociais", "Amizade e Respeito", "Pausa para Respirar"],
-  },
 ];
 
 function Treino() {
