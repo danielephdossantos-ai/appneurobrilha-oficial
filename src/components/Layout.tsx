@@ -256,7 +256,6 @@ function MobileNav({ path }: { path: string }) {
     { to: "/", icon: Home, label: "Início" },
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
     { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
-    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
     { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
   return (
