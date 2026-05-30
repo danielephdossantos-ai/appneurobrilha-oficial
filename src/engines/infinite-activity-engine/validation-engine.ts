@@ -27,9 +27,10 @@ export class PedagogicalValidationEngine {
     // 1. Validar BNCC
     if (!skill) {
       errors.push(`Habilidade BNCC não encontrada: ${activity.bnccCode}`);
-    } else if (skill.level !== context.grade) {
+    } else if (context && skill.level !== context.grade) {
       errors.push(`Incompatibilidade de nível BNCC: Esperado ${context.grade}, Recebido ${skill.level}`);
     }
+
 
     // 2. Validar Faixa Etária
     // Simplificado: Assumindo que o template já lida com isso, mas verificamos redundância
@@ -39,7 +40,7 @@ export class PedagogicalValidationEngine {
 
     // 3. Validar Carga Sensorial (Baseado em ajustes)
     const sensoryLoad = this.calculateSensoryLoad(activity);
-    if (context.adjustments.visualComplexity === "low" && sensoryLoad > 0.4) {
+    if (context?.adjustments?.visualComplexity === "low" && sensoryLoad > 0.4) {
       errors.push("Excesso de carga sensorial para perfil sensível");
     }
 
