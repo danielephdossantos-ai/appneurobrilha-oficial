@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/hooks/use-auth';
-import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/database/supabase/client';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { toast } from 'sonner';
 
 export interface Mascot {
   id: string;
