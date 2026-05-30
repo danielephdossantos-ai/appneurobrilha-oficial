@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Coins, Trophy } from 'lucide-react';
+import { PipPedagogicalGuidance } from './PipPedagogicalGuidance';
 
 interface SoftCelebrationProps {
   isVisible: boolean;
@@ -34,8 +34,10 @@ export const SoftCelebration: React.FC<SoftCelebrationProps> = ({
             onAnimationComplete={() => {
               setTimeout(onComplete, 3000);
             }}
-            className="bg-white p-8 rounded-3xl shadow-xl flex flex-col items-center space-y-4 max-w-sm w-full"
+            className="bg-white p-8 rounded-[3rem] shadow-2xl flex flex-col items-center space-y-6 max-w-sm w-full border-4 border-primary/10"
           >
+            <PipPedagogicalGuidance stage="celebration" className="scale-125 mb-4" />
+            
             <div className="bg-primary/10 p-4 rounded-full">
               {type === 'stars' && <Star className="w-12 h-12 text-yellow-400 fill-yellow-400" />}
               {type === 'coins' && <Coins className="w-12 h-12 text-orange-400" />}
@@ -52,8 +54,8 @@ export const SoftCelebration: React.FC<SoftCelebrationProps> = ({
               </div>
             )}
             
-            <p className="text-slate-500 text-center">
-              Você está indo maravilhosamente bem!
+            <p className="text-slate-500 text-center font-bold">
+              Cada desafio te deixa mais forte!
             </p>
           </motion.div>
         </motion.div>
