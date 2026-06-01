@@ -230,7 +230,7 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                   Já na Coleção
                 </div>
                 {isPip && (
-                  <Link to="/colecao-pip" className="w-full">
+                    <Link to="/loja-fantasia-pip" className="w-full">
                     <KidButton variant="secondary" className="w-full py-4 text-xs">
                       Ver Fantasias do Pip
                     </KidButton>
