@@ -255,6 +255,19 @@ function Escola() {
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const { gainExperience, gainAffinity, activeMascot } = useMascot();
+  const { addCoins } = useAppState();
+
+  const handleAcerto = () => {
+    setAcertou(true);
+    gainExperience(20);
+    gainAffinity(5);
+    addCoins(50);
+    toast.success("Parabéns!", {
+      description: "Você ganhou +20 XP, +5 Afinidade com Pip e 50 BrilhoCoins!",
+      icon: <SparklesIcon className="text-sun" />
+    });
+  };
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
