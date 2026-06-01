@@ -21,7 +21,6 @@ import pipVeiculos from '@/assets/pip-veiculos.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 import { MascotInventory } from '@/components/rewards/MascotInventory';
-import { PipVirtualPet } from '@/components/mascot/PipVirtualPet';
 
 const ADDITIONAL_CHARACTERS = [
   { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
@@ -46,7 +45,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'store' | 'inventory' | 'pip'>('pip');
+  const [activeTab, setActiveTab] = useState<'store' | 'inventory'>('inventory');
   
   useEffect(() => {
     const fetchAllMascots = async () => {
@@ -98,18 +97,12 @@ const MascotStorePage: React.FC = () => {
           Seus Amiguinhos
         </motion.h1>
         
-        <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <TabButton 
-            active={activeTab === 'pip'} 
-            onClick={() => setActiveTab('pip')}
-            label="Meu Pip"
-            icon={<Heart size={18} />}
-          />
+        <div className="flex justify-center gap-4 mt-8">
           <TabButton 
             active={activeTab === 'inventory'} 
             onClick={() => setActiveTab('inventory')}
-            label="Minha Coleção"
-            icon={<Star size={18} />}
+            label="Meus Mascotes"
+            icon={<Heart size={18} />}
           />
           <TabButton 
             active={activeTab === 'store'} 
@@ -120,9 +113,7 @@ const MascotStorePage: React.FC = () => {
         </div>
       </header>
 
-      {activeTab === 'pip' ? (
-        <PipVirtualPet />
-      ) : activeTab === 'inventory' ? (
+      {activeTab === 'inventory' ? (
         <MascotInventory />
       ) : (
         <>
