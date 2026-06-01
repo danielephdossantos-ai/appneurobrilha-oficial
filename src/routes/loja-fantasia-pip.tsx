@@ -6,9 +6,9 @@ import { KidButton } from '@/components/ui/KidButton';
 import { useAppState, Hiperfoco } from '@/core/store';
 import { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import { Sparkles, ShoppingBag, Check, Star } from 'lucide-react';
-import pipMascot from '@/assets/pip-mascot.png';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import pipMascot from '@/assets/pip-mascot.png';
 
 export const Route = createFileRoute('/loja-fantasia-pip')({
   component: LojaFantasiaPipPage,
@@ -27,58 +27,67 @@ const CATEGORIES = [
 const GENERATED_SKINS: Record<string, any[]> = {};
 
 const HERO_VARIANTS = [
-  { name: "Batman", color: "#1a1a1a", secondary: "#fde047", logo: "🦇" },
-  { name: "Super-Homem", color: "#1d4ed8", secondary: "#dc2626", logo: "S" },
-  { name: "Hulk", color: "#166534", secondary: "#6b21a8", logo: "👊" },
-  { name: "Homem de Ferro", color: "#991b1b", secondary: "#f59e0b", logo: "⚙️" },
-  { name: "Thor", color: "#334155", secondary: "#ef4444", logo: "🔨" },
-  { name: "Homem-Aranha", color: "#b91c1c", secondary: "#1d4ed8", logo: "🕸️" },
-  { name: "Homem-Formiga", color: "#000000", secondary: "#dc2626", logo: "🐜" }
+  { name: "Batman", filter: "brightness(0.3) grayscale(0.5) contrast(1.2)", color: "#1a1a1a", secondary: "#fde047", logo: "🦇" },
+  { name: "Super-Homem", filter: "hue-rotate(-10deg) saturate(1.8)", color: "#1d4ed8", secondary: "#dc2626", logo: "S" },
+  { name: "Hulk", filter: "hue-rotate(80deg) saturate(1.5) brightness(0.8)", color: "#166534", secondary: "#6b21a8", logo: "👊" },
+  { name: "Homem de Ferro", filter: "hue-rotate(-40deg) saturate(2) brightness(0.9)", color: "#991b1b", secondary: "#f59e0b", logo: "⚙️" },
+  { name: "Thor", filter: "hue-rotate(200deg) saturate(0.8) brightness(0.7)", color: "#334155", secondary: "#ef4444", logo: "🔨" },
+  { name: "Homem-Aranha", filter: "hue-rotate(-20deg) saturate(1.5)", color: "#b91c1c", secondary: "#1d4ed8", logo: "🕸️" },
+  { name: "Homem-Formiga", filter: "brightness(0.4) sepia(1) hue-rotate(-50deg) saturate(3)", color: "#000000", secondary: "#dc2626", logo: "🐜" }
+];
+
+const PRINCESS_VARIANTS = [
+  { name: "Rosa Doce", filter: "hue-rotate(0deg)", color: "#ec4899" },
+  { name: "Céu Azul", filter: "hue-rotate(180deg)", color: "#3b82f6" },
+  { name: "Brilho Real", filter: "hue-rotate(40deg) brightness(1.2) saturate(1.5)", color: "#eab308" },
+  { name: "Floresta", filter: "hue-rotate(90deg)", color: "#10b981" },
+  { name: "Lavanda", filter: "hue-rotate(260deg)", color: "#a855f7" },
+  { name: "Coral", filter: "hue-rotate(-30deg) saturate(1.3)", color: "#f43f5e" },
+  { name: "Neve", filter: "grayscale(1) brightness(1.5)", color: "#f8fafc" }
 ];
 
 const GENERAL_VARIANTS = [
-  { name: "Clássico", color: "#3b82f6" },
-  { name: "Real", color: "#a855f7" },
-  { name: "Galáctico", color: "#1e1b4b" },
-  { name: "Místico", color: "#ec4899" },
-  { name: "Lendário", color: "#eab308" },
-  { name: "Aventureiro", color: "#10b981" },
-  { name: "Supremo", color: "#ef4444" }
+  { name: "Estilo 1", filter: "hue-rotate(0deg)", color: "#3b82f6" },
+  { name: "Estilo 2", filter: "hue-rotate(45deg)", color: "#a855f7" },
+  { name: "Estilo 3", filter: "hue-rotate(90deg)", color: "#10b981" },
+  { name: "Estilo 4", filter: "hue-rotate(135deg)", color: "#fde047" },
+  { name: "Estilo 5", filter: "hue-rotate(180deg)", color: "#0ea5e9" },
+  { name: "Estilo 6", filter: "hue-rotate(225deg)", color: "#f43f5e" },
+  { name: "Estilo 7", filter: "hue-rotate(270deg)", color: "#6366f1" }
 ];
 
-// Gerar modelos únicos para cada categoria seguindo estritamente o padrão visual do Pip
 CATEGORIES.forEach(cat => {
-  const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
+  let variants = GENERAL_VARIANTS;
+  if (cat.id === 'super-herois') variants = HERO_VARIANTS;
+  if (cat.id === 'princesas' || cat.id === 'super-heroinas') variants = PRINCESS_VARIANTS;
+  
   const baseImage = PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'] || pipMascot;
   
-  GENERATED_SKINS[cat.id] = variants.map((v: any, i) => {
-    return {
-      id: `skin-${cat.id}-${i + 1}`,
-      name: cat.id === 'super-herois' ? `Pip ${v.name}` : `Pip ${cat.name} ${v.name}`,
-      category: cat.id as Hiperfoco,
-      price: 150 + (i * 50),
-      image: baseImage,
-      color: v.color,
-      secondary: v.secondary,
-      logo: v.logo,
-      description: cat.id === 'super-herois' 
-        ? `Pip com os superpoderes do ${v.name}!` 
-        : `Um visual único de ${cat.name} no estilo ${v.name}!`,
-    };
-  });
+  GENERATED_SKINS[cat.id] = variants.map((v: any, i) => ({
+    id: `skin-${cat.id}-${i + 1}`,
+    name: (cat.id === 'super-herois' || cat.id === 'princesas' || cat.id === 'super-heroinas') ? `Pip ${v.name}` : `Pip ${cat.name} ${v.name}`,
+    category: cat.id as Hiperfoco,
+    price: 150 + (i * 50),
+    image: baseImage,
+    filter: v.filter,
+    color: v.color,
+    secondary: v.secondary || v.color,
+    logo: v.logo || null,
+    description: `Transforme o Pip com o incrível estilo ${v.name}!`,
+  }));
 });
 
 function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
-  const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
+  const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id);
 
   const handleSelectSkin = (skin: any) => {
     if (!activeChild) return;
     
-    // Salvando a skin específica e suas propriedades visuais nos flags
     const updatedFlags = {
       ...(activeChild.flags || {}),
       active_skin_url: skin.image,
+      active_skin_filter: skin.filter,
       active_skin_color: skin.color,
       active_skin_secondary: skin.secondary,
       active_skin_logo: skin.logo
@@ -115,12 +124,11 @@ function LojaFantasiaPipPage() {
           >
             Loja de Fantasias
           </motion.h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Escolha um visual incrível e o Pip vai se transformar na hora, igual ao Tom Gato!
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">
+            Personalize seu Pip com estilos exclusivos! Escolha uma fantasia e veja a transformação instantânea.
           </p>
         </header>
 
-        {/* Categorias */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {CATEGORIES.map((cat) => (
             <button
@@ -138,11 +146,12 @@ function LojaFantasiaPipPage() {
           ))}
         </div>
 
-        {/* Grade de Fantasias */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <AnimatePresence mode="popLayout">
             {GENERATED_SKINS[selectedCategory].map((skin, index) => {
-              const isCurrent = (activeChild?.flags as any)?.active_skin_logo === skin.logo && (activeChild?.flags as any)?.active_skin_color === skin.color;
+              const isCurrent = (activeChild?.flags as any)?.active_skin_logo === skin.logo && 
+                               (activeChild?.flags as any)?.active_skin_color === skin.color &&
+                               (activeChild?.flags as any)?.active_skin_url === skin.image;
               
               return (
                 <motion.div
@@ -153,52 +162,50 @@ function LojaFantasiaPipPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all overflow-hidden ${
+                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all overflow-hidden relative group ${
                     isCurrent ? "border-primary bg-primary/5" : "border-primary/10 hover:border-primary/30"
                   }`}>
                     <div 
-                      className="relative w-40 h-40 mb-6 rounded-full flex items-center justify-center overflow-hidden"
-                      style={{ backgroundColor: `${skin.color}20` }}
+                      className="relative w-44 h-44 mb-6 rounded-3xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
+                      style={{ backgroundColor: `${skin.color}15` }}
                     >
-                      {/* Efeito de cor da fantasia */}
-                      <div className="absolute inset-0 opacity-20" style={{ backgroundColor: skin.color }} />
+                      <div className="absolute inset-0 opacity-10" style={{ backgroundColor: skin.color }} />
                       
                       <img 
                         src={skin.image} 
                         alt={skin.name} 
-                        className="w-full h-full object-contain drop-shadow-xl relative z-10" 
-                        style={{ 
-                          filter: skin.color ? `drop-shadow(0 0 10px ${skin.color}50)` : 'none'
-                        }}
+                        className="w-full h-full object-contain drop-shadow-2xl relative z-10" 
+                        style={{ filter: skin.filter }}
                       />
                       
-                      {/* Logo do herói no peito */}
                       {skin.logo && (
-                        <div className="absolute bottom-10 z-20 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-lg border-2" style={{ borderColor: skin.secondary }}>
-                          <span className="text-sm font-black" style={{ color: skin.color }}>{skin.logo}</span>
+                        <div className="absolute bottom-10 z-20 bg-white/95 rounded-full w-12 h-12 flex items-center justify-center shadow-2xl border-2" style={{ borderColor: skin.secondary }}>
+                          <span className="text-xl font-black" style={{ color: skin.color }}>{skin.logo}</span>
                         </div>
                       )}
 
                       {isCurrent && (
-                        <div className="absolute -top-2 -right-2 bg-success text-white p-2 rounded-full shadow-lg z-30">
+                        <div className="absolute top-3 right-3 bg-success text-white p-2 rounded-full shadow-lg z-30">
                           <Check size={20} strokeWidth={4} />
                         </div>
                       )}
                     </div>
                     
-                    <h3 className="text-xl font-black text-primary mb-2">{skin.name}</h3>
-                    <p className="text-xs text-muted-foreground mb-6 flex-1 italic">{skin.description}</p>
+                    <h3 className="text-xl font-black text-primary mb-2 leading-tight">{skin.name}</h3>
+                    <p className="text-xs text-muted-foreground mb-6 flex-1 font-bold italic opacity-70">
+                      {skin.description}
+                    </p>
                     
                     <KidButton
                       variant={isCurrent ? "secondary" : "primary"}
                       onClick={() => handleSelectSkin(skin)}
-                      className="w-full"
+                      className="w-full py-4"
                       style={!isCurrent ? { backgroundColor: skin.color, borderColor: skin.secondary } : {}}
                     >
                       {isCurrent ? "Vestido" : (
                         <span className="flex items-center gap-2">
-                          <Star size={16} fill="currentColor" />
-                          Vestir Agora
+                          <Sparkles size={16} fill="currentColor" />
+                          Vestir Pip
                         </span>
                       )}
                     </KidButton>
