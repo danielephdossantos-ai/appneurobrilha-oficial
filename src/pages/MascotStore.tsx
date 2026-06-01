@@ -327,15 +327,14 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
               <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
 
             ) : mascot.image_url ? (
-              <img 
-                src={`${mascot.image_url}${mascot.image_url.includes('?') ? '&' : '?'}v=${new Date().getTime()}`} 
-                alt={mascot.name} 
-                className="w-full h-full object-contain drop-shadow-2xl filter brightness-110" 
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${mascot.name}&backgroundColor=transparent`;
-                }}
-              />
+              <div className="relative w-full h-full">
+                <img 
+                  src={mascot.image_url} 
+                  alt={mascot.name} 
+                  className="w-full h-full object-contain drop-shadow-2xl filter brightness-110 transition-all duration-500 group-hover:scale-110" 
+                  loading="lazy"
+                />
+              </div>
             ) : (
               <span className="text-7xl animate-pulse">🧩</span>
             )}
