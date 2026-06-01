@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart, Volume2, Smile, Activity } from "lucide-react";
+import { AlertCircle, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart, Volume2, Smile, Sparkles, Activity } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
