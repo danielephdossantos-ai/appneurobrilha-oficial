@@ -45,15 +45,18 @@ interface LiveMascotProps {
   className?: string;
   message?: string;
   showBadge?: boolean;
+  skinUrl?: string; // Add this prop to allow overriding the skin image
 }
 
-const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true }: LiveMascotProps) => {
+const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true, skinUrl }: LiveMascotProps) => {
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
   const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
 
   const getMascotImage = () => {
+    if (skinUrl) return skinUrl; // Priority to the passed skinUrl
+    
     if (!isPip) {
       return activeMascot?.mascot.image_url || pipMascot;
     }
