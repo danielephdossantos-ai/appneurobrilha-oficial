@@ -75,17 +75,51 @@ const grupos = [
 
 function Treino() {
   const { activeChild, addCoins } = useAppState();
-  const [selectedAtividade, setSelectedAtividade] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("Sons Iniciais");
+  const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const { gainExperience, gainAffinity } = useMascot();
 
+  const handleSelectAtividade = (nome: string, categoria: string) => {
+    const activities = NEURO_ACTIVITIES[categoria];
+    if (activities) {
+      // Pega uma atividade aleatória da categoria ou baseada no nome
+      const activity = activities.find(a => a.title === nome) || activities[0];
+      setSelectedAtividade(activity);
+      setIsAnswered(false);
+      setIsCorrect(null);
+    }
+  };
+
+  const handleAnswer = (option: string) => {
+    if (isAnswered) return;
+    
+    const correct = option === selectedAtividade?.content.target;
+    setIsCorrect(correct);
+    setIsAnswered(true);
+
+    if (correct) {
+      toast.success("Parabéns!", { description: "Você acertou o som!" });
+    } else {
+      toast.error("Ops!", { description: "Tente ouvir o som novamente com o Pip." });
+    }
+  };
+
   const handleConcluir = () => {
+    if (!isCorrect) {
+      toast.error("Complete o desafio primeiro!");
+      return;
+    }
     gainExperience(30);
     gainAffinity(10);
     addCoins(100);
-    toast.success("Treino Concluído!", {
-      description: "Sua mente está mais forte! Ganhou +30 XP, +10 Afinidade e 100 BrilhoCoins!",
+    toast.success("Missão Cumprida!", {
+      description: "Sua mente está mais forte! Ganhou +30 XP e 100 BrilhoCoins!",
       icon: <SparklesIcon className="text-sun" />
     });
+    setSelectedAtividade(null);
+    setIsAnswered(false);
   };
 
   return (
