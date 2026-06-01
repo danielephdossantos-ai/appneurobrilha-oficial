@@ -25,11 +25,11 @@ import { cn } from '@/utils/utils';
 
 
 const ADDITIONAL_CHARACTERS = [
-  { id: 'pip-dino-t-rex', name: 'Pip T-Rex', description: 'O rei dos dinossauros em uma versão super fofa e divertida!', category: 'premium', image_url: pipDinossauros },
-  { id: 'pip-dino-triceratops', name: 'Pip Triceratops', description: 'Três chifres e muita coragem para explorar o mundo jurássico.', category: 'premium', image_url: pipDinossauros },
-  { id: 'pip-dino-pterodactilo', name: 'Pip Pterodáctilo', description: 'Voando alto sobre os vulcões com o Pip voador!', category: 'premium', image_url: pipDinossauros },
-  { id: 'pip-dino-braquiossauro', name: 'Pip Braquiossauro', description: 'Pescoço longo para alcançar as folhas mais altas do aprendizado.', category: 'premium', image_url: pipDinossauros },
-  { id: 'pip-dino-estegossauro', name: 'Pip Estegossauro', description: 'Com suas placas coloridas, o Pip está pronto para a aventura!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-t-rex', name: 'Pip T-Rex', description: 'O rei dos dinossauros com dentes grandes e um rugido amigável!', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4' },
+  { id: 'pip-dino-triceratops', name: 'Pip Triceratops', description: 'Três chifres e um escudo colorido para muitas aventuras jurássicas.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf' },
+  { id: 'pip-dino-pterodactilo', name: 'Pip Pterodáctilo', description: 'Voando alto com asas enormes para ver o mundo de cima!', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Pter&backgroundColor=c0aede' },
+  { id: 'pip-dino-braquiossauro', name: 'Pip Braquiossauro', description: 'O gigante gentil com pescoço longo para alcançar as estrelas.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Braq&backgroundColor=d1d4f9' },
+  { id: 'pip-dino-estegossauro', name: 'Pip Estegossauro', description: 'Com placas coloridas nas costas e muita vontade de brincar!', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Steg&backgroundColor=ffd5dc' },
   { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: pipEspaco },
   { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: pipArte },
   { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: pipAnimais },
