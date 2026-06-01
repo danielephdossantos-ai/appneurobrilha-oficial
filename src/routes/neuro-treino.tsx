@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { Component, ReactNode, useState, useEffect } from "react";
+import { Component, ReactNode, useState, useEffect, useCallback } from "react";
 import { 
   AlertCircle, 
   Play, 
@@ -18,7 +18,11 @@ import {
   Activity,
   Mic,
   Move,
-  Pencil
+  Pencil,
+  VolumeX,
+  Volume2 as VolIcon,
+  Sparkle,
+  RefreshCw
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
