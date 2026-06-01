@@ -151,6 +151,7 @@ function Treino() {
   // Estados do Motor de Variações Premium
   const [variacaoAtual, setVariacaoAtual] = useState<any>(null);
   const [faseIndex, setFaseIndex] = useState(1);
+  const [pontos, setPontos] = useState(0);
   const [textoBalao, setTextoBalao] = useState<string>('Olá, meu amiguinho! Toque em uma missão para a gente treinar juntos!');
   const [mascoteAnimando, setMascoteAnimando] = useState(false);
   const [audioMutado, setAudioMutado] = useState(false);
