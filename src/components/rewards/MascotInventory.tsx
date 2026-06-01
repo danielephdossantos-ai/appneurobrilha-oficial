@@ -1,5 +1,6 @@
 import React from 'react';
 import { useMascot, UserMascot } from '@/contexts/MascotContext';
+import { Link } from '@tanstack/react-router';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
 import { motion } from 'framer-motion';
