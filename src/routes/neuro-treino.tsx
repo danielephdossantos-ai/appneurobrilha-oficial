@@ -387,25 +387,28 @@ function Treino() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
+                className="grid grid-cols-2 md:grid-cols-3 gap-4 flex-1 items-center py-2"
               >
-                {clinicaCategorias.map((cat) => (
+                {[
+                  { id: 'atencao', nome: 'Atenção Super Focada', cor: 'bg-amber-400 text-amber-950', icone: <Target className="w-8 h-8" /> },
+                  { id: 'memoria', nome: 'Memória de Elefante', cor: 'bg-purple-400 text-white', icone: <Brain className="w-8 h-8" /> },
+                  { id: 'sons_iniciais', nome: 'Sons Iniciais', cor: 'bg-sky-400 text-sky-950', icone: <Volume2 className="w-8 h-8" /> },
+                  { id: 'motorzinho', nome: 'Motorzinho dos Sons', cor: 'bg-emerald-400 text-emerald-950', icone: <Activity className="w-8 h-8" /> },
+                  { id: 'rimas', nome: 'Rimas', cor: 'bg-pink-400 text-white', icone: <SparklesIcon className="w-8 h-8" /> },
+                  { id: 'regulacao', nome: 'Regulação Emocional', cor: 'bg-rose-400 text-white', icone: <Smile className="w-8 h-8" /> }
+                ].map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => selecionarCategoria(cat.id)}
                     className={cn(
-                      "p-6 rounded-[24px] border-b-8 border-black/10 flex flex-col items-center justify-between text-center gap-4 transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0",
-                      cat.cor, cat.corTexto
+                      "p-5 rounded-2xl border-b-8 border-black/10 flex flex-col items-center justify-center text-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0 h-36",
+                      cat.cor
                     )}
                   >
-                    <div className="bg-white/95 p-4 rounded-2xl shadow-inner text-slate-800">
+                    <div className="bg-white/90 p-3 rounded-xl shadow-inner text-slate-800">
                       {cat.icone}
                     </div>
-                    <div>
-                      <span className="text-xl font-black block tracking-wide">{cat.nome}</span>
-                      <p className="text-[10px] font-bold opacity-70 uppercase tracking-tighter mb-1">{cat.descricao}</p>
-                      <span className="text-[11px] bg-black/10 px-2.5 py-0.5 rounded-full font-bold uppercase">{cat.atividades.length} Protocolos</span>
-                    </div>
+                    <span className="text-md font-black tracking-wide leading-tight">{cat.nome}</span>
                   </button>
                 ))}
               </motion.div>
