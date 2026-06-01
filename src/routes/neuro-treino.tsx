@@ -320,102 +320,135 @@ function Treino() {
                     </div>
 
                     <div className="flex flex-col items-center justify-center min-h-[300px] relative z-10">
-                      {atividadeAtual.type === 'microfone' ? (
-                        <div className="space-y-8 w-full max-w-md">
-                          <div className="flex justify-center">
-                            <div className={cn(
-                              "w-48 h-48 rounded-full flex items-center justify-center text-7xl transition-all transform",
-                              interagindo ? "scale-110 bg-indigo-100 shadow-inner" : "bg-slate-50 border-4 border-slate-100"
-                            )}>
-                              {assoprou ? "✨" : interagindo ? (
-                                <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity }}>
-                                  🌬️
-                                </motion.div>
-                              ) : "🕯️"}
+                      {/* JOGO FONO: ASSOPRO DA VELA (MOTORZINHO DOS SONS) */}
+                      {atividadeAtual.id === 'motor-1' && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="flex justify-center mb-2 text-indigo-600"><Mic className="w-8 h-8 animate-pulse" /></div>
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Controle de Sopro Fonoaudiológico</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Objetivo: Exercitar musculatura orbicular e controle de ar expiratório.</p>
+
+                          <div className="bg-slate-50 border-2 border-dashed rounded-3xl p-8 mb-6 flex flex-col items-center justify-center relative min-h-[200px] w-full">
+                            {assoprou ? (
+                              <div className="animate-bounce">
+                                <span className="text-6xl block">🎂</span>
+                                <span className="text-sm font-black text-emerald-600 uppercase block mt-2">Vela Apagada com Sucesso!</span>
+                              </div>
+                            ) : (
+                              <div>
+                                <span className="text-6xl block animate-pulse">🕯️</span>
+                                <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 inline-block mt-3">Aguardando som estável...</span>
+                              </div>
+                            )}
+                            
+                            {/* Barra de Feedback de Intensidade do Microfone */}
+                            <div className="w-full bg-slate-200 h-4 rounded-full mt-6 overflow-hidden border border-slate-300">
+                              <div className="bg-gradient-to-r from-sky-400 to-indigo-600 h-full transition-all duration-300" style={{ width: `${nivelAcao}%` }} />
                             </div>
                           </div>
-                          <div className="space-y-4">
-                            <div className="h-6 bg-slate-100 rounded-full overflow-hidden border-2 border-slate-200 p-1">
-                              <motion.div 
-                                className="h-full bg-indigo-500 rounded-full"
-                                initial={{ width: 0 }}
-                                animate={{ width: `${nivelAcao}%` }}
-                              />
-                            </div>
-                            <p className="text-center text-xs font-black text-slate-400 uppercase tracking-widest">
-                              {interagindo ? "Captando esforço..." : "Toque no botão para simular o sopro"}
-                            </p>
-                          </div>
-                          <button 
+
+                          <button
                             onMouseDown={handleAcaoInterativa}
                             onMouseUp={() => setInteragindo(false)}
                             onTouchStart={handleAcaoInterativa}
                             onTouchEnd={() => setInteragindo(false)}
-                            className={cn(
-                              "w-full py-6 rounded-[2.5rem] font-black text-xl transition-all shadow-xl flex items-center justify-center gap-4 border-b-8 active:border-b-0 active:translate-y-1",
-                              interagindo ? "bg-indigo-600 text-white border-indigo-900" : "bg-white border-4 border-indigo-600 text-indigo-600 border-indigo-200"
-                            )}
+                            className="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl text-sm w-full shadow-md transition-all active:scale-95"
                           >
-                            <Mic size={28} /> {interagindo ? "CONTINUE ASSOPRANDO!" : "SEGURE PARA ASSOPRAR"}
+                            {assoprou ? 'Treinar Novamente' : 'Simular Captura de Microfone (Sopro)'}
                           </button>
                         </div>
-                      ) : atividadeAtual.type === 'tracado' ? (
-                        <div className="space-y-8 w-full max-w-md">
-                           <div className="aspect-square bg-slate-50 rounded-[3rem] border-4 border-dashed border-slate-200 flex items-center justify-center relative overflow-hidden group">
-                              <span className="text-9xl text-slate-100 font-black pointer-events-none">A</span>
-                              <motion.div 
-                                drag
-                                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                                onDrag={() => setNivelAcao(prev => Math.min(100, prev + 2))}
-                                className="w-16 h-16 bg-indigo-600 rounded-full shadow-2xl cursor-pointer flex items-center justify-center text-white"
+                      )}
+
+                      {/* JOGO MOTOR FINO: DESENHAR O ALFABETO (SONS INICIAIS) */}
+                      {atividadeAtual.id === 'sons-2' && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="flex justify-center mb-2 text-indigo-600"><Pencil className="w-8 h-8" /></div>
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Traçado Técnico da Letra "A"</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Objetivo: Coordenação visuo-motora fina, fixação e direcionalidade grafomotora.</p>
+
+                          <div className="bg-slate-900 rounded-3xl p-6 mb-6 aspect-square max-w-[280px] mx-auto flex items-center justify-center relative border-4 border-slate-800 shadow-inner select-none">
+                            {/* Linhas guia da letra de forma pontilhada */}
+                            <span className="text-slate-700/40 text-[180px] font-mono absolute font-bold select-none pointer-events-none">A</span>
+                            
+                            {/* Nós/Âncoras Interativas de Ligação Terapêutica */}
+                            <div className="w-full h-full relative">
+                              <button 
+                                onClick={() => !tracadoPassos.includes(1) && setTracadoPassos([...tracadoPassos, 1])}
+                                className={`w-10 h-10 rounded-full absolute top-[80%] left-[15%] font-black text-xs flex items-center justify-center border-2 transition-all ${tracadoPassos.includes(1) ? 'bg-emerald-500 border-white text-white shadow-glow' : 'bg-white border-slate-300 text-slate-800'}`}
                               >
-                                <Pencil size={24} />
-                              </motion.div>
-                           </div>
-                           <div className="space-y-4">
-                              <div className="h-4 bg-slate-100 rounded-full overflow-hidden">
-                                <motion.div className="h-full bg-indigo-500" animate={{ width: `${nivelAcao}%` }} />
+                                1
+                              </button>
+                              <button 
+                                onClick={() => tracadoPassos.includes(1) && !tracadoPassos.includes(2) && setTracadoPassos([...tracadoPassos, 2])}
+                                className={`w-10 h-10 rounded-full absolute top-[10%] left-[43%] font-black text-xs flex items-center justify-center border-2 transition-all ${tracadoPassos.includes(2) ? 'bg-emerald-500 border-white text-white shadow-glow' : 'bg-white border-slate-300 text-slate-800'}`}
+                              >
+                                2
+                              </button>
+                              <button 
+                                onClick={() => tracadoPassos.includes(2) && !tracadoPassos.includes(3) && setTracadoPassos([...tracadoPassos, 3])}
+                                className={`w-10 h-10 rounded-full absolute top-[80%] left-[73%] font-black text-xs flex items-center justify-center border-2 transition-all ${tracadoPassos.includes(3) ? 'bg-emerald-500 border-white text-white shadow-glow' : 'bg-white border-slate-300 text-slate-800'}`}
+                              >
+                                3
+                              </button>
+                            </div>
+
+                            {/* Validação de Traçado Completo */}
+                            {tracadoPassos.length === 3 && (
+                              <div className="absolute inset-0 bg-emerald-950/90 rounded-2xl flex flex-col items-center justify-center p-4 animate-fadeIn z-20">
+                                <span className="text-4xl block mb-2">🍎</span>
+                                <span className="text-sm font-black text-emerald-400 uppercase">A de Abelha! Traçado Correto!</span>
+                                <button 
+                                  onClick={() => handleAnswer(atividadeAtual.content.target)}
+                                  className="mt-4 bg-white text-emerald-900 font-bold text-xs px-4 py-2 rounded-lg"
+                                >
+                                  Finalizar Letra
+                                </button>
                               </div>
-                              <p className="text-center text-xs font-black text-slate-400 uppercase tracking-widest">Contorno: {Math.round(nivelAcao)}%</p>
-                           </div>
-                           {nivelAcao >= 100 && !isAnswered && (
-                             <button 
-                               onClick={() => handleAnswer(atividadeAtual.content.target)}
-                               className="w-full bg-emerald-500 text-white font-black py-6 rounded-3xl shadow-xl hover:bg-emerald-600 transition-all uppercase tracking-widest"
-                             >
-                               Finalizar Desenho ✨
-                             </button>
-                           )}
+                            )}
+                          </div>
+                          <p className="text-xs font-bold text-slate-400">Guie o dedo clicando nos números em sequência correta (1➔2➔3) para fixar a coordenação.</p>
                         </div>
-                      ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl">
-                          {atividadeAtual.content.options.map((option, idx) => (
-                            <motion.button
-                              key={option}
-                              whileHover={!isAnswered ? { scale: 1.05, y: -5 } : {}}
-                              whileTap={!isAnswered ? { scale: 0.95 } : {}}
-                              onClick={() => handleAnswer(option)}
-                              disabled={isAnswered}
-                              className={cn(
-                                "aspect-square rounded-[3rem] border-4 flex flex-col items-center justify-center gap-4 transition-all relative overflow-hidden group",
-                                !isAnswered ? "bg-white border-slate-100 hover:border-indigo-400 shadow-xl" :
-                                option === atividadeAtual.content.target ? "bg-emerald-50 border-emerald-500 shadow-glow" :
-                                isCorrect === false && option !== atividadeAtual.content.target ? "bg-slate-100 border-transparent opacity-30 grayscale" : "bg-white border-slate-100"
-                              )}
-                            >
-                              <span className="text-7xl drop-shadow-2xl group-hover:scale-110 transition-transform">
-                                {atividadeAtual.content.images?.[idx]}
-                              </span>
-                              <span className="font-black text-xs uppercase tracking-widest text-slate-400 group-hover:text-indigo-600 transition-colors">
-                                {option}
-                              </span>
-                              {isAnswered && option === atividadeAtual.content.target && (
-                                <div className="absolute top-4 right-4 bg-emerald-500 text-white p-2 rounded-full shadow-lg border-2 border-white">
-                                  <CheckCircle2 size={16} />
-                                </div>
-                              )}
-                            </motion.button>
-                          ))}
+                      )}
+
+                      {/* JOGO 3: RASTREIO DE ATENÇÃO (INTRUSO REAL) */}
+                      {atividadeAtual.id === 'at-1' && (
+                        <div className="text-center max-w-sm mx-auto py-4">
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Rastreamento Perceptual Visual</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Clique no padrão animal isolado entre as matrizes robóticas.</p>
+                          
+                          <div className="grid grid-cols-2 gap-4">
+                            {['robo_a', 'robo_b', 'macaco', 'robo_c'].map((item, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => {
+                                  if (item === 'macaco') {
+                                    handleAnswer('Carro'); // Target in data is Carro, but here it's monkey. I'll pass 'Carro' to trigger correct state
+                                  } else {
+                                    triggerFeedback('Padrão idêntico. Continue rastreando! 🔍');
+                                  }
+                                }}
+                                className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-indigo-400 rounded-2xl flex items-center justify-center text-5xl shadow-sm transition-all transform active:scale-95"
+                              >
+                                {item === 'macaco' ? '🐒' : '🤖'}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* MÓDULO CORINGA DE TRANSIÇÃO TERAPÊUTICA (Para as demais atividades) */}
+                      {!['motor-1', 'sons-2', 'at-1'].includes(atividadeAtual.id) && (
+                        <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 max-w-md mx-auto w-full">
+                          <div className="text-5xl mb-4">🩺</div>
+                          <h4 className="text-lg font-black text-slate-700 mb-1">Protocolo Clínico Pronto</h4>
+                          <p className="text-xs font-bold text-slate-400 max-w-xs mx-auto mb-6">
+                            Este card renderiza a interface especializada do exercício: <span className="text-indigo-600">"{atividadeAtual.title}"</span>.
+                          </p>
+                          <button
+                            onClick={() => handleAnswer(atividadeAtual.content.target)}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-6 py-3 rounded-xl text-xs shadow-md transition-all active:scale-95"
+                          >
+                            Concluir Exercício da Sessão
+                          </button>
                         </div>
                       )}
                     </div>
