@@ -6,6 +6,7 @@ import { KidButton } from '@/components/ui/KidButton';
 import { useAppState, Hiperfoco } from '@/core/store';
 import { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import { Sparkles, ShoppingBag, Check, Star } from 'lucide-react';
+import pipMascot from '@/assets/pip-mascot.png';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
