@@ -89,7 +89,8 @@ const grupos = [
 ];
 
 function Treino() {
-  const { activeChild, addCoins, coins } = useAppState();
+  const { activeChild, addCoins } = useAppState();
+  const coins = activeChild?.coins || 0;
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
