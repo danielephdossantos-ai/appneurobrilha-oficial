@@ -33,7 +33,7 @@ export const PIP_SKINS: Record<string, string> = {
   robos: pipRobos,
   veiculos: pipVeiculos,
 };
-import { Award, Puzzle } from 'lucide-react';
+
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'waving' | 'blinking';
 
@@ -81,16 +81,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   };
 
   const getEmotionStyles = () => {
-    switch (emotion) {
-      case 'happy': return 'animate-bounce-gentle';
-      case 'excited': return 'animate-celebrate';
-      case 'sleeping': return 'animate-yawn opacity-80';
-      case 'thinking': return 'animate-float-thinking';
-      case 'proud': return 'scale-110';
-      case 'waving': return 'animate-wave';
-      case 'blinking': return 'animate-blink';
-      default: return '';
-    }
+    return '';
   };
 
   return (
@@ -110,29 +101,6 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
           {/* Expressões faciais via filtros ou sobreposições se necessário */}
           {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
           
-          {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
-          {isPip && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-              <div className="relative w-1/5 h-1/5 translate-y-4">
-                <Puzzle 
-                  className="w-full h-full text-sun animate-glow-puzzle fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
-                  strokeWidth={3}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Selo Mascote Oficial - Agora mais destacado */}
-          {isPip && showBadge && (
-            <motion.div 
-              initial={{ scale: 0, rotate: -25 }}
-              animate={{ scale: 1.1, rotate: -15 }}
-              className="absolute -top-4 -right-8 bg-gradient-to-r from-sun to-warning text-primary font-black text-xs px-4 py-2 rounded-xl border-4 border-white shadow-xl z-20 flex items-center gap-2 uppercase tracking-tighter"
-            >
-              <Award className="w-4 h-4" />
-              Mascote Oficial
-            </motion.div>
-          )}
 
           <img
             src={mascotImage}
