@@ -193,27 +193,34 @@ function Treino() {
     setTimeout(() => setFeedback(null), 3500);
   };
 
-  const handleSelectAtv = (activityId: string) => {
-    setAtvAtiva(activityId);
+  // Carrega uma variação aleatória (entre as disponíveis) sempre que muda de fase
+  const carregarNovaVariacao = useCallback((categoria: string) => {
+    const lista = BANCO_DE_DADOS_CLINICO[categoria as keyof typeof BANCO_DE_DADOS_CLINICO] || BANCO_DE_DADOS_CLINICO.atencao;
+    const aleatorio = lista[Math.floor(Math.random() * lista.length)];
+    setVariacaoAtual(aleatorio);
     setIsAnswered(false);
     setIsCorrect(null);
     setNivelAcao(0);
     setInteragindo(false);
     setAssoprou(false);
     setTracadoPassos([]);
-
-    // Lógica para carregar variação aleatória do banco premium
-    if (catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva]) {
-      const variações = BANCO_DE_DADOS_CLINICO[catAtiva];
-      const randomVar = variações[Math.floor(Math.random() * variações.length)];
-      setVariacaoAtual(randomVar);
-      
-      // Mudar orientação por voz
-      if (activityId === 'at-1') {
-        terapeutaFalar(randomVar.dicaAudio);
-      } else if (catAtiva === 'sons_iniciais') {
-        terapeutaFalar(randomVar.somExplicacao);
+    
+    // Faz a Terapeuta IA explicar o jogo imediatamente por áudio para a criança não precisar ler
+    setTimeout(() => {
+      if (categoria === 'sons_iniciais') {
+        terapeutaFalar(`${aleatorio.somExplicacao} ... Agora me diz: ${aleatorio.dicaAudio}`);
+      } else {
+        terapeutaFalar(aleatorio.dicaAudio);
       }
+    }, 200);
+  }, [terapeutaFalar]);
+
+  const handleSelectAtv = (activityId: string) => {
+    setAtvAtiva(activityId);
+    setFaseIndex(1);
+    
+    if (catAtiva) {
+      carregarNovaVariacao(catAtiva);
     }
   };
 
@@ -249,11 +256,16 @@ function Treino() {
     setIsAnswered(true);
 
     if (correct) {
-      triggerFeedback("Excelente! Missão cumprida com sucesso!");
-      setPontos(prev => prev + 10);
+      setPontos(prev => prev + 20);
       setFaseIndex(prev => prev + 1);
+      triggerFeedback('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
+      
+      // Progride para uma nova variação inédita
+      if (catAtiva) {
+        setTimeout(() => carregarNovaVariacao(catAtiva), 2500);
+      }
     } else {
-      terapeutaFalar("Não desanime! Tente novamente, eu sei que você consegue!");
+      terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
       toast.error("Tente novamente!", { 
         description: "O Pip está aqui para te ajudar.",
         icon: <XCircle className="text-rose-500" />
