@@ -249,7 +249,10 @@ function Treino() {
 
     if (correct) {
       triggerFeedback("Excelente! Missão cumprida com sucesso!");
+      setPontos(prev => prev + 10);
+      setFaseIndex(prev => prev + 1);
     } else {
+      terapeutaFalar("Não desanime! Tente novamente, eu sei que você consegue!");
       toast.error("Tente novamente!", { 
         description: "O Pip está aqui para te ajudar.",
         icon: <XCircle className="text-rose-500" />
@@ -261,6 +264,7 @@ function Treino() {
     gainExperience(30);
     gainAffinity(10);
     addCoins(100);
+    terapeutaFalar("Parabéns! Você concluiu toda a sessão clínica de hoje! Estou muito orgulhoso!");
     triggerFeedback("Recompensa Coletada! Você ganhou +30 XP e 100 BrilhoCoins!");
     setAtvAtiva(null);
     setIsAnswered(false);
