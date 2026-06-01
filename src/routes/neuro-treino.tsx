@@ -43,22 +43,22 @@ export const Route = createFileRoute("/neuro-treino")({
 
 const grupos = [
   {
-    nome: "Fala e Som",
+    nome: "Sons Iniciais",
     emoji: "🗣️",
     cor: "from-coral/25 to-coral/5",
-    atividades: ["Sons Iniciais","Motorzinho dos Sons","Rimas","Pedacinhos da Palavra"],
+    atividades: NEURO_ACTIVITIES["Sons Iniciais"].map(a => a.title),
   },
   {
-    nome: "Funções Executivas",
-    emoji: "🧠",
+    nome: "Motorzinho dos Sons",
+    emoji: "⚙️",
     cor: "from-primary/20 to-primary/5",
-    atividades: ["Onde Está","Sequência e Padrão","Cadê o Par","Foco Total","Labirinto do Som"],
+    atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"].map(a => a.title),
   },
   {
-    nome: "Atenção avançada",
-    emoji: "👁️",
+    nome: "Rimas",
+    emoji: "🎵",
     cor: "from-sky/30 to-sky/5",
-    atividades: ["Foco Sustentado","Rastreamento Sacádico"],
+    atividades: NEURO_ACTIVITIES["Rimas"].map(a => a.title),
   },
   {
     nome: "Regulação emocional",
