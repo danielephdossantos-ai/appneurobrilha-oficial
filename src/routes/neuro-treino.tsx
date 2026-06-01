@@ -482,26 +482,58 @@ function Treino() {
                         </div>
                       )}
 
-                      {/* JOGO 3: RASTREIO DE ATENÇÃO (INTRUSO REAL) */}
-                      {atividadeAtual.id === 'at-1' && (
+                      {/* JOGO 3: RASTREIO DE ATENÇÃO (INTRUSO REAL PREMIUM) */}
+                      {atividadeAtual.id === 'at-1' && variacaoAtual && (
                         <div className="text-center max-w-sm mx-auto py-4">
                           <h3 className="text-xl font-black text-slate-800 mb-1">Rastreamento Perceptual Visual</h3>
-                          <p className="text-xs font-bold text-slate-400 mb-6">Clique no padrão animal isolado entre as matrizes robóticas.</p>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Encontre o elemento intruso que não pertence ao grupo!</p>
                           
                           <div className="grid grid-cols-2 gap-4">
-                            {['robo_a', 'robo_b', 'macaco', 'robo_c'].map((item, idx) => (
+                            {variacaoAtual.elementos.map((item: string, idx: number) => (
                               <button
                                 key={idx}
                                 onClick={() => {
-                                  if (item === 'macaco') {
-                                    handleAnswer('Carro'); // Target in data is Carro, but here it's monkey. I'll pass 'Carro' to trigger correct state
+                                  if (item === variacaoAtual.correto) {
+                                    handleAnswer(atividadeAtual.content.target);
+                                    triggerFeedback('Excelente discriminação de foco sustentado! 🎯');
                                   } else {
                                     triggerFeedback('Padrão idêntico. Continue rastreando! 🔍');
                                   }
                                 }}
                                 className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-indigo-400 rounded-2xl flex items-center justify-center text-5xl shadow-sm transition-all transform active:scale-95"
                               >
-                                {item === 'macaco' ? '🐒' : '🤖'}
+                                {item}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* JOGO 4: SONS INICIAIS PREMIUM */}
+                      {atividadeAtual.id === 'sons-1' && variacaoAtual && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="bg-indigo-50 p-6 rounded-3xl mb-6 border-2 border-indigo-100">
+                             <span className="text-8xl font-black text-indigo-600 drop-shadow-sm">{variacaoAtual.letra}</span>
+                             <p className="mt-4 text-sm font-bold text-indigo-800 italic">{variacaoAtual.somExplicacao}</p>
+                          </div>
+                          
+                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Qual começa com o som {variacaoAtual.letra}?</p>
+                          
+                          <div className="grid grid-cols-3 gap-4">
+                            {variacaoAtual.opcoes.map((item: string, idx: number) => (
+                              <button
+                                key={idx}
+                                onClick={() => {
+                                  if (item === variacaoAtual.correto) {
+                                    handleAnswer(atividadeAtual.content.target);
+                                    triggerFeedback(`Isso mesmo! ${variacaoAtual.nomeCorreto} começa com ${variacaoAtual.letra}! ✨`);
+                                  } else {
+                                    triggerFeedback('Escute o som novamente... tente outra vez! 👂');
+                                  }
+                                }}
+                                className="aspect-square bg-white border-4 border-slate-100 hover:border-indigo-400 rounded-2xl flex items-center justify-center text-5xl shadow-md transition-all transform active:scale-95"
+                              >
+                                {item}
                               </button>
                             ))}
                           </div>
