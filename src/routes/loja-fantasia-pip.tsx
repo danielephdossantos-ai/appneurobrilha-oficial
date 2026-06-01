@@ -37,27 +37,37 @@ const GENERAL_VARIANTS = [
 CATEGORIES.forEach(cat => {
   const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
   
-  GENERATED_SKINS[cat.id] = variants.map((variant, i) => ({
-    id: `skin-${cat.id}-${i + 1}`,
-    name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
-    category: cat.id as Hiperfoco,
-    price: 150 + (i * 50),
-    image: PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'],
-    description: cat.id === 'super-herois' 
-      ? `Pip com os superpoderes do ${variant}!` 
-      : `Um visual único de ${cat.name} no estilo ${variant}!`,
-  }));
+  GENERATED_SKINS[cat.id] = variants.map((variant, i) => {
+    const seed = `${cat.id}-${variant.toLowerCase().replace(/\s+/g, '-')}`;
+    return {
+      id: `skin-${cat.id}-${i + 1}`,
+      name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
+      category: cat.id as Hiperfoco,
+      price: 150 + (i * 50),
+      // Usando Dicebear para garantir que cada fantasia seja visualmente única
+      image: `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${seed}&backgroundColor=b6e3f4`,
+      description: cat.id === 'super-herois' 
+        ? `Pip com os superpoderes do ${variant}!` 
+        : `Um visual único de ${cat.name} no estilo ${variant}!`,
+    };
+  });
 });
 
 function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
 
-  const handleSelectSkin = (category: Hiperfoco) => {
+  const handleSelectSkin = (category: Hiperfoco, imageUrl: string) => {
     if (!activeChild) return;
     
-    // Troca automática de hiperfoco para mudar a skin visual no app
+    // Salvando a skin específica nos flags do perfil para troca automática
+    const updatedFlags = {
+      ...(activeChild.flags || {}),
+      active_skin_url: imageUrl
+    };
+
     updateChild(activeChild.id, {
+      flags: updatedFlags as any,
       hyperfocus_list: [category, ...(activeChild.hyperfocus_list || []).filter(h => h !== category)].slice(0, 5)
     });
     
@@ -114,7 +124,7 @@ function LojaFantasiaPipPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {GENERATED_SKINS[selectedCategory].map((skin, index) => {
-              const isCurrent = activeChild?.hyperfocus_list?.[0] === skin.category;
+              const isCurrent = (activeChild?.flags as any)?.active_skin_url === skin.image;
               
               return (
                 <motion.div
@@ -142,7 +152,7 @@ function LojaFantasiaPipPage() {
                     
                     <KidButton
                       variant={isCurrent ? "secondary" : "primary"}
-                      onClick={() => handleSelectSkin(skin.category)}
+                      onClick={() => handleSelectSkin(skin.category, skin.image)}
                       className="w-full"
                     >
                       {isCurrent ? "Vestido" : (

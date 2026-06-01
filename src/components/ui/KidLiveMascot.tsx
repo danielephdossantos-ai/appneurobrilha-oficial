@@ -54,6 +54,10 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
 
   const getMascotImage = () => {
+    // 1. Verificar se há uma skin específica selecionada na loja
+    const activeSkinUrl = (activeChild?.flags as any)?.active_skin_url;
+    if (activeSkinUrl) return activeSkinUrl;
+
     if (!isPip) {
       return activeMascot?.mascot.image_url || pipMascot;
     }
