@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState } from "react";
-import { AlertCircle, Palette, Play } from "lucide-react";
+import { AlertCircle, Palette, Play, Sparkles as SparklesIcon } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
+import { useMascot } from "@/contexts/MascotContext";
+import { toast } from "sonner";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
