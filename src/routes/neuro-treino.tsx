@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart } from "lucide-react";
+import { AlertCircle, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart, Volume2, Smile, Activity } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
@@ -43,48 +43,58 @@ export const Route = createFileRoute("/neuro-treino")({
 
 const grupos = [
   {
+    id: 'atencao',
     nome: "Atenção Super Focada",
     emoji: "🎯",
-    cor: "from-amber-400 to-amber-200",
+    cor: "bg-amber-400 border-amber-500",
     corTexto: "text-amber-950",
     atividades: NEURO_ACTIVITIES["Atenção Super Focada"].map(a => a.title),
-    icone: <Target className="w-12 h-12" />
+    icone: <Target className="w-10 h-10" />
   },
   {
+    id: 'memoria',
     nome: "Memória de Elefante",
     emoji: "🧠",
-    cor: "from-purple-400 to-purple-200",
+    cor: "bg-purple-400 border-purple-500",
     corTexto: "text-purple-950",
     atividades: NEURO_ACTIVITIES["Memória de Elefante"].map(a => a.title),
-    icone: <Brain className="w-12 h-12" />
+    icone: <Brain className="w-10 h-10" />
   },
   {
+    id: 'sons_iniciais',
     nome: "Sons Iniciais",
     emoji: "🗣️",
-    cor: "from-coral/25 to-coral/5",
+    cor: "bg-sky-400 border-sky-500",
+    corTexto: "text-sky-950",
     atividades: NEURO_ACTIVITIES["Sons Iniciais"].map(a => a.title),
-    icone: <Play className="w-12 h-12" />
+    icone: <Volume2 className="w-10 h-10" />
   },
   {
+    id: 'motorzinho',
     nome: "Motorzinho dos Sons",
     emoji: "⚙️",
-    cor: "from-primary/20 to-primary/5",
+    cor: "bg-emerald-400 border-emerald-500",
+    corTexto: "text-emerald-950",
     atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"].map(a => a.title),
-    icone: <Play className="w-12 h-12" />
+    icone: <Activity className="w-10 h-10" />
   },
   {
+    id: 'rimas',
     nome: "Rimas",
     emoji: "🎵",
-    cor: "from-sky/30 to-sky/5",
+    cor: "bg-pink-400 border-pink-500",
+    corTexto: "text-pink-950",
     atividades: NEURO_ACTIVITIES["Rimas"].map(a => a.title),
-    icone: <Play className="w-12 h-12" />
+    icone: <Sparkles className="w-10 h-10" />
   },
   {
+    id: 'regulacao',
     nome: "Regulação emocional",
     emoji: "💚",
-    cor: "from-success/20 to-success/5",
+    cor: "bg-rose-400 border-rose-500",
+    corTexto: "text-rose-950",
     atividades: ["Respira Flor","Termômetro dos Sentimentos","Cantinho da Calma","Como Eu Estou"],
-    icone: <Heart className="w-12 h-12" />
+    icone: <Smile className="w-10 h-10" />
   },
 ];
 
@@ -188,12 +198,12 @@ function Treino() {
                   <button
                     key={g.nome}
                     onClick={() => setSelectedCategory(g.nome)}
-                    className={`p-8 rounded-3xl flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg border-b-8 border-black/10 bg-gradient-to-br ${g.cor} ${g.corTexto || 'text-primary'}`}
+                    className={`p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-4 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md border-b-8 border-black/10 ${g.cor} ${g.corTexto}`}
                   >
-                    <div className="bg-white/80 p-4 rounded-full shadow-inner text-indigo-950">
+                    <div className="bg-white/90 p-4 rounded-2xl shadow-inner text-slate-800">
                       {g.icone}
                     </div>
-                    <span className="text-xl font-black uppercase tracking-tight">{g.nome}</span>
+                    <span className="text-xl font-black tracking-wide leading-tight uppercase">{g.nome}</span>
                   </button>
                 ))}
               </div>
@@ -206,11 +216,11 @@ function Treino() {
                   <ArrowLeft className="w-5 h-5" /> Voltar para os Treinos
                 </button>
 
-                <div className={`p-6 rounded-3xl shadow-md flex items-center gap-4 bg-gradient-to-r ${categoriaSelecionada?.cor} ${categoriaSelecionada?.corTexto || 'text-primary'}`}>
-                  <div className="bg-white/50 p-3 rounded-2xl">
+                <div className={`p-4 rounded-2xl mb-8 flex items-center gap-3 border-b-4 border-black/10 ${categoriaSelecionada?.cor} ${categoriaSelecionada?.corTexto}`}>
+                  <div className="bg-white/80 p-2 rounded-xl text-slate-800">
                     {categoriaSelecionada?.icone}
                   </div>
-                  <h3 className="text-3xl font-black uppercase tracking-tighter">{selectedCategory}</h3>
+                  <h3 className="text-2xl font-black uppercase tracking-wide">{selectedCategory}</h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
