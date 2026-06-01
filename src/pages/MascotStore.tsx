@@ -53,6 +53,7 @@ const MascotStorePage: React.FC = () => {
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
     if (activeTab === 'pip-collection') return mascot.name === 'Pip';
+    if (activeTab === 'autos') return mascot.category === 'autos';
     
     return true;
   });
