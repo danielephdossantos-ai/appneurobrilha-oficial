@@ -27,11 +27,23 @@ const CATEGORIES = [
 const GENERATED_SKINS: Record<string, any[]> = {};
 
 const HERO_VARIANTS = [
-  "Batman", "Super-Homem", "Hulk", "Homem de Ferro", "Thor", "Homem-Aranha", "Homem-Formiga"
+  { name: "Batman", color: "#1a1a1a", secondary: "#fde047", logo: "🦇" },
+  { name: "Super-Homem", color: "#1d4ed8", secondary: "#dc2626", logo: "S" },
+  { name: "Hulk", color: "#166534", secondary: "#6b21a8", logo: "👊" },
+  { name: "Homem de Ferro", color: "#991b1b", secondary: "#f59e0b", logo: "⚙️" },
+  { name: "Thor", color: "#334155", secondary: "#ef4444", logo: "🔨" },
+  { name: "Homem-Aranha", color: "#b91c1c", secondary: "#1d4ed8", logo: "🕸️" },
+  { name: "Homem-Formiga", color: "#000000", secondary: "#dc2626", logo: "🐜" }
 ];
 
 const GENERAL_VARIANTS = [
-  "Clássico", "Real", "Galáctico", "Místico", "Lendário", "Aventureiro", "Supremo"
+  { name: "Clássico", color: "#3b82f6" },
+  { name: "Real", color: "#a855f7" },
+  { name: "Galáctico", color: "#1e1b4b" },
+  { name: "Místico", color: "#ec4899" },
+  { name: "Lendário", color: "#eab308" },
+  { name: "Aventureiro", color: "#10b981" },
+  { name: "Supremo", color: "#ef4444" }
 ];
 
 // Gerar modelos únicos para cada categoria seguindo estritamente o padrão visual do Pip
