@@ -3,7 +3,7 @@ import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Star, ChevronRight, Heart } from 'lucide-react';
+import { ShoppingBag, Star, ChevronRight, Heart, Shirt, Gamepad2 } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipDinossauros from '@/assets/pip-dinossauros.png';
 import pipEspaco from '@/assets/pip-espaco.png';
@@ -21,6 +21,7 @@ import pipVeiculos from '@/assets/pip-veiculos.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 import { MascotInventory } from '@/components/rewards/MascotInventory';
+import { ClosetCatalog, ToyCatalog } from '@/components/mascot/PipVirtualPet';
 
 const ADDITIONAL_CHARACTERS = [
   { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
@@ -45,7 +46,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'store' | 'inventory'>('inventory');
+  const [activeTab, setActiveTab] = useState<'store' | 'inventory' | 'closet' | 'play'>('inventory');
   
   useEffect(() => {
     const fetchAllMascots = async () => {
@@ -97,7 +98,7 @@ const MascotStorePage: React.FC = () => {
           Seus Amiguinhos
         </motion.h1>
         
-        <div className="flex justify-center gap-4 mt-8">
+        <div className="flex flex-wrap justify-center gap-4 mt-8">
           <TabButton 
             active={activeTab === 'inventory'} 
             onClick={() => setActiveTab('inventory')}
@@ -110,11 +111,31 @@ const MascotStorePage: React.FC = () => {
             label="Loja de Mascotes"
             icon={<ShoppingBag size={18} />}
           />
+          <TabButton 
+            active={activeTab === 'closet'} 
+            onClick={() => setActiveTab('closet')}
+            label="Vestir (50)"
+            icon={<Shirt size={18} />}
+          />
+          <TabButton 
+            active={activeTab === 'play'} 
+            onClick={() => setActiveTab('play')}
+            label="Brincar (30)"
+            icon={<Gamepad2 size={18} />}
+          />
         </div>
       </header>
 
       {activeTab === 'inventory' ? (
         <MascotInventory />
+      ) : activeTab === 'closet' ? (
+        <div className="bg-white/40 backdrop-blur-md rounded-[3rem] p-8 border-4 border-white shadow-xl">
+          <ClosetCatalog />
+        </div>
+      ) : activeTab === 'play' ? (
+        <div className="bg-white/40 backdrop-blur-md rounded-[3rem] p-8 border-4 border-white shadow-xl">
+          <ToyCatalog />
+        </div>
       ) : (
         <>
           {isLoading ? (
