@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
+import { Check } from 'lucide-react';
 import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
@@ -27,27 +28,11 @@ import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 
 
-const ADDITIONAL_CHARACTERS = [
-  { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
-  { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: pipEspaco },
-  { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: pipArte },
-  { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: pipAnimais },
-  { id: 'pip-musica', name: 'Pip Maestro', description: 'Vamos reger uma sinfonia de aprendizado!', category: 'premium', image_url: pipMusica },
-  { id: 'pip-fazendinha', name: 'Pip Fazendeiro', description: 'Plantando aprendizado e colhendo conquistas.', category: 'premium', image_url: pipFazendinha },
-  { id: 'pip-super', name: 'Pip Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: pipSuperHerois },
-  { id: 'pip-princesas', name: 'Pip Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: pipPrincesas },
-  { id: 'pip-minecraft', name: 'Pip Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: pipMinecraft },
-  { id: 'pip-carros', name: 'Pip Carrinho', description: 'Vrum vrum! Acelerando na pista da diversão.', category: 'premium', image_url: pipCarros },
-  { id: 'pip-caminhao', name: 'Pip Caminhão', description: 'Carregando alegria por todas as estradas!', category: 'premium', image_url: pipCaminhao },
-  { id: 'pip-trator', name: 'Pip Trator', description: 'Força total para construir grandes aventuras.', category: 'premium', image_url: pipTrator },
-  { id: 'pip-moto', name: 'Pip Moto', description: 'Equilíbrio e velocidade para explorar o mundo.', category: 'premium', image_url: pipMoto },
-  { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
-  { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
-  { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
-];
+// We now use characters from the database
+const ADDITIONAL_CHARACTERS: any[] = [];
 
 const MascotStorePage: React.FC = () => {
-  const { userMascots } = useMascot();
+  const { userMascots, setActiveMascot, activeMascot } = useMascot();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -203,8 +188,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
 
           <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
-              <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
-
+              <KidLiveMascot 
+                size="xl" 
+                showBadge={false} 
+                emotion="happy" 
+                className="animate-bounce-gentle" 
+                skinUrl={mascot.image_url !== '/assets/pip-mascot.png' ? mascot.image_url : undefined}
+              />
             ) : mascot.image_url ? (
               <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
             ) : (
@@ -244,13 +234,27 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
           <div className="mt-auto space-y-3">
             {isOwned ? (
               <div className="flex flex-col gap-2">
-                <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                  <Star size={16} fill="currentColor" />
-                  Já na Coleção
-                </div>
+                <KidButton 
+                  variant={isActive ? "secondary" : "primary"}
+                  className="w-full py-4 font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2"
+                  onClick={() => setActiveMascot(mascot.id)}
+                  disabled={isActive}
+                >
+                  {isActive ? (
+                    <>
+                      <Check className="w-5 h-5" />
+                      Ativo Agora
+                    </>
+                  ) : (
+                    <>
+                      <Star size={16} fill="currentColor" />
+                      Usar este Mascote
+                    </>
+                  )}
+                </KidButton>
                 {isPip && (
                     <Link to="/loja-fantasia-pip" className="w-full">
-                    <KidButton variant="secondary" className="w-full py-4 text-xs">
+                    <KidButton variant="outline" className="w-full py-3 text-xs border-2">
                       Ver Fantasias do Pip
                     </KidButton>
                   </Link>
