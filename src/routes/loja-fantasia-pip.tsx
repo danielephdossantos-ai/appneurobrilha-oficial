@@ -51,7 +51,7 @@ CATEGORIES.forEach(cat => {
 
 function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
-  const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[0].id);
+  const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
 
   const handleSelectSkin = (category: Hiperfoco) => {
     if (!activeChild) return;
