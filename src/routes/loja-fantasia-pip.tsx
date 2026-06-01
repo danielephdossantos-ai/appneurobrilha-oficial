@@ -153,13 +153,34 @@ function LojaFantasiaPipPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all ${
+                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all overflow-hidden ${
                     isCurrent ? "border-primary bg-primary/5" : "border-primary/10 hover:border-primary/30"
                   }`}>
-                    <div className="relative w-40 h-40 mb-6 bg-gradient-to-b from-primary/5 to-transparent rounded-full flex items-center justify-center">
-                      <img src={skin.image} alt={skin.name} className="w-full h-full object-contain drop-shadow-xl" />
+                    <div 
+                      className="relative w-40 h-40 mb-6 rounded-full flex items-center justify-center overflow-hidden"
+                      style={{ backgroundColor: `${skin.color}20` }}
+                    >
+                      {/* Efeito de cor da fantasia */}
+                      <div className="absolute inset-0 opacity-20" style={{ backgroundColor: skin.color }} />
+                      
+                      <img 
+                        src={skin.image} 
+                        alt={skin.name} 
+                        className="w-full h-full object-contain drop-shadow-xl relative z-10" 
+                        style={{ 
+                          filter: skin.color ? `drop-shadow(0 0 10px ${skin.color}50)` : 'none'
+                        }}
+                      />
+                      
+                      {/* Logo do herói no peito */}
+                      {skin.logo && (
+                        <div className="absolute bottom-10 z-20 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-lg border-2" style={{ borderColor: skin.secondary }}>
+                          <span className="text-sm font-black" style={{ color: skin.color }}>{skin.logo}</span>
+                        </div>
+                      )}
+
                       {isCurrent && (
-                        <div className="absolute -top-2 -right-2 bg-success text-white p-2 rounded-full shadow-lg">
+                        <div className="absolute -top-2 -right-2 bg-success text-white p-2 rounded-full shadow-lg z-30">
                           <Check size={20} strokeWidth={4} />
                         </div>
                       )}
@@ -170,8 +191,9 @@ function LojaFantasiaPipPage() {
                     
                     <KidButton
                       variant={isCurrent ? "secondary" : "primary"}
-                      onClick={() => handleSelectSkin(skin.category, skin.image)}
+                      onClick={() => handleSelectSkin(skin)}
                       className="w-full"
+                      style={!isCurrent ? { backgroundColor: skin.color, borderColor: skin.secondary } : {}}
                     >
                       {isCurrent ? "Vestido" : (
                         <span className="flex items-center gap-2">
