@@ -176,7 +176,8 @@ function Treino() {
 
   useEffect(() => {
     terapeutaFalar('Olá, pequeno gênio! Vamos treinar o seu cérebro hoje? Escolha uma especialidade para começar!');
-  }, []); // Fala inicial apenas uma vez
+  }, [terapeutaFalar]); 
+
 
   // Estados para mecânicas específicas
   const [nivelAcao, setNivelAcao] = useState(0);
