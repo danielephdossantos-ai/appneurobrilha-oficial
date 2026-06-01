@@ -4,7 +4,7 @@ import { Shell } from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Lock, Star, Search, Heart, Sparkles, ChevronRight, User } from 'lucide-react';
+import { ShoppingBag, Lock, Star, Search, Heart, Sparkles, ChevronRight, User, Check } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
 import KidLiveMascot, { PIP_SKINS } from '@/components/ui/KidLiveMascot';
