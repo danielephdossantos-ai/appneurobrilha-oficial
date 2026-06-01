@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
 import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Star, Sparkles, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Star, ChevronRight, Heart } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
-import pipMascot from '@/assets/pip-mascot.png';
 import pipDinossauros from '@/assets/pip-dinossauros.png';
 import pipEspaco from '@/assets/pip-espaco.png';
 import pipArte from '@/assets/pip-arte.png';
@@ -20,12 +18,9 @@ import pipCarros from '@/assets/pip-carros.png';
 import pipTrens from '@/assets/pip-trens.png';
 import pipRobos from '@/assets/pip-robos.png';
 import pipVeiculos from '@/assets/pip-veiculos.png';
-import pipTrator from '@/assets/pip-fazendinha.png'; // Reusing related assets since I can't create new binaries
-import pipCaminhao from '@/assets/pip-veiculos.png';
-import pipMoto from '@/assets/pip-carros.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
-
+import { MascotInventory } from '@/components/rewards/MascotInventory';
 
 const ADDITIONAL_CHARACTERS = [
   { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
@@ -38,9 +33,9 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pip-princesas', name: 'Pip Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: pipPrincesas },
   { id: 'pip-minecraft', name: 'Pip Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: pipMinecraft },
   { id: 'pip-carros', name: 'Pip Carrinho', description: 'Vrum vrum! Acelerando na pista da diversão.', category: 'premium', image_url: pipCarros },
-  { id: 'pip-caminhao', name: 'Pip Caminhão', description: 'Carregando alegria por todas as estradas!', category: 'premium', image_url: pipCaminhao },
-  { id: 'pip-trator', name: 'Pip Trator', description: 'Força total para construir grandes aventuras.', category: 'premium', image_url: pipTrator },
-  { id: 'pip-moto', name: 'Pip Moto', description: 'Equilíbrio e velocidade para explorar o mundo.', category: 'premium', image_url: pipMoto },
+  { id: 'pip-caminhao', name: 'Pip Caminhão', description: 'Carregando alegria por todas as estradas!', category: 'premium', image_url: pipVeiculos },
+  { id: 'pip-trator', name: 'Pip Trator', description: 'Força total para construir grandes aventuras.', category: 'premium', image_url: pipFazendinha },
+  { id: 'pip-moto', name: 'Pip Moto', description: 'Equilíbrio e velocidade para explorar o mundo.', category: 'premium', image_url: pipCarros },
   { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
   { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
   { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
@@ -50,6 +45,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'store' | 'inventory'>('inventory');
   
   useEffect(() => {
     const fetchAllMascots = async () => {
@@ -74,10 +70,7 @@ const MascotStorePage: React.FC = () => {
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
-  // Combine DB mascots with additional characters
   const allDisplayMascots = [...dbMascots];
-  
-  // Add additional characters if they're not already in the DB mascots (by id)
   ADDITIONAL_CHARACTERS.forEach(char => {
     if (!dbMascots.find(m => m.id === char.id)) {
       allDisplayMascots.push(char as Mascot);
@@ -93,7 +86,7 @@ const MascotStorePage: React.FC = () => {
           className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-black uppercase tracking-widest text-xs mb-4"
         >
           <ShoppingBag size={14} />
-          Loja Brilha
+          Mundo dos Mascotes
         </motion.div>
         
         <motion.h1 
@@ -101,46 +94,59 @@ const MascotStorePage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl md:text-6xl font-black text-primary mb-4"
         >
-          Loja de Mascotes
+          Seus Amiguinhos
         </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-muted-foreground text-lg max-w-2xl mx-auto"
-        >
-          Descubra novos amigos incríveis para acompanhar sua jornada de aprendizado! Cada mascote traz uma energia especial.
-        </motion.p>
+        
+        <div className="flex justify-center gap-4 mt-8">
+          <TabButton 
+            active={activeTab === 'inventory'} 
+            onClick={() => setActiveTab('inventory')}
+            label="Meus Mascotes"
+            icon={<Heart size={18} />}
+          />
+          <TabButton 
+            active={activeTab === 'store'} 
+            onClick={() => setActiveTab('store')}
+            label="Loja de Mascotes"
+            icon={<ShoppingBag size={18} />}
+          />
+        </div>
       </header>
 
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3, 4, 5, 6].map(i => (
-            <div key={i} className="h-80 bg-muted animate-pulse rounded-[2.5rem]" />
-          ))}
-        </div>
+      {activeTab === 'inventory' ? (
+        <MascotInventory />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {allDisplayMascots.map((mascot, index) => (
-              <MascotStoreCard 
-                key={mascot.id} 
-                mascot={mascot} 
-                isOwned={ownedMascotIds.includes(mascot.id)}
-                index={index}
-                showCollectionButton={true}
-              />
-            ))}
-          </AnimatePresence>
-        </div>
-      )}
+        <>
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <div key={i} className="h-80 bg-muted animate-pulse rounded-[2.5rem]" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {allDisplayMascots.map((mascot, index) => (
+                  <MascotStoreCard 
+                    key={mascot.id} 
+                    mascot={mascot} 
+                    isOwned={ownedMascotIds.includes(mascot.id)}
+                    index={index}
+                    showCollectionButton={true}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
 
-      {allDisplayMascots.length === 0 && !isLoading && (
-        <div className="text-center py-20 bg-white/50 rounded-[3rem] border-4 border-dashed border-primary/10">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-black text-primary uppercase">Nenhum mascote encontrado</h3>
-          <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
-        </div>
+          {allDisplayMascots.length === 0 && !isLoading && (
+            <div className="text-center py-20 bg-white/50 rounded-[3rem] border-4 border-dashed border-primary/10">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-2xl font-black text-primary uppercase">Nenhum mascote encontrado</h3>
+              <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -150,10 +156,10 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
   <button
     onClick={onClick}
     className={cn(
-      "flex items-center gap-2 px-6 py-2.5 rounded-xl font-black text-sm uppercase tracking-widest transition-all whitespace-nowrap",
+      "flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-widest transition-all whitespace-nowrap",
       active 
         ? "bg-primary text-white shadow-kid [--shadow-color:oklch(var(--primary-dark))]" 
-        : "text-muted-foreground hover:bg-muted"
+        : "bg-white text-muted-foreground hover:bg-muted border-2 border-primary/10"
     )}
   >
     {icon}
