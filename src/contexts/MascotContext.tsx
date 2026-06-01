@@ -73,13 +73,22 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!user) return;
 
     try {
-      const { error } = await (supabase as any)
+      // First, set all mascots to inactive for this user
+      const { error: resetError } = await (supabase as any)
+        .from('user_mascots')
+        .update({ is_active: false })
+        .eq('user_id', user.id);
+
+      if (resetError) throw resetError;
+
+      // Then set the selected mascot as active
+      const { error: setActiveError } = await (supabase as any)
         .from('user_mascots')
         .update({ is_active: true })
         .eq('user_id', user.id)
         .eq('mascot_id', mascotId);
 
-      if (error) throw error;
+      if (setActiveError) throw setActiveError;
 
       await fetchMascots();
       toast.success("Mascote Alterado", {
