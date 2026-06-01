@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
@@ -43,40 +43,54 @@ export const Route = createFileRoute("/neuro-treino")({
 
 const grupos = [
   {
+    nome: "Atenção Super Focada",
+    emoji: "🎯",
+    cor: "from-amber-400 to-amber-200",
+    corTexto: "text-amber-950",
+    atividades: NEURO_ACTIVITIES["Atenção Super Focada"].map(a => a.title),
+    icone: <Target className="w-12 h-12" />
+  },
+  {
+    nome: "Memória de Elefante",
+    emoji: "🧠",
+    cor: "from-purple-400 to-purple-200",
+    corTexto: "text-purple-950",
+    atividades: NEURO_ACTIVITIES["Memória de Elefante"].map(a => a.title),
+    icone: <Brain className="w-12 h-12" />
+  },
+  {
     nome: "Sons Iniciais",
     emoji: "🗣️",
     cor: "from-coral/25 to-coral/5",
     atividades: NEURO_ACTIVITIES["Sons Iniciais"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Motorzinho dos Sons",
     emoji: "⚙️",
     cor: "from-primary/20 to-primary/5",
     atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Rimas",
     emoji: "🎵",
     cor: "from-sky/30 to-sky/5",
     atividades: NEURO_ACTIVITIES["Rimas"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Regulação emocional",
     emoji: "💚",
     cor: "from-success/20 to-success/5",
     atividades: ["Respira Flor","Termômetro dos Sentimentos","Cantinho da Calma","Como Eu Estou"],
-  },
-  {
-    nome: "Oficina Criativa",
-    emoji: "🎨",
-    cor: "from-lilac/30 to-lilac/5",
-    atividades: ["Mosaico de Formas", "Sequência de Cores", "Simetria", "Decoração Criativa"],
+    icone: <Heart className="w-12 h-12" />
   },
 ];
 
 function Treino() {
   const { activeChild, addCoins } = useAppState();
-  const [selectedCategory, setSelectedCategory] = useState<string>("Sons Iniciais");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -143,6 +157,8 @@ function Treino() {
     setIsAnswered(false);
   };
 
+  const categoriaSelecionada = grupos.find(g => g.nome === selectedCategory);
+
   return (
     <Shell>
       <PageHeader emoji="🧠" title="Neuro-Treino" subtitle="Reforço terapêutico que sustenta o aprendizado escolar" />
@@ -150,105 +166,163 @@ function Treino() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
           <div className="space-y-6">
-            {grupos.map((g) => (
-              <section key={g.nome}>
-                <h2 className="text-lg mb-3 flex items-center gap-2">{g.emoji} {g.nome}</h2>
-                <div className={`grid grid-cols-2 md:grid-cols-4 gap-3`}>
-                  {g.atividades.map((a) => (
+            {!selectedCategory ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4">
+                {grupos.map((g) => (
+                  <button
+                    key={g.nome}
+                    onClick={() => setSelectedCategory(g.nome)}
+                    className={`p-8 rounded-3xl flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg border-b-8 border-black/10 bg-gradient-to-br ${g.cor} ${g.corTexto || 'text-primary'}`}
+                  >
+                    <div className="bg-white/80 p-4 rounded-full shadow-inner text-indigo-950">
+                      {g.icone}
+                    </div>
+                    <span className="text-xl font-black uppercase tracking-tight">{g.nome}</span>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
+                <button 
+                  onClick={() => { setSelectedCategory(null); setSelectedAtividade(null); }}
+                  className="flex items-center gap-2 text-primary font-bold bg-white px-6 py-3 rounded-2xl shadow-sm hover:bg-primary/5 transition-colors border-2 border-primary/10"
+                >
+                  <ArrowLeft className="w-5 h-5" /> Voltar para os Treinos
+                </button>
+
+                <div className={`p-6 rounded-3xl shadow-md flex items-center gap-4 bg-gradient-to-r ${categoriaSelecionada?.cor} ${categoriaSelecionada?.corTexto || 'text-primary'}`}>
+                  <div className="bg-white/50 p-3 rounded-2xl">
+                    {categoriaSelecionada?.icone}
+                  </div>
+                  <h3 className="text-3xl font-black uppercase tracking-tighter">{selectedCategory}</h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {grupos.find(g => g.nome === selectedCategory)?.atividades.map((a) => (
                     <button 
                       key={a} 
-                      onClick={() => handleSelectAtividade(a, g.nome)}
-                      className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 transition-all min-h-[110px] ${
-                        selectedAtividade?.title === a ? 'border-primary shadow-glow scale-105' : 'border-border shadow-soft hover:shadow-glow'
-                      }`}
+                      onClick={() => handleSelectAtividade(a, selectedCategory)}
+                      className={cn(
+                        "p-6 rounded-[2rem] border-4 flex flex-col justify-between transition-all text-left min-h-[160px]",
+                        selectedAtividade?.title === a 
+                          ? "bg-primary text-white border-primary shadow-glow scale-[1.02]" 
+                          : "bg-white border-primary/5 hover:border-primary/20 shadow-soft"
+                      )}
                     >
-                      <div className="font-extrabold">{a}</div>
-                      <div className="text-xs text-muted-foreground mt-1">Toque para começar</div>
+                      <div>
+                         <div className="flex items-center justify-between mb-3">
+                           <span className={cn(
+                             "font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-widest",
+                             selectedAtividade?.title === a ? "bg-white/20 text-white" : "bg-primary/5 text-primary"
+                           )}>
+                             ⭐ +50 Pontos
+                           </span>
+                           <div className={cn(
+                             "p-2 rounded-xl",
+                             selectedAtividade?.title === a ? "bg-white/10" : "bg-primary/5"
+                           )}>
+                             <Play size={16} fill="currentColor" />
+                           </div>
+                         </div>
+                         <h4 className="text-xl font-black uppercase tracking-tight leading-none mb-2">{a}</h4>
+                         <p className={cn(
+                           "text-xs font-bold opacity-70 italic",
+                           selectedAtividade?.title === a ? "text-white/80" : "text-muted-foreground"
+                         )}>
+                           Toque para começar esta missão!
+                         </p>
+                      </div>
                     </button>
                   ))}
                 </div>
-              </section>
-            ))}
+              </div>
+            )}
           </div>
 
-          <Card className="mt-8 bg-white/80 border-2 border-primary/10 min-h-[400px] flex flex-col">
-            <h3 className="font-extrabold mb-6 flex items-center gap-2 text-primary p-4 border-b border-primary/5">
-              <SparklesIcon size={20} className="text-sun" />
-              {selectedAtividade ? `Desafio: ${selectedAtividade.title}` : 'Escolha um desafio acima!'}
-            </h3>
-            
-            <div className="flex-1 flex flex-col items-center justify-center p-8">
-              {!selectedAtividade ? (
-                <div className="text-center space-y-4">
-                   <div className="h-32 w-32 rounded-full bg-primary/5 flex items-center justify-center mx-auto">
-                      <Play className="text-primary/20" size={48} />
-                   </div>
-                   <p className="text-muted-foreground font-bold italic">O Pip está esperando você escolher um treino para começar!</p>
-                </div>
-              ) : (
-                <div className="w-full max-w-2xl mx-auto space-y-8">
-                  <div className="text-center space-y-2">
-                    <p className="text-2xl font-black text-primary uppercase tracking-tight">{selectedAtividade.content.prompt}</p>
-                    <p className="text-muted-foreground font-medium">{selectedAtividade.description}</p>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {selectedAtividade.content.options.map((option, idx) => (
-                      <motion.button
-                        key={option}
-                        whileHover={!isAnswered ? { scale: 1.05 } : {}}
-                        whileTap={!isAnswered ? { scale: 0.95 } : {}}
-                        onClick={() => handleAnswer(option)}
-                        disabled={isAnswered}
-                        className={cn(
-                          "aspect-square rounded-3xl border-4 flex flex-col items-center justify-center gap-3 transition-all",
-                          !isAnswered ? "bg-white border-primary/10 hover:border-primary shadow-soft" :
-                          option === selectedAtividade.content.target ? "bg-success/20 border-success shadow-glow" :
-                          isCorrect === false && option !== selectedAtividade.content.target ? "bg-muted border-transparent opacity-50" : "bg-white border-primary/10"
-                        )}
-                      >
-                        <span className="text-6xl">{selectedAtividade.content.images?.[idx]}</span>
-                        <span className="font-black text-xs uppercase tracking-widest">{option}</span>
-                        {isAnswered && option === selectedAtividade.content.target && (
-                          <CheckCircle2 className="text-success absolute -top-2 -right-2 bg-white rounded-full" size={32} />
-                        )}
-                      </motion.button>
-                    ))}
-                  </div>
-
-                  {isAnswered && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-center pt-4">
-                      {isCorrect ? (
-                        <div className="flex flex-col items-center gap-4">
-                          <p className="text-success font-black text-xl flex items-center gap-2">
-                            <CheckCircle2 /> MUITO BEM! VOCÊ ACERTOU!
-                          </p>
-                          <button 
-                            onClick={handleConcluir}
-                            className="bg-success text-white px-12 py-4 rounded-2xl font-black shadow-kid [--shadow-color:oklch(var(--success-dark))] hover:scale-105 transition-all uppercase tracking-widest"
-                          >
-                            Resgatar Recompensa
-                          </button>
+          <AnimatePresence>
+            {selectedAtividade && (
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="mt-12"
+              >
+                <Card className="bg-white/90 border-4 border-primary/10 rounded-[3rem] min-h-[450px] flex flex-col shadow-2xl overflow-hidden">
+                  <h3 className="font-black text-2xl mb-2 flex items-center gap-3 text-primary p-8 bg-primary/5 border-b border-primary/10">
+                    <SparklesIcon size={28} className="text-sun animate-spin-slow" />
+                    DESAFIO: {selectedAtividade.title}
+                  </h3>
+                  
+                  <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-12">
+                      <div className="w-full max-w-2xl mx-auto space-y-12">
+                        <div className="text-center space-y-4">
+                          <p className="text-3xl md:text-4xl font-black text-primary uppercase tracking-tighter leading-none">{selectedAtividade.content.prompt}</p>
+                          <div className="inline-block px-6 py-2 bg-primary/5 rounded-full text-sm font-black text-primary/60 uppercase tracking-widest border border-primary/10">
+                            {selectedAtividade.description}
+                          </div>
                         </div>
-                      ) : (
-                        <div className="flex flex-col items-center gap-4">
-                          <p className="text-destructive font-black text-xl flex items-center gap-2">
-                            <XCircle /> QUASE LÁ! VAMOS TENTAR DE NOVO?
-                          </p>
-                          <button 
-                            onClick={() => { setIsAnswered(false); setIsCorrect(null); }}
-                            className="bg-primary text-white px-12 py-4 rounded-2xl font-black shadow-kid [--shadow-color:oklch(var(--primary-dark))] hover:scale-105 transition-all uppercase tracking-widest"
-                          >
-                            Tentar Outra Vez
-                          </button>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                          {selectedAtividade.content.options.map((option, idx) => (
+                            <motion.button
+                              key={option}
+                              whileHover={!isAnswered ? { scale: 1.08, rotate: idx % 2 === 0 ? 2 : -2 } : {}}
+                              whileTap={!isAnswered ? { scale: 0.92 } : {}}
+                              onClick={() => handleAnswer(option)}
+                              disabled={isAnswered}
+                              className={cn(
+                                "aspect-square rounded-[2.5rem] border-4 flex flex-col items-center justify-center gap-4 transition-all relative",
+                                !isAnswered ? "bg-white border-primary/10 hover:border-primary shadow-kid hover:shadow-glow" :
+                                option === selectedAtividade.content.target ? "bg-success/20 border-success shadow-glow scale-105 z-10" :
+                                isCorrect === false && option !== selectedAtividade.content.target ? "bg-muted/50 border-transparent opacity-40 grayscale" : "bg-white border-primary/10"
+                              )}
+                            >
+                              <span className="text-7xl drop-shadow-lg">{selectedAtividade.content.images?.[idx]}</span>
+                              <span className="font-black text-xs uppercase tracking-widest">{option}</span>
+                              {isAnswered && option === selectedAtividade.content.target && (
+                                <div className="absolute -top-4 -right-4 bg-success text-white p-2 rounded-full shadow-lg border-4 border-white animate-bounce">
+                                  <CheckCircle2 size={24} />
+                                </div>
+                              )}
+                            </motion.button>
+                          ))}
                         </div>
-                      )}
-                    </motion.div>
-                  )}
-                </div>
-              )}
-            </div>
-          </Card>
+
+                        {isAnswered && (
+                          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex justify-center pt-8">
+                            {isCorrect ? (
+                              <div className="flex flex-col items-center gap-6">
+                                <p className="text-success font-black text-3xl flex items-center gap-3 animate-bounce">
+                                  <SparklesIcon /> INCRÍVEL! VOCÊ CONSEGUIU!
+                                </p>
+                                <button 
+                                  onClick={handleConcluir}
+                                  className="bg-success text-white px-16 py-6 rounded-[2rem] font-black shadow-kid [--shadow-color:oklch(var(--success-dark))] hover:scale-110 transition-all uppercase tracking-widest text-xl flex items-center gap-3"
+                                >
+                                  RESGATAR PREMIAÇÃO <SparklesIcon />
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex flex-col items-center gap-6">
+                                <p className="text-destructive font-black text-2xl flex items-center gap-3">
+                                  <XCircle /> QUASE LÁ! TENTE OUVIR O PIP...
+                                </p>
+                                <button 
+                                  onClick={() => { setIsAnswered(false); setIsCorrect(null); }}
+                                  className="bg-primary text-white px-16 py-6 rounded-[2rem] font-black shadow-kid [--shadow-color:oklch(var(--primary-dark))] hover:scale-105 transition-all uppercase tracking-widest text-xl"
+                                >
+                                  Tentar de Novo
+                                </button>
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+                      </div>
+                  </div>
+                </Card>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <div className="lg:col-span-1">

@@ -105,5 +105,65 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
         images: ["🎤", "🍬", "☁️", "☀️"]
       }
     }
+  ],
+  "Atenção Super Focada": [
+    {
+      id: "at-1",
+      title: "Encontre o Intruso",
+      category: "Atenção Super Focada",
+      description: "Olhe bem as imagens e ache o que não pertence ao grupo!",
+      difficulty: 1,
+      type: "selection",
+      content: {
+        prompt: "Qual destes não pertence ao grupo?",
+        target: "Carro",
+        options: ["Maçã", "Banana", "Uva", "Carro"],
+        images: ["🍎", "🍌", "🍇", "🚗"]
+      }
+    },
+    {
+      id: "at-2",
+      title: "Par Perfeito",
+      category: "Atenção Super Focada",
+      description: "Jogo da memória clássico com figuras super divertidas.",
+      difficulty: 1,
+      type: "matching",
+      content: {
+        prompt: "Encontre o par da Estrela!",
+        target: "Estrela",
+        options: ["Estrela", "Lua", "Sol", "Nuvem"],
+        images: ["⭐", "🌙", "☀️", "☁️"]
+      }
+    }
+  ],
+  "Memória de Elefante": [
+    {
+      id: "me-1",
+      title: "Repita o Ritmo",
+      category: "Memória de Elefante",
+      description: "Preste atenção nos sons e luzes e repita a sequência!",
+      difficulty: 1,
+      type: "sequence",
+      content: {
+        prompt: "O Pip tocou: Vermelho, Azul. O que vem agora?",
+        target: "Azul",
+        options: ["Vermelho", "Azul", "Verde", "Amarelo"],
+        images: ["🔴", "🔵", "🟢", "🟡"]
+      }
+    },
+    {
+      id: "me-2",
+      title: "Cadê o Objeto?",
+      category: "Memória de Elefante",
+      description: "Guarde os objetos na mente antes que eles sumam da tela!",
+      difficulty: 1,
+      type: "selection",
+      content: {
+        prompt: "Qual objeto o Pip escondeu na caixa?",
+        target: "Urso",
+        options: ["Bola", "Urso", "Carro", "Boneca"],
+        images: ["⚽", "🧸", "🚗", "🪆"]
+      }
+    }
   ]
 };
