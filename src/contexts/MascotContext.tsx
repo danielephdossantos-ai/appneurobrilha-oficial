@@ -20,6 +20,15 @@ export interface UserMascot {
   level: number;
   affinity: number;
   experience: number;
+  gender: 'menino' | 'menina' | 'neutro';
+  evolution_stage: 'egg' | 'baby' | 'child' | 'teen' | 'adult';
+  room_metadata: any;
+  inventory: any[];
+  stats: {
+    hunger: number;
+    energy: number;
+    happiness: number;
+  };
   mascot: Mascot;
 }
 
