@@ -20,6 +20,9 @@ import pipCarros from '@/assets/pip-carros.png';
 import pipTrens from '@/assets/pip-trens.png';
 import pipRobos from '@/assets/pip-robos.png';
 import pipVeiculos from '@/assets/pip-veiculos.png';
+import pipTrator from '@/assets/pip-fazendinha.png'; // Reusing related assets since I can't create new binaries
+import pipCaminhao from '@/assets/pip-veiculos.png';
+import pipMoto from '@/assets/pip-carros.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 
@@ -34,7 +37,10 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pip-super', name: 'Pip Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: pipSuperHerois },
   { id: 'pip-princesas', name: 'Pip Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: pipPrincesas },
   { id: 'pip-minecraft', name: 'Pip Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: pipMinecraft },
-  { id: 'pip-carros', name: 'Pip Piloto', description: 'Acelerando rumo a novas conquistas.', category: 'premium', image_url: pipCarros },
+  { id: 'pip-carros', name: 'Pip Carrinho', description: 'Vrum vrum! Acelerando na pista da diversão.', category: 'premium', image_url: pipCarros },
+  { id: 'pip-caminhao', name: 'Pip Caminhão', description: 'Carregando alegria por todas as estradas!', category: 'premium', image_url: pipCaminhao },
+  { id: 'pip-trator', name: 'Pip Trator', description: 'Força total para construir grandes aventuras.', category: 'premium', image_url: pipTrator },
+  { id: 'pip-moto', name: 'Pip Moto', description: 'Equilíbrio e velocidade para explorar o mundo.', category: 'premium', image_url: pipMoto },
   { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
   { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
   { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
