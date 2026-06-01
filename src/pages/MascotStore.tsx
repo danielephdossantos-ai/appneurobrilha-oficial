@@ -5,7 +5,7 @@ import { Shell } from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Lock, Star, Search, Heart, Sparkles, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Star, Sparkles, ChevronRight } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
@@ -16,8 +16,8 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'premium' | 'pip-collection'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState<'pip-collection'>('pip-collection');
+  
 
   useEffect(() => {
     const fetchAllMascots = async () => {
@@ -43,17 +43,7 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
   const filteredMascots = allMascots.filter(mascot => {
-    const matchesSearch = mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         mascot.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    if (!matchesSearch) return false;
-
-    if (activeTab === 'all') return true;
-    if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'premium') return mascot.category !== 'primary';
-    if (activeTab === 'pip-collection') return mascot.name === 'Pip';
-    
-    return true;
+    return mascot.name === 'Pip';
   });
 
   return (
@@ -85,41 +75,12 @@ const MascotStorePage: React.FC = () => {
         </motion.p>
       </header>
 
-      {/* Barra de Pesquisa e Filtros */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
-        <div className="relative flex-1 group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={20} />
-          <input 
-            type="text"
-            placeholder="Procurar um amigo novo..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border-2 border-border focus:border-primary outline-none transition-all font-bold text-foreground shadow-sm"
-          />
-        </div>
-        
-        <div className="flex gap-2 bg-white p-1.5 rounded-2xl border-2 border-border shadow-sm overflow-x-auto">
+      {/* Filtro fixo para Coleção Pip */}
+      <div className="flex justify-center mb-8">
+        <div className="flex gap-2 bg-white p-1.5 rounded-2xl border-2 border-border shadow-sm">
           <TabButton 
-            active={activeTab === 'all'} 
-            onClick={() => setActiveTab('all')} 
-            label="Todos" 
-            icon={<Sparkles size={16} />}
-          />
-          <TabButton 
-            active={activeTab === 'locked'} 
-            onClick={() => setActiveTab('locked')} 
-            label="Bloqueados" 
-            icon={<Lock size={16} />}
-          />
-          <TabButton 
-            active={activeTab === 'premium'} 
-            onClick={() => setActiveTab('premium')} 
-            label="Outros Personagens" 
-            icon={<Heart size={16} />}
-          />
-          <TabButton 
-            active={activeTab === 'pip-collection'} 
-            onClick={() => setActiveTab('pip-collection')} 
+            active={true} 
+            onClick={() => {}} 
             label="Coleção Pip" 
             icon={<Sparkles size={16} className="text-sun" />}
           />
