@@ -374,9 +374,20 @@ function Treino() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-white rounded-[28px] p-6 border border-slate-100 shadow-md relative overflow-hidden"
               >
-                <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 mb-6 transition-colors text-sm relative z-10">
-                  <ArrowLeft className="w-4 h-4" /> Trocar Exercício
-                </button>
+                <div className="flex justify-between items-center mb-6 relative z-10">
+                  <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm">
+                    <ArrowLeft className="w-4 h-4" /> Trocar Exercício
+                  </button>
+                  
+                  {catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva] && (
+                    <button 
+                      onClick={() => handleSelectAtv(atvAtiva!)}
+                      className="flex items-center gap-2 text-indigo-400 font-bold hover:text-indigo-600 transition-colors text-sm bg-indigo-50 px-4 py-2 rounded-full"
+                    >
+                      <RefreshCw className="w-4 h-4" /> Nova Variação
+                    </button>
+                  )}
+                </div>
 
                 {atividadeAtual && (
                   <>
