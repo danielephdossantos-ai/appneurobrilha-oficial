@@ -77,9 +77,9 @@ const MascotStorePage: React.FC = () => {
   // Combine DB mascots with additional characters
   const allDisplayMascots = [...dbMascots];
   
-  // Add additional characters if they're not already in the DB mascots (by name/id)
+  // Add additional characters if they're not already in the DB mascots (by id)
   ADDITIONAL_CHARACTERS.forEach(char => {
-    if (!dbMascots.find(m => m.name === char.name)) {
+    if (!dbMascots.find(m => m.id === char.id)) {
       allDisplayMascots.push(char as Mascot);
     }
   });
