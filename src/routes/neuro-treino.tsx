@@ -712,7 +712,20 @@ function Treino() {
                         </div>
                       )}
 
-                      {/* MÓDULO CORINGA REMOVIDO / SUBSTITUÍDO PELOS FLUXOS ACIMA */}
+                      {/* ESTADO DE ESPERA GENÉRICO PARA OUTRAS CATEGORIAS DA ENGINE */}
+                      {!['atencao', 'sons_iniciais', 'memoria', 'motorzinho', 'rimas', 'regulacao'].includes(atvAtiva!) && (
+                        <div className="text-center py-12 flex-1 flex flex-col justify-center items-center">
+                          <span className="text-5xl mb-3">✨</span>
+                          <h4 className="text-lg font-black text-slate-700">Mapeando Variações de Consultório...</h4>
+                          <p className="text-xs text-slate-400 max-w-xs mx-auto mt-1 mb-4">A Terapeuta IA está preparando a voz e as figuras dinâmicas para esta categoria.</p>
+                          <button 
+                            onClick={() => { setPontos(pontos + 15); setFaseIndex(faseIndex + 1); terapeutaFalar("Muito bem! Concluímos esse estímulo clínico! Vamos para o próximo!"); }}
+                            className="bg-indigo-600 text-white font-black px-6 py-2.5 rounded-xl text-xs shadow-md"
+                          >
+                            Simular Acerto Clínico
+                          </button>
+                        </div>
+                      )}
 
                     </div>
 
