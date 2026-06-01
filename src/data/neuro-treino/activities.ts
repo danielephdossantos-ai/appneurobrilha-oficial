@@ -24,7 +24,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Rastreio Visual: Ache o Intruso",
       category: "Atenção Super Focada",
       description: "Foco seletivo e discriminação visual.",
-      therapeuticGoal: "Desenvolver a atenção sustentada e a capacidade de filtrar estímulos irrelevantes.",
+      therapeuticGoal: "Foco sustentado, atenção seletiva e discriminação visual.",
       difficulty: 1,
       type: "visual",
       content: {
@@ -39,7 +39,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Alvo Móvel",
       category: "Atenção Super Focada",
       description: "Coordenação visuo-motora e tempo de reação.",
-      therapeuticGoal: "Melhorar a velocidade de processamento e a precisão do movimento.",
+      therapeuticGoal: "Velocidade de processamento e coordenação visuo-motora.",
       difficulty: 2,
       type: "visual",
       content: {
@@ -56,7 +56,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Sequência Neuro-Visual",
       category: "Memória de Elefante",
       description: "Memória operacional e de trabalho.",
-      therapeuticGoal: "Expandir a capacidade de retenção de informações sequenciais a curto prazo.",
+      therapeuticGoal: "Memória operacional e de trabalho de curto prazo.",
       difficulty: 2,
       type: "sequence",
       content: {
@@ -71,7 +71,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Guarde o Som",
       category: "Memória de Elefante",
       description: "Memória auditiva e retenção de comandos.",
-      therapeuticGoal: "Fortalecer a memória auditiva e a compreensão de enunciados verbais.",
+      therapeuticGoal: "Retenção de comandos e discriminação auditiva.",
       difficulty: 2,
       type: "visual",
       content: {
@@ -88,7 +88,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Consciência Fonológica",
       category: "Sons Iniciais",
       description: "Identificação do som inicial das palavras.",
-      therapeuticGoal: "Desenvolver a consciência fonêmica e a habilidade de aliteração.",
+      therapeuticGoal: "Identificação do som inicial (aliteracional) das palavras.",
       difficulty: 1,
       type: "visual",
       content: {
@@ -100,10 +100,10 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
     },
     {
       id: "sons-2",
-      title: "Traçado do Alfabeto",
+      title: "Traçado do Alfabeto Espacial",
       category: "Sons Iniciais",
       description: "Grafomotricidade e associação fonema-grafema.",
-      therapeuticGoal: "Integrar a percepção visual do grafema com o movimento motor da escrita.",
+      therapeuticGoal: "Grafomotricidade, associação fonema-grafema e coordenação motora fina.",
       difficulty: 2,
       type: "tracado",
       content: {
@@ -117,10 +117,10 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
   "Motorzinho dos Sons": [
     {
       id: "motor-1",
-      title: "Sopro Controlado",
+      title: "Treino Fono: Sopro Controlado",
       category: "Motorzinho dos Sons",
       description: "Controle do fluxo expiratório e suporte respiratório.",
-      therapeuticGoal: "Melhorar a capacidade pulmonar e o controle motor orofacial para a fala.",
+      therapeuticGoal: "Praxias buco-faciais, controle do fluxo expiratório e suporte respiratório.",
       difficulty: 1,
       type: "microfone",
       content: {
@@ -135,7 +135,7 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
       title: "Estica o Som (Controle de Voz)",
       category: "Motorzinho dos Sons",
       description: "Modulação vocal e sustentação fonatória.",
-      therapeuticGoal: "Desenvolver o controle da intensidade e duração da emissão sonora.",
+      therapeuticGoal: "Modulação vocal, sustentação fonatória e controle de intensidade.",
       difficulty: 2,
       type: "microfone",
       content: {
@@ -149,46 +149,61 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
   "Rimas Divertidas": [
     {
       id: "rimas-1",
-      title: "Caça-Rimas",
+      title: "Pares Rimados",
       category: "Rimas Divertidas",
-      description: "Identificação de rimas e processamento auditivo.",
-      therapeuticGoal: "Aprimorar a percepção de sons semelhantes no final das palavras.",
+      description: "Processamento fonológico e percepção de regularidades sonoras.",
+      therapeuticGoal: "Processamento fonológico e percepção de regularidades sonoras.",
       difficulty: 1,
-      type: "selection",
+      type: "visual",
       content: {
         prompt: "O Pip viu um GATO. O que rima com GATO?",
         target: "Rato",
         options: ["Rato", "Bolo", "Mão", "Céu"],
         images: ["🐭", "🎂", "✋", "☁️"]
       }
+    },
+    {
+      id: "rimas-2",
+      title: "Qual Palavra Não Rima?",
+      category: "Rimas Divertidas",
+      description: "Análise léxica-auditiva avançada.",
+      therapeuticGoal: "Análise léxica-auditiva avançada.",
+      difficulty: 2,
+      type: "visual",
+      content: {
+        prompt: "Qual destas palavras NÃO rima com as outras?",
+        target: "Céu",
+        options: ["Pão", "Mão", "Cão", "Céu"],
+        images: ["🍞", "✋", "🐶", "☁️"]
+      }
     }
   ],
   "Regulação Emocional": [
     {
       id: "reg-1",
-      title: "Respira Flor",
+      title: "Âncora da Calma",
       category: "Regulação Emocional",
-      description: "Auto-regulação e controle de ansiedade.",
-      therapeuticGoal: "Ensinar técnicas de respiração profunda para acalmar o sistema nervoso.",
+      description: "Biofeedback visual respiratório.",
+      therapeuticGoal: "Autorregulação, biofeedback visual respiratório para crises e ansiedade.",
       difficulty: 1,
       type: "emocional",
       content: {
-        prompt: "Cheire a flor (inspire) e assopre a vela (expire).",
+        prompt: "Respire com o Pip para encontrar sua calma.",
         target: "Calma",
         options: ["Respirar"],
-        images: ["🌸"]
+        images: ["⚓"]
       }
     },
     {
       id: "reg-2",
-      title: "Termômetro dos Sentimentos",
+      title: "Identificador de Emoções",
       category: "Regulação Emocional",
-      description: "Identificação de emoções e empatia.",
-      therapeuticGoal: "Ajudar a criança a rotular e expressar suas próprias emoções.",
+      description: "Nomeação de estados internos.",
+      therapeuticGoal: "Nomeação de estados internos e validação socioemocional.",
       difficulty: 1,
       type: "emocional",
       content: {
-        prompt: "Como você está se sentindo hoje?",
+        prompt: "Como você está se sentindo agora?",
         target: "Expressão",
         options: ["Feliz", "Triste", "Bravo", "Calmo"],
         images: ["😊", "😢", "😠", "😌"]
