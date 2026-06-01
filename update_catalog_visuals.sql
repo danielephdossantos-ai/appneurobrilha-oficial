@@ -1,0 +1,23 @@
+DELETE FROM public.mascot_catalog_items;
+INSERT INTO public.mascot_catalog_items (name, description, type, category, required_level, required_coins, image_url) VALUES 
+('Pip T-Rex', 'Fantasia exclusiva para o Pip!', 'costume', 'Dinossauros', 1, 100, 'SKIN:dinossauros'),
+('Pip Tricerátops', 'Fantasia exclusiva para o Pip!', 'costume', 'Dinossauros', 1, 200, 'SKIN:dinossauros'),
+('Pip Velociraptor', 'Fantasia exclusiva para o Pip!', 'costume', 'Dinossauros', 1, 300, 'SKIN:dinossauros'),
+('Pip Pterodáctilo', 'Fantasia exclusiva para o Pip!', 'costume', 'Dinossauros', 1, 400, 'SKIN:dinossauros'),
+('Pip Astronauta', 'Fantasia exclusiva para o Pip!', 'costume', 'Espaço', 1, 500, 'SKIN:espaco'),
+('Pip Robô Espacial', 'Fantasia exclusiva para o Pip!', 'costume', 'Espaço', 1, 600, 'SKIN:robos'),
+('Pip Capitão Galáctico', 'Fantasia exclusiva para o Pip!', 'costume', 'Espaço', 1, 700, 'SKIN:espaco'),
+('Pip Piloto de Corrida', 'Fantasia exclusiva para o Pip!', 'costume', 'Veículos', 1, 800, 'SKIN:carros'),
+('Pip Aviador', 'Fantasia exclusiva para o Pip!', 'costume', 'Veículos', 1, 900, 'SKIN:veiculos'),
+('Pip Maquinista', 'Fantasia exclusiva para o Pip!', 'costume', 'Veículos', 1, 1000, 'SKIN:trens'),
+('Pip Herói Matemática', 'Fantasia exclusiva para o Pip!', 'costume', 'Heróis', 1, 1100, 'SKIN:super-herois'),
+('Pip Herói Leitura', 'Fantasia exclusiva para o Pip!', 'costume', 'Heróis', 1, 1200, 'SKIN:arte'),
+('Pip Herói Ciência', 'Fantasia exclusiva para o Pip!', 'costume', 'Heróis', 1, 1300, 'SKIN:espaco'),
+('Carrinho', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 150, 'SKIN:carros'),
+('Trem', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 300, 'SKIN:trens'),
+('Bola', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 450, 'SKIN:arte'),
+('Ursinho', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 600, 'SKIN:animais'),
+('Dino de Pelúcia', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 750, 'SKIN:dinossauros'),
+('Piano', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 900, 'SKIN:musica'),
+('Telescópio', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 1050, 'SKIN:espaco'),
+('Blocos de Montar', 'Brinquedo exclusivo para o Pip!', 'toy', 'Brinquedos', 1, 1200, 'SKIN:minecraft');
