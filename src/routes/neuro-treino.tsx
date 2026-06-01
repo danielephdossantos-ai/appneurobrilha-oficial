@@ -123,34 +123,44 @@ function Treino() {
   // Estados para mecânicas específicas
   const [nivelAcao, setNivelAcao] = useState(0);
   const [interagindo, setInteragindo] = useState(false);
+  const [tracadoPassos, setTracadoPassos] = useState<any[]>([]);
+  const [assoprou, setAssoprou] = useState(false);
 
-  const handleSelectAtividade = (activity: NeuroActivity) => {
-    setSelectedAtividade(activity);
+  const categoriaAtual = clinicaCategorias.find(c => c.id === catAtiva);
+  const atividadeAtual = categoriaAtual?.atividades.find(a => a.id === atvAtiva);
+
+  const triggerFeedback = (msg: string) => {
+    setFeedback(msg);
+    setTimeout(() => setFeedback(null), 3500);
+  };
+
+  const handleSelectAtv = (activityId: string) => {
+    setAtvAtiva(activityId);
     setIsAnswered(false);
     setIsCorrect(null);
     setNivelAcao(0);
     setInteragindo(false);
+    setAssoprou(false);
+    setTracadoPassos([]);
   };
 
   const handleAcaoInterativa = () => {
-    if (!selectedAtividade) return;
+    if (!atividadeAtual) return;
     setInteragindo(true);
     let progresso = 0;
     
     // Simulador de captação de áudio/esforço (Sopro da Vela/Controle de Voz)
     const interval = setInterval(() => {
-      progresso += 20; // Incremento simulando o esforço contínuo
+      progresso += 20;
       setNivelAcao(progresso);
       if (progresso >= 100) {
         clearInterval(interval);
         setInteragindo(false);
-        handleAnswer(selectedAtividade.content.target);
+        setAssoprou(true);
+        handleAnswer(atividadeAtual.content.target);
         
-        if (selectedAtividade.type === 'microfone') {
-          toast.success('Parabéns!', {
-            description: 'Você controlou o ar perfeitamente e completou o desafio! 🎂✨',
-            icon: <CheckCircle2 className="text-emerald-500" />
-          });
+        if (atividadeAtual.type === 'microfone') {
+          triggerFeedback('Parabéns! Você controlou o ar perfeitamente e apagou a vela! 🎂✨');
         }
       }
     }, 300);
@@ -159,16 +169,14 @@ function Treino() {
   const handleAnswer = (option: string) => {
     if (isAnswered) return;
     
-    const correct = option === selectedAtividade?.content.target || selectedAtividade?.type === 'interaction' || selectedAtividade?.type === 'microfone' || selectedAtividade?.type === 'tracado' || selectedAtividade?.type === 'emocional';
+    const correct = option === atividadeAtual?.content.target || 
+                    ['interaction', 'microfone', 'tracado', 'emocional'].includes(atividadeAtual?.type || '');
     
     setIsCorrect(correct);
     setIsAnswered(true);
 
     if (correct) {
-      toast.success("Excelente!", { 
-        description: "Missão cumprida com sucesso!",
-        icon: <CheckCircle2 className="text-emerald-500" />
-      });
+      triggerFeedback("Excelente! Missão cumprida com sucesso!");
     } else {
       toast.error("Tente novamente!", { 
         description: "O Pip está aqui para te ajudar.",
@@ -181,16 +189,10 @@ function Treino() {
     gainExperience(30);
     gainAffinity(10);
     addCoins(100);
-    toast.success("Recompensa Coletada!", {
-      description: "Você ganhou +30 XP e 100 BrilhoCoins!",
-      icon: <SparklesIcon className="text-sun" />
-    });
-    setSelectedAtividade(null);
+    triggerFeedback("Recompensa Coletada! Você ganhou +30 XP e 100 BrilhoCoins!");
+    setAtvAtiva(null);
     setIsAnswered(false);
   };
-
-  const categoriaSelecionada = grupos.find(g => g.nome === selectedCategory);
-  const atividadesDaCategoria = selectedCategory ? NEURO_ACTIVITIES[selectedCategory] || [] : [];
 
   return (
     <Shell>
