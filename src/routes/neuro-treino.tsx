@@ -72,8 +72,19 @@ const grupos = [
 ];
 
 function Treino() {
-  const { activeChild } = useAppState();
+  const { activeChild, addCoins } = useAppState();
   const [selectedAtividade, setSelectedAtividade] = useState<string | null>(null);
+  const { gainExperience, gainAffinity } = useMascot();
+
+  const handleConcluir = () => {
+    gainExperience(30);
+    gainAffinity(10);
+    addCoins(100);
+    toast.success("Treino Concluído!", {
+      description: "Sua mente está mais forte! Ganhou +30 XP, +10 Afinidade e 100 BrilhoCoins!",
+      icon: <SparklesIcon className="text-sun" />
+    });
+  };
 
   return (
     <Shell>
