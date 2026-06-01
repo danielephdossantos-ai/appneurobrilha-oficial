@@ -1,11 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState } from "react";
-import { AlertCircle, Palette, Play, Sparkles as SparklesIcon } from "lucide-react";
+import { AlertCircle, Palette, Play } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
-import { useMascot } from "@/contexts/MascotContext";
-import { toast } from "sonner";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
@@ -72,19 +70,8 @@ const grupos = [
 ];
 
 function Treino() {
-  const { activeChild, addCoins } = useAppState();
+  const { activeChild } = useAppState();
   const [selectedAtividade, setSelectedAtividade] = useState<string | null>(null);
-  const { gainExperience, gainAffinity } = useMascot();
-
-  const handleConcluir = () => {
-    gainExperience(30);
-    gainAffinity(10);
-    addCoins(100);
-    toast.success("Treino Concluído!", {
-      description: "Sua mente está mais forte! Ganhou +30 XP, +10 Afinidade e 100 BrilhoCoins!",
-      icon: <SparklesIcon className="text-sun" />
-    });
-  };
 
   return (
     <Shell>
@@ -123,10 +110,7 @@ function Treino() {
               <div className="h-32 w-32 rounded-full bg-success/30 animate-pulse" style={{ animationDuration: "4s" }} />
               <p className="mt-6 text-center text-lg font-bold text-success/80">Inspira… segura… expira… 🌸</p>
               <div className="mt-8 flex gap-4">
-                <button 
-                  onClick={handleConcluir}
-                  className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm"
-                >
+                <button className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm">
                   Concluir Missão
                 </button>
               </div>

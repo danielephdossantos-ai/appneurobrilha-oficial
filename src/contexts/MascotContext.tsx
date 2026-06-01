@@ -20,15 +20,6 @@ export interface UserMascot {
   level: number;
   affinity: number;
   experience: number;
-  gender: 'menino' | 'menina' | 'neutro';
-  evolution_stage: 'egg' | 'baby' | 'child' | 'teen' | 'adult';
-  room_metadata: any;
-  inventory: any[];
-  stats: {
-    hunger: number;
-    energy: number;
-    happiness: number;
-  };
   mascot: Mascot;
 }
 
@@ -39,8 +30,6 @@ interface MascotContextType {
   setActiveMascot: (mascotId: string) => Promise<void>;
   gainExperience: (amount: number) => Promise<void>;
   gainAffinity: (amount: number) => Promise<void>;
-  updateStats: (stats: Partial<UserMascot['stats']>) => Promise<void>;
-  evolve: () => Promise<void>;
 }
 
 const MascotContext = createContext<MascotContextType | undefined>(undefined);
@@ -84,6 +73,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!user) return;
 
     try {
+      // First, set all mascots to inactive for this user
       const { error: resetError } = await (supabase as any)
         .from('user_mascots')
         .update({ is_active: false })
@@ -91,6 +81,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
       if (resetError) throw resetError;
 
+      // Then set the selected mascot as active
       const { error: setActiveError } = await (supabase as any)
         .from('user_mascots')
         .update({ is_active: true })
@@ -105,6 +96,9 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       });
     } catch (error) {
       console.error('Error setting active mascot:', error);
+      toast.error("Erro", {
+        description: "Não foi possível trocar o mascote.",
+      });
     }
   };
 
@@ -122,11 +116,6 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       toast.success("Level Up!", {
         description: `${activeMascot.mascot.name} subiu para o nível ${newLevel}!`,
       });
-      
-      // Auto evolve check
-      if (newLevel === 5 && activeMascot.evolution_stage === 'baby') evolve();
-      if (newLevel === 15 && activeMascot.evolution_stage === 'child') evolve();
-      if (newLevel === 30 && activeMascot.evolution_stage === 'teen') evolve();
     }
 
     try {
@@ -147,6 +136,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const gainAffinity = async (amount: number) => {
     if (!activeMascot || !user) return;
+
     try {
       const { error } = await (supabase as any)
         .from('user_mascots')
@@ -154,47 +144,11 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           affinity: Math.min(100, activeMascot.affinity + amount)
         })
         .eq('id', activeMascot.id);
+
       if (error) throw error;
       await fetchMascots();
     } catch (error) {
       console.error('Error gaining affinity:', error);
-    }
-  };
-
-  const updateStats = async (newStats: Partial<UserMascot['stats']>) => {
-    if (!activeMascot || !user) return;
-    try {
-      const updatedStats = { ...activeMascot.stats, ...newStats };
-      const { error } = await (supabase as any)
-        .from('user_mascots')
-        .update({ stats: updatedStats })
-        .eq('id', activeMascot.id);
-      if (error) throw error;
-      await fetchMascots();
-    } catch (error) {
-      console.error('Error updating stats:', error);
-    }
-  };
-
-  const evolve = async () => {
-    if (!activeMascot || !user) return;
-    const stages: UserMascot['evolution_stage'][] = ['egg', 'baby', 'child', 'teen', 'adult'];
-    const currentIndex = stages.indexOf(activeMascot.evolution_stage);
-    if (currentIndex < stages.length - 1) {
-      const nextStage = stages[currentIndex + 1];
-      try {
-        const { error } = await (supabase as any)
-          .from('user_mascots')
-          .update({ evolution_stage: nextStage })
-          .eq('id', activeMascot.id);
-        if (error) throw error;
-        await fetchMascots();
-        toast.success("Evolução!", {
-          description: `${activeMascot.mascot.name} evoluiu para o estágio ${nextStage}!`,
-        });
-      } catch (error) {
-        console.error('Error evolving mascot:', error);
-      }
     }
   };
 
@@ -205,9 +159,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       isLoading, 
       setActiveMascot,
       gainExperience,
-      gainAffinity,
-      updateStats,
-      evolve
+      gainAffinity
     }}>
       {children}
     </MascotContext.Provider>
