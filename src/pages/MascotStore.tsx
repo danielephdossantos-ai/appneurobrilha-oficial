@@ -17,7 +17,7 @@ const MascotStorePage: React.FC = () => {
   const { activeChild } = useAppState();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection' | 'espaco'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const MascotStorePage: React.FC = () => {
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
     if (activeTab === 'pip-collection') return mascot.name === 'Pip';
-    if (activeTab === 'espaco' as any) return mascot.category === 'espaco';
+    if (activeTab === 'espaco') return mascot.category === 'espaco';
     
     return true;
   });
@@ -142,8 +142,8 @@ const MascotStorePage: React.FC = () => {
             icon={<Sparkles size={16} />}
           />
           <TabButton 
-            active={activeTab === 'espaco' as any} 
-            onClick={() => setActiveTab('espaco' as any)} 
+            active={activeTab === 'espaco'} 
+            onClick={() => setActiveTab('espaco')} 
             label="Espaço" 
             icon={<ChevronRight size={16} />}
           />
