@@ -98,6 +98,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
             alt="Pip - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             draggable={false}
+          />
         </div>
       
       {message && (
