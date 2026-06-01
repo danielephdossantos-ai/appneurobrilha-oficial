@@ -193,9 +193,10 @@ function Treino() {
     setTimeout(() => setFeedback(null), 3500);
   };
 
-  // Carrega uma variação aleatória (entre as disponíveis) sempre que muda de fase
+  // Carrega uma variação aleatória (entre as 50 disponíveis) sempre que muda de fase
   const carregarNovaVariacao = useCallback((categoria: string) => {
     const lista = BANCO_DE_DADOS_CLINICO[categoria as keyof typeof BANCO_DE_DADOS_CLINICO] || BANCO_DE_DADOS_CLINICO.atencao;
+    // Pega um item aleatório do banco de dados de 50 variações
     const aleatorio = lista[Math.floor(Math.random() * lista.length)];
     setVariacaoAtual(aleatorio);
     setIsAnswered(false);
@@ -214,6 +215,38 @@ function Treino() {
       }
     }, 200);
   }, [terapeutaFalar]);
+
+  const selecionarCategoria = (id: string) => {
+    setCatAtiva(id);
+    setAtvAtiva(id); // Entra direto no jogo selecionado
+    setFaseIndex(1);
+    carregarNovaVariacao(id);
+  };
+
+  const responderExercicio = (escolha: string) => {
+    if (isAnswered) return;
+
+    const isCorrectChoice = variacaoAtual ? escolha === variacaoAtual.correto : true;
+    
+    if (isCorrectChoice) {
+      setIsCorrect(true);
+      setIsAnswered(true);
+      setPontos(prev => prev + 20);
+      setFaseIndex(prev => prev + 1);
+      terapeutaFalar('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
+      
+      // Progride para uma nova variação inédita
+      setTimeout(() => {
+        if (catAtiva) carregarNovaVariacao(catAtiva);
+      }, 2500);
+    } else {
+      terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
+      toast.error("Tente novamente!", { 
+        description: "O Pip está aqui para te ajudar.",
+        icon: <XCircle className="text-rose-500" />
+      });
+    }
+  };
 
   const handleSelectAtv = (activityId: string) => {
     setAtvAtiva(activityId);
