@@ -39,6 +39,8 @@ interface MascotContextType {
   setActiveMascot: (mascotId: string) => Promise<void>;
   gainExperience: (amount: number) => Promise<void>;
   gainAffinity: (amount: number) => Promise<void>;
+  updateStats: (stats: Partial<UserMascot['stats']>) => Promise<void>;
+  evolve: () => Promise<void>;
 }
 
 const MascotContext = createContext<MascotContextType | undefined>(undefined);
