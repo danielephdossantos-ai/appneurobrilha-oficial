@@ -45,9 +45,10 @@ interface LiveMascotProps {
   className?: string;
   message?: string;
   showBadge?: boolean;
+  overrideImage?: string;
 }
 
-const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true }: LiveMascotProps) => {
+const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true, overrideImage }: LiveMascotProps) => {
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
@@ -72,7 +73,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
     return pipMascot;
   };
 
-  const mascotImage = getMascotImage();
+  const mascotImage = overrideImage || getMascotImage();
 
   const sizes = {
     sm: 'w-24 h-24',

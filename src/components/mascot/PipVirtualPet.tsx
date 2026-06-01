@@ -13,9 +13,10 @@ import {
   Home as HomeIcon,
   Utensils,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Camera
 } from 'lucide-react';
-import KidLiveMascot from '@/components/ui/KidLiveMascot';
+import KidLiveMascot, { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 import { toast } from 'sonner';
 import { supabase } from '@/database/supabase/client';
@@ -24,6 +25,7 @@ import { useAuth } from '@/modules/auth/hooks/useAuth';
 export const PipVirtualPet: React.FC = () => {
   const { activeMascot, gainExperience, gainAffinity, isLoading, updateStats } = useMascot();
   const [activeTab, setActiveTab] = useState<'status' | 'room' | 'closet' | 'play'>('status');
+  const [currentSkin, setCurrentSkin] = useState<string | null>(null);
   
   if (isLoading) return <div className="flex justify-center p-20"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>;
 
@@ -83,6 +85,7 @@ export const PipVirtualPet: React.FC = () => {
             size={activeMascot.evolution_stage === 'baby' ? 'lg' : activeMascot.evolution_stage === 'child' ? 'xl' : '2xl'} 
             showBadge={false} 
             emotion={activeMascot.stats.happiness < 30 ? 'thinking' : 'happy'} 
+            overrideImage={currentSkin ? PIP_SKINS[currentSkin] : undefined}
           />
         </motion.div>
         
@@ -132,7 +135,7 @@ export const PipVirtualPet: React.FC = () => {
       <div className="mt-8 border-t-4 border-primary/5 pt-8">
         <AnimatePresence mode="wait">
           {activeTab === 'play' && <ToyCatalog key="toys" />}
-          {activeTab === 'closet' && <ClosetCatalog key="closet" />}
+          {activeTab === 'closet' && <ClosetCatalog key="closet" onSelectSkin={setCurrentSkin} />}
           {activeTab === 'room' && <RoomCustomizer key="room" />}
         </AnimatePresence>
       </div>
@@ -290,9 +293,20 @@ export const ToyCatalog = () => (
   </motion.div>
 );
 
-export const ClosetCatalog = () => (
+export const ClosetCatalog = ({ onSelectSkin }: { onSelectSkin?: (skin: string | null) => void }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-    <CatalogSection title="Guarda-Roupa Mágico" type="costume" icon="👕" />
+    <CatalogSection 
+      title="Guarda-Roupa Mágico" 
+      type="costume" 
+      icon="👕" 
+      onItemClick={(item) => {
+        if (item.image_url && item.image_url.startsWith('SKIN:')) {
+          const skinKey = item.image_url.replace('SKIN:', '');
+          onSelectSkin?.(skinKey);
+          toast.success(`${item.name} equipada!`);
+        }
+      }} 
+    />
   </motion.div>
 );
 
@@ -302,7 +316,7 @@ const RoomCustomizer = () => (
   </motion.div>
 );
 
-const CatalogSection = ({ title, type, icon }: { title: string, type: string, icon: string }) => {
+const CatalogSection = ({ title, type, icon, onItemClick }: { title: string, type: string, icon: string, onItemClick?: (item: any) => void }) => {
   const [items, setItems] = useState<any[]>([]);
   
   useEffect(() => {
@@ -325,9 +339,21 @@ const CatalogSection = ({ title, type, icon }: { title: string, type: string, ic
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {items.map(item => (
-          <KidCard key={item.id} className="p-6 flex flex-col items-center gap-4 group border-2 border-primary/5 hover:border-primary/20 transition-all cursor-pointer bg-white/50">
-            <div className="w-24 h-24 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl flex items-center justify-center text-5xl group-hover:scale-110 transition-transform shadow-inner">
-              {type === 'toy' ? '🧩' : type === 'costume' ? '🎭' : '🛋️'}
+          <KidCard 
+            key={item.id} 
+            onClick={() => onItemClick?.(item)}
+            className="p-6 flex flex-col items-center gap-4 group border-2 border-primary/5 hover:border-primary/20 transition-all cursor-pointer bg-white/50"
+          >
+            <div className="w-24 h-24 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl flex items-center justify-center text-5xl group-hover:scale-110 transition-transform shadow-inner overflow-hidden">
+              {item.image_url && item.image_url.startsWith('SKIN:') ? (
+                <img 
+                  src={PIP_SKINS[item.image_url.replace('SKIN:', '')]} 
+                  className="w-full h-full object-contain" 
+                  alt={item.name}
+                />
+              ) : (
+                type === 'toy' ? '🧩' : type === 'costume' ? '🎭' : '🛋️'
+              )}
             </div>
             <div className="text-center w-full">
               <span className="font-black text-xs uppercase truncate block mb-1">{item.name}</span>
