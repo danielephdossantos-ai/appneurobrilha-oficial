@@ -452,21 +452,19 @@ function Treino() {
                 key="game-screen"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-[28px] p-6 border border-slate-100 shadow-md relative overflow-hidden"
+                className="bg-white rounded-[28px] p-6 border-2 border-slate-100 shadow-inner flex-1 flex flex-col justify-between relative overflow-hidden"
               >
+                {/* Barra de Controle de Voltar / Status do Exercício */}
                 <div className="flex justify-between items-center mb-6 relative z-10">
-                  <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm">
-                    <ArrowLeft className="w-4 h-4" /> Trocar Exercício
+                  <button 
+                    onClick={() => { setCatAtiva(null); setAtvAtiva(null); setVariacaoAtual(null); }}
+                    className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Sair do Treino
                   </button>
-                  
-                  {catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva] && (
-                    <button 
-                      onClick={() => handleSelectAtv(atvAtiva!)}
-                      className="flex items-center gap-2 text-indigo-400 font-bold hover:text-indigo-600 transition-colors text-sm bg-indigo-50 px-4 py-2 rounded-full"
-                    >
-                      <RefreshCw className="w-4 h-4" /> Nova Variação
-                    </button>
-                  )}
+                  <div className="bg-slate-100 text-slate-600 font-black px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                    <RefreshCw className="w-3 h-3 animate-spin text-indigo-500" /> Missão {faseIndex} (Fases Infinitas)
+                  </div>
                 </div>
 
                 {atividadeAtual && (
