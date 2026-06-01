@@ -17,7 +17,7 @@ const MascotStorePage: React.FC = () => {
   const { activeChild } = useAppState();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection' | 'dinossauros' | 'espaco' | 'fantasia' | 'veiculos' | 'animais'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -53,6 +53,9 @@ const MascotStorePage: React.FC = () => {
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
     if (activeTab === 'pip-collection') return mascot.name === 'Pip';
+    if (['dinossauros', 'espaco', 'fantasia', 'veiculos', 'animais'].includes(activeTab)) {
+      return mascot.category === activeTab;
+    }
     
     
     return true;
@@ -140,6 +143,36 @@ const MascotStorePage: React.FC = () => {
             onClick={() => setActiveTab('pip-collection')} 
             label="Coleção Pip" 
             icon={<Sparkles size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'dinossauros'} 
+            onClick={() => setActiveTab('dinossauros')} 
+            label="Dinossauros" 
+            icon={<ChevronRight size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'espaco'} 
+            onClick={() => setActiveTab('espaco')} 
+            label="Espaço" 
+            icon={<ChevronRight size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'fantasia'} 
+            onClick={() => setActiveTab('fantasia')} 
+            label="Fantasia" 
+            icon={<ChevronRight size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'veiculos'} 
+            onClick={() => setActiveTab('veiculos')} 
+            label="Veículos" 
+            icon={<ChevronRight size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'animais'} 
+            onClick={() => setActiveTab('animais')} 
+            label="Animais" 
+            icon={<ChevronRight size={16} />}
           />
         </div>
       </div>
