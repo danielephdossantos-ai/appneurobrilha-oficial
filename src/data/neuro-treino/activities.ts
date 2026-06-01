@@ -4,116 +4,29 @@ export interface NeuroActivity {
   title: string;
   category: string;
   description: string;
+  therapeuticGoal: string;
   difficulty: number;
-  type: 'matching' | 'selection' | 'sequence' | 'interaction';
+  type: 'microfone' | 'tracado' | 'visual' | 'emocional' | 'matching' | 'selection' | 'sequence' | 'interaction';
   content: {
     prompt: string;
     target: string;
     options: string[];
     icons?: string[];
     images?: string[];
+    instructions?: string;
   };
 }
 
 export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
-  "Sons Iniciais": [
-    {
-      id: "sons-1",
-      title: "O Som da Letra A",
-      category: "Sons Iniciais",
-      description: "Identifique objetos que começam com o som da letra A.",
-      difficulty: 1,
-      type: "selection",
-      content: {
-        prompt: "Ajude o Pip a encontrar tudo que começa com o som 'AAAAA'",
-        target: "Avião",
-        options: ["Avião", "Bola", "Gato", "Dado"],
-        images: ["✈️", "⚽", "🐱", "🎲"]
-      }
-    },
-    {
-      id: "sons-2",
-      title: "B de Banana!",
-      category: "Sons Iniciais",
-      description: "Reconhecimento do fonema inicial /b/.",
-      difficulty: 1,
-      type: "selection",
-      content: {
-        prompt: "Qual destes começa com o som 'BBBBB'?",
-        target: "Bota",
-        options: ["Carro", "Bota", "Sapo", "Ilha"],
-        images: ["🚗", "🥾", "🐸", "🏝️"]
-      }
-    },
-    {
-      id: "sons-3",
-      title: "Som de Bicho",
-      category: "Sons Iniciais",
-      description: "Associe o animal ao seu som inicial.",
-      difficulty: 2,
-      type: "matching",
-      content: {
-        prompt: "O 'Jacaré' começa com qual som?",
-        target: "J",
-        options: ["J", "L", "M", "N"],
-        images: ["🐊", "🦁", "🐒", "🐘"]
-      }
-    },
-    {
-      id: "sons-4",
-      title: "Mesa dos Sons",
-      category: "Sons Iniciais",
-      description: "Classificação de múltiplos objetos pelo som inicial.",
-      difficulty: 2,
-      type: "selection",
-      content: {
-        prompt: "O Pip quer lanchar! Escolha apenas o que começa com 'MMMMM'",
-        target: "Maçã",
-        options: ["Maçã", "Pão", "Suco", "Uva"],
-        images: ["🍎", "🍞", "🧃", "🍇"]
-      }
-    }
-  ],
-  "Motorzinho dos Sons": [
-     {
-      id: "motor-1",
-      title: "Vibração do V",
-      category: "Motorzinho dos Sons",
-      description: "Sentindo a vibração das cordas vocais no som /v/.",
-      difficulty: 1,
-      type: "interaction",
-      content: {
-        prompt: "Faça o som do ventilador: VVVVVVV! Qual destes começa assim?",
-        target: "Vela",
-        options: ["Vela", "Faca", "Copo", "Mão"],
-        images: ["🕯️", "🔪", "🥛", "✋"]
-      }
-    }
-  ],
-  "Rimas": [
-    {
-      id: "rimas-1",
-      title: "Rima com Pip",
-      category: "Rimas",
-      description: "Identificação de palavras que rimam.",
-      difficulty: 1,
-      type: "matching",
-      content: {
-        prompt: "O Pip gosta de Pular! O que rima com PULAR?",
-        target: "Cantar",
-        options: ["Cantar", "Doce", "Céu", "Sol"],
-        images: ["🎤", "🍬", "☁️", "☀️"]
-      }
-    }
-  ],
   "Atenção Super Focada": [
     {
       id: "at-1",
-      title: "Encontre o Intruso",
+      title: "Rastreio Visual: Ache o Intruso",
       category: "Atenção Super Focada",
-      description: "Olhe bem as imagens e ache o que não pertence ao grupo!",
+      description: "Foco seletivo e discriminação visual.",
+      therapeuticGoal: "Desenvolver a atenção sustentada e a capacidade de filtrar estímulos irrelevantes.",
       difficulty: 1,
-      type: "selection",
+      type: "visual",
       content: {
         prompt: "Qual destes não pertence ao grupo?",
         target: "Carro",
@@ -123,46 +36,162 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
     },
     {
       id: "at-2",
-      title: "Par Perfeito",
+      title: "Alvo Móvel",
       category: "Atenção Super Focada",
-      description: "Jogo da memória clássico com figuras super divertidas.",
-      difficulty: 1,
-      type: "matching",
+      description: "Coordenação visuo-motora e tempo de reação.",
+      therapeuticGoal: "Melhorar a velocidade de processamento e a precisão do movimento.",
+      difficulty: 2,
+      type: "visual",
       content: {
-        prompt: "Encontre o par da Estrela!",
-        target: "Estrela",
-        options: ["Estrela", "Lua", "Sol", "Nuvem"],
-        images: ["⭐", "🌙", "☀️", "☁️"]
+        prompt: "Aperte no Pip assim que ele brilhar!",
+        target: "Pip Brilhando",
+        options: ["Pip Dormindo", "Pip Brilhando", "Pip Comendo"],
+        images: ["😴", "✨", "🍎"]
       }
     }
   ],
   "Memória de Elefante": [
     {
       id: "me-1",
-      title: "Repita o Ritmo",
+      title: "Sequência Neuro-Visual",
       category: "Memória de Elefante",
-      description: "Preste atenção nos sons e luzes e repita a sequência!",
-      difficulty: 1,
+      description: "Memória operacional e de trabalho.",
+      therapeuticGoal: "Expandir a capacidade de retenção de informações sequenciais a curto prazo.",
+      difficulty: 2,
       type: "sequence",
       content: {
-        prompt: "O Pip tocou: Vermelho, Azul. O que vem agora?",
-        target: "Azul",
-        options: ["Vermelho", "Azul", "Verde", "Amarelo"],
-        images: ["🔴", "🔵", "🟢", "🟡"]
+        prompt: "Guarde a ordem: Sol, Lua, Estrela. O que vem depois do Sol?",
+        target: "Lua",
+        options: ["Sol", "Lua", "Estrela", "Nuvem"],
+        images: ["☀️", "🌙", "⭐", "☁️"]
       }
     },
     {
       id: "me-2",
-      title: "Cadê o Objeto?",
+      title: "Guarde o Som",
       category: "Memória de Elefante",
-      description: "Guarde os objetos na mente antes que eles sumam da tela!",
+      description: "Memória auditiva e retenção de comandos.",
+      therapeuticGoal: "Fortalecer a memória auditiva e a compreensão de enunciados verbais.",
+      difficulty: 2,
+      type: "visual",
+      content: {
+        prompt: "O Pip disse: 'Peguem a bola e o dado'. O que o Pip pediu?",
+        target: "Bola e Dado",
+        options: ["Bola e Carro", "Bola e Dado", "Dado e Boneca", "Bola e Gato"],
+        images: ["⚽🚗", "⚽🎲", "🎲🪆", "⚽🐱"]
+      }
+    }
+  ],
+  "Sons Iniciais": [
+    {
+      id: "sons-1",
+      title: "Consciência Fonológica",
+      category: "Sons Iniciais",
+      description: "Identificação do som inicial das palavras.",
+      therapeuticGoal: "Desenvolver a consciência fonêmica e a habilidade de aliteração.",
+      difficulty: 1,
+      type: "visual",
+      content: {
+        prompt: "Qual destes começa com o som 'AAAAA'?",
+        target: "Abacaxi",
+        options: ["Abacaxi", "Bola", "Copo", "Dado"],
+        images: ["🍍", "⚽", "🥛", "🎲"]
+      }
+    },
+    {
+      id: "sons-2",
+      title: "Traçado do Alfabeto",
+      category: "Sons Iniciais",
+      description: "Grafomotricidade e associação fonema-grafema.",
+      therapeuticGoal: "Integrar a percepção visual do grafema com o movimento motor da escrita.",
+      difficulty: 2,
+      type: "tracado",
+      content: {
+        prompt: "Vamos desenhar a letra 'A' no espaço!",
+        target: "Letra A",
+        options: ["Desenhar"],
+        images: ["✍️"]
+      }
+    }
+  ],
+  "Motorzinho dos Sons": [
+    {
+      id: "motor-1",
+      title: "Sopro Controlado",
+      category: "Motorzinho dos Sons",
+      description: "Controle do fluxo expiratório e suporte respiratório.",
+      therapeuticGoal: "Melhorar a capacidade pulmonar e o controle motor orofacial para a fala.",
+      difficulty: 1,
+      type: "microfone",
+      content: {
+        prompt: "Assopre bem forte no microfone para apagar a vela!",
+        target: "Vela Apagada",
+        options: ["Assoprar"],
+        images: ["🕯️"]
+      }
+    },
+    {
+      id: "motor-2",
+      title: "Estica o Som (Controle de Voz)",
+      category: "Motorzinho dos Sons",
+      description: "Modulação vocal e sustentação fonatória.",
+      therapeuticGoal: "Desenvolver o controle da intensidade e duração da emissão sonora.",
+      difficulty: 2,
+      type: "microfone",
+      content: {
+        prompt: "Diga 'AAAAAA' por 5 segundos sem parar!",
+        target: "Voz Longa",
+        options: ["Cantar"],
+        images: ["🎤"]
+      }
+    }
+  ],
+  "Rimas Divertidas": [
+    {
+      id: "rimas-1",
+      title: "Caça-Rimas",
+      category: "Rimas Divertidas",
+      description: "Identificação de rimas e processamento auditivo.",
+      therapeuticGoal: "Aprimorar a percepção de sons semelhantes no final das palavras.",
       difficulty: 1,
       type: "selection",
       content: {
-        prompt: "Qual objeto o Pip escondeu na caixa?",
-        target: "Urso",
-        options: ["Bola", "Urso", "Carro", "Boneca"],
-        images: ["⚽", "🧸", "🚗", "🪆"]
+        prompt: "O Pip viu um GATO. O que rima com GATO?",
+        target: "Rato",
+        options: ["Rato", "Bolo", "Mão", "Céu"],
+        images: ["🐭", "🎂", "✋", "☁️"]
+      }
+    }
+  ],
+  "Regulação Emocional": [
+    {
+      id: "reg-1",
+      title: "Respira Flor",
+      category: "Regulação Emocional",
+      description: "Auto-regulação e controle de ansiedade.",
+      therapeuticGoal: "Ensinar técnicas de respiração profunda para acalmar o sistema nervoso.",
+      difficulty: 1,
+      type: "emocional",
+      content: {
+        prompt: "Cheire a flor (inspire) e assopre a vela (expire).",
+        target: "Calma",
+        options: ["Respirar"],
+        images: ["🌸"]
+      }
+    },
+    {
+      id: "reg-2",
+      title: "Termômetro dos Sentimentos",
+      category: "Regulação Emocional",
+      description: "Identificação de emoções e empatia.",
+      therapeuticGoal: "Ajudar a criança a rotular e expressar suas próprias emoções.",
+      difficulty: 1,
+      type: "emocional",
+      content: {
+        prompt: "Como você está se sentindo hoje?",
+        target: "Expressão",
+        options: ["Feliz", "Triste", "Bravo", "Calmo"],
+        images: ["😊", "😢", "😠", "😌"]
       }
     }
   ]
