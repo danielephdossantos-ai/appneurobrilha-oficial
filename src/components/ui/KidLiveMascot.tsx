@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/utils/utils';
 import { useAppState } from '@/core/store';
 import { useMascot } from '@/contexts/MascotContext';
@@ -98,9 +98,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
             alt="Pip - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             draggable={false}
-          />
-        </motion.div>
-      </AnimatePresence>
+        </div>
       
       {message && (
         <motion.div
