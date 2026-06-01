@@ -314,8 +314,8 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       transition={{ delay: index * 0.05 }}
     >
-      <KidCard className="group h-full flex flex-col overflow-hidden border-2 border-border hover:border-primary/30 transition-all duration-300">
-        <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center p-8 overflow-hidden">
+      <KidCard className="group h-full flex flex-col overflow-hidden border-4 border-white/50 bg-white/40 backdrop-blur-md hover:bg-white/60 hover:border-primary/50 transition-all duration-500 rounded-[3rem] shadow-xl hover:shadow-2xl">
+        <div className="relative h-72 bg-gradient-to-br from-primary/10 via-white to-secondary/10 flex items-center justify-center p-4 overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
