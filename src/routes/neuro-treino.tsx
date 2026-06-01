@@ -312,41 +312,13 @@ function Treino() {
       )}
 
       {/* HUD Superior Premium - Cabeçalho da Clínica Digital */}
-      <div className="flex justify-between items-center bg-white px-8 py-5 rounded-[2.5rem] shadow-xl border-b-4 border-slate-100 mb-10 max-w-5xl mx-auto transform hover:scale-[1.01] transition-transform">
-        <div className="flex items-center gap-4">
-          <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-600 border border-indigo-100 shadow-sm">
-            <Brain className="w-8 h-8 animate-pulse" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-black text-indigo-900 tracking-tight block leading-none">NEURO-TREINO</h2>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Módulo Clínico Cognitivo</p>
-          </div>
+      <div className="flex justify-between items-center z-10 mb-6 max-w-md mx-auto w-full">
+        <div className="bg-white/90 px-4 py-2 rounded-xl border-4 border-[#4B7BFF] shadow-[0_4px_0_#2B53C6] flex items-center gap-2">
+          <Brain className="w-6 h-6 text-[#4B7BFF]" />
+          <span className="text-base font-black text-[#1E3A8A] uppercase tracking-tighter">TREINO</span>
         </div>
-
-        {/* Stats de Sessão Premium */}
-        <div className="hidden md:flex items-center gap-6">
-           <div className="text-center">
-              <span className="text-[10px] font-black text-slate-400 uppercase block">Fase</span>
-              <span className="text-xl font-black text-indigo-600">#{faseIndex}</span>
-           </div>
-           <div className="h-8 w-px bg-slate-100" />
-           <div className="text-center">
-              <span className="text-[10px] font-black text-slate-400 uppercase block">Pontos</span>
-              <span className="text-xl font-black text-emerald-600">{pontos}</span>
-           </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="bg-emerald-500 text-white font-black px-5 py-2.5 rounded-2xl text-xs shadow-md flex items-center gap-3 border-b-4 border-emerald-700 active:translate-y-1 active:border-b-0 transition-all">
-            <span className="tracking-widest">SESSÃO ATIVA</span>
-            <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
-          </div>
-          <div className="bg-amber-100 text-amber-900 font-black px-6 py-3 rounded-2xl border-2 border-amber-200 flex items-center gap-3 shadow-sm">
-            <div className="bg-amber-400 p-1.5 rounded-full shadow-inner">
-              <Star size={16} fill="currentColor" />
-            </div>
-            <span className="text-lg">{coins} <span className="text-xs opacity-60 uppercase">BrilhoCoins</span></span>
-          </div>
+        <div className="bg-[#FFD23F] text-[#5C3E00] font-black px-5 py-2 rounded-xl border-4 border-[#B58A00] shadow-[0_4px_0_#806200] text-lg">
+          ⭐ {pontos}
         </div>
       </div>
 
