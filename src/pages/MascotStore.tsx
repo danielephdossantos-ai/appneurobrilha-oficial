@@ -53,6 +53,7 @@ const MascotStorePage: React.FC = () => {
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
     if (activeTab === 'pip-collection') return mascot.name === 'Pip';
+    if (activeTab === 'espaco' as any) return mascot.category === 'espaco';
     
     return true;
   });
@@ -139,6 +140,12 @@ const MascotStorePage: React.FC = () => {
             onClick={() => setActiveTab('pip-collection')} 
             label="Coleção Pip" 
             icon={<Sparkles size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'espaco' as any} 
+            onClick={() => setActiveTab('espaco' as any)} 
+            label="Espaço" 
+            icon={<ChevronRight size={16} />}
           />
         </div>
       </div>
