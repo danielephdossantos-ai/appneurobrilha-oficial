@@ -51,17 +51,19 @@ CATEGORIES.forEach(cat => {
   const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
   const baseImage = PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'] || pipMascot;
   
-  GENERATED_SKINS[cat.id] = variants.map((variant, i) => {
+  GENERATED_SKINS[cat.id] = variants.map((v: any, i) => {
     return {
       id: `skin-${cat.id}-${i + 1}`,
-      name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
+      name: cat.id === 'super-herois' ? `Pip ${v.name}` : `Pip ${cat.name} ${v.name}`,
       category: cat.id as Hiperfoco,
       price: 150 + (i * 50),
-      // Voltando a usar a imagem base do Pip para cada categoria para manter o padrão
       image: baseImage,
+      color: v.color,
+      secondary: v.secondary,
+      logo: v.logo,
       description: cat.id === 'super-herois' 
-        ? `Pip com os superpoderes do ${variant}!` 
-        : `Um visual único de ${cat.name} no estilo ${variant}!`,
+        ? `Pip com os superpoderes do ${v.name}!` 
+        : `Um visual único de ${cat.name} no estilo ${v.name}!`,
     };
   });
 });
