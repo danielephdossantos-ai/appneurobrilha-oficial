@@ -4,7 +4,6 @@ import { Component, ReactNode, useState, useEffect, useCallback } from "react";
 import { 
   AlertCircle, 
   Play, 
-  Sparkles as SparklesIcon, 
   CheckCircle2, 
   XCircle, 
   Brain, 
@@ -78,6 +77,18 @@ const BANCO_DE_DADOS_CLINICO: any = {
     { id: 'si_3', letra: 'M', somExplicacao: 'Junte bem os lábios: MMMM. De Macaco e de Melancia! Repita: MMMM.', opcoes: ['🐒', '🚗', '🎈'], correto: '🐒', nomeCorreto: 'Macaco', dicaAudio: 'Qual começa com o som MMMM? Toque no Macaco!' },
     { id: 'si_4', letra: 'O', somExplicacao: 'Faça um biquinho redondo: OOOO. De Ovo e de Óculos! Repita: OOOO.', opcoes: ['🥚', '🍌', '🤖'], correto: '🥚', nomeCorreto: 'Ovo', dicaAudio: 'Qual começa com o som OOOO? Toque no Ovo!' },
     { id: 'si_5', letra: 'S', somExplicacao: 'Dente com dente fazendo som de cobrinha: SSSS. De Sapo e Sol! Repita: SSSS.', opcoes: ['🐸', '🍦', '🐶'], correto: '🐸', nomeCorreto: 'Sapo', dicaAudio: 'Qual começa com o som SSSS? Toque no Sapo!' },
+  ],
+  memoria: [
+    { id: 'me_1', elementos: ['🍎', '🍌', '🍇'], ordem: ['🍎', '🍌', '🍇'], dicaAudio: 'Guarde bem esta ordem: Maçã, Banana e Uva! O que vem primeiro?', correto: '🍎' },
+  ],
+  motorzinho: [
+    { id: 'mo_1', dicaAudio: 'Respire fundo e solte o ar devagarinho para apagar a vela! Vamos lá!' },
+  ],
+  rimas: [
+    { id: 'ri_1', palavra: 'GATO', opcoes: ['RATO', 'BOLO', 'CASA'], correto: 'RATO', dicaAudio: 'O que rima com GATO? RATO ou BOLO?' },
+  ],
+  regulacao: [
+    { id: 're_1', dicaAudio: 'Respire fundo com o Pip... inspire e expire... sinta a calma chegar.' },
   ]
 };
 
@@ -86,54 +97,54 @@ const clinicaCategorias = [
     id: 'atencao',
     nome: "Atenção Super Focada",
     descricao: "Inclui: Ache o Intruso e Alvo Móvel",
-    cor: "bg-amber-400 border-amber-500",
+    cor: "bg-amber-400",
     corTexto: "text-amber-950",
-    icone: <Target className="w-10 h-10" />,
+    icone: <Target className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Atenção Super Focada"] || []
   },
   {
     id: 'memoria',
     nome: "Memória de Elefante",
     descricao: "Sequências e Comandos Auditivos",
-    cor: "bg-purple-400 border-purple-500",
-    corTexto: "text-purple-950",
-    icone: <Brain className="w-10 h-10" />,
+    cor: "bg-purple-400",
+    corTexto: "text-white",
+    icone: <Brain className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Memória de Elefante"] || []
   },
   {
     id: 'sons_iniciais',
     nome: "Sons Iniciais",
     descricao: "Inclui: Traçado da Letra A",
-    cor: "bg-sky-400 border-sky-500",
+    cor: "bg-sky-400",
     corTexto: "text-sky-950",
-    icone: <Volume2 className="w-10 h-10" />,
+    icone: <Volume2 className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Sons Iniciais"] || []
   },
   {
     id: 'motorzinho',
     nome: "Motorzinho dos Sons",
     descricao: "Inclui: Assopro da Vela e Voz",
-    cor: "bg-emerald-400 border-emerald-500",
+    cor: "bg-emerald-400",
     corTexto: "text-emerald-950",
-    icone: <Activity className="w-10 h-10" />,
+    icone: <Activity className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"] || []
   },
   {
     id: 'rimas',
-    nome: "Rimas Divertidas",
+    nome: "Rimas",
     descricao: "Pares Rimados e Intrusos Sonoros",
-    cor: "bg-pink-400 border-pink-500",
-    corTexto: "text-pink-950",
-    icone: <SparklesIcon className="w-10 h-10" />,
+    cor: "bg-pink-400",
+    corTexto: "text-white",
+    icone: <Sparkles className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Rimas Divertidas"] || []
   },
   {
     id: 'regulacao',
     nome: "Regulação Emocional",
     descricao: "Âncora da Calma e Emoções",
-    cor: "bg-rose-400 border-rose-500",
-    corTexto: "text-rose-950",
-    icone: <Smile className="w-10 h-10" />,
+    cor: "bg-rose-400",
+    corTexto: "text-white",
+    icone: <Smile className="w-8 h-8" />,
     atividades: NEURO_ACTIVITIES["Regulação Emocional"] || []
   },
 ];
@@ -387,25 +398,21 @@ function Treino() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
+                className="grid grid-cols-2 md:grid-cols-3 gap-4 flex-1 items-center py-2"
               >
                 {clinicaCategorias.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => selecionarCategoria(cat.id)}
                     className={cn(
-                      "p-6 rounded-[24px] border-b-8 border-black/10 flex flex-col items-center justify-between text-center gap-4 transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0",
+                      "p-5 rounded-2xl border-b-8 border-black/10 flex flex-col items-center justify-center text-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0 h-36",
                       cat.cor, cat.corTexto
                     )}
                   >
-                    <div className="bg-white/95 p-4 rounded-2xl shadow-inner text-slate-800">
+                    <div className="bg-white/90 p-3 rounded-xl shadow-inner text-slate-800">
                       {cat.icone}
                     </div>
-                    <div>
-                      <span className="text-xl font-black block tracking-wide">{cat.nome}</span>
-                      <p className="text-[10px] font-bold opacity-70 uppercase tracking-tighter mb-1">{cat.descricao}</p>
-                      <span className="text-[11px] bg-black/10 px-2.5 py-0.5 rounded-full font-bold uppercase">{cat.atividades.length} Protocolos</span>
-                    </div>
+                    <span className="text-md font-black tracking-wide leading-tight">{cat.nome}</span>
                   </button>
                 ))}
               </motion.div>
@@ -449,21 +456,19 @@ function Treino() {
                 key="game-screen"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-[28px] p-6 border border-slate-100 shadow-md relative overflow-hidden"
+                className="bg-white rounded-[28px] p-6 border-2 border-slate-100 shadow-inner flex-1 flex flex-col justify-between relative overflow-hidden"
               >
+                {/* Barra de Controle de Voltar / Status do Exercício */}
                 <div className="flex justify-between items-center mb-6 relative z-10">
-                  <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm">
-                    <ArrowLeft className="w-4 h-4" /> Trocar Exercício
+                  <button 
+                    onClick={() => { setCatAtiva(null); setAtvAtiva(null); setVariacaoAtual(null); }}
+                    className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Sair do Treino
                   </button>
-                  
-                  {catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva] && (
-                    <button 
-                      onClick={() => handleSelectAtv(atvAtiva!)}
-                      className="flex items-center gap-2 text-indigo-400 font-bold hover:text-indigo-600 transition-colors text-sm bg-indigo-50 px-4 py-2 rounded-full"
-                    >
-                      <RefreshCw className="w-4 h-4" /> Nova Variação
-                    </button>
-                  )}
+                  <div className="bg-slate-100 text-slate-600 font-black px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                    <RefreshCw className="w-3 h-3 animate-spin text-indigo-500" /> Missão {faseIndex} (Fases Infinitas)
+                  </div>
                 </div>
 
                 {atividadeAtual && (
