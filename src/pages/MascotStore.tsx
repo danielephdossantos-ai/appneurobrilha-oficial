@@ -355,41 +355,44 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
           )}
         </div>
 
-        <div className="p-6 flex-1 flex flex-col">
+        <div className="p-8 flex-1 flex flex-col items-center text-center">
           <div className="mb-4">
-            <h3 className="text-2xl font-black text-primary leading-tight mb-1 group-hover:text-secondary transition-colors">
+            <h3 className="text-3xl font-black text-primary leading-tight mb-2 group-hover:text-secondary transition-colors drop-shadow-sm">
               {mascot.name}
             </h3>
-            <p className="text-sm font-bold text-muted-foreground/60 uppercase tracking-widest text-[10px]">
-              {isPip ? 'Guardião Lendário' : 'Companheiro de Jornada'}
-            </p>
+            <div className={cn(
+              "inline-block px-4 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest shadow-md mb-4",
+              rarityColor
+            )}>
+              {rarity}
+            </div>
           </div>
 
-          <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-1 italic">
+          <p className="text-muted-foreground/80 text-sm line-clamp-2 mb-8 flex-1 italic font-medium leading-relaxed">
             "{mascot.description}"
           </p>
 
-          <div className="mt-auto space-y-3">
+          <div className="w-full mt-auto">
             {isOwned ? (
-              <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                <Star size={16} fill="currentColor" />
-                Já na Coleção
+              <div className="w-full py-4 rounded-3xl bg-success/10 border-2 border-success/30 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2 shadow-inner">
+                <Star size={18} fill="currentColor" />
+                Meu Amigo!
               </div>
             ) : (
               <KidButton 
                 variant="primary" 
-                className="w-full py-6 text-lg group/btn"
-                onClick={() => {}} // Futura integração de compra
+                className="w-full py-7 text-xl group/btn rounded-3xl shadow-kid [--shadow-color:oklch(var(--primary-dark))]"
+                onClick={() => {}} 
               >
                 <span className="flex items-center gap-2">
-                  Ver Detalhes
-                  <ChevronRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
+                  Conhecer!
+                  <Sparkles size={20} className="group-hover/btn:rotate-12 transition-transform" />
                 </span>
               </KidButton>
             )}
             
             {!isOwned && (
-              <p className="text-[10px] text-center font-bold text-muted-foreground uppercase tracking-widest">
+              <p className="text-[10px] text-center font-bold text-muted-foreground uppercase tracking-widest mt-4">
                 Requer Nível {mascot.category === 'premium' ? '10' : '5'} + Moedas Brilha
               </p>
             )}
