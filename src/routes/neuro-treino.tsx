@@ -4,7 +4,6 @@ import { Component, ReactNode, useState, useEffect, useCallback } from "react";
 import { 
   AlertCircle, 
   Play, 
-  Sparkles as SparklesIcon, 
   CheckCircle2, 
   XCircle, 
   Brain, 
