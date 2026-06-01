@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from '@tanstack/react-router';
 import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { Shell } from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -236,9 +237,18 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
 
           <div className="mt-auto space-y-3">
             {isOwned ? (
-              <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                <Star size={16} fill="currentColor" />
-                Já na Coleção
+              <div className="flex flex-col gap-2">
+                <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+                  <Star size={16} fill="currentColor" />
+                  Já na Coleção
+                </div>
+                {isPip && (
+                  <Link to="/colecao-pip" className="w-full">
+                    <KidButton variant="secondary" className="w-full py-4 text-xs">
+                      Ver Fantasias do Pip
+                    </KidButton>
+                  </Link>
+                )}
               </div>
             ) : (
               <KidButton 
