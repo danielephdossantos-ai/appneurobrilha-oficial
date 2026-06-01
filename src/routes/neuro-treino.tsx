@@ -356,7 +356,7 @@ function Treino() {
           {/* Mascote Animado */}
           <div className="relative">
             <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
-              🦊
+              🐶
             </div>
             {mascoteAnimando && (
               <span className="absolute -top-1 -right-1 flex h-4 w-4">
