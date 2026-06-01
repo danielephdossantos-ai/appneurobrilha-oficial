@@ -544,10 +544,8 @@ function Treino() {
 
                       {/* JOGO 1: JOGO DO INTRUSO (ATENÇÃO SUPER FOCADA) - Roda 50 variações */}
                       {catAtiva === 'atencao' && variacaoAtual && (
-                        <div className="text-center flex-1 flex flex-col justify-center">
-                          <h3 className="text-xl font-black text-slate-800 mb-1">Rastreamento Perceptual Visual</h3>
-                          <p className="text-xs font-bold text-slate-400 mb-6">Encontre o elemento intruso que não pertence ao grupo!</p>
-                          <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto w-full">
+                        <div className="flex-1 flex items-center justify-center py-6 animate-scaleUp">
+                          <div className="grid grid-cols-2 gap-4 w-full max-w-[280px]">
                             {variacaoAtual.elementos.map((item: string, index: number) => (
                               <button
                                 key={index}
@@ -559,9 +557,9 @@ function Treino() {
                                     triggerFeedback('Padrão idêntico. Continue rastreando! 🔍');
                                   }
                                 }}
-                                className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-indigo-400 rounded-3xl flex items-center justify-center text-6xl shadow-sm transition-all transform hover:scale-105 active:scale-95"
+                                className="aspect-square bg-gradient-to-b from-white to-[#F1F5F9] border-4 border-[#CBD5E1] hover:border-[#4B7BFF] rounded-[24px] flex items-center justify-center text-5xl shadow-[0_6px_0_#CBD5E1] hover:shadow-[0_6px_0_rgba(75,123,255,0.4)] transition-all transform active:translate-y-1 active:shadow-none"
                               >
-                                {item}
+                                <span className="filter drop-shadow-sm">{item}</span>
                               </button>
                             ))}
                           </div>
