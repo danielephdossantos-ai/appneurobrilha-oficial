@@ -15,7 +15,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'favorites'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
