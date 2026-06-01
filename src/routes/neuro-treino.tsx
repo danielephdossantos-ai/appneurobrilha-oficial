@@ -361,8 +361,7 @@ function Treino() {
           </div>
         </div>
 
-
-        <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-6 border-3 border-white shadow-xl flex-1 flex flex-col z-10 min-h-[400px]">
+        <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-4 border-3 border-white shadow-xl flex-1 flex flex-col z-10 min-h-[400px]">
           <AnimatePresence mode="wait">
             {!catAtiva ? (
               <motion.div 
