@@ -356,7 +356,7 @@ function Treino() {
           {/* Mascote Animado */}
           <div className="relative">
             <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
-              🦊
+              🐶
             </div>
             {mascoteAnimando && (
               <span className="absolute -top-1 -right-1 flex h-4 w-4">
@@ -778,10 +778,10 @@ function Treino() {
                  Você está em um ambiente controlado e seguro. O Pip está monitorando o progresso para o relatório terapêutico.
                </p>
                <div className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/20">
-                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🦊</div>
+                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🐶</div>
                  <div>
                    <span className="text-[10px] font-black uppercase tracking-widest block opacity-70">Acompanhamento</span>
-                   <span className="text-sm font-black">Pip Fox Ativo</span>
+                   <span className="text-sm font-black">Pip Inteligente Ativo</span>
                  </div>
                </div>
             </div>
