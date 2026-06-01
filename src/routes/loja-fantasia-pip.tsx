@@ -27,11 +27,23 @@ const CATEGORIES = [
 const GENERATED_SKINS: Record<string, any[]> = {};
 
 const HERO_VARIANTS = [
-  "Batman", "Super-Homem", "Hulk", "Homem de Ferro", "Thor", "Homem-Aranha", "Homem-Formiga"
+  { name: "Batman", color: "#1a1a1a", secondary: "#fde047", logo: "🦇" },
+  { name: "Super-Homem", color: "#1d4ed8", secondary: "#dc2626", logo: "S" },
+  { name: "Hulk", color: "#166534", secondary: "#6b21a8", logo: "👊" },
+  { name: "Homem de Ferro", color: "#991b1b", secondary: "#f59e0b", logo: "⚙️" },
+  { name: "Thor", color: "#334155", secondary: "#ef4444", logo: "🔨" },
+  { name: "Homem-Aranha", color: "#b91c1c", secondary: "#1d4ed8", logo: "🕸️" },
+  { name: "Homem-Formiga", color: "#000000", secondary: "#dc2626", logo: "🐜" }
 ];
 
 const GENERAL_VARIANTS = [
-  "Clássico", "Real", "Galáctico", "Místico", "Lendário", "Aventureiro", "Supremo"
+  { name: "Clássico", color: "#3b82f6" },
+  { name: "Real", color: "#a855f7" },
+  { name: "Galáctico", color: "#1e1b4b" },
+  { name: "Místico", color: "#ec4899" },
+  { name: "Lendário", color: "#eab308" },
+  { name: "Aventureiro", color: "#10b981" },
+  { name: "Supremo", color: "#ef4444" }
 ];
 
 // Gerar modelos únicos para cada categoria seguindo estritamente o padrão visual do Pip
@@ -39,17 +51,19 @@ CATEGORIES.forEach(cat => {
   const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
   const baseImage = PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'] || pipMascot;
   
-  GENERATED_SKINS[cat.id] = variants.map((variant, i) => {
+  GENERATED_SKINS[cat.id] = variants.map((v: any, i) => {
     return {
       id: `skin-${cat.id}-${i + 1}`,
-      name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
+      name: cat.id === 'super-herois' ? `Pip ${v.name}` : `Pip ${cat.name} ${v.name}`,
       category: cat.id as Hiperfoco,
       price: 150 + (i * 50),
-      // Voltando a usar a imagem base do Pip para cada categoria para manter o padrão
       image: baseImage,
+      color: v.color,
+      secondary: v.secondary,
+      logo: v.logo,
       description: cat.id === 'super-herois' 
-        ? `Pip com os superpoderes do ${variant}!` 
-        : `Um visual único de ${cat.name} no estilo ${variant}!`,
+        ? `Pip com os superpoderes do ${v.name}!` 
+        : `Um visual único de ${cat.name} no estilo ${v.name}!`,
     };
   });
 });
@@ -58,18 +72,21 @@ function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
 
-  const handleSelectSkin = (category: Hiperfoco, imageUrl: string) => {
+  const handleSelectSkin = (skin: any) => {
     if (!activeChild) return;
     
-    // Salvando a skin específica nos flags do perfil para troca automática
+    // Salvando a skin específica e suas propriedades visuais nos flags
     const updatedFlags = {
       ...(activeChild.flags || {}),
-      active_skin_url: imageUrl
+      active_skin_url: skin.image,
+      active_skin_color: skin.color,
+      active_skin_secondary: skin.secondary,
+      active_skin_logo: skin.logo
     };
 
     updateChild(activeChild.id, {
       flags: updatedFlags as any,
-      hyperfocus_list: [category, ...(activeChild.hyperfocus_list || []).filter(h => h !== category)].slice(0, 5)
+      hyperfocus_list: [skin.category, ...(activeChild.hyperfocus_list || []).filter(h => h !== skin.category)].slice(0, 5)
     });
     
     toast.success("Fantasia Trocada!", {
@@ -125,7 +142,7 @@ function LojaFantasiaPipPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {GENERATED_SKINS[selectedCategory].map((skin, index) => {
-              const isCurrent = (activeChild?.flags as any)?.active_skin_url === skin.image;
+              const isCurrent = (activeChild?.flags as any)?.active_skin_logo === skin.logo && (activeChild?.flags as any)?.active_skin_color === skin.color;
               
               return (
                 <motion.div
@@ -136,13 +153,34 @@ function LojaFantasiaPipPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all ${
+                  <KidCard className={`h-full flex flex-col items-center text-center p-6 border-4 transition-all overflow-hidden ${
                     isCurrent ? "border-primary bg-primary/5" : "border-primary/10 hover:border-primary/30"
                   }`}>
-                    <div className="relative w-40 h-40 mb-6 bg-gradient-to-b from-primary/5 to-transparent rounded-full flex items-center justify-center">
-                      <img src={skin.image} alt={skin.name} className="w-full h-full object-contain drop-shadow-xl" />
+                    <div 
+                      className="relative w-40 h-40 mb-6 rounded-full flex items-center justify-center overflow-hidden"
+                      style={{ backgroundColor: `${skin.color}20` }}
+                    >
+                      {/* Efeito de cor da fantasia */}
+                      <div className="absolute inset-0 opacity-20" style={{ backgroundColor: skin.color }} />
+                      
+                      <img 
+                        src={skin.image} 
+                        alt={skin.name} 
+                        className="w-full h-full object-contain drop-shadow-xl relative z-10" 
+                        style={{ 
+                          filter: skin.color ? `drop-shadow(0 0 10px ${skin.color}50)` : 'none'
+                        }}
+                      />
+                      
+                      {/* Logo do herói no peito */}
+                      {skin.logo && (
+                        <div className="absolute bottom-10 z-20 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-lg border-2" style={{ borderColor: skin.secondary }}>
+                          <span className="text-sm font-black" style={{ color: skin.color }}>{skin.logo}</span>
+                        </div>
+                      )}
+
                       {isCurrent && (
-                        <div className="absolute -top-2 -right-2 bg-success text-white p-2 rounded-full shadow-lg">
+                        <div className="absolute -top-2 -right-2 bg-success text-white p-2 rounded-full shadow-lg z-30">
                           <Check size={20} strokeWidth={4} />
                         </div>
                       )}
@@ -153,8 +191,9 @@ function LojaFantasiaPipPage() {
                     
                     <KidButton
                       variant={isCurrent ? "secondary" : "primary"}
-                      onClick={() => handleSelectSkin(skin.category, skin.image)}
+                      onClick={() => handleSelectSkin(skin)}
                       className="w-full"
+                      style={!isCurrent ? { backgroundColor: skin.color, borderColor: skin.secondary } : {}}
                     >
                       {isCurrent ? "Vestido" : (
                         <span className="flex items-center gap-2">

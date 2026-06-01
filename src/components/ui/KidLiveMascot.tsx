@@ -95,16 +95,39 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
             sizes[size]
           )}
         >
-          {/* Expressões faciais via filtros ou sobreposições se necessário */}
-          {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
-          
+          {/* Efeito de Aura da Fantasia */}
+          {(activeChild?.flags as any)?.active_skin_color && (
+            <div 
+              className="absolute inset-0 blur-3xl opacity-20 rounded-full animate-pulse"
+              style={{ backgroundColor: (activeChild?.flags as any).active_skin_color }}
+            />
+          )}
 
           <img
             src={mascotImage}
             alt="Pip - O Guardião dos Desafios"
-            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
+            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none relative z-10"
             draggable={false}
           />
+
+          {/* Símbolo da Fantasia no Peito (Estilo Tom Gato) */}
+          {(activeChild?.flags as any)?.active_skin_logo && (
+            <div 
+              className={cn(
+                "absolute z-20 bg-white/95 rounded-full flex items-center justify-center shadow-xl border-4 transform translate-y-4 md:translate-y-8",
+                size === 'sm' ? 'w-6 h-6 text-[8px]' : 
+                size === 'md' ? 'w-10 h-10 text-xs' : 
+                size === 'lg' ? 'w-14 h-14 text-lg' : 
+                size === 'xl' ? 'w-18 h-18 text-2xl' : 'w-24 h-24 text-4xl'
+              )}
+              style={{ 
+                borderColor: (activeChild?.flags as any).active_skin_secondary || '#eee',
+                color: (activeChild?.flags as any).active_skin_color
+              }}
+            >
+              <span className="font-black">{(activeChild?.flags as any).active_skin_logo}</span>
+            </div>
+          )}
         </div>
       
       {message && (
