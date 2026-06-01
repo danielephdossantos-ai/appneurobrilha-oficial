@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shell } from '@/components/Layout';
 import { KidCard } from '@/components/ui/KidCard';
@@ -65,7 +65,7 @@ function LojaFantasiaPipPage() {
             className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-black uppercase tracking-widest text-xs mb-4"
           >
             <ShoppingBag size={14} />
-            Guarda-Roupa do Pip
+            Mercado Brilha
           </motion.div>
           
           <motion.h1 
@@ -73,8 +73,23 @@ function LojaFantasiaPipPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-black text-primary mb-4"
           >
-            Loja de Fantasias
+            Loja de Mascotes
           </motion.h1>
+
+          {/* Navigation Tabs for Categories within Mascot Store */}
+          <div className="flex justify-center gap-4 mb-8 overflow-x-auto pb-4 scrollbar-hide">
+            <Link to="/loja-mascotes">
+              <button className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-black text-sm uppercase tracking-widest transition-all whitespace-nowrap text-muted-foreground hover:bg-muted">
+                <Star size={18} />
+                Mascotes Pip
+              </button>
+            </Link>
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-black text-sm uppercase tracking-widest transition-all whitespace-nowrap bg-primary text-white shadow-kid [--shadow-color:oklch(var(--primary-dark))]">
+              <Sparkles size={18} />
+              Fantasias do Pip
+            </button>
+          </div>
+
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Escolha um visual incrível e o Pip vai se transformar na hora, igual ao Tom Gato!
           </p>
