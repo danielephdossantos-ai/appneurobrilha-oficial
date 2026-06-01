@@ -302,7 +302,7 @@ const CatalogSection = ({ title, type, icon }: { title: string, type: string, ic
   
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).limit(25);
+      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).order('required_level', { ascending: true });
       setItems(data || []);
     };
     fetchItems();
