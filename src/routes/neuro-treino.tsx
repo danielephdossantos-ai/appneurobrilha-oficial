@@ -745,12 +745,12 @@ function Treino() {
 
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-6">
-            <div className="bg-white/90 p-6 rounded-[2.5rem] border-4 border-white shadow-xl space-y-3 mt-6">
+            <div className="bg-white/90 p-6 rounded-[2.5rem] border-4 border-white shadow-xl space-y-3 mt-4">
                <div className="flex items-center gap-3 text-indigo-900 font-black uppercase tracking-tighter">
                   <Heart className="text-rose-500" fill="currentColor" />
                   <span>Dica do Pip</span>
                </div>
-               <p className="text-xs font-bold text-slate-500 leading-relaxed italic">
+               <p className="text-[11px] font-bold text-slate-500 leading-relaxed italic">
                  "O estímulo visual associado ao motor fortalece as sinapses do pequeno gênio. Continue incentivando!"
                </p>
             </div>
