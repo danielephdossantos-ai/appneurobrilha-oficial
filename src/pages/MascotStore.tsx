@@ -42,9 +42,7 @@ const MascotStorePage: React.FC = () => {
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
-  const filteredMascots = allMascots.filter(mascot => {
-    return mascot.name === 'Pip';
-  });
+  const filteredMascots = allMascots;
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -137,8 +135,9 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
 
 const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
   const isPip = mascot.name === 'Pip';
-  const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
-  const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
+  const isCustom = !['Pip', 'Rex', 'Tina', 'Astro', 'Nova', 'Luna', 'Mia', 'Turbo'].includes(mascot.name);
+  const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Coleção Pip';
+  const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-sun';
 
   return (
     <motion.div
@@ -203,13 +202,11 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                   <Star size={16} fill="currentColor" />
                   Já na Coleção
                 </div>
-                {isPip && (
-                  <Link to="/colecao-pip" className="w-full">
-                    <KidButton variant="secondary" className="w-full py-4 text-xs">
-                      Ver Fantasias do Pip
-                    </KidButton>
-                  </Link>
-                )}
+                <Link to="/colecao-pip" className="w-full">
+                  <KidButton variant="secondary" className="w-full py-4 text-xs">
+                    Ver Coleção Pip
+                  </KidButton>
+                </Link>
               </div>
             ) : (
               <KidButton 
