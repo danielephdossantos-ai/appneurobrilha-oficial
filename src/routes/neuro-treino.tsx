@@ -6,6 +6,7 @@ import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
 import { toast } from "sonner";
+import { cn } from "@/utils/utils";
 import { NEURO_ACTIVITIES, NeuroActivity } from "@/data/neuro-treino/activities";
 import { motion, AnimatePresence } from "framer-motion";
 
