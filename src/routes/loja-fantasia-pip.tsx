@@ -33,19 +33,19 @@ const GENERAL_VARIANTS = [
   "Clássico", "Real", "Galáctico", "Místico", "Lendário", "Aventureiro", "Supremo"
 ];
 
-// Gerar modelos únicos para cada categoria
+// Gerar modelos únicos para cada categoria seguindo estritamente o padrão visual do Pip
 CATEGORIES.forEach(cat => {
   const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
+  const baseImage = PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'] || pipMascot;
   
   GENERATED_SKINS[cat.id] = variants.map((variant, i) => {
-    const seed = `${cat.id}-${variant.toLowerCase().replace(/\s+/g, '-')}`;
     return {
       id: `skin-${cat.id}-${i + 1}`,
       name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
       category: cat.id as Hiperfoco,
       price: 150 + (i * 50),
-      // Usando Dicebear para garantir que cada fantasia seja visualmente única
-      image: `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${seed}&backgroundColor=b6e3f4`,
+      // Voltando a usar a imagem base do Pip para cada categoria para manter o padrão
+      image: baseImage,
       description: cat.id === 'super-herois' 
         ? `Pip com os superpoderes do ${variant}!` 
         : `Um visual único de ${cat.name} no estilo ${variant}!`,
