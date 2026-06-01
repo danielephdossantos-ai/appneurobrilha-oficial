@@ -79,7 +79,7 @@ const MascotStorePage: React.FC = () => {
           <TabButton 
             active={true} 
             onClick={() => {}} 
-            label="Coleção Pip" 
+            label="Coleção NeuroBrilha Kids" 
             icon={<Sparkles size={16} className="text-sun" />}
           />
         </div>
