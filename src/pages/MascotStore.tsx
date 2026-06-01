@@ -12,13 +12,21 @@ import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 
 
+const ADDITIONAL_CHARACTERS = [
+  { id: 'rex', name: 'Rex', description: 'O T-Rex explorador com um sorriso gigante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4' },
+  { id: 'tina', name: 'Tina', description: 'Triceratops gentil com cores vivas e muita calma.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf' },
+  { id: 'astro', name: 'Astro', description: 'Robô astronauta expressivo e muito amigável.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Astro&backgroundColor=c0aede' },
+  { id: 'nova', name: 'Nova', description: 'Cadelinha espacial pronta para guiar aventuras.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Nova&backgroundColor=d1d4f9' },
+  { id: 'luna', name: 'Luna', description: 'Gata unicórnio mágica com chifre brilhante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Luna&backgroundColor=ffd5dc' },
+  { id: 'mia', name: 'Mia', description: 'Gatinha delicada com olhos enormes e encantadores.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Mia&backgroundColor=ffdfbf' },
+  { id: 'turbo', name: 'Turbo', description: 'Carrinho de corrida veloz com cores vibrantes.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Turbo&backgroundColor=b6e3f4' },
+];
+
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
-  const [allMascots, setAllMascots] = useState<Mascot[]>([]);
+  const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'pip-collection'>('pip-collection');
   
-
   useEffect(() => {
     const fetchAllMascots = async () => {
       try {
@@ -29,7 +37,7 @@ const MascotStorePage: React.FC = () => {
           .order('name');
 
         if (error) throw error;
-        setAllMascots(data || []);
+        setDbMascots(data || []);
       } catch (err) {
         console.error('Error fetching mascots from store:', err);
       } finally {
@@ -42,8 +50,14 @@ const MascotStorePage: React.FC = () => {
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
-  const filteredMascots = allMascots.filter(mascot => {
-    return mascot.name === 'Pip';
+  // Combine DB mascots with additional characters
+  const allDisplayMascots = [...dbMascots];
+  
+  // Add additional characters if they're not already in the DB mascots (by name/id)
+  ADDITIONAL_CHARACTERS.forEach(char => {
+    if (!dbMascots.find(m => m.name === char.name)) {
+      allDisplayMascots.push(char as Mascot);
+    }
   });
 
   return (
@@ -75,18 +89,6 @@ const MascotStorePage: React.FC = () => {
         </motion.p>
       </header>
 
-      {/* Filtro fixo para Coleção Pip */}
-      <div className="flex justify-center mb-8">
-        <div className="flex gap-2 bg-white p-1.5 rounded-2xl border-2 border-border shadow-sm">
-          <TabButton 
-            active={true} 
-            onClick={() => {}} 
-            label="Coleção Pip" 
-            icon={<Sparkles size={16} className="text-sun" />}
-          />
-        </div>
-      </div>
-
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2, 3, 4, 5, 6].map(i => (
@@ -96,20 +98,20 @@ const MascotStorePage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredMascots.map((mascot, index) => (
+            {allDisplayMascots.map((mascot, index) => (
               <MascotStoreCard 
                 key={mascot.id} 
                 mascot={mascot} 
                 isOwned={ownedMascotIds.includes(mascot.id)}
                 index={index}
-                showCollectionButton={activeTab === 'pip-collection'}
+                showCollectionButton={true}
               />
             ))}
           </AnimatePresence>
         </div>
       )}
 
-      {filteredMascots.length === 0 && !isLoading && (
+      {allDisplayMascots.length === 0 && !isLoading && (
         <div className="text-center py-20 bg-white/50 rounded-[3rem] border-4 border-dashed border-primary/10">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-2xl font-black text-primary uppercase">Nenhum mascote encontrado</h3>
