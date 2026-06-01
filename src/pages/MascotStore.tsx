@@ -39,7 +39,7 @@ const MascotStorePage: React.FC = () => {
     };
 
     fetchAllMascots();
-  }, []);
+  }, [allMascots.length]); // Re-fetch se o número de mascotes mudar
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
@@ -328,7 +328,7 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
 
             ) : mascot.image_url ? (
               <img 
-                src={mascot.image_url} 
+                src={`${mascot.image_url}${mascot.image_url.includes('?') ? '&' : '?'}v=${new Date().getTime()}`} 
                 alt={mascot.name} 
                 className="w-full h-full object-contain drop-shadow-2xl filter brightness-110" 
                 onError={(e) => {
