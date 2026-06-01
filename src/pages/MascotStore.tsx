@@ -166,7 +166,9 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
 );
 
 const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
-  const isPip = mascot.name === 'Pip';
+  const { setActiveMascot, activeMascot } = useMascot();
+  const isPip = mascot.name === 'Pip' || mascot.name.startsWith('Pip ');
+  const isActive = activeMascot?.mascot_id === mascot.id;
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
 
@@ -254,7 +256,7 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                 </KidButton>
                 {isPip && (
                     <Link to="/loja-fantasia-pip" className="w-full">
-                    <KidButton variant="outline" className="w-full py-3 text-xs border-2">
+                    <KidButton variant="secondary" className="w-full py-3 text-xs border-2">
                       Ver Fantasias do Pip
                     </KidButton>
                   </Link>
