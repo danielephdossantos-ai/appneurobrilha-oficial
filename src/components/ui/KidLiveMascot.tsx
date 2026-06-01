@@ -125,14 +125,10 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
       </AnimatePresence>
       
       {message && (
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm"
-        >
+        <div className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-t-4 border-l-4 border-primary/30 rotate-45" />
           <p className="text-primary font-black text-center text-lg md:text-xl leading-snug">{message}</p>
-        </motion.div>
+        </div>
       )}
     </div>
   );
