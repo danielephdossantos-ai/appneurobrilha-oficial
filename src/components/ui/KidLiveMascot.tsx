@@ -33,7 +33,7 @@ export const PIP_SKINS: Record<string, string> = {
   robos: pipRobos,
   veiculos: pipVeiculos,
 };
-import { Award, Puzzle } from 'lucide-react';
+import { Puzzle } from 'lucide-react';
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'waving' | 'blinking';
 
@@ -82,76 +82,50 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
   const getEmotionStyles = () => {
     switch (emotion) {
-      case 'happy': return 'animate-bounce-gentle';
-      case 'excited': return 'animate-celebrate';
-      case 'sleeping': return 'animate-yawn opacity-80';
-      case 'thinking': return 'animate-float-thinking';
+      case 'sleeping': return 'opacity-80';
       case 'proud': return 'scale-110';
-      case 'waving': return 'animate-wave';
-      case 'blinking': return 'animate-blink';
       default: return '';
     }
   };
 
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${emotion}-${mascotImage}`}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          className={cn(
-            "relative flex items-center justify-center overflow-visible",
-            sizes[size],
-            getEmotionStyles()
-          )}
-        >
-          {/* Expressões faciais via filtros ou sobreposições se necessário */}
-          {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
-          
-          {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
-          {isPip && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-              <div className="relative w-1/5 h-1/5 translate-y-4">
-                <Puzzle 
-                  className="w-full h-full text-sun animate-glow-puzzle fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
-                  strokeWidth={3}
-                />
-              </div>
+      <div
+        key={`${emotion}-${mascotImage}`}
+        className={cn(
+          "relative flex items-center justify-center overflow-visible",
+          sizes[size],
+          getEmotionStyles()
+        )}
+      >
+        {/* Expressões faciais via filtros ou sobreposições se necessário */}
+        {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
+        
+        {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
+        {isPip && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+            <div className="relative w-1/5 h-1/5 translate-y-4">
+              <Puzzle 
+                className="w-full h-full text-sun fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
+                strokeWidth={3}
+              />
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Selo Mascote Oficial - Agora mais destacado */}
-          {isPip && showBadge && (
-            <motion.div 
-              initial={{ scale: 0, rotate: -25 }}
-              animate={{ scale: 1.1, rotate: -15 }}
-              className="absolute -top-4 -right-8 bg-gradient-to-r from-sun to-warning text-primary font-black text-xs px-4 py-2 rounded-xl border-4 border-white shadow-xl z-20 flex items-center gap-2 uppercase tracking-tighter"
-            >
-              <Award className="w-4 h-4" />
-              Mascote Oficial
-            </motion.div>
-          )}
-
-          <img
-            src={mascotImage}
-            alt="Pip - O Guardião dos Desafios"
-            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
-            draggable={false}
-          />
-        </motion.div>
-      </AnimatePresence>
+        <img
+          src={mascotImage}
+          alt="Pip - O Guardião dos Desafios"
+          className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
+          draggable={false}
+        />
+      </div>
       
       {message && (
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm"
-        >
+        <div className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-t-4 border-l-4 border-primary/30 rotate-45" />
           <p className="text-primary font-black text-center text-lg md:text-xl leading-snug">{message}</p>
-        </motion.div>
+        </div>
       )}
     </div>
   );
