@@ -193,9 +193,10 @@ function Treino() {
     setTimeout(() => setFeedback(null), 3500);
   };
 
-  // Carrega uma variação aleatória (entre as disponíveis) sempre que muda de fase
+  // Carrega uma variação aleatória (entre as 50 disponíveis) sempre que muda de fase
   const carregarNovaVariacao = useCallback((categoria: string) => {
     const lista = BANCO_DE_DADOS_CLINICO[categoria as keyof typeof BANCO_DE_DADOS_CLINICO] || BANCO_DE_DADOS_CLINICO.atencao;
+    // Pega um item aleatório do banco de dados de 50 variações
     const aleatorio = lista[Math.floor(Math.random() * lista.length)];
     setVariacaoAtual(aleatorio);
     setIsAnswered(false);
@@ -215,13 +216,11 @@ function Treino() {
     }, 200);
   }, [terapeutaFalar]);
 
-  const handleSelectAtv = (activityId: string) => {
-    setAtvAtiva(activityId);
+  const selecionarCategoria = (id: string) => {
+    setCatAtiva(id);
+    setAtvAtiva(id); // Entra direto no jogo selecionado
     setFaseIndex(1);
-    
-    if (catAtiva) {
-      carregarNovaVariacao(catAtiva);
-    }
+    carregarNovaVariacao(id);
   };
 
   const handleAcaoInterativa = () => {
@@ -246,24 +245,25 @@ function Treino() {
     }, 300);
   };
 
-  const handleAnswer = (option: string) => {
+  const handleAnswer = (escolha: string) => {
     if (isAnswered) return;
     
-    const correct = option === atividadeAtual?.content.target || 
-                    ['interaction', 'microfone', 'tracado', 'emocional'].includes(atividadeAtual?.type || '');
-    
-    setIsCorrect(correct);
-    setIsAnswered(true);
+    // Se houver variação premium, valida por ela. Caso contrário, valida pelo target fixo.
+    const isCorrectChoice = variacaoAtual 
+      ? escolha === variacaoAtual.correto 
+      : (escolha === atividadeAtual?.content.target || ['interaction', 'microfone', 'tracado', 'emocional'].includes(atividadeAtual?.type || ''));
 
-    if (correct) {
+    if (isCorrectChoice) {
+      setIsCorrect(true);
+      setIsAnswered(true);
       setPontos(prev => prev + 20);
       setFaseIndex(prev => prev + 1);
-      triggerFeedback('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
+      terapeutaFalar('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
       
       // Progride para uma nova variação inédita
-      if (catAtiva) {
-        setTimeout(() => carregarNovaVariacao(catAtiva), 2500);
-      }
+      setTimeout(() => {
+        if (catAtiva) carregarNovaVariacao(catAtiva);
+      }, 2500);
     } else {
       terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
       toast.error("Tente novamente!", { 
@@ -271,6 +271,12 @@ function Treino() {
         icon: <XCircle className="text-rose-500" />
       });
     }
+  };
+
+  const handleSelectAtv = (activityId: string) => {
+    setAtvAtiva(activityId);
+    setFaseIndex(1);
+    if (catAtiva) carregarNovaVariacao(catAtiva);
   };
 
   const handleConcluir = () => {
@@ -346,7 +352,7 @@ function Treino() {
                 {clinicaCategorias.map((cat) => (
                   <button
                     key={cat.id}
-                    onClick={() => setCatAtiva(cat.id)}
+                    onClick={() => selecionarCategoria(cat.id)}
                     className={cn(
                       "p-6 rounded-[24px] border-b-8 border-black/10 flex flex-col items-center justify-between text-center gap-4 transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0",
                       cat.cor, cat.corTexto
