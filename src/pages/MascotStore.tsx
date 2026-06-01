@@ -93,7 +93,7 @@ const MascotStorePage: React.FC = () => {
           className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-black uppercase tracking-widest text-xs mb-4"
         >
           <ShoppingBag size={14} />
-          Loja Brilha
+          Mercado Brilha
         </motion.div>
         
         <motion.h1 
@@ -103,13 +103,32 @@ const MascotStorePage: React.FC = () => {
         >
           Loja de Mascotes
         </motion.h1>
+        
+        {/* Navigation Tabs for Categories within Mascot Store */}
+        <div className="flex justify-center gap-4 mb-8 overflow-x-auto pb-4 scrollbar-hide">
+          <TabButton 
+            active={true} 
+            onClick={() => {}} 
+            label="Mascotes Pip" 
+            icon={<Star size={18} />} 
+          />
+          <Link to="/loja-fantasia-pip">
+            <TabButton 
+              active={false} 
+              onClick={() => {}} 
+              label="Fantasias do Pip" 
+              icon={<Sparkles size={18} />} 
+            />
+          </Link>
+        </div>
+
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto"
         >
-          Descubra novos amigos incríveis para acompanhar sua jornada de aprendizado! Cada mascote traz uma energia especial.
+          Descubra novos amigos incríveis e estilos únicos para o seu Pip!
         </motion.p>
       </header>
 
