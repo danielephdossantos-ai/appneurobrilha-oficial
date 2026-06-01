@@ -293,9 +293,20 @@ export const ToyCatalog = () => (
   </motion.div>
 );
 
-export const ClosetCatalog = () => (
+export const ClosetCatalog = ({ onSelectSkin }: { onSelectSkin?: (skin: string | null) => void }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-    <CatalogSection title="Guarda-Roupa Mágico" type="costume" icon="👕" />
+    <CatalogSection 
+      title="Guarda-Roupa Mágico" 
+      type="costume" 
+      icon="👕" 
+      onItemClick={(item) => {
+        if (item.image_url && item.image_url.startsWith('SKIN:')) {
+          const skinKey = item.image_url.replace('SKIN:', '');
+          onSelectSkin?.(skinKey);
+          toast.success(`${item.name} equipada!`);
+        }
+      }} 
+    />
   </motion.div>
 );
 
