@@ -33,7 +33,7 @@ export const PIP_SKINS: Record<string, string> = {
   robos: pipRobos,
   veiculos: pipVeiculos,
 };
-import { Puzzle } from 'lucide-react';
+
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'waving' | 'blinking';
 
@@ -101,17 +101,6 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
         {/* Expressões faciais via filtros ou sobreposições se necessário */}
         {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
         
-        {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
-        {isPip && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-            <div className="relative w-1/5 h-1/5 translate-y-4">
-              <Puzzle 
-                className="w-full h-full text-sun fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
-                strokeWidth={3}
-              />
-            </div>
-          </div>
-        )}
 
         <img
           src={mascotImage}
