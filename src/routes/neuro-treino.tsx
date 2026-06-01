@@ -339,6 +339,45 @@ function Treino() {
         </div>
       </div>
 
+      {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
+      <div className="max-w-6xl mx-auto px-4 md:px-0">
+        <div className="bg-white rounded-3xl p-4 my-4 border-2 border-indigo-100 shadow-md flex items-center gap-4 relative">
+          {/* Mascote Animado */}
+          <div className="relative">
+            <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
+              🦊
+            </div>
+            {mascoteAnimando && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
+              </span>
+            )}
+          </div>
+
+          {/* Balão de Fala da Terapeuta IA */}
+          <div className="flex-1 bg-indigo-50/80 border border-indigo-100 rounded-2xl p-3 relative">
+            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-indigo-50 border-b-[8px] border-b-transparent"></div>
+            <p className="text-sm md:text-base font-bold text-indigo-950 leading-relaxed">{textoBalao}</p>
+            <div className="flex items-center gap-4 mt-1">
+              <button 
+                onClick={() => variacaoAtual ? terapeutaFalar(variacaoAtual.dicaAudio) : terapeutaFalar(textoBalao)}
+                className="text-[11px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
+              >
+                🗣️ Ouvir de Novo
+              </button>
+              <button 
+                onClick={() => setAudioMutado(!audioMutado)}
+                className="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
+              >
+                {audioMutado ? <VolumeX size={12} /> : <VolIcon size={12} />}
+                {audioMutado ? "Ativar Som" : "Silenciar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-3">
           <AnimatePresence mode="wait">
