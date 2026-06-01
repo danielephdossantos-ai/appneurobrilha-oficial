@@ -141,6 +141,12 @@ const MascotStorePage: React.FC = () => {
             label="Coleção Pip" 
             icon={<Sparkles size={16} />}
           />
+          <TabButton 
+            active={activeTab === 'autos'} 
+            onClick={() => setActiveTab('autos')} 
+            label="Autos" 
+            icon={<ChevronRight size={16} />}
+          />
         </div>
       </div>
 
