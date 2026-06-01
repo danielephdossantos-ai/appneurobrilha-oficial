@@ -256,11 +256,16 @@ function Treino() {
     setIsAnswered(true);
 
     if (correct) {
-      triggerFeedback("Excelente! Missão cumprida com sucesso!");
-      setPontos(prev => prev + 10);
+      setPontos(prev => prev + 20);
       setFaseIndex(prev => prev + 1);
+      triggerFeedback('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
+      
+      // Progride para uma nova variação inédita
+      if (catAtiva) {
+        setTimeout(() => carregarNovaVariacao(catAtiva), 2500);
+      }
     } else {
-      terapeutaFalar("Não desanime! Tente novamente, eu sei que você consegue!");
+      terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
       toast.error("Tente novamente!", { 
         description: "O Pip está aqui para te ajudar.",
         icon: <XCircle className="text-rose-500" />
