@@ -82,13 +82,8 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
   const getEmotionStyles = () => {
     switch (emotion) {
-      case 'happy': return 'animate-bounce-gentle';
-      case 'excited': return 'animate-celebrate';
-      case 'sleeping': return 'animate-yawn opacity-80';
-      case 'thinking': return 'animate-float-thinking';
+      case 'sleeping': return 'opacity-80';
       case 'proud': return 'scale-110';
-      case 'waving': return 'animate-wave';
-      case 'blinking': return 'animate-blink';
       default: return '';
     }
   };
