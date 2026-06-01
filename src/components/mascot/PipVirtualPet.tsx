@@ -65,7 +65,7 @@ export const PipVirtualPet: React.FC = () => {
 
           <div className="mt-8 bg-white/90 backdrop-blur px-12 py-4 rounded-full shadow-2xl border-4 border-primary">
             <span className="font-black text-primary text-3xl uppercase tracking-tighter">
-              {activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'}
+              {activeMascot.gender === 'menina' ? 'Pip' : 'Pip'}
             </span>
           </div>
         </div>
@@ -201,7 +201,7 @@ const PipEggHatch: React.FC = () => {
       if (error) throw error;
       
       toast.success("O Pip nasceu!", {
-        description: `Seja bem-vindo, novo companheiro ${gender === 'menina' ? 'Pipi' : 'Pip'}!`,
+        description: `Seja bem-vindo, novo companheiro Pip!`,
       });
       
       window.location.reload();
@@ -286,7 +286,7 @@ const PipEggHatch: React.FC = () => {
             <GenderOption 
               selected={gender === 'menina'} 
               onClick={() => setGender('menina')}
-              label="Menina (Pipi)"
+              label="Menina (Pip)"
               emoji="🎀"
             />
             <GenderOption 
