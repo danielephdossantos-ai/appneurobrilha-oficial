@@ -223,6 +223,28 @@ function Treino() {
     carregarNovaVariacao(id);
   };
 
+  const handleAcaoInterativa = () => {
+    if (!atividadeAtual) return;
+    setInteragindo(true);
+    let progresso = 0;
+    
+    // Simulador de captação de áudio/esforço (Sopro da Vela/Controle de Voz)
+    const interval = setInterval(() => {
+      progresso += 20;
+      setNivelAcao(progresso);
+      if (progresso >= 100) {
+        clearInterval(interval);
+        setInteragindo(false);
+        setAssoprou(true);
+        handleAnswer(atividadeAtual.content.target);
+        
+        if (atividadeAtual.type === 'microfone') {
+          triggerFeedback('Parabéns! Você controlou o ar perfeitamente e apagou a vela! 🎂✨');
+        }
+      }
+    }, 300);
+  };
+
   const handleAnswer = (escolha: string) => {
     if (isAnswered) return;
     
@@ -249,6 +271,12 @@ function Treino() {
         icon: <XCircle className="text-rose-500" />
       });
     }
+  };
+
+  const handleSelectAtv = (activityId: string) => {
+    setAtvAtiva(activityId);
+    setFaseIndex(1);
+    if (catAtiva) carregarNovaVariacao(catAtiva);
   };
 
   const handleConcluir = () => {
