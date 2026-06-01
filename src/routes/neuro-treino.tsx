@@ -59,58 +59,65 @@ export const Route = createFileRoute("/neuro-treino")({
   ),
 });
 
-const grupos = [
+const clinicaCategorias = [
   {
     id: 'atencao',
     nome: "Atenção Super Focada",
     cor: "bg-amber-400 border-amber-500",
     corTexto: "text-amber-950",
-    icone: <Target className="w-10 h-10" />
+    icone: <Target className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Atenção Super Focada"] || []
   },
   {
     id: 'memoria',
     nome: "Memória de Elefante",
     cor: "bg-purple-400 border-purple-500",
     corTexto: "text-purple-950",
-    icone: <Brain className="w-10 h-10" />
+    icone: <Brain className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Memória de Elefante"] || []
   },
   {
     id: 'sons_iniciais',
     nome: "Sons Iniciais",
     cor: "bg-sky-400 border-sky-500",
     corTexto: "text-sky-950",
-    icone: <Volume2 className="w-10 h-10" />
+    icone: <Volume2 className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Sons Iniciais"] || []
   },
   {
     id: 'motorzinho',
     nome: "Motorzinho dos Sons",
     cor: "bg-emerald-400 border-emerald-500",
     corTexto: "text-emerald-950",
-    icone: <Activity className="w-10 h-10" />
+    icone: <Activity className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"] || []
   },
   {
     id: 'rimas',
     nome: "Rimas Divertidas",
     cor: "bg-pink-400 border-pink-500",
     corTexto: "text-pink-950",
-    icone: <SparklesIcon className="w-10 h-10" />
+    icone: <SparklesIcon className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Rimas Divertidas"] || []
   },
   {
     id: 'regulacao',
     nome: "Regulação Emocional",
     cor: "bg-rose-400 border-rose-500",
     corTexto: "text-rose-950",
-    icone: <Smile className="w-10 h-10" />
+    icone: <Smile className="w-10 h-10" />,
+    atividades: NEURO_ACTIVITIES["Regulação Emocional"] || []
   },
 ];
 
 function Treino() {
   const { activeChild, addCoins } = useAppState();
   const coins = activeChild?.coins || 0;
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
+  const [catAtiva, setCatAtiva] = useState<string | null>(null);
+  const [atvAtiva, setAtvAtiva] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [feedback, setFeedback] = useState<string | null>(null);
   const { gainExperience, gainAffinity } = useMascot();
 
   // Estados para mecânicas específicas
