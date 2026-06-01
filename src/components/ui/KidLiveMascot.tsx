@@ -53,6 +53,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const { activeMascot } = useMascot();
 
   const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
+  const currentLevel = activeMascot?.level || 1;
 
   const getMascotImage = () => {
     if (!isPip) {
@@ -75,30 +76,54 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
   const mascotImage = overrideImage || getMascotImage();
 
-  const sizes = {
-    sm: 'w-24 h-24',
-    md: 'w-48 h-48', // Aumentado de 40 para 48
-    lg: 'w-64 h-64', // Aumentado de 56 para 64
-    xl: 'w-80 h-80', // Aumentado de 72 para 80
-    '2xl': 'w-[450px] h-[450px]', // Aumentado significativamente
+  // Evolution Scale and Style Logic based on level
+  const getEvolutionStyle = () => {
+    if (!isPip) return { scale: 1, filter: 'none' };
+
+    if (currentLevel >= 100) return { scale: 1.3, filter: 'drop-shadow(0 0 20px rgba(255,215,0,0.6)) saturate(1.5)' }; // Lendário
+    if (currentLevel >= 50) return { scale: 1.25, filter: 'drop-shadow(0 0 15px rgba(255,215,0,0.4))' }; // Guardião
+    if (currentLevel >= 35) return { scale: 1.2, filter: 'none' }; // Mestre
+    if (currentLevel >= 20) return { scale: 1.15, filter: 'none' }; // Aprendiz
+    if (currentLevel >= 10) return { scale: 1.1, filter: 'none' }; // Explorador
+    if (currentLevel >= 5) return { scale: 0.9, filter: 'none' }; // Pip Bebê
+    return { scale: 0.85, filter: 'none' }; // Baby/Egg phase
   };
 
+  const evolutionStyle = getEvolutionStyle();
+
+  const sizes = {
+    sm: 'w-24 h-24',
+    md: 'w-48 h-48',
+    lg: 'w-64 h-64',
+    xl: 'w-80 h-80',
+    '2xl': 'w-[450px] h-[450px]',
+  };
 
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
-        <div
+        <motion.div
+          animate={{
+            scale: evolutionStyle.scale,
+            filter: evolutionStyle.filter
+          }}
+          transition={{ duration: 0.5, ease: "backOut" }}
           className={cn(
             "relative flex items-center justify-center overflow-visible",
             sizes[size]
           )}
         >
+          {/* Evolution Aura for High Levels */}
+          {currentLevel >= 50 && isPip && (
+            <div className="absolute inset-0 bg-sun/20 blur-[60px] rounded-full animate-pulse" />
+          )}
+          
           <img
             src={mascotImage}
             alt="Pip - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none relative z-10"
             draggable={false}
           />
-        </div>
+        </motion.div>
       
       {message && (
         <div
