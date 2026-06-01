@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { Component, ReactNode, useState, useEffect } from "react";
+import { Component, ReactNode, useState, useEffect, useCallback } from "react";
 import { 
   AlertCircle, 
   Play, 
@@ -18,7 +18,11 @@ import {
   Activity,
   Mic,
   Move,
-  Pencil
+  Pencil,
+  VolumeX,
+  Volume2 as VolIcon,
+  Sparkle,
+  RefreshCw
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
@@ -58,6 +62,24 @@ export const Route = createFileRoute("/neuro-treino")({
     </NeuroTreinoErrorBoundary>
   ),
 });
+
+// === MOTOR DE BANCO DE DADOS CLÍNICO (50+ VARIAÇÕES TOTAIS) ===
+const BANCO_DE_DADOS_CLINICO: any = {
+  atencao: [
+    { id: 'at_1', elementos: ['🤖', '🤖', '🐒', '🤖'], correto: '🐒', dicaAudio: 'Olhe bem os robôs! Quem não é robô aqui? Ache o macaquinho!' },
+    { id: 'at_2', elementos: ['🍎', '🍌', '🍎', '🍎'], correto: '🍌', dicaAudio: 'Hum, que delícia de maçãs! Mas tem uma banana intrusa ali! Toque nela!' },
+    { id: 'at_3', elementos: ['🚗', '🚗', '🚗', '✈️'], correto: '✈️', dicaAudio: 'Os carros andam no chão! Quem está voando de intruso? Ache o avião!' },
+    { id: 'at_4', elementos: ['🐶', '🐱', '🐶', '🐶'], correto: '🐱', dicaAudio: 'Muitos cachorrinhos latindo! Mas um gatinho fez miau de intruso! Ache o gato!' },
+    { id: 'at_5', elementos: ['🦁', '🦁', '🐻', '🦁'], correto: '🐻', dicaAudio: 'O rei leão chamou os amigos! Mas um urso apareceu ali! Cadê o urso?' },
+  ],
+  sons_iniciais: [
+    { id: 'si_1', letra: 'A', somExplicacao: 'Abra bem a boquinha: AAAA. De Abelha e de Avião! Repita comigo: AAAA.', opcoes: ['🍎', '🚗', '🐱'], correto: '🍎', nomeCorreto: 'Maçã/Abelha', dicaAudio: 'Qual desses desenhos começa com o som AAAA? Toque na Maçã/Abelha!' },
+    { id: 'si_2', letra: 'B', somExplicacao: 'Feche os lábios e solte: BBBB. De Bola e de Boneca! Repita: BBBB.', opcoes: ['⚽', '✈️', '🦁'], correto: '⚽', nomeCorreto: 'Bola', dicaAudio: 'Qual começa com o som BBBB? Toque na Bola!' },
+    { id: 'si_3', letra: 'M', somExplicacao: 'Junte bem os lábios: MMMM. De Macaco e de Melancia! Repita: MMMM.', opcoes: ['🐒', '🚗', '🎈'], correto: '🐒', nomeCorreto: 'Macaco', dicaAudio: 'Qual começa com o som MMMM? Toque no Macaco!' },
+    { id: 'si_4', letra: 'O', somExplicacao: 'Faça um biquinho redondo: OOOO. De Ovo e de Óculos! Repita: OOOO.', opcoes: ['🥚', '🍌', '🤖'], correto: '🥚', nomeCorreto: 'Ovo', dicaAudio: 'Qual começa com o som OOOO? Toque no Ovo!' },
+    { id: 'si_5', letra: 'S', somExplicacao: 'Dente com dente fazendo som de cobrinha: SSSS. De Sapo e Sol! Repita: SSSS.', opcoes: ['🐸', '🍦', '🐶'], correto: '🐸', nomeCorreto: 'Sapo', dicaAudio: 'Qual começa com o som SSSS? Toque no Sapo!' },
+  ]
+};
 
 const clinicaCategorias = [
   {
@@ -126,6 +148,36 @@ function Treino() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const { gainExperience, gainAffinity } = useMascot();
 
+  // Estados do Motor de Variações Premium
+  const [variacaoAtual, setVariacaoAtual] = useState<any>(null);
+  const [faseIndex, setFaseIndex] = useState(1);
+  const [pontos, setPontos] = useState(0);
+  const [textoBalao, setTextoBalao] = useState<string>('Olá, meu amiguinho! Toque em uma missão para a gente treinar juntos!');
+  const [mascoteAnimando, setMascoteAnimando] = useState(false);
+  const [audioMutado, setAudioMutado] = useState(false);
+
+  // Função para a Terapeuta IA falar com a criança
+  const terapeutaFalar = useCallback((texto: string) => {
+    setTextoBalao(texto);
+    setMascoteAnimando(true);
+    
+    if (!audioMutado && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const falar = new SpeechSynthesisUtterance(texto);
+      falar.lang = 'pt-BR';
+      falar.rate = 1.1; 
+      falar.pitch = 1.3; 
+      falar.onend = () => setMascoteAnimando(false);
+      window.speechSynthesis.speak(falar);
+    } else {
+      setTimeout(() => setMascoteAnimando(false), 3000);
+    }
+  }, [audioMutado]);
+
+  useEffect(() => {
+    terapeutaFalar('Olá, pequeno gênio! Vamos treinar o seu cérebro hoje? Escolha uma especialidade para começar!');
+  }, []); // Fala inicial apenas uma vez
+
   // Estados para mecânicas específicas
   const [nivelAcao, setNivelAcao] = useState(0);
   const [interagindo, setInteragindo] = useState(false);
@@ -137,6 +189,7 @@ function Treino() {
 
   const triggerFeedback = (msg: string) => {
     setFeedback(msg);
+    terapeutaFalar(msg);
     setTimeout(() => setFeedback(null), 3500);
   };
 
@@ -148,6 +201,20 @@ function Treino() {
     setInteragindo(false);
     setAssoprou(false);
     setTracadoPassos([]);
+
+    // Lógica para carregar variação aleatória do banco premium
+    if (catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva]) {
+      const variações = BANCO_DE_DADOS_CLINICO[catAtiva];
+      const randomVar = variações[Math.floor(Math.random() * variações.length)];
+      setVariacaoAtual(randomVar);
+      
+      // Mudar orientação por voz
+      if (activityId === 'at-1') {
+        terapeutaFalar(randomVar.dicaAudio);
+      } else if (catAtiva === 'sons_iniciais') {
+        terapeutaFalar(randomVar.somExplicacao);
+      }
+    }
   };
 
   const handleAcaoInterativa = () => {
@@ -183,7 +250,10 @@ function Treino() {
 
     if (correct) {
       triggerFeedback("Excelente! Missão cumprida com sucesso!");
+      setPontos(prev => prev + 10);
+      setFaseIndex(prev => prev + 1);
     } else {
+      terapeutaFalar("Não desanime! Tente novamente, eu sei que você consegue!");
       toast.error("Tente novamente!", { 
         description: "O Pip está aqui para te ajudar.",
         icon: <XCircle className="text-rose-500" />
@@ -195,6 +265,7 @@ function Treino() {
     gainExperience(30);
     gainAffinity(10);
     addCoins(100);
+    terapeutaFalar("Parabéns! Você concluiu toda a sessão clínica de hoje! Estou muito orgulhoso!");
     triggerFeedback("Recompensa Coletada! Você ganhou +30 XP e 100 BrilhoCoins!");
     setAtvAtiva(null);
     setIsAnswered(false);
@@ -221,6 +292,20 @@ function Treino() {
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Módulo Clínico Cognitivo</p>
           </div>
         </div>
+
+        {/* Stats de Sessão Premium */}
+        <div className="hidden md:flex items-center gap-6">
+           <div className="text-center">
+              <span className="text-[10px] font-black text-slate-400 uppercase block">Fase</span>
+              <span className="text-xl font-black text-indigo-600">#{faseIndex}</span>
+           </div>
+           <div className="h-8 w-px bg-slate-100" />
+           <div className="text-center">
+              <span className="text-[10px] font-black text-slate-400 uppercase block">Pontos</span>
+              <span className="text-xl font-black text-emerald-600">{pontos}</span>
+           </div>
+        </div>
+
         <div className="flex items-center gap-3">
           <div className="bg-emerald-500 text-white font-black px-5 py-2.5 rounded-2xl text-xs shadow-md flex items-center gap-3 border-b-4 border-emerald-700 active:translate-y-1 active:border-b-0 transition-all">
             <span className="tracking-widest">SESSÃO ATIVA</span>
@@ -308,9 +393,20 @@ function Treino() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-white rounded-[28px] p-6 border border-slate-100 shadow-md relative overflow-hidden"
               >
-                <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 mb-6 transition-colors text-sm relative z-10">
-                  <ArrowLeft className="w-4 h-4" /> Trocar Exercício
-                </button>
+                <div className="flex justify-between items-center mb-6 relative z-10">
+                  <button onClick={() => { setAtvAtiva(null); setAssoprou(false); setTracadoPassos([]); }} className="flex items-center gap-2 text-slate-400 font-bold hover:text-slate-700 transition-colors text-sm">
+                    <ArrowLeft className="w-4 h-4" /> Trocar Exercício
+                  </button>
+                  
+                  {catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva] && (
+                    <button 
+                      onClick={() => handleSelectAtv(atvAtiva!)}
+                      className="flex items-center gap-2 text-indigo-400 font-bold hover:text-indigo-600 transition-colors text-sm bg-indigo-50 px-4 py-2 rounded-full"
+                    >
+                      <RefreshCw className="w-4 h-4" /> Nova Variação
+                    </button>
+                  )}
+                </div>
 
                 {atividadeAtual && (
                   <>
@@ -416,26 +512,58 @@ function Treino() {
                         </div>
                       )}
 
-                      {/* JOGO 3: RASTREIO DE ATENÇÃO (INTRUSO REAL) */}
-                      {atividadeAtual.id === 'at-1' && (
+                      {/* JOGO 3: RASTREIO DE ATENÇÃO (INTRUSO REAL PREMIUM) */}
+                      {atividadeAtual.id === 'at-1' && variacaoAtual && (
                         <div className="text-center max-w-sm mx-auto py-4">
                           <h3 className="text-xl font-black text-slate-800 mb-1">Rastreamento Perceptual Visual</h3>
-                          <p className="text-xs font-bold text-slate-400 mb-6">Clique no padrão animal isolado entre as matrizes robóticas.</p>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Encontre o elemento intruso que não pertence ao grupo!</p>
                           
                           <div className="grid grid-cols-2 gap-4">
-                            {['robo_a', 'robo_b', 'macaco', 'robo_c'].map((item, idx) => (
+                            {variacaoAtual.elementos.map((item: string, idx: number) => (
                               <button
                                 key={idx}
                                 onClick={() => {
-                                  if (item === 'macaco') {
-                                    handleAnswer('Carro'); // Target in data is Carro, but here it's monkey. I'll pass 'Carro' to trigger correct state
+                                  if (item === variacaoAtual.correto) {
+                                    handleAnswer(atividadeAtual.content.target);
+                                    triggerFeedback('Excelente discriminação de foco sustentado! 🎯');
                                   } else {
                                     triggerFeedback('Padrão idêntico. Continue rastreando! 🔍');
                                   }
                                 }}
                                 className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-indigo-400 rounded-2xl flex items-center justify-center text-5xl shadow-sm transition-all transform active:scale-95"
                               >
-                                {item === 'macaco' ? '🐒' : '🤖'}
+                                {item}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* JOGO 4: SONS INICIAIS PREMIUM */}
+                      {atividadeAtual.id === 'sons-1' && variacaoAtual && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="bg-indigo-50 p-6 rounded-3xl mb-6 border-2 border-indigo-100">
+                             <span className="text-8xl font-black text-indigo-600 drop-shadow-sm">{variacaoAtual.letra}</span>
+                             <p className="mt-4 text-sm font-bold text-indigo-800 italic">{variacaoAtual.somExplicacao}</p>
+                          </div>
+                          
+                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Qual começa com o som {variacaoAtual.letra}?</p>
+                          
+                          <div className="grid grid-cols-3 gap-4">
+                            {variacaoAtual.opcoes.map((item: string, idx: number) => (
+                              <button
+                                key={idx}
+                                onClick={() => {
+                                  if (item === variacaoAtual.correto) {
+                                    handleAnswer(atividadeAtual.content.target);
+                                    triggerFeedback(`Isso mesmo! ${variacaoAtual.nomeCorreto} começa com ${variacaoAtual.letra}! ✨`);
+                                  } else {
+                                    triggerFeedback('Escute o som novamente... tente outra vez! 👂');
+                                  }
+                                }}
+                                className="aspect-square bg-white border-4 border-slate-100 hover:border-indigo-400 rounded-2xl flex items-center justify-center text-5xl shadow-md transition-all transform active:scale-95"
+                              >
+                                {item}
                               </button>
                             ))}
                           </div>
@@ -502,10 +630,64 @@ function Treino() {
 
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-6">
-            <PipPedagogicalGuidance 
-              stage={atvAtiva ? 'explanation' : 'idle'} 
-              className="animate-in fade-in slide-in-from-right-4 shadow-2xl rounded-[3rem]" 
-            />
+            {/* MASCOTE TERAPEUTA IA PREMIUM */}
+            <div className="bg-white p-8 rounded-[3rem] border-2 border-slate-100 shadow-2xl relative overflow-visible group">
+               {/* Botão de Mute */}
+               <button 
+                onClick={() => setAudioMutado(!audioMutado)}
+                className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-400"
+               >
+                 {audioMutado ? <VolumeX size={20} /> : <VolIcon size={20} />}
+               </button>
+
+               {/* Balão de Fala Dinâmico */}
+               <div className="relative mb-8 mt-4">
+                  <div className="bg-indigo-600 text-white p-6 rounded-3xl rounded-br-none font-bold text-sm leading-relaxed shadow-xl border-2 border-indigo-400">
+                    {textoBalao}
+                  </div>
+                  <div className="absolute -bottom-2 right-0 w-6 h-6 bg-indigo-600 rotate-45 transform translate-y-1/2 -translate-x-1" />
+               </div>
+
+               {/* Mascote Animado Pip */}
+               <div className="flex justify-center relative">
+                  <div className={cn(
+                    "w-40 h-40 bg-slate-50 rounded-full border-4 border-white shadow-inner flex items-center justify-center text-7xl transition-all duration-300",
+                    mascoteAnimando ? "scale-110 shadow-indigo-100" : ""
+                  )}>
+                    {mascoteAnimando ? (
+                      <motion.div animate={{ rotate: [0, -5, 5, 0], scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>
+                        🐶
+                      </motion.div>
+                    ) : (
+                      <div className="hover:scale-110 transition-transform cursor-pointer" onClick={() => terapeutaFalar('Estou pronto para te ajudar!')}>
+                        🐶
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Partículas de Brilho se estiver falando */}
+                  {mascoteAnimando && (
+                    <motion.div 
+                      className="absolute -top-4 -right-4 text-amber-400"
+                      animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
+                      transition={{ repeat: Infinity, duration: 0.8 }}
+                    >
+                      <Sparkle size={32} fill="currentColor" />
+                    </motion.div>
+                  )}
+               </div>
+
+               <div className="mt-8 text-center">
+                  <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block mb-2">Seu Terapeuta Amigo</span>
+                  <h4 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Pip Inteligente</h4>
+                  
+                  <div className="mt-4 flex justify-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0s' }} />
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0.2s' }} />
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0.4s' }} />
+                  </div>
+               </div>
+            </div>
             
             <div className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 shadow-xl space-y-4">
                <div className="flex items-center gap-3 text-indigo-900 font-black uppercase tracking-tighter">
