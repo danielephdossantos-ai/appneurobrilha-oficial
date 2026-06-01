@@ -38,7 +38,7 @@ function SidebarMascot() {
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
-  { to: "/loja-mascotes", label: "Mascotes", icon: ShoppingBag },
+  { to: "/mascotes", label: "Mundo do Pip", icon: Heart },
   
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
