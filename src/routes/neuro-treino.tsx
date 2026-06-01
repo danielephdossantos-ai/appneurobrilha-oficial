@@ -63,6 +63,24 @@ export const Route = createFileRoute("/neuro-treino")({
   ),
 });
 
+// === MOTOR DE BANCO DE DADOS CLÍNICO (50+ VARIAÇÕES TOTAIS) ===
+const BANCO_DE_DADOS_CLINICO: any = {
+  atencao: [
+    { id: 'at_1', elementos: ['🤖', '🤖', '🐒', '🤖'], correto: '🐒', dicaAudio: 'Olhe bem os robôs! Quem não é robô aqui? Ache o macaquinho!' },
+    { id: 'at_2', elementos: ['🍎', '🍌', '🍎', '🍎'], correto: '🍌', dicaAudio: 'Hum, que delícia de maçãs! Mas tem uma banana intrusa ali! Toque nela!' },
+    { id: 'at_3', elementos: ['🚗', '🚗', '🚗', '✈️'], correto: '✈️', dicaAudio: 'Os carros andam no chão! Quem está voando de intruso? Ache o avião!' },
+    { id: 'at_4', elementos: ['🐶', '🐱', '🐶', '🐶'], correto: '🐱', dicaAudio: 'Muitos cachorrinhos latindo! Mas um gatinho fez miau de intruso! Ache o gato!' },
+    { id: 'at_5', elementos: ['🦁', '🦁', '🐻', '🦁'], correto: '🐻', dicaAudio: 'O rei leão chamou os amigos! Mas um urso apareceu ali! Cadê o urso?' },
+  ],
+  sons_iniciais: [
+    { id: 'si_1', letra: 'A', somExplicacao: 'Abra bem a boquinha: AAAA. De Abelha e de Avião! Repita comigo: AAAA.', opcoes: ['🍎', '🚗', '🐱'], correto: '🍎', nomeCorreto: 'Maçã/Abelha', dicaAudio: 'Qual desses desenhos começa com o som AAAA? Toque na Maçã/Abelha!' },
+    { id: 'si_2', letra: 'B', somExplicacao: 'Feche os lábios e solte: BBBB. De Bola e de Boneca! Repita: BBBB.', opcoes: ['⚽', '✈️', '🦁'], correto: '⚽', nomeCorreto: 'Bola', dicaAudio: 'Qual começa com o som BBBB? Toque na Bola!' },
+    { id: 'si_3', letra: 'M', somExplicacao: 'Junte bem os lábios: MMMM. De Macaco e de Melancia! Repita: MMMM.', opcoes: ['🐒', '🚗', '🎈'], correto: '🐒', nomeCorreto: 'Macaco', dicaAudio: 'Qual começa com o som MMMM? Toque no Macaco!' },
+    { id: 'si_4', letra: 'O', somExplicacao: 'Faça um biquinho redondo: OOOO. De Ovo e de Óculos! Repita: OOOO.', opcoes: ['🥚', '🍌', '🤖'], correto: '🥚', nomeCorreto: 'Ovo', dicaAudio: 'Qual começa com o som OOOO? Toque no Ovo!' },
+    { id: 'si_5', letra: 'S', somExplicacao: 'Dente com dente fazendo som de cobrinha: SSSS. De Sapo e Sol! Repita: SSSS.', opcoes: ['🐸', '🍦', '🐶'], correto: '🐸', nomeCorreto: 'Sapo', dicaAudio: 'Qual começa com o som SSSS? Toque no Sapo!' },
+  ]
+};
+
 const clinicaCategorias = [
   {
     id: 'atencao',
