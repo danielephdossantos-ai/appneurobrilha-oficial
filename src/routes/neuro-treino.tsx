@@ -85,12 +85,32 @@ function Treino() {
   const handleSelectAtividade = (nome: string, categoria: string) => {
     const activities = NEURO_ACTIVITIES[categoria];
     if (activities) {
-      // Pega uma atividade aleatória da categoria ou baseada no nome
-      const activity = activities.find(a => a.title === nome) || activities[0];
-      setSelectedAtividade(activity);
-      setIsAnswered(false);
-      setIsCorrect(null);
+      const activity = activities.find(a => a.title === nome);
+      if (activity) {
+        setSelectedAtividade(activity);
+        setIsAnswered(false);
+        setIsCorrect(null);
+        return;
+      }
     }
+    
+    // Fallback para atividades simples não mapeadas no data
+    setSelectedAtividade({
+      id: "simple-" + nome,
+      title: nome,
+      category: categoria,
+      description: "Prática terapêutica de " + nome,
+      difficulty: 1,
+      type: "interaction",
+      content: {
+        prompt: "Vamos praticar " + nome + "?",
+        target: "Sim",
+        options: ["Sim", "Depois"],
+        images: ["✅", "⏰"]
+      }
+    });
+    setIsAnswered(false);
+    setIsCorrect(null);
   };
 
   const handleAnswer = (option: string) => {
