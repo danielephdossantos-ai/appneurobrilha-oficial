@@ -125,20 +125,20 @@ const MascotStorePage: React.FC = () => {
           <TabButton 
             active={activeTab === 'all'} 
             onClick={() => setActiveTab('all')} 
-            label="Todos" 
+            label="Loja" 
+            icon={<ShoppingBag size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'owned'} 
+            onClick={() => setActiveTab('owned')} 
+            label="Meus Mascotes" 
+            icon={<User size={16} />}
+          />
+          <TabButton 
+            active={activeTab === 'pip-collection'} 
+            onClick={() => setActiveTab('pip-collection')} 
+            label="Coleção Pip" 
             icon={<Sparkles size={16} />}
-          />
-          <TabButton 
-            active={activeTab === 'locked'} 
-            onClick={() => setActiveTab('locked')} 
-            label="Bloqueados" 
-            icon={<Lock size={16} />}
-          />
-          <TabButton 
-            active={activeTab === 'favorites'} 
-            onClick={() => setActiveTab('favorites')} 
-            label="Favoritos" 
-            icon={<Heart size={16} />}
           />
         </div>
       </div>
@@ -150,21 +150,77 @@ const MascotStorePage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredMascots.map((mascot, index) => (
-              <MascotStoreCard 
-                key={mascot.id} 
-                mascot={mascot} 
-                isOwned={ownedMascotIds.includes(mascot.id)}
-                index={index}
-              />
-            ))}
-          </AnimatePresence>
+        <div className="space-y-12">
+          {activeTab === 'pip-collection' ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {pipSkinsList.map((skin, i) => {
+                const isUnlocked = unlockedPipSkins.has(skin.key);
+                return (
+                  <motion.div
+                    key={skin.key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.04 }}
+                  >
+                    <KidCard className="h-full flex flex-col overflow-hidden group border-2 border-border hover:border-primary/30">
+                      <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 opacity-10 pointer-events-none">
+                          <div className="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+                          <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+                        </div>
+                        <img
+                          src={skin.image}
+                          alt={skin.name}
+                          className={cn(
+                            'relative z-10 w-44 h-44 object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-110',
+                            !isUnlocked && 'grayscale opacity-60'
+                          )}
+                          draggable={false}
+                        />
+                        <div
+                          className={cn(
+                            'absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest shadow-lg flex items-center gap-1',
+                            isUnlocked ? 'bg-success' : 'bg-slate-500'
+                          )}
+                        >
+                          {isUnlocked ? <><Check size={12} /> Liberado</> : <><Lock size={12} /> Bloqueado</>}
+                        </div>
+                      </div>
+
+                      <div className="p-5 flex-1 flex flex-col">
+                        <p className="text-[10px] font-bold text-muted-foreground/70 uppercase tracking-widest">
+                          {skin.title}
+                        </p>
+                        <h3 className="text-xl font-black text-primary leading-tight">
+                          {skin.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-2 italic flex-1">
+                          "{skin.description}"
+                        </p>
+                      </div>
+                    </KidCard>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredMascots.map((mascot, index) => (
+                  <MascotStoreCard 
+                    key={mascot.id} 
+                    mascot={mascot} 
+                    isOwned={ownedMascotIds.includes(mascot.id)}
+                    index={index}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       )}
 
-      {filteredMascots.length === 0 && !isLoading && (
+      {(activeTab !== 'pip-collection' && filteredMascots.length === 0 && !isLoading) && (
         <div className="text-center py-20">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-2xl font-black text-primary">Nenhum mascote encontrado</h3>
