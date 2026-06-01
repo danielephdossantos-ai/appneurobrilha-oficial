@@ -148,6 +148,35 @@ function Treino() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const { gainExperience, gainAffinity } = useMascot();
 
+  // Estados do Motor de Variações Premium
+  const [variacaoAtual, setVariacaoAtual] = useState<any>(null);
+  const [faseIndex, setFaseIndex] = useState(1);
+  const [textoBalao, setTextoBalao] = useState<string>('Olá, meu amiguinho! Toque em uma missão para a gente treinar juntos!');
+  const [mascoteAnimando, setMascoteAnimando] = useState(false);
+  const [audioMutado, setAudioMutado] = useState(false);
+
+  // Função para a Terapeuta IA falar com a criança
+  const terapeutaFalar = useCallback((texto: string) => {
+    setTextoBalao(texto);
+    setMascoteAnimando(true);
+    
+    if (!audioMutado && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const falar = new SpeechSynthesisUtterance(texto);
+      falar.lang = 'pt-BR';
+      falar.rate = 1.1; 
+      falar.pitch = 1.3; 
+      falar.onend = () => setMascoteAnimando(false);
+      window.speechSynthesis.speak(falar);
+    } else {
+      setTimeout(() => setMascoteAnimando(false), 3000);
+    }
+  }, [audioMutado]);
+
+  useEffect(() => {
+    terapeutaFalar('Olá, pequeno gênio! Vamos treinar o seu cérebro hoje? Escolha uma especialidade para começar!');
+  }, []); // Fala inicial apenas uma vez
+
   // Estados para mecânicas específicas
   const [nivelAcao, setNivelAcao] = useState(0);
   const [interagindo, setInteragindo] = useState(false);
@@ -159,6 +188,7 @@ function Treino() {
 
   const triggerFeedback = (msg: string) => {
     setFeedback(msg);
+    terapeutaFalar(msg);
     setTimeout(() => setFeedback(null), 3500);
   };
 
