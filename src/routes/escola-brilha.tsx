@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState, useEffect, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette } from "lucide-react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, Sparkles as SparklesIcon } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
+import { useMascot } from "@/contexts/MascotContext";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 
