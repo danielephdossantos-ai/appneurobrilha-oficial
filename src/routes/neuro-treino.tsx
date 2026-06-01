@@ -259,7 +259,8 @@ function Treino() {
                       {cat.icone}
                     </div>
                     <div>
-                      <span className="text-xl font-black block tracking-wide mb-1">{cat.nome}</span>
+                      <span className="text-xl font-black block tracking-wide">{cat.nome}</span>
+                      <p className="text-[10px] font-bold opacity-70 uppercase tracking-tighter mb-1">{cat.descricao}</p>
                       <span className="text-[11px] bg-black/10 px-2.5 py-0.5 rounded-full font-bold uppercase">{cat.atividades.length} Protocolos</span>
                     </div>
                   </button>
