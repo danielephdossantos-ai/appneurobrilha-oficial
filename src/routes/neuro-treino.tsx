@@ -219,9 +219,9 @@ function Treino() {
 
   const selecionarCategoria = (id: string) => {
     setCatAtiva(id);
-    setAtvAtiva(id); // Entra direto no jogo selecionado
+    setAtvAtiva(null); // Reseta atividade para mostrar a lista e permitir ver os jogos específicos
     setFaseIndex(1);
-    carregarNovaVariacao(id);
+    terapeutaFalar(`Ótima escolha! Vamos trabalhar ${clinicaCategorias.find(c => c.id === id)?.nome}. Escolha um dos exercícios abaixo!`);
   };
 
   const handleAcaoInterativa = () => {
