@@ -19,7 +19,6 @@ import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
-import { Route as LojaFantasiaPipRouteImport } from './routes/loja-fantasia-pip'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
@@ -83,11 +82,6 @@ const MascotesRoute = MascotesRouteImport.update({
 const LojaMascotesRoute = LojaMascotesRouteImport.update({
   id: '/loja-mascotes',
   path: '/loja-mascotes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LojaFantasiaPipRoute = LojaFantasiaPipRouteImport.update({
-  id: '/loja-fantasia-pip',
-  path: '/loja-fantasia-pip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Jornada365Route = Jornada365RouteImport.update({
@@ -175,7 +169,6 @@ export interface FileRoutesByFullPath {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -202,7 +195,6 @@ export interface FileRoutesByTo {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -230,7 +222,6 @@ export interface FileRoutesById {
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -259,7 +250,6 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -286,7 +276,6 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -313,7 +302,6 @@ export interface FileRouteTypes {
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -341,7 +329,6 @@ export interface RootRouteChildren {
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
-  LojaFantasiaPipRoute: typeof LojaFantasiaPipRoute
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
@@ -426,13 +413,6 @@ declare module '@tanstack/react-router' {
       path: '/loja-mascotes'
       fullPath: '/loja-mascotes'
       preLoaderRoute: typeof LojaMascotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/loja-fantasia-pip': {
-      id: '/loja-fantasia-pip'
-      path: '/loja-fantasia-pip'
-      fullPath: '/loja-fantasia-pip'
-      preLoaderRoute: typeof LojaFantasiaPipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jornada-365': {
@@ -549,7 +529,6 @@ const rootRouteChildren: RootRouteChildren = {
   GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
-  LojaFantasiaPipRoute: LojaFantasiaPipRoute,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MissaoProvaRoute: MissaoProvaRoute,

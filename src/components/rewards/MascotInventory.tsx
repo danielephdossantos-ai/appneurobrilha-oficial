@@ -88,13 +88,6 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
               Escolher {mascot.name}
             </KidButton>
           )}
-          {mascot.name === 'Pip' && (
-            <Link to="/loja-fantasia-pip" className="block w-full">
-              <KidButton variant={isActive ? "primary" : "secondary"} className="w-full py-4 text-xs">
-                Loja de Fantasias 👗
-              </KidButton>
-            </Link>
-          )}
         </div>
       </div>
     </KidCard>
