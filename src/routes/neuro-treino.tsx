@@ -126,17 +126,27 @@ function Treino() {
   };
 
   const handleAcaoInterativa = () => {
+    if (!selectedAtividade) return;
     setInteragindo(true);
     let progresso = 0;
+    
+    // Simulador de captação de áudio/esforço (Sopro da Vela/Controle de Voz)
     const interval = setInterval(() => {
-      progresso += 10;
+      progresso += 20; // Incremento simulando o esforço contínuo
       setNivelAcao(progresso);
       if (progresso >= 100) {
         clearInterval(interval);
         setInteragindo(false);
-        handleAnswer(selectedAtividade?.content.target || "");
+        handleAnswer(selectedAtividade.content.target);
+        
+        if (selectedAtividade.type === 'microfone') {
+          toast.success('Parabéns!', {
+            description: 'Você controlou o ar perfeitamente e completou o desafio! 🎂✨',
+            icon: <CheckCircle2 className="text-emerald-500" />
+          });
+        }
       }
-    }, 150);
+    }, 300);
   };
 
   const handleAnswer = (option: string) => {
