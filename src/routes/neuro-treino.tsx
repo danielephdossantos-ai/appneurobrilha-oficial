@@ -77,6 +77,18 @@ const BANCO_DE_DADOS_CLINICO: any = {
     { id: 'si_3', letra: 'M', somExplicacao: 'Junte bem os lábios: MMMM. De Macaco e de Melancia! Repita: MMMM.', opcoes: ['🐒', '🚗', '🎈'], correto: '🐒', nomeCorreto: 'Macaco', dicaAudio: 'Qual começa com o som MMMM? Toque no Macaco!' },
     { id: 'si_4', letra: 'O', somExplicacao: 'Faça um biquinho redondo: OOOO. De Ovo e de Óculos! Repita: OOOO.', opcoes: ['🥚', '🍌', '🤖'], correto: '🥚', nomeCorreto: 'Ovo', dicaAudio: 'Qual começa com o som OOOO? Toque no Ovo!' },
     { id: 'si_5', letra: 'S', somExplicacao: 'Dente com dente fazendo som de cobrinha: SSSS. De Sapo e Sol! Repita: SSSS.', opcoes: ['🐸', '🍦', '🐶'], correto: '🐸', nomeCorreto: 'Sapo', dicaAudio: 'Qual começa com o som SSSS? Toque no Sapo!' },
+  ],
+  memoria: [
+    { id: 'me_1', elementos: ['🍎', '🍌', '🍇'], ordem: ['🍎', '🍌', '🍇'], dicaAudio: 'Guarde bem esta ordem: Maçã, Banana e Uva! O que vem primeiro?', correto: '🍎' },
+  ],
+  motorzinho: [
+    { id: 'mo_1', dicaAudio: 'Respire fundo e solte o ar devagarinho para apagar a vela! Vamos lá!' },
+  ],
+  rimas: [
+    { id: 'ri_1', palavra: 'GATO', opcoes: ['RATO', 'BOLO', 'CASA'], correto: 'RATO', dicaAudio: 'O que rima com GATO? RATO ou BOLO?' },
+  ],
+  regulacao: [
+    { id: 're_1', dicaAudio: 'Respire fundo com o Pip... inspire e expire... sinta a calma chegar.' },
   ]
 };
 
