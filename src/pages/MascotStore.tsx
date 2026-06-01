@@ -7,11 +7,37 @@ import { KidButton } from '@/components/ui/KidButton';
 import { ShoppingBag, Star, Sparkles, ChevronRight } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
+import pipDinossauros from '@/assets/pip-dinossauros.png';
+import pipEspaco from '@/assets/pip-espaco.png';
+import pipArte from '@/assets/pip-arte.png';
+import pipAnimais from '@/assets/pip-animais.png';
+import pipMusica from '@/assets/pip-musica.png';
+import pipFazendinha from '@/assets/pip-fazendinha.png';
+import pipSuperHerois from '@/assets/pip-super-herois.png';
+import pipPrincesas from '@/assets/pip-princesas.png';
+import pipMinecraft from '@/assets/pip-minecraft.png';
+import pipCarros from '@/assets/pip-carros.png';
+import pipTrens from '@/assets/pip-trens.png';
+import pipRobos from '@/assets/pip-robos.png';
+import pipVeiculos from '@/assets/pip-veiculos.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 
 
 const ADDITIONAL_CHARACTERS = [
+  { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: pipEspaco },
+  { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: pipArte },
+  { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: pipAnimais },
+  { id: 'pip-musica', name: 'Pip Maestro', description: 'Vamos reger uma sinfonia de aprendizado!', category: 'premium', image_url: pipMusica },
+  { id: 'pip-fazendinha', name: 'Pip Fazendeiro', description: 'Plantando aprendizado e colhendo conquistas.', category: 'premium', image_url: pipFazendinha },
+  { id: 'pip-super', name: 'Pip Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: pipSuperHerois },
+  { id: 'pip-princesas', name: 'Pip Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: pipPrincesas },
+  { id: 'pip-minecraft', name: 'Pip Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: pipMinecraft },
+  { id: 'pip-carros', name: 'Pip Piloto', description: 'Acelerando rumo a novas conquistas.', category: 'premium', image_url: pipCarros },
+  { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
+  { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
+  { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
   { id: 'rex', name: 'Rex', description: 'O T-Rex explorador com um sorriso gigante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4' },
   { id: 'tina', name: 'Tina', description: 'Triceratops gentil com cores vivas e muita calma.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf' },
   { id: 'astro', name: 'Astro', description: 'Robô astronauta expressivo e muito amigável.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Astro&backgroundColor=c0aede' },
