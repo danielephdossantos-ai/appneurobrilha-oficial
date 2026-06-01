@@ -338,8 +338,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                     <button 
                       key={`${opt}-${index}`} 
                       onClick={() => {
+                        const isCorrect = opt === (aula.resposta_correta || aula.answer);
                         setTentativa(opt);
-                        setAcertou(opt === (aula.resposta_correta || aula.answer));
+                        if (isCorrect) {
+                          handleAcerto();
+                        } else {
+                          setAcertou(false);
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
