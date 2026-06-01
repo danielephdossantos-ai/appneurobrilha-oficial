@@ -176,7 +176,8 @@ function Treino() {
 
   useEffect(() => {
     terapeutaFalar('Olá, pequeno gênio! Vamos treinar o seu cérebro hoje? Escolha uma especialidade para começar!');
-  }, []); // Fala inicial apenas uma vez
+  }, [terapeutaFalar]); 
+
 
   // Estados para mecânicas específicas
   const [nivelAcao, setNivelAcao] = useState(0);
@@ -218,9 +219,9 @@ function Treino() {
 
   const selecionarCategoria = (id: string) => {
     setCatAtiva(id);
-    setAtvAtiva(id); // Entra direto no jogo selecionado
+    setAtvAtiva(null); // Reseta atividade para mostrar a lista e permitir ver os jogos específicos
     setFaseIndex(1);
-    carregarNovaVariacao(id);
+    terapeutaFalar(`Ótima escolha! Vamos trabalhar ${clinicaCategorias.find(c => c.id === id)?.nome}. Escolha um dos exercícios abaixo!`);
   };
 
   const handleAcaoInterativa = () => {
@@ -334,6 +335,45 @@ function Treino() {
               <Star size={16} fill="currentColor" />
             </div>
             <span className="text-lg">{coins} <span className="text-xs opacity-60 uppercase">BrilhoCoins</span></span>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
+      <div className="max-w-6xl mx-auto px-4 md:px-0">
+        <div className="bg-white rounded-3xl p-4 my-4 border-2 border-indigo-100 shadow-md flex items-center gap-4 relative">
+          {/* Mascote Animado */}
+          <div className="relative">
+            <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
+              🦊
+            </div>
+            {mascoteAnimando && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
+              </span>
+            )}
+          </div>
+
+          {/* Balão de Fala da Terapeuta IA */}
+          <div className="flex-1 bg-indigo-50/80 border border-indigo-100 rounded-2xl p-3 relative">
+            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-indigo-50 border-b-[8px] border-b-transparent"></div>
+            <p className="text-sm md:text-base font-bold text-indigo-950 leading-relaxed">{textoBalao}</p>
+            <div className="flex items-center gap-4 mt-1">
+              <button 
+                onClick={() => variacaoAtual ? terapeutaFalar(variacaoAtual.dicaAudio) : terapeutaFalar(textoBalao)}
+                className="text-[11px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
+              >
+                🗣️ Ouvir de Novo
+              </button>
+              <button 
+                onClick={() => setAudioMutado(!audioMutado)}
+                className="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
+              >
+                {audioMutado ? <VolumeX size={12} /> : <VolIcon size={12} />}
+                {audioMutado ? "Ativar Som" : "Silenciar"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -648,62 +688,18 @@ function Treino() {
 
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-6">
-            {/* MASCOTE TERAPEUTA IA PREMIUM */}
-            <div className="bg-white p-8 rounded-[3rem] border-2 border-slate-100 shadow-2xl relative overflow-visible group">
-               {/* Botão de Mute */}
-               <button 
-                onClick={() => setAudioMutado(!audioMutado)}
-                className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-400"
-               >
-                 {audioMutado ? <VolumeX size={20} /> : <VolIcon size={20} />}
-               </button>
-
-               {/* Balão de Fala Dinâmico */}
-               <div className="relative mb-8 mt-4">
-                  <div className="bg-indigo-600 text-white p-6 rounded-3xl rounded-br-none font-bold text-sm leading-relaxed shadow-xl border-2 border-indigo-400">
-                    {textoBalao}
-                  </div>
-                  <div className="absolute -bottom-2 right-0 w-6 h-6 bg-indigo-600 rotate-45 transform translate-y-1/2 -translate-x-1" />
-               </div>
-
-               {/* Mascote Animado Pip */}
-               <div className="flex justify-center relative">
-                  <div className={cn(
-                    "w-40 h-40 bg-slate-50 rounded-full border-4 border-white shadow-inner flex items-center justify-center text-7xl transition-all duration-300",
-                    mascoteAnimando ? "scale-110 shadow-indigo-100" : ""
-                  )}>
-                    {mascoteAnimando ? (
-                      <motion.div animate={{ rotate: [0, -5, 5, 0], scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>
-                        🐶
-                      </motion.div>
-                    ) : (
-                      <div className="hover:scale-110 transition-transform cursor-pointer" onClick={() => terapeutaFalar('Estou pronto para te ajudar!')}>
-                        🐶
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Partículas de Brilho se estiver falando */}
-                  {mascoteAnimando && (
-                    <motion.div 
-                      className="absolute -top-4 -right-4 text-amber-400"
-                      animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5] }}
-                      transition={{ repeat: Infinity, duration: 0.8 }}
-                    >
-                      <Sparkle size={32} fill="currentColor" />
-                    </motion.div>
-                  )}
-               </div>
-
-               <div className="mt-8 text-center">
-                  <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block mb-2">Seu Terapeuta Amigo</span>
-                  <h4 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Pip Inteligente</h4>
-                  
-                  <div className="mt-4 flex justify-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0s' }} />
-                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0.2s' }} />
-                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0.4s' }} />
-                  </div>
+            <div className="bg-indigo-600 p-8 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group">
+               <Sparkles className="absolute top-[-10px] right-[-10px] w-20 h-20 text-white/10 rotate-12" />
+               <h4 className="text-xl font-black mb-2 relative z-10">Sessão Premium</h4>
+               <p className="text-xs font-bold text-indigo-100 leading-relaxed mb-6 relative z-10">
+                 Você está em um ambiente controlado e seguro. O Pip está monitorando o progresso para o relatório terapêutico.
+               </p>
+               <div className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/20">
+                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🦊</div>
+                 <div>
+                   <span className="text-[10px] font-black uppercase tracking-widest block opacity-70">Acompanhamento</span>
+                   <span className="text-sm font-black">Pip Fox Ativo</span>
+                 </div>
                </div>
             </div>
             
