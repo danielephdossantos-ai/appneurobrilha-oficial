@@ -187,18 +187,22 @@ function Treino() {
 
   return (
     <Shell>
-      {/* HUD Superior Premium */}
-      <div className="flex justify-between items-center bg-white px-8 py-5 rounded-[2rem] shadow-xl border-b-4 border-slate-100 mb-10 max-w-5xl mx-auto transform hover:scale-[1.01] transition-transform">
+      {/* HUD Superior Premium - Cabeçalho da Clínica Digital */}
+      <div className="flex justify-between items-center bg-white px-8 py-5 rounded-[2.5rem] shadow-xl border-b-4 border-slate-100 mb-10 max-w-5xl mx-auto transform hover:scale-[1.01] transition-transform">
         <div className="flex items-center gap-4">
-          <div className="bg-indigo-600 p-3 rounded-2xl shadow-lg shadow-indigo-200">
-            <Brain className="w-8 h-8 text-white" />
+          <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-600 border border-indigo-100 shadow-sm">
+            <Brain className="w-8 h-8 animate-pulse" />
           </div>
           <div>
-            <span className="text-2xl font-black text-slate-900 tracking-tight block leading-none">NEURO-TREINO</span>
-            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Clínica do Pip</span>
+            <h2 className="text-2xl font-black text-indigo-900 tracking-tight block leading-none">NEURO-TREINO</h2>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Módulo Clínico Cognitivo</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <div className="bg-emerald-500 text-white font-black px-5 py-2.5 rounded-2xl text-xs shadow-md flex items-center gap-3 border-b-4 border-emerald-700 active:translate-y-1 active:border-b-0 transition-all">
+            <span className="tracking-widest">SESSÃO ATIVA</span>
+            <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
+          </div>
           <div className="bg-amber-100 text-amber-900 font-black px-6 py-3 rounded-2xl border-2 border-amber-200 flex items-center gap-3 shadow-sm">
             <div className="bg-amber-400 p-1.5 rounded-full shadow-inner">
               <Star size={16} fill="currentColor" />
