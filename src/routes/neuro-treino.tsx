@@ -136,9 +136,9 @@ function Treino() {
                   {g.atividades.map((a) => (
                     <button 
                       key={a} 
-                      onClick={() => setSelectedAtividade(a)}
+                      onClick={() => handleSelectAtividade(a, g.nome)}
                       className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 transition-all min-h-[110px] ${
-                        selectedAtividade === a ? 'border-primary shadow-glow scale-105' : 'border-border shadow-soft hover:shadow-glow'
+                        selectedAtividade?.title === a ? 'border-primary shadow-glow scale-105' : 'border-border shadow-soft hover:shadow-glow'
                       }`}
                     >
                       <div className="font-extrabold">{a}</div>
