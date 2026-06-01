@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMascot, UserMascot } from '@/contexts/MascotContext';
+import { useMascot } from '@/contexts/MascotContext';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
 import { 
   Heart, 
   Star, 
   Zap, 
-  ShoppingBag, 
   Gamepad2, 
   Shirt, 
   Home as HomeIcon,
   Utensils,
+  ChevronLeft,
   ChevronRight,
-  Sparkles,
-  Camera
+  Sparkles
 } from 'lucide-react';
 import KidLiveMascot, { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
@@ -23,8 +22,8 @@ import { supabase } from '@/database/supabase/client';
 import { useAuth } from '@/modules/auth/hooks/useAuth';
 
 export const PipVirtualPet: React.FC = () => {
-  const { activeMascot, gainExperience, gainAffinity, isLoading, updateStats } = useMascot();
-  const [activeTab, setActiveTab] = useState<'status' | 'room' | 'closet' | 'play'>('status');
+  const { activeMascot, gainAffinity, isLoading, updateStats } = useMascot();
+  const [activeTab, setActiveTab] = useState<'status' | 'closet' | 'play'>('status');
   const [currentSkin, setCurrentSkin] = useState<string | null>(null);
   
   if (isLoading) return <div className="flex justify-center p-20"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>;
@@ -34,143 +33,145 @@ export const PipVirtualPet: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 bg-white/40 backdrop-blur-md rounded-[3rem] p-8 border-4 border-white shadow-xl">
-      {/* Top Stats Bar */}
-      <div className="grid grid-cols-3 gap-4">
-        <StatCard 
-          icon={<Utensils className="text-orange-500" />} 
-          label="Fome" 
-          value={activeMascot.stats.hunger} 
-          color="bg-orange-500"
-        />
-        <StatCard 
-          icon={<Zap className="text-yellow-500" />} 
-          label="Energia" 
-          value={activeMascot.stats.energy} 
-          color="bg-yellow-500"
-        />
-        <StatCard 
-          icon={<Heart className="text-red-500" />} 
-          label="Felicidade" 
-          value={activeMascot.stats.happiness} 
-          color="bg-red-500"
-        />
+    <div className="min-h-[80vh] flex flex-col gap-8 bg-gradient-to-b from-sky-50 to-white rounded-[4rem] p-6 md:p-12 border-4 border-white shadow-2xl overflow-hidden">
+      {/* Header Stats */}
+      <div className="flex flex-wrap justify-center gap-6">
+        <StatBadge icon={<Utensils size={16} />} value={activeMascot.stats.hunger} label="Fome" color="bg-orange-500" />
+        <StatBadge icon={<Zap size={16} />} value={activeMascot.stats.energy} label="Energia" color="bg-yellow-500" />
+        <StatBadge icon={<Heart size={16} />} value={activeMascot.stats.happiness} label="Felicidade" color="bg-red-500" />
       </div>
 
-      {/* Main Mascot Room View */}
-      <div className="relative aspect-[16/10] w-full max-w-4xl mx-auto bg-gradient-to-b from-sky-300 via-sky-100 to-green-100 rounded-[4rem] border-8 border-white shadow-2xl p-8 flex items-end justify-center overflow-hidden">
-        {/* Room Floor */}
-        <div className="absolute bottom-0 inset-x-0 h-1/4 bg-green-200/50 skew-y-1" />
+      {/* Main Wardrobe Display */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-12 items-center justify-center">
         
-        {/* Wall Decorations */}
-        <div className="absolute top-12 left-12 w-24 h-24 bg-white/80 rounded-2xl flex items-center justify-center text-4xl shadow-inner border-2 border-primary/5">🖼️</div>
-        <div className="absolute top-16 right-20 w-32 h-40 bg-white/40 rounded-3xl border-4 border-white shadow-lg" />
+        {/* Central Pip - The focus */}
+        <div className="relative order-1 lg:order-2 flex-1 flex flex-col items-center justify-center min-h-[500px]">
+          <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full scale-150 animate-pulse" />
+          
+          <motion.div 
+            key={currentSkin || 'base'}
+            initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            className="relative z-10"
+          >
+            <KidLiveMascot 
+              size="2xl" 
+              showBadge={false} 
+              emotion="happy" 
+              overrideImage={currentSkin ? PIP_SKINS[currentSkin] : undefined}
+              className="drop-shadow-[0_45px_65px_rgba(0,0,0,0.15)]"
+            />
+          </motion.div>
 
-        {/* Window */}
-        <div className="absolute top-10 right-1/4 w-32 h-32 bg-sky-200 rounded-2xl border-4 border-white flex items-center justify-center overflow-hidden">
-           <div className="text-4xl animate-bounce-slow">☁️</div>
+          <div className="mt-8 bg-white/90 backdrop-blur px-12 py-4 rounded-full shadow-2xl border-4 border-primary">
+            <span className="font-black text-primary text-3xl uppercase tracking-tighter">
+              {activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'}
+            </span>
+          </div>
         </div>
 
-        <motion.div 
-          animate={activeMascot.evolution_stage === 'baby' ? { 
-            y: [0, -10, 0],
-            scale: [1, 1.05, 1]
-          } : { 
-            y: [0, -10, 0]
-          }}
-          transition={{ repeat: Infinity, duration: activeMascot.evolution_stage === 'baby' ? 2 : 4, ease: "easeInOut" }}
-          className="relative z-10"
-        >
-          <KidLiveMascot 
-            size={activeMascot.evolution_stage === 'baby' ? 'lg' : activeMascot.evolution_stage === 'child' ? 'xl' : '2xl'} 
-            showBadge={false} 
-            emotion={activeMascot.stats.happiness < 30 ? 'thinking' : 'happy'} 
-            overrideImage={currentSkin ? PIP_SKINS[currentSkin] : undefined}
-          />
-        </motion.div>
-        
-        {/* Level Badge */}
-        <div className="absolute top-6 left-6 bg-sun text-white font-black px-5 py-2 rounded-full shadow-lg border-2 border-white flex items-center gap-2">
-          <Star size={16} fill="white" />
-          LV {activeMascot.level}
+        {/* Side Controls/Catalogs */}
+        <div className="order-2 lg:order-1 w-full lg:w-96 flex flex-col gap-4">
+           <div className="flex gap-2 mb-4 p-2 bg-white/60 rounded-3xl border-2 border-primary/5">
+              <TabTrigger active={activeTab === 'status'} onClick={() => setActiveTab('status')} icon={<HomeIcon />} label="Status" />
+              <TabTrigger active={activeTab === 'closet'} onClick={() => setActiveTab('closet')} icon={<Shirt />} label="Vestir" />
+              <TabTrigger active={activeTab === 'play'} onClick={() => setActiveTab('play')} icon={<Gamepad2 />} label="Brincar" />
+           </div>
+
+           <div className="h-[450px] overflow-y-auto pr-2 custom-scrollbar">
+             <AnimatePresence mode="wait">
+               {activeTab === 'status' && (
+                 <motion.div key="status" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
+                   <KidCard className="p-6 bg-white/80 border-2 border-primary/10">
+                     <h3 className="font-black text-primary uppercase text-sm mb-4">Ações Rápidas</h3>
+                     <div className="grid grid-cols-2 gap-4">
+                       <KidButton variant="secondary" onClick={() => { gainAffinity(5); toast.success('Pip amou o carinho!'); }} className="w-full">Dar Carinho</KidButton>
+                       <KidButton variant="secondary" onClick={() => updateStats({ hunger: 100 })} className="w-full">Alimentar</KidButton>
+                     </div>
+                   </KidCard>
+                 </motion.div>
+               )}
+               {activeTab === 'closet' && <CatalogGrid key="closet" type="costume" onSelect={setCurrentSkin} current={currentSkin} />}
+               {activeTab === 'play' && <CatalogGrid key="play" type="toy" onSelect={setCurrentSkin} current={currentSkin} />}
+             </AnimatePresence>
+           </div>
         </div>
-
-        {/* Name Tag */}
-        <div className="absolute top-6 right-6 bg-white/90 backdrop-blur px-8 py-3 rounded-full shadow-xl border-4 border-primary">
-          <span className="font-black text-primary text-2xl uppercase tracking-tighter">
-            {activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'}
-          </span>
-        </div>
-      </div>
-
-      {/* Interaction Menu */}
-      <div className="flex justify-center gap-4">
-        <InteractionButton 
-          icon={<Utensils />} 
-          label="Alimentar" 
-          onClick={() => {
-            gainAffinity(2);
-            updateStats({ hunger: Math.min(100, activeMascot.stats.hunger + 10) });
-            toast.success(`Humm! ${activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'} adorou o lanche educativo.`);
-          }}
-        />
-        <InteractionButton 
-          icon={<Gamepad2 />} 
-          label="Brincar" 
-          onClick={() => setActiveTab('play')}
-        />
-        <InteractionButton 
-          icon={<Shirt />} 
-          label="Vestir" 
-          onClick={() => setActiveTab('closet')}
-        />
-        <InteractionButton 
-          icon={<HomeIcon />} 
-          label="Quarto" 
-          onClick={() => setActiveTab('room')}
-        />
-      </div>
-
-      {/* Content Area */}
-      <div className="mt-8 border-t-4 border-primary/5 pt-8">
-        <AnimatePresence mode="wait">
-          {activeTab === 'play' && <ToyCatalog key="toys" />}
-          {activeTab === 'closet' && <ClosetCatalog key="closet" onSelectSkin={setCurrentSkin} />}
-          {activeTab === 'room' && <RoomCustomizer key="room" />}
-        </AnimatePresence>
       </div>
     </div>
   );
 };
 
-const StatCard = ({ icon, label, value, color }: { icon: React.ReactNode, label: string, value: number, color: string }) => (
-  <KidCard className="p-4 flex flex-col items-center gap-2">
-    <div className="flex items-center gap-2">
-      {icon}
-      <span className="text-[10px] font-black uppercase text-muted-foreground">{label}</span>
+const StatBadge = ({ icon, value, label, color }: { icon: React.ReactNode, value: number, label: string, color: string }) => (
+  <div className="bg-white px-5 py-3 rounded-2xl shadow-sm border-2 border-primary/5 flex items-center gap-3">
+    <div className={cn("p-2 rounded-xl text-white", color)}>{icon}</div>
+    <div>
+      <div className="text-[10px] font-black text-muted-foreground uppercase leading-none mb-1">{label}</div>
+      <div className="h-2 w-20 bg-muted rounded-full overflow-hidden">
+        <motion.div initial={{ width: 0 }} animate={{ width: `${value}%` }} className={cn("h-full", color)} />
+      </div>
     </div>
-    <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
-      <motion.div 
-        initial={{ width: 0 }}
-        animate={{ width: `${value}%` }}
-        className={cn("h-full", color)}
-      />
-    </div>
-    <span className="text-xs font-black">{value}%</span>
-  </KidCard>
+  </div>
 );
 
-const InteractionButton = ({ icon, label, onClick }: { icon: React.ReactNode, label: string, onClick: () => void }) => (
+const TabTrigger = ({ active, onClick, icon, label }: { active: boolean, onClick: () => void, icon: React.ReactNode, label: string }) => (
   <button 
     onClick={onClick}
-    className="flex flex-col items-center gap-2 group"
+    className={cn(
+      "flex-1 flex flex-col items-center py-3 rounded-2xl transition-all",
+      active ? "bg-primary text-white shadow-lg" : "text-muted-foreground hover:bg-white"
+    )}
   >
-    <div className="w-20 h-20 bg-white rounded-3xl shadow-kid border-2 border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform hover:-translate-y-1">
-      {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 32, strokeWidth: 3 }) : icon}
-    </div>
-    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary">{label}</span>
+    {icon}
+    <span className="text-[10px] font-black uppercase mt-1">{label}</span>
   </button>
 );
+
+const CatalogGrid = ({ type, onSelect, current }: { type: 'costume' | 'toy', onSelect: (skin: string | null) => void, current: string | null }) => {
+  const [items, setItems] = useState<any[]>([]);
+  
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).order('name');
+      setItems(data || []);
+    };
+    fetch();
+  }, [type]);
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {items.map(item => {
+        const skinKey = item.image_url?.replace('SKIN:', '');
+        const isActive = current === skinKey;
+        return (
+          <motion.div
+            key={item.id}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => {
+               if (skinKey) {
+                 onSelect(skinKey);
+                 toast.success(`${item.name} ativado!`);
+               }
+            }}
+            className={cn(
+              "p-4 rounded-[2rem] cursor-pointer transition-all border-4 flex flex-col items-center gap-3 bg-white",
+              isActive ? "border-primary shadow-kid" : "border-transparent hover:border-primary/20 shadow-sm"
+            )}
+          >
+            <div className="w-24 h-24 flex items-center justify-center overflow-hidden">
+              {skinKey && PIP_SKINS[skinKey] ? (
+                <img src={PIP_SKINS[skinKey]} className="w-full h-full object-contain" alt={item.name} />
+              ) : (
+                <span className="text-4xl">{type === 'costume' ? '👕' : '🧸'}</span>
+              )}
+            </div>
+            <span className="text-[10px] font-black text-center uppercase leading-tight line-clamp-1">{item.name}</span>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+};
 
 const PipEggHatch: React.FC = () => {
   const { user } = useAuth();
@@ -286,99 +287,3 @@ const GenderOption = ({ selected, onClick, label, emoji }: { selected: boolean, 
     <span className="font-black text-sm uppercase tracking-widest">{label}</span>
   </button>
 );
-
-export const ToyCatalog = () => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-    <CatalogSection title="Brinquedos do Pip" type="toy" icon="🎮" />
-  </motion.div>
-);
-
-export const ClosetCatalog = ({ onSelectSkin }: { onSelectSkin?: (skin: string | null) => void }) => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-    <CatalogSection 
-      title="Guarda-Roupa Mágico" 
-      type="costume" 
-      icon="👕" 
-      onItemClick={(item) => {
-        if (item.image_url && item.image_url.startsWith('SKIN:')) {
-          const skinKey = item.image_url.replace('SKIN:', '');
-          onSelectSkin?.(skinKey);
-          toast.success(`${item.name} equipada!`);
-        }
-      }} 
-    />
-  </motion.div>
-);
-
-const RoomCustomizer = () => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-    <CatalogSection title="Móveis e Decoração" type="furniture" icon="🏠" />
-  </motion.div>
-);
-
-const CatalogSection = ({ title, type, icon, onItemClick }: { title: string, type: string, icon: string, onItemClick?: (item: any) => void }) => {
-  const [items, setItems] = useState<any[]>([]);
-  
-  useEffect(() => {
-    const fetchItems = async () => {
-      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).order('required_level', { ascending: true });
-      setItems(data || []);
-    };
-    fetchItems();
-  }, [type]);
-
-  return (
-    <div className="col-span-full">
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="text-2xl font-black text-primary flex items-center gap-3 uppercase tracking-tighter">
-          <span className="text-3xl">{icon}</span> {title}
-        </h3>
-        <Pill tone="info" className="px-4 py-2 rounded-full font-black uppercase text-xs">
-          {items.length} ITENS NO CATÁLOGO
-        </Pill>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {items.map(item => (
-          <KidCard 
-            key={item.id} 
-            onClick={() => onItemClick?.(item)}
-            className="p-6 flex flex-col items-center gap-4 group border-2 border-primary/5 hover:border-primary/20 transition-all cursor-pointer bg-white/50"
-          >
-            <div className="w-24 h-24 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl flex items-center justify-center text-5xl group-hover:scale-110 transition-transform shadow-inner overflow-hidden">
-              {item.image_url && item.image_url.startsWith('SKIN:') ? (
-                <img 
-                  src={PIP_SKINS[item.image_url.replace('SKIN:', '')]} 
-                  className="w-full h-full object-contain" 
-                  alt={item.name}
-                />
-              ) : (
-                type === 'toy' ? '🧩' : type === 'costume' ? '🎭' : '🛋️'
-              )}
-            </div>
-            <div className="text-center w-full">
-              <span className="font-black text-xs uppercase truncate block mb-1">{item.name}</span>
-              <div className="flex items-center justify-center gap-1 bg-sun/20 px-3 py-1 rounded-full">
-                <Star size={12} fill="currentColor" className="text-sun" />
-                <span className="text-[10px] font-black text-sun-foreground">NÍVEL {item.required_level}</span>
-              </div>
-            </div>
-            <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-              {item.required_coins} Moedas
-            </div>
-          </KidCard>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Pill = ({ children, tone = "default", className = "" }: { children: React.ReactNode; tone?: "default" | "success" | "warning" | "info" | "danger"; className?: string }) => {
-  const tones: Record<string, string> = {
-    default: "bg-muted text-muted-foreground",
-    success: "bg-success/15 text-success",
-    warning: "bg-warning/20 text-warning-foreground",
-    info: "bg-sky/30 text-foreground",
-    danger: "bg-destructive/15 text-destructive",
-  };
-  return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]} ${className}`}>{children}</span>;
-};
