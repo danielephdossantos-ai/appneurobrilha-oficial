@@ -161,6 +161,10 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                 src={mascot.image_url || pipMascot} 
                 alt={mascot.name} 
                 className="w-full h-full object-contain drop-shadow-xl animate-bounce-gentle" 
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = pipMascot; // Fallback para a imagem base se o link da S3 falhar
+                }}
               />
             ) : mascot.image_url ? (
               <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
