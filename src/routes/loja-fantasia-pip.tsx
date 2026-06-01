@@ -152,7 +152,7 @@ function LojaFantasiaPipPage() {
                     
                     <KidButton
                       variant={isCurrent ? "secondary" : "primary"}
-                      onClick={() => handleSelectSkin(skin.category)}
+                      onClick={() => handleSelectSkin(skin.category, skin.image)}
                       className="w-full"
                     >
                       {isCurrent ? "Vestido" : (
