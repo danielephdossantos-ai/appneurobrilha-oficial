@@ -144,7 +144,7 @@ const InteractionButton = ({ icon, label, onClick }: { icon: React.ReactNode, la
     className="flex flex-col items-center gap-2 group"
   >
     <div className="w-16 h-16 bg-white rounded-2xl shadow-kid border-2 border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-      {React.cloneElement(icon as React.ReactElement, { size: 28, strokeWidth: 3 })}
+      {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 28, strokeWidth: 3 }) : icon}
     </div>
     <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary">{label}</span>
   </button>
