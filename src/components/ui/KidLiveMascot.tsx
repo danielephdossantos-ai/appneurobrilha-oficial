@@ -91,11 +91,8 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
       <AnimatePresence mode="wait">
-        <motion.div
+        <div
           key={`${emotion}-${mascotImage}`}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
           className={cn(
             "relative flex items-center justify-center overflow-visible",
             sizes[size],
@@ -110,24 +107,13 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
               <div className="relative w-1/5 h-1/5 translate-y-4">
                 <Puzzle 
-                  className="w-full h-full text-sun animate-glow-puzzle fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
+                  className="w-full h-full text-sun fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
                   strokeWidth={3}
                 />
               </div>
             </div>
           )}
 
-          {/* Selo Mascote Oficial - Agora mais destacado */}
-          {isPip && showBadge && (
-            <motion.div 
-              initial={{ scale: 0, rotate: -25 }}
-              animate={{ scale: 1.1, rotate: -15 }}
-              className="absolute -top-4 -right-8 bg-gradient-to-r from-sun to-warning text-primary font-black text-xs px-4 py-2 rounded-xl border-4 border-white shadow-xl z-20 flex items-center gap-2 uppercase tracking-tighter"
-            >
-              <Award className="w-4 h-4" />
-              Mascote Oficial
-            </motion.div>
-          )}
 
           <img
             src={mascotImage}
