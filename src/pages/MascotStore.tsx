@@ -44,21 +44,24 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
   const filteredMascots = allMascots.filter(mascot => {
-    const matchesSearch = mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const category = mascot.category?.trim().toLowerCase();
+    const tab = activeTab.toLowerCase();
+    
+    // Filtro de busca
+    const matchesSearch = !searchQuery || 
+                         mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          mascot.description.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (!matchesSearch) return false;
 
-    if (activeTab === 'all') return true;
-    if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'pip-collection') return mascot.name === 'Pip';
-    if (['dinossauros', 'espaco', 'fantasia', 'veiculos', 'animais'].includes(activeTab)) {
-      return mascot.category === activeTab;
-    }
+    // Lógica das Abas
+    if (tab === 'all') return true;
+    if (tab === 'locked') return !ownedMascotIds.includes(mascot.id);
+    if (tab === 'owned') return ownedMascotIds.includes(mascot.id);
+    if (tab === 'pip-collection') return mascot.name === 'Pip' || category === 'primary';
     
-    
-    return true;
+    // Categorias dinâmicas
+    return category === tab;
   });
 
   const unlockedPipSkins = new Set<string>([
@@ -125,54 +128,55 @@ const MascotStorePage: React.FC = () => {
           />
         </div>
         
-        <div className="flex gap-2 bg-white p-1.5 rounded-2xl border-2 border-border shadow-sm overflow-x-auto">
+        <div className="flex gap-2 bg-white/80 backdrop-blur-sm p-2 rounded-2xl border-2 border-border/50 shadow-sm overflow-x-auto no-scrollbar mb-4">
           <TabButton 
             active={activeTab === 'all'} 
             onClick={() => setActiveTab('all')} 
-            label="Loja" 
-            icon={<ShoppingBag size={16} />}
+            label="Ver Tudo" 
+            icon={<ShoppingBag size={18} />}
           />
           <TabButton 
             active={activeTab === 'owned'} 
             onClick={() => setActiveTab('owned')} 
-            label="Meus Mascotes" 
-            icon={<User size={16} />}
+            label="Meus Amigos" 
+            icon={<User size={18} />}
           />
           <TabButton 
             active={activeTab === 'pip-collection'} 
             onClick={() => setActiveTab('pip-collection')} 
-            label="Coleção Pip" 
-            icon={<Sparkles size={16} />}
+            label="Skins Pip" 
+            icon={<Sparkles size={18} />}
           />
+          <div className="w-px h-8 bg-border mx-2 self-center" />
           <TabButton 
             active={activeTab === 'dinossauros'} 
             onClick={() => setActiveTab('dinossauros')} 
-            label="Dinossauros" 
-            icon={<ChevronRight size={16} />}
+            label="Dinos" 
+            icon={<span className="text-xl">🦖</span>}
           />
           <TabButton 
             active={activeTab === 'espaco'} 
             onClick={() => setActiveTab('espaco')} 
             label="Espaço" 
-            icon={<ChevronRight size={16} />}
+            icon={<span className="text-xl">🚀</span>}
           />
           <TabButton 
             active={activeTab === 'fantasia'} 
             onClick={() => setActiveTab('fantasia')} 
-            label="Fantasia" 
-            icon={<ChevronRight size={16} />}
+            label="Magia" 
+            icon={<span className="text-xl">✨</span>}
           />
           <TabButton 
             active={activeTab === 'veiculos'} 
             onClick={() => setActiveTab('veiculos')} 
             label="Veículos" 
-            icon={<ChevronRight size={16} />}
+            icon={<span className="text-xl">🏎️</span>}
           />
           <TabButton 
             active={activeTab === 'animais'} 
             onClick={() => setActiveTab('animais')} 
             label="Animais" 
-            icon={<ChevronRight size={16} />}
+            icon={<span className="text-xl">🐾</span>}
           />
         </div>
       </div>
@@ -282,8 +286,25 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
 
 const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: boolean, index: number }) => {
   const isPip = mascot.name === 'Pip';
-  const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
-  const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
+  const categoryLabels: Record<string, string> = {
+    'dinossauros': 'Dino Amigo',
+    'espaco': 'Explorador',
+    'fantasia': 'Mágico',
+    'veiculos': 'Veloz',
+    'animais': 'Pet Fofo',
+    'primary': 'Oficial'
+  };
+  
+  const rarity = categoryLabels[mascot.category] || 'Mascote';
+  const rarityColors: Record<string, string> = {
+    'dinossauros': 'bg-green-500',
+    'espaco': 'bg-blue-600',
+    'fantasia': 'bg-purple-500',
+    'veiculos': 'bg-orange-500',
+    'animais': 'bg-pink-500',
+    'primary': 'bg-primary'
+  };
+  const rarityColor = rarityColors[mascot.category] || 'bg-slate-500';
 
   return (
     <motion.div
@@ -306,9 +327,17 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
               <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
 
             ) : mascot.image_url ? (
-              <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
+              <img 
+                src={mascot.image_url} 
+                alt={mascot.name} 
+                className="w-full h-full object-contain drop-shadow-2xl filter brightness-110" 
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = `https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${mascot.name}&backgroundColor=transparent`;
+                }}
+              />
             ) : (
-              <span className="text-7xl">🧩</span>
+              <span className="text-7xl animate-pulse">🧩</span>
             )}
           </div>
 
