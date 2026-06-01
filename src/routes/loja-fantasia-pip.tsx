@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shell } from '@/components/Layout';
 import { KidCard } from '@/components/ui/KidCard';
