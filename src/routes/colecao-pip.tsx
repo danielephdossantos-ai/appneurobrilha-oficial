@@ -63,7 +63,7 @@ function ColecaoPipPage() {
             Nossos Amiguinhos
           </motion.h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Conheça todos os personagens da nossa turma! Do Pip e suas fantasias aos novos companheiros de aventura.
+            Conheça todos os personagens da nossa turma! Do Pip clássico aos novos companheiros de aventura.
           </p>
         </header>
 
