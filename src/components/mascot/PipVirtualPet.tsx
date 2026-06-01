@@ -70,12 +70,17 @@ export const PipVirtualPet: React.FC = () => {
         </div>
 
         <motion.div 
-          animate={{ y: [0, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          animate={activeMascot.evolution_stage === 'baby' ? { 
+            y: [0, -10, 0],
+            scale: [1, 1.05, 1]
+          } : { 
+            y: [0, -10, 0]
+          }}
+          transition={{ repeat: Infinity, duration: activeMascot.evolution_stage === 'baby' ? 2 : 4, ease: "easeInOut" }}
           className="relative z-10"
         >
           <KidLiveMascot 
-            size="2xl" 
+            size={activeMascot.evolution_stage === 'baby' ? 'lg' : activeMascot.evolution_stage === 'child' ? 'xl' : '2xl'} 
             showBadge={false} 
             emotion={activeMascot.stats.happiness < 30 ? 'thinking' : 'happy'} 
           />
@@ -302,7 +307,7 @@ const CatalogSection = ({ title, type, icon }: { title: string, type: string, ic
   
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).limit(25);
+      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).order('required_level', { ascending: true });
       setItems(data || []);
     };
     fetchItems();
