@@ -33,7 +33,7 @@ export const PIP_SKINS: Record<string, string> = {
   robos: pipRobos,
   veiculos: pipVeiculos,
 };
-import { Award, Puzzle } from 'lucide-react';
+import { Puzzle } from 'lucide-react';
 
 type Emotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'waving' | 'blinking';
 
