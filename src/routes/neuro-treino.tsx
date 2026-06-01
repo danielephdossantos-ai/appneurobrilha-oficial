@@ -393,7 +393,7 @@ function Treino() {
                   { id: 'memoria', nome: 'Memória de Elefante', cor: 'bg-purple-400 text-white', icone: <Brain className="w-8 h-8" /> },
                   { id: 'sons_iniciais', nome: 'Sons Iniciais', cor: 'bg-sky-400 text-sky-950', icone: <Volume2 className="w-8 h-8" /> },
                   { id: 'motorzinho', nome: 'Motorzinho dos Sons', cor: 'bg-emerald-400 text-emerald-950', icone: <Activity className="w-8 h-8" /> },
-                  { id: 'rimas', nome: 'Rimas', cor: 'bg-pink-400 text-white', icone: <SparklesIcon className="w-8 h-8" /> },
+                  { id: 'rimas', nome: 'Rimas', cor: 'bg-pink-400 text-white', icone: <Sparkles className="w-8 h-8" /> },
                   { id: 'regulacao', nome: 'Regulação Emocional', cor: 'bg-rose-400 text-white', icone: <Smile className="w-8 h-8" /> }
                 ].map((cat) => (
                   <button
