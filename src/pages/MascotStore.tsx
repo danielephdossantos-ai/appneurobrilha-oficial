@@ -44,22 +44,31 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
   const filteredMascots = allMascots.filter(mascot => {
-    const matchesSearch = mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    // Normalização para comparação robusta
+    const category = mascot.category?.toLowerCase();
+    const tab = activeTab.toLowerCase();
+    
+    const matchesSearch = searchQuery === '' || 
+                         mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          mascot.description.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (!matchesSearch) return false;
 
-    if (activeTab === 'all') return true;
-    if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'pip-collection') return mascot.name === 'Pip';
-    if (['dinossauros', 'espaco', 'fantasia', 'veiculos', 'animais'].includes(activeTab)) {
-      return mascot.category === activeTab;
-    }
+    if (tab === 'all') return true;
+    if (tab === 'locked') return !ownedMascotIds.includes(mascot.id);
+    if (tab === 'owned') return ownedMascotIds.includes(mascot.id);
+    if (tab === 'pip-collection') return mascot.name === 'Pip' || category === 'primary';
     
+    // Filtro por categorias específicas
+    const validCategories = ['dinossauros', 'espaco', 'fantasia', 'veiculos', 'animais'];
+    if (validCategories.includes(tab)) {
+      return category === tab;
+    }
     
     return true;
   });
+
+  console.log(`Tab: ${activeTab}, Count: ${filteredMascots.length}`);
 
   const unlockedPipSkins = new Set<string>([
     'original',
