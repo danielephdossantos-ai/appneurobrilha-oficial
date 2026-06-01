@@ -33,13 +33,26 @@ const kidButtonVariants = cva(
 export interface KidButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof kidButtonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 const KidButton = React.memo(React.forwardRef<HTMLButtonElement, KidButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, loading = false, disabled, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <Comp className={cn(kidButtonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp 
+        className={cn(kidButtonVariants({ variant, size, className }))} 
+        ref={ref} 
+        disabled={loading || disabled}
+        {...props} 
+      >
+        {loading ? (
+          <div className="flex items-center gap-2">
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            {children}
+          </div>
+        ) : children}
+      </Comp>
     );
   },
 ));

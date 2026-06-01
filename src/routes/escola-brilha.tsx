@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState, useEffect, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette } from "lucide-react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, Sparkles as SparklesIcon } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
+import { useMascot } from "@/contexts/MascotContext";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 
@@ -254,6 +255,19 @@ function Escola() {
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const { gainExperience, gainAffinity, activeMascot } = useMascot();
+  const { addCoins } = useAppState();
+
+  const handleAcerto = () => {
+    setAcertou(true);
+    gainExperience(20);
+    gainAffinity(5);
+    addCoins(50);
+    toast.success("Parabéns!", {
+      description: "Você ganhou +20 XP, +5 Afinidade com Pip e 50 BrilhoCoins!",
+      icon: <SparklesIcon className="text-sun" />
+    });
+  };
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
@@ -324,8 +338,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                     <button 
                       key={`${opt}-${index}`} 
                       onClick={() => {
+                        const isCorrect = opt === (aula.resposta_correta || aula.answer);
                         setTentativa(opt);
-                        setAcertou(opt === (aula.resposta_correta || aula.answer));
+                        if (isCorrect) {
+                          handleAcerto();
+                        } else {
+                          setAcertou(false);
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
