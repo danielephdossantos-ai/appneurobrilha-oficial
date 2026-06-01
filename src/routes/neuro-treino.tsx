@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft } from "lucide-react";
+import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
@@ -90,7 +90,7 @@ const grupos = [
 
 function Treino() {
   const { activeChild, addCoins } = useAppState();
-  const [selectedCategory, setSelectedCategory] = useState<string>("Sons Iniciais");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
