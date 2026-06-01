@@ -123,7 +123,7 @@ const clinicaCategorias = [
     descricao: "Pares Rimados e Intrusos Sonoros",
     cor: "bg-pink-400 border-pink-500",
     corTexto: "text-pink-950",
-    icone: <SparklesIcon className="w-10 h-10" />,
+    icone: <Sparkles className="w-10 h-10" />,
     atividades: NEURO_ACTIVITIES["Rimas Divertidas"] || []
   },
   {
