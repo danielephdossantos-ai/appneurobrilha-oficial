@@ -17,7 +17,7 @@ const MascotStorePage: React.FC = () => {
   const { activeChild } = useAppState();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection' | 'dinossauros' | 'espaco' | 'fantasia' | 'veiculos' | 'animais'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection' | 'dinossauros' | 'espaco' | 'magia' | 'veiculos' | 'animais'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -161,8 +161,8 @@ const MascotStorePage: React.FC = () => {
             icon={<span className="text-xl">🚀</span>}
           />
           <TabButton 
-            active={activeTab === 'fantasia'} 
-            onClick={() => setActiveTab('fantasia')} 
+            active={activeTab === 'magia'} 
+            onClick={() => setActiveTab('magia')} 
             label="Magia" 
             icon={<span className="text-xl">✨</span>}
           />
@@ -289,7 +289,7 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
   const categoryLabels: Record<string, string> = {
     'dinossauros': 'Dino Amigo',
     'espaco': 'Explorador',
-    'fantasia': 'Mágico',
+    'magia': 'Mágico',
     'veiculos': 'Veloz',
     'animais': 'Pet Fofo',
     'primary': 'Oficial'
@@ -299,7 +299,7 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
   const rarityColors: Record<string, string> = {
     'dinossauros': 'bg-green-500',
     'espaco': 'bg-blue-600',
-    'fantasia': 'bg-purple-500',
+    'magia': 'bg-purple-500',
     'veiculos': 'bg-orange-500',
     'animais': 'bg-pink-500',
     'primary': 'bg-primary'
