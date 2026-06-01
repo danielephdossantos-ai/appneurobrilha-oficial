@@ -63,6 +63,7 @@ const clinicaCategorias = [
   {
     id: 'atencao',
     nome: "Atenção Super Focada",
+    descricao: "Inclui: Ache o Intruso e Alvo Móvel",
     cor: "bg-amber-400 border-amber-500",
     corTexto: "text-amber-950",
     icone: <Target className="w-10 h-10" />,
@@ -71,6 +72,7 @@ const clinicaCategorias = [
   {
     id: 'memoria',
     nome: "Memória de Elefante",
+    descricao: "Sequências e Comandos Auditivos",
     cor: "bg-purple-400 border-purple-500",
     corTexto: "text-purple-950",
     icone: <Brain className="w-10 h-10" />,
@@ -79,6 +81,7 @@ const clinicaCategorias = [
   {
     id: 'sons_iniciais',
     nome: "Sons Iniciais",
+    descricao: "Inclui: Traçado da Letra A",
     cor: "bg-sky-400 border-sky-500",
     corTexto: "text-sky-950",
     icone: <Volume2 className="w-10 h-10" />,
@@ -87,6 +90,7 @@ const clinicaCategorias = [
   {
     id: 'motorzinho',
     nome: "Motorzinho dos Sons",
+    descricao: "Inclui: Assopro da Vela e Voz",
     cor: "bg-emerald-400 border-emerald-500",
     corTexto: "text-emerald-950",
     icone: <Activity className="w-10 h-10" />,
@@ -95,6 +99,7 @@ const clinicaCategorias = [
   {
     id: 'rimas',
     nome: "Rimas Divertidas",
+    descricao: "Pares Rimados e Intrusos Sonoros",
     cor: "bg-pink-400 border-pink-500",
     corTexto: "text-pink-950",
     icone: <SparklesIcon className="w-10 h-10" />,
@@ -103,6 +108,7 @@ const clinicaCategorias = [
   {
     id: 'regulacao',
     nome: "Regulação Emocional",
+    descricao: "Âncora da Calma e Emoções",
     cor: "bg-rose-400 border-rose-500",
     corTexto: "text-rose-950",
     icone: <Smile className="w-10 h-10" />,
@@ -253,7 +259,8 @@ function Treino() {
                       {cat.icone}
                     </div>
                     <div>
-                      <span className="text-xl font-black block tracking-wide mb-1">{cat.nome}</span>
+                      <span className="text-xl font-black block tracking-wide">{cat.nome}</span>
+                      <p className="text-[10px] font-bold opacity-70 uppercase tracking-tighter mb-1">{cat.descricao}</p>
                       <span className="text-[11px] bg-black/10 px-2.5 py-0.5 rounded-full font-bold uppercase">{cat.atividades.length} Protocolos</span>
                     </div>
                   </button>

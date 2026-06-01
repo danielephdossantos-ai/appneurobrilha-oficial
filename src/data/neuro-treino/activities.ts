@@ -1,4 +1,3 @@
-
 export interface NeuroActivity {
   id: string;
   title: string;
@@ -21,14 +20,14 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
   "Atenção Super Focada": [
     {
       id: "at-1",
-      title: "Rastreio Visual: Ache o Intruso",
+      title: "Ache o Intruso",
       category: "Atenção Super Focada",
-      description: "Foco seletivo e discriminação visual.",
+      description: "Rastreamento Perceptual Visual.",
       therapeuticGoal: "Foco sustentado, atenção seletiva e discriminação visual.",
       difficulty: 1,
       type: "visual",
       content: {
-        prompt: "Qual destes não pertence ao grupo?",
+        prompt: "Clique no padrão animal isolado entre as matrizes robóticas.",
         target: "Carro",
         options: ["Maçã", "Banana", "Uva", "Carro"],
         images: ["🍎", "🍌", "🍇", "🚗"]
@@ -100,14 +99,14 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
     },
     {
       id: "sons-2",
-      title: "Traçado do Alfabeto Espacial",
+      title: "Traçado da Letra A",
       category: "Sons Iniciais",
-      description: "Grafomotricidade e associação fonema-grafema.",
+      description: "Traçado Técnico da Letra 'A'.",
       therapeuticGoal: "Grafomotricidade, associação fonema-grafema e coordenação motora fina.",
       difficulty: 2,
       type: "tracado",
       content: {
-        prompt: "Vamos desenhar a letra 'A' no espaço!",
+        prompt: "Guie o dedo clicando nos números em sequência correta (1➔2➔3).",
         target: "Letra A",
         options: ["Desenhar"],
         images: ["✍️"]
@@ -117,14 +116,14 @@ export const NEURO_ACTIVITIES: Record<string, NeuroActivity[]> = {
   "Motorzinho dos Sons": [
     {
       id: "motor-1",
-      title: "Treino Fono: Sopro Controlado",
+      title: "Assopro da Vela",
       category: "Motorzinho dos Sons",
-      description: "Controle do fluxo expiratório e suporte respiratório.",
+      description: "Controle de Sopro Fonoaudiológico.",
       therapeuticGoal: "Praxias buco-faciais, controle do fluxo expiratório e suporte respiratório.",
       difficulty: 1,
       type: "microfone",
       content: {
-        prompt: "Assopre bem forte no microfone para apagar a vela!",
+        prompt: "Objetivo: Exercitar musculatura orbicular e controle de ar expiratório.",
         target: "Vela Apagada",
         options: ["Assoprar"],
         images: ["🕯️"]
