@@ -312,50 +312,23 @@ function Treino() {
       )}
 
       {/* HUD Superior Premium - Cabeçalho da Clínica Digital */}
-      <div className="flex justify-between items-center bg-white px-8 py-5 rounded-[2.5rem] shadow-xl border-b-4 border-slate-100 mb-10 max-w-5xl mx-auto transform hover:scale-[1.01] transition-transform">
-        <div className="flex items-center gap-4">
-          <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-600 border border-indigo-100 shadow-sm">
-            <Brain className="w-8 h-8 animate-pulse" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-black text-indigo-900 tracking-tight block leading-none">NEURO-TREINO</h2>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Módulo Clínico Cognitivo</p>
-          </div>
+      <div className="flex justify-between items-center z-10 mb-6 max-w-md mx-auto w-full">
+        <div className="bg-white/90 px-4 py-2 rounded-xl border-4 border-[#4B7BFF] shadow-[0_4px_0_#2B53C6] flex items-center gap-2">
+          <Brain className="w-6 h-6 text-[#4B7BFF]" />
+          <span className="text-base font-black text-[#1E3A8A] uppercase tracking-tighter">TREINO</span>
         </div>
-
-        {/* Stats de Sessão Premium */}
-        <div className="hidden md:flex items-center gap-6">
-           <div className="text-center">
-              <span className="text-[10px] font-black text-slate-400 uppercase block">Fase</span>
-              <span className="text-xl font-black text-indigo-600">#{faseIndex}</span>
-           </div>
-           <div className="h-8 w-px bg-slate-100" />
-           <div className="text-center">
-              <span className="text-[10px] font-black text-slate-400 uppercase block">Pontos</span>
-              <span className="text-xl font-black text-emerald-600">{pontos}</span>
-           </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="bg-emerald-500 text-white font-black px-5 py-2.5 rounded-2xl text-xs shadow-md flex items-center gap-3 border-b-4 border-emerald-700 active:translate-y-1 active:border-b-0 transition-all">
-            <span className="tracking-widest">SESSÃO ATIVA</span>
-            <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
-          </div>
-          <div className="bg-amber-100 text-amber-900 font-black px-6 py-3 rounded-2xl border-2 border-amber-200 flex items-center gap-3 shadow-sm">
-            <div className="bg-amber-400 p-1.5 rounded-full shadow-inner">
-              <Star size={16} fill="currentColor" />
-            </div>
-            <span className="text-lg">{coins} <span className="text-xs opacity-60 uppercase">BrilhoCoins</span></span>
-          </div>
+        <div className="bg-[#FFD23F] text-[#5C3E00] font-black px-5 py-2 rounded-xl border-4 border-[#B58A00] shadow-[0_4px_0_#806200] text-lg">
+          ⭐ {pontos}
         </div>
       </div>
 
       {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
-      <div className="max-w-6xl mx-auto px-4 md:px-0">
-        <div className="bg-white rounded-3xl p-4 my-4 border-2 border-indigo-100 shadow-md flex items-center gap-4 relative">
+      <div className="max-w-2xl mx-auto min-h-[600px] bg-gradient-to-b from-[#A3E6FF] via-[#E3F9FF] to-[#FFFBE6] p-6 rounded-[40px] shadow-2xl border-[6px] border-white relative flex flex-col overflow-hidden font-sans">
+        {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-4 my-4 border-2 border-white shadow-md flex items-center gap-4 relative z-20">
           {/* Mascote Animado */}
           <div className="relative">
-            <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
+            <div className={`w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-3xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
               🐶
             </div>
             {mascoteAnimando && (
@@ -367,30 +340,28 @@ function Treino() {
           </div>
 
           {/* Balão de Fala da Terapeuta IA */}
-          <div className="flex-1 bg-indigo-50/80 border border-indigo-100 rounded-2xl p-3 relative">
-            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-indigo-50 border-b-[8px] border-b-transparent"></div>
-            <p className="text-sm md:text-base font-bold text-indigo-950 leading-relaxed">{textoBalao}</p>
-            <div className="flex items-center gap-4 mt-1">
+          <div className="flex-1 bg-white/50 border border-white/50 rounded-2xl p-3 relative">
+            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-white/50 border-b-[8px] border-b-transparent"></div>
+            <p className="text-[13px] font-bold text-indigo-950 leading-tight">{textoBalao}</p>
+            <div className="flex items-center gap-3 mt-1">
               <button 
                 onClick={() => variacaoAtual ? terapeutaFalar(variacaoAtual.dicaAudio) : terapeutaFalar(textoBalao)}
-                className="text-[11px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
+                className="text-[10px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
               >
-                🗣️ Ouvir de Novo
+                🗣️ Ouvir
               </button>
               <button 
                 onClick={() => setAudioMutado(!audioMutado)}
-                className="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
+                className="text-[10px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
               >
-                {audioMutado ? <VolumeX size={12} /> : <VolIcon size={12} />}
-                {audioMutado ? "Ativar Som" : "Silenciar"}
+                {audioMutado ? <VolumeX size={10} /> : <VolIcon size={10} />}
+                {audioMutado ? "Som" : "Mudo"}
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <div className="lg:col-span-3">
+        <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-4 border-3 border-white shadow-xl flex-1 flex flex-col z-10 min-h-[400px]">
           <AnimatePresence mode="wait">
             {!catAtiva ? (
               <motion.div 
@@ -774,27 +745,12 @@ function Treino() {
 
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-6">
-            <div className="bg-indigo-600 p-8 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group">
-               <Sparkles className="absolute top-[-10px] right-[-10px] w-20 h-20 text-white/10 rotate-12" />
-               <h4 className="text-xl font-black mb-2 relative z-10">Sessão Premium</h4>
-               <p className="text-xs font-bold text-indigo-100 leading-relaxed mb-6 relative z-10">
-                 Você está em um ambiente controlado e seguro. O Pip está monitorando o progresso para o relatório terapêutico.
-               </p>
-               <div className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/20">
-                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🐶</div>
-                 <div>
-                   <span className="text-[10px] font-black uppercase tracking-widest block opacity-70">Acompanhamento</span>
-                   <span className="text-sm font-black">Pip Inteligente Ativo</span>
-                 </div>
-               </div>
-            </div>
-            
-            <div className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 shadow-xl space-y-4">
+            <div className="bg-white/90 p-6 rounded-[2.5rem] border-4 border-white shadow-xl space-y-3 mt-4">
                <div className="flex items-center gap-3 text-indigo-900 font-black uppercase tracking-tighter">
                   <Heart className="text-rose-500" fill="currentColor" />
-                  <span>Dica Clínica</span>
+                  <span>Dica do Pip</span>
                </div>
-               <p className="text-xs font-bold text-slate-500 leading-relaxed italic">
+               <p className="text-[11px] font-bold text-slate-500 leading-relaxed italic">
                  "O estímulo visual associado ao motor fortalece as sinapses do pequeno gênio. Continue incentivando!"
                </p>
             </div>
