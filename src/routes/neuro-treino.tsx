@@ -223,11 +223,14 @@ function Treino() {
     carregarNovaVariacao(id);
   };
 
-  const responderExercicio = (escolha: string) => {
+  const handleAnswer = (escolha: string) => {
     if (isAnswered) return;
-
-    const isCorrectChoice = variacaoAtual ? escolha === variacaoAtual.correto : true;
     
+    // Se houver variação premium, valida por ela. Caso contrário, valida pelo target fixo.
+    const isCorrectChoice = variacaoAtual 
+      ? escolha === variacaoAtual.correto 
+      : (escolha === atividadeAtual?.content.target || ['interaction', 'microfone', 'tracado', 'emocional'].includes(atividadeAtual?.type || ''));
+
     if (isCorrectChoice) {
       setIsCorrect(true);
       setIsAnswered(true);
@@ -239,64 +242,6 @@ function Treino() {
       setTimeout(() => {
         if (catAtiva) carregarNovaVariacao(catAtiva);
       }, 2500);
-    } else {
-      terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
-      toast.error("Tente novamente!", { 
-        description: "O Pip está aqui para te ajudar.",
-        icon: <XCircle className="text-rose-500" />
-      });
-    }
-  };
-
-  const handleSelectAtv = (activityId: string) => {
-    setAtvAtiva(activityId);
-    setFaseIndex(1);
-    
-    if (catAtiva) {
-      carregarNovaVariacao(catAtiva);
-    }
-  };
-
-  const handleAcaoInterativa = () => {
-    if (!atividadeAtual) return;
-    setInteragindo(true);
-    let progresso = 0;
-    
-    // Simulador de captação de áudio/esforço (Sopro da Vela/Controle de Voz)
-    const interval = setInterval(() => {
-      progresso += 20;
-      setNivelAcao(progresso);
-      if (progresso >= 100) {
-        clearInterval(interval);
-        setInteragindo(false);
-        setAssoprou(true);
-        handleAnswer(atividadeAtual.content.target);
-        
-        if (atividadeAtual.type === 'microfone') {
-          triggerFeedback('Parabéns! Você controlou o ar perfeitamente e apagou a vela! 🎂✨');
-        }
-      }
-    }, 300);
-  };
-
-  const handleAnswer = (option: string) => {
-    if (isAnswered) return;
-    
-    const correct = option === atividadeAtual?.content.target || 
-                    ['interaction', 'microfone', 'tracado', 'emocional'].includes(atividadeAtual?.type || '');
-    
-    setIsCorrect(correct);
-    setIsAnswered(true);
-
-    if (correct) {
-      setPontos(prev => prev + 20);
-      setFaseIndex(prev => prev + 1);
-      triggerFeedback('Uau! Você acertou! Parabéns, estou muito orgulhosa! Vamos para o próximo?! 🌟');
-      
-      // Progride para uma nova variação inédita
-      if (catAtiva) {
-        setTimeout(() => carregarNovaVariacao(catAtiva), 2500);
-      }
     } else {
       terapeutaFalar('Ah, quase! Olhe com atenção, você consegue encontrar! Tente outra vez.');
       toast.error("Tente novamente!", { 
