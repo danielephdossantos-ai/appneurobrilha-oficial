@@ -323,11 +323,12 @@ function Treino() {
       </div>
 
       {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
-      <div className="max-w-6xl mx-auto px-4 md:px-0">
-        <div className="bg-white rounded-3xl p-4 my-4 border-2 border-indigo-100 shadow-md flex items-center gap-4 relative">
+      <div className="max-w-2xl mx-auto min-h-[600px] bg-gradient-to-b from-[#A3E6FF] via-[#E3F9FF] to-[#FFFBE6] p-6 rounded-[40px] shadow-2xl border-[6px] border-white relative flex flex-col overflow-hidden font-sans">
+        {/* ================= TERAPEUTA IA / MASCOTE INTERATIVA (GUIANDO POR ÁUDIO) ================= */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-4 my-4 border-2 border-white shadow-md flex items-center gap-4 relative z-20">
           {/* Mascote Animado */}
           <div className="relative">
-            <div className={`w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-4xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
+            <div className={`w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500 flex items-center justify-center text-3xl shadow-md border-4 border-white transition-transform duration-300 ${mascoteAnimando ? 'animate-bounce scale-110' : 'hover:scale-105'}`}>
               🐶
             </div>
             {mascoteAnimando && (
@@ -339,27 +340,27 @@ function Treino() {
           </div>
 
           {/* Balão de Fala da Terapeuta IA */}
-          <div className="flex-1 bg-indigo-50/80 border border-indigo-100 rounded-2xl p-3 relative">
-            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-indigo-50 border-b-[8px] border-b-transparent"></div>
-            <p className="text-sm md:text-base font-bold text-indigo-950 leading-relaxed">{textoBalao}</p>
-            <div className="flex items-center gap-4 mt-1">
+          <div className="flex-1 bg-white/50 border border-white/50 rounded-2xl p-3 relative">
+            <div className="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-white/50 border-b-[8px] border-b-transparent"></div>
+            <p className="text-[13px] font-bold text-indigo-950 leading-tight">{textoBalao}</p>
+            <div className="flex items-center gap-3 mt-1">
               <button 
                 onClick={() => variacaoAtual ? terapeutaFalar(variacaoAtual.dicaAudio) : terapeutaFalar(textoBalao)}
-                className="text-[11px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
+                className="text-[10px] text-indigo-600 font-black underline uppercase tracking-wider hover:text-indigo-800"
               >
-                🗣️ Ouvir de Novo
+                🗣️ Ouvir
               </button>
               <button 
                 onClick={() => setAudioMutado(!audioMutado)}
-                className="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
+                className="text-[10px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1 hover:text-slate-600"
               >
-                {audioMutado ? <VolumeX size={12} /> : <VolIcon size={12} />}
-                {audioMutado ? "Ativar Som" : "Silenciar"}
+                {audioMutado ? <VolumeX size={10} /> : <VolIcon size={10} />}
+                {audioMutado ? "Som" : "Mudo"}
               </button>
             </div>
           </div>
         </div>
-      </div>
+
 
         <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-6 border-3 border-white shadow-xl flex-1 flex flex-col z-10 min-h-[400px]">
           <AnimatePresence mode="wait">
