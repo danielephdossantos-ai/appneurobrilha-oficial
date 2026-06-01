@@ -361,8 +361,8 @@ function Treino() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <div className="lg:col-span-3">
+      <div className="max-w-2xl mx-auto min-h-[600px] bg-gradient-to-b from-[#A3E6FF] via-[#E3F9FF] to-[#FFFBE6] p-6 rounded-[40px] shadow-2xl border-[6px] border-white relative flex flex-col overflow-hidden font-sans">
+        <div className="flex-1">
           <AnimatePresence mode="wait">
             {!catAtiva ? (
               <motion.div 
