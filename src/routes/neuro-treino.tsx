@@ -486,46 +486,8 @@ function Treino() {
                     </div>
 
                     <div className="flex flex-col items-center justify-center min-h-[300px] relative z-10">
-                      {/* JOGO FONO: ASSOPRO DA VELA (MOTORZINHO DOS SONS) */}
-                      {atividadeAtual.id === 'motor-1' && (
-                        <div className="text-center max-w-md mx-auto py-4">
-                          <div className="flex justify-center mb-2 text-indigo-600"><Mic className="w-8 h-8 animate-pulse" /></div>
-                          <h3 className="text-xl font-black text-slate-800 mb-1">Controle de Sopro Fonoaudiológico</h3>
-                          <p className="text-xs font-bold text-slate-400 mb-6">Objetivo: Exercitar musculatura orbicular e controle de ar expiratório.</p>
-
-                          <div className="bg-slate-50 border-2 border-dashed rounded-3xl p-8 mb-6 flex flex-col items-center justify-center relative min-h-[200px] w-full">
-                            {assoprou ? (
-                              <div className="animate-bounce">
-                                <span className="text-6xl block">🎂</span>
-                                <span className="text-sm font-black text-emerald-600 uppercase block mt-2">Vela Apagada com Sucesso!</span>
-                              </div>
-                            ) : (
-                              <div>
-                                <span className="text-6xl block animate-pulse">🕯️</span>
-                                <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 inline-block mt-3">Aguardando som estável...</span>
-                              </div>
-                            )}
-                            
-                            {/* Barra de Feedback de Intensidade do Microfone */}
-                            <div className="w-full bg-slate-200 h-4 rounded-full mt-6 overflow-hidden border border-slate-300">
-                              <div className="bg-gradient-to-r from-sky-400 to-indigo-600 h-full transition-all duration-300" style={{ width: `${nivelAcao}%` }} />
-                            </div>
-                          </div>
-
-                          <button
-                            onMouseDown={handleAcaoInterativa}
-                            onMouseUp={() => setInteragindo(false)}
-                            onTouchStart={handleAcaoInterativa}
-                            onTouchEnd={() => setInteragindo(false)}
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl text-sm w-full shadow-md transition-all active:scale-95"
-                          >
-                            {assoprou ? 'Treinar Novamente' : 'Simular Captura de Microfone (Sopro)'}
-                          </button>
-                        </div>
-                      )}
-
                       {/* JOGO MOTOR FINO: DESENHAR O ALFABETO (SONS INICIAIS) */}
-                      {atividadeAtual.id === 'sons-2' && (
+                      {catAtiva === 'sons_iniciais' && atvAtiva === 'sons-2' && (
                         <div className="text-center max-w-md mx-auto py-4">
                           <div className="flex justify-center mb-2 text-indigo-600"><Pencil className="w-8 h-8" /></div>
                           <h3 className="text-xl font-black text-slate-800 mb-1">Traçado Técnico da Letra "A"</h3>
@@ -563,7 +525,7 @@ function Treino() {
                                 <span className="text-4xl block mb-2">🍎</span>
                                 <span className="text-sm font-black text-emerald-400 uppercase">A de Abelha! Traçado Correto!</span>
                                 <button 
-                                  onClick={() => handleAnswer(atividadeAtual.content.target)}
+                                  onClick={() => handleAnswer('Letra A')}
                                   className="mt-4 bg-white text-emerald-900 font-bold text-xs px-4 py-2 rounded-lg"
                                 >
                                   Finalizar Letra
