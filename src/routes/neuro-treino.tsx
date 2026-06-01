@@ -400,19 +400,24 @@ function Treino() {
                 exit={{ opacity: 0, y: -20 }}
                 className="grid grid-cols-2 md:grid-cols-3 gap-4 flex-1 items-center py-2"
               >
-                {clinicaCategorias.map((cat) => (
+                {[
+                  { id: 'atencao', nome: 'Atenção', cor: 'bg-[#FF6B6B] border-[#C93B3B] text-white', icone: '🎯' },
+                  { id: 'memoria', nome: 'Memória', cor: 'bg-[#B467FF] border-[#7F3BC9] text-white', icone: '🧠' },
+                  { id: 'sons_iniciais', nome: 'Sons', cor: 'bg-[#4CE3FF] border-[#1B99B5] text-slate-900', icone: '🗣️' },
+                  { id: 'motorzinho', nome: 'Motorzinho', cor: 'bg-[#4EFF91] border-[#1BB553] text-slate-900', icone: '⚡' },
+                  { id: 'rimas', nome: 'Rimas', cor: 'bg-[#FF6BD5] border-[#C93B9F] text-white', icone: '✨' },
+                  { id: 'regulacao', nome: 'Calminha', cor: 'bg-[#FF9F43] border-[#C96F16] text-white', icone: '🎈' }
+                ].map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => selecionarCategoria(cat.id)}
                     className={cn(
-                      "p-5 rounded-2xl border-b-8 border-black/10 flex flex-col items-center justify-center text-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0 h-36",
-                      cat.cor, cat.corTexto
+                      "p-4 rounded-[24px] border-4 shadow-[0_8px_0_rgba(0,0,0,0.15)] flex flex-col items-center justify-center text-center gap-2 transition-all transform active:translate-y-2 active:shadow-none h-28",
+                      cat.cor
                     )}
                   >
-                    <div className="bg-white/90 p-3 rounded-xl shadow-inner text-slate-800">
-                      {cat.icone}
-                    </div>
-                    <span className="text-md font-black tracking-wide leading-tight">{cat.nome}</span>
+                    <span className="text-3xl filter drop-shadow-sm">{cat.icone}</span>
+                    <span className="text-md font-black tracking-wide uppercase">{cat.nome}</span>
                   </button>
                 ))}
               </motion.div>
