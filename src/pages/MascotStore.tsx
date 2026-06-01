@@ -109,9 +109,14 @@ const MascotStorePage: React.FC = () => {
 
       {filteredMascots.length === 0 && !isLoading && (
         <div className="text-center py-20 bg-white/50 rounded-[3rem] border-4 border-dashed border-primary/10">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-black text-primary uppercase">Nenhum mascote encontrado</h3>
-          <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
+          <div className="text-6xl mb-4">✨</div>
+          <h3 className="text-2xl font-black text-primary uppercase">Nossos Amiguinhos</h3>
+          <p className="text-muted-foreground font-bold mb-8 text-lg">Clique abaixo para ver toda a nossa turma incrível!</p>
+          <Link to="/colecao-pip">
+            <KidButton variant="primary" className="px-12 py-8 text-xl">
+              Ver Coleção Completa
+            </KidButton>
+          </Link>
         </div>
       )}
     </div>
