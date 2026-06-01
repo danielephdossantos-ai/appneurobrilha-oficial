@@ -290,7 +290,7 @@ const CatalogSection = ({ title, type }: { title: string, type: string }) => {
   
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await supabase.from('mascot_catalog_items').select('*').eq('type', type).limit(20);
+      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).limit(20);
       setItems(data || []);
     };
     fetchItems();
