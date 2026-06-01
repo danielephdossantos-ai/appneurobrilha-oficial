@@ -12,6 +12,13 @@ import { cn } from '@/utils/utils';
 
 
 const ADDITIONAL_CHARACTERS = [
+  { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: '/src/assets/pip-dinossauros.png' },
+  { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: '/src/assets/pip-espaco.png' },
+  { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: '/src/assets/pip-arte.png' },
+  { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: '/src/assets/pip-animais.png' },
+  { id: 'pip-musica', name: 'Pip Maestro', description: 'Vamos reger uma sinfonia de aprendizado!', category: 'premium', image_url: '/src/assets/pip-musica.png' },
+  { id: 'pip-fazendinha', name: 'Pip Fazendeiro', description: 'Plantando aprendizado e colhendo conquistas.', category: 'premium', image_url: '/src/assets/pip-fazendinha.png' },
+  { id: 'pip-super', name: 'Pip Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: '/src/assets/pip-super-herois.png' },
   { id: 'rex', name: 'Rex', description: 'O T-Rex explorador com um sorriso gigante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4' },
   { id: 'tina', name: 'Tina', description: 'Triceratops gentil com cores vivas e muita calma.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf' },
   { id: 'astro', name: 'Astro', description: 'Robô astronauta expressivo e muito amigável.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Astro&backgroundColor=c0aede' },
