@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
@@ -43,34 +43,48 @@ export const Route = createFileRoute("/neuro-treino")({
 
 const grupos = [
   {
+    nome: "Atenção Super Focada",
+    emoji: "🎯",
+    cor: "from-amber-400 to-amber-200",
+    corTexto: "text-amber-950",
+    atividades: NEURO_ACTIVITIES["Atenção Super Focada"].map(a => a.title),
+    icone: <Target className="w-12 h-12" />
+  },
+  {
+    nome: "Memória de Elefante",
+    emoji: "🧠",
+    cor: "from-purple-400 to-purple-200",
+    corTexto: "text-purple-950",
+    atividades: NEURO_ACTIVITIES["Memória de Elefante"].map(a => a.title),
+    icone: <Brain className="w-12 h-12" />
+  },
+  {
     nome: "Sons Iniciais",
     emoji: "🗣️",
     cor: "from-coral/25 to-coral/5",
     atividades: NEURO_ACTIVITIES["Sons Iniciais"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Motorzinho dos Sons",
     emoji: "⚙️",
     cor: "from-primary/20 to-primary/5",
     atividades: NEURO_ACTIVITIES["Motorzinho dos Sons"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Rimas",
     emoji: "🎵",
     cor: "from-sky/30 to-sky/5",
     atividades: NEURO_ACTIVITIES["Rimas"].map(a => a.title),
+    icone: <Play className="w-12 h-12" />
   },
   {
     nome: "Regulação emocional",
     emoji: "💚",
     cor: "from-success/20 to-success/5",
     atividades: ["Respira Flor","Termômetro dos Sentimentos","Cantinho da Calma","Como Eu Estou"],
-  },
-  {
-    nome: "Oficina Criativa",
-    emoji: "🎨",
-    cor: "from-lilac/30 to-lilac/5",
-    atividades: ["Mosaico de Formas", "Sequência de Cores", "Simetria", "Decoração Criativa"],
+    icone: <Heart className="w-12 h-12" />
   },
 ];
 
