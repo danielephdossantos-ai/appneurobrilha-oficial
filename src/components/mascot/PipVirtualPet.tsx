@@ -214,26 +214,61 @@ const PipEggHatch: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto text-center py-12 bg-white/50 rounded-[4rem] border-4 border-dashed border-primary/20 p-12 shadow-2xl">
+    <div className="max-w-2xl mx-auto text-center py-12 bg-white/50 rounded-[4rem] border-4 border-dashed border-primary/20 p-12 shadow-2xl overflow-hidden">
       {step === 1 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <h2 className="text-4xl md:text-5xl font-black text-primary mb-8 uppercase tracking-tighter">Um novo amigo está chegando!</h2>
-          <div className="relative w-64 h-80 mx-auto mb-12 flex items-center justify-center">
-             <div className="absolute inset-0 bg-sun/20 blur-3xl rounded-full animate-pulse" />
+          <h2 className="text-4xl md:text-5xl font-black text-primary mb-8 uppercase tracking-tighter">O Ovo do Conhecimento</h2>
+          
+          <div className="relative w-80 h-96 mx-auto mb-12 flex items-center justify-center">
+             <div className="absolute inset-0 bg-gradient-to-tr from-sun/40 via-sky/20 to-primary/30 blur-[100px] rounded-full animate-pulse" />
+            
             <motion.div 
               animate={{ 
-                rotate: [0, -5, 5, -5, 5, 0],
-                y: [0, -20, 0]
+                rotate: [0, -3, 3, -3, 3, 0],
+                y: [0, -15, 0]
               }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="text-[180px] leading-none relative z-10"
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              className="relative z-10 w-full h-full flex items-center justify-center"
             >
-              🥚
+              <div className="relative w-64 h-80 bg-gradient-to-b from-sky-200 via-white to-sun-100 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] border-8 border-white shadow-[0_25px_50px_rgba(0,0,0,0.1),inset_0_-20px_40px_rgba(255,215,0,0.2)] overflow-hidden">
+                {/* Puzzle pieces pattern on shell */}
+                <div className="absolute top-10 left-8 w-12 h-12 border-4 border-primary/10 rounded-lg rotate-12 opacity-40" />
+                <div className="absolute bottom-20 right-10 w-16 h-16 border-4 border-secondary/10 rounded-lg -rotate-12 opacity-30" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border-8 border-white/20 rounded-full blur-xl" />
+
+                {/* Cracks with eyes */}
+                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-48 h-24 flex flex-col items-center justify-center">
+                  <div className="w-full h-2 bg-primary/20 rounded-full blur-sm mb-4" />
+                  <div className="flex gap-12">
+                    <motion.div 
+                      animate={{ scaleY: [1, 0.1, 1] }} 
+                      transition={{ repeat: Infinity, duration: 4, times: [0, 0.95, 1] }}
+                      className="w-8 h-10 bg-primary rounded-full border-4 border-white shadow-lg relative overflow-hidden"
+                    >
+                      <div className="absolute top-1 left-1 w-3 h-3 bg-white rounded-full" />
+                    </motion.div>
+                    <motion.div 
+                      animate={{ scaleY: [1, 0.1, 1] }} 
+                      transition={{ repeat: Infinity, duration: 4, times: [0, 0.95, 1] }}
+                      className="w-8 h-10 bg-primary rounded-full border-4 border-white shadow-lg relative overflow-hidden"
+                    >
+                      <div className="absolute top-1 left-1 w-3 h-3 bg-white rounded-full" />
+                    </motion.div>
+                  </div>
+                  <div className="w-full h-2 bg-primary/20 rounded-full blur-sm mt-4" />
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-sun/20 to-transparent pointer-events-none" />
+              </div>
             </motion.div>
           </div>
-          <p className="text-muted-foreground text-lg mb-8 font-bold">O ovo do conhecimento está pronto para chocar!</p>
-          <KidButton size="xl" onClick={() => setStep(2)} className="px-16">
-            CUIDAR DO OVO
+
+          <p className="text-muted-foreground text-lg mb-8 font-bold max-w-md mx-auto italic">
+            "Posso ouvir o Pip lá dentro! Ele está aprendendo muito e logo estará pronto para te conhecer."
+          </p>
+          <KidButton size="xl" onClick={() => setStep(2)} className="px-16 text-2xl py-8">
+            CUIDAR DO OVO ✨
           </KidButton>
         </motion.div>
       )}
