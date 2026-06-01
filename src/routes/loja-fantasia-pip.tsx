@@ -72,18 +72,21 @@ function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
 
-  const handleSelectSkin = (category: Hiperfoco, imageUrl: string) => {
+  const handleSelectSkin = (skin: any) => {
     if (!activeChild) return;
     
-    // Salvando a skin específica nos flags do perfil para troca automática
+    // Salvando a skin específica e suas propriedades visuais nos flags
     const updatedFlags = {
       ...(activeChild.flags || {}),
-      active_skin_url: imageUrl
+      active_skin_url: skin.image,
+      active_skin_color: skin.color,
+      active_skin_secondary: skin.secondary,
+      active_skin_logo: skin.logo
     };
 
     updateChild(activeChild.id, {
       flags: updatedFlags as any,
-      hyperfocus_list: [category, ...(activeChild.hyperfocus_list || []).filter(h => h !== category)].slice(0, 5)
+      hyperfocus_list: [skin.category, ...(activeChild.hyperfocus_list || []).filter(h => h !== skin.category)].slice(0, 5)
     });
     
     toast.success("Fantasia Trocada!", {
