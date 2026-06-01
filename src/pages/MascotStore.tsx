@@ -38,13 +38,6 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
   { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
   { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
-  { id: 'rex', name: 'Rex', description: 'O T-Rex explorador com um sorriso gigante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4' },
-  { id: 'tina', name: 'Tina', description: 'Triceratops gentil com cores vivas e muita calma.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf' },
-  { id: 'astro', name: 'Astro', description: 'Robô astronauta expressivo e muito amigável.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Astro&backgroundColor=c0aede' },
-  { id: 'nova', name: 'Nova', description: 'Cadelinha espacial pronta para guiar aventuras.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Nova&backgroundColor=d1d4f9' },
-  { id: 'luna', name: 'Luna', description: 'Gata unicórnio mágica com chifre brilhante.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Luna&backgroundColor=ffd5dc' },
-  { id: 'mia', name: 'Mia', description: 'Gatinha delicada com olhos enormes e encantadores.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Mia&backgroundColor=ffdfbf' },
-  { id: 'turbo', name: 'Turbo', description: 'Carrinho de corrida veloz com cores vibrantes.', category: 'premium', image_url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Turbo&backgroundColor=b6e3f4' },
 ];
 
 const MascotStorePage: React.FC = () => {
