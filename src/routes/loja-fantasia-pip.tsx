@@ -37,16 +37,20 @@ const GENERAL_VARIANTS = [
 CATEGORIES.forEach(cat => {
   const variants = cat.id === 'super-herois' ? HERO_VARIANTS : GENERAL_VARIANTS;
   
-  GENERATED_SKINS[cat.id] = variants.map((variant, i) => ({
-    id: `skin-${cat.id}-${i + 1}`,
-    name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
-    category: cat.id as Hiperfoco,
-    price: 150 + (i * 50),
-    image: PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'],
-    description: cat.id === 'super-herois' 
-      ? `Pip com os superpoderes do ${variant}!` 
-      : `Um visual único de ${cat.name} no estilo ${variant}!`,
-  }));
+  GENERATED_SKINS[cat.id] = variants.map((variant, i) => {
+    const seed = `${cat.id}-${variant.toLowerCase().replace(/\s+/g, '-')}`;
+    return {
+      id: `skin-${cat.id}-${i + 1}`,
+      name: cat.id === 'super-herois' ? `Pip ${variant}` : `Pip ${cat.name} ${variant}`,
+      category: cat.id as Hiperfoco,
+      price: 150 + (i * 50),
+      // Usando Dicebear para garantir que cada fantasia seja visualmente única
+      image: `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${seed}&backgroundColor=b6e3f4`,
+      description: cat.id === 'super-herois' 
+        ? `Pip com os superpoderes do ${variant}!` 
+        : `Um visual único de ${cat.name} no estilo ${variant}!`,
+    };
+  });
 });
 
 function LojaFantasiaPipPage() {
