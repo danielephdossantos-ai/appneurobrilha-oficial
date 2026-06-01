@@ -53,17 +53,17 @@ function ColecaoPipPage() {
             className="inline-flex items-center gap-2 bg-sun/20 px-4 py-2 rounded-full text-primary font-black uppercase tracking-widest text-xs mb-4"
           >
             <Sparkles size={14} className="text-sun" />
-            Coleção Pip Oficial
+            Coleção NeuroBrilha Kids
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-black text-primary mb-3"
           >
-            Minhas Fantasias
+            Nossos Amiguinhos
           </motion.h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Confira todas as variações do seu amigo Pip! Ative os hiperfocos no painel para usá-las.
+            Conheça todos os personagens da nossa turma! Do Pip e suas fantasias aos novos companheiros de aventura.
           </p>
         </header>
 
