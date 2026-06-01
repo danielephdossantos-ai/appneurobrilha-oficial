@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from '@tanstack/react-router';
 import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { Shell } from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +16,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'favorites'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'favorites' | 'pip-collection'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const MascotStorePage: React.FC = () => {
     if (activeTab === 'all') return true;
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (activeTab === 'favorites') return mascot.category === 'premium' || mascot.name === 'Pip';
+    if (activeTab === 'pip-collection') return mascot.name === 'Pip';
     
     return true;
   });
@@ -115,6 +117,12 @@ const MascotStorePage: React.FC = () => {
             label="Favoritos" 
             icon={<Heart size={16} />}
           />
+          <TabButton 
+            active={activeTab === 'pip-collection'} 
+            onClick={() => setActiveTab('pip-collection')} 
+            label="Coleção Pip" 
+            icon={<Sparkles size={16} className="text-sun" />}
+          />
         </div>
       </div>
 
@@ -133,6 +141,7 @@ const MascotStorePage: React.FC = () => {
                 mascot={mascot} 
                 isOwned={ownedMascotIds.includes(mascot.id)}
                 index={index}
+                showCollectionButton={activeTab === 'pip-collection'}
               />
             ))}
           </AnimatePresence>
@@ -140,10 +149,10 @@ const MascotStorePage: React.FC = () => {
       )}
 
       {filteredMascots.length === 0 && !isLoading && (
-        <div className="text-center py-20">
+        <div className="text-center py-20 bg-white/50 rounded-[3rem] border-4 border-dashed border-primary/10">
           <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-black text-primary">Nenhum mascote encontrado</h3>
-          <p className="text-muted-foreground">Tente buscar por outro nome ou mudar o filtro.</p>
+          <h3 className="text-2xl font-black text-primary uppercase">Nenhum mascote encontrado</h3>
+          <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
         </div>
       )}
     </div>
@@ -165,7 +174,7 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
   </button>
 );
 
-const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: boolean, index: number }) => {
+const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
   const isPip = mascot.name === 'Pip';
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
@@ -228,9 +237,18 @@ const MascotStoreCard = ({ mascot, isOwned, index }: { mascot: Mascot, isOwned: 
 
           <div className="mt-auto space-y-3">
             {isOwned ? (
-              <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                <Star size={16} fill="currentColor" />
-                Já na Coleção
+              <div className="flex flex-col gap-2">
+                <div className="w-full py-3 rounded-2xl bg-success/10 border-2 border-success/20 text-success text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+                  <Star size={16} fill="currentColor" />
+                  Já na Coleção
+                </div>
+                {isPip && (
+                  <Link to="/colecao-pip" className="w-full">
+                    <KidButton variant="secondary" className="w-full py-4 text-xs">
+                      Ver Fantasias do Pip
+                    </KidButton>
+                  </Link>
+                )}
               </div>
             ) : (
               <KidButton 
