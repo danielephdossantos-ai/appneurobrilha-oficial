@@ -42,7 +42,9 @@ const MascotStorePage: React.FC = () => {
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
-  const filteredMascots = allMascots;
+  const filteredMascots = allMascots.filter(mascot => {
+    return mascot.name === 'Pip';
+  });
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -134,10 +136,9 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
 );
 
 const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
-  const isPip = mascot.name === 'Pip' || mascot.name.startsWith('Pip ');
-  const isCustom = false;
-  const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Coleção Pip';
-  const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-sun';
+  const isPip = mascot.name === 'Pip';
+  const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
+  const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
 
   return (
     <motion.div
@@ -157,11 +158,8 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
 
           <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
-              <img 
-                src={mascot.image_url || pipMascot} 
-                alt={mascot.name} 
-                className="w-full h-full object-contain drop-shadow-xl animate-bounce-gentle" 
-              />
+              <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
+
             ) : mascot.image_url ? (
               <img src={mascot.image_url} alt={mascot.name} className="w-full h-full object-contain drop-shadow-xl" />
             ) : (
@@ -205,11 +203,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                   <Star size={16} fill="currentColor" />
                   Já na Coleção
                 </div>
-                <Link to="/colecao-pip" className="w-full">
-                  <KidButton variant="secondary" className="w-full py-4 text-xs">
-                    Ver Coleção Pip
-                  </KidButton>
-                </Link>
+                {isPip && (
+                  <Link to="/colecao-pip" className="w-full">
+                    <KidButton variant="secondary" className="w-full py-4 text-xs">
+                      Ver Fantasias do Pip
+                    </KidButton>
+                  </Link>
+                )}
               </div>
             ) : (
               <KidButton 
