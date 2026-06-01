@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode, useState, useEffect } from "react";
-import { AlertCircle, Palette, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart } from "lucide-react";
+import { AlertCircle, Play, Sparkles as SparklesIcon, CheckCircle2, XCircle, Brain, Target, Star, ArrowLeft, Heart } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useMascot } from "@/contexts/MascotContext";
@@ -89,7 +89,7 @@ const grupos = [
 ];
 
 function Treino() {
-  const { activeChild, addCoins } = useAppState();
+  const { activeChild, addCoins, coins } = useAppState();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAtividade, setSelectedAtividade] = useState<NeuroActivity | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -135,9 +135,15 @@ function Treino() {
     setIsAnswered(true);
 
     if (correct) {
-      toast.success("Parabéns!", { description: "Você acertou o som!" });
+      toast.success("Parabéns!", { 
+        description: "Você acertou! Ganhou +15 Pontos!",
+        icon: <CheckCircle2 className="text-emerald-500" />
+      });
     } else {
-      toast.error("Ops!", { description: "Tente ouvir o som novamente com o Pip." });
+      toast.error("Quase!", { 
+        description: "Tente ouvir o som novamente com o Pip.",
+        icon: <XCircle className="text-rose-500" />
+      });
     }
   };
 
@@ -161,9 +167,17 @@ function Treino() {
 
   return (
     <Shell>
-      <PageHeader emoji="🧠" title="Neuro-Treino" subtitle="Reforço terapêutico que sustenta o aprendizado escolar" />
+      <div className="flex justify-between items-center bg-white px-6 py-4 rounded-2xl shadow-sm border-2 border-slate-100 mb-8 max-w-4xl mx-auto">
+        <div className="flex items-center gap-2">
+          <Brain className="w-8 h-8 text-indigo-500 animate-pulse" />
+          <span className="text-2xl font-black text-indigo-900 tracking-wide uppercase">NeuroTreino</span>
+        </div>
+        <div className="bg-amber-400 text-amber-950 font-black px-6 py-2 rounded-full border-b-4 border-amber-600 flex items-center gap-2 shadow-md">
+          ⭐ {coins} BRILHOCOINS
+        </div>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-3">
           <div className="space-y-6">
             {!selectedCategory ? (
