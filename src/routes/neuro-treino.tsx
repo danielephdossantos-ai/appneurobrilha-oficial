@@ -632,22 +632,126 @@ function Treino() {
                         </div>
                       )}
 
-                      {/* MÓDULO CORINGA DE TRANSIÇÃO TERAPÊUTICA (Para as demais atividades) */}
-                      {!['motor-1', 'sons-2', 'at-1'].includes(atividadeAtual.id) && (
-                        <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 max-w-md mx-auto w-full">
-                          <div className="text-5xl mb-4">🩺</div>
-                          <h4 className="text-lg font-black text-slate-700 mb-1">Protocolo Clínico Pronto</h4>
-                          <p className="text-xs font-bold text-slate-400 max-w-xs mx-auto mb-6">
-                            Este card renderiza a interface especializada do exercício: <span className="text-indigo-600">"{atividadeAtual.title}"</span>.
-                          </p>
+                      {/* JOGO 3: MEMÓRIA DE ELEFANTE - Roda variações */}
+                      {catAtiva === 'memoria' && variacaoAtual && (
+                        <div className="text-center flex-1 flex flex-col justify-center items-center">
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Memória de Trabalho</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Memorize a ordem e toque no que foi pedido!</p>
+                          <div className="grid grid-cols-3 gap-4 w-full max-w-md">
+                            {variacaoAtual.elementos.map((item: string, index: number) => (
+                              <button
+                                key={index}
+                                onClick={() => {
+                                  if (item === variacaoAtual.correto) {
+                                    handleAnswer(item);
+                                    triggerFeedback('Memória excelente! Você guardou tudo direitinho! 🧠✨');
+                                  } else {
+                                    triggerFeedback('Tente lembrar... qual era a ordem? 🧐');
+                                  }
+                                }}
+                                className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-purple-400 rounded-2xl flex items-center justify-center text-5xl shadow-sm transition-all transform hover:scale-105 active:scale-95"
+                              >
+                                {item}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* JOGO 4: MOTORZINHO DOS SONS - Roda variações */}
+                      {catAtiva === 'motorzinho' && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="flex justify-center mb-2 text-indigo-600"><Mic className="w-8 h-8 animate-pulse" /></div>
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Controle de Sopro Fonoaudiológico</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-6">Objetivo: Exercitar musculatura orbicular e controle de ar expiratório.</p>
+
+                          <div className="bg-slate-50 border-2 border-dashed rounded-3xl p-8 mb-6 flex flex-col items-center justify-center relative min-h-[200px] w-full">
+                            {assoprou ? (
+                              <div className="animate-bounce">
+                                <span className="text-6xl block">🎂</span>
+                                <span className="text-sm font-black text-emerald-600 uppercase block mt-2">Vela Apagada com Sucesso!</span>
+                              </div>
+                            ) : (
+                              <div>
+                                <span className="text-6xl block animate-pulse">🕯️</span>
+                                <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 inline-block mt-3">Aguardando som estável...</span>
+                              </div>
+                            )}
+                            
+                            <div className="w-full bg-slate-200 h-4 rounded-full mt-6 overflow-hidden border border-slate-300">
+                              <div className="bg-gradient-to-r from-sky-400 to-indigo-600 h-full transition-all duration-300" style={{ width: `${nivelAcao}%` }} />
+                            </div>
+                          </div>
+
                           <button
-                            onClick={() => handleAnswer(atividadeAtual.content.target)}
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-6 py-3 rounded-xl text-xs shadow-md transition-all active:scale-95"
+                            onMouseDown={handleAcaoInterativa}
+                            onMouseUp={() => setInteragindo(false)}
+                            onTouchStart={handleAcaoInterativa}
+                            onTouchEnd={() => setInteragindo(false)}
+                            className="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-6 py-3.5 rounded-xl text-sm w-full shadow-md transition-all active:scale-95"
                           >
-                            Concluir Exercício da Sessão
+                            {assoprou ? 'Treinar Novamente' : 'Simular Captura de Microfone (Sopro)'}
                           </button>
                         </div>
                       )}
+
+                      {/* JOGO 5: RIMAS DIVERTIDAS - Roda variações */}
+                      {catAtiva === 'rimas' && variacaoAtual && (
+                        <div className="text-center flex-1 flex flex-col justify-center items-center">
+                          <div className="bg-pink-100 text-pink-600 rounded-3xl px-8 py-4 mb-6 shadow-sm border-2 border-pink-200">
+                            <span className="text-4xl font-black uppercase tracking-widest">{variacaoAtual.palavra}</span>
+                          </div>
+                          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">O que rima com {variacaoAtual.palavra}?</p>
+                          <div className="grid grid-cols-3 gap-4 w-full max-w-md">
+                            {variacaoAtual.opcoes.map((opcao: string, index: number) => (
+                              <button
+                                key={index}
+                                onClick={() => {
+                                  if (opcao === variacaoAtual.correto) {
+                                    handleAnswer(opcao);
+                                    triggerFeedback('Rima perfeita! Você é um poeta! 🎶✨');
+                                  } else {
+                                    triggerFeedback('Ouça o finalzinho da palavra... rima com... 👂');
+                                  }
+                                }}
+                                className="aspect-square bg-slate-50 border-4 border-slate-200 hover:border-pink-400 rounded-2xl flex items-center justify-center text-3xl font-bold text-slate-700 shadow-sm transition-all transform hover:scale-105 active:scale-95"
+                              >
+                                {opcao}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* JOGO 6: REGULAÇÃO EMOCIONAL - Roda variações */}
+                      {catAtiva === 'regulacao' && (
+                        <div className="text-center max-w-md mx-auto py-4">
+                          <div className="flex justify-center mb-2 text-rose-500"><Smile className="w-12 h-12" /></div>
+                          <h3 className="text-xl font-black text-slate-800 mb-1">Âncora da Calma</h3>
+                          <p className="text-xs font-bold text-slate-400 mb-8">Respire fundo com o Pip para encontrar sua paz interior.</p>
+                          
+                          <div className="flex justify-center mb-10">
+                            <motion.div 
+                              animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+                              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                              className="w-40 h-40 bg-rose-100 rounded-full flex items-center justify-center border-4 border-rose-200 shadow-lg relative"
+                            >
+                              <div className="w-24 h-24 bg-rose-400 rounded-full opacity-20 absolute" />
+                              <span className="text-6xl z-10">🧘</span>
+                            </motion.div>
+                          </div>
+
+                          <button
+                            onClick={() => handleAnswer('calma')}
+                            className="bg-rose-500 hover:bg-rose-600 text-white font-black px-8 py-4 rounded-2xl text-sm w-full shadow-md transition-all active:scale-95"
+                          >
+                            Encontrei minha Calma ✨
+                          </button>
+                        </div>
+                      )}
+
+                      {/* MÓDULO CORINGA REMOVIDO / SUBSTITUÍDO PELOS FLUXOS ACIMA */}
+
                     </div>
 
                     {isAnswered && (
