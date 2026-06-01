@@ -57,11 +57,17 @@ function LojaFantasiaPipPage() {
   const { activeChild, updateChild } = useAppState();
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[3].id); // Começa na categoria de heróis (index 3)
 
-  const handleSelectSkin = (category: Hiperfoco) => {
+  const handleSelectSkin = (category: Hiperfoco, imageUrl: string) => {
     if (!activeChild) return;
     
-    // Troca automática de hiperfoco para mudar a skin visual no app
+    // Salvando a skin específica nos flags do perfil para troca automática
+    const updatedFlags = {
+      ...(activeChild.flags || {}),
+      active_skin_url: imageUrl
+    };
+
     updateChild(activeChild.id, {
+      flags: updatedFlags as any,
       hyperfocus_list: [category, ...(activeChild.hyperfocus_list || []).filter(h => h !== category)].slice(0, 5)
     });
     
