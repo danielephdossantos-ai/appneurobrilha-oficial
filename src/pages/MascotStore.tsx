@@ -25,7 +25,11 @@ import { cn } from '@/utils/utils';
 
 
 const ADDITIONAL_CHARACTERS = [
-  { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-t-rex', name: 'Pip T-Rex', description: 'O rei dos dinossauros em uma versão super fofa e divertida!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-triceratops', name: 'Pip Triceratops', description: 'Três chifres e muita coragem para explorar o mundo jurássico.', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-pterodactilo', name: 'Pip Pterodáctilo', description: 'Voando alto sobre os vulcões com o Pip voador!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-braquiossauro', name: 'Pip Braquiossauro', description: 'Pescoço longo para alcançar as folhas mais altas do aprendizado.', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-dino-estegossauro', name: 'Pip Estegossauro', description: 'Com suas placas coloridas, o Pip está pronto para a aventura!', category: 'premium', image_url: pipDinossauros },
   { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: pipEspaco },
   { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: pipArte },
   { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: pipAnimais },
