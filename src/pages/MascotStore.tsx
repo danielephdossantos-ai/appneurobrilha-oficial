@@ -44,31 +44,25 @@ const MascotStorePage: React.FC = () => {
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
   const filteredMascots = allMascots.filter(mascot => {
-    // Normalização para comparação robusta
-    const category = mascot.category?.toLowerCase();
+    const category = mascot.category?.trim().toLowerCase();
     const tab = activeTab.toLowerCase();
     
-    const matchesSearch = searchQuery === '' || 
+    // Filtro de busca
+    const matchesSearch = !searchQuery || 
                          mascot.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          mascot.description.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (!matchesSearch) return false;
 
+    // Lógica das Abas
     if (tab === 'all') return true;
     if (tab === 'locked') return !ownedMascotIds.includes(mascot.id);
     if (tab === 'owned') return ownedMascotIds.includes(mascot.id);
     if (tab === 'pip-collection') return mascot.name === 'Pip' || category === 'primary';
     
-    // Filtro por categorias específicas
-    const validCategories = ['dinossauros', 'espaco', 'fantasia', 'veiculos', 'animais'];
-    if (validCategories.includes(tab)) {
-      return category === tab;
-    }
-    
-    return true;
+    // Categorias dinâmicas
+    return category === tab;
   });
-
-  console.log(`Tab: ${activeTab}, Count: ${filteredMascots.length}`);
 
   const unlockedPipSkins = new Set<string>([
     'original',
