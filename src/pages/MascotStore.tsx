@@ -14,6 +14,7 @@ import { useAppState } from '@/core/store';
 
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
+  const { activeChild } = useAppState();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'owned' | 'pip-collection'>('all');
@@ -50,10 +51,33 @@ const MascotStorePage: React.FC = () => {
 
     if (activeTab === 'all') return true;
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'favorites') return mascot.category === 'premium' || mascot.name === 'Pip';
+    if (activeTab === 'owned') return ownedMascotIds.includes(mascot.id);
+    if (activeTab === 'pip-collection') return mascot.name === 'Pip';
     
     return true;
   });
+
+  const unlockedPipSkins = new Set<string>([
+    'original',
+    ...((activeChild?.hyperfocus_list as string[]) || []),
+  ]);
+
+  const pipSkinsList = [
+    { key: 'original', name: 'Pip Clássico', title: 'O Guardião dos Desafios', image: pipMascot, description: 'A forma original do Pip, sempre pronto pra aventura.' },
+    { key: 'dinossauros', name: 'Pip Explorador', title: 'Dinossauros', image: PIP_SKINS.dinossauros, description: 'Vamos rugir e descobrir o mundo jurássico!' },
+    { key: 'espaco', name: 'Pip Astronauta', title: 'Espaço', image: PIP_SKINS.espaco, description: 'Pronto para decolar até as estrelas!' },
+    { key: 'arte', name: 'Pip Artista', title: 'Arte', image: PIP_SKINS.arte, description: 'Pincel na mão e muita cor pra criar.' },
+    { key: 'animais', name: 'Pip Veterinário', title: 'Animais', image: PIP_SKINS.animais, description: 'Cuidando dos amiguinhos com muito carinho.' },
+    { key: 'musica', name: 'Pip Maestro', title: 'Música', image: PIP_SKINS.musica, description: 'Vamos reger uma sinfonia de aprendizado!' },
+    { key: 'fazendinha', name: 'Pip Fazendeiro', title: 'Fazendinha', image: PIP_SKINS.fazendinha, description: 'Plantando aprendizado e colhendo conquistas.' },
+    { key: 'super-herois', name: 'Pip Super', title: 'Super-Heróis', image: PIP_SKINS['super-herois'], description: 'Salvando o dia com o poder do estudo!' },
+    { key: 'princesas', name: 'Pip Realeza', title: 'Princesas', image: PIP_SKINS.princesas, description: 'Coroado de gentileza e sabedoria.' },
+    { key: 'minecraft', name: 'Pip Builder', title: 'Minecraft', image: PIP_SKINS.minecraft, description: 'Construindo aventuras bloco a bloco.' },
+    { key: 'carros', name: 'Pip Piloto', title: 'Carros', image: PIP_SKINS.carros, description: 'Acelerando rumo a novas conquistas.' },
+    { key: 'trens', name: 'Pip Maquinista', title: 'Trens', image: PIP_SKINS.trens, description: 'Tchu-tchuuu! Bora pra próxima estação.' },
+    { key: 'robos', name: 'Pip Robô', title: 'Robôs', image: PIP_SKINS.robos, description: 'Tecnologia e curiosidade juntos.' },
+    { key: 'veiculos', name: 'Pip Aventureiro', title: 'Veículos', image: PIP_SKINS.veiculos, description: 'Mapa, binóculos e muita exploração.' },
+  ];
 
   return (
     <div className="container mx-auto py-8 px-4">
