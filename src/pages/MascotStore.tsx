@@ -202,13 +202,11 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                   <Star size={16} fill="currentColor" />
                   Já na Coleção
                 </div>
-                {isPip && (
-                  <Link to="/colecao-pip" className="w-full">
-                    <KidButton variant="secondary" className="w-full py-4 text-xs">
-                      Ver Fantasias do Pip
-                    </KidButton>
-                  </Link>
-                )}
+                <Link to="/colecao-pip" className="w-full">
+                  <KidButton variant="secondary" className="w-full py-4 text-xs">
+                    Ver Coleção Pip
+                  </KidButton>
+                </Link>
               </div>
             ) : (
               <KidButton 
