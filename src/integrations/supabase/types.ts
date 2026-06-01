@@ -1297,6 +1297,45 @@ export type Database = {
           },
         ]
       }
+      mascot_catalog_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          required_coins: number | null
+          required_level: number | null
+          stats_bonus: Json | null
+          type: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          required_coins?: number | null
+          required_level?: number | null
+          stats_bonus?: Json | null
+          type: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          required_coins?: number | null
+          required_level?: number | null
+          stats_bonus?: Json | null
+          type?: string
+        }
+        Relationships: []
+      }
       mascot_states: {
         Row: {
           affinity_points: number | null
@@ -1982,34 +2021,49 @@ export type Database = {
         Row: {
           affinity: number
           created_at: string
+          evolution_stage: string | null
           experience: number
+          gender: string | null
           id: string
+          inventory: Json | null
           is_active: boolean
           level: number
           mascot_id: string
           metadata: Json | null
+          room_metadata: Json | null
+          stats: Json | null
           user_id: string
         }
         Insert: {
           affinity?: number
           created_at?: string
+          evolution_stage?: string | null
           experience?: number
+          gender?: string | null
           id?: string
+          inventory?: Json | null
           is_active?: boolean
           level?: number
           mascot_id: string
           metadata?: Json | null
+          room_metadata?: Json | null
+          stats?: Json | null
           user_id: string
         }
         Update: {
           affinity?: number
           created_at?: string
+          evolution_stage?: string | null
           experience?: number
+          gender?: string | null
           id?: string
+          inventory?: Json | null
           is_active?: boolean
           level?: number
           mascot_id?: string
           metadata?: Json | null
+          room_metadata?: Json | null
+          stats?: Json | null
           user_id?: string
         }
         Relationships: [
