@@ -142,7 +142,7 @@ function LojaFantasiaPipPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {GENERATED_SKINS[selectedCategory].map((skin, index) => {
-              const isCurrent = (activeChild?.flags as any)?.active_skin_url === skin.image;
+              const isCurrent = (activeChild?.flags as any)?.active_skin_logo === skin.logo && (activeChild?.flags as any)?.active_skin_color === skin.color;
               
               return (
                 <motion.div
