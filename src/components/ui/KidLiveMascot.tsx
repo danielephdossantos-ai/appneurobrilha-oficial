@@ -80,22 +80,13 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
     '2xl': 'w-[450px] h-[450px]', // Aumentado significativamente
   };
 
-  const getEmotionStyles = () => {
-    return '';
-  };
 
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${emotion}-${mascotImage}`}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
+        <div
           className={cn(
             "relative flex items-center justify-center overflow-visible",
-            sizes[size],
-            getEmotionStyles()
+            sizes[size]
           )}
         >
           {/* Expressões faciais via filtros ou sobreposições se necessário */}
