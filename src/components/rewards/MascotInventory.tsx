@@ -1,5 +1,6 @@
 import React from 'react';
 import { useMascot, UserMascot } from '@/contexts/MascotContext';
+import { Link } from '@tanstack/react-router';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
 import { motion } from 'framer-motion';
@@ -78,14 +79,23 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
           <Stat icon={<Zap className="w-3 h-3 text-blue-500" />} label="EXP" value={userMascot.experience} />
         </div>
 
-        {!isActive && (
-          <KidButton 
-            onClick={onSelect}
-            className="w-full mt-2"
-          >
-            Escolher {mascot.name}
-          </KidButton>
-        )}
+        <div className="w-full space-y-2 mt-2">
+          {!isActive && (
+            <KidButton 
+              onClick={onSelect}
+              className="w-full"
+            >
+              Escolher {mascot.name}
+            </KidButton>
+          )}
+          {mascot.name === 'Pip' && (
+            <Link to="/loja-fantasia-pip" className="block w-full">
+              <KidButton variant={isActive ? "primary" : "secondary"} className="w-full py-4 text-xs">
+                Loja de Fantasias 👗
+              </KidButton>
+            </Link>
+          )}
+        </div>
       </div>
     </KidCard>
   );

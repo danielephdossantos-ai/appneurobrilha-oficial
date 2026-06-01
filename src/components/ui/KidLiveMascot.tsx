@@ -26,12 +26,14 @@ export const PIP_SKINS: Record<string, string> = {
   musica: pipMusica,
   fazendinha: pipFazendinha,
   'super-herois': pipSuperHerois,
+  'super-heroinas': pipPrincesas, // Usando princesas como base para heroinas por enquanto
   princesas: pipPrincesas,
   minecraft: pipMinecraft,
   carros: pipCarros,
   trens: pipTrens,
   robos: pipRobos,
   veiculos: pipVeiculos,
+  monstros: pipDinossauros, // Usando dinos como base para monstros
 };
 
 
