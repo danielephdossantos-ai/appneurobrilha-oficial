@@ -79,23 +79,23 @@ const MascotCard: React.FC<MascotCardProps> = ({ userMascot, isActive, onSelect 
           <Stat icon={<Zap className="w-3 h-3 text-blue-500" />} label="EXP" value={userMascot.experience} />
         </div>
 
-        {!isActive && (
-          <div className="w-full space-y-2 mt-2">
+        <div className="w-full space-y-2 mt-2">
+          {!isActive && (
             <KidButton 
               onClick={onSelect}
               className="w-full"
             >
               Escolher {mascot.name}
             </KidButton>
-            {mascot.name === 'Pip' && (
-              <Link to="/loja-fantasia-pip" className="block w-full">
-                <KidButton variant="secondary" className="w-full py-4 text-xs">
-                  Loja de Fantasias 👗
-                </KidButton>
-              </Link>
-            )}
-          </div>
-        )}
+          )}
+          {mascot.name === 'Pip' && (
+            <Link to="/loja-fantasia-pip" className="block w-full">
+              <KidButton variant={isActive ? "primary" : "secondary"} className="w-full py-4 text-xs">
+                Loja de Fantasias 👗
+              </KidButton>
+            </Link>
+          )}
+        </div>
       </div>
     </KidCard>
   );
