@@ -123,7 +123,10 @@ function Treino() {
               <div className="h-32 w-32 rounded-full bg-success/30 animate-pulse" style={{ animationDuration: "4s" }} />
               <p className="mt-6 text-center text-lg font-bold text-success/80">Inspira… segura… expira… 🌸</p>
               <div className="mt-8 flex gap-4">
-                <button className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm">
+                <button 
+                  onClick={handleConcluir}
+                  className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm"
+                >
                   Concluir Missão
                 </button>
               </div>
