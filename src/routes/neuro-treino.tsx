@@ -778,10 +778,10 @@ function Treino() {
                  Você está em um ambiente controlado e seguro. O Pip está monitorando o progresso para o relatório terapêutico.
                </p>
                <div className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/20">
-                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🦊</div>
+                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">🐶</div>
                  <div>
                    <span className="text-[10px] font-black uppercase tracking-widest block opacity-70">Acompanhamento</span>
-                   <span className="text-sm font-black">Pip Fox Ativo</span>
+                   <span className="text-sm font-black">Pip Inteligente Ativo</span>
                  </div>
                </div>
             </div>
