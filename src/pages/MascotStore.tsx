@@ -134,8 +134,8 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
 );
 
 const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
-  const isPip = mascot.name === 'Pip';
-  const isCustom = !['Pip'].includes(mascot.name);
+  const isPip = mascot.name === 'Pip' || mascot.name.startsWith('Pip ');
+  const isCustom = false;
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Coleção Pip';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-sun';
 
