@@ -90,39 +90,36 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
   return (
     <div className={cn("flex flex-col items-center gap-6", className)}>
-      <AnimatePresence mode="wait">
-        <div
-          key={`${emotion}-${mascotImage}`}
-          className={cn(
-            "relative flex items-center justify-center overflow-visible",
-            sizes[size],
-            getEmotionStyles()
-          )}
-        >
-          {/* Expressões faciais via filtros ou sobreposições se necessário */}
-          {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
-          
-          {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
-          {isPip && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-              <div className="relative w-1/5 h-1/5 translate-y-4">
-                <Puzzle 
-                  className="w-full h-full text-sun fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
-                  strokeWidth={3}
-                />
-              </div>
+      <div
+        key={`${emotion}-${mascotImage}`}
+        className={cn(
+          "relative flex items-center justify-center overflow-visible",
+          sizes[size],
+          getEmotionStyles()
+        )}
+      >
+        {/* Expressões faciais via filtros ou sobreposições se necessário */}
+        {/* Para um visual Disney/Pixar premium, focamos no drop-shadow e no glow do puzzle */}
+        
+        {/* Símbolo de Quebra-cabeça Luminoso no Peito (apenas para o Pip) */}
+        {isPip && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+            <div className="relative w-1/5 h-1/5 translate-y-4">
+              <Puzzle 
+                className="w-full h-full text-sun fill-sun/40 drop-shadow-[0_0_15px_oklch(var(--sun))]" 
+                strokeWidth={3}
+              />
             </div>
-          )}
+          </div>
+        )}
 
-
-          <img
-            src={mascotImage}
-            alt="Pip - O Guardião dos Desafios"
-            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
-            draggable={false}
-          />
-        </div>
-      </AnimatePresence>
+        <img
+          src={mascotImage}
+          alt="Pip - O Guardião dos Desafios"
+          className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
+          draggable={false}
+        />
+      </div>
       
       {message && (
         <div className="bg-white px-8 py-5 rounded-[2rem] border-4 border-primary/30 shadow-kid relative max-w-sm">
