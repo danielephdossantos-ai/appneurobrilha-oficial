@@ -284,13 +284,13 @@ const GenderOption = ({ selected, onClick, label, emoji }: { selected: boolean, 
   </button>
 );
 
-const ToyCatalog = () => (
+export const ToyCatalog = () => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
     <CatalogSection title="Brinquedos do Pip" type="toy" icon="🎮" />
   </motion.div>
 );
 
-const ClosetCatalog = () => (
+export const ClosetCatalog = () => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
     <CatalogSection title="Guarda-Roupa Mágico" type="costume" icon="👕" />
   </motion.div>
