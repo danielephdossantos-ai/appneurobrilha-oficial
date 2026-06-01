@@ -200,6 +200,20 @@ function Treino() {
     setInteragindo(false);
     setAssoprou(false);
     setTracadoPassos([]);
+
+    // Lógica para carregar variação aleatória do banco premium
+    if (catAtiva && BANCO_DE_DADOS_CLINICO[catAtiva]) {
+      const variações = BANCO_DE_DADOS_CLINICO[catAtiva];
+      const randomVar = variações[Math.floor(Math.random() * variações.length)];
+      setVariacaoAtual(randomVar);
+      
+      // Mudar orientação por voz
+      if (activityId === 'at-1') {
+        terapeutaFalar(randomVar.dicaAudio);
+      } else if (catAtiva === 'sons_iniciais') {
+        terapeutaFalar(randomVar.somExplicacao);
+      }
+    }
   };
 
   const handleAcaoInterativa = () => {
