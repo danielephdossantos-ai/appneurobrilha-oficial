@@ -22,7 +22,7 @@ import { supabase } from '@/database/supabase/client';
 import { useAuth } from '@/modules/auth/hooks/useAuth';
 
 export const PipVirtualPet: React.FC = () => {
-  const { activeMascot, gainExperience, gainAffinity, isLoading } = useMascot();
+  const { activeMascot, gainExperience, gainAffinity, isLoading, updateStats } = useMascot();
   const [activeTab, setActiveTab] = useState<'status' | 'room' | 'closet' | 'play'>('status');
   
   if (isLoading) return <div className="flex justify-center p-20"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>;
@@ -32,7 +32,7 @@ export const PipVirtualPet: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-white/40 backdrop-blur-md rounded-[3rem] p-8 border-4 border-white shadow-xl">
       {/* Top Stats Bar */}
       <div className="grid grid-cols-3 gap-4">
         <StatCard 
@@ -55,28 +55,41 @@ export const PipVirtualPet: React.FC = () => {
         />
       </div>
 
-      {/* Main Mascot View */}
-      <div className="relative aspect-square max-w-md mx-auto bg-gradient-to-b from-sky-200 to-white rounded-[3rem] border-8 border-white shadow-kid p-8 flex items-center justify-center overflow-hidden">
-        {/* Background Decorations (Room) */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400 rounded-full blur-2xl" />
-          <div className="absolute bottom-10 right-10 w-32 h-32 bg-primary rounded-full blur-3xl" />
+      {/* Main Mascot Room View */}
+      <div className="relative aspect-[16/10] w-full max-w-4xl mx-auto bg-gradient-to-b from-sky-300 via-sky-100 to-green-100 rounded-[4rem] border-8 border-white shadow-2xl p-8 flex items-end justify-center overflow-hidden">
+        {/* Room Floor */}
+        <div className="absolute bottom-0 inset-x-0 h-1/4 bg-green-200/50 skew-y-1" />
+        
+        {/* Wall Decorations */}
+        <div className="absolute top-12 left-12 w-24 h-24 bg-white/80 rounded-2xl flex items-center justify-center text-4xl shadow-inner border-2 border-primary/5">🖼️</div>
+        <div className="absolute top-16 right-20 w-32 h-40 bg-white/40 rounded-3xl border-4 border-white shadow-lg" />
+
+        {/* Window */}
+        <div className="absolute top-10 right-1/4 w-32 h-32 bg-sky-200 rounded-2xl border-4 border-white flex items-center justify-center overflow-hidden">
+           <div className="text-4xl animate-bounce-slow">☁️</div>
         </div>
 
-        <KidLiveMascot 
-          size="2xl" 
-          showBadge={false} 
-          emotion={activeMascot.stats.happiness < 30 ? 'thinking' : 'happy'} 
-        />
+        <motion.div 
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          className="relative z-10"
+        >
+          <KidLiveMascot 
+            size="2xl" 
+            showBadge={false} 
+            emotion={activeMascot.stats.happiness < 30 ? 'thinking' : 'happy'} 
+          />
+        </motion.div>
         
         {/* Level Badge */}
-        <div className="absolute top-6 right-6 bg-primary text-white font-black px-4 py-2 rounded-2xl shadow-lg border-2 border-white">
-          NÍVEL {activeMascot.level}
+        <div className="absolute top-6 left-6 bg-sun text-white font-black px-5 py-2 rounded-full shadow-lg border-2 border-white flex items-center gap-2">
+          <Star size={16} fill="white" />
+          LV {activeMascot.level}
         </div>
 
         {/* Name Tag */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur px-6 py-2 rounded-full shadow-xl border-2 border-primary/20">
-          <span className="font-black text-primary text-xl uppercase tracking-widest">
+        <div className="absolute top-6 right-6 bg-white/90 backdrop-blur px-8 py-3 rounded-full shadow-xl border-4 border-primary">
+          <span className="font-black text-primary text-2xl uppercase tracking-tighter">
             {activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'}
           </span>
         </div>
@@ -88,8 +101,9 @@ export const PipVirtualPet: React.FC = () => {
           icon={<Utensils />} 
           label="Alimentar" 
           onClick={() => {
-            gainAffinity(5);
-            toast.success("Humm! Pip adorou o lanche educativo.");
+            gainAffinity(2);
+            updateStats({ hunger: Math.min(100, activeMascot.stats.hunger + 10) });
+            toast.success(`Humm! ${activeMascot.gender === 'menina' ? 'Pipi' : 'Pip'} adorou o lanche educativo.`);
           }}
         />
         <InteractionButton 
@@ -110,11 +124,11 @@ export const PipVirtualPet: React.FC = () => {
       </div>
 
       {/* Content Area */}
-      <div className="mt-8">
+      <div className="mt-8 border-t-4 border-primary/5 pt-8">
         <AnimatePresence mode="wait">
-          {activeTab === 'play' && <ToyCatalog />}
-          {activeTab === 'closet' && <ClosetCatalog />}
-          {activeTab === 'room' && <RoomCustomizer />}
+          {activeTab === 'play' && <ToyCatalog key="toys" />}
+          {activeTab === 'closet' && <ClosetCatalog key="closet" />}
+          {activeTab === 'room' && <RoomCustomizer key="room" />}
         </AnimatePresence>
       </div>
     </div>
@@ -143,8 +157,8 @@ const InteractionButton = ({ icon, label, onClick }: { icon: React.ReactNode, la
     onClick={onClick}
     className="flex flex-col items-center gap-2 group"
   >
-    <div className="w-16 h-16 bg-white rounded-2xl shadow-kid border-2 border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-      {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 28, strokeWidth: 3 }) : icon}
+    <div className="w-20 h-20 bg-white rounded-3xl shadow-kid border-2 border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform hover:-translate-y-1">
+      {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 32, strokeWidth: 3 }) : icon}
     </div>
     <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary">{label}</span>
   </button>
@@ -161,9 +175,6 @@ const PipEggHatch: React.FC = () => {
     setIsHatching(true);
     
     try {
-      // First, find or create the Pip mascot in the database
-      // Using the UUID I seeded earlier: 792a7e4e-0c6a-4b9a-8e5f-1e9a3c4b5d6e
-      
       const { error } = await (supabase as any)
         .from('user_mascots')
         .insert([{
@@ -181,10 +192,9 @@ const PipEggHatch: React.FC = () => {
       if (error) throw error;
       
       toast.success("O Pip nasceu!", {
-        description: `Seja bem-vindo, novo companheiro ${gender}!`,
+        description: `Seja bem-vindo, novo companheiro ${gender === 'menina' ? 'Pipi' : 'Pip'}!`,
       });
       
-      // Force refresh of mascot data
       window.location.reload();
     } catch (error) {
       console.error('Error hatching egg:', error);
@@ -195,23 +205,25 @@ const PipEggHatch: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto text-center py-12">
+    <div className="max-w-2xl mx-auto text-center py-12 bg-white/50 rounded-[4rem] border-4 border-dashed border-primary/20 p-12 shadow-2xl">
       {step === 1 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <h2 className="text-4xl font-black text-primary mb-8 uppercase tracking-widest">Um novo amigo está chegando!</h2>
-          <div className="relative w-64 h-80 mx-auto mb-12">
+          <h2 className="text-4xl md:text-5xl font-black text-primary mb-8 uppercase tracking-tighter">Um novo amigo está chegando!</h2>
+          <div className="relative w-64 h-80 mx-auto mb-12 flex items-center justify-center">
+             <div className="absolute inset-0 bg-sun/20 blur-3xl rounded-full animate-pulse" />
             <motion.div 
               animate={{ 
                 rotate: [0, -5, 5, -5, 5, 0],
-                scale: [1, 1.05, 1, 1.05, 1]
+                y: [0, -20, 0]
               }}
               transition={{ repeat: Infinity, duration: 2 }}
-              className="text-[150px] leading-none"
+              className="text-[180px] leading-none relative z-10"
             >
               🥚
             </motion.div>
           </div>
-          <KidButton size="lg" onClick={() => setStep(2)} className="px-12 py-8 text-2xl">
+          <p className="text-muted-foreground text-lg mb-8 font-bold">O ovo do conhecimento está pronto para chocar!</p>
+          <KidButton size="xl" onClick={() => setStep(2)} className="px-16">
             CUIDAR DO OVO
           </KidButton>
         </motion.div>
@@ -219,8 +231,8 @@ const PipEggHatch: React.FC = () => {
 
       {step === 2 && (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-          <h2 className="text-3xl font-black text-primary mb-8">COMO SERÁ SEU COMPANHEIRO?</h2>
-          <div className="grid grid-cols-3 gap-6 mb-12">
+          <h2 className="text-3xl font-black text-primary mb-12 uppercase tracking-tight">COMO SERÁ SEU COMPANHEIRO?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <GenderOption 
               selected={gender === 'menino'} 
               onClick={() => setGender('menino')}
@@ -241,12 +253,12 @@ const PipEggHatch: React.FC = () => {
             />
           </div>
           <KidButton 
-            size="lg" 
+            size="xl" 
             onClick={handleHatch} 
             loading={isHatching}
-            className="px-12 py-8 text-2xl"
+            className="px-16"
           >
-            CHOCAR AGORA!
+            CHOCAR AGORA! 🐣
           </KidButton>
         </motion.div>
       )}
@@ -258,39 +270,39 @@ const GenderOption = ({ selected, onClick, label, emoji }: { selected: boolean, 
   <button 
     onClick={onClick}
     className={cn(
-      "p-6 rounded-3xl border-4 transition-all flex flex-col items-center gap-4",
-      selected ? "bg-primary text-white border-primary shadow-kid" : "bg-white text-muted-foreground border-primary/10 hover:border-primary/30"
+      "p-8 rounded-[2.5rem] border-4 transition-all flex flex-col items-center gap-4 transform active:scale-95",
+      selected ? "bg-primary text-white border-primary shadow-kid scale-105" : "bg-white text-muted-foreground border-primary/10 hover:border-primary/30"
     )}
   >
-    <span className="text-5xl">{emoji}</span>
-    <span className="font-black text-sm uppercase">{label}</span>
+    <span className="text-6xl">{emoji}</span>
+    <span className="font-black text-sm uppercase tracking-widest">{label}</span>
   </button>
 );
 
 const ToyCatalog = () => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <CatalogSection title="Brinquedos Educativos" type="toy" />
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+    <CatalogSection title="Brinquedos do Pip" type="toy" icon="🎮" />
   </motion.div>
 );
 
 const ClosetCatalog = () => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <CatalogSection title="Fantasias & Roupas" type="costume" />
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+    <CatalogSection title="Guarda-Roupa Mágico" type="costume" icon="👕" />
   </motion.div>
 );
 
 const RoomCustomizer = () => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <CatalogSection title="Decoração do Quarto" type="furniture" />
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+    <CatalogSection title="Móveis e Decoração" type="furniture" icon="🏠" />
   </motion.div>
 );
 
-const CatalogSection = ({ title, type }: { title: string, type: string }) => {
+const CatalogSection = ({ title, type, icon }: { title: string, type: string, icon: string }) => {
   const [items, setItems] = useState<any[]>([]);
   
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).limit(20);
+      const { data } = await (supabase as any).from('mascot_catalog_items').select('*').eq('type', type).limit(25);
       setItems(data || []);
     };
     fetchItems();
@@ -298,23 +310,44 @@ const CatalogSection = ({ title, type }: { title: string, type: string }) => {
 
   return (
     <div className="col-span-full">
-      <h3 className="text-xl font-black text-primary mb-4 flex items-center gap-2 uppercase tracking-widest">
-        <Sparkles size={18} /> {title}
-      </h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="flex items-center justify-between mb-8">
+        <h3 className="text-2xl font-black text-primary flex items-center gap-3 uppercase tracking-tighter">
+          <span className="text-3xl">{icon}</span> {title}
+        </h3>
+        <Pill tone="info" className="px-4 py-2 rounded-full font-black uppercase text-xs">
+          {items.length} ITENS NO CATÁLOGO
+        </Pill>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {items.map(item => (
-          <KidCard key={item.id} className="p-4 flex flex-col items-center gap-2 group border-2 border-primary/5 hover:border-primary/20 transition-all cursor-pointer">
-            <div className="w-20 h-20 bg-muted rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">
-              {type === 'toy' ? '🎮' : type === 'costume' ? '👕' : '🖼️'}
+          <KidCard key={item.id} className="p-6 flex flex-col items-center gap-4 group border-2 border-primary/5 hover:border-primary/20 transition-all cursor-pointer bg-white/50">
+            <div className="w-24 h-24 bg-gradient-to-br from-primary/5 to-secondary/10 rounded-3xl flex items-center justify-center text-5xl group-hover:scale-110 transition-transform shadow-inner">
+              {type === 'toy' ? '🧩' : type === 'costume' ? '🎭' : '🛋️'}
             </div>
-            <span className="font-black text-[10px] text-center uppercase truncate w-full">{item.name}</span>
-            <div className="flex items-center gap-1 bg-yellow-400/20 px-2 py-0.5 rounded-full">
-              <Star size={10} fill="currentColor" className="text-yellow-600" />
-              <span className="text-[10px] font-black text-yellow-700">LV {item.required_level}</span>
+            <div className="text-center w-full">
+              <span className="font-black text-xs uppercase truncate block mb-1">{item.name}</span>
+              <div className="flex items-center justify-center gap-1 bg-sun/20 px-3 py-1 rounded-full">
+                <Star size={12} fill="currentColor" className="text-sun" />
+                <span className="text-[10px] font-black text-sun-foreground">NÍVEL {item.required_level}</span>
+              </div>
+            </div>
+            <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+              {item.required_coins} Moedas
             </div>
           </KidCard>
         ))}
       </div>
     </div>
   );
+};
+
+const Pill = ({ children, tone = "default", className = "" }: { children: React.ReactNode; tone?: "default" | "success" | "warning" | "info" | "danger"; className?: string }) => {
+  const tones: Record<string, string> = {
+    default: "bg-muted text-muted-foreground",
+    success: "bg-success/15 text-success",
+    warning: "bg-warning/20 text-warning-foreground",
+    info: "bg-sky/30 text-foreground",
+    danger: "bg-destructive/15 text-destructive",
+  };
+  return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]} ${className}`}>{children}</span>;
 };
