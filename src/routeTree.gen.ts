@@ -17,13 +17,11 @@ import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
-import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
-import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
@@ -74,11 +72,6 @@ const MissaoProvaRoute = MissaoProvaRouteImport.update({
   path: '/missao-prova',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MascotesRoute = MascotesRouteImport.update({
-  id: '/mascotes',
-  path: '/mascotes',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LojaMascotesRoute = LojaMascotesRouteImport.update({
   id: '/loja-mascotes',
   path: '/loja-mascotes',
@@ -102,11 +95,6 @@ const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
 const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
   id: '/escola-brilha',
   path: '/escola-brilha',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ColecaoPipRoute = ColecaoPipRouteImport.update({
-  id: '/colecao-pip',
-  path: '/colecao-pip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
@@ -164,13 +152,11 @@ export interface FileRoutesByFullPath {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
-  '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -190,13 +176,11 @@ export interface FileRoutesByTo {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
-  '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -217,13 +201,11 @@ export interface FileRoutesById {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
-  '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/neuro-treino': typeof NeuroTreinoRoute
   '/painel-pais': typeof PainelPaisRoute
@@ -245,13 +227,11 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
-    | '/mascotes'
     | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
@@ -271,13 +251,11 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
-    | '/mascotes'
     | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
@@ -297,13 +275,11 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
-    | '/mascotes'
     | '/missao-prova'
     | '/neuro-treino'
     | '/painel-pais'
@@ -324,13 +300,11 @@ export interface RootRouteChildren {
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
-  ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
-  MascotesRoute: typeof MascotesRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
   NeuroTreinoRoute: typeof NeuroTreinoRoute
   PainelPaisRoute: typeof PainelPaisRoute
@@ -401,13 +375,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MissaoProvaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/mascotes': {
-      id: '/mascotes'
-      path: '/mascotes'
-      fullPath: '/mascotes'
-      preLoaderRoute: typeof MascotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/loja-mascotes': {
       id: '/loja-mascotes'
       path: '/loja-mascotes'
@@ -441,13 +408,6 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha'
       fullPath: '/escola-brilha'
       preLoaderRoute: typeof EscolaBrilhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/colecao-pip': {
-      id: '/colecao-pip'
-      path: '/colecao-pip'
-      fullPath: '/colecao-pip'
-      preLoaderRoute: typeof ColecaoPipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brilha-vida': {
@@ -524,13 +484,11 @@ const rootRouteChildren: RootRouteChildren = {
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
-  ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
-  MascotesRoute: MascotesRoute,
   MissaoProvaRoute: MissaoProvaRoute,
   NeuroTreinoRoute: NeuroTreinoRoute,
   PainelPaisRoute: PainelPaisRoute,
@@ -545,3 +503,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
