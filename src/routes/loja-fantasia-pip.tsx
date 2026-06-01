@@ -25,15 +25,19 @@ const CATEGORIES = [
 
 const GENERATED_SKINS: Record<string, any[]> = {};
 
-// Gerar 7 modelos para cada categoria
+const VARIATIONS = [
+  "Clássico", "Real", "Galáctico", "Místico", "Lendário", "Aventureiro", "Supremo"
+];
+
+// Gerar modelos únicos para cada categoria
 CATEGORIES.forEach(cat => {
-  GENERATED_SKINS[cat.id] = Array.from({ length: 7 }).map((_, i) => ({
+  GENERATED_SKINS[cat.id] = VARIATIONS.map((variant, i) => ({
     id: `skin-${cat.id}-${i + 1}`,
-    name: `Pip ${cat.name} ${i + 1}`,
+    name: `Pip ${cat.name} ${variant}`,
     category: cat.id as Hiperfoco,
     price: 150 + (i * 50),
-    image: PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'], // Fallback seguro
-    description: `Aumente sua diversão com o estilo ${cat.name}!`,
+    image: PIP_SKINS[cat.id] || PIP_SKINS['dinossauros'],
+    description: `Um visual único de ${cat.name} no estilo ${variant}!`,
   }));
 });
 
