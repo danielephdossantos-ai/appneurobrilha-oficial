@@ -352,7 +352,7 @@ function Treino() {
                 {clinicaCategorias.map((cat) => (
                   <button
                     key={cat.id}
-                    onClick={() => setCatAtiva(cat.id)}
+                    onClick={() => selecionarCategoria(cat.id)}
                     className={cn(
                       "p-6 rounded-[24px] border-b-8 border-black/10 flex flex-col items-center justify-between text-center gap-4 transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0",
                       cat.cor, cat.corTexto
