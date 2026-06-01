@@ -16,7 +16,7 @@ const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
   const [allMascots, setAllMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'favorites' | 'pip-collection'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'locked' | 'premium' | 'pip-collection'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const MascotStorePage: React.FC = () => {
 
     if (activeTab === 'all') return true;
     if (activeTab === 'locked') return !ownedMascotIds.includes(mascot.id);
-    if (activeTab === 'favorites') return mascot.category === 'premium' || mascot.name === 'Pip';
+    if (activeTab === 'premium') return mascot.category !== 'primary';
     if (activeTab === 'pip-collection') return mascot.name === 'Pip';
     
     return true;
@@ -112,9 +112,9 @@ const MascotStorePage: React.FC = () => {
             icon={<Lock size={16} />}
           />
           <TabButton 
-            active={activeTab === 'favorites'} 
-            onClick={() => setActiveTab('favorites')} 
-            label="Favoritos" 
+            active={activeTab === 'premium'} 
+            onClick={() => setActiveTab('premium')} 
+            label="Outros Personagens" 
             icon={<Heart size={16} />}
           />
           <TabButton 
