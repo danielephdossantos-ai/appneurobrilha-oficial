@@ -292,6 +292,20 @@ function Treino() {
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Módulo Clínico Cognitivo</p>
           </div>
         </div>
+
+        {/* Stats de Sessão Premium */}
+        <div className="hidden md:flex items-center gap-6">
+           <div className="text-center">
+              <span className="text-[10px] font-black text-slate-400 uppercase block">Fase</span>
+              <span className="text-xl font-black text-indigo-600">#{faseIndex}</span>
+           </div>
+           <div className="h-8 w-px bg-slate-100" />
+           <div className="text-center">
+              <span className="text-[10px] font-black text-slate-400 uppercase block">Pontos</span>
+              <span className="text-xl font-black text-emerald-600">{pontos}</span>
+           </div>
+        </div>
+
         <div className="flex items-center gap-3">
           <div className="bg-emerald-500 text-white font-black px-5 py-2.5 rounded-2xl text-xs shadow-md flex items-center gap-3 border-b-4 border-emerald-700 active:translate-y-1 active:border-b-0 transition-all">
             <span className="tracking-widest">SESSÃO ATIVA</span>
