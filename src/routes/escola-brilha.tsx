@@ -1116,6 +1116,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
         etapa3_exemplo: data.etapa3_exemplo || aula.etapa3_exemplo,
         etapa4_como_monta: data.etapa4_como_monta || aula.etapa4_como_monta,
         etapa5_instrucao: data.etapa5_instrucao || aula.etapa5_instrucao,
+        desafio_final: data.desafio_final || aula.desafio_final,
         dica: data.dica || aula.dica,
         ensino: data.etapa2_conceito || data.ensino || aula.ensino,
         demo: data.etapa3_exemplo || aula.demo,
