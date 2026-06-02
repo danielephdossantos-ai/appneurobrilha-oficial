@@ -530,13 +530,15 @@ function OndeEsta({ p, onDone }: any) {
 function SequenciaPadrao({ p, onDone }: any) {
   return (
     <div className="text-center">
-      <div className="flex justify-center gap-3 text-5xl mb-6">
-        {p.seq.map((s:string, i:number) => <span key={i}>{s}</span>)}
-        <span className="text-primary">?</span>
+      <div className="flex justify-center items-center gap-3 mb-6">
+        {p.seq.map((s:string, i:number) => <Obj key={i} emoji={s} size={64} />)}
+        <span className="text-5xl font-black text-primary">?</span>
       </div>
-      <div className="flex justify-center gap-3">
+      <div className="flex justify-center gap-3 flex-wrap">
         {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.next)} className="text-5xl p-4 bg-card border-2 border-border rounded-xl hover:border-primary hover:scale-110 transition-all">{o}</button>
+          <button key={i} onClick={()=>onDone(o === p.next)} className="p-3 bg-card border-2 border-border rounded-xl hover:border-primary hover:scale-110 transition-all">
+            <Obj emoji={o} size={64} />
+          </button>
         ))}
       </div>
     </div>
@@ -775,12 +777,18 @@ function Decoracao({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-2xl font-black mb-2">{p.cenario}</div>
       <div onDragOver={(e)=>e.preventDefault()} onDrop={drop} className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}>
-        {placed.map((it, i) => <span key={i} className="absolute text-4xl" style={{ left: it.x - 16, top: it.y - 16 }}>{it.e}</span>)}
+        {placed.map((it, i) => (
+          <span key={i} className="absolute" style={{ left: it.x - 24, top: it.y - 24 }}>
+            <Obj emoji={it.e} size={48} />
+          </span>
+        ))}
         {placed.length === 0 && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">Arraste para cá</div>}
       </div>
       <div className="flex gap-2 justify-center mb-4 flex-wrap">
         {p.stickers.map((s:string, i:number) => (
-          <div key={i} draggable onDragStart={()=>setDragging(s)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{s}</div>
+          <div key={i} draggable onDragStart={()=>setDragging(s)} className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">
+            <Obj emoji={s} size={48} />
+          </div>
         ))}
       </div>
       <div className="flex gap-2 justify-center">
@@ -1007,9 +1015,9 @@ function TriagemCategorias({ p, onDone }: any) {
       <div className="grid grid-cols-2 gap-4">
         {p.caixas.map((c:any) => (
           <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
-            <div className="font-black mb-2">{c.emoji} {c.nome}</div>
+            <div className="font-black mb-2 flex items-center justify-center gap-2"><Obj emoji={c.emoji} size={28} /> {c.nome}</div>
             <div className="flex flex-wrap gap-1 justify-center">
-              {p.itens.map((it:any, i:number) => assigned[i] === c.nome ? <span key={i} className="text-3xl">{it.e}</span> : null)}
+              {p.itens.map((it:any, i:number) => assigned[i] === c.nome ? <Obj key={i} emoji={it.e} size={36} /> : null)}
             </div>
           </div>
         ))}
