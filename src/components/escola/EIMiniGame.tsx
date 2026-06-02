@@ -302,24 +302,102 @@ function Bubbles({ aula, disabled, onAnswer }: Props) {
   );
 }
 
+/* ---------- MODE: DISCOVERY (Natureza/Relacionados) ---------- */
+function DiscoveryGame({ aula, disabled, onAnswer }: Props) {
+  const options = aula.opcoes || [];
+  const [wrongId, setWrongId] = useState<string | null>(null);
+  const [correctIds, setCorrectIds] = useState<string[]>([]);
+  const { celebrate, fire } = useFeedback(onAnswer);
+
+  const handleTap = (opt: any) => {
+    if (disabled || correctIds.includes(opt.n)) return;
+    
+    if (opt.correct) {
+      const next = [...correctIds, opt.n];
+      setCorrectIds(next);
+      // If found at least one or all? Usually for kids, one success is enough to trigger som, 
+      // but let's say they need to find all correct ones or just one to "win" this round.
+      // User says: "When touching a correct object, it shakes/glows and plays sound".
+      if (next.length === options.filter((o: any) => o.correct).length) {
+         fire(true, opt.n);
+      } else {
+         // Just visual feedback for now as per "balança ou brilha"
+      }
+    } else {
+      setWrongId(opt.n);
+      setTimeout(() => setWrongId(null), 600);
+      fire(false, opt.n);
+    }
+  };
+
+  return (
+    <div className="relative">
+      {celebrate && <Confetti />}
+      <div className="flex flex-col items-center gap-8">
+        <div className="relative group">
+           <div className="text-[10rem] md:text-[12rem] leading-none drop-shadow-2xl animate-float-thinking">
+             {aula.visual}
+           </div>
+           <div className="text-center mt-4 text-5xl font-black tracking-widest text-primary drop-shadow-sm uppercase">
+             {aula.palavra}
+           </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-2xl px-4">
+          {options.map((opt: any, i: number) => {
+            const isCorrect = opt.correct;
+            const isDone = correctIds.includes(opt.n);
+            const isWrong = wrongId === opt.n;
+            
+            return (
+              <button
+                key={opt.n + i}
+                disabled={disabled || isDone}
+                onClick={() => handleTap(opt)}
+                className={`btn-tap group relative aspect-square rounded-[2rem] bg-white border-4 flex flex-col items-center justify-center shadow-lg transition-all
+                  ${isDone ? "border-success bg-success/5 animate-[magicGlow_1s_infinite]" : "border-slate-200 hover:border-primary"}
+                  ${isWrong ? "animate-[wiggle_0.5s] border-destructive" : ""}
+                `}
+              >
+                <div className={`text-6xl md:text-7xl transition-transform ${isDone ? "scale-110" : "group-hover:scale-110"}`}>
+                  {opt.e}
+                </div>
+                <div className={`mt-2 text-xs font-black tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity ${isDone ? "text-success opacity-100" : "text-slate-400"}`}>
+                   {opt.n}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- DISPATCHER ---------- */
 export function EIMiniGame(props: Props) {
   const { aula } = props;
-  const opts: string[] = (aula.opcoes || []).map((o: any) => String(o));
+  const opts: any[] = (aula.opcoes || []);
   const correct = String(aula.resposta_correta || aula.answer || "").toUpperCase();
   const materia = String(aula.materia || "").toLowerCase();
   const topicLc = String(aula.topic || aula.tema || "").toLowerCase();
   const palavra = String(aula.palavra || "").toUpperCase();
 
-  const allSingleLetters = opts.length > 0 && opts.every(o => o.trim().length === 1);
-  const isShapes = materia.includes("forma") || topicLc.includes("forma") ||
-    Object.keys(SHAPE_GLYPHS).includes(correct);
+  // Se as opções forem objetos com campo 'correct', usamos o DiscoveryGame
+  const isDiscovery = opts.length > 0 && typeof opts[0] === 'object' && 'correct' in opts[0];
+  
+  const allSingleLetters = !isDiscovery && opts.length > 0 && opts.every(o => String(o).trim().length === 1);
+  const isShapes = !isDiscovery && (materia.includes("forma") || topicLc.includes("forma") ||
+    Object.keys(SHAPE_GLYPHS).includes(correct));
 
-  let mode: "shape" | "sum" | "word" | "bubbles" = "bubbles";
-  if (isShapes) mode = "shape";
+  let mode: "shape" | "sum" | "word" | "bubbles" | "discovery" = "bubbles";
+  
+  if (isDiscovery) mode = "discovery";
+  else if (isShapes) mode = "shape";
   else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) mode = "sum";
   else if (allSingleLetters && palavra.length >= 2) mode = "word";
 
+  if (mode === "discovery") return <DiscoveryGame {...props} />;
   if (mode === "shape") return <ShapeMatch {...props} />;
   if (mode === "sum") return <PhonemeSum {...props} />;
   if (mode === "word") return <WordBuild {...props} />;
