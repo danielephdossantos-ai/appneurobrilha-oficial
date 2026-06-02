@@ -133,6 +133,7 @@ serve(async (req) => {
 
       const isAlfabetizacao = (isEarlyYears || isMid) && (subject === "portugues" || subject === "linguagem");
       const isMathInicial = (isEarlyYears || isMid) && (subject === "matematica" || subject === "numeros");
+      const isMathExplicacao = (isMid || isTeen) && (subject === "matematica" || subject === "numeros");
 
       systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — atuando como PROFESSOR(A) PARTICULAR no NeuroBrilha Kids.
       ${mascotPersonaBlock}
