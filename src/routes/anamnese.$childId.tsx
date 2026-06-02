@@ -121,16 +121,33 @@ function Anamnese() {
     { title: "Rotina", icon: <Calendar className="w-5 h-5" /> },
   ];
 
+  const ageGrade = checkAgeGrade(data.dados_crianca.idade, serieLocal);
+
   const finish = async () => {
     if (editCount >= 3) {
       toast.error("Limite de 3 edições atingido.");
       return;
     }
 
+    if (!serieLocal) {
+      toast.error("Selecione a série/ano escolar antes de salvar.");
+      setStep(0);
+      return;
+    }
+
+    if (!ageGrade.ok && !overrideMismatch) {
+      toast.error(
+        `Idade (${data.dados_crianca.idade}) e série (${serieLocal}) não batem. ` +
+        `Esperado: ${ageGrade.expected} anos. Corrija ou marque "Confirmo mesmo assim" no topo.`
+      );
+      setStep(0);
+      return;
+    }
+
     try {
       const internalProfile = AnamnesisProcessor.process(data);
       const childPatch = AnamnesisProcessor.mapToChildPatch(internalProfile, data);
-      
+
       await saveAnamnesis({
         child_id: childId,
         responses: data,
@@ -142,6 +159,7 @@ function Anamnese() {
         ...childPatch,
         nome: data.dados_crianca.nome,
         idade: data.dados_crianca.idade,
+        serie: serieLocal,
         anamnese_completa: true,
       });
 
@@ -151,6 +169,7 @@ function Anamnese() {
       toast.error(err.message || "Erro ao salvar anamnese");
     }
   };
+
 
   if (loading) return <Shell><div className="p-8 text-center">Carregando...</div></Shell>;
 
