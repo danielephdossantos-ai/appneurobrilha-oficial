@@ -133,6 +133,7 @@ function AmigoVirtual() {
         body: {
           mode: "professor-foto",
           child: activeChild,
+          mascot: mascotPayload,
           image: base64,
         },
       });
