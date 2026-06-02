@@ -1,6 +1,6 @@
 
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Brain, AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react";
+import { Brain, AlertTriangle, CheckCircle2, ArrowRight, ArrowLeft, Home } from "lucide-react";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { DashboardHeader } from "@/components/responsible/DashboardHeader";
