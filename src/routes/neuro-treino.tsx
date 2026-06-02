@@ -301,7 +301,8 @@ function Trail({
         lastGrupo = item.grupo;
 
         const isCurrent = idx === currentIndex;
-        const isLocked = idx > currentIndex + 2; // bloqueia mais à frente, estilo Duolingo
+        // todas as categorias liberadas — cada nó possui sua atividade implementada
+        const isLocked = false;
         const isDone = idx < currentIndex;
 
         return (
