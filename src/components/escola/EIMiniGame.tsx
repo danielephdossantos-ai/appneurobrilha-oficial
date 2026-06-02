@@ -235,7 +235,7 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
         </div>
         {/* letter tiles (fridge magnets) */}
         <div className="flex flex-wrap gap-3 md:gap-4 justify-center max-w-xl">
-          {letters.map((l, i) => {
+          {letters.map((l: string, i: number) => {
             const id = l + "::" + i;
             const used = filled.some(f => f === id);
             const isWrong = wrong === id;
