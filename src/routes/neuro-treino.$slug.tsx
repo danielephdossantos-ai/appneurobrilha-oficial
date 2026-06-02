@@ -121,15 +121,60 @@ function NeuroAtividade() {
   const seed = `${slug}:${variation.id}`;
   const elemento = pickElemento(hiperfoco, seed);
   const instrucaoTematica = applyHiperfoco(meta.instrucao, hiperfoco, seed);
+  const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
+
+  // Frase de narração contextual da PIP por exercício
+  const narracao = useMemo(() => {
+    const p = variation?.payload ?? {};
+    const extra =
+      p.letra ? ` A letra é ${p.letra}.` :
+      p.palavra ? ` A palavra é ${p.palavra}.` :
+      p.alvo ? ` Procure ${p.alvo}.` :
+      p.target ? ` Procure ${p.target}.` :
+      "";
+    const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
+    return `${saud}${instrucaoTematica}${extra}`;
+  }, [variation, instrucaoTematica, nomeCrianca]);
+
+  // Auto-narra cada novo exercício (exceto motorzinho que tem fluxo de voz próprio)
+  useEffect(() => {
+    if (!voiceOn) return;
+    if (slug === "motorzinho-dos-sons") return;
+    if (isLoading || error) return;
+    const t = setTimeout(() => { speak(narracao); }, 250);
+    return () => { clearTimeout(t); stop(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [narracao, voiceOn, slug, isLoading, error]);
+
+  const toggleVoice = () => {
+    setVoiceOn((v) => {
+      const next = !v;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("pip:voice", next ? "on" : "off");
+      }
+      if (!next) stop();
+      return next;
+    });
+  };
+
+  const replay = () => {
+    if (!voiceOn) return;
+    stop();
+    speak(narracao);
+  };
 
   const onConcluir = (correto: boolean) => {
     if (correto) {
       setAcertos((a) => a + 1);
-      toast.success(pipFraseAcerto(hiperfoco));
+      const frase = pipFraseAcerto(hiperfoco);
+      toast.success(frase);
+      if (voiceOn) speak(`${nomeCrianca ? nomeCrianca + ", " : ""}${frase}`);
     } else {
-      toast(pipFraseIncentivo(hiperfoco));
+      const frase = pipFraseIncentivo(hiperfoco);
+      toast(frase);
+      if (voiceOn) speak(frase);
     }
-    setTimeout(() => setIndex((i) => i + 1), 600);
+    setTimeout(() => setIndex((i) => i + 1), 900);
   };
 
   return (
@@ -138,15 +183,38 @@ function NeuroAtividade() {
         <Link to="/neuro-treino" className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground">
           <ArrowLeft size={16} /> Voltar
         </Link>
-        <Link
-          to="/neuro-treino/configurar"
-          search={{ next: slug }}
-          className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
-        >
-          {hiperfoco.emoji} Hiperfoco: {hiperfoco.label} <span className="text-primary">· trocar</span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleVoice}
+            title={voiceOn ? "Desligar voz da PIP" : "Ligar voz da PIP"}
+            className={`flex items-center gap-1 text-xs font-bold rounded-full border px-3 py-1 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
+          >
+            {voiceOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
+            Voz {voiceOn ? "ON" : "OFF"}
+          </button>
+          <Link
+            to="/neuro-treino/configurar"
+            search={{ next: slug }}
+            className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
+          >
+            {hiperfoco.emoji} {hiperfoco.label} <span className="text-primary">· trocar</span>
+          </Link>
+        </div>
       </div>
       <PageHeader emoji={meta.emoji} title={meta.nome} subtitle={instrucaoTematica} />
+
+      {slug !== "motorzinho-dos-sons" && (
+        <div className="mb-3 flex items-center gap-2 justify-center">
+          <button
+            onClick={replay}
+            disabled={!voiceOn || isSpeaking}
+            className="flex items-center gap-2 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20 disabled:opacity-50"
+          >
+            <Volume2 size={14} className={isSpeaking ? "animate-pulse" : ""} />
+            {isSpeaking ? "PIP falando..." : "Ouvir PIP de novo"}
+          </button>
+        </div>
+      )}
 
       <div className="flex items-center justify-between mb-4 text-sm font-bold">
         <span className="text-muted-foreground">Exercício {(index % vars.length) + 1} de {vars.length}</span>
@@ -172,6 +240,7 @@ function NeuroAtividade() {
     </Shell>
   );
 }
+
 
 
 // ====================================================================
