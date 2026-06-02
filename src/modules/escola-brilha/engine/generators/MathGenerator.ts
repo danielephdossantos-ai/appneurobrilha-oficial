@@ -12,11 +12,12 @@ export class MathGenerator extends BaseGenerator {
       }
       return Math.random() < 0.5 ? 'ei-contagem' : 'ei-forma';
     }
+    // SÉRIE define o tipo de atividade — NUNCA misturar séries.
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "advanced-logic";
-    if (input.difficulty < 0.4) return "counting";
-    if (input.difficulty < 0.7) return "comparison";
-    return "visual-logic";
+    if (gradeNum <= 2) return "counting";
+    if (gradeNum === 3) return "comparison";
+    return "visual-logic"; // 4º e 5º
   }
 
   protected getTitle(input: GeneratorInput): string {
@@ -91,10 +92,12 @@ export class MathGenerator extends BaseGenerator {
       }
 
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
-      const maxNumber = input.difficulty < 0.5 ? 5 * gradeNum : 10 * gradeNum;
+      // Limite numérico estritamente por série
+      const maxByGrade: Record<number, number> = { 1: 10, 2: 20, 3: 50, 4: 100, 5: 1000 };
+      const maxNumber = maxByGrade[gradeNum] || 10;
 
       if (type === "advanced-logic") {
-        const dataKey = gradeNum >= 9 ? 'grade9' : (gradeNum >= 7 ? 'grade7' : 'grade7');
+        const dataKey = gradeNum >= 9 ? 'grade9' : 'grade7';
         const set = MATH_DATA.operations[dataKey as keyof typeof MATH_DATA.operations] || MATH_DATA.operations.grade7;
         if (!set || set.length === 0) throw new Error(`No math operations found for ${dataKey}`);
         return this.pickRandom(set);

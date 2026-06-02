@@ -147,7 +147,8 @@ type BancoState = {
 };
 
 function bancoKey(childId: string, grade: string) {
-  return `escola_banco:${childId}:${grade}`;
+  // v2: cache versionado — força regeneração após corrigir o sistema de séries
+  return `escola_banco_v2:${childId}:${grade}`;
 }
 
 function isFundamental2a9(grade: string): boolean {
