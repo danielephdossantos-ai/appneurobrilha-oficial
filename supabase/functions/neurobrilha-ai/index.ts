@@ -133,6 +133,7 @@ serve(async (req) => {
 
       const isAlfabetizacao = (isEarlyYears || isMid) && (subject === "portugues" || subject === "linguagem");
       const isMathInicial = (isEarlyYears || isMid) && (subject === "matematica" || subject === "numeros");
+      const isMathExplicacao = (isMid || isTeen) && (subject === "matematica" || subject === "numeros");
 
       systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — atuando como PROFESSOR(A) PARTICULAR no NeuroBrilha Kids.
       ${mascotPersonaBlock}
@@ -221,6 +222,20 @@ serve(async (req) => {
       - "resultado": Inteiro.
       - "visual_emoji": String com 1 emoji.
       - "opcoes_numericas": Array de 3 inteiros.
+      ` : ""}
+      ${isMathExplicacao ? `
+      ESTRUTURA DE TELA DE EXPLICAÇÃO DE MATEMÁTICA (2º ao 9º ano) — OBRIGATÓRIA:
+      A tela é uma AULA limpa, sem mascote, estilo livro didático moderno.
+      Adapte por idade:
+        - 2º ao 5º: explicação MUITO simples, sem termos técnicos sem explicar, exemplos concretos do dia a dia.
+        - 6º ao 9º: pode usar fórmula, lógica e termos técnicos (sempre explicando o significado).
+      Campos extras OBRIGATÓRIOS:
+      - "titulo_aula": Título curto e motivador no topo (ex: "Vamos aprender!", "Hora da equação!"). Máx 4 palavras.
+      - "pergunta_simples": UMA pergunta curta que introduz o tema (ex: "O que é equação do 2º grau?"). Sem jargão para 2º-5º.
+      - "explicacao_curta": Explicação em NO MÁXIMO 2 linhas (até 180 caracteres). Sem termo técnico não explicado.
+      - "conta_principal": A conta/expressão em DESTAQUE (ex: "2x² + 3x - 4 = 0", "12 + 7 = ?", "3/4 + 1/2 = ?"). Apenas a expressão matemática limpa, sem texto extra.
+      - "passos_resolucao": Array de 3 a 5 objetos { "titulo": "Passo 1 – ...", "conteudo": "..." } mostrando o passo a passo até o resultado. O último passo deve conter o RESULTADO FINAL claro. NÃO use emoji no lugar de número/símbolo matemático.
+      - "audio_explicacao": Texto COMPLETO (sem cortar frase) que será lido em voz alta, linguagem adaptada à idade. 2-5 frases. NÃO usar markdown.
       ` : ""}
 
       Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
