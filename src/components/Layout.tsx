@@ -172,18 +172,38 @@ export function Shell({ children }: { children?: ReactNode }) {
           {navCrianca.map((i) => <NavItem key={i.to} {...i} />)}
         </nav>
 
-        <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2">
-          Responsáveis
+        <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2 flex items-center justify-between">
+          <span>Responsáveis</span>
+          {parentUnlocked && (
+            <button
+              onClick={lockParent}
+              className="text-[10px] font-bold text-primary hover:underline normal-case tracking-normal"
+              title="Bloquear área dos pais"
+            >
+              <LockOpen className="h-3 w-3 inline mr-1" />sair
+            </button>
+          )}
         </div>
-        <nav className="flex flex-col gap-1">
-          {navPais.map((i) => <NavItem key={i.to} {...i} />)}
-          {activeChild && (
-            <NavItem to={`/ajuste-dificuldades/${activeChild.id}`} label="Ajuste fino" icon={SlidersHorizontal} />
-          )}
-          {activeChild && (
-            <NavItem to={`/anamnese/${activeChild.id}`} label="Anamnese" icon={ClipboardList} />
-          )}
-        </nav>
+        {!parentUnlocked ? (
+          <button
+            onClick={requestUnlock}
+            className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-muted/40 hover:bg-muted text-sidebar-foreground/80 hover:text-sidebar-accent-foreground transition-all btn-tap font-bold border-2 border-dashed border-border"
+          >
+            <Lock className="h-5 w-5 shrink-0" />
+            <span className="text-sm">Desbloquear Área dos Pais</span>
+          </button>
+        ) : (
+          <nav className="flex flex-col gap-1">
+            {navPais.map((i) => <NavItem key={i.to} {...i} />)}
+            {activeChild && (
+              <NavItem to={`/ajuste-dificuldades/${activeChild.id}`} label="Ajuste fino" icon={SlidersHorizontal} />
+            )}
+            {activeChild && (
+              <NavItem to={`/anamnese/${activeChild.id}`} label="Anamnese" icon={ClipboardList} />
+            )}
+          </nav>
+        )}
+
 
         <div className="mt-auto flex flex-col gap-1 pt-4">
           <button
