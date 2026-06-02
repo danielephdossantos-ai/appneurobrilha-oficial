@@ -108,6 +108,8 @@ export function Shell({ children }: { children?: ReactNode }) {
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
   const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
+  // Rotas que possuem navegação própria (trilha, atividade, configuração) — escondem o nav global
+  const hideGlobalNav = path.startsWith("/neuro-treino");
 
   // Apply neuro-adaptive CSS variables
   const adaptiveStyles = engine?.adaptive ? {
