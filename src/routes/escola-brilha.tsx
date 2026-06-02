@@ -469,9 +469,59 @@ function Escola() {
           </button>
         ))}
       </div>
+
+      {showBanco && banco && (
+        <section className="mt-10">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Banco BNCC · Infinito</div>
+              <h2 className="text-xl font-extrabold">Atividades liberadas — Lote {banco.lote}</h2>
+              <div className="text-sm text-muted-foreground">
+                {banco.done.length} de {BANCO_TAMANHO} concluídas. Ao terminar todas, mais {BANCO_TAMANHO} são liberadas automaticamente.
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
+            </div>
+          </div>
+          <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
+            <div
+              className="h-full bg-gradient-to-r from-primary to-success transition-all"
+              style={{ width: `${(banco.done.length / BANCO_TAMANHO) * 100}%` }}
+            />
+          </div>
+
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2">
+            {banco.items.map((item) => {
+              const done = banco.done.includes(item.activity.id);
+              const meta = materias.find((m) => m.id === item.materiaId) || materias[0];
+              return (
+                <button
+                  key={item.activity.id}
+                  onClick={() => carregarAula(item.materiaId, undefined, { activity: item.activity, ordem: item.ordem })}
+                  disabled={done}
+                  title={`${item.ordem}. ${meta.nome} — ${item.activity.title || ""}`}
+                  className={`relative aspect-square rounded-xl border-2 flex flex-col items-center justify-center text-center transition-all ${
+                    done
+                      ? "bg-success/15 border-success/40 text-success cursor-default"
+                      : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
+                  }`}
+                >
+                  <div className="text-2xl leading-none">{meta.emoji}</div>
+                  <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
+                  {done && (
+                    <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </Shell>
   );
 }
+
 
 
 function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
