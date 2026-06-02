@@ -17,6 +17,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
+import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 
 class ReforcoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
