@@ -31,6 +31,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -145,6 +146,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
+  id: '/configurar',
+  path: '/configurar',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
 const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -215,6 +222,7 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -243,6 +251,7 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
+  '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -272,6 +281,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -299,6 +309,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
   id:
     | '__root__'
     | '/'
@@ -326,6 +337,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/neuro-treino/$slug'
+    | '/neuro-treino/configurar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -511,6 +523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/neuro-treino/configurar': {
+      id: '/neuro-treino/configurar'
+      path: '/configurar'
+      fullPath: '/neuro-treino/configurar'
+      preLoaderRoute: typeof NeuroTreinoConfigurarRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
     '/neuro-treino/$slug': {
       id: '/neuro-treino/$slug'
       path: '/$slug'
@@ -537,10 +556,12 @@ declare module '@tanstack/react-router' {
 
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
+  NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
 }
 
 const NeuroTreinoRouteChildren: NeuroTreinoRouteChildren = {
   NeuroTreinoSlugRoute: NeuroTreinoSlugRoute,
+  NeuroTreinoConfigurarRoute: NeuroTreinoConfigurarRoute,
 }
 
 const NeuroTreinoRouteWithChildren = NeuroTreinoRoute._addFileChildren(
