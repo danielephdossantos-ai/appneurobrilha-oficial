@@ -298,42 +298,58 @@ function Trail({
   theme: typeof WORLD_THEME[WorldKey];
   hiperfocoLabel: string | null;
 }) {
+  // padrão zig-zag estilo Duolingo (serpentina): -2,-1,0,1,2,1,0,-1...
+  const OFFSETS = [0, 1, 2, 1, 0, -1, -2, -1];
   let lastGrupo = "";
+  // primeiro nó disponível (estilo Duolingo: 1º é "START", resto bloqueado pelo tema do app)
+  const currentIndex = 0;
+
   return (
-    <div className="relative flex flex-col items-stretch gap-2 pb-12">
+    <div className="relative mx-auto w-full max-w-[460px] flex flex-col items-center pb-16 pt-2">
       {trail.map((item, idx) => {
         const c = CATEGORIAS[item.slug];
-        const side = idx % 2 === 0 ? "left" : "right";
+        const offset = OFFSETS[idx % OFFSETS.length];
         const showGrupo = item.grupo !== lastGrupo;
         lastGrupo = item.grupo;
 
+        const isCurrent = idx === currentIndex;
+        const isLocked = idx > currentIndex + 2; // bloqueia mais à frente, estilo Duolingo
+        const isDone = idx < currentIndex;
+
         return (
-          <div key={item.slug} className="relative">
+          <div key={item.slug} className="relative w-full flex flex-col items-center">
             {showGrupo && (
-              <div className="my-4 flex items-center gap-3">
-                <div className="flex-1 h-px bg-white/60" />
-                <div className="bg-white/25 backdrop-blur border border-white/50 text-white font-black px-4 py-1.5 rounded-full text-sm drop-shadow-lg">
+              <div className="w-full my-5 flex items-center gap-3">
+                <div className="flex-1 h-[2px] bg-white/70 rounded-full" />
+                <div className="bg-white text-primary font-black px-4 py-1.5 rounded-full text-xs uppercase tracking-wider shadow-lg border-2 border-white">
                   {item.grupoEmoji} {item.grupo}
                 </div>
-                <div className="flex-1 h-px bg-white/60" />
+                <div className="flex-1 h-[2px] bg-white/70 rounded-full" />
               </div>
             )}
 
-            {/* Conector pontilhado */}
-            {idx < trail.length - 1 && (
-              <div
-                className={cn(
-                  "absolute left-1/2 top-28 h-20 border-l-[5px] border-dashed -translate-x-1/2 opacity-80",
-                  theme.trailColor
-                )}
-              />
-            )}
+            <div
+              className="relative my-3 transition-transform"
+              style={{ transform: `translateX(${offset * 38}px)` }}
+            >
+              {/* Balão START flutuante no nó atual */}
+              {isCurrent && (
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 animate-[float_2.4s_ease-in-out_infinite]">
+                  <div className="relative bg-white text-primary font-black text-xs px-4 py-1.5 rounded-full shadow-xl border-2 border-primary/20 uppercase tracking-widest">
+                    Começar
+                    <span className="absolute left-1/2 -bottom-[6px] -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-r-2 border-b-2 border-primary/20" />
+                  </div>
+                </div>
+              )}
 
-            <div className={cn("flex w-full", side === "left" ? "justify-start pl-4 md:pl-16" : "justify-end pr-4 md:pr-16")}>
               <Link
                 to="/neuro-treino/$slug"
                 params={{ slug: item.slug }}
-                onClick={() => {
+                onClick={(e) => {
+                  if (isLocked) {
+                    e.preventDefault();
+                    return;
+                  }
                   console.error("[Neuro-Treino] clique na trilha", {
                     slug: item.slug,
                     nome: c?.nome,
@@ -341,42 +357,57 @@ function Trail({
                     hiperfocoAtivo: hiperfocoLabel,
                   });
                 }}
-                className="group relative block"
+                className={cn(
+                  "group relative block focus:outline-none",
+                  isLocked && "pointer-events-auto cursor-not-allowed",
+                )}
+                aria-disabled={isLocked}
               >
-                {/* Anel pulsante de chamada */}
-                <span className="absolute inset-0 m-auto w-32 h-32 md:w-36 md:h-36 rounded-full bg-white/30 opacity-0 group-hover:opacity-100 animate-[pulseRing_1.6s_ease-out_infinite] pointer-events-none" />
-
-                {/* Medalha 3D */}
+                {/* Sombra base 3D estilo Duolingo */}
                 <div
                   className={cn(
-                    "relative w-28 h-28 md:w-32 md:h-32 rounded-full grid place-items-center overflow-hidden",
-                    "bg-gradient-to-br from-white via-white to-white/85",
-                    "border-[6px] border-white shadow-[0_14px_28px_rgba(0,0,0,0.35),inset_0_-6px_14px_rgba(0,0,0,0.12)]",
-                    "ring-4 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3",
-                    theme.accent,
+                    "absolute inset-x-2 bottom-0 h-[88%] rounded-full",
+                    isLocked ? "bg-slate-500/60" : isDone ? "bg-amber-700" : "bg-primary/80",
+                    "translate-y-[6px] blur-[1px]",
                   )}
-                  style={{ animation: "glow 3s ease-in-out infinite" }}
+                  aria-hidden
+                />
+
+                {/* Botão circular 3D */}
+                <div
+                  className={cn(
+                    "relative w-[92px] h-[92px] rounded-full grid place-items-center overflow-hidden",
+                    "border-[5px] border-white",
+                    "transition-transform duration-200 group-hover:-translate-y-0.5 active:translate-y-[3px]",
+                    isLocked
+                      ? "bg-gradient-to-b from-slate-300 to-slate-400 grayscale opacity-90"
+                      : isDone
+                        ? "bg-gradient-to-b from-amber-300 to-amber-500"
+                        : "bg-gradient-to-b from-white to-white/85",
+                    !isLocked && "shadow-[0_8px_0_rgba(0,0,0,0.18),0_14px_22px_rgba(0,0,0,0.25)]",
+                    !isLocked && theme.accent,
+                    !isLocked && "ring-4",
+                  )}
                 >
-                  <img
-                    src={ICONS[item.slug]}
-                    alt={c.nome}
-                    loading="lazy"
-                    width={512}
-                    height={512}
-                    className="w-[88%] h-[88%] object-contain drop-shadow-md select-none pointer-events-none"
-                    draggable={false}
-                  />
+                  {isLocked ? (
+                    <Lock className="h-9 w-9 text-white drop-shadow" />
+                  ) : (
+                    <img
+                      src={ICONS[item.slug]}
+                      alt={c.nome}
+                      loading="lazy"
+                      width={512}
+                      height={512}
+                      className="w-[78%] h-[78%] object-contain drop-shadow-md select-none pointer-events-none"
+                      draggable={false}
+                    />
+                  )}
 
-                  {/* Estrela de fase */}
-                  <div className="absolute -top-2 -right-2 bg-amber-400 text-white rounded-full w-9 h-9 grid place-items-center border-4 border-white shadow-lg z-10">
-                    <Star className="h-4 w-4 fill-white" />
-                  </div>
-                </div>
-
-                {/* Etiqueta */}
-                <div className="mt-3 max-w-[180px] mx-auto text-center bg-white/95 rounded-2xl px-3 py-2 shadow-lg border-2 border-white">
-                  <div className="font-black text-sm text-primary leading-tight">{c.nome}</div>
-                  <div className="text-[10px] text-muted-foreground mt-0.5">{VARIATIONS[item.slug]?.length || 0} fases</div>
+                  {isDone && (
+                    <div className="absolute -top-1 -right-1 bg-amber-400 text-white rounded-full w-8 h-8 grid place-items-center border-[3px] border-white shadow-lg z-10">
+                      <Star className="h-4 w-4 fill-white" />
+                    </div>
+                  )}
                 </div>
               </Link>
             </div>
@@ -384,7 +415,7 @@ function Trail({
         );
       })}
 
-      <div className="mt-8 mx-auto bg-white/25 backdrop-blur border border-white/50 rounded-full px-5 py-2 text-white font-black flex items-center gap-2 drop-shadow">
+      <div className="mt-10 mx-auto bg-white/90 text-primary rounded-full px-5 py-2 font-black flex items-center gap-2 shadow-xl border-2 border-white">
         <Lock className="h-4 w-4" /> Mais mundos em breve
       </div>
     </div>
