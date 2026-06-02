@@ -4,8 +4,10 @@ import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check } from 'lucide-react';
+import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check, Lock } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
+import { useAppState } from '@/core/store';
+import { EggHatchCinematic, shouldShowEggHatch } from '@/components/pip/EggHatchCinematic';
 import pipMascot from '@/assets/pip-mascot.png';
 import pipEgg from '@/assets/pip-egg.png';
 import pipHatching from '@/assets/pip-hatching.png';
@@ -124,11 +126,36 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pipa-super-heroina', name: 'Pipa Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: pipaSuperHeroina },
 ];
 
+// Gamificação: requisito de Moedas Brilha para cada mascote da loja
+// Ovo (0) → Nascendo (50) → Bebê (200) → Guardião + Fantasias (500)
+const STAGE_THRESHOLDS = { ovo: 0, nascendo: 50, bebe: 200, guardiao: 500 } as const;
+
+function getRequiredCoins(mascotId: string, mascotName: string): number {
+  const id = (mascotId || '').toLowerCase();
+  const name = (mascotName || '').toLowerCase();
+  if (id.includes('ovo') || name.includes('ovo')) return STAGE_THRESHOLDS.ovo;
+  if (id.includes('nascendo') || name.includes('nascendo')) return STAGE_THRESHOLDS.nascendo;
+  if (id.includes('bebe') || name.includes('bebê') || name.includes('bebe')) return STAGE_THRESHOLDS.bebe;
+  // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
+  return STAGE_THRESHOLDS.guardiao;
+}
+
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
+  const { activeChild } = useAppState();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [showEggHatch, setShowEggHatch] = useState(false);
+
+  const totalEarned = activeChild?.total_earned ?? 0;
+
+  // Cinematográfica do ovo no primeiro acesso da criança
+  useEffect(() => {
+    if (activeChild?.id && shouldShowEggHatch(activeChild.id)) {
+      setShowEggHatch(true);
+    }
+  }, [activeChild?.id]);
+
   useEffect(() => {
     const fetchAllMascots = async () => {
       try {
@@ -154,7 +181,7 @@ const MascotStorePage: React.FC = () => {
 
   // Combine DB mascots with additional characters
   const allDisplayMascots = [...dbMascots];
-  
+
   // Add additional characters if they're not already in the DB mascots (by name/id)
   ADDITIONAL_CHARACTERS.forEach(char => {
     if (!dbMascots.find(m => m.name === char.name)) {
@@ -224,15 +251,22 @@ const MascotStorePage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {allDisplayMascots.map((mascot, index) => (
-              <MascotStoreCard 
-                key={mascot.id} 
-                mascot={mascot} 
-                isOwned={ownedMascotIds.includes(mascot.id)}
-                index={index}
-                showCollectionButton={true}
-              />
-            ))}
+            {allDisplayMascots.map((mascot, index) => {
+              const required = getRequiredCoins(mascot.id, mascot.name);
+              const unlocked = totalEarned >= required;
+              return (
+                <MascotStoreCard
+                  key={mascot.id}
+                  mascot={mascot}
+                  isOwned={ownedMascotIds.includes(mascot.id)}
+                  index={index}
+                  showCollectionButton={true}
+                  unlocked={unlocked}
+                  requiredCoins={required}
+                  currentCoins={totalEarned}
+                />
+              );
+            })}
           </AnimatePresence>
         </div>
       )}
@@ -244,6 +278,12 @@ const MascotStorePage: React.FC = () => {
           <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
         </div>
       )}
+
+      <AnimatePresence>
+        {showEggHatch && activeChild?.id && (
+          <EggHatchCinematic childId={activeChild.id} onClose={() => setShowEggHatch(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -263,10 +303,27 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
   </button>
 );
 
-const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
+const MascotStoreCard = ({
+  mascot,
+  isOwned,
+  index,
+  showCollectionButton = false,
+  unlocked = true,
+  requiredCoins = 0,
+  currentCoins = 0,
+}: {
+  mascot: Mascot;
+  isOwned: boolean;
+  index: number;
+  showCollectionButton?: boolean;
+  unlocked?: boolean;
+  requiredCoins?: number;
+  currentCoins?: number;
+}) => {
   const isPip = mascot.name === 'Pip';
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
+  const missingCoins = Math.max(0, requiredCoins - currentCoins);
 
   return (
     <motion.div
@@ -276,7 +333,10 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       transition={{ delay: index * 0.05 }}
     >
-      <KidCard className="group h-full flex flex-col overflow-hidden border-2 border-border hover:border-primary/30 transition-all duration-300">
+      <KidCard className={cn(
+        "group h-full flex flex-col overflow-hidden border-2 transition-all duration-300",
+        unlocked ? "border-border hover:border-primary/30" : "border-muted/40"
+      )}>
         <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center p-8 overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -284,7 +344,10 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
 
-          <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+          <div className={cn(
+            "relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110",
+            !unlocked && "grayscale opacity-50"
+          )}>
             {isPip ? (
               <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
 
@@ -295,6 +358,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             )}
           </div>
 
+          {!unlocked && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px]">
+              <div className="bg-white/95 rounded-full p-4 shadow-2xl">
+                <Lock className="text-primary" size={32} strokeWidth={2.5} />
+              </div>
+            </div>
+          )}
 
           <div className={cn(
             "absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest shadow-lg",
@@ -303,12 +373,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             {rarity}
           </div>
 
-          {isOwned && (
+          {isOwned && unlocked && (
             <div className="absolute top-4 left-4 bg-success text-white p-1.5 rounded-full shadow-lg">
               <Star size={14} fill="white" />
             </div>
           )}
         </div>
+
 
         <div className="p-6 flex-1 flex flex-col">
           <div className="mb-4">
@@ -339,23 +410,36 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
                   </Link>
                 )}
               </div>
+            ) : !unlocked ? (
+              <div className="flex flex-col gap-2">
+                <div className="w-full py-3 rounded-2xl bg-muted/40 border-2 border-muted text-muted-foreground text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                  <Lock size={14} />
+                  Bloqueado
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-bold text-primary/70">
+                    <span>{currentCoins} / {requiredCoins} 💰</span>
+                    <span>Faltam {missingCoins} 💰</span>
+                  </div>
+                  <div className="h-2 bg-primary/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all"
+                      style={{ width: `${Math.min(100, (currentCoins / Math.max(1, requiredCoins)) * 100)}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
             ) : (
-              <KidButton 
-                variant="primary" 
+              <KidButton
+                variant="primary"
                 className="w-full py-6 text-lg group/btn"
-                onClick={() => {}} // Futura integração de compra
+                onClick={() => {}}
               >
                 <span className="flex items-center gap-2">
-                  Ver Detalhes
+                  Desbloqueado! Adicionar
                   <ChevronRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
                 </span>
               </KidButton>
-            )}
-            
-            {!isOwned && (
-              <p className="text-[10px] text-center font-bold text-muted-foreground uppercase tracking-widest">
-                Requer Nível {mascot.category === 'premium' ? '10' : '5'} + Moedas Brilha
-              </p>
             )}
           </div>
         </div>
