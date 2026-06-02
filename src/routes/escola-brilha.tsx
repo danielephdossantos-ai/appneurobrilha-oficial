@@ -173,6 +173,14 @@ function gerarLote(child: any, grade: string, lote: number): BancoItem[] {
 
 function Escola() {
   const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
+  const mascotPayload = activeMascot ? {
+    name: activeMascot.mascot?.name,
+    description: activeMascot.mascot?.description,
+    category: activeMascot.mascot?.category,
+    level: activeMascot.level,
+    affinity: activeMascot.affinity,
+  } : null;
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
