@@ -10,8 +10,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       // ciências/natureza para EI = reconhecer animais; português = vogais/primeira letra
       if (input.subject === 'ciencias') return 'ei-animal';
       const r = Math.random();
-      if (r < 0.4) return 'ei-vogal';
-      if (r < 0.8) return 'ei-word-image';
+      if (r < 0.5) return 'ei-vogal';
       return 'ei-animal';
     }
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
@@ -25,7 +24,6 @@ export class LinguisticsGenerator extends BaseGenerator {
     const type = this.getActivityType(input);
     switch (type) {
       case "ei-vogal": return "As Vogais Mágicas";
-      case "ei-word-image": return "Mestre das Palavras";
       case "ei-animal": return "Bichinhos da Fazenda";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
@@ -39,7 +37,6 @@ export class LinguisticsGenerator extends BaseGenerator {
     const type = this.getActivityType(input);
     switch (type) {
       case "ei-vogal": return "Olha a figura! Com qual vogal essa palavra começa?";
-      case "ei-word-image": return "Qual é o nome dessa figura?";
       case "ei-animal": return "Qual é o nome desse bichinho?";
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
@@ -67,21 +64,6 @@ export class LinguisticsGenerator extends BaseGenerator {
           exemplo: v.exemplo,
           answer: v.letter,
           options,
-        };
-      }
-
-      if (type === 'ei-word-image') {
-        const words = LINGUISTICS_DATA.words.beginner;
-        const target = this.pickRandom(words);
-        const distractors = this.pickNRandom(words.filter(w => w.word !== target.word), 3);
-        const options = this.shuffle([target.word, ...distractors.map(d => d.word)]);
-        return {
-          q: `Qual é o ${target.word}?`,
-          visual: target.emoji,
-          palavra: target.word,
-          answer: target.word,
-          options,
-          progression: "image-word" // Support for the progression system
         };
       }
 

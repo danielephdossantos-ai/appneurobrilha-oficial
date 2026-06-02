@@ -198,8 +198,6 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
   const [banco, setBanco] = useState<BancoState | null>(null);
-  const [explanationLevel, setExplanationLevel] = useState<"easy" | "medium" | "hard">("medium");
-  const [isFirstExplanation, setIsFirstExplanation] = useState(true);
   const [teenGuided, setTeenGuided] = useState<boolean>(() => {
     try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
   });
@@ -330,7 +328,6 @@ function Escola() {
         if (isShapes) miniGameType = "shape";
         else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
         else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
-        else if (activity.content.progression === "image-word") miniGameType = "word-image";
       }
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
@@ -345,9 +342,7 @@ function Escola() {
           systemOptions,
           systemAnswer,
           instruction: activity.instruction,
-          miniGameType,
-          explanationLevel,
-          isFirstExplanation
+          miniGameType // Enviando o tipo de jogo para a IA
         }
       });
 
@@ -358,20 +353,20 @@ function Escola() {
       const novaAula = {
         ...data,
         materia: materiaId,
-        etapa: "professor_intro", // Inicia sempre com o Professor Virtual
+        etapa: guidedActive ? "ensino" : "opcoes",
         grade: selectedGrade,
         activityId: activity.id,
         bancoOrdem: preset?.ordem,
+        // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
         resposta_correta: systemAnswer,
+        // Conteúdo visual extra (emoji/cor) para Educação Infantil
         visual: activity.content.visual,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
         guided: guidedActive,
       };
-
-      setIsFirstExplanation(false); // Nas próximas, não usa mais o nome
 
 
 
@@ -410,9 +405,6 @@ function Escola() {
           activeMascot={activeMascot}
           tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
-          explanationLevel={explanationLevel}
-          setExplanationLevel={setExplanationLevel}
-          activeChild={activeChild}
         />
       </AulaErrorBoundary>
     );
@@ -750,22 +742,28 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
 
         {eiStep === 5 && (
-          <EIMiniGame
-            aula={{
-              ...aula,
-              progression: "image-word",
-              opcoes: sortedOpcoes,
-              resposta_correta: palavraFoco
-            }}
-            onAnswer={(isCorrect) => {
-              if (isCorrect) {
-                setTimeout(() => setEiStep(6), 1500);
-              } else {
-                // Se errar muito, volta pro início da aula (REFORÇO)
-                // O EIMiniGame já trata o feedback visual/sonoro e ABA
-              }
-            }}
-          />
+          <div className="w-full space-y-6">
+            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
+            <div className="grid grid-cols-1 gap-4">
+              {sortedOpcoes.map((opt: string, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (opt.toUpperCase() === (palavraFoco || "").toUpperCase()) {
+                      setEiStep(6);
+                      toast.success("Isso mesmo!");
+                    } else {
+                      toast.error("Ops! Vamos ver de novo para aprender?");
+                      setEiStep(1); // REFORÇO logic
+                    }
+                  }}
+                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl font-black uppercase text-center shadow-soft"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
 
@@ -810,475 +808,239 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
   );
 }
 
-// Componente unificado do Professor Virtual para explicar antes da atividade
-function VirtualProfessorIntro({ 
-  aula, 
-  eiStep, 
-  setEiStep, 
-  activeMascot, 
-  materiaMeta, 
-  onStart, 
-  onNaoEntendi, 
-  reexplaining, 
-  metodoIdx 
-}: any) {
-  const METODOS = [
-    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
-    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
-    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
-  ];
-  const metodo = METODOS[metodoIdx % METODOS.length];
-
-  const fala = (texto: string) => {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(texto);
-    utterance.lang = "pt-BR";
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  };
-
-  useEffect(() => {
-    const texto = eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
-                  eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
-                  eiStep === 3 ? (aula.etapa3_exemplo || "Vamos ver um exemplo!") :
-                  (aula.etapa4_como_monta || "Veja como resolver!");
-    if (texto) fala(texto);
-  }, [eiStep, aula]);
-
-  return (
-    <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col items-center gap-6">
-        <div className={`relative transition-all duration-1000 transform ${
-          eiStep === 1 ? 'scale-125 translate-y-4' :
-          eiStep === 2 ? 'scale-110 -translate-x-12' :
-          eiStep === 3 ? 'scale-110 translate-x-12' :
-          'scale-100'
-        }`}>
-          <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
-            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-            ) : (
-              <div className="flex items-center justify-center w-full h-full">
-                {activeMascot?.mascot?.image_url || materiaMeta.mascote}
-              </div>
-            )}
-          </div>
-          
-          <div className={`absolute transition-all duration-500 ${
-            eiStep === 2 ? '-right-16 -top-8' :
-            eiStep === 3 ? '-left-16 -top-8' :
-            '-top-24 left-1/2 -translate-x-1/2'
-          } w-72 md:w-80`}>
-            <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
-               <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
-                 eiStep === 2 ? 'bottom-[-18px] left-10' :
-                 eiStep === 3 ? 'bottom-[-18px] right-10' :
-                 'bottom-[-18px] left-1/2 -translate-x-1/2'
-               }`} />
-               <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
-                 {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
-                  eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
-                  eiStep === 3 ? (aula.etapa3_exemplo || "Vamos ver um exemplo!") :
-                  (aula.etapa4_como_monta || "Veja como resolver!")}
-               </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Visual Example Area */}
-        {(eiStep === 2 || eiStep === 3) && (
-          <div className="flex gap-4 items-center justify-center animate-bounce-slow mt-8">
-             {eiStep === 2 ? (
-               <div className="text-[140px] md:text-[180px] drop-shadow-2xl">
-                 {aula.visual || "⭐"}
-               </div>
-             ) : (
-               <div className="flex flex-col items-center">
-                 <div className="text-4xl font-black text-muted-foreground mb-2">EXEMPLO:</div>
-                 <div className="bg-white p-6 rounded-3xl border-4 border-dashed border-primary/30 flex gap-4">
-                    {aula.palavra_foco ? (
-                      <div className="text-6xl font-black text-primary tracking-tighter">{aula.palavra_foco}</div>
-                    ) : (
-                      <div className="text-6xl font-black text-primary">{aula.numero_a} {aula.operacao} {aula.numero_b} = {aula.resultado}</div>
-                    )}
-                 </div>
-               </div>
-             )}
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col items-center gap-4 mt-12">
-        {aula.metodo_usado && (
-          <div className="px-4 py-1.5 rounded-full bg-lilac/20 border border-lilac/40 text-xs font-black uppercase tracking-wider text-lilac-foreground animate-pulse">
-            ✨ Usando Método {aula.metodo_usado}
-          </div>
-        )}
-        
-        {eiStep < 4 ? (
-          <button
-            onClick={() => setEiStep(eiStep + 1)}
-            className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
-          >
-            CONTINUAR <ArrowRight className="h-8 w-8" />
-          </button>
-        ) : (
-          <button
-            onClick={onStart}
-            className="btn-tap bg-gradient-to-br from-success to-success/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
-          >
-            VAMOS JOGAR! <Play className="h-8 w-8 fill-current" />
-          </button>
-        )}
-
-        <button
-          onClick={onNaoEntendi}
-          disabled={reexplaining}
-          className="btn-tap bg-white border-[3px] border-sun text-sun-foreground rounded-full px-8 py-3 text-base md:text-lg font-black uppercase shadow-[0_4px_0_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-2 disabled:opacity-60"
-        >
-          {reexplaining ? (
-            <><Loader2 className="h-5 w-5 animate-spin" /> Mudando forma de explicar...</>
-          ) : (
-            <>🤔 NÃO ENTENDI · Mudar explicação</>
-          )}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-
 // ============= MATEMÁTICA INICIAL — 6 ETAPAS =============
-// 1. Explicação Visual  2. Contagem Guiada  3. Mostra a Conta
-// 4. Montagem da Conta  5. Prática            6. Continha Armada
-function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, childNome, tier, onComplete }: { aula: any; mathStep: number; setMathStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; tier: GradeTier; onComplete: (isCorrect: boolean) => void }) {
-  // Grade -> ano (0=Pré, 1..5)
-  const ano = useMemo(() => {
-    const g = String(aula.grade || "").toLowerCase();
-    if (/pré|pre|infantil/.test(g)) return 0;
-    const m = g.match(/(\d)\s*º/);
-    return m ? Math.min(5, Number(m[1])) : (tier === "ei" ? 0 : tier === "alfa" ? 1 : 3);
-  }, [aula.grade, tier]);
-
-  // Defaults adaptados por série (resultado máx: 5 / 10 / 20 / 99 / 200)
-  const maxByAno = [5, 10, 20, 50, 200, 200];
-  const safeMax = maxByAno[ano];
-  const rawA = Number(aula.numero_a ?? 2);
-  const rawB = Number(aula.numero_b ?? 3);
+// 1. Visual  2. Contagem  3. Conta  4. Montagem  5. Prática  6. Continha armada
+function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; mathStep: number; setMathStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
+  // Defaults — simplifica se a IA não mandar
+  const a = Number(aula.numero_a ?? 3);
+  const b = Number(aula.numero_b ?? 2);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
-  // Se IA mandou números muito grandes pra série, reduz pra manter o ensino simples
-  const tooBig = (op === "+" ? rawA + rawB : rawA) > safeMax;
-  const a = tooBig ? Math.min(rawA, ano <= 1 ? 2 : 4) : rawA;
-  const b = tooBig ? Math.min(rawB, ano <= 1 ? 3 : 3) : rawB;
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const emojiA = aula.visual_emoji || aula.visual || "🍎";
-  const emojiB = aula.visual_emoji_b || emojiA;
-
+  const emoji = aula.visual_emoji || aula.visual || "🍎";
   const opcoesNum: number[] = useMemo(() => {
     const base = Array.isArray(aula.opcoes_numericas) && aula.opcoes_numericas.length >= 2
-      ? aula.opcoes_numericas.map((n: any) => Number(n)).filter((n: number) => Number.isFinite(n))
+      ? aula.opcoes_numericas.map((n: any) => Number(n))
       : [resultado, Math.max(0, resultado - 1), resultado + 1];
-    const uniq = Array.from(new Set([resultado, ...base]));
-    return uniq.slice(0, 3).sort(() => Math.random() - 0.5);
+    return [...new Set(base)].slice(0, 3).sort(() => Math.random() - 0.5) as number[];
   }, [aula.opcoes_numericas, resultado]);
 
-  // Estados das telas
+  // Contagem (tela 2)
   const [contados, setContados] = useState<number[]>([]);
+  // Montagem (tela 4) — slots: [a, op, b, =, ?]
   const [montagem, setMontagem] = useState<(number | string | null)[]>([null, op, null, "=", "?"]);
-  const pecas = useMemo(() => {
-    const pool = [a, b, resultado, Math.max(0, resultado - 1), resultado + 1, Math.max(0, a - 1), b + 1];
-    return Array.from(new Set(pool)).sort(() => Math.random() - 0.5);
-  }, [a, b, resultado]);
+  const pecas = useMemo(() => [a, b, resultado, Math.max(0, resultado - 1), resultado + 1]
+    .filter((n, i, arr) => arr.indexOf(n) === i)
+    .sort(() => Math.random() - 0.5), [a, b, resultado]);
 
-  const totalCont = op === "+" ? a + b : a;
+  // Áudio guiado
+  useEffect(() => {
+    const playAudio = (msg: string) => {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(msg);
+      u.lang = "pt-BR"; u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    };
+    let text = "";
+    if (mathStep === 1) text = `Olha! ${a}`;
+    else if (mathStep === 2) text = "Toque para contar!";
+    else if (mathStep === 3) text = `${a} ${op === "+" ? "mais" : "menos"} ${b}`;
+    else if (mathStep === 4) text = "Monte a conta!";
+    else if (mathStep === 5) text = `Quanto é ${a} ${op === "+" ? "mais" : "menos"} ${b}?`;
+    else if (mathStep === 6) text = `${a} ${op === "+" ? "mais" : "menos"} ${b} é igual a ${resultado}`;
+    if (text) playAudio(text);
+  }, [mathStep, a, b, op, resultado]);
 
-  // ============= ÁUDIO =============
-  const fala = useMemo(() => {
-    const opWord = op === "+" ? "mais" : "menos";
-    if (mathStep === 1) return ano <= 1 ? `Vamos juntar! ${a} mais ${b}` : `${a} ${opWord} ${b}, vamos ver!`;
-    if (mathStep === 2) return "Vamos contar juntos!";
-    if (mathStep === 3) return `${a} ${opWord} ${b} é igual a ${resultado}`;
-    if (mathStep === 4) return "Monte a conta arrastando!";
-    if (mathStep === 5) return `Quanto é ${a} ${opWord} ${b}?`;
-    return `${a} ${opWord} ${b} igual a ${resultado}. Você arrasou!`;
-  }, [mathStep, a, b, op, resultado, ano]);
-
-  const captionByStep: Record<number, string> = {
-    1: ano === 0 ? "Vamos juntar!" : ano <= 2 ? `Temos ${a} e mais ${b}.` : ano === 3 ? "Juntando dezenas e unidades." : "Vamos resolver juntos!",
-    2: "Vamos contar juntos!",
-    3: `${a} ${op} ${b} = ${resultado}`,
-    4: "Arraste o número que falta",
-    5: "Toque na resposta certa!",
-    6: ano <= 1 ? "Vamos completar!" : ano === 2 ? "Complete" : "Complete a conta",
-  };
-
-  const playFala = (msg = fala) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(msg);
-    u.lang = "pt-BR";
-    u.rate = ano <= 1 ? 0.85 : 0.95;
-    window.speechSynthesis.speak(u);
-  };
-
-  useEffect(() => { playFala(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [mathStep, a, b, op, resultado]);
-
-  // ============= RENDER DE OBJETOS POR SÉRIE =============
-  // Ano 0-1: emoji (fruta/brinquedo). Ano 2-3: bolinhas coloridas. Ano 4-5: números puros.
-  const renderQuantidade = (n: number, variante: "a" | "b" = "a", contavel = false) => {
-    const cor = variante === "a" ? "text-coral" : "text-success";
-    const dotBg = variante === "a" ? "bg-coral" : "bg-success";
-    const useEmoji = ano <= 1;
-    const useBolinhas = ano === 2 || ano === 3;
-    if (ano >= 4 && !contavel) {
-      return <div className={`text-7xl md:text-8xl font-black ${cor}`}>{n}</div>;
-    }
-    return (
-      <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center max-w-[260px]">
-        {Array.from({ length: Math.max(0, n) }).map((_, i) => (
-          <span key={i} className={`${useEmoji ? `text-4xl md:text-5xl` : useBolinhas ? `w-7 h-7 md:w-8 md:h-8 rounded-full ${dotBg} shadow-sm` : `text-4xl ${cor}`} animate-in zoom-in inline-block`} style={{ animationDelay: `${i * 60}ms` }}>
-            {useEmoji ? (variante === "a" ? emojiA : emojiB) : useBolinhas ? "" : "●"}
-          </span>
-        ))}
-      </div>
-    );
-  };
-
-  // ============= UI HELPERS =============
-  const Header = () => (
-    <div className="flex items-center justify-between px-2 mb-2">
-      <button
-        onClick={() => mathStep > 1 && setMathStep(mathStep - 1)}
-        disabled={mathStep === 1}
-        className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 disabled:opacity-30 transition"
-        aria-label="Voltar"
-      >
-        <ArrowRight className="h-5 w-5 rotate-180" />
-      </button>
-      <button
-        onClick={() => playFala()}
-        className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition"
-        aria-label="Ouvir"
-      >
-        <Volume2 className="h-5 w-5" />
-      </button>
-    </div>
-  );
-
-  const ProgressDots = () => (
-    <div className="flex items-center justify-center gap-2 mt-4">
-      {[1, 2, 3, 4, 5, 6].map((n) => (
-        <span key={n} className={`h-2.5 rounded-full transition-all ${n === mathStep ? "w-6 bg-primary" : n < mathStep ? "w-2.5 bg-success" : "w-2.5 bg-muted"}`} />
+  const renderEmojis = (n: number, color = "text-primary") => (
+    <div className="flex flex-wrap gap-2 justify-center max-w-md">
+      {Array.from({ length: Math.max(0, n) }).map((_, i) => (
+        <span key={i} className={`text-5xl md:text-6xl ${color} animate-in zoom-in`} style={{ animationDelay: `${i * 100}ms` }}>{emoji}</span>
       ))}
     </div>
   );
 
-  // ============= CARD =============
+  const fala =
+    mathStep === 1 ? `Veja, ${childNome}! Temos ${a}!` :
+    mathStep === 2 ? "Toque em cada um para contar!" :
+    mathStep === 3 ? `Agora juntamos ${a} com ${b}!` :
+    mathStep === 4 ? "Arraste os números pros lugares!" :
+    mathStep === 5 ? "Toque na resposta certa!" :
+    "Veja a conta armada! Você arrasou!";
+
   return (
-    <div className="w-full max-w-2xl space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote (somente Pré-2º, opcional) */}
-      {ano <= 2 && (
-        <div className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-3xl shrink-0">
-            {activeMascot?.mascot?.image_url?.startsWith("http") ? (
-              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-            ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
-          </div>
-          <div className="bg-white rounded-2xl border-2 border-primary px-3 py-1.5 text-sm font-bold shadow-sm">{fala}</div>
+    <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Mascote guia */}
+      <div className="flex items-center gap-4 mb-2">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl shrink-0">
+          {activeMascot?.mascot?.image_url?.startsWith("http") ? (
+            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+          ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
         </div>
-      )}
+        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
+      </div>
 
-      <div className="rounded-3xl bg-white border-2 border-muted shadow-soft p-6 md:p-8">
-        <Header />
-
-        <div className="min-h-[280px] flex flex-col items-center justify-center">
-          {/* TELA 1 — EXPLICAÇÃO VISUAL */}
-          {mathStep === 1 && (
-            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5">
-              {renderQuantidade(a, "a")}
-              <div className="text-5xl md:text-6xl font-black text-sun">{op}</div>
-              {renderQuantidade(b, "b")}
+      <div className="flex flex-col items-center justify-center min-h-[300px]">
+        {/* TELA 1 — VISUAL */}
+        {mathStep === 1 && (
+          <div className="text-center space-y-6">
+            {renderEmojis(a)}
+            <div className="bg-primary text-white text-8xl md:text-9xl font-black w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
+              {a}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* TELA 2 — CONTAGEM GUIADA (toque pra contar) */}
-          {mathStep === 2 && (
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-wrap gap-2 md:gap-3 justify-center max-w-md">
-                {Array.from({ length: totalCont }).map((_, i) => {
-                  const tocado = contados.includes(i);
-                  const isB = i >= a;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => {
-                        if (tocado) return;
-                        const next = [...contados, i];
-                        setContados(next);
-                        playFala(String(next.length));
-                        if (next.length === totalCont) toast.success(`Você contou até ${totalCont}!`);
-                      }}
-                      className={`btn-tap relative ${ano <= 1 ? "w-14 h-14 md:w-16 md:h-16" : "w-12 h-12 md:w-14 md:h-14"} rounded-2xl flex items-center justify-center border-4 transition-all ${
-                        tocado ? "bg-success/15 border-success scale-95" : isB ? "bg-success/10 border-success hover:scale-110" : "bg-coral/10 border-coral hover:scale-110"
-                      }`}
-                    >
-                      {tocado ? (
-                        <span className="text-xl md:text-2xl font-black text-success">{contados.indexOf(i) + 1}</span>
-                      ) : ano <= 1 ? (
-                        <span className="text-3xl md:text-4xl">{isB ? emojiB : emojiA}</span>
-                      ) : (
-                        <span className={`w-5 h-5 md:w-6 md:h-6 rounded-full ${isB ? "bg-success" : "bg-coral"}`} />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="flex gap-2 mt-1 text-base md:text-lg font-black text-muted-foreground">
-                {Array.from({ length: totalCont }).map((_, i) => (
-                  <span key={i} className={i < contados.length ? "text-primary" : ""}>{i + 1}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* TELA 3 — MOSTRA A CONTA */}
-          {mathStep === 3 && (
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-black tracking-tight">
-                <span className="text-coral">{a}</span>
-                <span className="text-sun mx-3">{op}</span>
-                <span className="text-success">{b}</span>
-                <span className="text-foreground mx-3">=</span>
-                <span className="text-primary">{resultado}</span>
-              </div>
-              {ano >= 4 && (
-                <p className="text-sm text-muted-foreground mt-4 font-bold">Decompomos pra somar melhor</p>
-              )}
-            </div>
-          )}
-
-          {/* TELA 4 — MONTAGEM (arrastar/clicar números) */}
-          {mathStep === 4 && (
-            <div className="w-full space-y-6">
-              <div className="flex gap-3 items-center justify-center flex-wrap text-4xl md:text-5xl font-black">
-                {montagem.map((slot, idx) => {
-                  const isHole = idx === 0 || idx === 2 || idx === 4;
-                  if (!isHole) return <span key={idx} className="px-2 text-sun">{slot}</span>;
-                  const filled = slot !== null && slot !== "?";
-                  return (
-                    <div
-                      key={idx}
-                      className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl border-4 border-dashed flex items-center justify-center ${
-                        filled ? "bg-primary text-white border-primary" : "bg-muted/30 border-muted text-muted-foreground/60"
-                      }`}
-                    >
-                      {filled ? slot : ""}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="flex gap-2 md:gap-3 flex-wrap justify-center">
-                {pecas.map((n, i) => (
+        {/* TELA 2 — CONTAGEM (toque para contar) */}
+        {mathStep === 2 && (
+          <div className="text-center space-y-6">
+            <div className="flex flex-wrap gap-3 justify-center max-w-md mx-auto">
+              {Array.from({ length: a }).map((_, i) => {
+                const tocado = contados.includes(i);
+                return (
                   <button
                     key={i}
                     onClick={() => {
-                      const next = [...montagem];
-                      const slotIdx = next[0] == null ? 0 : next[2] == null ? 2 : next[4] === "?" ? 4 : -1;
-                      if (slotIdx < 0) return;
-                      next[slotIdx] = n;
-                      setMontagem(next);
-                      if (slotIdx === 4) {
-                        if (next[0] === a && next[2] === b && n === resultado) {
-                          toast.success("Conta montada!");
-                        } else {
-                          toast.warning("Hmm, tente outros números!");
-                          setTimeout(() => setMontagem([null, op, null, "=", "?"]), 1200);
-                        }
+                      if (!tocado) {
+                        const next = [...contados, i];
+                        setContados(next);
+                        const u = new SpeechSynthesisUtterance(String(next.length));
+                        u.lang = "pt-BR"; u.rate = 0.95;
+                        window.speechSynthesis.speak(u);
+                        if (next.length === a) toast.success(`Você contou até ${a}!`);
                       }
                     }}
-                    className="btn-tap w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white border-4 border-primary text-primary text-2xl md:text-3xl font-black shadow-md hover:bg-primary/5"
+                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center text-5xl md:text-6xl border-4 transition-all ${
+                      tocado ? "bg-success/15 border-success scale-90" : "bg-white border-primary hover:scale-110"
+                    }`}
                   >
-                    {n}
+                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : emoji}
                   </button>
-                ))}
-                {(montagem[0] != null || montagem[2] != null) && (
-                  <button onClick={() => setMontagem([null, op, null, "=", "?"])} className="text-xs font-bold text-muted-foreground underline self-center px-2">Recomeçar</button>
-                )}
+                );
+              })}
+            </div>
+            <p className="text-2xl font-black text-primary">{contados.length} / {a}</p>
+          </div>
+        )}
+
+        {/* TELA 3 — CONTA (visual) */}
+        {mathStep === 3 && (
+          <div className="space-y-4 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {renderEmojis(a)}
+              <div className="text-6xl font-black text-sun">{op}</div>
+              {renderEmojis(b, "text-success")}
+            </div>
+            <div className="text-5xl md:text-6xl font-black text-primary mt-6">
+              {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
+            </div>
+          </div>
+        )}
+
+        {/* TELA 4 — MONTAGEM (arrastar/clicar números) */}
+        {mathStep === 4 && (
+          <div className="w-full space-y-8">
+            <div className="flex gap-3 items-center justify-center flex-wrap text-4xl md:text-5xl font-black">
+              {montagem.map((slot, idx) => {
+                const isHole = idx === 0 || idx === 2;
+                if (!isHole) return <span key={idx} className="px-2 text-sun">{slot}</span>;
+                return (
+                  <div
+                    key={idx}
+                    className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl border-4 border-dashed flex items-center justify-center ${
+                      slot != null ? "bg-primary text-white border-primary" : "bg-muted/30 border-muted text-muted-foreground"
+                    }`}
+                  >
+                    {slot != null ? slot : "?"}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex gap-3 flex-wrap justify-center">
+              {pecas.map((n, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const next = [...montagem];
+                    const slotIdx = next[0] == null ? 0 : next[2] == null ? 2 : -1;
+                    if (slotIdx < 0) return;
+                    next[slotIdx] = n;
+                    setMontagem(next);
+                    if (next[0] === a && next[2] === b) {
+                      next[4] = resultado;
+                      setMontagem([...next]);
+                      toast.success("Conta montada! Muito bem!");
+                    } else if (next[0] != null && next[2] != null) {
+                      toast.warning("Hmm, tente outros números!");
+                      setTimeout(() => setMontagem([null, op, null, "=", "?"]), 1200);
+                    }
+                  }}
+                  className="btn-tap w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white border-4 border-primary text-primary text-4xl font-black shadow-lg hover:bg-primary/5"
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TELA 5 — PRÁTICA (escolher resultado) */}
+        {mathStep === 5 && (
+          <div className="w-full space-y-6">
+            <div className="text-center text-5xl md:text-6xl font-black text-primary">
+              {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {opcoesNum.map((n, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (n === resultado) {
+                      setMathStep(6);
+                      toast.success("Isso mesmo!");
+                    } else {
+                      toast.error("Quase! Vamos contar de novo?");
+                      setContados([]);
+                      setMontagem([null, op, null, "=", "?"]);
+                      setMathStep(2);
+                    }
+                  }}
+                  className="btn-tap aspect-square rounded-3xl bg-white border-4 border-muted hover:border-primary text-5xl md:text-6xl font-black text-primary shadow-soft"
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TELA 6 — CONTINHA ARMADA */}
+        {mathStep === 6 && (
+          <div className="text-center space-y-6">
+            <div className="inline-block bg-white border-4 border-primary rounded-3xl px-10 py-8 shadow-glow">
+              <div className="font-mono text-6xl md:text-7xl font-black text-primary leading-tight text-right">
+                <div className="px-4">{a}</div>
+                <div className="px-4 border-b-4 border-foreground pb-2"><span className="text-sun mr-4">{op}</span>{b}</div>
+                <div className="px-4 pt-2 text-success">{resultado}</div>
               </div>
             </div>
-          )}
-
-          {/* TELA 5 — PRÁTICA */}
-          {mathStep === 5 && (
-            <div className="w-full space-y-6">
-              <div className="text-center text-4xl md:text-6xl font-black">
-                <span className="text-coral">{a}</span>
-                <span className="text-sun mx-3">{op}</span>
-                <span className="text-success">{b}</span>
-                <span className="text-foreground mx-3">=</span>
-                <span className="text-muted-foreground">?</span>
-              </div>
-              <div className="grid grid-cols-3 gap-3 md:gap-4">
-                {opcoesNum.map((n, i) => {
-                  const corClasses = ["bg-coral/10 border-coral text-coral", "bg-sun/15 border-sun text-sun-foreground", "bg-lilac/15 border-lilac text-lilac-foreground"];
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => {
-                        if (n === resultado) {
-                          setMathStep(6);
-                          toast.success("Isso mesmo!");
-                        } else {
-                          toast.error("Quase! Vamos contar de novo?");
-                          setContados([]);
-                          setMontagem([null, op, null, "=", "?"]);
-                          setMathStep(2); // REFORÇO
-                        }
-                      }}
-                      className={`btn-tap aspect-square rounded-2xl border-4 text-4xl md:text-5xl font-black shadow-soft hover:scale-105 transition ${corClasses[i % 3]}`}
-                    >
-                      {n}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* TELA 6 — CONTINHA ARMADA */}
-          {mathStep === 6 && (
-            <div className="text-center space-y-5">
-              <div className="inline-block font-mono text-5xl md:text-7xl font-black leading-tight text-right px-6 md:px-10">
-                <div className="text-coral">{String(a).padStart(String(resultado).length, " ")}</div>
-                <div className="border-b-4 border-foreground pb-1 flex items-baseline justify-end gap-2">
-                  <span className="text-sun">{op}</span>
-                  <span className="text-success">{String(b).padStart(String(resultado).length, " ")}</span>
-                </div>
-                <div className="pt-2 text-primary">{resultado}</div>
-              </div>
-              <button
-                onClick={() => onComplete(true)}
-                className="btn-tap bg-success text-white px-10 py-4 rounded-full text-xl font-black shadow-glow mt-4"
-              >
-                CONCLUIR AULA
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Caption + dots */}
-        <p className="text-center text-sm md:text-base font-bold text-muted-foreground mt-5">{captionByStep[mathStep]}</p>
-        <ProgressDots />
+            <p className="text-2xl font-black text-primary uppercase">Continha armada!</p>
+            <button
+              onClick={() => onComplete(true)}
+              className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
+            >
+              CONCLUIR AULA! 🌟
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Botão CONTINUAR (telas que não decidem sozinhas) */}
-      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === totalCont) || (mathStep === 4 && montagem[4] === resultado)) && (
-        <div className="flex justify-center">
+      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === a) || (mathStep === 4 && montagem[4] === resultado)) && (
+        <div className="flex justify-center mt-6">
           <button
             onClick={() => setMathStep(mathStep + 1)}
-            className="btn-tap bg-primary text-white rounded-full px-10 py-4 text-xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
+            className="btn-tap bg-primary text-white rounded-full px-12 py-5 text-2xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
           >
-            CONTINUAR <ArrowRight className="h-6 w-6" />
+            CONTINUAR <ArrowRight className="h-8 w-8" />
           </button>
         </div>
       )}
@@ -1288,220 +1050,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
 
 
 
-
-// ============================================================================
-// MathExplanationScreen — Padrão único de tela de explicação para
-// Matemática (2º ao 9º ano). Limpo, sem mascote, estilo livro didático.
-// ============================================================================
-function MathExplanationScreen({
-  aula,
-  onTentar,
-  onNaoEntendi,
-  reexplaining,
-}: {
-  aula: any;
-  onTentar: () => void;
-  onNaoEntendi: () => void;
-  reexplaining: boolean;
-}) {
-  const [showPassos, setShowPassos] = useState(true);
-  const [falando, setFalando] = useState(false);
-
-  const grade = String(aula.grade || "");
-  const ano = useMemo(() => {
-    const m = grade.match(/(\d)/);
-    return m ? Number(m[1]) : 5;
-  }, [grade]);
-  const ehPequeno = ano >= 2 && ano <= 5;
-
-  const titulo = aula.titulo_aula || (ehPequeno ? "Vamos aprender!" : "Hora de aprender");
-  const pergunta = aula.pergunta_simples || aula.pergunta || `O que é ${aula.topic || "isso"}?`;
-  const explicacao = aula.explicacao_curta || aula.ensino || "";
-  const contaPrincipal = aula.conta_principal || aula.demo || "";
-
-  const passos: Array<{ titulo: string; conteudo: string }> = useMemo(() => {
-    if (Array.isArray(aula.passos_resolucao) && aula.passos_resolucao.length > 0) {
-      return aula.passos_resolucao.map((p: any, i: number) =>
-        typeof p === "string"
-          ? { titulo: `Passo ${i + 1}`, conteudo: p }
-          : { titulo: p.titulo || `Passo ${i + 1}`, conteudo: p.conteudo || "" }
-      );
-    }
-    if (Array.isArray(aula.passos) && aula.passos.length > 0) {
-      return aula.passos.map((p: any, i: number) => ({
-        titulo: `Passo ${i + 1}`,
-        conteudo: typeof p === "string" ? p : String(p),
-      }));
-    }
-    return [];
-  }, [aula.passos_resolucao, aula.passos]);
-
-  const textoAudio = useMemo(() => {
-    const partes: string[] = [];
-    if (pergunta) partes.push(pergunta);
-    if (explicacao) partes.push(explicacao);
-    if (contaPrincipal) partes.push(`A conta é: ${contaPrincipal}.`);
-    passos.forEach((p) => partes.push(`${p.titulo}. ${p.conteudo}`));
-    return aula.audio_explicacao || partes.join(" ");
-  }, [pergunta, explicacao, contaPrincipal, passos, aula.audio_explicacao]);
-
-  const ouvir = () => {
-    try {
-      const synth = window.speechSynthesis;
-      if (!synth) return;
-      synth.cancel();
-      const u = new SpeechSynthesisUtterance(textoAudio);
-      u.lang = "pt-BR";
-      u.rate = ehPequeno ? 0.9 : 0.98;
-      u.pitch = 1.05;
-      u.onstart = () => setFalando(true);
-      u.onend = () => setFalando(false);
-      u.onerror = () => setFalando(false);
-      synth.speak(u);
-    } catch {
-      setFalando(false);
-    }
-  };
-  const parar = () => {
-    try { window.speechSynthesis?.cancel(); } catch {}
-    setFalando(false);
-  };
-
-  useEffect(() => {
-    return () => { try { window.speechSynthesis?.cancel(); } catch {} };
-  }, []);
-
-  return (
-    <div className="w-full max-w-3xl mx-auto px-3 md:px-0">
-      {/* Título grande */}
-      <h1 className="text-center font-black text-3xl md:text-5xl text-slate-900 tracking-tight mb-3">
-        {titulo}
-      </h1>
-
-      {/* Pergunta simples */}
-      <p className="text-center text-lg md:text-2xl font-semibold text-slate-700 mb-2">
-        {pergunta}
-      </p>
-
-      {/* Explicação curta (máx 2 linhas) */}
-      {explicacao && (
-        <p className="text-center text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-6 leading-snug line-clamp-2">
-          {explicacao}
-        </p>
-      )}
-
-      {/* Conta principal em DESTAQUE */}
-      {contaPrincipal && (
-        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-6 py-8 mb-6 text-center">
-          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
-            Conta principal
-          </div>
-          <div className="font-black text-slate-900 text-3xl md:text-5xl leading-tight break-words">
-            {contaPrincipal}
-          </div>
-        </div>
-      )}
-
-      {/* Passo a passo */}
-      {showPassos && passos.length > 0 && (
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 md:p-6 mb-6 space-y-3">
-          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">
-            Passo a passo
-          </div>
-          {passos.map((p, i) => {
-            const isLast = i === passos.length - 1;
-            return (
-              <div
-                key={i}
-                className={`rounded-xl border ${isLast ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-white"} p-3 md:p-4 flex gap-3`}
-              >
-                <div
-                  className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-black ${isLast ? "bg-emerald-500 text-white" : "bg-primary text-primary-foreground"}`}
-                >
-                  {i + 1}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className={`font-bold ${isLast ? "text-emerald-800" : "text-slate-800"} text-base md:text-lg`}>
-                    {p.titulo}
-                  </div>
-                  <div className={`mt-1 ${isLast ? "text-emerald-900 text-lg md:text-2xl font-extrabold" : "text-slate-700 text-base md:text-lg"} whitespace-pre-wrap break-words`}>
-                    {p.conteudo}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Botões */}
-      <div className="flex flex-wrap gap-3 justify-center">
-        <button
-          onClick={falando ? parar : ouvir}
-          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-primary text-primary font-bold px-5 py-3 shadow-sm hover:bg-primary/5"
-        >
-          <Volume2 className="h-5 w-5" />
-          {falando ? "Parar áudio" : "Ouvir explicação"}
-        </button>
-        <button
-          onClick={() => setShowPassos((v) => !v)}
-          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-slate-300 text-slate-700 font-bold px-5 py-3 shadow-sm hover:bg-slate-50"
-        >
-          <BookOpen className="h-5 w-5" />
-          {showPassos ? "Ocultar passo a passo" : "Ver passo a passo"}
-        </button>
-        <button
-          onClick={onTentar}
-          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-primary text-primary-foreground font-black px-6 py-3 shadow-md hover:opacity-95"
-        >
-          Tentar agora <ArrowRight className="h-5 w-5" />
-        </button>
-        <button
-          onClick={onNaoEntendi}
-          disabled={reexplaining}
-          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-sun text-sun-foreground font-bold px-4 py-3 shadow-sm disabled:opacity-60"
-        >
-          {reexplaining ? (
-            <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</>
-          ) : (
-            <>Não entendi — outro método</>
-          )}
-        </button>
-      </div>
-
-      {aula.metodo_usado && (
-        <div className="text-center text-xs text-slate-500 mt-3">
-          Método atual: <b>{aula.metodo_usado}</b>
-        </div>
-      )}
-    </div>
-  );
-}
-
-
-function AulaView({ 
-  aula, 
-  setAula, 
-  childNome, 
-  hiperfoco, 
-  activeMascot, 
-  tier, 
-  onCompleted,
-  explanationLevel,
-  setExplanationLevel,
-  activeChild
-}: { 
-  aula: any; 
-  setAula: (a: any) => void; 
-  childNome: string; 
-  hiperfoco: string; 
-  activeMascot: any; 
-  tier: GradeTier; 
-  onCompleted?: (activityId: string) => void;
-  explanationLevel: "easy" | "medium" | "hard";
-  setExplanationLevel: (l: "easy" | "medium" | "hard") => void;
-  activeChild: any;
-}) {
+function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
 
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
@@ -1522,7 +1071,7 @@ function AulaView({
   const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
 
   // Estados para Matemática Inicial (6 etapas)
-  const isMathFlow = (tier === "ei" || tier === "alfa" || tier === "fund1") && (aula.materia === "matematica" || aula.materia === "numeros");
+  const isMathFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "matematica" || aula.materia === "numeros");
   const [mathStep, setMathStep] = useState(1);
   
   
@@ -1535,24 +1084,12 @@ function AulaView({
   const naoEntendi = async () => {
     if (reexplaining) return;
     setReexplaining(true);
-
-    // Lógica de 3 níveis: Fácil, Médio, Difícil
-    // Se não entendeu, tentamos simplificar o nível ou mudar o método
-    let nextLevel = explanationLevel;
-    if (explanationLevel === "medium") nextLevel = "easy";
-    else if (explanationLevel === "hard") nextLevel = "medium";
-    else {
-      // Já está no fácil, apenas incrementa o método para a IA mudar a abordagem
-      setMetodoIdx((i) => i + 1);
-    }
-    setExplanationLevel(nextLevel);
-
     const metodo = METODOS[metodoIdx % METODOS.length];
     try {
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
           mode: "escola",
-          child: { nome: childNome, hiperfoco, serie: aula.grade, diagnostico: activeChild?.diagnostico, perfil: activeChild?.perfil, observacoes: activeChild?.observacoes },
+          child: { nome: childNome, hiperfoco, serie: aula.grade },
           mascot: activeMascot ? {
             name: activeMascot.mascot?.name,
             description: activeMascot.mascot?.description,
@@ -1567,8 +1104,6 @@ function AulaView({
           systemAnswer: aula.resposta_correta,
           miniGameType: aula.miniGameType,
           reexplainMethod: metodo.id,
-          explanationLevel: nextLevel,
-          isFirstExplanation: false // Já passou da primeira
         },
       });
       if (error) throw error;
@@ -1632,58 +1167,20 @@ function AulaView({
       {/* Cenário mágico de fundo por faixa etária */}
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
         <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
-        <div className="relative flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="text-5xl drop-shadow animate-float-thinking">
-              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-14 h-14 rounded-full object-cover border-4 border-white shadow-lg" />
-              ) : (
-                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center border-4 border-white shadow-lg">
-                  {activeMascot?.mascot?.image_url || materiaMeta.mascote}
-                </div>
-              )}
-            </div>
-            <div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-primary/70">{theme.scene}</div>
-              <div className={`font-extrabold ${theme.titleScale} leading-tight`}>{materiaMeta.nome}</div>
-              <div className="text-[11px] font-bold text-muted-foreground hidden md:block">
-                {activeMascot?.mascot?.name || materiaMeta.mascoteNome} te ajuda!
-              </div>
-            </div>
+        <div className="relative flex items-center gap-4">
+          <div className="text-5xl drop-shadow animate-float-thinking">
+            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+            ) : (
+              activeMascot?.mascot?.image_url || materiaMeta.mascote
+            )}
           </div>
-
-          <div className="flex items-center gap-3">
-            {/* Botão REPETIR ÁUDIO requested by user */}
-            <button
-              onClick={() => {
-                if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-                window.speechSynthesis.cancel();
-                // Tenta pegar o texto mais relevante para repetir
-                const textToRepeat = aula.audio_explicacao || aula.etapa5_instrucao || aula.pergunta || aula.etapa1_intro || "";
-                if (textToRepeat) {
-                  const u = new SpeechSynthesisUtterance(textToRepeat);
-                  u.lang = 'pt-BR';
-                  u.rate = 0.9;
-                  window.speechSynthesis.speak(u);
-                }
-              }}
-              className="btn-tap w-12 h-12 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center shadow-md hover:bg-primary/5 active:scale-95"
-              aria-label="Repetir áudio"
-            >
-              <Volume2 className="h-6 w-6" />
-            </button>
-
-            {/* Botão VOLTAR requested by user */}
-            <button
-              onClick={() => {
-                if (aula.etapa === "professor_intro") setAula(null);
-                else setAula({ ...aula, etapa: "professor_intro" });
-              }}
-              className="btn-tap w-12 h-12 rounded-full bg-white border-2 border-slate-200 text-slate-500 flex items-center justify-center shadow-md hover:bg-slate-50 active:scale-95"
-              aria-label="Voltar"
-            >
-              <ArrowRight className="h-6 w-6 rotate-180" />
-            </button>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
+            <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
+            <div className="text-sm text-muted-foreground">
+              <b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+            </div>
           </div>
         </div>
       </div>
@@ -1745,24 +1242,7 @@ function AulaView({
 
 
 
-            {aula.etapa === "professor_intro" ? (
-              <VirtualProfessorIntro
-                aula={aula}
-                eiStep={eiStep}
-                setEiStep={setEiStep}
-                activeMascot={activeMascot}
-                materiaMeta={materiaMeta}
-                onStart={() => {
-                  // Sempre vai para "ensino" — lá a tela mostra Tema/Explicação/Exemplo
-                  // (MathExplanationScreen para Math 2º-9º, painel mid/teen para outras matérias)
-                  setAula({ ...aula, etapa: "ensino" });
-                  setEiStep(1);
-                }}
-                onNaoEntendi={naoEntendi}
-                reexplaining={reexplaining}
-                metodoIdx={metodoIdx}
-              />
-            ) : aula.guided ? (
+            {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
                 {isAlfaFlow ? (
                   <AlfabetizacaoFlow
@@ -1788,7 +1268,6 @@ function AulaView({
                     activeMascot={activeMascot}
                     materiaMeta={materiaMeta}
                     childNome={childNome}
-                    tier={tier}
                     onComplete={(isCorrect) => {
                       setAcertou(isCorrect);
                       if (isCorrect && !completedRef.current && aula.activityId) {
@@ -1941,21 +1420,6 @@ function AulaView({
                   const panel: "kids" | "mid" | "teen" =
                     /infantil|pré|pre|^1º/i.test(g) ? "kids" :
                     /^[2-5]º/.test(g) ? "mid" : "teen";
-
-                  // ✅ Novo padrão de tela de explicação de MATEMÁTICA (2º ao 9º ano)
-                  const isMathExp = (panel === "mid" || panel === "teen") &&
-                    (aula.materia === "matematica" || aula.materia === "numeros");
-                  if (isMathExp) {
-                    return (
-                      <MathExplanationScreen
-                        aula={aula}
-                        reexplaining={reexplaining}
-                        onNaoEntendi={naoEntendi}
-                        onTentar={() => setAula({ ...aula, etapa: "opcoes" })}
-                      />
-                    );
-                  }
-
                   const visualGlyph = aula.visual
                     ? aula.visual
                     : hiperfoco === "dinossauros" ? "🦕"
@@ -1965,7 +1429,6 @@ function AulaView({
 
                   return (
                     <div>
-
 
                       {/* 2º AO 5º ANO — caderno pautado */}
                       {panel === "mid" && (

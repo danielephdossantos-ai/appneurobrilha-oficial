@@ -374,89 +374,6 @@ function DiscoveryGame({ aula, disabled, onAnswer }: Props) {
   );
 }
 
-/* ---------- MODE: WORD IMAGE MATCH (ATIVIDADE MODELO) ---------- */
-function WordImageMatch({ aula, disabled, onAnswer }: Props) {
-  const correct = String(aula.resposta_correta || aula.answer || aula.palavra || "").toUpperCase();
-  const [errors, setErrors] = useState(0);
-  const [wrong, setWrong] = useState<string | null>(null);
-  const [done, setDone] = useState(false);
-  const { celebrate, fire } = useFeedback(onAnswer);
-  
-  // ABA: Destaque após 2 erros
-  const showHint = errors >= 2;
-
-  const playAudio = (text: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'pt-BR';
-    u.rate = 0.9;
-    window.speechSynthesis.speak(u);
-  };
-
-  useEffect(() => {
-    // Áudio automático ao entrar
-    if (!done) {
-      playAudio(`Qual é o ${correct}?`);
-    }
-  }, [correct, done]);
-
-  const handleChoice = (opt: string) => {
-    if (disabled || done) return;
-    const isCorrect = opt.toUpperCase() === correct;
-    
-    if (isCorrect) {
-      setDone(true);
-      playAudio(`Muito bem! Isso é um ${correct}!`);
-      fire(true, opt);
-    } else {
-      setWrong(opt);
-      setErrors(prev => prev + 1);
-      playAudio(`Vamos tentar de novo. Procure o ${correct}`);
-      setTimeout(() => setWrong(null), 600);
-      fire(false, opt);
-    }
-  };
-
-  return (
-    <div className="relative w-full max-w-2xl mx-auto flex flex-col items-center gap-8 py-4">
-      {celebrate && <Confetti />}
-      
-      {/* CENTRO: Imagem grande no card claro */}
-      <div className="w-full bg-white rounded-[3rem] border-4 border-slate-100 shadow-xl p-8 flex flex-col items-center justify-center animate-in zoom-in duration-500 overflow-hidden relative min-h-[300px]">
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ background: 'radial-gradient(circle, #87CEEB 0%, transparent 70%)' }}></div>
-        <div className="text-[10rem] md:text-[12rem] drop-shadow-2xl animate-float-thinking relative z-10">
-          {aula.visual || "❓"}
-        </div>
-      </div>
-
-      {/* RESPOSTAS: Botões grandes e arredondados */}
-      <div className="grid grid-cols-2 gap-4 md:gap-6 w-full px-2">
-        {(aula.opcoes || []).map((opt: string, i: number) => {
-          const isCorrect = opt.toUpperCase() === correct;
-          const isWrong = wrong === opt;
-          const hint = showHint && isCorrect;
-          
-          return (
-            <button
-              key={i}
-              disabled={disabled || done}
-              onClick={() => handleChoice(opt)}
-              className={`btn-tap p-6 md:p-8 rounded-[2rem] border-4 text-2xl md:text-3xl font-black uppercase shadow-[0_8px_0_rgba(0,0,0,0.1)] transition-all flex items-center justify-center min-h-[100px]
-                ${isWrong ? "animate-[wiggle_0.5s] border-destructive bg-destructive/5 text-destructive" : ""}
-                ${done && isCorrect ? "bg-success text-white border-white scale-105 shadow-glow" : "bg-white border-slate-200 text-slate-700 hover:border-primary"}
-                ${hint && !done ? "border-primary animate-pulse shadow-glow ring-4 ring-primary/20" : ""}
-              `}
-            >
-              {opt}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 /* ---------- DISPATCHER ---------- */
 export function EIMiniGame(props: Props) {
   const { aula } = props;
@@ -472,22 +389,17 @@ export function EIMiniGame(props: Props) {
   const allSingleLetters = !isDiscovery && opts.length > 0 && opts.every(o => String(o).trim().length === 1);
   const isShapes = !isDiscovery && (materia.includes("forma") || topicLc.includes("forma") ||
     Object.keys(SHAPE_GLYPHS).includes(correct));
-  const isWordImage = !isDiscovery && aula.progression === "image-word";
 
-  let mode: "shape" | "sum" | "word" | "bubbles" | "discovery" | "word-image" = "bubbles";
+  let mode: "shape" | "sum" | "word" | "bubbles" | "discovery" = "bubbles";
   
   if (isDiscovery) mode = "discovery";
-  else if (isWordImage) mode = "word-image";
   else if (isShapes) mode = "shape";
   else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) mode = "sum";
   else if (allSingleLetters && palavra.length >= 2) mode = "word";
 
-  switch (mode) {
-    case "discovery": return <DiscoveryGame {...props} />;
-    case "word-image": return <WordImageMatch {...props} />;
-    case "shape": return <ShapeMatch {...props} />;
-    case "sum": return <PhonemeSum {...props} />;
-    case "word": return <WordBuild {...props} />;
-    default: return <Bubbles {...props} />;
-  }
+  if (mode === "discovery") return <DiscoveryGame {...props} />;
+  if (mode === "shape") return <ShapeMatch {...props} />;
+  if (mode === "sum") return <PhonemeSum {...props} />;
+  if (mode === "word") return <WordBuild {...props} />;
+  return <Bubbles {...props} />;
 }

@@ -68,16 +68,11 @@ export const LINGUISTICS_DATA = {
   ],
   words: {
     beginner: [
-      { word: 'BOLA', syllables: ['BO', 'LA'], category: 'objects', emoji: '⚽' },
-      { word: 'CASA', syllables: ['CA', 'SA'], category: 'objects', emoji: '🏠' },
-      { word: 'DADO', syllables: ['DA', 'DO'], category: 'objects', emoji: '🎲' },
-      { word: 'FOCA', syllables: ['FO', 'CA'], category: 'animals', emoji: '🦭' },
-      { word: 'GATO', syllables: ['GA', 'TO'], category: 'animals', emoji: '🐱' },
-      { word: 'MACACO', syllables: ['MA', 'CA', 'CO'], category: 'animals', emoji: '🐒' },
-      { word: 'BOLO', syllables: ['BO', 'LO'], category: 'food', emoji: '🎂' },
-      { word: 'SAPO', syllables: ['SA', 'PO'], category: 'animals', emoji: '🐸' },
-      { word: 'UVA', syllables: ['U', 'VA'], category: 'food', emoji: '🍇' },
-      { word: 'LUAR', syllables: ['LU', 'AR'], category: 'nature', emoji: '🌙' },
+      { word: 'BOLA', syllables: ['BO', 'LA'], category: 'objects' },
+      { word: 'CASA', syllables: ['CA', 'SA'], category: 'objects' },
+      { word: 'DADO', syllables: ['DA', 'DO'], category: 'objects' },
+      { word: 'FOCA', syllables: ['FO', 'CA'], category: 'animals' },
+      { word: 'GATO', syllables: ['GA', 'TO'], category: 'animals' },
     ],
     intermediate: [
       { word: 'BONECA', syllables: ['BO', 'NE', 'CA'], category: 'toys' },

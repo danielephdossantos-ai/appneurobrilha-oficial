@@ -15,7 +15,7 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep, explanationLevel, isFirstExplanation } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep } = payload
 
     // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
@@ -98,51 +98,41 @@ serve(async (req) => {
         ? `TOM: Amigável e didático. Frases médias. Explicações concretas com exemplos do cotidiano. Use o hiperfoco como ponte. Mistura caixa baixa com palavras-chave em CAIXA ALTA.`
         : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas com lógica/passo-a-passo. Pode usar termos técnicos quando explicados. Trate como alguém capaz e curioso.`;
 
-      // Diagnostic flags used throughout the prompt
-      const diag = (child.diagnostico || "").toLowerCase();
-      const isTEA = diag.includes("tea") || diag.includes("autismo");
-      const isTDAH = diag.includes("tdah") || diag.includes("déficit") || diag.includes("deficit");
-
       // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       // Quando a criança aperta "Não Entendi", trocamos a ABORDAGEM (não o conteúdo)
-      const explLevel = explanationLevel || "medium";
-
-      const levelInstruction = {
-        easy: "NÍVEL FÁCIL: Explicação extremamente simples, frases curtíssimas, foco em um único conceito por vez, linguagem muito lúdica.",
-        medium: "NÍVEL MÉDIO: Explicação equilibrada, introduz o conceito com clareza e um exemplo prático direto.",
-        hard: "NÍVEL DIFÍCIL: Explicação mais completa, relaciona com outros conceitos, usa vocabulário um pouco mais rico (dentro da faixa etária)."
-      }[explLevel as "easy" | "medium" | "hard"];
-
-      // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       const metodoBlock = reexplainMethod === "teacch"
         ? `🧩 MÉTODO TEACCH (Estruturado Visual — ideal para TEA):
            - Quebre em PASSOS NUMERADOS visuais (PASSO 1, PASSO 2, PASSO 3).
            - Use rotinas previsíveis: "PRIMEIRO... DEPOIS... POR ÚLTIMO...".
            - Seja LITERAL. Zero metáforas, zero figuras de linguagem.
-           - Cada etapa = uma ação concreta e finita. Sem ambiguidade.`
+           - Cada etapa = uma ação concreta e finita. Sem ambiguidade.
+           - Use ícones/emojis fixos como âncoras visuais (📦 = caixa, ✅ = pronto).`
         : reexplainMethod === "multisensorial"
         ? `🎨 MÉTODO MULTISSENSORIAL (Orton-Gillingham — ideal para Dislexia/TDAH):
            - Combine VER + OUVIR + TOCAR + FALAR em cada explicação.
            - Estique sons das letras: "MMMM-AAAA-MMMM-AAAA = MAMA".
            - Peça pra criança "desenhar no ar com o dedo" ou "bater palmas pra cada sílaba".
+           - Use ritmo, música, repetição rítmica.
            - Conecte letra → som → gesto → imagem em TODA explicação.`
         : reexplainMethod === "montessori"
         ? `🌱 MÉTODO MONTESSORI (Concreto/Manipulável — ideal para todos):
            - Use EXEMPLOS DO MUNDO REAL que a criança toca/vê todo dia.
            - "Imagine 3 maçãs na sua cozinha..." em vez de "3 + 2 = ?".
            - A criança DESCOBRE a resposta sozinha guiada por perguntas abertas.
-           - Use o HIPERFOCO (${child.hiperfoco || "interesse"}) como material concreto.`
-        : `MÉTODO PADRÃO: explicação didática direta personalizada.`;
+           - Use o HIPERFOCO (${child.hiperfoco || "interesse"}) como material concreto.
+           - Sem pressa, sem certo/errado — explore o conceito como brincadeira livre.`
+        : `MÉTODO PADRÃO: explicação didática direta.`;
 
       const reexplainInstruction = reexplainMethod
-        ? `\n\n⚠️ REEXPLICAÇÃO (ERRO DETECTADO). Mude totalmente a forma de explicar usando:
+        ? `\n\n⚠️ A CRIANÇA APERTOU "NÃO ENTENDI". Você JÁ explicou uma vez e não funcionou.
+           AGORA REEXPLIQUE O MESMO CONTEÚDO usando OBRIGATORIAMENTE o método abaixo.
+           NÃO repita as mesmas frases da primeira tentativa — mude TOTALMENTE a abordagem.
            ${metodoBlock}
-           NÃO repita as frases anteriores. Use uma variação nova e criativa.`
+           Comece reconhecendo: "TUDO BEM NÃO ENTENDER! VAMOS DE OUTRO JEITO..."`
         : "";
 
       const isAlfabetizacao = (isEarlyYears || isMid) && (subject === "portugues" || subject === "linguagem");
       const isMathInicial = (isEarlyYears || isMid) && (subject === "matematica" || subject === "numeros");
-      const isMathExplicacao = (isMid || isTeen) && (subject === "matematica" || subject === "numeros");
 
       systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — atuando como PROFESSOR(A) PARTICULAR no NeuroBrilha Kids.
       ${mascotPersonaBlock}
@@ -163,8 +153,7 @@ serve(async (req) => {
       - "palavra_foco": A palavra principal em CAIXA ALTA (ex: "MAÇÃ").
       - "silabas": Array com as sílabas (ex: ["MA", "ÇÃ"]).
       - "frase_apresentacao": "Esta é uma..." + objeto.
-      - "opcoes_identificacao": Array com 4 palavras (a correta + 3 intrusas, ex: ["GATO", "BOLA", "CASA", "SAPO"]).
-      - "progression": "image-word" para o novo modelo de atividade.
+      - "opcoes_identificacao": Array com 3 palavras (a correta + 2 intrusas, ex: ["MAÇÃ", "BANANA", "UVA"]).
       ` : isMathInicial ? `
       ESTRUTURA DE MATEMÁTICA INICIAL (6 ETAPAS):
       Você está ensinando uma criança em fase de numeralização (Pré ao 5º ano inicial).
@@ -193,18 +182,14 @@ serve(async (req) => {
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
-      ${levelInstruction}
       ${reexplainInstruction}
 
-      REGRAS DE PERSONALIZAÇÃO (ANAMNESE):
-      - Use os dados abaixo para adaptar o vocabulário e o estilo:
-      - Diagnóstico: ${child.diagnostico || "Geral"} -> ${isTEA ? "Foco em previsibilidade e literalidade." : isTDAH ? "Foco em brevidade e estímulos constantes." : "Linguagem adaptada."}
-      - Perfil Sensorial: ${JSON.stringify(child.perfil || {})}
-      - Observações dos Pais: ${child.observacoes || "Nenhuma"}
-      - Nível de Adaptação Sugerido: ${nivelDesc}
-      - Nome da Criança: ${child.nome || "Aluno"}
-      - REGRA DE NOME: ${isFirstExplanation ? `Use o nome da criança no início ("Olá, ${child.nome}!")` : "NÃO use o nome da criança agora, ela já está imersa na aula."}
-      - HIPERFOCO: ${child.hiperfoco || "Geral"} (Obrigatório usar como ponte de engajamento!)
+      Perfil do Aluno:
+      - Nome: ${child.nome || "Aluno"}
+      - Série: ${serie || "Não informada"}
+      - Hiperfoco: ${child.hiperfoco || "Geral"} (USE como ponte de engajamento!)
+      - Diagnóstico: ${child.diagnostico || "Geral"}
+      - Nível de Adaptação: ${nivelDesc}
 
       DADOS DO SISTEMA (NÃO ALTERE — você ensina sobre isso):
       - Desafio: ${systemQuestion || "Nenhum"}
@@ -236,20 +221,6 @@ serve(async (req) => {
       - "resultado": Inteiro.
       - "visual_emoji": String com 1 emoji.
       - "opcoes_numericas": Array de 3 inteiros.
-      ` : ""}
-      ${isMathExplicacao ? `
-      ESTRUTURA DE TELA DE EXPLICAÇÃO DE MATEMÁTICA (2º ao 9º ano) — OBRIGATÓRIA:
-      A tela é uma AULA limpa, sem mascote, estilo livro didático moderno.
-      Adapte por idade:
-        - 2º ao 5º: explicação MUITO simples, sem termos técnicos sem explicar, exemplos concretos do dia a dia.
-        - 6º ao 9º: pode usar fórmula, lógica e termos técnicos (sempre explicando o significado).
-      Campos extras OBRIGATÓRIOS:
-      - "titulo_aula": Título curto e motivador no topo (ex: "Vamos aprender!", "Hora da equação!"). Máx 4 palavras.
-      - "pergunta_simples": UMA pergunta curta que introduz o tema (ex: "O que é equação do 2º grau?"). Sem jargão para 2º-5º.
-      - "explicacao_curta": Explicação em NO MÁXIMO 2 linhas (até 180 caracteres). Sem termo técnico não explicado.
-      - "conta_principal": A conta/expressão em DESTAQUE (ex: "2x² + 3x - 4 = 0", "12 + 7 = ?", "3/4 + 1/2 = ?"). Apenas a expressão matemática limpa, sem texto extra.
-      - "passos_resolucao": Array de 3 a 5 objetos { "titulo": "Passo 1 – ...", "conteudo": "..." } mostrando o passo a passo até o resultado. O último passo deve conter o RESULTADO FINAL claro. NÃO use emoji no lugar de número/símbolo matemático.
-      - "audio_explicacao": Texto COMPLETO (sem cortar frase) que será lido em voz alta, linguagem adaptada à idade. 2-5 frases. NÃO usar markdown.
       ` : ""}
 
       Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
