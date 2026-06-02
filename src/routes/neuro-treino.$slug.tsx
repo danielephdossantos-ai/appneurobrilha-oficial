@@ -512,14 +512,30 @@ function Pedacinhos({ p, onDone }: any) {
 // ============== 5. Onde Está ==============
 function OndeEsta({ p, onDone }: any) {
   const cols = Math.ceil(Math.sqrt(p.grid.length));
+  const alvoImg = emojiImg(p.alvo);
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Encontre:</div>
-      <div className="text-5xl mb-4">{p.alvo}</div>
-      <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 64 }}>
-        {p.grid.map((e:string, i:number) => (
-          <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="text-3xl p-2 bg-card border-2 border-border rounded-lg hover:border-primary">{e}</button>
-        ))}
+      <div className="mb-4 flex justify-center">
+        {alvoImg ? (
+          <img src={alvoImg} alt="alvo" className="w-20 h-20 object-contain drop-shadow-md" />
+        ) : (
+          <div className="text-6xl">{p.alvo}</div>
+        )}
+      </div>
+      <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 72 }}>
+        {p.grid.map((e:string, i:number) => {
+          const img = emojiImg(e);
+          return (
+            <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="aspect-square p-1.5 bg-card border-2 border-border rounded-lg hover:border-primary hover:scale-105 transition-all flex items-center justify-center">
+              {img ? (
+                <img src={img} alt="" className="w-full h-full object-contain" loading="lazy" />
+              ) : (
+                <span className="text-3xl">{e}</span>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
