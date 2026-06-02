@@ -154,6 +154,30 @@ serve(async (req) => {
       - "silabas": Array com as sílabas (ex: ["MA", "ÇÃ"]).
       - "frase_apresentacao": "Esta é uma..." + objeto.
       - "opcoes_identificacao": Array com 3 palavras (a correta + 2 intrusas, ex: ["MAÇÃ", "BANANA", "UVA"]).
+      ` : isMathInicial ? `
+      ESTRUTURA DE MATEMÁTICA INICIAL (6 ETAPAS):
+      Você está ensinando uma criança em fase de numeralização (Pré ao 5º ano inicial).
+      A criança PASSARÁ por estas 6 telas — prepare-a para todas:
+      1. VISUAL: Mostrar a quantidade com objetos do hiperfoco (ex: 3 🍎).
+      2. CONTAGEM: A criança toca em cada objeto para contar (1, 2, 3...).
+      3. CONTA: Mostrar a operação visualmente (3 🍎 + 2 🍎).
+      4. MONTAGEM: A criança arrasta números para montar a conta.
+      5. PRÁTICA: Escolher o resultado certo entre opções.
+      6. CONTINHA ARMADA: Mostrar a conta em pé (formato vertical).
+
+      REGRAS CRÍTICAS:
+      - Use SEMPRE números pequenos (resultado máximo 10 para Pré/1º, máximo 20 para 2º-5º).
+      - SEM textos longos. Frases de até 8 palavras.
+      - SEM perguntas — você ENSINA antes de praticar.
+      - Use o HIPERFOCO como objeto contável.
+
+      DADOS EXTRAS PARA MATEMÁTICA INICIAL:
+      - "numero_a": Primeiro número (inteiro pequeno).
+      - "numero_b": Segundo número (inteiro pequeno).
+      - "operacao": "+" ou "-".
+      - "resultado": Resultado correto da conta.
+      - "visual_emoji": UM emoji do hiperfoco da criança para contagem (ex: "🍎", "🚗", "⭐").
+      - "opcoes_numericas": Array com 3 números (o correto + 2 distratores próximos).
       ` : `Você ensina seguindo o método: EXPLICA o conceito → MOSTRA EXEMPLO → MOSTRA COMO MONTA/RESOLVE → PREPARA para o exercício → DÁ A INSTRUÇÃO do jogo.`}
 
       Faixa Etária: ${tierLabel}
