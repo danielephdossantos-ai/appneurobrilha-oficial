@@ -615,6 +615,61 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
+  const [reexplaining, setReexplaining] = useState(false);
+  const [metodoIdx, setMetodoIdx] = useState(0);
+  const METODOS = [
+    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
+    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
+    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
+  ] as const;
+
+  const naoEntendi = async () => {
+    if (reexplaining) return;
+    setReexplaining(true);
+    const metodo = METODOS[metodoIdx % METODOS.length];
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: {
+          mode: "escola",
+          child: { nome: childNome, hiperfoco, serie: aula.grade },
+          mascot: activeMascot ? {
+            name: activeMascot.mascot?.name,
+            description: activeMascot.mascot?.description,
+            category: activeMascot.mascot?.category,
+            level: activeMascot.level,
+            affinity: activeMascot.affinity,
+          } : null,
+          subject: aula.materia,
+          topic: aula.topic || aula.materia,
+          systemQuestion: aula.pergunta,
+          systemOptions: aula.opcoes,
+          systemAnswer: aula.resposta_correta,
+          miniGameType: aula.miniGameType,
+          reexplainMethod: metodo.id,
+        },
+      });
+      if (error) throw error;
+      setAula({
+        ...aula,
+        etapa1_intro: data.etapa1_intro || aula.etapa1_intro,
+        etapa2_conceito: data.etapa2_conceito || aula.etapa2_conceito,
+        etapa3_exemplo: data.etapa3_exemplo || aula.etapa3_exemplo,
+        etapa4_como_monta: data.etapa4_como_monta || aula.etapa4_como_monta,
+        etapa5_instrucao: data.etapa5_instrucao || aula.etapa5_instrucao,
+        dica: data.dica || aula.dica,
+        ensino: data.etapa2_conceito || data.ensino || aula.ensino,
+        demo: data.etapa3_exemplo || aula.demo,
+        metodo_usado: data.metodo_usado || metodo.nome,
+      });
+      setMetodoIdx((i) => i + 1);
+      toast.success(`${metodo.emoji} Reexplicando com método ${metodo.nome}!`);
+    } catch (e) {
+      console.error(e);
+      toast.error("Não consegui reexplicar agora. Tente de novo.");
+    } finally {
+      setReexplaining(false);
+    }
+  };
 
   // Reinicia cronômetro quando entra na etapa de "opcoes" (ou passo 5 na EI)
   useEffect(() => {
