@@ -37,12 +37,13 @@ export function useNeuroAdaptive() {
   const { activeChild } = useAppState();
   const [metrics, setMetrics] = useState(INITIAL_METRICS);
   const seededRef = useRef<string | null>(null);
-  const [adjustment, setAdjustment] = useState<NeuroAdjustment>(() =>
-    NeuroAdaptiveCore.processState({
-      profile: "Tipico",
-      ...INITIAL_METRICS,
-      timestamp: Date.now(),
-    }).adjustment
+  const [adjustment, setAdjustment] = useState<NeuroAdjustment>(
+    () =>
+      NeuroAdaptiveCore.processState({
+        profile: "Tipico",
+        ...INITIAL_METRICS,
+        timestamp: Date.now(),
+      }).adjustment,
   );
 
   // Mapear diagnóstico → perfil neuro
@@ -84,7 +85,7 @@ export function useNeuroAdaptive() {
         data.reduce((a, b) => a + (b.duration_ms ?? 5000), 0) / data.length / 1000;
       const errorCount = scores.filter((s) => s < 0.5).length;
       const helpCount = data.filter(
-        (d) => (d.metadata as { helpRequested?: boolean } | null)?.helpRequested
+        (d) => (d.metadata as { helpRequested?: boolean } | null)?.helpRequested,
       ).length;
 
       setMetrics((prev) => ({
@@ -144,9 +145,7 @@ export function useNeuroAdaptive() {
       isCorrect: boolean;
     }) => {
       if (!activeChild) return;
-      const dayNumber = Math.floor(
-        (Date.now() - new Date(activeChild.id).getTime()) / 86400000
-      );
+      const dayNumber = Math.floor((Date.now() - new Date(activeChild.id).getTime()) / 86400000);
       await supabase.from("activity_logs").insert({
         child_id: activeChild.id,
         score: params.score,
@@ -160,7 +159,7 @@ export function useNeuroAdaptive() {
         },
       });
     },
-    [activeChild, profile]
+    [activeChild, profile],
   );
 
   const registerPerformance = useCallback(
@@ -195,7 +194,7 @@ export function useNeuroAdaptive() {
         isCorrect,
       });
     },
-    [persistLog]
+    [persistLog],
   );
 
   const reportSensoryIssue = useCallback(() => {
@@ -226,7 +225,7 @@ export function useNeuroAdaptive() {
         isCorrect: false,
       });
     },
-    [persistLog]
+    [persistLog],
   );
 
   return {

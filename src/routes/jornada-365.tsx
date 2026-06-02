@@ -1,7 +1,16 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { Play, Pause, CheckCircle2, Lock, ClipboardList, Loader2, Calendar, Trophy } from "lucide-react";
+import {
+  Play,
+  Pause,
+  CheckCircle2,
+  Lock,
+  ClipboardList,
+  Loader2,
+  Calendar,
+  Trophy,
+} from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import { PedagogyEngine } from "@/modules/escola-brilha/engine/pedagogy-core";
@@ -79,19 +88,29 @@ function Jornada() {
     onError: () => toast.error("Não foi possível avançar o dia."),
   });
 
-  if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
+  if (!activeChild)
+    return (
+      <Shell>
+        <p>Selecione uma criança.</p>
+      </Shell>
+    );
 
   if (!activeChild.anamnese_completa) {
     return (
       <Shell>
-        <PageHeader emoji="🧭" title="Jornada 365" subtitle="Caminho personalizado de aprendizagem" />
+        <PageHeader
+          emoji="🧭"
+          title="Jornada 365"
+          subtitle="Caminho personalizado de aprendizagem"
+        />
         <Card className="flex flex-col items-center text-center p-12 py-16 bg-gradient-to-b from-muted/50 to-background border-dashed">
           <div className="h-20 w-20 rounded-full bg-warning/10 flex items-center justify-center mb-6">
             <Lock className="h-10 w-10 text-warning" />
           </div>
           <h2 className="text-2xl font-extrabold mb-4">Jornada bloqueada</h2>
           <p className="text-muted-foreground max-w-md mb-8">
-            Para criar a jornada de 365 dias para <strong>{activeChild.nome}</strong>, precisamos primeiro concluir a anamnese pedagógica.
+            Para criar a jornada de 365 dias para <strong>{activeChild.nome}</strong>, precisamos
+            primeiro concluir a anamnese pedagógica.
           </p>
           <Link
             to="/anamnese/$childId"
@@ -125,7 +144,7 @@ function Jornada() {
   const MILESTONE_INTERVAL = 7;
   const daysToMilestone = MILESTONE_INTERVAL - ((currentDay - 1) % MILESTONE_INTERVAL);
 
-  const handleStart = (block: typeof blocks[number]) => {
+  const handleStart = (block: (typeof blocks)[number]) => {
     if (block.category === "pausa") {
       setActiveBlockId(block.id);
       return;
@@ -164,34 +183,54 @@ function Jornada() {
         </Card>
 
         <Card className="flex flex-col justify-center items-center bg-primary/5 border-primary/20">
-          <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider mb-1">Próxima conquista em</div>
-          <div className="text-2xl font-black text-primary">{daysToMilestone} {daysToMilestone === 1 ? "dia" : "dias"}</div>
+          <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider mb-1">
+            Próxima conquista em
+          </div>
+          <div className="text-2xl font-black text-primary">
+            {daysToMilestone} {daysToMilestone === 1 ? "dia" : "dias"}
+          </div>
         </Card>
       </div>
 
       <div className="space-y-3">
         <h3 className="font-extrabold text-lg px-1">Roteiro de hoje</h3>
         {blocks.map((b, i) => (
-          <div key={i} className={`rounded-2xl p-4 flex items-center gap-4 border-2 transition-all ${
-            b.status === "now" ? "border-primary bg-primary/5 shadow-glow" :
-            b.status === "done" ? "border-success/30 bg-success/5" :
-            "border-border bg-card opacity-80"
-          }`}>
-            <div className={`h-14 w-14 rounded-2xl grid place-items-center shrink-0 ${
-              b.category === "neuro-treino" ? "bg-coral/20 text-coral" :
-              b.category === "escola-brilha" ? "bg-sky/20 text-sky" :
-              "bg-success/20 text-success"
-            }`}>
-              {b.status === "done" ? <CheckCircle2 className="h-7 w-7 text-success" /> :
-               b.status === "now" ? <Play className="h-6 w-6 fill-current" /> :
-               <Pause className="h-6 w-6" />}
+          <div
+            key={i}
+            className={`rounded-2xl p-4 flex items-center gap-4 border-2 transition-all ${
+              b.status === "now"
+                ? "border-primary bg-primary/5 shadow-glow"
+                : b.status === "done"
+                  ? "border-success/30 bg-success/5"
+                  : "border-border bg-card opacity-80"
+            }`}
+          >
+            <div
+              className={`h-14 w-14 rounded-2xl grid place-items-center shrink-0 ${
+                b.category === "neuro-treino"
+                  ? "bg-coral/20 text-coral"
+                  : b.category === "escola-brilha"
+                    ? "bg-sky/20 text-sky"
+                    : "bg-success/20 text-success"
+              }`}
+            >
+              {b.status === "done" ? (
+                <CheckCircle2 className="h-7 w-7 text-success" />
+              ) : b.status === "now" ? (
+                <Play className="h-6 w-6 fill-current" />
+              ) : (
+                <Pause className="h-6 w-6" />
+              )}
             </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="font-black text-lg truncate">{b.title}</span>
                 {b.category !== "pausa" && (
-                  <Pill tone={b.category === "neuro-treino" ? "warning" : "info"} className="text-[10px] py-0 px-1.5 uppercase">
+                  <Pill
+                    tone={b.category === "neuro-treino" ? "warning" : "info"}
+                    className="text-[10px] py-0 px-1.5 uppercase"
+                  >
                     {b.category === "neuro-treino" ? "Neuro" : "Escola"}
                   </Pill>
                 )}
@@ -220,7 +259,11 @@ function Jornada() {
           disabled={advanceDay.isPending || currentDay >= 365}
           className="btn-tap rounded-2xl bg-gradient-to-r from-success to-primary text-primary-foreground px-8 py-4 font-bold text-lg flex items-center gap-2 shadow-glow disabled:opacity-50"
         >
-          {advanceDay.isPending ? <Loader2 className="h-5 w-5 animate-spin" /> : <Trophy className="h-5 w-5" />}
+          {advanceDay.isPending ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            <Trophy className="h-5 w-5" />
+          )}
           {currentDay >= 365 ? "Jornada completa!" : "Concluir Dia e Avançar"}
         </button>
       </div>
@@ -230,7 +273,9 @@ function Jornada() {
           <div className="max-w-md w-full">
             <div className="text-6xl mb-6">🌬️</div>
             <h2 className="text-3xl font-black mb-2">Hora da Pausa</h2>
-            <p className="text-muted-foreground mb-8">Respire fundo. Inspire... segure... e solte devagar.</p>
+            <p className="text-muted-foreground mb-8">
+              Respire fundo. Inspire... segure... e solte devagar.
+            </p>
             <div className="h-2 w-full bg-muted rounded-full overflow-hidden mb-8">
               <div className="h-full bg-primary animate-progress-loading" />
             </div>

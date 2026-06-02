@@ -1,4 +1,3 @@
-
 import { BNCC_SKILLS, BNCCSkill } from "@/engines/pedagogical-engine/bncc";
 
 export interface StudentProgress {
@@ -26,25 +25,21 @@ export class PedagogyEngine {
   }
 
   static getRecommendedSkills(progress: StudentProgress[], studentLevel: number): BNCCSkill[] {
-    const masteredIds = new Set(progress.filter(p => p.mastery > 0.8).map(p => p.skillId));
-    return BNCC_SKILLS.filter(s => s.level <= studentLevel && !masteredIds.has(s.id));
+    const masteredIds = new Set(progress.filter((p) => p.mastery > 0.8).map((p) => p.skillId));
+    return BNCC_SKILLS.filter((s) => s.level <= studentLevel && !masteredIds.has(s.id));
   }
 
-  static generateDailyRoutine(
-    day: number,
-    childProfile: any,
-    activities: any[]
-  ): JourneyBlock[] {
+  static generateDailyRoutine(day: number, childProfile: any, activities: any[]): JourneyBlock[] {
     // Deterministicamente escolhe atividades baseadas no dia para cobrir os 365 dias.
     // Usa multiplicador primo para evitar repetição óbvia quando N < 365.
     const seed = day;
-    const neuroActivities = activities.filter(a => a.category === "neuro-treino");
-    const schoolActivities = activities.filter(a => a.category === "escola-brilha");
+    const neuroActivities = activities.filter((a) => a.category === "neuro-treino");
+    const schoolActivities = activities.filter((a) => a.category === "escola-brilha");
 
     const getDeterministic = (arr: any[], offset: number) => {
       if (arr.length === 0) return null;
       // Mistura linear: (seed * 31 + offset * 17) — boa dispersão para conjuntos pequenos
-      return arr[((seed * 31) + (offset * 17)) % arr.length];
+      return arr[(seed * 31 + offset * 17) % arr.length];
     };
 
     const blocks: JourneyBlock[] = [];
@@ -60,7 +55,7 @@ export class PedagogyEngine {
         title: neuro1.name,
         dur: attentionMin,
         status: "now",
-        activityId: neuro1.id
+        activityId: neuro1.id,
       });
     }
 
@@ -71,7 +66,7 @@ export class PedagogyEngine {
       category: "pausa",
       title: "Pausa Ativa · Respiração",
       dur: 3,
-      status: "next"
+      status: "next",
     });
 
     // Bloco 3: Escola Brilha (Conteúdo Acadêmico)
@@ -81,10 +76,10 @@ export class PedagogyEngine {
         id: "b2",
         type: "ativo",
         category: "escola-brilha",
-        title: `Aula de ${school1.subcategory || 'Escola'}`,
+        title: `Aula de ${school1.subcategory || "Escola"}`,
         dur: attentionMin,
         status: "next",
-        activityId: school1.id
+        activityId: school1.id,
       });
     }
 
@@ -95,12 +90,15 @@ export class PedagogyEngine {
       category: "pausa",
       title: "Pausa Ativa · Alongamento",
       dur: 3,
-      status: "next"
+      status: "next",
     });
 
     // Bloco 5: Neuro-treino (Finalização com regulação emocional)
-    const neuroRegulacao = neuroActivities.filter(a => a.subcategory === "Regulação Emocional");
-    const neuro2 = getDeterministic(neuroRegulacao.length > 0 ? neuroRegulacao : neuroActivities, 5);
+    const neuroRegulacao = neuroActivities.filter((a) => a.subcategory === "Regulação Emocional");
+    const neuro2 = getDeterministic(
+      neuroRegulacao.length > 0 ? neuroRegulacao : neuroActivities,
+      5,
+    );
     if (neuro2) {
       blocks.push({
         id: "b3",
@@ -109,11 +107,10 @@ export class PedagogyEngine {
         title: neuro2.name,
         dur: Math.floor(attentionMin / 2),
         status: "next",
-        activityId: neuro2.id
+        activityId: neuro2.id,
       });
     }
 
     return blocks;
   }
 }
-
