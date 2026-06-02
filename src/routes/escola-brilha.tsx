@@ -799,7 +799,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
-                        <div className="text-base">{aula.reforco_positivo}</div>
+                        <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
                         <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                       {aula.bancoOrdem && (
