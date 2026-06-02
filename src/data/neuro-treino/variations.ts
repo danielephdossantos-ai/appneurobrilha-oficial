@@ -101,12 +101,66 @@ const SONS_INICIAIS_VARS: Variation[] = range(30).map((i) => {
   return { id:`si-${i+1}`, payload:{ letra: base.letra, options, correctName: base.correta.nome } };
 });
 
-// 2. MOTORZINHO DOS SONS — segurar para prolongar fonema
-const FONEMAS = ["S","F","Z","M","R","V","L","N","J","X"];
-const FONEMA_PISTA: Record<string,string> = { S:"cobra (sssss)", F:"vento (fffff)", Z:"abelha (zzzzz)", M:"comendo (mmmmm)", R:"motor (rrrrr)", V:"avião (vvvvv)", L:"sino (lllll)", N:"sem som (nnnnn)", J:"jato (jjjjj)", X:"silêncio (xxxxx)" };
+// 2. MOTORZINHO DOS SONS — exercício fonoaudiológico clínico real
+// Cada variação tem 4 versões temáticas (geral/minecraft/dinossauros/herois)
+// com os campos clínicos: letra_fonema, texto_prolongado, palavra_alvo, imagem_url_ou_emoji, tag_hiperfoco.
+export type MotorzinhoTag = "geral" | "minecraft" | "dinossauros" | "herois";
+export interface MotorzinhoItem {
+  letra_fonema: string;
+  texto_prolongado: string;
+  palavra_alvo: string;
+  imagem_url_ou_emoji: string;
+  tag_hiperfoco: MotorzinhoTag;
+}
+
+const repete = (l: string) => `${l} ${l.toLowerCase()} ${l.toLowerCase()} ${l.toLowerCase()} ${l.toLowerCase()}`;
+
+export const MOTORZINHO_BANK: Record<MotorzinhoTag, MotorzinhoItem[]> = {
+  geral: [
+    { letra_fonema:"V", texto_prolongado:repete("V"), palavra_alvo:"VACA", imagem_url_ou_emoji:"🐮", tag_hiperfoco:"geral" },
+    { letra_fonema:"P", texto_prolongado:repete("P"), palavra_alvo:"PRINCESA", imagem_url_ou_emoji:"👸", tag_hiperfoco:"geral" },
+    { letra_fonema:"S", texto_prolongado:repete("S"), palavra_alvo:"SAPO", imagem_url_ou_emoji:"🐸", tag_hiperfoco:"geral" },
+    { letra_fonema:"F", texto_prolongado:repete("F"), palavra_alvo:"FOGO", imagem_url_ou_emoji:"🔥", tag_hiperfoco:"geral" },
+    { letra_fonema:"B", texto_prolongado:repete("B"), palavra_alvo:"BOLA", imagem_url_ou_emoji:"⚽", tag_hiperfoco:"geral" },
+    { letra_fonema:"M", texto_prolongado:repete("M"), palavra_alvo:"MAÇÃ", imagem_url_ou_emoji:"🍎", tag_hiperfoco:"geral" },
+    { letra_fonema:"L", texto_prolongado:repete("L"), palavra_alvo:"LUA", imagem_url_ou_emoji:"🌙", tag_hiperfoco:"geral" },
+    { letra_fonema:"C", texto_prolongado:repete("C"), palavra_alvo:"CARRO", imagem_url_ou_emoji:"🚗", tag_hiperfoco:"geral" },
+  ],
+  minecraft: [
+    { letra_fonema:"Z", texto_prolongado:repete("Z"), palavra_alvo:"ZUMBI", imagem_url_ou_emoji:"🧟", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"C", texto_prolongado:repete("C"), palavra_alvo:"CREEPER", imagem_url_ou_emoji:"🟩", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"P", texto_prolongado:repete("P"), palavra_alvo:"PICARETA", imagem_url_ou_emoji:"⛏️", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"E", texto_prolongado:repete("E"), palavra_alvo:"ESPADA", imagem_url_ou_emoji:"🗡️", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"B", texto_prolongado:repete("B"), palavra_alvo:"BLOCO", imagem_url_ou_emoji:"🟫", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"D", texto_prolongado:repete("D"), palavra_alvo:"DIAMANTE", imagem_url_ou_emoji:"💎", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"T", texto_prolongado:repete("T"), palavra_alvo:"TOCHA", imagem_url_ou_emoji:"🔥", tag_hiperfoco:"minecraft" },
+    { letra_fonema:"V", texto_prolongado:repete("V"), palavra_alvo:"VILA", imagem_url_ou_emoji:"🏘️", tag_hiperfoco:"minecraft" },
+  ],
+  dinossauros: [
+    { letra_fonema:"D", texto_prolongado:repete("D"), palavra_alvo:"DINOSSAURO", imagem_url_ou_emoji:"🦖", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"T", texto_prolongado:repete("T"), palavra_alvo:"T-REX", imagem_url_ou_emoji:"🦖", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"O", texto_prolongado:repete("O"), palavra_alvo:"OVO", imagem_url_ou_emoji:"🥚", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"F", texto_prolongado:repete("F"), palavra_alvo:"FÓSSIL", imagem_url_ou_emoji:"🦴", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"V", texto_prolongado:repete("V"), palavra_alvo:"VULCÃO", imagem_url_ou_emoji:"🌋", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"P", texto_prolongado:repete("P"), palavra_alvo:"PTERODÁCTILO", imagem_url_ou_emoji:"🦅", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"R", texto_prolongado:repete("R"), palavra_alvo:"RAPTOR", imagem_url_ou_emoji:"🦖", tag_hiperfoco:"dinossauros" },
+    { letra_fonema:"S", texto_prolongado:repete("S"), palavra_alvo:"SELVA", imagem_url_ou_emoji:"🌴", tag_hiperfoco:"dinossauros" },
+  ],
+  herois: [
+    { letra_fonema:"H", texto_prolongado:repete("H"), palavra_alvo:"HERÓI", imagem_url_ou_emoji:"🦸", tag_hiperfoco:"herois" },
+    { letra_fonema:"C", texto_prolongado:repete("C"), palavra_alvo:"CAPA", imagem_url_ou_emoji:"🦸‍♂️", tag_hiperfoco:"herois" },
+    { letra_fonema:"R", texto_prolongado:repete("R"), palavra_alvo:"ROBÔ", imagem_url_ou_emoji:"🤖", tag_hiperfoco:"herois" },
+    { letra_fonema:"E", texto_prolongado:repete("E"), palavra_alvo:"ESCUDO", imagem_url_ou_emoji:"🛡️", tag_hiperfoco:"herois" },
+    { letra_fonema:"P", texto_prolongado:repete("P"), palavra_alvo:"PODER", imagem_url_ou_emoji:"⚡", tag_hiperfoco:"herois" },
+    { letra_fonema:"M", texto_prolongado:repete("M"), palavra_alvo:"MÁSCARA", imagem_url_ou_emoji:"🎭", tag_hiperfoco:"herois" },
+    { letra_fonema:"V", texto_prolongado:repete("V"), palavra_alvo:"VOAR", imagem_url_ou_emoji:"🌟", tag_hiperfoco:"herois" },
+    { letra_fonema:"J", texto_prolongado:repete("J"), palavra_alvo:"JUSTICEIRO", imagem_url_ou_emoji:"⚖️", tag_hiperfoco:"herois" },
+  ],
+};
+
 const MOTORZINHO_VARS: Variation[] = range(30).map((i) => ({
   id:`mt-${i+1}`,
-  payload:{ fonema: FONEMAS[i % FONEMAS.length], pista: FONEMA_PISTA[FONEMAS[i % FONEMAS.length]], holdSeconds: 2 + Math.floor(i/10) }
+  payload:{ bankIndex: i, holdSeconds: 3 }
 }));
 
 // 3. RIMAS

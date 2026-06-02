@@ -3,8 +3,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertCircle, ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
-import { CATEGORIAS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
+import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
 import { useHiperfoco } from "@/context/HiperfocoContext";
+import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
@@ -144,10 +145,12 @@ function NeuroAtividade() {
         <span className="text-success">⭐ {acertos}</span>
       </div>
 
-      <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center">
-        <span className="font-bold text-primary">{hiperfoco.emoji} {elemento}</span>
-        <span className="text-muted-foreground"> está aqui treinando com você!</span>
-      </div>
+      {slug !== "motorzinho-dos-sons" && (
+        <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center">
+          <span className="font-bold text-primary">{hiperfoco.emoji} {elemento}</span>
+          <span className="text-muted-foreground"> está aqui treinando com você!</span>
+        </div>
+      )}
 
       <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
         <MechanicRenderer slug={slug} variation={variation} onConcluir={onConcluir} key={variation.id} />
@@ -211,33 +214,128 @@ function SonsIniciais({ p, onDone }: any) {
   );
 }
 
-// ============== 2. Motorzinho dos Sons ==============
+// ============== 2. Motorzinho dos Sons (Clínico Fono) ==============
 function Motorzinho({ p, onDone }: any) {
+  const { hiperfoco } = useHiperfoco();
+  const { activeChild } = useAppState();
+  const nome = activeChild?.nome?.split(" ")[0] || "amigão";
+
+  // Mapeia o hiperfoco ativo para a tag do banco clínico.
+  const tag: MotorzinhoTag = (() => {
+    const id = hiperfoco?.id;
+    if (id === "minecraft") return "minecraft";
+    if (id === "dinossauros") return "dinossauros";
+    if (id === "herois") return "herois";
+    return "geral";
+  })();
+
+  const bank = MOTORZINHO_BANK[tag];
+  const item = bank[(p.bankIndex ?? 0) % bank.length];
+
+  const [phase, setPhase] = useState<"idle" | "holding" | "done">("idle");
   const [progress, setProgress] = useState(0);
-  const [holding, setHolding] = useState(false);
   const ref = useRef<number | null>(null);
+
   useEffect(() => {
-    if (holding) {
+    if (phase === "holding") {
       const start = Date.now();
       ref.current = window.setInterval(() => {
         const pct = Math.min(100, ((Date.now() - start) / (p.holdSeconds * 1000)) * 100);
         setProgress(pct);
-        if (pct >= 100) { window.clearInterval(ref.current!); onDone(true); }
+        if (pct >= 100) {
+          window.clearInterval(ref.current!);
+          setPhase("done");
+        }
       }, 50);
-    } else if (ref.current) window.clearInterval(ref.current);
+    } else if (ref.current) {
+      window.clearInterval(ref.current);
+    }
     return () => { if (ref.current) window.clearInterval(ref.current); };
-  }, [holding]);
+  }, [phase, p.holdSeconds]);
+
+  const cancelarSeIdle = () => {
+    if (phase === "holding") {
+      setPhase("idle");
+      setProgress(0);
+    }
+  };
+
   return (
     <div className="text-center">
-      <div className="text-8xl font-black text-coral mb-2">{p.fonema}</div>
-      <div className="text-sm text-muted-foreground mb-4">Pista: {p.pista}</div>
-      <div className="relative h-6 bg-muted rounded-full overflow-hidden mb-4">
-        <div className="h-full bg-gradient-to-r from-coral to-sun transition-all" style={{ width: `${progress}%` }} />
-        <div className="absolute top-0 text-2xl transition-all" style={{ left: `${progress}%`, transform: "translateX(-50%) translateY(-30%)" }}>🚂</div>
+      {/* Balão de fala do PIP — comando terapêutico com nome da criança */}
+      <div className="flex items-start gap-3 mb-6 text-left">
+        <div className="text-5xl shrink-0">🦁</div>
+        <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm">
+          <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
+          <div className="text-[10px] font-black uppercase tracking-widest text-primary">PIP diz:</div>
+          <p className="text-base font-bold text-foreground">
+            {phase === "done"
+              ? `Boa, ${nome}! Ouviu o som da letra ${item.letra_fonema}? Isso é ${item.palavra_alvo}! ${item.imagem_url_ou_emoji}`
+              : `Vamos ligar o motorzinho, ${nome}? Repita comigo!`}
+          </p>
+        </div>
       </div>
-      <button onMouseDown={()=>setHolding(true)} onMouseUp={()=>setHolding(false)} onTouchStart={()=>setHolding(true)} onTouchEnd={()=>setHolding(false)} className="bg-coral text-white px-12 py-6 rounded-2xl font-black text-xl shadow-lg active:scale-95">
-        SEGURE AQUI
-      </button>
+
+      {/* Área central — depende da fase */}
+      <div className="min-h-[260px] flex items-center justify-center mb-6">
+        {phase === "idle" && (
+          <div className="text-9xl font-black text-coral select-none animate-pulse">
+            {item.letra_fonema}
+          </div>
+        )}
+
+        {phase === "holding" && (
+          <div
+            className="font-black text-coral tracking-wider leading-none"
+            style={{ fontSize: `${4 + (progress / 100) * 6}rem` }}
+          >
+            {item.texto_prolongado}
+            <span className="inline-block">...</span>
+          </div>
+        )}
+
+        {phase === "done" && (
+          <div className="flex flex-col items-center gap-3 animate-fade-in">
+            <div className="text-9xl drop-shadow-lg">{item.imagem_url_ou_emoji}</div>
+            <div className="text-5xl font-black text-primary tracking-wide">{item.palavra_alvo}</div>
+          </div>
+        )}
+      </div>
+
+      {/* Barra do trenzinho */}
+      <div className="relative h-5 bg-muted rounded-full overflow-hidden mb-6 max-w-md mx-auto">
+        <div className="h-full bg-gradient-to-r from-coral to-sun transition-all" style={{ width: `${progress}%` }} />
+        <div className="absolute top-0 text-xl transition-all" style={{ left: `${progress}%`, transform: "translateX(-50%) translateY(-25%)" }}>🚂</div>
+      </div>
+
+      {/* Acelerador / ignição */}
+      {phase !== "done" ? (
+        <button
+          onMouseDown={() => setPhase("holding")}
+          onMouseUp={cancelarSeIdle}
+          onMouseLeave={cancelarSeIdle}
+          onTouchStart={() => setPhase("holding")}
+          onTouchEnd={cancelarSeIdle}
+          className="bg-gradient-to-br from-coral to-coral/80 text-white px-10 py-6 rounded-full font-black text-xl shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 select-none"
+        >
+          <span className="text-3xl">🔑</span> LIGAR MOTORZINHO
+        </button>
+      ) : (
+        <div className="flex gap-3 justify-center">
+          <button
+            onClick={() => { setPhase("idle"); setProgress(0); onDone(false); }}
+            className="bg-muted text-foreground px-6 py-3 rounded-xl font-bold inline-flex items-center gap-2"
+          >
+            <RotateCcw size={16} /> Repetir
+          </button>
+          <button
+            onClick={() => onDone(true)}
+            className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg"
+          >
+            Mandei bem! ⭐
+          </button>
+        </div>
+      )}
     </div>
   );
 }
