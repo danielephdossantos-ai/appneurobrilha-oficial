@@ -58,6 +58,20 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
   "sequencia-de-cores": { slug:"sequencia-de-cores", nome:"Sequência de Cores", emoji:"🌈", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Padrão cromático puro", instrucao:"Toque na cor que continua a sequência." },
   "simetria": { slug:"simetria", nome:"Simetria", emoji:"🦋", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Espelhamento em grade pixelada", instrucao:"Pinte o lado direito para espelhar a figura da esquerda." },
   "decoracao-criativa": { slug:"decoracao-criativa", nome:"Decoração Criativa", emoji:"🎨", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Cenário livre com arrastar e soltar", instrucao:"Arraste os elementos para decorar o cenário do seu jeito." },
+
+  // Fono & Onomatopeias
+  "onomatopeias-animadas": { slug:"onomatopeias-animadas", nome:"Onomatopeias Animadas", emoji:"🐮", grupo:"Fono & Onomatopeias", cor:"from-sun/25 to-coral/5", objetivo:"Associação de som natural ao elemento visual", instrucao:"Toque na figura que faz este som." },
+  "ritmo-e-sopro": { slug:"ritmo-e-sopro", nome:"Ritmo e Sopro Visual", emoji:"🚂", grupo:"Fono & Onomatopeias", cor:"from-sun/25 to-coral/5", objetivo:"Modulação de voz por pista visual", instrucao:"Estique o som conforme a linha cresce." },
+  "paromatopeias-corpo": { slug:"paromatopeias-corpo", nome:"Sons do Corpo", emoji:"🤧", grupo:"Fono & Onomatopeias", cor:"from-sun/25 to-coral/5", objetivo:"Reconhecimento de sons corporais e ações", instrucao:"Toque na ação que combina com o som." },
+
+  // Coordenação Motor-Escrita
+  "tracado-letras": { slug:"tracado-letras", nome:"Traçado de Letras", emoji:"✍️", grupo:"Coordenação Motor-Escrita", cor:"from-success/25 to-success/5", objetivo:"Cobertura de pontilhado com setas direcionais", instrucao:"Siga as setas em ordem para cobrir a letra." },
+  "caminho-dos-pontos": { slug:"caminho-dos-pontos", nome:"Caminho dos Pontos", emoji:"🔢", grupo:"Coordenação Motor-Escrita", cor:"from-success/25 to-success/5", objetivo:"Unir pontos em sequência para formar figura", instrucao:"Toque nos pontos em ordem para revelar a figura." },
+  "labirinto-precisao": { slug:"labirinto-precisao", nome:"Labirinto de Precisão", emoji:"🟢", grupo:"Coordenação Motor-Escrita", cor:"from-success/25 to-success/5", objetivo:"Arraste fino sem encostar nas paredes", instrucao:"Arraste a bolinha até o final sem tocar as bordas." },
+
+  // Jogos Clínicos Cognitivos
+  "triagem-categorias": { slug:"triagem-categorias", nome:"Triagem de Categorias", emoji:"🗂️", grupo:"Jogos Clínicos Cognitivos", cor:"from-lilac/25 to-primary/5", objetivo:"Categorização e flexibilidade cognitiva", instrucao:"Arraste cada item para a caixa certa." },
+  "expressao-emocao": { slug:"expressao-emocao", nome:"Expressão e Emoção", emoji:"😊", grupo:"Jogos Clínicos Cognitivos", cor:"from-lilac/25 to-primary/5", objetivo:"Pareamento emoção × situação social", instrucao:"Escolha o rosto que combina com a cena." },
 };
 
 // ===================== Variações (30 por categoria) =====================
