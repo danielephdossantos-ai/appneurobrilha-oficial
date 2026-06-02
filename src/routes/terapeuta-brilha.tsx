@@ -37,13 +37,14 @@ function Terapeuta() {
     
     try {
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: { 
-          mode: "terapeuta", 
+        body: {
+          mode: "terapeuta",
           child: activeChild,
+          mascot: mascotPayload,
           message: q,
-          chatHistory: msgs.map(m => ({ 
-            role: m.role === "ai" ? "assistant" : "user", 
-            content: m.t 
+          chatHistory: msgs.map(m => ({
+            role: m.role === "ai" ? "assistant" : "user",
+            content: m.t
           }))
         }
       });
