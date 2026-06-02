@@ -812,6 +812,144 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
   );
 }
 
+// Componente unificado do Professor Virtual para explicar antes da atividade
+function VirtualProfessorIntro({ 
+  aula, 
+  eiStep, 
+  setEiStep, 
+  activeMascot, 
+  materiaMeta, 
+  onStart, 
+  onNaoEntendi, 
+  reexplaining, 
+  metodoIdx 
+}: any) {
+  const METODOS = [
+    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
+    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
+    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
+  ];
+  const metodo = METODOS[metodoIdx % METODOS.length];
+
+  const fala = (texto: string) => {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = "pt-BR";
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  useEffect(() => {
+    const texto = eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
+                  eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
+                  eiStep === 3 ? (aula.etapa3_exemplo || "Vamos ver um exemplo!") :
+                  (aula.etapa4_como_monta || "Veja como resolver!");
+    if (texto) fala(texto);
+  }, [eiStep, aula]);
+
+  return (
+    <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col items-center gap-6">
+        <div className={`relative transition-all duration-1000 transform ${
+          eiStep === 1 ? 'scale-125 translate-y-4' :
+          eiStep === 2 ? 'scale-110 -translate-x-12' :
+          eiStep === 3 ? 'scale-110 translate-x-12' :
+          'scale-100'
+        }`}>
+          <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
+            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
+            ) : (
+              <div className="flex items-center justify-center w-full h-full">
+                {activeMascot?.mascot?.image_url || materiaMeta.mascote}
+              </div>
+            )}
+          </div>
+          
+          <div className={`absolute transition-all duration-500 ${
+            eiStep === 2 ? '-right-16 -top-8' :
+            eiStep === 3 ? '-left-16 -top-8' :
+            '-top-24 left-1/2 -translate-x-1/2'
+          } w-72 md:w-80`}>
+            <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
+               <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
+                 eiStep === 2 ? 'bottom-[-18px] left-10' :
+                 eiStep === 3 ? 'bottom-[-18px] right-10' :
+                 'bottom-[-18px] left-1/2 -translate-x-1/2'
+               }`} />
+               <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
+                 {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
+                  eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
+                  eiStep === 3 ? (aula.etapa3_exemplo || "Vamos ver um exemplo!") :
+                  (aula.etapa4_como_monta || "Veja como resolver!")}
+               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Visual Example Area */}
+        {(eiStep === 2 || eiStep === 3) && (
+          <div className="flex gap-4 items-center justify-center animate-bounce-slow mt-8">
+             {eiStep === 2 ? (
+               <div className="text-[140px] md:text-[180px] drop-shadow-2xl">
+                 {aula.visual || "⭐"}
+               </div>
+             ) : (
+               <div className="flex flex-col items-center">
+                 <div className="text-4xl font-black text-muted-foreground mb-2">EXEMPLO:</div>
+                 <div className="bg-white p-6 rounded-3xl border-4 border-dashed border-primary/30 flex gap-4">
+                    {aula.palavra_foco ? (
+                      <div className="text-6xl font-black text-primary tracking-tighter">{aula.palavra_foco}</div>
+                    ) : (
+                      <div className="text-6xl font-black text-primary">{aula.numero_a} {aula.operacao} {aula.numero_b} = {aula.resultado}</div>
+                    )}
+                 </div>
+               </div>
+             )}
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col items-center gap-4 mt-12">
+        {aula.metodo_usado && (
+          <div className="px-4 py-1.5 rounded-full bg-lilac/20 border border-lilac/40 text-xs font-black uppercase tracking-wider text-lilac-foreground animate-pulse">
+            ✨ Usando Método {aula.metodo_usado}
+          </div>
+        )}
+        
+        {eiStep < 4 ? (
+          <button
+            onClick={() => setEiStep(eiStep + 1)}
+            className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
+          >
+            CONTINUAR <ArrowRight className="h-8 w-8" />
+          </button>
+        ) : (
+          <button
+            onClick={onStart}
+            className="btn-tap bg-gradient-to-br from-success to-success/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
+          >
+            VAMOS JOGAR! <Play className="h-8 w-8 fill-current" />
+          </button>
+        )}
+
+        <button
+          onClick={onNaoEntendi}
+          disabled={reexplaining}
+          className="btn-tap bg-white border-[3px] border-sun text-sun-foreground rounded-full px-8 py-3 text-base md:text-lg font-black uppercase shadow-[0_4px_0_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-2 disabled:opacity-60"
+        >
+          {reexplaining ? (
+            <><Loader2 className="h-5 w-5 animate-spin" /> Mudando forma de explicar...</>
+          ) : (
+            <>🤔 NÃO ENTENDI · Mudar explicação</>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
 // ============= MATEMÁTICA INICIAL — 6 ETAPAS =============
 // 1. Explicação Visual  2. Contagem Guiada  3. Mostra a Conta
 // 4. Montagem da Conta  5. Prática            6. Continha Armada
