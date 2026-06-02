@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect, useRef, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee } from "lucide-react";
+import { useState, useEffect, useRef, Component, ReactNode, useMemo } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee, ArrowRight, Star } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
@@ -11,6 +11,7 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
 import { EIMiniGame } from "@/components/escola/EIMiniGame";
+import { Tracing } from "@/components/escola/Tracing";
 import imgPortugues from "@/assets/escola-brilha/portugues.png";
 import imgMatematica from "@/assets/escola-brilha/matematica.png";
 import imgCiencias from "@/assets/escola-brilha/ciencias.png";
@@ -619,7 +620,196 @@ function Escola() {
 
 
 
+function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; eiStep: number; setEiStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
+  const [montagem, setMontagem] = useState<string[]>([]);
+  const silabas = aula.silabas || ["MA", "ÇÃ"];
+  const palavraFoco = (aula.palavra_foco || "MAÇÃ").toUpperCase();
+  const opcoes = aula.opcoes_identificacao || [palavraFoco, "BANANA", "UVA"];
+  
+  // Sortear opções uma única vez
+  const sortedOpcoes = useMemo(() => [...opcoes].sort(() => Math.random() - 0.5), [opcoes]);
+
+  useEffect(() => {
+    const playAudio = (msg: string) => {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(msg);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 0.9; // Um pouco mais lento para crianças
+      window.speechSynthesis.speak(utterance);
+    };
+
+    let text = "";
+    if (eiStep === 1) text = aula.frase_apresentacao || `Esta é uma ${palavraFoco}`;
+    else if (eiStep === 2) text = palavraFoco;
+    else if (eiStep === 3) text = silabas.join(" - ");
+    else if (eiStep === 4) text = "Vamos montar a palavra?";
+    else if (eiStep === 5) text = `Qual palavra é ${palavraFoco}?`;
+    else if (eiStep === 6) text = "Vamos escrever?";
+    else if (eiStep === 7) text = "Parabéns! Você brilhou!";
+    
+    if (text) playAudio(text);
+  }, [eiStep, palavraFoco, silabas, aula.frase_apresentacao]);
+
+
+  return (
+    <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Mascote Guia */}
+      <div className="flex items-center gap-4 mb-4">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl">
+           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+           ) : (
+             activeMascot?.mascot?.image_url || materiaMeta.mascote
+           )}
+        </div>
+        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
+           {eiStep === 1 && (aula.etapa1_intro || `Veja só, ${childNome}!`)}
+           {eiStep === 2 && (aula.etapa2_conceito || "Olha como se escreve!")}
+           {eiStep === 3 && (aula.etapa3_exemplo || "Vamos separar os pedacinhos?")}
+           {eiStep === 4 && (aula.etapa4_como_monta || "Junte as peças!")}
+           {eiStep === 5 && (aula.etapa5_instrucao || "Onde está o nome certo?")}
+           {eiStep === 6 && "Use o dedo para desenhar a palavra!"}
+           {eiStep === 7 && (aula.reforco_positivo || "Incrível!")}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center min-h-[300px]">
+        {eiStep === 1 && (
+          <div className="text-center space-y-4">
+            <div className="text-[150px] md:text-[200px] drop-shadow-2xl animate-bounce-slow">
+              {aula.visual || "🍎"}
+            </div>
+            <p className="text-2xl font-black uppercase text-primary">
+              {aula.frase_apresentacao || `ESTA É UMA ${palavraFoco}`}
+            </p>
+          </div>
+        )}
+
+        {eiStep === 2 && (
+          <div className="text-center space-y-6">
+            <div className="text-9xl mb-4">{aula.visual || "🍎"}</div>
+            <div className="bg-primary text-white text-7xl md:text-9xl font-black px-12 py-6 rounded-3xl shadow-glow tracking-tighter">
+              {palavraFoco}
+            </div>
+          </div>
+        )}
+
+        {eiStep === 3 && (
+          <div className="flex gap-4 items-center justify-center flex-wrap">
+            {silabas.map((s: string, i: number) => (
+              <div key={i} className="flex items-center">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-5xl md:text-7xl font-black text-primary animate-in zoom-in" style={{ animationDelay: `${i * 300}ms` }}>
+                  {s.toUpperCase()}
+                </div>
+                {i < silabas.length - 1 && <div className="text-5xl font-black mx-2 text-muted-foreground">-</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {eiStep === 4 && (
+          <div className="w-full space-y-8">
+            <div className="flex gap-3 justify-center min-h-[100px] p-4 bg-muted/30 rounded-3xl border-4 border-dashed border-muted">
+              {montagem.map((s: string, i: number) => (
+                <div key={i} className="w-24 h-24 rounded-2xl bg-primary text-white flex items-center justify-center text-3xl font-black shadow-md animate-in zoom-in">
+                  {s}
+                </div>
+              ))}
+              {montagem.length === 0 && <span className="text-muted-foreground self-center font-bold">Arraste para cá</span>}
+            </div>
+            <div className="flex gap-4 justify-center flex-wrap">
+              {silabas.filter((s: string) => !montagem.includes(s)).map((s: string, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const next = [...montagem, s];
+                    setMontagem(next);
+                    if (next.length === silabas.length) {
+                      toast.success("Muito bem!");
+                    }
+                  }}
+                  className="btn-tap w-28 h-28 rounded-2xl bg-white border-4 border-primary text-primary flex items-center justify-center text-4xl font-black shadow-lg hover:bg-primary/5"
+                >
+                  {s}
+                </button>
+              ))}
+              {montagem.length > 0 && (
+                <button onClick={() => setMontagem([])} className="text-xs font-bold text-muted-foreground underline">Recomeçar</button>
+              )}
+            </div>
+          </div>
+        )}
+
+
+        {eiStep === 5 && (
+          <div className="w-full space-y-6">
+            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
+            <div className="grid grid-cols-1 gap-4">
+              {sortedOpcoes.map((opt: string, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (opt.toUpperCase() === (palavraFoco || "").toUpperCase()) {
+                      setEiStep(6);
+                      toast.success("Isso mesmo!");
+                    } else {
+                      toast.error("Ops! Vamos ver de novo para aprender?");
+                      setEiStep(1); // REFORÇO logic
+                    }
+                  }}
+                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl font-black uppercase text-center shadow-soft"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+
+        {eiStep === 6 && (
+          <div className="w-full">
+            <Tracing text={palavraFoco} onComplete={() => setEiStep(7)} />
+          </div>
+        )}
+
+        {eiStep === 7 && (
+          <div className="text-center space-y-6">
+             <div className="text-[180px] animate-bounce-slow">✨</div>
+             <h3 className="text-4xl font-black text-primary uppercase">Você Brilhou!</h3>
+             <p className="text-xl font-bold text-muted-foreground">Agora você já sabe tudo sobre {palavraFoco}!</p>
+             <button
+               onClick={() => onComplete(true)}
+               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-8"
+             >
+               CONCLUIR AULA! 🌟
+             </button>
+          </div>
+        )}
+      </div>
+
+      {eiStep < 7 && eiStep !== 5 && eiStep !== 6 && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => {
+              if (eiStep === 4 && montagem.length < silabas.length) {
+                toast.warning("Termine de montar a palavra primeiro!");
+                return;
+              }
+              setEiStep(eiStep + 1);
+            }}
+            className="btn-tap bg-primary text-white rounded-full px-12 py-5 text-2xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
+          >
+            CONTINUAR <ArrowRight className="h-8 w-8" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
@@ -632,6 +822,12 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const scoredRef = useRef<boolean>(false);
   const [reexplaining, setReexplaining] = useState(false);
   const [metodoIdx, setMetodoIdx] = useState(0);
+
+  // Estados para Alfabetização (7 etapas)
+  const isAlfaFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "portugues" || aula.materia === "linguagem");
+  const [alfaMontagem, setAlfaMontagem] = useState<string[]>([]);
+  const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
+  
   const METODOS = [
     { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
     { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
@@ -711,10 +907,12 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     opcoes: "✨ Sua vez!",
   };
 
-  // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
-  const stepIndex = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0);
-  // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
-  const visualStep = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1);
+  // Stepper pedagógico (6 ou 7 passos visuais)
+  const totalSteps = isAlfaFlow ? 7 : 6;
+  const stepIndex = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0));
+  
+  const visualStep = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1));
+
 
 
   return (
@@ -754,16 +952,35 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
         <div className="lg:col-span-3">
 
           <Card className="mb-4">
-            {/* Stepper pedagógico de 6 passos */}
+            {/* Stepper pedagógico adaptado */}
             <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
-              {[
+              {isAlfaFlow ? [
+                {n:1,l:"Objeto",i:"🍎"},
+                {n:2,l:"Palavra",i:"🔤"},
+                {n:3,l:"Sílabas",i:"✂️"},
+                {n:4,l:"Montar",i:"🧩"},
+                {n:5,l:"Achar",i:"🔎"},
+                {n:6,l:"Escrever",i:"✏️"},
+                {n:7,l:"Legal!",i:"🎉"},
+              ].map((s: any) => {
+                const active = s.n === eiStep;
+                const done = s.n < eiStep;
+                return (
+                  <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
+                    active ? "bg-primary text-white scale-110 shadow-glow" :
+                    done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
+                  }`}>
+                    <span>{s.i}</span>{s.l}
+                  </span>
+                );
+              }) : [
                 {n:1,l:"Tema",i:"🎯"},
                 {n:2,l:"Explicação",i:"💡"},
                 {n:3,l:"Exemplo",i:"👀"},
                 {n:4,l:"Atividade",i:"✋"},
                 {n:5,l:"Feedback",i:"💬"},
                 {n:6,l:"Reforço",i:"⭐"},
-              ].map(s => {
+              ].map((s: any) => {
                 const active = s.n === visualStep;
                 const done = s.n < visualStep;
                 return (
@@ -775,13 +992,31 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   </span>
                 );
               })}
+
             </div>
+
 
 
 
             {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
-                {eiStep < 5 ? (
+                {isAlfaFlow ? (
+                  <AlfabetizacaoFlow
+                    aula={aula}
+                    eiStep={eiStep}
+                    setEiStep={setEiStep}
+                    activeMascot={activeMascot}
+                    materiaMeta={materiaMeta}
+                    childNome={childNome}
+                    onComplete={(isCorrect) => {
+                      setAcertou(isCorrect);
+                      if (isCorrect && !completedRef.current && aula.activityId) {
+                        completedRef.current = true;
+                        onCompleted?.(aula.activityId);
+                      }
+                    }}
+                  />
+                ) : eiStep < 5 ? (
                   <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="flex flex-col items-center gap-6">
                       {/* Mascote central que se move e se ajusta */}
@@ -918,6 +1153,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 )}
               </div>
             ) : (
+
               <>
                 {aula.etapa === "ensino" && (() => {
                   const g = (aula.grade || "").toString();

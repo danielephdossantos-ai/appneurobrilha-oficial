@@ -131,9 +131,29 @@ serve(async (req) => {
            Comece reconhecendo: "TUDO BEM NÃO ENTENDER! VAMOS DE OUTRO JEITO..."`
         : "";
 
+      const isAlfabetizacao = (isEarlyYears || isMid) && (subject === "portugues" || subject === "linguagem");
+
       systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — atuando como PROFESSOR(A) PARTICULAR no NeuroBrilha Kids.
       ${mascotPersonaBlock}
-      Você ensina seguindo o método: EXPLICA o conceito → MOSTRA EXEMPLO → MOSTRA COMO MONTA/RESOLVE → PREPARA para o exercício → DÁ A INSTRUÇÃO do jogo.
+      
+      ${isAlfabetizacao ? `
+      ESTRUTURA DE ALFABETIZAÇÃO (7 ETAPAS):
+      Você está ensinando uma criança em fase de alfabetização (Pré ao 2º ano).
+      Sua explicação deve preparar a criança para estas 7 etapas:
+      1. APRESENTAÇÃO: Mostrar o objeto (ex: Maçã).
+      2. PALAVRA: Mostrar a palavra em CAIXA ALTA.
+      3. SÍLABAS: Mostrar a separação (MA-ÇÃ).
+      4. MONTAGEM: A criança vai montar as sílabas.
+      5. IDENTIFICAÇÃO: Escolher a palavra correta entre 3 opções.
+      6. ESCRITA: Tracing (traçado) da palavra.
+      7. REFORÇO: Revisão se errar.
+
+      DADOS EXTRAS PARA ALFABETIZAÇÃO:
+      - "palavra_foco": A palavra principal em CAIXA ALTA (ex: "MAÇÃ").
+      - "silabas": Array com as sílabas (ex: ["MA", "ÇÃ"]).
+      - "frase_apresentacao": "Esta é uma..." + objeto.
+      - "opcoes_identificacao": Array com 3 palavras (a correta + 2 intrusas, ex: ["MAÇÃ", "BANANA", "UVA"]).
+      ` : `Você ensina seguindo o método: EXPLICA o conceito → MOSTRA EXEMPLO → MOSTRA COMO MONTA/RESOLVE → PREPARA para o exercício → DÁ A INSTRUÇÃO do jogo.`}
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
@@ -152,7 +172,7 @@ serve(async (req) => {
       - Resposta Correta: ${systemAnswer || "Nenhuma"}
       - Tipo de Atividade: ${miniGameType || "padrão"}
 
-      IMPORTANTE: Você NÃO cria a pergunta nem as opções. Você ENSINA o conteúdo para que o aluno consiga resolver sozinho.
+      IMPORTANTE: Você NÃO cria a pergunta nem as opções principais do sistema (a menos que seja Alfabetização, onde você define os campos extras). Você ENSINA o conteúdo para que o aluno consiga resolver sozinho.
 
       Retorne EXCLUSIVAMENTE um JSON com as seguintes chaves (TODAS obrigatórias):
       - "etapa1_intro": Boas-vindas + apresentação animada do tema/assunto.
@@ -163,6 +183,12 @@ serve(async (req) => {
       - "dica": Uma dica útil caso erre.
       - "reforco_positivo": Comemoração personalizada citando o hiperfoco.
       - "metodo_usado": Nome curto do método didático aplicado (ex: "TEACCH", "Multissensorial", "Montessori", "Padrão").
+      ${isAlfabetizacao ? `
+      - "palavra_foco": String.
+      - "silabas": Array de strings.
+      - "frase_apresentacao": String.
+      - "opcoes_identificacao": Array de 3 strings.
+      ` : ""}
 
       Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
 
