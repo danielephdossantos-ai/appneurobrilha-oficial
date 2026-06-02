@@ -330,19 +330,41 @@ function Escola() {
         </div>
       </Card>
 
+      {(() => {
+        const t = tierTheme[gradeTier(selectedGrade)];
+        return (
+          <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
+            <div className="absolute right-3 top-2 text-5xl opacity-40 animate-float-thinking select-none">{t.sceneEmoji}</div>
+            <div className="relative">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
+              <div className="text-2xl font-extrabold">{t.scene}</div>
+              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo ✨</div>
+            </div>
+          </div>
+        );
+      })()}
+
       <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
-            <div className="text-5xl">{m.emoji}</div>
+            className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
+            <div className="absolute -right-2 -top-2 text-4xl opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-all">
+              {m.cenario}
+            </div>
+            <div className="text-5xl drop-shadow-sm group-hover:scale-110 transition-transform inline-block">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
+              <span className="text-base">{m.mascote}</span>
+              <span><b>{m.mascoteNome}</b> te guia</span>
+            </div>
             {ei && m.descricao && (
               <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
             )}
             {!ei && (
-              <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+              <div className="mt-2"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
             )}
+            <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
         ))}
       </div>
