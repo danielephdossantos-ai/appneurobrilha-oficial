@@ -215,11 +215,11 @@ const ONDE_VARS: Variation[] = range(30).map((i) => {
 
 // 6. SEQUÊNCIA E PADRÃO — continuação lógica de formas
 const SEQ_BANK = [
-  { seq:["🔴","🔵","🔴","🔵"], next:"🔴", opts:["🔴","🔵","🟢"] },
-  { seq:["🔺","🟦","🔺","🟦","🔺"], next:"🟦", opts:["🟦","🔺","⭐"] },
-  { seq:["⬆️","➡️","⬆️","➡️"], next:"⬆️", opts:["⬆️","➡️","⬇️"] },
-  { seq:["🟢","🟢","🔴","🟢","🟢"], next:"🔴", opts:["🔴","🟢","🔵"] },
-  { seq:["⭐","🌙","⭐","🌙","⭐"], next:"🌙", opts:["🌙","⭐","☀️"] },
+  { seq:["🔴","🔵","🔴","🔵"], next:"🔴", opts:["🔴","🔵","🟢","🟡"] },
+  { seq:["🔺","🟦","🔺","🟦","🔺"], next:"🟦", opts:["🟦","🔺","⭐","🟢"] },
+  { seq:["⬆️","➡️","⬆️","➡️"], next:"⬆️", opts:["⬆️","➡️","⬇️","⬅️"] },
+  { seq:["🟢","🟢","🔴","🟢","🟢"], next:"🔴", opts:["🔴","🟢","🔵","🟡"] },
+  { seq:["⭐","🌙","⭐","🌙","⭐"], next:"🌙", opts:["🌙","⭐","☀️","🌈"] },
 ];
 const SEQ_VARS: Variation[] = range(30).map((i) => {
   const b = SEQ_BANK[i % SEQ_BANK.length];
