@@ -108,8 +108,6 @@ export function Shell({ children }: { children?: ReactNode }) {
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
   const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
-  // Rotas que possuem navegação própria (trilha, atividade, configuração) — escondem o nav global
-  const hideGlobalNav = path.startsWith("/neuro-treino");
 
   // Apply neuro-adaptive CSS variables
   const adaptiveStyles = engine?.adaptive ? {
@@ -254,7 +252,6 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
           <MobileNav path={path} />
           
-          {!hideGlobalNav && (
           <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
             <div className="pointer-events-auto">
               {prevPath && (
@@ -279,9 +276,7 @@ export function Shell({ children }: { children?: ReactNode }) {
               )}
             </div>
           </div>
-          )}
 
-          {!hideGlobalNav && (
           <div className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
             <div className="pointer-events-auto">
               {prevPath && (
@@ -306,7 +301,6 @@ export function Shell({ children }: { children?: ReactNode }) {
               )}
             </div>
           </div>
-          )}
         </main>
       </div>
     </div>

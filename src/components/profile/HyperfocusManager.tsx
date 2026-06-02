@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, Sparkles, Check, Trash2, Edit3, Heart } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/utils/utils';
-import { hiperfocoImg } from '@/data/neuro-treino/hiperfocosImg';
 
 const HYPERFOCUS_OPTIONS: { value: Hiperfoco; label: string; icon: string }[] = [
   { value: "animais", label: "Animais", icon: "🐾" },
@@ -112,11 +111,7 @@ export const HyperfocusManager: React.FC = () => {
                     className="group relative"
                   >
                     <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white border-2 border-primary/20 hover:border-primary shadow-sm transition-all text-center h-full">
-                      {hiperfocoImg(focus) ? (
-                        <img src={hiperfocoImg(focus)} alt={info?.label || focus} width={64} height={64} loading="lazy" className="w-14 h-14 object-contain mb-1 drop-shadow-md" />
-                      ) : (
-                        <span className="text-3xl mb-1">{info?.icon || "✨"}</span>
-                      )}
+                      <span className="text-3xl mb-1">{info?.icon || "✨"}</span>
                       <span className="text-xs font-black text-primary uppercase tracking-tighter truncate w-full">
                         {info?.label || focus}
                       </span>
@@ -185,11 +180,7 @@ export const HyperfocusManager: React.FC = () => {
                           : "bg-white border-border hover:border-primary hover:bg-primary/5"
                       )}
                     >
-                      {hiperfocoImg(option.value) ? (
-                        <img src={hiperfocoImg(option.value)} alt={option.label} width={64} height={64} loading="lazy" className="w-14 h-14 object-contain mb-1 drop-shadow-md" />
-                      ) : (
-                        <span className="text-3xl mb-1">{option.icon}</span>
-                      )}
+                      <span className="text-3xl mb-1">{option.icon}</span>
                       <span className="text-xs font-black uppercase tracking-tighter truncate w-full">
                         {option.label}
                       </span>
