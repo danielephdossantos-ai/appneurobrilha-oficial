@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-r
 import { useState } from "react";
 import { ArrowLeft, Sparkles, X } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { HIPERFOCO_LIST } from "@/data/hiperfocos";
+import { HIPERFOCO_LIST, type HiperfocoId } from "@/data/hiperfocos";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 
 interface ConfigSearch {
