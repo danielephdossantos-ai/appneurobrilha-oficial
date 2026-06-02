@@ -356,6 +356,7 @@ function Escola() {
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
           tier={gradeTier(aula.grade || selectedGrade)}
+          onCompleted={(activityId) => marcarConcluida(activityId)}
         />
       </AulaErrorBoundary>
     );
