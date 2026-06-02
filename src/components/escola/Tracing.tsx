@@ -44,6 +44,16 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
       ctx.strokeStyle = '#CBD5E1';
       ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
       ctx.setLineDash([]);
+
+      // Draw starting points (Simplified: one green dot at the top-left-ish of the first letter)
+      ctx.fillStyle = '#10B981';
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2 - (text.length * 20), canvas.height / 2 - 30, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillText('1', canvas.width / 2 - (text.length * 20), canvas.height / 2 - 30);
+
     };
 
     resizeCanvas();
