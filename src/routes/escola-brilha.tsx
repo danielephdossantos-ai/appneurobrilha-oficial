@@ -178,16 +178,21 @@ function Escola() {
       
       console.log("AI Response:", data);
 
-      const novaAula = { 
-        ...data, 
-        materia: materiaId, 
-        etapa: "ensino", 
+      const novaAula = {
+        ...data,
+        materia: materiaId,
+        etapa: "ensino",
         grade: selectedGrade,
         // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
-        resposta_correta: systemAnswer
+        resposta_correta: systemAnswer,
+        // Conteúdo visual extra (emoji/cor) para Educação Infantil
+        visual: activity.content.visual,
+        visualHex: activity.content.hex,
+        isEI: isEI(selectedGrade),
       };
+
 
       console.log("FINAL AULA STATE:", novaAula);
       setAula(novaAula);
