@@ -424,7 +424,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
             {aula.etapa === "opcoes" && (
               <div>
-                <p className="text-xl mb-6 font-bold">{aula.pergunta || "O que você acha?"}</p>
+                {aula.isEI && aula.visual && (
+                  <div
+                    className="rounded-2xl grid place-items-center mb-6 py-10"
+                    style={{
+                      background: aula.visualHex
+                        ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
+                        : 'linear-gradient(135deg, hsl(var(--sky)/.3), hsl(var(--petal)/.2))',
+                    }}
+                  >
+                    <div className="text-[7rem] leading-none">{aula.visual}</div>
+                  </div>
+                )}
+                <p className={`mb-6 font-bold ${aula.isEI ? "text-2xl text-center" : "text-xl"}`}>{aula.pergunta || "O que você acha?"}</p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {(aula.opcoes || []).map((opt: string, index: number) => (
                     <button 
