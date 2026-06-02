@@ -182,10 +182,10 @@ function WorldBackground({ world }: { world: WorldKey }) {
       />
       {/* gradiente para legibilidade da trilha */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/40 pointer-events-none" />
-      {/* brilhos suaves */}
+      {/* luz que passa lentamente, dando sensação de vida ao cenário */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-50 bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.25)_50%,transparent_70%)] bg-[length:250%_250%] animate-[shimmerWorld_14s_ease-in-out_infinite]" />
+      {/* brilhos suaves (estrelinhas / partículas de luz) */}
       <div className="absolute inset-0 bg-[radial-gradient(1.5px_1.5px_at_15%_25%,white,transparent),radial-gradient(1.5px_1.5px_at_75%_55%,white,transparent),radial-gradient(1px_1px_at_45%_80%,white,transparent),radial-gradient(2px_2px_at_85%_15%,white,transparent)] opacity-60 animate-pulse pointer-events-none" />
-      {/* criaturinhas animadas do mundo */}
-      <WorldCreatures world={world} />
     </div>
   );
 }
