@@ -62,6 +62,9 @@ import worldPrincesas from '@/assets/neuro-treino/worlds/princesas.jpg';
 import worldRobos from '@/assets/neuro-treino/worlds/robos.jpg';
 import worldTrens from '@/assets/neuro-treino/worlds/trens.jpg';
 import worldVeiculos from '@/assets/neuro-treino/worlds/veiculos.jpg';
+import worldOceano from '@/assets/neuro-treino/worlds/oceano.jpg';
+import worldFloresta from '@/assets/neuro-treino/worlds/floresta.jpg';
+import worldCastelo from '@/assets/neuro-treino/worlds/castelo.jpg';
 
 type WorldOption = {
   id: string;
@@ -87,6 +90,9 @@ const WORLDS: WorldOption[] = [
   { id: 'w-robos', label: 'Robôs', emoji: '🤖', description: 'Tecnologia, engrenagens e futuro.', image: worldRobos, customLabel: 'Robôs' },
   { id: 'w-trens', label: 'Trens', emoji: '🚂', description: 'Estações, trilhos e grandes viagens.', image: worldTrens, customLabel: 'Trens' },
   { id: 'w-veiculos', label: 'Veículos', emoji: '🚙', description: 'Caminhões, motos e muita ação.', image: worldVeiculos, customLabel: 'Veículos' },
+  { id: 'w-oceano', label: 'Oceano', emoji: '🐠', description: 'Mergulhe no fundo do mar cheio de vida.', image: worldOceano, customLabel: 'Oceano' },
+  { id: 'w-floresta', label: 'Floresta Encantada', emoji: '🍄', description: 'Trilhas mágicas, fadas e cogumelos brilhantes.', image: worldFloresta, customLabel: 'Floresta' },
+  { id: 'w-castelo', label: 'Castelo Mágico', emoji: '🏰', description: 'Torres nas nuvens com dragões amigos.', image: worldCastelo, customLabel: 'Castelo' },
 ];
 
 
