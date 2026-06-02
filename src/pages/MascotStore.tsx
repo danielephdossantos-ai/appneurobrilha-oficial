@@ -20,6 +20,20 @@ import pipCarros from '@/assets/pip-carros.png';
 import pipTrens from '@/assets/pip-trens.png';
 import pipRobos from '@/assets/pip-robos.png';
 import pipVeiculos from '@/assets/pip-veiculos.png';
+import pipaMascot from '@/assets/pip-girl-mascot.png';
+import pipaPrincesa from '@/assets/pip-girl-princesas.png';
+import pipaUnicornio from '@/assets/pip-girl-unicornio.png';
+import pipaDoutora from '@/assets/pip-girl-doutora.png';
+import pipaAstronauta from '@/assets/pip-girl-astronauta.png';
+import pipaBailarina from '@/assets/pip-girl-bailarina.png';
+import pipaFada from '@/assets/pip-girl-fada.png';
+import pipaSereia from '@/assets/pip-girl-sereia.png';
+import pipaConfeiteira from '@/assets/pip-girl-confeiteira.png';
+import pipaVeterinaria from '@/assets/pip-girl-veterinaria.png';
+import pipaProfessora from '@/assets/pip-girl-professora.png';
+import pipaArte from '@/assets/pip-girl-arte.png';
+import pipaMusica from '@/assets/pip-girl-musica.png';
+import pipaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
 import { useHiperfoco } from '@/context/HiperfocoContext';
@@ -81,6 +95,20 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
   { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
   { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
+  { id: 'pipa-original', name: 'Pipa Clássica', description: 'A forma original da Pipa, doce e cheia de coragem.', category: 'premium', image_url: pipaMascot },
+  { id: 'pipa-princesa', name: 'Pipa Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: pipaPrincesa },
+  { id: 'pipa-unicornio', name: 'Pipa Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: pipaUnicornio },
+  { id: 'pipa-doutora', name: 'Pipa Doutora', description: 'Cuidando de todos com carinho e ciência.', category: 'premium', image_url: pipaDoutora },
+  { id: 'pipa-astronauta', name: 'Pipa Astronauta', description: 'Pronta para explorar galáxias inteiras.', category: 'premium', image_url: pipaAstronauta },
+  { id: 'pipa-bailarina', name: 'Pipa Bailarina', description: 'Cada passo é uma poesia em movimento.', category: 'premium', image_url: pipaBailarina },
+  { id: 'pipa-fada', name: 'Pipa Fada', description: 'Espalhando pó mágico e desejos pelo caminho.', category: 'premium', image_url: pipaFada },
+  { id: 'pipa-sereia', name: 'Pipa Sereia', description: 'Mergulhando em aventuras submarinas.', category: 'premium', image_url: pipaSereia },
+  { id: 'pipa-confeiteira', name: 'Pipa Confeiteira', description: 'Receitas cheias de afeto e criatividade.', category: 'premium', image_url: pipaConfeiteira },
+  { id: 'pipa-veterinaria', name: 'Pipa Veterinária', description: 'Amando e cuidando de todos os bichinhos.', category: 'premium', image_url: pipaVeterinaria },
+  { id: 'pipa-professora', name: 'Pipa Professora', description: 'Ensinando com paciência e muito carinho.', category: 'premium', image_url: pipaProfessora },
+  { id: 'pipa-arte', name: 'Pipa Artista', description: 'Pincel na mão, sonhos no papel.', category: 'premium', image_url: pipaArte },
+  { id: 'pipa-musica', name: 'Pipa Musicista', description: 'Cantando e dançando ao som do coração.', category: 'premium', image_url: pipaMusica },
+  { id: 'pipa-super-heroina', name: 'Pipa Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: pipaSuperHeroina },
 ];
 
 const MascotStorePage: React.FC = () => {
