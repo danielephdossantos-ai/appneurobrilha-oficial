@@ -58,26 +58,55 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
+  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🦊", mascoteNome: "Lulu" },
+  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🦉", mascoteNome: "Numo" },
+  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐸", mascoteNome: "Bio" },
+  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🦁", mascoteNome: "Rex" },
+  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🦜", mascoteNome: "Aro" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐙", mascoteNome: "Pinto" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras" },
-  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5" },
-  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas" },
+  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐰", mascoteNome: "Letrinha" },
+  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Conti" },
+  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐢", mascoteNome: "Tato" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🦄", mascoteNome: "Pincel" },
 ] as const;
 
 function isEI(grade: string) {
   const g = grade.toLowerCase();
   return g.includes('infantil') || g.includes('pré') || g.includes('pre');
 }
+
+// ===== Camada visual por faixa etária (apenas estética, não muda lógica) =====
+type GradeTier = "ei" | "alfa" | "fund1" | "fund2" | "fund2plus";
+function gradeTier(grade: string): GradeTier {
+  if (isEI(grade)) return "ei";
+  if (/^1º|^2º/.test(grade)) return "alfa";
+  if (/^3º|^4º|^5º/.test(grade)) return "fund1";
+  if (/^6º|^7º/.test(grade)) return "fund2";
+  return "fund2plus"; // 8º, 9º
+}
+
+const tierTheme: Record<GradeTier, {
+  bg: string; scene: string; sceneEmoji: string; vibe: string; titleScale: string;
+}> = {
+  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneEmoji: "🌈🌳🦋", vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
+  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneEmoji: "🏘️📚✨", vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
+  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneEmoji: "🔭🧪🗺️", vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
+  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneEmoji: "🛰️🧭🎯", vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
+  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneEmoji: "📊🧠📐", vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
+};
+
+// Frases de feedback positivas (substituem "Tente novamente")
+const ALMOST_THERE = [
+  "Você está quase lá!",
+  "Olhe a dica e tente de novo 💡",
+  "Boa tentativa! Vamos observar com calma.",
+  "Está perto! Respira e tenta mais uma vez 🌿",
+];
+function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
 
 function Escola() {
@@ -225,7 +254,8 @@ function Escola() {
           aula={aula} 
           setAula={setAula} 
           childNome={activeChild.nome} 
-          hiperfoco={activeChild.hiperfoco} 
+          hiperfoco={activeChild.hiperfoco}
+          tier={gradeTier(aula.grade || selectedGrade)}
         />
       </AulaErrorBoundary>
     );
@@ -300,19 +330,41 @@ function Escola() {
         </div>
       </Card>
 
+      {(() => {
+        const t = tierTheme[gradeTier(selectedGrade)];
+        return (
+          <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
+            <div className="absolute right-3 top-2 text-5xl opacity-40 animate-float-thinking select-none">{t.sceneEmoji}</div>
+            <div className="relative">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
+              <div className="text-2xl font-extrabold">{t.scene}</div>
+              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo ✨</div>
+            </div>
+          </div>
+        );
+      })()}
+
       <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
-            <div className="text-5xl">{m.emoji}</div>
+            className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
+            <div className="absolute -right-2 -top-2 text-4xl opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-all">
+              {m.cenario}
+            </div>
+            <div className="text-5xl drop-shadow-sm group-hover:scale-110 transition-transform inline-block">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
+            <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
+              <span className="text-base">{m.mascote}</span>
+              <span><b>{m.mascoteNome}</b> te guia</span>
+            </div>
             {ei && m.descricao && (
               <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
             )}
             {!ei && (
-              <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+              <div className="mt-2"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
             )}
+            <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
         ))}
       </div>
@@ -321,7 +373,10 @@ function Escola() {
 }
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
+function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier }) {
+  const theme = tierTheme[tier];
+  const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
+  const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
@@ -349,13 +404,27 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
     opcoes: "✨ Sua vez!",
   };
 
+  // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
+  const stepIndex = aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0;
+  // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
+  const visualStep = aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1;
+
   return (
     <Shell>
-      <PageHeader 
-        emoji="🎓" 
-        title={titulos[aula.etapa] || "Aula"} 
-        subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
-      />
+      {/* Cenário mágico de fundo por faixa etária */}
+      <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
+        <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
+        <div className="relative flex items-center gap-4">
+          <div className="text-5xl drop-shadow animate-float-thinking">{materiaMeta.mascote}</div>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
+            <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
+            <div className="text-sm text-muted-foreground">
+              <b>{materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+            </div>
+          </div>
+        </div>
+      </div>
 
       {adjustment.suggestBreak && (
         <Card className="mb-4 bg-sun/15 border-sun/30 flex items-center gap-3">
@@ -371,11 +440,29 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
         <div className="lg:col-span-3">
 
           <Card className="mb-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "opcoes" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>3. Opções</span>
+            {/* Stepper pedagógico de 6 passos */}
+            <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
+              {[
+                {n:1,l:"Tema",i:"🎯"},
+                {n:2,l:"Explicação",i:"💡"},
+                {n:3,l:"Exemplo",i:"👀"},
+                {n:4,l:"Atividade",i:"✋"},
+                {n:5,l:"Feedback",i:"💬"},
+                {n:6,l:"Reforço",i:"⭐"},
+              ].map(s => {
+                const active = s.n === visualStep;
+                const done = s.n < visualStep;
+                return (
+                  <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
+                    active ? "bg-primary text-primary-foreground scale-110 shadow-glow" :
+                    done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
+                  }`}>
+                    <span>{s.i}</span>{s.l}
+                  </span>
+                );
+              })}
             </div>
+
 
 
             {aula.etapa === "ensino" && (
@@ -482,23 +569,32 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
 
                 {acertou === true && (
-                  <div className="mt-6 p-6 rounded-2xl bg-success/15 border-2 border-success/30 text-success text-lg animate-bounce-short">
+                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
+                      <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div>
-                        <div className="font-extrabold">Incrível, {childNome}!</div>
-                        <div>{aula.reforco_positivo}</div>
+                        <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
+                        <div className="text-base">{aula.reforco_positivo}</div>
+                        <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                     </div>
                   </div>
                 )}
                 
                 {acertou === false && (
-                  <div className="mt-6 p-6 rounded-2xl bg-sun/20 border-2 border-sun/30 flex items-start gap-3">
-                    <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-bold text-sun-foreground">Dica especial:</div>
-                      <div className="text-lg text-sun-foreground/90">{aula.dica}</div>
+                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
+                    <div className="text-4xl">{materiaMeta.mascote}</div>
+                    <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
+                    <div className="flex-1">
+                      <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
+                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.dica}</div>
+                      <button
+                        onClick={() => { setAcertou(null); setTentativa(null); }}
+                        className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
+                      >
+                        Tentar de novo 🌟
+                      </button>
                     </div>
                   </div>
                 )}
