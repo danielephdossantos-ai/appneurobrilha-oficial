@@ -23,7 +23,11 @@ import worldPrincesas from "@/assets/neuro-treino/worlds/princesas.jpg";
 import worldTrens from "@/assets/neuro-treino/worlds/trens.jpg";
 import worldRobos from "@/assets/neuro-treino/worlds/robos.jpg";
 import worldVeiculos from "@/assets/neuro-treino/worlds/veiculos.jpg";
+import worldOceano from "@/assets/neuro-treino/worlds/oceano.jpg";
+import worldFloresta from "@/assets/neuro-treino/worlds/floresta.jpg";
+import worldCastelo from "@/assets/neuro-treino/worlds/castelo.jpg";
 import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
+import WorldCreatures from "@/components/neuro-treino/WorldCreatures";
 
 // Ícones por categoria
 import icSonsIniciais from "@/assets/neuro-treino/icons/sons-iniciais.png";
@@ -111,7 +115,7 @@ function NeuroTreinoShell() {
 
 // ============== MUNDOS ==============
 
-type WorldKey = "dinossauros" | "minecraft" | "carros" | "fazendinha" | "espaco" | "animais" | "herois" | "arte" | "musica" | "princesas" | "trens" | "robos" | "veiculos" | "default";
+type WorldKey = "dinossauros" | "minecraft" | "carros" | "fazendinha" | "espaco" | "animais" | "herois" | "arte" | "musica" | "princesas" | "trens" | "robos" | "veiculos" | "oceano" | "floresta" | "castelo" | "default";
 
 function mapHiperfocoToWorld(label?: string | null): WorldKey {
   if (!label) return "default";
@@ -129,6 +133,9 @@ function mapHiperfocoToWorld(label?: string | null): WorldKey {
   if (l.includes("espac") || l.includes("espaç") || l.includes("galá") || l.includes("gala") || l.includes("astro")) return "espaco";
   if (l.includes("animal") || l.includes("bicho")) return "animais";
   if (l.includes("her") || l.includes("super")) return "herois";
+  if (l.includes("ocean") || l.includes("mar") || l.includes("peix")) return "oceano";
+  if (l.includes("flores") || l.includes("fada") || l.includes("encant")) return "floresta";
+  if (l.includes("castel") || l.includes("drag")) return "castelo";
   return "default";
 }
 
@@ -146,25 +153,30 @@ const WORLD_THEME: Record<WorldKey, { image: string; accent: string; trailColor:
   trens:       { image: worldTrens,     accent: "ring-sky-300/70",     trailColor: "border-sky-200",     name: "Mundo Trilhos" },
   robos:       { image: worldRobos,     accent: "ring-cyan-300/70",    trailColor: "border-cyan-200",    name: "Mundo Robótico" },
   veiculos:    { image: worldVeiculos,  accent: "ring-sky-300/70",     trailColor: "border-sky-100",     name: "Mundo Aventura" },
+  oceano:      { image: worldOceano,    accent: "ring-cyan-300/70",    trailColor: "border-cyan-200",    name: "Mundo Oceano" },
+  floresta:    { image: worldFloresta,  accent: "ring-violet-300/70",  trailColor: "border-violet-200",  name: "Floresta Encantada" },
+  castelo:     { image: worldCastelo,   accent: "ring-pink-300/70",    trailColor: "border-pink-200",    name: "Castelo Mágico" },
   default:     { image: worldDefault,   accent: "ring-white/70",       trailColor: "border-white",       name: "Mundo Encantado" },
 };
 
 function WorldBackground({ world }: { world: WorldKey }) {
   const theme = WORLD_THEME[world];
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden">
       <img
         src={theme.image}
         alt={theme.name}
         className="absolute inset-0 w-full h-full object-cover animate-[breathe_18s_ease-in-out_infinite]"
         loading="lazy"
-        width={1408}
-        height={768}
+        width={1920}
+        height={1088}
       />
       {/* gradiente para legibilidade da trilha */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/25 to-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/25 to-black/45 pointer-events-none" />
       {/* brilhos suaves */}
-      <div className="absolute inset-0 bg-[radial-gradient(1.5px_1.5px_at_15%_25%,white,transparent),radial-gradient(1.5px_1.5px_at_75%_55%,white,transparent),radial-gradient(1px_1px_at_45%_80%,white,transparent),radial-gradient(2px_2px_at_85%_15%,white,transparent)] opacity-60 animate-pulse" />
+      <div className="absolute inset-0 bg-[radial-gradient(1.5px_1.5px_at_15%_25%,white,transparent),radial-gradient(1.5px_1.5px_at_75%_55%,white,transparent),radial-gradient(1px_1px_at_45%_80%,white,transparent),radial-gradient(2px_2px_at_85%_15%,white,transparent)] opacity-60 animate-pulse pointer-events-none" />
+      {/* criaturinhas animadas do mundo */}
+      <WorldCreatures world={world} />
     </div>
   );
 }
