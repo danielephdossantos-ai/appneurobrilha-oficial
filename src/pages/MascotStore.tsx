@@ -41,6 +41,7 @@ import pipaArte from '@/assets/pip-girl-arte.png';
 import pipaMusica from '@/assets/pip-girl-musica.png';
 import pipaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
+import { PipEvolution } from '@/components/pip/PipEvolution';
 import { cn } from '@/utils/utils';
 import { useHiperfoco } from '@/context/HiperfocoContext';
 import { toast } from 'sonner';
