@@ -410,23 +410,36 @@ const MascotStoreCard = ({
                   </Link>
                 )}
               </div>
+            ) : !unlocked ? (
+              <div className="flex flex-col gap-2">
+                <div className="w-full py-3 rounded-2xl bg-muted/40 border-2 border-muted text-muted-foreground text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                  <Lock size={14} />
+                  Bloqueado
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-bold text-primary/70">
+                    <span>{currentCoins} / {requiredCoins} 💰</span>
+                    <span>Faltam {missingCoins} 💰</span>
+                  </div>
+                  <div className="h-2 bg-primary/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all"
+                      style={{ width: `${Math.min(100, (currentCoins / Math.max(1, requiredCoins)) * 100)}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
             ) : (
-              <KidButton 
-                variant="primary" 
+              <KidButton
+                variant="primary"
                 className="w-full py-6 text-lg group/btn"
-                onClick={() => {}} // Futura integração de compra
+                onClick={() => {}}
               >
                 <span className="flex items-center gap-2">
-                  Ver Detalhes
+                  Desbloqueado! Adicionar
                   <ChevronRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
                 </span>
               </KidButton>
-            )}
-            
-            {!isOwned && (
-              <p className="text-[10px] text-center font-bold text-muted-foreground uppercase tracking-widest">
-                Requer Nível {mascot.category === 'premium' ? '10' : '5'} + Moedas Brilha
-              </p>
             )}
           </div>
         </div>
