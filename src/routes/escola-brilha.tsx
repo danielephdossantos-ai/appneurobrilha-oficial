@@ -380,19 +380,33 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
             {aula.etapa === "ensino" && (
               <div>
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-sky/40 to-petal/30 grid place-items-center mb-4 relative overflow-hidden">
-                  <div className="text-8xl animate-pulse">
-                    {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
+                <div
+                  className="aspect-video rounded-2xl grid place-items-center mb-4 relative overflow-hidden"
+                  style={{
+                    background: aula.visualHex
+                      ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
+                      : undefined,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-sky/40 to-petal/30 -z-10" />
+                  <div className="text-[8rem] leading-none animate-pulse text-center">
+                    {aula.visual
+                      ? aula.visual
+                      : hiperfoco === "dinossauros" ? "🦕"
+                        : hiperfoco === "espaco" ? "🚀"
+                        : hiperfoco === "animais" ? "🦁"
+                        : "🌟"}
                   </div>
                 </div>
-                <p className="text-xl leading-relaxed font-medium">
+                <p className={`leading-relaxed font-medium ${aula.isEI ? "text-2xl" : "text-xl"}`}>
                   {aula.ensino}
                 </p>
                 <div className="mt-6 flex gap-2 flex-wrap">
-                  <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                    Continuar →
+                  <button onClick={() => setAula({ ...aula, etapa: aula.isEI ? "opcoes" : "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                    {aula.isEI ? "Vamos brincar! 🎉" : "Continuar →"}
                   </button>
                 </div>
+
               </div>
             )}
 
