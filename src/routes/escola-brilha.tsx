@@ -355,7 +355,7 @@ function Escola() {
       const novaAula = {
         ...data,
         materia: materiaId,
-        etapa: guidedActive ? "ensino" : "opcoes",
+        etapa: "ensino",
         grade: selectedGrade,
         activityId: activity.id,
         bancoOrdem: preset?.ordem,
