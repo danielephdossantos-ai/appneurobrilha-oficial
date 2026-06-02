@@ -303,10 +303,27 @@ const TabButton = ({ active, onClick, label, icon }: { active: boolean, onClick:
   </button>
 );
 
-const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false }: { mascot: Mascot, isOwned: boolean, index: number, showCollectionButton?: boolean }) => {
+const MascotStoreCard = ({
+  mascot,
+  isOwned,
+  index,
+  showCollectionButton = false,
+  unlocked = true,
+  requiredCoins = 0,
+  currentCoins = 0,
+}: {
+  mascot: Mascot;
+  isOwned: boolean;
+  index: number;
+  showCollectionButton?: boolean;
+  unlocked?: boolean;
+  requiredCoins?: number;
+  currentCoins?: number;
+}) => {
   const isPip = mascot.name === 'Pip';
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
+  const missingCoins = Math.max(0, requiredCoins - currentCoins);
 
   return (
     <motion.div
@@ -316,7 +333,10 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       transition={{ delay: index * 0.05 }}
     >
-      <KidCard className="group h-full flex flex-col overflow-hidden border-2 border-border hover:border-primary/30 transition-all duration-300">
+      <KidCard className={cn(
+        "group h-full flex flex-col overflow-hidden border-2 transition-all duration-300",
+        unlocked ? "border-border hover:border-primary/30" : "border-muted/40"
+      )}>
         <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center p-8 overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -324,7 +344,10 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
 
-          <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+          <div className={cn(
+            "relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110",
+            !unlocked && "grayscale opacity-50"
+          )}>
             {isPip ? (
               <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
 
@@ -335,6 +358,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             )}
           </div>
 
+          {!unlocked && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px]">
+              <div className="bg-white/95 rounded-full p-4 shadow-2xl">
+                <Lock className="text-primary" size={32} strokeWidth={2.5} />
+              </div>
+            </div>
+          )}
 
           <div className={cn(
             "absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest shadow-lg",
@@ -343,12 +373,13 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
             {rarity}
           </div>
 
-          {isOwned && (
+          {isOwned && unlocked && (
             <div className="absolute top-4 left-4 bg-success text-white p-1.5 rounded-full shadow-lg">
               <Star size={14} fill="white" />
             </div>
           )}
         </div>
+
 
         <div className="p-6 flex-1 flex flex-col">
           <div className="mb-4">
