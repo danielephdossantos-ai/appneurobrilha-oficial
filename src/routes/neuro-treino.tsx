@@ -29,30 +29,30 @@ import worldCastelo from "@/assets/neuro-treino/worlds/castelo.jpg";
 import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
 
 
-// Ícones por categoria
-import icSonsIniciais from "@/assets/neuro-treino/icons/sons-iniciais.png";
-import icMotorzinho from "@/assets/neuro-treino/icons/motorzinho-dos-sons.png";
-import icRimas from "@/assets/neuro-treino/icons/rimas.png";
-import icPedacinhos from "@/assets/neuro-treino/icons/pedacinhos-da-palavra.png";
-import icOndeEsta from "@/assets/neuro-treino/icons/onde-esta.png";
-import icSeqPadrao from "@/assets/neuro-treino/icons/sequencia-e-padrao.png";
-import icCadePar from "@/assets/neuro-treino/icons/cade-o-par.png";
-import icFocoTotal from "@/assets/neuro-treino/icons/foco-total.png";
-import icLabSom from "@/assets/neuro-treino/icons/labirinto-do-som.png";
-import icFocoSust from "@/assets/neuro-treino/icons/foco-sustentado.png";
-import icRastreio from "@/assets/neuro-treino/icons/rastreamento-sacadico.png";
-import icMosaico from "@/assets/neuro-treino/icons/mosaico-de-formas.png";
-import icSeqCores from "@/assets/neuro-treino/icons/sequencia-de-cores.png";
-import icSimetria from "@/assets/neuro-treino/icons/simetria.png";
-import icDecoracao from "@/assets/neuro-treino/icons/decoracao-criativa.png";
-import icOnomatopeias from "@/assets/neuro-treino/icons/onomatopeias-animadas.png";
-import icRitmoSopro from "@/assets/neuro-treino/icons/ritmo-e-sopro.png";
-import icSonsCorpo from "@/assets/neuro-treino/icons/paromatopeias-corpo.png";
-import icTracado from "@/assets/neuro-treino/icons/tracado-letras.png";
-import icCaminhoPontos from "@/assets/neuro-treino/icons/caminho-dos-pontos.png";
-import icLabPrecisao from "@/assets/neuro-treino/icons/labirinto-precisao.png";
-import icTriagem from "@/assets/neuro-treino/icons/triagem-categorias.png";
-import icExpressao from "@/assets/neuro-treino/icons/expressao-emocao.png";
+// Ícones por categoria (v2 - ilustrações premium 2D)
+import icSonsIniciais from "@/assets/neuro-treino/icons/v2/sons-iniciais.png";
+import icMotorzinho from "@/assets/neuro-treino/icons/v2/motorzinho-dos-sons.png";
+import icRimas from "@/assets/neuro-treino/icons/v2/rimas.png";
+import icPedacinhos from "@/assets/neuro-treino/icons/v2/pedacinhos-da-palavra.png";
+import icOndeEsta from "@/assets/neuro-treino/icons/v2/onde-esta.png";
+import icSeqPadrao from "@/assets/neuro-treino/icons/v2/sequencia-e-padrao.png";
+import icCadePar from "@/assets/neuro-treino/icons/v2/cade-o-par.png";
+import icFocoTotal from "@/assets/neuro-treino/icons/v2/foco-total.png";
+import icLabSom from "@/assets/neuro-treino/icons/v2/labirinto-do-som.png";
+import icFocoSust from "@/assets/neuro-treino/icons/v2/foco-sustentado.png";
+import icRastreio from "@/assets/neuro-treino/icons/v2/rastreamento-sacadico.png";
+import icMosaico from "@/assets/neuro-treino/icons/v2/mosaico-de-formas.png";
+import icSeqCores from "@/assets/neuro-treino/icons/v2/sequencia-de-cores.png";
+import icSimetria from "@/assets/neuro-treino/icons/v2/simetria.png";
+import icDecoracao from "@/assets/neuro-treino/icons/v2/decoracao-criativa.png";
+import icOnomatopeias from "@/assets/neuro-treino/icons/v2/onomatopeias-animadas.png";
+import icRitmoSopro from "@/assets/neuro-treino/icons/v2/ritmo-e-sopro.png";
+import icSonsCorpo from "@/assets/neuro-treino/icons/v2/paromatopeias-corpo.png";
+import icTracado from "@/assets/neuro-treino/icons/v2/tracado-letras.png";
+import icCaminhoPontos from "@/assets/neuro-treino/icons/v2/caminho-dos-pontos.png";
+import icLabPrecisao from "@/assets/neuro-treino/icons/v2/labirinto-precisao.png";
+import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
+import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
 
 const ICONS: Record<CategoriaSlug, string> = {
   "sons-iniciais": icSonsIniciais,
