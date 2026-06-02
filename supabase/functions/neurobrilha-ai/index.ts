@@ -214,6 +214,14 @@ serve(async (req) => {
       - "frase_apresentacao": String.
       - "opcoes_identificacao": Array de 3 strings.
       ` : ""}
+      ${isMathInicial ? `
+      - "numero_a": Inteiro pequeno.
+      - "numero_b": Inteiro pequeno.
+      - "operacao": "+" ou "-".
+      - "resultado": Inteiro.
+      - "visual_emoji": String com 1 emoji.
+      - "opcoes_numericas": Array de 3 inteiros.
+      ` : ""}
 
       Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
 
