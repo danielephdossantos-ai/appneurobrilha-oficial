@@ -41,6 +41,7 @@ import pipaArte from '@/assets/pip-girl-arte.png';
 import pipaMusica from '@/assets/pip-girl-musica.png';
 import pipaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
+import { PipEvolution } from '@/components/pip/PipEvolution';
 import { cn } from '@/utils/utils';
 import { useHiperfoco } from '@/context/HiperfocoContext';
 import { toast } from 'sonner';
@@ -192,10 +193,23 @@ const MascotStorePage: React.FC = () => {
 
       <WorldsSection />
 
+      {/* Sistema de Evolução conectado ao progresso do app */}
+      <div className="flex items-center gap-3 mb-6 mt-16">
+        <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
+        <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-wider flex items-center gap-2">
+          <Sparkles size={22} /> Evolução do Pip & Pipa
+        </h2>
+        <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
+      </div>
+      <p className="text-center text-muted-foreground font-bold mb-8 max-w-2xl mx-auto">
+        Acompanhe a evolução do seu mascote conforme você conquista Moedas Brilha: Ovo → Nascendo → Bebê → Guardião. ✨
+      </p>
+      <PipEvolution />
+
       <div className="flex items-center gap-3 mb-6 mt-16">
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
         <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-wider flex items-center gap-2">
-          <Sparkles size={22} /> Mascotes
+          <Sparkles size={22} /> Mascotes & Fantasias
         </h2>
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
       </div>
