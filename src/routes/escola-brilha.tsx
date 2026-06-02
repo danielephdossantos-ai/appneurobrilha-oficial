@@ -382,13 +382,27 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
     opcoes: "✨ Sua vez!",
   };
 
+  // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
+  const stepIndex = aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0;
+  // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
+  const visualStep = aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1;
+
   return (
     <Shell>
-      <PageHeader 
-        emoji="🎓" 
-        title={titulos[aula.etapa] || "Aula"} 
-        subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
-      />
+      {/* Cenário mágico de fundo por faixa etária */}
+      <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
+        <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
+        <div className="relative flex items-center gap-4">
+          <div className="text-5xl drop-shadow animate-float-thinking">{materiaMeta.mascote}</div>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
+            <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
+            <div className="text-sm text-muted-foreground">
+              <b>{materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+            </div>
+          </div>
+        </div>
+      </div>
 
       {adjustment.suggestBreak && (
         <Card className="mb-4 bg-sun/15 border-sun/30 flex items-center gap-3">
@@ -404,11 +418,29 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
         <div className="lg:col-span-3">
 
           <Card className="mb-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "demo" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>2. Demonstração</span>
-              <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "opcoes" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>3. Opções</span>
+            {/* Stepper pedagógico de 6 passos */}
+            <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
+              {[
+                {n:1,l:"Tema",i:"🎯"},
+                {n:2,l:"Explicação",i:"💡"},
+                {n:3,l:"Exemplo",i:"👀"},
+                {n:4,l:"Atividade",i:"✋"},
+                {n:5,l:"Feedback",i:"💬"},
+                {n:6,l:"Reforço",i:"⭐"},
+              ].map(s => {
+                const active = s.n === visualStep;
+                const done = s.n < visualStep;
+                return (
+                  <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
+                    active ? "bg-primary text-primary-foreground scale-110 shadow-glow" :
+                    done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
+                  }`}>
+                    <span>{s.i}</span>{s.l}
+                  </span>
+                );
+              })}
             </div>
+
 
 
             {aula.etapa === "ensino" && (
