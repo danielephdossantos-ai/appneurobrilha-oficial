@@ -1260,6 +1260,22 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       }
                     }}
                   />
+                ) : isMathFlow ? (
+                  <MathFlow
+                    aula={aula}
+                    mathStep={mathStep}
+                    setMathStep={setMathStep}
+                    activeMascot={activeMascot}
+                    materiaMeta={materiaMeta}
+                    childNome={childNome}
+                    onComplete={(isCorrect) => {
+                      setAcertou(isCorrect);
+                      if (isCorrect && !completedRef.current && aula.activityId) {
+                        completedRef.current = true;
+                        onCompleted?.(aula.activityId);
+                      }
+                    }}
+                  />
                 ) : eiStep < 5 ? (
                   <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="flex flex-col items-center gap-6">
