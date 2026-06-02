@@ -97,7 +97,7 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
             {silhouette}
           </div>
           <div className="absolute -bottom-8 text-center text-lg font-black tracking-widest text-slate-700">
-            {done ? correct : "ARRASTE AQUI"}
+            {done ? correct : ""}
           </div>
         </div>
         {/* right options */}
