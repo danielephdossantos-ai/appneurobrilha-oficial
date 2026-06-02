@@ -4,6 +4,7 @@ import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles,
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
+import { objetoImg } from "@/data/neuro-treino/objetos";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
