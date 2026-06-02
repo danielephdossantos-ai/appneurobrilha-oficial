@@ -16,9 +16,10 @@ import { mockResponsibleData } from "@/data/responsible/mock-data";
 import { ResponsibleIntelligence } from "@/modules/parental/intelligence";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChildProtection } from "@/modules/auth/components/ChildProtection";
+import { useParentMode } from "@/contexts/ParentModeContext";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
+
 
 export const Route = createFileRoute("/painel-pais")({
   component: PainelPremium,
@@ -26,30 +27,38 @@ export const Route = createFileRoute("/painel-pais")({
 
 function PainelPremium() {
   const { activeChild } = useAppState();
-  const [protected_access, setProtectedAccess] = useState(false);
-  
+  const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
+
   useEffect(() => {
-    if (protected_access) {
+    if (parentUnlocked) {
       AuditLogService.log({
         action: 'ACCESS_PARENT_DASHBOARD',
         module: 'RESPONSIBLE',
         metadata: { childId: activeChild?.id }
       });
+    } else {
+      requestUnlock();
     }
-  }, [protected_access, activeChild]);
+  }, [parentUnlocked, activeChild, requestUnlock]);
 
-  if (!activeChild) return <Shell><p className="text-center py-10">Selecione uma criança para acessar o painel inteligente.</p></Shell>;
+  if (!activeChild) return <Shell><p className="text-center py-10">Selecione uma criança para acessar o painel.</p></Shell>;
 
-  if (!protected_access) {
+  if (!parentUnlocked) {
     return (
       <Shell>
-        <ChildProtection 
-          onSuccess={() => setProtectedAccess(true)} 
-          onCancel={() => window.history.back()} 
-        />
+        <div className="text-center py-20">
+          <p className="text-lg font-bold mb-4">🔒 Área dos Pais bloqueada</p>
+          <button
+            onClick={requestUnlock}
+            className="px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-bold"
+          >
+            Digitar PIN
+          </button>
+        </div>
       </Shell>
     );
   }
+
 
   const analysis = ResponsibleIntelligence.analyzePerformance(mockResponsibleData);
 

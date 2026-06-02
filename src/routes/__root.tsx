@@ -125,12 +125,15 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
         <MascotProvider>
-          <div className="relative min-h-screen">
-            <Outlet />
-            <LGPDConsent />
-            <ConnectivityStatus />
-            <MascotGlobalContainer />
-          </div>
+          <ParentModeProvider>
+            <div className="relative min-h-screen">
+              <Outlet />
+              <LGPDConsent />
+              <ConnectivityStatus />
+              <MascotGlobalContainer />
+              <ParentPinGate />
+            </div>
+          </ParentModeProvider>
         </MascotProvider>
       </AuthGuard>
       <Toaster position="top-center" richColors />
@@ -146,6 +149,9 @@ import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 import { MascotProvider } from "@/contexts/MascotContext";
 import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
+import { ParentModeProvider } from "@/contexts/ParentModeContext";
+import { ParentPinGate } from "@/components/auth/ParentPinGate";
+
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const [authReady, setAuthReady] = useState(false);
