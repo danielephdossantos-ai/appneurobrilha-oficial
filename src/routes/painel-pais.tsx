@@ -1,6 +1,6 @@
 
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Brain, AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react";
+import { Brain, AlertTriangle, CheckCircle2, ArrowRight, ArrowLeft, Home } from "lucide-react";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { DashboardHeader } from "@/components/responsible/DashboardHeader";
@@ -118,6 +118,27 @@ function PainelPremium() {
   return (
     <Shell>
       <div className="bg-slate-50/50 min-h-screen pb-20 -mx-4 md:-mx-8 -mt-6 md:-mt-10 px-4 md:px-8 pt-8">
+        <div className="flex items-center justify-between gap-2 mb-6">
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border-2 border-slate-200 hover:border-primary font-bold text-sm shadow-sm"
+          >
+            <ArrowLeft className="h-4 w-4" /> Voltar
+          </button>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border-2 border-slate-200 hover:border-primary font-bold text-sm shadow-sm"
+          >
+            <Home className="h-4 w-4" /> Início
+          </Link>
+          <button
+            onClick={() => window.history.forward()}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border-2 border-slate-200 hover:border-primary font-bold text-sm shadow-sm"
+          >
+            Avançar <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+
         <DashboardHeader 
 
           studentName={activeChild.nome || mockResponsibleData.studentName} 
