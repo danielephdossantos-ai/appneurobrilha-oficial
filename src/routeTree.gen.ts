@@ -19,13 +19,15 @@ import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
-import { Route as LojaFantasiaPipRouteImport } from './routes/loja-fantasia-pip'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
+import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
@@ -82,11 +84,6 @@ const LojaMascotesRoute = LojaMascotesRouteImport.update({
   path: '/loja-mascotes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LojaFantasiaPipRoute = LojaFantasiaPipRouteImport.update({
-  id: '/loja-fantasia-pip',
-  path: '/loja-fantasia-pip',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const Jornada365Route = Jornada365RouteImport.update({
   id: '/jornada-365',
   path: '/jornada-365',
@@ -95,6 +92,11 @@ const Jornada365Route = Jornada365RouteImport.update({
 const HistoriasRoute = HistoriasRouteImport.update({
   id: '/historias',
   path: '/historias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
+  id: '/gerador-procedural',
+  path: '/gerador-procedural',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
@@ -115,6 +117,16 @@ const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
+  id: '/auditoria-pedagogica',
+  path: '/auditoria-pedagogica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AmigoVirtualRoute = AmigoVirtualRouteImport.update({
@@ -148,13 +160,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -172,13 +186,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -197,13 +213,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
+  '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
-  '/loja-fantasia-pip': typeof LojaFantasiaPipRoute
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
@@ -223,13 +241,15 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/amigo-virtual'
+    | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -247,13 +267,15 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/amigo-virtual'
+    | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -271,13 +293,15 @@ export interface FileRouteTypes {
     | '/'
     | '/agenda'
     | '/amigo-virtual'
+    | '/analytics'
+    | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/escola-brilha'
+    | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
-    | '/loja-fantasia-pip'
     | '/loja-mascotes'
     | '/mascotes'
     | '/missao-prova'
@@ -296,13 +320,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
+  GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
-  LojaFantasiaPipRoute: typeof LojaFantasiaPipRoute
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
@@ -389,13 +415,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LojaMascotesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/loja-fantasia-pip': {
-      id: '/loja-fantasia-pip'
-      path: '/loja-fantasia-pip'
-      fullPath: '/loja-fantasia-pip'
-      preLoaderRoute: typeof LojaFantasiaPipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/jornada-365': {
       id: '/jornada-365'
       path: '/jornada-365'
@@ -408,6 +427,13 @@ declare module '@tanstack/react-router' {
       path: '/historias'
       fullPath: '/historias'
       preLoaderRoute: typeof HistoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gerador-procedural': {
+      id: '/gerador-procedural'
+      path: '/gerador-procedural'
+      fullPath: '/gerador-procedural'
+      preLoaderRoute: typeof GeradorProceduralRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/escola-brilha': {
@@ -436,6 +462,20 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditoria-pedagogica': {
+      id: '/auditoria-pedagogica'
+      path: '/auditoria-pedagogica'
+      fullPath: '/auditoria-pedagogica'
+      preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/amigo-virtual': {
@@ -480,13 +520,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
+  GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
-  LojaFantasiaPipRoute: LojaFantasiaPipRoute,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MissaoProvaRoute: MissaoProvaRoute,

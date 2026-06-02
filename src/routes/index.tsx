@@ -201,52 +201,15 @@ function Index() {
 
       <h2 className="text-2xl font-black mb-6 uppercase tracking-widest text-foreground/60 flex items-center gap-3">
         <Compass size={24} className="text-primary" />
-        Explore os Mundos
+        Explore sua Jornada
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-        <WorldTile 
-          to="/escola-brilha" 
-          emoji="🏫" 
-          title="Cidade das Letras" 
-          desc="Alfabetização e Português" 
-          color="from-sky/40 to-sky/5" 
-          shadow="oklch(var(--sky-dark))" 
-          tags={["LEITURA", "ESCRITA", "BNCC"]}
-        />
-        <WorldTile 
-          to="/escola-brilha" 
-          emoji="🔢" 
-          title="Vale dos Números" 
-          desc="Matemática e Lógica" 
-          color="from-sun/40 to-sun/5" 
-          shadow="oklch(var(--sun-dark))" 
-          tags={["CÁLCULO", "GEOMETRIA", "BNCC"]}
-        />
-        <WorldTile 
-          to="/neuro-treino" 
-          emoji="🌲" 
-          title="Floresta da Atenção" 
-          desc="Foco e Regulação" 
-          color="from-success/30 to-success/5" 
-          shadow="oklch(var(--success-dark))" 
-          tags={["TREINO COGNITIVO", "CALMA"]}
-        />
-        <WorldTile 
-          to="/reforco-brilha" 
-          emoji="🧪" 
-          title="Laboratório do Pip" 
-          desc="Ciência e Experiências" 
-          color="from-lilac/40 to-lilac/5" 
-          shadow="oklch(0.7 0.1 300)" 
-          tags={["CIÊNCIAS", "CRIATIVIDADE"]}
-        />
-      </div>
-
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Tile to="/historias" emoji="📚" title="HISTÓRIAS" desc="Livros" color="from-[#6C5CE7]/30 to-[#6C5CE7]/5" shadow="oklch(0.5 0.15 300)" />
-        <Tile to="/brilha-vida" emoji="🤝" title="BRILHA VIDA" desc="Social" color="from-petal/30 to-petal/5" shadow="oklch(var(--petal-dark))" />
-        <Tile to="/amigo-virtual" emoji="🦄" title="AMIGO" desc="IA Estudo" color="from-lilac/30 to-lilac/5" shadow="oklch(0.7 0.1 300)" />
-        <Tile to="/rotina" emoji="🗓️" title="ROTINA" desc="Meu dia" color="from-sun/30 to-sun/5" shadow="oklch(var(--sun-dark))" />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <Tile to="/historias" emoji="📚" title="HISTÓRIAS" desc="Livrinho interativo" color="from-[#6C5CE7]/30 to-[#6C5CE7]/5" shadow="oklch(0.5 0.15 300)" />
+        <Tile to="/escola-brilha" emoji="🎓" title="Escola Brilha" desc="BNCC 1º–9º" color="from-primary/30 to-primary/5" shadow="oklch(var(--primary-dark))" />
+        <Tile to="/reforco-brilha" emoji="✨" title="REFORÇO BRILHA" desc="Ensino infinito" color="from-petal/30 to-petal/5" shadow="oklch(var(--petal-dark))" />
+        <Tile to="/neuro-treino" emoji="🧠" title="Neuro-Treino" desc="Reforço clínico" color="from-sky/30 to-sky/5" shadow="oklch(var(--sky-dark))" />
+        <Tile to="/jornada-365" emoji="🧭" title="Jornada 365" desc="Sua rotina" color="from-sun/30 to-sun/5" shadow="oklch(var(--sun-dark))" />
+        <Tile to="/amigo-virtual" emoji="🦄" title="Amigo Virtual" desc="IA & Estudo" color="from-lilac/30 to-lilac/5" shadow="oklch(0.7 0.1 300)" />
       </div>
 
     </Shell>
@@ -258,48 +221,13 @@ function Tile({ to, emoji, title, desc, color, shadow }: { to: string; emoji: st
     <Link to={to} className="group">
       <KidCard 
         className={cn(
-          `rounded-3xl p-4 bg-gradient-to-br ${color} border-2 border-white/50 shadow-kid hover:translate-y-[-4px] active:translate-y-[2px] active:shadow-kid-active transition-all h-full flex flex-col gap-1`,
+          `rounded-3xl p-6 bg-gradient-to-br ${color} border-2 border-white/50 shadow-kid hover:translate-y-[-4px] active:translate-y-[2px] active:shadow-kid-active transition-all h-full flex flex-col gap-2`,
         )}
         style={{ '--shadow-color': shadow } as React.CSSProperties}
       >
-        <span className="text-3xl mb-1 group-hover:scale-125 transition-transform origin-left">{emoji}</span>
-        <span className="font-black text-xs leading-tight uppercase tracking-wide">{title}</span>
-        <span className="text-[10px] font-bold text-foreground/50 flex items-center gap-1 uppercase tracking-widest">{desc}</span>
-      </KidCard>
-    </Link>
-  );
-}
-
-function WorldTile({ to, emoji, title, desc, color, shadow, tags }: { to: string; emoji: string; title: string; desc: string; color: string; shadow: string; tags: string[] }) {
-  return (
-    <Link to={to} className="group">
-      <KidCard 
-        className={cn(
-          `rounded-[3rem] p-8 bg-gradient-to-br ${color} border-4 border-white/50 shadow-premium hover:translate-y-[-8px] active:translate-y-[2px] active:shadow-kid-active transition-all h-full flex flex-col gap-4 relative overflow-hidden`,
-        )}
-        style={{ '--shadow-color': shadow } as React.CSSProperties}
-      >
-        {/* Background glow */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        
-        <div className="flex items-center gap-6">
-          <span className="text-7xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">{emoji}</span>
-          <div>
-            <div className="flex gap-2 mb-2">
-              {tags.map(t => (
-                <span key={t} className="text-[8px] font-black bg-white/40 px-2 py-0.5 rounded-full tracking-tighter">{t}</span>
-              ))}
-            </div>
-            <h3 className="font-black text-3xl leading-none uppercase tracking-tight">{title}</h3>
-            <p className="text-sm font-bold text-foreground/60 mt-1">{desc}</p>
-          </div>
-        </div>
-        
-        <div className="mt-auto flex justify-end">
-          <div className="bg-white/40 p-3 rounded-2xl group-hover:bg-white group-hover:scale-110 transition-all">
-             <ArrowRight className="h-6 w-6" strokeWidth={4} />
-          </div>
-        </div>
+        <span className="text-5xl mb-2 group-hover:scale-125 transition-transform origin-left">{emoji}</span>
+        <span className="font-black text-lg leading-tight uppercase tracking-wide">{title}</span>
+        <span className="text-xs font-bold text-foreground/50 flex items-center gap-1 uppercase tracking-widest">{desc} <ArrowRight className="h-4 w-4" strokeWidth={3} /></span>
       </KidCard>
     </Link>
   );

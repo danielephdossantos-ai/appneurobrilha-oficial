@@ -26,18 +26,12 @@ export const PIP_SKINS: Record<string, string> = {
   musica: pipMusica,
   fazendinha: pipFazendinha,
   'super-herois': pipSuperHerois,
-  'super-heroinas': pipPrincesas, // Usando princesas como base para heroinas por enquanto
   princesas: pipPrincesas,
   minecraft: pipMinecraft,
   carros: pipCarros,
-  carrinho: pipCarros,
-  caminhao: pipVeiculos,
-  trator: pipFazendinha,
-  moto: pipCarros,
   trens: pipTrens,
   robos: pipRobos,
   veiculos: pipVeiculos,
-  monstros: pipDinossauros, // Usando dinos como base para monstros
 };
 
 
@@ -49,18 +43,15 @@ interface LiveMascotProps {
   className?: string;
   message?: string;
   showBadge?: boolean;
-  skinUrl?: string; // Add this prop to allow overriding the skin image
 }
 
-const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true, skinUrl }: LiveMascotProps) => {
+const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true }: LiveMascotProps) => {
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
   const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
 
   const getMascotImage = () => {
-    if (skinUrl) return skinUrl; // Priority to the passed skinUrl
-    
     if (!isPip) {
       return activeMascot?.mascot.image_url || pipMascot;
     }

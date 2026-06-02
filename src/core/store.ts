@@ -7,8 +7,8 @@ import { SensoryMode } from "@/engines/regulation-engine/sensory-engine";
 export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo" | "nenhum";
 export type Hiperfoco =
   | "animais" | "dinossauros" | "espaco" | "veiculos"
-  | "princesas" | "super-herois" | "super-heroinas" | "robos" | "musica"
-  | "minecraft" | "carros" | "trens" | "arte" | "fazendinha" | "monstros" | "outros";
+  | "princesas" | "super-herois" | "robos" | "musica"
+  | "minecraft" | "carros" | "trens" | "arte" | "fazendinha" | "outros";
 
 export interface Child {
   id: string;

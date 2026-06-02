@@ -6,7 +6,6 @@ import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { motion, AnimatePresence } from "framer-motion";
-import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
@@ -121,15 +120,11 @@ function BrilhaVida() {
 
   return (
     <Shell>
-      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-sun/10 shadow-soft items-center">
-        <div className="flex-shrink-0">
-          <PipPedagogicalGuidance stage="idle" />
-        </div>
-        <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-4xl font-black text-sun-foreground mb-2">Brilha Vida</h1>
-          <p className="text-muted-foreground text-lg font-bold">Sentimentos são como cores, vamos aprender a lidar com cada uma delas!</p>
-        </div>
-      </div>
+      <PageHeader 
+        emoji="🌱" 
+        title="Brilha Vida" 
+        subtitle="Educação socioemocional e regulação para brilhar na vida" 
+      />
 
       <AnimatePresence>
         {isLoading && (

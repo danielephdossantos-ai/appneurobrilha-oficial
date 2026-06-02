@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GeneratedActivity } from "@/engines/pedagogical-engine/types";
 import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { RewardBadge } from "@/components/rewards/RewardBadge";
-import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 
 interface Props {
   activity: GeneratedActivity;
@@ -14,11 +13,9 @@ interface Props {
 
 export const ActivityContainer: React.FC<Props> = ({ activity, onComplete, emotion }) => {
   const [showReward, setShowReward] = useState(false);
-  const [acertou, setAcertou] = useState<boolean | null>(null);
   const mascotReaction = EmotionalEngine.getMascotReaction(emotion.current);
 
   const handleFinish = (success: boolean) => {
-    setAcertou(success);
     if (success) {
       setShowReward(true);
       setTimeout(() => {
@@ -26,9 +23,6 @@ export const ActivityContainer: React.FC<Props> = ({ activity, onComplete, emoti
         onComplete({ success: true, timeSpent: 10000 }); // Mock performance
       }, 3000);
     } else {
-      setTimeout(() => {
-        setAcertou(null);
-      }, 2000);
       onComplete({ success: false, timeSpent: 10000 });
     }
   };
@@ -151,12 +145,13 @@ export const ActivityContainer: React.FC<Props> = ({ activity, onComplete, emoti
       <motion.div 
         animate={{ y: [0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 3 }}
-        className="absolute bottom-4 right-4"
+        className="absolute bottom-4 right-4 flex items-center gap-3 bg-gradient-to-br from-indigo-50 to-white p-5 rounded-[2rem] border-2 border-indigo-100 max-w-xs shadow-lg"
       >
-        <PipPedagogicalGuidance 
-          stage={acertou === true ? 'celebration' : (acertou === false ? 'encouragement' : 'explanation')} 
-          className="scale-90"
-        />
+        <div className="text-5xl drop-shadow-sm group-hover:rotate-12 transition-transform">🦁</div>
+        <div className="flex flex-col">
+          <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Brilhante diz:</span>
+          <p className="text-sm font-bold text-indigo-800 leading-tight">{mascotReaction.text}</p>
+        </div>
       </motion.div>
     </div>
   );
