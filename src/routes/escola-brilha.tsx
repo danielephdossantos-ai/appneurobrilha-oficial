@@ -1297,11 +1297,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     <div className="flex justify-center">
                       <span className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-black uppercase tracking-widest text-primary">
                         Passo {eiStep} de 8 ·{" "}
-                        {eiStep === 1 ? "Descobrir" :
-                         eiStep === 2 ? "Observar" :
-                         eiStep === 3 ? "Entender" :
-                         eiStep === 4 ? "Ver Exemplo" :
-                         "Fazer Junto"}
+                        {eiStep === 1 ? "Vamos Descobrir" :
+                         eiStep === 2 ? "Observe" :
+                         eiStep === 3 ? "Pip Explica" :
+                         eiStep === 4 ? "Exemplo Resolvido" :
+                         "Faça Comigo"}
                       </span>
                     </div>
 
