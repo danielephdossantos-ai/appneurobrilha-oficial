@@ -69,17 +69,18 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       if (type === 'ei-animal') {
         const a = this.pickRandom(EARLY_CHILDHOOD.animais);
-        const wrongs = this.pickNRandom(
-          EARLY_CHILDHOOD.animais.filter(x => x.nome !== a.nome),
-          2
-        ).map(x => x.nome);
-        const options = this.shuffle([a.nome, ...wrongs]);
+        const relacionados = a.relacionados || [];
+        const options = this.shuffle([
+          ...relacionados.map((r: any) => ({ ...r, correct: true })),
+          { ...a.intruso, correct: false }
+        ]);
         return {
-          q: `${a.emoji} Que bichinho é esse? (faz "${a.som}")`,
+          q: `${a.emoji} O que o ${a.nome} gosta?`,
           visual: a.emoji,
+          palavra: a.nome,
           som: a.som,
-          answer: a.nome,
-          options,
+          answer: relacionados.map((r: any) => r.n).join(","), // multiple correct answers logically
+          options, // options are now objects {e, n, correct}
         };
       }
 
