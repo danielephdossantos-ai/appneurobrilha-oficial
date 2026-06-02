@@ -1367,6 +1367,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     activeMascot={activeMascot}
                     materiaMeta={materiaMeta}
                     childNome={childNome}
+                    tier={tier}
                     onComplete={(isCorrect) => {
                       setAcertou(isCorrect);
                       if (isCorrect && !completedRef.current && aula.activityId) {
