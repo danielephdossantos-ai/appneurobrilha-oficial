@@ -366,14 +366,14 @@ const SOPRO_VARS: Variation[] = range(30).map((i) => {
 
 // 18. SONS DO CORPO / PAROMATOPEIAS — som → ação correta
 const CORPO_BANK = [
-  { som:"Atchim!", correta:"😤 Espirrar", opts:["😴 Dormir","🍽️ Comer"] },
-  { som:"Nhac!",   correta:"🍎 Morder",  opts:["💧 Beber","👋 Acenar"] },
-  { som:"Glub-glub!", correta:"💧 Beber", opts:["😤 Espirrar","🍎 Morder"] },
-  { som:"Hum-hum!", correta:"😋 Saborear", opts:["😴 Dormir","🤧 Tossir"] },
-  { som:"Cof-cof!", correta:"🤧 Tossir", opts:["😤 Espirrar","💧 Beber"] },
-  { som:"Zzzz...", correta:"😴 Dormir", opts:["🏃 Correr","🍎 Morder"] },
-  { som:"Toc-toc!", correta:"🚪 Bater na porta", opts:["👋 Acenar","🍽️ Comer"] },
-  { som:"Plaft!",   correta:"👏 Bater palma", opts:["🦶 Pisar","🚪 Bater na porta"] },
+  { som:"Atchim!", correta:"😤 Espirrar", opts:["😴 Dormir","🍽️ Comer","🏃 Correr"] },
+  { som:"Nhac!",   correta:"🍎 Morder",  opts:["💧 Beber","👋 Acenar","😴 Dormir"] },
+  { som:"Glub-glub!", correta:"💧 Beber", opts:["😤 Espirrar","🍎 Morder","🤧 Tossir"] },
+  { som:"Hum-hum!", correta:"😋 Saborear", opts:["😴 Dormir","🤧 Tossir","👋 Acenar"] },
+  { som:"Cof-cof!", correta:"🤧 Tossir", opts:["😤 Espirrar","💧 Beber","😴 Dormir"] },
+  { som:"Zzzz...", correta:"😴 Dormir", opts:["🏃 Correr","🍎 Morder","👏 Bater palma"] },
+  { som:"Toc-toc!", correta:"🚪 Bater na porta", opts:["👋 Acenar","🍽️ Comer","🦶 Pisar"] },
+  { som:"Plaft!",   correta:"👏 Bater palma", opts:["🦶 Pisar","🚪 Bater na porta","😤 Espirrar"] },
 ];
 const CORPO_VARS: Variation[] = range(30).map((i) => {
   const b = CORPO_BANK[i % CORPO_BANK.length];
