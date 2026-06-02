@@ -255,6 +255,17 @@ function Escola() {
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
+  const startRef = useRef<number>(Date.now());
+  const scoredRef = useRef<boolean>(false);
+
+  // Reinicia cronômetro quando entra na etapa de "opcoes"
+  useEffect(() => {
+    if (aula.etapa === "opcoes") {
+      startRef.current = Date.now();
+      scoredRef.current = false;
+    }
+  }, [aula.etapa]);
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
