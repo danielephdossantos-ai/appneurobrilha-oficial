@@ -386,7 +386,7 @@ function Motorzinho({ p, onDone }: any) {
     <div className="text-center">
       {/* Balão do PIP */}
       <div className="flex items-start gap-3 mb-6 text-left">
-        <div className="text-5xl shrink-0">🦁</div>
+        <div className="text-5xl shrink-0">{ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO") ? <img src={ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO")} className="w-16 h-16 object-contain" /> : "🦁"}</div>
         <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm flex-1">
           <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
           <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
@@ -478,10 +478,16 @@ function Rimas({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Que palavra rima com</div>
-      <div className="text-5xl font-black text-coral mb-6">{p.palavra}</div>
+      <div className="text-5xl font-black text-coral mb-6 flex items-center justify-center gap-4">
+        {p.palavra}
+        {objetoImg(p.palavra) && <img src={objetoImg(p.palavra)} className="w-20 h-20 object-contain drop-shadow-sm" />}
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl hover:border-coral hover:scale-105 transition-all">{o}</button>
+          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2">
+            {objetoImg(o) && <img src={objetoImg(o)} className="w-16 h-16 object-contain" />}
+            <span>{o}</span>
+          </button>
         ))}
       </div>
     </div>
@@ -493,13 +499,19 @@ function Pedacinhos({ p, onDone }: any) {
   const [claps, setClaps] = useState(0);
   return (
     <div className="text-center">
-      <div className="text-5xl font-black mb-4">{p.palavra}</div>
+      <div className="text-5xl font-black mb-4 flex items-center justify-center gap-4">
+        {p.palavra}
+        {objetoImg(p.palavra) && <img src={objetoImg(p.palavra)} className="w-20 h-20 object-contain drop-shadow-sm" />}
+      </div>
       <div className="flex justify-center gap-2 mb-6">
         {p.silabas.map((s:string, i:number) => (
           <div key={i} className={`px-4 py-2 rounded-xl font-bold ${i < claps ? "bg-success text-white" : "bg-muted"}`}>{s}</div>
         ))}
       </div>
-      <button onClick={()=>setClaps(c=>c+1)} className="bg-coral text-white text-4xl px-12 py-8 rounded-2xl shadow-lg active:scale-95 mb-4">👏</button>
+      <button onClick={()=>setClaps(c=>c+1)} className="bg-coral text-white text-4xl px-12 py-8 rounded-2xl shadow-lg active:scale-95 mb-4 flex items-center gap-3 mx-auto">
+        <img src={getElementoImg("👏")} className="w-12 h-12 invert brightness-0" />
+        <span>👏</span>
+      </button>
       <div className="text-muted-foreground mb-4">Palmas: <b>{claps}</b></div>
       <div className="flex gap-2 justify-center">
         <button onClick={()=>setClaps(0)} className="bg-muted px-4 py-2 rounded-xl font-bold flex items-center gap-1"><RotateCcw size={14}/> Recomeçar</button>
@@ -545,13 +557,19 @@ function OndeEsta({ p, onDone }: any) {
 function SequenciaPadrao({ p, onDone }: any) {
   return (
     <div className="text-center">
-      <div className="flex justify-center gap-3 text-5xl mb-6">
-        {p.seq.map((s:string, i:number) => <span key={i}>{s}</span>)}
-        <span className="text-primary">?</span>
+      <div className="flex justify-center gap-3 text-5xl mb-6 items-center">
+        {p.seq.map((s:string, i:number) => (
+          <div key={i} className="w-20 h-20 flex items-center justify-center bg-card rounded-2xl border shadow-sm">
+            {emojiImg(s) ? <img src={emojiImg(s)} className="w-16 h-16 object-contain" /> : s}
+          </div>
+        ))}
+        <span className="text-primary text-6xl font-black">?</span>
       </div>
       <div className="flex justify-center gap-3">
         {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.next)} className="text-5xl p-4 bg-card border-2 border-border rounded-xl hover:border-primary hover:scale-110 transition-all">{o}</button>
+          <button key={i} onClick={()=>onDone(o === p.next)} className="w-24 h-24 flex items-center justify-center bg-card border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-md">
+            {emojiImg(o) ? <img src={emojiImg(o)} className="w-16 h-16 object-contain" /> : <span className="text-5xl">{o}</span>}
+          </button>
         ))}
       </div>
     </div>
@@ -805,12 +823,18 @@ function Decoracao({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-2xl font-black mb-2">{p.cenario}</div>
       <div onDragOver={(e)=>e.preventDefault()} onDrop={drop} className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}>
-        {placed.map((it, i) => <span key={i} className="absolute text-4xl" style={{ left: it.x - 16, top: it.y - 16 }}>{it.e}</span>)}
+        {placed.map((it, i) => (
+          <div key={i} className="absolute" style={{ left: it.x - 32, top: it.y - 32 }}>
+            {emojiImg(it.e) ? <img src={emojiImg(it.e)} className="w-16 h-16 object-contain" /> : <span className="text-4xl">{it.e}</span>}
+          </div>
+        ))}
         {placed.length === 0 && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">Arraste para cá</div>}
       </div>
       <div className="flex gap-2 justify-center mb-4 flex-wrap">
         {p.stickers.map((s:string, i:number) => (
-          <div key={i} draggable onDragStart={()=>setDragging(s)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{s}</div>
+          <div key={i} draggable onDragStart={()=>setDragging(s)} className="w-20 h-20 flex items-center justify-center bg-card border-2 border-border rounded-2xl cursor-grab active:cursor-grabbing hover:border-primary transition-all shadow-sm">
+            {emojiImg(s) ? <img src={emojiImg(s)} className="w-14 h-14 object-contain" /> : <span className="text-4xl">{s}</span>}
+          </div>
         ))}
       </div>
       <div className="flex gap-2 justify-center">
@@ -905,7 +929,10 @@ function SonsCorpo({ p, onDone }: any) {
       <div className="text-5xl font-black text-coral mb-6">"{p.som}"</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all">{o}</button>
+          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2">
+            {objetoImg(o.split(" ").pop()?.toUpperCase()) && <img src={objetoImg(o.split(" ").pop()?.toUpperCase())} className="w-12 h-12 object-contain" />}
+            <span>{o}</span>
+          </button>
         ))}
       </div>
     </div>
@@ -1095,7 +1122,10 @@ function ExpressaoEmocao({ p, onDone }: any) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all">{o}</button>
+          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all flex flex-col items-center gap-2">
+            {objetoImg(o.split(" ").pop()?.toUpperCase()) && <img src={objetoImg(o.split(" ").pop()?.toUpperCase())} className="w-16 h-16 object-contain" />}
+            <span>{o}</span>
+          </button>
         ))}
       </div>
     </div>
