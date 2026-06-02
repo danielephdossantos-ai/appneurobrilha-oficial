@@ -620,7 +620,189 @@ function Escola() {
 
 
 
+function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; eiStep: number; setEiStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
+  const [montagem, setMontagem] = useState<string[]>([]);
+  const silabas = aula.silabas || ["MA", "ÇÃ"];
+  const palavraFoco = (aula.palavra_foco || "MAÇÃ").toUpperCase();
+  const opcoes = aula.opcoes_identificacao || [palavraFoco, "BANANA", "UVA"];
+  
+  // Sortear opções uma única vez
+  const sortedOpcoes = useMemo(() => [...opcoes].sort(() => Math.random() - 0.5), [opcoes]);
+
+  useEffect(() => {
+    // Audio logic for each step
+    const playAudio = async () => {
+      let text = "";
+      if (eiStep === 1) text = aula.frase_apresentacao || `Esta é uma ${palavraFoco}`;
+      else if (eiStep === 2) text = palavraFoco;
+      else if (eiStep === 3) text = silabas.join(" - ");
+      else if (eiStep === 4) text = "Vamos montar a palavra?";
+      else if (eiStep === 5) text = `Qual palavra é ${palavraFoco}?`;
+      else if (eiStep === 6) text = "Vamos escrever?";
+      else if (eiStep === 7) text = "Parabéns! Você brilhou!";
+      
+      // Aqui integraria com o TTS real do app
+      console.log("Audio:", text);
+    };
+    playAudio();
+  }, [eiStep]);
+
+  return (
+    <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Mascote Guia */}
+      <div className="flex items-center gap-4 mb-4">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl">
+           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+           ) : (
+             activeMascot?.mascot?.image_url || materiaMeta.mascote
+           )}
+        </div>
+        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
+           {eiStep === 1 && (aula.etapa1_intro || `Veja só, ${childNome}!`)}
+           {eiStep === 2 && (aula.etapa2_conceito || "Olha como se escreve!")}
+           {eiStep === 3 && (aula.etapa3_exemplo || "Vamos separar os pedacinhos?")}
+           {eiStep === 4 && (aula.etapa4_como_monta || "Junte as peças!")}
+           {eiStep === 5 && (aula.etapa5_instrucao || "Onde está o nome certo?")}
+           {eiStep === 6 && "Use o dedo para desenhar a palavra!"}
+           {eiStep === 7 && (aula.reforco_positivo || "Incrível!")}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center min-h-[300px]">
+        {eiStep === 1 && (
+          <div className="text-center space-y-4">
+            <div className="text-[150px] md:text-[200px] drop-shadow-2xl animate-bounce-slow">
+              {aula.visual || "🍎"}
+            </div>
+            <p className="text-2xl font-black uppercase text-primary">
+              {aula.frase_apresentacao || `ESTA É UMA ${palavraFoco}`}
+            </p>
+          </div>
+        )}
+
+        {eiStep === 2 && (
+          <div className="text-center space-y-6">
+            <div className="text-9xl mb-4">{aula.visual || "🍎"}</div>
+            <div className="bg-primary text-white text-7xl md:text-9xl font-black px-12 py-6 rounded-3xl shadow-glow tracking-tighter">
+              {palavraFoco}
+            </div>
+          </div>
+        )}
+
+        {eiStep === 3 && (
+          <div className="flex gap-4 items-center justify-center flex-wrap">
+            {silabas.map((s, i) => (
+              <div key={i} className="flex items-center">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-5xl md:text-7xl font-black text-primary animate-in zoom-in" style={{ animationDelay: `${i * 300}ms` }}>
+                  {s.toUpperCase()}
+                </div>
+                {i < silabas.length - 1 && <div className="text-5xl font-black mx-2 text-muted-foreground">-</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {eiStep === 4 && (
+          <div className="w-full space-y-8">
+            <div className="flex gap-3 justify-center min-h-[100px] p-4 bg-muted/30 rounded-3xl border-4 border-dashed border-muted">
+              {montagem.map((s, i) => (
+                <div key={i} className="w-24 h-24 rounded-2xl bg-primary text-white flex items-center justify-center text-3xl font-black shadow-md animate-in zoom-in">
+                  {s}
+                </div>
+              ))}
+              {montagem.length === 0 && <span className="text-muted-foreground self-center font-bold">Arraste para cá</span>}
+            </div>
+            <div className="flex gap-4 justify-center flex-wrap">
+              {silabas.filter(s => !montagem.includes(s)).map((s, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const next = [...montagem, s];
+                    setMontagem(next);
+                    if (next.length === silabas.length) {
+                      toast.success("Muito bem!");
+                    }
+                  }}
+                  className="btn-tap w-28 h-28 rounded-2xl bg-white border-4 border-primary text-primary flex items-center justify-center text-4xl font-black shadow-lg hover:bg-primary/5"
+                >
+                  {s}
+                </button>
+              ))}
+              {montagem.length > 0 && (
+                <button onClick={() => setMontagem([])} className="text-xs font-bold text-muted-foreground underline">Recomeçar</button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {eiStep === 5 && (
+          <div className="w-full space-y-6">
+            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
+            <div className="grid grid-cols-1 gap-4">
+              {sortedOpcoes.map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (opt.toUpperCase() === palavraFoco) {
+                      setEiStep(6);
+                      toast.success("Isso mesmo!");
+                    } else {
+                      toast.error("Ops! Tente de novo.");
+                    }
+                  }}
+                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl font-black uppercase text-center shadow-soft"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {eiStep === 6 && (
+          <div className="w-full">
+            <Tracing text={palavraFoco} onComplete={() => setEiStep(7)} />
+          </div>
+        )}
+
+        {eiStep === 7 && (
+          <div className="text-center space-y-6">
+             <div className="text-[180px] animate-bounce-slow">✨</div>
+             <h3 className="text-4xl font-black text-primary uppercase">Você Brilhou!</h3>
+             <p className="text-xl font-bold text-muted-foreground">Agora você já sabe tudo sobre {palavraFoco}!</p>
+             <button
+               onClick={() => onComplete(true)}
+               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-8"
+             >
+               CONCLUIR AULA! 🌟
+             </button>
+          </div>
+        )}
+      </div>
+
+      {eiStep < 7 && eiStep !== 5 && eiStep !== 6 && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => {
+              if (eiStep === 4 && montagem.length < silabas.length) {
+                toast.warning("Termine de montar a palavra primeiro!");
+                return;
+              }
+              setEiStep(eiStep + 1);
+            }}
+            className="btn-tap bg-primary text-white rounded-full px-12 py-5 text-2xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
+          >
+            CONTINUAR <ArrowRight className="h-8 w-8" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
