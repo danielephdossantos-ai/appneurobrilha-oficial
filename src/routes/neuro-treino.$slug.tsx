@@ -72,7 +72,38 @@ function NeuroAtividade() {
     }
   }, [slug, meta, vars, hiperfoco?.label]);
 
-  // Gate: sem hiperfoco selecionado → manda para a tela de configuração
+  // ⚠️ TODOS os hooks devem ficar ANTES dos early returns
+  const hasData = Boolean(meta && vars && vars.length > 0);
+  const safeIndex = hasData ? index % vars!.length : 0;
+  const variation = hasData ? vars![safeIndex] : null;
+  const seed = variation ? `${slug}:${variation.id}` : slug;
+  const elemento = hiperfoco ? pickElemento(hiperfoco, seed) : "";
+  const instrucaoTematica = hiperfoco && meta ? applyHiperfoco(meta.instrucao, hiperfoco, seed) : "";
+  const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
+
+  const narracao = useMemo(() => {
+    if (!variation || !instrucaoTematica) return "";
+    const p: any = variation.payload ?? {};
+    const extra =
+      p.letra ? ` A letra é ${p.letra}.` :
+      p.palavra ? ` A palavra é ${p.palavra}.` :
+      p.alvo ? ` Procure ${p.alvo}.` :
+      p.target ? ` Procure ${p.target}.` :
+      "";
+    const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
+    return `${saud}${instrucaoTematica}${extra}`;
+  }, [variation, instrucaoTematica, nomeCrianca]);
+
+  useEffect(() => {
+    if (!voiceOn || !narracao) return;
+    if (slug === "motorzinho-dos-sons") return;
+    if (isLoading || error) return;
+    const t = setTimeout(() => { speak(narracao); }, 250);
+    return () => { clearTimeout(t); stop(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [narracao, voiceOn, slug, isLoading, error]);
+
+  // ===== Early returns (depois de todos os hooks) =====
   if (!hiperfoco) {
     return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
   }
@@ -89,7 +120,7 @@ function NeuroAtividade() {
     );
   }
 
-  if (error || !meta || !vars) {
+  if (error || !meta || !vars || !variation) {
     return (
       <Shell>
         <Card className="text-center p-8">
@@ -99,14 +130,14 @@ function NeuroAtividade() {
           <h2 className="text-2xl font-extrabold mb-2">Ops! Algo deu errado</h2>
           <p className="text-muted-foreground mb-6">{error || "Atividade não encontrada no banco de dados."}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-105 transition-all"
             >
               <RotateCcw size={18} /> Tentar Novamente
             </button>
-            <button 
-              onClick={() => navigate({ to: "/neuro-treino" })} 
+            <button
+              onClick={() => navigate({ to: "/neuro-treino" })}
               className="bg-muted text-muted-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-105 transition-all"
             >
               <ArrowLeft size={18} /> Voltar ao Painel
@@ -117,34 +148,7 @@ function NeuroAtividade() {
     );
   }
 
-  const variation = vars[index % vars.length];
-  const seed = `${slug}:${variation.id}`;
-  const elemento = pickElemento(hiperfoco, seed);
-  const instrucaoTematica = applyHiperfoco(meta.instrucao, hiperfoco, seed);
-  const nomeCrianca = activeChild?.nome?.split(" ")[0] || "";
 
-  // Frase de narração contextual da PIP por exercício
-  const narracao = useMemo(() => {
-    const p = variation?.payload ?? {};
-    const extra =
-      p.letra ? ` A letra é ${p.letra}.` :
-      p.palavra ? ` A palavra é ${p.palavra}.` :
-      p.alvo ? ` Procure ${p.alvo}.` :
-      p.target ? ` Procure ${p.target}.` :
-      "";
-    const saud = nomeCrianca ? `${nomeCrianca}, ` : "";
-    return `${saud}${instrucaoTematica}${extra}`;
-  }, [variation, instrucaoTematica, nomeCrianca]);
-
-  // Auto-narra cada novo exercício (exceto motorzinho que tem fluxo de voz próprio)
-  useEffect(() => {
-    if (!voiceOn) return;
-    if (slug === "motorzinho-dos-sons") return;
-    if (isLoading || error) return;
-    const t = setTimeout(() => { speak(narracao); }, 250);
-    return () => { clearTimeout(t); stop(); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [narracao, voiceOn, slug, isLoading, error]);
 
   const toggleVoice = () => {
     setVoiceOn((v) => {
