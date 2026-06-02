@@ -1048,19 +1048,37 @@ function TriagemCategorias({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
-        {p.itens.map((it:any, i:number) => assigned[i] ? null : (
-          <div key={i} draggable onDragStart={()=>setDragging(i)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{it.e}</div>
-        ))}
+        {p.itens.map((it:any, i:number) => {
+          if (assigned[i]) return null;
+          const img = emojiImg(it.e);
+          return (
+            <div key={i} draggable onDragStart={()=>setDragging(i)} className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing w-16 h-16 flex items-center justify-center">
+              {img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{it.e}</span>}
+            </div>
+          );
+        })}
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {p.caixas.map((c:any) => (
-          <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
-            <div className="font-black mb-2">{c.emoji} {c.nome}</div>
-            <div className="flex flex-wrap gap-1 justify-center">
-              {p.itens.map((it:any, i:number) => assigned[i] === c.nome ? <span key={i} className="text-3xl">{it.e}</span> : null)}
+        {p.caixas.map((c:any) => {
+          const caixaImg = emojiImg(c.emoji);
+          return (
+            <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
+              <div className="font-black mb-2 flex items-center justify-center gap-2">
+                {caixaImg ? <img src={caixaImg} alt="" className="w-7 h-7 object-contain" /> : <span>{c.emoji}</span>}
+                {c.nome}
+              </div>
+              <div className="flex flex-wrap gap-1 justify-center">
+                {p.itens.map((it:any, i:number) => {
+                  if (assigned[i] !== c.nome) return null;
+                  const im = emojiImg(it.e);
+                  return im
+                    ? <img key={i} src={im} alt="" className="w-10 h-10 object-contain" />
+                    : <span key={i} className="text-3xl">{it.e}</span>;
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
