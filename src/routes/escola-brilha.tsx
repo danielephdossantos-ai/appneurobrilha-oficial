@@ -679,11 +679,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                     <div className="flex items-center gap-3">
                       <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
                       <CheckCircle2 className="h-8 w-8" />
-                      <div>
+                      <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
                         <div className="text-base">{aula.reforco_positivo}</div>
                         <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
+                      {aula.bancoOrdem && (
+                        <button
+                          onClick={() => setAula(null)}
+                          className="px-4 py-2 rounded-xl bg-success text-success-foreground font-bold text-sm shadow"
+                        >
+                          Próxima do banco →
+                        </button>
+                      )}
                     </div>
                   </div>
                 )}
