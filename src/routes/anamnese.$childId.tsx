@@ -102,7 +102,6 @@ function Anamnese() {
     if (!session?.user) return;
     if (creatingChildRef.current) return;
     creatingChildRef.current = true;
-    let cancelled = false;
     (async () => {
       const { error: profileError } = await supabase
         .from("profiles")
@@ -112,7 +111,6 @@ function Anamnese() {
           avatar_url: session.user.user_metadata?.avatar_url ?? null,
         } as any, { onConflict: "id" });
 
-      if (cancelled) return;
       if (profileError) {
         creatingChildRef.current = false;
         toast.error("Não foi possível preparar seu cadastro para iniciar a anamnese.");
@@ -131,7 +129,6 @@ function Anamnese() {
         } as any])
         .select()
         .single();
-      if (cancelled) return;
       if (error || !created) {
         creatingChildRef.current = false;
         toast.error("Não foi possível iniciar a anamnese.");
@@ -142,7 +139,6 @@ function Anamnese() {
       await queryClient.invalidateQueries({ queryKey: ["children"] });
       navigate({ to: "/anamnese/$childId", params: { childId: created.id }, replace: true });
     })();
-    return () => { cancelled = true; };
   }, [isNova, session?.user, navigate, queryClient]);
 
   useEffect(() => {
