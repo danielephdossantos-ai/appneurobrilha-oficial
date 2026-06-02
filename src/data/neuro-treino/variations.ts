@@ -16,7 +16,18 @@ export type CategoriaSlug =
   | "mosaico-de-formas"
   | "sequencia-de-cores"
   | "simetria"
-  | "decoracao-criativa";
+  | "decoracao-criativa"
+  // Fono & Onomatopeias
+  | "onomatopeias-animadas"
+  | "ritmo-e-sopro"
+  | "paromatopeias-corpo"
+  // Coordenação Motor-Escrita
+  | "tracado-letras"
+  | "caminho-dos-pontos"
+  | "labirinto-precisao"
+  // Jogos Clínicos Cognitivos
+  | "triagem-categorias"
+  | "expressao-emocao";
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
