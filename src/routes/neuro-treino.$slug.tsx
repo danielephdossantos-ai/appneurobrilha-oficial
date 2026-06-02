@@ -573,6 +573,21 @@ function CadeOPar({ p, onDone }: any) {
     if (flipped.length === 2 || flipped.includes(idx) || matched.includes(cards[idx].v)) return;
     const next = [...flipped, idx];
     setFlipped(next);
+// ============== 7. Cadê o Par ==============
+function CadeOPar({ p, onDone }: any) {
+  const cards = useMemo(() => {
+    const dup = [...p.pares, ...p.pares].map((v,i)=>({v, i, id: Math.random()}));
+    return dup.sort(()=>Math.random()-0.5);
+  }, [p]);
+  const [flipped, setFlipped] = useState<number[]>([]);
+  const [matched, setMatched] = useState<string[]>([]);
+  useEffect(() => {
+    if (matched.length === p.pares.length) setTimeout(()=>onDone(true), 400);
+  }, [matched.length]);
+  const handleClick = (idx:number) => {
+    if (flipped.length === 2 || flipped.includes(idx) || matched.includes(cards[idx].v)) return;
+    const next = [...flipped, idx];
+    setFlipped(next);
     if (next.length === 2) {
       if (cards[next[0]].v === cards[next[1]].v) {
         setMatched(m=>[...m, cards[next[0]].v]);
@@ -584,9 +599,14 @@ function CadeOPar({ p, onDone }: any) {
     <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
+        const img = emojiImg(c.v);
         return (
-          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl text-4xl border-2 transition-all ${show ? "bg-card border-primary" : "bg-primary/20 border-border"}`}>
-            {show ? c.v : "?"}
+          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl border-2 transition-all flex items-center justify-center p-2 ${show ? "bg-card border-primary" : "bg-gradient-to-br from-primary/30 to-primary/10 border-border"}`}>
+            {show ? (
+              img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{c.v}</span>
+            ) : (
+              <span className="text-3xl text-primary/70">?</span>
+            )}
           </button>
         );
       })}
