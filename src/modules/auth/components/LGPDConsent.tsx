@@ -1,58 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from '@tanstack/react-router';
 import { AuthService } from '../services/AuthService';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldCheck, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
+const LGPD_KEY = 'lgpd_accepted_v1';
+
 export const LGPDConsent: React.FC = () => {
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const checkedRef = useRef(false);
+  const location = useLocation();
 
   useEffect(() => {
+    // Não mostrar na tela de autenticação
+    if (location.pathname === '/auth') {
+      setShow(false);
+      return;
+    }
+
+    // Se já aceitou (persistido em localStorage), nunca mais mostrar nesta máquina
+    if (localStorage.getItem(LGPD_KEY)) {
+      setShow(false);
+      return;
+    }
+
+    // Evitar re-checagem (TOKEN_REFRESHED, navegação, etc. não devem disparar o modal de novo)
+    if (checkedRef.current) return;
+
     const checkConsent = async () => {
       try {
-        // Verificar se já aceitou nesta sessão para evitar flickering ou checks excessivos
-        if (sessionStorage.getItem('lgpd_accepted')) {
-          setShow(false);
-          setLoading(false);
+        const { data: { session } } = await AuthService.getSession();
+        if (!session) return;
+
+        const settings = await AuthService.getPrivacySettings();
+        if (settings?.terms_accepted) {
+          localStorage.setItem(LGPD_KEY, 'true');
           return;
         }
 
-        const { data: { session } } = await AuthService.getSession();
-        if (!session) {
-          setShow(false);
-          setLoading(false);
-          return;
-        }
-        
-        const settings = await AuthService.getPrivacySettings();
-        if (!settings || !settings.terms_accepted) {
-          setShow(true);
-        } else {
-          // Se já aceitou no banco, marcar na sessão
-          sessionStorage.setItem('lgpd_accepted', 'true');
-        }
+        // Só mostrar depois de confirmar que realmente falta aceitar
+        checkedRef.current = true;
+        setShow(true);
       } catch (error) {
-        console.error("Erro ao verificar consentimento:", error);
-      } finally {
-        setLoading(false);
+        console.error('Erro ao verificar consentimento:', error);
       }
     };
 
     checkConsent();
 
-    const { data: { subscription } } = AuthService.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        checkConsent();
-      } else if (event === 'SIGNED_OUT') {
+    const { data: { subscription } } = AuthService.onAuthStateChange((event) => {
+      if (event === 'SIGNED_OUT') {
         setShow(false);
-        sessionStorage.removeItem('lgpd_accepted');
+        checkedRef.current = false;
+        localStorage.removeItem(LGPD_KEY);
       }
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [location.pathname]);
 
   const handleAccept = async () => {
     setLoading(true);
@@ -60,14 +68,13 @@ export const LGPDConsent: React.FC = () => {
       await AuthService.updatePrivacySettings({
         terms_accepted: true,
         data_usage_consent: true,
-        analytics_consent: true
+        analytics_consent: true,
       });
-      sessionStorage.setItem('lgpd_accepted', 'true');
+      localStorage.setItem(LGPD_KEY, 'true');
       setShow(false);
     } catch (error: any) {
-      console.error("Erro ao salvar consentimento LGPD:", error);
-      const errorMessage = error?.message || "Erro desconhecido";
-      toast.error(`Não foi possível salvar: ${errorMessage}`);
+      console.error('Erro ao salvar consentimento LGPD:', error);
+      toast.error(`Não foi possível salvar: ${error?.message || 'Erro desconhecido'}`);
     } finally {
       setLoading(false);
     }
