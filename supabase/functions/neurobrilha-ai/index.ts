@@ -120,11 +120,20 @@ serve(async (req) => {
       IMPORTANTE: Você NÃO deve criar a pergunta nem as opções.
       Sua tarefa é EXPLICAR o que fazer como se estivesse jogando junto.
 
-      Retorne EXCLUSIVAMENTE um JSON com as seguintes chaves:
-      - "ensino": Narração inicial do jogo (convite para jogar, explicando a mecânica de forma lúdica).
-      - "demo": Exemplos práticos ou visualização baseada no hiperfoco.
+      Retorne EXCLUSIVAMENTE um JSON com as seguintes chaves para Educação Infantil (isEarlyYears=true):
+      - "etapa1_intro": Narração inicial dando as boas-vindas e apresentando o tema de forma empolgante.
+      - "etapa2_conceito": Explicação do que é o conceito (Ex: "Você sabia que as vogais são as letras que dão som às palavras?").
+      - "etapa3_ensino": Ensino prático do que a criança vai fazer (Ex: "Para formar 'BOLA', precisamos do B com o O e o L com o A. Veja como elas se juntam!").
+      - "etapa4_preparo": Incentivo final e preparação para o desafio (Ex: "Agora é sua vez de brilhar! Vamos tentar?").
+      - "etapa5_instrucao": A instrução específica do que ela deve fazer no jogo (Ex: "Toque nas letrinhas para formar a palavra OVO!").
       - "dica": Uma dica de parceiro (Ex: "Hm, tente olhar para o formato da pecinha...").
-      - "reforco_positivo": Comemoração de parceiro citando o hiperfoco.`
+      - "reforco_positivo": Comemoração de parceiro citando o hiperfoco.
+
+      Para outras séries, você pode manter as chaves simplificadas:
+      - "ensino": Narração inicial do jogo.
+      - "demo": Exemplos práticos.
+      - "dica": Dica.
+      - "reforco_positivo": Reforço.`
 
       userPrompt = `Convide a criança para o minijogo de ${topic || "aprendizado"}.`
     } else if (mode === "professor-foto") {
