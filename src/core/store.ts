@@ -122,11 +122,19 @@ export interface AnamnesisData {
       tem_terapia: boolean;
     };
   };
-  internal_profile: any;
+  internal_profile: Record<string, unknown>;
   edit_count: number;
 }
 
 const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
+
+const isAuthExpiredError = (error: unknown) => {
+  const possibleError = error as { message?: unknown; status?: unknown };
+  return (
+    (typeof possibleError.message === "string" && possibleError.message.includes("JWT")) ||
+    possibleError.status === 401
+  );
+};
 
 export function useAppState() {
   const queryClient = useQueryClient();
@@ -180,8 +188,8 @@ export function useAppState() {
       localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
       toast.success("Criança cadastrada com sucesso!");
     },
-    onError: (error: any) => {
-      if (error?.message?.includes("JWT") || error?.status === 401) {
+    onError: (error: unknown) => {
+      if (isAuthExpiredError(error)) {
         supabase.auth.signOut();
         toast.error("Sua sessão expirou. Por favor, entre novamente.");
       } else {
@@ -194,7 +202,7 @@ export function useAppState() {
     mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
       const { error } = await supabase
         .from("children")
-        .update(patch as any)
+        .update(patch)
         .eq("id", id);
 
       if (error) throw error;
@@ -203,8 +211,8 @@ export function useAppState() {
       queryClient.invalidateQueries({ queryKey: ["children"] });
       toast.success("Dados atualizados!");
     },
-    onError: (error: any) => {
-      if (error?.message?.includes("JWT") || error?.status === 401) {
+    onError: (error: unknown) => {
+      if (isAuthExpiredError(error)) {
         supabase.auth.signOut();
         toast.error("Sua sessão expirou. Por favor, entre novamente.");
       } else {
@@ -215,7 +223,7 @@ export function useAppState() {
 
   const addCoinsMutation = useMutation({
     mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
-      const { error } = await (supabase as any).rpc("add_brilhocoins", {
+      const { error } = await supabase.rpc("add_brilhocoins", {
         child_id: childId,
         amount: amount,
       });
