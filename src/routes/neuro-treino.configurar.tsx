@@ -35,7 +35,6 @@ function ConfigurarHiperfoco() {
         </Link>
       </div>
       <PageHeader
-        emoji="✨"
         title="Qual é o hiperfoco de hoje?"
         subtitle="Escolha um tema para personalizar as atividades — o PIP vai usar essa paixão para guiar a criança."
       />

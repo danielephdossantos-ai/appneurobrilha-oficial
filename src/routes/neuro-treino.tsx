@@ -125,9 +125,8 @@ function Treino() {
   return (
     <Shell>
       <PageHeader
-        emoji="🧠"
         title="Neuro-Treino"
-        subtitle={hiperfoco ? `Hiperfoco: ${hiperfoco.emoji} ${hiperfoco.label}` : "Escolha as atividades"}
+        subtitle={hiperfoco ? `Hiperfoco: ${hiperfoco.label}` : "Escolha as atividades"}
       />
 
       <div className="flex items-center justify-between mb-4">
@@ -159,7 +158,7 @@ function Treino() {
             <div className="flex items-center gap-2 mb-3 px-1">
               <Sparkles className="h-4 w-4 text-primary" />
               <h2 className="font-black text-lg uppercase tracking-wider">
-                {g.emoji} {g.nome}
+                {g.nome}
               </h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
