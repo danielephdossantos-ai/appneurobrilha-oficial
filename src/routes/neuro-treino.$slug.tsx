@@ -641,15 +641,23 @@ function LabirintoSom({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Pista sonora 🔊</div>
       <div className="text-4xl font-black text-primary mb-6">"{atual.nome}"</div>
-      <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto">
+      <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto">
         <div />
-        <button onClick={()=>handleDir("CIMA")} className={btnDir()}>⬆️</button>
+        <button onClick={()=>handleDir("CIMA")} className={btnDir()}>
+          {emojiImg("⬆️") ? <img src={emojiImg("⬆️")} className="w-12 h-12 object-contain mx-auto" /> : "⬆️"}
+        </button>
         <div />
-        <button onClick={()=>handleDir("ESQUERDA")} className={btnDir()}>⬅️</button>
-        <div className="text-3xl flex items-center justify-center">🌀</div>
-        <button onClick={()=>handleDir("DIREITA")} className={btnDir()}>➡️</button>
+        <button onClick={()=>handleDir("ESQUERDA")} className={btnDir()}>
+          {emojiImg("⬅️") ? <img src={emojiImg("⬅️")} className="w-12 h-12 object-contain mx-auto" /> : "⬅️"}
+        </button>
+        <div className="text-3xl flex items-center justify-center bg-primary/10 rounded-full border-2 border-primary/30 w-16 h-16 mx-auto">🌀</div>
+        <button onClick={()=>handleDir("DIREITA")} className={btnDir()}>
+          {emojiImg("➡️") ? <img src={emojiImg("➡️")} className="w-12 h-12 object-contain mx-auto" /> : "➡️"}
+        </button>
         <div />
-        <button onClick={()=>handleDir("BAIXO")} className={btnDir()}>⬇️</button>
+        <button onClick={()=>handleDir("BAIXO")} className={btnDir()}>
+          {emojiImg("⬇️") ? <img src={emojiImg("⬇️")} className="w-12 h-12 object-contain mx-auto" /> : "⬇️"}
+        </button>
         <div />
       </div>
       <div className="mt-4 text-sm text-muted-foreground">Passo {passo+1} de {p.caminho.length}</div>
@@ -903,8 +911,10 @@ function RitmoSopro({ p, onDone }: any) {
   }, [holding]);
   return (
     <div className="text-center">
-      <div className="text-6xl mb-2">{p.veiculo}</div>
-      <div className="text-3xl font-black text-coral mb-4">{p.silaba}</div>
+      <div className="text-6xl mb-4 flex justify-center">
+        {emojiImg(p.veiculo) ? <img src={emojiImg(p.veiculo)} className="w-24 h-24 object-contain" /> : p.veiculo}
+      </div>
+      <div className="text-4xl font-black text-coral mb-6 px-4 py-2 bg-card border-2 border-coral/30 rounded-2xl inline-block">{p.silaba}</div>
       <div className="mx-auto h-8 bg-muted rounded-full overflow-hidden mb-2" style={{ width: `${p.tamanho}%`, maxWidth: "90%" }}>
         <div className="h-full bg-gradient-to-r from-sun to-coral transition-all" style={{ width: `${progress}%` }} />
       </div>
@@ -959,10 +969,11 @@ function TracadoLetras({ p, onDone }: any) {
         {p.passos.map((seta:string, i:number) => {
           const done = i < step;
           const current = i === step;
+          const img = emojiImg(seta);
           return (
-            <button key={i} onClick={()=>tap(i)} className={`relative w-20 h-20 rounded-2xl text-4xl border-4 transition-all ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse" : "bg-muted border-border"}`}>
-              <span className="absolute top-0 left-1 text-xs font-black bg-success text-white rounded-full px-1.5">{i+1}</span>
-              {seta}
+            <button key={i} onClick={()=>tap(i)} className={`relative w-24 h-24 rounded-3xl text-4xl border-4 transition-all flex items-center justify-center ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse shadow-glow" : "bg-muted border-border"}`}>
+              <span className="absolute -top-2 -left-2 text-sm font-black bg-success text-white rounded-full w-7 h-7 flex items-center justify-center border-2 border-white shadow-sm z-10">{i+1}</span>
+              {img ? <img src={img} className="w-16 h-16 object-contain" /> : seta}
             </button>
           );
         })}
@@ -1003,6 +1014,7 @@ function CaminhoPontos({ p, onDone }: any) {
 
 // ============== 21. Labirinto de Precisão ==============
 // Mecânica única: arrastar bolinha; sair dos corredores reseta progresso
+// Padrão visual Sons Iniciais premium
 function LabirintoPrecisao({ p, onDone }: any) {
   const [pos, setPos] = useState({ x: 12, y: 53 });
   const [erros, setErros] = useState(0);
@@ -1046,10 +1058,12 @@ function LabirintoPrecisao({ p, onDone }: any) {
         <button
           onMouseDown={()=>setDragging(true)}
           onTouchStart={()=>setDragging(true)}
-          className="absolute w-7 h-7 bg-coral rounded-full shadow-lg border-2 border-white cursor-grab active:cursor-grabbing"
-          style={{ left: `calc(${pos.x}% - 14px)`, top: `calc(${pos.y}% - 14px)` }}
+          className="absolute w-12 h-12 bg-coral rounded-full shadow-xl border-4 border-white cursor-grab active:cursor-grabbing flex items-center justify-center transition-transform hover:scale-110 z-20"
+          style={{ left: `calc(${pos.x}% - 24px)`, top: `calc(${pos.y}% - 24px)` }}
           aria-label="Bolinha"
-        />
+        >
+          {ilustracao(undefined, "BOLA") ? <img src={ilustracao(undefined, "BOLA")} className="w-full h-full object-contain" /> : <div className="w-6 h-6 bg-white rounded-full" />}
+        </button>
       </div>
       <div className="text-xs text-muted-foreground mt-2">Arraste a bolinha pelo corredor verde até o final</div>
     </div>
