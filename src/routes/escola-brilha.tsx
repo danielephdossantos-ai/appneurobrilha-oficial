@@ -1219,12 +1219,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:5,l:"Prática",i:"✋"},
                 {n:6,l:"Armada",i:"📐"},
               ] : [
-                {n:1,l:"Tema",i:"🎯"},
-                {n:2,l:"Explicação",i:"💡"},
-                {n:3,l:"Exemplo",i:"👀"},
-                {n:4,l:"Atividade",i:"✋"},
-                {n:5,l:"Feedback",i:"💬"},
-                {n:6,l:"Reforço",i:"⭐"},
+                {n:1,l:"Descobrir",i:"🎯"},
+                {n:2,l:"Observar",i:"👀"},
+                {n:3,l:"Entender",i:"💡"},
+                {n:4,l:"Exemplo",i:"📘"},
+                {n:5,l:"Junto",i:"🤝"},
+                {n:6,l:"Sozinho",i:"✋"},
+                {n:7,l:"Desafio",i:"🏁"},
+                {n:8,l:"Recompensa",i:"🏆"},
               ]).map((s: any) => {
                 const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
                 const active = s.n === current;
