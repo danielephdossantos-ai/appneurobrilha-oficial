@@ -351,7 +351,10 @@ function Escola() {
 }
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
+function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier }) {
+  const theme = tierTheme[tier];
+  const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
+  const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
