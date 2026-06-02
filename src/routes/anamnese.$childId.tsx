@@ -41,8 +41,9 @@ function suggestSerieForAge(idade: number): string {
 
 function Anamnese() {
   const { childId } = Route.useParams();
-  const { children: allChildren, updateChild, saveAnamnesis } = useAppState();
+  const { children: allChildren, updateChild, saveAnamnesis, session } = useAppState();
   const navigate = useNavigate();
+  const isNova = childId === "nova";
   const child = allChildren.find((c: any) => c.id === childId);
 
   const [step, setStep] = useState(0);
@@ -92,9 +93,41 @@ function Anamnese() {
     },
   });
 
+  // Cria criança quando rota é /anamnese/nova e redireciona para o id real
+  useEffect(() => {
+    if (!isNova) return;
+    if (!session?.user) return;
+    let cancelled = false;
+    (async () => {
+      const { data: created, error } = await supabase
+        .from("children")
+        .insert([{
+          user_id: session.user.id,
+          nome: "Nova criança",
+          idade: 6,
+          serie: "1º ano",
+          anamnese_completa: false,
+        } as any])
+        .select()
+        .single();
+      if (cancelled) return;
+      if (error || !created) {
+        toast.error("Não foi possível iniciar a anamnese.");
+        navigate({ to: "/painel-pais" });
+        return;
+      }
+      localStorage.setItem("neurobrilha:activeChildId", created.id);
+      navigate({ to: "/anamnese/$childId", params: { childId: created.id }, replace: true });
+    })();
+    return () => { cancelled = true; };
+  }, [isNova, session?.user, navigate]);
+
   useEffect(() => {
     async function loadAnamnesis() {
-      if (!childId) return;
+      if (!childId || isNova) {
+        setLoading(false);
+        return;
+      }
       const { data: existing } = await supabase
         .from("child_anamnesis")
         .select("*")
@@ -109,7 +142,8 @@ function Anamnese() {
       setLoading(false);
     }
     loadAnamnesis();
-  }, [childId, child?.serie]);
+  }, [childId, isNova, child?.serie]);
+
 
 
   const steps = [
