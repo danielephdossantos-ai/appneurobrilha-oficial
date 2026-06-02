@@ -6,6 +6,7 @@ import { ChevronRight, CheckCircle2, Brain, Baby, BookOpen, MessageCircle, Heart
 import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 import { toast } from "sonner";
 import { supabase } from "@/database/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
@@ -43,6 +44,7 @@ function Anamnese() {
   const { childId } = Route.useParams();
   const { children: allChildren, updateChild, saveAnamnesis, session } = useAppState();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const isNova = childId === "nova";
   const child = allChildren.find((c: any) => c.id === childId);
 
@@ -117,17 +119,19 @@ function Anamnese() {
         return;
       }
       localStorage.setItem("neurobrilha:activeChildId", created.id);
+      await queryClient.invalidateQueries({ queryKey: ["children"] });
       navigate({ to: "/anamnese/$childId", params: { childId: created.id }, replace: true });
     })();
     return () => { cancelled = true; };
-  }, [isNova, session?.user, navigate]);
+  }, [isNova, session?.user, navigate, queryClient]);
 
   useEffect(() => {
     async function loadAnamnesis() {
       if (!childId || isNova) {
-        setLoading(false);
+        // mantém loading=true durante a criação/redirect
         return;
       }
+
       const { data: existing } = await supabase
         .from("child_anamnesis")
         .select("*")
