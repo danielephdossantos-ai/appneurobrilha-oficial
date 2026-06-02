@@ -169,10 +169,10 @@ function AmigoVirtual() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="h-16 w-16 flex items-center justify-center">
-              <SimpleMascotRenderer emoji={virtualFriend.emoji} size={64} />
+              <SimpleMascotRenderer emoji={activeMascot?.mascot?.image_url || "🦄"} size={64} />
             </div>
             <div>
-              <h2 className="text-xl font-black text-pink-600">Amigo Virtual & Protetor</h2>
+              <h2 className="text-xl font-black text-pink-600">{mascotName} · Amigo Virtual & Protetor</h2>
               <p className="text-[10px] font-medium text-pink-400">Sempre aqui por você! ✨</p>
             </div>
           </div>
