@@ -88,6 +88,47 @@ function PainelPremium() {
           childId={activeChild.id}
         />
 
+        {/* Cartão de Anamnese — sempre visível na área dos pais */}
+        <div className={`mb-6 rounded-3xl border-4 p-6 flex flex-col md:flex-row items-start md:items-center gap-4 ${
+          activeChild.anamnese_completa
+            ? 'bg-emerald-50 border-emerald-300'
+            : 'bg-amber-50 border-amber-400 shadow-lg animate-pulse-slow'
+        }`}>
+          <div className={`h-14 w-14 rounded-2xl flex items-center justify-center ${
+            activeChild.anamnese_completa ? 'bg-emerald-500' : 'bg-amber-500'
+          } text-white`}>
+            {activeChild.anamnese_completa ? <CheckCircle2 className="h-7 w-7" /> : <Brain className="h-7 w-7" />}
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500">
+              {activeChild.anamnese_completa ? 'Anamnese concluída' : <><AlertTriangle className="h-4 w-4 text-amber-600" /> Anamnese pendente</>}
+            </div>
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 leading-tight mt-1">
+              {activeChild.anamnese_completa
+                ? `Anamnese de ${activeChild.nome} está completa`
+                : `Preencha a anamnese de ${activeChild.nome} para liberar a IA pedagógica`}
+            </h2>
+            <p className="text-sm font-medium text-slate-600 mt-1">
+              {activeChild.anamnese_completa
+                ? 'Você pode revisar ou editar as respostas (até 3 edições).'
+                : 'A anamnese é essencial para que o app personalize as atividades.'}
+            </p>
+          </div>
+          <Link
+            to="/anamnese/$childId"
+            params={{ childId: activeChild.id }}
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black uppercase tracking-widest text-sm shadow-md transition-transform hover:scale-105 ${
+              activeChild.anamnese_completa
+                ? 'bg-emerald-600 text-white'
+                : 'bg-amber-500 text-white'
+            }`}
+          >
+            {activeChild.anamnese_completa ? 'Revisar anamnese' : 'Iniciar anamnese'}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           variants={containerVariants}
