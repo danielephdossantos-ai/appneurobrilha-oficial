@@ -83,13 +83,14 @@ function AmigoVirtual() {
     
     try {
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: { 
-          mode: "amigo-virtual", 
+        body: {
+          mode: "amigo-virtual",
           child: activeChild,
+          mascot: mascotPayload,
           message: q,
-          chatHistory: msgs.slice(-6).map(m => ({ 
-            role: m.role === "ai" ? "assistant" : "user", 
-            content: m.t 
+          chatHistory: msgs.slice(-6).map(m => ({
+            role: m.role === "ai" ? "assistant" : "user",
+            content: m.t
           }))
         }
       });
