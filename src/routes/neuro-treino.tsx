@@ -5,6 +5,7 @@ import { AlertCircle, Play, HelpCircle, Coffee } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
+import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { toast } from "sonner";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
