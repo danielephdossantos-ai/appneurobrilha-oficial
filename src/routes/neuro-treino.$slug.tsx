@@ -454,18 +454,24 @@ function Motorzinho({ p, onDone }: any) {
         </div>
       </div>
 
-      {/* Área central: letra grande + palavra */}
-      <div className="min-h-[220px] flex flex-col items-center justify-center mb-6 gap-3">
-        <div className="text-8xl font-black text-coral select-none leading-none">
-          {item.letra_fonema}
-          <span className="text-3xl text-muted-foreground"> {item.texto_prolongado.toLowerCase()}</span>
+      {/* Área central: imagem GRANDE em primeiro plano (a criança não lê — associa pela imagem) + som da letra */}
+      <div className="min-h-[280px] flex flex-col items-center justify-center mb-6 gap-4">
+        <div className="relative">
+          <RenderEmoji
+            e={item.imagem_url_ou_emoji}
+            label={item.palavra_alvo}
+            className="w-48 h-48 sm:w-56 sm:h-56 drop-shadow-2xl animate-fade-in"
+          />
+          {(phase === "your-turn" || phase === "listening") && (
+            <div className="absolute -inset-3 rounded-full border-4 border-primary/40 animate-pulse pointer-events-none" />
+          )}
         </div>
-        {(phase === "your-turn" || phase === "listening" || phase === "result") && (
-          <div className="flex items-center gap-3 animate-fade-in">
-            <RenderEmoji e={item.imagem_url_ou_emoji} label={item.palavra_alvo} className="w-20 h-20" />
-            <div className="text-4xl font-black text-primary">{item.palavra_alvo}</div>
-          </div>
-        )}
+        <div className="text-7xl sm:text-8xl font-black text-coral select-none leading-none tracking-wide">
+          {item.letra_fonema}
+          <span className="text-2xl sm:text-3xl text-muted-foreground ml-2">
+            {item.texto_prolongado.toLowerCase()}
+          </span>
+        </div>
         {phase === "result" && lastTranscript && (
           <div className={`text-sm font-bold px-3 py-1 rounded-full ${lastMatched ? "bg-success/15 text-success" : "bg-muted text-muted-foreground"}`}>
             Você disse: "{lastTranscript}"
