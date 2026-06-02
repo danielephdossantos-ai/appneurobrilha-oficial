@@ -336,8 +336,15 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                     <button 
                       key={`${opt}-${index}`} 
                       onClick={() => {
+                        const correctAnswer = aula.resposta_correta || aula.answer;
+                        const isCorrect = opt === correctAnswer;
                         setTentativa(opt);
-                        setAcertou(opt === (aula.resposta_correta || aula.answer));
+                        setAcertou(isCorrect);
+                        if (!scoredRef.current) {
+                          const elapsed = (Date.now() - startRef.current) / 1000;
+                          registerPerformance(isCorrect, elapsed, aula.activityId);
+                          scoredRef.current = true;
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
@@ -352,6 +359,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                 {(!aula.opcoes || aula.opcoes.length === 0) && (
                   <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
                 )}
+
+                <div className="mt-4 flex justify-end">
+                  <button
+                    onClick={() => {
+                      requestHelp(aula.activityId);
+                      toast.info("Pip vai te ajudar! 💡");
+                    }}
+                    className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
+                  >
+                    <HelpCircle size={14} /> Preciso de ajuda
+                  </button>
+                </div>
+
 
 
                 {acertou === true && (
