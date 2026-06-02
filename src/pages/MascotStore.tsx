@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useMascot, Mascot } from '@/contexts/MascotContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidCard } from '@/components/ui/KidCard';
 import { KidButton } from '@/components/ui/KidButton';
-import { ShoppingBag, Star, Sparkles, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
 import pipDinossauros from '@/assets/pip-dinossauros.png';
@@ -22,6 +22,49 @@ import pipRobos from '@/assets/pip-robos.png';
 import pipVeiculos from '@/assets/pip-veiculos.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { cn } from '@/utils/utils';
+import { useHiperfoco } from '@/context/HiperfocoContext';
+import { toast } from 'sonner';
+
+// World thumbnails (cenários) — using the same illustrated worlds from Neuro-Treino
+import worldAnimais from '@/assets/neuro-treino/worlds/animais.jpg';
+import worldArte from '@/assets/neuro-treino/worlds/arte.jpg';
+import worldCarros from '@/assets/neuro-treino/worlds/carros.jpg';
+import worldDinossauros from '@/assets/neuro-treino/worlds/dinossauros.jpg';
+import worldEspaco from '@/assets/neuro-treino/worlds/espaco.jpg';
+import worldFazendinha from '@/assets/neuro-treino/worlds/fazendinha.jpg';
+import worldHerois from '@/assets/neuro-treino/worlds/herois.jpg';
+import worldMinecraft from '@/assets/neuro-treino/worlds/minecraft.jpg';
+import worldMusica from '@/assets/neuro-treino/worlds/musica.jpg';
+import worldPrincesas from '@/assets/neuro-treino/worlds/princesas.jpg';
+import worldRobos from '@/assets/neuro-treino/worlds/robos.jpg';
+import worldTrens from '@/assets/neuro-treino/worlds/trens.jpg';
+import worldVeiculos from '@/assets/neuro-treino/worlds/veiculos.jpg';
+
+type WorldOption = {
+  id: string;
+  label: string;
+  emoji: string;
+  description: string;
+  image: string;
+  hiperfocoId?: 'minecraft' | 'dinossauros' | 'herois' | 'animais' | 'carros';
+  customLabel?: string;
+};
+
+const WORLDS: WorldOption[] = [
+  { id: 'w-dino', label: 'Dinossauros', emoji: '🦖', description: 'Era jurássica cheia de rugidos e fósseis.', image: worldDinossauros, hiperfocoId: 'dinossauros' },
+  { id: 'w-minecraft', label: 'Minecraft', emoji: '🟩', description: 'Construa aventuras bloco a bloco.', image: worldMinecraft, hiperfocoId: 'minecraft' },
+  { id: 'w-espaco', label: 'Espaço', emoji: '🚀', description: 'Foguetes, planetas e estrelas brilhando.', image: worldEspaco, customLabel: 'Espaço' },
+  { id: 'w-herois', label: 'Super-Heróis', emoji: '🦸', description: 'Poderes incríveis para salvar o dia!', image: worldHerois, hiperfocoId: 'herois' },
+  { id: 'w-animais', label: 'Animais', emoji: '🐾', description: 'Floresta cheia de amigos peludos.', image: worldAnimais, hiperfocoId: 'animais' },
+  { id: 'w-carros', label: 'Carros', emoji: '🚗', description: 'Acelere na pista de corrida!', image: worldCarros, hiperfocoId: 'carros' },
+  { id: 'w-fazendinha', label: 'Fazendinha', emoji: '🚜', description: 'Bichinhos, plantação e muito sol.', image: worldFazendinha, customLabel: 'Fazendinha' },
+  { id: 'w-arte', label: 'Arte', emoji: '🎨', description: 'Cores, pincéis e muita imaginação.', image: worldArte, customLabel: 'Arte' },
+  { id: 'w-musica', label: 'Música', emoji: '🎵', description: 'Instrumentos mágicos e ritmo no ar.', image: worldMusica, customLabel: 'Música' },
+  { id: 'w-princesas', label: 'Princesas', emoji: '👑', description: 'Castelos encantados e reinos mágicos.', image: worldPrincesas, customLabel: 'Princesas' },
+  { id: 'w-robos', label: 'Robôs', emoji: '🤖', description: 'Tecnologia, engrenagens e futuro.', image: worldRobos, customLabel: 'Robôs' },
+  { id: 'w-trens', label: 'Trens', emoji: '🚂', description: 'Estações, trilhos e grandes viagens.', image: worldTrens, customLabel: 'Trens' },
+  { id: 'w-veiculos', label: 'Veículos', emoji: '🚙', description: 'Caminhões, motos e muita ação.', image: worldVeiculos, customLabel: 'Veículos' },
+];
 
 
 const ADDITIONAL_CHARACTERS = [
