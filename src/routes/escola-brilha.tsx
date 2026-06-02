@@ -747,49 +747,107 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
 
             {aula.etapa === "opcoes" && (
               <div>
-                {aula.isEI && aula.visual && (
-                  <div
-                    className="rounded-2xl grid place-items-center mb-6 py-10"
-                    style={{
-                      background: aula.visualHex
-                        ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
-                        : 'linear-gradient(135deg, hsl(var(--sky)/.3), hsl(var(--petal)/.2))',
-                    }}
-                  >
-                    <div className="text-[7rem] leading-none">{aula.visual}</div>
-                  </div>
-                )}
-                <p className={`mb-6 font-bold ${aula.isEI ? "text-2xl text-center" : "text-xl"}`}>{aula.pergunta || "O que você acha?"}</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {(aula.opcoes || []).map((opt: string, index: number) => (
-                    <button 
-                      key={`${opt}-${index}`} 
-                      onClick={() => {
-                        const correctAnswer = aula.resposta_correta || aula.answer;
-                        const isCorrect = opt === correctAnswer;
-                        setTentativa(opt);
-                        setAcertou(isCorrect);
-                        if (!scoredRef.current) {
-                          const elapsed = (Date.now() - startRef.current) / 1000;
-                          registerPerformance(isCorrect, elapsed, aula.activityId);
-                          scoredRef.current = true;
-                        }
-                        if (isCorrect && !completedRef.current && aula.activityId) {
-                          completedRef.current = true;
-                          onCompleted?.(aula.activityId);
-                        }
+                {aula.isEI ? (
+                  <>
+                    {/* Ilustração centralizada + nome do objeto em letras grandes maiúsculas */}
+                    <div
+                      className="rounded-[2.5rem] grid place-items-center mb-6 py-10 px-6 border-4 border-white shadow-xl"
+                      style={{
+                        background: aula.visualHex
+                          ? `radial-gradient(circle at 50% 40%, ${aula.visualHex}66, ${aula.visualHex}11 70%)`
+                          : 'radial-gradient(circle at 50% 40%, hsl(var(--sky)/.45), hsl(var(--petal)/.2) 70%)',
                       }}
-                      disabled={acertou === true}
-                      className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
-                        tentativa === opt 
-                          ? (opt === (aula.resposta_correta || aula.answer) ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
-                          : "border-border bg-muted hover:border-primary"
-                      }`}>
-                      {opt}
-                    </button>
-                  ))}
-                </div>
+                    >
+                      {aula.visual && (
+                        <div className="text-[9rem] md:text-[11rem] leading-none drop-shadow-2xl animate-float-thinking">
+                          {aula.visual}
+                        </div>
+                      )}
+                      <div className="mt-4 text-4xl md:text-6xl font-black tracking-[0.18em] text-primary drop-shadow-md">
+                        {(aula.palavra || aula.topic || aula.resposta_correta || "").toString().toUpperCase()}
+                      </div>
+                    </div>
+
+                    {/* Alternativas em bolhas grandes coloridas */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 place-items-center">
+                      {(aula.opcoes || []).map((opt: string, index: number) => {
+                        const bubbleColors = [
+                          "from-coral to-coral/70",
+                          "from-sky to-sky/70",
+                          "from-sun to-sun/70",
+                          "from-success to-success/70",
+                          "from-lilac to-lilac/70",
+                          "from-pink to-pink/70",
+                        ];
+                        const color = bubbleColors[index % bubbleColors.length];
+                        const correctAnswer = aula.resposta_correta || aula.answer;
+                        const selected = tentativa === opt;
+                        const isCorrect = opt === correctAnswer;
+                        return (
+                          <button
+                            key={`${opt}-${index}`}
+                            onClick={() => {
+                              setTentativa(opt);
+                              setAcertou(isCorrect);
+                              if (!scoredRef.current) {
+                                const elapsed = (Date.now() - startRef.current) / 1000;
+                                registerPerformance(isCorrect, elapsed, aula.activityId);
+                                scoredRef.current = true;
+                              }
+                              if (isCorrect && !completedRef.current && aula.activityId) {
+                                completedRef.current = true;
+                                onCompleted?.(aula.activityId);
+                              }
+                            }}
+                            disabled={acertou === true}
+                            className={`btn-tap relative w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center text-5xl md:text-6xl font-black uppercase text-white shadow-[0_10px_0_rgba(0,0,0,0.15)] border-4 border-white transition-all hover:-translate-y-1 hover:shadow-[0_14px_0_rgba(0,0,0,0.18)] active:translate-y-1 active:shadow-[0_4px_0_rgba(0,0,0,0.2)] bg-gradient-to-br ${
+                              selected
+                                ? isCorrect
+                                  ? "from-success to-success/70 ring-4 ring-success/40 scale-110"
+                                  : "from-destructive to-destructive/70 ring-4 ring-destructive/40 animate-pulse"
+                                : color
+                            }`}
+                          >
+                            {opt.toString().toUpperCase()}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="mb-6 font-bold text-xl">{aula.pergunta || "O que você acha?"}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {(aula.opcoes || []).map((opt: string, index: number) => (
+                        <button
+                          key={`${opt}-${index}`}
+                          onClick={() => {
+                            const correctAnswer = aula.resposta_correta || aula.answer;
+                            const isCorrect = opt === correctAnswer;
+                            setTentativa(opt);
+                            setAcertou(isCorrect);
+                            if (!scoredRef.current) {
+                              const elapsed = (Date.now() - startRef.current) / 1000;
+                              registerPerformance(isCorrect, elapsed, aula.activityId);
+                              scoredRef.current = true;
+                            }
+                            if (isCorrect && !completedRef.current && aula.activityId) {
+                              completedRef.current = true;
+                              onCompleted?.(aula.activityId);
+                            }
+                          }}
+                          disabled={acertou === true}
+                          className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
+                            tentativa === opt
+                              ? (opt === (aula.resposta_correta || aula.answer) ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/5 text-destructive")
+                              : "border-border bg-muted hover:border-primary"
+                          }`}>
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
                 {(!aula.opcoes || aula.opcoes.length === 0) && (
                   <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
                 )}
