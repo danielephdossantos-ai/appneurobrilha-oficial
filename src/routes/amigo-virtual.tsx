@@ -156,22 +156,22 @@ function AmigoVirtual() {
   return (
     <Shell>
       <div className="max-w-2xl mx-auto flex flex-col h-[calc(100vh-180px)]">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="h-16 w-16 flex items-center justify-center">
+        <div className="flex items-center justify-between mb-8 bg-white/50 p-6 rounded-[2.5rem] border-4 border-pink-100 shadow-soft">
+          <div className="flex items-center gap-4">
+            <div className="h-20 w-20 flex items-center justify-center bg-white rounded-3xl shadow-soft">
               <SimpleMascotRenderer emoji={virtualFriend.emoji} size={64} />
             </div>
             <div>
-              <h2 className="text-xl font-black text-pink-600">Amigo Virtual & Protetor</h2>
-              <p className="text-[10px] font-medium text-pink-400">Sempre aqui por você! ✨</p>
+              <h2 className="text-2xl font-black text-pink-600 uppercase">Amigo Virtual</h2>
+              <p className="text-xs font-bold text-pink-400 tracking-widest uppercase">Sempre aqui por você! ✨</p>
             </div>
           </div>
           <div className="flex gap-2">
             <button 
               onClick={() => setIsAudioEnabled(!isAudioEnabled)}
-              className={`p-2 rounded-full ${isAudioEnabled ? "bg-pink-500 text-white" : "bg-gray-200 text-gray-500"}`}
+              className={`p-3 rounded-2xl shadow-soft transition-all ${isAudioEnabled ? "bg-pink-500 text-white" : "bg-gray-200 text-gray-500"}`}
             >
-              {isAudioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
+              {isAudioEnabled ? <Volume2 size={24} /> : <VolumeX size={24} />}
             </button>
           </div>
         </div>

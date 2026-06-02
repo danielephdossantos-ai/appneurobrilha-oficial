@@ -189,11 +189,15 @@ function ReforcoBrilha() {
 
   return (
     <Shell>
-      <PageHeader 
-        emoji="✨" 
-        title="REFORÇO BRILHA" 
-        subtitle="O professor particular infinito que ensina qualquer assunto" 
-      />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-lilac/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-lilac-foreground mb-2">Laboratório do Pip</h1>
+          <p className="text-muted-foreground text-lg font-bold">O que vamos descobrir e reforçar hoje no nosso laboratório mágico?</p>
+        </div>
+      </div>
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">

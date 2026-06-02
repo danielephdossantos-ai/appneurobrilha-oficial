@@ -75,7 +75,15 @@ function Treino() {
 
   return (
     <Shell>
-      <PageHeader emoji="🧠" title="Neuro-Treino" subtitle="Reforço terapêutico que sustenta o aprendizado escolar" />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-success/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-success mb-2">Floresta da Atenção</h1>
+          <p className="text-muted-foreground text-lg font-bold">Vamos treinar seu cérebro para ficar super forte e focado!</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">

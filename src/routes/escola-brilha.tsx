@@ -200,7 +200,15 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-primary/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-primary mb-2">Escola Brilha</h1>
+          <p className="text-muted-foreground text-lg font-bold">Olá! Escolha uma matéria para começarmos nossa missão de hoje!</p>
+        </div>
+      </div>
 
       <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
         <div className="flex gap-2 min-w-max">

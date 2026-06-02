@@ -26,7 +26,15 @@ const cores: Record<string, string> = {
 function Rotina() {
   return (
     <Shell>
-      <PageHeader emoji="🗓️" title="Rotina de Hoje" subtitle="O dia inteiro num lugar só" />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-sun/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-warning-foreground mb-2">Minha Rotina</h1>
+          <p className="text-muted-foreground text-lg font-bold">Vamos ver o que temos para hoje? Seguir a rotina nos ajuda a brilhar!</p>
+        </div>
+      </div>
 
       <div className="space-y-2">
         {itens.map((i, idx) => (

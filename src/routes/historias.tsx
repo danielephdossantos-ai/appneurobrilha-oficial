@@ -42,32 +42,34 @@ function HistoriasPage() {
     <div className="min-h-screen bg-[#F8F7FF] font-sans pb-20">
       {/* Topo / Header */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md px-6 py-4 border-b border-[#6C5CE7]/10">
-        <div className="max-w-md mx-auto space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="max-w-2xl mx-auto flex items-center justify-between">
             <button 
               onClick={() => navigate({ to: '/' })}
-              className="p-2 hover:bg-[#6C5CE7]/10 rounded-full transition-colors"
+              className="p-3 bg-[#6C5CE7]/10 hover:bg-[#6C5CE7]/20 rounded-2xl transition-all"
             >
               <ArrowLeft className="w-6 h-6 text-[#6C5CE7]" />
             </button>
-            <h1 className="text-2xl font-black text-[#6C5CE7] tracking-tight">Histórias</h1>
-            <div className="bg-[#6C5CE7]/10 p-2 rounded-full">
-              <Star className="w-6 h-6 text-[#6C5CE7] fill-[#6C5CE7]" />
+            <div className="flex items-center gap-3">
+              <span className="text-4xl">📚</span>
+              <h1 className="text-3xl font-black text-[#6C5CE7] tracking-tight uppercase">Histórias</h1>
             </div>
-          </div>
-          
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-xs font-bold text-[#6C5CE7] uppercase tracking-wider">
-              <span>Progresso de Leitura</span>
-              <span>45%</span>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:block">
+                <div className="flex justify-between text-[10px] font-black text-[#6C5CE7] uppercase tracking-widest mb-1">
+                  <span>Progresso</span>
+                  <span>45%</span>
+                </div>
+                <Progress value={45} className="h-2 w-32 bg-[#E4E0FF]" />
+              </div>
+              <div className="bg-[#6C5CE7]/10 p-3 rounded-2xl">
+                <Star className="w-6 h-6 text-[#6C5CE7] fill-[#6C5CE7]" />
+              </div>
             </div>
-            <Progress value={45} className="h-3 bg-[#E4E0FF]" />
-          </div>
         </div>
       </header>
 
       {/* Conteúdo Principal */}
-      <main className="max-w-md mx-auto p-6 space-y-8">
+      <main className="max-w-2xl mx-auto p-6 space-y-8">
         {categories.map((cat, index) => (
           <motion.button
             key={cat.id}
