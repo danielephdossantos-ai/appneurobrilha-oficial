@@ -432,14 +432,14 @@ const TRIAGEM_VARS: Variation[] = range(30).map((i) => ({ id:`tc-${i+1}`, payloa
 
 // 23. EXPRESSÃO E EMOÇÃO — pareamento rosto × situação
 const EMOCAO_BANK = [
-  { cena:"Ganhou um presente 🎁", correta:"😄 Feliz", opts:["😢 Triste","😡 Bravo"] },
-  { cena:"Quebrou o brinquedo 💔", correta:"😢 Triste", opts:["😄 Feliz","😲 Surpreso"] },
-  { cena:"Alguém pegou seu lanche", correta:"😡 Bravo", opts:["😄 Feliz","😨 Medo"] },
-  { cena:"Viu uma surpresa atrás da porta", correta:"😲 Surpreso", opts:["😴 Sono","😢 Triste"] },
-  { cena:"Está sozinho no escuro", correta:"😨 Medo", opts:["😄 Feliz","😡 Bravo"] },
-  { cena:"Ganhou abraço da família 🤗", correta:"😄 Feliz", opts:["😨 Medo","😡 Bravo"] },
-  { cena:"Perdeu o cachorrinho", correta:"😢 Triste", opts:["😲 Surpreso","😄 Feliz"] },
-  { cena:"Acordou cedo demais", correta:"😴 Sono", opts:["😄 Feliz","😲 Surpreso"] },
+  { cena:"Ganhou um presente 🎁", correta:"😄 Feliz", opts:["😢 Triste","😡 Bravo","😨 Medo"] },
+  { cena:"Quebrou o brinquedo 💔", correta:"😢 Triste", opts:["😄 Feliz","😲 Surpreso","😡 Bravo"] },
+  { cena:"Alguém pegou seu lanche", correta:"😡 Bravo", opts:["😄 Feliz","😨 Medo","😴 Sono"] },
+  { cena:"Viu uma surpresa atrás da porta", correta:"😲 Surpreso", opts:["😴 Sono","😢 Triste","😡 Bravo"] },
+  { cena:"Está sozinho no escuro", correta:"😨 Medo", opts:["😄 Feliz","😡 Bravo","😲 Surpreso"] },
+  { cena:"Ganhou abraço da família 🤗", correta:"😄 Feliz", opts:["😨 Medo","😡 Bravo","😢 Triste"] },
+  { cena:"Perdeu o cachorrinho", correta:"😢 Triste", opts:["😲 Surpreso","😄 Feliz","😴 Sono"] },
+  { cena:"Acordou cedo demais", correta:"😴 Sono", opts:["😄 Feliz","😲 Surpreso","😡 Bravo"] },
 ];
 const EMOCAO_VARS: Variation[] = range(30).map((i) => {
   const b = EMOCAO_BANK[i % EMOCAO_BANK.length];
