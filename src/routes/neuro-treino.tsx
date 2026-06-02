@@ -270,7 +270,18 @@ function Treino() {
 
       <style>{`
         @keyframes float   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+        @keyframes breathe {
+          0%   { transform: scale(1.02) translate3d(0,0,0); }
+          25%  { transform: scale(1.05) translate3d(-1.2%, -0.8%, 0); }
+          50%  { transform: scale(1.07) translate3d(0.8%, 0.6%, 0); }
+          75%  { transform: scale(1.04) translate3d(1.2%, -0.4%, 0); }
+          100% { transform: scale(1.02) translate3d(0,0,0); }
+        }
+        @keyframes shimmerWorld {
+          0%   { background-position: -50% 50%; opacity: 0.0; }
+          40%  { opacity: 0.55; }
+          100% { background-position: 150% 50%; opacity: 0.0; }
+        }
         @keyframes glow    { 0%,100% { box-shadow: 0 0 22px rgba(255,255,255,0.55); } 50% { box-shadow: 0 0 44px rgba(255,255,255,0.9); } }
         @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.4); opacity: 0; } }
       `}</style>
