@@ -1720,8 +1720,10 @@ function AulaView({
                 activeMascot={activeMascot}
                 materiaMeta={materiaMeta}
                 onStart={() => {
-                  setAula({ ...aula, etapa: aula.guided ? "ensino" : "opcoes" });
-                  setEiStep(1); // Reset para o fluxo interno se necessário
+                  // Sempre vai para "ensino" — lá a tela mostra Tema/Explicação/Exemplo
+                  // (MathExplanationScreen para Math 2º-9º, painel mid/teen para outras matérias)
+                  setAula({ ...aula, etapa: "ensino" });
+                  setEiStep(1);
                 }}
                 onNaoEntendi={naoEntendi}
                 reexplaining={reexplaining}
