@@ -630,22 +630,26 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
   const sortedOpcoes = useMemo(() => [...opcoes].sort(() => Math.random() - 0.5), [opcoes]);
 
   useEffect(() => {
-    // Audio logic for each step
-    const playAudio = async () => {
-      let text = "";
-      if (eiStep === 1) text = aula.frase_apresentacao || `Esta é uma ${palavraFoco}`;
-      else if (eiStep === 2) text = palavraFoco;
-      else if (eiStep === 3) text = silabas.join(" - ");
-      else if (eiStep === 4) text = "Vamos montar a palavra?";
-      else if (eiStep === 5) text = `Qual palavra é ${palavraFoco}?`;
-      else if (eiStep === 6) text = "Vamos escrever?";
-      else if (eiStep === 7) text = "Parabéns! Você brilhou!";
-      
-      // Aqui integraria com o TTS real do app
-      console.log("Audio:", text);
+    const playAudio = (msg: string) => {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(msg);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 0.9; // Um pouco mais lento para crianças
+      window.speechSynthesis.speak(utterance);
     };
-    playAudio();
-  }, [eiStep]);
+
+    let text = "";
+    if (eiStep === 1) text = aula.frase_apresentacao || `Esta é uma ${palavraFoco}`;
+    else if (eiStep === 2) text = palavraFoco;
+    else if (eiStep === 3) text = silabas.join(" - ");
+    else if (eiStep === 4) text = "Vamos montar a palavra?";
+    else if (eiStep === 5) text = `Qual palavra é ${palavraFoco}?`;
+    else if (eiStep === 6) text = "Vamos escrever?";
+    else if (eiStep === 7) text = "Parabéns! Você brilhou!";
+    
+    if (text) playAudio(text);
+  }, [eiStep, palavraFoco, silabas, aula.frase_apresentacao]);
+
 
   return (
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
