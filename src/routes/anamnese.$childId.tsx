@@ -95,20 +95,22 @@ function Anamnese() {
   useEffect(() => {
     async function loadAnamnesis() {
       if (!childId) return;
-      const { data: existing, error } = await supabase
+      const { data: existing } = await supabase
         .from("child_anamnesis")
         .select("*")
         .eq("child_id", childId)
         .maybeSingle();
-      
+
       if (existing) {
         setData(existing.responses as any);
         setEditCount(existing.edit_count ?? 0);
       }
+      if (child?.serie) setSerieLocal(child.serie);
       setLoading(false);
     }
     loadAnamnesis();
-  }, [childId]);
+  }, [childId, child?.serie]);
+
 
   const steps = [
     { title: "Identidade", icon: <Baby className="w-5 h-5" /> },
