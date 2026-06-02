@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
+import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
