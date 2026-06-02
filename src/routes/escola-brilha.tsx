@@ -305,7 +305,7 @@ function Escola() {
         const isShapes = materiaId.includes("forma") || activity.title.toLowerCase().includes("forma") || 
                         ["TRIANGULO", "TRIÂNGULO", "CIRCULO", "CÍRCULO", "QUADRADO", "RETANGULO", "RETÂNGULO", "ESTRELA", "CORACAO", "CORAÇÃO", "LOSANGO", "OVAL", "HEXAGONO", "HEXÁGONO"].includes(systemAnswer.toUpperCase());
         
-        const allSingleLetters = opts.length > 0 && opts.every(o => o.trim().length === 1);
+        const allSingleLetters = opts.length > 0 && opts.every((o: string) => o.trim().length === 1);
         if (isShapes) miniGameType = "shape";
         else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
         else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
