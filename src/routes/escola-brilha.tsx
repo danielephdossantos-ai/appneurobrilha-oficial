@@ -1201,7 +1201,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <Card className="mb-4">
             {/* Stepper pedagógico adaptado */}
             <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
-              {isAlfaFlow ? [
+              {(isAlfaFlow ? [
                 {n:1,l:"Objeto",i:"🍎"},
                 {n:2,l:"Palavra",i:"🔤"},
                 {n:3,l:"Sílabas",i:"✂️"},
@@ -1209,30 +1209,27 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:5,l:"Achar",i:"🔎"},
                 {n:6,l:"Escrever",i:"✏️"},
                 {n:7,l:"Legal!",i:"🎉"},
-              ].map((s: any) => {
-                const active = s.n === eiStep;
-                const done = s.n < eiStep;
-                return (
-                  <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
-                    active ? "bg-primary text-white scale-110 shadow-glow" :
-                    done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
-                  }`}>
-                    <span>{s.i}</span>{s.l}
-                  </span>
-                );
-              }) : [
+              ] : isMathFlow ? [
+                {n:1,l:"Visual",i:"👀"},
+                {n:2,l:"Contar",i:"☝️"},
+                {n:3,l:"Conta",i:"➕"},
+                {n:4,l:"Montar",i:"🧩"},
+                {n:5,l:"Prática",i:"✋"},
+                {n:6,l:"Armada",i:"📐"},
+              ] : [
                 {n:1,l:"Tema",i:"🎯"},
                 {n:2,l:"Explicação",i:"💡"},
                 {n:3,l:"Exemplo",i:"👀"},
                 {n:4,l:"Atividade",i:"✋"},
                 {n:5,l:"Feedback",i:"💬"},
                 {n:6,l:"Reforço",i:"⭐"},
-              ].map((s: any) => {
-                const active = s.n === visualStep;
-                const done = s.n < visualStep;
+              ]).map((s: any) => {
+                const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
+                const active = s.n === current;
+                const done = s.n < current;
                 return (
                   <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
-                    active ? "bg-primary text-primary-foreground scale-110 shadow-glow" :
+                    active ? "bg-primary text-white scale-110 shadow-glow" :
                     done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
                   }`}>
                     <span>{s.i}</span>{s.l}
