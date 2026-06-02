@@ -12,6 +12,12 @@ import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
+import soproCarro from "@/assets/neuro-treino/sopro/carro.png";
+import soproVela from "@/assets/neuro-treino/sopro/vela.png";
+import soproBalao from "@/assets/neuro-treino/sopro/balao.png";
+import soproMoinho from "@/assets/neuro-treino/sopro/moinho.png";
+import soproBarco from "@/assets/neuro-treino/sopro/barco.png";
+import soproBolha from "@/assets/neuro-treino/sopro/bolha.png";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
   component: NeuroAtividade,
