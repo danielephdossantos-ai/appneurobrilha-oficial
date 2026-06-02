@@ -31,11 +31,13 @@ function PainelPremium() {
   const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
 
   useEffect(() => {
+    if (!activeChild) return;
+
     if (parentUnlocked) {
       AuditLogService.log({
         action: 'ACCESS_PARENT_DASHBOARD',
         module: 'RESPONSIBLE',
-        metadata: { childId: activeChild?.id }
+        metadata: { childId: activeChild.id }
       });
     } else {
       requestUnlock();
