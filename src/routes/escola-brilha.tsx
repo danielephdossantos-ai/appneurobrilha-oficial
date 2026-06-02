@@ -1149,6 +1149,196 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
 
 
 
+// ============================================================================
+// MathExplanationScreen — Padrão único de tela de explicação para
+// Matemática (2º ao 9º ano). Limpo, sem mascote, estilo livro didático.
+// ============================================================================
+function MathExplanationScreen({
+  aula,
+  onTentar,
+  onNaoEntendi,
+  reexplaining,
+}: {
+  aula: any;
+  onTentar: () => void;
+  onNaoEntendi: () => void;
+  reexplaining: boolean;
+}) {
+  const [showPassos, setShowPassos] = useState(true);
+  const [falando, setFalando] = useState(false);
+
+  const grade = String(aula.grade || "");
+  const ano = useMemo(() => {
+    const m = grade.match(/(\d)/);
+    return m ? Number(m[1]) : 5;
+  }, [grade]);
+  const ehPequeno = ano >= 2 && ano <= 5;
+
+  const titulo = aula.titulo_aula || (ehPequeno ? "Vamos aprender!" : "Hora de aprender");
+  const pergunta = aula.pergunta_simples || aula.pergunta || `O que é ${aula.topic || "isso"}?`;
+  const explicacao = aula.explicacao_curta || aula.ensino || "";
+  const contaPrincipal = aula.conta_principal || aula.demo || "";
+
+  const passos: Array<{ titulo: string; conteudo: string }> = useMemo(() => {
+    if (Array.isArray(aula.passos_resolucao) && aula.passos_resolucao.length > 0) {
+      return aula.passos_resolucao.map((p: any, i: number) =>
+        typeof p === "string"
+          ? { titulo: `Passo ${i + 1}`, conteudo: p }
+          : { titulo: p.titulo || `Passo ${i + 1}`, conteudo: p.conteudo || "" }
+      );
+    }
+    if (Array.isArray(aula.passos) && aula.passos.length > 0) {
+      return aula.passos.map((p: any, i: number) => ({
+        titulo: `Passo ${i + 1}`,
+        conteudo: typeof p === "string" ? p : String(p),
+      }));
+    }
+    return [];
+  }, [aula.passos_resolucao, aula.passos]);
+
+  const textoAudio = useMemo(() => {
+    const partes: string[] = [];
+    if (pergunta) partes.push(pergunta);
+    if (explicacao) partes.push(explicacao);
+    if (contaPrincipal) partes.push(`A conta é: ${contaPrincipal}.`);
+    passos.forEach((p) => partes.push(`${p.titulo}. ${p.conteudo}`));
+    return aula.audio_explicacao || partes.join(" ");
+  }, [pergunta, explicacao, contaPrincipal, passos, aula.audio_explicacao]);
+
+  const ouvir = () => {
+    try {
+      const synth = window.speechSynthesis;
+      if (!synth) return;
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(textoAudio);
+      u.lang = "pt-BR";
+      u.rate = ehPequeno ? 0.9 : 0.98;
+      u.pitch = 1.05;
+      u.onstart = () => setFalando(true);
+      u.onend = () => setFalando(false);
+      u.onerror = () => setFalando(false);
+      synth.speak(u);
+    } catch {
+      setFalando(false);
+    }
+  };
+  const parar = () => {
+    try { window.speechSynthesis?.cancel(); } catch {}
+    setFalando(false);
+  };
+
+  useEffect(() => {
+    return () => { try { window.speechSynthesis?.cancel(); } catch {} };
+  }, []);
+
+  return (
+    <div className="w-full max-w-3xl mx-auto px-3 md:px-0">
+      {/* Título grande */}
+      <h1 className="text-center font-black text-3xl md:text-5xl text-slate-900 tracking-tight mb-3">
+        {titulo}
+      </h1>
+
+      {/* Pergunta simples */}
+      <p className="text-center text-lg md:text-2xl font-semibold text-slate-700 mb-2">
+        {pergunta}
+      </p>
+
+      {/* Explicação curta (máx 2 linhas) */}
+      {explicacao && (
+        <p className="text-center text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-6 leading-snug line-clamp-2">
+          {explicacao}
+        </p>
+      )}
+
+      {/* Conta principal em DESTAQUE */}
+      {contaPrincipal && (
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm px-6 py-8 mb-6 text-center">
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
+            Conta principal
+          </div>
+          <div className="font-black text-slate-900 text-3xl md:text-5xl leading-tight break-words">
+            {contaPrincipal}
+          </div>
+        </div>
+      )}
+
+      {/* Passo a passo */}
+      {showPassos && passos.length > 0 && (
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 md:p-6 mb-6 space-y-3">
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">
+            Passo a passo
+          </div>
+          {passos.map((p, i) => {
+            const isLast = i === passos.length - 1;
+            return (
+              <div
+                key={i}
+                className={`rounded-xl border ${isLast ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-white"} p-3 md:p-4 flex gap-3`}
+              >
+                <div
+                  className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-black ${isLast ? "bg-emerald-500 text-white" : "bg-primary text-primary-foreground"}`}
+                >
+                  {i + 1}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className={`font-bold ${isLast ? "text-emerald-800" : "text-slate-800"} text-base md:text-lg`}>
+                    {p.titulo}
+                  </div>
+                  <div className={`mt-1 ${isLast ? "text-emerald-900 text-lg md:text-2xl font-extrabold" : "text-slate-700 text-base md:text-lg"} whitespace-pre-wrap break-words`}>
+                    {p.conteudo}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Botões */}
+      <div className="flex flex-wrap gap-3 justify-center">
+        <button
+          onClick={falando ? parar : ouvir}
+          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-primary text-primary font-bold px-5 py-3 shadow-sm hover:bg-primary/5"
+        >
+          <Volume2 className="h-5 w-5" />
+          {falando ? "Parar áudio" : "Ouvir explicação"}
+        </button>
+        <button
+          onClick={() => setShowPassos((v) => !v)}
+          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-slate-300 text-slate-700 font-bold px-5 py-3 shadow-sm hover:bg-slate-50"
+        >
+          <BookOpen className="h-5 w-5" />
+          {showPassos ? "Ocultar passo a passo" : "Ver passo a passo"}
+        </button>
+        <button
+          onClick={onTentar}
+          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-primary text-primary-foreground font-black px-6 py-3 shadow-md hover:opacity-95"
+        >
+          Tentar agora <ArrowRight className="h-5 w-5" />
+        </button>
+        <button
+          onClick={onNaoEntendi}
+          disabled={reexplaining}
+          className="btn-tap inline-flex items-center gap-2 rounded-xl bg-white border-2 border-sun text-sun-foreground font-bold px-4 py-3 shadow-sm disabled:opacity-60"
+        >
+          {reexplaining ? (
+            <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</>
+          ) : (
+            <>Não entendi — outro método</>
+          )}
+        </button>
+      </div>
+
+      {aula.metodo_usado && (
+        <div className="text-center text-xs text-slate-500 mt-3">
+          Método atual: <b>{aula.metodo_usado}</b>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
 
   const theme = tierTheme[tier];
