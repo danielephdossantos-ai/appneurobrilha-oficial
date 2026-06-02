@@ -1084,109 +1084,94 @@ function RitmoSopro({ p, onDone }: any) {
   );
 }
 
-// Cenas animadas pela força do sopro
+// Cenas animadas (imagens 2D) pela força do sopro
 function CenaSopro({ cena, progress, level }: { cena: string; progress: number; level: number }) {
   const p = Math.min(100, progress);
   switch (cena) {
     case "carro":
       return (
-        <div className="relative h-40 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border">
+        <div className="relative h-44 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border">
           <div className="absolute bottom-0 left-0 right-0 h-6 bg-emerald-300/60" />
-          <div className="absolute bottom-6 transition-all duration-150" style={{ left: `${4 + p * 0.85}%` }}>
-            <svg width="72" height="44" viewBox="0 0 72 44" className="drop-shadow-md">
-              <rect x="6" y="14" width="58" height="18" rx="6" fill="#ef4444" />
-              <rect x="18" y="6" width="34" height="14" rx="4" fill="#fca5a5" />
-              <circle cx="20" cy="34" r="7" fill="#1f2937" /><circle cx="20" cy="34" r="3" fill="#9ca3af" />
-              <circle cx="52" cy="34" r="7" fill="#1f2937" /><circle cx="52" cy="34" r="3" fill="#9ca3af" />
-            </svg>
-          </div>
-          <div className="absolute top-2 left-2 text-[10px] font-bold text-emerald-700">Chegada →</div>
+          <img
+            src={soproCarro}
+            alt="Carrinho"
+            loading="lazy"
+            className="absolute bottom-4 w-24 h-24 object-contain transition-all duration-150 drop-shadow-md"
+            style={{ left: `${4 + p * 0.78}%` }}
+          />
+          <div className="absolute top-2 right-3 text-[10px] font-bold text-emerald-700">→ Chegada</div>
         </div>
       );
     case "vela": {
-      const flameScale = Math.max(0.05, 1 - p / 100);
+      const flameOpacity = Math.max(0, 1 - p / 100);
+      const flameScale = Math.max(0.2, 1 - p / 130);
+      const sway = (level - 0.2) * 12;
       return (
-        <div className="relative h-40 bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl overflow-hidden border-2 border-border flex items-end justify-center pb-4">
-          <div className="flex flex-col items-center">
+        <div className="relative h-44 bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl overflow-hidden border-2 border-border flex items-end justify-center pb-2">
+          <div className="relative">
+            <img src={soproVela} alt="Vela" loading="lazy" className="w-32 h-32 object-contain" />
+            {/* máscara para "apagar" a chama: cobre a parte de cima quando p sobe */}
             <div
-              className="origin-bottom transition-transform duration-150"
-              style={{ transform: `scale(${flameScale}) translateX(${(level - 0.3) * 30}px)` }}
-            >
-              <svg width="40" height="60" viewBox="0 0 40 60">
-                <path d="M20 4 C 28 18, 36 28, 28 44 C 24 52, 16 52, 12 44 C 4 28, 12 18, 20 4 Z" fill="#fbbf24" />
-                <path d="M20 16 C 24 24, 28 30, 24 40 C 22 46, 18 46, 16 40 C 12 30, 16 24, 20 16 Z" fill="#fde68a" />
-              </svg>
-            </div>
-            <div className="w-8 h-20 bg-gradient-to-b from-rose-200 to-rose-400 rounded-sm" />
-            <div className="w-12 h-2 bg-rose-500 rounded-full -mt-1" />
+              className="absolute top-0 left-0 right-0 bg-gradient-to-b from-amber-50 to-transparent transition-all duration-150"
+              style={{ height: `${p * 0.45}%`, opacity: 1 - flameOpacity * 0.4, transform: `translateX(${sway}px)` }}
+            />
           </div>
           {p >= 100 && (
-            <div className="absolute inset-0 flex items-center justify-center text-2xl font-black text-emerald-600">Apagou!</div>
+            <div className="absolute inset-x-0 top-2 text-center text-lg font-black text-emerald-600">Apagou!</div>
           )}
         </div>
       );
     }
     case "balao":
       return (
-        <div className="relative h-48 bg-gradient-to-b from-sky-200 to-sky-50 rounded-2xl overflow-hidden border-2 border-border">
-          <div className="absolute left-1/2 -translate-x-1/2 transition-all duration-150" style={{ bottom: `${4 + p * 0.8}%` }}>
-            <svg width="64" height="84" viewBox="0 0 64 84">
-              <ellipse cx="32" cy="30" rx="26" ry="30" fill="#ef4444" />
-              <ellipse cx="24" cy="22" rx="6" ry="9" fill="#fca5a5" opacity="0.7" />
-              <polygon points="28,58 36,58 32,66" fill="#b91c1c" />
-              <line x1="32" y1="66" x2="32" y2="82" stroke="#374151" strokeWidth="1.5" />
-            </svg>
-          </div>
+        <div className="relative h-52 bg-gradient-to-b from-sky-200 to-sky-50 rounded-2xl overflow-hidden border-2 border-border">
+          <img
+            src={soproBalao}
+            alt="Balão"
+            loading="lazy"
+            className="absolute left-1/2 -translate-x-1/2 w-24 h-28 object-contain transition-all duration-150 drop-shadow-md"
+            style={{ bottom: `${4 + p * 0.78}%`, transform: `translateX(-50%) translateX(${(level - 0.3) * 14}px)` }}
+          />
         </div>
       );
     case "moinho": {
-      const angle = p * 7.2; // 0..720°
+      const angle = p * 7.2;
       return (
-        <div className="relative h-48 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border flex items-end justify-center pb-2">
-          <div className="relative">
-            <div className="w-10 h-24 bg-stone-300 rounded-t-md mx-auto" />
-            <div className="absolute top-2 left-1/2 -translate-x-1/2" style={{ transform: `translateX(-50%) rotate(${angle}deg)`, transformOrigin: "center" }}>
-              <svg width="80" height="80" viewBox="-40 -40 80 80">
-                {[0, 90, 180, 270].map((a) => (
-                  <g key={a} transform={`rotate(${a})`}>
-                    <polygon points="0,-4 30,-10 30,10 0,4" fill="#dc2626" />
-                  </g>
-                ))}
-                <circle r="5" fill="#1f2937" />
-              </svg>
-            </div>
-          </div>
+        <div className="relative h-52 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border flex items-center justify-center">
+          <img
+            src={soproMoinho}
+            alt="Moinho"
+            loading="lazy"
+            className="w-40 h-40 object-contain transition-transform duration-100"
+            style={{ transform: `rotate(${angle}deg)` }}
+          />
         </div>
       );
     }
     case "barco":
       return (
-        <div className="relative h-40 bg-gradient-to-b from-sky-200 to-sky-400 rounded-2xl overflow-hidden border-2 border-border">
+        <div className="relative h-44 bg-gradient-to-b from-sky-200 to-sky-400 rounded-2xl overflow-hidden border-2 border-border">
           <div className="absolute bottom-0 left-0 right-0 h-10 bg-blue-600/70" />
-          <div className="absolute bottom-8 transition-all duration-150" style={{ left: `${4 + p * 0.85}%` }}>
-            <svg width="70" height="60" viewBox="0 0 70 60">
-              <polygon points="35,4 35,42 8,42" fill="#fef3c7" stroke="#92400e" strokeWidth="1.5" />
-              <line x1="35" y1="2" x2="35" y2="46" stroke="#78350f" strokeWidth="2" />
-              <path d="M2 46 Q 35 56 68 46 L 62 56 L 8 56 Z" fill="#92400e" />
-            </svg>
-          </div>
+          <img
+            src={soproBarco}
+            alt="Barco"
+            loading="lazy"
+            className="absolute bottom-6 w-24 h-24 object-contain transition-all duration-150 drop-shadow-md"
+            style={{ left: `${4 + p * 0.78}%` }}
+          />
         </div>
       );
     case "bolha": {
-      const r = 8 + p * 0.6;
+      const scale = 0.3 + (p / 100) * 1.1;
       return (
-        <div className="relative h-48 bg-gradient-to-b from-pink-50 to-violet-100 rounded-2xl overflow-hidden border-2 border-border flex items-center justify-center">
-          <svg width="200" height="180" viewBox="0 0 200 180">
-            <defs>
-              <radialGradient id="bub" cx="40%" cy="40%">
-                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-                <stop offset="60%" stopColor="#c4b5fd" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.3" />
-              </radialGradient>
-            </defs>
-            <rect x="80" y="120" width="40" height="40" rx="6" fill="#a78bfa" />
-            <circle cx="100" cy={120 - r * 0.6} r={r} fill="url(#bub)" stroke="#a78bfa" strokeWidth="1.5" />
-          </svg>
+        <div className="relative h-52 bg-gradient-to-b from-pink-50 to-violet-100 rounded-2xl overflow-hidden border-2 border-border flex items-center justify-center">
+          <img
+            src={soproBolha}
+            alt="Bolha"
+            loading="lazy"
+            className="w-40 h-40 object-contain transition-transform duration-100"
+            style={{ transform: `scale(${scale})` }}
+          />
         </div>
       );
     }
