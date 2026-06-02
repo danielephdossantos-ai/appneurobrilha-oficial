@@ -274,6 +274,125 @@ const DECOR_BANK = [
 ];
 const DECOR_VARS: Variation[] = range(30).map((i) => ({ id:`dc-${i+1}`, payload: DECOR_BANK[i % DECOR_BANK.length] }));
 
+// ===================== NOVAS CATEGORIAS =====================
+
+// 16. ONOMATOPEIAS ANIMADAS — som → escolher figura (mecânica única: emissor de som textual + opções visuais grandes)
+const ONOMA_BANK = [
+  { som:"Au-au!", correta:{emoji:"🐶",nome:"Cachorro"}, distratoras:[{emoji:"🐱",nome:"Gato"},{emoji:"🐮",nome:"Vaca"}] },
+  { som:"Muuu!", correta:{emoji:"🐮",nome:"Vaca"}, distratoras:[{emoji:"🐷",nome:"Porco"},{emoji:"🐔",nome:"Galinha"}] },
+  { som:"Bi-bi!", correta:{emoji:"🚗",nome:"Carro"}, distratoras:[{emoji:"🚲",nome:"Bike"},{emoji:"✈️",nome:"Avião"}] },
+  { som:"Miau!", correta:{emoji:"🐱",nome:"Gato"}, distratoras:[{emoji:"🐶",nome:"Cachorro"},{emoji:"🐭",nome:"Rato"}] },
+  { som:"Quá-quá!", correta:{emoji:"🦆",nome:"Pato"}, distratoras:[{emoji:"🐦",nome:"Pássaro"},{emoji:"🦉",nome:"Coruja"}] },
+  { som:"Có-có-có!", correta:{emoji:"🐔",nome:"Galinha"}, distratoras:[{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"}] },
+  { som:"Oinc-oinc!", correta:{emoji:"🐷",nome:"Porco"}, distratoras:[{emoji:"🐮",nome:"Vaca"},{emoji:"🐶",nome:"Cachorro"}] },
+  { som:"Bééé!", correta:{emoji:"🐑",nome:"Ovelha"}, distratoras:[{emoji:"🐐",nome:"Cabra"},{emoji:"🐮",nome:"Vaca"}] },
+  { som:"Mééé!", correta:{emoji:"🐐",nome:"Cabra"}, distratoras:[{emoji:"🐑",nome:"Ovelha"},{emoji:"🐷",nome:"Porco"}] },
+  { som:"Pi-pi!", correta:{emoji:"🐥",nome:"Pintinho"}, distratoras:[{emoji:"🐔",nome:"Galinha"},{emoji:"🦆",nome:"Pato"}] },
+];
+const ONOMA_VARS: Variation[] = range(30).map((i) => {
+  const b = ONOMA_BANK[i % ONOMA_BANK.length];
+  const opts = [b.correta, ...b.distratoras].sort(() => (i % 2 === 0 ? -1 : 1));
+  return { id:`on-${i+1}`, payload:{ som:b.som, options:opts, correctName:b.correta.nome } };
+});
+
+// 17. RITMO E SOPRO VISUAL — esticar vogal conforme tamanho da linha (mecânica única: barra de comprimento)
+const SOPRO_BANK = [
+  { silaba:"Vruuum", vogal:"U", veiculo:"🚗" },
+  { silaba:"Tchuu",  vogal:"U", veiculo:"🚂" },
+  { silaba:"Brmm",   vogal:"M", veiculo:"🏍️" },
+  { silaba:"Fiuuu",  vogal:"U", veiculo:"🎈" },
+  { silaba:"Shhh",   vogal:"H", veiculo:"💨" },
+  { silaba:"Iaaaa",  vogal:"A", veiculo:"🚑" },
+];
+const SOPRO_VARS: Variation[] = range(30).map((i) => {
+  const b = SOPRO_BANK[i % SOPRO_BANK.length];
+  const tamanho = 30 + (i % 6) * 15; // 30,45,60,75,90,105
+  return { id:`rs-${i+1}`, payload:{ ...b, tamanho, holdSeconds: Math.max(1.5, tamanho / 30) } };
+});
+
+// 18. SONS DO CORPO / PAROMATOPEIAS — som → ação correta
+const CORPO_BANK = [
+  { som:"Atchim!", correta:"😤 Espirrar", opts:["😴 Dormir","🍽️ Comer"] },
+  { som:"Nhac!",   correta:"🍎 Morder",  opts:["💧 Beber","👋 Acenar"] },
+  { som:"Glub-glub!", correta:"💧 Beber", opts:["😤 Espirrar","🍎 Morder"] },
+  { som:"Hum-hum!", correta:"😋 Saborear", opts:["😴 Dormir","🤧 Tossir"] },
+  { som:"Cof-cof!", correta:"🤧 Tossir", opts:["😤 Espirrar","💧 Beber"] },
+  { som:"Zzzz...", correta:"😴 Dormir", opts:["🏃 Correr","🍎 Morder"] },
+  { som:"Toc-toc!", correta:"🚪 Bater na porta", opts:["👋 Acenar","🍽️ Comer"] },
+  { som:"Plaft!",   correta:"👏 Bater palma", opts:["🦶 Pisar","🚪 Bater na porta"] },
+];
+const CORPO_VARS: Variation[] = range(30).map((i) => {
+  const b = CORPO_BANK[i % CORPO_BANK.length];
+  const opts = [b.correta, ...b.opts].sort(() => (i % 2 ? -1 : 1));
+  return { id:`pc-${i+1}`, payload:{ som:b.som, opts, correta:b.correta } };
+});
+
+// 19. TRAÇADO DE LETRAS — sequência de setas numeradas (mecânica única: tocar setas em ordem)
+const TRACADO_BANK = [
+  { letra:"A", passos:["⬇️","↗️","➡️"] },
+  { letra:"L", passos:["⬇️","➡️"] },
+  { letra:"T", passos:["➡️","⬇️"] },
+  { letra:"I", passos:["⬇️"] },
+  { letra:"O", passos:["↪️","↩️","⤴️"] },
+  { letra:"E", passos:["⬇️","➡️","➡️","➡️"] },
+  { letra:"H", passos:["⬇️","⬇️","➡️"] },
+  { letra:"F", passos:["⬇️","➡️","➡️"] },
+  { letra:"V", passos:["↘️","↗️"] },
+  { letra:"M", passos:["⬆️","↘️","↗️","⬇️"] },
+];
+const TRACADO_VARS: Variation[] = range(30).map((i) => {
+  const b = TRACADO_BANK[i % TRACADO_BANK.length];
+  return { id:`tl-${i+1}`, payload:{ letra:b.letra, passos:b.passos } };
+});
+
+// 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
+const CAMINHO_BANK = [
+  { figura:"Estrela ⭐", pontos:[{x:50,y:10},{x:60,y:40},{x:90,y:40},{x:65,y:60},{x:75,y:90},{x:50,y:70},{x:25,y:90},{x:35,y:60},{x:10,y:40},{x:40,y:40}] },
+  { figura:"Casa 🏠", pontos:[{x:20,y:80},{x:20,y:40},{x:50,y:15},{x:80,y:40},{x:80,y:80}] },
+  { figura:"Coração ❤️", pontos:[{x:50,y:85},{x:15,y:50},{x:25,y:20},{x:50,y:40},{x:75,y:20},{x:85,y:50}] },
+  { figura:"Peixe 🐟", pontos:[{x:15,y:50},{x:40,y:25},{x:75,y:25},{x:85,y:50},{x:75,y:75},{x:40,y:75}] },
+  { figura:"Lua 🌙", pontos:[{x:60,y:15},{x:30,y:35},{x:25,y:60},{x:45,y:80},{x:70,y:75}] },
+  { figura:"Barco ⛵", pontos:[{x:50,y:15},{x:50,y:60},{x:15,y:60},{x:85,y:60},{x:20,y:80},{x:80,y:80}] },
+];
+const CAMINHO_VARS: Variation[] = range(30).map((i) => ({ id:`cp-${i+1}`, payload: CAMINHO_BANK[i % CAMINHO_BANK.length] }));
+
+// 21. LABIRINTO DE PRECISÃO — arrastar bolinha em corredor estreito
+const LABPRE_BANK = [
+  { tema:"Verde 🌿", segmentos:[{x:10,y:50,w:30,h:14},{x:35,y:20,w:14,h:44},{x:35,y:20,w:55,h:14},{x:78,y:20,w:14,h:60}] },
+  { tema:"Azul 💧",  segmentos:[{x:10,y:20,w:14,h:60},{x:10,y:66,w:80,h:14},{x:76,y:20,w:14,h:60}] },
+  { tema:"Roxo 🔮",  segmentos:[{x:10,y:40,w:80,h:14},{x:10,y:40,w:14,h:40},{x:76,y:40,w:14,h:40},{x:10,y:66,w:80,h:14}] },
+  { tema:"Sol ☀️",   segmentos:[{x:10,y:20,w:80,h:14},{x:76,y:20,w:14,h:60},{x:10,y:66,w:80,h:14}] },
+  { tema:"Mar 🌊",   segmentos:[{x:10,y:30,w:30,h:14},{x:35,y:30,w:14,h:30},{x:35,y:50,w:30,h:14},{x:60,y:50,w:14,h:30},{x:60,y:66,w:30,h:14}] },
+];
+const LABPRE_VARS: Variation[] = range(30).map((i) => ({ id:`lp-${i+1}`, payload: LABPRE_BANK[i % LABPRE_BANK.length] }));
+
+// 22. TRIAGEM DE CATEGORIAS — arrastar itens para caixas corretas
+const TRIAGEM_BANK = [
+  { caixas:[{nome:"Animais", emoji:"🐾"},{nome:"Transportes", emoji:"🚗"}], itens:[{e:"🐱",cat:"Animais"},{e:"🚂",cat:"Transportes"},{e:"🐶",cat:"Animais"},{e:"✈️",cat:"Transportes"},{e:"🐰",cat:"Animais"},{e:"🚌",cat:"Transportes"}] },
+  { caixas:[{nome:"Frutas", emoji:"🍎"},{nome:"Verduras", emoji:"🥬"}], itens:[{e:"🍎",cat:"Frutas"},{e:"🥦",cat:"Verduras"},{e:"🍌",cat:"Frutas"},{e:"🥕",cat:"Verduras"},{e:"🍇",cat:"Frutas"},{e:"🥒",cat:"Verduras"}] },
+  { caixas:[{nome:"Roupas", emoji:"👕"},{nome:"Brinquedos", emoji:"🧸"}], itens:[{e:"👕",cat:"Roupas"},{e:"🧸",cat:"Brinquedos"},{e:"👖",cat:"Roupas"},{e:"🎲",cat:"Brinquedos"},{e:"🧦",cat:"Roupas"},{e:"⚽",cat:"Brinquedos"}] },
+  { caixas:[{nome:"Céu", emoji:"☁️"},{nome:"Mar", emoji:"🌊"}], itens:[{e:"☀️",cat:"Céu"},{e:"🐠",cat:"Mar"},{e:"🌙",cat:"Céu"},{e:"🐙",cat:"Mar"},{e:"⭐",cat:"Céu"},{e:"🦀",cat:"Mar"}] },
+  { caixas:[{nome:"Quente", emoji:"🔥"},{nome:"Frio", emoji:"❄️"}], itens:[{e:"☀️",cat:"Quente"},{e:"⛄",cat:"Frio"},{e:"🌶️",cat:"Quente"},{e:"🧊",cat:"Frio"},{e:"🔥",cat:"Quente"},{e:"❄️",cat:"Frio"}] },
+];
+const TRIAGEM_VARS: Variation[] = range(30).map((i) => ({ id:`tc-${i+1}`, payload: TRIAGEM_BANK[i % TRIAGEM_BANK.length] }));
+
+// 23. EXPRESSÃO E EMOÇÃO — pareamento rosto × situação
+const EMOCAO_BANK = [
+  { cena:"Ganhou um presente 🎁", correta:"😄 Feliz", opts:["😢 Triste","😡 Bravo"] },
+  { cena:"Quebrou o brinquedo 💔", correta:"😢 Triste", opts:["😄 Feliz","😲 Surpreso"] },
+  { cena:"Alguém pegou seu lanche", correta:"😡 Bravo", opts:["😄 Feliz","😨 Medo"] },
+  { cena:"Viu uma surpresa atrás da porta", correta:"😲 Surpreso", opts:["😴 Sono","😢 Triste"] },
+  { cena:"Está sozinho no escuro", correta:"😨 Medo", opts:["😄 Feliz","😡 Bravo"] },
+  { cena:"Ganhou abraço da família 🤗", correta:"😄 Feliz", opts:["😨 Medo","😡 Bravo"] },
+  { cena:"Perdeu o cachorrinho", correta:"😢 Triste", opts:["😲 Surpreso","😄 Feliz"] },
+  { cena:"Acordou cedo demais", correta:"😴 Sono", opts:["😄 Feliz","😲 Surpreso"] },
+];
+const EMOCAO_VARS: Variation[] = range(30).map((i) => {
+  const b = EMOCAO_BANK[i % EMOCAO_BANK.length];
+  const opts = [b.correta, ...b.opts].sort(() => (i % 2 ? -1 : 1));
+  return { id:`ee-${i+1}`, payload:{ cena:b.cena, opts, correta:b.correta } };
+});
+
 export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sons-iniciais": SONS_INICIAIS_VARS,
   "motorzinho-dos-sons": MOTORZINHO_VARS,
