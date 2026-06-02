@@ -72,7 +72,7 @@ const grupos = [
 ];
 
 function Treino() {
-  const { activeChild } = useAppState();
+  useAppState(); // garante contexto da criança ativa
   const [selectedAtividade, setSelectedAtividade] = useState<string | null>(null);
   const { registerPerformance, requestHelp, adjustment, metrics } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
