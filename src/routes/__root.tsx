@@ -126,13 +126,15 @@ function RootComponent() {
       <AuthGuard>
         <MascotProvider>
           <ParentModeProvider>
-            <div className="relative min-h-screen">
-              <Outlet />
-              <LGPDConsent />
-              <ConnectivityStatus />
-              <MascotGlobalContainer />
-              <ParentPinGate />
-            </div>
+            <HiperfocoProvider>
+              <div className="relative min-h-screen">
+                <Outlet />
+                <LGPDConsent />
+                <ConnectivityStatus />
+                <MascotGlobalContainer />
+                <ParentPinGate />
+              </div>
+            </HiperfocoProvider>
           </ParentModeProvider>
         </MascotProvider>
       </AuthGuard>
