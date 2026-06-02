@@ -479,7 +479,7 @@ function Rimas({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Que palavra rima com</div>
       <div className="text-5xl font-black text-coral mb-6">{p.palavra}</div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl hover:border-coral hover:scale-105 transition-all">{o}</button>
         ))}
