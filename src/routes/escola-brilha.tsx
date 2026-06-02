@@ -1231,13 +1231,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:6,l:"Armada",i:"📐"},
               ] : [
                 {n:1,l:"Descobrir",i:"🎯"},
-                {n:2,l:"Observar",i:"👀"},
-                {n:3,l:"Entender",i:"💡"},
+                {n:2,l:"Observe",i:"👀"},
+                {n:3,l:"Pip Explica",i:"💡"},
                 {n:4,l:"Exemplo",i:"📘"},
-                {n:5,l:"Junto",i:"🤝"},
-                {n:6,l:"Sozinho",i:"✋"},
+                {n:5,l:"Faça Comigo",i:"🤝"},
+                {n:6,l:"Agora Você",i:"✋"},
                 {n:7,l:"Desafio",i:"🏁"},
-                {n:8,l:"Recompensa",i:"🏆"},
+                {n:8,l:"Conquista",i:"🏆"},
               ]).map((s: any) => {
                 const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
                 const active = s.n === current;
@@ -1297,11 +1297,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     <div className="flex justify-center">
                       <span className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-black uppercase tracking-widest text-primary">
                         Passo {eiStep} de 8 ·{" "}
-                        {eiStep === 1 ? "Descobrir" :
-                         eiStep === 2 ? "Observar" :
-                         eiStep === 3 ? "Entender" :
-                         eiStep === 4 ? "Ver Exemplo" :
-                         "Fazer Junto"}
+                        {eiStep === 1 ? "Vamos Descobrir" :
+                         eiStep === 2 ? "Observe" :
+                         eiStep === 3 ? "Pip Explica" :
+                         eiStep === 4 ? "Exemplo Resolvido" :
+                         "Faça Comigo"}
                       </span>
                     </div>
 
@@ -1403,7 +1403,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         onClick={() => setEiStep(eiStep + 1)}
                         className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
-                        {eiStep < 5 ? <>CONTINUAR <Play className="h-8 w-8 fill-current" /></> : <>FAZER SOZINHO <Play className="h-8 w-8 fill-current" /></>}
+                        {eiStep < 5 ? <>CONTINUAR <Play className="h-8 w-8 fill-current" /></> : <>AGORA VOCÊ <Play className="h-8 w-8 fill-current" /></>}
                       </button>
                       <button
                         onClick={naoEntendi}
