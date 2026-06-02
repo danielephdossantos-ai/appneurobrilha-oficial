@@ -633,6 +633,12 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const scoredRef = useRef<boolean>(false);
   const [reexplaining, setReexplaining] = useState(false);
   const [metodoIdx, setMetodoIdx] = useState(0);
+
+  // Estados para Alfabetização (7 etapas)
+  const isAlfaFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "portugues" || aula.materia === "linguagem");
+  const [alfaMontagem, setAlfaMontagem] = useState<string[]>([]);
+  const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
+  
   const METODOS = [
     { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
     { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
