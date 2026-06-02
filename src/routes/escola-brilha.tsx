@@ -297,6 +297,20 @@ function Escola() {
 
       console.log("Formatted data for AI:", { systemQuestion, systemOptions, systemAnswer });
 
+      // Determinar o tipo de minijogo para a IA adaptar a narração (apenas para EI)
+      let miniGameType = "bubbles";
+      if (isEI(selectedGrade)) {
+        const opts = (systemOptions || []).map(String);
+        const palavra = (activity.content.palavra || systemAnswer || "").toUpperCase();
+        const isShapes = materiaId.includes("forma") || activity.title.toLowerCase().includes("forma") || 
+                        ["TRIANGULO", "TRIÂNGULO", "CIRCULO", "CÍRCULO", "QUADRADO", "RETANGULO", "RETÂNGULO", "ESTRELA", "CORACAO", "CORAÇÃO", "LOSANGO", "OVAL", "HEXAGONO", "HEXÁGONO"].includes(systemAnswer.toUpperCase());
+        
+        const allSingleLetters = opts.length > 0 && opts.every(o => o.trim().length === 1);
+        if (isShapes) miniGameType = "shape";
+        else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
+        else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+      }
+
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
@@ -308,7 +322,8 @@ function Escola() {
           systemQuestion,
           systemOptions,
           systemAnswer,
-          instruction: activity.instruction
+          instruction: activity.instruction,
+          miniGameType // Enviando o tipo de jogo para a IA
         }
       });
 
