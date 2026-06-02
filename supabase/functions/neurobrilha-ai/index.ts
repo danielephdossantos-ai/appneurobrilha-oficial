@@ -87,9 +87,11 @@ serve(async (req) => {
       }[currentLevel as 1 | 2 | 3 | 4] || "Linguagem adaptada e clara."
 
       const isEarlyYears = /infantil|pré|pre|^1º/i.test(child.serie || "");
-      const mascotName = Math.random() > 0.5 ? "Professora Pipa" : "Professor Pip";
 
-      systemPrompt = `Você é o ${mascotName} do NeuroBrilha Kids. Sua tarefa é ensinar um conteúdo gerado pelo sistema.
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora no papel de PROFESSOR(A) da criança no NeuroBrilha Kids.
+      ${mascotPersonaBlock}
+      Sua tarefa é ensinar um conteúdo gerado pelo sistema mantendo SEMPRE sua identidade como ${mascotName}.
+
       Perfil da Criança:
       - Nome: ${child.nome || "Criança"}
       - Série: ${child.serie || "Não informada"}
@@ -104,7 +106,7 @@ serve(async (req) => {
       - Instrução Pedagógica: ${instruction || "Ensinar o tema de forma lúdica"}
 
       ${isEarlyYears ? `DIRETRIZES PEDAGÓGICAS (OBRIGATÓRIO PARA ESTA SÉRIE):
-      1. IDENTIDADE: Você é o ${mascotName}. Use uma linguagem ultra-acolhedora, alegre e cheia de entusiasmo.
+      1. IDENTIDADE: Você é ${mascotName}. Use uma linguagem ultra-acolhedora, alegre e cheia de entusiasmo.
       2. MÉTODO FÔNICO: Ao citar a palavra-alvo ou a resposta, estique o som da primeira letra (Ex: "OOOO-vo", "AAAA-bela", "BBBB-ola").
       3. DIRETRIZ VISUAL: Use frases como: "Olha o desenho que apareceu no nosso livro!", "Veja os blocos coloridos lá embaixo!".
       4. EXPLICAÇÃO ÚNICA: Gere apenas UMA explicação curta e direta por campo.
