@@ -18,6 +18,12 @@ function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
   const { hiperfoco } = useHiperfoco();
+  const { activeChild } = useAppState();
+  const { speak, stop, isSpeaking } = usePipVoice();
+  const [voiceOn, setVoiceOn] = useState<boolean>(() => {
+    if (typeof window === "undefined") return true;
+    return localStorage.getItem("pip:voice") !== "off";
+  });
 
   const [index, setIndex] = useState(0);
   const [acertos, setAcertos] = useState(0);
