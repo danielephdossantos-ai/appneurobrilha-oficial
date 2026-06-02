@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState, AnamnesisData } from "@/core/store";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronRight, CheckCircle2, Brain, Baby, BookOpen, MessageCircle, Heart, Calendar, Activity, Info } from "lucide-react";
 import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 import { toast } from "sonner";
@@ -47,6 +47,7 @@ function Anamnese() {
   const queryClient = useQueryClient();
   const isNova = childId === "nova";
   const child = allChildren.find((c: any) => c.id === childId);
+  const creatingChildRef = useRef(false);
 
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -99,8 +100,26 @@ function Anamnese() {
   useEffect(() => {
     if (!isNova) return;
     if (!session?.user) return;
+    if (creatingChildRef.current) return;
+    creatingChildRef.current = true;
     let cancelled = false;
     (async () => {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .upsert({
+          id: session.user.id,
+          display_name: session.user.user_metadata?.full_name ?? session.user.email ?? "Responsável",
+          avatar_url: session.user.user_metadata?.avatar_url ?? null,
+        } as any, { onConflict: "id" });
+
+      if (cancelled) return;
+      if (profileError) {
+        creatingChildRef.current = false;
+        toast.error("Não foi possível preparar seu cadastro para iniciar a anamnese.");
+        navigate({ to: "/painel-pais" });
+        return;
+      }
+
       const { data: created, error } = await supabase
         .from("children")
         .insert([{
@@ -114,6 +133,7 @@ function Anamnese() {
         .single();
       if (cancelled) return;
       if (error || !created) {
+        creatingChildRef.current = false;
         toast.error("Não foi possível iniciar a anamnese.");
         navigate({ to: "/painel-pais" });
         return;
