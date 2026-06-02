@@ -709,7 +709,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
 
 
-            {aula.isEI ? (
+            {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
                 {eiStep < 5 ? (
                   <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
