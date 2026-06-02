@@ -1156,11 +1156,17 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     opcoes: "✨ Sua vez!",
   };
 
-  // Stepper pedagógico (6 ou 7 passos visuais)
-  const totalSteps = isAlfaFlow ? 7 : 6;
-  const stepIndex = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0));
-  
-  const visualStep = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1));
+  // Stepper pedagógico: alfa=7, math=6, geral=8 (Descobrir→Recompensa)
+  const totalSteps = isAlfaFlow ? 7 : isMathFlow ? 6 : 8;
+  const stepIndex = isAlfaFlow ? eiStep : isMathFlow ? mathStep : (aula.isEI ? eiStep : eiStep);
+
+  // Mapa eiStep (1..6) → passo pedagógico (1..8) para o geral
+  const visualStep = isAlfaFlow ? eiStep : isMathFlow ? mathStep : (
+    eiStep <= 5 ? eiStep // 1=Descobrir 2=Observar 3=Entender 4=Exemplo 5=Junto
+    : acertou === null ? 6 // 6=Sozinho (jogando)
+    : acertou ? 8 // 8=Recompensa
+    : 7 // 7=Desafio/erro pede retentativa
+  );
 
 
 
