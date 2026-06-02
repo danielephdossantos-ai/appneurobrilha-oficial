@@ -7,6 +7,9 @@ import { KidButton } from '@/components/ui/KidButton';
 import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
+import pipEgg from '@/assets/pip-egg.png';
+import pipHatching from '@/assets/pip-hatching.png';
+import pipBaby from '@/assets/pip-baby.png';
 import pipDinossauros from '@/assets/pip-dinossauros.png';
 import pipEspaco from '@/assets/pip-espaco.png';
 import pipArte from '@/assets/pip-arte.png';
@@ -21,6 +24,9 @@ import pipTrens from '@/assets/pip-trens.png';
 import pipRobos from '@/assets/pip-robos.png';
 import pipVeiculos from '@/assets/pip-veiculos.png';
 import pipaMascot from '@/assets/pip-girl-mascot.png';
+import pipaEgg from '@/assets/pipa-egg.png';
+import pipaHatching from '@/assets/pipa-hatching.png';
+import pipaBaby from '@/assets/pipa-baby.png';
 import pipaPrincesa from '@/assets/pip-girl-princesas.png';
 import pipaUnicornio from '@/assets/pip-girl-unicornio.png';
 import pipaDoutora from '@/assets/pip-girl-doutora.png';
@@ -95,6 +101,12 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
   { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
   { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
+  { id: 'pip-ovo', name: 'Ovo do Pip', description: 'O começo de uma grande amizade, cheio de brilho e potencial.', category: 'premium', image_url: pipEgg },
+  { id: 'pip-nascendo', name: 'Pip Nascendo', description: 'A casquinha rachou e uma nova aventura vai começar.', category: 'premium', image_url: pipHatching },
+  { id: 'pip-bebe', name: 'Pip Bebê', description: 'Pequenino, curioso e pronto para seus primeiros desafios.', category: 'premium', image_url: pipBaby },
+  { id: 'pipa-ovo', name: 'Ovo da Pipa', description: 'Um ovo encantado guardando a doçura e coragem da Pipa.', category: 'premium', image_url: pipaEgg },
+  { id: 'pipa-nascendo', name: 'Pipa Nascendo', description: 'A Pipa está chegando ao mundo com muito brilho.', category: 'premium', image_url: pipaHatching },
+  { id: 'pipa-bebe', name: 'Pipa Bebê', description: 'A versão bebê da Pipa, fofa, alegre e cheia de ternura.', category: 'premium', image_url: pipaBaby },
   { id: 'pipa-original', name: 'Pipa Clássica', description: 'A forma original da Pipa, doce e cheia de coragem.', category: 'premium', image_url: pipaMascot },
   { id: 'pipa-princesa', name: 'Pipa Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: pipaPrincesa },
   { id: 'pipa-unicornio', name: 'Pipa Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: pipaUnicornio },
