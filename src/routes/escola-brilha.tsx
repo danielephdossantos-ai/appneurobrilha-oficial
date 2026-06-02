@@ -1069,6 +1069,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const isAlfaFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "portugues" || aula.materia === "linguagem");
   const [alfaMontagem, setAlfaMontagem] = useState<string[]>([]);
   const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
+
+  // Estados para Matemática Inicial (6 etapas)
+  const isMathFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "matematica" || aula.materia === "numeros");
+  const [mathStep, setMathStep] = useState(1);
+  
   
   const METODOS = [
     { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
