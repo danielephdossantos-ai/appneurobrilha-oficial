@@ -621,7 +621,12 @@ function CadeOPar({ p, onDone }: any) {
 function FocoTotal({ p, onDone }: any) {
   return (
     <div className="text-center">
-      <div className="font-black text-7xl mb-8" style={{ color: p.corExibida }}>{p.palavra}</div>
+      <div className="font-black text-8xl mb-8 flex flex-col items-center gap-4" style={{ color: p.corExibida }}>
+        <div className="bg-card border-4 border-white rounded-full p-6 shadow-xl w-32 h-32 flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full shadow-inner" style={{ background: p.corExibida }} />
+        </div>
+        <span>{p.palavra}</span>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((c:any, i:number) => (
           <button key={i} onClick={()=>onDone(c.nome === p.corCerta)} className="rounded-xl py-8 font-black text-white shadow-lg hover:scale-105 transition-all" style={{ background: c.hex }}>
@@ -756,10 +761,12 @@ function Mosaico({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Monte:</div>
-      <div className="text-4xl font-black mb-6">{p.figura}</div>
+      <div className="text-4xl font-black mb-6 bg-card border-2 border-primary/20 rounded-2xl p-4 inline-block">{p.figura}</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {p.opcoes.map((op:string, i:number) => (
-          <button key={i} onClick={()=>toggle(op)} className={`text-5xl p-4 rounded-xl border-2 transition-all ${selecionadas.includes(op) ? "border-primary bg-primary/10 scale-110" : "border-border bg-card"}`}>{op}</button>
+          <button key={i} onClick={()=>toggle(op)} className={`w-24 h-24 flex items-center justify-center rounded-2xl border-2 transition-all shadow-sm ${selecionadas.includes(op) ? "border-primary bg-primary/10 scale-110 shadow-glow" : "border-border bg-card"}`}>
+            {emojiImg(op) ? <img src={emojiImg(op)} className="w-16 h-16 object-contain" /> : <span className="text-5xl">{op}</span>}
+          </button>
         ))}
       </div>
       <button onClick={verificar} className="bg-success text-white px-8 py-3 rounded-xl font-black">Conferir</button>
@@ -1105,7 +1112,7 @@ function TriagemCategorias({ p, onDone }: any) {
           return (
             <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
               <div className="font-black mb-2 flex items-center justify-center gap-2">
-                {caixaImg ? <img src={caixaImg} alt="" className="w-7 h-7 object-contain" /> : <span>{c.emoji}</span>}
+                {caixaImg ? <img src={caixaImg} alt="" className="w-10 h-10 object-contain" /> : <span className="text-2xl">{c.emoji}</span>}
                 {c.nome}
               </div>
               <div className="flex flex-wrap gap-1 justify-center">
