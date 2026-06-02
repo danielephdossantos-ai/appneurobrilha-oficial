@@ -33,10 +33,10 @@ export class PedagogyEngine {
     day: number,
     childProfile: { tempo_atencao_min?: number | null },
     activities: Array<{
-      id?: string;
-      name?: string;
-      category?: string;
-      subcategory?: string;
+      id: string;
+      name: string;
+      category: string;
+      subcategory?: string | null;
     }>
   ): JourneyBlock[] {
     // Deterministicamente escolhe atividades baseadas no dia para cobrir os 365 dias.
