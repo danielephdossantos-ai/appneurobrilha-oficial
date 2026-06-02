@@ -409,11 +409,22 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sequencia-de-cores": SEQC_VARS,
   "simetria": SIMETRIA_VARS,
   "decoracao-criativa": DECOR_VARS,
+  "onomatopeias-animadas": ONOMA_VARS,
+  "ritmo-e-sopro": SOPRO_VARS,
+  "paromatopeias-corpo": CORPO_VARS,
+  "tracado-letras": TRACADO_VARS,
+  "caminho-dos-pontos": CAMINHO_VARS,
+  "labirinto-precisao": LABPRE_VARS,
+  "triagem-categorias": TRIAGEM_VARS,
+  "expressao-emocao": EMOCAO_VARS,
 };
 
 export const GRUPOS = [
   { nome:"Fala e Som", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra"] as CategoriaSlug[] },
+  { nome:"Fono & Onomatopeias", emoji:"🐮", cor:"from-sun/25 to-coral/5", slugs:["onomatopeias-animadas","ritmo-e-sopro","paromatopeias-corpo"] as CategoriaSlug[] },
+  { nome:"Coordenação Motor-Escrita", emoji:"✍️", cor:"from-success/25 to-success/5", slugs:["tracado-letras","caminho-dos-pontos","labirinto-precisao"] as CategoriaSlug[] },
   { nome:"Funções Executivas", emoji:"🧠", cor:"from-primary/20 to-primary/5", slugs:["onde-esta","sequencia-e-padrao","cade-o-par","foco-total","labirinto-do-som"] as CategoriaSlug[] },
+  { nome:"Jogos Clínicos Cognitivos", emoji:"🗂️", cor:"from-lilac/25 to-primary/5", slugs:["triagem-categorias","expressao-emocao"] as CategoriaSlug[] },
   { nome:"Atenção Avançada", emoji:"👁️", cor:"from-sky/30 to-sky/5", slugs:["foco-sustentado","rastreamento-sacadico"] as CategoriaSlug[] },
   { nome:"Oficina Criativa", emoji:"🎨", cor:"from-lilac/30 to-lilac/5", slugs:["mosaico-de-formas","sequencia-de-cores","simetria","decoracao-criativa"] as CategoriaSlug[] },
 ];
