@@ -8,7 +8,6 @@ import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check, Lock } from '
 import { supabase } from '@/database/supabase/client';
 import { useAppState } from '@/core/store';
 import { EggHatchCinematic, shouldShowEggHatch } from '@/components/pip/EggHatchCinematic';
-import { supabase } from '@/database/supabase/client';
 import pipMascot from '@/assets/pip-mascot.png';
 import pipEgg from '@/assets/pip-egg.png';
 import pipHatching from '@/assets/pip-hatching.png';
