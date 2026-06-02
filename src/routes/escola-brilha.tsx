@@ -820,7 +820,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
                     <div className="flex-1">
                       <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
-                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.dica}</div>
+                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.isEI ? (aula.dica || "").toUpperCase() : aula.dica}</div>
                       <button
                         onClick={() => { setAcertou(null); setTentativa(null); }}
                         className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
