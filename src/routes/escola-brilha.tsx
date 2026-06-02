@@ -1286,14 +1286,26 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       }
                     }}
                   />
-                ) : eiStep < 5 ? (
+                ) : eiStep <= 5 ? (
                   <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    {/* Badge do passo pedagógico atual */}
+                    <div className="flex justify-center">
+                      <span className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-black uppercase tracking-widest text-primary">
+                        Passo {eiStep} de 8 ·{" "}
+                        {eiStep === 1 ? "Descobrir" :
+                         eiStep === 2 ? "Observar" :
+                         eiStep === 3 ? "Entender" :
+                         eiStep === 4 ? "Ver Exemplo" :
+                         "Fazer Junto"}
+                      </span>
+                    </div>
+
                     <div className="flex flex-col items-center gap-6">
-                      {/* Mascote central que se move e se ajusta */}
+                      {/* Mascote central */}
                       <div className={`relative transition-all duration-1000 transform ${
                         eiStep === 1 ? 'scale-125 translate-y-4' :
-                        eiStep === 2 ? 'scale-110 -translate-x-12' :
-                        eiStep === 3 ? 'scale-110 translate-x-12' :
+                        eiStep === 3 ? 'scale-110 -translate-x-12' :
+                        eiStep === 4 ? 'scale-110 translate-x-12' :
                         'scale-100'
                       }`}>
                         <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white">
@@ -1303,53 +1315,75 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                             activeMascot?.mascot?.image_url || materiaMeta.mascote
                           )}
                         </div>
-                        {/* Balão de fala estilo HQ centralizado e dinâmico */}
+                        {/* Balão de fala */}
                         <div className={`absolute transition-all duration-500 ${
-                          eiStep === 2 ? '-right-16 -top-8' :
-                          eiStep === 3 ? '-left-16 -top-8' :
+                          eiStep === 3 ? '-right-16 -top-8' :
+                          eiStep === 4 ? '-left-16 -top-8' :
                           '-top-24 left-1/2 -translate-x-1/2'
                         } w-72 md:w-80`}>
                           <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
-                             {/* Rabicho dinâmico */}
                              <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
-                               eiStep === 2 ? 'bottom-[-18px] left-10' :
-                               eiStep === 3 ? 'bottom-[-18px] right-10' :
+                               eiStep === 3 ? 'bottom-[-18px] left-10' :
+                               eiStep === 4 ? 'bottom-[-18px] right-10' :
                                'bottom-[-18px] left-1/2 -translate-x-1/2'
                              }`} />
                              <div className={`absolute w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[14px] border-t-white ${
-                               eiStep === 2 ? 'bottom-[-11px] left-[44px]' :
-                               eiStep === 3 ? 'bottom-[-11px] right-[44px]' :
+                               eiStep === 3 ? 'bottom-[-11px] left-[44px]' :
+                               eiStep === 4 ? 'bottom-[-11px] right-[44px]' :
                                'bottom-[-11px] left-1/2 -translate-x-1/2'
                              }`} />
-                             
+
                              <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
-                               {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
-                                eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
-                                eiStep === 3 ? (aula.etapa3_exemplo || aula.etapa3_ensino || "Vamos ver um exemplo!") :
-                                (aula.etapa4_como_monta || aula.etapa4_preparo || "Veja como resolver!")}
+                               {eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
+                                eiStep === 2 ? "Olha bem para isto..." :
+                                eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
+                                eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
+                                (aula.etapa4_como_monta || "Vamos resolver juntos!")}
                              </p>
                           </div>
                         </div>
                       </div>
 
-                      {/* Elementos visuais gigantes para ensino concretizado */}
-                      {(eiStep === 2 || eiStep === 3) && (
-                        <div className="flex gap-4 items-center justify-center animate-bounce-slow mt-8">
-                           {eiStep === 2 ? (
-                             <div className="text-[140px] md:text-[180px] drop-shadow-2xl">
-                               {aula.visual || "⭐"}
-                             </div>
-                           ) : (
-                             <div className="flex gap-4">
-                               <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-6xl md:text-8xl font-black text-primary">
-                                 {aula.resposta_correta?.toString().charAt(0) || "A"}
-                               </div>
-                               <div className="text-6xl self-center font-black text-sun">+</div>
-                               <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl bg-white border-4 border-success shadow-xl flex items-center justify-center text-6xl md:text-8xl font-black text-success">
-                                 {aula.resposta_correta?.toString().charAt(1) || "B"}
-                               </div>
-                             </div>
-                           )}
+                      {/* Apoio visual gigante — sempre presente do passo 2 em diante */}
+                      {eiStep === 2 && (
+                        <div className="text-[160px] md:text-[200px] drop-shadow-2xl animate-bounce-slow mt-8">
+                          {aula.visual || "⭐"}
+                        </div>
+                      )}
+                      {eiStep === 3 && (
+                        <div className="text-[140px] md:text-[180px] drop-shadow-2xl animate-bounce-slow mt-8">
+                          {aula.visual || "⭐"}
+                        </div>
+                      )}
+                      {eiStep === 4 && (
+                        <div className="flex flex-col items-center gap-3 mt-8">
+                          <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Exemplo resolvido</div>
+                          <div className="flex gap-4 items-center">
+                            <div className="text-7xl md:text-8xl">{aula.visual || "⭐"}</div>
+                            <div className="text-5xl font-black text-sun">→</div>
+                            <div className="px-6 py-4 rounded-3xl bg-success/15 border-4 border-success text-2xl md:text-3xl font-black text-success">
+                              {aula.resposta_correta?.toString() || "Resposta"}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {eiStep === 5 && (
+                        <div className="flex flex-col items-center gap-4 mt-8 w-full">
+                          <div className="text-xs font-black uppercase tracking-widest text-primary">Fazendo juntos</div>
+                          <div className="w-full max-w-md rounded-3xl bg-white border-4 border-primary/40 shadow-xl p-6 space-y-3">
+                            <div className="flex items-center gap-3">
+                              <span className="w-8 h-8 rounded-full bg-primary text-white font-black flex items-center justify-center text-sm">1</span>
+                              <span className="font-bold text-base">Observe o que aparece.</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className="w-8 h-8 rounded-full bg-primary text-white font-black flex items-center justify-center text-sm">2</span>
+                              <span className="font-bold text-base">Pense no exemplo que viu.</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className="w-8 h-8 rounded-full bg-primary text-white font-black flex items-center justify-center text-sm">3</span>
+                              <span className="font-bold text-base">Escolha sua resposta com calma.</span>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -1364,7 +1398,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         onClick={() => setEiStep(eiStep + 1)}
                         className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
-                        VAMOS LÁ! <Play className="h-8 w-8 fill-current" />
+                        {eiStep < 5 ? <>CONTINUAR <Play className="h-8 w-8 fill-current" /></> : <>FAZER SOZINHO <Play className="h-8 w-8 fill-current" /></>}
                       </button>
                       <button
                         onClick={naoEntendi}
