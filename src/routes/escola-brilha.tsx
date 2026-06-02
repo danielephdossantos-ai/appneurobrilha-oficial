@@ -58,26 +58,55 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
+  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🦊", mascoteNome: "Lulu" },
+  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🦉", mascoteNome: "Numo" },
+  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐸", mascoteNome: "Bio" },
+  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🦁", mascoteNome: "Rex" },
+  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🦜", mascoteNome: "Aro" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐙", mascoteNome: "Pinto" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras" },
-  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5" },
-  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas" },
+  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐰", mascoteNome: "Letrinha" },
+  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Conti" },
+  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐢", mascoteNome: "Tato" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🦄", mascoteNome: "Pincel" },
 ] as const;
 
 function isEI(grade: string) {
   const g = grade.toLowerCase();
   return g.includes('infantil') || g.includes('pré') || g.includes('pre');
 }
+
+// ===== Camada visual por faixa etária (apenas estética, não muda lógica) =====
+type GradeTier = "ei" | "alfa" | "fund1" | "fund2" | "fund2plus";
+function gradeTier(grade: string): GradeTier {
+  if (isEI(grade)) return "ei";
+  if (/^1º|^2º/.test(grade)) return "alfa";
+  if (/^3º|^4º|^5º/.test(grade)) return "fund1";
+  if (/^6º|^7º/.test(grade)) return "fund2";
+  return "fund2plus"; // 8º, 9º
+}
+
+const tierTheme: Record<GradeTier, {
+  bg: string; scene: string; sceneEmoji: string; vibe: string; titleScale: string;
+}> = {
+  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneEmoji: "🌈🌳🦋", vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
+  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneEmoji: "🏘️📚✨", vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
+  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneEmoji: "🔭🧪🗺️", vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
+  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneEmoji: "🛰️🧭🎯", vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
+  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneEmoji: "📊🧠📐", vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
+};
+
+// Frases de feedback positivas (substituem "Tente novamente")
+const ALMOST_THERE = [
+  "Você está quase lá!",
+  "Olhe a dica e tente de novo 💡",
+  "Boa tentativa! Vamos observar com calma.",
+  "Está perto! Respira e tenta mais uma vez 🌿",
+];
+function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
 
 function Escola() {
