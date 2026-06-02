@@ -126,11 +126,36 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'pipa-super-heroina', name: 'Pipa Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: pipaSuperHeroina },
 ];
 
+// Gamificação: requisito de Moedas Brilha para cada mascote da loja
+// Ovo (0) → Nascendo (50) → Bebê (200) → Guardião + Fantasias (500)
+const STAGE_THRESHOLDS = { ovo: 0, nascendo: 50, bebe: 200, guardiao: 500 } as const;
+
+function getRequiredCoins(mascotId: string, mascotName: string): number {
+  const id = (mascotId || '').toLowerCase();
+  const name = (mascotName || '').toLowerCase();
+  if (id.includes('ovo') || name.includes('ovo')) return STAGE_THRESHOLDS.ovo;
+  if (id.includes('nascendo') || name.includes('nascendo')) return STAGE_THRESHOLDS.nascendo;
+  if (id.includes('bebe') || name.includes('bebê') || name.includes('bebe')) return STAGE_THRESHOLDS.bebe;
+  // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
+  return STAGE_THRESHOLDS.guardiao;
+}
+
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
+  const { activeChild } = useAppState();
   const [dbMascots, setDbMascots] = useState<Mascot[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [showEggHatch, setShowEggHatch] = useState(false);
+
+  const totalEarned = activeChild?.total_earned ?? 0;
+
+  // Cinematográfica do ovo no primeiro acesso da criança
+  useEffect(() => {
+    if (activeChild?.id && shouldShowEggHatch(activeChild.id)) {
+      setShowEggHatch(true);
+    }
+  }, [activeChild?.id]);
+
   useEffect(() => {
     const fetchAllMascots = async () => {
       try {
@@ -156,7 +181,7 @@ const MascotStorePage: React.FC = () => {
 
   // Combine DB mascots with additional characters
   const allDisplayMascots = [...dbMascots];
-  
+
   // Add additional characters if they're not already in the DB mascots (by name/id)
   ADDITIONAL_CHARACTERS.forEach(char => {
     if (!dbMascots.find(m => m.name === char.name)) {
