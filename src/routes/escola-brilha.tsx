@@ -342,7 +342,7 @@ function Escola() {
       const novaAula = {
         ...data,
         materia: materiaId,
-        etapa: "ensino",
+        etapa: guidedActive ? "ensino" : "opcoes",
         grade: selectedGrade,
         activityId: activity.id,
         bancoOrdem: preset?.ordem,
@@ -354,7 +354,9 @@ function Escola() {
         visual: activity.content.visual,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
+        guided: guidedActive,
       };
+
 
 
       console.log("FINAL AULA STATE:", novaAula);
