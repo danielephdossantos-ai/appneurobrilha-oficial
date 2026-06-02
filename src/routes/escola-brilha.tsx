@@ -330,6 +330,7 @@ function Escola() {
         if (isShapes) miniGameType = "shape";
         else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
         else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+        else if (activity.content.progression === "image-word") miniGameType = "word-image";
       }
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
@@ -749,28 +750,22 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
 
         {eiStep === 5 && (
-          <div className="w-full space-y-6">
-            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
-            <div className="grid grid-cols-1 gap-4">
-              {sortedOpcoes.map((opt: string, i: number) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (opt.toUpperCase() === (palavraFoco || "").toUpperCase()) {
-                      setEiStep(6);
-                      toast.success("Isso mesmo!");
-                    } else {
-                      toast.error("Ops! Vamos ver de novo para aprender?");
-                      setEiStep(1); // REFORÇO logic
-                    }
-                  }}
-                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl font-black uppercase text-center shadow-soft"
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
+          <EIMiniGame
+            aula={{
+              ...aula,
+              progression: "image-word",
+              opcoes: sortedOpcoes,
+              resposta_correta: palavraFoco
+            }}
+            onAnswer={(isCorrect) => {
+              if (isCorrect) {
+                setTimeout(() => setEiStep(6), 1500);
+              } else {
+                // Se errar muito, volta pro início da aula (REFORÇO)
+                // O EIMiniGame já trata o feedback visual/sonoro e ABA
+              }
+            }}
+          />
         )}
 
 
@@ -1637,20 +1632,58 @@ function AulaView({
       {/* Cenário mágico de fundo por faixa etária */}
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
         <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
-        <div className="relative flex items-center gap-4">
-          <div className="text-5xl drop-shadow animate-float-thinking">
-            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
-            ) : (
-              activeMascot?.mascot?.image_url || materiaMeta.mascote
-            )}
-          </div>
-          <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
-            <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
-            <div className="text-sm text-muted-foreground">
-              <b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+        <div className="relative flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="text-5xl drop-shadow animate-float-thinking">
+              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-14 h-14 rounded-full object-cover border-4 border-white shadow-lg" />
+              ) : (
+                <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center border-4 border-white shadow-lg">
+                  {activeMascot?.mascot?.image_url || materiaMeta.mascote}
+                </div>
+              )}
             </div>
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-primary/70">{theme.scene}</div>
+              <div className={`font-extrabold ${theme.titleScale} leading-tight`}>{materiaMeta.nome}</div>
+              <div className="text-[11px] font-bold text-muted-foreground hidden md:block">
+                {activeMascot?.mascot?.name || materiaMeta.mascoteNome} te ajuda!
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {/* Botão REPETIR ÁUDIO requested by user */}
+            <button
+              onClick={() => {
+                if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+                window.speechSynthesis.cancel();
+                // Tenta pegar o texto mais relevante para repetir
+                const textToRepeat = aula.audio_explicacao || aula.etapa5_instrucao || aula.pergunta || aula.etapa1_intro || "";
+                if (textToRepeat) {
+                  const u = new SpeechSynthesisUtterance(textToRepeat);
+                  u.lang = 'pt-BR';
+                  u.rate = 0.9;
+                  window.speechSynthesis.speak(u);
+                }
+              }}
+              className="btn-tap w-12 h-12 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center shadow-md hover:bg-primary/5 active:scale-95"
+              aria-label="Repetir áudio"
+            >
+              <Volume2 className="h-6 w-6" />
+            </button>
+
+            {/* Botão VOLTAR requested by user */}
+            <button
+              onClick={() => {
+                if (aula.etapa === "professor_intro") setAula(null);
+                else setAula({ ...aula, etapa: "professor_intro" });
+              }}
+              className="btn-tap w-12 h-12 rounded-full bg-white border-2 border-slate-200 text-slate-500 flex items-center justify-center shadow-md hover:bg-slate-50 active:scale-95"
+              aria-label="Voltar"
+            >
+              <ArrowRight className="h-6 w-6 rotate-180" />
+            </button>
           </div>
         </div>
       </div>

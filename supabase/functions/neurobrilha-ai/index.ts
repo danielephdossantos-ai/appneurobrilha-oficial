@@ -163,7 +163,8 @@ serve(async (req) => {
       - "palavra_foco": A palavra principal em CAIXA ALTA (ex: "MAÇÃ").
       - "silabas": Array com as sílabas (ex: ["MA", "ÇÃ"]).
       - "frase_apresentacao": "Esta é uma..." + objeto.
-      - "opcoes_identificacao": Array com 3 palavras (a correta + 2 intrusas, ex: ["MAÇÃ", "BANANA", "UVA"]).
+      - "opcoes_identificacao": Array com 4 palavras (a correta + 3 intrusas, ex: ["GATO", "BOLA", "CASA", "SAPO"]).
+      - "progression": "image-word" para o novo modelo de atividade.
       ` : isMathInicial ? `
       ESTRUTURA DE MATEMÁTICA INICIAL (6 ETAPAS):
       Você está ensinando uma criança em fase de numeralização (Pré ao 5º ano inicial).
