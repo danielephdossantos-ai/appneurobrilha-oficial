@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode } from "react";
 import { AlertCircle, Coffee, Sparkles } from "lucide-react";
@@ -31,10 +31,15 @@ class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasE
 export const Route = createFileRoute("/neuro-treino")({
   component: () => (
     <NeuroTreinoErrorBoundary>
-      <Treino />
+      <NeuroTreinoShell />
     </NeuroTreinoErrorBoundary>
   ),
 });
+
+function NeuroTreinoShell() {
+  const location = useLocation();
+  return location.pathname === "/neuro-treino" ? <Treino /> : <Outlet />;
+}
 
 function Treino() {
   useAppState();
@@ -85,20 +90,23 @@ function Treino() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {g.slugs.map((slug) => {
                   const c = CATEGORIAS[slug];
-                  const isLoading = false; // Placeholder for future loading state
                   return (
                     <Link
                       key={slug}
                       to="/neuro-treino/$slug"
                       params={{ slug }}
-                      disabled={isLoading}
-                      className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 border-border shadow-soft hover:shadow-glow hover:scale-105 transition-all min-h-[120px] flex flex-col group ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                      onClick={() => {
+                        console.error("[Neuro-Treino] clique na categoria", {
+                          slug,
+                          nome: c?.nome,
+                          variacoesLocais: VARIATIONS[slug]?.length ?? 0,
+                          hiperfocoAtivo: hiperfoco?.label ?? null,
+                        });
+                      }}
+                      className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 border-border shadow-soft hover:shadow-glow hover:scale-105 transition-all min-h-[120px] flex flex-col group`}
                     >
                       <div className="flex justify-between items-start">
                         <div className="text-3xl mb-1">{c.emoji}</div>
-                        {isLoading && (
-                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary border-t-transparent" />
-                        )}
                       </div>
                       <div className="font-extrabold group-hover:text-primary transition-colors">{c.nome}</div>
                       <div className="text-xs text-muted-foreground mt-1">{VARIATIONS[slug]?.length || 0} variações</div>

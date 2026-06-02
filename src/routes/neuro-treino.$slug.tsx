@@ -21,37 +21,52 @@ function NeuroAtividade() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Gate: sem hiperfoco selecionado → manda para a tela de configuração
-  // Usamos useEffect para evitar renderização condicional de hooks (Navigate é um componente, mas por segurança)
-  if (!hiperfoco) {
-    return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
-  }
-
   const meta = CATEGORIAS[slug];
   const vars = VARIATIONS[slug];
 
   useEffect(() => {
-    // Simula carregamento do banco de dados/Supabase
-    // Já temos os dados localmente em VARIATIONS, mas o usuário pediu lógica de carregamento e tratamento de erro
+    setIndex(0);
+    setError(null);
+    setIsLoading(true);
+
     try {
-      console.log(`Buscando atividades para categoria: ${slug} com hiperfoco: ${hiperfoco.label}`);
+      console.error("[Neuro-Treino] carregando sessão", {
+        categoryId: slug,
+        hiperfoco: hiperfoco?.label ?? null,
+        metaEncontrada: Boolean(meta),
+        quantidadeVariacoes: vars?.length ?? 0,
+      });
       
       if (!meta || !vars) {
         throw new Error(`Dados não encontrados para a categoria: ${slug}`);
       }
 
-      // Simulamos um delay de rede para mostrar o loading
+      if (vars.length === 0) {
+        throw new Error(`Categoria ${slug} retornou 0 variações.`);
+      }
+
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, 500);
+      }, 250);
 
       return () => clearTimeout(timer);
     } catch (err: any) {
-      console.error("Erro ao carregar atividade Neuro-Treino:", err);
+      console.error("[Neuro-Treino] erro ao carregar atividade", {
+        categoryId: slug,
+        hiperfoco: hiperfoco?.label ?? null,
+        meta,
+        vars,
+        erro: err,
+      });
       setError(err.message || "Falha ao carregar atividade");
       setIsLoading(false);
     }
-  }, [slug, meta, vars, hiperfoco]);
+  }, [slug, meta, vars, hiperfoco?.label]);
+
+  // Gate: sem hiperfoco selecionado → manda para a tela de configuração
+  if (!hiperfoco) {
+    return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
+  }
 
   if (isLoading) {
     return (
