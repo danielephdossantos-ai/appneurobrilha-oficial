@@ -91,7 +91,7 @@ export const LGPDConsent: React.FC = () => {
         data_usage_consent: true,
         analytics_consent: true,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erro ao salvar consentimento LGPD:", error);
       toast.error("Aviso fechado. Vamos tentar salvar sua preferência novamente depois.");
     } finally {
