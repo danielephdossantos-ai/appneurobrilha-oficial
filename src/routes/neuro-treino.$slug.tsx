@@ -145,10 +145,12 @@ function NeuroAtividade() {
         <span className="text-success">⭐ {acertos}</span>
       </div>
 
-      <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center">
-        <span className="font-bold text-primary">{hiperfoco.emoji} {elemento}</span>
-        <span className="text-muted-foreground"> está aqui treinando com você!</span>
-      </div>
+      {slug !== "motorzinho-dos-sons" && (
+        <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center">
+          <span className="font-bold text-primary">{hiperfoco.emoji} {elemento}</span>
+          <span className="text-muted-foreground"> está aqui treinando com você!</span>
+        </div>
+      )}
 
       <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
         <MechanicRenderer slug={slug} variation={variation} onConcluir={onConcluir} key={variation.id} />
