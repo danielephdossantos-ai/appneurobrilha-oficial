@@ -4,7 +4,14 @@ import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles,
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
-import { objetoImg } from "@/data/neuro-treino/objetos";
+import { objetoImg, emojiImg } from "@/data/neuro-treino/objetos";
+
+// Helper: renderiza ilustração se houver, senão cai pro emoji estilizado.
+function Obj({ emoji, nome, size = 80, className = "" }: { emoji?: string; nome?: string; size?: number; className?: string }) {
+  const img = objetoImg(nome) ?? emojiImg(emoji);
+  if (img) return <img src={img} alt={nome || emoji || ""} width={size} height={size} loading="lazy" className={`object-contain drop-shadow-md ${className}`} style={{ width: size, height: size }} />;
+  return <span className={className} style={{ fontSize: size * 0.7, lineHeight: 1 }}>{emoji}</span>;
+}
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
