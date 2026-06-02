@@ -940,42 +940,259 @@ function Onomatopeias({ p, onDone }: any) {
   );
 }
 
-// ============== 17. Ritmo e Sopro Visual ==============
-// Mecânica única: barra horizontal de comprimento variável; segurar = encher
+// ============== 17. Ritmo e Sopro Visual (Microfone real) ==============
+// A criança sopra/faz o som no microfone — o volume captado anima a cena (carrinho anda,
+// vela apaga, balão sobe...). Sem botão "SOPRE AQUI": é a voz/sopro real que move tudo.
 function RitmoSopro({ p, onDone }: any) {
-  const [holding, setHolding] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const ref = useRef<number | null>(null);
-  useEffect(() => {
-    if (holding) {
-      const start = Date.now();
-      ref.current = window.setInterval(() => {
-        const pct = Math.min(100, ((Date.now() - start) / (p.holdSeconds * 1000)) * 100);
+  const [micOn, setMicOn] = useState(false);
+  const [level, setLevel] = useState(0); // 0..1 volume instantâneo
+  const [progress, setProgress] = useState(0); // 0..100
+  const [erro, setErro] = useState<string | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const startedAtRef = useRef<number>(0);
+  const blowMsRef = useRef<number>(0); // tempo acumulado soprando
+  const lastTickRef = useRef<number>(0);
+  const doneRef = useRef(false);
+
+  const meta = p.holdSeconds * 1000; // ms necessários soprando
+
+  const stop = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = null;
+    streamRef.current?.getTracks().forEach((t) => t.stop());
+    streamRef.current = null;
+    audioCtxRef.current?.close().catch(() => {});
+    audioCtxRef.current = null;
+    analyserRef.current = null;
+  };
+
+  useEffect(() => () => stop(), []);
+
+  const iniciar = async () => {
+    setErro(null);
+    doneRef.current = false;
+    blowMsRef.current = 0;
+    setProgress(0);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
+      });
+      streamRef.current = stream;
+      const AC: typeof AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
+      const ctx = new AC();
+      audioCtxRef.current = ctx;
+      const src = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 1024;
+      src.connect(analyser);
+      analyserRef.current = analyser;
+      setMicOn(true);
+      startedAtRef.current = performance.now();
+      lastTickRef.current = performance.now();
+
+      const data = new Uint8Array(analyser.fftSize);
+      const tick = () => {
+        if (!analyserRef.current) return;
+        analyserRef.current.getByteTimeDomainData(data);
+        // RMS
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+          const v = (data[i] - 128) / 128;
+          sum += v * v;
+        }
+        const rms = Math.sqrt(sum / data.length); // 0..~1
+        const lvl = Math.min(1, rms * 4); // ganho
+        setLevel(lvl);
+
+        const now = performance.now();
+        const dt = now - lastTickRef.current;
+        lastTickRef.current = now;
+        const threshold = 0.12; // limiar de sopro/voz
+        if (lvl > threshold) {
+          blowMsRef.current += dt * Math.min(2, lvl / threshold);
+        } else {
+          blowMsRef.current = Math.max(0, blowMsRef.current - dt * 0.3);
+        }
+        const pct = Math.min(100, (blowMsRef.current / meta) * 100);
         setProgress(pct);
-        if (pct >= 100) { window.clearInterval(ref.current!); onDone(true); }
-      }, 50);
-    } else if (ref.current) window.clearInterval(ref.current);
-    return () => { if (ref.current) window.clearInterval(ref.current); };
-  }, [holding]);
+        if (pct >= 100 && !doneRef.current) {
+          doneRef.current = true;
+          stop();
+          setMicOn(false);
+          setTimeout(() => onDone(true), 600);
+          return;
+        }
+        rafRef.current = requestAnimationFrame(tick);
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    } catch (e: any) {
+      setErro("Não consegui acessar o microfone. Permita o uso para soprar.");
+    }
+  };
+
   return (
     <div className="text-center">
-      <div className="mb-4 flex justify-center">
-        <RenderEmoji e={p.veiculo} className="w-24 h-24" />
+      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1 flex items-center justify-center gap-1">
+        <Mic size={12} /> Sopre ou faça o som no microfone
       </div>
-      <div className="text-4xl font-black text-coral mb-6 px-4 py-2 bg-card border-2 border-coral/30 rounded-2xl inline-block">{p.silaba}</div>
-      <div className="mx-auto h-8 bg-muted rounded-full overflow-hidden mb-2" style={{ width: `${p.tamanho}%`, maxWidth: "90%" }}>
-        <div className="h-full bg-gradient-to-r from-sun to-coral transition-all" style={{ width: `${progress}%` }} />
+      <div className="text-4xl font-black text-coral mb-2">{p.silaba}</div>
+      <div className="text-sm font-bold text-foreground mb-4">{p.instrucao}</div>
+
+      <div className="mx-auto max-w-md mb-4">
+        <CenaSopro cena={p.cena} progress={progress} level={level} />
       </div>
-      <div className="text-xs text-muted-foreground mb-4">Tamanho do sopro: {p.tamanho}%</div>
-      <button
-        onMouseDown={()=>setHolding(true)} onMouseUp={()=>setHolding(false)} onMouseLeave={()=>setHolding(false)}
-        onTouchStart={()=>setHolding(true)} onTouchEnd={()=>setHolding(false)}
-        className="bg-coral text-white px-12 py-6 rounded-2xl font-black text-lg shadow-lg active:scale-95"
-      >
-        SOPRE AQUI
-      </button>
+
+      {/* Medidor de volume */}
+      <div className="mx-auto max-w-md mb-2">
+        <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 flex items-center justify-between">
+          <span>Volume do sopro</span>
+          <span>{Math.round(progress)}%</span>
+        </div>
+        <div className="h-3 bg-muted rounded-full overflow-hidden relative">
+          <div
+            className="h-full bg-gradient-to-r from-sun via-coral to-primary transition-[width] duration-75"
+            style={{ width: `${Math.min(100, level * 100)}%` }}
+          />
+        </div>
+        <div className="h-2 bg-muted/60 rounded-full overflow-hidden mt-1">
+          <div className="h-full bg-success transition-all" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+
+      {erro && (
+        <div className="text-xs text-coral bg-coral/10 rounded-lg p-2 max-w-md mx-auto flex items-center gap-2 justify-center mb-3">
+          <AlertCircle size={14} /> {erro}
+        </div>
+      )}
+
+      {!micOn ? (
+        <button
+          onClick={iniciar}
+          className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground px-10 py-5 rounded-full font-black text-lg shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3"
+        >
+          <Mic size={22} /> Ligar microfone
+        </button>
+      ) : (
+        <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-3 rounded-full font-black animate-pulse">
+          <Mic size={20} /> Ouvindo... sopre agora!
+        </div>
+      )}
     </div>
   );
+}
+
+// Cenas animadas pela força do sopro
+function CenaSopro({ cena, progress, level }: { cena: string; progress: number; level: number }) {
+  const p = Math.min(100, progress);
+  switch (cena) {
+    case "carro":
+      return (
+        <div className="relative h-40 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border">
+          <div className="absolute bottom-0 left-0 right-0 h-6 bg-emerald-300/60" />
+          <div className="absolute bottom-6 transition-all duration-150" style={{ left: `${4 + p * 0.85}%` }}>
+            <svg width="72" height="44" viewBox="0 0 72 44" className="drop-shadow-md">
+              <rect x="6" y="14" width="58" height="18" rx="6" fill="#ef4444" />
+              <rect x="18" y="6" width="34" height="14" rx="4" fill="#fca5a5" />
+              <circle cx="20" cy="34" r="7" fill="#1f2937" /><circle cx="20" cy="34" r="3" fill="#9ca3af" />
+              <circle cx="52" cy="34" r="7" fill="#1f2937" /><circle cx="52" cy="34" r="3" fill="#9ca3af" />
+            </svg>
+          </div>
+          <div className="absolute top-2 left-2 text-[10px] font-bold text-emerald-700">Chegada →</div>
+        </div>
+      );
+    case "vela": {
+      const flameScale = Math.max(0.05, 1 - p / 100);
+      return (
+        <div className="relative h-40 bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl overflow-hidden border-2 border-border flex items-end justify-center pb-4">
+          <div className="flex flex-col items-center">
+            <div
+              className="origin-bottom transition-transform duration-150"
+              style={{ transform: `scale(${flameScale}) translateX(${(level - 0.3) * 30}px)` }}
+            >
+              <svg width="40" height="60" viewBox="0 0 40 60">
+                <path d="M20 4 C 28 18, 36 28, 28 44 C 24 52, 16 52, 12 44 C 4 28, 12 18, 20 4 Z" fill="#fbbf24" />
+                <path d="M20 16 C 24 24, 28 30, 24 40 C 22 46, 18 46, 16 40 C 12 30, 16 24, 20 16 Z" fill="#fde68a" />
+              </svg>
+            </div>
+            <div className="w-8 h-20 bg-gradient-to-b from-rose-200 to-rose-400 rounded-sm" />
+            <div className="w-12 h-2 bg-rose-500 rounded-full -mt-1" />
+          </div>
+          {p >= 100 && (
+            <div className="absolute inset-0 flex items-center justify-center text-2xl font-black text-emerald-600">Apagou!</div>
+          )}
+        </div>
+      );
+    }
+    case "balao":
+      return (
+        <div className="relative h-48 bg-gradient-to-b from-sky-200 to-sky-50 rounded-2xl overflow-hidden border-2 border-border">
+          <div className="absolute left-1/2 -translate-x-1/2 transition-all duration-150" style={{ bottom: `${4 + p * 0.8}%` }}>
+            <svg width="64" height="84" viewBox="0 0 64 84">
+              <ellipse cx="32" cy="30" rx="26" ry="30" fill="#ef4444" />
+              <ellipse cx="24" cy="22" rx="6" ry="9" fill="#fca5a5" opacity="0.7" />
+              <polygon points="28,58 36,58 32,66" fill="#b91c1c" />
+              <line x1="32" y1="66" x2="32" y2="82" stroke="#374151" strokeWidth="1.5" />
+            </svg>
+          </div>
+        </div>
+      );
+    case "moinho": {
+      const angle = p * 7.2; // 0..720°
+      return (
+        <div className="relative h-48 bg-gradient-to-b from-sky-100 to-emerald-100 rounded-2xl overflow-hidden border-2 border-border flex items-end justify-center pb-2">
+          <div className="relative">
+            <div className="w-10 h-24 bg-stone-300 rounded-t-md mx-auto" />
+            <div className="absolute top-2 left-1/2 -translate-x-1/2" style={{ transform: `translateX(-50%) rotate(${angle}deg)`, transformOrigin: "center" }}>
+              <svg width="80" height="80" viewBox="-40 -40 80 80">
+                {[0, 90, 180, 270].map((a) => (
+                  <g key={a} transform={`rotate(${a})`}>
+                    <polygon points="0,-4 30,-10 30,10 0,4" fill="#dc2626" />
+                  </g>
+                ))}
+                <circle r="5" fill="#1f2937" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    case "barco":
+      return (
+        <div className="relative h-40 bg-gradient-to-b from-sky-200 to-sky-400 rounded-2xl overflow-hidden border-2 border-border">
+          <div className="absolute bottom-0 left-0 right-0 h-10 bg-blue-600/70" />
+          <div className="absolute bottom-8 transition-all duration-150" style={{ left: `${4 + p * 0.85}%` }}>
+            <svg width="70" height="60" viewBox="0 0 70 60">
+              <polygon points="35,4 35,42 8,42" fill="#fef3c7" stroke="#92400e" strokeWidth="1.5" />
+              <line x1="35" y1="2" x2="35" y2="46" stroke="#78350f" strokeWidth="2" />
+              <path d="M2 46 Q 35 56 68 46 L 62 56 L 8 56 Z" fill="#92400e" />
+            </svg>
+          </div>
+        </div>
+      );
+    case "bolha": {
+      const r = 8 + p * 0.6;
+      return (
+        <div className="relative h-48 bg-gradient-to-b from-pink-50 to-violet-100 rounded-2xl overflow-hidden border-2 border-border flex items-center justify-center">
+          <svg width="200" height="180" viewBox="0 0 200 180">
+            <defs>
+              <radialGradient id="bub" cx="40%" cy="40%">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+                <stop offset="60%" stopColor="#c4b5fd" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.3" />
+              </radialGradient>
+            </defs>
+            <rect x="80" y="120" width="40" height="40" rx="6" fill="#a78bfa" />
+            <circle cx="100" cy={120 - r * 0.6} r={r} fill="url(#bub)" stroke="#a78bfa" strokeWidth="1.5" />
+          </svg>
+        </div>
+      );
+    }
+    default:
+      return null;
+  }
 }
 
 // ============== 18. Sons do Corpo / Paromatopeias ==============
