@@ -29,14 +29,18 @@ export class PedagogyEngine {
     return BNCC_SKILLS.filter((s) => s.level <= studentLevel && !masteredIds.has(s.id));
   }
 
-  static generateDailyRoutine(day: number, childProfile: any, activities: any[]): JourneyBlock[] {
+  static generateDailyRoutine(
+    day: number,
+    childProfile: Record<string, unknown> & { tempo_atencao_min?: number },
+    activities: Array<Record<string, unknown> & { category?: string; name?: string; id?: string; subcategory?: string }>
+  ): JourneyBlock[] {
     // Deterministicamente escolhe atividades baseadas no dia para cobrir os 365 dias.
     // Usa multiplicador primo para evitar repetição óbvia quando N < 365.
     const seed = day;
     const neuroActivities = activities.filter((a) => a.category === "neuro-treino");
     const schoolActivities = activities.filter((a) => a.category === "escola-brilha");
 
-    const getDeterministic = (arr: any[], offset: number) => {
+    const getDeterministic = <T,>(arr: T[], offset: number): T | null => {
       if (arr.length === 0) return null;
       // Mistura linear: (seed * 31 + offset * 17) — boa dispersão para conjuntos pequenos
       return arr[(seed * 31 + offset * 17) % arr.length];
