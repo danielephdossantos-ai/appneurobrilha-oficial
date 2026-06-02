@@ -994,7 +994,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     </div>
                   </div>
                 )}
-              </div>
+              </>
             )}
           </Card>
           <button onClick={() => setAula(null)} className="text-sm text-muted-foreground hover:text-foreground">← Voltar para matérias</button>
