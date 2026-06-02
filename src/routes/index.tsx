@@ -1,48 +1,108 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Shell, PageHeader, Pill } from "@/components/Layout";
+import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { GraduationCap, Sparkles, Brain, Compass, ShieldCheck, MessagesSquare, AlertTriangle, ArrowRight, Zap, Activity, Plus, Star, Award, Heart, Puzzle } from "lucide-react";
+import { Plus, Sparkles } from "lucide-react";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
-import { KidCard } from "@/components/ui/KidCard";
-import { KidButton } from "@/components/ui/KidButton";
-import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
-
-
-
+import { cn } from "@/utils/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NeuroBrilha Kids — Início" },
-      { name: "description", content: "Escolha quem vai brilhar hoje e continue a jornada de aprendizagem adaptativa." },
+      { title: "NeuroBrilha Kids — Cidade Mágica" },
+      { name: "description", content: "Entre na cidade mágica do Pip e comece sua aventura de aprendizagem." },
     ],
   }),
   component: Index,
 });
 
+type Destino = {
+  to: string;
+  params?: any;
+  title: string;
+  subtitle: string;
+  gradient: string;
+  glow: string;
+  icon: string;
+  building: React.ReactNode;
+};
+
 function Index() {
   const { children: allChildren, activeChild, setActiveChild, isLoading, session } = useAppState();
-  const engine = usePedagogicalEngine();
   const navigate = useNavigate();
   const [showEggHatch, setShowEggHatch] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
 
-  // Onboarding obrigatório: nova conta sem crianças → anamnese
   useEffect(() => {
     if (!isLoading && session && allChildren.length === 0) {
       navigate({ to: "/anamnese/$childId", params: { childId: "nova" }, replace: true });
     }
   }, [isLoading, session, allChildren.length, navigate]);
 
-  // Cinemática do ovo: primeira vez que a criança entra após anamnese
   useEffect(() => {
     if (activeChild?.id && activeChild.anamnese_completa && shouldShowEggHatch(activeChild.id)) {
       setShowEggHatch(true);
     }
   }, [activeChild?.id, activeChild?.anamnese_completa]);
+
+  const destinos: Destino[] = [
+    {
+      to: "/escola-brilha",
+      title: "Escola Brilha",
+      subtitle: "Academia do Conhecimento",
+      gradient: "from-[#4C9EFF] to-[#1E5FCC]",
+      glow: "rgba(76,158,255,0.55)",
+      icon: "🏫",
+      building: <SchoolBuilding />,
+    },
+    {
+      to: "/neuro-treino",
+      title: "Neuro Treino",
+      subtitle: "Centro Cerebral",
+      gradient: "from-[#9B6CFF] to-[#5A2DC9]",
+      glow: "rgba(155,108,255,0.55)",
+      icon: "🧠",
+      building: <BrainTower />,
+    },
+    {
+      to: "/reforco-brilha",
+      title: "Reforço Brilha",
+      subtitle: "Professor Particular",
+      gradient: "from-[#FF8A4C] to-[#D45A1A]",
+      glow: "rgba(255,138,76,0.55)",
+      icon: "📚",
+      building: <StudyHouse />,
+    },
+    {
+      to: "/loja-mascotes",
+      title: "Loja do Pip",
+      subtitle: "Shopping do Saber",
+      gradient: "from-[#FFC93C] to-[#E89B00]",
+      glow: "rgba(255,201,60,0.6)",
+      icon: "🎁",
+      building: <Shop />,
+    },
+    {
+      to: "/colecao-pip",
+      title: "Conquistas",
+      subtitle: "Galeria de Troféus",
+      gradient: "from-[#3BD68B] to-[#0E9D5B]",
+      glow: "rgba(59,214,139,0.55)",
+      icon: "🏆",
+      building: <TrophyHall />,
+    },
+    {
+      to: "/painel-pais",
+      title: "Área dos Pais",
+      subtitle: "Acompanhamento",
+      gradient: "from-[#FF6FA8] to-[#C73774]",
+      glow: "rgba(255,111,168,0.55)",
+      icon: "👨‍👩‍👧",
+      building: <FamilyHouse />,
+    },
+  ];
 
   return (
     <Shell>
@@ -51,208 +111,305 @@ function Index() {
           <EggHatchCinematic childId={activeChild.id} onClose={() => setShowEggHatch(false)} />
         )}
       </AnimatePresence>
-      <PageHeader
-        emoji="✨"
-        title={`Bem-vindo, ${activeChild?.nome ?? "amigo"}!`}
-        subtitle="Sua jornada neuro-divertida começa aqui."
-      />
 
+      {/* CIDADE MÁGICA */}
+      <div className="relative w-full min-h-[88vh] -mt-6 rounded-[3rem] overflow-hidden border-4 border-white shadow-glow"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 110%, #1a3a8c 0%, #0d1f55 45%, #050a2c 100%)",
+        }}
+      >
+        {/* Estrelas */}
+        <Stars />
+        {/* Aurora */}
+        <div className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 10%, rgba(155,108,255,0.35), transparent 50%), radial-gradient(ellipse at 80% 15%, rgba(76,158,255,0.35), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(255,201,60,0.25), transparent 60%)",
+          }}
+        />
+        {/* Montanhas / horizonte */}
+        <svg viewBox="0 0 1200 300" className="absolute bottom-0 left-0 w-full h-[28%] pointer-events-none" preserveAspectRatio="none">
+          <path d="M0,300 L0,180 L150,90 L280,170 L420,80 L560,160 L700,70 L860,150 L1000,90 L1200,160 L1200,300 Z" fill="#0a1740" />
+          <path d="M0,300 L0,230 L120,170 L260,220 L420,160 L580,210 L740,150 L900,200 L1060,160 L1200,210 L1200,300 Z" fill="#06102e" />
+        </svg>
 
-      <div className="flex flex-col lg:flex-row items-center gap-12 mb-16 bg-gradient-to-br from-primary/5 via-white to-secondary/5 p-12 rounded-[4rem] border-4 border-primary/20 shadow-glow relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-           <Puzzle size={120} className="text-primary rotate-12" />
-        </div>
-        <div className="absolute bottom-0 left-0 p-12 opacity-5 pointer-events-none">
-           <Star size={80} className="text-sun -rotate-12" />
-        </div>
-
-        <div className="flex-shrink-0">
-          <KidLiveMascot 
-            size="2xl" 
-            emotion="waving" 
-            message={`E aí, ${activeChild?.nome}! Pronto para brilhar?`}
-          />
-        </div>
-        <div className="flex-1 text-center lg:text-left space-y-6 relative z-10">
-          <div className="flex justify-center lg:justify-start">
-            <motion.div 
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              className="inline-flex items-center gap-3 bg-sun px-6 py-2 rounded-2xl text-primary font-black uppercase tracking-widest text-xs border-4 border-white shadow-soft"
+        {/* Header flutuante */}
+        <div className="relative z-10 flex items-center justify-between p-6 md:p-10">
+          <div className="flex items-center gap-3">
+            <motion.div
+              animate={{ rotate: [0, 8, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="text-4xl"
             >
-              <Award className="w-5 h-5 fill-primary/20" />
-              Personagem Principal
+              ✨
             </motion.div>
+            <div>
+              <div className="text-white/60 text-xs font-black uppercase tracking-[0.3em]">Bem-vindo à</div>
+              <h1 className="text-white text-2xl md:text-4xl font-black leading-none">
+                Cidade do <span className="text-[#FFC93C]">Pip</span>
+              </h1>
+            </div>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.1]">
-            Eu sou o Pip! <br/>
-            <span className="text-secondary">O Guardião dos Desafios</span>
-          </h2>
-          <p className="text-muted-foreground text-xl md:text-2xl max-w-2xl font-medium">
-            Juntos vamos transformar cada aprendizado em uma peça brilhante do seu quebra-cabeça do conhecimento!
-          </p>
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-             <div className="bg-primary/10 px-6 py-3 rounded-2xl font-black text-primary uppercase tracking-widest text-xs border-2 border-primary/20 flex items-center gap-2">
-               <Sparkles className="w-4 h-4" /> Curioso
-             </div>
-             <div className="bg-success/10 px-6 py-3 rounded-2xl font-black text-success uppercase tracking-widest text-xs border-2 border-success/20 flex items-center gap-2">
-               <Heart className="w-4 h-4" /> Amigável
-             </div>
-             <div className="bg-sun/10 px-6 py-3 rounded-2xl font-black text-warning-foreground uppercase tracking-widest text-xs border-2 border-sun/20 flex items-center gap-2">
-               <Brain className="w-4 h-4" /> Inteligente
-             </div>
+          {activeChild && (
+            <div className="hidden md:flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-full border-2 border-white/20">
+              <div className="h-10 w-10 rounded-full bg-white/20 grid place-items-center text-2xl">{activeChild.avatar}</div>
+              <div>
+                <div className="text-white font-black text-sm">{activeChild.nome}</div>
+                <div className="text-white/60 text-[10px] font-bold uppercase tracking-widest">{activeChild.serie}</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* PIP NO CENTRO */}
+        <div className="relative z-20 flex flex-col items-center justify-center mt-2 mb-8 md:mb-12">
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative"
+          >
+            {/* Halo */}
+            <div className="absolute inset-0 -m-12 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(255,201,60,0.4), transparent 65%)",
+                filter: "blur(20px)",
+              }}
+            />
+            <div className="relative scale-[1.3] md:scale-[1.6]">
+              <KidLiveMascot size="2xl" emotion="happy" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 bg-white/95 backdrop-blur px-6 py-3 rounded-2xl shadow-xl border-2 border-[#FFC93C] max-w-md text-center"
+          >
+            <p className="text-[#0d1f55] font-black text-base md:text-lg leading-tight">
+              {activeChild
+                ? `Oi ${activeChild.nome}! Pra onde vamos hoje?`
+                : "Escolha um aventureiro pra começar!"}
+            </p>
+          </motion.div>
+        </div>
+
+        {/* 6 DESTINOS — CIDADE */}
+        <div className="relative z-10 px-4 md:px-10 pb-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-7 max-w-6xl mx-auto">
+            {destinos.map((d, i) => (
+              <Link key={d.to} to={d.to} className="group">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i, type: "spring", stiffness: 100 }}
+                  whileHover={{ y: -8, scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onHoverStart={() => setHovered(d.to)}
+                  onHoverEnd={() => setHovered(null)}
+                  className={cn(
+                    "relative rounded-[2rem] p-5 md:p-6 cursor-pointer overflow-hidden border-4 border-white/90",
+                    "bg-gradient-to-br", d.gradient,
+                  )}
+                  style={{
+                    boxShadow: `0 12px 0 rgba(0,0,0,0.25), 0 0 40px ${d.glow}`,
+                  }}
+                >
+                  {/* sparkle */}
+                  <Sparkles className="absolute top-3 right-3 text-white/40 w-5 h-5" />
+                  {/* construção */}
+                  <div className="h-28 md:h-36 flex items-end justify-center mb-3">
+                    <motion.div
+                      animate={hovered === d.to ? { y: [-2, -6, -2] } : {}}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="w-full max-w-[160px]"
+                    >
+                      {d.building}
+                    </motion.div>
+                  </div>
+
+                  <div className="relative z-10 bg-white/95 rounded-2xl p-3 text-center">
+                    <div className="text-xl md:text-2xl font-black text-[#0d1f55] leading-tight">
+                      {d.title}
+                    </div>
+                    <div className="text-[10px] md:text-xs font-black uppercase tracking-widest text-[#0d1f55]/60 mt-0.5">
+                      {d.subtitle}
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
 
-
-      <h2 className="text-2xl font-black mb-6 uppercase tracking-widest text-foreground/60 flex items-center gap-3">
-        <Sparkles size={24} className="text-sun" />
-        Quem vai brilhar hoje?
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-
-        {allChildren.map((c: any) => (
-          <button
-            key={c.id}
-            onClick={() => setActiveChild(c.id)}
-            className="group relative"
-          >
-            <KidCard 
-              variant={c.id === activeChild?.id ? 'sky' : 'white'}
-              className={`text-left h-full transition-all active:scale-95 ${
+      {/* ESCOLHA DA CRIANÇA */}
+      <div className="mt-10">
+        <h2 className="text-xl font-black mb-4 uppercase tracking-[0.25em] text-[#0d1f55]/70 flex items-center gap-3">
+          <Sparkles className="text-[#FFC93C]" />
+          Quem vai brilhar?
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {allChildren.map((c: any) => (
+            <button
+              key={c.id}
+              onClick={() => setActiveChild(c.id)}
+              className={cn(
+                "text-left rounded-3xl p-4 border-4 transition-all active:scale-95",
                 c.id === activeChild?.id
-                  ? "border-primary shadow-kid [--shadow-color:oklch(var(--primary-dark))]"
-                  : "border-border hover:border-primary/40"
-              }`}
+                  ? "bg-gradient-to-br from-[#4C9EFF] to-[#1E5FCC] border-[#FFC93C] text-white shadow-xl"
+                  : "bg-white border-white hover:border-[#4C9EFF]/40 shadow-md",
+              )}
+              style={c.id === activeChild?.id ? { boxShadow: "0 8px 0 rgba(0,0,0,0.15), 0 0 30px rgba(76,158,255,0.5)" } : {}}
             >
-              <div className="flex items-center gap-5">
-                <div className="h-20 w-20 rounded-3xl bg-secondary grid place-items-center text-5xl shadow-inner group-hover:scale-110 transition-transform">
+              <div className="flex items-center gap-3">
+                <div className="h-14 w-14 rounded-2xl bg-white/30 grid place-items-center text-3xl">
                   {c.avatar}
                 </div>
-                <div>
-                  <div className="text-xl font-black text-foreground">{c.nome}</div>
-                  <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">{c.idade} anos · {c.serie}</div>
-                  <div className="mt-2 flex gap-2">
-                    <Pill tone="info" className="px-3 py-1 text-[10px]">{c.diagnostico.toUpperCase()}</Pill>
-                    {!c.anamnese_completa && <Pill tone="warning" className="px-3 py-1 text-[10px]">INCOMPLETO</Pill>}
+                <div className="min-w-0">
+                  <div className="font-black truncate">{c.nome}</div>
+                  <div className={cn("text-[10px] font-bold uppercase tracking-wider", c.id === activeChild?.id ? "text-white/80" : "text-[#0d1f55]/60")}>
+                    {c.idade}a · {c.serie}
                   </div>
                 </div>
               </div>
-            </KidCard>
-          </button>
-        ))}
-        <Link
-          to="/anamnese/$childId"
-          params={{ childId: "nova" }}
-          className="group"
-        >
-          <KidCard variant="white" className="border-4 border-dashed border-primary/20 hover:border-primary/50 transition-all h-full min-h-[100px] flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+            </button>
+          ))}
+          <Link
+            to="/anamnese/$childId"
+            params={{ childId: "nova" }}
+            className="rounded-3xl p-4 border-4 border-dashed border-[#4C9EFF]/40 bg-white/60 hover:bg-white hover:border-[#4C9EFF] transition-all flex items-center justify-center gap-2 min-h-[88px]"
+          >
+            <div className="w-9 h-9 rounded-full bg-[#4C9EFF] text-white grid place-items-center">
               <Plus strokeWidth={3} />
             </div>
-            <span className="font-black text-primary uppercase tracking-widest text-sm">Nova Criança</span>
-          </KidCard>
-        </Link>
-      </div>
-
-      {activeChild && !activeChild.anamnese_completa && (
-        <KidCard variant="sun" className="mb-10 border-sun shadow-kid [--shadow-color:oklch(var(--sun-dark))]">
-          <div className="flex items-center gap-5">
-            <div className="h-16 w-16 rounded-full bg-sun flex items-center justify-center text-3xl animate-bounce-gentle">
-              ⚠️
-            </div>
-            <div className="flex-1">
-              <div className="text-xl font-black text-warning-foreground leading-tight">Anamnese de {activeChild.nome} pendente</div>
-              <p className="text-sm font-bold text-warning-foreground/70 mt-1 uppercase tracking-wider">Essencial para IA pedagógica funcionar</p>
-            </div>
-            <Link to="/anamnese/$childId" params={{ childId: activeChild.id }}>
-              <KidButton variant="sun" size="sm">INICIAR</KidButton>
-            </Link>
-          </div>
-        </KidCard>
-      )}
-
-      {engine && (
-        <div className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <KidCard variant="white" className="border-primary/20 bg-primary/5">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-xl bg-primary text-white">
-                <Zap size={20} strokeWidth={3} />
-              </div>
-              <h3 className="font-black text-sm uppercase tracking-widest text-primary">Motor Neuroadaptativo</h3>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-               {[
-                 { label: 'Dificuldade', value: `x${engine.adaptive.difficulty.toFixed(1)}`, color: 'text-primary' },
-                 { label: 'Pausas', value: `${engine.adaptive.breakFrequency} min`, color: 'text-foreground' },
-                 { label: 'Instrução', value: engine.adaptive.instructionType, color: 'text-foreground' },
-                 { label: 'Estímulos', value: engine.adaptive.stimuliLevel, color: 'text-foreground' },
-               ].map((item) => (
-                 <div key={item.label} className="bg-white/50 p-3 rounded-2xl border border-primary/10">
-                    <div className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">{item.label}</div>
-                    <div className={cn("text-sm font-black capitalize", item.color)}>{item.value}</div>
-                 </div>
-               ))}
-            </div>
-          </KidCard>
-
-          <KidCard variant="white" className="border-success/20 bg-success/5">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-xl bg-success text-white">
-                <Activity size={20} strokeWidth={3} />
-              </div>
-              <h3 className="font-black text-sm uppercase tracking-widest text-success">
-                Perfil Sensorial: {activeChild?.sensory_mode || "FOCO"}
-              </h3>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex gap-2 flex-wrap">
-                <Pill tone="success" className="px-4 py-1.5 rounded-xl font-black">SOM {engine.sensory.soundVolume * 100}%</Pill>
-                <Pill tone="info" className="px-4 py-1.5 rounded-xl font-black">LUZ {engine.sensory.brightness * 100}%</Pill>
-                <Pill tone="default" className="px-4 py-1.5 rounded-xl font-black">FONTE {engine.sensory.fontSize}PX</Pill>
-              </div>
-              <p className="text-[10px] font-bold text-success/60 uppercase tracking-widest">
-                * Calibrado para perfil {activeChild?.diagnostico}
-              </p>
-            </div>
-          </KidCard>
+            <span className="font-black text-[#0d1f55] uppercase tracking-widest text-xs">Nova Criança</span>
+          </Link>
         </div>
-      )}
 
-      <h2 className="text-2xl font-black mb-6 uppercase tracking-widest text-foreground/60 flex items-center gap-3">
-        <Compass size={24} className="text-primary" />
-        Explore sua Jornada
-      </h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-        <Tile to="/historias" emoji="📚" title="HISTÓRIAS" desc="Livrinho interativo" color="from-[#6C5CE7]/30 to-[#6C5CE7]/5" shadow="oklch(0.5 0.15 300)" />
-        <Tile to="/escola-brilha" emoji="🎓" title="Escola Brilha" desc="BNCC 1º–9º" color="from-primary/30 to-primary/5" shadow="oklch(var(--primary-dark))" />
-        <Tile to="/reforco-brilha" emoji="✨" title="REFORÇO BRILHA" desc="Ensino infinito" color="from-petal/30 to-petal/5" shadow="oklch(var(--petal-dark))" />
-        <Tile to="/neuro-treino" emoji="🧠" title="Neuro-Treino" desc="Reforço clínico" color="from-sky/30 to-sky/5" shadow="oklch(var(--sky-dark))" />
-        <Tile to="/jornada-365" emoji="🧭" title="Jornada 365" desc="Sua rotina" color="from-sun/30 to-sun/5" shadow="oklch(var(--sun-dark))" />
-        <Tile to="/amigo-virtual" emoji="🦄" title="Amigo Virtual" desc="IA & Estudo" color="from-lilac/30 to-lilac/5" shadow="oklch(0.7 0.1 300)" />
+        {activeChild && !activeChild.anamnese_completa && (
+          <Link to="/anamnese/$childId" params={{ childId: activeChild.id }}>
+            <div className="mt-6 rounded-3xl p-5 bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] border-4 border-white shadow-xl flex items-center gap-4 hover:scale-[1.01] transition-transform">
+              <div className="text-4xl animate-bounce-gentle">⚠️</div>
+              <div className="flex-1">
+                <div className="font-black text-[#0d1f55] text-lg leading-tight">
+                  Anamnese de {activeChild.nome} pendente
+                </div>
+                <div className="text-[11px] font-black uppercase tracking-widest text-[#0d1f55]/70">
+                  Toque para começar
+                </div>
+              </div>
+            </div>
+          </Link>
+        )}
       </div>
-
     </Shell>
   );
 }
 
-function Tile({ to, emoji, title, desc, color, shadow }: { to: string; emoji: string; title: string; desc: string; color: string; shadow: string }) {
+/* ---------- CONSTRUÇÕES SVG ---------- */
+
+function SchoolBuilding() {
   return (
-    <Link to={to} className="group">
-      <KidCard 
-        className={cn(
-          `rounded-3xl p-6 bg-gradient-to-br ${color} border-2 border-white/50 shadow-kid hover:translate-y-[-4px] active:translate-y-[2px] active:shadow-kid-active transition-all h-full flex flex-col gap-2`,
-        )}
-        style={{ '--shadow-color': shadow } as React.CSSProperties}
-      >
-        <span className="text-5xl mb-2 group-hover:scale-125 transition-transform origin-left">{emoji}</span>
-        <span className="font-black text-lg leading-tight uppercase tracking-wide">{title}</span>
-        <span className="text-xs font-bold text-foreground/50 flex items-center gap-1 uppercase tracking-widest">{desc} <ArrowRight className="h-4 w-4" strokeWidth={3} /></span>
-      </KidCard>
-    </Link>
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <polygon points="80,15 20,55 140,55" fill="#FFC93C" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="30" y="55" width="100" height="70" fill="#fff" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="70" y="80" width="20" height="45" fill="#FF8A4C" stroke="#0d1f55" strokeWidth="2.5" />
+      <rect x="40" y="65" width="18" height="18" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2" />
+      <rect x="102" y="65" width="18" height="18" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2" />
+      <rect x="76" y="0" width="8" height="20" fill="#0d1f55" />
+      <polygon points="84,2 110,9 84,16" fill="#FF6FA8" stroke="#0d1f55" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function BrainTower() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <rect x="50" y="50" width="60" height="80" fill="#fff" stroke="#0d1f55" strokeWidth="3" rx="6" />
+      <ellipse cx="80" cy="40" rx="35" ry="25" fill="#FF6FA8" stroke="#0d1f55" strokeWidth="3" />
+      <path d="M55 40 Q 65 25 80 30 Q 95 25 105 40" fill="none" stroke="#0d1f55" strokeWidth="2.5" />
+      <path d="M60 45 Q 80 55 100 45" fill="none" stroke="#0d1f55" strokeWidth="2.5" />
+      <rect x="68" y="95" width="24" height="35" fill="#9B6CFF" stroke="#0d1f55" strokeWidth="2.5" />
+      <circle cx="62" cy="70" r="5" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <circle cx="98" cy="70" r="5" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function StudyHouse() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <polygon points="80,20 25,65 135,65" fill="#FF8A4C" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="35" y="65" width="90" height="60" fill="#fff" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="50" y="80" width="60" height="32" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2.5" rx="3" />
+      <line x1="50" y1="96" x2="110" y2="96" stroke="#fff" strokeWidth="2" />
+      <line x1="80" y1="80" x2="80" y2="112" stroke="#fff" strokeWidth="2" />
+      <rect x="70" y="115" width="20" height="10" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function Shop() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <rect x="25" y="45" width="110" height="80" fill="#fff" stroke="#0d1f55" strokeWidth="3" rx="4" />
+      <path d="M25 45 Q 30 30 45 35 Q 55 28 70 35 Q 85 28 100 35 Q 115 28 130 35 Q 140 30 135 45 Z" fill="#FF6FA8" stroke="#0d1f55" strokeWidth="2.5" />
+      <rect x="40" y="60" width="35" height="40" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2.5" rx="3" />
+      <rect x="85" y="60" width="35" height="40" fill="#9B6CFF" stroke="#0d1f55" strokeWidth="2.5" rx="3" />
+      <circle cx="80" cy="115" r="6" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function TrophyHall() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <rect x="25" y="55" width="110" height="70" fill="#fff" stroke="#0d1f55" strokeWidth="3" />
+      <polygon points="20,55 80,15 140,55" fill="#3BD68B" stroke="#0d1f55" strokeWidth="3" />
+      <path d="M65 70 Q 65 95 80 100 Q 95 95 95 70 Z" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2.5" />
+      <rect x="73" y="100" width="14" height="8" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <rect x="65" y="108" width="30" height="6" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <circle cx="55" cy="80" r="4" fill="#FFC93C" stroke="#0d1f55" strokeWidth="1.5" />
+      <circle cx="105" cy="80" r="4" fill="#FFC93C" stroke="#0d1f55" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function FamilyHouse() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <polygon points="80,18 25,60 135,60" fill="#FF6FA8" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="35" y="60" width="90" height="65" fill="#fff" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="68" y="85" width="24" height="40" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2.5" rx="3" />
+      <rect x="45" y="72" width="14" height="14" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <rect x="101" y="72" width="14" height="14" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <path d="M55 60 Q 80 40 105 60" fill="none" stroke="#FF8A4C" strokeWidth="2.5" strokeDasharray="3 3" />
+      <text x="80" y="55" textAnchor="middle" fontSize="14" fill="#FFC93C">♥</text>
+    </svg>
+  );
+}
+
+function Stars() {
+  const stars = Array.from({ length: 40 }, (_, i) => ({
+    x: Math.random() * 100,
+    y: Math.random() * 60,
+    s: Math.random() * 2 + 1,
+    d: Math.random() * 3,
+    id: i,
+  }));
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {stars.map((st) => (
+        <motion.div
+          key={st.id}
+          className="absolute rounded-full bg-white"
+          style={{ left: `${st.x}%`, top: `${st.y}%`, width: st.s, height: st.s }}
+          animate={{ opacity: [0.2, 1, 0.2] }}
+          transition={{ duration: 2 + st.d, repeat: Infinity, delay: st.d }}
+        />
+      ))}
+    </div>
   );
 }
