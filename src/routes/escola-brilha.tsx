@@ -231,29 +231,16 @@ function Escola() {
   };
 
 
-  const carregarAula = async (materiaId: string, topic?: string) => {
+  const carregarAula = async (materiaId: string, topic?: string, preset?: { activity: any; ordem?: number }) => {
     if (!activeChild) return;
     setLoading(true);
     try {
-      // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
+      // 1. O SISTEMA gera (ou reusa do banco) a atividade
       const service = ActivityProceduralService.getInstance();
-      // Mapa de matéria → domínio do gerador
-      const domainMap: Record<string, string> = {
-        matematica: "math",
-        artes: "math",          // EI: cores/formas; demais séries: padrões visuais
-        portugues: "linguistics",
-        ciencias: "linguistics", // EI: animais; demais: leitura temática
-        historia: "linguistics",
-        geografia: "linguistics",
-      };
-      const domain = domainMap[materiaId] || "linguistics";
-
-      // Em Educação Infantil, dificuldade muito baixa e fixa
+      const domain = DOMAIN_MAP[materiaId] || "linguistics";
       const difficulty = isEI(selectedGrade) ? 0.15 : 0.5;
 
-      console.log("Generating activity for domain:", domain, "grade:", selectedGrade, "subject:", materiaId);
-
-      const activity = service.generateActivity({
+      const activity = preset?.activity ?? service.generateActivity({
         domain,
         difficulty,
         grade: selectedGrade,
@@ -266,6 +253,7 @@ function Escola() {
         },
         previousActivityIds: []
       });
+
 
 
       console.log("Activity generated:", activity);
