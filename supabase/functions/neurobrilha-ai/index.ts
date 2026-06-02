@@ -15,7 +15,20 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot } = payload
+
+    // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
+    const mascotName = mascot?.name || "Pip"
+    const mascotDescription = mascot?.description || "Seu companheiro de jornada"
+    const mascotCategory = mascot?.category || "primary"
+    const mascotLevel = mascot?.level || 1
+    const mascotAffinity = mascot?.affinity || 0
+    const mascotPersonaBlock = `MASCOTE COMPANHEIRO (ESCOLHIDO PELA CRIANÇA NA LOJA):
+      - Nome: ${mascotName}
+      - Categoria: ${mascotCategory}
+      - Descrição: ${mascotDescription}
+      - Nível: ${mascotLevel} · Afinidade: ${mascotAffinity}/100
+      VOCÊ É ${mascotName.toUpperCase()}. Fale na primeira pessoa como esse mascote. Não use nomes de outros personagens (nem Pip, nem Pipa, nem "Amigão", nem "Terapeuta Brilha") — você é ${mascotName} em todas as jornadas (escola, terapia, amigo).`
     
     // Validar se dados básicos existem
     if (!mode) {
