@@ -11,6 +11,16 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
 import { EIMiniGame } from "@/components/escola/EIMiniGame";
+import imgPortugues from "@/assets/escola-brilha/portugues.png";
+import imgMatematica from "@/assets/escola-brilha/matematica.png";
+import imgCiencias from "@/assets/escola-brilha/ciencias.png";
+import imgHistoria from "@/assets/escola-brilha/historia.png";
+import imgGeografia from "@/assets/escola-brilha/geografia.png";
+import imgArtes from "@/assets/escola-brilha/artes.png";
+import imgLinguagemEI from "@/assets/escola-brilha/linguagem-ei.png";
+import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
+import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
+import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
@@ -61,20 +71,20 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 function isEI(grade: string) {
@@ -530,20 +540,25 @@ function Escola() {
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
-            <div className="absolute -right-2 -top-2 text-4xl opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-all">
-              {m.cenario}
+            <div className="flex justify-center">
+              <img
+                src={m.img}
+                alt={m.nome}
+                loading="lazy"
+                width={512}
+                height={512}
+                className="w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-md group-hover:scale-110 transition-transform"
+              />
             </div>
-            <div className="text-5xl drop-shadow-sm group-hover:scale-110 transition-transform inline-block">{m.emoji}</div>
-            <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
-              <span className="text-base">{m.mascote}</span>
-              <span><b>{m.mascoteNome}</b> te guia</span>
+            <div className="font-extrabold text-lg mt-3 text-center">{m.nome}</div>
+            <div className="flex items-center justify-center gap-1.5 mt-1 text-xs text-muted-foreground">
+              <b>{m.mascoteNome}</b> te guia
             </div>
             {ei && m.descricao && (
-              <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
+              <div className="text-xs text-muted-foreground mt-1 text-center">{m.descricao}</div>
             )}
             {!ei && (
-              <div className="mt-2"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
+              <div className="mt-2 flex justify-center"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
             )}
             <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
@@ -587,7 +602,7 @@ function Escola() {
                       : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
                   }`}
                 >
-                  <div className="text-2xl leading-none">{meta.emoji}</div>
+                  <img src={meta.img} alt={meta.nome} loading="lazy" width={512} height={512} className="w-10 h-10 object-contain" />
                   <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
                   {done && (
                     <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
