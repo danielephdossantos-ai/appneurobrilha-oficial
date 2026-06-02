@@ -59,20 +59,20 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🦊", mascoteNome: "Lulu" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🦉", mascoteNome: "Numo" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐸", mascoteNome: "Bio" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🦁", mascoteNome: "Rex" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🦜", mascoteNome: "Aro" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐙", mascoteNome: "Pinto" },
+  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐰", mascoteNome: "Letrinha" },
-  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Conti" },
-  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐢", mascoteNome: "Tato" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🦄", mascoteNome: "Pincel" },
+  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 function isEI(grade: string) {
@@ -646,7 +646,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                         <div className="relative bg-white rounded-3xl border-4 border-primary/40 px-5 py-4 shadow-lg max-w-md mx-auto">
                           <div className="absolute -bottom-3 left-12 w-6 h-6 bg-white border-r-4 border-b-4 border-primary/40 rotate-45" />
                           <p className="text-2xl font-black text-primary leading-snug text-center">
-                            {aula.ensino}
+                            {aula.ensino?.toUpperCase()}
                           </p>
                         </div>
                         <div className="relative flex items-end justify-center gap-6 mt-6">
@@ -782,7 +782,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                   <button
                     onClick={() => {
                       requestHelp(aula.activityId);
-                      toast.info("Pip vai te ajudar! 💡");
+                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar! 💡`);
                     }}
                     className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
                   >
@@ -799,7 +799,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
-                        <div className="text-base">{aula.reforco_positivo}</div>
+                        <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
                         <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                       {aula.bancoOrdem && (
@@ -820,7 +820,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
                     <div className="flex-1">
                       <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
-                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.dica}</div>
+                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.isEI ? (aula.dica || "").toUpperCase() : aula.dica}</div>
                       <button
                         onClick={() => { setAcertou(null); setTentativa(null); }}
                         className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
