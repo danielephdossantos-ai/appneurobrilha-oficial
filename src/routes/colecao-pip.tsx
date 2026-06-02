@@ -5,6 +5,20 @@ import { KidCard } from '@/components/ui/KidCard';
 import { Sparkles, Lock, Check } from 'lucide-react';
 import { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import pipMascot from '@/assets/pip-mascot.png';
+import pipaMascot from '@/assets/pip-girl-mascot.png';
+import pipaPrincesa from '@/assets/pip-girl-princesas.png';
+import pipaUnicornio from '@/assets/pip-girl-unicornio.png';
+import pipaDoutora from '@/assets/pip-girl-doutora.png';
+import pipaAstronauta from '@/assets/pip-girl-astronauta.png';
+import pipaBailarina from '@/assets/pip-girl-bailarina.png';
+import pipaFada from '@/assets/pip-girl-fada.png';
+import pipaSereia from '@/assets/pip-girl-sereia.png';
+import pipaConfeiteira from '@/assets/pip-girl-confeiteira.png';
+import pipaVeterinaria from '@/assets/pip-girl-veterinaria.png';
+import pipaProfessora from '@/assets/pip-girl-professora.png';
+import pipaArte from '@/assets/pip-girl-arte.png';
+import pipaMusica from '@/assets/pip-girl-musica.png';
+import pipaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import { useAppState } from '@/core/store';
 import { cn } from '@/utils/utils';
 import { PipEvolution } from '@/components/pip/PipEvolution';
@@ -28,6 +42,21 @@ const SKINS = [
   { key: 'trens', name: 'Pip Maquinista', title: 'Trens', image: PIP_SKINS.trens, description: 'Tchu-tchuuu! Bora pra próxima estação.' },
   { key: 'robos', name: 'Pip Robô', title: 'Robôs', image: PIP_SKINS.robos, description: 'Tecnologia e curiosidade juntos.' },
   { key: 'veiculos', name: 'Pip Aventureiro', title: 'Veículos', image: PIP_SKINS.veiculos, description: 'Mapa, binóculos e muita exploração.' },
+  // Coleção Pipa (menina)
+  { key: 'pipa-original', name: 'Pipa Clássica', title: 'A Guardiã dos Sonhos', image: pipaMascot, description: 'A forma original da Pipa, doce e cheia de coragem.' },
+  { key: 'pipa-princesa', name: 'Pipa Princesa', title: 'Realeza', image: pipaPrincesa, description: 'Coroada de gentileza, sabedoria e brilho próprio.' },
+  { key: 'pipa-unicornio', name: 'Pipa Unicórnio', title: 'Mágica', image: pipaUnicornio, description: 'Asas, chifre brilhante e muita magia.' },
+  { key: 'pipa-doutora', name: 'Pipa Doutora', title: 'Saúde', image: pipaDoutora, description: 'Cuidando de todos com carinho e ciência.' },
+  { key: 'pipa-astronauta', name: 'Pipa Astronauta', title: 'Espaço', image: pipaAstronauta, description: 'Pronta para explorar galáxias inteiras.' },
+  { key: 'pipa-bailarina', name: 'Pipa Bailarina', title: 'Dança', image: pipaBailarina, description: 'Cada passo é uma poesia em movimento.' },
+  { key: 'pipa-fada', name: 'Pipa Fada', title: 'Encanto', image: pipaFada, description: 'Espalhando pó mágico e desejos pelo caminho.' },
+  { key: 'pipa-sereia', name: 'Pipa Sereia', title: 'Oceano', image: pipaSereia, description: 'Mergulhando em aventuras submarinas.' },
+  { key: 'pipa-confeiteira', name: 'Pipa Confeiteira', title: 'Doces', image: pipaConfeiteira, description: 'Receitas cheias de afeto e criatividade.' },
+  { key: 'pipa-veterinaria', name: 'Pipa Veterinária', title: 'Animais', image: pipaVeterinaria, description: 'Amando e cuidando de todos os bichinhos.' },
+  { key: 'pipa-professora', name: 'Pipa Professora', title: 'Educação', image: pipaProfessora, description: 'Ensinando com paciência e muito carinho.' },
+  { key: 'pipa-arte', name: 'Pipa Artista', title: 'Arte', image: pipaArte, description: 'Pincel na mão, sonhos no papel.' },
+  { key: 'pipa-musica', name: 'Pipa Musicista', title: 'Música', image: pipaMusica, description: 'Cantando e dançando ao som do coração.' },
+  { key: 'pipa-super-heroina', name: 'Pipa Super', title: 'Super-Heroína', image: pipaSuperHeroina, description: 'Salvando o dia com coragem e gentileza.' },
   // Novos personagens integrados à coleção
   { key: 'rex', name: 'Rex', title: 'Dino Explorador', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4', description: 'O T-Rex explorador com um sorriso gigante.' },
   { key: 'tina', name: 'Tina', title: 'Mestra Sabedoria', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf', description: 'Triceratops gentil com cores vivas e muita calma.' },
