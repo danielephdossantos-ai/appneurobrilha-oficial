@@ -73,9 +73,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "NeuroBrilha Kids — Aprendizagem adaptativa para crianças neurodivergentes" },
-      { name: "description", content: "Plataforma de aprendizagem adaptativa BNCC + práticas clínicas (ABA, Orton-Gillingham, TEACCH, CRA) para crianças com TDAH, TEA, dislexia, discalculia." },
+      {
+        name: "description",
+        content:
+          "Plataforma de aprendizagem adaptativa BNCC + práticas clínicas (ABA, Orton-Gillingham, TEACCH, CRA) para crianças com TDAH, TEA, dislexia, discalculia.",
+      },
       { property: "og:title", content: "NeuroBrilha Kids" },
-      { property: "og:description", content: "Ensino BNCC adaptado por perfil clínico, terapia, rotina e IA professora." },
+      {
+        property: "og:description",
+        content: "Ensino BNCC adaptado por perfil clínico, terapia, rotina e IA professora.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -83,7 +90,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap",
+      },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/pwa-192x192.png" },
     ],
