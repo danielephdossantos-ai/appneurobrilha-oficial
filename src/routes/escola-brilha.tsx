@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette } from "lucide-react";
+import { useState, useEffect, useRef, Component, ReactNode } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
+import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
@@ -254,6 +255,17 @@ function Escola() {
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
+  const startRef = useRef<number>(Date.now());
+  const scoredRef = useRef<boolean>(false);
+
+  // Reinicia cronômetro quando entra na etapa de "opcoes"
+  useEffect(() => {
+    if (aula.etapa === "opcoes") {
+      startRef.current = Date.now();
+      scoredRef.current = false;
+    }
+  }, [aula.etapa]);
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
@@ -276,8 +288,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
         subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
       />
 
+      {adjustment.suggestBreak && (
+        <Card className="mb-4 bg-sun/15 border-sun/30 flex items-center gap-3">
+          <Coffee className="h-6 w-6 text-sun" />
+          <div className="flex-1">
+            <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
+            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo 🌿</div>
+          </div>
+        </Card>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
+
           <Card className="mb-4">
             <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
               <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
@@ -324,8 +347,15 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                     <button 
                       key={`${opt}-${index}`} 
                       onClick={() => {
+                        const correctAnswer = aula.resposta_correta || aula.answer;
+                        const isCorrect = opt === correctAnswer;
                         setTentativa(opt);
-                        setAcertou(opt === (aula.resposta_correta || aula.answer));
+                        setAcertou(isCorrect);
+                        if (!scoredRef.current) {
+                          const elapsed = (Date.now() - startRef.current) / 1000;
+                          registerPerformance(isCorrect, elapsed, aula.activityId);
+                          scoredRef.current = true;
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
@@ -340,6 +370,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
                 {(!aula.opcoes || aula.opcoes.length === 0) && (
                   <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
                 )}
+
+                <div className="mt-4 flex justify-end">
+                  <button
+                    onClick={() => {
+                      requestHelp(aula.activityId);
+                      toast.info("Pip vai te ajudar! 💡");
+                    }}
+                    className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
+                  >
+                    <HelpCircle size={14} /> Preciso de ajuda
+                  </button>
+                </div>
+
 
 
                 {acertou === true && (
