@@ -187,6 +187,9 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
   const [banco, setBanco] = useState<BancoState | null>(null);
+  const [teenGuided, setTeenGuided] = useState<boolean>(() => {
+    try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
+  });
 
   const grades = [
     "Educação Infantil",
@@ -194,7 +197,12 @@ function Escola() {
     "6º Ano", "7º Ano", "8º Ano", "9º Ano"
   ];
 
+  const isTeen = /^[6-9]º/.test(selectedGrade);
+  // EI e 2º-5º sempre têm aula guiada de 5 telas. Teen escolhe.
+  const guidedActive = !isTeen || teenGuided;
+
   const showBanco = !!activeChild && isFundamental2a9(selectedGrade);
+
 
   // Carrega ou cria o lote de 50 atividades para a série atual
   useEffect(() => {
