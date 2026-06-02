@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode } from "react";
-import { AlertCircle, Coffee } from "lucide-react";
+import { AlertCircle, Coffee, Sparkles } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS } from "@/data/neuro-treino/variations";
+import { useHiperfoco } from "@/context/HiperfocoContext";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) { super(props); this.state = { hasError: false, error: null }; }
