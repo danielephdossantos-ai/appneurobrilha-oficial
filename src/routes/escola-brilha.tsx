@@ -641,6 +641,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                           registerPerformance(isCorrect, elapsed, aula.activityId);
                           scoredRef.current = true;
                         }
+                        if (isCorrect && !completedRef.current && aula.activityId) {
+                          completedRef.current = true;
+                          onCompleted?.(aula.activityId);
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
