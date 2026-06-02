@@ -1034,7 +1034,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
       </div>
 
       {/* Botão CONTINUAR (telas que não decidem sozinhas) */}
-      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === a) || (mathStep === 4 && montagem[4] === resultado)) && mathStep !== 6 && (
+      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === a) || (mathStep === 4 && montagem[4] === resultado)) && (
         <div className="flex justify-center mt-6">
           <button
             onClick={() => setMathStep(mathStep + 1)}
