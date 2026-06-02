@@ -308,11 +308,12 @@ export function Shell({ children }: { children?: ReactNode }) {
 }
 
 function MobileNav({ path }: { path: string }) {
+  const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
+  const navigate = useNavigate();
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
     { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
-    { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
@@ -326,9 +327,23 @@ function MobileNav({ path }: { path: string }) {
           </Link>
         );
       })}
+      <button
+        onClick={() => {
+          if (parentUnlocked) {
+            navigate({ to: "/painel-pais" });
+          } else {
+            requestUnlock();
+          }
+        }}
+        className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg btn-tap ${path === "/painel-pais" ? "text-primary font-bold" : "text-muted-foreground"}`}
+      >
+        {parentUnlocked ? <ShieldCheck className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
+        <span className="text-[10px]">Pais</span>
+      </button>
     </nav>
   );
 }
+
 
 export function PageHeader({ title, subtitle, emoji }: { title: string; subtitle?: string; emoji?: string }) {
   return (
