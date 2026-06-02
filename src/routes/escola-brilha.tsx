@@ -834,13 +834,32 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       )}
                     </div>
 
-                    <div className="flex justify-center mt-12">
-                      <button 
-                        onClick={() => setEiStep(eiStep + 1)} 
+                    <div className="flex flex-col items-center gap-4 mt-12">
+                      {aula.metodo_usado && (
+                        <div className="px-4 py-1.5 rounded-full bg-lilac/20 border border-lilac/40 text-xs font-black uppercase tracking-wider text-lilac-foreground">
+                          ✨ Método {aula.metodo_usado}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setEiStep(eiStep + 1)}
                         className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
                         VAMOS LÁ! <Play className="h-8 w-8 fill-current" />
                       </button>
+                      <button
+                        onClick={naoEntendi}
+                        disabled={reexplaining}
+                        className="btn-tap bg-white border-[3px] border-sun text-sun-foreground rounded-full px-8 py-3 text-base md:text-lg font-black uppercase shadow-[0_4px_0_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-2 disabled:opacity-60"
+                      >
+                        {reexplaining ? (
+                          <><Loader2 className="h-5 w-5 animate-spin" /> Reexplicando...</>
+                        ) : (
+                          <>🤔 NÃO ENTENDI · Tente de outro jeito</>
+                        )}
+                      </button>
+                      <div className="text-[11px] text-muted-foreground text-center max-w-xs">
+                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].emoji} {METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
+                      </div>
                     </div>
                   </div>
                 ) : (
