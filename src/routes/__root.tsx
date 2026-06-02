@@ -139,56 +139,63 @@ import { MascotProvider } from "@/contexts/MascotContext";
 import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true);
+  const [authReady, setAuthReady] = useState(false);
+  const [hasSession, setHasSession] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkSession = async () => {
-      // getUser() helps verify the token is still valid with the server
-      const { data: { user }, error } = await supabase.auth.getUser();
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      setLoading(false);
-      
-      if (error || !session || !user) {
-        if (location.pathname !== "/auth") {
-          navigate({ to: "/auth" });
-        }
-      } else if (location.pathname === "/auth") {
-        navigate({ to: "/" });
-      }
-    };
+    let cancelled = false;
 
-    checkSession();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (cancelled) return;
+      setHasSession(Boolean(session));
+      setAuthReady(true);
+    });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setLoading(false);
-      
-      if (event === 'SIGNED_IN' && session) {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (cancelled) return;
+
+      if (event === "SIGNED_IN" && session) {
+        setHasSession(true);
         AuditLogService.log({
-          action: 'LOGIN_SUCCESS',
-          module: 'AUTH',
-          metadata: { method: 'password' }
+          action: "LOGIN_SUCCESS",
+          module: "AUTH",
+          metadata: { method: "password" },
         });
-      }
-
-      if (event === 'SIGNED_OUT') {
-        navigate({ to: "/auth" });
         return;
       }
 
-      if (!session && location.pathname !== "/auth") {
-        navigate({ to: "/auth" });
-      } else if (session && location.pathname === "/auth") {
-        navigate({ to: "/" });
+      if (event === "SIGNED_OUT") {
+        setHasSession(false);
+        setAuthReady(true);
+        return;
+      }
+
+      if (event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
+        setHasSession(Boolean(session));
       }
     });
 
-    return () => subscription.unsubscribe();
-  }, [location.pathname, navigate]);
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
+  }, []);
 
-  if (loading) {
+  useEffect(() => {
+    if (!authReady) return;
+
+    if (!hasSession && location.pathname !== "/auth") {
+      navigate({ to: "/auth", replace: true });
+    } else if (hasSession && location.pathname === "/auth") {
+      navigate({ to: "/", replace: true });
+    }
+  }, [authReady, hasSession, location.pathname, navigate]);
+
+  if (!authReady) {
     return (
       <div className="flex h-screen items-center justify-center bg-sidebar">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
