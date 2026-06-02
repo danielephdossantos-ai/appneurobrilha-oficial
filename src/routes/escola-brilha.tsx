@@ -10,6 +10,7 @@ import { ActivityProceduralService } from "@/modules/escola-brilha/services/Acti
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
+import { EIMiniGame } from "@/components/escola/EIMiniGame";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
