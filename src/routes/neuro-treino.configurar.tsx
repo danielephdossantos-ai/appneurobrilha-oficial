@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Sparkles, X } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { HIPERFOCO_LIST, type HiperfocoId } from "@/data/hiperfocos";
+import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 
 interface ConfigSearch {
@@ -56,7 +57,11 @@ function ConfigurarHiperfoco() {
                     : "border-border bg-card hover:border-primary/50"
                 }`}
               >
-                <div className="text-5xl mb-3">{h.emoji}</div>
+                <div className="w-16 h-16 mb-3 flex items-center justify-center">
+                  {getElementoImg(h.elementos[0]) ? (
+                    <img src={getElementoImg(h.elementos[0])} alt={h.label} className="w-full h-full object-contain drop-shadow-sm" />
+                  ) : null}
+                </div>
                 <div className="font-extrabold text-sm">{h.label}</div>
                 <div className="text-[10px] text-muted-foreground mt-1 line-clamp-1">
                   {h.elementos.slice(0, 2).join(", ")}
@@ -102,8 +107,10 @@ function ConfigurarHiperfoco() {
         {hiperfoco && (
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-3xl bg-primary/5 border-2 border-primary/20 p-6 animate-fade-in shadow-lg">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-4xl shadow-inner border border-primary/10">
-                {hiperfoco.emoji}
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shadow-inner border border-primary/10 overflow-hidden">
+                {getElementoImg(hiperfoco.elementos?.[0]) && (
+                  <img src={getElementoImg(hiperfoco.elementos[0])} alt={hiperfoco.label} className="w-12 h-12 object-contain" />
+                )}
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-black uppercase tracking-wider text-primary/60">Hiperfoco Ativo</span>
