@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode } from "react";
-import { AlertCircle, Coffee } from "lucide-react";
+import { AlertCircle, Coffee, Sparkles } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS } from "@/data/neuro-treino/variations";
+import { useHiperfoco } from "@/context/HiperfocoContext";
 
 class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) { super(props); this.state = { hasError: false, error: null }; }
@@ -38,10 +39,33 @@ export const Route = createFileRoute("/neuro-treino")({
 function Treino() {
   useAppState();
   const { adjustment, metrics } = useNeuroAdaptive();
+  const { hiperfoco } = useHiperfoco();
 
   return (
     <Shell>
       <PageHeader emoji="🧠" title="Neuro-Treino" subtitle="Cada caixinha abre uma atividade exclusiva com 30 variações" />
+
+      <Card className="mb-4 flex items-center justify-between gap-3 bg-primary/5 border-primary/30">
+        <div className="flex items-center gap-3">
+          <Sparkles className="h-6 w-6 text-primary" />
+          <div>
+            <div className="font-bold">
+              {hiperfoco ? <>Hiperfoco ativo: {hiperfoco.emoji} {hiperfoco.label}</> : "Nenhum hiperfoco selecionado"}
+            </div>
+            <div className="text-xs text-muted-foreground">
+              {hiperfoco
+                ? "Todas as atividades vão usar esse tema para engajar a criança."
+                : "Antes de começar, escolha o tema favorito da criança para personalizar tudo."}
+            </div>
+          </div>
+        </div>
+        <Link
+          to="/neuro-treino/configurar"
+          className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm font-extrabold hover:scale-105 transition-all whitespace-nowrap"
+        >
+          {hiperfoco ? "Trocar" : "Escolher"}
+        </Link>
+      </Card>
 
       {adjustment.suggestBreak && (
         <Card className="mb-4 bg-sun/15 border-sun/30 flex items-center gap-3">

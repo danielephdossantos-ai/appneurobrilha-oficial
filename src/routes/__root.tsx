@@ -126,13 +126,15 @@ function RootComponent() {
       <AuthGuard>
         <MascotProvider>
           <ParentModeProvider>
-            <div className="relative min-h-screen">
-              <Outlet />
-              <LGPDConsent />
-              <ConnectivityStatus />
-              <MascotGlobalContainer />
-              <ParentPinGate />
-            </div>
+            <HiperfocoProvider>
+              <div className="relative min-h-screen">
+                <Outlet />
+                <LGPDConsent />
+                <ConnectivityStatus />
+                <MascotGlobalContainer />
+                <ParentPinGate />
+              </div>
+            </HiperfocoProvider>
           </ParentModeProvider>
         </MascotProvider>
       </AuthGuard>
@@ -151,6 +153,7 @@ import { MascotProvider } from "@/contexts/MascotContext";
 import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
 import { ParentModeProvider } from "@/contexts/ParentModeContext";
 import { ParentPinGate } from "@/components/auth/ParentPinGate";
+import { HiperfocoProvider } from "@/context/HiperfocoContext";
 
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
