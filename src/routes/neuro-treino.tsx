@@ -31,12 +31,14 @@ import icCaminhoPontos from "@/assets/neuro-treino/icons/v2/caminho-dos-pontos.p
 import icLabPrecisao from "@/assets/neuro-treino/icons/v2/labirinto-precisao.png";
 import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
 import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
+import icConscienciaFono from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png";
 
 const ICONS: Record<CategoriaSlug, string> = {
   "sons-iniciais": icSonsIniciais,
   "motorzinho-dos-sons": icMotorzinho,
   "rimas": icRimas,
   "pedacinhos-da-palavra": icPedacinhos,
+  "consciencia-fonologica": icConscienciaFono,
   "onde-esta": icOndeEsta,
   "sequencia-e-padrao": icSeqPadrao,
   "cade-o-par": icCadePar,
