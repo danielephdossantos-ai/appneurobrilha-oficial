@@ -617,37 +617,105 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
 
 
 
-            {aula.etapa === "ensino" && (
-              <div>
-                <div
-                  className="aspect-video rounded-2xl grid place-items-center mb-4 relative overflow-hidden"
-                  style={{
-                    background: aula.visualHex
-                      ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
-                      : undefined,
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-sky/40 to-petal/30 -z-10" />
-                  <div className="text-[8rem] leading-none animate-pulse text-center">
-                    {aula.visual
-                      ? aula.visual
-                      : hiperfoco === "dinossauros" ? "🦕"
-                        : hiperfoco === "espaco" ? "🚀"
-                        : hiperfoco === "animais" ? "🦁"
-                        : "🌟"}
+            {aula.etapa === "ensino" && (() => {
+              const g = (aula.grade || "").toString();
+              const panel: "kids" | "mid" | "teen" =
+                /infantil|pré|pre|^1º/i.test(g) ? "kids" :
+                /^[2-5]º/.test(g) ? "mid" : "teen";
+              const visualGlyph = aula.visual
+                ? aula.visual
+                : hiperfoco === "dinossauros" ? "🦕"
+                  : hiperfoco === "espaco" ? "🚀"
+                  : hiperfoco === "animais" ? "🦁"
+                  : "🌟";
+
+              return (
+                <div>
+                  {/* PRÉ + 1º ANO — cena ilustrada, balão de fala */}
+                  {panel === "kids" && (
+                    <div className="space-y-4">
+                      <div className="flex justify-center">
+                        <span className="inline-block px-6 py-2 rounded-full bg-coral text-white font-black uppercase tracking-widest text-sm shadow-md">
+                          Pré + 1º Ano
+                        </span>
+                      </div>
+                      <div className="relative rounded-3xl overflow-hidden border-4 border-coral/40 bg-gradient-to-b from-sky/40 via-sky/20 to-success/30 p-6 min-h-[360px]">
+                        <div className="absolute top-3 left-6 w-12 h-12 rounded-full bg-white/70 blur-sm" />
+                        <div className="absolute top-6 left-24 w-16 h-8 rounded-full bg-white/60 blur-sm" />
+                        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-success/60 to-transparent" />
+                        <div className="relative bg-white rounded-3xl border-4 border-primary/40 px-5 py-4 shadow-lg max-w-md mx-auto">
+                          <div className="absolute -bottom-3 left-12 w-6 h-6 bg-white border-r-4 border-b-4 border-primary/40 rotate-45" />
+                          <p className="text-2xl font-black text-primary leading-snug text-center">
+                            {aula.ensino}
+                          </p>
+                        </div>
+                        <div className="relative flex items-end justify-center gap-6 mt-6">
+                          <div className="text-7xl drop-shadow-md animate-float-thinking">{materiaMeta.mascote}</div>
+                          <div className="text-8xl drop-shadow-md">{visualGlyph}</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 2º AO 5º ANO — caderno pautado */}
+                  {panel === "mid" && (
+                    <div className="space-y-4">
+                      <div className="flex justify-center">
+                        <span className="inline-block px-6 py-2 rounded-full bg-coral text-white font-black uppercase tracking-widest text-sm shadow-md">
+                          2º ao 5º Ano
+                        </span>
+                      </div>
+                      <div
+                        className="rounded-2xl border-2 border-amber-300 p-8 shadow-inner"
+                        style={{
+                          backgroundColor: '#fdf6e3',
+                          backgroundImage:
+                            'repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(59,130,246,0.25) 35px, rgba(59,130,246,0.25) 36px)',
+                        }}
+                      >
+                        <div className="bg-white/80 rounded-xl border-2 border-primary/30 px-5 py-3 inline-block shadow-sm mb-6">
+                          <p className="text-xl font-black text-primary">{aula.ensino}</p>
+                        </div>
+                        <div className="text-7xl text-center my-6">{visualGlyph}</div>
+                        <div className="text-center text-2xl font-black text-slate-700">
+                          <span className="text-coral">{materiaMeta.mascote}</span> {materiaMeta.mascoteNome} está aqui pra te ajudar
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 6º AO 9º ANO — clean / quadro branco */}
+                  {panel === "teen" && (
+                    <div className="space-y-4">
+                      <div className="flex justify-center">
+                        <span className="inline-block px-6 py-2 rounded-full bg-primary text-primary-foreground font-black uppercase tracking-widest text-sm shadow-md">
+                          6º ao 9º Ano
+                        </span>
+                      </div>
+                      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                        <div className="border-b border-slate-200 pb-4 mb-6">
+                          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Explicação</div>
+                          <p className="text-xl font-semibold text-slate-800 leading-relaxed">{aula.ensino}</p>
+                        </div>
+                        <div className="flex items-center justify-center gap-4 py-4">
+                          <div className="text-6xl">{visualGlyph}</div>
+                          <div className="text-sm font-medium text-slate-500 max-w-xs">
+                            Leia com atenção e siga para o próximo passo quando estiver pronto.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-6 flex gap-2 flex-wrap">
+                    <button onClick={() => setAula({ ...aula, etapa: aula.isEI ? "opcoes" : "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                      {aula.isEI ? "Vamos brincar! 🎉" : "Continuar →"}
+                    </button>
                   </div>
                 </div>
-                <p className={`leading-relaxed font-medium ${aula.isEI ? "text-2xl" : "text-xl"}`}>
-                  {aula.ensino}
-                </p>
-                <div className="mt-6 flex gap-2 flex-wrap">
-                  <button onClick={() => setAula({ ...aula, etapa: aula.isEI ? "opcoes" : "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                    {aula.isEI ? "Vamos brincar! 🎉" : "Continuar →"}
-                  </button>
-                </div>
+              );
+            })()}
 
-              </div>
-            )}
 
             {aula.etapa === "demo" && (
               <div>
