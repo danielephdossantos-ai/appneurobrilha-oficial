@@ -279,7 +279,9 @@ export function Shell({ children }: { children?: ReactNode }) {
               )}
             </div>
           </div>
+          )}
 
+          {!hideGlobalNav && (
           <div className="hidden md:flex fixed bottom-8 left-1/2 -translate-x-1/2 gap-4 pointer-events-none z-50">
             <div className="pointer-events-auto">
               {prevPath && (
@@ -304,6 +306,7 @@ export function Shell({ children }: { children?: ReactNode }) {
               )}
             </div>
           </div>
+          )}
         </main>
       </div>
     </div>
