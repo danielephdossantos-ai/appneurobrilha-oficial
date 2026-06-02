@@ -14,6 +14,7 @@ export const GeneratorInputSchema = z.object({
   }),
   previousActivityIds: z.array(z.string()),
   grade: z.string().optional(),
+  subject: z.string().optional(),
 });
 
 export type DifficultyLevel = z.infer<typeof DifficultyLevelSchema>;
