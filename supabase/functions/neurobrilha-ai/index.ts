@@ -179,25 +179,24 @@ serve(async (req) => {
       - "visual_emoji": UM emoji do hiperfoco da criança para contagem (ex: "🍎", "🚗", "⭐").
       - "opcoes_numericas": Array com 3 números (o correto + 2 distratores próximos).
       ` : `
-      ESTRUTURA OBRIGATÓRIA DA AULA (8 PASSOS DE PROFESSOR REAL):
-      Toda aula precisa ENSINAR antes de perguntar. Nenhuma aula pode começar com pergunta.
-      A criança vai passar por estas telas, NESTA ORDEM, e você deve preparar UMA frase curta para cada uma:
+      ESTRUTURA OFICIAL ESCOLA BRILHA 2.0 (8 PASSOS — PROFESSOR PARTICULAR INFANTIL):
+      Toda aula ENSINA primeiro e avalia depois. Nenhuma aula começa por pergunta.
+      A criança passa por estas telas NESTA ORDEM — prepare UMA frase curta para cada:
 
-      1. DESCOBRIR  → apresentar o tema com entusiasmo (1 frase).
-      2. OBSERVAR   → o que ela vai olhar/notar (1 frase + foco visual).
-      3. ENTENDER   → o conceito explicado de forma simples (1-2 frases curtas).
-      4. VER EXEMPLO → um exemplo já resolvido, mostrando passo a passo (1-2 frases curtas).
-      5. FAZER JUNTO → guia para resolver junto com a criança, revelando a resposta (1-2 frases curtas).
-      6. FAZER SOZINHO → instrução para tentar agora.
-      7. DESAFIO     → reforço final / aplicação rápida.
-      8. RECOMPENSA  → comemoração personalizada.
+      1. VAMOS DESCOBRIR  → apresentar o tema com pouco texto e entusiasmo (1 frase).
+      2. OBSERVE          → mostrar exemplo visual, sem perguntas (1 frase guia).
+      3. PIP EXPLICA      → conceito em 1-2 frases curtas, máximo 2 linhas.
+      4. EXEMPLO RESOLVIDO → o sistema resolve junto, mostrando o passo a passo (1-2 frases).
+      5. FAÇA COMIGO      → primeira questão guiada com dica visual (1-2 frases).
+      6. AGORA VOCÊ       → instrução curta para tentar sozinho.
+      7. DESAFIO          → missão especial mais divertida (1 frase).
+      8. CONQUISTA        → comemoração positiva personalizada (1 frase).
 
       PROIBIDO:
-      - Blocos longos de texto.
-      - Parágrafos com mais de 2 frases.
-      - Explicações abstratas sem exemplo.
-      - Começar com pergunta.
-      - Repetir a mesma explicação em campos diferentes (cada etapa tem um papel próprio).
+      - Blocos longos de texto, parágrafos com mais de 2 frases.
+      - Histórias aleatórias, super-heróis (Batman etc.), textos sem objetivo pedagógico.
+      - Misturar conteúdos ou BNCC de séries diferentes.
+      - Começar por pergunta ou repetir a mesma explicação em campos diferentes.
 
       Use SEMPRE o hiperfoco "${child.hiperfoco || "interesses"}" como ponte concreta.`}
 
