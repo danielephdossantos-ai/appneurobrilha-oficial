@@ -101,6 +101,8 @@ export function Shell({ children }: { children?: ReactNode }) {
   const engine = usePedagogicalEngine();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
+  const { unlocked: parentUnlocked, requestUnlock, lock: lockParent } = useParentMode();
+
 
 
   const currentIndex = navigationSequence.indexOf(path);
