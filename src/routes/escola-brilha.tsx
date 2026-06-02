@@ -64,8 +64,21 @@ const materias = [
   { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
   { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
   { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
-  
 ] as const;
+
+// Educação Infantil — 4 grandes áreas BNCC adaptadas
+const materiasInfantil = [
+  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras" },
+  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5" },
+  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas" },
+] as const;
+
+function isEI(grade: string) {
+  const g = grade.toLowerCase();
+  return g.includes('infantil') || g.includes('pré') || g.includes('pre');
+}
+
 
 function Escola() {
   const { activeChild } = useAppState();
