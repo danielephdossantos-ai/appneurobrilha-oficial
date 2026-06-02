@@ -59,12 +59,6 @@ const grupos = [
     atividades: ["Foco Sustentado","Rastreamento Sacádico"],
   },
   {
-    nome: "Regulação emocional",
-    emoji: "💚",
-    cor: "from-success/20 to-success/5",
-    atividades: ["Respira Flor","Termômetro dos Sentimentos","Cantinho da Calma","Como Eu Estou"],
-  },
-  {
     nome: "Oficina Criativa",
     emoji: "🎨",
     cor: "from-lilac/30 to-lilac/5",
