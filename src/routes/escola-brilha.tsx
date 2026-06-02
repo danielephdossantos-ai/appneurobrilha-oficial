@@ -646,7 +646,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                         <div className="relative bg-white rounded-3xl border-4 border-primary/40 px-5 py-4 shadow-lg max-w-md mx-auto">
                           <div className="absolute -bottom-3 left-12 w-6 h-6 bg-white border-r-4 border-b-4 border-primary/40 rotate-45" />
                           <p className="text-2xl font-black text-primary leading-snug text-center">
-                            {aula.ensino}
+                            {aula.ensino?.toUpperCase()}
                           </p>
                         </div>
                         <div className="relative flex items-end justify-center gap-6 mt-6">
