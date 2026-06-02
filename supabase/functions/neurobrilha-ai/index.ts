@@ -98,9 +98,15 @@ serve(async (req) => {
         ? `TOM: Amigável e didático. Frases médias. Explicações concretas com exemplos do cotidiano. Use o hiperfoco como ponte. Mistura caixa baixa com palavras-chave em CAIXA ALTA.`
         : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas com lógica/passo-a-passo. Pode usar termos técnicos quando explicados. Trate como alguém capaz e curioso.`;
 
+      // Diagnostic flags used throughout the prompt
+      const diag = (child.diagnostico || "").toLowerCase();
+      const isTEA = diag.includes("tea") || diag.includes("autismo");
+      const isTDAH = diag.includes("tdah") || diag.includes("déficit") || diag.includes("deficit");
+
       // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       // Quando a criança aperta "Não Entendi", trocamos a ABORDAGEM (não o conteúdo)
       const explLevel = explanationLevel || "medium";
+
       const levelInstruction = {
         easy: "NÍVEL FÁCIL: Explicação extremamente simples, frases curtíssimas, foco em um único conceito por vez, linguagem muito lúdica.",
         medium: "NÍVEL MÉDIO: Explicação equilibrada, introduz o conceito com clareza e um exemplo prático direto.",
