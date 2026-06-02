@@ -12,9 +12,12 @@ export const LGPDConsent: React.FC = () => {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const checkedRef = useRef(false);
+  const mountedRef = useRef(true);
   const location = useLocation();
 
   useEffect(() => {
+    mountedRef.current = true;
+
     // Não mostrar na tela de autenticação
     if (location.pathname === '/auth') {
       setShow(false);
@@ -33,7 +36,8 @@ export const LGPDConsent: React.FC = () => {
     const checkConsent = async () => {
       try {
         const { data: { session } } = await AuthService.getSession();
-        if (!session) return;
+        checkedRef.current = true;
+        if (!session || !mountedRef.current) return;
 
         const settings = await AuthService.getPrivacySettings();
         if (settings?.terms_accepted) {
@@ -42,8 +46,9 @@ export const LGPDConsent: React.FC = () => {
         }
 
         // Só mostrar depois de confirmar que realmente falta aceitar
-        checkedRef.current = true;
-        setShow(true);
+        if (mountedRef.current && !localStorage.getItem(LGPD_KEY)) {
+          setShow(true);
+        }
       } catch (error) {
         console.error('Erro ao verificar consentimento:', error);
       }
@@ -55,26 +60,29 @@ export const LGPDConsent: React.FC = () => {
       if (event === 'SIGNED_OUT') {
         setShow(false);
         checkedRef.current = false;
-        localStorage.removeItem(LGPD_KEY);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mountedRef.current = false;
+      subscription.unsubscribe();
+    };
   }, [location.pathname]);
 
   const handleAccept = async () => {
     setLoading(true);
+    localStorage.setItem(LGPD_KEY, 'true');
+    setShow(false);
+
     try {
       await AuthService.updatePrivacySettings({
         terms_accepted: true,
         data_usage_consent: true,
         analytics_consent: true,
       });
-      localStorage.setItem(LGPD_KEY, 'true');
-      setShow(false);
     } catch (error: any) {
       console.error('Erro ao salvar consentimento LGPD:', error);
-      toast.error(`Não foi possível salvar: ${error?.message || 'Erro desconhecido'}`);
+      toast.error('Aviso fechado. Vamos tentar salvar sua preferência novamente depois.');
     } finally {
       setLoading(false);
     }
