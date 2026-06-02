@@ -330,6 +330,11 @@ function MissaoProva() {
           </Card>
         </div>
       </div>
+      <FloatingActivityControls
+        onSkip={isStudying && lessonContent ? () => { toast.info("Indo direto para a prática!"); } : undefined}
+        onChange={isStudying ? () => { setIsStudying(false); setCurrentSession(null); setLessonContent(null); } : undefined}
+        changeLabel="Trocar sessão"
+      />
     </Shell>
   );
 }
