@@ -403,7 +403,7 @@ function Motorzinho({ p, onDone }: any) {
         </div>
         {(phase === "your-turn" || phase === "listening" || phase === "result") && (
           <div className="flex items-center gap-3 animate-fade-in">
-            <div className="text-6xl">{item.imagem_url_ou_emoji}</div>
+            <Obj nome={item.palavra_alvo} emoji={item.imagem_url_ou_emoji} size={96} />
             <div className="text-4xl font-black text-primary">{item.palavra_alvo}</div>
           </div>
         )}
@@ -514,10 +514,12 @@ function OndeEsta({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Encontre:</div>
-      <div className="text-5xl mb-4">{p.alvo}</div>
+      <div className="mx-auto mb-4"><Obj emoji={p.alvo} size={72} /></div>
       <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 64 }}>
         {p.grid.map((e:string, i:number) => (
-          <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="text-3xl p-2 bg-card border-2 border-border rounded-lg hover:border-primary">{e}</button>
+          <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="p-1 bg-card border-2 border-border rounded-lg hover:border-primary flex items-center justify-center">
+            <Obj emoji={e} size={44} />
+          </button>
         ))}
       </div>
     </div>
@@ -568,8 +570,8 @@ function CadeOPar({ p, onDone }: any) {
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
         return (
-          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl text-4xl border-2 transition-all ${show ? "bg-card border-primary" : "bg-primary/20 border-border"}`}>
-            {show ? c.v : "?"}
+          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl border-2 transition-all flex items-center justify-center ${show ? "bg-card border-primary" : "bg-primary/20 border-border"}`}>
+            {show ? <Obj emoji={c.v} size={56} /> : <span className="text-3xl font-black text-primary/60">?</span>}
           </button>
         );
       })}
@@ -641,9 +643,9 @@ function FocoSustentado({ p, onDone }: any) {
   };
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Alvo: <span className="text-3xl">{p.alvo}</span></div>
-      <button onClick={handleTap} className="text-9xl p-8 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95">
-        {p.stream[k] ?? "✅"}
+      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-2">Alvo: <Obj emoji={p.alvo} size={36} /></div>
+      <button onClick={handleTap} className="p-8 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95 flex items-center justify-center" style={{ width: 220, height: 220 }}>
+        {p.stream[k] ? <Obj emoji={p.stream[k]} size={140} /> : <span className="text-7xl">✅</span>}
       </button>
       <div className="text-sm text-muted-foreground">Acertos: <b className="text-success">{score}</b> · Enganos: <b className="text-destructive">{missed}</b></div>
       <div className="text-xs text-muted-foreground mt-1">{k}/{p.stream.length}</div>
@@ -800,8 +802,8 @@ function Onomatopeias({ p, onDone }: any) {
       </div>
       <div className="grid grid-cols-3 gap-3">
         {p.options.map((o:any, i:number) => (
-          <button key={i} onClick={()=>onDone(o.nome === p.correctName)} className="bg-card border-2 border-border rounded-2xl p-5 hover:border-coral hover:scale-105 transition-all">
-            <div className="text-6xl mb-1">{o.emoji}</div>
+          <button key={i} onClick={()=>onDone(o.nome === p.correctName)} className="bg-card border-2 border-border rounded-2xl p-4 hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-1">
+            <Obj emoji={o.emoji} nome={o.nome} size={96} />
             <div className="font-bold text-xs">{o.nome}</div>
           </button>
         ))}
@@ -829,7 +831,7 @@ function RitmoSopro({ p, onDone }: any) {
   }, [holding]);
   return (
     <div className="text-center">
-      <div className="text-6xl mb-2">{p.veiculo}</div>
+      <div className="mb-2 flex justify-center"><Obj emoji={p.veiculo} size={88} /></div>
       <div className="text-3xl font-black text-coral mb-4">{p.silaba}</div>
       <div className="mx-auto h-8 bg-muted rounded-full overflow-hidden mb-2" style={{ width: `${p.tamanho}%`, maxWidth: "90%" }}>
         <div className="h-full bg-gradient-to-r from-sun to-coral transition-all" style={{ width: `${progress}%` }} />
@@ -999,7 +1001,7 @@ function TriagemCategorias({ p, onDone }: any) {
     <div className="text-center">
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
         {p.itens.map((it:any, i:number) => assigned[i] ? null : (
-          <div key={i} draggable onDragStart={()=>setDragging(i)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{it.e}</div>
+          <div key={i} draggable onDragStart={()=>setDragging(i)} className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing"><Obj emoji={it.e} size={52} /></div>
         ))}
       </div>
       <div className="grid grid-cols-2 gap-4">
