@@ -737,7 +737,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         </div>
                         <div className="text-7xl text-center my-6">{visualGlyph}</div>
                         <div className="text-center text-2xl font-black text-slate-700">
-                          <span className="text-coral">{materiaMeta.mascote}</span> {materiaMeta.mascoteNome} está aqui pra te ajudar
+                          <span className="text-coral">
+                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-10 h-10 rounded-full inline-block object-cover border-2 border-white mr-2" />
+                            ) : (
+                              <span className="mr-2">{activeMascot?.mascot?.image_url || materiaMeta.mascote}</span>
+                            )}
+                          </span> 
+                          {activeMascot?.mascot?.name || materiaMeta.mascoteNome} está aqui pra te ajudar
                         </div>
                       </div>
                     </div>
