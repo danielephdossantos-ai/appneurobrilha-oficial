@@ -97,7 +97,7 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
             {silhouette}
           </div>
           <div className="absolute -bottom-8 text-center text-lg font-black tracking-widest text-slate-700">
-            {done ? correct : "ARRASTE AQUI"}
+            {done ? correct : ""}
           </div>
         </div>
         {/* right options */}
@@ -153,7 +153,7 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
     <div className="relative">
       {celebrate && <Confetti />}
       <div className="flex flex-col items-center gap-8">
-        <div className="text-xl font-black tracking-widest text-slate-700">FÁBRICA DE PALAVRAS</div>
+        <div className="text-xl font-black tracking-widest text-slate-700"></div>
         {!fused ? (
           <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
             {opcoes.map((l: string, i: number) => {
@@ -179,8 +179,8 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
             {correct}
           </div>
         )}
-        <div className="text-base text-slate-600 font-bold">
-          {fused ? `SOM: "${correct}"!` : "TOQUE NAS LETRAS PARA JUNTAR"}
+        <div className="text-base text-slate-600 font-bold uppercase">
+          {fused ? correct : ""}
         </div>
       </div>
     </div>
@@ -252,8 +252,8 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
             );
           })}
         </div>
-        <div className="text-sm font-bold text-slate-600 tracking-widest">
-          {done ? `VOCÊ FORMOU: ${target}!` : "TOQUE AS LETRAS NA ORDEM CERTA"}
+        <div className="text-xl font-black text-slate-700 tracking-widest uppercase">
+          {done ? target : ""}
         </div>
       </div>
     </div>

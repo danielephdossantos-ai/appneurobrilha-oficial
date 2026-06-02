@@ -577,21 +577,26 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const [eiStep, setEiStep] = useState(1);
   const completedRef = useRef<boolean>(false);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
 
-  // Reinicia cronômetro quando entra na etapa de "opcoes"
+  // Reinicia cronômetro quando entra na etapa de "opcoes" (ou passo 5 na EI)
   useEffect(() => {
-    if (aula.etapa === "opcoes") {
+    if (aula.etapa === "opcoes" || (aula.isEI && eiStep === 5)) {
       startRef.current = Date.now();
       scoredRef.current = false;
     }
-  }, [aula.etapa]);
+  }, [aula.etapa, eiStep]);
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
+    if (aula.isEI) {
+      if (eiStep < 5) return 'explanation';
+      return 'encouragement';
+    }
     if (aula.etapa === 'ensino') return 'explanation';
     if (aula.etapa === 'opcoes') return 'encouragement';
     return 'idle';
@@ -604,9 +609,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   };
 
   // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
-  const stepIndex = aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0;
+  const stepIndex = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0);
   // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
-  const visualStep = aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1;
+  const visualStep = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1);
+
 
   return (
     <Shell>
@@ -670,154 +676,225 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
 
 
-            {aula.etapa === "ensino" && (() => {
-              const g = (aula.grade || "").toString();
-              const panel: "kids" | "mid" | "teen" =
-                /infantil|pré|pre|^1º/i.test(g) ? "kids" :
-                /^[2-5]º/.test(g) ? "mid" : "teen";
-              const visualGlyph = aula.visual
-                ? aula.visual
-                : hiperfoco === "dinossauros" ? "🦕"
-                  : hiperfoco === "espaco" ? "🚀"
-                  : hiperfoco === "animais" ? "🦁"
-                  : "🌟";
-
-              return (
-                <div>
-                  {/* PRÉ + 1º ANO — cena ilustrada, balão de fala */}
-                  {panel === "kids" && (
-                    <div className="space-y-4">
-                      <div className="flex justify-center">
-                        <span className="inline-block px-6 py-2 rounded-full bg-coral text-white font-black uppercase tracking-widest text-sm shadow-md">
-                          Pré + 1º Ano
-                        </span>
-                      </div>
-                      <div className="relative rounded-3xl overflow-hidden border-4 border-coral/40 bg-gradient-to-b from-sky/40 via-sky/20 to-success/30 p-6 min-h-[360px]">
-                        <div className="absolute top-3 left-6 w-12 h-12 rounded-full bg-white/70 blur-sm" />
-                        <div className="absolute top-6 left-24 w-16 h-8 rounded-full bg-white/60 blur-sm" />
-                        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-success/60 to-transparent" />
-                        <div className="relative bg-white rounded-3xl border-4 border-primary/40 px-5 py-4 shadow-lg max-w-md mx-auto">
-                          <div className="absolute -bottom-3 left-12 w-6 h-6 bg-white border-r-4 border-b-4 border-primary/40 rotate-45" />
-                          <p className="text-2xl font-black text-primary leading-snug text-center">
-                            {aula.ensino?.toUpperCase()}
-                          </p>
+            {aula.isEI ? (
+              <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
+                {eiStep < 5 ? (
+                  <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <div className="flex flex-col items-center gap-6">
+                      {/* Mascote central que se move e se ajusta */}
+                      <div className={`relative transition-all duration-1000 transform ${
+                        eiStep === 1 ? 'scale-125 translate-y-4' :
+                        eiStep === 2 ? 'scale-110 -translate-x-12' :
+                        eiStep === 3 ? 'scale-110 translate-x-12' :
+                        'scale-100'
+                      }`}>
+                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white">
+                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+                          ) : (
+                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                          )}
                         </div>
-                        <div className="relative flex items-end justify-center gap-6 mt-6">
-                          <div className="text-7xl drop-shadow-md animate-float-thinking">
-                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-16 h-16 rounded-full object-cover border-2 border-white" />
-                            ) : (
-                              activeMascot?.mascot?.image_url || materiaMeta.mascote
-                            )}
+                        {/* Balão de fala estilo HQ centralizado e dinâmico */}
+                        <div className={`absolute transition-all duration-500 ${
+                          eiStep === 2 ? '-right-16 -top-8' :
+                          eiStep === 3 ? '-left-16 -top-8' :
+                          '-top-24 left-1/2 -translate-x-1/2'
+                        } w-72 md:w-80`}>
+                          <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
+                             {/* Rabicho dinâmico */}
+                             <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
+                               eiStep === 2 ? 'bottom-[-18px] left-10' :
+                               eiStep === 3 ? 'bottom-[-18px] right-10' :
+                               'bottom-[-18px] left-1/2 -translate-x-1/2'
+                             }`} />
+                             <div className={`absolute w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[14px] border-t-white ${
+                               eiStep === 2 ? 'bottom-[-11px] left-[44px]' :
+                               eiStep === 3 ? 'bottom-[-11px] right-[44px]' :
+                               'bottom-[-11px] left-1/2 -translate-x-1/2'
+                             }`} />
+                             
+                             <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
+                               {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
+                                eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
+                                eiStep === 3 ? (aula.etapa3_ensino || "Vamos ver como faz!") :
+                                (aula.etapa4_preparo || "Tudo pronto?")}
+                             </p>
                           </div>
-                          <div className="text-8xl drop-shadow-md">{visualGlyph}</div>
                         </div>
                       </div>
-                    </div>
-                  )}
 
-                  {/* 2º AO 5º ANO — caderno pautado */}
-                  {panel === "mid" && (
-                    <div className="space-y-4">
-                      <div className="flex justify-center">
-                        <span className="inline-block px-6 py-2 rounded-full bg-coral text-white font-black uppercase tracking-widest text-sm shadow-md">
-                          2º ao 5º Ano
-                        </span>
-                      </div>
-                      <div
-                        className="rounded-2xl border-2 border-amber-300 p-8 shadow-inner"
-                        style={{
-                          backgroundColor: '#fdf6e3',
-                          backgroundImage:
-                            'repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(59,130,246,0.25) 35px, rgba(59,130,246,0.25) 36px)',
-                        }}
+                      {/* Elementos visuais gigantes para ensino concretizado */}
+                      {(eiStep === 2 || eiStep === 3) && (
+                        <div className="flex gap-4 items-center justify-center animate-bounce-slow mt-8">
+                           {eiStep === 2 ? (
+                             <div className="text-[140px] md:text-[180px] drop-shadow-2xl">
+                               {aula.visual || "⭐"}
+                             </div>
+                           ) : (
+                             <div className="flex gap-4">
+                               <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-6xl md:text-8xl font-black text-primary">
+                                 {aula.resposta_correta?.toString().charAt(0) || "A"}
+                               </div>
+                               <div className="text-6xl self-center font-black text-sun">+</div>
+                               <div className="w-28 h-28 md:w-36 md:h-36 rounded-3xl bg-white border-4 border-success shadow-xl flex items-center justify-center text-6xl md:text-8xl font-black text-success">
+                                 {aula.resposta_correta?.toString().charAt(1) || "B"}
+                               </div>
+                             </div>
+                           )}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex justify-center mt-12">
+                      <button 
+                        onClick={() => setEiStep(eiStep + 1)} 
+                        className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
-                        <div className="bg-white/80 rounded-xl border-2 border-primary/30 px-5 py-3 inline-block shadow-sm mb-6">
-                          <p className="text-xl font-black text-primary">{aula.ensino}</p>
-                        </div>
-                        <div className="text-7xl text-center my-6">{visualGlyph}</div>
-                        <div className="text-center text-2xl font-black text-slate-700">
-                          <span className="text-coral">
-                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-10 h-10 rounded-full inline-block object-cover border-2 border-white mr-2" />
-                            ) : (
-                              <span className="mr-2">{activeMascot?.mascot?.image_url || materiaMeta.mascote}</span>
-                            )}
-                          </span> 
-                          {activeMascot?.mascot?.name || materiaMeta.mascoteNome} está aqui pra te ajudar
-                        </div>
-                      </div>
+                        VAMOS LÁ! <Play className="h-8 w-8 fill-current" />
+                      </button>
                     </div>
-                  )}
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    {/* Cabeçalho do Jogo com Instrução do Mascote */}
+                    <div className="flex items-end gap-4 mb-8">
+                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-5xl overflow-hidden">
+                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
+                          ) : (
+                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                          )}
+                       </div>
+                       <div className="flex-1 bg-white rounded-2xl border-[3px] border-foreground px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative mb-2">
+                          <div className="absolute -left-3 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-foreground" />
+                          <div className="absolute -left-[8px] bottom-[17px] w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[10px] border-r-white" />
+                          <p className="font-bold text-primary uppercase text-sm md:text-base leading-tight">
+                            {aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!"}
+                          </p>
+                       </div>
+                    </div>
 
-                  {/* 6º AO 9º ANO — clean / quadro branco */}
-                  {panel === "teen" && (
-                    <div className="space-y-4">
-                      <div className="flex justify-center">
-                        <span className="inline-block px-6 py-2 rounded-full bg-primary text-primary-foreground font-black uppercase tracking-widest text-sm shadow-md">
-                          6º ao 9º Ano
-                        </span>
-                      </div>
-                      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                        <div className="border-b border-slate-200 pb-4 mb-6">
-                          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Explicação</div>
-                          <p className="text-xl font-semibold text-slate-800 leading-relaxed">{aula.ensino}</p>
-                        </div>
-                        <div className="flex items-center justify-center gap-4 py-4">
-                          <div className="text-6xl">{visualGlyph}</div>
-                          <div className="text-sm font-medium text-slate-500 max-w-xs">
-                            Leia com atenção e siga para o próximo passo quando estiver pronto.
+                    <EIMiniGame
+                      aula={aula}
+                      disabled={acertou === true}
+                      onAnswer={(isCorrect, opt) => {
+                        setTentativa(opt);
+                        setAcertou(isCorrect);
+                        if (!scoredRef.current) {
+                          const elapsed = (Date.now() - startRef.current) / 1000;
+                          registerPerformance(isCorrect, elapsed, aula.activityId);
+                          scoredRef.current = true;
+                        }
+                        if (isCorrect && !completedRef.current && aula.activityId) {
+                          completedRef.current = true;
+                          onCompleted?.(aula.activityId);
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                {aula.etapa === "ensino" && (() => {
+                  const g = (aula.grade || "").toString();
+                  const panel: "kids" | "mid" | "teen" =
+                    /infantil|pré|pre|^1º/i.test(g) ? "kids" :
+                    /^[2-5]º/.test(g) ? "mid" : "teen";
+                  const visualGlyph = aula.visual
+                    ? aula.visual
+                    : hiperfoco === "dinossauros" ? "🦕"
+                      : hiperfoco === "espaco" ? "🚀"
+                      : hiperfoco === "animais" ? "🦁"
+                      : "🌟";
+
+                  return (
+                    <div>
+
+                      {/* 2º AO 5º ANO — caderno pautado */}
+                      {panel === "mid" && (
+                        <div className="space-y-4">
+                          <div className="flex justify-center">
+                            <span className="inline-block px-6 py-2 rounded-full bg-coral text-white font-black uppercase tracking-widest text-sm shadow-md">
+                              2º ao 5º Ano
+                            </span>
+                          </div>
+                          <div
+                            className="rounded-2xl border-2 border-amber-300 p-8 shadow-inner"
+                            style={{
+                              backgroundColor: '#fdf6e3',
+                              backgroundImage:
+                                'repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(59,130,246,0.25) 35px, rgba(59,130,246,0.25) 36px)',
+                            }}
+                          >
+                            <div className="bg-white/80 rounded-xl border-2 border-primary/30 px-5 py-3 inline-block shadow-sm mb-6">
+                              <p className="text-xl font-black text-primary">{aula.ensino}</p>
+                            </div>
+                            <div className="text-7xl text-center my-6">{visualGlyph}</div>
+                            <div className="text-center text-2xl font-black text-slate-700">
+                              <span className="text-coral">
+                                {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                                  <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-10 h-10 rounded-full inline-block object-cover border-2 border-white mr-2" />
+                                ) : (
+                                  <span className="mr-2">{activeMascot?.mascot?.image_url || materiaMeta.mascote}</span>
+                                )}
+                              </span> 
+                              {activeMascot?.mascot?.name || materiaMeta.mascoteNome} está aqui pra te ajudar
+                            </div>
                           </div>
                         </div>
+                      )}
+
+                      {/* 6º AO 9º ANO — clean / quadro branco */}
+                      {panel === "teen" && (
+                        <div className="space-y-4">
+                          <div className="flex justify-center">
+                            <span className="inline-block px-6 py-2 rounded-full bg-primary text-primary-foreground font-black uppercase tracking-widest text-sm shadow-md">
+                              6º ao 9º Ano
+                            </span>
+                          </div>
+                          <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                            <div className="border-b border-slate-200 pb-4 mb-6">
+                              <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Explicação</div>
+                              <p className="text-xl font-semibold text-slate-800 leading-relaxed">{aula.ensino}</p>
+                            </div>
+                            <div className="flex items-center justify-center gap-4 py-4">
+                              <div className="text-6xl">{visualGlyph}</div>
+                              <div className="text-sm font-medium text-slate-500 max-w-xs">
+                                Leia com atenção e siga para o próximo passo quando estiver pronto.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="mt-6 flex gap-2 flex-wrap">
+                        <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                          Continuar →
+                        </button>
                       </div>
                     </div>
-                  )}
+                  );
+                })()}
 
-                  <div className="mt-6 flex gap-2 flex-wrap">
-                    <button onClick={() => setAula({ ...aula, etapa: aula.isEI ? "opcoes" : "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                      {aula.isEI ? "Vamos brincar! 🎉" : "Continuar →"}
+
+                {aula.etapa === "demo" && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-4">Veja alguns exemplos:</h3>
+                    <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
+                      {aula.demo}
+                    </div>
+                    <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                      Estou pronto para o desafio!
                     </button>
                   </div>
-                </div>
-              );
-            })()}
+                )}
 
-
-            {aula.etapa === "demo" && (
-              <div>
-                <h3 className="text-lg font-bold mb-4">Veja alguns exemplos:</h3>
-                <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
-                  {aula.demo}
-                </div>
-                <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                  Estou pronto para o desafio!
-                </button>
-              </div>
-            )}
-
-            {aula.etapa === "opcoes" && (
-              <div>
-                {aula.isEI ? (
-                  <EIMiniGame
-                    aula={aula}
-                    disabled={acertou === true}
-                    onAnswer={(isCorrect, opt) => {
-                      setTentativa(opt);
-                      setAcertou(isCorrect);
-                      if (!scoredRef.current) {
-                        const elapsed = (Date.now() - startRef.current) / 1000;
-                        registerPerformance(isCorrect, elapsed, aula.activityId);
-                        scoredRef.current = true;
-                      }
-                      if (isCorrect && !completedRef.current && aula.activityId) {
-                        completedRef.current = true;
-                        onCompleted?.(aula.activityId);
-                      }
-                    }}
-                  />
-                ) : (
-                  <>
+                {aula.etapa === "opcoes" && (
+                  <div>
                     {!aula.isEI && <p className="mb-6 font-bold text-xl">{aula.pergunta || "O que você acha?"}</p>}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {(aula.opcoes || []).map((opt: string, index: number) => (
                         <button
@@ -847,7 +924,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         </button>
                       ))}
                     </div>
-                  </>
+                  </div>
                 )}
                 {(!aula.opcoes || aula.opcoes.length === 0) && (
                   <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
@@ -917,7 +994,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     </div>
                   </div>
                 )}
-              </div>
+              </>
             )}
           </Card>
           <button onClick={() => setAula(null)} className="text-sm text-muted-foreground hover:text-foreground">← Voltar para matérias</button>
