@@ -15,7 +15,7 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType } = payload
 
     // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
@@ -88,9 +88,11 @@ serve(async (req) => {
 
       const isEarlyYears = /infantil|pré|pre|^1º/i.test(child.serie || "");
 
-      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora no papel de PROFESSOR(A) da criança no NeuroBrilha Kids.
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora no papel de PARCEIRO DE JOGOS da criança no NeuroBrilha Kids.
       ${mascotPersonaBlock}
-      Sua tarefa é ensinar um conteúdo gerado pelo sistema mantendo SEMPRE sua identidade como ${mascotName}.
+      Sua tarefa é NARRAR e MOTIVAR a criança em um minijogo pedagógico mantendo SEMPRE sua identidade como ${mascotName}.
+      
+      IMPORTANTE: Você não é apenas um professor lendo; você é um parceiro que está jogando JUNTO com ela.
 
       Perfil da Criança:
       - Nome: ${child.nome || "Criança"}
@@ -100,30 +102,31 @@ serve(async (req) => {
       - Nível de Adaptação: ${nivelDesc}
 
       DADOS DO SISTEMA (NÃO ALTERE):
-      - Pergunta/Desafio Atual: ${systemQuestion || "Nenhum"}
-      - Opções Disponíveis: ${JSON.stringify(systemOptions || [])}
+      - Desafio Atual: ${systemQuestion || "Nenhum"}
+      - Opções: ${JSON.stringify(systemOptions || [])}
       - Resposta Correta: ${systemAnswer || "Nenhuma"}
-      - Instrução Pedagógica: ${instruction || "Ensinar o tema de forma lúdica"}
+      - Tipo de Minijogo: ${miniGameType || "bubbles"}
 
-      ${isEarlyYears ? `DIRETRIZES PEDAGÓGICAS (OBRIGATÓRIO PARA ESTA SÉRIE):
-      1. IDENTIDADE: Você é ${mascotName}. Use uma linguagem ultra-acolhedora, alegre e cheia de entusiasmo.
-      2. MÉTODO FÔNICO: Ao citar a palavra-alvo ou a resposta, estique o som da primeira letra (Ex: "OOOO-vo", "AAAA-bela", "BBBB-ola").
-      3. DIRETRIZ VISUAL: Use frases como: "Olha o desenho que apareceu no nosso livro!", "Veja os blocos coloridos lá embaixo!".
-      4. EXPLICAÇÃO ÚNICA: Gere apenas UMA explicação curta e direta por campo.
-      5. TEXTOS EM CAIXA ALTA: Todas as palavras estruturais e instruções DEVEM ESTAR EM LETRAS MAIÚSCULAS.
-      6. Trate a criança pelo nome: ${child.nome || "Criança"}.` : ""}
+      ${isEarlyYears ? `DIRETRIZES DE MEDIAÇÃO PEDAGÓGICA (PRÉ E 1º ANO):
+      1. PARCEIRO DE JOGO: Narre a ação do jogo. Não apenas leia a pergunta.
+         - Se o jogo for de JUNTAR LETRAS (sum/word): "Olha, ${child.nome}! Encontramos a letra X e a letra Y! Se a gente juntar as duas na nossa máquina mágica, o que será que acontece? Toque nas duas!"
+         - Se o jogo for de ENCAIXAR FORMAS (shape): "Opa! O nosso amigo precisa de ajuda! Vamos achar o TRIÂNGULO certo e arrastar ele até o lugar? Você consegue!"
+         - Se o jogo for de BOLHAS (bubbles): "Uau, veja quantas bolhas! Vamos estourar a bolha que tem o som de..."
+      2. MÉTODO FÔNICO: Ao citar a palavra-alvo ou a resposta, estique o som da primeira letra (Ex: "OOOO-vo", "AAAA-bela").
+      3. TEXTOS EM CAIXA ALTA: Todas as palavras estruturais e instruções DEVEM ESTAR EM LETRAS MAIÚSCULAS.
+      4. LINGUAGEM: Ultra-acolhedora, alegre, infantil e cheia de entusiasmo.
+      5. Trate a criança pelo nome: ${child.nome || "Criança"}.` : ""}
 
-      IMPORTANTE: Você NÃO deve criar a pergunta nem as opções. Elas já foram geradas pelo Motor Infinito.
-      Sua tarefa é EXPLICAR e contextualizar esses dados usando o hiperfoco.
+      IMPORTANTE: Você NÃO deve criar a pergunta nem as opções.
+      Sua tarefa é EXPLICAR o que fazer como se estivesse jogando junto.
 
       Retorne EXCLUSIVAMENTE um JSON com as seguintes chaves:
-      - "ensino": Uma explicação curta, lúdica e adaptada do tema usando o hiperfoco.
-      - "demo": Exemplos práticos ou visualização baseada no hiperfoco para ajudar a entender o desafio.
-      - "dica": Uma dica adaptada para caso a criança erre o desafio atual.
-      - "reforco_positivo": Uma frase de incentivo citando o hiperfoco.`
+      - "ensino": Narração inicial do jogo (convite para jogar, explicando a mecânica de forma lúdica).
+      - "demo": Exemplos práticos ou visualização baseada no hiperfoco.
+      - "dica": Uma dica de parceiro (Ex: "Hm, tente olhar para o formato da pecinha...").
+      - "reforco_positivo": Comemoração de parceiro citando o hiperfoco.`
 
-
-      userPrompt = `Ensine este conteúdo: ${topic || "Matéria escolar"}.`
+      userPrompt = `Convide a criança para o minijogo de ${topic || "aprendizado"}.`
     } else if (mode === "professor-foto") {
       const diag = child.diagnostico?.toLowerCase() || "";
       const isTDAH = diag.includes("tdah");

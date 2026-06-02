@@ -297,6 +297,20 @@ function Escola() {
 
       console.log("Formatted data for AI:", { systemQuestion, systemOptions, systemAnswer });
 
+      // Determinar o tipo de minijogo para a IA adaptar a narração (apenas para EI)
+      let miniGameType = "bubbles";
+      if (isEI(selectedGrade)) {
+        const opts = (systemOptions || []).map(String);
+        const palavra = (activity.content.palavra || systemAnswer || "").toUpperCase();
+        const isShapes = materiaId.includes("forma") || activity.title.toLowerCase().includes("forma") || 
+                        ["TRIANGULO", "TRIÂNGULO", "CIRCULO", "CÍRCULO", "QUADRADO", "RETANGULO", "RETÂNGULO", "ESTRELA", "CORACAO", "CORAÇÃO", "LOSANGO", "OVAL", "HEXAGONO", "HEXÁGONO"].includes(systemAnswer.toUpperCase());
+        
+        const allSingleLetters = opts.length > 0 && opts.every((o: string) => o.trim().length === 1);
+        if (isShapes) miniGameType = "shape";
+        else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
+        else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+      }
+
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
@@ -308,7 +322,8 @@ function Escola() {
           systemQuestion,
           systemOptions,
           systemAnswer,
-          instruction: activity.instruction
+          instruction: activity.instruction,
+          miniGameType // Enviando o tipo de jogo para a IA
         }
       });
 
@@ -366,6 +381,7 @@ function Escola() {
           setAula={setAula} 
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
+          activeMascot={activeMascot}
           tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
         />
@@ -409,11 +425,15 @@ function Escola() {
         <div className="mb-4 flex items-end gap-3 md:gap-4">
           {/* Avatar do mascote apontando para o balão */}
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking">
-              🐦
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking overflow-hidden">
+              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
+              ) : (
+                activeMascot?.mascot?.image_url || "🐦"
+              )}
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow">
-              PROFª PIPA
+            <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
+              {activeMascot?.mascot?.name || "Profª Pipa"}
             </div>
           </div>
 
@@ -551,7 +571,7 @@ function Escola() {
 
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
@@ -594,12 +614,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
         <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
         <div className="relative flex items-center gap-4">
-          <div className="text-5xl drop-shadow animate-float-thinking">{materiaMeta.mascote}</div>
+          <div className="text-5xl drop-shadow animate-float-thinking">
+            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+            ) : (
+              activeMascot?.mascot?.image_url || materiaMeta.mascote
+            )}
+          </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
             <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
             <div className="text-sm text-muted-foreground">
-              <b>{materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+              <b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
             </div>
           </div>
         </div>
@@ -677,7 +703,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                           </p>
                         </div>
                         <div className="relative flex items-end justify-center gap-6 mt-6">
-                          <div className="text-7xl drop-shadow-md animate-float-thinking">{materiaMeta.mascote}</div>
+                          <div className="text-7xl drop-shadow-md animate-float-thinking">
+                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-16 h-16 rounded-full object-cover border-2 border-white" />
+                            ) : (
+                              activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            )}
+                          </div>
                           <div className="text-8xl drop-shadow-md">{visualGlyph}</div>
                         </div>
                       </div>
@@ -705,7 +737,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                         </div>
                         <div className="text-7xl text-center my-6">{visualGlyph}</div>
                         <div className="text-center text-2xl font-black text-slate-700">
-                          <span className="text-coral">{materiaMeta.mascote}</span> {materiaMeta.mascoteNome} está aqui pra te ajudar
+                          <span className="text-coral">
+                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-10 h-10 rounded-full inline-block object-cover border-2 border-white mr-2" />
+                            ) : (
+                              <span className="mr-2">{activeMascot?.mascot?.image_url || materiaMeta.mascote}</span>
+                            )}
+                          </span> 
+                          {activeMascot?.mascot?.name || materiaMeta.mascoteNome} está aqui pra te ajudar
                         </div>
                       </div>
                     </div>
@@ -831,12 +870,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                 {acertou === true && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
-                      <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
+                      <div className="text-4xl drop-shadow">
+                        {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                          <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+                        ) : (
+                          activeMascot?.mascot?.image_url || materiaMeta.mascote
+                        )}
+                      </div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
-                        <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
+                        <div className="text-xs text-success/70 mt-1"><b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                       {aula.bancoOrdem && (
                         <button
@@ -852,7 +897,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                 
                 {acertou === false && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
-                    <div className="text-4xl">{materiaMeta.mascote}</div>
+                    <div className="text-4xl">
+                      {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                        <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+                      ) : (
+                        activeMascot?.mascot?.image_url || materiaMeta.mascote
+                      )}
+                    </div>
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
                     <div className="flex-1">
                       <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
