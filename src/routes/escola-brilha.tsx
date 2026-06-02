@@ -254,7 +254,8 @@ function Escola() {
           aula={aula} 
           setAula={setAula} 
           childNome={activeChild.nome} 
-          hiperfoco={activeChild.hiperfoco} 
+          hiperfoco={activeChild.hiperfoco}
+          tier={gradeTier(aula.grade || selectedGrade)}
         />
       </AulaErrorBoundary>
     );
