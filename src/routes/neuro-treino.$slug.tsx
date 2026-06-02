@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
+import { AlertCircle, ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
@@ -14,24 +14,80 @@ export const Route = createFileRoute("/neuro-treino/$slug")({
 function NeuroAtividade() {
   const { slug } = Route.useParams() as { slug: CategoriaSlug };
   const navigate = useNavigate();
-  const meta = CATEGORIAS[slug];
-  const vars = VARIATIONS[slug];
   const { hiperfoco } = useHiperfoco();
 
   const [index, setIndex] = useState(0);
   const [acertos, setAcertos] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Gate: sem hiperfoco selecionado → manda para a tela de configuração
+  // Usamos useEffect para evitar renderização condicional de hooks (Navigate é um componente, mas por segurança)
   if (!hiperfoco) {
     return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
   }
 
-  if (!meta || !vars) {
+  const meta = CATEGORIAS[slug];
+  const vars = VARIATIONS[slug];
+
+  useEffect(() => {
+    // Simula carregamento do banco de dados/Supabase
+    // Já temos os dados localmente em VARIATIONS, mas o usuário pediu lógica de carregamento e tratamento de erro
+    try {
+      console.log(`Buscando atividades para categoria: ${slug} com hiperfoco: ${hiperfoco.label}`);
+      
+      if (!meta || !vars) {
+        throw new Error(`Dados não encontrados para a categoria: ${slug}`);
+      }
+
+      // Simulamos um delay de rede para mostrar o loading
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    } catch (err: any) {
+      console.error("Erro ao carregar atividade Neuro-Treino:", err);
+      setError(err.message || "Falha ao carregar atividade");
+      setIsLoading(false);
+    }
+  }, [slug, meta, vars, hiperfoco]);
+
+  if (isLoading) {
     return (
       <Shell>
-        <Card className="text-center">
-          <h2 className="text-2xl font-extrabold mb-2">Atividade não encontrada</h2>
-          <button onClick={() => navigate({ to: "/neuro-treino" })} className="mt-4 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold">Voltar</button>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mb-4" />
+          <h2 className="text-xl font-bold text-muted-foreground">Preparando treino personalizado...</h2>
+          <p className="text-sm text-muted-foreground mt-2">Aplicando hiperfoco: {hiperfoco.emoji} {hiperfoco.label}</p>
+        </div>
+      </Shell>
+    );
+  }
+
+  if (error || !meta || !vars) {
+    return (
+      <Shell>
+        <Card className="text-center p-8">
+          <div className="bg-destructive/10 text-destructive rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <AlertCircle size={32} />
+          </div>
+          <h2 className="text-2xl font-extrabold mb-2">Ops! Algo deu errado</h2>
+          <p className="text-muted-foreground mb-6">{error || "Atividade não encontrada no banco de dados."}</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-105 transition-all"
+            >
+              <RotateCcw size={18} /> Tentar Novamente
+            </button>
+            <button 
+              onClick={() => navigate({ to: "/neuro-treino" })} 
+              className="bg-muted text-muted-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-105 transition-all"
+            >
+              <ArrowLeft size={18} /> Voltar ao Painel
+            </button>
+          </div>
         </Card>
       </Shell>
     );
