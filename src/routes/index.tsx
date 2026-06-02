@@ -25,16 +25,38 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { children: allChildren, activeChild, setActiveChild } = useAppState();
+  const { children: allChildren, activeChild, setActiveChild, isLoading, session } = useAppState();
   const engine = usePedagogicalEngine();
+  const navigate = useNavigate();
+  const [showEggHatch, setShowEggHatch] = useState(false);
+
+  // Onboarding obrigatório: nova conta sem crianças → anamnese
+  useEffect(() => {
+    if (!isLoading && session && allChildren.length === 0) {
+      navigate({ to: "/anamnese/$childId", params: { childId: "nova" }, replace: true });
+    }
+  }, [isLoading, session, allChildren.length, navigate]);
+
+  // Cinemática do ovo: primeira vez que a criança entra após anamnese
+  useEffect(() => {
+    if (activeChild?.id && activeChild.anamnese_completa && shouldShowEggHatch(activeChild.id)) {
+      setShowEggHatch(true);
+    }
+  }, [activeChild?.id, activeChild?.anamnese_completa]);
 
   return (
     <Shell>
+      <AnimatePresence>
+        {showEggHatch && activeChild?.id && (
+          <EggHatchCinematic childId={activeChild.id} onClose={() => setShowEggHatch(false)} />
+        )}
+      </AnimatePresence>
       <PageHeader
         emoji="✨"
         title={`Bem-vindo, ${activeChild?.nome ?? "amigo"}!`}
         subtitle="Sua jornada neuro-divertida começa aqui."
       />
+
 
       <div className="flex flex-col lg:flex-row items-center gap-12 mb-16 bg-gradient-to-br from-primary/5 via-white to-secondary/5 p-12 rounded-[4rem] border-4 border-primary/20 shadow-glow relative overflow-hidden">
         {/* Decorative elements */}
