@@ -613,12 +613,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
         <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
         <div className="relative flex items-center gap-4">
-          <div className="text-5xl drop-shadow animate-float-thinking">{materiaMeta.mascote}</div>
+          <div className="text-5xl drop-shadow animate-float-thinking">
+            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+            ) : (
+              activeMascot?.mascot?.image_url || materiaMeta.mascote
+            )}
+          </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
             <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
             <div className="text-sm text-muted-foreground">
-              <b>{materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
+              <b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está com você nesta aventura — {theme.vibe.toLowerCase()}.
             </div>
           </div>
         </div>
