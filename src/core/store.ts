@@ -79,6 +79,79 @@ export interface Child {
   observacoes: string;
 }
 
+const DEFAULT_CHILD_PROFILE: Pick<
+  Child,
+  | "hiperfoco"
+  | "has_hyperfocus"
+  | "hyperfocus_list"
+  | "diagnostico"
+  | "avatar"
+  | "anamnese_completa"
+  | "sensory_mode"
+  | "coins"
+  | "earned_today"
+  | "total_earned"
+  | "perfil"
+  | "niveis"
+  | "tempo_atencao_min"
+  | "flags"
+  | "observacoes"
+> = {
+  hiperfoco: "animais",
+  has_hyperfocus: true,
+  hyperfocus_list: [],
+  diagnostico: "nenhum",
+  avatar: "🧒",
+  anamnese_completa: false,
+  sensory_mode: "foco",
+  coins: 0,
+  earned_today: 0,
+  total_earned: 0,
+  perfil: {
+    leitura: 50,
+    escrita: 50,
+    matematica: 50,
+    atencao: 50,
+    linguagem: 50,
+    autonomia: 50,
+    emocional: 50,
+    social: 50,
+  },
+  niveis: {
+    geral: 2,
+    portugues: 2,
+    matematica: 2,
+    ciencias: 2,
+    historia: 2,
+    geografia: 2,
+  },
+  tempo_atencao_min: 15,
+  flags: {
+    apoioVisual: true,
+    passoAPasso: true,
+    preferAudio: false,
+    contaNosDedos: false,
+    trocaLetras: false,
+    palavrasLongas: false,
+  },
+  observacoes: "",
+};
+
+function normalizeChild(row: Partial<Child> & { id: string; user_id: string; nome: string }): Child {
+  return {
+    ...DEFAULT_CHILD_PROFILE,
+    ...row,
+    idade: row.idade ?? 6,
+    serie: row.serie ?? "1º ano",
+    anamnese_completa: row.anamnese_completa ?? false,
+    has_hyperfocus: row.has_hyperfocus ?? DEFAULT_CHILD_PROFILE.has_hyperfocus,
+    hyperfocus_list: Array.isArray(row.hyperfocus_list) ? row.hyperfocus_list : DEFAULT_CHILD_PROFILE.hyperfocus_list,
+    perfil: { ...DEFAULT_CHILD_PROFILE.perfil, ...(row.perfil ?? {}) },
+    niveis: { ...DEFAULT_CHILD_PROFILE.niveis, ...(row.niveis ?? {}) },
+    flags: { ...DEFAULT_CHILD_PROFILE.flags, ...(row.flags ?? {}) },
+  };
+}
+
 export interface AnamnesisData {
   id?: string;
   child_id: string;
