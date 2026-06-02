@@ -958,7 +958,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:5,l:"Achar",i:"🔎"},
                 {n:6,l:"Escrever",i:"✏️"},
                 {n:7,l:"Legal!",i:"🎉"},
-              ].map(s => {
+              ].map((s: any) => {
                 const active = s.n === eiStep;
                 const done = s.n < eiStep;
                 return (
@@ -976,7 +976,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:4,l:"Atividade",i:"✋"},
                 {n:5,l:"Feedback",i:"💬"},
                 {n:6,l:"Reforço",i:"⭐"},
-              ].map(s => {
+              ].map((s: any) => {
                 const active = s.n === visualStep;
                 const done = s.n < visualStep;
                 return (
@@ -988,6 +988,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   </span>
                 );
               })}
+
             </div>
 
 
