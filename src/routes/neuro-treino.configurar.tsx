@@ -50,7 +50,7 @@ function ConfigurarHiperfoco() {
             return (
               <button
                 key={h.id}
-                onClick={() => setHiperfocoById(h.id)}
+                onClick={() => h.id !== "custom" && setHiperfocoById(h.id as Exclude<HiperfocoId, "custom">)}
                 className={`rounded-2xl p-4 border-2 text-left transition-all hover:scale-105 flex flex-col items-center text-center ${
                   ativo
                     ? "border-primary bg-primary/10 shadow-glow"
