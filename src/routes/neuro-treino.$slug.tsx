@@ -3,8 +3,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertCircle, ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
-import { CATEGORIAS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
+import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
 import { useHiperfoco } from "@/context/HiperfocoContext";
+import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
