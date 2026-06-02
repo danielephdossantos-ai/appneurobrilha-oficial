@@ -1403,7 +1403,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         onClick={() => setEiStep(eiStep + 1)}
                         className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
-                        {eiStep < 5 ? <>CONTINUAR <Play className="h-8 w-8 fill-current" /></> : <>FAZER SOZINHO <Play className="h-8 w-8 fill-current" /></>}
+                        {eiStep < 5 ? <>CONTINUAR <Play className="h-8 w-8 fill-current" /></> : <>AGORA VOCÊ <Play className="h-8 w-8 fill-current" /></>}
                       </button>
                       <button
                         onClick={naoEntendi}
