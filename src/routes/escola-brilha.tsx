@@ -211,7 +211,8 @@ function Escola() {
 
   const isTeen = /^[6-9]º/.test(selectedGrade);
   // EI e 2º-5º sempre têm aula guiada de 5 telas. Teen escolhe.
-  const guidedActive = !isTeen || teenGuided;
+  // Toda aula deve seguir o fluxo pedagógico de professor (8 passos). Sem atalho.
+  const guidedActive = true;
 
   const showBanco = !!activeChild && isFundamental2a9(selectedGrade);
 
