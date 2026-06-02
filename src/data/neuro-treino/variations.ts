@@ -165,16 +165,16 @@ const MOTORZINHO_VARS: Variation[] = range(30).map((i) => ({
 
 // 3. RIMAS
 const RIMAS_BANK = [
-  { palavra:"BOLA", correta:"COLA", outras:["PATO","FACA"] },
-  { palavra:"GATO", correta:"PATO", outras:["BOLA","FOLHA"] },
-  { palavra:"COROA", correta:"LAGOA", outras:["CARRO","SAPO"] },
-  { palavra:"JANELA", correta:"PANELA", outras:["MENINO","FOGO"] },
-  { palavra:"MÃO", correta:"PÃO", outras:["LUA","FLOR"] },
-  { palavra:"FACA", correta:"VACA", outras:["BOLA","CASA"] },
-  { palavra:"GELO", correta:"CABELO", outras:["BARCO","SOFÁ"] },
-  { palavra:"FLOR", correta:"COR", outras:["MESA","CADEIRA"] },
-  { palavra:"CASA", correta:"BRASA", outras:["CARRO","BOI"] },
-  { palavra:"PATO", correta:"RATO", outras:["FLOR","BANANA"] },
+  { palavra:"BOLA", correta:"COLA", outras:["PATO","FACA","LIVRO"] },
+  { palavra:"GATO", correta:"PATO", outras:["BOLA","FOLHA","MESA"] },
+  { palavra:"COROA", correta:"LAGOA", outras:["CARRO","SAPO","BOLA"] },
+  { palavra:"JANELA", correta:"PANELA", outras:["MENINO","FOGO","CARRO"] },
+  { palavra:"MÃO", correta:"PÃO", outras:["LUA","FLOR","GATO"] },
+  { palavra:"FACA", correta:"VACA", outras:["BOLA","CASA","SOL"] },
+  { palavra:"GELO", correta:"CABELO", outras:["BARCO","SOFÁ","PATO"] },
+  { palavra:"FLOR", correta:"COR", outras:["MESA","CADEIRA","LUA"] },
+  { palavra:"CASA", correta:"BRASA", outras:["CARRO","BOI","FLOR"] },
+  { palavra:"PATO", correta:"RATO", outras:["FLOR","BANANA","CASA"] },
 ];
 const RIMAS_VARS: Variation[] = range(30).map((i) => {
   const b = RIMAS_BANK[i % RIMAS_BANK.length];
