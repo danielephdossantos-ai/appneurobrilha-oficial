@@ -409,6 +409,9 @@ function Escola() {
           activeMascot={activeMascot}
           tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
+          explanationLevel={explanationLevel}
+          setExplanationLevel={setExplanationLevel}
+          activeChild={activeChild}
         />
       </AulaErrorBoundary>
     );
@@ -1481,7 +1484,29 @@ function MathExplanationScreen({
 }
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ 
+  aula, 
+  setAula, 
+  childNome, 
+  hiperfoco, 
+  activeMascot, 
+  tier, 
+  onCompleted,
+  explanationLevel,
+  setExplanationLevel,
+  activeChild
+}: { 
+  aula: any; 
+  setAula: (a: any) => void; 
+  childNome: string; 
+  hiperfoco: string; 
+  activeMascot: any; 
+  tier: GradeTier; 
+  onCompleted?: (activityId: string) => void;
+  explanationLevel: "easy" | "medium" | "hard";
+  setExplanationLevel: (l: "easy" | "medium" | "hard") => void;
+  activeChild: any;
+}) {
 
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
