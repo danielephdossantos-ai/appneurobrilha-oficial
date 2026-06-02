@@ -88,6 +88,14 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
     case "sequencia-de-cores": return <SequenciaCores p={variation.payload} onDone={onConcluir} />;
     case "simetria": return <Simetria p={variation.payload} onDone={onConcluir} />;
     case "decoracao-criativa": return <Decoracao p={variation.payload} onDone={onConcluir} />;
+    case "onomatopeias-animadas": return <Onomatopeias p={variation.payload} onDone={onConcluir} />;
+    case "ritmo-e-sopro": return <RitmoSopro p={variation.payload} onDone={onConcluir} />;
+    case "paromatopeias-corpo": return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
+    case "tracado-letras": return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
+    case "caminho-dos-pontos": return <CaminhoPontos p={variation.payload} onDone={onConcluir} />;
+    case "labirinto-precisao": return <LabirintoPrecisao p={variation.payload} onDone={onConcluir} />;
+    case "triagem-categorias": return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
+    case "expressao-emocao": return <ExpressaoEmocao p={variation.payload} onDone={onConcluir} />;
   }
 }
 
@@ -451,6 +459,251 @@ function Decoracao({ p, onDone }: any) {
       <div className="flex gap-2 justify-center">
         <button onClick={()=>setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold flex items-center gap-1"><RotateCcw size={14}/> Limpar</button>
         <button onClick={()=>onDone(placed.length >= 3)} className="bg-success text-white px-6 py-2 rounded-xl font-black flex items-center gap-1"><Sparkles size={16}/> Finalizar arte</button>
+      </div>
+    </div>
+  );
+}
+
+// ============== 16. Onomatopeias Animadas ==============
+// Mecânica única: balão grande com som textual + opções com emoji
+function Onomatopeias({ p, onDone }: any) {
+  return (
+    <div className="text-center">
+      <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
+        <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Som</div>
+        <div className="text-5xl font-black text-coral">{p.som}</div>
+      </div>
+      <div className="grid grid-cols-3 gap-3">
+        {p.options.map((o:any, i:number) => (
+          <button key={i} onClick={()=>onDone(o.nome === p.correctName)} className="bg-card border-2 border-border rounded-2xl p-5 hover:border-coral hover:scale-105 transition-all">
+            <div className="text-6xl mb-1">{o.emoji}</div>
+            <div className="font-bold text-xs">{o.nome}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============== 17. Ritmo e Sopro Visual ==============
+// Mecânica única: barra horizontal de comprimento variável; segurar = encher
+function RitmoSopro({ p, onDone }: any) {
+  const [holding, setHolding] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const ref = useRef<number | null>(null);
+  useEffect(() => {
+    if (holding) {
+      const start = Date.now();
+      ref.current = window.setInterval(() => {
+        const pct = Math.min(100, ((Date.now() - start) / (p.holdSeconds * 1000)) * 100);
+        setProgress(pct);
+        if (pct >= 100) { window.clearInterval(ref.current!); onDone(true); }
+      }, 50);
+    } else if (ref.current) window.clearInterval(ref.current);
+    return () => { if (ref.current) window.clearInterval(ref.current); };
+  }, [holding]);
+  return (
+    <div className="text-center">
+      <div className="text-6xl mb-2">{p.veiculo}</div>
+      <div className="text-3xl font-black text-coral mb-4">{p.silaba}</div>
+      <div className="mx-auto h-8 bg-muted rounded-full overflow-hidden mb-2" style={{ width: `${p.tamanho}%`, maxWidth: "90%" }}>
+        <div className="h-full bg-gradient-to-r from-sun to-coral transition-all" style={{ width: `${progress}%` }} />
+      </div>
+      <div className="text-xs text-muted-foreground mb-4">Tamanho do sopro: {p.tamanho}%</div>
+      <button
+        onMouseDown={()=>setHolding(true)} onMouseUp={()=>setHolding(false)} onMouseLeave={()=>setHolding(false)}
+        onTouchStart={()=>setHolding(true)} onTouchEnd={()=>setHolding(false)}
+        className="bg-coral text-white px-12 py-6 rounded-2xl font-black text-lg shadow-lg active:scale-95"
+      >
+        SOPRE AQUI
+      </button>
+    </div>
+  );
+}
+
+// ============== 18. Sons do Corpo / Paromatopeias ==============
+// Mecânica única: som textual → escolher ação (texto + emoji)
+function SonsCorpo({ p, onDone }: any) {
+  return (
+    <div className="text-center">
+      <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Ouça</div>
+      <div className="text-5xl font-black text-coral mb-6">"{p.som}"</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {p.opts.map((o:string, i:number) => (
+          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all">{o}</button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============== 19. Traçado de Letras ==============
+// Mecânica única: tocar setas direcionais na ordem correta (1→2→3)
+function TracadoLetras({ p, onDone }: any) {
+  const [step, setStep] = useState(0);
+  const tap = (i:number) => {
+    if (i === step) {
+      if (step + 1 >= p.passos.length) { toast.success("Letra completa!"); onDone(true); }
+      else setStep(step+1);
+    } else {
+      toast("Ops, comece pela seta 1");
+    }
+  };
+  return (
+    <div className="text-center">
+      <div className="text-[10rem] leading-none font-black text-success/20 select-none mb-4">{p.letra}</div>
+      <div className="text-sm text-muted-foreground mb-3">Toque as setas em ordem:</div>
+      <div className="flex justify-center gap-3 flex-wrap">
+        {p.passos.map((seta:string, i:number) => {
+          const done = i < step;
+          const current = i === step;
+          return (
+            <button key={i} onClick={()=>tap(i)} className={`relative w-20 h-20 rounded-2xl text-4xl border-4 transition-all ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse" : "bg-muted border-border"}`}>
+              <span className="absolute top-0 left-1 text-xs font-black bg-success text-white rounded-full px-1.5">{i+1}</span>
+              {seta}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============== 20. Caminho dos Pontos ==============
+// Mecânica única: SVG com pontos numerados; tocar em ordem desenha linhas
+function CaminhoPontos({ p, onDone }: any) {
+  const [next, setNext] = useState(0);
+  const [linhas, setLinhas] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
+  const tap = (i:number) => {
+    if (i !== next) { toast("Próximo é o " + (next+1)); return; }
+    if (i > 0) {
+      const a = p.pontos[i-1], b = p.pontos[i];
+      setLinhas(l => [...l, { x1:a.x, y1:a.y, x2:b.x, y2:b.y }]);
+    }
+    if (i + 1 >= p.pontos.length) { toast.success("Figura completa!"); onDone(true); }
+    else setNext(i+1);
+  };
+  return (
+    <div className="text-center">
+      <div className="text-lg font-black mb-2">{p.figura}</div>
+      <svg viewBox="0 0 100 100" className="mx-auto bg-card border-2 border-border rounded-2xl" style={{ width: 280, height: 280 }}>
+        {linhas.map((l, i) => <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="hsl(var(--success))" strokeWidth={1.2} />)}
+        {p.pontos.map((pt:any, i:number) => (
+          <g key={i} onClick={()=>tap(i)} style={{ cursor:"pointer" }}>
+            <circle cx={pt.x} cy={pt.y} r={i === next ? 4 : 3} fill={i < next ? "hsl(var(--success))" : i === next ? "hsl(var(--coral))" : "hsl(var(--muted-foreground))"} />
+            <text x={pt.x} y={pt.y - 5} fontSize={4.5} textAnchor="middle" fontWeight="900" fill="hsl(var(--foreground))">{i+1}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ============== 21. Labirinto de Precisão ==============
+// Mecânica única: arrastar bolinha; sair dos corredores reseta progresso
+function LabirintoPrecisao({ p, onDone }: any) {
+  const [pos, setPos] = useState({ x: 12, y: 53 });
+  const [erros, setErros] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dentroDeAlgum = (x:number, y:number) =>
+    p.segmentos.some((s:any) => x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h);
+
+  const move = (clientX:number, clientY:number) => {
+    if (!dragging || !containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    if (dentroDeAlgum(x, y)) {
+      setPos({ x, y });
+      // chegou no fim (último segmento, canto inferior direito)
+      const last = p.segmentos[p.segmentos.length - 1];
+      if (x >= last.x + last.w - 6 && y >= last.y + last.h - 6) { onDone(true); }
+    } else {
+      setErros(e => e + 1);
+      setDragging(false);
+      toast("Saiu do caminho — recomece");
+      setPos({ x: 12, y: 53 });
+    }
+  };
+  return (
+    <div className="text-center">
+      <div className="text-sm text-muted-foreground mb-2">Tema: {p.tema} · Erros: {erros}</div>
+      <div
+        ref={containerRef}
+        onMouseMove={(e)=>move(e.clientX, e.clientY)}
+        onMouseUp={()=>setDragging(false)}
+        onTouchMove={(e)=>{ const t = e.touches[0]; move(t.clientX, t.clientY); }}
+        onTouchEnd={()=>setDragging(false)}
+        className="relative mx-auto bg-muted/30 border-2 border-border rounded-2xl"
+        style={{ width: 360, height: 280 }}
+      >
+        {p.segmentos.map((s:any, i:number) => (
+          <div key={i} className="absolute bg-success/20 border border-success/40 rounded" style={{ left: `${s.x}%`, top: `${s.y}%`, width: `${s.w}%`, height: `${s.h}%` }} />
+        ))}
+        <button
+          onMouseDown={()=>setDragging(true)}
+          onTouchStart={()=>setDragging(true)}
+          className="absolute w-7 h-7 bg-coral rounded-full shadow-lg border-2 border-white cursor-grab active:cursor-grabbing"
+          style={{ left: `calc(${pos.x}% - 14px)`, top: `calc(${pos.y}% - 14px)` }}
+          aria-label="Bolinha"
+        />
+      </div>
+      <div className="text-xs text-muted-foreground mt-2">Arraste a bolinha pelo corredor verde até o final</div>
+    </div>
+  );
+}
+
+// ============== 22. Triagem de Categorias ==============
+// Mecânica única: arrastar itens para caixas; valida ao colocar todos
+function TriagemCategorias({ p, onDone }: any) {
+  const [assigned, setAssigned] = useState<Record<number, string>>({}); // itemIndex → caixaName
+  const [dragging, setDragging] = useState<number | null>(null);
+  const drop = (caixa:string) => {
+    if (dragging === null) return;
+    setAssigned(a => ({ ...a, [dragging]: caixa }));
+    setDragging(null);
+  };
+  useEffect(() => {
+    if (Object.keys(assigned).length === p.itens.length) {
+      const acertou = p.itens.every((it:any, i:number) => assigned[i] === it.cat);
+      onDone(acertou);
+    }
+  }, [assigned]);
+  return (
+    <div className="text-center">
+      <div className="flex gap-3 justify-center mb-4 flex-wrap">
+        {p.itens.map((it:any, i:number) => assigned[i] ? null : (
+          <div key={i} draggable onDragStart={()=>setDragging(i)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{it.e}</div>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {p.caixas.map((c:any) => (
+          <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
+            <div className="font-black mb-2">{c.emoji} {c.nome}</div>
+            <div className="flex flex-wrap gap-1 justify-center">
+              {p.itens.map((it:any, i:number) => assigned[i] === c.nome ? <span key={i} className="text-3xl">{it.e}</span> : null)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============== 23. Expressão e Emoção ==============
+// Mecânica única: cena descritiva → escolher rosto que combina
+function ExpressaoEmocao({ p, onDone }: any) {
+  return (
+    <div className="text-center">
+      <div className="bg-card border-2 border-border rounded-2xl p-6 mb-6">
+        <div className="text-xs uppercase text-muted-foreground mb-2">Situação</div>
+        <div className="text-xl font-bold">{p.cena}</div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {p.opts.map((o:string, i:number) => (
+          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all">{o}</button>
+        ))}
       </div>
     </div>
   );
