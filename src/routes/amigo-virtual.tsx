@@ -7,6 +7,7 @@ import { supabase } from "@/database/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
 import { toast } from "sonner";
+import { useMascot } from "@/contexts/MascotContext";
 
 export const Route = createFileRoute("/amigo-virtual")({
   component: AmigoVirtual,
@@ -14,11 +15,19 @@ export const Route = createFileRoute("/amigo-virtual")({
 
 function AmigoVirtual() {
   const { activeChild } = useAppState();
-  const virtualFriend = { name: "Amigão", emoji: "🦄" };
-  
+  const { activeMascot } = useMascot();
+  const mascotName = activeMascot?.mascot?.name || "Pip";
+  const mascotPayload = activeMascot ? {
+    name: activeMascot.mascot?.name,
+    description: activeMascot.mascot?.description,
+    category: activeMascot.mascot?.category,
+    level: activeMascot.level,
+    affinity: activeMascot.affinity,
+  } : null;
+
   // Amigo Virtual States
   const [msgs, setMsgs] = useState<{ role: "ai" | "user"; t: string }[]>([
-    { role: "ai", t: `Oi, ${activeChild?.nome ?? "amiguinho"}! 🌈 Eu sou o ${virtualFriend.name}. Estou aqui para te ouvir e te dar um abraço virtual gigante! Como você está se sentindo agora?` },
+    { role: "ai", t: `Oi, ${activeChild?.nome ?? "amiguinho"}! 🌈 Eu sou o ${mascotName}, seu companheiro de verdade. Estou aqui para te ouvir e te dar um abraço virtual gigante! Como você está se sentindo agora?` },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
