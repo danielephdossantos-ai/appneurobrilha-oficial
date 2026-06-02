@@ -897,7 +897,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 
                 {acertou === false && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
-                    <div className="text-4xl">{materiaMeta.mascote}</div>
+                    <div className="text-4xl">
+                      {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                        <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+                      ) : (
+                        activeMascot?.mascot?.image_url || materiaMeta.mascote
+                      )}
+                    </div>
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
                     <div className="flex-1">
                       <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
