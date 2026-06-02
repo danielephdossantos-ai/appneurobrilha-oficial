@@ -187,6 +187,9 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
   const [banco, setBanco] = useState<BancoState | null>(null);
+  const [teenGuided, setTeenGuided] = useState<boolean>(() => {
+    try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
+  });
 
   const grades = [
     "Educação Infantil",
@@ -194,7 +197,12 @@ function Escola() {
     "6º Ano", "7º Ano", "8º Ano", "9º Ano"
   ];
 
+  const isTeen = /^[6-9]º/.test(selectedGrade);
+  // EI e 2º-5º sempre têm aula guiada de 5 telas. Teen escolhe.
+  const guidedActive = !isTeen || teenGuided;
+
   const showBanco = !!activeChild && isFundamental2a9(selectedGrade);
+
 
   // Carrega ou cria o lote de 50 atividades para a série atual
   useEffect(() => {
@@ -334,7 +342,7 @@ function Escola() {
       const novaAula = {
         ...data,
         materia: materiaId,
-        etapa: "ensino",
+        etapa: guidedActive ? "ensino" : "opcoes",
         grade: selectedGrade,
         activityId: activity.id,
         bancoOrdem: preset?.ordem,
@@ -346,7 +354,9 @@ function Escola() {
         visual: activity.content.visual,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
+        guided: guidedActive,
       };
+
 
 
       console.log("FINAL AULA STATE:", novaAula);
@@ -492,7 +502,30 @@ function Escola() {
         );
       })()}
 
-      <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
+        {isTeen && (
+          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
+            <div className="text-2xl">🎓</div>
+            <div className="flex-1">
+              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
+              <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
+            </div>
+            <button
+              onClick={() => {
+                const next = !teenGuided;
+                setTeenGuided(next);
+                try { localStorage.setItem("escola_teen_guided", next ? "1" : "0"); } catch {}
+              }}
+              className={`relative w-14 h-8 rounded-full transition-colors ${teenGuided ? "bg-primary" : "bg-muted"}`}
+              aria-label="Alternar atividade guiada"
+            >
+              <span className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow transition-all ${teenGuided ? "left-7" : "left-1"}`} />
+            </button>
+          </div>
+        )}
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
@@ -676,7 +709,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
 
 
-            {aula.isEI ? (
+            {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
                 {eiStep < 5 ? (
                   <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -717,8 +750,8 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                              <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
                                {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
                                 eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
-                                eiStep === 3 ? (aula.etapa3_ensino || "Vamos ver como faz!") :
-                                (aula.etapa4_preparo || "Tudo pronto?")}
+                                eiStep === 3 ? (aula.etapa3_exemplo || aula.etapa3_ensino || "Vamos ver um exemplo!") :
+                                (aula.etapa4_como_monta || aula.etapa4_preparo || "Veja como resolver!")}
                              </p>
                           </div>
                         </div>
