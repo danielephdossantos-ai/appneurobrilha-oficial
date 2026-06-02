@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowDown, ArrowLeft as ArrowLeftIcon, ArrowRight, ArrowUp, ChevronRight, Hand, Mic, MicOff, RotateCcw, Sparkles, Volume2, VolumeX, Zap } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
-import { objetoImg, emojiImg, ilustracao } from "@/data/neuro-treino/objetos";
+import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
+import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
@@ -311,7 +312,7 @@ function SonsIniciais({ p, onDone }: any) {
                   className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
                 />
               ) : (
-                <div className="text-5xl">{o.emoji}</div>
+                <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
               )}
               <div className="font-bold text-sm">{o.nome}</div>
             </button>
@@ -378,7 +379,7 @@ function Motorzinho({ p, onDone }: any) {
     if (phase === "demo") return `Escuta a professora falando o som da letra ${item.letra_fonema}...`;
     if (phase === "your-turn") return `Agora é a sua vez, ${nome}! Aperta o microfone e fala: ${item.palavra_alvo}`;
     if (phase === "listening") return `Tô te ouvindo... fala alto: ${item.palavra_alvo}!`;
-    if (lastMatched) return `Boa, ${nome}! Falou certinho! ${item.imagem_url_ou_emoji}`;
+    if (lastMatched) return `Boa, ${nome}! Falou ${item.palavra_alvo} certinho!`;
     return `Quase! Vamos repetir o som "${item.letra_fonema}" e a palavra ${item.palavra_alvo}.`;
   })();
 
@@ -404,7 +405,7 @@ function Motorzinho({ p, onDone }: any) {
         </div>
         {(phase === "your-turn" || phase === "listening" || phase === "result") && (
           <div className="flex items-center gap-3 animate-fade-in">
-            <div className="text-6xl">{item.imagem_url_ou_emoji}</div>
+            <RenderEmoji e={item.imagem_url_ou_emoji} label={item.palavra_alvo} className="w-20 h-20" />
             <div className="text-4xl font-black text-primary">{item.palavra_alvo}</div>
           </div>
         )}
@@ -417,8 +418,8 @@ function Motorzinho({ p, onDone }: any) {
 
       {/* Aviso se mic não suportado */}
       {!micSupported && phase === "your-turn" && (
-        <div className="mb-4 text-xs text-muted-foreground bg-muted/50 rounded-lg p-2 max-w-md mx-auto">
-          ⚠️ Seu navegador não suporta reconhecimento de voz. Use Chrome, Edge ou Safari para a criança falar.
+        <div className="mb-4 text-xs text-muted-foreground bg-muted/50 rounded-lg p-2 max-w-md mx-auto flex items-center gap-2 justify-center">
+          <AlertCircle size={14} /> Seu navegador não suporta reconhecimento de voz. Use Chrome, Edge ou Safari.
         </div>
       )}
 
@@ -429,12 +430,12 @@ function Motorzinho({ p, onDone }: any) {
           disabled={isSpeaking}
           className="bg-gradient-to-br from-coral to-coral/80 text-white px-10 py-6 rounded-full font-black text-xl shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 disabled:opacity-60"
         >
-          <span className="text-3xl">🔑</span> LIGAR MOTORZINHO
+          <Sparkles size={28} /> LIGAR MOTORZINHO
         </button>
       )}
 
       {phase === "demo" && (
-        <div className="text-sm font-bold text-primary animate-pulse">🔊 Professora falando...</div>
+        <div className="text-sm font-bold text-primary animate-pulse flex items-center justify-center gap-2"><Volume2 size={16}/> Professora falando...</div>
       )}
 
       {(phase === "your-turn" || phase === "result") && (
@@ -508,9 +509,9 @@ function Pedacinhos({ p, onDone }: any) {
           <div key={i} className={`px-4 py-2 rounded-xl font-bold ${i < claps ? "bg-success text-white" : "bg-muted"}`}>{s}</div>
         ))}
       </div>
-      <button onClick={()=>setClaps(c=>c+1)} className="bg-coral text-white text-4xl px-12 py-8 rounded-2xl shadow-lg active:scale-95 mb-4 flex items-center gap-3 mx-auto">
-        <img src={getElementoImg("👏")} className="w-12 h-12 invert brightness-0" />
-        <span>👏</span>
+      <button onClick={()=>setClaps(c=>c+1)} className="bg-coral text-white px-12 py-8 rounded-2xl shadow-lg active:scale-95 mb-4 flex items-center gap-3 mx-auto">
+        <Hand size={40} />
+        <span className="text-2xl font-black">BATER PALMA</span>
       </button>
       <div className="text-muted-foreground mb-4">Palmas: <b>{claps}</b></div>
       <div className="flex gap-2 justify-center">
@@ -529,25 +530,14 @@ function OndeEsta({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Encontre:</div>
       <div className="mb-4 flex justify-center">
-        {alvoImg ? (
-          <img src={alvoImg} alt="alvo" className="w-20 h-20 object-contain drop-shadow-md" />
-        ) : (
-          <div className="text-6xl">{p.alvo}</div>
-        )}
+        <RenderEmoji e={p.alvo} className="w-20 h-20" />
       </div>
       <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 72 }}>
-        {p.grid.map((e:string, i:number) => {
-          const img = emojiImg(e);
-          return (
-            <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="aspect-square p-1.5 bg-card border-2 border-border rounded-lg hover:border-primary hover:scale-105 transition-all flex items-center justify-center">
-              {img ? (
-                <img src={img} alt="" className="w-full h-full object-contain" loading="lazy" />
-              ) : (
-                <span className="text-3xl">{e}</span>
-              )}
-            </button>
-          );
-        })}
+        {p.grid.map((e:string, i:number) => (
+          <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="aspect-square p-1.5 bg-card border-2 border-border rounded-lg hover:border-primary hover:scale-105 transition-all flex items-center justify-center">
+            <RenderEmoji e={e} className="w-full h-full" />
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -557,10 +547,10 @@ function OndeEsta({ p, onDone }: any) {
 function SequenciaPadrao({ p, onDone }: any) {
   return (
     <div className="text-center">
-      <div className="flex justify-center gap-3 text-5xl mb-6 items-center">
+      <div className="flex justify-center gap-3 mb-6 items-center">
         {p.seq.map((s:string, i:number) => (
           <div key={i} className="w-20 h-20 flex items-center justify-center bg-card rounded-2xl border shadow-sm">
-            {emojiImg(s) ? <img src={emojiImg(s)} className="w-16 h-16 object-contain" /> : s}
+            <RenderEmoji e={s} className="w-16 h-16" />
           </div>
         ))}
         <span className="text-primary text-6xl font-black">?</span>
@@ -568,7 +558,7 @@ function SequenciaPadrao({ p, onDone }: any) {
       <div className="flex justify-center gap-3">
         {p.opts.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.next)} className="w-24 h-24 flex items-center justify-center bg-card border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-md">
-            {emojiImg(o) ? <img src={emojiImg(o)} className="w-16 h-16 object-contain" /> : <span className="text-5xl">{o}</span>}
+            <RenderEmoji e={o} className="w-16 h-16" />
           </button>
         ))}
       </div>
@@ -602,13 +592,12 @@ function CadeOPar({ p, onDone }: any) {
     <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
-        const img = emojiImg(c.v);
         return (
           <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl border-2 transition-all flex items-center justify-center p-2 ${show ? "bg-card border-primary" : "bg-gradient-to-br from-primary/30 to-primary/10 border-border"}`}>
             {show ? (
-              img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{c.v}</span>
+              <RenderEmoji e={c.v} className="w-full h-full" />
             ) : (
-              <span className="text-3xl text-primary/70">?</span>
+              <span className="text-3xl text-primary/70 font-black">?</span>
             )}
           </button>
         );
@@ -629,8 +618,8 @@ function FocoTotal({ p, onDone }: any) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((c:any, i:number) => (
-          <button key={i} onClick={()=>onDone(c.nome === p.corCerta)} className="rounded-xl py-8 font-black text-white shadow-lg hover:scale-105 transition-all" style={{ background: c.hex }}>
-            ●
+          <button key={i} onClick={()=>onDone(c.nome === p.corCerta)} className="rounded-xl py-8 font-black text-white shadow-lg hover:scale-105 transition-all flex items-center justify-center" style={{ background: c.hex }}>
+            <div className="w-8 h-8 rounded-full bg-white/40 border-2 border-white shadow-inner" />
           </button>
         ))}
       </div>
@@ -644,24 +633,26 @@ function LabirintoSom({ p, onDone }: any) {
   const atual = p.caminho[passo];
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Pista sonora 🔊</div>
+      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-1"><Volume2 size={14}/> Pista sonora</div>
       <div className="text-4xl font-black text-primary mb-6">"{atual.nome}"</div>
       <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto">
         <div />
         <button onClick={()=>handleDir("CIMA")} className={btnDir()}>
-          {emojiImg("⬆️") ? <img src={emojiImg("⬆️")} className="w-12 h-12 object-contain mx-auto" /> : "⬆️"}
+          <ArrowUp className="w-10 h-10 mx-auto" />
         </button>
         <div />
         <button onClick={()=>handleDir("ESQUERDA")} className={btnDir()}>
-          {emojiImg("⬅️") ? <img src={emojiImg("⬅️")} className="w-12 h-12 object-contain mx-auto" /> : "⬅️"}
+          <ArrowLeftIcon className="w-10 h-10 mx-auto" />
         </button>
-        <div className="text-3xl flex items-center justify-center bg-primary/10 rounded-full border-2 border-primary/30 w-16 h-16 mx-auto">🌀</div>
+        <div className="flex items-center justify-center bg-primary/10 rounded-full border-2 border-primary/30 w-16 h-16 mx-auto">
+          <RotateCcw className="w-8 h-8 text-primary" />
+        </div>
         <button onClick={()=>handleDir("DIREITA")} className={btnDir()}>
-          {emojiImg("➡️") ? <img src={emojiImg("➡️")} className="w-12 h-12 object-contain mx-auto" /> : "➡️"}
+          <ArrowRight className="w-10 h-10 mx-auto" />
         </button>
         <div />
         <button onClick={()=>handleDir("BAIXO")} className={btnDir()}>
-          {emojiImg("⬇️") ? <img src={emojiImg("⬇️")} className="w-12 h-12 object-contain mx-auto" /> : "⬇️"}
+          <ArrowDown className="w-10 h-10 mx-auto" />
         </button>
         <div />
       </div>
@@ -675,7 +666,7 @@ function LabirintoSom({ p, onDone }: any) {
     } else onDone(false);
   }
 }
-function btnDir() { return "text-4xl p-4 bg-card border-2 border-border rounded-xl hover:border-primary"; }
+function btnDir() { return "p-4 bg-card border-2 border-border rounded-xl hover:border-primary text-primary"; }
 
 // ============== 10. Foco Sustentado ==============
 function FocoSustentado({ p, onDone }: any) {
@@ -692,21 +683,15 @@ function FocoSustentado({ p, onDone }: any) {
     else setMissed(m=>m+1);
     setK(k+1);
   };
-  const alvoImg = emojiImg(p.alvo);
   const atual = p.stream[k];
-  const atualImg = emojiImg(atual);
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-2">
         Alvo:
-        {alvoImg ? <img src={alvoImg} alt="alvo" className="w-12 h-12 object-contain" /> : <span className="text-3xl">{p.alvo}</span>}
+        <RenderEmoji e={p.alvo} className="w-12 h-12" />
       </div>
       <button onClick={handleTap} className="p-6 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95 w-48 h-48 flex items-center justify-center">
-        {atualImg ? (
-          <img src={atualImg} alt="" className="w-full h-full object-contain" />
-        ) : (
-          <span className="text-9xl">{atual ?? "✅"}</span>
-        )}
+        <RenderEmoji e={atual} className="w-full h-full" />
       </button>
       <div className="text-sm text-muted-foreground">Acertos: <b className="text-success">{score}</b> · Enganos: <b className="text-destructive">{missed}</b></div>
       <div className="text-xs text-muted-foreground mt-1">{k}/{p.stream.length}</div>
@@ -761,11 +746,11 @@ function Mosaico({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Monte:</div>
-      <div className="text-4xl font-black mb-6 bg-card border-2 border-primary/20 rounded-2xl p-4 inline-block">{p.figura}</div>
+      <div className="text-3xl font-black mb-6 bg-card border-2 border-primary/20 rounded-2xl px-6 py-3 inline-block text-primary">{semEmoji(p.figura)}</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {p.opcoes.map((op:string, i:number) => (
           <button key={i} onClick={()=>toggle(op)} className={`w-24 h-24 flex items-center justify-center rounded-2xl border-2 transition-all shadow-sm ${selecionadas.includes(op) ? "border-primary bg-primary/10 scale-110 shadow-glow" : "border-border bg-card"}`}>
-            {emojiImg(op) ? <img src={emojiImg(op)} className="w-16 h-16 object-contain" /> : <span className="text-5xl">{op}</span>}
+            <RenderEmoji e={op} className="w-16 h-16" />
           </button>
         ))}
       </div>
@@ -836,11 +821,11 @@ function Decoracao({ p, onDone }: any) {
   };
   return (
     <div className="text-center">
-      <div className="text-2xl font-black mb-2">{p.cenario}</div>
+      <div className="text-2xl font-black mb-2">{semEmoji(p.cenario)}</div>
       <div onDragOver={(e)=>e.preventDefault()} onDrop={drop} className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}>
         {placed.map((it, i) => (
           <div key={i} className="absolute" style={{ left: it.x - 32, top: it.y - 32 }}>
-            {emojiImg(it.e) ? <img src={emojiImg(it.e)} className="w-16 h-16 object-contain" /> : <span className="text-4xl">{it.e}</span>}
+            <RenderEmoji e={it.e} className="w-16 h-16" />
           </div>
         ))}
         {placed.length === 0 && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">Arraste para cá</div>}
@@ -848,7 +833,7 @@ function Decoracao({ p, onDone }: any) {
       <div className="flex gap-2 justify-center mb-4 flex-wrap">
         {p.stickers.map((s:string, i:number) => (
           <div key={i} draggable onDragStart={()=>setDragging(s)} className="w-20 h-20 flex items-center justify-center bg-card border-2 border-border rounded-2xl cursor-grab active:cursor-grabbing hover:border-primary transition-all shadow-sm">
-            {emojiImg(s) ? <img src={emojiImg(s)} className="w-14 h-14 object-contain" /> : <span className="text-4xl">{s}</span>}
+            <RenderEmoji e={s} className="w-14 h-14" />
           </div>
         ))}
       </div>
@@ -866,7 +851,7 @@ function Onomatopeias({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
-        <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Som</div>
+        <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1"><Volume2 size={12}/> Som</div>
         <div className="text-5xl font-black text-coral">{p.som}</div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -879,16 +864,9 @@ function Onomatopeias({ p, onDone }: any) {
               className="bg-card border-2 border-border rounded-2xl p-4 hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
             >
               {img ? (
-                <img
-                  src={img}
-                  alt={o.nome}
-                  width={128}
-                  height={128}
-                  loading="lazy"
-                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
-                />
+                <img src={img} alt={o.nome} width={128} height={128} loading="lazy" className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md" />
               ) : (
-                <div className="text-6xl">{o.emoji}</div>
+                <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
               )}
               <div className="font-bold text-xs">{o.nome}</div>
             </button>
@@ -918,8 +896,8 @@ function RitmoSopro({ p, onDone }: any) {
   }, [holding]);
   return (
     <div className="text-center">
-      <div className="text-6xl mb-4 flex justify-center">
-        {emojiImg(p.veiculo) ? <img src={emojiImg(p.veiculo)} className="w-24 h-24 object-contain" /> : p.veiculo}
+      <div className="mb-4 flex justify-center">
+        <RenderEmoji e={p.veiculo} className="w-24 h-24" />
       </div>
       <div className="text-4xl font-black text-coral mb-6 px-4 py-2 bg-card border-2 border-coral/30 rounded-2xl inline-block">{p.silaba}</div>
       <div className="mx-auto h-8 bg-muted rounded-full overflow-hidden mb-2" style={{ width: `${p.tamanho}%`, maxWidth: "90%" }}>
@@ -942,15 +920,20 @@ function RitmoSopro({ p, onDone }: any) {
 function SonsCorpo({ p, onDone }: any) {
   return (
     <div className="text-center">
-      <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Ouça</div>
+      <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1"><Volume2 size={12}/> Ouça</div>
       <div className="text-5xl font-black text-coral mb-6">"{p.som}"</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2">
-            {objetoImg(o.split(" ").pop()?.toUpperCase()) && <img src={objetoImg(o.split(" ").pop()?.toUpperCase())} className="w-12 h-12 object-contain" />}
-            <span>{o}</span>
-          </button>
-        ))}
+        {p.opts.map((o:string, i:number) => {
+          const limpo = semEmoji(o);
+          const parts = o.trim().split(/\s+/);
+          const emoji = parts[0];
+          return (
+            <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2">
+              <RenderEmoji e={emoji} label={limpo} className="w-16 h-16" />
+              <span>{limpo}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -976,11 +959,10 @@ function TracadoLetras({ p, onDone }: any) {
         {p.passos.map((seta:string, i:number) => {
           const done = i < step;
           const current = i === step;
-          const img = emojiImg(seta);
           return (
-            <button key={i} onClick={()=>tap(i)} className={`relative w-24 h-24 rounded-3xl text-4xl border-4 transition-all flex items-center justify-center ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse shadow-glow" : "bg-muted border-border"}`}>
+            <button key={i} onClick={()=>tap(i)} className={`relative w-24 h-24 rounded-3xl border-4 transition-all flex items-center justify-center ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse shadow-glow" : "bg-muted border-border"}`}>
               <span className="absolute -top-2 -left-2 text-sm font-black bg-success text-white rounded-full w-7 h-7 flex items-center justify-center border-2 border-white shadow-sm z-10">{i+1}</span>
-              {img ? <img src={img} className="w-16 h-16 object-contain" /> : seta}
+              <RenderEmoji e={seta} className="w-12 h-12" />
             </button>
           );
         })}
@@ -1005,7 +987,7 @@ function CaminhoPontos({ p, onDone }: any) {
   };
   return (
     <div className="text-center">
-      <div className="text-lg font-black mb-2">{p.figura}</div>
+      <div className="text-lg font-black mb-2">{semEmoji(p.figura)}</div>
       <svg viewBox="0 0 100 100" className="mx-auto bg-card border-2 border-border rounded-2xl" style={{ width: 280, height: 280 }}>
         {linhas.map((l, i) => <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="hsl(var(--success))" strokeWidth={1.2} />)}
         {p.pontos.map((pt:any, i:number) => (
@@ -1049,7 +1031,7 @@ function LabirintoPrecisao({ p, onDone }: any) {
   };
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Tema: {p.tema} · Erros: {erros}</div>
+      <div className="text-sm text-muted-foreground mb-2">Tema: {semEmoji(p.tema)} · Erros: {erros}</div>
       <div
         ref={containerRef}
         onMouseMove={(e)=>move(e.clientX, e.clientY)}
@@ -1098,35 +1080,28 @@ function TriagemCategorias({ p, onDone }: any) {
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
         {p.itens.map((it:any, i:number) => {
           if (assigned[i]) return null;
-          const img = emojiImg(it.e);
           return (
             <div key={i} draggable onDragStart={()=>setDragging(i)} className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing w-16 h-16 flex items-center justify-center">
-              {img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{it.e}</span>}
+              <RenderEmoji e={it.e} className="w-full h-full" />
             </div>
           );
         })}
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {p.caixas.map((c:any) => {
-          const caixaImg = emojiImg(c.emoji);
-          return (
-            <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
-              <div className="font-black mb-2 flex items-center justify-center gap-2">
-                {caixaImg ? <img src={caixaImg} alt="" className="w-10 h-10 object-contain" /> : <span className="text-2xl">{c.emoji}</span>}
-                {c.nome}
-              </div>
-              <div className="flex flex-wrap gap-1 justify-center">
-                {p.itens.map((it:any, i:number) => {
-                  if (assigned[i] !== c.nome) return null;
-                  const im = emojiImg(it.e);
-                  return im
-                    ? <img key={i} src={im} alt="" className="w-10 h-10 object-contain" />
-                    : <span key={i} className="text-3xl">{it.e}</span>;
-                })}
-              </div>
+        {p.caixas.map((c:any) => (
+          <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
+            <div className="font-black mb-2 flex items-center justify-center gap-2">
+              <RenderEmoji e={c.emoji} label={c.nome} className="w-10 h-10" />
+              {c.nome}
             </div>
-          );
-        })}
+            <div className="flex flex-wrap gap-1 justify-center">
+              {p.itens.map((it:any, i:number) => {
+                if (assigned[i] !== c.nome) return null;
+                return <RenderEmoji key={i} e={it.e} className="w-10 h-10" />;
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -1139,15 +1114,19 @@ function ExpressaoEmocao({ p, onDone }: any) {
     <div className="text-center">
       <div className="bg-card border-2 border-border rounded-2xl p-6 mb-6">
         <div className="text-xs uppercase text-muted-foreground mb-2">Situação</div>
-        <div className="text-xl font-bold">{p.cena}</div>
+        <div className="text-xl font-bold">{semEmoji(p.cena)}</div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {p.opts.map((o:string, i:number) => (
-          <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all flex flex-col items-center gap-2">
-            {objetoImg(o.split(" ").pop()?.toUpperCase()) && <img src={objetoImg(o.split(" ").pop()?.toUpperCase())} className="w-16 h-16 object-contain" />}
-            <span>{o}</span>
-          </button>
-        ))}
+        {p.opts.map((o:string, i:number) => {
+          const limpo = semEmoji(o);
+          const emoji = o.trim().split(/\s+/)[0];
+          return (
+            <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 px-3 font-black text-lg hover:border-lilac hover:scale-105 transition-all flex flex-col items-center gap-2">
+              <RenderEmoji e={emoji} label={limpo} className="w-20 h-20" />
+              <span>{limpo}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
