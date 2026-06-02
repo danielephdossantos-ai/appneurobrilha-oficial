@@ -1673,7 +1673,22 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
 
 
-            {aula.guided ? (
+            {aula.etapa === "professor_intro" ? (
+              <VirtualProfessorIntro
+                aula={aula}
+                eiStep={eiStep}
+                setEiStep={setEiStep}
+                activeMascot={activeMascot}
+                materiaMeta={materiaMeta}
+                onStart={() => {
+                  setAula({ ...aula, etapa: aula.guided ? "ensino" : "opcoes" });
+                  setEiStep(1); // Reset para o fluxo interno se necessário
+                }}
+                onNaoEntendi={naoEntendi}
+                reexplaining={reexplaining}
+                metodoIdx={metodoIdx}
+              />
+            ) : aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
                 {isAlfaFlow ? (
                   <AlfabetizacaoFlow
