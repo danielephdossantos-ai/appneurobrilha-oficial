@@ -425,35 +425,11 @@ const WorldsSection: React.FC = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 {active && (
                   <div className="absolute top-3 right-3 bg-primary text-white rounded-full p-2 shadow-lg">
                     <Check size={16} strokeWidth={3} />
                   </div>
                 )}
-                <div className="absolute bottom-2 left-3 right-3 flex items-center gap-2">
-                  <span className="text-2xl drop-shadow-lg">{w.emoji}</span>
-                  <span className="text-white font-black text-lg uppercase tracking-wide drop-shadow-lg leading-tight">
-                    {w.label}
-                  </span>
-                </div>
-              </div>
-              <div className="bg-white/90 backdrop-blur px-4 py-3">
-                <p className="text-xs text-muted-foreground font-semibold line-clamp-2">
-                  {w.description}
-                </p>
-                <div className={cn(
-                  'mt-2 text-[10px] font-black uppercase tracking-widest flex items-center gap-1',
-                  active ? 'text-primary' : 'text-secondary'
-                )}>
-                  {active ? (
-                    <>
-                      <Star size={12} fill="currentColor" /> Mundo ativo
-                    </>
-                  ) : (
-                    <>Tocar para escolher <ChevronRight size={12} /></>
-                  )}
-                </div>
               </div>
             </motion.button>
           );
