@@ -11,6 +11,16 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
 import { EIMiniGame } from "@/components/escola/EIMiniGame";
+import imgPortugues from "@/assets/escola-brilha/portugues.png";
+import imgMatematica from "@/assets/escola-brilha/matematica.png";
+import imgCiencias from "@/assets/escola-brilha/ciencias.png";
+import imgHistoria from "@/assets/escola-brilha/historia.png";
+import imgGeografia from "@/assets/escola-brilha/geografia.png";
+import imgArtes from "@/assets/escola-brilha/artes.png";
+import imgLinguagemEI from "@/assets/escola-brilha/linguagem-ei.png";
+import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
+import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
+import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
