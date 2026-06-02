@@ -153,6 +153,7 @@ import { MascotProvider } from "@/contexts/MascotContext";
 import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
 import { ParentModeProvider } from "@/contexts/ParentModeContext";
 import { ParentPinGate } from "@/components/auth/ParentPinGate";
+import { HiperfocoProvider } from "@/context/HiperfocoContext";
 
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
