@@ -541,6 +541,11 @@ function ReforcoBrilha() {
           )}
         </div>
       )}
+      <FloatingActivityControls
+        onSkip={isTeaching && lessonContent ? () => { toast.info("Vamos pular para a prática!"); } : undefined}
+        onChange={isTeaching ? () => { setIsTeaching(false); setLessonContent(null); } : undefined}
+        changeLabel="Trocar tópico"
+      />
     </Shell>
   );
 }
