@@ -179,8 +179,8 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
             {correct}
           </div>
         )}
-        <div className="text-base text-slate-600 font-bold">
-          {fused ? `SOM: "${correct}"!` : "TOQUE NAS LETRAS PARA JUNTAR"}
+        <div className="text-base text-slate-600 font-bold uppercase">
+          {fused ? correct : ""}
         </div>
       </div>
     </div>
