@@ -67,6 +67,14 @@ const SKINS = [
   { key: 'turbo', name: 'Turbo', title: 'Piloto do Saber', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Turbo&backgroundColor=b6e3f4', description: 'Carrinho de corrida veloz com cores vibrantes.' },
 ];
 
+const PIPA_HIGHLIGHTS = [
+  { name: 'Pipa Clássica', image: pipaMascot },
+  { name: 'Pipa Princesa', image: pipaPrincesa },
+  { name: 'Pipa Unicórnio', image: pipaUnicornio },
+  { name: 'Pipa Doutora', image: pipaDoutora },
+  { name: 'Pipa Astronauta', image: pipaAstronauta },
+];
+
 function ColecaoPipPage() {
   const { activeChild } = useAppState();
   
@@ -96,6 +104,34 @@ function ColecaoPipPage() {
             Conheça todos os personagens da nossa turma! Do Pip e suas fantasias aos novos companheiros de aventura.
           </p>
         </header>
+
+        <section className="mb-10 rounded-[2.5rem] border-4 border-pink/20 bg-pink/10 p-5 md:p-7 shadow-xl">
+          <div className="mb-5 flex flex-col gap-1 text-center">
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/50">
+              Nova coleção menina
+            </span>
+            <h2 className="text-3xl font-black text-primary">Pipa e suas fantasias</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {PIPA_HIGHLIGHTS.map((pipa) => (
+              <div
+                key={pipa.name}
+                className="rounded-[2rem] border-4 border-white bg-white/80 p-4 text-center shadow-md"
+              >
+                <div className="mx-auto mb-3 flex h-28 w-28 items-center justify-center rounded-full bg-pink/10">
+                  <img
+                    src={pipa.image}
+                    alt={pipa.name}
+                    className="h-full w-full object-contain drop-shadow-xl"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-sm font-black text-primary">{pipa.name}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Evolução do mascote */}
         <div className="mb-16">
           <PipEvolution />
