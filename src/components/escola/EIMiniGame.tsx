@@ -252,8 +252,8 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
             );
           })}
         </div>
-        <div className="text-sm font-bold text-slate-600 tracking-widest">
-          {done ? `VOCÊ FORMOU: ${target}!` : "TOQUE AS LETRAS NA ORDEM CERTA"}
+        <div className="text-xl font-black text-slate-700 tracking-widest uppercase">
+          {done ? target : ""}
         </div>
       </div>
     </div>
