@@ -6,6 +6,7 @@ import { ChevronRight, CheckCircle2, Brain, Baby, BookOpen, MessageCircle, Heart
 import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 import { toast } from "sonner";
 import { supabase } from "@/database/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
