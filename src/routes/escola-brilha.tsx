@@ -110,11 +110,73 @@ const ALMOST_THERE = [
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
 
+// ============== Banco BNCC (50 atividades por lote, infinito) ==============
+const BANCO_TAMANHO = 50;
+const DOMAIN_MAP: Record<string, string> = {
+  matematica: "math",
+  artes: "math",
+  portugues: "linguistics",
+  ciencias: "linguistics",
+  historia: "linguistics",
+  geografia: "linguistics",
+};
+const MATERIAS_BANCO = ["portugues", "matematica", "ciencias", "historia", "geografia", "artes"] as const;
+
+type BancoItem = {
+  activity: any;       // GeneratedActivity (pré-gerado)
+  materiaId: string;   // qual matéria essa atividade representa
+  ordem: number;       // 1..50
+};
+type BancoState = {
+  lote: number;
+  items: BancoItem[];
+  done: string[];      // activity.id concluídos no lote atual
+};
+
+function bancoKey(childId: string, grade: string) {
+  return `escola_banco:${childId}:${grade}`;
+}
+
+function isFundamental2a9(grade: string): boolean {
+  return /^[2-9]º Ano/.test(grade);
+}
+
+function gerarLote(child: any, grade: string, lote: number): BancoItem[] {
+  const service = ActivityProceduralService.getInstance();
+  const items: BancoItem[] = [];
+  for (let i = 0; i < BANCO_TAMANHO; i++) {
+    const materiaId = MATERIAS_BANCO[i % MATERIAS_BANCO.length];
+    const domain = DOMAIN_MAP[materiaId];
+    try {
+      const act = service.generateActivity({
+        domain,
+        difficulty: 0.5,
+        grade,
+        subject: materiaId,
+        childProfile: {
+          neurodivergence: child?.diagnostico ? [child.diagnostico] : [],
+          interests: child?.hiperfoco ? [child.hiperfoco] : [],
+          sensoryThreshold: 0.5,
+          lastErrors: [],
+        },
+        previousActivityIds: items.map((x) => x.activity.id),
+      });
+      items.push({ activity: act, materiaId, ordem: i + 1 });
+    } catch (e) {
+      console.warn("[Banco] falha ao gerar item", i, e);
+    }
+  }
+  console.log(`[Banco] Lote ${lote} gerado:`, items.length, "atividades para", grade);
+  return items;
+}
+
+
 function Escola() {
   const { activeChild } = useAppState();
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
+  const [banco, setBanco] = useState<BancoState | null>(null);
 
   const grades = [
     "Educação Infantil",
@@ -122,29 +184,63 @@ function Escola() {
     "6º Ano", "7º Ano", "8º Ano", "9º Ano"
   ];
 
-  const carregarAula = async (materiaId: string, topic?: string) => {
+  const showBanco = !!activeChild && isFundamental2a9(selectedGrade);
+
+  // Carrega ou cria o lote de 50 atividades para a série atual
+  useEffect(() => {
+    if (!activeChild || !isFundamental2a9(selectedGrade)) {
+      setBanco(null);
+      return;
+    }
+    const key = bancoKey(activeChild.id, selectedGrade);
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const parsed = JSON.parse(raw) as BancoState;
+        if (parsed?.items?.length === BANCO_TAMANHO) {
+          setBanco(parsed);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn("[Banco] localStorage parse falhou", e);
+    }
+    const novo: BancoState = { lote: 1, items: gerarLote(activeChild, selectedGrade, 1), done: [] };
+    try { localStorage.setItem(key, JSON.stringify(novo)); } catch {}
+    setBanco(novo);
+  }, [activeChild?.id, selectedGrade]);
+
+  const persistBanco = (next: BancoState) => {
+    if (!activeChild) return;
+    try { localStorage.setItem(bancoKey(activeChild.id, selectedGrade), JSON.stringify(next)); } catch {}
+    setBanco(next);
+  };
+
+  const marcarConcluida = (activityId: string) => {
+    if (!banco || !activeChild) return;
+    if (banco.done.includes(activityId)) return;
+    const doneNext = [...banco.done, activityId];
+    if (doneNext.length >= BANCO_TAMANHO) {
+      const proxLote = banco.lote + 1;
+      const itensNovos = gerarLote(activeChild, selectedGrade, proxLote);
+      persistBanco({ lote: proxLote, items: itensNovos, done: [] });
+      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades ✨`);
+    } else {
+      persistBanco({ ...banco, done: doneNext });
+    }
+  };
+
+
+  const carregarAula = async (materiaId: string, topic?: string, preset?: { activity: any; ordem?: number }) => {
     if (!activeChild) return;
     setLoading(true);
     try {
-      // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
+      // 1. O SISTEMA gera (ou reusa do banco) a atividade
       const service = ActivityProceduralService.getInstance();
-      // Mapa de matéria → domínio do gerador
-      const domainMap: Record<string, string> = {
-        matematica: "math",
-        artes: "math",          // EI: cores/formas; demais séries: padrões visuais
-        portugues: "linguistics",
-        ciencias: "linguistics", // EI: animais; demais: leitura temática
-        historia: "linguistics",
-        geografia: "linguistics",
-      };
-      const domain = domainMap[materiaId] || "linguistics";
-
-      // Em Educação Infantil, dificuldade muito baixa e fixa
+      const domain = DOMAIN_MAP[materiaId] || "linguistics";
       const difficulty = isEI(selectedGrade) ? 0.15 : 0.5;
 
-      console.log("Generating activity for domain:", domain, "grade:", selectedGrade, "subject:", materiaId);
-
-      const activity = service.generateActivity({
+      const activity = preset?.activity ?? service.generateActivity({
         domain,
         difficulty,
         grade: selectedGrade,
@@ -157,6 +253,7 @@ function Escola() {
         },
         previousActivityIds: []
       });
+
 
 
       console.log("Activity generated:", activity);
@@ -213,6 +310,8 @@ function Escola() {
         materia: materiaId,
         etapa: "ensino",
         grade: selectedGrade,
+        activityId: activity.id,
+        bancoOrdem: preset?.ordem,
         // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
@@ -257,6 +356,7 @@ function Escola() {
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
           tier={gradeTier(aula.grade || selectedGrade)}
+          onCompleted={(activityId) => marcarConcluida(activityId)}
         />
       </AulaErrorBoundary>
     );
@@ -369,17 +469,68 @@ function Escola() {
           </button>
         ))}
       </div>
+
+      {showBanco && banco && (
+        <section className="mt-10">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Banco BNCC · Infinito</div>
+              <h2 className="text-xl font-extrabold">Atividades liberadas — Lote {banco.lote}</h2>
+              <div className="text-sm text-muted-foreground">
+                {banco.done.length} de {BANCO_TAMANHO} concluídas. Ao terminar todas, mais {BANCO_TAMANHO} são liberadas automaticamente.
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-3xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
+            </div>
+          </div>
+          <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
+            <div
+              className="h-full bg-gradient-to-r from-primary to-success transition-all"
+              style={{ width: `${(banco.done.length / BANCO_TAMANHO) * 100}%` }}
+            />
+          </div>
+
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2">
+            {banco.items.map((item) => {
+              const done = banco.done.includes(item.activity.id);
+              const meta = materias.find((m) => m.id === item.materiaId) || materias[0];
+              return (
+                <button
+                  key={item.activity.id}
+                  onClick={() => carregarAula(item.materiaId, undefined, { activity: item.activity, ordem: item.ordem })}
+                  disabled={done}
+                  title={`${item.ordem}. ${meta.nome} — ${item.activity.title || ""}`}
+                  className={`relative aspect-square rounded-xl border-2 flex flex-col items-center justify-center text-center transition-all ${
+                    done
+                      ? "bg-success/15 border-success/40 text-success cursor-default"
+                      : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
+                  }`}
+                >
+                  <div className="text-2xl leading-none">{meta.emoji}</div>
+                  <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
+                  {done && (
+                    <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </Shell>
   );
 }
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier }) {
+
+function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const completedRef = useRef<boolean>(false);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
@@ -540,6 +691,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
                           registerPerformance(isCorrect, elapsed, aula.activityId);
                           scoredRef.current = true;
                         }
+                        if (isCorrect && !completedRef.current && aula.activityId) {
+                          completedRef.current = true;
+                          onCompleted?.(aula.activityId);
+                        }
                       }}
                       disabled={acertou === true}
                       className={`btn-tap p-6 rounded-2xl text-xl font-extrabold border-2 transition-all text-left ${
@@ -574,11 +729,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
                     <div className="flex items-center gap-3">
                       <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
                       <CheckCircle2 className="h-8 w-8" />
-                      <div>
+                      <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
                         <div className="text-base">{aula.reforco_positivo}</div>
                         <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
+                      {aula.bancoOrdem && (
+                        <button
+                          onClick={() => setAula(null)}
+                          className="px-4 py-2 rounded-xl bg-success text-success-foreground font-bold text-sm shadow"
+                        >
+                          Próxima do banco →
+                        </button>
+                      )}
                     </div>
                   </div>
                 )}
