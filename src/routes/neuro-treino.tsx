@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Component, ReactNode } from "react";
 import { AlertCircle, Coffee, Sparkles } from "lucide-react";
@@ -31,10 +31,15 @@ class NeuroTreinoErrorBoundary extends Component<{ children: ReactNode }, { hasE
 export const Route = createFileRoute("/neuro-treino")({
   component: () => (
     <NeuroTreinoErrorBoundary>
-      <Treino />
+      <NeuroTreinoShell />
     </NeuroTreinoErrorBoundary>
   ),
 });
+
+function NeuroTreinoShell() {
+  const location = useLocation();
+  return location.pathname === "/neuro-treino" ? <Treino /> : <Outlet />;
+}
 
 function Treino() {
   useAppState();
