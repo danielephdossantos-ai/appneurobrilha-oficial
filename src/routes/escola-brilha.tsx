@@ -357,20 +357,20 @@ function Escola() {
       const novaAula = {
         ...data,
         materia: materiaId,
-        etapa: guidedActive ? "ensino" : "opcoes",
+        etapa: "professor_intro", // Inicia sempre com o Professor Virtual
         grade: selectedGrade,
         activityId: activity.id,
         bancoOrdem: preset?.ordem,
-        // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
         resposta_correta: systemAnswer,
-        // Conteúdo visual extra (emoji/cor) para Educação Infantil
         visual: activity.content.visual,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
         guided: guidedActive,
       };
+
+      setIsFirstExplanation(false); // Nas próximas, não usa mais o nome
 
 
 
