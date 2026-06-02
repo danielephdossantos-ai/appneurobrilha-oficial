@@ -750,8 +750,8 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                              <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
                                {eiStep === 1 ? (aula.etapa1_intro || aula.ensino) :
                                 eiStep === 2 ? (aula.etapa2_conceito || "Sabe o que é isso?") :
-                                eiStep === 3 ? (aula.etapa3_ensino || "Vamos ver como faz!") :
-                                (aula.etapa4_preparo || "Tudo pronto?")}
+                                eiStep === 3 ? (aula.etapa3_exemplo || aula.etapa3_ensino || "Vamos ver um exemplo!") :
+                                (aula.etapa4_como_monta || aula.etapa4_preparo || "Veja como resolver!")}
                              </p>
                           </div>
                         </div>
