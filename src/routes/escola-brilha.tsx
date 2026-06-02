@@ -809,244 +809,343 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 }
 
 // ============= MATEMÁTICA INICIAL — 6 ETAPAS =============
-// 1. Visual  2. Contagem  3. Conta  4. Montagem  5. Prática  6. Continha armada
-function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; mathStep: number; setMathStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
-  // Defaults — simplifica se a IA não mandar
-  const a = Number(aula.numero_a ?? 3);
-  const b = Number(aula.numero_b ?? 2);
+// 1. Explicação Visual  2. Contagem Guiada  3. Mostra a Conta
+// 4. Montagem da Conta  5. Prática            6. Continha Armada
+function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, childNome, tier, onComplete }: { aula: any; mathStep: number; setMathStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; tier: GradeTier; onComplete: (isCorrect: boolean) => void }) {
+  // Grade -> ano (0=Pré, 1..5)
+  const ano = useMemo(() => {
+    const g = String(aula.grade || "").toLowerCase();
+    if (/pré|pre|infantil/.test(g)) return 0;
+    const m = g.match(/(\d)\s*º/);
+    return m ? Math.min(5, Number(m[1])) : (tier === "ei" ? 0 : tier === "alfa" ? 1 : 3);
+  }, [aula.grade, tier]);
+
+  // Defaults adaptados por série (resultado máx: 5 / 10 / 20 / 99 / 200)
+  const maxByAno = [5, 10, 20, 50, 200, 200];
+  const safeMax = maxByAno[ano];
+  const rawA = Number(aula.numero_a ?? 2);
+  const rawB = Number(aula.numero_b ?? 3);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
+  // Se IA mandou números muito grandes pra série, reduz pra manter o ensino simples
+  const tooBig = (op === "+" ? rawA + rawB : rawA) > safeMax;
+  const a = tooBig ? Math.min(rawA, ano <= 1 ? 2 : 4) : rawA;
+  const b = tooBig ? Math.min(rawB, ano <= 1 ? 3 : 3) : rawB;
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const emoji = aula.visual_emoji || aula.visual || "🍎";
+  const emojiA = aula.visual_emoji || aula.visual || "🍎";
+  const emojiB = aula.visual_emoji_b || emojiA;
+
   const opcoesNum: number[] = useMemo(() => {
     const base = Array.isArray(aula.opcoes_numericas) && aula.opcoes_numericas.length >= 2
-      ? aula.opcoes_numericas.map((n: any) => Number(n))
+      ? aula.opcoes_numericas.map((n: any) => Number(n)).filter((n: number) => Number.isFinite(n))
       : [resultado, Math.max(0, resultado - 1), resultado + 1];
-    return [...new Set(base)].slice(0, 3).sort(() => Math.random() - 0.5) as number[];
+    const uniq = Array.from(new Set([resultado, ...base]));
+    return uniq.slice(0, 3).sort(() => Math.random() - 0.5);
   }, [aula.opcoes_numericas, resultado]);
 
-  // Contagem (tela 2)
+  // Estados das telas
   const [contados, setContados] = useState<number[]>([]);
-  // Montagem (tela 4) — slots: [a, op, b, =, ?]
   const [montagem, setMontagem] = useState<(number | string | null)[]>([null, op, null, "=", "?"]);
-  const pecas = useMemo(() => [a, b, resultado, Math.max(0, resultado - 1), resultado + 1]
-    .filter((n, i, arr) => arr.indexOf(n) === i)
-    .sort(() => Math.random() - 0.5), [a, b, resultado]);
+  const pecas = useMemo(() => {
+    const pool = [a, b, resultado, Math.max(0, resultado - 1), resultado + 1, Math.max(0, a - 1), b + 1];
+    return Array.from(new Set(pool)).sort(() => Math.random() - 0.5);
+  }, [a, b, resultado]);
 
-  // Áudio guiado
-  useEffect(() => {
-    const playAudio = (msg: string) => {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(msg);
-      u.lang = "pt-BR"; u.rate = 0.9;
-      window.speechSynthesis.speak(u);
-    };
-    let text = "";
-    if (mathStep === 1) text = `Olha! ${a}`;
-    else if (mathStep === 2) text = "Toque para contar!";
-    else if (mathStep === 3) text = `${a} ${op === "+" ? "mais" : "menos"} ${b}`;
-    else if (mathStep === 4) text = "Monte a conta!";
-    else if (mathStep === 5) text = `Quanto é ${a} ${op === "+" ? "mais" : "menos"} ${b}?`;
-    else if (mathStep === 6) text = `${a} ${op === "+" ? "mais" : "menos"} ${b} é igual a ${resultado}`;
-    if (text) playAudio(text);
-  }, [mathStep, a, b, op, resultado]);
+  const totalCont = op === "+" ? a + b : a;
 
-  const renderEmojis = (n: number, color = "text-primary") => (
-    <div className="flex flex-wrap gap-2 justify-center max-w-md">
-      {Array.from({ length: Math.max(0, n) }).map((_, i) => (
-        <span key={i} className={`text-5xl md:text-6xl ${color} animate-in zoom-in`} style={{ animationDelay: `${i * 100}ms` }}>{emoji}</span>
+  // ============= ÁUDIO =============
+  const fala = useMemo(() => {
+    const opWord = op === "+" ? "mais" : "menos";
+    if (mathStep === 1) return ano <= 1 ? `Vamos juntar! ${a} mais ${b}` : `${a} ${opWord} ${b}, vamos ver!`;
+    if (mathStep === 2) return "Vamos contar juntos!";
+    if (mathStep === 3) return `${a} ${opWord} ${b} é igual a ${resultado}`;
+    if (mathStep === 4) return "Monte a conta arrastando!";
+    if (mathStep === 5) return `Quanto é ${a} ${opWord} ${b}?`;
+    return `${a} ${opWord} ${b} igual a ${resultado}. Você arrasou!`;
+  }, [mathStep, a, b, op, resultado, ano]);
+
+  const captionByStep: Record<number, string> = {
+    1: ano === 0 ? "Vamos juntar!" : ano <= 2 ? `Temos ${a} e mais ${b}.` : ano === 3 ? "Juntando dezenas e unidades." : "Vamos resolver juntos!",
+    2: "Vamos contar juntos!",
+    3: `${a} ${op} ${b} = ${resultado}`,
+    4: "Arraste o número que falta",
+    5: "Toque na resposta certa!",
+    6: ano <= 1 ? "Vamos completar!" : ano === 2 ? "Complete" : "Complete a conta",
+  };
+
+  const playFala = (msg = fala) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(msg);
+    u.lang = "pt-BR";
+    u.rate = ano <= 1 ? 0.85 : 0.95;
+    window.speechSynthesis.speak(u);
+  };
+
+  useEffect(() => { playFala(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [mathStep, a, b, op, resultado]);
+
+  // ============= RENDER DE OBJETOS POR SÉRIE =============
+  // Ano 0-1: emoji (fruta/brinquedo). Ano 2-3: bolinhas coloridas. Ano 4-5: números puros.
+  const renderQuantidade = (n: number, variante: "a" | "b" = "a", contavel = false) => {
+    const cor = variante === "a" ? "text-coral" : "text-success";
+    const dotBg = variante === "a" ? "bg-coral" : "bg-success";
+    const useEmoji = ano <= 1;
+    const useBolinhas = ano === 2 || ano === 3;
+    if (ano >= 4 && !contavel) {
+      return <div className={`text-7xl md:text-8xl font-black ${cor}`}>{n}</div>;
+    }
+    return (
+      <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center max-w-[260px]">
+        {Array.from({ length: Math.max(0, n) }).map((_, i) => (
+          <span key={i} className={`${useEmoji ? `text-4xl md:text-5xl` : useBolinhas ? `w-7 h-7 md:w-8 md:h-8 rounded-full ${dotBg} shadow-sm` : `text-4xl ${cor}`} animate-in zoom-in inline-block`} style={{ animationDelay: `${i * 60}ms` }}>
+            {useEmoji ? (variante === "a" ? emojiA : emojiB) : useBolinhas ? "" : "●"}
+          </span>
+        ))}
+      </div>
+    );
+  };
+
+  // ============= UI HELPERS =============
+  const Header = () => (
+    <div className="flex items-center justify-between px-2 mb-2">
+      <button
+        onClick={() => mathStep > 1 && setMathStep(mathStep - 1)}
+        disabled={mathStep === 1}
+        className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 disabled:opacity-30 transition"
+        aria-label="Voltar"
+      >
+        <ArrowRight className="h-5 w-5 rotate-180" />
+      </button>
+      <button
+        onClick={() => playFala()}
+        className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition"
+        aria-label="Ouvir"
+      >
+        <Volume2 className="h-5 w-5" />
+      </button>
+    </div>
+  );
+
+  const ProgressDots = () => (
+    <div className="flex items-center justify-center gap-2 mt-4">
+      {[1, 2, 3, 4, 5, 6].map((n) => (
+        <span key={n} className={`h-2.5 rounded-full transition-all ${n === mathStep ? "w-6 bg-primary" : n < mathStep ? "w-2.5 bg-success" : "w-2.5 bg-muted"}`} />
       ))}
     </div>
   );
 
-  const fala =
-    mathStep === 1 ? `Veja, ${childNome}! Temos ${a}!` :
-    mathStep === 2 ? "Toque em cada um para contar!" :
-    mathStep === 3 ? `Agora juntamos ${a} com ${b}!` :
-    mathStep === 4 ? "Arraste os números pros lugares!" :
-    mathStep === 5 ? "Toque na resposta certa!" :
-    "Veja a conta armada! Você arrasou!";
-
+  // ============= CARD =============
   return (
-    <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote guia */}
-      <div className="flex items-center gap-4 mb-2">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl shrink-0">
-          {activeMascot?.mascot?.image_url?.startsWith("http") ? (
-            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-          ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
-        </div>
-        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center min-h-[300px]">
-        {/* TELA 1 — VISUAL */}
-        {mathStep === 1 && (
-          <div className="text-center space-y-6">
-            {renderEmojis(a)}
-            <div className="bg-primary text-white text-8xl md:text-9xl font-black w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
-              {a}
-            </div>
+    <div className="w-full max-w-2xl space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Mascote (somente Pré-2º, opcional) */}
+      {ano <= 2 && (
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-14 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-3xl shrink-0">
+            {activeMascot?.mascot?.image_url?.startsWith("http") ? (
+              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+            ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
           </div>
-        )}
+          <div className="bg-white rounded-2xl border-2 border-primary px-3 py-1.5 text-sm font-bold shadow-sm">{fala}</div>
+        </div>
+      )}
 
-        {/* TELA 2 — CONTAGEM (toque para contar) */}
-        {mathStep === 2 && (
-          <div className="text-center space-y-6">
-            <div className="flex flex-wrap gap-3 justify-center max-w-md mx-auto">
-              {Array.from({ length: a }).map((_, i) => {
-                const tocado = contados.includes(i);
-                return (
+      <div className="rounded-3xl bg-white border-2 border-muted shadow-soft p-6 md:p-8">
+        <Header />
+
+        <div className="min-h-[280px] flex flex-col items-center justify-center">
+          {/* TELA 1 — EXPLICAÇÃO VISUAL */}
+          {mathStep === 1 && (
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5">
+              {renderQuantidade(a, "a")}
+              <div className="text-5xl md:text-6xl font-black text-sun">{op}</div>
+              {renderQuantidade(b, "b")}
+            </div>
+          )}
+
+          {/* TELA 2 — CONTAGEM GUIADA (toque pra contar) */}
+          {mathStep === 2 && (
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-wrap gap-2 md:gap-3 justify-center max-w-md">
+                {Array.from({ length: totalCont }).map((_, i) => {
+                  const tocado = contados.includes(i);
+                  const isB = i >= a;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        if (tocado) return;
+                        const next = [...contados, i];
+                        setContados(next);
+                        playFala(String(next.length));
+                        if (next.length === totalCont) toast.success(`Você contou até ${totalCont}!`);
+                      }}
+                      className={`btn-tap relative ${ano <= 1 ? "w-14 h-14 md:w-16 md:h-16" : "w-12 h-12 md:w-14 md:h-14"} rounded-2xl flex items-center justify-center border-4 transition-all ${
+                        tocado ? "bg-success/15 border-success scale-95" : isB ? "bg-success/10 border-success hover:scale-110" : "bg-coral/10 border-coral hover:scale-110"
+                      }`}
+                    >
+                      {tocado ? (
+                        <span className="text-xl md:text-2xl font-black text-success">{contados.indexOf(i) + 1}</span>
+                      ) : ano <= 1 ? (
+                        <span className="text-3xl md:text-4xl">{isB ? emojiB : emojiA}</span>
+                      ) : (
+                        <span className={`w-5 h-5 md:w-6 md:h-6 rounded-full ${isB ? "bg-success" : "bg-coral"}`} />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex gap-2 mt-1 text-base md:text-lg font-black text-muted-foreground">
+                {Array.from({ length: totalCont }).map((_, i) => (
+                  <span key={i} className={i < contados.length ? "text-primary" : ""}>{i + 1}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TELA 3 — MOSTRA A CONTA */}
+          {mathStep === 3 && (
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-black tracking-tight">
+                <span className="text-coral">{a}</span>
+                <span className="text-sun mx-3">{op}</span>
+                <span className="text-success">{b}</span>
+                <span className="text-foreground mx-3">=</span>
+                <span className="text-primary">{resultado}</span>
+              </div>
+              {ano >= 4 && (
+                <p className="text-sm text-muted-foreground mt-4 font-bold">Decompomos pra somar melhor</p>
+              )}
+            </div>
+          )}
+
+          {/* TELA 4 — MONTAGEM (arrastar/clicar números) */}
+          {mathStep === 4 && (
+            <div className="w-full space-y-6">
+              <div className="flex gap-3 items-center justify-center flex-wrap text-4xl md:text-5xl font-black">
+                {montagem.map((slot, idx) => {
+                  const isHole = idx === 0 || idx === 2 || idx === 4;
+                  if (!isHole) return <span key={idx} className="px-2 text-sun">{slot}</span>;
+                  const filled = slot !== null && slot !== "?";
+                  return (
+                    <div
+                      key={idx}
+                      className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl border-4 border-dashed flex items-center justify-center ${
+                        filled ? "bg-primary text-white border-primary" : "bg-muted/30 border-muted text-muted-foreground/60"
+                      }`}
+                    >
+                      {filled ? slot : ""}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex gap-2 md:gap-3 flex-wrap justify-center">
+                {pecas.map((n, i) => (
                   <button
                     key={i}
                     onClick={() => {
-                      if (!tocado) {
-                        const next = [...contados, i];
-                        setContados(next);
-                        const u = new SpeechSynthesisUtterance(String(next.length));
-                        u.lang = "pt-BR"; u.rate = 0.95;
-                        window.speechSynthesis.speak(u);
-                        if (next.length === a) toast.success(`Você contou até ${a}!`);
+                      const next = [...montagem];
+                      const slotIdx = next[0] == null ? 0 : next[2] == null ? 2 : next[4] === "?" ? 4 : -1;
+                      if (slotIdx < 0) return;
+                      next[slotIdx] = n;
+                      setMontagem(next);
+                      if (slotIdx === 4) {
+                        if (next[0] === a && next[2] === b && n === resultado) {
+                          toast.success("Conta montada!");
+                        } else {
+                          toast.warning("Hmm, tente outros números!");
+                          setTimeout(() => setMontagem([null, op, null, "=", "?"]), 1200);
+                        }
                       }
                     }}
-                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center text-5xl md:text-6xl border-4 transition-all ${
-                      tocado ? "bg-success/15 border-success scale-90" : "bg-white border-primary hover:scale-110"
-                    }`}
+                    className="btn-tap w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white border-4 border-primary text-primary text-2xl md:text-3xl font-black shadow-md hover:bg-primary/5"
                   >
-                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : emoji}
+                    {n}
                   </button>
-                );
-              })}
-            </div>
-            <p className="text-2xl font-black text-primary">{contados.length} / {a}</p>
-          </div>
-        )}
-
-        {/* TELA 3 — CONTA (visual) */}
-        {mathStep === 3 && (
-          <div className="space-y-4 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {renderEmojis(a)}
-              <div className="text-6xl font-black text-sun">{op}</div>
-              {renderEmojis(b, "text-success")}
-            </div>
-            <div className="text-5xl md:text-6xl font-black text-primary mt-6">
-              {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
-            </div>
-          </div>
-        )}
-
-        {/* TELA 4 — MONTAGEM (arrastar/clicar números) */}
-        {mathStep === 4 && (
-          <div className="w-full space-y-8">
-            <div className="flex gap-3 items-center justify-center flex-wrap text-4xl md:text-5xl font-black">
-              {montagem.map((slot, idx) => {
-                const isHole = idx === 0 || idx === 2;
-                if (!isHole) return <span key={idx} className="px-2 text-sun">{slot}</span>;
-                return (
-                  <div
-                    key={idx}
-                    className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl border-4 border-dashed flex items-center justify-center ${
-                      slot != null ? "bg-primary text-white border-primary" : "bg-muted/30 border-muted text-muted-foreground"
-                    }`}
-                  >
-                    {slot != null ? slot : "?"}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex gap-3 flex-wrap justify-center">
-              {pecas.map((n, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    const next = [...montagem];
-                    const slotIdx = next[0] == null ? 0 : next[2] == null ? 2 : -1;
-                    if (slotIdx < 0) return;
-                    next[slotIdx] = n;
-                    setMontagem(next);
-                    if (next[0] === a && next[2] === b) {
-                      next[4] = resultado;
-                      setMontagem([...next]);
-                      toast.success("Conta montada! Muito bem!");
-                    } else if (next[0] != null && next[2] != null) {
-                      toast.warning("Hmm, tente outros números!");
-                      setTimeout(() => setMontagem([null, op, null, "=", "?"]), 1200);
-                    }
-                  }}
-                  className="btn-tap w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white border-4 border-primary text-primary text-4xl font-black shadow-lg hover:bg-primary/5"
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TELA 5 — PRÁTICA (escolher resultado) */}
-        {mathStep === 5 && (
-          <div className="w-full space-y-6">
-            <div className="text-center text-5xl md:text-6xl font-black text-primary">
-              {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {opcoesNum.map((n, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (n === resultado) {
-                      setMathStep(6);
-                      toast.success("Isso mesmo!");
-                    } else {
-                      toast.error("Quase! Vamos contar de novo?");
-                      setContados([]);
-                      setMontagem([null, op, null, "=", "?"]);
-                      setMathStep(2);
-                    }
-                  }}
-                  className="btn-tap aspect-square rounded-3xl bg-white border-4 border-muted hover:border-primary text-5xl md:text-6xl font-black text-primary shadow-soft"
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TELA 6 — CONTINHA ARMADA */}
-        {mathStep === 6 && (
-          <div className="text-center space-y-6">
-            <div className="inline-block bg-white border-4 border-primary rounded-3xl px-10 py-8 shadow-glow">
-              <div className="font-mono text-6xl md:text-7xl font-black text-primary leading-tight text-right">
-                <div className="px-4">{a}</div>
-                <div className="px-4 border-b-4 border-foreground pb-2"><span className="text-sun mr-4">{op}</span>{b}</div>
-                <div className="px-4 pt-2 text-success">{resultado}</div>
+                ))}
+                {(montagem[0] != null || montagem[2] != null) && (
+                  <button onClick={() => setMontagem([null, op, null, "=", "?"])} className="text-xs font-bold text-muted-foreground underline self-center px-2">Recomeçar</button>
+                )}
               </div>
             </div>
-            <p className="text-2xl font-black text-primary uppercase">Continha armada!</p>
-            <button
-              onClick={() => onComplete(true)}
-              className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
-            >
-              CONCLUIR AULA! 🌟
-            </button>
-          </div>
-        )}
+          )}
+
+          {/* TELA 5 — PRÁTICA */}
+          {mathStep === 5 && (
+            <div className="w-full space-y-6">
+              <div className="text-center text-4xl md:text-6xl font-black">
+                <span className="text-coral">{a}</span>
+                <span className="text-sun mx-3">{op}</span>
+                <span className="text-success">{b}</span>
+                <span className="text-foreground mx-3">=</span>
+                <span className="text-muted-foreground">?</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
+                {opcoesNum.map((n, i) => {
+                  const corClasses = ["bg-coral/10 border-coral text-coral", "bg-sun/15 border-sun text-sun-foreground", "bg-lilac/15 border-lilac text-lilac-foreground"];
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        if (n === resultado) {
+                          setMathStep(6);
+                          toast.success("Isso mesmo!");
+                        } else {
+                          toast.error("Quase! Vamos contar de novo?");
+                          setContados([]);
+                          setMontagem([null, op, null, "=", "?"]);
+                          setMathStep(2); // REFORÇO
+                        }
+                      }}
+                      className={`btn-tap aspect-square rounded-2xl border-4 text-4xl md:text-5xl font-black shadow-soft hover:scale-105 transition ${corClasses[i % 3]}`}
+                    >
+                      {n}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* TELA 6 — CONTINHA ARMADA */}
+          {mathStep === 6 && (
+            <div className="text-center space-y-5">
+              <div className="inline-block font-mono text-5xl md:text-7xl font-black leading-tight text-right px-6 md:px-10">
+                <div className="text-coral">{String(a).padStart(String(resultado).length, " ")}</div>
+                <div className="border-b-4 border-foreground pb-1 flex items-baseline justify-end gap-2">
+                  <span className="text-sun">{op}</span>
+                  <span className="text-success">{String(b).padStart(String(resultado).length, " ")}</span>
+                </div>
+                <div className="pt-2 text-primary">{resultado}</div>
+              </div>
+              <button
+                onClick={() => onComplete(true)}
+                className="btn-tap bg-success text-white px-10 py-4 rounded-full text-xl font-black shadow-glow mt-4"
+              >
+                CONCLUIR AULA
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Caption + dots */}
+        <p className="text-center text-sm md:text-base font-bold text-muted-foreground mt-5">{captionByStep[mathStep]}</p>
+        <ProgressDots />
       </div>
 
       {/* Botão CONTINUAR (telas que não decidem sozinhas) */}
-      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === a) || (mathStep === 4 && montagem[4] === resultado)) && (
-        <div className="flex justify-center mt-6">
+      {(mathStep === 1 || mathStep === 3 || (mathStep === 2 && contados.length === totalCont) || (mathStep === 4 && montagem[4] === resultado)) && (
+        <div className="flex justify-center">
           <button
             onClick={() => setMathStep(mathStep + 1)}
-            className="btn-tap bg-primary text-white rounded-full px-12 py-5 text-2xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
+            className="btn-tap bg-primary text-white rounded-full px-10 py-4 text-xl font-black shadow-glow flex items-center gap-3 border-4 border-white"
           >
-            CONTINUAR <ArrowRight className="h-8 w-8" />
+            CONTINUAR <ArrowRight className="h-6 w-6" />
           </button>
         </div>
       )}
     </div>
   );
 }
+
 
 
 
@@ -1071,7 +1170,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
 
   // Estados para Matemática Inicial (6 etapas)
-  const isMathFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "matematica" || aula.materia === "numeros");
+  const isMathFlow = (tier === "ei" || tier === "alfa" || tier === "fund1") && (aula.materia === "matematica" || aula.materia === "numeros");
   const [mathStep, setMathStep] = useState(1);
   
   
@@ -1268,6 +1367,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     activeMascot={activeMascot}
                     materiaMeta={materiaMeta}
                     childNome={childNome}
+                    tier={tier}
                     onComplete={(isCorrect) => {
                       setAcertou(isCorrect);
                       if (isCorrect && !completedRef.current && aula.activityId) {
