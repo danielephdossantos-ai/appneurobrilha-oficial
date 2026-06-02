@@ -264,6 +264,7 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
   switch (slug) {
     case "sons-iniciais": return <SonsIniciais p={variation.payload} onDone={onConcluir} />;
     case "motorzinho-dos-sons": return <Motorzinho p={variation.payload} onDone={onConcluir} />;
+    case "consciencia-fonologica": return <ConscienciaFonologica p={variation.payload} onDone={onConcluir} />;
     case "rimas": return <Rimas p={variation.payload} onDone={onConcluir} />;
     case "pedacinhos-da-palavra": return <Pedacinhos p={variation.payload} onDone={onConcluir} />;
     case "onde-esta": return <OndeEsta p={variation.payload} onDone={onConcluir} />;
@@ -313,6 +314,62 @@ function SonsIniciais({ p, onDone }: any) {
                 />
               ) : (
                 <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
+              )}
+              <div className="font-bold text-sm">{o.nome}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============== Consciência Fonológica (5 sub-tarefas, padrão 2D) ==============
+function ConscienciaFonologica({ p, onDone }: any) {
+  const headers: Record<string, string> = {
+    inicial: `Qual começa com a letra ${p.letra}?`,
+    final: `Qual termina com a letra ${p.letra}?`,
+    silabas: `Qual palavra tem ${p.n} pedacinhos?`,
+    rima: `Qual palavra rima com ${p.palavra}?`,
+    juncao: `Junte os pedacinhos: ${(p.partes || []).join(" + ")}`,
+  };
+  const tipoLabel: Record<string, string> = {
+    inicial: "Som Inicial",
+    final: "Som Final",
+    silabas: "Sílabas",
+    rima: "Rima",
+    juncao: "Junção",
+  };
+  return (
+    <div className="text-center">
+      <div className="inline-block px-4 py-1 mb-3 rounded-full bg-primary/10 text-primary text-xs font-extrabold uppercase tracking-wider">
+        {tipoLabel[p.tipo] || p.tipo}
+      </div>
+      <div className="text-2xl md:text-3xl font-black mb-6 text-foreground">
+        {headers[p.tipo]}
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {p.options.map((o: any, i: number) => {
+          const img = objetoImg(o.nome);
+          return (
+            <button
+              key={i}
+              onClick={() => onDone(o.nome === p.correctName)}
+              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-primary hover:scale-105 transition-all flex flex-col items-center gap-2"
+            >
+              {img ? (
+                <img
+                  src={img}
+                  alt={o.nome}
+                  width={128}
+                  height={128}
+                  loading="lazy"
+                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                />
+              ) : (
+                <div className="w-24 h-24 md:w-28 md:h-28 grid place-items-center rounded-xl bg-muted text-2xl font-black text-muted-foreground">
+                  {o.nome.slice(0, 2)}
+                </div>
               )}
               <div className="font-bold text-sm">{o.nome}</div>
             </button>

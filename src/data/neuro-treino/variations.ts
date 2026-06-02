@@ -6,6 +6,7 @@ export type CategoriaSlug =
   | "motorzinho-dos-sons"
   | "rimas"
   | "pedacinhos-da-palavra"
+  | "consciencia-fonologica"
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
@@ -44,6 +45,7 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
   "motorzinho-dos-sons": { slug:"motorzinho-dos-sons", nome:"Motorzinho dos Sons", emoji:"🚂", grupo:"Fala e Som", cor:"from-coral/25 to-coral/5", objetivo:"Prolongamento de fonemas isolados", instrucao:"Segure o botão enquanto faz o som da letra até o trenzinho chegar." },
   "rimas": { slug:"rimas", nome:"Rimas", emoji:"🎵", grupo:"Fala e Som", cor:"from-coral/25 to-coral/5", objetivo:"Associação por terminação sonora", instrucao:"Escolha a palavra que termina com o mesmo som." },
   "pedacinhos-da-palavra": { slug:"pedacinhos-da-palavra", nome:"Pedacinhos da Palavra", emoji:"👏", grupo:"Fala e Som", cor:"from-coral/25 to-coral/5", objetivo:"Contagem silábica interativa", instrucao:"Bata palma uma vez para cada pedacinho da palavra." },
+  "consciencia-fonologica": { slug:"consciencia-fonologica", nome:"Consciência Fonológica", emoji:"🔤", grupo:"Fala e Som", cor:"from-coral/25 to-sun/5", objetivo:"Habilidades fonológicas: som inicial/final, sílabas, rima e junção", instrucao:"Leia a tarefa e toque na figura certa." },
 
   "onde-esta": { slug:"onde-esta", nome:"Onde Está", emoji:"🔍", grupo:"Funções Executivas", cor:"from-primary/20 to-primary/5", objetivo:"Busca visual ativa com distratores", instrucao:"Encontre e toque na figura procurada o mais rápido possível." },
   "sequencia-e-padrao": { slug:"sequencia-e-padrao", nome:"Sequência e Padrão", emoji:"🧩", grupo:"Funções Executivas", cor:"from-primary/20 to-primary/5", objetivo:"Continuação lógica de padrões", instrucao:"Toque na peça que continua a sequência." },
@@ -447,11 +449,89 @@ const EMOCAO_VARS: Variation[] = range(30).map((i) => {
   return { id:`ee-${i+1}`, payload:{ cena:b.cena, opts, correta:b.correta } };
 });
 
+// 24. CONSCIÊNCIA FONOLÓGICA — 5 sub-tarefas (inicial/final/sílabas/rima/junção)
+// Mecânica: pergunta + 4 opções de imagem 2D. Reutiliza biblioteca OBJETO_IMG.
+type CfOption = { nome: string };
+type CfExtra =
+  | { tipo:"inicial"; letra:string }
+  | { tipo:"final"; letra:string }
+  | { tipo:"silabas"; n:number }
+  | { tipo:"rima"; palavra:string }
+  | { tipo:"juncao"; partes:string[] };
+
+const cfShuffle = (arr: CfOption[], i:number): CfOption[] => {
+  const a = [...arr];
+  for (let k = a.length - 1; k > 0; k--) {
+    const j = (i * 7 + k * 13) % (k + 1);
+    [a[k], a[j]] = [a[j], a[k]];
+  }
+  return a;
+};
+const cfMake = (correta:string, distratores:string[], extra:CfExtra, idx:number) => {
+  const options = cfShuffle(
+    [correta, ...distratores].map((nome) => ({ nome })),
+    idx
+  );
+  return { ...extra, options, correctName: correta };
+};
+
+const CF_INICIAL = [
+  { letra:"B", correta:"BOLA",  distra:["GATO","FLOR","LUA"] },
+  { letra:"C", correta:"CASA",  distra:["PATO","MAÇÃ","RATO"] },
+  { letra:"G", correta:"GATO",  distra:["SOL","FLOR","RATO"] },
+  { letra:"P", correta:"PATO",  distra:["LUA","MAÇÃ","FOGO"] },
+  { letra:"S", correta:"SOL",   distra:["CHUVA","RATO","ABELHA"] },
+  { letra:"M", correta:"MAÇÃ",  distra:["CASA","GATO","BOLA"] },
+];
+const CF_FINAL = [
+  { letra:"A", correta:"BOLA", distra:["SOL","FLOR","PATO"] },
+  { letra:"O", correta:"SAPO", distra:["BOLA","LUA","MAÇÃ"] },
+  { letra:"L", correta:"SOL",  distra:["BOLA","GATO","LUA"] },
+  { letra:"A", correta:"CASA", distra:["SOL","FLOR","ROBÔ"] },
+  { letra:"O", correta:"RATO", distra:["LUA","MAÇÃ","FLOR"] },
+  { letra:"R", correta:"FLOR", distra:["BOLA","GATO","SOL"] },
+];
+const CF_SILABAS = [
+  { n:2, correta:"BOLA",       distra:["BANANA","BORBOLETA","DINOSSAURO"] },
+  { n:3, correta:"BANANA",     distra:["SOL","CASA","DINOSSAURO"] },
+  { n:2, correta:"GATO",       distra:["CACHORRO","BORBOLETA","SOL"] },
+  { n:4, correta:"BORBOLETA",  distra:["BOLA","SOL","CASA"] },
+  { n:3, correta:"MORANGO",    distra:["BOLA","SOL","GATO"] },
+  { n:4, correta:"DINOSSAURO", distra:["GATO","SOL","BOLA"] },
+];
+const CF_RIMA = [
+  { palavra:"PATO", correta:"GATO", distra:["BOLA","SOL","CASA"] },
+  { palavra:"RATO", correta:"PATO", distra:["LUA","FLOR","BANANA"] },
+  { palavra:"GATO", correta:"RATO", distra:["SOL","MAÇÃ","FLOR"] },
+  { palavra:"PATO", correta:"RATO", distra:["CASA","FOGO","LUA"] },
+  { palavra:"GATO", correta:"PATO", distra:["ABELHA","FLOR","BANANA"] },
+  { palavra:"RATO", correta:"GATO", distra:["SOL","CASA","BOLA"] },
+];
+const CF_JUNCAO = [
+  { partes:["BO","LA"], correta:"BOLA", distra:["GATO","CASA","LUA"] },
+  { partes:["GA","TO"], correta:"GATO", distra:["BOLA","RATO","SOL"] },
+  { partes:["CA","SA"], correta:"CASA", distra:["GATO","PATO","BOLA"] },
+  { partes:["SA","PO"], correta:"SAPO", distra:["BOLA","GATO","MAÇÃ"] },
+  { partes:["VA","CA"], correta:"VACA", distra:["PATO","FLOR","GATO"] },
+  { partes:["PA","TO"], correta:"PATO", distra:["GATO","RATO","BOLA"] },
+];
+
+const CONSCIENCIA_VARS: Variation[] = (() => {
+  const out: Variation[] = [];
+  CF_INICIAL.forEach((b, i) => out.push({ id:`cf-i-${i+1}`, payload: cfMake(b.correta, b.distra, { tipo:"inicial", letra:b.letra }, i) }));
+  CF_FINAL.forEach((b, i)   => out.push({ id:`cf-f-${i+1}`, payload: cfMake(b.correta, b.distra, { tipo:"final",   letra:b.letra }, i+6) }));
+  CF_SILABAS.forEach((b, i) => out.push({ id:`cf-s-${i+1}`, payload: cfMake(b.correta, b.distra, { tipo:"silabas", n:b.n }, i+12) }));
+  CF_RIMA.forEach((b, i)    => out.push({ id:`cf-r-${i+1}`, payload: cfMake(b.correta, b.distra, { tipo:"rima",    palavra:b.palavra }, i+18) }));
+  CF_JUNCAO.forEach((b, i)  => out.push({ id:`cf-j-${i+1}`, payload: cfMake(b.correta, b.distra, { tipo:"juncao",  partes:b.partes }, i+24) }));
+  return out;
+})();
+
 export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sons-iniciais": SONS_INICIAIS_VARS,
   "motorzinho-dos-sons": MOTORZINHO_VARS,
   "rimas": RIMAS_VARS,
   "pedacinhos-da-palavra": PEDACINHOS_VARS,
+  "consciencia-fonologica": CONSCIENCIA_VARS,
   "onde-esta": ONDE_VARS,
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
@@ -474,7 +554,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
 };
 
 export const GRUPOS = [
-  { nome:"Fala e Som", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra"] as CategoriaSlug[] },
+  { nome:"Fala e Som", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra","consciencia-fonologica"] as CategoriaSlug[] },
   { nome:"Fono & Onomatopeias", emoji:"🐮", cor:"from-sun/25 to-coral/5", slugs:["onomatopeias-animadas","ritmo-e-sopro","paromatopeias-corpo"] as CategoriaSlug[] },
   { nome:"Coordenação Motor-Escrita", emoji:"✍️", cor:"from-success/25 to-success/5", slugs:["tracado-letras","caminho-dos-pontos","labirinto-precisao"] as CategoriaSlug[] },
   { nome:"Funções Executivas", emoji:"🧠", cor:"from-primary/20 to-primary/5", slugs:["onde-esta","sequencia-e-padrao","cade-o-par","foco-total","labirinto-do-som"] as CategoriaSlug[] },
