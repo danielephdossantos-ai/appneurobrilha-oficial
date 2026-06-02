@@ -65,18 +65,8 @@ export const LGPDConsent: React.FC = () => {
 
     checkConsent();
 
-    const {
-      data: { subscription },
-    } = AuthService.onAuthStateChange((event) => {
-      if (event === "SIGNED_OUT") {
-        setShow(false);
-        checkedRef.current = false;
-      }
-    });
-
     return () => {
       mountedRef.current = false;
-      subscription.unsubscribe();
     };
   }, [location.pathname]);
 
