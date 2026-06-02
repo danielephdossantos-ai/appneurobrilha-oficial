@@ -4,7 +4,7 @@ import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles,
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
-import { objetoImg } from "@/data/neuro-treino/objetos";
+import { objetoImg, emojiImg, ilustracao } from "@/data/neuro-treino/objetos";
 import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
@@ -791,7 +791,7 @@ function Decoracao({ p, onDone }: any) {
 }
 
 // ============== 16. Onomatopeias Animadas ==============
-// Mecânica única: balão grande com som textual + opções com emoji
+// Som textual + opções com ilustrações premium 2D (padrão Sons Iniciais)
 function Onomatopeias({ p, onDone }: any) {
   return (
     <div className="text-center">
@@ -800,12 +800,30 @@ function Onomatopeias({ p, onDone }: any) {
         <div className="text-5xl font-black text-coral">{p.som}</div>
       </div>
       <div className="grid grid-cols-3 gap-3">
-        {p.options.map((o:any, i:number) => (
-          <button key={i} onClick={()=>onDone(o.nome === p.correctName)} className="bg-card border-2 border-border rounded-2xl p-5 hover:border-coral hover:scale-105 transition-all">
-            <div className="text-6xl mb-1">{o.emoji}</div>
-            <div className="font-bold text-xs">{o.nome}</div>
-          </button>
-        ))}
+        {p.options.map((o:any, i:number) => {
+          const img = ilustracao(o.emoji, o.nome);
+          return (
+            <button
+              key={i}
+              onClick={()=>onDone(o.nome === p.correctName)}
+              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+            >
+              {img ? (
+                <img
+                  src={img}
+                  alt={o.nome}
+                  width={128}
+                  height={128}
+                  loading="lazy"
+                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                />
+              ) : (
+                <div className="text-6xl">{o.emoji}</div>
+              )}
+              <div className="font-bold text-xs">{o.nome}</div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
