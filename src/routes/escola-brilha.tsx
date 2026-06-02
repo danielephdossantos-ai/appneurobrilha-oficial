@@ -1071,7 +1071,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const [alfaIdentificado, setAlfaIdentificado] = useState<string | null>(null);
 
   // Estados para Matemática Inicial (6 etapas)
-  const isMathFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "matematica" || aula.materia === "numeros");
+  const isMathFlow = (tier === "ei" || tier === "alfa" || tier === "fund1") && (aula.materia === "matematica" || aula.materia === "numeros");
   const [mathStep, setMathStep] = useState(1);
   
   
