@@ -870,12 +870,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {acertou === true && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
-                      <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
+                      <div className="text-4xl drop-shadow">
+                        {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                          <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+                        ) : (
+                          activeMascot?.mascot?.image_url || materiaMeta.mascote
+                        )}
+                      </div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
-                        <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
+                        <div className="text-xs text-success/70 mt-1"><b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                       {aula.bancoOrdem && (
                         <button
