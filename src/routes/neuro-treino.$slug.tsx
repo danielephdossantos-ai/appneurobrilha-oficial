@@ -1075,7 +1075,7 @@ function ExpressaoEmocao({ p, onDone }: any) {
         <div className="text-xs uppercase text-muted-foreground mb-2">Situação</div>
         <div className="text-xl font-bold">{p.cena}</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.opts.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all">{o}</button>
         ))}
