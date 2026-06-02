@@ -976,10 +976,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         </div>
                       )}
 
-                      <div className="mt-6 flex gap-2 flex-wrap">
+                      <div className="mt-6 flex gap-2 flex-wrap items-center">
                         <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
                           Continuar →
                         </button>
+                        <button
+                          onClick={naoEntendi}
+                          disabled={reexplaining}
+                          className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
+                        >
+                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — outro método</>}
+                        </button>
+                        {aula.metodo_usado && (
+                          <span className="text-xs font-bold text-muted-foreground">Método atual: <b>{aula.metodo_usado}</b></span>
+                        )}
                       </div>
                     </div>
                   );
@@ -992,9 +1002,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
                       {aula.demo}
                     </div>
-                    <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                      Estou pronto para o desafio!
-                    </button>
+                    <div className="flex gap-2 flex-wrap items-center">
+                      <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                        Estou pronto para o desafio!
+                      </button>
+                      <button
+                        onClick={naoEntendi}
+                        disabled={reexplaining}
+                        className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
+                      >
+                        {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — tente outro jeito</>}
+                      </button>
+                    </div>
                   </div>
                 )}
 
