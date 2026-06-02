@@ -79,6 +79,88 @@ export interface Child {
   observacoes: string;
 }
 
+const DEFAULT_CHILD_PROFILE: Pick<
+  Child,
+  | "hiperfoco"
+  | "has_hyperfocus"
+  | "hyperfocus_list"
+  | "diagnostico"
+  | "avatar"
+  | "anamnese_completa"
+  | "sensory_mode"
+  | "coins"
+  | "earned_today"
+  | "total_earned"
+  | "perfil"
+  | "niveis"
+  | "tempo_atencao_min"
+  | "flags"
+  | "observacoes"
+> = {
+  hiperfoco: "animais",
+  has_hyperfocus: true,
+  hyperfocus_list: [],
+  diagnostico: "nenhum",
+  avatar: "🧒",
+  anamnese_completa: false,
+  sensory_mode: "foco",
+  coins: 0,
+  earned_today: 0,
+  total_earned: 0,
+  perfil: {
+    leitura: 50,
+    escrita: 50,
+    matematica: 50,
+    atencao: 50,
+    linguagem: 50,
+    autonomia: 50,
+    emocional: 50,
+    social: 50,
+  },
+  niveis: {
+    geral: 2,
+    portugues: 2,
+    matematica: 2,
+    ciencias: 2,
+    historia: 2,
+    geografia: 2,
+  },
+  tempo_atencao_min: 15,
+  flags: {
+    apoioVisual: true,
+    passoAPasso: true,
+    preferAudio: false,
+    contaNosDedos: false,
+    trocaLetras: false,
+    palavrasLongas: false,
+  },
+  observacoes: "",
+};
+
+function normalizeChild(row: Partial<Child> & { id: string; user_id: string; nome: string }): Child {
+  return {
+    ...DEFAULT_CHILD_PROFILE,
+    ...row,
+    hiperfoco: row.hiperfoco ?? DEFAULT_CHILD_PROFILE.hiperfoco,
+    diagnostico: row.diagnostico ?? DEFAULT_CHILD_PROFILE.diagnostico,
+    avatar: row.avatar ?? DEFAULT_CHILD_PROFILE.avatar,
+    sensory_mode: row.sensory_mode ?? DEFAULT_CHILD_PROFILE.sensory_mode,
+    coins: row.coins ?? DEFAULT_CHILD_PROFILE.coins,
+    earned_today: row.earned_today ?? DEFAULT_CHILD_PROFILE.earned_today,
+    total_earned: row.total_earned ?? DEFAULT_CHILD_PROFILE.total_earned,
+    tempo_atencao_min: row.tempo_atencao_min ?? DEFAULT_CHILD_PROFILE.tempo_atencao_min,
+    observacoes: row.observacoes ?? DEFAULT_CHILD_PROFILE.observacoes,
+    idade: row.idade ?? 6,
+    serie: row.serie ?? "1º ano",
+    anamnese_completa: row.anamnese_completa ?? false,
+    has_hyperfocus: row.has_hyperfocus ?? DEFAULT_CHILD_PROFILE.has_hyperfocus,
+    hyperfocus_list: Array.isArray(row.hyperfocus_list) ? row.hyperfocus_list : DEFAULT_CHILD_PROFILE.hyperfocus_list,
+    perfil: { ...DEFAULT_CHILD_PROFILE.perfil, ...(row.perfil ?? {}) },
+    niveis: { ...DEFAULT_CHILD_PROFILE.niveis, ...(row.niveis ?? {}) },
+    flags: { ...DEFAULT_CHILD_PROFILE.flags, ...(row.flags ?? {}) },
+  };
+}
+
 export interface AnamnesisData {
   id?: string;
   child_id: string;
@@ -165,7 +247,7 @@ export function useAppState() {
         .order("created_at", { ascending: true });
 
       if (error) throw error;
-      return data as unknown as Child[];
+      return (data ?? []).map((child) => normalizeChild(child as any));
     },
     enabled: !!session?.user,
   });
@@ -180,7 +262,7 @@ export function useAppState() {
         .single();
 
       if (error) throw error;
-      return data;
+      return normalizeChild(data as any);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
