@@ -301,6 +301,7 @@ function Escola() {
         body: {
           mode: "escola",
           child: activeChild,
+          mascot: mascotPayload,
           subject: materiaId,
           topic: activity.title,
           systemQuestion,
