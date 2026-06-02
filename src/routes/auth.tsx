@@ -21,12 +21,6 @@ function Auth() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate({ to: "/" });
-    });
-  }, [navigate]);
-
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
@@ -37,9 +31,9 @@ function Auth() {
         const { error, data } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
           await AuditLogService.log({
-            action: 'LOGIN_FAILURE',
-            module: 'AUTH',
-            metadata: { email, error: error.message }
+            action: "LOGIN_FAILURE",
+            module: "AUTH",
+            metadata: { email, error: error.message },
           });
           if (error.message.includes("Invalid login credentials")) {
             throw new Error("E-mail ou senha incorretos. Se ainda não tem conta, clique em 'Cadastrar'.");
@@ -56,9 +50,9 @@ function Auth() {
         });
         if (error) {
           await AuditLogService.log({
-            action: 'REGISTER_FAILURE',
-            module: 'AUTH',
-            metadata: { email, error: error.message }
+            action: "REGISTER_FAILURE",
+            module: "AUTH",
+            metadata: { email, error: error.message },
           });
           if (error.message.includes("known to be weak")) {
             throw new Error("Esta senha é muito simples. Tente uma com pelo menos 6 letras ou números.");
@@ -67,9 +61,9 @@ function Auth() {
         }
         
         await AuditLogService.log({
-          action: 'REGISTER_SUCCESS',
-          module: 'AUTH',
-          metadata: { email }
+          action: "REGISTER_SUCCESS",
+          module: "AUTH",
+          metadata: { email },
         });
 
         // Ensure we try to sign in automatically if auto-confirm is on
@@ -77,8 +71,8 @@ function Auth() {
         toast.success("Conta criada com sucesso!");
       }
       navigate({ to: "/" });
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Erro ao autenticar.");
     } finally {
       setLoading(false);
     }
@@ -110,8 +104,9 @@ function Auth() {
         toast.success("Bem-vindo(a) de volta!");
       }
       navigate({ to: "/" });
-    } catch (error: any) {
-      toast.error("Erro ao acessar modo demo: " + error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "erro desconhecido";
+      toast.error("Erro ao acessar modo demo: " + message);
     } finally {
       setLoading(false);
     }
