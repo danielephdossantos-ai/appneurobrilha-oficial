@@ -540,20 +540,25 @@ function Escola() {
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
-            <div className="absolute -right-2 -top-2 text-4xl opacity-30 group-hover:opacity-60 group-hover:scale-110 transition-all">
-              {m.cenario}
+            <div className="flex justify-center">
+              <img
+                src={m.img}
+                alt={m.nome}
+                loading="lazy"
+                width={512}
+                height={512}
+                className="w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-md group-hover:scale-110 transition-transform"
+              />
             </div>
-            <div className="text-5xl drop-shadow-sm group-hover:scale-110 transition-transform inline-block">{m.emoji}</div>
-            <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-muted-foreground">
-              <span className="text-base">{m.mascote}</span>
-              <span><b>{m.mascoteNome}</b> te guia</span>
+            <div className="font-extrabold text-lg mt-3 text-center">{m.nome}</div>
+            <div className="flex items-center justify-center gap-1.5 mt-1 text-xs text-muted-foreground">
+              <b>{m.mascoteNome}</b> te guia
             </div>
             {ei && m.descricao && (
-              <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
+              <div className="text-xs text-muted-foreground mt-1 text-center">{m.descricao}</div>
             )}
             {!ei && (
-              <div className="mt-2"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
+              <div className="mt-2 flex justify-center"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
             )}
             <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
