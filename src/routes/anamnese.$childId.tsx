@@ -119,10 +119,11 @@ function Anamnese() {
         return;
       }
       localStorage.setItem("neurobrilha:activeChildId", created.id);
+      await queryClient.invalidateQueries({ queryKey: ["children"] });
       navigate({ to: "/anamnese/$childId", params: { childId: created.id }, replace: true });
     })();
     return () => { cancelled = true; };
-  }, [isNova, session?.user, navigate]);
+  }, [isNova, session?.user, navigate, queryClient]);
 
   useEffect(() => {
     async function loadAnamnesis() {
