@@ -27,7 +27,7 @@ import worldOceano from "@/assets/neuro-treino/worlds/oceano.jpg";
 import worldFloresta from "@/assets/neuro-treino/worlds/floresta.jpg";
 import worldCastelo from "@/assets/neuro-treino/worlds/castelo.jpg";
 import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
-import WorldCreatures from "@/components/neuro-treino/WorldCreatures";
+
 
 // Ícones por categoria
 import icSonsIniciais from "@/assets/neuro-treino/icons/sons-iniciais.png";
@@ -182,10 +182,10 @@ function WorldBackground({ world }: { world: WorldKey }) {
       />
       {/* gradiente para legibilidade da trilha */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/40 pointer-events-none" />
-      {/* brilhos suaves */}
+      {/* luz que passa lentamente, dando sensação de vida ao cenário */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-50 bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.25)_50%,transparent_70%)] bg-[length:250%_250%] animate-[shimmerWorld_14s_ease-in-out_infinite]" />
+      {/* brilhos suaves (estrelinhas / partículas de luz) */}
       <div className="absolute inset-0 bg-[radial-gradient(1.5px_1.5px_at_15%_25%,white,transparent),radial-gradient(1.5px_1.5px_at_75%_55%,white,transparent),radial-gradient(1px_1px_at_45%_80%,white,transparent),radial-gradient(2px_2px_at_85%_15%,white,transparent)] opacity-60 animate-pulse pointer-events-none" />
-      {/* criaturinhas animadas do mundo */}
-      <WorldCreatures world={world} />
     </div>
   );
 }
@@ -270,7 +270,18 @@ function Treino() {
 
       <style>{`
         @keyframes float   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+        @keyframes breathe {
+          0%   { transform: scale(1.02) translate3d(0,0,0); }
+          25%  { transform: scale(1.05) translate3d(-1.2%, -0.8%, 0); }
+          50%  { transform: scale(1.07) translate3d(0.8%, 0.6%, 0); }
+          75%  { transform: scale(1.04) translate3d(1.2%, -0.4%, 0); }
+          100% { transform: scale(1.02) translate3d(0,0,0); }
+        }
+        @keyframes shimmerWorld {
+          0%   { background-position: -50% 50%; opacity: 0.0; }
+          40%  { opacity: 0.55; }
+          100% { background-position: 150% 50%; opacity: 0.0; }
+        }
         @keyframes glow    { 0%,100% { box-shadow: 0 0 22px rgba(255,255,255,0.55); } 50% { box-shadow: 0 0 44px rgba(255,255,255,0.9); } }
         @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.4); opacity: 0; } }
       `}</style>
