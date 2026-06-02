@@ -330,6 +330,7 @@ function Escola() {
         if (isShapes) miniGameType = "shape";
         else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
         else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+        else if (activity.content.progression === "image-word") miniGameType = "word-image";
       }
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
