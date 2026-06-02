@@ -88,6 +88,14 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
     case "sequencia-de-cores": return <SequenciaCores p={variation.payload} onDone={onConcluir} />;
     case "simetria": return <Simetria p={variation.payload} onDone={onConcluir} />;
     case "decoracao-criativa": return <Decoracao p={variation.payload} onDone={onConcluir} />;
+    case "onomatopeias-animadas": return <Onomatopeias p={variation.payload} onDone={onConcluir} />;
+    case "ritmo-e-sopro": return <RitmoSopro p={variation.payload} onDone={onConcluir} />;
+    case "paromatopeias-corpo": return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
+    case "tracado-letras": return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
+    case "caminho-dos-pontos": return <CaminhoPontos p={variation.payload} onDone={onConcluir} />;
+    case "labirinto-precisao": return <LabirintoPrecisao p={variation.payload} onDone={onConcluir} />;
+    case "triagem-categorias": return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
+    case "expressao-emocao": return <ExpressaoEmocao p={variation.payload} onDone={onConcluir} />;
   }
 }
 
