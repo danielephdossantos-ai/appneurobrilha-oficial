@@ -17,6 +17,9 @@ import { ResponsibleIntelligence } from "@/modules/parental/intelligence";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useParentMode } from "@/contexts/ParentModeContext";
+import { AuditLogService } from "@/modules/auth/services/AuditLogService";
+import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
+
 
 export const Route = createFileRoute("/painel-pais")({
   component: PainelPremium,
