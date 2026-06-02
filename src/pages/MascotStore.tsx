@@ -310,4 +310,116 @@ const MascotStoreCard = ({ mascot, isOwned, index, showCollectionButton = false 
   );
 };
 
+const WorldsSection: React.FC = () => {
+  const { hiperfoco, setHiperfocoById, setHiperfocoCustom } = useHiperfoco();
+  const navigate = useNavigate();
+
+  const handlePick = (w: WorldOption) => {
+    if (w.hiperfocoId) {
+      setHiperfocoById(w.hiperfocoId);
+    } else if (w.customLabel) {
+      setHiperfocoCustom(w.customLabel);
+    }
+    toast.success(`Mundo ${w.label} escolhido! 🌟`, {
+      description: 'Pronto para brincar no Neuro-Treino.',
+    });
+  };
+
+  const isActive = (w: WorldOption) => {
+    if (!hiperfoco) return false;
+    if (w.hiperfocoId) return hiperfoco.id === w.hiperfocoId;
+    return hiperfoco.id === 'custom' && hiperfoco.label.toLowerCase() === (w.customLabel ?? '').toLowerCase();
+  };
+
+  return (
+    <section className="mb-6">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
+        <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-wider flex items-center gap-2">
+          <Globe2 size={22} /> Mundos
+        </h2>
+        <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
+      </div>
+      <p className="text-center text-muted-foreground font-bold mb-8 max-w-2xl mx-auto">
+        Escolha o mundo que você mais ama! Tudo no Neuro-Treino vai se transformar para a sua aventura favorita. ✨
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        {WORLDS.map((w, i) => {
+          const active = isActive(w);
+          return (
+            <motion.button
+              key={w.id}
+              type="button"
+              onClick={() => handlePick(w)}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04 }}
+              whileHover={{ scale: 1.04, y: -4 }}
+              whileTap={{ scale: 0.97 }}
+              className={cn(
+                'group relative overflow-hidden rounded-[2rem] border-4 text-left shadow-kid transition-all',
+                active
+                  ? 'border-primary ring-4 ring-primary/30'
+                  : 'border-white/70 hover:border-primary/40'
+              )}
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <img
+                  src={w.image}
+                  alt={w.label}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                {active && (
+                  <div className="absolute top-3 right-3 bg-primary text-white rounded-full p-2 shadow-lg">
+                    <Check size={16} strokeWidth={3} />
+                  </div>
+                )}
+                <div className="absolute bottom-2 left-3 right-3 flex items-center gap-2">
+                  <span className="text-2xl drop-shadow-lg">{w.emoji}</span>
+                  <span className="text-white font-black text-lg uppercase tracking-wide drop-shadow-lg leading-tight">
+                    {w.label}
+                  </span>
+                </div>
+              </div>
+              <div className="bg-white/90 backdrop-blur px-4 py-3">
+                <p className="text-xs text-muted-foreground font-semibold line-clamp-2">
+                  {w.description}
+                </p>
+                <div className={cn(
+                  'mt-2 text-[10px] font-black uppercase tracking-widest flex items-center gap-1',
+                  active ? 'text-primary' : 'text-secondary'
+                )}>
+                  {active ? (
+                    <>
+                      <Star size={12} fill="currentColor" /> Mundo ativo
+                    </>
+                  ) : (
+                    <>Tocar para escolher <ChevronRight size={12} /></>
+                  )}
+                </div>
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <div className="flex justify-center mt-6">
+        <KidButton
+          variant="secondary"
+          onClick={() => navigate({ to: '/neuro-treino' })}
+          className="px-8"
+        >
+          <span className="flex items-center gap-2">
+            <Sparkles size={18} /> Ir para o Neuro-Treino
+          </span>
+        </KidButton>
+      </div>
+    </section>
+  );
+};
+
 export default MascotStorePage;
+
