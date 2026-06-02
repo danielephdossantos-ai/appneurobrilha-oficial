@@ -602,7 +602,7 @@ function Escola() {
                       : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
                   }`}
                 >
-                  <div className="text-2xl leading-none">{meta.emoji}</div>
+                  <img src={meta.img} alt={meta.nome} loading="lazy" width={512} height={512} className="w-10 h-10 object-contain" />
                   <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
                   {done && (
                     <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
