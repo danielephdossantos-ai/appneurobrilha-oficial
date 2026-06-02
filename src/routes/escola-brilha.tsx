@@ -424,8 +424,12 @@ function Escola() {
         <div className="mb-4 flex items-end gap-3 md:gap-4">
           {/* Avatar do mascote apontando para o balão */}
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking">
-              {activeMascot?.mascot?.avatar || "🐦"}
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking overflow-hidden">
+              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
+              ) : (
+                activeMascot?.mascot?.image_url || "🐦"
+              )}
             </div>
             <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
               {activeMascot?.mascot?.name || "Profª Pipa"}
