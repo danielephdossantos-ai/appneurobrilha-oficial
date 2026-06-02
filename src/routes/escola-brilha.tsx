@@ -110,17 +110,126 @@ const ALMOST_THERE = [
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
 
+// ============== Banco BNCC (50 atividades por lote, infinito) ==============
+const BANCO_TAMANHO = 50;
+const DOMAIN_MAP: Record<string, string> = {
+  matematica: "math",
+  artes: "math",
+  portugues: "linguistics",
+  ciencias: "linguistics",
+  historia: "linguistics",
+  geografia: "linguistics",
+};
+const MATERIAS_BANCO = ["portugues", "matematica", "ciencias", "historia", "geografia", "artes"] as const;
+
+type BancoItem = {
+  activity: any;       // GeneratedActivity (pré-gerado)
+  materiaId: string;   // qual matéria essa atividade representa
+  ordem: number;       // 1..50
+};
+type BancoState = {
+  lote: number;
+  items: BancoItem[];
+  done: string[];      // activity.id concluídos no lote atual
+};
+
+function bancoKey(childId: string, grade: string) {
+  return `escola_banco:${childId}:${grade}`;
+}
+
+function isFundamental2a9(grade: string): boolean {
+  return /^[2-9]º Ano/.test(grade);
+}
+
+function gerarLote(child: any, grade: string, lote: number): BancoItem[] {
+  const service = ActivityProceduralService.getInstance();
+  const items: BancoItem[] = [];
+  for (let i = 0; i < BANCO_TAMANHO; i++) {
+    const materiaId = MATERIAS_BANCO[i % MATERIAS_BANCO.length];
+    const domain = DOMAIN_MAP[materiaId];
+    try {
+      const act = service.generateActivity({
+        domain,
+        difficulty: 0.5,
+        grade,
+        subject: materiaId,
+        childProfile: {
+          neurodivergence: child?.diagnostico ? [child.diagnostico] : [],
+          interests: child?.hiperfoco ? [child.hiperfoco] : [],
+          sensoryThreshold: 0.5,
+          lastErrors: [],
+        },
+        previousActivityIds: items.map((x) => x.activity.id),
+      });
+      items.push({ activity: act, materiaId, ordem: i + 1 });
+    } catch (e) {
+      console.warn("[Banco] falha ao gerar item", i, e);
+    }
+  }
+  console.log(`[Banco] Lote ${lote} gerado:`, items.length, "atividades para", grade);
+  return items;
+}
+
+
 function Escola() {
   const { activeChild } = useAppState();
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
+  const [banco, setBanco] = useState<BancoState | null>(null);
 
   const grades = [
     "Educação Infantil",
     "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
     "6º Ano", "7º Ano", "8º Ano", "9º Ano"
   ];
+
+  const showBanco = !!activeChild && isFundamental2a9(selectedGrade);
+
+  // Carrega ou cria o lote de 50 atividades para a série atual
+  useEffect(() => {
+    if (!activeChild || !isFundamental2a9(selectedGrade)) {
+      setBanco(null);
+      return;
+    }
+    const key = bancoKey(activeChild.id, selectedGrade);
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const parsed = JSON.parse(raw) as BancoState;
+        if (parsed?.items?.length === BANCO_TAMANHO) {
+          setBanco(parsed);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn("[Banco] localStorage parse falhou", e);
+    }
+    const novo: BancoState = { lote: 1, items: gerarLote(activeChild, selectedGrade, 1), done: [] };
+    try { localStorage.setItem(key, JSON.stringify(novo)); } catch {}
+    setBanco(novo);
+  }, [activeChild?.id, selectedGrade]);
+
+  const persistBanco = (next: BancoState) => {
+    if (!activeChild) return;
+    try { localStorage.setItem(bancoKey(activeChild.id, selectedGrade), JSON.stringify(next)); } catch {}
+    setBanco(next);
+  };
+
+  const marcarConcluida = (activityId: string) => {
+    if (!banco || !activeChild) return;
+    if (banco.done.includes(activityId)) return;
+    const doneNext = [...banco.done, activityId];
+    if (doneNext.length >= BANCO_TAMANHO) {
+      const proxLote = banco.lote + 1;
+      const itensNovos = gerarLote(activeChild, selectedGrade, proxLote);
+      persistBanco({ lote: proxLote, items: itensNovos, done: [] });
+      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades ✨`);
+    } else {
+      persistBanco({ ...banco, done: doneNext });
+    }
+  };
+
 
   const carregarAula = async (materiaId: string, topic?: string) => {
     if (!activeChild) return;
