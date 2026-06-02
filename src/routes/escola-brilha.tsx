@@ -797,6 +797,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
               </div>
             ) : (
               <>
+              <>
                 {aula.etapa === "ensino" && (() => {
                   const g = (aula.grade || "").toString();
                   const panel: "kids" | "mid" | "teen" =
@@ -811,6 +812,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
                   return (
                     <div>
+
                       {/* 2º AO 5º ANO — caderno pautado */}
                       {panel === "mid" && (
                         <div className="space-y-4">
