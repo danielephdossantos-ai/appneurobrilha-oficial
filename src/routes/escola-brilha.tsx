@@ -547,23 +547,32 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
 
 
                 {acertou === true && (
-                  <div className="mt-6 p-6 rounded-2xl bg-success/15 border-2 border-success/30 text-success text-lg animate-bounce-short">
+                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
+                      <div className="text-4xl drop-shadow">{materiaMeta.mascote}</div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div>
-                        <div className="font-extrabold">Incrível, {childNome}!</div>
-                        <div>{aula.reforco_positivo}</div>
+                        <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
+                        <div className="text-base">{aula.reforco_positivo}</div>
+                        <div className="text-xs text-success/70 mt-1"><b>{materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                     </div>
                   </div>
                 )}
                 
                 {acertou === false && (
-                  <div className="mt-6 p-6 rounded-2xl bg-sun/20 border-2 border-sun/30 flex items-start gap-3">
-                    <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-bold text-sun-foreground">Dica especial:</div>
-                      <div className="text-lg text-sun-foreground/90">{aula.dica}</div>
+                  <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
+                    <div className="text-4xl">{materiaMeta.mascote}</div>
+                    <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
+                    <div className="flex-1">
+                      <div className="font-extrabold text-sun-foreground text-lg">{pickAlmost()}</div>
+                      <div className="text-base text-sun-foreground/90 mt-1"><b>Observe a dica:</b> {aula.dica}</div>
+                      <button
+                        onClick={() => { setAcertou(null); setTentativa(null); }}
+                        className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
+                      >
+                        Tentar de novo 🌟
+                      </button>
                     </div>
                   </div>
                 )}
