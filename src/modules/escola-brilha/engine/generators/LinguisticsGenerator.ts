@@ -94,10 +94,16 @@ export class LinguisticsGenerator extends BaseGenerator {
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
 
       if (type === "interpretation") {
+        // 6º-8º → grade6 ; 9º → grade9 (estrito por série)
         const dataKey = gradeNum >= 9 ? 'grade9' : 'grade6';
         const set = LINGUISTICS_DATA.texts[dataKey as keyof typeof LINGUISTICS_DATA.texts];
         if (!set || set.length === 0) throw new Error(`No texts found for ${dataKey}`);
         return this.pickRandom(set);
+      }
+
+      const difficultyLevel = this.wordLevelForGrade(gradeNum);
+      const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
+      if (!words || words.length === 0) throw new Error(`No words found for level ${difficultyLevel}`);
       }
 
       const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
