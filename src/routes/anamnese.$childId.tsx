@@ -44,6 +44,7 @@ function Anamnese() {
   const { childId } = Route.useParams();
   const { children: allChildren, updateChild, saveAnamnesis, session } = useAppState();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const isNova = childId === "nova";
   const child = allChildren.find((c: any) => c.id === childId);
 
