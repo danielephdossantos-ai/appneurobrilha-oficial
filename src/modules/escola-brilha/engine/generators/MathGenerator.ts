@@ -12,11 +12,12 @@ export class MathGenerator extends BaseGenerator {
       }
       return Math.random() < 0.5 ? 'ei-contagem' : 'ei-forma';
     }
+    // SÉRIE define o tipo de atividade — NUNCA misturar séries.
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "advanced-logic";
-    if (input.difficulty < 0.4) return "counting";
-    if (input.difficulty < 0.7) return "comparison";
-    return "visual-logic";
+    if (gradeNum <= 2) return "counting";
+    if (gradeNum === 3) return "comparison";
+    return "visual-logic"; // 4º e 5º
   }
 
   protected getTitle(input: GeneratorInput): string {
