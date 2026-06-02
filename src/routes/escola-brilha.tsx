@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect, useRef, Component, ReactNode } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee } from "lucide-react";
+import { useState, useEffect, useRef, Component, ReactNode, useMemo } from "react";
+import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee, ArrowRight, Star } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
@@ -11,6 +11,7 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
 import { EIMiniGame } from "@/components/escola/EIMiniGame";
+import { Tracing } from "@/components/escola/Tracing";
 import imgPortugues from "@/assets/escola-brilha/portugues.png";
 import imgMatematica from "@/assets/escola-brilha/matematica.png";
 import imgCiencias from "@/assets/escola-brilha/ciencias.png";
