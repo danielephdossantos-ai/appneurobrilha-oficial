@@ -332,16 +332,16 @@ const DECOR_VARS: Variation[] = range(30).map((i) => ({ id:`dc-${i+1}`, payload:
 
 // 16. ONOMATOPEIAS ANIMADAS — som → escolher figura (mecânica única: emissor de som textual + opções visuais grandes)
 const ONOMA_BANK = [
-  { som:"Au-au!", correta:{emoji:"🐶",nome:"Cachorro"}, distratoras:[{emoji:"🐱",nome:"Gato"},{emoji:"🐮",nome:"Vaca"}] },
-  { som:"Muuu!", correta:{emoji:"🐮",nome:"Vaca"}, distratoras:[{emoji:"🐷",nome:"Porco"},{emoji:"🐔",nome:"Galinha"}] },
-  { som:"Bi-bi!", correta:{emoji:"🚗",nome:"Carro"}, distratoras:[{emoji:"🚲",nome:"Bike"},{emoji:"✈️",nome:"Avião"}] },
-  { som:"Miau!", correta:{emoji:"🐱",nome:"Gato"}, distratoras:[{emoji:"🐶",nome:"Cachorro"},{emoji:"🐭",nome:"Rato"}] },
-  { som:"Quá-quá!", correta:{emoji:"🦆",nome:"Pato"}, distratoras:[{emoji:"🐦",nome:"Pássaro"},{emoji:"🦉",nome:"Coruja"}] },
-  { som:"Có-có-có!", correta:{emoji:"🐔",nome:"Galinha"}, distratoras:[{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"}] },
-  { som:"Oinc-oinc!", correta:{emoji:"🐷",nome:"Porco"}, distratoras:[{emoji:"🐮",nome:"Vaca"},{emoji:"🐶",nome:"Cachorro"}] },
-  { som:"Bééé!", correta:{emoji:"🐑",nome:"Ovelha"}, distratoras:[{emoji:"🐐",nome:"Cabra"},{emoji:"🐮",nome:"Vaca"}] },
-  { som:"Mééé!", correta:{emoji:"🐐",nome:"Cabra"}, distratoras:[{emoji:"🐑",nome:"Ovelha"},{emoji:"🐷",nome:"Porco"}] },
-  { som:"Pi-pi!", correta:{emoji:"🐥",nome:"Pintinho"}, distratoras:[{emoji:"🐔",nome:"Galinha"},{emoji:"🦆",nome:"Pato"}] },
+  { som:"Au-au!", correta:{emoji:"🐶",nome:"Cachorro"}, distratoras:[{emoji:"🐱",nome:"Gato"},{emoji:"🐮",nome:"Vaca"},{emoji:"🐷",nome:"Porco"}] },
+  { som:"Muuu!", correta:{emoji:"🐮",nome:"Vaca"}, distratoras:[{emoji:"🐷",nome:"Porco"},{emoji:"🐔",nome:"Galinha"},{emoji:"🐑",nome:"Ovelha"}] },
+  { som:"Bi-bi!", correta:{emoji:"🚗",nome:"Carro"}, distratoras:[{emoji:"🚲",nome:"Bike"},{emoji:"✈️",nome:"Avião"},{emoji:"🚂",nome:"Trem"}] },
+  { som:"Miau!", correta:{emoji:"🐱",nome:"Gato"}, distratoras:[{emoji:"🐶",nome:"Cachorro"},{emoji:"🐭",nome:"Rato"},{emoji:"🦉",nome:"Coruja"}] },
+  { som:"Quá-quá!", correta:{emoji:"🦆",nome:"Pato"}, distratoras:[{emoji:"🐦",nome:"Pássaro"},{emoji:"🦉",nome:"Coruja"},{emoji:"🐔",nome:"Galinha"}] },
+  { som:"Có-có-có!", correta:{emoji:"🐔",nome:"Galinha"}, distratoras:[{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"},{emoji:"🐥",nome:"Pintinho"}] },
+  { som:"Oinc-oinc!", correta:{emoji:"🐷",nome:"Porco"}, distratoras:[{emoji:"🐮",nome:"Vaca"},{emoji:"🐶",nome:"Cachorro"},{emoji:"🐐",nome:"Cabra"}] },
+  { som:"Bééé!", correta:{emoji:"🐑",nome:"Ovelha"}, distratoras:[{emoji:"🐐",nome:"Cabra"},{emoji:"🐮",nome:"Vaca"},{emoji:"🐷",nome:"Porco"}] },
+  { som:"Mééé!", correta:{emoji:"🐐",nome:"Cabra"}, distratoras:[{emoji:"🐑",nome:"Ovelha"},{emoji:"🐷",nome:"Porco"},{emoji:"🐮",nome:"Vaca"}] },
+  { som:"Pi-pi!", correta:{emoji:"🐥",nome:"Pintinho"}, distratoras:[{emoji:"🐔",nome:"Galinha"},{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"}] },
 ];
 const ONOMA_VARS: Variation[] = range(30).map((i) => {
   const b = ONOMA_BANK[i % ONOMA_BANK.length];
