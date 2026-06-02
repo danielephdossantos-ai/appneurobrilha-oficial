@@ -178,7 +178,28 @@ serve(async (req) => {
       - "resultado": Resultado correto da conta.
       - "visual_emoji": UM emoji do hiperfoco da criança para contagem (ex: "🍎", "🚗", "⭐").
       - "opcoes_numericas": Array com 3 números (o correto + 2 distratores próximos).
-      ` : `Você ensina seguindo o método: EXPLICA o conceito → MOSTRA EXEMPLO → MOSTRA COMO MONTA/RESOLVE → PREPARA para o exercício → DÁ A INSTRUÇÃO do jogo.`}
+      ` : `
+      ESTRUTURA OBRIGATÓRIA DA AULA (8 PASSOS DE PROFESSOR REAL):
+      Toda aula precisa ENSINAR antes de perguntar. Nenhuma aula pode começar com pergunta.
+      A criança vai passar por estas telas, NESTA ORDEM, e você deve preparar UMA frase curta para cada uma:
+
+      1. DESCOBRIR  → apresentar o tema com entusiasmo (1 frase).
+      2. OBSERVAR   → o que ela vai olhar/notar (1 frase + foco visual).
+      3. ENTENDER   → o conceito explicado de forma simples (1-2 frases curtas).
+      4. VER EXEMPLO → um exemplo já resolvido, mostrando passo a passo (1-2 frases curtas).
+      5. FAZER JUNTO → guia para resolver junto com a criança, revelando a resposta (1-2 frases curtas).
+      6. FAZER SOZINHO → instrução para tentar agora.
+      7. DESAFIO     → reforço final / aplicação rápida.
+      8. RECOMPENSA  → comemoração personalizada.
+
+      PROIBIDO:
+      - Blocos longos de texto.
+      - Parágrafos com mais de 2 frases.
+      - Explicações abstratas sem exemplo.
+      - Começar com pergunta.
+      - Repetir a mesma explicação em campos diferentes (cada etapa tem um papel próprio).
+
+      Use SEMPRE o hiperfoco "${child.hiperfoco || "interesses"}" como ponte concreta.`}
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
@@ -199,15 +220,16 @@ serve(async (req) => {
 
       IMPORTANTE: Você NÃO cria a pergunta nem as opções principais do sistema (a menos que seja Alfabetização, onde você define os campos extras). Você ENSINA o conteúdo para que o aluno consiga resolver sozinho.
 
-      Retorne EXCLUSIVAMENTE um JSON com as seguintes chaves (TODAS obrigatórias):
-      - "etapa1_intro": Boas-vindas + apresentação animada do tema/assunto.
-      - "etapa2_conceito": EXPLICAÇÃO clara do conceito (o que é, por que existe).
-      - "etapa3_exemplo": EXEMPLO PRÁTICO do conceito aplicado (mostre um caso resolvido).
-      - "etapa4_como_monta": COMO MONTA/RESOLVE — passo a passo de como chegar à resposta.
-      - "etapa5_instrucao": Instrução clara do que fazer no exercício/jogo agora.
-      - "dica": Uma dica útil caso erre.
-      - "reforco_positivo": Comemoração personalizada citando o hiperfoco.
-      - "metodo_usado": Nome curto do método didático aplicado (ex: "TEACCH", "Multissensorial", "Montessori", "Padrão").
+      Retorne EXCLUSIVAMENTE um JSON com TODAS as chaves abaixo (cada campo: 1 a 2 frases curtas, máximo ~16 palavras, sem parágrafos):
+      - "etapa1_intro": DESCOBRIR — abertura animada do tema (sem perguntas).
+      - "etapa2_conceito": ENTENDER — o conceito em linguagem simples.
+      - "etapa3_exemplo": VER EXEMPLO — exemplo já resolvido com números/palavras concretas.
+      - "etapa4_como_monta": FAZER JUNTO — guia passo a passo para chegar à resposta.
+      - "etapa5_instrucao": FAZER SOZINHO — instrução curta do que fazer agora.
+      - "desafio_final": DESAFIO — frase curta de reforço/aplicação (1 frase).
+      - "dica": Dica útil caso erre (1 frase).
+      - "reforco_positivo": RECOMPENSA — comemoração citando o hiperfoco (1 frase).
+      - "metodo_usado": Nome curto do método didático (ex: "TEACCH", "Multissensorial", "Montessori", "Padrão").
       ${isAlfabetizacao ? `
       - "palavra_foco": String.
       - "silabas": Array de strings.
@@ -223,7 +245,7 @@ serve(async (req) => {
       - "opcoes_numericas": Array de 3 inteiros.
       ` : ""}
 
-      Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
+      Cada campo precisa ter conteúdo DIFERENTE — não repita a mesma frase em campos diferentes.`
 
       userPrompt = `Ensine o tema "${topic || "aprendizado"}" para ${child.nome || "o aluno"} (${tierLabel}).${reexplainMethod ? ` REEXPLIQUE usando o método ${reexplainMethod.toUpperCase()}.` : ""}`
 
