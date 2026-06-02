@@ -31,6 +31,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 
@@ -144,6 +145,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
 const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
   id: '/anamnese/$childId',
   path: '/anamnese/$childId',
@@ -172,7 +178,7 @@ export interface FileRoutesByFullPath {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/neuro-treino': typeof NeuroTreinoRoute
+  '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -181,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
+  '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -198,7 +205,7 @@ export interface FileRoutesByTo {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/neuro-treino': typeof NeuroTreinoRoute
+  '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -207,6 +214,7 @@ export interface FileRoutesByTo {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
+  '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -225,7 +233,7 @@ export interface FileRoutesById {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/missao-prova': typeof MissaoProvaRoute
-  '/neuro-treino': typeof NeuroTreinoRoute
+  '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
@@ -234,6 +242,7 @@ export interface FileRoutesById {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRoute
+  '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -262,6 +271,7 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/neuro-treino/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -288,6 +298,7 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/neuro-treino/$slug'
   id:
     | '__root__'
     | '/'
@@ -314,6 +325,7 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/neuro-treino/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -332,7 +344,7 @@ export interface RootRouteChildren {
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
-  NeuroTreinoRoute: typeof NeuroTreinoRoute
+  NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
@@ -499,6 +511,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/neuro-treino/$slug': {
+      id: '/neuro-treino/$slug'
+      path: '/$slug'
+      fullPath: '/neuro-treino/$slug'
+      preLoaderRoute: typeof NeuroTreinoSlugRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
     '/anamnese/$childId': {
       id: '/anamnese/$childId'
       path: '/anamnese/$childId'
@@ -516,6 +535,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface NeuroTreinoRouteChildren {
+  NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
+}
+
+const NeuroTreinoRouteChildren: NeuroTreinoRouteChildren = {
+  NeuroTreinoSlugRoute: NeuroTreinoSlugRoute,
+}
+
+const NeuroTreinoRouteWithChildren = NeuroTreinoRoute._addFileChildren(
+  NeuroTreinoRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
@@ -532,7 +563,7 @@ const rootRouteChildren: RootRouteChildren = {
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MissaoProvaRoute: MissaoProvaRoute,
-  NeuroTreinoRoute: NeuroTreinoRoute,
+  NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
