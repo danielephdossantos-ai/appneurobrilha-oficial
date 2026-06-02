@@ -125,9 +125,10 @@ function Anamnese() {
   useEffect(() => {
     async function loadAnamnesis() {
       if (!childId || isNova) {
-        setLoading(false);
+        // mantém loading=true durante a criação/redirect
         return;
       }
+
       const { data: existing } = await supabase
         .from("child_anamnesis")
         .select("*")
