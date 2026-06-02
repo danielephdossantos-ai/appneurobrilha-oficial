@@ -31,13 +31,12 @@ export class PedagogyEngine {
 
   static generateDailyRoutine(
     day: number,
-    childProfile: { tempo_atencao_min?: number | null } & Record<string, unknown>,
+    childProfile: { tempo_atencao_min?: number | null },
     activities: Array<{
       id?: string;
       name?: string;
       category?: string;
       subcategory?: string;
-      [k: string]: unknown;
     }>
   ): JourneyBlock[] {
     // Deterministicamente escolhe atividades baseadas no dia para cobrir os 365 dias.
