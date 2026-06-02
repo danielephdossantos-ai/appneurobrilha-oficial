@@ -1,11 +1,18 @@
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
-import { LINGUISTICS_DATA } from "./PedagogyData";
+import { LINGUISTICS_DATA, EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
 
 export class LinguisticsGenerator extends BaseGenerator {
   protected domain = "linguistics";
 
   protected getActivityType(input: GeneratorInput): string {
+    if (isEarlyChildhood(input.grade)) {
+      // ciências/natureza para EI = reconhecer animais; português = vogais/primeira letra
+      if (input.subject === 'ciencias') return 'ei-animal';
+      const r = Math.random();
+      if (r < 0.5) return 'ei-vogal';
+      return 'ei-animal';
+    }
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "interpretation";
     if (input.difficulty < 0.3) return "phonemes";
@@ -16,6 +23,8 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
+      case "ei-vogal": return "As Vogais Mágicas";
+      case "ei-animal": return "Bichinhos da Fazenda";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
@@ -27,6 +36,8 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
+      case "ei-vogal": return "Olha a figura! Com qual vogal essa palavra começa?";
+      case "ei-animal": return "Qual é o nome desse bichinho?";
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
       case "reading": return "Leia a palavra e encontre a imagem correspondente.";
@@ -38,6 +49,40 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected generateContent(input: GeneratorInput): any {
     try {
       const type = this.getActivityType(input);
+
+      // ===== EDUCAÇÃO INFANTIL =====
+      if (type === 'ei-vogal') {
+        const v = this.pickRandom(EARLY_CHILDHOOD.vowels);
+        const wrongs = this.pickNRandom(
+          EARLY_CHILDHOOD.vowels.filter(x => x.letter !== v.letter),
+          2
+        ).map(x => x.letter);
+        const options = this.shuffle([v.letter, ...wrongs]);
+        return {
+          q: `${v.emoji}  ${v.exemplo}  — Com qual vogal começa?`,
+          visual: v.emoji,
+          exemplo: v.exemplo,
+          answer: v.letter,
+          options,
+        };
+      }
+
+      if (type === 'ei-animal') {
+        const a = this.pickRandom(EARLY_CHILDHOOD.animais);
+        const wrongs = this.pickNRandom(
+          EARLY_CHILDHOOD.animais.filter(x => x.nome !== a.nome),
+          2
+        ).map(x => x.nome);
+        const options = this.shuffle([a.nome, ...wrongs]);
+        return {
+          q: `${a.emoji} Que bichinho é esse? (faz "${a.som}")`,
+          visual: a.emoji,
+          som: a.som,
+          answer: a.nome,
+          options,
+        };
+      }
+
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
 
       if (type === "interpretation") {
@@ -50,7 +95,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
       const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
       if (!words || words.length === 0) throw new Error(`No words found for level ${difficultyLevel}`);
-      
+
       const targetWord = this.pickRandom(words);
 
       if (type === "phonemes") {
@@ -69,11 +114,11 @@ export class LinguisticsGenerator extends BaseGenerator {
           missingSyllable,
           ...this.pickNRandom(LINGUISTICS_DATA.simpleSyllables.filter(s => s !== missingSyllable), 3)
         ]);
-        return { 
-          targetWord, 
+        return {
+          targetWord,
           syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
           missingSyllable,
-          options 
+          options
         };
       }
 
@@ -83,7 +128,6 @@ export class LinguisticsGenerator extends BaseGenerator {
       return { targetWord, options };
     } catch (e) {
       console.error("Error in LinguisticsGenerator:", e);
-      // Fallback robusto
       return {
         word: "BOLA",
         options: ["BOLA", "CASA", "DADO", "FOCA"],

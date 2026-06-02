@@ -1,11 +1,17 @@
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
-import { MATH_DATA } from "./PedagogyData";
+import { MATH_DATA, EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
 
 export class MathGenerator extends BaseGenerator {
   protected domain = "math";
 
   protected getActivityType(input: GeneratorInput): string {
+    if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'artes') {
+        return Math.random() < 0.5 ? 'ei-cor' : 'ei-forma';
+      }
+      return Math.random() < 0.5 ? 'ei-contagem' : 'ei-forma';
+    }
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "advanced-logic";
     if (input.difficulty < 0.4) return "counting";
@@ -16,6 +22,9 @@ export class MathGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
+      case "ei-contagem": return "Vamos Contar Juntos!";
+      case "ei-cor": return "Que Cor é Essa?";
+      case "ei-forma": return "Caça às Formas";
       case "counting": return "Contagem Divertida";
       case "comparison": return "Mais ou Menos?";
       case "visual-logic": return "Desafio Lógico";
@@ -27,6 +36,9 @@ export class MathGenerator extends BaseGenerator {
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
+      case "ei-contagem": return "Conte com o dedinho 👆 quantos tem na imagem.";
+      case "ei-cor": return "Olha a cor! Qual é o nome dela?";
+      case "ei-forma": return "Que forma é essa? Aponta a resposta!";
       case "counting": return "Quantos objetos você vê?";
       case "comparison": return "Qual grupo tem mais itens?";
       case "visual-logic": return "Qual é o próximo da sequência?";
@@ -38,6 +50,46 @@ export class MathGenerator extends BaseGenerator {
   protected generateContent(input: GeneratorInput): any {
     try {
       const type = this.getActivityType(input);
+
+      // ===== EDUCAÇÃO INFANTIL =====
+      if (type === 'ei-contagem') {
+        const item = this.pickRandom(EARLY_CHILDHOOD.contagem);
+        const wrongs = this.pickNRandom([1,2,3,4,5].filter(n => n !== item.n), 2);
+        const options = this.shuffle([item.n, ...wrongs]).map(String);
+        return {
+          q: `Quantos ${item.emoji} você vê?`,
+          visual: item.emoji.repeat(item.n),
+          targetCount: item.n,
+          answer: String(item.n),
+          options,
+        };
+      }
+
+      if (type === 'ei-cor') {
+        const cor = this.pickRandom(EARLY_CHILDHOOD.cores);
+        const wrongs = this.pickNRandom(EARLY_CHILDHOOD.cores.filter(c => c.nome !== cor.nome), 2);
+        const options = this.shuffle([cor.nome, ...wrongs.map(w => w.nome)]);
+        return {
+          q: `Que cor é essa? ${cor.emoji}`,
+          visual: cor.emoji,
+          hex: cor.hex,
+          answer: cor.nome,
+          options,
+        };
+      }
+
+      if (type === 'ei-forma') {
+        const forma = this.pickRandom(EARLY_CHILDHOOD.formas);
+        const wrongs = this.pickNRandom(EARLY_CHILDHOOD.formas.filter(f => f.nome !== forma.nome), 2);
+        const options = this.shuffle([forma.nome, ...wrongs.map(w => w.nome)]);
+        return {
+          q: `Qual forma é essa? ${forma.emoji}`,
+          visual: forma.emoji,
+          answer: forma.nome,
+          options,
+        };
+      }
+
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
       const maxNumber = input.difficulty < 0.5 ? 5 * gradeNum : 10 * gradeNum;
 
@@ -61,8 +113,8 @@ export class MathGenerator extends BaseGenerator {
         const countA = Math.floor(Math.random() * maxNumber) + 1;
         let countB = Math.floor(Math.random() * maxNumber) + 1;
         while (countB === countA) countB = Math.floor(Math.random() * maxNumber) + 1;
-        
-        return { 
+
+        return {
           groupA: { count: countA, item: this.pickRandom(MATH_DATA.shapes) },
           groupB: { count: countB, item: this.pickRandom(MATH_DATA.shapes) },
           answer: countA > countB ? 'A' : 'B'
@@ -80,11 +132,10 @@ export class MathGenerator extends BaseGenerator {
         return shapes[2];
       });
       const nextItem = pattern.next === 'A' ? shapes[0] : (pattern.next === 'B' ? shapes[1] : shapes[2]);
-      
+
       return { sequence, nextItem, options: this.shuffle([...shapes]) };
     } catch (e) {
       console.error("Error in MathGenerator:", e);
-      // Fallback robusto
       return {
         q: "2 + 2",
         a: 4,

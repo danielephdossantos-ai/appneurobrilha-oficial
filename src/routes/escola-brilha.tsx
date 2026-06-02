@@ -64,8 +64,21 @@ const materias = [
   { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5" },
   { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5" },
   { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5" },
-  
 ] as const;
+
+// Educação Infantil — 4 grandes áreas BNCC adaptadas
+const materiasInfantil = [
+  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras" },
+  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5" },
+  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo" },
+  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas" },
+] as const;
+
+function isEI(grade: string) {
+  const g = grade.toLowerCase();
+  return g.includes('infantil') || g.includes('pré') || g.includes('pre');
+}
+
 
 function Escola() {
   const { activeChild } = useAppState();
@@ -85,14 +98,27 @@ function Escola() {
     try {
       // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
       const service = ActivityProceduralService.getInstance();
-      const domain = materiaId === "matematica" ? "math" : "linguistics";
-      
-      console.log("Generating activity for domain:", domain, "grade:", selectedGrade);
-      
+      // Mapa de matéria → domínio do gerador
+      const domainMap: Record<string, string> = {
+        matematica: "math",
+        artes: "math",          // EI: cores/formas; demais séries: padrões visuais
+        portugues: "linguistics",
+        ciencias: "linguistics", // EI: animais; demais: leitura temática
+        historia: "linguistics",
+        geografia: "linguistics",
+      };
+      const domain = domainMap[materiaId] || "linguistics";
+
+      // Em Educação Infantil, dificuldade muito baixa e fixa
+      const difficulty = isEI(selectedGrade) ? 0.15 : 0.5;
+
+      console.log("Generating activity for domain:", domain, "grade:", selectedGrade, "subject:", materiaId);
+
       const activity = service.generateActivity({
         domain,
-        difficulty: 0.5,
+        difficulty,
         grade: selectedGrade,
+        subject: materiaId,
         childProfile: {
           neurodivergence: [activeChild.diagnostico],
           interests: [activeChild.hiperfoco],
@@ -101,6 +127,7 @@ function Escola() {
         },
         previousActivityIds: []
       });
+
 
       console.log("Activity generated:", activity);
 
@@ -151,16 +178,21 @@ function Escola() {
       
       console.log("AI Response:", data);
 
-      const novaAula = { 
-        ...data, 
-        materia: materiaId, 
-        etapa: "ensino", 
+      const novaAula = {
+        ...data,
+        materia: materiaId,
+        etapa: "ensino",
         grade: selectedGrade,
         // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
-        resposta_correta: systemAnswer
+        resposta_correta: systemAnswer,
+        // Conteúdo visual extra (emoji/cor) para Educação Infantil
+        visual: activity.content.visual,
+        visualHex: activity.content.hex,
+        isEI: isEI(selectedGrade),
       };
+
 
       console.log("FINAL AULA STATE:", novaAula);
       setAula(novaAula);
@@ -199,9 +231,19 @@ function Escola() {
     );
   }
 
+  const ei = isEI(selectedGrade);
+  const materiasVisiveis = ei ? materiasInfantil : materias;
+  const startMateriaId = ei ? "matematica" : "matematica";
+
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+      <PageHeader
+        emoji="🎓"
+        title="Escola Brilha"
+        subtitle={ei
+          ? `Educação Infantil · Atividades simples e visuais para os pequenos 🌱`
+          : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
+      />
 
       <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
         <div className="flex gap-2 min-w-max">
@@ -221,36 +263,63 @@ function Escola() {
         </div>
       </div>
 
+      {ei && (
+        <Card className="mb-4 bg-gradient-to-br from-sun/20 to-petal/15 border-sun/30">
+          <div className="flex items-start gap-3">
+            <div className="text-4xl">🌱</div>
+            <div>
+              <div className="font-extrabold text-lg">Pequeninos em descoberta!</div>
+              <div className="text-sm text-muted-foreground">
+                Nesta fase ensinamos com <b>figuras, cores e sons</b>. Sem textos longos, sem contas — só
+                brincar aprendendo: vogais, contar até 5, cores, formas e bichinhos.
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
           <div className="text-5xl">{activeChild.avatar}</div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">Pronto para brilhar?</div>
-            <div className="text-sm text-muted-foreground">Escolha uma matéria do {selectedGrade} e vamos começar!</div>
+            <div className="font-extrabold text-lg">
+              {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {ei
+                ? "Escolha uma carinha lá embaixo 👇"
+                : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
+            </div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
               <div className="h-full bg-primary" style={{ width: "10%" }} />
             </div>
           </div>
-          <button onClick={() => carregarAula("matematica")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+          <button onClick={() => carregarAula(startMateriaId)} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
             <Play className="h-4 w-4" /> Começar
           </button>
         </div>
       </Card>
 
-      <h2 className="text-xl mb-4">Matérias</h2>
+      <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {materias.map((m) => (
+        {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
-            <div className="text-4xl">{m.emoji}</div>
+            <div className="text-5xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+            {ei && m.descricao && (
+              <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
+            )}
+            {!ei && (
+              <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+            )}
           </button>
         ))}
       </div>
     </Shell>
   );
 }
+
 
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
@@ -311,19 +380,33 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
             {aula.etapa === "ensino" && (
               <div>
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-sky/40 to-petal/30 grid place-items-center mb-4 relative overflow-hidden">
-                  <div className="text-8xl animate-pulse">
-                    {hiperfoco === "dinossauros" ? "🦕" : hiperfoco === "espaco" ? "🚀" : hiperfoco === "animais" ? "🦁" : "🌟"}
+                <div
+                  className="aspect-video rounded-2xl grid place-items-center mb-4 relative overflow-hidden"
+                  style={{
+                    background: aula.visualHex
+                      ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
+                      : undefined,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-sky/40 to-petal/30 -z-10" />
+                  <div className="text-[8rem] leading-none animate-pulse text-center">
+                    {aula.visual
+                      ? aula.visual
+                      : hiperfoco === "dinossauros" ? "🦕"
+                        : hiperfoco === "espaco" ? "🚀"
+                        : hiperfoco === "animais" ? "🦁"
+                        : "🌟"}
                   </div>
                 </div>
-                <p className="text-xl leading-relaxed font-medium">
+                <p className={`leading-relaxed font-medium ${aula.isEI ? "text-2xl" : "text-xl"}`}>
                   {aula.ensino}
                 </p>
                 <div className="mt-6 flex gap-2 flex-wrap">
-                  <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                    Continuar →
+                  <button onClick={() => setAula({ ...aula, etapa: aula.isEI ? "opcoes" : "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                    {aula.isEI ? "Vamos brincar! 🎉" : "Continuar →"}
                   </button>
                 </div>
+
               </div>
             )}
 
@@ -341,7 +424,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
 
             {aula.etapa === "opcoes" && (
               <div>
-                <p className="text-xl mb-6 font-bold">{aula.pergunta || "O que você acha?"}</p>
+                {aula.isEI && aula.visual && (
+                  <div
+                    className="rounded-2xl grid place-items-center mb-6 py-10"
+                    style={{
+                      background: aula.visualHex
+                        ? `linear-gradient(135deg, ${aula.visualHex}55, ${aula.visualHex}11)`
+                        : 'linear-gradient(135deg, hsl(var(--sky)/.3), hsl(var(--petal)/.2))',
+                    }}
+                  >
+                    <div className="text-[7rem] leading-none">{aula.visual}</div>
+                  </div>
+                )}
+                <p className={`mb-6 font-bold ${aula.isEI ? "text-2xl text-center" : "text-xl"}`}>{aula.pergunta || "O que você acha?"}</p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {(aula.opcoes || []).map((opt: string, index: number) => (
                     <button 

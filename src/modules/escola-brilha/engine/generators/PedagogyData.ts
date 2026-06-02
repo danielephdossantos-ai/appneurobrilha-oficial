@@ -1,4 +1,53 @@
 
+// ====== Educação Infantil (3-5 anos) — conteúdo concreto, visual, simples ======
+export const EARLY_CHILDHOOD = {
+  vowels: [
+    { letter: 'A', exemplo: 'ABELHA', emoji: '🐝' },
+    { letter: 'E', exemplo: 'ELEFANTE', emoji: '🐘' },
+    { letter: 'I', exemplo: 'IGREJA', emoji: '⛪' },
+    { letter: 'O', exemplo: 'OVO', emoji: '🥚' },
+    { letter: 'U', exemplo: 'UVA', emoji: '🍇' },
+  ],
+  cores: [
+    { nome: 'VERMELHO', hex: '#ef4444', exemplo: 'maçã', emoji: '🍎' },
+    { nome: 'AZUL', hex: '#3b82f6', exemplo: 'céu', emoji: '💙' },
+    { nome: 'AMARELO', hex: '#facc15', exemplo: 'sol', emoji: '☀️' },
+    { nome: 'VERDE', hex: '#22c55e', exemplo: 'folha', emoji: '🍀' },
+    { nome: 'ROSA', hex: '#ec4899', exemplo: 'flor', emoji: '🌸' },
+    { nome: 'ROXO', hex: '#a855f7', exemplo: 'uva', emoji: '🍇' },
+  ],
+  formas: [
+    { nome: 'CÍRCULO', emoji: '⭕', exemplo: 'a roda' },
+    { nome: 'QUADRADO', emoji: '🟦', exemplo: 'a janela' },
+    { nome: 'TRIÂNGULO', emoji: '🔺', exemplo: 'a fatia de pizza' },
+    { nome: 'ESTRELA', emoji: '⭐', exemplo: 'a estrela no céu' },
+    { nome: 'CORAÇÃO', emoji: '❤️', exemplo: 'o amor' },
+  ],
+  animais: [
+    { nome: 'CACHORRO', emoji: '🐶', som: 'au au' },
+    { nome: 'GATO', emoji: '🐱', som: 'miau' },
+    { nome: 'VACA', emoji: '🐮', som: 'muuu' },
+    { nome: 'PATO', emoji: '🦆', som: 'quack' },
+    { nome: 'GALO', emoji: '🐔', som: 'cocoricó' },
+    { nome: 'LEÃO', emoji: '🦁', som: 'rugido' },
+    { nome: 'OVELHA', emoji: '🐑', som: 'béééé' },
+  ],
+  contagem: [
+    { n: 1, emoji: '🍎' },
+    { n: 2, emoji: '🐶' },
+    { n: 3, emoji: '⭐' },
+    { n: 4, emoji: '🎈' },
+    { n: 5, emoji: '🌻' },
+  ],
+};
+
+export function isEarlyChildhood(grade?: string): boolean {
+  if (!grade) return false;
+  const g = grade.toLowerCase();
+  return g.includes('infantil') || g.includes('pré') || g.includes('pre');
+}
+
+
 export const LINGUISTICS_DATA = {
   vowels: ['a', 'e', 'i', 'o', 'u'],
   consonants: ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'],
