@@ -85,16 +85,26 @@ function Treino() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {g.slugs.map((slug) => {
                   const c = CATEGORIAS[slug];
+                  const isLoading = false; // Placeholder for future loading state
                   return (
                     <Link
                       key={slug}
                       to="/neuro-treino/$slug"
                       params={{ slug }}
-                      className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 border-border shadow-soft hover:shadow-glow hover:scale-105 transition-all min-h-[120px] flex flex-col`}
+                      disabled={isLoading}
+                      className={`text-left rounded-2xl p-4 bg-gradient-to-br ${g.cor} border-2 border-border shadow-soft hover:shadow-glow hover:scale-105 transition-all min-h-[120px] flex flex-col group ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      <div className="text-3xl mb-1">{c.emoji}</div>
-                      <div className="font-extrabold">{c.nome}</div>
-                      <div className="text-xs text-muted-foreground mt-1">{VARIATIONS[slug].length} variações</div>
+                      <div className="flex justify-between items-start">
+                        <div className="text-3xl mb-1">{c.emoji}</div>
+                        {isLoading && (
+                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary border-t-transparent" />
+                        )}
+                      </div>
+                      <div className="font-extrabold group-hover:text-primary transition-colors">{c.nome}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{VARIATIONS[slug]?.length || 0} variações</div>
+                      <div className="mt-auto pt-2 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] font-bold text-primary uppercase tracking-wider">
+                        Toque para começar
+                      </div>
                     </Link>
                   );
                 })}
