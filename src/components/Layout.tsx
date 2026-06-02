@@ -15,6 +15,9 @@ import { KidButton } from "./ui/KidButton";
 import KidLiveMascot from "./ui/KidLiveMascot";
 import { useMascot } from "@/contexts/MascotContext";
 import { CoinDisplay } from "./rewards/CoinDisplay";
+import { useParentMode } from "@/contexts/ParentModeContext";
+import { Lock, LockOpen } from "lucide-react";
+
 
 function SidebarMascot() {
   const { activeMascot } = useMascot();
