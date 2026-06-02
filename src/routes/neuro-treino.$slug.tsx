@@ -116,7 +116,7 @@ function NeuroAtividade() {
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mb-4" />
           <h2 className="text-xl font-bold text-muted-foreground">Preparando treino personalizado...</h2>
-          <p className="text-sm text-muted-foreground mt-2">Aplicando hiperfoco: {hiperfoco.emoji} {hiperfoco.label}</p>
+          <p className="text-sm text-muted-foreground mt-2">Aplicando hiperfoco: {hiperfoco.label}</p>
         </div>
       </Shell>
     );
@@ -203,11 +203,11 @@ function NeuroAtividade() {
             search={{ next: slug }}
             className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
           >
-            {hiperfoco.emoji} {hiperfoco.label} <span className="text-primary">· trocar</span>
+            {hiperfoco.label} <span className="text-primary">· trocar</span>
           </Link>
         </div>
       </div>
-      <PageHeader emoji={meta.emoji} title={meta.nome} subtitle={instrucaoTematica} />
+      <PageHeader title={meta.nome} subtitle={instrucaoTematica} />
 
       {slug !== "motorzinho-dos-sons" && (
         <div className="mb-3 flex items-center gap-2 justify-center">
