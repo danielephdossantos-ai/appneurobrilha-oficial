@@ -7,6 +7,7 @@ import { PIP_SKINS } from '@/components/ui/KidLiveMascot';
 import pipMascot from '@/assets/pip-mascot.png';
 import { useAppState } from '@/core/store';
 import { cn } from '@/utils/utils';
+import { PipEvolution } from '@/components/pip/PipEvolution';
 
 export const Route = createFileRoute('/colecao-pip')({
   component: ColecaoPipPage,
