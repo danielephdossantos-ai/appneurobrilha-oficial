@@ -143,7 +143,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
-import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 import { MascotProvider } from "@/contexts/MascotContext";
 import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContainer";
@@ -170,11 +169,6 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 
       if (event === "SIGNED_IN" && session) {
         setHasSession(true);
-        AuditLogService.log({
-          action: "LOGIN_SUCCESS",
-          module: "AUTH",
-          metadata: { method: "password" },
-        });
         return;
       }
 
@@ -205,7 +199,10 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     }
   }, [authReady, hasSession, location.pathname, navigate]);
 
-  if (!authReady) {
+  const isRedirectingToAuth = authReady && !hasSession && location.pathname !== "/auth";
+  const isRedirectingHome = authReady && hasSession && location.pathname === "/auth";
+
+  if (!authReady || isRedirectingToAuth || isRedirectingHome) {
     return (
       <div className="flex h-screen items-center justify-center bg-sidebar">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>

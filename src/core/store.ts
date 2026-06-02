@@ -4,11 +4,32 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SensoryMode } from "@/engines/regulation-engine/sensory-engine";
 
-export type Diagnostico = "tdah" | "tea" | "dislexia" | "tod" | "deficiencia_intelectual" | "altas_habilidades" | "neurotipico" | "discalculia" | "multiplo" | "nenhum";
+export type Diagnostico =
+  | "tdah"
+  | "tea"
+  | "dislexia"
+  | "tod"
+  | "deficiencia_intelectual"
+  | "altas_habilidades"
+  | "neurotipico"
+  | "discalculia"
+  | "multiplo"
+  | "nenhum";
 export type Hiperfoco =
-  | "animais" | "dinossauros" | "espaco" | "veiculos"
-  | "princesas" | "super-herois" | "robos" | "musica"
-  | "minecraft" | "carros" | "trens" | "arte" | "fazendinha" | "outros";
+  | "animais"
+  | "dinossauros"
+  | "espaco"
+  | "veiculos"
+  | "princesas"
+  | "super-herois"
+  | "robos"
+  | "musica"
+  | "minecraft"
+  | "carros"
+  | "trens"
+  | "arte"
+  | "fazendinha"
+  | "outros";
 
 export interface Child {
   id: string;
@@ -107,6 +128,14 @@ export interface AnamnesisData {
 
 const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
 
+const isAuthExpiredError = (error: unknown) => {
+  const possibleError = error as { message?: unknown; status?: unknown };
+  return (
+    (typeof possibleError.message === "string" && possibleError.message.includes("JWT")) ||
+    possibleError.status === 401
+  );
+};
+
 export function useAppState() {
   const queryClient = useQueryClient();
   const [activeChildId, setActiveChildId] = useState<string | null>(() => {
@@ -116,12 +145,14 @@ export function useAppState() {
     return null;
   });
 
-  const { data: session } = useQuery({
+  const { data: session, isLoading: isSessionLoading } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       const { data } = await supabase.auth.getSession();
       return data.session;
     },
+    staleTime: 0,
+    gcTime: 0,
   });
 
   const { data: children = [], isLoading } = useQuery({
@@ -132,7 +163,7 @@ export function useAppState() {
         .from("children")
         .select("*")
         .order("created_at", { ascending: true });
-      
+
       if (error) throw error;
       return data as unknown as Child[];
     },
@@ -147,7 +178,7 @@ export function useAppState() {
         .insert([{ ...newChild, user_id: session.user.id }])
         .select()
         .single();
-      
+
       if (error) throw error;
       return data;
     },
@@ -157,8 +188,8 @@ export function useAppState() {
       localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
       toast.success("Criança cadastrada com sucesso!");
     },
-    onError: (error: any) => {
-      if (error?.message?.includes("JWT") || error?.status === 401) {
+    onError: (error: unknown) => {
+      if (isAuthExpiredError(error)) {
         supabase.auth.signOut();
         toast.error("Sua sessão expirou. Por favor, entre novamente.");
       } else {
@@ -173,15 +204,15 @@ export function useAppState() {
         .from("children")
         .update(patch as any)
         .eq("id", id);
-      
+
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
       toast.success("Dados atualizados!");
     },
-    onError: (error: any) => {
-      if (error?.message?.includes("JWT") || error?.status === 401) {
+    onError: (error: unknown) => {
+      if (isAuthExpiredError(error)) {
         supabase.auth.signOut();
         toast.error("Sua sessão expirou. Por favor, entre novamente.");
       } else {
@@ -192,9 +223,9 @@ export function useAppState() {
 
   const addCoinsMutation = useMutation({
     mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
-      const { error } = await (supabase as any).rpc('add_brilhocoins', { 
-        child_id: childId, 
-        amount: amount 
+      const { error } = await (supabase as any).rpc("add_brilhocoins", {
+        child_id: childId,
+        amount: amount,
       });
       if (error) throw error;
     },
@@ -215,7 +246,7 @@ export function useAppState() {
   return {
     children,
     activeChild,
-    isLoading,
+    isLoading: isSessionLoading || isLoading,
     session,
     logout,
     setActiveChild: (id: string) => {
@@ -244,11 +275,11 @@ export function useAppState() {
           .update({
             responses: anamnesis.responses,
             internal_profile: anamnesis.internal_profile,
-            edit_count: count + 1
+            edit_count: count + 1,
           })
           .eq("id", existing.id);
         if (error) throw error;
-        
+
         await supabase
           .from("children")
           .update({ anamnesis_edit_count: count + 1 })
@@ -263,15 +294,15 @@ export function useAppState() {
 
         await supabase
           .from("children")
-          .update({ 
-            anamnesis_id: data.id, 
+          .update({
+            anamnesis_id: data.id,
             anamnesis_edit_count: 1,
-            anamnese_completa: true 
+            anamnese_completa: true,
           })
           .eq("id", anamnesis.child_id);
       }
       queryClient.invalidateQueries({ queryKey: ["children"] });
-    }
+    },
   };
 }
 
