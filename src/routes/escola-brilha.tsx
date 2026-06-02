@@ -288,8 +288,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula:
         subtitle={`${(aula.materia || "Aula").charAt(0).toUpperCase() + (aula.materia || "Aula").slice(1)} · ${aula.grade || "Geral"} · Adaptado para você`} 
       />
 
+      {adjustment.suggestBreak && (
+        <Card className="mb-4 bg-sun/15 border-sun/30 flex items-center gap-3">
+          <Coffee className="h-6 w-6 text-sun" />
+          <div className="flex-1">
+            <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
+            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo 🌿</div>
+          </div>
+        </Card>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
+
           <Card className="mb-4">
             <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground mb-3">
               <span className={`px-2.5 py-1 rounded-full ${aula.etapa === "ensino" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>1. Ensino</span>
