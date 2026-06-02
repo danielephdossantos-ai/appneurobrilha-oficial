@@ -172,6 +172,10 @@ function Treino() {
           </div>
         </div>
       </div>
+      <FloatingActivityControls
+        onSkip={selectedAtividade ? () => { toast.info("Vamos direto pra missão! 🚀"); } : undefined}
+        onChange={selectedAtividade ? () => setSelectedAtividade(null) : undefined}
+      />
     </Shell>
   );
 }
