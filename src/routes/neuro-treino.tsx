@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Shell, PageHeader } from "@/components/Layout";
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, useEffect } from "react";
 import { AlertCircle, Coffee, Sparkles } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
@@ -95,6 +95,32 @@ function Treino() {
   useAppState();
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
+
+  // Limpa caches antigos do sistema de mundos do neuro-treino
+  // (que foi movido para a Jornada 365) para evitar redirecionamentos fantasma.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const STALE_KEYS = [
+      "neuroTreino:world",
+      "neuroTreino:trilha",
+      "neuroTreino:trail",
+      "neuroTreino:lastRoute",
+      "neuroTreino:redirect",
+      "neuro-treino:world",
+      "neuro-treino:trilha",
+      "neuro-treino:redirect",
+      "currentWorld",
+      "lastJourneyRoute",
+    ];
+    try {
+      STALE_KEYS.forEach((k) => {
+        window.localStorage.removeItem(k);
+        window.sessionStorage.removeItem(k);
+      });
+    } catch {
+      // ignore
+    }
+  }, []);
 
   return (
     <Shell>
