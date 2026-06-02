@@ -703,7 +703,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                           </p>
                         </div>
                         <div className="relative flex items-end justify-center gap-6 mt-6">
-                          <div className="text-7xl drop-shadow-md animate-float-thinking">{materiaMeta.mascote}</div>
+                          <div className="text-7xl drop-shadow-md animate-float-thinking">
+                            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-16 h-16 rounded-full object-cover border-2 border-white" />
+                            ) : (
+                              activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            )}
+                          </div>
                           <div className="text-8xl drop-shadow-md">{visualGlyph}</div>
                         </div>
                       </div>
