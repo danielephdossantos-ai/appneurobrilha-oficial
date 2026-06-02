@@ -198,6 +198,8 @@ function Escola() {
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
   const [banco, setBanco] = useState<BancoState | null>(null);
+  const [explanationLevel, setExplanationLevel] = useState<"easy" | "medium" | "hard">("medium");
+  const [isFirstExplanation, setIsFirstExplanation] = useState(true);
   const [teenGuided, setTeenGuided] = useState<boolean>(() => {
     try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
   });
@@ -342,7 +344,9 @@ function Escola() {
           systemOptions,
           systemAnswer,
           instruction: activity.instruction,
-          miniGameType // Enviando o tipo de jogo para a IA
+          miniGameType,
+          explanationLevel,
+          isFirstExplanation
         }
       });
 
