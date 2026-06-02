@@ -782,7 +782,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { 
                   <button
                     onClick={() => {
                       requestHelp(aula.activityId);
-                      toast.info("Pip vai te ajudar! 💡");
+                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar! 💡`);
                     }}
                     className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
                   >
