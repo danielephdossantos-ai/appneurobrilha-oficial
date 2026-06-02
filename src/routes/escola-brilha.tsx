@@ -310,6 +310,8 @@ function Escola() {
         materia: materiaId,
         etapa: "ensino",
         grade: selectedGrade,
+        activityId: activity.id,
+        bancoOrdem: preset?.ordem,
         // Garantindo que os dados do Motor Infinito persistam para a terceira tela
         pergunta: systemQuestion,
         opcoes: systemOptions,
