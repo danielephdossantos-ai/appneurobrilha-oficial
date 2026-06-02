@@ -817,7 +817,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   />
                 ) : (
                   <>
-                    <p className="mb-6 font-bold text-xl">{aula.pergunta || "O que você acha?"}</p>
+                    {!aula.isEI && <p className="mb-6 font-bold text-xl">{aula.pergunta || "O que você acha?"}</p>}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {(aula.opcoes || []).map((opt: string, index: number) => (
                         <button
