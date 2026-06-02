@@ -262,7 +262,56 @@ function Anamnese() {
                 </select>
               </Field>
             </div>
+
+            <Field label="Série / Ano escolar">
+              <select
+                className="input-premium"
+                value={serieLocal}
+                onChange={(e) => { setSerieLocal(e.target.value); setOverrideMismatch(false); }}
+              >
+                <option value="">Selecione a série...</option>
+                {SERIES.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </Field>
+
+            {serieLocal && !ageGrade.ok && (
+              <div className="p-4 rounded-xl border-2 border-amber-400 bg-amber-50 text-amber-900 space-y-3">
+                <div className="flex items-start gap-2">
+                  <Info className="w-5 h-5 shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="font-bold">Incoerência detectada entre idade e série</p>
+                    <p>
+                      Para <strong>{serieLocal}</strong> esperamos cerca de <strong>{ageGrade.expected} anos</strong>, mas você informou <strong>{data.dados_crianca.idade} anos</strong>.
+                      Sem isso, o sistema gera atividades no nível errado.
+                    </p>
+                    {suggestSerieForAge(data.dados_crianca.idade) && (
+                      <p className="mt-1">
+                        Sugestão para {data.dados_crianca.idade} anos:{" "}
+                        <button
+                          type="button"
+                          className="font-bold underline"
+                          onClick={() => { setSerieLocal(suggestSerieForAge(data.dados_crianca.idade)); setOverrideMismatch(false); }}
+                        >
+                          {suggestSerieForAge(data.dados_crianca.idade)}
+                        </button>
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <label className="flex items-center gap-2 text-xs font-semibold">
+                  <input
+                    type="checkbox"
+                    checked={overrideMismatch}
+                    onChange={(e) => setOverrideMismatch(e.target.checked)}
+                  />
+                  Confirmo mesmo assim (ex.: criança adiantada ou repetente).
+                </label>
+              </div>
+            )}
           </div>
+
         )}
 
         {step === 1 && (
