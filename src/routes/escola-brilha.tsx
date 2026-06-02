@@ -1710,6 +1710,21 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   const panel: "kids" | "mid" | "teen" =
                     /infantil|pré|pre|^1º/i.test(g) ? "kids" :
                     /^[2-5]º/.test(g) ? "mid" : "teen";
+
+                  // ✅ Novo padrão de tela de explicação de MATEMÁTICA (2º ao 9º ano)
+                  const isMathExp = (panel === "mid" || panel === "teen") &&
+                    (aula.materia === "matematica" || aula.materia === "numeros");
+                  if (isMathExp) {
+                    return (
+                      <MathExplanationScreen
+                        aula={aula}
+                        reexplaining={reexplaining}
+                        onNaoEntendi={naoEntendi}
+                        onTentar={() => setAula({ ...aula, etapa: "opcoes" })}
+                      />
+                    );
+                  }
+
                   const visualGlyph = aula.visual
                     ? aula.visual
                     : hiperfoco === "dinossauros" ? "🦕"
@@ -1719,6 +1734,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
                   return (
                     <div>
+
 
                       {/* 2º AO 5º ANO — caderno pautado */}
                       {panel === "mid" && (
