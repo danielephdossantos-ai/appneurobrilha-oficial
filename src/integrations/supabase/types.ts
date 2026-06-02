@@ -1173,6 +1173,71 @@ export type Database = {
           },
         ]
       }
+      hiperfoco_elementos: {
+        Row: {
+          created_at: string
+          hiperfoco_id: string | null
+          id: string
+          image_url: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          hiperfoco_id?: string | null
+          id?: string
+          image_url: string
+          nome: string
+        }
+        Update: {
+          created_at?: string
+          hiperfoco_id?: string | null
+          id?: string
+          image_url?: string
+          nome?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hiperfoco_elementos_hiperfoco_id_fkey"
+            columns: ["hiperfoco_id"]
+            isOneToOne: false
+            referencedRelation: "hiperfocos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hiperfocos: {
+        Row: {
+          created_at: string
+          emoji: string | null
+          forma_pontilhado: string | null
+          id: string
+          label: string
+          slug: string
+          som: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          emoji?: string | null
+          forma_pontilhado?: string | null
+          id?: string
+          label: string
+          slug: string
+          som?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          emoji?: string | null
+          forma_pontilhado?: string | null
+          id?: string
+          label?: string
+          slug?: string
+          som?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       inventory: {
         Row: {
           child_id: string

@@ -8,6 +8,7 @@ export type HiperfocoId =
   | "herois"
   | "animais"
   | "carros"
+  | "nenhum"
   | "custom";
 
 export interface Hiperfoco {
@@ -110,6 +111,23 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     pipIncentivos: [
       "Reduz a marcha e tenta de novo. 🛞",
       "Pit stop rápido e voltamos pra pista! 🔧",
+    ],
+  },
+  nenhum: {
+    id: "nenhum",
+    label: "Sem Hiperfoco",
+    emoji: "✨",
+    elementos: ["PIP", "Estrela", "Coração"],
+    som: "plim! (brilho)",
+    formaPontilhado: "uma estrela",
+    pipAcertos: [
+      "Boa! Você é brilhante! ⭐",
+      "Mandou muito bem! ✨",
+      "Incrível! Continue assim! 🏆",
+    ],
+    pipIncentivos: [
+      "Tudo bem! Vamos brilhar na próxima. 💫",
+      "O aprendizado é uma jornada linda! 🌈",
     ],
   },
 };
