@@ -351,19 +351,19 @@ const ONOMA_VARS: Variation[] = range(30).map((i) => {
   return { id:`on-${i+1}`, payload:{ som:b.som, options:opts, correctName:b.correta.nome } };
 });
 
-// 17. RITMO E SOPRO VISUAL — esticar vogal conforme tamanho da linha (mecânica única: barra de comprimento)
+// 17. RITMO E SOPRO VISUAL — mic real: criança sopra/fala e cena se anima (carro anda, vela apaga, balão sobe...)
 const SOPRO_BANK = [
-  { silaba:"Vruuum", vogal:"U", veiculo:"🚗" },
-  { silaba:"Tchuu",  vogal:"U", veiculo:"🚂" },
-  { silaba:"Brmm",   vogal:"M", veiculo:"🏍️" },
-  { silaba:"Fiuuu",  vogal:"U", veiculo:"🎈" },
-  { silaba:"Shhh",   vogal:"H", veiculo:"💨" },
-  { silaba:"Iaaaa",  vogal:"A", veiculo:"🚑" },
+  { cena:"carro",   silaba:"Vruuum", instrucao:"Sopra forte pra empurrar o carrinho!" },
+  { cena:"vela",    silaba:"Fuuu",   instrucao:"Sopra a vela até apagar a chama!" },
+  { cena:"balao",   silaba:"Fiuuu",  instrucao:"Sopra pra fazer o balão subir!" },
+  { cena:"moinho",  silaba:"Whoosh", instrucao:"Sopra pra girar o moinho de vento!" },
+  { cena:"barco",   silaba:"Shhh",   instrucao:"Sopra a vela do barco até ele atravessar!" },
+  { cena:"bolha",   silaba:"Soo",    instrucao:"Sopra devagar pra encher a bolha de sabão!" },
 ];
 const SOPRO_VARS: Variation[] = range(30).map((i) => {
   const b = SOPRO_BANK[i % SOPRO_BANK.length];
-  const tamanho = 30 + (i % 6) * 15; // 30,45,60,75,90,105
-  return { id:`rs-${i+1}`, payload:{ ...b, tamanho, holdSeconds: Math.max(1.5, tamanho / 30) } };
+  const dificuldade = 1 + (i % 5); // 1..5
+  return { id:`rs-${i+1}`, payload:{ ...b, dificuldade, holdSeconds: 2 + dificuldade * 0.8 } };
 });
 
 // 18. SONS DO CORPO / PAROMATOPEIAS — som → ação correta
