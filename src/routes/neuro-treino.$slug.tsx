@@ -830,7 +830,7 @@ function Onomatopeias({ p, onDone }: any) {
         <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Som</div>
         <div className="text-5xl font-black text-coral">{p.som}</div>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((o:any, i:number) => {
           const img = ilustracao(o.emoji, o.nome);
           return (
