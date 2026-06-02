@@ -254,6 +254,7 @@ export function Shell({ children }: { children?: ReactNode }) {
           </div>
           <MobileNav path={path} />
           
+          {!hideGlobalNav && (
           <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
             <div className="pointer-events-auto">
               {prevPath && (
