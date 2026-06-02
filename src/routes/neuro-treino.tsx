@@ -75,7 +75,15 @@ function Treino() {
 
   return (
     <Shell>
-      <PageHeader emoji="🧠" title="Neuro-Treino" subtitle="Reforço terapêutico que sustenta o aprendizado escolar" />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-success/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-success mb-2">Floresta da Atenção</h1>
+          <p className="text-muted-foreground text-lg font-bold">Vamos treinar seu cérebro para ficar super forte e focado!</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
@@ -107,7 +115,10 @@ function Treino() {
               Atividade em Foco: {selectedAtividade || 'Respira Flor'}
             </h3>
             <div className="grid place-items-center py-12">
-              <div className="h-32 w-32 rounded-full bg-success/30 animate-pulse" style={{ animationDuration: "4s" }} />
+              <PipPedagogicalGuidance 
+                stage={selectedAtividade ? 'explanation' : 'idle'} 
+                className="mb-8"
+              />
               <p className="mt-6 text-center text-lg font-bold text-success/80">Inspira… segura… expira… 🌸</p>
               <div className="mt-8 flex gap-4">
                 <button className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm">
@@ -118,12 +129,12 @@ function Treino() {
           </Card>
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-24">
-            <PipPedagogicalGuidance 
-              stage={selectedAtividade ? 'explanation' : 'idle'} 
-              className="animate-in fade-in slide-in-from-right-4" 
-            />
+        <div className="hidden lg:block lg:col-span-1">
+          <div className="sticky top-24 bg-white/50 p-6 rounded-[2rem] border-2 border-success/10">
+            <h4 className="text-xs font-black text-success uppercase tracking-widest mb-4">Dica do Pip</h4>
+            <p className="text-sm font-bold text-muted-foreground italic leading-relaxed">
+              "Treinar o cérebro é como exercitar um músculo. Quanto mais praticamos, mais forte ele fica!"
+            </p>
           </div>
         </div>
       </div>

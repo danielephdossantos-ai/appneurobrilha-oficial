@@ -177,9 +177,10 @@ function Escola() {
     return (
       <Shell>
         <div className="h-full flex flex-col items-center justify-center p-12 text-center">
+          <PipPedagogicalGuidance stage="idle" className="mb-6" />
           <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
           <h2 className="text-2xl font-bold">Preparando sua aula especial...</h2>
-          <p className="text-muted-foreground">O {activeChild.hiperfoco === 'dinossauros' ? 'dinossauro' : 'amigo'} está organizando tudo!</p>
+          <p className="text-muted-foreground">O Pip está organizando tudo!</p>
         </div>
       </Shell>
     );
@@ -200,7 +201,15 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+      <div className="flex flex-col lg:flex-row gap-8 mb-12 bg-white/50 p-8 rounded-[3rem] border-4 border-primary/10 shadow-soft items-center">
+        <div className="flex-shrink-0">
+          <PipPedagogicalGuidance stage="idle" />
+        </div>
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-4xl font-black text-primary mb-2">Escola Brilha</h1>
+          <p className="text-muted-foreground text-lg font-bold">Olá! Escolha uma matéria para começarmos nossa missão de hoje!</p>
+        </div>
+      </div>
 
       <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
         <div className="flex gap-2 min-w-max">
@@ -222,7 +231,7 @@ function Escola() {
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
-          <div className="text-5xl">{activeChild.avatar}</div>
+          <PipPedagogicalGuidance stage="idle" className="scale-75" />
           <div className="flex-1">
             <div className="font-extrabold text-lg">Pronto para brilhar?</div>
             <div className="text-sm text-muted-foreground">Escolha uma matéria do {selectedGrade} e vamos começar!</div>

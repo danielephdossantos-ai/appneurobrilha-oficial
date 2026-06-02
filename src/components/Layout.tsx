@@ -37,19 +37,11 @@ function SidebarMascot() {
 
 
 const navCrianca = [
-  { to: "/", label: "Início", icon: Home },
+  { to: "/", label: "Mundos", icon: Compass },
   { to: "/mascotes", label: "Meus Mascotes", icon: Heart },
-  { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
-  { to: "/loja-fantasia-pip", label: "Loja do Pip", icon: Sparkles },
-  { to: "/missao-prova", label: "Missão Prova", icon: Target },
+  { to: "/loja-mascotes", label: "Loja do Pip", icon: ShoppingBag },
   { to: "/historias", label: "Histórias", icon: BookOpen },
-  { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
-  { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
-  { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
-  { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
-  { to: "/jornada-365", label: "Jornada 365", icon: Compass },
-  { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
-  { to: "/rotina", label: "Rotina", icon: ListChecks },
+  { to: "/rotina", label: "Minha Rotina", icon: ListChecks },
 ];
 
 const navPais = [
@@ -285,9 +277,9 @@ export function Shell({ children }: { children?: ReactNode }) {
 
 function MobileNav({ path }: { path: string }) {
   const items = [
-    { to: "/", icon: Home, label: "Início" },
-    { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
-    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
+    { to: "/", icon: Compass, label: "Mundos" },
+    { to: "/mascotes", icon: Heart, label: "Mascotes" },
+    { to: "/historias", icon: BookOpen, label: "Histórias" },
     { to: "/painel-pais", icon: ShieldCheck, label: "Pais" },
   ];
   return (
