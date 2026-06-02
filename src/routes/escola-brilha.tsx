@@ -1141,6 +1141,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
+    if (aula.guided && !isAlfaFlow && !isMathFlow) {
+      if (eiStep <= 5) return 'explanation';
+      return 'encouragement';
+    }
     if (aula.isEI) {
       if (eiStep < 5) return 'explanation';
       return 'encouragement';
