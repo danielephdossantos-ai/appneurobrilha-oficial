@@ -116,12 +116,14 @@ export function useAppState() {
     return null;
   });
 
-  const { data: session } = useQuery({
+  const { data: session, isLoading: isSessionLoading } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       const { data } = await supabase.auth.getSession();
       return data.session;
     },
+    staleTime: 0,
+    gcTime: 0,
   });
 
   const { data: children = [], isLoading } = useQuery({
@@ -215,7 +217,7 @@ export function useAppState() {
   return {
     children,
     activeChild,
-    isLoading,
+    isLoading: isSessionLoading || isLoading,
     session,
     logout,
     setActiveChild: (id: string) => {
