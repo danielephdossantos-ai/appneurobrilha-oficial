@@ -381,6 +381,7 @@ function Escola() {
           setAula={setAula} 
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
+          activeMascot={activeMascot}
           tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
         />
