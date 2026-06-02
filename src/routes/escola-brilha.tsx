@@ -611,6 +611,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; se
           </div>
         </div>
       </div>
+      <FloatingActivityControls
+        onSkip={aula.etapa !== "opcoes" ? () => setAula({ ...aula, etapa: "opcoes" }) : undefined}
+        onChange={() => setAula(null)}
+        changeLabel="Trocar matéria"
+      />
     </Shell>
   );
 }
