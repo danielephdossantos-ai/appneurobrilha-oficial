@@ -4,6 +4,7 @@ import { useAppState } from "@/core/store";
 import { useState } from "react";
 import { Send, Sparkles, Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
+import { useMascot } from "@/contexts/MascotContext";
 
 export const Route = createFileRoute("/terapeuta-brilha")({
   component: Terapeuta,
@@ -11,8 +12,17 @@ export const Route = createFileRoute("/terapeuta-brilha")({
 
 function Terapeuta() {
   const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
+  const mascotName = activeMascot?.mascot?.name || "Pip";
+  const mascotPayload = activeMascot ? {
+    name: activeMascot.mascot?.name,
+    description: activeMascot.mascot?.description,
+    category: activeMascot.mascot?.category,
+    level: activeMascot.level,
+    affinity: activeMascot.affinity,
+  } : null;
   const [msgs, setMsgs] = useState<{ role: "ai" | "user"; t: string }[]>([
-    { role: "ai", t: `Oi! Sou a Terapeuta Brilha 💚 Estou aqui pra te ajudar com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
+    { role: "ai", t: `Oi! Sou ${mascotName} 💚 Hoje vou te ajudar como terapeuta com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,13 +37,14 @@ function Terapeuta() {
     
     try {
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: { 
-          mode: "terapeuta", 
+        body: {
+          mode: "terapeuta",
           child: activeChild,
+          mascot: mascotPayload,
           message: q,
-          chatHistory: msgs.map(m => ({ 
-            role: m.role === "ai" ? "assistant" : "user", 
-            content: m.t 
+          chatHistory: msgs.map(m => ({
+            role: m.role === "ai" ? "assistant" : "user",
+            content: m.t
           }))
         }
       });

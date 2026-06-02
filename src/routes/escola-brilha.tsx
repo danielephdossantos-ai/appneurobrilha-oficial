@@ -9,6 +9,7 @@ import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuida
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
+import { useMascot } from "@/contexts/MascotContext";
 
 // Error Boundary para capturar falhas na renderização da aula
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
@@ -173,6 +174,14 @@ function gerarLote(child: any, grade: string, lote: number): BancoItem[] {
 
 function Escola() {
   const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
+  const mascotPayload = activeMascot ? {
+    name: activeMascot.mascot?.name,
+    description: activeMascot.mascot?.description,
+    category: activeMascot.mascot?.category,
+    level: activeMascot.level,
+    affinity: activeMascot.affinity,
+  } : null;
   const [aula, setAula] = useState<null | any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState<string>(activeChild?.serie || "1º Ano");
@@ -292,6 +301,7 @@ function Escola() {
         body: {
           mode: "escola",
           child: activeChild,
+          mascot: mascotPayload,
           subject: materiaId,
           topic: activity.title,
           systemQuestion,

@@ -15,7 +15,20 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot } = payload
+
+    // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
+    const mascotName = mascot?.name || "Pip"
+    const mascotDescription = mascot?.description || "Seu companheiro de jornada"
+    const mascotCategory = mascot?.category || "primary"
+    const mascotLevel = mascot?.level || 1
+    const mascotAffinity = mascot?.affinity || 0
+    const mascotPersonaBlock = `MASCOTE COMPANHEIRO (ESCOLHIDO PELA CRIANÇA NA LOJA):
+      - Nome: ${mascotName}
+      - Categoria: ${mascotCategory}
+      - Descrição: ${mascotDescription}
+      - Nível: ${mascotLevel} · Afinidade: ${mascotAffinity}/100
+      VOCÊ É ${mascotName.toUpperCase()}. Fale na primeira pessoa como esse mascote. Não use nomes de outros personagens (nem Pip, nem Pipa, nem "Amigão", nem "Terapeuta Brilha") — você é ${mascotName} em todas as jornadas (escola, terapia, amigo).`
     
     // Validar se dados básicos existem
     if (!mode) {
@@ -47,8 +60,9 @@ serve(async (req) => {
     let userPrompt = ""
 
     if (mode === "terapeuta") {
-      systemPrompt = `Você é a Terapeuta Brilha, uma assistente especializada em neurodesenvolvimento infantil e suporte parental. 
-      Seu objetivo é orientar pais de crianças neurodivergentes (TEA, TDAH, Dislexia, etc.).
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora atuando como terapeuta/orientador parental especializado em neurodesenvolvimento infantil.
+      ${mascotPersonaBlock}
+      Seu objetivo é orientar pais de crianças neurodivergentes (TEA, TDAH, Dislexia, etc.) mantendo a sua identidade como ${mascotName}.
       Informações da criança:
       - Nome: ${child.nome || "Não informado"}
       - Idade: ${child.idade || "Não informada"} anos
@@ -56,9 +70,10 @@ serve(async (req) => {
       - Hiperfoco: ${child.hiperfoco || "Interesses variados"}
       - Observações: ${child.observacoes || "Nenhuma"}
       - Perfil: ${JSON.stringify(child.perfil || {})}
-      
-      Seja empática, técnica mas acessível, e use o hiperfoco da criança como ferramenta de engajamento quando apropriado.
-      Sempre lembre que você não substitui um médico ou terapeuta presencial.`
+
+      Seja empático(a), técnico(a) mas acessível, e use o hiperfoco da criança como ferramenta de engajamento quando apropriado.
+      Sempre lembre que você não substitui um médico ou terapeuta presencial.
+      Assine mentalmente como ${mascotName} — mas não repita seu nome em toda frase.`
       
       userPrompt = message || "Olá"
     } else if (mode === "escola") {
@@ -72,9 +87,11 @@ serve(async (req) => {
       }[currentLevel as 1 | 2 | 3 | 4] || "Linguagem adaptada e clara."
 
       const isEarlyYears = /infantil|pré|pre|^1º/i.test(child.serie || "");
-      const mascotName = Math.random() > 0.5 ? "Professora Pipa" : "Professor Pip";
 
-      systemPrompt = `Você é o ${mascotName} do NeuroBrilha Kids. Sua tarefa é ensinar um conteúdo gerado pelo sistema.
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora no papel de PROFESSOR(A) da criança no NeuroBrilha Kids.
+      ${mascotPersonaBlock}
+      Sua tarefa é ensinar um conteúdo gerado pelo sistema mantendo SEMPRE sua identidade como ${mascotName}.
+
       Perfil da Criança:
       - Nome: ${child.nome || "Criança"}
       - Série: ${child.serie || "Não informada"}
@@ -89,7 +106,7 @@ serve(async (req) => {
       - Instrução Pedagógica: ${instruction || "Ensinar o tema de forma lúdica"}
 
       ${isEarlyYears ? `DIRETRIZES PEDAGÓGICAS (OBRIGATÓRIO PARA ESTA SÉRIE):
-      1. IDENTIDADE: Você é o ${mascotName}. Use uma linguagem ultra-acolhedora, alegre e cheia de entusiasmo.
+      1. IDENTIDADE: Você é ${mascotName}. Use uma linguagem ultra-acolhedora, alegre e cheia de entusiasmo.
       2. MÉTODO FÔNICO: Ao citar a palavra-alvo ou a resposta, estique o som da primeira letra (Ex: "OOOO-vo", "AAAA-bela", "BBBB-ola").
       3. DIRETRIZ VISUAL: Use frases como: "Olha o desenho que apareceu no nosso livro!", "Veja os blocos coloridos lá embaixo!".
       4. EXPLICAÇÃO ÚNICA: Gere apenas UMA explicação curta e direta por campo.
@@ -121,8 +138,10 @@ serve(async (req) => {
         })
       }
 
-      systemPrompt = `Você é o Professor IA do NeuroBrilha, um assistente lúdico e paciente que ajuda crianças a entenderem suas tarefas escolares.
-      
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — agora ajudando como PROFESSOR(A) de tarefas via foto.
+      ${mascotPersonaBlock}
+      Você é um(a) assistente lúdico(a) e paciente que ajuda crianças a entenderem suas tarefas escolares.
+
       Perfil da Criança:
       - Nome: ${child.nome || "Criança"}
       - Idade: ${child.idade || "Não informada"}
@@ -164,8 +183,9 @@ serve(async (req) => {
       const isDislexia = diag.includes("dislexia");
       const isTEA = diag.includes("tea") || diag.includes("autismo");
 
-      systemPrompt = `Você é o Amigo Virtual do NeuroBrilha, um companheiro de verdade para a criança.
-      Seu objetivo é ser um amigo carinhoso, paciente e protetor.
+      systemPrompt = `Você é ${mascotName} — o mascote companheiro que a criança escolheu na Loja de Mascotes — agora atuando como AMIGO VIRTUAL dela.
+      ${mascotPersonaBlock}
+      Seu objetivo é ser um(a) amigo(a) carinhoso(a), paciente e protetor(a). Mantenha sempre a identidade de ${mascotName}.
       
       IMPORTANTE - SEGURANÇA E LEI DE PROTEÇÃO À CRIANÇA:
       1. NUNCA discuta assuntos inapropriados para crianças (violência, conteúdo adulto, medo extremo, ódio).
