@@ -11,15 +11,45 @@ export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
 });
 
+// ---- Regras BNCC: idade ↔ ano escolar (Brasil) ----
+const SERIES = [
+  "Berçário", "Maternal", "Pré I", "Pré II", "Pré III",
+  "1º ano", "2º ano", "3º ano", "4º ano", "5º ano",
+  "6º ano", "7º ano", "8º ano", "9º ano",
+  "1º EM", "2º EM", "3º EM",
+] as const;
+
+const EXPECTED_AGE: Record<string, number> = {
+  "Berçário": 1, "Maternal": 2, "Pré I": 3, "Pré II": 4, "Pré III": 5,
+  "1º ano": 6, "2º ano": 7, "3º ano": 8, "4º ano": 9, "5º ano": 10,
+  "6º ano": 11, "7º ano": 12, "8º ano": 13, "9º ano": 14,
+  "1º EM": 15, "2º EM": 16, "3º EM": 17,
+};
+
+function checkAgeGrade(idade: number, serie: string): { ok: boolean; expected: number; diff: number } {
+  const expected = EXPECTED_AGE[serie];
+  if (expected === undefined) return { ok: true, expected: idade, diff: 0 };
+  const diff = idade - expected;
+  // Tolerância ±1 ano (reprovação / adiantamento). Acima é incoerência grave.
+  return { ok: Math.abs(diff) <= 1, expected, diff };
+}
+
+function suggestSerieForAge(idade: number): string {
+  const found = Object.entries(EXPECTED_AGE).find(([, age]) => age === idade);
+  return found ? found[0] : "";
+}
+
 function Anamnese() {
   const { childId } = Route.useParams();
   const { children: allChildren, updateChild, saveAnamnesis } = useAppState();
   const navigate = useNavigate();
   const child = allChildren.find((c: any) => c.id === childId);
-  
+
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(true);
   const [editCount, setEditCount] = useState(0);
+  const [serieLocal, setSerieLocal] = useState<string>(child?.serie ?? "");
+  const [overrideMismatch, setOverrideMismatch] = useState(false);
 
   const [data, setData] = useState<AnamnesisData['responses']>({
     dados_crianca: {
