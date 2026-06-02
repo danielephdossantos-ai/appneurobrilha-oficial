@@ -924,7 +924,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         </button>
                       ))}
                     </div>
-                  </>
+                  </div>
                 )}
                 {(!aula.opcoes || aula.opcoes.length === 0) && (
                   <p className="text-muted-foreground italic">Nenhuma opção de resposta disponível.</p>
