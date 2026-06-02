@@ -17,6 +17,12 @@ import worldFazenda from "@/assets/neuro-treino/worlds/fazendinha.jpg";
 import worldEspaco from "@/assets/neuro-treino/worlds/espaco.jpg";
 import worldAnimais from "@/assets/neuro-treino/worlds/animais.jpg";
 import worldHerois from "@/assets/neuro-treino/worlds/herois.jpg";
+import worldArte from "@/assets/neuro-treino/worlds/arte.jpg";
+import worldMusica from "@/assets/neuro-treino/worlds/musica.jpg";
+import worldPrincesas from "@/assets/neuro-treino/worlds/princesas.jpg";
+import worldTrens from "@/assets/neuro-treino/worlds/trens.jpg";
+import worldRobos from "@/assets/neuro-treino/worlds/robos.jpg";
+import worldVeiculos from "@/assets/neuro-treino/worlds/veiculos.jpg";
 import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
 
 // Ícones por categoria
@@ -105,14 +111,20 @@ function NeuroTreinoShell() {
 
 // ============== MUNDOS ==============
 
-type WorldKey = "dinossauros" | "minecraft" | "carros" | "fazendinha" | "espaco" | "animais" | "herois" | "default";
+type WorldKey = "dinossauros" | "minecraft" | "carros" | "fazendinha" | "espaco" | "animais" | "herois" | "arte" | "musica" | "princesas" | "trens" | "robos" | "veiculos" | "default";
 
 function mapHiperfocoToWorld(label?: string | null): WorldKey {
   if (!label) return "default";
   const l = label.toLowerCase();
   if (l.includes("dino")) return "dinossauros";
   if (l.includes("minecraft") || l.includes("bloco")) return "minecraft";
-  if (l.includes("carro") || l.includes("auto") || l.includes("veíc") || l.includes("veic") || l.includes("trem") || l.includes("pista")) return "carros";
+  if (l.includes("trem")) return "trens";
+  if (l.includes("rob")) return "robos";
+  if (l.includes("princ")) return "princesas";
+  if (l.includes("music") || l.includes("músic")) return "musica";
+  if (l.includes("arte") || l.includes("pint") || l.includes("desenh")) return "arte";
+  if (l.includes("carro") || l.includes("auto") || l.includes("pista")) return "carros";
+  if (l.includes("veíc") || l.includes("veic") || l.includes("aviã") || l.includes("avia") || l.includes("barco")) return "veiculos";
   if (l.includes("fazend") || l.includes("campo")) return "fazendinha";
   if (l.includes("espac") || l.includes("espaç") || l.includes("galá") || l.includes("gala") || l.includes("astro")) return "espaco";
   if (l.includes("animal") || l.includes("bicho")) return "animais";
@@ -128,6 +140,12 @@ const WORLD_THEME: Record<WorldKey, { image: string; accent: string; trailColor:
   espaco:      { image: worldEspaco,    accent: "ring-fuchsia-300/70", trailColor: "border-fuchsia-200", name: "Mundo Galáctico" },
   animais:     { image: worldAnimais,   accent: "ring-amber-300/70",   trailColor: "border-orange-200",  name: "Mundo Safári" },
   herois:      { image: worldHerois,    accent: "ring-yellow-300/70",  trailColor: "border-yellow-100",  name: "Mundo Heróis" },
+  arte:        { image: worldArte,      accent: "ring-pink-300/70",    trailColor: "border-pink-200",    name: "Mundo Arte" },
+  musica:      { image: worldMusica,    accent: "ring-violet-300/70",  trailColor: "border-violet-200",  name: "Mundo Música" },
+  princesas:   { image: worldPrincesas, accent: "ring-pink-300/70",    trailColor: "border-pink-100",    name: "Mundo Encantado" },
+  trens:       { image: worldTrens,     accent: "ring-sky-300/70",     trailColor: "border-sky-200",     name: "Mundo Trilhos" },
+  robos:       { image: worldRobos,     accent: "ring-cyan-300/70",    trailColor: "border-cyan-200",    name: "Mundo Robótico" },
+  veiculos:    { image: worldVeiculos,  accent: "ring-sky-300/70",     trailColor: "border-sky-100",     name: "Mundo Aventura" },
   default:     { image: worldDefault,   accent: "ring-white/70",       trailColor: "border-white",       name: "Mundo Encantado" },
 };
 
