@@ -718,10 +718,12 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     opcoes: "✨ Sua vez!",
   };
 
-  // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
-  const stepIndex = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0);
-  // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
-  const visualStep = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1);
+  // Stepper pedagógico (6 ou 7 passos visuais)
+  const totalSteps = isAlfaFlow ? 7 : 6;
+  const stepIndex = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0));
+  
+  const visualStep = isAlfaFlow ? eiStep : (aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1));
+
 
 
   return (
