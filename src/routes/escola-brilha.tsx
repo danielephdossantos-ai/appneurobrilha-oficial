@@ -692,7 +692,7 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 3 && (
           <div className="flex gap-4 items-center justify-center flex-wrap">
-            {silabas.map((s, i) => (
+            {silabas.map((s: string, i: number) => (
               <div key={i} className="flex items-center">
                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-5xl md:text-7xl font-black text-primary animate-in zoom-in" style={{ animationDelay: `${i * 300}ms` }}>
                   {s.toUpperCase()}
@@ -706,7 +706,7 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
         {eiStep === 4 && (
           <div className="w-full space-y-8">
             <div className="flex gap-3 justify-center min-h-[100px] p-4 bg-muted/30 rounded-3xl border-4 border-dashed border-muted">
-              {montagem.map((s, i) => (
+              {montagem.map((s: string, i: number) => (
                 <div key={i} className="w-24 h-24 rounded-2xl bg-primary text-white flex items-center justify-center text-3xl font-black shadow-md animate-in zoom-in">
                   {s}
                 </div>
@@ -714,7 +714,7 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
               {montagem.length === 0 && <span className="text-muted-foreground self-center font-bold">Arraste para cá</span>}
             </div>
             <div className="flex gap-4 justify-center flex-wrap">
-              {silabas.filter(s => !montagem.includes(s)).map((s, i) => (
+              {silabas.filter((s: string) => !montagem.includes(s)).map((s: string, i: number) => (
                 <button
                   key={i}
                   onClick={() => {
@@ -735,6 +735,7 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
             </div>
           </div>
         )}
+
 
         {eiStep === 5 && (
           <div className="w-full space-y-6">
