@@ -15,7 +15,7 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep, explanationLevel, isFirstExplanation } = payload
 
     // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
@@ -183,14 +183,18 @@ serve(async (req) => {
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
+      ${levelInstruction}
       ${reexplainInstruction}
 
-      Perfil do Aluno:
-      - Nome: ${child.nome || "Aluno"}
-      - Série: ${serie || "Não informada"}
-      - Hiperfoco: ${child.hiperfoco || "Geral"} (USE como ponte de engajamento!)
-      - Diagnóstico: ${child.diagnostico || "Geral"}
-      - Nível de Adaptação: ${nivelDesc}
+      REGRAS DE PERSONALIZAÇÃO (ANAMNESE):
+      - Use os dados abaixo para adaptar o vocabulário e o estilo:
+      - Diagnóstico: ${child.diagnostico || "Geral"} -> ${isTEA ? "Foco em previsibilidade e literalidade." : isTDAH ? "Foco em brevidade e estímulos constantes." : "Linguagem adaptada."}
+      - Perfil Sensorial: ${JSON.stringify(child.perfil || {})}
+      - Observações dos Pais: ${child.observacoes || "Nenhuma"}
+      - Nível de Adaptação Sugerido: ${nivelDesc}
+      - Nome da Criança: ${child.nome || "Aluno"}
+      - REGRA DE NOME: ${isFirstExplanation ? `Use o nome da criança no início ("Olá, ${child.nome}!")` : "NÃO use o nome da criança agora, ela já está imersa na aula."}
+      - HIPERFOCO: ${child.hiperfoco || "Geral"} (Obrigatório usar como ponte de engajamento!)
 
       DADOS DO SISTEMA (NÃO ALTERE — você ensina sobre isso):
       - Desafio: ${systemQuestion || "Nenhum"}
