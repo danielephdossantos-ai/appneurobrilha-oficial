@@ -98,14 +98,27 @@ function Escola() {
     try {
       // 1. O SISTEMA gera a atividade (Título, Pergunta, Opções, Resposta)
       const service = ActivityProceduralService.getInstance();
-      const domain = materiaId === "matematica" ? "math" : "linguistics";
-      
-      console.log("Generating activity for domain:", domain, "grade:", selectedGrade);
-      
+      // Mapa de matéria → domínio do gerador
+      const domainMap: Record<string, string> = {
+        matematica: "math",
+        artes: "math",          // EI: cores/formas; demais séries: padrões visuais
+        portugues: "linguistics",
+        ciencias: "linguistics", // EI: animais; demais: leitura temática
+        historia: "linguistics",
+        geografia: "linguistics",
+      };
+      const domain = domainMap[materiaId] || "linguistics";
+
+      // Em Educação Infantil, dificuldade muito baixa e fixa
+      const difficulty = isEI(selectedGrade) ? 0.15 : 0.5;
+
+      console.log("Generating activity for domain:", domain, "grade:", selectedGrade, "subject:", materiaId);
+
       const activity = service.generateActivity({
         domain,
-        difficulty: 0.5,
+        difficulty,
         grade: selectedGrade,
+        subject: materiaId,
         childProfile: {
           neurodivergence: [activeChild.diagnostico],
           interests: [activeChild.hiperfoco],
@@ -114,6 +127,7 @@ function Escola() {
         },
         previousActivityIds: []
       });
+
 
       console.log("Activity generated:", activity);
 
