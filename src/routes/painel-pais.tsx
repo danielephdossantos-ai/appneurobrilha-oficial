@@ -27,7 +27,7 @@ export const Route = createFileRoute("/painel-pais")({
 });
 
 function PainelPremium() {
-  const { activeChild } = useAppState();
+  const { activeChild, children, isLoading, setActiveChild } = useAppState();
   const { unlocked: parentUnlocked, requestUnlock } = useParentMode();
 
   useEffect(() => {
@@ -42,7 +42,44 @@ function PainelPremium() {
     }
   }, [parentUnlocked, activeChild, requestUnlock]);
 
-  if (!activeChild) return <Shell><p className="text-center py-10">Selecione uma criança para acessar o painel.</p></Shell>;
+  if (isLoading) {
+    return <Shell><p className="text-center py-10">Carregando…</p></Shell>;
+  }
+
+  if (!activeChild && children.length === 0) {
+    return (
+      <Shell>
+        <div className="text-center py-20 space-y-4">
+          <p className="text-lg font-bold">Nenhuma criança cadastrada ainda</p>
+          <p className="text-sm text-muted-foreground">Cadastre a primeira criança e faça a anamnese para liberar o painel.</p>
+          <Link to="/anamnese/$childId" params={{ childId: "nova" }} className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-black">
+            Iniciar cadastro <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </Shell>
+    );
+  }
+
+  if (!activeChild) {
+    return (
+      <Shell>
+        <div className="max-w-xl mx-auto py-12 space-y-4">
+          <p className="text-lg font-bold text-center">Selecione uma criança</p>
+          <div className="grid gap-3">
+            {children.map((c: any) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveChild(c.id)}
+                className="w-full p-4 rounded-2xl bg-white border-2 border-slate-200 hover:border-primary text-left font-bold"
+              >
+                {c.nome}
+              </button>
+            ))}
+          </div>
+        </div>
+      </Shell>
+    );
+  }
 
   if (!parentUnlocked) {
     return (
