@@ -104,11 +104,6 @@ export class LinguisticsGenerator extends BaseGenerator {
       const difficultyLevel = this.wordLevelForGrade(gradeNum);
       const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
       if (!words || words.length === 0) throw new Error(`No words found for level ${difficultyLevel}`);
-      }
-
-      const difficultyLevel = input.difficulty < 0.4 ? 'beginner' : (input.difficulty < 0.8 ? 'intermediate' : 'advanced');
-      const words = LINGUISTICS_DATA.words[difficultyLevel as keyof typeof LINGUISTICS_DATA.words];
-      if (!words || words.length === 0) throw new Error(`No words found for level ${difficultyLevel}`);
 
       const targetWord = this.pickRandom(words);
 
