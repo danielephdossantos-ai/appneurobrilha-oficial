@@ -165,16 +165,16 @@ const MOTORZINHO_VARS: Variation[] = range(30).map((i) => ({
 
 // 3. RIMAS
 const RIMAS_BANK = [
-  { palavra:"BOLA", correta:"COLA", outras:["PATO","FACA"] },
-  { palavra:"GATO", correta:"PATO", outras:["BOLA","FOLHA"] },
-  { palavra:"COROA", correta:"LAGOA", outras:["CARRO","SAPO"] },
-  { palavra:"JANELA", correta:"PANELA", outras:["MENINO","FOGO"] },
-  { palavra:"MÃO", correta:"PÃO", outras:["LUA","FLOR"] },
-  { palavra:"FACA", correta:"VACA", outras:["BOLA","CASA"] },
-  { palavra:"GELO", correta:"CABELO", outras:["BARCO","SOFÁ"] },
-  { palavra:"FLOR", correta:"COR", outras:["MESA","CADEIRA"] },
-  { palavra:"CASA", correta:"BRASA", outras:["CARRO","BOI"] },
-  { palavra:"PATO", correta:"RATO", outras:["FLOR","BANANA"] },
+  { palavra:"BOLA", correta:"COLA", outras:["PATO","FACA","LIVRO"] },
+  { palavra:"GATO", correta:"PATO", outras:["BOLA","FOLHA","MESA"] },
+  { palavra:"COROA", correta:"LAGOA", outras:["CARRO","SAPO","BOLA"] },
+  { palavra:"JANELA", correta:"PANELA", outras:["MENINO","FOGO","CARRO"] },
+  { palavra:"MÃO", correta:"PÃO", outras:["LUA","FLOR","GATO"] },
+  { palavra:"FACA", correta:"VACA", outras:["BOLA","CASA","SOL"] },
+  { palavra:"GELO", correta:"CABELO", outras:["BARCO","SOFÁ","PATO"] },
+  { palavra:"FLOR", correta:"COR", outras:["MESA","CADEIRA","LUA"] },
+  { palavra:"CASA", correta:"BRASA", outras:["CARRO","BOI","FLOR"] },
+  { palavra:"PATO", correta:"RATO", outras:["FLOR","BANANA","CASA"] },
 ];
 const RIMAS_VARS: Variation[] = range(30).map((i) => {
   const b = RIMAS_BANK[i % RIMAS_BANK.length];
@@ -215,11 +215,11 @@ const ONDE_VARS: Variation[] = range(30).map((i) => {
 
 // 6. SEQUÊNCIA E PADRÃO — continuação lógica de formas
 const SEQ_BANK = [
-  { seq:["🔴","🔵","🔴","🔵"], next:"🔴", opts:["🔴","🔵","🟢"] },
-  { seq:["🔺","🟦","🔺","🟦","🔺"], next:"🟦", opts:["🟦","🔺","⭐"] },
-  { seq:["⬆️","➡️","⬆️","➡️"], next:"⬆️", opts:["⬆️","➡️","⬇️"] },
-  { seq:["🟢","🟢","🔴","🟢","🟢"], next:"🔴", opts:["🔴","🟢","🔵"] },
-  { seq:["⭐","🌙","⭐","🌙","⭐"], next:"🌙", opts:["🌙","⭐","☀️"] },
+  { seq:["🔴","🔵","🔴","🔵"], next:"🔴", opts:["🔴","🔵","🟢","🟡"] },
+  { seq:["🔺","🟦","🔺","🟦","🔺"], next:"🟦", opts:["🟦","🔺","⭐","🟢"] },
+  { seq:["⬆️","➡️","⬆️","➡️"], next:"⬆️", opts:["⬆️","➡️","⬇️","⬅️"] },
+  { seq:["🟢","🟢","🔴","🟢","🟢"], next:"🔴", opts:["🔴","🟢","🔵","🟡"] },
+  { seq:["⭐","🌙","⭐","🌙","⭐"], next:"🌙", opts:["🌙","⭐","☀️","🌈"] },
 ];
 const SEQ_VARS: Variation[] = range(30).map((i) => {
   const b = SEQ_BANK[i % SEQ_BANK.length];
@@ -332,16 +332,16 @@ const DECOR_VARS: Variation[] = range(30).map((i) => ({ id:`dc-${i+1}`, payload:
 
 // 16. ONOMATOPEIAS ANIMADAS — som → escolher figura (mecânica única: emissor de som textual + opções visuais grandes)
 const ONOMA_BANK = [
-  { som:"Au-au!", correta:{emoji:"🐶",nome:"Cachorro"}, distratoras:[{emoji:"🐱",nome:"Gato"},{emoji:"🐮",nome:"Vaca"}] },
-  { som:"Muuu!", correta:{emoji:"🐮",nome:"Vaca"}, distratoras:[{emoji:"🐷",nome:"Porco"},{emoji:"🐔",nome:"Galinha"}] },
-  { som:"Bi-bi!", correta:{emoji:"🚗",nome:"Carro"}, distratoras:[{emoji:"🚲",nome:"Bike"},{emoji:"✈️",nome:"Avião"}] },
-  { som:"Miau!", correta:{emoji:"🐱",nome:"Gato"}, distratoras:[{emoji:"🐶",nome:"Cachorro"},{emoji:"🐭",nome:"Rato"}] },
-  { som:"Quá-quá!", correta:{emoji:"🦆",nome:"Pato"}, distratoras:[{emoji:"🐦",nome:"Pássaro"},{emoji:"🦉",nome:"Coruja"}] },
-  { som:"Có-có-có!", correta:{emoji:"🐔",nome:"Galinha"}, distratoras:[{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"}] },
-  { som:"Oinc-oinc!", correta:{emoji:"🐷",nome:"Porco"}, distratoras:[{emoji:"🐮",nome:"Vaca"},{emoji:"🐶",nome:"Cachorro"}] },
-  { som:"Bééé!", correta:{emoji:"🐑",nome:"Ovelha"}, distratoras:[{emoji:"🐐",nome:"Cabra"},{emoji:"🐮",nome:"Vaca"}] },
-  { som:"Mééé!", correta:{emoji:"🐐",nome:"Cabra"}, distratoras:[{emoji:"🐑",nome:"Ovelha"},{emoji:"🐷",nome:"Porco"}] },
-  { som:"Pi-pi!", correta:{emoji:"🐥",nome:"Pintinho"}, distratoras:[{emoji:"🐔",nome:"Galinha"},{emoji:"🦆",nome:"Pato"}] },
+  { som:"Au-au!", correta:{emoji:"🐶",nome:"Cachorro"}, distratoras:[{emoji:"🐱",nome:"Gato"},{emoji:"🐮",nome:"Vaca"},{emoji:"🐷",nome:"Porco"}] },
+  { som:"Muuu!", correta:{emoji:"🐮",nome:"Vaca"}, distratoras:[{emoji:"🐷",nome:"Porco"},{emoji:"🐔",nome:"Galinha"},{emoji:"🐑",nome:"Ovelha"}] },
+  { som:"Bi-bi!", correta:{emoji:"🚗",nome:"Carro"}, distratoras:[{emoji:"🚲",nome:"Bike"},{emoji:"✈️",nome:"Avião"},{emoji:"🚂",nome:"Trem"}] },
+  { som:"Miau!", correta:{emoji:"🐱",nome:"Gato"}, distratoras:[{emoji:"🐶",nome:"Cachorro"},{emoji:"🐭",nome:"Rato"},{emoji:"🦉",nome:"Coruja"}] },
+  { som:"Quá-quá!", correta:{emoji:"🦆",nome:"Pato"}, distratoras:[{emoji:"🐦",nome:"Pássaro"},{emoji:"🦉",nome:"Coruja"},{emoji:"🐔",nome:"Galinha"}] },
+  { som:"Có-có-có!", correta:{emoji:"🐔",nome:"Galinha"}, distratoras:[{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"},{emoji:"🐥",nome:"Pintinho"}] },
+  { som:"Oinc-oinc!", correta:{emoji:"🐷",nome:"Porco"}, distratoras:[{emoji:"🐮",nome:"Vaca"},{emoji:"🐶",nome:"Cachorro"},{emoji:"🐐",nome:"Cabra"}] },
+  { som:"Bééé!", correta:{emoji:"🐑",nome:"Ovelha"}, distratoras:[{emoji:"🐐",nome:"Cabra"},{emoji:"🐮",nome:"Vaca"},{emoji:"🐷",nome:"Porco"}] },
+  { som:"Mééé!", correta:{emoji:"🐐",nome:"Cabra"}, distratoras:[{emoji:"🐑",nome:"Ovelha"},{emoji:"🐷",nome:"Porco"},{emoji:"🐮",nome:"Vaca"}] },
+  { som:"Pi-pi!", correta:{emoji:"🐥",nome:"Pintinho"}, distratoras:[{emoji:"🐔",nome:"Galinha"},{emoji:"🦆",nome:"Pato"},{emoji:"🐓",nome:"Galo"}] },
 ];
 const ONOMA_VARS: Variation[] = range(30).map((i) => {
   const b = ONOMA_BANK[i % ONOMA_BANK.length];
@@ -366,14 +366,14 @@ const SOPRO_VARS: Variation[] = range(30).map((i) => {
 
 // 18. SONS DO CORPO / PAROMATOPEIAS — som → ação correta
 const CORPO_BANK = [
-  { som:"Atchim!", correta:"😤 Espirrar", opts:["😴 Dormir","🍽️ Comer"] },
-  { som:"Nhac!",   correta:"🍎 Morder",  opts:["💧 Beber","👋 Acenar"] },
-  { som:"Glub-glub!", correta:"💧 Beber", opts:["😤 Espirrar","🍎 Morder"] },
-  { som:"Hum-hum!", correta:"😋 Saborear", opts:["😴 Dormir","🤧 Tossir"] },
-  { som:"Cof-cof!", correta:"🤧 Tossir", opts:["😤 Espirrar","💧 Beber"] },
-  { som:"Zzzz...", correta:"😴 Dormir", opts:["🏃 Correr","🍎 Morder"] },
-  { som:"Toc-toc!", correta:"🚪 Bater na porta", opts:["👋 Acenar","🍽️ Comer"] },
-  { som:"Plaft!",   correta:"👏 Bater palma", opts:["🦶 Pisar","🚪 Bater na porta"] },
+  { som:"Atchim!", correta:"😤 Espirrar", opts:["😴 Dormir","🍽️ Comer","🏃 Correr"] },
+  { som:"Nhac!",   correta:"🍎 Morder",  opts:["💧 Beber","👋 Acenar","😴 Dormir"] },
+  { som:"Glub-glub!", correta:"💧 Beber", opts:["😤 Espirrar","🍎 Morder","🤧 Tossir"] },
+  { som:"Hum-hum!", correta:"😋 Saborear", opts:["😴 Dormir","🤧 Tossir","👋 Acenar"] },
+  { som:"Cof-cof!", correta:"🤧 Tossir", opts:["😤 Espirrar","💧 Beber","😴 Dormir"] },
+  { som:"Zzzz...", correta:"😴 Dormir", opts:["🏃 Correr","🍎 Morder","👏 Bater palma"] },
+  { som:"Toc-toc!", correta:"🚪 Bater na porta", opts:["👋 Acenar","🍽️ Comer","🦶 Pisar"] },
+  { som:"Plaft!",   correta:"👏 Bater palma", opts:["🦶 Pisar","🚪 Bater na porta","😤 Espirrar"] },
 ];
 const CORPO_VARS: Variation[] = range(30).map((i) => {
   const b = CORPO_BANK[i % CORPO_BANK.length];
@@ -432,14 +432,14 @@ const TRIAGEM_VARS: Variation[] = range(30).map((i) => ({ id:`tc-${i+1}`, payloa
 
 // 23. EXPRESSÃO E EMOÇÃO — pareamento rosto × situação
 const EMOCAO_BANK = [
-  { cena:"Ganhou um presente 🎁", correta:"😄 Feliz", opts:["😢 Triste","😡 Bravo"] },
-  { cena:"Quebrou o brinquedo 💔", correta:"😢 Triste", opts:["😄 Feliz","😲 Surpreso"] },
-  { cena:"Alguém pegou seu lanche", correta:"😡 Bravo", opts:["😄 Feliz","😨 Medo"] },
-  { cena:"Viu uma surpresa atrás da porta", correta:"😲 Surpreso", opts:["😴 Sono","😢 Triste"] },
-  { cena:"Está sozinho no escuro", correta:"😨 Medo", opts:["😄 Feliz","😡 Bravo"] },
-  { cena:"Ganhou abraço da família 🤗", correta:"😄 Feliz", opts:["😨 Medo","😡 Bravo"] },
-  { cena:"Perdeu o cachorrinho", correta:"😢 Triste", opts:["😲 Surpreso","😄 Feliz"] },
-  { cena:"Acordou cedo demais", correta:"😴 Sono", opts:["😄 Feliz","😲 Surpreso"] },
+  { cena:"Ganhou um presente 🎁", correta:"😄 Feliz", opts:["😢 Triste","😡 Bravo","😨 Medo"] },
+  { cena:"Quebrou o brinquedo 💔", correta:"😢 Triste", opts:["😄 Feliz","😲 Surpreso","😡 Bravo"] },
+  { cena:"Alguém pegou seu lanche", correta:"😡 Bravo", opts:["😄 Feliz","😨 Medo","😴 Sono"] },
+  { cena:"Viu uma surpresa atrás da porta", correta:"😲 Surpreso", opts:["😴 Sono","😢 Triste","😡 Bravo"] },
+  { cena:"Está sozinho no escuro", correta:"😨 Medo", opts:["😄 Feliz","😡 Bravo","😲 Surpreso"] },
+  { cena:"Ganhou abraço da família 🤗", correta:"😄 Feliz", opts:["😨 Medo","😡 Bravo","😢 Triste"] },
+  { cena:"Perdeu o cachorrinho", correta:"😢 Triste", opts:["😲 Surpreso","😄 Feliz","😴 Sono"] },
+  { cena:"Acordou cedo demais", correta:"😴 Sono", opts:["😄 Feliz","😲 Surpreso","😡 Bravo"] },
 ];
 const EMOCAO_VARS: Variation[] = range(30).map((i) => {
   const b = EMOCAO_BANK[i % EMOCAO_BANK.length];
