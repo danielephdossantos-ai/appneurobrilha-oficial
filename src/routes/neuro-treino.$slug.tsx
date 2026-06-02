@@ -4,6 +4,7 @@ import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles,
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
+import { objetoImg } from "@/data/neuro-treino/objetos";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
@@ -284,12 +285,30 @@ function SonsIniciais({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-7xl font-black text-primary mb-6">{p.letra}</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {p.options.map((o:any, i:number) => (
-          <button key={i} onClick={()=>onDone(o.nome === p.correctName)} className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary hover:scale-105 transition-all">
-            <div className="text-5xl mb-2">{o.emoji}</div>
-            <div className="font-bold text-sm">{o.nome}</div>
-          </button>
-        ))}
+        {p.options.map((o:any, i:number) => {
+          const img = objetoImg(o.nome);
+          return (
+            <button
+              key={i}
+              onClick={()=>onDone(o.nome === p.correctName)}
+              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-primary hover:scale-105 transition-all flex flex-col items-center gap-2"
+            >
+              {img ? (
+                <img
+                  src={img}
+                  alt={o.nome}
+                  width={128}
+                  height={128}
+                  loading="lazy"
+                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                />
+              ) : (
+                <div className="text-5xl">{o.emoji}</div>
+              )}
+              <div className="font-bold text-sm">{o.nome}</div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
