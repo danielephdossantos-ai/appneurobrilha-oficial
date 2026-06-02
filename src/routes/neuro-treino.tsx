@@ -27,7 +27,7 @@ import worldOceano from "@/assets/neuro-treino/worlds/oceano.jpg";
 import worldFloresta from "@/assets/neuro-treino/worlds/floresta.jpg";
 import worldCastelo from "@/assets/neuro-treino/worlds/castelo.jpg";
 import worldDefault from "@/assets/neuro-treino/worlds/default.jpg";
-import WorldCreatures from "@/components/neuro-treino/WorldCreatures";
+
 
 // Ícones por categoria
 import icSonsIniciais from "@/assets/neuro-treino/icons/sons-iniciais.png";
