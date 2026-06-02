@@ -31,8 +31,14 @@ export class PedagogyEngine {
 
   static generateDailyRoutine(
     day: number,
-    childProfile: Record<string, unknown> & { tempo_atencao_min?: number },
-    activities: Array<Record<string, unknown> & { category?: string; name?: string; id?: string; subcategory?: string }>
+    childProfile: { tempo_atencao_min?: number | null } & Record<string, unknown>,
+    activities: Array<{
+      id?: string;
+      name?: string;
+      category?: string;
+      subcategory?: string;
+      [k: string]: unknown;
+    }>
   ): JourneyBlock[] {
     // Deterministicamente escolhe atividades baseadas no dia para cobrir os 365 dias.
     // Usa multiplicador primo para evitar repetição óbvia quando N < 365.
@@ -42,7 +48,6 @@ export class PedagogyEngine {
 
     const getDeterministic = <T,>(arr: T[], offset: number): T | null => {
       if (arr.length === 0) return null;
-      // Mistura linear: (seed * 31 + offset * 17) — boa dispersão para conjuntos pequenos
       return arr[(seed * 31 + offset * 17) % arr.length];
     };
 
