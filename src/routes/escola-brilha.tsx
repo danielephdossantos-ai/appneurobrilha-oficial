@@ -1131,13 +1131,13 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     }
   };
 
-  // Reinicia cronômetro quando entra na etapa de "opcoes" (ou passo 5 na EI)
+  // Reinicia cronômetro quando entra na etapa de exercício (FAZER SOZINHO = passo 6)
   useEffect(() => {
-    if (aula.etapa === "opcoes" || (aula.isEI && eiStep === 5)) {
+    if (aula.etapa === "opcoes" || (aula.guided && eiStep >= 6) || (aula.isEI && eiStep === 5)) {
       startRef.current = Date.now();
       scoredRef.current = false;
     }
-  }, [aula.etapa, eiStep]);
+  }, [aula.etapa, aula.guided, aula.isEI, eiStep]);
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
