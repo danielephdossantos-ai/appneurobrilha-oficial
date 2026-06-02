@@ -7,17 +7,24 @@ export class LinguisticsGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
-      // ciências/natureza para EI = reconhecer animais; português = vogais/primeira letra
       if (input.subject === 'ciencias') return 'ei-animal';
       const r = Math.random();
       if (r < 0.5) return 'ei-vogal';
       return 'ei-animal';
     }
+    // SÉRIE define o tipo de atividade — NUNCA misturar séries.
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "interpretation";
-    if (input.difficulty < 0.3) return "phonemes";
-    if (input.difficulty < 0.6) return "syllables";
-    return "reading";
+    if (gradeNum <= 1) return "phonemes";
+    if (gradeNum <= 3) return "syllables";
+    return "reading"; // 4º e 5º
+  }
+
+  // Nível lexical estritamente por série
+  private wordLevelForGrade(gradeNum: number): 'beginner' | 'intermediate' | 'advanced' {
+    if (gradeNum <= 2) return 'beginner';
+    if (gradeNum <= 4) return 'intermediate';
+    return 'advanced';
   }
 
   protected getTitle(input: GeneratorInput): string {
