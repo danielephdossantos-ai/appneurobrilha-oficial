@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { supabase } from "@/database/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { KidCard } from "@/components/ui/KidCard";
 import { KidButton } from "@/components/ui/KidButton";
