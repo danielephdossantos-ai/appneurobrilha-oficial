@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
+import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 
 export const Route = createFileRoute("/rotina")({
   component: Rotina,

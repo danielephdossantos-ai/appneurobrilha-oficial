@@ -6,6 +6,7 @@ import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { motion, AnimatePresence } from "framer-motion";
+import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
