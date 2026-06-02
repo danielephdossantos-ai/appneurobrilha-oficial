@@ -1,9 +1,11 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
+import { useHiperfoco } from "@/context/HiperfocoContext";
+import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
   component: NeuroAtividade,
@@ -14,9 +16,15 @@ function NeuroAtividade() {
   const navigate = useNavigate();
   const meta = CATEGORIAS[slug];
   const vars = VARIATIONS[slug];
+  const { hiperfoco } = useHiperfoco();
 
   const [index, setIndex] = useState(0);
   const [acertos, setAcertos] = useState(0);
+
+  // Gate: sem hiperfoco selecionado → manda para a tela de configuração
+  if (!hiperfoco) {
+    return <Navigate to="/neuro-treino/configurar" search={{ next: slug }} />;
+  }
 
   if (!meta || !vars) {
     return (
@@ -30,29 +38,44 @@ function NeuroAtividade() {
   }
 
   const variation = vars[index % vars.length];
+  const seed = `${slug}:${variation.id}`;
+  const elemento = pickElemento(hiperfoco, seed);
+  const instrucaoTematica = applyHiperfoco(meta.instrucao, hiperfoco, seed);
 
   const onConcluir = (correto: boolean) => {
     if (correto) {
       setAcertos((a) => a + 1);
-      toast.success("Boa! +1 estrela ⭐");
+      toast.success(pipFraseAcerto(hiperfoco));
     } else {
-      toast("Tudo bem, vamos tentar de novo! 💪");
+      toast(pipFraseIncentivo(hiperfoco));
     }
     setTimeout(() => setIndex((i) => i + 1), 600);
   };
 
   return (
     <Shell>
-      <div className="flex items-center gap-3 mb-2">
+      <div className="flex items-center justify-between gap-3 mb-2">
         <Link to="/neuro-treino" className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground">
           <ArrowLeft size={16} /> Voltar
         </Link>
+        <Link
+          to="/neuro-treino/configurar"
+          search={{ next: slug }}
+          className="flex items-center gap-1 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20"
+        >
+          {hiperfoco.emoji} Hiperfoco: {hiperfoco.label} <span className="text-primary">· trocar</span>
+        </Link>
       </div>
-      <PageHeader emoji={meta.emoji} title={meta.nome} subtitle={meta.instrucao} />
+      <PageHeader emoji={meta.emoji} title={meta.nome} subtitle={instrucaoTematica} />
 
       <div className="flex items-center justify-between mb-4 text-sm font-bold">
         <span className="text-muted-foreground">Exercício {(index % vars.length) + 1} de {vars.length}</span>
         <span className="text-success">⭐ {acertos}</span>
+      </div>
+
+      <div className="mb-3 rounded-2xl bg-card border-2 border-dashed border-primary/30 px-4 py-2 text-sm text-center">
+        <span className="font-bold text-primary">{hiperfoco.emoji} {elemento}</span>
+        <span className="text-muted-foreground"> está aqui treinando com você!</span>
       </div>
 
       <Card className={`bg-gradient-to-br ${meta.cor} border-2`}>
@@ -67,6 +90,7 @@ function NeuroAtividade() {
     </Shell>
   );
 }
+
 
 // ====================================================================
 // Renderizador — escolhe a mecânica única conforme a categoria
