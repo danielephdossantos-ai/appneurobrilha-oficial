@@ -395,19 +395,35 @@ function Escola() {
       </div>
 
       {ei && (
-        <Card className="mb-4 bg-gradient-to-br from-sun/20 to-petal/15 border-sun/30">
-          <div className="flex items-start gap-3">
-            <div className="text-4xl">🌱</div>
-            <div>
-              <div className="font-extrabold text-lg">Pequeninos em descoberta!</div>
-              <div className="text-sm text-muted-foreground">
-                Nesta fase ensinamos com <b>figuras, cores e sons</b>. Sem textos longos, sem contas — só
-                brincar aprendendo: vogais, contar até 5, cores, formas e bichinhos.
-              </div>
+        <div className="mb-4 flex items-end gap-3 md:gap-4">
+          {/* Avatar do mascote apontando para o balão */}
+          <div className="relative shrink-0">
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking">
+              🐦
+            </div>
+            <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow">
+              PROFª PIPA
             </div>
           </div>
-        </Card>
+
+          {/* Balão de fala estilo HQ */}
+          <div className="relative flex-1">
+            <div className="relative bg-white rounded-3xl border-[3px] border-foreground/80 px-5 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,0.85)]">
+              {/* Rabicho do balão apontando para o avatar (à esquerda) */}
+              <div className="absolute -left-3 bottom-5 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-foreground/80" />
+              <div className="absolute -left-[9px] bottom-[22px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[11px] border-r-white" />
+
+              <p className="font-extrabold text-lg md:text-xl text-primary leading-snug">
+                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}! 🌱
+              </p>
+              <p className="text-sm md:text-base text-foreground/80 mt-1 font-bold">
+                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA CARINHA LÁ EMBAIXO! 👇
+              </p>
+            </div>
+          </div>
+        </div>
       )}
+
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
