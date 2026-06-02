@@ -1515,12 +1515,24 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const naoEntendi = async () => {
     if (reexplaining) return;
     setReexplaining(true);
+
+    // Lógica de 3 níveis: Fácil, Médio, Difícil
+    // Se não entendeu, tentamos simplificar o nível ou mudar o método
+    let nextLevel = explanationLevel;
+    if (explanationLevel === "medium") nextLevel = "easy";
+    else if (explanationLevel === "hard") nextLevel = "medium";
+    else {
+      // Já está no fácil, apenas incrementa o método para a IA mudar a abordagem
+      setMetodoIdx((i) => i + 1);
+    }
+    setExplanationLevel(nextLevel);
+
     const metodo = METODOS[metodoIdx % METODOS.length];
     try {
       const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
         body: {
           mode: "escola",
-          child: { nome: childNome, hiperfoco, serie: aula.grade },
+          child: { nome: childNome, hiperfoco, serie: aula.grade, diagnostico: activeChild?.diagnostico, perfil: activeChild?.perfil, observacoes: activeChild?.observacoes },
           mascot: activeMascot ? {
             name: activeMascot.mascot?.name,
             description: activeMascot.mascot?.description,
@@ -1535,6 +1547,8 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           systemAnswer: aula.resposta_correta,
           miniGameType: aula.miniGameType,
           reexplainMethod: metodo.id,
+          explanationLevel: nextLevel,
+          isFirstExplanation: false // Já passou da primeira
         },
       });
       if (error) throw error;
