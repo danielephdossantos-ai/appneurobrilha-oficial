@@ -1046,6 +1046,9 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
       )}
     </div>
   );
+}
+
+
 
 function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
 
