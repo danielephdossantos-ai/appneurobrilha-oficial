@@ -26,108 +26,153 @@ import pintinho from "@/assets/neuro-treino/objetos/pintinho.png";
 import galo from "@/assets/neuro-treino/objetos/galo.png";
 import passaro from "@/assets/neuro-treino/objetos/passaro.png";
 import coruja from "@/assets/neuro-treino/objetos/coruja.png";
+import borboleta from "@/assets/neuro-treino/objetos/borboleta.png";
+import peixe from "@/assets/neuro-treino/objetos/peixe.png";
+import dinossauro from "@/assets/neuro-treino/objetos/dinossauro.png";
+import coracao from "@/assets/neuro-treino/objetos/coracao.png";
+import sapo from "@/assets/neuro-treino/objetos/sapo.png";
+import raposa from "@/assets/neuro-treino/objetos/raposa.png";
+import coelho from "@/assets/neuro-treino/objetos/coelho.png";
+import panda from "@/assets/neuro-treino/objetos/panda.png";
+import leao from "@/assets/neuro-treino/objetos/leao.png";
+import tigre from "@/assets/neuro-treino/objetos/tigre.png";
+import ursinho from "@/assets/neuro-treino/objetos/ursinho.png";
+import presente from "@/assets/neuro-treino/objetos/presente.png";
+import princesa from "@/assets/neuro-treino/objetos/princesa.png";
+import heroi from "@/assets/neuro-treino/objetos/heroi.png";
+import robo from "@/assets/neuro-treino/objetos/robo.png";
+import diamante from "@/assets/neuro-treino/objetos/diamante.png";
+import fogo from "@/assets/neuro-treino/objetos/fogo.png";
+import morango from "@/assets/neuro-treino/frutas/morango.png";
+import uva from "@/assets/neuro-treino/frutas/uva.png";
+import cenoura from "@/assets/neuro-treino/vegetais/cenoura.png";
+import brocolis from "@/assets/neuro-treino/vegetais/brocolis.png";
+import camiseta from "@/assets/neuro-treino/roupas/camiseta.png";
+import feliz from "@/assets/neuro-treino/emocoes/feliz.png";
+import triste from "@/assets/neuro-treino/emocoes/triste.png";
+import bravo from "@/assets/neuro-treino/emocoes/bravo.png";
+import surpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
+import medo from "@/assets/neuro-treino/emocoes/medo.png";
+import sono from "@/assets/neuro-treino/emocoes/sono.png";
 
 export const OBJETO_IMG: Record<string, string> = {
-  // Por NOME
-  BOLA: bola,
-  GATO: gato,
-  "MAÇÃ": maca,
-  MACA: maca,
-  "ÁRVORE": arvore,
-  ARVORE: arvore,
-  CASA: casa,
-  ABELHA: abelha,
-  FLOR: flor,
-  CARRO: carro,
-  OUTRO: carro,
-  TREM: trem,
-  PATO: pato,
-  CACHORRO: cachorro,
-  DOG: cachorro,
-  LUA: lua,
-  ESTRELA: estrela,
-  SOL: sol,
-  CHUVA: chuva,
-  RATO: rato,
-  BANANA: banana,
-  VACA: vaca,
-  PORCO: porco,
-  GALINHA: galinha,
-  OVELHA: ovelha,
-  CABRA: cabra,
-  PINTINHO: pintinho,
-  GALO: galo,
-  "PÁSSARO": passaro,
-  PASSARO: passaro,
-  CORUJA: coruja,
-  BIKE: carro,
-  "AVIÃO": carro,
-  AVIAO: carro,
+  BOLA: bola, GATO: gato, "MAÇÃ": maca, MACA: maca, "ÁRVORE": arvore, ARVORE: arvore,
+  CASA: casa, ABELHA: abelha, FLOR: flor, CARRO: carro, OUTRO: carro, TREM: trem,
+  PATO: pato, CACHORRO: cachorro, DOG: cachorro, LUA: lua, ESTRELA: estrela, SOL: sol,
+  CHUVA: chuva, RATO: rato, BANANA: banana, VACA: vaca, PORCO: porco, GALINHA: galinha,
+  OVELHA: ovelha, CABRA: cabra, PINTINHO: pintinho, GALO: galo,
+  "PÁSSARO": passaro, PASSARO: passaro, CORUJA: coruja,
+  BIKE: carro, "AVIÃO": carro, AVIAO: carro,
+  BORBOLETA: borboleta, PEIXE: peixe, DINOSSAURO: dinossauro, "T-REX": dinossauro,
+  RAPTOR: dinossauro, "PTERODÁCTILO": passaro, "CORAÇÃO": coracao, CORACAO: coracao,
+  SAPO: sapo, RAPOSA: raposa, COELHO: coelho, PANDA: panda,
+  "LEÃO": leao, LEAO: leao, TIGRE: tigre, MACACO: panda,
+  URSINHO: ursinho, "URSO": ursinho, PRESENTE: presente, PRINCESA: princesa,
+  HEROI: heroi, "HERÓI": heroi, ROBO: robo, "ROBÔ": robo, DIAMANTE: diamante,
+  FOGO: fogo, TOCHA: fogo, "VULCÃO": fogo, VULCAO: fogo,
+  MORANGO: morango, UVA: uva, CENOURA: cenoura, BROCOLIS: brocolis, "BRÓCOLIS": brocolis,
+  CAMISETA: camiseta, ROUPA: camiseta,
+  FELIZ: feliz, TRISTE: triste, BRAVO: bravo, SURPRESO: surpreso, MEDO: medo, SONO: sono,
+  CREEPER: dinossauro, ZUMBI: dinossauro,
 };
 
 // Mapeia emojis para a mesma biblioteca de ilustrações premium
 export const EMOJI_IMG: Record<string, string> = {
-  "⚽": bola,
-  "🐱": gato,
-  "🐈": gato,
-  "🍎": maca,
-  "🍏": maca,
-  "🌳": arvore,
-  "🌲": arvore,
-  "🏠": casa,
-  "🏡": casa,
+  "⚽": bola, "🏀": bola,
+  "🐱": gato, "🐈": gato,
+  "🍎": maca, "🍏": maca,
+  "🌳": arvore, "🌲": arvore, "🌴": arvore,
+  "🏠": casa, "🏡": casa, "🏘️": casa,
   "🐝": abelha,
-  "🌸": flor,
-  "🌺": flor,
-  "🌷": flor,
-  "🌼": flor,
-  "🌻": flor,
-  "🚗": carro,
-  "🚙": carro,
-  "🚲": carro,
-  "✈️": carro,
-  "🚌": carro,
+  "🌸": flor, "🌺": flor, "🌷": flor, "🌼": flor, "🌻": flor,
+  "🚗": carro, "🚙": carro, "🚲": carro, "✈️": carro, "🚌": carro, "🏍️": carro, "🚑": carro,
   "🚂": trem,
   "🦆": pato,
-  "🐶": cachorro,
-  "🐕": cachorro,
+  "🐶": cachorro, "🐕": cachorro, "🐺": cachorro,
   "🌙": lua,
-  "⭐": estrela,
-  "🌟": estrela,
-  "☀️": sol,
-  "🌞": sol,
-  "🌧️": chuva,
-  "🌧": chuva,
-  "🐀": rato,
-  "🐭": rato,
-  "🍌": banana,
-  "🐮": vaca,
-  "🐄": vaca,
-  "🐷": porco,
-  "🐖": porco,
+  "⭐": estrela, "🌟": estrela, "✨": estrela,
+  "☀️": sol, "🌞": sol,
+  "🌧️": chuva, "🌧": chuva, "☁️": chuva, "💧": chuva, "🌊": chuva, "❄️": chuva, "🧊": chuva, "⛄": chuva,
+  "🐀": rato, "🐭": rato,
+  "🍌": banana, "🍋": banana,
+  "🐮": vaca, "🐄": vaca,
+  "🐷": porco, "🐖": porco,
   "🐔": galinha,
   "🐑": ovelha,
   "🐐": cabra,
-  "🐥": pintinho,
-  "🐤": pintinho,
+  "🐥": pintinho, "🐤": pintinho,
   "🐓": galo,
-  "🐦": passaro,
+  "🐦": passaro, "🦅": passaro,
   "🦉": coruja,
+  "🦋": borboleta,
+  "🐠": peixe, "🐟": peixe, "🐙": peixe, "🦀": peixe, "🐚": peixe,
+  "🦖": dinossauro,
+  "❤️": coracao, "💔": coracao, "🤗": coracao,
+  "🐸": sapo,
+  "🦊": raposa,
+  "🐰": coelho,
+  "🐼": panda, "🐨": panda, "🐵": panda,
+  "🦁": leao,
+  "🐯": tigre,
+  "🧸": ursinho,
+  "🎁": presente, "🎀": presente,
+  "👸": princesa,
+  "🦸": heroi, "🦸‍♂️": heroi, "🦸‍♀️": heroi,
+  "🤖": robo,
+  "💎": diamante,
+  "🔥": fogo, "🌋": fogo, "🕯️": fogo,
+  "🍓": morango,
+  "🍇": uva,
+  "🥕": cenoura,
+  "🥦": brocolis, "🥬": brocolis, "🥒": brocolis,
+  "👕": camiseta, "👖": camiseta, "🧦": camiseta, "👗": camiseta,
+  "😄": feliz, "😀": feliz, "😊": feliz, "🙂": feliz, "😋": feliz,
+  "😢": triste, "😭": triste, "🥺": triste,
+  "😡": bravo, "😠": bravo, "🤬": bravo,
+  "😲": surpreso, "😮": surpreso, "😯": surpreso,
+  "😨": medo, "😱": medo, "😰": medo,
+  "😴": sono, "💤": sono,
+  "🧟": dinossauro, "🟩": dinossauro,
+  "⛏️": diamante, "🗡️": diamante, "🛡️": diamante, "⚔️": diamante,
+  "🥚": ovelha, "🦴": ursinho, "🌱": arvore, "🌿": arvore, "🍄": flor,
+  "🐛": abelha, "🐞": abelha, "🦗": abelha, "🐌": abelha,
+  "🪐": lua, "☄️": estrela, "👽": robo, "🚀": carro,
+  "⛵": carro, "🛏️": casa, "🪑": casa, "📚": casa, "🐿️": raposa,
+  "⛱️": sol, "🎈": presente, "💨": chuva,
+  "🎭": presente, "⚡": fogo, "⚖️": diamante,
+  "👏": feliz, "😤": bravo, "🤧": medo,
+  "🚪": casa, "🦶": ursinho, "🍽️": maca, "🏃": heroi, "👋": feliz,
+  "🌈": estrela, "🌶️": fogo,
+  "🎲": presente, "🎯": estrela,
 };
 
 /** Retorna a imagem do objeto pelo nome, ou undefined se não houver. */
 export function objetoImg(nome?: string): string | undefined {
   if (!nome) return undefined;
-  return OBJETO_IMG[nome.toUpperCase()];
+  // remove emoji prefix se houver ("😄 Feliz" → "Feliz")
+  const limpo = nome.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}\uFE0F]/gu, "").trim();
+  return OBJETO_IMG[limpo.toUpperCase()] ?? OBJETO_IMG[nome.toUpperCase()];
 }
 
 /** Retorna a imagem premium pelo emoji, ou undefined. */
 export function emojiImg(emoji?: string): string | undefined {
   if (!emoji) return undefined;
-  return EMOJI_IMG[emoji.trim()];
+  const t = emoji.trim();
+  if (EMOJI_IMG[t]) return EMOJI_IMG[t];
+  // se vier "😄 Feliz" tenta cada parte
+  for (const part of t.split(/\s+/)) {
+    if (EMOJI_IMG[part]) return EMOJI_IMG[part];
+  }
+  return undefined;
 }
 
 /** Tenta resolver imagem por emoji OU nome — útil para activities mistas. */
 export function ilustracao(emoji?: string, nome?: string): string | undefined {
   return emojiImg(emoji) ?? objetoImg(nome);
+}
+
+/** Remove emojis de uma string, deixando só o texto. */
+export function semEmoji(s?: string): string {
+  if (!s) return "";
+  return s.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}\uFE0F]/gu, "").trim();
 }
