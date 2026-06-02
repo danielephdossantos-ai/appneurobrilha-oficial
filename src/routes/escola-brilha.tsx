@@ -474,12 +474,13 @@ function Escola() {
 }
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco, tier }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier }) {
+function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const completedRef = useRef<boolean>(false);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
