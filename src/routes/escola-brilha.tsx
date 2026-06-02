@@ -750,28 +750,22 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
 
         {eiStep === 5 && (
-          <div className="w-full space-y-6">
-            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
-            <div className="grid grid-cols-1 gap-4">
-              {sortedOpcoes.map((opt: string, i: number) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (opt.toUpperCase() === (palavraFoco || "").toUpperCase()) {
-                      setEiStep(6);
-                      toast.success("Isso mesmo!");
-                    } else {
-                      toast.error("Ops! Vamos ver de novo para aprender?");
-                      setEiStep(1); // REFORÇO logic
-                    }
-                  }}
-                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl font-black uppercase text-center shadow-soft"
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
+          <EIMiniGame
+            aula={{
+              ...aula,
+              progression: "image-word",
+              opcoes: sortedOpcoes,
+              resposta_correta: palavraFoco
+            }}
+            onAnswer={(isCorrect) => {
+              if (isCorrect) {
+                setTimeout(() => setEiStep(6), 1500);
+              } else {
+                // Se errar muito, volta pro início da aula (REFORÇO)
+                // O EIMiniGame já trata o feedback visual/sonoro e ABA
+              }
+            }}
+          />
         )}
 
 
