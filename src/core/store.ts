@@ -122,7 +122,7 @@ export interface AnamnesisData {
       tem_terapia: boolean;
     };
   };
-  internal_profile: Record<string, unknown>;
+  internal_profile: any;
   edit_count: number;
 }
 
@@ -202,7 +202,7 @@ export function useAppState() {
     mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
       const { error } = await supabase
         .from("children")
-        .update(patch)
+        .update(patch as any)
         .eq("id", id);
 
       if (error) throw error;
@@ -223,7 +223,7 @@ export function useAppState() {
 
   const addCoinsMutation = useMutation({
     mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
-      const { error } = await supabase.rpc("add_brilhocoins", {
+      const { error } = await (supabase as any).rpc("add_brilhocoins", {
         child_id: childId,
         amount: amount,
       });
