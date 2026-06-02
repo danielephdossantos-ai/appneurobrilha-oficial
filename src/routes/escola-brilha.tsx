@@ -71,20 +71,20 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", emoji: "📚", cor: "from-coral/30 to-coral/5", cenario: "📖✨", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", emoji: "🔢", cor: "from-sky/30 to-sky/5", cenario: "🧮✨", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", emoji: "🔬", cor: "from-success/20 to-success/5", cenario: "🧪🌱", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", emoji: "🏛️", cor: "from-sun/30 to-sun/5", cenario: "🏺🗺️", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", emoji: "🌍", cor: "from-lilac/30 to-lilac/5", cenario: "🗺️🧭", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", cenario: "🎨🌈", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", emoji: "🗣️", cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", cenario: "🅰️🎈", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Números", emoji: "🔢", cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", cenario: "🍎🍎", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Natureza", emoji: "🌳", cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", cenario: "🌳🦋", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", emoji: "🎨", cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", cenario: "🟦🔺🔵", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: "🐦", mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: "🐥", mascoteNome: "Professor Pip" },
 ] as const;
 
 function isEI(grade: string) {
