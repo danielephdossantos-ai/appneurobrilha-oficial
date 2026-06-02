@@ -15,7 +15,7 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep, explanationLevel, isFirstExplanation } = payload
 
     // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
@@ -100,35 +100,38 @@ serve(async (req) => {
 
       // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       // Quando a criança aperta "Não Entendi", trocamos a ABORDAGEM (não o conteúdo)
+      const explLevel = explanationLevel || "medium";
+      const levelInstruction = {
+        easy: "NÍVEL FÁCIL: Explicação extremamente simples, frases curtíssimas, foco em um único conceito por vez, linguagem muito lúdica.",
+        medium: "NÍVEL MÉDIO: Explicação equilibrada, introduz o conceito com clareza e um exemplo prático direto.",
+        hard: "NÍVEL DIFÍCIL: Explicação mais completa, relaciona com outros conceitos, usa vocabulário um pouco mais rico (dentro da faixa etária)."
+      }[explLevel as "easy" | "medium" | "hard"];
+
+      // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       const metodoBlock = reexplainMethod === "teacch"
         ? `🧩 MÉTODO TEACCH (Estruturado Visual — ideal para TEA):
            - Quebre em PASSOS NUMERADOS visuais (PASSO 1, PASSO 2, PASSO 3).
            - Use rotinas previsíveis: "PRIMEIRO... DEPOIS... POR ÚLTIMO...".
            - Seja LITERAL. Zero metáforas, zero figuras de linguagem.
-           - Cada etapa = uma ação concreta e finita. Sem ambiguidade.
-           - Use ícones/emojis fixos como âncoras visuais (📦 = caixa, ✅ = pronto).`
+           - Cada etapa = uma ação concreta e finita. Sem ambiguidade.`
         : reexplainMethod === "multisensorial"
         ? `🎨 MÉTODO MULTISSENSORIAL (Orton-Gillingham — ideal para Dislexia/TDAH):
            - Combine VER + OUVIR + TOCAR + FALAR em cada explicação.
            - Estique sons das letras: "MMMM-AAAA-MMMM-AAAA = MAMA".
            - Peça pra criança "desenhar no ar com o dedo" ou "bater palmas pra cada sílaba".
-           - Use ritmo, música, repetição rítmica.
            - Conecte letra → som → gesto → imagem em TODA explicação.`
         : reexplainMethod === "montessori"
         ? `🌱 MÉTODO MONTESSORI (Concreto/Manipulável — ideal para todos):
            - Use EXEMPLOS DO MUNDO REAL que a criança toca/vê todo dia.
            - "Imagine 3 maçãs na sua cozinha..." em vez de "3 + 2 = ?".
            - A criança DESCOBRE a resposta sozinha guiada por perguntas abertas.
-           - Use o HIPERFOCO (${child.hiperfoco || "interesse"}) como material concreto.
-           - Sem pressa, sem certo/errado — explore o conceito como brincadeira livre.`
-        : `MÉTODO PADRÃO: explicação didática direta.`;
+           - Use o HIPERFOCO (${child.hiperfoco || "interesse"}) como material concreto.`
+        : `MÉTODO PADRÃO: explicação didática direta personalizada.`;
 
       const reexplainInstruction = reexplainMethod
-        ? `\n\n⚠️ A CRIANÇA APERTOU "NÃO ENTENDI". Você JÁ explicou uma vez e não funcionou.
-           AGORA REEXPLIQUE O MESMO CONTEÚDO usando OBRIGATORIAMENTE o método abaixo.
-           NÃO repita as mesmas frases da primeira tentativa — mude TOTALMENTE a abordagem.
+        ? `\n\n⚠️ REEXPLICAÇÃO (ERRO DETECTADO). Mude totalmente a forma de explicar usando:
            ${metodoBlock}
-           Comece reconhecendo: "TUDO BEM NÃO ENTENDER! VAMOS DE OUTRO JEITO..."`
+           NÃO repita as frases anteriores. Use uma variação nova e criativa.`
         : "";
 
       const isAlfabetizacao = (isEarlyYears || isMid) && (subject === "portugues" || subject === "linguagem");
@@ -183,14 +186,18 @@ serve(async (req) => {
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
+      ${levelInstruction}
       ${reexplainInstruction}
 
-      Perfil do Aluno:
-      - Nome: ${child.nome || "Aluno"}
-      - Série: ${serie || "Não informada"}
-      - Hiperfoco: ${child.hiperfoco || "Geral"} (USE como ponte de engajamento!)
-      - Diagnóstico: ${child.diagnostico || "Geral"}
-      - Nível de Adaptação: ${nivelDesc}
+      REGRAS DE PERSONALIZAÇÃO (ANAMNESE):
+      - Use os dados abaixo para adaptar o vocabulário e o estilo:
+      - Diagnóstico: ${child.diagnostico || "Geral"} -> ${isTEA ? "Foco em previsibilidade e literalidade." : isTDAH ? "Foco em brevidade e estímulos constantes." : "Linguagem adaptada."}
+      - Perfil Sensorial: ${JSON.stringify(child.perfil || {})}
+      - Observações dos Pais: ${child.observacoes || "Nenhuma"}
+      - Nível de Adaptação Sugerido: ${nivelDesc}
+      - Nome da Criança: ${child.nome || "Aluno"}
+      - REGRA DE NOME: ${isFirstExplanation ? `Use o nome da criança no início ("Olá, ${child.nome}!")` : "NÃO use o nome da criança agora, ela já está imersa na aula."}
+      - HIPERFOCO: ${child.hiperfoco || "Geral"} (Obrigatório usar como ponte de engajamento!)
 
       DADOS DO SISTEMA (NÃO ALTERE — você ensina sobre isso):
       - Desafio: ${systemQuestion || "Nenhum"}
