@@ -571,7 +571,7 @@ function Escola() {
 
 
 
-function AulaView({ aula, setAula, childNome, hiperfoco, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const theme = tierTheme[tier];
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
