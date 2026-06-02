@@ -251,15 +251,22 @@ const MascotStorePage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {allDisplayMascots.map((mascot, index) => (
-              <MascotStoreCard 
-                key={mascot.id} 
-                mascot={mascot} 
-                isOwned={ownedMascotIds.includes(mascot.id)}
-                index={index}
-                showCollectionButton={true}
-              />
-            ))}
+            {allDisplayMascots.map((mascot, index) => {
+              const required = getRequiredCoins(mascot.id, mascot.name);
+              const unlocked = totalEarned >= required;
+              return (
+                <MascotStoreCard
+                  key={mascot.id}
+                  mascot={mascot}
+                  isOwned={ownedMascotIds.includes(mascot.id)}
+                  index={index}
+                  showCollectionButton={true}
+                  unlocked={unlocked}
+                  requiredCoins={required}
+                  currentCoins={totalEarned}
+                />
+              );
+            })}
           </AnimatePresence>
         </div>
       )}
@@ -271,6 +278,12 @@ const MascotStorePage: React.FC = () => {
           <p className="text-muted-foreground font-bold">Tente buscar por outro nome ou mudar o filtro.</p>
         </div>
       )}
+
+      <AnimatePresence>
+        {showEggHatch && activeChild?.id && (
+          <EggHatchCinematic childId={activeChild.id} onClose={() => setShowEggHatch(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
