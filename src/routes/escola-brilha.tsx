@@ -231,9 +231,19 @@ function Escola() {
     );
   }
 
+  const ei = isEI(selectedGrade);
+  const materiasVisiveis = ei ? materiasInfantil : materias;
+  const startMateriaId = ei ? "matematica" : "matematica";
+
   return (
     <Shell>
-      <PageHeader emoji="🎓" title="Escola Brilha" subtitle={`BNCC adaptada · Atualmente em: ${selectedGrade}`} />
+      <PageHeader
+        emoji="🎓"
+        title="Escola Brilha"
+        subtitle={ei
+          ? `Educação Infantil · Atividades simples e visuais para os pequenos 🌱`
+          : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
+      />
 
       <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
         <div className="flex gap-2 min-w-max">
@@ -253,36 +263,63 @@ function Escola() {
         </div>
       </div>
 
+      {ei && (
+        <Card className="mb-4 bg-gradient-to-br from-sun/20 to-petal/15 border-sun/30">
+          <div className="flex items-start gap-3">
+            <div className="text-4xl">🌱</div>
+            <div>
+              <div className="font-extrabold text-lg">Pequeninos em descoberta!</div>
+              <div className="text-sm text-muted-foreground">
+                Nesta fase ensinamos com <b>figuras, cores e sons</b>. Sem textos longos, sem contas — só
+                brincar aprendendo: vogais, contar até 5, cores, formas e bichinhos.
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
           <div className="text-5xl">{activeChild.avatar}</div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">Pronto para brilhar?</div>
-            <div className="text-sm text-muted-foreground">Escolha uma matéria do {selectedGrade} e vamos começar!</div>
+            <div className="font-extrabold text-lg">
+              {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {ei
+                ? "Escolha uma carinha lá embaixo 👇"
+                : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
+            </div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
               <div className="h-full bg-primary" style={{ width: "10%" }} />
             </div>
           </div>
-          <button onClick={() => carregarAula("matematica")} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
+          <button onClick={() => carregarAula(startMateriaId)} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
             <Play className="h-4 w-4" /> Começar
           </button>
         </div>
       </Card>
 
-      <h2 className="text-xl mb-4">Matérias</h2>
+      <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {materias.map((m) => (
+        {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
             className={`rounded-2xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow transition-all text-left`}>
-            <div className="text-4xl">{m.emoji}</div>
+            <div className="text-5xl">{m.emoji}</div>
             <div className="font-extrabold text-lg mt-2">{m.nome}</div>
-            <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+            {ei && m.descricao && (
+              <div className="text-xs text-muted-foreground mt-1">{m.descricao}</div>
+            )}
+            {!ei && (
+              <Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill>
+            )}
           </button>
         ))}
       </div>
     </Shell>
   );
 }
+
 
 function AulaView({ aula, setAula, childNome, hiperfoco }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string }) {
   const [acertou, setAcertou] = useState<null | boolean>(null);
