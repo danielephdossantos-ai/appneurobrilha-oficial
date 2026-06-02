@@ -577,21 +577,26 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   const [acertou, setAcertou] = useState<null | boolean>(null);
   const [tentativa, setTentativa] = useState<string | null>(null);
+  const [eiStep, setEiStep] = useState(1);
   const completedRef = useRef<boolean>(false);
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
 
-  // Reinicia cronômetro quando entra na etapa de "opcoes"
+  // Reinicia cronômetro quando entra na etapa de "opcoes" (ou passo 5 na EI)
   useEffect(() => {
-    if (aula.etapa === "opcoes") {
+    if (aula.etapa === "opcoes" || (aula.isEI && eiStep === 5)) {
       startRef.current = Date.now();
       scoredRef.current = false;
     }
-  }, [aula.etapa]);
+  }, [aula.etapa, eiStep]);
 
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
+    if (aula.isEI) {
+      if (eiStep < 5) return 'explanation';
+      return 'encouragement';
+    }
     if (aula.etapa === 'ensino') return 'explanation';
     if (aula.etapa === 'opcoes') return 'encouragement';
     return 'idle';
@@ -604,9 +609,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   };
 
   // Stepper pedagógico (6 passos visuais; reflete a etapa atual do motor)
-  const stepIndex = aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0;
+  const stepIndex = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 1 : aula.etapa === "demo" ? 2 : aula.etapa === "opcoes" ? 3 : 0);
   // 1 Tema (header) · 2 Explicação (ensino) · 3 Exemplo (demo) · 4 Atividade (opcoes) · 5 Feedback · 6 Reforço
-  const visualStep = aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1;
+  const visualStep = aula.isEI ? eiStep : (aula.etapa === "ensino" ? 2 : aula.etapa === "demo" ? 3 : aula.etapa === "opcoes" ? (acertou === null ? 4 : acertou ? 6 : 5) : 1);
+
 
   return (
     <Shell>
