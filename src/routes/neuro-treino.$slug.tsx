@@ -479,7 +479,7 @@ function Rimas({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Que palavra rima com</div>
       <div className="text-5xl font-black text-coral mb-6">{p.palavra}</div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl hover:border-coral hover:scale-105 transition-all">{o}</button>
         ))}
@@ -512,14 +512,30 @@ function Pedacinhos({ p, onDone }: any) {
 // ============== 5. Onde Está ==============
 function OndeEsta({ p, onDone }: any) {
   const cols = Math.ceil(Math.sqrt(p.grid.length));
+  const alvoImg = emojiImg(p.alvo);
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Encontre:</div>
-      <div className="text-5xl mb-4">{p.alvo}</div>
-      <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 64 }}>
-        {p.grid.map((e:string, i:number) => (
-          <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="text-3xl p-2 bg-card border-2 border-border rounded-lg hover:border-primary">{e}</button>
-        ))}
+      <div className="mb-4 flex justify-center">
+        {alvoImg ? (
+          <img src={alvoImg} alt="alvo" className="w-20 h-20 object-contain drop-shadow-md" />
+        ) : (
+          <div className="text-6xl">{p.alvo}</div>
+        )}
+      </div>
+      <div className="grid gap-2 mx-auto" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, maxWidth: cols * 72 }}>
+        {p.grid.map((e:string, i:number) => {
+          const img = emojiImg(e);
+          return (
+            <button key={i} onClick={()=>onDone(i === p.correctIndex)} className="aspect-square p-1.5 bg-card border-2 border-border rounded-lg hover:border-primary hover:scale-105 transition-all flex items-center justify-center">
+              {img ? (
+                <img src={img} alt="" className="w-full h-full object-contain" loading="lazy" />
+              ) : (
+                <span className="text-3xl">{e}</span>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -568,9 +584,14 @@ function CadeOPar({ p, onDone }: any) {
     <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
+        const img = emojiImg(c.v);
         return (
-          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl text-4xl border-2 transition-all ${show ? "bg-card border-primary" : "bg-primary/20 border-border"}`}>
-            {show ? c.v : "?"}
+          <button key={i} onClick={()=>handleClick(i)} className={`aspect-square rounded-xl border-2 transition-all flex items-center justify-center p-2 ${show ? "bg-card border-primary" : "bg-gradient-to-br from-primary/30 to-primary/10 border-border"}`}>
+            {show ? (
+              img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{c.v}</span>
+            ) : (
+              <span className="text-3xl text-primary/70">?</span>
+            )}
           </button>
         );
       })}
@@ -640,11 +661,21 @@ function FocoSustentado({ p, onDone }: any) {
     else setMissed(m=>m+1);
     setK(k+1);
   };
+  const alvoImg = emojiImg(p.alvo);
+  const atual = p.stream[k];
+  const atualImg = emojiImg(atual);
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Alvo: <span className="text-3xl">{p.alvo}</span></div>
-      <button onClick={handleTap} className="text-9xl p-8 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95">
-        {p.stream[k] ?? "✅"}
+      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-2">
+        Alvo:
+        {alvoImg ? <img src={alvoImg} alt="alvo" className="w-12 h-12 object-contain" /> : <span className="text-3xl">{p.alvo}</span>}
+      </div>
+      <button onClick={handleTap} className="p-6 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95 w-48 h-48 flex items-center justify-center">
+        {atualImg ? (
+          <img src={atualImg} alt="" className="w-full h-full object-contain" />
+        ) : (
+          <span className="text-9xl">{atual ?? "✅"}</span>
+        )}
       </button>
       <div className="text-sm text-muted-foreground">Acertos: <b className="text-success">{score}</b> · Enganos: <b className="text-destructive">{missed}</b></div>
       <div className="text-xs text-muted-foreground mt-1">{k}/{p.stream.length}</div>
@@ -799,7 +830,7 @@ function Onomatopeias({ p, onDone }: any) {
         <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Som</div>
         <div className="text-5xl font-black text-coral">{p.som}</div>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.options.map((o:any, i:number) => {
           const img = ilustracao(o.emoji, o.nome);
           return (
@@ -872,7 +903,7 @@ function SonsCorpo({ p, onDone }: any) {
     <div className="text-center">
       <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1">🔊 Ouça</div>
       <div className="text-5xl font-black text-coral mb-6">"{p.som}"</div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.opts.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all">{o}</button>
         ))}
@@ -1017,19 +1048,37 @@ function TriagemCategorias({ p, onDone }: any) {
   return (
     <div className="text-center">
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
-        {p.itens.map((it:any, i:number) => assigned[i] ? null : (
-          <div key={i} draggable onDragStart={()=>setDragging(i)} className="text-4xl p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing">{it.e}</div>
-        ))}
+        {p.itens.map((it:any, i:number) => {
+          if (assigned[i]) return null;
+          const img = emojiImg(it.e);
+          return (
+            <div key={i} draggable onDragStart={()=>setDragging(i)} className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing w-16 h-16 flex items-center justify-center">
+              {img ? <img src={img} alt="" className="w-full h-full object-contain" /> : <span className="text-4xl">{it.e}</span>}
+            </div>
+          );
+        })}
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {p.caixas.map((c:any) => (
-          <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
-            <div className="font-black mb-2">{c.emoji} {c.nome}</div>
-            <div className="flex flex-wrap gap-1 justify-center">
-              {p.itens.map((it:any, i:number) => assigned[i] === c.nome ? <span key={i} className="text-3xl">{it.e}</span> : null)}
+        {p.caixas.map((c:any) => {
+          const caixaImg = emojiImg(c.emoji);
+          return (
+            <div key={c.nome} onDragOver={(e)=>e.preventDefault()} onDrop={()=>drop(c.nome)} className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3">
+              <div className="font-black mb-2 flex items-center justify-center gap-2">
+                {caixaImg ? <img src={caixaImg} alt="" className="w-7 h-7 object-contain" /> : <span>{c.emoji}</span>}
+                {c.nome}
+              </div>
+              <div className="flex flex-wrap gap-1 justify-center">
+                {p.itens.map((it:any, i:number) => {
+                  if (assigned[i] !== c.nome) return null;
+                  const im = emojiImg(it.e);
+                  return im
+                    ? <img key={i} src={im} alt="" className="w-10 h-10 object-contain" />
+                    : <span key={i} className="text-3xl">{it.e}</span>;
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -1044,7 +1093,7 @@ function ExpressaoEmocao({ p, onDone }: any) {
         <div className="text-xs uppercase text-muted-foreground mb-2">Situação</div>
         <div className="text-xl font-bold">{p.cena}</div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {p.opts.map((o:string, i:number) => (
           <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 font-black text-xl hover:border-lilac hover:scale-105 transition-all">{o}</button>
         ))}
