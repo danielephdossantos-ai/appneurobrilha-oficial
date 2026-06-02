@@ -11,15 +11,45 @@ export const Route = createFileRoute("/anamnese/$childId")({
   component: Anamnese,
 });
 
+// ---- Regras BNCC: idade ↔ ano escolar (Brasil) ----
+const SERIES = [
+  "Berçário", "Maternal", "Pré I", "Pré II", "Pré III",
+  "1º ano", "2º ano", "3º ano", "4º ano", "5º ano",
+  "6º ano", "7º ano", "8º ano", "9º ano",
+  "1º EM", "2º EM", "3º EM",
+] as const;
+
+const EXPECTED_AGE: Record<string, number> = {
+  "Berçário": 1, "Maternal": 2, "Pré I": 3, "Pré II": 4, "Pré III": 5,
+  "1º ano": 6, "2º ano": 7, "3º ano": 8, "4º ano": 9, "5º ano": 10,
+  "6º ano": 11, "7º ano": 12, "8º ano": 13, "9º ano": 14,
+  "1º EM": 15, "2º EM": 16, "3º EM": 17,
+};
+
+function checkAgeGrade(idade: number, serie: string): { ok: boolean; expected: number; diff: number } {
+  const expected = EXPECTED_AGE[serie];
+  if (expected === undefined) return { ok: true, expected: idade, diff: 0 };
+  const diff = idade - expected;
+  // Tolerância ±1 ano (reprovação / adiantamento). Acima é incoerência grave.
+  return { ok: Math.abs(diff) <= 1, expected, diff };
+}
+
+function suggestSerieForAge(idade: number): string {
+  const found = Object.entries(EXPECTED_AGE).find(([, age]) => age === idade);
+  return found ? found[0] : "";
+}
+
 function Anamnese() {
   const { childId } = Route.useParams();
   const { children: allChildren, updateChild, saveAnamnesis } = useAppState();
   const navigate = useNavigate();
   const child = allChildren.find((c: any) => c.id === childId);
-  
+
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(true);
   const [editCount, setEditCount] = useState(0);
+  const [serieLocal, setSerieLocal] = useState<string>(child?.serie ?? "");
+  const [overrideMismatch, setOverrideMismatch] = useState(false);
 
   const [data, setData] = useState<AnamnesisData['responses']>({
     dados_crianca: {
@@ -65,20 +95,22 @@ function Anamnese() {
   useEffect(() => {
     async function loadAnamnesis() {
       if (!childId) return;
-      const { data: existing, error } = await supabase
+      const { data: existing } = await supabase
         .from("child_anamnesis")
         .select("*")
         .eq("child_id", childId)
         .maybeSingle();
-      
+
       if (existing) {
         setData(existing.responses as any);
         setEditCount(existing.edit_count ?? 0);
       }
+      if (child?.serie) setSerieLocal(child.serie);
       setLoading(false);
     }
     loadAnamnesis();
-  }, [childId]);
+  }, [childId, child?.serie]);
+
 
   const steps = [
     { title: "Identidade", icon: <Baby className="w-5 h-5" /> },
@@ -91,16 +123,33 @@ function Anamnese() {
     { title: "Rotina", icon: <Calendar className="w-5 h-5" /> },
   ];
 
+  const ageGrade = checkAgeGrade(data.dados_crianca.idade, serieLocal);
+
   const finish = async () => {
     if (editCount >= 3) {
       toast.error("Limite de 3 edições atingido.");
       return;
     }
 
+    if (!serieLocal) {
+      toast.error("Selecione a série/ano escolar antes de salvar.");
+      setStep(0);
+      return;
+    }
+
+    if (!ageGrade.ok && !overrideMismatch) {
+      toast.error(
+        `Idade (${data.dados_crianca.idade}) e série (${serieLocal}) não batem. ` +
+        `Esperado: ${ageGrade.expected} anos. Corrija ou marque "Confirmo mesmo assim" no topo.`
+      );
+      setStep(0);
+      return;
+    }
+
     try {
       const internalProfile = AnamnesisProcessor.process(data);
       const childPatch = AnamnesisProcessor.mapToChildPatch(internalProfile, data);
-      
+
       await saveAnamnesis({
         child_id: childId,
         responses: data,
@@ -112,6 +161,7 @@ function Anamnese() {
         ...childPatch,
         nome: data.dados_crianca.nome,
         idade: data.dados_crianca.idade,
+        serie: serieLocal,
         anamnese_completa: true,
       });
 
@@ -121,6 +171,7 @@ function Anamnese() {
       toast.error(err.message || "Erro ao salvar anamnese");
     }
   };
+
 
   if (loading) return <Shell><div className="p-8 text-center">Carregando...</div></Shell>;
 
@@ -211,7 +262,56 @@ function Anamnese() {
                 </select>
               </Field>
             </div>
+
+            <Field label="Série / Ano escolar">
+              <select
+                className="input-premium"
+                value={serieLocal}
+                onChange={(e) => { setSerieLocal(e.target.value); setOverrideMismatch(false); }}
+              >
+                <option value="">Selecione a série...</option>
+                {SERIES.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </Field>
+
+            {serieLocal && !ageGrade.ok && (
+              <div className="p-4 rounded-xl border-2 border-amber-400 bg-amber-50 text-amber-900 space-y-3">
+                <div className="flex items-start gap-2">
+                  <Info className="w-5 h-5 shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="font-bold">Incoerência detectada entre idade e série</p>
+                    <p>
+                      Para <strong>{serieLocal}</strong> esperamos cerca de <strong>{ageGrade.expected} anos</strong>, mas você informou <strong>{data.dados_crianca.idade} anos</strong>.
+                      Sem isso, o sistema gera atividades no nível errado.
+                    </p>
+                    {suggestSerieForAge(data.dados_crianca.idade) && (
+                      <p className="mt-1">
+                        Sugestão para {data.dados_crianca.idade} anos:{" "}
+                        <button
+                          type="button"
+                          className="font-bold underline"
+                          onClick={() => { setSerieLocal(suggestSerieForAge(data.dados_crianca.idade)); setOverrideMismatch(false); }}
+                        >
+                          {suggestSerieForAge(data.dados_crianca.idade)}
+                        </button>
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <label className="flex items-center gap-2 text-xs font-semibold">
+                  <input
+                    type="checkbox"
+                    checked={overrideMismatch}
+                    onChange={(e) => setOverrideMismatch(e.target.checked)}
+                  />
+                  Confirmo mesmo assim (ex.: criança adiantada ou repetente).
+                </label>
+              </div>
+            )}
           </div>
+
         )}
 
         {step === 1 && (
