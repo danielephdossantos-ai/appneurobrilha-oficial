@@ -615,6 +615,61 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const { registerPerformance, requestHelp, adjustment } = useNeuroAdaptive();
   const startRef = useRef<number>(Date.now());
   const scoredRef = useRef<boolean>(false);
+  const [reexplaining, setReexplaining] = useState(false);
+  const [metodoIdx, setMetodoIdx] = useState(0);
+  const METODOS = [
+    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
+    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
+    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
+  ] as const;
+
+  const naoEntendi = async () => {
+    if (reexplaining) return;
+    setReexplaining(true);
+    const metodo = METODOS[metodoIdx % METODOS.length];
+    try {
+      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
+        body: {
+          mode: "escola",
+          child: { nome: childNome, hiperfoco, serie: aula.grade },
+          mascot: activeMascot ? {
+            name: activeMascot.mascot?.name,
+            description: activeMascot.mascot?.description,
+            category: activeMascot.mascot?.category,
+            level: activeMascot.level,
+            affinity: activeMascot.affinity,
+          } : null,
+          subject: aula.materia,
+          topic: aula.topic || aula.materia,
+          systemQuestion: aula.pergunta,
+          systemOptions: aula.opcoes,
+          systemAnswer: aula.resposta_correta,
+          miniGameType: aula.miniGameType,
+          reexplainMethod: metodo.id,
+        },
+      });
+      if (error) throw error;
+      setAula({
+        ...aula,
+        etapa1_intro: data.etapa1_intro || aula.etapa1_intro,
+        etapa2_conceito: data.etapa2_conceito || aula.etapa2_conceito,
+        etapa3_exemplo: data.etapa3_exemplo || aula.etapa3_exemplo,
+        etapa4_como_monta: data.etapa4_como_monta || aula.etapa4_como_monta,
+        etapa5_instrucao: data.etapa5_instrucao || aula.etapa5_instrucao,
+        dica: data.dica || aula.dica,
+        ensino: data.etapa2_conceito || data.ensino || aula.ensino,
+        demo: data.etapa3_exemplo || aula.demo,
+        metodo_usado: data.metodo_usado || metodo.nome,
+      });
+      setMetodoIdx((i) => i + 1);
+      toast.success(`${metodo.emoji} Reexplicando com método ${metodo.nome}!`);
+    } catch (e) {
+      console.error(e);
+      toast.error("Não consegui reexplicar agora. Tente de novo.");
+    } finally {
+      setReexplaining(false);
+    }
+  };
 
   // Reinicia cronômetro quando entra na etapa de "opcoes" (ou passo 5 na EI)
   useEffect(() => {
@@ -779,13 +834,32 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       )}
                     </div>
 
-                    <div className="flex justify-center mt-12">
-                      <button 
-                        onClick={() => setEiStep(eiStep + 1)} 
+                    <div className="flex flex-col items-center gap-4 mt-12">
+                      {aula.metodo_usado && (
+                        <div className="px-4 py-1.5 rounded-full bg-lilac/20 border border-lilac/40 text-xs font-black uppercase tracking-wider text-lilac-foreground">
+                          ✨ Método {aula.metodo_usado}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setEiStep(eiStep + 1)}
                         className="btn-tap bg-gradient-to-br from-primary to-primary/80 text-white rounded-full px-12 py-5 text-2xl font-black shadow-[0_8px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 active:translate-y-1 transition-all border-4 border-white flex items-center gap-3"
                       >
                         VAMOS LÁ! <Play className="h-8 w-8 fill-current" />
                       </button>
+                      <button
+                        onClick={naoEntendi}
+                        disabled={reexplaining}
+                        className="btn-tap bg-white border-[3px] border-sun text-sun-foreground rounded-full px-8 py-3 text-base md:text-lg font-black uppercase shadow-[0_4px_0_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-1 transition-all flex items-center gap-2 disabled:opacity-60"
+                      >
+                        {reexplaining ? (
+                          <><Loader2 className="h-5 w-5 animate-spin" /> Reexplicando...</>
+                        ) : (
+                          <>🤔 NÃO ENTENDI · Tente de outro jeito</>
+                        )}
+                      </button>
+                      <div className="text-[11px] text-muted-foreground text-center max-w-xs">
+                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].emoji} {METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
+                      </div>
                     </div>
                   </div>
                 ) : (
@@ -902,10 +976,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         </div>
                       )}
 
-                      <div className="mt-6 flex gap-2 flex-wrap">
+                      <div className="mt-6 flex gap-2 flex-wrap items-center">
                         <button onClick={() => setAula({ ...aula, etapa: "demo" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
                           Continuar →
                         </button>
+                        <button
+                          onClick={naoEntendi}
+                          disabled={reexplaining}
+                          className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
+                        >
+                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — outro método</>}
+                        </button>
+                        {aula.metodo_usado && (
+                          <span className="text-xs font-bold text-muted-foreground">Método atual: <b>{aula.metodo_usado}</b></span>
+                        )}
                       </div>
                     </div>
                   );
@@ -918,9 +1002,18 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                     <div className="rounded-2xl bg-secondary p-8 mb-6 text-center text-3xl font-extrabold text-primary leading-loose">
                       {aula.demo}
                     </div>
-                    <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
-                      Estou pronto para o desafio!
-                    </button>
+                    <div className="flex gap-2 flex-wrap items-center">
+                      <button onClick={() => setAula({ ...aula, etapa: "opcoes" })} className="btn-tap rounded-xl bg-primary text-primary-foreground px-8 py-3 font-bold text-lg">
+                        Estou pronto para o desafio!
+                      </button>
+                      <button
+                        onClick={naoEntendi}
+                        disabled={reexplaining}
+                        className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
+                      >
+                        {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — tente outro jeito</>}
+                      </button>
+                    </div>
                   </div>
                 )}
 

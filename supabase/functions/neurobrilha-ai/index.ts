@@ -15,7 +15,7 @@ serve(async (req) => {
     const payload = await req.json()
     console.log('Receiving request:', JSON.stringify(payload, null, 2))
 
-    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType } = payload
+    const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep } = payload
 
     // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
@@ -98,12 +98,46 @@ serve(async (req) => {
         ? `TOM: Amigável e didático. Frases médias. Explicações concretas com exemplos do cotidiano. Use o hiperfoco como ponte. Mistura caixa baixa com palavras-chave em CAIXA ALTA.`
         : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas com lógica/passo-a-passo. Pode usar termos técnicos quando explicados. Trate como alguém capaz e curioso.`;
 
+      // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
+      // Quando a criança aperta "Não Entendi", trocamos a ABORDAGEM (não o conteúdo)
+      const metodoBlock = reexplainMethod === "teacch"
+        ? `🧩 MÉTODO TEACCH (Estruturado Visual — ideal para TEA):
+           - Quebre em PASSOS NUMERADOS visuais (PASSO 1, PASSO 2, PASSO 3).
+           - Use rotinas previsíveis: "PRIMEIRO... DEPOIS... POR ÚLTIMO...".
+           - Seja LITERAL. Zero metáforas, zero figuras de linguagem.
+           - Cada etapa = uma ação concreta e finita. Sem ambiguidade.
+           - Use ícones/emojis fixos como âncoras visuais (📦 = caixa, ✅ = pronto).`
+        : reexplainMethod === "multisensorial"
+        ? `🎨 MÉTODO MULTISSENSORIAL (Orton-Gillingham — ideal para Dislexia/TDAH):
+           - Combine VER + OUVIR + TOCAR + FALAR em cada explicação.
+           - Estique sons das letras: "MMMM-AAAA-MMMM-AAAA = MAMA".
+           - Peça pra criança "desenhar no ar com o dedo" ou "bater palmas pra cada sílaba".
+           - Use ritmo, música, repetição rítmica.
+           - Conecte letra → som → gesto → imagem em TODA explicação.`
+        : reexplainMethod === "montessori"
+        ? `🌱 MÉTODO MONTESSORI (Concreto/Manipulável — ideal para todos):
+           - Use EXEMPLOS DO MUNDO REAL que a criança toca/vê todo dia.
+           - "Imagine 3 maçãs na sua cozinha..." em vez de "3 + 2 = ?".
+           - A criança DESCOBRE a resposta sozinha guiada por perguntas abertas.
+           - Use o HIPERFOCO (${child.hiperfoco || "interesse"}) como material concreto.
+           - Sem pressa, sem certo/errado — explore o conceito como brincadeira livre.`
+        : `MÉTODO PADRÃO: explicação didática direta.`;
+
+      const reexplainInstruction = reexplainMethod
+        ? `\n\n⚠️ A CRIANÇA APERTOU "NÃO ENTENDI". Você JÁ explicou uma vez e não funcionou.
+           AGORA REEXPLIQUE O MESMO CONTEÚDO usando OBRIGATORIAMENTE o método abaixo.
+           NÃO repita as mesmas frases da primeira tentativa — mude TOTALMENTE a abordagem.
+           ${metodoBlock}
+           Comece reconhecendo: "TUDO BEM NÃO ENTENDER! VAMOS DE OUTRO JEITO..."`
+        : "";
+
       systemPrompt = `Você é ${mascotName} — o mascote companheiro escolhido pela criança na Loja de Mascotes — atuando como PROFESSOR(A) PARTICULAR no NeuroBrilha Kids.
       ${mascotPersonaBlock}
       Você ensina seguindo o método: EXPLICA o conceito → MOSTRA EXEMPLO → MOSTRA COMO MONTA/RESOLVE → PREPARA para o exercício → DÁ A INSTRUÇÃO do jogo.
 
       Faixa Etária: ${tierLabel}
       ${toneByTier}
+      ${reexplainInstruction}
 
       Perfil do Aluno:
       - Nome: ${child.nome || "Aluno"}
@@ -128,10 +162,11 @@ serve(async (req) => {
       - "etapa5_instrucao": Instrução clara do que fazer no exercício/jogo agora.
       - "dica": Uma dica útil caso erre.
       - "reforco_positivo": Comemoração personalizada citando o hiperfoco.
+      - "metodo_usado": Nome curto do método didático aplicado (ex: "TEACCH", "Multissensorial", "Montessori", "Padrão").
 
       Mantenha cada campo conciso (1-3 frases para EI/Mid, 2-4 frases para Teen).`
 
-      userPrompt = `Ensine o tema "${topic || "aprendizado"}" para ${child.nome || "o aluno"} (${tierLabel}).`
+      userPrompt = `Ensine o tema "${topic || "aprendizado"}" para ${child.nome || "o aluno"} (${tierLabel}).${reexplainMethod ? ` REEXPLIQUE usando o método ${reexplainMethod.toUpperCase()}.` : ""}`
 
     } else if (mode === "professor-foto") {
       const diag = child.diagnostico?.toLowerCase() || "";
