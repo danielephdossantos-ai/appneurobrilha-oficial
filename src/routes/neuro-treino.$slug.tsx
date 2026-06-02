@@ -1,12 +1,14 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertCircle, ArrowLeft, ChevronRight, RotateCcw, Sparkles } from "lucide-react";
+import { AlertCircle, ArrowLeft, ChevronRight, Mic, MicOff, RotateCcw, Sparkles, Volume2 } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
+import { usePipVoice } from "@/hooks/usePipVoice";
+import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
 
 export const Route = createFileRoute("/neuro-treino/$slug")({
   component: NeuroAtividade,
@@ -214,13 +216,12 @@ function SonsIniciais({ p, onDone }: any) {
   );
 }
 
-// ============== 2. Motorzinho dos Sons (Clínico Fono) ==============
+// ============== 2. Motorzinho dos Sons (Clínico Fono + Voz IA + Mic) ==============
 function Motorzinho({ p, onDone }: any) {
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const nome = activeChild?.nome?.split(" ")[0] || "amigão";
 
-  // Mapeia o hiperfoco ativo para a tag do banco clínico.
   const tag: MotorzinhoTag = (() => {
     const id = hiperfoco?.id;
     if (id === "minecraft") return "minecraft";
@@ -232,108 +233,134 @@ function Motorzinho({ p, onDone }: any) {
   const bank = MOTORZINHO_BANK[tag];
   const item = bank[(p.bankIndex ?? 0) % bank.length];
 
-  const [phase, setPhase] = useState<"idle" | "holding" | "done">("idle");
-  const [progress, setProgress] = useState(0);
-  const ref = useRef<number | null>(null);
+  const { speak, isSpeaking } = usePipVoice();
+  const { listen, isListening, supported: micSupported } = useSpeechMatcher();
 
-  useEffect(() => {
-    if (phase === "holding") {
-      const start = Date.now();
-      ref.current = window.setInterval(() => {
-        const pct = Math.min(100, ((Date.now() - start) / (p.holdSeconds * 1000)) * 100);
-        setProgress(pct);
-        if (pct >= 100) {
-          window.clearInterval(ref.current!);
-          setPhase("done");
-        }
-      }, 50);
-    } else if (ref.current) {
-      window.clearInterval(ref.current);
-    }
-    return () => { if (ref.current) window.clearInterval(ref.current); };
-  }, [phase, p.holdSeconds]);
+  const [phase, setPhase] = useState<"idle" | "demo" | "your-turn" | "listening" | "result">("idle");
+  const [lastTranscript, setLastTranscript] = useState<string>("");
+  const [lastMatched, setLastMatched] = useState<boolean | null>(null);
 
-  const cancelarSeIdle = () => {
-    if (phase === "holding") {
-      setPhase("idle");
-      setProgress(0);
+  // PIP demonstra: "P, P, P, P... princesa!"
+  const fraseDemo = `${item.texto_prolongado.replace(/\s+/g, ", ")}... ${item.palavra_alvo}!`;
+  const fraseAbertura = `Vamos ligar o motorzinho, ${nome}? Escuta a professora: ${fraseDemo} Agora é a sua vez!`;
+
+  const iniciarDemo = async () => {
+    setPhase("demo");
+    setLastTranscript("");
+    setLastMatched(null);
+    await speak(fraseAbertura);
+    setPhase("your-turn");
+  };
+
+  const ouvirCrianca = async () => {
+    setPhase("listening");
+    const res = await listen(item.palavra_alvo, { timeoutMs: 7000 });
+    setLastTranscript(res.transcript);
+    setLastMatched(res.matched);
+    setPhase("result");
+    if (res.matched) {
+      await speak(`Boa, ${nome}! Você falou ${item.palavra_alvo} certinho!`);
+    } else if (res.transcript) {
+      await speak(`Quase, ${nome}! Vamos tentar de novo. ${item.palavra_alvo}.`);
+    } else {
+      await speak(`Não consegui te ouvir. Aperta o microfone e fala ${item.palavra_alvo}.`);
     }
   };
 
+  const pipMsg = (() => {
+    if (phase === "idle") return `Vamos ligar o motorzinho, ${nome}?`;
+    if (phase === "demo") return `Escuta a professora falando o som da letra ${item.letra_fonema}...`;
+    if (phase === "your-turn") return `Agora é a sua vez, ${nome}! Aperta o microfone e fala: ${item.palavra_alvo}`;
+    if (phase === "listening") return `Tô te ouvindo... fala alto: ${item.palavra_alvo}!`;
+    if (lastMatched) return `Boa, ${nome}! Falou certinho! ${item.imagem_url_ou_emoji}`;
+    return `Quase! Vamos repetir o som "${item.letra_fonema}" e a palavra ${item.palavra_alvo}.`;
+  })();
+
   return (
     <div className="text-center">
-      {/* Balão de fala do PIP — comando terapêutico com nome da criança */}
+      {/* Balão do PIP */}
       <div className="flex items-start gap-3 mb-6 text-left">
         <div className="text-5xl shrink-0">🦁</div>
-        <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm">
+        <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm flex-1">
           <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
-          <div className="text-[10px] font-black uppercase tracking-widest text-primary">PIP diz:</div>
-          <p className="text-base font-bold text-foreground">
-            {phase === "done"
-              ? `Boa, ${nome}! Ouviu o som da letra ${item.letra_fonema}? Isso é ${item.palavra_alvo}! ${item.imagem_url_ou_emoji}`
-              : `Vamos ligar o motorzinho, ${nome}? Repita comigo!`}
-          </p>
+          <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
+            PIP – Professora {isSpeaking && <Volume2 size={12} className="animate-pulse" />}
+          </div>
+          <p className="text-base font-bold text-foreground">{pipMsg}</p>
         </div>
       </div>
 
-      {/* Área central — depende da fase */}
-      <div className="min-h-[260px] flex items-center justify-center mb-6">
-        {phase === "idle" && (
-          <div className="text-9xl font-black text-coral select-none animate-pulse">
-            {item.letra_fonema}
+      {/* Área central: letra grande + palavra */}
+      <div className="min-h-[220px] flex flex-col items-center justify-center mb-6 gap-3">
+        <div className="text-8xl font-black text-coral select-none leading-none">
+          {item.letra_fonema}
+          <span className="text-3xl text-muted-foreground"> {item.texto_prolongado.toLowerCase()}</span>
+        </div>
+        {(phase === "your-turn" || phase === "listening" || phase === "result") && (
+          <div className="flex items-center gap-3 animate-fade-in">
+            <div className="text-6xl">{item.imagem_url_ou_emoji}</div>
+            <div className="text-4xl font-black text-primary">{item.palavra_alvo}</div>
           </div>
         )}
-
-        {phase === "holding" && (
-          <div
-            className="font-black text-coral tracking-wider leading-none"
-            style={{ fontSize: `${4 + (progress / 100) * 6}rem` }}
-          >
-            {item.texto_prolongado}
-            <span className="inline-block">...</span>
-          </div>
-        )}
-
-        {phase === "done" && (
-          <div className="flex flex-col items-center gap-3 animate-fade-in">
-            <div className="text-9xl drop-shadow-lg">{item.imagem_url_ou_emoji}</div>
-            <div className="text-5xl font-black text-primary tracking-wide">{item.palavra_alvo}</div>
+        {phase === "result" && lastTranscript && (
+          <div className={`text-sm font-bold px-3 py-1 rounded-full ${lastMatched ? "bg-success/15 text-success" : "bg-muted text-muted-foreground"}`}>
+            Você disse: "{lastTranscript}"
           </div>
         )}
       </div>
 
-      {/* Barra do trenzinho */}
-      <div className="relative h-5 bg-muted rounded-full overflow-hidden mb-6 max-w-md mx-auto">
-        <div className="h-full bg-gradient-to-r from-coral to-sun transition-all" style={{ width: `${progress}%` }} />
-        <div className="absolute top-0 text-xl transition-all" style={{ left: `${progress}%`, transform: "translateX(-50%) translateY(-25%)" }}>🚂</div>
-      </div>
+      {/* Aviso se mic não suportado */}
+      {!micSupported && phase === "your-turn" && (
+        <div className="mb-4 text-xs text-muted-foreground bg-muted/50 rounded-lg p-2 max-w-md mx-auto">
+          ⚠️ Seu navegador não suporta reconhecimento de voz. Use Chrome, Edge ou Safari para a criança falar.
+        </div>
+      )}
 
-      {/* Acelerador / ignição */}
-      {phase !== "done" ? (
+      {/* Botões da fase */}
+      {phase === "idle" && (
         <button
-          onMouseDown={() => setPhase("holding")}
-          onMouseUp={cancelarSeIdle}
-          onMouseLeave={cancelarSeIdle}
-          onTouchStart={() => setPhase("holding")}
-          onTouchEnd={cancelarSeIdle}
-          className="bg-gradient-to-br from-coral to-coral/80 text-white px-10 py-6 rounded-full font-black text-xl shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 select-none"
+          onClick={iniciarDemo}
+          disabled={isSpeaking}
+          className="bg-gradient-to-br from-coral to-coral/80 text-white px-10 py-6 rounded-full font-black text-xl shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 disabled:opacity-60"
         >
           <span className="text-3xl">🔑</span> LIGAR MOTORZINHO
         </button>
-      ) : (
-        <div className="flex gap-3 justify-center">
+      )}
+
+      {phase === "demo" && (
+        <div className="text-sm font-bold text-primary animate-pulse">🔊 Professora falando...</div>
+      )}
+
+      {(phase === "your-turn" || phase === "result") && (
+        <div className="flex flex-wrap gap-3 justify-center">
           <button
-            onClick={() => { setPhase("idle"); setProgress(0); onDone(false); }}
-            className="bg-muted text-foreground px-6 py-3 rounded-xl font-bold inline-flex items-center gap-2"
+            onClick={ouvirCrianca}
+            disabled={isListening || isSpeaking || !micSupported}
+            className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground px-8 py-5 rounded-full font-black text-lg shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 disabled:opacity-60"
           >
-            <RotateCcw size={16} /> Repetir
+            <Mic size={22} /> {phase === "result" ? "Falar de novo" : "Minha vez de falar"}
           </button>
           <button
-            onClick={() => onDone(true)}
-            className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg"
+            onClick={() => speak(fraseDemo)}
+            disabled={isSpeaking || isListening}
+            className="bg-muted text-foreground px-5 py-3 rounded-xl font-bold inline-flex items-center gap-2 disabled:opacity-60"
           >
-            Mandei bem! ⭐
+            <Volume2 size={16} /> Ouvir de novo
           </button>
+          {phase === "result" && (
+            <button
+              onClick={() => onDone(Boolean(lastMatched))}
+              className={`px-8 py-3 rounded-xl font-black shadow-lg text-white ${lastMatched ? "bg-success" : "bg-coral"}`}
+            >
+              {lastMatched ? "Mandei bem! ⭐" : "Próximo"}
+            </button>
+          )}
+        </div>
+      )}
+
+      {phase === "listening" && (
+        <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-4 rounded-full font-black animate-pulse">
+          <MicOff size={22} /> Ouvindo... fala agora!
         </div>
       )}
     </div>
