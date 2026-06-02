@@ -149,7 +149,7 @@ function Treino() {
           <Coffee className="h-6 w-6 text-sun" />
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha?</div>
-            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo 🌿</div>
+            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo.</div>
           </div>
         </div>
       )}

@@ -231,7 +231,7 @@ function NeuroAtividade() {
 
       <div className="flex items-center justify-between mb-4 text-sm font-bold">
         <span className="text-muted-foreground">Exercício {(index % vars.length) + 1} de {vars.length}</span>
-        <span className="text-success">⭐ {acertos}</span>
+        <span className="text-success inline-flex items-center gap-1"><Star size={14} className="fill-current" /> {acertos}</span>
       </div>
 
       {slug !== "motorzinho-dos-sons" && (
@@ -450,7 +450,7 @@ function Motorzinho({ p, onDone }: any) {
     <div className="text-center">
       {/* Balão do PIP */}
       <div className="flex items-start gap-3 mb-6 text-left">
-        <div className="text-5xl shrink-0">{ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO") ? <img src={ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO")} className="w-16 h-16 object-contain" /> : "🦁"}</div>
+        <div className="shrink-0">{ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO") ? <img src={ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO")} className="w-16 h-16 object-contain" alt="" /> : <div className="w-16 h-16 rounded-full bg-primary/15 border-2 border-primary/30" />}</div>
         <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm flex-1">
           <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
           <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
