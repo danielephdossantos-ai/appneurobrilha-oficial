@@ -238,7 +238,7 @@ export function useAppState() {
         .order("created_at", { ascending: true });
 
       if (error) throw error;
-      return data as unknown as Child[];
+      return (data ?? []).map((child) => normalizeChild(child as any));
     },
     enabled: !!session?.user,
   });
@@ -253,7 +253,7 @@ export function useAppState() {
         .single();
 
       if (error) throw error;
-      return data;
+      return normalizeChild(data as any);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
