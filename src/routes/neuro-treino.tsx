@@ -115,7 +115,10 @@ function Treino() {
               Atividade em Foco: {selectedAtividade || 'Respira Flor'}
             </h3>
             <div className="grid place-items-center py-12">
-              <div className="h-32 w-32 rounded-full bg-success/30 animate-pulse" style={{ animationDuration: "4s" }} />
+              <PipPedagogicalGuidance 
+                stage={selectedAtividade ? 'explanation' : 'idle'} 
+                className="mb-8"
+              />
               <p className="mt-6 text-center text-lg font-bold text-success/80">Inspira… segura… expira… 🌸</p>
               <div className="mt-8 flex gap-4">
                 <button className="bg-success text-white px-8 py-3 rounded-xl font-black shadow-lg hover:opacity-90 transition-all uppercase tracking-widest text-sm">
@@ -126,12 +129,12 @@ function Treino() {
           </Card>
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-24">
-            <PipPedagogicalGuidance 
-              stage={selectedAtividade ? 'explanation' : 'idle'} 
-              className="animate-in fade-in slide-in-from-right-4" 
-            />
+        <div className="hidden lg:block lg:col-span-1">
+          <div className="sticky top-24 bg-white/50 p-6 rounded-[2rem] border-2 border-success/10">
+            <h4 className="text-xs font-black text-success uppercase tracking-widest mb-4">Dica do Pip</h4>
+            <p className="text-sm font-bold text-muted-foreground italic leading-relaxed">
+              "Treinar o cérebro é como exercitar um músculo. Quanto mais praticamos, mais forte ele fica!"
+            </p>
           </div>
         </div>
       </div>
