@@ -502,7 +502,30 @@ function Escola() {
         );
       })()}
 
-      <h2 className="text-xl mb-4">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
+        {isTeen && (
+          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
+            <div className="text-2xl">🎓</div>
+            <div className="flex-1">
+              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
+              <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
+            </div>
+            <button
+              onClick={() => {
+                const next = !teenGuided;
+                setTeenGuided(next);
+                try { localStorage.setItem("escola_teen_guided", next ? "1" : "0"); } catch {}
+              }}
+              className={`relative w-14 h-8 rounded-full transition-colors ${teenGuided ? "bg-primary" : "bg-muted"}`}
+              aria-label="Alternar atividade guiada"
+            >
+              <span className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow transition-all ${teenGuided ? "left-7" : "left-1"}`} />
+            </button>
+          </div>
+        )}
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {materiasVisiveis.map((m: any) => (
           <button key={m.id} onClick={() => carregarAula(m.id)}
