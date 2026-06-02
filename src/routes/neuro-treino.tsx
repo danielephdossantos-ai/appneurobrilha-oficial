@@ -162,17 +162,26 @@ const WORLD_THEME: Record<WorldKey, { image: string; accent: string; trailColor:
 function WorldBackground({ world }: { world: WorldKey }) {
   const theme = WORLD_THEME[world];
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden bg-slate-900">
+      {/* camada de preenchimento: mesma imagem desfocada para evitar bordas vazias */}
+      <img
+        src={theme.image}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70"
+        loading="lazy"
+      />
+      {/* mundo principal centralizado, sempre inteiro na tela (sem zoom/corte) */}
       <img
         src={theme.image}
         alt={theme.name}
-        className="absolute inset-0 w-full h-full object-cover animate-[breathe_18s_ease-in-out_infinite]"
+        className="absolute inset-0 w-full h-full object-contain object-center animate-[breathe_18s_ease-in-out_infinite]"
         loading="lazy"
         width={1920}
         height={1088}
       />
       {/* gradiente para legibilidade da trilha */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/25 to-black/45 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/40 pointer-events-none" />
       {/* brilhos suaves */}
       <div className="absolute inset-0 bg-[radial-gradient(1.5px_1.5px_at_15%_25%,white,transparent),radial-gradient(1.5px_1.5px_at_75%_55%,white,transparent),radial-gradient(1px_1px_at_45%_80%,white,transparent),radial-gradient(2px_2px_at_85%_15%,white,transparent)] opacity-60 animate-pulse pointer-events-none" />
       {/* criaturinhas animadas do mundo */}
