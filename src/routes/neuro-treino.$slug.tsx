@@ -661,11 +661,21 @@ function FocoSustentado({ p, onDone }: any) {
     else setMissed(m=>m+1);
     setK(k+1);
   };
+  const alvoImg = emojiImg(p.alvo);
+  const atual = p.stream[k];
+  const atualImg = emojiImg(atual);
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Alvo: <span className="text-3xl">{p.alvo}</span></div>
-      <button onClick={handleTap} className="text-9xl p-8 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95">
-        {p.stream[k] ?? "✅"}
+      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-2">
+        Alvo:
+        {alvoImg ? <img src={alvoImg} alt="alvo" className="w-12 h-12 object-contain" /> : <span className="text-3xl">{p.alvo}</span>}
+      </div>
+      <button onClick={handleTap} className="p-6 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95 w-48 h-48 flex items-center justify-center">
+        {atualImg ? (
+          <img src={atualImg} alt="" className="w-full h-full object-contain" />
+        ) : (
+          <span className="text-9xl">{atual ?? "✅"}</span>
+        )}
       </button>
       <div className="text-sm text-muted-foreground">Acertos: <b className="text-success">{score}</b> · Enganos: <b className="text-destructive">{missed}</b></div>
       <div className="text-xs text-muted-foreground mt-1">{k}/{p.stream.length}</div>
