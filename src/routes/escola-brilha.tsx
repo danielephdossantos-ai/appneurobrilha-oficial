@@ -1643,6 +1643,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       <div className="flex-1">
                         <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
+                        {aula.desafio_final && (
+                          <div className="mt-2 px-3 py-2 rounded-xl bg-white/60 border border-success/40 text-sm text-success">
+                            <b className="uppercase tracking-wider text-[10px] mr-1">🏁 Desafio:</b>{aula.desafio_final}
+                          </div>
+                        )}
                         <div className="text-xs text-success/70 mt-1"><b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
                       </div>
                       {aula.bancoOrdem && (
