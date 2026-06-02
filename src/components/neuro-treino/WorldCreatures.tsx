@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef } from "react";
+import { emojiImg } from "@/data/neuro-treino/objetos";
 
 /**
  * WorldCreatures
@@ -218,6 +219,7 @@ export default function WorldCreatures({ world }: { world: WorldKey }) {
           c.motion === "drift"  ? "creature-drift" :
           /* bounce */            "creature-bounce";
 
+        const img = emojiImg(c.emoji);
         return (
           <button
             key={c.id}
@@ -239,7 +241,18 @@ export default function WorldCreatures({ world }: { world: WorldKey }) {
               cursor: "pointer",
             }}
           >
-            <span aria-hidden>{c.emoji}</span>
+            {img ? (
+              <img
+                src={img}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                style={{ width: `${size * 1.6}rem`, height: `${size * 1.6}rem`, objectFit: "contain" }}
+                className="drop-shadow-md"
+              />
+            ) : (
+              <span aria-hidden>{c.emoji}</span>
+            )}
           </button>
         );
       })}
