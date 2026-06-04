@@ -3,43 +3,43 @@ import { supabase } from "@/integrations/supabase/client";
 export interface BNCCSkill {
   id: string;
   codigo_bncc: string;
-  ano: string;
-  disciplina: string;
-  titulo: string;
-  objetivo: string;
-  nivel: string;
+  ano: string | null;
+  disciplina: string | null;
+  titulo: string | null;
+  objetivo: string | null;
+  nivel: string | null;
 }
 
 export interface Explanation {
   id: string;
-  codigo_bncc: string;
-  texto_professor: string;
-  audio?: string;
-  imagem?: string;
-  video?: string;
+  codigo_bncc: string | null;
+  texto_professor: string | null;
+  audio: string | null;
+  imagem: string | null;
+  video: string | null;
 }
 
 export interface ActivityDB {
   id: string;
-  codigo_bncc: string;
-  tipo: string;
-  nivel: string;
-  pergunta: string;
-  alternativa_a: string;
-  alternativa_b: string;
-  alternativa_c: string;
-  resposta: string;
-  feedback: string;
+  codigo_bncc: string | null;
+  tipo: string | null;
+  nivel: string | null;
+  pergunta: string | null;
+  alternativa_a: string | null;
+  alternativa_b: string | null;
+  alternativa_c: string | null;
+  resposta: string | null;
+  feedback: string | null;
 }
 
 export interface StudentProgress {
   id: string;
-  aluno_id: string;
-  codigo_bncc: string;
-  tentativas: number;
-  acertos: number;
-  erros: number;
-  dominio: number;
+  aluno_id: string | null;
+  codigo_bncc: string | null;
+  tentativas: number | null;
+  acertos: number | null;
+  erros: number | null;
+  dominio: number | null;
 }
 
 export class SupabasePedagogicalService {
