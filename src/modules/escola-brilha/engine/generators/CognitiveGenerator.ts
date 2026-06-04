@@ -41,14 +41,14 @@ export class CognitiveGenerator extends BaseGenerator {
     if (isEarlyChildhood(input.grade)) {
       if (type === "ei-memory") {
         return {
-          opcoes: EARLY_CHILDHOOD.atencao.memory.slice(0, 3), // 3 pares = 6 cartas
+          opcoes: EARLY_CHILDHOOD.cognitivo.memory.slice(0, 3), // 3 pares = 6 cartas
           miniGameType: "memory"
         };
       }
       if (type === "ei-missing") {
         return {
-          sequence: EARLY_CHILDHOOD.atencao.sequence,
-          opcoes: EARLY_CHILDHOOD.atencao.sequence,
+          sequence: EARLY_CHILDHOOD.cognitivo.sequence,
+          opcoes: EARLY_CHILDHOOD.cognitivo.sequence,
           miniGameType: "sequence"
         };
       }
