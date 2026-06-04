@@ -54,8 +54,8 @@ export interface MockResponsibleData {
 }
 
 export const mockResponsibleData: MockResponsibleData = {
-  studentName: "Lucas Oliveira",
-  grade: "2º Ano - Fundamental I",
+  studentName: "Criança Brilhante",
+  grade: "Série Escolar",
   skills: [
     { skillId: "EF02MA01", skillCode: "EF02MA01", name: "Números e Operações", mastery: 85, status: 'dominado', lastActivity: "2024-05-20" },
     { skillId: "EF02LP04", skillCode: "EF02LP04", name: "Leitura e Interpretação", mastery: 45, status: 'em-progresso', lastActivity: "2024-05-21" },
