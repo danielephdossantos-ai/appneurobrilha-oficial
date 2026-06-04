@@ -140,24 +140,6 @@ const ALMOST_THERE = [
 ];
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
-const FloatingMascotGuidance = ({ activeMascot, icon }: { activeMascot: any, icon: any }) => {
-  return (
-    <div className="fixed bottom-6 left-6 z-[60] animate-in slide-in-from-left duration-500 hidden md:block">
-      <div className="relative group">
-        <div className="w-24 h-24 rounded-full bg-white border-4 border-primary shadow-glow flex items-center justify-center overflow-hidden">
-           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-           ) : (
-             <RenderMascote icon={activeMascot?.mascot?.image_url || icon} className="h-14 w-14 text-primary" />
-           )}
-        </div>
-        <div className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-sm">
-          PROFESSOR
-        </div>
-      </div>
-    </div>
-  );
-};
 
 
 // ============== Banco BNCC (50 atividades por lote, infinito) ==============
