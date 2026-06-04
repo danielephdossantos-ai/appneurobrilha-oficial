@@ -18,7 +18,14 @@ import {
   Calendar,
   AlertCircle,
   TrendingUp,
-  Layout
+  Layout,
+  Rocket,
+  Calculator,
+  PenTool,
+  FlaskConical,
+  Brain,
+  Trophy,
+  Flag
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
@@ -123,8 +130,8 @@ function MissaoProva() {
                     
                     <div className="flex flex-col md:flex-row md:items-center gap-6 relative z-10">
 
-                  <div className="h-20 w-20 rounded-2xl bg-white/20 backdrop-blur-md grid place-items-center text-4xl shadow-xl">
-                    🚀
+                  <div className="h-20 w-20 rounded-2xl bg-white/20 backdrop-blur-md grid place-items-center text-white shadow-xl">
+                    <Rocket className="h-10 w-10" />
                   </div>
                   <div>
                     <Pill tone="info" className="bg-white/20 text-white mb-2">MISSÃO EM CURSO</Pill>
@@ -192,7 +199,7 @@ function MissaoProva() {
   return (
     <Shell>
       <PageHeader 
-        emoji="🚩" 
+        icon={Flag} 
         title="MISSÃO PROVA BRILHA" 
         subtitle="Sua jornada para o sucesso nas provas escolares!" 
       />
@@ -224,8 +231,8 @@ function MissaoProva() {
                 <Card key={mission.id} className="overflow-hidden p-0 border-2 border-indigo-100 hover:border-indigo-300 transition-all">
                   <div className="bg-gradient-to-r from-indigo-600 to-violet-600 p-6 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur-md grid place-items-center text-3xl shadow-lg">
-                        {mission.subject === "Matemática" ? "🧮" : mission.subject === "Português" ? "✍️" : "🧪"}
+                      <div className="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur-md grid place-items-center text-white shadow-lg">
+                        {mission.subject === "Matemática" ? <Calculator className="h-8 w-8" /> : mission.subject === "Português" ? <PenTool className="h-8 w-8" /> : <FlaskConical className="h-8 w-8" />}
                       </div>
                       <div>
                         <h3 className="text-2xl font-black">{mission.subject}</h3>
@@ -300,35 +307,41 @@ function MissaoProva() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-           <Card className="bg-amber-50 border-amber-200">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-2xl bg-amber-100 grid place-items-center text-2xl">🧠</div>
-              <div>
-                <h4 className="font-bold text-sm">Neuro-Treino</h4>
-                <p className="text-[11px] text-muted-foreground">Sua mente está sendo preparada para o sucesso.</p>
-              </div>
-            </div>
-          </Card>
-          <Card className="bg-indigo-50 border-indigo-200">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-2xl bg-indigo-100 grid place-items-center text-2xl">✨</div>
-              <div>
-                <h4 className="font-bold text-sm">Sistema Infinito</h4>
-                <p className="text-[11px] text-muted-foreground">O conteúdo se adapta ao que você precisa aprender.</p>
-              </div>
-            </div>
-          </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-2xl bg-emerald-100 grid place-items-center text-2xl">🏆</div>
-              <div>
-                <h4 className="font-bold text-sm">Pronto para Brilhar</h4>
-                <p className="text-[11px] text-muted-foreground">Siga o plano e você terá um resultado incrível!</p>
-              </div>
-            </div>
-          </Card>
-        </div>
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="bg-amber-50 border-amber-200">
+             <div className="flex items-center gap-3">
+               <div className="h-12 w-12 rounded-2xl bg-amber-100 grid place-items-center text-primary">
+                 <Brain className="h-6 w-6" />
+               </div>
+               <div>
+                 <h4 className="font-bold text-sm">Neuro-Treino</h4>
+                 <p className="text-[11px] text-muted-foreground">Sua mente está sendo preparada para o sucesso.</p>
+               </div>
+             </div>
+           </Card>
+           <Card className="bg-indigo-50 border-indigo-200">
+             <div className="flex items-center gap-3">
+               <div className="h-12 w-12 rounded-2xl bg-indigo-100 grid place-items-center text-primary">
+                 <Sparkles className="h-6 w-6" />
+               </div>
+               <div>
+                 <h4 className="font-bold text-sm">Sistema Infinito</h4>
+                 <p className="text-[11px] text-muted-foreground">O conteúdo se adapta ao que você precisa aprender.</p>
+               </div>
+             </div>
+           </Card>
+           <Card className="bg-emerald-50 border-emerald-200">
+             <div className="flex items-center gap-3">
+               <div className="h-12 w-12 rounded-2xl bg-emerald-100 grid place-items-center text-primary">
+                 <Trophy className="h-6 w-6" />
+               </div>
+               <div>
+                 <h4 className="font-bold text-sm">Pronto para Brilhar</h4>
+                 <p className="text-[11px] text-muted-foreground">Siga o plano e você terá um resultado incrível!</p>
+               </div>
+             </div>
+           </Card>
+         </div>
       </div>
       <FloatingActivityControls
         onSkip={isStudying && lessonContent ? () => { toast.info("Indo direto para a prática!"); } : undefined}
