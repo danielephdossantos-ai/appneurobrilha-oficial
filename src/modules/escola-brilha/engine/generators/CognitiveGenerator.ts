@@ -7,6 +7,9 @@ export class CognitiveGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-emocoes') {
+        return 'ei-emotions';
+      }
       return Math.random() < 0.5 ? "ei-memory" : "ei-missing";
     }
     if (input.difficulty < 0.5) return "memory-match";
