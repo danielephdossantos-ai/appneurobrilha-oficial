@@ -91,12 +91,13 @@ const materias = [
   { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: Bird, mascoteNome: "Professor Pip" },
 ] as const;
 
-// Educação Infantil — 4 grandes áreas BNCC adaptadas
+// Educação Infantil — 5 Campos de Experiência BNCC
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: Bird, mascoteNome: "Professora Pipa" },
 ] as const;
 
 function isEI(grade: string) {
@@ -164,6 +165,15 @@ const DOMAIN_MAP: Record<string, string> = {
   geografia: "linguistics",
 };
 const MATERIAS_BANCO = ["portugues", "matematica", "ciencias", "historia", "geografia", "artes"] as const;
+
+// Campos de Experiência da Educação Infantil (BNCC)
+const CAMPOS_EI = [
+  "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO",
+  "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES",
+  "CORPO, GESTOS E MOVIMENTOS",
+  "TRAÇOS, SONS, CORES E FORMAS",
+  "O EU, O OUTRO E O NÓS"
+] as const;
 
 type BancoItem = {
   activity: any;       // GeneratedActivity (pré-gerado)
@@ -296,7 +306,46 @@ function Escola() {
     if (!activeChild) return;
     setLoading(true);
     try {
-      // 1. O SISTEMA gera (ou reusa do banco) a atividade
+      const isInfantil = isEI(selectedGrade);
+      
+      // 1. Priorizar conteúdo do Banco Pedagógico (Supabase)
+      const { data: dbSkills, error: skillsError } = await supabase
+        .from('bncc_skills')
+        .select('*, pedagogical_explanations(*), pedagogical_activities(*)')
+        .eq('grade', selectedGrade)
+        .eq('field', isInfantil ? materiaId : (materiaId.charAt(0).toUpperCase() + materiaId.slice(1)))
+        .limit(1);
+
+      if (dbSkills && dbSkills.length > 0) {
+        const skill = dbSkills[0];
+        const explanation = skill.pedagogical_explanations?.[0];
+        const activity = skill.pedagogical_activities?.[0];
+        
+        if (explanation && activity) {
+          // Usar conteúdo fixo do banco
+          setAula({
+            materia: materiaId,
+            grade: selectedGrade,
+            skill_code: skill.code,
+            etapa1_intro: explanation.content.intro,
+            etapa2_conceito: explanation.content.conceito,
+            etapa3_exemplo: activity.demonstration.text,
+            etapa4_como_monta: activity.guided_training.instruction,
+            etapa5_instrucao: activity.practice.instruction,
+            desafio_final: activity.challenge.instruction,
+            reforco_positivo: "Você brilhou!",
+            visual: activity.demonstration.visual_key,
+            isEI: isInfantil,
+            guided: true,
+            db_activity: activity,
+            db_explanation: explanation
+          });
+          setLoading(false);
+          return;
+        }
+      }
+
+      // 2. Fallback para Motor Procedural se não houver no banco (Mantendo funcionamento enquanto o banco cresce)
       const service = ActivityProceduralService.getInstance();
       const domain = DOMAIN_MAP[materiaId] || "linguistics";
       const difficulty = isEI(selectedGrade) ? 0.15 : 0.5;
