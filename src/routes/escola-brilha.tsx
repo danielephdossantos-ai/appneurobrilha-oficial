@@ -133,6 +133,25 @@ const ALMOST_THERE = [
 ];
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
+const FloatingMascotGuidance = ({ activeMascot, icon }: { activeMascot: any, icon: any }) => {
+  return (
+    <div className="fixed bottom-6 left-6 z-[60] animate-in slide-in-from-left duration-500 hidden md:block">
+      <div className="relative group">
+        <div className="w-24 h-24 rounded-full bg-white border-4 border-primary shadow-glow flex items-center justify-center overflow-hidden">
+           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
+           ) : (
+             <RenderMascote icon={activeMascot?.mascot?.image_url || icon} className="h-14 w-14 text-primary" />
+           )}
+        </div>
+        <div className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-sm">
+          PROFESSOR
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 // ============== Banco BNCC (50 atividades por lote, infinito) ==============
 const BANCO_TAMANHO = 50;
@@ -651,21 +670,30 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(msg);
       utterance.lang = 'pt-BR';
-      utterance.rate = 0.9; // Um pouco mais lento para crianças
+      utterance.rate = 0.85; 
       window.speechSynthesis.speak(utterance);
     };
 
-    let text = "";
-    if (eiStep === 1) text = aula.frase_apresentacao || `Esta é uma ${palavraFoco}`;
-    else if (eiStep === 2) text = palavraFoco;
-    else if (eiStep === 3) text = silabas.join(" - ");
-    else if (eiStep === 4) text = "Vamos montar a palavra?";
-    else if (eiStep === 5) text = `Qual palavra é ${palavraFoco}?`;
-    else if (eiStep === 6) text = "Vamos escrever?";
-    else if (eiStep === 7) text = "Parabéns! Você brilhou!";
-    
-    if (text) playAudio(text);
-  }, [eiStep, palavraFoco, silabas, aula.frase_apresentacao]);
+    const runGuidedFlow = async () => {
+      if (eiStep === 1) {
+        playAudio(aula.etapa1_intro || aula.frase_apresentacao || `Esta é uma ${palavraFoco}`);
+      } else if (eiStep === 2) {
+        playAudio(aula.etapa2_conceito || "Olha como se escreve!");
+      } else if (eiStep === 3) {
+        playAudio(aula.etapa3_exemplo || "Vamos separar os pedacinhos?");
+      } else if (eiStep === 4) {
+        playAudio(aula.etapa4_como_monta || "Vamos montar a palavra?");
+      } else if (eiStep === 5) {
+        playAudio(aula.etapa5_instrucao || `Qual palavra é ${palavraFoco}?`);
+      } else if (eiStep === 6) {
+        playAudio("Use o dedo para desenhar a palavra!");
+      } else if (eiStep === 7) {
+        playAudio(aula.reforco_positivo || "Parabéns! Você brilhou!");
+      }
+    };
+
+    runGuidedFlow();
+  }, [eiStep, palavraFoco, silabas, aula]);
 
 
   return (
@@ -1165,6 +1193,26 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     }
   }, [aula.etapa, aula.guided, aula.isEI, eiStep]);
 
+  // Áudio Automático para o Professor Pip/Pipa no fluxo guiado (Geral)
+  useEffect(() => {
+    if (aula.guided && !isAlfaFlow && !isMathFlow && eiStep <= 5) {
+      const texts = [
+        aula.etapa1_intro,
+        aula.etapa2_conceito,
+        aula.etapa3_exemplo,
+        aula.etapa4_como_monta,
+        aula.etapa5_instrucao
+      ];
+      const currentText = texts[eiStep - 1];
+      if (currentText) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(currentText);
+        u.lang = "pt-BR"; u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+      }
+    }
+  }, [eiStep, aula.guided, isAlfaFlow, isMathFlow, aula]);
+
   const getPipStage = (): 'explanation' | 'encouragement' | 'celebration' | 'idle' => {
     if (acertou === true) return 'celebration';
     if (aula.guided && !isAlfaFlow && !isMathFlow) {
@@ -1231,7 +1279,8 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
             <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo</div>
-          </div>
+        </div>
+        <FloatingMascotGuidance activeMascot={activeMascot} icon={materiaMeta.mascote} />
         </Card>
       )}
 
@@ -1366,7 +1415,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                                'bottom-[-11px] left-1/2 -translate-x-1/2'
                              }`} />
 
-                             <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase">
+                             <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase animate-in fade-in zoom-in duration-700">
                                {eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
                                 eiStep === 2 ? "Olha bem para isto..." :
                                 eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
