@@ -108,15 +108,23 @@ export class LinguisticsGenerator extends BaseGenerator {
       const targetWord = this.pickRandom(words);
 
       if (type === "phonemes") {
+        const targetWord = input.grade?.includes("1º") ? { word: "MALA", syllables: ["MA", "LA"], emoji: "👜" } : this.pickRandom(words);
         const firstLetter = targetWord.word[0];
         const options = this.shuffle([
           firstLetter,
           ...this.pickNRandom(LINGUISTICS_DATA.consonants.filter(c => c !== firstLetter), 3)
         ]);
-        return { targetWord, firstLetter, options };
+        return { 
+          targetWord, 
+          firstLetter, 
+          options,
+          sound: `Som da letra ${firstLetter}`, // Novo campo para o Método Fônico
+          exemplo_palavras: ["MALA", "MAMA", "MAPA"] // Exemplos solicitados
+        };
       }
 
       if (type === "syllables") {
+        const targetWord = input.grade?.includes("1º") ? { word: "MALA", syllables: ["MA", "LA"], emoji: "👜" } : this.pickRandom(words);
         const missingSyllableIndex = Math.floor(Math.random() * targetWord.syllables.length);
         const missingSyllable = targetWord.syllables[missingSyllableIndex];
         const options = this.shuffle([
@@ -127,7 +135,8 @@ export class LinguisticsGenerator extends BaseGenerator {
           targetWord,
           syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
           missingSyllable,
-          options
+          options,
+          combination: input.grade?.includes("1º") ? "M + A = MA" : undefined
         };
       }
 
