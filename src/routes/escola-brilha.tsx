@@ -8,8 +8,8 @@ import {
   Bird, Apple, Rainbow, Trees, Bug, Library, Telescope, 
   TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
   Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, 
-  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer,
-  Bot
+  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer
+
 
 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
