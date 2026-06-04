@@ -309,7 +309,7 @@ function Escola() {
       const isInfantil = isEI(selectedGrade);
       
       // 1. Priorizar conteúdo do Banco Pedagógico (Supabase)
-      const { data: dbSkills, error: skillsError } = await supabase
+      const { data: dbSkills, error: skillsError } = await (supabase as any)
         .from('bncc_skills')
         .select('*, pedagogical_explanations(*), pedagogical_activities(*)')
         .eq('grade', selectedGrade)
@@ -327,14 +327,14 @@ function Escola() {
             materia: materiaId,
             grade: selectedGrade,
             skill_code: skill.code,
-            etapa1_intro: explanation.content.intro,
-            etapa2_conceito: explanation.content.conceito,
-            etapa3_exemplo: activity.demonstration.text,
-            etapa4_como_monta: activity.guided_training.instruction,
-            etapa5_instrucao: activity.practice.instruction,
-            desafio_final: activity.challenge.instruction,
+            etapa1_intro: (explanation.content as any).intro,
+            etapa2_conceito: (explanation.content as any).conceito,
+            etapa3_exemplo: (activity.demonstration as any).text,
+            etapa4_como_monta: (activity.guided_training as any).instruction,
+            etapa5_instrucao: (activity.practice as any).instruction,
+            desafio_final: (activity.challenge as any).instruction,
             reforco_positivo: "Você brilhou!",
-            visual: activity.demonstration.visual_key,
+            visual: (activity.demonstration as any).visual_key,
             isEI: isInfantil,
             guided: true,
             db_activity: activity,
