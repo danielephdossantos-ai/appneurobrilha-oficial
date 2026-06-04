@@ -126,10 +126,16 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
         <CardContent className="p-8">
           {step === 'explicação' && (
             <div className="space-y-6 text-center">
-              <div className="bg-blue-50 p-6 rounded-2xl inline-block mb-4">
-                <Play className="w-12 h-12 text-blue-500" />
+              <div className="flex justify-center mb-4">
+                <div className="w-48 h-48">
+                  <img 
+                    src="/src/assets/pip-mascot.png" 
+                    alt="Pip" 
+                    className="w-full h-full object-contain drop-shadow-2xl" 
+                  />
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-800">Hora de aprender!</h3>
+              <h3 className="text-2xl font-bold text-slate-800">Hora de aprender com o Pip!</h3>
               <p className="text-xl text-slate-600 leading-relaxed italic">
                 " {explanation?.texto_professor} "
               </p>
@@ -138,7 +144,7 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
               )}
               <div className="pt-8">
                 <Button onClick={handleNextStep} size="lg" className="rounded-full px-8 gap-2 bg-blue-600 hover:bg-blue-700">
-                  Entendi! <ChevronRight />
+                  Entendi, Pip! <ChevronRight />
                 </Button>
               </div>
             </div>
@@ -208,8 +214,14 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
 
           {step === 'domínio' && (
             <div className="text-center space-y-8 py-8">
-              <div className="relative inline-block">
-                <Star className="w-24 h-24 text-yellow-400 fill-yellow-400 animate-bounce" />
+              <div className="flex justify-center mb-4">
+                <div className="w-48 h-48">
+                  <img 
+                    src="/src/assets/pip-mascot.png" 
+                    alt="Pip" 
+                    className="w-full h-full object-contain drop-shadow-2xl animate-bounce" 
+                  />
+                </div>
               </div>
               
               <div className="space-y-4">
