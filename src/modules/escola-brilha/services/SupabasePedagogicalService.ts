@@ -153,7 +153,7 @@ export class SupabasePedagogicalService {
 
   async getNextSkill(currentSkillCode: string): Promise<BNCCSkill | null> {
     const currentSkill = await this.getSkillByCode(currentSkillCode);
-    if (!currentSkill || currentSkill.ordem === null) return null;
+    if (!currentSkill || currentSkill.ordem === null || !currentSkill.ano || !currentSkill.disciplina) return null;
 
     const { data, error } = await supabase
       .from('bncc_habilidades')
@@ -163,7 +163,7 @@ export class SupabasePedagogicalService {
       .gt('ordem', currentSkill.ordem)
       .order('ordem', { ascending: true })
       .limit(1)
-      .single();
+      .maybeSingle();
 
     if (error) return null;
     return data;
@@ -171,7 +171,7 @@ export class SupabasePedagogicalService {
 
   async isSkillUnlocked(alunoId: string, skillCode: string): Promise<boolean> {
     const skill = await this.getSkillByCode(skillCode);
-    if (!skill) return false;
+    if (!skill || !skill.ano || !skill.disciplina) return false;
     
     // First skill is always unlocked
     if (skill.ordem === 1) return true;
@@ -185,7 +185,7 @@ export class SupabasePedagogicalService {
       .lt('ordem', skill.ordem)
       .order('ordem', { ascending: false })
       .limit(1)
-      .single();
+      .maybeSingle();
 
     if (error || !data) return true; // If no previous skill found, unlock it
 
