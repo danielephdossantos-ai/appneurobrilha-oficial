@@ -58,13 +58,6 @@ const SKINS = [
   { key: 'pipa-musica', name: 'Pipa Musicista', title: 'Música', image: pipaMusica, description: 'Cantando e dançando ao som do coração.' },
   { key: 'pipa-super-heroina', name: 'Pipa Super', title: 'Super-Heroína', image: pipaSuperHeroina, description: 'Salvando o dia com coragem e gentileza.' },
   // Novos personagens integrados à coleção
-  { key: 'rex', name: 'Rex', title: 'Dino Explorador', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Rex&backgroundColor=b6e3f4', description: 'O T-Rex explorador com um sorriso gigante.' },
-  { key: 'tina', name: 'Tina', title: 'Mestra Sabedoria', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Tina&backgroundColor=ffdfbf', description: 'Triceratops gentil com cores vivas e muita calma.' },
-  { key: 'astro', name: 'Astro', title: 'Viajante Estelar', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Astro&backgroundColor=c0aede', description: 'Robô astronauta expressivo e muito amigável.' },
-  { key: 'nova', name: 'Nova', title: 'Guia das Estrelas', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Nova&backgroundColor=d1d4f9', description: 'Cadelinha espacial pronta para guiar aventuras.' },
-  { key: 'luna', name: 'Luna', title: 'Gata Mística', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Luna&backgroundColor=ffd5dc', description: 'Gata unicórnio mágica com chifre brilhante.' },
-  { key: 'mia', name: 'Mia', title: 'Patinhas Curiosas', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Mia&backgroundColor=ffdfbf', description: 'Gatinha delicada com olhos enormes e encantadores.' },
-  { key: 'turbo', name: 'Turbo', title: 'Piloto do Saber', image: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Turbo&backgroundColor=b6e3f4', description: 'Carrinho de corrida veloz com cores vibrantes.' },
 ];
 
 const PIPA_HIGHLIGHTS = [

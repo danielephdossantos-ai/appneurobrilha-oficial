@@ -12,9 +12,9 @@ export interface MascotState {
 
 export class MascotEngine {
   private static readonly MASCOTS = {
-    amigo: { name: "Lumi", personality: "acolhedor" },
-    mentor: { name: "Dr. Sabio", personality: "instrutivo" },
-    explorador: { name: "Zapt", personality: "energético" }
+    amigo: { name: "Pip", personality: "acolhedor" },
+    mentor: { name: "Pip", personality: "instrutivo" },
+    explorador: { name: "Pip", personality: "energético" }
   };
 
   static getMascot(type: keyof typeof MascotEngine.MASCOTS = "amigo"): MascotState {
