@@ -1497,22 +1497,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 ) : (
                   <div className="w-full">
                     {/* Cabeçalho do Jogo com Instrução do Mascote */}
-                    <div className="flex items-end gap-4 mb-8">
-                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center overflow-hidden">
-                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-14 w-14 text-primary" />
-                          )}
-                       </div>
-                       <div className="flex-1 bg-white rounded-2xl border-[3px] border-foreground px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative mb-2">
-                          <div className="absolute -left-3 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-foreground" />
-                          <div className="absolute -left-[8px] bottom-[17px] w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[10px] border-r-white" />
-                          <p className="font-bold text-primary uppercase text-sm md:text-base leading-tight">
+                    <div className="flex items-center justify-center mb-8">
+                       <div className="w-full max-w-lg bg-white rounded-2xl border-[3px] border-foreground px-6 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative">
+                          <p className="font-black text-primary uppercase text-lg md:text-xl text-center leading-tight">
                             {aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!"}
                           </p>
                        </div>
                     </div>
+
 
                     <EIMiniGame
                       aula={aula}
