@@ -552,7 +552,9 @@ function Escola() {
         const t = tierTheme[gradeTier(selectedGrade)];
         return (
           <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
-            <div className="absolute right-3 top-2 text-5xl opacity-40 animate-float-thinking select-none">{t.sceneEmoji}</div>
+            <div className="absolute right-3 top-2 opacity-40 animate-float-thinking select-none">
+              <t.sceneIcon className="h-20 w-20" />
+            </div>
             <div className="relative">
               <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
               <div className="text-2xl font-extrabold">{t.scene}</div>
@@ -1226,7 +1228,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     <Shell>
       {/* Cenário mágico de fundo por faixa etária */}
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
-        <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
+        <div className="absolute -right-4 -top-2 opacity-30 select-none animate-float-thinking">
+          <theme.sceneIcon className="h-32 w-32" />
+        </div>
         <div className="relative flex items-center gap-4">
           <div className="text-5xl drop-shadow animate-float-thinking">
             {activeMascot?.mascot?.image_url?.startsWith('http') ? (
