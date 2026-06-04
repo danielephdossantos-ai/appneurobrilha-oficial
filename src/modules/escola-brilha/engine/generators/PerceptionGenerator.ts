@@ -17,11 +17,14 @@ export class PerceptionGenerator extends BaseGenerator {
 
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
+    if (type === 'ei-find-shape' || type === 'ei-find-color') return "Trilha das Cores e Formas";
     return type === "visual-search" ? "Olho de Lince" : "Ouvido Atento";
   }
 
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
+    if (type === 'ei-find-shape') return "Encontre o desenho correto!";
+    if (type === 'ei-find-color') return "Qual é a cor deste objeto?";
     return type === "visual-search" 
       ? "Encontre o objeto escondido." 
       : "Ouça o som e identifique o animal.";
