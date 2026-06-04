@@ -394,15 +394,15 @@ function MissingSequence({ aula, disabled, onAnswer }: Props) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-12">
-      <div className="flex gap-6 items-center">
+    <div className="flex flex-col items-center gap-8">
+      <div className="flex gap-4 items-center">
         {sequence.map((item: string, i: number) => (
-          <div key={i} className="w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-white border-4 border-dashed border-primary/30 flex items-center justify-center shadow-inner">
+          <div key={i} className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white border-4 border-dashed border-primary/30 flex items-center justify-center shadow-inner">
             {!revealed || i !== hiddenIdx ? (
-              getIcon(item, "w-16 h-16 text-primary animate-bounce")
+              getIcon(item, "w-12 h-12 text-primary animate-bounce")
             ) : (
-              <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center">
-                <HelpCircle className="w-10 h-10 text-slate-300" />
+              <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center">
+                <HelpCircle className="w-8 h-8 text-slate-300" />
               </div>
             )}
           </div>
@@ -418,15 +418,59 @@ function MissingSequence({ aula, disabled, onAnswer }: Props) {
                 const ok = opt === sequence[hiddenIdx];
                 fire(ok, opt);
               }}
-              className="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-white border-4 border-slate-200 flex items-center justify-center hover:border-primary transition-all shadow-md"
+              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white border-4 border-slate-200 flex items-center justify-center hover:border-primary transition-all shadow-md"
             >
-              {getIcon(opt, "w-12 h-12")}
+              {getIcon(opt, "w-10 h-10")}
             </button>
           ))}
         </div>
       )}
     </div>
   );
+}
+
+/* ---------- MODE: VISUAL OP (Addition/Subtraction) ---------- */
+function VisualOp({ aula, disabled, onAnswer }: Props) {
+  const a = Number(aula.numero_a || 1);
+  const b = Number(aula.numero_b || 1);
+  const op = aula.operacao || "+";
+  const result = Number(aula.resultado || (op === "+" ? a + b : a - b));
+  const visual = aula.visual || "apple";
+  const { celebrate, fire } = useFeedback(onAnswer);
+  const [done, setDone] = useState(false);
+  const [wrong, setWrong] = useState<number | null>(null);
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      {celebrate && <Confetti />}
+      <div className="flex flex-wrap items-center justify-center gap-4 bg-white/60 p-6 rounded-3xl border-4 border-white shadow-soft">
+        <div className="flex flex-wrap gap-1 max-w-[150px] justify-center">
+           {Array.from({length: a}).map((_, i) => <div key={i}>{getIcon(visual, "w-8 h-8")}</div>)}
+        </div>
+        <div className="text-4xl font-black text-sun">{op}</div>
+        <div className="flex flex-wrap gap-1 max-w-[150px] justify-center">
+           {Array.from({length: b}).map((_, i) => <div key={i}>{getIcon(visual, "w-8 h-8")}</div>)}
+        </div>
+        <div className="text-4xl font-black text-primary">= ?</div>
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        {(aula.opcoes || [result, result+1, result-1]).map((opt: any, i: number) => {
+          const n = Number(opt);
+          const isCorrect = n === result;
+          return (
+            <button key={i} disabled={disabled || done}
+              onClick={() => {
+                if (isCorrect) { setDone(true); fire(true, n.toString()); }
+                else { setWrong(n); setTimeout(() => setWrong(null), 600); fire(false, n.toString()); }
+              }}
+              className={`w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${PALETTE[i % PALETTE.length]} border-4 border-white text-4xl md:text-5xl font-black text-white shadow-lg ${wrong === n ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"}`}>
+              {n}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 /* ---------- MODE: QUANTITY DRAG ---------- */
@@ -484,6 +528,9 @@ export function EIMiniGame(props: Props) {
     case "quantity": return <QuantityDrag {...props} />;
     case "shape": return <ShapeMatch {...props} />;
     case "sum": return <PhonemeSum {...props} />;
+    case "alfa-syllable": return <PhonemeSum {...props} />;
+    case "alfa-sum": return <VisualOp {...props} />;
+    case "alfa-sub": return <VisualOp {...props} />;
     case "word": return <WordBuild {...props} />;
     default: return <Bubbles {...props} />;
   }

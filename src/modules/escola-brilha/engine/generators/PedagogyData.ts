@@ -48,6 +48,41 @@ export function isEarlyChildhood(grade?: string): boolean {
   return g.includes('infantil') || g.includes('pré') || g.includes('pre');
 }
 
+export const ALPHABETIZATION_DATA = {
+  syllableFormation: [
+    { parts: ['M', 'A'], result: 'MA', distractors: ['ME', 'MO'] },
+    { parts: ['B', 'A'], result: 'BA', distractors: ['BE', 'BO'] },
+    { parts: ['L', 'A'], result: 'LA', distractors: ['LE', 'LO'] },
+    { parts: ['P', 'A'], result: 'PA', distractors: ['PE', 'PO'] },
+  ],
+  completeWord: [
+    { word: 'GATO', display: 'GA _ O', missing: 'TO', distractors: ['TA', 'TU'], visual: '🐱' },
+    { word: 'BOLA', display: 'BO _ A', missing: 'LA', distractors: ['LE', 'LO'], visual: '⚽' },
+    { word: 'CASA', display: 'CA _ A', missing: 'SA', distractors: ['SE', 'SI'], visual: '🏠' },
+    { word: 'PATO', display: 'PA _ O', missing: 'TO', distractors: ['TA', 'TI'], visual: '🦆' },
+  ],
+  shortReading: [
+    { text: 'A BOLA É AZUL.', question: 'Qual é a cor da bola?', options: ['Azul', 'Vermelha'], answer: 'Azul', visual: '🔵' },
+    { text: 'O GATO É PRETO.', question: 'Qual é a cor do gato?', options: ['Preto', 'Branco'], answer: 'Preto', visual: '🐱' },
+    { text: 'A CASA É GRANDE.', question: 'Como é a casa?', options: ['Grande', 'Pequena'], answer: 'Grande', visual: '🏠' },
+  ]
+};
+
+export const FIRST_GRADE_MATH = {
+  visualAddition: [
+    { group1: { n: 2, item: '🍎' }, group2: { n: 1, item: '🍎' }, answer: 3, options: [2, 3, 4] },
+    { group1: { n: 3, item: '⭐' }, group2: { n: 2, item: '⭐' }, answer: 5, options: [4, 5, 6] },
+  ],
+  visualSubtraction: [
+    { total: { n: 4, item: '🐟' }, take: 1, answer: 3, options: [2, 3, 4] },
+    { total: { n: 5, item: '🍎' }, take: 2, answer: 3, options: [3, 4, 5] },
+  ],
+  tens: [
+    { question: '3 dezenas?', answer: '30', options: ['10', '20', '30'] },
+    { question: '2 dezenas?', answer: '20', options: ['10', '20', '30'] },
+    { question: '1 dezena?', answer: '10', options: ['10', '20', '30'] },
+  ]
+};
 
 export const LINGUISTICS_DATA = {
   vowels: ['a', 'e', 'i', 'o', 'u'],

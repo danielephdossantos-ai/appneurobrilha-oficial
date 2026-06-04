@@ -396,18 +396,17 @@ function Escola() {
 
       console.log("Formatted data for AI:", { systemQuestion, systemOptions, systemAnswer });
 
-      // Determinar o tipo de minijogo para a IA adaptar a narração (apenas para EI)
-      let miniGameType = "bubbles";
-      if (isEI(selectedGrade)) {
-        const opts = (systemOptions || []).map(String);
-        const palavra = (activity.content.palavra || systemAnswer || "").toUpperCase();
-        const isShapes = materiaId.includes("forma") || activity.title.toLowerCase().includes("forma") || 
-                        ["TRIANGULO", "TRIÂNGULO", "CIRCULO", "CÍRCULO", "QUADRADO", "RETANGULO", "RETÂNGULO", "ESTRELA", "CORACAO", "CORAÇÃO", "LOSANGO", "OVAL", "HEXAGONO", "HEXÁGONO"].includes(systemAnswer.toUpperCase());
-        
-        const allSingleLetters = opts.length > 0 && opts.every((o: string) => o.trim().length === 1);
-        if (isShapes) miniGameType = "shape";
-        else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
-        else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+      // Determinar o tipo de minijogo para a IA adaptar a narração
+      let miniGameType = activity.content.miniGameType || "bubbles";
+      
+      // Mapear tipos de 1º Ano para miniGameType
+      const is1stGrade = selectedGrade.includes("1º");
+      if (is1stGrade) {
+        if (activity.content.combination) miniGameType = "alfa-syllable";
+        else if (activity.content.missingSyllable) miniGameType = "alfa-complete";
+        else if (activity.content.text) miniGameType = "alfa-reading";
+        else if (activity.content.group1) miniGameType = "alfa-sum";
+        else if (activity.content.take) miniGameType = "alfa-sub";
       }
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
@@ -442,10 +441,16 @@ function Escola() {
         opcoes: systemOptions,
         resposta_correta: systemAnswer,
         // Conteúdo visual extra (emoji/cor) para Educação Infantil
-        visual: activity.content.visual,
+        visual: activity.content.visual || activity.content.visual_key || data.visual_key,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
         guided: guidedActive,
+        miniGameType,
+        // Dados específicos para 1º Ano
+        numero_a: activity.content.group1?.n || activity.content.total?.n || data.numero_a,
+        numero_b: activity.content.group2?.n || activity.content.take || data.numero_b,
+        operacao: activity.content.group1 ? "+" : activity.content.total ? "-" : data.operacao,
+        palavra_foco: activity.content.targetWord?.word || activity.content.palavra || data.palavra_foco,
       };
 
 
@@ -705,10 +710,9 @@ function Escola() {
 
 
 function Literacy1stGradeFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; step: number; setStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
-  const [montagem, setMontagem] = useState<string[]>([]);
-  const silabas = aula.silabas || ["MA", "LA"];
   const palavraFoco = (aula.palavra_foco || "MALA").toUpperCase();
-  const opcoes = aula.opcoes_identificacao || [palavraFoco, "MAMA", "MAPA"];
+  const opcoes = aula.opcoes || [palavraFoco, "MAMA", "MAPA"];
+  const miniGameType = aula.miniGameType;
   
   const sortedOpcoes = useMemo(() => [...opcoes].sort(() => Math.random() - 0.5), [opcoes]);
 
@@ -721,12 +725,12 @@ function Literacy1stGradeFlow({ aula, step, setStep, activeMascot, materiaMeta, 
       window.speechSynthesis.speak(utterance);
     };
 
-    if (step === 1) playAudio("Vamos rimar? Ouça o som!");
-    if (step === 2) playAudio(`Este é o som da letra ${palavraFoco[0]}. Ouça: mmm`);
-    if (step === 3) playAudio(`Vamos juntar? ${palavraFoco[0]} mais A faz MA!`);
-    if (step === 4) playAudio(`Onde está escrito ${palavraFoco}?`);
-    if (step === 5) playAudio("Parabéns! Você é brilhante!");
-  }, [step, palavraFoco]);
+    if (step === 1) playAudio(aula.etapa1_intro || "Vamos começar!");
+    if (step === 2) playAudio(aula.etapa2_conceito || "Olha só!");
+    if (step === 3) playAudio(aula.etapa3_exemplo || "Vou te explicar.");
+    if (step === 4) playAudio(aula.etapa5_instrucao || "Agora é sua vez!");
+    if (step === 5) playAudio(aula.reforco_positivo || "Parabéns! Você é brilhante!");
+  }, [step, aula]);
 
   return (
     <div className="w-full max-w-2xl space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -734,56 +738,59 @@ function Literacy1stGradeFlow({ aula, step, setStep, activeMascot, materiaMeta, 
         {step === 1 && (
           <div className="text-center space-y-4">
             <div className="drop-shadow-2xl animate-bounce-slow">
-              <RenderVisual value={aula.visual || "music"} className="h-40 w-40 text-primary mx-auto" />
+              <RenderVisual value={aula.visual || "book"} className="h-40 w-40 text-primary mx-auto" />
             </div>
-            <p className="text-3xl font-black uppercase text-primary">Vamos começar com música!</p>
+            <p className="text-3xl font-black uppercase text-primary leading-tight">
+              {aula.etapa1_intro || "VAMOS DESCOBRIR!"}
+            </p>
           </div>
         )}
 
         {step === 2 && (
           <div className="text-center space-y-6">
-            <div className="bg-primary text-white text-9xl font-black w-48 h-48 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
-              {palavraFoco[0]}
+            <div className="bg-primary text-white text-7xl md:text-9xl font-black min-w-[12rem] h-48 rounded-3xl flex items-center justify-center shadow-glow mx-auto p-4">
+              {palavraFoco}
             </div>
-            <p className="text-2xl font-black text-primary">Som da letra {palavraFoco[0]}</p>
+            <p className="text-2xl font-black text-primary uppercase leading-tight">
+              {aula.etapa2_conceito || `VAMOS VER A PALAVRA ${palavraFoco}`}
+            </p>
           </div>
         )}
 
         {step === 3 && (
           <div className="flex flex-col items-center gap-8">
-            <div className="flex gap-4 items-center justify-center">
-              <div className="w-32 h-32 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-6xl font-black text-primary">
-                {palavraFoco[0]}
+            <div className="flex flex-col items-center gap-4">
+              <RenderVisual value={aula.visual || "star"} className="h-40 w-40 text-primary mx-auto" />
+              <div className="text-4xl font-black text-primary text-center px-4 leading-tight uppercase">
+                {aula.etapa3_exemplo || "JUNTE OS PEDACINHOS!"}
               </div>
-              <div className="text-5xl font-black text-sun">+</div>
-              <div className="w-32 h-32 rounded-3xl bg-white border-4 border-primary shadow-xl flex items-center justify-center text-6xl font-black text-primary">
-                A
-              </div>
-            </div>
-            <div className="text-7xl font-black text-primary animate-in zoom-in">
-              = {palavraFoco.substring(0, 2)}
             </div>
           </div>
         )}
 
         {step === 4 && (
           <div className="w-full space-y-6">
-            <div className="text-center mb-4">
-              <RenderVisual value={aula.visual || "star"} className="h-28 w-28 text-primary mx-auto" />
+            <div className="text-center mb-6">
+              <div className="bg-white rounded-2xl border-[3px] border-foreground px-6 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] inline-block">
+                <p className="font-black text-primary uppercase text-lg md:text-xl leading-tight">
+                  {aula.etapa5_instrucao || "QUAL É O CERTO?"}
+                </p>
+              </div>
             </div>
             <div className="grid grid-cols-1 gap-4">
               {sortedOpcoes.map((opt: string, i: number) => (
                 <button
                   key={i}
                   onClick={() => {
-                    if (opt.toUpperCase() === palavraFoco) {
+                    const isCorrect = String(opt).toUpperCase() === String(aula.resposta_correta || aula.answer || palavraFoco).toUpperCase();
+                    if (isCorrect) {
                       setStep(5);
                       toast.success("Incrível!");
                     } else {
-                      toast.error("Quase lá! Tente de novo.");
+                      toast.error(aula.dica || "Quase lá! Tente de novo.");
                     }
                   }}
-                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-4xl font-black uppercase shadow-soft"
+                  className="btn-tap p-6 rounded-3xl bg-white border-4 border-muted hover:border-primary text-3xl md:text-4xl font-black uppercase shadow-soft"
                 >
                   {opt}
                 </button>
@@ -797,7 +804,9 @@ function Literacy1stGradeFlow({ aula, step, setStep, activeMascot, materiaMeta, 
             <div className="animate-bounce-slow">
               <Sparkles className="h-40 w-40 text-sun mx-auto" />
             </div>
-            <h3 className="text-4xl font-black text-primary uppercase">Você Brilhou!</h3>
+            <h3 className="text-4xl font-black text-primary uppercase leading-tight">
+              {aula.reforco_positivo || "Você Brilhou!"}
+            </h3>
             <button
               onClick={() => onComplete(true)}
               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-8"
@@ -827,14 +836,12 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
   const b = Number(aula.numero_b ?? 2);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const visualKey = aula.visual_key || aula.visual_emoji || aula.visual || "apple";
+  const visualKey = aula.visual || "apple";
+  const opcoes = aula.opcoes || [resultado, resultado + 1, resultado - 1];
   
-  const [contados, setContados] = useState<number[]>([]);
-  
-  const opcoesNum: number[] = useMemo(() => {
-    const base = [resultado, Math.max(0, resultado - 1), resultado + 1];
-    return [...new Set(base)].sort(() => Math.random() - 0.5) as number[];
-  }, [resultado]);
+  const sortedOpcoes = useMemo(() => {
+    return [...new Set(opcoes)].map(Number).sort(() => Math.random() - 0.5);
+  }, [opcoes]);
 
   useEffect(() => {
     const playAudio = (msg: string) => {
@@ -843,12 +850,12 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
       u.lang = "pt-BR"; u.rate = 0.9;
       window.speechSynthesis.speak(u);
     };
-    if (step === 1) playAudio("Vamos ver quantos temos?");
-    if (step === 2) playAudio(`Olha o número ${a}!`);
-    if (step === 3) playAudio(`Vamos contar? ${a} ${op === "+" ? "mais" : "menos"} ${b}`);
-    if (step === 4) playAudio(`Quanto é o resultado?`);
-    if (step === 5) playAudio("Parabéns! Você é fera na matemática!");
-  }, [step, a, b, op]);
+    if (step === 1) playAudio(aula.etapa1_intro || "Vamos ver quantos temos?");
+    if (step === 2) playAudio(aula.etapa2_conceito || `Olha o número ${a}!`);
+    if (step === 3) playAudio(aula.etapa3_exemplo || `Vamos contar? ${a} ${op === "+" ? "mais" : "menos"} ${b}`);
+    if (step === 4) playAudio(aula.etapa5_instrucao || `Qual o resultado final?`);
+    if (step === 5) playAudio(aula.reforco_positivo || "Parabéns! Você é fera na matemática!");
+  }, [step, aula, a, b, op]);
 
   const renderVisuals = (n: number, color = "text-primary") => (
     <div className="flex flex-wrap gap-2 justify-center max-w-md">
@@ -865,48 +872,58 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {step === 1 && (
           <div className="text-center space-y-6">
-            {renderVisuals(a)}
-            <p className="text-3xl font-black text-primary uppercase">Aquecimento!</p>
+            <div className="bg-primary/10 rounded-3xl p-8 border-2 border-dashed border-primary/30">
+              {renderVisuals(a)}
+            </div>
+            <p className="text-3xl font-black text-primary uppercase leading-tight">
+              {aula.etapa1_intro || "VAMOS DESCOBRIR!"}
+            </p>
           </div>
         )}
 
         {step === 2 && (
           <div className="text-center space-y-6">
-            <div className="bg-primary text-white text-9xl font-black w-40 h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
+            <div className="bg-primary text-white text-9xl font-black w-48 h-48 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
               {a}
             </div>
-            <p className="text-2xl font-black text-primary">Este é o número {a}!</p>
+            <p className="text-2xl font-black text-primary uppercase leading-tight">
+              {aula.etapa2_conceito || `ESTE É O NÚMERO ${a}`}
+            </p>
           </div>
         )}
 
         {step === 3 && (
-          <div className="space-y-4 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="space-y-8 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-6 bg-white rounded-3xl p-8 shadow-soft border-2 border-muted">
               {renderVisuals(a)}
               <div className="text-6xl font-black text-sun">{op}</div>
               {renderVisuals(b, "text-success")}
             </div>
-            <div className="text-6xl font-black text-primary mt-6">
-              {a} <span className="text-sun">{op}</span> {b} = ?
+            <div className="text-4xl md:text-5xl font-black text-primary mt-6 uppercase leading-tight">
+              {aula.etapa3_exemplo || "VAMOS CALCULAR!"}
             </div>
           </div>
         )}
 
         {step === 4 && (
           <div className="w-full space-y-6">
-            <div className="text-center text-6xl font-black text-primary">
-              {a} <span className="text-sun">{op}</span> {b} = ?
+            <div className="text-center mb-6">
+              <div className="bg-white rounded-2xl border-[3px] border-foreground px-6 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] inline-block">
+                <p className="font-black text-primary uppercase text-lg md:text-xl leading-tight">
+                  {aula.etapa5_instrucao || "QUAL O RESULTADO?"}
+                </p>
+              </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              {opcoesNum.map((n, i) => (
+              {sortedOpcoes.map((n, i) => (
                 <button
                   key={i}
                   onClick={() => {
-                    if (n === resultado) {
+                    if (Number(n) === resultado) {
                       setStep(5);
                       toast.success("Correto!");
                     } else {
-                      toast.error("Tente contar de novo!");
+                      toast.error(aula.dica || "Tente contar de novo!");
                     }
                   }}
                   className="btn-tap aspect-square rounded-3xl bg-white border-4 border-muted hover:border-primary text-6xl font-black text-primary shadow-soft"
@@ -923,7 +940,9 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
             <div className="animate-bounce-slow">
               <Sparkles className="h-40 w-40 text-sun mx-auto" />
             </div>
-            <h3 className="text-4xl font-black text-primary uppercase">Você Arrasou!</h3>
+            <h3 className="text-4xl font-black text-primary uppercase leading-tight">
+              {aula.reforco_positivo || "Você Brilhou!"}
+            </h3>
             <button
               onClick={() => onComplete(true)}
               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"

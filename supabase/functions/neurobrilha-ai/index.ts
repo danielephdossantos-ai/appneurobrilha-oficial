@@ -131,7 +131,7 @@ serve(async (req) => {
       1. MÁXIMO 1 frase curta por campo (no máximo 8 a 10 palavras).
       2. MÁXIMO 2 linhas de texto na tela.
       3. PROIBIDO parágrafos ou blocos de texto longos.
-      4. PROIBIDO emojis em qualquer campo de texto.
+      4. PROIBIDO emojis em qualquer campo de texto gerado por você.
       5. TODO ENSINO DEVE SER GRADUAL.
       
       ESTRUTURA OFICIAL ESCOLA BRILHA 2.0 (8 PASSOS):
@@ -145,16 +145,24 @@ serve(async (req) => {
       7. DESAFIO          → Missão especial curta de aplicação.
       8. CONQUISTA        → Comemoração curta citando o esforço.
 
+      TIPOS DE ATIVIDADES (MINIGAMETYPE):
+      - "alfa-syllable": Formação de sílabas (ex: M+A=MA). Mostre as partes e o resultado.
+      - "alfa-complete": Completar palavras (ex: GA_O). Foco na sílaba que falta.
+      - "alfa-reading": Leitura de frases curtas e interpretação simples.
+      - "alfa-sum": Soma visual com objetos (ex: 2 maçãs + 1 maçã).
+      - "alfa-sub": Subtração visual (ex: 4 peixes tira 1).
+      - "alfa-tens": Reconhecimento de dezenas (ex: 3 dezenas = 30).
+
       Retorne EXCLUSIVAMENTE um JSON com TODAS as chaves:
       - "etapa1_intro": Frase de abertura ultra-curta.
       - "etapa2_conceito": Frase de conceito ultra-curta.
       - "etapa3_exemplo": Frase de exemplo ultra-curta.
       - "etapa4_como_monta": Frase de instrução guiada ultra-curta.
-      - "etapa5_instrucao": Frase de comando para o aluno.
-      - "desafio_final": Frase de desafio.
-      - "dica": Frase de ajuda ultra-curta.
-      - "reforco_positivo": Frase de conquista.
-      - "metodo_usado": Nome do método.
+      - "etapa5_instrucao": Frase de comando para o aluno (o que ele deve fazer agora).
+      - "desafio_final": Frase de desafio final.
+      - "dica": Frase de ajuda ultra-curta caso ele erre.
+      - "reforco_positivo": Frase de conquista ("Você brilhou!").
+      - "metodo_usado": Nome do método pedagógico aplicado.
       ${isAlfabetizacao ? `
       - "palavra_foco": String CAIXA ALTA (ex: "BOLA").
       - "silabas": Array de sílabas (ex: ["BO", "LA"]).
@@ -162,11 +170,11 @@ serve(async (req) => {
       - "opcoes_identificacao": Array 3 strings.
       ` : ""}
       ${isMathInicial ? `
-      - "numero_a": Inteiro.
-      - "numero_b": Inteiro.
+      - "numero_a": Inteiro (ex: 2).
+      - "numero_b": Inteiro (ex: 1).
       - "operacao": "+" ou "-".
-      - "resultado": Inteiro.
-      - "visual_key": Nome do objeto para o ícone (ex: "apple").
+      - "resultado": Inteiro (ex: 3).
+      - "visual_key": Nome do objeto (ex: "apple").
       - "opcoes_numericas": Array 3 inteiros.
       ` : ""}`
 
