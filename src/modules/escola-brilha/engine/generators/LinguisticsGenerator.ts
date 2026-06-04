@@ -193,15 +193,28 @@ export class LinguisticsGenerator extends BaseGenerator {
       }
 
       if (type === 'alfa-syllable') {
-        const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
-        return {
-          q: `Qual sílaba forma ${item.parts.join(' + ')}?`,
-          visual: item.parts.join(' + '),
-          answer: item.result,
-          options: this.shuffle([item.result, ...item.distractors]),
-          miniGameType: "alfa-syllable",
-          bncc_code: item.code
-        };
+        const r = Math.random();
+        if (r < 0.5) {
+          const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
+          return {
+            q: `Qual sílaba forma ${item.parts.join(' + ')}?`,
+            visual: item.parts.join(' + '),
+            answer: item.result,
+            options: this.shuffle([item.result, ...item.distractors]),
+            miniGameType: "alfa-syllable",
+            bncc_code: item.code
+          };
+        } else {
+          const item = this.pickRandom(ALPHABETIZATION_DATA.completeWord);
+          return {
+            q: `Qual sílaba completa ${item.display}?`,
+            visual: item.visual,
+            answer: item.missing,
+            options: this.shuffle([item.missing, ...item.distractors]),
+            miniGameType: "bubbles",
+            bncc_code: item.code
+          };
+        }
       }
 
       if (type === 'alfa-word-build') {
