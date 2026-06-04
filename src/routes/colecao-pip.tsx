@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Shell } from '@/components/Layout';
 import { KidCard } from '@/components/ui/KidCard';
 import { Sparkles, Lock, Check } from 'lucide-react';
-import { PIP_SKINS } from '@/components/ui/KidLiveMascot';
+import { LUMI_SKINS } from '@/components/ui/KidLiveMascot';
 import lumiMascot from '@/assets/pip-mascot.png';
 import lumaMascot from '@/assets/pip-girl-mascot.png';
 import lumaPrincesa from '@/assets/pip-girl-princesas.png';
