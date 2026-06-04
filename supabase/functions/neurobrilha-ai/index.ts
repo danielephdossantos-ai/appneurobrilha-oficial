@@ -81,7 +81,7 @@ serve(async (req) => {
       const currentLevel = childNiveis[subject] || 2
       const nivelDesc = {
         1: "Concreto total: use metáforas físicas, evite abstrações. Foco em imagens e sons.",
-        2: "Visual guiado: use muitos emojis, frases curtas e suporte visual constante.",
+        2: "Visual guiado: use frases curtas e suporte visual constante (sem emojis).",
         3: "Semi-abstrato: pode usar símbolos e textos, mas mantenha a clareza e alguns apoios visuais.",
         4: "Abstrato: nível padrão da BNCC, mas ainda com linguagem clara e organizada."
       }[currentLevel as 1 | 2 | 3 | 4] || "Linguagem adaptada e clara."
@@ -93,10 +93,10 @@ serve(async (req) => {
       const tierLabel = isEarlyYears ? "Educação Infantil (Pré + 1º)" : isMid ? "Anos Iniciais (2º ao 5º)" : isTeen ? "Anos Finais (6º ao 9º)" : "Geral";
 
       const toneByTier = isEarlyYears
-        ? `TOM: Ultra-acolhedor, infantil, alegre, cheio de entusiasmo. CAIXA ALTA em todas as palavras estruturais. Frases curtas. Método fônico (estique a primeira letra: "OOOO-vo"). Use emojis com moderação.`
+        ? `TOM: Ultra-acolhedor, infantil, alegre, cheio de entusiasmo. CAIXA ALTA em todas as palavras estruturais. Frases curtas. Método fônico (estique a primeira letra: "OOOO-vo"). É EXTREMAMENTE PROIBIDO O USO DE EMOJIS.`
         : isMid
-        ? `TOM: Amigável e didático. Frases médias. Explicações concretas com exemplos do cotidiano. Use o hiperfoco como ponte. Mistura caixa baixa com palavras-chave em CAIXA ALTA.`
-        : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas com lógica/passo-a-passo. Pode usar termos técnicos quando explicados. Trate como alguém capaz e curioso.`;
+        ? `TOM: Amigável e didático. Frases médias. Explicações concretas com exemplos do cotidiano. Use o hiperfoco como ponte. Mistura caixa baixa com palavras-chave em CAIXA ALTA. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS.`
+        : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas com lógica/passo-a-passo. Pode usar termos técnicos quando explicados. Trate como alguém capaz e curioso. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS.`;
 
       // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       // Quando a criança aperta "Não Entendi", trocamos a ABORDAGEM (não o conteúdo)
@@ -106,14 +106,14 @@ serve(async (req) => {
            - Use rotinas previsíveis: "PRIMEIRO... DEPOIS... POR ÚLTIMO...".
            - Seja LITERAL. Zero metáforas, zero figuras de linguagem.
            - Cada etapa = uma ação concreta e finita. Sem ambiguidade.
-           - Use ícones/emojis fixos como âncoras visuais (📦 = caixa, ✅ = pronto).`
+           - É PROIBIDO o uso de emojis (📦, ✅, etc.). Use apenas texto estruturado.`
         : reexplainMethod === "multisensorial"
         ? `🎨 MÉTODO MULTISSENSORIAL (Orton-Gillingham — ideal para Dislexia/TDAH):
            - Combine VER + OUVIR + TOCAR + FALAR em cada explicação.
            - Estique sons das letras: "MMMM-AAAA-MMMM-AAAA = MAMA".
            - Peça pra criança "desenhar no ar com o dedo" ou "bater palmas pra cada sílaba".
            - Use ritmo, música, repetição rítmica.
-           - Conecte letra → som → gesto → imagem em TODA explicação.`
+           - Conecte letra → som → gesto → imagem em TODA explicação (sem emojis).`
         : reexplainMethod === "montessori"
         ? `🌱 MÉTODO MONTESSORI (Concreto/Manipulável — ideal para todos):
            - Use EXEMPLOS DO MUNDO REAL que a criança toca/vê todo dia.
@@ -158,9 +158,9 @@ serve(async (req) => {
       ESTRUTURA DE MATEMÁTICA INICIAL (6 ETAPAS):
       Você está ensinando uma criança em fase de numeralização (Pré ao 5º ano inicial).
       A criança PASSARÁ por estas 6 telas — prepare-a para todas:
-      1. VISUAL: Mostrar a quantidade com objetos do hiperfoco (ex: 3 🍎).
+      1. VISUAL: Mostrar a quantidade com objetos do hiperfoco (ex: 3 aviões).
       2. CONTAGEM: A criança toca em cada objeto para contar (1, 2, 3...).
-      3. CONTA: Mostrar a operação visualmente (3 🍎 + 2 🍎).
+      3. CONTA: Mostrar a operação visualmente (3 aviões + 2 aviões).
       4. MONTAGEM: A criança arrasta números para montar a conta.
       5. PRÁTICA: Escolher o resultado certo entre opções.
       6. CONTINHA ARMADA: Mostrar a conta em pé (formato vertical).
@@ -176,7 +176,7 @@ serve(async (req) => {
       - "numero_b": Segundo número (inteiro pequeno).
       - "operacao": "+" ou "-".
       - "resultado": Resultado correto da conta.
-      - "visual_emoji": UM emoji do hiperfoco da criança para contagem (ex: "🍎", "🚗", "⭐").
+      - "visual_key": UMA palavra-chave do hiperfoco da criança para buscar o ícone premium (ex: "apple", "car", "star"). PROIBIDO EMOJI.
       - "opcoes_numericas": Array com 3 números (o correto + 2 distratores próximos).
       ` : `
       ESTRUTURA OFICIAL ESCOLA BRILHA 2.0 (8 PASSOS — PROFESSOR PARTICULAR INFANTIL):
@@ -240,7 +240,7 @@ serve(async (req) => {
       - "numero_b": Inteiro pequeno.
       - "operacao": "+" ou "-".
       - "resultado": Inteiro.
-      - "visual_emoji": String com 1 emoji.
+      - "visual_key": String com nome do objeto em inglês para o ícone (ex: "apple", "car", "dog"). PROIBIDO EMOJI.
       - "opcoes_numericas": Array de 3 inteiros.
       ` : ""}
 
