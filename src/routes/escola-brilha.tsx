@@ -78,20 +78,20 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: Bird, mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: Bird, mascoteNome: "Professor Pip" },
 ] as const;
 
 function isEI(grade: string) {
@@ -110,13 +110,13 @@ function gradeTier(grade: string): GradeTier {
 }
 
 const tierTheme: Record<GradeTier, {
-  bg: string; scene: string; sceneEmoji: string; vibe: string; titleScale: string;
+  bg: string; scene: string; sceneIcon: ComponentType<{ className?: string }>; vibe: string; titleScale: string;
 }> = {
-  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneEmoji: "🌈🌳🦋", vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
-  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneEmoji: "🏘️📚✨", vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
-  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneEmoji: "🔭🧪🗺️", vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
-  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneEmoji: "🛰️🧭🎯", vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
-  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneEmoji: "📊🧠📐", vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
+  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneIcon: Rainbow, vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
+  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneIcon: Library, vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
+  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneIcon: Telescope, vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
+  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneIcon: Satellite, vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
+  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneIcon: Brain, vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
 };
 
 // Frases de feedback positivas (substituem "Tente novamente")
