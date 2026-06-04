@@ -102,8 +102,8 @@ function RelatorioPremium() {
             "{report?.summary}"
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {report?.initialProfile.slice(0, 3).map((item, i) => (
-              <div key={i} className="flex flex-col gap-1 p-5 bg-white/80 rounded-[2rem] border border-indigo-50 shadow-sm hover:shadow-md transition-all">
+            {report?.initialProfile.slice(0, 5).map((item, i) => (
+              <div key={i} className="flex flex-col gap-2 p-5 bg-white/80 rounded-[2rem] border border-indigo-50 shadow-sm hover:shadow-md transition-all">
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{item.label}</span>
                 <span className={`text-lg font-black ${
                   item.status === 'adequate' ? 'text-emerald-600' : 
@@ -112,6 +112,13 @@ function RelatorioPremium() {
                 }`}>
                   {STATUS_LABELS[item.status as keyof typeof STATUS_LABELS]}
                 </span>
+                {item.bnccCodes && item.bnccCodes.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {item.bnccCodes.map(code => (
+                      <span key={code} className="text-[9px] font-bold bg-indigo-50 text-indigo-500 px-1.5 py-0.5 rounded border border-indigo-100">{code}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
