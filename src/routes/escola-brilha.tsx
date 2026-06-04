@@ -714,7 +714,7 @@ function Escola() {
 
 
 
-function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
   const [practiceCount, setPracticeCount] = useState(0);
   const [performance, setPerformance] = useState({ hits: 0, misses: 0, startTime: Date.now() });
