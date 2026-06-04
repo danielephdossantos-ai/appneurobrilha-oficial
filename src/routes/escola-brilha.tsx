@@ -813,9 +813,48 @@ function Literacy1stGradeFlow({ aula, step, setStep, activeMascot, materiaMeta, 
   );
 }
 
-// ============= MATEMÁTICA INICIAL — 6 ETAPAS =============
-// 1. Visual  2. Contagem  3. Conta  4. Montagem  5. Prática  6. Continha armada
-function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; mathStep: number; setMathStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
+function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, onComplete }: { aula: any; step: number; setStep: (s: number) => void; activeMascot: any; materiaMeta: any; childNome: string; onComplete: (isCorrect: boolean) => void }) {
+  const a = Number(aula.numero_a ?? 3);
+  const b = Number(aula.numero_b ?? 2);
+  const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
+  const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
+  const visualKey = aula.visual_key || aula.visual_emoji || aula.visual || "apple";
+  
+  const [contados, setContados] = useState<number[]>([]);
+  
+  const opcoesNum: number[] = useMemo(() => {
+    const base = [resultado, Math.max(0, resultado - 1), resultado + 1];
+    return [...new Set(base)].sort(() => Math.random() - 0.5) as number[];
+  }, [resultado]);
+
+  useEffect(() => {
+    const playAudio = (msg: string) => {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(msg);
+      u.lang = "pt-BR"; u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    };
+    if (step === 1) playAudio("Vamos ver quantos temos?");
+    if (step === 2) playAudio(`Olha o número ${a}!`);
+    if (step === 3) playAudio(`Vamos contar? ${a} ${op === "+" ? "mais" : "menos"} ${b}`);
+    if (step === 4) playAudio(`Quanto é o resultado?`);
+    if (step === 5) playAudio("Parabéns! Você é fera na matemática!");
+  }, [step, a, b, op]);
+
+  const renderVisuals = (n: number, color = "text-primary") => (
+    <div className="flex flex-wrap gap-2 justify-center max-w-md">
+      {Array.from({ length: Math.max(0, n) }).map((_, i) => (
+        <div key={i} className={`animate-in zoom-in ${color}`} style={{ animationDelay: `${i * 100}ms` }}>
+          <RenderVisual value={visualKey} className="h-12 w-12 md:h-16 md:w-16" />
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col items-center justify-center min-h-[300px]">
+
   // Defaults — simplifica se a IA não mandar
   const a = Number(aula.numero_a ?? 3);
   const b = Number(aula.numero_b ?? 2);
