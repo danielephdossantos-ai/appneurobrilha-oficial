@@ -1776,12 +1776,17 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <button onClick={() => setAula(null)} className="text-sm text-muted-foreground hover:text-foreground">← Voltar para matérias</button>
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-24">
-            <PipPedagogicalGuidance stage={getPipStage()} className="animate-in fade-in slide-in-from-right-4" />
-          </div>
-        </div>
       </div>
+
+      {/* Mascote Pip/Pipa fixo no canto inferior — Guia de Aprendizado */}
+      <div className="fixed bottom-4 left-4 z-50 pointer-events-none md:pointer-events-auto max-w-[280px] md:max-w-md">
+        <PipPedagogicalGuidance 
+          stage={getPipStage()} 
+          manualMessage={currentMascotMessage}
+          className="animate-in slide-in-from-left-4 duration-500" 
+        />
+      </div>
+
       <FloatingActivityControls
         onSkip={
           aula.guided && !isAlfaFlow && !isMathFlow && eiStep < 6
