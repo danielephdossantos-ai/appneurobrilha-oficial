@@ -7,7 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface PipPedagogicalGuidanceProps {
   stage: 'explanation' | 'encouragement' | 'celebration' | 'idle';
   className?: string;
+  manualMessage?: string | null;
 }
+
 
 export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className }) => {
   const { activeChild } = useAppState();
