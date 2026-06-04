@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Coins, Trophy } from 'lucide-react';
-import { LumiPedagogicalGuidance } from './LumiPedagogicalGuidance';
+import { PipPedagogicalGuidance } from './PipPedagogicalGuidance';
 
 interface SoftCelebrationProps {
   isVisible: boolean;
@@ -36,7 +36,7 @@ export const SoftCelebration: React.FC<SoftCelebrationProps> = ({
             }}
             className="bg-white p-8 rounded-[3rem] shadow-2xl flex flex-col items-center space-y-6 max-w-sm w-full border-4 border-primary/10"
           >
-            <LumiPedagogicalGuidance stage="celebration" className="scale-125 mb-4" />
+            <PipPedagogicalGuidance stage="celebration" className="scale-125 mb-4" />
             
             <div className="bg-primary/10 p-4 rounded-full">
               {type === 'stars' && <Star className="w-12 h-12 text-yellow-400 fill-yellow-400" />}

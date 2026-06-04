@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useAppState } from '@/core/store';
-import { LumiPedagogicalSystem, LumiEmotion } from '@/engines/pedagogical-engine/LumiPedagogicalSystem';
+import { PipPedagogicalSystem, PipEmotion } from '@/engines/pedagogical-engine/PipPedagogicalSystem';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface LumiPedagogicalGuidanceProps {
+interface PipPedagogicalGuidanceProps {
   stage: 'explanation' | 'encouragement' | 'celebration' | 'idle';
   className?: string;
   manualMessage?: string | null;
 }
 
 
-export const LumiPedagogicalGuidance: React.FC<LumiPedagogicalGuidanceProps> = ({ stage, className, manualMessage }) => {
+export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className, manualMessage }) => {
   const { activeChild } = useAppState();
   const [message, setMessage] = useState<string | null>(null);
-  const [emotion, setEmotion] = useState<LumiEmotion>('happy');
+  const [emotion, setEmotion] = useState<PipEmotion>('happy');
 
 
   useEffect(() => {
@@ -27,19 +27,19 @@ export const LumiPedagogicalGuidance: React.FC<LumiPedagogicalGuidanceProps> = (
     let result;
     switch (stage) {
       case 'explanation':
-        result = LumiPedagogicalSystem.getExplanation(activeChild);
+        result = PipPedagogicalSystem.getExplanation(activeChild);
         break;
       case 'encouragement':
-        result = LumiPedagogicalSystem.getEncouragement(activeChild);
+        result = PipPedagogicalSystem.getEncouragement(activeChild);
         break;
       case 'celebration':
-        result = LumiPedagogicalSystem.getCelebration(activeChild);
+        result = PipPedagogicalSystem.getCelebration(activeChild);
         break;
     }
 
     if (result) {
       setMessage(result.text);
-      setEmotion(result.emotion as LumiEmotion);
+      setEmotion(result.emotion as PipEmotion);
       
       // Auto-clear message for encouragement after some time
       if (stage === 'encouragement') {

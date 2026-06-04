@@ -23,7 +23,7 @@ import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
-import { Route as ColecaoLumiRouteImport } from './routes/colecao-lumi'
+import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
@@ -106,9 +106,9 @@ const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
   path: '/escola-brilha',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ColecaoLumiRoute = ColecaoLumiRouteImport.update({
-  id: '/colecao-lumi',
-  path: '/colecao-lumi',
+const ColecaoPipRoute = ColecaoPipRouteImport.update({
+  id: '/colecao-pip',
+  path: '/colecao-pip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
@@ -176,7 +176,7 @@ export interface FileRoutesByFullPath {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-lumi': typeof ColecaoLumiRoute
+  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
@@ -204,7 +204,7 @@ export interface FileRoutesByTo {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-lumi': typeof ColecaoLumiRoute
+  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
@@ -233,7 +233,7 @@ export interface FileRoutesById {
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
-  '/colecao-lumi': typeof ColecaoLumiRoute
+  '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
@@ -263,7 +263,7 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-lumi'
+    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
@@ -291,7 +291,7 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-lumi'
+    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
@@ -319,7 +319,7 @@ export interface FileRouteTypes {
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
-    | '/colecao-lumi'
+    | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
@@ -348,7 +348,7 @@ export interface RootRouteChildren {
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
-  ColecaoLumiRoute: typeof ColecaoLumiRoute
+  ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
@@ -467,11 +467,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/colecao-lumi': {
-      id: '/colecao-lumi'
-      path: '/colecao-lumi'
-      fullPath: '/colecao-lumi'
-      preLoaderRoute: typeof ColecaoLumiRouteImport
+    '/colecao-pip': {
+      id: '/colecao-pip'
+      path: '/colecao-pip'
+      fullPath: '/colecao-pip'
+      preLoaderRoute: typeof ColecaoPipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brilha-vida': {
@@ -576,7 +576,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
-  ColecaoLumiRoute: ColecaoLumiRoute,
+  ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,

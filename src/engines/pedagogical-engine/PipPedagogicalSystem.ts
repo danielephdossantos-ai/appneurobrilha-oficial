@@ -1,13 +1,13 @@
 import { Child } from "@/core/store";
 
-export type LumiEmotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'cheering';
+export type PipEmotion = 'happy' | 'thinking' | 'excited' | 'sleeping' | 'proud' | 'cheering';
 
-export interface LumiMessage {
+export interface PipMessage {
   text: string;
-  emotion: LumiEmotion;
+  emotion: PipEmotion;
 }
 
-export class LumiPedagogicalSystem {
+export class PipPedagogicalSystem {
   private static MENSAGENS_EXPLICACAO: Record<number, string[]> = {
     4: ["Olha que legal o que vamos fazer!", "Vou te mostrar um segredo novo!", "Vamos brincar de aprender?"],
     6: ["Hoje o desafio é muito especial!", "Vou te explicar como ser um mestre aqui!", "Preparado para essa missão?"],
@@ -40,7 +40,7 @@ export class LumiPedagogicalSystem {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  static getExplanation(child: Child): LumiMessage {
+  static getExplanation(child: Child): PipMessage {
     const ageKey = this.getAgeKey(child.idade);
     return {
       text: this.getRandom(this.MENSAGENS_EXPLICACAO[ageKey]),
@@ -48,7 +48,7 @@ export class LumiPedagogicalSystem {
     };
   }
 
-  static getEncouragement(child: Child): LumiMessage {
+  static getEncouragement(child: Child): PipMessage {
     const ageKey = this.getAgeKey(child.idade);
     return {
       text: this.getRandom(this.MENSAGENS_INCENTIVO[ageKey]),
@@ -56,7 +56,7 @@ export class LumiPedagogicalSystem {
     };
   }
 
-  static getCelebration(child: Child): LumiMessage {
+  static getCelebration(child: Child): PipMessage {
     const ageKey = this.getAgeKey(child.idade);
     return {
       text: this.getRandom(this.MENSAGENS_COMEMORACAO[ageKey]),

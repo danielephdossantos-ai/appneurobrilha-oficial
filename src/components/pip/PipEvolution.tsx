@@ -4,17 +4,17 @@ import { Sparkles, Lock, Trophy } from 'lucide-react';
 import { cn } from '@/utils/utils';
 import { useAppState } from '@/core/store';
 
-// Lumi (menino)
-import lumiEgg from '@/assets/pip-egg.png';
-import lumiHatching from '@/assets/pip-hatching.png';
-import lumiBaby from '@/assets/pip-baby.png';
-import lumiMascot from '@/assets/pip-mascot.png';
+// Pip (menino)
+import pipEgg from '@/assets/pip-egg.png';
+import pipHatching from '@/assets/pip-hatching.png';
+import pipBaby from '@/assets/pip-baby.png';
+import pipMascot from '@/assets/pip-mascot.png';
 
-// Luma (menina)
-import lumaEgg from '@/assets/pipa-egg.png';
-import lumaHatching from '@/assets/pipa-hatching.png';
-import lumaBaby from '@/assets/pipa-baby.png';
-import lumaMascot from '@/assets/pip-girl-mascot.png';
+// Pipa (menina)
+import pipaEgg from '@/assets/pipa-egg.png';
+import pipaHatching from '@/assets/pipa-hatching.png';
+import pipaBaby from '@/assets/pipa-baby.png';
+import pipaMascot from '@/assets/pip-girl-mascot.png';
 
 type StageKey = 'ovo' | 'nascendo' | 'bebe' | 'crianca';
 
@@ -23,8 +23,8 @@ interface Stage {
   name: string;
   description: string;
   minCoins: number;
-  imageLumi: string;
-  imageLuma: string;
+  imagePip: string;
+  imagePipa: string;
 }
 
 const STAGES: Stage[] = [
@@ -33,40 +33,40 @@ const STAGES: Stage[] = [
     name: 'Ovo Mágico',
     description: 'Tudo começa aqui! Um ovo cheio de potencial esperando pra nascer.',
     minCoins: 0,
-    imageLumi: lumiEgg,
-    imageLuma: lumaEgg,
+    imagePip: pipEgg,
+    imagePipa: pipaEgg,
   },
   {
     key: 'nascendo',
     name: 'Nascendo',
     description: 'O ovo está rachando! O grande momento da chegada ao mundo.',
     minCoins: 50,
-    imageLumi: lumiHatching,
-    imageLuma: lumaHatching,
+    imagePip: pipHatching,
+    imagePipa: pipaHatching,
   },
   {
     key: 'bebe',
     name: 'Bebê',
     description: 'Pequenininho, fofinho e curioso. Começando a explorar tudo!',
     minCoins: 200,
-    imageLumi: lumiBaby,
-    imageLuma: lumaBaby,
+    imagePip: pipBaby,
+    imagePipa: pipaBaby,
   },
   {
     key: 'crianca',
     name: 'Guardião dos Desafios',
     description: 'Forma completa! Pronto para enfrentar qualquer aventura ao seu lado.',
     minCoins: 500,
-    imageLumi: lumiMascot,
-    imageLuma: lumaMascot,
+    imagePip: pipMascot,
+    imagePipa: pipaMascot,
   },
 ];
 
-type MascotChoice = 'lumi' | 'luma';
+type MascotChoice = 'pip' | 'pipa';
 
-export function LumiEvolution() {
+export function PipEvolution() {
   const { activeChild } = useAppState();
-  const [mascot, setMascot] = useState<MascotChoice>('lumi');
+  const [mascot, setMascot] = useState<MascotChoice>('pip');
 
   const totalEarned = activeChild?.total_earned ?? 0;
 
@@ -90,10 +90,10 @@ export function LumiEvolution() {
       )
     : 100;
 
-  const themeFrom = mascot === 'lumi' ? 'from-sky-100' : 'from-pink-100';
-  const themeTo = mascot === 'lumi' ? 'to-cyan-50' : 'to-rose-50';
-  const themeAccent = mascot === 'lumi' ? 'bg-sky-500' : 'bg-pink-500';
-  const themeText = mascot === 'lumi' ? 'text-sky-600' : 'text-pink-600';
+  const themeFrom = mascot === 'pip' ? 'from-sky-100' : 'from-pink-100';
+  const themeTo = mascot === 'pip' ? 'to-cyan-50' : 'to-rose-50';
+  const themeAccent = mascot === 'pip' ? 'bg-sky-500' : 'bg-pink-500';
+  const themeText = mascot === 'pip' ? 'text-sky-600' : 'text-pink-600';
 
   return (
     <section
@@ -111,7 +111,7 @@ export function LumiEvolution() {
             Linha do Tempo da Evolução
           </div>
           <h2 className="text-3xl md:text-4xl font-black text-primary">
-            Veja o {mascot === 'lumi' ? 'Lumi' : 'a Luma'} crescer com você!
+            Veja o {mascot === 'pip' ? 'Pip' : 'a Pipa'} crescer com você!
           </h2>
           <p className="text-muted-foreground mt-1">
             Cada conquista faz seu mascote evoluir. Comece do ovo e chegue ao Guardião dos Desafios.
@@ -121,26 +121,26 @@ export function LumiEvolution() {
         {/* Mascot toggle */}
         <div className="inline-flex bg-white/80 backdrop-blur rounded-full p-1 shadow-md self-start md:self-center">
           <button
-            onClick={() => setMascot('lumi')}
+            onClick={() => setMascot('pip')}
             className={cn(
               'px-4 py-2 rounded-full text-sm font-black transition-all',
-              mascot === 'lumi'
+              mascot === 'pip'
                 ? 'bg-sky-500 text-white shadow-md'
                 : 'text-sky-600 hover:bg-sky-50',
             )}
           >
-            Lumi
+            Pip
           </button>
           <button
-            onClick={() => setMascot('luma')}
+            onClick={() => setMascot('pipa')}
             className={cn(
               'px-4 py-2 rounded-full text-sm font-black transition-all',
-              mascot === 'luma'
+              mascot === 'pipa'
                 ? 'bg-pink-500 text-white shadow-md'
                 : 'text-pink-600 hover:bg-pink-50',
             )}
           >
-            Luma
+            Pipa
           </button>
         </div>
       </div>
@@ -163,7 +163,7 @@ export function LumiEvolution() {
               )}
             />
             <img
-              src={mascot === 'lumi' ? currentStage.imageLumi : currentStage.imageLuma}
+              src={mascot === 'pip' ? currentStage.imagePip : currentStage.imagePipa}
               alt={currentStage.name}
               className="relative w-full h-full object-contain drop-shadow-2xl"
               width={1024}
@@ -180,7 +180,7 @@ export function LumiEvolution() {
           <h3 className="text-2xl md:text-3xl font-black text-primary mt-1">
             {currentStage.name}
           </h3>
-          <p className="text-muted-foreground mt-2 max-w-md mx-auto md:bg-white/0">
+          <p className="text-muted-foreground mt-2 max-w-md mx-auto md:mx-0">
             {currentStage.description}
           </p>
 
@@ -223,7 +223,7 @@ export function LumiEvolution() {
               className={cn(
                 'relative bg-white rounded-3xl p-4 text-center border-4 transition-all',
                 isCurrent
-                  ? mascot === 'lumi'
+                  ? mascot === 'pip'
                     ? 'border-sky-400 shadow-lg scale-105'
                     : 'border-pink-400 shadow-lg scale-105'
                   : 'border-primary/10',
@@ -232,7 +232,7 @@ export function LumiEvolution() {
             >
               <div className="relative w-24 h-24 mx-auto mb-3 flex items-center justify-center">
                 <img
-                  src={mascot === 'lumi' ? stage.imageLumi : stage.imageLuma}
+                  src={mascot === 'pip' ? stage.imagePip : stage.imagePipa}
                   alt={stage.name}
                   className={cn(
                     'w-full h-full object-contain drop-shadow-xl transition-all',
@@ -275,4 +275,4 @@ export function LumiEvolution() {
   );
 }
 
-export default LumiEvolution;
+export default PipEvolution;

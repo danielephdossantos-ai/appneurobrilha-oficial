@@ -5,14 +5,14 @@ import { Plus, Sparkles, School, Brain, BookOpen, Gift, Trophy, Users, Star } fr
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { EggHatchCinematic, shouldShowEggHatch } from "@/components/lumi/EggHatchCinematic";
+import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
 import { cn } from "@/utils/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "NeuroBrilha Kids — Cidade Mágica" },
-      { name: "description", content: "Entre na cidade mágica do Lumi e comece sua aventura de aprendizagem." },
+      { name: "description", content: "Entre na cidade mágica do Pip e comece sua aventura de aprendizagem." },
     ],
   }),
   component: Index,
@@ -77,7 +77,7 @@ function Index() {
     },
     {
       to: "/loja-mascotes",
-      title: "Loja do Lumi",
+      title: "Loja do Pip",
       subtitle: "Shopping do Saber",
       gradient: "from-[#FFC93C] to-[#E89B00]",
       glow: "rgba(255,201,60,0.6)",
@@ -85,7 +85,7 @@ function Index() {
       building: <Shop />,
     },
     {
-      to: "/colecao-lumi",
+      to: "/colecao-pip",
       title: "Conquistas",
       subtitle: "Galeria de Troféus",
       gradient: "from-[#3BD68B] to-[#0E9D5B]",
@@ -147,7 +147,7 @@ function Index() {
             <div>
               <div className="text-white/60 text-xs font-black uppercase tracking-[0.3em]">Bem-vindo à</div>
               <h1 className="text-white text-2xl md:text-4xl font-black leading-none">
-                Cidade do <span className="text-[#FFC93C]">Lumi</span>
+                Cidade do <span className="text-[#FFC93C]">Pip</span>
               </h1>
             </div>
           </div>
@@ -162,7 +162,7 @@ function Index() {
           )}
         </div>
 
-        {/* LUMI NO CENTRO */}
+        {/* PIP NO CENTRO */}
         <div className="relative z-20 flex flex-col items-center justify-center mt-2 mb-8 md:mb-12">
           <motion.div
             animate={{ y: [0, -12, 0] }}

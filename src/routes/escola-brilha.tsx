@@ -14,7 +14,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
-import { LumiPedagogicalGuidance } from "@/components/rewards/LumiPedagogicalGuidance";
+import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
 import { SupabasePedagogicalService } from "@/modules/escola-brilha/services/SupabasePedagogicalService";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
@@ -32,8 +32,8 @@ import imgLinguagemEI from "@/assets/escola-brilha/linguagem-ei.png";
 import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
 import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
-import imgLumi from "@/assets/pip-mascot.png";
-import imgLuma from "@/assets/pip-girl-professora.png";
+import imgPip from "@/assets/pip-mascot.png";
+import imgPipa from "@/assets/pip-girl-professora.png";
 
 
 import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";
@@ -89,21 +89,21 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: imgLuma, mascoteNome: "Professora Luma" },
-  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: imgLumi, mascoteNome: "Professor Lumi" },
-  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: imgLuma, mascoteNome: "Professora Luma" },
-  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: imgLumi, mascoteNome: "Professor Lumi" },
-  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: imgLuma, mascoteNome: "Professora Luma" },
-  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: imgLumi, mascoteNome: "Professor Lumi" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: imgPip, mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 5 Trilhas (BNCC Campos de Experiência)
 const materiasInfantil = [
-  { id: "trilha-palavras", nome: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Trilha das Palavras", mascote: imgLuma, mascoteNome: "Professora Luma", code_pref: "EI03EF" },
-  { id: "trilha-numeros", nome: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Trilha dos Números", mascote: imgLumi, mascoteNome: "Professor Lumi", code_pref: "EI03ET" },
-  { id: "trilha-cores-formas", nome: "TRAÇOS, SONS, CORES E FORMAS", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Trilha das Cores e Formas", mascote: imgLumi, mascoteNome: "Professor Lumi", code_pref: "EI03TS" },
-  { id: "trilha-movimentos", nome: "CORPO, GESTOS E MOVIMENTOS", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Trilha dos Movimentos", mascote: imgLuma, mascoteNome: "Professora Luma", code_pref: "EI03CG" },
-  { id: "trilha-emocoes", nome: "O EU, O OUTRO E O NÓS", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Trilha das Emoções", mascote: imgLuma, mascoteNome: "Professora Luma", code_pref: "EI03EO" },
+  { id: "trilha-palavras", nome: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Trilha das Palavras", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03EF" },
+  { id: "trilha-numeros", nome: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Trilha dos Números", mascote: imgPip, mascoteNome: "Professor Pip", code_pref: "EI03ET" },
+  { id: "trilha-cores-formas", nome: "TRAÇOS, SONS, CORES E FORMAS", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Trilha das Cores e Formas", mascote: imgPip, mascoteNome: "Professor Pip", code_pref: "EI03TS" },
+  { id: "trilha-movimentos", nome: "CORPO, GESTOS E MOVIMENTOS", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Trilha dos Movimentos", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03CG" },
+  { id: "trilha-emocoes", nome: "O EU, O OUTRO E O NÓS", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Trilha das Emoções", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03EO" },
 ] as const;
 
 
@@ -567,7 +567,7 @@ function Escola() {
               )}
             </div>
             <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
-              {activeMascot?.mascot?.name || "Profª Luma"}
+              {activeMascot?.mascot?.name || "Profª Pipa"}
             </div>
           </div>
 
@@ -636,7 +636,7 @@ function Escola() {
           <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
             <div className="text-2xl"><GraduationCap className="h-6 w-6 text-primary" /></div>
             <div className="flex-1">
-              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Lumi/Luma"}</div>
+              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
               <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
             </div>
             <button
@@ -746,9 +746,9 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   
-  const isLumaMateria = aula.isEI || aula.materia === 'portugues';
-  const mascotImg = isLumaMateria ? imgLuma : imgLumi;
-  const mascotNome = isLumaMateria ? "Professora Luma" : "Professor Lumi";
+  const isPipaMateria = aula.isEI || aula.materia === 'portugues';
+  const mascotImg = isPipaMateria ? imgPipa : imgPip;
+  const mascotNome = isPipaMateria ? "Professora Pipa" : "Professor Pip";
 
   const currentActivity = useMemo(() => {
     if (step === 3) return aula.treino_activity || aula;

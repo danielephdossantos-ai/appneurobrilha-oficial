@@ -28,8 +28,8 @@ function hidratar(raw: string | null): Hiperfoco | null {
         elementos: parsed.elementos?.length ? parsed.elementos : [parsed.label || "personagem"],
         som: "som do tema",
         formaPontilhado: "um símbolo do tema",
-        lumiAcertos: [`Boa! Acertou em cheio no mundo de ${parsed.label}! ⭐`],
-        lumiIncentivos: [`Tranquilo! No universo de ${parsed.label} se aprende treinando. 💪`],
+        pipAcertos: [`Boa! Acertou em cheio no mundo de ${parsed.label}! ⭐`],
+        pipIncentivos: [`Tranquilo! No universo de ${parsed.label} se aprende treinando. 💪`],
       };
     }
     return HIPERFOCOS[parsed.id] ?? null;
@@ -71,8 +71,8 @@ export function HiperfocoProvider({ children }: { children: ReactNode }) {
           elementos: [trimmed],
           som: "som do tema",
           formaPontilhado: "um símbolo do tema",
-          lumiAcertos: [`Boa! Acertou em cheio no mundo de ${trimmed}! ⭐`],
-          lumiIncentivos: [`Tranquilo! No universo de ${trimmed} se aprende treinando. 💪`],
+          pipAcertos: [`Boa! Acertou em cheio no mundo de ${trimmed}! ⭐`],
+          pipIncentivos: [`Tranquilo! No universo de ${trimmed} se aprende treinando. 💪`],
         });
       },
       limpar: () => setHiperfoco(null),

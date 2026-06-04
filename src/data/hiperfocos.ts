@@ -1,6 +1,6 @@
 // Sistema de Hiperfoco Dinâmico — temas que adaptam textos, sons e estímulos.
 // Cada hiperfoco fornece elementos para substituir {elemento_hiperfoco} e {hiperfoco}
-// nas instruções/payloads, além de frases contextualizadas da LUMI.
+// nas instruções/payloads, além de frases contextualizadas do PIP.
 
 export type HiperfocoId =
   | "minecraft"
@@ -21,10 +21,10 @@ export interface Hiperfoco {
   som: string;
   /** Forma sugerida para coordenação/pontilhado. */
   formaPontilhado: string;
-  /** Frases da LUMI quando a criança acerta. */
-  lumiAcertos: string[];
-  /** Frases da LUMI de incentivo após erro. */
-  lumiIncentivos: string[];
+  /** Frases do PIP quando a criança acerta. */
+  pipAcertos: string[];
+  /** Frases do PIP de incentivo após erro. */
+  pipIncentivos: string[];
 }
 
 export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
@@ -35,12 +35,12 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     elementos: ["Steve", "Alex", "Creeper", "Aldeão", "Lhama", "Galinha"],
     som: "tlec! tlec! (blocos quebrando)",
     formaPontilhado: "um bloco quadradinho",
-    lumiAcertos: [
+    pipAcertos: [
       "Boa! Você minerou a resposta certa! ⛏️",
       "Mandou bem! Bloco encaixado perfeitamente! 🟩",
       "Uhul! Crafting concluído! ✨",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Quase! Bora pegar mais um bloco e tentar de novo. 🟫",
       "Tranquilo! Todo construtor precisa de respiro. 🛠️",
     ],
@@ -52,12 +52,12 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     elementos: ["Tricerátops", "T-Rex", "Estegossauro", "Braquiossauro", "Velociraptor"],
     som: "Roaaar! (rugido)",
     formaPontilhado: "um ovo de dinossauro",
-    lumiAcertos: [
+    pipAcertos: [
       "Rooar! Você é fera igual um T-Rex! 🦖",
       "Boa! Caçada perfeita! 🦴",
       "Uhu! Descobriu o fóssil certinho! 🥚",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Calma, paleontólogo! Bora escavar de novo. ⛏️",
       "Errar é parte da aventura jurássica! 🌋",
     ],
@@ -69,12 +69,12 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     elementos: ["Super-Herói", "Heroína", "Robô-amigo", "Capitã", "Justiceiro"],
     som: "Pow! Zap! (super-poder)",
     formaPontilhado: "uma capa de herói",
-    lumiAcertos: [
+    pipAcertos: [
       "Pow! Super-acerto desbloqueado! 🦸",
       "Boa! Seu poder está crescendo! ⚡",
       "Salvou o dia! 🏆",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Todo herói treina! Bora de novo. 💪",
       "Respira, recarrega o poder e tenta outra vez. ✨",
     ],
@@ -86,12 +86,12 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     elementos: ["Leão", "Elefante", "Macaco", "Tartaruga", "Coruja"],
     som: "som do animal escolhido",
     formaPontilhado: "uma patinha",
-    lumiAcertos: [
+    pipAcertos: [
       "Boa! Faro de leão! 🦁",
       "Uhu! Sabidíssimo como uma coruja! 🦉",
       "Acertou na mosca! 🐾",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Calma como a tartaruga, bora de novo. 🐢",
       "Cada bichinho aprende no seu tempo. 🐣",
     ],
@@ -103,12 +103,12 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     elementos: ["Carro de corrida", "Caminhão", "Moto", "Trator", "Trem"],
     som: "Vrum vrum! (motor)",
     formaPontilhado: "um carrinho",
-    lumiAcertos: [
+    pipAcertos: [
       "Vrum! Acelerou direto pra resposta certa! 🏁",
       "Boa! Pista limpa, ponto garantido! 🚗",
       "Uhul! Pole position! 🏆",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Reduz a marcha e tenta de novo. 🛞",
       "Pit stop rápido e voltamos pra pista! 🔧",
     ],
@@ -117,15 +117,15 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     id: "nenhum",
     label: "Sem Hiperfoco",
     emoji: "✨",
-    elementos: ["LUMI", "Estrela", "Coração"],
+    elementos: ["PIP", "Estrela", "Coração"],
     som: "plim! (brilho)",
     formaPontilhado: "uma estrela",
-    lumiAcertos: [
+    pipAcertos: [
       "Boa! Você é brilhante! ⭐",
       "Mandou muito bem! ✨",
       "Incrível! Continue assim! 🏆",
     ],
-    lumiIncentivos: [
+    pipIncentivos: [
       "Tudo bem! Vamos brilhar na próxima. 💫",
       "O aprendizado é uma jornada linda! 🌈",
     ],
@@ -153,12 +153,12 @@ export function applyHiperfoco(text: string, h: Hiperfoco | null, seed = "defaul
     .replace(/\{forma_hiperfoco\}/g, h.formaPontilhado);
 }
 
-export function lumiFraseAcerto(h: Hiperfoco | null): string {
+export function pipFraseAcerto(h: Hiperfoco | null): string {
   if (!h) return "Boa! Mandou muito bem! ⭐";
-  return h.lumiAcertos[Math.floor(Math.random() * h.lumiAcertos.length)];
+  return h.pipAcertos[Math.floor(Math.random() * h.pipAcertos.length)];
 }
 
-export function lumiFraseIncentivo(h: Hiperfoco | null): string {
+export function pipFraseIncentivo(h: Hiperfoco | null): string {
   if (!h) return "Tudo bem, vamos tentar de novo! 💪";
-  return h.lumiIncentivos[Math.floor(Math.random() * h.lumiIncentivos.length)];
+  return h.pipIncentivos[Math.floor(Math.random() * h.pipIncentivos.length)];
 }

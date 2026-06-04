@@ -7,43 +7,43 @@ import { KidButton } from '@/components/ui/KidButton';
 import { ShoppingBag, Star, Sparkles, ChevronRight, Globe2, Check, Lock } from 'lucide-react';
 import { supabase } from '@/database/supabase/client';
 import { useAppState } from '@/core/store';
-import { EggHatchCinematic, shouldShowEggHatch } from '@/components/lumi/EggHatchCinematic';
-import lumiMascot from '@/assets/lumi-mascot.png';
-import lumiEgg from '@/assets/lumi-egg.png';
-import lumiHatching from '@/assets/lumi-hatching.png';
-import lumiBaby from '@/assets/lumi-baby.png';
-import lumiDinossauros from '@/assets/lumi-dinossauros.png';
-import lumiEspaco from '@/assets/lumi-espaco.png';
-import lumiArte from '@/assets/lumi-arte.png';
-import lumiAnimais from '@/assets/lumi-animais.png';
-import lumiMusica from '@/assets/lumi-musica.png';
-import lumiFazendinha from '@/assets/lumi-fazendinha.png';
-import lumiSuperHerois from '@/assets/lumi-super-herois.png';
-import lumiPrincesas from '@/assets/lumi-princesas.png';
-import lumiMinecraft from '@/assets/lumi-minecraft.png';
-import lumiCarros from '@/assets/lumi-carros.png';
-import lumiTrens from '@/assets/lumi-trens.png';
-import lumiRobos from '@/assets/lumi-robos.png';
-import lumiVeiculos from '@/assets/lumi-veiculos.png';
-import lumaMascot from '@/assets/lumi-girl-mascot.png';
-import lumaEgg from '@/assets/luma-egg.png';
-import lumaHatching from '@/assets/luma-hatching.png';
-import lumaBaby from '@/assets/luma-baby.png';
-import lumaPrincesa from '@/assets/lumi-girl-princesas.png';
-import lumaUnicornio from '@/assets/lumi-girl-unicornio.png';
-import lumaDoutora from '@/assets/lumi-girl-doutora.png';
-import lumaAstronauta from '@/assets/lumi-girl-astronauta.png';
-import lumaBailarina from '@/assets/lumi-girl-bailarina.png';
-import lumaFada from '@/assets/lumi-girl-fada.png';
-import lumaSereia from '@/assets/lumi-girl-sereia.png';
-import lumaConfeiteira from '@/assets/lumi-girl-confeiteira.png';
-import lumaVeterinaria from '@/assets/lumi-girl-veterinaria.png';
-import lumaProfessora from '@/assets/lumi-girl-professora.png';
-import lumaArte from '@/assets/lumi-girl-arte.png';
-import lumaMusica from '@/assets/lumi-girl-musica.png';
-import lumaSuperHeroina from '@/assets/lumi-girl-super-heroina.png';
+import { EggHatchCinematic, shouldShowEggHatch } from '@/components/pip/EggHatchCinematic';
+import pipMascot from '@/assets/pip-mascot.png';
+import pipEgg from '@/assets/pip-egg.png';
+import pipHatching from '@/assets/pip-hatching.png';
+import pipBaby from '@/assets/pip-baby.png';
+import pipDinossauros from '@/assets/pip-dinossauros.png';
+import pipEspaco from '@/assets/pip-espaco.png';
+import pipArte from '@/assets/pip-arte.png';
+import pipAnimais from '@/assets/pip-animais.png';
+import pipMusica from '@/assets/pip-musica.png';
+import pipFazendinha from '@/assets/pip-fazendinha.png';
+import pipSuperHerois from '@/assets/pip-super-herois.png';
+import pipPrincesas from '@/assets/pip-princesas.png';
+import pipMinecraft from '@/assets/pip-minecraft.png';
+import pipCarros from '@/assets/pip-carros.png';
+import pipTrens from '@/assets/pip-trens.png';
+import pipRobos from '@/assets/pip-robos.png';
+import pipVeiculos from '@/assets/pip-veiculos.png';
+import pipaMascot from '@/assets/pip-girl-mascot.png';
+import pipaEgg from '@/assets/pipa-egg.png';
+import pipaHatching from '@/assets/pipa-hatching.png';
+import pipaBaby from '@/assets/pipa-baby.png';
+import pipaPrincesa from '@/assets/pip-girl-princesas.png';
+import pipaUnicornio from '@/assets/pip-girl-unicornio.png';
+import pipaDoutora from '@/assets/pip-girl-doutora.png';
+import pipaAstronauta from '@/assets/pip-girl-astronauta.png';
+import pipaBailarina from '@/assets/pip-girl-bailarina.png';
+import pipaFada from '@/assets/pip-girl-fada.png';
+import pipaSereia from '@/assets/pip-girl-sereia.png';
+import pipaConfeiteira from '@/assets/pip-girl-confeiteira.png';
+import pipaVeterinaria from '@/assets/pip-girl-veterinaria.png';
+import pipaProfessora from '@/assets/pip-girl-professora.png';
+import pipaArte from '@/assets/pip-girl-arte.png';
+import pipaMusica from '@/assets/pip-girl-musica.png';
+import pipaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
-import { LumiEvolution } from '@/components/lumi/LumiEvolution';
+import { PipEvolution } from '@/components/pip/PipEvolution';
 import { cn } from '@/utils/utils';
 import { useHiperfoco } from '@/context/HiperfocoContext';
 import { toast } from 'sonner';
@@ -97,39 +97,39 @@ const WORLDS: WorldOption[] = [
 
 
 const ADDITIONAL_CHARACTERS = [
-  { id: 'lumi-dino', name: 'Lumi Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: lumiDinossauros },
-  { id: 'lumi-espaco', name: 'Lumi Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: lumiEspaco },
-  { id: 'lumi-arte', name: 'Lumi Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: lumiArte },
-  { id: 'lumi-animais', name: 'Lumi Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: lumiAnimais },
-  { id: 'lumi-musica', name: 'Lumi Maestro', description: 'Vamos reger uma sinfonia de aprendizado!', category: 'premium', image_url: lumiMusica },
-  { id: 'lumi-fazendinha', name: 'Lumi Fazendeiro', description: 'Plantando aprendizado e colhendo conquistas.', category: 'premium', image_url: lumiFazendinha },
-  { id: 'lumi-super', name: 'Lumi Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: lumiSuperHerois },
-  { id: 'lumi-princesas', name: 'Lumi Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: lumiPrincesas },
-  { id: 'lumi-minecraft', name: 'Lumi Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: lumiMinecraft },
-  { id: 'lumi-carros', name: 'Lumi Piloto', description: 'Acelerando rumo a novas conquistas.', category: 'premium', image_url: lumiCarros },
-  { id: 'lumi-trens', name: 'Lumi Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: lumiTrens },
-  { id: 'lumi-robos', name: 'Lumi Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: lumiRobos },
-  { id: 'lumi-veiculos', name: 'Lumi Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: lumiVeiculos },
-  { id: 'lumi-ovo', name: 'Ovo do Lumi', description: 'O começo de uma grande amizade, cheio de brilho e potencial.', category: 'premium', image_url: lumiEgg },
-  { id: 'lumi-nascendo', name: 'Lumi Nascendo', description: 'A casquinha rachou e uma nova aventura vai começar.', category: 'premium', image_url: lumiHatching },
-  { id: 'lumi-bebe', name: 'Lumi Bebê', description: 'Pequenino, curioso e pronto para seus primeiros desafios.', category: 'premium', image_url: lumiBaby },
-  { id: 'luma-ovo', name: 'Ovo da Luma', description: 'Um ovo encantado guardando a doçura e coragem da Luma.', category: 'premium', image_url: lumaEgg },
-  { id: 'luma-nascendo', name: 'Luma Nascendo', description: 'A Luma está chegando ao mundo com muito brilho.', category: 'premium', image_url: lumaHatching },
-  { id: 'luma-bebe', name: 'Luma Bebê', description: 'A versão bebê da Luma, fofa, alegre e cheia de ternura.', category: 'premium', image_url: lumaBaby },
-  { id: 'luma-original', name: 'Luma Clássica', description: 'A forma original da Luma, doce e cheia de coragem.', category: 'premium', image_url: lumaMascot },
-  { id: 'luma-princesa', name: 'Luma Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: lumaPrincesa },
-  { id: 'luma-unicornio', name: 'Luma Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: lumaUnicornio },
-  { id: 'luma-doutora', name: 'Luma Doutora', description: 'Cuidando de todos com carinho e ciência.', category: 'premium', image_url: lumaDoutora },
-  { id: 'luma-astronauta', name: 'Luma Astronauta', description: 'Pronta para explorar galáxias inteiras.', category: 'premium', image_url: lumaAstronauta },
-  { id: 'luma-bailarina', name: 'Luma Bailarina', description: 'Cada passo é uma poesia em movimento.', category: 'premium', image_url: lumaBailarina },
-  { id: 'luma-fada', name: 'Luma Fada', description: 'Espalhando pó mágico e desejos pelo caminho.', category: 'premium', image_url: lumaFada },
-  { id: 'luma-sereia', name: 'Luma Sereia', description: 'Mergulhando em aventuras submarinas.', category: 'premium', image_url: lumaSereia },
-  { id: 'luma-confeiteira', name: 'Luma Confeiteira', description: 'Receitas cheias de afeto e criatividade.', category: 'premium', image_url: lumaConfeiteira },
-  { id: 'luma-veterinaria', name: 'Luma Veterinária', description: 'Amando e cuidando de todos os bichinhos.', category: 'premium', image_url: lumaVeterinaria },
-  { id: 'luma-professora', name: 'Luma Professora', description: 'Ensinando com paciência e muito carinho.', category: 'premium', image_url: lumaProfessora },
-  { id: 'luma-arte', name: 'Luma Artista', description: 'Pincel na mão, sonhos no papel.', category: 'premium', image_url: lumaArte },
-  { id: 'luma-musica', name: 'Luma Musicista', description: 'Cantando e dançando ao som do coração.', category: 'premium', image_url: lumaMusica },
-  { id: 'luma-super-heroina', name: 'Luma Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: lumaSuperHeroina },
+  { id: 'pip-dino', name: 'Pip Explorador', description: 'Vamos rugir e descobrir o mundo jurássico!', category: 'premium', image_url: pipDinossauros },
+  { id: 'pip-espaco', name: 'Pip Astronauta', description: 'Pronto para decolar até as estrelas!', category: 'premium', image_url: pipEspaco },
+  { id: 'pip-arte', name: 'Pip Artista', description: 'Pincel na mão e muita cor pra criar.', category: 'premium', image_url: pipArte },
+  { id: 'pip-animais', name: 'Pip Veterinário', description: 'Cuidando dos amiguinhos com muito carinho.', category: 'premium', image_url: pipAnimais },
+  { id: 'pip-musica', name: 'Pip Maestro', description: 'Vamos reger uma sinfonia de aprendizado!', category: 'premium', image_url: pipMusica },
+  { id: 'pip-fazendinha', name: 'Pip Fazendeiro', description: 'Plantando aprendizado e colhendo conquistas.', category: 'premium', image_url: pipFazendinha },
+  { id: 'pip-super', name: 'Pip Super', description: 'Salvando o dia com o poder do estudo!', category: 'premium', image_url: pipSuperHerois },
+  { id: 'pip-princesas', name: 'Pip Realeza', description: 'Coroado de gentileza e sabedoria.', category: 'premium', image_url: pipPrincesas },
+  { id: 'pip-minecraft', name: 'Pip Builder', description: 'Construindo aventuras bloco a bloco.', category: 'premium', image_url: pipMinecraft },
+  { id: 'pip-carros', name: 'Pip Piloto', description: 'Acelerando rumo a novas conquistas.', category: 'premium', image_url: pipCarros },
+  { id: 'pip-trens', name: 'Pip Maquinista', description: 'Tchu-tchuuu! Bora pra próxima estação.', category: 'premium', image_url: pipTrens },
+  { id: 'pip-robos', name: 'Pip Robô', description: 'Tecnologia e curiosidade juntos.', category: 'premium', image_url: pipRobos },
+  { id: 'pip-veiculos', name: 'Pip Aventureiro', description: 'Mapa, binóculos e muita exploração.', category: 'premium', image_url: pipVeiculos },
+  { id: 'pip-ovo', name: 'Ovo do Pip', description: 'O começo de uma grande amizade, cheio de brilho e potencial.', category: 'premium', image_url: pipEgg },
+  { id: 'pip-nascendo', name: 'Pip Nascendo', description: 'A casquinha rachou e uma nova aventura vai começar.', category: 'premium', image_url: pipHatching },
+  { id: 'pip-bebe', name: 'Pip Bebê', description: 'Pequenino, curioso e pronto para seus primeiros desafios.', category: 'premium', image_url: pipBaby },
+  { id: 'pipa-ovo', name: 'Ovo da Pipa', description: 'Um ovo encantado guardando a doçura e coragem da Pipa.', category: 'premium', image_url: pipaEgg },
+  { id: 'pipa-nascendo', name: 'Pipa Nascendo', description: 'A Pipa está chegando ao mundo com muito brilho.', category: 'premium', image_url: pipaHatching },
+  { id: 'pipa-bebe', name: 'Pipa Bebê', description: 'A versão bebê da Pipa, fofa, alegre e cheia de ternura.', category: 'premium', image_url: pipaBaby },
+  { id: 'pipa-original', name: 'Pipa Clássica', description: 'A forma original da Pipa, doce e cheia de coragem.', category: 'premium', image_url: pipaMascot },
+  { id: 'pipa-princesa', name: 'Pipa Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: pipaPrincesa },
+  { id: 'pipa-unicornio', name: 'Pipa Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: pipaUnicornio },
+  { id: 'pipa-doutora', name: 'Pipa Doutora', description: 'Cuidando de todos com carinho e ciência.', category: 'premium', image_url: pipaDoutora },
+  { id: 'pipa-astronauta', name: 'Pipa Astronauta', description: 'Pronta para explorar galáxias inteiras.', category: 'premium', image_url: pipaAstronauta },
+  { id: 'pipa-bailarina', name: 'Pipa Bailarina', description: 'Cada passo é uma poesia em movimento.', category: 'premium', image_url: pipaBailarina },
+  { id: 'pipa-fada', name: 'Pipa Fada', description: 'Espalhando pó mágico e desejos pelo caminho.', category: 'premium', image_url: pipaFada },
+  { id: 'pipa-sereia', name: 'Pipa Sereia', description: 'Mergulhando em aventuras submarinas.', category: 'premium', image_url: pipaSereia },
+  { id: 'pipa-confeiteira', name: 'Pipa Confeiteira', description: 'Receitas cheias de afeto e criatividade.', category: 'premium', image_url: pipaConfeiteira },
+  { id: 'pipa-veterinaria', name: 'Pipa Veterinária', description: 'Amando e cuidando de todos os bichinhos.', category: 'premium', image_url: pipaVeterinaria },
+  { id: 'pipa-professora', name: 'Pipa Professora', description: 'Ensinando com paciência e muito carinho.', category: 'premium', image_url: pipaProfessora },
+  { id: 'pipa-arte', name: 'Pipa Artista', description: 'Pincel na mão, sonhos no papel.', category: 'premium', image_url: pipaArte },
+  { id: 'pipa-musica', name: 'Pipa Musicista', description: 'Cantando e dançando ao som do coração.', category: 'premium', image_url: pipaMusica },
+  { id: 'pipa-super-heroina', name: 'Pipa Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: pipaSuperHeroina },
 ];
 
 // Gamificação: requisito de Moedas Brilha para cada mascote da loja
@@ -142,7 +142,7 @@ function getRequiredCoins(mascotId: string, mascotName: string): number {
   if (id.includes('ovo') || name.includes('ovo')) return STAGE_THRESHOLDS.ovo;
   if (id.includes('nascendo') || name.includes('nascendo')) return STAGE_THRESHOLDS.nascendo;
   if (id.includes('bebe') || name.includes('bebê') || name.includes('bebe')) return STAGE_THRESHOLDS.bebe;
-  // Lumi (mascote principal) e Luma Clássica liberam ao virar Guardião
+  // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
   return STAGE_THRESHOLDS.guardiao;
 }
 
@@ -230,14 +230,14 @@ const MascotStorePage: React.FC = () => {
       <div className="flex items-center gap-3 mb-6 mt-16">
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
         <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-wider flex items-center gap-2">
-          <Sparkles size={22} /> Evolução do Lumi & Luma
+          <Sparkles size={22} /> Evolução do Pip & Pipa
         </h2>
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
       </div>
       <p className="text-center text-muted-foreground font-bold mb-8 max-w-2xl mx-auto">
         Acompanhe a evolução do seu mascote conforme você conquista Moedas Brilha: Ovo → Nascendo → Bebê → Guardião. ✨
       </p>
-      <LumiEvolution />
+      <PipEvolution />
 
       <div className="flex items-center gap-3 mb-6 mt-16">
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
@@ -326,7 +326,7 @@ const MascotStoreCard = ({
   requiredCoins?: number;
   currentCoins?: number;
 }) => {
-  const isLumi = mascot.name === 'Lumi';
+  const isPip = mascot.name === 'Pip';
   const rarity = mascot.category === 'primary' ? 'Oficial' : mascot.category === 'premium' ? 'Épico' : 'Comum';
   const rarityColor = mascot.category === 'primary' ? 'bg-primary' : mascot.category === 'premium' ? 'bg-purple-500' : 'bg-slate-500';
   const missingCoins = Math.max(0, requiredCoins - currentCoins);
@@ -354,7 +354,7 @@ const MascotStoreCard = ({
             "relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110",
             !unlocked && "grayscale opacity-50"
           )}>
-            {isLumi ? (
+            {isPip ? (
               <KidLiveMascot size="xl" showBadge={false} emotion="happy" className="animate-bounce-gentle" />
 
             ) : mascot.image_url ? (
@@ -393,7 +393,7 @@ const MascotStoreCard = ({
               {mascot.name}
             </h3>
             <p className="text-sm font-bold text-muted-foreground/60 uppercase tracking-widest text-[10px]">
-              {isLumi ? 'Guardião Lendário' : 'Companheiro de Jornada'}
+              {isPip ? 'Guardião Lendário' : 'Companheiro de Jornada'}
             </p>
           </div>
 
@@ -408,10 +408,10 @@ const MascotStoreCard = ({
                   <Star size={16} fill="currentColor" />
                   Já na Coleção
                 </div>
-                {isLumi && (
-                  <Link to="/colecao-lumi" className="w-full">
+                {isPip && (
+                  <Link to="/colecao-pip" className="w-full">
                     <KidButton variant="secondary" className="w-full py-4 text-xs">
-                      Ver Fantasias do Lumi
+                      Ver Fantasias do Pip
                     </KidButton>
                   </Link>
                 )}
