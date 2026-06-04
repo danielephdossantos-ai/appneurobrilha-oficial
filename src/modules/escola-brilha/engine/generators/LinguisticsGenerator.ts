@@ -116,6 +116,17 @@ export class LinguisticsGenerator extends BaseGenerator {
         };
       }
 
+      if (type === 'ei-rimas') {
+        const item = this.pickRandom(EARLY_CHILDHOOD.linguagem.rimas);
+        return {
+          q: `${item.word} combina com...?`,
+          visual: item.emoji,
+          answer: item.answer,
+          options: item.options,
+          miniGameType: "bubbles"
+        };
+      }
+
       // ===== 1º ANO (ALFABETIZAÇÃO) =====
       if (type === 'alfa-syllable') {
         const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
