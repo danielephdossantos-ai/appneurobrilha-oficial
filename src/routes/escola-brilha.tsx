@@ -1416,20 +1416,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
                       {/* Apoio visual gigante — sempre presente do passo 2 em diante */}
                       {eiStep === 2 && (
-                        <div className="text-[160px] md:text-[200px] drop-shadow-2xl animate-bounce-slow mt-8">
-                          {aula.visual || "⭐"}
+                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
+                          <RenderVisual value={aula.visual || "star"} className="h-40 w-40 md:h-52 md:w-52 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 3 && (
-                        <div className="text-[140px] md:text-[180px] drop-shadow-2xl animate-bounce-slow mt-8">
-                          {aula.visual || "⭐"}
+                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
+                          <RenderVisual value={aula.visual || "star"} className="h-32 w-32 md:h-44 md:w-44 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 4 && (
                         <div className="flex flex-col items-center gap-3 mt-8">
                           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Exemplo resolvido</div>
                           <div className="flex gap-4 items-center">
-                            <div className="text-7xl md:text-8xl">{aula.visual || "⭐"}</div>
+                            <div><RenderVisual value={aula.visual || "star"} className="h-20 w-20 md:h-24 md:w-24 text-primary" /></div>
                             <div className="text-5xl font-black text-sun">→</div>
                             <div className="px-6 py-4 rounded-3xl bg-success/15 border-4 border-success text-2xl md:text-3xl font-black text-success">
                               {aula.resposta_correta?.toString() || "Resposta"}
