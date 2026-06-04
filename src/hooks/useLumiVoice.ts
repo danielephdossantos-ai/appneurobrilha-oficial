@@ -5,7 +5,7 @@ import { speakWithElevenLabs } from "@/lib/elevenlabs-tts.functions";
 // Cache em memória para não regenerar áudio idêntico
 const audioCache = new Map<string, string>();
 
-export function usePipVoice() {
+export function useLumiVoice() {
   const speakFn = useServerFn(speakWithElevenLabs);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -28,7 +28,7 @@ export function usePipVoice() {
         if (!base64) {
           const res = await speakFn({ data: { text } });
           if (!res?.audio) {
-            console.error("[PipVoice] sem áudio:", res?.error);
+            console.error("[LumiVoice] sem áudio:", res?.error);
             setIsSpeaking(false);
             return;
           }
@@ -41,7 +41,7 @@ export function usePipVoice() {
         audio.onerror = () => setIsSpeaking(false);
         await audio.play();
       } catch (e) {
-        console.error("[PipVoice] falha play:", e);
+        console.error("[LumiVoice] falha play:", e);
         setIsSpeaking(false);
       }
     },

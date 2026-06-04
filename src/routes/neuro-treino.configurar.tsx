@@ -37,7 +37,7 @@ function ConfigurarHiperfoco() {
       </div>
       <PageHeader
         title="Qual é o hiperfoco de hoje?"
-        subtitle="Escolha um tema para personalizar as atividades — o PIP vai usar essa paixão para guiar a criança."
+        subtitle="Escolha um tema para personalizar as atividades — a LUMI vai usar essa paixão para guiar a criança."
       />
 
       <Card>

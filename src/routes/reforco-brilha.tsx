@@ -6,7 +6,7 @@ import { useState, useEffect, Component, ReactNode } from "react";
 import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle, Palette, Target, PenTool, Brain } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
-import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
+import { LumiPedagogicalGuidance } from "@/components/rewards/LumiPedagogicalGuidance";
 import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
 import { ProgressionService } from "@/engines/progression-engine/service";
 import { ProgressionEngine } from "@/engines/progression-engine/engine/progression-engine";
@@ -535,7 +535,7 @@ function ReforcoBrilha() {
               
               <div className="lg:col-span-1">
                 <div className="sticky top-24">
-                  <PipPedagogicalGuidance 
+                  <LumiPedagogicalGuidance 
                     stage={lessonContent ? 'explanation' : 'idle'} 
                     className="animate-in fade-in slide-in-from-right-4" 
                   />

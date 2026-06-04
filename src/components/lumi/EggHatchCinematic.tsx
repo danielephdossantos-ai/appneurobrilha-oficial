@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import pipEgg from '@/assets/pip-egg.png';
-import pipHatching from '@/assets/pip-hatching.png';
-import pipaEgg from '@/assets/pipa-egg.png';
-import pipaHatching from '@/assets/pipa-hatching.png';
+import lumiEgg from '@/assets/pip-egg.png';
+import lumiHatching from '@/assets/pip-hatching.png';
+import lumaEgg from '@/assets/pipa-egg.png';
+import lumaHatching from '@/assets/pipa-hatching.png';
 import { KidButton } from '@/components/ui/KidButton';
 
-type MascotChoice = 'pip' | 'pipa';
+type MascotChoice = 'lumi' | 'luma';
 
 interface Props {
   childId: string;
@@ -18,7 +18,7 @@ const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}
 
 export function EggHatchCinematic({ childId, onClose }: Props) {
   const [phase, setPhase] = useState<'choose' | 'shake' | 'crack' | 'reveal'>('choose');
-  const [mascot, setMascot] = useState<MascotChoice>('pip');
+  const [mascot, setMascot] = useState<MascotChoice>('lumi');
 
   useEffect(() => {
     if (phase === 'shake') {
@@ -39,8 +39,8 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
     onClose();
   };
 
-  const eggImg = mascot === 'pip' ? pipEgg : pipaEgg;
-  const hatchImg = mascot === 'pip' ? pipHatching : pipaHatching;
+  const eggImg = mascot === 'lumi' ? lumiEgg : lumaEgg;
+  const hatchImg = mascot === 'lumi' ? lumiHatching : lumaHatching;
 
   return (
     <motion.div
@@ -75,25 +75,25 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               </div>
 
               <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                {(['pip', 'pipa'] as MascotChoice[]).map((m) => (
+                {(['lumi', 'luma'] as MascotChoice[]).map((m) => (
                   <button
                     key={m}
                     onClick={() => setMascot(m)}
                     className={`relative rounded-3xl p-6 border-4 transition-all bg-white/10 backdrop-blur hover:bg-white/20 ${
                       mascot === m
-                        ? m === 'pip'
+                        ? m === 'lumi'
                           ? 'border-sky-300 ring-4 ring-sky-300/40 scale-105'
                           : 'border-pink-300 ring-4 ring-pink-300/40 scale-105'
                         : 'border-white/20'
                     }`}
                   >
                     <img
-                      src={m === 'pip' ? pipEgg : pipaEgg}
-                      alt={`Ovo do ${m === 'pip' ? 'Pip' : 'Pipa'}`}
+                      src={m === 'lumi' ? lumiEgg : lumaEgg}
+                      alt={`Ovo do ${m === 'lumi' ? 'Lumi' : 'Luma'}`}
                       className="w-32 h-32 mx-auto object-contain drop-shadow-2xl"
                     />
                     <div className="mt-3 text-white font-black uppercase tracking-wider text-sm">
-                      Ovo {m === 'pip' ? 'do Pip' : 'da Pipa'}
+                      Ovo {m === 'lumi' ? 'do Lumi' : 'da Luma'}
                     </div>
                   </button>
                 ))}
@@ -168,7 +168,7 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                 <Sparkles size={14} /> Bem-vindo ao mundo!
               </div>
               <h2 className="text-4xl md:text-6xl font-black text-white drop-shadow-lg">
-                Olá, eu sou seu {mascot === 'pip' ? 'Pip' : 'sua Pipa'}!
+                Olá, eu sou seu {mascot === 'lumi' ? 'Lumi' : 'sua Luma'}!
               </h2>
               <motion.img
                 src={hatchImg}
@@ -204,7 +204,7 @@ export function getStarterMascot(childId: string | null | undefined): MascotChoi
   if (!childId) return null;
   try {
     const v = localStorage.getItem(`neurobrilha:starterMascot:${childId}`);
-    return v === 'pip' || v === 'pipa' ? v : null;
+    return v === 'lumi' || v === 'luma' ? v : null;
   } catch {
     return null;
   }

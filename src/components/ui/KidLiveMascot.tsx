@@ -3,35 +3,35 @@ import React from 'react';
 import { cn } from '@/utils/utils';
 import { useAppState } from '@/core/store';
 import { useMascot } from '@/contexts/MascotContext';
-import pipMascot from '@/assets/pip-mascot.png';
-import pipDinossauros from '@/assets/pip-dinossauros.png';
-import pipEspaco from '@/assets/pip-espaco.png';
-import pipArte from '@/assets/pip-arte.png';
-import pipAnimais from '@/assets/pip-animais.png';
-import pipMusica from '@/assets/pip-musica.png';
-import pipFazendinha from '@/assets/pip-fazendinha.png';
-import pipSuperHerois from '@/assets/pip-super-herois.png';
-import pipPrincesas from '@/assets/pip-princesas.png';
-import pipMinecraft from '@/assets/pip-minecraft.png';
-import pipCarros from '@/assets/pip-carros.png';
-import pipTrens from '@/assets/pip-trens.png';
-import pipRobos from '@/assets/pip-robos.png';
-import pipVeiculos from '@/assets/pip-veiculos.png';
+import lumiMascot from '@/assets/pip-mascot.png';
+import lumiDinossauros from '@/assets/pip-dinossauros.png';
+import lumiEspaco from '@/assets/pip-espaco.png';
+import lumiArte from '@/assets/pip-arte.png';
+import lumiAnimais from '@/assets/pip-animais.png';
+import lumiMusica from '@/assets/pip-musica.png';
+import lumiFazendinha from '@/assets/pip-fazendinha.png';
+import lumiSuperHerois from '@/assets/pip-super-herois.png';
+import lumaPrincesas from '@/assets/pip-princesas.png';
+import lumiMinecraft from '@/assets/pip-minecraft.png';
+import lumiCarros from '@/assets/pip-carros.png';
+import lumiTrens from '@/assets/pip-trens.png';
+import lumiRobos from '@/assets/pip-robos.png';
+import lumiVeiculos from '@/assets/pip-veiculos.png';
 
-export const PIP_SKINS: Record<string, string> = {
-  dinossauros: pipDinossauros,
-  espaco: pipEspaco,
-  arte: pipArte,
-  animais: pipAnimais,
-  musica: pipMusica,
-  fazendinha: pipFazendinha,
-  'super-herois': pipSuperHerois,
-  princesas: pipPrincesas,
-  minecraft: pipMinecraft,
-  carros: pipCarros,
-  trens: pipTrens,
-  robos: pipRobos,
-  veiculos: pipVeiculos,
+export const LUMI_SKINS: Record<string, string> = {
+  dinossauros: lumiDinossauros,
+  espaco: lumiEspaco,
+  arte: lumiArte,
+  animais: lumiAnimais,
+  musica: lumiMusica,
+  fazendinha: lumiFazendinha,
+  'super-herois': lumiSuperHerois,
+  princesas: lumaPrincesas,
+  minecraft: lumiMinecraft,
+  carros: lumiCarros,
+  trens: lumiTrens,
+  robos: lumiRobos,
+  veiculos: lumiVeiculos,
 };
 
 
@@ -49,11 +49,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
-  const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
+  const isLumi = !activeMascot || activeMascot.mascot.name === 'Lumi' || activeMascot.mascot.name === 'Pip';
 
   const getMascotImage = () => {
-    if (!isPip) {
-      return activeMascot?.mascot.image_url || pipMascot;
+    if (!isLumi) {
+      return activeMascot?.mascot.image_url || lumiMascot;
     }
 
     const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
@@ -63,11 +63,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
       return skins[firstHyperfocus];
     }
 
-    if (firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
-      return PIP_SKINS[firstHyperfocus];
+    if (firstHyperfocus && LUMI_SKINS[firstHyperfocus]) {
+      return LUMI_SKINS[firstHyperfocus];
     }
 
-    return pipMascot;
+    return lumiMascot;
   };
 
   const mascotImage = getMascotImage();
@@ -95,7 +95,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
           <img
             src={mascotImage}
-            alt="Pip - O Guardião dos Desafios"
+            alt="Lumi - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             draggable={false}
           />
