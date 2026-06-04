@@ -432,6 +432,7 @@ export type Database = {
           id: string
           nivel: string | null
           objetivo: string | null
+          ordem: number | null
           titulo: string | null
           updated_at: string | null
         }
@@ -443,6 +444,7 @@ export type Database = {
           id?: string
           nivel?: string | null
           objetivo?: string | null
+          ordem?: number | null
           titulo?: string | null
           updated_at?: string | null
         }
@@ -454,6 +456,7 @@ export type Database = {
           id?: string
           nivel?: string | null
           objetivo?: string | null
+          ordem?: number | null
           titulo?: string | null
           updated_at?: string | null
         }
