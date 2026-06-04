@@ -5,6 +5,11 @@ export class PerceptionGenerator extends BaseGenerator {
   protected domain = "perception";
 
   protected getActivityType(input: GeneratorInput): string {
+    if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-cores-formas') {
+        return Math.random() < 0.5 ? 'ei-find-shape' : 'ei-find-color';
+      }
+    }
     if (input.difficulty < 0.5) return "visual-search";
     return "auditory-discrimination";
   }
