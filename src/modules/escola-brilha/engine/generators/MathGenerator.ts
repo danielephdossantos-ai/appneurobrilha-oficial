@@ -1,6 +1,6 @@
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
-import { MATH_DATA, EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
+import { MATH_DATA, EARLY_CHILDHOOD, FIRST_GRADE_MATH, isEarlyChildhood } from "./PedagogyData";
 
 export class MathGenerator extends BaseGenerator {
   protected domain = "math";
@@ -13,6 +13,12 @@ export class MathGenerator extends BaseGenerator {
     }
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "advanced-logic";
+    if (input.grade?.includes("1º")) {
+      const r = Math.random();
+      if (r < 0.33) return 'alfa-sum';
+      if (r < 0.66) return 'alfa-sub';
+      return 'alfa-tens';
+    }
     if (gradeNum <= 2) return "counting";
     if (gradeNum === 3) return "comparison";
     return "visual-logic";
@@ -23,6 +29,9 @@ export class MathGenerator extends BaseGenerator {
     switch (type) {
       case "ei-contagem": return "Vale dos Números";
       case "ei-drag-quantity": return "Vale dos Números";
+      case "alfa-sum": return "Vale dos Números";
+      case "alfa-sub": return "Vale dos Números";
+      case "alfa-tens": return "Escola Brilha";
       case "counting": return "Contagem Divertida";
       case "comparison": return "Mais ou Menos?";
       case "visual-logic": return "Desafio Lógico";
@@ -36,6 +45,9 @@ export class MathGenerator extends BaseGenerator {
     switch (type) {
       case "ei-contagem": return "Quantas maçãs existem?";
       case "ei-drag-quantity": return "Arraste as estrelas para a caixa.";
+      case "alfa-sum": return "Soma Visual";
+      case "alfa-sub": return "Subtração Visual";
+      case "alfa-tens": return "Qual número representa:";
       case "counting": return "Quantos objetos você vê?";
       case "comparison": return "Qual grupo tem mais itens?";
       case "visual-logic": return "Qual é o próximo da sequência?";
@@ -68,6 +80,39 @@ export class MathGenerator extends BaseGenerator {
           targetCount: item.n,
           symbol: item.emoji,
           miniGameType: "quantity"
+        };
+      }
+
+      // ===== 1º ANO (MATEMÁTICA VISUAL) =====
+      if (type === 'alfa-sum') {
+        const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
+        return {
+          q: "Soma Visual",
+          visual: `${item.group1.item.repeat(item.group1.n)} + ${item.group2.item.repeat(item.group2.n)} = ?`,
+          answer: String(item.answer),
+          options: item.options.map(String),
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'alfa-sub') {
+        const item = this.pickRandom(FIRST_GRADE_MATH.visualSubtraction);
+        return {
+          q: "Subtração Visual",
+          visual: `${item.total.item.repeat(item.total.n)} tira ${item.take} = ?`,
+          answer: String(item.answer),
+          options: item.options.map(String),
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'alfa-tens') {
+        const item = this.pickRandom(FIRST_GRADE_MATH.tens);
+        return {
+          q: item.question,
+          answer: item.answer,
+          options: item.options,
+          miniGameType: "bubbles"
         };
       }
 
