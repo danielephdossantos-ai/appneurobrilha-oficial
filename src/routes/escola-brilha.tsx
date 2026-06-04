@@ -725,10 +725,12 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
 
   const steps = [
     { id: 1, label: "EXPLICAÇÃO", icon: Lightbulb },
-    { id: 2, label: "TREINO GUIADO", icon: Target },
-    { id: 3, label: "PRÁTICA", icon: PenTool },
-    { id: 4, label: "DESAFIO", icon: Flag },
-    { id: 5, label: "AVALIAÇÃO", icon: Trophy },
+    { id: 2, label: "DEMONSTRAÇÃO", icon: Eye },
+    { id: 3, label: "TREINO GUIADO", icon: Target },
+    { id: 4, label: "PRÁTICA", icon: PenTool },
+    { id: 5, label: "DESAFIO", icon: Flag },
+    { id: 6, label: "AVALIAÇÃO", icon: Trophy },
+    { id: 7, label: "DOMÍNIO", icon: Star },
   ];
 
   const handleAnswer = (isCorrect: boolean) => {
@@ -737,20 +739,17 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
       setFeedback(true);
       setTimeout(() => {
         setFeedback(null);
-        if (step === 2) {
-          setStep(3);
+        if (step === 3) { // Treino Guiado
+          setStep(4);
           setPracticeCount(0);
-        } else if (step === 3) {
+        } else if (step === 4) { // Prática
           if (practiceCount < 2) {
             setPracticeCount(prev => prev + 1);
-            // Aqui poderíamos regenerar a atividade, mas para simplificar
-            // e garantir consistência, vamos apenas avançar o contador.
-            // Em uma implementação real, o ActivityProceduralService geraria um novo item.
           } else {
-            setStep(4);
+            setStep(5); // Desafio
           }
-        } else if (step === 4) {
-          setStep(5);
+        } else if (step === 5) { // Desafio
+          setStep(6); // Avaliação
         }
       }, 1500);
     } else {
@@ -762,6 +761,7 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
 
   useEffect(() => {
     const playAudio = (msg: string) => {
+      if (!msg) return;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(msg);
       u.lang = 'pt-BR';
@@ -769,9 +769,11 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
       window.speechSynthesis.speak(u);
     };
 
-    if (step === 1) playAudio(aula.etapa1_intro || aula.instruction || "Vamos começar nossa aula!");
-    if (step === 2) playAudio("Vamos tentar juntos? Eu te ajudo!");
-    if (step === 4) playAudio("Agora é um desafio! Tente fazer sozinho.");
+    if (step === 1) playAudio(aula.etapa1_explicação || aula.etapa1_intro || "Vamos começar nossa aula!");
+    if (step === 2) playAudio(aula.etapa2_demonstração || aula.etapa2_conceito || "Veja como se faz!");
+    if (step === 3) playAudio(aula.etapa3_treino_guiado || "Vamos tentar juntos? Eu te ajudo!");
+    if (step === 5) playAudio(aula.etapa5_desafio || "Agora é um desafio! Tente fazer sozinho.");
+    if (step === 7) playAudio(aula.etapa7_domínio || "Você brilhou! Você dominou este conteúdo.");
   }, [step, aula]);
 
   return (
