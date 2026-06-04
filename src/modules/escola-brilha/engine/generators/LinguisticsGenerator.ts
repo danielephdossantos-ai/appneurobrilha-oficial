@@ -72,7 +72,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-vogal') {
         // Encontre a Vogal (A among A, P, O)
-        const v = EARLY_CHILDHOOD.vowels[0]; // Letra A por padrão como solicitado
+        const v = EARLY_CHILDHOOD.linguagem.vowels[0]; // Letra A por padrão como solicitado
         const options = this.shuffle([v.letter, ...v.distractors]);
         return {
           q: "Vamos procurar a letra A!",
@@ -85,7 +85,7 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       if (type === 'ei-drag-letter') {
         // Arraste a Letra (BOLA)
-        const w = EARLY_CHILDHOOD.words[0]; // BOLA
+        const w = EARLY_CHILDHOOD.linguagem.words[0]; // BOLA
         return {
           q: `Qual letra começa ${w.word}?`,
           visual: w.emoji,
@@ -98,7 +98,7 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       if (type === 'ei-animal-sound') {
         // Sons dos Animais (Vaca)
-        const a = EARLY_CHILDHOOD.animais[0]; // VACA
+        const a = EARLY_CHILDHOOD.artes_sons.animais[0]; // VACA
         return {
           q: a.nome,
           visual: a.emoji,
