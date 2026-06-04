@@ -22,7 +22,6 @@ import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
-import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -101,11 +100,6 @@ const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
   path: '/gerador-procedural',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
-  id: '/escola-brilha',
-  path: '/escola-brilha',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ColecaoPipRoute = ColecaoPipRouteImport.update({
   id: '/colecao-pip',
   path: '/colecao-pip',
@@ -177,7 +171,6 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
-  '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
@@ -205,7 +198,6 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
-  '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
@@ -234,7 +226,6 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
-  '/escola-brilha': typeof EscolaBrilhaRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
@@ -264,7 +255,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
@@ -292,7 +282,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
@@ -320,7 +309,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
@@ -349,7 +337,6 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
-  EscolaBrilhaRoute: typeof EscolaBrilhaRoute
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   HistoriasRoute: typeof HistoriasRoute
   Jornada365Route: typeof Jornada365Route
@@ -458,13 +445,6 @@ declare module '@tanstack/react-router' {
       path: '/gerador-procedural'
       fullPath: '/gerador-procedural'
       preLoaderRoute: typeof GeradorProceduralRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escola-brilha': {
-      id: '/escola-brilha'
-      path: '/escola-brilha'
-      fullPath: '/escola-brilha'
-      preLoaderRoute: typeof EscolaBrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/colecao-pip': {
@@ -577,7 +557,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
-  EscolaBrilhaRoute: EscolaBrilhaRoute,
   GeradorProceduralRoute: GeradorProceduralRoute,
   HistoriasRoute: HistoriasRoute,
   Jornada365Route: Jornada365Route,
