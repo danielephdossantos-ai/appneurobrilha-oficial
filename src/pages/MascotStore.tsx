@@ -25,23 +25,23 @@ import lumiCarros from '@/assets/lumi-carros.png';
 import lumiTrens from '@/assets/lumi-trens.png';
 import lumiRobos from '@/assets/lumi-robos.png';
 import lumiVeiculos from '@/assets/lumi-veiculos.png';
-import lumiaMascot from '@/assets/lumi-girl-mascot.png';
-import lumiaEgg from '@/assets/lumia-egg.png';
-import lumiaHatching from '@/assets/lumia-hatching.png';
-import lumiaBaby from '@/assets/lumia-baby.png';
-import lumiaPrincesa from '@/assets/lumi-girl-princesas.png';
-import lumiaUnicornio from '@/assets/lumi-girl-unicornio.png';
-import lumiaDoutora from '@/assets/lumi-girl-doutora.png';
-import lumiaAstronauta from '@/assets/lumi-girl-astronauta.png';
-import lumiaBailarina from '@/assets/lumi-girl-bailarina.png';
-import lumiaFada from '@/assets/lumi-girl-fada.png';
-import lumiaSereia from '@/assets/lumi-girl-sereia.png';
-import lumiaConfeiteira from '@/assets/lumi-girl-confeiteira.png';
-import lumiaVeterinaria from '@/assets/lumi-girl-veterinaria.png';
-import lumiaProfessora from '@/assets/lumi-girl-professora.png';
-import lumiaArte from '@/assets/lumi-girl-arte.png';
-import lumiaMusica from '@/assets/lumi-girl-musica.png';
-import lumiaSuperHeroina from '@/assets/lumi-girl-super-heroina.png';
+import lumaMascot from '@/assets/lumi-girl-mascot.png';
+import lumaEgg from '@/assets/luma-egg.png';
+import lumaHatching from '@/assets/luma-hatching.png';
+import lumaBaby from '@/assets/luma-baby.png';
+import lumaPrincesa from '@/assets/lumi-girl-princesas.png';
+import lumaUnicornio from '@/assets/lumi-girl-unicornio.png';
+import lumaDoutora from '@/assets/lumi-girl-doutora.png';
+import lumaAstronauta from '@/assets/lumi-girl-astronauta.png';
+import lumaBailarina from '@/assets/lumi-girl-bailarina.png';
+import lumaFada from '@/assets/lumi-girl-fada.png';
+import lumaSereia from '@/assets/lumi-girl-sereia.png';
+import lumaConfeiteira from '@/assets/lumi-girl-confeiteira.png';
+import lumaVeterinaria from '@/assets/lumi-girl-veterinaria.png';
+import lumaProfessora from '@/assets/lumi-girl-professora.png';
+import lumaArte from '@/assets/lumi-girl-arte.png';
+import lumaMusica from '@/assets/lumi-girl-musica.png';
+import lumaSuperHeroina from '@/assets/lumi-girl-super-heroina.png';
 import KidLiveMascot from '@/components/ui/KidLiveMascot';
 import { LumiEvolution } from '@/components/lumi/LumiEvolution';
 import { cn } from '@/utils/utils';
@@ -113,23 +113,23 @@ const ADDITIONAL_CHARACTERS = [
   { id: 'lumi-ovo', name: 'Ovo do Lumi', description: 'O começo de uma grande amizade, cheio de brilho e potencial.', category: 'premium', image_url: lumiEgg },
   { id: 'lumi-nascendo', name: 'Lumi Nascendo', description: 'A casquinha rachou e uma nova aventura vai começar.', category: 'premium', image_url: lumiHatching },
   { id: 'lumi-bebe', name: 'Lumi Bebê', description: 'Pequenino, curioso e pronto para seus primeiros desafios.', category: 'premium', image_url: lumiBaby },
-  { id: 'lumia-ovo', name: 'Ovo da Lumia', description: 'Um ovo encantado guardando a doçura e coragem da Lumia.', category: 'premium', image_url: lumiaEgg },
-  { id: 'lumia-nascendo', name: 'Lumia Nascendo', description: 'A Lumia está chegando ao mundo com muito brilho.', category: 'premium', image_url: lumiaHatching },
-  { id: 'lumia-bebe', name: 'Lumia Bebê', description: 'A versão bebê da Lumia, fofa, alegre e cheia de ternura.', category: 'premium', image_url: lumiaBaby },
-  { id: 'lumia-original', name: 'Lumia Clássica', description: 'A forma original da Lumia, doce e cheia de coragem.', category: 'premium', image_url: lumiaMascot },
-  { id: 'lumia-princesa', name: 'Lumia Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: lumiaPrincesa },
-  { id: 'lumia-unicornio', name: 'Lumia Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: lumiaUnicornio },
-  { id: 'lumia-doutora', name: 'Lumia Doutora', description: 'Cuidando de todos com carinho e ciência.', category: 'premium', image_url: lumiaDoutora },
-  { id: 'lumia-astronauta', name: 'Lumia Astronauta', description: 'Pronta para explorar galáxias inteiras.', category: 'premium', image_url: lumiaAstronauta },
-  { id: 'lumia-bailarina', name: 'Lumia Bailarina', description: 'Cada passo é uma poesia em movimento.', category: 'premium', image_url: lumiaBailarina },
-  { id: 'lumia-fada', name: 'Lumia Fada', description: 'Espalhando pó mágico e desejos pelo caminho.', category: 'premium', image_url: lumiaFada },
-  { id: 'lumia-sereia', name: 'Lumia Sereia', description: 'Mergulhando em aventuras submarinas.', category: 'premium', image_url: lumiaSereia },
-  { id: 'lumia-confeiteira', name: 'Lumia Confeiteira', description: 'Receitas cheias de afeto e criatividade.', category: 'premium', image_url: lumiaConfeiteira },
-  { id: 'lumia-veterinaria', name: 'Lumia Veterinária', description: 'Amando e cuidando de todos os bichinhos.', category: 'premium', image_url: lumiaVeterinaria },
-  { id: 'lumia-professora', name: 'Lumia Professora', description: 'Ensinando com paciência e muito carinho.', category: 'premium', image_url: lumiaProfessora },
-  { id: 'lumia-arte', name: 'Lumia Artista', description: 'Pincel na mão, sonhos no papel.', category: 'premium', image_url: lumiaArte },
-  { id: 'lumia-musica', name: 'Lumia Musicista', description: 'Cantando e dançando ao som do coração.', category: 'premium', image_url: lumiaMusica },
-  { id: 'lumia-super-heroina', name: 'Lumia Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: lumiaSuperHeroina },
+  { id: 'luma-ovo', name: 'Ovo da Luma', description: 'Um ovo encantado guardando a doçura e coragem da Luma.', category: 'premium', image_url: lumaEgg },
+  { id: 'luma-nascendo', name: 'Luma Nascendo', description: 'A Luma está chegando ao mundo com muito brilho.', category: 'premium', image_url: lumaHatching },
+  { id: 'luma-bebe', name: 'Luma Bebê', description: 'A versão bebê da Luma, fofa, alegre e cheia de ternura.', category: 'premium', image_url: lumaBaby },
+  { id: 'luma-original', name: 'Luma Clássica', description: 'A forma original da Luma, doce e cheia de coragem.', category: 'premium', image_url: lumaMascot },
+  { id: 'luma-princesa', name: 'Luma Princesa', description: 'Coroada de gentileza, sabedoria e brilho próprio.', category: 'premium', image_url: lumaPrincesa },
+  { id: 'luma-unicornio', name: 'Luma Unicórnio', description: 'Asas, chifre brilhante e muita magia.', category: 'premium', image_url: lumaUnicornio },
+  { id: 'luma-doutora', name: 'Luma Doutora', description: 'Cuidando de todos com carinho e ciência.', category: 'premium', image_url: lumaDoutora },
+  { id: 'luma-astronauta', name: 'Luma Astronauta', description: 'Pronta para explorar galáxias inteiras.', category: 'premium', image_url: lumaAstronauta },
+  { id: 'luma-bailarina', name: 'Luma Bailarina', description: 'Cada passo é uma poesia em movimento.', category: 'premium', image_url: lumaBailarina },
+  { id: 'luma-fada', name: 'Luma Fada', description: 'Espalhando pó mágico e desejos pelo caminho.', category: 'premium', image_url: lumaFada },
+  { id: 'luma-sereia', name: 'Luma Sereia', description: 'Mergulhando em aventuras submarinas.', category: 'premium', image_url: lumaSereia },
+  { id: 'luma-confeiteira', name: 'Luma Confeiteira', description: 'Receitas cheias de afeto e criatividade.', category: 'premium', image_url: lumaConfeiteira },
+  { id: 'luma-veterinaria', name: 'Luma Veterinária', description: 'Amando e cuidando de todos os bichinhos.', category: 'premium', image_url: lumaVeterinaria },
+  { id: 'luma-professora', name: 'Luma Professora', description: 'Ensinando com paciência e muito carinho.', category: 'premium', image_url: lumaProfessora },
+  { id: 'luma-arte', name: 'Luma Artista', description: 'Pincel na mão, sonhos no papel.', category: 'premium', image_url: lumaArte },
+  { id: 'luma-musica', name: 'Luma Musicista', description: 'Cantando e dançando ao som do coração.', category: 'premium', image_url: lumaMusica },
+  { id: 'luma-super-heroina', name: 'Luma Super', description: 'Salvando o dia com coragem e gentileza.', category: 'premium', image_url: lumaSuperHeroina },
 ];
 
 // Gamificação: requisito de Moedas Brilha para cada mascote da loja
@@ -142,7 +142,7 @@ function getRequiredCoins(mascotId: string, mascotName: string): number {
   if (id.includes('ovo') || name.includes('ovo')) return STAGE_THRESHOLDS.ovo;
   if (id.includes('nascendo') || name.includes('nascendo')) return STAGE_THRESHOLDS.nascendo;
   if (id.includes('bebe') || name.includes('bebê') || name.includes('bebe')) return STAGE_THRESHOLDS.bebe;
-  // Lumi (mascote principal) e Lumia Clássica liberam ao virar Guardião
+  // Lumi (mascote principal) e Luma Clássica liberam ao virar Guardião
   return STAGE_THRESHOLDS.guardiao;
 }
 
@@ -230,7 +230,7 @@ const MascotStorePage: React.FC = () => {
       <div className="flex items-center gap-3 mb-6 mt-16">
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
         <h2 className="text-2xl md:text-3xl font-black text-primary uppercase tracking-wider flex items-center gap-2">
-          <Sparkles size={22} /> Evolução do Lumi & Lumia
+          <Sparkles size={22} /> Evolução do Lumi & Luma
         </h2>
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
       </div>
