@@ -307,34 +307,41 @@ function Escola() {
     setLoading(true);
     try {
       const isInfantil = isEI(selectedGrade);
+      const pedService = SupabasePedagogicalService.getInstance();
       
-      // 1. Priorizar conteúdo do Banco Pedagógico (Supabase)
-      const { data: dbSkills, error: skillsError } = await (supabase as any)
-        .from('bncc_skills')
-        .select('*, pedagogical_explanations(*), pedagogical_activities(*)')
-        .eq('grade', selectedGrade)
-        .eq('field', isInfantil ? materiaId : (materiaId.charAt(0).toUpperCase() + materiaId.slice(1)))
+      // 1. Priorizar conteúdo do Banco Pedagógico (Novas tabelas)
+      const { data: dbSkills, error: skillsError } = await supabase
+        .from('bncc_habilidades')
+        .select('*')
+        .eq('ano', selectedGrade)
+        .ilike('disciplina', `%${materiaId}%`)
         .limit(1);
 
       if (dbSkills && dbSkills.length > 0) {
         const skill = dbSkills[0];
-        const explanation = skill.pedagogical_explanations?.[0];
-        const activity = skill.pedagogical_activities?.[0];
+        const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
+        const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
-        if (explanation && activity) {
-          // Usar conteúdo fixo do banco
+        if (explanation && dbActivities.length > 0) {
+          const activity = dbActivities[0];
           setAula({
             materia: materiaId,
             grade: selectedGrade,
-            skill_code: skill.code,
-            etapa1_intro: (explanation.content as any).intro,
-            etapa2_conceito: (explanation.content as any).conceito,
-            etapa3_exemplo: (activity.demonstration as any).text,
-            etapa4_como_monta: (activity.guided_training as any).instruction,
-            etapa5_instrucao: (activity.practice as any).instruction,
-            desafio_final: (activity.challenge as any).instruction,
-            reforco_positivo: "Você brilhou!",
-            visual: (activity.demonstration as any).visual_key,
+            skill_code: skill.codigo_bncc,
+            topic: skill.titulo,
+            objetivo: skill.objetivo,
+            etapa1_explicação: explanation.texto_professor,
+            etapa2_demonstração: "Observe como as pessoas se expressam!",
+            etapa3_treino_guiado: "Vamos identificar os sentimentos?",
+            etapa4_prática: "Agora é sua vez de escolher!",
+            etapa5_desafio: "Desafio final: você consegue identificar todos?",
+            etapa6_avaliação: "Excelente desempenho no reconhecimento!",
+            etapa7_domínio: "Parabéns! Você dominou esta habilidade BNCC!",
+            pergunta: activity.pergunta,
+            opcoes: [activity.alternativa_a, activity.alternativa_b, activity.alternativa_c].filter(Boolean),
+            resposta_correta: activity.resposta,
+            feedback: activity.feedback,
+            visual: explanation.imagem || "book",
             isEI: isInfantil,
             guided: true,
             db_activity: activity,
