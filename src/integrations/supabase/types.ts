@@ -2372,6 +2372,42 @@ export type Database = {
           },
         ]
       }
+      trilhas_aprendizagem: {
+        Row: {
+          ano: string
+          ativa: boolean | null
+          created_at: string | null
+          descricao: string | null
+          disciplina: string
+          habilidades_ordenadas: Json
+          id: string
+          nome: string
+          updated_at: string | null
+        }
+        Insert: {
+          ano: string
+          ativa?: boolean | null
+          created_at?: string | null
+          descricao?: string | null
+          disciplina: string
+          habilidades_ordenadas?: Json
+          id?: string
+          nome: string
+          updated_at?: string | null
+        }
+        Update: {
+          ano?: string
+          ativa?: boolean | null
+          created_at?: string | null
+          descricao?: string | null
+          disciplina?: string
+          habilidades_ordenadas?: Json
+          id?: string
+          nome?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_mascots: {
         Row: {
           affinity: number

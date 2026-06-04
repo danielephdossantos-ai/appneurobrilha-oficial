@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { SupabasePedagogicalService, ActivityDB, Explanation, BNCCSkill } from '../services/SupabasePedagogicalService';
+import { SupabasePedagogicalService, Activity, Explanation, BNCCSkill } from '../services/SupabasePedagogicalService';
 import { MasteryMotor } from '../engine/MasteryMotor';
 import { ChevronRight, Star, CheckCircle2, AlertCircle, Play, ArrowRight } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -19,7 +19,7 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
   const [step, setStep] = useState<LessonStep>('explicação');
   const [skill, setSkill] = useState<BNCCSkill | null>(null);
   const [explanation, setExplanation] = useState<Explanation | null>(null);
-  const [activities, setActivities] = useState<ActivityDB[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
   const [score, setScore] = useState({ hits: 0, errors: 0 });
   const [loading, setLoading] = useState(true);
