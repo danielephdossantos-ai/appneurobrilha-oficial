@@ -17,7 +17,6 @@ serve(async (req) => {
 
     const { mode, child, subject, topic, message, chatHistory, image, systemQuestion, systemOptions, systemAnswer, instruction, mascot, miniGameType, reexplainMethod, reexplainStep } = payload
 
-    // Mascote ativo escolhido pela criança na Loja de Mascotes (substitui personas genéricas)
     const mascotName = mascot?.name || "Pip"
     const mascotDescription = mascot?.description || "Seu companheiro de jornada"
     const mascotCategory = mascot?.category || "primary"
@@ -30,7 +29,6 @@ serve(async (req) => {
       - Nível: ${mascotLevel} · Afinidade: ${mascotAffinity}/100
       VOCÊ É ${mascotName.toUpperCase()}. Fale na primeira pessoa como esse mascote. Não use nomes de outros personagens (nem Pip, nem Pipa, nem "Amigão", nem "Terapeuta Brilha") — você é ${mascotName} em todas as jornadas (escola, terapia, amigo).`
     
-    // Validar se dados básicos existem
     if (!mode) {
       console.error('Missing mode in request')
       return new Response(JSON.stringify({ error: 'O modo de operação não foi informado.' }), {
@@ -98,7 +96,6 @@ serve(async (req) => {
         ? `TOM: Amigável e didático. Frases curtas e diretas. Explicações concretas. Mistura caixa baixa com palavras-chave em CAIXA ALTA. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`
         : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas passo-a-passo. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`;
 
-      // ============= MÉTODOS RECONHECIDOS PARA NEURODIVERGENTES =============
       const metodoBlock = reexplainMethod === "teacch"
         ? `🧩 MÉTODO TEACCH (Estruturado Visual — ideal para TEA):
            - Quebre em micro-passos.
@@ -134,16 +131,15 @@ serve(async (req) => {
       4. PROIBIDO emojis em qualquer campo de texto gerado por você.
       5. TODO ENSINO DEVE SER GRADUAL.
       
-      ESTRUTURA OFICIAL ESCOLA BRILHA 2.0 (8 PASSOS):
-      Toda aula ENSINA primeiro e avalia depois.
-      1. VAMOS DESCOBRIR  → Apresentar o tema (ex: "VAMOS CONHECER A LETRA B!").
-      2. OBSERVE          → Mostrar o objeto visual (ex: "ESTA É A LETRA B.").
-      3. PIP EXPLICA      → Conceito ultra-curto (ex: "B DE BOLA!").
-      4. EXEMPLO RESOLVIDO → Sistema resolve junto (ex: "JUNTE OS PEDACINHOS.").
-      5. FAÇA COMIGO      → Questão guiada (ex: "TOQUE NA BOLA.").
-      6. AGORA VOCÊ       → Comando para o aluno resolver sozinho.
-      7. DESAFIO          → Missão especial curta de aplicação.
-      8. CONQUISTA        → Comemoração curta citando o esforço.
+      ESTRUTURA OFICIAL ESCOLA BRILHA 2.0 (7 PASSOS PEDAGÓGICOS):
+      Toda habilidade deve possuir:
+      1. EXPLICAÇÃO   → O mascote explica o conceito (ex: "A LETRA B FAZ O SOM /B/").
+      2. DEMONSTRAÇÃO → O mascote mostra como se faz (ex: "VEJA: B DE BOLA!").
+      3. TREINO GUIADO → Questão fácil com ajuda (ex: "VAMOS JUNTOS? TOQUE NA LETRA B.").
+      4. PRÁTICA      → 3 a 5 questões para o aluno fixar.
+      5. DESAFIO      → Questão difícil sem ajuda.
+      6. AVALIAÇÃO    → Feedback do desempenho e registro dos acertos.
+      7. DOMÍNIO      → Comemoração do nível alcançado (ex: "VOCÊ DOMINOU A LETRA B!").
 
       TIPOS DE ATIVIDADES (MINIGAMETYPE):
       - "alfa-syllable": Formação de sílabas (ex: M+A=MA). Mostre as partes e o resultado.
@@ -154,14 +150,14 @@ serve(async (req) => {
       - "alfa-tens": Reconhecimento de dezenas (ex: 3 dezenas = 30).
 
       Retorne EXCLUSIVAMENTE um JSON com TODAS as chaves:
-      - "etapa1_intro": Frase de abertura ultra-curta.
-      - "etapa2_conceito": Frase de conceito ultra-curta.
-      - "etapa3_exemplo": Frase de exemplo ultra-curta.
-      - "etapa4_como_monta": Frase de instrução guiada ultra-curta.
-      - "etapa5_instrucao": Frase de comando para o aluno (o que ele deve fazer agora).
-      - "desafio_final": Frase de desafio final.
+      - "etapa1_explicação": Frase de explicação ultra-curta.
+      - "etapa2_demonstração": Frase de demonstração (exemplo visual) ultra-curta.
+      - "etapa3_treino_guiado": Frase de instrução para o treino guiado.
+      - "etapa4_prática": Frase de comando para a prática.
+      - "etapa5_desafio": Frase para o desafio final.
+      - "etapa6_avaliação": Frase de feedback de desempenho.
+      - "etapa7_domínio": Frase de conquista e maestria.
       - "dica": Frase de ajuda ultra-curta caso ele erre.
-      - "reforco_positivo": Frase de conquista ("Você brilhou!").
       - "metodo_usado": Nome do método pedagógico aplicado.
       ${isAlfabetizacao ? `
       - "palavra_foco": String CAIXA ALTA (ex: "BOLA").
@@ -200,7 +196,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'google/gemini-2.0-flash',
         messages: [
           { role: 'system', content: systemPrompt },
           ...(chatHistory || []),
