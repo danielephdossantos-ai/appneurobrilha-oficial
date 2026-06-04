@@ -877,7 +877,22 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
                 </div>
 
                 <button 
-                  onClick={() => {
+                  onClick={async () => {
+                    const pedService = SupabasePedagogicalService.getInstance();
+                    const total = performance.hits + performance.misses;
+                    const mastery = total > 0 ? (performance.hits / total) * 100 : 0;
+                    
+                    if (aula.skill_code) {
+                      await pedService.saveProgress({
+                        aluno_id: childId,
+                        codigo_bncc: aula.skill_code,
+                        tentativas: 1,
+                        acertos: performance.hits,
+                        erros: performance.misses,
+                        dominio: mastery
+                      });
+                    }
+
                     if (aula.activityId) onCompleted?.(aula.activityId);
                     setAula(null);
                   }}
