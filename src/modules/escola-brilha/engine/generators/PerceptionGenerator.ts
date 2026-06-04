@@ -1,4 +1,5 @@
 import { BaseGenerator } from "./BaseGenerator";
+import { GeneratorInput } from "../../types/generator";
 import { EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
 
 export class PerceptionGenerator extends BaseGenerator {
