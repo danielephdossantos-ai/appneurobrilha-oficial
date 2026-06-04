@@ -31,6 +31,9 @@ import imgLinguagemEI from "@/assets/escola-brilha/linguagem-ei.png";
 import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
 import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
+import imgPip from "@/assets/pip-mascot.png";
+import imgPipa from "@/assets/pip-girl-professora.png";
+
 
 import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";
 
