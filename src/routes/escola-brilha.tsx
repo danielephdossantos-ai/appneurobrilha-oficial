@@ -164,9 +164,9 @@ const tierTheme: Record<GradeTier, {
 // Frases de feedback positivas (substituem "Tente novamente")
 const ALMOST_THERE = [
   "Você está quase lá!",
-  "Olhe a dica e tente de novo 💡",
+  "Olhe a dica e tente de novo",
   "Boa tentativa! Vamos observar com calma.",
-  "Está perto! Respira e tenta mais uma vez 🌿",
+  "Está perto! Respira e tenta mais uma vez",
 ];
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
@@ -303,7 +303,7 @@ function Escola() {
       const proxLote = banco.lote + 1;
       const itensNovos = gerarLote(activeChild, selectedGrade, proxLote);
       persistBanco({ lote: proxLote, items: itensNovos, done: [] });
-      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades ✨`);
+      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades`);
     } else {
       persistBanco({ ...banco, done: doneNext });
     }
@@ -467,10 +467,10 @@ function Escola() {
   return (
     <Shell>
       <PageHeader
-        emoji="🎓"
+        icon={GraduationCap}
         title="Escola Brilha"
         subtitle={ei
-          ? `Educação Infantil · Atividades simples e visuais para os pequenos 🌱`
+          ? `Educação Infantil · Atividades simples e visuais para os pequenos`
           : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
       />
 
@@ -1610,7 +1610,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                           disabled={reexplaining}
                           className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
                         >
-                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — outro método</>}
+                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>Não entendi — outro método</>}
                         </button>
                         {aula.metodo_usado && (
                           <span className="text-xs font-bold text-muted-foreground">Método atual: <b>{aula.metodo_usado}</b></span>
@@ -1685,7 +1685,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   <button
                     onClick={() => {
                       requestHelp(aula.activityId);
-                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar! 💡`);
+                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar!`);
                     }}
                     className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
                   >
@@ -1711,7 +1711,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
                         {aula.desafio_final && (
                           <div className="mt-2 px-3 py-2 rounded-xl bg-white/60 border border-success/40 text-sm text-success">
-                            <b className="uppercase tracking-wider text-[10px] mr-1">🏁 Desafio:</b>{aula.desafio_final}
+                            <b className="uppercase tracking-wider text-[10px] mr-1">Desafio:</b>{aula.desafio_final}
                           </div>
                         )}
                         <div className="text-xs text-success/70 mt-1"><b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
@@ -1745,7 +1745,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         onClick={() => { setAcertou(null); setTentativa(null); }}
                         className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
                       >
-                        Tentar de novo 🌟
+                        Tentar de novo
                       </button>
                     </div>
                   </div>
