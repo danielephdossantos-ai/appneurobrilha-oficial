@@ -38,7 +38,6 @@ import KidLiveMascot from "@/components/ui/KidLiveMascot";
 
 
 import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";
-import KidLiveMascot from "@/components/ui/KidLiveMascot";
 
 // Error Boundary para capturar falhas na renderização da aula
 
