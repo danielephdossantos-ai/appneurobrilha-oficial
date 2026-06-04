@@ -153,12 +153,12 @@ const DOMAIN_MAP: Record<string, string> = {
   geografia: "linguistics",
   artes: "math",
   
-  // Educação Infantil (Campos de Experiência BNCC)
-  "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO": "linguistics",
-  "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES": "math",
-  "CORPO, GESTOS E MOVIMENTOS": "motor",
-  "TRAÇOS, SONS, CORES E FORMAS": "math", // can also be perception
-  "O EU, O OUTRO E O NÓS": "cognitive",
+  // Educação Infantil (Trilhas BNCC)
+  "trilha-palavras": "linguistics",
+  "trilha-numeros": "math",
+  "trilha-cores-formas": "perception",
+  "trilha-movimentos": "motor",
+  "trilha-emocoes": "cognitive",
 };
 
 const MATERIAS_BANCO = ["portugues", "matematica", "ciencias", "historia", "geografia", "artes"] as const;
