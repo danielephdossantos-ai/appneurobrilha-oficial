@@ -1321,8 +1321,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
       )}
 
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-3">
+      <div className="w-full">
+        <div>
+
 
           <Card className="mb-4">
             {/* Stepper pedagógico adaptado */}
