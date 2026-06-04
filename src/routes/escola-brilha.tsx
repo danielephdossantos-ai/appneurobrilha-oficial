@@ -1478,11 +1478,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         {reexplaining ? (
                           <><Loader2 className="h-5 w-5 animate-spin" /> Reexplicando...</>
                         ) : (
-                          <>🤔 NÃO ENTENDI · Tente de outro jeito</>
+                          <>NÃO ENTENDI · Tente de outro jeito</>
                         )}
                       </button>
                       <div className="text-[11px] text-muted-foreground text-center max-w-xs">
-                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].emoji} {METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
+                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
                       </div>
                     </div>
                   </div>
@@ -1490,11 +1490,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   <div className="w-full">
                     {/* Cabeçalho do Jogo com Instrução do Mascote */}
                     <div className="flex items-end gap-4 mb-8">
-                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-5xl overflow-hidden">
+                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center overflow-hidden">
                           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
                           ) : (
-                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-14 w-14 text-primary" />
                           )}
                        </div>
                        <div className="flex-1 bg-white rounded-2xl border-[3px] border-foreground px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative mb-2">
