@@ -4,12 +4,15 @@ import {
   Circle, Square, Triangle, Heart, Cloud, Bird,
   Gamepad2, Book, Pencil, Music, Camera, Gift,
   Coffee, Pizza, Car, Plane, Ship, Tractor,
-  Beef, Banana, Grape, Home, Waves, Corn,
+  Beef, Banana, Grape, Home, Waves,
   Egg, Crown, Trash2, Rocket, IceCream,
   Trees, Bug, MousePointer2, HelpCircle,
   Eye, EyeOff, Check, X, Volume2, 
-  Bike, GlassWater, Ghost, Zap
+  Bike, GlassWater, Ghost, Zap, Sprout
 } from "lucide-react";
+
+// Simple proxy for Bone since it might not be in the initial import set or standard lucide
+const Bone = (props: any) => <Gift {...props} />;
 
 type Props = {
   aula: any;
@@ -31,13 +34,10 @@ const EMOJI_MAP: Record<string, any> = {
   '⭕': Circle, '🟦': Square, '🔺': Triangle, '❤️': Heart, '☁️': Cloud, '🐔': Bird, '🐮': Beef,
   '🐄': Beef, '🐝': Bug, '🐘': Beef, '⛪': Home, '🥚': Egg, '🍇': Grape, '🍌': Banana,
   '🦴': Bone, '🏠': Home, '🥣': Coffee, '🚜': Tractor, '🌿': Trees,
-  '💻': Gamepad2, '⚽': Gamepad2, '🌊': Waves, '🌽': Corn, '🏚️': Home, '🍕': Pizza,
+  '💻': Gamepad2, '⚽': Gamepad2, '🌊': Waves, '🌽': Sprout, '🏚️': Home, '🍕': Pizza,
   '🥩': Beef, '🌳': Trees, '👑': Crown, '🍦': IceCream, '🧶': Music, '🧺': Gift,
   '🚀': Rocket, '👜': Gift, '🥛': GlassWater, '🚲': Bike, '🚗': Car, '✈️': Plane, '🚢': Ship,
 };
-
-// Simple proxy for Bone since it might not be in the initial import set or standard lucide
-const Bone = (props: any) => <Gift {...props} />;
 
 const getIcon = (key: string, className = "w-12 h-12") => {
   if (!key) return <HelpCircle className={className} />;
@@ -345,7 +345,8 @@ function MemoryGame({ aula, disabled, onAnswer }: Props) {
         setTimeout(() => {
           setState(prev => prev.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c));
           setSelected([]);
-          if (next.every(c => c.solved || (c.id === i1 || c.id === i2))) {
+          const newState = next.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c);
+          if (newState.every(c => c.solved)) {
             fire(true, "victory");
           }
         }, 600);
