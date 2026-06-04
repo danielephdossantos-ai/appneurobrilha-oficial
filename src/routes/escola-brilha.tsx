@@ -864,7 +864,7 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
                     <p className="text-sm font-bold text-muted-foreground">{step === 3 ? (aula.etapa3_treino_guiado || "Vamos fazer juntos!") : step === 4 ? (aula.etapa4_prática || "Agora é com você!") : (aula.etapa5_desafio || "O grande desafio!")}</p>
                  </div>
                  <div className="w-full max-w-2xl my-8">
-                   <EIMiniGame aula={aula} onAnswer={handleAnswer} disabled={feedback !== null} />
+                   <EIMiniGame aula={aulaForGame} onAnswer={handleAnswer} disabled={feedback !== null} />
                  </div>
                  <div className="absolute bottom-6 right-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-[2rem] p-3 border-2 border-primary/20 shadow-kid z-10 animate-in slide-in-from-right-4">
                     <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gradient-to-br from-primary/10 to-sun/10">
