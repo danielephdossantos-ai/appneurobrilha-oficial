@@ -1321,14 +1321,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
             {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
                 {isAlfaFlow ? (
-                  <AlfabetizacaoFlow
+                  <Literacy1stGradeFlow
                     aula={aula}
-                    eiStep={eiStep}
-                    setEiStep={setEiStep}
+                    step={eiStep}
+                    setStep={setEiStep}
                     activeMascot={activeMascot}
                     materiaMeta={materiaMeta}
                     childNome={childNome}
-                    onComplete={(isCorrect) => {
+                    onComplete={(isCorrect: boolean) => {
                       setAcertou(isCorrect);
                       if (isCorrect && !completedRef.current && aula.activityId) {
                         completedRef.current = true;
@@ -1336,6 +1336,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       }
                     }}
                   />
+
                 ) : isMathFlow ? (
                   <MathFlow
                     aula={aula}
