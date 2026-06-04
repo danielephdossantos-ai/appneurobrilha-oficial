@@ -98,11 +98,11 @@ const materias = [
 
 // Educação Infantil — 5 Trilhas (BNCC Campos de Experiência)
 const materiasInfantil = [
-  { id: "trilha-palavras", nome: "TRILHA DAS PALAVRAS", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Escuta e fala", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "trilha-numeros", nome: "TRILHA DOS NÚMEROS", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contagem e quantidades", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "trilha-cores-formas", nome: "TRILHA DAS CORES E FORMAS", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Formas e cores", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "trilha-movimentos", nome: "TRILHA DOS MOVIMENTOS", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação motora", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "trilha-emocoes", nome: "TRILHA DAS EMOÇÕES", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Sentimentos e empatia", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "trilha-palavras", nome: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Trilha das Palavras", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03EF" },
+  { id: "trilha-numeros", nome: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Trilha dos Números", mascote: imgPip, mascoteNome: "Professor Pip", code_pref: "EI03ET" },
+  { id: "trilha-cores-formas", nome: "TRAÇOS, SONS, CORES E FORMAS", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Trilha das Cores e Formas", mascote: imgPip, mascoteNome: "Professor Pip", code_pref: "EI03TS" },
+  { id: "trilha-movimentos", nome: "CORPO, GESTOS E MOVIMENTOS", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Trilha dos Movimentos", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03CG" },
+  { id: "trilha-emocoes", nome: "O EU, O OUTRO E O NÓS", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Trilha das Emoções", mascote: imgPipa, mascoteNome: "Professora Pipa", code_pref: "EI03EO" },
 ] as const;
 
 
