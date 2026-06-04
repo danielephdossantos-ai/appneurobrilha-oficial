@@ -54,6 +54,20 @@ export class SupabasePedagogicalService {
     return SupabasePedagogicalService.instance;
   }
 
+  async getSkillsByGradeAndSubject(grade: string, subject: string): Promise<BNCCSkill[]> {
+    const { data, error } = await supabase
+      .from('bncc_habilidades')
+      .select('*')
+      .eq('ano', grade)
+      .ilike('disciplina', `%${subject}%`);
+
+    if (error) {
+      console.error('Error fetching skills:', error);
+      return [];
+    }
+    return data || [];
+  }
+
   async getSkillByCode(code: string): Promise<BNCCSkill | null> {
     const { data, error } = await supabase
       .from('bncc_habilidades')
