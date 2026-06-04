@@ -8,10 +8,10 @@ import {
   Bird, Apple, Rainbow, Trees, Bug, Library, Telescope, 
   TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
   Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, 
-  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer
-
-
+  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer,
+  X
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
