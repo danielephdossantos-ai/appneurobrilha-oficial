@@ -5,7 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
-import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
+import { RenderMascote } from "@/components/ui/PremiumIcons";
+import { Bird } from "lucide-react";
 import { toast } from "sonner";
 import { useMascot } from "@/contexts/MascotContext";
 
@@ -27,7 +28,7 @@ function AmigoVirtual() {
 
   // Amigo Virtual States
   const [msgs, setMsgs] = useState<{ role: "ai" | "user"; t: string }[]>([
-    { role: "ai", t: `Oi, ${activeChild?.nome ?? "amiguinho"}! 🌈 Eu sou o ${mascotName}, seu companheiro de verdade. Estou aqui para te ouvir e te dar um abraço virtual gigante! Como você está se sentindo agora?` },
+    { role: "ai", t: `Oi, ${activeChild?.nome ?? "amiguinho"}! Eu sou o ${mascotName}, seu companheiro de verdade. Estou aqui para te ouvir e te dar um abraço virtual gigante! Como você está se sentindo agora?` },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -102,7 +103,7 @@ function AmigoVirtual() {
       lerTexto(response);
     } catch (err) {
       console.error(err);
-      const errorMsg = "Eita, minha cabecinha de robô deu um nó! 😵‍💫 Mas eu ainda te amo! Tenta falar de novo?";
+      const errorMsg = "Eita, minha cabecinha de robô deu um nó! Mas eu ainda te amo! Tenta falar de novo?";
       setMsgs([...newMsgs, { role: "ai", t: errorMsg }]);
       lerTexto(errorMsg);
     } finally {
@@ -155,11 +156,11 @@ function AmigoVirtual() {
   };
 
   const sentimentos = [
-    { label: "Tô com medo 😨", value: "Estou com um pouco de medo..." },
-    { label: "Tô triste 😢", value: "Estou me sentindo triste." },
-    { label: "Tô com raiva 😡", value: "Estou com muita raiva!" },
-    { label: "Tô cansado 😴", value: "Estou bem cansado." },
-    { label: "Me ajuda? 🆘", value: "Eu preciso de ajuda para me acalmar." },
+    { label: "Tô com medo", value: "Estou com um pouco de medo..." },
+    { label: "Tô triste", value: "Estou me sentindo triste." },
+    { label: "Tô com raiva", value: "Estou com muita raiva!" },
+    { label: "Tô cansado", value: "Estou bem cansado." },
+    { label: "Me ajuda?", value: "Eu preciso de ajuda para me acalmar." },
   ];
 
   if (!activeChild) return <Shell><p>Selecione uma criança.</p></Shell>;
@@ -170,11 +171,11 @@ function AmigoVirtual() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="h-16 w-16 flex items-center justify-center">
-              <SimpleMascotRenderer emoji={activeMascot?.mascot?.image_url || "🦄"} size={64} />
+              <RenderMascote icon={activeMascot?.mascot?.image_url || Bird} className="h-14 w-14 text-pink-500" />
             </div>
             <div>
               <h2 className="text-xl font-black text-pink-600">{mascotName} · Amigo Virtual & Protetor</h2>
-              <p className="text-[10px] font-medium text-pink-400">Sempre aqui por você! ✨</p>
+              <p className="text-[10px] font-medium text-pink-400">Sempre aqui por você!</p>
             </div>
           </div>
           <div className="flex gap-2">
@@ -319,7 +320,7 @@ function AmigoVirtual() {
                       onChange={(e) => setInput(e.target.value)} 
                       onKeyDown={(e) => e.key === "Enter" && send()}
                       disabled={isLoading}
-                      placeholder="Quer me contar algo? 🌸"
+                      placeholder="Quer me contar algo?"
                       className="w-full p-4 pr-14 rounded-[1.5rem] bg-white border-2 border-pink-100 text-base font-medium focus:border-pink-300 outline-none transition-all placeholder:text-pink-200 disabled:opacity-50" 
                     />
                     <button 
@@ -379,7 +380,7 @@ function AmigoVirtual() {
                   <div className="flex flex-col items-center justify-center p-8 text-center bg-white rounded-3xl border border-pink-100 shadow-sm">
                     <div className="relative mb-6">
                       <div className="h-20 w-20 rounded-full border-4 border-pink-100 border-t-pink-500 animate-spin" />
-                      <div className="absolute inset-0 flex items-center justify-center text-2xl">🔎</div>
+                      <div className="absolute inset-0 flex items-center justify-center text-pink-500"><Search className="h-8 w-8" /></div>
                     </div>
                     <h2 className="text-lg font-bold text-pink-600">Lendo sua tarefa...</h2>
                     <p className="text-gray-400 text-xs mt-1">Vou usar meus superpoderes de robô!</p>
