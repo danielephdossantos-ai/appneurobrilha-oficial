@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import { 
   Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
-  Calendar, ArrowUpRight, History, Sparkles, Gem, BarChart, PenTool, Dumbbell
+  Calendar, ArrowUpRight, History, Sparkles, Gem, PenTool, Dumbbell
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
 import { supabase } from "@/database/supabase/client";
@@ -49,7 +49,7 @@ function RelatorioPremium() {
   if (!activeChild || !anamnesis) {
     return (
       <Shell>
-        <PageHeader icon={BarChart} title="Relatório de Evolução" subtitle="Análise do Desenvolvimento" />
+        <PageHeader icon={BarChart3} title="Relatório de Evolução" subtitle="Análise do Desenvolvimento" />
         <Card className="text-center py-10 max-w-xl mx-auto mt-10">
           <div className="text-5xl mb-4 text-primary mx-auto flex justify-center"><PenTool className="h-12 w-12" /></div>
           <h2 className="text-xl font-bold mb-2">Anamnese Necessária</h2>
