@@ -1698,16 +1698,16 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {acertou === true && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
-                      <div className="text-4xl drop-shadow">
+                      <div className="shrink-0">
                         {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                           <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
                         ) : (
-                          activeMascot?.mascot?.image_url || materiaMeta.mascote
+                          <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
                         )}
                       </div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
-                        <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
+                        <div className="font-extrabold">Mandou bem, {childNome}!</div>
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
                         {aula.desafio_final && (
                           <div className="mt-2 px-3 py-2 rounded-xl bg-white/60 border border-success/40 text-sm text-success">
@@ -1730,11 +1730,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 
                 {acertou === false && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
-                    <div className="text-4xl">
+                    <div className="shrink-0">
                       {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                         <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
                       ) : (
-                        activeMascot?.mascot?.image_url || materiaMeta.mascote
+                        <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
                       )}
                     </div>
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
