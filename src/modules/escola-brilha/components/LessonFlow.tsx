@@ -210,32 +210,41 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
             <div className="text-center space-y-8 py-8">
               <div className="relative inline-block">
                 <Star className="w-24 h-24 text-yellow-400 fill-yellow-400 animate-bounce" />
-                <div className="absolute inset-0 flex items-center justify-center font-black text-2xl text-yellow-800">
-                  {MasteryMotor.calculateMastery(score.hits, score.errors, score.hits + score.errors)}%
-                </div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-4">
+                <div className="bg-slate-50 border-2 border-slate-100 rounded-3xl p-8 max-w-sm mx-auto shadow-sm">
+                  <p className="text-slate-400 text-sm font-black uppercase tracking-widest mb-2">Relatório de Domínio</p>
+                  <div className="flex flex-col items-center">
+                    <span className="text-6xl font-black text-slate-900 mb-1">
+                      {MasteryMotor.calculateMastery(score.hits, score.errors, score.hits + score.errors)}%
+                    </span>
+                    <span className="text-lg font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                      Domina {skillCode}
+                    </span>
+                  </div>
+                </div>
+
                 <h3 className="text-3xl font-black text-slate-800">
                   {MasteryMotor.isMastered(MasteryMotor.calculateMastery(score.hits, score.errors, score.hits + score.errors)) 
                     ? 'Incrível! Você dominou!' 
                     : 'Bom esforço! Vamos tentar de novo?'}
                 </h3>
-                <p className="text-slate-500 text-lg">
+                <p className="text-slate-500 text-lg max-w-md mx-auto">
                   {MasteryMotor.isMastered(MasteryMotor.calculateMastery(score.hits, score.errors, score.hits + score.errors))
-                    ? 'A próxima habilidade foi desbloqueada para você.'
-                    : 'Precisamos de pelo menos 80% de acertos para avançar.'}
+                    ? 'Seu progresso foi registrado e a próxima habilidade foi desbloqueada.'
+                    : 'Precisamos de pelo menos 80% de domínio para avançar para a próxima habilidade.'}
                 </p>
               </div>
 
               <div className="pt-4 flex flex-col items-center gap-4">
                 {MasteryMotor.isMastered(MasteryMotor.calculateMastery(score.hits, score.errors, score.hits + score.errors)) ? (
-                  <Button onClick={onComplete} size="lg" className="rounded-full px-12 bg-green-600 hover:bg-green-700 h-14 text-lg font-bold shadow-lg">
-                    Finalizar <CheckCircle2 className="ml-2" />
+                  <Button onClick={onComplete} size="lg" className="rounded-full px-12 bg-green-600 hover:bg-green-700 h-16 text-xl font-black shadow-xl scale-110 transition-transform hover:scale-115">
+                    CONCLUIR MISSÃO <CheckCircle2 className="ml-2 w-6 h-6" />
                   </Button>
                 ) : (
-                  <Button onClick={() => window.location.reload()} size="lg" className="rounded-full px-12 bg-orange-600 hover:bg-orange-700 h-14 text-lg font-bold shadow-lg">
-                    Tentar Novamente <ArrowRight className="ml-2" />
+                  <Button onClick={() => window.location.reload()} size="lg" className="rounded-full px-12 bg-orange-600 hover:bg-orange-700 h-16 text-xl font-black shadow-xl">
+                    TENTAR NOVAMENTE <ArrowRight className="ml-2 w-6 h-6" />
                   </Button>
                 )}
               </div>
