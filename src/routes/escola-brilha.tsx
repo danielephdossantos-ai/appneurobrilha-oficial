@@ -921,9 +921,9 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
                     const total = performance.hits + performance.misses;
                     const mastery = total > 0 ? (performance.hits / total) * 100 : 0;
                     
-                    if (aula.skill_code && activeChild?.id) {
+                    if (aula.skill_code && childId) {
                       await pedService.saveProgress({
-                        aluno_id: activeChild.id,
+                        aluno_id: childId,
                         codigo_bncc: aula.skill_code,
                         tentativas: 1,
                         acertos: performance.hits,
