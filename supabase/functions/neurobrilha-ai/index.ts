@@ -185,25 +185,40 @@ serve(async (req) => {
       userPrompt = message || "Oi";
     }
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${LOVABLE_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o',
+        model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: systemPrompt },
           ...(chatHistory || []),
           { role: 'user', content: userPrompt },
         ],
-        temperature: 0.7,
         response_format: { type: 'json_object' }
       }),
     })
 
+    if (!response.ok) {
+      const errText = await response.text()
+      console.error('AI Gateway error:', response.status, errText)
+      return new Response(JSON.stringify({ error: `AI Gateway ${response.status}: ${errText}` }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
     const result = await response.json()
+    if (!result?.choices?.[0]?.message?.content) {
+      console.error('Unexpected AI response:', JSON.stringify(result))
+      return new Response(JSON.stringify({ error: 'AI returned empty response' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
     const content = result.choices[0].message.content
     
     if (mode === "amigo-virtual" || mode === "terapeuta") {
