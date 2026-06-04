@@ -298,11 +298,14 @@ export type Database = {
           alternativa_a: string | null
           alternativa_b: string | null
           alternativa_c: string | null
+          alternativa_d: string | null
           codigo_bncc: string | null
           created_at: string | null
+          explicacao_ativa: string | null
           feedback: string | null
           id: string
           nivel: string | null
+          ordem: number | null
           pergunta: string | null
           resposta: string | null
           tipo: string | null
@@ -312,11 +315,14 @@ export type Database = {
           alternativa_a?: string | null
           alternativa_b?: string | null
           alternativa_c?: string | null
+          alternativa_d?: string | null
           codigo_bncc?: string | null
           created_at?: string | null
+          explicacao_ativa?: string | null
           feedback?: string | null
           id?: string
           nivel?: string | null
+          ordem?: number | null
           pergunta?: string | null
           resposta?: string | null
           tipo?: string | null
@@ -326,11 +332,14 @@ export type Database = {
           alternativa_a?: string | null
           alternativa_b?: string | null
           alternativa_c?: string | null
+          alternativa_d?: string | null
           codigo_bncc?: string | null
           created_at?: string | null
+          explicacao_ativa?: string | null
           feedback?: string | null
           id?: string
           nivel?: string | null
+          ordem?: number | null
           pergunta?: string | null
           resposta?: string | null
           tipo?: string | null
