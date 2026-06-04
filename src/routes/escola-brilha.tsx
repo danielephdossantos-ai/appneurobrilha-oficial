@@ -836,14 +836,12 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
   const b = Number(aula.numero_b ?? 2);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const visualKey = aula.visual_key || aula.visual_emoji || aula.visual || "apple";
+  const visualKey = aula.visual || "apple";
+  const opcoes = aula.opcoes || [resultado, resultado + 1, resultado - 1];
   
-  const [contados, setContados] = useState<number[]>([]);
-  
-  const opcoesNum: number[] = useMemo(() => {
-    const base = [resultado, Math.max(0, resultado - 1), resultado + 1];
-    return [...new Set(base)].sort(() => Math.random() - 0.5) as number[];
-  }, [resultado]);
+  const sortedOpcoes = useMemo(() => {
+    return [...new Set(opcoes)].map(Number).sort(() => Math.random() - 0.5);
+  }, [opcoes]);
 
   useEffect(() => {
     const playAudio = (msg: string) => {
@@ -852,12 +850,12 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
       u.lang = "pt-BR"; u.rate = 0.9;
       window.speechSynthesis.speak(u);
     };
-    if (step === 1) playAudio("Vamos ver quantos temos?");
-    if (step === 2) playAudio(`Olha o número ${a}!`);
-    if (step === 3) playAudio(`Vamos contar? ${a} ${op === "+" ? "mais" : "menos"} ${b}`);
-    if (step === 4) playAudio(`Quanto é o resultado?`);
-    if (step === 5) playAudio("Parabéns! Você é fera na matemática!");
-  }, [step, a, b, op]);
+    if (step === 1) playAudio(aula.etapa1_intro || "Vamos ver quantos temos?");
+    if (step === 2) playAudio(aula.etapa2_conceito || `Olha o número ${a}!`);
+    if (step === 3) playAudio(aula.etapa3_exemplo || `Vamos contar? ${a} ${op === "+" ? "mais" : "menos"} ${b}`);
+    if (step === 4) playAudio(aula.etapa5_instrucao || `Qual o resultado final?`);
+    if (step === 5) playAudio(aula.reforco_positivo || "Parabéns! Você é fera na matemática!");
+  }, [step, aula, a, b, op]);
 
   const renderVisuals = (n: number, color = "text-primary") => (
     <div className="flex flex-wrap gap-2 justify-center max-w-md">
@@ -874,48 +872,58 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {step === 1 && (
           <div className="text-center space-y-6">
-            {renderVisuals(a)}
-            <p className="text-3xl font-black text-primary uppercase">Aquecimento!</p>
+            <div className="bg-primary/10 rounded-3xl p-8 border-2 border-dashed border-primary/30">
+              {renderVisuals(a)}
+            </div>
+            <p className="text-3xl font-black text-primary uppercase leading-tight">
+              {aula.etapa1_intro || "VAMOS DESCOBRIR!"}
+            </p>
           </div>
         )}
 
         {step === 2 && (
           <div className="text-center space-y-6">
-            <div className="bg-primary text-white text-9xl font-black w-40 h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
+            <div className="bg-primary text-white text-9xl font-black w-48 h-48 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
               {a}
             </div>
-            <p className="text-2xl font-black text-primary">Este é o número {a}!</p>
+            <p className="text-2xl font-black text-primary uppercase leading-tight">
+              {aula.etapa2_conceito || `ESTE É O NÚMERO ${a}`}
+            </p>
           </div>
         )}
 
         {step === 3 && (
-          <div className="space-y-4 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="space-y-8 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-6 bg-white rounded-3xl p-8 shadow-soft border-2 border-muted">
               {renderVisuals(a)}
               <div className="text-6xl font-black text-sun">{op}</div>
               {renderVisuals(b, "text-success")}
             </div>
-            <div className="text-6xl font-black text-primary mt-6">
-              {a} <span className="text-sun">{op}</span> {b} = ?
+            <div className="text-4xl md:text-5xl font-black text-primary mt-6 uppercase leading-tight">
+              {aula.etapa3_exemplo || "VAMOS CALCULAR!"}
             </div>
           </div>
         )}
 
         {step === 4 && (
           <div className="w-full space-y-6">
-            <div className="text-center text-6xl font-black text-primary">
-              {a} <span className="text-sun">{op}</span> {b} = ?
+            <div className="text-center mb-6">
+              <div className="bg-white rounded-2xl border-[3px] border-foreground px-6 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] inline-block">
+                <p className="font-black text-primary uppercase text-lg md:text-xl leading-tight">
+                  {aula.etapa5_instrucao || "QUAL O RESULTADO?"}
+                </p>
+              </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              {opcoesNum.map((n, i) => (
+              {sortedOpcoes.map((n, i) => (
                 <button
                   key={i}
                   onClick={() => {
-                    if (n === resultado) {
+                    if (Number(n) === resultado) {
                       setStep(5);
                       toast.success("Correto!");
                     } else {
-                      toast.error("Tente contar de novo!");
+                      toast.error(aula.dica || "Tente contar de novo!");
                     }
                   }}
                   className="btn-tap aspect-square rounded-3xl bg-white border-4 border-muted hover:border-primary text-6xl font-black text-primary shadow-soft"
@@ -932,7 +940,9 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
             <div className="animate-bounce-slow">
               <Sparkles className="h-40 w-40 text-sun mx-auto" />
             </div>
-            <h3 className="text-4xl font-black text-primary uppercase">Você Arrasou!</h3>
+            <h3 className="text-4xl font-black text-primary uppercase leading-tight">
+              {aula.reforco_positivo || "Você Brilhou!"}
+            </h3>
             <button
               onClick={() => onComplete(true)}
               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
