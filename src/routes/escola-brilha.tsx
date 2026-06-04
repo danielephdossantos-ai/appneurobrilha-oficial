@@ -1114,10 +1114,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
   // Stepper pedagógico: alfa=7, math=6, geral=8 (Descobrir→Recompensa)
   const totalSteps = (isAlfaFlow || isMathFlow) ? 5 : 8;
-  const stepIndex = isAlfaFlow ? eiStep : isMathFlow ? mathStep : (aula.isEI ? eiStep : eiStep);
+  const stepIndex = (isAlfaFlow || isMathFlow) ? eiStep : (aula.isEI ? eiStep : eiStep);
 
   // Mapa eiStep (1..6) → passo pedagógico (1..8) para o geral
-  const visualStep = isAlfaFlow ? eiStep : isMathFlow ? mathStep : (
+  const visualStep = (isAlfaFlow || isMathFlow) ? eiStep : (
     eiStep <= 5 ? eiStep // 1=Descobrir 2=Observar 3=Entender 4=Exemplo 5=Junto
     : acertou === null ? 6 // 6=Sozinho (jogando)
     : acertou ? 8 // 8=Recompensa
@@ -1195,7 +1195,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:8,l:"Conquista",i:Trophy},
               ]).map((s: any) => {
 
-                const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
+                const current = (isAlfaFlow || isMathFlow) ? eiStep : visualStep;
                 const active = s.n === current;
                 const done = s.n < current;
                 const Icon = s.i;
