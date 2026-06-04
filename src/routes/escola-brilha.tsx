@@ -737,25 +737,6 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
   return (
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote Guia */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
-           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-           ) : (
-             <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
-           )}
-        </div>
-        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
-           {eiStep === 1 && (aula.etapa1_intro || `Veja só, ${childNome}!`)}
-           {eiStep === 2 && (aula.etapa2_conceito || "Olha como se escreve!")}
-           {eiStep === 3 && (aula.etapa3_exemplo || "Vamos separar os pedacinhos?")}
-           {eiStep === 4 && (aula.etapa4_como_monta || "Junte as peças!")}
-           {eiStep === 5 && (aula.etapa5_instrucao || "Onde está o nome certo?")}
-           {eiStep === 6 && "Use o dedo para desenhar a palavra!"}
-           {eiStep === 7 && (aula.reforco_positivo || "Incrível!")}
-        </div>
-      </div>
 
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {eiStep === 1 && (
