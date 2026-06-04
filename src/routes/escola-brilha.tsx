@@ -750,6 +750,20 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
   const mascotImg = isPipaMateria ? imgPipa : imgPip;
   const mascotNome = isPipaMateria ? "Professora Pipa" : "Professor Pip";
 
+  const currentActivity = useMemo(() => {
+    if (step === 3) return aula.treino_activity || aula;
+    if (step === 4) return (aula.pratica_activities && aula.pratica_activities[practiceCount]) || aula;
+    if (step === 5) return aula.desafio_activity || aula;
+    return aula;
+  }, [step, practiceCount, aula]);
+
+  const aulaForGame = useMemo(() => ({
+    ...aula,
+    pergunta: currentActivity.pergunta,
+    opcoes: currentActivity.opcoes,
+    resposta_correta: currentActivity.resposta_correta
+  }), [aula, currentActivity]);
+
   const steps = [
     { id: 1, label: "EXPLICAÇÃO", icon: Lightbulb },
     { id: 2, label: "DEMONSTRAÇÃO", icon: Eye },
