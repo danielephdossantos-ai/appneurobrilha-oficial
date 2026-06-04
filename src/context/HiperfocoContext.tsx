@@ -71,8 +71,8 @@ export function HiperfocoProvider({ children }: { children: ReactNode }) {
           elementos: [trimmed],
           som: "som do tema",
           formaPontilhado: "um símbolo do tema",
-          pipAcertos: [`Boa! Acertou em cheio no mundo de ${trimmed}! ⭐`],
-          pipIncentivos: [`Tranquilo! No universo de ${trimmed} se aprende treinando. 💪`],
+          lumiAcertos: [`Boa! Acertou em cheio no mundo de ${trimmed}! ⭐`],
+          lumiIncentivos: [`Tranquilo! No universo de ${trimmed} se aprende treinando. 💪`],
         });
       },
       limpar: () => setHiperfoco(null),
