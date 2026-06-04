@@ -1420,61 +1420,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-center gap-6">
-                      {/* Mascote central */}
-                      <div className={`relative transition-all duration-1000 transform ${
-                        eiStep === 1 ? 'scale-125 translate-y-4' :
-                        eiStep === 3 ? 'scale-110 -translate-x-12' :
-                        eiStep === 4 ? 'scale-110 translate-x-12' :
-                        'scale-100'
-                      }`}>
-                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
-                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-32 w-32 text-primary" />
-                          )}
-                        </div>
-                        {/* Balão de fala */}
-                        <div className={`absolute transition-all duration-500 ${
-                          eiStep === 3 ? '-right-16 -top-8' :
-                          eiStep === 4 ? '-left-16 -top-8' :
-                          '-top-24 left-1/2 -translate-x-1/2'
-                        } w-72 md:w-80`}>
-                          <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
-                             <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
-                               eiStep === 3 ? 'bottom-[-18px] left-10' :
-                               eiStep === 4 ? 'bottom-[-18px] right-10' :
-                               'bottom-[-18px] left-1/2 -translate-x-1/2'
-                             }`} />
-                             <div className={`absolute w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[14px] border-t-white ${
-                               eiStep === 3 ? 'bottom-[-11px] left-[44px]' :
-                               eiStep === 4 ? 'bottom-[-11px] right-[44px]' :
-                               'bottom-[-11px] left-1/2 -translate-x-1/2'
-                             }`} />
-
-                             <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase animate-in fade-in zoom-in duration-700">
-                               {eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
-                                eiStep === 2 ? "Olha bem para isto..." :
-                                eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
-                                eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
-                                (aula.etapa4_como_monta || "Vamos resolver juntos!")}
-                             </p>
-                          </div>
-                        </div>
-                      </div>
-
+                    <div className="flex flex-col items-center justify-center min-h-[300px] w-full gap-8">
                       {/* Apoio visual gigante — sempre presente do passo 2 em diante */}
                       {eiStep === 2 && (
-                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
-                          <RenderVisual value={aula.visual || "star"} className="h-40 w-40 md:h-52 md:w-52 text-primary mx-auto" />
+                        <div className="drop-shadow-2xl animate-bounce-slow">
+                          <RenderVisual value={aula.visual || "star"} className="h-48 w-48 md:h-64 md:w-64 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 3 && (
-                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
-                          <RenderVisual value={aula.visual || "star"} className="h-32 w-32 md:h-44 md:w-44 text-primary mx-auto" />
+                        <div className="drop-shadow-2xl animate-bounce-slow">
+                          <RenderVisual value={aula.visual || "star"} className="h-48 w-48 md:h-64 md:w-64 text-primary mx-auto" />
                         </div>
                       )}
+
                       {eiStep === 4 && (
                         <div className="flex flex-col items-center gap-3 mt-8">
                           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Exemplo resolvido</div>
