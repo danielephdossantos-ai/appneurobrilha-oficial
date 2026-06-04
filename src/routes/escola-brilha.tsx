@@ -29,7 +29,48 @@ import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
 import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
 
+// --- Componentes visuais premium ---
+const PremiumIcon = ({ name, className = "" }: { name: string; className?: string }) => {
+  const map: Record<string, any> = {
+    "apple": Apple, "car": Car, "dog": Dog, "cat": Cat, "star": Star, 
+    "heart": Heart, "sun": Sun, "moon": Moon, "bird": Bird, "tree": Trees, 
+    "flower": Flower, "circle": Circle, "plane": Plane, "ship": Ship, 
+    "fish": Fish, "book": BookOpen, "pencil": Pencil, "ruler": Ruler, 
+    "school": School, "home": Home, "rainbow": Rainbow, "bug": Bug, 
+    "telescope": Telescope, "testtube": TestTube, "map": Map, 
+    "satellite": Satellite, "brain": Brain, "target": Target, "sparkles": Sparkles
+  };
+  const Icon = map[name.toLowerCase()] || Star;
+  return <Icon className={className} />;
+};
+
+const RenderVisual = ({ value, className }: { value: string; className?: string }) => {
+  if (!value) return null;
+  // Se for emoji (regex simples), tenta mapear ou não renderiza se proibido
+  const emojiRegex = /[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+  if (emojiRegex.test(value)) {
+    const emojiMap: Record<string, string> = {
+      "🍎": "apple", "🚗": "car", "🐶": "dog", "🐱": "cat", "⭐": "star",
+      "❤️": "heart", "☀️": "sun", "🌙": "moon", "🐦": "bird", "🌳": "tree",
+      "🌸": "flower", "🌈": "rainbow", "🎓": "school", "📚": "book", "✨": "sparkles"
+    };
+    const key = emojiMap[value] || "star";
+    return <PremiumIcon name={key} className={className} />;
+  }
+  return <PremiumIcon name={value} className={className} />;
+};
+
+const RenderMascote = ({ icon, className }: { icon: any; className?: string }) => {
+  if (!icon) return <Bird className={className} />;
+  if (typeof icon === 'string') {
+    return <RenderVisual value={icon} className={className} />;
+  }
+  const IconComp = icon as ComponentType<{ className?: string }>;
+  return <IconComp className={className} />;
+};
+
 // Error Boundary para capturar falhas na renderização da aula
+
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
     super(props);
