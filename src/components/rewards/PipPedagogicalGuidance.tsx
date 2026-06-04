@@ -7,12 +7,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface PipPedagogicalGuidanceProps {
   stage: 'explanation' | 'encouragement' | 'celebration' | 'idle';
   className?: string;
+  manualMessage?: string | null;
 }
 
-export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className }) => {
+
+export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className, manualMessage }) => {
   const { activeChild } = useAppState();
   const [message, setMessage] = useState<string | null>(null);
   const [emotion, setEmotion] = useState<PipEmotion>('happy');
+
 
   useEffect(() => {
     if (!activeChild || stage === 'idle') {
@@ -52,9 +55,10 @@ export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ 
     <div className={className}>
       <KidLiveMascot 
         emotion={emotion as any} 
-        message={message || undefined}
+        message={manualMessage || message || undefined}
         size="md"
       />
     </div>
   );
+
 };

@@ -32,9 +32,16 @@ export const RenderVisual = ({ value, className }: { value: string; className?: 
 
 export const RenderMascote = ({ icon, className }: { icon: any; className?: string }) => {
   if (!icon) return <Bird className={className} />;
+  
   if (typeof icon === 'string') {
+    // Se for um caminho de imagem ou URL
+    if (icon.includes('/') || icon.includes('.') || icon.startsWith('data:')) {
+      return <img src={icon} alt="Mascote" className={className} />;
+    }
     return <RenderVisual value={icon} className={className} />;
   }
+  
   const IconComp = icon as ComponentType<{ className?: string }>;
   return <IconComp className={className} />;
 };
+

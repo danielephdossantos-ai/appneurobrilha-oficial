@@ -8,7 +8,9 @@ import {
   Bird, Apple, Rainbow, Trees, Bug, Library, Telescope, 
   TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
   Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, 
-  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer
+  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer,
+  Bot
+
 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
@@ -29,6 +31,9 @@ import imgLinguagemEI from "@/assets/escola-brilha/linguagem-ei.png";
 import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
 import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
+import imgPip from "@/assets/pip-mascot.png";
+import imgPipa from "@/assets/pip-girl-professora.png";
+
 
 import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";
 
@@ -83,22 +88,23 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: imgPip, mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 5 Campos de Experiência BNCC
 const materiasInfantil = [
-  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: imgPipa, mascoteNome: "Professora Pipa" },
 ] as const;
+
 
 function isEI(grade: string) {
   const g = grade.toLowerCase();
@@ -134,24 +140,6 @@ const ALMOST_THERE = [
 ];
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
-const FloatingMascotGuidance = ({ activeMascot, icon }: { activeMascot: any, icon: any }) => {
-  return (
-    <div className="fixed bottom-6 left-6 z-[60] animate-in slide-in-from-left duration-500 hidden md:block">
-      <div className="relative group">
-        <div className="w-24 h-24 rounded-full bg-white border-4 border-primary shadow-glow flex items-center justify-center overflow-hidden">
-           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-           ) : (
-             <RenderMascote icon={activeMascot?.mascot?.image_url || icon} className="h-14 w-14 text-primary" />
-           )}
-        </div>
-        <div className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-sm">
-          PROFESSOR
-        </div>
-      </div>
-    </div>
-  );
-};
 
 
 // ============== Banco BNCC (50 atividades por lote, infinito) ==============
@@ -242,6 +230,8 @@ function Escola() {
   const [teenGuided, setTeenGuided] = useState<boolean>(() => {
     try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
   });
+
+
 
   const grades = [
     "Educação Infantil",
@@ -747,25 +737,6 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
   return (
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote Guia */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
-           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-           ) : (
-             <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
-           )}
-        </div>
-        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
-           {eiStep === 1 && (aula.etapa1_intro || `Veja só, ${childNome}!`)}
-           {eiStep === 2 && (aula.etapa2_conceito || "Olha como se escreve!")}
-           {eiStep === 3 && (aula.etapa3_exemplo || "Vamos separar os pedacinhos?")}
-           {eiStep === 4 && (aula.etapa4_como_monta || "Junte as peças!")}
-           {eiStep === 5 && (aula.etapa5_instrucao || "Onde está o nome certo?")}
-           {eiStep === 6 && "Use o dedo para desenhar a palavra!"}
-           {eiStep === 7 && (aula.reforco_positivo || "Incrível!")}
-        </div>
-      </div>
 
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {eiStep === 1 && (
@@ -970,17 +941,6 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
 
   return (
     <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote guia */}
-      <div className="flex items-center gap-4 mb-2">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0">
-          {activeMascot?.mascot?.image_url?.startsWith("http") ? (
-            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-          ) : (
-            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
-          )}
-        </div>
-        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
-      </div>
 
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {/* TELA 1 — VISUAL */}
@@ -1177,6 +1137,46 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   // Estados para Matemática Inicial (6 etapas)
   const isMathFlow = (tier === "ei" || tier === "alfa") && (aula.materia === "matematica" || aula.materia === "numeros");
   const [mathStep, setMathStep] = useState(1);
+
+  const currentMascotMessage = useMemo(() => {
+    if (aula?.guided) {
+      if (isAlfaFlow) {
+        if (eiStep === 1) return aula.etapa1_intro || `Veja só, ${childNome}!`;
+        if (eiStep === 2) return aula.etapa2_conceito || "Olha como se escreve!";
+        if (eiStep === 3) return aula.etapa3_exemplo || "Vamos separar os pedacinhos?";
+        if (eiStep === 4) return aula.etapa4_como_monta || "Junte as peças!";
+        if (eiStep === 5) return aula.etapa5_instrucao || "Onde está o nome certo?";
+        if (eiStep === 6) return "Use o dedo para desenhar a palavra!";
+        if (eiStep === 7) return aula.reforco_positivo || "Incrível!";
+      }
+      
+      if (isMathFlow) {
+        if (mathStep === 1) return `Veja, ${childNome}! Temos ${aula.content?.a || ""}!`;
+        if (mathStep === 2) return "Toque em cada um para contar!";
+        if (mathStep === 3) return `Agora juntamos ${aula.content?.a || ""} com ${aula.content?.b || ""}!`;
+        if (mathStep === 4) return "Arraste os números pros lugares!";
+        if (mathStep === 5) return "Toque na resposta certa!";
+        if (mathStep === 6) return "Veja a conta armada! Você arrasou!";
+      }
+
+      if (eiStep <= 5) {
+        return eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
+               eiStep === 2 ? "Olha bem para isto..." :
+               eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
+               eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
+               (aula.etapa4_como_monta || "Vamos resolver juntos!");
+      }
+      if (eiStep === 6) {
+        return aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!";
+      }
+    }
+    return null;
+  }, [aula, eiStep, mathStep, isAlfaFlow, isMathFlow, childNome]);
+
+
+  const [visualStepState, setVisualStepState] = useState(1);
+
+
   
   
   const METODOS = [
@@ -1328,13 +1328,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
             <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo</div>
-        </div>
-        <FloatingMascotGuidance activeMascot={activeMascot} icon={materiaMeta.mascote} />
+          </div>
         </Card>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <div className="lg:col-span-3">
+
+      <div className="w-full">
+        <div>
+
 
           <Card className="mb-4">
             {/* Stepper pedagógico adaptado */}
@@ -1431,61 +1432,19 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-center gap-6">
-                      {/* Mascote central */}
-                      <div className={`relative transition-all duration-1000 transform ${
-                        eiStep === 1 ? 'scale-125 translate-y-4' :
-                        eiStep === 3 ? 'scale-110 -translate-x-12' :
-                        eiStep === 4 ? 'scale-110 translate-x-12' :
-                        'scale-100'
-                      }`}>
-                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
-                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-32 w-32 text-primary" />
-                          )}
-                        </div>
-                        {/* Balão de fala */}
-                        <div className={`absolute transition-all duration-500 ${
-                          eiStep === 3 ? '-right-16 -top-8' :
-                          eiStep === 4 ? '-left-16 -top-8' :
-                          '-top-24 left-1/2 -translate-x-1/2'
-                        } w-72 md:w-80`}>
-                          <div className="bg-white rounded-3xl border-[4px] border-foreground px-6 py-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative">
-                             <div className={`absolute w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-foreground ${
-                               eiStep === 3 ? 'bottom-[-18px] left-10' :
-                               eiStep === 4 ? 'bottom-[-18px] right-10' :
-                               'bottom-[-18px] left-1/2 -translate-x-1/2'
-                             }`} />
-                             <div className={`absolute w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[14px] border-t-white ${
-                               eiStep === 3 ? 'bottom-[-11px] left-[44px]' :
-                               eiStep === 4 ? 'bottom-[-11px] right-[44px]' :
-                               'bottom-[-11px] left-1/2 -translate-x-1/2'
-                             }`} />
-
-                             <p className="font-black text-xl md:text-2xl text-primary leading-tight text-center uppercase animate-in fade-in zoom-in duration-700">
-                               {eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
-                                eiStep === 2 ? "Olha bem para isto..." :
-                                eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
-                                eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
-                                (aula.etapa4_como_monta || "Vamos resolver juntos!")}
-                             </p>
-                          </div>
-                        </div>
-                      </div>
-
+                    <div className="flex flex-col items-center justify-center min-h-[300px] w-full gap-8">
                       {/* Apoio visual gigante — sempre presente do passo 2 em diante */}
                       {eiStep === 2 && (
-                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
-                          <RenderVisual value={aula.visual || "star"} className="h-40 w-40 md:h-52 md:w-52 text-primary mx-auto" />
+                        <div className="drop-shadow-2xl animate-bounce-slow">
+                          <RenderVisual value={aula.visual || "star"} className="h-48 w-48 md:h-64 md:w-64 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 3 && (
-                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
-                          <RenderVisual value={aula.visual || "star"} className="h-32 w-32 md:h-44 md:w-44 text-primary mx-auto" />
+                        <div className="drop-shadow-2xl animate-bounce-slow">
+                          <RenderVisual value={aula.visual || "star"} className="h-48 w-48 md:h-64 md:w-64 text-primary mx-auto" />
                         </div>
                       )}
+
                       {eiStep === 4 && (
                         <div className="flex flex-col items-center gap-3 mt-8">
                           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Exemplo resolvido</div>
@@ -1550,22 +1509,14 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 ) : (
                   <div className="w-full">
                     {/* Cabeçalho do Jogo com Instrução do Mascote */}
-                    <div className="flex items-end gap-4 mb-8">
-                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center overflow-hidden">
-                          {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-14 w-14 text-primary" />
-                          )}
-                       </div>
-                       <div className="flex-1 bg-white rounded-2xl border-[3px] border-foreground px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative mb-2">
-                          <div className="absolute -left-3 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-foreground" />
-                          <div className="absolute -left-[8px] bottom-[17px] w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[10px] border-r-white" />
-                          <p className="font-bold text-primary uppercase text-sm md:text-base leading-tight">
+                    <div className="flex items-center justify-center mb-8">
+                       <div className="w-full max-w-lg bg-white rounded-2xl border-[3px] border-foreground px-6 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative">
+                          <p className="font-black text-primary uppercase text-lg md:text-xl text-center leading-tight">
                             {aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!"}
                           </p>
                        </div>
                     </div>
+
 
                     <EIMiniGame
                       aula={aula}
@@ -1817,12 +1768,17 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <button onClick={() => setAula(null)} className="text-sm text-muted-foreground hover:text-foreground">← Voltar para matérias</button>
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-24">
-            <PipPedagogicalGuidance stage={getPipStage()} className="animate-in fade-in slide-in-from-right-4" />
-          </div>
-        </div>
       </div>
+
+      {/* Mascote Pip/Pipa fixo no canto inferior — Guia de Aprendizado */}
+      <div className="fixed bottom-4 left-4 z-50 pointer-events-none md:pointer-events-auto max-w-[280px] md:max-w-md">
+        <PipPedagogicalGuidance 
+          stage={getPipStage()} 
+          manualMessage={currentMascotMessage}
+          className="animate-in slide-in-from-left-4 duration-500" 
+        />
+      </div>
+
       <FloatingActivityControls
         onSkip={
           aula.guided && !isAlfaFlow && !isMathFlow && eiStep < 6
