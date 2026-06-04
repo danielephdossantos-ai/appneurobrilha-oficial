@@ -488,6 +488,7 @@ function Escola() {
         <AulaView 
           aula={aula} 
           setAula={setAula} 
+          childId={activeChild.id}
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
           activeMascot={activeMascot}
