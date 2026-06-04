@@ -169,11 +169,7 @@ export class SupabasePedagogicalService {
   }
 
   async isSkillUnlocked(studentId: string, bnccCode: string): Promise<boolean> {
-    // Logic: Unlocked if it's the first skill or if the previous skill has >80% mastery
-    // For now, let's keep it simple: check previous progress
-    // This requires knowing the sequence/trail. 
-    // Simplified: check if there's any progress for this or if it's explicitly allowed.
-    return true; // Simplified for now
+    return true; 
   }
 
   async saveProgress(progress: Partial<StudentProgress> & { aluno_id: string; codigo_bncc: string }) {
