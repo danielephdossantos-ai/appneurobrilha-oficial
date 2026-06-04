@@ -41,9 +41,10 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-vogal": return "Cidade das Letras";
-      case "ei-drag-letter": return "Cidade das Letras";
-      case "ei-animal-sound": return "Cidade das Letras";
+      case "ei-vogal": return "Trilha das Palavras";
+      case "ei-drag-letter": return "Trilha das Palavras";
+      case "ei-animal-sound": return "Trilha das Palavras";
+      case "ei-rimas": return "Trilha das Palavras";
       case "alfa-syllable": return "Cidade das Letras";
       case "alfa-complete": return "Cidade das Letras";
       case "alfa-reading": return "Cidade das Letras";
