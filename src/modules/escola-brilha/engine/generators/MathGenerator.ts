@@ -7,6 +7,12 @@ export class MathGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-numeros') {
+        const r = Math.random();
+        if (r < 0.33) return 'ei-contagem';
+        if (r < 0.66) return 'ei-drag-quantity';
+        return 'ei-comparacao';
+      }
       const r = Math.random();
       if (r < 0.5) return 'ei-contagem';
       return 'ei-drag-quantity';
