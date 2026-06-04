@@ -293,6 +293,68 @@ export type Database = {
           },
         ]
       }
+      atividades: {
+        Row: {
+          alternativa_a: string | null
+          alternativa_b: string | null
+          alternativa_c: string | null
+          alternativa_d: string | null
+          codigo_bncc: string | null
+          created_at: string | null
+          explicacao_ativa: string | null
+          feedback: string | null
+          id: string
+          nivel: string | null
+          ordem: number | null
+          pergunta: string | null
+          resposta: string | null
+          tipo: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          alternativa_a?: string | null
+          alternativa_b?: string | null
+          alternativa_c?: string | null
+          alternativa_d?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          explicacao_ativa?: string | null
+          feedback?: string | null
+          id?: string
+          nivel?: string | null
+          ordem?: number | null
+          pergunta?: string | null
+          resposta?: string | null
+          tipo?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          alternativa_a?: string | null
+          alternativa_b?: string | null
+          alternativa_c?: string | null
+          alternativa_d?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          explicacao_ativa?: string | null
+          feedback?: string | null
+          id?: string
+          nivel?: string | null
+          ordem?: number | null
+          pergunta?: string | null
+          resposta?: string | null
+          tipo?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "atividades_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
       attention_metrics: {
         Row: {
           distraction_events: number | null
@@ -358,6 +420,42 @@ export type Database = {
           module?: string
           user_agent?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      bncc_habilidades: {
+        Row: {
+          ano: string | null
+          codigo_bncc: string
+          created_at: string | null
+          disciplina: string | null
+          id: string
+          nivel: string | null
+          objetivo: string | null
+          titulo: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          ano?: string | null
+          codigo_bncc: string
+          created_at?: string | null
+          disciplina?: string | null
+          id?: string
+          nivel?: string | null
+          objetivo?: string | null
+          titulo?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          ano?: string | null
+          codigo_bncc?: string
+          created_at?: string | null
+          disciplina?: string | null
+          id?: string
+          nivel?: string | null
+          objetivo?: string | null
+          titulo?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1106,6 +1204,47 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "exam_missions"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      explicacoes: {
+        Row: {
+          audio: string | null
+          codigo_bncc: string | null
+          created_at: string | null
+          id: string
+          imagem: string | null
+          texto_professor: string | null
+          updated_at: string | null
+          video: string | null
+        }
+        Insert: {
+          audio?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          id?: string
+          imagem?: string | null
+          texto_professor?: string | null
+          updated_at?: string | null
+          video?: string | null
+        }
+        Update: {
+          audio?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          id?: string
+          imagem?: string | null
+          texto_professor?: string | null
+          updated_at?: string | null
+          video?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "explicacoes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
           },
         ]
       }
@@ -1943,6 +2082,57 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "bncc_skills"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      progresso_aluno: {
+        Row: {
+          acertos: number | null
+          aluno_id: string | null
+          codigo_bncc: string | null
+          created_at: string | null
+          dominio: number | null
+          erros: number | null
+          id: string
+          tentativas: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          acertos?: number | null
+          aluno_id?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          dominio?: number | null
+          erros?: number | null
+          id?: string
+          tentativas?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          acertos?: number | null
+          aluno_id?: string | null
+          codigo_bncc?: string | null
+          created_at?: string | null
+          dominio?: number | null
+          erros?: number | null
+          id?: string
+          tentativas?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progresso_aluno_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "progresso_aluno_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
           },
         ]
       }

@@ -16,6 +16,7 @@ import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
+import { SupabasePedagogicalService } from "@/modules/escola-brilha/services/SupabasePedagogicalService";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
@@ -306,34 +307,60 @@ function Escola() {
     setLoading(true);
     try {
       const isInfantil = isEI(selectedGrade);
+      const pedService = SupabasePedagogicalService.getInstance();
       
-      // 1. Priorizar conteúdo do Banco Pedagógico (Supabase)
-      const { data: dbSkills, error: skillsError } = await (supabase as any)
-        .from('bncc_skills')
-        .select('*, pedagogical_explanations(*), pedagogical_activities(*)')
-        .eq('grade', selectedGrade)
-        .eq('field', isInfantil ? materiaId : (materiaId.charAt(0).toUpperCase() + materiaId.slice(1)))
-        .limit(1);
+      // 1. Priorizar conteúdo do Banco Pedagógico (Novas tabelas)
+      const dbSkills = await pedService.getSkillsByGradeAndSubject(selectedGrade, materiaId);
 
       if (dbSkills && dbSkills.length > 0) {
         const skill = dbSkills[0];
-        const explanation = skill.pedagogical_explanations?.[0];
-        const activity = skill.pedagogical_activities?.[0];
+        const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
+        const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
-        if (explanation && activity) {
-          // Usar conteúdo fixo do banco
+        if (explanation && dbActivities.length > 0) {
+          const activity = dbActivities[0];
+          const treino = dbActivities.find(a => a.nivel === 'treino') || activity;
+          const pratica = dbActivities.filter(a => a.nivel === 'pratica');
+          const desafio = dbActivities.find(a => a.nivel === 'desafio') || activity;
+
           setAula({
             materia: materiaId,
             grade: selectedGrade,
-            skill_code: skill.code,
-            etapa1_intro: (explanation.content as any).intro,
-            etapa2_conceito: (explanation.content as any).conceito,
-            etapa3_exemplo: (activity.demonstration as any).text,
-            etapa4_como_monta: (activity.guided_training as any).instruction,
-            etapa5_instrucao: (activity.practice as any).instruction,
-            desafio_final: (activity.challenge as any).instruction,
-            reforco_positivo: "Você brilhou!",
-            visual: (activity.demonstration as any).visual_key,
+            skill_code: skill.codigo_bncc,
+            topic: skill.titulo,
+            objetivo: skill.objetivo,
+            etapa1_explicação: explanation.texto_professor,
+            etapa2_demonstração: "Observe com atenção o exemplo da professora!",
+            etapa3_treino_guiado: treino.explicacao_ativa || "Vamos identificar os sentimentos?",
+            etapa4_prática: pratica[0]?.explicacao_ativa || "Agora é sua vez de escolher!",
+            etapa5_desafio: desafio.explicacao_ativa || "Desafio final: você consegue identificar todos?",
+            etapa6_avaliação: "Excelente desempenho no reconhecimento!",
+            etapa7_domínio: "Parabéns! Você dominou esta habilidade BNCC!",
+            
+            // Atividade principal (fallback)
+            pergunta: activity.pergunta,
+            opcoes: [activity.alternativa_a, activity.alternativa_b, activity.alternativa_c, activity.alternativa_d].filter(Boolean),
+            resposta_correta: activity.resposta,
+            feedback: activity.feedback,
+            
+            // Dados para as etapas específicas
+            treino_activity: {
+              pergunta: treino.pergunta,
+              opcoes: [treino.alternativa_a, treino.alternativa_b, treino.alternativa_c, treino.alternativa_d].filter(Boolean),
+              resposta_correta: treino.resposta,
+            },
+            pratica_activities: pratica.map(p => ({
+              pergunta: p.pergunta,
+              opcoes: [p.alternativa_a, p.alternativa_b, p.alternativa_c, p.alternativa_d].filter(Boolean),
+              resposta_correta: p.resposta,
+            })),
+            desafio_activity: {
+              pergunta: desafio.pergunta,
+              opcoes: [desafio.alternativa_a, desafio.alternativa_b, desafio.alternativa_c, desafio.alternativa_d].filter(Boolean),
+              resposta_correta: desafio.resposta,
+            },
+
+            visual: explanation.imagem || "book",
             isEI: isInfantil,
             guided: true,
             db_activity: activity,
@@ -485,6 +512,7 @@ function Escola() {
         <AulaView 
           aula={aula} 
           setAula={setAula} 
+          childId={activeChild.id}
           childNome={activeChild.nome} 
           hiperfoco={activeChild.hiperfoco}
           activeMascot={activeMascot}
@@ -710,7 +738,7 @@ function Escola() {
 
 
 
-function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
   const [practiceCount, setPracticeCount] = useState(0);
   const [performance, setPerformance] = useState({ hits: 0, misses: 0, startTime: Date.now() });
@@ -721,6 +749,20 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
   const isPipaMateria = aula.isEI || aula.materia === 'portugues';
   const mascotImg = isPipaMateria ? imgPipa : imgPip;
   const mascotNome = isPipaMateria ? "Professora Pipa" : "Professor Pip";
+
+  const currentActivity = useMemo(() => {
+    if (step === 3) return aula.treino_activity || aula;
+    if (step === 4) return (aula.pratica_activities && aula.pratica_activities[practiceCount]) || aula;
+    if (step === 5) return aula.desafio_activity || aula;
+    return aula;
+  }, [step, practiceCount, aula]);
+
+  const aulaForGame = useMemo(() => ({
+    ...aula,
+    pergunta: currentActivity.pergunta,
+    opcoes: currentActivity.opcoes,
+    resposta_correta: currentActivity.resposta_correta
+  }), [aula, currentActivity]);
 
   const steps = [
     { id: 1, label: "EXPLICAÇÃO", icon: Lightbulb },
@@ -742,7 +784,8 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
           setStep(4);
           setPracticeCount(0);
         } else if (step === 4) {
-          if (practiceCount < 2) {
+          const maxPratica = (aula.pratica_activities?.length || 3) - 1;
+          if (practiceCount < maxPratica) {
             setPracticeCount(prev => prev + 1);
           } else {
             setStep(5);
@@ -822,7 +865,7 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
                     <p className="text-sm font-bold text-muted-foreground">{step === 3 ? (aula.etapa3_treino_guiado || "Vamos fazer juntos!") : step === 4 ? (aula.etapa4_prática || "Agora é com você!") : (aula.etapa5_desafio || "O grande desafio!")}</p>
                  </div>
                  <div className="w-full max-w-2xl my-8">
-                   <EIMiniGame aula={aula} onAnswer={handleAnswer} disabled={feedback !== null} />
+                   <EIMiniGame aula={aulaForGame} onAnswer={handleAnswer} disabled={feedback !== null} />
                  </div>
                  <div className="absolute bottom-6 right-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-[2rem] p-3 border-2 border-primary/20 shadow-kid z-10 animate-in slide-in-from-right-4">
                     <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gradient-to-br from-primary/10 to-sun/10">
@@ -873,7 +916,22 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
                 </div>
 
                 <button 
-                  onClick={() => {
+                  onClick={async () => {
+                    const pedService = SupabasePedagogicalService.getInstance();
+                    const total = performance.hits + performance.misses;
+                    const mastery = total > 0 ? (performance.hits / total) * 100 : 0;
+                    
+                    if (aula.skill_code) {
+                      await pedService.saveProgress({
+                        aluno_id: childId,
+                        codigo_bncc: aula.skill_code,
+                        tentativas: 1,
+                        acertos: performance.hits,
+                        erros: performance.misses,
+                        dominio: mastery
+                      });
+                    }
+
                     if (aula.activityId) onCompleted?.(aula.activityId);
                     setAula(null);
                   }}
