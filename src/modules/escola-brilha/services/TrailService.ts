@@ -1,56 +1,77 @@
-import { Trail, AreaType, Mission } from "../types/school";
+import { Trail, AreaType, Mission, MissionStatusSchema } from "../types/school";
+import { SupabasePedagogicalService } from "./SupabasePedagogicalService";
+import { z } from "zod";
 
 export class TrailService {
-  private static trails: Trail[] = [
-    {
-      id: 'trail-ling-1',
-      area: 'linguagem',
-      title: 'Aventura das Letras',
-      progress: 0,
-      missions: this.generateMockMissions('Letras'),
-      phases: {
-        inicio: ['m1'],
-        desenvolvimento: ['m2', 'm3'],
-        consolidacao: ['m4'],
-        reforco: ['m5'],
-        revisao: ['m6']
-      }
-    },
-    {
-      id: 'trail-math-1',
-      area: 'matematica',
-      title: 'Mundo dos Números',
-      progress: 35,
-      missions: this.generateMockMissions('Números'),
-      phases: {
-        inicio: ['m1'],
-        desenvolvimento: ['m2', 'm3'],
-        consolidacao: ['m4'],
-        reforco: ['m5'],
-        revisao: ['m6']
-      }
-    }
-  ];
+  private static pedagogicalService = SupabasePedagogicalService.getInstance();
 
-  private static generateMockMissions(prefix: string): Mission[] {
-    return Array.from({ length: 6 }, (_, i) => ({
-      id: `m${i + 1}`,
-      title: `${prefix} Nível ${i + 1}`,
-      description: `Explorando ${prefix.toLowerCase()} de forma divertida.`,
-      status: i === 0 ? 'available' : 'locked',
-      order: i,
-      activities: [
-        { id: `a${i}-1`, title: 'Desafio Inicial', type: 'drag-and-drop', bncc_codes: ['EI03EF01'], status: 'pending' },
-        { id: `a${i}-2`, title: 'Prática Guiada', type: 'multiple-choice', bncc_codes: ['EI03EF01'], status: 'pending' }
-      ]
+  static async getTrailsByArea(area: AreaType, alunoId: string): Promise<Trail[]> {
+    // In a real scenario, trails might be in a separate table, 
+    // but for now we'll group skills by area into virtual trails.
+    const subjectsMap: Record<string, string> = {
+      'linguagem': 'Português',
+      'matematica': 'Matemática',
+      'ciencias': 'Ciências',
+      'artes': 'Artes',
+      'coordenacao_motora': 'Educação Física',
+      'logica': 'Lógica'
+    };
+
+    const subject = subjectsMap[area];
+    if (!subject) return [];
+
+    // Fetch all skills for this subject
+    // We assume 1st Year (Ensino Fundamental) for now as requested
+    const skills = await this.pedagogicalService.getSkillsByGradeAndSubject('1º Ano', subject);
+    
+    if (skills.length === 0) return [];
+
+    const missions: Mission[] = await Promise.all(skills.map(async (skill) => {
+      const progress = await this.pedagogicalService.getProgress(alunoId, skill.codigo_bncc);
+      const isUnlocked = await this.pedagogicalService.isSkillUnlocked(alunoId, skill.codigo_bncc);
+      
+      let status: z.infer<typeof MissionStatusSchema> = 'locked';
+      if (progress && (progress.dominio || 0) >= 80) {
+        status = 'completed';
+      } else if (isUnlocked) {
+        status = 'available';
+      }
+
+      return {
+        id: skill.codigo_bncc,
+        title: skill.titulo || skill.codigo_bncc,
+        description: skill.objetivo || '',
+        status,
+        order: skill.ordem || 0,
+        activities: [] // Activities will be fetched when lesson starts
+      };
     }));
+
+    return [{
+      id: `trail-${area}`,
+      area: area,
+      title: `Trilha de ${subject}`,
+      missions: missions.sort((a, b) => a.order - b.order),
+      progress: this.calculateTrailProgress(missions),
+      phases: {
+        inicio: missions.slice(0, 2).map(m => m.id),
+        desenvolvimento: missions.slice(2, 4).map(m => m.id),
+        consolidacao: missions.slice(4, 5).map(m => m.id),
+        reforco: [],
+        revisao: []
+      }
+    }];
   }
 
-  static getTrailsByArea(area: AreaType): Trail[] {
-    return this.trails.filter(t => t.area === area);
+  static async getAllTrails(alunoId: string): Promise<Trail[]> {
+    const areas: AreaType[] = ['linguagem', 'matematica', 'ciencias', 'artes', 'coordenacao_motora', 'logica'];
+    const trails = await Promise.all(areas.map(area => this.getTrailsByArea(area, alunoId)));
+    return trails.flat();
   }
 
-  static getAllTrails(): Trail[] {
-    return this.trails;
+  private static calculateTrailProgress(missions: Mission[]): number {
+    if (missions.length === 0) return 0;
+    const completed = missions.filter(m => m.status === 'completed').length;
+    return Math.round((completed / missions.length) * 100);
   }
 }
