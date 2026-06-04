@@ -143,8 +143,8 @@ function PainelPremium() {
 
         <DashboardHeader 
 
-          studentName={activeChild.nome || mockResponsibleData.studentName} 
-          grade={mockResponsibleData.grade} 
+          studentName={activeChild.nome} 
+          grade={activeChild.serie} 
           childId={activeChild.id}
         />
 
