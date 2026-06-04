@@ -387,21 +387,27 @@ export type Database = {
           code: string
           created_at: string | null
           description: string
+          field: string | null
           field_of_experience: string | null
+          grade: string | null
           segment: string
         }
         Insert: {
           code: string
           created_at?: string | null
           description: string
+          field?: string | null
           field_of_experience?: string | null
+          grade?: string | null
           segment: string
         }
         Update: {
           code?: string
           created_at?: string | null
           description?: string
+          field?: string | null
           field_of_experience?: string | null
+          grade?: string | null
           segment?: string
         }
         Relationships: []
@@ -601,37 +607,49 @@ export type Database = {
         Row: {
           child_id: string
           created_at: string
+          errors_count: number | null
+          hits_count: number | null
           id: string
           last_attempt_at: string | null
           mastery_level: number
+          mastery_percentage: number | null
           materia: string
           skill_code: string
           success_rate: number
           total_attempts: number
+          total_time_seconds: number | null
           updated_at: string
         }
         Insert: {
           child_id: string
           created_at?: string
+          errors_count?: number | null
+          hits_count?: number | null
           id?: string
           last_attempt_at?: string | null
           mastery_level?: number
+          mastery_percentage?: number | null
           materia: string
           skill_code: string
           success_rate?: number
           total_attempts?: number
+          total_time_seconds?: number | null
           updated_at?: string
         }
         Update: {
           child_id?: string
           created_at?: string
+          errors_count?: number | null
+          hits_count?: number | null
           id?: string
           last_attempt_at?: string | null
           mastery_level?: number
+          mastery_percentage?: number | null
           materia?: string
           skill_code?: string
           success_rate?: number
           total_attempts?: number
+          total_time_seconds?: number | null
           updated_at?: string
         }
         Relationships: [
@@ -1705,6 +1723,53 @@ export type Database = {
           },
         ]
       }
+      pedagogical_activities: {
+        Row: {
+          assessment: Json
+          challenge: Json
+          created_at: string
+          demonstration: Json
+          guided_training: Json
+          id: string
+          practice: Json
+          skill_code: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assessment: Json
+          challenge: Json
+          created_at?: string
+          demonstration: Json
+          guided_training: Json
+          id?: string
+          practice: Json
+          skill_code: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assessment?: Json
+          challenge?: Json
+          created_at?: string
+          demonstration?: Json
+          guided_training?: Json
+          id?: string
+          practice?: Json
+          skill_code?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pedagogical_activities_skill_code_fkey"
+            columns: ["skill_code"]
+            isOneToOne: false
+            referencedRelation: "bncc_skills"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       pedagogical_activities_base: {
         Row: {
           adaptacoes: Json | null
@@ -1785,6 +1850,38 @@ export type Database = {
           variacoes?: Json | null
         }
         Relationships: []
+      }
+      pedagogical_explanations: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          skill_code: string
+          updated_at: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          id?: string
+          skill_code: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          skill_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pedagogical_explanations_skill_code_fkey"
+            columns: ["skill_code"]
+            isOneToOne: false
+            referencedRelation: "bncc_skills"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       profiles: {
         Row: {

@@ -6,6 +6,7 @@ export interface ReportData {
     label: string;
     value: number;
     status: 'adequate' | 'developing' | 'attention';
+    bnccCodes?: string[];
   }[];
   evolution: {
     label: string;
@@ -30,11 +31,11 @@ export interface ReportData {
 export class ReportGenerator {
   static generate(profile: InternalProfile, childName: string, dynamicStats?: any[]): ReportData {
     const initialProfile = [
-      { label: "Linguagem", value: profile.linguagem, status: this.getStatus(profile.linguagem) },
-      { label: "Atenção", value: profile.atencao, status: this.getStatus(profile.atencao) },
-      { label: "Comunicação", value: profile.linguagem > 50 ? profile.linguagem : 40, status: this.getStatus(profile.linguagem > 50 ? profile.linguagem : 40) },
-      { label: "Aprendizagem", value: profile.leitura, status: this.getStatus(profile.leitura) },
-      { label: "Cognição", value: (profile.leitura + profile.atencao) / 2, status: this.getStatus((profile.leitura + profile.atencao) / 2) },
+      { label: "Linguagem", value: profile.linguagem, status: this.getStatus(profile.linguagem), bnccCodes: ["EI03EF", "EF01LP"] },
+      { label: "Atenção", value: profile.atencao, status: this.getStatus(profile.atencao), bnccCodes: ["Cognição"] },
+      { label: "Comunicação", value: profile.linguagem > 50 ? profile.linguagem : 40, status: this.getStatus(profile.linguagem > 50 ? profile.linguagem : 40), bnccCodes: ["EI03EF01"] },
+      { label: "Aprendizagem", value: profile.leitura, status: this.getStatus(profile.leitura), bnccCodes: ["EF01LP05", "EF01LP07"] },
+      { label: "Cognição", value: (profile.leitura + profile.atencao) / 2, status: this.getStatus((profile.leitura + profile.atencao) / 2), bnccCodes: ["Lógica"] },
     ];
 
     const evolution: ReportData['evolution'] = [];
