@@ -1,6 +1,6 @@
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
-import { LINGUISTICS_DATA, EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
+import { LINGUISTICS_DATA, EARLY_CHILDHOOD, ALPHABETIZATION_DATA, isEarlyChildhood } from "./PedagogyData";
 
 export class LinguisticsGenerator extends BaseGenerator {
   protected domain = "linguistics";
@@ -14,6 +14,12 @@ export class LinguisticsGenerator extends BaseGenerator {
     }
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "interpretation";
+    if (input.grade?.includes("1º")) {
+      const r = Math.random();
+      if (r < 0.33) return 'alfa-syllable';
+      if (r < 0.66) return 'alfa-complete';
+      return 'alfa-reading';
+    }
     if (gradeNum <= 1) return "phonemes";
     if (gradeNum <= 3) return "syllables";
     return "reading";
@@ -31,6 +37,9 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "ei-vogal": return "Cidade das Letras";
       case "ei-drag-letter": return "Cidade das Letras";
       case "ei-animal-sound": return "Cidade das Letras";
+      case "alfa-syllable": return "Cidade das Letras";
+      case "alfa-complete": return "Cidade das Letras";
+      case "alfa-reading": return "Cidade das Letras";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
@@ -45,6 +54,9 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "ei-vogal": return "Vamos procurar a letra A!";
       case "ei-drag-letter": return "Qual letra começa esta palavra?";
       case "ei-animal-sound": return "Ouça e escolha o animal correto.";
+      case "alfa-syllable": return "Qual sílaba foi formada?";
+      case "alfa-complete": return "Complete a palavra!";
+      case "alfa-reading": return "Leitura Curta";
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
       case "reading": return "Leia a palavra e encontre a imagem correspondente.";
@@ -92,6 +104,41 @@ export class LinguisticsGenerator extends BaseGenerator {
           visual: a.emoji,
           answer: a.answer,
           options: a.options,
+          miniGameType: "bubbles"
+        };
+      }
+
+      // ===== 1º ANO (ALFABETIZAÇÃO) =====
+      if (type === 'alfa-syllable') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
+        return {
+          q: `Qual sílaba forma ${item.parts.join(' + ')}?`,
+          visual: item.parts.join(' + '),
+          answer: item.result,
+          options: this.shuffle([item.result, ...item.distractors]),
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'alfa-complete') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.completeWord);
+        return {
+          q: `Qual sílaba completa ${item.display}?`,
+          visual: item.visual,
+          answer: item.missing,
+          options: this.shuffle([item.missing, ...item.distractors]),
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'alfa-reading') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.shortReading);
+        return {
+          q: item.text,
+          visual: item.visual,
+          question: item.question,
+          answer: item.answer,
+          options: item.options,
           miniGameType: "bubbles"
         };
       }
