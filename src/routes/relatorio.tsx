@@ -22,18 +22,21 @@ function RelatorioPremium() {
   const [anamnesis, setAnamnesis] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [dynamicStats, setDynamicStats] = useState<any[]>([]);
+  const [masteryData, setMasteryData] = useState<any[]>([]);
 
   useEffect(() => {
     async function loadData() {
       if (!activeChild?.id) return;
       
-      const [anamnesisRes, statsRes] = await Promise.all([
+      const [anamnesisRes, statsRes, masteryRes] = await Promise.all([
         supabase.from("child_anamnesis").select("*").eq("child_id", activeChild.id).maybeSingle(),
-        supabase.from("activity_logs").select("*").eq("child_id", activeChild.id).limit(20)
+        supabase.from("activity_logs").select("*").eq("child_id", activeChild.id).limit(20),
+        supabase.from("child_skill_mastery").select("*").eq("child_id", activeChild.id)
       ]);
       
       setAnamnesis(anamnesisRes.data);
       setDynamicStats(statsRes.data || []);
+      setMasteryData(masteryRes.data || []);
       setLoading(false);
     }
     loadData();
@@ -289,8 +292,52 @@ function RelatorioPremium() {
           </Card>
         </div>
 
+        <div className="grid grid-cols-1 gap-8">
+          {/* BLOCO 4 — DOMÍNIO DE HABILIDADES BNCC */}
+          <Card className="shadow-lg border-primary/20 p-8">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+              <Target className="w-6 h-6 text-primary" /> Domínio de Habilidades BNCC
+            </h3>
+            {masteryData.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {masteryData.map((m, i) => (
+                  <div key={i} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm">
+                    <div className="flex justify-between items-start mb-2">
+                      <Pill tone="info" className="text-[10px]">{m.skill_code}</Pill>
+                      <span className="font-black text-primary text-sm">{m.mastery_percentage || Math.round(m.success_rate * 100)}%</span>
+                    </div>
+                    <div className="text-xs font-bold text-slate-700 mb-2">{m.materia}</div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full transition-all ${
+                          (m.mastery_percentage || m.success_rate * 100) >= 80 ? 'bg-success' : 
+                          (m.mastery_percentage || m.success_rate * 100) >= 50 ? 'bg-warning' : 
+                          'bg-destructive'
+                        }`}
+                        style={{ width: `${m.mastery_percentage || m.success_rate * 100}%` }}
+                      />
+                    </div>
+                    <div className="mt-2 text-[10px] text-muted-foreground flex justify-between">
+                      <span>{m.total_attempts} tentativas</span>
+                      <span className="font-bold text-slate-500">
+                        {(m.mastery_percentage || m.success_rate * 100) >= 80 ? 'Dominada' : 
+                         (m.mastery_percentage || m.success_rate * 100) >= 50 ? 'Em desenvolvimento' : 
+                         'Precisa de reforço'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-10 text-muted-foreground italic">
+                Nenhum dado de domínio registrado ainda. Complete as aulas para ver o progresso.
+              </div>
+            )}
+          </Card>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* BLOCO 4 — PONTOS FORTES */}
+          {/* BLOCO 5 — PONTOS FORTES */}
           <Card className="border-emerald-100 bg-emerald-50/40 shadow-md p-8">
             <h3 className="text-xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
               <CheckCircle2 className="w-6 h-6 text-emerald-600" /> Pontos Fortes
@@ -303,8 +350,8 @@ function RelatorioPremium() {
               ))}
             </div>
           </Card>
-
-          {/* BLOCO 5 — PONTOS DE ATENÇÃO */}
+          
+          {/* BLOCO 6 — PONTOS DE ATENÇÃO */}
           <Card className="border-amber-100 bg-amber-50/40 shadow-md p-8">
             <h3 className="text-xl font-bold text-amber-900 mb-6 flex items-center gap-2">
               <AlertCircle className="w-6 h-6 text-amber-600" /> Pontos de Atenção
