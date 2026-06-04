@@ -23,11 +23,15 @@ export class LinguisticsGenerator extends BaseGenerator {
     if (gradeNum >= 6) return "interpretation";
     if (input.grade?.includes("1º")) {
       const r = Math.random();
-      if (r < 0.2) return 'alfa-syllable';
-      if (r < 0.4) return 'alfa-complete';
-      if (r < 0.6) return 'alfa-reading';
-      if (r < 0.8) return 'alfa-phonemes';
-      return 'alfa-types';
+      if (r < 0.1) return 'alfa-types';    // EF01LP01
+      if (r < 0.2) return 'alfa-letters';  // EF01LP02
+      if (r < 0.3) return 'alfa-order';    // EF01LP03
+      if (r < 0.4) return 'alfa-phonemes'; // EF01LP04
+      if (r < 0.5) return 'alfa-syllable'; // EF01LP05
+      if (r < 0.6) return 'alfa-word-build'; // EF01LP06
+      if (r < 0.7) return 'alfa-reading';  // EF01LP07
+      if (r < 0.8) return 'alfa-sentence'; // EF01LP08
+      return 'alfa-comprehension';         // EF01LP10
     }
     if (gradeNum <= 1) return "phonemes";
     if (gradeNum <= 3) return "syllables";
@@ -47,11 +51,16 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "ei-drag-letter": return "Trilha das Palavras";
       case "ei-animal-sound": return "Trilha das Palavras";
       case "ei-rimas": return "Trilha das Palavras";
-      case "alfa-syllable": return "Cidade das Letras";
-      case "alfa-complete": return "Cidade das Letras";
-      case "alfa-reading": return "Cidade das Letras";
-      case "alfa-phonemes": return "Cidade das Letras";
-      case "alfa-types": return "Cidade das Letras";
+      case "alfa-syllable": return "Cidade das Letras · Sílabas";
+      case "alfa-complete": return "Cidade das Letras · Complete";
+      case "alfa-reading": return "Cidade das Letras · Leitura";
+      case "alfa-phonemes": return "Cidade das Letras · Sons";
+      case "alfa-types": return "Cidade das Letras · Textos";
+      case "alfa-letters": return "Cidade das Letras · Letras";
+      case "alfa-order": return "Cidade das Letras · Ordem Alfabética";
+      case "alfa-word-build": return "Cidade das Letras · Construindo Palavras";
+      case "alfa-sentence": return "Cidade das Letras · Frases";
+      case "alfa-comprehension": return "Cidade das Letras · Compreensão";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
@@ -135,27 +144,87 @@ export class LinguisticsGenerator extends BaseGenerator {
       }
 
       // ===== 1º ANO (ALFABETIZAÇÃO) =====
-      if (type === 'alfa-syllable') {
-        const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
+      if (type === 'alfa-types') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.textTypes);
         return {
-          q: `Qual sílaba forma ${item.parts.join(' + ')}?`,
-          visual: item.parts.join(' + '),
-          answer: item.result,
-          options: this.shuffle([item.result, ...item.distractors]),
+          q: item.question,
+          visual: item.visual,
+          answer: item.answer,
+          options: item.options,
           miniGameType: "bubbles",
           bncc_code: item.code
         };
       }
 
-      if (type === 'alfa-complete') {
-        const item = this.pickRandom(ALPHABETIZATION_DATA.completeWord);
+      if (type === 'alfa-letters') {
+        const item = EARLY_CHILDHOOD.linguagem.vowels[0]; // EF01LP02 uses letter recognition
         return {
-          q: `Qual sílaba completa ${item.display}?`,
-          visual: item.visual,
-          answer: item.missing,
-          options: this.shuffle([item.missing, ...item.distractors]),
+          q: "Encontre a letra solicitada:",
+          visual: item.letter,
+          answer: item.letter,
+          options: this.shuffle([item.letter, ...item.distractors]),
+          miniGameType: "bubbles",
+          bncc_code: 'EF01LP02'
+        };
+      }
+
+      if (type === 'alfa-order') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.alphabeticalOrder);
+        return {
+          q: "Qual letra vem depois?",
+          visual: item.sequence.slice(0, 2).join(' '),
+          answer: item.sequence[2],
+          options: this.shuffle([item.sequence[2], 'X', 'Z', 'K']),
           miniGameType: "bubbles",
           bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-phonemes') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.phonemes);
+        return {
+          q: `Qual letra faz o som /${item.sound}/?`,
+          visual: 'volume-2',
+          answer: item.result,
+          options: this.shuffle([item.result, ...item.distractors]),
+          miniGameType: "bubbles",
+          bncc_code: item.code || 'EF01LP04'
+        };
+      }
+
+      if (type === 'alfa-syllable') {
+        const r = Math.random();
+        if (r < 0.5) {
+          const item = this.pickRandom(ALPHABETIZATION_DATA.syllableFormation);
+          return {
+            q: `Qual sílaba forma ${item.parts.join(' + ')}?`,
+            visual: item.parts.join(' + '),
+            answer: item.result,
+            options: this.shuffle([item.result, ...item.distractors]),
+            miniGameType: "alfa-syllable",
+            bncc_code: item.code
+          };
+        } else {
+          const item = this.pickRandom(ALPHABETIZATION_DATA.completeWord);
+          return {
+            q: `Qual sílaba completa ${item.display}?`,
+            visual: item.visual,
+            answer: item.missing,
+            options: this.shuffle([item.missing, ...item.distractors]),
+            miniGameType: "bubbles",
+            bncc_code: item.code
+          };
+        }
+      }
+
+      if (type === 'alfa-word-build') {
+        const item = LINGUISTICS_DATA.words.beginner[0];
+        return {
+          q: "Arraste as sílabas para formar a palavra:",
+          palavra: item.word,
+          opcoes: item.syllables,
+          miniGameType: "word",
+          bncc_code: 'EF01LP06'
         };
       }
 
@@ -172,25 +241,26 @@ export class LinguisticsGenerator extends BaseGenerator {
         };
       }
 
-      if (type === 'alfa-phonemes') {
-        const item = this.pickRandom(ALPHABETIZATION_DATA.phonemes);
+      if (type === 'alfa-sentence') {
+        const item = ALPHABETIZATION_DATA.shortReading[0];
         return {
-          q: `Qual letra faz o som /${item.sound}/?`,
-          visual: 'volume-2',
-          answer: item.result,
-          options: this.shuffle([item.result, ...item.distractors]),
-          miniGameType: "bubbles",
-          bncc_code: item.code
-        };
-      }
-
-      if (type === 'alfa-types') {
-        const item = this.pickRandom(ALPHABETIZATION_DATA.textTypes);
-        return {
-          q: item.question,
+          q: item.text,
           visual: item.visual,
           answer: item.answer,
           options: item.options,
+          miniGameType: "bubbles",
+          bncc_code: 'EF01LP08'
+        };
+      }
+
+      if (type === 'alfa-comprehension') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.comprehension);
+        return {
+          q: item.text,
+          question: item.question,
+          answer: item.answer,
+          options: item.options,
+          visual: item.visual,
           miniGameType: "bubbles",
           bncc_code: item.code
         };

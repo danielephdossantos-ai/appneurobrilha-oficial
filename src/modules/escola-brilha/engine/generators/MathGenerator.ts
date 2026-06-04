@@ -21,9 +21,14 @@ export class MathGenerator extends BaseGenerator {
     if (gradeNum >= 6) return "advanced-logic";
     if (input.grade?.includes("1º")) {
       const r = Math.random();
-      if (r < 0.33) return 'alfa-sum';
-      if (r < 0.66) return 'alfa-sub';
-      return 'alfa-tens';
+      if (r < 0.12) return 'alfa-count';    // EF01MA01
+      if (r < 0.24) return 'alfa-compare';  // EF01MA02
+      if (r < 0.36) return 'alfa-tens';     // EF01MA03
+      if (r < 0.48) return 'alfa-sequence'; // EF01MA04
+      if (r < 0.60) return 'alfa-sum';      // EF01MA05
+      if (r < 0.72) return 'alfa-sub';      // EF01MA06
+      if (r < 0.84) return 'alfa-problem';  // EF01MA07
+      return 'alfa-spatial';               // EF01MA08
     }
     if (gradeNum <= 2) return "counting";
     if (gradeNum === 3) return "comparison";
@@ -35,9 +40,14 @@ export class MathGenerator extends BaseGenerator {
     switch (type) {
       case "ei-contagem": return "Vale dos Números";
       case "ei-drag-quantity": return "Vale dos Números";
-      case "alfa-sum": return "Vale dos Números";
-      case "alfa-sub": return "Vale dos Números";
-      case "alfa-tens": return "Escola Brilha";
+      case "alfa-sum": return "Vale dos Números · Adição";
+      case "alfa-sub": return "Vale dos Números · Subtração";
+      case "alfa-tens": return "Vale dos Números · Dezenas";
+      case "alfa-count": return "Vale dos Números · Contagem";
+      case "alfa-compare": return "Vale dos Números · Comparação";
+      case "alfa-sequence": return "Vale dos Números · Sequências";
+      case "alfa-problem": return "Vale dos Números · Problemas";
+      case "alfa-spatial": return "Vale dos Números · Localização";
       case "counting": return "Contagem Divertida";
       case "comparison": return "Mais ou Menos?";
       case "visual-logic": return "Desafio Lógico";
@@ -51,9 +61,14 @@ export class MathGenerator extends BaseGenerator {
     switch (type) {
       case "ei-contagem": return "Quantas maçãs existem?";
       case "ei-drag-quantity": return "Arraste as estrelas para a caixa.";
-      case "alfa-sum": return "Soma Visual";
-      case "alfa-sub": return "Subtração Visual";
-      case "alfa-tens": return "Qual número representa:";
+      case "alfa-sum": return "Quanto dá essa soma?";
+      case "alfa-sub": return "Quanto sobra?";
+      case "alfa-tens": return "Qual número representa estas dezenas?";
+      case "alfa-count": return "Quantos objetos você vê?";
+      case "alfa-compare": return "Qual grupo tem mais?";
+      case "alfa-sequence": return "Qual o próximo número?";
+      case "alfa-problem": return "Resolva o probleminha:";
+      case "alfa-spatial": return "Onde está o objeto?";
       case "counting": return "Quantos objetos você vê?";
       case "comparison": return "Qual grupo tem mais itens?";
       case "visual-logic": return "Qual é o próximo da sequência?";
@@ -103,25 +118,27 @@ export class MathGenerator extends BaseGenerator {
       }
 
       // ===== 1º ANO (MATEMÁTICA VISUAL) =====
-      if (type === 'alfa-sum') {
-        const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
+      if (type === 'alfa-count') {
+        const item = FIRST_GRADE_MATH.counting[0];
         return {
-          q: "Soma Visual",
-          visual: `${item.group1.item.repeat(item.group1.n)} + ${item.group2.item.repeat(item.group2.n)} = ?`,
-          answer: String(item.answer),
-          options: item.options.map(String),
-          miniGameType: "bubbles"
+          q: "Conte e responda:",
+          targetCount: item.n,
+          answer: String(item.n),
+          options: [String(item.n), String(item.n - 1), String(item.n + 2)],
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
-      if (type === 'alfa-sub') {
-        const item = this.pickRandom(FIRST_GRADE_MATH.visualSubtraction);
+      if (type === 'alfa-compare') {
+        const item = FIRST_GRADE_MATH.comparison[0];
         return {
-          q: "Subtração Visual",
-          visual: `${item.total.item.repeat(item.total.n)} tira ${item.take} = ?`,
-          answer: String(item.answer),
-          options: item.options.map(String),
-          miniGameType: "bubbles"
+          q: `Qual grupo tem mais ${item.item}?`,
+          visual: `Grupo A: ${item.countA} vs Grupo B: ${item.countB}`,
+          answer: item.answer,
+          options: ['A', 'B'],
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
@@ -131,7 +148,70 @@ export class MathGenerator extends BaseGenerator {
           q: item.question,
           answer: item.answer,
           options: item.options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-sequence') {
+        return {
+          q: "Complete a sequência:",
+          visual: "2, 4, 6, ?",
+          answer: "8",
+          options: ["7", "8", "9"],
+          miniGameType: "bubbles",
+          bncc_code: 'EF01MA04'
+        };
+      }
+
+      if (type === 'alfa-sum') {
+        const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
+        return {
+          q: "Soma Visual",
+          visual: "maçãs",
+          numero_a: item.group1.n,
+          numero_b: item.group2.n,
+          operacao: "+",
+          answer: String(item.answer),
+          options: item.options.map(String),
+          miniGameType: "alfa-sum",
+          bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-sub') {
+        const item = this.pickRandom(FIRST_GRADE_MATH.visualSubtraction);
+        return {
+          q: "Subtração Visual",
+          visual: "peixes",
+          numero_a: item.total.n,
+          numero_b: item.take,
+          operacao: "-",
+          answer: String(item.answer),
+          options: item.options.map(String),
+          miniGameType: "alfa-sub",
+          bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-problem') {
+        return {
+          q: "Tinha 3 maçãs, comi 1. Quantas sobraram?",
+          answer: "2",
+          options: ["1", "2", "3"],
+          miniGameType: "bubbles",
+          bncc_code: 'EF01MA07'
+        };
+      }
+
+      if (type === 'alfa-spatial') {
+        const item = FIRST_GRADE_MATH.spatialLocation[0];
+        return {
+          q: item.question,
+          options: item.options,
+          answer: item.options[0],
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
