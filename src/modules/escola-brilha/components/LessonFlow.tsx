@@ -81,7 +81,9 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
               alternativa_c: 'Vamos lá!',
               resposta: 'Sim!',
               feedback: 'Excelente entusiasmo!',
-              tipo: 'fallback'
+              tipo: 'fallback',
+              nivel: 'Iniciante',
+              alternativa_d: null
             }
           ];
           setActivities(fallbackActivities);
