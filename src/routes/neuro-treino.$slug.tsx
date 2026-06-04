@@ -28,10 +28,10 @@ function NeuroAtividade() {
   const navigate = useNavigate();
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
-  const { speak, stop, isSpeaking } = usePipVoice();
+  const { speak, stop, isSpeaking } = useLumiVoice();
   const [voiceOn, setVoiceOn] = useState<boolean>(() => {
     if (typeof window === "undefined") return true;
-    return localStorage.getItem("pip:voice") !== "off";
+    return localStorage.getItem("lumi:voice") !== "off";
   });
 
   const [index, setIndex] = useState(0);
@@ -163,7 +163,7 @@ function NeuroAtividade() {
     setVoiceOn((v) => {
       const next = !v;
       if (typeof window !== "undefined") {
-        localStorage.setItem("pip:voice", next ? "on" : "off");
+        localStorage.setItem("lumi:voice", next ? "on" : "off");
       }
       if (!next) stop();
       return next;
@@ -179,11 +179,11 @@ function NeuroAtividade() {
   const onConcluir = (correto: boolean) => {
     if (correto) {
       setAcertos((a) => a + 1);
-      const frase = pipFraseAcerto(hiperfoco);
+      const frase = lumiFraseAcerto(hiperfoco);
       toast.success(frase);
       if (voiceOn) speak(`${nomeCrianca ? nomeCrianca + ", " : ""}${frase}`);
     } else {
-      const frase = pipFraseIncentivo(hiperfoco);
+      const frase = lumiFraseIncentivo(hiperfoco);
       toast(frase);
       if (voiceOn) speak(frase);
     }
@@ -199,7 +199,7 @@ function NeuroAtividade() {
         <div className="flex items-center gap-2">
           <button
             onClick={toggleVoice}
-            title={voiceOn ? "Desligar voz da PIP" : "Ligar voz da PIP"}
+            title={voiceOn ? "Desligar voz da LUMI" : "Ligar voz da LUMI"}
             className={`flex items-center gap-1 text-xs font-bold rounded-full border px-3 py-1 transition ${voiceOn ? "bg-success/10 border-success/40 text-success" : "bg-muted border-border text-muted-foreground"}`}
           >
             {voiceOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
@@ -224,7 +224,7 @@ function NeuroAtividade() {
             className="flex items-center gap-2 text-xs font-bold rounded-full bg-primary/10 border border-primary/30 px-3 py-1 hover:bg-primary/20 disabled:opacity-50"
           >
             <Volume2 size={14} className={isSpeaking ? "animate-pulse" : ""} />
-            {isSpeaking ? "PIP falando..." : "Ouvir PIP de novo"}
+            {isSpeaking ? "LUMI falando..." : "Ouvir LUMI de novo"}
           </button>
         </div>
       )}
@@ -403,14 +403,14 @@ function Motorzinho({ p, onDone }: any) {
   const bank = MOTORZINHO_BANK[tag];
   const item = bank[(p.bankIndex ?? 0) % bank.length];
 
-  const { speak, isSpeaking } = usePipVoice();
+  const { speak, isSpeaking } = useLumiVoice();
   const { listen, isListening, supported: micSupported } = useSpeechMatcher();
 
   const [phase, setPhase] = useState<"idle" | "demo" | "your-turn" | "listening" | "result">("idle");
   const [lastTranscript, setLastTranscript] = useState<string>("");
   const [lastMatched, setLastMatched] = useState<boolean | null>(null);
 
-  // PIP demonstra: "P, P, P, P... princesa!"
+  // LUMI demonstra: "P, P, P, P... princesa!"
   const fraseDemo = `${item.texto_prolongado.replace(/\s+/g, ", ")}... ${item.palavra_alvo}!`;
   const fraseAbertura = `Vamos ligar o motorzinho, ${nome}? Escuta a professora: ${fraseDemo} Agora é a sua vez!`;
 
@@ -448,13 +448,13 @@ function Motorzinho({ p, onDone }: any) {
 
   return (
     <div className="text-center">
-      {/* Balão do PIP */}
+      {/* Balão do LUMI */}
       <div className="flex items-start gap-3 mb-6 text-left">
         <div className="shrink-0">{ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO") ? <img src={ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO")} className="w-16 h-16 object-contain" alt="" /> : <div className="w-16 h-16 rounded-full bg-primary/15 border-2 border-primary/30" />}</div>
         <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm flex-1">
           <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
           <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
-            PIP – Professora {isSpeaking && <Volume2 size={12} className="animate-pulse" />}
+            LUMI – Professora {isSpeaking && <Volume2 size={12} className="animate-pulse" />}
           </div>
           <p className="text-base font-bold text-foreground">{pipMsg}</p>
         </div>
