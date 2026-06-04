@@ -86,6 +86,8 @@ export const ALPHABETIZATION_DATA = {
   completeWord: [
     { word: 'GATO', display: 'GA _ O', missing: 'TO', distractors: ['TA', 'TU'], visual: 'cat', code: 'EF01LP05' },
     { word: 'BOLA', display: 'BO _ A', missing: 'LA', distractors: ['LE', 'LO'], visual: 'circle', code: 'EF01LP05' },
+    { word: 'PATO', display: 'PA _ O', missing: 'TO', distractors: ['TA', 'TU'], visual: 'bird', code: 'EF01LP05' },
+    { word: 'CASA', display: 'CA _ A', missing: 'SA', distractors: ['SE', 'SI'], visual: 'home', code: 'EF01LP05' },
   ],
   shortReading: [
     { text: 'A BOLA É AZUL.', question: 'Qual é a cor da bola?', options: ['Azul', 'Vermelha'], answer: 'Azul', visual: 'circle', code: 'EF01LP07' },
@@ -112,6 +114,7 @@ export const FIRST_GRADE_MATH = {
   visualAddition: [
     { group1: { n: 2, item: 'apple' }, group2: { n: 1, item: 'apple' }, answer: 3, options: [2, 3, 4], code: 'EF01MA05' },
     { group1: { n: 3, item: 'star' }, group2: { n: 2, item: 'star' }, answer: 5, options: [4, 5, 6], code: 'EF01MA05' },
+    { group1: { n: 5, item: 'apple' }, group2: { n: 2, item: 'apple' }, answer: 7, options: [6, 7, 8], code: 'EF01MA05' },
   ],
   visualSubtraction: [
     { total: { n: 4, item: 'fish' }, take: 1, answer: 3, options: [2, 3, 4], code: 'EF01MA06' },
