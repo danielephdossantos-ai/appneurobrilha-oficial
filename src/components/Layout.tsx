@@ -5,9 +5,9 @@ import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
   ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck,
-  Target
+  Target, Sprout, Star, Apple, Bird, BabyChick, Rainbow, Trees, Butterfly, Library, Telescope, TestTube, Map, Satellite, Ruler, Trophy, Users, Gift, School, PenTool
 } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, ComponentType } from "react";
 import { supabase } from "@/database/supabase/client";
 import { NotificationBell } from "./NotificationBell";
 import { KidCard } from "./ui/KidCard";
@@ -124,8 +124,8 @@ export function Shell({ children }: { children?: ReactNode }) {
     >
       <aside className="hidden md:flex w-80 shrink-0 flex-col bg-sidebar border-r-4 border-sidebar-border p-6 gap-4 overflow-y-auto">
         <Link to="/" className="flex items-center gap-3 px-2 py-4 mb-2">
-          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-3xl shadow-glow transform -rotate-3">
-            🌱
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-success grid place-items-center text-white shadow-glow transform -rotate-3">
+            <Sprout className="h-7 w-7" />
           </div>
           <div>
             <div className="font-black text-2xl text-sidebar-foreground leading-none tracking-tight">NeuroBrilha</div>
@@ -224,7 +224,7 @@ export function Shell({ children }: { children?: ReactNode }) {
         <header className="sticky top-0 z-20 backdrop-blur-xl bg-background/70 border-b-4 border-sidebar-border px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/" className="font-extrabold flex items-center gap-2 md:hidden">
-              <span className="text-2xl">🌱</span> NeuroBrilha
+              <Sprout className="h-6 w-6 text-primary" /> NeuroBrilha
             </Link>
             {activeChild && (
               <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-muted/50">
@@ -345,14 +345,20 @@ function MobileNav({ path }: { path: string }) {
 }
 
 
-export function PageHeader({ title, subtitle, emoji }: { title: string; subtitle?: string; emoji?: string }) {
+export function PageHeader({ title, subtitle, emoji, icon: Icon }: { title: string; subtitle?: string; emoji?: string; icon?: ComponentType<{ className?: string }> }) {
   return (
     <div className="mb-6 md:mb-8">
       <div className="flex items-center gap-3">
-        {emoji && <span className="text-4xl md:text-5xl">{emoji}</span>}
+        {Icon ? (
+          <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl bg-primary/10 grid place-items-center text-primary shadow-sm border-2 border-primary/20">
+            <Icon className="h-7 w-7 md:h-8 md:w-8" />
+          </div>
+        ) : emoji ? (
+          <span className="text-4xl md:text-5xl">{emoji}</span>
+        ) : null}
         <div>
-          <h1 className="text-2xl md:text-4xl">{title}</h1>
-          {subtitle && <p className="text-muted-foreground mt-1">{subtitle}</p>}
+          <h1 className="text-2xl md:text-4xl font-black">{title}</h1>
+          {subtitle && <p className="text-muted-foreground mt-1 font-medium">{subtitle}</p>}
         </div>
       </div>
     </div>
