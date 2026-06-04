@@ -89,6 +89,17 @@ export class MathGenerator extends BaseGenerator {
         };
       }
 
+      if (type === 'ei-comparacao') {
+        const item = this.pickRandom(EARLY_CHILDHOOD.matematica.comparacao);
+        return {
+          q: `Qual possui mais ${item.item}?`,
+          visual: `Grupo A: ${item.groupA} vs Grupo B: ${item.groupB}`,
+          answer: item.answer,
+          options: item.options,
+          miniGameType: "bubbles"
+        };
+      }
+
       // ===== 1º ANO (MATEMÁTICA VISUAL) =====
       if (type === 'alfa-sum') {
         const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
