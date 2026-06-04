@@ -16,6 +16,7 @@ import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
 import { ActivityProceduralService } from "@/modules/escola-brilha/services/ActivityProceduralService";
+import { SupabasePedagogicalService } from "@/modules/escola-brilha/services/SupabasePedagogicalService";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { useMascot } from "@/contexts/MascotContext";
