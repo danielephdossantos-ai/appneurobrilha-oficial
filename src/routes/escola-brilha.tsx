@@ -231,19 +231,6 @@ function Escola() {
     try { return localStorage.getItem("escola_teen_guided") === "1"; } catch { return false; }
   });
 
-  const currentMascotMessage = useMemo(() => {
-    if (aula?.guided && eiStep <= 5) {
-      return eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
-             eiStep === 2 ? "Olha bem para isto..." :
-             eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
-             eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
-             (aula.etapa4_como_monta || "Vamos resolver juntos!");
-    }
-    if (aula?.guided && eiStep === 6) {
-      return aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!";
-    }
-    return null;
-  }, [aula, eiStep, childNome]);
 
 
   const grades = [
