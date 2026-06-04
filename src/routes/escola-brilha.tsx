@@ -495,11 +495,11 @@ function Escola() {
         <div className="mb-4 flex items-end gap-3 md:gap-4">
           {/* Avatar do mascote apontando para o balão */}
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking overflow-hidden">
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center animate-float-thinking overflow-hidden">
               {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                 <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
               ) : (
-                activeMascot?.mascot?.image_url || "🐦"
+                <RenderMascote icon={activeMascot?.mascot?.image_url || Bird} className="w-16 h-16 text-primary" />
               )}
             </div>
             <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
@@ -515,10 +515,10 @@ function Escola() {
               <div className="absolute -left-[9px] bottom-[22px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[11px] border-r-white" />
 
               <p className="font-extrabold text-lg md:text-xl text-primary leading-snug">
-                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}! 🌱
+                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}!
               </p>
               <p className="text-sm md:text-base text-foreground/80 mt-1 font-bold">
-                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA CARINHA LÁ EMBAIXO! 👇
+                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA MATÉRIA LÁ EMBAIXO!
               </p>
             </div>
           </div>
@@ -528,14 +528,16 @@ function Escola() {
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
-          <div className="text-5xl">{activeChild.avatar}</div>
+          <div className="text-5xl">
+            <RenderVisual value={activeChild.avatar} className="h-12 w-12 text-primary" />
+          </div>
           <div className="flex-1">
             <div className="font-extrabold text-lg">
               {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
             </div>
             <div className="text-sm text-muted-foreground">
               {ei
-                ? "Escolha uma carinha lá embaixo 👇"
+                ? "Escolha uma matéria lá embaixo"
                 : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
             </div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
@@ -558,7 +560,7 @@ function Escola() {
             <div className="relative">
               <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
               <div className="text-2xl font-extrabold">{t.scene}</div>
-              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo ✨</div>
+              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo</div>
             </div>
           </div>
         );
@@ -568,7 +570,7 @@ function Escola() {
         <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
         {isTeen && (
           <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
-            <div className="text-2xl">🎓</div>
+            <div className="text-2xl"><GraduationCap className="h-6 w-6 text-primary" /></div>
             <div className="flex-1">
               <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
               <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
@@ -706,11 +708,11 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Mascote Guia */}
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
            ) : (
-             activeMascot?.mascot?.image_url || materiaMeta.mascote
+             <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
            )}
         </div>
         <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
@@ -727,8 +729,8 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {eiStep === 1 && (
           <div className="text-center space-y-4">
-            <div className="text-[150px] md:text-[200px] drop-shadow-2xl animate-bounce-slow">
-              {aula.visual || "🍎"}
+            <div className="drop-shadow-2xl animate-bounce-slow">
+              <RenderVisual value={aula.visual || "apple"} className="h-40 w-40 text-primary" />
             </div>
             <p className="text-2xl font-black uppercase text-primary">
               {aula.frase_apresentacao || `ESTA É UMA ${palavraFoco}`}
@@ -738,7 +740,9 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 2 && (
           <div className="text-center space-y-6">
-            <div className="text-9xl mb-4">{aula.visual || "🍎"}</div>
+            <div className="mb-4">
+              <RenderVisual value={aula.visual || "apple"} className="h-32 w-32 text-primary mx-auto" />
+            </div>
             <div className="bg-primary text-white text-7xl md:text-9xl font-black px-12 py-6 rounded-3xl shadow-glow tracking-tighter">
               {palavraFoco}
             </div>
@@ -794,7 +798,9 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 5 && (
           <div className="w-full space-y-6">
-            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
+            <div className="text-center mb-4">
+              <RenderVisual value={aula.visual || "apple"} className="h-28 w-28 text-primary mx-auto" />
+            </div>
             <div className="grid grid-cols-1 gap-4">
               {sortedOpcoes.map((opt: string, i: number) => (
                 <button
@@ -826,14 +832,16 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 7 && (
           <div className="text-center space-y-6">
-             <div className="text-[180px] animate-bounce-slow">✨</div>
+             <div className="animate-bounce-slow">
+               <Sparkles className="h-40 w-40 text-sun mx-auto" />
+             </div>
              <h3 className="text-4xl font-black text-primary uppercase">Você Brilhou!</h3>
              <p className="text-xl font-bold text-muted-foreground">Agora você já sabe tudo sobre {palavraFoco}!</p>
              <button
                onClick={() => onComplete(true)}
                className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-8"
              >
-               CONCLUIR AULA! 🌟
+               CONCLUIR AULA!
              </button>
           </div>
         )}
