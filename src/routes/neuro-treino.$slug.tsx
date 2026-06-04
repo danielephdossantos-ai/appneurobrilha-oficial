@@ -437,7 +437,7 @@ function Motorzinho({ p, onDone }: any) {
     }
   };
 
-  const lumiMsg = (() => {
+  const pipMsg = (() => {
     if (phase === "idle") return `Vamos ligar o motorzinho, ${nome}?`;
     if (phase === "demo") return `Escuta a professora falando o som da letra ${item.letra_fonema}...`;
     if (phase === "your-turn") return `Agora é a sua vez, ${nome}! Aperta o microfone e fala: ${item.palavra_alvo}`;
@@ -456,7 +456,7 @@ function Motorzinho({ p, onDone }: any) {
           <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
             LUMI – Professora {isSpeaking && <Volume2 size={12} className="animate-pulse" />}
           </div>
-          <p className="text-base font-bold text-foreground">{lumiMsg}</p>
+          <p className="text-base font-bold text-foreground">{pipMsg}</p>
         </div>
       </div>
 

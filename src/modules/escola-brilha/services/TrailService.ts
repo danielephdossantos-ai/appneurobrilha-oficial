@@ -22,13 +22,11 @@ export class TrailService {
 
     // Fetch all skills for this subject
     // We assume 1st Year (Ensino Fundamental) for now as requested
-    const skills = await this.pedagogicalService.getSkillsByGradeAndSubject('Educação Infantil', subject);
-    const primarySkills = await this.pedagogicalService.getSkillsByGradeAndSubject('1º Ano', subject);
-    const allSkills = [...skills, ...primarySkills];
+    const skills = await this.pedagogicalService.getSkillsByGradeAndSubject('1º Ano', subject);
     
-    if (allSkills.length === 0) return [];
+    if (skills.length === 0) return [];
 
-    const missions: Mission[] = await Promise.all(allSkills.map(async (skill) => {
+    const missions: Mission[] = await Promise.all(skills.map(async (skill) => {
       const progress = await this.pedagogicalService.getProgress(alunoId, skill.codigo_bncc);
       const isUnlocked = await this.pedagogicalService.isSkillUnlocked(alunoId, skill.codigo_bncc);
       

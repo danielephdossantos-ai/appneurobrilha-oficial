@@ -94,14 +94,7 @@ export const SchoolMap: React.FC = () => {
               <Card 
                 key={mission.id} 
                 className={`transition-all ${mission.status === 'locked' ? 'opacity-50' : 'hover:shadow-md cursor-pointer'}`}
-                onClick={() => {
-                  console.log('Clicked mission:', mission.id, 'Status:', mission.status);
-                  if (mission.status !== 'locked') {
-                    setActiveLesson(mission.id);
-                  } else {
-                    alert('Esta habilidade ainda está bloqueada. Você precisa de 80% de domínio na anterior para avançar!');
-                  }
-                }}
+                onClick={() => mission.status !== 'locked' && setActiveLesson(mission.id)}
               >
                 <CardContent className="p-6 flex items-center justify-between">
                   <div className="flex items-center gap-6">
