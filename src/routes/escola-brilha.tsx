@@ -941,17 +941,6 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
 
   return (
     <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Mascote guia */}
-      <div className="flex items-center gap-4 mb-2">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0">
-          {activeMascot?.mascot?.image_url?.startsWith("http") ? (
-            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-          ) : (
-            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
-          )}
-        </div>
-        <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
-      </div>
 
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {/* TELA 1 — VISUAL */}
