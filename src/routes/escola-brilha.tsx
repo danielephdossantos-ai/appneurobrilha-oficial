@@ -1218,7 +1218,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   };
 
   // Stepper pedagógico: alfa=7, math=6, geral=8 (Descobrir→Recompensa)
-  const totalSteps = isAlfaFlow ? 7 : isMathFlow ? 6 : 8;
+  const totalSteps = (isAlfaFlow || isMathFlow) ? 5 : 8;
   const stepIndex = isAlfaFlow ? eiStep : isMathFlow ? mathStep : (aula.isEI ? eiStep : eiStep);
 
   // Mapa eiStep (1..6) → passo pedagógico (1..8) para o geral
