@@ -49,11 +49,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
-  const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
+  const isLumi = !activeMascot || activeMascot.mascot.name === 'Lumi' || activeMascot.mascot.name === 'Pip';
 
   const getMascotImage = () => {
-    if (!isPip) {
-      return activeMascot?.mascot.image_url || pipMascot;
+    if (!isLumi) {
+      return activeMascot?.mascot.image_url || lumiMascot;
     }
 
     const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
@@ -63,11 +63,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
       return skins[firstHyperfocus];
     }
 
-    if (firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
-      return PIP_SKINS[firstHyperfocus];
+    if (firstHyperfocus && LUMI_SKINS[firstHyperfocus]) {
+      return LUMI_SKINS[firstHyperfocus];
     }
 
-    return pipMascot;
+    return lumiMascot;
   };
 
   const mascotImage = getMascotImage();
@@ -95,7 +95,7 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
 
           <img
             src={mascotImage}
-            alt="Pip - O Guardião dos Desafios"
+            alt="Lumi - O Guardião dos Desafios"
             className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             draggable={false}
           />
