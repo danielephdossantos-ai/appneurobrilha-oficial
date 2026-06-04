@@ -2,7 +2,7 @@
 // ====== Educação Infantil (4-5 anos) — conteúdo concreto, visual, simples ======
 // BNCC: Campos de Experiência
 export const EARLY_CHILDHOOD = {
-  // ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO
+  // TRILHA DAS PALAVRAS (EI03EF01 - EI03EF05)
   linguagem: {
     vowels: [
       { letter: 'A', exemplo: 'ABELHA', emoji: '🐝', distractors: ['P', 'O'] },
@@ -16,8 +16,12 @@ export const EARLY_CHILDHOOD = {
       { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], emoji: '🏠' },
       { word: 'DADO', startLetter: 'D', options: ['D', 'B', 'T'], emoji: '🎲' },
     ],
+    rimas: [
+      { word: 'CASA', answer: 'ASA', options: ['ASA', 'PATO', 'GATO'], emoji: '🏠' },
+      { word: 'GATO', answer: 'PATO', options: ['PATO', 'BALÃO', 'CASA'], emoji: '🐱' },
+    ]
   },
-  // ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES
+  // TRILHA DOS NÚMEROS (EI03ET01 - EI03ET07)
   matematica: {
     contagem: [
       { n: 3, item: 'maçãs', emoji: '🍎', options: [1, 3, 5, 6] },
@@ -28,13 +32,25 @@ export const EARLY_CHILDHOOD = {
       { n: 4, item: 'estrelas', emoji: '⭐' },
       { n: 3, item: 'corações', emoji: '❤️' },
     ],
-    formas: [
-      { nome: 'CÍRCULO', emoji: '⭕', exemplo: 'a roda' },
-      { nome: 'QUADRADO', emoji: '🟦', exemplo: 'a janela' },
-      { nome: 'TRIÂNGULO', emoji: '🔺', exemplo: 'a fatia de pizza' },
-    ],
+    comparacao: [
+      { item: 'maçãs', groupA: 2, groupB: 5, answer: 'B', options: ['A', 'B'] },
+      { item: 'estrelas', groupA: 4, groupB: 1, answer: 'A', options: ['A', 'B'] },
+    ]
   },
-  // TRAÇOS, SONS, CORES E FORMAS
+  // TRILHA DAS CORES E FORMAS (EI03TS02 - EI03TS03)
+  formas_cores: {
+    formas: [
+      { nome: 'CÍRCULO', emoji: '⭕', visual: 'circle' },
+      { nome: 'QUADRADO', emoji: '🟦', visual: 'square' },
+      { nome: 'TRIÂNGULO', emoji: '🔺', visual: 'triangle' },
+    ],
+    cores: [
+      { nome: 'VERMELHO', hex: '#EF4444', emoji: '🍎' },
+      { nome: 'AZUL', hex: '#3B82F6', emoji: '🔵' },
+      { nome: 'AMARELO', hex: '#FACC15', emoji: '☀️' },
+    ]
+  },
+  // Legado para evitar erros de compilação durante migração
   artes_sons: {
     animais: [
       { nome: 'VACA', emoji: '🐮', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐮 Muuu' },
@@ -47,7 +63,20 @@ export const EARLY_CHILDHOOD = {
       { nome: 'AMARELO', emoji: '☀️' },
     ]
   },
-  // O EU, O OUTRO E O NÓS / FLORESTA DA ATENÇÃO
+  // TRILHA DAS EMOÇÕES (EI03EO01 - EI03EO04)
+  emocoes: [
+    { label: 'FELIZ', emoji: '😀', emotion: 'happy' },
+    { label: 'TRISTE', emoji: '😢', emotion: 'sad' },
+    { label: 'BRAVO', emoji: '😡', emotion: 'angry' },
+    { label: 'SONO', emoji: '😴', emotion: 'sleeping' },
+  ],
+  // TRILHA DOS MOVIMENTOS (EI03CG01 - EI03CG04)
+  movimentos: {
+    tracado: [
+      { points: [{x:10, y:50}, {x:90, y:50}], label: 'Linha Reta' },
+      { points: [{x:50, y:10}, {x:50, y:90}], label: 'Linha em Pé' },
+    ]
+  },
   cognitivo: {
     memory: ['🍎', '🐶', '⭐', '🎈', '🌻', '🚗'],
     sequence: ['🍎', '🍌', '🍇'],

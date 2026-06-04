@@ -7,6 +7,12 @@ export class MathGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-numeros') {
+        const r = Math.random();
+        if (r < 0.33) return 'ei-contagem';
+        if (r < 0.66) return 'ei-drag-quantity';
+        return 'ei-comparacao';
+      }
       const r = Math.random();
       if (r < 0.5) return 'ei-contagem';
       return 'ei-drag-quantity';
@@ -80,6 +86,17 @@ export class MathGenerator extends BaseGenerator {
           targetCount: item.n,
           symbol: item.emoji,
           miniGameType: "quantity"
+        };
+      }
+
+      if (type === 'ei-comparacao') {
+        const item = this.pickRandom(EARLY_CHILDHOOD.matematica.comparacao);
+        return {
+          q: `Qual possui mais ${item.item}?`,
+          visual: `Grupo A: ${item.groupA} vs Grupo B: ${item.groupB}`,
+          answer: item.answer,
+          options: item.options,
+          miniGameType: "bubbles"
         };
       }
 

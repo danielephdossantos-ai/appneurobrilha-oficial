@@ -7,6 +7,9 @@ export class CognitiveGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-emocoes') {
+        return 'ei-emotions';
+      }
       return Math.random() < 0.5 ? "ei-memory" : "ei-missing";
     }
     if (input.difficulty < 0.5) return "memory-match";
@@ -19,6 +22,7 @@ export class CognitiveGenerator extends BaseGenerator {
       case "ei-memory":
       case "memory-match": return "Floresta da Atenção";
       case "ei-missing": return "Floresta da Atenção";
+      case "ei-emotions": return "Trilha das Emoções";
       case "sequence-recall": return "Mestre das Cores";
       default: return "Treino Cerebral";
     }
@@ -30,6 +34,7 @@ export class CognitiveGenerator extends BaseGenerator {
       case "ei-memory": return "Encontre os pares dos amigos!";
       case "memory-match": return "Encontre os pares correspondentes.";
       case "ei-missing": return "O que sumiu? Olhe bem!";
+      case "ei-emotions": return "Como o personagem está se sentindo?";
       case "sequence-recall": return "Repita a sequência de cores que você viu.";
       default: return "Prepare-se para o desafio!";
     }
@@ -39,6 +44,17 @@ export class CognitiveGenerator extends BaseGenerator {
     const type = this.getActivityType(input);
     
     if (isEarlyChildhood(input.grade)) {
+      if (type === "ei-emotions") {
+        const item = this.pickRandom(EARLY_CHILDHOOD.emocoes);
+        const options = EARLY_CHILDHOOD.emocoes.map(e => e.label);
+        return {
+          q: "Como o personagem está?",
+          visual: item.emoji,
+          answer: item.label,
+          options: this.shuffle(options),
+          miniGameType: "bubbles"
+        };
+      }
       if (type === "ei-memory") {
         return {
           opcoes: EARLY_CHILDHOOD.cognitivo.memory.slice(0, 3), // 3 pares = 6 cartas

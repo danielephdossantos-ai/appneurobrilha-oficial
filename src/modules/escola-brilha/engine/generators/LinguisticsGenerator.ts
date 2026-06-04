@@ -7,6 +7,13 @@ export class LinguisticsGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
+      if (input.subject === 'trilha-palavras') {
+        const r = Math.random();
+        if (r < 0.25) return 'ei-vogal';
+        if (r < 0.5) return 'ei-drag-letter';
+        if (r < 0.75) return 'ei-animal-sound';
+        return 'ei-rimas';
+      }
       const r = Math.random();
       if (r < 0.33) return 'ei-vogal';
       if (r < 0.66) return 'ei-drag-letter';
@@ -34,9 +41,10 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-vogal": return "Cidade das Letras";
-      case "ei-drag-letter": return "Cidade das Letras";
-      case "ei-animal-sound": return "Cidade das Letras";
+      case "ei-vogal": return "Trilha das Palavras";
+      case "ei-drag-letter": return "Trilha das Palavras";
+      case "ei-animal-sound": return "Trilha das Palavras";
+      case "ei-rimas": return "Trilha das Palavras";
       case "alfa-syllable": return "Cidade das Letras";
       case "alfa-complete": return "Cidade das Letras";
       case "alfa-reading": return "Cidade das Letras";
@@ -104,6 +112,17 @@ export class LinguisticsGenerator extends BaseGenerator {
           visual: a.emoji,
           answer: a.answer,
           options: a.options,
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'ei-rimas') {
+        const item = this.pickRandom(EARLY_CHILDHOOD.linguagem.rimas);
+        return {
+          q: `${item.word} combina com...?`,
+          visual: item.emoji,
+          answer: item.answer,
+          options: item.options,
           miniGameType: "bubbles"
         };
       }
