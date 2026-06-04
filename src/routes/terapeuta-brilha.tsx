@@ -13,7 +13,7 @@ export const Route = createFileRoute("/terapeuta-brilha")({
 function Terapeuta() {
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
-  const mascotName = activeMascot?.mascot?.name || "Pip";
+  const mascotName = activeMascot?.mascot?.name || "Lumi";
   const mascotPayload = activeMascot ? {
     name: activeMascot.mascot?.name,
     description: activeMascot.mascot?.description,
