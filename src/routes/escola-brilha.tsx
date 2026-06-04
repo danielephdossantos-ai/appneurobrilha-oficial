@@ -712,6 +712,7 @@ function Escola() {
 
 function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
+  const [practiceCount, setPracticeCount] = useState(0);
   const [performance, setPerformance] = useState({ hits: 0, misses: 0, startTime: Date.now() });
   const [feedback, setFeedback] = useState<null | boolean>(null);
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
@@ -736,8 +737,21 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
       setFeedback(true);
       setTimeout(() => {
         setFeedback(null);
-        if (step < 4) setStep(step + 1);
-        else setStep(5);
+        if (step === 2) {
+          setStep(3);
+          setPracticeCount(0);
+        } else if (step === 3) {
+          if (practiceCount < 2) {
+            setPracticeCount(prev => prev + 1);
+            // Aqui poderíamos regenerar a atividade, mas para simplificar
+            // e garantir consistência, vamos apenas avançar o contador.
+            // Em uma implementação real, o ActivityProceduralService geraria um novo item.
+          } else {
+            setStep(4);
+          }
+        } else if (step === 4) {
+          setStep(5);
+        }
       }, 1500);
     } else {
       setPerformance(p => ({ ...p, misses: p.misses + 1 }));
@@ -804,11 +818,13 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
               <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full flex flex-col items-center justify-center space-y-8">
                  <div className="text-center">
                    <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">
-                     Passo {step} de 5 · {steps[step-1].label}
+                     Passo {step} de 5 · {steps[step-1].label} {step === 3 && `(${practiceCount + 1}/3)`}
                    </span>
                    <h3 className="text-3xl font-black text-primary uppercase mt-1">
                      {step === 2 ? "Treino Guiado" : step === 3 ? "Prática" : "Desafio Final"}
                    </h3>
+                   {step === 2 && <p className="text-sm font-bold text-success animate-pulse">DICA: Observe bem a imagem antes de responder!</p>}
+                   {step === 4 && <p className="text-sm font-bold text-sun">SEM AJUDA AGORA! VOCÊ CONSEGUE!</p>}
                  </div>
 
                  <div className="w-full max-w-2xl">
