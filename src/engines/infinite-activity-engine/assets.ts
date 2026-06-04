@@ -64,15 +64,15 @@ export const OBJECTS = [
 ];
 
 export const CHARACTERS = [
-  { id: "char_1", name: "Robô Bio", role: "guide", personality: "logical" },
-  { id: "char_2", name: "Fada Lumi", role: "guide", personality: "kind" },
-  { id: "char_3", name: "Pirata Barba-Azul", role: "adventure", personality: "brave" },
-  { id: "char_4", name: "Astronauta Leo", role: "space", personality: "curious" },
-  { id: "char_5", name: "Pajé Curumim", role: "nature", personality: "wise" },
-  { id: "char_6", name: "Cientista Ester", role: "science", personality: "smart" },
-  { id: "char_7", name: "Pintora Tarsila", role: "arts", personality: "creative" },
-  { id: "char_8", name: "Dino Guia", role: "history", personality: "friendly" },
-  { id: "char_9", name: "Ursinho Calma", role: "emocional", personality: "peaceful" }
+  { id: "char_1", name: "Pip", role: "guide", personality: "logical" },
+  { id: "char_2", name: "Pipa", role: "guide", personality: "kind" },
+  { id: "char_3", name: "Pip Piloto", role: "adventure", personality: "brave" },
+  { id: "char_4", name: "Pip Astronauta", role: "space", personality: "curious" },
+  { id: "char_5", name: "Pip Explorador", role: "nature", personality: "wise" },
+  { id: "char_6", name: "Pipa Doutora", role: "science", personality: "smart" },
+  { id: "char_7", name: "Pipa Artista", role: "arts", personality: "creative" },
+  { id: "char_8", name: "Pip Dino", role: "history", personality: "friendly" },
+  { id: "char_9", name: "Pip Amigo", role: "emocional", personality: "peaceful" }
 ];
 
 export const EMOTIONS = [
