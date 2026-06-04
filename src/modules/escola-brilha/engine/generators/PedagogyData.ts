@@ -48,7 +48,6 @@ export function isEarlyChildhood(grade?: string): boolean {
   return g.includes('infantil') || g.includes('pré') || g.includes('pre');
 }
 
-
 export const ALPHABETIZATION_DATA = {
   syllableFormation: [
     { parts: ['M', 'A'], result: 'MA', distractors: ['ME', 'MO'] },
@@ -87,7 +86,57 @@ export const FIRST_GRADE_MATH = {
 
 export const LINGUISTICS_DATA = {
   vowels: ['a', 'e', 'i', 'o', 'u'],
-...
+  consonants: ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'],
+  simpleSyllables: [
+    'ba', 'be', 'bi', 'bo', 'bu',
+    'ca', 'ce', 'ci', 'co', 'cu',
+    'da', 'de', 'di', 'do', 'du',
+    'fa', 'fe', 'fi', 'fo', 'fu',
+    'ga', 'ge', 'gi', 'go', 'gu',
+    'la', 'le', 'li', 'lo', 'lu',
+    'ma', 'me', 'mi', 'mo', 'mu',
+    'na', 'ne', 'ni', 'no', 'nu',
+    'pa', 'pe', 'pi', 'po', 'pu',
+    'ra', 're', 'ri', 'ro', 'ru',
+    'sa', 'se', 'si', 'so', 'su',
+    'ta', 'te', 'ti', 'to', 'tu',
+    'va', 've', 'vi', 'vo', 'vu',
+  ],
+  words: {
+    beginner: [
+      { word: 'BOLA', syllables: ['BO', 'LA'], category: 'objects' },
+      { word: 'CASA', syllables: ['CA', 'SA'], category: 'objects' },
+      { word: 'DADO', syllables: ['DA', 'DO'], category: 'objects' },
+      { word: 'FOCA', syllables: ['FO', 'CA'], category: 'animals' },
+      { word: 'GATO', syllables: ['GA', 'TO'], category: 'animals' },
+    ],
+    intermediate: [
+      { word: 'BONECA', syllables: ['BO', 'NE', 'CA'], category: 'toys' },
+      { word: 'CAVALO', syllables: ['CA', 'VA', 'LO'], category: 'animals' },
+      { word: 'PANELA', syllables: ['PA', 'NE', 'LA'], category: 'objects' },
+    ],
+    advanced: [
+      { word: 'ASTRONAUTA', syllables: ['AS', 'TRO', 'NAU', 'TA'], category: 'professions' },
+      { word: 'BIBLIOTECA', syllables: ['BI', 'BLIO', 'TE', 'CA'], category: 'places' },
+    ]
+  },
+  texts: {
+    grade6: [
+      { text: "O sol brilhava intensamente sobre a colina, iluminando as flores silvestres.", question: "Qual é o tema principal?", options: ["Clima", "Natureza", "Flores", "Sol"], answer: "Natureza" },
+    ],
+    grade9: [
+      { text: "A globalização é um fenômeno complexo que afeta a economy e a cultura.", question: "O autor sugere que a globalização é:", options: ["Simples", "Multifacetada", "Apenas econômica", "Irrelevante"], answer: "Multifacetada" }
+    ]
+  }
+};
+
+export const MATH_DATA = {
+  shapes: ['circle', 'square', 'triangle', 'rectangle', 'star', 'heart'],
+  colors: ['red', 'blue', 'green', 'yellow', 'purple', 'orange'],
+  patterns: [
+    { sequence: ['A', 'B', 'A'], next: 'B' },
+    { sequence: ['A', 'A', 'B', 'A'], next: 'A' },
+  ],
   operations: {
     grade7: [
       { q: "(-5) + (+3)", a: -2, options: [-2, 8, -8, 2] },
