@@ -319,7 +319,6 @@ function Escola() {
         
         if (explanation && dbActivities.length > 0) {
           const activity = dbActivities[0];
-          const activity = dbActivities[0];
           const treino = dbActivities.find(a => a.nivel === 'treino') || activity;
           const pratica = dbActivities.filter(a => a.nivel === 'pratica');
           const desafio = dbActivities.find(a => a.nivel === 'desafio') || activity;
