@@ -1075,37 +1075,38 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   const currentMascotMessage = useMemo(() => {
     if (aula?.guided) {
       if (isAlfaFlow) {
-        if (eiStep === 1) return aula.etapa1_intro || `Veja só, ${childNome}!`;
-        if (eiStep === 2) return aula.etapa2_conceito || "Olha como se escreve!";
-        if (eiStep === 3) return aula.etapa3_exemplo || "Vamos separar os pedacinhos?";
-        if (eiStep === 4) return aula.etapa4_como_monta || "Junte as peças!";
-        if (eiStep === 5) return aula.etapa5_instrucao || "Onde está o nome certo?";
-        if (eiStep === 6) return "Use o dedo para desenhar a palavra!";
-        if (eiStep === 7) return aula.reforco_positivo || "Incrível!";
+        if (eiStep === 1) return "Vamos começar com uma música?";
+        if (eiStep === 2) return `Este é o som da letra ${aula.palavra_foco?.[0] || "M"}!`;
+        if (eiStep === 3) return "Veja como as letras se juntam!";
+        if (eiStep === 4) return "Qual é a palavra certa?";
+        if (eiStep === 5) return "Incrível! Você brilhou!";
       }
       
       if (isMathFlow) {
-        if (mathStep === 1) return `Veja, ${childNome}! Temos ${aula.content?.a || ""}!`;
-        if (mathStep === 2) return "Toque em cada um para contar!";
-        if (mathStep === 3) return `Agora juntamos ${aula.content?.a || ""} com ${aula.content?.b || ""}!`;
-        if (mathStep === 4) return "Arraste os números pros lugares!";
-        if (mathStep === 5) return "Toque na resposta certa!";
-        if (mathStep === 6) return "Veja a conta armada! Você arrasou!";
+        if (mathStep === 1) return "Vamos contar juntos?";
+        if (mathStep === 2) return "Olha esse número!";
+        if (mathStep === 3) return "Agora vamos calcular!";
+        if (mathStep === 4) return "Qual o resultado final?";
+        if (mathStep === 5) return "Você é um gênio da matemática!";
       }
 
       if (eiStep <= 5) {
-        return eiStep === 1 ? (aula.etapa1_intro || aula.ensino || `Olha, ${childNome}! Vamos descobrir algo novo!`) :
-               eiStep === 2 ? "Olha bem para isto..." :
-               eiStep === 3 ? (aula.etapa2_conceito || aula.ensino || "Vou te explicar...") :
-               eiStep === 4 ? (aula.etapa3_exemplo || aula.demo || "Veja um exemplo!") :
-               (aula.etapa4_como_monta || "Vamos resolver juntos!");
+        const msgs = [
+          "Vamos descobrir algo novo!",
+          "Olha bem para isto...",
+          "Vou te explicar como funciona.",
+          "Veja esse exemplo legal!",
+          "Vamos tentar fazer juntos?"
+        ];
+        return msgs[eiStep - 1];
       }
       if (eiStep === 6) {
-        return aula.etapa5_instrucao || aula.pergunta || "VAMOS JOGAR!";
+        return "AGORA É COM VOCÊ!";
       }
     }
     return null;
   }, [aula, eiStep, mathStep, isAlfaFlow, isMathFlow, childNome]);
+
 
 
   const [visualStepState, setVisualStepState] = useState(1);
