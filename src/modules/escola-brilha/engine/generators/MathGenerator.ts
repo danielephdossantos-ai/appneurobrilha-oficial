@@ -62,7 +62,7 @@ export class MathGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-contagem') {
-        const item = EARLY_CHILDHOOD.contagem[0]; // 3 apples
+        const item = EARLY_CHILDHOOD.matematica.contagem[0]; // 3 apples
         return {
           q: "Quantas maçãs existem?",
           visual: item.emoji.repeat(item.n),
@@ -74,7 +74,7 @@ export class MathGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-drag-quantity') {
-        const item = EARLY_CHILDHOOD.contagem[1]; // 4 stars
+        const item = EARLY_CHILDHOOD.matematica.drag[0]; // 4 stars
         return {
           q: `Coloque ${item.n} estrelas na caixa`,
           targetCount: item.n,
