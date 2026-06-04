@@ -1244,6 +1244,17 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
             {aula.guided ? (
               <div className="min-h-[400px] flex flex-col items-center justify-center p-4">
+                {/* Pip abaixo da tela na primeira explicação, como solicitado */}
+                {((isMathFlow && mathStep === 1) || (!isMathFlow && eiStep === 1)) && (
+                  <div className="mb-8 w-full flex justify-center">
+                    <PipPedagogicalGuidance 
+                      stage="explanation" 
+                      manualMessage={currentMascotMessage}
+                      className="animate-in zoom-in duration-500" 
+                    />
+                  </div>
+                )}
+
                 {isAlfaFlow ? (
                   <Literacy1stGradeFlow
                     aula={aula}
