@@ -88,22 +88,23 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: imgPip, mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 5 Campos de Experiência BNCC
 const materiasInfantil = [
-  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: Bird, mascoteNome: "Professora Pipa" },
-  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: Bird, mascoteNome: "Professor Pip" },
-  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: imgPipa, mascoteNome: "Professora Pipa" },
 ] as const;
+
 
 function isEI(grade: string) {
   const g = grade.toLowerCase();
