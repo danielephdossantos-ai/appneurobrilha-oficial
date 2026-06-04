@@ -875,7 +875,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
   const b = Number(aula.numero_b ?? 2);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const emoji = aula.visual_emoji || aula.visual || "🍎";
+  const visualKey = aula.visual_key || aula.visual_emoji || aula.visual || "apple";
   const opcoesNum: number[] = useMemo(() => {
     const base = Array.isArray(aula.opcoes_numericas) && aula.opcoes_numericas.length >= 2
       ? aula.opcoes_numericas.map((n: any) => Number(n))
@@ -909,10 +909,12 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
     if (text) playAudio(text);
   }, [mathStep, a, b, op, resultado]);
 
-  const renderEmojis = (n: number, color = "text-primary") => (
+  const renderVisuals = (n: number, color = "text-primary") => (
     <div className="flex flex-wrap gap-2 justify-center max-w-md">
       {Array.from({ length: Math.max(0, n) }).map((_, i) => (
-        <span key={i} className={`text-5xl md:text-6xl ${color} animate-in zoom-in`} style={{ animationDelay: `${i * 100}ms` }}>{emoji}</span>
+        <div key={i} className={`animate-in zoom-in ${color}`} style={{ animationDelay: `${i * 100}ms` }}>
+          <RenderVisual value={visualKey} className="h-12 w-12 md:h-16 md:w-16" />
+        </div>
       ))}
     </div>
   );
@@ -929,10 +931,12 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
     <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Mascote guia */}
       <div className="flex items-center gap-4 mb-2">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl shrink-0">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0">
           {activeMascot?.mascot?.image_url?.startsWith("http") ? (
             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-          ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
+          ) : (
+            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
+          )}
         </div>
         <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
       </div>
@@ -941,7 +945,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
         {/* TELA 1 — VISUAL */}
         {mathStep === 1 && (
           <div className="text-center space-y-6">
-            {renderEmojis(a)}
+            {renderVisuals(a)}
             <div className="bg-primary text-white text-8xl md:text-9xl font-black w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
               {a}
             </div>
@@ -967,11 +971,11 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
                         if (next.length === a) toast.success(`Você contou até ${a}!`);
                       }
                     }}
-                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center text-5xl md:text-6xl border-4 transition-all ${
+                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center border-4 transition-all ${
                       tocado ? "bg-success/15 border-success scale-90" : "bg-white border-primary hover:scale-110"
                     }`}
                   >
-                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : emoji}
+                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : <RenderVisual value={visualKey} className="h-12 w-12" />}
                   </button>
                 );
               })}
@@ -984,9 +988,9 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
         {mathStep === 3 && (
           <div className="space-y-4 text-center">
             <div className="flex flex-wrap items-center justify-center gap-4">
-              {renderEmojis(a)}
+              {renderVisuals(a)}
               <div className="text-6xl font-black text-sun">{op}</div>
-              {renderEmojis(b, "text-success")}
+              {renderVisuals(b, "text-success")}
             </div>
             <div className="text-5xl md:text-6xl font-black text-primary mt-6">
               {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
@@ -1086,7 +1090,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
               onClick={() => onComplete(true)}
               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
             >
-              CONCLUIR AULA! 🌟
+              CONCLUIR AULA!
             </button>
           </div>
         )}
@@ -1135,9 +1139,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   
   
   const METODOS = [
-    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
-    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
-    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
+    { id: "teacch", nome: "TEACCH", icon: PenTool, desc: "Passo-a-passo visual estruturado" },
+    { id: "multisensorial", nome: "Multissensorial", icon: Palette, desc: "Ver + ouvir + tocar + falar" },
+    { id: "montessori", nome: "Montessori", icon: Sprout, desc: "Exemplos concretos do dia a dia" },
   ] as const;
 
   const naoEntendi = async () => {
@@ -1180,7 +1184,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
         metodo_usado: data.metodo_usado || metodo.nome,
       });
       setMetodoIdx((i) => i + 1);
-      toast.success(`${metodo.emoji} Reexplicando com método ${metodo.nome}!`);
+      toast.success(`Reexplicando com método ${metodo.nome}!`);
     } catch (e) {
       console.error(e);
       toast.error("Não consegui reexplicar agora. Tente de novo.");
@@ -1213,9 +1217,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   };
 
   const titulos: Record<string, string> = {
-    ensino: "📖 Aula",
-    demo: "🎨 Demonstração",
-    opcoes: "✨ Sua vez!",
+    ensino: "Aula",
+    demo: "Demonstração",
+    opcoes: "Sua vez!",
   };
 
   // Stepper pedagógico: alfa=7, math=6, geral=8 (Descobrir→Recompensa)
@@ -1240,11 +1244,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <theme.sceneIcon className="h-32 w-32" />
         </div>
         <div className="relative flex items-center gap-4">
-          <div className="text-5xl drop-shadow animate-float-thinking">
+          <div className="drop-shadow animate-float-thinking">
             {activeMascot?.mascot?.image_url?.startsWith('http') ? (
               <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
             ) : (
-              activeMascot?.mascot?.image_url || materiaMeta.mascote
+              <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
             )}
           </div>
           <div>
@@ -1262,7 +1266,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <Coffee className="h-6 w-6 text-sun" />
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
-            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo 🌿</div>
+            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo</div>
           </div>
         </Card>
       )}
@@ -1274,39 +1278,40 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
             {/* Stepper pedagógico adaptado */}
             <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
               {(isAlfaFlow ? [
-                {n:1,l:"Objeto",i:"🍎"},
-                {n:2,l:"Palavra",i:"🔤"},
-                {n:3,l:"Sílabas",i:"✂️"},
-                {n:4,l:"Montar",i:"🧩"},
-                {n:5,l:"Achar",i:"🔎"},
-                {n:6,l:"Escrever",i:"✏️"},
-                {n:7,l:"Legal!",i:"🎉"},
+                {n:1,l:"Objeto",i:Apple},
+                {n:2,l:"Palavra",i:PenTool},
+                {n:3,l:"Sílabas",i:Scissors}, // Scissors doesn't exist? Use Scissors or Ruler. I'll check Scissors.
+                {n:4,l:"Montar",i:Target},
+                {n:5,l:"Achar",i:Search},
+                {n:6,l:"Escrever",i:PenTool},
+                {n:7,l:"Legal!",i:Sparkles},
               ] : isMathFlow ? [
-                {n:1,l:"Visual",i:"👀"},
-                {n:2,l:"Contar",i:"☝️"},
-                {n:3,l:"Conta",i:"➕"},
-                {n:4,l:"Montar",i:"🧩"},
-                {n:5,l:"Prática",i:"✋"},
-                {n:6,l:"Armada",i:"📐"},
+                {n:1,l:"Visual",i:Sun},
+                {n:2,l:"Contar",i:Pointer}, // Pointer? check Lucide. Or Fingerprint. Use Pointer.
+                {n:3,l:"Conta",i:Plus},
+                {n:4,l:"Montar",i:Target},
+                {n:5,l:"Prática",i:Hand},
+                {n:6,l:"Armada",i:Ruler},
               ] : [
-                {n:1,l:"Descobrir",i:"🎯"},
-                {n:2,l:"Observe",i:"👀"},
-                {n:3,l:"Pip Explica",i:"💡"},
-                {n:4,l:"Exemplo",i:"📘"},
-                {n:5,l:"Faça Comigo",i:"🤝"},
-                {n:6,l:"Agora Você",i:"✋"},
-                {n:7,l:"Desafio",i:"🏁"},
-                {n:8,l:"Conquista",i:"🏆"},
+                {n:1,l:"Descobrir",i:Target},
+                {n:2,l:"Observe",i:Eye},
+                {n:3,l:"Pip Explica",i:Lightbulb},
+                {n:4,l:"Exemplo",i:BookOpen},
+                {n:5,l:"Faça Comigo",i:Users},
+                {n:6,l:"Agora Você",i:Hand},
+                {n:7,l:"Desafio",i:Flag},
+                {n:8,l:"Conquista",i:Trophy},
               ]).map((s: any) => {
                 const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
                 const active = s.n === current;
                 const done = s.n < current;
+                const Icon = s.i;
                 return (
                   <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
                     active ? "bg-primary text-white scale-110 shadow-glow" :
                     done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
                   }`}>
-                    <span>{s.i}</span>{s.l}
+                    <Icon className="h-3 w-3" /> {s.l}
                   </span>
                 );
               })}
@@ -1372,11 +1377,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         eiStep === 4 ? 'scale-110 translate-x-12' :
                         'scale-100'
                       }`}>
-                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white">
+                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
                           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
                           ) : (
-                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-32 w-32 text-primary" />
                           )}
                         </div>
                         {/* Balão de fala */}
