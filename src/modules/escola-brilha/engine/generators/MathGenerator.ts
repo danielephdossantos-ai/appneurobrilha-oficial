@@ -7,25 +7,22 @@ export class MathGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
-      if (input.subject === 'artes') {
-        return Math.random() < 0.5 ? 'ei-cor' : 'ei-forma';
-      }
-      return Math.random() < 0.5 ? 'ei-contagem' : 'ei-forma';
+      const r = Math.random();
+      if (r < 0.5) return 'ei-contagem';
+      return 'ei-drag-quantity';
     }
-    // SÉRIE define o tipo de atividade — NUNCA misturar séries.
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "advanced-logic";
     if (gradeNum <= 2) return "counting";
     if (gradeNum === 3) return "comparison";
-    return "visual-logic"; // 4º e 5º
+    return "visual-logic";
   }
 
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-contagem": return "Vamos Contar Juntos!";
-      case "ei-cor": return "Que Cor é Essa?";
-      case "ei-forma": return "Caça às Formas";
+      case "ei-contagem": return "Vale dos Números";
+      case "ei-drag-quantity": return "Vale dos Números";
       case "counting": return "Contagem Divertida";
       case "comparison": return "Mais ou Menos?";
       case "visual-logic": return "Desafio Lógico";
@@ -37,9 +34,8 @@ export class MathGenerator extends BaseGenerator {
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-contagem": return "Conte com o dedinho 👆 quantos tem na imagem.";
-      case "ei-cor": return "Olha a cor! Qual é o nome dela?";
-      case "ei-forma": return "Que forma é essa? Aponta a resposta!";
+      case "ei-contagem": return "Quantas maçãs existem?";
+      case "ei-drag-quantity": return "Arraste as estrelas para a caixa.";
       case "counting": return "Quantos objetos você vê?";
       case "comparison": return "Qual grupo tem mais itens?";
       case "visual-logic": return "Qual é o próximo da sequência?";
@@ -54,45 +50,28 @@ export class MathGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-contagem') {
-        const item = this.pickRandom(EARLY_CHILDHOOD.contagem);
-        const wrongs = this.pickNRandom([1,2,3,4,5].filter(n => n !== item.n), 2);
-        const options = this.shuffle([item.n, ...wrongs]).map(String);
+        const item = EARLY_CHILDHOOD.contagem[0]; // 3 apples
         return {
-          q: `Quantos ${item.emoji} você vê?`,
+          q: "Quantas maçãs existem?",
           visual: item.emoji.repeat(item.n),
           targetCount: item.n,
           answer: String(item.n),
-          options,
+          options: item.options?.map(String),
+          miniGameType: "bubbles"
         };
       }
 
-      if (type === 'ei-cor') {
-        const cor = this.pickRandom(EARLY_CHILDHOOD.cores);
-        const wrongs = this.pickNRandom(EARLY_CHILDHOOD.cores.filter(c => c.nome !== cor.nome), 2);
-        const options = this.shuffle([cor.nome, ...wrongs.map(w => w.nome)]);
+      if (type === 'ei-drag-quantity') {
+        const item = EARLY_CHILDHOOD.contagem[1]; // 4 stars
         return {
-          q: `Que cor é essa? ${cor.emoji}`,
-          visual: cor.emoji,
-          hex: cor.hex,
-          answer: cor.nome,
-          options,
-        };
-      }
-
-      if (type === 'ei-forma') {
-        const forma = this.pickRandom(EARLY_CHILDHOOD.formas);
-        const wrongs = this.pickNRandom(EARLY_CHILDHOOD.formas.filter(f => f.nome !== forma.nome), 2);
-        const options = this.shuffle([forma.nome, ...wrongs.map(w => w.nome)]);
-        return {
-          q: `Qual forma é essa? ${forma.emoji}`,
-          visual: forma.emoji,
-          answer: forma.nome,
-          options,
+          q: `Coloque ${item.n} estrelas na caixa`,
+          targetCount: item.n,
+          symbol: item.emoji,
+          miniGameType: "quantity"
         };
       }
 
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
-      // Limite numérico estritamente por série
       const maxByGrade: Record<number, number> = { 1: 10, 2: 20, 3: 50, 4: 100, 5: 1000 };
       const maxNumber = maxByGrade[gradeNum] || 10;
 
@@ -124,7 +103,6 @@ export class MathGenerator extends BaseGenerator {
         };
       }
 
-      // Logic/Patterns
       const patterns = MATH_DATA.patterns;
       if (!patterns || patterns.length === 0) throw new Error("No patterns found in MATH_DATA");
       const pattern = this.pickRandom(patterns);
