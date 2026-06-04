@@ -1,42 +1,54 @@
 
 // ====== Educação Infantil (4-5 anos) — conteúdo concreto, visual, simples ======
+// BNCC: Campos de Experiência
 export const EARLY_CHILDHOOD = {
-  vowels: [
-    { letter: 'A', exemplo: 'ABELHA', emoji: '🐝', distractors: ['P', 'O'] },
-    { letter: 'E', exemplo: 'ELEFANTE', emoji: '🐘', distractors: ['B', 'L'] },
-    { letter: 'I', exemplo: 'IGREJA', emoji: '⛪', distractors: ['M', 'T'] },
-    { letter: 'O', exemplo: 'OVO', emoji: '🥚', distractors: ['S', 'C'] },
-    { letter: 'U', exemplo: 'UVA', emoji: '🍇', distractors: ['X', 'Z'] },
-  ],
-  words: [
-    { word: 'BOLA', startLetter: 'B', options: ['B', 'M', 'P'], emoji: '⚽' },
-    { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], emoji: '🏠' },
-  ],
-  cores: [
-    { nome: 'VERMELHO', hex: '#ef4444', exemplo: 'maçã', emoji: '🍎' },
-    { nome: 'AZUL', hex: '#3b82f6', exemplo: 'céu', emoji: '💙' },
-    { nome: 'AMARELO', hex: '#facc15', exemplo: 'sol', emoji: '☀️' },
-    { nome: 'VERDE', hex: '#22c55e', exemplo: 'folha', emoji: '🍀' },
-    { nome: 'ROSA', hex: '#ec4899', exemplo: 'flor', emoji: '🌸' },
-    { nome: 'ROXO', hex: '#a855f7', exemplo: 'uva', emoji: '🍇' },
-  ],
-  formas: [
-    { nome: 'CÍRCULO', emoji: '⭕', exemplo: 'a roda' },
-    { nome: 'QUADRADO', emoji: '🟦', exemplo: 'a janela' },
-    { nome: 'TRIÂNGULO', emoji: '🔺', exemplo: 'a fatia de pizza' },
-    { nome: 'ESTRELA', emoji: '⭐', exemplo: 'a estrela no céu' },
-    { nome: 'CORAÇÃO', emoji: '❤️', exemplo: 'o amor' },
-  ],
-  animais: [
-    { nome: 'VACA', emoji: '🐮', som: 'muuu', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐮 Muuu' },
-    { nome: 'CACHORRO', emoji: '🐶', som: 'au au', relacionados: [{e:'🦴',n:'OSSO'}, {e:'🏠',n:'CASINHA'}, {e:'🥣',n:'RAÇÃO'}], intruso: {e:'🍌',n:'BANANA'} },
-    { nome: 'GATO', emoji: '🐱', som: 'miau', relacionados: [{e:'🐟',n:'PEIXE'}, {e:'🧶',n:'NOVELO'}, {e:'🥛',n:'LEITE'}], intruso: {e:'🚗',n:'CARRO'} },
-  ],
-  contagem: [
-    { n: 3, emoji: '🍎', options: [1, 3, 5, 6] },
-    { n: 4, emoji: '⭐', mode: 'drag' },
-  ],
-  atencao: {
+  // ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO
+  linguagem: {
+    vowels: [
+      { letter: 'A', exemplo: 'ABELHA', emoji: '🐝', distractors: ['P', 'O'] },
+      { letter: 'E', exemplo: 'ELEFANTE', emoji: '🐘', distractors: ['B', 'L'] },
+      { letter: 'I', exemplo: 'IGREJA', emoji: '⛪', distractors: ['M', 'T'] },
+      { letter: 'O', exemplo: 'OVO', emoji: '🥚', distractors: ['S', 'C'] },
+      { letter: 'U', exemplo: 'UVA', emoji: '🍇', distractors: ['X', 'Z'] },
+    ],
+    words: [
+      { word: 'BOLA', startLetter: 'B', options: ['B', 'M', 'P'], emoji: '⚽' },
+      { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], emoji: '🏠' },
+      { word: 'DADO', startLetter: 'D', options: ['D', 'B', 'T'], emoji: '🎲' },
+    ],
+  },
+  // ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES
+  matematica: {
+    contagem: [
+      { n: 3, item: 'maçãs', emoji: '🍎', options: [1, 3, 5, 6] },
+      { n: 2, item: 'estrelas', emoji: '⭐', options: [2, 4, 1, 3] },
+      { n: 5, item: 'balões', emoji: '🎈', options: [3, 5, 4, 6] },
+    ],
+    drag: [
+      { n: 4, item: 'estrelas', emoji: '⭐' },
+      { n: 3, item: 'corações', emoji: '❤️' },
+    ],
+    formas: [
+      { nome: 'CÍRCULO', emoji: '⭕', exemplo: 'a roda' },
+      { nome: 'QUADRADO', emoji: '🟦', exemplo: 'a janela' },
+      { nome: 'TRIÂNGULO', emoji: '🔺', exemplo: 'a fatia de pizza' },
+    ],
+  },
+  // TRAÇOS, SONS, CORES E FORMAS
+  artes_sons: {
+    animais: [
+      { nome: 'VACA', emoji: '🐮', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐮 Muuu' },
+      { nome: 'GATO', emoji: '🐱', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐱 Miau' },
+      { nome: 'CACHORRO', emoji: '🐶', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐶 Au au' },
+    ],
+    cores: [
+      { nome: 'VERMELHO', emoji: '🍎' },
+      { nome: 'AZUL', emoji: '🔵' },
+      { nome: 'AMARELO', emoji: '☀️' },
+    ]
+  },
+  // O EU, O OUTRO E O NÓS / FLORESTA DA ATENÇÃO
+  cognitivo: {
     memory: ['🍎', '🐶', '⭐', '🎈', '🌻', '🚗'],
     sequence: ['🍎', '🍌', '🍇'],
   }
