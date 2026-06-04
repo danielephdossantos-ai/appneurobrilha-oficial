@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import { 
   Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
-  Calendar, ArrowUpRight, History, Sparkles, Gem, PenTool, Dumbbell
+  Calendar, ArrowUpRight, History, Sparkles, Gem, PenTool, Dumbbell, Target
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
 import { supabase } from "@/database/supabase/client";
