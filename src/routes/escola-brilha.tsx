@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect, useRef, Component, ReactNode, useMemo } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee, ArrowRight, Star } from "lucide-react";
+import { useState, useEffect, useRef, Component, ReactNode, useMemo, ComponentType } from "react";
+import { 
+  Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, 
+  Palette, HelpCircle, Coffee, ArrowRight, Star, GraduationCap, 
+  Bird, BabyChick, Apple, Rainbow, Trees, Bug, Library, Telescope, 
+  TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
+  Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, Plane, Ship, PenTool
+} from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
