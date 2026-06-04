@@ -319,6 +319,11 @@ function Escola() {
         
         if (explanation && dbActivities.length > 0) {
           const activity = dbActivities[0];
+          const activity = dbActivities[0];
+          const treino = dbActivities.find(a => a.nivel === 'treino') || activity;
+          const pratica = dbActivities.filter(a => a.nivel === 'pratica');
+          const desafio = dbActivities.find(a => a.nivel === 'desafio') || activity;
+
           setAula({
             materia: materiaId,
             grade: selectedGrade,
@@ -326,16 +331,36 @@ function Escola() {
             topic: skill.titulo,
             objetivo: skill.objetivo,
             etapa1_explicação: explanation.texto_professor,
-            etapa2_demonstração: "Observe como as pessoas se expressam!",
-            etapa3_treino_guiado: "Vamos identificar os sentimentos?",
-            etapa4_prática: "Agora é sua vez de escolher!",
-            etapa5_desafio: "Desafio final: você consegue identificar todos?",
+            etapa2_demonstração: "Observe com atenção o exemplo da professora!",
+            etapa3_treino_guiado: treino.explicacao_ativa || "Vamos identificar os sentimentos?",
+            etapa4_prática: pratica[0]?.explicacao_ativa || "Agora é sua vez de escolher!",
+            etapa5_desafio: desafio.explicacao_ativa || "Desafio final: você consegue identificar todos?",
             etapa6_avaliação: "Excelente desempenho no reconhecimento!",
             etapa7_domínio: "Parabéns! Você dominou esta habilidade BNCC!",
+            
+            // Atividade principal (fallback)
             pergunta: activity.pergunta,
-            opcoes: [activity.alternativa_a, activity.alternativa_b, activity.alternativa_c].filter(Boolean),
+            opcoes: [activity.alternativa_a, activity.alternativa_b, activity.alternativa_c, activity.alternativa_d].filter(Boolean),
             resposta_correta: activity.resposta,
             feedback: activity.feedback,
+            
+            // Dados para as etapas específicas
+            treino_activity: {
+              pergunta: treino.pergunta,
+              opcoes: [treino.alternativa_a, treino.alternativa_b, treino.alternativa_c, treino.alternativa_d].filter(Boolean),
+              resposta_correta: treino.resposta,
+            },
+            pratica_activities: pratica.map(p => ({
+              pergunta: p.pergunta,
+              opcoes: [p.alternativa_a, p.alternativa_b, p.alternativa_c, p.alternativa_d].filter(Boolean),
+              resposta_correta: p.resposta,
+            })),
+            desafio_activity: {
+              pergunta: desafio.pergunta,
+              opcoes: [desafio.alternativa_a, desafio.alternativa_b, desafio.alternativa_c, desafio.alternativa_d].filter(Boolean),
+              resposta_correta: desafio.resposta,
+            },
+
             visual: explanation.imagem || "book",
             isEI: isInfantil,
             guided: true,
