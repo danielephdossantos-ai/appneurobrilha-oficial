@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, Component, ReactNode, useMemo, ComponentTy
 import { 
   Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, 
   Palette, HelpCircle, Coffee, ArrowRight, Star, GraduationCap, 
-  Bird, BabyChick, Apple, Rainbow, Trees, Bug, Library, Telescope, 
+  Bird, Apple, Rainbow, Trees, Bug, Library, Telescope, 
   TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
   Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, Plane, Ship, PenTool
 } from "lucide-react";
