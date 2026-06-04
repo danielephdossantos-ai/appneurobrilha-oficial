@@ -1,8 +1,6 @@
 
 // ====== Educação Infantil (4-5 anos) — conteúdo concreto, visual, simples ======
-// Baseado nos Campos de Experiência da BNCC
 export const EARLY_CHILDHOOD = {
-  // ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO
   linguagem: {
     vowels: [
       { letter: 'A', exemplo: 'ABELHA', visual: 'bug', distractors: ['P', 'O'], code: 'EI03EF09' },
@@ -21,7 +19,6 @@ export const EARLY_CHILDHOOD = {
       { word: 'GATO', answer: 'PATO', options: ['PATO', 'BALÃO', 'CASA'], visual: 'cat', code: 'EI03EF01' },
     ],
   },
-  // ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES
   matematica: {
     contagem: [
       { n: 3, item: 'maçãs', visual: 'apple', options: [1, 3, 5, 6], code: 'EI03ET07' },
@@ -37,7 +34,6 @@ export const EARLY_CHILDHOOD = {
       { item: 'estrelas', groupA: 4, groupB: 1, answer: 'A', options: ['A', 'B'], code: 'EI03ET07' },
     ]
   },
-  // TRAÇOS, SONS, CORES E FORMAS
   formas_cores: {
     formas: [
       { nome: 'CÍRCULO', visual: 'circle', code: 'EI03TS02' },
@@ -50,26 +46,18 @@ export const EARLY_CHILDHOOD = {
       { nome: 'AMARELO', hex: '#FACC15', visual: 'sun', code: 'EI03TS02' },
     ]
   },
-  // CORPO, GESTOS E MOVIMENTOS
   movimentos: {
     tracado: [
       { points: [{x:10, y:50}, {x:90, y:50}], label: 'Linha Reta', code: 'EI03CG01' },
       { points: [{x:50, y:10}, {x:50, y:90}], label: 'Linha em Pé', code: 'EI03CG01' },
     ]
   },
-  // EI03EO01 - Sentimentos (O EU, O OUTRO E O NÓS)
   emocoes: [
     { label: 'FELIZ', visual: 'smile', emotion: 'happy', code: 'EI03EO01' },
     { label: 'TRISTE', visual: 'frown', emotion: 'sad', code: 'EI03EO01' },
     { label: 'BRAVO', visual: 'angry', emotion: 'angry', code: 'EI03EO01' },
     { label: 'SONO', visual: 'moon', emotion: 'sleeping', code: 'EI03EO01' },
   ],
-  // Compatibilidade com CognitiveGenerator
-  cognitivo: {
-    memory: ['apple', 'cat', 'star', 'balloon', 'flower', 'car'],
-    sequence: ['apple', 'banana', 'grape'],
-  },
-  // Compatibilidade com LinguisticsGenerator
   artes_sons: {
     animais: [
       { nome: 'VACA', visual: 'cow', options: ['miau', 'au au', 'cocoricó', 'muuu'], answer: 'muuu', code: 'EI03TS03' },
@@ -84,49 +72,56 @@ export function isEarlyChildhood(grade?: string): boolean {
 }
 
 export const ALPHABETIZATION_DATA = {
-  // EF01LP05 - Sílabas
   syllableFormation: [
     { parts: ['M', 'A'], result: 'MA', distractors: ['ME', 'MO'], code: 'EF01LP05' },
     { parts: ['B', 'A'], result: 'BA', distractors: ['BE', 'BO'], code: 'EF01LP05' },
   ],
-  // EF01LP05 - Complete a palavra
   completeWord: [
     { word: 'GATO', display: 'GA _ O', missing: 'TO', distractors: ['TA', 'TU'], visual: 'cat', code: 'EF01LP05' },
     { word: 'BOLA', display: 'BO _ A', missing: 'LA', distractors: ['LE', 'LO'], visual: 'circle', code: 'EF01LP05' },
   ],
-  // EF01LP07 - Leitura de palavras simples
   shortReading: [
     { text: 'A BOLA É AZUL.', question: 'Qual é a cor da bola?', options: ['Azul', 'Vermelha'], answer: 'Azul', visual: 'circle', code: 'EF01LP07' },
     { text: 'O GATO É PRETO.', question: 'Qual é a cor do gato?', options: ['Preto', 'Branco'], answer: 'Preto', visual: 'cat', code: 'EF01LP07' },
   ],
-  // EF01LP06 - Fonema e Grafema
   phonemes: [
     { sound: 'm', result: 'M', distractors: ['P', 'T'], code: 'EF01LP06' },
     { sound: 'b', result: 'B', distractors: ['D', 'P'], code: 'EF01LP06' },
   ],
-  // EF01LP01 - Tipos de texto
   textTypes: [
     { question: "Qual usamos para contar histórias?", options: ['Livro', 'Telefone', 'Maçã'], answer: 'Livro', visual: 'book', code: 'EF01LP01' },
     { question: "Onde lemos notícias?", options: ['Jornal', 'Bola', 'Flor'], answer: 'Jornal', visual: 'newspaper', code: 'EF01LP01' },
   ],
-  // EF01LP10 - Compreensão de leitura
   comprehension: [
     { text: "O gato dorme.", question: "Quem dorme?", options: ['Gato', 'Cachorro', 'Pássaro'], answer: 'Gato', visual: 'cat', code: 'EF01LP10' }
+  ],
+  alphabeticalOrder: [
+    { sequence: ['A', 'B', 'C'], code: 'EF01LP03' },
+    { sequence: ['D', 'E', 'F'], code: 'EF01LP03' },
   ]
 };
 
 export const FIRST_GRADE_MATH = {
   visualAddition: [
-    { group1: { n: 2, item: 'apple' }, group2: { n: 1, item: 'apple' }, answer: 3, options: [2, 3, 4], code: 'EF01MA06' },
-    { group1: { n: 3, item: 'star' }, group2: { n: 2, item: 'star' }, answer: 5, options: [4, 5, 6], code: 'EF01MA06' },
+    { group1: { n: 2, item: 'apple' }, group2: { n: 1, item: 'apple' }, answer: 3, options: [2, 3, 4], code: 'EF01MA05' },
+    { group1: { n: 3, item: 'star' }, group2: { n: 2, item: 'star' }, answer: 5, options: [4, 5, 6], code: 'EF01MA05' },
   ],
   visualSubtraction: [
     { total: { n: 4, item: 'fish' }, take: 1, answer: 3, options: [2, 3, 4], code: 'EF01MA06' },
   ],
   tens: [
-    { question: '3 dezenas?', answer: '30', options: ['10', '20', '30'], code: 'EF01MA01' },
-    { question: '2 dezenas?', answer: '20', options: ['10', '20', '30'], code: 'EF01MA01' },
-    { question: '1 dezena?', answer: '10', options: ['10', '20', '30'], code: 'EF01MA01' },
+    { question: '3 dezenas?', answer: '30', options: ['10', '20', '30'], code: 'EF01MA03' },
+    { question: '2 dezenas?', answer: '20', options: ['10', '20', '30'], code: 'EF01MA03' },
+  ],
+  counting: [
+    { n: 10, code: 'EF01MA01' },
+    { n: 20, code: 'EF01MA01' },
+  ],
+  comparison: [
+    { item: 'lápis', countA: 5, countB: 3, answer: 'A', code: 'EF01MA02' },
+  ],
+  spatialLocation: [
+    { question: 'Onde está o lápis?', options: ['Dentro', 'Fora'], code: 'EF01MA08' },
   ]
 };
 
