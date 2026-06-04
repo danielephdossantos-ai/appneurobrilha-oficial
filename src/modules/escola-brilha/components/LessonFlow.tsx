@@ -30,16 +30,69 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
 
   useEffect(() => {
     const loadData = async () => {
-      setLoading(true);
-      const [s, e, a] = await Promise.all([
-        pedagogicalService.getSkillByCode(skillCode),
-        pedagogicalService.getExplanationByCode(skillCode),
-        pedagogicalService.getActivitiesByCode(skillCode)
-      ]);
-      setSkill(s);
-      setExplanation(e);
-      setActivities(a.sort((x, y) => (x.ordem || 0) - (y.ordem || 0)));
-      setLoading(false);
+      try {
+        setLoading(true);
+        console.log('LessonFlow: Loading data for skill', skillCode);
+        const [s, e, a] = await Promise.all([
+          pedagogicalService.getSkillByCode(skillCode),
+          pedagogicalService.getExplanationByCode(skillCode),
+          pedagogicalService.getActivitiesByCode(skillCode)
+        ]);
+        
+        console.log('LessonFlow: Skill data', s);
+        console.log('LessonFlow: Explanation data', e);
+        console.log('LessonFlow: Activities data count', a.length);
+
+        if (!s) {
+          console.warn('LessonFlow: Skill not found in DB, using fallback');
+          setSkill({
+            id: 'fallback',
+            codigo_bncc: skillCode,
+            titulo: 'Habilidade em Estudo',
+            objetivo: 'Objetivo de aprendizagem',
+            ano: '1º Ano',
+            disciplina: 'Geral',
+            nivel: 'Iniciante'
+          });
+        } else {
+          setSkill(s);
+        }
+
+        if (!e) {
+          console.warn('LessonFlow: Explanation not found, using generic');
+          setExplanation({
+            id: 'gen-e',
+            codigo_bncc: skillCode,
+            texto_professor: 'Hoje vamos aprender algo novo e muito especial sobre esta habilidade!'
+          });
+        } else {
+          setExplanation(e);
+        }
+
+        if (a.length === 0) {
+          console.warn('LessonFlow: No activities found, generating fallback');
+          const fallbackActivities: Activity[] = [
+            {
+              id: 'fallback-1',
+              codigo_bncc: skillCode,
+              pergunta: `Você está pronto para aprender sobre ${skillCode}?`,
+              alternativa_a: 'Sim!',
+              alternativa_b: 'Com certeza!',
+              alternativa_c: 'Vamos lá!',
+              resposta: 'Sim!',
+              feedback: 'Excelente entusiasmo!',
+              tipo: 'fallback'
+            }
+          ];
+          setActivities(fallbackActivities);
+        } else {
+          setActivities(a.sort((x, y) => (x.ordem || 0) - (y.ordem || 0)));
+        }
+      } catch (err) {
+        console.error('LessonFlow: Fatal error loading data', err);
+      } finally {
+        setLoading(false);
+      }
     };
     loadData();
   }, [skillCode]);
