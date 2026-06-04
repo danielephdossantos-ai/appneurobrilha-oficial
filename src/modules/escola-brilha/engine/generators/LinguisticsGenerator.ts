@@ -23,9 +23,11 @@ export class LinguisticsGenerator extends BaseGenerator {
     if (gradeNum >= 6) return "interpretation";
     if (input.grade?.includes("1º")) {
       const r = Math.random();
-      if (r < 0.33) return 'alfa-syllable';
-      if (r < 0.66) return 'alfa-complete';
-      return 'alfa-reading';
+      if (r < 0.2) return 'alfa-syllable';
+      if (r < 0.4) return 'alfa-complete';
+      if (r < 0.6) return 'alfa-reading';
+      if (r < 0.8) return 'alfa-phonemes';
+      return 'alfa-types';
     }
     if (gradeNum <= 1) return "phonemes";
     if (gradeNum <= 3) return "syllables";
@@ -48,6 +50,8 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "alfa-syllable": return "Cidade das Letras";
       case "alfa-complete": return "Cidade das Letras";
       case "alfa-reading": return "Cidade das Letras";
+      case "alfa-phonemes": return "Cidade das Letras";
+      case "alfa-types": return "Cidade das Letras";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
@@ -65,6 +69,8 @@ export class LinguisticsGenerator extends BaseGenerator {
       case "alfa-syllable": return "Qual sílaba foi formada?";
       case "alfa-complete": return "Complete a palavra!";
       case "alfa-reading": return "Leitura Curta";
+      case "alfa-phonemes": return "Qual letra faz este som?";
+      case "alfa-types": return "Para que serve este texto?";
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
       case "reading": return "Leia a palavra e encontre a imagem correspondente.";
@@ -79,21 +85,20 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-vogal') {
-        // Encontre a Vogal (A among A, P, O)
-        const v = EARLY_CHILDHOOD.linguagem.vowels[0]; // Letra A por padrão como solicitado
+        const v = EARLY_CHILDHOOD.linguagem.vowels[0]; 
         const options = this.shuffle([v.letter, ...v.distractors]);
         return {
           q: "Vamos procurar a letra A!",
           visual: v.letter,
           answer: v.letter,
           options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: v.code
         };
       }
 
       if (type === 'ei-drag-letter') {
-        // Arraste a Letra (BOLA)
-        const w = EARLY_CHILDHOOD.linguagem.words[0]; // BOLA
+        const w = EARLY_CHILDHOOD.linguagem.words[0]; 
         return {
           q: `Qual letra começa ${w.word}?`,
           visual: w.visual,
@@ -106,8 +111,7 @@ export class LinguisticsGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-animal-sound') {
-        // Sons dos Animais (Vaca)
-        const a = EARLY_CHILDHOOD.artes_sons.animais[0]; // VACA
+        const a = EARLY_CHILDHOOD.artes_sons.animais[0]; 
         return {
           q: a.nome,
           visual: a.visual,
@@ -138,7 +142,8 @@ export class LinguisticsGenerator extends BaseGenerator {
           visual: item.parts.join(' + '),
           answer: item.result,
           options: this.shuffle([item.result, ...item.distractors]),
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
@@ -149,7 +154,8 @@ export class LinguisticsGenerator extends BaseGenerator {
           visual: item.visual,
           answer: item.missing,
           options: this.shuffle([item.missing, ...item.distractors]),
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
@@ -161,7 +167,32 @@ export class LinguisticsGenerator extends BaseGenerator {
           question: item.question,
           answer: item.answer,
           options: item.options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-phonemes') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.phonemes);
+        return {
+          q: `Qual letra faz o som /${item.sound}/?`,
+          visual: 'volume-2',
+          answer: item.result,
+          options: this.shuffle([item.result, ...item.distractors]),
+          miniGameType: "bubbles",
+          bncc_code: item.code
+        };
+      }
+
+      if (type === 'alfa-types') {
+        const item = this.pickRandom(ALPHABETIZATION_DATA.textTypes);
+        return {
+          q: item.question,
+          visual: item.visual,
+          answer: item.answer,
+          options: item.options,
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
@@ -181,7 +212,6 @@ export class LinguisticsGenerator extends BaseGenerator {
       const targetWord = this.pickRandom(words);
 
       if (type === "phonemes") {
-        const targetWord = input.grade?.includes("1º") ? { word: "MALA", syllables: ["MA", "LA"], emoji: "👜" } : this.pickRandom(words);
         const firstLetter = targetWord.word[0];
         const options = this.shuffle([
           firstLetter,
@@ -191,13 +221,11 @@ export class LinguisticsGenerator extends BaseGenerator {
           targetWord, 
           firstLetter, 
           options,
-          sound: `Som da letra ${firstLetter}`,
-          exemplo_palavras: ["MALA", "MAMA", "MAPA"]
+          sound: `Som da letra ${firstLetter}`
         };
       }
 
       if (type === "syllables") {
-        const targetWord = input.grade?.includes("1º") ? { word: "MALA", syllables: ["MA", "LA"], emoji: "👜" } : this.pickRandom(words);
         const missingSyllableIndex = Math.floor(Math.random() * targetWord.syllables.length);
         const missingSyllable = targetWord.syllables[missingSyllableIndex];
         const options = this.shuffle([
@@ -208,8 +236,7 @@ export class LinguisticsGenerator extends BaseGenerator {
           targetWord,
           syllables: targetWord.syllables.map((s: string, i: number) => i === missingSyllableIndex ? null : s),
           missingSyllable,
-          options,
-          combination: input.grade?.includes("1º") ? "M + A = MA" : undefined
+          options
         };
       }
 
