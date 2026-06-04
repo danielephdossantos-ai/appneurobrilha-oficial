@@ -96,13 +96,13 @@ const materias = [
   { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: imgPip, mascoteNome: "Professor Pip" },
 ] as const;
 
-// Educação Infantil — 5 Campos de Experiência BNCC
+// Educação Infantil — 5 Trilhas (BNCC Campos de Experiência)
 const materiasInfantil = [
-  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Escuta, fala, pensamento e imaginação", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Espaços, tempos, quantidades, relações e transformações", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Corpo, gestos e movimentos", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Traços, sons, cores e formas", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "O eu, o outro e o nós", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "trilha-palavras", nome: "TRILHA DAS PALAVRAS", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Escuta e fala", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "trilha-numeros", nome: "TRILHA DOS NÚMEROS", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contagem e quantidades", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "trilha-cores-formas", nome: "TRILHA DAS CORES E FORMAS", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Formas e cores", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "trilha-movimentos", nome: "TRILHA DOS MOVIMENTOS", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação motora", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "trilha-emocoes", nome: "TRILHA DAS EMOÇÕES", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Sentimentos e empatia", mascote: imgPipa, mascoteNome: "Professora Pipa" },
 ] as const;
 
 
