@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState, useEffect, useRef } from "react";
-import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert } from "lucide-react";
+import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert, Search } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { RenderMascote } from "@/components/ui/PremiumIcons";
