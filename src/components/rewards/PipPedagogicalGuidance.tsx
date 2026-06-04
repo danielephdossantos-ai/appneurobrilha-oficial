@@ -55,9 +55,10 @@ export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ 
     <div className={className}>
       <KidLiveMascot 
         emotion={emotion as any} 
-        message={message || undefined}
+        message={manualMessage || message || undefined}
         size="md"
       />
     </div>
   );
+
 };
