@@ -96,11 +96,12 @@ export class LinguisticsGenerator extends BaseGenerator {
         const w = EARLY_CHILDHOOD.linguagem.words[0]; // BOLA
         return {
           q: `Qual letra começa ${w.word}?`,
-          visual: w.emoji,
+          visual: w.visual,
           palavra: w.word,
           answer: w.startLetter,
           options: w.options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: w.code
         };
       }
 
@@ -109,10 +110,11 @@ export class LinguisticsGenerator extends BaseGenerator {
         const a = EARLY_CHILDHOOD.artes_sons.animais[0]; // VACA
         return {
           q: a.nome,
-          visual: a.emoji,
+          visual: a.visual,
           answer: a.answer,
           options: a.options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: a.code
         };
       }
 
@@ -120,10 +122,11 @@ export class LinguisticsGenerator extends BaseGenerator {
         const item = this.pickRandom(EARLY_CHILDHOOD.linguagem.rimas);
         return {
           q: `${item.word} combina com...?`,
-          visual: item.emoji,
+          visual: item.visual,
           answer: item.answer,
           options: item.options,
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 

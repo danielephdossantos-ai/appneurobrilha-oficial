@@ -71,11 +71,12 @@ export class MathGenerator extends BaseGenerator {
         const item = EARLY_CHILDHOOD.matematica.contagem[0]; // 3 apples
         return {
           q: "Quantas maçãs existem?",
-          visual: item.emoji.repeat(item.n),
+          visual: item.visual,
           targetCount: item.n,
           answer: String(item.n),
           options: item.options?.map(String),
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
 
@@ -84,8 +85,9 @@ export class MathGenerator extends BaseGenerator {
         return {
           q: `Coloque ${item.n} estrelas na caixa`,
           targetCount: item.n,
-          symbol: item.emoji,
-          miniGameType: "quantity"
+          symbol: item.visual,
+          miniGameType: "quantity",
+          bncc_code: item.code
         };
       }
 
