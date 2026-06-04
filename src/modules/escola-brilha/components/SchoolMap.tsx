@@ -39,7 +39,12 @@ export const SchoolMap: React.FC = () => {
     loadTrails();
   }, [alunoId]);
 
+  const filteredTrails = activeArea === 'todas' 
+    ? trails 
+    : trails.filter(t => t.area === activeArea);
+
   if (activeLesson) {
+
     return (
       <div className="bg-slate-50 min-h-screen py-12">
         <LessonFlow 
