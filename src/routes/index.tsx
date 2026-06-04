@@ -176,8 +176,8 @@ function Index() {
                 filter: "blur(20px)",
               }}
             />
-            <div className="relative scale-[1.3] md:scale-[1.6]">
-              <KidLiveMascot size="2xl" emotion="happy" />
+            <div className="relative">
+              <KidLiveMascot size="xl" emotion="happy" />
             </div>
           </motion.div>
 
