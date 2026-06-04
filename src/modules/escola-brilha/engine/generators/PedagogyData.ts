@@ -50,6 +50,19 @@ export const EARLY_CHILDHOOD = {
       { nome: 'AMARELO', hex: '#FACC15', emoji: '☀️' },
     ]
   },
+  // Legado para evitar erros de compilação durante migração
+  artes_sons: {
+    animais: [
+      { nome: 'VACA', emoji: '🐮', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐮 Muuu' },
+      { nome: 'GATO', emoji: '🐱', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐱 Miau' },
+      { nome: 'CACHORRO', emoji: '🐶', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐶 Au au' },
+    ],
+    cores: [
+      { nome: 'VERMELHO', emoji: '🍎' },
+      { nome: 'AZUL', emoji: '🔵' },
+      { nome: 'AMARELO', emoji: '☀️' },
+    ]
+  },
   // TRILHA DAS EMOÇÕES (EI03EO01 - EI03EO04)
   emocoes: [
     { label: 'FELIZ', emoji: '😀', emotion: 'happy' },
