@@ -854,9 +854,77 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
   return (
     <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col items-center justify-center min-h-[300px]">
+        {step === 1 && (
+          <div className="text-center space-y-6">
+            {renderVisuals(a)}
+            <p className="text-3xl font-black text-primary uppercase">Aquecimento!</p>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="text-center space-y-6">
+            <div className="bg-primary text-white text-9xl font-black w-40 h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
+              {a}
+            </div>
+            <p className="text-2xl font-black text-primary">Este é o número {a}!</p>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="space-y-4 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {renderVisuals(a)}
+              <div className="text-6xl font-black text-sun">{op}</div>
+              {renderVisuals(b, "text-success")}
+            </div>
+            <div className="text-6xl font-black text-primary mt-6">
+              {a} <span className="text-sun">{op}</span> {b} = ?
+            </div>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="w-full space-y-6">
+            <div className="text-center text-6xl font-black text-primary">
+              {a} <span className="text-sun">{op}</span> {b} = ?
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {opcoesNum.map((n, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (n === resultado) {
+                      setStep(5);
+                      toast.success("Correto!");
+                    } else {
+                      toast.error("Tente contar de novo!");
+                    }
+                  }}
+                  className="btn-tap aspect-square rounded-3xl bg-white border-4 border-muted hover:border-primary text-6xl font-black text-primary shadow-soft"
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 5 && (
+          <div className="text-center space-y-6">
+            <div className="animate-bounce-slow">
+              <Sparkles className="h-40 w-40 text-sun mx-auto" />
+            </div>
+            <h3 className="text-4xl font-black text-primary uppercase">Você Arrasou!</h3>
+            <button
+              onClick={() => onComplete(true)}
+              className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
+            >
+              CONCLUIR AULA!
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Botão CONTINUAR */}
       {step < 5 && step !== 4 && (
         <div className="flex justify-center mt-6">
           <button
@@ -871,9 +939,6 @@ function MathFlow({ aula, step, setStep, activeMascot, materiaMeta, childNome, o
   );
 }
 
-    </div>
-  );
-}
 
 
 
