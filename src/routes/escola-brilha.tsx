@@ -396,18 +396,17 @@ function Escola() {
 
       console.log("Formatted data for AI:", { systemQuestion, systemOptions, systemAnswer });
 
-      // Determinar o tipo de minijogo para a IA adaptar a narração (apenas para EI)
-      let miniGameType = "bubbles";
-      if (isEI(selectedGrade)) {
-        const opts = (systemOptions || []).map(String);
-        const palavra = (activity.content.palavra || systemAnswer || "").toUpperCase();
-        const isShapes = materiaId.includes("forma") || activity.title.toLowerCase().includes("forma") || 
-                        ["TRIANGULO", "TRIÂNGULO", "CIRCULO", "CÍRCULO", "QUADRADO", "RETANGULO", "RETÂNGULO", "ESTRELA", "CORACAO", "CORAÇÃO", "LOSANGO", "OVAL", "HEXAGONO", "HEXÁGONO"].includes(systemAnswer.toUpperCase());
-        
-        const allSingleLetters = opts.length > 0 && opts.every((o: string) => o.trim().length === 1);
-        if (isShapes) miniGameType = "shape";
-        else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) miniGameType = "sum";
-        else if (allSingleLetters && palavra.length >= 2) miniGameType = "word";
+      // Determinar o tipo de minijogo para a IA adaptar a narração
+      let miniGameType = activity.content.miniGameType || "bubbles";
+      
+      // Mapear tipos de 1º Ano para miniGameType
+      const is1stGrade = selectedGrade.includes("1º");
+      if (is1stGrade) {
+        if (activity.content.combination) miniGameType = "alfa-syllable";
+        else if (activity.content.missingSyllable) miniGameType = "alfa-complete";
+        else if (activity.content.text) miniGameType = "alfa-reading";
+        else if (activity.content.group1) miniGameType = "alfa-sum";
+        else if (activity.content.take) miniGameType = "alfa-sub";
       }
 
       // 2. A IA atua apenas como "Professor" ensinando o que o sistema gerou
@@ -442,10 +441,16 @@ function Escola() {
         opcoes: systemOptions,
         resposta_correta: systemAnswer,
         // Conteúdo visual extra (emoji/cor) para Educação Infantil
-        visual: activity.content.visual,
+        visual: activity.content.visual || activity.content.visual_key || data.visual_key,
         visualHex: activity.content.hex,
         isEI: isEI(selectedGrade),
         guided: guidedActive,
+        miniGameType,
+        // Dados específicos para 1º Ano
+        numero_a: activity.content.group1?.n || activity.content.total?.n || data.numero_a,
+        numero_b: activity.content.group2?.n || activity.content.take || data.numero_b,
+        operacao: activity.content.group1 ? "+" : activity.content.total ? "-" : data.operacao,
+        palavra_foco: activity.content.targetWord?.word || activity.content.palavra || data.palavra_foco,
       };
 
 
