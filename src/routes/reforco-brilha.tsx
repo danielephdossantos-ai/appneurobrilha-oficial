@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
-import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle, Palette } from "lucide-react";
+import { Search, Sparkles, BookOpen, Calculator, Pencil, MessageSquare, ArrowRight, PlayCircle, Star, Zap, Info, ChevronRight, Trophy, CheckCircle2, RefreshCw, TrendingUp, Calendar, AlertCircle, Palette, Target, PenTool, Brain } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
@@ -191,7 +191,7 @@ function ReforcoBrilha() {
   return (
     <Shell>
       <PageHeader 
-        emoji="✨" 
+        icon={Sparkles} 
         title="REFORÇO BRILHA" 
         subtitle="O professor particular infinito que ensina qualquer assunto" 
       />
@@ -239,7 +239,7 @@ function ReforcoBrilha() {
                     className="p-5 rounded-[2rem] bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-100/50 transition-all text-left flex items-start gap-4 group"
                   >
                     <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      {item.type === 'prova' ? '🚩' : item.type === 'trabalho' ? '📝' : '📖'}
+                      {item.type === 'prova' ? <Target className="h-6 w-6 text-red-500" /> : item.type === 'trabalho' ? <PenTool className="h-6 w-6 text-blue-500" /> : <BookOpen className="h-6 w-6 text-green-500" />}
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-0.5">
@@ -324,7 +324,9 @@ function ReforcoBrilha() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Card className="bg-success/5 border-success/20">
                   <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-2xl bg-success/20 grid place-items-center text-2xl">📚</div>
+                    <div className="h-12 w-12 rounded-2xl bg-success/20 grid place-items-center text-primary">
+                      <BookOpen className="h-6 w-6" />
+                    </div>
                     <div>
                       <h4 className="font-bold text-sm">Base Pedagógica Completa</h4>
                       <p className="text-[11px] text-muted-foreground">Tabuada, Verbos, Interpretação, Ortografia e mais.</p>
@@ -333,7 +335,9 @@ function ReforcoBrilha() {
                 </Card>
                 <Card className="bg-primary/5 border-primary/20">
                   <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-2xl bg-primary/20 grid place-items-center text-2xl">🧠</div>
+                    <div className="h-12 w-12 rounded-2xl bg-primary/20 grid place-items-center text-primary">
+                      <Brain className="h-6 w-6" />
+                    </div>
                     <div>
                       <h4 className="font-bold text-sm">Neuro-Adaptação Ativa</h4>
                       <p className="text-[11px] text-muted-foreground">O sistema ensina muito melhor que um professor comum.</p>
@@ -369,8 +373,8 @@ function ReforcoBrilha() {
                   </div>
                   
                   <div className="flex flex-col md:flex-row md:items-center gap-6 relative z-10">
-                    <div className="h-24 w-24 rounded-3xl bg-white shadow-xl grid place-items-center text-5xl transform -rotate-3 border-2 border-primary/10">
-                      {lessonContent.category === "Matemática" ? "🧮" : lessonContent.category === "Português" ? "✍️" : "📚"}
+                    <div className="h-24 w-24 rounded-3xl bg-white shadow-xl grid place-items-center transform -rotate-3 border-2 border-primary/10 text-primary">
+                      {lessonContent.category === "Matemática" ? <Calculator className="h-12 w-12" /> : lessonContent.category === "Português" ? <PenTool className="h-12 w-12" /> : <BookOpen className="h-12 w-12" />}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">

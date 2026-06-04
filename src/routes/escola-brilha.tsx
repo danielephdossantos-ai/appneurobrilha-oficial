@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { useState, useEffect, useRef, Component, ReactNode, useMemo } from "react";
-import { Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, Palette, HelpCircle, Coffee, ArrowRight, Star } from "lucide-react";
+import { useState, useEffect, useRef, Component, ReactNode, useMemo, ComponentType } from "react";
+import { 
+  Play, BookOpen, Volume2, CheckCircle2, Lightbulb, Loader2, AlertCircle, 
+  Palette, HelpCircle, Coffee, ArrowRight, Star, GraduationCap, 
+  Bird, Apple, Rainbow, Trees, Bug, Library, Telescope, 
+  TestTube, Map, Satellite, Ruler, Brain, Target, Sparkles, Home,
+  Car, Dog, Cat, Fish, Flower, Pencil, School, Heart, Sun, Moon, Circle, 
+  Plane, Ship, PenTool, Scissors, Search, Plus, Hand, Eye, Users, Flag, Trophy, Sprout, MousePointer2 as Pointer
+} from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
@@ -23,7 +30,11 @@ import imgNumerosEI from "@/assets/escola-brilha/numeros-ei.png";
 import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
 
+import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";
+
 // Error Boundary para capturar falhas na renderização da aula
+
+
 class AulaErrorBoundary extends Component<{ children: ReactNode; onReset: () => void }, { hasError: boolean; error: Error | null }> {
   constructor(props: any) {
     super(props);
@@ -72,20 +83,20 @@ export const Route = createFileRoute("/escola-brilha")({
 });
 
 const materias = [
-  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Português", img: imgPortugues, cor: "from-coral/30 to-coral/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Matemática", img: imgMatematica, cor: "from-sky/30 to-sky/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Ciências", img: imgCiencias, cor: "from-success/20 to-success/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "historia", nome: "História", img: imgHistoria, cor: "from-sun/30 to-sun/5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "geografia", nome: "Geografia", img: imgGeografia, cor: "from-lilac/30 to-lilac/5", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtes, cor: "from-pink/30 to-pink/5", mascote: Bird, mascoteNome: "Professor Pip" },
 ] as const;
 
 // Educação Infantil — 4 grandes áreas BNCC adaptadas
 const materiasInfantil = [
-  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: "🐥", mascoteNome: "Professor Pip" },
-  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: "🐦", mascoteNome: "Professora Pipa" },
-  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: "🐥", mascoteNome: "Professor Pip" },
+  { id: "portugues", nome: "Linguagem", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Vogais e primeiras palavras", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "matematica", nome: "Números", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar de 1 a 5", mascote: Bird, mascoteNome: "Professor Pip" },
+  { id: "ciencias", nome: "Natureza", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Bichinhos e o mundo", mascote: Bird, mascoteNome: "Professora Pipa" },
+  { id: "artes", nome: "Artes", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Cores e formas", mascote: Bird, mascoteNome: "Professor Pip" },
 ] as const;
 
 function isEI(grade: string) {
@@ -104,21 +115,21 @@ function gradeTier(grade: string): GradeTier {
 }
 
 const tierTheme: Record<GradeTier, {
-  bg: string; scene: string; sceneEmoji: string; vibe: string; titleScale: string;
+  bg: string; scene: string; sceneIcon: ComponentType<{ className?: string }>; vibe: string; titleScale: string;
 }> = {
-  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneEmoji: "🌈🌳🦋", vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
-  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneEmoji: "🏘️📚✨", vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
-  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneEmoji: "🔭🧪🗺️", vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
-  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneEmoji: "🛰️🧭🎯", vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
-  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneEmoji: "📊🧠📐", vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
+  ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneIcon: Rainbow, vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
+  alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneIcon: Library, vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
+  fund1:    { bg: "from-success/15 via-sky/20 to-lilac/15", scene: "Laboratório das Descobertas", sceneIcon: Telescope, vibe: "Vamos investigar juntos",   titleScale: "text-2xl" },
+  fund2:    { bg: "from-sky/20 via-lilac/15 to-primary/10", scene: "Estação de Missões",  sceneIcon: Satellite, vibe: "Sua próxima missão começa agora", titleScale: "text-xl" },
+  fund2plus:{ bg: "from-primary/15 via-lilac/10 to-sky/10", scene: "Centro de Estudos Brilha", sceneIcon: Brain, vibe: "Foco, estratégia e descoberta", titleScale: "text-xl" },
 };
 
 // Frases de feedback positivas (substituem "Tente novamente")
 const ALMOST_THERE = [
   "Você está quase lá!",
-  "Olhe a dica e tente de novo 💡",
+  "Olhe a dica e tente de novo",
   "Boa tentativa! Vamos observar com calma.",
-  "Está perto! Respira e tenta mais uma vez 🌿",
+  "Está perto! Respira e tenta mais uma vez",
 ];
 function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THERE.length)]; }
 
@@ -255,7 +266,7 @@ function Escola() {
       const proxLote = banco.lote + 1;
       const itensNovos = gerarLote(activeChild, selectedGrade, proxLote);
       persistBanco({ lote: proxLote, items: itensNovos, done: [] });
-      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades ✨`);
+      toast.success(`Lote ${banco.lote} concluído! Liberando mais ${BANCO_TAMANHO} atividades`);
     } else {
       persistBanco({ ...banco, done: doneNext });
     }
@@ -419,10 +430,10 @@ function Escola() {
   return (
     <Shell>
       <PageHeader
-        emoji="🎓"
+        icon={GraduationCap}
         title="Escola Brilha"
         subtitle={ei
-          ? `Educação Infantil · Atividades simples e visuais para os pequenos 🌱`
+          ? `Educação Infantil · Atividades simples e visuais para os pequenos`
           : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
       />
 
@@ -448,11 +459,11 @@ function Escola() {
         <div className="mb-4 flex items-end gap-3 md:gap-4">
           {/* Avatar do mascote apontando para o balão */}
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center text-6xl md:text-7xl animate-float-thinking overflow-hidden">
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center animate-float-thinking overflow-hidden">
               {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                 <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
               ) : (
-                activeMascot?.mascot?.image_url || "🐦"
+                <RenderMascote icon={activeMascot?.mascot?.image_url || Bird} className="w-16 h-16 text-primary" />
               )}
             </div>
             <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
@@ -468,10 +479,10 @@ function Escola() {
               <div className="absolute -left-[9px] bottom-[22px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[11px] border-r-white" />
 
               <p className="font-extrabold text-lg md:text-xl text-primary leading-snug">
-                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}! 🌱
+                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}!
               </p>
               <p className="text-sm md:text-base text-foreground/80 mt-1 font-bold">
-                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA CARINHA LÁ EMBAIXO! 👇
+                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA MATÉRIA LÁ EMBAIXO!
               </p>
             </div>
           </div>
@@ -481,14 +492,16 @@ function Escola() {
 
       <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
         <div className="flex items-center gap-4">
-          <div className="text-5xl">{activeChild.avatar}</div>
+          <div className="text-5xl">
+            <RenderVisual value={activeChild.avatar} className="h-12 w-12 text-primary" />
+          </div>
           <div className="flex-1">
             <div className="font-extrabold text-lg">
               {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
             </div>
             <div className="text-sm text-muted-foreground">
               {ei
-                ? "Escolha uma carinha lá embaixo 👇"
+                ? "Escolha uma matéria lá embaixo"
                 : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
             </div>
             <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
@@ -505,11 +518,13 @@ function Escola() {
         const t = tierTheme[gradeTier(selectedGrade)];
         return (
           <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
-            <div className="absolute right-3 top-2 text-5xl opacity-40 animate-float-thinking select-none">{t.sceneEmoji}</div>
+            <div className="absolute right-3 top-2 opacity-40 animate-float-thinking select-none">
+              <t.sceneIcon className="h-20 w-20" />
+            </div>
             <div className="relative">
               <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
               <div className="text-2xl font-extrabold">{t.scene}</div>
-              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo ✨</div>
+              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo</div>
             </div>
           </div>
         );
@@ -519,7 +534,7 @@ function Escola() {
         <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
         {isTeen && (
           <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
-            <div className="text-2xl">🎓</div>
+            <div className="text-2xl"><GraduationCap className="h-6 w-6 text-primary" /></div>
             <div className="flex-1">
               <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
               <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
@@ -657,11 +672,11 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Mascote Guia */}
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
            ) : (
-             activeMascot?.mascot?.image_url || materiaMeta.mascote
+             <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
            )}
         </div>
         <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">
@@ -678,8 +693,8 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         {eiStep === 1 && (
           <div className="text-center space-y-4">
-            <div className="text-[150px] md:text-[200px] drop-shadow-2xl animate-bounce-slow">
-              {aula.visual || "🍎"}
+            <div className="drop-shadow-2xl animate-bounce-slow">
+              <RenderVisual value={aula.visual || "apple"} className="h-40 w-40 text-primary" />
             </div>
             <p className="text-2xl font-black uppercase text-primary">
               {aula.frase_apresentacao || `ESTA É UMA ${palavraFoco}`}
@@ -689,7 +704,9 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 2 && (
           <div className="text-center space-y-6">
-            <div className="text-9xl mb-4">{aula.visual || "🍎"}</div>
+            <div className="mb-4">
+              <RenderVisual value={aula.visual || "apple"} className="h-32 w-32 text-primary mx-auto" />
+            </div>
             <div className="bg-primary text-white text-7xl md:text-9xl font-black px-12 py-6 rounded-3xl shadow-glow tracking-tighter">
               {palavraFoco}
             </div>
@@ -745,7 +762,9 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 5 && (
           <div className="w-full space-y-6">
-            <div className="text-7xl text-center mb-4">{aula.visual || "🍎"}</div>
+            <div className="text-center mb-4">
+              <RenderVisual value={aula.visual || "apple"} className="h-28 w-28 text-primary mx-auto" />
+            </div>
             <div className="grid grid-cols-1 gap-4">
               {sortedOpcoes.map((opt: string, i: number) => (
                 <button
@@ -777,14 +796,16 @@ function AlfabetizacaoFlow({ aula, eiStep, setEiStep, activeMascot, materiaMeta,
 
         {eiStep === 7 && (
           <div className="text-center space-y-6">
-             <div className="text-[180px] animate-bounce-slow">✨</div>
+             <div className="animate-bounce-slow">
+               <Sparkles className="h-40 w-40 text-sun mx-auto" />
+             </div>
              <h3 className="text-4xl font-black text-primary uppercase">Você Brilhou!</h3>
              <p className="text-xl font-bold text-muted-foreground">Agora você já sabe tudo sobre {palavraFoco}!</p>
              <button
                onClick={() => onComplete(true)}
                className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-8"
              >
-               CONCLUIR AULA! 🌟
+               CONCLUIR AULA!
              </button>
           </div>
         )}
@@ -818,7 +839,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
   const b = Number(aula.numero_b ?? 2);
   const op = (aula.operacao === "-" ? "-" : "+") as "+" | "-";
   const resultado = Number(aula.resultado ?? (op === "+" ? a + b : a - b));
-  const emoji = aula.visual_emoji || aula.visual || "🍎";
+  const visualKey = aula.visual_key || aula.visual_emoji || aula.visual || "apple";
   const opcoesNum: number[] = useMemo(() => {
     const base = Array.isArray(aula.opcoes_numericas) && aula.opcoes_numericas.length >= 2
       ? aula.opcoes_numericas.map((n: any) => Number(n))
@@ -852,10 +873,12 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
     if (text) playAudio(text);
   }, [mathStep, a, b, op, resultado]);
 
-  const renderEmojis = (n: number, color = "text-primary") => (
+  const renderVisuals = (n: number, color = "text-primary") => (
     <div className="flex flex-wrap gap-2 justify-center max-w-md">
       {Array.from({ length: Math.max(0, n) }).map((_, i) => (
-        <span key={i} className={`text-5xl md:text-6xl ${color} animate-in zoom-in`} style={{ animationDelay: `${i * 100}ms` }}>{emoji}</span>
+        <div key={i} className={`animate-in zoom-in ${color}`} style={{ animationDelay: `${i * 100}ms` }}>
+          <RenderVisual value={visualKey} className="h-12 w-12 md:h-16 md:w-16" />
+        </div>
       ))}
     </div>
   );
@@ -872,10 +895,12 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
     <div className="w-full max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Mascote guia */}
       <div className="flex items-center gap-4 mb-2">
-        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-4xl shrink-0">
+        <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0">
           {activeMascot?.mascot?.image_url?.startsWith("http") ? (
             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
-          ) : (activeMascot?.mascot?.image_url || materiaMeta.mascote)}
+          ) : (
+            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
+          )}
         </div>
         <div className="bg-white rounded-2xl border-2 border-primary px-4 py-2 text-sm font-bold shadow-sm">{fala}</div>
       </div>
@@ -884,7 +909,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
         {/* TELA 1 — VISUAL */}
         {mathStep === 1 && (
           <div className="text-center space-y-6">
-            {renderEmojis(a)}
+            {renderVisuals(a)}
             <div className="bg-primary text-white text-8xl md:text-9xl font-black w-32 h-32 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-glow mx-auto">
               {a}
             </div>
@@ -910,11 +935,11 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
                         if (next.length === a) toast.success(`Você contou até ${a}!`);
                       }
                     }}
-                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center text-5xl md:text-6xl border-4 transition-all ${
+                    className={`btn-tap w-20 h-20 md:w-24 md:h-24 rounded-3xl flex items-center justify-center border-4 transition-all ${
                       tocado ? "bg-success/15 border-success scale-90" : "bg-white border-primary hover:scale-110"
                     }`}
                   >
-                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : emoji}
+                    {tocado ? <span className="text-2xl font-black text-success">{contados.indexOf(i) + 1}</span> : <RenderVisual value={visualKey} className="h-12 w-12" />}
                   </button>
                 );
               })}
@@ -927,9 +952,9 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
         {mathStep === 3 && (
           <div className="space-y-4 text-center">
             <div className="flex flex-wrap items-center justify-center gap-4">
-              {renderEmojis(a)}
+              {renderVisuals(a)}
               <div className="text-6xl font-black text-sun">{op}</div>
-              {renderEmojis(b, "text-success")}
+              {renderVisuals(b, "text-success")}
             </div>
             <div className="text-5xl md:text-6xl font-black text-primary mt-6">
               {a} <span className="text-sun">{op}</span> {b} = <span className="text-muted-foreground">?</span>
@@ -1029,7 +1054,7 @@ function MathFlow({ aula, mathStep, setMathStep, activeMascot, materiaMeta, chil
               onClick={() => onComplete(true)}
               className="btn-tap bg-success text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow mt-4"
             >
-              CONCLUIR AULA! 🌟
+              CONCLUIR AULA!
             </button>
           </div>
         )}
@@ -1078,9 +1103,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   
   
   const METODOS = [
-    { id: "teacch", nome: "TEACCH", emoji: "🧩", desc: "Passo-a-passo visual estruturado" },
-    { id: "multisensorial", nome: "Multissensorial", emoji: "🎨", desc: "Ver + ouvir + tocar + falar" },
-    { id: "montessori", nome: "Montessori", emoji: "🌱", desc: "Exemplos concretos do dia a dia" },
+    { id: "teacch", nome: "TEACCH", icon: PenTool, desc: "Passo-a-passo visual estruturado" },
+    { id: "multisensorial", nome: "Multissensorial", icon: Palette, desc: "Ver + ouvir + tocar + falar" },
+    { id: "montessori", nome: "Montessori", icon: Sprout, desc: "Exemplos concretos do dia a dia" },
   ] as const;
 
   const naoEntendi = async () => {
@@ -1123,7 +1148,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
         metodo_usado: data.metodo_usado || metodo.nome,
       });
       setMetodoIdx((i) => i + 1);
-      toast.success(`${metodo.emoji} Reexplicando com método ${metodo.nome}!`);
+      toast.success(`Reexplicando com método ${metodo.nome}!`);
     } catch (e) {
       console.error(e);
       toast.error("Não consegui reexplicar agora. Tente de novo.");
@@ -1156,9 +1181,9 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
   };
 
   const titulos: Record<string, string> = {
-    ensino: "📖 Aula",
-    demo: "🎨 Demonstração",
-    opcoes: "✨ Sua vez!",
+    ensino: "Aula",
+    demo: "Demonstração",
+    opcoes: "Sua vez!",
   };
 
   // Stepper pedagógico: alfa=7, math=6, geral=8 (Descobrir→Recompensa)
@@ -1179,13 +1204,15 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
     <Shell>
       {/* Cenário mágico de fundo por faixa etária */}
       <div className={`relative -mx-4 -mt-4 mb-6 px-6 py-6 rounded-3xl bg-gradient-to-br ${theme.bg} overflow-hidden`}>
-        <div className="absolute -right-4 -top-2 text-7xl opacity-30 select-none animate-float-thinking">{theme.sceneEmoji}</div>
+        <div className="absolute -right-4 -top-2 opacity-30 select-none animate-float-thinking">
+          <theme.sceneIcon className="h-32 w-32" />
+        </div>
         <div className="relative flex items-center gap-4">
-          <div className="text-5xl drop-shadow animate-float-thinking">
+          <div className="drop-shadow animate-float-thinking">
             {activeMascot?.mascot?.image_url?.startsWith('http') ? (
               <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
             ) : (
-              activeMascot?.mascot?.image_url || materiaMeta.mascote
+              <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
             )}
           </div>
           <div>
@@ -1203,7 +1230,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <Coffee className="h-6 w-6 text-sun" />
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
-            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo 🌿</div>
+            <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo</div>
           </div>
         </Card>
       )}
@@ -1215,39 +1242,40 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
             {/* Stepper pedagógico adaptado */}
             <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
               {(isAlfaFlow ? [
-                {n:1,l:"Objeto",i:"🍎"},
-                {n:2,l:"Palavra",i:"🔤"},
-                {n:3,l:"Sílabas",i:"✂️"},
-                {n:4,l:"Montar",i:"🧩"},
-                {n:5,l:"Achar",i:"🔎"},
-                {n:6,l:"Escrever",i:"✏️"},
-                {n:7,l:"Legal!",i:"🎉"},
+                {n:1,l:"Objeto",i:Apple},
+                {n:2,l:"Palavra",i:PenTool},
+                {n:3,l:"Sílabas",i:Scissors}, // Scissors doesn't exist? Use Scissors or Ruler. I'll check Scissors.
+                {n:4,l:"Montar",i:Target},
+                {n:5,l:"Achar",i:Search},
+                {n:6,l:"Escrever",i:PenTool},
+                {n:7,l:"Legal!",i:Sparkles},
               ] : isMathFlow ? [
-                {n:1,l:"Visual",i:"👀"},
-                {n:2,l:"Contar",i:"☝️"},
-                {n:3,l:"Conta",i:"➕"},
-                {n:4,l:"Montar",i:"🧩"},
-                {n:5,l:"Prática",i:"✋"},
-                {n:6,l:"Armada",i:"📐"},
+                {n:1,l:"Visual",i:Sun},
+                {n:2,l:"Contar",i:Pointer}, // Pointer? check Lucide. Or Fingerprint. Use Pointer.
+                {n:3,l:"Conta",i:Plus},
+                {n:4,l:"Montar",i:Target},
+                {n:5,l:"Prática",i:Hand},
+                {n:6,l:"Armada",i:Ruler},
               ] : [
-                {n:1,l:"Descobrir",i:"🎯"},
-                {n:2,l:"Observe",i:"👀"},
-                {n:3,l:"Pip Explica",i:"💡"},
-                {n:4,l:"Exemplo",i:"📘"},
-                {n:5,l:"Faça Comigo",i:"🤝"},
-                {n:6,l:"Agora Você",i:"✋"},
-                {n:7,l:"Desafio",i:"🏁"},
-                {n:8,l:"Conquista",i:"🏆"},
+                {n:1,l:"Descobrir",i:Target},
+                {n:2,l:"Observe",i:Eye},
+                {n:3,l:"Pip Explica",i:Lightbulb},
+                {n:4,l:"Exemplo",i:BookOpen},
+                {n:5,l:"Faça Comigo",i:Users},
+                {n:6,l:"Agora Você",i:Hand},
+                {n:7,l:"Desafio",i:Flag},
+                {n:8,l:"Conquista",i:Trophy},
               ]).map((s: any) => {
                 const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
                 const active = s.n === current;
                 const done = s.n < current;
+                const Icon = s.i;
                 return (
                   <span key={s.n} className={`shrink-0 px-2.5 py-1 rounded-full flex items-center gap-1 transition-all ${
                     active ? "bg-primary text-white scale-110 shadow-glow" :
                     done ? "bg-success/20 text-success" : "bg-muted text-muted-foreground"
                   }`}>
-                    <span>{s.i}</span>{s.l}
+                    <Icon className="h-3 w-3" /> {s.l}
                   </span>
                 );
               })}
@@ -1313,11 +1341,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         eiStep === 4 ? 'scale-110 translate-x-12' :
                         'scale-100'
                       }`}>
-                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-[120px] md:text-[140px] animate-float-thinking shadow-2xl border-8 border-white">
+                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center animate-float-thinking shadow-2xl border-8 border-white overflow-hidden">
                           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover rounded-full" />
+                            <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
                           ) : (
-                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-32 w-32 text-primary" />
                           )}
                         </div>
                         {/* Balão de fala */}
@@ -1351,20 +1379,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
 
                       {/* Apoio visual gigante — sempre presente do passo 2 em diante */}
                       {eiStep === 2 && (
-                        <div className="text-[160px] md:text-[200px] drop-shadow-2xl animate-bounce-slow mt-8">
-                          {aula.visual || "⭐"}
+                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
+                          <RenderVisual value={aula.visual || "star"} className="h-40 w-40 md:h-52 md:w-52 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 3 && (
-                        <div className="text-[140px] md:text-[180px] drop-shadow-2xl animate-bounce-slow mt-8">
-                          {aula.visual || "⭐"}
+                        <div className="drop-shadow-2xl animate-bounce-slow mt-8">
+                          <RenderVisual value={aula.visual || "star"} className="h-32 w-32 md:h-44 md:w-44 text-primary mx-auto" />
                         </div>
                       )}
                       {eiStep === 4 && (
                         <div className="flex flex-col items-center gap-3 mt-8">
                           <div className="text-xs font-black uppercase tracking-widest text-muted-foreground">Exemplo resolvido</div>
                           <div className="flex gap-4 items-center">
-                            <div className="text-7xl md:text-8xl">{aula.visual || "⭐"}</div>
+                            <div><RenderVisual value={aula.visual || "star"} className="h-20 w-20 md:h-24 md:w-24 text-primary" /></div>
                             <div className="text-5xl font-black text-sun">→</div>
                             <div className="px-6 py-4 rounded-3xl bg-success/15 border-4 border-success text-2xl md:text-3xl font-black text-success">
                               {aula.resposta_correta?.toString() || "Resposta"}
@@ -1413,11 +1441,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         {reexplaining ? (
                           <><Loader2 className="h-5 w-5 animate-spin" /> Reexplicando...</>
                         ) : (
-                          <>🤔 NÃO ENTENDI · Tente de outro jeito</>
+                          <>NÃO ENTENDI · Tente de outro jeito</>
                         )}
                       </button>
                       <div className="text-[11px] text-muted-foreground text-center max-w-xs">
-                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].emoji} {METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
+                        Próximo método: <b>{METODOS[metodoIdx % METODOS.length].nome}</b> — {METODOS[metodoIdx % METODOS.length].desc}
                       </div>
                     </div>
                   </div>
@@ -1425,11 +1453,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   <div className="w-full">
                     {/* Cabeçalho do Jogo com Instrução do Mascote */}
                     <div className="flex items-end gap-4 mb-8">
-                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center text-5xl overflow-hidden">
+                       <div className="w-24 h-24 shrink-0 rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-coral/20 to-sun/20 flex items-center justify-center overflow-hidden">
                           {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                             <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
                           ) : (
-                            activeMascot?.mascot?.image_url || materiaMeta.mascote
+                            <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-14 w-14 text-primary" />
                           )}
                        </div>
                        <div className="flex-1 bg-white rounded-2xl border-[3px] border-foreground px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative mb-2">
@@ -1545,7 +1573,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                           disabled={reexplaining}
                           className="btn-tap rounded-xl bg-white border-2 border-sun text-sun-foreground px-5 py-3 font-bold text-sm flex items-center gap-2 disabled:opacity-60"
                         >
-                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>🤔 Não entendi — outro método</>}
+                          {reexplaining ? <><Loader2 className="h-4 w-4 animate-spin" /> Reexplicando...</> : <>Não entendi — outro método</>}
                         </button>
                         {aula.metodo_usado && (
                           <span className="text-xs font-bold text-muted-foreground">Método atual: <b>{aula.metodo_usado}</b></span>
@@ -1620,7 +1648,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                   <button
                     onClick={() => {
                       requestHelp(aula.activityId);
-                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar! 💡`);
+                      toast.info(`${materiaMeta.mascoteNome} vai te ajudar!`);
                     }}
                     className="text-sm flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted hover:bg-muted/70 font-bold"
                   >
@@ -1633,20 +1661,20 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {acertou === true && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 border-2 border-success/30 text-success text-lg animate-bounce-short">
                     <div className="flex items-center gap-3">
-                      <div className="text-4xl drop-shadow">
+                      <div className="shrink-0">
                         {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                           <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
                         ) : (
-                          activeMascot?.mascot?.image_url || materiaMeta.mascote
+                          <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
                         )}
                       </div>
                       <CheckCircle2 className="h-8 w-8" />
                       <div className="flex-1">
-                        <div className="font-extrabold">Mandou bem, {childNome}! ⭐</div>
+                        <div className="font-extrabold">Mandou bem, {childNome}!</div>
                         <div className="text-base">{aula.isEI ? (aula.reforco_positivo || "").toUpperCase() : aula.reforco_positivo}</div>
                         {aula.desafio_final && (
                           <div className="mt-2 px-3 py-2 rounded-xl bg-white/60 border border-success/40 text-sm text-success">
-                            <b className="uppercase tracking-wider text-[10px] mr-1">🏁 Desafio:</b>{aula.desafio_final}
+                            <b className="uppercase tracking-wider text-[10px] mr-1">Desafio:</b>{aula.desafio_final}
                           </div>
                         )}
                         <div className="text-xs text-success/70 mt-1"><b>{activeMascot?.mascot?.name || materiaMeta.mascoteNome}</b> está orgulhoso(a) de você.</div>
@@ -1665,11 +1693,11 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 
                 {acertou === false && (
                   <div className="mt-6 p-6 rounded-2xl bg-gradient-to-br from-sun/25 to-petal/15 border-2 border-sun/30 flex items-start gap-3 animate-in fade-in">
-                    <div className="text-4xl">
+                    <div className="shrink-0">
                       {activeMascot?.mascot?.image_url?.startsWith('http') ? (
                         <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
                       ) : (
-                        activeMascot?.mascot?.image_url || materiaMeta.mascote
+                        <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
                       )}
                     </div>
                     <Lightbulb className="h-7 w-7 text-sun shrink-0 mt-0.5 animate-pulse" />
@@ -1680,7 +1708,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                         onClick={() => { setAcertou(null); setTentativa(null); }}
                         className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm"
                       >
-                        Tentar de novo 🌟
+                        Tentar de novo
                       </button>
                     </div>
                   </div>

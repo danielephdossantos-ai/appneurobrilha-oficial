@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import { 
   Brain, Lightbulb, AlertCircle, Info, CheckCircle2, TrendingUp, TrendingDown, Minus, BarChart3,
-  Calendar, ArrowUpRight, History, Sparkles
+  Calendar, ArrowUpRight, History, Sparkles, Gem, PenTool, Dumbbell
 } from "lucide-react";
 import { ReportGenerator } from "@/modules/neuro-treino/engine/ReportGenerator";
 import { supabase } from "@/database/supabase/client";
@@ -49,9 +49,9 @@ function RelatorioPremium() {
   if (!activeChild || !anamnesis) {
     return (
       <Shell>
-        <PageHeader emoji="📊" title="Relatório de Evolução" subtitle="Análise do Desenvolvimento" />
+        <PageHeader icon={BarChart3} title="Relatório de Evolução" subtitle="Análise do Desenvolvimento" />
         <Card className="text-center py-10 max-w-xl mx-auto mt-10">
-          <div className="text-5xl mb-4">📝</div>
+          <div className="text-5xl mb-4 text-primary mx-auto flex justify-center"><PenTool className="h-12 w-12" /></div>
           <h2 className="text-xl font-bold mb-2">Anamnese Necessária</h2>
           <p className="text-muted-foreground mb-6">A anamnese ainda não foi concluída para gerar o perfil fixo de desenvolvimento.</p>
           <button 
@@ -81,7 +81,7 @@ function RelatorioPremium() {
     <Shell>
       <div className="max-w-5xl mx-auto space-y-8 pb-20">
         <PageHeader 
-          emoji="💎" 
+          icon={Gem} 
           title="Relatório Premium NeuroBrilha" 
           subtitle={`Perfil e Evolução · ${activeChild.nome}`} 
         />
@@ -291,7 +291,7 @@ function RelatorioPremium() {
             <div className="grid grid-cols-1 gap-3">
               {report?.strengths.map((s, i) => (
                 <div key={i} className="p-4 bg-white rounded-2xl border border-emerald-100 text-emerald-900 text-sm font-black shadow-sm flex items-center gap-3">
-                  <span className="text-xl">💪</span> {s}
+                  <span className="text-emerald-600"><Dumbbell className="h-5 w-5" /></span> {s}
                 </div>
               ))}
             </div>
@@ -305,7 +305,7 @@ function RelatorioPremium() {
             <div className="grid grid-cols-1 gap-3">
               {report?.attentionPoints.map((s, i) => (
                 <div key={i} className="p-4 bg-white rounded-2xl border border-amber-100 text-amber-900 text-sm font-black shadow-sm flex items-center gap-3">
-                  <span className="text-xl">⚠️</span> {s}
+                  <span className="text-amber-600"><AlertCircle className="h-5 w-5" /></span> {s}
                 </div>
               ))}
             </div>
@@ -324,7 +324,7 @@ function RelatorioPremium() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {report?.recommendations.map((r, i) => (
               <div key={i} className="p-6 bg-white/5 hover:bg-white/10 transition-all rounded-[2rem] border border-white/10 flex flex-col gap-4 group">
-                <div className="text-4xl group-hover:scale-110 transition-transform">💡</div>
+                <div className="group-hover:scale-110 transition-transform"><Lightbulb className="h-8 w-8 text-primary" /></div>
                 <p className="text-sm font-black leading-snug">{r}</p>
               </div>
             ))}
