@@ -11,10 +11,11 @@ interface PipPedagogicalGuidanceProps {
 }
 
 
-export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className }) => {
+export const PipPedagogicalGuidance: React.FC<PipPedagogicalGuidanceProps> = ({ stage, className, manualMessage }) => {
   const { activeChild } = useAppState();
   const [message, setMessage] = useState<string | null>(null);
   const [emotion, setEmotion] = useState<PipEmotion>('happy');
+
 
   useEffect(() => {
     if (!activeChild || stage === 'idle') {
