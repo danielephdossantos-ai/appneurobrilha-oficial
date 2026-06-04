@@ -52,12 +52,19 @@ export const EARLY_CHILDHOOD = {
       { points: [{x:50, y:10}, {x:50, y:90}], label: 'Linha em Pé', code: 'EI03CG01' },
     ]
   },
+  // EI03EO01 - Sentimentos (O EU, O OUTRO E O NÓS)
   emocoes: [
     { label: 'FELIZ', visual: 'smile', emotion: 'happy', code: 'EI03EO01' },
     { label: 'TRISTE', visual: 'frown', emotion: 'sad', code: 'EI03EO01' },
     { label: 'BRAVO', visual: 'angry', emotion: 'angry', code: 'EI03EO01' },
     { label: 'SONO', visual: 'moon', emotion: 'sleeping', code: 'EI03EO01' },
   ],
+  // Compatibilidade com CognitiveGenerator
+  cognitivo: {
+    memory: ['apple', 'cat', 'star', 'balloon', 'flower', 'car'],
+    sequence: ['apple', 'banana', 'grape'],
+  },
+  // Compatibilidade com LinguisticsGenerator
   artes_sons: {
     animais: [
       { nome: 'VACA', visual: 'cow', options: ['miau', 'au au', 'cocoricó', 'muuu'], answer: 'muuu', code: 'EI03TS03' },
