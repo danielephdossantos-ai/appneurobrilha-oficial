@@ -3,47 +3,52 @@ import { supabase } from "@/integrations/supabase/client";
 export interface BNCCSkill {
   id: string;
   codigo_bncc: string;
-  ano: string | null;
-  disciplina: string | null;
-  titulo: string | null;
-  objetivo: string | null;
-  nivel: string | null;
-  ordem: number | null;
+  ano: string;
+  disciplina: string;
+  titulo: string;
+  objetivo: string;
+  nivel: string;
 }
 
 export interface Explanation {
   id: string;
-  codigo_bncc: string | null;
-  texto_professor: string | null;
-  audio: string | null;
-  imagem: string | null;
-  video: string | null;
+  codigo_bncc: string;
+  texto_professor: string;
+  audio?: string;
+  imagem?: string;
+  video?: string;
 }
 
-export interface ActivityDB {
+export interface Activity {
   id: string;
-  codigo_bncc: string | null;
-  tipo: string | null;
-  nivel: string | null;
-  pergunta: string | null;
-  alternativa_a: string | null;
-  alternativa_b: string | null;
-  alternativa_c: string | null;
-  alternativa_d: string | null;
-  resposta: string | null;
-  feedback: string | null;
-  ordem: number | null;
-  explicacao_ativa: string | null;
+  codigo_bncc: string;
+  tipo: string;
+  nivel: string;
+  pergunta: string;
+  alternativa_a: string;
+  alternativa_b: string;
+  alternativa_c: string;
+  resposta: string;
+  feedback: string;
+}
+
+export interface LearningTrail {
+  id: string;
+  nome: string;
+  descricao: string;
+  ano: string;
+  disciplina: string;
+  habilidades_ordenadas: string[];
 }
 
 export interface StudentProgress {
   id: string;
-  aluno_id: string | null;
-  codigo_bncc: string | null;
-  tentativas: number | null;
-  acertos: number | null;
-  erros: number | null;
-  dominio: number | null;
+  aluno_id: string;
+  codigo_bncc: string;
+  tentativas: number;
+  acertos: number;
+  erros: number;
+  dominio: number;
 }
 
 export class SupabasePedagogicalService {
@@ -58,29 +63,13 @@ export class SupabasePedagogicalService {
     return SupabasePedagogicalService.instance;
   }
 
-  async getSkillsByGradeAndSubject(grade: string, subject: string): Promise<BNCCSkill[]> {
-    const { data, error } = await supabase
-      .from('bncc_habilidades')
-      .select('*')
-      .eq('ano', grade)
-      .ilike('disciplina', `%${subject}%`)
-      .order('ordem', { ascending: true });
-
-
-    if (error) {
-      console.error('Error fetching skills:', error);
-      return [];
-    }
-    return data || [];
-  }
-
   async getSkillByCode(code: string): Promise<BNCCSkill | null> {
     const { data, error } = await supabase
       .from('bncc_habilidades')
       .select('*')
       .eq('codigo_bncc', code)
       .single();
-
+    
     if (error) {
       console.error('Error fetching skill:', error);
       return null;
@@ -94,7 +83,7 @@ export class SupabasePedagogicalService {
       .select('*')
       .eq('codigo_bncc', code)
       .single();
-
+    
     if (error) {
       console.error('Error fetching explanation:', error);
       return null;
@@ -102,12 +91,12 @@ export class SupabasePedagogicalService {
     return data;
   }
 
-  async getActivitiesByCode(code: string): Promise<ActivityDB[]> {
+  async getActivitiesByCode(code: string): Promise<Activity[]> {
     const { data, error } = await supabase
       .from('atividades')
       .select('*')
       .eq('codigo_bncc', code);
-
+    
     if (error) {
       console.error('Error fetching activities:', error);
       return [];
@@ -115,81 +104,62 @@ export class SupabasePedagogicalService {
     return data || [];
   }
 
-  async saveProgress(progress: Omit<StudentProgress, 'id'>): Promise<void> {
-    const { error } = await supabase
-      .from('progresso_aluno')
-      .upsert(
-        { 
-          aluno_id: progress.aluno_id, 
-          codigo_bncc: progress.codigo_bncc,
-          tentativas: progress.tentativas,
-          acertos: progress.acertos,
-          erros: progress.erros,
-          dominio: progress.dominio,
-          updated_at: new Date().toISOString()
-        },
-        { onConflict: 'aluno_id,codigo_bncc' }
-      );
-
-    if (error) {
-      console.error('Error saving progress:', error);
+  async getTrails(grade: string, subject?: string): Promise<LearningTrail[]> {
+    let query = supabase
+      .from('trilhas_aprendizagem')
+      .select('*')
+      .eq('ano', grade)
+      .eq('ativa', true);
+    
+    if (subject) {
+      query = query.eq('disciplina', subject);
     }
+
+    const { data, error } = await query;
+    
+    if (error) {
+      console.error('Error fetching trails:', error);
+      return [];
+    }
+    return (data || []).map(trail => ({
+      ...trail,
+      habilidades_ordenadas: Array.isArray(trail.habilidades_ordenadas) 
+        ? trail.habilidades_ordenadas 
+        : []
+    }));
   }
 
-  async getProgress(alunoId: string, code: string): Promise<StudentProgress | null> {
+  async getStudentProgress(studentId: string, bnccCode: string): Promise<StudentProgress | null> {
     const { data, error } = await supabase
       .from('progresso_aluno')
       .select('*')
-      .eq('aluno_id', alunoId)
-      .eq('codigo_bncc', code)
-      .single();
-
-    if (error && error.code !== 'PGRST116') { // PGRST116 is not found
-      console.error('Error fetching progress:', error);
+      .eq('aluno_id', studentId)
+      .eq('codigo_bncc', bnccCode)
+      .maybeSingle();
+    
+    if (error) {
+      console.error('Error fetching student progress:', error);
       return null;
     }
     return data;
   }
 
-  async getNextSkill(currentSkillCode: string): Promise<BNCCSkill | null> {
-    const currentSkill = await this.getSkillByCode(currentSkillCode);
-    if (!currentSkill || currentSkill.ordem === null || !currentSkill.ano || !currentSkill.disciplina) return null;
-
+  async updateStudentProgress(progress: Partial<StudentProgress> & { aluno_id: string; codigo_bncc: string }) {
     const { data, error } = await supabase
-      .from('bncc_habilidades')
-      .select('*')
-      .eq('ano', currentSkill.ano)
-      .eq('disciplina', currentSkill.disciplina)
-      .gt('ordem', currentSkill.ordem)
-      .order('ordem', { ascending: true })
-      .limit(1)
-      .maybeSingle();
+      .from('progresso_aluno')
+      .upsert({
+        ...progress,
+        updated_at: new Date().toISOString()
+      }, {
+        onConflict: 'aluno_id,codigo_bncc'
+      })
+      .select()
+      .single();
 
-    if (error) return null;
+    if (error) {
+      console.error('Error updating student progress:', error);
+      throw error;
+    }
     return data;
-  }
-
-  async isSkillUnlocked(alunoId: string, skillCode: string): Promise<boolean> {
-    const skill = await this.getSkillByCode(skillCode);
-    if (!skill || !skill.ano || !skill.disciplina) return false;
-    
-    // First skill is always unlocked
-    if (skill.ordem === 1) return true;
-
-    // Check if the previous skill has 80% mastery
-    const { data, error } = await supabase
-      .from('bncc_habilidades')
-      .select('codigo_bncc')
-      .eq('ano', skill.ano)
-      .eq('disciplina', skill.disciplina)
-      .lt('ordem', skill.ordem)
-      .order('ordem', { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (error || !data) return true; // If no previous skill found, unlock it
-
-    const prevProgress = await this.getProgress(alunoId, data.codigo_bncc);
-    return (prevProgress?.dominio || 0) >= 80;
   }
 }
