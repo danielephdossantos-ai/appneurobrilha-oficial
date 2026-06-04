@@ -1316,10 +1316,10 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <div className="flex-1">
             <div className="font-bold">Que tal uma pausinha, {childNome}?</div>
             <div className="text-sm text-muted-foreground">Detectei sinais de cansaço. Respira fundo</div>
-        </div>
-        <FloatingMascotGuidance activeMascot={activeMascot} icon={materiaMeta.mascote} />
+          </div>
         </Card>
       )}
+
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
