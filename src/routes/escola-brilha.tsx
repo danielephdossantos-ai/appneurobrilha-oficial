@@ -316,8 +316,6 @@ function Escola() {
         const skill = dbSkills[0];
         const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
         const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
-        const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
-        const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
         if (explanation && dbActivities.length > 0) {
           const activity = dbActivities[0];
