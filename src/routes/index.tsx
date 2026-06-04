@@ -163,7 +163,7 @@ function Index() {
         </div>
 
         {/* PIP NO CENTRO */}
-        <div className="relative z-20 flex flex-col items-center justify-center mt-2 mb-8 md:mb-12">
+        <div className="relative z-20 flex flex-col items-center justify-center mt-0 mb-4 md:mb-12">
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -185,7 +185,7 @@ function Index() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-6 bg-white/95 backdrop-blur px-6 py-3 rounded-2xl shadow-xl border-2 border-[#FFC93C] max-w-md text-center"
+            className="mt-3 bg-white/95 backdrop-blur px-4 py-2 rounded-2xl shadow-xl border-2 border-[#FFC93C] max-w-[280px] md:max-w-md text-center"
           >
             <p className="text-[#0d1f55] font-black text-base md:text-lg leading-tight">
               {activeChild
