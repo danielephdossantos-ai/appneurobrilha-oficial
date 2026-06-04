@@ -28,8 +28,8 @@ function hidratar(raw: string | null): Hiperfoco | null {
         elementos: parsed.elementos?.length ? parsed.elementos : [parsed.label || "personagem"],
         som: "som do tema",
         formaPontilhado: "um símbolo do tema",
-        pipAcertos: [`Boa! Acertou em cheio no mundo de ${parsed.label}! ⭐`],
-        pipIncentivos: [`Tranquilo! No universo de ${parsed.label} se aprende treinando. 💪`],
+        lumiAcertos: [`Boa! Acertou em cheio no mundo de ${parsed.label}! ⭐`],
+        lumiIncentivos: [`Tranquilo! No universo de ${parsed.label} se aprende treinando. 💪`],
       };
     }
     return HIPERFOCOS[parsed.id] ?? null;
