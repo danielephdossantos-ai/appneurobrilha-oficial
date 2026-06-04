@@ -718,17 +718,18 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
   const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
   const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   
-  // Mascote oficial: Pipa para EI/Linguagem, Pip para o resto
   const isPipaMateria = aula.isEI || aula.materia === 'portugues';
   const mascotImg = isPipaMateria ? imgPipa : imgPip;
   const mascotNome = isPipaMateria ? "Professora Pipa" : "Professor Pip";
 
   const steps = [
     { id: 1, label: "EXPLICAÇÃO", icon: Lightbulb },
-    { id: 2, label: "TREINO GUIADO", icon: Target },
-    { id: 3, label: "PRÁTICA", icon: PenTool },
-    { id: 4, label: "DESAFIO", icon: Flag },
-    { id: 5, label: "AVALIAÇÃO", icon: Trophy },
+    { id: 2, label: "DEMONSTRAÇÃO", icon: Eye },
+    { id: 3, label: "TREINO GUIADO", icon: Target },
+    { id: 4, label: "PRÁTICA", icon: PenTool },
+    { id: 5, label: "DESAFIO", icon: Flag },
+    { id: 6, label: "AVALIAÇÃO", icon: Trophy },
+    { id: 7, label: "DOMÍNIO", icon: Star },
   ];
 
   const handleAnswer = (isCorrect: boolean) => {
@@ -737,20 +738,19 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
       setFeedback(true);
       setTimeout(() => {
         setFeedback(null);
-        if (step === 2) {
-          setStep(3);
+        if (step === 3) {
+          setStep(4);
           setPracticeCount(0);
-        } else if (step === 3) {
+        } else if (step === 4) {
           if (practiceCount < 2) {
             setPracticeCount(prev => prev + 1);
-            // Aqui poderíamos regenerar a atividade, mas para simplificar
-            // e garantir consistência, vamos apenas avançar o contador.
-            // Em uma implementação real, o ActivityProceduralService geraria um novo item.
           } else {
-            setStep(4);
+            setStep(5);
           }
-        } else if (step === 4) {
-          setStep(5);
+        } else if (step === 5) {
+          setStep(6);
+        } else if (step === 6) {
+          setStep(7);
         }
       }, 1500);
     } else {
@@ -762,6 +762,7 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
 
   useEffect(() => {
     const playAudio = (msg: string) => {
+      if (!msg) return;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(msg);
       u.lang = 'pt-BR';
@@ -769,9 +770,12 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
       window.speechSynthesis.speak(u);
     };
 
-    if (step === 1) playAudio(aula.etapa1_intro || aula.instruction || "Vamos começar nossa aula!");
-    if (step === 2) playAudio("Vamos tentar juntos? Eu te ajudo!");
-    if (step === 4) playAudio("Agora é um desafio! Tente fazer sozinho.");
+    if (step === 1) playAudio(aula.etapa1_explicação || "Vamos aprender algo novo!");
+    if (step === 2) playAudio(aula.etapa2_demonstração || "Veja como é fácil!");
+    if (step === 3) playAudio(aula.etapa3_treino_guiado || "Vamos tentar juntos?");
+    if (step === 4) playAudio(aula.etapa4_prática || "Agora é sua vez!");
+    if (step === 5) playAudio(aula.etapa5_desafio || "Desafio final!");
+    if (step === 7) playAudio(aula.etapa7_domínio || "Parabéns, você conseguiu!");
   }, [step, aula]);
 
   return (
@@ -786,100 +790,86 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
           ))}
         </div>
 
-        <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] overflow-hidden bg-gradient-to-b from-white to-primary/5">
+        <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] bg-gradient-to-b from-white to-primary/5">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="text-center space-y-8 w-full max-w-lg">
-                <div className="space-y-4">
-                  <div className="text-[10px] font-black tracking-widest text-primary/60 uppercase">Módulo Escola Brilha</div>
-                  <h2 className="text-4xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
-                  <div className="bg-white rounded-[3rem] p-10 border-4 border-primary/10 shadow-soft relative">
-                     <RenderVisual value={aula.visual || "book"} className="h-40 w-40 text-primary mx-auto animate-float-thinking" />
-                  </div>
-                  <p className="text-xl font-bold text-foreground/80 leading-relaxed bg-white/50 rounded-2xl p-4">
-                    {aula.etapa1_intro || aula.instruction}
-                  </p>
+              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
+                <h2 className="text-4xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
+                <div className="bg-white rounded-[3rem] p-10 border-4 border-primary/10 shadow-soft">
+                  <RenderVisual value={aula.visual || "book"} className="h-40 w-40 text-primary mx-auto" />
                 </div>
-
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-28 h-28 rounded-full bg-gradient-to-br from-primary/30 to-sun/30 border-4 border-white shadow-xl overflow-hidden animate-bounce-slow">
-                    <img src={mascotImg} alt={mascotNome} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="bg-primary text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">{mascotNome}</div>
-                </div>
-
-                <button onClick={() => setStep(2)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full text-2xl font-black shadow-glow flex items-center gap-3 border-4 border-white mt-4">
-                  COMEÇAR <ArrowRight className="h-8 w-8" />
-                </button>
+                <p className="text-xl font-bold text-foreground/80 p-4 bg-white/50 rounded-2xl">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
+                <button onClick={() => setStep(2)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full text-2xl font-black border-4 border-white">CONTINUAR</button>
               </motion.div>
             )}
 
-            {(step >= 2 && step <= 4) && (
-              <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full flex flex-col items-center justify-center space-y-8">
-                 <div className="text-center">
-                   <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">
-                     Passo {step} de 5 · {steps[step-1].label} {step === 3 && `(${practiceCount + 1}/3)`}
-                   </span>
-                   <h3 className="text-3xl font-black text-primary uppercase mt-1">
-                     {step === 2 ? "Treino Guiado" : step === 3 ? "Prática" : "Desafio Final"}
-                   </h3>
-                   {step === 2 && <p className="text-sm font-bold text-success animate-pulse">DICA: Observe bem a imagem antes de responder!</p>}
-                   {step === 4 && <p className="text-sm font-bold text-sun">SEM AJUDA AGORA! VOCÊ CONSEGUE!</p>}
-                 </div>
+            {step === 2 && (
+              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
+                <h2 className="text-3xl font-black text-primary uppercase">DEMONSTRAÇÃO</h2>
+                <div className="bg-white rounded-[3rem] p-10 border-4 border-sun/10 shadow-soft">
+                   <RenderVisual value={aula.visual || "eye"} className="h-32 w-32 text-sun mx-auto animate-pulse" />
+                </div>
+                <p className="text-xl font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
+                <button onClick={() => setStep(3)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full font-black">ENTENDI!</button>
+              </motion.div>
+            )}
 
-                 <div className="w-full max-w-2xl">
-                   <EIMiniGame 
-                     aula={aula} 
-                     onAnswer={handleAnswer}
-                     disabled={feedback !== null}
-                   />
+            {(step >= 3 && step <= 5) && (
+              <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full flex flex-col items-center justify-center">
+                 <div className="text-center mb-4">
+                    <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">Passo {step} de 7 · {steps[step-1].label}</span>
+                    <h3 className="text-3xl font-black text-primary uppercase">{steps[step-1].label}</h3>
+                    <p className="text-sm font-bold text-muted-foreground">{step === 3 ? (aula.etapa3_treino_guiado || "Vamos fazer juntos!") : step === 4 ? (aula.etapa4_prática || "Agora é com você!") : (aula.etapa5_desafio || "O grande desafio!")}</p>
                  </div>
-
-                 {/* Mascote no rodapé sem atrapalhar */}
+                 <div className="w-full max-w-2xl my-8">
+                   <EIMiniGame aula={aula} onAnswer={handleAnswer} disabled={feedback !== null} />
+                 </div>
                  <div className="absolute bottom-6 right-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-[2rem] p-3 border-2 border-primary/20 shadow-kid z-10 animate-in slide-in-from-right-4">
-                   <div className="text-right hidden sm:block">
-                     <div className="text-[11px] font-black text-primary uppercase leading-none">{mascotNome}</div>
-                     <div className="text-[10px] text-muted-foreground font-bold mt-1">Estou aqui com você!</div>
-                   </div>
-                   <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gradient-to-br from-primary/10 to-sun/10">
-                     <img src={mascotImg} alt={mascotNome} className="w-full h-full object-cover" />
-                   </div>
+                    <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gradient-to-br from-primary/10 to-sun/10">
+                      <img src={mascotImg} alt={mascotNome} className="w-full h-full object-cover" />
+                    </div>
                  </div>
               </motion.div>
             )}
 
-            {step === 5 && (
-              <motion.div key="step5" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-8 w-full max-w-md">
+            {step === 6 && (
+               <motion.div key="step6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-md">
+                  <h2 className="text-4xl font-black text-primary uppercase">AVALIAÇÃO</h2>
+                  <div className="grid grid-cols-2 gap-4">
+                     <div className="p-6 bg-white rounded-3xl shadow-soft border-4 border-success/10">
+                        <div className="text-4xl font-black text-success">{performance.hits}</div>
+                        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Acertos</div>
+                     </div>
+                     <div className="p-6 bg-white rounded-3xl shadow-soft border-4 border-destructive/10">
+                        <div className="text-4xl font-black text-destructive">{performance.misses}</div>
+                        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Erros</div>
+                     </div>
+                  </div>
+                  <p className="text-lg font-bold text-foreground/70">{aula.etapa6_avaliação || "Excelente desempenho!"}</p>
+                  <button onClick={() => setStep(7)} className="btn-tap bg-success text-white px-12 py-5 rounded-full font-black shadow-glow border-4 border-white w-full">VER RESULTADO FINAL</button>
+               </motion.div>
+            )}
+
+            {step === 7 && (
+              <motion.div key="step7" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-8 w-full max-w-md">
                 <div className="relative">
                   <div className="absolute inset-0 bg-sun/20 blur-3xl rounded-full" />
                   <div className="bg-white rounded-full w-40 h-40 flex items-center justify-center mx-auto mb-4 border-8 border-sun/20 shadow-2xl relative">
-                    <Trophy className="h-20 w-20 text-sun animate-bounce" />
+                    <Trophy className="h-24 w-24 text-sun animate-bounce" />
                   </div>
                 </div>
+                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">DOMÍNIO ATINGIDO!</h2>
+                <p className="text-xl font-bold text-muted-foreground">{aula.etapa7_domínio || "Você dominou esta habilidade com maestria!"}</p>
                 
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">Aula Concluída!</h2>
-                <p className="text-xl font-bold text-muted-foreground">Você brilhou muito nesta atividade!</p>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-6 rounded-[2rem] border-4 border-primary/10 shadow-soft">
-                    <div className="text-4xl font-black text-primary">{performance.hits}</div>
-                    <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Acertos</div>
-                  </div>
-                  <div className="bg-white p-6 rounded-[2rem] border-4 border-primary/10 shadow-soft">
-                    <div className="text-4xl font-black text-sun">{Math.floor((Date.now() - performance.startTime) / 1000)}s</div>
-                    <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Tempo</div>
-                  </div>
-                </div>
-
                 <div className="p-6 rounded-[2.5rem] bg-primary/5 border-4 border-white shadow-soft">
-                  <div className="text-[10px] font-black uppercase text-primary mb-2 tracking-widest">Habilidade BNCC</div>
-                  <div className="text-lg font-black text-foreground">{aula.bncc_code || "HABILIDADE EM DESENVOLVIMENTO"}</div>
-                  <div className="mt-3 flex items-center justify-center gap-2">
-                    <div className="h-3 w-40 bg-muted rounded-full overflow-hidden">
-                       <div className="h-full bg-success" style={{ width: '85%' }} />
-                    </div>
-                    <span className="text-xs font-black text-success uppercase">Domínio: 85%</span>
-                  </div>
+                   <div className="text-[10px] font-black uppercase text-primary mb-2 tracking-widest">Habilidade BNCC</div>
+                   <div className="text-lg font-black text-foreground">{aula.bncc_code || aula.skill_code || "HABILIDADE EM DESENVOLVIMENTO"}</div>
+                   <div className="mt-3 flex items-center justify-center gap-2">
+                     <div className="h-3 w-40 bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-success" style={{ width: '90%' }} />
+                     </div>
+                     <span className="text-xs font-black text-success uppercase">Domínio: 90%</span>
+                   </div>
                 </div>
 
                 <button 
@@ -895,7 +885,6 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
             )}
           </AnimatePresence>
 
-          {/* Feedback overlays */}
           {feedback === true && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0 bg-success/20 pointer-events-none flex items-center justify-center z-50">
               <CheckCircle2 className="h-48 w-48 text-success drop-shadow-glow" />
@@ -908,14 +897,14 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
           )}
         </Card>
 
-        {step < 5 && (
+        {step < 7 && (
           <div className="flex justify-between items-center px-4">
              <button onClick={() => setStep(Math.max(1, step - 1))} className="text-muted-foreground font-black text-xs uppercase tracking-widest hover:text-primary transition-colors">← Voltar</button>
              <div className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-[0.2em]">
                {childNome} • {aula.grade}
              </div>
-             {step > 1 ? (
-               <button onClick={() => setStep(Math.min(5, step + 1))} className="text-primary font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all">Pular passo →</button>
+             {step > 1 && step < 6 ? (
+               <button onClick={() => setStep(Math.min(7, step + 1))} className="text-primary font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all">Pular passo →</button>
              ) : <div className="w-20" />}
           </div>
         )}
@@ -923,4 +912,5 @@ function AulaView({ aula, setAula, childNome, activeMascot, tier, onCompleted }:
     </Shell>
   );
 }
+
 
