@@ -73,11 +73,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const mascotImage = getMascotImage();
 
   const sizes = {
-    sm: 'w-24 h-24',
-    md: 'w-48 h-48', // Aumentado de 40 para 48
-    lg: 'w-64 h-64', // Aumentado de 56 para 64
-    xl: 'w-80 h-80', // Aumentado de 72 para 80
-    '2xl': 'w-[450px] h-[450px]', // Aumentado significativamente
+    sm: 'w-12 h-12 md:w-16 md:h-16',
+    md: 'w-20 h-20 md:w-24 md:h-24',
+    lg: 'w-28 h-28 md:w-32 md:h-32',
+    xl: 'w-36 h-36 md:w-48 md:h-48',
+    '2xl': 'w-52 h-52 md:w-64 md:h-64',
   };
 
 
