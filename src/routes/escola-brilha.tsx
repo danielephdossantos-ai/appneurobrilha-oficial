@@ -310,15 +310,12 @@ function Escola() {
       const pedService = SupabasePedagogicalService.getInstance();
       
       // 1. Priorizar conteúdo do Banco Pedagógico (Novas tabelas)
-      const { data: dbSkills, error: skillsError } = await supabase
-        .from('bncc_habilidades')
-        .select('*')
-        .eq('ano', selectedGrade)
-        .ilike('disciplina', `%${materiaId}%`)
-        .limit(1);
+      const dbSkills = await pedService.getSkillsByGradeAndSubject(selectedGrade, materiaId);
 
       if (dbSkills && dbSkills.length > 0) {
         const skill = dbSkills[0];
+        const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
+        const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
         const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
