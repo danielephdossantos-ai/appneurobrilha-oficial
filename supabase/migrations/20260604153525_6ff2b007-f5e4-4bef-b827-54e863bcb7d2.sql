@@ -1,0 +1,1 @@
+ALTER TABLE public.progresso_aluno ADD CONSTRAINT unique_student_skill UNIQUE (aluno_id, codigo_bncc);

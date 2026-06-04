@@ -8,6 +8,7 @@ export interface BNCCSkill {
   titulo: string | null;
   objetivo: string | null;
   nivel: string | null;
+  ordem: number | null;
 }
 
 export interface Explanation {
@@ -62,7 +63,9 @@ export class SupabasePedagogicalService {
       .from('bncc_habilidades')
       .select('*')
       .eq('ano', grade)
-      .ilike('disciplina', `%${subject}%`);
+      .ilike('disciplina', `%${subject}%`)
+      .order('ordem', { ascending: true });
+
 
     if (error) {
       console.error('Error fetching skills:', error);
@@ -146,5 +149,47 @@ export class SupabasePedagogicalService {
       return null;
     }
     return data;
+  }
+
+  async getNextSkill(currentSkillCode: string): Promise<BNCCSkill | null> {
+    const currentSkill = await this.getSkillByCode(currentSkillCode);
+    if (!currentSkill || currentSkill.ordem === null || !currentSkill.ano || !currentSkill.disciplina) return null;
+
+    const { data, error } = await supabase
+      .from('bncc_habilidades')
+      .select('*')
+      .eq('ano', currentSkill.ano)
+      .eq('disciplina', currentSkill.disciplina)
+      .gt('ordem', currentSkill.ordem)
+      .order('ordem', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (error) return null;
+    return data;
+  }
+
+  async isSkillUnlocked(alunoId: string, skillCode: string): Promise<boolean> {
+    const skill = await this.getSkillByCode(skillCode);
+    if (!skill || !skill.ano || !skill.disciplina) return false;
+    
+    // First skill is always unlocked
+    if (skill.ordem === 1) return true;
+
+    // Check if the previous skill has 80% mastery
+    const { data, error } = await supabase
+      .from('bncc_habilidades')
+      .select('codigo_bncc')
+      .eq('ano', skill.ano)
+      .eq('disciplina', skill.disciplina)
+      .lt('ordem', skill.ordem)
+      .order('ordem', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (error || !data) return true; // If no previous skill found, unlock it
+
+    const prevProgress = await this.getProgress(alunoId, data.codigo_bncc);
+    return (prevProgress?.dominio || 0) >= 80;
   }
 }
