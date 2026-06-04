@@ -20,13 +20,6 @@ export const EARLY_CHILDHOOD = {
       { word: 'CASA', answer: 'ASA', options: ['ASA', 'PATO', 'GATO'], visual: 'home', code: 'EI03EF01' },
       { word: 'GATO', answer: 'PATO', options: ['PATO', 'BALÃO', 'CASA'], visual: 'cat', code: 'EI03EF01' },
     ],
-    // EI03EF01 - Sentimentos
-    emocoes: [
-      { label: 'FELIZ', visual: 'smile', emotion: 'happy', code: 'EI03EF01' },
-      { label: 'TRISTE', visual: 'frown', emotion: 'sad', code: 'EI03EF01' },
-      { label: 'BRAVO', visual: 'angry', emotion: 'angry', code: 'EI03EF01' },
-      { label: 'SONO', visual: 'moon', emotion: 'sleeping', code: 'EI03EF01' },
-    ]
   },
   // ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES
   matematica: {
@@ -64,10 +57,22 @@ export const EARLY_CHILDHOOD = {
       { points: [{x:50, y:10}, {x:50, y:90}], label: 'Linha em Pé', code: 'EI03CG01' },
     ]
   },
-  // O EU, O OUTRO E O NÓS
-  socioemocional: {
-    interacao: [
-      { q: "Qual criança está feliz?", options: ['FELIZ', 'TRISTE', 'BRAVO', 'SONO'], answer: 'FELIZ', code: 'EI03EO01' }
+  // EI03EO01 - Sentimentos (O EU, O OUTRO E O NÓS)
+  emocoes: [
+    { label: 'FELIZ', visual: 'smile', emotion: 'happy', code: 'EI03EO01' },
+    { label: 'TRISTE', visual: 'frown', emotion: 'sad', code: 'EI03EO01' },
+    { label: 'BRAVO', visual: 'angry', emotion: 'angry', code: 'EI03EO01' },
+    { label: 'SONO', visual: 'moon', emotion: 'sleeping', code: 'EI03EO01' },
+  ],
+  // Compatibilidade com CognitiveGenerator
+  cognitivo: {
+    memory: ['apple', 'cat', 'star', 'balloon', 'flower', 'car'],
+    sequence: ['apple', 'banana', 'grape'],
+  },
+  // Compatibilidade com LinguisticsGenerator
+  artes_sons: {
+    animais: [
+      { nome: 'VACA', visual: 'cow', options: ['miau', 'au au', 'cocoricó', 'muuu'], answer: 'muuu', code: 'EI03TS03' },
     ]
   }
 };
@@ -118,6 +123,11 @@ export const FIRST_GRADE_MATH = {
   visualSubtraction: [
     { total: { n: 4, item: 'fish' }, take: 1, answer: 3, options: [2, 3, 4], code: 'EF01MA06' },
   ],
+  tens: [
+    { question: '3 dezenas?', answer: '30', options: ['10', '20', '30'], code: 'EF01MA01' },
+    { question: '2 dezenas?', answer: '20', options: ['10', '20', '30'], code: 'EF01MA01' },
+    { question: '1 dezena?', answer: '10', options: ['10', '20', '30'], code: 'EF01MA01' },
+  ]
 };
 
 export const LINGUISTICS_DATA = {
