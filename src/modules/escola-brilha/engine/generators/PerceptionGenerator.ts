@@ -38,10 +38,11 @@ export class PerceptionGenerator extends BaseGenerator {
       const options = this.shuffle(EARLY_CHILDHOOD.formas_cores.formas.map(f => f.nome));
       return {
         q: `Onde está o ${item.nome}?`,
-        visual: item.emoji,
+        visual: item.visual,
         answer: item.nome,
         options,
-        miniGameType: "bubbles"
+        miniGameType: "bubbles",
+        bncc_code: item.code
       };
     }
 
@@ -50,11 +51,12 @@ export class PerceptionGenerator extends BaseGenerator {
       const options = this.shuffle(EARLY_CHILDHOOD.formas_cores.cores.map(c => c.nome));
       return {
         q: `Qual é a cor deste objeto?`,
-        visual: item.emoji,
+        visual: item.visual,
         hex: item.hex,
         answer: item.nome,
         options,
-        miniGameType: "bubbles"
+        miniGameType: "bubbles",
+        bncc_code: item.code
       };
     }
 

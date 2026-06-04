@@ -49,10 +49,11 @@ export class CognitiveGenerator extends BaseGenerator {
         const options = EARLY_CHILDHOOD.emocoes.map(e => e.label);
         return {
           q: "Como o personagem está?",
-          visual: item.emoji,
+          visual: item.visual,
           answer: item.label,
           options: this.shuffle(options),
-          miniGameType: "bubbles"
+          miniGameType: "bubbles",
+          bncc_code: item.code
         };
       }
       if (type === "ei-memory") {
