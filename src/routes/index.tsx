@@ -5,7 +5,7 @@ import { Plus, Sparkles, School, Brain, BookOpen, Gift, Trophy, Users, Star } fr
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
+import { EggHatchCinematic, shouldShowEggHatch } from "@/components/lumi/EggHatchCinematic";
 import { cn } from "@/utils/utils";
 
 export const Route = createFileRoute("/")({

@@ -21,7 +21,7 @@ import lumaMusica from '@/assets/pip-girl-musica.png';
 import lumaSuperHeroina from '@/assets/pip-girl-super-heroina.png';
 import { useAppState } from '@/core/store';
 import { cn } from '@/utils/utils';
-import { LumiEvolution } from '@/components/pip/LumiEvolution';
+import { LumiEvolution } from '@/components/lumi/LumiEvolution';
 
 export const Route = createFileRoute('/colecao-pip')({
   component: ColecaoLumiPage,
