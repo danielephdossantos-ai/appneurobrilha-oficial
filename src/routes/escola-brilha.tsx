@@ -98,11 +98,11 @@ const materias = [
 
 // Educação Infantil — 5 Campos de Experiência BNCC
 const materiasInfantil = [
-  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Histórias e rimas", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Contar e comparar", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Coordenação", mascote: imgPipa, mascoteNome: "Professora Pipa" },
-  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Arte e música", mascote: imgPip, mascoteNome: "Professor Pip" },
-  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "Emoções", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO", nome: "Escuta e Fala", img: imgLinguagemEI, cor: "from-coral/30 to-coral/5", descricao: "Escuta, fala, pensamento e imaginação", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES", nome: "Números e Espaços", img: imgNumerosEI, cor: "from-sky/30 to-sky/5", descricao: "Espaços, tempos, quantidades, relações e transformações", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "CORPO, GESTOS E MOVIMENTOS", nome: "Corpo e Movimento", img: imgNaturezaEI, cor: "from-success/20 to-success/5", descricao: "Corpo, gestos e movimentos", mascote: imgPipa, mascoteNome: "Professora Pipa" },
+  { id: "TRAÇOS, SONS, CORES E FORMAS", nome: "Cores e Formas", img: imgArtesEI, cor: "from-pink/30 to-pink/5", descricao: "Traços, sons, cores e formas", mascote: imgPip, mascoteNome: "Professor Pip" },
+  { id: "O EU, O OUTRO E O NÓS", nome: "Eu e os Outros", img: imgArtesEI, cor: "from-indigo/30 to-indigo/5", descricao: "O eu, o outro e o nós", mascote: imgPipa, mascoteNome: "Professora Pipa" },
 ] as const;
 
 
