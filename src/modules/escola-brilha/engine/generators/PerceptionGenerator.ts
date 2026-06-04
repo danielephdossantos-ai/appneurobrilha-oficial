@@ -33,6 +33,31 @@ export class PerceptionGenerator extends BaseGenerator {
   protected generateContent(input: GeneratorInput): any {
     const type = this.getActivityType(input);
     
+    if (type === 'ei-find-shape') {
+      const item = this.pickRandom(EARLY_CHILDHOOD.formas_cores.formas);
+      const options = this.shuffle(EARLY_CHILDHOOD.formas_cores.formas.map(f => f.nome));
+      return {
+        q: `Onde está o ${item.nome}?`,
+        visual: item.emoji,
+        answer: item.nome,
+        options,
+        miniGameType: "bubbles"
+      };
+    }
+
+    if (type === 'ei-find-color') {
+      const item = this.pickRandom(EARLY_CHILDHOOD.formas_cores.cores);
+      const options = this.shuffle(EARLY_CHILDHOOD.formas_cores.cores.map(c => c.nome));
+      return {
+        q: `Qual é a cor deste objeto?`,
+        visual: item.emoji,
+        hex: item.hex,
+        answer: item.nome,
+        options,
+        miniGameType: "bubbles"
+      };
+    }
+
     if (type === "visual-search") {
       const distractorsCount = Math.floor(input.difficulty * 20) + 5;
       const target = { id: 'target', type: 'star', color: 'gold' };
