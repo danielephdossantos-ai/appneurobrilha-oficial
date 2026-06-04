@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { SupabasePedagogicalService, ActivityDB, Explanation, BNCCSkill } from '../services/SupabasePedagogicalService';
+import { SupabasePedagogicalService, Activity, Explanation, BNCCSkill } from '../services/SupabasePedagogicalService';
 import { MasteryMotor } from '../engine/MasteryMotor';
 import { ChevronRight, Star, CheckCircle2, AlertCircle, Play, ArrowRight } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
