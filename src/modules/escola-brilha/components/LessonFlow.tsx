@@ -5,6 +5,7 @@ import { SupabasePedagogicalService, Activity, Explanation, BNCCSkill } from '..
 import { MasteryMotor } from '../engine/MasteryMotor';
 import { ChevronRight, Star, CheckCircle2, AlertCircle, Play, ArrowRight } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import KidLiveMascot from '@/components/ui/KidLiveMascot';
 
 interface LessonFlowProps {
   skillCode: string;
@@ -128,11 +129,7 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
             <div className="space-y-6 text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-48 h-48">
-                  <img 
-                    src="/src/assets/pip-mascot.png" 
-                    alt="Pip" 
-                    className="w-full h-full object-contain drop-shadow-2xl" 
-                  />
+                  <KidLiveMascot size="xl" showBadge={false} emotion="thinking" />
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-slate-800">Hora de aprender com o Pip!</h3>
@@ -216,11 +213,7 @@ export const LessonFlow: React.FC<LessonFlowProps> = ({ skillCode, alunoId, onCo
             <div className="text-center space-y-8 py-8">
               <div className="flex justify-center mb-4">
                 <div className="w-48 h-48">
-                  <img 
-                    src="/src/assets/pip-mascot.png" 
-                    alt="Pip" 
-                    className="w-full h-full object-contain drop-shadow-2xl animate-bounce" 
-                  />
+                  <KidLiveMascot size="xl" showBadge={false} emotion="excited" />
                 </div>
               </div>
               

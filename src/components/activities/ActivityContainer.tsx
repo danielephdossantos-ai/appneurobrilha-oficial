@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GeneratedActivity } from "@/engines/pedagogical-engine/types";
 import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { RewardBadge } from "@/components/rewards/RewardBadge";
+import KidLiveMascot from "@/components/ui/KidLiveMascot";
 
 interface Props {
   activity: GeneratedActivity;
@@ -148,14 +149,10 @@ export const ActivityContainer: React.FC<Props> = ({ activity, onComplete, emoti
         className="absolute bottom-4 right-4 flex items-center gap-3 bg-gradient-to-br from-indigo-50 to-white p-5 rounded-[2rem] border-2 border-indigo-100 max-w-xs shadow-lg"
       >
         <div className="w-16 h-16 flex items-center justify-center">
-          <img 
-            src="/src/assets/pip-mascot.png" 
-            alt="Pip" 
-            className="w-full h-full object-contain drop-shadow-sm" 
-          />
+          <KidLiveMascot size="sm" showBadge={false} emotion={mascotReaction.emotion as any} />
         </div>
         <div className="flex flex-col">
-          <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Pip diz:</span>
+          <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Amigo diz:</span>
           <p className="text-sm font-bold text-indigo-800 leading-tight">{mascotReaction.text}</p>
         </div>
       </motion.div>

@@ -34,6 +34,7 @@ import imgNaturezaEI from "@/assets/escola-brilha/natureza-ei.png";
 import imgArtesEI from "@/assets/escola-brilha/artes-ei.png";
 import imgPip from "@/assets/pip-mascot.png";
 import imgPipa from "@/assets/pip-girl-professora.png";
+import KidLiveMascot from "@/components/ui/KidLiveMascot";
 
 
 import { RenderMascote, RenderVisual } from "@/components/ui/PremiumIcons";

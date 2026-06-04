@@ -49,11 +49,11 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
-  const isPip = !activeMascot || activeMascot.mascot.name === 'Pip';
+  const isPip = !activeMascot || activeMascot.mascot.name === 'Pip' || activeMascot.mascot.name === 'Pipa';
 
   const getMascotImage = () => {
-    if (!isPip) {
-      return activeMascot?.mascot.image_url || pipMascot;
+    if (!isPip && activeMascot?.mascot.image_url) {
+      return activeMascot.mascot.image_url;
     }
 
     const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
