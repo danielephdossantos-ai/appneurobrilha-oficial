@@ -1278,20 +1278,17 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
             {/* Stepper pedagógico adaptado */}
             <div className="flex items-center gap-1.5 text-[11px] font-bold mb-4 overflow-x-auto pb-1">
               {(isAlfaFlow ? [
-                {n:1,l:"Objeto",i:Apple},
-                {n:2,l:"Palavra",i:PenTool},
-                {n:3,l:"Sílabas",i:Scissors}, // Scissors doesn't exist? Use Scissors or Ruler. I'll check Scissors.
-                {n:4,l:"Montar",i:Target},
-                {n:5,l:"Achar",i:Search},
-                {n:6,l:"Escrever",i:PenTool},
-                {n:7,l:"Legal!",i:Sparkles},
+                {n:1,l:"Aquecimento",i:Sun},
+                {n:2,l:"Apresentação",i:Lightbulb},
+                {n:3,l:"Manipulação",i:Target},
+                {n:4,l:"Registro",i:PenTool},
+                {n:5,l:"Encerramento",i:Trophy},
               ] : isMathFlow ? [
-                {n:1,l:"Visual",i:Sun},
-                {n:2,l:"Contar",i:Pointer}, // Pointer? check Lucide. Or Fingerprint. Use Pointer.
-                {n:3,l:"Conta",i:Plus},
-                {n:4,l:"Montar",i:Target},
-                {n:5,l:"Prática",i:Hand},
-                {n:6,l:"Armada",i:Ruler},
+                {n:1,l:"Aquecimento",i:Sun},
+                {n:2,l:"Apresentação",i:Lightbulb},
+                {n:3,l:"Manipulação",i:Target},
+                {n:4,l:"Registro",i:PenTool},
+                {n:5,l:"Encerramento",i:Trophy},
               ] : [
                 {n:1,l:"Descobrir",i:Target},
                 {n:2,l:"Observe",i:Eye},
@@ -1302,6 +1299,7 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
                 {n:7,l:"Desafio",i:Flag},
                 {n:8,l:"Conquista",i:Trophy},
               ]).map((s: any) => {
+
                 const current = isAlfaFlow ? eiStep : isMathFlow ? mathStep : visualStep;
                 const active = s.n === current;
                 const done = s.n < current;
