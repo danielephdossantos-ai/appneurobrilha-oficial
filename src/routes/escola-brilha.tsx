@@ -497,7 +497,7 @@ function Escola() {
 
   const ei = isEI(selectedGrade);
   const materiasVisiveis = ei ? materiasInfantil : materias;
-  const startMateriaId = ei ? "matematica" : "matematica";
+  const startMateriaId = ei ? "trilha-palavras" : "matematica";
 
   return (
     <Shell>
