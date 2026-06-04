@@ -194,6 +194,7 @@ serve(async (req) => {
 
       PROIBIDO:
       - Blocos longos de texto, parágrafos com mais de 2 frases.
+      - EMOJIS e ícones de baixa qualidade (o sistema usa ícones 2D premium via visual_key).
       - Histórias aleatórias, super-heróis (Batman etc.), textos sem objetivo pedagógico.
       - Misturar conteúdos ou BNCC de séries diferentes.
       - Começar por pergunta ou repetir a mesma explicação em campos diferentes.
