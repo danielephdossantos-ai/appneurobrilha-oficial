@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState } from "react";
-import { Send, Sparkles, Loader2 } from "lucide-react";
+import { Send, Sparkles, Loader2, MessagesSquare } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { useMascot } from "@/contexts/MascotContext";
 
@@ -22,7 +22,7 @@ function Terapeuta() {
     affinity: activeMascot.affinity,
   } : null;
   const [msgs, setMsgs] = useState<{ role: "ai" | "user"; t: string }[]>([
-    { role: "ai", t: `Oi! Sou ${mascotName} 💚 Hoje vou te ajudar como terapeuta com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
+    { role: "ai", t: `Oi! Sou ${mascotName}. Hoje vou te ajudar como terapeuta com ${activeChild?.nome ?? "sua criança"}. Pode perguntar sobre comportamento, regulação emocional, estratégias caseiras ou quando procurar ajuda profissional.` },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +54,7 @@ function Terapeuta() {
       setMsgs([...newMsgs, { role: "ai", t: data }]);
     } catch (err) {
       console.error(err);
-      setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes! 💚" }]);
+      setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes!" }]);
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +69,7 @@ function Terapeuta() {
 
   return (
     <Shell>
-      <PageHeader emoji="💬" title="Terapeuta Brilha" subtitle="IA especializada em neurodesenvolvimento — orientação para a família" />
+      <PageHeader icon={MessagesSquare} title="Terapeuta Brilha" subtitle="IA especializada em neurodesenvolvimento — orientação para a família" />
 
       <Card className="mb-4 min-h-[400px] flex flex-col">
         <div className="flex-1 space-y-3 mb-4">
