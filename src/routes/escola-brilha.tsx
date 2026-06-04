@@ -784,7 +784,8 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
           setStep(4);
           setPracticeCount(0);
         } else if (step === 4) {
-          if (practiceCount < 2) {
+          const maxPratica = (aula.pratica_activities?.length || 3) - 1;
+          if (practiceCount < maxPratica) {
             setPracticeCount(prev => prev + 1);
           } else {
             setStep(5);
