@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { Plus, Sparkles } from "lucide-react";
+import { Plus, Sparkles, School, Brain, BookOpen, Gift, Trophy, Users, Star } from "lucide-react";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ type Destino = {
   subtitle: string;
   gradient: string;
   glow: string;
-  icon: string;
+  icon: any;
   building: React.ReactNode;
 };
 
@@ -54,7 +54,7 @@ function Index() {
       subtitle: "Academia do Conhecimento",
       gradient: "from-[#4C9EFF] to-[#1E5FCC]",
       glow: "rgba(76,158,255,0.55)",
-      icon: "🏫",
+      icon: School,
       building: <SchoolBuilding />,
     },
     {
@@ -63,7 +63,7 @@ function Index() {
       subtitle: "Centro Cerebral",
       gradient: "from-[#9B6CFF] to-[#5A2DC9]",
       glow: "rgba(155,108,255,0.55)",
-      icon: "🧠",
+      icon: Brain,
       building: <BrainTower />,
     },
     {
@@ -72,7 +72,7 @@ function Index() {
       subtitle: "Professor Particular",
       gradient: "from-[#FF8A4C] to-[#D45A1A]",
       glow: "rgba(255,138,76,0.55)",
-      icon: "📚",
+      icon: BookOpen,
       building: <StudyHouse />,
     },
     {
@@ -81,7 +81,7 @@ function Index() {
       subtitle: "Shopping do Saber",
       gradient: "from-[#FFC93C] to-[#E89B00]",
       glow: "rgba(255,201,60,0.6)",
-      icon: "🎁",
+      icon: Gift,
       building: <Shop />,
     },
     {
@@ -90,7 +90,7 @@ function Index() {
       subtitle: "Galeria de Troféus",
       gradient: "from-[#3BD68B] to-[#0E9D5B]",
       glow: "rgba(59,214,139,0.55)",
-      icon: "🏆",
+      icon: Trophy,
       building: <TrophyHall />,
     },
     {
@@ -99,7 +99,7 @@ function Index() {
       subtitle: "Acompanhamento",
       gradient: "from-[#FF6FA8] to-[#C73774]",
       glow: "rgba(255,111,168,0.55)",
-      icon: "👨‍👩‍👧",
+      icon: Users,
       building: <FamilyHouse />,
     },
   ];
@@ -142,7 +142,7 @@ function Index() {
               transition={{ duration: 4, repeat: Infinity }}
               className="text-4xl"
             >
-              ✨
+              <Star className="text-white h-8 w-8" />
             </motion.div>
             <div>
               <div className="text-white/60 text-xs font-black uppercase tracking-[0.3em]">Bem-vindo à</div>
@@ -217,7 +217,7 @@ function Index() {
                   }}
                 >
                   {/* sparkle */}
-                  <Sparkles className="absolute top-3 right-3 text-white/40 w-5 h-5" />
+                  <d.icon className="absolute top-3 right-3 text-white/40 w-5 h-5" />
                   {/* construção */}
                   <div className="h-28 md:h-36 flex items-end justify-center mb-3">
                     <motion.div
