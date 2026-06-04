@@ -85,7 +85,7 @@ function Index() {
       building: <Shop />,
     },
     {
-      to: "/colecao-pip",
+      to: "/colecao-lumi",
       title: "Conquistas",
       subtitle: "Galeria de Troféus",
       gradient: "from-[#3BD68B] to-[#0E9D5B]",

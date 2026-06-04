@@ -23,7 +23,7 @@ import { useAppState } from '@/core/store';
 import { cn } from '@/utils/utils';
 import { LumiEvolution } from '@/components/lumi/LumiEvolution';
 
-export const Route = createFileRoute('/colecao-pip')({
+export const Route = createFileRoute('/colecao-lumi')({
   component: ColecaoLumiPage,
 });
 
