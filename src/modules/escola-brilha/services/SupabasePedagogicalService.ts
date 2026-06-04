@@ -28,8 +28,11 @@ export interface ActivityDB {
   alternativa_a: string | null;
   alternativa_b: string | null;
   alternativa_c: string | null;
+  alternativa_d: string | null;
   resposta: string | null;
   feedback: string | null;
+  ordem: number | null;
+  explicacao_ativa: string | null;
 }
 
 export interface StudentProgress {
