@@ -183,7 +183,7 @@ function MissaoProva() {
                       />
                     </KidCard>
                     <div className="p-4 rounded-2xl bg-white border-2 border-indigo-100 shadow-soft">
-                      <h4 className="font-black text-indigo-600 uppercase tracking-widest text-[10px] mb-2">Comando do Pip</h4>
+                      <h4 className="font-black text-indigo-600 uppercase tracking-widest text-[10px] mb-2">Comando do Lumi</h4>
                       <p className="text-xs text-slate-500 italic">"Foque nos passos e respire fundo. O conhecimento é como um quebra-cabeça, vamos montar peça por peça!"</p>
                     </div>
                   </div>
