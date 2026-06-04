@@ -1,10 +1,14 @@
 import { BaseGenerator } from "./BaseGenerator";
 import { GeneratorInput } from "../../types/generator";
+import { EARLY_CHILDHOOD, isEarlyChildhood } from "./PedagogyData";
 
 export class CognitiveGenerator extends BaseGenerator {
   protected domain = "cognitive";
 
   protected getActivityType(input: GeneratorInput): string {
+    if (isEarlyChildhood(input.grade)) {
+      return Math.random() < 0.5 ? "ei-memory" : "ei-missing";
+    }
     if (input.difficulty < 0.5) return "memory-match";
     return "sequence-recall";
   }
@@ -12,7 +16,9 @@ export class CognitiveGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "memory-match": return "Jogo da Memória";
+      case "ei-memory":
+      case "memory-match": return "Floresta da Atenção";
+      case "ei-missing": return "Floresta da Atenção";
       case "sequence-recall": return "Mestre das Cores";
       default: return "Treino Cerebral";
     }
@@ -21,7 +27,9 @@ export class CognitiveGenerator extends BaseGenerator {
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
+      case "ei-memory": return "Encontre os pares dos amigos!";
       case "memory-match": return "Encontre os pares correspondentes.";
+      case "ei-missing": return "O que sumiu? Olhe bem!";
       case "sequence-recall": return "Repita a sequência de cores que você viu.";
       default: return "Prepare-se para o desafio!";
     }
@@ -30,6 +38,22 @@ export class CognitiveGenerator extends BaseGenerator {
   protected generateContent(input: GeneratorInput): any {
     const type = this.getActivityType(input);
     
+    if (isEarlyChildhood(input.grade)) {
+      if (type === "ei-memory") {
+        return {
+          opcoes: EARLY_CHILDHOOD.atencao.memory.slice(0, 3), // 3 pares = 6 cartas
+          miniGameType: "memory"
+        };
+      }
+      if (type === "ei-missing") {
+        return {
+          sequence: EARLY_CHILDHOOD.atencao.sequence,
+          opcoes: EARLY_CHILDHOOD.atencao.sequence,
+          miniGameType: "sequence"
+        };
+      }
+    }
+
     if (type === "memory-match") {
       const pairCount = input.difficulty < 0.4 ? 3 : (input.difficulty < 0.7 ? 6 : 8);
       const items = ['🍎', '🍌', '🍇', '🍓', '🍉', '🍍', '🍒', '🥝'].slice(0, pairCount);
@@ -42,7 +66,6 @@ export class CognitiveGenerator extends BaseGenerator {
       return { cards, pairCount };
     }
 
-    // Sequence Recall (Simon Says style)
     const sequenceLength = Math.floor(input.difficulty * 5) + 3;
     const colors = ['red', 'blue', 'green', 'yellow'];
     const sequence = Array.from({ length: sequenceLength }, () => this.pickRandom(colors));

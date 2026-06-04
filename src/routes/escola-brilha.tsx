@@ -145,13 +145,22 @@ function pickAlmost() { return ALMOST_THERE[Math.floor(Math.random()*ALMOST_THER
 // ============== Banco BNCC (50 atividades por lote, infinito) ==============
 const BANCO_TAMANHO = 50;
 const DOMAIN_MAP: Record<string, string> = {
-  matematica: "math",
-  artes: "math",
+  // Ensino Fundamental
   portugues: "linguistics",
+  matematica: "math",
   ciencias: "linguistics",
   historia: "linguistics",
   geografia: "linguistics",
+  artes: "math",
+  
+  // Educação Infantil (Campos de Experiência BNCC)
+  "ESCUTA, FALA, PENSAMENTO E IMAGINAÇÃO": "linguistics",
+  "ESPAÇOS, TEMPOS, QUANTIDADES, RELAÇÕES E TRANSFORMAÇÕES": "math",
+  "CORPO, GESTOS E MOVIMENTOS": "motor",
+  "TRAÇOS, SONS, CORES E FORMAS": "math", // can also be perception
+  "O EU, O OUTRO E O NÓS": "cognitive",
 };
+
 const MATERIAS_BANCO = ["portugues", "matematica", "ciencias", "historia", "geografia", "artes"] as const;
 
 // Campos de Experiência da Educação Infantil (BNCC)

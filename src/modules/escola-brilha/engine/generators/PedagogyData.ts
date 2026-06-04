@@ -1,12 +1,16 @@
 
-// ====== Educação Infantil (3-5 anos) — conteúdo concreto, visual, simples ======
+// ====== Educação Infantil (4-5 anos) — conteúdo concreto, visual, simples ======
 export const EARLY_CHILDHOOD = {
   vowels: [
-    { letter: 'A', exemplo: 'ABELHA', emoji: '🐝' },
-    { letter: 'E', exemplo: 'ELEFANTE', emoji: '🐘' },
-    { letter: 'I', exemplo: 'IGREJA', emoji: '⛪' },
-    { letter: 'O', exemplo: 'OVO', emoji: '🥚' },
-    { letter: 'U', exemplo: 'UVA', emoji: '🍇' },
+    { letter: 'A', exemplo: 'ABELHA', emoji: '🐝', distractors: ['P', 'O'] },
+    { letter: 'E', exemplo: 'ELEFANTE', emoji: '🐘', distractors: ['B', 'L'] },
+    { letter: 'I', exemplo: 'IGREJA', emoji: '⛪', distractors: ['M', 'T'] },
+    { letter: 'O', exemplo: 'OVO', emoji: '🥚', distractors: ['S', 'C'] },
+    { letter: 'U', exemplo: 'UVA', emoji: '🍇', distractors: ['X', 'Z'] },
+  ],
+  words: [
+    { word: 'BOLA', startLetter: 'B', options: ['B', 'M', 'P'], emoji: '⚽' },
+    { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], emoji: '🏠' },
   ],
   cores: [
     { nome: 'VERMELHO', hex: '#ef4444', exemplo: 'maçã', emoji: '🍎' },
@@ -24,21 +28,18 @@ export const EARLY_CHILDHOOD = {
     { nome: 'CORAÇÃO', emoji: '❤️', exemplo: 'o amor' },
   ],
   animais: [
+    { nome: 'VACA', emoji: '🐮', som: 'muuu', options: ['🐱 Miau', '🐶 Au au', '🐔 Cocoricó', '🐮 Muuu'], answer: '🐮 Muuu' },
     { nome: 'CACHORRO', emoji: '🐶', som: 'au au', relacionados: [{e:'🦴',n:'OSSO'}, {e:'🏠',n:'CASINHA'}, {e:'🥣',n:'RAÇÃO'}], intruso: {e:'🍌',n:'BANANA'} },
     { nome: 'GATO', emoji: '🐱', som: 'miau', relacionados: [{e:'🐟',n:'PEIXE'}, {e:'🧶',n:'NOVELO'}, {e:'🥛',n:'LEITE'}], intruso: {e:'🚗',n:'CARRO'} },
-    { nome: 'VACA', emoji: '🐮', som: 'muuu', relacionados: [{e:'🌿',n:'GRAMA'}, {e:'🥛',n:'LEITE'}, {e:'🚜',n:'FAZENDA'}], intruso: {e:'💻',n:'COMPUTADOR'} },
-    { nome: 'PATO', emoji: '🦆', som: 'quack', relacionados: [{e:'🌊',n:'LAGO'}, {e:'🌽',n:'MILHO'}, {e:'🥚',n:'OVO'}], intruso: {e:'⚽',n:'BOLA'} },
-    { nome: 'GALO', emoji: '🐔', som: 'cocoricó', relacionados: [{e:'☀️',n:'SOL'}, {e:'🌽',n:'MILHO'}, {e:'🏚️',n:'POLEIRO'}], intruso: {e:'🍕',n:'PIZZA'} },
-    { nome: 'LEÃO', emoji: '🦁', som: 'rugido', relacionados: [{e:'🥩',n:'CARNE'}, {e:'🌳',n:'SAVANA'}, {e:'👑',n:'REI'}], intruso: {e:'🍦',n:'SORVETE'} },
-    { nome: 'OVELHA', emoji: '🐑', som: 'béééé', relacionados: [{e:'🧶',n:'LÃ'}, {e:'🌿',n:'GRAMA'}, {e:'🧺',n:'CESTO'}], intruso: {e:'🚀',n:'FOGUETE'} },
   ],
   contagem: [
-    { n: 1, emoji: '🍎' },
-    { n: 2, emoji: '🐶' },
-    { n: 3, emoji: '⭐' },
-    { n: 4, emoji: '🎈' },
-    { n: 5, emoji: '🌻' },
+    { n: 3, emoji: '🍎', options: [1, 3, 5, 6] },
+    { n: 4, emoji: '⭐', mode: 'drag' },
   ],
+  atencao: {
+    memory: ['🍎', '🐶', '⭐', '🎈', '🌻', '🚗'],
+    sequence: ['🍎', '🍌', '🍇'],
+  }
 };
 
 export function isEarlyChildhood(grade?: string): boolean {
@@ -89,7 +90,7 @@ export const LINGUISTICS_DATA = {
       { text: "O sol brilhava intensamente sobre a colina, iluminando as flores silvestres.", question: "Qual é o tema principal?", options: ["Clima", "Natureza", "Flores", "Sol"], answer: "Natureza" },
     ],
     grade9: [
-      { text: "A globalização é um fenômeno complexo que afeta a economia e a cultura.", question: "O autor sugere que a globalização é:", options: ["Simples", "Multifacetada", "Apenas econômica", "Irrelevante"], answer: "Multifacetada" }
+      { text: "A globalização é um fenômeno complexo que afeta a economy e a cultura.", question: "O autor sugere que a globalização é:", options: ["Simples", "Multifacetada", "Apenas econômica", "Irrelevante"], answer: "Multifacetada" }
     ]
   }
 };

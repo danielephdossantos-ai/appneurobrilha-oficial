@@ -1,4 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { 
+  Apple, Dog, Cat, Fish, Flower, Star, Moon, Sun, 
+  Circle, Square, Triangle, Heart, Cloud, Bird,
+  Gamepad2, Book, Pencil, Music, Camera, Gift,
+  Coffee, Pizza, Car, Plane, Ship, Tractor,
+  Beef, Banana, Grape, Home, Waves,
+  Egg, Crown, Trash2, Rocket, IceCream,
+  Trees, Bug, MousePointer2, HelpCircle,
+  Eye, EyeOff, Check, X, Volume2, 
+  Bike, GlassWater, Ghost, Zap, Sprout
+} from "lucide-react";
+
+// Simple proxy for Bone since it might not be in the initial import set or standard lucide
+const Bone = (props: any) => <Gift {...props} />;
 
 type Props = {
   aula: any;
@@ -14,6 +28,22 @@ const PALETTE = [
   "from-lilac to-lilac/70",
   "from-pink to-pink/70",
 ];
+
+const EMOJI_MAP: Record<string, any> = {
+  '🍎': Apple, '🍏': Apple, '🐶': Dog, '🐱': Cat, '🐟': Fish, '🌻': Flower, '⭐': Star, '🌙': Moon, '☀️': Sun,
+  '⭕': Circle, '🟦': Square, '🔺': Triangle, '❤️': Heart, '☁️': Cloud, '🐔': Bird, '🐮': Beef,
+  '🐄': Beef, '🐝': Bug, '🐘': Beef, '⛪': Home, '🥚': Egg, '🍇': Grape, '🍌': Banana,
+  '🦴': Bone, '🏠': Home, '🥣': Coffee, '🚜': Tractor, '🌿': Trees,
+  '💻': Gamepad2, '⚽': Gamepad2, '🌊': Waves, '🌽': Sprout, '🏚️': Home, '🍕': Pizza,
+  '🥩': Beef, '🌳': Trees, '👑': Crown, '🍦': IceCream, '🧶': Music, '🧺': Gift,
+  '🚀': Rocket, '👜': Gift, '🥛': GlassWater, '🚲': Bike, '🚗': Car, '✈️': Plane, '🚢': Ship,
+};
+
+const getIcon = (key: string, className = "w-12 h-12") => {
+  if (!key) return <HelpCircle className={className} />;
+  const IconComponent = EMOJI_MAP[key] || HelpCircle;
+  return <IconComponent className={className} />;
+};
 
 const SHAPE_GLYPHS: Record<string, string> = {
   TRIANGULO: "▲", "TRIÂNGULO": "▲", CIRCULO: "●", "CÍRCULO": "●",
@@ -82,7 +112,6 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
     <div className="relative">
       {celebrate && <Confetti />}
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8">
-        {/* left options */}
         <div className="flex flex-col gap-4 items-center">
           {(aula.opcoes || []).slice(0, Math.ceil((aula.opcoes||[]).length/2)).map((opt: string, i: number) => (
             <DraggableOption key={opt} opt={opt} color={PALETTE[i % PALETTE.length]}
@@ -91,7 +120,6 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
               onDrop={() => handleDrop(opt)} />
           ))}
         </div>
-        {/* silhouette target */}
         <div className={`relative w-48 h-48 md:w-64 md:h-64 grid place-items-center rounded-3xl border-4 border-dashed border-slate-400/60 bg-white/40 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}>
           <div className={`text-[8rem] md:text-[10rem] leading-none ${done ? "text-primary" : "text-slate-300"}`} style={{ filter: done ? "drop-shadow(0 0 20px gold)" : "none" }}>
             {silhouette}
@@ -100,7 +128,6 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
             {done ? correct : ""}
           </div>
         </div>
-        {/* right options */}
         <div className="flex flex-col gap-4 items-center">
           {(aula.opcoes || []).slice(Math.ceil((aula.opcoes||[]).length/2)).map((opt: string, i: number) => (
             <DraggableOption key={opt} opt={opt} color={PALETTE[(i+3) % PALETTE.length]}
@@ -153,7 +180,6 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
     <div className="relative">
       {celebrate && <Confetti />}
       <div className="flex flex-col items-center gap-8">
-        <div className="text-xl font-black tracking-widest text-slate-700"></div>
         {!fused ? (
           <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
             {opcoes.map((l: string, i: number) => {
@@ -179,9 +205,6 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
             {correct}
           </div>
         )}
-        <div className="text-base text-slate-600 font-bold uppercase">
-          {fused ? correct : ""}
-        </div>
       </div>
     </div>
   );
@@ -193,7 +216,6 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
   const letters = useMemo(() => {
     const opts = (aula.opcoes || []).map((o: string) => String(o).toUpperCase());
     if (opts.length >= target.length) return opts;
-    // ensure all target letters present + a couple of distractors
     const extras = ["A","E","I","O","U","M","P","B","S","T"].filter(l => !target.includes(l)).slice(0,2);
     return Array.from(new Set([...target.split(""), ...extras])).sort(() => Math.random() - 0.5);
   }, [aula.opcoes, target]);
@@ -221,8 +243,7 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
     <div className="relative">
       {celebrate && <Confetti />}
       <div className="flex flex-col items-center gap-8">
-        {aula.visual && <div className="text-8xl md:text-9xl drop-shadow-xl">{aula.visual}</div>}
-        {/* slots */}
+        {aula.visual && <div className="text-8xl md:text-9xl drop-shadow-xl">{getIcon(aula.visual, "w-24 h-24")}</div>}
         <div className={`flex gap-3 md:gap-4 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite] rounded-2xl p-2" : ""}`}>
           {target.split("").map((ch, i) => {
             const got = filled[i]?.split("::")[0];
@@ -233,7 +254,6 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
             );
           })}
         </div>
-        {/* letter tiles (fridge magnets) */}
         <div className="flex flex-wrap gap-3 md:gap-4 justify-center max-w-xl">
           {letters.map((l: string, i: number) => {
             const id = l + "::" + i;
@@ -252,15 +272,12 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
             );
           })}
         </div>
-        <div className="text-xl font-black text-slate-700 tracking-widest uppercase">
-          {done ? target : ""}
-        </div>
       </div>
     </div>
   );
 }
 
-/* ---------- MODE: BUBBLES (default fallback) ---------- */
+/* ---------- MODE: BUBBLES ---------- */
 function Bubbles({ aula, disabled, onAnswer }: Props) {
   const correct = String(aula.resposta_correta || aula.answer || "");
   const [wrong, setWrong] = useState<string | null>(null);
@@ -277,22 +294,22 @@ function Bubbles({ aula, disabled, onAnswer }: Props) {
             : 'radial-gradient(circle at 50% 40%, hsl(var(--sky)/.45), hsl(var(--petal)/.2) 70%)',
         }}
       >
-        {aula.visual && <div className="text-[8rem] md:text-[10rem] leading-none drop-shadow-2xl">{aula.visual}</div>}
+        {aula.visual && <div className="text-[8rem] md:text-[10rem] leading-none drop-shadow-2xl">{getIcon(aula.visual, "w-32 h-32 text-primary")}</div>}
         <div className="mt-3 text-4xl md:text-5xl font-black tracking-[0.18em] text-primary drop-shadow-md">
-          {(aula.palavra || aula.topic || aula.resposta_correta || "").toString().toUpperCase()}
+          {(aula.palavra || aula.topic || "").toString().toUpperCase()}
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 place-items-center">
         {(aula.opcoes || []).map((opt: string, i: number) => {
           const isWrong = wrong === opt;
-          const isCorrect = opt === correct;
+          const isCorrect = String(opt) === correct;
           return (
             <button key={`${opt}-${i}`} disabled={disabled || done}
               onClick={() => {
                 if (isCorrect) { setDone(true); fire(true, opt); }
                 else { setWrong(opt); setTimeout(() => setWrong(null), 600); fire(false, opt); }
               }}
-              className={`btn-tap w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center text-5xl md:text-6xl font-black uppercase text-white shadow-[0_10px_0_rgba(0,0,0,0.15)] border-4 border-white bg-gradient-to-br ${PALETTE[i % PALETTE.length]} ${isWrong ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"} ${done && isCorrect ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}>
+              className={`btn-tap w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center text-4xl md:text-5xl font-black uppercase text-white shadow-[0_10px_0_rgba(0,0,0,0.15)] border-4 border-white bg-gradient-to-br ${PALETTE[i % PALETTE.length]} ${isWrong ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"} ${done && isCorrect ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}>
               {opt.toString().toUpperCase()}
             </button>
           );
@@ -302,73 +319,155 @@ function Bubbles({ aula, disabled, onAnswer }: Props) {
   );
 }
 
-/* ---------- MODE: DISCOVERY (Natureza/Relacionados) ---------- */
-function DiscoveryGame({ aula, disabled, onAnswer }: Props) {
-  const options = aula.opcoes || [];
-  const [wrongId, setWrongId] = useState<string | null>(null);
-  const [correctIds, setCorrectIds] = useState<string[]>([]);
+/* ---------- MODE: MEMORY GAME ---------- */
+function MemoryGame({ aula, disabled, onAnswer }: Props) {
+  const cards = useMemo(() => {
+    const symbols = aula.opcoes || ["🍎", "🐶", "⭐"];
+    return [...symbols, ...symbols]
+      .sort(() => Math.random() - 0.5)
+      .map((s, i) => ({ id: i, symbol: s, flipped: false, solved: false }));
+  }, [aula.opcoes]);
+
+  const [state, setState] = useState(cards);
+  const [selected, setSelected] = useState<number[]>([]);
   const { celebrate, fire } = useFeedback(onAnswer);
 
-  const handleTap = (opt: any) => {
-    if (disabled || correctIds.includes(opt.n)) return;
-    
-    if (opt.correct) {
-      const next = [...correctIds, opt.n];
-      setCorrectIds(next);
-      // If found at least one or all? Usually for kids, one success is enough to trigger som, 
-      // but let's say they need to find all correct ones or just one to "win" this round.
-      // User says: "When touching a correct object, it shakes/glows and plays sound".
-      if (next.length === options.filter((o: any) => o.correct).length) {
-         fire(true, opt.n);
+  const flip = (id: number) => {
+    if (disabled || selected.length === 2 || state[id].flipped || state[id].solved) return;
+    const next = state.map(c => c.id === id ? { ...c, flipped: true } : c);
+    setState(next);
+    const newSel = [...selected, id];
+    setSelected(newSel);
+
+    if (newSel.length === 2) {
+      const [i1, i2] = newSel;
+      if (state[i1].symbol === state[i2].symbol) {
+        setTimeout(() => {
+          setState(prev => prev.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c));
+          setSelected([]);
+          const newState = next.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c);
+          if (newState.every(c => c.solved)) {
+            fire(true, "victory");
+          }
+        }, 600);
       } else {
-         // Just visual feedback for now as per "balança ou brilha"
+        setTimeout(() => {
+          setState(prev => prev.map(c => (c.id === i1 || c.id === i2) ? { ...c, flipped: false } : c));
+          setSelected([]);
+          fire(false, "mismatch");
+        }, 1000);
       }
-    } else {
-      setWrongId(opt.n);
-      setTimeout(() => setWrongId(null), 600);
-      fire(false, opt.n);
     }
   };
 
   return (
-    <div className="relative">
-      {celebrate && <Confetti />}
-      <div className="flex flex-col items-center gap-8">
-        <div className="relative group">
-           <div className="text-[10rem] md:text-[12rem] leading-none drop-shadow-2xl animate-float-thinking">
-             {aula.visual}
-           </div>
-           <div className="text-center mt-4 text-5xl font-black tracking-widest text-primary drop-shadow-sm uppercase">
-             {aula.palavra}
-           </div>
-        </div>
+    <div className="grid grid-cols-3 gap-4 place-items-center">
+      {state.map((card) => (
+        <button
+          key={card.id}
+          disabled={disabled || card.solved}
+          onClick={() => flip(card.id)}
+          className={`w-24 h-32 md:w-32 md:h-40 rounded-2xl border-4 transition-all duration-500 preserve-3d relative ${card.flipped || card.solved ? "[transform:rotateY(180deg)]" : ""}`}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center backface-hidden border-2 border-white shadow-lg`}>
+            <HelpCircle className="w-12 h-12 text-white" />
+          </div>
+          <div className={`absolute inset-0 bg-white rounded-xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden border-2 border-primary shadow-lg`}>
+            {getIcon(card.symbol, "w-16 h-16 text-primary")}
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-2xl px-4">
-          {options.map((opt: any, i: number) => {
-            const isCorrect = opt.correct;
-            const isDone = correctIds.includes(opt.n);
-            const isWrong = wrongId === opt.n;
-            
-            return (
-              <button
-                key={opt.n + i}
-                disabled={disabled || isDone}
-                onClick={() => handleTap(opt)}
-                className={`btn-tap group relative aspect-square rounded-[2rem] bg-white border-4 flex flex-col items-center justify-center shadow-lg transition-all
-                  ${isDone ? "border-success bg-success/5 animate-[magicGlow_1s_infinite]" : "border-slate-200 hover:border-primary"}
-                  ${isWrong ? "animate-[wiggle_0.5s] border-destructive" : ""}
-                `}
-              >
-                <div className={`text-6xl md:text-7xl transition-transform ${isDone ? "scale-110" : "group-hover:scale-110"}`}>
-                  {opt.e}
-                </div>
-                <div className={`mt-2 text-xs font-black tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity ${isDone ? "text-success opacity-100" : "text-slate-400"}`}>
-                   {opt.n}
-                </div>
-              </button>
-            );
-          })}
+/* ---------- MODE: MISSING SEQUENCE ---------- */
+function MissingSequence({ aula, disabled, onAnswer }: Props) {
+  const sequence = aula.sequence || ["🍎", "🍌", "🍇"];
+  const [hiddenIdx] = useState(() => Math.floor(Math.random() * sequence.length));
+  const [revealed, setRevealed] = useState(false);
+  const { celebrate, fire } = useFeedback(onAnswer);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setRevealed(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center gap-12">
+      <div className="flex gap-6 items-center">
+        {sequence.map((item: string, i: number) => (
+          <div key={i} className="w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-white border-4 border-dashed border-primary/30 flex items-center justify-center shadow-inner">
+            {!revealed || i !== hiddenIdx ? (
+              getIcon(item, "w-16 h-16 text-primary animate-bounce")
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center">
+                <HelpCircle className="w-10 h-10 text-slate-300" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      {revealed && (
+        <div className="grid grid-cols-3 gap-4">
+          {(aula.opcoes || sequence).map((opt: string) => (
+            <button
+              key={opt}
+              disabled={disabled}
+              onClick={() => {
+                const ok = opt === sequence[hiddenIdx];
+                fire(ok, opt);
+              }}
+              className="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-white border-4 border-slate-200 flex items-center justify-center hover:border-primary transition-all shadow-md"
+            >
+              {getIcon(opt, "w-12 h-12")}
+            </button>
+          ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+/* ---------- MODE: QUANTITY DRAG ---------- */
+function QuantityDrag({ aula, disabled, onAnswer }: Props) {
+  const target = aula.targetCount || 3;
+  const [count, setCount] = useState(0);
+  const { celebrate, fire } = useFeedback(onAnswer);
+
+  const addItem = () => {
+    if (disabled || count >= target) return;
+    const next = count + 1;
+    setCount(next);
+    if (next === target) {
+      setTimeout(() => fire(true, next.toString()), 500);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <div className="text-6xl font-black text-primary bg-white px-8 py-4 rounded-full border-4 border-primary shadow-glow">
+        {target}
+      </div>
+      <div className="w-64 h-64 md:w-80 md:h-80 rounded-[3rem] border-4 border-dashed border-slate-300 bg-white/40 relative overflow-hidden flex flex-wrap p-4 items-center justify-center gap-2">
+        {Array.from({ length: count }).map((_, i) => (
+          <div key={i} className="w-12 h-12 text-primary animate-[fuseIn_0.3s_ease-out]">
+            {getIcon(aula.symbol || "⭐", "w-10 h-10")}
+          </div>
+        ))}
+        {count === 0 && <div className="text-slate-300 font-bold uppercase tracking-widest text-center px-4">Arraste para cá</div>}
+      </div>
+      <div className="flex gap-4">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <button
+            key={i}
+            disabled={disabled || count >= target}
+            onClick={addItem}
+            className="w-20 h-20 rounded-2xl bg-white border-4 border-slate-200 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+          >
+            {getIcon(aula.symbol || "⭐", "w-12 h-12 text-primary")}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -377,29 +476,15 @@ function DiscoveryGame({ aula, disabled, onAnswer }: Props) {
 /* ---------- DISPATCHER ---------- */
 export function EIMiniGame(props: Props) {
   const { aula } = props;
-  const opts: any[] = (aula.opcoes || []);
-  const correct = String(aula.resposta_correta || aula.answer || "").toUpperCase();
-  const materia = String(aula.materia || "").toLowerCase();
-  const topicLc = String(aula.topic || aula.tema || "").toLowerCase();
-  const palavra = String(aula.palavra || "").toUpperCase();
+  const type = aula.miniGameType || "bubbles";
 
-  // Se as opções forem objetos com campo 'correct', usamos o DiscoveryGame
-  const isDiscovery = opts.length > 0 && typeof opts[0] === 'object' && 'correct' in opts[0];
-  
-  const allSingleLetters = !isDiscovery && opts.length > 0 && opts.every(o => String(o).trim().length === 1);
-  const isShapes = !isDiscovery && (materia.includes("forma") || topicLc.includes("forma") ||
-    Object.keys(SHAPE_GLYPHS).includes(correct));
-
-  let mode: "shape" | "sum" | "word" | "bubbles" | "discovery" = "bubbles";
-  
-  if (isDiscovery) mode = "discovery";
-  else if (isShapes) mode = "shape";
-  else if (allSingleLetters && palavra.length >= 2 && palavra.length === opts.length) mode = "sum";
-  else if (allSingleLetters && palavra.length >= 2) mode = "word";
-
-  if (mode === "discovery") return <DiscoveryGame {...props} />;
-  if (mode === "shape") return <ShapeMatch {...props} />;
-  if (mode === "sum") return <PhonemeSum {...props} />;
-  if (mode === "word") return <WordBuild {...props} />;
-  return <Bubbles {...props} />;
+  switch (type) {
+    case "memory": return <MemoryGame {...props} />;
+    case "sequence": return <MissingSequence {...props} />;
+    case "quantity": return <QuantityDrag {...props} />;
+    case "shape": return <ShapeMatch {...props} />;
+    case "sum": return <PhonemeSum {...props} />;
+    case "word": return <WordBuild {...props} />;
+    default: return <Bubbles {...props} />;
+  }
 }
