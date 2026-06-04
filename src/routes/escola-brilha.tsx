@@ -1239,13 +1239,16 @@ function AulaView({ aula, setAula, childNome, hiperfoco, activeMascot, tier, onC
           <theme.sceneIcon className="h-32 w-32" />
         </div>
         <div className="relative flex items-center gap-4">
-          <div className="drop-shadow animate-float-thinking">
-            {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-              <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
-            ) : (
-              <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
-            )}
-          </div>
+          {!aula && (
+            <div className="drop-shadow animate-float-thinking">
+              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
+                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+              ) : (
+                <RenderMascote icon={activeMascot?.mascot?.image_url || materiaMeta.mascote} className="h-10 w-10 text-primary" />
+              )}
+            </div>
+          )}
+
           <div>
             <div className="text-xs font-bold uppercase tracking-widest text-primary/70">{theme.scene}</div>
             <div className={`font-extrabold ${theme.titleScale}`}>{materiaMeta.nome} · {aula.grade}</div>
