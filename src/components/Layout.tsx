@@ -5,7 +5,7 @@ import {
   Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
   Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
   ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck,
-  Target, Sprout, Star, Apple, Bird, BabyChick, Rainbow, Trees, Butterfly, Library, Telescope, TestTube, Map, Satellite, Ruler, Trophy, Users, Gift, School, PenTool
+  Target, Sprout, Star, Apple, Bird, Rainbow, Trees, Bug, Library, Telescope, TestTube, Map, Satellite, Ruler, Trophy, Users, Gift, School, PenTool
 } from "lucide-react";
 import { ReactNode, ComponentType } from "react";
 import { supabase } from "@/database/supabase/client";
