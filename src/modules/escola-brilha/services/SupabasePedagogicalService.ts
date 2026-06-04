@@ -169,22 +169,19 @@ export class SupabasePedagogicalService {
   }
 
   async isSkillUnlocked(studentId: string, bnccCode: string): Promise<boolean> {
-    // A primeira habilidade de qualquer série está sempre desbloqueada
-    // As outras dependem do domínio de 80% da anterior na ordem
     const { data: skill } = await supabase
       .from('bncc_habilidades')
       .select('ordem, ano, disciplina')
       .eq('codigo_bncc', bnccCode)
       .maybeSingle();
 
-    if (!skill || skill.ordem === 1) return true;
+    if (!skill || !skill.ordem || skill.ordem === 1) return true;
 
-    // Busca a habilidade anterior
     const { data: prevSkill } = await supabase
       .from('bncc_habilidades')
       .select('codigo_bncc')
-      .eq('ano', skill.ano)
-      .eq('disciplina', skill.disciplina)
+      .eq('ano', skill.ano || '')
+      .eq('disciplina', skill.disciplina || '')
       .eq('ordem', skill.ordem - 1)
       .maybeSingle();
 
