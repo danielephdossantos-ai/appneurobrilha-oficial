@@ -22,9 +22,9 @@ export interface Hiperfoco {
   /** Forma sugerida para coordenação/pontilhado. */
   formaPontilhado: string;
   /** Frases do PIP quando a criança acerta. */
-  pipAcertos: string[];
-  /** Frases do PIP de incentivo após erro. */
-  pipIncentivos: string[];
+  lumiAcertos: string[];
+  /** Frases da Lumi de incentivo após erro. */
+  lumiIncentivos: string[];
 }
 
 export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
