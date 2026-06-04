@@ -7,20 +7,18 @@ export class LinguisticsGenerator extends BaseGenerator {
 
   protected getActivityType(input: GeneratorInput): string {
     if (isEarlyChildhood(input.grade)) {
-      if (input.subject === 'ciencias') return 'ei-animal';
       const r = Math.random();
-      if (r < 0.5) return 'ei-vogal';
-      return 'ei-animal';
+      if (r < 0.33) return 'ei-vogal';
+      if (r < 0.66) return 'ei-drag-letter';
+      return 'ei-animal-sound';
     }
-    // SÉRIE define o tipo de atividade — NUNCA misturar séries.
     const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
     if (gradeNum >= 6) return "interpretation";
     if (gradeNum <= 1) return "phonemes";
     if (gradeNum <= 3) return "syllables";
-    return "reading"; // 4º e 5º
+    return "reading";
   }
 
-  // Nível lexical estritamente por série
   private wordLevelForGrade(gradeNum: number): 'beginner' | 'intermediate' | 'advanced' {
     if (gradeNum <= 2) return 'beginner';
     if (gradeNum <= 4) return 'intermediate';
@@ -30,8 +28,9 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getTitle(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-vogal": return "As Vogais Mágicas";
-      case "ei-animal": return "Bichinhos da Fazenda";
+      case "ei-vogal": return "Cidade das Letras";
+      case "ei-drag-letter": return "Cidade das Letras";
+      case "ei-animal-sound": return "Cidade das Letras";
       case "phonemes": return "Brincando com Sons";
       case "syllables": return "Aventura das Sílabas";
       case "reading": return "Mestre da Leitura";
@@ -43,8 +42,9 @@ export class LinguisticsGenerator extends BaseGenerator {
   protected getInstruction(input: GeneratorInput): string {
     const type = this.getActivityType(input);
     switch (type) {
-      case "ei-vogal": return "Olha a figura! Com qual vogal essa palavra começa?";
-      case "ei-animal": return "Qual é o nome desse bichinho?";
+      case "ei-vogal": return "Vamos procurar a letra A!";
+      case "ei-drag-letter": return "Qual letra começa esta palavra?";
+      case "ei-animal-sound": return "Ouça e escolha o animal correto.";
       case "phonemes": return "Qual som começa esta palavra?";
       case "syllables": return "Complete a palavra com a sílaba correta.";
       case "reading": return "Leia a palavra e encontre a imagem correspondente.";
@@ -59,42 +59,46 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-vogal') {
-        const v = this.pickRandom(EARLY_CHILDHOOD.vowels);
-        const wrongs = this.pickNRandom(
-          EARLY_CHILDHOOD.vowels.filter(x => x.letter !== v.letter),
-          2
-        ).map(x => x.letter);
-        const options = this.shuffle([v.letter, ...wrongs]);
+        // Encontre a Vogal (A among A, P, O)
+        const v = EARLY_CHILDHOOD.vowels[0]; // Letra A por padrão como solicitado
+        const options = this.shuffle([v.letter, ...v.distractors]);
         return {
-          q: `${v.emoji}  ${v.exemplo}  — Com qual vogal começa?`,
-          visual: v.emoji,
-          exemplo: v.exemplo,
+          q: "Vamos procurar a letra A!",
+          visual: v.letter,
           answer: v.letter,
           options,
+          miniGameType: "bubbles"
         };
       }
 
-      if (type === 'ei-animal') {
-        const a = this.pickRandom(EARLY_CHILDHOOD.animais);
-        const relacionados = a.relacionados || [];
-        const options = this.shuffle([
-          ...relacionados.map((r: any) => ({ ...r, correct: true })),
-          { ...a.intruso, correct: false }
-        ]);
+      if (type === 'ei-drag-letter') {
+        // Arraste a Letra (BOLA)
+        const w = EARLY_CHILDHOOD.words[0]; // BOLA
         return {
-          q: `${a.emoji} O que o ${a.nome} gosta?`,
+          q: `Qual letra começa ${w.word}?`,
+          visual: w.emoji,
+          palavra: w.word,
+          answer: w.startLetter,
+          options: w.options,
+          miniGameType: "bubbles"
+        };
+      }
+
+      if (type === 'ei-animal-sound') {
+        // Sons dos Animais (Vaca)
+        const a = EARLY_CHILDHOOD.animais[0]; // VACA
+        return {
+          q: a.nome,
           visual: a.emoji,
-          palavra: a.nome,
-          som: a.som,
-          answer: relacionados.map((r: any) => r.n).join(","), // multiple correct answers logically
-          options, // options are now objects {e, n, correct}
+          answer: a.answer,
+          options: a.options,
+          miniGameType: "bubbles"
         };
       }
 
       const gradeNum = parseInt(input.grade?.replace(/\D/g, '') || "1");
 
       if (type === "interpretation") {
-        // 6º-8º → grade6 ; 9º → grade9 (estrito por série)
         const dataKey = gradeNum >= 9 ? 'grade9' : 'grade6';
         const set = LINGUISTICS_DATA.texts[dataKey as keyof typeof LINGUISTICS_DATA.texts];
         if (!set || set.length === 0) throw new Error(`No texts found for ${dataKey}`);
@@ -118,8 +122,8 @@ export class LinguisticsGenerator extends BaseGenerator {
           targetWord, 
           firstLetter, 
           options,
-          sound: `Som da letra ${firstLetter}`, // Novo campo para o Método Fônico
-          exemplo_palavras: ["MALA", "MAMA", "MAPA"] // Exemplos solicitados
+          sound: `Som da letra ${firstLetter}`,
+          exemplo_palavras: ["MALA", "MAMA", "MAPA"]
         };
       }
 
@@ -140,7 +144,6 @@ export class LinguisticsGenerator extends BaseGenerator {
         };
       }
 
-      // Reading
       const distractors = this.pickNRandom(words.filter(w => w.word !== targetWord.word), 3);
       const options = this.shuffle([targetWord, ...distractors]);
       return { targetWord, options };
