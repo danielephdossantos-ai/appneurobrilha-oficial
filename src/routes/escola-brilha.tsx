@@ -739,6 +739,67 @@ function Escola() {
 
 
 
+// Lousa digital estilo "professor escrevendo no quadro"
+// Mostra o conteúdo REAL da aula (letras, sílabas, palavras, números) em vez de ícones genéricos.
+function Chalkboard({ aula, mode }: { aula: any; mode: 'explicacao' | 'demonstracao' }) {
+  const palavra: string | undefined = aula?.palavra_foco;
+  const silabas: string[] | undefined = aula?.silabas;
+  const frase: string | undefined = aula?.frase_apresentacao;
+  const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const numA = aula?.numero_a;
+  const numB = aula?.numero_b;
+  const op = aula?.operacao;
+  const resultado = aula?.resultado;
+  const isMath = typeof numA === 'number' && typeof numB === 'number';
+
+  return (
+    <div className="relative mx-auto w-full max-w-md rounded-[2rem] p-6 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] border-[10px] border-[#6b3f1f]" style={{ background: 'linear-gradient(180deg, #1f4d3a 0%, #163b2c 100%)' }}>
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#6b3f1f] text-white text-[10px] font-black tracking-widest uppercase">Lousa da Aula</div>
+      <div className="text-white font-black uppercase text-center py-4" style={{ fontFamily: '"Comic Sans MS", "Marker Felt", system-ui, sans-serif', textShadow: '0 1px 0 rgba(255,255,255,0.15)' }}>
+        {isMath ? (
+          <div className="flex items-center justify-center gap-3 text-6xl">
+            <span>{numA}</span>
+            <span className="text-yellow-300">{op}</span>
+            <span>{numB}</span>
+            {mode === 'demonstracao' && resultado !== undefined && (
+              <>
+                <span className="text-yellow-300">=</span>
+                <span className="text-yellow-300">{resultado}</span>
+              </>
+            )}
+          </div>
+        ) : silabas && silabas.length > 0 ? (
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-5xl">
+              {silabas.map((s, i) => (
+                <React.Fragment key={i}>
+                  <span className="px-3 py-1 rounded-lg bg-white/10 border-2 border-dashed border-white/40">{s}</span>
+                  {i < silabas.length - 1 && <span className="text-yellow-300">+</span>}
+                </React.Fragment>
+              ))}
+            </div>
+            {mode === 'demonstracao' && palavra && (
+              <div className="text-yellow-300 text-4xl mt-2">= {palavra}</div>
+            )}
+          </div>
+        ) : palavra ? (
+          <div className="space-y-2">
+            <div className="text-6xl tracking-wider">{palavra}</div>
+            {frase && <div className="text-base font-bold text-white/80 normal-case mt-3">{frase}</div>}
+          </div>
+        ) : letra ? (
+          <div className="text-8xl">{letra}</div>
+        ) : frase ? (
+          <div className="text-2xl normal-case leading-snug">{frase}</div>
+        ) : (
+          <div className="text-3xl">{aula?.topic || 'Vamos aprender!'}</div>
+        )}
+      </div>
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-3 rounded-md bg-[#d9b382] shadow-md" />
+    </div>
+  );
+}
+
 function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
   const [practiceCount, setPracticeCount] = useState(0);
