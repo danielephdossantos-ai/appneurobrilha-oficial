@@ -739,6 +739,67 @@ function Escola() {
 
 
 
+// Lousa digital estilo "professor escrevendo no quadro"
+// Mostra o conteúdo REAL da aula (letras, sílabas, palavras, números) em vez de ícones genéricos.
+function Chalkboard({ aula, mode }: { aula: any; mode: 'explicacao' | 'demonstracao' }) {
+  const palavra: string | undefined = aula?.palavra_foco;
+  const silabas: string[] | undefined = aula?.silabas;
+  const frase: string | undefined = aula?.frase_apresentacao;
+  const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const numA = aula?.numero_a;
+  const numB = aula?.numero_b;
+  const op = aula?.operacao;
+  const resultado = aula?.resultado;
+  const isMath = typeof numA === 'number' && typeof numB === 'number';
+
+  return (
+    <div className="relative mx-auto w-full max-w-md rounded-[2rem] p-6 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] border-[10px] border-[#6b3f1f]" style={{ background: 'linear-gradient(180deg, #1f4d3a 0%, #163b2c 100%)' }}>
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#6b3f1f] text-white text-[10px] font-black tracking-widest uppercase">Lousa da Aula</div>
+      <div className="text-white font-black uppercase text-center py-4" style={{ fontFamily: '"Comic Sans MS", "Marker Felt", system-ui, sans-serif', textShadow: '0 1px 0 rgba(255,255,255,0.15)' }}>
+        {isMath ? (
+          <div className="flex items-center justify-center gap-3 text-6xl">
+            <span>{numA}</span>
+            <span className="text-yellow-300">{op}</span>
+            <span>{numB}</span>
+            {mode === 'demonstracao' && resultado !== undefined && (
+              <>
+                <span className="text-yellow-300">=</span>
+                <span className="text-yellow-300">{resultado}</span>
+              </>
+            )}
+          </div>
+        ) : silabas && silabas.length > 0 ? (
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-5xl">
+              {silabas.map((s, i) => (
+                <span key={i} className="contents">
+                  <span className="px-3 py-1 rounded-lg bg-white/10 border-2 border-dashed border-white/40">{s}</span>
+                  {i < silabas.length - 1 && <span className="text-yellow-300">+</span>}
+                </span>
+              ))}
+            </div>
+            {mode === 'demonstracao' && palavra && (
+              <div className="text-yellow-300 text-4xl mt-2">= {palavra}</div>
+            )}
+          </div>
+        ) : palavra ? (
+          <div className="space-y-2">
+            <div className="text-6xl tracking-wider">{palavra}</div>
+            {frase && <div className="text-base font-bold text-white/80 normal-case mt-3">{frase}</div>}
+          </div>
+        ) : letra ? (
+          <div className="text-8xl">{letra}</div>
+        ) : frase ? (
+          <div className="text-2xl normal-case leading-snug">{frase}</div>
+        ) : (
+          <div className="text-3xl">{aula?.topic || 'Vamos aprender!'}</div>
+        )}
+      </div>
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-3 rounded-md bg-[#d9b382] shadow-md" />
+    </div>
+  );
+}
+
 function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
   const [practiceCount, setPracticeCount] = useState(0);
@@ -837,23 +898,19 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
         <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] bg-gradient-to-b from-white to-primary/5">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
-                <h2 className="text-4xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
-                <div className="bg-white rounded-[3rem] p-10 border-4 border-primary/10 shadow-soft">
-                  <RenderVisual value={aula.visual || "book"} className="h-40 w-40 text-primary mx-auto" />
-                </div>
-                <p className="text-xl font-bold text-foreground/80 p-4 bg-white/50 rounded-2xl">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
+              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
+                <h2 className="text-3xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
+                <Chalkboard aula={aula} mode="explicacao" />
+                <p className="text-lg font-bold text-foreground/80 p-4 bg-white/70 rounded-2xl border-2 border-primary/10">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
                 <button onClick={() => setStep(2)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full text-2xl font-black border-4 border-white">CONTINUAR</button>
               </motion.div>
             )}
 
             {step === 2 && (
-              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
-                <h2 className="text-3xl font-black text-primary uppercase">DEMONSTRAÇÃO</h2>
-                <div className="bg-white rounded-[3rem] p-10 border-4 border-sun/10 shadow-soft">
-                   <RenderVisual value={aula.visual || "eye"} className="h-32 w-32 text-sun mx-auto animate-pulse" />
-                </div>
-                <p className="text-xl font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
+              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
+                <h2 className="text-2xl font-black text-primary uppercase">VEJA NA LOUSA</h2>
+                <Chalkboard aula={aula} mode="demonstracao" />
+                <p className="text-lg font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
                 <button onClick={() => setStep(3)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full font-black">ENTENDI!</button>
               </motion.div>
             )}
