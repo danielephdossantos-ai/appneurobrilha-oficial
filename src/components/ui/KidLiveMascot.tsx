@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@/utils/utils';
 import { useAppState } from '@/core/store';
-import { useMascot } from '@/contexts/MascotContext';
+
 import pipMascot from '@/assets/pip-mascot.png';
 import pipDinossauros from '@/assets/pip-dinossauros.png';
 import pipEspaco from '@/assets/pip-espaco.png';
