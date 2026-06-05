@@ -47,7 +47,7 @@ interface LiveMascotProps {
 
 const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBadge = true }: LiveMascotProps) => {
   const { activeChild } = useAppState();
-  const { activeMascot } = useMascot();
+  
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
   // Ignoramos qualquer outro mascote selecionado (inclui robôs antigos).
