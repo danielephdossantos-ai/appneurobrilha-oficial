@@ -49,24 +49,13 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
 
-  const isPip = !activeMascot || activeMascot.mascot.name === 'Pip' || activeMascot.mascot.name === 'Pipa';
-
+  // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
+  // Ignoramos qualquer outro mascote selecionado (inclui robôs antigos).
   const getMascotImage = () => {
-    if (!isPip && activeMascot?.mascot.image_url) {
-      return activeMascot.mascot.image_url;
-    }
-
     const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
-    const skins = activeMascot?.mascot.skins;
-
-    if (firstHyperfocus && skins && skins[firstHyperfocus]) {
-      return skins[firstHyperfocus];
-    }
-
     if (firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
       return PIP_SKINS[firstHyperfocus];
     }
-
     return pipMascot;
   };
 
