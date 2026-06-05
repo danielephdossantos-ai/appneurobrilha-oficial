@@ -1027,22 +1027,16 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
         <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] bg-gradient-to-b from-white to-primary/5">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
-                <h2 className="text-3xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
-                <Chalkboard aula={aula} mode="explicacao" />
-                <p className="text-lg font-bold text-foreground/80 p-4 bg-white/70 rounded-2xl border-2 border-primary/10">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
-                <button onClick={() => setStep(2)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full text-2xl font-black border-4 border-white">CONTINUAR</button>
+              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full flex justify-center">
+                <TeachingSequence
+                  aula={aula}
+                  mascotImg={mascotImg}
+                  mascotNome={mascotNome}
+                  onComplete={() => setStep(3)}
+                />
               </motion.div>
             )}
 
-            {step === 2 && (
-              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
-                <h2 className="text-2xl font-black text-primary uppercase">VEJA NA LOUSA</h2>
-                <Chalkboard aula={aula} mode="demonstracao" />
-                <p className="text-lg font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
-                <button onClick={() => setStep(3)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full font-black">ENTENDI!</button>
-              </motion.div>
-            )}
 
             {(step >= 3 && step <= 5) && (
               <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full flex flex-col items-center justify-center">
