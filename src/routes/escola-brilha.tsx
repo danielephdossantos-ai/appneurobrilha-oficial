@@ -837,23 +837,19 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
         <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] bg-gradient-to-b from-white to-primary/5">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
-                <h2 className="text-4xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
-                <div className="bg-white rounded-[3rem] p-10 border-4 border-primary/10 shadow-soft">
-                  <RenderVisual value={aula.visual || "book"} className="h-40 w-40 text-primary mx-auto" />
-                </div>
-                <p className="text-xl font-bold text-foreground/80 p-4 bg-white/50 rounded-2xl">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
+              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
+                <h2 className="text-3xl font-black text-primary uppercase leading-tight">{aula.topic || materiaMeta.nome}</h2>
+                <Chalkboard aula={aula} mode="explicacao" />
+                <p className="text-lg font-bold text-foreground/80 p-4 bg-white/70 rounded-2xl border-2 border-primary/10">{aula.etapa1_explicação || aula.etapa1_intro || aula.instruction}</p>
                 <button onClick={() => setStep(2)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full text-2xl font-black border-4 border-white">CONTINUAR</button>
               </motion.div>
             )}
 
             {step === 2 && (
-              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-lg">
-                <h2 className="text-3xl font-black text-primary uppercase">DEMONSTRAÇÃO</h2>
-                <div className="bg-white rounded-[3rem] p-10 border-4 border-sun/10 shadow-soft">
-                   <RenderVisual value={aula.visual || "eye"} className="h-32 w-32 text-sun mx-auto animate-pulse" />
-                </div>
-                <p className="text-xl font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
+              <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-6 w-full max-w-lg">
+                <h2 className="text-2xl font-black text-primary uppercase">VEJA NA LOUSA</h2>
+                <Chalkboard aula={aula} mode="demonstracao" />
+                <p className="text-lg font-bold">{aula.etapa2_demonstração || aula.etapa2_conceito || "Observe com atenção!"}</p>
                 <button onClick={() => setStep(3)} className="btn-tap bg-primary text-white px-12 py-5 rounded-full font-black">ENTENDI!</button>
               </motion.div>
             )}
