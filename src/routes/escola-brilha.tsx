@@ -772,10 +772,10 @@ function Chalkboard({ aula, mode }: { aula: any; mode: 'explicacao' | 'demonstra
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-center gap-2 text-5xl">
               {silabas.map((s, i) => (
-                <React.Fragment key={i}>
+                <span key={i} className="contents">
                   <span className="px-3 py-1 rounded-lg bg-white/10 border-2 border-dashed border-white/40">{s}</span>
                   {i < silabas.length - 1 && <span className="text-yellow-300">+</span>}
-                </React.Fragment>
+                </span>
               ))}
             </div>
             {mode === 'demonstracao' && palavra && (
