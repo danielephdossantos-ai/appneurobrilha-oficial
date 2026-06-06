@@ -5,10 +5,11 @@ import { MascotTeacher } from '../components/MascotTeacher';
 import { SpeechBubble } from '../components/SpeechBubble';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
+import { Lesson, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
+import { useSearch } from '@tanstack/react-router';
 
-const MOCK_LESSON: Lesson = {
+const MATH_LESSON: Lesson = {
   id: 'contagem-divertida',
   title: 'Contagem Divertida',
   bncc_field: 'espacos_tempos',
@@ -48,26 +49,60 @@ const MOCK_LESSON: Lesson = {
         correctAnswer: '🍎🍎🍎🍎',
         options: ['🍌🍌', '🍎🍎🍎🍎']
       }
+    }
+  ]
+};
+
+const LANG_LESSON: Lesson = {
+  id: 'brincando-com-rimas',
+  title: 'Brincando com Rimas',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EI03EF02', 
+  steps: [
+    {
+      id: 'rima-intro',
+      phase: 'explanation',
+      type: 'explanation',
+      mascot: 'pip',
+      speech: 'Olá! Vamos encontrar palavras que terminam com o mesmo som? Isso se chama rima!',
+      elements: [
+        { id: 'casa', type: 'text', content: '🏠', position: { x: -40, y: 0 }, animation: 'bounce', delay: 0.5 },
+        { id: 'asa', type: 'text', content: '🪽', position: { x: 40, y: 0 }, animation: 'bounce', delay: 1.0 }
+      ]
     },
     {
-      id: 'sequencia-atividade',
-      phase: 'challenge',
+      id: 'rima-demo',
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pipa',
+      speech: 'CASA combina com ASA. Elas terminam igualzinho!',
+      elements: [
+        { id: 'casa-txt', type: 'text', content: 'CASA', position: { x: -40, y: -40 }, animation: 'fade', delay: 0.2 },
+        { id: 'asa-txt', type: 'text', content: 'ASA', position: { x: 40, y: -40 }, animation: 'fade', delay: 0.4 }
+      ]
+    },
+    {
+      id: 'rima-pratica',
+      phase: 'practice',
       type: 'interaction',
       mascot: 'pip',
-      speech: 'Uma estrela... duas estrelas... três estrelas... O que vem depois?',
+      speech: 'O que rima com CASA? É a BOLA ou a ASA?',
       elements: [
-        { id: 'seq-ref', type: 'text', content: '⭐ ⭐⭐ ⭐⭐⭐', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.3 }
+        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
       ],
       interaction: {
         type: 'click',
-        correctAnswer: '⭐⭐⭐⭐',
-        options: ['⭐', '⭐⭐⭐⭐', '🎈']
+        correctAnswer: '🪽',
+        options: ['⚽', '🪽']
       }
     }
   ]
 };
 
 export const LessonPlayer: React.FC = () => {
+  const search = useSearch({ from: '/escola-brilha/aula' });
+  const currentLesson = search.category === 'matematica' ? MATH_LESSON : LANG_LESSON;
+  
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showMascot, setShowMascot] = useState(false);
   const [showElements, setShowElements] = useState<string[]>([]);
