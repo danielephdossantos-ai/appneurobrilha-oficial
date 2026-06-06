@@ -317,10 +317,10 @@ export const LessonPlayer: React.FC = () => {
               key={el.id}
               initial={{ scale: 0, opacity: 0, y: 50 }}
               animate={{ 
-                scale: 2.5, 
+                scale: 2, 
                 opacity: 1, 
                 x: el.position.x * 2, 
-                y: el.position.y * 2 
+                y: (el.position.y * 2) - 100 
               }}
               exit={{ scale: 0, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 200 }}
@@ -332,7 +332,7 @@ export const LessonPlayer: React.FC = () => {
         </AnimatePresence>
 
         {showInteraction && (
-          <div className="flex gap-6 mt-32">
+          <div className="flex gap-6 mt-10">
             <AnimatePresence>
               {visibleOptions.map((opt) => (
                 <motion.div

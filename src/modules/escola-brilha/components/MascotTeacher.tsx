@@ -13,13 +13,13 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
   expression = 'happy' 
 }) => {
   // Use unique colors or visual markers for each mascot
-  const mascotColor = type === 'pip' ? '#4FD1C5' : '#F6AD55';
+  const mascotColor = type === 'pip' ? '#4FD1C5' : '#F687B3'; // Alterado de laranja/marrom para rosa/azul-claro
   
   return (
     <motion.div 
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      className="fixed bottom-10 left-10 z-50 pointer-events-none"
       style={{ height: '35vh' }}
     >
       <div className="relative w-full h-full flex flex-col items-center justify-end">
@@ -30,7 +30,7 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
             rotate: [0, 1, -1, 0]
           } : {}}
           transition={{ repeat: Infinity, duration: 0.5 }}
-          className="w-48 h-64 relative"
+          className="w-32 h-44 relative"
         >
           {/* Main Body */}
           <div 
