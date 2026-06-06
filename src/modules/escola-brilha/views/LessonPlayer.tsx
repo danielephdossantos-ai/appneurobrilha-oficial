@@ -150,16 +150,27 @@ export const LessonPlayer: React.FC = () => {
       }
     }
 
+    // Construct speech with instruction and options
+    const fullSpeech = getStepSpeech(currentStep);
+    
     setIsSpeaking(true);
-    await AudioSpeechService.speak(getStepSpeech(currentStep));
+    // Start speaking
+    const speechPromise = AudioSpeechService.speak(fullSpeech);
+    
+    // If it's an interaction, start showing options with a slight delay so they synchronize better
+    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
+      // Short delay after instruction starts
+      await new Promise(r => setTimeout(r, 1500)); 
+      for (const opt of currentStep.interaction.options) {
+        setVisibleOptions(prev => [...prev, opt]);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    await speechPromise;
     setIsSpeaking(false);
 
-    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      for (const opt of currentStep.interaction.options) {
-        await new Promise(r => setTimeout(r, 400));
-        setVisibleOptions(prev => [...prev, opt]);
-      }
-    } else if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
+    if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
