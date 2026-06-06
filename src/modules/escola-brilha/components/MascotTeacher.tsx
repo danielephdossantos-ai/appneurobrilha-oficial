@@ -68,6 +68,5 @@ const MascotImage: React.FC<{ type: 'pip' | 'pipa', isSpeaking: boolean }> = ({ 
           </div>
         </motion.div>
       </div>
-    </motion.div>
   );
 };
