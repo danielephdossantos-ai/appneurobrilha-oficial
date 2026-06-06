@@ -660,9 +660,6 @@ function Escola() {
     </Shell>
   );
 }
-    </Shell>
-  );
-}
 
 
 
