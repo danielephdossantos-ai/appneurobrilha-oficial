@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useMascot } from '@/contexts/MascotContext';
 import pipImg from '@/assets/pip-mascot.png';
 import pipaImg from '@/assets/pip-girl-mascot.png';
 
@@ -10,15 +11,48 @@ interface MascotTeacherProps {
 
 /**
  * Padrão visual obrigatório Escola Brilha:
- * - Pipa (menina) SEMPRE no canto inferior ESQUERDO
- * - Pip (azul) SEMPRE no canto inferior DIREITO
- * - Ambos sempre visíveis. O que está "falando" anima.
+ * - Apenas o mascote selecionado pela criança aparece.
+ * - Pipa (menina) no canto inferior ESQUERDO.
+ * - Pip (azul) no canto inferior DIREITO.
  */
-export const MascotTeacher: React.FC<MascotTeacherProps> = ({ type, isSpeaking }) => {
+export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking }) => {
+  const { activeMascot } = useMascot();
+  
+  // Determina qual mascote exibir com base na escolha da criança
+  // Se não houver mascote ativo ou se for um mascote genérico, usamos Pip/Pipa como fallback
+  const selectedMascot = activeMascot?.mascot?.name?.toLowerCase();
+  const isPipa = selectedMascot === 'pipa';
+  const isPip = selectedMascot === 'pip' || !isPipa; // Default to Pip if not Pipa
+
   return (
     <div className="fixed bottom-0 left-0 w-full z-40 pointer-events-none flex justify-between items-end px-2 sm:px-6">
-      <MascotImage src={pipaImg} alt="Pipa" speaking={isSpeaking && type === 'pipa'} side="left" />
-      <MascotImage src={pipImg} alt="Pip" speaking={isSpeaking && type === 'pip'} side="right" />
+      <AnimatePresence mode="wait">
+        {isPipa ? (
+          <MascotImage 
+            key="pipa"
+            src={pipaImg} 
+            alt="Pipa" 
+            speaking={isSpeaking} 
+            side="left" 
+          />
+        ) : (
+          <div key="spacer-left" className="w-28 sm:w-40 md:w-48" />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {isPip ? (
+          <MascotImage 
+            key="pip"
+            src={pipImg} 
+            alt="Pip" 
+            speaking={isSpeaking} 
+            side="right" 
+          />
+        ) : (
+          <div key="spacer-right" className="w-28 sm:w-40 md:w-48" />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -28,7 +62,7 @@ const MascotImage: React.FC<{
   alt: string;
   speaking: boolean;
   side: 'left' | 'right';
-}> = ({ src, alt, speaking, side }) => (
+}> = ({ src, alt, speaking }) => (
   <motion.img
     src={src}
     alt={alt}
@@ -38,6 +72,7 @@ const MascotImage: React.FC<{
         ? { y: [0, -8, 0], opacity: 1, scale: [1, 1.04, 1] }
         : { y: 0, opacity: 1, scale: 1 }
     }
+    exit={{ y: 120, opacity: 0 }}
     transition={
       speaking
         ? { repeat: Infinity, duration: 0.7, ease: 'easeInOut' }
