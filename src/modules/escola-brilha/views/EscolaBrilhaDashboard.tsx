@@ -10,18 +10,18 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const categories = [
     {
       id: 'portugues',
-      title: 'Português',
+      title: 'Linguagem',
       icon: BookOpen,
       color: 'bg-orange-400',
-      skills: 'EF01LP01 - EF01LP10',
-      method: 'Método Fônico'
+      field: 'Escuta, Fala e Pensamento',
+      method: 'Consciência Fonológica'
     },
     {
       id: 'matematica',
       title: 'Matemática',
       icon: Calculator,
       color: 'bg-blue-400',
-      skills: 'EF01MA01 - EF01MA09',
+      field: 'Espaços e Quantidades',
       method: 'Método CRA'
     }
   ];
@@ -38,7 +38,12 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <School className="w-12 h-12 text-blue-500" />
           </motion.div>
           <h1 className="text-4xl font-black text-blue-600">Escola Brilha</h1>
-          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Neuroeducação e BNCC</p>
+          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Educação Infantil (4 a 5 anos)</p>
+          <div className="mt-4 flex justify-center gap-2 flex-wrap">
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Onomatopeias</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Linguagem Lúdica</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Neuroeducação</span>
+          </div>
         </header>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -58,13 +63,13 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                   <Brain className="w-4 h-4" />
                   <span>{cat.method}</span>
                 </div>
-                <div className="inline-block bg-gray-50 px-4 py-1 rounded-full text-xs font-black text-gray-400 border border-gray-100">
-                  {cat.skills}
+                <div className="inline-block bg-gray-50 px-4 py-1 rounded-full text-[10px] font-black text-gray-400 border border-gray-100 uppercase tracking-tighter">
+                  {cat.field}
                 </div>
               </div>
               
               <Button className="w-full mt-8 h-16 rounded-2xl text-xl font-black bg-blue-500 hover:bg-blue-600 shadow-lg">
-                Começar Aula
+                Brincar e Aprender
               </Button>
             </motion.div>
           ))}

@@ -9,19 +9,19 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'aula-som-b',
-  title: 'O Som da Letra B',
+  id: 'brincando-com-sons',
+  title: 'Brincando com os Sons',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP04', 
+  skill_bncc: 'EI03EF01', // Consciência Fonológica e Onomatopeias (EI03 - 4 a 5 anos)
   steps: [
     {
       id: 'fase-1',
       phase: 'explanation',
       type: 'explanation',
       mascot: 'pip',
-      speech: 'Ouça o som da letra B: /b/, /b/. Faz comigo!',
+      speech: 'Olha a abelhinha! Ela faz: ZZZZZZZZZ!',
       elements: [
-        { id: 'letra-b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
+        { id: 'abelha', type: 'text', content: '🐝', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
       ]
     },
     {
@@ -29,9 +29,9 @@ const MOCK_LESSON: Lesson = {
       phase: 'demonstration',
       type: 'demonstration',
       mascot: 'pipa',
-      speech: 'Veja: /b/ de BONECA!',
+      speech: 'Faz comigo: ZZZZZZ! É o som da abelha!',
       elements: [
-        { id: 'boneca', type: 'text', content: '🪆', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
+        { id: 'abelha-demo', type: 'text', content: '🐝', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
       ]
     },
     {
@@ -39,12 +39,12 @@ const MOCK_LESSON: Lesson = {
       phase: 'guided_training',
       type: 'interaction',
       mascot: 'pip',
-      speech: 'Toque na figura que começa com o som /b/.',
+      speech: 'Onde está o amiguinho que faz ZZZZZZ?',
       showHelp: true,
       interaction: {
         type: 'click',
-        correctAnswer: '🪆',
-        options: ['🍎', '🪆', '🐶']
+        correctAnswer: '🐝',
+        options: ['🐶', '🐝', '🐱']
       }
     },
     {
@@ -52,11 +52,11 @@ const MOCK_LESSON: Lesson = {
       phase: 'practice',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'Onde está o /b/ da Baleia?',
+      speech: 'Muito bem! A abelha faz ZZZZZZ!',
       interaction: {
         type: 'click',
-        correctAnswer: '🐋',
-        options: ['🐱', '🐋', '☀️']
+        correctAnswer: '🐝',
+        options: ['🐝', '🍎', '🚗']
       }
     }
   ]
