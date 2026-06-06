@@ -49,6 +49,15 @@ function Index() {
 
   const destinos: Destino[] = [
     {
+      to: "/escola-brilha",
+      title: "Escola Brilha",
+      subtitle: "Aulas Mágicas",
+      gradient: "from-[#4C9EFF] to-[#1E5FCC]",
+      glow: "rgba(76,158,255,0.55)",
+      icon: School,
+      building: <MagicSchool />,
+    },
+    {
       to: "/neuro-treino",
       title: "Neuro Treino",
       subtitle: "Centro Cerebral",
