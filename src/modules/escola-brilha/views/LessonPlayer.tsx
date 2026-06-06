@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
   id: 'aula-letra-b',
-  title: 'Letra B',
-  skill_bncc: 'EF01LP04',
+  title: 'Brincando com a Letra B',
+  bncc_field: 'escuta_fala',
   steps: [
     {
       id: 'fase-1',
@@ -165,7 +165,7 @@ export const LessonPlayer: React.FC = () => {
 
   return (
     <LessonEnvironment>
-      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} />
+      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} field={MOCK_LESSON.bncc_field} />
 
       {/* Main Element Area */}
       <div className="flex-1 w-full relative flex items-center justify-center pt-20">

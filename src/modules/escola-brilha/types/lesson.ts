@@ -1,4 +1,12 @@
+export type BNCC_Field = 
+  | 'escuta_fala' // Escuta, Fala, Pensamento e Imaginação
+  | 'espacos_tempos' // Espaços, Tempos, Quantidades, Relações e Transformações
+  | 'corpo_gestos' // Corpo, Gestos e Movimentos
+  | 'tracos_sons' // Traços, Sons, Cores e Formas
+  | 'eu_outro_nos'; // O Eu, o Outro e o Nós
+
 export type LessonPhase = 
+
   | 'explanation' 
   | 'demonstration' 
   | 'guided_training' 
@@ -46,6 +54,7 @@ export interface LessonPerformance {
 export interface Lesson {
   id: string;
   title: string;
+  bncc_field?: BNCC_Field;
   skill_bncc?: string;
   steps: LessonStep[];
 }
