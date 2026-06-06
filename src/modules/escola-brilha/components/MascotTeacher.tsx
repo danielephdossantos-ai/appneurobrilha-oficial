@@ -17,9 +17,9 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
   
   return (
     <motion.div 
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      className="fixed bottom-10 left-10 z-50 pointer-events-none"
       style={{ height: '35vh' }}
     >
       <div className="relative w-full h-full flex flex-col items-center justify-end">
