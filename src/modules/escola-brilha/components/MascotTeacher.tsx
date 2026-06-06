@@ -30,7 +30,7 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
             rotate: [0, 1, -1, 0]
           } : {}}
           transition={{ repeat: Infinity, duration: 0.5 }}
-          className="w-48 h-64 relative"
+          className="w-32 h-44 relative"
         >
           {/* Main Body */}
           <div 
