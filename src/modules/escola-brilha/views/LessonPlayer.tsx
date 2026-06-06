@@ -9,35 +9,44 @@ import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
   id: 'aula-1',
-  title: 'Aprendendo as Cores',
+  title: 'Bem-vindo à Escola Brilha!',
   steps: [
     {
       id: 'step-1',
       type: 'explanation',
       mascot: 'pip',
-      speech: 'Olá! Eu sou o Pip e hoje vamos aprender as cores.',
+      speech: 'Oi amiguinho! Eu sou o Pip e esta é a Escola Brilha!',
       elements: [
-        { id: 'el-1', type: 'icon', content: '🎨', position: { x: 0, y: -50 }, animation: 'bounce', delay: 0.5 }
+        { id: 'el-1', type: 'icon', content: '✨', position: { x: 0, y: -50 }, animation: 'bounce', delay: 0.5 }
       ]
     },
     {
       id: 'step-2',
       type: 'explanation',
-      mascot: 'pip',
-      speech: 'Veja este círculo. Ele é vermelho como uma maçã!',
+      mascot: 'pipa',
+      speech: 'E eu sou a Pipa! Vamos aprender muitas coisas legais juntos!',
       elements: [
-        { id: 'el-2', type: 'text', content: '🔴', position: { x: 0, y: -100 }, animation: 'fade', delay: 0.3 }
+        { id: 'el-2', type: 'icon', content: '🌟', position: { x: 0, y: -100 }, animation: 'fade', delay: 0.3 }
       ]
     },
     {
       id: 'step-3',
+      type: 'explanation',
+      mascot: 'pip',
+      speech: 'Hoje vamos descobrir o mundo das cores. Olha esse azul!',
+      elements: [
+        { id: 'el-3', type: 'text', content: '🔵', position: { x: 0, y: -80 }, animation: 'bounce', delay: 0.4 }
+      ]
+    },
+    {
+      id: 'step-4',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'Agora é sua vez! Toque no círculo vermelho.',
+      speech: 'Qual desses é o azul igual ao céu? Toque nele!',
       interaction: {
         type: 'click',
-        correctAnswer: 'red',
-        options: ['blue', 'red', 'green']
+        correctAnswer: 'blue',
+        options: ['red', 'blue', 'green']
       }
     }
   ]
