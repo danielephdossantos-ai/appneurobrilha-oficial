@@ -9,10 +9,10 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'aula-som-b',
-  title: 'O Som da Letra B',
+  id: 'brincando-com-sons',
+  title: 'Brincando com os Sons',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP04', 
+  skill_bncc: 'EI03EF01', // Consciência Fonológica e Onomatopeias (EI03 - 4 a 5 anos)
   steps: [
     {
       id: 'fase-1',
