@@ -1333,6 +1333,35 @@ export type Database = {
           },
         ]
       }
+      habilidade_tecnica: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          id: string
+          tecnica_id: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          id?: string
+          tecnica_id: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          id?: string
+          tecnica_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "habilidade_tecnica_tecnica_id_fkey"
+            columns: ["tecnica_id"]
+            isOneToOne: false
+            referencedRelation: "tecnicas_pedagogicas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hiperfoco_elementos: {
         Row: {
           created_at: string
