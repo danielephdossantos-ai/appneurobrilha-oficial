@@ -533,182 +533,109 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader
-        icon={GraduationCap}
-        title="Escola Brilha"
-        subtitle={ei
-          ? `Educação Infantil · Atividades simples e visuais para os pequenos`
-          : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
-      />
+      {/* Header Compacto e Mobile-First */}
+      <div className="flex flex-col gap-4 mb-6 md:mb-8">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-primary/10 grid place-items-center text-primary border-2 border-primary/20">
+              <GraduationCap className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl md:text-3xl font-black leading-tight">Escola Brilha</h1>
+              <p className="text-[10px] md:text-xs text-muted-foreground uppercase font-black tracking-wider">
+                {ei ? "Educação Infantil" : `BNCC Adaptada · ${selectedGrade}`}
+              </p>
+            </div>
+          </div>
 
-      <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
-        <div className="flex gap-2 min-w-max">
-          {grades.map((grade) => (
-            <button
-              key={grade}
-              onClick={() => setSelectedGrade(grade)}
-              className={`px-4 py-2 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
-                selectedGrade === grade
-                  ? "bg-primary text-white shadow-glow scale-105"
-                  : "bg-muted text-muted-foreground hover:bg-primary/10"
-              }`}
+          <div className="flex gap-2">
+            <select
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+              className="bg-card border-2 border-border rounded-xl px-2 py-1.5 text-xs font-bold outline-none focus:border-primary transition-all shadow-sm"
             >
-              {grade}
-            </button>
-          ))}
+              {grades.map(g => <option key={g} value={g}>{g}</option>)}
+            </select>
+          </div>
         </div>
-      </div>
 
-      {ei && (
-        <div className="mb-4 flex items-end gap-3 md:gap-4">
-          {/* Avatar do mascote apontando para o balão */}
+        {/* Mascote e Boas-vindas - Compacto */}
+        <div className="flex items-center gap-3 md:gap-4 bg-gradient-to-r from-primary/5 to-transparent p-3 rounded-2xl border border-primary/10">
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center animate-float-thinking overflow-hidden">
-              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-              ) : (
-                <RenderMascote icon={activeMascot?.mascot?.image_url || Bird} className="w-16 h-16 text-primary" />
-              )}
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white border-2 border-primary/20 shadow-sm flex items-center justify-center overflow-hidden">
+              <img 
+                src={ei ? imgPipa : imgPip} 
+                alt="Mascote" 
+                className="w-full h-full object-contain" 
+              />
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
-              {activeMascot?.mascot?.name || "Profª Pipa"}
-            </div>
-          </div>
-
-          {/* Balão de fala estilo HQ */}
-          <div className="relative flex-1">
-            <div className="relative bg-white rounded-3xl border-[3px] border-foreground/80 px-5 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,0.85)]">
-              {/* Rabicho do balão apontando para o avatar (à esquerda) */}
-              <div className="absolute -left-3 bottom-5 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-foreground/80" />
-              <div className="absolute -left-[9px] bottom-[22px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[11px] border-r-white" />
-
-              <p className="font-extrabold text-lg md:text-xl text-primary leading-snug">
-                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}!
-              </p>
-              <p className="text-sm md:text-base text-foreground/80 mt-1 font-bold">
-                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA MATÉRIA LÁ EMBAIXO!
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-
-      <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
-        <div className="flex items-center gap-4">
-          <div className="text-5xl">
-            <RenderVisual value={activeChild.avatar} className="h-12 w-12 text-primary" />
           </div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">
-              {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
+            <div className="font-black text-sm md:text-base text-primary">
+              {ei ? `Oi, ${activeChild.nome}!` : `Pronto para brilhar, ${activeChild.nome}?`}
             </div>
-            <div className="text-sm text-muted-foreground">
-              {ei
-                ? "Escolha uma matéria lá embaixo"
-                : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
-            </div>
-            <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: "10%" }} />
-            </div>
+            <p className="text-[11px] md:text-sm text-foreground/70 font-bold leading-snug">
+              {ei 
+                ? "Vamos brincar de aprender? Escolha um tema abaixo!" 
+                : "Escolha uma matéria e vamos começar nossa missão!"}
+            </p>
           </div>
-          <button onClick={() => carregarAula(startMateriaId)} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
-            <Play className="h-4 w-4" /> Começar
+          <button 
+            onClick={() => carregarAula(startMateriaId)} 
+            className="shrink-0 h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center shadow-glow animate-pulse"
+          >
+            <Play className="h-5 w-5 fill-current" />
           </button>
         </div>
-      </Card>
-
-      {(() => {
-        const t = tierTheme[gradeTier(selectedGrade)];
-        return (
-          <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
-            <div className="absolute right-3 top-2 opacity-40 animate-float-thinking select-none">
-              <t.sceneIcon className="h-20 w-20" />
-            </div>
-            <div className="relative">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
-              <div className="text-2xl font-extrabold">{t.scene}</div>
-              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo</div>
-            </div>
-          </div>
-        );
-      })()}
-
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
-        {isTeen && (
-          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
-            <div className="text-2xl"><GraduationCap className="h-6 w-6 text-primary" /></div>
-            <div className="flex-1">
-              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
-              <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
-            </div>
-            <button
-              onClick={() => {
-                const next = !teenGuided;
-                setTeenGuided(next);
-                try { localStorage.setItem("escola_teen_guided", next ? "1" : "0"); } catch {}
-              }}
-              className={`relative w-14 h-8 rounded-full transition-colors ${teenGuided ? "bg-primary" : "bg-muted"}`}
-              aria-label="Alternar atividade guiada"
-            >
-              <span className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow transition-all ${teenGuided ? "left-7" : "left-1"}`} />
-            </button>
-          </div>
-        )}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      {/* Grid de Matérias - Mais limpo e mobile-friendly */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
         {materiasVisiveis.map((m: any) => (
-          <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
-            <div className="flex justify-center">
+          <button 
+            key={m.id} 
+            onClick={() => carregarAula(m.id)}
+            className={`group relative rounded-2xl p-4 bg-gradient-to-br ${m.cor} border border-border/40 shadow-sm hover:shadow-glow hover:-translate-y-1 transition-all text-center overflow-hidden flex flex-col items-center`}
+          >
+            <div className="relative mb-2">
+              <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
                 src={m.img}
                 alt={m.nome}
-                loading="lazy"
-                width={512}
-                height={512}
-                className="w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-md group-hover:scale-110 transition-transform"
+                className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-sm group-hover:scale-110 transition-transform relative z-10"
               />
             </div>
-            <div className="font-extrabold text-lg mt-3 text-center">{m.nome}</div>
-            <div className="flex items-center justify-center gap-1.5 mt-1 text-xs text-muted-foreground">
-              <b>{m.mascoteNome}</b> te guia
+            <div className="font-black text-sm md:text-base leading-tight">{m.nome}</div>
+            <div className="text-[10px] text-muted-foreground mt-1 opacity-80">
+              {ei ? (m.descricao || "Ver trilha") : `Nível ${(activeChild.niveis as any)[m.id] ?? 2}`}
             </div>
-            {ei && m.descricao && (
-              <div className="text-xs text-muted-foreground mt-1 text-center">{m.descricao}</div>
-            )}
-            {!ei && (
-              <div className="mt-2 flex justify-center"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
-            )}
-            <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
         ))}
       </div>
 
+      {/* Banco BNCC - Agora como seção secundária mais discreta */}
       {showBanco && banco && (
-        <section className="mt-10">
-          <div className="flex items-center justify-between mb-3">
+        <div className="mt-8 border-t border-border pt-8 pb-12">
+          <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Banco BNCC · Infinito</div>
-              <h2 className="text-xl font-extrabold">Atividades liberadas — Lote {banco.lote}</h2>
-              <div className="text-sm text-muted-foreground">
-                {banco.done.length} de {BANCO_TAMANHO} concluídas. Ao terminar todas, mais {BANCO_TAMANHO} são liberadas automaticamente.
-              </div>
+              <h2 className="text-lg font-black flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-sun" /> Banco de Atividades
+              </h2>
+              <p className="text-xs text-muted-foreground">Progresso do Lote {banco.lote}: {banco.done.length}/{BANCO_TAMANHO}</p>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
+              <div className="text-xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
             </div>
           </div>
-          <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
+          
+          <div className="h-2 rounded-full bg-muted overflow-hidden mb-6">
             <div
               className="h-full bg-gradient-to-r from-primary to-success transition-all"
               style={{ width: `${(banco.done.length / BANCO_TAMANHO) * 100}%` }}
             />
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2">
+          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-1.5">
             {banco.items.map((item) => {
               const done = banco.done.includes(item.activity.id);
               const meta = materias.find((m) => m.id === item.materiaId) || materias[0];
@@ -717,24 +644,22 @@ function Escola() {
                   key={item.activity.id}
                   onClick={() => carregarAula(item.materiaId, undefined, { activity: item.activity, ordem: item.ordem })}
                   disabled={done}
-                  title={`${item.ordem}. ${meta.nome} — ${item.activity.title || ""}`}
-                  className={`relative aspect-square rounded-xl border-2 flex flex-col items-center justify-center text-center transition-all ${
+                  className={`relative aspect-square rounded-lg border flex items-center justify-center transition-all ${
                     done
-                      ? "bg-success/15 border-success/40 text-success cursor-default"
-                      : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
+                      ? "bg-success/10 border-success/20 text-success/50"
+                      : `bg-white border-border hover:border-primary hover:shadow-sm`
                   }`}
                 >
-                  <img src={meta.img} alt={meta.nome} loading="lazy" width={512} height={512} className="w-10 h-10 object-contain" />
-                  <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
-                  {done && (
-                    <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
-                  )}
+                  {done ? <CheckCircle2 className="h-4 w-4" /> : <span className="text-[10px] font-bold">{item.ordem}</span>}
                 </button>
               );
             })}
           </div>
-        </section>
+        </div>
       )}
+    </Shell>
+  );
+}
     </Shell>
   );
 }
