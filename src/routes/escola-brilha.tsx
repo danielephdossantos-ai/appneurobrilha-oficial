@@ -309,12 +309,14 @@ function Escola() {
     try {
       const isInfantil = isEI(selectedGrade);
       const pedService = SupabasePedagogicalService.getInstance();
+      let bncc_code: string | undefined;
       
       // 1. Priorizar conteúdo do Banco Pedagógico (Novas tabelas)
       const dbSkills = await pedService.getSkillsByGradeAndSubject(selectedGrade, materiaId);
 
       if (dbSkills && dbSkills.length > 0) {
         const skill = dbSkills[0];
+        bncc_code = skill.codigo_bncc;
         const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
         const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
@@ -327,7 +329,7 @@ function Escola() {
           setAula({
             materia: materiaId,
             grade: selectedGrade,
-            skill_code: skill.codigo_bncc,
+            skill_code: bncc_code,
             topic: skill.titulo,
             objetivo: skill.objetivo,
             etapa1_explicação: explanation.texto_professor,
@@ -449,7 +451,8 @@ function Escola() {
           systemOptions,
           systemAnswer,
           instruction: activity.instruction,
-          miniGameType // Enviando o tipo de jogo para a IA
+          miniGameType,
+          bncc_code // Passando o código BNCC para a IA buscar as técnicas
         }
       });
 
