@@ -1,19 +1,30 @@
+export type LessonPhase = 
+  | 'explanation' 
+  | 'demonstration' 
+  | 'guided_training' 
+  | 'practice' 
+  | 'challenge' 
+  | 'mastery' 
+  | 'spaced_review';
+
 export interface LessonStep {
   id: string;
-  type: 'explanation' | 'interaction';
+  phase: LessonPhase;
+  type: 'explanation' | 'interaction' | 'demonstration';
   mascot: 'pip' | 'pipa';
   speech: string;
   elements?: LessonElement[];
   interaction?: LessonInteraction;
   audioUrl?: string;
+  showHelp?: boolean;
 }
 
 export interface LessonElement {
   id: string;
-  type: 'image' | 'icon' | 'text';
+  type: 'image' | 'icon' | 'text' | 'shape';
   content: string;
   position: { x: number; y: number };
-  animation: 'fade' | 'bounce' | 'slide';
+  animation: 'fade' | 'bounce' | 'slide' | 'pop';
   delay: number;
 }
 
@@ -24,8 +35,18 @@ export interface LessonInteraction {
   hint?: string;
 }
 
+export interface LessonPerformance {
+  hits: number;
+  misses: number;
+  startTime: number;
+  endTime?: number;
+  percentage: number;
+}
+
 export interface Lesson {
   id: string;
   title: string;
+  skill_bncc?: string;
   steps: LessonStep[];
 }
+
