@@ -518,11 +518,9 @@ function Escola() {
           setAula={setAula} 
           childId={activeChild.id}
           childNome={activeChild.nome} 
-          hiperfoco={activeChild.hiperfoco}
-          activeMascot={activeMascot}
-          tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
         />
+
       </AulaErrorBoundary>
     );
   }
