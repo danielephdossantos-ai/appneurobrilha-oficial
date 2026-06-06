@@ -311,6 +311,19 @@ function Index() {
 /* ---------- CONSTRUÇÕES SVG ---------- */
 
 
+function MagicSchool() {
+  return (
+    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
+      <rect x="30" y="60" width="100" height="70" fill="#fff" stroke="#0d1f55" strokeWidth="3" rx="4" />
+      <polygon points="80,15 20,60 140,60" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="3" />
+      <rect x="70" y="95" width="20" height="35" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2.5" />
+      <circle cx="55" cy="85" r="8" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <circle cx="105" cy="85" r="8" fill="#FFC93C" stroke="#0d1f55" strokeWidth="2" />
+      <path d="M75 35 L85 35 M80 30 L80 40" stroke="#FFC93C" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function BrainTower() {
   return (
     <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
