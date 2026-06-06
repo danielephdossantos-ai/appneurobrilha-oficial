@@ -9,9 +9,10 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'aula-letra-b',
-  title: 'Brincando com a Letra B',
+  id: 'aula-som-b',
+  title: 'O Som da Letra B',
   bncc_field: 'escuta_fala',
+  skill_bncc: 'EF01LP04', // Consciência fonológica e fonêmica (Método Fônico)
   steps: [
     {
       id: 'fase-1',
