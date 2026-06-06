@@ -5,15 +5,17 @@ import { MascotTeacher } from '../components/MascotTeacher';
 import { SpeechBubble } from '../components/SpeechBubble';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonStep } from '../types/lesson';
+import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
   id: 'aula-letra-b',
   title: 'Letra B',
+  skill_bncc: 'EF01LP04',
   steps: [
     {
-      id: 'step-1',
+      id: 'fase-1',
+      phase: 'explanation',
       type: 'explanation',
       mascot: 'pipa',
       speech: 'Vamos aprender a letra B!',
@@ -22,32 +24,38 @@ const MOCK_LESSON: Lesson = {
       ]
     },
     {
-      id: 'step-2',
-      type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Esta é a letra B.',
-      elements: [
-        { id: 'letra-b-static', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'fade', delay: 0 }
-      ]
-    },
-    {
-      id: 'step-3',
-      type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Borboleta começa com B.',
-      elements: [
-        { id: 'borboleta', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
-      ]
-    },
-    {
-      id: 'step-4',
-      type: 'interaction',
+      id: 'fase-2',
+      phase: 'demonstration',
+      type: 'demonstration',
       mascot: 'pip',
-      speech: 'Onde está a borboleta?',
+      speech: 'Olha como eu resolvo: B de Borboleta!',
+      elements: [
+        { id: 'borboleta-demo', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
+      ]
+    },
+    {
+      id: 'fase-3',
+      phase: 'guided_training',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: 'Agora sua vez com ajuda. Onde está o B?',
+      showHelp: true,
       interaction: {
         type: 'click',
-        correctAnswer: 'borboleta',
-        options: ['🍎', '🦋', '🐶']
+        correctAnswer: 'B',
+        options: ['A', 'B', 'C']
+      }
+    },
+    {
+      id: 'fase-4',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'Muito bem! Vamos praticar mais um pouco.',
+      interaction: {
+        type: 'click',
+        correctAnswer: 'B',
+        options: ['D', 'E', 'B']
       }
     }
   ]
@@ -61,6 +69,14 @@ export const LessonPlayer: React.FC = () => {
   const [showInteraction, setShowInteraction] = useState(false);
   const [visibleOptions, setVisibleOptions] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string | null>(null);
+  
+  // Performance Tracking (Fase 6: Domínio)
+  const [performance, setPerformance] = useState<LessonPerformance>({
+    hits: 0,
+    misses: 0,
+    startTime: Date.now(),
+    percentage: 0
+  });
 
   const currentStep = MOCK_LESSON.steps[currentStepIndex];
   const progress = ((currentStepIndex + 1) / MOCK_LESSON.steps.length) * 100;
@@ -107,9 +123,15 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === '🦋'; // Simple logic for mock
+    const isCorrect = answer === currentStep.interaction?.correctAnswer;
     
     if (isCorrect) {
+      setPerformance(prev => ({
+        ...prev,
+        hits: prev.hits + 1,
+        percentage: ((prev.hits + 1) / (prev.hits + prev.misses + 1)) * 100
+      }));
+
       setFeedback('Incrível!');
       setIsSpeaking(true);
       await AudioSpeechService.speak('Parabéns! Você brilhou!');
@@ -118,12 +140,25 @@ export const LessonPlayer: React.FC = () => {
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
         await new Promise(r => setTimeout(r, 1000));
         setCurrentStepIndex(prev => prev + 1);
+      } else {
+        // Fase 6: Domínio - Finalizar e registrar
+        const totalTime = (Date.now() - performance.startTime) / 1000;
+        console.log(`Domínio registrado: ${performance.hits} acertos, ${performance.misses} erros, ${totalTime}s`);
+        await AudioSpeechService.speak('Você completou a missão com sucesso!');
       }
     } else {
+      setPerformance(prev => ({
+        ...prev,
+        misses: prev.misses + 1,
+        percentage: (prev.hits / (prev.hits + prev.misses + 1)) * 100
+      }));
+
       setFeedback('Vamos tentar juntos');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Vamos tentar juntos! Olha só...');
+      await AudioSpeechService.speak('Não se preocupe, vamos tentar juntos! Olha só...');
       setIsSpeaking(false);
+      
+      // Fase 2: Demonstração automática em caso de erro
       runStep();
     }
   };
