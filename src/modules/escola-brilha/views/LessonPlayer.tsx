@@ -144,19 +144,21 @@ export const LessonPlayer: React.FC = () => {
 
         {/* Interaction Options */}
         {showInteraction && (
-          <div className="flex gap-4 mt-20">
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="flex gap-6 mt-20"
+          >
             {currentStep.interaction?.options?.map((opt) => (
               <Button
                 key={opt}
                 onClick={() => handleInteraction(opt)}
-                className={`w-24 h-24 rounded-full text-4xl shadow-xl transition-transform hover:scale-110 ${
+                className={`w-28 h-28 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-90 border-8 border-white ${
                   opt === 'red' ? 'bg-red-500' : opt === 'blue' ? 'bg-blue-500' : 'bg-green-500'
                 }`}
-              >
-                {/* Visual cue instead of text if possible */}
-              </Button>
+              />
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 
