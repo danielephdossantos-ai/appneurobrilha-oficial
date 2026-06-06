@@ -12,8 +12,8 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
   isSpeaking, 
   expression = 'happy' 
 }) => {
-  // Use unique colors or visual markers for each mascot
-  const mascotColor = type === 'pip' ? '#4FD1C5' : '#F687B3'; // Alterado de laranja/marrom para rosa/azul-claro
+  // Pip é azul (#38BDF8) e Pipa é rosa (#F472B6)
+  const mascotColor = type === 'pip' ? '#38BDF8' : '#F472B6';
   
   return (
     <motion.div 
