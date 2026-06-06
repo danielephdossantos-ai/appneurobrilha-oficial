@@ -128,7 +128,7 @@ export const LessonPlayer: React.FC = () => {
     if (step.type === 'interaction' && step.interaction?.options) {
       const options = step.interaction.options;
       if (options.length > 0) {
-        const optionsText = options.slice(0, -1).join(', ') + (options.length > 1 ? ' ou ' : '') + options[options.length - 1];
+        const optionsText = options.slice(0, -1).join('... ') + (options.length > 1 ? '... ou ... ' : '') + options[options.length - 1];
         text += '. ' + optionsText + '?';
       }
     }
