@@ -6,16 +6,17 @@ interface LessonEnvironmentProps {
 
 export const LessonEnvironment: React.FC<LessonEnvironmentProps> = ({ children }) => {
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-sky-50 font-sans">
-      {/* Background Decor - Minimal to avoid distraction */}
-      <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-3xl opacity-50" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-50" />
-      
-      {/* Ground/Floor */}
-      <div className="absolute bottom-0 w-full h-[25vh] bg-green-50 rounded-t-[100px]" />
-      
-      {/* Content Area */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center pt-10 px-4">
+    <div className="relative w-full min-h-screen overflow-hidden font-sans bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50">
+      {/* Clouds */}
+      <div className="absolute top-24 left-6 w-20 h-8 bg-white rounded-full opacity-80 blur-sm" />
+      <div className="absolute top-32 right-10 w-28 h-10 bg-white rounded-full opacity-80 blur-sm" />
+      <div className="absolute top-52 left-1/3 w-16 h-6 bg-white rounded-full opacity-70 blur-sm" />
+
+      {/* Grass / floor */}
+      <div className="absolute bottom-0 w-full h-[28vh] bg-gradient-to-t from-green-300 to-green-200 rounded-t-[60%]" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col items-center">
         {children}
       </div>
     </div>
