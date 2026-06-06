@@ -170,10 +170,11 @@ export class MathGenerator extends BaseGenerator {
       if (type === 'alfa-sum') {
         const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
         return {
-          q: "Soma Visual",
-          visual: "maçãs",
+          q: `Quanto é ${item.group1.n} mais ${item.group2.n}?`,
+          visual: item.group1.item === 'apple' ? '🍎' : '⭐',
           numero_a: item.group1.n,
           numero_b: item.group2.n,
+          resultado: item.answer,
           operacao: "+",
           answer: String(item.answer),
           options: item.options.map(String),
@@ -185,10 +186,11 @@ export class MathGenerator extends BaseGenerator {
       if (type === 'alfa-sub') {
         const item = this.pickRandom(FIRST_GRADE_MATH.visualSubtraction);
         return {
-          q: "Subtração Visual",
-          visual: "peixes",
+          q: `Tinha ${item.total.n} e tirou ${item.take}. Quanto sobrou?`,
+          visual: item.total.item === 'fish' ? '🐟' : '🍎',
           numero_a: item.total.n,
           numero_b: item.take,
+          resultado: item.answer,
           operacao: "-",
           answer: String(item.answer),
           options: item.options.map(String),
