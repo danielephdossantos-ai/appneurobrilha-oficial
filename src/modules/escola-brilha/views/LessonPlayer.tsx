@@ -5,7 +5,7 @@ import { MascotTeacher } from '../components/MascotTeacher';
 import { SpeechBubble } from '../components/SpeechBubble';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonStep } from '../types/lesson';
+import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
