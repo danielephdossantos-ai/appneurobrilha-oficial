@@ -882,7 +882,8 @@ function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'de
 function buildTeachingScreens(aula: any): Array<{ titulo: string; fala: string; focus?: string; mode?: 'explicacao' | 'demonstracao' }> {
   const palavra: string | undefined = aula?.palavra_foco;
   const silabas: string[] | undefined = aula?.silabas;
-  const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const letra: string | undefined = aula?.letra || (palavra ? (silabas ? undefined : palavra[0]) : undefined);
+  const visual: string | undefined = aula?.visual;
   const numA = aula?.numero_a;
   const numB = aula?.numero_b;
   const op = aula?.operacao;
@@ -892,44 +893,55 @@ function buildTeachingScreens(aula: any): Array<{ titulo: string; fala: string; 
   const opNome = op === '+' ? 'somar' : op === '-' ? 'tirar' : 'juntar';
   const opFala = op === '+' ? 'mais' : op === '-' ? 'menos' : op;
 
+  // EDUCAÇÃO INFANTIL OU ALFABETIZAÇÃO: Foco em som, imagem e letra
+  if (visual && (aula.isEI || aula.grade?.includes('1º'))) {
+    return [
+      { titulo: 'OLHA O QUE APARECEU!', fala: `Oi! Olha que legal o que eu trouxe hoje: uma figura de ${palavra || 'algo especial'}!`, focus: 'visual', mode: 'explicacao' },
+      { titulo: 'VOCÊ SABE O NOME?', fala: `Essa figura é um ${palavra || 'objeto'}. Diz comigo: ${palavra || 'objeto'}!`, focus: 'visual' },
+      { titulo: 'A LETRA DE HOJE', fala: `A palavra ${palavra} começa com a letra ${letra}. Olha ela ali no quadro!`, focus: 'visual' },
+      { titulo: 'O SOM DA LETRA', fala: `A letra ${letra} faz um som muito especial. Repete comigo: ${letra}, ${letra}, ${letra}!`, focus: 'visual' },
+      { titulo: 'VAMOS PROCURAR?', fala: `Agora eu quero ver se você consegue encontrar a letra ${letra} ou a figura de ${palavra}. Vamos brincar?`, mode: 'demonstracao' },
+    ];
+  }
+
   if (isMath) {
     return [
-      { titulo: 'OLHA O PRIMEIRO NÚMERO', fala: `Olha que legal! O primeiro número é ${numA}. Conta comigo as bolinhas amarelas!`, focus: 'numA' },
-      { titulo: 'AGORA O SEGUNDO', fala: `Muito bem! Agora o segundo número é ${numB}. Vamos contar essas bolinhas também!`, focus: 'numB' },
+      { titulo: 'OLHA O PRIMEIRO NÚMERO', fala: `Olha que legal! O primeiro número é ${numA}. Conta comigo as bolinhas no quadro!`, focus: 'numA', mode: 'explicacao' },
+      { titulo: 'AGORA O SEGUNDO', fala: `Muito bem! Agora o segundo número é ${numB}. Vamos contar essas outras bolinhas também!`, focus: 'numB' },
       { titulo: `VAMOS ${opNome.toUpperCase()}!`, fala: `Agora vamos ${opNome} os dois. ${numA} ${opFala} ${numB}. Junta tudo na sua cabecinha!`, focus: 'op' },
       { titulo: 'O RESULTADO!', fala: `Olha que legal! ${numA} ${opFala} ${numB} é igual a ${resultado}! Repete comigo: ${numA} ${opFala} ${numB} igual a ${resultado}.`, focus: 'result', mode: 'demonstracao' },
-      { titulo: 'AGORA É SUA VEZ!', fala: `Você aprendeu! Agora vamos brincar de fazer continhas iguais a essa.`, mode: 'demonstracao' },
+      { titulo: 'VAMOS PRATICAR?', fala: `Você aprendeu! Agora é sua vez de brilhar fazendo continhas iguais a essa.`, mode: 'demonstracao' },
     ];
   }
 
   if (silabas && silabas.length > 0 && palavra) {
     const screens: Array<{ titulo: string; fala: string; focus?: string; mode?: any }> = [
-      { titulo: 'A PALAVRA DE HOJE', fala: `A nossa palavra de hoje é: ${palavra}. Diz comigo: ${palavra}!`, focus: 'word', mode: 'explicacao' },
-      { titulo: 'VAMOS SEPARAR EM PEDACINHOS', fala: `Toda palavra tem pedacinhos chamados sílabas. A palavra ${palavra} tem ${silabas.length} pedacinhos.` },
+      { titulo: 'A PALAVRA DE HOJE', fala: `A nossa palavra de hoje é: ${palavra}. Diz comigo bem alto: ${palavra}!`, focus: 'word', mode: 'explicacao' },
+      { titulo: 'VAMOS SEPARAR EM PEDACINHOS', fala: `Sabia que toda palavra tem pedacinhos? Eles se chamam sílabas. A palavra ${palavra} tem ${silabas.length} pedacinhos.`, focus: 'word' },
     ];
     silabas.slice(0, 3).forEach((s, i) => {
-      screens.push({ titulo: `PEDACINHO ${i + 1}`, fala: `Este pedacinho é ${s}. Diz comigo: ${s}!`, focus: `syl-${i}` });
+      screens.push({ titulo: `PEDACINHO ${i + 1}`, fala: `Este pedacinho aqui é ${s}. Diz comigo: ${s}!`, focus: `syl-${i}` });
     });
-    screens.push({ titulo: 'JUNTANDO TUDO!', fala: `Quando juntamos os pedacinhos ${silabas.join(', ')}, fica: ${palavra}! Vamos brincar agora!`, focus: 'word', mode: 'demonstracao' });
+    screens.push({ titulo: 'JUNTANDO TUDO!', fala: `Quando juntamos os pedacinhos ${silabas.join(', ')}, formamos a palavra: ${palavra}! Vamos brincar?`, focus: 'word', mode: 'demonstracao' });
     return screens.slice(0, 6);
   }
 
   if (letra) {
     return [
-      { titulo: 'A LETRA DE HOJE', fala: `Olha que letra bonita! Esta é a letra ${letra}. Diz comigo: ${letra}!`, focus: 'letter' },
-      { titulo: 'COMO ELA FAZ?', fala: `A letra ${letra} faz um som. Repete comigo: ${letra}, ${letra}, ${letra}.`, focus: 'letter' },
-      { titulo: 'ONDE APARECE?', fala: `Várias palavras têm a letra ${letra}! Vamos procurá-la?`, focus: 'letter' },
-      { titulo: 'PRONTO PRA BRINCAR?', fala: `Agora vamos brincar de encontrar a letra ${letra}.`, mode: 'demonstracao' },
+      { titulo: 'A LETRA DE HOJE', fala: `Olha que letra bonita eu desenhei! Esta é a letra ${letra}. Diz comigo: ${letra}!`, focus: 'letter', mode: 'explicacao' },
+      { titulo: 'O SOM DELA', fala: `A letra ${letra} tem um som muito legal. Faz comigo: ${letra}, ${letra}, ${letra}.`, focus: 'letter' },
+      { titulo: 'PALAVRAS COM ESSA LETRA', fala: `Muitas palavras começam com a letra ${letra}! Você consegue pensar em uma?`, focus: 'letter' },
+      { titulo: 'HORA DE BRINCAR!', fala: `Agora vamos ver se você consegue encontrar a letra ${letra} no meio de outras letras.`, mode: 'demonstracao' },
     ];
   }
 
-  const intro = aula?.etapa1_explicação || aula?.etapa1_intro || aula?.instruction || 'Hoje vamos aprender uma coisa nova!';
-  const concept = aula?.etapa2_demonstração || aula?.etapa2_conceito || 'Olha como é fácil!';
+  const intro = aula?.etapa1_explicação || aula?.etapa1_intro || aula?.instruction || 'Hoje vamos aprender uma coisa nova e muito divertida!';
+  const concept = aula?.etapa2_demonstração || aula?.etapa2_conceito || 'Olha só como é fácil de fazer!';
   return [
     { titulo: aula?.topic || 'AULA DE HOJE', fala: intro, mode: 'explicacao' },
-    { titulo: 'OBSERVE COM ATENÇÃO', fala: concept, mode: 'demonstracao' },
-    { titulo: 'IMPORTANTE LEMBRAR', fala: `Esta atividade é da habilidade ${bncc}. Vamos exercitar!`, mode: 'demonstracao' },
-    { titulo: 'AGORA É SUA VEZ!', fala: 'Toque em CONTINUAR para começar a brincar e aprender!', mode: 'demonstracao' },
+    { titulo: 'OBSERVE O QUADRO', fala: concept, focus: 'visual', mode: 'demonstracao' },
+    { titulo: 'VOCÊ CONSEGUE!', fala: `Estamos aprendendo a habilidade ${bncc}. Vamos praticar um pouquinho?`, mode: 'demonstracao' },
+    { titulo: 'VAMOS COMEÇAR?', fala: 'Toque no botão PRÓXIMO para começar a brincar e aprender de verdade!', mode: 'demonstracao' },
   ];
 }
 
