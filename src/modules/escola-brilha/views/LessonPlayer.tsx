@@ -165,7 +165,7 @@ export const LessonPlayer: React.FC = () => {
 
   return (
     <LessonEnvironment>
-      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} />
+      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} field={MOCK_LESSON.bncc_field} />
 
       {/* Main Element Area */}
       <div className="flex-1 w-full relative flex items-center justify-center pt-20">
