@@ -8,8 +8,8 @@ export const getRouter = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        gcTime: 1000 * 60 * 60 * 24, // 24 hours
-        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 60 * 1, // Reduzido de 24h para 1h para evitar cache persistente de dados antigos
+        staleTime: 0, // Garantir que o app busque dados novos ao invés de usar cache "podre"
       },
     },
   });
