@@ -50,10 +50,12 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // Ignoramos qualquer outro mascote selecionado (inclui robôs antigos).
+  // No computador, usamos a versão clássica. No celular, se houver hiperfoco, usamos a skin.
   const getMascotImage = () => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
-    if (firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
+    
+    if (isMobile && firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
       return PIP_SKINS[firstHyperfocus];
     }
     return pipMascot;
