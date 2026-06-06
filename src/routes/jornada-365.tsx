@@ -312,9 +312,7 @@ function Jornada() {
                         "h-10 w-10 rounded-xl grid place-items-center shrink-0",
                         b.category === "neuro-treino"
                           ? "bg-coral/20 text-coral"
-                          : b.category === "escola-brilha"
-                            ? "bg-sky/20 text-sky"
-                            : "bg-success/20 text-success"
+                          : "bg-success/20 text-success"
                       )}
                     >
                       {b.status === "done" ? (
