@@ -227,7 +227,7 @@ function Jornada() {
   }
 
   const currentDay = journeyState?.current_day || 1;
-  const blocks = PedagogyEngine.generateDailyRoutine(currentDay, activeChild, activities);
+  const blocks: any[] = []; // PedagogyEngine.generateDailyRoutine(currentDay, activeChild, activities);
   const progress = Math.min(Math.round(((currentDay - 1) / 365) * 100), 100);
 
   const handleStart = (block: (typeof blocks)[number]) => {
