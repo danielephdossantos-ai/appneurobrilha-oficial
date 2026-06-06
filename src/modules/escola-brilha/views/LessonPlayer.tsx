@@ -125,19 +125,17 @@ export const LessonPlayer: React.FC = () => {
         percentage: ((prev.hits + 1) / (prev.hits + prev.misses + 1)) * 100
       }));
 
-      setFeedback('Incrível!');
+      setFeedback('Acertou!');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Parabéns! Você brilhou!');
+      await AudioSpeechService.speak('Isso mesmo! Você brilhou!');
       setIsSpeaking(false);
       
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
         await new Promise(r => setTimeout(r, 1000));
         setCurrentStepIndex(prev => prev + 1);
       } else {
-        // Fase 6: Domínio - Finalizar e registrar
-        const totalTime = (Date.now() - performance.startTime) / 1000;
-        console.log(`Domínio registrado: ${performance.hits} acertos, ${performance.misses} erros, ${totalTime}s`);
-        await AudioSpeechService.speak('Você completou a missão com sucesso!');
+        setFeedback('Missão Cumprida!');
+        await AudioSpeechService.speak('Parabéns! Você completou toda a missão!');
       }
     } else {
       setPerformance(prev => ({
@@ -146,12 +144,11 @@ export const LessonPlayer: React.FC = () => {
         percentage: (prev.hits / (prev.hits + prev.misses + 1)) * 100
       }));
 
-      setFeedback('Vamos tentar juntos');
+      setFeedback('Tente de novo');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Não se preocupe, vamos tentar juntos! Olha só...');
+      await AudioSpeechService.speak('Vamos tentar juntos! Olhe com atenção.');
       setIsSpeaking(false);
       
-      // Fase 2: Demonstração automática em caso de erro
       runStep();
     }
   };
