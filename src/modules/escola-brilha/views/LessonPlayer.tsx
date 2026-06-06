@@ -11,9 +11,11 @@ import { Button } from "@/components/ui/button";
 const MOCK_LESSON: Lesson = {
   id: 'aula-letra-b',
   title: 'Letra B',
+  skill_bncc: 'EF01LP04',
   steps: [
     {
-      id: 'step-1',
+      id: 'fase-1',
+      phase: 'explanation',
       type: 'explanation',
       mascot: 'pipa',
       speech: 'Vamos aprender a letra B!',
@@ -22,32 +24,38 @@ const MOCK_LESSON: Lesson = {
       ]
     },
     {
-      id: 'step-2',
-      type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Esta é a letra B.',
-      elements: [
-        { id: 'letra-b-static', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'fade', delay: 0 }
-      ]
-    },
-    {
-      id: 'step-3',
-      type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Borboleta começa com B.',
-      elements: [
-        { id: 'borboleta', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
-      ]
-    },
-    {
-      id: 'step-4',
-      type: 'interaction',
+      id: 'fase-2',
+      phase: 'demonstration',
+      type: 'demonstration',
       mascot: 'pip',
-      speech: 'Onde está a borboleta?',
+      speech: 'Olha como eu resolvo: B de Borboleta!',
+      elements: [
+        { id: 'borboleta-demo', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
+      ]
+    },
+    {
+      id: 'fase-3',
+      phase: 'guided_training',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: 'Agora sua vez com ajuda. Onde está o B?',
+      showHelp: true,
       interaction: {
         type: 'click',
-        correctAnswer: 'borboleta',
-        options: ['🍎', '🦋', '🐶']
+        correctAnswer: 'B',
+        options: ['A', 'B', 'C']
+      }
+    },
+    {
+      id: 'fase-4',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'Muito bem! Vamos praticar mais um pouco.',
+      interaction: {
+        type: 'click',
+        correctAnswer: 'B',
+        options: ['D', 'E', 'B']
       }
     }
   ]
