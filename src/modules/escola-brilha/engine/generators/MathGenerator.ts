@@ -83,12 +83,13 @@ export class MathGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-contagem') {
-        const item = EARLY_CHILDHOOD.matematica.contagem[0]; // 3 apples
+        const item = this.pickRandom(EARLY_CHILDHOOD.matematica.contagem); 
         return {
-          q: "Quantas maçãs existem?",
+          q: `Quantas ${item.item} existem?`,
           visual: item.visual,
           targetCount: item.n,
           answer: String(item.n),
+          numero_a: item.n, // Para a lousa mostrar as bolinhas
           options: item.options?.map(String),
           miniGameType: "bubbles",
           bncc_code: item.code
@@ -96,11 +97,13 @@ export class MathGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-drag-quantity') {
-        const item = EARLY_CHILDHOOD.matematica.drag[0]; // 4 stars
+        const item = this.pickRandom(EARLY_CHILDHOOD.matematica.drag); 
         return {
-          q: `Coloque ${item.n} estrelas na caixa`,
+          q: `Coloque ${item.n} ${item.item} na caixa`,
           targetCount: item.n,
+          numero_a: item.n,
           symbol: item.visual,
+          visual: item.visual,
           miniGameType: "quantity",
           bncc_code: item.code
         };
@@ -167,10 +170,11 @@ export class MathGenerator extends BaseGenerator {
       if (type === 'alfa-sum') {
         const item = this.pickRandom(FIRST_GRADE_MATH.visualAddition);
         return {
-          q: "Soma Visual",
-          visual: "maçãs",
+          q: `Quanto é ${item.group1.n} mais ${item.group2.n}?`,
+          visual: item.group1.item === 'apple' ? '🍎' : '⭐',
           numero_a: item.group1.n,
           numero_b: item.group2.n,
+          resultado: item.answer,
           operacao: "+",
           answer: String(item.answer),
           options: item.options.map(String),
@@ -182,10 +186,11 @@ export class MathGenerator extends BaseGenerator {
       if (type === 'alfa-sub') {
         const item = this.pickRandom(FIRST_GRADE_MATH.visualSubtraction);
         return {
-          q: "Subtração Visual",
-          visual: "peixes",
+          q: `Tinha ${item.total.n} e tirou ${item.take}. Quanto sobrou?`,
+          visual: item.total.item === 'fish' ? '🐟' : '🍎',
           numero_a: item.total.n,
           numero_b: item.take,
+          resultado: item.answer,
           operacao: "-",
           answer: String(item.answer),
           options: item.options.map(String),

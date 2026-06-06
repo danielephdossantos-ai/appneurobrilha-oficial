@@ -3,27 +3,27 @@
 export const EARLY_CHILDHOOD = {
   linguagem: {
     vowels: [
-      { letter: 'A', exemplo: 'ABELHA', visual: 'bug', distractors: ['P', 'O'], code: 'EI03EF09' },
-      { letter: 'E', exemplo: 'ELEFANTE', visual: 'elephant', distractors: ['B', 'L'], code: 'EI03EF09' },
-      { letter: 'I', exemplo: 'IGREJA', visual: 'home', distractors: ['M', 'T'], code: 'EI03EF09' },
-      { letter: 'O', exemplo: 'OVO', visual: 'egg', distractors: ['S', 'C'], code: 'EI03EF09' },
-      { letter: 'U', exemplo: 'UVA', visual: 'grape', distractors: ['X', 'Z'], code: 'EI03EF09' },
+      { letter: 'A', exemplo: 'ABELHA', visual: '🐝', distractors: ['P', 'O'], code: 'EI03EF09' },
+      { letter: 'E', exemplo: 'ELEFANTE', visual: '/src/assets/hiperfocos/animais/elefante.png', distractors: ['B', 'L'], code: 'EI03EF09' },
+      { letter: 'I', exemplo: 'IGREJA', visual: '⛪', distractors: ['M', 'T'], code: 'EI03EF09' },
+      { letter: 'O', exemplo: 'OVO', visual: '🥚', distractors: ['S', 'C'], code: 'EI03EF09' },
+      { letter: 'U', exemplo: 'UVA', visual: '🍇', distractors: ['X', 'Z'], code: 'EI03EF09' },
     ],
     words: [
-      { word: 'BOLA', startLetter: 'B', options: ['B', 'M', 'P'], visual: 'circle', code: 'EI03EF09' },
-      { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], visual: 'home', code: 'EI03EF09' },
-      { word: 'DADO', startLetter: 'D', options: ['D', 'B', 'T'], visual: 'square', code: 'EI03EF09' },
+      { word: 'BOLA', startLetter: 'B', options: ['B', 'M', 'P'], visual: '⭕', code: 'EI03EF09' },
+      { word: 'CASA', startLetter: 'C', options: ['C', 'F', 'D'], visual: '🏠', code: 'EI03EF09' },
+      { word: 'DADO', startLetter: 'D', options: ['D', 'B', 'T'], visual: '🎲', code: 'EI03EF09' },
     ],
     rimas: [
-      { word: 'CASA', answer: 'ASA', options: ['ASA', 'PATO', 'GATO'], visual: 'home', code: 'EI03EF01' },
-      { word: 'GATO', answer: 'PATO', options: ['PATO', 'BALÃO', 'CASA'], visual: 'cat', code: 'EI03EF01' },
+      { word: 'CASA', answer: 'ASA', options: ['ASA', 'PATO', 'GATO'], visual: '🏠', code: 'EI03EF01' },
+      { word: 'GATO', answer: 'PATO', options: ['PATO', 'BALÃO', 'CASA'], visual: '🐱', code: 'EI03EF01' },
     ],
   },
   matematica: {
     contagem: [
-      { n: 3, item: 'maçãs', visual: 'apple', options: [1, 3, 5, 6], code: 'EI03ET07' },
-      { n: 2, item: 'estrelas', visual: 'star', options: [2, 4, 1, 3], code: 'EI03ET07' },
-      { n: 5, item: 'balões', visual: 'balloon', options: [3, 5, 4, 6], code: 'EI03ET07' },
+      { n: 3, item: 'maçãs', visual: '🍎', options: [1, 3, 5, 6], code: 'EI03ET07' },
+      { n: 2, item: 'estrelas', visual: '⭐', options: [2, 4, 1, 3], code: 'EI03ET07' },
+      { n: 5, item: 'balões', visual: '🎈', options: [3, 5, 4, 6], code: 'EI03ET07' },
     ],
     drag: [
       { n: 4, item: 'estrelas', visual: 'star', code: 'EI03ET07' },

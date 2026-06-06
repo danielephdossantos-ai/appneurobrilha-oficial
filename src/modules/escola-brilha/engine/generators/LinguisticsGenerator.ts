@@ -94,11 +94,13 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-vogal') {
-        const v = EARLY_CHILDHOOD.linguagem.vowels[0]; 
+        const v = this.pickRandom(EARLY_CHILDHOOD.linguagem.vowels); 
         const options = this.shuffle([v.letter, ...v.distractors]);
         return {
-          q: "Vamos procurar a letra A!",
-          visual: v.letter,
+          q: `Vamos procurar a letra ${v.letter}!`,
+          visual: v.visual,
+          letra: v.letter,
+          palavra: v.exemplo,
           answer: v.letter,
           options,
           miniGameType: "bubbles",
@@ -107,11 +109,12 @@ export class LinguisticsGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-drag-letter') {
-        const w = EARLY_CHILDHOOD.linguagem.words[0]; 
+        const w = this.pickRandom(EARLY_CHILDHOOD.linguagem.words); 
         return {
           q: `Qual letra começa ${w.word}?`,
           visual: w.visual,
           palavra: w.word,
+          letra: w.startLetter,
           answer: w.startLetter,
           options: w.options,
           miniGameType: "bubbles",
@@ -120,10 +123,11 @@ export class LinguisticsGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-animal-sound') {
-        const a = EARLY_CHILDHOOD.artes_sons.animais[0]; 
+        const a = this.pickRandom(EARLY_CHILDHOOD.artes_sons.animais); 
         return {
-          q: a.nome,
+          q: `O que a ${a.nome} faz?`,
           visual: a.visual,
+          palavra: a.nome,
           answer: a.answer,
           options: a.options,
           miniGameType: "bubbles",

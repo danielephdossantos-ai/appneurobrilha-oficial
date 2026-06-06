@@ -743,11 +743,12 @@ function Escola() {
 
 
 // Lousa digital estilo "professor escrevendo no quadro" - destaca o item em foco.
-function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'demonstracao'; focus?: 'numA' | 'numB' | 'op' | 'result' | 'word' | 'letter' | string }) {
+function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'demonstracao'; focus?: 'numA' | 'numB' | 'op' | 'result' | 'word' | 'letter' | 'visual' | string }) {
   const palavra: string | undefined = aula?.palavra_foco;
   const silabas: string[] | undefined = aula?.silabas;
   const frase: string | undefined = aula?.frase_apresentacao;
   const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const visual: string | undefined = aula?.visual;
   const numA = aula?.numero_a;
   const numB = aula?.numero_b;
   const op = aula?.operacao;
@@ -756,67 +757,122 @@ function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'de
   const hl = (active: boolean) => active ? 'text-yellow-300 scale-110 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]' : 'text-white';
 
   return (
-    <div className="relative mx-auto w-full max-w-md rounded-[2rem] p-6 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] border-[10px] border-[#6b3f1f]" style={{ background: 'linear-gradient(180deg, #1f4d3a 0%, #163b2c 100%)' }}>
-      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#6b3f1f] text-white text-[10px] font-black tracking-widest uppercase">Lousa da Aula</div>
-      <div className="text-white font-black uppercase text-center py-4" style={{ fontFamily: '"Comic Sans MS", "Marker Felt", system-ui, sans-serif', textShadow: '0 1px 0 rgba(255,255,255,0.15)' }}>
+    <div className="relative mx-auto w-full max-w-md rounded-[2.5rem] p-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border-[12px] border-[#5d3a1a] overflow-hidden" 
+      style={{ 
+        background: 'linear-gradient(180deg, #1a4231 0%, #123024 100%)',
+        boxShadow: 'inset 0 0 100px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.4)'
+      }}>
+      {/* Textura de giz apagado */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-[#5d3a1a] text-white text-[12px] font-black tracking-widest uppercase shadow-md">
+        Quadro do {aula?.materia?.toUpperCase() || 'Professor'}
+      </div>
+
+      <div className="relative z-10 text-white font-black uppercase text-center py-6 min-h-[220px] flex flex-col items-center justify-center" 
+        style={{ 
+          fontFamily: '"Comic Sans MS", "Chalkboard SE", "Marker Felt", system-ui, sans-serif', 
+          textShadow: '2px 2px 0 rgba(0,0,0,0.3)' 
+        }}>
+        
         {isMath ? (
-          <div className="space-y-4">
-            <div className="flex items-center justify-center gap-3 text-6xl">
-              <span className={`transition-all ${hl(focus === 'numA')}`}>{numA}</span>
-              <span className={`transition-all ${hl(focus === 'op')}`}>{op}</span>
-              <span className={`transition-all ${hl(focus === 'numB')}`}>{numB}</span>
+          <div className="space-y-6">
+            <div className="flex items-center justify-center gap-4 text-7xl">
+              <span className={`transition-all duration-500 ${hl(focus === 'numA')}`}>{numA}</span>
+              <span className={`transition-all duration-500 ${hl(focus === 'op')}`}>{op}</span>
+              <span className={`transition-all duration-500 ${hl(focus === 'numB')}`}>{numB}</span>
               {(mode === 'demonstracao' || focus === 'result') && resultado !== undefined && (
                 <>
                   <span className="text-yellow-300">=</span>
-                  <span className={`transition-all ${hl(focus === 'result')}`}>{resultado}</span>
+                  <span className={`transition-all duration-500 ${hl(focus === 'result')}`}>{resultado}</span>
                 </>
               )}
             </div>
-            <div className="flex items-center justify-center gap-3 mt-2">
-              <div className="flex flex-wrap gap-1 max-w-[110px] justify-center">
+            
+            {/* Representação visual concreta (bolinhas/estrelas) */}
+            <div className="flex items-center justify-center gap-6 mt-4 p-4 bg-black/10 rounded-2xl border-2 border-dashed border-white/10">
+              <div className="flex flex-wrap gap-2 max-w-[120px] justify-center">
                 {Array.from({ length: Math.min(numA, 10) }).map((_, i) => (
-                  <span key={`a${i}`} className={`w-4 h-4 rounded-full ${focus === 'numA' ? 'bg-yellow-300' : 'bg-white/80'}`} />
+                  <motion.div 
+                    initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05 }}
+                    key={`a${i}`} 
+                    className={`w-5 h-5 rounded-full shadow-sm ${focus === 'numA' ? 'bg-yellow-300' : 'bg-white/80'}`} 
+                  />
                 ))}
               </div>
-              <span className="text-2xl text-yellow-300">{op}</span>
-              <div className="flex flex-wrap gap-1 max-w-[110px] justify-center">
+              <span className="text-3xl text-yellow-300 font-bold">{op}</span>
+              <div className="flex flex-wrap gap-2 max-w-[120px] justify-center">
                 {Array.from({ length: Math.min(numB, 10) }).map((_, i) => (
-                  <span key={`b${i}`} className={`w-4 h-4 rounded-full ${focus === 'numB' ? 'bg-yellow-300' : 'bg-white/80'}`} />
+                  <motion.div 
+                    initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05 }}
+                    key={`b${i}`} 
+                    className={`w-5 h-5 rounded-full shadow-sm ${focus === 'numB' ? 'bg-yellow-300' : 'bg-white/80'}`} 
+                  />
                 ))}
               </div>
             </div>
           </div>
         ) : silabas && silabas.length > 0 ? (
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center justify-center gap-2 text-5xl">
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-6xl">
               {silabas.map((s, i) => {
                 const active = focus === `syl-${i}` || focus === 'word';
                 return (
-                  <span key={i} className="contents">
-                    <span className={`px-3 py-1 rounded-lg border-2 border-dashed transition-all ${active ? 'text-yellow-300 scale-110 bg-yellow-300/20 border-yellow-300' : 'bg-white/10 border-white/40 text-white'}`}>{s}</span>
-                    {i < silabas.length - 1 && <span className="text-yellow-300">+</span>}
-                  </span>
+                  <div key={i} className="flex items-center">
+                    <motion.span 
+                      animate={{ scale: active ? 1.15 : 1, y: active ? -5 : 0 }}
+                      className={`px-4 py-2 rounded-xl border-4 border-dashed transition-all duration-500 ${active ? 'text-yellow-300 bg-yellow-300/20 border-yellow-300' : 'bg-white/5 border-white/30 text-white'}`}>
+                      {s}
+                    </motion.span>
+                    {i < silabas.length - 1 && <span className="text-yellow-300 mx-2">+</span>}
+                  </div>
                 );
               })}
             </div>
             {(mode === 'demonstracao' || focus === 'word') && palavra && (
-              <div className="text-yellow-300 text-4xl mt-2">= {palavra}</div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                className="text-yellow-300 text-5xl mt-4 bg-white/10 py-3 px-8 rounded-full border-2 border-yellow-300/30">
+                = {palavra}
+              </motion.div>
             )}
           </div>
-        ) : palavra ? (
-          <div className="space-y-2">
-            <div className="text-6xl tracking-wider">{palavra}</div>
-            {frase && <div className="text-base font-bold text-white/80 normal-case mt-3">{frase}</div>}
+        ) : visual ? (
+          <div className="flex flex-col items-center gap-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+              className={`text-[9rem] leading-none transition-all duration-500 ${hl(focus === 'visual')}`}>
+              {visual.startsWith('http') || visual.startsWith('/src') ? (
+                <img src={visual} alt="visual" className="w-48 h-48 object-contain drop-shadow-2xl" />
+              ) : (
+                visual
+              )}
+            </motion.div>
+            {palavra && (
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                className={`text-5xl tracking-widest mt-2 ${hl(focus === 'word' || focus === 'visual')}`}>
+                {palavra}
+              </motion.div>
+            )}
           </div>
         ) : letra ? (
-          <div className="text-8xl">{letra}</div>
-        ) : frase ? (
-          <div className="text-2xl normal-case leading-snug">{frase}</div>
+          <motion.div 
+            initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+            className="text-[12rem] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            {letra}
+          </motion.div>
         ) : (
-          <div className="text-3xl">{aula?.topic || 'Vamos aprender!'}</div>
+          <div className="text-4xl normal-case leading-tight px-4 font-bold">
+            {frase || aula?.topic || 'Vamos aprender juntos!'}
+          </div>
         )}
       </div>
-      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-3 rounded-md bg-[#d9b382] shadow-md" />
+      
+      {/* Prateleira de giz embaixo */}
+      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-32 h-4 rounded-full bg-[#8b5a2b] shadow-lg border-t-2 border-white/20" />
+      <div className="absolute bottom-1 left-[40%] w-6 h-2 bg-white/80 rounded-sm rotate-12" />
+      <div className="absolute bottom-1 right-[40%] w-5 h-2 bg-yellow-300/80 rounded-sm -rotate-6" />
     </div>
   );
 }
@@ -826,7 +882,8 @@ function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'de
 function buildTeachingScreens(aula: any): Array<{ titulo: string; fala: string; focus?: string; mode?: 'explicacao' | 'demonstracao' }> {
   const palavra: string | undefined = aula?.palavra_foco;
   const silabas: string[] | undefined = aula?.silabas;
-  const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const letra: string | undefined = aula?.letra || (palavra ? (silabas ? undefined : palavra[0]) : undefined);
+  const visual: string | undefined = aula?.visual;
   const numA = aula?.numero_a;
   const numB = aula?.numero_b;
   const op = aula?.operacao;
@@ -836,44 +893,55 @@ function buildTeachingScreens(aula: any): Array<{ titulo: string; fala: string; 
   const opNome = op === '+' ? 'somar' : op === '-' ? 'tirar' : 'juntar';
   const opFala = op === '+' ? 'mais' : op === '-' ? 'menos' : op;
 
+  // EDUCAÇÃO INFANTIL OU ALFABETIZAÇÃO: Foco em som, imagem e letra
+  if (visual && (aula.isEI || aula.grade?.includes('1º'))) {
+    return [
+      { titulo: 'OLHA O QUE APARECEU!', fala: `Oi! Olha que legal o que eu trouxe hoje: uma figura de ${palavra || 'algo especial'}!`, focus: 'visual', mode: 'explicacao' },
+      { titulo: 'VOCÊ SABE O NOME?', fala: `Essa figura é um ${palavra || 'objeto'}. Diz comigo: ${palavra || 'objeto'}!`, focus: 'visual' },
+      { titulo: 'A LETRA DE HOJE', fala: `A palavra ${palavra} começa com a letra ${letra}. Olha ela ali no quadro!`, focus: 'visual' },
+      { titulo: 'O SOM DA LETRA', fala: `A letra ${letra} faz um som muito especial. Repete comigo: ${letra}, ${letra}, ${letra}!`, focus: 'visual' },
+      { titulo: 'VAMOS PROCURAR?', fala: `Agora eu quero ver se você consegue encontrar a letra ${letra} ou a figura de ${palavra}. Vamos brincar?`, mode: 'demonstracao' },
+    ];
+  }
+
   if (isMath) {
     return [
-      { titulo: 'OLHA O PRIMEIRO NÚMERO', fala: `Olha que legal! O primeiro número é ${numA}. Conta comigo as bolinhas amarelas!`, focus: 'numA' },
-      { titulo: 'AGORA O SEGUNDO', fala: `Muito bem! Agora o segundo número é ${numB}. Vamos contar essas bolinhas também!`, focus: 'numB' },
+      { titulo: 'OLHA O PRIMEIRO NÚMERO', fala: `Olha que legal! O primeiro número é ${numA}. Conta comigo as bolinhas no quadro!`, focus: 'numA', mode: 'explicacao' },
+      { titulo: 'AGORA O SEGUNDO', fala: `Muito bem! Agora o segundo número é ${numB}. Vamos contar essas outras bolinhas também!`, focus: 'numB' },
       { titulo: `VAMOS ${opNome.toUpperCase()}!`, fala: `Agora vamos ${opNome} os dois. ${numA} ${opFala} ${numB}. Junta tudo na sua cabecinha!`, focus: 'op' },
       { titulo: 'O RESULTADO!', fala: `Olha que legal! ${numA} ${opFala} ${numB} é igual a ${resultado}! Repete comigo: ${numA} ${opFala} ${numB} igual a ${resultado}.`, focus: 'result', mode: 'demonstracao' },
-      { titulo: 'AGORA É SUA VEZ!', fala: `Você aprendeu! Agora vamos brincar de fazer continhas iguais a essa.`, mode: 'demonstracao' },
+      { titulo: 'VAMOS PRATICAR?', fala: `Você aprendeu! Agora é sua vez de brilhar fazendo continhas iguais a essa.`, mode: 'demonstracao' },
     ];
   }
 
   if (silabas && silabas.length > 0 && palavra) {
     const screens: Array<{ titulo: string; fala: string; focus?: string; mode?: any }> = [
-      { titulo: 'A PALAVRA DE HOJE', fala: `A nossa palavra de hoje é: ${palavra}. Diz comigo: ${palavra}!`, focus: 'word', mode: 'explicacao' },
-      { titulo: 'VAMOS SEPARAR EM PEDACINHOS', fala: `Toda palavra tem pedacinhos chamados sílabas. A palavra ${palavra} tem ${silabas.length} pedacinhos.` },
+      { titulo: 'A PALAVRA DE HOJE', fala: `A nossa palavra de hoje é: ${palavra}. Diz comigo bem alto: ${palavra}!`, focus: 'word', mode: 'explicacao' },
+      { titulo: 'VAMOS SEPARAR EM PEDACINHOS', fala: `Sabia que toda palavra tem pedacinhos? Eles se chamam sílabas. A palavra ${palavra} tem ${silabas.length} pedacinhos.`, focus: 'word' },
     ];
     silabas.slice(0, 3).forEach((s, i) => {
-      screens.push({ titulo: `PEDACINHO ${i + 1}`, fala: `Este pedacinho é ${s}. Diz comigo: ${s}!`, focus: `syl-${i}` });
+      screens.push({ titulo: `PEDACINHO ${i + 1}`, fala: `Este pedacinho aqui é ${s}. Diz comigo: ${s}!`, focus: `syl-${i}` });
     });
-    screens.push({ titulo: 'JUNTANDO TUDO!', fala: `Quando juntamos os pedacinhos ${silabas.join(', ')}, fica: ${palavra}! Vamos brincar agora!`, focus: 'word', mode: 'demonstracao' });
+    screens.push({ titulo: 'JUNTANDO TUDO!', fala: `Quando juntamos os pedacinhos ${silabas.join(', ')}, formamos a palavra: ${palavra}! Vamos brincar?`, focus: 'word', mode: 'demonstracao' });
     return screens.slice(0, 6);
   }
 
   if (letra) {
     return [
-      { titulo: 'A LETRA DE HOJE', fala: `Olha que letra bonita! Esta é a letra ${letra}. Diz comigo: ${letra}!`, focus: 'letter' },
-      { titulo: 'COMO ELA FAZ?', fala: `A letra ${letra} faz um som. Repete comigo: ${letra}, ${letra}, ${letra}.`, focus: 'letter' },
-      { titulo: 'ONDE APARECE?', fala: `Várias palavras têm a letra ${letra}! Vamos procurá-la?`, focus: 'letter' },
-      { titulo: 'PRONTO PRA BRINCAR?', fala: `Agora vamos brincar de encontrar a letra ${letra}.`, mode: 'demonstracao' },
+      { titulo: 'A LETRA DE HOJE', fala: `Olha que letra bonita eu desenhei! Esta é a letra ${letra}. Diz comigo: ${letra}!`, focus: 'letter', mode: 'explicacao' },
+      { titulo: 'O SOM DELA', fala: `A letra ${letra} tem um som muito legal. Faz comigo: ${letra}, ${letra}, ${letra}.`, focus: 'letter' },
+      { titulo: 'PALAVRAS COM ESSA LETRA', fala: `Muitas palavras começam com a letra ${letra}! Você consegue pensar em uma?`, focus: 'letter' },
+      { titulo: 'HORA DE BRINCAR!', fala: `Agora vamos ver se você consegue encontrar a letra ${letra} no meio de outras letras.`, mode: 'demonstracao' },
     ];
   }
 
-  const intro = aula?.etapa1_explicação || aula?.etapa1_intro || aula?.instruction || 'Hoje vamos aprender uma coisa nova!';
-  const concept = aula?.etapa2_demonstração || aula?.etapa2_conceito || 'Olha como é fácil!';
+  const intro = aula?.etapa1_explicação || aula?.etapa1_intro || aula?.instruction || 'Hoje vamos aprender uma coisa nova e muito divertida!';
+  const concept = aula?.etapa2_demonstração || aula?.etapa2_conceito || 'Olha só como é fácil de fazer!';
   return [
     { titulo: aula?.topic || 'AULA DE HOJE', fala: intro, mode: 'explicacao' },
-    { titulo: 'OBSERVE COM ATENÇÃO', fala: concept, mode: 'demonstracao' },
-    { titulo: 'IMPORTANTE LEMBRAR', fala: `Esta atividade é da habilidade ${bncc}. Vamos exercitar!`, mode: 'demonstracao' },
-    { titulo: 'AGORA É SUA VEZ!', fala: 'Toque em CONTINUAR para começar a brincar e aprender!', mode: 'demonstracao' },
+    { titulo: 'OBSERVE O QUADRO', fala: concept, focus: 'visual', mode: 'demonstracao' },
+    { titulo: 'VOCÊ CONSEGUE!', fala: `Estamos aprendendo a habilidade ${bncc}. Vamos praticar um pouquinho?`, mode: 'demonstracao' },
+    { titulo: 'VAMOS COMEÇAR?', fala: 'Toque no botão PRÓXIMO para começar a brincar e aprender de verdade!', mode: 'demonstracao' },
   ];
 }
 

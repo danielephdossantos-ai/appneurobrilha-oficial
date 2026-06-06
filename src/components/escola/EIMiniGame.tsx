@@ -41,6 +41,12 @@ const EMOJI_MAP: Record<string, any> = {
 
 const getIcon = (key: string, className = "w-12 h-12") => {
   if (!key) return <HelpCircle className={className} />;
+  
+  // Se for uma URL de imagem
+  if (key.startsWith('http') || key.startsWith('/src/assets') || key.startsWith('data:image')) {
+    return <img src={key} alt="visual" className={className + " object-contain"} />;
+  }
+
   const IconComponent = EMOJI_MAP[key] || HelpCircle;
   return <IconComponent className={className} />;
 };
