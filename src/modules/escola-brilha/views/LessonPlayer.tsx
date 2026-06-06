@@ -69,6 +69,14 @@ export const LessonPlayer: React.FC = () => {
   const [showInteraction, setShowInteraction] = useState(false);
   const [visibleOptions, setVisibleOptions] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string | null>(null);
+  
+  // Performance Tracking (Fase 6: Domínio)
+  const [performance, setPerformance] = useState<LessonPerformance>({
+    hits: 0,
+    misses: 0,
+    startTime: Date.now(),
+    percentage: 0
+  });
 
   const currentStep = MOCK_LESSON.steps[currentStepIndex];
   const progress = ((currentStepIndex + 1) / MOCK_LESSON.steps.length) * 100;
