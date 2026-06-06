@@ -518,11 +518,9 @@ function Escola() {
           setAula={setAula} 
           childId={activeChild.id}
           childNome={activeChild.nome} 
-          hiperfoco={activeChild.hiperfoco}
-          activeMascot={activeMascot}
-          tier={gradeTier(aula.grade || selectedGrade)}
           onCompleted={(activityId) => marcarConcluida(activityId)}
         />
+
       </AulaErrorBoundary>
     );
   }
@@ -533,182 +531,109 @@ function Escola() {
 
   return (
     <Shell>
-      <PageHeader
-        icon={GraduationCap}
-        title="Escola Brilha"
-        subtitle={ei
-          ? `Educação Infantil · Atividades simples e visuais para os pequenos`
-          : `BNCC adaptada · Atualmente em: ${selectedGrade}`}
-      />
+      {/* Header Compacto e Mobile-First */}
+      <div className="flex flex-col gap-4 mb-6 md:mb-8">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-primary/10 grid place-items-center text-primary border-2 border-primary/20">
+              <GraduationCap className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-xl md:text-3xl font-black leading-tight">Escola Brilha</h1>
+              <p className="text-[10px] md:text-xs text-muted-foreground uppercase font-black tracking-wider">
+                {ei ? "Educação Infantil" : `BNCC Adaptada · ${selectedGrade}`}
+              </p>
+            </div>
+          </div>
 
-      <div className="mb-8 overflow-x-auto pb-4 scrollbar-hide">
-        <div className="flex gap-2 min-w-max">
-          {grades.map((grade) => (
-            <button
-              key={grade}
-              onClick={() => setSelectedGrade(grade)}
-              className={`px-4 py-2 rounded-full font-bold text-sm transition-all whitespace-nowrap ${
-                selectedGrade === grade
-                  ? "bg-primary text-white shadow-glow scale-105"
-                  : "bg-muted text-muted-foreground hover:bg-primary/10"
-              }`}
+          <div className="flex gap-2">
+            <select
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+              className="bg-card border-2 border-border rounded-xl px-2 py-1.5 text-xs font-bold outline-none focus:border-primary transition-all shadow-sm"
             >
-              {grade}
-            </button>
-          ))}
+              {grades.map(g => <option key={g} value={g}>{g}</option>)}
+            </select>
+          </div>
         </div>
-      </div>
 
-      {ei && (
-        <div className="mb-4 flex items-end gap-3 md:gap-4">
-          {/* Avatar do mascote apontando para o balão */}
+        {/* Mascote e Boas-vindas - Compacto */}
+        <div className="flex items-center gap-3 md:gap-4 bg-gradient-to-r from-primary/5 to-transparent p-3 rounded-2xl border border-primary/10">
           <div className="relative shrink-0">
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-coral/30 to-sun/30 border-4 border-white shadow-xl flex items-center justify-center animate-float-thinking overflow-hidden">
-              {activeMascot?.mascot?.image_url?.startsWith('http') ? (
-                <img src={activeMascot.mascot.image_url} alt={activeMascot.mascot.name} className="w-full h-full object-cover" />
-              ) : (
-                <RenderMascote icon={activeMascot?.mascot?.image_url || Bird} className="w-16 h-16 text-primary" />
-              )}
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white border-2 border-primary/20 shadow-sm flex items-center justify-center overflow-hidden">
+              <img 
+                src={ei ? imgPipa : imgPip} 
+                alt="Mascote" 
+                className="w-full h-full object-contain" 
+              />
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-white rounded-full px-2 py-0.5 text-[10px] font-black text-primary border-2 border-coral shadow uppercase">
-              {activeMascot?.mascot?.name || "Profª Pipa"}
-            </div>
-          </div>
-
-          {/* Balão de fala estilo HQ */}
-          <div className="relative flex-1">
-            <div className="relative bg-white rounded-3xl border-[3px] border-foreground/80 px-5 py-4 shadow-[4px_4px_0_0_rgba(0,0,0,0.85)]">
-              {/* Rabicho do balão apontando para o avatar (à esquerda) */}
-              <div className="absolute -left-3 bottom-5 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-foreground/80" />
-              <div className="absolute -left-[9px] bottom-[22px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-r-[11px] border-r-white" />
-
-              <p className="font-extrabold text-lg md:text-xl text-primary leading-snug">
-                OOOI, {activeChild.nome?.toUpperCase() || "AMIGUINHO"}!
-              </p>
-              <p className="text-sm md:text-base text-foreground/80 mt-1 font-bold">
-                VAMOS BRINCAR DE APRENDER COM FIGURAS, CORES E SONS! ESCOLHE UMA MATÉRIA LÁ EMBAIXO!
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-
-      <Card className="mb-6 bg-gradient-to-br from-primary/10 to-success/5">
-        <div className="flex items-center gap-4">
-          <div className="text-5xl">
-            <RenderVisual value={activeChild.avatar} className="h-12 w-12 text-primary" />
           </div>
           <div className="flex-1">
-            <div className="font-extrabold text-lg">
-              {ei ? `Vamos brincar de aprender, ${activeChild.nome}?` : "Pronto para brilhar?"}
+            <div className="font-black text-sm md:text-base text-primary">
+              {ei ? `Oi, ${activeChild.nome}!` : `Pronto para brilhar, ${activeChild.nome}?`}
             </div>
-            <div className="text-sm text-muted-foreground">
-              {ei
-                ? "Escolha uma matéria lá embaixo"
-                : `Escolha uma matéria do ${selectedGrade} e vamos começar!`}
-            </div>
-            <div className="mt-2 h-2 rounded-full bg-muted overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: "10%" }} />
-            </div>
+            <p className="text-[11px] md:text-sm text-foreground/70 font-bold leading-snug">
+              {ei 
+                ? "Vamos brincar de aprender? Escolha um tema abaixo!" 
+                : "Escolha uma matéria e vamos começar nossa missão!"}
+            </p>
           </div>
-          <button onClick={() => carregarAula(startMateriaId)} className="btn-tap rounded-xl bg-primary text-primary-foreground px-5 py-3 font-bold flex items-center gap-2">
-            <Play className="h-4 w-4" /> Começar
+          <button 
+            onClick={() => carregarAula(startMateriaId)} 
+            className="shrink-0 h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center shadow-glow animate-pulse"
+          >
+            <Play className="h-5 w-5 fill-current" />
           </button>
         </div>
-      </Card>
-
-      {(() => {
-        const t = tierTheme[gradeTier(selectedGrade)];
-        return (
-          <div className={`relative rounded-3xl p-5 mb-6 bg-gradient-to-br ${t.bg} overflow-hidden`}>
-            <div className="absolute right-3 top-2 opacity-40 animate-float-thinking select-none">
-              <t.sceneIcon className="h-20 w-20" />
-            </div>
-            <div className="relative">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Cenário de hoje</div>
-              <div className="text-2xl font-extrabold">{t.scene}</div>
-              <div className="text-sm text-muted-foreground">{t.vibe} — escolha uma porta mágica abaixo</div>
-            </div>
-          </div>
-        );
-      })()}
-
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <h2 className="text-xl">{ei ? "Áreas de descoberta" : "Matérias"}</h2>
-        {isTeen && (
-          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-4 py-2 shadow-sm">
-            <div className="text-2xl"><GraduationCap className="h-6 w-6 text-primary" /></div>
-            <div className="flex-1">
-              <div className="text-sm font-bold leading-tight">Atividade guiada por {activeMascot?.mascot?.name || "Pip/Pipa"}</div>
-              <div className="text-xs text-muted-foreground">Ative para receber explicação, exemplo e passo-a-passo antes do exercício.</div>
-            </div>
-            <button
-              onClick={() => {
-                const next = !teenGuided;
-                setTeenGuided(next);
-                try { localStorage.setItem("escola_teen_guided", next ? "1" : "0"); } catch {}
-              }}
-              className={`relative w-14 h-8 rounded-full transition-colors ${teenGuided ? "bg-primary" : "bg-muted"}`}
-              aria-label="Alternar atividade guiada"
-            >
-              <span className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow transition-all ${teenGuided ? "left-7" : "left-1"}`} />
-            </button>
-          </div>
-        )}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      {/* Grid de Matérias - Mais limpo e mobile-friendly */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
         {materiasVisiveis.map((m: any) => (
-          <button key={m.id} onClick={() => carregarAula(m.id)}
-            className={`group relative rounded-3xl p-5 bg-gradient-to-br ${m.cor} border border-border shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all text-left overflow-hidden`}>
-            <div className="flex justify-center">
+          <button 
+            key={m.id} 
+            onClick={() => carregarAula(m.id)}
+            className={`group relative rounded-2xl p-4 bg-gradient-to-br ${m.cor} border border-border/40 shadow-sm hover:shadow-glow hover:-translate-y-1 transition-all text-center overflow-hidden flex flex-col items-center`}
+          >
+            <div className="relative mb-2">
+              <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-110 opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
                 src={m.img}
                 alt={m.nome}
-                loading="lazy"
-                width={512}
-                height={512}
-                className="w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-md group-hover:scale-110 transition-transform"
+                className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow-sm group-hover:scale-110 transition-transform relative z-10"
               />
             </div>
-            <div className="font-extrabold text-lg mt-3 text-center">{m.nome}</div>
-            <div className="flex items-center justify-center gap-1.5 mt-1 text-xs text-muted-foreground">
-              <b>{m.mascoteNome}</b> te guia
+            <div className="font-black text-sm md:text-base leading-tight">{m.nome}</div>
+            <div className="text-[10px] text-muted-foreground mt-1 opacity-80">
+              {ei ? (m.descricao || "Ver trilha") : `Nível ${(activeChild.niveis as any)[m.id] ?? 2}`}
             </div>
-            {ei && m.descricao && (
-              <div className="text-xs text-muted-foreground mt-1 text-center">{m.descricao}</div>
-            )}
-            {!ei && (
-              <div className="mt-2 flex justify-center"><Pill tone="info">Nível {(activeChild.niveis as any)[m.id] ?? 2}</Pill></div>
-            )}
-            <div className="absolute bottom-2 right-3 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition">Entrar →</div>
           </button>
         ))}
       </div>
 
+      {/* Banco BNCC - Agora como seção secundária mais discreta */}
       {showBanco && banco && (
-        <section className="mt-10">
-          <div className="flex items-center justify-between mb-3">
+        <div className="mt-8 border-t border-border pt-8 pb-12">
+          <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Banco BNCC · Infinito</div>
-              <h2 className="text-xl font-extrabold">Atividades liberadas — Lote {banco.lote}</h2>
-              <div className="text-sm text-muted-foreground">
-                {banco.done.length} de {BANCO_TAMANHO} concluídas. Ao terminar todas, mais {BANCO_TAMANHO} são liberadas automaticamente.
-              </div>
+              <h2 className="text-lg font-black flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-sun" /> Banco de Atividades
+              </h2>
+              <p className="text-xs text-muted-foreground">Progresso do Lote {banco.lote}: {banco.done.length}/{BANCO_TAMANHO}</p>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
+              <div className="text-xl font-black text-primary">{Math.round((banco.done.length / BANCO_TAMANHO) * 100)}%</div>
             </div>
           </div>
-          <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
+          
+          <div className="h-2 rounded-full bg-muted overflow-hidden mb-6">
             <div
               className="h-full bg-gradient-to-r from-primary to-success transition-all"
               style={{ width: `${(banco.done.length / BANCO_TAMANHO) * 100}%` }}
             />
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2">
+          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-1.5">
             {banco.items.map((item) => {
               const done = banco.done.includes(item.activity.id);
               const meta = materias.find((m) => m.id === item.materiaId) || materias[0];
@@ -717,23 +642,18 @@ function Escola() {
                   key={item.activity.id}
                   onClick={() => carregarAula(item.materiaId, undefined, { activity: item.activity, ordem: item.ordem })}
                   disabled={done}
-                  title={`${item.ordem}. ${meta.nome} — ${item.activity.title || ""}`}
-                  className={`relative aspect-square rounded-xl border-2 flex flex-col items-center justify-center text-center transition-all ${
+                  className={`relative aspect-square rounded-lg border flex items-center justify-center transition-all ${
                     done
-                      ? "bg-success/15 border-success/40 text-success cursor-default"
-                      : `bg-gradient-to-br ${meta.cor} border-border hover:border-primary hover:-translate-y-0.5 hover:shadow-glow`
+                      ? "bg-success/10 border-success/20 text-success/50"
+                      : `bg-white border-border hover:border-primary hover:shadow-sm`
                   }`}
                 >
-                  <img src={meta.img} alt={meta.nome} loading="lazy" width={512} height={512} className="w-10 h-10 object-contain" />
-                  <div className="text-[10px] font-black mt-1 leading-none">{item.ordem}</div>
-                  {done && (
-                    <CheckCircle2 className="absolute -top-1.5 -right-1.5 h-5 w-5 text-success bg-card rounded-full" />
-                  )}
+                  {done ? <CheckCircle2 className="h-4 w-4" /> : <span className="text-[10px] font-bold">{item.ordem}</span>}
                 </button>
               );
             })}
           </div>
-        </section>
+        </div>
       )}
     </Shell>
   );
@@ -967,46 +887,72 @@ function TeachingSequence({ aula, mascotImg, mascotNome, onComplete }: { aula: a
   }, [idx]);
 
   return (
-    <motion.div key={`teach-${idx}`} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="text-center space-y-4 w-full max-w-lg">
-      <div className="flex items-center justify-center gap-1.5">
+    <motion.div 
+      key={`teach-${idx}`} 
+      initial={{ opacity: 0, y: 10 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      className="flex flex-col items-center gap-4 w-full"
+    >
+      <div className="flex items-center justify-center gap-1 w-full max-w-[200px]">
         {screens.map((_, i) => (
-          <div key={i} className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-8 bg-primary' : i < idx ? 'w-4 bg-success' : 'w-4 bg-muted'}`} />
+          <div 
+            key={i} 
+            className={`h-1.5 rounded-full transition-all flex-1 ${i === idx ? 'bg-primary' : i < idx ? 'bg-success' : 'bg-muted'}`} 
+          />
         ))}
       </div>
-      <h2 className="text-2xl font-black text-primary uppercase leading-tight">{screen.titulo}</h2>
-      <Chalkboard aula={aula} mode={screen.mode || 'explicacao'} focus={screen.focus} />
-      <div className="flex items-start gap-3 bg-white/90 p-4 rounded-3xl border-4 border-primary/15 shadow-soft text-left">
-        <img src={mascotImg} alt={mascotNome} className="w-16 h-16 rounded-full border-4 border-white shadow-md object-cover shrink-0" />
-        <div className="flex-1">
-          <div className="text-[10px] font-black uppercase text-primary tracking-widest mb-1">{mascotNome}</div>
-          <p className="text-base font-bold text-foreground leading-snug">{screen.fala}</p>
+      
+      <div className="w-full max-w-md">
+        <Chalkboard aula={aula} mode={screen.mode || 'explicacao'} focus={screen.focus} />
+      </div>
+
+      <div className="flex items-start gap-3 bg-white/80 p-3 rounded-2xl border-2 border-primary/10 shadow-sm text-left w-full">
+        <img 
+          src={mascotImg} 
+          alt={mascotNome} 
+          className="w-12 h-12 rounded-full border-2 border-white shadow-sm object-cover shrink-0" 
+        />
+        <div className="flex-1 min-w-0">
+          <div className="text-[10px] font-black uppercase text-primary tracking-widest mb-0.5">{mascotNome}</div>
+          <p className="text-xs md:text-sm font-bold text-foreground leading-snug">{screen.fala}</p>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-2 pt-2 flex-wrap">
-        <button onClick={() => falar(screen.fala)} className="btn-tap bg-white text-primary px-4 py-3 rounded-full text-sm font-black border-4 border-primary/20 flex items-center gap-2">
-          <Volume2 className="h-4 w-4" /> OUVIR
-        </button>
-        {idx > 0 && (
-          <button onClick={() => setIdx(idx - 1)} className="btn-tap bg-muted text-foreground px-4 py-3 rounded-full text-sm font-black">VOLTAR</button>
-        )}
-        <button
-          onClick={() => { if (isLast) onComplete(); else setIdx(idx + 1); }}
-          className="btn-tap bg-primary text-white px-6 py-4 rounded-full text-lg font-black border-4 border-white shadow-glow"
+
+      <div className="flex items-center justify-center gap-2 w-full">
+        <button 
+          onClick={() => falar(screen.fala)} 
+          className="h-12 w-12 rounded-full bg-white text-primary border-2 border-primary/20 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+          aria-label="Ouvir novamente"
         >
-          {isLast ? 'COMEÇAR!' : 'PRÓXIMO'} <ArrowRight className="inline h-5 w-5 ml-1" />
+          <Volume2 className="h-5 w-5" />
         </button>
+        
+        <div className="flex-1 flex gap-2">
+          {idx > 0 && (
+            <button 
+              onClick={() => setIdx(idx - 1)} 
+              className="flex-1 h-12 rounded-xl bg-muted text-foreground font-black text-sm active:scale-95 transition-transform"
+            >
+              VOLTAR
+            </button>
+          )}
+          <button
+            onClick={() => { if (isLast) onComplete(); else setIdx(idx + 1); }}
+            className="flex-[2] h-12 rounded-xl bg-primary text-white font-black shadow-glow border-2 border-white active:scale-95 transition-transform flex items-center justify-center gap-2"
+          >
+            {isLast ? 'COMEÇAR!' : 'PRÓXIMO'} <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
 }
 
-function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; hiperfoco: string; activeMascot: any; tier: GradeTier; onCompleted?: (activityId: string) => void }) {
+function AulaView({ aula, setAula, childId, childNome, onCompleted }: { aula: any; setAula: (a: any) => void; childId: string; childNome: string; onCompleted?: (activityId: string) => void }) {
   const [step, setStep] = useState(1);
   const [practiceCount, setPracticeCount] = useState(0);
   const [performance, setPerformance] = useState({ hits: 0, misses: 0, startTime: Date.now() });
   const [feedback, setFeedback] = useState<null | boolean>(null);
-  const subjectList: any[] = aula.isEI ? (materiasInfantil as any) : (materias as any);
-  const materiaMeta = subjectList.find((m: any) => m.id === aula.materia) || subjectList[0];
   
   const isPipaMateria = aula.isEI || aula.materia === 'portugues';
   const mascotImg = isPipaMateria ? imgPipa : imgPip;
@@ -1028,12 +974,10 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
 
   const steps = [
     { id: 1, label: "EXPLICAÇÃO", icon: Lightbulb },
-    { id: 2, label: "DEMONSTRAÇÃO", icon: Eye },
-    { id: 3, label: "TREINO GUIADO", icon: Target },
+    { id: 3, label: "TREINO", icon: Target },
     { id: 4, label: "PRÁTICA", icon: PenTool },
     { id: 5, label: "DESAFIO", icon: Flag },
-    { id: 6, label: "AVALIAÇÃO", icon: Trophy },
-    { id: 7, label: "DOMÍNIO", icon: Star },
+    { id: 6, label: "FIM", icon: Trophy },
   ];
 
   const handleAnswer = (isCorrect: boolean) => {
@@ -1054,8 +998,6 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
           }
         } else if (step === 5) {
           setStep(6);
-        } else if (step === 6) {
-          setStep(7);
         }
       }, 1500);
     } else {
@@ -1076,29 +1018,27 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
     };
 
     if (step === 1) playAudio(aula.etapa1_explicação || "Vamos aprender algo novo!");
-    if (step === 2) playAudio(aula.etapa2_demonstração || "Veja como é fácil!");
     if (step === 3) playAudio(aula.etapa3_treino_guiado || "Vamos tentar juntos?");
     if (step === 4) playAudio(aula.etapa4_prática || "Agora é sua vez!");
     if (step === 5) playAudio(aula.etapa5_desafio || "Desafio final!");
-    if (step === 7) playAudio(aula.etapa7_domínio || "Parabéns, você conseguiu!");
   }, [step, aula]);
 
   return (
     <Shell>
-      <div className="flex flex-col h-full w-full max-w-4xl mx-auto space-y-6">
-        <div className="flex items-center justify-between gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex flex-col h-full w-full max-w-2xl mx-auto">
+        <div className="flex items-center gap-1 mb-6 px-2">
           {steps.map((s) => (
-            <div key={s.id} className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all shrink-0 ${step === s.id ? 'bg-primary text-white scale-105 shadow-glow' : s.id < step ? 'bg-success/20 text-success' : 'bg-muted text-muted-foreground'}`}>
-              <s.icon className="h-4 w-4" />
-              <span className="text-xs font-black uppercase whitespace-nowrap">{s.label}</span>
-            </div>
+            <div 
+              key={s.id} 
+              className={`h-1.5 rounded-full transition-all flex-1 ${step === s.id ? 'bg-primary' : s.id < step ? 'bg-success' : 'bg-muted'}`}
+            />
           ))}
         </div>
 
-        <Card className="flex-1 flex flex-col items-center justify-center p-8 relative min-h-[500px] bg-gradient-to-b from-white to-primary/5">
+        <div className="relative flex-1 flex flex-col items-center">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full flex justify-center">
+              <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
                 <TeachingSequence
                   aula={aula}
                   mascotImg={mascotImg}
@@ -1108,119 +1048,100 @@ function AulaView({ aula, setAula, childId, childNome, activeMascot, tier, onCom
               </motion.div>
             )}
 
-
             {(step >= 3 && step <= 5) && (
-              <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full h-full flex flex-col items-center justify-center">
-                 <div className="text-center mb-4">
-                    <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">Passo {step} de 7 · {steps[step-1].label}</span>
-                    <h3 className="text-3xl font-black text-primary uppercase">{steps[step-1].label}</h3>
-                    <p className="text-sm font-bold text-muted-foreground">{step === 3 ? (aula.etapa3_treino_guiado || "Vamos fazer juntos!") : step === 4 ? (aula.etapa4_prática || "Agora é com você!") : (aula.etapa5_desafio || "O grande desafio!")}</p>
+              <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full flex flex-col items-center">
+                 <div className="text-center mb-6">
+                    <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">Atividade</span>
+                    <h3 className="text-2xl font-black text-primary uppercase">{steps.find(s => s.id === step)?.label}</h3>
                  </div>
-                 <div className="w-full max-w-2xl my-8">
+                 <div className="w-full mb-8">
                    <EIMiniGame aula={aulaForGame} onAnswer={handleAnswer} disabled={feedback !== null} />
                  </div>
-                 <div className="absolute bottom-6 right-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-[2rem] p-3 border-2 border-primary/20 shadow-kid z-10 animate-in slide-in-from-right-4">
-                    <div className="w-16 h-16 rounded-full border-4 border-white shadow-md overflow-hidden bg-gradient-to-br from-primary/10 to-sun/10">
-                      <img src={mascotImg} alt={mascotNome} className="w-full h-full object-cover" />
+                 
+                 {/* Mascote de Apoio Flutuante Compacto */}
+                 <div className="fixed bottom-24 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full p-2 border-2 border-primary/20 shadow-lg z-10">
+                    <img src={mascotImg} alt={mascotNome} className="w-10 h-10 rounded-full object-cover" />
+                    <div className="pr-2">
+                      <div className="text-[8px] font-black text-primary leading-none">PIP</div>
+                      <div className="text-[10px] font-bold">Você consegue!</div>
                     </div>
                  </div>
               </motion.div>
             )}
 
             {step === 6 && (
-               <motion.div key="step6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center space-y-8 w-full max-w-md">
-                  <h2 className="text-4xl font-black text-primary uppercase">AVALIAÇÃO</h2>
-                  <div className="grid grid-cols-2 gap-4">
-                     <div className="p-6 bg-white rounded-3xl shadow-soft border-4 border-success/10">
-                        <div className="text-4xl font-black text-success">{performance.hits}</div>
-                        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Acertos</div>
+               <motion.div key="step6" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-6 w-full max-w-sm">
+                  <div className="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto border-4 border-sun/20 shadow-xl">
+                    <Trophy className="h-12 w-12 text-sun" />
+                  </div>
+                  <h2 className="text-3xl font-black text-primary uppercase">MUITO BEM!</h2>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                     <div className="p-4 bg-success/5 rounded-2xl border-2 border-success/10">
+                        <div className="text-2xl font-black text-success">{performance.hits}</div>
+                        <div className="text-[10px] font-black uppercase text-muted-foreground">Acertos</div>
                      </div>
-                     <div className="p-6 bg-white rounded-3xl shadow-soft border-4 border-destructive/10">
-                        <div className="text-4xl font-black text-destructive">{performance.misses}</div>
-                        <div className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mt-1">Erros</div>
+                     <div className="p-4 bg-destructive/5 rounded-2xl border-2 border-destructive/10">
+                        <div className="text-2xl font-black text-destructive">{performance.misses}</div>
+                        <div className="text-[10px] font-black uppercase text-muted-foreground">Erros</div>
                      </div>
                   </div>
-                  <p className="text-lg font-bold text-foreground/70">{aula.etapa6_avaliação || "Excelente desempenho!"}</p>
-                  <button onClick={() => setStep(7)} className="btn-tap bg-success text-white px-12 py-5 rounded-full font-black shadow-glow border-4 border-white w-full">VER RESULTADO FINAL</button>
+
+                  <button 
+                    onClick={async () => {
+                      const pedService = SupabasePedagogicalService.getInstance();
+                      const total = performance.hits + performance.misses;
+                      const mastery = total > 0 ? (performance.hits / total) * 100 : 0;
+                      
+                      if (aula.skill_code && childId) {
+                        await pedService.saveProgress({
+                          aluno_id: childId,
+                          codigo_bncc: aula.skill_code,
+                          tentativas: 1,
+                          acertos: performance.hits,
+                          erros: performance.misses,
+                          dominio: mastery
+                        });
+                      }
+
+                      if (aula.activityId) onCompleted?.(aula.activityId);
+                      setAula(null);
+                    }}
+                    className="btn-tap bg-success text-white px-8 py-4 rounded-xl text-xl font-black shadow-glow border-2 border-white w-full"
+                  >
+                    CONCLUIR AULA
+                  </button>
                </motion.div>
-            )}
-
-            {step === 7 && (
-              <motion.div key="step7" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-8 w-full max-w-md">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-sun/20 blur-3xl rounded-full" />
-                  <div className="bg-white rounded-full w-40 h-40 flex items-center justify-center mx-auto mb-4 border-8 border-sun/20 shadow-2xl relative">
-                    <Trophy className="h-24 w-24 text-sun animate-bounce" />
-                  </div>
-                </div>
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">DOMÍNIO ATINGIDO!</h2>
-                <p className="text-xl font-bold text-muted-foreground">{aula.etapa7_domínio || "Você dominou esta habilidade com maestria!"}</p>
-                
-                <div className="p-6 rounded-[2.5rem] bg-primary/5 border-4 border-white shadow-soft">
-                   <div className="text-[10px] font-black uppercase text-primary mb-2 tracking-widest">Habilidade BNCC</div>
-                   <div className="text-lg font-black text-foreground">{aula.bncc_code || aula.skill_code || "HABILIDADE EM DESENVOLVIMENTO"}</div>
-                   <div className="mt-3 flex items-center justify-center gap-2">
-                     <div className="h-3 w-40 bg-muted rounded-full overflow-hidden">
-                        <div className="h-full bg-success" style={{ width: '90%' }} />
-                     </div>
-                     <span className="text-xs font-black text-success uppercase">Domínio: 90%</span>
-                   </div>
-                </div>
-
-                <button 
-                  onClick={async () => {
-                    const pedService = SupabasePedagogicalService.getInstance();
-                    const total = performance.hits + performance.misses;
-                    const mastery = total > 0 ? (performance.hits / total) * 100 : 0;
-                    
-                    if (aula.skill_code && childId) {
-                      await pedService.saveProgress({
-                        aluno_id: childId,
-                        codigo_bncc: aula.skill_code,
-                        tentativas: 1,
-                        acertos: performance.hits,
-                        erros: performance.misses,
-                        dominio: mastery
-                      });
-                    }
-
-                    if (aula.activityId) onCompleted?.(aula.activityId);
-                    setAula(null);
-                  }}
-                  className="btn-tap bg-success text-white px-12 py-6 rounded-full text-2xl font-black shadow-glow mt-8 border-4 border-white w-full"
-                >
-                  CONCLUIR AULA
-                </button>
-              </motion.div>
             )}
           </AnimatePresence>
 
           {feedback === true && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0 bg-success/20 pointer-events-none flex items-center justify-center z-50">
-              <CheckCircle2 className="h-48 w-48 text-success drop-shadow-glow" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 bg-success/10 pointer-events-none flex items-center justify-center z-50">
+              <CheckCircle2 className="h-32 w-32 text-success drop-shadow-glow" />
             </motion.div>
           )}
           {feedback === false && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0 bg-destructive/10 pointer-events-none flex items-center justify-center z-50">
-              <X className="h-48 w-48 text-destructive drop-shadow-lg" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 bg-destructive/5 pointer-events-none flex items-center justify-center z-50">
+              <X className="h-32 w-32 text-destructive drop-shadow-lg" />
             </motion.div>
           )}
-        </Card>
+        </div>
 
-        {step < 7 && (
-          <div className="flex justify-between items-center px-4">
-             <button onClick={() => setStep(Math.max(1, step - 1))} className="text-muted-foreground font-black text-xs uppercase tracking-widest hover:text-primary transition-colors">← Voltar</button>
-             <div className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-[0.2em]">
+        {step < 6 && (
+          <div className="mt-8 flex justify-between items-center px-2">
+             <button onClick={() => setStep(Math.max(1, step - 1))} className="text-muted-foreground font-black text-[10px] uppercase tracking-widest">← Voltar</button>
+             <div className="text-[8px] font-black text-muted-foreground/40 uppercase tracking-widest">
                {childNome} • {aula.grade}
              </div>
-             {step > 1 && step < 6 ? (
-               <button onClick={() => setStep(Math.min(7, step + 1))} className="text-primary font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all">Pular passo →</button>
-             ) : <div className="w-20" />}
+             {step > 1 ? (
+               <button onClick={() => setStep(6)} className="text-primary/50 font-black text-[10px] uppercase tracking-widest">Sair</button>
+             ) : <div className="w-10" />}
           </div>
         )}
       </div>
     </Shell>
   );
 }
+
 
 
