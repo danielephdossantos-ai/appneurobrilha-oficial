@@ -743,11 +743,12 @@ function Escola() {
 
 
 // Lousa digital estilo "professor escrevendo no quadro" - destaca o item em foco.
-function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'demonstracao'; focus?: 'numA' | 'numB' | 'op' | 'result' | 'word' | 'letter' | string }) {
+function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'demonstracao'; focus?: 'numA' | 'numB' | 'op' | 'result' | 'word' | 'letter' | 'visual' | string }) {
   const palavra: string | undefined = aula?.palavra_foco;
   const silabas: string[] | undefined = aula?.silabas;
   const frase: string | undefined = aula?.frase_apresentacao;
   const letra: string | undefined = aula?.letra || (palavra ? palavra[0] : undefined);
+  const visual: string | undefined = aula?.visual;
   const numA = aula?.numero_a;
   const numB = aula?.numero_b;
   const op = aula?.operacao;
@@ -756,67 +757,122 @@ function Chalkboard({ aula, mode, focus }: { aula: any; mode: 'explicacao' | 'de
   const hl = (active: boolean) => active ? 'text-yellow-300 scale-110 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]' : 'text-white';
 
   return (
-    <div className="relative mx-auto w-full max-w-md rounded-[2rem] p-6 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] border-[10px] border-[#6b3f1f]" style={{ background: 'linear-gradient(180deg, #1f4d3a 0%, #163b2c 100%)' }}>
-      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#6b3f1f] text-white text-[10px] font-black tracking-widest uppercase">Lousa da Aula</div>
-      <div className="text-white font-black uppercase text-center py-4" style={{ fontFamily: '"Comic Sans MS", "Marker Felt", system-ui, sans-serif', textShadow: '0 1px 0 rgba(255,255,255,0.15)' }}>
+    <div className="relative mx-auto w-full max-w-md rounded-[2.5rem] p-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border-[12px] border-[#5d3a1a] overflow-hidden" 
+      style={{ 
+        background: 'linear-gradient(180deg, #1a4231 0%, #123024 100%)',
+        boxShadow: 'inset 0 0 100px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.4)'
+      }}>
+      {/* Textura de giz apagado */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-[#5d3a1a] text-white text-[12px] font-black tracking-widest uppercase shadow-md">
+        Quadro do {aula?.materia?.toUpperCase() || 'Professor'}
+      </div>
+
+      <div className="relative z-10 text-white font-black uppercase text-center py-6 min-h-[220px] flex flex-col items-center justify-center" 
+        style={{ 
+          fontFamily: '"Comic Sans MS", "Chalkboard SE", "Marker Felt", system-ui, sans-serif', 
+          textShadow: '2px 2px 0 rgba(0,0,0,0.3)' 
+        }}>
+        
         {isMath ? (
-          <div className="space-y-4">
-            <div className="flex items-center justify-center gap-3 text-6xl">
-              <span className={`transition-all ${hl(focus === 'numA')}`}>{numA}</span>
-              <span className={`transition-all ${hl(focus === 'op')}`}>{op}</span>
-              <span className={`transition-all ${hl(focus === 'numB')}`}>{numB}</span>
+          <div className="space-y-6">
+            <div className="flex items-center justify-center gap-4 text-7xl">
+              <span className={`transition-all duration-500 ${hl(focus === 'numA')}`}>{numA}</span>
+              <span className={`transition-all duration-500 ${hl(focus === 'op')}`}>{op}</span>
+              <span className={`transition-all duration-500 ${hl(focus === 'numB')}`}>{numB}</span>
               {(mode === 'demonstracao' || focus === 'result') && resultado !== undefined && (
                 <>
                   <span className="text-yellow-300">=</span>
-                  <span className={`transition-all ${hl(focus === 'result')}`}>{resultado}</span>
+                  <span className={`transition-all duration-500 ${hl(focus === 'result')}`}>{resultado}</span>
                 </>
               )}
             </div>
-            <div className="flex items-center justify-center gap-3 mt-2">
-              <div className="flex flex-wrap gap-1 max-w-[110px] justify-center">
+            
+            {/* Representação visual concreta (bolinhas/estrelas) */}
+            <div className="flex items-center justify-center gap-6 mt-4 p-4 bg-black/10 rounded-2xl border-2 border-dashed border-white/10">
+              <div className="flex flex-wrap gap-2 max-w-[120px] justify-center">
                 {Array.from({ length: Math.min(numA, 10) }).map((_, i) => (
-                  <span key={`a${i}`} className={`w-4 h-4 rounded-full ${focus === 'numA' ? 'bg-yellow-300' : 'bg-white/80'}`} />
+                  <motion.div 
+                    initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05 }}
+                    key={`a${i}`} 
+                    className={`w-5 h-5 rounded-full shadow-sm ${focus === 'numA' ? 'bg-yellow-300' : 'bg-white/80'}`} 
+                  />
                 ))}
               </div>
-              <span className="text-2xl text-yellow-300">{op}</span>
-              <div className="flex flex-wrap gap-1 max-w-[110px] justify-center">
+              <span className="text-3xl text-yellow-300 font-bold">{op}</span>
+              <div className="flex flex-wrap gap-2 max-w-[120px] justify-center">
                 {Array.from({ length: Math.min(numB, 10) }).map((_, i) => (
-                  <span key={`b${i}`} className={`w-4 h-4 rounded-full ${focus === 'numB' ? 'bg-yellow-300' : 'bg-white/80'}`} />
+                  <motion.div 
+                    initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05 }}
+                    key={`b${i}`} 
+                    className={`w-5 h-5 rounded-full shadow-sm ${focus === 'numB' ? 'bg-yellow-300' : 'bg-white/80'}`} 
+                  />
                 ))}
               </div>
             </div>
           </div>
         ) : silabas && silabas.length > 0 ? (
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center justify-center gap-2 text-5xl">
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-6xl">
               {silabas.map((s, i) => {
                 const active = focus === `syl-${i}` || focus === 'word';
                 return (
-                  <span key={i} className="contents">
-                    <span className={`px-3 py-1 rounded-lg border-2 border-dashed transition-all ${active ? 'text-yellow-300 scale-110 bg-yellow-300/20 border-yellow-300' : 'bg-white/10 border-white/40 text-white'}`}>{s}</span>
-                    {i < silabas.length - 1 && <span className="text-yellow-300">+</span>}
-                  </span>
+                  <div key={i} className="flex items-center">
+                    <motion.span 
+                      animate={{ scale: active ? 1.15 : 1, y: active ? -5 : 0 }}
+                      className={`px-4 py-2 rounded-xl border-4 border-dashed transition-all duration-500 ${active ? 'text-yellow-300 bg-yellow-300/20 border-yellow-300' : 'bg-white/5 border-white/30 text-white'}`}>
+                      {s}
+                    </motion.span>
+                    {i < silabas.length - 1 && <span className="text-yellow-300 mx-2">+</span>}
+                  </div>
                 );
               })}
             </div>
             {(mode === 'demonstracao' || focus === 'word') && palavra && (
-              <div className="text-yellow-300 text-4xl mt-2">= {palavra}</div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                className="text-yellow-300 text-5xl mt-4 bg-white/10 py-3 px-8 rounded-full border-2 border-yellow-300/30">
+                = {palavra}
+              </motion.div>
             )}
           </div>
-        ) : palavra ? (
-          <div className="space-y-2">
-            <div className="text-6xl tracking-wider">{palavra}</div>
-            {frase && <div className="text-base font-bold text-white/80 normal-case mt-3">{frase}</div>}
+        ) : visual ? (
+          <div className="flex flex-col items-center gap-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+              className={`text-[9rem] leading-none transition-all duration-500 ${hl(focus === 'visual')}`}>
+              {visual.startsWith('http') || visual.startsWith('/src') ? (
+                <img src={visual} alt="visual" className="w-48 h-48 object-contain drop-shadow-2xl" />
+              ) : (
+                visual
+              )}
+            </motion.div>
+            {palavra && (
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                className={`text-5xl tracking-widest mt-2 ${hl(focus === 'word' || focus === 'visual')}`}>
+                {palavra}
+              </motion.div>
+            )}
           </div>
         ) : letra ? (
-          <div className="text-8xl">{letra}</div>
-        ) : frase ? (
-          <div className="text-2xl normal-case leading-snug">{frase}</div>
+          <motion.div 
+            initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+            className="text-[12rem] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            {letra}
+          </motion.div>
         ) : (
-          <div className="text-3xl">{aula?.topic || 'Vamos aprender!'}</div>
+          <div className="text-4xl normal-case leading-tight px-4 font-bold">
+            {frase || aula?.topic || 'Vamos aprender juntos!'}
+          </div>
         )}
       </div>
-      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-3 rounded-md bg-[#d9b382] shadow-md" />
+      
+      {/* Prateleira de giz embaixo */}
+      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-32 h-4 rounded-full bg-[#8b5a2b] shadow-lg border-t-2 border-white/20" />
+      <div className="absolute bottom-1 left-[40%] w-6 h-2 bg-white/80 rounded-sm rotate-12" />
+      <div className="absolute bottom-1 right-[40%] w-5 h-2 bg-yellow-300/80 rounded-sm -rotate-6" />
     </div>
   );
 }
