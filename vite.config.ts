@@ -14,7 +14,7 @@ export default defineConfig({
   vite: {
     plugins: [
       VitePWA({
-        registerType: 'autoUpdate',
+        registerType: 'prompt', // Alterado de autoUpdate para prompt para evitar versões conflitantes sem aviso
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
           name: 'NeuroBrilha Kids',
