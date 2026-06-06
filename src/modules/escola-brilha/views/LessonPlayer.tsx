@@ -28,7 +28,7 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       elements: [{ id: 'ref-casa', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
     { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'BOLO. Escolha a imagem correta!',
+      speech: 'Escolha a imagem correta!',
       elements: [{ id: 'w', type: 'text', content: 'BOLO', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '🍰', options: ['🍰', '🚗', '🐶'] } },
     { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
