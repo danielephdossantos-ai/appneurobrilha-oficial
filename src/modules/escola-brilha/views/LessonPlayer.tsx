@@ -9,16 +9,17 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'aula-letra-b',
-  title: 'Brincando com a Letra B',
+  id: 'aula-som-b',
+  title: 'O Som da Letra B',
   bncc_field: 'escuta_fala',
+  skill_bncc: 'EF01LP04', 
   steps: [
     {
       id: 'fase-1',
       phase: 'explanation',
       type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Vamos aprender a letra B!',
+      mascot: 'pip',
+      speech: 'Ouça o som da letra B: /b/, /b/. Faz comigo!',
       elements: [
         { id: 'letra-b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
       ]
@@ -27,35 +28,35 @@ const MOCK_LESSON: Lesson = {
       id: 'fase-2',
       phase: 'demonstration',
       type: 'demonstration',
-      mascot: 'pip',
-      speech: 'Olha como eu resolvo: B de Borboleta!',
+      mascot: 'pipa',
+      speech: 'Veja: /b/ de BONECA!',
       elements: [
-        { id: 'borboleta-demo', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
+        { id: 'boneca', type: 'text', content: '🪆', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
       ]
     },
     {
       id: 'fase-3',
       phase: 'guided_training',
       type: 'interaction',
-      mascot: 'pipa',
-      speech: 'Agora sua vez com ajuda. Onde está o B?',
+      mascot: 'pip',
+      speech: 'Toque na figura que começa com o som /b/.',
       showHelp: true,
       interaction: {
         type: 'click',
-        correctAnswer: 'B',
-        options: ['A', 'B', 'C']
+        correctAnswer: '🪆',
+        options: ['🍎', '🪆', '🐶']
       }
     },
     {
       id: 'fase-4',
       phase: 'practice',
       type: 'interaction',
-      mascot: 'pip',
-      speech: 'Muito bem! Vamos praticar mais um pouco.',
+      mascot: 'pipa',
+      speech: 'Onde está o /b/ da Baleia?',
       interaction: {
         type: 'click',
-        correctAnswer: 'B',
-        options: ['D', 'E', 'B']
+        correctAnswer: '🐋',
+        options: ['🐱', '🐋', '☀️']
       }
     }
   ]
