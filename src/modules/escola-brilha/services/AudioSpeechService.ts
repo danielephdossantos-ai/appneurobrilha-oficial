@@ -1,30 +1,37 @@
 export class AudioSpeechService {
-  private static synth = window.speechSynthesis;
+  private static getSynth(): SpeechSynthesis | null {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return null;
+    return window.speechSynthesis;
+  }
 
   static async speak(text: string, onEnd?: () => void): Promise<void> {
     return new Promise((resolve) => {
-      // Cancel any ongoing speech
-      this.synth.cancel();
+      const synth = this.getSynth();
+      if (!synth) {
+        onEnd?.();
+        resolve();
+        return;
+      }
+
+      synth.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'pt-BR'; // Focus on Brazilian Portuguese
-      utterance.rate = 0.9; // Slightly slower for kids
-      utterance.pitch = 1.2; // A bit higher for a friendly mascot voice
+      utterance.lang = 'pt-BR';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.2;
 
       utterance.onend = () => {
         onEnd?.();
         resolve();
       };
 
-      utterance.onerror = () => {
-        resolve(); // Resolve anyway to not block the flow
-      };
+      utterance.onerror = () => resolve();
 
-      this.synth.speak(utterance);
+      synth.speak(utterance);
     });
   }
 
   static stop(): void {
-    this.synth.cancel();
+    this.getSynth()?.cancel();
   }
 }
