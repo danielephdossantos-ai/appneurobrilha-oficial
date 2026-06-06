@@ -451,7 +451,8 @@ function Escola() {
           systemOptions,
           systemAnswer,
           instruction: activity.instruction,
-          miniGameType // Enviando o tipo de jogo para a IA
+          miniGameType,
+          bncc_code // Passando o código BNCC para a IA buscar as técnicas
         }
       });
 
