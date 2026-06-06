@@ -31,6 +31,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
@@ -147,6 +148,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EscolaBrilhaRoute,
+} as any)
 const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
   id: '/configurar',
   path: '/configurar',
@@ -202,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/escola-brilha/': typeof EscolaBrilhaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -212,7 +219,6 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
-  '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/historias': typeof HistoriasRoute
   '/jornada-365': typeof Jornada365Route
@@ -231,6 +237,7 @@ export interface FileRoutesByTo {
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/escola-brilha': typeof EscolaBrilhaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -261,6 +268,7 @@ export interface FileRoutesById {
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/escola-brilha/': typeof EscolaBrilhaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -292,6 +300,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/escola-brilha/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -302,7 +311,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/brilha-vida'
     | '/colecao-pip'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/historias'
     | '/jornada-365'
@@ -321,6 +329,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/escola-brilha'
   id:
     | '__root__'
     | '/'
@@ -350,6 +359,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/escola-brilha/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -535,6 +545,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escola-brilha/': {
+      id: '/escola-brilha/'
+      path: '/'
+      fullPath: '/escola-brilha/'
+      preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
+      parentRoute: typeof EscolaBrilhaRoute
+    }
     '/neuro-treino/configurar': {
       id: '/neuro-treino/configurar'
       path: '/configurar'
@@ -575,10 +592,12 @@ declare module '@tanstack/react-router' {
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
+  EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
 }
 
 const EscolaBrilhaRouteChildren: EscolaBrilhaRouteChildren = {
   EscolaBrilhaAulaRoute: EscolaBrilhaAulaRoute,
+  EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
 }
 
 const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
