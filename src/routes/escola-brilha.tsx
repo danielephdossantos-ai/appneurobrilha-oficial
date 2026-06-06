@@ -889,34 +889,62 @@ function TeachingSequence({ aula, mascotImg, mascotNome, onComplete }: { aula: a
   }, [idx]);
 
   return (
-    <motion.div key={`teach-${idx}`} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="text-center space-y-4 w-full max-w-lg">
-      <div className="flex items-center justify-center gap-1.5">
+    <motion.div 
+      key={`teach-${idx}`} 
+      initial={{ opacity: 0, y: 10 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      className="flex flex-col items-center gap-4 w-full"
+    >
+      <div className="flex items-center justify-center gap-1 w-full max-w-[200px]">
         {screens.map((_, i) => (
-          <div key={i} className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-8 bg-primary' : i < idx ? 'w-4 bg-success' : 'w-4 bg-muted'}`} />
+          <div 
+            key={i} 
+            className={`h-1.5 rounded-full transition-all flex-1 ${i === idx ? 'bg-primary' : i < idx ? 'bg-success' : 'bg-muted'}`} 
+          />
         ))}
       </div>
-      <h2 className="text-2xl font-black text-primary uppercase leading-tight">{screen.titulo}</h2>
-      <Chalkboard aula={aula} mode={screen.mode || 'explicacao'} focus={screen.focus} />
-      <div className="flex items-start gap-3 bg-white/90 p-4 rounded-3xl border-4 border-primary/15 shadow-soft text-left">
-        <img src={mascotImg} alt={mascotNome} className="w-16 h-16 rounded-full border-4 border-white shadow-md object-cover shrink-0" />
-        <div className="flex-1">
-          <div className="text-[10px] font-black uppercase text-primary tracking-widest mb-1">{mascotNome}</div>
-          <p className="text-base font-bold text-foreground leading-snug">{screen.fala}</p>
+      
+      <div className="w-full max-w-md">
+        <Chalkboard aula={aula} mode={screen.mode || 'explicacao'} focus={screen.focus} />
+      </div>
+
+      <div className="flex items-start gap-3 bg-white/80 p-3 rounded-2xl border-2 border-primary/10 shadow-sm text-left w-full">
+        <img 
+          src={mascotImg} 
+          alt={mascotNome} 
+          className="w-12 h-12 rounded-full border-2 border-white shadow-sm object-cover shrink-0" 
+        />
+        <div className="flex-1 min-w-0">
+          <div className="text-[10px] font-black uppercase text-primary tracking-widest mb-0.5">{mascotNome}</div>
+          <p className="text-xs md:text-sm font-bold text-foreground leading-snug">{screen.fala}</p>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-2 pt-2 flex-wrap">
-        <button onClick={() => falar(screen.fala)} className="btn-tap bg-white text-primary px-4 py-3 rounded-full text-sm font-black border-4 border-primary/20 flex items-center gap-2">
-          <Volume2 className="h-4 w-4" /> OUVIR
-        </button>
-        {idx > 0 && (
-          <button onClick={() => setIdx(idx - 1)} className="btn-tap bg-muted text-foreground px-4 py-3 rounded-full text-sm font-black">VOLTAR</button>
-        )}
-        <button
-          onClick={() => { if (isLast) onComplete(); else setIdx(idx + 1); }}
-          className="btn-tap bg-primary text-white px-6 py-4 rounded-full text-lg font-black border-4 border-white shadow-glow"
+
+      <div className="flex items-center justify-center gap-2 w-full">
+        <button 
+          onClick={() => falar(screen.fala)} 
+          className="h-12 w-12 rounded-full bg-white text-primary border-2 border-primary/20 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+          aria-label="Ouvir novamente"
         >
-          {isLast ? 'COMEÇAR!' : 'PRÓXIMO'} <ArrowRight className="inline h-5 w-5 ml-1" />
+          <Volume2 className="h-5 w-5" />
         </button>
+        
+        <div className="flex-1 flex gap-2">
+          {idx > 0 && (
+            <button 
+              onClick={() => setIdx(idx - 1)} 
+              className="flex-1 h-12 rounded-xl bg-muted text-foreground font-black text-sm active:scale-95 transition-transform"
+            >
+              VOLTAR
+            </button>
+          )}
+          <button
+            onClick={() => { if (isLast) onComplete(); else setIdx(idx + 1); }}
+            className="flex-[2] h-12 rounded-xl bg-primary text-white font-black shadow-glow border-2 border-white active:scale-95 transition-transform flex items-center justify-center gap-2"
+          >
+            {isLast ? 'COMEÇAR!' : 'PRÓXIMO'} <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
