@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
-import { PedagogyEngine } from "@/modules/escola-brilha/engine/pedagogy-core";
+// Pedagogical engine logic removed for rebuild
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useHiperfoco } from "@/context/HiperfocoContext";
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/jornada-365")({
 
 const CATEGORY_ROUTES: Record<string, string> = {
   "neuro-treino": "/neuro-treino",
-  "escola-brilha": "/escola-brilha",
+  
 };
 
 type WorldKey =
