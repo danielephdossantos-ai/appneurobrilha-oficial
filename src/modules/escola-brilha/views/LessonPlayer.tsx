@@ -109,6 +109,33 @@ export const LessonPlayer: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, currentLesson.id]);
 
+  const getStepSpeech = (step: any) => {
+    let text = step.speech;
+    
+    // Add elements text if they exist and aren't already in speech
+    if (step.elements) {
+      const elementsText = step.elements
+        .filter((el: any) => el.type === 'text')
+        .map((el: any) => el.content)
+        .join('. ');
+      
+      if (elementsText && !text.includes(elementsText)) {
+        text += '. ' + elementsText;
+      }
+    }
+
+    // Add options if it's an interaction
+    if (step.type === 'interaction' && step.interaction?.options) {
+      const options = step.interaction.options;
+      if (options.length > 0) {
+        const optionsText = options.slice(0, -1).join('... ') + (options.length > 1 ? '... ou ... ' : '') + options[options.length - 1];
+        text += '. ' + optionsText + '?';
+      }
+    }
+    
+    return text;
+  };
+
   const runStep = async () => {
     setShowElements([]);
     setVisibleOptions([]);
@@ -123,16 +150,27 @@ export const LessonPlayer: React.FC = () => {
       }
     }
 
+    // Construct speech with instruction and options
+    const fullSpeech = getStepSpeech(currentStep);
+    
     setIsSpeaking(true);
-    await AudioSpeechService.speak(currentStep.speech);
+    // Start speaking
+    const speechPromise = AudioSpeechService.speak(fullSpeech);
+    
+    // If it's an interaction, start showing options with a slight delay so they synchronize better
+    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
+      // Short delay after instruction starts
+      await new Promise(r => setTimeout(r, 1500)); 
+      for (const opt of currentStep.interaction.options) {
+        setVisibleOptions(prev => [...prev, opt]);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    await speechPromise;
     setIsSpeaking(false);
 
-    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      for (const opt of currentStep.interaction.options) {
-        await new Promise(r => setTimeout(r, 400));
-        setVisibleOptions(prev => [...prev, opt]);
-      }
-    } else if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
+    if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
@@ -142,7 +180,7 @@ export const LessonPlayer: React.FC = () => {
 
   const replaySpeech = async () => {
     setIsSpeaking(true);
-    await AudioSpeechService.speak(currentStep.speech);
+    await AudioSpeechService.speak(getStepSpeech(currentStep));
     setIsSpeaking(false);
   };
 
