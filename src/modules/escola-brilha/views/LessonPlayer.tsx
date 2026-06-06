@@ -198,12 +198,13 @@ export const LessonPlayer: React.FC = () => {
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   transition={{ type: 'spring' }}
                 >
-                  <Button
-                    onClick={() => handleInteraction(opt)}
-                    className="w-24 h-24 md:w-32 md:h-32 rounded-3xl text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600"
-                  >
-                    {opt}
-                  </Button>
+              <Button
+                key={opt}
+                onClick={() => handleInteraction(opt)}
+                className="min-w-[120px] h-24 md:h-32 px-4 rounded-3xl text-3xl md:text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600 flex items-center justify-center"
+              >
+                {opt}
+              </Button>
                 </motion.div>
               ))}
             </AnimatePresence>
