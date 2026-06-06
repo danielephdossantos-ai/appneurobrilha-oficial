@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
   id: 'aula-letra-b',
-  title: 'Letra B',
-  skill_bncc: 'EF01LP04',
+  title: 'Brincando com a Letra B',
+  bncc_field: 'escuta_fala',
   steps: [
     {
       id: 'fase-1',
