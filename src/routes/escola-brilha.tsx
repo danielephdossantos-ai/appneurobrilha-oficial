@@ -309,6 +309,7 @@ function Escola() {
     try {
       const isInfantil = isEI(selectedGrade);
       const pedService = SupabasePedagogicalService.getInstance();
+      let bncc_code: string | undefined;
       
       // 1. Priorizar conteúdo do Banco Pedagógico (Novas tabelas)
       const dbSkills = await pedService.getSkillsByGradeAndSubject(selectedGrade, materiaId);
