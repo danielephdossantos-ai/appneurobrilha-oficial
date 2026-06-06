@@ -9,6 +9,66 @@ import { Lesson, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 import { useSearch } from '@tanstack/react-router';
 
+const PORTUGUES_1ANO_LESSON: Lesson = {
+  id: 'silabas-divertidas',
+  title: 'Brincando com Sílabas',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF01LP05', 
+  steps: [
+    {
+      id: 'silaba-intro',
+      phase: 'explanation',
+      type: 'explanation',
+      mascot: 'pipa',
+      speech: 'Vamos aprender a separar as palavrinhas em pedaços? Cada pedaço é uma sílaba! Veja a palavra CASA.',
+      elements: [
+        { id: 'casa-full', type: 'text', content: 'CASA', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.5 }
+      ]
+    },
+    {
+      id: 'silaba-demo',
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pip',
+      speech: 'CA... SA... Viu só? Juntando os pedaços formamos a palavra!',
+      elements: [
+        { id: 'ca', type: 'text', content: 'CA', position: { x: -40, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: 'sa', type: 'text', content: 'SA', position: { x: 40, y: 0 }, animation: 'bounce', delay: 0.6 }
+      ]
+    },
+    {
+      id: 'primeira-silaba',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: 'Qual é a primeira sílaba de CASA?',
+      elements: [
+        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+      ],
+      interaction: {
+        type: 'click',
+        correctAnswer: 'CA',
+        options: ['CA', 'BO', 'PA']
+      }
+    },
+    {
+      id: 'ultima-silaba',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'E qual é a última sílaba de CASA?',
+      elements: [
+        { id: 'casa-ref-2', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+      ],
+      interaction: {
+        type: 'click',
+        correctAnswer: 'SA',
+        options: ['SA', 'TO', 'LA']
+      }
+    }
+  ]
+};
+
 const MATH_LESSON: Lesson = {
   id: 'contagem-divertida',
   title: 'Contagem Divertida',
@@ -101,7 +161,7 @@ const LANG_LESSON: Lesson = {
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const currentLesson = search.category === 'matematica' ? MATH_LESSON : LANG_LESSON;
+  const currentLesson = search.category === 'matematica' ? MATH_LESSON : search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
   
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showMascot, setShowMascot] = useState(false);
