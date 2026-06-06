@@ -94,11 +94,13 @@ export class LinguisticsGenerator extends BaseGenerator {
 
       // ===== EDUCAÇÃO INFANTIL =====
       if (type === 'ei-vogal') {
-        const v = EARLY_CHILDHOOD.linguagem.vowels[0]; 
+        const v = this.pickRandom(EARLY_CHILDHOOD.linguagem.vowels); 
         const options = this.shuffle([v.letter, ...v.distractors]);
         return {
-          q: "Vamos procurar a letra A!",
-          visual: v.letter,
+          q: `Vamos procurar a letra ${v.letter}!`,
+          visual: v.visual,
+          letra: v.letter,
+          palavra: v.exemplo,
           answer: v.letter,
           options,
           miniGameType: "bubbles",
