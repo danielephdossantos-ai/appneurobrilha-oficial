@@ -109,6 +109,33 @@ export const LessonPlayer: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, currentLesson.id]);
 
+  const getStepSpeech = (step: any) => {
+    let text = step.speech;
+    
+    // Add elements text if they exist and aren't already in speech
+    if (step.elements) {
+      const elementsText = step.elements
+        .filter((el: any) => el.type === 'text')
+        .map((el: any) => el.content)
+        .join('. ');
+      
+      if (elementsText && !text.includes(elementsText)) {
+        text += '. ' + elementsText;
+      }
+    }
+
+    // Add options if it's an interaction
+    if (step.type === 'interaction' && step.interaction?.options) {
+      const options = step.interaction.options;
+      if (options.length > 0) {
+        const optionsText = options.slice(0, -1).join(', ') + (options.length > 1 ? ' ou ' : '') + options[options.length - 1];
+        text += '. ' + optionsText + '?';
+      }
+    }
+    
+    return text;
+  };
+
   const runStep = async () => {
     setShowElements([]);
     setVisibleOptions([]);
@@ -124,7 +151,7 @@ export const LessonPlayer: React.FC = () => {
     }
 
     setIsSpeaking(true);
-    await AudioSpeechService.speak(currentStep.speech);
+    await AudioSpeechService.speak(getStepSpeech(currentStep));
     setIsSpeaking(false);
 
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
@@ -142,7 +169,7 @@ export const LessonPlayer: React.FC = () => {
 
   const replaySpeech = async () => {
     setIsSpeaking(true);
-    await AudioSpeechService.speak(currentStep.speech);
+    await AudioSpeechService.speak(getStepSpeech(currentStep));
     setIsSpeaking(false);
   };
 
