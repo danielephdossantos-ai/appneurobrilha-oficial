@@ -124,7 +124,7 @@ function gradeTier(grade: string): GradeTier {
 }
 
 const tierTheme: Record<GradeTier, {
-  bg: string; scene: string; sceneIcon: ComponentType<{ className?: string }>; vibe: string; titleScale: string;
+  bg: string; scene: string; sceneIcon: any; vibe: string; titleScale: string;
 }> = {
   ei:       { bg: "from-sky/25 via-petal/20 to-sun/15", scene: "Jardim Encantado",        sceneIcon: Rainbow, vibe: "Bem-vindo ao Jardim Brilha", titleScale: "text-3xl" },
   alfa:     { bg: "from-coral/20 via-sun/20 to-petal/15", scene: "Vila das Letras",       sceneIcon: Library, vibe: "Hoje vamos descobrir palavras",  titleScale: "text-2xl" },
