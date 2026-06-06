@@ -9,46 +9,59 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'brincando-com-rimas',
-  title: 'Brincando com Rimas',
-  bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF02', 
+  id: 'contagem-divertida',
+  title: 'Contagem Divertida',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EI03ET07', 
   steps: [
     {
-      id: 'rima-intro',
+      id: 'contagem-intro',
       phase: 'explanation',
       type: 'explanation',
-      mascot: 'pip',
-      speech: 'Vamos encontrar palavras que combinam?',
+      mascot: 'pipa',
+      speech: 'Vamos contar as maçãs juntos? Um... dois... três!',
       elements: [
-        { id: 'casa', type: 'text', content: '🏠', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.5 },
-        { id: 'asa', type: 'text', content: '🪽', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.8 }
+        { id: 'maca-1', type: 'text', content: '🍎', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.4 },
+        { id: 'maca-2', type: 'text', content: '🍎🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.8 },
+        { id: 'maca-3', type: 'text', content: '🍎🍎🍎', position: { x: 60, y: 0 }, animation: 'bounce', delay: 1.2 }
       ]
     },
     {
-      id: 'rima-demo',
+      id: 'mais-menos-demo',
       phase: 'demonstration',
       type: 'demonstration',
       mascot: 'pip',
-      speech: 'CASA combina com ASA!',
+      speech: 'Veja só! Quatro maçãs é MAIS que duas bananas!',
       elements: [
-        { id: 'casa-static', type: 'text', content: '🏠', position: { x: -60, y: 0 }, animation: 'fade', delay: 0 },
-        { id: 'asa-static', type: 'text', content: '🪽', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
+        { id: 'bananas', type: 'text', content: '🍌🍌', position: { x: -60, y: 0 }, animation: 'fade', delay: 0.2 },
+        { id: 'macas-4', type: 'text', content: '🍎🍎🍎🍎', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
       ]
     },
     {
-      id: 'rima-atividade',
+      id: 'mais-menos-atividade',
       phase: 'practice',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'O que combina com CASA?',
+      speech: 'Qual desses grupos tem MAIS frutinhas?',
+      interaction: {
+        type: 'click',
+        correctAnswer: '🍎🍎🍎🍎',
+        options: ['🍌🍌', '🍎🍎🍎🍎']
+      }
+    },
+    {
+      id: 'sequencia-atividade',
+      phase: 'challenge',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'Uma estrela... duas estrelas... três estrelas... O que vem depois?',
       elements: [
-        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.3 }
+        { id: 'seq-ref', type: 'text', content: '⭐ ⭐⭐ ⭐⭐⭐', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.3 }
       ],
       interaction: {
         type: 'click',
-        correctAnswer: '🪽',
-        options: ['⚽', '🪽', '🍎']
+        correctAnswer: '⭐⭐⭐⭐',
+        options: ['⭐', '⭐⭐⭐⭐', '🎈']
       }
     }
   ]
