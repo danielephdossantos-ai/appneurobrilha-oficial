@@ -332,7 +332,7 @@ export const LessonPlayer: React.FC = () => {
         </AnimatePresence>
 
         {showInteraction && (
-          <div className="flex gap-6 mt-32">
+          <div className="flex gap-6 mt-10">
             <AnimatePresence>
               {visibleOptions.map((opt) => (
                 <motion.div
