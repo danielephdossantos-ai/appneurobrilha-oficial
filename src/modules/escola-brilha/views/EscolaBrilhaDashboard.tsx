@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { School, BookOpen, Calculator, Brain } from 'lucide-react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, Link } from '@tanstack/react-router';
 
 export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
