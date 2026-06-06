@@ -21,9 +21,9 @@ export const EARLY_CHILDHOOD = {
   },
   matematica: {
     contagem: [
-      { n: 3, item: 'maçãs', visual: 'apple', options: [1, 3, 5, 6], code: 'EI03ET07' },
-      { n: 2, item: 'estrelas', visual: 'star', options: [2, 4, 1, 3], code: 'EI03ET07' },
-      { n: 5, item: 'balões', visual: 'balloon', options: [3, 5, 4, 6], code: 'EI03ET07' },
+      { n: 3, item: 'maçãs', visual: '🍎', options: [1, 3, 5, 6], code: 'EI03ET07' },
+      { n: 2, item: 'estrelas', visual: '⭐', options: [2, 4, 1, 3], code: 'EI03ET07' },
+      { n: 5, item: 'balões', visual: '🎈', options: [3, 5, 4, 6], code: 'EI03ET07' },
     ],
     drag: [
       { n: 4, item: 'estrelas', visual: 'star', code: 'EI03ET07' },
