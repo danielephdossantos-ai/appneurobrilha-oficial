@@ -24,7 +24,8 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
         { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
       ] },
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba?',
+      speech: 'Qual é a primeira sílaba de CASA?',
+      elements: [{ id: 'ref-casa', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
     { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'BOLO. Escolha a imagem correta!',
@@ -111,22 +112,11 @@ export const LessonPlayer: React.FC = () => {
   const getStepSpeech = (step: any) => {
     let text = step.speech;
     
-    // Add elements text if they exist and aren't already in speech
-    if (step.elements) {
-      const elementsText = step.elements
-        .filter((el: any) => el.type === 'text')
-        .map((el: any) => el.content)
-        .join('. ');
-      
-      if (elementsText && !text.includes(elementsText)) {
-        text += '. ' + elementsText;
-      }
-    }
-
-    // Add options if it's an interaction
+    // Add options if it's an interaction, using syllabic method (no spelling letter by letter)
     if (step.type === 'interaction' && step.interaction?.options) {
       const options = step.interaction.options;
       if (options.length > 0) {
+        // Use "..." for natural pauses between syllables or words
         const optionsText = options.slice(0, -1).join('... ') + (options.length > 1 ? '... ou ... ' : '') + options[options.length - 1];
         text += '. ' + optionsText + '?';
       }
