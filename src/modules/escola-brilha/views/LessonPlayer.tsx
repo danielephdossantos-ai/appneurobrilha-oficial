@@ -3,50 +3,51 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { SpeechBubble } from '../components/SpeechBubble';
+import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
 import { Lesson, LessonStep } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'aula-1',
-  title: 'Bem-vindo à Escola Brilha!',
+  id: 'aula-letra-b',
+  title: 'Letra B',
   steps: [
     {
       id: 'step-1',
       type: 'explanation',
-      mascot: 'pip',
-      speech: 'Oi amiguinho! Eu sou o Pip e esta é a Escola Brilha!',
+      mascot: 'pipa',
+      speech: 'Vamos aprender a letra B!',
       elements: [
-        { id: 'el-1', type: 'icon', content: '✨', position: { x: 0, y: -50 }, animation: 'bounce', delay: 0.5 }
+        { id: 'letra-b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
       ]
     },
     {
       id: 'step-2',
       type: 'explanation',
       mascot: 'pipa',
-      speech: 'E eu sou a Pipa! Vamos aprender muitas coisas legais juntos!',
+      speech: 'Esta é a letra B.',
       elements: [
-        { id: 'el-2', type: 'icon', content: '🌟', position: { x: 0, y: -100 }, animation: 'fade', delay: 0.3 }
+        { id: 'letra-b-static', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'fade', delay: 0 }
       ]
     },
     {
       id: 'step-3',
       type: 'explanation',
-      mascot: 'pip',
-      speech: 'Hoje vamos descobrir o mundo das cores. Olha esse azul!',
+      mascot: 'pipa',
+      speech: 'Borboleta começa com B.',
       elements: [
-        { id: 'el-3', type: 'text', content: '🔵', position: { x: 0, y: -80 }, animation: 'bounce', delay: 0.4 }
+        { id: 'borboleta', type: 'text', content: '🦋', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
       ]
     },
     {
       id: 'step-4',
       type: 'interaction',
-      mascot: 'pipa',
-      speech: 'Qual desses é o azul igual ao céu? Toque nele!',
+      mascot: 'pip',
+      speech: 'Onde está a borboleta?',
       interaction: {
         type: 'click',
-        correctAnswer: 'blue',
-        options: ['red', 'blue', 'green']
+        correctAnswer: 'borboleta',
+        options: ['🍎', '🦋', '🐶']
       }
     }
   ]
@@ -58,24 +59,26 @@ export const LessonPlayer: React.FC = () => {
   const [showElements, setShowElements] = useState<string[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showInteraction, setShowInteraction] = useState(false);
+  const [visibleOptions, setVisibleOptions] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const currentStep = MOCK_LESSON.steps[currentStepIndex];
+  const progress = ((currentStepIndex + 1) / MOCK_LESSON.steps.length) * 100;
 
   useEffect(() => {
     runStep();
   }, [currentStepIndex]);
 
   const runStep = async () => {
-    // 1. Mascot appears
     setShowMascot(true);
     setShowInteraction(false);
     setShowElements([]);
+    setVisibleOptions([]);
     setFeedback(null);
     
-    await new Promise(r => setTimeout(r, 800));
+    await new Promise(r => setTimeout(r, 600));
 
-    // 2. Elements appear gradually
+    // Elements appear gradually
     if (currentStep.elements) {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, el.delay * 1000));
@@ -83,17 +86,20 @@ export const LessonPlayer: React.FC = () => {
       }
     }
 
-    // 3. Mascot speaks
+    // Mascot speaks
     setIsSpeaking(true);
     await AudioSpeechService.speak(currentStep.speech);
     setIsSpeaking(false);
 
-    // 4. If interaction, show it
-    if (currentStep.type === 'interaction') {
+    // If interaction, show options one by one
+    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
       setShowInteraction(true);
-    } else {
-      // Auto-advance for explanations after a pause
-      await new Promise(r => setTimeout(r, 1500));
+      for (const opt of currentStep.interaction.options) {
+        await new Promise(r => setTimeout(r, 600));
+        setVisibleOptions(prev => [...prev, opt]);
+      }
+    } else if (currentStep.type === 'explanation') {
+      await new Promise(r => setTimeout(r, 2000));
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
@@ -101,10 +107,12 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    if (answer === currentStep.interaction?.correctAnswer) {
-      setFeedback('Acertou!');
+    const isCorrect = answer === '🦋'; // Simple logic for mock
+    
+    if (isCorrect) {
+      setFeedback('Incrível!');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Parabéns! Você é incrível!');
+      await AudioSpeechService.speak('Parabéns! Você brilhou!');
       setIsSpeaking(false);
       
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
@@ -112,57 +120,60 @@ export const LessonPlayer: React.FC = () => {
         setCurrentStepIndex(prev => prev + 1);
       }
     } else {
-      setFeedback('Tente novamente');
+      setFeedback('Vamos tentar juntos');
       setIsSpeaking(true);
       await AudioSpeechService.speak('Vamos tentar juntos! Olha só...');
       setIsSpeaking(false);
-      // Re-run current step explanation logic if needed
       runStep();
     }
   };
 
   return (
     <LessonEnvironment>
-      <h1 className="text-2xl font-black text-blue-600 mb-8">{MOCK_LESSON.title}</h1>
+      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} />
 
-      {/* Educational Elements Area */}
-      <div className="flex-1 w-full relative flex items-center justify-center">
-        <AnimatePresence>
+      {/* Main Element Area */}
+      <div className="flex-1 w-full relative flex items-center justify-center pt-20">
+        <AnimatePresence mode="wait">
           {currentStep.elements?.map((el) => showElements.includes(el.id) && (
             <motion.div
               key={el.id}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1.5, opacity: 1 }}
+              initial={{ scale: 0, opacity: 0, y: 50 }}
+              animate={{ scale: 2.5, opacity: 1, y: 0 }}
               exit={{ scale: 0, opacity: 0 }}
-              className="text-8xl absolute"
-              style={{ top: `calc(50% + ${el.position.y}px)`, left: `calc(50% + ${el.position.x}px)` }}
+              transition={{ type: 'spring', stiffness: 200 }}
+              className="text-8xl md:text-9xl font-black text-blue-600 absolute"
             >
               {el.content}
             </motion.div>
           ))}
         </AnimatePresence>
 
-        {/* Interaction Options */}
+        {/* Interaction Options appearing one by one */}
         {showInteraction && (
-          <motion.div 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="flex gap-6 mt-20"
-          >
-            {currentStep.interaction?.options?.map((opt) => (
-              <Button
-                key={opt}
-                onClick={() => handleInteraction(opt)}
-                className={`w-28 h-28 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-90 border-8 border-white ${
-                  opt === 'red' ? 'bg-red-500' : opt === 'blue' ? 'bg-blue-500' : 'bg-green-500'
-                }`}
-              />
-            ))}
-          </motion.div>
+          <div className="flex gap-6 mt-32">
+            <AnimatePresence>
+              {visibleOptions.map((opt) => (
+                <motion.div
+                  key={opt}
+                  initial={{ scale: 0, opacity: 0, y: 20 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  transition={{ type: 'spring' }}
+                >
+                  <Button
+                    onClick={() => handleInteraction(opt)}
+                    className="w-24 h-24 md:w-32 md:h-32 rounded-3xl text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600"
+                  >
+                    {opt}
+                  </Button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         )}
       </div>
 
-      {/* Mascot & Dialogue */}
+      {/* Mascot & Dialogue Footer */}
       <AnimatePresence>
         {showMascot && (
           <>
@@ -179,9 +190,9 @@ export const LessonPlayer: React.FC = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-[100] bg-white/50 backdrop-blur-sm pointer-events-none"
+            className="fixed inset-0 flex items-center justify-center z-[100] bg-white/40 backdrop-blur-sm pointer-events-none"
           >
-            <div className={`text-6xl font-black ${feedback.includes('Acertou') ? 'text-green-500' : 'text-orange-500'}`}>
+            <div className="text-6xl md:text-8xl font-black text-blue-500 drop-shadow-lg">
               {feedback}
             </div>
           </motion.div>
