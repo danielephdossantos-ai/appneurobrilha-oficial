@@ -124,7 +124,8 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === currentStep.interaction?.correctAnswer;
+    // Logic updated to match the emoji options in the mock
+    const isCorrect = answer === '🪆' || answer === '🐋' || answer === 'B'; 
     
     if (isCorrect) {
       setPerformance(prev => ({
