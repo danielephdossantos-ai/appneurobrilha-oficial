@@ -10,15 +10,26 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const categories = [
     {
       id: 'portugues',
-      title: 'Linguagem',
+      title: 'Educação Infantil',
+      subtitle: 'Linguagem e Sons',
       icon: BookOpen,
       color: 'bg-orange-400',
       field: 'Escuta, Fala e Pensamento',
       method: 'Consciência Fonológica'
     },
     {
+      id: 'portugues_1ano',
+      title: '1º Ano Alfabetização',
+      subtitle: 'Sílabas e Letras',
+      icon: BookOpen,
+      color: 'bg-emerald-400',
+      field: 'Língua Portuguesa',
+      method: 'Método Fônico'
+    },
+    {
       id: 'matematica',
-      title: 'Matemática',
+      title: 'Matemática Kids',
+      subtitle: 'Números e Quantidades',
       icon: Calculator,
       color: 'bg-blue-400',
       field: 'Espaços e Quantidades',
@@ -60,7 +71,8 @@ export const EscolaBrilhaDashboard: React.FC = () => {
               <div className={`${cat.color} w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                 <cat.icon className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-3xl font-black text-gray-800 mb-2">{cat.title}</h2>
+              <h2 className="text-3xl font-black text-gray-800 mb-1">{cat.title}</h2>
+              <p className="text-sm font-bold text-gray-400 mb-2 uppercase tracking-wider">{cat.subtitle}</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-gray-500 font-bold">
                   <Brain className="w-4 h-4" />
