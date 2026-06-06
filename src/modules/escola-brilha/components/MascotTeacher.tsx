@@ -17,21 +17,31 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
   
   return (
     <motion.div 
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      className="fixed bottom-10 left-10 z-50 pointer-events-none"
-      style={{ height: '35vh' }}
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="fixed bottom-0 right-0 z-50 pointer-events-none flex gap-4 pr-10"
+      style={{ height: '25vh' }}
     >
-      <div className="relative w-full h-full flex flex-col items-center justify-end">
-        {/* Simplified Mascot Representation - To be replaced with actual SVG/Images */}
-        <motion.div
-          animate={isSpeaking ? {
-            scale: [1, 1.02, 1],
-            rotate: [0, 1, -1, 0]
-          } : {}}
-          transition={{ repeat: Infinity, duration: 0.5 }}
-          className="w-32 h-44 relative"
-        >
+      <div className="flex items-end gap-2">
+        <MascotImage type="pipa" isSpeaking={isSpeaking && type === 'pipa'} />
+        <MascotImage type="pip" isSpeaking={isSpeaking && type === 'pip'} />
+      </div>
+    </motion.div>
+  );
+};
+
+const MascotImage: React.FC<{ type: 'pip' | 'pipa', isSpeaking: boolean }> = ({ type, isSpeaking }) => {
+  const mascotColor = type === 'pip' ? '#38BDF8' : '#F472B6';
+  return (
+    <div className="relative flex flex-col items-center justify-end h-full">
+      <motion.div
+        animate={isSpeaking ? {
+          y: [0, -10, 0],
+          scale: [1, 1.05, 1]
+        } : {}}
+        transition={{ repeat: Infinity, duration: 0.6 }}
+        className="w-24 h-32 md:w-32 md:h-44 relative"
+      >
           {/* Main Body */}
           <div 
             className="w-full h-full rounded-t-full relative shadow-lg"
@@ -58,6 +68,5 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({
           </div>
         </motion.div>
       </div>
-    </motion.div>
   );
 };

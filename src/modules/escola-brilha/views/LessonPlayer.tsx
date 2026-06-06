@@ -310,29 +310,31 @@ export const LessonPlayer: React.FC = () => {
     <LessonEnvironment>
       <LessonHeader progress={progress} missionName={currentLesson.title} field={currentLesson.bncc_field} />
 
-      <div className="flex-1 w-full relative flex items-center justify-center pt-20">
-        <AnimatePresence mode="wait">
-          {currentStep.elements?.map((el: any) => showElements.includes(el.id) && (
-            <motion.div
-              key={el.id}
-              initial={{ scale: 0, opacity: 0, y: 50 }}
-              animate={{ 
-                scale: 2, 
-                opacity: 1, 
-                x: el.position.x * 2, 
-                y: (el.position.y * 2) - 100 
-              }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 200 }}
-              className="text-8xl md:text-9xl font-black text-blue-600 absolute"
-            >
-              {el.content}
-            </motion.div>
-          ))}
-        </AnimatePresence>
+      <div className="flex-1 w-full relative flex flex-col items-center justify-center pt-32 pb-40">
+        <div className="flex-1 w-full relative flex items-center justify-center min-h-[300px]">
+          <AnimatePresence mode="wait">
+            {currentStep.elements?.map((el: any) => showElements.includes(el.id) && (
+              <motion.div
+                key={el.id}
+                initial={{ scale: 0, opacity: 0, y: 50 }}
+                animate={{ 
+                  scale: 2, 
+                  opacity: 1, 
+                  x: el.position.x * 2, 
+                  y: el.position.y * 2 
+                }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 200 }}
+                className="text-8xl md:text-9xl font-black text-blue-600 absolute"
+              >
+                {el.content}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
 
         {showInteraction && (
-          <div className="flex gap-6 mt-10">
+          <div className="flex flex-wrap justify-center gap-6 px-4 z-40">
             <AnimatePresence>
               {visibleOptions.map((opt) => (
                 <motion.div
@@ -344,7 +346,7 @@ export const LessonPlayer: React.FC = () => {
                   <Button
                     key={opt}
                     onClick={() => handleInteraction(opt)}
-                    className="min-w-[120px] h-24 md:h-32 px-4 rounded-3xl text-3xl md:text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600 flex items-center justify-center"
+                    className="min-w-[140px] h-24 md:h-32 px-8 rounded-3xl text-3xl md:text-5xl shadow-2xl bg-white border-4 border-blue-200 hover:border-blue-400 hover:scale-110 active:scale-95 transition-all text-blue-600 flex items-center justify-center font-black"
                   >
                     {opt}
                   </Button>
