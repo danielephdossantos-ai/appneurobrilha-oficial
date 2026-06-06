@@ -12,7 +12,7 @@ const MOCK_LESSON: Lesson = {
   id: 'aula-som-b',
   title: 'O Som da Letra B',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP04', // Consciência fonológica e fonêmica (Método Fônico)
+  skill_bncc: 'EF01LP04', 
   steps: [
     {
       id: 'fase-1',
@@ -43,7 +43,7 @@ const MOCK_LESSON: Lesson = {
       showHelp: true,
       interaction: {
         type: 'click',
-        correctAnswer: 'B',
+        correctAnswer: '🪆',
         options: ['🍎', '🪆', '🐶']
       }
     },
@@ -55,7 +55,7 @@ const MOCK_LESSON: Lesson = {
       speech: 'Onde está o /b/ da Baleia?',
       interaction: {
         type: 'click',
-        correctAnswer: 'B',
+        correctAnswer: '🐋',
         options: ['🐱', '🐋', '☀️']
       }
     }
