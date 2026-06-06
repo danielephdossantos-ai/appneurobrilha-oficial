@@ -316,6 +316,7 @@ function Escola() {
 
       if (dbSkills && dbSkills.length > 0) {
         const skill = dbSkills[0];
+        bncc_code = skill.codigo_bncc;
         const explanation = await pedService.getExplanationByCode(skill.codigo_bncc);
         const dbActivities = await pedService.getActivitiesByCode(skill.codigo_bncc);
         
