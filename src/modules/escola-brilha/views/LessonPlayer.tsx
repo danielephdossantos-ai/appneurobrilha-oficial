@@ -32,7 +32,6 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       interaction: { type: 'click', correctAnswer: '🍰', options: ['🍰', '🚗', '🐶'] } },
     { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'O gato dorme. Quem dorme?',
-      elements: [{ id: 'f', type: 'text', content: 'O GATO DORME', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '🐱', options: ['🐱', '🐶', '🐦'] } }
   ]
 };
