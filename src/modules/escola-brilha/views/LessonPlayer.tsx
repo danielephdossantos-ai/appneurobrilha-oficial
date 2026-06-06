@@ -9,54 +9,46 @@ import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
 
 const MOCK_LESSON: Lesson = {
-  id: 'brincando-com-sons',
-  title: 'Brincando com os Sons',
+  id: 'brincando-com-rimas',
+  title: 'Brincando com Rimas',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF01', // Consciência Fonológica e Onomatopeias (EI03 - 4 a 5 anos)
+  skill_bncc: 'EI03EF02', 
   steps: [
     {
-      id: 'fase-1',
+      id: 'rima-intro',
       phase: 'explanation',
       type: 'explanation',
       mascot: 'pip',
-      speech: 'Olha a abelhinha! Ela faz: ZZZZZZZZZ!',
+      speech: 'Vamos encontrar palavras que combinam?',
       elements: [
-        { id: 'abelha', type: 'text', content: '🐝', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 }
+        { id: 'casa', type: 'text', content: '🏠', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.5 },
+        { id: 'asa', type: 'text', content: '🪽', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.8 }
       ]
     },
     {
-      id: 'fase-2',
+      id: 'rima-demo',
       phase: 'demonstration',
       type: 'demonstration',
-      mascot: 'pipa',
-      speech: 'Faz comigo: ZZZZZZ! É o som da abelha!',
+      mascot: 'pip',
+      speech: 'CASA combina com ASA!',
       elements: [
-        { id: 'abelha-demo', type: 'text', content: '🐝', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 }
+        { id: 'casa-static', type: 'text', content: '🏠', position: { x: -60, y: 0 }, animation: 'fade', delay: 0 },
+        { id: 'asa-static', type: 'text', content: '🪽', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
       ]
     },
     {
-      id: 'fase-3',
-      phase: 'guided_training',
-      type: 'interaction',
-      mascot: 'pip',
-      speech: 'Onde está o amiguinho que faz ZZZZZZ?',
-      showHelp: true,
-      interaction: {
-        type: 'click',
-        correctAnswer: '🐝',
-        options: ['🐶', '🐝', '🐱']
-      }
-    },
-    {
-      id: 'fase-4',
+      id: 'rima-atividade',
       phase: 'practice',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'Muito bem! A abelha faz ZZZZZZ!',
+      speech: 'O que combina com CASA?',
+      elements: [
+        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.3 }
+      ],
       interaction: {
         type: 'click',
-        correctAnswer: '🐝',
-        options: ['🐝', '🍎', '🚗']
+        correctAnswer: '🪽',
+        options: ['⚽', '🪽', '🍎']
       }
     }
   ]
@@ -133,19 +125,17 @@ export const LessonPlayer: React.FC = () => {
         percentage: ((prev.hits + 1) / (prev.hits + prev.misses + 1)) * 100
       }));
 
-      setFeedback('Incrível!');
+      setFeedback('Acertou!');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Parabéns! Você brilhou!');
+      await AudioSpeechService.speak('Isso mesmo! Você brilhou!');
       setIsSpeaking(false);
       
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
         await new Promise(r => setTimeout(r, 1000));
         setCurrentStepIndex(prev => prev + 1);
       } else {
-        // Fase 6: Domínio - Finalizar e registrar
-        const totalTime = (Date.now() - performance.startTime) / 1000;
-        console.log(`Domínio registrado: ${performance.hits} acertos, ${performance.misses} erros, ${totalTime}s`);
-        await AudioSpeechService.speak('Você completou a missão com sucesso!');
+        setFeedback('Missão Cumprida!');
+        await AudioSpeechService.speak('Parabéns! Você completou toda a missão!');
       }
     } else {
       setPerformance(prev => ({
@@ -154,12 +144,11 @@ export const LessonPlayer: React.FC = () => {
         percentage: (prev.hits / (prev.hits + prev.misses + 1)) * 100
       }));
 
-      setFeedback('Vamos tentar juntos');
+      setFeedback('Tente de novo');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Não se preocupe, vamos tentar juntos! Olha só...');
+      await AudioSpeechService.speak('Vamos tentar juntos! Olhe com atenção.');
       setIsSpeaking(false);
       
-      // Fase 2: Demonstração automática em caso de erro
       runStep();
     }
   };
