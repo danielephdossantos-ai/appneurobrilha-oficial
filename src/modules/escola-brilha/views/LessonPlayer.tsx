@@ -82,44 +82,81 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
 };
 
 const MATH_LESSON: Lesson = {
-  id: 'contagem-divertida',
-  title: 'Contagem Divertida',
+  id: 'matematica-1ano',
+  title: 'Matemática Divertida',
   bncc_field: 'espacos_tempos',
-  skill_bncc: 'EI03ET07', 
+  skill_bncc: 'EF01MA06', 
   steps: [
     {
-      id: 'contagem-intro',
-      phase: 'explanation',
-      type: 'explanation',
-      mascot: 'pipa',
-      speech: 'Vamos contar as maçãs juntos? Um... dois... três!',
-      elements: [
-        { id: 'maca-1', type: 'text', content: '🍎', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.4 },
-        { id: 'maca-2', type: 'text', content: '🍎🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.8 },
-        { id: 'maca-3', type: 'text', content: '🍎🍎🍎', position: { x: 60, y: 0 }, animation: 'bounce', delay: 1.2 }
-      ]
-    },
-    {
-      id: 'mais-menos-demo',
-      phase: 'demonstration',
-      type: 'demonstration',
-      mascot: 'pip',
-      speech: 'Veja só! Quatro maçãs é MAIS que duas bananas!',
-      elements: [
-        { id: 'bananas', type: 'text', content: '🍌🍌', position: { x: -60, y: 0 }, animation: 'fade', delay: 0.2 },
-        { id: 'macas-4', type: 'text', content: '🍎🍎🍎🍎', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
-      ]
-    },
-    {
-      id: 'mais-menos-atividade',
+      id: 'contagem-pratica',
       phase: 'practice',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'Qual desses grupos tem MAIS frutinhas?',
+      speech: 'Vamos contar as maçãs? Quantas existem aqui?',
+      elements: [
+        { id: 'macas-3', type: 'text', content: '🍎🍎🍎', position: { x: 0, y: -60 }, animation: 'bounce', delay: 0.2 }
+      ],
       interaction: {
         type: 'click',
-        correctAnswer: '🍎🍎🍎🍎',
-        options: ['🍌🍌', '🍎🍎🍎🍎']
+        correctAnswer: '3',
+        options: ['2', '3', '4']
+      }
+    },
+    {
+      id: 'adicao-demo',
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pip',
+      speech: 'Vamos juntar as frutinhas! Duas maçãs mais uma maçã...',
+      elements: [
+        { id: 'add-1', type: 'text', content: '🍎🍎', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'plus', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
+        { id: 'add-2', type: 'text', content: '🍎', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.6 }
+      ]
+    },
+    {
+      id: 'adicao-resultado',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: 'Qual é o resultado quando juntamos tudo?',
+      elements: [
+        { id: 'result-macas', type: 'text', content: '🍎🍎🍎', position: { x: 0, y: -60 }, animation: 'bounce', delay: 0.2 }
+      ],
+      interaction: {
+        type: 'click',
+        correctAnswer: '3',
+        options: ['1', '2', '3']
+      }
+    },
+    {
+      id: 'subtracao-pratica',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'Tínhamos 4 peixinhos e 1 saiu nadando. Quantos sobraram?',
+      elements: [
+        { id: 'peixes-ref', type: 'text', content: '🐟🐟🐟', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+      ],
+      interaction: {
+        type: 'click',
+        correctAnswer: '3',
+        options: ['2', '3', '4']
+      }
+    },
+    {
+      id: 'sequencia-logica',
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: 'Olha a sequência: 1, 2, 3... Qual número vem depois?',
+      elements: [
+        { id: 'seq', type: 'text', content: '1, 2, 3, ?', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+      ],
+      interaction: {
+        type: 'click',
+        correctAnswer: '4',
+        options: ['4', '5', '6']
       }
     }
   ]
