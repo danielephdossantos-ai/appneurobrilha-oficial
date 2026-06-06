@@ -5,10 +5,11 @@ import { MascotTeacher } from '../components/MascotTeacher';
 import { SpeechBubble } from '../components/SpeechBubble';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
+import { Lesson, LessonPerformance } from '../types/lesson';
 import { Button } from "@/components/ui/button";
+import { useSearch } from '@tanstack/react-router';
 
-const MOCK_LESSON: Lesson = {
+const MATH_LESSON: Lesson = {
   id: 'contagem-divertida',
   title: 'Contagem Divertida',
   bncc_field: 'espacos_tempos',
@@ -48,26 +49,60 @@ const MOCK_LESSON: Lesson = {
         correctAnswer: '🍎🍎🍎🍎',
         options: ['🍌🍌', '🍎🍎🍎🍎']
       }
+    }
+  ]
+};
+
+const LANG_LESSON: Lesson = {
+  id: 'brincando-com-rimas',
+  title: 'Brincando com Rimas',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EI03EF02', 
+  steps: [
+    {
+      id: 'rima-intro',
+      phase: 'explanation',
+      type: 'explanation',
+      mascot: 'pip',
+      speech: 'Olá! Vamos encontrar palavras que terminam com o mesmo som? Isso se chama rima!',
+      elements: [
+        { id: 'casa', type: 'text', content: '🏠', position: { x: -40, y: 0 }, animation: 'bounce', delay: 0.5 },
+        { id: 'asa', type: 'text', content: '🪽', position: { x: 40, y: 0 }, animation: 'bounce', delay: 1.0 }
+      ]
     },
     {
-      id: 'sequencia-atividade',
-      phase: 'challenge',
+      id: 'rima-demo',
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pipa',
+      speech: 'CASA combina com ASA. Elas terminam igualzinho!',
+      elements: [
+        { id: 'casa-txt', type: 'text', content: 'CASA', position: { x: -40, y: -40 }, animation: 'fade', delay: 0.2 },
+        { id: 'asa-txt', type: 'text', content: 'ASA', position: { x: 40, y: -40 }, animation: 'fade', delay: 0.4 }
+      ]
+    },
+    {
+      id: 'rima-pratica',
+      phase: 'practice',
       type: 'interaction',
       mascot: 'pip',
-      speech: 'Uma estrela... duas estrelas... três estrelas... O que vem depois?',
+      speech: 'O que rima com CASA? É a BOLA ou a ASA?',
       elements: [
-        { id: 'seq-ref', type: 'text', content: '⭐ ⭐⭐ ⭐⭐⭐', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.3 }
+        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
       ],
       interaction: {
         type: 'click',
-        correctAnswer: '⭐⭐⭐⭐',
-        options: ['⭐', '⭐⭐⭐⭐', '🎈']
+        correctAnswer: '🪽',
+        options: ['⚽', '🪽']
       }
     }
   ]
 };
 
 export const LessonPlayer: React.FC = () => {
+  const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
+  const currentLesson = search.category === 'matematica' ? MATH_LESSON : LANG_LESSON;
+  
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showMascot, setShowMascot] = useState(false);
   const [showElements, setShowElements] = useState<string[]>([]);
@@ -76,7 +111,6 @@ export const LessonPlayer: React.FC = () => {
   const [visibleOptions, setVisibleOptions] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string | null>(null);
   
-  // Performance Tracking (Fase 6: Domínio)
   const [performance, setPerformance] = useState<LessonPerformance>({
     hits: 0,
     misses: 0,
@@ -84,12 +118,12 @@ export const LessonPlayer: React.FC = () => {
     percentage: 0
   });
 
-  const currentStep = MOCK_LESSON.steps[currentStepIndex];
-  const progress = ((currentStepIndex + 1) / MOCK_LESSON.steps.length) * 100;
+  const currentStep = currentLesson.steps[currentStepIndex];
+  const progress = ((currentStepIndex + 1) / currentLesson.steps.length) * 100;
 
   useEffect(() => {
     runStep();
-  }, [currentStepIndex]);
+  }, [currentStepIndex, currentLesson.id]);
 
   const runStep = async () => {
     setShowMascot(true);
@@ -100,20 +134,17 @@ export const LessonPlayer: React.FC = () => {
     
     await new Promise(r => setTimeout(r, 600));
 
-    // Elements appear gradually
     if (currentStep.elements) {
       for (const el of currentStep.elements) {
-        await new Promise(r => setTimeout(r, el.delay * 1000));
+        await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
       }
     }
 
-    // Mascot speaks
     setIsSpeaking(true);
     await AudioSpeechService.speak(currentStep.speech);
     setIsSpeaking(false);
 
-    // If interaction, show options one by one
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
       setShowInteraction(true);
       for (const opt of currentStep.interaction.options) {
@@ -122,7 +153,7 @@ export const LessonPlayer: React.FC = () => {
       }
     } else if (currentStep.type === 'explanation') {
       await new Promise(r => setTimeout(r, 2000));
-      if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
+      if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
     }
@@ -143,7 +174,7 @@ export const LessonPlayer: React.FC = () => {
       await AudioSpeechService.speak('Isso mesmo! Você brilhou!');
       setIsSpeaking(false);
       
-      if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
+      if (currentStepIndex < currentLesson.steps.length - 1) {
         await new Promise(r => setTimeout(r, 1000));
         setCurrentStepIndex(prev => prev + 1);
       } else {
@@ -168,12 +199,11 @@ export const LessonPlayer: React.FC = () => {
 
   return (
     <LessonEnvironment>
-      <LessonHeader progress={progress} missionName={MOCK_LESSON.title} field={MOCK_LESSON.bncc_field} />
+      <LessonHeader progress={progress} missionName={currentLesson.title} field={currentLesson.bncc_field} />
 
-      {/* Main Element Area */}
       <div className="flex-1 w-full relative flex items-center justify-center pt-20">
         <AnimatePresence mode="wait">
-          {currentStep.elements?.map((el) => showElements.includes(el.id) && (
+          {currentStep.elements?.map((el: any) => showElements.includes(el.id) && (
             <motion.div
               key={el.id}
               initial={{ scale: 0, opacity: 0, y: 50 }}
@@ -187,7 +217,6 @@ export const LessonPlayer: React.FC = () => {
           ))}
         </AnimatePresence>
 
-        {/* Interaction Options appearing one by one */}
         {showInteraction && (
           <div className="flex gap-6 mt-32">
             <AnimatePresence>
@@ -198,13 +227,13 @@ export const LessonPlayer: React.FC = () => {
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   transition={{ type: 'spring' }}
                 >
-              <Button
-                key={opt}
-                onClick={() => handleInteraction(opt)}
-                className="min-w-[120px] h-24 md:h-32 px-4 rounded-3xl text-3xl md:text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600 flex items-center justify-center"
-              >
-                {opt}
-              </Button>
+                  <Button
+                    key={opt}
+                    onClick={() => handleInteraction(opt)}
+                    className="min-w-[120px] h-24 md:h-32 px-4 rounded-3xl text-3xl md:text-5xl shadow-2xl bg-white border-4 border-blue-100 hover:scale-110 active:scale-90 transition-all text-blue-600 flex items-center justify-center"
+                  >
+                    {opt}
+                  </Button>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -212,7 +241,6 @@ export const LessonPlayer: React.FC = () => {
         )}
       </div>
 
-      {/* Mascot & Dialogue Footer */}
       <AnimatePresence>
         {showMascot && (
           <>
@@ -222,7 +250,6 @@ export const LessonPlayer: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Feedback Overlay */}
       <AnimatePresence>
         {feedback && (
           <motion.div
