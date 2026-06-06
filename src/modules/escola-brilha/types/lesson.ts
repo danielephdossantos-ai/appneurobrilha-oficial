@@ -54,6 +54,7 @@ export interface LessonPerformance {
 export interface Lesson {
   id: string;
   title: string;
+  bncc_field?: BNCC_Field;
   skill_bncc?: string;
   steps: LessonStep[];
 }
