@@ -329,7 +329,7 @@ function Escola() {
           setAula({
             materia: materiaId,
             grade: selectedGrade,
-            skill_code: skill.codigo_bncc,
+            skill_code: bncc_code,
             topic: skill.titulo,
             objetivo: skill.objetivo,
             etapa1_explicação: explanation.texto_professor,
