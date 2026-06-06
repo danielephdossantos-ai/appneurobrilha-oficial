@@ -4,9 +4,18 @@ import { motion } from 'framer-motion';
 interface LessonHeaderProps {
   progress: number;
   missionName: string;
+  field?: string;
 }
 
-export const LessonHeader: React.FC<LessonHeaderProps> = ({ progress, missionName }) => {
+const FIELD_LABELS: Record<string, string> = {
+  escuta_fala: 'Escuta, Fala, Pensamento e Imaginação',
+  espacos_tempos: 'Espaços, Tempos e Relações',
+  corpo_gestos: 'Corpo, Gestos e Movimentos',
+  tracos_sons: 'Traços, Sons, Cores e Formas',
+  eu_outro_nos: 'O Eu, o Outro e o Nós',
+};
+
+export const LessonHeader: React.FC<LessonHeaderProps> = ({ progress, missionName, field }) => {
   return (
     <div className="fixed top-0 left-0 w-full p-4 z-50 bg-white/80 backdrop-blur-sm border-b-2 border-blue-100">
       <div className="max-w-xl mx-auto flex flex-col gap-2">
