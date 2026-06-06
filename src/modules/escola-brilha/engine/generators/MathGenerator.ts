@@ -97,11 +97,13 @@ export class MathGenerator extends BaseGenerator {
       }
 
       if (type === 'ei-drag-quantity') {
-        const item = EARLY_CHILDHOOD.matematica.drag[0]; // 4 stars
+        const item = this.pickRandom(EARLY_CHILDHOOD.matematica.drag); 
         return {
-          q: `Coloque ${item.n} estrelas na caixa`,
+          q: `Coloque ${item.n} ${item.item} na caixa`,
           targetCount: item.n,
+          numero_a: item.n,
           symbol: item.visual,
+          visual: item.visual,
           miniGameType: "quantity",
           bncc_code: item.code
         };
