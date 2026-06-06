@@ -50,14 +50,9 @@ const LiveMascot = ({ emotion = 'happy', size = 'md', className, message, showBa
   
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // No computador, usamos a versão clássica. No celular, se houver hiperfoco, usamos a skin.
+  // Mantemos a consistência entre dispositivos para evitar confusão.
   const getMascotImage = () => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const firstHyperfocus = activeChild?.hyperfocus_list?.[0];
-    
-    if (isMobile && firstHyperfocus && PIP_SKINS[firstHyperfocus]) {
-      return PIP_SKINS[firstHyperfocus];
-    }
+    // Se a criança for menina, podemos usar Pipa (futuro), por enquanto apenas Pip clássico.
     return pipMascot;
   };
 
