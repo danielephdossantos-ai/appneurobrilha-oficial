@@ -242,8 +242,14 @@ export const LessonPlayer: React.FC = () => {
             <div className="w-full flex flex-wrap items-center justify-center gap-3 pt-2">
               <AnimatePresence>
                 {visibleOptions.map((opt, i) => {
-                  const palette = ['bg-blue-500', 'bg-emerald-500', 'bg-yellow-400', 'bg-pink-500'];
+                  const palette = [
+                    'bg-blue-500 border-blue-700',
+                    'bg-emerald-500 border-emerald-700',
+                    'bg-yellow-400 border-yellow-600',
+                    'bg-pink-500 border-pink-700',
+                  ];
                   const color = palette[i % palette.length];
+                  const isEmoji = /\p{Emoji}/u.test(opt);
                   return (
                     <motion.button
                       key={opt}
@@ -251,9 +257,9 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${color} text-white min-w-[72px] h-20 px-5 rounded-2xl text-3xl sm:text-4xl font-black shadow-lg border-b-4 border-black/10 hover:scale-105 active:scale-95 transition`}
+                      className={`${color} text-white w-20 h-20 sm:w-24 sm:h-24 rounded-full text-3xl sm:text-4xl font-black shadow-xl border-b-4 hover:scale-110 active:scale-95 transition flex items-center justify-center`}
                     >
-                      {opt}
+                      <span className={isEmoji ? 'text-4xl sm:text-5xl drop-shadow' : ''}>{opt}</span>
                     </motion.button>
                   );
                 })}
