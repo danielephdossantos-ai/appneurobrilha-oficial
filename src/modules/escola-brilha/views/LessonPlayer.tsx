@@ -123,9 +123,15 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === '🦋'; // Simple logic for mock
+    const isCorrect = answer === currentStep.interaction?.correctAnswer;
     
     if (isCorrect) {
+      setPerformance(prev => ({
+        ...prev,
+        hits: prev.hits + 1,
+        percentage: ((prev.hits + 1) / (prev.hits + prev.misses + 1)) * 100
+      }));
+
       setFeedback('Incrível!');
       setIsSpeaking(true);
       await AudioSpeechService.speak('Parabéns! Você brilhou!');
@@ -134,12 +140,25 @@ export const LessonPlayer: React.FC = () => {
       if (currentStepIndex < MOCK_LESSON.steps.length - 1) {
         await new Promise(r => setTimeout(r, 1000));
         setCurrentStepIndex(prev => prev + 1);
+      } else {
+        // Fase 6: Domínio - Finalizar e registrar
+        const totalTime = (Date.now() - performance.startTime) / 1000;
+        console.log(`Domínio registrado: ${performance.hits} acertos, ${performance.misses} erros, ${totalTime}s`);
+        await AudioSpeechService.speak('Você completou a missão com sucesso!');
       }
     } else {
+      setPerformance(prev => ({
+        ...prev,
+        misses: prev.misses + 1,
+        percentage: (prev.hits / (prev.hits + prev.misses + 1)) * 100
+      }));
+
       setFeedback('Vamos tentar juntos');
       setIsSpeaking(true);
-      await AudioSpeechService.speak('Vamos tentar juntos! Olha só...');
+      await AudioSpeechService.speak('Não se preocupe, vamos tentar juntos! Olha só...');
       setIsSpeaking(false);
+      
+      // Fase 2: Demonstração automática em caso de erro
       runStep();
     }
   };
