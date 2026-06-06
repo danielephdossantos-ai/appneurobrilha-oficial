@@ -279,7 +279,12 @@ export const LessonPlayer: React.FC = () => {
             <motion.div
               key={el.id}
               initial={{ scale: 0, opacity: 0, y: 50 }}
-              animate={{ scale: 2.5, opacity: 1, y: 0 }}
+              animate={{ 
+                scale: 2.5, 
+                opacity: 1, 
+                x: el.position.x * 2, 
+                y: el.position.y * 2 
+              }}
               exit={{ scale: 0, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 200 }}
               className="text-8xl md:text-9xl font-black text-blue-600 absolute"
