@@ -96,6 +96,7 @@ export const LessonPlayer: React.FC = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [highlightedElementId, setHighlightedElementId] = useState<string | null>(null);
   const [visibleOptions, setVisibleOptions] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<{ kind: 'ok' | 'err' | 'done'; msg: string } | null>(null);
   const [, setPerformance] = useState<LessonPerformance>({ hits: 0, misses: 0, startTime: Date.now(), percentage: 0 });
@@ -143,26 +144,35 @@ export const LessonPlayer: React.FC = () => {
     setShowElements([]);
     setVisibleOptions([]);
     setFeedback(null);
+    setHighlightedElementId(null);
 
     await new Promise(r => setTimeout(r, 300));
 
+    // Show elements and speak them if they are part of a demonstration/explanation
     if (currentStep.elements) {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
+        
+        // If it's a demonstration or explanation, highlight and speak as it appears
+        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+          setHighlightedElementId(el.id);
+          setIsSpeaking(true);
+          await AudioSpeechService.speak(el.content);
+          setIsSpeaking(false);
+          setHighlightedElementId(null);
+          await new Promise(r => setTimeout(r, 400)); // Pause between syllables
+        }
       }
     }
 
-    // Construct speech with instruction and options
+    // After elements appear, speak the main instruction and options
     const fullSpeech = getStepSpeech(currentStep);
     
     setIsSpeaking(true);
-    // Start speaking
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     
-    // If it's an interaction, start showing options with a slight delay so they synchronize better
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      // Short delay after instruction starts
       await new Promise(r => setTimeout(r, 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
@@ -268,7 +278,11 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
-                      className="text-5xl sm:text-6xl font-black text-blue-600 px-2"
+                      className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${
+                        highlightedElementId === el.id 
+                          ? 'text-yellow-400 scale-125 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
+                          : 'text-blue-600 scale-100'
+                      }`}
                     >
                       {el.content}
                     </motion.div>
