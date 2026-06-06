@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { useSearch } from '@tanstack/react-router';
 
 const PORTUGUES_1ANO_LESSON: Lesson = {
-  id: 'silabas-divertidas',
-  title: 'Brincando com Sílabas',
+  id: 'leitura-primeiros-passos',
+  title: 'Primeiros Passos na Leitura',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP05', 
+  skill_bncc: 'EF01LP06', 
   steps: [
     {
       id: 'silaba-intro',
@@ -37,33 +37,45 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       ]
     },
     {
-      id: 'primeira-silaba',
+      id: 'leitura-guiada',
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pip',
+      speech: 'Vamos ler juntos? BO... LO... BOLO!',
+      elements: [
+        { id: 'bo', type: 'text', content: 'BO', position: { x: -40, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: 'lo', type: 'text', content: 'LO', position: { x: 40, y: 0 }, animation: 'bounce', delay: 0.6 },
+        { id: 'bolo', type: 'text', content: 'BOLO', position: { x: 0, y: 50 }, animation: 'pop', delay: 1.2 }
+      ]
+    },
+    {
+      id: 'associacao-bolo',
       phase: 'practice',
       type: 'interaction',
       mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
+      speech: 'BOLO. Escolha a imagem correta!',
       elements: [
-        { id: 'casa-ref', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+        { id: 'word-bolo', type: 'text', content: 'BOLO', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
       ],
       interaction: {
         type: 'click',
-        correctAnswer: 'CA',
-        options: ['CA', 'BO', 'PA']
+        correctAnswer: '🍰',
+        options: ['🍰', '🚗', '🐶']
       }
     },
     {
-      id: 'ultima-silaba',
+      id: 'compreensao-gato',
       phase: 'practice',
       type: 'interaction',
       mascot: 'pip',
-      speech: 'E qual é a última sílaba de CASA?',
+      speech: 'O gato dorme. Quem dorme?',
       elements: [
-        { id: 'casa-ref-2', type: 'text', content: '🏠', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
+        { id: 'frase-gato', type: 'text', content: 'O GATO DORME', position: { x: 0, y: -60 }, animation: 'pop', delay: 0.2 }
       ],
       interaction: {
         type: 'click',
-        correctAnswer: 'SA',
-        options: ['SA', 'TO', 'LA']
+        correctAnswer: '🐱',
+        options: ['🐱', '🐶', '🐦']
       }
     }
   ]
