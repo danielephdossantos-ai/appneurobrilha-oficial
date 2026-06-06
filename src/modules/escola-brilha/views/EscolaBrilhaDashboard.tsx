@@ -51,10 +51,13 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <motion.div
               key={cat.id}
               whileHover={{ y: -10 }}
-              className="bg-white rounded-[3rem] p-8 shadow-2xl border-b-8 border-gray-100 cursor-pointer"
-              onClick={() => navigate({ to: '/escola-brilha/aula' })}
+              className="bg-white rounded-[3rem] p-8 shadow-2xl border-b-8 border-gray-100 cursor-pointer group"
+              onClick={() => navigate({ 
+                to: '/escola-brilha/aula',
+                search: { category: cat.id }
+              })}
             >
-              <div className={`${cat.color} w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-lg`}>
+              <div className={`${cat.color} w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                 <cat.icon className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-black text-gray-800 mb-2">{cat.title}</h2>
@@ -68,7 +71,16 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                 </div>
               </div>
               
-              <Button className="w-full mt-8 h-16 rounded-2xl text-xl font-black bg-blue-500 hover:bg-blue-600 shadow-lg">
+              <Button 
+                className="w-full mt-8 h-16 rounded-2xl text-xl font-black bg-blue-500 hover:bg-blue-600 shadow-lg"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate({ 
+                    to: '/escola-brilha/aula',
+                    search: { category: cat.id }
+                  });
+                }}
+              >
                 Brincar e Aprender
               </Button>
             </motion.div>
