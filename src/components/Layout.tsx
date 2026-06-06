@@ -45,7 +45,7 @@ const navCrianca = [
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
-  { to: "/escola-brilha", label: "Escola Brilha", icon: GraduationCap },
+  
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
@@ -67,7 +67,6 @@ const navigationSequence = [
   "/",
   "/missao-prova",
   "/historias",
-  "/escola-brilha",
   "/reforco-brilha",
   "/neuro-treino",
   "/brilha-vida",
@@ -312,7 +311,7 @@ function MobileNav({ path }: { path: string }) {
   const navigate = useNavigate();
   const items = [
     { to: "/", icon: Home, label: "Início" },
-    { to: "/escola-brilha", icon: GraduationCap, label: "Escola" },
+    { to: "/neuro-treino", icon: Brain, label: "Treino" },
     { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
   ];
   return (

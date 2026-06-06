@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
-import { PedagogyEngine } from "@/modules/escola-brilha/engine/pedagogy-core";
+// Pedagogical engine logic removed for rebuild
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useHiperfoco } from "@/context/HiperfocoContext";
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/jornada-365")({
 
 const CATEGORY_ROUTES: Record<string, string> = {
   "neuro-treino": "/neuro-treino",
-  "escola-brilha": "/escola-brilha",
+  
 };
 
 type WorldKey =
@@ -227,7 +227,7 @@ function Jornada() {
   }
 
   const currentDay = journeyState?.current_day || 1;
-  const blocks = PedagogyEngine.generateDailyRoutine(currentDay, activeChild, activities);
+  const blocks: any[] = []; // PedagogyEngine.generateDailyRoutine(currentDay, activeChild, activities);
   const progress = Math.min(Math.round(((currentDay - 1) / 365) * 100), 100);
 
   const handleStart = (block: (typeof blocks)[number]) => {
@@ -312,9 +312,7 @@ function Jornada() {
                         "h-10 w-10 rounded-xl grid place-items-center shrink-0",
                         b.category === "neuro-treino"
                           ? "bg-coral/20 text-coral"
-                          : b.category === "escola-brilha"
-                            ? "bg-sky/20 text-sky"
-                            : "bg-success/20 text-success"
+                          : "bg-success/20 text-success"
                       )}
                     >
                       {b.status === "done" ? (

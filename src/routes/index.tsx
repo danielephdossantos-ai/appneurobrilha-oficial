@@ -49,15 +49,6 @@ function Index() {
 
   const destinos: Destino[] = [
     {
-      to: "/escola-brilha",
-      title: "Escola Brilha",
-      subtitle: "Academia do Conhecimento",
-      gradient: "from-[#4C9EFF] to-[#1E5FCC]",
-      glow: "rgba(76,158,255,0.55)",
-      icon: School,
-      building: <SchoolBuilding />,
-    },
-    {
       to: "/neuro-treino",
       title: "Neuro Treino",
       subtitle: "Centro Cerebral",
@@ -310,19 +301,6 @@ function Index() {
 
 /* ---------- CONSTRUÇÕES SVG ---------- */
 
-function SchoolBuilding() {
-  return (
-    <svg viewBox="0 0 160 140" className="w-full h-full drop-shadow-2xl">
-      <polygon points="80,15 20,55 140,55" fill="#FFC93C" stroke="#0d1f55" strokeWidth="3" />
-      <rect x="30" y="55" width="100" height="70" fill="#fff" stroke="#0d1f55" strokeWidth="3" />
-      <rect x="70" y="80" width="20" height="45" fill="#FF8A4C" stroke="#0d1f55" strokeWidth="2.5" />
-      <rect x="40" y="65" width="18" height="18" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2" />
-      <rect x="102" y="65" width="18" height="18" fill="#4C9EFF" stroke="#0d1f55" strokeWidth="2" />
-      <rect x="76" y="0" width="8" height="20" fill="#0d1f55" />
-      <polygon points="84,2 110,9 84,16" fill="#FF6FA8" stroke="#0d1f55" strokeWidth="1.5" />
-    </svg>
-  );
-}
 
 function BrainTower() {
   return (
