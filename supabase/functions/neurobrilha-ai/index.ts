@@ -83,11 +83,24 @@ serve(async (req) => {
       const childNiveis = child.niveis || {}
       const currentLevel = childNiveis[subject] || 2
       const nivelDesc = {
-        1: "Concreto total: use metáforas físicas, evite abstrações. Foco em imagens e sons.",
+        1: "Concreto total: use metáforas físicas (maçãs, bolas), evite abstrações. Foco em imagens, onomatopeias e sons.",
         2: "Visual guiado: use frases curtas e suporte visual constante (sem emojis).",
         3: "Semi-abstrato: pode usar símbolos e textos, mas mantenha a clareza e alguns apoios visuais.",
         4: "Abstrato: nível padrão da BNCC, mas ainda com linguagem clara e organizada."
       }[currentLevel as 1 | 2 | 3 | 4] || "Linguagem adaptada e clara."
+
+      let tecnicasContext = "";
+      if (bncc_code) {
+        const { data: techs } = await supabase
+          .from('habilidade_tecnica')
+          .select('tecnicas_pedagogicas(nome, descricao)')
+          .eq('codigo_bncc', bncc_code);
+        
+        if (techs && techs.length > 0) {
+          tecnicasContext = "\nTÉCNICAS OBRIGATÓRIAS PARA ESTA HABILIDADE BNCC:\n" + 
+            techs.map((t: any) => `- ${t.tecnicas_pedagogicas.nome}: ${t.tecnicas_pedagogicas.descricao}`).join("\n");
+        }
+      }
 
       const serie = (child.serie || "").toString();
       const isEarlyYears = /infantil|pré|pre|^1º/i.test(serie);
@@ -96,28 +109,14 @@ serve(async (req) => {
       const tierLabel = isEarlyYears ? "Educação Infantil (Pré + 1º)" : isMid ? "Anos Iniciais (2º ao 5º)" : isTeen ? "Anos Finais (6º ao 9º)" : "Geral";
 
       const toneByTier = isEarlyYears
-        ? `TOM: Ultra-acolhedor, infantil, alegre, cheio de entusiasmo. CAIXA ALTA em todas as palavras estruturais. Frases ultra-curtas (máximo 8 palavras). Método fônico (estique a primeira letra: "OOOO-vo"). É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`
+        ? `TOM: Ultra-acolhedor, infantil, alegre, cheio de entusiasmo. CAIXA ALTA em todas as palavras estruturais. Frases ultra-curtas (máximo 8 palavras). Método fônico (estique a primeira letra: "OOOO-vo"). O uso de ONOMATOPEIAS é recomendado (ex: "B faz /BUMP/"). É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`
         : isMid
-        ? `TOM: Amigável e didático. Frases curtas e diretas. Explicações concretas. Mistura caixa baixa com palavras-chave em CAIXA ALTA. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`
-        : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas passo-a-passo. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`;
+        ? `TOM: Amigável e didático. Frases curtas e diretas. Explicações concretas. Mistura caixa baixa com palavras-chave em CAIXA ALTA. Use GAMIFICAÇÃO e REVISÃO ESPAÇADA se possível. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`
+        : `TOM: Respeitoso, direto e objetivo. Linguagem clara, sem infantilização. Explicações estruturadas passo-a-passo. Use METACOGNIÇÃO e SALA DE AULA INVERTIDA. É EXTREMAMENTE PROIBIDO O USO DE EMOJIS. O texto deve ter no máximo 2 linhas na tela.`;
 
-      const metodoBlock = reexplainMethod === "teacch"
-        ? `🧩 MÉTODO TEACCH (Estruturado Visual — ideal para TEA):
-           - Quebre em micro-passos.
-           - Rotina previsível: "PRIMEIRO... DEPOIS...".
-           - Linguagem LITERAL.
-           - É PROIBIDO o uso de emojis.`
-        : reexplainMethod === "multisensorial"
-        ? `🎨 MÉTODO MULTISSENSORIAL (Orton-Gillingham — ideal para Dislexia/TDAH):
-           - Combine sons e gestos.
-           - Estique sons: "MMMM-AAAA".
-           - Peça para desenhar no ar.`
-        : reexplainMethod === "montessori"
-        ? `🌱 MÉTODO MONTESSORI (Concreto/Manipulável — ideal para todos):
-           - Use exemplos do mundo real.
-           - "Imagine 3 maçãs...".
-           - Foco no HIPERFOCO (${child.hiperfoco || "interesse"}).`
-        : `MÉTODO PADRÃO: explicação didática ultra-direta.`;
+      const metodoBlock = reexplainMethod
+        ? `\n⚠️ REEXPLICAÇÃO: Use o método ${reexplainMethod.toUpperCase()} (Fônico, Multissensorial, etc.) para simplificar ainda mais.`
+        : `MÉTODO PADRÃO: ${tecnicasContext || "Explicação didática ultra-direta baseada na BNCC."}`;
 
       const reexplainInstruction = reexplainMethod
         ? `\n\n⚠️ A CRIANÇA APERTOU "NÃO ENTENDI". Reexplique o conteúdo usando o método ${reexplainMethod.toUpperCase()} de forma ainda mais simples.`
