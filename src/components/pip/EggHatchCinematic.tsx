@@ -19,7 +19,7 @@ interface Props {
 const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}`;
 
 export function EggHatchCinematic({ childId, onClose }: Props) {
-  const [phase, setPhase] = useState<'choose' | 'shake' | 'crack' | 'reveal'>('choose');
+  const [phase, setPhase] = useState<'choose' | 'shake' | 'crack' | 'open' | 'reveal'>('choose');
   const [mascot, setMascot] = useState<MascotChoice>('pip');
 
   useEffect(() => {
@@ -28,8 +28,12 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
       return () => clearTimeout(t1);
     }
     if (phase === 'crack') {
-      const t2 = setTimeout(() => setPhase('reveal'), 1800);
+      const t2 = setTimeout(() => setPhase('open'), 1500);
       return () => clearTimeout(t2);
+    }
+    if (phase === 'open') {
+      const t3 = setTimeout(() => setPhase('reveal'), 2500);
+      return () => clearTimeout(t3);
     }
   }, [phase]);
 
@@ -43,6 +47,7 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
 
   const eggImg = mascot === 'pip' ? pipEgg : pipaEgg;
   const hatchImg = mascot === 'pip' ? pipHatching : pipaHatching;
+  const babyImg = mascot === 'pip' ? pipBaby : pipaBaby;
 
   return (
     <motion.div
