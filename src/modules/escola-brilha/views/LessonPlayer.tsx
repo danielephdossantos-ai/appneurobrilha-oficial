@@ -67,32 +67,33 @@ const VALE_NUMEROS_LESSON: Lesson = {
   bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01MA06',
   steps: [
-    // 1. Soma Visual
+    // 1. Soma Visual com Frutas
     { id: 'n1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Duas maçãs mais uma maçã. Quantas temos ao todo?',
+      speech: 'Vamos somar! Se eu tenho duas maçãs e ganho mais uma, com quantas eu fico?',
       elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.1 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a1', type: 'text', content: 'MAÇÃ', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'a2', type: 'text', content: 'MAÇÃ', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 },
+        { id: 'a3', type: 'text', content: 'MAÇÃ', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     
-    // 2. Subtração Visual
+    // 2. Subtração Visual (Tirar Frutas)
     { id: 'n2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Tínhamos quatro peixinhos e um saiu. Quantos sobraram?',
+      speech: 'Tínhamos quatro bananas e o macaco comeu uma. Quantas sobraram?',
       elements: [
-        { id: 'px1', type: 'text', content: 'peixe', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.1 },
-        { id: 'px2', type: 'text', content: 'peixe', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'px3', type: 'text', content: 'peixe', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.3 },
+        { id: 'b1', type: 'text', content: 'BANANA', position: { x: -60, y: -20 }, animation: 'pop', delay: 0.1 },
+        { id: 'b2', type: 'text', content: 'BANANA', position: { x: 0, y: -20 }, animation: 'pop', delay: 0.2 },
+        { id: 'b3', type: 'text', content: 'BANANA', position: { x: 60, y: -20 }, animation: 'pop', delay: 0.3 },
+        { id: 'b4', type: 'text', content: 'BANANA', position: { x: 0, y: 30 }, animation: 'pop', delay: 0.4 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
 
-    // 3. Antecessor
+    // 3. Dezenas
     { id: 'n3', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Qual número vem antes do 8?',
-      elements: [{ id: 'ref-8', type: 'text', content: '8', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '7', options: ['6', '7', '9'] } }
+      speech: 'Quanto valem 2 dezenas?',
+      elements: [{ id: 'dez', type: 'text', content: '10 + 10', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: '20', options: ['10', '20', '30'] } }
   ]
 };
 
