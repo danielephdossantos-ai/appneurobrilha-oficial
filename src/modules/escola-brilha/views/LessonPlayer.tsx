@@ -210,6 +210,36 @@ const MATEMATICA_7ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_8ANO_LESSON: Lesson = {
+  id: 'portugues-8ano-figurada',
+  title: 'Linguagem Figurada - 8º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF08LP01',
+  steps: [
+    { id: 'p8s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'No 8º ano, exploramos o sentido conotativo das palavras. Metáforas tornam a linguagem mais rica!',
+      elements: [{ id: 'txt-fig', type: 'text', content: 'Metáfora: Você é um sol.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p8s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O que significa a metáfora "Você é um sol"?',
+      interaction: { type: 'click', correctAnswer: 'Você brilha e traz alegria', options: ['Você brilha e traz alegria', 'Você é uma estrela de fogo', 'Você é muito quente'] } }
+  ]
+};
+
+const MATEMATICA_8ANO_LESSON: Lesson = {
+  id: 'matematica-8ano-sistemas',
+  title: 'Sistemas e Funções - 8º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF08MA01',
+  steps: [
+    { id: 'm8s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Sistemas de equações nos ajudam a encontrar duas incógnitas ao mesmo tempo!',
+      elements: [{ id: 'sis-1', type: 'text', content: 'x + y = 10 e x - y = 2', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm8s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Se x + y = 10 e x - y = 2, qual é o valor de x?',
+      interaction: { type: 'click', correctAnswer: '6', options: ['4', '6', '8'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
@@ -371,6 +401,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
     'portugues_4ano': PORTUGUES_4ANO_LESSON,
     'matematica_4ano': MATEMATICA_4ANO_LESSON,
+    'portugues_8ano': PORTUGUES_8ANO_LESSON,
+    'matematica_8ano': MATEMATICA_8ANO_LESSON,
     'portugues_7ano': PORTUGUES_7ANO_LESSON,
     'matematica_7ano': MATEMATICA_7ANO_LESSON,
     'portugues_6ano': PORTUGUES_6ANO_LESSON,
@@ -384,7 +416,7 @@ export const LessonPlayer: React.FC = () => {
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
     ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' :
-    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
+    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
 
   const isModern = interfaceStyle === 'Modern';
 
