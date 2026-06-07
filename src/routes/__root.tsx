@@ -157,67 +157,6 @@ import { HiperfocoProvider } from "@/context/HiperfocoContext";
 
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
-  const [authReady, setAuthReady] = useState(false);
-  const [hasSession, setHasSession] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (cancelled) return;
-      setHasSession(Boolean(session));
-      setAuthReady(true);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (cancelled) return;
-
-      if (event === "SIGNED_IN" && session) {
-        setHasSession(true);
-        return;
-      }
-
-      if (event === "SIGNED_OUT") {
-        setHasSession(false);
-        setAuthReady(true);
-        return;
-      }
-
-      if (event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
-        setHasSession(Boolean(session));
-      }
-    });
-
-    return () => {
-      cancelled = true;
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!authReady) return;
-
-    if (!hasSession && location.pathname !== "/auth") {
-      navigate({ to: "/auth", replace: true });
-    } else if (hasSession && location.pathname === "/auth") {
-      navigate({ to: "/", replace: true });
-    }
-  }, [authReady, hasSession, location.pathname, navigate]);
-
-  const isRedirectingToAuth = authReady && !hasSession && location.pathname !== "/auth";
-  const isRedirectingHome = authReady && hasSession && location.pathname === "/auth";
-
-  if (!authReady || isRedirectingToAuth || isRedirectingHome) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-sidebar">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
+  // LOGIN TEMPORARIAMENTE DESATIVADO PARA TESTES
   return <>{children}</>;
 }
