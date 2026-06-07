@@ -249,6 +249,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica_2ano': MATEMATICA_2ANO_LESSON,
     'portugues_3ano': PORTUGUES_3ANO_LESSON,
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
+    'portugues_4ano': PORTUGUES_4ANO_LESSON,
+    'matematica_4ano': MATEMATICA_4ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
   };
@@ -257,7 +259,7 @@ export const LessonPlayer: React.FC = () => {
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    ['portugues_3ano', 'matematica_3ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
+    ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
 
   const isModern = interfaceStyle === 'Modern';
 
