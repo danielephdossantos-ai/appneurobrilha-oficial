@@ -257,7 +257,7 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === currentStep.interaction?.correctAnswer;
+    const isCorrect = answer === currentStep?.interaction?.correctAnswer;
 
     if (isCorrect) {
       setPerformance(prev => ({
@@ -271,7 +271,7 @@ export const LessonPlayer: React.FC = () => {
       setIsSpeaking(false);
       await new Promise(r => setTimeout(r, 600));
 
-      if (currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       } else {
         setFeedback({ kind: 'done', msg: 'Missão Cumprida!' });
