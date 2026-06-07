@@ -182,13 +182,13 @@ export const LessonPlayer: React.FC = () => {
       />
 
       {/* Activity card */}
-      <div className="w-full max-w-md px-4 pt-24 pb-56 flex flex-col items-center">
+      <div className={`w-full ${isSecondYear ? 'max-w-2xl px-2' : 'max-w-md px-4'} pt-24 pb-56 flex flex-col items-center`}>
         <motion.div
           key={currentStep.id}
-          initial={{ opacity: 0, y: 20, scale: 0.96 }}
+          initial={isSecondYear ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ type: 'spring', stiffness: 120, damping: 16 }}
-          className="w-full bg-white rounded-3xl shadow-2xl border-4 border-white p-5 sm:p-6 flex flex-col items-center gap-5"
+          transition={isSecondYear ? { duration: 0.3 } : { type: 'spring', stiffness: 120, damping: 16 }}
+          className={`w-full bg-white rounded-3xl shadow-2xl border-4 border-white ${isSecondYear ? 'p-6 sm:p-10' : 'p-5 sm:p-6'} flex flex-col items-center gap-5`}
         >
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
