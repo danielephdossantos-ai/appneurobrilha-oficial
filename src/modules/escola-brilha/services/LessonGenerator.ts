@@ -477,21 +477,6 @@ export class LessonGenerator {
     };
   }
 
-  static generate(category: string): Lesson {
-    if (category.includes('ciencias') || category.includes('historia') || category.includes('geografia') || category.includes('artes')) {
-      return this.generateSubjectLesson(category);
-    }
-    if (category.includes('matematica')) {
-      return this.generateCRAMath(category);
-    }
-    if (category.includes('portugues')) {
-      if (category.includes('inf') || category.includes('1ano')) {
-        return this.generateEF01LP05();
-      }
-      return this.generateCycleC(category);
-    }
-    return this.generateEF01LP05(); // Fallback
-  }
   /**
    * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
    */
@@ -627,37 +612,36 @@ export class LessonGenerator {
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
 
-    if (['historia', 'geografia', 'artes'].some(c => category.includes(c))) {
-      return this.generateInfiniteLesson(category, count);
+    // Subjects: Ciências, História, Geografia, Artes
+    if (category.includes('ciencias') || category.includes('historia') || category.includes('geografia') || category.includes('artes')) {
+      if (category.includes('ciencias') && !category.includes('inf')) {
+        return this.generateScienceLesson(category, count);
+      }
+      return this.generateSubjectLesson(category, count);
     }
 
-    if (['ciencias_kids', 'ciencias_inf'].includes(category)) {
-      return this.generateScienceLesson(category);
-    }
-
+    // Matemática
     if (category.includes('matematica')) {
       return this.generateCRAMath(category, count);
     }
 
-    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
-      return this.generateCycleC(category, count);
-    }
-    
+    // Português Moderno (6º-9º)
     if (['portugues_6ano', 'portugues_7ano', 'portugues_8ano', 'portugues_9ano', 'fundamental2'].includes(category)) {
       return this.generateModern(category, count + 2);
     }
 
+    // Português Fundamental I (3º-5º)
+    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
+      return this.generateCycleC(category, count);
+    }
+    
+    // Português Inicial (Infantil ao 2º)
     switch (category) {
       case 'portugues':
       case 'portugues_inf':
       case 'portugues_1ano':
-        return this.generateEF01LP05(count);
-      case 'matematica_inf':
-        return this.generateCRAMath(category, count);
       case 'portugues_2ano':
-        return this.generateEF01LP05(count + 2); 
-      case 'matematica_2ano':
-        return this.generateCRAMath(category, count + 2);
+        return this.generateEF01LP05(count);
       default:
         return this.generateEF01LP05(count);
     }
