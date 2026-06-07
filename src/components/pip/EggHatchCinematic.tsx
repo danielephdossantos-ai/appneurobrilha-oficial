@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import pipEgg from '@/assets/pip-egg.png';
 import pipHatching from '@/assets/pip-hatching.png';
+import pipBaby from '@/assets/pip-baby.png';
 import pipaEgg from '@/assets/pipa-egg.png';
 import pipaHatching from '@/assets/pipa-hatching.png';
+import pipaBaby from '@/assets/pipa-baby.png';
 import { KidButton } from '@/components/ui/KidButton';
 
 type MascotChoice = 'pip' | 'pipa';
