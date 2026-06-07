@@ -1,7 +1,7 @@
 
 import { Lesson, LessonStep } from '../types/lesson';
 import { WORD_BANK, MATH_BANK, SENTENCE_BANK, Word } from '../data/content-banks';
-import { ART_BANK, HISTORY_GEOGRAPHY_BANK } from '../data/extra-banks';
+import { ART_BANK, HISTORY_GEOGRAPHY_BANK, SCIENCE_BANK } from '../data/extra-banks';
 import { StudentProgressService } from './StudentProgressService';
 
 export class LessonGenerator {
@@ -422,6 +422,77 @@ export class LessonGenerator {
 
 
   /**
+   * Gerador Genérico para Ciências, História, Geografia e Artes
+   */
+  static generateSubjectLesson(category: string, count: number = 6): Lesson {
+    const isHistory = category.includes('historia');
+    const isGeography = category.includes('geografia');
+    const isScience = category.includes('ciencias');
+    const isArt = category.includes('artes');
+
+    const bank = isScience ? SCIENCE_BANK : 
+                 (isHistory || isGeography) ? HISTORY_GEOGRAPHY_BANK : 
+                 ART_BANK;
+    
+    const items = this.getRandomItems(bank, Math.min(count, bank.length));
+    const steps: LessonStep[] = [];
+
+    // FASE 1: DESCOBERTA
+    steps.push({
+      id: `subj-desc-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: `Bem-vindo à Missão de ${isScience ? 'Ciências' : isHistory ? 'História' : isGeography ? 'Geografia' : 'Artes'}! Vamos explorar o mundo?`,
+      elements: [{ id: 'subj-icon', type: 'text', content: items[0].emoji, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    // FASES DE PRÁTICA
+    items.forEach((item, idx) => {
+      steps.push({
+        id: `subj-step-${idx}`,
+        phase: idx === items.length - 1 ? 'challenge' : 'practice',
+        type: 'interaction',
+        mascot: idx % 2 === 0 ? 'pip' : 'pipa',
+        speech: item.question,
+        elements: [{ id: `subj-el-${idx}`, type: 'text', content: item.topic, position: { x: 0, y: -40 }, animation: 'fade', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: item.correct,
+          options: this.shuffle(item.options)
+        }
+      });
+    });
+
+    // FASE FINAL: DOMÍNIO
+    steps.push({
+      id: `subj-dom-${Date.now()}`, phase: 'mastery', type: 'explanation', mascot: 'pipa',
+      speech: 'Parabéns, explorador! Você completou a missão com sucesso!',
+      elements: [{ id: 'subj-trophy', type: 'text', content: '🏆', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    return {
+      id: `gen-subj-${category}-${Date.now()}`,
+      title: `${isScience ? 'Cientista' : isHistory ? 'Historiador' : isGeography ? 'Geógrafo' : 'Artista'} Brilhante`,
+      mission_name: items[0].topic,
+      bncc_field: isScience ? 'espacos_tempos' : 'escuta_fala',
+      steps
+    };
+  }
+
+  static generate(category: string): Lesson {
+    if (category.includes('ciencias') || category.includes('historia') || category.includes('geografia') || category.includes('artes')) {
+      return this.generateSubjectLesson(category);
+    }
+    if (category.includes('matematica')) {
+      return this.generateCRAMath(category);
+    }
+    if (category.includes('portugues')) {
+      if (category.includes('inf') || category.includes('1ano')) {
+        return this.generateEF01LP05();
+      }
+      return this.generateCycleC(category);
+    }
+    return this.generateEF01LP05(); // Fallback
+  }
+
    * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
    */
   static generateScienceLesson(category: string, count: number = 6): Lesson {
