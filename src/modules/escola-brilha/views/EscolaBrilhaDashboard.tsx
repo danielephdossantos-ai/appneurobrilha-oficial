@@ -90,12 +90,21 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Interface C'
     },
     {
-      id: 'ano3_5',
-      title: '5º Ano',
-      subtitle: 'Conhecimento Pleno',
-      icon: Brain,
-      color: 'bg-blue-600',
-      field: 'Fundamental I',
+      id: 'portugues_5ano',
+      title: '5º Ano Português',
+      subtitle: 'Análise e Pontuação',
+      icon: BookOpen,
+      color: 'bg-blue-500',
+      field: 'Língua Portuguesa',
+      method: 'Interface C'
+    },
+    {
+      id: 'matematica_5ano',
+      title: '5º Ano Matemática',
+      subtitle: 'Porcentagem e Gráficos',
+      icon: Calculator,
+      color: 'bg-orange-600',
+      field: 'Matemática',
       method: 'Interface C'
     },
     {
