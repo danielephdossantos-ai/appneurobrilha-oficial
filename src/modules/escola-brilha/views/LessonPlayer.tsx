@@ -90,6 +90,36 @@ const MATEMATICA_3ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_4ANO_LESSON: Lesson = {
+  id: 'portugues-4ano-generos',
+  title: 'Gêneros Textuais - 4º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF04LP01',
+  steps: [
+    { id: 'p4s1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Olá! Hoje vamos conhecer o gênero textual Receita. Ele serve para nos ensinar a preparar algo!',
+      elements: [{ id: 'txt-rec', type: 'text', content: 'RECEITA: Ingredientes e Modo de Preparo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p4s2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual parte da receita indica o que vamos usar?',
+      interaction: { type: 'click', correctAnswer: 'Ingredientes', options: ['Ingredientes', 'Título', 'Modo de Fazer'] } }
+  ]
+};
+
+const MATEMATICA_4ANO_LESSON: Lesson = {
+  id: 'matematica-4ano-fracoes',
+  title: 'Frações e Divisão - 4º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF04MA01',
+  steps: [
+    { id: 'm4s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Frações são partes de um todo! Imagine uma pizza dividida em 4 partes.',
+      elements: [{ id: 'frac-1', type: 'text', content: '1/4 (Uma parte de quatro)', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm4s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Se eu comer 2 partes de uma pizza de 4, qual é a fração?',
+      interaction: { type: 'click', correctAnswer: '2/4', options: ['1/4', '2/4', '3/4'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
@@ -249,6 +279,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica_2ano': MATEMATICA_2ANO_LESSON,
     'portugues_3ano': PORTUGUES_3ANO_LESSON,
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
+    'portugues_4ano': PORTUGUES_4ANO_LESSON,
+    'matematica_4ano': MATEMATICA_4ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
   };
@@ -257,7 +289,7 @@ export const LessonPlayer: React.FC = () => {
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    ['portugues_3ano', 'matematica_3ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
+    ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
 
   const isModern = interfaceStyle === 'Modern';
 

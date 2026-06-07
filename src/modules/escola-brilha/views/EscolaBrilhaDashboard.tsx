@@ -72,8 +72,26 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Interface C'
     },
     {
+      id: 'portugues_4ano',
+      title: '4º Ano Português',
+      subtitle: 'Gêneros e Escrita',
+      icon: BookOpen,
+      color: 'bg-emerald-500',
+      field: 'Língua Portuguesa',
+      method: 'Interface C'
+    },
+    {
+      id: 'matematica_4ano',
+      title: '4º Ano Matemática',
+      subtitle: 'Frações e Grandezas',
+      icon: Calculator,
+      color: 'bg-yellow-600',
+      field: 'Matemática',
+      method: 'Interface C'
+    },
+    {
       id: 'ano3_5',
-      title: '4º ao 5º Ano',
+      title: '5º Ano',
       subtitle: 'Conhecimento Pleno',
       icon: Brain,
       color: 'bg-blue-600',
