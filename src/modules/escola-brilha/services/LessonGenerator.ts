@@ -244,7 +244,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'Missão: O Valor de X' : isCycleC ? 'Missão: Somar Frutinhas' : 'Missão: Resgate Numérico',
+      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : 'Herói dos Números',
+      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : 'Resgate Numérico',
       bncc_field: 'espacos_tempos',
       steps
     };
