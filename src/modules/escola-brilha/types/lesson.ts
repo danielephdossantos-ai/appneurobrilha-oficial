@@ -54,6 +54,7 @@ export interface LessonPerformance {
 export interface Lesson {
   id: string;
   title: string;
+  grade: number; // 1 to 9
   bncc_field?: BNCC_Field;
   skill_bncc?: string;
   steps: LessonStep[];
