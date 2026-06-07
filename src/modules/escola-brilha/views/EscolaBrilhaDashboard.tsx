@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { School, BookOpen, Calculator, Brain, Palette, Globe, LayoutGrid } from 'lucide-react';
+import { School, BookOpen, Calculator, Brain, Palette, Globe, Landmark, LayoutGrid, FlaskConical } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
 
 export const EscolaBrilhaDashboard: React.FC = () => {
