@@ -335,12 +335,12 @@ export const LessonPlayer: React.FC = () => {
               <AnimatePresence>
                 {visibleOptions.map((opt, i) => {
                   const palette = [
-                    'bg-blue-500 border-blue-700',
-                    'bg-emerald-500 border-emerald-700',
-                    'bg-yellow-400 border-yellow-600',
-                    'bg-pink-500 border-pink-700',
+                    'bg-blue-50 border-blue-100 text-blue-600',
+                    'bg-emerald-50 border-emerald-100 text-emerald-600',
+                    'bg-yellow-50 border-yellow-100 text-yellow-600',
+                    'bg-pink-50 border-pink-100 text-pink-600',
                   ];
-                  const color = palette[i % palette.length];
+                  const colorClasses = palette[i % palette.length];
                   const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
                   return (
                     <motion.button
@@ -349,7 +349,7 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${color} text-white w-24 h-24 sm:w-28 sm:h-28 rounded-3xl text-3xl sm:text-4xl font-black shadow-xl border-b-8 hover:scale-105 active:scale-95 transition flex items-center justify-center p-4`}
+                      className={`${colorClasses} w-24 h-24 sm:w-28 sm:h-28 rounded-full text-5xl sm:text-6xl font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-4`}
                     >
                       {hasIllust ? (
                         <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
