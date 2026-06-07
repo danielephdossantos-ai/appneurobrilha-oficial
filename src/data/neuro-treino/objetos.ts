@@ -114,7 +114,7 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐸": sapo,
   "🦊": raposa,
   "🐰": coelho,
-  "🐼": panda, "🐨": "https://cdn-icons-png.flaticon.com/512/3069/3069165.png", "🐵": "https://cdn-icons-png.flaticon.com/512/3069/3069185.png",
+  "🐼": panda, "🐨": "https://cdn-icons-png.flaticon.com/512/3069/3069165.png", "🐵": "https://cdn-icons-png.flaticon.com/512/3069/3069185.png", "🐒": "https://cdn-icons-png.flaticon.com/512/3069/3069185.png",
   "🦁": leao,
   "🐯": tigre,
   "🧸": ursinho,
