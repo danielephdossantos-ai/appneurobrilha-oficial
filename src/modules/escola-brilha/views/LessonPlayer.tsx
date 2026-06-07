@@ -257,8 +257,6 @@ export const LessonPlayer: React.FC = () => {
       }
     }
 
-    await speechPromise;
-    setIsSpeaking(false);
 
     if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
