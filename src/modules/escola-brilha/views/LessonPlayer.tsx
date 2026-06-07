@@ -118,8 +118,9 @@ export const LessonPlayer: React.FC = () => {
     // Add text elements (like "BOLO") to the speech, but ignore icons/emojis in speech
     if (step.elements) {
       const elementsText = step.elements
-        .filter((el: any) => el.type === 'text' && !/\p{Emoji}/u.test(el.content))
-        .map((el: any) => el.content)
+        .filter((el: any) => el.type === 'text')
+        .map((el: any) => semEmoji(el.content))
+        .filter((txt: string) => txt.length > 0)
         .join('. ');
       
       if (elementsText && !text.includes(elementsText)) {
