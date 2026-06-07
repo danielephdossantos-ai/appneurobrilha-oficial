@@ -108,11 +108,29 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Interface C'
     },
     {
+      id: 'portugues_6ano',
+      title: '6º Ano Português',
+      subtitle: 'Gramática e Literatura',
+      icon: BookOpen,
+      color: 'bg-indigo-500',
+      field: 'Língua Portuguesa',
+      method: 'Interface Moderna'
+    },
+    {
+      id: 'matematica_6ano',
+      title: '6º Ano Matemática',
+      subtitle: 'Inteiros e Geometria',
+      icon: Calculator,
+      color: 'bg-indigo-700',
+      field: 'Matemática',
+      method: 'Interface Moderna'
+    },
+    {
       id: 'fundamental2',
-      title: '6º ao 9º Ano',
+      title: '7º ao 9º Ano',
       subtitle: 'Base Preparatória',
       icon: School,
-      color: 'bg-indigo-600',
+      color: 'bg-slate-700',
       field: 'Fundamental II',
       method: 'Moderna'
     }
