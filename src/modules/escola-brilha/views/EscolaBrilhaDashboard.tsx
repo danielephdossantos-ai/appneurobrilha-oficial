@@ -9,22 +9,13 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
-      id: 'portugues',
-      title: 'Bosque dos Sons',
-      subtitle: 'Trilha: Primeiros Sons',
-      icon: BookOpen,
-      color: 'bg-orange-400',
-      field: 'Missão: Sons Mágicos',
-      method: 'Amigo do Pip'
-    },
-    {
       id: 'portugues_1ano',
       title: 'Mundo das Letras',
       subtitle: 'Capítulo: Sílabas',
       icon: BookOpen,
       color: 'bg-emerald-400',
       field: 'Missão: Descobrir Palavras',
-      method: 'Mestre das Sílabas'
+      method: 'Próxima Meta: Mestre das Sílabas'
     },
     {
       id: 'matematica',
@@ -33,7 +24,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: Calculator,
       color: 'bg-blue-400',
       field: 'Missão: Somar Frutinhas',
-      method: 'Gênio da Adição'
+      method: 'Próxima Meta: Gênio da Adição'
     },
     {
       id: 'ciencias_kids',
@@ -42,7 +33,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: Brain,
       color: 'bg-teal-400',
       field: 'Missão: Vida Verde',
-      method: 'Cientista Júnior'
+      method: 'Próxima Meta: Cientista Júnior'
     },
     {
       id: 'portugues_2ano',
@@ -51,7 +42,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: BookOpen,
       color: 'bg-purple-400',
       field: 'Missão: Escritor Criativo',
-      method: 'Mestre das Frases'
+      method: 'Próxima Meta: Mestre das Frases'
     },
     {
       id: 'matematica_2ano',
@@ -60,7 +51,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: Calculator,
       color: 'bg-indigo-400',
       field: 'Missão: Resgate Numérico',
-      method: 'Herói dos Números'
+      method: 'Próxima Meta: Herói dos Números'
     },
     {
       id: 'portugues_5ano',
@@ -69,7 +60,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: BookOpen,
       color: 'bg-blue-500',
       field: 'Missão: O Código da Vírgula',
-      method: 'Expert em Análise'
+      method: 'Próxima Meta: Expert em Análise'
     },
     {
       id: 'matematica_9ano',
@@ -78,7 +69,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: Calculator,
       color: 'bg-slate-900',
       field: 'Missão: O Valor de X',
-      method: 'Lenda da Matemática'
+      method: 'Próxima Meta: Lenda da Matemática'
     }
   ];
 
