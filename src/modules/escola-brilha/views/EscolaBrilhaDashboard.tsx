@@ -15,7 +15,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       icon: BookOpen,
       color: 'bg-orange-400',
       field: 'Missão: Sons Mágicos',
-      method: 'Amigo do Pip'
+      method: 'Próxima Meta: Amigo do Pip'
     },
     {
       id: 'portugues_1ano',
