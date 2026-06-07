@@ -180,6 +180,36 @@ const MATEMATICA_6ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_7ANO_LESSON: Lesson = {
+  id: 'portugues-7ano-arg',
+  title: 'Argumentação e Gêneros - 7º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF07LP01',
+  steps: [
+    { id: 'p7s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'No 7º ano, vamos aprender a construir argumentos sólidos em nossos textos!',
+      elements: [{ id: 'txt-arg', type: 'text', content: 'FATO vs OPINIÃO', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p7s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual destes é um fato?',
+      interaction: { type: 'click', correctAnswer: 'O Sol é uma estrela', options: ['O Sol é uma estrela', 'O Sol é lindo', 'Eu amo o Sol'] } }
+  ]
+};
+
+const MATEMATICA_7ANO_LESSON: Lesson = {
+  id: 'matematica-7ano-equacoes',
+  title: 'Equações e Razão - 7º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF07MA01',
+  steps: [
+    { id: 'm7s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Equações são como balanças em equilíbrio. O objetivo é encontrar o valor desconhecido (x)!',
+      elements: [{ id: 'eq-1', type: 'text', content: 'x + 5 = 10', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm7s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual é o valor de x na equação x + 5 = 10?',
+      interaction: { type: 'click', correctAnswer: '5', options: ['2', '5', '10'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
@@ -341,6 +371,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
     'portugues_4ano': PORTUGUES_4ANO_LESSON,
     'matematica_4ano': MATEMATICA_4ANO_LESSON,
+    'portugues_7ano': PORTUGUES_7ANO_LESSON,
+    'matematica_7ano': MATEMATICA_7ANO_LESSON,
     'portugues_6ano': PORTUGUES_6ANO_LESSON,
     'matematica_6ano': MATEMATICA_6ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
@@ -352,7 +384,7 @@ export const LessonPlayer: React.FC = () => {
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
     ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' :
-    ['portugues_6ano', 'matematica_6ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
+    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
 
   const isModern = interfaceStyle === 'Modern';
 
