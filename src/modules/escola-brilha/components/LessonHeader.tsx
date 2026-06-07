@@ -46,21 +46,33 @@ export const LessonHeader: React.FC<LessonHeaderProps> = ({
 
         {/* Step counter */}
         {totalSteps > 0 && (
-          <span className="shrink-0 text-xs font-black text-violet-600 bg-white px-2 py-1 rounded-full border-2 border-violet-200 shadow-sm">
+          <span className={`shrink-0 text-xs font-black ${isModern ? 'text-slate-500 bg-slate-100 border-slate-200' : 'text-violet-600 bg-white border-violet-200'} px-2 py-1 rounded-full border-2 shadow-sm`}>
             {stepIndex + 1}/{totalSteps}
           </span>
         )}
 
-        {/* Star */}
-        <div className="shrink-0 w-11 h-11 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg">
-          <Star className="w-6 h-6 text-white fill-white" />
-        </div>
-        
-        {/* XP Counter */}
-        <div className="shrink-0 flex items-center gap-1 bg-white px-3 py-1.5 rounded-full border-2 border-yellow-200 shadow-sm">
-          <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-          <span className="text-sm font-black text-yellow-600">{xp} XP</span>
-        </div>
+        {isModern ? (
+          <>
+            <div className="hidden sm:flex shrink-0 items-center gap-1 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+              <Trophy className="w-4 h-4 text-amber-500" />
+              <span className="text-xs font-bold text-slate-600">Ranking #4</span>
+            </div>
+            <div className="shrink-0 flex items-center gap-1 bg-indigo-50 px-3 py-1.5 rounded-full border border-indigo-100">
+              <Target className="w-4 h-4 text-indigo-500" />
+              <span className="text-xs font-bold text-indigo-600">{xp} XP</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="shrink-0 w-11 h-11 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg">
+              <Star className="w-6 h-6 text-white fill-white" />
+            </div>
+            <div className="shrink-0 flex items-center gap-1 bg-white px-3 py-1.5 rounded-full border-2 border-yellow-200 shadow-sm">
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <span className="text-sm font-black text-yellow-600">{xp} XP</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
