@@ -240,6 +240,36 @@ const MATEMATICA_8ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_9ANO_LESSON: Lesson = {
+  id: 'portugues-9ano-dissertacao',
+  title: 'Dissertação e Argumentação - 9º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF09LP01',
+  steps: [
+    { id: 'p9s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'No 9º ano, focamos na produção de textos dissertativos-argumentativos. É hora de defender seu ponto de vista!',
+      elements: [{ id: 'txt-diss', type: 'text', content: 'Tese + Desenvolvimento + Conclusão', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p9s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual parte do texto apresenta a ideia principal que será defendida?',
+      interaction: { type: 'click', correctAnswer: 'Tese', options: ['Tese', 'Conclusão', 'Título'] } }
+  ]
+};
+
+const MATEMATICA_9ANO_LESSON: Lesson = {
+  id: 'matematica-9ano-algebra',
+  title: 'Álgebra e Funções - 9º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF09MA01',
+  steps: [
+    { id: 'm9s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'A álgebra nos permite resolver problemas complexos usando equações de 2º grau!',
+      elements: [{ id: 'alg-1', type: 'text', content: 'ax² + bx + c = 0', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm9s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Como se chama o valor que determina se uma equação de 2º grau tem raízes reais?',
+      interaction: { type: 'click', correctAnswer: 'Delta', options: ['Delta', 'Soma', 'Produto'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
@@ -401,12 +431,16 @@ export const LessonPlayer: React.FC = () => {
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
     'portugues_4ano': PORTUGUES_4ANO_LESSON,
     'matematica_4ano': MATEMATICA_4ANO_LESSON,
-    'portugues_8ano': PORTUGUES_8ANO_LESSON,
-    'matematica_8ano': MATEMATICA_8ANO_LESSON,
-    'portugues_7ano': PORTUGUES_7ANO_LESSON,
-    'matematica_7ano': MATEMATICA_7ANO_LESSON,
+    'portugues_5ano': PORTUGUES_5ANO_LESSON,
+    'matematica_5ano': MATEMATICA_5ANO_LESSON,
     'portugues_6ano': PORTUGUES_6ANO_LESSON,
     'matematica_6ano': MATEMATICA_6ANO_LESSON,
+    'portugues_7ano': PORTUGUES_7ANO_LESSON,
+    'matematica_7ano': MATEMATICA_7ANO_LESSON,
+    'portugues_8ano': PORTUGUES_8ANO_LESSON,
+    'matematica_8ano': MATEMATICA_8ANO_LESSON,
+    'portugues_9ano': PORTUGUES_9ANO_LESSON,
+    'matematica_9ano': MATEMATICA_9ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
   };
@@ -416,7 +450,7 @@ export const LessonPlayer: React.FC = () => {
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
     ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' :
-    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
+    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
 
   const isModern = interfaceStyle === 'Modern';
 
