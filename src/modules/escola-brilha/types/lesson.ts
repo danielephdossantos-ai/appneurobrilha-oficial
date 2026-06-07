@@ -54,10 +54,8 @@ export interface LessonPerformance {
 export interface Lesson {
   id: string;
   title: string;
-  mission_name?: string;
   bncc_field?: BNCC_Field;
   skill_bncc?: string;
-  xp?: number;
   steps: LessonStep[];
 }
 
