@@ -254,75 +254,81 @@ export class LessonGenerator {
   /**
    * Ciclo C: 3º ao 5º Ano.
    * Foco em Interpretação, Operações complexas.
+   * PADRÃO PORTUGUÊS 2-9: Descoberta -> Exploração -> Explicação -> Treino -> Desafio -> Domínio
    */
   static generateCycleC(category: string, count: number = 6): Lesson {
     const isMath = category.includes('matematica');
     const steps: LessonStep[] = [];
 
-    for (let i = 0; i < count; i++) {
-      if (isMath) {
-        const val1 = Math.floor(Math.random() * 50) + 10;
-        const val2 = Math.floor(Math.random() * 10) + 2;
-        const model = Math.random() > 0.5 ? 'multi' : 'div';
-        
-        if (model === 'multi') {
-          steps.push({
-            id: `c-math-${i}`,
-            phase: 'practice',
-            type: 'interaction',
-            mascot: 'pip',
-            speech: `Resolva o desafio: ${val1} x ${val2}`,
-            elements: [{ id: `el-${i}`, type: 'text', content: `${val1} x ${val2} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-            interaction: {
-              type: 'click',
-              correctAnswer: (val1 * val2).toString(),
-              options: this.shuffle([(val1 * val2).toString(), (val1 * val2 + 10).toString(), (val1 * val2 - 5).toString()])
-            }
-          });
-        } else {
-          const divResult = Math.floor(Math.random() * 10) + 2;
-          const divisor = Math.floor(Math.random() * 5) + 2;
-          const dividend = divResult * divisor;
-          steps.push({
-            id: `c-math-${i}`,
-            phase: 'practice',
-            type: 'interaction',
-            mascot: 'pipa',
-            speech: `Se dividirmos ${dividend} por ${divisor}, quanto teremos?`,
-            elements: [{ id: `el-${i}`, type: 'text', content: `${dividend} ÷ ${divisor} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-            interaction: {
-              type: 'click',
-              correctAnswer: divResult.toString(),
-              options: this.shuffle([divResult.toString(), (divResult + 1).toString(), (divResult - 1).toString()])
-            }
-          });
-        }
-      } else {
-        // Português Ciclo C
-        const word = this.getRandomItems(WORD_BANK.filter(w => w.text.length > 5), 1)[0];
-        steps.push({
-          id: `c-port-${i}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Quantas sílabas tem a palavra ${word.text}?`,
-          elements: [{ id: `el-${i}`, type: 'text', content: word.text, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-          interaction: {
-            type: 'click',
-            correctAnswer: word.syllables.length.toString(),
-            options: ['2', '3', '4', '5']
-          }
-        });
-      }
+    if (isMath) {
+      return this.generateCRAMath(category, count);
     }
 
+    // PORTUGUÊS CICLO C (3º-5º) - Padrão de Ensino
+    const word = this.getRandomItems(WORD_BANK.filter(w => w.text.length > 5), 1)[0];
+    
+    // FASE 1: DESCOBERTA
+    steps.push({
+      id: `p-c-desc-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: `Você sabe o que esta palavra significa?`,
+      elements: [{ id: 'word-desc', type: 'text', content: word.text, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }]
+    });
+
+    // FASE 2: EXPLORAÇÃO
+    steps.push({
+      id: `p-c-explor-${Date.now()}`, phase: 'demonstration', type: 'demonstration', mascot: 'pipa',
+      speech: `Observe a imagem e escute o som da palavra.`,
+      elements: [{ id: 'word-img', type: 'text', content: word.emoji || '📖', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.3 }]
+    });
+
+    // FASE 3: EXPLICAÇÃO
+    steps.push({
+      id: `p-c-exp-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: `As palavras podem ter nomes para seus sons e significados. Vamos aprender!`,
+      elements: [{ id: 'exp-txt', type: 'text', content: `${word.text} tem ${word.syllables.length} sílabas.`, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }]
+    });
+
+    // FASE 4: TREINO
+    for (let i = 0; i < 3; i++) {
+      const practiceWord = this.getRandomItems(WORD_BANK, 1)[0];
+      steps.push({
+        id: `p-c-train-${i}`, phase: 'practice', type: 'interaction', mascot: 'pipa',
+        speech: `Quantas sílabas tem ${practiceWord.text}?`,
+        elements: [{ id: `tr-${i}`, type: 'text', content: practiceWord.text, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: practiceWord.syllables.length.toString(),
+          options: this.shuffle(['1', '2', '3', '4'])
+        }
+      });
+    }
+
+    // FASE 5: DESAFIO
+    steps.push({
+      id: `p-c-chal-${Date.now()}`, phase: 'challenge', type: 'interaction', mascot: 'pip',
+      speech: `DESAFIO: Qual destas palavras combina mais com ${word.text}?`,
+      interaction: {
+        type: 'click',
+        correctAnswer: word.text,
+        options: this.shuffle([word.text, 'X', 'Y'])
+      }
+    });
+
+    // FASE 6: DOMÍNIO
+    steps.push({
+      id: `p-c-dom-${Date.now()}`, phase: 'mastery', type: 'explanation', mascot: 'pipa',
+      speech: `Incrível! Você dominou o significado e a estrutura desta palavra!`,
+      elements: [{ id: 'dom-icon', type: 'text', content: '🏆', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
     return {
-      id: `gen-cycleC-${Date.now()}`,
-      title: `Desafios do Ciclo C - ${isMath ? 'Matemática' : 'Português'}`,
-      bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
+      id: `gen-port-c-${Date.now()}`,
+      title: 'Aventura das Palavras',
+      bncc_field: 'escuta_fala',
       steps
     };
   }
+
 
   /**
    * Interface Moderna: 6º ao 9º Ano.
