@@ -575,8 +575,8 @@ export const LessonPlayer: React.FC = () => {
       const speechToValue = isIntro ? fullSpeech.replace(currentStep.speech, '').trim() : fullSpeech;
       if (speechToValue && speechToValue !== '.' && speechToValue !== '..') {
         // Limpa o speech para não ler "_" ou outros caracteres técnicos para os pequenos
-        const cleanSpeech = isInfantOr1st ? speechToValue.replace(/_/g, '').replace(/\s+/g, ' ').trim() : speechToValue;
-        if (cleanSpeech) await AudioSpeechService.speak(cleanSpeech);
+        const cleanSpeech = isInfantOr1st ? speechToValue.replace(/_/g, '').replace(/\./g, '').replace(/\s+/g, ' ').trim() : speechToValue;
+        if (cleanSpeech && cleanSpeech.length > 1) await AudioSpeechService.speak(cleanSpeech);
       }
       setIsSpeaking(false);
     }

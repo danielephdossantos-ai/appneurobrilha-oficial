@@ -69,7 +69,7 @@ export const OBJETO_IMG: Record<string, string> = {
   BORBOLETA: borboleta, PEIXE: peixe, DINOSSAURO: dinossauro, "T-REX": dinossauro,
   RAPTOR: dinossauro, "PTERODÁCTILO": passaro, "CORAÇÃO": coracao, CORACAO: coracao,
   SAPO: sapo, RAPOSA: raposa, COELHO: coelho, PANDA: panda,
-  "LEÃO": leao, LEAO: leao, TIGRE: tigre, MACACO: "https://cdn-icons-png.flaticon.com/512/3069/3069185.png", "MACACOS": "https://cdn-icons-png.flaticon.com/512/3069/3069185.png",
+  "LEÃO": leao, LEAO: leao, TIGRE: tigre, MACACO: "https://cdn-icons-png.flaticon.com/512/2632/2632837.png", "MACACOS": "https://cdn-icons-png.flaticon.com/512/2632/2632837.png",
   URSINHO: ursinho, "URSO": ursinho, PRESENTE: presente, PRINCESA: princesa,
   HEROI: heroi, "HERÓI": heroi, ROBO: robo, "ROBÔ": robo, DIAMANTE: diamante,
   FOGO: fogo, TOCHA: fogo, "VULCÃO": fogo, VULCAO: fogo,

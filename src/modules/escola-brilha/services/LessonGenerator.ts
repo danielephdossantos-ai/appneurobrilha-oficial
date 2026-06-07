@@ -129,12 +129,12 @@ export class LessonGenerator {
     const steps: LessonStep[] = [];
     const isInfant = category.includes('_inf');
     const is1Ano = category.includes('1ano');
-    const isBasic = isInfant || is1Ano || category === 'matematica';
+    const isBasic = isInfant || is1Ano || category === 'matematica' || category === 'portugues';
     const isCycleC = ['matematica_3ano', 'matematica_4ano', 'matematica_5ano'].includes(category);
     const isModern = ['matematica_6ano', 'matematica_7ano', 'matematica_8ano', 'matematica_9ano'].includes(category);
     
     // Para infantil/1ano, valores pequenos (max 5)
-    const maxVal = isInfant ? 3 : is1Ano ? 5 : isCycleC ? 12 : 20;
+    const maxVal = isInfant ? 3 : (is1Ano || isBasic) ? 5 : isCycleC ? 12 : 20;
     const finalCount = isBasic ? 3 : count; // Menos passos para os pequenos
 
     const val1 = Math.floor(Math.random() * maxVal) + 1;
