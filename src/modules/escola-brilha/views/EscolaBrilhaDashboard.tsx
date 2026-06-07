@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { School, BookOpen, Calculator, Microscope, Map, Brain, Star, ChevronRight, GraduationCap } from 'lucide-react';
+import { School, BookOpen, Calculator, Microscope, Map, Brain, Star, ChevronRight, GraduationCap, Trophy, RotateCcw } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
 
 export const EscolaBrilhaDashboard: React.FC = () => {
