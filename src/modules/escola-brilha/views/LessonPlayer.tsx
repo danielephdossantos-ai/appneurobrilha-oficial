@@ -126,7 +126,7 @@ const NOSSO_LUGAR_LESSON: Lesson = {
     // Família
     { id: 'h1', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Quem faz parte da nossa família?',
-      interaction: { type: 'click', correctAnswer: '👨‍👩‍👧‍👦', options: ['👨‍👩‍👧‍👦', '🏫', '🏪'] } },
+      interaction: { type: 'click', correctAnswer: 'FAMÍLIA', options: ['FAMÍLIA', 'ESCOLA', 'LOJA'] } },
     // Escola
     { id: 'h2', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Onde nós vamos para aprender e brincar com os amigos?',
