@@ -1501,6 +1501,89 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_steps: {
+        Row: {
+          created_at: string | null
+          display_text: string | null
+          elements: Json | null
+          id: string
+          interaction: Json | null
+          lesson_id: string | null
+          mascot: string
+          order_index: number
+          phase: string
+          speech_text: string
+          step_id_internal: string
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_text?: string | null
+          elements?: Json | null
+          id?: string
+          interaction?: Json | null
+          lesson_id?: string | null
+          mascot: string
+          order_index: number
+          phase: string
+          speech_text: string
+          step_id_internal: string
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          display_text?: string | null
+          elements?: Json | null
+          id?: string
+          interaction?: Json | null
+          lesson_id?: string | null
+          mascot?: string
+          order_index?: number
+          phase?: string
+          speech_text?: string
+          step_id_internal?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_steps_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lessons: {
+        Row: {
+          bncc_field: string | null
+          category: string
+          created_at: string | null
+          id: string
+          skill_bncc: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          bncc_field?: string | null
+          category: string
+          created_at?: string | null
+          id?: string
+          skill_bncc?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          bncc_field?: string | null
+          category?: string
+          created_at?: string | null
+          id?: string
+          skill_bncc?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       longitudinal_scores: {
         Row: {
           attention_score: number | null
