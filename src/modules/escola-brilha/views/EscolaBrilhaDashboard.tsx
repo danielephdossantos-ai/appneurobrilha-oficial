@@ -9,184 +9,76 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
-      id: 'ciencias_kids',
-      title: 'Ciências Kids',
-      subtitle: 'Curiosidade e Natureza',
-      icon: Brain,
-      color: 'bg-teal-400',
-      field: 'Ciências da Natureza',
-      method: 'Método Científico'
-    },
-    {
       id: 'portugues',
-      title: 'Educação Infantil',
-      subtitle: 'Linguagem e Sons',
+      title: 'Bosque dos Sons',
+      subtitle: 'Trilha: Primeiros Sons',
       icon: BookOpen,
       color: 'bg-orange-400',
-      field: 'Escuta, Fala e Pensamento',
-      method: 'Consciência Fonológica'
+      field: 'Missão: Sons Mágicos',
+      method: 'Próxima Meta: Amigo do Pip'
     },
     {
       id: 'portugues_1ano',
-      title: '1º Ano Alfabetização',
-      subtitle: 'Sílabas e Letras',
+      title: 'Mundo das Letras',
+      subtitle: 'Capítulo: Sílabas',
       icon: BookOpen,
       color: 'bg-emerald-400',
-      field: 'Língua Portuguesa',
-      method: 'Método Fônico'
+      field: 'Missão: Descobrir Palavras',
+      method: 'Próxima Meta: Mestre das Sílabas'
     },
     {
       id: 'matematica',
-      title: 'Matemática Kids',
-      subtitle: 'Números e Quantidades',
+      title: 'Laboratório dos Números',
+      subtitle: 'Capítulo: Primeiras Contas',
       icon: Calculator,
       color: 'bg-blue-400',
-      field: 'Espaços e Quantidades',
-      method: 'Método CRA'
+      field: 'Missão: Somar Frutinhas',
+      method: 'Próxima Meta: Gênio da Adição'
+    },
+    {
+      id: 'ciencias_kids',
+      title: 'Exploradores da Natureza',
+      subtitle: 'Capítulo: Plantas e Sol',
+      icon: Brain,
+      color: 'bg-teal-400',
+      field: 'Missão: Vida Verde',
+      method: 'Próxima Meta: Cientista Júnior'
     },
     {
       id: 'portugues_2ano',
-      title: '2º Ano Português',
-      subtitle: 'Leitura e Escrita',
+      title: 'Viagem Literária',
+      subtitle: 'Capítulo: Frases Mágicas',
       icon: BookOpen,
       color: 'bg-purple-400',
-      field: 'Língua Portuguesa',
-      method: 'Método Fônico'
+      field: 'Missão: Escritor Criativo',
+      method: 'Próxima Meta: Mestre das Frases'
     },
     {
       id: 'matematica_2ano',
-      title: '2º Ano Matemática',
-      subtitle: 'Cálculos e Lógica',
+      title: 'Universo dos Cálculos',
+      subtitle: 'Capítulo: Subtração Espacial',
       icon: Calculator,
       color: 'bg-indigo-400',
-      field: 'Matemática',
-      method: 'Método CRA'
-    },
-    {
-      id: 'portugues_3ano',
-      title: '3º Ano Português',
-      subtitle: 'Fluência e Compreensão',
-      icon: BookOpen,
-      color: 'bg-rose-400',
-      field: 'Língua Portuguesa',
-      method: 'Interface C'
-    },
-    {
-      id: 'matematica_3ano',
-      title: '3º Ano Matemática',
-      subtitle: 'Operações e Espaço',
-      icon: Calculator,
-      color: 'bg-orange-500',
-      field: 'Matemática',
-      method: 'Interface C'
-    },
-    {
-      id: 'portugues_4ano',
-      title: '4º Ano Português',
-      subtitle: 'Gêneros e Escrita',
-      icon: BookOpen,
-      color: 'bg-emerald-500',
-      field: 'Língua Portuguesa',
-      method: 'Interface C'
-    },
-    {
-      id: 'matematica_4ano',
-      title: '4º Ano Matemática',
-      subtitle: 'Frações e Grandezas',
-      icon: Calculator,
-      color: 'bg-yellow-600',
-      field: 'Matemática',
-      method: 'Interface C'
+      field: 'Missão: Resgate Numérico',
+      method: 'Próxima Meta: Herói dos Números'
     },
     {
       id: 'portugues_5ano',
-      title: '5º Ano Português',
-      subtitle: 'Análise e Pontuação',
+      title: 'Detetives do Texto',
+      subtitle: 'Capítulo: Pontuação Secreta',
       icon: BookOpen,
       color: 'bg-blue-500',
-      field: 'Língua Portuguesa',
-      method: 'Interface C'
-    },
-    {
-      id: 'matematica_5ano',
-      title: '5º Ano Matemática',
-      subtitle: 'Porcentagem e Gráficos',
-      icon: Calculator,
-      color: 'bg-orange-600',
-      field: 'Matemática',
-      method: 'Interface C'
-    },
-    {
-      id: 'portugues_6ano',
-      title: '6º Ano Português',
-      subtitle: 'Gramática e Literatura',
-      icon: BookOpen,
-      color: 'bg-indigo-500',
-      field: 'Língua Portuguesa',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'matematica_6ano',
-      title: '6º Ano Matemática',
-      subtitle: 'Inteiros e Geometria',
-      icon: Calculator,
-      color: 'bg-indigo-700',
-      field: 'Matemática',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'portugues_7ano',
-      title: '7º Ano Português',
-      subtitle: 'Argumentação e Gêneros',
-      icon: BookOpen,
-      color: 'bg-indigo-600',
-      field: 'Língua Portuguesa',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'matematica_7ano',
-      title: '7º Ano Matemática',
-      subtitle: 'Equações e Proporções',
-      icon: Calculator,
-      color: 'bg-indigo-800',
-      field: 'Matemática',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'portugues_8ano',
-      title: '8º Ano Português',
-      subtitle: 'Linguagem e Crítica',
-      icon: BookOpen,
-      color: 'bg-indigo-700',
-      field: 'Língua Portuguesa',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'matematica_8ano',
-      title: '8º Ano Matemática',
-      subtitle: 'Sistemas e Funções',
-      icon: Calculator,
-      color: 'bg-indigo-900',
-      field: 'Matemática',
-      method: 'Interface Moderna'
-    },
-    {
-      id: 'portugues_9ano',
-      title: '9º Ano Português',
-      subtitle: 'Dissertação e Análise',
-      icon: BookOpen,
-      color: 'bg-slate-700',
-      field: 'Língua Portuguesa',
-      method: 'Interface Moderna'
+      field: 'Missão: O Código da Vírgula',
+      method: 'Próxima Meta: Expert em Análise'
     },
     {
       id: 'matematica_9ano',
-      title: '9º Ano Matemática',
-      subtitle: 'Álgebra e Funções',
+      title: 'Arena da Álgebra',
+      subtitle: 'Capítulo: Equações de Elite',
       icon: Calculator,
       color: 'bg-slate-900',
-      field: 'Matemática',
-      method: 'Interface Moderna'
+      field: 'Missão: O Valor de X',
+      method: 'Próxima Meta: Lenda da Matemática'
     }
   ];
 
@@ -201,8 +93,8 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             <School className="w-12 h-12 text-blue-500" />
           </motion.div>
-          <h1 className="text-4xl font-black text-blue-600">Escola Brilha</h1>
-          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Educação Infantil (4 a 5 anos)</p>
+          <h1 className="text-4xl font-black text-blue-600">Minha Jornada</h1>
+          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Escolha sua próxima missão</p>
           <div className="mt-4 flex justify-center gap-2 flex-wrap">
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Onomatopeias</span>
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Linguagem Lúdica</span>

@@ -112,7 +112,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-ef01lp05-${Date.now()}`,
-      title: 'Desafio das Sílabas',
+      title: 'Mestre das Sílabas',
+      mission_name: 'Descobrir Palavras',
       bncc_field: 'escuta_fala',
       skill_bncc: 'EF01LP05',
       steps
@@ -243,7 +244,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'Laboratório de Matemática' : isCycleC ? 'Desafios Numéricos' : 'Brincando com Números',
+      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : 'Herói dos Números',
+      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : 'Resgate Numérico',
       bncc_field: 'espacos_tempos',
       steps
     };
@@ -323,7 +325,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-port-c-${Date.now()}`,
-      title: 'Aventura das Palavras',
+      title: 'Mestre das Frases',
+      mission_name: 'Escritor Criativo',
       bncc_field: 'escuta_fala',
       steps
     };
@@ -409,7 +412,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-modern-${Date.now()}`,
-      title: `Plataforma Avançada - ${isMath ? 'Matemática' : 'Português'}`,
+      title: isMath ? 'Lenda da Matemática' : 'Expert em Análise',
+      mission_name: isMath ? 'O Valor de X' : 'O Código da Vírgula',
       bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
       steps
     };
@@ -496,7 +500,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-sci-${Date.now()}`,
-      title: 'Laboratório de Curiosidades',
+      title: 'Cientista Júnior',
+      mission_name: 'Vida Verde',
       bncc_field: 'espacos_tempos',
       steps
     };
