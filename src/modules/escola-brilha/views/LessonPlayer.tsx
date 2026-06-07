@@ -651,7 +651,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Content elements area */}
           {currentStep.elements && currentStep.elements.length > 0 && (
-            <div className={`w-full ${interfaceStyle === 'B' || interfaceStyle === 'C' ? 'min-h-[220px]' : 'min-h-[140px]'} flex items-center justify-center gap-6 flex-wrap`}>
+            <div className={`w-full ${interfaceStyle === 'B' || interfaceStyle === 'C' ? 'min-h-[220px]' : 'min-h-[160px]'} flex items-center justify-center gap-8 flex-wrap py-4`}>
               <AnimatePresence>
                 {currentStep.elements.map((el: any) =>
                   showElements.includes(el.id) && (
