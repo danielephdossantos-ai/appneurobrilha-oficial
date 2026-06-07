@@ -560,7 +560,7 @@ export class LessonGenerator {
       return this.generateInfiniteLesson(category, count);
     }
 
-    if (category === 'ciencias_kids') {
+    if (['ciencias_kids', 'ciencias_inf'].includes(category)) {
       return this.generateScienceLesson(category);
     }
 
@@ -578,9 +578,10 @@ export class LessonGenerator {
 
     switch (category) {
       case 'portugues':
+      case 'portugues_inf':
       case 'portugues_1ano':
         return this.generateEF01LP05(count);
-      case 'matematica':
+      case 'matematica_inf':
         return this.generateCRAMath(category, count);
       case 'portugues_2ano':
         return this.generateEF01LP05(count + 2); 

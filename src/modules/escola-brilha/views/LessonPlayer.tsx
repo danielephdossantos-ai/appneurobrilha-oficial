@@ -429,9 +429,8 @@ export const LessonPlayer: React.FC = () => {
   const [currentLesson] = useState(() => LessonGenerator.generateByCategory(search.category));
 
   const interfaceStyle = 
-    ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
-    ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    ['portugues_3ano', 'matematica_3ano', 'ano3_5'].includes(search.category) ? 'C' :
+    ['portugues', 'portugues_inf', 'matematica_inf', 'ciencias_inf', 'artes_inf', 'portugues_1ano', 'matematica_1ano', 'matematica'].includes(search.category) ? 'A' :
+    ['portugues_2ano', 'matematica_2ano', 'portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano'].includes(search.category) ? 'B' :
     ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
 
 
