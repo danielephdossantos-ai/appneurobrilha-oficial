@@ -126,11 +126,29 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Interface Moderna'
     },
     {
+      id: 'portugues_7ano',
+      title: '7º Ano Português',
+      subtitle: 'Argumentação e Gêneros',
+      icon: BookOpen,
+      color: 'bg-indigo-600',
+      field: 'Língua Portuguesa',
+      method: 'Interface Moderna'
+    },
+    {
+      id: 'matematica_7ano',
+      title: '7º Ano Matemática',
+      subtitle: 'Equações e Proporções',
+      icon: Calculator,
+      color: 'bg-indigo-800',
+      field: 'Matemática',
+      method: 'Interface Moderna'
+    },
+    {
       id: 'fundamental2',
-      title: '7º ao 9º Ano',
+      title: '8º ao 9º Ano',
       subtitle: 'Base Preparatória',
       icon: School,
-      color: 'bg-slate-700',
+      color: 'bg-slate-800',
       field: 'Fundamental II',
       method: 'Moderna'
     }
