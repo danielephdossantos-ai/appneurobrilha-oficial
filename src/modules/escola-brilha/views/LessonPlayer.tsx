@@ -13,7 +13,7 @@ import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 const CIDADE_LETRAS_LESSON: Lesson = {
   id: 'cidade-letras-1ano',
   title: 'Cidade das Letras',
-  bncc_field: 'linguagens',
+  bncc_field: 'escuta_fala',
   skill_bncc: 'EF01LP07',
   steps: [
     // 1. Vogais
