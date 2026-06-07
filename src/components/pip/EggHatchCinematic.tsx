@@ -61,6 +61,55 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
 
       <div className="relative w-full max-w-2xl text-center">
         <AnimatePresence mode="wait">
+          {phase === 'intro' && (
+            <motion.div
+              key="intro"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              className="space-y-8"
+            >
+              <div className="relative mx-auto w-48 h-48 mb-8">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, -5, 5, 0]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <img src={pipEgg} className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]" alt="Ovo Misterioso" />
+                </motion.div>
+                <motion.div
+                  className="absolute inset-0 bg-white/20 blur-2xl rounded-full"
+                  animate={{ opacity: [0, 0.5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </div>
+
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-6xl font-black text-white drop-shadow-lg">
+                  Um ovo mágico apareceu!
+                </h1>
+                <p className="text-white/80 text-xl max-w-md mx-auto font-bold">
+                  Você está pronto para ver quem vai nascer?
+                </p>
+              </div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <KidButton 
+                  variant="primary" 
+                  onClick={() => setPhase('choose')} 
+                  className="px-12 py-6 text-2xl shadow-[0_0_30px_rgba(255,255,255,0.4)] animate-bounce"
+                >
+                  SIM! ESTOU PRONTO! 🐣
+                </KidButton>
+              </motion.div>
+            </motion.div>
+          )}
+
           {phase === 'choose' && (
             <motion.div
               key="choose"
