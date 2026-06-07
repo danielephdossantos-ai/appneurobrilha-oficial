@@ -10,6 +10,7 @@ import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
+import { StudentProgressService } from '../services/StudentProgressService';
 
 
 const PORTUGUES_2ANO_LESSON: Lesson = {
@@ -599,6 +600,7 @@ export const LessonPlayer: React.FC = () => {
         misses: prev.misses + 1,
         percentage: (prev.hits / (prev.hits + prev.misses + 1)) * 100,
       }));
+      StudentProgressService.saveAttempt(search.category, false);
       setFeedback({ kind: 'err', msg: 'Vamos tentar de novo!' });
       setIsSpeaking(true);
       await AudioSpeechService.speak('Vamos tentar juntos! Olhe com atenção.');
