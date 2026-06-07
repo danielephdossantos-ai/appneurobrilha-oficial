@@ -135,15 +135,17 @@ export class LessonGenerator {
     
     // Para infantil/1ano, valores pequenos (max 5)
     const maxVal = isInfant ? 3 : is1Ano ? 5 : isCycleC ? 12 : 20;
+    const finalCount = isBasic ? 3 : count; // Menos passos para os pequenos
+
     const val1 = Math.floor(Math.random() * maxVal) + 1;
-    const val2 = isInfant ? 0 : Math.floor(Math.random() * (maxVal - val1)) + 1;
+    const val2 = isInfant ? 0 : Math.floor(Math.random() * Math.min(maxVal - val1 + 1, maxVal)) + 1;
     
     const op = isCycleC ? 'x' : '+';
     const result = op === 'x' ? val1 * val2 : val1 + val2;
     const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀', '🚗', '🚜'])[0];
 
     // 1. CONCRETO (Visualização da Missão)
-    if (isInfant) {
+    if (isInfant || is1Ano) {
       steps.push({
         id: `math-inf-1`,
         phase: 'explanation',
@@ -165,7 +167,7 @@ export class LessonGenerator {
         interaction: {
           type: 'click',
           correctAnswer: val1.toString(),
-          options: this.shuffle([val1.toString(), (val1 + 1).toString(), (val1 - 1 > 0 ? val1 - 1 : val1 + 2).toString()])
+          options: this.shuffle([val1.toString(), (val1 + 1).toString(), (val1 - 1 > 0 ? val1 - 1 : val1 + 2).toString()]).slice(0, 3)
         }
       });
     } else {
@@ -219,14 +221,14 @@ export class LessonGenerator {
     }
 
     // Treino (Prática)
-    const practiceCount = isInfant ? 2 : count;
+    const practiceCount = isBasic ? 2 : finalCount;
     for (let i = 0; i < practiceCount; i++) {
       const a = Math.floor(Math.random() * (isModern ? 50 : is1Ano ? 5 : 10)) + 1;
-      const b = isInfant ? 0 : Math.floor(Math.random() * (isModern ? 30 : is1Ano ? 3 : 10)) + 1;
+      const b = isBasic ? 0 : Math.floor(Math.random() * (isModern ? 30 : is1Ano ? 3 : 10)) + 1;
       const currentOp = isCycleC || isModern ? (Math.random() > 0.5 ? 'x' : '+') : '+';
       const r = currentOp === 'x' ? a * b : a + b;
 
-      if (isInfant) {
+      if (isBasic) {
         steps.push({
           id: `math-inf-p-${i}`,
           phase: 'practice',
@@ -240,7 +242,7 @@ export class LessonGenerator {
           interaction: {
             type: 'click',
             correctAnswer: a.toString(),
-            options: this.shuffle([a.toString(), (a + 1).toString(), (a + 2).toString()])
+            options: this.shuffle([a.toString(), (a + 1).toString(), (a + 2).toString()]).slice(0, 3)
           }
         });
       } else {
@@ -262,12 +264,13 @@ export class LessonGenerator {
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : isInfant ? 'Primeiros Números' : 'Herói dos Números',
-      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : isInfant ? 'Contar é Divertido' : 'Resgate Numérico',
+      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : isBasic ? 'Primeiros Números' : 'Herói dos Números',
+      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : isBasic ? 'Contar é Divertido' : 'Resgate Numérico',
       bncc_field: 'espacos_tempos',
       steps
     };
   }
+
 
 
 
@@ -626,9 +629,11 @@ export class LessonGenerator {
   }
 
   static generateByCategory(category: string): Lesson {
+    const isInfantOr1st = category.includes('_inf') || category.includes('1ano');
     const mastery = StudentProgressService.getMastery(category); 
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
-    const count = 5 + difficultyMultiplier;
+    const count = isInfantOr1st ? 4 : 5 + difficultyMultiplier;
+
 
     // Subjects: Ciências, História, Geografia, Artes
     if (category.includes('ciencias') || category.includes('historia') || category.includes('geografia') || category.includes('artes')) {

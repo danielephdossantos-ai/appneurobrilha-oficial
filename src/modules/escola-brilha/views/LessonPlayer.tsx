@@ -536,27 +536,26 @@ export const LessonPlayer: React.FC = () => {
         
         const isIllustration = objetoImg(el.content) || /\p{Emoji}/u.test(el.content);
         
+        // No Pré e 1º Ano, evitamos ler cada elemento individualmente se for muita poluição
+        const skipLoopSpeech = isInfantOr1st && currentStep.elements.length > 5;
+
         // If it's an illustration or demonstration, highlight and speak
-        if (isIllustration || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        if ((isIllustration || currentStep.type === 'demonstration' || currentStep.type === 'explanation') && !skipLoopSpeech) {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           
           let textToSpeak = el.content;
           
-          // Se for uma ilustração, tenta falar o nome do objeto em vez do emoji
           if (isIllustration) {
-            // Em matemática, conta os itens
             if (search.category.includes('matematica')) {
               mathItemCount++;
               textToSpeak = getPortugueseCount(mathItemCount, el.content);
             } else {
-              // Se tiver um texto associado no step, fala o texto, senão fala o nome do objeto
               textToSpeak = getWordForContent(el.content);
             }
           }
 
-          // No Infantil, evitamos falar caracteres técnicos
-          if (textToSpeak && textToSpeak !== '+' && textToSpeak !== '=' && textToSpeak !== '?' && textToSpeak !== '_') {
+          if (textToSpeak && !['+', '=', '?', '_'].includes(textToSpeak)) {
             await AudioSpeechService.speak(textToSpeak);
           }
           
@@ -566,6 +565,7 @@ export const LessonPlayer: React.FC = () => {
         }
       }
     }
+
 
     // After elements appear, speak the main instruction and options (if not already spoken)
     const fullSpeech = getStepSpeech(currentStep);
