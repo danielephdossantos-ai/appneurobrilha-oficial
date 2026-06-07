@@ -7,6 +7,8 @@ import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
 import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
+import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
+import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
 const PORTUGUES_1ANO_LESSON: Lesson = {
   id: 'leitura-primeiros-passos',
@@ -45,12 +47,12 @@ const MATH_LESSON: Lesson = {
   steps: [
     { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Quantas maçãs temos aqui?',
-      elements: [{ id: 'a', type: 'text', content: '🍎🍎🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
+      elements: [{ id: 'a', type: 'text', content: '🍎 🍎 🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
       speech: 'Vamos juntar as frutinhas!',
       elements: [
-        { id: 'a1', type: 'text', content: '🍎🍎', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a1', type: 'text', content: '🍎 🍎', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
         { id: 'a2', type: 'text', content: '🍎', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
       ] },
@@ -59,7 +61,7 @@ const MATH_LESSON: Lesson = {
       interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
     { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Tínhamos 4 peixinhos e 1 saiu. Quantos sobraram?',
-      elements: [{ id: 'pe', type: 'text', content: '🐟🐟🐟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'pe', type: 'text', content: '🐟 🐟 🐟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual número vem depois?',
@@ -82,7 +84,7 @@ const LANG_LESSON: Lesson = {
       ] },
     { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'O que rima com CASA?',
-      elements: [{ id: 'ref', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'ref', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '🪽', options: ['⚽', '🪽'] } }
   ]
 };
@@ -116,8 +118,9 @@ export const LessonPlayer: React.FC = () => {
     // Add text elements (like "BOLO") to the speech, but ignore icons/emojis in speech
     if (step.elements) {
       const elementsText = step.elements
-        .filter((el: any) => el.type === 'text' && !/\p{Emoji}/u.test(el.content))
-        .map((el: any) => el.content)
+        .filter((el: any) => el.type === 'text')
+        .map((el: any) => semEmoji(el.content))
+        .filter((txt: string) => txt.length > 0)
         .join('. ');
       
       if (elementsText && !text.includes(elementsText)) {
@@ -268,7 +271,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Content elements area */}
           {currentStep.elements && currentStep.elements.length > 0 && (
-            <div className="w-full min-h-[110px] flex items-center justify-center gap-3 flex-wrap">
+            <div className="w-full min-h-[140px] flex items-center justify-center gap-6 flex-wrap">
               <AnimatePresence>
                 {currentStep.elements.map((el: any) =>
                   showElements.includes(el.id) && (
@@ -278,13 +281,28 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
-                      className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${
+                      className={`flex flex-col items-center justify-center transition-all duration-300 ${
                         highlightedElementId === el.id 
-                          ? 'text-yellow-400 scale-125 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
-                          : 'text-blue-600 scale-100'
+                          ? 'scale-110' 
+                          : 'scale-100'
                       }`}
                     >
-                      {el.content}
+                      {(/\p{Emoji}/u.test(el.content) || objetoImg(el.content)) ? (
+                        <div className={highlightedElementId === el.id ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' : ''}>
+                          <RenderEmoji 
+                            e={el.content} 
+                            className="w-24 h-24 sm:w-32 sm:h-32" 
+                          />
+                        </div>
+                      ) : (
+                        <div className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${
+                          highlightedElementId === el.id 
+                            ? 'text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
+                            : 'text-blue-600'
+                        }`}>
+                          {el.content}
+                        </div>
+                      )}
                     </motion.div>
                   )
                 )}
@@ -294,7 +312,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Interaction options */}
           {currentStep.type === 'interaction' && currentStep.interaction?.options && (
-            <div className="w-full flex flex-wrap items-center justify-center gap-3 pt-2">
+            <div className="w-full flex flex-wrap items-center justify-center gap-4 pt-4">
               <AnimatePresence>
                 {visibleOptions.map((opt, i) => {
                   const palette = [
@@ -304,7 +322,7 @@ export const LessonPlayer: React.FC = () => {
                     'bg-pink-500 border-pink-700',
                   ];
                   const color = palette[i % palette.length];
-                  const isEmoji = /\p{Emoji}/u.test(opt);
+                  const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
                   return (
                     <motion.button
                       key={opt}
@@ -312,9 +330,13 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${color} text-white w-20 h-20 sm:w-24 sm:h-24 rounded-full text-3xl sm:text-4xl font-black shadow-xl border-b-4 hover:scale-110 active:scale-95 transition flex items-center justify-center`}
+                      className={`${color} text-white w-24 h-24 sm:w-28 sm:h-28 rounded-3xl text-3xl sm:text-4xl font-black shadow-xl border-b-8 hover:scale-105 active:scale-95 transition flex items-center justify-center p-4`}
                     >
-                      <span className={isEmoji ? 'text-4xl sm:text-5xl drop-shadow' : ''}>{opt}</span>
+                      {hasIllust ? (
+                        <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
+                      ) : (
+                        <span>{opt}</span>
+                      )}
                     </motion.button>
                   );
                 })}

@@ -144,6 +144,7 @@ export const EMOJI_IMG: Record<string, string> = {
   "🚪": casa, "🦶": ursinho, "🍽️": maca, "🏃": heroi, "👋": feliz,
   "🌈": estrela, "🌶️": fogo,
   "🎲": presente, "🎯": estrela,
+  "🪽": passaro,
 };
 
 /** Retorna a imagem do objeto pelo nome, ou undefined se não houver. */
