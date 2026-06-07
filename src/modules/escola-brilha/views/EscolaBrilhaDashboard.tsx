@@ -9,6 +9,15 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
+      id: 'portugues',
+      title: 'Bosque dos Sons',
+      subtitle: 'Trilha: Primeiros Sons',
+      icon: BookOpen,
+      color: 'bg-orange-400',
+      field: 'Missão: Sons Mágicos',
+      method: 'Amigo do Pip'
+    },
+    {
       id: 'portugues_1ano',
       title: 'Mundo das Letras',
       subtitle: 'Capítulo: Sílabas',
