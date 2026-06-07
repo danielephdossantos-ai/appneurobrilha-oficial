@@ -10,6 +10,7 @@ import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
+import { WORD_BANK } from '../data/content-banks';
 import { StudentProgressService } from '../services/StudentProgressService';
 
 
