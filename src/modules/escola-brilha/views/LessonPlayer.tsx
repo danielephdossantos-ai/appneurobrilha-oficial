@@ -10,117 +10,90 @@ import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
-const PORTUGUES_1ANO_LESSON: Lesson = {
-  id: 'leitura-primeiros-passos',
-  title: 'Primeiros Passos na Leitura',
+const PRE_SCHOOL_LESSON: Lesson = {
+  id: 'pre-escola-cidade-letras',
+  title: 'Cidade das Letras',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP06',
+  skill_bncc: 'EI03EF01',
   steps: [
-    { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      displayText: 'CASA',
-      speechText: 'Vamos aprender uma palavra nova! Esta palavra é casa.',
-      elements: [{ id: 'casa-full', type: 'text', content: 'casa', speechText: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
-    { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      displayText: 'CA - SA',
-      speechText: 'Agora, vamos separar os pedacinhos da palavra casa. Escute com atenção!',
+    { id: 'v1', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      displayText: 'ENCONTRE A LETRA A',
+      speechText: 'Olá amiguinho! Vamos brincar de procurar? Encontre para mim a letra A, de abelha!',
       elements: [
-        { id: 'ca', type: 'text', content: 'CA', speechText: 'Esta é a sílaba CA.', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
-        { id: 'sa', type: 'text', content: 'SA', speechText: 'E esta é a sílaba SA.', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
-      ] },
-    { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'CASA',
-      speechText: 'Olhe para a palavra casa. Qual é o primeiro pedacinho dela? É o CA, o BO ou o PA?',
-      elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
-    { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'BOLO',
-      speechText: 'Escolha a imagem que representa o bolo!',
-      elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
-    { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'O GATO DORME',
-      speechText: 'O gato está dormindo. Quem é que está dormindo?',
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
-    }
+        { id: 'a1', type: 'text', content: '🍎 A', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a2', type: 'text', content: '🐶 P', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'a3', type: 'text', content: '🚗 O', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
+      ],
+      interaction: { type: 'click', correctAnswer: '🍎 A', options: ['🍎 A', '🐶 P', '🚗 O'] } },
+    { id: 'v2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      displayText: 'QUAL LETRA COMEÇA BOLA?',
+      speechText: 'Olha que bola legal! Você sabe com qual letra começa a palavra bola? É com o B, com o M ou com o P?',
+      elements: [{ id: 'img-bola', type: 'text', content: 'bola', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'B', options: ['B', 'M', 'P'] } },
+    { id: 'v3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      displayText: 'QUEM FAZ ESTE SOM?',
+      speechText: 'Escute com muita atenção... Miau! Qual desses animaizinhos faz esse som? É o gatinho, o cachorrinho ou a galinha?',
+      elements: [{ id: 'som-gato', type: 'text', content: '🐱', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'galinha'] } }
   ]
 };
 
-const MATH_LESSON: Lesson = {
-  id: 'matematica-1ano',
-  title: 'Matemática Divertida',
+const VALE_NUMEROS_LESSON: Lesson = {
+  id: 'vale-dos-numeros',
+  title: 'Vale dos Números',
   bncc_field: 'espacos_tempos',
-  skill_bncc: 'EF01MA06',
+  skill_bncc: 'EI03ET07',
   steps: [
-    { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
+    { id: 'n1', phase: 'practice', type: 'interaction', mascot: 'pip',
       displayText: 'QUANTAS MAÇÃS?',
-      speechText: 'Conte as maçãs que aparecem na tela. Quantas maçãs nós temos aqui? São duas, três ou quatro?',
+      speechText: 'Hum, que maçãs deliciosas! Conte devagarzinho... Quantas maçãs existem na tela? Uma, três ou cinco?',
       elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
+        { id: 'm1', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'm2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'm3', type: 'text', content: 'maça', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 },
       ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      displayText: 'VAMOS SOMAR',
-      speechText: 'Vamos juntar todas essas frutinhas para ver quantas ficam juntas!',
+      interaction: { type: 'click', correctAnswer: '3', options: ['1', '3', '5'] } },
+    { id: 'n2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      displayText: 'COLOQUE 4 ESTRELAS NA CAIXA',
+      speechText: 'Agora um desafio! Precisamos colocar quatro estrelas brilhantes dentro da caixa. Você consegue me ajudar?',
       elements: [
-        { id: 'd1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'd2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.5 },
-        { id: 'plus', type: 'text', content: '+', position: { x: 20, y: 0 }, animation: 'fade', delay: 0.7 },
-        { id: 'd3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.9 },
-      ] },
-    { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'TOTAL DE MAÇÃS',
-      speechText: 'Se a gente juntar todas essas maçãs, quantas teremos ao todo? Uma, duas ou três?',
-      elements: [
-        { id: 'r1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'r2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'r3', type: 'text', content: 'maça', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
+        { id: 'n4', type: 'text', content: '4', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.2 },
+        { id: 'box', type: 'text', content: '🎁', position: { x: 0, y: 40 }, animation: 'fade', delay: 0.5 }
       ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
-    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'SOBROU QUANTOS?',
-      speechText: 'Nós tínhamos alguns peixinhos, mas um deles nadou para longe. Quantos peixinhos sobraram agora?',
-      elements: [
-        { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'QUAL É O PRÓXIMO?',
-      speechText: 'Olhe para os números: um, dois, três... Qual é o número que vem logo depois do três?',
-      elements: [{ id: 'sq', type: 'text', content: '1  2  3  ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '4', options: ['4', '5', '6'] } }
+      interaction: { type: 'click', correctAnswer: '⭐⭐⭐⭐', options: ['⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'] } }
   ]
 };
 
-const LANG_LESSON: Lesson = {
-  id: 'brincando-com-rimas',
-  title: 'Brincando com Rimas',
-  bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF02',
+const FLORESTA_ATENCAO_LESSON: Lesson = {
+  id: 'floresta-atencao',
+  title: 'Floresta da Atenção',
+  bncc_field: 'eu_outro_nos',
+  skill_bncc: 'EI03EO02',
   steps: [
-    { id: 'r1', phase: 'explanation', type: 'explanation', mascot: 'pip',
-      displayText: 'VAMOS RIMAR!',
-      speechText: 'Hoje vamos descobrir as rimas! Rima é quando as palavras terminam com o mesmo som, como casa e asa.',
+    { id: 'mem1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      displayText: 'O QUE SUMIU?',
+      speechText: 'Olhe bem para estas frutinhas: a maçã, a banana e a uva. Memorize elas!',
       elements: [
-        { id: 'c', type: 'text', content: 'casa', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
-        { id: 'a', type: 'text', content: 'asa', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
+        { id: 'f1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'f2', type: 'text', content: 'banana', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'f3', type: 'text', content: '🍇', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
       ] },
-    { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'O QUE RIMA COM CASA?',
-      speechText: 'Escute bem: o que rima com a palavra casa? Será que é bola ou é asa?',
-      elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'asa', options: ['bola', 'asa'] } }
+    { id: 'mem2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      displayText: 'QUAL FRUTINHA SUMIU?',
+      speechText: 'Agora feche os olhos... Prontinho! Uma frutinha sumiu. Você sabe qual delas não está mais aqui? Foi a maçã ou foi a banana?',
+      elements: [
+        { id: 'f1r', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'f3r', type: 'text', content: '🍇', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.4 },
+      ],
+      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca'] } }
   ]
 };
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   const currentLesson =
-    search.category === 'matematica' ? MATH_LESSON :
-    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+    search.category === 'matematica' ? VALE_NUMEROS_LESSON :
+    search.category === 'portugues' ? PRE_SCHOOL_LESSON : FLORESTA_ATENCAO_LESSON;
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
