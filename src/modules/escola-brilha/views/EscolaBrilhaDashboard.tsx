@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { School, BookOpen, Calculator, Palette, Move, Heart, Brain } from 'lucide-react';
+import { School, BookOpen, Calculator, Microscope, Map, Brain } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
 
 export const EscolaBrilhaDashboard: React.FC = () => {
@@ -10,48 +10,39 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const categories = [
     {
       id: 'portugues_1ano',
-      title: 'Trilha das Palavras',
-      subtitle: 'Escuta, Fala e Leitura',
+      title: 'Cidade das Letras',
+      subtitle: 'Alfabetização e Leitura',
       icon: BookOpen,
       color: 'bg-emerald-400',
-      field: 'BNCC: EI03EF01 a EF05',
-      method: 'Consciência Fonológica'
+      field: 'BNCC: EF01LP01 a LP08',
+      method: 'Método Fônico e Sílabas'
     },
     {
       id: 'matematica',
-      title: 'Trilha dos Números',
-      subtitle: 'Quantidade e Sequência',
+      title: 'Vale dos Números',
+      subtitle: 'Operações e Contagem',
       icon: Calculator,
       color: 'bg-blue-400',
-      field: 'BNCC: EI03ET01 a ET07',
-      method: 'Classificação e Comparação'
+      field: 'BNCC: EF01MA01 a MA08',
+      method: 'Soma e Subtração Visual'
     },
     {
-      id: 'cores_formas',
-      title: 'Cores e Formas',
-      subtitle: 'Percepção e Criatividade',
-      icon: Palette,
+      id: 'ciencias',
+      title: 'Mundo das Descobertas',
+      subtitle: 'Corpo, Plantas e Higiene',
+      icon: Microscope,
       color: 'bg-orange-400',
-      field: 'BNCC: EI03TS02 a TS03',
-      method: 'Artes Visuais'
+      field: 'BNCC: EF01CI01 a CI03',
+      method: 'Ciências da Natureza'
     },
     {
-      id: 'movimentos',
-      title: 'Trilha dos Movimentos',
-      subtitle: 'Coordenação e Lateralidade',
-      icon: Move,
+      id: 'historia_geografia',
+      title: 'Nosso Lugar',
+      subtitle: 'Família, Escola e Bairro',
+      icon: Map,
       color: 'bg-purple-400',
-      field: 'BNCC: EI03CG01 a CG04',
-      method: 'Esquema Corporal'
-    },
-    {
-      id: 'emocoes',
-      title: 'Trilha das Emoções',
-      subtitle: 'Empatia e Sentimentos',
-      icon: Heart,
-      color: 'bg-pink-400',
-      field: 'BNCC: EI03EO01 a EO04',
-      method: 'Socioemocional'
+      field: 'BNCC: EF01HI01 e GE01',
+      method: 'Sociedade e Espaço'
     }
   ];
 
@@ -66,18 +57,18 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             <School className="w-12 h-12 text-blue-500" />
           </motion.div>
-          <h1 className="text-4xl font-black text-blue-600 italic">1º Ano</h1>
+          <h1 className="text-4xl font-black text-blue-600 italic">Escola Brilha: 1º Ano</h1>
           <p className="text-blue-400 font-bold uppercase tracking-widest mt-2 max-w-2xl mx-auto">
-            Alfabetização formal e áreas de conhecimento baseadas na BNCC
+            Alfabetização Formal e Áreas de Conhecimento
           </p>
           <div className="mt-4 flex justify-center gap-2 flex-wrap">
-            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase italic">Consciência Fonológica</span>
-            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase italic">Linguagem e Letramento</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase italic">BNCC 2026</span>
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase italic">Alfabetização</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase italic">Neurociência</span>
           </div>
         </header>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {categories.map((cat) => (
             <motion.div
               key={cat.id}
@@ -113,7 +104,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                   });
                 }}
               >
-                Brincar e Aprender
+                Começar Missão
               </Button>
             </motion.div>
           ))}
