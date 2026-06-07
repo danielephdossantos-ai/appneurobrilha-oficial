@@ -325,7 +325,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-port-c-${Date.now()}`,
-      title: 'Missão: Escritor Criativo',
+      title: 'Mestre das Frases',
+      mission_name: 'Escritor Criativo',
       bncc_field: 'escuta_fala',
       steps
     };
