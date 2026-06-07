@@ -617,7 +617,7 @@ export const LessonPlayer: React.FC = () => {
       <LessonEnvironment>
       <LessonHeader
         progress={progress}
-        missionName={currentLesson.title}
+        missionName={currentLesson.mission_name || currentLesson.title}
         xp={currentLesson.xp || (100 + (currentStepIndex * 10))}
         field={currentLesson.bncc_field}
         stepIndex={currentStepIndex}
