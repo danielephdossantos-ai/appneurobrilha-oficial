@@ -95,24 +95,46 @@ const VALE_NUMEROS_LESSON: Lesson = {
 const MUNDO_DESCOBERTAS_LESSON: Lesson = {
   id: 'mundo-descobertas-1ano',
   title: 'Mundo das Descobertas',
-  bncc_field: 'espacos_tempos', // Simulating CI
+  bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01CI01',
   steps: [
+    // Corpo Humano
     { id: 'd1', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Onde está o coração no corpo humano?',
-      interaction: { type: 'click', correctAnswer: '❤', options: ['❤', '👃', '👂'] } }
+      interaction: { type: 'click', correctAnswer: '❤️', options: ['❤️', '👃', '👂'] } },
+    // Animais
+    { id: 'd2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual destes animais vive na água?',
+      interaction: { type: 'click', correctAnswer: '🐟', options: ['🐶', '🐟', '🐦'] } },
+    // Plantas
+    { id: 'd3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O que as plantas precisam para crescer?',
+      interaction: { type: 'click', correctAnswer: '☀️', options: ['☀️', '⚽', '🚗'] } },
+    // Higiene
+    { id: 'd4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'O que usamos para lavar as mãos?',
+      interaction: { type: 'click', correctAnswer: '🧼', options: ['🧼', '🍪', '🧸'] } }
   ]
 };
 
 const NOSSO_LUGAR_LESSON: Lesson = {
   id: 'nosso-lugar-1ano',
   title: 'Nosso Lugar',
-  bncc_field: 'eu_outro_nos', // Simulating HI/GE
+  bncc_field: 'eu_outro_nos',
   skill_bncc: 'EF01HI01',
   steps: [
+    // Família
     { id: 'h1', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Quem faz parte da nossa família?',
-      interaction: { type: 'click', correctAnswer: 'FAMÍLIA', options: ['FAMÍLIA', 'ESCOLA', 'LOJA'] } }
+      interaction: { type: 'click', correctAnswer: '👨‍👩‍👧‍👦', options: ['👨‍👩‍👧‍👦', '🏫', '🏪'] } },
+    // Escola
+    { id: 'h2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Onde nós vamos para aprender e brincar com os amigos?',
+      interaction: { type: 'click', correctAnswer: '🏫', options: ['🏫', '🏖️', '🍿'] } },
+    // Bairro/Localização
+    { id: 'h3', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual imagem representa a nossa casa?',
+      interaction: { type: 'click', correctAnswer: '🏠', options: ['🏠', '🌳', '☁️'] } }
   ]
 };
 
