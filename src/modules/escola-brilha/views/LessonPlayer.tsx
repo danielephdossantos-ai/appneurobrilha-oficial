@@ -622,10 +622,11 @@ export const LessonPlayer: React.FC = () => {
         field={currentLesson.bncc_field}
         stepIndex={currentStepIndex}
         totalSteps={currentLesson.steps.length}
+        isModern={isModern}
       />
 
       {/* Activity card */}
-      <div className="w-full max-w-md px-4 pt-24 pb-56 flex flex-col items-center">
+      <div className={`w-full ${isModern ? 'max-w-5xl' : 'max-w-md'} px-4 pt-24 pb-56 flex flex-col items-center`}>
         <motion.div
           key={currentStep.id}
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
