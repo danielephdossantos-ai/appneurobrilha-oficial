@@ -48,10 +48,52 @@ const MATEMATICA_2ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_3ANO_LESSON: Lesson = {
+  id: 'portugues-3ano-sinonimos',
+  title: 'Sinônimos e Antônimos - 3º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF03LP01',
+  steps: [
+    { id: 'p3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Olá! Vamos aprender sobre palavras que têm significados parecidos? Chamamos de sinônimos.',
+      elements: [{ id: 's-txt', type: 'text', content: 'GRANDE = ENORME', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p3s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual é o sinônimo de BONITO?',
+      interaction: { type: 'click', correctAnswer: 'LINDO', options: ['LINDO', 'FEIO', 'PEQUENO'] } },
+    { id: 'p3s3', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'E o contrário? O oposto de uma palavra chamamos de antônimo.',
+      elements: [{ id: 'a-txt', type: 'text', content: 'FELIZ ≠ TRISTE', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p3s4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual é o antônimo de QUENTE?',
+      interaction: { type: 'click', correctAnswer: 'FRIO', options: ['FRIO', 'MORNO', 'FOGO'] } }
+  ]
+};
+
+const MATEMATICA_3ANO_LESSON: Lesson = {
+  id: 'matematica-3ano-multiplicacao',
+  title: 'Multiplicação e Divisão - 3º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF03MA01',
+  steps: [
+    { id: 'm3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'A multiplicação é uma forma rápida de somar! 2 vezes 3 é o mesmo que 3 + 3.',
+      elements: [{ id: 'mult-1', type: 'text', content: '2 x 3 = 6', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm3s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Quanto é 3 vezes 3?',
+      interaction: { type: 'click', correctAnswer: '9', options: ['6', '9', '12'] } },
+    { id: 'm3s3', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Dividir é repartir em partes iguais!',
+      elements: [{ id: 'div-1', type: 'text', content: '6 ÷ 2 = 3', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm3s4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Se eu tenho 10 balas e divido para 2 amigos, quantas cada um ganha?',
+      interaction: { type: 'click', correctAnswer: '5', options: ['2', '5', '10'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
-  bncc_field: 'espacos_tempos',
+  bncc_field: 'escuta_fala',
   skill_bncc: 'EF03CI01',
   steps: [
     { id: 'a3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
@@ -205,6 +247,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica': MATH_LESSON,
     'portugues_2ano': PORTUGUES_2ANO_LESSON,
     'matematica_2ano': MATEMATICA_2ANO_LESSON,
+    'portugues_3ano': PORTUGUES_3ANO_LESSON,
+    'matematica_3ano': MATEMATICA_3ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
   };
@@ -213,7 +257,7 @@ export const LessonPlayer: React.FC = () => {
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    search.category === 'ano3_5' ? 'C' : 'Modern';
+    ['portugues_3ano', 'matematica_3ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
 
   const isModern = interfaceStyle === 'Modern';
 

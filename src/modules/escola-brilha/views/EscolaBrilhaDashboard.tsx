@@ -54,11 +54,29 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Método CRA'
     },
     {
+      id: 'portugues_3ano',
+      title: '3º Ano Português',
+      subtitle: 'Fluência e Compreensão',
+      icon: BookOpen,
+      color: 'bg-rose-400',
+      field: 'Língua Portuguesa',
+      method: 'Interface C'
+    },
+    {
+      id: 'matematica_3ano',
+      title: '3º Ano Matemática',
+      subtitle: 'Operações e Espaço',
+      icon: Calculator,
+      color: 'bg-orange-500',
+      field: 'Matemática',
+      method: 'Interface C'
+    },
+    {
       id: 'ano3_5',
-      title: '3º ao 5º Ano',
+      title: '4º ao 5º Ano',
       subtitle: 'Conhecimento Pleno',
       icon: Brain,
-      color: 'bg-rose-400',
+      color: 'bg-blue-600',
       field: 'Fundamental I',
       method: 'Interface C'
     },
