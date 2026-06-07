@@ -407,6 +407,10 @@ export const LessonPlayer: React.FC = () => {
                   ];
                   const colorClasses = palette[i % palette.length];
                   const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
+                  const isNumber = /^\d+$/.test(opt);
+                  const fontSize = hasIllust ? '' : 
+                                   (opt.length === 1 || isNumber) ? 'text-7xl sm:text-8xl' : 
+                                   opt.length === 2 ? 'text-5xl sm:text-6xl' : 'text-3xl sm:text-4xl';
                   return (
                     <motion.button
                       key={opt}
@@ -414,7 +418,7 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${colorClasses} w-24 h-24 sm:w-32 sm:h-32 rounded-full text-7xl sm:text-8xl font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
+                      className={`${colorClasses} w-24 h-24 sm:w-32 sm:h-32 rounded-full ${fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
                     >
                       {hasIllust ? (
                         <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
