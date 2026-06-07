@@ -729,7 +729,7 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${colorClasses} w-24 h-24 sm:w-32 sm:h-32 rounded-full ${fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
+                      className={`${colorClasses} ${isModern ? 'w-auto px-10 h-20 rounded-2xl text-2xl' : 'w-24 h-24 sm:w-32 sm:h-32 rounded-full ' + fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
                     >
                       {hasIllust ? (
                         <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
