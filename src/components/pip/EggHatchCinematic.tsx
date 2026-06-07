@@ -123,13 +123,26 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
                 O ovo está se mexendo...
               </h2>
-              <motion.img
-                src={eggImg}
-                alt="Ovo chocando"
-                className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
-                animate={{ rotate: [-6, 6, -6, 6, -4, 4, 0], y: [0, -8, 0, -8, 0] }}
+              <motion.div
+                animate={{ 
+                  rotate: [-6, 6, -6, 6, -4, 4, 0], 
+                  y: [0, -8, 0, -8, 0],
+                  scale: [1, 1.05, 1, 1.05, 1]
+                }}
                 transition={{ duration: 1.8, ease: 'easeInOut' }}
-              />
+                className="relative"
+              >
+                <img
+                  src={eggImg}
+                  alt="Ovo chocando"
+                  className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
+                />
+                <motion.div
+                  className="absolute inset-0 bg-white/20 blur-xl rounded-full"
+                  animate={{ opacity: [0, 0.4, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                />
+              </motion.div>
               <p className="text-white/80 text-lg">Algo mágico está prestes a acontecer!</p>
             </motion.div>
           )}
@@ -148,18 +161,65 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               <motion.div
                 className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
                 initial={{ scale: 0.8 }}
-                animate={{ scale: [0.8, 1.1, 1] }}
+                animate={{ 
+                  scale: [0.8, 1.1, 1],
+                  rotate: [-2, 2, -2, 2, 0] 
+                }}
                 transition={{ duration: 0.6 }}
               >
-                <img src={hatchImg} alt="Nascendo" className="w-full h-full object-contain drop-shadow-2xl" />
-                {/* flash */}
+                <img src={eggImg} alt="Ovo rachando" className="w-full h-full object-contain drop-shadow-2xl brightness-110" />
                 <motion.div
                   className="absolute inset-0 rounded-full bg-white/70 blur-2xl"
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 0.9, 0] }}
+                  animate={{ opacity: [0, 1, 0] }}
                   transition={{ duration: 0.8 }}
                 />
               </motion.div>
+            </motion.div>
+          )}
+
+          {phase === 'open' && (
+            <motion.div
+              key="open"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
+                Olha! Ele está saindo!
+              </h2>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                <motion.div
+                  initial={{ y: 0, opacity: 1 }}
+                  animate={{ y: -40, rotate: -20, opacity: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="absolute top-0 left-0 w-full h-1/2 overflow-hidden"
+                >
+                  <img src={eggImg} className="w-full h-[200%] object-contain drop-shadow-lg" style={{ clipPath: 'inset(0 0 50% 0)' }} alt="Casca topo" />
+                </motion.div>
+                <motion.div
+                  initial={{ y: 0, opacity: 1 }}
+                  animate={{ y: 40, rotate: 20, opacity: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="absolute bottom-0 left-0 w-full h-1/2 overflow-hidden"
+                >
+                  <img src={eggImg} className="w-full h-[200%] object-contain drop-shadow-lg" style={{ clipPath: 'inset(50% 0 0 0)' }} alt="Casca fundo" />
+                </motion.div>
+                <motion.img 
+                  src={hatchImg} 
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 1, type: "spring" }}
+                  className="w-full h-full object-contain drop-shadow-2xl"
+                  alt="Nascendo" 
+                />
+                <motion.div
+                  className="absolute inset-0 bg-yellow-200/40 blur-3xl rounded-full"
+                  animate={{ scale: [1, 1.5, 1], opacity: [0, 0.8, 0] }}
+                  transition={{ duration: 1.2 }}
+                />
+              </div>
             </motion.div>
           )}
 
@@ -175,17 +235,20 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                 <Sparkles size={14} /> Bem-vindo ao mundo!
               </div>
               <h2 className="text-4xl md:text-6xl font-black text-white drop-shadow-lg">
-                Olá, eu sou seu {mascot === 'pip' ? 'Pip' : 'sua Pipa'}!
+                Olá, eu sou seu {mascot === 'pip' ? 'Pip' : 'sua Pipa'} Bebê!
               </h2>
               <motion.img
-                src={hatchImg}
-                alt="Mascote nascido"
+                src={babyImg}
+                alt="Mascote bebê"
                 className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                animate={{ 
+                  y: [0, -15, 0],
+                  scale: [1, 1.05, 1] 
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               />
               <p className="text-white/90 text-lg max-w-md mx-auto">
-                Brinque, aprenda e ganhe Moedas Brilha 💰 para fazer seu amiguinho crescer e desbloquear novas fantasias!
+                Brinque, aprenda e ganhe Moedas Brilha 💰 para me ver crescer ainda mais!
               </p>
               <KidButton variant="primary" onClick={finish} className="px-10 py-5 text-lg">
                 Vamos brincar! 🚀
