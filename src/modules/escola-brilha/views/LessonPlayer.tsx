@@ -119,8 +119,8 @@ const LANG_LESSON: Lesson = {
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   const currentLesson =
-    search.category === 'matematica' ? MATH_LESSON :
-    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+    search.category === 'matematica' ? VALE_NUMEROS_LESSON :
+    search.category === 'portugues' ? PRE_SCHOOL_LESSON : FLORESTA_ATENCAO_LESSON;
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
