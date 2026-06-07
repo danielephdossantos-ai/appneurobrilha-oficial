@@ -1,127 +1,116 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Volume2, Loader2 } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
+import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
-import { supabase } from '@/integrations/supabase/client';
 
-const PRE_SCHOOL_LESSON: Lesson = {
-  id: 'pre-escola-cidade-letras',
-  title: 'Cidade das Letras',
+const PORTUGUES_1ANO_LESSON: Lesson = {
+  id: 'leitura-primeiros-passos',
+  title: 'Primeiros Passos na Leitura',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF01',
+  skill_bncc: 'EF01LP06',
   steps: [
-    { id: 'v1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'ENCONTRE A LETRA A',
-      speechText: 'Olá amiguinho! Vamos brincar de procurar? Encontre para mim a letra A, de abelha!',
+    { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Qual é a primeira sílaba de CASA?',
+      elements: [{ id: 'casa-full', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
+      speech: 'Vamos separar as sílabas de CASA!',
       elements: [
-        { id: 'a1', type: 'text', content: '🍎 A', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'a2', type: 'text', content: '🐶 P', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'a3', type: 'text', content: '🚗 O', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '🍎 A', options: ['🍎 A', '🐶 P', '🚗 O'] } },
-    { id: 'v2', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'QUAL LETRA COMEÇA BOLA?',
-      speechText: 'Olha que bola legal! Você sabe com qual letra começa a palavra bola? É com o B, com o M ou com o P?',
-      elements: [{ id: 'img-bola', type: 'text', content: 'bola', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'B', options: ['B', 'M', 'P'] } },
-    { id: 'v3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'QUEM FAZ ESTE SOM?',
-      speechText: 'Escute com muita atenção... Miau! Qual desses animaizinhos faz esse som? É o gatinho, o cachorrinho ou a galinha?',
-      elements: [{ id: 'som-gato', type: 'text', content: '🐱', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'galinha'] } },
-    { id: 'v4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'ASSOCIAÇÃO DE CORES',
-      speechText: 'Veja a cor deste sol radiante! Ele é amarelo. Qual destas frutas também tem a cor amarela? É a banana, a maçã ou a uva?',
-      elements: [{ id: 'sol-ref', type: 'text', content: 'sol', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca', '🍇'] } },
-    { id: 'v5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'O QUE COMEMOS?',
-      speechText: 'Estou com um pouquinho de fome! Qual destes objetos nós podemos comer? É o bolo, o carro ou o robô?',
-      elements: [{ id: 'comida-ref', type: 'text', content: '😋', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'robo'] } }
-  ]
-};
-
-const VALE_NUMEROS_LESSON: Lesson = {
-  id: 'vale-dos-numeros',
-  title: 'Vale dos Números',
-  bncc_field: 'espacos_tempos',
-  skill_bncc: 'EI03ET07',
-  steps: [
-    { id: 'n1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'QUANTAS MAÇÃS?',
-      speechText: 'Hum, que maçãs deliciosas! Conte devagarzinho... Quantas maçãs existem na tela? Uma, três ou cinco?',
-      elements: [
-        { id: 'm1', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'm2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'm3', type: 'text', content: 'maça', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['1', '3', '5'] } },
-    { id: 'n2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'COLOQUE 4 ESTRELAS NA CAIXA',
-      speechText: 'Agora um desafio! Precisamos colocar quatro estrelas brilhantes dentro da caixa. Você consegue me ajudar?',
-      elements: [
-        { id: 'n4', type: 'text', content: '4', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.2 },
-        { id: 'box', type: 'text', content: '🎁', position: { x: 0, y: 40 }, animation: 'fade', delay: 0.5 }
-      ],
-      interaction: { type: 'click', correctAnswer: '⭐⭐⭐⭐', options: ['⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'] } },
-    { id: 'n3', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'QUAL É O MAIOR?',
-      speechText: 'Olhe para estes dois amigos: o leão e a abelha. Qual deles é o maior de todos? É o leão ou é a abelha?',
-      elements: [
-        { id: 'big', type: 'text', content: 'leao', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'small', type: 'text', content: 'abelha', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
-      ],
-      interaction: { type: 'click', correctAnswer: 'leao', options: ['leao', 'abelha'] } }
-  ]
-};
-
-const FLORESTA_ATENCAO_LESSON: Lesson = {
-  id: 'floresta-atencao',
-  title: 'Floresta da Atenção',
-  bncc_field: 'eu_outro_nos',
-  skill_bncc: 'EI03EO02',
-  steps: [
-    { id: 'mem1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      displayText: 'O QUE SUMIU?',
-      speechText: 'Olhe bem para estas frutinhas: a maçã, a banana e a uva. Memorize elas!',
-      elements: [
-        { id: 'f1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'f2', type: 'text', content: 'banana', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'f3', type: 'text', content: '🍇', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
+        { id: 'ca', type: 'text', content: 'CA', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
       ] },
-    { id: 'mem2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      displayText: 'QUAL FRUTINHA SUMIU?',
-      speechText: 'Agora feche os olhos... Prontinho! Uma frutinha sumiu. Você sabe qual delas não está mais aqui? Foi a maçã ou foi a banana?',
+    { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual é a primeira sílaba de CASA?',
+      elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
+    { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'ESCOLHA A IMAGEM CORRETA! BOLO',
+      elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
+    { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O gato dorme. Quem dorme?',
+      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
+    }
+  ]
+};
+
+const MATH_LESSON: Lesson = {
+  id: 'matematica-1ano',
+  title: 'Matemática Divertida',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF01MA06',
+  steps: [
+    { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Quantas maçãs temos aqui?',
       elements: [
-        { id: 'f1r', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'f3r', type: 'text', content: '🍇', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'a3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
       ],
-      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca'] } },
-    { id: 'log1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      displayText: 'QUEM NÃO PERTENCE?',
-      speechText: 'Aqui temos uma maçã, uma banana e um carro. Um deles não é uma fruta! Qual deles não pertence ao grupo das frutas?',
+      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
+    { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
+      speech: 'Vamos juntar as frutinhas!',
       elements: [
-        { id: 'l1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'l2', type: 'text', content: 'banana', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'l3', type: 'text', content: 'carro', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 }
+        { id: 'd1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'd2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.5 },
+        { id: 'plus', type: 'text', content: '+', position: { x: 20, y: 0 }, animation: 'fade', delay: 0.7 },
+        { id: 'd3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.9 },
+      ] },
+    { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Quantas maçãs ao todo?',
+      elements: [
+        { id: 'r1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'r2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'r3', type: 'text', content: 'maça', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
       ],
-      interaction: { type: 'click', correctAnswer: 'carro', options: ['maca', 'banana', 'carro'] } }
+      interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
+    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Tínhamos peixinhos e um saiu. Quantos sobraram?',
+      elements: [
+        { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
+      ],
+      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
+    { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual número vem depois?',
+      elements: [{ id: 'sq', type: 'text', content: '1  2  3  ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: '4', options: ['4', '5', '6'] } }
+  ]
+};
+
+const LANG_LESSON: Lesson = {
+  id: 'brincando-com-rimas',
+  title: 'Brincando com Rimas',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EI03EF02',
+  steps: [
+    { id: 'r1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Vamos descobrir as rimas!',
+      elements: [
+        { id: 'c', type: 'text', content: 'casa', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
+        { id: 'a', type: 'text', content: 'asa', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
+      ] },
+    { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O que rima com CASA?',
+      elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'asa', options: ['bola', 'asa'] } }
   ]
 };
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
+  const currentLesson =
+    search.category === 'matematica' ? MATH_LESSON :
+    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
   const [showElements, setShowElements] = useState<string[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [highlightedElementId, setHighlightedElementId] = useState<string | null>(null);
@@ -129,72 +118,48 @@ export const LessonPlayer: React.FC = () => {
   const [feedback, setFeedback] = useState<{ kind: 'ok' | 'err' | 'done'; msg: string } | null>(null);
   const [, setPerformance] = useState<LessonPerformance>({ hits: 0, misses: 0, startTime: Date.now(), percentage: 0 });
 
-  useEffect(() => {
-    const fetchLesson = async () => {
-      setLoading(true);
-      try {
-        // Query dynamic lessons from Supabase based on category
-        const { data: lessons, error: lessonError } = await supabase
-          .from('lessons')
-          .select('*, lesson_steps(*)')
-          .eq('category', search.category || 'portugues')
-          .order('created_at', { ascending: false });
-
-        if (lessonError) throw lessonError;
-
-        if (lessons && lessons.length > 0) {
-          // Pick a random lesson from the 200 variations
-          const randomLesson = lessons[Math.floor(Math.random() * lessons.length)];
-          
-          const mappedLesson: Lesson = {
-            id: randomLesson.id,
-            title: randomLesson.title,
-            bncc_field: randomLesson.bncc_field as any,
-            skill_bncc: randomLesson.skill_bncc || undefined,
-            steps: randomLesson.lesson_steps
-              .sort((a: any, b: any) => a.order_index - b.order_index)
-              .map((s: any) => ({
-                id: s.id,
-                phase: s.phase as any,
-                type: s.type as any,
-                mascot: s.mascot as any,
-                displayText: s.display_text,
-                speechText: s.speech_text,
-                elements: s.elements,
-                interaction: s.interaction
-              }))
-          };
-          setCurrentLesson(mappedLesson);
-        } else {
-          // Fallback if no lessons found (using PRE_SCHOOL_LESSON or similar)
-          setCurrentLesson(PRE_SCHOOL_LESSON);
-        }
-      } catch (err) {
-        console.error('Error fetching lesson:', err);
-        setCurrentLesson(PRE_SCHOOL_LESSON);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLesson();
-  }, [search.category]);
-
-  const currentStep = currentLesson?.steps[currentStepIndex];
-  const progress = currentLesson ? ((currentStepIndex + 1) / currentLesson.steps.length) * 100 : 0;
+  const currentStep = currentLesson.steps[currentStepIndex];
+  const progress = ((currentStepIndex + 1) / currentLesson.steps.length) * 100;
 
   useEffect(() => {
-    if (currentLesson) {
-      runStep();
-    }
+    runStep();
     return () => AudioSpeechService.stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentStepIndex, currentLesson?.id]);
+  }, [currentStepIndex, currentLesson.id]);
 
   const getStepSpeech = (step: any) => {
-    // Priority 1: speechText (mandatory now)
-    // We no longer automatically build speech from elements to follow pedagogical rules
-    return step.speechText;
+    let text = step.speech;
+    
+    // Add text elements to the speech, but ignore icons/emojis in speech
+    if (step.elements) {
+      const elementsText = step.elements
+        .filter((el: any) => el.type === 'text')
+        .map((el: any) => {
+          // If it's a known object name, don't read the word as text if it's meant to be an illustration
+          if (objetoImg(el.content)) return '';
+          return semEmoji(el.content);
+        })
+        .filter((txt: string) => txt.length > 0)
+        .join('. ');
+      
+      if (elementsText && !text.includes(elementsText)) {
+        text += '. ' + elementsText;
+      }
+    }
+
+    // Add options ONLY if they are text/syllables (never read emojis/images)
+    if (step.type === 'interaction' && step.interaction?.options) {
+      const options = step.interaction.options;
+      const textOptions = options.filter((opt: string) => !/\p{Emoji}/u.test(opt) && !objetoImg(opt));
+      
+      if (textOptions.length > 0) {
+        // Use "..." for natural pauses between syllables or words
+        const optionsText = textOptions.slice(0, -1).join('... ') + (textOptions.length > 1 ? '... ou ... ' : '') + textOptions[textOptions.length - 1];
+        text += '. ' + optionsText + '?';
+      }
+    }
+    
+    return text;
   };
 
   const runStep = async () => {
@@ -206,21 +171,19 @@ export const LessonPlayer: React.FC = () => {
     await new Promise(r => setTimeout(r, 300));
 
     // Show elements and speak them if they are part of a demonstration/explanation
-    if (currentStep?.elements) {
+    if (currentStep.elements) {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
         // If it's a demonstration or explanation, highlight and speak as it appears
-        if (currentStep?.type === 'demonstration' || currentStep?.type === 'explanation') {
+        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
-          // Use element's specific speechText or fallback to content
-          const elSpeech = el.speechText || el.content;
-          await AudioSpeechService.speak(elSpeech);
+          await AudioSpeechService.speak(el.content);
           setIsSpeaking(false);
           setHighlightedElementId(null);
-          await new Promise(r => setTimeout(r, 400)); // Pause between elements
+          await new Promise(r => setTimeout(r, 400)); // Pause between syllables
         }
       }
     }
@@ -231,7 +194,7 @@ export const LessonPlayer: React.FC = () => {
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     
-    if (currentStep?.type === 'interaction' && currentStep.interaction?.options) {
+    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
       await new Promise(r => setTimeout(r, 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
@@ -242,9 +205,9 @@ export const LessonPlayer: React.FC = () => {
     await speechPromise;
     setIsSpeaking(false);
 
-    if (currentStep?.type === 'explanation' || currentStep?.type === 'demonstration') {
+    if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
-      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
     }
@@ -257,7 +220,7 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === currentStep?.interaction?.correctAnswer;
+    const isCorrect = answer === currentStep.interaction?.correctAnswer;
 
     if (isCorrect) {
       setPerformance(prev => ({
@@ -271,7 +234,7 @@ export const LessonPlayer: React.FC = () => {
       setIsSpeaking(false);
       await new Promise(r => setTimeout(r, 600));
 
-      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       } else {
         setFeedback({ kind: 'done', msg: 'Missão Cumprida!' });
@@ -291,14 +254,6 @@ export const LessonPlayer: React.FC = () => {
       runStep();
     }
   };
-
-  if (loading || !currentLesson || !currentStep) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-violet-50">
-        <Loader2 className="w-12 h-12 text-violet-600 animate-spin" />
-      </div>
-    );
-  }
 
   return (
     <LessonEnvironment>
@@ -322,7 +277,7 @@ export const LessonPlayer: React.FC = () => {
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
             <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep?.displayText || currentStep?.speechText}
+              {currentStep.speech}
             </p>
             <button
               onClick={replaySpeech}
