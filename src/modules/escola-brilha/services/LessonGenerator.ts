@@ -372,15 +372,19 @@ export class LessonGenerator {
   }
 
   static generateByCategory(category: string): Lesson {
-    const mastery = StudentProgressService.getMastery(category); // Usando categoria como chave simplificada
-    const difficultyMultiplier = Math.floor(mastery.score / 25); // 0 to 4
+    const mastery = StudentProgressService.getMastery(category); 
+    const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
 
-    if (['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(category)) {
+    if (category.includes('matematica')) {
+      return this.generateCRAMath(category, count);
+    }
+
+    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
       return this.generateCycleC(category, count);
     }
     
-    if (['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(category)) {
+    if (['portugues_6ano', 'portugues_7ano', 'portugues_8ano', 'portugues_9ano', 'fundamental2'].includes(category)) {
       return this.generateModern(category, count + 2);
     }
 
