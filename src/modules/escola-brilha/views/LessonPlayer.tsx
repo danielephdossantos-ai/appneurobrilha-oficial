@@ -637,10 +637,11 @@ export const LessonPlayer: React.FC = () => {
           } bg-white rounded-[2.5rem] shadow-2xl border-4 ${isModern ? 'border-slate-200' : 'border-white'} p-6 sm:p-10 flex flex-col items-center gap-8`}
         >
           {/* Question / speech */}
-          <div className="w-full flex items-start gap-2 bg-slate-50/50 p-3 rounded-2xl border border-slate-100">
-            <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-tight">
-              {currentStep.speech.length > 120 ? currentStep.speech.substring(0, 117) + '...' : currentStep.speech}
+          <div className={`w-full flex items-start gap-2 ${isModern ? 'bg-slate-50 p-6 rounded-3xl border border-slate-100' : 'bg-slate-50/50 p-3 rounded-2xl border border-slate-100'}`}>
+            <p className={`flex-1 text-center ${isModern ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'} font-black text-slate-700 leading-tight`}>
+              {currentStep.speech.length > 150 ? currentStep.speech.substring(0, 147) + '...' : currentStep.speech}
             </p>
+
             <button
               onClick={replaySpeech}
               className="shrink-0 w-10 h-10 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center shadow-sm active:scale-95 transition"
