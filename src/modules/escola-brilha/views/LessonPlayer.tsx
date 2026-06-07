@@ -167,7 +167,7 @@ export const LessonPlayer: React.FC = () => {
         .filter((txt: string) => txt.length > 0)
         .join('. ');
       
-      if (elementsText && !text.includes(elementsText)) {
+      if (elementsText && !text.toLowerCase().includes(elementsText.toLowerCase())) {
         text += '. ' + elementsText;
       }
     }
@@ -188,12 +188,24 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const runStep = async () => {
+    AudioSpeechService.stop();
     setShowElements([]);
     setVisibleOptions([]);
     setFeedback(null);
     setHighlightedElementId(null);
 
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 100));
+
+    // If it's an explanation or demonstration, speak the main instruction FIRST
+    const isIntro = currentStep.type === 'explanation' || currentStep.type === 'demonstration';
+    let mainSpeechPromise = Promise.resolve();
+    
+    if (isIntro) {
+      setIsSpeaking(true);
+      await AudioSpeechService.speak(currentStep.speech);
+      setIsSpeaking(false);
+      await new Promise(r => setTimeout(r, 400));
+    }
 
     // Show elements and speak them if they are part of a demonstration/explanation
     if (currentStep.elements) {
@@ -223,11 +235,19 @@ export const LessonPlayer: React.FC = () => {
       }
     }
 
-    // After elements appear, speak the main instruction and options
+    // After elements appear, speak the main instruction and options (if not already spoken)
     const fullSpeech = getStepSpeech(currentStep);
     
-    setIsSpeaking(true);
-    const speechPromise = AudioSpeechService.speak(fullSpeech);
+    // For interaction steps, we speak the full speech now.
+    // For intro steps, we only speak if there's something new in fullSpeech compared to what we just said
+    if (!isIntro || (fullSpeech.toLowerCase() !== currentStep.speech.toLowerCase())) {
+      setIsSpeaking(true);
+      const speechToValue = isIntro ? fullSpeech.replace(currentStep.speech, '').trim() : fullSpeech;
+      if (speechToValue && speechToValue !== '.' && speechToValue !== '..') {
+        await AudioSpeechService.speak(speechToValue);
+      }
+      setIsSpeaking(false);
+    }
     
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
       await new Promise(r => setTimeout(r, 1500)); 
