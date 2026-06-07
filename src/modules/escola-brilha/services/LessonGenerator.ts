@@ -411,10 +411,100 @@ export class LessonGenerator {
     };
   }
 
+  /**
+   * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
+   */
+  static generateScienceLesson(category: string, count: number = 6): Lesson {
+    const steps: LessonStep[] = [];
+    const topics = [
+      { 
+        q: 'Por que algumas plantas precisam de sol?', 
+        obs: '🌱 + ☀️ = 🌳', 
+        h: 'Para produzir energia', 
+        dist: ['Para se refrescar', 'Para dormir'],
+        exp: 'As plantas usam a luz do sol para fazer seu próprio alimento através da fotossíntese!',
+        exp_img: '☀️',
+        conc: 'Aprendemos que o sol é o motor das plantas!'
+      },
+      { 
+        q: 'Por que o céu muda de cor no pôr do sol?', 
+        obs: '🌅 🧡 🌆', 
+        h: 'A luz se espalha no ar', 
+        dist: ['O sol troca de roupa', 'As nuvens brilham'],
+        exp: 'Quando o sol está baixo, a luz atravessa mais ar e as cores vermelha e laranja aparecem!',
+        exp_img: '🌅',
+        conc: 'O céu é um grande filtro de cores!'
+      }
+    ];
+
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+
+    // FASE 1: Pergunta Intrigante
+    steps.push({
+      id: 'sci-q', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: topic.q,
+      elements: [{ id: 'q-mark', type: 'text', content: '❓', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }]
+    });
+
+    // FASE 2: Observação
+    steps.push({
+      id: 'sci-obs', phase: 'demonstration', type: 'demonstration', mascot: 'pipa',
+      speech: 'Observe com atenção o que acontece aqui.',
+      elements: [{ id: 'obs-img', type: 'text', content: topic.obs, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.3 }]
+    });
+
+    // FASE 3: Hipótese
+    steps.push({
+      id: 'sci-hyp', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'O que você acha que está acontecendo?',
+      interaction: {
+        type: 'click',
+        correctAnswer: topic.h,
+        options: this.shuffle([topic.h, ...topic.dist])
+      }
+    });
+
+    // FASE 4: Explicação
+    steps.push({
+      id: 'sci-exp', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: topic.exp,
+      elements: [{ id: 'exp-icon', type: 'text', content: topic.exp_img, position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }]
+    });
+
+    // FASE 5: Experiência Digital (Interação de Prática)
+    steps.push({
+      id: 'sci-sim', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Se removermos o sol, o que acontece com a planta?',
+      interaction: {
+        type: 'click',
+        correctAnswer: 'Ela para de crescer',
+        options: this.shuffle(['Ela fica azul', 'Ela para de crescer', 'Ela cresce mais rápido'])
+      }
+    });
+
+    // FASE 6: Conclusão
+    steps.push({
+      id: 'sci-conc', phase: 'mastery', type: 'explanation', mascot: 'pipa',
+      speech: topic.conc,
+      elements: [{ id: 'conc-star', type: 'text', content: '🎓', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    return {
+      id: `gen-sci-${Date.now()}`,
+      title: 'Laboratório de Curiosidades',
+      bncc_field: 'espacos_tempos',
+      steps
+    };
+  }
+
   static generateByCategory(category: string): Lesson {
     const mastery = StudentProgressService.getMastery(category); 
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
+
+    if (category === 'ciencias_kids') {
+      return this.generateScienceLesson(category);
+    }
 
     if (category.includes('matematica')) {
       return this.generateCRAMath(category, count);
