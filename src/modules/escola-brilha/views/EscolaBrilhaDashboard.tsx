@@ -93,8 +93,8 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             <School className="w-12 h-12 text-blue-500" />
           </motion.div>
-          <h1 className="text-4xl font-black text-blue-600">Escola Brilha</h1>
-          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Educação Infantil (4 a 5 anos)</p>
+          <h1 className="text-4xl font-black text-blue-600">Minha Jornada</h1>
+          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Escolha sua próxima missão</p>
           <div className="mt-4 flex justify-center gap-2 flex-wrap">
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Onomatopeias</span>
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Linguagem Lúdica</span>
