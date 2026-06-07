@@ -554,7 +554,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
 };
 
 export const GRUPOS = [
-  { nome:"Educação Infantil", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra","consciencia-fonologica"] as CategoriaSlug[] },
+  { nome:"Fala e Som", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra","consciencia-fonologica"] as CategoriaSlug[] },
   { nome:"Fono & Onomatopeias", emoji:"🐮", cor:"from-sun/25 to-coral/5", slugs:["onomatopeias-animadas","ritmo-e-sopro","paromatopeias-corpo"] as CategoriaSlug[] },
   { nome:"Coordenação Motor-Escrita", emoji:"✍️", cor:"from-success/25 to-success/5", slugs:["tracado-letras","caminho-dos-pontos","labirinto-precisao"] as CategoriaSlug[] },
   { nome:"Funções Executivas", emoji:"🧠", cor:"from-primary/20 to-primary/5", slugs:["onde-esta","sequencia-e-padrao","cade-o-par","foco-total","labirinto-do-som"] as CategoriaSlug[] },
