@@ -116,11 +116,15 @@ export const LessonPlayer: React.FC = () => {
   const getStepSpeech = (step: any) => {
     let text = step.speech;
     
-    // Add text elements (like "BOLO") to the speech, but ignore icons/emojis in speech
+    // Add text elements to the speech, but ignore icons/emojis in speech
     if (step.elements) {
       const elementsText = step.elements
         .filter((el: any) => el.type === 'text')
-        .map((el: any) => semEmoji(el.content))
+        .map((el: any) => {
+          // If it's a known object name, don't read the word as text if it's meant to be an illustration
+          if (objetoImg(el.content)) return '';
+          return semEmoji(el.content);
+        })
         .filter((txt: string) => txt.length > 0)
         .join('. ');
       
