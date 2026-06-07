@@ -11,7 +11,9 @@ import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 import * as Lessons from '../data/lessons';
 import { ActivityPlayer } from './ActivityPlayer';
+import { ActivityPlayerC } from './ActivityPlayerC';
 import { ActivityLesson } from '../types/activity-lesson';
+import { ActivityLessonC } from '../types/activity-lesson-c';
 import {
   SINONIMOS_LESSON,
   ANTONIMOS_LESSON,
@@ -19,6 +21,16 @@ import {
   SUBSTANTIVOS_LESSON,
   MULTIPLICACAO_LESSON,
 } from '../data/activity-lessons';
+import {
+  OCEANOS_LESSON,
+  BIOMAS_LESSON,
+  CELULAS_LESSON,
+  EQUACOES_LESSON,
+  REVOLUCAO_LESSON,
+  SISTEMA_NERVOSO_LESSON,
+  GENETICA_LESSON,
+  ILUMINISMO_LESSON,
+} from '../data/activity-lessons-c';
 
 const ACTIVITY_MAP: Record<string, ActivityLesson> = {
   sinonimos: SINONIMOS_LESSON,
@@ -28,16 +40,26 @@ const ACTIVITY_MAP: Record<string, ActivityLesson> = {
   multiplicacao: MULTIPLICACAO_LESSON,
 };
 
+const ACTIVITY_C_MAP: Record<string, ActivityLessonC> = {
+  oceanos: OCEANOS_LESSON,
+  biomas: BIOMAS_LESSON,
+  celulas: CELULAS_LESSON,
+  equacoes: EQUACOES_LESSON,
+  revolucao: REVOLUCAO_LESSON,
+  sistema_nervoso: SISTEMA_NERVOSO_LESSON,
+  genetica: GENETICA_LESSON,
+  iluminismo: ILUMINISMO_LESSON,
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string; type: string };
 
-  // Route to new ActivityPlayer for new-style lessons
-  const activityLesson = ACTIVITY_MAP[search.category];
-  if (activityLesson) {
-    return <ActivityPlayer lesson={activityLesson} />;
-  }
+  const lessonC = ACTIVITY_C_MAP[search.category];
+  if (lessonC) return <ActivityPlayerC lesson={lessonC} />;
 
-  // Fallback: legacy lesson player
+  const lessonB = ACTIVITY_MAP[search.category];
+  if (lessonB) return <ActivityPlayer lesson={lessonB} />;
+
   return <LegacyLessonPlayer />;
 };
 
