@@ -112,7 +112,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-ef01lp05-${Date.now()}`,
-      title: 'Mundo das Letras',
+      title: 'Mestre das Sílabas',
       bncc_field: 'escuta_fala',
       skill_bncc: 'EF01LP05',
       steps
