@@ -102,31 +102,14 @@ const VALE_NUMEROS_LESSON: Lesson = {
 const MUNDO_DESCOBERTAS_LESSON: Lesson = {
   id: 'mundo-descobertas-1ano',
   title: 'Mundo das Descobertas',
+  grade: 1,
   bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01CI01',
-  steps: [
-    // Corpo Humano
-    { id: 'd1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Onde está o coração no corpo humano?',
-      interaction: { type: 'click', correctAnswer: '❤️', options: ['❤️', '👃', '👂'] } },
-    // Animais
-    { id: 'd2', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Qual destes animais vive na água?',
-      interaction: { type: 'click', correctAnswer: '🐟', options: ['🐶', '🐟', '🐦'] } },
-    // Plantas
-    { id: 'd3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O que as plantas precisam para crescer?',
-      interaction: { type: 'click', correctAnswer: '☀️', options: ['☀️', '⚽', '🚗'] } },
-    // Higiene
-    { id: 'd4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'O que usamos para lavar as mãos?',
-      interaction: { type: 'click', correctAnswer: '🧼', options: ['🧼', '🍪', '🧸'] } }
-  ]
-};
-
+...
 const NOSSO_LUGAR_LESSON: Lesson = {
   id: 'nosso-lugar-1ano',
   title: 'Nosso Lugar',
+  grade: 1,
   bncc_field: 'eu_outro_nos',
   skill_bncc: 'EF01HI01',
   steps: [
