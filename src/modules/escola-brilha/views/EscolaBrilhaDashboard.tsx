@@ -162,13 +162,22 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Interface Moderna'
     },
     {
-      id: 'fundamental2',
-      title: '9º Ano',
-      subtitle: 'Conclusão e Base',
-      icon: School,
+      id: 'portugues_9ano',
+      title: '9º Ano Português',
+      subtitle: 'Dissertação e Análise',
+      icon: BookOpen,
+      color: 'bg-slate-700',
+      field: 'Língua Portuguesa',
+      method: 'Interface Moderna'
+    },
+    {
+      id: 'matematica_9ano',
+      title: '9º Ano Matemática',
+      subtitle: 'Álgebra e Funções',
+      icon: Calculator,
       color: 'bg-slate-900',
-      field: 'Fundamental II',
-      method: 'Moderna'
+      field: 'Matemática',
+      method: 'Interface Moderna'
     }
   ];
 
