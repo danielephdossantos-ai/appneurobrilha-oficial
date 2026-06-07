@@ -492,7 +492,7 @@ export class LessonGenerator {
     }
     return this.generateEF01LP05(); // Fallback
   }
-
+  /**
    * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
    */
   static generateScienceLesson(category: string, count: number = 6): Lesson {
