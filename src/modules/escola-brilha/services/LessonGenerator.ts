@@ -500,7 +500,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-sci-${Date.now()}`,
-      title: 'Missão: Vida Verde',
+      title: 'Cientista Júnior',
+      mission_name: 'Vida Verde',
       bncc_field: 'espacos_tempos',
       steps
     };
