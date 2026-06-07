@@ -618,10 +618,10 @@ export const LessonPlayer: React.FC = () => {
       <LessonHeader
         progress={progress}
         missionName={currentLesson.title}
+        xp={currentLesson.xp || (100 + (currentStepIndex * 10))}
         field={currentLesson.bncc_field}
         stepIndex={currentStepIndex}
         totalSteps={currentLesson.steps.length}
-        xp={100 + (currentStepIndex * 10)}
       />
 
       {/* Activity card */}
