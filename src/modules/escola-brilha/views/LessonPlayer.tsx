@@ -271,7 +271,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Content elements area */}
           {currentStep.elements && currentStep.elements.length > 0 && (
-            <div className="w-full min-h-[110px] flex items-center justify-center gap-3 flex-wrap">
+            <div className="w-full min-h-[140px] flex items-center justify-center gap-6 flex-wrap">
               <AnimatePresence>
                 {currentStep.elements.map((el: any) =>
                   showElements.includes(el.id) && (
@@ -281,20 +281,24 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
-                      className={`transition-all duration-300 ${
+                      className={`flex flex-col items-center justify-center transition-all duration-300 ${
                         highlightedElementId === el.id 
-                          ? 'scale-125 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
+                          ? 'scale-110' 
                           : 'scale-100'
                       }`}
                     >
-                      <RenderEmoji 
-                        e={el.content} 
-                        className="w-24 h-24 sm:w-32 sm:h-32" 
-                        label={semEmoji(el.content)} 
-                      />
-                      {!/\p{Emoji}/u.test(el.content) && (
-                        <div className={`text-5xl sm:text-6xl font-black px-2 mt-2 ${
-                          highlightedElementId === el.id ? 'text-yellow-400' : 'text-blue-600'
+                      {(/\p{Emoji}/u.test(el.content) || objetoImg(el.content)) ? (
+                        <div className={highlightedElementId === el.id ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' : ''}>
+                          <RenderEmoji 
+                            e={el.content} 
+                            className="w-24 h-24 sm:w-32 sm:h-32" 
+                          />
+                        </div>
+                      ) : (
+                        <div className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${
+                          highlightedElementId === el.id 
+                            ? 'text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
+                            : 'text-blue-600'
                         }`}>
                           {el.content}
                         </div>
@@ -308,7 +312,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Interaction options */}
           {currentStep.type === 'interaction' && currentStep.interaction?.options && (
-            <div className="w-full flex flex-wrap items-center justify-center gap-3 pt-2">
+            <div className="w-full flex flex-wrap items-center justify-center gap-4 pt-4">
               <AnimatePresence>
                 {visibleOptions.map((opt, i) => {
                   const palette = [
@@ -318,7 +322,7 @@ export const LessonPlayer: React.FC = () => {
                     'bg-pink-500 border-pink-700',
                   ];
                   const color = palette[i % palette.length];
-                  const isEmoji = /\p{Emoji}/u.test(opt);
+                  const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
                   return (
                     <motion.button
                       key={opt}
@@ -326,9 +330,13 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${color} text-white w-20 h-20 sm:w-24 sm:h-24 rounded-full text-3xl sm:text-4xl font-black shadow-xl border-b-4 hover:scale-110 active:scale-95 transition flex items-center justify-center`}
+                      className={`${color} text-white w-24 h-24 sm:w-28 sm:h-28 rounded-3xl text-3xl sm:text-4xl font-black shadow-xl border-b-8 hover:scale-105 active:scale-95 transition flex items-center justify-center p-4`}
                     >
-                      <span className={isEmoji ? 'text-4xl sm:text-5xl drop-shadow' : ''}>{opt}</span>
+                      {hasIllust ? (
+                        <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
+                      ) : (
+                        <span>{opt}</span>
+                      )}
                     </motion.button>
                   );
                 })}
