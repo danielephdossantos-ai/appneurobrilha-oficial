@@ -3,7 +3,9 @@ export type BNCC_Field =
   | 'espacos_tempos' // Espaços, Tempos, Quantidades, Relações e Transformações
   | 'corpo_gestos' // Corpo, Gestos e Movimentos
   | 'tracos_sons' // Traços, Sons, Cores e Formas
-  | 'eu_outro_nos'; // O Eu, o Outro e o Nós
+  | 'eu_outro_nos' // O Eu, o Outro e o Nós
+  | 'lingua_portuguesa'
+  | 'matematica';
 
 export type LessonPhase = 
 
