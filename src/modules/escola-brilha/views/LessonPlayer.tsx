@@ -10,6 +10,7 @@ import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
+import { WORD_BANK } from '../data/content-banks';
 import { StudentProgressService } from '../services/StudentProgressService';
 
 
@@ -397,26 +398,40 @@ const LANG_LESSON: Lesson = {
   ]
 };
 
-const getPortugueseCount = (n: number, word: string) => {
-  const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta'];
-  const isFeminine = feminineWords.includes(word.toLowerCase());
+const getWordForContent = (content: string) => {
+  const clean = semEmoji(content);
+  if (clean) return clean;
+  
+  // Se for apenas emoji, tenta achar no banco de palavras
+  const found = WORD_BANK.find(w => w.emoji === content);
+  if (found) return found.text;
+  
+  return '';
+};
+
+const getPortugueseCount = (n: number, content: string) => {
+  const word = getWordForContent(content).toLowerCase();
+  const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta', 'girafa', 'zebra', 'foca', 'janela', 'vela'];
+  const isFeminine = feminineWords.includes(word);
   
   let numStr = n.toString();
   if (n === 1) numStr = isFeminine ? 'uma' : 'um';
   if (n === 2) numStr = isFeminine ? 'duas' : 'dois';
   
   let pluralWord = word;
-  const lower = word.toLowerCase();
   if (n > 1) {
-    if (lower === 'maça' || lower === 'maçã') pluralWord = 'maçãs';
-    else if (lower === 'peixe') pluralWord = 'peixes';
-    else if (lower.endsWith('a') || lower.endsWith('e') || lower.endsWith('o') || lower.endsWith('i') || lower.endsWith('u')) {
+    if (word === 'maça' || word === 'maçã') pluralWord = 'maçãs';
+    else if (word === 'peixe') pluralWord = 'peixes';
+    else if (word === 'avião') pluralWord = 'aviões';
+    else if (word === 'balão') pluralWord = 'balões';
+    else if (word === 'pião') pluralWord = 'piões';
+    else if (word.endsWith('a') || word.endsWith('e') || word.endsWith('o') || word.endsWith('i') || word.endsWith('u')) {
       pluralWord = word + 's';
-    } else if (lower.endsWith('r') || lower.endsWith('z')) {
+    } else if (word.endsWith('r') || word.endsWith('z')) {
       pluralWord = word + 'es';
     }
   } else {
-    if (lower === 'maça') pluralWord = 'maçã';
+    if (word === 'maça') pluralWord = 'maçã';
   }
   
   return `${numStr} ${pluralWord}`;
@@ -499,9 +514,11 @@ export const LessonPlayer: React.FC = () => {
 
     await new Promise(r => setTimeout(r, 100));
 
+    // Para o Pre e 1º Ano, as lições devem ser extremamente simples
+    const isInfantOr1st = search.category.includes('inf') || search.category.includes('1ano');
+
     // If it's an explanation or demonstration, speak the main instruction FIRST
     const isIntro = currentStep.type === 'explanation' || currentStep.type === 'demonstration';
-    let mainSpeechPromise = Promise.resolve();
     
     if (isIntro) {
       setIsSpeaking(true);
@@ -517,20 +534,32 @@ export const LessonPlayer: React.FC = () => {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
-        const isMathObject = search.category === 'matematica' && (objetoImg(el.content) || /\p{Emoji}/u.test(el.content));
+        const isIllustration = objetoImg(el.content) || /\p{Emoji}/u.test(el.content);
         
-        // If it's a math object or demonstration, highlight and speak
-        if (isMathObject || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        // If it's an illustration or demonstration, highlight and speak
+        if (isIllustration || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           
           let textToSpeak = el.content;
-          if (isMathObject) {
-            mathItemCount++;
-            textToSpeak = getPortugueseCount(mathItemCount, el.content);
+          
+          // Se for uma ilustração, tenta falar o nome do objeto em vez do emoji
+          if (isIllustration) {
+            // Em matemática, conta os itens
+            if (search.category.includes('matematica')) {
+              mathItemCount++;
+              textToSpeak = getPortugueseCount(mathItemCount, el.content);
+            } else {
+              // Se tiver um texto associado no step, fala o texto, senão fala o nome do objeto
+              textToSpeak = getWordForContent(el.content);
+            }
           }
 
-          await AudioSpeechService.speak(textToSpeak);
+          // No Infantil, evitamos falar caracteres técnicos
+          if (textToSpeak && textToSpeak !== '+' && textToSpeak !== '=' && textToSpeak !== '?' && textToSpeak !== '_') {
+            await AudioSpeechService.speak(textToSpeak);
+          }
+          
           setIsSpeaking(false);
           setHighlightedElementId(null);
           await new Promise(r => setTimeout(r, 400));
@@ -541,28 +570,27 @@ export const LessonPlayer: React.FC = () => {
     // After elements appear, speak the main instruction and options (if not already spoken)
     const fullSpeech = getStepSpeech(currentStep);
     
-    // For interaction steps, we speak the full speech now.
-    // For intro steps, we only speak if there's something new in fullSpeech compared to what we just said
     if (!isIntro || (fullSpeech.toLowerCase() !== currentStep.speech.toLowerCase())) {
       setIsSpeaking(true);
       const speechToValue = isIntro ? fullSpeech.replace(currentStep.speech, '').trim() : fullSpeech;
       if (speechToValue && speechToValue !== '.' && speechToValue !== '..') {
-        await AudioSpeechService.speak(speechToValue);
+        // Limpa o speech para não ler "_" ou outros caracteres técnicos para os pequenos
+        const cleanSpeech = isInfantOr1st ? speechToValue.replace(/_/g, '').replace(/\s+/g, ' ').trim() : speechToValue;
+        if (cleanSpeech) await AudioSpeechService.speak(cleanSpeech);
       }
       setIsSpeaking(false);
     }
     
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      await new Promise(r => setTimeout(r, 1500)); 
+      await new Promise(r => setTimeout(r, isInfantOr1st ? 800 : 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
         await new Promise(r => setTimeout(r, 500));
       }
     }
 
-
     if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
-      await new Promise(r => setTimeout(r, 1800));
+      await new Promise(r => setTimeout(r, isInfantOr1st ? 1200 : 1800));
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
