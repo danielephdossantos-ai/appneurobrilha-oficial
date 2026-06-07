@@ -407,11 +407,19 @@ export const LessonPlayer: React.FC = () => {
                   ];
                   const colorClasses = palette[i % palette.length];
                   const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
-                  const isNumber = /^\d+$/.test(opt);
+                  const trimmedOpt = opt.trim();
+                  const isNumber = /^\d+$/.test(trimmedOpt);
+                  const isMath = search.category === 'matematica';
+                  
+                  // Botões muito maiores para números em Matemática
+                  const btnSize = (isMath && isNumber) ? 'w-40 h-40 sm:w-56 sm:h-56' : 'w-24 h-24 sm:w-32 sm:h-32';
+                  
+                  // Fonte gigante para números, ajustada para caber no círculo
                   const fontSize = hasIllust ? '' : 
-                                   isNumber ? 'text-[8rem] sm:text-[10rem]' :
-                                   opt.length === 1 ? 'text-7xl sm:text-8xl' : 
-                                   opt.length === 2 ? 'text-5xl sm:text-6xl' : 'text-3xl sm:text-4xl';
+                                   isNumber ? 'text-[7rem] sm:text-[10rem]' :
+                                   trimmedOpt.length === 1 ? 'text-7xl sm:text-8xl' : 
+                                   trimmedOpt.length === 2 ? 'text-5xl sm:text-6xl' : 'text-3xl sm:text-4xl';
+
                   return (
                     <motion.button
                       key={opt}
@@ -419,12 +427,12 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${colorClasses} w-24 h-24 sm:w-32 sm:h-32 rounded-full ${fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
+                      className={`${colorClasses} ${btnSize} rounded-full ${fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0`}
                     >
                       {hasIllust ? (
-                        <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
+                        <RenderEmoji e={opt} className="w-full h-full p-4" label={semEmoji(opt)} />
                       ) : (
-                        <span>{opt}</span>
+                        <span className="leading-none">{opt}</span>
                       )}
                     </motion.button>
                   );
