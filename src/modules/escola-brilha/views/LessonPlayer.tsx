@@ -150,7 +150,7 @@ export const LessonPlayer: React.FC = () => {
             id: randomLesson.id,
             title: randomLesson.title,
             bncc_field: randomLesson.bncc_field as any,
-            skill_bncc: randomLesson.skill_bncc,
+            skill_bncc: randomLesson.skill_bncc || undefined,
             steps: randomLesson.lesson_steps
               .sort((a: any, b: any) => a.order_index - b.order_index)
               .map((s: any) => ({
@@ -206,13 +206,13 @@ export const LessonPlayer: React.FC = () => {
     await new Promise(r => setTimeout(r, 300));
 
     // Show elements and speak them if they are part of a demonstration/explanation
-    if (currentStep.elements) {
+    if (currentStep?.elements) {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
         // If it's a demonstration or explanation, highlight and speak as it appears
-        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        if (currentStep?.type === 'demonstration' || currentStep?.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           // Use element's specific speechText or fallback to content
@@ -231,7 +231,7 @@ export const LessonPlayer: React.FC = () => {
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     
-    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
+    if (currentStep?.type === 'interaction' && currentStep.interaction?.options) {
       await new Promise(r => setTimeout(r, 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
@@ -242,9 +242,9 @@ export const LessonPlayer: React.FC = () => {
     await speechPromise;
     setIsSpeaking(false);
 
-    if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
+    if (currentStep?.type === 'explanation' || currentStep?.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
-      if (currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
     }
@@ -322,7 +322,7 @@ export const LessonPlayer: React.FC = () => {
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
             <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep.displayText || currentStep.speechText}
+              {currentStep?.displayText || currentStep?.speechText}
             </p>
             <button
               onClick={replaySpeech}
