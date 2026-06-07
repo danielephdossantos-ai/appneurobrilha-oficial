@@ -375,7 +375,7 @@ export const LessonPlayer: React.FC = () => {
                         <div className={highlightedElementId === el.id ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' : ''}>
                           <RenderEmoji 
                             e={el.content} 
-                            className="w-24 h-24 sm:w-32 sm:h-32" 
+                            className="w-32 h-32 sm:w-48 sm:h-48" 
                           />
                         </div>
                       ) : (
@@ -416,7 +416,7 @@ export const LessonPlayer: React.FC = () => {
                   
                   // Fonte gigante para números, ajustada para caber no círculo
                   const fontSize = hasIllust ? '' : 
-                                   isNumber ? 'text-[7rem] sm:text-[10rem]' :
+                                   isNumber ? 'text-[10rem] sm:text-[14rem]' :
                                    trimmedOpt.length === 1 ? 'text-7xl sm:text-8xl' : 
                                    trimmedOpt.length === 2 ? 'text-5xl sm:text-6xl' : 'text-3xl sm:text-4xl';
 
