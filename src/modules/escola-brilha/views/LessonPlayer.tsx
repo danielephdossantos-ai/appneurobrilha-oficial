@@ -5,6 +5,7 @@ import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
+import { LessonGenerator } from '../services/LessonGenerator';
 import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
@@ -421,36 +422,16 @@ const getPortugueseCount = (n: number, word: string) => {
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const lessonsMap: Record<string, Lesson> = {
-    'portugues': LANG_LESSON,
-    'portugues_1ano': PORTUGUES_1ANO_LESSON,
-    'matematica': MATH_LESSON,
-    'portugues_2ano': PORTUGUES_2ANO_LESSON,
-    'matematica_2ano': MATEMATICA_2ANO_LESSON,
-    'portugues_3ano': PORTUGUES_3ANO_LESSON,
-    'matematica_3ano': MATEMATICA_3ANO_LESSON,
-    'portugues_4ano': PORTUGUES_4ANO_LESSON,
-    'matematica_4ano': MATEMATICA_4ANO_LESSON,
-    'portugues_5ano': PORTUGUES_5ANO_LESSON,
-    'matematica_5ano': MATEMATICA_5ANO_LESSON,
-    'portugues_6ano': PORTUGUES_6ANO_LESSON,
-    'matematica_6ano': MATEMATICA_6ANO_LESSON,
-    'portugues_7ano': PORTUGUES_7ANO_LESSON,
-    'matematica_7ano': MATEMATICA_7ANO_LESSON,
-    'portugues_8ano': PORTUGUES_8ANO_LESSON,
-    'matematica_8ano': MATEMATICA_8ANO_LESSON,
-    'portugues_9ano': PORTUGUES_9ANO_LESSON,
-    'matematica_9ano': MATEMATICA_9ANO_LESSON,
-    'ano3_5': ANO3_5_LESSON,
-    'fundamental2': FUNDAMENTAL2_LESSON
-  };
-  const currentLesson = lessonsMap[search.category] || LANG_LESSON;
+  
+  // Gera uma lição dinâmica baseada na categoria
+  const [currentLesson] = useState(() => LessonGenerator.generateByCategory(search.category));
 
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' :
+    ['portugues_3ano', 'matematica_3ano', 'ano3_5'].includes(search.category) ? 'C' :
     ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
+
 
   const isModern = interfaceStyle === 'Modern';
 
