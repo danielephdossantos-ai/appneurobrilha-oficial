@@ -243,7 +243,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : 'Resgate Numérico',
+      title: isModern ? 'Missão: O Valor de X' : isCycleC ? 'Missão: Somar Frutinhas' : 'Missão: Resgate Numérico',
       bncc_field: 'espacos_tempos',
       steps
     };
