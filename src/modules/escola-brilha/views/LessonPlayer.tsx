@@ -547,15 +547,13 @@ export const LessonPlayer: React.FC = () => {
               mathItemCount++;
               textToSpeak = getPortugueseCount(mathItemCount, el.content);
             } else {
-              // Se tiver um texto associado no step, fala o texto, senão fala o nome limpo
-              textToSpeak = semEmoji(el.content) || el.content;
-              // Caso especial: se o conteúdo for apenas um emoji, o semEmoji retorna vazio. 
-              // Precisamos do nome do objeto. Mas por enquanto vamos confiar no speech do step.
+              // Se tiver um texto associado no step, fala o texto, senão fala o nome do objeto
+              textToSpeak = getWordForContent(el.content);
             }
           }
 
           // No Infantil, evitamos falar caracteres técnicos
-          if (textToSpeak !== '+' && textToSpeak !== '=' && textToSpeak !== '?' && textToSpeak !== '_') {
+          if (textToSpeak && textToSpeak !== '+' && textToSpeak !== '=' && textToSpeak !== '?' && textToSpeak !== '_') {
             await AudioSpeechService.speak(textToSpeak);
           }
           
