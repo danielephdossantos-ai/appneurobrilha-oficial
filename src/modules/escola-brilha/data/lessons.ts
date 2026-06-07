@@ -107,7 +107,7 @@ export const MATH_1ANO_LESSON: Lesson = {
 export const MATH_2ANO_LESSON: Lesson = {
   id: 'matematica-2ano',
   title: 'Matemática do 2º Ano',
-  bncc_field: 'espacos_tempos',
+  bncc_field: 'matematica',
   skill_bncc: 'EF02MA01',
   steps: [
     { id: 'mt1', phase: 'practice', type: 'interaction', mascot: 'pip',
