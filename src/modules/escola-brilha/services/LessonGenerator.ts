@@ -126,21 +126,103 @@ export class LessonGenerator {
     const steps: LessonStep[] = [];
 
     items.forEach((item, index) => {
-      steps.push({
-        id: `ma06-${index}`,
-        phase: 'practice',
-        type: 'interaction',
-        mascot: 'pipa',
-        speech: `Quanto é ${item.a} mais ${item.b}?`,
-        elements: [
-          { id: `op-${index}`, type: 'text', content: `${item.a} + ${item.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }
-        ],
-        interaction: {
-          type: 'click',
-          correctAnswer: item.result.toString(),
-          options: this.shuffle([item.result.toString(), (item.result + 1).toString(), (item.result - 1).toString()])
-        }
-      });
+      const modelType = Math.floor(Math.random() * 5); // 0-4
+
+      if (modelType === 0) {
+        // Adição Visual
+        steps.push({
+          id: `ma06-add-${index}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Quanto é ${item.a} mais ${item.b}?`,
+          elements: [
+            { id: `op-${index}`, type: 'text', content: `${item.a} + ${item.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }
+          ],
+          interaction: {
+            type: 'click',
+            correctAnswer: item.result.toString(),
+            options: this.shuffle([item.result.toString(), (item.result + 1).toString(), (item.result - 1).toString()])
+          }
+        });
+      } else if (modelType === 1) {
+        // Contagem
+        const count = Math.floor(Math.random() * 5) + 1;
+        steps.push({
+          id: `ma06-count-${index}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pip',
+          speech: `Quantas maçãs você vê?`,
+          elements: Array.from({ length: count }).map((_, i) => ({
+            id: `apple-${index}-${i}`,
+            type: 'text',
+            content: '🍎',
+            position: { x: (i - (count-1)/2) * 50, y: 0 },
+            animation: 'pop',
+            delay: 0.1 * i
+          })),
+          interaction: {
+            type: 'click',
+            correctAnswer: count.toString(),
+            options: this.shuffle([count.toString(), (count + 1).toString(), (count - 1).toString()].filter(v => parseInt(v) > 0))
+          }
+        });
+      } else if (modelType === 2) {
+        // Sequência numérica
+        const start = Math.floor(Math.random() * 5) + 1;
+        steps.push({
+          id: `ma06-seq-${index}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Qual número vem depois do ${start + 1}?`,
+          elements: [{ id: `seq-${index}`, type: 'text', content: `${start}, ${start+1}, ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          interaction: {
+            type: 'click',
+            correctAnswer: (start + 2).toString(),
+            options: this.shuffle([(start + 2).toString(), (start + 3).toString(), (start + 4).toString()])
+          }
+        });
+      } else if (modelType === 3) {
+        // Comparação (Qual é maior?)
+        const v1 = Math.floor(Math.random() * 10);
+        const v2 = Math.floor(Math.random() * 10);
+        if (v1 === v2) { v1 > 5 ? v1 - 1 : v1 + 1; }
+        const max = Math.max(v1, v2);
+        steps.push({
+          id: `ma06-comp-${index}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pip',
+          speech: `Qual número é maior?`,
+          elements: [
+            { id: `v1-${index}`, type: 'text', content: v1.toString(), position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+            { id: `v2-${index}`, type: 'text', content: v2.toString(), position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
+          ],
+          interaction: {
+            type: 'click',
+            correctAnswer: max.toString(),
+            options: [v1.toString(), v2.toString()]
+          }
+        });
+      } else {
+        // Subtração Simples
+        const sub = MATH_BANK.simple_subtraction[Math.floor(Math.random() * MATH_BANK.simple_subtraction.length)];
+        steps.push({
+          id: `ma06-sub-${index}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Se eu tinha ${sub.a} e perdi ${sub.b}, com quanto fiquei?`,
+          elements: [{ id: `sub-${index}`, type: 'text', content: `${sub.a} - ${sub.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          interaction: {
+            type: 'click',
+            correctAnswer: sub.result.toString(),
+            options: this.shuffle([sub.result.toString(), (sub.result + 1).toString(), (sub.result - 1).toString()].filter(v => parseInt(v) >= 0))
+          }
+        });
+      }
     });
 
     return {
