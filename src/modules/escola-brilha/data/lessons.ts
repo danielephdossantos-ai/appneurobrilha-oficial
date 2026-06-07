@@ -33,7 +33,7 @@ export const PORTUGUES_1ANO_LESSON: Lesson = {
 export const PORTUGUES_2ANO_LESSON: Lesson = {
   id: 'alfabetizacao-consolidacao',
   title: 'Consolidando a Leitura',
-  bncc_field: 'escuta_fala',
+  bncc_field: 'lingua_portuguesa',
   skill_bncc: 'EF02LP01',
   steps: [
     { id: 'p1', phase: 'explanation', type: 'explanation', mascot: 'pip',
