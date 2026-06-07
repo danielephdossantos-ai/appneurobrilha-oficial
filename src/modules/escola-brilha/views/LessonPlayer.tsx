@@ -150,6 +150,36 @@ const MATEMATICA_5ANO_LESSON: Lesson = {
   ]
 };
 
+const PORTUGUES_6ANO_LESSON: Lesson = {
+  id: 'portugues-6ano-literatura',
+  title: 'Literatura e Gramática - 6º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF06LP01',
+  steps: [
+    { id: 'p6s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Bem-vindo ao 6º ano! Vamos analisar a estrutura dos textos literários e a gramática normativa.',
+      elements: [{ id: 'txt-lit', type: 'text', content: 'Substantivos, Adjetivos e Verbos', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p6s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual classe gramatical indica uma ação?',
+      interaction: { type: 'click', correctAnswer: 'Verbo', options: ['Verbo', 'Substantivo', 'Adjetivo'] } }
+  ]
+};
+
+const MATEMATICA_6ANO_LESSON: Lesson = {
+  id: 'matematica-6ano-inteiros',
+  title: 'Números Inteiros - 6º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF06MA01',
+  steps: [
+    { id: 'm6s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Números inteiros incluem os positivos, os negativos e o zero!',
+      elements: [{ id: 'int-1', type: 'text', content: '-3, -2, -1, 0, 1, 2, 3', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm6s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual número é menor: -5 ou 2?',
+      interaction: { type: 'click', correctAnswer: '-5', options: ['-5', '2', 'Iguais'] } }
+  ]
+};
+
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
@@ -311,8 +341,8 @@ export const LessonPlayer: React.FC = () => {
     'matematica_3ano': MATEMATICA_3ANO_LESSON,
     'portugues_4ano': PORTUGUES_4ANO_LESSON,
     'matematica_4ano': MATEMATICA_4ANO_LESSON,
-    'portugues_5ano': PORTUGUES_5ANO_LESSON,
-    'matematica_5ano': MATEMATICA_5ANO_LESSON,
+    'portugues_6ano': PORTUGUES_6ANO_LESSON,
+    'matematica_6ano': MATEMATICA_6ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
   };
@@ -321,7 +351,8 @@ export const LessonPlayer: React.FC = () => {
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
     ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
-    ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' : 'Modern';
+    ['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(search.category) ? 'C' :
+    ['portugues_6ano', 'matematica_6ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
 
   const isModern = interfaceStyle === 'Modern';
 
