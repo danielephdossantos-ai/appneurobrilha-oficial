@@ -34,6 +34,24 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       color: 'bg-blue-400',
       field: 'Espaços e Quantidades',
       method: 'Método CRA'
+    },
+    {
+      id: 'portugues_2ano',
+      title: '2º Ano - Leitura',
+      subtitle: 'Frases e Textos',
+      icon: BookOpen,
+      color: 'bg-violet-400',
+      field: 'Língua Portuguesa',
+      method: 'Alfabetização'
+    },
+    {
+      id: 'matematica_2ano',
+      title: '2º Ano - Matemática',
+      subtitle: 'Cálculos e Medidas',
+      icon: Calculator,
+      color: 'bg-indigo-400',
+      field: 'Matemática',
+      method: 'Resolução de Problemas'
     }
   ];
 

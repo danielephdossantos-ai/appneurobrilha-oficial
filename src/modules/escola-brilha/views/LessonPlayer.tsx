@@ -9,106 +9,22 @@ import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
-
-const PORTUGUES_1ANO_LESSON: Lesson = {
-  id: 'leitura-primeiros-passos',
-  title: 'Primeiros Passos na Leitura',
-  bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP06',
-  steps: [
-    { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'casa-full', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
-    { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos separar as sílabas de CASA!',
-      elements: [
-        { id: 'ca', type: 'text', content: 'CA', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
-        { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
-      ] },
-    { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
-    { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'ESCOLHA A IMAGEM CORRETA! BOLO',
-      elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
-    { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O gato dorme. Quem dorme?',
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
-    }
-  ]
-};
-
-const MATH_LESSON: Lesson = {
-  id: 'matematica-1ano',
-  title: 'Matemática Divertida',
-  bncc_field: 'espacos_tempos',
-  skill_bncc: 'EF01MA06',
-  steps: [
-    { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs temos aqui?',
-      elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos juntar as frutinhas!',
-      elements: [
-        { id: 'd1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'd2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.5 },
-        { id: 'plus', type: 'text', content: '+', position: { x: 20, y: 0 }, animation: 'fade', delay: 0.7 },
-        { id: 'd3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.9 },
-      ] },
-    { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs ao todo?',
-      elements: [
-        { id: 'r1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'r2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'r3', type: 'text', content: 'maça', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
-    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Tínhamos peixinhos e um saiu. Quantos sobraram?',
-      elements: [
-        { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual número vem depois?',
-      elements: [{ id: 'sq', type: 'text', content: '1  2  3  ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '4', options: ['4', '5', '6'] } }
-  ]
-};
-
-const LANG_LESSON: Lesson = {
-  id: 'brincando-com-rimas',
-  title: 'Brincando com Rimas',
-  bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF02',
-  steps: [
-    { id: 'r1', phase: 'explanation', type: 'explanation', mascot: 'pip',
-      speech: 'Vamos descobrir as rimas!',
-      elements: [
-        { id: 'c', type: 'text', content: 'casa', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
-        { id: 'a', type: 'text', content: 'asa', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
-      ] },
-    { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O que rima com CASA?',
-      elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'asa', options: ['bola', 'asa'] } }
-  ]
-};
+import * as Lessons from '../data/lessons';
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const currentLesson =
-    search.category === 'matematica' ? MATH_LESSON :
-    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+  
+  const currentLesson = React.useMemo(() => {
+    switch (search.category) {
+      case 'matematica': return Lessons.MATH_1ANO_LESSON;
+      case 'portugues_1ano': return Lessons.PORTUGUES_1ANO_LESSON;
+      case 'portugues_2ano': return Lessons.PORTUGUES_2ANO_LESSON;
+      case 'matematica_2ano': return Lessons.MATH_2ANO_LESSON;
+      default: return Lessons.LANG_LESSON;
+    }
+  }, [search.category]);
+
+  const isSecondYear = search.category.includes('2ano');
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
@@ -266,13 +182,13 @@ export const LessonPlayer: React.FC = () => {
       />
 
       {/* Activity card */}
-      <div className="w-full max-w-md px-4 pt-24 pb-56 flex flex-col items-center">
+      <div className={`w-full ${isSecondYear ? 'max-w-2xl px-2' : 'max-w-md px-4'} pt-24 pb-56 flex flex-col items-center`}>
         <motion.div
           key={currentStep.id}
-          initial={{ opacity: 0, y: 20, scale: 0.96 }}
+          initial={isSecondYear ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ type: 'spring', stiffness: 120, damping: 16 }}
-          className="w-full bg-white rounded-3xl shadow-2xl border-4 border-white p-5 sm:p-6 flex flex-col items-center gap-5"
+          transition={isSecondYear ? { duration: 0.3 } : { type: 'spring', stiffness: 120, damping: 16 }}
+          className={`w-full bg-white rounded-3xl shadow-2xl border-4 border-white ${isSecondYear ? 'p-6 sm:p-10' : 'p-5 sm:p-6'} flex flex-col items-center gap-5`}
         >
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
@@ -296,10 +212,10 @@ export const LessonPlayer: React.FC = () => {
                   showElements.includes(el.id) && (
                     <motion.div
                       key={el.id}
-                      initial={{ scale: 0, opacity: 0, y: 30 }}
+                      initial={isSecondYear ? { opacity: 0 } : { scale: 0, opacity: 0, y: 30 }}
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
-                      transition={{ type: 'spring', stiffness: 200, damping: 14 }}
+                      transition={isSecondYear ? { duration: 0.2 } : { type: 'spring', stiffness: 200, damping: 14 }}
                       className={`flex flex-col items-center justify-center transition-all duration-300 ${
                         highlightedElementId === el.id 
                           ? 'scale-110' 
