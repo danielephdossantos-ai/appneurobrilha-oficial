@@ -409,7 +409,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-modern-${Date.now()}`,
-      title: `Plataforma Avançada - ${isMath ? 'Matemática' : 'Português'}`,
+      title: isMath ? 'O Valor de X' : 'Expert em Análise',
       bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
       steps
     };
