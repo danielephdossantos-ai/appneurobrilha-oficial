@@ -10,21 +10,21 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const categories = [
     {
       id: 'portugues_1ano',
-      title: '1º Ano Alfabetização',
-      subtitle: 'Sílabas e Letras',
+      title: 'Língua Portuguesa',
+      subtitle: 'Iniciando a Alfabetização',
       icon: BookOpen,
       color: 'bg-emerald-400',
-      field: 'Língua Portuguesa',
-      method: 'Método Fônico'
+      field: 'Alfabetização Formal',
+      method: 'Consciência Fonológica e Leitura'
     },
     {
       id: 'matematica',
-      title: 'Matemática Kids',
-      subtitle: 'Números e Quantidades',
+      title: 'Matemática',
+      subtitle: 'Contagem e Problemas',
       icon: Calculator,
       color: 'bg-blue-400',
-      field: 'Espaços e Quantidades',
-      method: 'Método CRA'
+      field: 'Área de Conhecimento',
+      method: 'Adição, Subtração e Resolução'
     }
   ];
 
@@ -40,10 +40,10 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <School className="w-12 h-12 text-blue-500" />
           </motion.div>
           <h1 className="text-4xl font-black text-blue-600">Escola Brilha</h1>
-          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">Educação Infantil (4 a 5 anos)</p>
+          <p className="text-blue-400 font-bold uppercase tracking-widest mt-2">1º Ano (Alfabetização Formal)</p>
           <div className="mt-4 flex justify-center gap-2 flex-wrap">
-            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Onomatopeias</span>
-            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Linguagem Lúdica</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Alfabetização</span>
+            <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Matemática</span>
             <span className="bg-white px-4 py-1 rounded-full text-[10px] font-black text-blue-400 border border-blue-100 shadow-sm uppercase">Neuroeducação</span>
           </div>
         </header>
