@@ -10,6 +10,52 @@ import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
+
+const ANO2_LESSON: Lesson = {
+  id: 'ano2-demo',
+  title: 'Aventuras do 2º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF02LP01',
+  steps: [
+    { id: 'a2s1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Olá! No segundo ano, vamos aprender coisas incríveis com muitas imagens!',
+      elements: [{ id: 'img-1', type: 'text', content: '🍎', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'a2s2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual destas frutas é vermelha?',
+      interaction: { type: 'click', correctAnswer: '🍎', options: ['🍎', '🍌', '🍇'] } }
+  ]
+};
+
+const ANO3_5_LESSON: Lesson = {
+  id: 'ano3-5-demo',
+  title: 'Desafios do 3º ao 5º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF03CI01',
+  steps: [
+    { id: 'a3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Bem-vindo ao ciclo fundamental! Aqui os problemas são mais elaborados.',
+      elements: [{ id: 'txt-1', type: 'text', content: 'O ciclo da água é fundamental para a vida na Terra.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'a3s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O que acontece quando a água aquece e sobe para as nuvens?',
+      interaction: { type: 'click', correctAnswer: 'Evaporação', options: ['Evaporação', 'Chuva', 'Gelo'] } }
+  ]
+};
+
+const FUNDAMENTAL2_LESSON: Lesson = {
+  id: 'fund2-demo',
+  title: 'Plataforma 6º ao 9º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF06HI01',
+  steps: [
+    { id: 'f2s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Neste nível, focamos no pensamento crítico e na resolução de problemas complexos.',
+      elements: [{ id: 'txt-hist', type: 'text', content: 'As civilizações antigas moldaram o mundo moderno.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'f2s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual civilização é conhecida pelas pirâmides?',
+      interaction: { type: 'click', correctAnswer: 'Egípcia', options: ['Egípcia', 'Romana', 'Grega'] } }
+  ]
+};
+
 const PORTUGUES_1ANO_LESSON: Lesson = {
   id: 'leitura-primeiros-passos',
   title: 'Primeiros Passos na Leitura',
@@ -134,6 +180,13 @@ export const LessonPlayer: React.FC = () => {
   const currentLesson =
     search.category === 'matematica' ? MATH_LESSON :
     search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+
+  const interfaceStyle = 
+    ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
+    search.category === 'ano2' ? 'B' :
+    search.category === 'ano3_5' ? 'C' : 'Modern';
+
+  const isModern = interfaceStyle === 'Modern';
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
@@ -309,7 +362,8 @@ export const LessonPlayer: React.FC = () => {
   };
 
   return (
-    <LessonEnvironment>
+    <div className={isModern ? 'bg-slate-50' : ''}>
+      <LessonEnvironment>
       <LessonHeader
         progress={progress}
         missionName={currentLesson.title}
@@ -325,7 +379,9 @@ export const LessonPlayer: React.FC = () => {
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ type: 'spring', stiffness: 120, damping: 16 }}
-          className="w-full bg-white rounded-3xl shadow-2xl border-4 border-white p-5 sm:p-6 flex flex-col items-center gap-5"
+          className={`w-full ${
+            interfaceStyle === 'C' ? 'max-w-2xl' : isModern ? 'max-w-3xl' : 'max-w-md'
+          } bg-white rounded-3xl shadow-2xl border-4 ${isModern ? 'border-indigo-100' : 'border-white'} p-5 sm:p-6 flex flex-col items-center gap-5`}
         >
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
@@ -436,7 +492,14 @@ export const LessonPlayer: React.FC = () => {
       </div>
 
       {/* Mascots fixed bottom: Pipa LEFT, Pip RIGHT */}
-      <MascotTeacher type={currentStep.mascot} isSpeaking={isSpeaking} />
+      <MascotTeacher 
+        type={currentStep.mascot} 
+        isSpeaking={isSpeaking} 
+        size={
+          interfaceStyle === 'C' ? 'medium' : 
+          isModern ? 'mentor' : 'large'
+        }
+      />
 
       {/* Feedback overlay */}
       <AnimatePresence>
@@ -461,6 +524,7 @@ export const LessonPlayer: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </LessonEnvironment>
+      </LessonEnvironment>
+    </div>
   );
 };
