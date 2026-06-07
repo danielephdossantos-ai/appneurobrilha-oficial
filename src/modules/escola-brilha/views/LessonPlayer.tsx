@@ -17,25 +17,26 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
   skill_bncc: 'EF01LP06',
   steps: [
     { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Vamos aprender as sílabas!',
-      elements: [{ id: 'casa-full', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+      speech: 'Qual é a primeira sílaba de CASA?',
+      elements: [{ id: 'casa-full', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
     { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos separar juntos!',
+      speech: 'Vamos separar as sílabas de CASA!',
       elements: [
         { id: 'ca', type: 'text', content: 'CA', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
         { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
       ] },
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'ref-casa', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
     { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Escolha a imagem correta!',
-      elements: [{ id: 'w', type: 'text', content: 'BOLO', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '🍰', options: ['🍰', '🚗', '🐶'] } },
+      speech: 'ESCOLHA A IMAGEM CORRETA! BOLO',
+      elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
     { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'O gato dorme. Quem dorme?',
-      interaction: { type: 'click', correctAnswer: '🐱', options: ['🐱', '🐶', '🐦'] } }
+      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
+    }
   ]
 };
 
@@ -47,21 +48,21 @@ const MATH_LESSON: Lesson = {
   steps: [
     { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Quantas maçãs temos aqui?',
-      elements: [{ id: 'a', type: 'text', content: '🍎 🍎 🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
+      elements: [{ id: 'a', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
       speech: 'Vamos juntar as frutinhas!',
       elements: [
-        { id: 'a1', type: 'text', content: '🍎 🍎', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a1', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
-        { id: 'a2', type: 'text', content: '🍎', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
+        { id: 'a2', type: 'text', content: 'maça', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
       ] },
     { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual é o resultado?',
       interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
     { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Tínhamos 4 peixinhos e 1 saiu. Quantos sobraram?',
-      elements: [{ id: 'pe', type: 'text', content: '🐟 🐟 🐟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      speech: 'Tínhamos peixinhos e um saiu. Quantos sobraram?',
+      elements: [{ id: 'pe', type: 'text', content: 'peixe', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual número vem depois?',
@@ -79,13 +80,13 @@ const LANG_LESSON: Lesson = {
     { id: 'r1', phase: 'explanation', type: 'explanation', mascot: 'pip',
       speech: 'Vamos descobrir as rimas!',
       elements: [
-        { id: 'c', type: 'text', content: '🏠', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
-        { id: 'a', type: 'text', content: '🪽', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
+        { id: 'c', type: 'text', content: 'casa', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
+        { id: 'a', type: 'text', content: 'asa', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
       ] },
     { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'O que rima com CASA?',
-      elements: [{ id: 'ref', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '🪽', options: ['⚽', '🪽'] } }
+      elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'asa', options: ['bola', 'asa'] } }
   ]
 };
 
