@@ -34,7 +34,17 @@ const PRE_SCHOOL_LESSON: Lesson = {
       displayText: 'QUEM FAZ ESTE SOM?',
       speechText: 'Escute com muita atenção... Miau! Qual desses animaizinhos faz esse som? É o gatinho, o cachorrinho ou a galinha?',
       elements: [{ id: 'som-gato', type: 'text', content: '🐱', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'galinha'] } }
+      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'galinha'] } },
+    { id: 'v4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      displayText: 'ASSOCIAÇÃO DE CORES',
+      speechText: 'Veja a cor deste sol radiante! Ele é amarelo. Qual destas frutas também tem a cor amarela? É a banana, a maçã ou a uva?',
+      elements: [{ id: 'sol-ref', type: 'text', content: 'sol', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca', '🍇'] } },
+    { id: 'v5', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      displayText: 'O QUE COMEMOS?',
+      speechText: 'Estou com um pouquinho de fome! Qual destes objetos nós podemos comer? É o bolo, o carro ou o robô?',
+      elements: [{ id: 'comida-ref', type: 'text', content: '😋', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'robo'] } }
   ]
 };
 
@@ -60,7 +70,15 @@ const VALE_NUMEROS_LESSON: Lesson = {
         { id: 'n4', type: 'text', content: '4', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.2 },
         { id: 'box', type: 'text', content: '🎁', position: { x: 0, y: 40 }, animation: 'fade', delay: 0.5 }
       ],
-      interaction: { type: 'click', correctAnswer: '⭐⭐⭐⭐', options: ['⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'] } }
+      interaction: { type: 'click', correctAnswer: '⭐⭐⭐⭐', options: ['⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'] } },
+    { id: 'n3', phase: 'practice', type: 'interaction', mascot: 'pip',
+      displayText: 'QUAL É O MAIOR?',
+      speechText: 'Olhe para estes dois amigos: o leão e a abelha. Qual deles é o maior de todos? É o leão ou é a abelha?',
+      elements: [
+        { id: 'big', type: 'text', content: 'leao', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'small', type: 'text', content: 'abelha', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
+      ],
+      interaction: { type: 'click', correctAnswer: 'leao', options: ['leao', 'abelha'] } }
   ]
 };
 
@@ -85,7 +103,16 @@ const FLORESTA_ATENCAO_LESSON: Lesson = {
         { id: 'f1r', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'f3r', type: 'text', content: '🍇', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.4 },
       ],
-      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca'] } }
+      interaction: { type: 'click', correctAnswer: 'banana', options: ['banana', 'maca'] } },
+    { id: 'log1', phase: 'practice', type: 'interaction', mascot: 'pip',
+      displayText: 'QUEM NÃO PERTENCE?',
+      speechText: 'Aqui temos uma maçã, uma banana e um carro. Um deles não é uma fruta! Qual deles não pertence ao grupo das frutas?',
+      elements: [
+        { id: 'l1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'l2', type: 'text', content: 'banana', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'l3', type: 'text', content: 'carro', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 }
+      ],
+      interaction: { type: 'click', correctAnswer: 'carro', options: ['maca', 'banana', 'carro'] } }
   ]
 };
 
