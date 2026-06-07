@@ -47,12 +47,12 @@ const MATH_LESSON: Lesson = {
   steps: [
     { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Quantas maçãs temos aqui?',
-      elements: [{ id: 'a', type: 'text', content: '🍎🍎🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
+      elements: [{ id: 'a', type: 'text', content: '🍎 🍎 🍎', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
       speech: 'Vamos juntar as frutinhas!',
       elements: [
-        { id: 'a1', type: 'text', content: '🍎🍎', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a1', type: 'text', content: '🍎 🍎', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
         { id: 'a2', type: 'text', content: '🍎', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 }
       ] },
@@ -61,7 +61,7 @@ const MATH_LESSON: Lesson = {
       interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
     { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Tínhamos 4 peixinhos e 1 saiu. Quantos sobraram?',
-      elements: [{ id: 'pe', type: 'text', content: '🐟🐟🐟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'pe', type: 'text', content: '🐟 🐟 🐟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual número vem depois?',
@@ -84,7 +84,7 @@ const LANG_LESSON: Lesson = {
       ] },
     { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'O que rima com CASA?',
-      elements: [{ id: 'ref', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'ref', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '🪽', options: ['⚽', '🪽'] } }
   ]
 };
