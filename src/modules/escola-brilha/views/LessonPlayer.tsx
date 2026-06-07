@@ -189,6 +189,8 @@ export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   
   const currentLesson =
+    search.category === 'sinonimos' ? SINONIMOS_LESSON :
+    search.category === 'oceanos' ? OCEANOS_LESSON :
     search.category === 'matematica' ? VALE_NUMEROS_LESSON :
     search.category === 'ciencias' ? MUNDO_DESCOBERTAS_LESSON :
     search.category === 'historia_geografia' ? NOSSO_LUGAR_LESSON : CIDADE_LETRAS_LESSON;
