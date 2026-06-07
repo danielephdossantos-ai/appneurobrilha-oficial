@@ -17,24 +17,29 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
   skill_bncc: 'EF01LP06',
   steps: [
     { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'casa-full', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+      displayText: 'CASA',
+      speechText: 'Vamos aprender uma palavra nova! Esta palavra é casa.',
+      elements: [{ id: 'casa-full', type: 'text', content: 'casa', speechText: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
     { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos separar as sílabas de CASA!',
+      displayText: 'CA - SA',
+      speechText: 'Agora, vamos separar os pedacinhos da palavra casa. Escute com atenção!',
       elements: [
-        { id: 'ca', type: 'text', content: 'CA', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
-        { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
+        { id: 'ca', type: 'text', content: 'CA', speechText: 'Esta é a sílaba CA.', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: 'sa', type: 'text', content: 'SA', speechText: 'E esta é a sílaba SA.', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
       ] },
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
+      displayText: 'CASA',
+      speechText: 'Olhe para a palavra casa. Qual é o primeiro pedacinho dela? É o CA, o BO ou o PA?',
       elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
     { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'ESCOLHA A IMAGEM CORRETA! BOLO',
+      displayText: 'BOLO',
+      speechText: 'Escolha a imagem que representa o bolo!',
       elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
     { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O gato dorme. Quem dorme?',
+      displayText: 'O GATO DORME',
+      speechText: 'O gato está dormindo. Quem é que está dormindo?',
       interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
     }
   ]
@@ -47,7 +52,8 @@ const MATH_LESSON: Lesson = {
   skill_bncc: 'EF01MA06',
   steps: [
     { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs temos aqui?',
+      displayText: 'QUANTAS MAÇÃS?',
+      speechText: 'Conte as maçãs que aparecem na tela. Quantas maçãs nós temos aqui? São duas, três ou quatro?',
       elements: [
         { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
@@ -55,7 +61,8 @@ const MATH_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos juntar as frutinhas!',
+      displayText: 'VAMOS SOMAR',
+      speechText: 'Vamos juntar todas essas frutinhas para ver quantas ficam juntas!',
       elements: [
         { id: 'd1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'd2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.5 },
@@ -63,7 +70,8 @@ const MATH_LESSON: Lesson = {
         { id: 'd3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.9 },
       ] },
     { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs ao todo?',
+      displayText: 'TOTAL DE MAÇÃS',
+      speechText: 'Se a gente juntar todas essas maçãs, quantas teremos ao todo? Uma, duas ou três?',
       elements: [
         { id: 'r1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'r2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
@@ -71,7 +79,8 @@ const MATH_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
     { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Tínhamos peixinhos e um saiu. Quantos sobraram?',
+      displayText: 'SOBROU QUANTOS?',
+      speechText: 'Nós tínhamos alguns peixinhos, mas um deles nadou para longe. Quantos peixinhos sobraram agora?',
       elements: [
         { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
@@ -79,7 +88,8 @@ const MATH_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual número vem depois?',
+      displayText: 'QUAL É O PRÓXIMO?',
+      speechText: 'Olhe para os números: um, dois, três... Qual é o número que vem logo depois do três?',
       elements: [{ id: 'sq', type: 'text', content: '1  2  3  ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: '4', options: ['4', '5', '6'] } }
   ]
@@ -92,13 +102,15 @@ const LANG_LESSON: Lesson = {
   skill_bncc: 'EI03EF02',
   steps: [
     { id: 'r1', phase: 'explanation', type: 'explanation', mascot: 'pip',
-      speech: 'Vamos descobrir as rimas!',
+      displayText: 'VAMOS RIMAR!',
+      speechText: 'Hoje vamos descobrir as rimas! Rima é quando as palavras terminam com o mesmo som, como casa e asa.',
       elements: [
         { id: 'c', type: 'text', content: 'casa', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.3 },
         { id: 'a', type: 'text', content: 'asa', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.7 }
       ] },
     { id: 'r2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O que rima com CASA?',
+      displayText: 'O QUE RIMA COM CASA?',
+      speechText: 'Escute bem: o que rima com a palavra casa? Será que é bola ou é asa?',
       elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'asa', options: ['bola', 'asa'] } }
   ]
