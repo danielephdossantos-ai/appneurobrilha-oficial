@@ -34,34 +34,51 @@ export const EscolaBrilhaDashboard: React.FC = () => {
     // 2º ANO
     { id: 'portugues_2ano', title: 'Viagem Literária', subtitle: 'Português', icon: BookOpen, color: 'bg-purple-400', field: 'Missão: Escritor Criativo', method: 'Interface B', group: '2º Ano' },
     { id: 'matematica_2ano', title: 'Universo dos Cálculos', subtitle: 'Matemática', icon: Calculator, color: 'bg-indigo-400', field: 'Missão: Resgate Numérico', method: 'CRA Avançado', group: '2º Ano' },
+    { id: 'ciencias_2ano', title: 'Pequenos Cientistas', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-green-400', field: 'Missão: Vida no Jardim', method: 'Observação', group: '2º Ano' },
+    { id: 'historia_2ano', title: 'Minha Comunidade', subtitle: 'História', icon: Landmark, color: 'bg-amber-400', field: 'Missão: Linha do Tempo', method: 'Identidade', group: '2º Ano' },
 
     // 3º ANO
     { id: 'portugues_3ano', title: 'Sinônimos em Ação', subtitle: 'Português', icon: BookOpen, color: 'bg-purple-500', field: 'Missão: Palavras Parecidas', method: 'Interface B+', group: '3º Ano' },
     { id: 'matematica_3ano', title: 'Gênio da Multiplicação', subtitle: 'Matemática', icon: Calculator, color: 'bg-indigo-500', field: 'Missão: Dobro e Triplo', method: 'CRA Pro', group: '3º Ano' },
+    { id: 'ciencias_3ano', title: 'Ciclo da Água', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-green-500', field: 'Missão: Chuva Mágica', method: 'Experiência', group: '3º Ano' },
+    { id: 'geografia_3ano', title: 'Nossa Cidade', subtitle: 'Geografia', icon: Globe, color: 'bg-blue-500', field: 'Missão: Mapa do Tesouro', method: 'Cartografia', group: '3º Ano' },
 
     // 4º ANO
     { id: 'portugues_4ano', title: 'Detetives do Texto', subtitle: 'Português', icon: BookOpen, color: 'bg-purple-600', field: 'Missão: Gêneros Literários', method: 'Interpretação', group: '4º Ano' },
     { id: 'matematica_4ano', title: 'Exploradores de Frações', subtitle: 'Matemática', icon: Calculator, color: 'bg-indigo-600', field: 'Missão: Partes do Todo', method: 'CRA Expert', group: '4º Ano' },
+    { id: 'ciencias_4ano', title: 'Sistema Solar', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-green-600', field: 'Missão: Viagem Espacial', method: 'Astronomia', group: '4º Ano' },
+    { id: 'historia_4ano', title: 'Brasil Colonial', subtitle: 'História', icon: Landmark, color: 'bg-amber-600', field: 'Missão: Grandes Navegações', method: 'Crítica', group: '4º Ano' },
 
     // 5º ANO
     { id: 'portugues_5ano', title: 'Mestre da Pontuação', subtitle: 'Português', icon: BookOpen, color: 'bg-purple-700', field: 'Missão: O Código da Vírgula', method: 'Gramática', group: '5º Ano' },
     { id: 'matematica_5ano', title: 'Rei da Porcentagem', subtitle: 'Matemática', icon: Calculator, color: 'bg-indigo-700', field: 'Missão: Descontos Reais', method: 'Finanças Kids', group: '5º Ano' },
+    { id: 'ciencias_5ano', title: 'Corpo Humano', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-green-700', field: 'Missão: Pulmão em Ação', method: 'Anatomia', group: '5º Ano' },
+    { id: 'geografia_5ano', title: 'Regiões do Brasil', subtitle: 'Geografia', icon: Globe, color: 'bg-blue-700', field: 'Missão: Diversidade', method: 'Social', group: '5º Ano' },
 
     // 6º ANO
     { id: 'portugues_6ano', title: 'Analista de Textos', subtitle: 'Português', icon: BookOpen, color: 'bg-slate-600', field: 'Missão: Estrutura Narrativa', method: 'Interface Moderna', group: '6º Ano' },
     { id: 'matematica_6ano', title: 'Arena da Álgebra', subtitle: 'Matemática', icon: Calculator, color: 'bg-slate-700', field: 'Missão: Números Inteiros', method: 'Lógica Pura', group: '6º Ano' },
+    { id: 'ciencias_6ano', title: 'Ecossistemas', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-slate-800', field: 'Missão: Cadeia Alimentar', method: 'Biotec', group: '6º Ano' },
+    { id: 'historia_6ano', title: 'Grécia Antiga', subtitle: 'História', icon: Landmark, color: 'bg-slate-900', field: 'Missão: Democracia', method: 'Contextual', group: '6º Ano' },
 
     // 7º ANO
     { id: 'portugues_7ano', title: 'Poder da Argumentação', subtitle: 'Português', icon: BookOpen, color: 'bg-slate-700', field: 'Missão: Debates Críticos', method: 'Interface Moderna', group: '7º Ano' },
     { id: 'matematica_7ano', title: 'Equações em Equilíbrio', subtitle: 'Matemática', icon: Calculator, color: 'bg-slate-800', field: 'Missão: Equilíbrio de X', method: 'Álgebra II', group: '7º Ano' },
+    { id: 'geografia_7ano', title: 'Geopolítica Mundi', subtitle: 'Geografia', icon: Globe, color: 'bg-slate-900', field: 'Missão: Fronteiras', method: 'Global', group: '7º Ano' },
+    { id: 'ciencias_7ano', title: 'Células e Vida', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-black', field: 'Missão: DNA Explorer', method: 'Lab', group: '7º Ano' },
 
     // 8º ANO
     { id: 'portugues_8ano', title: 'Mestre das Metáforas', subtitle: 'Português', icon: BookOpen, color: 'bg-slate-800', field: 'Missão: Sentido Figurado', method: 'Literatura', group: '8º Ano' },
     { id: 'matematica_8ano', title: 'Sistemas Complexos', subtitle: 'Matemática', icon: Calculator, color: 'bg-slate-900', field: 'Missão: Duas Incógnitas', method: 'Análise de Dados', group: '8º Ano' },
+    { id: 'historia_8ano', title: 'Revolução Industrial', subtitle: 'História', icon: Landmark, color: 'bg-black', field: 'Missão: Máquina a Vapor', method: 'Crítica II', group: '8º Ano' },
+    { id: 'geografia_8ano', title: 'Economia Global', subtitle: 'Geografia', icon: Globe, color: 'bg-slate-700', field: 'Missão: Mercados', method: 'Estatística', group: '8º Ano' },
 
     // 9º ANO
     { id: 'portugues_9ano', title: 'Dissertação Expert', subtitle: 'Português', icon: BookOpen, color: 'bg-slate-900', field: 'Missão: Redação Nota 10', method: 'Preparatório', group: '9º Ano' },
     { id: 'matematica_9ano', title: 'Mestre da Álgebra', subtitle: 'Matemática', icon: Calculator, color: 'bg-black', field: 'Missão: Funções de 2º Grau', method: 'Alta Performance', group: '9º Ano' },
+    { id: 'ciencias_9ano', title: 'Química e Física', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-slate-800', field: 'Missão: Átomos', method: 'Avançado', group: '9º Ano' },
+    { id: 'historia_9ano', title: 'Guerra Fria', subtitle: 'História', icon: Landmark, color: 'bg-slate-700', field: 'Missão: Muro de Berlim', method: 'Geopolítica', group: '9º Ano' },
+  ];
   ];
 
   return (
