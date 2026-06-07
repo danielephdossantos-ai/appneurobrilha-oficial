@@ -443,7 +443,6 @@ export const LessonPlayer: React.FC = () => {
     'matematica_9ano': MATEMATICA_9ANO_LESSON,
     'ano3_5': ANO3_5_LESSON,
     'fundamental2': FUNDAMENTAL2_LESSON
-    'fundamental2': FUNDAMENTAL2_LESSON
   };
   const currentLesson = lessonsMap[search.category] || LANG_LESSON;
 
