@@ -129,12 +129,12 @@ export class LessonGenerator {
     const steps: LessonStep[] = [];
     const isInfant = category.includes('_inf');
     const is1Ano = category.includes('1ano');
-    const isBasic = isInfant || is1Ano || category === 'matematica';
+    const isBasic = isInfant || is1Ano || category === 'matematica' || category === 'portugues';
     const isCycleC = ['matematica_3ano', 'matematica_4ano', 'matematica_5ano'].includes(category);
     const isModern = ['matematica_6ano', 'matematica_7ano', 'matematica_8ano', 'matematica_9ano'].includes(category);
     
     // Para infantil/1ano, valores pequenos (max 5)
-    const maxVal = isInfant ? 3 : is1Ano ? 5 : isCycleC ? 12 : 20;
+    const maxVal = isInfant ? 3 : (is1Ano || isBasic) ? 5 : isCycleC ? 12 : 20;
     const finalCount = isBasic ? 3 : count; // Menos passos para os pequenos
 
     const val1 = Math.floor(Math.random() * maxVal) + 1;
@@ -660,14 +660,52 @@ export class LessonGenerator {
     
     // Português Inicial (Infantil ao 2º)
     switch (category) {
-      case 'portugues':
       case 'portugues_inf':
+      case 'educacao_infantil':
+      case 'infantil':
+        return this.generateInfantLanguage(count);
+      case 'portugues':
       case 'portugues_1ano':
       case 'portugues_2ano':
         return this.generateEF01LP05(count);
       default:
         return this.generateEF01LP05(count);
     }
+  }
+
+  /**
+   * Educação Infantil: Foco TOTAL em IMAGENS.
+   * Não usa sílabas ou palavras complexas.
+   */
+  private static generateInfantLanguage(count: number = 4): Lesson {
+    const words = this.getRandomItems(WORD_BANK, count);
+    const steps: LessonStep[] = [];
+
+    words.forEach((word, index) => {
+      const distractor = this.getRandomItems(WORD_BANK.filter(w => w.text !== word.text), 2);
+      steps.push({
+        id: `inf-lang-${index}`,
+        phase: 'practice',
+        type: 'interaction',
+        mascot: index % 2 === 0 ? 'pip' : 'pipa',
+        speech: `Onde está o ${word.text}?`,
+        elements: [{ id: `txt-${index}`, type: 'text', content: word.text, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: word.emoji || word.text,
+          options: this.shuffle([word.emoji || word.text, distractor[0].emoji || distractor[0].text, distractor[1].emoji || distractor[1].text])
+        }
+      });
+    });
+
+    return {
+      id: `gen-infant-lang-${Date.now()}`,
+      title: 'Brincando com Imagens',
+      mission_name: 'Desafio Visual',
+      bncc_field: 'escuta_fala',
+      skill_bncc: 'EI03EF01',
+      steps
+    };
   }
 }
 
