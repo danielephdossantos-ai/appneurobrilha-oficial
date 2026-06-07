@@ -26,21 +26,36 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking, size =
   const isPip = selectedMascot === 'pip' || !isPipa; // Default to Pip if not Pipa
 
   return (
-    <div className="fixed bottom-0 left-0 w-full z-40 pointer-events-none flex justify-between items-end px-2 sm:px-6">
-      <AnimatePresence mode="wait">
-        {isPipa ? (
-          <MascotImage 
-            key="pipa"
+    <div className={`fixed bottom-0 left-0 w-full z-40 pointer-events-none flex ${size === 'large' ? 'justify-between' : 'justify-end'} items-end px-2 sm:px-6`}>
+      {size === 'large' && (
+        <AnimatePresence mode="wait">
+          {isPipa ? (
+            <MascotImage 
+              key="pipa"
+              src={pipaImg} 
+              alt="Pipa" 
+              speaking={isSpeaking} 
+              side="left" 
+              size={size}
+            />
+          ) : (
+            <div key="spacer-left" className="w-28 sm:w-40 md:w-48" />
+          )}
+        </AnimatePresence>
+      )}
+
+      {/* For Interface B and beyond, mascots are usually on the right or center-right */}
+      <div className="flex items-end">
+        {size !== 'large' && isPipa && (
+           <MascotImage 
+            key="pipa-right"
             src={pipaImg} 
             alt="Pipa" 
             speaking={isSpeaking} 
-            side="left" 
+            side="right" 
             size={size}
           />
-        ) : (
-          <div key="spacer-left" className={size === 'mentor' ? "w-16 sm:w-20" : "w-28 sm:w-40 md:w-48"} />
         )}
-      </AnimatePresence>
 
       <AnimatePresence mode="wait">
         {isPip ? (

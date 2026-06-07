@@ -39,6 +39,7 @@ const MATEMATICA_2ANO_LESSON: Lesson = {
   id: 'matematica-2ano-calculo',
   title: 'Adição e Subtração - 2º Ano',
   bncc_field: 'espacos_tempos',
+  xp: 150,
   skill_bncc: 'EF02MA01',
   steps: [
     { id: 'm2s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
@@ -620,6 +621,7 @@ export const LessonPlayer: React.FC = () => {
         field={currentLesson.bncc_field}
         stepIndex={currentStepIndex}
         totalSteps={currentLesson.steps.length}
+        xp={100 + (currentStepIndex * 10)}
       />
 
       {/* Activity card */}
@@ -634,13 +636,13 @@ export const LessonPlayer: React.FC = () => {
           } bg-white rounded-3xl shadow-2xl border-4 ${isModern ? 'border-indigo-100' : 'border-white'} p-5 sm:p-6 flex flex-col items-center gap-5`}
         >
           {/* Question / speech */}
-          <div className="w-full flex items-start gap-2">
-            <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep.speech}
+          <div className="w-full flex items-start gap-2 bg-slate-50/50 p-3 rounded-2xl border border-slate-100">
+            <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-tight">
+              {currentStep.speech.length > 120 ? currentStep.speech.substring(0, 117) + '...' : currentStep.speech}
             </p>
             <button
               onClick={replaySpeech}
-              className="shrink-0 w-9 h-9 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center active:scale-95 transition"
+              className="shrink-0 w-10 h-10 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center shadow-sm active:scale-95 transition"
               aria-label="Ouvir novamente"
             >
               <Volume2 className="w-5 h-5" />
@@ -649,7 +651,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Content elements area */}
           {currentStep.elements && currentStep.elements.length > 0 && (
-            <div className="w-full min-h-[140px] flex items-center justify-center gap-6 flex-wrap">
+            <div className={`w-full ${interfaceStyle === 'B' || interfaceStyle === 'C' ? 'min-h-[220px]' : 'min-h-[140px]'} flex items-center justify-center gap-6 flex-wrap`}>
               <AnimatePresence>
                 {currentStep.elements.map((el: any) =>
                   showElements.includes(el.id) && (
