@@ -85,7 +85,7 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐱": gato, "🐈": gato,
   "🍎": maca, "🍏": maca,
   "🌳": arvore, "🌲": arvore, "🌴": arvore,
-  "🏠": casa, "🏡": casa, "🏘️": casa,
+  "🏠": casa, "🏡": casa, "🏘️": casa, "🏫": casa, "👨‍👩‍👧‍👦": ursinho, "🏪": casa, "🧼": maca,
   "🐝": abelha,
   "🌸": flor, "🌺": flor, "🌷": flor, "🌼": flor, "🌻": flor,
   "🚗": carro, "🚙": carro, "🚲": carro, "✈️": carro, "🚌": carro, "🏍️": carro, "🚑": carro,
