@@ -412,7 +412,8 @@ export class LessonGenerator {
 
     return {
       id: `gen-modern-${Date.now()}`,
-      title: isMath ? 'Missão: O Valor de X' : 'Missão: O Código da Vírgula',
+      title: isMath ? 'Lenda da Matemática' : 'Expert em Análise',
+      mission_name: isMath ? 'O Valor de X' : 'O Código da Vírgula',
       bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
       steps
     };
