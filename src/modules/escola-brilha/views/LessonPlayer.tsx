@@ -622,24 +622,26 @@ export const LessonPlayer: React.FC = () => {
         field={currentLesson.bncc_field}
         stepIndex={currentStepIndex}
         totalSteps={currentLesson.steps.length}
+        isModern={isModern}
       />
 
       {/* Activity card */}
-      <div className="w-full max-w-md px-4 pt-24 pb-56 flex flex-col items-center">
+      <div className={`w-full ${isModern ? 'max-w-5xl' : 'max-w-md'} px-4 pt-24 pb-56 flex flex-col items-center`}>
         <motion.div
           key={currentStep.id}
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ type: 'spring', stiffness: 120, damping: 16 }}
           className={`w-full ${
-            interfaceStyle === 'B' || interfaceStyle === 'C' ? 'max-w-2xl' : isModern ? 'max-w-3xl' : 'max-w-md'
-          } bg-white rounded-[2.5rem] shadow-2xl border-4 ${isModern ? 'border-indigo-100' : 'border-white'} p-6 sm:p-8 flex flex-col items-center gap-6`}
+            interfaceStyle === 'B' || interfaceStyle === 'C' ? 'max-w-2xl' : isModern ? 'max-w-5xl' : 'max-w-md'
+          } bg-white rounded-[2.5rem] shadow-2xl border-4 ${isModern ? 'border-slate-200' : 'border-white'} p-6 sm:p-10 flex flex-col items-center gap-8`}
         >
           {/* Question / speech */}
-          <div className="w-full flex items-start gap-2 bg-slate-50/50 p-3 rounded-2xl border border-slate-100">
-            <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-tight">
-              {currentStep.speech.length > 120 ? currentStep.speech.substring(0, 117) + '...' : currentStep.speech}
+          <div className={`w-full flex items-start gap-2 ${isModern ? 'bg-slate-50 p-6 rounded-3xl border border-slate-100' : 'bg-slate-50/50 p-3 rounded-2xl border border-slate-100'}`}>
+            <p className={`flex-1 text-center ${isModern ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'} font-black text-slate-700 leading-tight`}>
+              {currentStep.speech.length > 150 ? currentStep.speech.substring(0, 147) + '...' : currentStep.speech}
             </p>
+
             <button
               onClick={replaySpeech}
               className="shrink-0 w-10 h-10 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center shadow-sm active:scale-95 transition"
@@ -651,7 +653,7 @@ export const LessonPlayer: React.FC = () => {
 
           {/* Content elements area */}
           {currentStep.elements && currentStep.elements.length > 0 && (
-            <div className={`w-full ${interfaceStyle === 'B' || interfaceStyle === 'C' ? 'min-h-[220px]' : 'min-h-[160px]'} flex items-center justify-center gap-8 flex-wrap py-4`}>
+            <div className={`w-full ${interfaceStyle === 'B' || interfaceStyle === 'C' ? 'min-h-[220px]' : isModern ? 'min-h-[350px]' : 'min-h-[160px]'} flex items-center justify-center gap-10 flex-wrap py-6`}>
               <AnimatePresence>
                 {currentStep.elements.map((el: any) =>
                   showElements.includes(el.id) && (
@@ -727,7 +729,7 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: 'spring', stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${colorClasses} w-24 h-24 sm:w-32 sm:h-32 rounded-full ${fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
+                      className={`${colorClasses} ${isModern ? 'w-auto px-10 h-20 rounded-2xl text-2xl' : 'w-24 h-24 sm:w-32 sm:h-32 rounded-full ' + fontSize} font-black shadow-lg border-4 hover:scale-105 active:scale-95 transition flex items-center justify-center p-0 overflow-visible`}
                     >
                       {hasIllust ? (
                         <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
@@ -744,14 +746,16 @@ export const LessonPlayer: React.FC = () => {
       </div>
 
       {/* Mascots fixed bottom: Pipa LEFT, Pip RIGHT */}
-      <MascotTeacher 
-        type={currentStep.mascot} 
-        isSpeaking={isSpeaking} 
-        size={
-          interfaceStyle === 'C' ? 'medium' : 
-          isModern ? 'mentor' : 'large'
-        }
-      />
+      {(!isModern || isSpeaking || feedback || currentStepIndex === 0 || currentStepIndex === currentLesson.steps.length - 1) && (
+        <MascotTeacher 
+          type={currentStep.mascot} 
+          isSpeaking={isSpeaking} 
+          size={
+            interfaceStyle === 'C' ? 'medium' : 
+            isModern ? 'mentor' : 'large'
+          }
+        />
+      )}
 
       {/* Feedback overlay */}
       <AnimatePresence>

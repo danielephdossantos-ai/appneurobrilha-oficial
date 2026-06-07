@@ -311,24 +311,45 @@ export class LessonGenerator {
   /**
    * Interface Moderna: 6º ao 9º Ano.
    * Foco em Álgebra, Interpretação Crítica.
+   * Flow: MISSÃO -> DESCOBERTA -> PRÁTICA -> DESAFIO
    */
   static generateModern(category: string, count: number = 8): Lesson {
     const isMath = category.includes('matematica');
     const steps: LessonStep[] = [];
 
-    for (let i = 0; i < count; i++) {
+    // 1. MISSÃO (Início)
+    steps.push({
+      id: `mod-mission-${Date.now()}`,
+      phase: 'explanation',
+      type: 'explanation',
+      mascot: 'pip',
+      speech: isMath ? 'Missão: Descubra o valor oculto de X. Você está pronto?' : 'Missão: Você consegue identificar as causas principais deste evento histórico?',
+      elements: [{ id: 'mission-title', type: 'text', content: '🎯 MISSÃO ATIVADA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    // 2. DESCOBERTA
+    steps.push({
+      id: `mod-discovery-${Date.now()}`,
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pipa',
+      speech: isMath ? 'Observe como as variáveis se comportam em uma equação.' : 'Explore os documentos e identifique os pontos-chave.',
+      elements: [{ id: 'discovery-content', type: 'text', content: isMath ? 'X + 10 = 25' : '📜 Documento Histórico: A Independência', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }]
+    });
+
+    // 3. PRÁTICA (Several steps)
+    for (let i = 0; i < Math.floor(count / 2); i++) {
       if (isMath) {
-        // Álgebra básica: x + a = b
         const a = Math.floor(Math.random() * 20) + 1;
         const x = Math.floor(Math.random() * 20) + 1;
         const b = x + a;
         steps.push({
-          id: `mod-math-${i}`,
+          id: `mod-math-practice-${i}`,
           phase: 'practice',
           type: 'interaction',
           mascot: 'pip',
-          speech: `Encontre o valor de X na equação: X + ${a} = ${b}`,
-          elements: [{ id: `el-${i}`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          speech: `Prática: Resolva X + ${a} = ${b}`,
+          elements: [{ id: `el-p-${i}`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
           interaction: {
             type: 'click',
             correctAnswer: x.toString(),
@@ -336,21 +357,35 @@ export class LessonGenerator {
           }
         });
       } else {
-        // Português Moderno (Interpretação)
         steps.push({
-          id: `mod-port-${i}`,
+          id: `mod-port-practice-${i}`,
           phase: 'practice',
           type: 'interaction',
           mascot: 'pipa',
-          speech: `Qual é o objetivo principal de um texto dissertativo?`,
+          speech: `Analise: Qual é o argumento central deste parágrafo?`,
           interaction: {
             type: 'click',
-            correctAnswer: 'Defender uma ideia',
-            options: this.shuffle(['Defender uma ideia', 'Contar uma história', 'Ensinar uma receita'])
+            correctAnswer: 'A liberdade econômica',
+            options: this.shuffle(['A liberdade econômica', 'A beleza das artes', 'O clima da região'])
           }
         });
       }
     }
+
+    // 4. DESAFIO (Final)
+    steps.push({
+      id: `mod-challenge-${Date.now()}`,
+      phase: 'challenge',
+      type: 'interaction',
+      mascot: 'pip',
+      speech: 'DESAFIO FINAL: Aplique tudo o que você aprendeu agora!',
+      elements: [{ id: 'challenge-icon', type: 'text', content: '🔥 DESAFIO', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.1 }],
+      interaction: {
+        type: 'click',
+        correctAnswer: 'Concluído',
+        options: ['Concluído', 'Tentar depois']
+      }
+    });
 
     return {
       id: `gen-modern-${Date.now()}`,
