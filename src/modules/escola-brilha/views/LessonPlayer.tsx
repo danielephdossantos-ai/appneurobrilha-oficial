@@ -166,6 +166,70 @@ const SINONIMOS_LESSON: Lesson = {
   ]
 };
 
+const ADICAO_SUBTRACAO_2ANO_LESSON: Lesson = {
+  id: 'matematica-2ano',
+  title: 'Adição e Subtração',
+  grade: 2,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF02MA05',
+  steps: [
+    { id: 'm1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Vamos praticar somas maiores! Se você tem 15 figurinhas e ganha 5, quantas você tem?',
+      elements: [{ id: 'sum-2', type: 'text', content: '15 + 5 = 20', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'm2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Quanto é 25 + 10?',
+      interaction: { type: 'choice', correctAnswer: '35', options: ['30', '35', '40'] } }
+  ]
+};
+
+const MULTIPLICACAO_3ANO_LESSON: Lesson = {
+  id: 'matematica-3ano',
+  title: 'Multiplicação',
+  grade: 3,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF03MA07',
+  steps: [
+    { id: 'mu1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Multiplicar é somar o mesmo número várias vezes! 3 vezes 2 é igual a 2+2+2.',
+      elements: [{ id: 'mult-1', type: 'text', content: '3 x 2 = 6', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'mu2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Quanto é 4 vezes 2?',
+      interaction: { type: 'choice', correctAnswer: '8', options: ['6', '8', '10'] } }
+  ]
+};
+
+const FRACOES_4ANO_LESSON: Lesson = {
+  id: 'matematica-4ano',
+  title: 'Frações',
+  grade: 4,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF04MA09',
+  steps: [
+    { id: 'f1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Uma fração representa uma parte de um inteiro. Como uma pizza cortada!',
+      elements: [{ id: 'frac-1', type: 'text', content: '1/2 (Metade)', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'f2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Se eu divido uma maçã em 4 partes e como 1, qual a fração?',
+      interaction: { type: 'choice', correctAnswer: '1/4', options: ['1/2', '1/4', '3/4'] } }
+  ]
+};
+
+const PORCENTAGEM_5ANO_LESSON: Lesson = {
+  id: 'matematica-5ano',
+  title: 'Porcentagem',
+  grade: 5,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF05MA06',
+  steps: [
+    { id: 'p1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Porcentagem é uma parte de 100! 50% é o mesmo que a metade.',
+      elements: [{ id: 'por-1', type: 'text', content: '50% de 100 = 50', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'p2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Quanto é 10% de 100?',
+      interaction: { type: 'choice', correctAnswer: '10', options: ['1', '10', '20'] } }
+  ]
+};
+
 const OCEANOS_LESSON: Lesson = {
   id: 'oceanos-6ano',
   title: 'Importância dos Oceanos',
@@ -185,12 +249,67 @@ const OCEANOS_LESSON: Lesson = {
   ]
 };
 
+const ECOSSISTEMAS_7ANO_LESSON: Lesson = {
+  id: 'ciencias-7ano',
+  title: 'Ecossistemas Brasileiros',
+  grade: 7,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF07CI07',
+  steps: [
+    { id: 'ec1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'O Brasil possui diversos ecossistemas como a Amazônia e o Cerrado.',
+      elements: [{ id: 'eco-1', type: 'text', content: '🌳 AMAZÔNIA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'ec2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual bioma é conhecido como a "Savana Brasileira"?',
+      interaction: { type: 'choice', correctAnswer: 'Cerrado', options: ['Caatinga', 'Cerrado', 'Pantanal'] } }
+  ]
+};
+
+const GENETICA_8ANO_LESSON: Lesson = {
+  id: 'ciencias-8ano',
+  title: 'Genética Básica',
+  grade: 8,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF08CI07',
+  steps: [
+    { id: 'g1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'O DNA contém todas as informações que definem quem nós somos!',
+      elements: [{ id: 'gen-1', type: 'text', content: '🧬 DNA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'g2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Onde fica guardado o DNA na célula?',
+      interaction: { type: 'choice', correctAnswer: 'Núcleo', options: ['Núcleo', 'Parede', 'Citoplasma'] } }
+  ]
+};
+
+const QUIMICA_9ANO_LESSON: Lesson = {
+  id: 'ciencias-9ano',
+  title: 'Tabela Periódica',
+  grade: 9,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF09CI03',
+  steps: [
+    { id: 'q1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'A Tabela Periódica organiza todos os elementos químicos conhecidos.',
+      elements: [{ id: 'qui-1', type: 'text', content: 'H (Hidrogênio)', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'q2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual o símbolo químico do Oxigênio?',
+      interaction: { type: 'choice', correctAnswer: 'O', options: ['Ox', 'O', 'Og'] } }
+  ]
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   
   const currentLesson =
     search.category === 'sinonimos' ? SINONIMOS_LESSON :
     search.category === 'oceanos' ? OCEANOS_LESSON :
+    search.category === 'matematica-2ano' ? ADICAO_SUBTRACAO_2ANO_LESSON :
+    search.category === 'matematica-3ano' ? MULTIPLICACAO_3ANO_LESSON :
+    search.category === 'matematica-4ano' ? FRACOES_4ANO_LESSON :
+    search.category === 'matematica-5ano' ? PORCENTAGEM_5ANO_LESSON :
+    search.category === 'ciencias-7ano' ? ECOSSISTEMAS_7ANO_LESSON :
+    search.category === 'ciencias-8ano' ? GENETICA_8ANO_LESSON :
+    search.category === 'ciencias-9ano' ? QUIMICA_9ANO_LESSON :
     search.category === 'matematica' ? VALE_NUMEROS_LESSON :
     search.category === 'ciencias' ? MUNDO_DESCOBERTAS_LESSON :
     search.category === 'historia_geografia' ? NOSSO_LUGAR_LESSON : CIDADE_LETRAS_LESSON;

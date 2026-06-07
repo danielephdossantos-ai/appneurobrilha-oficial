@@ -18,12 +18,29 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       { id: 'historia_geografia', title: 'Nosso Lugar', subtitle: 'Família, Escola e Bairro', icon: Map, color: 'bg-purple-400', field: 'BNCC: EF01HI01 e GE01', method: 'Sociedade e Espaço' }
     ],
     2: [
-      { id: 'sinonimos', title: 'Sinônimos', subtitle: 'Ampliação de Vocabulário', icon: BookOpen, color: 'bg-purple-400', field: 'BNCC: EF02LP03', method: 'Interface B (Interativa)' },
-      { id: 'matematica_2ano', title: 'Matemática Divertida', subtitle: 'Cálculo Mental', icon: Calculator, color: 'bg-pink-400', field: 'BNCC: EF02MA01', method: 'Lógica Visual' }
+      { id: 'sinonimos', title: 'Sinônimos', subtitle: 'Ampliação de Vocabulário', icon: BookOpen, color: 'bg-emerald-400', field: 'BNCC: EF02LP03', method: 'Interface B (Interativa)' },
+      { id: 'matematica-2ano', title: 'Adição e Subtração', subtitle: 'Cálculo Mental', icon: Calculator, color: 'bg-blue-400', field: 'BNCC: EF02MA05', method: 'Lógica Visual' }
+    ],
+    3: [
+      { id: 'matematica-3ano', title: 'Multiplicação', subtitle: 'Operações Matemáticas', icon: Calculator, color: 'bg-blue-400', field: 'BNCC: EF03MA07', method: 'Interface B' }
+    ],
+    4: [
+      { id: 'matematica-4ano', title: 'Frações', subtitle: 'Partes do Inteiro', icon: Calculator, color: 'bg-blue-400', field: 'BNCC: EF04MA09', method: 'Interface B' }
+    ],
+    5: [
+      { id: 'matematica-5ano', title: 'Porcentagem', subtitle: 'Razões e Proporções', icon: Calculator, color: 'bg-blue-400', field: 'BNCC: EF05MA06', method: 'Interface B' }
     ],
     6: [
-      { id: 'oceanos', title: 'Oceanos', subtitle: 'Geografia e Ecologia', icon: Map, color: 'bg-blue-600', field: 'BNCC: EF06CI11', method: 'Interface C (Acadêmica)' },
-      { id: 'historia_6ano', title: 'Civilizações', subtitle: 'História Geral', icon: GraduationCap, color: 'bg-slate-700', field: 'BNCC: EF06HI01', method: 'Pesquisa e Análise' }
+      { id: 'oceanos', title: 'Oceanos', subtitle: 'Geografia e Ecologia', icon: Map, color: 'bg-blue-600', field: 'BNCC: EF06CI11', method: 'Interface C (Acadêmica)' }
+    ],
+    7: [
+      { id: 'ciencias-7ano', title: 'Ecossistemas', subtitle: 'Biomas Brasileiros', icon: Microscope, color: 'bg-emerald-600', field: 'BNCC: EF07CI07', method: 'Interface C' }
+    ],
+    8: [
+      { id: 'ciencias-8ano', title: 'Genética', subtitle: 'Vida e Evolução', icon: Brain, color: 'bg-purple-600', field: 'BNCC: EF08CI07', method: 'Interface C' }
+    ],
+    9: [
+      { id: 'ciencias-9ano', title: 'Química', subtitle: 'Tabela Periódica', icon: Microscope, color: 'bg-slate-700', field: 'BNCC: EF09CI03', method: 'Interface C' }
     ]
   };
 
