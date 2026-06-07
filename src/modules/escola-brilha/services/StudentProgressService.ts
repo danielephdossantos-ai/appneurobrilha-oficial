@@ -1,7 +1,10 @@
 
+export type MasteryStatus = 'Iniciante' | 'Aprendendo' | 'Praticando' | 'Dominando' | 'Especialista';
+
 export interface SkillMastery {
   skill_bncc: string;
   score: number; // 0 to 100
+  status: MasteryStatus;
   attempts: number;
   lastUpdate: number;
 }
