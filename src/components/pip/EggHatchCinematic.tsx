@@ -19,7 +19,7 @@ interface Props {
 const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}`;
 
 export function EggHatchCinematic({ childId, onClose }: Props) {
-  const [phase, setPhase] = useState<'choose' | 'shake' | 'crack' | 'open' | 'reveal'>('choose');
+  const [phase, setPhase] = useState<'intro' | 'choose' | 'shake' | 'crack' | 'open' | 'reveal'>('intro');
   const [mascot, setMascot] = useState<MascotChoice>('pip');
 
   useEffect(() => {
