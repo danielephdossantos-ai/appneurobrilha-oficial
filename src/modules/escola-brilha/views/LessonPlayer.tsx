@@ -633,8 +633,8 @@ export const LessonPlayer: React.FC = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ type: 'spring', stiffness: 120, damping: 16 }}
           className={`w-full ${
-            interfaceStyle === 'B' || interfaceStyle === 'C' ? 'max-w-2xl' : isModern ? 'max-w-3xl' : 'max-w-md'
-          } bg-white rounded-[2.5rem] shadow-2xl border-4 ${isModern ? 'border-indigo-100' : 'border-white'} p-6 sm:p-8 flex flex-col items-center gap-6`}
+            interfaceStyle === 'B' || interfaceStyle === 'C' ? 'max-w-2xl' : isModern ? 'max-w-5xl' : 'max-w-md'
+          } bg-white rounded-[2.5rem] shadow-2xl border-4 ${isModern ? 'border-slate-200' : 'border-white'} p-6 sm:p-10 flex flex-col items-center gap-8`}
         >
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2 bg-slate-50/50 p-3 rounded-2xl border border-slate-100">
