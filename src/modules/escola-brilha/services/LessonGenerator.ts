@@ -1,6 +1,7 @@
 
 import { Lesson, LessonStep } from '../types/lesson';
 import { WORD_BANK, MATH_BANK, SENTENCE_BANK, Word } from '../data/content-banks';
+import { StudentProgressService } from './StudentProgressService';
 
 export class LessonGenerator {
   
@@ -360,26 +361,30 @@ export class LessonGenerator {
   }
 
   static generateByCategory(category: string): Lesson {
+    const mastery = StudentProgressService.getMastery(category); // Usando categoria como chave simplificada
+    const difficultyMultiplier = Math.floor(mastery.score / 25); // 0 to 4
+    const count = 5 + difficultyMultiplier;
+
     if (['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(category)) {
-      return this.generateCycleC(category);
+      return this.generateCycleC(category, count);
     }
     
     if (['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(category)) {
-      return this.generateModern(category);
+      return this.generateModern(category, count + 2);
     }
 
     switch (category) {
       case 'portugues':
       case 'portugues_1ano':
-        return this.generateEF01LP05();
+        return this.generateEF01LP05(count);
       case 'matematica':
-        return this.generateEF01MA06();
+        return this.generateEF01MA06(count);
       case 'portugues_2ano':
-        return this.generateEF01LP05(7); 
+        return this.generateEF01LP05(count + 2); 
       case 'matematica_2ano':
-        return this.generateEF01MA06(7);
+        return this.generateEF01MA06(count + 2);
       default:
-        return this.generateEF01LP05(3);
+        return this.generateEF01LP05(count);
     }
   }
 }
