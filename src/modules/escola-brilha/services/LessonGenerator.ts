@@ -127,13 +127,18 @@ export class LessonGenerator {
    */
   static generateCRAMath(category: string, count: number = 5): Lesson {
     const steps: LessonStep[] = [];
-    const isBasic = ['matematica', 'matematica_2ano'].includes(category);
+    const isInfant = category.includes('_inf');
+    const is1Ano = category.includes('1ano');
+    const isBasic = isInfant || is1Ano || category === 'matematica';
     const isCycleC = ['matematica_3ano', 'matematica_4ano', 'matematica_5ano'].includes(category);
     const isModern = ['matematica_6ano', 'matematica_7ano', 'matematica_8ano', 'matematica_9ano'].includes(category);
     
     // FASE 1-3: O Motor CRA para um problema central
-    const val1 = Math.floor(Math.random() * (isBasic ? 5 : isCycleC ? 12 : 20)) + 2;
-    const val2 = Math.floor(Math.random() * (isBasic ? 5 : isCycleC ? 10 : 15)) + 2;
+    // Para infantil/1ano, valores pequenos (max 5)
+    const maxVal = isInfant ? 5 : is1Ano ? 8 : isCycleC ? 12 : 20;
+    const val1 = Math.floor(Math.random() * (maxVal - 1)) + 1;
+    const val2 = Math.floor(Math.random() * (maxVal - val1)) + 1;
+    
     const op = isCycleC ? 'x' : '+';
     const result = op === 'x' ? val1 * val2 : val1 + val2;
     const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀'])[0];
@@ -144,16 +149,17 @@ export class LessonGenerator {
       phase: 'explanation',
       type: 'explanation',
       mascot: 'pip',
-      speech: isModern ? `Missão: Vamos analisar a proporção deste grupo.` : `Observe estes grupos. Quantas figuras existem ao todo?`,
+      speech: isModern ? `Missão: Vamos analisar a proporção deste grupo.` : 
+              isBasic ? `Conte as figuras!` : `Observe estes grupos. Quantas figuras existem ao todo?`,
       elements: [
-        ...Array.from({ length: Math.min(val1, 10) }).map((_, idx) => ({
+        ...Array.from({ length: val1 }).map((_, idx) => ({
           id: `v1-0-${idx}`, type: 'text' as const, content: emoji,
-          position: { x: -60, y: (idx - (Math.min(val1, 10)-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx
+          position: { x: -60, y: (idx - (val1-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx
         })),
         { id: `op-icon`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
-        ...Array.from({ length: Math.min(val2, 10) }).map((_, idx) => ({
+        ...Array.from({ length: val2 }).map((_, idx) => ({
           id: `v2-0-${idx}`, type: 'text' as const, content: emoji,
-          position: { x: 60, y: (idx - (Math.min(val2, 10)-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
+          position: { x: 60, y: (idx - (val2-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
         }))
       ]
     });

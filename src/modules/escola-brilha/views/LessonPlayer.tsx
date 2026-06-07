@@ -906,16 +906,14 @@ export const LessonPlayer: React.FC = () => {
           transition={{ type: 'spring', stiffness: 120, damping: 16 }}
           className="w-full bg-white rounded-3xl shadow-2xl border-4 border-white p-5 sm:p-6 flex flex-col items-center gap-5"
         >
-          <div className="w-full flex items-start gap-2">
-            <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep.speech}
-            </p>
+          {/* Instrução: Apenas botão de áudio visível para os pequenos, evitando poluição de texto */}
+          <div className="w-full flex items-center justify-center py-2">
             <button
               onClick={replaySpeech}
-              className="shrink-0 w-9 h-9 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center active:scale-95 transition"
-              aria-label="Ouvir novamente"
+              className="w-16 h-16 rounded-full bg-violet-100 hover:bg-violet-200 text-violet-600 flex items-center justify-center active:scale-95 transition shadow-lg border-4 border-white"
+              aria-label="Ouvir instrução"
             >
-              <Volume2 className="w-5 h-5" />
+              <Volume2 className="w-8 h-8" />
             </button>
           </div>
 
