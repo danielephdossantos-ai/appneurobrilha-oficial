@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Volume2 } from 'lucide-react';
+import { Volume2, Star, Trophy, BookOpen, Microscope, Globe, FileText, Settings, User, Layout, MessageSquare, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { LessonHeader } from '../components/LessonHeader';
