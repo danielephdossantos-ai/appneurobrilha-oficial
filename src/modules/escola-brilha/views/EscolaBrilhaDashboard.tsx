@@ -36,13 +36,22 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       method: 'Método CRA'
     },
     {
-      id: 'ano2',
-      title: '2º Ano',
-      subtitle: 'Exploração Criativa',
-      icon: School,
+      id: 'portugues_2ano',
+      title: '2º Ano Português',
+      subtitle: 'Leitura e Escrita',
+      icon: BookOpen,
       color: 'bg-purple-400',
-      field: 'Fundamental I',
-      method: 'Interface B'
+      field: 'Língua Portuguesa',
+      method: 'Método Fônico'
+    },
+    {
+      id: 'matematica_2ano',
+      title: '2º Ano Matemática',
+      subtitle: 'Cálculos e Lógica',
+      icon: Calculator,
+      color: 'bg-indigo-400',
+      field: 'Matemática',
+      method: 'Método CRA'
     },
     {
       id: 'ano3_5',

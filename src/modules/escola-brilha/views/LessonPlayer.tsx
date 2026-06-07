@@ -11,18 +11,40 @@ import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
 
-const ANO2_LESSON: Lesson = {
-  id: 'ano2-demo',
-  title: 'Aventuras do 2º Ano',
+const PORTUGUES_2ANO_LESSON: Lesson = {
+  id: 'portugues-2ano-leitura',
+  title: 'Leitura e Escrita - 2º Ano',
   bncc_field: 'escuta_fala',
   skill_bncc: 'EF02LP01',
   steps: [
-    { id: 'a2s1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Olá! No segundo ano, vamos aprender coisas incríveis com muitas imagens!',
-      elements: [{ id: 'img-1', type: 'text', content: '🍎', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
-    { id: 'a2s2', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Qual destas frutas é vermelha?',
-      interaction: { type: 'click', correctAnswer: '🍎', options: ['🍎', '🍌', '🍇'] } }
+    { id: 'p2s1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Vamos ler frases juntos!',
+      elements: [{ id: 'frase-1', type: 'text', content: 'O gato subiu no telhado.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'p2s2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
+      speech: 'Veja como separamos as sílabas de TELHADO!',
+      elements: [
+        { id: 'tel', type: 'text', content: 'TEL', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: 'ha', type: 'text', content: 'HA', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.5 },
+        { id: 'do', type: 'text', content: 'DO', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.8 }
+      ] },
+    { id: 'p2s3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual é a primeira sílaba de TELHADO?',
+      interaction: { type: 'click', correctAnswer: 'TEL', options: ['TEL', 'TE', 'TAL'] } }
+  ]
+};
+
+const MATEMATICA_2ANO_LESSON: Lesson = {
+  id: 'matematica-2ano-calculo',
+  title: 'Adição e Subtração - 2º Ano',
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF02MA01',
+  steps: [
+    { id: 'm2s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Vamos somar! Quanto é 5 mais 3?',
+      elements: [{ id: 'calc-1', type: 'text', content: '5 + 3 = ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'm2s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Escolha o resultado correto!',
+      interaction: { type: 'click', correctAnswer: '8', options: ['7', '8', '9'] } }
   ]
 };
 
@@ -177,13 +199,20 @@ const getPortugueseCount = (n: number, word: string) => {
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const currentLesson =
-    search.category === 'matematica' ? MATH_LESSON :
-    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+  const lessonsMap: Record<string, Lesson> = {
+    'portugues': LANG_LESSON,
+    'portugues_1ano': PORTUGUES_1ANO_LESSON,
+    'matematica': MATH_LESSON,
+    'portugues_2ano': PORTUGUES_2ANO_LESSON,
+    'matematica_2ano': MATEMATICA_2ANO_LESSON,
+    'ano3_5': ANO3_5_LESSON,
+    'fundamental2': FUNDAMENTAL2_LESSON
+  };
+  const currentLesson = lessonsMap[search.category] || LANG_LESSON;
 
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
-    search.category === 'ano2' ? 'B' :
+    ['portugues_2ano', 'matematica_2ano'].includes(search.category) ? 'B' :
     search.category === 'ano3_5' ? 'C' : 'Modern';
 
   const isModern = interfaceStyle === 'Modern';
