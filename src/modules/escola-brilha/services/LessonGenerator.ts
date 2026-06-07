@@ -332,44 +332,41 @@ export class LessonGenerator {
 
   /**
    * Interface Moderna: 6º ao 9º Ano.
-   * Foco em Álgebra, Interpretação Crítica.
-   * Flow: MISSÃO -> DESCOBERTA -> PRÁTICA -> DESAFIO
+   * Flow: MISSÃO (Descoberta) -> DESCOBERTA (Exploração) -> EXPLICAÇÃO -> PRÁTICA (Treino) -> DESAFIO -> DOMÍNIO
    */
   static generateModern(category: string, count: number = 8): Lesson {
     const isMath = category.includes('matematica');
     const steps: LessonStep[] = [];
 
-    // 1. MISSÃO (Início)
+    // FASE 1: DESCOBERTA (Missão)
     steps.push({
-      id: `mod-mission-${Date.now()}`,
-      phase: 'explanation',
-      type: 'explanation',
-      mascot: 'pip',
-      speech: isMath ? 'Missão: Descubra o valor oculto de X. Você está pronto?' : 'Missão: Você consegue identificar as causas principais deste evento histórico?',
+      id: `mod-desc-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: isMath ? 'Missão: Descubra o valor oculto de X. Você está pronto?' : 'Desafio: Você consegue identificar o sentido conotativo nesta expressão?',
       elements: [{ id: 'mission-title', type: 'text', content: '🎯 MISSÃO ATIVADA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
     });
 
-    // 2. DESCOBERTA
+    // FASE 2: EXPLORAÇÃO (Descoberta)
     steps.push({
-      id: `mod-discovery-${Date.now()}`,
-      phase: 'demonstration',
-      type: 'demonstration',
-      mascot: 'pipa',
-      speech: isMath ? 'Observe como as variáveis se comportam em uma equação.' : 'Explore os documentos e identifique os pontos-chave.',
-      elements: [{ id: 'discovery-content', type: 'text', content: isMath ? 'X + 10 = 25' : '📜 Documento Histórico: A Independência', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }]
+      id: `mod-explor-${Date.now()}`, phase: 'demonstration', type: 'demonstration', mascot: 'pipa',
+      speech: isMath ? 'Observe como as variáveis se comportam em uma balança.' : 'Leia o exemplo e observe as imagens para entender o contexto.',
+      elements: [{ id: 'expl-content', type: 'text', content: isMath ? 'X + 10 = 25' : '📖 "Ele tem um coração de ouro"', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.2 }]
     });
 
-    // 3. PRÁTICA (Several steps)
+    // FASE 3: EXPLICAÇÃO
+    steps.push({
+      id: `mod-exp-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: isMath ? 'Para isolar o X, invertemos a operação do outro lado.' : 'Linguagem figurada é quando usamos palavras fora do sentido literal.',
+      elements: [{ id: 'exp-hint', type: 'text', content: isMath ? 'X = 25 - 10' : '✨ Sentido Figurado', position: { x: 0, y: 0 }, animation: 'bounce', delay: 0.2 }]
+    });
+
+    // FASE 4: TREINO (Prática)
     for (let i = 0; i < Math.floor(count / 2); i++) {
       if (isMath) {
         const a = Math.floor(Math.random() * 20) + 1;
         const x = Math.floor(Math.random() * 20) + 1;
         const b = x + a;
         steps.push({
-          id: `mod-math-practice-${i}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pip',
+          id: `mod-math-train-${i}`, phase: 'practice', type: 'interaction', mascot: 'pipa',
           speech: `Prática: Resolva X + ${a} = ${b}`,
           elements: [{ id: `el-p-${i}`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
           interaction: {
@@ -380,27 +377,21 @@ export class LessonGenerator {
         });
       } else {
         steps.push({
-          id: `mod-port-practice-${i}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Analise: Qual é o argumento central deste parágrafo?`,
+          id: `mod-port-train-${i}`, phase: 'practice', type: 'interaction', mascot: 'pipa',
+          speech: `Analise: Qual é o sentido da palavra destacada?`,
           interaction: {
             type: 'click',
-            correctAnswer: 'A liberdade econômica',
-            options: this.shuffle(['A liberdade econômica', 'A beleza das artes', 'O clima da região'])
+            correctAnswer: 'Figurado',
+            options: this.shuffle(['Figurado', 'Literal', 'Dicionário'])
           }
         });
       }
     }
 
-    // 4. DESAFIO (Final)
+    // FASE 5: DESAFIO
     steps.push({
-      id: `mod-challenge-${Date.now()}`,
-      phase: 'challenge',
-      type: 'interaction',
-      mascot: 'pip',
-      speech: 'DESAFIO FINAL: Aplique tudo o que você aprendeu agora!',
+      id: `mod-chal-${Date.now()}`, phase: 'challenge', type: 'interaction', mascot: 'pip',
+      speech: 'DESAFIO FINAL: Aplique tudo o que você aprendeu agora sem dicas!',
       elements: [{ id: 'challenge-icon', type: 'text', content: '🔥 DESAFIO', position: { x: 0, y: -40 }, animation: 'pop', delay: 0.1 }],
       interaction: {
         type: 'click',
@@ -409,13 +400,21 @@ export class LessonGenerator {
       }
     });
 
+    // FASE 6: DOMÍNIO
+    steps.push({
+      id: `mod-dom-${Date.now()}`, phase: 'mastery', type: 'explanation', mascot: 'pipa',
+      speech: 'Parabéns! Você alcançou o domínio desta habilidade!',
+      elements: [{ id: 'dom-star', type: 'text', content: '🌟', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
     return {
       id: `gen-modern-${Date.now()}`,
-      title: `Plataforma de Aprendizagem - ${isMath ? 'Matemática' : 'Português'}`,
+      title: `Plataforma Avançada - ${isMath ? 'Matemática' : 'Português'}`,
       bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
       steps
     };
   }
+
 
   /**
    * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
