@@ -9,15 +9,6 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
-      id: 'portugues',
-      title: 'Educação Infantil',
-      subtitle: 'Linguagem e Sons',
-      icon: BookOpen,
-      color: 'bg-orange-400',
-      field: 'Escuta, Fala e Pensamento',
-      method: 'Consciência Fonológica'
-    },
-    {
       id: 'portugues_1ano',
       title: '1º Ano Alfabetização',
       subtitle: 'Sílabas e Letras',
