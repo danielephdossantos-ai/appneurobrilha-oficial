@@ -303,6 +303,13 @@ export const LessonPlayer: React.FC = () => {
   const currentLesson =
     search.category === 'sinonimos' ? SINONIMOS_LESSON :
     search.category === 'oceanos' ? OCEANOS_LESSON :
+    search.category === 'matematica-2ano' ? ADICAO_SUBTRACAO_2ANO_LESSON :
+    search.category === 'matematica-3ano' ? MULTIPLICACAO_3ANO_LESSON :
+    search.category === 'matematica-4ano' ? FRACOES_4ANO_LESSON :
+    search.category === 'matematica-5ano' ? PORCENTAGEM_5ANO_LESSON :
+    search.category === 'ciencias-7ano' ? ECOSSISTEMAS_7ANO_LESSON :
+    search.category === 'ciencias-8ano' ? GENETICA_8ANO_LESSON :
+    search.category === 'ciencias-9ano' ? QUIMICA_9ANO_LESSON :
     search.category === 'matematica' ? VALE_NUMEROS_LESSON :
     search.category === 'ciencias' ? MUNDO_DESCOBERTAS_LESSON :
     search.category === 'historia_geografia' ? NOSSO_LUGAR_LESSON : CIDADE_LETRAS_LESSON;
