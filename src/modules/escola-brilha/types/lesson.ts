@@ -56,6 +56,7 @@ export interface Lesson {
   title: string;
   bncc_field?: BNCC_Field;
   skill_bncc?: string;
+  xp?: number;
   steps: LessonStep[];
 }
 
