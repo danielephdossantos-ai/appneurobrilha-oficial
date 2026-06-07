@@ -243,7 +243,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'Laboratório de Matemática' : isCycleC ? 'Desafios Numéricos' : 'Brincando com Números',
+      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : 'Herói dos Números',
       bncc_field: 'espacos_tempos',
       steps
     };
