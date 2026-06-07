@@ -508,6 +508,49 @@ export class LessonGenerator {
     };
   }
 
+  /**
+   * SISTEMA DE GERAÇÃO INFINITA: Template + Banco
+   */
+  static generateInfiniteLesson(category: string, count: number = 5): Lesson {
+    const steps: LessonStep[] = [];
+    let bank: any[] = [];
+    let title = 'Missão de Exploração';
+
+    if (category.includes('artes')) {
+      bank = ART_BANK;
+      title = 'Oficina de Artes';
+    } else {
+      bank = HISTORY_GEOGRAPHY_BANK;
+      title = 'Exploradores do Mundo';
+    }
+
+    const selectedItems = this.getRandomItems(bank, Math.min(count, bank.length));
+
+    selectedItems.forEach((item, index) => {
+      steps.push({
+        id: `inf-${category}-${index}`,
+        phase: 'practice',
+        type: 'interaction',
+        mascot: Math.random() > 0.5 ? 'pip' : 'pipa',
+        speech: item.question,
+        elements: [{ id: `el-${index}`, type: 'text', content: item.emoji || '🎯', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: item.correct,
+          options: this.shuffle(item.options)
+        }
+      });
+    });
+
+    return {
+      id: `gen-inf-${category}-${Date.now()}`,
+      title,
+      mission_name: bank[0]?.topic || 'Desafio',
+      bncc_field: 'eu_outro_nos',
+      steps
+    };
+  }
+
   static generateByCategory(category: string): Lesson {
     const mastery = StudentProgressService.getMastery(category); 
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
