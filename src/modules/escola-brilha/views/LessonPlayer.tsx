@@ -136,7 +136,7 @@ export const LessonPlayer: React.FC = () => {
     // Add options ONLY if they are text/syllables (never read emojis/images)
     if (step.type === 'interaction' && step.interaction?.options) {
       const options = step.interaction.options;
-      const textOptions = options.filter((opt: string) => !/\p{Emoji}/u.test(opt));
+      const textOptions = options.filter((opt: string) => !/\p{Emoji}/u.test(opt) && !objetoImg(opt));
       
       if (textOptions.length > 0) {
         // Use "..." for natural pauses between syllables or words
