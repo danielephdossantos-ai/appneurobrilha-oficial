@@ -16,7 +16,7 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
   steps: [
     { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
       speech: 'Vamos aprender as sílabas!',
-      elements: [{ id: 'casa-full', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+      elements: [{ id: 'casa-full', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
     { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
       speech: 'Vamos separar juntos!',
       elements: [
@@ -25,7 +25,7 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       ] },
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'ref-casa', type: 'text', content: 'CASA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'ref-casa', type: 'text', content: '🏠', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
     { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Escolha a imagem correta!',
@@ -113,10 +113,10 @@ export const LessonPlayer: React.FC = () => {
   const getStepSpeech = (step: any) => {
     let text = step.speech;
     
-    // Add text elements (like "BOLO") to the speech
+    // Add text elements (like "BOLO") to the speech, but ignore icons/emojis in speech
     if (step.elements) {
       const elementsText = step.elements
-        .filter((el: any) => el.type === 'text')
+        .filter((el: any) => el.type === 'text' && !/\p{Emoji}/u.test(el.content))
         .map((el: any) => el.content)
         .join('. ');
       
