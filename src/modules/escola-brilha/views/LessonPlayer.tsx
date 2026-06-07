@@ -32,8 +32,14 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: 'MA', options: ['MA', 'ME', 'MO'] } },
     
-    // 2. Complete a Palavra
+    // 2. Sílaba Inicial PA
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual palavra começa com PA?',
+      elements: [{ id: 'ref-pa', type: 'text', content: 'PA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'pato', options: ['pato', 'banana', 'gato'] } },
+
+    // 3. Complete a Palavra
+    { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Complete a palavra GATO!',
       elements: [
         { id: 'gato-img', type: 'text', content: 'gato', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.2 },
@@ -41,14 +47,14 @@ const PORTUGUES_1ANO_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: 'TO', options: ['TO', 'TA', 'TU'] } },
 
-    // 3. Leitura Curta
-    { id: 's4', phase: 'explanation', type: 'explanation', mascot: 'pip',
+    // 4. Leitura Curta
+    { id: 's5', phase: 'explanation', type: 'explanation', mascot: 'pip',
       speech: 'A BOLA É AZUL.',
       elements: [
         { id: 'bola-img', type: 'text', content: 'bola', position: { x: 0, y: -30 }, animation: 'pop', delay: 0.2 },
         { id: 'frase', type: 'text', content: 'A BOLA É AZUL', position: { x: 0, y: 40 }, animation: 'pop', delay: 0.5 }
       ] },
-    { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
+    { id: 's6', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Qual é a cor da bola?',
       elements: [{ id: 'ref-bola', type: 'text', content: 'bola', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'AZUL', options: ['AZUL', 'VERMELHA'] } }
@@ -82,8 +88,14 @@ const MATH_LESSON: Lesson = {
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
 
-    // 2. Subtração Visual
-    { id: 'm3', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+    // 2. Reconhecer Dezenas
+    { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual número representa 3 dezenas?',
+      elements: [{ id: 'ref-dez', type: 'text', content: '3 DEZENAS', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: '30', options: ['10', '20', '30'] } },
+
+    // 3. Subtração Visual
+    { id: 'm4', phase: 'explanation', type: 'explanation', mascot: 'pipa',
       speech: 'Tínhamos quatro peixinhos e um saiu. Quantos sobraram?',
       elements: [
         { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: -20 }, animation: 'pop', delay: 0.2 },
@@ -91,7 +103,7 @@ const MATH_LESSON: Lesson = {
         { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: -20 }, animation: 'pop', delay: 0.6 },
         { id: 'p4', type: 'text', content: 'peixe', position: { x: 90, y: -20 }, animation: 'pop', delay: 0.8 },
       ] },
-    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
+    { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Quantos sobraram?',
       elements: [
         { id: 's1', type: 'text', content: 'peixe', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
