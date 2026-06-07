@@ -12,9 +12,14 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    server: {
+      host: "0.0.0.0",
+      port: 5000,
+      allowedHosts: true,
+    },
     plugins: [
       VitePWA({
-        registerType: 'prompt', // Alterado de autoUpdate para prompt para evitar versões conflitantes sem aviso
+        registerType: 'prompt',
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
           name: 'NeuroBrilha Kids',
@@ -44,7 +49,7 @@ export default defineConfig({
                 cacheName: 'supabase-cache',
                 expiration: {
                   maxEntries: 100,
-                  maxAgeSeconds: 60 * 60 * 24 * 7 // 1 week
+                  maxAgeSeconds: 60 * 60 * 24 * 7
                 },
                 cacheableResponse: {
                   statuses: [0, 200]
