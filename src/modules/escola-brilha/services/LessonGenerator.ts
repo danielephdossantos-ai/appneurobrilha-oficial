@@ -389,11 +389,11 @@ export class LessonGenerator {
       case 'portugues_1ano':
         return this.generateEF01LP05(count);
       case 'matematica':
-        return this.generateEF01MA06(count);
+        return this.generateCRAMath(category, count);
       case 'portugues_2ano':
         return this.generateEF01LP05(count + 2); 
       case 'matematica_2ano':
-        return this.generateEF01MA06(count + 2);
+        return this.generateCRAMath(category, count + 2);
       default:
         return this.generateEF01LP05(count);
     }
