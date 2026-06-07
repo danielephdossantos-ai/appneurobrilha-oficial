@@ -556,6 +556,10 @@ export class LessonGenerator {
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
 
+    if (['historia', 'geografia', 'artes'].some(c => category.includes(c))) {
+      return this.generateInfiniteLesson(category, count);
+    }
+
     if (category === 'ciencias_kids') {
       return this.generateScienceLesson(category);
     }
