@@ -140,38 +140,9 @@ export const LessonPlayer: React.FC = () => {
   }, [currentStepIndex, currentLesson.id]);
 
   const getStepSpeech = (step: any) => {
-    let text = step.speech;
-    
-    // Add text elements to the speech, but ignore icons/emojis in speech
-    if (step.elements) {
-      const elementsText = step.elements
-        .filter((el: any) => el.type === 'text')
-        .map((el: any) => {
-          // If it's a known object name, don't read the word as text if it's meant to be an illustration
-          if (objetoImg(el.content)) return '';
-          return semEmoji(el.content);
-        })
-        .filter((txt: string) => txt.length > 0)
-        .join('. ');
-      
-      if (elementsText && !text.includes(elementsText)) {
-        text += '. ' + elementsText;
-      }
-    }
-
-    // Add options ONLY if they are text/syllables (never read emojis/images)
-    if (step.type === 'interaction' && step.interaction?.options) {
-      const options = step.interaction.options;
-      const textOptions = options.filter((opt: string) => !/\p{Emoji}/u.test(opt) && !objetoImg(opt));
-      
-      if (textOptions.length > 0) {
-        // Use "..." for natural pauses between syllables or words
-        const optionsText = textOptions.slice(0, -1).join('... ') + (textOptions.length > 1 ? '... ou ... ' : '') + textOptions[textOptions.length - 1];
-        text += '. ' + optionsText + '?';
-      }
-    }
-    
-    return text;
+    // Priority 1: speechText (mandatory now)
+    // We no longer automatically build speech from elements to follow pedagogical rules
+    return step.speechText;
   };
 
   const runStep = async () => {
@@ -192,10 +163,12 @@ export const LessonPlayer: React.FC = () => {
         if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
-          await AudioSpeechService.speak(el.content);
+          // Use element's specific speechText or fallback to content
+          const elSpeech = el.speechText || el.content;
+          await AudioSpeechService.speak(elSpeech);
           setIsSpeaking(false);
           setHighlightedElementId(null);
-          await new Promise(r => setTimeout(r, 400)); // Pause between syllables
+          await new Promise(r => setTimeout(r, 400)); // Pause between elements
         }
       }
     }
@@ -289,7 +262,7 @@ export const LessonPlayer: React.FC = () => {
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
             <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep.speech}
+              {currentStep.displayText || currentStep.speechText}
             </p>
             <button
               onClick={replaySpeech}
