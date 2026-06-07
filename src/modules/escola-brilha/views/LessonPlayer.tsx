@@ -14,46 +14,50 @@ const CIDADE_LETRAS_LESSON: Lesson = {
   id: 'cidade-letras-1ano',
   title: 'Cidade das Letras',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EF01LP06',
+  skill_bncc: 'EF01LP07',
   steps: [
-    // 1. Método Fônico
+    // 1. Vogais
+    { id: 'v1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'As vogais são as letras mais amigáveis! Vamos conhecer a letra A.',
+      elements: [{ id: 'a-vogal', type: 'text', content: 'A', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'v2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual destas figuras começa com a vogal A?',
+      interaction: { type: 'click', correctAnswer: '🍎 MAÇÃ', options: ['🍎 MAÇÃ', '🐶 CACHORRO', '🐱 GATO'] } },
+    { id: 'v3', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Agora a letra E de Estrela!',
+      elements: [{ id: 'e-vogal', type: 'text', content: 'E', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'v4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Onde está a Estrela que começa com E?',
+      interaction: { type: 'click', correctAnswer: '⭐ ESTRELA', options: ['⭐ ESTRELA', '☀️ SOL', '🌙 LUA'] } },
+
+    // 2. Método Fônico (Consoantes)
     { id: 'l1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Esta é a letra B. O som dela é /b/. Qual dessas figuras começa com B?',
+      speech: 'Esta é a letra B. O som dela é /b/. B de Bola!',
       elements: [{ id: 'b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
     { id: 'l2', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Escolha a imagem que começa com B!',
-      interaction: { type: 'click', correctAnswer: 'bola', options: ['bola', 'gato', 'sapo'] } },
+      speech: 'Escolha a imagem que começa com o som /b/!',
+      interaction: { type: 'click', correctAnswer: '⚽ BOLA', options: ['⚽ BOLA', '🐱 GATO', '🐸 SAPO'] } },
     
-    // 2. Formação de Sílabas
+    // 3. Sílabas
     { id: 'l3', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'B mais A faz BA!',
+      speech: 'Quando juntamos B com A, formamos a sílaba BA!',
       elements: [
         { id: 'b-syll', type: 'text', content: 'B', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.1 },
         { id: 'plus', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.3 },
         { id: 'a-syll', type: 'text', content: 'A', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 }
       ] },
     { id: 'l4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'B mais A forma qual sílaba?',
+      speech: 'B + A faz...',
       interaction: { type: 'click', correctAnswer: 'BA', options: ['BA', 'BE', 'BO'] } },
 
-    // 3. Completar Palavra
+    // 4. Completar e Ler
     { id: 'l5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Complete a palavra GATO!',
+      speech: 'Olhe o Gato! Complete o nome dele: GA-TO.',
       elements: [
-        { id: 'gato-img', type: 'text', content: 'gato', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.2 },
+        { id: 'gato-img', type: 'text', content: 'GATO', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.2 },
         { id: 'gato-txt', type: 'text', content: 'GA _ O', position: { x: 0, y: 40 }, animation: 'pop', delay: 0.5 }
       ],
-      interaction: { type: 'click', correctAnswer: 'TO', options: ['TO', 'TA', 'TU'] } },
-
-    // 4. Leitura Curta
-    { id: 'l6', phase: 'explanation', type: 'explanation', mascot: 'pip',
-      speech: 'O GATO DORME.',
-      elements: [
-        { id: 'frase', type: 'text', content: 'O GATO DORME', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.5 }
-      ] },
-    { id: 'l7', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quem dorme?',
-      interaction: { type: 'click', correctAnswer: '🐱 GATO', options: ['🐱 GATO', '🐶 CACHORRO'] } }
+      interaction: { type: 'click', correctAnswer: 'TO', options: ['TO', 'TA', 'TU'] } }
   ]
 };
 
@@ -63,32 +67,33 @@ const VALE_NUMEROS_LESSON: Lesson = {
   bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01MA06',
   steps: [
-    // 1. Soma Visual
+    // 1. Soma Visual com Frutas
     { id: 'n1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Duas maçãs mais uma maçã. Quantas temos ao todo?',
+      speech: 'Vamos somar! Se eu tenho duas maçãs e ganho mais uma, com quantas eu fico?',
       elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.1 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a1', type: 'text', content: 'MAÇÃ', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'a2', type: 'text', content: 'MAÇÃ', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
         { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 },
+        { id: 'a3', type: 'text', content: 'MAÇÃ', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
     
-    // 2. Subtração Visual
+    // 2. Subtração Visual (Tirar Frutas)
     { id: 'n2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Tínhamos quatro peixinhos e um saiu. Quantos sobraram?',
+      speech: 'Tínhamos quatro bananas e o macaco comeu uma. Quantas sobraram?',
       elements: [
-        { id: 'px1', type: 'text', content: 'peixe', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.1 },
-        { id: 'px2', type: 'text', content: 'peixe', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'px3', type: 'text', content: 'peixe', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.3 },
+        { id: 'b1', type: 'text', content: 'BANANA', position: { x: -60, y: -20 }, animation: 'pop', delay: 0.1 },
+        { id: 'b2', type: 'text', content: 'BANANA', position: { x: 0, y: -20 }, animation: 'pop', delay: 0.2 },
+        { id: 'b3', type: 'text', content: 'BANANA', position: { x: 60, y: -20 }, animation: 'pop', delay: 0.3 },
+        { id: 'b4', type: 'text', content: 'BANANA', position: { x: 0, y: 30 }, animation: 'pop', delay: 0.4 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
 
-    // 3. Antecessor
+    // 3. Dezenas
     { id: 'n3', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Qual número vem antes do 8?',
-      elements: [{ id: 'ref-8', type: 'text', content: '8', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '7', options: ['6', '7', '9'] } }
+      speech: 'Quanto valem 2 dezenas?',
+      elements: [{ id: 'dez', type: 'text', content: '10 + 10', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: '20', options: ['10', '20', '30'] } }
   ]
 };
 
