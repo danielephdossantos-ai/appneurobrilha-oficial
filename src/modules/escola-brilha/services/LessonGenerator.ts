@@ -120,120 +120,96 @@ export class LessonGenerator {
   }
 
   /**
-   * EF01MA06: Construir fatos básicos da adição.
+   * MÉTODO CRA: Concreto -> Representacional -> Abstrato
+   * Matemática 2º ao 9º Ano.
    */
-  static generateEF01MA06(count: number = 5): Lesson {
-    const items = this.getRandomItems(MATH_BANK.simple_addition, count);
+  static generateCRAMath(category: string, count: number = 5): Lesson {
     const steps: LessonStep[] = [];
+    const isBasic = ['matematica', 'matematica_2ano'].includes(category);
+    
+    for (let i = 0; i < count; i++) {
+      const val1 = Math.floor(Math.random() * (isBasic ? 5 : 10)) + 1;
+      const val2 = Math.floor(Math.random() * (isBasic ? 5 : 10)) + 1;
+      const result = val1 + val2;
+      const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬'])[0];
 
-    items.forEach((item, index) => {
-      const modelType = Math.floor(Math.random() * 5); // 0-4
-
-      if (modelType === 0) {
-        // Adição Visual
-        steps.push({
-          id: `ma06-add-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Quanto é ${item.a} mais ${item.b}?`,
-          elements: [
-            { id: `op-${index}`, type: 'text', content: `${item.a} + ${item.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }
-          ],
-          interaction: {
-            type: 'click',
-            correctAnswer: item.result.toString(),
-            options: this.shuffle([item.result.toString(), (item.result + 1).toString(), (item.result - 1).toString()])
-          }
-        });
-      } else if (modelType === 1) {
-        // Contagem
-        const count = Math.floor(Math.random() * 5) + 1;
-        steps.push({
-          id: `ma06-count-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pip',
-          speech: `Quantas maçãs você vê?`,
-          elements: Array.from({ length: count }).map((_, i) => ({
-            id: `apple-${index}-${i}`,
-            type: 'text',
-            content: '🍎',
-            position: { x: (i - (count-1)/2) * 50, y: 0 },
-            animation: 'pop',
-            delay: 0.1 * i
+      // FASE 1: Problema Visual (Concreto)
+      steps.push({
+        id: `math-c-${i}`,
+        phase: 'explanation',
+        type: 'explanation',
+        mascot: 'pip',
+        speech: `Observe estes grupos. Quantas estrelas existem ao todo?`,
+        elements: [
+          ...Array.from({ length: val1 }).map((_, idx) => ({
+            id: `v1-${i}-${idx}`, type: 'text' as const, content: emoji,
+            position: { x: -60, y: (idx - (val1-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx
           })),
-          interaction: {
-            type: 'click',
-            correctAnswer: count.toString(),
-            options: this.shuffle([count.toString(), (count + 1).toString(), (count - 1).toString()].filter(v => parseInt(v) > 0))
-          }
-        });
-      } else if (modelType === 2) {
-        // Sequência numérica
-        const start = Math.floor(Math.random() * 5) + 1;
-        steps.push({
-          id: `ma06-seq-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Qual número vem depois do ${start + 1}?`,
-          elements: [{ id: `seq-${index}`, type: 'text', content: `${start}, ${start+1}, ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-          interaction: {
-            type: 'click',
-            correctAnswer: (start + 2).toString(),
-            options: this.shuffle([(start + 2).toString(), (start + 3).toString(), (start + 4).toString()])
-          }
-        });
-      } else if (modelType === 3) {
-        // Comparação (Qual é maior?)
-        const v1 = Math.floor(Math.random() * 10);
-        const v2 = Math.floor(Math.random() * 10);
-        if (v1 === v2) { v1 > 5 ? v1 - 1 : v1 + 1; }
-        const max = Math.max(v1, v2);
-        steps.push({
-          id: `ma06-comp-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pip',
-          speech: `Qual número é maior?`,
-          elements: [
-            { id: `v1-${index}`, type: 'text', content: v1.toString(), position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
-            { id: `v2-${index}`, type: 'text', content: v2.toString(), position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
-          ],
-          interaction: {
-            type: 'click',
-            correctAnswer: max.toString(),
-            options: [v1.toString(), v2.toString()]
-          }
-        });
-      } else {
-        // Subtração Simples
-        const sub = MATH_BANK.simple_subtraction[Math.floor(Math.random() * MATH_BANK.simple_subtraction.length)];
-        steps.push({
-          id: `ma06-sub-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Se eu tinha ${sub.a} e perdi ${sub.b}, com quanto fiquei?`,
-          elements: [{ id: `sub-${index}`, type: 'text', content: `${sub.a} - ${sub.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-          interaction: {
-            type: 'click',
-            correctAnswer: sub.result.toString(),
-            options: this.shuffle([sub.result.toString(), (sub.result + 1).toString(), (sub.result - 1).toString()].filter(v => parseInt(v) >= 0))
-          }
-        });
-      }
-    });
+          { id: `plus-${i}`, type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
+          ...Array.from({ length: val2 }).map((_, idx) => ({
+            id: `v2-${i}-${idx}`, type: 'text' as const, content: emoji,
+            position: { x: 60, y: (idx - (val2-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
+          }))
+        ]
+      });
+
+      // FASE 2: Descoberta (Interaction)
+      steps.push({
+        id: `math-d-${i}`,
+        phase: 'practice',
+        type: 'interaction',
+        mascot: 'pipa',
+        speech: `Tente responder: quantas figuras temos agora?`,
+        interaction: {
+          type: 'click',
+          correctAnswer: result.toString(),
+          options: this.shuffle([result.toString(), (result + 1).toString(), (result - 1).toString()])
+        }
+      });
+
+      // FASE 3: Explicação (Estratégia/Representacional)
+      steps.push({
+        id: `math-e-${i}`,
+        phase: 'demonstration',
+        type: 'demonstration',
+        mascot: 'pip',
+        speech: `Veja a estratégia: somamos ${val1} unidades com ${val2} unidades, o que resulta em ${result}.`,
+        elements: [
+          { id: `rep-1`, type: 'text', content: `${val1}`, position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+          { id: `rep-p`, type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
+          { id: `rep-2`, type: 'text', content: `${val2}`, position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 },
+          { id: `rep-e`, type: 'text', content: `= ${result}`, position: { x: 0, y: 60 }, animation: 'pop', delay: 1.0 }
+        ]
+      });
+    }
+
+    // FASE 4-5: Treino e Desafio (Abstrato/Simbólico)
+    for (let i = 0; i < 3; i++) {
+      const a = Math.floor(Math.random() * 20) + 1;
+      const b = Math.floor(Math.random() * 20) + 1;
+      steps.push({
+        id: `math-a-${i}`,
+        phase: i === 2 ? 'challenge' : 'practice',
+        type: 'interaction',
+        mascot: 'pipa',
+        speech: i === 2 ? `DESAFIO: Resolva esta operação simbólica!` : `Agora no modo abstrato: quanto é ${a} + ${b}?`,
+        elements: [{ id: `abs-${i}`, type: 'text', content: `${a} + ${b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: (a + b).toString(),
+          options: this.shuffle([(a + b).toString(), (a + b + 2).toString(), (a + b - 1).toString()])
+        }
+      });
+    }
 
     return {
-      id: `gen-ef01ma06-${Date.now()}`,
-      title: 'Somando com Pip e Pipa',
+      id: `gen-math-cra-${Date.now()}`,
+      title: 'Matemática CRA',
       bncc_field: 'espacos_tempos',
-      skill_bncc: 'EF01MA06',
       steps
     };
   }
+
 
   /**
    * Ciclo C: 3º ao 5º Ano.
