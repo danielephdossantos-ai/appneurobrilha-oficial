@@ -9,13 +9,13 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
-      id: 'ciencias_kids',
-      title: 'Ciências Kids',
-      subtitle: 'Curiosidade e Natureza',
-      icon: Brain,
-      color: 'bg-teal-400',
-      field: 'Ciências da Natureza',
-      method: 'Método Científico'
+      id: 'portugues',
+      title: 'Educação Infantil',
+      subtitle: 'Trilha: Primeiros Sons',
+      icon: BookOpen,
+      color: 'bg-orange-400',
+      field: 'Missão: Sons Mágicos',
+      method: 'Amigo do Pip'
     },
     {
       id: 'portugues_1ano',
