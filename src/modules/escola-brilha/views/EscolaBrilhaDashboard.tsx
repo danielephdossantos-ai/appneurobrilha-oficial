@@ -79,7 +79,6 @@ export const EscolaBrilhaDashboard: React.FC = () => {
     { id: 'ciencias_9ano', title: 'Química e Física', subtitle: 'Ciências', icon: FlaskConical, color: 'bg-slate-800', field: 'Missão: Átomos', method: 'Avançado', group: '9º Ano' },
     { id: 'historia_9ano', title: 'Guerra Fria', subtitle: 'História', icon: Landmark, color: 'bg-slate-700', field: 'Missão: Muro de Berlim', method: 'Geopolítica', group: '9º Ano' },
   ];
-  ];
 
   return (
     <div className="min-h-screen bg-slate-50 p-6 pt-24 pb-20">
