@@ -10,75 +10,109 @@ import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
-const WORD_TRILHA: Lesson = {
-  id: 'trilha-palavras-1ano',
-  title: 'Trilha das Palavras',
+const CIDADE_LETRAS_LESSON: Lesson = {
+  id: 'cidade-letras-1ano',
+  title: 'Cidade das Letras',
   bncc_field: 'escuta_fala',
-  skill_bncc: 'EI03EF01',
+  skill_bncc: 'EF01LP06',
   steps: [
-    { id: 'p1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual é o cachorro?',
-      interaction: { type: 'click', correctAnswer: 'cachorro', options: ['cachorro', 'gato', 'sapo'] } },
-    { id: 'p2', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Qual começa com B?',
-      elements: [{ id: 'b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'bola', options: ['bola', 'banana', 'gato'] } },
-    { id: 'p3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O que rima com CASA?',
-      elements: [{ id: 'ref', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'asa', options: ['asa', 'pato', 'gato'] } }
+    // 1. Método Fônico
+    { id: 'l1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Esta é a letra B. O som dela é /b/. Qual dessas figuras começa com B?',
+      elements: [{ id: 'b', type: 'text', content: 'B', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'l2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Escolha a imagem que começa com B!',
+      interaction: { type: 'click', correctAnswer: 'bola', options: ['bola', 'gato', 'sapo'] } },
+    
+    // 2. Formação de Sílabas
+    { id: 'l3', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'B mais A faz BA!',
+      elements: [
+        { id: 'b-syll', type: 'text', content: 'B', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'plus', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.3 },
+        { id: 'a-syll', type: 'text', content: 'A', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 }
+      ] },
+    { id: 'l4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'B mais A forma qual sílaba?',
+      interaction: { type: 'click', correctAnswer: 'BA', options: ['BA', 'BE', 'BO'] } },
+
+    // 3. Completar Palavra
+    { id: 'l5', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Complete a palavra GATO!',
+      elements: [
+        { id: 'gato-img', type: 'text', content: 'gato', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.2 },
+        { id: 'gato-txt', type: 'text', content: 'GA _ O', position: { x: 0, y: 40 }, animation: 'pop', delay: 0.5 }
+      ],
+      interaction: { type: 'click', correctAnswer: 'TO', options: ['TO', 'TA', 'TU'] } },
+
+    // 4. Leitura Curta
+    { id: 'l6', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'O GATO DORME.',
+      elements: [
+        { id: 'frase', type: 'text', content: 'O GATO DORME', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.5 }
+      ] },
+    { id: 'l7', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Quem dorme?',
+      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro'] } }
   ]
 };
 
-const NUMBER_TRILHA: Lesson = {
-  id: 'trilha-numeros-1ano',
-  title: 'Trilha dos Números',
+const VALE_NUMEROS_LESSON: Lesson = {
+  id: 'vale-numeros-1ano',
+  title: 'Vale dos Números',
   bncc_field: 'espacos_tempos',
-  skill_bncc: 'EI03ET01',
+  skill_bncc: 'EF01MA06',
   steps: [
+    // 1. Soma Visual
     { id: 'n1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Quantas maçãs existem?',
+      speech: 'Duas maçãs mais uma maçã. Quantas temos ao todo?',
       elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 },
+        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'a2', type: 'text', content: 'maça', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'p', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
+        { id: 'a3', type: 'text', content: 'maça', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.5 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
+    
+    // 2. Subtração Visual
     { id: 'n2', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual possui mais maçãs?',
+      speech: 'Tínhamos quatro peixinhos e um saiu. Quantos sobraram?',
       elements: [
-        { id: 'g1', type: 'text', content: 'maça', position: { x: -100, y: -20 }, animation: 'pop', delay: 0.1 },
-        { id: 'g1b', type: 'text', content: 'maça', position: { x: -70, y: -20 }, animation: 'pop', delay: 0.2 },
-        { id: 'vs', type: 'text', content: 'OU', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
-        { id: 'g2', type: 'text', content: 'maça', position: { x: 60, y: -20 }, animation: 'pop', delay: 0.5 },
-        { id: 'g2b', type: 'text', content: 'maça', position: { x: 90, y: -20 }, animation: 'pop', delay: 0.6 },
-        { id: 'g2c', type: 'text', content: 'maça', position: { x: 120, y: -20 }, animation: 'pop', delay: 0.7 },
+        { id: 'px1', type: 'text', content: 'peixe', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'px2', type: 'text', content: 'peixe', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'px3', type: 'text', content: 'peixe', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.3 },
       ],
-      interaction: { type: 'click', correctAnswer: 'DIREITA', options: ['ESQUERDA', 'DIREITA'] } }
+      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
+
+    // 3. Antecessor
+    { id: 'n3', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual número vem antes do 8?',
+      elements: [{ id: 'ref-8', type: 'text', content: '8', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: '7', options: ['6', '7', '9'] } }
   ]
 };
 
-const COLOR_SHAPE_TRILHA: Lesson = {
-  id: 'trilha-cores-1ano',
-  title: 'Cores e Formas',
-  bncc_field: 'tracos_sons',
-  skill_bncc: 'EI03TS02',
+const MUNDO_DESCOBERTAS_LESSON: Lesson = {
+  id: 'mundo-descobertas-1ano',
+  title: 'Mundo das Descobertas',
+  bncc_field: 'espacos_tempos', // Simulating CI
+  skill_bncc: 'EF01CI01',
   steps: [
-    { id: 'c1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Encontre o círculo!',
-      interaction: { type: 'click', correctAnswer: '🔴', options: ['🔴', '🟦', '🔺'] } }
+    { id: 'd1', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Onde está o coração no corpo humano?',
+      interaction: { type: 'click', correctAnswer: '❤', options: ['❤', '👃', '👂'] } }
   ]
 };
 
-const EMOTION_TRILHA: Lesson = {
-  id: 'trilha-emocoes-1ano',
-  title: 'Trilha das Emoções',
-  bncc_field: 'eu_outro_nos',
-  skill_bncc: 'EI03EO01',
+const NOSSO_LUGAR_LESSON: Lesson = {
+  id: 'nosso-lugar-1ano',
+  title: 'Nosso Lugar',
+  bncc_field: 'eu_outro_nos', // Simulating HI/GE
+  skill_bncc: 'EF01HI01',
   steps: [
-    { id: 'e1', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Como o personagem está?',
-      interaction: { type: 'click', correctAnswer: '😀', options: ['😀', '😢', '😡', '😴'] } }
+    { id: 'h1', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Quem faz parte da nossa família?',
+      interaction: { type: 'click', correctAnswer: 'FAMÍLIA', options: ['FAMÍLIA', 'ESCOLA', 'LOJA'] } }
   ]
 };
 
@@ -86,9 +120,9 @@ export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   
   const currentLesson =
-    search.category === 'matematica' ? NUMBER_TRILHA :
-    search.category === 'cores_shapes' ? COLOR_SHAPE_TRILHA :
-    search.category === 'emocoes' ? EMOTION_TRILHA : WORD_TRILHA;
+    search.category === 'matematica' ? VALE_NUMEROS_LESSON :
+    search.category === 'ciencias' ? MUNDO_DESCOBERTAS_LESSON :
+    search.category === 'historia_geografia' ? NOSSO_LUGAR_LESSON : CIDADE_LETRAS_LESSON;
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showElements, setShowElements] = useState<string[]>([]);
@@ -104,7 +138,6 @@ export const LessonPlayer: React.FC = () => {
   useEffect(() => {
     runStep();
     return () => AudioSpeechService.stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, currentLesson.id]);
 
   const getStepSpeech = (step: any) => {
@@ -131,7 +164,7 @@ export const LessonPlayer: React.FC = () => {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
-        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        if (currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           await AudioSpeechService.speak(el.content);
@@ -147,10 +180,10 @@ export const LessonPlayer: React.FC = () => {
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      await new Promise(r => setTimeout(r, 1500)); 
+      await new Promise(r => setTimeout(r, 1000)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 300));
       }
     }
     await speechPromise;
