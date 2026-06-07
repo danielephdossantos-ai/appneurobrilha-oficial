@@ -398,6 +398,17 @@ const LANG_LESSON: Lesson = {
   ]
 };
 
+const getWordForContent = (content: string) => {
+  const clean = semEmoji(content);
+  if (clean) return clean;
+  
+  // Se for apenas emoji, tenta achar no banco de palavras
+  const found = WORD_BANK.find(w => w.emoji === content);
+  if (found) return found.text;
+  
+  return '';
+};
+
 const getPortugueseCount = (n: number, content: string) => {
   const word = getWordForContent(content).toLowerCase();
   const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta', 'girafa', 'zebra', 'foca', 'janela', 'vela'];
@@ -424,17 +435,6 @@ const getPortugueseCount = (n: number, content: string) => {
   }
   
   return `${numStr} ${pluralWord}`;
-};
-
-const getWordForContent = (content: string) => {
-  const clean = semEmoji(content);
-  if (clean) return clean;
-  
-  // Se for apenas emoji, tenta achar no banco de palavras
-  const found = WORD_BANK.find(w => w.emoji === content);
-  if (found) return found.text;
-  
-  return '';
 };
 
 export const LessonPlayer: React.FC = () => {
