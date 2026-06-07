@@ -133,130 +133,142 @@ export class LessonGenerator {
     const isCycleC = ['matematica_3ano', 'matematica_4ano', 'matematica_5ano'].includes(category);
     const isModern = ['matematica_6ano', 'matematica_7ano', 'matematica_8ano', 'matematica_9ano'].includes(category);
     
-    // FASE 1-3: O Motor CRA para um problema central
     // Para infantil/1ano, valores pequenos (max 5)
-    const maxVal = isInfant ? 5 : is1Ano ? 8 : isCycleC ? 12 : 20;
-    const val1 = Math.floor(Math.random() * (maxVal - 1)) + 1;
-    const val2 = Math.floor(Math.random() * (maxVal - val1)) + 1;
+    const maxVal = isInfant ? 3 : is1Ano ? 5 : isCycleC ? 12 : 20;
+    const val1 = Math.floor(Math.random() * maxVal) + 1;
+    const val2 = isInfant ? 0 : Math.floor(Math.random() * (maxVal - val1)) + 1;
     
     const op = isCycleC ? 'x' : '+';
     const result = op === 'x' ? val1 * val2 : val1 + val2;
     const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀', '🚗', '🚜'])[0];
 
     // 1. CONCRETO (Visualização da Missão)
-    steps.push({
-      id: `math-c-0`,
-      phase: 'explanation',
-      type: 'explanation',
-      mascot: 'pip',
-      speech: isModern ? `Missão: Vamos analisar a proporção deste grupo.` : 
-              isBasic ? `Conte as figuras!` : `Observe estes grupos. Quantas figuras existem ao todo?`,
-      elements: [
-        ...Array.from({ length: val1 }).map((_, idx) => ({
-          id: `v1-0-${idx}`, type: 'text' as const, content: emoji,
-          position: { x: -60, y: (idx - (val1-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx
-        })),
-        { id: `op-icon`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
-        ...Array.from({ length: val2 }).map((_, idx) => ({
-          id: `v2-0-${idx}`, type: 'text' as const, content: emoji,
-          position: { x: 60, y: (idx - (val2-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
-        }))
-      ]
-    });
-
-    // 2. DESCOBERTA (Tentativa do Aluno)
-    steps.push({
-      id: `math-d-0`,
-      phase: 'practice',
-      type: 'interaction',
-      mascot: 'pipa',
-      speech: isModern ? `Levante uma hipótese: qual seria o valor total equilibrado?` : `Tente responder: quanto temos no total?`,
-      interaction: {
-        type: 'click',
-        correctAnswer: result.toString(),
-        options: this.shuffle([result.toString(), (result + (isCycleC ? 5 : 1)).toString(), (result - (isCycleC ? 2 : 1)).toString()])
-      }
-    });
-
-    // 3. REPRESENTACIONAL (Estratégia)
-    steps.push({
-      id: `math-e-0`,
-      phase: 'demonstration',
-      type: 'demonstration',
-      mascot: 'pip',
-      speech: `Estratégia: Representamos ${val1} ${op} ${val2}. Veja como chegamos em ${result}.`,
-      elements: [
-        { id: `rep-1`, type: 'text', content: `${val1}`, position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
-        { id: `rep-p`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
-        { id: `rep-2`, type: 'text', content: `${val2}`, position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 },
-        { id: `rep-e`, type: 'text', content: `= ${result}`, position: { x: 0, y: 60 }, animation: 'pop', delay: 1.0 }
-      ]
-    });
-
-    // 4. TREINO (Simbólico / Abstrato)
-    for (let i = 0; i < count; i++) {
-      const a = Math.floor(Math.random() * (isModern ? 50 : 20)) + 1;
-      const b = Math.floor(Math.random() * (isModern ? 30 : 10)) + 1;
-      const currentOp = isCycleC || isModern ? (Math.random() > 0.5 ? 'x' : '+') : '+';
-      const r = currentOp === 'x' ? a * b : a + b;
-
+    if (isInfant) {
       steps.push({
-        id: `math-a-${i}`,
+        id: `math-inf-1`,
+        phase: 'explanation',
+        type: 'explanation',
+        mascot: 'pip',
+        speech: `Vamos contar os ${emoji}? Olhe com atenção!`,
+        elements: Array.from({ length: val1 }).map((_, idx) => ({
+          id: `v-inf-${idx}`, type: 'text', content: emoji,
+          position: { x: (idx - (val1-1)/2) * 60, y: 0 }, animation: 'pop', delay: 0.2 * idx
+        }))
+      });
+      
+      steps.push({
+        id: `math-inf-q`,
         phase: 'practice',
         type: 'interaction',
         mascot: 'pipa',
-        speech: `Prática: Resolva ${a} ${currentOp} ${b}`,
-        elements: [{ id: `abs-${i}`, type: 'text', content: `${a} ${currentOp} ${b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        speech: `Quantos ${emoji} você vê na tela?`,
         interaction: {
           type: 'click',
-          correctAnswer: r.toString(),
-          options: this.shuffle([r.toString(), (r + 10).toString(), (r - 5).toString()])
-        }
-      });
-    }
-
-    // 5. DESAFIO (Problema diferente)
-    if (isModern) {
-      // Álgebra: x + a = b
-      const a = Math.floor(Math.random() * 20) + 1;
-      const x = Math.floor(Math.random() * 20) + 1;
-      const b = x + a;
-      steps.push({
-        id: `math-challenge-modern`,
-        phase: 'challenge',
-        type: 'interaction',
-        mascot: 'pip',
-        speech: `DESAFIO FINAL: Se X + ${a} = ${b}, qual é o valor de X?`,
-        elements: [{ id: `ch-mod`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-        interaction: {
-          type: 'click',
-          correctAnswer: x.toString(),
-          options: this.shuffle([x.toString(), (x + 5).toString(), (x - 3).toString()])
+          correctAnswer: val1.toString(),
+          options: this.shuffle([val1.toString(), (val1 + 1).toString(), (val1 - 1 > 0 ? val1 - 1 : val1 + 2).toString()])
         }
       });
     } else {
+      // Model CRA para Fundamental
       steps.push({
-        id: `math-challenge-basic`,
-        phase: 'challenge',
+        id: `math-c-0`,
+        phase: 'explanation',
+        type: 'explanation',
+        mascot: 'pip',
+        speech: isModern ? `Missão: Vamos analisar a proporção deste grupo.` : 
+                isBasic ? `Conte as figuras!` : `Observe estes grupos. Quantas figuras existem ao todo?`,
+        elements: [
+          ...Array.from({ length: val1 }).map((_, idx) => ({
+            id: `v1-0-${idx}`, type: 'text' as const, content: emoji,
+            position: { x: -60, y: (idx - (val1-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx
+          })),
+          { id: `op-icon`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
+          ...Array.from({ length: val2 }).map((_, idx) => ({
+            id: `v2-0-${idx}`, type: 'text' as const, content: emoji,
+            position: { x: 60, y: (idx - (val2-1)/2) * 40 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
+          }))
+        ]
+      });
+
+      steps.push({
+        id: `math-d-0`,
+        phase: 'practice',
         type: 'interaction',
         mascot: 'pipa',
-        speech: `DESAFIO: Resolva um problema maior!`,
+        speech: isModern ? `Levante uma hipótese: qual seria o valor total equilibrado?` : `Tente responder: quanto temos no total?`,
         interaction: {
           type: 'click',
-          correctAnswer: (result * 2).toString(),
-          options: [(result * 2).toString(), (result * 2 + 1).toString(), (result * 2 - 1).toString()]
+          correctAnswer: result.toString(),
+          options: this.shuffle([result.toString(), (result + (isCycleC ? 5 : 1)).toString(), (result - (isCycleC ? 2 : 1)).toString()])
         }
       });
+
+      steps.push({
+        id: `math-e-0`,
+        phase: 'demonstration',
+        type: 'demonstration',
+        mascot: 'pip',
+        speech: `Estratégia: Representamos ${val1} ${op} ${val2}. Veja como chegamos em ${result}.`,
+        elements: [
+          { id: `rep-1`, type: 'text', content: `${val1}`, position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+          { id: `rep-p`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
+          { id: `rep-2`, type: 'text', content: `${val2}`, position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 },
+          { id: `rep-e`, type: 'text', content: `= ${result}`, position: { x: 0, y: 60 }, animation: 'pop', delay: 1.0 }
+        ]
+      });
+    }
+
+    // Treino (Prática)
+    const practiceCount = isInfant ? 2 : count;
+    for (let i = 0; i < practiceCount; i++) {
+      const a = Math.floor(Math.random() * (isModern ? 50 : is1Ano ? 5 : 10)) + 1;
+      const b = isInfant ? 0 : Math.floor(Math.random() * (isModern ? 30 : is1Ano ? 3 : 10)) + 1;
+      const currentOp = isCycleC || isModern ? (Math.random() > 0.5 ? 'x' : '+') : '+';
+      const r = currentOp === 'x' ? a * b : a + b;
+
+      if (isInfant) {
+        steps.push({
+          id: `math-inf-p-${i}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Quantos são ${a}? Escolha o número!`,
+          elements: Array.from({ length: a }).map((_, idx) => ({
+            id: `v-inf-p-${i}-${idx}`, type: 'text', content: emoji,
+            position: { x: (idx - (a-1)/2) * 50, y: 0 }, animation: 'pop', delay: 0.1 * idx
+          })),
+          interaction: {
+            type: 'click',
+            correctAnswer: a.toString(),
+            options: this.shuffle([a.toString(), (a + 1).toString(), (a + 2).toString()])
+          }
+        });
+      } else {
+        steps.push({
+          id: `math-a-${i}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Prática: Resolva ${a} ${currentOp} ${b}`,
+          elements: [{ id: `abs-${i}`, type: 'text', content: `${a} ${currentOp} ${b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          interaction: {
+            type: 'click',
+            correctAnswer: r.toString(),
+            options: this.shuffle([r.toString(), (r + 2).toString(), (r - 1 > 0 ? r - 1 : r + 3).toString()])
+          }
+        });
+      }
     }
 
     return {
       id: `gen-math-cra-${Date.now()}`,
-      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : 'Herói dos Números',
-      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : 'Resgate Numérico',
+      title: isModern ? 'Lenda da Matemática' : isCycleC ? 'Gênio da Adição' : isInfant ? 'Primeiros Números' : 'Herói dos Números',
+      mission_name: isModern ? 'O Valor de X' : isCycleC ? 'Somar Frutinhas' : isInfant ? 'Contar é Divertido' : 'Resgate Numérico',
       bncc_field: 'espacos_tempos',
       steps
     };
   }
+
 
 
 
