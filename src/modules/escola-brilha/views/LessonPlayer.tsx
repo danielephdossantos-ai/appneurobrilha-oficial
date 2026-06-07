@@ -14,7 +14,7 @@ import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 const ANO2_LESSON: Lesson = {
   id: 'ano2-demo',
   title: 'Aventuras do 2º Ano',
-  bncc_field: 'linguagens',
+  bncc_field: 'escuta_fala',
   skill_bncc: 'EF02LP01',
   steps: [
     { id: 'a2s1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
@@ -29,7 +29,7 @@ const ANO2_LESSON: Lesson = {
 const ANO3_5_LESSON: Lesson = {
   id: 'ano3-5-demo',
   title: 'Desafios do 3º ao 5º Ano',
-  bncc_field: 'ciencias',
+  bncc_field: 'espacos_tempos',
   skill_bncc: 'EF03CI01',
   steps: [
     { id: 'a3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
@@ -44,7 +44,7 @@ const ANO3_5_LESSON: Lesson = {
 const FUNDAMENTAL2_LESSON: Lesson = {
   id: 'fund2-demo',
   title: 'Plataforma 6º ao 9º Ano',
-  bncc_field: 'historia',
+  bncc_field: 'escuta_fala',
   skill_bncc: 'EF06HI01',
   steps: [
     { id: 'f2s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
@@ -362,7 +362,8 @@ export const LessonPlayer: React.FC = () => {
   };
 
   return (
-    <LessonEnvironment className={isModern ? 'bg-slate-50' : ''}>
+    <div className={isModern ? 'bg-slate-50' : ''}>
+      <LessonEnvironment>
       <LessonHeader
         progress={progress}
         missionName={currentLesson.title}
@@ -523,6 +524,7 @@ export const LessonPlayer: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </LessonEnvironment>
+      </LessonEnvironment>
+    </div>
   );
 };
