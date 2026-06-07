@@ -112,7 +112,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-ef01lp05-${Date.now()}`,
-      title: 'Desafio das Sílabas',
+      title: 'Mestre das Sílabas',
       bncc_field: 'escuta_fala',
       skill_bncc: 'EF01LP05',
       steps
@@ -323,7 +323,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-port-c-${Date.now()}`,
-      title: 'Aventura das Palavras',
+      title: 'Escritor Criativo',
       bncc_field: 'escuta_fala',
       steps
     };
@@ -496,7 +496,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-sci-${Date.now()}`,
-      title: 'Laboratório de Curiosidades',
+      title: 'Cientista Júnior',
       bncc_field: 'espacos_tempos',
       steps
     };
