@@ -11,19 +11,16 @@ interface MascotTeacherProps {
 }
 
 /**
- * Padrão visual obrigatório Escola Brilha:
- * - Apenas o mascote selecionado pela criança aparece.
- * - Pipa (menina) no canto inferior ESQUERDO.
- * - Pip (azul) no canto inferior DIREITO.
+ * Padrão visual Escola Brilha:
+ * - Interface A: Pipa na esquerda, Pip na direita.
+ * - Interface B/C/Modern: Mascote posicionado à direita para dar espaço ao conteúdo.
  */
 export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking, size = 'large' }) => {
   const { activeMascot } = useMascot();
   
-  // Determina qual mascote exibir com base na escolha da criança
-  // Se não houver mascote ativo ou se for um mascote genérico, usamos Pip/Pipa como fallback
   const selectedMascot = activeMascot?.mascot?.name?.toLowerCase();
   const isPipa = selectedMascot === 'pipa';
-  const isPip = selectedMascot === 'pip' || !isPipa; // Default to Pip if not Pipa
+  const isPip = selectedMascot === 'pip' || !isPipa; 
 
   return (
     <div className={`fixed bottom-0 left-0 w-full z-40 pointer-events-none flex ${size === 'large' ? 'justify-between' : 'justify-end'} items-end px-2 sm:px-6`}>
@@ -31,7 +28,7 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking, size =
         <AnimatePresence mode="wait">
           {isPipa ? (
             <MascotImage 
-              key="pipa"
+              key="pipa-left"
               src={pipaImg} 
               alt="Pipa" 
               speaking={isSpeaking} 
@@ -44,33 +41,31 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking, size =
         </AnimatePresence>
       )}
 
-      {/* For Interface B and beyond, mascots are usually on the right or center-right */}
-      <div className="flex items-end">
-        {size !== 'large' && isPipa && (
-           <MascotImage 
-            key="pipa-right"
-            src={pipaImg} 
-            alt="Pipa" 
-            speaking={isSpeaking} 
-            side="right" 
-            size={size}
-          />
-        )}
-
-      <AnimatePresence mode="wait">
-        {isPip ? (
-          <MascotImage 
-            key="pip"
-            src={pipImg} 
-            alt="Pip" 
-            speaking={isSpeaking} 
-            side="right" 
-            size={size}
-          />
-        ) : (
-          <div key="spacer-right" className={size === 'mentor' ? "w-16 sm:w-20" : "w-28 sm:w-40 md:w-48"} />
-        )}
-      </AnimatePresence>
+      <div className="flex items-end gap-2">
+        <AnimatePresence mode="wait">
+          {size !== 'large' && isPipa ? (
+             <MascotImage 
+              key="pipa-right"
+              src={pipaImg} 
+              alt="Pipa" 
+              speaking={isSpeaking} 
+              side="right" 
+              size={size}
+            />
+          ) : isPip ? (
+            <MascotImage 
+              key="pip-right"
+              src={pipImg} 
+              alt="Pip" 
+              speaking={isSpeaking} 
+              side="right" 
+              size={size}
+            />
+          ) : (
+            <div key="spacer-right" className={size === 'mentor' ? "w-16 sm:w-20" : "w-28 sm:w-40 md:w-48"} />
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
@@ -89,24 +84,24 @@ const MascotImage: React.FC<{
   };
 
   return (
-  <motion.img
-    src={src}
-    alt={alt}
-    initial={{ y: 120, opacity: 0 }}
-    animate={
-      speaking
-        ? { y: [0, -8, 0], opacity: 1, scale: [1, 1.04, 1] }
-        : { y: 0, opacity: 1, scale: 1 }
-    }
-    exit={{ y: 120, opacity: 0 }}
-    transition={
-      speaking
-        ? { repeat: Infinity, duration: 0.7, ease: 'easeInOut' }
-        : { duration: 0.4 }
-    }
-    style={{ transformOrigin: 'bottom center' }}
-    className={`${sizeClasses[size]} object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] select-none`}
-    draggable={false}
-  />
-);
-}
+    <motion.img
+      src={src}
+      alt={alt}
+      initial={{ y: 120, opacity: 0 }}
+      animate={
+        speaking
+          ? { y: [0, -8, 0], opacity: 1, scale: [1, 1.04, 1] }
+          : { y: 0, opacity: 1, scale: 1 }
+      }
+      exit={{ y: 120, opacity: 0 }}
+      transition={
+        speaking
+          ? { repeat: Infinity, duration: 0.7, ease: 'easeInOut' }
+          : { duration: 0.4 }
+      }
+      style={{ transformOrigin: 'bottom center' }}
+      className={`${sizeClasses[size]} object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] select-none`}
+      draggable={false}
+    />
+  );
+};
