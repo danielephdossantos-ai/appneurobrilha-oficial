@@ -583,7 +583,9 @@ export const LessonPlayer: React.FC = () => {
         hits: prev.hits + 1,
         percentage: ((prev.hits + 1) / (prev.hits + prev.misses + 1)) * 100,
       }));
-      StudentProgressService.saveAttempt(search.category, true);
+      const mastery = StudentProgressService.getMastery(search.category);
+      const difficulty = mastery.score > 80 ? 1.5 : mastery.score > 50 ? 1.2 : 1;
+      StudentProgressService.saveAttempt(search.category, true, difficulty);
       setFeedback({ kind: 'ok', msg: 'Isso mesmo!' });
       setIsSpeaking(true);
       await AudioSpeechService.speak('Isso mesmo! Você é demais!');
