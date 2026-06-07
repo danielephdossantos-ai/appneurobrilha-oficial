@@ -323,7 +323,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-port-c-${Date.now()}`,
-      title: 'Viagem Literária',
+      title: 'Escritor Criativo',
       bncc_field: 'escuta_fala',
       steps
     };
