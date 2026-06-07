@@ -104,6 +104,31 @@ const LANG_LESSON: Lesson = {
   ]
 };
 
+const getPortugueseCount = (n: number, word: string) => {
+  const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta'];
+  const isFeminine = feminineWords.includes(word.toLowerCase());
+  
+  let numStr = n.toString();
+  if (n === 1) numStr = isFeminine ? 'uma' : 'um';
+  if (n === 2) numStr = isFeminine ? 'duas' : 'dois';
+  
+  let pluralWord = word;
+  const lower = word.toLowerCase();
+  if (n > 1) {
+    if (lower === 'maça' || lower === 'maçã') pluralWord = 'maçãs';
+    else if (lower === 'peixe') pluralWord = 'peixes';
+    else if (lower.endsWith('a') || lower.endsWith('e') || lower.endsWith('o') || lower.endsWith('i') || lower.endsWith('u')) {
+      pluralWord = word + 's';
+    } else if (lower.endsWith('r') || lower.endsWith('z')) {
+      pluralWord = word + 'es';
+    }
+  } else {
+    if (lower === 'maça') pluralWord = 'maçã';
+  }
+  
+  return `${numStr} ${pluralWord}`;
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   const currentLesson =
@@ -172,18 +197,28 @@ export const LessonPlayer: React.FC = () => {
 
     // Show elements and speak them if they are part of a demonstration/explanation
     if (currentStep.elements) {
+      let mathItemCount = 0;
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
-        // If it's a demonstration or explanation, highlight and speak as it appears
-        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        const isMathObject = search.category === 'matematica' && (objetoImg(el.content) || /\p{Emoji}/u.test(el.content));
+        
+        // If it's a math object or demonstration, highlight and speak
+        if (isMathObject || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
-          await AudioSpeechService.speak(el.content);
+          
+          let textToSpeak = el.content;
+          if (isMathObject) {
+            mathItemCount++;
+            textToSpeak = getPortugueseCount(mathItemCount, el.content);
+          }
+
+          await AudioSpeechService.speak(textToSpeak);
           setIsSpeaking(false);
           setHighlightedElementId(null);
-          await new Promise(r => setTimeout(r, 400)); // Pause between syllables
+          await new Promise(r => setTimeout(r, 400));
         }
       }
     }
@@ -300,10 +335,22 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
+                      onClick={() => {
+                        if (currentStep.type === 'interaction' && search.category === 'matematica') {
+                          const items = currentStep.elements?.filter((e: any) => objetoImg(e.content) || /\p{Emoji}/u.test(e.content)) || [];
+                          const index = items.findIndex((e: any) => e.id === el.id);
+                          if (index !== -1) {
+                            setHighlightedElementId(el.id);
+                            AudioSpeechService.speak(getPortugueseCount(index + 1, el.content)).then(() => {
+                              setHighlightedElementId(null);
+                            });
+                          }
+                        }
+                      }}
                       className={`flex flex-col items-center justify-center transition-all duration-300 ${
                         highlightedElementId === el.id 
                           ? 'scale-110' 
-                          : 'scale-100'
+                          : 'scale-100 cursor-pointer'
                       }`}
                     >
                       {(/\p{Emoji}/u.test(el.content) || objetoImg(el.content)) ? (
