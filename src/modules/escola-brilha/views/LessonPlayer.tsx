@@ -745,14 +745,16 @@ export const LessonPlayer: React.FC = () => {
       </div>
 
       {/* Mascots fixed bottom: Pipa LEFT, Pip RIGHT */}
-      <MascotTeacher 
-        type={currentStep.mascot} 
-        isSpeaking={isSpeaking} 
-        size={
-          interfaceStyle === 'C' ? 'medium' : 
-          isModern ? 'mentor' : 'large'
-        }
-      />
+      {(!isModern || isSpeaking || feedback || currentStepIndex === 0 || currentStepIndex === currentLesson.steps.length - 1) && (
+        <MascotTeacher 
+          type={currentStep.mascot} 
+          isSpeaking={isSpeaking} 
+          size={
+            interfaceStyle === 'C' ? 'medium' : 
+            isModern ? 'mentor' : 'large'
+          }
+        />
+      )}
 
       {/* Feedback overlay */}
       <AnimatePresence>
