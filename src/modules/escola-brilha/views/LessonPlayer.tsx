@@ -53,7 +53,7 @@ const CIDADE_LETRAS_LESSON: Lesson = {
       ] },
     { id: 'l7', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Quem dorme?',
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro'] } }
+      interaction: { type: 'click', correctAnswer: '🐱 GATO', options: ['🐱 GATO', '🐶 CACHORRO'] } }
   ]
 };
 
