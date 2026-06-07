@@ -12,76 +12,93 @@ import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
 const PORTUGUES_1ANO_LESSON: Lesson = {
   id: 'leitura-primeiros-passos',
-  title: 'Primeiros Passos na Leitura',
+  title: 'Cidade das Letras',
   bncc_field: 'escuta_fala',
   skill_bncc: 'EF01LP06',
   steps: [
+    // 1. Formando Sílabas
     { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'casa-full', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
-    { id: 's2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos separar as sílabas de CASA!',
+      speech: 'M mais A. Qual sílaba foi formada?',
       elements: [
-        { id: 'ca', type: 'text', content: 'CA', position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
-        { id: 'sa', type: 'text', content: 'SA', position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 }
+        { id: 'm', type: 'text', content: 'M', position: { x: -40, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'plus', type: 'text', content: '+', position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
+        { id: 'a', type: 'text', content: 'A', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.8 }
       ] },
+    { id: 's2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual sílaba foi formada?',
+      elements: [
+        { id: 'm-ref', type: 'text', content: 'M', position: { x: -20, y: 0 }, animation: 'pop', delay: 0.1 },
+        { id: 'a-ref', type: 'text', content: 'A', position: { x: 20, y: 0 }, animation: 'pop', delay: 0.3 }
+      ],
+      interaction: { type: 'click', correctAnswer: 'MA', options: ['MA', 'ME', 'MO'] } },
+    
+    // 2. Complete a Palavra
     { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual é a primeira sílaba de CASA?',
-      elements: [{ id: 'ref-casa', type: 'text', content: 'casa', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'CA', options: ['CA', 'BO', 'PA'] } },
-    { id: 's4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'ESCOLHA A IMAGEM CORRETA! BOLO',
-      elements: [{ id: 'w', type: 'text', content: 'bolo', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: 'bolo', options: ['bolo', 'carro', 'cachorro'] } },
+      speech: 'Complete a palavra GATO!',
+      elements: [
+        { id: 'gato-img', type: 'text', content: 'gato', position: { x: 0, y: -40 }, animation: 'bounce', delay: 0.2 },
+        { id: 'gato-txt', type: 'text', content: 'GA _ O', position: { x: 0, y: 40 }, animation: 'pop', delay: 0.5 }
+      ],
+      interaction: { type: 'click', correctAnswer: 'TO', options: ['TO', 'TA', 'TU'] } },
+
+    // 3. Leitura Curta
+    { id: 's4', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'A BOLA É AZUL.',
+      elements: [
+        { id: 'bola-img', type: 'text', content: 'bola', position: { x: 0, y: -30 }, animation: 'pop', delay: 0.2 },
+        { id: 'frase', type: 'text', content: 'A BOLA É AZUL', position: { x: 0, y: 40 }, animation: 'pop', delay: 0.5 }
+      ] },
     { id: 's5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'O gato dorme. Quem dorme?',
-      interaction: { type: 'click', correctAnswer: 'gato', options: ['gato', 'cachorro', 'passarinho'] }
-    }
+      speech: 'Qual é a cor da bola?',
+      elements: [{ id: 'ref-bola', type: 'text', content: 'bola', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      interaction: { type: 'click', correctAnswer: 'AZUL', options: ['AZUL', 'VERMELHA'] } }
   ]
 };
 
 const MATH_LESSON: Lesson = {
   id: 'matematica-1ano',
-  title: 'Matemática Divertida',
+  title: 'Vale dos Números',
   bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01MA06',
   steps: [
-    { id: 'm1', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs temos aqui?',
+    // 1. Soma Visual
+    { id: 'm1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Duas maçãs mais uma maçã é igual a quanto?',
       elements: [
-        { id: 'a1', type: 'text', content: 'maça', position: { x: -80, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'a2', type: 'text', content: 'maça', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'a3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm2', phase: 'demonstration', type: 'demonstration', mascot: 'pip',
-      speech: 'Vamos juntar as frutinhas!',
-      elements: [
-        { id: 'd1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'd2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.5 },
-        { id: 'plus', type: 'text', content: '+', position: { x: 20, y: 0 }, animation: 'fade', delay: 0.7 },
-        { id: 'd3', type: 'text', content: 'maça', position: { x: 80, y: 0 }, animation: 'pop', delay: 0.9 },
+        { id: 'a1', type: 'text', content: 'maça', position: { x: -100, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'a2', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'plus', type: 'text', content: '+', position: { x: -10, y: 0 }, animation: 'fade', delay: 0.6 },
+        { id: 'a3', type: 'text', content: 'maça', position: { x: 40, y: 0 }, animation: 'pop', delay: 0.8 },
+        { id: 'eq', type: 'text', content: '=', position: { x: 80, y: 0 }, animation: 'fade', delay: 1.0 },
+        { id: 'quest', type: 'text', content: '?', position: { x: 120, y: 0 }, animation: 'pop', delay: 1.2 },
       ] },
-    { id: 'm3', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Quantas maçãs ao todo?',
+    { id: 'm2', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual é o resultado?',
       elements: [
-        { id: 'r1', type: 'text', content: 'maça', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'r2', type: 'text', content: 'maça', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'r3', type: 'text', content: 'maça', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
-      ],
-      interaction: { type: 'click', correctAnswer: '3', options: ['1', '2', '3'] } },
-    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
-      speech: 'Tínhamos peixinhos e um saiu. Quantos sobraram?',
-      elements: [
-        { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: 0 }, animation: 'pop', delay: 0.2 },
-        { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: 0 }, animation: 'pop', delay: 0.4 },
-        { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: 0 }, animation: 'pop', delay: 0.6 },
+        { id: 'r1', type: 'text', content: 'maça', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 'r2', type: 'text', content: 'maça', position: { x: -20, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 'pl', type: 'text', content: '+', position: { x: 20, y: 0 }, animation: 'fade', delay: 0.6 },
+        { id: 'r3', type: 'text', content: 'maça', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.8 },
       ],
       interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } },
-    { id: 'm5', phase: 'practice', type: 'interaction', mascot: 'pipa',
-      speech: 'Qual número vem depois?',
-      elements: [{ id: 'sq', type: 'text', content: '1  2  3  ?', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-      interaction: { type: 'click', correctAnswer: '4', options: ['4', '5', '6'] } }
+
+    // 2. Subtração Visual
+    { id: 'm3', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Tínhamos quatro peixinhos e um saiu. Quantos sobraram?',
+      elements: [
+        { id: 'p1', type: 'text', content: 'peixe', position: { x: -90, y: -20 }, animation: 'pop', delay: 0.2 },
+        { id: 'p2', type: 'text', content: 'peixe', position: { x: -30, y: -20 }, animation: 'pop', delay: 0.4 },
+        { id: 'p3', type: 'text', content: 'peixe', position: { x: 30, y: -20 }, animation: 'pop', delay: 0.6 },
+        { id: 'p4', type: 'text', content: 'peixe', position: { x: 90, y: -20 }, animation: 'pop', delay: 0.8 },
+      ] },
+    { id: 'm4', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Quantos sobraram?',
+      elements: [
+        { id: 's1', type: 'text', content: 'peixe', position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
+        { id: 's2', type: 'text', content: 'peixe', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.4 },
+        { id: 's3', type: 'text', content: 'peixe', position: { x: 60, y: 0 }, animation: 'pop', delay: 0.6 },
+      ],
+      interaction: { type: 'click', correctAnswer: '3', options: ['2', '3', '4'] } }
   ]
 };
 
