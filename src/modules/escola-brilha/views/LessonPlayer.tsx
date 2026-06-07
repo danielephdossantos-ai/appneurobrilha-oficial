@@ -422,6 +422,17 @@ const getPortugueseCount = (n: number, word: string) => {
   return `${numStr} ${pluralWord}`;
 };
 
+const getWordForContent = (content: string) => {
+  const clean = semEmoji(content);
+  if (clean) return clean;
+  
+  // Se for apenas emoji, tenta achar no banco de palavras
+  const found = WORD_BANK.find(w => w.emoji === content);
+  if (found) return found.text;
+  
+  return '';
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   
