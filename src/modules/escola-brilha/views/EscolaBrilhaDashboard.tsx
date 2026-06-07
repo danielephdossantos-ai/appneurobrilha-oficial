@@ -34,6 +34,33 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       color: 'bg-blue-400',
       field: 'Espaços e Quantidades',
       method: 'Método CRA'
+    },
+    {
+      id: 'ano2',
+      title: '2º Ano',
+      subtitle: 'Exploração Criativa',
+      icon: School,
+      color: 'bg-purple-400',
+      field: 'Fundamental I',
+      method: 'Interface B'
+    },
+    {
+      id: 'ano3_5',
+      title: '3º ao 5º Ano',
+      subtitle: 'Conhecimento Pleno',
+      icon: Brain,
+      color: 'bg-rose-400',
+      field: 'Fundamental I',
+      method: 'Interface C'
+    },
+    {
+      id: 'fundamental2',
+      title: '6º ao 9º Ano',
+      subtitle: 'Base Preparatória',
+      icon: School,
+      color: 'bg-indigo-600',
+      field: 'Fundamental II',
+      method: 'Moderna'
     }
   ];
 

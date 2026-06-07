@@ -7,6 +7,7 @@ import pipaImg from '@/assets/pip-girl-mascot.png';
 interface MascotTeacherProps {
   type: 'pip' | 'pipa';
   isSpeaking: boolean;
+  size?: 'large' | 'medium' | 'mentor';
 }
 
 /**
@@ -15,7 +16,7 @@ interface MascotTeacherProps {
  * - Pipa (menina) no canto inferior ESQUERDO.
  * - Pip (azul) no canto inferior DIREITO.
  */
-export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking }) => {
+export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking, size = 'large' }) => {
   const { activeMascot } = useMascot();
   
   // Determina qual mascote exibir com base na escolha da criança
@@ -34,9 +35,10 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking }) => {
             alt="Pipa" 
             speaking={isSpeaking} 
             side="left" 
+            size={size}
           />
         ) : (
-          <div key="spacer-left" className="w-28 sm:w-40 md:w-48" />
+          <div key="spacer-left" className={size === 'mentor' ? "w-16 sm:w-20" : "w-28 sm:w-40 md:w-48"} />
         )}
       </AnimatePresence>
 
@@ -48,9 +50,10 @@ export const MascotTeacher: React.FC<MascotTeacherProps> = ({ isSpeaking }) => {
             alt="Pip" 
             speaking={isSpeaking} 
             side="right" 
+            size={size}
           />
         ) : (
-          <div key="spacer-right" className="w-28 sm:w-40 md:w-48" />
+          <div key="spacer-right" className={size === 'mentor' ? "w-16 sm:w-20" : "w-28 sm:w-40 md:w-48"} />
         )}
       </AnimatePresence>
     </div>
@@ -62,7 +65,15 @@ const MascotImage: React.FC<{
   alt: string;
   speaking: boolean;
   side: 'left' | 'right';
-}> = ({ src, alt, speaking }) => (
+  size: 'large' | 'medium' | 'mentor';
+}> = ({ src, alt, speaking, size }) => {
+  const sizeClasses = {
+    large: 'w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48',
+    medium: 'w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36',
+    mentor: 'w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 opacity-80'
+  };
+
+  return (
   <motion.img
     src={src}
     alt={alt}
@@ -79,7 +90,8 @@ const MascotImage: React.FC<{
         : { duration: 0.4 }
     }
     style={{ transformOrigin: 'bottom center' }}
-    className="w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] select-none"
+    className={`${sizeClasses[size]} object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.18)] select-none`}
     draggable={false}
   />
 );
+}
