@@ -43,6 +43,8 @@ import heroi from "@/assets/neuro-treino/objetos/heroi.png";
 import robo from "@/assets/neuro-treino/objetos/robo.png";
 import diamante from "@/assets/neuro-treino/objetos/diamante.png";
 import fogo from "@/assets/neuro-treino/objetos/fogo.png";
+import bolo from "@/assets/neuro-treino/objetos/bolo.png";
+import asa from "@/assets/neuro-treino/objetos/asa.png";
 import morango from "@/assets/neuro-treino/frutas/morango.png";
 import uva from "@/assets/neuro-treino/frutas/uva.png";
 import cenoura from "@/assets/neuro-treino/vegetais/cenoura.png";
@@ -56,9 +58,9 @@ import medo from "@/assets/neuro-treino/emocoes/medo.png";
 import sono from "@/assets/neuro-treino/emocoes/sono.png";
 
 export const OBJETO_IMG: Record<string, string> = {
-  BOLA: bola, GATO: gato, "MAÇÃ": maca, MACA: maca, "ÁRVORE": arvore, ARVORE: arvore,
+  BOLA: bola, GATO: gato, "MAÇÃ": maca, "MAÇÃS": maca, "MAÇA": maca, "MAÇAS": maca, MACA: maca, MACAS: maca, "ÁRVORE": arvore, ARVORE: arvore,
   CASA: casa, ABELHA: abelha, FLOR: flor, CARRO: carro, OUTRO: carro, TREM: trem,
-  ASA: passaro, BOLO: "🍰", PATO: pato, CACHORRO: cachorro, DOG: cachorro,
+  ASA: asa, BOLO: bolo, PATO: pato, CACHORRO: cachorro, DOG: cachorro,
   LUA: lua, ESTRELA: estrela, SOL: sol, CHUVA: chuva, RATO: rato, BANANA: banana,
   VACA: vaca, PORCO: porco, GALINHA: galinha, OVELHA: ovelha, CABRA: cabra,
   PINTINHO: pintinho, GALO: galo, PASSARINHO: passaro, PASSARINHOS: passaro,

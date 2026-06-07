@@ -1,5 +1,5 @@
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ArrowUpLeft, ArrowDownRight, ArrowDownLeft, CornerUpLeft, CornerUpRight, RotateCcw } from "lucide-react";
-import { emojiImg, semEmoji } from "@/data/neuro-treino/objetos";
+import { emojiImg, objetoImg, semEmoji } from "@/data/neuro-treino/objetos";
 
 // Mapeia emojis abstratos (formas/cores) → cor sólida para chip CSS
 const SHAPE_COLOR: Record<string, string> = {
@@ -47,7 +47,7 @@ export interface RenderEmojiProps {
 export function RenderEmoji({ e, className = "w-16 h-16", label, hideText }: RenderEmojiProps) {
   if (!e && !label) return null;
   const raw = (e ?? "").trim();
-  const img = emojiImg(raw);
+  const img = emojiImg(raw) ?? objetoImg(raw);
 
   if (img) {
     return (
