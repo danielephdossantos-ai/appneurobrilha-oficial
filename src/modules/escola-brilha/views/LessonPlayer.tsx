@@ -212,10 +212,10 @@ export const LessonPlayer: React.FC = () => {
                   showElements.includes(el.id) && (
                     <motion.div
                       key={el.id}
-                      initial={{ scale: 0, opacity: 0, y: 30 }}
+                      initial={isSecondYear ? { opacity: 0 } : { scale: 0, opacity: 0, y: 30 }}
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
-                      transition={{ type: 'spring', stiffness: 200, damping: 14 }}
+                      transition={isSecondYear ? { duration: 0.2 } : { type: 'spring', stiffness: 200, damping: 14 }}
                       className={`flex flex-col items-center justify-center transition-all duration-300 ${
                         highlightedElementId === el.id 
                           ? 'scale-110' 
