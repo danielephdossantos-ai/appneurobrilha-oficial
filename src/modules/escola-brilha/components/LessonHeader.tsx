@@ -53,6 +53,10 @@ export const LessonHeader: React.FC<LessonHeaderProps> = ({
 
         {isModern ? (
           <>
+            <div className="hidden md:flex shrink-0 items-center gap-1 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+              <Award className="w-4 h-4 text-purple-500" />
+              <span className="text-xs font-bold text-slate-600">3 Conquistas</span>
+            </div>
             <div className="hidden sm:flex shrink-0 items-center gap-1 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
               <Trophy className="w-4 h-4 text-amber-500" />
               <span className="text-xs font-bold text-slate-600">Ranking #4</span>
