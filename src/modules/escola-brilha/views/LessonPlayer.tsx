@@ -199,9 +199,16 @@ const getPortugueseCount = (n: number, word: string) => {
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const currentLesson =
-    search.category === 'matematica' ? MATH_LESSON :
-    search.category === 'portugues_1ano' ? PORTUGUES_1ANO_LESSON : LANG_LESSON;
+  const lessonsMap: Record<string, Lesson> = {
+    'portugues': LANG_LESSON,
+    'portugues_1ano': PORTUGUES_1ANO_LESSON,
+    'matematica': MATH_LESSON,
+    'portugues_2ano': PORTUGUES_2ANO_LESSON,
+    'matematica_2ano': MATEMATICA_2ANO_LESSON,
+    'ano3_5': ANO3_5_LESSON,
+    'fundamental2': FUNDAMENTAL2_LESSON
+  };
+  const currentLesson = lessonsMap[search.category] || LANG_LESSON;
 
   const interfaceStyle = 
     ['portugues', 'portugues_1ano', 'matematica'].includes(search.category) ? 'A' :
