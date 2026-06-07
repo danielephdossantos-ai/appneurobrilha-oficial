@@ -409,7 +409,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-modern-${Date.now()}`,
-      title: isMath ? 'O Valor de X' : 'Expert em Análise',
+      title: isMath ? 'Arena da Álgebra' : 'Detetives do Texto',
       bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
       steps
     };
