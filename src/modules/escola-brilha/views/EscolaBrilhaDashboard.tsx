@@ -9,6 +9,24 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   
   const categories = [
     {
+      id: 'artes_kids',
+      title: 'Oficina de Criatividade',
+      subtitle: 'Trilha: Cores e Sons',
+      icon: School,
+      color: 'bg-pink-400',
+      field: 'Missão: Pequeno Artista',
+      method: 'Próxima Meta: Mestre da Arte'
+    },
+    {
+      id: 'historia_geo',
+      title: 'Exploradores do Tempo',
+      subtitle: 'Trilha: Nosso Mundo',
+      icon: School,
+      color: 'bg-amber-600',
+      field: 'Missão: Viajante Espacial',
+      method: 'Próxima Meta: Historiador Mirim'
+    },
+    {
       id: 'portugues',
       title: 'Bosque dos Sons',
       subtitle: 'Trilha: Primeiros Sons',
