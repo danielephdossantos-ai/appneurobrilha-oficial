@@ -77,6 +77,7 @@ export const OBJETO_IMG: Record<string, string> = {
   CAMISETA: camiseta, ROUPA: camiseta,
   FELIZ: feliz, TRISTE: triste, BRAVO: bravo, SURPRESO: surpreso, MEDO: medo, SONO: sono,
   CREEPER: dinossauro, ZUMBI: dinossauro,
+  "FAMÍLIA": ursinho, FAMILIA: ursinho, ESCOLA: casa, LOJA: casa,
 };
 
 // Mapeia emojis para a mesma biblioteca de ilustrações premium
@@ -85,7 +86,7 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐱": gato, "🐈": gato,
   "🍎": maca, "🍏": maca,
   "🌳": arvore, "🌲": arvore, "🌴": arvore,
-  "🏠": casa, "🏡": casa, "🏘️": casa,
+  "🏠": casa, "🏡": casa, "🏘️": casa, "🏫": casa, "👨‍👩‍👧‍👦": ursinho, "🏪": casa, "🧼": maca,
   "🐝": abelha,
   "🌸": flor, "🌺": flor, "🌷": flor, "🌼": flor, "🌻": flor,
   "🚗": carro, "🚙": carro, "🚲": carro, "✈️": carro, "🚌": carro, "🏍️": carro, "🚑": carro,
