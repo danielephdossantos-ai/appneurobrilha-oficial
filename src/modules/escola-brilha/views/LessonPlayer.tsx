@@ -281,13 +281,24 @@ export const LessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 14 }}
-                      className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${
+                      className={`transition-all duration-300 ${
                         highlightedElementId === el.id 
-                          ? 'text-yellow-400 scale-125 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
-                          : 'text-blue-600 scale-100'
+                          ? 'scale-125 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]' 
+                          : 'scale-100'
                       }`}
                     >
-                      {el.content}
+                      <RenderEmoji 
+                        e={el.content} 
+                        className="w-24 h-24 sm:w-32 sm:h-32" 
+                        label={semEmoji(el.content)} 
+                      />
+                      {!/\p{Emoji}/u.test(el.content) && (
+                        <div className={`text-5xl sm:text-6xl font-black px-2 mt-2 ${
+                          highlightedElementId === el.id ? 'text-yellow-400' : 'text-blue-600'
+                        }`}>
+                          {el.content}
+                        </div>
+                      )}
                     </motion.div>
                   )
                 )}
