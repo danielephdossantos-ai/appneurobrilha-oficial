@@ -234,7 +234,140 @@ export class LessonGenerator {
     };
   }
 
+  /**
+   * Ciclo C: 3º ao 5º Ano.
+   * Foco em Interpretação, Operações complexas.
+   */
+  static generateCycleC(category: string, count: number = 6): Lesson {
+    const isMath = category.includes('matematica');
+    const steps: LessonStep[] = [];
+
+    for (let i = 0; i < count; i++) {
+      if (isMath) {
+        const val1 = Math.floor(Math.random() * 50) + 10;
+        const val2 = Math.floor(Math.random() * 10) + 2;
+        const model = Math.random() > 0.5 ? 'multi' : 'div';
+        
+        if (model === 'multi') {
+          steps.push({
+            id: `c-math-${i}`,
+            phase: 'practice',
+            type: 'interaction',
+            mascot: 'pip',
+            speech: `Resolva o desafio: ${val1} x ${val2}`,
+            elements: [{ id: `el-${i}`, type: 'text', content: `${val1} x ${val2} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+            interaction: {
+              type: 'click',
+              correctAnswer: (val1 * val2).toString(),
+              options: this.shuffle([(val1 * val2).toString(), (val1 * val2 + 10).toString(), (val1 * val2 - 5).toString()])
+            }
+          });
+        } else {
+          const divResult = Math.floor(Math.random() * 10) + 2;
+          const divisor = Math.floor(Math.random() * 5) + 2;
+          const dividend = divResult * divisor;
+          steps.push({
+            id: `c-math-${i}`,
+            phase: 'practice',
+            type: 'interaction',
+            mascot: 'pipa',
+            speech: `Se dividirmos ${dividend} por ${divisor}, quanto teremos?`,
+            elements: [{ id: `el-${i}`, type: 'text', content: `${dividend} ÷ ${divisor} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+            interaction: {
+              type: 'click',
+              correctAnswer: divResult.toString(),
+              options: this.shuffle([divResult.toString(), (divResult + 1).toString(), (divResult - 1).toString()])
+            }
+          });
+        }
+      } else {
+        // Português Ciclo C
+        const word = this.getRandomItems(WORD_BANK.filter(w => w.text.length > 5), 1)[0];
+        steps.push({
+          id: `c-port-${i}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Quantas sílabas tem a palavra ${word.text}?`,
+          elements: [{ id: `el-${i}`, type: 'text', content: word.text, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          interaction: {
+            type: 'click',
+            correctAnswer: word.syllables.length.toString(),
+            options: ['2', '3', '4', '5']
+          }
+        });
+      }
+    }
+
+    return {
+      id: `gen-cycleC-${Date.now()}`,
+      title: `Desafios do Ciclo C - ${isMath ? 'Matemática' : 'Português'}`,
+      bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
+      steps
+    };
+  }
+
+  /**
+   * Interface Moderna: 6º ao 9º Ano.
+   * Foco em Álgebra, Interpretação Crítica.
+   */
+  static generateModern(category: string, count: number = 8): Lesson {
+    const isMath = category.includes('matematica');
+    const steps: LessonStep[] = [];
+
+    for (let i = 0; i < count; i++) {
+      if (isMath) {
+        // Álgebra básica: x + a = b
+        const a = Math.floor(Math.random() * 20) + 1;
+        const x = Math.floor(Math.random() * 20) + 1;
+        const b = x + a;
+        steps.push({
+          id: `mod-math-${i}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pip',
+          speech: `Encontre o valor de X na equação: X + ${a} = ${b}`,
+          elements: [{ id: `el-${i}`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+          interaction: {
+            type: 'click',
+            correctAnswer: x.toString(),
+            options: this.shuffle([x.toString(), (x + 2).toString(), (x - 2).toString()])
+          }
+        });
+      } else {
+        // Português Moderno (Interpretação)
+        steps.push({
+          id: `mod-port-${i}`,
+          phase: 'practice',
+          type: 'interaction',
+          mascot: 'pipa',
+          speech: `Qual é o objetivo principal de um texto dissertativo?`,
+          interaction: {
+            type: 'click',
+            correctAnswer: 'Defender uma ideia',
+            options: this.shuffle(['Defender uma ideia', 'Contar uma história', 'Ensinar uma receita'])
+          }
+        });
+      }
+    }
+
+    return {
+      id: `gen-modern-${Date.now()}`,
+      title: `Plataforma de Aprendizagem - ${isMath ? 'Matemática' : 'Português'}`,
+      bncc_field: isMath ? 'espacos_tempos' : 'escuta_fala',
+      steps
+    };
+  }
+
   static generateByCategory(category: string): Lesson {
+    if (['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(category)) {
+      return this.generateCycleC(category);
+    }
+    
+    if (['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(category)) {
+      return this.generateModern(category);
+    }
+
     switch (category) {
       case 'portugues':
       case 'portugues_1ano':
@@ -242,12 +375,12 @@ export class LessonGenerator {
       case 'matematica':
         return this.generateEF01MA06();
       case 'portugues_2ano':
-        return this.generateEF01LP05(7); // Dificuldade um pouco maior
+        return this.generateEF01LP05(7); 
       case 'matematica_2ano':
         return this.generateEF01MA06(7);
       default:
-        // Fallback para uma lição genérica ou a lição de rimas original
         return this.generateEF01LP05(3);
     }
   }
 }
+
