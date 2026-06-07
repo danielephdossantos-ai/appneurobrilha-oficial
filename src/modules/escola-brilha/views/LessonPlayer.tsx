@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Volume2 } from 'lucide-react';
+import { Volume2, Loader2 } from 'lucide-react';
 import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { LessonHeader } from '../components/LessonHeader';
 import { AudioSpeechService } from '../services/AudioSpeechService';
-import { Lesson, LessonPerformance } from '../types/lesson';
+import { Lesson, LessonStep, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
 import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
+import { supabase } from '@/integrations/supabase/client';
 
 const PRE_SCHOOL_LESSON: Lesson = {
   id: 'pre-escola-cidade-letras',
@@ -118,11 +119,9 @@ const FLORESTA_ATENCAO_LESSON: Lesson = {
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
-  const currentLesson =
-    search.category === 'matematica' ? VALE_NUMEROS_LESSON :
-    search.category === 'portugues' ? PRE_SCHOOL_LESSON : FLORESTA_ATENCAO_LESSON;
-
+  const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [showElements, setShowElements] = useState<string[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [highlightedElementId, setHighlightedElementId] = useState<string | null>(null);
@@ -130,14 +129,67 @@ export const LessonPlayer: React.FC = () => {
   const [feedback, setFeedback] = useState<{ kind: 'ok' | 'err' | 'done'; msg: string } | null>(null);
   const [, setPerformance] = useState<LessonPerformance>({ hits: 0, misses: 0, startTime: Date.now(), percentage: 0 });
 
-  const currentStep = currentLesson.steps[currentStepIndex];
-  const progress = ((currentStepIndex + 1) / currentLesson.steps.length) * 100;
+  useEffect(() => {
+    const fetchLesson = async () => {
+      setLoading(true);
+      try {
+        // Query dynamic lessons from Supabase based on category
+        const { data: lessons, error: lessonError } = await supabase
+          .from('lessons')
+          .select('*, lesson_steps(*)')
+          .eq('category', search.category || 'portugues')
+          .order('created_at', { ascending: false });
+
+        if (lessonError) throw lessonError;
+
+        if (lessons && lessons.length > 0) {
+          // Pick a random lesson from the 200 variations
+          const randomLesson = lessons[Math.floor(Math.random() * lessons.length)];
+          
+          const mappedLesson: Lesson = {
+            id: randomLesson.id,
+            title: randomLesson.title,
+            bncc_field: randomLesson.bncc_field as any,
+            skill_bncc: randomLesson.skill_bncc || undefined,
+            steps: randomLesson.lesson_steps
+              .sort((a: any, b: any) => a.order_index - b.order_index)
+              .map((s: any) => ({
+                id: s.id,
+                phase: s.phase as any,
+                type: s.type as any,
+                mascot: s.mascot as any,
+                displayText: s.display_text,
+                speechText: s.speech_text,
+                elements: s.elements,
+                interaction: s.interaction
+              }))
+          };
+          setCurrentLesson(mappedLesson);
+        } else {
+          // Fallback if no lessons found (using PRE_SCHOOL_LESSON or similar)
+          setCurrentLesson(PRE_SCHOOL_LESSON);
+        }
+      } catch (err) {
+        console.error('Error fetching lesson:', err);
+        setCurrentLesson(PRE_SCHOOL_LESSON);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLesson();
+  }, [search.category]);
+
+  const currentStep = currentLesson?.steps[currentStepIndex];
+  const progress = currentLesson ? ((currentStepIndex + 1) / currentLesson.steps.length) * 100 : 0;
 
   useEffect(() => {
-    runStep();
+    if (currentLesson) {
+      runStep();
+    }
     return () => AudioSpeechService.stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentStepIndex, currentLesson.id]);
+  }, [currentStepIndex, currentLesson?.id]);
 
   const getStepSpeech = (step: any) => {
     // Priority 1: speechText (mandatory now)
@@ -154,13 +206,13 @@ export const LessonPlayer: React.FC = () => {
     await new Promise(r => setTimeout(r, 300));
 
     // Show elements and speak them if they are part of a demonstration/explanation
-    if (currentStep.elements) {
+    if (currentStep?.elements) {
       for (const el of currentStep.elements) {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
         // If it's a demonstration or explanation, highlight and speak as it appears
-        if (currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        if (currentStep?.type === 'demonstration' || currentStep?.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           // Use element's specific speechText or fallback to content
@@ -179,7 +231,7 @@ export const LessonPlayer: React.FC = () => {
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     
-    if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
+    if (currentStep?.type === 'interaction' && currentStep.interaction?.options) {
       await new Promise(r => setTimeout(r, 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
@@ -190,9 +242,9 @@ export const LessonPlayer: React.FC = () => {
     await speechPromise;
     setIsSpeaking(false);
 
-    if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
+    if (currentStep?.type === 'explanation' || currentStep?.type === 'demonstration') {
       await new Promise(r => setTimeout(r, 1800));
-      if (currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
     }
@@ -205,7 +257,7 @@ export const LessonPlayer: React.FC = () => {
   };
 
   const handleInteraction = async (answer: string) => {
-    const isCorrect = answer === currentStep.interaction?.correctAnswer;
+    const isCorrect = answer === currentStep?.interaction?.correctAnswer;
 
     if (isCorrect) {
       setPerformance(prev => ({
@@ -219,7 +271,7 @@ export const LessonPlayer: React.FC = () => {
       setIsSpeaking(false);
       await new Promise(r => setTimeout(r, 600));
 
-      if (currentStepIndex < currentLesson.steps.length - 1) {
+      if (currentLesson && currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       } else {
         setFeedback({ kind: 'done', msg: 'Missão Cumprida!' });
@@ -239,6 +291,14 @@ export const LessonPlayer: React.FC = () => {
       runStep();
     }
   };
+
+  if (loading || !currentLesson || !currentStep) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-violet-50">
+        <Loader2 className="w-12 h-12 text-violet-600 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <LessonEnvironment>
@@ -262,7 +322,7 @@ export const LessonPlayer: React.FC = () => {
           {/* Question / speech */}
           <div className="w-full flex items-start gap-2">
             <p className="flex-1 text-center text-lg sm:text-xl font-black text-slate-700 leading-snug">
-              {currentStep.displayText || currentStep.speechText}
+              {currentStep?.displayText || currentStep?.speechText}
             </p>
             <button
               onClick={replaySpeech}
