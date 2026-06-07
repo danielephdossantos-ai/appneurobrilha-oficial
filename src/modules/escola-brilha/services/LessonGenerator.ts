@@ -496,7 +496,7 @@ export class LessonGenerator {
 
     return {
       id: `gen-sci-${Date.now()}`,
-      title: 'Cientista Júnior',
+      title: 'Exploradores da Natureza',
       bncc_field: 'espacos_tempos',
       steps
     };
