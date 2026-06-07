@@ -61,7 +61,7 @@ const NUMBER_TRILHA: Lesson = {
 const COLOR_SHAPE_TRILHA: Lesson = {
   id: 'trilha-cores-1ano',
   title: 'Cores e Formas',
-  bncc_field: 'artes',
+  bncc_field: 'tracos_sons',
   skill_bncc: 'EI03TS02',
   steps: [
     { id: 'c1', phase: 'practice', type: 'interaction', mascot: 'pipa',
@@ -73,7 +73,7 @@ const COLOR_SHAPE_TRILHA: Lesson = {
 const EMOTION_TRILHA: Lesson = {
   id: 'trilha-emocoes-1ano',
   title: 'Trilha das Emoções',
-  bncc_field: 'socioemocional',
+  bncc_field: 'eu_outro_nos',
   skill_bncc: 'EI03EO01',
   steps: [
     { id: 'e1', phase: 'practice', type: 'interaction', mascot: 'pip',
