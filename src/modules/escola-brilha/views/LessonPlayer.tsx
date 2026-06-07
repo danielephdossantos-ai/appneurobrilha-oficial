@@ -65,6 +65,7 @@ const CIDADE_LETRAS_LESSON: Lesson = {
 const VALE_NUMEROS_LESSON: Lesson = {
   id: 'vale-numeros-1ano',
   title: 'Vale dos Números',
+  grade: 1,
   bncc_field: 'espacos_tempos',
   skill_bncc: 'EF01MA06',
   steps: [
