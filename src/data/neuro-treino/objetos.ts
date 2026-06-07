@@ -58,6 +58,7 @@ import sono from "@/assets/neuro-treino/emocoes/sono.png";
 export const OBJETO_IMG: Record<string, string> = {
   BOLA: bola, GATO: gato, "MAÇÃ": maca, MACA: maca, "ÁRVORE": arvore, ARVORE: arvore,
   CASA: casa, ABELHA: abelha, FLOR: flor, CARRO: carro, OUTRO: carro, TREM: trem,
+  ASA: passaro, BOLO: "🍰", BOLA: bola, GATO: gato,
   PATO: pato, CACHORRO: cachorro, DOG: cachorro, LUA: lua, ESTRELA: estrela, SOL: sol,
   CHUVA: chuva, RATO: rato, BANANA: banana, VACA: vaca, PORCO: porco, GALINHA: galinha,
   OVELHA: ovelha, CABRA: cabra, PINTINHO: pintinho, GALO: galo,
