@@ -91,6 +91,19 @@ const MATEMATICA_3ANO_LESSON: Lesson = {
 };
 
 const ANO3_5_LESSON: Lesson = {
+  id: 'ano3-5-demo',
+  title: 'Desafios do 3º ao 5º Ano',
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF03CI01',
+  steps: [
+    { id: 'a3s1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Bem-vindo ao ciclo fundamental! Aqui os problemas são mais elaborados.',
+      elements: [{ id: 'txt-1', type: 'text', content: 'O ciclo da água é fundamental para a vida na Terra.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.3 }] },
+    { id: 'a3s2', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'O que acontece quando a água aquece e sobe para as nuvens?',
+      interaction: { type: 'click', correctAnswer: 'Evaporação', options: ['Evaporação', 'Chuva', 'Gelo'] } }
+  ]
+};
 
 const FUNDAMENTAL2_LESSON: Lesson = {
   id: 'fund2-demo',
