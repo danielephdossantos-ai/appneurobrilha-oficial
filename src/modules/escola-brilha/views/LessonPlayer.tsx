@@ -398,26 +398,29 @@ const LANG_LESSON: Lesson = {
   ]
 };
 
-const getPortugueseCount = (n: number, word: string) => {
-  const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta'];
-  const isFeminine = feminineWords.includes(word.toLowerCase());
+const getPortugueseCount = (n: number, content: string) => {
+  const word = getWordForContent(content).toLowerCase();
+  const feminineWords = ['maça', 'maçã', 'bola', 'asa', 'casa', 'abelha', 'flor', 'lua', 'estrela', 'chuva', 'banana', 'vaca', 'galinha', 'ovelha', 'cabra', 'borboleta', 'princesa', 'morango', 'uva', 'camiseta', 'girafa', 'zebra', 'foca', 'janela', 'vela'];
+  const isFeminine = feminineWords.includes(word);
   
   let numStr = n.toString();
   if (n === 1) numStr = isFeminine ? 'uma' : 'um';
   if (n === 2) numStr = isFeminine ? 'duas' : 'dois';
   
   let pluralWord = word;
-  const lower = word.toLowerCase();
   if (n > 1) {
-    if (lower === 'maça' || lower === 'maçã') pluralWord = 'maçãs';
-    else if (lower === 'peixe') pluralWord = 'peixes';
-    else if (lower.endsWith('a') || lower.endsWith('e') || lower.endsWith('o') || lower.endsWith('i') || lower.endsWith('u')) {
+    if (word === 'maça' || word === 'maçã') pluralWord = 'maçãs';
+    else if (word === 'peixe') pluralWord = 'peixes';
+    else if (word === 'avião') pluralWord = 'aviões';
+    else if (word === 'balão') pluralWord = 'balões';
+    else if (word === 'pião') pluralWord = 'piões';
+    else if (word.endsWith('a') || word.endsWith('e') || word.endsWith('o') || word.endsWith('i') || word.endsWith('u')) {
       pluralWord = word + 's';
-    } else if (lower.endsWith('r') || lower.endsWith('z')) {
+    } else if (word.endsWith('r') || word.endsWith('z')) {
       pluralWord = word + 'es';
     }
   } else {
-    if (lower === 'maça') pluralWord = 'maçã';
+    if (word === 'maça') pluralWord = 'maçã';
   }
   
   return `${numStr} ${pluralWord}`;
