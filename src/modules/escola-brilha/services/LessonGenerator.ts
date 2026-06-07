@@ -120,120 +120,136 @@ export class LessonGenerator {
   }
 
   /**
-   * EF01MA06: Construir fatos básicos da adição.
+   * MÉTODO CRA: Concreto -> Representacional -> Abstrato
+   * Matemática 2º ao 9º Ano.
    */
-  static generateEF01MA06(count: number = 5): Lesson {
-    const items = this.getRandomItems(MATH_BANK.simple_addition, count);
+  static generateCRAMath(category: string, count: number = 5): Lesson {
     const steps: LessonStep[] = [];
+    const isBasic = ['matematica', 'matematica_2ano'].includes(category);
+    const isCycleC = ['matematica_3ano', 'matematica_4ano', 'matematica_5ano'].includes(category);
+    const isModern = ['matematica_6ano', 'matematica_7ano', 'matematica_8ano', 'matematica_9ano'].includes(category);
+    
+    // FASE 1-3: O Motor CRA para um problema central
+    const val1 = Math.floor(Math.random() * (isBasic ? 5 : isCycleC ? 12 : 20)) + 2;
+    const val2 = Math.floor(Math.random() * (isBasic ? 5 : isCycleC ? 10 : 15)) + 2;
+    const op = isCycleC ? 'x' : '+';
+    const result = op === 'x' ? val1 * val2 : val1 + val2;
+    const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀'])[0];
 
-    items.forEach((item, index) => {
-      const modelType = Math.floor(Math.random() * 5); // 0-4
+    // 1. CONCRETO (Visualização da Missão)
+    steps.push({
+      id: `math-c-0`,
+      phase: 'explanation',
+      type: 'explanation',
+      mascot: 'pip',
+      speech: isModern ? `Missão: Vamos analisar a proporção deste grupo.` : `Observe estes grupos. Quantas figuras existem ao todo?`,
+      elements: [
+        ...Array.from({ length: Math.min(val1, 10) }).map((_, idx) => ({
+          id: `v1-0-${idx}`, type: 'text' as const, content: emoji,
+          position: { x: -60, y: (idx - (Math.min(val1, 10)-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx
+        })),
+        { id: `op-icon`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.5 },
+        ...Array.from({ length: Math.min(val2, 10) }).map((_, idx) => ({
+          id: `v2-0-${idx}`, type: 'text' as const, content: emoji,
+          position: { x: 60, y: (idx - (Math.min(val2, 10)-1)/2) * 30 }, animation: 'pop' as const, delay: 0.1 * idx + 0.6
+        }))
+      ]
+    });
 
-      if (modelType === 0) {
-        // Adição Visual
-        steps.push({
-          id: `ma06-add-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Quanto é ${item.a} mais ${item.b}?`,
-          elements: [
-            { id: `op-${index}`, type: 'text', content: `${item.a} + ${item.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }
-          ],
-          interaction: {
-            type: 'click',
-            correctAnswer: item.result.toString(),
-            options: this.shuffle([item.result.toString(), (item.result + 1).toString(), (item.result - 1).toString()])
-          }
-        });
-      } else if (modelType === 1) {
-        // Contagem
-        const count = Math.floor(Math.random() * 5) + 1;
-        steps.push({
-          id: `ma06-count-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pip',
-          speech: `Quantas maçãs você vê?`,
-          elements: Array.from({ length: count }).map((_, i) => ({
-            id: `apple-${index}-${i}`,
-            type: 'text',
-            content: '🍎',
-            position: { x: (i - (count-1)/2) * 50, y: 0 },
-            animation: 'pop',
-            delay: 0.1 * i
-          })),
-          interaction: {
-            type: 'click',
-            correctAnswer: count.toString(),
-            options: this.shuffle([count.toString(), (count + 1).toString(), (count - 1).toString()].filter(v => parseInt(v) > 0))
-          }
-        });
-      } else if (modelType === 2) {
-        // Sequência numérica
-        const start = Math.floor(Math.random() * 5) + 1;
-        steps.push({
-          id: `ma06-seq-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Qual número vem depois do ${start + 1}?`,
-          elements: [{ id: `seq-${index}`, type: 'text', content: `${start}, ${start+1}, ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-          interaction: {
-            type: 'click',
-            correctAnswer: (start + 2).toString(),
-            options: this.shuffle([(start + 2).toString(), (start + 3).toString(), (start + 4).toString()])
-          }
-        });
-      } else if (modelType === 3) {
-        // Comparação (Qual é maior?)
-        const v1 = Math.floor(Math.random() * 10);
-        const v2 = Math.floor(Math.random() * 10);
-        if (v1 === v2) { v1 > 5 ? v1 - 1 : v1 + 1; }
-        const max = Math.max(v1, v2);
-        steps.push({
-          id: `ma06-comp-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pip',
-          speech: `Qual número é maior?`,
-          elements: [
-            { id: `v1-${index}`, type: 'text', content: v1.toString(), position: { x: -60, y: 0 }, animation: 'pop', delay: 0.2 },
-            { id: `v2-${index}`, type: 'text', content: v2.toString(), position: { x: 60, y: 0 }, animation: 'pop', delay: 0.4 }
-          ],
-          interaction: {
-            type: 'click',
-            correctAnswer: max.toString(),
-            options: [v1.toString(), v2.toString()]
-          }
-        });
-      } else {
-        // Subtração Simples
-        const sub = MATH_BANK.simple_subtraction[Math.floor(Math.random() * MATH_BANK.simple_subtraction.length)];
-        steps.push({
-          id: `ma06-sub-${index}`,
-          phase: 'practice',
-          type: 'interaction',
-          mascot: 'pipa',
-          speech: `Se eu tinha ${sub.a} e perdi ${sub.b}, com quanto fiquei?`,
-          elements: [{ id: `sub-${index}`, type: 'text', content: `${sub.a} - ${sub.b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
-          interaction: {
-            type: 'click',
-            correctAnswer: sub.result.toString(),
-            options: this.shuffle([sub.result.toString(), (sub.result + 1).toString(), (sub.result - 1).toString()].filter(v => parseInt(v) >= 0))
-          }
-        });
+    // 2. DESCOBERTA (Tentativa do Aluno)
+    steps.push({
+      id: `math-d-0`,
+      phase: 'practice',
+      type: 'interaction',
+      mascot: 'pipa',
+      speech: isModern ? `Levante uma hipótese: qual seria o valor total equilibrado?` : `Tente responder: quanto temos no total?`,
+      interaction: {
+        type: 'click',
+        correctAnswer: result.toString(),
+        options: this.shuffle([result.toString(), (result + (isCycleC ? 5 : 1)).toString(), (result - (isCycleC ? 2 : 1)).toString()])
       }
     });
 
+    // 3. REPRESENTACIONAL (Estratégia)
+    steps.push({
+      id: `math-e-0`,
+      phase: 'demonstration',
+      type: 'demonstration',
+      mascot: 'pip',
+      speech: `Estratégia: Representamos ${val1} ${op} ${val2}. Veja como chegamos em ${result}.`,
+      elements: [
+        { id: `rep-1`, type: 'text', content: `${val1}`, position: { x: -60, y: 0 }, animation: 'bounce', delay: 0.2 },
+        { id: `rep-p`, type: 'text', content: op, position: { x: 0, y: 0 }, animation: 'fade', delay: 0.4 },
+        { id: `rep-2`, type: 'text', content: `${val2}`, position: { x: 60, y: 0 }, animation: 'bounce', delay: 0.6 },
+        { id: `rep-e`, type: 'text', content: `= ${result}`, position: { x: 0, y: 60 }, animation: 'pop', delay: 1.0 }
+      ]
+    });
+
+    // 4. TREINO (Simbólico / Abstrato)
+    for (let i = 0; i < count; i++) {
+      const a = Math.floor(Math.random() * (isModern ? 50 : 20)) + 1;
+      const b = Math.floor(Math.random() * (isModern ? 30 : 10)) + 1;
+      const currentOp = isCycleC || isModern ? (Math.random() > 0.5 ? 'x' : '+') : '+';
+      const r = currentOp === 'x' ? a * b : a + b;
+
+      steps.push({
+        id: `math-a-${i}`,
+        phase: 'practice',
+        type: 'interaction',
+        mascot: 'pipa',
+        speech: `Prática: Resolva ${a} ${currentOp} ${b}`,
+        elements: [{ id: `abs-${i}`, type: 'text', content: `${a} ${currentOp} ${b} = ?`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: r.toString(),
+          options: this.shuffle([r.toString(), (r + 10).toString(), (r - 5).toString()])
+        }
+      });
+    }
+
+    // 5. DESAFIO (Problema diferente)
+    if (isModern) {
+      // Álgebra: x + a = b
+      const a = Math.floor(Math.random() * 20) + 1;
+      const x = Math.floor(Math.random() * 20) + 1;
+      const b = x + a;
+      steps.push({
+        id: `math-challenge-modern`,
+        phase: 'challenge',
+        type: 'interaction',
+        mascot: 'pip',
+        speech: `DESAFIO FINAL: Se X + ${a} = ${b}, qual é o valor de X?`,
+        elements: [{ id: `ch-mod`, type: 'text', content: `X + ${a} = ${b}`, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: x.toString(),
+          options: this.shuffle([x.toString(), (x + 5).toString(), (x - 3).toString()])
+        }
+      });
+    } else {
+      steps.push({
+        id: `math-challenge-basic`,
+        phase: 'challenge',
+        type: 'interaction',
+        mascot: 'pipa',
+        speech: `DESAFIO: Resolva um problema maior!`,
+        interaction: {
+          type: 'click',
+          correctAnswer: (result * 2).toString(),
+          options: [(result * 2).toString(), (result * 2 + 1).toString(), (result * 2 - 1).toString()]
+        }
+      });
+    }
+
     return {
-      id: `gen-ef01ma06-${Date.now()}`,
-      title: 'Somando com Pip e Pipa',
+      id: `gen-math-cra-${Date.now()}`,
+      title: isModern ? 'Laboratório de Matemática' : isCycleC ? 'Desafios Numéricos' : 'Brincando com Números',
       bncc_field: 'espacos_tempos',
-      skill_bncc: 'EF01MA06',
       steps
     };
   }
+
+
 
   /**
    * Ciclo C: 3º ao 5º Ano.
@@ -396,15 +412,19 @@ export class LessonGenerator {
   }
 
   static generateByCategory(category: string): Lesson {
-    const mastery = StudentProgressService.getMastery(category); // Usando categoria como chave simplificada
-    const difficultyMultiplier = Math.floor(mastery.score / 25); // 0 to 4
+    const mastery = StudentProgressService.getMastery(category); 
+    const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
 
-    if (['portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano', 'ano3_5'].includes(category)) {
+    if (category.includes('matematica')) {
+      return this.generateCRAMath(category, count);
+    }
+
+    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
       return this.generateCycleC(category, count);
     }
     
-    if (['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(category)) {
+    if (['portugues_6ano', 'portugues_7ano', 'portugues_8ano', 'portugues_9ano', 'fundamental2'].includes(category)) {
       return this.generateModern(category, count + 2);
     }
 
@@ -413,11 +433,11 @@ export class LessonGenerator {
       case 'portugues_1ano':
         return this.generateEF01LP05(count);
       case 'matematica':
-        return this.generateEF01MA06(count);
+        return this.generateCRAMath(category, count);
       case 'portugues_2ano':
         return this.generateEF01LP05(count + 2); 
       case 'matematica_2ano':
-        return this.generateEF01MA06(count + 2);
+        return this.generateCRAMath(category, count + 2);
       default:
         return this.generateEF01LP05(count);
     }
