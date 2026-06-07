@@ -409,7 +409,8 @@ export const LessonPlayer: React.FC = () => {
                   const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
                   const isNumber = /^\d+$/.test(opt);
                   const fontSize = hasIllust ? '' : 
-                                   (opt.length === 1 || isNumber) ? 'text-7xl sm:text-8xl' : 
+                                   isNumber ? 'text-[8rem] sm:text-[10rem]' :
+                                   opt.length === 1 ? 'text-7xl sm:text-8xl' : 
                                    opt.length === 2 ? 'text-5xl sm:text-6xl' : 'text-3xl sm:text-4xl';
                   return (
                     <motion.button
