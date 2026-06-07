@@ -9,12 +9,14 @@ interface LessonHeaderProps {
   field?: string;
   stepIndex?: number;
   totalSteps?: number;
+  xp?: number;
 }
 
 export const LessonHeader: React.FC<LessonHeaderProps> = ({
   progress,
   stepIndex = 0,
   totalSteps = 0,
+  xp = 100,
 }) => {
   const navigate = useNavigate();
 
@@ -50,6 +52,12 @@ export const LessonHeader: React.FC<LessonHeaderProps> = ({
         {/* Star */}
         <div className="shrink-0 w-11 h-11 rounded-full bg-yellow-400 flex items-center justify-center shadow-lg">
           <Star className="w-6 h-6 text-white fill-white" />
+        </div>
+        
+        {/* XP Counter */}
+        <div className="shrink-0 flex items-center gap-1 bg-white px-3 py-1.5 rounded-full border-2 border-yellow-200 shadow-sm">
+          <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+          <span className="text-sm font-black text-yellow-600">{xp} XP</span>
         </div>
       </div>
     </div>
