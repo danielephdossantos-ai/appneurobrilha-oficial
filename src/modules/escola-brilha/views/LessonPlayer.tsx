@@ -499,9 +499,11 @@ export const LessonPlayer: React.FC = () => {
 
     await new Promise(r => setTimeout(r, 100));
 
+    // Para o Pre e 1º Ano, as lições devem ser extremamente simples
+    const isInfantOr1st = search.category.includes('inf') || search.category.includes('1ano');
+
     // If it's an explanation or demonstration, speak the main instruction FIRST
     const isIntro = currentStep.type === 'explanation' || currentStep.type === 'demonstration';
-    let mainSpeechPromise = Promise.resolve();
     
     if (isIntro) {
       setIsSpeaking(true);
@@ -517,20 +519,34 @@ export const LessonPlayer: React.FC = () => {
         await new Promise(r => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements(prev => [...prev, el.id]);
         
-        const isMathObject = search.category === 'matematica' && (objetoImg(el.content) || /\p{Emoji}/u.test(el.content));
+        const isIllustration = objetoImg(el.content) || /\p{Emoji}/u.test(el.content);
         
-        // If it's a math object or demonstration, highlight and speak
-        if (isMathObject || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
+        // If it's an illustration or demonstration, highlight and speak
+        if (isIllustration || currentStep.type === 'demonstration' || currentStep.type === 'explanation') {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           
           let textToSpeak = el.content;
-          if (isMathObject) {
-            mathItemCount++;
-            textToSpeak = getPortugueseCount(mathItemCount, el.content);
+          
+          // Se for uma ilustração, tenta falar o nome do objeto em vez do emoji
+          if (isIllustration) {
+            // Em matemática, conta os itens
+            if (search.category.includes('matematica')) {
+              mathItemCount++;
+              textToSpeak = getPortugueseCount(mathItemCount, el.content);
+            } else {
+              // Se tiver um texto associado no step, fala o texto, senão fala o nome limpo
+              textToSpeak = semEmoji(el.content) || el.content;
+              // Caso especial: se o conteúdo for apenas um emoji, o semEmoji retorna vazio. 
+              // Precisamos do nome do objeto. Mas por enquanto vamos confiar no speech do step.
+            }
           }
 
-          await AudioSpeechService.speak(textToSpeak);
+          // No Infantil, evitamos falar caracteres técnicos
+          if (textToSpeak !== '+' && textToSpeak !== '=' && textToSpeak !== '?' && textToSpeak !== '_') {
+            await AudioSpeechService.speak(textToSpeak);
+          }
+          
           setIsSpeaking(false);
           setHighlightedElementId(null);
           await new Promise(r => setTimeout(r, 400));
@@ -541,28 +557,27 @@ export const LessonPlayer: React.FC = () => {
     // After elements appear, speak the main instruction and options (if not already spoken)
     const fullSpeech = getStepSpeech(currentStep);
     
-    // For interaction steps, we speak the full speech now.
-    // For intro steps, we only speak if there's something new in fullSpeech compared to what we just said
     if (!isIntro || (fullSpeech.toLowerCase() !== currentStep.speech.toLowerCase())) {
       setIsSpeaking(true);
       const speechToValue = isIntro ? fullSpeech.replace(currentStep.speech, '').trim() : fullSpeech;
       if (speechToValue && speechToValue !== '.' && speechToValue !== '..') {
-        await AudioSpeechService.speak(speechToValue);
+        // Limpa o speech para não ler "_" ou outros caracteres técnicos para os pequenos
+        const cleanSpeech = isInfantOr1st ? speechToValue.replace(/_/g, '').replace(/\s+/g, ' ').trim() : speechToValue;
+        if (cleanSpeech) await AudioSpeechService.speak(cleanSpeech);
       }
       setIsSpeaking(false);
     }
     
     if (currentStep.type === 'interaction' && currentStep.interaction?.options) {
-      await new Promise(r => setTimeout(r, 1500)); 
+      await new Promise(r => setTimeout(r, isInfantOr1st ? 800 : 1500)); 
       for (const opt of currentStep.interaction.options) {
         setVisibleOptions(prev => [...prev, opt]);
         await new Promise(r => setTimeout(r, 500));
       }
     }
 
-
     if (currentStep.type === 'explanation' || currentStep.type === 'demonstration') {
-      await new Promise(r => setTimeout(r, 1800));
+      await new Promise(r => setTimeout(r, isInfantOr1st ? 1200 : 1800));
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex(prev => prev + 1);
       }
