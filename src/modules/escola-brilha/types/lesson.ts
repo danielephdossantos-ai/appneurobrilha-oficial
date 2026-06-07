@@ -20,7 +20,8 @@ export interface LessonStep {
   phase: LessonPhase;
   type: 'explanation' | 'interaction' | 'demonstration';
   mascot: 'pip' | 'pipa';
-  speech: string;
+  displayText?: string;
+  speechText: string;
   elements?: LessonElement[];
   interaction?: LessonInteraction;
   audioUrl?: string;
@@ -31,6 +32,7 @@ export interface LessonElement {
   id: string;
   type: 'image' | 'icon' | 'text' | 'shape';
   content: string;
+  speechText?: string;
   position: { x: number; y: number };
   animation: 'fade' | 'bounce' | 'slide' | 'pop';
   delay: number;
