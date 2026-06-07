@@ -1,6 +1,7 @@
 
 import { Lesson, LessonStep } from '../types/lesson';
 import { WORD_BANK, MATH_BANK, SENTENCE_BANK, Word } from '../data/content-banks';
+import { ART_BANK, HISTORY_GEOGRAPHY_BANK } from '../data/extra-banks';
 import { StudentProgressService } from './StudentProgressService';
 
 export class LessonGenerator {
