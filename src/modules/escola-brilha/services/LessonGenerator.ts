@@ -141,7 +141,7 @@ export class LessonGenerator {
     
     const op = isCycleC ? 'x' : '+';
     const result = op === 'x' ? val1 * val2 : val1 + val2;
-    const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀'])[0];
+    const emoji = this.shuffle(['🍎', '⭐', '🐶', '⚽', '🍬', '💎', '🚀', '🚗', '🚜'])[0];
 
     // 1. CONCRETO (Visualização da Missão)
     steps.push({
