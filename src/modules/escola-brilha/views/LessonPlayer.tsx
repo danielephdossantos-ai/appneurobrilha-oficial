@@ -147,6 +147,44 @@ const NOSSO_LUGAR_LESSON: Lesson = {
   ]
 };
 
+const SINONIMOS_LESSON: Lesson = {
+  id: 'sinonimos-2ano',
+  title: 'Sinônimos',
+  grade: 2,
+  bncc_field: 'escuta_fala',
+  skill_bncc: 'EF02LP03',
+  steps: [
+    { id: 's1', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Vamos aprender sobre SINÔNIMOS! Sinônimos são palavras que têm significados parecidos.',
+      elements: [{ id: 'sin-1', type: 'text', content: 'ALEGRE = FELIZ', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 's2', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Veja este exemplo: Ele está alegre. Ele está feliz. As duas palavras têm o mesmo significado.',
+      elements: [{ id: 'sin-2', type: 'text', content: 'BONITO = LINDO', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 's3', phase: 'practice', type: 'interaction', mascot: 'pipa',
+      speech: 'Qual palavra é sinônimo de FELIZ?',
+      interaction: { type: 'choice', correctAnswer: 'ALEGRE', options: ['TRISTE', 'ALEGRE', 'BRAVO'] } }
+  ]
+};
+
+const OCEANOS_LESSON: Lesson = {
+  id: 'oceanos-6ano',
+  title: 'Importância dos Oceanos',
+  grade: 6,
+  bncc_field: 'espacos_tempos',
+  skill_bncc: 'EF06CI11',
+  steps: [
+    { id: 'o1', phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: 'Por que os oceanos são importantes para o planeta? Nesta missão você vai entender o papel dos oceanos.',
+      elements: [{ id: 'oce-1', type: 'text', content: '🌊 OCEANO', position: { x: 0, y: -20 }, animation: 'fade', delay: 0.2 }] },
+    { id: 'o2', phase: 'explanation', type: 'explanation', mascot: 'pipa',
+      speech: 'Os oceanos cobrem mais de 70% da superfície da Terra e regulam o clima.',
+      elements: [{ id: 'oce-2', type: 'text', content: '🌡️ REGULA CLIMA', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }] },
+    { id: 'o3', phase: 'practice', type: 'interaction', mascot: 'pip',
+      speech: 'Qual alternativa melhor explica por que os oceanos regulam o clima do planeta?',
+      interaction: { type: 'choice', correctAnswer: 'A', options: ['A) Porque absorvem e liberam calor', 'B) Porque produzem ventos fortes', 'C) Porque formam nuvens'] } }
+  ]
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string };
   
