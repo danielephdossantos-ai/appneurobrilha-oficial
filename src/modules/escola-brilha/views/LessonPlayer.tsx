@@ -8,7 +8,7 @@ import { AudioSpeechService } from '../services/AudioSpeechService';
 import { Lesson, LessonPerformance } from '../types/lesson';
 import { useSearch } from '@tanstack/react-router';
 import { RenderEmoji } from '@/components/neuro-treino/RenderEmoji';
-import { semEmoji } from '@/data/neuro-treino/objetos';
+import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 
 const PORTUGUES_1ANO_LESSON: Lesson = {
   id: 'leitura-primeiros-passos',
