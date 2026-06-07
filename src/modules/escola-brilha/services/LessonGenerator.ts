@@ -1,7 +1,7 @@
 
 import { Lesson, LessonStep } from '../types/lesson';
 import { WORD_BANK, MATH_BANK, SENTENCE_BANK, Word } from '../data/content-banks';
-import { ART_BANK, HISTORY_GEOGRAPHY_BANK } from '../data/extra-banks';
+import { ART_BANK, HISTORY_GEOGRAPHY_BANK, SCIENCE_BANK } from '../data/extra-banks';
 import { StudentProgressService } from './StudentProgressService';
 
 export class LessonGenerator {
@@ -422,6 +422,62 @@ export class LessonGenerator {
 
 
   /**
+   * Gerador Genérico para Ciências, História, Geografia e Artes
+   */
+  static generateSubjectLesson(category: string, count: number = 6): Lesson {
+    const isHistory = category.includes('historia');
+    const isGeography = category.includes('geografia');
+    const isScience = category.includes('ciencias');
+    const isArt = category.includes('artes');
+
+    const bank = isScience ? SCIENCE_BANK : 
+                 (isHistory || isGeography) ? HISTORY_GEOGRAPHY_BANK : 
+                 ART_BANK;
+    
+    const items = this.getRandomItems(bank, Math.min(count, bank.length));
+    const steps: LessonStep[] = [];
+
+    // FASE 1: DESCOBERTA
+    steps.push({
+      id: `subj-desc-${Date.now()}`, phase: 'explanation', type: 'explanation', mascot: 'pip',
+      speech: `Bem-vindo à Missão de ${isScience ? 'Ciências' : isHistory ? 'História' : isGeography ? 'Geografia' : 'Artes'}! Vamos explorar o mundo?`,
+      elements: [{ id: 'subj-icon', type: 'text', content: items[0].emoji, position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    // FASES DE PRÁTICA
+    items.forEach((item, idx) => {
+      steps.push({
+        id: `subj-step-${idx}`,
+        phase: idx === items.length - 1 ? 'challenge' : 'practice',
+        type: 'interaction',
+        mascot: idx % 2 === 0 ? 'pip' : 'pipa',
+        speech: item.question,
+        elements: [{ id: `subj-el-${idx}`, type: 'text', content: item.topic, position: { x: 0, y: -40 }, animation: 'fade', delay: 0.2 }],
+        interaction: {
+          type: 'click',
+          correctAnswer: item.correct,
+          options: this.shuffle(item.options)
+        }
+      });
+    });
+
+    // FASE FINAL: DOMÍNIO
+    steps.push({
+      id: `subj-dom-${Date.now()}`, phase: 'mastery', type: 'explanation', mascot: 'pipa',
+      speech: 'Parabéns, explorador! Você completou a missão com sucesso!',
+      elements: [{ id: 'subj-trophy', type: 'text', content: '🏆', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.1 }]
+    });
+
+    return {
+      id: `gen-subj-${category}-${Date.now()}`,
+      title: `${isScience ? 'Cientista' : isHistory ? 'Historiador' : isGeography ? 'Geógrafo' : 'Artista'} Brilhante`,
+      mission_name: items[0].topic,
+      bncc_field: isScience ? 'espacos_tempos' : 'escuta_fala',
+      steps
+    };
+  }
+
+  /**
    * MÉTODO CIÊNCIAS: Pergunta -> Observação -> Hipótese -> Explicação -> Experiência -> Conclusão
    */
   static generateScienceLesson(category: string, count: number = 6): Lesson {
@@ -556,37 +612,36 @@ export class LessonGenerator {
     const difficultyMultiplier = Math.floor(mastery.score / 25); 
     const count = 5 + difficultyMultiplier;
 
-    if (['historia', 'geografia', 'artes'].some(c => category.includes(c))) {
-      return this.generateInfiniteLesson(category, count);
+    // Subjects: Ciências, História, Geografia, Artes
+    if (category.includes('ciencias') || category.includes('historia') || category.includes('geografia') || category.includes('artes')) {
+      if (category.includes('ciencias') && !category.includes('inf')) {
+        return this.generateScienceLesson(category, count);
+      }
+      return this.generateSubjectLesson(category, count);
     }
 
-    if (['ciencias_kids', 'ciencias_inf'].includes(category)) {
-      return this.generateScienceLesson(category);
-    }
-
+    // Matemática
     if (category.includes('matematica')) {
       return this.generateCRAMath(category, count);
     }
 
-    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
-      return this.generateCycleC(category, count);
-    }
-    
+    // Português Moderno (6º-9º)
     if (['portugues_6ano', 'portugues_7ano', 'portugues_8ano', 'portugues_9ano', 'fundamental2'].includes(category)) {
       return this.generateModern(category, count + 2);
     }
 
+    // Português Fundamental I (3º-5º)
+    if (['portugues_3ano', 'portugues_4ano', 'portugues_5ano', 'ano3_5'].includes(category)) {
+      return this.generateCycleC(category, count);
+    }
+    
+    // Português Inicial (Infantil ao 2º)
     switch (category) {
       case 'portugues':
       case 'portugues_inf':
       case 'portugues_1ano':
-        return this.generateEF01LP05(count);
-      case 'matematica_inf':
-        return this.generateCRAMath(category, count);
       case 'portugues_2ano':
-        return this.generateEF01LP05(count + 2); 
-      case 'matematica_2ano':
-        return this.generateCRAMath(category, count + 2);
+        return this.generateEF01LP05(count);
       default:
         return this.generateEF01LP05(count);
     }

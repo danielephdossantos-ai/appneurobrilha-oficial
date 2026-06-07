@@ -428,10 +428,12 @@ export const LessonPlayer: React.FC = () => {
   // Gera uma lição dinâmica baseada na categoria
   const [currentLesson] = useState(() => LessonGenerator.generateByCategory(search.category));
 
-  const interfaceStyle = 
-    ['portugues', 'portugues_inf', 'matematica_inf', 'ciencias_inf', 'artes_inf', 'portugues_1ano', 'matematica_1ano', 'matematica'].includes(search.category) ? 'A' :
-    ['portugues_2ano', 'matematica_2ano', 'portugues_3ano', 'matematica_3ano', 'portugues_4ano', 'matematica_4ano', 'portugues_5ano', 'matematica_5ano'].includes(search.category) ? 'B' :
-    ['portugues_6ano', 'matematica_6ano', 'portugues_7ano', 'matematica_7ano', 'portugues_8ano', 'matematica_8ano', 'portugues_9ano', 'matematica_9ano', 'fundamental2'].includes(search.category) ? 'Modern' : 'A';
+  const interfaceStyle = React.useMemo(() => {
+    if (search.category.includes('inf') || search.category.includes('1ano')) return 'A';
+    if (['2ano', '3ano', '4ano', '5ano'].some(grade => search.category.includes(grade))) return 'B';
+    if (['6ano', '7ano', '8ano', '9ano'].some(grade => search.category.includes(grade))) return 'Modern';
+    return 'A'; // Default
+  }, [search.category]);
 
 
   const isModern = interfaceStyle === 'Modern';
