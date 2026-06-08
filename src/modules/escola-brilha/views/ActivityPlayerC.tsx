@@ -11,6 +11,7 @@ import { AudioSpeechService } from '../services/AudioSpeechService';
 import pipImg from '@/assets/pip-mascot.png';
 import pipaImg from '@/assets/pip-girl-mascot.png';
 import { LessonVisualMap } from '../components/LessonVisualMap';
+import { MathVisualizer } from '../components/MathVisualizer';
 
 interface Props { lesson: ActivityLessonC }
 
@@ -453,39 +454,59 @@ const PontosChaveScreen: React.FC<{ lesson: ActivityLessonC; pointsVisible: numb
 /* ─── TELA 4: EXEMPLO APLICADO ─── */
 const ExemploScreen: React.FC<{ lesson: ActivityLessonC; pointsVisible: number[]; ac: any }> = ({ lesson, pointsVisible, ac }) => {
   const s = lesson.screens.exemplo_aplicado;
+
   return (
     <div className="space-y-4">
-      <p className="text-slate-700 font-black text-base">{s.title}</p>
-
-      {/* Scenario */}
-      <div className={`bg-gradient-to-br ${lesson.color.from} ${lesson.color.to} rounded-2xl p-4 text-white flex items-center gap-3`}>
-        <span className="text-4xl shrink-0">{s.scenario_emoji}</span>
-        <p className="font-semibold text-sm leading-snug">{s.scenario}</p>
+      {/* Header */}
+      <div className="flex items-center gap-2">
+        <span className="text-2xl">{s.scenario_emoji}</span>
+        <div>
+          <p className="text-slate-700 font-black text-base leading-tight">{s.title}</p>
+          <p className={`text-sm font-bold ${ac.text}`}>{s.scenario}</p>
+        </div>
       </div>
 
-      {/* Analysis steps */}
-      <div className="space-y-2">
-        {s.analysis.map((step, i) => (
-          <AnimatePresence key={i}>
-            {pointsVisible.includes(i) && (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 180 }}
-                className="bg-white border border-slate-100 rounded-xl p-3 flex items-start gap-2 shadow-sm">
-                <div className={`w-5 h-5 rounded-full ${ac.bg} flex items-center justify-center text-white text-xs font-black shrink-0 mt-0.5`}>
-                  {i + 1}
-                </div>
-                <p className="text-slate-700 font-medium text-sm">{step}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        ))}
-      </div>
+      {/* ── Visual math mode ── */}
+      {s.visual_steps ? (
+        <MathVisualizer
+          build={s.visual_steps.build}
+          steps={s.visual_steps.steps}
+          verification={s.visual_steps.verification}
+          accentColor={lesson.color.accent}
+        />
+      ) : (
+        <>
+          {/* Scenario card (non-math lessons) */}
+          <div className={`bg-gradient-to-br ${lesson.color.from} ${lesson.color.to} rounded-2xl p-4 text-white flex items-center gap-3`}>
+            <span className="text-4xl shrink-0">{s.scenario_emoji}</span>
+            <p className="font-semibold text-sm leading-snug">{s.scenario}</p>
+          </div>
 
-      {/* Conclusion */}
-      {pointsVisible.length >= s.analysis.length && (
-        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-          className={`${ac.light} ${ac.border} border-2 rounded-2xl p-4 text-center`}>
-          <p className={`font-black ${ac.text} text-sm`}>{s.conclusion}</p>
-        </motion.div>
+          {/* Analysis steps */}
+          <div className="space-y-2">
+            {s.analysis.map((step, i) => (
+              <AnimatePresence key={i}>
+                {pointsVisible.includes(i) && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 180 }}
+                    className="bg-white border border-slate-100 rounded-xl p-3 flex items-start gap-2 shadow-sm">
+                    <div className={`w-5 h-5 rounded-full ${ac.bg} flex items-center justify-center text-white text-xs font-black shrink-0 mt-0.5`}>
+                      {i + 1}
+                    </div>
+                    <p className="text-slate-700 font-medium text-sm">{step}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            ))}
+          </div>
+
+          {/* Conclusion */}
+          {pointsVisible.length >= s.analysis.length && (
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+              className={`${ac.light} ${ac.border} border-2 rounded-2xl p-4 text-center`}>
+              <p className={`font-black ${ac.text} text-sm`}>{s.conclusion}</p>
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   );

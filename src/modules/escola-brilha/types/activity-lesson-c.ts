@@ -46,6 +46,19 @@ export interface ActivityLessonC {
       scenario_emoji: string;
       analysis: string[];
       conclusion: string;
+      visual_steps?: {
+        build: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren' }>;
+        steps: Array<{
+          id: number;
+          action: string;
+          action_symbol: string;
+          accent: string;
+          explanation: string;
+          before: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren'; dim?: boolean; strike?: boolean }>;
+          result: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren' }>;
+        }>;
+        verification: string;
+      };
     };
     desafio: {
       question: string;

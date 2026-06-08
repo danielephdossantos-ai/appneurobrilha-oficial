@@ -1,0 +1,1 @@
+- [Math visual steps pattern](math-visual-steps.md) — ActivityLessonC supports optional visual_steps in exemplo_aplicado for animated equation building; non-math lessons fall back to text analysis list.
