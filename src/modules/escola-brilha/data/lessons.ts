@@ -38,10 +38,10 @@ export const PORTUGUES_2ANO_LESSON: Lesson = {
   steps: [
     { id: 'p1', phase: 'explanation', type: 'explanation', mascot: 'pip',
       speech: 'Leia a frase com atenção.',
-      elements: [{ id: 'f1', type: 'text', content: '🐶 O cachorro corre.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.5 }] },
+      elements: [{ id: 'f1', type: 'text', content: 'O cachorro corre.', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.5 }] },
     { id: 'p2', phase: 'practice', type: 'interaction', mascot: 'pipa',
       speech: 'Quem corre?',
-      elements: [{ id: 'ref-f1', type: 'text', content: '🐶 O cachorro corre.', position: { x: 0, y: -40 }, animation: 'fade', delay: 0.2 }],
+      elements: [{ id: 'ref-f1', type: 'text', content: 'O cachorro corre.', position: { x: 0, y: -40 }, animation: 'fade', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'Cachorro', options: ['Cachorro', 'Gato', 'Pássaro'] } },
     { id: 'p3', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Vamos formar a palavra BOLA. Qual sílaba falta?',
@@ -126,7 +126,7 @@ export const MATH_2ANO_LESSON: Lesson = {
       interaction: { type: 'click', correctAnswer: 'Régua', options: ['Régua', 'Relógio', 'Balança'] } },
     { id: 'mt5', phase: 'practice', type: 'interaction', mascot: 'pip',
       speech: 'Observe o gráfico. Qual fruta é a favorita?',
-      elements: [{ id: 'gr1', type: 'text', content: '🍎: 5 | 🍌: 3', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
+      elements: [{ id: 'gr1', type: 'text', content: 'Maca: 5 | Banana: 3', position: { x: 0, y: 0 }, animation: 'pop', delay: 0.2 }],
       interaction: { type: 'click', correctAnswer: 'Maçã', options: ['Maçã', 'Banana'] } }
   ]
 };

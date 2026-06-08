@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from '@tanstack/react-router';
-import { BookOpen, Calculator, Star, ChevronRight, Sparkles, FlaskConical, Globe, Landmark } from 'lucide-react';
+import { BookOpen, Calculator, Star, ChevronRight, Sparkles, FlaskConical, Globe, Landmark, GraduationCap, Sprout } from 'lucide-react';
+import { Illustration } from '@/components/Illustration';
 import pipImg from '@/assets/pip-mascot.png';
 import pipaImg from '@/assets/pip-girl-mascot.png';
 
@@ -95,29 +96,31 @@ const ACTIVITY_C = [
   },
 ];
 
-const EARLY_CATEGORIES = [
+import type { IllustrationName } from '@/components/Illustration';
+
+const EARLY_CATEGORIES: Array<{ id: string; title: string; badge: string; illustration: IllustrationName; gradient: string; xp: number; desc: string; type: string; highlight?: boolean }> = [
   {
     id: 'vogais', title: 'As Vogais', badge: 'Alfabetização',
-    emoji: '🔤', gradient: 'from-rose-400 to-pink-500', xp: 80,
+    illustration: 'vowels-icon', gradient: 'from-rose-400 to-pink-500', xp: 80,
     desc: 'A  E  I  O  U', type: 'early', highlight: true,
   },
   {
     id: 'contagem', title: 'Vamos Contar!', badge: 'Matemática',
-    emoji: '🔢', gradient: 'from-amber-400 to-orange-500', xp: 80,
+    illustration: 'counting-icon', gradient: 'from-amber-400 to-orange-500', xp: 80,
     desc: '1 ao 10', type: 'early', highlight: true,
   },
   {
     id: 'subtracao', title: 'Subtrair é Tirar!', badge: 'Matemática',
-    emoji: '➖', gradient: 'from-rose-500 to-red-600', xp: 90,
+    illustration: 'subtract-icon', gradient: 'from-rose-500 to-red-600', xp: 90,
     desc: 'Tirar objetos', type: 'early', highlight: true,
   },
 ];
 
 const LEGACY_CATEGORIES = [
-  { id: 'portugues_1ano', title: '1º Ano — Sílabas', badge: 'Alfabetização', emoji: '📖', gradient: 'from-emerald-400 to-green-500', xp: 100, type: 'legacy', desc: 'Primeiras sílabas' },
-  { id: 'matematica',     title: '1º Ano — Contas',  badge: 'Matemática',    emoji: '🧮', gradient: 'from-sky-400 to-blue-500',    xp: 100, type: 'legacy', desc: 'Somar e subtrair' },
-  { id: 'portugues_2ano', title: '2º Ano — Leitura', badge: 'Leitura',       emoji: '📚', gradient: 'from-fuchsia-400 to-violet-500',xp: 110, type: 'legacy', desc: 'Ler frases' },
-  { id: 'matematica_2ano',title: '2º Ano — Cálculos',badge: 'Matemática',    emoji: '📐', gradient: 'from-orange-400 to-red-500',  xp: 110, type: 'legacy', desc: 'Contas maiores' },
+  { id: 'portugues_1ano', title: '1º Ano — Sílabas', badge: 'Alfabetização', Icon: BookOpen,   gradient: 'from-emerald-400 to-green-500',   xp: 100, type: 'legacy', desc: 'Primeiras sílabas' },
+  { id: 'matematica',     title: '1º Ano — Contas',  badge: 'Matemática',    Icon: Calculator,  gradient: 'from-sky-400 to-blue-500',         xp: 100, type: 'legacy', desc: 'Somar e subtrair' },
+  { id: 'portugues_2ano', title: '2º Ano — Leitura', badge: 'Leitura',       Icon: BookOpen,    gradient: 'from-fuchsia-400 to-violet-500',   xp: 110, type: 'legacy', desc: 'Ler frases' },
+  { id: 'matematica_2ano',title: '2º Ano — Cálculos',badge: 'Matemática',    Icon: Calculator,  gradient: 'from-orange-400 to-red-500',       xp: 110, type: 'legacy', desc: 'Contas maiores' },
 ];
 
 type Tab = 'fundamental1' | 'fundamental2' | 'infantil';
@@ -157,15 +160,15 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       {/* Tab switcher */}
       <div className="mx-4 mt-8 mb-5 bg-white/10 rounded-2xl p-1 flex gap-1 max-w-lg mx-auto">
         {([
-          { id: 'fundamental2', label: '6º ao 9º Ano', emoji: '🎓' },
-          { id: 'fundamental1', label: '2º ao 5º Ano', emoji: '📚' },
-          { id: 'infantil',     label: '1º e 2º Ano',  emoji: '🌱' },
-        ] as { id: Tab; label: string; emoji: string }[]).map(t => (
+          { id: 'fundamental2', label: '6º ao 9º Ano', Icon: GraduationCap },
+          { id: 'fundamental1', label: '2º ao 5º Ano', Icon: BookOpen },
+          { id: 'infantil',     label: '1º e 2º Ano',  Icon: Sprout },
+        ] as { id: Tab; label: string; Icon: React.FC<{className?: string}> }[]).map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`flex-1 py-2.5 rounded-xl text-xs font-black transition flex items-center justify-center gap-1.5 ${
               tab === t.id ? 'bg-white text-slate-800 shadow' : 'text-white/60 hover:text-white/80'
             }`}>
-            <span>{t.emoji}</span>
+            <t.Icon className="w-3.5 h-3.5 shrink-0" />
             <span className="hidden sm:inline">{t.label}</span>
           </button>
         ))}
@@ -211,7 +214,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                  <p className="text-yellow-400 text-xs font-black uppercase tracking-widest">✨ Novo — Professor fala tudo!</p>
+                  <p className="text-yellow-400 text-xs font-black uppercase tracking-widest">Novo — Professor fala tudo!</p>
                 </div>
                 <div className="space-y-3">
                   {EARLY_CATEGORIES.map((cat, i) => (
@@ -221,7 +224,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                       onClick={() => goToActivity(cat.id, cat.type)}
                       className="w-full bg-white rounded-2xl shadow-lg overflow-hidden text-left flex items-stretch">
                       <div className={`bg-gradient-to-b ${cat.gradient} w-16 flex items-center justify-center shrink-0`}>
-                        <span className="text-4xl">{cat.emoji}</span>
+                        <Illustration name={cat.illustration} className="w-12 h-12" />
                       </div>
                       <div className="flex-1 p-4 flex flex-col justify-center">
                         <p className="font-black text-slate-800 text-base leading-tight">{cat.title}</p>
@@ -253,8 +256,8 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                       whileTap={{ scale: 0.96 }}
                       onClick={() => goToActivity(cat.id, cat.type)}
                       className="bg-white/10 hover:bg-white/15 rounded-2xl p-4 text-left transition-all border border-white/10">
-                      <div className={`bg-gradient-to-br ${cat.gradient} w-10 h-10 rounded-xl flex items-center justify-center mb-3 shadow-sm text-2xl`}>
-                        {cat.emoji}
+                      <div className={`bg-gradient-to-br ${cat.gradient} w-10 h-10 rounded-xl flex items-center justify-center mb-3 shadow-sm`}>
+                        <cat.Icon className="w-5 h-5 text-white" />
                       </div>
                       <p className="text-white font-black text-sm leading-tight mb-0.5">{cat.title}</p>
                       <p className="text-white/40 text-xs font-semibold mb-1.5">{cat.desc}</p>

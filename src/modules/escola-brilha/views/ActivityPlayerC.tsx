@@ -298,8 +298,8 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson }) => {
             {completed && currentScreen.id === 'desafio' && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
                 <div className={`${ac.light} ${ac.border} border-2 rounded-2xl p-4 text-center`}>
-                  <p className={`text-xl font-black ${ac.text}`}>🎉 Missão Concluída!</p>
-                  <p className="text-slate-500 text-sm mt-1">+{lesson.xp} XP • BNCC {lesson.bncc_code} ✓</p>
+                  <p className={`text-xl font-black ${ac.text}`}>Missão Concluída!</p>
+                  <p className="text-slate-500 text-sm mt-1">+{lesson.xp} XP • BNCC {lesson.bncc_code}</p>
                 </div>
                 <button onClick={() => navigate({ to: '/escola-brilha' })}
                   className={`w-full ${ac.bg} text-white font-black py-3.5 rounded-2xl shadow-md hover:opacity-90 active:scale-[0.98] transition`}>
@@ -321,7 +321,7 @@ const MissaoScreen: React.FC<{ lesson: ActivityLessonC; ac: any }> = ({ lesson, 
     <div className="space-y-4">
       {/* Mission header card */}
       <div className={`bg-gradient-to-br ${lesson.color.from} ${lesson.color.to} rounded-2xl p-5 text-white relative overflow-hidden`}>
-        <div className="absolute top-3 right-3 opacity-20 text-7xl pointer-events-none select-none">{s.context_emoji}</div>
+        <div className="absolute top-3 right-3 opacity-10 w-20 h-20 rounded-full bg-white pointer-events-none select-none" />
         <div className={`inline-block text-xs font-black px-2 py-0.5 rounded-full bg-white/20 mb-2 uppercase tracking-widest`}>MISSÃO</div>
         <h2 className="text-lg font-black leading-snug mb-4">{lesson.mission_question}</h2>
         <p className="text-xs font-bold text-white/80 mb-2">{s.intro}</p>
@@ -339,7 +339,9 @@ const MissaoScreen: React.FC<{ lesson: ActivityLessonC; ac: any }> = ({ lesson, 
 
       {/* Context fact */}
       <div className="bg-white border border-slate-100 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
-        <span className="text-3xl shrink-0">{s.context_emoji}</span>
+        <div className={`w-10 h-10 rounded-xl ${ac.bg} flex items-center justify-center shrink-0`}>
+          <Lightbulb className="w-5 h-5 text-white" />
+        </div>
         <p className="text-slate-600 font-semibold text-sm leading-snug">{s.context_text}</p>
       </div>
 
@@ -403,7 +405,7 @@ const ExploracaoScreen: React.FC<{
             {s.pontos_destaque.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
                 className="bg-white border border-slate-100 rounded-xl p-3 flex items-start gap-3 shadow-sm">
-                <span className="text-xl shrink-0">{p.emoji}</span>
+                <div className="w-2 h-2 rounded-full bg-slate-300 mt-1.5 shrink-0" />
                 <p className="text-slate-700 font-medium text-sm">{p.text}</p>
               </motion.div>
             ))}
@@ -431,8 +433,8 @@ const PontosChaveScreen: React.FC<{ lesson: ActivityLessonC; pointsVisible: numb
             {pointsVisible.includes(i) && (
               <motion.div initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ type: 'spring', stiffness: 160 }}
                 className="bg-white border border-slate-100 rounded-2xl p-4 flex gap-3 shadow-sm">
-                <div className={`w-10 h-10 rounded-xl ${ac.bg} flex items-center justify-center text-lg shrink-0`}>
-                  {pt.icon}
+                <div className={`w-10 h-10 rounded-xl ${ac.bg} flex items-center justify-center text-sm font-black text-white shrink-0`}>
+                  {i + 1}
                 </div>
                 <div>
                   <p className="font-black text-slate-800 text-sm">{pt.title}</p>
@@ -459,7 +461,9 @@ const ExemploScreen: React.FC<{ lesson: ActivityLessonC; pointsVisible: number[]
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <span className="text-2xl">{s.scenario_emoji}</span>
+        <div className={`w-9 h-9 rounded-xl ${ac.bg} flex items-center justify-center shrink-0`}>
+          <BarChart3 className="w-5 h-5 text-white" />
+        </div>
         <div>
           <p className="text-slate-700 font-black text-base leading-tight">{s.title}</p>
           <p className={`text-sm font-bold ${ac.text}`}>{s.scenario}</p>
@@ -478,7 +482,9 @@ const ExemploScreen: React.FC<{ lesson: ActivityLessonC; pointsVisible: number[]
         <>
           {/* Scenario card (non-math lessons) */}
           <div className={`bg-gradient-to-br ${lesson.color.from} ${lesson.color.to} rounded-2xl p-4 text-white flex items-center gap-3`}>
-            <span className="text-4xl shrink-0">{s.scenario_emoji}</span>
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+              <BarChart3 className="w-5 h-5 text-white" />
+            </div>
             <p className="font-semibold text-sm leading-snug">{s.scenario}</p>
           </div>
 

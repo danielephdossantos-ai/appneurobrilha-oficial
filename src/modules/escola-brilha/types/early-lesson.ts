@@ -1,3 +1,5 @@
+import type { IllustrationName } from '@/components/Illustration';
+
 export type VowelTeachStep = {
   kind: 'vowel-teach';
   id: string;
@@ -5,7 +7,7 @@ export type VowelTeachStep = {
   color: string;
   bg: string;
   text: string;
-  emoji: string;
+  illustration: IllustrationName;
   word: string;
   word2?: string;
   speech: string;
@@ -24,7 +26,7 @@ export type VowelPracticeStep = {
 export type CountTeachStep = {
   kind: 'count-teach';
   id: string;
-  emoji: string;
+  illustration: IllustrationName;
   count: number;
   speech: string;
   count_words: string[];
@@ -33,7 +35,7 @@ export type CountTeachStep = {
 export type CountPracticeStep = {
   kind: 'count-practice';
   id: string;
-  emoji: string;
+  illustration: IllustrationName;
   count: number;
   question_speech: string;
   options: number[];
@@ -42,7 +44,7 @@ export type CountPracticeStep = {
 export type SubtractStep = {
   kind: 'subtract';
   id: string;
-  emoji: string;
+  illustration: IllustrationName;
   total: number;
   remove: number;
   teach_speech: string;
@@ -54,7 +56,7 @@ export type SubtractStep = {
 export type IntroStep = {
   kind: 'intro';
   id: string;
-  emoji: string;
+  illustration: IllustrationName;
   title: string;
   speech: string;
 };

@@ -7,7 +7,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
     {
       kind: 'intro',
       id: 'intro',
-      emoji: '🔤',
+      illustration: 'vowels-icon',
       title: 'As Vogais',
       speech: 'Olá! Vou te ensinar as vogais! As vogais são letras muito especiais. Elas são: A, E, I, O, U! Vamos aprender juntos?',
     },
@@ -20,7 +20,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       color: 'text-rose-600',
       bg: 'bg-rose-100',
       text: 'border-rose-400',
-      emoji: '🍎',
+      illustration: 'pineapple',
       word: 'Abacaxi',
       word2: 'Abelha',
       speech: 'A! Essa é a letra A! A de Abacaxi! A de Abelha! Repita comigo: A!',
@@ -47,7 +47,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       color: 'text-emerald-600',
       bg: 'bg-emerald-100',
       text: 'border-emerald-400',
-      emoji: '🐘',
+      illustration: 'elephant',
       word: 'Elefante',
       word2: 'Estrela',
       speech: 'E! Essa é a letra E! E de Elefante! E de Estrela! Repita comigo: E!',
@@ -74,7 +74,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       color: 'text-amber-600',
       bg: 'bg-amber-100',
       text: 'border-amber-400',
-      emoji: '🦎',
+      illustration: 'iguana',
       word: 'Iguana',
       word2: 'Igreja',
       speech: 'I! Essa é a letra I! I de Iguana! I de Igreja! Repita comigo: I!',
@@ -101,7 +101,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       color: 'text-blue-600',
       bg: 'bg-blue-100',
       text: 'border-blue-400',
-      emoji: '🐑',
+      illustration: 'sheep',
       word: 'Ovelha',
       word2: 'Ovo',
       speech: 'O! Essa é a letra O! O de Ovelha! O de Ovo! Repita comigo: O!',
@@ -128,7 +128,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       color: 'text-violet-600',
       bg: 'bg-violet-100',
       text: 'border-violet-400',
-      emoji: '🍇',
+      illustration: 'grape',
       word: 'Uva',
       word2: 'Urso',
       speech: 'U! Essa é a letra U! U de Uva! U de Urso! Repita comigo: U!',
@@ -158,16 +158,14 @@ export const CONTAGEM_LESSON: EarlyLesson = {
     {
       kind: 'intro',
       id: 'intro',
-      emoji: '🔢',
+      illustration: 'counting-icon',
       title: 'Vamos Contar!',
       speech: 'Olá! Agora vamos aprender a contar! Olha como é divertido! Vamos lá!',
     },
-
-    /* Count 1–3 */
     {
       kind: 'count-teach',
       id: 'teach-3',
-      emoji: '🐶',
+      illustration: 'dog',
       count: 3,
       speech: 'Olha que legal! Vamos contar os cachorrinhos juntos!',
       count_words: COUNT_WORDS.slice(0, 3),
@@ -175,35 +173,31 @@ export const CONTAGEM_LESSON: EarlyLesson = {
     {
       kind: 'count-practice',
       id: 'practice-3',
-      emoji: '🐶',
+      illustration: 'dog',
       count: 3,
       question_speech: 'Muito bem! Quantos cachorrinhos você vê? Toque no número certo!',
       options: [2, 3, 4],
     },
-
-    /* Count 1–5 */
     {
       kind: 'count-teach',
       id: 'teach-5',
-      emoji: '⭐',
+      illustration: 'star',
       count: 5,
-      speech: 'Agora vamos contar as estrelinha! Pronto? Vamos lá!',
+      speech: 'Agora vamos contar as estrelinhas! Pronto? Vamos lá!',
       count_words: COUNT_WORDS.slice(0, 5),
     },
     {
       kind: 'count-practice',
       id: 'practice-5',
-      emoji: '⭐',
+      illustration: 'star',
       count: 5,
       question_speech: 'Quantas estrelinhas tem aqui? Toque no número!',
       options: [4, 5, 6],
     },
-
-    /* Count 1–7 */
     {
       kind: 'count-teach',
       id: 'teach-7',
-      emoji: '🐟',
+      illustration: 'fish',
       count: 7,
       speech: 'Uau! Olha os peixinhos! Vamos contar todos eles!',
       count_words: COUNT_WORDS.slice(0, 7),
@@ -211,17 +205,15 @@ export const CONTAGEM_LESSON: EarlyLesson = {
     {
       kind: 'count-practice',
       id: 'practice-7',
-      emoji: '🐟',
+      illustration: 'fish',
       count: 7,
       question_speech: 'Quantos peixinhos tem? Você sabe! Toque no número!',
       options: [6, 7, 8],
     },
-
-    /* Count 1–10 */
     {
       kind: 'count-teach',
       id: 'teach-10',
-      emoji: '🍭',
+      illustration: 'lollipop',
       count: 10,
       speech: 'Agora o maior desafio! Dez pirulitos! Vamos contar juntos!',
       count_words: COUNT_WORDS.slice(0, 10),
@@ -229,7 +221,7 @@ export const CONTAGEM_LESSON: EarlyLesson = {
     {
       kind: 'count-practice',
       id: 'practice-10',
-      emoji: '🍭',
+      illustration: 'lollipop',
       count: 10,
       question_speech: 'Quantos pirulitos tem? Você consegue! Toque no número!',
       options: [8, 9, 10],
@@ -244,16 +236,14 @@ export const SUBTRACAO_LESSON: EarlyLesson = {
     {
       kind: 'intro',
       id: 'intro',
-      emoji: '➖',
+      illustration: 'subtract-icon',
       title: 'Subtrair é Tirar!',
       speech: 'Olá! Agora vamos aprender subtração! Subtrair significa tirar! Quando você tira alguma coisa, a quantidade fica menor! Vamos ver como funciona!',
     },
-
-    /* 4 − 1 = 3 */
     {
       kind: 'subtract',
       id: 'sub-4-1',
-      emoji: '🍎',
+      illustration: 'apple',
       total: 4,
       remove: 1,
       teach_speech: 'Olha! Temos quatro maçãs aqui! Quatro!',
@@ -261,25 +251,21 @@ export const SUBTRACAO_LESSON: EarlyLesson = {
       question_speech: 'Quantas maçãs sobraram? Toque no número certo!',
       options: [2, 3, 4],
     },
-
-    /* 5 − 2 = 3 */
     {
       kind: 'subtract',
       id: 'sub-5-2',
-      emoji: '🍌',
+      illustration: 'banana',
       total: 5,
       remove: 2,
       teach_speech: 'Agora temos cinco bananas! Vamos contar? Um, dois, três, quatro, cinco!',
-      remove_speech: 'Ops! Vamos tirar duas bananas! Olha só!',
+      remove_speech: 'Vamos tirar duas bananas! Olha só!',
       question_speech: 'Quantas bananas ficaram? Toque no número!',
       options: [2, 3, 4],
     },
-
-    /* 6 − 3 = 3 */
     {
       kind: 'subtract',
       id: 'sub-6-3',
-      emoji: '⭐',
+      illustration: 'star',
       total: 6,
       remove: 3,
       teach_speech: 'Seis estrelinhas brilhando! Que lindo! Seis estrelas!',
@@ -287,29 +273,25 @@ export const SUBTRACAO_LESSON: EarlyLesson = {
       question_speech: 'Quantas estrelas ainda brilham? Toque no número!',
       options: [2, 3, 4],
     },
-
-    /* 7 − 4 = 3 */
     {
       kind: 'subtract',
       id: 'sub-7-4',
-      emoji: '🐠',
+      illustration: 'tropical-fish',
       total: 7,
       remove: 4,
       teach_speech: 'Sete peixinhos nadando! Que turma grande!',
-      remove_speech: 'Quatro peixinhos nadaram para longe! Tchau peixinhos!',
+      remove_speech: 'Quatro peixinhos nadaram para longe!',
       question_speech: 'Quantos peixinhos ficaram? Você sabe!',
       options: [2, 3, 4],
     },
-
-    /* 8 − 5 = 3 */
     {
       kind: 'subtract',
       id: 'sub-8-5',
-      emoji: '🎈',
+      illustration: 'balloon',
       total: 8,
       remove: 5,
-      teach_speech: 'Uau! Oito balões coloridos! Que festa!',
-      remove_speech: 'Cinco balões voaram para o céu! Lá vão eles!',
+      teach_speech: 'Oito balões coloridos! Que festa!',
+      remove_speech: 'Cinco balões voaram para o céu!',
       question_speech: 'Quantos balões ainda estão aqui? Toque no número!',
       options: [2, 3, 4],
     },

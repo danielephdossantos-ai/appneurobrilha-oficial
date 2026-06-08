@@ -4,6 +4,7 @@ import { Volume2, ArrowLeft } from 'lucide-react';
 import { LessonEnvironment } from '../components/LessonEnvironment';
 import { MascotTeacher } from '../components/MascotTeacher';
 import { AudioSpeechService } from '../services/AudioSpeechService';
+import { Illustration } from '@/components/Illustration';
 import {
   EarlyLesson, EarlyStep,
   IntroStep, VowelTeachStep, VowelPracticeStep,
@@ -12,7 +13,6 @@ import {
 
 interface Props { lesson: EarlyLesson; onBack?: () => void }
 
-/* ─── helpers ─────────────────────────────────────────── */
 const speak = (text: string, slow = false) =>
   AudioSpeechService.speakWithOptions(text, { rate: slow ? 0.72 : 0.88, pitch: 1.25 });
 
@@ -116,12 +116,12 @@ interface StepProps {
 
 const StepRenderer: React.FC<StepProps> = (props) => {
   switch (props.step.kind) {
-    case 'intro':       return <IntroSlide {...props} step={props.step} />;
-    case 'vowel-teach': return <VowelTeachSlide {...props} step={props.step} />;
+    case 'intro':          return <IntroSlide {...props} step={props.step} />;
+    case 'vowel-teach':    return <VowelTeachSlide {...props} step={props.step} />;
     case 'vowel-practice': return <VowelPracticeSlide {...props} step={props.step} />;
-    case 'count-teach': return <CountTeachSlide {...props} step={props.step} />;
+    case 'count-teach':    return <CountTeachSlide {...props} step={props.step} />;
     case 'count-practice': return <CountPracticeSlide {...props} step={props.step} />;
-    case 'subtract':    return <SubtractSlide {...props} step={props.step} />;
+    case 'subtract':       return <SubtractSlide {...props} step={props.step} />;
   }
 };
 
@@ -143,8 +143,13 @@ const IntroSlide: React.FC<StepProps & { step: IntroStep }> = ({ step, setIsSpea
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border-4 border-violet-200 p-8 flex flex-col items-center gap-5 text-center">
-      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
-        className="text-8xl">{step.emoji}</motion.div>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+      >
+        <Illustration name={step.illustration} className="w-28 h-28" />
+      </motion.div>
       <h1 className="text-3xl font-black text-slate-800">{step.title}</h1>
       <p className="text-slate-500 font-semibold text-sm">O professor vai te ajudar!</p>
       <div className="flex gap-1 mt-2">
@@ -181,44 +186,35 @@ const VowelTeachSlide: React.FC<StepProps & { step: VowelTeachStep }> = ({ step,
 
   return (
     <div className={`rounded-3xl border-4 ${step.text} ${step.bg} p-6 flex flex-col items-center gap-4 shadow-xl`}>
-      {/* Giant letter */}
       <AnimatePresence>
         {show && (
           <motion.div
             initial={{ scale: 0, rotate: -15 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-            className={`text-[10rem] leading-none font-black ${step.color} drop-shadow-md select-none`}
+            className={`text-[9rem] leading-none font-black ${step.color} drop-shadow-md select-none`}
           >
             {step.vowel}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Emoji + word */}
       <AnimatePresence>
         {show && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, type: 'spring' }}
-            className="flex flex-col items-center gap-2"
+            className="flex flex-col items-center gap-3"
           >
-            <div className="text-7xl">{step.emoji}</div>
+            <Illustration name={step.illustration} className="w-28 h-28" alt={step.word} />
             <div className={`text-2xl font-black ${step.color}`}>{step.word}</div>
             {step.word2 && (
-              <div className="text-base font-bold text-slate-500">{step.vowel} de {step.word2} também!</div>
+              <div className="text-sm font-bold text-slate-500">{step.vowel} de {step.word2} também!</div>
             )}
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Pulse ring on letter */}
-      <motion.div
-        animate={{ scale: [1, 1.04, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className={`absolute w-40 h-40 rounded-full border-4 ${step.text} pointer-events-none`}
-      />
     </div>
   );
 };
@@ -246,7 +242,6 @@ const VowelPracticeSlide: React.FC<StepProps & { step: VowelPracticeStep }> = ({
     setChosen(letter);
     const ok = letter === step.target;
     setFeedback(ok ? 'ok' : 'err');
-
     if (ok) {
       setIsSpeaking(true);
       await speak(`Isso mesmo! ${letter}! Que incrível! Você acertou!`);
@@ -265,7 +260,6 @@ const VowelPracticeSlide: React.FC<StepProps & { step: VowelPracticeStep }> = ({
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border-4 border-slate-100 p-6 flex flex-col items-center gap-6">
-      {/* Target hint */}
       <div className="flex flex-col items-center gap-1">
         <p className="text-slate-500 font-bold text-sm">Toque na letra</p>
         <div className={`text-8xl font-black ${step.target_color} ${step.target_bg} rounded-2xl px-6 py-2 leading-none`}>
@@ -273,7 +267,6 @@ const VowelPracticeSlide: React.FC<StepProps & { step: VowelPracticeStep }> = ({
         </div>
       </div>
 
-      {/* Options */}
       <div className="flex gap-4 flex-wrap justify-center">
         {visible && step.options.map((opt, i) => {
           const isChosen = chosen === opt.letter;
@@ -298,7 +291,6 @@ const VowelPracticeSlide: React.FC<StepProps & { step: VowelPracticeStep }> = ({
         })}
       </div>
 
-      {/* Feedback banner */}
       <AnimatePresence>
         {feedback && (
           <motion.div
@@ -308,7 +300,7 @@ const VowelPracticeSlide: React.FC<StepProps & { step: VowelPracticeStep }> = ({
             className={`w-full py-4 rounded-2xl text-center text-2xl font-black
               ${feedback === 'ok' ? 'bg-emerald-400 text-white' : 'bg-rose-400 text-white'}`}
           >
-            {feedback === 'ok' ? '🎉 Parabéns!' : '🔄 Tente de novo!'}
+            {feedback === 'ok' ? 'Parabéns!' : 'Tente de novo!'}
           </motion.div>
         )}
       </AnimatePresence>
@@ -356,11 +348,10 @@ const CountTeachSlide: React.FC<StepProps & { step: CountTeachStep }> = ({ step,
     return () => { live = false; };
   }, [step.id]);
 
-  const emojis = Array.from({ length: step.count }, (_, i) => i);
-  const columns = step.count <= 5 ? step.count : Math.ceil(step.count / 2);
+  const itemsPerRow = step.count <= 5 ? step.count : 5;
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border-4 border-amber-200 p-6 flex flex-col items-center gap-5">
+    <div className="bg-white rounded-3xl shadow-xl border-4 border-amber-200 p-6 flex flex-col items-center gap-4">
       {/* Count badge */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -373,7 +364,6 @@ const CountTeachSlide: React.FC<StepProps & { step: CountTeachStep }> = ({ step,
         </motion.div>
       </AnimatePresence>
 
-      {/* Count word flash */}
       <AnimatePresence mode="wait">
         {currentCount && (
           <motion.div
@@ -388,21 +378,17 @@ const CountTeachSlide: React.FC<StepProps & { step: CountTeachStep }> = ({ step,
         )}
       </AnimatePresence>
 
-      {/* Emoji grid */}
-      <div
-        className="flex flex-wrap justify-center gap-2"
-        style={{ maxWidth: `${columns * 64}px` }}
-      >
-        {emojis.map(i => (
+      {/* Illustration grid */}
+      <div className="flex flex-wrap justify-center gap-2" style={{ maxWidth: `${itemsPerRow * 72}px` }}>
+        {Array.from({ length: step.count }, (_, i) => i).map(i => (
           <AnimatePresence key={i}>
             {shown > i && (
               <motion.div
                 initial={{ scale: 0, opacity: 0, y: -20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 280, damping: 16 }}
-                className="text-5xl leading-none"
               >
-                {step.emoji}
+                <Illustration name={step.illustration} className="w-14 h-14" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -451,23 +437,18 @@ const CountPracticeSlide: React.FC<StepProps & { step: CountPracticeStep }> = ({
     }
   };
 
-  const emojis = Array.from({ length: step.count });
-
   return (
     <div className="bg-white rounded-3xl shadow-xl border-4 border-amber-200 p-6 flex flex-col items-center gap-5">
-      {/* Objects to count */}
       <div className="flex flex-wrap justify-center gap-2 min-h-[80px] items-center">
-        {emojis.map((_, i) => (
-          <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.06, type: 'spring' }}
-            className="text-5xl leading-none">
-            {step.emoji}
+        {Array.from({ length: step.count }).map((_, i) => (
+          <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.06, type: 'spring' }}>
+            <Illustration name={step.illustration} className="w-14 h-14" />
           </motion.div>
         ))}
       </div>
 
       <p className="text-slate-500 font-bold text-base text-center">Quantos você vê?</p>
 
-      {/* Number buttons */}
       <div className="flex gap-4 justify-center flex-wrap">
         {showButtons && step.options.map((n, i) => {
           const isChosen = chosen === n;
@@ -499,7 +480,7 @@ const CountPracticeSlide: React.FC<StepProps & { step: CountPracticeStep }> = ({
           <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ opacity: 0 }}
             className={`w-full py-4 rounded-2xl text-center text-2xl font-black
               ${feedback === 'ok' ? 'bg-emerald-400 text-white' : 'bg-rose-400 text-white'}`}>
-            {feedback === 'ok' ? '🎉 Isso mesmo!' : '🔄 Tente de novo!'}
+            {feedback === 'ok' ? 'Isso mesmo!' : 'Tente de novo!'}
           </motion.div>
         )}
       </AnimatePresence>
@@ -576,12 +557,10 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
     }
   };
 
-  /* Which objects to show and how */
   const allItems = Array.from({ length: total }, (_, i) => i);
-  const removedStart = remaining; /* last `remove` items are being removed */
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border-4 border-rose-200 p-6 flex flex-col items-center gap-5">
+    <div className="bg-white rounded-3xl shadow-xl border-4 border-rose-200 p-6 flex flex-col items-center gap-4">
       {/* Operation header */}
       <div className="flex items-center justify-center gap-3 text-3xl font-black text-slate-700">
         <span className="bg-rose-100 text-rose-600 px-3 py-1 rounded-xl">{total}</span>
@@ -591,20 +570,20 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
         <AnimatePresence mode="wait">
           {subPhase === 'question' ? (
             <motion.span key="reveal" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring' }}
-              className="bg-emerald-100 text-emerald-600 px-3 py-1 rounded-xl">
-              ?
-            </motion.span>
+              className="bg-emerald-100 text-emerald-600 px-3 py-1 rounded-xl">?</motion.span>
           ) : (
             <motion.span key="q" className="bg-slate-100 text-slate-400 px-3 py-1 rounded-xl">?</motion.span>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Emoji objects */}
+      {/* Illustration objects */}
       <div className="flex flex-wrap justify-center gap-2 min-h-[72px] items-center">
         {allItems.map(i => {
-          const isRemoved = i >= removedStart;
-          const shouldShow = subPhase === 'show-all' || (subPhase === 'removing') || (subPhase === 'question' && !isRemoved);
+          const isRemoved = i >= remaining;
+          const shouldShow = subPhase === 'show-all'
+            || subPhase === 'removing'
+            || (subPhase === 'question' && !isRemoved);
           return (
             <AnimatePresence key={i} mode="wait">
               {shouldShow && (
@@ -615,11 +594,9 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
                   transition={{ type: 'spring', stiffness: 240, damping: 18 }}
                   className="relative"
                 >
-                  <span className={`text-5xl leading-none block transition-all duration-300
-                    ${isRemoved && subPhase === 'removing' ? 'opacity-40 grayscale' : ''}`}>
-                    {step.emoji}
-                  </span>
-                  {/* X overlay for removed items during 'removing' phase */}
+                  <div className={`transition-all duration-300 ${isRemoved && subPhase === 'removing' ? 'opacity-35 grayscale' : ''}`}>
+                    <Illustration name={step.illustration} className="w-14 h-14" />
+                  </div>
                   <AnimatePresence>
                     {isRemoved && subPhase === 'removing' && (
                       <motion.div
@@ -628,7 +605,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
                         exit={{ scale: 0 }}
                         className="absolute inset-0 flex items-center justify-center"
                       >
-                        <span className="text-4xl font-black text-red-500">✕</span>
+                        <span className="text-4xl font-black text-red-500 drop-shadow">X</span>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -639,16 +616,14 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
         })}
       </div>
 
-      {/* Phase label */}
       <AnimatePresence mode="wait">
         <motion.p key={subPhase} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-slate-500 font-bold text-sm text-center">
-          {subPhase === 'show-all' && `Temos ${total} ${step.emoji}`}
-          {subPhase === 'removing' && `Tirando ${remove}... ✕`}
+          {subPhase === 'show-all' && `Temos ${total} ao todo`}
+          {subPhase === 'removing' && `Tirando ${remove}...`}
           {subPhase === 'question' && `Sobraram quantos?`}
         </motion.p>
       </AnimatePresence>
 
-      {/* Number buttons */}
       <AnimatePresence>
         {subPhase === 'question' && showButtons && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
@@ -656,9 +631,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
             {step.options.map((n, i) => {
               const isChosen = chosen === n;
               const isCorrect = n === remaining;
-              const bg = isChosen
-                ? isCorrect ? 'bg-emerald-400' : 'bg-rose-400'
-                : 'bg-rose-500';
+              const bg = isChosen ? (isCorrect ? 'bg-emerald-400' : 'bg-rose-400') : 'bg-rose-500';
               const border = isChosen
                 ? isCorrect ? 'border-emerald-300 ring-4 ring-emerald-200' : 'border-red-300 ring-4 ring-red-200'
                 : 'border-rose-700';
@@ -680,13 +653,12 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({ step, set
         )}
       </AnimatePresence>
 
-      {/* Feedback */}
       <AnimatePresence>
         {feedback && (
           <motion.div initial={{ scale: 0.5 }} animate={{ scale: 1 }} exit={{ opacity: 0 }}
             className={`w-full py-4 rounded-2xl text-center text-2xl font-black
               ${feedback === 'ok' ? 'bg-emerald-400 text-white' : 'bg-rose-400 text-white'}`}>
-            {feedback === 'ok' ? '🎉 Isso mesmo!' : '🔄 Tente de novo!'}
+            {feedback === 'ok' ? 'Isso mesmo!' : 'Tente de novo!'}
           </motion.div>
         )}
       </AnimatePresence>
@@ -703,19 +675,20 @@ const CelebrationScreen: React.FC<{ lesson: EarlyLesson; onBack?: () => void }> 
   return (
     <LessonEnvironment>
       <div className="w-full max-w-sm mx-auto px-4 pt-24 pb-48 flex flex-col items-center gap-6 text-center">
-        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 160 }}
-          className="text-[8rem] leading-none">🎉</motion.div>
+        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 160 }}>
+          <Illustration name="star" className="w-36 h-36" />
+        </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
           className="text-4xl font-black text-slate-800">Missão Cumprida!</motion.h1>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           className="bg-yellow-400 text-white rounded-2xl px-6 py-3 text-xl font-black shadow-lg">
-          ⭐ Você aprendeu {lesson.title}!
+          Você aprendeu {lesson.title}!
         </motion.div>
         {onBack && (
           <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             onClick={onBack}
             className="bg-violet-500 text-white font-black px-8 py-4 rounded-2xl text-lg shadow-lg hover:bg-violet-600 active:scale-95 transition">
-            Continuar →
+            Continuar
           </motion.button>
         )}
       </div>

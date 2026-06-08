@@ -7,12 +7,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const BiomasBrasilMap: React.FC = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const biomes = [
-    { id: 'amazonia',   name: 'Amazônia',       pct: '49%', bg: 'bg-green-600',   light: 'bg-green-50',   border: 'border-green-300',   emoji: '🌳', animals: '🐍 🦜 🐒 🌿', desc: 'Maior floresta tropical do mundo' },
-    { id: 'cerrado',    name: 'Cerrado',         pct: '22%', bg: 'bg-yellow-600',  light: 'bg-yellow-50',  border: 'border-yellow-300',  emoji: '🌾', animals: '🦁 🐦 🦌 🌵', desc: 'Savana mais biodiversa do planeta' },
-    { id: 'caatinga',   name: 'Caatinga',        pct: '10%', bg: 'bg-orange-500',  light: 'bg-orange-50',  border: 'border-orange-300',  emoji: '🌵', animals: '🐍 🦎 🐦 🌵', desc: 'Único bioma exclusivamente brasileiro' },
-    { id: 'mata',       name: 'Mata Atlântica',  pct: '13%', bg: 'bg-emerald-600', light: 'bg-emerald-50', border: 'border-emerald-300', emoji: '🌿', animals: '🐸 🦋 🐦 🐘', desc: 'Hotspot de biodiversidade global' },
-    { id: 'pantanal',   name: 'Pantanal',        pct: '2%',  bg: 'bg-blue-500',    light: 'bg-blue-50',    border: 'border-blue-300',    emoji: '🌊', animals: '🐊 🐦 🐟 🦩', desc: 'Maior área úmida do mundo' },
-    { id: 'pampa',      name: 'Pampa',           pct: '2%',  bg: 'bg-lime-500',    light: 'bg-lime-50',    border: 'border-lime-300',    emoji: '🌱', animals: '🐎 🦌 🦅 🐄', desc: 'Campos do Sul do Brasil' },
+    { id: 'amazonia',   name: 'Amazônia',       pct: '49%', bg: 'bg-green-600',   light: 'bg-green-50',   border: 'border-green-300',   label: 'AMZ', animals: 'onça, arara, macaco', desc: 'Maior floresta tropical do mundo' },
+    { id: 'cerrado',    name: 'Cerrado',         pct: '22%', bg: 'bg-yellow-600',  light: 'bg-yellow-50',  border: 'border-yellow-300',  label: 'CER', animals: 'lobo, ema, veado',  desc: 'Savana mais biodiversa do planeta' },
+    { id: 'caatinga',   name: 'Caatinga',        pct: '10%', bg: 'bg-orange-500',  light: 'bg-orange-50',  border: 'border-orange-300',  label: 'CAA', animals: 'lagartixa, canguru-rato', desc: 'Único bioma exclusivamente brasileiro' },
+    { id: 'mata',       name: 'Mata Atlântica',  pct: '13%', bg: 'bg-emerald-600', light: 'bg-emerald-50', border: 'border-emerald-300', label: 'MA',  animals: 'sapo, borboleta, perereca', desc: 'Hotspot de biodiversidade global' },
+    { id: 'pantanal',   name: 'Pantanal',        pct: '2%',  bg: 'bg-blue-500',    light: 'bg-blue-50',    border: 'border-blue-300',    label: 'PAN', animals: 'jacaré, garça, lontra', desc: 'Maior área úmida do mundo' },
+    { id: 'pampa',      name: 'Pampa',           pct: '2%',  bg: 'bg-lime-500',    light: 'bg-lime-50',    border: 'border-lime-300',    label: 'PAM', animals: 'cavalo, avestruz, capivara', desc: 'Campos do Sul do Brasil' },
   ];
 
   const active = biomes.find(b => b.id === hovered);
@@ -43,11 +43,11 @@ export const BiomasBrasilMap: React.FC = () => {
           {active && (
             <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               className={`${active.light} ${active.border} border rounded-xl p-2 flex items-center gap-2`}>
-              <span className="text-2xl">{active.emoji}</span>
+              <div className={`${active.bg} text-white text-[10px] font-black w-10 h-10 rounded-lg flex items-center justify-center shrink-0`}>{active.label}</div>
               <div>
                 <p className="font-black text-slate-800 text-sm">{active.name} — {active.pct}</p>
                 <p className="text-slate-500 text-xs">{active.desc}</p>
-                <p className="text-xs mt-0.5">{active.animals}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5 italic">{active.animals}</p>
               </div>
             </motion.div>
           )}
@@ -61,7 +61,7 @@ export const BiomasBrasilMap: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 + i * 0.08 }}
             className={`${b.light} ${b.border} border rounded-xl p-2.5 flex items-center gap-2`}>
-            <div className={`${b.bg} w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0`}>{b.emoji}</div>
+            <div className={`${b.bg} w-8 h-8 rounded-lg flex items-center justify-center shrink-0`}><span className="text-white text-[9px] font-black">{b.label}</span></div>
             <div>
               <p className="font-black text-slate-800 text-xs leading-tight">{b.name}</p>
               <p className="text-slate-500 text-[10px]">{b.pct} do Brasil</p>
@@ -78,11 +78,11 @@ export const BiomasBrasilMap: React.FC = () => {
    ════════════════════════════════════ */
 export const OceanosMap: React.FC = () => {
   const zones = [
-    { name: 'Zona de Luz',     depth: '0 – 200m',    color: 'bg-sky-400',    emoji: '🌞', text: 'Luz solar penetra. Algas e peixes coloridos.' },
-    { name: 'Zona Crepuscular',depth: '200 – 1000m',  color: 'bg-blue-600',   emoji: '🐬', text: 'Pouca luz. Lulas e tubarões vivem aqui.' },
-    { name: 'Zona Meia-noite', depth: '1000 – 4000m', color: 'bg-indigo-800', emoji: '🐙', text: 'Escuridão total. Criaturas bioluminescentes.' },
-    { name: 'Zona Abissal',    depth: '4000 – 6000m', color: 'bg-slate-900',  emoji: '🦐', text: 'Pressão enorme. Temperatura perto do 0°C.' },
-    { name: 'Zona Hadal',      depth: '> 6000m',      color: 'bg-black',      emoji: '🌑', text: 'Fossos oceânicos. Maior profundidade = 11km.' },
+    { name: 'Zona de Luz',     depth: '0 – 200m',    color: 'bg-sky-400',    label: 'SOL', text: 'Luz solar penetra. Algas e peixes coloridos.' },
+    { name: 'Zona Crepuscular',depth: '200 – 1000m',  color: 'bg-blue-600',   label: 'CRE', text: 'Pouca luz. Lulas e tubarões vivem aqui.' },
+    { name: 'Zona Meia-noite', depth: '1000 – 4000m', color: 'bg-indigo-800', label: 'NOI', text: 'Escuridão total. Criaturas bioluminescentes.' },
+    { name: 'Zona Abissal',    depth: '4000 – 6000m', color: 'bg-slate-900',  label: 'ABI', text: 'Pressão enorme. Temperatura perto do 0°C.' },
+    { name: 'Zona Hadal',      depth: '> 6000m',      color: 'bg-black',      label: 'HAD', text: 'Fossos oceânicos. Maior profundidade = 11km.' },
   ];
   const [revealed, setRevealed] = useState<number[]>([]);
   const ran = useRef(false);
@@ -106,7 +106,7 @@ export const OceanosMap: React.FC = () => {
             <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
               transition={{ type: 'spring', stiffness: 180 }}
               className="flex items-center gap-2 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-              <div className={`${z.color} w-12 h-12 flex items-center justify-center text-xl shrink-0`}>{z.emoji}</div>
+              <div className={`${z.color} w-12 h-12 flex items-center justify-center shrink-0`}><span className="text-white text-[9px] font-black">{z.label}</span></div>
               <div className="flex-1 py-2 pr-2">
                 <p className="font-black text-slate-800 text-xs">{z.name}</p>
                 <p className="text-slate-400 text-[10px] font-mono">{z.depth}</p>
@@ -125,12 +125,12 @@ export const OceanosMap: React.FC = () => {
    ════════════════════════════════════ */
 export const CelulaDiagram: React.FC = () => {
   const parts = [
-    { name: 'Membrana Plasmática', emoji: '🛡️', color: 'bg-violet-100 border-violet-300', text: 'Controla entrada e saída de substâncias.' },
-    { name: 'Citoplasma',          emoji: '💧', color: 'bg-blue-100 border-blue-300',    text: 'Meio líquido onde ficam as organelas.' },
-    { name: 'Núcleo',              emoji: '🧬', color: 'bg-pink-100 border-pink-300',    text: 'Contém o DNA — centro de controle.' },
-    { name: 'Mitocôndria',         emoji: '⚡', color: 'bg-yellow-100 border-yellow-300',text: 'Produz energia (ATP) para a célula.' },
-    { name: 'Ribossomo',           emoji: '🟢', color: 'bg-green-100 border-green-300',  text: 'Fabrica proteínas necessárias.' },
-    { name: 'Retículo Endoplasmático', emoji: '🔀', color: 'bg-orange-100 border-orange-300', text: 'Transporte interno de substâncias.' },
+    { name: 'Membrana Plasmática',     label: 'MEM', dot: 'bg-violet-500', color: 'bg-violet-100 border-violet-300', text: 'Controla entrada e saída de substâncias.' },
+    { name: 'Citoplasma',              label: 'CIT', dot: 'bg-blue-500',   color: 'bg-blue-100 border-blue-300',    text: 'Meio líquido onde ficam as organelas.' },
+    { name: 'Núcleo',                  label: 'NÚC', dot: 'bg-pink-500',   color: 'bg-pink-100 border-pink-300',    text: 'Contém o DNA — centro de controle.' },
+    { name: 'Mitocôndria',             label: 'MIT', dot: 'bg-yellow-500', color: 'bg-yellow-100 border-yellow-300',text: 'Produz energia (ATP) para a célula.' },
+    { name: 'Ribossomo',               label: 'RIB', dot: 'bg-green-500',  color: 'bg-green-100 border-green-300',  text: 'Fabrica proteínas necessárias.' },
+    { name: 'Retículo Endoplasmático', label: 'RET', dot: 'bg-orange-500', color: 'bg-orange-100 border-orange-300', text: 'Transporte interno de substâncias.' },
   ];
   const [active, setActive] = useState<string | null>(null);
 
@@ -142,8 +142,8 @@ export const CelulaDiagram: React.FC = () => {
       <div className="bg-violet-50 border-2 border-violet-200 rounded-2xl p-4 relative flex items-center justify-center min-h-[120px]">
         <div className="w-32 h-20 bg-violet-200/60 rounded-full border-2 border-violet-400 relative flex items-center justify-center">
           <div className="w-12 h-10 bg-pink-300 rounded-full border-2 border-pink-500 flex items-center justify-center text-xs font-black text-pink-700">DNA</div>
-          <div className="absolute -top-2 -right-2 text-lg">⚡</div>
-          <div className="absolute -bottom-2 -left-3 text-lg">🟢</div>
+          <div className="absolute -top-2 -right-2 bg-yellow-400 text-white text-[8px] font-black rounded-full w-6 h-6 flex items-center justify-center">ATP</div>
+          <div className="absolute -bottom-2 -left-3 bg-green-500 text-white text-[8px] font-black rounded-full w-6 h-6 flex items-center justify-center">PRO</div>
         </div>
         <div className="absolute top-2 right-3 text-[10px] font-bold text-violet-600">Toque nas partes →</div>
       </div>
@@ -156,7 +156,7 @@ export const CelulaDiagram: React.FC = () => {
             transition={{ delay: i * 0.08 }}
             onClick={() => setActive(active === p.name ? null : p.name)}
             className={`${p.color} border rounded-xl p-2.5 flex items-center gap-2 text-left transition-all`}>
-            <span className="text-xl shrink-0">{p.emoji}</span>
+            <div className={`${p.dot} text-white text-[9px] font-black w-8 h-8 rounded-lg flex items-center justify-center shrink-0`}>{p.label}</div>
             <div className="flex-1">
               <p className="font-black text-slate-800 text-xs">{p.name}</p>
               <AnimatePresence>
@@ -183,8 +183,8 @@ export const EquacaoSteps: React.FC = () => {
     { expr: '2x = 12 − 4',       color: 'bg-orange-50 border-orange-400 text-orange-800', label: 'Subtrair 4 dos dois lados' },
     { expr: '2x = 8',            color: 'bg-amber-50  border-amber-400  text-amber-800',  label: 'Resultado intermediário' },
     { expr: 'x = 8 ÷ 2',        color: 'bg-teal-50   border-teal-400   text-teal-800',   label: 'Dividir os dois lados por 2' },
-    { expr: 'x = 4  ✅',         color: 'bg-green-50  border-green-400  text-green-800',  label: 'Solução encontrada!', highlight: true },
-    { expr: '2(4) + 4 = 12  ✓', color: 'bg-violet-50 border-violet-400 text-violet-800', label: 'Verificação' },
+    { expr: 'x = 4',            color: 'bg-green-50  border-green-400  text-green-800',  label: 'Solução encontrada!', highlight: true },
+    { expr: '2(4) + 4 = 12',   color: 'bg-violet-50 border-violet-400 text-violet-800', label: 'Verificação' },
   ];
 
   return (
@@ -207,7 +207,7 @@ export const EquacaoSteps: React.FC = () => {
       ) : (
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           className="bg-green-500 text-white rounded-xl py-2 text-center font-black shadow-md">
-          🎉 Equação resolvida!
+          Equação resolvida!
         </motion.div>
       )}
     </div>
@@ -219,11 +219,11 @@ export const EquacaoSteps: React.FC = () => {
    ════════════════════════════════════ */
 export const SistemaNervosoDiagram: React.FC = () => {
   const parts = [
-    { name: 'Cérebro',      emoji: '🧠', bg: 'bg-indigo-500', size: 'text-5xl', desc: 'Pensamento, memória, emoções, consciência.' },
-    { name: 'Cerebelo',     emoji: '🔵', bg: 'bg-blue-500',   size: 'text-3xl', desc: 'Equilíbrio, postura e coordenação motora.' },
-    { name: 'Bulbo',        emoji: '🟣', bg: 'bg-violet-500', size: 'text-2xl', desc: 'Controla respiração e batimentos cardíacos.' },
-    { name: 'Medula Espinhal', emoji: '⚡', bg: 'bg-cyan-500',size: 'text-2xl', desc: 'Conduz impulsos e controla reflexos.' },
-    { name: 'Neurônios',    emoji: '🔌', bg: 'bg-teal-500',   size: 'text-2xl', desc: 'Células que transmitem impulsos elétricos.' },
+    { name: 'Cérebro',         label: 'CER', size: 'text-base', bg: 'bg-indigo-500', desc: 'Pensamento, memória, emoções, consciência.' },
+    { name: 'Cerebelo',        label: 'CBL', size: 'text-sm',   bg: 'bg-blue-500',   desc: 'Equilíbrio, postura e coordenação motora.' },
+    { name: 'Bulbo',           label: 'BUL', size: 'text-sm',   bg: 'bg-violet-500', desc: 'Controla respiração e batimentos cardíacos.' },
+    { name: 'Medula Espinhal', label: 'MED', size: 'text-sm',   bg: 'bg-cyan-500',   desc: 'Conduz impulsos e controla reflexos.' },
+    { name: 'Neurônios',       label: 'NEU', size: 'text-sm',   bg: 'bg-teal-500',   desc: 'Células que transmitem impulsos elétricos.' },
   ];
   const [active, setActive] = useState(0);
 
@@ -233,18 +233,18 @@ export const SistemaNervosoDiagram: React.FC = () => {
 
       {/* Visual diagram */}
       <div className="bg-indigo-950 rounded-2xl p-4 flex flex-col items-center gap-1">
-        <div className="text-5xl mb-1">🧠</div>
+        <div className="bg-indigo-500 text-white text-[10px] font-black px-3 py-2 rounded-2xl mb-1">CÉREBRO</div>
         <div className="w-0.5 h-4 bg-indigo-400" />
-        <div className="text-3xl">🔵</div>
-        <div className="text-2xl">🟣</div>
+        <div className="bg-blue-500 text-white text-[10px] font-black px-2 py-1.5 rounded-xl">CEREBELO</div>
+        <div className="bg-violet-500 text-white text-[10px] font-black px-2 py-1.5 rounded-xl">BULBO</div>
         <div className="w-0.5 h-8 bg-indigo-400" />
         <div className="flex gap-8">
           <div className="flex flex-col items-center gap-1">
-            <div className="text-xl">⚡</div>
+            <div className="bg-cyan-500 text-white text-[9px] font-black px-2 py-1 rounded-lg">MED.</div>
             <div className="text-[10px] text-indigo-300 font-bold text-center">Medula<br/>Espinhal</div>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <div className="text-xl">🔌</div>
+            <div className="bg-teal-500 text-white text-[9px] font-black px-2 py-1 rounded-lg">NEU.</div>
             <div className="text-[10px] text-indigo-300 font-bold text-center">Nervos<br/>Periféricos</div>
           </div>
         </div>
@@ -256,7 +256,7 @@ export const SistemaNervosoDiagram: React.FC = () => {
           <button key={p.name} onClick={() => setActive(i)}
             className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl border-2 transition shrink-0
               ${active === i ? `${p.bg} border-transparent text-white` : 'bg-white border-slate-200 text-slate-600'}`}>
-            <span className={p.size}>{p.emoji}</span>
+            <span className="text-xs font-black">{p.label}</span>
             <span className="text-[10px] font-black whitespace-nowrap">{p.name}</span>
           </button>
         ))}
@@ -274,12 +274,12 @@ export const SistemaNervosoDiagram: React.FC = () => {
    ════════════════════════════════════ */
 export const RevolucaoTimeline: React.FC = () => {
   const events = [
-    { year: '1769', event: 'Máquina a vapor aperfeiçoada por James Watt.', emoji: '♨️', color: 'bg-stone-500' },
-    { year: '1785', event: 'Tear mecânico revoluciona a produção têxtil.', emoji: '🧵', color: 'bg-stone-600' },
-    { year: '1804', event: 'Primeira locomotiva a vapor de Richard Trevithick.', emoji: '🚂', color: 'bg-stone-700' },
-    { year: '1830', event: 'Primeira ferrovia comercial Liverpool-Manchester.', emoji: '🛤️', color: 'bg-stone-700' },
-    { year: '1837', event: 'Telégrafo elétrico — comunicação a longa distância.', emoji: '📡', color: 'bg-stone-800' },
-    { year: '1870', event: '2ª Revolução Industrial: aço, petróleo, eletricidade.', emoji: '⚡', color: 'bg-zinc-800' },
+    { year: '1769', event: 'Máquina a vapor aperfeiçoada por James Watt.', color: 'bg-stone-500' },
+    { year: '1785', event: 'Tear mecânico revoluciona a produção têxtil.', color: 'bg-stone-600' },
+    { year: '1804', event: 'Primeira locomotiva a vapor de Richard Trevithick.', color: 'bg-stone-700' },
+    { year: '1830', event: 'Primeira ferrovia comercial Liverpool-Manchester.', color: 'bg-stone-700' },
+    { year: '1837', event: 'Telégrafo elétrico — comunicação a longa distância.', color: 'bg-stone-800' },
+    { year: '1870', event: '2ª Revolução Industrial: aço, petróleo, eletricidade.', color: 'bg-zinc-800' },
   ];
   const [revealed, setRevealed] = useState<number[]>([]);
   const ran = useRef(false);
@@ -306,8 +306,7 @@ export const RevolucaoTimeline: React.FC = () => {
               <div className={`${ev.color} text-white text-xs font-black px-2 py-1 rounded-lg shrink-0 min-w-[48px] text-center`}>
                 {ev.year}
               </div>
-              <div className="flex-1 bg-white border border-slate-200 rounded-xl p-2.5 flex items-start gap-2 shadow-sm">
-                <span className="text-lg shrink-0">{ev.emoji}</span>
+              <div className="flex-1 bg-white border border-slate-200 rounded-xl p-2.5 shadow-sm">
                 <p className="text-slate-700 font-medium text-xs leading-snug">{ev.event}</p>
               </div>
             </motion.div>
@@ -382,10 +381,10 @@ export const PunnettSquare: React.FC = () => {
    ════════════════════════════════════ */
 export const IluminismoVisual: React.FC = () => {
   const thinkers = [
-    { name: 'Montesquieu', idea: 'Separação dos Poderes', emoji: '⚖️', color: 'bg-yellow-500', impact: 'Base das democracias modernas.' },
-    { name: 'Rousseau',    idea: 'Contrato Social',       emoji: '✍️', color: 'bg-amber-500',  impact: 'Soberania popular — poder vem do povo.' },
-    { name: 'Voltaire',    idea: 'Liberdade de Expressão',emoji: '💬', color: 'bg-orange-500', impact: 'Crítica à intolerância e ao absolutismo.' },
-    { name: 'Locke',       idea: 'Direitos Naturais',     emoji: '📜', color: 'bg-red-500',    impact: 'Vida, liberdade e propriedade são invioláveis.' },
+    { name: 'Montesquieu', idea: 'Separação dos Poderes', label: 'MON', color: 'bg-yellow-500', impact: 'Base das democracias modernas.' },
+    { name: 'Rousseau',    idea: 'Contrato Social',       label: 'ROU', color: 'bg-amber-500',  impact: 'Soberania popular — poder vem do povo.' },
+    { name: 'Voltaire',    idea: 'Liberdade de Expressão',label: 'VOL', color: 'bg-orange-500', impact: 'Crítica à intolerância e ao absolutismo.' },
+    { name: 'Locke',       idea: 'Direitos Naturais',     label: 'LOC', color: 'bg-red-500',    impact: 'Vida, liberdade e propriedade são invioláveis.' },
   ];
   const [active, setActive] = useState<number | null>(null);
 
@@ -399,7 +398,7 @@ export const IluminismoVisual: React.FC = () => {
             transition={{ delay: i * 0.1 }}
             onClick={() => setActive(active === i ? null : i)}
             className={`${t.color} text-white rounded-2xl p-3 text-left transition-all active:scale-95 shadow-md`}>
-            <div className="text-3xl mb-1">{t.emoji}</div>
+            <div className="text-xs font-black text-white/80 mb-1">{t.label}</div>
             <p className="font-black text-sm leading-tight">{t.name}</p>
             <p className="text-white/80 text-xs mt-0.5">{t.idea}</p>
           </motion.button>
@@ -409,7 +408,7 @@ export const IluminismoVisual: React.FC = () => {
         {active !== null && (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             className="bg-yellow-50 border-2 border-yellow-300 rounded-2xl p-3">
-            <p className="font-black text-yellow-800 text-sm mb-1">{thinkers[active].emoji} {thinkers[active].name}</p>
+            <p className="font-black text-yellow-800 text-sm mb-1">{thinkers[active].name}</p>
             <p className="text-slate-700 font-medium text-sm"><strong>{thinkers[active].idea}:</strong> {thinkers[active].impact}</p>
           </motion.div>
         )}
@@ -417,7 +416,9 @@ export const IluminismoVisual: React.FC = () => {
 
       {/* Impact arrow */}
       <div className="flex items-center gap-2 bg-slate-800 rounded-2xl p-3">
-        <span className="text-2xl">💡</span>
+        <div className="w-7 h-7 rounded-lg bg-yellow-400 flex items-center justify-center shrink-0">
+          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-3.5 10.8V14a1 1 0 001 1h5a1 1 0 001-1v-1.2A6 6 0 0010 2zm-1 13h2v1a1 1 0 01-2 0v-1z"/></svg>
+        </div>
         <p className="text-white font-bold text-xs leading-snug">
           Iluminismo → Revoluções Americana (1776) e Francesa (1789) → Democracias modernas
         </p>

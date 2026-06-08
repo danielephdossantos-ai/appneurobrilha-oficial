@@ -11,7 +11,7 @@ export const SINONIMOS_LESSON: ActivityLesson = {
       instruction: 'Vamos aprender sobre',
       highlight: 'SINÔNIMOS!',
       summary: 'Sinônimos são palavras que têm significados parecidos.',
-      visual_emoji: '📖',
+      visual_emoji: '',
     },
     exploracao: {
       instruction: 'Observe as palavras com o mesmo sentido.',
@@ -29,8 +29,8 @@ export const SINONIMOS_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: 'Veja este exemplo:',
       sentences: [
-        { text: 'Ele está alegre.', emoji: '😄' },
-        { text: 'Ele está feliz.', emoji: '😄' },
+        { text: 'Ele está alegre.', emoji: '' },
+        { text: 'Ele está feliz.', emoji: '' },
       ],
       conclusion: 'As duas palavras têm o mesmo significado.',
     },
@@ -57,7 +57,7 @@ export const ANTONIMOS_LESSON: ActivityLesson = {
       instruction: 'Vamos aprender sobre',
       highlight: 'ANTÔNIMOS!',
       summary: 'Antônimos são palavras com significados opostos.',
-      visual_emoji: '↔️',
+      visual_emoji: '',
     },
     exploracao: {
       instruction: 'Observe os opostos abaixo.',
@@ -75,8 +75,8 @@ export const ANTONIMOS_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: 'Veja este exemplo:',
       sentences: [
-        { text: 'O elefante é GRANDE.', emoji: '🐘' },
-        { text: 'O rato é PEQUENO.',    emoji: '🐭' },
+        { text: 'O elefante é GRANDE.', emoji: '' },
+        { text: 'O rato é PEQUENO.',    emoji: '' },
       ],
       conclusion: 'Grande e pequeno são palavras opostas!',
     },
@@ -103,7 +103,7 @@ export const SUBSTANTIVOS_LESSON: ActivityLesson = {
       instruction: 'Vamos aprender sobre',
       highlight: 'SUBSTANTIVOS!',
       summary: 'Substantivos são palavras que dão nome às coisas.',
-      visual_emoji: '✏️',
+      visual_emoji: '',
     },
     exploracao: {
       instruction: 'Veja exemplos de substantivos.',
@@ -121,8 +121,8 @@ export const SUBSTANTIVOS_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: 'Veja este exemplo:',
       sentences: [
-        { text: 'A menina leu um livro.', emoji: '📖' },
-        { text: '"menina" e "livro" são substantivos.', emoji: '✏️' },
+        { text: 'A menina leu um livro.', emoji: '' },
+        { text: '"menina" e "livro" são substantivos.', emoji: '' },
       ],
       conclusion: 'Eles nomeiam seres e objetos!',
     },
@@ -148,7 +148,7 @@ export const FRACOES_LESSON: ActivityLesson = {
       instruction: 'Vamos aprender sobre',
       highlight: 'FRAÇÕES!',
       summary: 'Fração representa uma parte de um todo.',
-      visual_emoji: '🍕',
+      visual_emoji: '',
     },
     exploracao: {
       instruction: 'Observe as frações abaixo.',
@@ -162,7 +162,7 @@ export const FRACOES_LESSON: ActivityLesson = {
         fraction: {
           numerator: 1,
           denominator: 4,
-          emoji: '🍕',
+          emoji: '',
           label: '1/4 — um quarto da pizza',
         },
       },
@@ -175,8 +175,8 @@ export const FRACOES_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: 'Veja o que aconteceu com a pizza:',
       sentences: [
-        { text: 'Uma pizza foi cortada em 4 partes iguais.', emoji: '🍕' },
-        { text: 'Comemos 1 parte — veja ela sumir!',         emoji: '😋' },
+        { text: 'Uma pizza foi cortada em 4 partes iguais.', emoji: '' },
+        { text: 'Comemos 1 parte — veja ela sumir!',         emoji: '' },
       ],
       conclusion: 'Comemos 1/4 da pizza!',
       visual: {
@@ -194,7 +194,7 @@ export const FRACOES_LESSON: ActivityLesson = {
       visual: {
         type: 'counter_grid',
         counter: {
-          items: ['🍎','🍎','🍊','🍊'],
+          items: ['A','A','B','B'],
           question: 'Metade das frutas são maçãs — quantas?',
           answer: 2,
         },
@@ -214,7 +214,7 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
       instruction: 'Vamos aprender sobre',
       highlight: 'MULTIPLICAÇÃO!',
       summary: 'Multiplicar é uma forma rápida de somar grupos iguais.',
-      visual_emoji: '🧮',
+      visual_emoji: '',
     },
     exploracao: {
       instruction: 'Observe os grupos de objetos.',
@@ -228,7 +228,7 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
         multiplication: {
           groups: 3,
           items_per_group: 4,
-          emoji: '🍬',
+          emoji: '',
         },
       },
     },
@@ -240,13 +240,13 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: 'Veja os grupos de balas aparecendo:',
       sentences: [
-        { text: '3 caixas, cada uma com 4 balas.', emoji: '📦' },
-        { text: 'Veja cada grupo aparecer e o total crescer!', emoji: '🍬' },
+        { text: '3 caixas, cada uma com 4 balas.', emoji: '' },
+        { text: 'Veja cada grupo aparecer e o total crescer!', emoji: '' },
       ],
       conclusion: '3 × 4 = 12 balas no total!',
       visual: {
         type: 'group_build',
-        group_build: { groups: 3, items_per_group: 4, emoji: '🍬', item_name: 'balas' },
+        group_build: { groups: 3, items_per_group: 4, emoji: '', item_name: 'balas' },
       },
     },
     praticar: {
@@ -259,7 +259,7 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
       visual: {
         type: 'counter_grid',
         counter: {
-          items: ['🍎','🍎','🍎','🍎','🍎', '🍊','🍊','🍊','🍊','🍊', '🍋','🍋','🍋','🍋','🍋'],
+          items: ['A','A','A','A','A', 'B','B','B','B','B', 'C','C','C','C','C'],
           question: 'Conte os grupos de frutas: 3 × 5 = ?',
           answer: 15,
         },

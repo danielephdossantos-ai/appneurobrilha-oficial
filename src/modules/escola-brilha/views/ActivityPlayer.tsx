@@ -201,7 +201,7 @@ const FractionBarVisual: React.FC<{ fraction: NonNullable<VisualConfig['fraction
           {/* Centre circle */}
           <circle cx={cx} cy={cy} r={18} fill="white" stroke="#D97706" strokeWidth="2" />
           <text x={cx} y={cy - 2} textAnchor="middle" dominantBaseline="middle"
-            fill="#D97706" fontSize="11" fontWeight="900">🍕</text>
+            fill="#D97706" fontSize="11" fontWeight="900">1/4</text>
         </svg>
       </div>
 
@@ -313,7 +313,7 @@ const CounterGridVisual: React.FC<{ counter: NonNullable<VisualConfig['counter']
 
   return (
     <div className="my-4 text-center">
-      <p className="text-xs font-bold text-slate-500 mb-2">👆 Toque para remover as frutas!</p>
+      <p className="text-xs font-bold text-slate-500 mb-2">Toque para remover os itens!</p>
       <div className="flex flex-wrap gap-2 justify-center mb-3">
         {counter.items.map((emoji, i) => (
           <motion.button
@@ -333,7 +333,7 @@ const CounterGridVisual: React.FC<{ counter: NonNullable<VisualConfig['counter']
       {showResult && (
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           className="mt-2 bg-emerald-100 border-2 border-emerald-300 rounded-2xl py-2 px-4">
-          <p className="font-black text-emerald-700">✅ Isso mesmo! {counter.answer} frutas!</p>
+          <p className="font-black text-emerald-700">Isso mesmo! {counter.answer} frutas!</p>
         </motion.div>
       )}
     </div>
@@ -392,19 +392,19 @@ const PizzaBiteVisual: React.FC<{ bite: NonNullable<VisualConfig['pizza_bite']> 
         {phase === 0 && (
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="text-sm font-black text-amber-700 bg-amber-50 rounded-xl px-3 py-1 inline-block border border-amber-200">
-            🍕 Pizza inteira — {total} pedaços iguais
+            Pizza inteira — {total} pedaços iguais
           </motion.p>
         )}
         {phase === 1 && (
           <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
             className="text-sm font-black text-red-700 bg-red-50 rounded-xl px-3 py-1 inline-block border border-red-200">
-            😋 Um pedaço foi comido — veja sumir!
+            Um pedaço foi comido — veja sumir!
           </motion.p>
         )}
         {phase === 2 && (
           <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
             className="text-sm font-black text-green-700 bg-green-50 rounded-xl px-3 py-1 inline-block border border-green-200">
-            ✅ Sobraram {remaining} pedaços de {total}
+            Sobraram {remaining} pedaços de {total}
           </motion.p>
         )}
       </div>
@@ -483,7 +483,7 @@ const PizzaBiteVisual: React.FC<{ bite: NonNullable<VisualConfig['pizza_bite']> 
 
           {/* Centre label */}
           <circle cx={cx} cy={cy} r={18} fill="white" stroke="#D97706" strokeWidth="2" />
-          <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle" fontSize="18">🍕</text>
+          <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle" fontSize="9" fontWeight="900" fill="#D97706">PIZZA</text>
         </svg>
       </div>
 
@@ -504,7 +504,7 @@ const PizzaBiteVisual: React.FC<{ bite: NonNullable<VisualConfig['pizza_bite']> 
               <div className="w-7 h-7 rounded-full bg-red-500 text-white font-black text-sm flex items-center justify-center shrink-0">N</div>
               <div className="text-left">
                 <p className="text-[10px] font-black text-red-400 uppercase tracking-wider">Numerador</p>
-                <p className="font-black text-red-800 text-base">😋 Comemos → {eaten} pedaço</p>
+                <p className="font-black text-red-800 text-base">Comemos → {eaten} pedaço</p>
               </div>
             </motion.div>
           )}
@@ -516,8 +516,8 @@ const PizzaBiteVisual: React.FC<{ bite: NonNullable<VisualConfig['pizza_bite']> 
               transition={{ type: 'spring', stiffness: 200 }}
               className="bg-green-500 text-white rounded-xl px-4 py-2.5 shadow-lg">
               <p className="text-[10px] font-black opacity-80 uppercase tracking-wider">Numerador ÷ Denominador = Fração</p>
-              <p className="font-black text-2xl mt-0.5">{eaten} ÷ {total} = {eaten}/{total} ✅</p>
-              <p className="text-sm opacity-90 mt-0.5">🍕 {eaten}/{total} da pizza foi comida!</p>
+              <p className="font-black text-2xl mt-0.5">{eaten} ÷ {total} = {eaten}/{total}</p>
+              <p className="text-sm opacity-90 mt-0.5">{eaten}/{total} da pizza foi comida!</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -815,7 +815,7 @@ export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson }) => {
             <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
               className="mt-4 flex flex-col items-center gap-3">
               <div className="text-center bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 w-full">
-                <p className="text-2xl font-black text-emerald-600">🎉 Missão Cumprida!</p>
+                <p className="text-2xl font-black text-emerald-600">Missão Cumprida!</p>
                 <p className="text-sm text-emerald-500 font-bold mt-1">+{lesson.xp} XP conquistados!</p>
               </div>
               <button onClick={() => navigate({ to: '/escola-brilha' })}
@@ -948,7 +948,7 @@ const ExplicacaoCurtaScreen: React.FC<{ lesson: ActivityLesson }> = ({ lesson })
       <div className="flex items-end justify-between px-2">
         <img src={pipaImg} alt="Pipa" className="w-20 h-20 object-contain drop-shadow-md select-none" draggable={false} />
         <div className="flex-1 mx-3 bg-blue-50 border border-blue-100 rounded-xl p-2 text-center">
-          <p className="text-blue-600 text-xs font-bold">💡 Lembre-se!</p>
+          <p className="text-blue-600 text-xs font-bold">Lembre-se!</p>
           <p className="text-blue-500 text-xs mt-0.5">{s.tip ?? 'Preste atenção!'}</p>
         </div>
         <img src={pipImg} alt="Pip" className="w-20 h-20 object-contain drop-shadow-md select-none" draggable={false} />
@@ -1006,7 +1006,6 @@ const ExemploVisualScreen: React.FC<{ lesson: ActivityLesson; speak: (t: string)
         ) : (
           /* Fallback when no visual configured */
           <div className="bg-amber-50 border-2 border-amber-100 rounded-2xl p-4 text-center">
-            <p className="text-4xl mb-2">📐</p>
             <p className="text-slate-600 font-semibold text-sm">{s.conclusion}</p>
           </div>
         )}

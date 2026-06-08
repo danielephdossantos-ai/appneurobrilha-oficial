@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Lightbulb } from 'lucide-react';
 
 type TokenRole = 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren';
 
@@ -207,7 +207,7 @@ export const MathVisualizer: React.FC<Props> = ({ build, steps, verification }) 
                         transition={{ delay: 0.2 }}
                         className={`text-center text-xs font-semibold ${ac.text} px-2`}
                       >
-                        💡 {step.explanation}
+                        <Lightbulb className="w-3 h-3 inline mr-1 shrink-0" />{step.explanation}
                       </motion.p>
                     </motion.div>
                   )}
@@ -225,7 +225,7 @@ export const MathVisualizer: React.FC<Props> = ({ build, steps, verification }) 
                   ? 'Ver resultado →'
                   : currentStep < steps.length - 1
                     ? `Próximo passo (${currentStep + 2}/${steps.length})`
-                    : 'Ver verificação ✓'
+                    : 'Ver verificação'
                 }
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -266,7 +266,7 @@ export const MathVisualizer: React.FC<Props> = ({ build, steps, verification }) 
               className="bg-white border-2 border-emerald-200 rounded-2xl p-4"
             >
               <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-2 text-center">
-                ✓ Verificação
+                Verificação
               </p>
               <p className="text-center text-slate-700 font-bold text-base font-mono">{verification}</p>
             </motion.div>
