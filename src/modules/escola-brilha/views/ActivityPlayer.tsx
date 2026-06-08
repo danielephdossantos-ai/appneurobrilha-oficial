@@ -81,49 +81,157 @@ const MathStepsVisual: React.FC<{ steps: MathStep[]; startDelay?: number }> = ({
   );
 };
 
-/** Visual fraction bar — pizza slices filling in one by one */
+/** Premium 2D SVG Pizza divided into 4 labelled slices — interactive fraction visual */
 const FractionBarVisual: React.FC<{ fraction: NonNullable<VisualConfig['fraction']> }> = ({ fraction }) => {
-  const [filled, setFilled] = useState(0);
+  const [mode, setMode] = useState(0); // 0=1/4  1=2/4  2=3/4
+  const [visibleSlices, setVisibleSlices] = useState<number[]>([]);
   const ran = useRef(false);
 
   useEffect(() => {
     if (ran.current) return;
     ran.current = true;
-    const fill = async () => {
-      for (let i = 0; i < fraction.numerator; i++) {
-        await new Promise(r => setTimeout(r, 500 + i * 500));
-        setFilled(p => p + 1);
+    const go = async () => {
+      for (let i = 0; i < 4; i++) {
+        await new Promise(r => setTimeout(r, 200 + i * 280));
+        setVisibleSlices(p => [...p, i]);
       }
     };
-    fill();
-  }, [fraction.numerator]);
+    go();
+  }, []);
+
+  const cx = 130, cy = 130, rCrust = 122, rFill = 108;
+
+  const polar = (r: number, deg: number) => ({
+    x: cx + r * Math.cos((deg * Math.PI) / 180),
+    y: cy + r * Math.sin((deg * Math.PI) / 180),
+  });
+
+  const wedge = (start: number, end: number) => {
+    const s = polar(rFill, start);
+    const e = polar(rFill, end);
+    const large = end - start > 180 ? 1 : 0;
+    return `M ${cx} ${cy} L ${s.x.toFixed(1)} ${s.y.toFixed(1)} A ${rFill} ${rFill} 0 ${large} 1 ${e.x.toFixed(1)} ${e.y.toFixed(1)} Z`;
+  };
+
+  const slices = [
+    { start: -90, end: 0,   mid: -45  },
+    { start: 0,   end: 90,  mid: 45   },
+    { start: 90,  end: 180, mid: 135  },
+    { start: 180, end: 270, mid: 225  },
+  ];
+
+  const modes = [
+    { count: 1, top: '1', bot: '4', label: '1/4', name: 'um quarto',    color: '#EF4444' },
+    { count: 2, top: '2', bot: '4', label: '2/4', name: '= ½ metade',   color: '#F97316' },
+    { count: 3, top: '3', bot: '4', label: '3/4', name: 'três quartos', color: '#8B5CF6' },
+  ];
+
+  const highlighted = modes[mode].count;
+  const modeColor   = modes[mode].color;
+
+  /* toppings per slice (decorative) */
+  const toppings = [
+    [{ dx: -28, dy: -18 }, { dx: -10, dy: -38 }],
+    [{ dx:  28, dy: -18 }, { dx:  10, dy: -38 }],
+    [{ dx:  28, dy:  18 }, { dx:  10, dy:  38 }],
+    [{ dx: -28, dy:  18 }, { dx: -10, dy:  38 }],
+  ];
 
   return (
-    <div className="my-4 text-center">
-      <div className="flex gap-2 justify-center flex-wrap mb-3">
-        {Array.from({ length: fraction.denominator }).map((_, i) => (
-          <motion.div
-            key={i}
-            animate={i < filled ? { scale: [1, 1.2, 1] } : { scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className={`w-16 h-16 rounded-2xl border-3 flex items-center justify-center text-3xl transition-all duration-300
-              ${i < filled
-                ? 'bg-violet-100 border-violet-400 shadow-lg'
-                : 'bg-slate-100 border-slate-200 opacity-30'
-              }`}
-          >
-            {i < filled ? fraction.emoji : ''}
-          </motion.div>
+    <div className="my-2 text-center select-none">
+
+      {/* SVG PIZZA */}
+      <div className="flex justify-center">
+        <svg width="260" height="260" viewBox="0 0 260 260">
+          {/* Drop shadow */}
+          <filter id="shadow"><feDropShadow dx="0" dy="3" stdDeviation="6" floodColor="#0002"/></filter>
+
+          {/* Outer crust */}
+          <circle cx={cx} cy={cy} r={rCrust} fill="#C2823A" filter="url(#shadow)" />
+          {/* Crust highlight ring */}
+          <circle cx={cx} cy={cy} r={rCrust - 2} fill="none" stroke="#E5A55A" strokeWidth="4" strokeDasharray="6 4" />
+          {/* Cheese base */}
+          <circle cx={cx} cy={cy} r={rFill} fill="#FDE68A" />
+
+          {/* Wedges */}
+          {slices.map((s, i) => {
+            if (!visibleSlices.includes(i)) return null;
+            const isLit = i < highlighted;
+            const mp = polar(rFill * 0.58, s.mid);
+            return (
+              <g key={i}>
+                <motion.path
+                  initial={{ opacity: 0, scale: 0.3 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  style={{ transformOrigin: `${cx}px ${cy}px` }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                  d={wedge(s.start, s.end)}
+                  fill={isLit ? modeColor : '#FBBF24'}
+                  stroke="#D97706"
+                  strokeWidth="1.5"
+                />
+                {/* Sauce circle on highlighted */}
+                {isLit && (
+                  <circle cx={mp.x} cy={mp.y} r={14}
+                    fill={modeColor} opacity={0.25} />
+                )}
+                {/* Decorative toppings (pepperoni) */}
+                {toppings[i].map((t, ti) => (
+                  <circle key={ti} cx={cx + t.dx} cy={cy + t.dy} r={5}
+                    fill={isLit ? '#7F1D1D' : '#B45309'} opacity={0.7} />
+                ))}
+                {/* Fraction label */}
+                <text x={mp.x} y={mp.y - 5} textAnchor="middle"
+                  fill={isLit ? 'white' : '#78350F'} fontSize="15" fontWeight="900">1</text>
+                <line x1={mp.x - 7} y1={mp.y + 1} x2={mp.x + 7} y2={mp.y + 1}
+                  stroke={isLit ? 'white' : '#78350F'} strokeWidth="1.5" />
+                <text x={mp.x} y={mp.y + 15} textAnchor="middle"
+                  fill={isLit ? 'white' : '#78350F'} fontSize="15" fontWeight="900">4</text>
+              </g>
+            );
+          })}
+
+          {/* Divider lines */}
+          {[-90, 0, 90, 180].map(a => {
+            const e = polar(rFill, a);
+            return <line key={a} x1={cx} y1={cy} x2={e.x.toFixed(1)} y2={e.y.toFixed(1)}
+              stroke="#D97706" strokeWidth="2" />;
+          })}
+
+          {/* Centre circle */}
+          <circle cx={cx} cy={cy} r={18} fill="white" stroke="#D97706" strokeWidth="2" />
+          <text x={cx} y={cy - 2} textAnchor="middle" dominantBaseline="middle"
+            fill="#D97706" fontSize="11" fontWeight="900">🍕</text>
+        </svg>
+      </div>
+
+      {/* Mode buttons */}
+      <div className="flex gap-2 justify-center mt-1">
+        {modes.map((m, i) => (
+          <button key={m.label} onClick={() => setMode(i)}
+            style={mode === i ? { background: m.color } : {}}
+            className={`px-3 py-1.5 rounded-xl font-black text-sm transition active:scale-95 shadow-sm
+              ${mode === i ? 'text-white shadow-md' : 'bg-slate-100 text-slate-600'}`}>
+            {m.label}
+          </button>
         ))}
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: filled >= fraction.numerator ? 1 : 0, y: 0 }}
-        className="inline-block bg-violet-600 text-white px-5 py-2 rounded-2xl shadow-md"
-      >
-        <span className="font-black text-2xl">{fraction.numerator}/{fraction.denominator}</span>
-        <p className="text-xs font-semibold text-violet-100 mt-0.5">{fraction.label}</p>
-      </motion.div>
+      <p className="text-xs font-bold text-slate-500 mt-1">{modes[mode].name}</p>
+
+      {/* Formula banner */}
+      <AnimatePresence mode="wait">
+        <motion.div key={mode}
+          initial={{ opacity: 0, y: 6, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0 }}
+          style={{ background: modeColor }}
+          className="mt-3 text-white rounded-2xl px-4 py-2.5 inline-block shadow-lg">
+          <p className="font-black text-xs uppercase tracking-wider opacity-80">Numerador ÷ Denominador = Fração</p>
+          <p className="font-black text-2xl mt-0.5 tracking-wide">
+            {modes[mode].top} ÷ 4 = {modes[mode].label}
+          </p>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
