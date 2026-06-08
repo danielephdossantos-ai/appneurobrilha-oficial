@@ -8,8 +8,9 @@ type SignInOptions = {
 export const lovable = {
   auth: {
     signInWithOAuth: async (provider: "google" | "apple" | "microsoft", opts?: SignInOptions) => {
+      const oauthProvider = provider === "microsoft" ? "azure" : provider;
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: provider as "google" | "apple" | "microsoft",
+        provider: oauthProvider,
         options: {
           redirectTo: opts?.redirect_uri ?? window.location.origin,
           queryParams: opts?.extraParams,

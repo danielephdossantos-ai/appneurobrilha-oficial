@@ -7,7 +7,7 @@ const childSchema = z.object({
   idade: z.number().optional(),
   perfil_neuro: z.string().optional(),
   nivel_dificuldade: z.string().optional(),
-}).passthrough();
+});
 
 const mascotSchema = z.object({
   name: z.string().optional(),
@@ -15,7 +15,7 @@ const mascotSchema = z.object({
   category: z.string().optional(),
   level: z.number().optional(),
   affinity: z.number().optional(),
-}).passthrough().nullable();
+}).nullable();
 
 const chatMessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
