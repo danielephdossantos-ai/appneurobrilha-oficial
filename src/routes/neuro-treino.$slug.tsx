@@ -292,6 +292,27 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
     case "labirinto-precisao": return <LabirintoPrecisao p={variation.payload} onDone={onConcluir} />;
     case "triagem-categorias": return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
     case "expressao-emocao": return <ExpressaoEmocao p={variation.payload} onDone={onConcluir} />;
+    // FONO CLÍNICO
+    case "discriminacao-auditiva": return <DiscriminacaoAuditiva p={variation.payload} onDone={onConcluir} />;
+    case "articulacao-sons": return <ArticulacaoSons p={variation.payload} onDone={onConcluir} />;
+    case "vocabulario-semantico": return <VocabularioSemantico p={variation.payload} onDone={onConcluir} />;
+    case "nomeacao-rapida": return <NomeacaoRapida p={variation.payload} onDone={onConcluir} />;
+    // COORDENAÇÃO MOTORA
+    case "toque-sequencia": return <ToqueSequencia p={variation.payload} onDone={onConcluir} />;
+    case "ritmo-batidas": return <RitmoBatidas p={variation.payload} onDone={onConcluir} />;
+    case "copiar-figura": return <CopiarFigura p={variation.payload} onDone={onConcluir} />;
+    case "alvo-movel": return <AlvoMovel p={variation.payload} onDone={onConcluir} />;
+    // ATENÇÃO & CONCENTRAÇÃO
+    case "achar-diferente": return <AcharDiferente p={variation.payload} onDone={onConcluir} />;
+    case "memoria-visual": return <MemoriaVisual p={variation.payload} onDone={onConcluir} />;
+    case "reacao-rapida": return <ReacaoRapida p={variation.payload} onDone={onConcluir} />;
+    case "seguir-instrucao": return <SeguirInstrucao p={variation.payload} onDone={onConcluir} />;
+    // ALFABETIZAÇÃO
+    case "letra-som": return <LetraSom p={variation.payload} onDone={onConcluir} />;
+    case "palavra-imagem": return <PalavraImagem p={variation.payload} onDone={onConcluir} />;
+    case "formando-palavras": return <FormandoPalavras p={variation.payload} onDone={onConcluir} />;
+    case "leitura-palavras": return <LeituraPalavras p={variation.payload} onDone={onConcluir} />;
+    case "completar-letra": return <CompletarLetra p={variation.payload} onDone={onConcluir} />;
   }
 }
 
@@ -1379,7 +1400,6 @@ function TriagemCategorias({ p, onDone }: any) {
 }
 
 // ============== 23. Expressão e Emoção ==============
-// Mecânica única: cena descritiva → escolher rosto que combina
 function ExpressaoEmocao({ p, onDone }: any) {
   return (
     <div className="text-center">
@@ -1395,6 +1415,676 @@ function ExpressaoEmocao({ p, onDone }: any) {
             <button key={i} onClick={()=>onDone(o === p.correta)} className="bg-card border-2 border-border rounded-2xl py-6 px-3 font-black text-lg hover:border-lilac hover:scale-105 transition-all flex flex-col items-center gap-2">
               <RenderEmoji e={emoji} label={limpo} className="w-20 h-20" />
               <span>{limpo}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ================================================================
+// NOVOS MECÂNICOS CLÍNICOS
+// ================================================================
+
+// ── FONO CLÍNICO ──────────────────────────────────────────────
+
+// 24. DISCRIMINAÇÃO AUDITIVA — par mínimo: vê/ouve palavra → escolhe figura
+function DiscriminacaoAuditiva({ p, onDone }: any) {
+  const [escolhida, setEscolhida] = useState<string | null>(null);
+  const handleClick = (palavra: string) => {
+    if (escolhida) return;
+    setEscolhida(palavra);
+    setTimeout(() => onDone(palavra === p.correta), 700);
+  };
+  return (
+    <div className="text-center space-y-6">
+      <div className="bg-gradient-to-br from-rose/20 to-rose/5 border-2 border-rose/30 rounded-3xl p-6">
+        <div className="text-xs uppercase text-muted-foreground mb-1">Ouça e escolha</div>
+        <div className="text-4xl font-black tracking-wide text-rose-600">{p.pista}</div>
+        <div className="text-sm text-muted-foreground mt-2">Qual figura tem o nome certo?</div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {p.ordem.map((palavra: string, i: number) => {
+          const emoji = p.ordem[i] === p.par1 ? p.emoji1 : p.emoji2;
+          const certa = palavra === p.correta;
+          const bg = escolhida === palavra ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : "border-border bg-card hover:border-rose/60";
+          return (
+            <button key={i} onClick={() => handleClick(palavra)}
+              className={`rounded-3xl border-2 p-5 flex flex-col items-center gap-3 transition-all font-black text-lg ${bg}`}>
+              <span className="text-5xl">{emoji}</span>
+              <span>{palavra}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 25. ARTICULAÇÃO DE SONS — vê imagem + palavra, toca sílaba em destaque para praticar
+function ArticulacaoSons({ p, onDone }: any) {
+  const [silIdx, setSilIdx] = useState(0);
+  const [done, setDone] = useState(false);
+  const handleSilaba = () => {
+    const next = silIdx + 1;
+    if (next >= p.silabas.length) { setDone(true); setTimeout(() => onDone(true), 600); }
+    else setSilIdx(next);
+  };
+  return (
+    <div className="text-center space-y-5">
+      <div className="text-7xl">{p.emoji}</div>
+      <div className="text-3xl font-black tracking-widest">
+        {p.silabas.map((s: string, i: number) => (
+          <span key={i} className={`px-1 rounded-lg transition-all ${i === silIdx && !done ? "bg-rose/30 text-rose-700 scale-110 inline-block" : i < silIdx ? "text-muted-foreground" : ""}`}>{s}</span>
+        ))}
+      </div>
+      <div className="bg-card border-2 border-rose/20 rounded-2xl p-4">
+        <div className="text-xs uppercase text-muted-foreground">Fonema em foco</div>
+        <div className="text-4xl font-black text-rose-600">{p.fonema}</div>
+      </div>
+      <button onClick={handleSilaba} disabled={done}
+        className="w-full py-5 rounded-3xl bg-rose-500 text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-50">
+        {done ? "✅ Muito bem!" : `Falar: ${p.silabas[silIdx]}`}
+      </button>
+      <div className="text-sm text-muted-foreground">{silIdx + 1} / {p.silabas.length} sílabas</div>
+    </div>
+  );
+}
+
+// 26. VOCABULÁRIO SEMÂNTICO — qual item NÃO pertence ao grupo?
+function VocabularioSemantico({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (item: string) => {
+    if (selecionado) return;
+    setSelecionado(item);
+    setTimeout(() => onDone(item === p.intruso), 700);
+  };
+  return (
+    <div className="space-y-5">
+      <div className="bg-gradient-to-br from-rose/15 to-rose/5 border-2 border-rose/25 rounded-2xl p-4 text-center">
+        <div className="text-sm uppercase text-muted-foreground mb-1">Grupo</div>
+        <div className="text-2xl font-black">{p.grupo}</div>
+        <div className="text-sm text-muted-foreground mt-1">Qual NÃO pertence aqui?</div>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {p.itens.map((item: string, i: number) => {
+          const emoji = item.trim().split(/\s+/)[0];
+          const nome = item.replace(emoji, "").trim();
+          const certo = item === p.intruso;
+          const bg = selecionado === item ? (certo ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : "border-border bg-card hover:border-rose/50";
+          return (
+            <button key={i} onClick={() => handleClick(item)}
+              className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}>
+              <span className="text-4xl">{emoji}</span>
+              <span className="font-bold text-sm">{nome}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
+function NomeacaoRapida({ p, onDone }: any) {
+  const [fase, setFase] = useState<"flash" | "resposta" | "done">("flash");
+  const [escolhido, setEscolhido] = useState<string | null>(null);
+  useEffect(() => {
+    const t = setTimeout(() => setFase("resposta"), p.flashMs);
+    return () => clearTimeout(t);
+  }, [p.flashMs]);
+  const handleClick = (opt: string) => {
+    if (fase !== "resposta" || escolhido) return;
+    setEscolhido(opt);
+    setFase("done");
+    setTimeout(() => onDone(opt === p.nome), 600);
+  };
+  return (
+    <div className="text-center space-y-5">
+      <div className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}>
+        {fase === "flash" ? (
+          <span className="text-7xl animate-pulse">{p.emoji}</span>
+        ) : (
+          <div className="text-muted-foreground font-bold">🤔 Qual era?</div>
+        )}
+      </div>
+      {fase !== "flash" && (
+        <div className="grid grid-cols-2 gap-3">
+          {p.opts.map((opt: string, i: number) => {
+            const certa = opt === p.nome;
+            const bg = escolhido === opt ? (certa ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/10") : escolhido && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
+            return (
+              <button key={i} onClick={() => handleClick(opt)}
+                className={`rounded-2xl border-2 p-4 font-black text-lg transition-all ${bg}`}>
+                {opt}
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {fase === "flash" && (
+        <div className="text-sm text-muted-foreground animate-pulse">Memorize a figura!</div>
+      )}
+    </div>
+  );
+}
+
+// ── COORDENAÇÃO MOTORA ──────────────────────────────────────
+
+// 28. TOQUE EM SEQUÊNCIA — pontos numerados, tocar em ordem
+function ToqueSequencia({ p, onDone }: any) {
+  const [proximo, setProximo] = useState(1);
+  const [acertos, setAcertos] = useState<number[]>([]);
+  const handlePonto = (id: number) => {
+    if (id !== proximo) return;
+    const novos = [...acertos, id];
+    setAcertos(novos);
+    if (novos.length === p.pontos.length) { setTimeout(() => onDone(true), 400); }
+    else setProximo(id + 1);
+  };
+  return (
+    <div className="space-y-4">
+      <div className="text-center text-sm text-muted-foreground font-bold">
+        Toque o número <span className="text-emerald-600 text-xl">{proximo}</span>
+      </div>
+      <div className="relative bg-gradient-to-br from-emerald/10 to-emerald/5 border-2 border-emerald/20 rounded-3xl" style={{ height: 280 }}>
+        {p.pontos.map((pt: any) => (
+          <button
+            key={pt.id}
+            onClick={() => handlePonto(pt.id)}
+            style={{ left: `${pt.x}%`, top: `${pt.y}%`, transform: "translate(-50%,-50%)" }}
+            className={`absolute w-12 h-12 rounded-full border-3 font-black text-lg flex items-center justify-center transition-all active:scale-90
+              ${acertos.includes(pt.id) ? "bg-emerald-500 text-white border-emerald-600 scale-90" : pt.id === proximo ? "bg-white border-emerald-500 text-emerald-700 shadow-lg scale-110 animate-pulse" : "bg-card border-border text-muted-foreground"}`}>
+            {pt.id}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 29. RITMO DE BATIDAS — exibe padrão, usuário reproduz tocando
+function RitmoBatidas({ p, onDone }: any) {
+  const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
+  const [ativo, setAtivo] = useState(-1);
+  const [tentativas, setTentativas] = useState<string[]>([]);
+  const [feedback, setFeedback] = useState<"ok" | "erro" | null>(null);
+
+  useEffect(() => {
+    if (fase !== "mostrar") return;
+    let delay = 0;
+    p.padrao.forEach((_: any, i: number) => {
+      const dur = p.durMs[i] ?? 200;
+      setTimeout(() => setAtivo(i), delay + 500);
+      setTimeout(() => setAtivo(-1), delay + 500 + dur);
+      delay += dur + 400;
+    });
+    setTimeout(() => setFase("reproduzir"), delay + 1000);
+    return () => setAtivo(-1);
+  }, [fase]);
+
+  const handleBatida = (tipo: string) => {
+    if (fase !== "reproduzir") return;
+    const novos = [...tentativas, tipo];
+    setTentativas(novos);
+    if (novos.length === p.padrao.length) {
+      const correto = novos.every((v, i) => v === p.padrao[i]);
+      setFeedback(correto ? "ok" : "erro");
+      setTimeout(() => onDone(correto), 800);
+    }
+  };
+
+  return (
+    <div className="space-y-6 text-center">
+      <div className="flex gap-2 justify-center">
+        {p.padrao.map((s: string, i: number) => (
+          <div key={i} className={`rounded-xl border-2 px-3 py-2 font-black transition-all ${ativo === i ? "bg-emerald-400 text-white border-emerald-500 scale-110" : "border-border bg-card"}`}>
+            {s === "●" ? "curto" : "longo"}
+          </div>
+        ))}
+      </div>
+      {fase === "mostrar" && <div className="text-muted-foreground text-sm animate-pulse">Preste atenção no padrão!</div>}
+      {fase === "reproduzir" && (
+        <div className="space-y-3">
+          <div className="text-sm font-bold text-emerald-700">Sua vez! ({tentativas.length}/{p.padrao.length})</div>
+          <div className="grid grid-cols-2 gap-4">
+            <button onClick={() => handleBatida("●")}
+              className="py-6 rounded-2xl bg-emerald-100 border-2 border-emerald-300 font-black text-emerald-700 active:scale-95 transition-all text-lg">
+              ● Curto
+            </button>
+            <button onClick={() => handleBatida("─")}
+              className="py-6 rounded-2xl bg-emerald-50 border-2 border-emerald-200 font-black text-emerald-600 active:scale-95 transition-all text-lg">
+              ─ Longo
+            </button>
+          </div>
+        </div>
+      )}
+      {feedback && (
+        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}>
+          {feedback === "ok" ? "✅ Perfeito!" : "❌ Tente de novo!"}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 30. COPIAR FIGURA — grade modelo à esquerda, grade em branco à direita
+function CopiarFigura({ p, onDone }: any) {
+  const [copia, setCopia] = useState<number[][]>(() => p.modelo.map((r: number[]) => r.map(() => 0)));
+  const [validado, setValidado] = useState(false);
+
+  const toggle = (r: number, c: number) => {
+    if (validado) return;
+    setCopia(prev => prev.map((row, ri) => row.map((v, ci) => ri === r && ci === c ? (v ? 0 : 1) : v)));
+  };
+  const validar = () => {
+    const correto = copia.every((row, r) => row.every((v, c) => v === p.modelo[r][c]));
+    setValidado(true);
+    setTimeout(() => onDone(correto), 700);
+  };
+
+  const CellGrid = ({ data, onClick }: { data: number[][], onClick?: (r: number, c: number) => void }) => (
+    <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}>
+      {data.map((row: number[], r: number) => row.map((v: number, c: number) => (
+        <button key={`${r}-${c}`} onClick={() => onClick?.(r, c)}
+          className={`w-10 h-10 rounded-md border-2 transition-all ${v ? "bg-emerald-500 border-emerald-600" : "bg-card border-border hover:border-emerald/50"}`} />
+      )))}
+    </div>
+  );
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="text-center">
+          <div className="text-xs font-bold text-muted-foreground mb-2">MODELO</div>
+          <CellGrid data={p.modelo} />
+        </div>
+        <div className="text-center">
+          <div className="text-xs font-bold text-muted-foreground mb-2">SUA CÓPIA</div>
+          <CellGrid data={copia} onClick={toggle} />
+        </div>
+      </div>
+      <button onClick={validar} disabled={validado}
+        className="w-full py-4 rounded-2xl bg-emerald-500 text-white font-black text-lg active:scale-95 transition-all disabled:opacity-50">
+        ✅ Pronto!
+      </button>
+    </div>
+  );
+}
+
+// 31. ALVO MÓVEL — círculo move pela tela, toca nele
+function AlvoMovel({ p, onDone }: any) {
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const [round, setRound] = useState(1);
+  const [tocou, setTocou] = useState(false);
+  const [perdeu, setPerdeu] = useState(false);
+  const angRef = useRef(0);
+  const animRef = useRef<number>();
+
+  useEffect(() => {
+    let t = 0;
+    const move = () => {
+      t += 0.02 * p.velocidade;
+      angRef.current = t;
+      setPos({ x: 50 + 35 * Math.cos(t), y: 50 + 30 * Math.sin(t * 1.3) });
+      animRef.current = requestAnimationFrame(move);
+    };
+    animRef.current = requestAnimationFrame(move);
+    const timeout = setTimeout(() => { cancelAnimationFrame(animRef.current!); if (!tocou) { setPerdeu(true); setTimeout(() => onDone(false), 600); } }, p.tempoMs);
+    return () => { cancelAnimationFrame(animRef.current!); clearTimeout(timeout); };
+  }, [round]);
+
+  const handleToque = () => {
+    if (tocou || perdeu) return;
+    setTocou(true);
+    cancelAnimationFrame(animRef.current!);
+    if (round >= p.rounds) { setTimeout(() => onDone(true), 400); }
+    else { setTimeout(() => { setTocou(false); setRound(r => r + 1); }, 400); }
+  };
+
+  return (
+    <div className="space-y-3 text-center">
+      <div className="text-sm text-muted-foreground font-bold">Rodada {round} / {p.rounds}</div>
+      <div className="relative bg-gradient-to-br from-emerald/10 to-emerald/5 border-2 border-emerald/20 rounded-3xl overflow-hidden" style={{ height: 280 }}>
+        {!perdeu && (
+          <button
+            onClick={handleToque}
+            style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%,-50%)", backgroundColor: p.cor }}
+            className="absolute w-16 h-16 rounded-full text-3xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+            {p.emoji}
+          </button>
+        )}
+        {perdeu && <div className="flex items-center justify-center h-full text-4xl">⏱️ Tempo!</div>}
+      </div>
+    </div>
+  );
+}
+
+// ── ATENÇÃO & CONCENTRAÇÃO ────────────────────────────────────
+
+// 32. ACHAR O DIFERENTE — grade com um item diferente
+function AcharDiferente({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<number | null>(null);
+  const handleClick = (idx: number) => {
+    if (selecionado !== null) return;
+    setSelecionado(idx);
+    setTimeout(() => onDone(idx === p.posAlvo), 600);
+  };
+  const cols = p.colunas ?? 3;
+  return (
+    <div className="space-y-4">
+      <div className="text-center text-sm text-muted-foreground font-bold">Encontre o elemento diferente!</div>
+      <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+        {p.grid.map((emoji: string, i: number) => {
+          const certa = i === p.posAlvo;
+          const bg = selecionado === i ? (certa ? "bg-success/20 border-success scale-110" : "bg-destructive/20 border-destructive") : selecionado !== null && certa ? "bg-success/20 border-success" : "bg-card border-border hover:border-violet/50 hover:scale-105";
+          return (
+            <button key={i} onClick={() => handleClick(i)}
+              className={`rounded-xl border-2 p-2 text-2xl flex items-center justify-center transition-all ${bg}`}>
+              {emoji}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 33. MEMÓRIA VISUAL — flash de grade colorida, depois reproduzir
+function MemoriaVisual({ p, onDone }: any) {
+  const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
+  const [selecionados, setSelecionados] = useState<string[]>([]);
+  const [feedback, setFeedback] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (fase !== "mostrar") return;
+    const t = setTimeout(() => setFase("reproduzir"), p.flashMs);
+    return () => clearTimeout(t);
+  }, [fase, p.flashMs]);
+
+  const handleCor = (cor: string, i: number) => {
+    if (fase !== "reproduzir" || selecionados.length >= p.grid.length) return;
+    const novos = [...selecionados, cor];
+    setSelecionados(novos);
+    if (novos.length === p.grid.length) {
+      const correto = novos.every((c, idx) => c === p.grid[idx]);
+      setFeedback(correto);
+      setTimeout(() => onDone(correto), 700);
+    }
+  };
+
+  const cores = [...new Set<string>(p.grid)];
+  return (
+    <div className="space-y-4 text-center">
+      {fase === "mostrar" ? (
+        <div>
+          <div className="text-sm font-bold text-muted-foreground mb-3 animate-pulse">Memorize as cores!</div>
+          <div className="grid gap-2 mx-auto max-w-xs" style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}>
+            {p.grid.map((cor: string, i: number) => (
+              <div key={i} className="w-16 h-16 rounded-xl border-2 border-white/20" style={{ backgroundColor: cor }} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <div className="text-sm font-bold">Posição {selecionados.length + 1}/{p.grid.length}</div>
+          <div className="grid gap-2 mx-auto max-w-xs" style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}>
+            {p.grid.map((_: any, i: number) => (
+              <div key={i} className="w-16 h-16 rounded-xl border-2 border-dashed border-muted-foreground"
+                style={{ backgroundColor: selecionados[i] ?? "transparent" }} />
+            ))}
+          </div>
+          <div className="flex gap-3 justify-center flex-wrap">
+            {cores.map((cor, i) => (
+              <button key={i} onClick={() => handleCor(cor, selecionados.length)}
+                className="w-14 h-14 rounded-xl border-2 border-white/30 active:scale-90 transition-all shadow"
+                style={{ backgroundColor: cor }} />
+            ))}
+          </div>
+        </div>
+      )}
+      {feedback !== null && (
+        <div className={`text-2xl font-black ${feedback ? "text-success" : "text-destructive"}`}>
+          {feedback ? "✅ Incrível!" : "❌ Quase!"}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 34. REAÇÃO RÁPIDA — Go / No-Go
+function ReacaoRapida({ p, onDone }: any) {
+  const [idx, setIdx] = useState(0);
+  const [acertos, setAcertos] = useState(0);
+  const [mostrar, setMostrar] = useState(true);
+  const [feedbackLocal, setFeedbackLocal] = useState<"ok" | "erro" | null>(null);
+
+  useEffect(() => {
+    setMostrar(true);
+    setFeedbackLocal(null);
+    const t = setTimeout(() => {
+      if (idx < p.seq.length - 1) { setMostrar(false); setTimeout(() => setIdx(i => i + 1), 300); }
+      else { setTimeout(() => onDone(acertos >= Math.ceil(p.seq.length * 0.6)), 500); }
+    }, p.intervaloMs);
+    return () => clearTimeout(t);
+  }, [idx]);
+
+  const handleToque = () => {
+    if (!mostrar) return;
+    const item = p.seq[idx];
+    if (item.tipo === "alvo") { setAcertos(a => a + 1); setFeedbackLocal("ok"); }
+    else setFeedbackLocal("erro");
+    setMostrar(false);
+    setTimeout(() => { if (idx < p.seq.length - 1) setIdx(i => i + 1); else onDone(acertos >= Math.ceil(p.seq.length * 0.6)); }, 300);
+  };
+
+  const item = p.seq[idx] ?? p.seq[0];
+  return (
+    <div className="text-center space-y-5">
+      <div className="text-xs text-muted-foreground font-bold">
+        ✅ Toque em <span className="text-success">{p.alvo}</span> | ❌ Ignore <span className="text-destructive">{p.erro}</span>
+      </div>
+      <button onClick={handleToque}
+        className={`w-full rounded-3xl border-2 py-12 text-8xl transition-all active:scale-95 ${feedbackLocal === "ok" ? "border-success bg-success/10" : feedbackLocal === "erro" ? "border-destructive bg-destructive/10" : "border-border bg-card hover:border-violet/50"}`}>
+        {mostrar ? item.emoji : "···"}
+      </button>
+      <div className="text-sm text-muted-foreground">{idx + 1} / {p.seq.length}</div>
+    </div>
+  );
+}
+
+// 35. SEGUIR INSTRUÇÃO — lê instrução, toca item correto
+function SeguirInstrucao({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (item: string) => {
+    if (selecionado) return;
+    setSelecionado(item);
+    setTimeout(() => onDone(item === p.correta), 600);
+  };
+  return (
+    <div className="space-y-5">
+      <div className="bg-gradient-to-br from-violet/20 to-violet/5 border-2 border-violet/30 rounded-3xl p-6 text-center">
+        <div className="text-xs uppercase text-muted-foreground mb-2">Instrução</div>
+        <div className="text-2xl font-black">{p.instrucao}</div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {p.itens.map((item: string, i: number) => {
+          const certa = item === p.correta;
+          const bg = selecionado === item ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-violet/50";
+          return (
+            <button key={i} onClick={() => handleClick(item)}
+              className={`rounded-2xl border-2 p-5 text-4xl font-bold flex flex-col items-center gap-2 transition-all ${bg}`}>
+              {item}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── ALFABETIZAÇÃO ─────────────────────────────────────────────
+
+// 36. LETRA-SOM — fonema → escolher imagem
+function LetraSom({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (nome: string) => {
+    if (selecionado) return;
+    setSelecionado(nome);
+    setTimeout(() => onDone(nome === p.correta), 700);
+  };
+  return (
+    <div className="space-y-6">
+      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/30 rounded-3xl py-8 text-center">
+        <div className="text-xs uppercase text-muted-foreground mb-2">Começa com</div>
+        <div className="text-7xl font-black text-amber-700">{p.fonema}</div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {p.imagens.map((img: { e: string; n: string }, i: number) => {
+          const certa = img.n === p.correta;
+          const bg = selecionado === img.n ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
+          return (
+            <button key={i} onClick={() => handleClick(img.n)}
+              className={`rounded-2xl border-2 p-5 flex flex-col items-center gap-2 transition-all font-bold ${bg}`}>
+              <span className="text-5xl">{img.e}</span>
+              <span className="text-sm">{img.n}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 37. PALAVRA-IMAGEM — ver imagem, escolher palavra correta
+function PalavraImagem({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (opt: string) => {
+    if (selecionado) return;
+    setSelecionado(opt);
+    setTimeout(() => onDone(opt === p.correta), 700);
+  };
+  return (
+    <div className="space-y-5 text-center">
+      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8">
+        <span className="text-8xl">{p.emoji}</span>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {p.opts.map((opt: string, i: number) => {
+          const certa = opt === p.correta;
+          const bg = selecionado === opt ? (certa ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
+          return (
+            <button key={i} onClick={() => handleClick(opt)}
+              className={`rounded-2xl border-2 py-4 font-black text-lg tracking-wider transition-all ${bg}`}>
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 38. FORMANDO PALAVRAS — tocar sílabas em ordem
+function FormandoPalavras({ p, onDone }: any) {
+  const [sequencia, setSequencia] = useState<string[]>([]);
+  const [erro, setErro] = useState(false);
+
+  const handleSilaba = (sil: string) => {
+    if (erro) return;
+    const esperada = p.silabas[sequencia.length];
+    if (sil !== esperada) { setErro(true); setTimeout(() => { setErro(false); setSequencia([]); }, 800); return; }
+    const nova = [...sequencia, sil];
+    setSequencia(nova);
+    if (nova.length === p.silabas.length) setTimeout(() => onDone(true), 500);
+  };
+
+  return (
+    <div className="space-y-5 text-center">
+      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/20 rounded-3xl p-4 min-h-[72px] flex items-center justify-center">
+        <div className={`text-4xl font-black tracking-widest transition-all ${erro ? "text-destructive animate-pulse" : sequencia.length === p.silabas.length ? "text-success" : "text-foreground"}`}>
+          {sequencia.length === 0 ? "..." : sequencia.join("") || "..."}
+        </div>
+      </div>
+      <div className="flex gap-3 flex-wrap justify-center">
+        {p.embaralhadas.map((sil: string, i: number) => {
+          const usada = sequencia.join("").includes(sil) && sequencia.some(s => s === sil && sequencia.indexOf(s) < sequencia.length);
+          return (
+            <button key={i} onClick={() => handleSilaba(sil)}
+              className={`px-6 py-4 rounded-2xl border-2 font-black text-xl transition-all active:scale-95
+                ${usada ? "border-muted bg-muted/20 text-muted-foreground" : "border-amber/50 bg-amber/10 text-amber-800 hover:border-amber hover:bg-amber/20"}`}>
+              {sil}
+            </button>
+          );
+        })}
+      </div>
+      <div className="text-sm text-muted-foreground">
+        {sequencia.length} / {p.silabas.length} sílabas
+      </div>
+    </div>
+  );
+}
+
+// 39. LEITURA DE PALAVRAS — lê palavra, escolhe emoji correto
+function LeituraPalavras({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (e: string) => {
+    if (selecionado) return;
+    setSelecionado(e);
+    setTimeout(() => onDone(e === p.emoji_certo), 700);
+  };
+  return (
+    <div className="space-y-5 text-center">
+      <div className="bg-gradient-to-br from-amber/25 to-amber/5 border-2 border-amber/35 rounded-3xl py-8">
+        <div className="text-xs uppercase text-muted-foreground mb-2">Leia e encontre</div>
+        <div className="text-5xl font-black tracking-widest">{p.palavra}</div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {p.opts.map((e: string, i: number) => {
+          const certa = e === p.emoji_certo;
+          const bg = selecionado === e ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
+          return (
+            <button key={i} onClick={() => handleClick(e)}
+              className={`rounded-2xl border-2 py-6 text-6xl transition-all ${bg}`}>
+              {e}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 40. COMPLETAR LETRA — palavra com lacuna, escolher letra certa
+function CompletarLetra({ p, onDone }: any) {
+  const [selecionado, setSelecionado] = useState<string | null>(null);
+  const handleClick = (letra: string) => {
+    if (selecionado) return;
+    setSelecionado(letra);
+    setTimeout(() => onDone(letra === p.letra), 700);
+  };
+  return (
+    <div className="space-y-5 text-center">
+      <div className="text-6xl mb-2">{p.emoji}</div>
+      <div className="bg-gradient-to-br from-amber/20 to-amber/5 border-2 border-amber/30 rounded-3xl p-6">
+        <div className="text-xs uppercase text-muted-foreground mb-2">Complete a palavra</div>
+        <div className="text-4xl font-black tracking-widest">
+          {p.palavra.split("").map((c: string, i: number) => (
+            <span key={i} className={c === "_" && selecionado ? "text-amber-700 border-b-4 border-amber-700" : c === "_" ? "text-muted-foreground border-b-4 border-border" : ""}>
+              {c === "_" ? (selecionado ?? "_") : c}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {p.opts.map((letra: string, i: number) => {
+          const certa = letra === p.letra;
+          const bg = selecionado === letra ? (certa ? "border-success bg-success/10 text-success" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
+          return (
+            <button key={i} onClick={() => handleClick(letra)}
+              className={`rounded-2xl border-2 py-5 text-3xl font-black transition-all ${bg}`}>
+              {letra}
             </button>
           );
         })}

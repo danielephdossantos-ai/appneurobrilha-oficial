@@ -1,5 +1,24 @@
 // Banco de variações exclusivas por categoria de Neuro-Treino.
 // Regra de ouro: cada categoria tem mecânica única. NÃO repita mecânicas entre categorias.
+import {
+  DISCRIMINACAO_AUDITIVA_VARS,
+  ARTICULACAO_SONS_VARS,
+  VOCABULARIO_SEMANTICO_VARS,
+  NOMEACAO_RAPIDA_VARS,
+  TOQUE_SEQUENCIA_VARS,
+  RITMO_BATIDAS_VARS,
+  COPIAR_FIGURA_VARS,
+  ALVO_MOVEL_VARS,
+  ACHAR_DIFERENTE_VARS,
+  MEMORIA_VISUAL_VARS,
+  REACAO_RAPIDA_VARS,
+  SEGUIR_INSTRUCAO_VARS,
+  LETRA_SOM_VARS,
+  PALAVRA_IMAGEM_VARS,
+  FORMANDO_PALAVRAS_VARS,
+  LEITURA_PALAVRAS_VARS,
+  COMPLETAR_LETRA_VARS,
+} from "./variations-extended";
 
 export type CategoriaSlug =
   | "sons-iniciais"
@@ -18,17 +37,35 @@ export type CategoriaSlug =
   | "sequencia-de-cores"
   | "simetria"
   | "decoracao-criativa"
-  // Fono & Onomatopeias
   | "onomatopeias-animadas"
   | "ritmo-e-sopro"
   | "paromatopeias-corpo"
-  // Coordenação Motor-Escrita
   | "tracado-letras"
   | "caminho-dos-pontos"
   | "labirinto-precisao"
-  // Jogos Clínicos Cognitivos
   | "triagem-categorias"
-  | "expressao-emocao";
+  | "expressao-emocao"
+  // FONO CLÍNICO
+  | "discriminacao-auditiva"
+  | "articulacao-sons"
+  | "vocabulario-semantico"
+  | "nomeacao-rapida"
+  // COORDENAÇÃO MOTORA
+  | "toque-sequencia"
+  | "ritmo-batidas"
+  | "copiar-figura"
+  | "alvo-movel"
+  // ATENÇÃO & CONCENTRAÇÃO
+  | "achar-diferente"
+  | "memoria-visual"
+  | "reacao-rapida"
+  | "seguir-instrucao"
+  // ALFABETIZAÇÃO
+  | "letra-som"
+  | "palavra-imagem"
+  | "formando-palavras"
+  | "leitura-palavras"
+  | "completar-letra";
 
 export interface CategoriaMeta {
   slug: CategoriaSlug;
@@ -71,9 +108,29 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
   "caminho-dos-pontos": { slug:"caminho-dos-pontos", nome:"Caminho dos Pontos", emoji:"🔢", grupo:"Coordenação Motor-Escrita", cor:"from-success/25 to-success/5", objetivo:"Unir pontos em sequência para formar figura", instrucao:"Toque nos pontos em ordem para revelar a figura." },
   "labirinto-precisao": { slug:"labirinto-precisao", nome:"Labirinto de Precisão", emoji:"🟢", grupo:"Coordenação Motor-Escrita", cor:"from-success/25 to-success/5", objetivo:"Arraste fino sem encostar nas paredes", instrucao:"Arraste a bolinha até o final sem tocar as bordas." },
 
-  // Jogos Clínicos Cognitivos
   "triagem-categorias": { slug:"triagem-categorias", nome:"Triagem de Categorias", emoji:"🗂️", grupo:"Jogos Clínicos Cognitivos", cor:"from-lilac/25 to-primary/5", objetivo:"Categorização e flexibilidade cognitiva", instrucao:"Arraste cada item para a caixa certa." },
   "expressao-emocao": { slug:"expressao-emocao", nome:"Expressão e Emoção", emoji:"😊", grupo:"Jogos Clínicos Cognitivos", cor:"from-lilac/25 to-primary/5", objetivo:"Pareamento emoção × situação social", instrucao:"Escolha o rosto que combina com a cena." },
+  // FONO CLÍNICO
+  "discriminacao-auditiva": { slug:"discriminacao-auditiva", nome:"Discriminação Auditiva", emoji:"👂", grupo:"Fono Clínico", cor:"from-rose/25 to-coral/5", objetivo:"Diferenciar pares mínimos de palavras", instrucao:"Escuta a palavra e toque na figura certa." },
+  "articulacao-sons": { slug:"articulacao-sons", nome:"Articulação de Sons", emoji:"🗣️", grupo:"Fono Clínico", cor:"from-rose/25 to-coral/5", objetivo:"Trabalhar articulação de fonemas específicos", instrucao:"Repita a sílaba em destaque olhando para a figura." },
+  "vocabulario-semantico": { slug:"vocabulario-semantico", nome:"Vocabulário Semântico", emoji:"🧠", grupo:"Fono Clínico", cor:"from-rose/25 to-coral/5", objetivo:"Ampliar vocabulário e categorização semântica", instrucao:"Encontre o item que não pertence ao grupo." },
+  "nomeacao-rapida": { slug:"nomeacao-rapida", nome:"Nomeação Rápida", emoji:"⚡", grupo:"Fono Clínico", cor:"from-rose/25 to-coral/5", objetivo:"Velocidade de nomeação (RAN simplificado)", instrucao:"Veja a figura e toque no nome certo rapidamente!" },
+  // COORDENAÇÃO MOTORA
+  "toque-sequencia": { slug:"toque-sequencia", nome:"Toque em Sequência", emoji:"🎯", grupo:"Coordenação Motora", cor:"from-emerald/25 to-success/5", objetivo:"Sequenciamento motor e planejamento", instrucao:"Toque os pontos em ordem do menor para o maior número." },
+  "ritmo-batidas": { slug:"ritmo-batidas", nome:"Ritmo de Batidas", emoji:"🥁", grupo:"Coordenação Motora", cor:"from-emerald/25 to-success/5", objetivo:"Coordenação rítmica e memória motora", instrucao:"Memorize o padrão de batidas e reproduza." },
+  "copiar-figura": { slug:"copiar-figura", nome:"Copiar Figura", emoji:"📐", grupo:"Coordenação Motora", cor:"from-emerald/25 to-success/5", objetivo:"Coordenação visomotora e reprodução espacial", instrucao:"Copie a figura na grade do lado direito." },
+  "alvo-movel": { slug:"alvo-movel", nome:"Alvo em Movimento", emoji:"🎯", grupo:"Coordenação Motora", cor:"from-emerald/25 to-success/5", objetivo:"Coordenação olho-mão e rastreamento dinâmico", instrucao:"Toque no alvo antes que ele desapareça!" },
+  // ATENÇÃO & CONCENTRAÇÃO
+  "achar-diferente": { slug:"achar-diferente", nome:"Achar o Diferente", emoji:"🔍", grupo:"Atenção & Concentração", cor:"from-violet/25 to-primary/5", objetivo:"Atenção seletiva e discriminação visual", instrucao:"Encontre o elemento diferente de todos os outros." },
+  "memoria-visual": { slug:"memoria-visual", nome:"Memória Visual", emoji:"🧩", grupo:"Atenção & Concentração", cor:"from-violet/25 to-primary/5", objetivo:"Memória de trabalho visual e codificação", instrucao:"Memorize o padrão e reproduza depois." },
+  "reacao-rapida": { slug:"reacao-rapida", nome:"Reação Rápida", emoji:"⚡", grupo:"Atenção & Concentração", cor:"from-violet/25 to-primary/5", objetivo:"Controle inibitório e tempo de reação (Go/No-Go)", instrucao:"Toque SOMENTE no alvo verde — ignore o vermelho!" },
+  "seguir-instrucao": { slug:"seguir-instrucao", nome:"Seguir Instrução", emoji:"📋", grupo:"Atenção & Concentração", cor:"from-violet/25 to-primary/5", objetivo:"Atenção auditiva e compreensão de comandos", instrucao:"Leia a instrução e toque no item correto." },
+  // ALFABETIZAÇÃO
+  "letra-som": { slug:"letra-som", nome:"Letra e Som", emoji:"🔤", grupo:"Alfabetização", cor:"from-amber/25 to-sun/5", objetivo:"Consciência fonêmica e correspondência letra-som", instrucao:"Toque na figura que começa com este som." },
+  "palavra-imagem": { slug:"palavra-imagem", nome:"Palavra e Imagem", emoji:"📖", grupo:"Alfabetização", cor:"from-amber/25 to-sun/5", objetivo:"Reconhecimento de palavras e leitura global", instrucao:"Veja a figura e escolha a palavra certa." },
+  "formando-palavras": { slug:"formando-palavras", nome:"Formando Palavras", emoji:"🔠", grupo:"Alfabetização", cor:"from-amber/25 to-sun/5", objetivo:"Montagem de palavras com sílabas (síntese silábica)", instrucao:"Toque nas sílabas na ordem certa para formar a palavra." },
+  "leitura-palavras": { slug:"leitura-palavras", nome:"Leitura de Palavras", emoji:"📚", grupo:"Alfabetização", cor:"from-amber/25 to-sun/5", objetivo:"Decodificação e leitura de palavras com imagem", instrucao:"Leia a palavra e toque na figura que ela representa." },
+  "completar-letra": { slug:"completar-letra", nome:"Completar a Letra", emoji:"✏️", grupo:"Alfabetização", cor:"from-amber/25 to-sun/5", objetivo:"Análise fonêmica e escrita de palavras", instrucao:"Toque na letra que falta para completar a palavra." },
 };
 
 // ===================== Variações (30 por categoria) =====================
@@ -551,14 +608,35 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "labirinto-precisao": LABPRE_VARS,
   "triagem-categorias": TRIAGEM_VARS,
   "expressao-emocao": EMOCAO_VARS,
+  // FONO CLÍNICO
+  "discriminacao-auditiva": DISCRIMINACAO_AUDITIVA_VARS,
+  "articulacao-sons": ARTICULACAO_SONS_VARS,
+  "vocabulario-semantico": VOCABULARIO_SEMANTICO_VARS,
+  "nomeacao-rapida": NOMEACAO_RAPIDA_VARS,
+  // COORDENAÇÃO MOTORA
+  "toque-sequencia": TOQUE_SEQUENCIA_VARS,
+  "ritmo-batidas": RITMO_BATIDAS_VARS,
+  "copiar-figura": COPIAR_FIGURA_VARS,
+  "alvo-movel": ALVO_MOVEL_VARS,
+  // ATENÇÃO & CONCENTRAÇÃO
+  "achar-diferente": ACHAR_DIFERENTE_VARS,
+  "memoria-visual": MEMORIA_VISUAL_VARS,
+  "reacao-rapida": REACAO_RAPIDA_VARS,
+  "seguir-instrucao": SEGUIR_INSTRUCAO_VARS,
+  // ALFABETIZAÇÃO
+  "letra-som": LETRA_SOM_VARS,
+  "palavra-imagem": PALAVRA_IMAGEM_VARS,
+  "formando-palavras": FORMANDO_PALAVRAS_VARS,
+  "leitura-palavras": LEITURA_PALAVRAS_VARS,
+  "completar-letra": COMPLETAR_LETRA_VARS,
 };
 
 export const GRUPOS = [
-  { nome:"Fala e Som", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra","consciencia-fonologica"] as CategoriaSlug[] },
-  { nome:"Fono & Onomatopeias", emoji:"🐮", cor:"from-sun/25 to-coral/5", slugs:["onomatopeias-animadas","ritmo-e-sopro","paromatopeias-corpo"] as CategoriaSlug[] },
-  { nome:"Coordenação Motor-Escrita", emoji:"✍️", cor:"from-success/25 to-success/5", slugs:["tracado-letras","caminho-dos-pontos","labirinto-precisao"] as CategoriaSlug[] },
-  { nome:"Funções Executivas", emoji:"🧠", cor:"from-primary/20 to-primary/5", slugs:["onde-esta","sequencia-e-padrao","cade-o-par","foco-total","labirinto-do-som"] as CategoriaSlug[] },
-  { nome:"Jogos Clínicos Cognitivos", emoji:"🗂️", cor:"from-lilac/25 to-primary/5", slugs:["triagem-categorias","expressao-emocao"] as CategoriaSlug[] },
-  { nome:"Atenção Avançada", emoji:"👁️", cor:"from-sky/30 to-sky/5", slugs:["foco-sustentado","rastreamento-sacadico"] as CategoriaSlug[] },
-  { nome:"Oficina Criativa", emoji:"🎨", cor:"from-lilac/30 to-lilac/5", slugs:["mosaico-de-formas","sequencia-de-cores","simetria","decoracao-criativa"] as CategoriaSlug[] },
+  { nome:"Fono Clínico 🏥", emoji:"👂", cor:"from-rose/25 to-rose/5", slugs:["discriminacao-auditiva","articulacao-sons","vocabulario-semantico","nomeacao-rapida"] as CategoriaSlug[] },
+  { nome:"Coordenação Motora 🤲", emoji:"🎯", cor:"from-emerald/25 to-emerald/5", slugs:["toque-sequencia","ritmo-batidas","copiar-figura","alvo-movel","tracado-letras","caminho-dos-pontos","labirinto-precisao"] as CategoriaSlug[] },
+  { nome:"Atenção & Concentração 🧠", emoji:"👁️", cor:"from-violet/25 to-violet/5", slugs:["achar-diferente","memoria-visual","reacao-rapida","seguir-instrucao","foco-sustentado","rastreamento-sacadico","foco-total"] as CategoriaSlug[] },
+  { nome:"Alfabetização 📖", emoji:"✏️", cor:"from-amber/25 to-amber/5", slugs:["letra-som","palavra-imagem","formando-palavras","leitura-palavras","completar-letra","sons-iniciais","rimas","pedacinhos-da-palavra","consciencia-fonologica"] as CategoriaSlug[] },
+  { nome:"Fala e Som 🗣️", emoji:"🗣️", cor:"from-coral/25 to-coral/5", slugs:["motorzinho-dos-sons","onomatopeias-animadas","ritmo-e-sopro","paromatopeias-corpo","discriminacao-auditiva"] as CategoriaSlug[] },
+  { nome:"Funções Executivas 🔧", emoji:"🧩", cor:"from-primary/20 to-primary/5", slugs:["onde-esta","sequencia-e-padrao","cade-o-par","labirinto-do-som","triagem-categorias","expressao-emocao"] as CategoriaSlug[] },
+  { nome:"Oficina Criativa 🎨", emoji:"🎨", cor:"from-lilac/30 to-lilac/5", slugs:["mosaico-de-formas","sequencia-de-cores","simetria","decoracao-criativa"] as CategoriaSlug[] },
 ];
