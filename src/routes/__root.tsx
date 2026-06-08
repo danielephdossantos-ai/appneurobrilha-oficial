@@ -154,7 +154,7 @@ function RootComponent() {
 import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
 import { supabase } from "@/database/supabase/client";
-import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 import { MascotProvider } from "@/contexts/MascotContext";
