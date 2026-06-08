@@ -99,19 +99,9 @@ function AuditoriaPedagogica() {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    async function checkAdmin() {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      // Simulação de verificação de admin
-      const isUserAdmin = user?.email?.includes("admin") || user?.app_metadata?.role === "admin" || true; 
-      
-      setIsAdmin(isUserAdmin);
-      if (!isUserAdmin) {
-        navigate({ to: "/" });
-      }
-    }
-    checkAdmin();
-  }, [navigate]);
+    // All authenticated Replit users can access the audit panel
+    setIsAdmin(true);
+  }, []);
 
   const { data: entries = [], isLoading } = useQuery({
     queryKey: ["pedagogical-audit"],

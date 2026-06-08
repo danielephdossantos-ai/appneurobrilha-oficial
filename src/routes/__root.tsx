@@ -152,9 +152,6 @@ function RootComponent() {
 }
 
 import { Toaster } from "sonner";
-import { useEffect, useState } from "react";
-import { supabase } from "@/database/supabase/client";
-import { useNavigate } from "@tanstack/react-router";
 import { LGPDConsent } from "@/modules/auth/components/LGPDConsent";
 import { ConnectivityStatus } from "@/components/ConnectivityStatus";
 import { MascotProvider } from "@/contexts/MascotContext";
@@ -162,9 +159,4 @@ import { MascotGlobalContainer } from "@/components/rewards/MascotGlobalContaine
 import { ParentModeProvider } from "@/contexts/ParentModeContext";
 import { ParentPinGate } from "@/components/auth/ParentPinGate";
 import { HiperfocoProvider } from "@/context/HiperfocoContext";
-
-
-function AuthGuard({ children }: { children: React.ReactNode }) {
-  // LOGIN TEMPORARIAMENTE DESATIVADO PARA TESTES
-  return <>{children}</>;
-}
+import { AuthGuard } from "@/modules/auth/components/AuthGuard";

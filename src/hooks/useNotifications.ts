@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { supabase } from "@/database/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -21,42 +20,28 @@ export interface Notification {
 export function useNotifications() {
   const queryClient = useQueryClient();
 
-  const { data: session } = useQuery({
-    queryKey: ["session"],
-    queryFn: async () => {
-      const { data } = await supabase.auth.getSession();
-      return data.session;
-    },
-  });
-
   const { data: notifications = [], isLoading } = useQuery({
     queryKey: ["notifications"],
     queryFn: async () => {
-      if (!session?.user) return [];
       const { data, error } = await supabase
         .from("notifications")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(20);
-      
       if (error) throw error;
       return data as Notification[];
     },
-    enabled: !!session?.user,
   });
 
   const sendNotification = useMutation({
     mutationFn: async (notif: Omit<Notification, "id" | "user_id" | "read" | "created_at" | "scheduled_for">) => {
-      if (!session?.user) throw new Error("Não autenticado");
       const { error } = await supabase
         .from("notifications")
         .insert([{
           ...notif,
-          user_id: session.user.id,
           read: false,
           scheduled_for: new Date().toISOString()
         }]);
-      
       if (error) throw error;
     },
     onSuccess: () => {
@@ -79,11 +64,9 @@ export function useNotifications() {
 
   const markAllAsRead = useMutation({
     mutationFn: async () => {
-      if (!session?.user) return;
       const { error } = await supabase
         .from("notifications")
         .update({ read: true })
-        .eq("user_id", session.user.id)
         .eq("read", false);
       if (error) throw error;
     },
@@ -91,49 +74,6 @@ export function useNotifications() {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
     }
   });
-
-  // Real-time subscription
-  useEffect(() => {
-    if (!session?.user) return;
-
-    // Usar um ID único por instância do hook para evitar colisões
-    const instanceId = Math.random().toString(36).substring(7);
-    const channelId = `notifications-${session.user.id}-${instanceId}`;
-    
-    const channel = supabase.channel(channelId);
-    
-    channel
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'notifications',
-          filter: `user_id=eq.${session.user.id}`
-        },
-        (payload) => {
-          const newNotif = payload.new as Notification;
-          toast(newNotif.title, {
-            description: newNotif.message,
-            action: {
-              label: "Ver",
-              onClick: () => console.log("Notificação clicada", newNotif)
-            }
-          });
-          queryClient.invalidateQueries({ queryKey: ["notifications"] });
-        }
-      );
-
-    channel.subscribe((status) => {
-      if (status === 'CHANNEL_ERROR') {
-        console.error(`[REALTIME] Erro na inscrição para: ${channelId}`);
-      }
-    });
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [session?.user?.id, queryClient]);
 
   return {
     notifications,

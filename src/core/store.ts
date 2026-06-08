@@ -227,20 +227,9 @@ export function useAppState() {
     return null;
   });
 
-  const { data: session, isLoading: isSessionLoading } = useQuery({
-    queryKey: ["session"],
-    queryFn: async () => {
-      const { data } = await supabase.auth.getSession();
-      return data.session;
-    },
-    staleTime: 0,
-    gcTime: 0,
-  });
-
   const { data: children = [], isLoading } = useQuery({
     queryKey: ["children"],
     queryFn: async () => {
-      if (!session?.user) return [];
       const { data, error } = await supabase
         .from("children")
         .select("*")
@@ -249,15 +238,13 @@ export function useAppState() {
       if (error) throw error;
       return (data ?? []).map((child) => normalizeChild(child as any));
     },
-    enabled: !!session?.user,
   });
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
-      if (!session?.user) throw new Error("Não autenticado");
       const { data, error } = await supabase
         .from("children")
-        .insert([{ ...newChild, user_id: session.user.id }])
+        .insert([{ ...newChild, user_id: "anonymous" }])
         .select()
         .single();
 
@@ -272,8 +259,7 @@ export function useAppState() {
     },
     onError: (error: unknown) => {
       if (isAuthExpiredError(error)) {
-        supabase.auth.signOut();
-        toast.error("Sua sessão expirou. Por favor, entre novamente.");
+        toast.error("Erro de autenticação. Por favor, atualize a página.");
       } else {
         toast.error("Erro ao cadastrar criança");
       }
@@ -295,8 +281,7 @@ export function useAppState() {
     },
     onError: (error: unknown) => {
       if (isAuthExpiredError(error)) {
-        supabase.auth.signOut();
-        toast.error("Sua sessão expirou. Por favor, entre novamente.");
+        toast.error("Erro de autenticação. Por favor, atualize a página.");
       } else {
         toast.error("Erro ao atualizar dados");
       }
@@ -319,17 +304,16 @@ export function useAppState() {
   const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
 
   const logout = async () => {
-    await supabase.auth.signOut();
     localStorage.removeItem(ACTIVE_CHILD_KEY);
     queryClient.clear();
-    toast.info("Sessão encerrada");
+    window.location.href = "/api/logout";
   };
 
   return {
     children,
     activeChild,
-    isLoading: isSessionLoading || isLoading,
-    session,
+    isLoading,
+    session: null,
     logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);

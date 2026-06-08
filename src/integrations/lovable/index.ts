@@ -1,24 +1,8 @@
-import { supabase } from "../supabase/client";
-
-type SignInOptions = {
-  redirect_uri?: string;
-  extraParams?: Record<string, string>;
-};
-
 export const lovable = {
   auth: {
-    signInWithOAuth: async (provider: "google" | "apple" | "microsoft", opts?: SignInOptions) => {
-      const oauthProvider = provider === "microsoft" ? "azure" : provider;
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: oauthProvider,
-        options: {
-          redirectTo: opts?.redirect_uri ?? window.location.origin,
-          queryParams: opts?.extraParams,
-        },
-      });
-
-      if (error) return { error, redirected: false };
-      return { redirected: !!data.url, error: null };
+    signInWithOAuth: async (_provider: "google" | "apple" | "microsoft", _opts?: { redirect_uri?: string; extraParams?: Record<string, string> }) => {
+      window.location.href = "/api/login";
+      return { redirected: true, error: null };
     },
   },
 };
