@@ -340,6 +340,296 @@ const CounterGridVisual: React.FC<{ counter: NonNullable<VisualConfig['counter']
   );
 };
 
+/* ─── PIZZA BITE — pedaço some ao ser comido ─── */
+const PizzaBiteVisual: React.FC<{ bite: NonNullable<VisualConfig['pizza_bite']> }> = ({ bite }) => {
+  const [phase, setPhase] = useState(0);
+  // 0 = pizza inteira aparece  |  1 = pedaço comido voa para fora  |  2 = fórmula aparece
+  const ran = useRef(false);
+
+  useEffect(() => {
+    if (ran.current) return;
+    ran.current = true;
+    setTimeout(() => setPhase(1), 1400);
+    setTimeout(() => setPhase(2), 2600);
+  }, []);
+
+  const { total, eaten } = bite;
+  const cx = 118, cy = 118, rCrust = 110, rFill = 96;
+
+  const polar = (r: number, deg: number) => ({
+    x: cx + r * Math.cos((deg * Math.PI) / 180),
+    y: cy + r * Math.sin((deg * Math.PI) / 180),
+  });
+
+  const sliceAngle = 360 / total;
+
+  const wedgePath = (idx: number) => {
+    const start = -90 + idx * sliceAngle;
+    const end   = start + sliceAngle;
+    const s = polar(rFill, start);
+    const e = polar(rFill, end);
+    const large = sliceAngle > 180 ? 1 : 0;
+    return `M ${cx} ${cy} L ${s.x.toFixed(1)} ${s.y.toFixed(1)} A ${rFill} ${rFill} 0 ${large} 1 ${e.x.toFixed(1)} ${e.y.toFixed(1)} Z`;
+  };
+
+  const midAngle = (idx: number) => -90 + idx * sliceAngle + sliceAngle / 2;
+
+  /* toppings (pepperoni): 2 per slice */
+  const toppingOffsets = [
+    [{ r: 0.42, a: -30 }, { r: 0.65, a: 10 }],
+    [{ r: 0.42, a:  60 }, { r: 0.65, a: 100 }],
+    [{ r: 0.42, a: 150 }, { r: 0.65, a: 190 }],
+    [{ r: 0.42, a: 240 }, { r: 0.65, a: 280 }],
+  ];
+
+  const remaining = total - eaten;
+
+  return (
+    <div className="text-center select-none">
+
+      {/* Step label */}
+      <div className="mb-2">
+        {phase === 0 && (
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            className="text-sm font-black text-amber-700 bg-amber-50 rounded-xl px-3 py-1 inline-block border border-amber-200">
+            🍕 Pizza inteira — {total} pedaços iguais
+          </motion.p>
+        )}
+        {phase === 1 && (
+          <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+            className="text-sm font-black text-red-700 bg-red-50 rounded-xl px-3 py-1 inline-block border border-red-200">
+            😋 Um pedaço foi comido — veja sumir!
+          </motion.p>
+        )}
+        {phase === 2 && (
+          <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+            className="text-sm font-black text-green-700 bg-green-50 rounded-xl px-3 py-1 inline-block border border-green-200">
+            ✅ Sobraram {remaining} pedaços de {total}
+          </motion.p>
+        )}
+      </div>
+
+      {/* PIZZA SVG */}
+      <div className="flex justify-center overflow-visible">
+        <svg width="236" height="236" viewBox="0 0 236 236" overflow="visible">
+          <filter id="bshadow">
+            <feDropShadow dx="0" dy="3" stdDeviation="7" floodColor="#00000022" />
+          </filter>
+          {/* Crust base */}
+          <circle cx={cx} cy={cy} r={rCrust} fill="#C2823A" filter="url(#bshadow)" />
+          {/* Crust ring */}
+          <circle cx={cx} cy={cy} r={rCrust - 2} fill="none" stroke="#E8B06A" strokeWidth="5"
+            strokeDasharray="7 4" />
+          {/* Cheese layer */}
+          <circle cx={cx} cy={cy} r={rFill} fill="#FDE68A" />
+
+          {/* Slices */}
+          {Array.from({ length: total }).map((_, i) => {
+            const isEaten = i < eaten;
+            const mid = midAngle(i);
+            const mp = polar(rFill * 0.58, mid);
+            const flyVec = polar(280, mid); // direction to fly off screen
+
+            return (
+              <motion.g key={i}
+                animate={
+                  isEaten && phase >= 1
+                    ? { x: flyVec.x - cx, y: flyVec.y - cy, opacity: 0, scale: 0.15 }
+                    : { x: 0, y: 0, opacity: 1, scale: 1 }
+                }
+                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                transition={{ type: 'spring', stiffness: 100, damping: 14, duration: 0.7 }}
+                style={{ transformOrigin: `${cx}px ${cy}px` }}>
+
+                {/* Wedge fill */}
+                <path d={wedgePath(i)}
+                  fill={isEaten ? '#EF4444' : '#FCD34D'}
+                  stroke="#D97706" strokeWidth="1.5" />
+
+                {/* Sauce pool */}
+                {isEaten && (
+                  <circle cx={mp.x} cy={mp.y} r={16} fill="#EF4444" opacity={0.18} />
+                )}
+
+                {/* Pepperoni toppings */}
+                {(toppingOffsets[i] ?? []).map((t, ti) => {
+                  const tp = polar(rFill * t.r, t.a);
+                  return (
+                    <circle key={ti} cx={tp.x} cy={tp.y} r={5}
+                      fill={isEaten ? '#7F1D1D' : '#B45309'} opacity={0.75} />
+                  );
+                })}
+
+                {/* Fraction label: numerator / line / denominator */}
+                <text x={mp.x} y={mp.y - 6} textAnchor="middle"
+                  fill={isEaten ? 'white' : '#78350F'} fontSize="13" fontWeight="900">1</text>
+                <line x1={mp.x - 7} y1={mp.y} x2={mp.x + 7} y2={mp.y}
+                  stroke={isEaten ? 'white' : '#78350F'} strokeWidth="1.8" />
+                <text x={mp.x} y={mp.y + 14} textAnchor="middle"
+                  fill={isEaten ? 'white' : '#78350F'} fontSize="13" fontWeight="900">{total}</text>
+              </motion.g>
+            );
+          })}
+
+          {/* Divider lines */}
+          {Array.from({ length: total }).map((_, i) => {
+            const angle = -90 + i * sliceAngle;
+            const e = polar(rFill, angle);
+            return (
+              <line key={i} x1={cx} y1={cy} x2={e.x.toFixed(1)} y2={e.y.toFixed(1)}
+                stroke="#D97706" strokeWidth="1.8" />
+            );
+          })}
+
+          {/* Centre label */}
+          <circle cx={cx} cy={cy} r={18} fill="white" stroke="#D97706" strokeWidth="2" />
+          <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle" fontSize="18">🍕</text>
+        </svg>
+      </div>
+
+      {/* Logic build — appears progressively */}
+      <div className="space-y-2 mt-3">
+        <motion.div className="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-2.5 flex items-center gap-3">
+          <div className="w-7 h-7 rounded-full bg-blue-500 text-white font-black text-sm flex items-center justify-center shrink-0">D</div>
+          <div className="text-left">
+            <p className="text-[10px] font-black text-blue-400 uppercase tracking-wider">Denominador</p>
+            <p className="font-black text-blue-800 text-base">Pizza inteira = {total} pedaços</p>
+          </div>
+        </motion.div>
+
+        <AnimatePresence>
+          {phase >= 1 && (
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              className="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-2.5 flex items-center gap-3">
+              <div className="w-7 h-7 rounded-full bg-red-500 text-white font-black text-sm flex items-center justify-center shrink-0">N</div>
+              <div className="text-left">
+                <p className="text-[10px] font-black text-red-400 uppercase tracking-wider">Numerador</p>
+                <p className="font-black text-red-800 text-base">😋 Comemos → {eaten} pedaço</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {phase >= 2 && (
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+              className="bg-green-500 text-white rounded-xl px-4 py-2.5 shadow-lg">
+              <p className="text-[10px] font-black opacity-80 uppercase tracking-wider">Numerador ÷ Denominador = Fração</p>
+              <p className="font-black text-2xl mt-0.5">{eaten} ÷ {total} = {eaten}/{total} ✅</p>
+              <p className="text-sm opacity-90 mt-0.5">🍕 {eaten}/{total} da pizza foi comida!</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+/* ─── GROUP BUILD — grupos de itens construindo o total (multiplicação) ─── */
+const GroupBuildVisual: React.FC<{ gb: NonNullable<VisualConfig['group_build']> }> = ({ gb }) => {
+  const [visibleGroups, setVisibleGroups] = useState(0);
+  const [showFormula, setShowFormula] = useState(false);
+  const ran = useRef(false);
+
+  useEffect(() => {
+    if (ran.current) return;
+    ran.current = true;
+    const go = async () => {
+      for (let g = 0; g < gb.groups; g++) {
+        await new Promise(r => setTimeout(r, 500 + g * 800));
+        setVisibleGroups(p => p + 1);
+      }
+      await new Promise(r => setTimeout(r, 600));
+      setShowFormula(true);
+    };
+    go();
+  }, [gb.groups]);
+
+  const runningTotal = visibleGroups * gb.items_per_group;
+  const boxColors = ['bg-orange-400', 'bg-amber-400', 'bg-yellow-400'];
+
+  return (
+    <div className="text-center select-none">
+      {/* Running total counter */}
+      <div className="mb-3 flex items-center justify-center gap-3">
+        <div className="bg-slate-100 rounded-xl px-4 py-2 border-2 border-slate-200">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Total acumulado</p>
+          <motion.p key={runningTotal} initial={{ scale: 1.4, color: '#F97316' }}
+            animate={{ scale: 1, color: '#1e293b' }}
+            className="font-black text-3xl">
+            {runningTotal} {gb.emoji}
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Groups */}
+      <div className="flex gap-2 justify-center flex-wrap mb-3">
+        {Array.from({ length: gb.groups }).map((_, g) => (
+          <AnimatePresence key={g}>
+            {g < visibleGroups && (
+              <motion.div
+                initial={{ opacity: 0, y: -24, scale: 0.6 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ type: 'spring', stiffness: 240, damping: 18 }}
+                className={`${boxColors[g % boxColors.length]} rounded-2xl p-3 shadow-md`}>
+                {/* Box label */}
+                <p className="text-white font-black text-[10px] text-center mb-1.5 uppercase tracking-wider">
+                  Caixa {g + 1}
+                </p>
+                {/* Items in a 2-col grid */}
+                <div className={`grid gap-1 ${gb.items_per_group <= 4 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                  {Array.from({ length: gb.items_per_group }).map((_, j) => (
+                    <motion.span key={j}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: j * 0.07 }}
+                      className="text-xl leading-none text-center">{gb.emoji}</motion.span>
+                  ))}
+                </div>
+                <p className="text-white/80 font-black text-xs text-center mt-1.5">
+                  +{gb.items_per_group}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        ))}
+      </div>
+
+      {/* Addition bridge */}
+      <AnimatePresence>
+        {visibleGroups === gb.groups && !showFormula && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            className="text-slate-600 font-black text-base mb-2">
+            {Array.from({ length: gb.groups }).map((_, i) => (
+              <span key={i}>{gb.items_per_group}{i < gb.groups - 1 ? ' + ' : ''}</span>
+            ))}
+            {' = '}
+            <span className="text-orange-600 text-xl">{gb.groups * gb.items_per_group}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Result formula */}
+      <AnimatePresence>
+        {showFormula && (
+          <motion.div initial={{ opacity: 0, scale: 0.85, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 200 }}
+            className="bg-orange-500 text-white rounded-2xl px-5 py-3 shadow-xl">
+            <p className="text-xs font-black opacity-80 uppercase tracking-wider mb-0.5">grupos × itens = total</p>
+            <p className="font-black text-2xl">
+              {gb.groups} × {gb.items_per_group} = {gb.groups * gb.items_per_group} {gb.emoji}
+            </p>
+            <p className="text-sm opacity-90 mt-0.5">
+              {gb.groups} caixas com {gb.items_per_group} {gb.item_name} = {gb.groups * gb.items_per_group} {gb.item_name}!
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 /** Dispatch the right visual component */
 const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({ visual, startDelay }) => {
   if (visual.type === 'math_steps' && visual.math_steps) {
@@ -348,8 +638,14 @@ const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({ 
   if (visual.type === 'fraction_bar' && visual.fraction) {
     return <FractionBarVisual fraction={visual.fraction} />;
   }
+  if (visual.type === 'pizza_bite' && visual.pizza_bite) {
+    return <PizzaBiteVisual bite={visual.pizza_bite} />;
+  }
   if (visual.type === 'multiplication_grid' && visual.multiplication) {
     return <MultiplicationGridVisual mult={visual.multiplication} />;
+  }
+  if (visual.type === 'group_build' && visual.group_build) {
+    return <GroupBuildVisual gb={visual.group_build} />;
   }
   if (visual.type === 'counter_grid' && visual.counter) {
     return <CounterGridVisual counter={visual.counter} />;
@@ -664,48 +960,71 @@ const ExplicacaoCurtaScreen: React.FC<{ lesson: ActivityLesson }> = ({ lesson })
 /* ─── SCREEN 4: EXEMPLO VISUAL ─── */
 const ExemploVisualScreen: React.FC<{ lesson: ActivityLesson; speak: (t: string) => Promise<void> }> = ({ lesson, speak }) => {
   const s = lesson.screens.exemplo_visual;
-  return (
-    <div className="p-5">
-      <p className="text-slate-700 font-black text-base mb-3">{s.title}</p>
 
-      {/* Sentence cards */}
-      <div className="space-y-2 mb-3">
-        {s.sentences.map((sentence, i) => (
-          <motion.div key={i}
-            initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.2 }}
-            className="flex items-center justify-between bg-amber-50 border-2 border-amber-100 rounded-2xl px-4 py-3">
-            <div className="flex items-center gap-2">
-              {sentence.emoji && <span className="text-2xl">{sentence.emoji}</span>}
-              <span className="text-slate-700 font-semibold text-sm">{sentence.text}</span>
-            </div>
-            <button onClick={() => speak(sentence.text)}
-              className="w-8 h-8 rounded-full bg-white border border-amber-200 flex items-center justify-center text-amber-500 hover:bg-amber-50 active:scale-95 transition shrink-0 ml-2">
-              <Volume2 className="w-4 h-4" />
-            </button>
-          </motion.div>
-        ))}
+  /* colour accent per subject (visual type gives us a hint) */
+  const isPizza = s.visual?.type === 'pizza_bite';
+  const isGroup = s.visual?.type === 'group_build';
+  const accent  = isPizza ? 'from-red-500 to-orange-400'
+                : isGroup ? 'from-orange-500 to-amber-400'
+                : 'from-amber-400 to-orange-400';
+
+  return (
+    <div className="overflow-hidden">
+
+      {/* ── Coloured header strip ── */}
+      <div className={`bg-gradient-to-r ${accent} px-5 pt-4 pb-3 flex items-start justify-between`}>
+        <div className="flex-1">
+          <p className="text-white/70 text-[10px] font-black uppercase tracking-widest">Exemplo concreto</p>
+          <p className="text-white font-black text-base leading-snug mt-0.5">{s.title}</p>
+        </div>
+        <button onClick={() => speak(s.sentences.map(s => s.text).join('. ') + '. ' + s.conclusion)}
+          className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition shrink-0 ml-3 mt-0.5">
+          <Volume2 className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* Step-by-step visual for math lessons */}
-      {s.visual && (
-        <div className="border-t border-slate-100 pt-3">
-          <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 text-center">
-            Passo a passo
-          </p>
-          <VisualBlock visual={s.visual} startDelay={600} />
+      <div className="px-4 pt-3 pb-5 space-y-4">
+
+        {/* ── Context chips (o problema concreto) ── */}
+        <div className="flex flex-wrap gap-2">
+          {s.sentences.map((sentence, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.15 }}
+              className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+              {sentence.emoji && <span className="text-base leading-none">{sentence.emoji}</span>}
+              <span className="text-slate-700 font-semibold text-xs leading-snug">{sentence.text}</span>
+            </motion.div>
+          ))}
         </div>
-      )}
 
-      {/* Conclusion */}
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: s.visual ? 1.5 : 0.5 }}
-        className="bg-gradient-to-r from-amber-400 to-orange-400 rounded-2xl p-3 text-white text-center mt-3 mb-3">
-        <p className="font-black text-sm">{s.conclusion}</p>
-      </motion.div>
+        {/* ── VISUAL PRINCIPAL — full width, no labels above it ── */}
+        {s.visual ? (
+          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3">
+            <VisualBlock visual={s.visual} startDelay={300} />
+          </div>
+        ) : (
+          /* Fallback when no visual configured */
+          <div className="bg-amber-50 border-2 border-amber-100 rounded-2xl p-4 text-center">
+            <p className="text-4xl mb-2">📐</p>
+            <p className="text-slate-600 font-semibold text-sm">{s.conclusion}</p>
+          </div>
+        )}
 
-      <div className="flex justify-center">
-        <img src={pipImg} alt="Pip" className="w-20 h-20 object-contain drop-shadow-lg select-none" draggable={false} />
+        {/* ── Conclusion badge ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: s.visual ? 3.2 : 0.6 }}
+          className={`bg-gradient-to-r ${accent} rounded-2xl px-5 py-3 text-white text-center shadow-lg`}>
+          <p className="text-xs font-black opacity-80 uppercase tracking-widest mb-0.5">Conclusão</p>
+          <p className="font-black text-base">{s.conclusion}</p>
+        </motion.div>
+
+        {/* ── Mascot ── */}
+        <div className="flex justify-end -mb-1">
+          <img src={pipImg} alt="Pip" className="w-16 h-16 object-contain drop-shadow-lg select-none" draggable={false} />
+        </div>
+
       </div>
     </div>
   );

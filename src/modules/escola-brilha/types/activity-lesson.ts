@@ -12,8 +12,10 @@ export interface PraticarOption {
 }
 
 export type VisualType =
-  | 'fraction_bar'         // pizza/bar dividida em partes, preenchendo gradualmente
+  | 'fraction_bar'         // pizza interativa — 4 pedaços, modo 1/4 1/2 3/4
+  | 'pizza_bite'           // pizza com pedaço animado sendo comido
   | 'multiplication_grid'  // grupos de objetos que aparecem um a um
+  | 'group_build'          // grupos construindo até o total (multiplicação)
   | 'math_steps'           // passos da conta aparecendo linha a linha
   | 'counter_grid'         // grade de emojis clicáveis que somem ao contar
   | 'word_visual'          // pares de palavras com ícone ilustrativo
@@ -34,10 +36,21 @@ export interface VisualConfig {
     emoji: string;
     label: string;
   };
+  pizza_bite?: {
+    total: number;    // denominador — total de pedaços
+    eaten: number;    // numerador — pedaços comidos
+    item: string;     // nome do item (ex: "pizza")
+  };
   multiplication?: {
     groups: number;
     items_per_group: number;
     emoji: string;
+  };
+  group_build?: {
+    groups: number;
+    items_per_group: number;
+    emoji: string;
+    item_name: string;   // ex: "balas"
   };
   counter?: {
     items: string[];   // array of emojis shown in grid

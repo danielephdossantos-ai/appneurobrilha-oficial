@@ -173,20 +173,15 @@ export const FRACOES_LESSON: ActivityLesson = {
       tip: 'Numerador ÷ denominador = fração!',
     },
     exemplo_visual: {
-      title: 'Montando o cálculo passo a passo:',
+      title: 'Veja o que aconteceu com a pizza:',
       sentences: [
-        { text: 'Uma pizza foi cortada em 4 partes.', emoji: '🍕' },
-        { text: 'Comemos 1 parte.',                  emoji: '😋' },
+        { text: 'Uma pizza foi cortada em 4 partes iguais.', emoji: '🍕' },
+        { text: 'Comemos 1 parte — veja ela sumir!',         emoji: '😋' },
       ],
       conclusion: 'Comemos 1/4 da pizza!',
       visual: {
-        type: 'math_steps',
-        math_steps: [
-          { expr: 'Pizza inteira  =  4 pedaços',     color: 'blue',   label: 'Denominador' },
-          { expr: 'Comemos  →  1 pedaço',            color: 'orange', label: 'Numerador'   },
-          { expr: '1 ÷ 4  =  1/4',                  color: 'green',  label: 'Resultado', highlight: true },
-          { expr: '🍕 1/4 da pizza foi comida!',     color: 'purple', highlight: true },
-        ],
+        type: 'pizza_bite',
+        pizza_bite: { total: 4, eaten: 1, item: 'pizza' },
       },
     },
     praticar: {
@@ -243,20 +238,15 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
       tip: 'Grupos iguais = multiplicação!',
     },
     exemplo_visual: {
-      title: 'Montando o cálculo passo a passo:',
+      title: 'Veja os grupos de balas aparecendo:',
       sentences: [
-        { text: '3 caixas com 4 balas cada.', emoji: '📦' },
-        { text: 'Somamos todos os grupos.',   emoji: '➕' },
+        { text: '3 caixas, cada uma com 4 balas.', emoji: '📦' },
+        { text: 'Veja cada grupo aparecer e o total crescer!', emoji: '🍬' },
       ],
       conclusion: '3 × 4 = 12 balas no total!',
       visual: {
-        type: 'math_steps',
-        math_steps: [
-          { expr: '3  grupos',              color: 'blue',   label: '1º fator'    },
-          { expr: '×  4  em cada grupo',    color: 'orange', label: '2º fator'    },
-          { expr: '4 + 4 + 4  =  12',       color: 'teal',   label: 'Soma dos grupos' },
-          { expr: '3 × 4  =  12  🍬',       color: 'green',  label: 'Resultado', highlight: true },
-        ],
+        type: 'group_build',
+        group_build: { groups: 3, items_per_group: 4, emoji: '🍬', item_name: 'balas' },
       },
     },
     praticar: {
