@@ -95,11 +95,29 @@ const ACTIVITY_C = [
   },
 ];
 
+const EARLY_CATEGORIES = [
+  {
+    id: 'vogais', title: 'As Vogais', badge: 'Alfabetização',
+    emoji: '🔤', gradient: 'from-rose-400 to-pink-500', xp: 80,
+    desc: 'A  E  I  O  U', type: 'early', highlight: true,
+  },
+  {
+    id: 'contagem', title: 'Vamos Contar!', badge: 'Matemática',
+    emoji: '🔢', gradient: 'from-amber-400 to-orange-500', xp: 80,
+    desc: '1 ao 10', type: 'early', highlight: true,
+  },
+  {
+    id: 'subtracao', title: 'Subtrair é Tirar!', badge: 'Matemática',
+    emoji: '➖', gradient: 'from-rose-500 to-red-600', xp: 90,
+    desc: 'Tirar objetos', type: 'early', highlight: true,
+  },
+];
+
 const LEGACY_CATEGORIES = [
-  { id: 'portugues_1ano', title: '1º Ano — Sílabas e Letras', badge: 'Alfabetização', gradient: 'from-emerald-400 to-green-500', xp: 100 },
-  { id: 'matematica',     title: '1º Ano — Matemática Kids', badge: 'Matemática',    gradient: 'from-sky-400 to-blue-500',    xp: 100 },
-  { id: 'portugues_2ano', title: '2º Ano — Leitura',         badge: 'Leitura',       gradient: 'from-fuchsia-400 to-violet-500',xp: 110 },
-  { id: 'matematica_2ano',title: '2º Ano — Cálculos',        badge: 'Matemática',    gradient: 'from-orange-400 to-red-500',  xp: 110 },
+  { id: 'portugues_1ano', title: '1º Ano — Sílabas', badge: 'Alfabetização', emoji: '📖', gradient: 'from-emerald-400 to-green-500', xp: 100, type: 'legacy', desc: 'Primeiras sílabas' },
+  { id: 'matematica',     title: '1º Ano — Contas',  badge: 'Matemática',    emoji: '🧮', gradient: 'from-sky-400 to-blue-500',    xp: 100, type: 'legacy', desc: 'Somar e subtrair' },
+  { id: 'portugues_2ano', title: '2º Ano — Leitura', badge: 'Leitura',       emoji: '📚', gradient: 'from-fuchsia-400 to-violet-500',xp: 110, type: 'legacy', desc: 'Ler frases' },
+  { id: 'matematica_2ano',title: '2º Ano — Cálculos',badge: 'Matemática',    emoji: '📐', gradient: 'from-orange-400 to-red-500',  xp: 110, type: 'legacy', desc: 'Contas maiores' },
 ];
 
 type Tab = 'fundamental1' | 'fundamental2' | 'infantil';
@@ -188,25 +206,65 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           )}
 
           {tab === 'infantil' && (
-            <motion.div key="inf" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              <SectionHeader label="1º e 2º Ano" sublabel="Alfabetização • BNCC" />
-              <div className="grid grid-cols-2 gap-3">
-                {LEGACY_CATEGORIES.map((cat, i) => (
-                  <motion.button key={cat.id}
-                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                    whileTap={{ scale: 0.96 }}
-                    onClick={() => goToActivity(cat.id, 'legacy')}
-                    className="bg-white/10 hover:bg-white/15 rounded-2xl p-4 text-left transition-all border border-white/10">
-                    <div className={`bg-gradient-to-br ${cat.gradient} w-10 h-10 rounded-xl flex items-center justify-center mb-3 shadow-sm`}>
-                      <Star className="w-5 h-5 text-white fill-white" />
-                    </div>
-                    <p className="text-white font-black text-sm leading-tight mb-1">{cat.title}</p>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs font-bold text-yellow-400">{cat.xp} XP</span>
-                    </div>
-                  </motion.button>
-                ))}
+            <motion.div key="inf" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-5">
+              {/* New immersive early lessons */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                  <p className="text-yellow-400 text-xs font-black uppercase tracking-widest">✨ Novo — Professor fala tudo!</p>
+                </div>
+                <div className="space-y-3">
+                  {EARLY_CATEGORIES.map((cat, i) => (
+                    <motion.button key={cat.id}
+                      initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, type: 'spring' }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => goToActivity(cat.id, cat.type)}
+                      className="w-full bg-white rounded-2xl shadow-lg overflow-hidden text-left flex items-stretch">
+                      <div className={`bg-gradient-to-b ${cat.gradient} w-16 flex items-center justify-center shrink-0`}>
+                        <span className="text-4xl">{cat.emoji}</span>
+                      </div>
+                      <div className="flex-1 p-4 flex flex-col justify-center">
+                        <p className="font-black text-slate-800 text-base leading-tight">{cat.title}</p>
+                        <p className="text-slate-500 text-xs font-semibold mt-0.5">{cat.desc}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-xs font-black text-rose-500 bg-rose-50 px-2 py-0.5 rounded-full">{cat.badge}</span>
+                          <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+                          <span className="text-xs font-bold text-yellow-500">{cat.xp} XP</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center pr-4">
+                        <ChevronRight className="w-5 h-5 text-slate-300" />
+                      </div>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Classic legacy lessons */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2 h-2 rounded-full bg-white/30" />
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest">Lições Clássicas</p>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {LEGACY_CATEGORIES.map((cat, i) => (
+                    <motion.button key={cat.id}
+                      initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.07 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => goToActivity(cat.id, cat.type)}
+                      className="bg-white/10 hover:bg-white/15 rounded-2xl p-4 text-left transition-all border border-white/10">
+                      <div className={`bg-gradient-to-br ${cat.gradient} w-10 h-10 rounded-xl flex items-center justify-center mb-3 shadow-sm text-2xl`}>
+                        {cat.emoji}
+                      </div>
+                      <p className="text-white font-black text-sm leading-tight mb-0.5">{cat.title}</p>
+                      <p className="text-white/40 text-xs font-semibold mb-1.5">{cat.desc}</p>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+                        <span className="text-xs font-bold text-yellow-400">{cat.xp} XP</span>
+                      </div>
+                    </motion.button>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}

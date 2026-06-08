@@ -12,6 +12,8 @@ import { semEmoji, objetoImg } from '@/data/neuro-treino/objetos';
 import * as Lessons from '../data/lessons';
 import { ActivityPlayer } from './ActivityPlayer';
 import { ActivityPlayerC } from './ActivityPlayerC';
+import { EarlyChildhoodPlayer } from './EarlyChildhoodPlayer';
+import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from '../data/early-lessons';
 import { ActivityLesson } from '../types/activity-lesson';
 import { ActivityLessonC } from '../types/activity-lesson-c';
 import {
@@ -51,6 +53,12 @@ const ACTIVITY_C_MAP: Record<string, ActivityLessonC> = {
   iluminismo: ILUMINISMO_LESSON,
 };
 
+const EARLY_MAP: Record<string, typeof VOGAIS_LESSON> = {
+  vogais:    VOGAIS_LESSON,
+  contagem:  CONTAGEM_LESSON,
+  subtracao: SUBTRACAO_LESSON,
+};
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: '/escola-brilha/aula' }) as { category: string; type: string };
 
@@ -59,6 +67,9 @@ export const LessonPlayer: React.FC = () => {
 
   const lessonB = ACTIVITY_MAP[search.category];
   if (lessonB) return <ActivityPlayer lesson={lessonB} />;
+
+  const earlyLesson = EARLY_MAP[search.category];
+  if (earlyLesson) return <EarlyChildhoodPlayer lesson={earlyLesson} />;
 
   return <LegacyLessonPlayer />;
 };
