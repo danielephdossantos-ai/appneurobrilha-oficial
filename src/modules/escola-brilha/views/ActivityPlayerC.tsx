@@ -10,6 +10,7 @@ import { ActivityLessonC } from '../types/activity-lesson-c';
 import { AudioSpeechService } from '../services/AudioSpeechService';
 import pipImg from '@/assets/pip-mascot.png';
 import pipaImg from '@/assets/pip-girl-mascot.png';
+import { LessonVisualMap } from '../components/LessonVisualMap';
 
 interface Props { lesson: ActivityLessonC }
 
@@ -356,9 +357,9 @@ const MissaoScreen: React.FC<{ lesson: ActivityLessonC; ac: any }> = ({ lesson, 
 
 /* ─── TELA 2: EXPLORAÇÃO ─── */
 const TABS: { id: TabId; label: string; icon: React.ElementType }[] = [
-  { id: 'texto',  label: 'TEXTO',    icon: BookOpen },
-  { id: 'pontos', label: 'DESTAQUES',icon: Lightbulb },
-  { id: 'info',   label: 'SAIBA MAIS',icon: Image },
+  { id: 'texto',  label: 'TEXTO',   icon: BookOpen  },
+  { id: 'pontos', label: 'PONTOS',  icon: Lightbulb },
+  { id: 'info',   label: 'VISUAL',  icon: Image     },
 ];
 
 const ExploracaoScreen: React.FC<{
@@ -377,7 +378,7 @@ const ExploracaoScreen: React.FC<{
               activeTab === tab.id ? `bg-white shadow-sm ${ac.text}` : 'text-slate-400 hover:text-slate-600'
             }`}>
             <tab.icon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{tab.label}</span>
+            <span>{tab.label}</span>
           </button>
         ))}
       </div>
@@ -388,6 +389,11 @@ const ExploracaoScreen: React.FC<{
           <motion.div key="texto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm">
             <p className="text-slate-700 font-medium text-sm leading-relaxed">{s.texto}</p>
+            {/* Mascot tip at bottom */}
+            <div className={`mt-3 ${ac.light} ${ac.border} border rounded-xl p-3 flex items-start gap-2`}>
+              <img src={pipaImg} alt="Pipa" className="w-10 h-10 object-contain shrink-0 select-none" draggable={false} />
+              <p className={`text-xs font-semibold ${ac.text} leading-snug`}>{s.mascot_tip}</p>
+            </div>
           </motion.div>
         )}
         {activeTab === 'pontos' && (
@@ -403,13 +409,8 @@ const ExploracaoScreen: React.FC<{
           </motion.div>
         )}
         {activeTab === 'info' && (
-          <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className={`${ac.light} ${ac.border} border rounded-2xl p-4`}>
-            <p className={`font-black text-sm ${ac.text} mb-2`}>💡 Dica do mascote</p>
-            <p className="text-slate-600 font-medium text-sm leading-relaxed">{s.mascot_tip}</p>
-            <div className="flex justify-end mt-3">
-              <img src={pipImg} alt="Pip" className="w-16 h-16 object-contain drop-shadow-md select-none" draggable={false} />
-            </div>
+          <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <LessonVisualMap lessonId={lesson.id} />
           </motion.div>
         )}
       </AnimatePresence>
