@@ -27,7 +27,6 @@ import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
-import { Route as AppIndexRouteImport } from './routes/app-index'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
@@ -129,11 +128,6 @@ const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
   path: '/auditoria-pedagogica',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/app-index',
-  path: '/app-index',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -191,7 +185,6 @@ export interface FileRoutesByFullPath {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
-  '/app-index': typeof AppIndexRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -222,7 +215,6 @@ export interface FileRoutesByTo {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
-  '/app-index': typeof AppIndexRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -253,7 +245,6 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
-  '/app-index': typeof AppIndexRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -286,7 +277,6 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
-    | '/app-index'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -317,7 +307,6 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
-    | '/app-index'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -347,7 +336,6 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
-    | '/app-index'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -379,7 +367,6 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
-  AppIndexRoute: typeof AppIndexRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
@@ -530,13 +517,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app-index': {
-      id: '/app-index'
-      path: '/app-index'
-      fullPath: '/app-index'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/analytics': {
       id: '/analytics'
       path: '/analytics'
@@ -643,7 +623,6 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
-  AppIndexRoute: AppIndexRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,

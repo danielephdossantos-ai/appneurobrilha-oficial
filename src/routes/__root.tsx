@@ -2,7 +2,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
+  Navigate,
   createRootRouteWithContext,
+  useLocation,
   useRouter,
   HeadContent,
   Scripts,
@@ -11,6 +13,12 @@ import {
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
+  const location = useLocation();
+
+  if (location.pathname === "/index" || location.pathname === "/index/") {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
