@@ -3,7 +3,7 @@ import { Shell, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState, useEffect, useRef } from "react";
 import { Send, Sparkles, Loader2, Heart, Volume2, VolumeX, Camera, Upload, RotateCcw, BookOpen, CheckCircle2, Video, Play, MessageCircle, ExternalLink, ShieldAlert, Search } from "lucide-react";
-import { supabase } from "@/database/supabase/client";
+import { callNeuroBrilhaAI } from "@/services/api/neurobrilha-ai.functions";
 import { motion, AnimatePresence } from "framer-motion";
 import { RenderMascote } from "@/components/ui/PremiumIcons";
 import { Bird } from "lucide-react";
@@ -83,8 +83,8 @@ function AmigoVirtual() {
     setInput("");
     
     try {
-      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: {
+      const response = await callNeuroBrilhaAI({
+        data: {
           mode: "amigo-virtual",
           child: activeChild,
           mascot: mascotPayload,
@@ -95,10 +95,6 @@ function AmigoVirtual() {
           }))
         }
       });
-
-      if (error) throw error;
-      
-      const response = data;
       setMsgs([...newMsgs, { role: "ai", t: response }]);
       lerTexto(response);
     } catch (err) {
@@ -130,8 +126,8 @@ function AmigoVirtual() {
     setProfLoading(true);
     setAnalise(null);
     try {
-      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: {
+      const result = await callNeuroBrilhaAI({
+        data: {
           mode: "professor-foto",
           child: activeChild,
           mascot: mascotPayload,
@@ -139,8 +135,7 @@ function AmigoVirtual() {
         },
       });
 
-      if (error) throw error;
-      setAnalise(data);
+      setAnalise(result);
     } catch (err) {
       console.error(err);
       toast.error("Erro ao analisar a foto. Tente novamente.");

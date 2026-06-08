@@ -3,7 +3,7 @@ import { Shell, PageHeader, Card } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { useState } from "react";
 import { Send, Sparkles, Loader2, MessagesSquare } from "lucide-react";
-import { supabase } from "@/database/supabase/client";
+import { callNeuroBrilhaAI } from "@/services/api/neurobrilha-ai.functions";
 import { useMascot } from "@/contexts/MascotContext";
 
 export const Route = createFileRoute("/terapeuta-brilha")({
@@ -36,8 +36,8 @@ function Terapeuta() {
     setInput("");
     
     try {
-      const { data, error } = await supabase.functions.invoke("neurobrilha-ai", {
-        body: {
+      const response = await callNeuroBrilhaAI({
+        data: {
           mode: "terapeuta",
           child: activeChild,
           mascot: mascotPayload,
@@ -48,10 +48,8 @@ function Terapeuta() {
           }))
         }
       });
-
-      if (error) throw error;
       
-      setMsgs([...newMsgs, { role: "ai", t: data }]);
+      setMsgs([...newMsgs, { role: "ai", t: response as string }]);
     } catch (err) {
       console.error(err);
       setMsgs([...newMsgs, { role: "ai", t: "Ops, tive um probleminha para pensar agora. Tente de novo em instantes!" }]);
