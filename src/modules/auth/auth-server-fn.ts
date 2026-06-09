@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 
 export type ReplitUser = {
   id: string;
@@ -13,7 +13,7 @@ export type ReplitUser = {
 
 export const getReplitUser = createServerFn({ method: "GET" }).handler(
   async () => {
-    const request = getWebRequest();
+    const request = getRequest();
     const id = request.headers.get("x-replit-user-id");
     if (!id) return { user: null };
 
