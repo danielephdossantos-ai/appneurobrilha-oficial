@@ -13,27 +13,39 @@ type MascotChoice = 'pip' | 'pipa';
 
 interface Props {
   childId: string;
+  childName: string;
   onClose: () => void;
 }
 
 const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}`;
 
-export function EggHatchCinematic({ childId, onClose }: Props) {
-  const [phase, setPhase] = useState<'intro' | 'choose' | 'shake' | 'crack' | 'open' | 'reveal'>('intro');
+export function EggHatchCinematic({ childId, childName, onClose }: Props) {
+  const [phase, setPhase] = useState<'intro' | 'choose' | 'shake' | 'spin' | 'crack' | 'open' | 'reveal'>('intro');
   const [mascot, setMascot] = useState<MascotChoice>('pip');
+  const [speechSupported, setSpeechSupported] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setSpeechSupported('speechSynthesis' in window);
+    }
+  }, []);
 
   useEffect(() => {
     if (phase === 'shake') {
-      const t1 = setTimeout(() => setPhase('crack'), 2200);
+      const t1 = setTimeout(() => setPhase('spin'), 1800);
       return () => clearTimeout(t1);
     }
-    if (phase === 'crack') {
-      const t2 = setTimeout(() => setPhase('open'), 1500);
+    if (phase === 'spin') {
+      const t2 = setTimeout(() => setPhase('crack'), 1800);
       return () => clearTimeout(t2);
     }
-    if (phase === 'open') {
-      const t3 = setTimeout(() => setPhase('reveal'), 2500);
+    if (phase === 'crack') {
+      const t3 = setTimeout(() => setPhase('open'), 1400);
       return () => clearTimeout(t3);
+    }
+    if (phase === 'open') {
+      const t4 = setTimeout(() => setPhase('reveal'), 2500);
+      return () => clearTimeout(t4);
     }
   }, [phase]);
 
@@ -48,6 +60,79 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
   const eggImg = mascot === 'pip' ? pipEgg : pipaEgg;
   const hatchImg = mascot === 'pip' ? pipHatching : pipaHatching;
   const babyImg = mascot === 'pip' ? pipBaby : pipaBaby;
+  const mascotName = mascot === 'pip' ? 'o Pip' : 'a Pipa';
+  const greetingSpeech = `Olá, ${childName}! Eu sou ${mascotName} e vou te ajudar nessa aventura. Vamos crescer juntos!`;
+
+  useEffect(() => {
+    if (phase !== 'reveal') return;
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+    const utterance = new SpeechSynthesisUtterance(greetingSpeech);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.1;
+    utterance.lang = 'pt-BR';
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, [phase, greetingSpeech]);
+
+  // Play a provided MP3 file if available (public/sounds/pop.mp3), otherwise fallback to Web Audio.
+  const playPopSound = async () => {
+    if (typeof window === 'undefined') return;
+    const mp3Url = '/sounds/pop.mp3';
+    try {
+      // Try the simple HTMLAudioElement first (works if file is present and allowed by browser)
+      const a = new Audio(mp3Url);
+      a.volume = 0.9;
+      await a.play().catch(() => { throw new Error('audio-play-failed'); });
+      return;
+    } catch (e) {
+      // Fallback: generate a short pop with WebAudio
+      try {
+        const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'triangle';
+        o.frequency.value = 700;
+        o.connect(g);
+        g.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.linearRampToValueAtTime(0.18, now + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+
+        o.start(now);
+        o.stop(now + 0.24);
+
+        setTimeout(() => {
+          try { ctx.close(); } catch (e) {}
+        }, 500);
+      } catch (er) {
+        // give up silently
+      }
+    }
+  };
+
+  // Play small pops when shell cracks and when the hatch opens
+  useEffect(() => {
+    if (phase === 'crack') {
+      playPopSound();
+      const t = setTimeout(() => playPopSound(), 220);
+      return () => clearTimeout(t);
+    }
+    if (phase === 'open') {
+      const t = setTimeout(() => playPopSound(), 120);
+      return () => clearTimeout(t);
+    }
+  }, [phase]);
 
   return (
     <motion.div
@@ -123,10 +208,10 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                   <Sparkles size={14} /> Sua jornada começa aqui
                 </div>
                 <h1 className="text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-3">
-                  Escolha o seu ovo mágico!
+                  Escolha seu ovo: azul ou rosa?
                 </h1>
                 <p className="text-white/80 text-lg max-w-md mx-auto">
-                  Cada conquista vai fazer o seu amiguinho crescer. Quem vai chocar com você?
+                  Toque no ovo que você mais gostou e prepare-se para a grande surpresa.
                 </p>
               </div>
 
@@ -145,11 +230,11 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                   >
                     <img
                       src={m === 'pip' ? pipEgg : pipaEgg}
-                      alt={`Ovo do ${m === 'pip' ? 'Pip' : 'Pipa'}`}
+                      alt={`Ovo ${m === 'pip' ? 'Azul' : 'Rosa'}`}
                       className="w-32 h-32 mx-auto object-contain drop-shadow-2xl"
                     />
                     <div className="mt-3 text-white font-black uppercase tracking-wider text-sm">
-                      Ovo {m === 'pip' ? 'do Pip' : 'da Pipa'}
+                      Ovo {m === 'pip' ? 'Azul' : 'Rosa'}
                     </div>
                   </button>
                 ))}
@@ -170,12 +255,12 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                O ovo está se mexendo...
+                O seu ovo mágico está se mexendo...
               </h2>
               <motion.div
                 animate={{ 
-                  rotate: [-6, 6, -6, 6, -4, 4, 0], 
-                  y: [0, -8, 0, -8, 0],
+                  rotate: [-8, 8, -8, 8, -4, 4, 0], 
+                  y: [0, -10, 0, -10, 0],
                   scale: [1, 1.05, 1, 1.05, 1]
                 }}
                 transition={{ duration: 1.8, ease: 'easeInOut' }}
@@ -192,7 +277,38 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                   transition={{ duration: 0.8, repeat: Infinity }}
                 />
               </motion.div>
-              <p className="text-white/80 text-lg">Algo mágico está prestes a acontecer!</p>
+              <p className="text-white/80 text-lg">Sinta o ovo girar e o mistério ficar maior...</p>
+            </motion.div>
+          )}
+
+          {phase === 'spin' && (
+            <motion.div
+              key="spin"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
+                O ovo está girando...
+              </h2>
+              <motion.div
+                animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.05, 1, 1.05, 1] }}
+                transition={{ duration: 2, ease: 'easeInOut' }}
+                className="relative"
+              >
+                <img
+                  src={eggImg}
+                  alt="Ovo girando"
+                  className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
+                />
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-white/30 via-transparent to-white/30"
+                  animate={{ opacity: [0, 0.6, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </motion.div>
+              <p className="text-white/80 text-lg">Cada volta deixa a casca mais pronta para nascer.</p>
             </motion.div>
           )}
 
@@ -205,13 +321,13 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                Crack! A casquinha rachou!
+                Olha! A casca está abrindo em pedaços!
               </h2>
               <motion.div
                 className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
                 initial={{ scale: 0.8 }}
                 animate={{ 
-                  scale: [0.8, 1.1, 1],
+                  scale: [0.8, 1.05, 1],
                   rotate: [-2, 2, -2, 2, 0] 
                 }}
                 transition={{ duration: 0.6 }}
@@ -224,6 +340,7 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                   transition={{ duration: 0.8 }}
                 />
               </motion.div>
+              <p className="text-white/80 text-lg">A casca se abre em pedaços, revelando a surpresa dentro.</p>
             </motion.div>
           )}
 
@@ -236,7 +353,7 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                Olha! Ele está saindo!
+                Quase lá! O seu mascote está quase pronto.
               </h2>
               <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
                 <motion.div
@@ -284,18 +401,160 @@ export function EggHatchCinematic({ childId, onClose }: Props) {
                 <Sparkles size={14} /> Bem-vindo ao mundo!
               </div>
               <h2 className="text-4xl md:text-6xl font-black text-white drop-shadow-lg">
-                Olá, eu sou seu {mascot === 'pip' ? 'Pip' : 'sua Pipa'} Bebê!
+                Olá, {childName}!
               </h2>
-              <motion.img
-                src={babyImg}
-                alt="Mascote bebê"
-                className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
-                animate={{ 
-                  y: [0, -15, 0],
-                  scale: [1, 1.05, 1] 
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              />
+              <p className="text-white/90 text-lg max-w-md mx-auto font-bold">
+                Eu sou {mascot === 'pip' ? 'o Pip' : 'a Pipa'} e vou te ajudar nessa aventura. Vamos crescer juntos!
+              </p>
+              <p className="text-white/70 text-sm max-w-sm mx-auto">
+                {speechSupported
+                  ? 'Vou falar seu nome com carinho em voz alta.'
+                  : 'Se o som não aparecer, pode ler a mensagem comigo.'}
+              </p>
+              <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80">
+                <motion.div
+                  initial={{ opacity: 0.85, scale: 0.95 }}
+                  animate={{ opacity: [0.85, 1, 0.85], y: [0, -8, 0], scale: [0.96, 1, 0.96] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute inset-0 rounded-full bg-white/10"
+                />
+                <motion.img
+                  src={babyImg}
+                  alt="Mascote bebê"
+                  className="w-full h-full object-contain drop-shadow-2xl"
+                  animate={{
+                    y: [0, -14, 0],
+                    rotate: [-2, 2, -2, 2, 0],
+                    scale: [1, 1.04, 1]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                />
+
+                <svg viewBox="0 0 220 220" className="absolute inset-0 w-full h-full pointer-events-none">
+                  <motion.circle
+                    cx="30"
+                    cy="40"
+                    r="6"
+                    className="fill-sky-300"
+                    animate={{ x: [0, -6, 0], y: [0, 8, 0], opacity: [0.8, 1, 0.2] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: 0.1 }}
+                  />
+                  <motion.circle
+                    cx="190"
+                    cy="32"
+                    r="5"
+                    className="fill-pink-300"
+                    animate={{ x: [0, 6, 0], y: [0, 10, 0], opacity: [0.8, 1, 0.2] }}
+                    transition={{ duration: 1.9, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+                  />
+                  <motion.rect
+                    x="95"
+                    y="16"
+                    width="8"
+                    height="8"
+                    rx="2"
+                    className="fill-amber-300"
+                    animate={{ x: [0, -4, 0], y: [0, 10, 0], rotate: [0, 15, 0] }}
+                    transition={{ duration: 2.1, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
+                  />
+                  <motion.rect
+                    x="50"
+                    y="180"
+                    width="6"
+                    height="6"
+                    rx="2"
+                    className="fill-emerald-300"
+                    animate={{ x: [0, 3, 0], y: [0, 8, 0], rotate: [0, -15, 0] }}
+                    transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut', delay: 0.05 }}
+                  />
+                  <motion.path
+                    d="M36 152 C50 142 70 146 90 164"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.72)"
+                    strokeWidth="7"
+                    strokeLinecap="round"
+                    animate={{ x: [0, 2, 0, 2, 0], y: [0, -2, 0, -2, 0] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.path
+                    d="M184 152 C170 142 150 146 130 164"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.72)"
+                    strokeWidth="7"
+                    strokeLinecap="round"
+                    animate={{ x: [0, -2, 0, -2, 0], y: [0, -2, 0, -2, 0] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.path
+                    d="M80 100 C100 118 120 118 140 100"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.95)"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    animate={{ scale: [0.8, 1, 0.8], opacity: [0.85, 1, 0.85] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ originX: '50%', originY: '50%' }}
+                  />
+
+                  <motion.g
+                    animate={{ rotate: [0, -8, 0, -8, 0], y: [0, -2, 0, -2, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ originX: '20%', originY: '60%' }}
+                  >
+                    <path
+                      d="M20 140 C40 120 60 110 80 118"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.85)"
+                      strokeWidth="8"
+                      strokeLinecap="round"
+                    />
+                  </motion.g>
+                  <motion.g
+                    animate={{ rotate: [0, 8, 0, 8, 0], y: [0, -2, 0, -2, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+                    style={{ originX: '80%', originY: '60%' }}
+                  >
+                    <path
+                      d="M200 140 C180 120 160 110 140 118"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.85)"
+                      strokeWidth="8"
+                      strokeLinecap="round"
+                    />
+                  </motion.g>
+
+                  <motion.g
+                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2 }}
+                    style={{ originX: '31%', originY: '30%' }}
+                  >
+                    <circle cx="70" cy="65" r="14" fill="#fff" />
+                    <circle
+                      cx="70"
+                      cy="65"
+                      r="6"
+                      fill="#0f172a"
+                      animate={{ x: [0, 1.5, 0], y: [0, 0.5, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  </motion.g>
+                  <motion.g
+                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2, delay: 0.25 }}
+                    style={{ originX: '69%', originY: '30%' }}
+                  >
+                    <circle cx="150" cy="65" r="14" fill="#fff" />
+                    <circle
+                      cx="150"
+                      cy="65"
+                      r="6"
+                      fill="#0f172a"
+                      animate={{ x: [0, -1.5, 0], y: [0, 0.5, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.1 }}
+                    />
+                  </motion.g>
+                </svg>
+              </div>
               <p className="text-white/90 text-lg max-w-md mx-auto">
                 Brinque, aprenda e ganhe Moedas Brilha 💰 para me ver crescer ainda mais!
               </p>

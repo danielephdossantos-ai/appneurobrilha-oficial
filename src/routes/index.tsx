@@ -108,7 +108,11 @@ function Index() {
     <Shell>
       <AnimatePresence>
         {showEggHatch && activeChild?.id && (
-          <EggHatchCinematic childId={activeChild.id} onClose={() => setShowEggHatch(false)} />
+          <EggHatchCinematic
+            childId={activeChild.id}
+            childName={activeChild.nome}
+            onClose={() => setShowEggHatch(false)}
+          />
         )}
       </AnimatePresence>
 
