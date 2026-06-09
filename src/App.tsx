@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { RouterProvider } from '@tanstack/react-router';
 import { getRouter } from './router';
+import { persister } from './utils/persistence';
 
 const router = getRouter();
 
@@ -19,6 +20,12 @@ function App() {
           localStorage.removeItem(key);
         }
       });
+
+      // Remove cache persistido do React Query para evitar reuso de dados antigos do mascote
+      persister.removeClient?.().catch((error) => {
+        console.warn("Falha ao limpar cache persistido do React Query:", error);
+      });
+
       localStorage.setItem("app_version", CACHE_VERSION);
     }
   }, []);

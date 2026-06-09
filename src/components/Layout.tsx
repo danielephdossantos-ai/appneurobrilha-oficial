@@ -25,7 +25,7 @@ function SidebarMascot() {
   if (!activeMascot) return <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />;
 
   return (
-    <Link to="/mascotes" className="relative group cursor-pointer">
+    <div className="relative group">
       <KidLiveMascot 
         emotion="happy" 
         size="sm" 
@@ -34,14 +34,13 @@ function SidebarMascot() {
       <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white shadow-sm">
         LV {activeMascot.level}
       </div>
-    </Link>
+    </div>
   );
 }
 
 
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
-  { to: "/mascotes", label: "Meus Mascotes", icon: Heart },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
