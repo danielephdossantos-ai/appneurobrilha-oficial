@@ -42,8 +42,7 @@ function suggestSerieForAge(idade: number): string {
 
 function Anamnese() {
   const { childId } = Route.useParams();
-  const { children: allChildren, updateChild, saveAnamnesis, session: sessionRaw } = useAppState();
-  const session = sessionRaw as { user: { id: string; email?: string; user_metadata?: { full_name?: string; avatar_url?: string } } } | null;
+  const { children: allChildren, updateChild, saveAnamnesis, session } = useAppState();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isNova = childId === "nova";

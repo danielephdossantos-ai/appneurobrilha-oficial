@@ -1720,7 +1720,7 @@ function AlvoMovel({ p, onDone }: any) {
   const [tocou, setTocou] = useState(false);
   const [perdeu, setPerdeu] = useState(false);
   const angRef = useRef(0);
-  const animRef = useRef<number | undefined>(undefined);
+  const animRef = useRef<number>();
 
   useEffect(() => {
     let t = 0;

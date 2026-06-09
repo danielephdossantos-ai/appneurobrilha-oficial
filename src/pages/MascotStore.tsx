@@ -185,18 +185,12 @@ const MascotStorePage: React.FC = () => {
 
   const ownedMascotIds = userMascots.map(um => um.mascot_id);
 
-  const isExcludedMascot = (mascot: Mascot) => {
-    const id = (mascot.id || '').toLowerCase();
-    const name = (mascot.name || '').toLowerCase();
-    return id.includes('lumi') || name.includes('lumi');
-  };
-
-  // Combine DB mascots with additional characters, excluindo apenas o mascote Lumi
-  const allDisplayMascots = [...dbMascots].filter(mascot => !isExcludedMascot(mascot));
+  // Combine DB mascots with additional characters
+  const allDisplayMascots = [...dbMascots];
 
   // Add additional characters if they're not already in the DB mascots (by name/id)
   ADDITIONAL_CHARACTERS.forEach(char => {
-    if (!dbMascots.find(m => m.name === char.name) && !isExcludedMascot(char)) {
+    if (!dbMascots.find(m => m.name === char.name)) {
       allDisplayMascots.push(char as Mascot);
     }
   });
