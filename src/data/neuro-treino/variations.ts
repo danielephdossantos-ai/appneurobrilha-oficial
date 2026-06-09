@@ -353,11 +353,72 @@ const SACADICO_VARS: Variation[] = range(30).map((i) => {
 
 // 12. MOSAICO DE FORMAS — escolher peças corretas (Tangram)
 const MOSAICO_BANK = [
-  { figura:"🏠 Casa", pecas:["🔺","🟦"], opcoes:["🔺","🟦","🟢","⭐"] },
-  { figura:"⛵ Barco", pecas:["🔺","🟫"], opcoes:["🔺","🟫","🟦","🟢"] },
-  { figura:"🌳 Árvore", pecas:["🔺","🟫"], opcoes:["🔺","🟫","🟦","⭐"] },
-  { figura:"🐟 Peixe", pecas:["🔷","🔺"], opcoes:["🔷","🔺","🟦","🟢"] },
-  { figura:"🚀 Foguete", pecas:["🔺","🟦","🟦"], opcoes:["🔺","🟦","🟢","⭐"] },
+  {
+    figura: "Casa",
+    modelo: [
+      [null, 1,    1,    null],
+      [1,    1,    1,    1   ],
+      [2,    2,    2,    2   ],
+      [2,    2,    2,    2   ],
+    ],
+    cores: ["#ef4444", "#3b82f6"],
+    nomesCores: ["vermelho", "azul"],
+  },
+  {
+    figura: "Barco",
+    modelo: [
+      [null, null, 1,    null, null],
+      [null, 1,    1,    1,    null],
+      [2,    2,    2,    2,    2   ],
+    ],
+    cores: ["#93c5fd", "#f97316"],
+    nomesCores: ["azul", "laranja"],
+  },
+  {
+    figura: "Arvore",
+    modelo: [
+      [null, null, 1,    null, null],
+      [null, 1,    1,    1,    null],
+      [1,    1,    1,    1,    1   ],
+      [null, null, 2,    null, null],
+    ],
+    cores: ["#22c55e", "#92400e"],
+    nomesCores: ["verde", "marrom"],
+  },
+  {
+    figura: "Sol",
+    modelo: [
+      [1,    null, 1,    null, 1   ],
+      [null, 1,    1,    1,    null],
+      [1,    1,    1,    1,    1   ],
+      [null, 1,    1,    1,    null],
+      [1,    null, 1,    null, 1   ],
+    ],
+    cores: ["#facc15"],
+    nomesCores: ["amarelo"],
+  },
+  {
+    figura: "Foguete",
+    modelo: [
+      [null, 1,    1,    null],
+      [null, 2,    2,    null],
+      [null, 2,    2,    null],
+      [3,    2,    2,    3   ],
+      [3,    null, null, 3   ],
+    ],
+    cores: ["#ef4444", "#9ca3af", "#f59e0b"],
+    nomesCores: ["vermelho", "cinza", "laranja"],
+  },
+  {
+    figura: "Peixe",
+    modelo: [
+      [null, 1,    1,    2,    2   ],
+      [1,    1,    1,    1,    null],
+      [null, 1,    1,    2,    2   ],
+    ],
+    cores: ["#06b6d4", "#0369a1"],
+    nomesCores: ["azul claro", "azul escuro"],
+  },
 ];
 const MOSAICO_VARS: Variation[] = range(30).map((i) => ({ id:`mf-${i+1}`, payload: MOSAICO_BANK[i % MOSAICO_BANK.length] }));
 

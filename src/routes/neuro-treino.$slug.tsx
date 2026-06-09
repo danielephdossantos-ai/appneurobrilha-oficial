@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertCircle, ArrowLeft, ArrowDown, ArrowLeft as ArrowLeftIcon, ArrowRight, ArrowUp, ChevronRight, Hand, Mic, MicOff, RotateCcw, Sparkles, Star, Volume2, VolumeX, Zap } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowDown, ArrowLeft as ArrowLeftIcon, ArrowRight, ArrowUp, ChevronRight, Hand, Mic, MicOff, RotateCcw, Sparkles, Star, Volume2, VolumeX, X, Zap } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
@@ -827,24 +827,197 @@ function Sacadico({ p, onDone }: any) {
 
 // ============== 12. Mosaico de Formas ==============
 function Mosaico({ p, onDone }: any) {
-  const [selecionadas, setSelecionadas] = useState<string[]>([]);
-  const toggle = (op:string) => setSelecionadas(s => s.includes(op) ? s.filter(x=>x!==op) : [...s, op]);
-  const verificar = () => {
-    const ok = p.pecas.every((x:string)=>selecionadas.includes(x)) && selecionadas.length === p.pecas.length;
-    onDone(ok);
+  type Grid = (number | null)[][];
+  const [built, setBuilt] = useState<Grid>(() =>
+    p.modelo.map((row: any[]) => row.map(() => null))
+  );
+  const [selected, setSelected] = useState<number | null>(null);
+  const [dragColor, setDragColor] = useState<number | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [wrongCells, setWrongCells] = useState<Set<string>>(new Set());
+  const [dragOver, setDragOver] = useState<string | null>(null);
+
+  const totalCells = p.modelo.flat().filter((v: any) => v !== null).length;
+  const filledCells = built.flat().filter((v) => v !== null).length;
+
+  const placeColor = (r: number, c: number, color: number | null) => {
+    if (checking) return;
+    if (p.modelo[r][c] === null) return;
+    setBuilt(g => g.map((row, ri) =>
+      row.map((v, ci) => ri === r && ci === c ? color : v)
+    ));
   };
+
+  const handleCellClick = (r: number, c: number) => {
+    if (selected === null) {
+      placeColor(r, c, null);
+    } else {
+      placeColor(r, c, selected);
+    }
+  };
+
+  const handleDrop = (r: number, c: number) => {
+    if (dragColor !== null) placeColor(r, c, dragColor);
+    setDragOver(null);
+    setDragColor(null);
+  };
+
+  const verificar = () => {
+    const wrong = new Set<string>();
+    p.modelo.forEach((row: (number | null)[], r: number) => {
+      row.forEach((v: number | null, c: number) => {
+        if (v !== null && built[r][c] !== v) wrong.add(`${r}-${c}`);
+      });
+    });
+    setWrongCells(wrong);
+    setChecking(true);
+    setTimeout(() => {
+      if (wrong.size === 0) {
+        onDone(true);
+      } else {
+        setChecking(false);
+        setWrongCells(new Set());
+        setBuilt(g => g.map((row, r) =>
+          row.map((v, c) => wrong.has(`${r}-${c}`) ? null : v)
+        ));
+      }
+    }, 900);
+  };
+
+  const allFilled = filledCells === totalCells;
+
+  const CELL_MODEL = "w-8 h-8 sm:w-9 sm:h-9 rounded-lg shadow-md";
+  const CELL_BUILD = "w-11 h-11 sm:w-12 sm:h-12 rounded-xl border-2 transition-all active:scale-90";
+
   return (
-    <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">Monte:</div>
-      <div className="text-3xl font-black mb-6 bg-card border-2 border-primary/20 rounded-2xl px-6 py-3 inline-block text-primary">{semEmoji(p.figura)}</div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-        {p.opcoes.map((op:string, i:number) => (
-          <button key={i} onClick={()=>toggle(op)} className={`w-24 h-24 flex items-center justify-center rounded-2xl border-2 transition-all shadow-sm ${selecionadas.includes(op) ? "border-primary bg-primary/10 scale-110 shadow-glow" : "border-border bg-card"}`}>
-            <RenderEmoji e={op} className="w-16 h-16" />
-          </button>
-        ))}
+    <div className="space-y-4">
+
+      {/* Reference model — always visible */}
+      <div className="bg-gradient-to-br from-amber-50 to-amber/10 border-2 border-amber/50 rounded-2xl p-4">
+        <div className="text-xs font-black uppercase tracking-wide text-amber-700 text-center mb-3">
+          Modelo — {p.figura}
+        </div>
+        <div className="flex justify-center">
+          <div className="space-y-1.5">
+            {p.modelo.map((row: (number | null)[], r: number) => (
+              <div key={r} className="flex gap-1.5">
+                {row.map((v, c) => (
+                  <div key={c}
+                    className={v !== null ? CELL_MODEL : "w-8 h-8 sm:w-9 sm:h-9"}
+                    style={{ backgroundColor: v !== null ? p.cores[v - 1] : "transparent" }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <button onClick={verificar} className="bg-success text-white px-8 py-3 rounded-xl font-black">Conferir</button>
+
+      {/* Progress */}
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+          <div className="h-full bg-primary rounded-full transition-all duration-300"
+            style={{ width: `${totalCells > 0 ? (filledCells / totalCells) * 100 : 0}%` }} />
+        </div>
+        <span className="text-xs font-bold text-muted-foreground">{filledCells}/{totalCells}</span>
+      </div>
+
+      {/* Interactive build grid */}
+      <div className="bg-card border-2 border-primary/25 rounded-2xl p-4">
+        <div className="text-xs font-black uppercase tracking-wide text-primary text-center mb-3">
+          Monte aqui!
+        </div>
+        <div className="flex justify-center">
+          <div className="space-y-1.5">
+            {p.modelo.map((row: (number | null)[], r: number) => (
+              <div key={r} className="flex gap-1.5">
+                {row.map((v: number | null, c: number) => {
+                  const placed = built[r][c];
+                  const isTarget = v !== null;
+                  const isWrong = wrongCells.has(`${r}-${c}`);
+                  const isDragTarget = dragOver === `${r}-${c}`;
+                  return isTarget ? (
+                    <button key={c}
+                      onClick={() => handleCellClick(r, c)}
+                      onDragOver={e => { e.preventDefault(); setDragOver(`${r}-${c}`); }}
+                      onDragLeave={() => setDragOver(null)}
+                      onDrop={() => handleDrop(r, c)}
+                      style={{ backgroundColor: placed !== null && !isWrong ? p.cores[placed - 1] : undefined }}
+                      className={`${CELL_BUILD}
+                        ${isWrong
+                          ? "border-red-500 bg-red-100 animate-pulse scale-105"
+                          : placed !== null
+                          ? "border-white/40 shadow-md"
+                          : isDragTarget
+                          ? "border-primary bg-primary/20 scale-105"
+                          : selected !== null
+                          ? "border-dashed border-primary/70 bg-primary/5 hover:bg-primary/15 hover:scale-105 cursor-pointer"
+                          : "border-dashed border-muted-foreground/30 bg-muted/20 cursor-pointer"
+                        }`}
+                    />
+                  ) : (
+                    <div key={c} className="w-11 h-11 sm:w-12 sm:h-12" />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Color palette */}
+      <div>
+        <div className="text-xs font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
+          Escolha uma cor e toque nas células
+        </div>
+        <div className="flex gap-3 justify-center flex-wrap">
+          {p.cores.map((cor: string, i: number) => {
+            const idx = i + 1;
+            return (
+              <button key={i}
+                draggable
+                onDragStart={() => { setDragColor(idx); setSelected(idx); }}
+                onDragEnd={() => setDragColor(null)}
+                onClick={() => setSelected(s => s === idx ? null : idx)}
+                className={`w-16 h-16 rounded-2xl border-4 shadow-lg transition-all active:scale-95 flex flex-col items-center justify-center gap-1
+                  ${selected === idx ? "border-gray-800 scale-115 shadow-xl ring-4 ring-gray-800/20" : "border-white/60 hover:scale-110"}`}
+                style={{ backgroundColor: cor }}
+              >
+                <span className="text-[10px] font-black text-white/90 drop-shadow leading-tight text-center px-1">
+                  {p.nomesCores[i]}
+                </span>
+              </button>
+            );
+          })}
+          {/* Eraser */}
+          <button
+            onClick={() => setSelected(null)}
+            className={`w-16 h-16 rounded-2xl border-4 shadow-md flex flex-col items-center justify-center gap-1 transition-all active:scale-95
+              ${selected === null ? "border-gray-800 scale-115 bg-muted ring-4 ring-gray-800/20" : "border-muted/50 bg-muted/40 hover:scale-110"}`}
+          >
+            <X size={20} className="text-muted-foreground" />
+            <span className="text-[10px] font-bold text-muted-foreground">apagar</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Verify button */}
+      {allFilled && !checking && (
+        <button onClick={verificar}
+          className="w-full py-4 rounded-2xl bg-success text-white font-black text-xl active:scale-95 transition-all shadow-lg">
+          Conferir!
+        </button>
+      )}
+      {checking && wrongCells.size === 0 && (
+        <div className="w-full py-4 rounded-2xl bg-success/20 text-success font-black text-xl text-center animate-pulse">
+          Perfeito!
+        </div>
+      )}
+      {checking && wrongCells.size > 0 && (
+        <div className="w-full py-3 rounded-2xl bg-destructive/10 text-destructive font-bold text-base text-center">
+          Quase! Corrija as células vermelhas.
+        </div>
+      )}
     </div>
   );
 }
