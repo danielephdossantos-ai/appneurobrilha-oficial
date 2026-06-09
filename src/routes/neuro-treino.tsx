@@ -322,6 +322,7 @@ function Treino() {
           );
         })}
       </div>
+      </div>
     </Shell>
   );
 }
