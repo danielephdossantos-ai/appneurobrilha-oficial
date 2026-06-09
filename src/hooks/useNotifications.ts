@@ -35,13 +35,16 @@ export function useNotifications() {
 
   const sendNotification = useMutation({
     mutationFn: async (notif: Omit<Notification, "id" | "user_id" | "read" | "created_at" | "scheduled_for">) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
       const { error } = await supabase
         .from("notifications")
         .insert([{
           ...notif,
+          user_id: user.id,
           read: false,
           scheduled_for: new Date().toISOString()
-        }]);
+        }] as any);
       if (error) throw error;
     },
     onSuccess: () => {

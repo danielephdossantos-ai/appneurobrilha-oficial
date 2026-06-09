@@ -187,7 +187,9 @@ function Treino() {
   const fadiga = Math.round(metrics.fatigue.fatigueLevel * 100);
 
   return (
-    <Shell className="pb-8">
+    <Shell>
+      <div className="pb-8">
+
       {/* ── CABEÇALHO CONSULTÓRIO ──────────────────────────────── */}
       <div className="relative rounded-3xl overflow-hidden mb-6 bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-950 dark:to-slate-900 p-5 shadow-xl">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #7c3aed 0%, transparent 50%), radial-gradient(circle at 80% 20%, #0ea5e9 0%, transparent 50%)" }} />
@@ -319,6 +321,7 @@ function Treino() {
             </section>
           );
         })}
+      </div>
       </div>
     </Shell>
   );
