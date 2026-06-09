@@ -48,7 +48,7 @@ export const LGPDConsent: React.FC = () => {
         checkedRef.current = true;
         if (!session || !mountedRef.current) return;
 
-        const settings = await AuthService.getPrivacySettings();
+        const settings = await AuthService.getPrivacySettings() as { terms_accepted?: boolean } | null;
         if (settings?.terms_accepted) {
           localStorage.setItem(LGPD_KEY, "true");
           return;
