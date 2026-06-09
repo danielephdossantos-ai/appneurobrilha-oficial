@@ -1,18 +1,15 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  tanstackStart: {
+    server: { entry: "src/server.ts" },
+  },
   plugins: [
     tailwindcss(),
     tsconfigPaths(),
-    tanstackStart({
-      server: { entry: "src/server.ts" },
-    }),
-    react(),
     VitePWA({
       registerType: "prompt",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
@@ -45,34 +42,36 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    host: "0.0.0.0",
-    port: 5000,
-    allowedHosts: true,
-  },
-  resolve: {
-    alias: {
-      "@": `${process.cwd()}/src`,
+  vite: {
+    server: {
+      host: "0.0.0.0",
+      port: 5000,
+      allowedHosts: true,
     },
-    dedupe: [
-      "react",
-      "react-dom",
-      "react/jsx-runtime",
-      "react/jsx-dev-runtime",
-      "@tanstack/react-query",
-      "@tanstack/query-core",
-    ],
-  },
-  build: {
-    chunkSizeWarningLimit: 1000,
-  },
-  optimizeDeps: {
-    include: [
-      "framer-motion",
-      "recharts",
-      "lucide-react",
-      "@tanstack/react-virtual",
-      "idb-keyval",
-    ],
+    resolve: {
+      alias: {
+        "@": `${process.cwd()}/src`,
+      },
+      dedupe: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "react/jsx-dev-runtime",
+        "@tanstack/react-query",
+        "@tanstack/query-core",
+      ],
+    },
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
+    optimizeDeps: {
+      include: [
+        "framer-motion",
+        "recharts",
+        "lucide-react",
+        "@tanstack/react-virtual",
+        "idb-keyval",
+      ],
+    },
   },
 });
