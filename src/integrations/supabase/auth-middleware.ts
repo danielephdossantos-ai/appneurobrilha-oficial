@@ -1,9 +1,9 @@
 import { createMiddleware } from '@tanstack/react-start'
-import { getWebRequest } from '@tanstack/react-start/server'
+import { getRequest } from '@tanstack/react-start/server'
 
 export const requireSupabaseAuth = createMiddleware({ type: 'function' }).server(
   async ({ next }) => {
-    const request = getWebRequest();
+    const request = getRequest();
 
     if (!request?.headers) {
       throw new Error('Unauthorized: No request headers available');
