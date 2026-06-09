@@ -258,6 +258,56 @@ export type Database = {
           },
         ]
       }
+      anamnese_v2: {
+        Row: {
+          child_id: string
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          current_step: number
+          id: string
+          responses: Json
+          risk_levels: Json
+          scores: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          child_id: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_step?: number
+          id?: string
+          responses?: Json
+          risk_levels?: Json
+          scores?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          child_id?: string
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          current_step?: number
+          id?: string
+          responses?: Json
+          risk_levels?: Json
+          scores?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anamnese_v2_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       anamnesis: {
         Row: {
           child_id: string
