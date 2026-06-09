@@ -27,6 +27,7 @@ import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
+import { Route as AnamneseRouteImport } from './routes/anamnese'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
@@ -128,6 +129,11 @@ const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
   path: '/auditoria-pedagogica',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnamneseRoute = AnamneseRouteImport.update({
+  id: '/anamnese',
+  path: '/anamnese',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -169,9 +175,9 @@ const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
   getParentRoute: () => EscolaBrilhaRoute,
 } as any)
 const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
-  id: '/anamnese/$childId',
-  path: '/anamnese/$childId',
-  getParentRoute: () => rootRouteImport,
+  id: '/$childId',
+  path: '/$childId',
+  getParentRoute: () => AnamneseRoute,
 } as any)
 const AjusteDificuldadesChildIdRoute =
   AjusteDificuldadesChildIdRouteImport.update({
@@ -185,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/anamnese': typeof AnamneseRouteWithChildren
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -215,6 +222,7 @@ export interface FileRoutesByTo {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/anamnese': typeof AnamneseRouteWithChildren
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -245,6 +253,7 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
+  '/anamnese': typeof AnamneseRouteWithChildren
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/brilha-vida': typeof BrilhaVidaRoute
@@ -277,6 +286,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/anamnese'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/anamnese'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -336,6 +347,7 @@ export interface FileRouteTypes {
     | '/agenda'
     | '/amigo-virtual'
     | '/analytics'
+    | '/anamnese'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/brilha-vida'
@@ -367,6 +379,7 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  AnamneseRoute: typeof AnamneseRouteWithChildren
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
@@ -386,7 +399,6 @@ export interface RootRouteChildren {
   RotinaRoute: typeof RotinaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
-  AnamneseChildIdRoute: typeof AnamneseChildIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -517,6 +529,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuditoriaPedagogicaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/anamnese': {
+      id: '/anamnese'
+      path: '/anamnese'
+      fullPath: '/anamnese'
+      preLoaderRoute: typeof AnamneseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/analytics': {
       id: '/analytics'
       path: '/analytics'
@@ -575,10 +594,10 @@ declare module '@tanstack/react-router' {
     }
     '/anamnese/$childId': {
       id: '/anamnese/$childId'
-      path: '/anamnese/$childId'
+      path: '/$childId'
       fullPath: '/anamnese/$childId'
       preLoaderRoute: typeof AnamneseChildIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AnamneseRoute
     }
     '/ajuste-dificuldades/$childId': {
       id: '/ajuste-dificuldades/$childId'
@@ -589,6 +608,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AnamneseRouteChildren {
+  AnamneseChildIdRoute: typeof AnamneseChildIdRoute
+}
+
+const AnamneseRouteChildren: AnamneseRouteChildren = {
+  AnamneseChildIdRoute: AnamneseChildIdRoute,
+}
+
+const AnamneseRouteWithChildren = AnamneseRoute._addFileChildren(
+  AnamneseRouteChildren,
+)
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
@@ -623,6 +654,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
+  AnamneseRoute: AnamneseRouteWithChildren,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
@@ -642,7 +674,6 @@ const rootRouteChildren: RootRouteChildren = {
   RotinaRoute: RotinaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
-  AnamneseChildIdRoute: AnamneseChildIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
