@@ -3,6 +3,10 @@ const path = require('path');
 const sharp = require('sharp');
 
 const srcDir = path.join(__dirname, '../src/assets/mascots/teens');
+const inspectFiles = [
+  path.join(__dirname, '../src/assets/pip-mascot.png'),
+  path.join(__dirname, '../src/assets/pip-girl-mascot.png')
+];
 const outSizes = [512, 1024];
 
 async function convert() {
