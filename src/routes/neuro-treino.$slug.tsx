@@ -1452,7 +1452,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
           return (
             <button key={i} onClick={() => handleClick(palavra)}
               className={`rounded-3xl border-2 p-5 flex flex-col items-center gap-3 transition-all font-black text-lg ${bg}`}>
-              <span className="text-5xl">{emoji}</span>
+              <RenderEmoji e={emoji} className="w-16 h-16" />
               <span>{palavra}</span>
             </button>
           );
@@ -1473,7 +1473,7 @@ function ArticulacaoSons({ p, onDone }: any) {
   };
   return (
     <div className="text-center space-y-5">
-      <div className="text-7xl">{p.emoji}</div>
+      <div className="flex justify-center"><RenderEmoji e={p.emoji} className="w-28 h-28" /></div>
       <div className="text-3xl font-black tracking-widest">
         {p.silabas.map((s: string, i: number) => (
           <span key={i} className={`px-1 rounded-lg transition-all ${i === silIdx && !done ? "bg-rose/30 text-rose-700 scale-110 inline-block" : i < silIdx ? "text-muted-foreground" : ""}`}>{s}</span>
@@ -1485,7 +1485,7 @@ function ArticulacaoSons({ p, onDone }: any) {
       </div>
       <button onClick={handleSilaba} disabled={done}
         className="w-full py-5 rounded-3xl bg-rose-500 text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-50">
-        {done ? "✅ Muito bem!" : `Falar: ${p.silabas[silIdx]}`}
+        {done ? "Muito bem!" : `Falar: ${p.silabas[silIdx]}`}
       </button>
       <div className="text-sm text-muted-foreground">{silIdx + 1} / {p.silabas.length} sílabas</div>
     </div>
@@ -1516,7 +1516,7 @@ function VocabularioSemantico({ p, onDone }: any) {
           return (
             <button key={i} onClick={() => handleClick(item)}
               className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}>
-              <span className="text-4xl">{emoji}</span>
+              <RenderEmoji e={emoji} label={nome} className="w-14 h-14" />
               <span className="font-bold text-sm">{nome}</span>
             </button>
           );
@@ -1544,9 +1544,9 @@ function NomeacaoRapida({ p, onDone }: any) {
     <div className="text-center space-y-5">
       <div className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}>
         {fase === "flash" ? (
-          <span className="text-7xl animate-pulse">{p.emoji}</span>
+          <div className="animate-pulse"><RenderEmoji e={p.emoji} className="w-28 h-28" /></div>
         ) : (
-          <div className="text-muted-foreground font-bold">🤔 Qual era?</div>
+          <div className="text-muted-foreground font-bold text-lg">Qual era?</div>
         )}
       </div>
       {fase !== "flash" && (
@@ -1662,7 +1662,7 @@ function RitmoBatidas({ p, onDone }: any) {
       )}
       {feedback && (
         <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}>
-          {feedback === "ok" ? "✅ Perfeito!" : "❌ Tente de novo!"}
+          {feedback === "ok" ? "Perfeito!" : "Tente de novo!"}
         </div>
       )}
     </div>
@@ -1707,7 +1707,7 @@ function CopiarFigura({ p, onDone }: any) {
       </div>
       <button onClick={validar} disabled={validado}
         className="w-full py-4 rounded-2xl bg-emerald-500 text-white font-black text-lg active:scale-95 transition-all disabled:opacity-50">
-        ✅ Pronto!
+        Pronto!
       </button>
     </div>
   );
@@ -1751,11 +1751,11 @@ function AlvoMovel({ p, onDone }: any) {
           <button
             onClick={handleToque}
             style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%,-50%)", backgroundColor: p.cor }}
-            className="absolute w-16 h-16 rounded-full text-3xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
-            {p.emoji}
+            className="absolute w-16 h-16 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+            <RenderEmoji e={p.emoji} className="w-10 h-10" />
           </button>
         )}
-        {perdeu && <div className="flex items-center justify-center h-full text-4xl">⏱️ Tempo!</div>}
+        {perdeu && <div className="flex items-center justify-center h-full text-xl font-black text-muted-foreground">Tempo!</div>}
       </div>
     </div>
   );
@@ -1781,8 +1781,8 @@ function AcharDiferente({ p, onDone }: any) {
           const bg = selecionado === i ? (certa ? "bg-success/20 border-success scale-110" : "bg-destructive/20 border-destructive") : selecionado !== null && certa ? "bg-success/20 border-success" : "bg-card border-border hover:border-violet/50 hover:scale-105";
           return (
             <button key={i} onClick={() => handleClick(i)}
-              className={`rounded-xl border-2 p-2 text-2xl flex items-center justify-center transition-all ${bg}`}>
-              {emoji}
+              className={`rounded-xl border-2 p-1 flex items-center justify-center transition-all ${bg}`}>
+              <RenderEmoji e={emoji} className="w-10 h-10" />
             </button>
           );
         })}
@@ -1846,7 +1846,7 @@ function MemoriaVisual({ p, onDone }: any) {
       )}
       {feedback !== null && (
         <div className={`text-2xl font-black ${feedback ? "text-success" : "text-destructive"}`}>
-          {feedback ? "✅ Incrível!" : "❌ Quase!"}
+          {feedback ? "Incrível!" : "Quase!"}
         </div>
       )}
     </div>
@@ -1883,11 +1883,11 @@ function ReacaoRapida({ p, onDone }: any) {
   return (
     <div className="text-center space-y-5">
       <div className="text-xs text-muted-foreground font-bold">
-        ✅ Toque em <span className="text-success">{p.alvo}</span> | ❌ Ignore <span className="text-destructive">{p.erro}</span>
+        <span className="text-success">✓ Toque em {p.alvo}</span> <span className="mx-1">|</span> <span className="text-destructive">✕ Ignore {p.erro}</span>
       </div>
       <button onClick={handleToque}
-        className={`w-full rounded-3xl border-2 py-12 text-8xl transition-all active:scale-95 ${feedbackLocal === "ok" ? "border-success bg-success/10" : feedbackLocal === "erro" ? "border-destructive bg-destructive/10" : "border-border bg-card hover:border-violet/50"}`}>
-        {mostrar ? item.emoji : "···"}
+        className={`w-full rounded-3xl border-2 py-8 flex items-center justify-center transition-all active:scale-95 ${feedbackLocal === "ok" ? "border-success bg-success/10" : feedbackLocal === "erro" ? "border-destructive bg-destructive/10" : "border-border bg-card hover:border-violet/50"}`}>
+        {mostrar ? <RenderEmoji e={item.emoji} className="w-24 h-24" /> : <span className="text-3xl font-black text-muted-foreground">···</span>}
       </button>
       <div className="text-sm text-muted-foreground">{idx + 1} / {p.seq.length}</div>
     </div>
@@ -1914,8 +1914,8 @@ function SeguirInstrucao({ p, onDone }: any) {
           const bg = selecionado === item ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-violet/50";
           return (
             <button key={i} onClick={() => handleClick(item)}
-              className={`rounded-2xl border-2 p-5 text-4xl font-bold flex flex-col items-center gap-2 transition-all ${bg}`}>
-              {item}
+              className={`rounded-2xl border-2 p-4 font-bold flex flex-col items-center gap-2 transition-all ${bg}`}>
+              <RenderEmoji e={item} className="w-14 h-14" />
             </button>
           );
         })}
@@ -1947,7 +1947,7 @@ function LetraSom({ p, onDone }: any) {
           return (
             <button key={i} onClick={() => handleClick(img.n)}
               className={`rounded-2xl border-2 p-5 flex flex-col items-center gap-2 transition-all font-bold ${bg}`}>
-              <span className="text-5xl">{img.e}</span>
+              <RenderEmoji e={img.e} label={img.n} className="w-16 h-16" />
               <span className="text-sm">{img.n}</span>
             </button>
           );
@@ -1967,8 +1967,8 @@ function PalavraImagem({ p, onDone }: any) {
   };
   return (
     <div className="space-y-5 text-center">
-      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8">
-        <span className="text-8xl">{p.emoji}</span>
+      <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8 flex items-center justify-center">
+        <RenderEmoji e={p.emoji} className="w-32 h-32" />
       </div>
       <div className="grid grid-cols-2 gap-3">
         {p.opts.map((opt: string, i: number) => {
@@ -2046,8 +2046,8 @@ function LeituraPalavras({ p, onDone }: any) {
           const bg = selecionado === e ? (certa ? "border-success bg-success/10" : "border-destructive bg-destructive/10") : selecionado && certa ? "border-success bg-success/10" : "border-border bg-card hover:border-amber/60";
           return (
             <button key={i} onClick={() => handleClick(e)}
-              className={`rounded-2xl border-2 py-6 text-6xl transition-all ${bg}`}>
-              {e}
+              className={`rounded-2xl border-2 py-4 flex items-center justify-center transition-all ${bg}`}>
+              <RenderEmoji e={e} className="w-16 h-16" />
             </button>
           );
         })}
@@ -2066,7 +2066,7 @@ function CompletarLetra({ p, onDone }: any) {
   };
   return (
     <div className="space-y-5 text-center">
-      <div className="text-6xl mb-2">{p.emoji}</div>
+      <div className="flex justify-center mb-2"><RenderEmoji e={p.emoji} className="w-24 h-24" /></div>
       <div className="bg-gradient-to-br from-amber/20 to-amber/5 border-2 border-amber/30 rounded-3xl p-6">
         <div className="text-xs uppercase text-muted-foreground mb-2">Complete a palavra</div>
         <div className="text-4xl font-black tracking-widest">
