@@ -32,6 +32,23 @@ import icLabPrecisao from "@/assets/neuro-treino/icons/v2/labirinto-precisao.png
 import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
 import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
 import icConscienciaFono from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png";
+import icDiscriminacaoAuditiva from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.svg";
+import icArticulacaoSons from "@/assets/neuro-treino/icons/v2/articulacao-sons.svg";
+import icVocabularioSemantico from "@/assets/neuro-treino/icons/v2/vocabulario-semantico.svg";
+import icNomeacaoRapida from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.svg";
+import icToqueSequencia from "@/assets/neuro-treino/icons/v2/toque-sequencia.svg";
+import icRitmoBatidas from "@/assets/neuro-treino/icons/v2/ritmo-batidas.svg";
+import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.svg";
+import icAlvoMovel from "@/assets/neuro-treino/icons/v2/alvo-movel.svg";
+import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.svg";
+import icMemoriaVisual from "@/assets/neuro-treino/icons/v2/memoria-visual.svg";
+import icReacaoRapida from "@/assets/neuro-treino/icons/v2/reacao-rapida.svg";
+import icSeguirInstrucao from "@/assets/neuro-treino/icons/v2/seguir-instrucao.svg";
+import icLetraSom from "@/assets/neuro-treino/icons/v2/letra-som.svg";
+import icPalavraImagem from "@/assets/neuro-treino/icons/v2/palavra-imagem.svg";
+import icFormandoPalavras from "@/assets/neuro-treino/icons/v2/formando-palavras.svg";
+import icLeituraPalavras from "@/assets/neuro-treino/icons/v2/leitura-palavras.svg";
+import icCompletarLetra from "@/assets/neuro-treino/icons/v2/completar-letra.svg";
 
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,
@@ -58,27 +75,23 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "labirinto-precisao": icLabPrecisao,
   "triagem-categorias": icTriagem,
   "expressao-emocao": icExpressao,
-};
-
-// Emojis para categorias sem ícone PNG
-const EMOJI_ICONS: Partial<Record<CategoriaSlug, string>> = {
-  "discriminacao-auditiva": "👂",
-  "articulacao-sons": "🗣️",
-  "vocabulario-semantico": "🧩",
-  "nomeacao-rapida": "⚡",
-  "toque-sequencia": "👆",
-  "ritmo-batidas": "🥁",
-  "copiar-figura": "📐",
-  "alvo-movel": "🎯",
-  "achar-diferente": "🔍",
-  "memoria-visual": "🧠",
-  "reacao-rapida": "⚡",
-  "seguir-instrucao": "📋",
-  "letra-som": "🔤",
-  "palavra-imagem": "🖼️",
-  "formando-palavras": "✏️",
-  "leitura-palavras": "📖",
-  "completar-letra": "🔡",
+  "discriminacao-auditiva": icDiscriminacaoAuditiva,
+  "articulacao-sons": icArticulacaoSons,
+  "vocabulario-semantico": icVocabularioSemantico,
+  "nomeacao-rapida": icNomeacaoRapida,
+  "toque-sequencia": icToqueSequencia,
+  "ritmo-batidas": icRitmoBatidas,
+  "copiar-figura": icCopiarFigura,
+  "alvo-movel": icAlvoMovel,
+  "achar-diferente": icAcharDiferente,
+  "memoria-visual": icMemoriaVisual,
+  "reacao-rapida": icReacaoRapida,
+  "seguir-instrucao": icSeguirInstrucao,
+  "letra-som": icLetraSom,
+  "palavra-imagem": icPalavraImagem,
+  "formando-palavras": icFormandoPalavras,
+  "leitura-palavras": icLeituraPalavras,
+  "completar-letra": icCompletarLetra,
 };
 
 // Ícone do grupo clínico
@@ -271,7 +284,6 @@ function Treino() {
                 {g.slugs.map((slug) => {
                   const c = CATEGORIAS[slug];
                   const iconSrc = ICONS[slug];
-                  const emoji = EMOJI_ICONS[slug];
                   const varCount = VARIATIONS[slug]?.length ?? 0;
 
                   return (
@@ -292,19 +304,15 @@ function Treino() {
 
                       {/* Ícone */}
                       <div className="w-16 h-16 grid place-items-center mb-2 rounded-xl">
-                        {iconSrc ? (
-                          <img
-                            src={iconSrc}
-                            alt={c?.nome ?? slug}
-                            loading="lazy"
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-contain drop-shadow group-hover:scale-105 transition-transform"
-                            draggable={false}
-                          />
-                        ) : (
-                          <span className="text-4xl group-hover:scale-110 transition-transform block">{emoji ?? "🎯"}</span>
-                        )}
+                        <img
+                          src={iconSrc ?? ""}
+                          alt={c?.nome ?? slug}
+                          loading="lazy"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain drop-shadow group-hover:scale-105 transition-transform"
+                          draggable={false}
+                        />
                       </div>
 
                       <div className="font-extrabold text-xs leading-tight text-foreground">{c?.nome ?? slug}</div>

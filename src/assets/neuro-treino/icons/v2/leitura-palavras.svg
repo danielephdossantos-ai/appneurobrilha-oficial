@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="60" fill="url(#bg)"/>
+  <rect x="24" y="22" width="80" height="90" rx="10" fill="#92400e" opacity="0.9"/>
+  <rect x="28" y="26" width="72" height="82" rx="8" fill="white"/>
+  <rect x="28" y="26" width="72" height="16" rx="8" fill="#fbbf24"/>
+  <rect x="28" y="34" width="72" height="8" fill="#fbbf24"/>
+  <text x="64" y="40" font-size="8" text-anchor="middle" fill="white" font-weight="bold" font-family="sans-serif">LER E APRENDER</text>
+  <line x1="36" y1="54" x2="92" y2="54" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="62" x2="88" y2="62" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="70" x2="92" y2="70" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+  <rect x="34" y="78" width="30" height="12" rx="4" fill="#fbbf24" opacity="0.5"/>
+  <line x1="36" y1="84" x2="62" y2="84" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+  <rect x="34" y="94" width="44" height="4" rx="2" fill="#bfdbfe"/>
+  <circle cx="86" cy="86" r="14" fill="#fef9c3" stroke="#fbbf24" stroke-width="2.5"/>
+  <circle cx="86" cy="84" r="5" fill="#1d4ed8" opacity="0.8"/>
+  <path d="M80 90 Q86 87 92 90" stroke="#1d4ed8" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

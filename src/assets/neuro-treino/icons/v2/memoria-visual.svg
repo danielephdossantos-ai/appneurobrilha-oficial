@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#faf5ff"/>
+      <stop offset="100%" stop-color="#e9d5ff"/>
+    </radialGradient>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="60" fill="url(#bg)"/>
+  <path d="M64 30 C44 30 28 44 28 58 C28 66 32 73 40 78 L40 90 L52 90 L52 80 C56 81 60 82 64 82 C68 82 72 81 76 80 L76 90 L88 90 L88 78 C96 73 100 66 100 58 C100 44 84 30 64 30 Z" fill="url(#brain)"/>
+  <path d="M64 30 C64 30 64 82 64 82" stroke="#c4b5fd" stroke-width="2" opacity="0.5"/>
+  <path d="M44 38 Q36 48 38 58" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M84 38 Q92 48 90 58" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M36 56 Q40 50 48 54" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M92 56 Q88 50 80 54" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="48" cy="55" r="5" fill="#fbbf24" opacity="0.9"/>
+  <circle cx="64" cy="50" r="5" fill="#34d399" opacity="0.9"/>
+  <circle cx="80" cy="55" r="5" fill="#f87171" opacity="0.9"/>
+  <circle cx="56" cy="68" r="4" fill="#60a5fa" opacity="0.9"/>
+  <circle cx="72" cy="68" r="4" fill="#f472b6" opacity="0.9"/>
+  <path d="M48 55 L64 50 L80 55" stroke="white" stroke-width="1.5" fill="none" stroke-dasharray="3 2" opacity="0.6"/>
+  <path d="M48 55 L56 68 L72 68 L80 55" stroke="white" stroke-width="1.5" fill="none" stroke-dasharray="3 2" opacity="0.6"/>
+</svg>
