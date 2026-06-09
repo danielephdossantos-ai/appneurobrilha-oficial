@@ -1,0 +1,50 @@
+[
+  {
+    "id": "pip-teen-skate",
+    "name": "Pip Skatista",
+    "file": "src/assets/mascots/teens/pip-teen-skate.svg",
+    "gender": "male",
+    "tags": ["teen","skate","pip"],
+    "description": "Versão adolescente do Pip com visual skatista (mesma silhueta do Pip)."
+  },
+  {
+    "id": "pip-teen-gamer",
+    "name": "Pip Gamer",
+    "file": "src/assets/mascots/teens/pip-teen-gamer.svg",
+    "gender": "male",
+    "tags": ["teen","gamer","pip"],
+    "description": "Pip adolescente com estilo gamer e acessórios tecnológicos."
+  },
+  {
+    "id": "pip-teen-artist",
+    "name": "Pip Artista",
+    "file": "src/assets/mascots/teens/pip-teen-artist.svg",
+    "gender": "male",
+    "tags": ["teen","artist","pip"],
+    "description": "Pip adolescente com caderno de desenho e boina, mantendo o traço base."
+  },
+  {
+    "id": "pipa-teen-street",
+    "name": "Pipa Trendy",
+    "file": "src/assets/mascots/teens/pipa-teen-street.svg",
+    "gender": "female",
+    "tags": ["teen","street","pipa"],
+    "description": "Pipa adolescente com jaqueta trendy e acessórios, seguindo o padrão visual."
+  },
+  {
+    "id": "pipa-teen-athlete",
+    "name": "Pipa Atleta",
+    "file": "src/assets/mascots/teens/pipa-teen-athlete.svg",
+    "gender": "female",
+    "tags": ["teen","athlete","pipa"],
+    "description": "Pipa adolescente com visual esportivo e garrafa d'água como acessório."
+  },
+  {
+    "id": "pipa-teen-tech",
+    "name": "Pipa Tech",
+    "file": "src/assets/mascots/teens/pipa-teen-tech.svg",
+    "gender": "female",
+    "tags": ["teen","tech","pipa"],
+    "description": "Pipa adolescente com acessórios tecnológicos e óculos leves."
+  }
+]

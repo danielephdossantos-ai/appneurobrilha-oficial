@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Pipa adolescente atleta">
+  <defs>
+    <style>.skin{fill:#FFD9B3}.hair{fill:#fb7185}.cloth{fill:#f97316}.accent{fill:#fde68a}.shoe{fill:#0f172a}</style>
+  </defs>
+  <g transform="translate(0,6)">
+    <circle cx="100" cy="50" r="28" class="skin" />
+    <path d="M72 44c6-12 56-12 62 0v6c-16-6-46-6-62 0v-6z" class="hair" />
+    <circle cx="92" cy="52" r="4" fill="#0b1320" />
+    <circle cx="108" cy="52" r="4" fill="#0b1320" />
+
+    <rect x="66" y="82" width="68" height="44" rx="10" class="cloth" />
+    <rect x="78" y="96" width="44" height="6" rx="3" class="accent" />
+
+    <rect x="62" y="132" width="36" height="12" rx="6" class="shoe" />
+    <rect x="102" y="132" width="36" height="12" rx="6" class="shoe" />
+
+    <!-- Garrafa d'água -->
+    <rect x="136" y="100" width="10" height="20" rx="4" fill="#60a5fa" />
+  </g>
+</svg>

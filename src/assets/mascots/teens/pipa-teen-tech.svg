@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Pipa adolescente tech">
+  <defs>
+    <style>.skin{fill:#FFD9B3}.hair{fill:#f472b6}.cloth{fill:#c084fc}.accent{fill:#a78bfa}.glass{fill:#eef2ff;opacity:0.7}.shoe{fill:#0f172a}</style>
+  </defs>
+  <g transform="translate(0,6)">
+    <circle cx="100" cy="50" r="28" class="skin" />
+    <path d="M76 44c6-12 44-12 50 0v6c-14-6-36-6-50 0v-6z" class="hair" />
+    <circle cx="92" cy="52" r="4" fill="#0b1320" />
+    <circle cx="108" cy="52" r="4" fill="#0b1320" />
+
+    <rect x="68" y="82" width="64" height="44" rx="10" class="cloth" />
+    <rect x="76" y="90" width="48" height="8" rx="4" class="accent" />
+
+    <!-- Óculos leves -->
+    <rect x="84" y="44" width="32" height="12" rx="6" class="glass" />
+
+    <rect x="62" y="132" width="36" height="12" rx="6" class="shoe" />
+    <rect x="102" y="132" width="36" height="12" rx="6" class="shoe" />
+  </g>
+</svg>
