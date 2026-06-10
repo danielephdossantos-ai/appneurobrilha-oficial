@@ -34,6 +34,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
+import { Route as HistoriasStoryIdRouteImport } from './routes/historias.$storyId'
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -164,6 +165,11 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
+const HistoriasStoryIdRoute = HistoriasStoryIdRouteImport.update({
+  id: '/$storyId',
+  path: '/$storyId',
+  getParentRoute: () => HistoriasRoute,
+} as any)
 const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
   id: '/aula',
   path: '/aula',
@@ -198,7 +204,7 @@ export interface FileRoutesByFullPath {
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRoute
+  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -213,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -228,7 +235,7 @@ export interface FileRoutesByTo {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRoute
+  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -243,6 +250,7 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
@@ -260,7 +268,7 @@ export interface FileRoutesById {
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRoute
+  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -275,6 +283,7 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -308,6 +317,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -338,6 +348,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
@@ -369,6 +380,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -386,7 +398,7 @@ export interface RootRouteChildren {
   ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
   GeradorProceduralRoute: typeof GeradorProceduralRoute
-  HistoriasRoute: typeof HistoriasRoute
+  HistoriasRoute: typeof HistoriasRouteWithChildren
   Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
@@ -579,6 +591,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
+    '/historias/$storyId': {
+      id: '/historias/$storyId'
+      path: '/$storyId'
+      fullPath: '/historias/$storyId'
+      preLoaderRoute: typeof HistoriasStoryIdRouteImport
+      parentRoute: typeof HistoriasRoute
+    }
     '/escola-brilha/aula': {
       id: '/escola-brilha/aula'
       path: '/aula'
@@ -624,6 +643,18 @@ const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
   EscolaBrilhaRouteChildren,
 )
 
+interface HistoriasRouteChildren {
+  HistoriasStoryIdRoute: typeof HistoriasStoryIdRoute
+}
+
+const HistoriasRouteChildren: HistoriasRouteChildren = {
+  HistoriasStoryIdRoute: HistoriasStoryIdRoute,
+}
+
+const HistoriasRouteWithChildren = HistoriasRoute._addFileChildren(
+  HistoriasRouteChildren,
+)
+
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
@@ -661,7 +692,7 @@ const rootRouteChildren: RootRouteChildren = {
   ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,
   GeradorProceduralRoute: GeradorProceduralRoute,
-  HistoriasRoute: HistoriasRoute,
+  HistoriasRoute: HistoriasRouteWithChildren,
   Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
