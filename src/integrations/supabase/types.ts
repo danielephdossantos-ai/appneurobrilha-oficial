@@ -2458,6 +2458,187 @@ export type Database = {
           },
         ]
       }
+      stories: {
+        Row: {
+          age_max: number
+          age_min: number
+          ai_generated: boolean | null
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          difficulty: number
+          id: string
+          reading_level: string
+          theme: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          age_max?: number
+          age_min?: number
+          ai_generated?: boolean | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          id?: string
+          reading_level?: string
+          theme: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          age_max?: number
+          age_min?: number
+          ai_generated?: boolean | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          id?: string
+          reading_level?: string
+          theme?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      story_pages: {
+        Row: {
+          audio_url: string | null
+          created_at: string
+          highlight_words: Json | null
+          id: string
+          image_url: string | null
+          page_number: number
+          story_id: string
+          text: string
+        }
+        Insert: {
+          audio_url?: string | null
+          created_at?: string
+          highlight_words?: Json | null
+          id?: string
+          image_url?: string | null
+          page_number: number
+          story_id: string
+          text: string
+        }
+        Update: {
+          audio_url?: string | null
+          created_at?: string
+          highlight_words?: Json | null
+          id?: string
+          image_url?: string | null
+          page_number?: number
+          story_id?: string
+          text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_pages_story_id_fkey"
+            columns: ["story_id"]
+            isOneToOne: false
+            referencedRelation: "stories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      story_progress: {
+        Row: {
+          child_id: string
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string
+          current_page: number | null
+          id: string
+          score: number | null
+          story_id: string
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string
+          current_page?: number | null
+          id?: string
+          score?: number | null
+          story_id: string
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string
+          current_page?: number | null
+          id?: string
+          score?: number | null
+          story_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_progress_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "story_progress_story_id_fkey"
+            columns: ["story_id"]
+            isOneToOne: false
+            referencedRelation: "stories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      story_questions: {
+        Row: {
+          correct_answer: string
+          created_at: string
+          difficulty: number
+          id: string
+          option_a: string
+          option_b: string
+          option_c: string
+          question: string
+          story_id: string
+        }
+        Insert: {
+          correct_answer: string
+          created_at?: string
+          difficulty?: number
+          id?: string
+          option_a: string
+          option_b: string
+          option_c: string
+          question: string
+          story_id: string
+        }
+        Update: {
+          correct_answer?: string
+          created_at?: string
+          difficulty?: number
+          id?: string
+          option_a?: string
+          option_b?: string
+          option_c?: string
+          question?: string
+          story_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_questions_story_id_fkey"
+            columns: ["story_id"]
+            isOneToOne: false
+            referencedRelation: "stories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       study_agenda: {
         Row: {
           child_id: string
