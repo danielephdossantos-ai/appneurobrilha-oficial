@@ -351,73 +351,141 @@ const SACADICO_VARS: Variation[] = range(30).map((i) => {
   return { id:`rs-${i+1}`, payload:{ sequencia: seq, posicoes: 4, flashMs: 600 - (i%4)*80 } };
 });
 
-// 12. MOSAICO DE FORMAS — escolher peças corretas (Tangram)
-const MOSAICO_BANK = [
+// 12. MOSAICO DE FORMAS — montar figuras com peças geométricas reais (Tangram)
+export type ShapeType = "triangle-up" | "triangle-down" | "triangle-left" | "triangle-right" | "rect" | "circle" | "trapezoid";
+
+export interface MosaicoPiece {
+  id: number;
+  shape: ShapeType;
+  x: number; y: number; w: number; h: number;
+  color: string;
+  label: string;
+}
+
+export interface MosaicoData {
+  figura: string;
+  emoji: string;
+  viewW: number;
+  viewH: number;
+  pieces: MosaicoPiece[];
+  distractors: MosaicoPiece[];
+}
+
+const MOSAICO_BANK: MosaicoData[] = [
   {
-    figura: "Casa",
-    modelo: [
-      [null, 1,    1,    null],
-      [1,    1,    1,    1   ],
-      [2,    2,    2,    2   ],
-      [2,    2,    2,    2   ],
+    figura: "Casa", emoji: "🏠", viewW: 200, viewH: 200,
+    pieces: [
+      { id:1, shape:"triangle-up",  x:18,  y:15,  w:164, h:76,  color:"#ef4444", label:"telhado" },
+      { id:2, shape:"rect",         x:38,  y:88,  w:124, h:82,  color:"#fbbf24", label:"parede"  },
+      { id:3, shape:"rect",         x:82,  y:128, w:36,  h:42,  color:"#92400e", label:"porta"   },
+      { id:4, shape:"rect",         x:50,  y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
+      { id:5, shape:"rect",         x:122, y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
     ],
-    cores: ["#ef4444", "#3b82f6"],
-    nomesCores: ["vermelho", "azul"],
+    distractors: [
+      { id:101, shape:"circle",        x:70,  y:70,  w:60, h:60, color:"#22c55e", label:"bola"      },
+      { id:102, shape:"triangle-down", x:60,  y:30,  w:80, h:55, color:"#8b5cf6", label:"triângulo" },
+      { id:103, shape:"trapezoid",     x:30,  y:100, w:100,h:40, color:"#f97316", label:"tabuleiro" },
+    ],
   },
   {
-    figura: "Barco",
-    modelo: [
-      [null, null, 1,    null, null],
-      [null, 1,    1,    1,    null],
-      [2,    2,    2,    2,    2   ],
+    figura: "Carro", emoji: "🚗", viewW: 220, viewH: 140,
+    pieces: [
+      { id:1, shape:"rect",   x:10,  y:68,  w:200, h:48, color:"#3b82f6", label:"carroceria" },
+      { id:2, shape:"rect",   x:55,  y:28,  w:110, h:44, color:"#60a5fa", label:"cabine"     },
+      { id:3, shape:"rect",   x:64,  y:35,  w:92,  h:30, color:"#bae6fd", label:"vidro"      },
+      { id:4, shape:"circle", x:30,  y:96,  w:48,  h:48, color:"#1f2937", label:"roda"       },
+      { id:5, shape:"circle", x:142, y:96,  w:48,  h:48, color:"#1f2937", label:"roda"       },
     ],
-    cores: ["#93c5fd", "#f97316"],
-    nomesCores: ["azul", "laranja"],
+    distractors: [
+      { id:101, shape:"triangle-up", x:60,  y:20,  w:100, h:60, color:"#ef4444", label:"telhado" },
+      { id:102, shape:"rect",        x:30,  y:50,  w:80,  h:40, color:"#22c55e", label:"caixa"   },
+      { id:103, shape:"circle",      x:80,  y:30,  w:50,  h:50, color:"#f59e0b", label:"sol"     },
+    ],
   },
   {
-    figura: "Arvore",
-    modelo: [
-      [null, null, 1,    null, null],
-      [null, 1,    1,    1,    null],
-      [1,    1,    1,    1,    1   ],
-      [null, null, 2,    null, null],
+    figura: "Árvore", emoji: "🌳", viewW: 180, viewH: 210,
+    pieces: [
+      { id:1, shape:"triangle-up", x:10,  y:8,   w:160, h:88,  color:"#22c55e", label:"copa"    },
+      { id:2, shape:"triangle-up", x:28,  y:62,  w:124, h:78,  color:"#16a34a", label:"copa"    },
+      { id:3, shape:"rect",        x:72,  y:150, w:36,  h:55,  color:"#92400e", label:"tronco"  },
     ],
-    cores: ["#22c55e", "#92400e"],
-    nomesCores: ["verde", "marrom"],
+    distractors: [
+      { id:101, shape:"circle",        x:60, y:50,  w:60, h:60, color:"#ef4444", label:"bola"      },
+      { id:102, shape:"rect",          x:40, y:80,  w:20, h:60, color:"#3b82f6", label:"bloco"     },
+      { id:103, shape:"triangle-down", x:40, y:130, w:80, h:50, color:"#f97316", label:"triângulo" },
+    ],
   },
   {
-    figura: "Sol",
-    modelo: [
-      [1,    null, 1,    null, 1   ],
-      [null, 1,    1,    1,    null],
-      [1,    1,    1,    1,    1   ],
-      [null, 1,    1,    1,    null],
-      [1,    null, 1,    null, 1   ],
+    figura: "Foguete", emoji: "🚀", viewW: 140, viewH: 230,
+    pieces: [
+      { id:1, shape:"triangle-up",    x:30,  y:5,   w:80,  h:52,  color:"#ef4444", label:"ponta"  },
+      { id:2, shape:"rect",           x:42,  y:52,  w:56,  h:120, color:"#9ca3af", label:"corpo"  },
+      { id:3, shape:"circle",         x:52,  y:82,  w:36,  h:36,  color:"#bae6fd", label:"janela" },
+      { id:4, shape:"triangle-left",  x:8,   y:122, w:38,  h:46,  color:"#f59e0b", label:"asa"    },
+      { id:5, shape:"triangle-right", x:94,  y:122, w:38,  h:46,  color:"#f59e0b", label:"asa"    },
+      { id:6, shape:"triangle-down",  x:53,  y:172, w:34,  h:28,  color:"#f97316", label:"chama"  },
     ],
-    cores: ["#facc15"],
-    nomesCores: ["amarelo"],
+    distractors: [
+      { id:101, shape:"rect",          x:30, y:60, w:50, h:30, color:"#22c55e", label:"caixa" },
+      { id:102, shape:"circle",        x:50, y:50, w:40, h:40, color:"#a855f7", label:"bola"  },
+      { id:103, shape:"triangle-down", x:40, y:30, w:60, h:40, color:"#3b82f6", label:"triângulo" },
+    ],
   },
   {
-    figura: "Foguete",
-    modelo: [
-      [null, 1,    1,    null],
-      [null, 2,    2,    null],
-      [null, 2,    2,    null],
-      [3,    2,    2,    3   ],
-      [3,    null, null, 3   ],
+    figura: "Sol", emoji: "☀️", viewW: 200, viewH: 200,
+    pieces: [
+      { id:1, shape:"circle",         x:65, y:65,  w:70,  h:70,  color:"#fbbf24", label:"sol"  },
+      { id:2, shape:"triangle-up",    x:82, y:6,   w:36,  h:34,  color:"#fde68a", label:"raio" },
+      { id:3, shape:"triangle-down",  x:82, y:160, w:36,  h:34,  color:"#fde68a", label:"raio" },
+      { id:4, shape:"triangle-left",  x:6,  y:82,  w:34,  h:36,  color:"#fde68a", label:"raio" },
+      { id:5, shape:"triangle-right", x:160,y:82,  w:34,  h:36,  color:"#fde68a", label:"raio" },
     ],
-    cores: ["#ef4444", "#9ca3af", "#f59e0b"],
-    nomesCores: ["vermelho", "cinza", "laranja"],
+    distractors: [
+      { id:101, shape:"rect",        x:50, y:50, w:80, h:30, color:"#3b82f6", label:"bloco"     },
+      { id:102, shape:"triangle-up", x:60, y:20, w:80, h:60, color:"#ef4444", label:"triângulo" },
+    ],
   },
   {
-    figura: "Peixe",
-    modelo: [
-      [null, 1,    1,    2,    2   ],
-      [1,    1,    1,    1,    null],
-      [null, 1,    1,    2,    2   ],
+    figura: "Barco", emoji: "⛵", viewW: 220, viewH: 180,
+    pieces: [
+      { id:1, shape:"trapezoid",   x:20,  y:100, w:180, h:55, color:"#f97316", label:"casco"  },
+      { id:2, shape:"triangle-up", x:65,  y:18,  w:90,  h:88, color:"#f8fafc", label:"vela"   },
+      { id:3, shape:"rect",        x:108, y:18,  w:8,   h:88, color:"#6b7280", label:"mastro" },
     ],
-    cores: ["#06b6d4", "#0369a1"],
-    nomesCores: ["azul claro", "azul escuro"],
+    distractors: [
+      { id:101, shape:"circle",       x:60, y:60, w:50, h:50, color:"#fbbf24", label:"roda"      },
+      { id:102, shape:"triangle-down",x:40, y:30, w:80, h:50, color:"#ef4444", label:"triângulo" },
+      { id:103, shape:"rect",         x:30, y:60, w:60, h:30, color:"#22c55e", label:"placa"     },
+    ],
+  },
+  {
+    figura: "Peixe", emoji: "🐟", viewW: 220, viewH: 140,
+    pieces: [
+      { id:1, shape:"circle",         x:20,  y:28,  w:130, h:84, color:"#06b6d4", label:"corpo"  },
+      { id:2, shape:"triangle-right", x:140, y:28,  w:62,  h:84, color:"#0891b2", label:"cauda"  },
+      { id:3, shape:"circle",         x:38,  y:50,  w:22,  h:22, color:"#ffffff", label:"olho"   },
+      { id:4, shape:"circle",         x:44,  y:56,  w:10,  h:10, color:"#1e3a5f", label:"pupila" },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:60, y:20, w:80, h:60, color:"#ef4444", label:"telhado"  },
+      { id:102, shape:"rect",        x:30, y:60, w:60, h:30, color:"#22c55e", label:"bloco"    },
+      { id:103, shape:"circle",      x:80, y:40, w:50, h:50, color:"#f59e0b", label:"bola"     },
+    ],
+  },
+  {
+    figura: "Flor", emoji: "🌸", viewW: 200, viewH: 200,
+    pieces: [
+      { id:1, shape:"circle",         x:75,  y:75,  w:50,  h:50,  color:"#fbbf24", label:"centro"  },
+      { id:2, shape:"circle",         x:75,  y:20,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:3, shape:"circle",         x:75,  y:130, w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:4, shape:"circle",         x:20,  y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:5, shape:"circle",         x:130, y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:6, shape:"rect",           x:96,  y:150, w:8,   h:50,  color:"#16a34a", label:"caule"   },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up",  x:60, y:30, w:80, h:60, color:"#ef4444", label:"triângulo" },
+      { id:102, shape:"rect",         x:30, y:60, w:60, h:30, color:"#3b82f6", label:"bloco"     },
+    ],
   },
 ];
 const MOSAICO_VARS: Variation[] = range(30).map((i) => ({ id:`mf-${i+1}`, payload: MOSAICO_BANK[i % MOSAICO_BANK.length] }));

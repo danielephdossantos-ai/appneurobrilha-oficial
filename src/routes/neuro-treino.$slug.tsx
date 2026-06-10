@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertCircle, ArrowLeft, ArrowDown, ArrowLeft as ArrowLeftIcon, ArrowRight, ArrowUp, ChevronRight, Hand, Mic, MicOff, RotateCcw, Sparkles, Star, Volume2, VolumeX, X, Zap } from "lucide-react";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { toast } from "sonner";
-import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag } from "@/data/neuro-treino/variations";
+import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag, type ShapeType, type MosaicoPiece } from "@/data/neuro-treino/variations";
 import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { getElementoImg } from "@/data/hiperfocos-img";
@@ -825,197 +825,208 @@ function Sacadico({ p, onDone }: any) {
   );
 }
 
-// ============== 12. Mosaico de Formas ==============
-function Mosaico({ p, onDone }: any) {
-  type Grid = (number | null)[][];
-  const [built, setBuilt] = useState<Grid>(() =>
-    p.modelo.map((row: any[]) => row.map(() => null))
+// ============== 12. Mosaico de Formas — tangram com SVG real ==============
+
+/** Renders a geometric shape at the given coordinates in an SVG */
+function ShapeEl({ shape, x, y, w, h, color, opacity = 1, stroke, strokeDash }: {
+  shape: ShapeType; x: number; y: number; w: number; h: number;
+  color: string; opacity?: number; stroke?: string; strokeDash?: string;
+}) {
+  const commonProps = { fill: color, opacity, stroke: stroke ?? "none", strokeWidth: stroke ? 2 : 0, strokeDasharray: strokeDash };
+  switch (shape) {
+    case "triangle-up":
+      return <polygon points={`${x+w/2},${y} ${x},${y+h} ${x+w},${y+h}`} {...commonProps} />;
+    case "triangle-down":
+      return <polygon points={`${x},${y} ${x+w},${y} ${x+w/2},${y+h}`} {...commonProps} />;
+    case "triangle-left":
+      return <polygon points={`${x+w},${y} ${x+w},${y+h} ${x},${y+h/2}`} {...commonProps} />;
+    case "triangle-right":
+      return <polygon points={`${x},${y} ${x},${y+h} ${x+w},${y+h/2}`} {...commonProps} />;
+    case "circle":
+      return <ellipse cx={x+w/2} cy={y+h/2} rx={w/2} ry={h/2} {...commonProps} />;
+    case "trapezoid": {
+      const ind = Math.round(w * 0.15);
+      return <polygon points={`${x+ind},${y} ${x+w-ind},${y} ${x+w},${y+h} ${x},${y+h}`} {...commonProps} />;
+    }
+    default:
+      return <rect x={x} y={y} width={w} height={h} rx={4} {...commonProps} />;
+  }
+}
+
+/** Small piece card preview — renders the shape centred in a square SVG */
+function PieceCard({ piece, state, onClick }: {
+  piece: MosaicoPiece;
+  state: "idle" | "selected" | "wrong" | "placed";
+  onClick: () => void;
+}) {
+  const pad = 10;
+  const size = 72;
+  const inner = size - pad * 2;
+
+  const ringCls =
+    state === "selected" ? "ring-4 ring-[#0d1f55] border-[#0d1f55] scale-110 shadow-xl" :
+    state === "wrong"    ? "ring-4 ring-red-500 border-red-400 animate-[wiggle_0.4s_ease]" :
+    state === "placed"   ? "opacity-30 cursor-default" :
+    "border-white/70 hover:scale-105 active:scale-95";
+
+  return (
+    <button
+      onClick={onClick}
+      disabled={state === "placed"}
+      className={`flex flex-col items-center gap-1 rounded-2xl border-[3px] p-1.5 shadow-md transition-all bg-white/90 ${ringCls}`}
+    >
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="shrink-0">
+        <ShapeEl shape={piece.shape} x={pad} y={pad} w={inner} h={inner} color={piece.color} />
+      </svg>
+      <span className="text-[9px] font-black uppercase tracking-wide text-[#0d1f55]/70 leading-tight pb-0.5">
+        {piece.label}
+      </span>
+    </button>
   );
+}
+
+function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: number; viewH: number; pieces: MosaicoPiece[]; distractors: MosaicoPiece[] }; onDone: (ok: boolean) => void }) {
+  const correctIds = useMemo(() => new Set(p.pieces.map(pc => pc.id)), [p.pieces]);
+
+  // Shuffle pieces + distractors once
+  const allBank = useMemo(() => {
+    const arr = [...p.pieces, ...p.distractors];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [p.pieces, p.distractors]);
+
+  const [placed, setPlaced] = useState<Set<number>>(new Set());
   const [selected, setSelected] = useState<number | null>(null);
-  const [dragColor, setDragColor] = useState<number | null>(null);
-  const [checking, setChecking] = useState(false);
-  const [wrongCells, setWrongCells] = useState<Set<string>>(new Set());
-  const [dragOver, setDragOver] = useState<string | null>(null);
+  const [wrongId, setWrongId] = useState<number | null>(null);
+  const [done, setDone] = useState(false);
 
-  const totalCells = p.modelo.flat().filter((v: any) => v !== null).length;
-  const filledCells = built.flat().filter((v) => v !== null).length;
+  const handlePieceTap = (piece: MosaicoPiece) => {
+    if (done) return;
+    if (placed.has(piece.id)) return;
 
-  const placeColor = (r: number, c: number, color: number | null) => {
-    if (checking) return;
-    if (p.modelo[r][c] === null) return;
-    setBuilt(g => g.map((row, ri) =>
-      row.map((v, ci) => ri === r && ci === c ? color : v)
-    ));
-  };
-
-  const handleCellClick = (r: number, c: number) => {
-    if (selected === null) {
-      placeColor(r, c, null);
+    if (correctIds.has(piece.id)) {
+      // Correct piece!
+      const next = new Set(placed).add(piece.id);
+      setPlaced(next);
+      setSelected(null);
+      if (next.size === p.pieces.length) {
+        setDone(true);
+        setTimeout(() => onDone(true), 900);
+      }
     } else {
-      placeColor(r, c, selected);
+      // Distractor
+      setWrongId(piece.id);
+      setTimeout(() => setWrongId(null), 450);
     }
   };
 
-  const handleDrop = (r: number, c: number) => {
-    if (dragColor !== null) placeColor(r, c, dragColor);
-    setDragOver(null);
-    setDragColor(null);
-  };
-
-  const verificar = () => {
-    const wrong = new Set<string>();
-    p.modelo.forEach((row: (number | null)[], r: number) => {
-      row.forEach((v: number | null, c: number) => {
-        if (v !== null && built[r][c] !== v) wrong.add(`${r}-${c}`);
-      });
-    });
-    setWrongCells(wrong);
-    setChecking(true);
-    setTimeout(() => {
-      if (wrong.size === 0) {
-        onDone(true);
-      } else {
-        setChecking(false);
-        setWrongCells(new Set());
-        setBuilt(g => g.map((row, r) =>
-          row.map((v, c) => wrong.has(`${r}-${c}`) ? null : v)
-        ));
-      }
-    }, 900);
-  };
-
-  const allFilled = filledCells === totalCells;
-
-  const CELL_MODEL = "w-8 h-8 sm:w-9 sm:h-9 rounded-lg shadow-md";
-  const CELL_BUILD = "w-11 h-11 sm:w-12 sm:h-12 rounded-xl border-2 transition-all active:scale-90";
+  const progress = placed.size / p.pieces.length;
 
   return (
     <div className="space-y-4">
 
-      {/* Reference model — always visible */}
-      <div className="bg-gradient-to-br from-amber-50 to-amber/10 border-2 border-amber/50 rounded-2xl p-4">
-        <div className="text-xs font-black uppercase tracking-wide text-amber-700 text-center mb-3">
-          Modelo — {p.figura}
+      {/* ── MODELO REFERÊNCIA ── */}
+      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-3">
+        <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-2">
+          Modelo — {p.emoji} {p.figura}
         </div>
         <div className="flex justify-center">
-          <div className="space-y-1.5">
-            {p.modelo.map((row: (number | null)[], r: number) => (
-              <div key={r} className="flex gap-1.5">
-                {row.map((v, c) => (
-                  <div key={c}
-                    className={v !== null ? CELL_MODEL : "w-8 h-8 sm:w-9 sm:h-9"}
-                    style={{ backgroundColor: v !== null ? p.cores[v - 1] : "transparent" }}
-                  />
-                ))}
-              </div>
+          <svg
+            viewBox={`0 0 ${p.viewW} ${p.viewH}`}
+            style={{ width: Math.min(180, p.viewW), height: Math.min(180, p.viewW) * (p.viewH / p.viewW) }}
+            className="drop-shadow"
+          >
+            {/* All pieces fully coloured */}
+            {p.pieces.map(pc => (
+              <ShapeEl key={pc.id} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
             ))}
-          </div>
+            {/* Subtle outlines */}
+            {p.pieces.map(pc => (
+              <ShapeEl key={`o${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                color="none" stroke="rgba(0,0,0,0.15)" />
+            ))}
+          </svg>
         </div>
       </div>
 
-      {/* Progress */}
+      {/* ── BARRA DE PROGRESSO ── */}
       <div className="flex items-center gap-2">
-        <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-          <div className="h-full bg-primary rounded-full transition-all duration-300"
-            style={{ width: `${totalCells > 0 ? (filledCells / totalCells) * 100 : 0}%` }} />
+        <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
+          <div
+            className="h-full bg-primary rounded-full transition-all duration-500"
+            style={{ width: `${progress * 100}%` }}
+          />
         </div>
-        <span className="text-xs font-bold text-muted-foreground">{filledCells}/{totalCells}</span>
+        <span className="text-xs font-bold text-muted-foreground tabular-nums">
+          {placed.size}/{p.pieces.length}
+        </span>
       </div>
 
-      {/* Interactive build grid */}
-      <div className="bg-card border-2 border-primary/25 rounded-2xl p-4">
-        <div className="text-xs font-black uppercase tracking-wide text-primary text-center mb-3">
+      {/* ── ÁREA DE MONTAGEM ── */}
+      <div className="bg-card border-2 border-primary/20 rounded-2xl p-3">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary text-center mb-2">
           Monte aqui!
         </div>
         <div className="flex justify-center">
-          <div className="space-y-1.5">
-            {p.modelo.map((row: (number | null)[], r: number) => (
-              <div key={r} className="flex gap-1.5">
-                {row.map((v: number | null, c: number) => {
-                  const placed = built[r][c];
-                  const isTarget = v !== null;
-                  const isWrong = wrongCells.has(`${r}-${c}`);
-                  const isDragTarget = dragOver === `${r}-${c}`;
-                  return isTarget ? (
-                    <button key={c}
-                      onClick={() => handleCellClick(r, c)}
-                      onDragOver={e => { e.preventDefault(); setDragOver(`${r}-${c}`); }}
-                      onDragLeave={() => setDragOver(null)}
-                      onDrop={() => handleDrop(r, c)}
-                      style={{ backgroundColor: placed !== null && !isWrong ? p.cores[placed - 1] : undefined }}
-                      className={`${CELL_BUILD}
-                        ${isWrong
-                          ? "border-red-500 bg-red-100 animate-pulse scale-105"
-                          : placed !== null
-                          ? "border-white/40 shadow-md"
-                          : isDragTarget
-                          ? "border-primary bg-primary/20 scale-105"
-                          : selected !== null
-                          ? "border-dashed border-primary/70 bg-primary/5 hover:bg-primary/15 hover:scale-105 cursor-pointer"
-                          : "border-dashed border-muted-foreground/30 bg-muted/20 cursor-pointer"
-                        }`}
-                    />
-                  ) : (
-                    <div key={c} className="w-11 h-11 sm:w-12 sm:h-12" />
-                  );
-                })}
-              </div>
+          <svg
+            viewBox={`0 0 ${p.viewW} ${p.viewH}`}
+            style={{ width: "100%", maxWidth: Math.min(300, p.viewW * 1.5), aspectRatio: `${p.viewW}/${p.viewH}` }}
+          >
+            {/* Ghost outlines for unplaced */}
+            {p.pieces.filter(pc => !placed.has(pc.id)).map(pc => (
+              <ShapeEl key={`ghost-${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                color="#e2e8f0" stroke="#94a3b8" strokeDash="8 5" opacity={0.7} />
+            ))}
+            {/* Placed pieces */}
+            {p.pieces.filter(pc => placed.has(pc.id)).map(pc => (
+              <g key={`placed-${pc.id}`}>
+                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
+                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                  color="none" stroke="rgba(255,255,255,0.4)" />
+              </g>
+            ))}
+            {/* Celebration sparkles when done */}
+            {done && (
+              <>
+                <text x={p.viewW/2} y={p.viewH/2 - 10} textAnchor="middle" fontSize="32" opacity="0.9">⭐</text>
+                <text x={p.viewW/2} y={p.viewH/2 + 30} textAnchor="middle" fontSize="14" fill="#0d1f55" fontWeight="bold">
+                  Incrível!
+                </text>
+              </>
+            )}
+          </svg>
+        </div>
+      </div>
+
+      {/* ── BANCO DE PEÇAS (embaralhado) ── */}
+      {!done && (
+        <div>
+          <div className="text-[10px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
+            Toque na peça que pertence à figura!
+          </div>
+          <div className="grid grid-cols-4 gap-2 justify-items-center">
+            {allBank.map(piece => (
+              <PieceCard
+                key={piece.id}
+                piece={piece}
+                state={
+                  placed.has(piece.id) ? "placed" :
+                  wrongId === piece.id ? "wrong" :
+                  "idle"
+                }
+                onClick={() => handlePieceTap(piece)}
+              />
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Color palette */}
-      <div>
-        <div className="text-xs font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
-          Escolha uma cor e toque nas células
-        </div>
-        <div className="flex gap-3 justify-center flex-wrap">
-          {p.cores.map((cor: string, i: number) => {
-            const idx = i + 1;
-            return (
-              <button key={i}
-                draggable
-                onDragStart={() => { setDragColor(idx); setSelected(idx); }}
-                onDragEnd={() => setDragColor(null)}
-                onClick={() => setSelected(s => s === idx ? null : idx)}
-                className={`w-16 h-16 rounded-2xl border-4 shadow-lg transition-all active:scale-95 flex flex-col items-center justify-center gap-1
-                  ${selected === idx ? "border-gray-800 scale-115 shadow-xl ring-4 ring-gray-800/20" : "border-white/60 hover:scale-110"}`}
-                style={{ backgroundColor: cor }}
-              >
-                <span className="text-[10px] font-black text-white/90 drop-shadow leading-tight text-center px-1">
-                  {p.nomesCores[i]}
-                </span>
-              </button>
-            );
-          })}
-          {/* Eraser */}
-          <button
-            onClick={() => setSelected(null)}
-            className={`w-16 h-16 rounded-2xl border-4 shadow-md flex flex-col items-center justify-center gap-1 transition-all active:scale-95
-              ${selected === null ? "border-gray-800 scale-115 bg-muted ring-4 ring-gray-800/20" : "border-muted/50 bg-muted/40 hover:scale-110"}`}
-          >
-            <X size={20} className="text-muted-foreground" />
-            <span className="text-[10px] font-bold text-muted-foreground">apagar</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Verify button */}
-      {allFilled && !checking && (
-        <button onClick={verificar}
-          className="w-full py-4 rounded-2xl bg-success text-white font-black text-xl active:scale-95 transition-all shadow-lg">
-          Conferir!
-        </button>
       )}
-      {checking && wrongCells.size === 0 && (
-        <div className="w-full py-4 rounded-2xl bg-success/20 text-success font-black text-xl text-center animate-pulse">
-          Perfeito!
-        </div>
-      )}
-      {checking && wrongCells.size > 0 && (
-        <div className="w-full py-3 rounded-2xl bg-destructive/10 text-destructive font-bold text-base text-center">
-          Quase! Corrija as células vermelhas.
+
+      {done && (
+        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30">
+          🎉 Figura montada! Arrasou!
         </div>
       )}
     </div>
