@@ -282,7 +282,7 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
     case "rastreamento-sacadico": return <Sacadico p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas": return <Mosaico p={variation.payload} onDone={onConcluir} />;
     case "sequencia-de-cores": return <SequenciaCores p={variation.payload} onDone={onConcluir} />;
-    case "simetria": return <Simetria p={variation.payload} onDone={onConcluir} />;
+    case "simetria": return <PinturaZonas p={variation.payload} onDone={onConcluir} />;
     case "decoracao-criativa": return <Decoracao p={variation.payload} onDone={onConcluir} />;
     case "onomatopeias-animadas": return <Onomatopeias p={variation.payload} onDone={onConcluir} />;
     case "ritmo-e-sopro": return <RitmoSopro p={variation.payload} onDone={onConcluir} />;
@@ -1109,88 +1109,460 @@ function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void 
   );
 }
 
+// ── Balão de dica/fala do PIP — usado em todas as atividades ──
+function PipBubble({ texto, onClose }: { texto: string; onClose?: () => void }) {
+  return (
+    <div className="flex items-start gap-3 bg-primary/10 border-2 border-primary/30 rounded-2xl p-3 animate-in fade-in slide-in-from-bottom-2">
+      <div className="shrink-0 w-10 h-10 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center text-xl select-none">
+        🤖
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="text-[9px] font-black text-primary uppercase tracking-widest mb-1">💬 PIP diz:</div>
+        <div className="text-sm font-bold text-foreground leading-snug">{texto}</div>
+      </div>
+      {onClose && (
+        <button onClick={onClose} className="shrink-0 text-muted-foreground hover:text-foreground text-lg leading-none mt-0.5">✕</button>
+      )}
+    </div>
+  );
+}
+
 // ============== 13. Sequência de Cores ==============
+const NOMES_CORES: Record<string, string> = {
+  "#ef4444":"Vermelho", "#3b82f6":"Azul", "#22c55e":"Verde",
+  "#facc15":"Amarelo",  "#a855f7":"Roxo", "#f97316":"Laranja",
+};
+
 function SequenciaCores({ p, onDone }: any) {
-  return (
-    <div className="text-center">
-      <div className="flex justify-center gap-2 mb-6">
-        {p.sequencia.map((c:string, i:number) => <div key={i} className="w-12 h-12 rounded-lg shadow" style={{ background: c }} />)}
-        <div className="w-12 h-12 rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black">?</div>
-      </div>
-      <div className="flex justify-center gap-3">
-        {p.options.map((c:string, i:number) => (
-          <button key={i} onClick={()=>onDone(c === p.next)} className="w-16 h-16 rounded-xl shadow-lg hover:scale-110 transition-all" style={{ background: c }} />
-        ))}
-      </div>
-    </div>
-  );
-}
+  const [showIntro, setShowIntro] = useState(true);
+  const [wrongIdx, setWrongIdx]   = useState<number | null>(null);
+  const [showHint, setShowHint]   = useState(false);
 
-// ============== 14. Simetria ==============
-function Simetria({ p, onDone }: any) {
-  const [right, setRight] = useState<number[][]>(() => Array(p.rows).fill(0).map(()=>Array(p.halfCols).fill(0)));
-  const toggle = (r:number, c:number) => setRight(rt => rt.map((row,i)=> i===r ? row.map((v,j)=> j===c ? (v?0:1) : v) : row));
-  const conferir = () => {
-    // mirror: right[r][c] deve corresponder a left[r][halfCols-1-c]
-    const ok = p.left.every((row:number[], r:number) => row.every((v:number, c:number) => v === right[r][p.halfCols-1-c]));
-    onDone(ok);
+  const handleAnswer = (color: string) => {
+    if (color === p.next) {
+      onDone(true);
+    } else {
+      setWrongIdx(p.options.indexOf(color));
+      setShowHint(true);
+      setTimeout(() => setWrongIdx(null), 700);
+    }
   };
-  return (
-    <div className="text-center">
-      <div className="flex justify-center gap-1 mb-4">
-        <div>
-          {p.left.map((row:number[], r:number) => (
-            <div key={r} className="flex gap-1">
-              {row.map((v:number, c:number) => <div key={c} className={`w-10 h-10 rounded ${v ? "bg-primary" : "bg-muted"}`} />)}
+
+  const seqNames = (p.sequencia as string[]).map((c: string) => NOMES_CORES[c] ?? c);
+
+  if (showIntro) return (
+    <div className="space-y-4">
+      <PipBubble texto={`Olá! Veja a sequência de cores. Ela repete um padrão! Descubra qual cor vem no lugar do ❓ e toque nela lá embaixo! 🎨`} />
+      <div className="bg-white/60 rounded-2xl p-3 border-2 border-primary/20">
+        <div className="text-[9px] font-black uppercase tracking-widest text-center text-primary mb-3">Exemplo da sequência:</div>
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          {(p.sequencia as string[]).map((c: string, i: number) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <div className="w-14 h-14 rounded-2xl shadow-lg border-4 border-white" style={{ background: c }} />
+              <span className="text-[9px] font-bold text-muted-foreground">{NOMES_CORES[c] ?? ""}</span>
             </div>
           ))}
-        </div>
-        <div className="w-px bg-foreground/30 mx-1" />
-        <div>
-          {right.map((row, r) => (
-            <div key={r} className="flex gap-1">
-              {row.map((v, c) => <button key={c} onClick={()=>toggle(r,c)} className={`w-10 h-10 rounded border ${v ? "bg-lilac" : "bg-card border-border"}`} />)}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-14 h-14 rounded-2xl border-4 border-dashed border-primary/50 bg-primary/10 flex items-center justify-center">
+              <span className="text-3xl font-black text-primary">?</span>
             </div>
+            <span className="text-[9px] font-bold text-primary">Sua vez!</span>
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={() => setShowIntro(false)}
+        className="w-full bg-primary text-primary-foreground rounded-2xl py-3 font-black text-base hover:scale-105 active:scale-95 transition-all"
+      >
+        Entendi! Vou jogar! 🎮
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="space-y-4">
+      {showHint && (
+        <PipBubble
+          texto={p.dica ?? `Ops! Olha de novo! A sequência começa com ${seqNames[0]}... siga o padrão!`}
+          onClose={() => setShowHint(false)}
+        />
+      )}
+
+      {/* Sequência */}
+      <div className="bg-white/60 rounded-2xl p-3 border-2 border-primary/20">
+        <div className="text-[9px] font-black uppercase tracking-widest text-center text-primary mb-2">
+          🔍 Qual cor vem depois?
+        </div>
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          {(p.sequencia as string[]).map((c: string, i: number) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <div className="w-14 h-14 rounded-2xl shadow-lg border-4 border-white" style={{ background: c }} />
+              <span className="text-[9px] font-bold" style={{ color: c === "#facc15" ? "#a16207" : c }}>{NOMES_CORES[c] ?? ""}</span>
+            </div>
+          ))}
+          <span className="text-2xl font-black text-muted-foreground mx-1">→</span>
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-16 h-16 rounded-2xl border-4 border-dashed border-primary/60 bg-primary/10 flex items-center justify-center animate-pulse">
+              <span className="text-3xl font-black text-primary">?</span>
+            </div>
+            <span className="text-[9px] font-bold text-primary">Você!</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Opções */}
+      <div>
+        <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
+          👆 Toque na cor certa!
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {(p.options as string[]).map((c: string, i: number) => (
+            <button
+              key={i}
+              onClick={() => handleAnswer(c)}
+              className={`h-20 rounded-2xl border-4 border-white shadow-lg font-black text-white text-sm transition-all hover:scale-105 active:scale-95
+                ${wrongIdx === i ? "opacity-40 scale-90" : ""}`}
+              style={{ background: c }}
+            >
+              <span style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                {NOMES_CORES[c] ?? ""}
+              </span>
+            </button>
           ))}
         </div>
       </div>
-      <button onClick={conferir} className="bg-success text-white px-8 py-3 rounded-xl font-black">Conferir simetria</button>
     </div>
   );
 }
 
-// ============== 15. Decoração Criativa ==============
+// ============== 14. Pintura Mágica (substitui Simetria) ==============
+function PinturaZonas({ p, onDone }: any) {
+  const [pintado, setPintado]   = useState<Record<number, string>>({});
+  const [bucketSel, setBucketSel] = useState<number | null>(null); // 1–4
+  const [wrongZone, setWrongZone] = useState<number | null>(null);
+  const [showHint, setShowHint] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const [done, setDone] = useState(false);
+
+  const handleZoneTap = (zona: any) => {
+    if (done || pintado[zona.id]) return;
+    if (!bucketSel) { setShowHint(true); return; }
+    if (bucketSel === zona.numero) {
+      const next = { ...pintado, [zona.id]: p.paleta[zona.numero - 1] };
+      setPintado(next);
+      if (Object.keys(next).length === p.zonas.length) {
+        setDone(true);
+        setTimeout(() => onDone(true), 900);
+      }
+    } else {
+      setWrongZone(zona.id);
+      setShowHint(true);
+      setTimeout(() => setWrongZone(null), 700);
+    }
+  };
+
+  if (showIntro) return (
+    <div className="space-y-4">
+      <PipBubble texto={`Vamos pintar o ${p.figura}! 🎨 Primeiro escolha um balde de tinta lá embaixo. Depois toque na parte da figura que tem o mesmo número do balde. Combine os números!`} />
+      <div className="bg-white/70 rounded-2xl p-3 border-2 border-primary/20">
+        <div className="text-[9px] font-black text-center text-primary uppercase tracking-widest mb-2">Os baldes de tinta:</div>
+        <div className="flex gap-3 justify-center">
+          {(p.paleta as string[]).map((cor: string, i: number) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <div className="w-14 h-14 rounded-2xl border-4 border-white shadow-lg" style={{ background: cor }} />
+              <div className="w-7 h-7 rounded-full bg-white border-2 border-foreground/40 flex items-center justify-center font-black text-sm">{i + 1}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        onClick={() => setShowIntro(false)}
+        className="w-full bg-primary text-primary-foreground rounded-2xl py-3 font-black text-base hover:scale-105 active:scale-95 transition-all"
+      >
+        Vamos pintar! 🖌️
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="space-y-3">
+      {showHint && (
+        <PipBubble
+          texto={bucketSel
+            ? (p.dica ?? "Olha o número da peça e escolha o balde com o mesmo número!")
+            : "Primeiro escolha um balde de tinta tocando nele! 🪣"}
+          onClose={() => setShowHint(false)}
+        />
+      )}
+
+      {/* Baldes de tinta */}
+      <div>
+        <div className="text-[9px] font-black uppercase tracking-widest text-center text-muted-foreground mb-2">🪣 Escolha um balde:</div>
+        <div className="flex gap-3 justify-center">
+          {(p.paleta as string[]).map((cor: string, i: number) => (
+            <button
+              key={i}
+              onClick={() => setBucketSel(i + 1)}
+              className={`flex flex-col items-center gap-1 p-2 rounded-2xl border-4 transition-all hover:scale-110 active:scale-95
+                ${bucketSel === i + 1 ? "border-foreground scale-110 shadow-xl ring-2 ring-foreground/30" : "border-white shadow-md"}`}
+            >
+              <div className="w-12 h-12 rounded-xl" style={{ background: cor }} />
+              <div className="w-6 h-6 rounded-full bg-white border-2 border-foreground/40 flex items-center justify-center font-black text-xs">{i + 1}</div>
+            </button>
+          ))}
+        </div>
+        {bucketSel && (
+          <div className="text-center text-[10px] font-bold text-primary mt-1">
+            Balde {bucketSel} selecionado! Agora toque na peça com o número {bucketSel} ⬇️
+          </div>
+        )}
+      </div>
+
+      {/* Canvas SVG */}
+      <div className="bg-white rounded-2xl border-2 border-primary/20 p-2">
+        <div className="text-[9px] font-black uppercase tracking-widest text-center text-muted-foreground mb-1">
+          🖌️ Toque na peça com o mesmo número!
+        </div>
+        <svg
+          viewBox={`0 0 ${p.viewW} ${p.viewH}`}
+          style={{ width: "100%", aspectRatio: `${p.viewW}/${p.viewH}` }}
+        >
+          {(p.zonas as any[]).map((zona) => {
+            const filled  = pintado[zona.id];
+            const isWrong = wrongZone === zona.id;
+            const numSize = Math.min(zona.w, zona.h) > 38 ? 18 : 12;
+            return (
+              <g key={zona.id} onClick={() => handleZoneTap(zona)} style={{ cursor: "pointer" }}>
+                <ShapeEl
+                  shape={zona.shape} x={zona.x} y={zona.y} w={zona.w} h={zona.h}
+                  color={filled ?? "#f1f5f9"}
+                  stroke={isWrong ? "#ef4444" : filled ? "rgba(255,255,255,0.35)" : "#94a3b8"}
+                  strokeDash={filled ? undefined : "6 4"}
+                  opacity={isWrong ? 0.45 : 1}
+                />
+                {!filled && (
+                  <text
+                    x={zona.x + zona.w / 2} y={zona.y + zona.h / 2 + numSize * 0.4}
+                    textAnchor="middle" fontSize={numSize} fontWeight="bold" fill="#475569"
+                    style={{ pointerEvents: "none", userSelect: "none" }}
+                  >{zona.numero}</text>
+                )}
+                {filled && (
+                  <text
+                    x={zona.x + zona.w / 2} y={zona.y + zona.h / 2 + 5}
+                    textAnchor="middle" fontSize="12" fill="rgba(255,255,255,0.8)"
+                    style={{ pointerEvents: "none", userSelect: "none" }}
+                  >✓</text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* Progress */}
+      <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
+        <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+          <div className="h-full bg-primary rounded-full transition-all duration-500"
+            style={{ width: `${(Object.keys(pintado).length / p.zonas.length) * 100}%` }} />
+        </div>
+        <span>{Object.keys(pintado).length}/{p.zonas.length}</span>
+      </div>
+
+      {done && (
+        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30 animate-bounce">
+          🎨 Obra de arte! Que pintura incrível!
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============== 15. Decoração Criativa — pointer drag + cenários visuais ==============
+function SceneBackground({ tipo }: { tipo: string }) {
+  switch (tipo) {
+    case "quarto": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #e9d5ff 0%, #e9d5ff 70%, #c4a882 70%)" }} />
+        <div className="absolute inset-x-0 bottom-[29.5%] h-1 bg-amber-900/50" />
+        <div className="absolute top-3 right-5 w-18 h-16 rounded border-4 border-amber-900 overflow-hidden" style={{ width: 72 }}>
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#93c5fd)" }} />
+          <div className="absolute inset-0 grid grid-cols-2"><div className="border-r-2 border-amber-900/60" /><div /></div>
+          <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-amber-900/60" />
+        </div>
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-purple-700/40">🛏️ quarto vazio</div>
+      </>
+    );
+    case "cozinha": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "#fffbeb" }} />
+        <div className="absolute inset-x-0 bottom-0 h-[35%]" style={{ background: "#92400e" }} />
+        <div className="absolute inset-x-0 bottom-[34%] h-3" style={{ background: "#b45309" }} />
+        <div className="absolute inset-x-0 bottom-[37%] h-[16%] flex">
+          {Array.from({ length: 14 }).map((_, k) => (
+            <div key={k} className="flex-1 border border-amber-200" style={{ background: k % 2 === 0 ? "#fef9c3" : "#fef3c7" }} />
+          ))}
+        </div>
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-amber-700/40">🍳 cozinha vazia</div>
+      </>
+    );
+    case "jardim": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#bfdbfe 55%,#4ade80 55%,#16a34a 100%)" }} />
+        <div className="absolute top-2 left-6 w-20 h-7 bg-white/85 rounded-full" />
+        <div className="absolute top-4 left-18 w-14 h-6 bg-white/75 rounded-full" style={{ left: 72 }} />
+        <div className="absolute top-2 right-10 w-16 h-5 bg-white/80 rounded-full" />
+        <div className="absolute top-2 right-4 w-12 h-12 rounded-full" style={{ background: "#fbbf24", boxShadow: "0 0 12px #fbbf2488" }} />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-[46%] rounded-t-sm" style={{ background: "#d4a96e" }} />
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-700/40">🌳 jardim vazio</div>
+      </>
+    );
+    case "escola": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "#f0fdf4" }} />
+        <div className="absolute inset-x-0 bottom-0 h-[28%]" style={{ background: "repeating-linear-gradient(90deg,#d4a96e 0,#d4a96e 23px,#b8875a 23px,#b8875a 46px)" }} />
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-40 h-24 rounded border-4 border-amber-800" style={{ background: "#14532d", width: 160 }}>
+          <div className="absolute top-2 left-2 text-[8px] text-green-200/60 font-mono leading-tight">A B C D<br/>1 2 3 4<br/>_ _ _ _</div>
+        </div>
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-green-700/40">🏫 sala de aula</div>
+      </>
+    );
+    case "sala": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "#fef3c7" }} />
+        <div className="absolute inset-x-0 bottom-0 h-[32%]" style={{ background: "#d6b48a" }} />
+        <div className="absolute inset-x-0 bottom-[31%] h-1 bg-amber-900/50" />
+        <div className="absolute bottom-[32%] left-1/2 -translate-x-1/2 w-44 h-14 rounded-full border-4" style={{ background: "#fca5a5", borderColor: "#ef4444" }} />
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-amber-700/40">🛋️ sala vazia</div>
+      </>
+    );
+    case "praia": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#38bdf8 42%,#0ea5e9 52%,#fde68a 52%,#fbbf24 100%)" }} />
+        <div className="absolute inset-x-0 bottom-[46%] h-2" style={{ background: "rgba(255,255,255,0.25)" }} />
+        <div className="absolute top-2 left-8 w-20 h-7 bg-white/80 rounded-full" />
+        <div className="absolute top-4 right-10 w-16 h-5 bg-white/70 rounded-full" />
+        <div className="absolute top-2 right-4 w-12 h-12 rounded-full" style={{ background: "#fbbf24", boxShadow: "0 0 12px #fbbf2488" }} />
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-800/40">🏖️ praia vazia</div>
+      </>
+    );
+    case "parque": return (
+      <>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#bfdbfe 48%,#4ade80 48%,#16a34a 100%)" }} />
+        <div className="absolute top-2 left-6 w-24 h-7 bg-white/80 rounded-full" />
+        <div className="absolute top-5 left-24 w-16 h-5 bg-white/70 rounded-full" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[56%] rounded-t-full" style={{ background: "#d4a96e" }} />
+        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-700/40">🌲 parque vazio</div>
+      </>
+    );
+    default: return <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#4ade80)" }} />;
+  }
+}
+
 function Decoracao({ p, onDone }: any) {
-  const [placed, setPlaced] = useState<{e:string;x:number;y:number}[]>([]);
+  const sceneRef  = useRef<HTMLDivElement>(null);
+  const [placed, setPlaced]   = useState<{ e: string; x: number; y: number }[]>([]);
   const [dragging, setDragging] = useState<string | null>(null);
-  const drop = (e: React.DragEvent) => {
+  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
+  const [showHint, setShowHint] = useState(true);
+
+  useEffect(() => {
     if (!dragging) return;
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    setPlaced(p => [...p, { e: dragging, x: e.clientX - rect.left, y: e.clientY - rect.top }]);
-    setDragging(null);
-  };
+    const onMove = (e: PointerEvent) => setDragPos({ x: e.clientX, y: e.clientY });
+    const onUp = (e: PointerEvent) => {
+      const scene = sceneRef.current;
+      if (scene) {
+        const r = scene.getBoundingClientRect();
+        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+          setPlaced(prev => [...prev, { e: dragging!, x: e.clientX - r.left, y: e.clientY - r.top }]);
+        }
+      }
+      setDragging(null);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerup", onUp);
+    return () => { window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); };
+  }, [dragging]);
+
+  const tipo = p.tipo ?? "jardim";
+
   return (
-    <div className="text-center">
-      <div className="text-2xl font-black mb-2">{semEmoji(p.cenario)}</div>
-      <div onDragOver={(e)=>e.preventDefault()} onDrop={drop} className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}>
+    <div className="space-y-3">
+      {showHint && (
+        <PipBubble
+          texto={p.dica ?? "Arraste os itens para decorar o cenário! Segure o item e solte no lugar certo! 🎨"}
+          onClose={() => setShowHint(false)}
+        />
+      )}
+
+      {/* Cenário */}
+      <div
+        ref={sceneRef}
+        className="relative h-56 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-inner"
+        style={{ touchAction: "none" }}
+      >
+        <SceneBackground tipo={tipo} />
         {placed.map((it, i) => (
-          <div key={i} className="absolute" style={{ left: it.x - 32, top: it.y - 32 }}>
-            <RenderEmoji e={it.e} className="w-16 h-16" />
+          <div key={i} className="absolute" style={{ left: it.x - 26, top: it.y - 26, pointerEvents: "none", fontSize: 48, lineHeight: 1 }}>
+            {it.e}
           </div>
         ))}
-        {placed.length === 0 && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">Arraste para cá</div>}
-      </div>
-      <div className="flex gap-2 justify-center mb-4 flex-wrap">
-        {p.stickers.map((s:string, i:number) => (
-          <div key={i} draggable onDragStart={()=>setDragging(s)} className="w-20 h-20 flex items-center justify-center bg-card border-2 border-border rounded-2xl cursor-grab active:cursor-grabbing hover:border-primary transition-all shadow-sm">
-            <RenderEmoji e={s} className="w-14 h-14" />
+        {placed.length === 0 && (
+          <div className="absolute inset-0 flex items-end justify-center pb-4 pointer-events-none">
+            <div className="bg-black/20 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold">
+              👆 Segure um item e arraste até aqui!
+            </div>
           </div>
-        ))}
+        )}
       </div>
+
+      {/* Banco de stickers */}
+      <div>
+        <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
+          🎭 Itens para decorar — segure e arraste!
+        </div>
+        <div className="flex gap-2 flex-wrap justify-center">
+          {(p.stickers as string[]).map((s, i) => (
+            <div
+              key={i}
+              onPointerDown={(e) => { e.preventDefault(); setDragging(s); setDragPos({ x: e.clientX, y: e.clientY }); }}
+              style={{ touchAction: "none", userSelect: "none", cursor: "grab", fontSize: 36 }}
+              className="w-14 h-14 flex items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95"
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Ações */}
       <div className="flex gap-2 justify-center">
-        <button onClick={()=>setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold flex items-center gap-1"><RotateCcw size={14}/> Limpar</button>
-        <button onClick={()=>onDone(placed.length >= 3)} className="bg-success text-white px-6 py-2 rounded-xl font-black flex items-center gap-1"><Sparkles size={16}/> Finalizar arte</button>
+        <button onClick={() => setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70">
+          <RotateCcw size={14} /> Limpar
+        </button>
+        <button
+          onClick={() => onDone(placed.length >= 2)}
+          disabled={placed.length < 2}
+          className="bg-success text-white px-6 py-2 rounded-xl font-black text-sm flex items-center gap-1 disabled:opacity-50 hover:scale-105 active:scale-95 transition-all"
+        >
+          <Sparkles size={16} /> Finalizar arte!
+        </button>
       </div>
+      <div className="text-center text-[9px] text-muted-foreground">{placed.length} {placed.length === 1 ? "item colocado" : "itens colocados"} — coloque pelo menos 2!</div>
+
+      {/* Ghost seguindo o dedo */}
+      {dragging && (
+        <div style={{
+          position: "fixed", left: dragPos.x - 28, top: dragPos.y - 28,
+          pointerEvents: "none", zIndex: 9999,
+          fontSize: 52, lineHeight: 1,
+          filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.35))",
+          transform: "scale(1.25) rotate(-8deg)",
+          transition: "transform 0.05s",
+        }}>
+          {dragging}
+        </div>
+      )}
     </div>
   );
 }

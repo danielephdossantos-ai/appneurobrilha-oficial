@@ -95,7 +95,7 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
 
   "mosaico-de-formas": { slug:"mosaico-de-formas", nome:"Mosaico de Formas", emoji:"🔷", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Composição com encaixe geométrico (Tangram)", instrucao:"Escolha as formas certas para montar a figura." },
   "sequencia-de-cores": { slug:"sequencia-de-cores", nome:"Sequência de Cores", emoji:"🌈", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Padrão cromático puro", instrucao:"Toque na cor que continua a sequência." },
-  "simetria": { slug:"simetria", nome:"Simetria", emoji:"🦋", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Espelhamento em grade pixelada", instrucao:"Pinte o lado direito para espelhar a figura da esquerda." },
+  "simetria": { slug:"simetria", nome:"Pintura Mágica", emoji:"🎨", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Pintar zonas numeradas com baldes de tinta colorida", instrucao:"Escolha um balde de tinta e pinte a parte da figura com o mesmo número!" },
   "decoracao-criativa": { slug:"decoracao-criativa", nome:"Decoração Criativa", emoji:"🎨", grupo:"Oficina Criativa", cor:"from-lilac/30 to-lilac/5", objetivo:"Cenário livre com arrastar e soltar", instrucao:"Arraste os elementos para decorar o cenário do seu jeito." },
 
   // Fono & Onomatopeias
@@ -800,29 +800,177 @@ const MOSAICO_BANK: MosaicoData[] = [
 ];
 const MOSAICO_VARS: Variation[] = MOSAICO_BANK.map((b, i) => ({ id:`mf-${i+1}`, payload: b }));
 
-// 13. SEQUÊNCIA DE CORES — ordem cromática pura
+// 13. SEQUÊNCIA DE CORES — ordem cromática com dicas e padrões variados
+const CORES_INFO = [
+  { hex:"#ef4444", nome:"Vermelho", emoji:"🔴" },
+  { hex:"#3b82f6", nome:"Azul",     emoji:"🔵" },
+  { hex:"#22c55e", nome:"Verde",    emoji:"🟢" },
+  { hex:"#facc15", nome:"Amarelo",  emoji:"🟡" },
+  { hex:"#a855f7", nome:"Roxo",     emoji:"🟣" },
+  { hex:"#f97316", nome:"Laranja",  emoji:"🟠" },
+];
 const SEQC_VARS: Variation[] = range(30).map((i) => {
-  const cores = ["#ef4444","#3b82f6","#22c55e","#facc15","#a855f7"];
-  const len = 3 + (i % 3);
-  const padrao = range(len).map(k => cores[(i+k) % 3]); // padrão simples 3 cores
-  const next = cores[(i+len) % 3];
-  return { id:`sc-${i+1}`, payload:{ sequencia: padrao, next, options: cores.slice(0,4) } };
+  const patLen = 2 + (i % 2);                                    // pattern of 2 or 3 colors
+  const offset = (i * 2) % CORES_INFO.length;
+  const pattern = range(patLen).map(k => CORES_INFO[(offset + k) % CORES_INFO.length]);
+  const seqLen  = 3 + (i % 2);                                   // 3 or 4 visible items
+  const sequencia = range(seqLen).map(k => pattern[k % patLen].hex);
+  const nextInfo  = pattern[seqLen % patLen];
+  const next      = nextInfo.hex;
+  // 3 distractors + 1 correct, lightly shuffled
+  const wrong   = CORES_INFO.filter(c => c.hex !== next).slice(0, 3).map(c => c.hex);
+  const rawOpts = [...wrong, next];
+  const options = rawOpts.sort((_, __, s = (i * 13 + 7) % 4) => s % 2 === 0 ? -1 : 1).slice(0, 4);
+  const seq2    = seqLen > 1 ? ` depois ${pattern[1 % patLen].nome}` : "";
+  const dica    = `Olha! O padrão começa com ${pattern[0].nome}${seq2}... e repete! Qual cor vem depois de ${CORES_INFO.find(c=>c.hex===sequencia[seqLen-1])?.nome}?`;
+  return { id:`sc-${i+1}`, payload:{ sequencia, next, options, dica, pattern: pattern.map(c=>c.hex) } };
 });
 
-// 14. SIMETRIA — grade 4x4, lado esquerdo preenchido; usuário espelha no lado direito
-const SIMETRIA_VARS: Variation[] = range(30).map((i) => {
-  const rows = 4, halfCols = 2;
-  const left: number[][] = range(rows).map(r => range(halfCols).map(c => ((i + r * 3 + c) % 2)));
-  return { id:`sm-${i+1}`, payload:{ rows, halfCols, left } };
-});
+// 14. PINTURA MÁGICA — pintar zonas numeradas com baldes de tinta (substitui simetria)
+export interface PinturaZona {
+  id: number; numero: number;
+  shape: ShapeType; x: number; y: number; w: number; h: number;
+  label: string;
+}
+const PINTURA_BANK = [
+  {
+    figura:"Borboleta", emoji:"🦋", viewW:220, viewH:200,
+    paleta:["#f9a8d4","#fbbf24","#a855f7","#1f2937"],
+    dica:"Olha os números! Use o balde 1 para as asas de cima, o 2 para as de baixo!",
+    zonas:[
+      { id:1, numero:3, shape:"rect",   x:106, y:28, w:8,   h:144, label:"corpo"  },
+      { id:2, numero:1, shape:"circle", x:10,  y:10, w:98,  h:78,  label:"asa ↑esq"},
+      { id:3, numero:1, shape:"circle", x:112, y:10, w:98,  h:78,  label:"asa ↑dir"},
+      { id:4, numero:2, shape:"circle", x:20,  y:80, w:84,  h:112, label:"asa ↓esq"},
+      { id:5, numero:2, shape:"circle", x:116, y:80, w:84,  h:112, label:"asa ↓dir"},
+    ],
+  },
+  {
+    figura:"Casa", emoji:"🏠", viewW:200, viewH:200,
+    paleta:["#ef4444","#fbbf24","#92400e","#93c5fd"],
+    dica:"Pinte o telhado de vermelho (1), a parede de amarelo (2), a porta de marrom (3) e as janelas de azul (4)!",
+    zonas:[
+      { id:1, numero:1, shape:"triangle-up", x:18,  y:10,  w:164, h:80,  label:"telhado" },
+      { id:2, numero:2, shape:"rect",        x:30,  y:88,  w:140, h:100, label:"parede"  },
+      { id:3, numero:3, shape:"rect",        x:82,  y:128, w:36,  h:60,  label:"porta"   },
+      { id:4, numero:4, shape:"rect",        x:44,  y:102, w:28,  h:24,  label:"janela"  },
+      { id:5, numero:4, shape:"rect",        x:128, y:102, w:28,  h:24,  label:"janela"  },
+    ],
+  },
+  {
+    figura:"Sol", emoji:"☀️", viewW:200, viewH:200,
+    paleta:["#fbbf24","#fde68a","#f97316","#ffedd5"],
+    dica:"O disco central é cor 1, e os raios são cor 3! Pinte com os baldes certos!",
+    zonas:[
+      { id:1, numero:1, shape:"circle",         x:60,  y:60,  w:80,  h:80,  label:"disco"    },
+      { id:2, numero:3, shape:"triangle-up",    x:80,  y:6,   w:40,  h:36,  label:"raio cima"},
+      { id:3, numero:3, shape:"triangle-down",  x:80,  y:158, w:40,  h:36,  label:"raio baixo"},
+      { id:4, numero:3, shape:"triangle-left",  x:6,   y:80,  w:36,  h:40,  label:"raio esq" },
+      { id:5, numero:3, shape:"triangle-right", x:158, y:80,  w:36,  h:40,  label:"raio dir" },
+    ],
+  },
+  {
+    figura:"Peixe", emoji:"🐟", viewW:220, viewH:140,
+    paleta:["#f97316","#fbbf24","#22c55e","#f9fafb"],
+    dica:"O corpo é laranja (1), a cauda é amarela (2), a barbatana é verde (3) e o olho é branco (4)!",
+    zonas:[
+      { id:1, numero:1, shape:"circle",         x:20,  y:28, w:130, h:84, label:"corpo"    },
+      { id:2, numero:2, shape:"triangle-right", x:140, y:28, w:62,  h:84, label:"cauda"    },
+      { id:3, numero:3, shape:"triangle-up",    x:60,  y:14, w:60,  h:26, label:"barbatana"},
+      { id:4, numero:4, shape:"circle",         x:36,  y:48, w:28,  h:28, label:"olho"     },
+    ],
+  },
+  {
+    figura:"Girassol", emoji:"🌻", viewW:200, viewH:220,
+    paleta:["#22c55e","#fbbf24","#92400e","#f97316"],
+    dica:"O caule é verde (1), as pétalas são amarelas (2) e o centro é marrom (3)!",
+    zonas:[
+      { id:1, numero:1, shape:"rect",   x:90,  y:108, w:20,  h:102, label:"caule"   },
+      { id:2, numero:2, shape:"circle", x:50,  y:18,  w:100, h:100, label:"pétalas" },
+      { id:3, numero:3, shape:"circle", x:66,  y:34,  w:68,  h:68,  label:"centro"  },
+      { id:4, numero:1, shape:"circle", x:72,  y:140, w:26,  h:22,  label:"folha"   },
+    ],
+  },
+  {
+    figura:"Pinguim", emoji:"🐧", viewW:180, viewH:220,
+    paleta:["#1f2937","#f9fafb","#f97316","#3b82f6"],
+    dica:"O pinguim é preto (1), a barriga é branca (2), o bico e os pés são laranja (3)!",
+    zonas:[
+      { id:1, numero:1, shape:"circle",       x:28,  y:10,  w:124, h:120, label:"cabeça"  },
+      { id:2, numero:1, shape:"rect",         x:18,  y:120, w:144, h:78,  label:"corpo"   },
+      { id:3, numero:2, shape:"circle",       x:48,  y:36,  w:84,  h:72,  label:"barriga" },
+      { id:4, numero:3, shape:"triangle-down",x:72,  y:88,  w:36,  h:28,  label:"bico"    },
+      { id:5, numero:3, shape:"rect",         x:38,  y:194, w:40,  h:24,  label:"pé esq"  },
+      { id:6, numero:3, shape:"rect",         x:102, y:194, w:40,  h:24,  label:"pé dir"  },
+    ],
+  },
+  {
+    figura:"Coelho", emoji:"🐰", viewW:180, viewH:230,
+    paleta:["#fda4af","#fde68a","#1f2937","#ef4444"],
+    dica:"O coelho é rosa (1), o interior das orelhas é amarelo (2) e os olhos são pretos (3)!",
+    zonas:[
+      { id:1, numero:1, shape:"circle", x:28,  y:70,  w:124, h:100, label:"cabeça"      },
+      { id:2, numero:1, shape:"rect",   x:28,  y:108, w:44,  h:92,  label:"orelha esq"  },
+      { id:3, numero:1, shape:"rect",   x:108, y:108, w:44,  h:92,  label:"orelha dir"  },
+      { id:4, numero:2, shape:"rect",   x:38,  y:118, w:24,  h:70,  label:"int orelha esq"},
+      { id:5, numero:2, shape:"rect",   x:118, y:118, w:24,  h:70,  label:"int orelha dir"},
+      { id:6, numero:3, shape:"circle", x:56,  y:100, w:20,  h:20,  label:"olho esq"    },
+      { id:7, numero:3, shape:"circle", x:104, y:100, w:20,  h:20,  label:"olho dir"    },
+    ],
+  },
+  {
+    figura:"Foguete", emoji:"🚀", viewW:140, viewH:230,
+    paleta:["#ef4444","#9ca3af","#3b82f6","#f97316"],
+    dica:"A ponta é vermelha (1), o corpo é cinza (2), a janela é azul (3) e a chama é laranja (4)!",
+    zonas:[
+      { id:1, numero:1, shape:"triangle-up",    x:30, y:5,   w:80,  h:52,  label:"ponta"    },
+      { id:2, numero:2, shape:"rect",           x:42, y:52,  w:56,  h:120, label:"corpo"    },
+      { id:3, numero:3, shape:"circle",         x:52, y:82,  w:36,  h:36,  label:"janela"   },
+      { id:4, numero:2, shape:"triangle-left",  x:8,  y:122, w:38,  h:46,  label:"asa esq"  },
+      { id:5, numero:2, shape:"triangle-right", x:94, y:122, w:38,  h:46,  label:"asa dir"  },
+      { id:6, numero:4, shape:"triangle-down",  x:53, y:172, w:34,  h:28,  label:"chama"    },
+    ],
+  },
+];
+const PINTURA_VARS: Variation[] = range(30).map((i) => ({ id:`sm-${i+1}`, payload: PINTURA_BANK[i % PINTURA_BANK.length] }));
 
-// 15. DECORAÇÃO CRIATIVA — cenário livre arrastar e soltar
+// 15. DECORAÇÃO CRIATIVA — cenário com fundo visual, arrastar e soltar com pointer events
 const DECOR_BANK = [
-  { cenario:"Jardim 🌳", fundo:"from-success/30 to-success/5", stickers:["🌸","🌼","🦋","🌳","🐝","☀️"] },
-  { cenario:"Praia 🏖️", fundo:"from-sky/30 to-sun/10", stickers:["🌊","⛱️","🐚","🌞","🐠","⛵"] },
-  { cenario:"Quarto 🛏️", fundo:"from-lilac/30 to-lilac/5", stickers:["🛏️","🪑","🧸","📚","🌙","⭐"] },
-  { cenario:"Floresta 🌲", fundo:"from-success/30 to-primary/10", stickers:["🌲","🍄","🦊","🐿️","🌸","🦉"] },
-  { cenario:"Espaço 🚀", fundo:"from-primary/30 to-primary/5", stickers:["🚀","🪐","⭐","🌙","👽","☄️"] },
+  {
+    cenario:"Jardim 🌳", tipo:"jardim",
+    dica:"Plante flores e chame os bichinhos para o jardim! 🌸",
+    stickers:["🌸","🌼","🦋","🌳","🐝","☀️","🌈","🐞","🍀","🌺","🌻","🐛"],
+  },
+  {
+    cenario:"Quarto 🛏️", tipo:"quarto",
+    dica:"Decore o quarto com móveis e brinquedos! 🧸",
+    stickers:["🛏️","🪑","🧸","📚","🖼️","⭐","🌙","💡","🎮","🧩","🪆","📷"],
+  },
+  {
+    cenario:"Cozinha 🍳", tipo:"cozinha",
+    dica:"Coloque comidas e utensílios na cozinha! 🍎",
+    stickers:["🍳","🥘","🥦","🍎","🥕","🫙","🥄","🍞","🧁","☕","🍰","🥗"],
+  },
+  {
+    cenario:"Sala 🛋️", tipo:"sala",
+    dica:"Monte uma sala de estar confortável! 📺",
+    stickers:["🛋️","📺","🪴","📷","🎮","📱","🕹️","🕯️","🖼️","📻","🪞","🎨"],
+  },
+  {
+    cenario:"Escola 🏫", tipo:"escola",
+    dica:"Deixe a sala de aula pronta para aprender! ✏️",
+    stickers:["📚","✏️","🎒","📏","🖊️","🖍️","📐","🔭","🎨","🏆","📌","📎"],
+  },
+  {
+    cenario:"Praia 🏖️", tipo:"praia",
+    dica:"Crie uma praia incrível com tudo que você quiser! 🐚",
+    stickers:["🌊","⛱️","🐚","🌞","🐠","⛵","🦀","🐬","🏄","🌴","🐙","🦈"],
+  },
+  {
+    cenario:"Parque 🌲", tipo:"parque",
+    dica:"Monte um parque com animais e plantas! 🦊",
+    stickers:["🌲","🍄","🦊","🐿️","🌸","🦉","🦅","🐦","🍁","🏕️","🐺","🐗"],
+  },
 ];
 const DECOR_VARS: Variation[] = range(30).map((i) => ({ id:`dc-${i+1}`, payload: DECOR_BANK[i % DECOR_BANK.length] }));
 
@@ -1037,7 +1185,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "rastreamento-sacadico": SACADICO_VARS,
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
-  "simetria": SIMETRIA_VARS,
+  "simetria": PINTURA_VARS,
   "decoracao-criativa": DECOR_VARS,
   "onomatopeias-animadas": ONOMA_VARS,
   "ritmo-e-sopro": SOPRO_VARS,
