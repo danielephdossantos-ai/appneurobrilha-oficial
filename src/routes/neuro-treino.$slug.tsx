@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag, type ShapeType, type MosaicoPiece } from "@/data/neuro-treino/variations";
 import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
+import { RenderSticker, STICKER_REGISTRY, stickerSize } from "@/components/neuro-treino/DecorStickers";
+import { DecorScene } from "@/components/neuro-treino/DecorScenes";
 import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
@@ -1380,166 +1382,20 @@ function PinturaZonas({ p, onDone }: any) {
 
 // ============== 15. Decoração Criativa — pointer drag + cenários visuais ==============
 
-// Pixel sizes for each semantic tier
-const DECOR_PX: Record<string, number> = { xs: 24, sm: 36, md: 52, lg: 70 };
-
-function SceneBackground({ tipo }: { tipo: string }) {
-  switch (tipo) {
-    case "quarto": return (
-      <>
-        {/* wall + floor */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #ddd6fe 0%, #ede9fe 65%, #c4a882 65%)" }} />
-        {/* baseboard */}
-        <div className="absolute inset-x-0 bottom-[34.5%] h-[1.5px] bg-amber-900/40" />
-        {/* wallpaper stars */}
-        {[{l:18,t:20},{l:60,t:10},{l:110,t:28},{l:170,t:14},{l:220,t:22},{l:80,t:50},{l:150,t:45}].map((s,i)=>(
-          <div key={i} className="absolute text-[10px] text-purple-300/50 pointer-events-none" style={{left:s.l,top:s.t}}>✦</div>
-        ))}
-        {/* window */}
-        <div className="absolute top-3 right-6 rounded-lg border-4 border-amber-800 overflow-hidden shadow-md" style={{ width:70, height:58 }}>
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd 0%,#93c5fd 60%,#fde68a 100%)" }} />
-          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/50" />
-          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/50" />
-        </div>
-        {/* door */}
-        <div className="absolute bottom-[35%] left-5 rounded-t-full border-4 border-amber-800 overflow-hidden" style={{ width:36, height:60, borderBottomWidth:0 }}>
-          <div className="absolute inset-0" style={{ background: "#d4a96e" }} />
-          <div className="absolute right-2 top-1/2 w-2 h-2 rounded-full bg-amber-900/60" />
-        </div>
-      </>
-    );
-    case "cozinha": return (
-      <>
-        {/* wall */}
-        <div className="absolute inset-0" style={{ background: "#fffbeb" }} />
-        {/* tiled backsplash */}
-        <div className="absolute inset-x-0" style={{ bottom:"35%", height:"18%", display:"flex" }}>
-          {Array.from({ length: 16 }).map((_, k) => (
-            <div key={k} className="flex-1 border border-amber-200/80" style={{ background: k % 2 === 0 ? "#fef9c3" : "#fef3c7" }} />
-          ))}
-        </div>
-        {/* counter */}
-        <div className="absolute inset-x-0 bottom-[34%] h-4" style={{ background: "linear-gradient(180deg,#e5e7eb,#d1d5db)" }} />
-        {/* cabinets */}
-        <div className="absolute inset-x-0 bottom-0 h-[34%]" style={{ background: "#92400e" }} />
-        <div className="absolute bottom-[8%] left-4 w-[35%] h-[18%] rounded-t border-2 border-amber-900/50 flex items-center justify-center">
-          <div className="w-3 h-3 rounded-full bg-amber-200/60" />
-        </div>
-        <div className="absolute bottom-[8%] right-4 w-[35%] h-[18%] rounded-t border-2 border-amber-900/50 flex items-center justify-center">
-          <div className="w-3 h-3 rounded-full bg-amber-200/60" />
-        </div>
-        {/* window above counter */}
-        <div className="absolute top-3 right-6 rounded border-4 border-amber-800 overflow-hidden shadow" style={{ width:58, height:48 }}>
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#e0f2fe)" }} />
-          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/40" />
-          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/40" />
-        </div>
-      </>
-    );
-    case "jardim": return (
-      <>
-        {/* sky */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 40%,#bfdbfe 58%,#4ade80 58%,#16a34a 100%)" }} />
-        {/* clouds */}
-        <div className="absolute top-3 left-6 w-24 h-8 bg-white/90 rounded-full" />
-        <div className="absolute top-5 left-20 w-16 h-6 bg-white/80 rounded-full" />
-        <div className="absolute top-2 right-12 w-20 h-7 bg-white/85 rounded-full" />
-        <div className="absolute top-4 right-8 w-14 h-5 bg-white/75 rounded-full" />
-        {/* sun */}
-        <div className="absolute top-3 right-4 w-11 h-11 rounded-full" style={{ background: "radial-gradient(circle,#fde68a,#fbbf24)", boxShadow: "0 0 16px #fbbf2460" }} />
-        {/* distant hills */}
-        <div className="absolute" style={{ bottom:"42%", left:"-5%", width:"50%", height:"16%", background:"#22c55e", borderRadius:"50% 50% 0 0" }} />
-        <div className="absolute" style={{ bottom:"42%", right:"10%", width:"40%", height:"12%", background:"#16a34a", borderRadius:"50% 50% 0 0" }} />
-        {/* path */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[44%] rounded-t-lg" style={{ background: "linear-gradient(180deg,#d4a96e,#b8875a)" }} />
-      </>
-    );
-    case "escola": return (
-      <>
-        {/* room */}
-        <div className="absolute inset-0" style={{ background: "#f0fdf4" }} />
-        {/* floor */}
-        <div className="absolute inset-x-0 bottom-0 h-[28%]" style={{ background: "repeating-linear-gradient(90deg,#d4a96e 0,#d4a96e 24px,#b8875a 24px,#b8875a 48px)" }} />
-        <div className="absolute inset-x-0 bottom-[27.5%] h-1 bg-amber-900/30" />
-        {/* blackboard */}
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 rounded-lg border-4 border-amber-800 shadow-md" style={{ background: "#14532d", width:160, height:88 }}>
-          <div className="absolute top-2 left-3 text-[8px] text-green-200/70 font-mono leading-relaxed">A B C D E F<br/>1 2 3 4 5 6<br/>_ _ _ _ _ _</div>
-          <div className="absolute bottom-2 right-2 w-5 h-1 bg-green-200/30 rounded" />
-        </div>
-        {/* chalk tray */}
-        <div className="absolute left-1/2 -translate-x-1/2 h-2 rounded" style={{ top: 91+12, width:160, background:"#92400e" }} />
-        {/* windows */}
-        <div className="absolute top-3 right-3 rounded border-4 border-amber-800 overflow-hidden shadow" style={{ width:48, height:40 }}>
-          <div style={{ background:"linear-gradient(180deg,#bae6fd,#e0f2fe)", position:"absolute", inset:0 }} />
-          <div className="absolute inset-x-0 top-1/2 h-px bg-amber-800/40" />
-          <div className="absolute inset-y-0 left-1/2 w-px bg-amber-800/40" />
-        </div>
-      </>
-    );
-    case "sala": return (
-      <>
-        {/* wall + floor */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#fef3c7 0%,#fef9c3 65%,#d6b48a 65%)" }} />
-        <div className="absolute inset-x-0 bottom-[34.5%] h-[1.5px] bg-amber-900/40" />
-        {/* wall panel stripes */}
-        {[0,1,2,3,4].map(i=>(
-          <div key={i} className="absolute top-0 bottom-[35%] w-px bg-amber-200/30" style={{ left:`${18+i*20}%` }} />
-        ))}
-        {/* window */}
-        <div className="absolute top-3 right-6 rounded-lg border-4 border-amber-800 overflow-hidden shadow-md" style={{ width:68, height:56 }}>
-          <div style={{ background:"linear-gradient(180deg,#bae6fd 0%,#fde68a 100%)", position:"absolute", inset:0 }} />
-          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/40" />
-          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/40" />
-        </div>
-        {/* rug */}
-        <div className="absolute bottom-[35%] left-1/2 -translate-x-1/2 rounded-lg border-4 border-red-400" style={{ width:140, height:44, background:"linear-gradient(135deg,#fca5a5,#fda4af,#f9a8d4)" }} />
-      </>
-    );
-    case "praia": return (
-      <>
-        {/* sky + sea + sand */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 38%,#0ea5e9 50%,#fde68a 50%,#fbbf24 100%)" }} />
-        {/* waves */}
-        <div className="absolute inset-x-0 h-3 rounded-full" style={{ bottom:"49%", background:"rgba(255,255,255,0.35)" }} />
-        <div className="absolute inset-x-0 h-2 rounded-full" style={{ bottom:"46%", background:"rgba(255,255,255,0.2)" }} />
-        {/* clouds */}
-        <div className="absolute top-3 left-8 w-20 h-7 bg-white/85 rounded-full" />
-        <div className="absolute top-5 left-20 w-14 h-5 bg-white/75 rounded-full" />
-        <div className="absolute top-2 right-14 w-16 h-6 bg-white/80 rounded-full" />
-        {/* sun */}
-        <div className="absolute top-3 right-4 w-11 h-11 rounded-full" style={{ background:"radial-gradient(circle,#fde68a,#fbbf24)", boxShadow:"0 0 16px #fbbf2460" }} />
-        {/* shells on sand */}
-        {[{l:14,b:8},{l:55,b:12},{l:90,b:6},{l:140,b:14},{l:195,b:9},{l:235,b:11}].map((s,i)=>(
-          <div key={i} className="absolute text-[11px] pointer-events-none" style={{ left:s.l, bottom:s.b }}>🐚</div>
-        ))}
-      </>
-    );
-    case "parque": return (
-      <>
-        {/* sky + grass */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 42%,#bfdbfe 54%,#4ade80 54%,#15803d 100%)" }} />
-        {/* clouds */}
-        <div className="absolute top-3 left-6 w-24 h-8 bg-white/85 rounded-full" />
-        <div className="absolute top-5 left-24 w-16 h-6 bg-white/75 rounded-full" />
-        <div className="absolute top-2 right-10 w-18 h-6 bg-white/80 rounded-full" style={{ width:72 }} />
-        {/* sun */}
-        <div className="absolute top-2 right-4 w-10 h-10 rounded-full" style={{ background:"radial-gradient(circle,#fde68a,#fbbf24)", boxShadow:"0 0 14px #fbbf2450" }} />
-        {/* path */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[52%] rounded-t-xl" style={{ background:"linear-gradient(180deg,#d4a96e,#b8875a)" }} />
-        {/* grass tufts */}
-        {[{l:10,b:2},{l:30,b:4},{l:200,b:2},{l:230,b:5},{l:260,b:3}].map((g,i)=>(
-          <div key={i} className="absolute text-[10px] pointer-events-none" style={{ left:g.l, bottom:g.b }}>🌿</div>
-        ))}
-      </>
-    );
-    default: return <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#4ade80)" }} />;
-  }
+// ── helpers ──────────────────────────────────────────────────────────────────
+function decorStickerSize(id: string, eo: string | undefined, tier: string): { w: number; h: number } {
+  const def = STICKER_REGISTRY[id];
+  if (def) return stickerSize(def);
+  const tierMax: Record<string, number> = { sm: 40, md: 60, lg: 88 };
+  const sz = tierMax[tier ?? "md"] ?? 60;
+  return { w: sz, h: sz };
 }
 
+// ── Decoracao ─────────────────────────────────────────────────────────────────
 function Decoracao({ p, onDone }: any) {
   const sceneRef = useRef<HTMLDivElement>(null);
-  const [placed, setPlaced] = useState<{ e: string; sizePx: number; x: number; y: number }[]>([]);
-  const [dragging, setDragging] = useState<{ emoji: string; sizePx: number } | null>(null);
+  const [placed, setPlaced] = useState<{ id: string; eo?: string; w: number; h: number; x: number; y: number }[]>([]);
+  const [dragging, setDragging] = useState<{ id: string; eo?: string; w: number; h: number } | null>(null);
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [showHint, setShowHint] = useState(true);
 
@@ -1552,8 +1408,10 @@ function Decoracao({ p, onDone }: any) {
         const r = scene.getBoundingClientRect();
         if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
           setPlaced(prev => [...prev, {
-            e: dragging!.emoji,
-            sizePx: dragging!.sizePx,
+            id: dragging!.id,
+            eo: dragging!.eo,
+            w: dragging!.w,
+            h: dragging!.h,
             x: e.clientX - r.left,
             y: e.clientY - r.top,
           }]);
@@ -1567,50 +1425,50 @@ function Decoracao({ p, onDone }: any) {
   }, [dragging]);
 
   const tipo = p.tipo ?? "jardim";
-  const stickers: { emoji: string; size: string; label: string }[] = p.stickers ?? [];
+  const stickers: { id: string; label: string; emojiOverride?: string; tier: string }[] = p.stickers ?? [];
 
   return (
     <div className="space-y-3">
       {showHint && (
         <PipBubble
-          texto={p.dica ?? "Arraste os itens para decorar o cenário! Segure o item e solte no lugar certo! 🎨"}
+          texto={p.dica ?? "Arraste os móveis e objetos para montar o cenário! 🎨"}
           onClose={() => setShowHint(false)}
         />
       )}
 
-      {/* Cenário — mais alto para acomodar itens grandes */}
+      {/* ── Cenário premium ───────────────────────────────────────────────── */}
       <div
         ref={sceneRef}
-        className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg"
-        style={{ touchAction: "none", height: 256 }}
+        className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl"
+        style={{ touchAction: "none", height: 260 }}
       >
-        <SceneBackground tipo={tipo} />
-        {placed.map((it, i) => {
-          const half = it.sizePx / 2;
-          return (
-            <div
-              key={i}
-              className="absolute pointer-events-none select-none"
-              style={{
-                left: it.x - half,
-                top: it.y - half,
-                fontSize: it.sizePx,
-                lineHeight: 1,
-                filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))",
-              }}
-            >
-              {it.e}
-            </div>
-          );
-        })}
+        <DecorScene tipo={tipo} />
+
+        {/* itens colocados */}
+        {placed.map((it, i) => (
+          <div
+            key={i}
+            className="absolute pointer-events-none select-none"
+            style={{
+              left: it.x - it.w / 2,
+              top: it.y - it.h / 2,
+              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.28))",
+            }}
+          >
+            <RenderSticker id={it.id} sizePx={Math.max(it.w, it.h)} emojiOverride={it.eo} />
+          </div>
+        ))}
+
+        {/* hint vazio */}
         {placed.length === 0 && (
           <div className="absolute inset-0 flex items-end justify-center pb-4 pointer-events-none">
-            <div className="bg-black/25 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold shadow">
-              👆 Segure um item e arraste até aqui!
+            <div className="bg-black/30 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold shadow-lg">
+              👆 Segure um item e arraste para o cenário!
             </div>
           </div>
         )}
-        {/* item count badge */}
+
+        {/* contador */}
         {placed.length > 0 && (
           <div className="absolute top-2 right-2 bg-black/30 backdrop-blur-sm text-white text-[10px] font-bold rounded-full px-2 py-0.5 pointer-events-none">
             {placed.length} ✦
@@ -1618,23 +1476,21 @@ function Decoracao({ p, onDone }: any) {
         )}
       </div>
 
-      {/* Banco de stickers — tamanhos proporcionais por escala real */}
+      {/* ── Banco de stickers premium ─────────────────────────────────────── */}
       <div>
         <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
-          🎭 Segure e arraste para o cenário
+          🎨 Segure e arraste para montar a cena!
         </div>
-        <div className="flex gap-1.5 flex-wrap justify-center">
+        <div className="flex gap-2 flex-wrap justify-center">
           {stickers.map((s, i) => {
-            const sizePx = DECOR_PX[s.size] ?? 36;
-            // container height scales with item so large items have more room
-            const containerH = sizePx + 16;
-            const containerW = Math.max(sizePx + 12, 44);
+            const { w, h } = decorStickerSize(s.id, s.emojiOverride, s.tier);
+            const containerSize = Math.max(w, h) + 18;
             return (
               <div
                 key={i}
                 onPointerDown={(e) => {
                   e.preventDefault();
-                  setDragging({ emoji: s.emoji, sizePx });
+                  setDragging({ id: s.id, eo: s.emojiOverride, w, h });
                   setDragPos({ x: e.clientX, y: e.clientY });
                 }}
                 title={s.label}
@@ -1642,26 +1498,25 @@ function Decoracao({ p, onDone }: any) {
                   touchAction: "none",
                   userSelect: "none",
                   cursor: "grab",
-                  width: containerW,
-                  height: containerH,
-                  minWidth: 44,
+                  width: containerSize,
+                  height: containerSize + 14,
+                  minWidth: 54,
                 }}
-                className="flex flex-col items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95 gap-0.5"
+                className="flex flex-col items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95 gap-0.5 overflow-hidden p-1"
               >
-                <span style={{ fontSize: sizePx, lineHeight: 1 }}>{s.emoji}</span>
-                <span className="text-[8px] font-semibold text-muted-foreground leading-none truncate max-w-full px-1">{s.label}</span>
+                <div className="flex items-center justify-center flex-1">
+                  <RenderSticker id={s.id} sizePx={Math.max(w, h)} emojiOverride={s.emojiOverride} />
+                </div>
+                <span className="text-[8px] font-semibold text-muted-foreground leading-none truncate w-full text-center px-1">{s.label}</span>
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* Ações */}
+      {/* ── Ações ─────────────────────────────────────────────────────────── */}
       <div className="flex gap-2 justify-center">
-        <button
-          onClick={() => setPlaced([])}
-          className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70 transition-colors"
-        >
+        <button onClick={() => setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70 transition-colors">
           <RotateCcw size={14} /> Limpar
         </button>
         <button
@@ -1676,21 +1531,19 @@ function Decoracao({ p, onDone }: any) {
         {placed.length} {placed.length === 1 ? "item colocado" : "itens colocados"} — coloque pelo menos 2!
       </div>
 
-      {/* Ghost seguindo o dedo — tamanho correto do item */}
+      {/* ── Ghost seguindo o dedo ─────────────────────────────────────────── */}
       {dragging && (
         <div style={{
           position: "fixed",
-          left: dragPos.x - dragging.sizePx / 2,
-          top: dragPos.y - dragging.sizePx / 2,
+          left: dragPos.x - dragging.w / 2,
+          top: dragPos.y - dragging.h / 2,
           pointerEvents: "none",
           zIndex: 9999,
-          fontSize: dragging.sizePx,
-          lineHeight: 1,
-          filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.40))",
-          transform: "scale(1.2) rotate(-6deg)",
+          filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.45))",
+          transform: "scale(1.18) rotate(-5deg)",
           transition: "transform 0.05s",
         }}>
-          {dragging.emoji}
+          <RenderSticker id={dragging.id} sizePx={Math.max(dragging.w, dragging.h)} emojiOverride={dragging.eo} />
         </div>
       )}
     </div>
