@@ -47,10 +47,10 @@
     "@tanstack/query-sync-storage-persister": "^5.100.14",
     "@tanstack/react-query": "^5.100.14",
     "@tanstack/react-query-persist-client": "^5.100.14",
-    "@tanstack/react-router": "^1.168.25",
-    "@tanstack/react-start": "^1.167.50",
+    "@tanstack/react-router": "^1.170.15",
+    "@tanstack/react-start": "^1.168.25",
     "@tanstack/react-virtual": "^3.13.26",
-    "@tanstack/router-plugin": "^1.167.28",
+    "@tanstack/router-plugin": "^1.168.18",
     "@types/pg": "^8.20.0",
     "@types/uuid": "^11.0.0",
     "@vitejs/plugin-react": "^4.7.0",
@@ -121,7 +121,7 @@
     "prettier": "^3.7.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "^7.3.1",
+    "vite": "^7.3.5",
     "vitest": "^4.1.7"
   }
 }
