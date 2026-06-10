@@ -52,13 +52,11 @@ export function useAnamneseV2(childId: string) {
       current_step: number;
       completed?: boolean;
     }) => {
-      const { data: u } = await supabase.auth.getUser();
-      if (!u.user) throw new Error("Sem sessão");
       const scores = computeScores(payload.responses);
       const risk_levels = computeRiskMap(scores);
       const insertRow = {
         child_id: childId,
-        user_id: u.user.id,
+        user_id: "replit",
         responses: payload.responses,
         current_step: payload.current_step,
         completed: payload.completed ?? false,

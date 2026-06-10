@@ -35,13 +35,11 @@ export function useNotifications() {
 
   const sendNotification = useMutation({
     mutationFn: async (notif: Omit<Notification, "id" | "user_id" | "read" | "created_at" | "scheduled_for">) => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Usuário não autenticado");
       const { error } = await supabase
         .from("notifications")
         .insert([{
           ...notif,
-          user_id: user.id,
+          user_id: "replit",
           read: false,
           scheduled_for: new Date().toISOString()
         }]);

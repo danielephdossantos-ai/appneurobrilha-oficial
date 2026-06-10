@@ -1,4 +1,5 @@
 import { supabase } from '@/database/supabase/client';
+// Note: sync engine uses the supabase shim which routes to Replit PostgreSQL
 import { db, type OfflineSyncQueue } from './database';
 import { toast } from 'sonner';
 
