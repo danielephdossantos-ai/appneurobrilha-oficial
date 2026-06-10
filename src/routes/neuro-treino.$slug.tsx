@@ -1379,80 +1379,157 @@ function PinturaZonas({ p, onDone }: any) {
 }
 
 // ============== 15. Decoração Criativa — pointer drag + cenários visuais ==============
+
+// Pixel sizes for each semantic tier
+const DECOR_PX: Record<string, number> = { xs: 24, sm: 36, md: 52, lg: 70 };
+
 function SceneBackground({ tipo }: { tipo: string }) {
   switch (tipo) {
     case "quarto": return (
       <>
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #e9d5ff 0%, #e9d5ff 70%, #c4a882 70%)" }} />
-        <div className="absolute inset-x-0 bottom-[29.5%] h-1 bg-amber-900/50" />
-        <div className="absolute top-3 right-5 w-18 h-16 rounded border-4 border-amber-900 overflow-hidden" style={{ width: 72 }}>
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#93c5fd)" }} />
-          <div className="absolute inset-0 grid grid-cols-2"><div className="border-r-2 border-amber-900/60" /><div /></div>
-          <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-amber-900/60" />
+        {/* wall + floor */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #ddd6fe 0%, #ede9fe 65%, #c4a882 65%)" }} />
+        {/* baseboard */}
+        <div className="absolute inset-x-0 bottom-[34.5%] h-[1.5px] bg-amber-900/40" />
+        {/* wallpaper stars */}
+        {[{l:18,t:20},{l:60,t:10},{l:110,t:28},{l:170,t:14},{l:220,t:22},{l:80,t:50},{l:150,t:45}].map((s,i)=>(
+          <div key={i} className="absolute text-[10px] text-purple-300/50 pointer-events-none" style={{left:s.l,top:s.t}}>✦</div>
+        ))}
+        {/* window */}
+        <div className="absolute top-3 right-6 rounded-lg border-4 border-amber-800 overflow-hidden shadow-md" style={{ width:70, height:58 }}>
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd 0%,#93c5fd 60%,#fde68a 100%)" }} />
+          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/50" />
+          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/50" />
         </div>
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-purple-700/40">🛏️ quarto vazio</div>
+        {/* door */}
+        <div className="absolute bottom-[35%] left-5 rounded-t-full border-4 border-amber-800 overflow-hidden" style={{ width:36, height:60, borderBottomWidth:0 }}>
+          <div className="absolute inset-0" style={{ background: "#d4a96e" }} />
+          <div className="absolute right-2 top-1/2 w-2 h-2 rounded-full bg-amber-900/60" />
+        </div>
       </>
     );
     case "cozinha": return (
       <>
+        {/* wall */}
         <div className="absolute inset-0" style={{ background: "#fffbeb" }} />
-        <div className="absolute inset-x-0 bottom-0 h-[35%]" style={{ background: "#92400e" }} />
-        <div className="absolute inset-x-0 bottom-[34%] h-3" style={{ background: "#b45309" }} />
-        <div className="absolute inset-x-0 bottom-[37%] h-[16%] flex">
-          {Array.from({ length: 14 }).map((_, k) => (
-            <div key={k} className="flex-1 border border-amber-200" style={{ background: k % 2 === 0 ? "#fef9c3" : "#fef3c7" }} />
+        {/* tiled backsplash */}
+        <div className="absolute inset-x-0" style={{ bottom:"35%", height:"18%", display:"flex" }}>
+          {Array.from({ length: 16 }).map((_, k) => (
+            <div key={k} className="flex-1 border border-amber-200/80" style={{ background: k % 2 === 0 ? "#fef9c3" : "#fef3c7" }} />
           ))}
         </div>
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-amber-700/40">🍳 cozinha vazia</div>
+        {/* counter */}
+        <div className="absolute inset-x-0 bottom-[34%] h-4" style={{ background: "linear-gradient(180deg,#e5e7eb,#d1d5db)" }} />
+        {/* cabinets */}
+        <div className="absolute inset-x-0 bottom-0 h-[34%]" style={{ background: "#92400e" }} />
+        <div className="absolute bottom-[8%] left-4 w-[35%] h-[18%] rounded-t border-2 border-amber-900/50 flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-amber-200/60" />
+        </div>
+        <div className="absolute bottom-[8%] right-4 w-[35%] h-[18%] rounded-t border-2 border-amber-900/50 flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-amber-200/60" />
+        </div>
+        {/* window above counter */}
+        <div className="absolute top-3 right-6 rounded border-4 border-amber-800 overflow-hidden shadow" style={{ width:58, height:48 }}>
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#e0f2fe)" }} />
+          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/40" />
+          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/40" />
+        </div>
       </>
     );
     case "jardim": return (
       <>
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#bfdbfe 55%,#4ade80 55%,#16a34a 100%)" }} />
-        <div className="absolute top-2 left-6 w-20 h-7 bg-white/85 rounded-full" />
-        <div className="absolute top-4 left-18 w-14 h-6 bg-white/75 rounded-full" style={{ left: 72 }} />
-        <div className="absolute top-2 right-10 w-16 h-5 bg-white/80 rounded-full" />
-        <div className="absolute top-2 right-4 w-12 h-12 rounded-full" style={{ background: "#fbbf24", boxShadow: "0 0 12px #fbbf2488" }} />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-[46%] rounded-t-sm" style={{ background: "#d4a96e" }} />
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-700/40">🌳 jardim vazio</div>
+        {/* sky */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 40%,#bfdbfe 58%,#4ade80 58%,#16a34a 100%)" }} />
+        {/* clouds */}
+        <div className="absolute top-3 left-6 w-24 h-8 bg-white/90 rounded-full" />
+        <div className="absolute top-5 left-20 w-16 h-6 bg-white/80 rounded-full" />
+        <div className="absolute top-2 right-12 w-20 h-7 bg-white/85 rounded-full" />
+        <div className="absolute top-4 right-8 w-14 h-5 bg-white/75 rounded-full" />
+        {/* sun */}
+        <div className="absolute top-3 right-4 w-11 h-11 rounded-full" style={{ background: "radial-gradient(circle,#fde68a,#fbbf24)", boxShadow: "0 0 16px #fbbf2460" }} />
+        {/* distant hills */}
+        <div className="absolute" style={{ bottom:"42%", left:"-5%", width:"50%", height:"16%", background:"#22c55e", borderRadius:"50% 50% 0 0" }} />
+        <div className="absolute" style={{ bottom:"42%", right:"10%", width:"40%", height:"12%", background:"#16a34a", borderRadius:"50% 50% 0 0" }} />
+        {/* path */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[44%] rounded-t-lg" style={{ background: "linear-gradient(180deg,#d4a96e,#b8875a)" }} />
       </>
     );
     case "escola": return (
       <>
+        {/* room */}
         <div className="absolute inset-0" style={{ background: "#f0fdf4" }} />
-        <div className="absolute inset-x-0 bottom-0 h-[28%]" style={{ background: "repeating-linear-gradient(90deg,#d4a96e 0,#d4a96e 23px,#b8875a 23px,#b8875a 46px)" }} />
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-40 h-24 rounded border-4 border-amber-800" style={{ background: "#14532d", width: 160 }}>
-          <div className="absolute top-2 left-2 text-[8px] text-green-200/60 font-mono leading-tight">A B C D<br/>1 2 3 4<br/>_ _ _ _</div>
+        {/* floor */}
+        <div className="absolute inset-x-0 bottom-0 h-[28%]" style={{ background: "repeating-linear-gradient(90deg,#d4a96e 0,#d4a96e 24px,#b8875a 24px,#b8875a 48px)" }} />
+        <div className="absolute inset-x-0 bottom-[27.5%] h-1 bg-amber-900/30" />
+        {/* blackboard */}
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 rounded-lg border-4 border-amber-800 shadow-md" style={{ background: "#14532d", width:160, height:88 }}>
+          <div className="absolute top-2 left-3 text-[8px] text-green-200/70 font-mono leading-relaxed">A B C D E F<br/>1 2 3 4 5 6<br/>_ _ _ _ _ _</div>
+          <div className="absolute bottom-2 right-2 w-5 h-1 bg-green-200/30 rounded" />
         </div>
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-green-700/40">🏫 sala de aula</div>
+        {/* chalk tray */}
+        <div className="absolute left-1/2 -translate-x-1/2 h-2 rounded" style={{ top: 91+12, width:160, background:"#92400e" }} />
+        {/* windows */}
+        <div className="absolute top-3 right-3 rounded border-4 border-amber-800 overflow-hidden shadow" style={{ width:48, height:40 }}>
+          <div style={{ background:"linear-gradient(180deg,#bae6fd,#e0f2fe)", position:"absolute", inset:0 }} />
+          <div className="absolute inset-x-0 top-1/2 h-px bg-amber-800/40" />
+          <div className="absolute inset-y-0 left-1/2 w-px bg-amber-800/40" />
+        </div>
       </>
     );
     case "sala": return (
       <>
-        <div className="absolute inset-0" style={{ background: "#fef3c7" }} />
-        <div className="absolute inset-x-0 bottom-0 h-[32%]" style={{ background: "#d6b48a" }} />
-        <div className="absolute inset-x-0 bottom-[31%] h-1 bg-amber-900/50" />
-        <div className="absolute bottom-[32%] left-1/2 -translate-x-1/2 w-44 h-14 rounded-full border-4" style={{ background: "#fca5a5", borderColor: "#ef4444" }} />
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-amber-700/40">🛋️ sala vazia</div>
+        {/* wall + floor */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#fef3c7 0%,#fef9c3 65%,#d6b48a 65%)" }} />
+        <div className="absolute inset-x-0 bottom-[34.5%] h-[1.5px] bg-amber-900/40" />
+        {/* wall panel stripes */}
+        {[0,1,2,3,4].map(i=>(
+          <div key={i} className="absolute top-0 bottom-[35%] w-px bg-amber-200/30" style={{ left:`${18+i*20}%` }} />
+        ))}
+        {/* window */}
+        <div className="absolute top-3 right-6 rounded-lg border-4 border-amber-800 overflow-hidden shadow-md" style={{ width:68, height:56 }}>
+          <div style={{ background:"linear-gradient(180deg,#bae6fd 0%,#fde68a 100%)", position:"absolute", inset:0 }} />
+          <div className="absolute inset-x-0 top-1/2 h-[2px] bg-amber-800/40" />
+          <div className="absolute inset-y-0 left-1/2 w-[2px] bg-amber-800/40" />
+        </div>
+        {/* rug */}
+        <div className="absolute bottom-[35%] left-1/2 -translate-x-1/2 rounded-lg border-4 border-red-400" style={{ width:140, height:44, background:"linear-gradient(135deg,#fca5a5,#fda4af,#f9a8d4)" }} />
       </>
     );
     case "praia": return (
       <>
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#38bdf8 42%,#0ea5e9 52%,#fde68a 52%,#fbbf24 100%)" }} />
-        <div className="absolute inset-x-0 bottom-[46%] h-2" style={{ background: "rgba(255,255,255,0.25)" }} />
-        <div className="absolute top-2 left-8 w-20 h-7 bg-white/80 rounded-full" />
-        <div className="absolute top-4 right-10 w-16 h-5 bg-white/70 rounded-full" />
-        <div className="absolute top-2 right-4 w-12 h-12 rounded-full" style={{ background: "#fbbf24", boxShadow: "0 0 12px #fbbf2488" }} />
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-800/40">🏖️ praia vazia</div>
+        {/* sky + sea + sand */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 38%,#0ea5e9 50%,#fde68a 50%,#fbbf24 100%)" }} />
+        {/* waves */}
+        <div className="absolute inset-x-0 h-3 rounded-full" style={{ bottom:"49%", background:"rgba(255,255,255,0.35)" }} />
+        <div className="absolute inset-x-0 h-2 rounded-full" style={{ bottom:"46%", background:"rgba(255,255,255,0.2)" }} />
+        {/* clouds */}
+        <div className="absolute top-3 left-8 w-20 h-7 bg-white/85 rounded-full" />
+        <div className="absolute top-5 left-20 w-14 h-5 bg-white/75 rounded-full" />
+        <div className="absolute top-2 right-14 w-16 h-6 bg-white/80 rounded-full" />
+        {/* sun */}
+        <div className="absolute top-3 right-4 w-11 h-11 rounded-full" style={{ background:"radial-gradient(circle,#fde68a,#fbbf24)", boxShadow:"0 0 16px #fbbf2460" }} />
+        {/* shells on sand */}
+        {[{l:14,b:8},{l:55,b:12},{l:90,b:6},{l:140,b:14},{l:195,b:9},{l:235,b:11}].map((s,i)=>(
+          <div key={i} className="absolute text-[11px] pointer-events-none" style={{ left:s.l, bottom:s.b }}>🐚</div>
+        ))}
       </>
     );
     case "parque": return (
       <>
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#7dd3fc 0%,#bfdbfe 48%,#4ade80 48%,#16a34a 100%)" }} />
-        <div className="absolute top-2 left-6 w-24 h-7 bg-white/80 rounded-full" />
-        <div className="absolute top-5 left-24 w-16 h-5 bg-white/70 rounded-full" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[56%] rounded-t-full" style={{ background: "#d4a96e" }} />
-        <div className="absolute top-2 left-3 text-[9px] font-bold text-sky-700/40">🌲 parque vazio</div>
+        {/* sky + grass */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#38bdf8 0%,#7dd3fc 42%,#bfdbfe 54%,#4ade80 54%,#15803d 100%)" }} />
+        {/* clouds */}
+        <div className="absolute top-3 left-6 w-24 h-8 bg-white/85 rounded-full" />
+        <div className="absolute top-5 left-24 w-16 h-6 bg-white/75 rounded-full" />
+        <div className="absolute top-2 right-10 w-18 h-6 bg-white/80 rounded-full" style={{ width:72 }} />
+        {/* sun */}
+        <div className="absolute top-2 right-4 w-10 h-10 rounded-full" style={{ background:"radial-gradient(circle,#fde68a,#fbbf24)", boxShadow:"0 0 14px #fbbf2450" }} />
+        {/* path */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[52%] rounded-t-xl" style={{ background:"linear-gradient(180deg,#d4a96e,#b8875a)" }} />
+        {/* grass tufts */}
+        {[{l:10,b:2},{l:30,b:4},{l:200,b:2},{l:230,b:5},{l:260,b:3}].map((g,i)=>(
+          <div key={i} className="absolute text-[10px] pointer-events-none" style={{ left:g.l, bottom:g.b }}>🌿</div>
+        ))}
       </>
     );
     default: return <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#bae6fd,#4ade80)" }} />;
@@ -1460,9 +1537,9 @@ function SceneBackground({ tipo }: { tipo: string }) {
 }
 
 function Decoracao({ p, onDone }: any) {
-  const sceneRef  = useRef<HTMLDivElement>(null);
-  const [placed, setPlaced]   = useState<{ e: string; x: number; y: number }[]>([]);
-  const [dragging, setDragging] = useState<string | null>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [placed, setPlaced] = useState<{ e: string; sizePx: number; x: number; y: number }[]>([]);
+  const [dragging, setDragging] = useState<{ emoji: string; sizePx: number } | null>(null);
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [showHint, setShowHint] = useState(true);
 
@@ -1474,7 +1551,12 @@ function Decoracao({ p, onDone }: any) {
       if (scene) {
         const r = scene.getBoundingClientRect();
         if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
-          setPlaced(prev => [...prev, { e: dragging!, x: e.clientX - r.left, y: e.clientY - r.top }]);
+          setPlaced(prev => [...prev, {
+            e: dragging!.emoji,
+            sizePx: dragging!.sizePx,
+            x: e.clientX - r.left,
+            y: e.clientY - r.top,
+          }]);
         }
       }
       setDragging(null);
@@ -1485,6 +1567,7 @@ function Decoracao({ p, onDone }: any) {
   }, [dragging]);
 
   const tipo = p.tipo ?? "jardim";
+  const stickers: { emoji: string; size: string; label: string }[] = p.stickers ?? [];
 
   return (
     <div className="space-y-3">
@@ -1495,49 +1578,90 @@ function Decoracao({ p, onDone }: any) {
         />
       )}
 
-      {/* Cenário */}
+      {/* Cenário — mais alto para acomodar itens grandes */}
       <div
         ref={sceneRef}
-        className="relative h-56 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-inner"
-        style={{ touchAction: "none" }}
+        className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg"
+        style={{ touchAction: "none", height: 256 }}
       >
         <SceneBackground tipo={tipo} />
-        {placed.map((it, i) => (
-          <div key={i} className="absolute" style={{ left: it.x - 26, top: it.y - 26, pointerEvents: "none", fontSize: 48, lineHeight: 1 }}>
-            {it.e}
-          </div>
-        ))}
+        {placed.map((it, i) => {
+          const half = it.sizePx / 2;
+          return (
+            <div
+              key={i}
+              className="absolute pointer-events-none select-none"
+              style={{
+                left: it.x - half,
+                top: it.y - half,
+                fontSize: it.sizePx,
+                lineHeight: 1,
+                filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))",
+              }}
+            >
+              {it.e}
+            </div>
+          );
+        })}
         {placed.length === 0 && (
           <div className="absolute inset-0 flex items-end justify-center pb-4 pointer-events-none">
-            <div className="bg-black/20 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold">
+            <div className="bg-black/25 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold shadow">
               👆 Segure um item e arraste até aqui!
             </div>
           </div>
         )}
+        {/* item count badge */}
+        {placed.length > 0 && (
+          <div className="absolute top-2 right-2 bg-black/30 backdrop-blur-sm text-white text-[10px] font-bold rounded-full px-2 py-0.5 pointer-events-none">
+            {placed.length} ✦
+          </div>
+        )}
       </div>
 
-      {/* Banco de stickers */}
+      {/* Banco de stickers — tamanhos proporcionais por escala real */}
       <div>
         <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
-          🎭 Itens para decorar — segure e arraste!
+          🎭 Segure e arraste para o cenário
         </div>
-        <div className="flex gap-2 flex-wrap justify-center">
-          {(p.stickers as string[]).map((s, i) => (
-            <div
-              key={i}
-              onPointerDown={(e) => { e.preventDefault(); setDragging(s); setDragPos({ x: e.clientX, y: e.clientY }); }}
-              style={{ touchAction: "none", userSelect: "none", cursor: "grab", fontSize: 36 }}
-              className="w-14 h-14 flex items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95"
-            >
-              {s}
-            </div>
-          ))}
+        <div className="flex gap-1.5 flex-wrap justify-center">
+          {stickers.map((s, i) => {
+            const sizePx = DECOR_PX[s.size] ?? 36;
+            // container height scales with item so large items have more room
+            const containerH = sizePx + 16;
+            const containerW = Math.max(sizePx + 12, 44);
+            return (
+              <div
+                key={i}
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  setDragging({ emoji: s.emoji, sizePx });
+                  setDragPos({ x: e.clientX, y: e.clientY });
+                }}
+                title={s.label}
+                style={{
+                  touchAction: "none",
+                  userSelect: "none",
+                  cursor: "grab",
+                  width: containerW,
+                  height: containerH,
+                  minWidth: 44,
+                }}
+                className="flex flex-col items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95 gap-0.5"
+              >
+                <span style={{ fontSize: sizePx, lineHeight: 1 }}>{s.emoji}</span>
+                <span className="text-[8px] font-semibold text-muted-foreground leading-none truncate max-w-full px-1">{s.label}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Ações */}
       <div className="flex gap-2 justify-center">
-        <button onClick={() => setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70">
+        <button
+          onClick={() => setPlaced([])}
+          className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70 transition-colors"
+        >
           <RotateCcw size={14} /> Limpar
         </button>
         <button
@@ -1548,19 +1672,25 @@ function Decoracao({ p, onDone }: any) {
           <Sparkles size={16} /> Finalizar arte!
         </button>
       </div>
-      <div className="text-center text-[9px] text-muted-foreground">{placed.length} {placed.length === 1 ? "item colocado" : "itens colocados"} — coloque pelo menos 2!</div>
+      <div className="text-center text-[9px] text-muted-foreground">
+        {placed.length} {placed.length === 1 ? "item colocado" : "itens colocados"} — coloque pelo menos 2!
+      </div>
 
-      {/* Ghost seguindo o dedo */}
+      {/* Ghost seguindo o dedo — tamanho correto do item */}
       {dragging && (
         <div style={{
-          position: "fixed", left: dragPos.x - 28, top: dragPos.y - 28,
-          pointerEvents: "none", zIndex: 9999,
-          fontSize: 52, lineHeight: 1,
-          filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.35))",
-          transform: "scale(1.25) rotate(-8deg)",
+          position: "fixed",
+          left: dragPos.x - dragging.sizePx / 2,
+          top: dragPos.y - dragging.sizePx / 2,
+          pointerEvents: "none",
+          zIndex: 9999,
+          fontSize: dragging.sizePx,
+          lineHeight: 1,
+          filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.40))",
+          transform: "scale(1.2) rotate(-6deg)",
           transition: "transform 0.05s",
         }}>
-          {dragging}
+          {dragging.emoji}
         </div>
       )}
     </div>

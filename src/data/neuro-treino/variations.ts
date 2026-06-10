@@ -935,41 +935,139 @@ const PINTURA_BANK = [
 const PINTURA_VARS: Variation[] = range(30).map((i) => ({ id:`sm-${i+1}`, payload: PINTURA_BANK[i % PINTURA_BANK.length] }));
 
 // 15. DECORAÇÃO CRIATIVA — cenário com fundo visual, arrastar e soltar com pointer events
-const DECOR_BANK = [
+// size: "xs"=24px "sm"=36px "md"=52px "lg"=70px — respeita escala real dos objetos
+export type DecorSize = "xs" | "sm" | "md" | "lg";
+export interface DecorSticker { emoji: string; size: DecorSize; label: string }
+
+const DECOR_BANK: {
+  cenario: string; tipo: string; dica: string;
+  stickers: DecorSticker[];
+}[] = [
   {
     cenario:"Jardim 🌳", tipo:"jardim",
     dica:"Plante flores e chame os bichinhos para o jardim! 🌸",
-    stickers:["🌸","🌼","🦋","🌳","🐝","☀️","🌈","🐞","🍀","🌺","🌻","🐛"],
+    stickers:[
+      { emoji:"🌳", size:"lg", label:"Árvore" },
+      { emoji:"🌻", size:"md", label:"Girassol" },
+      { emoji:"🌈", size:"lg", label:"Arco-íris" },
+      { emoji:"☀️", size:"md", label:"Sol" },
+      { emoji:"🌺", size:"sm", label:"Flor" },
+      { emoji:"🌸", size:"sm", label:"Flor Rosa" },
+      { emoji:"🌼", size:"sm", label:"Margarida" },
+      { emoji:"🦋", size:"sm", label:"Borboleta" },
+      { emoji:"🐝", size:"xs", label:"Abelha" },
+      { emoji:"🐞", size:"xs", label:"Joaninha" },
+      { emoji:"🍀", size:"xs", label:"Trevo" },
+      { emoji:"🐛", size:"xs", label:"Lagarta" },
+    ],
   },
   {
     cenario:"Quarto 🛏️", tipo:"quarto",
     dica:"Decore o quarto com móveis e brinquedos! 🧸",
-    stickers:["🛏️","🪑","🧸","📚","🖼️","⭐","🌙","💡","🎮","🧩","🪆","📷"],
+    stickers:[
+      { emoji:"🛏️", size:"lg", label:"Cama" },
+      { emoji:"🪞", size:"lg", label:"Espelho" },
+      { emoji:"🖼️", size:"md", label:"Quadro" },
+      { emoji:"🪑", size:"md", label:"Cadeira" },
+      { emoji:"💡", size:"md", label:"Luminária" },
+      { emoji:"🎮", size:"md", label:"Videogame" },
+      { emoji:"🧩", size:"md", label:"Quebra-cabeça" },
+      { emoji:"🧸", size:"md", label:"Ursinho" },
+      { emoji:"🪆", size:"md", label:"Boneca" },
+      { emoji:"📚", size:"sm", label:"Livros" },
+      { emoji:"⭐", size:"xs", label:"Estrela" },
+      { emoji:"🌙", size:"sm", label:"Lua" },
+    ],
   },
   {
     cenario:"Cozinha 🍳", tipo:"cozinha",
     dica:"Coloque comidas e utensílios na cozinha! 🍎",
-    stickers:["🍳","🥘","🥦","🍎","🥕","🫙","🥄","🍞","🧁","☕","🍰","🥗"],
+    stickers:[
+      { emoji:"🍳", size:"md", label:"Frigideira" },
+      { emoji:"🥘", size:"md", label:"Panela" },
+      { emoji:"🍰", size:"md", label:"Bolo" },
+      { emoji:"☕", size:"md", label:"Xícara" },
+      { emoji:"🥗", size:"md", label:"Salada" },
+      { emoji:"🍞", size:"sm", label:"Pão" },
+      { emoji:"🧁", size:"sm", label:"Cupcake" },
+      { emoji:"🍎", size:"sm", label:"Maçã" },
+      { emoji:"🥦", size:"sm", label:"Brócolis" },
+      { emoji:"🥕", size:"sm", label:"Cenoura" },
+      { emoji:"🫙", size:"sm", label:"Pote" },
+      { emoji:"🥄", size:"xs", label:"Colher" },
+    ],
   },
   {
     cenario:"Sala 🛋️", tipo:"sala",
     dica:"Monte uma sala de estar confortável! 📺",
-    stickers:["🛋️","📺","🪴","📷","🎮","📱","🕹️","🕯️","🖼️","📻","🪞","🎨"],
+    stickers:[
+      { emoji:"🛋️", size:"lg", label:"Sofá" },
+      { emoji:"📺", size:"lg", label:"TV" },
+      { emoji:"🪞", size:"lg", label:"Espelho" },
+      { emoji:"🪴", size:"md", label:"Planta" },
+      { emoji:"🖼️", size:"md", label:"Quadro" },
+      { emoji:"🎮", size:"md", label:"Videogame" },
+      { emoji:"📻", size:"md", label:"Rádio" },
+      { emoji:"🎨", size:"md", label:"Tinta" },
+      { emoji:"📷", size:"sm", label:"Câmera" },
+      { emoji:"📱", size:"sm", label:"Celular" },
+      { emoji:"🕹️", size:"sm", label:"Joystick" },
+      { emoji:"🕯️", size:"sm", label:"Vela" },
+    ],
   },
   {
     cenario:"Escola 🏫", tipo:"escola",
     dica:"Deixe a sala de aula pronta para aprender! ✏️",
-    stickers:["📚","✏️","🎒","📏","🖊️","🖍️","📐","🔭","🎨","🏆","📌","📎"],
+    stickers:[
+      { emoji:"🗄️", size:"lg", label:"Estante" },
+      { emoji:"🏆", size:"md", label:"Troféu" },
+      { emoji:"🎒", size:"md", label:"Mochila" },
+      { emoji:"🔭", size:"md", label:"Telescópio" },
+      { emoji:"🎨", size:"md", label:"Arte" },
+      { emoji:"📚", size:"sm", label:"Livros" },
+      { emoji:"📏", size:"sm", label:"Régua" },
+      { emoji:"📐", size:"sm", label:"Esquadro" },
+      { emoji:"✏️", size:"sm", label:"Lápis" },
+      { emoji:"🖊️", size:"sm", label:"Caneta" },
+      { emoji:"🖍️", size:"sm", label:"Giz de Cera" },
+      { emoji:"📌", size:"xs", label:"Alfinete" },
+    ],
   },
   {
     cenario:"Praia 🏖️", tipo:"praia",
     dica:"Crie uma praia incrível com tudo que você quiser! 🐚",
-    stickers:["🌊","⛱️","🐚","🌞","🐠","⛵","🦀","🐬","🏄","🌴","🐙","🦈"],
+    stickers:[
+      { emoji:"🌴", size:"lg", label:"Coqueiro" },
+      { emoji:"🐬", size:"lg", label:"Golfinho" },
+      { emoji:"🦈", size:"lg", label:"Tubarão" },
+      { emoji:"⛱️", size:"lg", label:"Guarda-sol" },
+      { emoji:"⛵", size:"md", label:"Barco" },
+      { emoji:"🐙", size:"md", label:"Polvo" },
+      { emoji:"🏄", size:"md", label:"Surfista" },
+      { emoji:"🌞", size:"md", label:"Sol" },
+      { emoji:"🐠", size:"sm", label:"Peixe" },
+      { emoji:"🦀", size:"sm", label:"Caranguejo" },
+      { emoji:"🌊", size:"sm", label:"Onda" },
+      { emoji:"🐚", size:"xs", label:"Concha" },
+    ],
   },
   {
     cenario:"Parque 🌲", tipo:"parque",
     dica:"Monte um parque com animais e plantas! 🦊",
-    stickers:["🌲","🍄","🦊","🐿️","🌸","🦉","🦅","🐦","🍁","🏕️","🐺","🐗"],
+    stickers:[
+      { emoji:"🌲", size:"lg", label:"Pinheiro" },
+      { emoji:"🐺", size:"md", label:"Lobo" },
+      { emoji:"🦌", size:"md", label:"Veado" },
+      { emoji:"🦊", size:"md", label:"Raposa" },
+      { emoji:"🦉", size:"md", label:"Coruja" },
+      { emoji:"🦅", size:"md", label:"Águia" },
+      { emoji:"🏕️", size:"md", label:"Barraca" },
+      { emoji:"🐦", size:"sm", label:"Passarinho" },
+      { emoji:"🐿️", size:"sm", label:"Esquilo" },
+      { emoji:"🌸", size:"sm", label:"Flor" },
+      { emoji:"🍄", size:"sm", label:"Cogumelo" },
+      { emoji:"🍁", size:"xs", label:"Folha" },
+    ],
   },
 ];
 const DECOR_VARS: Variation[] = range(30).map((i) => ({ id:`dc-${i+1}`, payload: DECOR_BANK[i % DECOR_BANK.length] }));
