@@ -351,7 +351,7 @@ const SACADICO_VARS: Variation[] = range(30).map((i) => {
   return { id:`rs-${i+1}`, payload:{ sequencia: seq, posicoes: 4, flashMs: 600 - (i%4)*80 } };
 });
 
-// 12. MOSAICO DE FORMAS — montar figuras com peças geométricas reais (Tangram)
+// 12. MOSAICO DE FORMAS — arrastar e soltar peças geométricas para montar figuras
 export type ShapeType = "triangle-up" | "triangle-down" | "triangle-left" | "triangle-right" | "rect" | "circle" | "trapezoid";
 
 export interface MosaicoPiece {
@@ -365,6 +365,7 @@ export interface MosaicoPiece {
 export interface MosaicoData {
   figura: string;
   emoji: string;
+  nivel: "facil" | "intermediario" | "dificil";
   viewW: number;
   viewH: number;
   pieces: MosaicoPiece[];
@@ -372,23 +373,138 @@ export interface MosaicoData {
 }
 
 const MOSAICO_BANK: MosaicoData[] = [
+  // ───────────── FÁCIL — 2 a 3 peças ─────────────
   {
-    figura: "Casa", emoji: "🏠", viewW: 200, viewH: 200,
+    figura: "Árvore", emoji: "🌳", nivel:"facil", viewW: 180, viewH: 200,
     pieces: [
-      { id:1, shape:"triangle-up",  x:18,  y:15,  w:164, h:76,  color:"#ef4444", label:"telhado" },
-      { id:2, shape:"rect",         x:38,  y:88,  w:124, h:82,  color:"#fbbf24", label:"parede"  },
-      { id:3, shape:"rect",         x:82,  y:128, w:36,  h:42,  color:"#92400e", label:"porta"   },
-      { id:4, shape:"rect",         x:50,  y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
-      { id:5, shape:"rect",         x:122, y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
+      { id:1, shape:"triangle-up", x:10, y:8,   w:160, h:100, color:"#22c55e", label:"copa"   },
+      { id:2, shape:"rect",        x:68, y:108, w:44,  h:80,  color:"#92400e", label:"tronco" },
     ],
     distractors: [
-      { id:101, shape:"circle",        x:70,  y:70,  w:60, h:60, color:"#22c55e", label:"bola"      },
-      { id:102, shape:"triangle-down", x:60,  y:30,  w:80, h:55, color:"#8b5cf6", label:"triângulo" },
-      { id:103, shape:"trapezoid",     x:30,  y:100, w:100,h:40, color:"#f97316", label:"tabuleiro" },
+      { id:101, shape:"circle",        x:50, y:50, w:70, h:70, color:"#ef4444", label:"bola"      },
+      { id:102, shape:"triangle-down", x:40, y:30, w:80, h:60, color:"#3b82f6", label:"triângulo" },
     ],
   },
   {
-    figura: "Carro", emoji: "🚗", viewW: 220, viewH: 140,
+    figura: "Barco", emoji: "⛵", nivel:"facil", viewW: 220, viewH: 170,
+    pieces: [
+      { id:1, shape:"trapezoid",   x:20,  y:100, w:180, h:55, color:"#f97316", label:"casco"  },
+      { id:2, shape:"triangle-up", x:68,  y:18,  w:84,  h:84, color:"#f8fafc", label:"vela"   },
+      { id:3, shape:"rect",        x:109, y:18,  w:8,   h:84, color:"#6b7280", label:"mastro" },
+    ],
+    distractors: [
+      { id:101, shape:"circle",        x:60, y:60, w:50, h:50, color:"#fbbf24", label:"roda"      },
+      { id:102, shape:"triangle-down", x:40, y:30, w:80, h:50, color:"#a855f7", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Montanha", emoji: "⛰️", nivel:"facil", viewW: 200, viewH: 180,
+    pieces: [
+      { id:1, shape:"triangle-up", x:10, y:10,  w:180, h:110, color:"#78716c", label:"pico"  },
+      { id:2, shape:"rect",        x:10, y:110, w:180, h:60,  color:"#a8a29e", label:"base"  },
+    ],
+    distractors: [
+      { id:101, shape:"circle",   x:60, y:50, w:70, h:70, color:"#22c55e", label:"bola"  },
+      { id:102, shape:"trapezoid",x:30, y:80, w:100,h:40, color:"#3b82f6", label:"mesa"  },
+    ],
+  },
+  {
+    figura: "Sorvete", emoji: "🍦", nivel:"facil", viewW: 160, viewH: 210,
+    pieces: [
+      { id:1, shape:"circle",       x:20,  y:10,  w:120, h:120, color:"#fda4af", label:"bola"      },
+      { id:2, shape:"triangle-down",x:55,  y:118, w:50,  h:80,  color:"#d97706", label:"casquinha" },
+    ],
+    distractors: [
+      { id:101, shape:"rect",     x:40, y:50, w:60, h:30, color:"#3b82f6", label:"bloco"     },
+      { id:102, shape:"triangle-up",x:40,y:20, w:80, h:60, color:"#22c55e", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Diamante", emoji: "💎", nivel:"facil", viewW: 200, viewH: 200,
+    pieces: [
+      { id:1, shape:"triangle-up",   x:40, y:10,  w:120, h:90, color:"#60a5fa", label:"topo"  },
+      { id:2, shape:"triangle-down", x:40, y:98,  w:120, h:92, color:"#3b82f6", label:"base"  },
+    ],
+    distractors: [
+      { id:101, shape:"circle", x:50, y:50, w:80, h:80, color:"#f59e0b", label:"bola"   },
+      { id:102, shape:"rect",   x:30, y:60, w:70, h:40, color:"#ef4444", label:"bloco"  },
+    ],
+  },
+  {
+    figura: "Cogumelo", emoji: "🍄", nivel:"facil", viewW: 180, viewH: 210,
+    pieces: [
+      { id:1, shape:"circle", x:10,  y:10,  w:160, h:110, color:"#ef4444", label:"chapéu" },
+      { id:2, shape:"rect",   x:60,  y:112, w:60,  h:88,  color:"#fef3c7", label:"caule"  },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:40, y:30, w:80, h:60, color:"#22c55e", label:"triângulo" },
+      { id:102, shape:"trapezoid",   x:30, y:80, w:90, h:40, color:"#a855f7", label:"mesa"     },
+    ],
+  },
+  {
+    figura: "Balão", emoji: "🎈", nivel:"facil", viewW: 160, viewH: 220,
+    pieces: [
+      { id:1, shape:"circle",       x:20,  y:10,  w:120, h:130, color:"#f87171", label:"balão" },
+      { id:2, shape:"triangle-down",x:60,  y:134, w:40,  h:30,  color:"#b91c1c", label:"nó"   },
+      { id:3, shape:"rect",         x:78,  y:163, w:4,   h:55,  color:"#6b7280", label:"fio"  },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:40, y:30, w:80, h:60, color:"#22c55e", label:"telhado" },
+      { id:102, shape:"rect",        x:30, y:60, w:60, h:30, color:"#3b82f6", label:"bloco"   },
+    ],
+  },
+  {
+    figura: "Chapéu", emoji: "🎩", nivel:"facil", viewW: 200, viewH: 160,
+    pieces: [
+      { id:1, shape:"rect",     x:10,  y:118, w:180, h:28, color:"#1f2937", label:"aba"  },
+      { id:2, shape:"trapezoid",x:52,  y:20,  w:96,  h:100,color:"#111827", label:"copa" },
+    ],
+    distractors: [
+      { id:101, shape:"circle",      x:50, y:40, w:70, h:70, color:"#f59e0b", label:"bola"  },
+      { id:102, shape:"triangle-up", x:40, y:30, w:80, h:70, color:"#ef4444", label:"cone"  },
+    ],
+  },
+  {
+    figura: "Nuvem", emoji: "☁️", nivel:"facil", viewW: 220, viewH: 130,
+    pieces: [
+      { id:1, shape:"circle", x:10,  y:40,  w:80,  h:80, color:"#e2e8f0", label:"parte" },
+      { id:2, shape:"circle", x:65,  y:20,  w:90,  h:90, color:"#e2e8f0", label:"topo"  },
+      { id:3, shape:"circle", x:130, y:40,  w:80,  h:80, color:"#e2e8f0", label:"parte" },
+    ],
+    distractors: [
+      { id:101, shape:"rect",        x:40, y:40, w:80, h:40, color:"#3b82f6", label:"bloco"     },
+      { id:102, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#fbbf24", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Flecha", emoji: "🏹", nivel:"facil", viewW: 220, viewH: 100,
+    pieces: [
+      { id:1, shape:"rect",          x:10,  y:40,  w:140, h:20, color:"#92400e", label:"haste" },
+      { id:2, shape:"triangle-right",x:142, y:10,  w:68,  h:80, color:"#6b7280", label:"ponta" },
+    ],
+    distractors: [
+      { id:101, shape:"circle",      x:60, y:20, w:60, h:60, color:"#22c55e", label:"bola"  },
+      { id:102, shape:"triangle-up", x:40, y:10, w:80, h:60, color:"#ef4444", label:"cone"  },
+    ],
+  },
+
+  // ───────────── INTERMEDIÁRIO — 4 a 5 peças ─────────────
+  {
+    figura: "Casa", emoji: "🏠", nivel:"intermediario", viewW: 200, viewH: 200,
+    pieces: [
+      { id:1, shape:"triangle-up", x:18,  y:15,  w:164, h:76,  color:"#ef4444", label:"telhado" },
+      { id:2, shape:"rect",        x:38,  y:88,  w:124, h:82,  color:"#fbbf24", label:"parede"  },
+      { id:3, shape:"rect",        x:82,  y:128, w:36,  h:42,  color:"#92400e", label:"porta"   },
+      { id:4, shape:"rect",        x:50,  y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
+      { id:5, shape:"rect",        x:122, y:102, w:28,  h:24,  color:"#93c5fd", label:"janela"  },
+    ],
+    distractors: [
+      { id:101, shape:"circle",        x:70, y:70, w:60, h:60, color:"#22c55e", label:"bola"      },
+      { id:102, shape:"triangle-down", x:60, y:30, w:80, h:55, color:"#8b5cf6", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Carro", emoji: "🚗", nivel:"intermediario", viewW: 220, viewH: 140,
     pieces: [
       { id:1, shape:"rect",   x:10,  y:68,  w:200, h:48, color:"#3b82f6", label:"carroceria" },
       { id:2, shape:"rect",   x:55,  y:28,  w:110, h:44, color:"#60a5fa", label:"cabine"     },
@@ -397,48 +513,18 @@ const MOSAICO_BANK: MosaicoData[] = [
       { id:5, shape:"circle", x:142, y:96,  w:48,  h:48, color:"#1f2937", label:"roda"       },
     ],
     distractors: [
-      { id:101, shape:"triangle-up", x:60,  y:20,  w:100, h:60, color:"#ef4444", label:"telhado" },
-      { id:102, shape:"rect",        x:30,  y:50,  w:80,  h:40, color:"#22c55e", label:"caixa"   },
-      { id:103, shape:"circle",      x:80,  y:30,  w:50,  h:50, color:"#f59e0b", label:"sol"     },
+      { id:101, shape:"triangle-up", x:60, y:20, w:100, h:60, color:"#ef4444", label:"telhado" },
+      { id:102, shape:"circle",      x:80, y:30, w:50,  h:50, color:"#f59e0b", label:"bola"    },
     ],
   },
   {
-    figura: "Árvore", emoji: "🌳", viewW: 180, viewH: 210,
+    figura: "Sol", emoji: "☀️", nivel:"intermediario", viewW: 200, viewH: 200,
     pieces: [
-      { id:1, shape:"triangle-up", x:10,  y:8,   w:160, h:88,  color:"#22c55e", label:"copa"    },
-      { id:2, shape:"triangle-up", x:28,  y:62,  w:124, h:78,  color:"#16a34a", label:"copa"    },
-      { id:3, shape:"rect",        x:72,  y:150, w:36,  h:55,  color:"#92400e", label:"tronco"  },
-    ],
-    distractors: [
-      { id:101, shape:"circle",        x:60, y:50,  w:60, h:60, color:"#ef4444", label:"bola"      },
-      { id:102, shape:"rect",          x:40, y:80,  w:20, h:60, color:"#3b82f6", label:"bloco"     },
-      { id:103, shape:"triangle-down", x:40, y:130, w:80, h:50, color:"#f97316", label:"triângulo" },
-    ],
-  },
-  {
-    figura: "Foguete", emoji: "🚀", viewW: 140, viewH: 230,
-    pieces: [
-      { id:1, shape:"triangle-up",    x:30,  y:5,   w:80,  h:52,  color:"#ef4444", label:"ponta"  },
-      { id:2, shape:"rect",           x:42,  y:52,  w:56,  h:120, color:"#9ca3af", label:"corpo"  },
-      { id:3, shape:"circle",         x:52,  y:82,  w:36,  h:36,  color:"#bae6fd", label:"janela" },
-      { id:4, shape:"triangle-left",  x:8,   y:122, w:38,  h:46,  color:"#f59e0b", label:"asa"    },
-      { id:5, shape:"triangle-right", x:94,  y:122, w:38,  h:46,  color:"#f59e0b", label:"asa"    },
-      { id:6, shape:"triangle-down",  x:53,  y:172, w:34,  h:28,  color:"#f97316", label:"chama"  },
-    ],
-    distractors: [
-      { id:101, shape:"rect",          x:30, y:60, w:50, h:30, color:"#22c55e", label:"caixa" },
-      { id:102, shape:"circle",        x:50, y:50, w:40, h:40, color:"#a855f7", label:"bola"  },
-      { id:103, shape:"triangle-down", x:40, y:30, w:60, h:40, color:"#3b82f6", label:"triângulo" },
-    ],
-  },
-  {
-    figura: "Sol", emoji: "☀️", viewW: 200, viewH: 200,
-    pieces: [
-      { id:1, shape:"circle",         x:65, y:65,  w:70,  h:70,  color:"#fbbf24", label:"sol"  },
-      { id:2, shape:"triangle-up",    x:82, y:6,   w:36,  h:34,  color:"#fde68a", label:"raio" },
-      { id:3, shape:"triangle-down",  x:82, y:160, w:36,  h:34,  color:"#fde68a", label:"raio" },
-      { id:4, shape:"triangle-left",  x:6,  y:82,  w:34,  h:36,  color:"#fde68a", label:"raio" },
-      { id:5, shape:"triangle-right", x:160,y:82,  w:34,  h:36,  color:"#fde68a", label:"raio" },
+      { id:1, shape:"circle",         x:65,  y:65,  w:70,  h:70,  color:"#fbbf24", label:"disco" },
+      { id:2, shape:"triangle-up",    x:82,  y:6,   w:36,  h:34,  color:"#fde68a", label:"raio"  },
+      { id:3, shape:"triangle-down",  x:82,  y:160, w:36,  h:34,  color:"#fde68a", label:"raio"  },
+      { id:4, shape:"triangle-left",  x:6,   y:82,  w:34,  h:36,  color:"#fde68a", label:"raio"  },
+      { id:5, shape:"triangle-right", x:160, y:82,  w:34,  h:36,  color:"#fde68a", label:"raio"  },
     ],
     distractors: [
       { id:101, shape:"rect",        x:50, y:50, w:80, h:30, color:"#3b82f6", label:"bloco"     },
@@ -446,20 +532,7 @@ const MOSAICO_BANK: MosaicoData[] = [
     ],
   },
   {
-    figura: "Barco", emoji: "⛵", viewW: 220, viewH: 180,
-    pieces: [
-      { id:1, shape:"trapezoid",   x:20,  y:100, w:180, h:55, color:"#f97316", label:"casco"  },
-      { id:2, shape:"triangle-up", x:65,  y:18,  w:90,  h:88, color:"#f8fafc", label:"vela"   },
-      { id:3, shape:"rect",        x:108, y:18,  w:8,   h:88, color:"#6b7280", label:"mastro" },
-    ],
-    distractors: [
-      { id:101, shape:"circle",       x:60, y:60, w:50, h:50, color:"#fbbf24", label:"roda"      },
-      { id:102, shape:"triangle-down",x:40, y:30, w:80, h:50, color:"#ef4444", label:"triângulo" },
-      { id:103, shape:"rect",         x:30, y:60, w:60, h:30, color:"#22c55e", label:"placa"     },
-    ],
-  },
-  {
-    figura: "Peixe", emoji: "🐟", viewW: 220, viewH: 140,
+    figura: "Peixe", emoji: "🐟", nivel:"intermediario", viewW: 220, viewH: 140,
     pieces: [
       { id:1, shape:"circle",         x:20,  y:28,  w:130, h:84, color:"#06b6d4", label:"corpo"  },
       { id:2, shape:"triangle-right", x:140, y:28,  w:62,  h:84, color:"#0891b2", label:"cauda"  },
@@ -467,28 +540,265 @@ const MOSAICO_BANK: MosaicoData[] = [
       { id:4, shape:"circle",         x:44,  y:56,  w:10,  h:10, color:"#1e3a5f", label:"pupila" },
     ],
     distractors: [
-      { id:101, shape:"triangle-up", x:60, y:20, w:80, h:60, color:"#ef4444", label:"telhado"  },
-      { id:102, shape:"rect",        x:30, y:60, w:60, h:30, color:"#22c55e", label:"bloco"    },
-      { id:103, shape:"circle",      x:80, y:40, w:50, h:50, color:"#f59e0b", label:"bola"     },
+      { id:101, shape:"triangle-up", x:60, y:20, w:80, h:60, color:"#ef4444", label:"telhado" },
+      { id:102, shape:"rect",        x:30, y:60, w:60, h:30, color:"#22c55e", label:"bloco"   },
     ],
   },
   {
-    figura: "Flor", emoji: "🌸", viewW: 200, viewH: 200,
+    figura: "Borboleta", emoji: "🦋", nivel:"intermediario", viewW: 220, viewH: 160,
     pieces: [
-      { id:1, shape:"circle",         x:75,  y:75,  w:50,  h:50,  color:"#fbbf24", label:"centro"  },
-      { id:2, shape:"circle",         x:75,  y:20,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
-      { id:3, shape:"circle",         x:75,  y:130, w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
-      { id:4, shape:"circle",         x:20,  y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
-      { id:5, shape:"circle",         x:130, y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
-      { id:6, shape:"rect",           x:96,  y:150, w:8,   h:50,  color:"#16a34a", label:"caule"   },
+      { id:1, shape:"triangle-right", x:10,  y:15,  w:90,  h:65, color:"#a855f7", label:"asa esq" },
+      { id:2, shape:"triangle-left",  x:120, y:15,  w:90,  h:65, color:"#a855f7", label:"asa dir" },
+      { id:3, shape:"triangle-right", x:20,  y:80,  w:80,  h:65, color:"#c084fc", label:"asa inf" },
+      { id:4, shape:"triangle-left",  x:120, y:80,  w:80,  h:65, color:"#c084fc", label:"asa inf" },
+      { id:5, shape:"rect",           x:107, y:10,  w:6,   h:140,color:"#1f2937", label:"corpo"   },
     ],
     distractors: [
-      { id:101, shape:"triangle-up",  x:60, y:30, w:80, h:60, color:"#ef4444", label:"triângulo" },
-      { id:102, shape:"rect",         x:30, y:60, w:60, h:30, color:"#3b82f6", label:"bloco"     },
+      { id:101, shape:"circle",      x:60, y:40, w:70, h:70, color:"#fbbf24", label:"bola"   },
+      { id:102, shape:"trapezoid",   x:30, y:70, w:90, h:40, color:"#ef4444", label:"mesa"   },
+    ],
+  },
+  {
+    figura: "Avião", emoji: "✈️", nivel:"intermediario", viewW: 240, viewH: 130,
+    pieces: [
+      { id:1, shape:"rect",          x:20,  y:48,  w:180, h:34, color:"#9ca3af", label:"corpo"     },
+      { id:2, shape:"triangle-right",x:190, y:38,  w:44,  h:54, color:"#6b7280", label:"nariz"     },
+      { id:3, shape:"triangle-up",   x:60,  y:8,   w:80,  h:42, color:"#60a5fa", label:"asa cima"  },
+      { id:4, shape:"triangle-down", x:60,  y:80,  w:80,  h:42, color:"#60a5fa", label:"asa baixo" },
+      { id:5, shape:"triangle-up",   x:18,  y:28,  w:40,  h:22, color:"#93c5fd", label:"cauda"     },
+    ],
+    distractors: [
+      { id:101, shape:"circle",   x:60, y:40, w:60, h:60, color:"#ef4444", label:"bola"  },
+      { id:102, shape:"trapezoid",x:30, y:60, w:90, h:40, color:"#22c55e", label:"mesa"  },
+    ],
+  },
+  {
+    figura: "Robô", emoji: "🤖", nivel:"intermediario", viewW: 180, viewH: 220,
+    pieces: [
+      { id:1, shape:"rect",   x:40,  y:10,  w:100, h:60,  color:"#64748b", label:"cabeça" },
+      { id:2, shape:"rect",   x:25,  y:80,  w:130, h:80,  color:"#475569", label:"corpo"  },
+      { id:3, shape:"circle", x:58,  y:28,  w:22,  h:22,  color:"#38bdf8", label:"olho"   },
+      { id:4, shape:"circle", x:100, y:28,  w:22,  h:22,  color:"#38bdf8", label:"olho"   },
+      { id:5, shape:"rect",   x:45,  y:155, w:40,  h:55,  color:"#94a3b8", label:"perna"  },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:50, y:30, w:80, h:60, color:"#ef4444", label:"telhado" },
+      { id:102, shape:"circle",      x:60, y:40, w:60, h:60, color:"#fbbf24", label:"roda"    },
+    ],
+  },
+  {
+    figura: "Trem", emoji: "🚂", nivel:"intermediario", viewW: 240, viewH: 140,
+    pieces: [
+      { id:1, shape:"rect",   x:10,  y:55,  w:180, h:60,  color:"#dc2626", label:"vagão"       },
+      { id:2, shape:"rect",   x:170, y:30,  w:60,  h:85,  color:"#b91c1c", label:"locomotiva"  },
+      { id:3, shape:"circle", x:25,  y:96,  w:44,  h:44,  color:"#1f2937", label:"roda"        },
+      { id:4, shape:"circle", x:95,  y:96,  w:44,  h:44,  color:"#1f2937", label:"roda"        },
+      { id:5, shape:"circle", x:175, y:96,  w:44,  h:44,  color:"#1f2937", label:"roda"        },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:60, y:20, w:80, h:50, color:"#22c55e", label:"telhado" },
+      { id:102, shape:"trapezoid",   x:30, y:60, w:90, h:40, color:"#f59e0b", label:"mesa"    },
+    ],
+  },
+  {
+    figura: "Gato", emoji: "🐱", nivel:"intermediario", viewW: 180, viewH: 200,
+    pieces: [
+      { id:1, shape:"circle",       x:20,  y:40,  w:140, h:120, color:"#f97316", label:"cabeça"    },
+      { id:2, shape:"triangle-up",  x:30,  y:15,  w:40,  h:40,  color:"#f97316", label:"orelha"    },
+      { id:3, shape:"triangle-up",  x:110, y:15,  w:40,  h:40,  color:"#f97316", label:"orelha"    },
+      { id:4, shape:"circle",       x:52,  y:80,  w:24,  h:24,  color:"#1f2937", label:"olho"      },
+      { id:5, shape:"circle",       x:104, y:80,  w:24,  h:24,  color:"#1f2937", label:"olho"      },
+    ],
+    distractors: [
+      { id:101, shape:"rect",        x:40, y:60, w:80, h:40, color:"#3b82f6", label:"bloco"     },
+      { id:102, shape:"triangle-down",x:40,y:30, w:80, h:60, color:"#a855f7", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Tartaruga", emoji: "🐢", nivel:"intermediario", viewW: 200, viewH: 160,
+    pieces: [
+      { id:1, shape:"circle",   x:40,  y:20,  w:120, h:100, color:"#16a34a", label:"casco"  },
+      { id:2, shape:"circle",   x:10,  y:70,  w:38,  h:38,  color:"#4ade80", label:"pata"   },
+      { id:3, shape:"circle",   x:152, y:70,  w:38,  h:38,  color:"#4ade80", label:"pata"   },
+      { id:4, shape:"rect",     x:82,  y:108, w:36,  h:32,  color:"#4ade80", label:"cauda"  },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#ef4444", label:"telhado" },
+      { id:102, shape:"trapezoid",   x:30, y:60, w:90, h:40, color:"#3b82f6", label:"mesa"    },
+    ],
+  },
+
+  // ───────────── DIFÍCIL — 6 a 8 peças ─────────────
+  {
+    figura: "Foguete", emoji: "🚀", nivel:"dificil", viewW: 140, viewH: 230,
+    pieces: [
+      { id:1, shape:"triangle-up",    x:30,  y:5,   w:80,  h:52,  color:"#ef4444", label:"ponta"   },
+      { id:2, shape:"rect",           x:42,  y:52,  w:56,  h:120, color:"#9ca3af", label:"corpo"   },
+      { id:3, shape:"circle",         x:52,  y:82,  w:36,  h:36,  color:"#bae6fd", label:"janela"  },
+      { id:4, shape:"triangle-left",  x:8,   y:122, w:38,  h:46,  color:"#f59e0b", label:"asa esq" },
+      { id:5, shape:"triangle-right", x:94,  y:122, w:38,  h:46,  color:"#f59e0b", label:"asa dir" },
+      { id:6, shape:"triangle-down",  x:53,  y:172, w:34,  h:28,  color:"#f97316", label:"chama"   },
+    ],
+    distractors: [
+      { id:101, shape:"rect",          x:30, y:60, w:50, h:30, color:"#22c55e", label:"caixa"     },
+      { id:102, shape:"circle",        x:50, y:50, w:40, h:40, color:"#a855f7", label:"bola"      },
+      { id:103, shape:"triangle-down", x:40, y:30, w:60, h:40, color:"#3b82f6", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Flor", emoji: "🌸", nivel:"dificil", viewW: 200, viewH: 210,
+    pieces: [
+      { id:1, shape:"circle", x:75,  y:75,  w:50,  h:50,  color:"#fbbf24", label:"centro"  },
+      { id:2, shape:"circle", x:75,  y:20,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:3, shape:"circle", x:75,  y:130, w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:4, shape:"circle", x:20,  y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:5, shape:"circle", x:130, y:75,  w:50,  h:50,  color:"#f9a8d4", label:"pétala"  },
+      { id:6, shape:"rect",   x:96,  y:178, w:8,   h:30,  color:"#16a34a", label:"caule"   },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:60, y:30, w:80, h:60, color:"#ef4444", label:"triângulo" },
+      { id:102, shape:"rect",        x:30, y:60, w:60, h:30, color:"#3b82f6", label:"bloco"     },
+      { id:103, shape:"circle",      x:40, y:40, w:50, h:50, color:"#a855f7", label:"bola"      },
+    ],
+  },
+  {
+    figura: "Casa Detalhada", emoji: "🏡", nivel:"dificil", viewW: 220, viewH: 220,
+    pieces: [
+      { id:1, shape:"triangle-up", x:10,  y:10,  w:200, h:90,  color:"#dc2626", label:"telhado"  },
+      { id:2, shape:"rect",        x:30,  y:96,  w:160, h:100, color:"#fbbf24", label:"parede"   },
+      { id:3, shape:"rect",        x:88,  y:148, w:44,  h:48,  color:"#92400e", label:"porta"    },
+      { id:4, shape:"rect",        x:42,  y:110, w:34,  h:28,  color:"#bae6fd", label:"janela"   },
+      { id:5, shape:"rect",        x:144, y:110, w:34,  h:28,  color:"#bae6fd", label:"janela"   },
+      { id:6, shape:"circle",      x:100, y:8,   w:20,  h:20,  color:"#fbbf24", label:"chaminé"  },
+      { id:7, shape:"rect",        x:108, y:18,  w:6,   h:50,  color:"#78716c", label:"chaminé"  },
+    ],
+    distractors: [
+      { id:101, shape:"circle",        x:60, y:60, w:60, h:60, color:"#22c55e", label:"bola"      },
+      { id:102, shape:"trapezoid",     x:30, y:80, w:90, h:40, color:"#a855f7", label:"mesa"      },
+      { id:103, shape:"triangle-down", x:60, y:40, w:70, h:55, color:"#f97316", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Castelo", emoji: "🏰", nivel:"dificil", viewW: 220, viewH: 220,
+    pieces: [
+      { id:1, shape:"rect",        x:10,  y:80,  w:200, h:130, color:"#9ca3af", label:"muralha"   },
+      { id:2, shape:"rect",        x:10,  y:40,  w:50,  h:50,  color:"#6b7280", label:"torre esq" },
+      { id:3, shape:"rect",        x:160, y:40,  w:50,  h:50,  color:"#6b7280", label:"torre dir" },
+      { id:4, shape:"triangle-up", x:10,  y:10,  w:50,  h:34,  color:"#4b5563", label:"pico esq"  },
+      { id:5, shape:"triangle-up", x:160, y:10,  w:50,  h:34,  color:"#4b5563", label:"pico dir"  },
+      { id:6, shape:"rect",        x:88,  y:140, w:44,  h:70,  color:"#1f2937", label:"portão"    },
+      { id:7, shape:"circle",      x:98,  y:98,  w:24,  h:24,  color:"#fbbf24", label:"brasão"    },
+    ],
+    distractors: [
+      { id:101, shape:"circle",        x:60, y:60, w:60, h:60, color:"#ef4444", label:"bola"      },
+      { id:102, shape:"trapezoid",     x:30, y:80, w:90, h:40, color:"#22c55e", label:"mesa"      },
+      { id:103, shape:"triangle-down", x:60, y:40, w:70, h:55, color:"#3b82f6", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Guarda-Chuva", emoji: "☂️", nivel:"dificil", viewW: 200, viewH: 210,
+    pieces: [
+      { id:1, shape:"circle",    x:10,  y:10,  w:180, h:100, color:"#3b82f6", label:"domo"     },
+      { id:2, shape:"rect",      x:98,  y:108, w:8,   h:90,  color:"#1e3a5f", label:"cabo"     },
+      { id:3, shape:"triangle-up",x:10, y:60,  w:58,  h:50,  color:"#60a5fa", label:"parte esq"},
+      { id:4, shape:"triangle-up",x:68, y:60,  w:58,  h:50,  color:"#60a5fa", label:"parte ctr"},
+      { id:5, shape:"triangle-up",x:126,y:60,  w:58,  h:50,  color:"#60a5fa", label:"parte dir"},
+      { id:6, shape:"circle",    x:92,  y:194, w:16,  h:16,  color:"#1e3a5f", label:"ponta"    },
+    ],
+    distractors: [
+      { id:101, shape:"rect",        x:40, y:60, w:80, h:40, color:"#ef4444", label:"bloco"     },
+      { id:102, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#22c55e", label:"triângulo" },
+      { id:103, shape:"trapezoid",   x:30, y:70, w:90, h:40, color:"#f59e0b", label:"mesa"      },
+    ],
+  },
+  {
+    figura: "Pinguim", emoji: "🐧", nivel:"dificil", viewW: 180, viewH: 240,
+    pieces: [
+      { id:1, shape:"circle",       x:30,  y:10,  w:120, h:120, color:"#1f2937", label:"cabeça"   },
+      { id:2, shape:"rect",         x:20,  y:120, w:140, h:100, color:"#1f2937", label:"corpo"    },
+      { id:3, shape:"circle",       x:50,  y:35,  w:80,  h:80,  color:"#f9fafb", label:"rosto"    },
+      { id:4, shape:"triangle-down",x:72,  y:85,  w:36,  h:26,  color:"#f97316", label:"bico"     },
+      { id:5, shape:"rect",         x:30,  y:210, w:44,  h:30,  color:"#f97316", label:"pé esq"   },
+      { id:6, shape:"rect",         x:106, y:210, w:44,  h:30,  color:"#f97316", label:"pé dir"   },
+      { id:7, shape:"circle",       x:58,  y:48,  w:18,  h:18,  color:"#1f2937", label:"olho"     },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#ef4444", label:"telhado"   },
+      { id:102, shape:"circle",      x:60, y:50, w:60, h:60, color:"#a855f7", label:"bola"      },
+      { id:103, shape:"trapezoid",   x:30, y:70, w:90, h:40, color:"#3b82f6", label:"mesa"      },
+    ],
+  },
+  {
+    figura: "Nave Espacial", emoji: "🛸", nivel:"dificil", viewW: 220, viewH: 150,
+    pieces: [
+      { id:1, shape:"circle",    x:50,  y:40,  w:120, h:70,  color:"#6b7280", label:"disco"     },
+      { id:2, shape:"circle",    x:80,  y:20,  w:60,  h:50,  color:"#9ca3af", label:"cúpula"    },
+      { id:3, shape:"trapezoid", x:10,  y:90,  w:200, h:40,  color:"#4b5563", label:"base"      },
+      { id:4, shape:"triangle-down",x:30,y:124, w:44,  h:26,  color:"#f97316", label:"motor esq" },
+      { id:5, shape:"triangle-down",x:146,y:124,w:44,  h:26,  color:"#f97316", label:"motor dir" },
+      { id:6, shape:"circle",    x:92,  y:30,  w:36,  h:28,  color:"#bae6fd", label:"visor"     },
+    ],
+    distractors: [
+      { id:101, shape:"rect",        x:60, y:40, w:80, h:40, color:"#ef4444", label:"bloco"   },
+      { id:102, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#22c55e", label:"cone"    },
+      { id:103, shape:"circle",      x:60, y:40, w:60, h:60, color:"#fbbf24", label:"esfera"  },
+    ],
+  },
+  {
+    figura: "Robô Avançado", emoji: "🦾", nivel:"dificil", viewW: 180, viewH: 250,
+    pieces: [
+      { id:1, shape:"rect",   x:40,  y:10,  w:100, h:65,  color:"#0f172a", label:"cabeça"    },
+      { id:2, shape:"rect",   x:20,  y:85,  w:140, h:90,  color:"#1e293b", label:"torso"     },
+      { id:3, shape:"circle", x:56,  y:28,  w:24,  h:24,  color:"#38bdf8", label:"olho esq"  },
+      { id:4, shape:"circle", x:100, y:28,  w:24,  h:24,  color:"#38bdf8", label:"olho dir"  },
+      { id:5, shape:"rect",   x:2,   y:90,  w:20,  h:70,  color:"#334155", label:"braço esq" },
+      { id:6, shape:"rect",   x:158, y:90,  w:20,  h:70,  color:"#334155", label:"braço dir" },
+      { id:7, shape:"rect",   x:40,  y:175, w:40,  h:70,  color:"#475569", label:"perna esq" },
+      { id:8, shape:"rect",   x:100, y:175, w:40,  h:70,  color:"#475569", label:"perna dir" },
+    ],
+    distractors: [
+      { id:101, shape:"triangle-up", x:50, y:30, w:80, h:60, color:"#ef4444", label:"telhado"   },
+      { id:102, shape:"circle",      x:60, y:50, w:60, h:60, color:"#fbbf24", label:"esfera"    },
+      { id:103, shape:"trapezoid",   x:30, y:60, w:90, h:40, color:"#22c55e", label:"mesa"      },
+    ],
+  },
+  {
+    figura: "Dragão", emoji: "🐉", nivel:"dificil", viewW: 220, viewH: 200,
+    pieces: [
+      { id:1, shape:"circle",        x:140, y:20,  w:70,  h:70,  color:"#15803d", label:"cabeça"   },
+      { id:2, shape:"circle",        x:50,  y:80,  w:100, h:100, color:"#16a34a", label:"corpo"    },
+      { id:3, shape:"triangle-up",   x:150, y:10,  w:30,  h:28,  color:"#15803d", label:"chifre"   },
+      { id:4, shape:"triangle-up",   x:170, y:10,  w:30,  h:28,  color:"#15803d", label:"chifre"   },
+      { id:5, shape:"triangle-right",x:10,  y:90,  w:48,  h:48,  color:"#22c55e", label:"asa esq"  },
+      { id:6, shape:"triangle-left", x:162, y:90,  w:48,  h:48,  color:"#22c55e", label:"asa dir"  },
+      { id:7, shape:"triangle-down", x:148, y:78,  w:28,  h:24,  color:"#f97316", label:"fogo"     },
+    ],
+    distractors: [
+      { id:101, shape:"rect",        x:50, y:50, w:70, h:40, color:"#ef4444", label:"bloco"     },
+      { id:102, shape:"circle",      x:60, y:40, w:60, h:60, color:"#a855f7", label:"esfera"    },
+      { id:103, shape:"triangle-up", x:50, y:20, w:80, h:60, color:"#3b82f6", label:"triângulo" },
+    ],
+  },
+  {
+    figura: "Cidade", emoji: "🏙️", nivel:"dificil", viewW: 240, viewH: 220,
+    pieces: [
+      { id:1, shape:"rect",        x:10,  y:80,  w:60,  h:130, color:"#64748b", label:"prédio A"  },
+      { id:2, shape:"rect",        x:80,  y:50,  w:70,  h:160, color:"#475569", label:"prédio B"  },
+      { id:3, shape:"rect",        x:160, y:90,  w:70,  h:120, color:"#64748b", label:"prédio C"  },
+      { id:4, shape:"triangle-up", x:10,  y:50,  w:60,  h:34,  color:"#94a3b8", label:"topo A"    },
+      { id:5, shape:"triangle-up", x:80,  y:20,  w:70,  h:34,  color:"#94a3b8", label:"topo B"    },
+      { id:6, shape:"triangle-up", x:160, y:60,  w:70,  h:34,  color:"#94a3b8", label:"topo C"    },
+      { id:7, shape:"rect",        x:10,  y:200, w:220, h:20,  color:"#374151", label:"rua"       },
+      { id:8, shape:"rect",        x:108, y:148, w:24,  h:52,  color:"#1e3a5f", label:"porta"     },
+    ],
+    distractors: [
+      { id:101, shape:"circle",        x:60, y:40, w:60, h:60, color:"#ef4444", label:"esfera"    },
+      { id:102, shape:"trapezoid",     x:30, y:80, w:90, h:40, color:"#22c55e", label:"mesa"      },
+      { id:103, shape:"triangle-down", x:60, y:40, w:70, h:55, color:"#f59e0b", label:"triângulo" },
     ],
   },
 ];
-const MOSAICO_VARS: Variation[] = range(30).map((i) => ({ id:`mf-${i+1}`, payload: MOSAICO_BANK[i % MOSAICO_BANK.length] }));
+const MOSAICO_VARS: Variation[] = MOSAICO_BANK.map((b, i) => ({ id:`mf-${i+1}`, payload: b }));
 
 // 13. SEQUÊNCIA DE CORES — ordem cromática pura
 const SEQC_VARS: Variation[] = range(30).map((i) => {

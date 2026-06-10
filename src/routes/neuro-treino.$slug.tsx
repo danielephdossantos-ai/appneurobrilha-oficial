@@ -825,14 +825,14 @@ function Sacadico({ p, onDone }: any) {
   );
 }
 
-// ============== 12. Mosaico de Formas — tangram com SVG real ==============
+// ============== 12. Mosaico de Formas — arrastar e soltar peças nos moldes ==============
 
 /** Renders a geometric shape at the given coordinates in an SVG */
 function ShapeEl({ shape, x, y, w, h, color, opacity = 1, stroke, strokeDash }: {
   shape: ShapeType; x: number; y: number; w: number; h: number;
   color: string; opacity?: number; stroke?: string; strokeDash?: string;
 }) {
-  const commonProps = { fill: color, opacity, stroke: stroke ?? "none", strokeWidth: stroke ? 2 : 0, strokeDasharray: strokeDash };
+  const commonProps = { fill: color, opacity, stroke: stroke ?? "none", strokeWidth: stroke ? 2.5 : 0, strokeDasharray: strokeDash };
   switch (shape) {
     case "triangle-up":
       return <polygon points={`${x+w/2},${y} ${x},${y+h} ${x+w},${y+h}`} {...commonProps} />;
@@ -853,42 +853,44 @@ function ShapeEl({ shape, x, y, w, h, color, opacity = 1, stroke, strokeDash }: 
   }
 }
 
-/** Small piece card preview — renders the shape centred in a square SVG */
-function PieceCard({ piece, state, onClick }: {
+/** Piece card — draggable colored shape */
+function DraggablePiece({ piece, onPointerDown, wrong, placed }: {
   piece: MosaicoPiece;
-  state: "idle" | "selected" | "wrong" | "placed";
-  onClick: () => void;
+  onPointerDown: (e: React.PointerEvent, piece: MosaicoPiece) => void;
+  wrong: boolean;
+  placed: boolean;
 }) {
-  const pad = 10;
-  const size = 72;
-  const inner = size - pad * 2;
-
-  const ringCls =
-    state === "selected" ? "ring-4 ring-[#0d1f55] border-[#0d1f55] scale-110 shadow-xl" :
-    state === "wrong"    ? "ring-4 ring-red-500 border-red-400 animate-[wiggle_0.4s_ease]" :
-    state === "placed"   ? "opacity-30 cursor-default" :
-    "border-white/70 hover:scale-105 active:scale-95";
-
+  const pad = 8; const size = 76; const inner = size - pad * 2;
+  if (placed) return (
+    <div className="w-[76px] h-[90px] rounded-2xl border-[3px] border-dashed border-success/30 bg-success/5 flex flex-col items-center justify-center gap-1 opacity-60">
+      <span className="text-lg">✓</span>
+      <span className="text-[9px] font-black uppercase tracking-wide text-success">{piece.label}</span>
+    </div>
+  );
   return (
-    <button
-      onClick={onClick}
-      disabled={state === "placed"}
-      className={`flex flex-col items-center gap-1 rounded-2xl border-[3px] p-1.5 shadow-md transition-all bg-white/90 ${ringCls}`}
+    <div
+      onPointerDown={(e) => onPointerDown(e, piece)}
+      style={{ touchAction: "none", userSelect: "none", cursor: "grab" }}
+      className={`flex flex-col items-center gap-1 rounded-2xl border-[3px] p-1.5 shadow-md transition-all bg-white/90 active:scale-95 select-none
+        ${wrong ? "border-red-400 ring-4 ring-red-400 animate-bounce" : "border-white/70 hover:scale-105 hover:shadow-lg hover:border-primary/40"}`}
     >
-      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="shrink-0">
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="shrink-0 pointer-events-none">
         <ShapeEl shape={piece.shape} x={pad} y={pad} w={inner} h={inner} color={piece.color} />
       </svg>
-      <span className="text-[9px] font-black uppercase tracking-wide text-[#0d1f55]/70 leading-tight pb-0.5">
+      <span className="text-[9px] font-black uppercase tracking-wide text-[#0d1f55]/70 leading-tight pb-0.5 pointer-events-none">
         {piece.label}
       </span>
-    </button>
+    </div>
   );
 }
 
-function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: number; viewH: number; pieces: MosaicoPiece[]; distractors: MosaicoPiece[] }; onDone: (ok: boolean) => void }) {
-  const correctIds = useMemo(() => new Set(p.pieces.map(pc => pc.id)), [p.pieces]);
+const NIVEL_LABEL: Record<string, string> = { facil:"⭐ Fácil", intermediario:"⭐⭐ Intermediário", dificil:"⭐⭐⭐ Difícil" };
+const NIVEL_COLOR: Record<string, string> = { facil:"bg-green-100 text-green-700 border-green-300", intermediario:"bg-yellow-100 text-yellow-700 border-yellow-300", dificil:"bg-red-100 text-red-700 border-red-300" };
 
-  // Shuffle pieces + distractors once
+function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void }) {
+  const assemblyRef = useRef<SVGSVGElement>(null);
+
+  // Shuffle pieces + distractors once on mount
   const allBank = useMemo(() => {
     const arr = [...p.pieces, ...p.distractors];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -896,58 +898,108 @@ function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: num
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
-  }, [p.pieces, p.distractors]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [placed, setPlaced] = useState<Set<number>>(new Set());
-  const [selected, setSelected] = useState<number | null>(null);
+  const [dragging, setDragging] = useState<MosaicoPiece | null>(null);
+  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [wrongId, setWrongId] = useState<number | null>(null);
+  const [highlightSlot, setHighlightSlot] = useState<number | null>(null);
   const [done, setDone] = useState(false);
 
-  const handlePieceTap = (piece: MosaicoPiece) => {
-    if (done) return;
-    if (placed.has(piece.id)) return;
+  // Global pointer move/up listeners while dragging
+  useEffect(() => {
+    if (!dragging) return;
 
-    if (correctIds.has(piece.id)) {
-      // Correct piece!
-      const next = new Set(placed).add(piece.id);
-      setPlaced(next);
-      setSelected(null);
-      if (next.size === p.pieces.length) {
-        setDone(true);
-        setTimeout(() => onDone(true), 900);
+    const onMove = (e: PointerEvent) => {
+      setDragPos({ x: e.clientX, y: e.clientY });
+
+      // Highlight the slot under the pointer
+      const svg = assemblyRef.current;
+      if (!svg) return;
+      const rect = svg.getBoundingClientRect();
+      const svgX = ((e.clientX - rect.left) / rect.width) * p.viewW;
+      const svgY = ((e.clientY - rect.top) / rect.height) * p.viewH;
+      const hit = p.pieces.find(pc =>
+        !placed.has(pc.id) &&
+        svgX >= pc.x - 10 && svgX <= pc.x + pc.w + 10 &&
+        svgY >= pc.y - 10 && svgY <= pc.y + pc.h + 10
+      );
+      setHighlightSlot(hit?.id ?? null);
+    };
+
+    const onUp = (e: PointerEvent) => {
+      const svg = assemblyRef.current;
+      if (svg) {
+        const rect = svg.getBoundingClientRect();
+        const svgX = ((e.clientX - rect.left) / rect.width) * p.viewW;
+        const svgY = ((e.clientY - rect.top) / rect.height) * p.viewH;
+
+        // Find which unplaced slot the drop landed on (with generous hit area)
+        const hitSlot = p.pieces.find(pc =>
+          !placed.has(pc.id) &&
+          svgX >= pc.x - 8 && svgX <= pc.x + pc.w + 8 &&
+          svgY >= pc.y - 8 && svgY <= pc.y + pc.h + 8
+        );
+
+        if (hitSlot) {
+          if (hitSlot.id === dragging.id) {
+            const next = new Set(placed).add(dragging.id);
+            setPlaced(next);
+            if (next.size === p.pieces.length) {
+              setDone(true);
+              setTimeout(() => onDone(true), 1000);
+            }
+          } else {
+            setWrongId(dragging.id);
+            setTimeout(() => setWrongId(null), 600);
+          }
+        }
       }
-    } else {
-      // Distractor
-      setWrongId(piece.id);
-      setTimeout(() => setWrongId(null), 450);
-    }
+      setDragging(null);
+      setHighlightSlot(null);
+    };
+
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, [dragging, placed, p.pieces, p.viewW, p.viewH, onDone]);
+
+  const handlePointerDown = (e: React.PointerEvent, piece: MosaicoPiece) => {
+    if (done || placed.has(piece.id)) return;
+    e.preventDefault();
+    setDragging(piece);
+    setDragPos({ x: e.clientX, y: e.clientY });
   };
 
   const progress = placed.size / p.pieces.length;
+  const nivel = (p as any).nivel ?? "facil";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 select-none">
+      {/* ── CABEÇALHO: nível + modelo ── */}
+      <div className="flex items-center justify-between gap-2">
+        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border ${NIVEL_COLOR[nivel] ?? NIVEL_COLOR.facil}`}>
+          {NIVEL_LABEL[nivel] ?? "Fácil"}
+        </span>
+        <span className="text-sm font-bold text-muted-foreground">{p.emoji} {p.figura}</span>
+      </div>
 
-      {/* ── MODELO REFERÊNCIA ── */}
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-2">
-          Modelo — {p.emoji} {p.figura}
+      {/* ── MODELO REFERÊNCIA (mini) ── */}
+      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-2">
+        <div className="text-[9px] font-black uppercase tracking-widest text-amber-700 text-center mb-1">
+          🔍 Modelo — arraste as peças para os moldes!
         </div>
         <div className="flex justify-center">
           <svg
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{ width: Math.min(180, p.viewW), height: Math.min(180, p.viewW) * (p.viewH / p.viewW) }}
-            className="drop-shadow"
+            style={{ width: Math.min(160, p.viewW), height: Math.min(160, p.viewW) * (p.viewH / p.viewW) }}
           >
-            {/* All pieces fully coloured */}
-            {p.pieces.map(pc => (
-              <ShapeEl key={pc.id} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
-            ))}
-            {/* Subtle outlines */}
-            {p.pieces.map(pc => (
-              <ShapeEl key={`o${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
-                color="none" stroke="rgba(0,0,0,0.15)" />
-            ))}
+            {p.pieces.map(pc => <ShapeEl key={pc.id} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />)}
+            {p.pieces.map(pc => <ShapeEl key={`o${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color="none" stroke="rgba(0,0,0,0.12)" />)}
           </svg>
         </div>
       </div>
@@ -955,69 +1007,72 @@ function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: num
       {/* ── BARRA DE PROGRESSO ── */}
       <div className="flex items-center gap-2">
         <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary rounded-full transition-all duration-500"
-            style={{ width: `${progress * 100}%` }}
-          />
+          <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${progress * 100}%` }} />
         </div>
-        <span className="text-xs font-bold text-muted-foreground tabular-nums">
-          {placed.size}/{p.pieces.length}
-        </span>
+        <span className="text-xs font-bold text-muted-foreground tabular-nums">{placed.size}/{p.pieces.length}</span>
       </div>
 
-      {/* ── ÁREA DE MONTAGEM ── */}
-      <div className="bg-card border-2 border-primary/20 rounded-2xl p-3">
-        <div className="text-[10px] font-black uppercase tracking-widest text-primary text-center mb-2">
-          Monte aqui!
+      {/* ── ÁREA DE MONTAGEM (drop zone) ── */}
+      <div className="bg-card border-2 border-primary/20 rounded-2xl p-2">
+        <div className="text-[9px] font-black uppercase tracking-widest text-primary text-center mb-1">
+          ⬇️ Solte a peça no molde certo!
         </div>
         <div className="flex justify-center">
           <svg
+            ref={assemblyRef}
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{ width: "100%", maxWidth: Math.min(300, p.viewW * 1.5), aspectRatio: `${p.viewW}/${p.viewH}` }}
+            style={{ width: "100%", maxWidth: Math.min(320, p.viewW * 1.6), aspectRatio: `${p.viewW}/${p.viewH}` }}
           >
-            {/* Ghost outlines for unplaced */}
+            {/* Ghost slots for unplaced */}
             {p.pieces.filter(pc => !placed.has(pc.id)).map(pc => (
-              <ShapeEl key={`ghost-${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
-                color="#e2e8f0" stroke="#94a3b8" strokeDash="8 5" opacity={0.7} />
+              <g key={`slot-${pc.id}`}>
+                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                  color={highlightSlot === pc.id ? "#c7d2fe" : "#e2e8f0"}
+                  stroke={highlightSlot === pc.id ? "#6366f1" : "#94a3b8"}
+                  strokeDash={highlightSlot === pc.id ? undefined : "8 5"}
+                  opacity={0.85}
+                />
+                {/* Label inside slot */}
+                <text
+                  x={pc.x + pc.w / 2} y={pc.y + pc.h / 2 + 4}
+                  textAnchor="middle" fontSize="8" fill="#64748b" fontWeight="bold"
+                  style={{ pointerEvents: "none", userSelect: "none" }}
+                >
+                  {pc.label}
+                </text>
+              </g>
             ))}
             {/* Placed pieces */}
             {p.pieces.filter(pc => placed.has(pc.id)).map(pc => (
               <g key={`placed-${pc.id}`}>
                 <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
-                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
-                  color="none" stroke="rgba(255,255,255,0.4)" />
+                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color="none" stroke="rgba(255,255,255,0.35)" />
               </g>
             ))}
-            {/* Celebration sparkles when done */}
             {done && (
               <>
-                <text x={p.viewW/2} y={p.viewH/2 - 10} textAnchor="middle" fontSize="32" opacity="0.9">⭐</text>
-                <text x={p.viewW/2} y={p.viewH/2 + 30} textAnchor="middle" fontSize="14" fill="#0d1f55" fontWeight="bold">
-                  Incrível!
-                </text>
+                <text x={p.viewW/2} y={p.viewH/2 - 8} textAnchor="middle" fontSize="30">⭐</text>
+                <text x={p.viewW/2} y={p.viewH/2 + 22} textAnchor="middle" fontSize="12" fill="#0d1f55" fontWeight="bold">Incrível!</text>
               </>
             )}
           </svg>
         </div>
       </div>
 
-      {/* ── BANCO DE PEÇAS (embaralhado) ── */}
+      {/* ── BANCO DE PEÇAS ── */}
       {!done && (
         <div>
-          <div className="text-[10px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
-            Toque na peça que pertence à figura!
+          <div className="text-[9px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
+            👆 Segure e arraste a peça até o molde!
           </div>
-          <div className="grid grid-cols-4 gap-2 justify-items-center">
+          <div className="flex flex-wrap gap-2 justify-center">
             {allBank.map(piece => (
-              <PieceCard
+              <DraggablePiece
                 key={piece.id}
                 piece={piece}
-                state={
-                  placed.has(piece.id) ? "placed" :
-                  wrongId === piece.id ? "wrong" :
-                  "idle"
-                }
-                onClick={() => handlePieceTap(piece)}
+                placed={placed.has(piece.id)}
+                wrong={wrongId === piece.id}
+                onPointerDown={handlePointerDown}
               />
             ))}
           </div>
@@ -1025,8 +1080,29 @@ function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: num
       )}
 
       {done && (
-        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30">
+        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30 animate-bounce">
           🎉 Figura montada! Arrasou!
+        </div>
+      )}
+
+      {/* ── GHOST que segue o dedo/mouse durante o arraste ── */}
+      {dragging && (
+        <div
+          style={{
+            position: "fixed",
+            left: dragPos.x - 38,
+            top: dragPos.y - 38,
+            pointerEvents: "none",
+            zIndex: 9999,
+            opacity: 0.88,
+            transform: "scale(1.15) rotate(-6deg)",
+            transition: "transform 0.05s",
+            filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.3))",
+          }}
+        >
+          <svg viewBox="0 0 80 80" width={76} height={76}>
+            <ShapeEl shape={dragging.shape} x={4} y={4} w={72} h={72} color={dragging.color} />
+          </svg>
         </div>
       )}
     </div>
