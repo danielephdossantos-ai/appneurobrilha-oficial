@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { useStories } from "@/modules/historias/hooks/useStories";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
 import { useAppState } from "@/core/store";
+import { StoryIllustration } from "@/modules/historias/illustrations";
 
 export const Route = createFileRoute("/historias")({
   component: HistoriasLibrary,
@@ -142,11 +143,8 @@ function HistoriasLibrary() {
                     params={{ storyId: s.id }}
                     className="block bg-white rounded-3xl p-5 shadow-sm border border-[#6C5CE7]/5 hover:scale-[1.02] transition active:scale-[0.98]"
                   >
-                    <div
-                      className="w-full h-32 rounded-2xl flex items-center justify-center text-7xl mb-3"
-                      style={{ backgroundColor: meta?.bg ?? "#EEE" }}
-                    >
-                      {s.cover_image || meta?.emoji}
+                    <div className="w-full h-36 rounded-2xl overflow-hidden mb-3">
+                      <StoryIllustration sceneKey={s.cover_image} />
                     </div>
                     <div className="flex items-center gap-2 mb-1">
                       <span
