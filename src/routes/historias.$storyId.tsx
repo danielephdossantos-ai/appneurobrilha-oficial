@@ -1,30 +1,170 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Play, Pause, ChevronLeft, ChevronRight, Trophy, RotateCcw } from "lucide-react";
+import { ArrowLeft, Play, Pause, ChevronLeft, ChevronRight, Trophy, RotateCcw, Sparkles } from "lucide-react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useStory, saveStoryProgress } from "@/modules/historias/hooks/useStories";
 import { speak, type TTSHandle } from "@/modules/historias/lib/tts";
 import { useAppState } from "@/core/store";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
+import {
+  generateStoryPageImage,
+  generateStoryCoverImage,
+} from "@/services/api/story-illustration.functions";
 
 type Ripple = { id: number; x: number; y: number };
 
+const THEME_GRADIENTS: Record<string, string> = {
+  dinossauros: "from-emerald-400 via-green-500 to-teal-600",
+  animais: "from-orange-400 via-amber-500 to-yellow-500",
+  espaco: "from-indigo-600 via-purple-600 to-violet-700",
+  fazendinha: "from-yellow-400 via-lime-400 to-green-500",
+  princesas: "from-pink-400 via-rose-400 to-fuchsia-500",
+  "super-herois": "from-red-500 via-orange-500 to-yellow-400",
+  natureza: "from-teal-400 via-emerald-500 to-green-600",
+};
+
+const THEME_EMOJIS: Record<string, string[]> = {
+  dinossauros: ["🦕", "🌿", "🌋", "🦖"],
+  animais: ["🦊", "🐰", "🌸", "🦌"],
+  espaco: ["🚀", "⭐", "🪐", "✨"],
+  fazendinha: ["🌻", "🐄", "🌾", "🐓"],
+  princesas: ["👑", "🏰", "🌹", "✨"],
+  "super-herois": ["⚡", "🦸", "💥", "🌟"],
+  natureza: ["🌺", "🦋", "🌊", "🌳"],
+};
+
+function IllustrationSkeleton({ theme }: { theme: string }) {
+  const gradient = THEME_GRADIENTS[theme] ?? "from-violet-400 via-purple-500 to-indigo-600";
+  const emojis = THEME_EMOJIS[theme] ?? ["✨", "🌟", "💫", "⭐"];
+
+  return (
+    <div
+      className={`relative w-full rounded-[2rem] overflow-hidden shadow-xl bg-gradient-to-br ${gradient}`}
+      style={{ aspectRatio: "4 / 3" }}
+    >
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+        <div className="flex gap-3">
+          {emojis.map((e, i) => (
+            <motion.span
+              key={i}
+              className="text-4xl drop-shadow-lg"
+              animate={{ y: [0, -12, 0], scale: [1, 1.15, 1] }}
+              transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.25, ease: "easeInOut" }}
+            >
+              {e}
+            </motion.span>
+          ))}
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <motion.div
+            className="flex gap-1.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            {[0, 1, 2, 3, 4].map((i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 rounded-full bg-white"
+                animate={{ scale: [1, 1.6, 1], opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 1, repeat: Infinity, delay: i * 0.18 }}
+              />
+            ))}
+          </motion.div>
+          <motion.p
+            className="text-white/90 text-sm font-bold tracking-wide"
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            Criando ilustração mágica...
+          </motion.p>
+        </div>
+      </div>
+      <div className="absolute inset-0 opacity-20">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: 60 + i * 30,
+              height: 60 + i * 30,
+              left: `${10 + i * 15}%`,
+              top: `${20 + (i % 3) * 20}%`,
+            }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function StoryIllustration({
-  coverImage,
   imageUrl,
+  coverImage,
   theme,
   bg,
+  pageId,
+  pageText,
+  storyId,
+  storyTitle,
+  storyDescription,
+  isCoverPage,
 }: {
-  coverImage: string | null;
   imageUrl: string | null;
+  coverImage: string | null;
   theme: string;
   bg?: string;
+  pageId?: string;
+  pageText?: string;
+  storyId?: string;
+  storyTitle?: string;
+  storyDescription?: string;
+  isCoverPage?: boolean;
 }) {
-  const src = imageUrl || coverImage;
+  const rawSrc = imageUrl || coverImage;
+  const isSvgOrEmpty = !rawSrc || rawSrc.startsWith("data:image/svg");
+  const [src, setSrc] = useState<string | null>(isSvgOrEmpty ? null : rawSrc);
+  const [generating, setGenerating] = useState(false);
   const controls = useAnimation();
   const [ripples, setRipples] = useState<Ripple[]>([]);
+  const generatedRef = useRef(false);
+
+  const tryGenerate = useCallback(async () => {
+    if (generatedRef.current || generating) return;
+    generatedRef.current = true;
+    setGenerating(true);
+    try {
+      if (isCoverPage && storyId && storyTitle) {
+        const result = await generateStoryCoverImage({
+          data: { storyId, storyTitle, theme, description: storyDescription ?? "" },
+        });
+        if (result.imageUrl) setSrc(result.imageUrl);
+      } else if (pageId && pageText && storyTitle) {
+        const result = await generateStoryPageImage({
+          data: { pageId, pageText, theme, storyTitle },
+        });
+        if (result.imageUrl) setSrc(result.imageUrl);
+      }
+    } catch (e) {
+      console.error("[StoryIllustration] generate error:", e);
+    } finally {
+      setGenerating(false);
+    }
+  }, [pageId, pageText, storyId, storyTitle, theme, storyDescription, isCoverPage]);
+
+  useEffect(() => {
+    if (isSvgOrEmpty) {
+      tryGenerate();
+    } else {
+      setSrc(rawSrc);
+      generatedRef.current = false;
+    }
+  }, [rawSrc, isSvgOrEmpty]);
 
   const handleInteract = (e: React.MouseEvent | React.TouchEvent) => {
+    if (generating) return;
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const clientX = "touches" in e ? e.touches[0]?.clientX ?? rect.left + rect.width / 2 : e.clientX;
     const clientY = "touches" in e ? e.touches[0]?.clientY ?? rect.top + rect.height / 2 : e.clientY;
@@ -33,25 +173,33 @@ function StoryIllustration({
     const id = Date.now();
     setRipples((prev) => [...prev, { id, x, y }]);
     setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 900);
-    controls.start({ scale: [1, 1.045, 0.975, 1.01, 1], transition: { duration: 0.45, ease: "easeOut" } });
+    controls.start({ scale: [1, 1.04, 0.98, 1.01, 1], transition: { duration: 0.45, ease: "easeOut" } });
   };
 
-  const isSvgDataUrl = src?.startsWith("data:image/svg+xml,");
+  if (generating) {
+    return <IllustrationSkeleton theme={theme} />;
+  }
 
-  if (isSvgDataUrl) {
-    const svgContent = decodeURIComponent(src!.replace("data:image/svg+xml,", ""));
+  if (src && !src.startsWith("data:image/svg")) {
+    const isAI = src.startsWith("data:image/png;base64") || src.startsWith("data:image/jpeg");
     return (
       <motion.div
         animate={controls}
         onClick={handleInteract}
         onTouchStart={handleInteract}
-        className="relative w-full rounded-[2rem] overflow-hidden shadow-lg cursor-pointer select-none"
-        style={{ aspectRatio: "400 / 280" }}
+        className="relative w-full rounded-[2rem] overflow-hidden shadow-xl cursor-pointer select-none"
+        style={{ aspectRatio: "4 / 3" }}
+        initial={{ opacity: 0, scale: 0.97 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div
-          dangerouslySetInnerHTML={{ __html: svgContent }}
-          style={{ width: "100%", height: "100%", display: "block" }}
+        <img
+          src={src}
+          alt={`Ilustração de ${theme}`}
+          className="w-full h-full object-cover"
+          style={{ imageRendering: "auto" }}
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         <AnimatePresence>
           {ripples.map((r) => (
             <motion.div
@@ -59,14 +207,22 @@ function StoryIllustration({
               className="absolute rounded-full bg-white pointer-events-none"
               style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
               initial={{ width: 0, height: 0, opacity: 0.55 }}
-              animate={{ width: 160, height: 160, opacity: 0 }}
+              animate={{ width: 180, height: 180, opacity: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.85, ease: "easeOut" }}
             />
           ))}
         </AnimatePresence>
-        <div className="absolute inset-0 flex items-end justify-center pb-3 pointer-events-none">
-          <span className="text-white/60 text-xs font-bold bg-black/20 rounded-full px-3 py-1 select-none">
+        {isAI && (
+          <div className="absolute bottom-3 right-3 pointer-events-none">
+            <div className="flex items-center gap-1 bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1">
+              <Sparkles className="w-3 h-3 text-[#FFD93D]" />
+              <span className="text-white/80 text-[10px] font-bold">IA</span>
+            </div>
+          </div>
+        )}
+        <div className="absolute bottom-3 left-3 pointer-events-none">
+          <span className="text-white/50 text-[10px] font-bold bg-black/20 rounded-full px-2.5 py-1">
             Toque para animar
           </span>
         </div>
@@ -74,36 +230,10 @@ function StoryIllustration({
     );
   }
 
-  if (src && src.startsWith("http")) {
-    return (
-      <motion.div
-        animate={controls}
-        onClick={handleInteract}
-        onTouchStart={handleInteract}
-        className="relative w-full rounded-[2rem] overflow-hidden shadow-lg cursor-pointer select-none"
-      >
-        <img src={src} alt={`Ilustração de ${theme}`} className="w-full aspect-video object-cover" />
-        <AnimatePresence>
-          {ripples.map((r) => (
-            <motion.div
-              key={r.id}
-              className="absolute rounded-full bg-white pointer-events-none"
-              style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
-              initial={{ width: 0, height: 0, opacity: 0.55 }}
-              animate={{ width: 160, height: 160, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.85, ease: "easeOut" }}
-            />
-          ))}
-        </AnimatePresence>
-      </motion.div>
-    );
-  }
-
   return (
     <div
-      className="w-full aspect-video rounded-[2rem] shadow-lg"
-      style={{ backgroundColor: bg ?? "#EEE" }}
+      className={`w-full rounded-[2rem] shadow-lg bg-gradient-to-br ${THEME_GRADIENTS[theme] ?? "from-violet-400 to-indigo-600"}`}
+      style={{ aspectRatio: "4 / 3" }}
     />
   );
 }
@@ -132,14 +262,12 @@ function StoryReader() {
   const currentPage = pages[pageIdx];
   const themeMeta = story ? THEME_META[story.theme as StoryTheme] : undefined;
 
-  // Stop TTS when leaving page
   useEffect(() => {
     return () => {
       ttsRef.current?.stop();
     };
   }, []);
 
-  // Auto-save progress
   useEffect(() => {
     if (!activeChild || !story) return;
     saveStoryProgress({
@@ -213,7 +341,6 @@ function StoryReader() {
   }).length;
   const finalScore = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 100;
 
-  // Render highlighted text
   const highlighted = useMemo(() => {
     if (!currentPage) return null;
     const words = currentPage.text.split(/(\s+)/);
@@ -236,7 +363,14 @@ function StoryReader() {
   if (isLoading || !story) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F8F7FF]">
-        <p className="text-[#6C5CE7] font-bold">Carregando história...</p>
+        <div className="flex flex-col items-center gap-4">
+          <motion.div
+            className="w-16 h-16 rounded-full bg-gradient-to-br from-[#6C5CE7] to-[#A29BFE]"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+          />
+          <p className="text-[#6C5CE7] font-bold">Carregando história...</p>
+        </div>
       </div>
     );
   }
@@ -275,13 +409,18 @@ function StoryReader() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="space-y-6"
+              className="space-y-5"
             >
               <StoryIllustration
-                coverImage={story.coverImage ?? story.cover_image}
-                imageUrl={currentPage.imageUrl ?? currentPage.image_url}
+                imageUrl={currentPage.imageUrl ?? currentPage.image_url ?? null}
+                coverImage={story.coverImage ?? story.cover_image ?? null}
                 theme={story.theme}
                 bg={themeMeta?.bg}
+                pageId={currentPage.id}
+                pageText={currentPage.text}
+                storyId={story.id}
+                storyTitle={story.title}
+                storyDescription={story.description ?? ""}
               />
 
               <div className="bg-white rounded-3xl p-6 shadow-md">

@@ -56,24 +56,93 @@ const LEVEL_LABELS: Record<string, string> = {
   avancado: "Avancado",
 };
 
+const COVER_GRADIENTS: Record<string, string> = {
+  dinossauros: "from-emerald-400 via-green-500 to-teal-600",
+  animais: "from-orange-400 via-amber-500 to-yellow-400",
+  espaco: "from-indigo-500 via-purple-600 to-violet-700",
+  fazendinha: "from-yellow-300 via-lime-400 to-green-500",
+  princesas: "from-pink-400 via-rose-400 to-fuchsia-500",
+  "super-herois": "from-red-500 via-orange-500 to-yellow-400",
+  natureza: "from-teal-400 via-emerald-500 to-green-600",
+};
+
+const COVER_EMOJIS: Record<string, string[]> = {
+  dinossauros: ["🦕", "🌿", "🦖", "🌋"],
+  animais: ["🦊", "🐰", "🦋", "🌸"],
+  espaco: ["🚀", "⭐", "🪐", "🌙"],
+  fazendinha: ["🌻", "🐄", "🌾", "🐓"],
+  princesas: ["👑", "🏰", "🌹", "✨"],
+  "super-herois": ["⚡", "🦸", "💥", "🌟"],
+  natureza: ["🌺", "🦋", "🌊", "🌳"],
+};
+
 function StoryCover({ coverImage, theme }: { coverImage: string | null | undefined; theme: string }) {
-  const meta = THEME_META[theme as StoryTheme];
-  if (coverImage && (coverImage.startsWith("data:") || coverImage.startsWith("http"))) {
+  const isRealImage =
+    coverImage &&
+    (coverImage.startsWith("data:image/png") ||
+      coverImage.startsWith("data:image/jpeg") ||
+      coverImage.startsWith("http"));
+
+  if (isRealImage) {
     return (
-      <img
-        src={coverImage}
-        alt={`Ilustracao de ${theme}`}
-        className="w-full h-36 object-cover rounded-2xl"
-        loading="lazy"
-      />
+      <div className="relative w-full h-40 rounded-2xl overflow-hidden">
+        <img
+          src={coverImage!}
+          alt={`Ilustração de ${theme}`}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+        <div className="absolute bottom-2 right-2">
+          <div className="flex items-center gap-1 bg-black/30 backdrop-blur-sm rounded-full px-2 py-0.5">
+            <Sparkles className="w-3 h-3 text-yellow-300" />
+            <span className="text-white/80 text-[9px] font-bold">IA</span>
+          </div>
+        </div>
+      </div>
     );
   }
+
+  const gradient = COVER_GRADIENTS[theme] ?? "from-violet-400 via-purple-500 to-indigo-600";
+  const emojis = COVER_EMOJIS[theme] ?? ["📖", "✨", "🌟", "💫"];
+
   return (
-    <div
-      className="w-full h-36 rounded-2xl flex items-center justify-center"
-      style={{ backgroundColor: meta?.bg ?? "#EEE" }}
-    >
-      <BookOpen className="w-12 h-12 text-white/60" />
+    <div className={`relative w-full h-40 rounded-2xl overflow-hidden bg-gradient-to-br ${gradient} flex items-center justify-center`}>
+      <div className="absolute inset-0 opacity-20">
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{ width: 80 + i * 40, height: 80 + i * 40, left: `${20 + i * 22}%`, top: `${15 + i * 15}%` }}
+            animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.25, 0.1] }}
+            transition={{ duration: 3 + i * 0.8, repeat: Infinity, delay: i * 0.5 }}
+          />
+        ))}
+      </div>
+      <div className="relative z-10 flex flex-col items-center gap-2">
+        <div className="flex gap-2">
+          {emojis.map((e, i) => (
+            <motion.span
+              key={i}
+              className="text-2xl drop-shadow-md"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
+            >
+              {e}
+            </motion.span>
+          ))}
+        </div>
+        <div className="flex gap-1 mt-1">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-1.5 h-1.5 rounded-full bg-white"
+              animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
