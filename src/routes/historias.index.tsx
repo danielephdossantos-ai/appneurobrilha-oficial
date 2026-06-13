@@ -100,16 +100,17 @@ function StoryCover({ coverImage, theme }: { coverImage: string | null | undefin
     );
   }
 
-  const svgScene = getThemeScene(theme);
+  const fallback = THEME_COVERS[theme] ?? THEME_COVERS.natureza;
 
   return (
     <div className="relative w-full h-40 rounded-2xl overflow-hidden">
-      <div
-        className="absolute inset-0 w-full h-full [&>svg]:w-full [&>svg]:h-full"
-        dangerouslySetInnerHTML={{ __html: svgScene }}
-        style={{ lineHeight: 0 }}
+      <img
+        src={fallback}
+        alt={`Ilustração de ${theme}`}
+        className="w-full h-full object-cover"
+        loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
     </div>
   );
 }
