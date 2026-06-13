@@ -6,7 +6,6 @@ import { useStory, saveStoryProgress } from "@/modules/historias/hooks/useStorie
 import { speak, type TTSHandle } from "@/modules/historias/lib/tts";
 import { useAppState } from "@/core/store";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
-import { StoryIllustration } from "@/modules/historias/illustrations";
 
 export const Route = createFileRoute("/historias/$storyId")({
   component: StoryReader,
@@ -173,8 +172,11 @@ function StoryReader() {
               exit={{ opacity: 0, x: -30 }}
               className="space-y-6"
             >
-              <div className="w-full aspect-square rounded-[2rem] overflow-hidden shadow-lg">
-                <StoryIllustration sceneKey={currentPage.image_url || story.cover_image} />
+              <div
+                className="w-full aspect-square rounded-[2rem] flex items-center justify-center text-[9rem] shadow-lg"
+                style={{ backgroundColor: themeMeta?.bg ?? "#EEE" }}
+              >
+                {currentPage.image_url || story.cover_image}
               </div>
 
               <div className="bg-white rounded-3xl p-6 shadow-md">

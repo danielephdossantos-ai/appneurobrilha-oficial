@@ -24,9 +24,6 @@ import {
   getNeuroAtividades, upsertProgressoAluno,
   insertAuditLog,
 } from "@/services/db/data.functions";
-import {
-  getStories, getStory, upsertStoryProgress,
-} from "@/services/db/stories.functions";
 
 type AnyRecord = Record<string, unknown>;
 type FilterEntry = { col: string; op: string; val: unknown };
@@ -58,24 +55,6 @@ async function resolveTable(table: string, filters: FilterEntry[], opts: AnyReco
     case "atividades": return getAtividades({ data: {} });
     case "pedagogical_activities_base": return getPedagogicalActivities({ data: {} });
     case "neuro_atividades": return getNeuroAtividades({ data: {} });
-    case "stories": {
-      const theme = get("theme");
-      const level = get("reading_level");
-      return getStories({ data: { theme, level } });
-    }
-    case "story_pages": {
-      const storyId = get("story_id");
-      if (!storyId) return [];
-      const result = await getStory({ data: { id: storyId } });
-      return result.pages;
-    }
-    case "story_questions": {
-      const storyId = get("story_id");
-      if (!storyId) return [];
-      const result = await getStory({ data: { id: storyId } });
-      return result.questions;
-    }
-    case "story_progress": return [];
     default:
       console.warn(`[supabase-shim] Unknown table: ${table}. Returning [].`);
       return [];
@@ -118,7 +97,6 @@ async function execInsert(table: string, row: any): Promise<unknown> {
     case "anamnese_v2": return upsertAnamneseV2({ data: { row } });
     case "progresso_aluno": return upsertProgressoAluno({ data: { progresso: row } });
     case "audit_logs": return insertAuditLog({ data: { log: row } });
-    case "story_progress": return upsertStoryProgress({ data: { childId: row.child_id, storyId: row.story_id, currentPage: row.current_page ?? 1, completed: row.completed ?? false, score: row.score ?? 0 } });
     default:
       console.warn(`[supabase-shim] insert on unknown table: ${table}`);
       return row;
