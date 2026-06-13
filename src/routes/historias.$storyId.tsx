@@ -10,12 +10,12 @@ import {
   generateStoryPageImage,
   generateStoryCoverImage,
 } from "@/services/api/story-illustration.functions";
-import { getThemeScene } from "@/modules/historias/lib/theme-scenes";
+import { getPageScene, getThemeScene } from "@/modules/historias/lib/theme-scenes";
 
 type Ripple = { id: number; x: number; y: number };
 
-function IllustrationSkeleton({ theme }: { theme: string }) {
-  const svgScene = getThemeScene(theme);
+function IllustrationSkeleton({ theme, pageIndex = 0 }: { theme: string; pageIndex?: number }) {
+  const svgScene = getPageScene(theme, pageIndex);
   return (
     <div
       className="relative w-full rounded-[2rem] overflow-hidden shadow-xl"
@@ -68,6 +68,7 @@ function StoryIllustration({
   bg,
   pageId,
   pageText,
+  pageIndex,
   storyId,
   storyTitle,
   storyDescription,
@@ -79,6 +80,7 @@ function StoryIllustration({
   bg?: string;
   pageId?: string;
   pageText?: string;
+  pageIndex?: number;
   storyId?: string;
   storyTitle?: string;
   storyDescription?: string;
@@ -138,7 +140,7 @@ function StoryIllustration({
   };
 
   if (generating) {
-    return <IllustrationSkeleton theme={theme} />;
+    return <IllustrationSkeleton theme={theme} pageIndex={pageIndex ?? 0} />;
   }
 
   if (src && !src.startsWith("data:image/svg")) {
@@ -191,7 +193,7 @@ function StoryIllustration({
     );
   }
 
-  const svgScene = getThemeScene(theme);
+  const svgScene = getPageScene(theme, pageIndex ?? 0);
   return (
     <div
       className="relative w-full rounded-[2rem] overflow-hidden shadow-lg"
@@ -386,6 +388,7 @@ function StoryReader() {
                 bg={themeMeta?.bg}
                 pageId={currentPage.id}
                 pageText={currentPage.text}
+                pageIndex={pageIdx}
                 storyId={story.id}
                 storyTitle={story.title}
                 storyDescription={story.description ?? ""}
