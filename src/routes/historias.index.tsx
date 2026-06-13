@@ -2,7 +2,23 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Search, Sparkles, RefreshCw, PlusCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getThemeScene } from "@/modules/historias/lib/theme-scenes";
+import dinossaurosImg from "@/assets/historias/dinossauros.jpg";
+import animaisImg from "@/assets/historias/animais.jpg";
+import espacoImg from "@/assets/historias/espaco.jpg";
+import fazendinhaImg from "@/assets/historias/fazendinha.jpg";
+import princesasImg from "@/assets/historias/princesas.jpg";
+import superHeroisImg from "@/assets/historias/super-herois.jpg";
+import naturezaImg from "@/assets/historias/natureza.jpg";
+
+const THEME_COVERS: Record<string, string> = {
+  dinossauros: dinossaurosImg,
+  animais: animaisImg,
+  espaco: espacoImg,
+  fazendinha: fazendinhaImg,
+  princesas: princesasImg,
+  "super-herois": superHeroisImg,
+  natureza: naturezaImg,
+};
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { seedStoriesIfEmpty, generateExtraStory } from "@/services/db/stories.seed";
@@ -84,16 +100,17 @@ function StoryCover({ coverImage, theme }: { coverImage: string | null | undefin
     );
   }
 
-  const svgScene = getThemeScene(theme);
+  const fallback = THEME_COVERS[theme] ?? THEME_COVERS.natureza;
 
   return (
     <div className="relative w-full h-40 rounded-2xl overflow-hidden">
-      <div
-        className="absolute inset-0 w-full h-full [&>svg]:w-full [&>svg]:h-full"
-        dangerouslySetInnerHTML={{ __html: svgScene }}
-        style={{ lineHeight: 0 }}
+      <img
+        src={fallback}
+        alt={`Ilustração de ${theme}`}
+        className="w-full h-full object-cover"
+        loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
     </div>
   );
 }
