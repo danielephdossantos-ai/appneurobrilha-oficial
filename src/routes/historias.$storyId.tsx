@@ -7,6 +7,35 @@ import { speak, type TTSHandle } from "@/modules/historias/lib/tts";
 import { useAppState } from "@/core/store";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
 
+function StoryIllustration({
+  coverImage,
+  imageUrl,
+  theme,
+  bg,
+}: {
+  coverImage: string | null;
+  imageUrl: string | null;
+  theme: string;
+  bg?: string;
+}) {
+  const src = imageUrl || coverImage;
+  if (src && (src.startsWith("data:") || src.startsWith("http"))) {
+    return (
+      <img
+        src={src}
+        alt={`Ilustracao de ${theme}`}
+        className="w-full aspect-video rounded-[2rem] object-cover shadow-lg"
+      />
+    );
+  }
+  return (
+    <div
+      className="w-full aspect-video rounded-[2rem] flex items-center justify-center shadow-lg"
+      style={{ backgroundColor: bg ?? "#EEE" }}
+    />
+  );
+}
+
 export const Route = createFileRoute("/historias/$storyId")({
   component: StoryReader,
 });
@@ -172,12 +201,12 @@ function StoryReader() {
               exit={{ opacity: 0, x: -30 }}
               className="space-y-6"
             >
-              <div
-                className="w-full aspect-square rounded-[2rem] flex items-center justify-center text-[9rem] shadow-lg"
-                style={{ backgroundColor: themeMeta?.bg ?? "#EEE" }}
-              >
-                {currentPage.image_url || story.cover_image}
-              </div>
+              <StoryIllustration
+                coverImage={story.cover_image}
+                imageUrl={currentPage.image_url}
+                theme={story.theme}
+                bg={themeMeta?.bg}
+              />
 
               <div className="bg-white rounded-3xl p-6 shadow-md">
                 <p className="text-xl leading-relaxed font-medium text-[#2D3436]">{highlighted}</p>
