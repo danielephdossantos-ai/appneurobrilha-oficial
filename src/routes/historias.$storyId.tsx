@@ -10,91 +10,52 @@ import {
   generateStoryPageImage,
   generateStoryCoverImage,
 } from "@/services/api/story-illustration.functions";
+import { getThemeScene } from "@/modules/historias/lib/theme-scenes";
 
 type Ripple = { id: number; x: number; y: number };
 
-const THEME_GRADIENTS: Record<string, string> = {
-  dinossauros: "from-emerald-400 via-green-500 to-teal-600",
-  animais: "from-orange-400 via-amber-500 to-yellow-500",
-  espaco: "from-indigo-600 via-purple-600 to-violet-700",
-  fazendinha: "from-yellow-400 via-lime-400 to-green-500",
-  princesas: "from-pink-400 via-rose-400 to-fuchsia-500",
-  "super-herois": "from-red-500 via-orange-500 to-yellow-400",
-  natureza: "from-teal-400 via-emerald-500 to-green-600",
-};
-
-const THEME_EMOJIS: Record<string, string[]> = {
-  dinossauros: ["🦕", "🌿", "🌋", "🦖"],
-  animais: ["🦊", "🐰", "🌸", "🦌"],
-  espaco: ["🚀", "⭐", "🪐", "✨"],
-  fazendinha: ["🌻", "🐄", "🌾", "🐓"],
-  princesas: ["👑", "🏰", "🌹", "✨"],
-  "super-herois": ["⚡", "🦸", "💥", "🌟"],
-  natureza: ["🌺", "🦋", "🌊", "🌳"],
-};
-
 function IllustrationSkeleton({ theme }: { theme: string }) {
-  const gradient = THEME_GRADIENTS[theme] ?? "from-violet-400 via-purple-500 to-indigo-600";
-  const emojis = THEME_EMOJIS[theme] ?? ["✨", "🌟", "💫", "⭐"];
-
+  const svgScene = getThemeScene(theme);
   return (
     <div
-      className={`relative w-full rounded-[2rem] overflow-hidden shadow-xl bg-gradient-to-br ${gradient}`}
+      className="relative w-full rounded-[2rem] overflow-hidden shadow-xl"
       style={{ aspectRatio: "4 / 3" }}
     >
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <div className="flex gap-3">
-          {emojis.map((e, i) => (
-            <motion.span
-              key={i}
-              className="text-4xl drop-shadow-lg"
-              animate={{ y: [0, -12, 0], scale: [1, 1.15, 1] }}
-              transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.25, ease: "easeInOut" }}
-            >
-              {e}
-            </motion.span>
-          ))}
-        </div>
-        <div className="flex flex-col items-center gap-2">
+      <div
+        className="absolute inset-0 w-full h-full"
+        dangerouslySetInnerHTML={{ __html: svgScene }}
+        style={{ lineHeight: 0 }}
+      />
+      <motion.div
+        className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
+        animate={{ opacity: [0.25, 0.4, 0.25] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="absolute inset-0 flex flex-col items-end justify-end p-5 gap-2">
+        <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-2xl px-4 py-2.5">
           <motion.div
-            className="flex gap-1.5"
+            className="flex gap-1"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
           >
-            {[0, 1, 2, 3, 4].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <motion.div
                 key={i}
                 className="w-2 h-2 rounded-full bg-white"
-                animate={{ scale: [1, 1.6, 1], opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 1, repeat: Infinity, delay: i * 0.18 }}
+                animate={{ scale: [1, 1.7, 1], opacity: [0.35, 1, 0.35] }}
+                transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.16 }}
               />
             ))}
           </motion.div>
           <motion.p
-            className="text-white/90 text-sm font-bold tracking-wide"
-            animate={{ opacity: [0.6, 1, 0.6] }}
+            className="text-white text-xs font-bold tracking-wide"
+            animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            Criando ilustração mágica...
+            Pintando o cenário...
           </motion.p>
         </div>
-      </div>
-      <div className="absolute inset-0 opacity-20">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: 60 + i * 30,
-              height: 60 + i * 30,
-              left: `${10 + i * 15}%`,
-              top: `${20 + (i % 3) * 20}%`,
-            }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.3, 0.1] }}
-            transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
-          />
-        ))}
       </div>
     </div>
   );
