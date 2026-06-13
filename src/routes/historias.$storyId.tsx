@@ -1,11 +1,13 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Play, Pause, ChevronLeft, ChevronRight, Trophy, RotateCcw } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStory, saveStoryProgress } from "@/modules/historias/hooks/useStories";
 import { speak, type TTSHandle } from "@/modules/historias/lib/tts";
 import { useAppState } from "@/core/store";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
+
+type Ripple = { id: number; x: number; y: number };
 
 function StoryIllustration({
   coverImage,
@@ -19,18 +21,88 @@ function StoryIllustration({
   bg?: string;
 }) {
   const src = imageUrl || coverImage;
-  if (src && (src.startsWith("data:") || src.startsWith("http"))) {
+  const controls = useAnimation();
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+
+  const handleInteract = (e: React.MouseEvent | React.TouchEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const clientX = "touches" in e ? e.touches[0]?.clientX ?? rect.left + rect.width / 2 : e.clientX;
+    const clientY = "touches" in e ? e.touches[0]?.clientY ?? rect.top + rect.height / 2 : e.clientY;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const id = Date.now();
+    setRipples((prev) => [...prev, { id, x, y }]);
+    setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 900);
+    controls.start({ scale: [1, 1.045, 0.975, 1.01, 1], transition: { duration: 0.45, ease: "easeOut" } });
+  };
+
+  const isSvgDataUrl = src?.startsWith("data:image/svg+xml,");
+
+  if (isSvgDataUrl) {
+    const svgContent = decodeURIComponent(src!.replace("data:image/svg+xml,", ""));
     return (
-      <img
-        src={src}
-        alt={`Ilustracao de ${theme}`}
-        className="w-full aspect-video rounded-[2rem] object-cover shadow-lg"
-      />
+      <motion.div
+        animate={controls}
+        onClick={handleInteract}
+        onTouchStart={handleInteract}
+        className="relative w-full rounded-[2rem] overflow-hidden shadow-lg cursor-pointer select-none"
+        style={{ aspectRatio: "400 / 280" }}
+      >
+        <div
+          dangerouslySetInnerHTML={{ __html: svgContent }}
+          style={{ width: "100%", height: "100%", display: "block" }}
+        />
+        <AnimatePresence>
+          {ripples.map((r) => (
+            <motion.div
+              key={r.id}
+              className="absolute rounded-full bg-white pointer-events-none"
+              style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
+              initial={{ width: 0, height: 0, opacity: 0.55 }}
+              animate={{ width: 160, height: 160, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            />
+          ))}
+        </AnimatePresence>
+        <div className="absolute inset-0 flex items-end justify-center pb-3 pointer-events-none">
+          <span className="text-white/60 text-xs font-bold bg-black/20 rounded-full px-3 py-1 select-none">
+            Toque para animar
+          </span>
+        </div>
+      </motion.div>
     );
   }
+
+  if (src && src.startsWith("http")) {
+    return (
+      <motion.div
+        animate={controls}
+        onClick={handleInteract}
+        onTouchStart={handleInteract}
+        className="relative w-full rounded-[2rem] overflow-hidden shadow-lg cursor-pointer select-none"
+      >
+        <img src={src} alt={`Ilustração de ${theme}`} className="w-full aspect-video object-cover" />
+        <AnimatePresence>
+          {ripples.map((r) => (
+            <motion.div
+              key={r.id}
+              className="absolute rounded-full bg-white pointer-events-none"
+              style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
+              initial={{ width: 0, height: 0, opacity: 0.55 }}
+              animate={{ width: 160, height: 160, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            />
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    );
+  }
+
   return (
     <div
-      className="w-full aspect-video rounded-[2rem] flex items-center justify-center shadow-lg"
+      className="w-full aspect-video rounded-[2rem] shadow-lg"
       style={{ backgroundColor: bg ?? "#EEE" }}
     />
   );
