@@ -135,16 +135,20 @@ function StoryReader() {
   };
 
   const allAnswered = questions.every((q) => showResult[q.id]);
-  const correctCount = questions.filter((q) => answers[q.id] === q.correct_answer).length;
+  const correctCount = questions.filter((q) => {
+    const ca = q.correctAnswer ?? q.correct_answer;
+    return answers[q.id] === ca;
+  }).length;
   const finalScore = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 100;
 
   // Render highlighted text
   const highlighted = useMemo(() => {
     if (!currentPage) return null;
     const words = currentPage.text.split(/(\s+)/);
+    const hw = currentPage.highlightWords ?? currentPage.highlight_words ?? [];
     return words.map((w, i) => {
       const clean = w.replace(/[.,!?]/g, "").toLowerCase();
-      const isHighlight = currentPage.highlight_words?.some((h) => h.toLowerCase() === clean);
+      const isHighlight = hw.some((h: string) => h.toLowerCase() === clean);
       const isActive = currentWord && currentWord.toLowerCase() === clean && clean.length > 0;
       return (
         <span
@@ -202,8 +206,8 @@ function StoryReader() {
               className="space-y-6"
             >
               <StoryIllustration
-                coverImage={story.cover_image}
-                imageUrl={currentPage.image_url}
+                coverImage={story.coverImage ?? story.cover_image}
+                imageUrl={currentPage.imageUrl ?? currentPage.image_url}
                 theme={story.theme}
                 bg={themeMeta?.bg}
               />
@@ -249,15 +253,19 @@ function StoryReader() {
               className="space-y-5"
             >
               <div className="text-center">
-                <h2 className="text-2xl font-black text-[#6C5CE7]">Hora das perguntas! 🎯</h2>
+                <h2 className="text-2xl font-black text-[#6C5CE7]">Hora das perguntas!</h2>
                 <p className="text-gray-500 font-medium">Vamos ver o que você entendeu.</p>
               </div>
 
               {questions.map((q, i) => {
+                const optA = q.optionA ?? q.option_a ?? "";
+                const optB = q.optionB ?? q.option_b ?? "";
+                const optC = q.optionC ?? q.option_c ?? "";
+                const correctAnswer = q.correctAnswer ?? q.correct_answer ?? "";
                 const opts: Array<["a" | "b" | "c", string]> = [
-                  ["a", q.option_a],
-                  ["b", q.option_b],
-                  ["c", q.option_c],
+                  ["a", optA],
+                  ["b", optB],
+                  ["c", optC],
                 ];
                 const result = showResult[q.id];
                 return (
@@ -268,7 +276,7 @@ function StoryReader() {
                     <div className="space-y-2">
                       {opts.map(([key, label]) => {
                         const picked = answers[q.id] === key;
-                        const correct = q.correct_answer === key;
+                        const correct = correctAnswer === key;
                         let cls = "border-gray-200 bg-white";
                         if (result) {
                           if (correct) cls = "border-green-500 bg-green-50";
@@ -277,7 +285,7 @@ function StoryReader() {
                         return (
                           <button
                             key={key}
-                            onClick={() => submitAnswer(q.id, key, q.correct_answer)}
+                            onClick={() => submitAnswer(q.id, key, correctAnswer)}
                             className={`w-full text-left p-3 rounded-2xl border-2 font-bold transition ${cls}`}
                           >
                             <span className="uppercase text-xs mr-2 text-gray-400">{key}</span>
