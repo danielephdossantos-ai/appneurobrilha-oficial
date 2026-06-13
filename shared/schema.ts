@@ -430,6 +430,57 @@ export const habilidadeTecnica = pgTable("habilidade_tecnica", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// ── STORIES ──────────────────────────────────────────────────────────────────
+export const stories = pgTable("stories", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  title: text("title").notNull(),
+  description: text("description"),
+  coverImage: text("cover_image"),
+  readingLevel: text("reading_level").notNull().default("iniciante"),
+  ageMin: integer("age_min").notNull().default(4),
+  ageMax: integer("age_max").notNull().default(12),
+  theme: text("theme").notNull(),
+  difficulty: integer("difficulty").notNull().default(1),
+  aiGenerated: boolean("ai_generated").default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const storyPages = pgTable("story_pages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  storyId: uuid("story_id").notNull().references(() => stories.id, { onDelete: "cascade" }),
+  pageNumber: integer("page_number").notNull(),
+  text: text("text").notNull(),
+  imageUrl: text("image_url"),
+  audioUrl: text("audio_url"),
+  highlightWords: jsonb("highlight_words").default([]),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const storyQuestions = pgTable("story_questions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  storyId: uuid("story_id").notNull().references(() => stories.id, { onDelete: "cascade" }),
+  question: text("question").notNull(),
+  optionA: text("option_a").notNull(),
+  optionB: text("option_b").notNull(),
+  optionC: text("option_c").notNull(),
+  correctAnswer: text("correct_answer").notNull().default("a"),
+  difficulty: integer("difficulty").notNull().default(1),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const storyProgress = pgTable("story_progress", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  storyId: uuid("story_id").notNull().references(() => stories.id, { onDelete: "cascade" }),
+  currentPage: integer("current_page").notNull().default(1),
+  completed: boolean("completed").default(false),
+  score: integer("score").default(0),
+  completedAt: timestamp("completed_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export type User = typeof users.$inferSelect;
 export type UpsertUser = typeof users.$inferInsert;
 export type Child = typeof children.$inferSelect;
