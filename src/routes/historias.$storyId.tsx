@@ -87,13 +87,13 @@ function StoryIllustration({
   const rawSrc = imageUrl || coverImage;
   const isSvgOrEmpty = !rawSrc || rawSrc.startsWith("data:image/svg");
   const [src, setSrc] = useState<string | null>(isSvgOrEmpty ? null : rawSrc);
-  const [generating, setGenerating] = useState(false);
+  const [generating, setGenerating] = useState(isSvgOrEmpty);
   const controls = useAnimation();
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const generatedRef = useRef(false);
 
   const tryGenerate = useCallback(async () => {
-    if (generatedRef.current || generating) return;
+    if (generatedRef.current) return;
     generatedRef.current = true;
     setGenerating(true);
     try {
@@ -191,11 +191,18 @@ function StoryIllustration({
     );
   }
 
+  const svgScene = getThemeScene(theme);
   return (
     <div
-      className={`w-full rounded-[2rem] shadow-lg bg-gradient-to-br ${THEME_GRADIENTS[theme] ?? "from-violet-400 to-indigo-600"}`}
+      className="relative w-full rounded-[2rem] overflow-hidden shadow-lg"
       style={{ aspectRatio: "4 / 3" }}
-    />
+    >
+      <div
+        className="absolute inset-0 w-full h-full"
+        dangerouslySetInnerHTML={{ __html: svgScene }}
+        style={{ lineHeight: 0 }}
+      />
+    </div>
   );
 }
 
