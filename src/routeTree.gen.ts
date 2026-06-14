@@ -31,7 +31,6 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HistoriasIndexRouteImport } from './routes/historias.index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
@@ -151,11 +150,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HistoriasIndexRoute = HistoriasIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => HistoriasRoute,
-} as any)
 const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -229,7 +223,6 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
-  '/historias/': typeof HistoriasIndexRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRoutesByTo {
@@ -242,6 +235,7 @@ export interface FileRoutesByTo {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
+  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -260,7 +254,6 @@ export interface FileRoutesByTo {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
-  '/historias': typeof HistoriasIndexRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRoutesById {
@@ -294,7 +287,6 @@ export interface FileRoutesById {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
-  '/historias/': typeof HistoriasIndexRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRouteTypes {
@@ -329,7 +321,6 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
-    | '/historias/'
     | '/anamnese/$childId/resultado'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -342,6 +333,7 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/gerador-procedural'
+    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
@@ -360,7 +352,6 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
-    | '/historias'
     | '/anamnese/$childId/resultado'
   id:
     | '__root__'
@@ -393,7 +384,6 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
-    | '/historias/'
     | '/anamnese/$childId/resultado'
   fileRoutesById: FileRoutesById
 }
@@ -580,13 +570,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/historias/': {
-      id: '/historias/'
-      path: '/'
-      fullPath: '/historias/'
-      preLoaderRoute: typeof HistoriasIndexRouteImport
-      parentRoute: typeof HistoriasRoute
-    }
     '/escola-brilha/': {
       id: '/escola-brilha/'
       path: '/'
@@ -662,12 +645,10 @@ const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
 
 interface HistoriasRouteChildren {
   HistoriasStoryIdRoute: typeof HistoriasStoryIdRoute
-  HistoriasIndexRoute: typeof HistoriasIndexRoute
 }
 
 const HistoriasRouteChildren: HistoriasRouteChildren = {
   HistoriasStoryIdRoute: HistoriasStoryIdRoute,
-  HistoriasIndexRoute: HistoriasIndexRoute,
 }
 
 const HistoriasRouteWithChildren = HistoriasRoute._addFileChildren(

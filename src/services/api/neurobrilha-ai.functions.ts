@@ -48,10 +48,9 @@ export const callNeuroBrilhaAI = createServerFn({ method: "POST" })
     ])
   )
   .handler(async ({ data }) => {
-    const apiKey = process.env.AI_INTEGRATIONS_OPENAI_API_KEY ?? process.env.OPENAI_API_KEY;
-    const baseURL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL ?? "https://api.openai.com/v1";
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      throw new Error("Chave de API OpenAI não configurada.");
+      throw new Error("OPENAI_API_KEY não configurada. Configure a chave nas variáveis de ambiente.");
     }
 
     const { mode } = data;
@@ -71,7 +70,7 @@ Responda APENAS o texto da mensagem, sem formatação extra.`;
         { role: "user", content: message },
       ];
 
-      const res = await fetch(`${baseURL}/chat/completions`, {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +99,7 @@ Lembre sempre que não substitui um profissional de saúde. Responda em portugu�
         { role: "user", content: message },
       ];
 
-      const res = await fetch(`${baseURL}/chat/completions`, {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +119,7 @@ Lembre sempre que não substitui um profissional de saúde. Responda em portugu�
 Analise a imagem enviada e forneça orientações educacionais para uma criança de ${child?.idade ?? "?"} anos com perfil ${child?.perfil_neuro ?? "não especificado"}.
 Retorne um JSON com: { "titulo": string, "observacoes": string, "sugestoes": string[], "nivel": "fácil"|"médio"|"avançado" }`;
 
-      const res = await fetch(`${baseURL}/chat/completions`, {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

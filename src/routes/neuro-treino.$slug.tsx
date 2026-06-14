@@ -6,8 +6,6 @@ import { toast } from "sonner";
 import { CATEGORIAS, VARIATIONS, MOTORZINHO_BANK, type CategoriaSlug, type MotorzinhoTag, type ShapeType, type MosaicoPiece } from "@/data/neuro-treino/variations";
 import { objetoImg, emojiImg, ilustracao, semEmoji } from "@/data/neuro-treino/objetos";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
-import { RenderSticker, STICKER_REGISTRY, stickerSize } from "@/components/neuro-treino/DecorStickers";
-import { DecorScene } from "@/components/neuro-treino/DecorScenes";
 import { getElementoImg } from "@/data/hiperfocos-img";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { useAppState } from "@/core/store";
@@ -284,7 +282,7 @@ function MechanicRenderer({ slug, variation, onConcluir }: { slug: CategoriaSlug
     case "rastreamento-sacadico": return <Sacadico p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas": return <Mosaico p={variation.payload} onDone={onConcluir} />;
     case "sequencia-de-cores": return <SequenciaCores p={variation.payload} onDone={onConcluir} />;
-    case "simetria": return <PinturaZonas p={variation.payload} onDone={onConcluir} />;
+    case "simetria": return <Simetria p={variation.payload} onDone={onConcluir} />;
     case "decoracao-criativa": return <Decoracao p={variation.payload} onDone={onConcluir} />;
     case "onomatopeias-animadas": return <Onomatopeias p={variation.payload} onDone={onConcluir} />;
     case "ritmo-e-sopro": return <RitmoSopro p={variation.payload} onDone={onConcluir} />;
@@ -827,14 +825,14 @@ function Sacadico({ p, onDone }: any) {
   );
 }
 
-// ============== 12. Mosaico de Formas — arrastar e soltar peças nos moldes ==============
+// ============== 12. Mosaico de Formas — tangram com SVG real ==============
 
 /** Renders a geometric shape at the given coordinates in an SVG */
 function ShapeEl({ shape, x, y, w, h, color, opacity = 1, stroke, strokeDash }: {
   shape: ShapeType; x: number; y: number; w: number; h: number;
   color: string; opacity?: number; stroke?: string; strokeDash?: string;
 }) {
-  const commonProps = { fill: color, opacity, stroke: stroke ?? "none", strokeWidth: stroke ? 2.5 : 0, strokeDasharray: strokeDash };
+  const commonProps = { fill: color, opacity, stroke: stroke ?? "none", strokeWidth: stroke ? 2 : 0, strokeDasharray: strokeDash };
   switch (shape) {
     case "triangle-up":
       return <polygon points={`${x+w/2},${y} ${x},${y+h} ${x+w},${y+h}`} {...commonProps} />;
@@ -855,44 +853,42 @@ function ShapeEl({ shape, x, y, w, h, color, opacity = 1, stroke, strokeDash }: 
   }
 }
 
-/** Piece card — draggable colored shape */
-function DraggablePiece({ piece, onPointerDown, wrong, placed }: {
+/** Small piece card preview — renders the shape centred in a square SVG */
+function PieceCard({ piece, state, onClick }: {
   piece: MosaicoPiece;
-  onPointerDown: (e: React.PointerEvent, piece: MosaicoPiece) => void;
-  wrong: boolean;
-  placed: boolean;
+  state: "idle" | "selected" | "wrong" | "placed";
+  onClick: () => void;
 }) {
-  const pad = 8; const size = 76; const inner = size - pad * 2;
-  if (placed) return (
-    <div className="w-[76px] h-[90px] rounded-2xl border-[3px] border-dashed border-success/30 bg-success/5 flex flex-col items-center justify-center gap-1 opacity-60">
-      <span className="text-lg">✓</span>
-      <span className="text-[9px] font-black uppercase tracking-wide text-success">{piece.label}</span>
-    </div>
-  );
+  const pad = 10;
+  const size = 72;
+  const inner = size - pad * 2;
+
+  const ringCls =
+    state === "selected" ? "ring-4 ring-[#0d1f55] border-[#0d1f55] scale-110 shadow-xl" :
+    state === "wrong"    ? "ring-4 ring-red-500 border-red-400 animate-[wiggle_0.4s_ease]" :
+    state === "placed"   ? "opacity-30 cursor-default" :
+    "border-white/70 hover:scale-105 active:scale-95";
+
   return (
-    <div
-      onPointerDown={(e) => onPointerDown(e, piece)}
-      style={{ touchAction: "none", userSelect: "none", cursor: "grab" }}
-      className={`flex flex-col items-center gap-1 rounded-2xl border-[3px] p-1.5 shadow-md transition-all bg-white/90 active:scale-95 select-none
-        ${wrong ? "border-red-400 ring-4 ring-red-400 animate-bounce" : "border-white/70 hover:scale-105 hover:shadow-lg hover:border-primary/40"}`}
+    <button
+      onClick={onClick}
+      disabled={state === "placed"}
+      className={`flex flex-col items-center gap-1 rounded-2xl border-[3px] p-1.5 shadow-md transition-all bg-white/90 ${ringCls}`}
     >
-      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="shrink-0 pointer-events-none">
+      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} className="shrink-0">
         <ShapeEl shape={piece.shape} x={pad} y={pad} w={inner} h={inner} color={piece.color} />
       </svg>
-      <span className="text-[9px] font-black uppercase tracking-wide text-[#0d1f55]/70 leading-tight pb-0.5 pointer-events-none">
+      <span className="text-[9px] font-black uppercase tracking-wide text-[#0d1f55]/70 leading-tight pb-0.5">
         {piece.label}
       </span>
-    </div>
+    </button>
   );
 }
 
-const NIVEL_LABEL: Record<string, string> = { facil:"⭐ Fácil", intermediario:"⭐⭐ Intermediário", dificil:"⭐⭐⭐ Difícil" };
-const NIVEL_COLOR: Record<string, string> = { facil:"bg-green-100 text-green-700 border-green-300", intermediario:"bg-yellow-100 text-yellow-700 border-yellow-300", dificil:"bg-red-100 text-red-700 border-red-300" };
+function Mosaico({ p, onDone }: { p: { figura: string; emoji: string; viewW: number; viewH: number; pieces: MosaicoPiece[]; distractors: MosaicoPiece[] }; onDone: (ok: boolean) => void }) {
+  const correctIds = useMemo(() => new Set(p.pieces.map(pc => pc.id)), [p.pieces]);
 
-function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void }) {
-  const assemblyRef = useRef<SVGSVGElement>(null);
-
-  // Shuffle pieces + distractors once on mount
+  // Shuffle pieces + distractors once
   const allBank = useMemo(() => {
     const arr = [...p.pieces, ...p.distractors];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -900,108 +896,58 @@ function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void 
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [p.pieces, p.distractors]);
 
   const [placed, setPlaced] = useState<Set<number>>(new Set());
-  const [dragging, setDragging] = useState<MosaicoPiece | null>(null);
-  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
+  const [selected, setSelected] = useState<number | null>(null);
   const [wrongId, setWrongId] = useState<number | null>(null);
-  const [highlightSlot, setHighlightSlot] = useState<number | null>(null);
   const [done, setDone] = useState(false);
 
-  // Global pointer move/up listeners while dragging
-  useEffect(() => {
-    if (!dragging) return;
+  const handlePieceTap = (piece: MosaicoPiece) => {
+    if (done) return;
+    if (placed.has(piece.id)) return;
 
-    const onMove = (e: PointerEvent) => {
-      setDragPos({ x: e.clientX, y: e.clientY });
-
-      // Highlight the slot under the pointer
-      const svg = assemblyRef.current;
-      if (!svg) return;
-      const rect = svg.getBoundingClientRect();
-      const svgX = ((e.clientX - rect.left) / rect.width) * p.viewW;
-      const svgY = ((e.clientY - rect.top) / rect.height) * p.viewH;
-      const hit = p.pieces.find(pc =>
-        !placed.has(pc.id) &&
-        svgX >= pc.x - 10 && svgX <= pc.x + pc.w + 10 &&
-        svgY >= pc.y - 10 && svgY <= pc.y + pc.h + 10
-      );
-      setHighlightSlot(hit?.id ?? null);
-    };
-
-    const onUp = (e: PointerEvent) => {
-      const svg = assemblyRef.current;
-      if (svg) {
-        const rect = svg.getBoundingClientRect();
-        const svgX = ((e.clientX - rect.left) / rect.width) * p.viewW;
-        const svgY = ((e.clientY - rect.top) / rect.height) * p.viewH;
-
-        // Find which unplaced slot the drop landed on (with generous hit area)
-        const hitSlot = p.pieces.find(pc =>
-          !placed.has(pc.id) &&
-          svgX >= pc.x - 8 && svgX <= pc.x + pc.w + 8 &&
-          svgY >= pc.y - 8 && svgY <= pc.y + pc.h + 8
-        );
-
-        if (hitSlot) {
-          if (hitSlot.id === dragging.id) {
-            const next = new Set(placed).add(dragging.id);
-            setPlaced(next);
-            if (next.size === p.pieces.length) {
-              setDone(true);
-              setTimeout(() => onDone(true), 1000);
-            }
-          } else {
-            setWrongId(dragging.id);
-            setTimeout(() => setWrongId(null), 600);
-          }
-        }
+    if (correctIds.has(piece.id)) {
+      // Correct piece!
+      const next = new Set(placed).add(piece.id);
+      setPlaced(next);
+      setSelected(null);
+      if (next.size === p.pieces.length) {
+        setDone(true);
+        setTimeout(() => onDone(true), 900);
       }
-      setDragging(null);
-      setHighlightSlot(null);
-    };
-
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerup", onUp);
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerup", onUp);
-    };
-  }, [dragging, placed, p.pieces, p.viewW, p.viewH, onDone]);
-
-  const handlePointerDown = (e: React.PointerEvent, piece: MosaicoPiece) => {
-    if (done || placed.has(piece.id)) return;
-    e.preventDefault();
-    setDragging(piece);
-    setDragPos({ x: e.clientX, y: e.clientY });
+    } else {
+      // Distractor
+      setWrongId(piece.id);
+      setTimeout(() => setWrongId(null), 450);
+    }
   };
 
   const progress = placed.size / p.pieces.length;
-  const nivel = (p as any).nivel ?? "facil";
 
   return (
-    <div className="space-y-3 select-none">
-      {/* ── CABEÇALHO: nível + modelo ── */}
-      <div className="flex items-center justify-between gap-2">
-        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border ${NIVEL_COLOR[nivel] ?? NIVEL_COLOR.facil}`}>
-          {NIVEL_LABEL[nivel] ?? "Fácil"}
-        </span>
-        <span className="text-sm font-bold text-muted-foreground">{p.emoji} {p.figura}</span>
-      </div>
+    <div className="space-y-4">
 
-      {/* ── MODELO REFERÊNCIA (mini) ── */}
-      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-2">
-        <div className="text-[9px] font-black uppercase tracking-widest text-amber-700 text-center mb-1">
-          🔍 Modelo — arraste as peças para os moldes!
+      {/* ── MODELO REFERÊNCIA ── */}
+      <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-2xl p-3">
+        <div className="text-[10px] font-black uppercase tracking-widest text-amber-700 text-center mb-2">
+          Modelo — {p.emoji} {p.figura}
         </div>
         <div className="flex justify-center">
           <svg
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{ width: Math.min(160, p.viewW), height: Math.min(160, p.viewW) * (p.viewH / p.viewW) }}
+            style={{ width: Math.min(180, p.viewW), height: Math.min(180, p.viewW) * (p.viewH / p.viewW) }}
+            className="drop-shadow"
           >
-            {p.pieces.map(pc => <ShapeEl key={pc.id} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />)}
-            {p.pieces.map(pc => <ShapeEl key={`o${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color="none" stroke="rgba(0,0,0,0.12)" />)}
+            {/* All pieces fully coloured */}
+            {p.pieces.map(pc => (
+              <ShapeEl key={pc.id} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
+            ))}
+            {/* Subtle outlines */}
+            {p.pieces.map(pc => (
+              <ShapeEl key={`o${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                color="none" stroke="rgba(0,0,0,0.15)" />
+            ))}
           </svg>
         </div>
       </div>
@@ -1009,72 +955,69 @@ function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void 
       {/* ── BARRA DE PROGRESSO ── */}
       <div className="flex items-center gap-2">
         <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
-          <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${progress * 100}%` }} />
+          <div
+            className="h-full bg-primary rounded-full transition-all duration-500"
+            style={{ width: `${progress * 100}%` }}
+          />
         </div>
-        <span className="text-xs font-bold text-muted-foreground tabular-nums">{placed.size}/{p.pieces.length}</span>
+        <span className="text-xs font-bold text-muted-foreground tabular-nums">
+          {placed.size}/{p.pieces.length}
+        </span>
       </div>
 
-      {/* ── ÁREA DE MONTAGEM (drop zone) ── */}
-      <div className="bg-card border-2 border-primary/20 rounded-2xl p-2">
-        <div className="text-[9px] font-black uppercase tracking-widest text-primary text-center mb-1">
-          ⬇️ Solte a peça no molde certo!
+      {/* ── ÁREA DE MONTAGEM ── */}
+      <div className="bg-card border-2 border-primary/20 rounded-2xl p-3">
+        <div className="text-[10px] font-black uppercase tracking-widest text-primary text-center mb-2">
+          Monte aqui!
         </div>
         <div className="flex justify-center">
           <svg
-            ref={assemblyRef}
             viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-            style={{ width: "100%", maxWidth: Math.min(320, p.viewW * 1.6), aspectRatio: `${p.viewW}/${p.viewH}` }}
+            style={{ width: "100%", maxWidth: Math.min(300, p.viewW * 1.5), aspectRatio: `${p.viewW}/${p.viewH}` }}
           >
-            {/* Ghost slots for unplaced */}
+            {/* Ghost outlines for unplaced */}
             {p.pieces.filter(pc => !placed.has(pc.id)).map(pc => (
-              <g key={`slot-${pc.id}`}>
-                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
-                  color={highlightSlot === pc.id ? "#c7d2fe" : "#e2e8f0"}
-                  stroke={highlightSlot === pc.id ? "#6366f1" : "#94a3b8"}
-                  strokeDash={highlightSlot === pc.id ? undefined : "8 5"}
-                  opacity={0.85}
-                />
-                {/* Label inside slot */}
-                <text
-                  x={pc.x + pc.w / 2} y={pc.y + pc.h / 2 + 4}
-                  textAnchor="middle" fontSize="8" fill="#64748b" fontWeight="bold"
-                  style={{ pointerEvents: "none", userSelect: "none" }}
-                >
-                  {pc.label}
-                </text>
-              </g>
+              <ShapeEl key={`ghost-${pc.id}`} shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                color="#e2e8f0" stroke="#94a3b8" strokeDash="8 5" opacity={0.7} />
             ))}
             {/* Placed pieces */}
             {p.pieces.filter(pc => placed.has(pc.id)).map(pc => (
               <g key={`placed-${pc.id}`}>
                 <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color={pc.color} />
-                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h} color="none" stroke="rgba(255,255,255,0.35)" />
+                <ShapeEl shape={pc.shape} x={pc.x} y={pc.y} w={pc.w} h={pc.h}
+                  color="none" stroke="rgba(255,255,255,0.4)" />
               </g>
             ))}
+            {/* Celebration sparkles when done */}
             {done && (
               <>
-                <text x={p.viewW/2} y={p.viewH/2 - 8} textAnchor="middle" fontSize="30">⭐</text>
-                <text x={p.viewW/2} y={p.viewH/2 + 22} textAnchor="middle" fontSize="12" fill="#0d1f55" fontWeight="bold">Incrível!</text>
+                <text x={p.viewW/2} y={p.viewH/2 - 10} textAnchor="middle" fontSize="32" opacity="0.9">⭐</text>
+                <text x={p.viewW/2} y={p.viewH/2 + 30} textAnchor="middle" fontSize="14" fill="#0d1f55" fontWeight="bold">
+                  Incrível!
+                </text>
               </>
             )}
           </svg>
         </div>
       </div>
 
-      {/* ── BANCO DE PEÇAS ── */}
+      {/* ── BANCO DE PEÇAS (embaralhado) ── */}
       {!done && (
         <div>
-          <div className="text-[9px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
-            👆 Segure e arraste a peça até o molde!
+          <div className="text-[10px] font-bold text-muted-foreground text-center mb-2 uppercase tracking-wide">
+            Toque na peça que pertence à figura!
           </div>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="grid grid-cols-4 gap-2 justify-items-center">
             {allBank.map(piece => (
-              <DraggablePiece
+              <PieceCard
                 key={piece.id}
                 piece={piece}
-                placed={placed.has(piece.id)}
-                wrong={wrongId === piece.id}
-                onPointerDown={handlePointerDown}
+                state={
+                  placed.has(piece.id) ? "placed" :
+                  wrongId === piece.id ? "wrong" :
+                  "idle"
+                }
+                onClick={() => handlePieceTap(piece)}
               />
             ))}
           </div>
@@ -1082,470 +1025,96 @@ function Mosaico({ p, onDone }: { p: MosaicoData; onDone: (ok: boolean) => void 
       )}
 
       {done && (
-        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30 animate-bounce">
+        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30">
           🎉 Figura montada! Arrasou!
         </div>
-      )}
-
-      {/* ── GHOST que segue o dedo/mouse durante o arraste ── */}
-      {dragging && (
-        <div
-          style={{
-            position: "fixed",
-            left: dragPos.x - 38,
-            top: dragPos.y - 38,
-            pointerEvents: "none",
-            zIndex: 9999,
-            opacity: 0.88,
-            transform: "scale(1.15) rotate(-6deg)",
-            transition: "transform 0.05s",
-            filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.3))",
-          }}
-        >
-          <svg viewBox="0 0 80 80" width={76} height={76}>
-            <ShapeEl shape={dragging.shape} x={4} y={4} w={72} h={72} color={dragging.color} />
-          </svg>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── Balão de dica/fala do PIP — usado em todas as atividades ──
-function PipBubble({ texto, onClose }: { texto: string; onClose?: () => void }) {
-  return (
-    <div className="flex items-start gap-3 bg-primary/10 border-2 border-primary/30 rounded-2xl p-3 animate-in fade-in slide-in-from-bottom-2">
-      <div className="shrink-0 w-10 h-10 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center text-xl select-none">
-        🤖
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="text-[9px] font-black text-primary uppercase tracking-widest mb-1">💬 PIP diz:</div>
-        <div className="text-sm font-bold text-foreground leading-snug">{texto}</div>
-      </div>
-      {onClose && (
-        <button onClick={onClose} className="shrink-0 text-muted-foreground hover:text-foreground text-lg leading-none mt-0.5">✕</button>
       )}
     </div>
   );
 }
 
 // ============== 13. Sequência de Cores ==============
-const NOMES_CORES: Record<string, string> = {
-  "#ef4444":"Vermelho", "#3b82f6":"Azul", "#22c55e":"Verde",
-  "#facc15":"Amarelo",  "#a855f7":"Roxo", "#f97316":"Laranja",
-};
-
 function SequenciaCores({ p, onDone }: any) {
-  const [showIntro, setShowIntro] = useState(true);
-  const [wrongIdx, setWrongIdx]   = useState<number | null>(null);
-  const [showHint, setShowHint]   = useState(false);
-
-  const handleAnswer = (color: string) => {
-    if (color === p.next) {
-      onDone(true);
-    } else {
-      setWrongIdx(p.options.indexOf(color));
-      setShowHint(true);
-      setTimeout(() => setWrongIdx(null), 700);
-    }
-  };
-
-  const seqNames = (p.sequencia as string[]).map((c: string) => NOMES_CORES[c] ?? c);
-
-  if (showIntro) return (
-    <div className="space-y-4">
-      <PipBubble texto={`Olá! Veja a sequência de cores. Ela repete um padrão! Descubra qual cor vem no lugar do ❓ e toque nela lá embaixo! 🎨`} />
-      <div className="bg-white/60 rounded-2xl p-3 border-2 border-primary/20">
-        <div className="text-[9px] font-black uppercase tracking-widest text-center text-primary mb-3">Exemplo da sequência:</div>
-        <div className="flex items-center justify-center gap-2 flex-wrap">
-          {(p.sequencia as string[]).map((c: string, i: number) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div className="w-14 h-14 rounded-2xl shadow-lg border-4 border-white" style={{ background: c }} />
-              <span className="text-[9px] font-bold text-muted-foreground">{NOMES_CORES[c] ?? ""}</span>
-            </div>
-          ))}
-          <div className="flex flex-col items-center gap-1">
-            <div className="w-14 h-14 rounded-2xl border-4 border-dashed border-primary/50 bg-primary/10 flex items-center justify-center">
-              <span className="text-3xl font-black text-primary">?</span>
-            </div>
-            <span className="text-[9px] font-bold text-primary">Sua vez!</span>
-          </div>
-        </div>
-      </div>
-      <button
-        onClick={() => setShowIntro(false)}
-        className="w-full bg-primary text-primary-foreground rounded-2xl py-3 font-black text-base hover:scale-105 active:scale-95 transition-all"
-      >
-        Entendi! Vou jogar! 🎮
-      </button>
-    </div>
-  );
-
   return (
-    <div className="space-y-4">
-      {showHint && (
-        <PipBubble
-          texto={p.dica ?? `Ops! Olha de novo! A sequência começa com ${seqNames[0]}... siga o padrão!`}
-          onClose={() => setShowHint(false)}
-        />
-      )}
-
-      {/* Sequência */}
-      <div className="bg-white/60 rounded-2xl p-3 border-2 border-primary/20">
-        <div className="text-[9px] font-black uppercase tracking-widest text-center text-primary mb-2">
-          🔍 Qual cor vem depois?
-        </div>
-        <div className="flex items-center justify-center gap-2 flex-wrap">
-          {(p.sequencia as string[]).map((c: string, i: number) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div className="w-14 h-14 rounded-2xl shadow-lg border-4 border-white" style={{ background: c }} />
-              <span className="text-[9px] font-bold" style={{ color: c === "#facc15" ? "#a16207" : c }}>{NOMES_CORES[c] ?? ""}</span>
-            </div>
-          ))}
-          <span className="text-2xl font-black text-muted-foreground mx-1">→</span>
-          <div className="flex flex-col items-center gap-1">
-            <div className="w-16 h-16 rounded-2xl border-4 border-dashed border-primary/60 bg-primary/10 flex items-center justify-center animate-pulse">
-              <span className="text-3xl font-black text-primary">?</span>
-            </div>
-            <span className="text-[9px] font-bold text-primary">Você!</span>
-          </div>
-        </div>
+    <div className="text-center">
+      <div className="flex justify-center gap-2 mb-6">
+        {p.sequencia.map((c:string, i:number) => <div key={i} className="w-12 h-12 rounded-lg shadow" style={{ background: c }} />)}
+        <div className="w-12 h-12 rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black">?</div>
       </div>
-
-      {/* Opções */}
-      <div>
-        <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
-          👆 Toque na cor certa!
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {(p.options as string[]).map((c: string, i: number) => (
-            <button
-              key={i}
-              onClick={() => handleAnswer(c)}
-              className={`h-20 rounded-2xl border-4 border-white shadow-lg font-black text-white text-sm transition-all hover:scale-105 active:scale-95
-                ${wrongIdx === i ? "opacity-40 scale-90" : ""}`}
-              style={{ background: c }}
-            >
-              <span style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
-                {NOMES_CORES[c] ?? ""}
-              </span>
-            </button>
-          ))}
-        </div>
+      <div className="flex justify-center gap-3">
+        {p.options.map((c:string, i:number) => (
+          <button key={i} onClick={()=>onDone(c === p.next)} className="w-16 h-16 rounded-xl shadow-lg hover:scale-110 transition-all" style={{ background: c }} />
+        ))}
       </div>
     </div>
   );
 }
 
-// ============== 14. Pintura Mágica (substitui Simetria) ==============
-function PinturaZonas({ p, onDone }: any) {
-  const [pintado, setPintado]   = useState<Record<number, string>>({});
-  const [bucketSel, setBucketSel] = useState<number | null>(null); // 1–4
-  const [wrongZone, setWrongZone] = useState<number | null>(null);
-  const [showHint, setShowHint] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-  const [done, setDone] = useState(false);
-
-  const handleZoneTap = (zona: any) => {
-    if (done || pintado[zona.id]) return;
-    if (!bucketSel) { setShowHint(true); return; }
-    if (bucketSel === zona.numero) {
-      const next = { ...pintado, [zona.id]: p.paleta[zona.numero - 1] };
-      setPintado(next);
-      if (Object.keys(next).length === p.zonas.length) {
-        setDone(true);
-        setTimeout(() => onDone(true), 900);
-      }
-    } else {
-      setWrongZone(zona.id);
-      setShowHint(true);
-      setTimeout(() => setWrongZone(null), 700);
-    }
+// ============== 14. Simetria ==============
+function Simetria({ p, onDone }: any) {
+  const [right, setRight] = useState<number[][]>(() => Array(p.rows).fill(0).map(()=>Array(p.halfCols).fill(0)));
+  const toggle = (r:number, c:number) => setRight(rt => rt.map((row,i)=> i===r ? row.map((v,j)=> j===c ? (v?0:1) : v) : row));
+  const conferir = () => {
+    // mirror: right[r][c] deve corresponder a left[r][halfCols-1-c]
+    const ok = p.left.every((row:number[], r:number) => row.every((v:number, c:number) => v === right[r][p.halfCols-1-c]));
+    onDone(ok);
   };
-
-  if (showIntro) return (
-    <div className="space-y-4">
-      <PipBubble texto={`Vamos pintar o ${p.figura}! 🎨 Primeiro escolha um balde de tinta lá embaixo. Depois toque na parte da figura que tem o mesmo número do balde. Combine os números!`} />
-      <div className="bg-white/70 rounded-2xl p-3 border-2 border-primary/20">
-        <div className="text-[9px] font-black text-center text-primary uppercase tracking-widest mb-2">Os baldes de tinta:</div>
-        <div className="flex gap-3 justify-center">
-          {(p.paleta as string[]).map((cor: string, i: number) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div className="w-14 h-14 rounded-2xl border-4 border-white shadow-lg" style={{ background: cor }} />
-              <div className="w-7 h-7 rounded-full bg-white border-2 border-foreground/40 flex items-center justify-center font-black text-sm">{i + 1}</div>
+  return (
+    <div className="text-center">
+      <div className="flex justify-center gap-1 mb-4">
+        <div>
+          {p.left.map((row:number[], r:number) => (
+            <div key={r} className="flex gap-1">
+              {row.map((v:number, c:number) => <div key={c} className={`w-10 h-10 rounded ${v ? "bg-primary" : "bg-muted"}`} />)}
+            </div>
+          ))}
+        </div>
+        <div className="w-px bg-foreground/30 mx-1" />
+        <div>
+          {right.map((row, r) => (
+            <div key={r} className="flex gap-1">
+              {row.map((v, c) => <button key={c} onClick={()=>toggle(r,c)} className={`w-10 h-10 rounded border ${v ? "bg-lilac" : "bg-card border-border"}`} />)}
             </div>
           ))}
         </div>
       </div>
-      <button
-        onClick={() => setShowIntro(false)}
-        className="w-full bg-primary text-primary-foreground rounded-2xl py-3 font-black text-base hover:scale-105 active:scale-95 transition-all"
-      >
-        Vamos pintar! 🖌️
-      </button>
-    </div>
-  );
-
-  return (
-    <div className="space-y-3">
-      {showHint && (
-        <PipBubble
-          texto={bucketSel
-            ? (p.dica ?? "Olha o número da peça e escolha o balde com o mesmo número!")
-            : "Primeiro escolha um balde de tinta tocando nele! 🪣"}
-          onClose={() => setShowHint(false)}
-        />
-      )}
-
-      {/* Baldes de tinta */}
-      <div>
-        <div className="text-[9px] font-black uppercase tracking-widest text-center text-muted-foreground mb-2">🪣 Escolha um balde:</div>
-        <div className="flex gap-3 justify-center">
-          {(p.paleta as string[]).map((cor: string, i: number) => (
-            <button
-              key={i}
-              onClick={() => setBucketSel(i + 1)}
-              className={`flex flex-col items-center gap-1 p-2 rounded-2xl border-4 transition-all hover:scale-110 active:scale-95
-                ${bucketSel === i + 1 ? "border-foreground scale-110 shadow-xl ring-2 ring-foreground/30" : "border-white shadow-md"}`}
-            >
-              <div className="w-12 h-12 rounded-xl" style={{ background: cor }} />
-              <div className="w-6 h-6 rounded-full bg-white border-2 border-foreground/40 flex items-center justify-center font-black text-xs">{i + 1}</div>
-            </button>
-          ))}
-        </div>
-        {bucketSel && (
-          <div className="text-center text-[10px] font-bold text-primary mt-1">
-            Balde {bucketSel} selecionado! Agora toque na peça com o número {bucketSel} ⬇️
-          </div>
-        )}
-      </div>
-
-      {/* Canvas SVG */}
-      <div className="bg-white rounded-2xl border-2 border-primary/20 p-2">
-        <div className="text-[9px] font-black uppercase tracking-widest text-center text-muted-foreground mb-1">
-          🖌️ Toque na peça com o mesmo número!
-        </div>
-        <svg
-          viewBox={`0 0 ${p.viewW} ${p.viewH}`}
-          style={{ width: "100%", aspectRatio: `${p.viewW}/${p.viewH}` }}
-        >
-          {(p.zonas as any[]).map((zona) => {
-            const filled  = pintado[zona.id];
-            const isWrong = wrongZone === zona.id;
-            const numSize = Math.min(zona.w, zona.h) > 38 ? 18 : 12;
-            return (
-              <g key={zona.id} onClick={() => handleZoneTap(zona)} style={{ cursor: "pointer" }}>
-                <ShapeEl
-                  shape={zona.shape} x={zona.x} y={zona.y} w={zona.w} h={zona.h}
-                  color={filled ?? "#f1f5f9"}
-                  stroke={isWrong ? "#ef4444" : filled ? "rgba(255,255,255,0.35)" : "#94a3b8"}
-                  strokeDash={filled ? undefined : "6 4"}
-                  opacity={isWrong ? 0.45 : 1}
-                />
-                {!filled && (
-                  <text
-                    x={zona.x + zona.w / 2} y={zona.y + zona.h / 2 + numSize * 0.4}
-                    textAnchor="middle" fontSize={numSize} fontWeight="bold" fill="#475569"
-                    style={{ pointerEvents: "none", userSelect: "none" }}
-                  >{zona.numero}</text>
-                )}
-                {filled && (
-                  <text
-                    x={zona.x + zona.w / 2} y={zona.y + zona.h / 2 + 5}
-                    textAnchor="middle" fontSize="12" fill="rgba(255,255,255,0.8)"
-                    style={{ pointerEvents: "none", userSelect: "none" }}
-                  >✓</text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Progress */}
-      <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
-        <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-          <div className="h-full bg-primary rounded-full transition-all duration-500"
-            style={{ width: `${(Object.keys(pintado).length / p.zonas.length) * 100}%` }} />
-        </div>
-        <span>{Object.keys(pintado).length}/{p.zonas.length}</span>
-      </div>
-
-      {done && (
-        <div className="w-full py-4 rounded-2xl bg-success/15 text-success font-black text-xl text-center border-2 border-success/30 animate-bounce">
-          🎨 Obra de arte! Que pintura incrível!
-        </div>
-      )}
+      <button onClick={conferir} className="bg-success text-white px-8 py-3 rounded-xl font-black">Conferir simetria</button>
     </div>
   );
 }
 
-// ============== 15. Decoração Criativa — pointer drag + cenários visuais ==============
-
-// ── helpers ──────────────────────────────────────────────────────────────────
-function decorStickerSize(id: string, eo: string | undefined, tier: string): { w: number; h: number } {
-  const def = STICKER_REGISTRY[id];
-  if (def) return stickerSize(def);
-  const tierMax: Record<string, number> = { sm: 40, md: 60, lg: 88 };
-  const sz = tierMax[tier ?? "md"] ?? 60;
-  return { w: sz, h: sz };
-}
-
-// ── Decoracao ─────────────────────────────────────────────────────────────────
+// ============== 15. Decoração Criativa ==============
 function Decoracao({ p, onDone }: any) {
-  const sceneRef = useRef<HTMLDivElement>(null);
-  const [placed, setPlaced] = useState<{ id: string; eo?: string; w: number; h: number; x: number; y: number }[]>([]);
-  const [dragging, setDragging] = useState<{ id: string; eo?: string; w: number; h: number } | null>(null);
-  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
-  const [showHint, setShowHint] = useState(true);
-
-  useEffect(() => {
+  const [placed, setPlaced] = useState<{e:string;x:number;y:number}[]>([]);
+  const [dragging, setDragging] = useState<string | null>(null);
+  const drop = (e: React.DragEvent) => {
     if (!dragging) return;
-    const onMove = (e: PointerEvent) => setDragPos({ x: e.clientX, y: e.clientY });
-    const onUp = (e: PointerEvent) => {
-      const scene = sceneRef.current;
-      if (scene) {
-        const r = scene.getBoundingClientRect();
-        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
-          setPlaced(prev => [...prev, {
-            id: dragging!.id,
-            eo: dragging!.eo,
-            w: dragging!.w,
-            h: dragging!.h,
-            x: e.clientX - r.left,
-            y: e.clientY - r.top,
-          }]);
-        }
-      }
-      setDragging(null);
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerup", onUp);
-    return () => { window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); };
-  }, [dragging]);
-
-  const tipo = p.tipo ?? "jardim";
-  const stickers: { id: string; label: string; emojiOverride?: string; tier: string }[] = p.stickers ?? [];
-
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setPlaced(p => [...p, { e: dragging, x: e.clientX - rect.left, y: e.clientY - rect.top }]);
+    setDragging(null);
+  };
   return (
-    <div className="space-y-3">
-      {showHint && (
-        <PipBubble
-          texto={p.dica ?? "Arraste os móveis e objetos para montar o cenário! 🎨"}
-          onClose={() => setShowHint(false)}
-        />
-      )}
-
-      {/* ── Cenário premium ───────────────────────────────────────────────── */}
-      <div
-        ref={sceneRef}
-        className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-xl"
-        style={{ touchAction: "none", height: 260 }}
-      >
-        <DecorScene tipo={tipo} />
-
-        {/* itens colocados */}
+    <div className="text-center">
+      <div className="text-2xl font-black mb-2">{semEmoji(p.cenario)}</div>
+      <div onDragOver={(e)=>e.preventDefault()} onDrop={drop} className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}>
         {placed.map((it, i) => (
-          <div
-            key={i}
-            className="absolute pointer-events-none select-none"
-            style={{
-              left: it.x - it.w / 2,
-              top: it.y - it.h / 2,
-              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.28))",
-            }}
-          >
-            <RenderSticker id={it.id} sizePx={Math.max(it.w, it.h)} emojiOverride={it.eo} />
+          <div key={i} className="absolute" style={{ left: it.x - 32, top: it.y - 32 }}>
+            <RenderEmoji e={it.e} className="w-16 h-16" />
           </div>
         ))}
-
-        {/* hint vazio */}
-        {placed.length === 0 && (
-          <div className="absolute inset-0 flex items-end justify-center pb-4 pointer-events-none">
-            <div className="bg-black/30 backdrop-blur-sm text-white rounded-2xl px-4 py-2 text-xs font-bold shadow-lg">
-              👆 Segure um item e arraste para o cenário!
-            </div>
-          </div>
-        )}
-
-        {/* contador */}
-        {placed.length > 0 && (
-          <div className="absolute top-2 right-2 bg-black/30 backdrop-blur-sm text-white text-[10px] font-bold rounded-full px-2 py-0.5 pointer-events-none">
-            {placed.length} ✦
-          </div>
-        )}
+        {placed.length === 0 && <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">Arraste para cá</div>}
       </div>
-
-      {/* ── Banco de stickers premium ─────────────────────────────────────── */}
-      <div>
-        <div className="text-[9px] font-bold text-center text-muted-foreground uppercase tracking-widest mb-2">
-          🎨 Segure e arraste para montar a cena!
-        </div>
-        <div className="flex gap-2 flex-wrap justify-center">
-          {stickers.map((s, i) => {
-            const { w, h } = decorStickerSize(s.id, s.emojiOverride, s.tier);
-            const containerSize = Math.max(w, h) + 18;
-            return (
-              <div
-                key={i}
-                onPointerDown={(e) => {
-                  e.preventDefault();
-                  setDragging({ id: s.id, eo: s.emojiOverride, w, h });
-                  setDragPos({ x: e.clientX, y: e.clientY });
-                }}
-                title={s.label}
-                style={{
-                  touchAction: "none",
-                  userSelect: "none",
-                  cursor: "grab",
-                  width: containerSize,
-                  height: containerSize + 14,
-                  minWidth: 54,
-                }}
-                className="flex flex-col items-center justify-center bg-white border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-sm active:scale-95 gap-0.5 overflow-hidden p-1"
-              >
-                <div className="flex items-center justify-center flex-1">
-                  <RenderSticker id={s.id} sizePx={Math.max(w, h)} emojiOverride={s.emojiOverride} />
-                </div>
-                <span className="text-[8px] font-semibold text-muted-foreground leading-none truncate w-full text-center px-1">{s.label}</span>
-              </div>
-            );
-          })}
-        </div>
+      <div className="flex gap-2 justify-center mb-4 flex-wrap">
+        {p.stickers.map((s:string, i:number) => (
+          <div key={i} draggable onDragStart={()=>setDragging(s)} className="w-20 h-20 flex items-center justify-center bg-card border-2 border-border rounded-2xl cursor-grab active:cursor-grabbing hover:border-primary transition-all shadow-sm">
+            <RenderEmoji e={s} className="w-14 h-14" />
+          </div>
+        ))}
       </div>
-
-      {/* ── Ações ─────────────────────────────────────────────────────────── */}
       <div className="flex gap-2 justify-center">
-        <button onClick={() => setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-muted/70 transition-colors">
-          <RotateCcw size={14} /> Limpar
-        </button>
-        <button
-          onClick={() => onDone(placed.length >= 2)}
-          disabled={placed.length < 2}
-          className="bg-success text-white px-6 py-2 rounded-xl font-black text-sm flex items-center gap-1 disabled:opacity-50 hover:scale-105 active:scale-95 transition-all"
-        >
-          <Sparkles size={16} /> Finalizar arte!
-        </button>
+        <button onClick={()=>setPlaced([])} className="bg-muted px-4 py-2 rounded-xl font-bold flex items-center gap-1"><RotateCcw size={14}/> Limpar</button>
+        <button onClick={()=>onDone(placed.length >= 3)} className="bg-success text-white px-6 py-2 rounded-xl font-black flex items-center gap-1"><Sparkles size={16}/> Finalizar arte</button>
       </div>
-      <div className="text-center text-[9px] text-muted-foreground">
-        {placed.length} {placed.length === 1 ? "item colocado" : "itens colocados"} — coloque pelo menos 2!
-      </div>
-
-      {/* ── Ghost seguindo o dedo ─────────────────────────────────────────── */}
-      {dragging && (
-        <div style={{
-          position: "fixed",
-          left: dragPos.x - dragging.w / 2,
-          top: dragPos.y - dragging.h / 2,
-          pointerEvents: "none",
-          zIndex: 9999,
-          filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.45))",
-          transform: "scale(1.18) rotate(-5deg)",
-          transition: "transform 0.05s",
-        }}>
-          <RenderSticker id={dragging.id} sizePx={Math.max(dragging.w, dragging.h)} emojiOverride={dragging.eo} />
-        </div>
-      )}
     </div>
   );
 }

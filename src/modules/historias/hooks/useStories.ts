@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { getStoryById, getStoryPages, getStoryQuestions } from "@/services/db/data.functions";
 import type { Story, StoryPage, StoryQuestion } from "../types";
 
 const db = supabase as any;
@@ -16,6 +15,7 @@ export function useStories(filters?: {
       let q = db.from("stories").select("*").order("created_at", { ascending: true });
       if (filters?.theme && filters.theme !== "todos") q = q.eq("theme", filters.theme);
       if (filters?.level && filters.level !== "todos") q = q.eq("reading_level", filters.level);
+      if (filters?.age) q = q.lte("age_min", filters.age).gte("age_max", filters.age);
       const { data, error } = await q;
       if (error) throw error;
       return (data ?? []) as Story[];
@@ -23,21 +23,18 @@ export function useStories(filters?: {
   });
 }
 
-// Bypasses the shim — calls server functions directly to avoid loading all
-// stories (with large SVG cover images) just to find one by ID.
 export function useStory(storyId: string | undefined) {
   return useQuery({
     queryKey: ["story", storyId],
     enabled: !!storyId,
-    retry: 2,
     queryFn: async () => {
-      const [story, pages, questions] = await Promise.all([
-        getStoryById({ data: { id: storyId! } }),
-        getStoryPages({ data: { storyId: storyId! } }),
-        getStoryQuestions({ data: { storyId: storyId! } }),
+      const [{ data: story }, { data: pages }, { data: questions }] = await Promise.all([
+        db.from("stories").select("*").eq("id", storyId).maybeSingle(),
+        db.from("story_pages").select("*").eq("story_id", storyId).order("page_number"),
+        db.from("story_questions").select("*").eq("story_id", storyId).order("created_at"),
       ]);
       return {
-        story: (story ?? null) as Story | null,
+        story: story as Story | null,
         pages: (pages ?? []) as StoryPage[],
         questions: (questions ?? []) as StoryQuestion[],
       };

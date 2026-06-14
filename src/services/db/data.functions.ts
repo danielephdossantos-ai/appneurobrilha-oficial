@@ -8,8 +8,7 @@ import {
   achievements, childAchievements, activityLogs, childSkillMastery,
   childProgressionStats, cognitiveProfile, longitudinalScores,
   userPrivacySettings, anamneseV2, bnccHabilidades, atividades,
-  pedagogicalActivitiesBase, neuroAtividades, progressoAluno, auditLogs,
-  stories, storyPages, storyQuestions, storyProgress,
+  pedagogicalActivitiesBase, neuroAtividades, progressoAluno, auditLogs
 } from "../../../shared/schema";
 import { eq, desc, and, asc } from "drizzle-orm";
 
@@ -314,47 +313,5 @@ export const insertAuditLog = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     const [row] = await db.insert(auditLogs).values({ ...(data.log as any), userId }).returning();
-    return row;
-  });
-
-// ── STORIES ──────────────────────────────────────────────────────────────────
-export const getStories = createServerFn({ method: "GET" }).handler(async () => {
-  return db.select().from(stories).orderBy(asc(stories.createdAt));
-});
-
-export const getStoryById = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ id: z.string() }))
-  .handler(async ({ data }) => {
-    const [row] = await db.select().from(stories).where(eq(stories.id, data.id));
-    return row ?? null;
-  });
-
-export const getStoryPages = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ storyId: z.string() }))
-  .handler(async ({ data }) => {
-    return db.select().from(storyPages).where(eq(storyPages.storyId, data.storyId)).orderBy(asc(storyPages.pageNumber));
-  });
-
-export const getStoryQuestions = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ storyId: z.string() }))
-  .handler(async ({ data }) => {
-    return db.select().from(storyQuestions).where(eq(storyQuestions.storyId, data.storyId)).orderBy(asc(storyQuestions.createdAt));
-  });
-
-export const getStoryProgress = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ childId: z.string(), storyId: z.string() }))
-  .handler(async ({ data }) => {
-    const [row] = await db.select().from(storyProgress)
-      .where(and(eq(storyProgress.childId, data.childId), eq(storyProgress.storyId, data.storyId)));
-    return row ?? null;
-  });
-
-export const upsertStoryProgress = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ progress: z.record(z.unknown()) }))
-  .handler(async ({ data }) => {
-    const p = data.progress as any;
-    const [row] = await db.insert(storyProgress).values(p)
-      .onConflictDoUpdate({ target: [storyProgress.childId, storyProgress.storyId], set: { ...p, updatedAt: new Date() } })
-      .returning();
     return row;
   });

@@ -10,6 +10,11 @@ channel = "stable-25_05"
 [userenv]
 
 [userenv.shared]
+VITE_SUPABASE_URL = "https://zfbkloozfvuhrmnbfbtw.supabase.co"
+VITE_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmYmtsb296ZnZ1aHJtbmJmYnR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNzQyMjksImV4cCI6MjA5NTk1MDIyOX0.RriKn6fQZQ4N7Rn7_7C8-a9oPi0CVhpkGsmCoHYwNzY"
+SUPABASE_URL = "https://zfbkloozfvuhrmnbfbtw.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmYmtsb296ZnZ1aHJtbmJmYnR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNzQyMjksImV4cCI6MjA5NTk1MDIyOX0.RriKn6fQZQ4N7Rn7_7C8-a9oPi0CVhpkGsmCoHYwNzY"
+SUPABASE_PROJECT_ID = "zfbkloozfvuhrmnbfbtw"
 
 [workflows]
 runButton = "Project"

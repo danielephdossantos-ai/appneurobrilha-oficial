@@ -1,212 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Play, Pause, ChevronLeft, ChevronRight, Trophy, RotateCcw, Sparkles } from "lucide-react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { ArrowLeft, Play, Pause, ChevronLeft, ChevronRight, Trophy, RotateCcw } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useStory, saveStoryProgress } from "@/modules/historias/hooks/useStories";
 import { speak, type TTSHandle } from "@/modules/historias/lib/tts";
 import { useAppState } from "@/core/store";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
-import {
-  generateStoryPageImage,
-  generateStoryCoverImage,
-} from "@/services/api/story-illustration.functions";
-import { getPageScene, getThemeScene } from "@/modules/historias/lib/theme-scenes";
-
-type Ripple = { id: number; x: number; y: number };
-
-function IllustrationSkeleton({ theme, pageIndex = 0 }: { theme: string; pageIndex?: number }) {
-  const svgScene = getPageScene(theme, pageIndex);
-  return (
-    <div
-      className="relative w-full rounded-[2rem] overflow-hidden shadow-xl"
-      style={{ aspectRatio: "4 / 3" }}
-    >
-      <div
-        className="absolute inset-0 w-full h-full"
-        dangerouslySetInnerHTML={{ __html: svgScene }}
-        style={{ lineHeight: 0 }}
-      />
-      <motion.div
-        className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
-        animate={{ opacity: [0.25, 0.4, 0.25] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <div className="absolute inset-0 flex flex-col items-end justify-end p-5 gap-2">
-        <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-2xl px-4 py-2.5">
-          <motion.div
-            className="flex gap-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            {[0, 1, 2, 3].map((i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 rounded-full bg-white"
-                animate={{ scale: [1, 1.7, 1], opacity: [0.35, 1, 0.35] }}
-                transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.16 }}
-              />
-            ))}
-          </motion.div>
-          <motion.p
-            className="text-white text-xs font-bold tracking-wide"
-            animate={{ opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Pintando o cenário...
-          </motion.p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StoryIllustration({
-  imageUrl,
-  coverImage,
-  theme,
-  bg,
-  pageId,
-  pageText,
-  pageIndex,
-  storyId,
-  storyTitle,
-  storyDescription,
-  isCoverPage,
-}: {
-  imageUrl: string | null;
-  coverImage: string | null;
-  theme: string;
-  bg?: string;
-  pageId?: string;
-  pageText?: string;
-  pageIndex?: number;
-  storyId?: string;
-  storyTitle?: string;
-  storyDescription?: string;
-  isCoverPage?: boolean;
-}) {
-  const rawSrc = imageUrl || coverImage;
-  const isSvgOrEmpty = !rawSrc || rawSrc.startsWith("data:image/svg");
-  const [src, setSrc] = useState<string | null>(isSvgOrEmpty ? null : rawSrc);
-  const [generating, setGenerating] = useState(isSvgOrEmpty);
-  const controls = useAnimation();
-  const [ripples, setRipples] = useState<Ripple[]>([]);
-  const generatedRef = useRef(false);
-
-  const tryGenerate = useCallback(async () => {
-    if (generatedRef.current) return;
-    generatedRef.current = true;
-    setGenerating(true);
-    try {
-      if (isCoverPage && storyId && storyTitle) {
-        const result = await generateStoryCoverImage({
-          data: { storyId, storyTitle, theme, description: storyDescription ?? "" },
-        });
-        if (result.imageUrl) setSrc(result.imageUrl);
-      } else if (pageId && pageText && storyTitle) {
-        const result = await generateStoryPageImage({
-          data: { pageId, pageText, theme, storyTitle },
-        });
-        if (result.imageUrl) setSrc(result.imageUrl);
-      }
-    } catch (e) {
-      console.error("[StoryIllustration] generate error:", e);
-    } finally {
-      setGenerating(false);
-    }
-  }, [pageId, pageText, storyId, storyTitle, theme, storyDescription, isCoverPage]);
-
-  useEffect(() => {
-    if (isSvgOrEmpty) {
-      tryGenerate();
-    } else {
-      setSrc(rawSrc);
-      generatedRef.current = false;
-    }
-  }, [rawSrc, isSvgOrEmpty]);
-
-  const handleInteract = (e: React.MouseEvent | React.TouchEvent) => {
-    if (generating) return;
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const clientX = "touches" in e ? e.touches[0]?.clientX ?? rect.left + rect.width / 2 : e.clientX;
-    const clientY = "touches" in e ? e.touches[0]?.clientY ?? rect.top + rect.height / 2 : e.clientY;
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
-    const id = Date.now();
-    setRipples((prev) => [...prev, { id, x, y }]);
-    setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 900);
-    controls.start({ scale: [1, 1.04, 0.98, 1.01, 1], transition: { duration: 0.45, ease: "easeOut" } });
-  };
-
-  if (generating) {
-    return <IllustrationSkeleton theme={theme} pageIndex={pageIndex ?? 0} />;
-  }
-
-  if (src && !src.startsWith("data:image/svg")) {
-    const isAI = src.startsWith("data:image/png;base64") || src.startsWith("data:image/jpeg");
-    return (
-      <motion.div
-        animate={controls}
-        onClick={handleInteract}
-        onTouchStart={handleInteract}
-        className="relative w-full rounded-[2rem] overflow-hidden shadow-xl cursor-pointer select-none"
-        style={{ aspectRatio: "4 / 3" }}
-        initial={{ opacity: 0, scale: 0.97 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <img
-          src={src}
-          alt={`Ilustração de ${theme}`}
-          className="w-full h-full object-cover"
-          style={{ imageRendering: "auto" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-        <AnimatePresence>
-          {ripples.map((r) => (
-            <motion.div
-              key={r.id}
-              className="absolute rounded-full bg-white pointer-events-none"
-              style={{ left: r.x, top: r.y, x: "-50%", y: "-50%" }}
-              initial={{ width: 0, height: 0, opacity: 0.55 }}
-              animate={{ width: 180, height: 180, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.85, ease: "easeOut" }}
-            />
-          ))}
-        </AnimatePresence>
-        {isAI && (
-          <div className="absolute bottom-3 right-3 pointer-events-none">
-            <div className="flex items-center gap-1 bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1">
-              <Sparkles className="w-3 h-3 text-[#FFD93D]" />
-              <span className="text-white/80 text-[10px] font-bold">IA</span>
-            </div>
-          </div>
-        )}
-        <div className="absolute bottom-3 left-3 pointer-events-none">
-          <span className="text-white/50 text-[10px] font-bold bg-black/20 rounded-full px-2.5 py-1">
-            Toque para animar
-          </span>
-        </div>
-      </motion.div>
-    );
-  }
-
-  const svgScene = getPageScene(theme, pageIndex ?? 0);
-  return (
-    <div
-      className="relative w-full rounded-[2rem] overflow-hidden shadow-lg"
-      style={{ aspectRatio: "4 / 3" }}
-    >
-      <div
-        className="absolute inset-0 w-full h-full"
-        dangerouslySetInnerHTML={{ __html: svgScene }}
-        style={{ lineHeight: 0 }}
-      />
-    </div>
-  );
-}
 
 export const Route = createFileRoute("/historias/$storyId")({
   component: StoryReader,
@@ -232,12 +31,14 @@ function StoryReader() {
   const currentPage = pages[pageIdx];
   const themeMeta = story ? THEME_META[story.theme as StoryTheme] : undefined;
 
+  // Stop TTS when leaving page
   useEffect(() => {
     return () => {
       ttsRef.current?.stop();
     };
   }, []);
 
+  // Auto-save progress
   useEffect(() => {
     if (!activeChild || !story) return;
     saveStoryProgress({
@@ -305,19 +106,16 @@ function StoryReader() {
   };
 
   const allAnswered = questions.every((q) => showResult[q.id]);
-  const correctCount = questions.filter((q) => {
-    const ca = q.correctAnswer ?? q.correct_answer;
-    return answers[q.id] === ca;
-  }).length;
+  const correctCount = questions.filter((q) => answers[q.id] === q.correct_answer).length;
   const finalScore = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 100;
 
+  // Render highlighted text
   const highlighted = useMemo(() => {
     if (!currentPage) return null;
     const words = currentPage.text.split(/(\s+)/);
-    const hw = currentPage.highlightWords ?? currentPage.highlight_words ?? [];
     return words.map((w, i) => {
       const clean = w.replace(/[.,!?]/g, "").toLowerCase();
-      const isHighlight = hw.some((h: string) => h.toLowerCase() === clean);
+      const isHighlight = currentPage.highlight_words?.some((h) => h.toLowerCase() === clean);
       const isActive = currentWord && currentWord.toLowerCase() === clean && clean.length > 0;
       return (
         <span
@@ -333,14 +131,7 @@ function StoryReader() {
   if (isLoading || !story) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F8F7FF]">
-        <div className="flex flex-col items-center gap-4">
-          <motion.div
-            className="w-16 h-16 rounded-full bg-gradient-to-br from-[#6C5CE7] to-[#A29BFE]"
-            animate={{ scale: [1, 1.15, 1] }}
-            transition={{ duration: 1.2, repeat: Infinity }}
-          />
-          <p className="text-[#6C5CE7] font-bold">Carregando história...</p>
-        </div>
+        <p className="text-[#6C5CE7] font-bold">Carregando história...</p>
       </div>
     );
   }
@@ -379,20 +170,14 @@ function StoryReader() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="space-y-5"
+              className="space-y-6"
             >
-              <StoryIllustration
-                imageUrl={currentPage.imageUrl ?? currentPage.image_url ?? null}
-                coverImage={story.coverImage ?? story.cover_image ?? null}
-                theme={story.theme}
-                bg={themeMeta?.bg}
-                pageId={currentPage.id}
-                pageText={currentPage.text}
-                pageIndex={pageIdx}
-                storyId={story.id}
-                storyTitle={story.title}
-                storyDescription={story.description ?? ""}
-              />
+              <div
+                className="w-full aspect-square rounded-[2rem] flex items-center justify-center text-[9rem] shadow-lg"
+                style={{ backgroundColor: themeMeta?.bg ?? "#EEE" }}
+              >
+                {currentPage.image_url || story.cover_image}
+              </div>
 
               <div className="bg-white rounded-3xl p-6 shadow-md">
                 <p className="text-xl leading-relaxed font-medium text-[#2D3436]">{highlighted}</p>
@@ -435,19 +220,15 @@ function StoryReader() {
               className="space-y-5"
             >
               <div className="text-center">
-                <h2 className="text-2xl font-black text-[#6C5CE7]">Hora das perguntas!</h2>
+                <h2 className="text-2xl font-black text-[#6C5CE7]">Hora das perguntas! 🎯</h2>
                 <p className="text-gray-500 font-medium">Vamos ver o que você entendeu.</p>
               </div>
 
               {questions.map((q, i) => {
-                const optA = q.optionA ?? q.option_a ?? "";
-                const optB = q.optionB ?? q.option_b ?? "";
-                const optC = q.optionC ?? q.option_c ?? "";
-                const correctAnswer = q.correctAnswer ?? q.correct_answer ?? "";
                 const opts: Array<["a" | "b" | "c", string]> = [
-                  ["a", optA],
-                  ["b", optB],
-                  ["c", optC],
+                  ["a", q.option_a],
+                  ["b", q.option_b],
+                  ["c", q.option_c],
                 ];
                 const result = showResult[q.id];
                 return (
@@ -458,7 +239,7 @@ function StoryReader() {
                     <div className="space-y-2">
                       {opts.map(([key, label]) => {
                         const picked = answers[q.id] === key;
-                        const correct = correctAnswer === key;
+                        const correct = q.correct_answer === key;
                         let cls = "border-gray-200 bg-white";
                         if (result) {
                           if (correct) cls = "border-green-500 bg-green-50";
@@ -467,7 +248,7 @@ function StoryReader() {
                         return (
                           <button
                             key={key}
-                            onClick={() => submitAnswer(q.id, key, correctAnswer)}
+                            onClick={() => submitAnswer(q.id, key, q.correct_answer)}
                             className={`w-full text-left p-3 rounded-2xl border-2 font-bold transition ${cls}`}
                           >
                             <span className="uppercase text-xs mr-2 text-gray-400">{key}</span>
