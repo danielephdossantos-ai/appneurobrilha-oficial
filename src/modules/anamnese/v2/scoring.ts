@@ -22,6 +22,7 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
   // ATENÇÃO + FUNÇÕES EXECUTIVAS + MEMÓRIA  → Cognitivo
   const at = r.step7 ?? {};
   const mem = r.step13 ?? {};
+  const fe = r.step17 ?? {}; // funções executivas
   const cognitivoMean = avg([
     L(at.distrai_facil),
     L(at.esquece_instrucoes),
@@ -33,6 +34,12 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     INV(mem.recorda_historias),
     INV(mem.memoriza_sequencias),
     INV(mem.reconhece_informacoes),
+    INV(fe.memoria_trabalho),
+    INV(fe.planejamento),
+    INV(fe.controle_inibitorio),
+    INV(fe.flexibilidade_cognitiva),
+    INV(fe.organizacao_pensamento),
+    INV(fe.iniciativa),
   ]);
 
   // ESCOLAR (leitura/escrita/matemática — todos "positivos", invertidos)
@@ -43,6 +50,7 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     INV(e.le_palavras),
     INV(e.le_frases),
     INV(e.le_textos),
+    INV(e.compreende_textos),
     INV(e.copia_palavras),
     INV(e.escreve_espontaneamente),
     L(e.troca_letras), // negativo: alto = problema

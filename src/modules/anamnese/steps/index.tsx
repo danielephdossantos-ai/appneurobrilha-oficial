@@ -1,4 +1,4 @@
-// Conteúdo de cada uma das 16 etapas da anamnese científica.
+// Conteúdo de cada uma das 17 etapas da anamnese científica.
 // Cada Step recebe `value` (parcial) e `onChange` para atualizar campo a campo.
 import { LikertScale } from "../components/LikertScale";
 import { YesNoField } from "../components/YesNoField";
@@ -25,6 +25,7 @@ import type {
   Step14_Motora,
   Step15_Emocional,
   Step16_Autonomia,
+  Step17_FuncoesExecutivas,
 } from "../v2/types";
 
 type Updater<K extends keyof AnamneseV2Responses> = (patch: AnamneseV2Responses[K]) => void;
@@ -135,7 +136,38 @@ export function Step2({
   );
   return (
     <div className="space-y-1">
+      <p className="text-sm font-bold text-primary mb-2">Gestação</p>
       {yn("gravidez_planejada", "A gravidez foi planejada?")}
+      {yn("medicamentos_gestacao", "Usou medicamentos durante a gestação?")}
+      {yn("infeccoes_gestacao", "Teve infecções durante a gestação?")}
+      
+      <p className="text-sm font-bold text-primary mt-4 mb-2">Parto</p>
+      <div className="mb-3">
+        <Label>Tipo de parto</Label>
+        <div className="grid grid-cols-3 gap-2 mt-1">
+          {[
+            { v: "vaginal", l: "Vaginal" },
+            { v: "cesariana", l: "Cesariana" },
+            { v: "nao_informado", l: "Não informado" },
+          ].map((o) => (
+            <button
+              key={o.v}
+              type="button"
+              onClick={() => onChange({ tipo_parto: o.v as any })}
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${
+                value.tipo_parto === o.v ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+              }`}
+            >
+              {o.l}
+            </button>
+          ))}
+        </div>
+      </div>
+      {yn("complicacoes_parto", "Houve complicações no parto?")}
+      {yn("sofrimento_fetal", "Sinais de sofrimento fetal?")}
+      {yn("anoxia", "Asfixia perinatal (anoxia)?")}
+      
+      <p className="text-sm font-bold text-primary mt-4 mb-2">Prematuridade e nascimento</p>
       {yn("prematuro", "O bebê nasceu prematuro?")}
       <div className="grid grid-cols-2 gap-3 py-3">
         <div>
@@ -161,11 +193,6 @@ export function Step2({
         </div>
       </div>
       {yn("uti_neonatal", "Houve internação em UTI neonatal?")}
-      {yn("complicacoes_parto", "Houve complicações no parto?")}
-      {yn("sofrimento_fetal", "Houve sofrimento fetal?")}
-      {yn("anoxia", "Houve anóxia (falta de oxigênio)?")}
-      {yn("medicamentos_gestacao", "Uso de medicamentos durante a gestação?")}
-      {yn("infeccoes_gestacao", "Infecções durante a gravidez?")}
     </div>
   );
 }
@@ -317,6 +344,9 @@ export function Step6({
       {lk("escreve_espontaneamente", "Escreve espontaneamente")}
       {lk("troca_letras", "Troca letras ao escrever")}
       {lk("organiza_frases", "Organiza frases")}
+      <p className="text-sm font-bold text-primary mt-3 mb-2">Compreensão de texto</p>
+      {lk("compreende_textos", "Compreende textos lidos")}
+      
       <p className="text-sm font-bold text-primary mt-3 mb-2">Matemática</p>
       {lk("reconhece_numeros", "Reconhece números")}
       {lk("conta_objetos", "Conta objetos")}
@@ -516,4 +546,39 @@ export function Step16({
     { k: "organizacao_materiais", l: "Organiza seus materiais" },
     { k: "independencia_diaria", l: "Independência em tarefas diárias" },
   ]);
+}
+
+// ─── ETAPA 17 ──────────────────────────────────────────────────────
+export function Step17({
+  value,
+  onChange,
+}: {
+  value: Partial<Step17_FuncoesExecutivas>;
+  onChange: Updater<"step17">;
+}) {
+  return (
+    <div className="space-y-1">
+      <p className="text-xs text-muted-foreground mb-3">
+        Escalas adaptadas para triagem: SNAP-IV, M-CHAT-R, CARS-2, ABAS, Vineland
+      </p>
+      <p className="text-sm font-bold text-primary mb-2">Memória de trabalho</p>
+      {likertList(value, onChange, [
+        { k: "memoria_trabalho", l: "Mantém informações na mente para usar" },
+      ])}
+      <p className="text-sm font-bold text-primary mt-3 mb-2">Planejamento</p>
+      {likertList(value, onChange, [
+        { k: "planejamento", l: "Consegue planejar e sequenciar passos" },
+      ])}
+      <p className="text-sm font-bold text-primary mt-3 mb-2">Controle inibitório</p>
+      {likertList(value, onChange, [
+        { k: "controle_inibitorio", l: "Consegue controlar impulsos e esperar" },
+      ])}
+      <p className="text-sm font-bold text-primary mt-3 mb-2">Flexibilidade cognitiva</p>
+      {likertList(value, onChange, [
+        { k: "flexibilidade_cognitiva", l: "Consegue mudar de estratégia ou pensamento" },
+        { k: "organizacao_pensamento", l: "Organiza pensamentos de forma lógica" },
+        { k: "iniciativa", l: "Consegue iniciar atividades autonomamente" },
+      ])}
+    </div>
+  );
 }

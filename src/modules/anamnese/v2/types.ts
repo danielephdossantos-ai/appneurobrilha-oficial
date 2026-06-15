@@ -1,4 +1,5 @@
-// Tipos da Anamnese Científica v2 (16 etapas)
+// Tipos da Anamnese Científica v2 (17 etapas)
+// Inspirada em: SNAP-IV, M-CHAT-R, CARS-2, ABAS, Vineland (escalas adaptadas para triagem)
 // IMPORTANTE: este sistema NÃO realiza diagnóstico clínico.
 
 export type Likert = 0 | 1 | 2 | 3 | 4; // 0=Nunca .. 4=Muito frequentemente
@@ -17,16 +18,22 @@ export interface Step01_Identificacao {
 }
 
 export interface Step02_Gestacao {
+  // Gestação
   gravidez_planejada: SimNao;
+  medicamentos_gestacao: SimNao;
+  infeccoes_gestacao: SimNao;
+  
+  // Parto
+  tipo_parto: "vaginal" | "cesariana" | "nao_informado" | null;
+  complicacoes_parto: SimNao;
+  sofrimento_fetal: SimNao;
+  anoxia: SimNao;
+  
+  // Prematuridade e nascimento
   prematuro: SimNao;
   semanas_gestacao: number | null;
   peso_nascer_kg: number | null;
   uti_neonatal: SimNao;
-  complicacoes_parto: SimNao;
-  sofrimento_fetal: SimNao;
-  anoxia: SimNao;
-  medicamentos_gestacao: SimNao;
-  infeccoes_gestacao: SimNao;
 }
 
 export interface Step03_Marcos {
@@ -72,6 +79,7 @@ export interface Step06_Escolar {
   escreve_espontaneamente: Likert;
   troca_letras: Likert;
   organiza_frases: Likert;
+  compreende_textos: Likert; // invertida (alto = bom)
   reconhece_numeros: Likert;
   conta_objetos: Likert;
   adicao: Likert;
@@ -162,6 +170,16 @@ export interface Step16_Autonomia {
   independencia_diaria: Likert; // invertida
 }
 
+export interface Step17_FuncoesExecutivas {
+  // Adaptadas de escalas: SNAP-IV, M-CHAT-R, CARS-2, ABAS, Vineland
+  memoria_trabalho: Likert; // consegue manter informações na mente para usar
+  planejamento: Likert; // consegue planejar e sequenciar passos
+  controle_inibitorio: Likert; // consegue controlar impulsos e esperar
+  flexibilidade_cognitiva: Likert; // consegue mudar de estratégia ou pensamento
+  organizacao_pensamento: Likert; // organiza pensamentos de forma lógica
+  iniciativa: Likert; // consegue iniciar atividades autonomamente
+}
+
 export interface AnamneseV2Responses {
   step1?: Partial<Step01_Identificacao>;
   step2?: Partial<Step02_Gestacao>;
@@ -179,6 +197,7 @@ export interface AnamneseV2Responses {
   step14?: Partial<Step14_Motora>;
   step15?: Partial<Step15_Emocional>;
   step16?: Partial<Step16_Autonomia>;
+  step17?: Partial<Step17_FuncoesExecutivas>;
 }
 
 export interface PerfilScores {
@@ -198,16 +217,16 @@ export interface RiskMap {
   global: RiskLevel;
 }
 
-export const TOTAL_STEPS = 16;
+export const TOTAL_STEPS = 17;
 
 export const STEP_TITLES: Record<number, string> = {
   1: "Identificação",
-  2: "Gestação e nascimento",
+  2: "Desenvolvimento: Gestação e nascimento",
   3: "Marcos do desenvolvimento",
   4: "Histórico médico",
   5: "Histórico familiar",
   6: "Desempenho escolar",
-  7: "Atenção e funções executivas",
+  7: "Atenção e controle inibitório",
   8: "Hiperatividade e impulsividade",
   9: "Comunicação social",
   10: "Comportamentos repetitivos",
@@ -217,4 +236,5 @@ export const STEP_TITLES: Record<number, string> = {
   14: "Coordenação motora",
   15: "Aspectos emocionais",
   16: "Autonomia",
+  17: "Funções executivas",
 };
