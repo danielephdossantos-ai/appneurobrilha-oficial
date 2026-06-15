@@ -2,6 +2,16 @@ import { supabase } from "@/database/supabase/client";
 import { ChildProfile } from "../types";
 
 export class ChildProfileRepository {
+  async getAll(): Promise<ChildProfile[]> {
+    const { data, error } = await supabase
+      .from("children")
+      .select("*")
+      .order("created_at", { ascending: true });
+
+    if (error) throw error;
+    return data as unknown as ChildProfile[];
+  }
+
   async getAllByUserId(userId: string): Promise<ChildProfile[]> {
     const { data, error } = await supabase
       .from("children")
@@ -21,21 +31,14 @@ export class ChildProfileRepository {
   }
 
   async create(profile: Omit<ChildProfile, "id">): Promise<ChildProfile> {
-    const { data, error } = await supabase
-      .from("children")
-      .insert([profile as any])
-      .select()
-      .single();
+    const { data, error } = await supabase.from("children").insert([profile]).select().single();
 
     if (error) throw error;
     return data as unknown as ChildProfile;
   }
 
   async update(id: string, patch: Partial<ChildProfile>): Promise<void> {
-    const { error } = await supabase
-      .from("children")
-      .update(patch as any)
-      .eq("id", id);
+    const { error } = await supabase.from("children").update(patch).eq("id", id);
 
     if (error) throw error;
   }

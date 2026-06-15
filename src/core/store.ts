@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/database/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SensoryMode } from "@/engines/regulation-engine/sensory-engine";
+import { ChildProfileService } from "@/modules/child-profile/services/ChildProfileService";
+import type { ChildProfile } from "@/modules/child-profile/types";
+import { supabase } from "@/database/supabase/client";
 
 export type Diagnostico =
   | "tdah"
@@ -208,7 +210,7 @@ export interface AnamnesisData {
       tem_terapia: boolean;
     };
   };
-  internal_profile: any;
+  internal_profile: unknown;
   edit_count: number;
 }
 
@@ -234,26 +236,18 @@ export function useAppState() {
   const { data: children = [], isLoading } = useQuery({
     queryKey: ["children"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("children")
-        .select("*")
-        .order("created_at", { ascending: true });
-
-      if (error) throw error;
-      return (data ?? []).map((child) => normalizeChild(child as any));
+      const profiles = await ChildProfileService.getAll();
+      return profiles.map((child) => normalizeChild(child));
     },
   });
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
-      const { data, error } = await supabase
-        .from("children")
-        .insert([{ ...newChild, user_id: "anonymous" }])
-        .select()
-        .single();
-
-      if (error) throw error;
-      return normalizeChild(data as any);
+      const created = await ChildProfileService.create({
+        ...newChild,
+        user_id: "anonymous",
+      });
+      return normalizeChild(created);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
@@ -272,12 +266,7 @@ export function useAppState() {
 
   const updateChildMutation = useMutation({
     mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
-      const { error } = await supabase
-        .from("children")
-        .update(patch as any)
-        .eq("id", id);
-
-      if (error) throw error;
+      await ChildProfileService.update(id, patch);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
@@ -294,7 +283,7 @@ export function useAppState() {
 
   const addCoinsMutation = useMutation({
     mutationFn: async ({ childId, amount }: { childId: string; amount: number }) => {
-      const { error } = await (supabase as any).rpc("add_brilhocoins", {
+      const { error } = await supabase.rpc("add_brilhocoins", {
         child_id: childId,
         amount: amount,
       });

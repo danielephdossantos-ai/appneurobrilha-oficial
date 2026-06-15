@@ -33,7 +33,15 @@ export const ChildProfileSchema = z.object({
   hiperfoco: HiperfocoSchema,
   diagnostico: DiagnosticoSchema,
   avatar: z.string(),
-  anamnese_completa: z.boolean(),
+  anamnese_completa: z.boolean().default(false),
+  has_hyperfocus: z.boolean().default(true),
+  hyperfocus_list: z.array(HiperfocoSchema).default([]),
+  sensory_mode: z.string().default("foco"),
+  coins: z.number().default(0),
+  earned_today: z.number().default(0),
+  total_earned: z.number().default(0),
+  anamnesis_id: z.string().uuid().optional(),
+  anamnesis_edit_count: z.number().optional(),
   perfil: z.object({
     leitura: z.number(),
     escrita: z.number(),
@@ -53,7 +61,23 @@ export const ChildProfileSchema = z.object({
     geografia: z.number().min(1).max(4),
   }),
   tempo_atencao_min: z.number(),
-  flags: z.record(z.string(), z.boolean()),
+  flags: z
+    .object({
+      apoioVisual: z.boolean(),
+      passoAPasso: z.boolean(),
+      preferAudio: z.boolean(),
+      contaNosDedos: z.boolean(),
+      trocaLetras: z.boolean(),
+      palavrasLongas: z.boolean(),
+    })
+    .default({
+      apoioVisual: true,
+      passoAPasso: true,
+      preferAudio: false,
+      contaNosDedos: false,
+      trocaLetras: false,
+      palavrasLongas: false,
+    }),
   observacoes: z.string().optional(),
 });
 
