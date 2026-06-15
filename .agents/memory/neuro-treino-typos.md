@@ -4,6 +4,7 @@ description: Portuguese field names in variation bank arrays must be exactly con
 ---
 
 ## Rule
+
 In `variations-extended.ts`, every entry in a bank array must use the exact same field name. The bug: one entry used `outros` instead of `outras`, causing `...b.outras` to throw "not iterable" for that rotation slot.
 
 **Why:** The bank is accessed via `i % bank.length`, so the crash only surfaces when `i` hits the bad entry — not immediately on load, making it hard to spot.

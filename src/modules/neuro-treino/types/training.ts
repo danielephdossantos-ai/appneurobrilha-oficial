@@ -1,13 +1,13 @@
 import { z } from "zod";
 
 export const CognitiveSkillSchema = z.enum([
-  'atencao',
-  'memoria',
-  'foco',
-  'raciocinio',
-  'planejamento',
-  'flexibilidade_cognitiva',
-  'velocidade_processamento'
+  "atencao",
+  "memoria",
+  "foco",
+  "raciocinio",
+  "planejamento",
+  "flexibilidade_cognitiva",
+  "velocidade_processamento",
 ]);
 
 export type CognitiveSkill = z.infer<typeof CognitiveSkillSchema>;

@@ -1,4 +1,3 @@
-
 import { GeneratedActivity, Difficulty } from "./types";
 import { BNCCEngine } from "./bncc-engine";
 
@@ -17,7 +16,7 @@ export class PedagogicalValidationEngine {
   private static approvalStats: Record<string, number> = {
     total: 0,
     approved: 0,
-    rejected: 0
+    rejected: 0,
   };
 
   static validate(activity: GeneratedActivity, context: any): ValidationResult {
@@ -28,9 +27,10 @@ export class PedagogicalValidationEngine {
     if (!skill) {
       errors.push(`Habilidade BNCC não encontrada: ${activity.bnccCode}`);
     } else if (context && skill.level !== context.grade) {
-      errors.push(`Incompatibilidade de nível BNCC: Esperado ${context.grade}, Recebido ${skill.level}`);
+      errors.push(
+        `Incompatibilidade de nível BNCC: Esperado ${context.grade}, Recebido ${skill.level}`,
+      );
     }
-
 
     // 2. Validar Faixa Etária
     // Simplificado: Assumindo que o template já lida com isso, mas verificamos redundância
@@ -50,7 +50,7 @@ export class PedagogicalValidationEngine {
     }
 
     const isValid = errors.length === 0;
-    
+
     // Atualizar estatísticas
     this.updateStats(isValid, activity, errors);
 
@@ -60,8 +60,8 @@ export class PedagogicalValidationEngine {
       metrics: {
         cognitiveLoad: this.calculateCognitiveLoad(activity),
         sensoryLoad,
-        difficultyMatch: this.calculateDifficultyMatch(activity, context.previousPerformance)
-      }
+        difficultyMatch: this.calculateDifficultyMatch(activity, context.previousPerformance),
+      },
     };
   }
 
@@ -77,9 +77,12 @@ export class PedagogicalValidationEngine {
     return difficultyMap[activity.difficulty] || 5;
   }
 
-  private static calculateDifficultyMatch(activity: GeneratedActivity, performance: number): number {
+  private static calculateDifficultyMatch(
+    activity: GeneratedActivity,
+    performance: number,
+  ): number {
     // Implementar lógica de proximidade entre performance e dificuldade proposta
-    return 1.0; 
+    return 1.0;
   }
 
   private static updateStats(isValid: boolean, activity: GeneratedActivity, errors: string[]) {
@@ -92,7 +95,7 @@ export class PedagogicalValidationEngine {
         timestamp: Date.now(),
         activityId: activity.id,
         errors,
-        bnccCode: activity.bnccCode
+        bnccCode: activity.bnccCode,
       });
     }
   }
@@ -101,7 +104,7 @@ export class PedagogicalValidationEngine {
     return {
       ...this.approvalStats,
       rejectionRate: (this.approvalStats.rejected / this.approvalStats.total) * 100 || 0,
-      logs: this.rejectionLogs.slice(-10) // Últimos 10 erros
+      logs: this.rejectionLogs.slice(-10), // Últimos 10 erros
     };
   }
 }

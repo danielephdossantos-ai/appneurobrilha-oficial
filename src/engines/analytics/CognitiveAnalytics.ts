@@ -1,10 +1,20 @@
-import { NeuroAnalyticsEvent, CognitiveMetrics, EmotionalMetrics, Insight } from "../../modules/relatorios/types";
+import {
+  NeuroAnalyticsEvent,
+  CognitiveMetrics,
+  EmotionalMetrics,
+  Insight,
+} from "../../modules/relatorios/types";
 
 export class CognitiveAnalytics {
-  analyze(events: NeuroAnalyticsEvent[]): { cognitiveRadar: CognitiveMetrics, emotionalMap: EmotionalMetrics } {
+  analyze(events: NeuroAnalyticsEvent[]): {
+    cognitiveRadar: CognitiveMetrics;
+    emotionalMap: EmotionalMetrics;
+  } {
     // In a real scenario, this would compute metrics from event logs
     // Simplified logic for simulation:
-    const focusEvents = events.filter(e => e.event_type === "focus_lost" || e.event_type === "focus_gained");
+    const focusEvents = events.filter(
+      (e) => e.event_type === "focus_lost" || e.event_type === "focus_gained",
+    );
     const attentionScore = this.calculateAttention(focusEvents);
 
     return {
@@ -19,15 +29,15 @@ export class CognitiveAnalytics {
         focus_score: attentionScore,
         inhibitory_control: 60,
         working_memory: 72,
-        cognitive_flexibility: 68
+        cognitive_flexibility: 68,
       },
       emotionalMap: {
         frustration: 12,
         engagement: 85,
         calm: 75,
         joy: 90,
-        anxiety: 5
-      }
+        anxiety: 5,
+      },
     };
   }
 
@@ -43,17 +53,18 @@ export class CognitiveAnalytics {
 
   generateInsights(events: NeuroAnalyticsEvent[]): Insight[] {
     const insights: Insight[] = [];
-    
+
     // Example logic for fatigue detection
-    const fatigueEvents = events.filter(e => e.event_type === "fatigue_detected");
+    const fatigueEvents = events.filter((e) => e.event_type === "fatigue_detected");
     if (fatigueEvents.length > 2) {
       insights.push({
         id: crypto.randomUUID(),
         type: "warning",
         category: "neuro",
         severity: "medium",
-        message: "Detectamos cansaço mental recorrente no final do dia. Considere sessões mais curtas.",
-        created_at: new Date().toISOString()
+        message:
+          "Detectamos cansaço mental recorrente no final do dia. Considere sessões mais curtas.",
+        created_at: new Date().toISOString(),
       });
     }
 

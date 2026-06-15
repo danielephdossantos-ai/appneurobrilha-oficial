@@ -8,11 +8,14 @@ const kidButtonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground shadow-kid [--shadow-color:oklch(var(--primary-dark))] hover:bg-primary/95",
+        primary:
+          "bg-primary text-primary-foreground shadow-kid [--shadow-color:oklch(var(--primary-dark))] hover:bg-primary/95",
         sun: "bg-sun text-warning-foreground shadow-kid [--shadow-color:oklch(var(--sun-dark))] hover:bg-sun/95",
         sky: "bg-sky text-primary-foreground shadow-kid [--shadow-color:oklch(var(--sky-dark))] hover:bg-sky/95",
-        petal: "bg-petal text-primary-foreground shadow-kid [--shadow-color:oklch(var(--petal-dark))] hover:bg-petal/95",
-        secondary: "bg-secondary text-secondary-foreground shadow-kid [--shadow-color:oklch(var(--secondary-dark))] hover:bg-secondary/95",
+        petal:
+          "bg-petal text-primary-foreground shadow-kid [--shadow-color:oklch(var(--petal-dark))] hover:bg-petal/95",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-kid [--shadow-color:oklch(var(--secondary-dark))] hover:bg-secondary/95",
         ghost: "hover:bg-accent hover:text-accent-foreground",
       },
       size: {
@@ -35,14 +38,20 @@ export interface KidButtonProps
   asChild?: boolean;
 }
 
-const KidButton = React.memo(React.forwardRef<HTMLButtonElement, KidButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp className={cn(kidButtonVariants({ variant, size, className }))} ref={ref} {...props} />
-    );
-  },
-));
+const KidButton = React.memo(
+  React.forwardRef<HTMLButtonElement, KidButtonProps>(
+    ({ className, variant, size, asChild = false, ...props }, ref) => {
+      const Comp = asChild ? Slot : "button";
+      return (
+        <Comp
+          className={cn(kidButtonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        />
+      );
+    },
+  ),
+);
 KidButton.displayName = "KidButton";
 
 export { KidButton, kidButtonVariants };

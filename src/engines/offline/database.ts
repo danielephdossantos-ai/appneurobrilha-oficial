@@ -1,11 +1,11 @@
-import Dexie, { type Table } from 'dexie';
+import Dexie, { type Table } from "dexie";
 
 export interface OfflineSyncQueue {
   id?: number;
   type: string;
   data: any;
   timestamp: number;
-  status: 'pending' | 'syncing' | 'failed';
+  status: "pending" | "syncing" | "failed";
   attempts: number;
   lastError?: string;
 }
@@ -22,10 +22,10 @@ export class NeuroOfflineDB extends Dexie {
   records!: Table<OfflineRecord>;
 
   constructor() {
-    super('NeuroBrilhaOffline');
+    super("NeuroBrilhaOffline");
     this.version(1).stores({
-      syncQueue: '++id, type, status, timestamp',
-      records: 'id, type, updatedAt'
+      syncQueue: "++id, type, status, timestamp",
+      records: "id, type, updatedAt",
     });
   }
 }

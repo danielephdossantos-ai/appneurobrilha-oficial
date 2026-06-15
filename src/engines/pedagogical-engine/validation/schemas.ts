@@ -1,10 +1,17 @@
-
 import { z } from "zod";
 
 export const DifficultyLevelSchema = z.enum(["easy", "medium", "hard", "expert"]);
-export const NivelDificuldadeSchema = z.enum(['simples', 'intermediario', 'complexo']);
+export const NivelDificuldadeSchema = z.enum(["simples", "intermediario", "complexo"]);
 export const SensoryTypeSchema = z.enum(["visual", "auditory", "tactile", "mixed"]);
-export const CognitiveDomainSchema = z.enum(["memory", "attention", "logic", "language", "math", "motor", "socioemotional"]);
+export const CognitiveDomainSchema = z.enum([
+  "memory",
+  "attention",
+  "logic",
+  "language",
+  "math",
+  "motor",
+  "socioemotional",
+]);
 
 export const ActivityOptionSchema = z.object({
   id: z.string(),

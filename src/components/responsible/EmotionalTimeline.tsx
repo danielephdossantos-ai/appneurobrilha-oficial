@@ -1,18 +1,28 @@
-
-import React from 'react';
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { EmotionalHistoryEntry } from "@/data/responsible/mock-data";
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 
 interface EmotionalTimelineProps {
   history: EmotionalHistoryEntry[];
 }
 
 export const EmotionalTimeline: React.FC<EmotionalTimelineProps> = ({ history }) => {
-  const chartData = history.map(entry => ({
-    time: new Date(entry.timestamp).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+  const chartData = history.map((entry) => ({
+    time: new Date(entry.timestamp).toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
     intensity: Math.round(entry.intensity * 100),
-    emotion: entry.emotion
+    emotion: entry.emotion,
   }));
 
   const CustomTooltip = ({ active, payload, label }: any) => {
@@ -41,25 +51,25 @@ export const EmotionalTimeline: React.FC<EmotionalTimelineProps> = ({ history })
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="colorIntensity" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ec4899" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#ec4899" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#ec4899" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#ec4899" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-            <XAxis 
-              dataKey="time" 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: '#94a3b8', fontSize: 10 }}
+            <XAxis
+              dataKey="time"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#94a3b8", fontSize: 10 }}
             />
             <YAxis hide />
             <Tooltip content={<CustomTooltip />} />
-            <Area 
-              type="monotone" 
-              dataKey="intensity" 
-              stroke="#ec4899" 
-              fillOpacity={1} 
-              fill="url(#colorIntensity)" 
+            <Area
+              type="monotone"
+              dataKey="intensity"
+              stroke="#ec4899"
+              fillOpacity={1}
+              fill="url(#colorIntensity)"
               strokeWidth={3}
             />
           </AreaChart>

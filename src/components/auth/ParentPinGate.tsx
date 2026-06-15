@@ -66,7 +66,8 @@ export const ParentPinGate: React.FC = () => {
 
   const descriptions: Record<typeof mode, string> = {
     enter: "Digite seu PIN de 4 dígitos para acessar a área dos responsáveis.",
-    create: "Crie um PIN de 4 dígitos. Ele será pedido sempre que alguém quiser entrar na área dos pais.",
+    create:
+      "Crie um PIN de 4 dígitos. Ele será pedido sempre que alguém quiser entrar na área dos pais.",
     confirm: "Digite o PIN novamente para confirmar.",
   };
 
@@ -118,9 +119,7 @@ export const ParentPinGate: React.FC = () => {
           maxLength={4}
         />
 
-        {error && (
-          <p className="text-sm text-destructive text-center font-bold">{error}</p>
-        )}
+        {error && <p className="text-sm text-destructive text-center font-bold">{error}</p>}
 
         <p className="text-xs text-muted-foreground text-center mt-4">
           Toque na tela e use o teclado para digitar.

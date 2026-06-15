@@ -9,13 +9,15 @@ const childSchema = z.object({
   nivel_dificuldade: z.string().optional(),
 });
 
-const mascotSchema = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  category: z.string().optional(),
-  level: z.number().optional(),
-  affinity: z.number().optional(),
-}).nullable();
+const mascotSchema = z
+  .object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    category: z.string().optional(),
+    level: z.number().optional(),
+    affinity: z.number().optional(),
+  })
+  .nullable();
 
 const chatMessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -23,7 +25,7 @@ const chatMessageSchema = z.object({
 });
 
 export const callNeuroBrilhaAI = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     z.discriminatedUnion("mode", [
       z.object({
         mode: z.literal("amigo-virtual"),
@@ -45,12 +47,14 @@ export const callNeuroBrilhaAI = createServerFn({ method: "POST" })
         mascot: mascotSchema,
         image: z.string(),
       }),
-    ])
+    ]),
   )
   .handler(async ({ data }) => {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      throw new Error("OPENAI_API_KEY não configurada. Configure a chave nas variáveis de ambiente.");
+      throw new Error(
+        "OPENAI_API_KEY não configurada. Configure a chave nas variáveis de ambiente.",
+      );
     }
 
     const { mode } = data;

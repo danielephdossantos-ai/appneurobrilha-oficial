@@ -12,7 +12,10 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "NeuroBrilha Kids — Cidade Mágica" },
-      { name: "description", content: "Entre na cidade mágica do Pip e comece sua aventura de aprendizagem." },
+      {
+        name: "description",
+        content: "Entre na cidade mágica do Pip e comece sua aventura de aprendizagem.",
+      },
     ],
   }),
   component: Index,
@@ -170,15 +173,21 @@ function Index() {
 
       {/* ═══════════════ MOBILE ═══════════════ */}
       <div className="md:hidden flex flex-col gap-3 -mt-2">
-
         {/* Hero compacto */}
         <div
           className="relative rounded-[2rem] overflow-hidden border-[3px] border-white/80 px-4 pt-3 pb-3"
-          style={{ background: "radial-gradient(ellipse at 30% 80%, #1a3a8c 0%, #0d1f55 55%, #050a2c 100%)" }}
+          style={{
+            background:
+              "radial-gradient(ellipse at 30% 80%, #1a3a8c 0%, #0d1f55 55%, #050a2c 100%)",
+          }}
         >
           <Stars />
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 15% 20%, rgba(155,108,255,0.3) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(76,158,255,0.3) 0%, transparent 55%)" }}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 15% 20%, rgba(155,108,255,0.3) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(76,158,255,0.3) 0%, transparent 55%)",
+            }}
           />
           <div className="relative z-10 flex items-center gap-3">
             <motion.div
@@ -186,20 +195,28 @@ function Index() {
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="shrink-0 relative"
             >
-              <div className="absolute inset-0 -m-4 rounded-full"
-                style={{ background: "radial-gradient(circle, rgba(255,201,60,0.55), transparent 70%)", filter: "blur(10px)" }}
+              <div
+                className="absolute inset-0 -m-4 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,201,60,0.55), transparent 70%)",
+                  filter: "blur(10px)",
+                }}
               />
               <KidLiveMascot size="sm" emotion="happy" className="relative" />
             </motion.div>
 
             <div className="flex-1 min-w-0">
-              <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">Bem-vindo à</div>
+              <div className="text-white/55 text-[9px] font-black uppercase tracking-[0.3em]">
+                Bem-vindo à
+              </div>
               <h1 className="text-white text-lg font-black leading-tight">
                 Cidade do <span className="text-[#FFC93C]">Pip</span> ✨
               </h1>
               <div className="mt-1.5 inline-flex bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-xl border border-[#FFC93C]/70 shadow-sm">
                 <p className="text-[#0d1f55] font-black text-[11px] leading-tight">
-                  {activeChild ? `Oi ${activeChild.nome}! Por onde vamos? 🚀` : "Escolha um aventureiro! ✨"}
+                  {activeChild
+                    ? `Oi ${activeChild.nome}! Por onde vamos? 🚀`
+                    : "Escolha um aventureiro! ✨"}
                 </p>
               </div>
             </div>
@@ -215,7 +232,9 @@ function Index() {
         {/* Seletor de criança — chips */}
         {allChildren.length > 0 && (
           <div className="flex items-center gap-2 flex-wrap px-0.5">
-            <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#0d1f55]/50 mr-1">Quem?</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#0d1f55]/50 mr-1">
+              Quem?
+            </span>
             {allChildren.map((c: any) => (
               <button
                 key={c.id}
@@ -248,8 +267,12 @@ function Index() {
             <div className="rounded-2xl p-3 bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] border-[3px] border-white shadow-lg flex items-center gap-2.5 active:scale-[0.98] transition-transform">
               <span className="text-2xl">⚠️</span>
               <div>
-                <div className="font-black text-[#0d1f55] text-xs leading-tight">Anamnese de {activeChild.nome} pendente</div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/65">Toque para começar</div>
+                <div className="font-black text-[#0d1f55] text-xs leading-tight">
+                  Anamnese de {activeChild.nome} pendente
+                </div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/65">
+                  Toque para começar
+                </div>
               </div>
             </div>
           </Link>
@@ -259,7 +282,9 @@ function Index() {
         <div>
           <div className="flex items-center gap-2 mb-2 px-0.5">
             <Sparkles className="h-3.5 w-3.5 text-[#FFC93C]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0d1f55]/55">Explorar Cidade</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#0d1f55]/55">
+              Explorar Cidade
+            </span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             {DESTINOS_KIDS.map((d, i) => (
@@ -269,23 +294,35 @@ function Index() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.04 * i, type: "spring", stiffness: 240, damping: 18 }}
                   whileTap={{ scale: 0.93 }}
-                  className={cn("relative rounded-[1.4rem] overflow-hidden border-[2.5px] border-white/85 cursor-pointer bg-gradient-to-br", d.gradient)}
+                  className={cn(
+                    "relative rounded-[1.4rem] overflow-hidden border-[2.5px] border-white/85 cursor-pointer bg-gradient-to-br",
+                    d.gradient,
+                  )}
                   style={{ boxShadow: `0 5px 0 rgba(0,0,0,0.2), 0 0 18px ${d.glow}` }}
                 >
                   {/* Brilho interno */}
-                  <div className="absolute inset-0 pointer-events-none"
-                    style={{ background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)` }}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
+                    }}
                   />
 
                   {/* Emoji grande */}
                   <div className="flex items-center justify-center pt-3 pb-1">
-                    <span className="text-4xl drop-shadow-lg select-none" role="img">{d.emoji}</span>
+                    <span className="text-4xl drop-shadow-lg select-none" role="img">
+                      {d.emoji}
+                    </span>
                   </div>
 
                   {/* Label */}
                   <div className="mx-1.5 mb-1.5 bg-white/92 backdrop-blur-sm rounded-xl px-1.5 py-1.5 text-center">
-                    <div className="text-[10px] font-black text-[#0d1f55] leading-tight">{d.title}</div>
-                    <div className="text-[7px] font-black uppercase tracking-wide text-[#0d1f55]/50 mt-0.5 leading-tight">{d.subtitle}</div>
+                    <div className="text-[10px] font-black text-[#0d1f55] leading-tight">
+                      {d.title}
+                    </div>
+                    <div className="text-[7px] font-black uppercase tracking-wide text-[#0d1f55]/50 mt-0.5 leading-tight">
+                      {d.subtitle}
+                    </div>
                   </div>
                 </motion.div>
               </Link>
@@ -298,23 +335,48 @@ function Index() {
       <div className="hidden md:block">
         <div
           className="relative w-full min-h-[80vh] -mt-6 rounded-[3rem] overflow-hidden border-4 border-white shadow-glow"
-          style={{ background: "radial-gradient(circle at 50% 110%, #1a3a8c 0%, #0d1f55 45%, #050a2c 100%)" }}
+          style={{
+            background:
+              "radial-gradient(circle at 50% 110%, #1a3a8c 0%, #0d1f55 45%, #050a2c 100%)",
+          }}
         >
           <Stars />
-          <div className="absolute inset-0 pointer-events-none opacity-60"
-            style={{ background: "radial-gradient(ellipse at 20% 10%, rgba(155,108,255,0.35), transparent 50%), radial-gradient(ellipse at 80% 15%, rgba(76,158,255,0.35), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(255,201,60,0.25), transparent 60%)" }}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-60"
+            style={{
+              background:
+                "radial-gradient(ellipse at 20% 10%, rgba(155,108,255,0.35), transparent 50%), radial-gradient(ellipse at 80% 15%, rgba(76,158,255,0.35), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(255,201,60,0.25), transparent 60%)",
+            }}
           />
-          <svg viewBox="0 0 1200 200" className="absolute bottom-0 left-0 w-full h-[18%] pointer-events-none" preserveAspectRatio="none">
-            <path d="M0,200 L0,120 L150,60 L280,110 L420,50 L560,100 L700,40 L860,90 L1000,55 L1200,100 L1200,200 Z" fill="#0a1740" />
-            <path d="M0,200 L0,150 L120,110 L260,145 L420,100 L580,140 L740,95 L900,135 L1060,105 L1200,140 L1200,200 Z" fill="#06102e" />
+          <svg
+            viewBox="0 0 1200 200"
+            className="absolute bottom-0 left-0 w-full h-[18%] pointer-events-none"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,200 L0,120 L150,60 L280,110 L420,50 L560,100 L700,40 L860,90 L1000,55 L1200,100 L1200,200 Z"
+              fill="#0a1740"
+            />
+            <path
+              d="M0,200 L0,150 L120,110 L260,145 L420,100 L580,140 L740,95 L900,135 L1060,105 L1200,140 L1200,200 Z"
+              fill="#06102e"
+            />
           </svg>
 
           {/* Header desktop */}
           <div className="relative z-10 flex items-center justify-between p-8 pb-0">
             <div className="flex items-center gap-3">
-              <motion.span animate={{ rotate: [0, 8, -8, 0] }} transition={{ duration: 4, repeat: Infinity }} className="text-3xl">⭐</motion.span>
+              <motion.span
+                animate={{ rotate: [0, 8, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="text-3xl"
+              >
+                ⭐
+              </motion.span>
               <div>
-                <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">Bem-vindo à</div>
+                <div className="text-white/55 text-xs font-black uppercase tracking-[0.3em]">
+                  Bem-vindo à
+                </div>
                 <h1 className="text-white text-3xl md:text-4xl font-black leading-none">
                   Cidade do <span className="text-[#FFC93C]">Pip</span>
                 </h1>
@@ -322,10 +384,14 @@ function Index() {
             </div>
             {activeChild && (
               <div className="flex items-center gap-3 bg-white/12 backdrop-blur-md px-5 py-3 rounded-full border-2 border-white/20">
-                <div className="h-10 w-10 rounded-full bg-white/20 grid place-items-center text-2xl">{activeChild.avatar}</div>
+                <div className="h-10 w-10 rounded-full bg-white/20 grid place-items-center text-2xl">
+                  {activeChild.avatar}
+                </div>
                 <div>
                   <div className="text-white font-black text-sm">{activeChild.nome}</div>
-                  <div className="text-white/55 text-[10px] font-bold uppercase tracking-widest">{activeChild.serie}</div>
+                  <div className="text-white/55 text-[10px] font-bold uppercase tracking-widest">
+                    {activeChild.serie}
+                  </div>
                 </div>
               </div>
             )}
@@ -338,17 +404,25 @@ function Index() {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="absolute inset-0 -m-10 rounded-full"
-                style={{ background: "radial-gradient(circle, rgba(255,201,60,0.4), transparent 65%)", filter: "blur(18px)" }}
+              <div
+                className="absolute inset-0 -m-10 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,201,60,0.4), transparent 65%)",
+                  filter: "blur(18px)",
+                }}
               />
               <KidLiveMascot size="xl" emotion="happy" className="relative" />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
               className="mt-2 bg-white/95 backdrop-blur px-5 py-2.5 rounded-2xl shadow-xl border-2 border-[#FFC93C] max-w-md text-center"
             >
               <p className="text-[#0d1f55] font-black text-lg leading-tight">
-                {activeChild ? `Oi ${activeChild.nome}! Pra onde vamos hoje? 🚀` : "Escolha um aventureiro pra começar! ✨"}
+                {activeChild
+                  ? `Oi ${activeChild.nome}! Pra onde vamos hoje? 🚀`
+                  : "Escolha um aventureiro pra começar! ✨"}
               </p>
             </motion.div>
           </div>
@@ -364,18 +438,30 @@ function Index() {
                     transition={{ delay: 0.06 * i, type: "spring", stiffness: 120 }}
                     whileHover={{ y: -6, scale: 1.04 }}
                     whileTap={{ scale: 0.97 }}
-                    className={cn("relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br", d.gradient)}
+                    className={cn(
+                      "relative rounded-[1.8rem] overflow-hidden border-[3px] border-white/88 cursor-pointer bg-gradient-to-br",
+                      d.gradient,
+                    )}
                     style={{ boxShadow: `0 8px 0 rgba(0,0,0,0.22), 0 0 28px ${d.glow}` }}
                   >
-                    <div className="absolute inset-0 pointer-events-none"
-                      style={{ background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)` }}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(ellipse at 40% 20%, ${d.shine}, transparent 65%)`,
+                      }}
                     />
                     <div className="flex flex-col items-center px-3 pt-5 pb-1">
-                      <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">{d.emoji}</span>
+                      <span className="text-5xl drop-shadow-xl select-none mb-2" role="img">
+                        {d.emoji}
+                      </span>
                     </div>
                     <div className="mx-2 mb-2 bg-white/93 rounded-2xl px-2 py-2.5 text-center">
-                      <div className="text-sm font-black text-[#0d1f55] leading-tight">{d.title}</div>
-                      <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">{d.subtitle}</div>
+                      <div className="text-sm font-black text-[#0d1f55] leading-tight">
+                        {d.title}
+                      </div>
+                      <div className="text-[9px] font-black uppercase tracking-widest text-[#0d1f55]/55 mt-0.5">
+                        {d.subtitle}
+                      </div>
                     </div>
                   </motion.div>
                 </Link>
@@ -400,12 +486,23 @@ function Index() {
                     ? "bg-gradient-to-br from-[#4C9EFF] to-[#1E5FCC] border-[#FFC93C] text-white shadow-xl"
                     : "bg-white border-white hover:border-[#4C9EFF]/40 shadow-md",
                 )}
-                style={c.id === activeChild?.id ? { boxShadow: "0 6px 0 rgba(0,0,0,0.12), 0 0 24px rgba(76,158,255,0.45)" } : {}}
+                style={
+                  c.id === activeChild?.id
+                    ? { boxShadow: "0 6px 0 rgba(0,0,0,0.12), 0 0 24px rgba(76,158,255,0.45)" }
+                    : {}
+                }
               >
-                <div className="h-12 w-12 rounded-2xl bg-white/25 grid place-items-center text-2xl">{c.avatar}</div>
+                <div className="h-12 w-12 rounded-2xl bg-white/25 grid place-items-center text-2xl">
+                  {c.avatar}
+                </div>
                 <div className="text-left">
                   <div className="font-black">{c.nome}</div>
-                  <div className={cn("text-[10px] font-bold uppercase tracking-wider", c.id === activeChild?.id ? "text-white/70" : "text-[#0d1f55]/55")}>
+                  <div
+                    className={cn(
+                      "text-[10px] font-bold uppercase tracking-wider",
+                      c.id === activeChild?.id ? "text-white/70" : "text-[#0d1f55]/55",
+                    )}
+                  >
                     {c.idade}a · {c.serie}
                   </div>
                 </div>
@@ -419,7 +516,9 @@ function Index() {
               <div className="w-10 h-10 rounded-xl bg-[#4C9EFF] text-white grid place-items-center">
                 <Plus strokeWidth={3} className="h-5 w-5" />
               </div>
-              <span className="font-black text-[#0d1f55] uppercase tracking-wider text-xs">Nova Criança</span>
+              <span className="font-black text-[#0d1f55] uppercase tracking-wider text-xs">
+                Nova Criança
+              </span>
             </Link>
           </div>
 
@@ -428,8 +527,12 @@ function Index() {
               <div className="mt-5 rounded-3xl p-5 bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] border-4 border-white shadow-xl flex items-center gap-4 hover:scale-[1.01] transition-transform">
                 <span className="text-4xl">⚠️</span>
                 <div>
-                  <div className="font-black text-[#0d1f55] text-lg leading-tight">Anamnese de {activeChild.nome} pendente</div>
-                  <div className="text-[11px] font-black uppercase tracking-widest text-[#0d1f55]/65">Toque para começar</div>
+                  <div className="font-black text-[#0d1f55] text-lg leading-tight">
+                    Anamnese de {activeChild.nome} pendente
+                  </div>
+                  <div className="text-[11px] font-black uppercase tracking-widest text-[#0d1f55]/65">
+                    Toque para começar
+                  </div>
                 </div>
               </div>
             </Link>

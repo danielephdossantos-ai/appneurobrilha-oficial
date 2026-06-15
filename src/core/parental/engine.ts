@@ -1,4 +1,3 @@
-
 export interface ParentalSettings {
   screenTimeLimit: number; // minutes
   allowedFields: string[];
@@ -12,7 +11,7 @@ export class ParentalEngine {
       skillsGained: 2,
       timeSpent: 45,
       mood: emotionalState.current,
-      observation: "Ótimo foco hoje em Matemática!"
+      observation: "Ótimo foco hoje em Matemática!",
     };
   }
 }

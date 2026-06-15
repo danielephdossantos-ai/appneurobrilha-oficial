@@ -67,12 +67,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: [
-      "framer-motion",
-      "recharts",
-      "lucide-react",
-      "@tanstack/react-virtual",
-      "idb-keyval",
-    ],
+    include: ["framer-motion", "recharts", "lucide-react", "@tanstack/react-virtual", "idb-keyval"],
   },
 });

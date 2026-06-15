@@ -1,9 +1,8 @@
-
-export type SensoryMode = 
-  | "calmante" 
-  | "foco" 
-  | "hiperfoco" 
-  | "baixa-estimulacao" 
+export type SensoryMode =
+  | "calmante"
+  | "foco"
+  | "hiperfoco"
+  | "baixa-estimulacao"
   | "recompensa-intensa";
 
 export interface SensoryPreferences {
@@ -39,7 +38,7 @@ export class SensoryEngine {
           reinforcementType: "subtle",
           animationStyle: "smooth",
           responseTimeAllowance: "relaxed",
-          predictability: "high"
+          predictability: "high",
         };
       case "foco":
         return {
@@ -50,7 +49,7 @@ export class SensoryEngine {
           reinforcementType: "standard",
           animationStyle: "minimal",
           responseTimeAllowance: "standard",
-          predictability: "high"
+          predictability: "high",
         };
       case "hiperfoco":
         return {
@@ -61,7 +60,7 @@ export class SensoryEngine {
           reinforcementType: "intense",
           animationStyle: "energetic",
           responseTimeAllowance: "strict",
-          predictability: "low"
+          predictability: "low",
         };
       case "baixa-estimulacao":
         return {
@@ -72,7 +71,7 @@ export class SensoryEngine {
           reinforcementType: "subtle",
           animationStyle: "minimal",
           responseTimeAllowance: "none",
-          predictability: "very-high"
+          predictability: "very-high",
         };
       case "recompensa-intensa":
         return {
@@ -83,7 +82,7 @@ export class SensoryEngine {
           reinforcementType: "intense",
           animationStyle: "playful",
           responseTimeAllowance: "standard",
-          predictability: "high"
+          predictability: "high",
         };
     }
   }
@@ -94,7 +93,7 @@ export class SensoryEngine {
       foco: "Modo Foco",
       hiperfoco: "Modo Hiperfoco",
       "baixa-estimulacao": "Baixa Estimulação",
-      "recompensa-intensa": "Recompensa Intensa"
+      "recompensa-intensa": "Recompensa Intensa",
     };
     return labels[mode];
   }
@@ -102,19 +101,75 @@ export class SensoryEngine {
   static getDefaultPreferences(profile: string): SensoryPreferences {
     switch (profile) {
       case "TEA":
-        return { brightness: 0.6, contrast: 1.1, soundVolume: 0.4, fontSize: 18, colorPalette: "soft", animationIntensity: "low", hapticFeedback: false };
+        return {
+          brightness: 0.6,
+          contrast: 1.1,
+          soundVolume: 0.4,
+          fontSize: 18,
+          colorPalette: "soft",
+          animationIntensity: "low",
+          hapticFeedback: false,
+        };
       case "TDAH":
-        return { brightness: 1.0, contrast: 1.3, soundVolume: 0.7, fontSize: 17, colorPalette: "standard", animationIntensity: "standard", hapticFeedback: true };
+        return {
+          brightness: 1.0,
+          contrast: 1.3,
+          soundVolume: 0.7,
+          fontSize: 17,
+          colorPalette: "standard",
+          animationIntensity: "standard",
+          hapticFeedback: true,
+        };
       case "Dislexia":
-        return { brightness: 1.0, contrast: 1.0, soundVolume: 0.9, fontSize: 20, colorPalette: "high-contrast", animationIntensity: "standard", hapticFeedback: false };
+        return {
+          brightness: 1.0,
+          contrast: 1.0,
+          soundVolume: 0.9,
+          fontSize: 20,
+          colorPalette: "high-contrast",
+          animationIntensity: "standard",
+          hapticFeedback: false,
+        };
       case "DeficienciaIntelectual":
-        return { brightness: 1.0, contrast: 1.2, soundVolume: 0.6, fontSize: 22, colorPalette: "standard", animationIntensity: "low", hapticFeedback: false };
+        return {
+          brightness: 1.0,
+          contrast: 1.2,
+          soundVolume: 0.6,
+          fontSize: 22,
+          colorPalette: "standard",
+          animationIntensity: "low",
+          hapticFeedback: false,
+        };
       case "AltasHabilidades":
-        return { brightness: 1.0, contrast: 1.0, soundVolume: 0.8, fontSize: 16, colorPalette: "standard", animationIntensity: "high", hapticFeedback: true };
+        return {
+          brightness: 1.0,
+          contrast: 1.0,
+          soundVolume: 0.8,
+          fontSize: 16,
+          colorPalette: "standard",
+          animationIntensity: "high",
+          hapticFeedback: true,
+        };
       case "TOD":
-        return { brightness: 0.9, contrast: 1.0, soundVolume: 0.6, fontSize: 17, colorPalette: "soft", animationIntensity: "standard", hapticFeedback: true };
+        return {
+          brightness: 0.9,
+          contrast: 1.0,
+          soundVolume: 0.6,
+          fontSize: 17,
+          colorPalette: "soft",
+          animationIntensity: "standard",
+          hapticFeedback: true,
+        };
       default:
-        return { brightness: 1, contrast: 1, soundVolume: 0.8, fontSize: 16, colorPalette: "standard", animationIntensity: "standard", hapticFeedback: true };
+        return {
+          brightness: 1,
+          contrast: 1,
+          soundVolume: 0.8,
+          fontSize: 16,
+          colorPalette: "standard",
+          animationIntensity: "standard",
+          hapticFeedback: true,
+        };
     }
   }
 }

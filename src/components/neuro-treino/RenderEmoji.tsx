@@ -1,33 +1,90 @@
-import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ArrowUpLeft, ArrowDownRight, ArrowDownLeft, CornerUpLeft, CornerUpRight, RotateCcw } from "lucide-react";
+import {
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  ArrowUpLeft,
+  ArrowDownRight,
+  ArrowDownLeft,
+  CornerUpLeft,
+  CornerUpRight,
+  RotateCcw,
+} from "lucide-react";
 import { emojiImg, objetoImg, semEmoji } from "@/data/neuro-treino/objetos";
 
 // Mapeia emojis abstratos (formas/cores) → cor sólida para chip CSS
 const SHAPE_COLOR: Record<string, string> = {
-  "🔴": "#ef4444", "🟠": "#f97316", "🟡": "#facc15", "🟢": "#22c55e",
-  "🔵": "#3b82f6", "🟣": "#a855f7", "🟤": "#92400e", "⚫": "#0f172a", "⚪": "#f1f5f9",
-  "🟥": "#ef4444", "🟧": "#f97316", "🟨": "#facc15", "🟩": "#22c55e",
-  "🟦": "#3b82f6", "🟪": "#a855f7", "🟫": "#92400e", "⬛": "#0f172a", "⬜": "#f1f5f9",
+  "🔴": "#ef4444",
+  "🟠": "#f97316",
+  "🟡": "#facc15",
+  "🟢": "#22c55e",
+  "🔵": "#3b82f6",
+  "🟣": "#a855f7",
+  "🟤": "#92400e",
+  "⚫": "#0f172a",
+  "⚪": "#f1f5f9",
+  "🟥": "#ef4444",
+  "🟧": "#f97316",
+  "🟨": "#facc15",
+  "🟩": "#22c55e",
+  "🟦": "#3b82f6",
+  "🟪": "#a855f7",
+  "🟫": "#92400e",
+  "⬛": "#0f172a",
+  "⬜": "#f1f5f9",
 };
 // Formas geométricas
 const SHAPE_KIND: Record<string, "circle" | "square" | "triangle" | "diamond"> = {
-  "🔴": "circle", "🟠": "circle", "🟡": "circle", "🟢": "circle",
-  "🔵": "circle", "🟣": "circle", "🟤": "circle", "⚫": "circle", "⚪": "circle",
-  "🟥": "square", "🟧": "square", "🟨": "square", "🟩": "square",
-  "🟦": "square", "🟪": "square", "🟫": "square", "⬛": "square", "⬜": "square",
-  "🔺": "triangle", "🔻": "triangle",
-  "🔷": "diamond", "🔶": "diamond", "🔸": "diamond", "🔹": "diamond",
+  "🔴": "circle",
+  "🟠": "circle",
+  "🟡": "circle",
+  "🟢": "circle",
+  "🔵": "circle",
+  "🟣": "circle",
+  "🟤": "circle",
+  "⚫": "circle",
+  "⚪": "circle",
+  "🟥": "square",
+  "🟧": "square",
+  "🟨": "square",
+  "🟩": "square",
+  "🟦": "square",
+  "🟪": "square",
+  "🟫": "square",
+  "⬛": "square",
+  "⬜": "square",
+  "🔺": "triangle",
+  "🔻": "triangle",
+  "🔷": "diamond",
+  "🔶": "diamond",
+  "🔸": "diamond",
+  "🔹": "diamond",
 };
 const SHAPE_OUTLINE: Record<string, string> = {
-  "🔺": "#ef4444", "🔻": "#ef4444",
-  "🔷": "#3b82f6", "🔹": "#3b82f6",
-  "🔶": "#f97316", "🔸": "#f97316",
+  "🔺": "#ef4444",
+  "🔻": "#ef4444",
+  "🔷": "#3b82f6",
+  "🔹": "#3b82f6",
+  "🔶": "#f97316",
+  "🔸": "#f97316",
 };
 
 const ARROWS: Record<string, React.ComponentType<{ className?: string }>> = {
-  "⬆️": ArrowUp, "⬇️": ArrowDown, "⬅️": ArrowLeft, "➡️": ArrowRight,
-  "↗️": ArrowUpRight, "↖️": ArrowUpLeft, "↘️": ArrowDownRight, "↙️": ArrowDownLeft,
-  "↪️": CornerUpRight, "↩️": CornerUpLeft, "⤴️": ArrowUpRight, "⤵️": ArrowDownRight,
-  "🔄": RotateCcw, "🌀": RotateCcw,
+  "⬆️": ArrowUp,
+  "⬇️": ArrowDown,
+  "⬅️": ArrowLeft,
+  "➡️": ArrowRight,
+  "↗️": ArrowUpRight,
+  "↖️": ArrowUpLeft,
+  "↘️": ArrowDownRight,
+  "↙️": ArrowDownLeft,
+  "↪️": CornerUpRight,
+  "↩️": CornerUpLeft,
+  "⤴️": ArrowUpRight,
+  "⤵️": ArrowDownRight,
+  "🔄": RotateCcw,
+  "🌀": RotateCcw,
 };
 
 export interface RenderEmojiProps {
@@ -65,7 +122,9 @@ export function RenderEmoji({ e, className = "w-16 h-16", label, hideText }: Ren
   if (kind) {
     const color = SHAPE_COLOR[raw] ?? SHAPE_OUTLINE[raw] ?? "#64748b";
     if (kind === "circle")
-      return <div className={`${className} rounded-full shadow-md`} style={{ background: color }} />;
+      return (
+        <div className={`${className} rounded-full shadow-md`} style={{ background: color }} />
+      );
     if (kind === "square")
       return <div className={`${className} rounded-lg shadow-md`} style={{ background: color }} />;
     if (kind === "triangle")
@@ -102,8 +161,12 @@ export function RenderEmoji({ e, className = "w-16 h-16", label, hideText }: Ren
     return <div className={`${className} rounded-xl bg-muted/60`} />;
   }
   return (
-    <div className={`${className} flex items-center justify-center px-2 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20`}>
-      <span className="font-black text-primary text-xs md:text-sm text-center leading-tight">{txt}</span>
+    <div
+      className={`${className} flex items-center justify-center px-2 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20`}
+    >
+      <span className="font-black text-primary text-xs md:text-sm text-center leading-tight">
+        {txt}
+      </span>
     </div>
   );
 }

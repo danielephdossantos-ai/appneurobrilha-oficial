@@ -1,11 +1,10 @@
-
-export type NeuroProfile = 
-  | "TEA" 
-  | "TDAH" 
-  | "Dislexia" 
-  | "TOD" 
-  | "DeficienciaIntelectual" 
-  | "AltasHabilidades" 
+export type NeuroProfile =
+  | "TEA"
+  | "TDAH"
+  | "Dislexia"
+  | "TOD"
+  | "DeficienciaIntelectual"
+  | "AltasHabilidades"
   | "Neurotipico";
 
 export interface CognitiveLoad {
@@ -22,7 +21,7 @@ export interface NeuroAdjustment {
   positiveReinforcementFrequency: "high" | "standard";
   autonomyLevel: "guided" | "collaborative" | "independent";
   complexityMultiplier: number; // 1.0 is standard
-  
+
   // New specific parameters
   animationSpeed: number; // velocidade (e.g., 0.5 slow, 1.5 fast)
   stimuliLevel: "none" | "low" | "medium" | "high"; // estímulos
@@ -38,9 +37,9 @@ export class AdaptiveEngine {
   static getAdjustments(profile: NeuroProfile): NeuroAdjustment {
     switch (profile) {
       case "TEA":
-        return { 
-          breakFrequency: 15, 
-          visualComplexity: "low", 
+        return {
+          breakFrequency: 15,
+          visualComplexity: "low",
           instructionType: "visual",
           repetitionRate: 1.5,
           positiveReinforcementFrequency: "high",
@@ -53,12 +52,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "high",
           animationIntensity: "low",
           responseTimeLimit: null,
-          predictabilityLevel: "high"
+          predictabilityLevel: "high",
         };
       case "TDAH":
-        return { 
-          breakFrequency: 8, 
-          visualComplexity: "low", 
+        return {
+          breakFrequency: 8,
+          visualComplexity: "low",
           instructionType: "mixed",
           repetitionRate: 1.2,
           positiveReinforcementFrequency: "high",
@@ -71,12 +70,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "high",
           animationIntensity: "low",
           responseTimeLimit: 30,
-          predictabilityLevel: "medium"
+          predictabilityLevel: "medium",
         };
       case "Dislexia":
-        return { 
-          breakFrequency: 20, 
-          visualComplexity: "medium", 
+        return {
+          breakFrequency: 20,
+          visualComplexity: "medium",
           instructionType: "audio",
           repetitionRate: 1.3,
           positiveReinforcementFrequency: "standard",
@@ -89,12 +88,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "standard",
           animationIntensity: "standard",
           responseTimeLimit: 60,
-          predictabilityLevel: "medium"
+          predictabilityLevel: "medium",
         };
       case "TOD":
-        return { 
-          breakFrequency: 12, 
-          visualComplexity: "medium", 
+        return {
+          breakFrequency: 12,
+          visualComplexity: "medium",
           instructionType: "mixed",
           repetitionRate: 1.0,
           positiveReinforcementFrequency: "high",
@@ -107,12 +106,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "high",
           animationIntensity: "standard",
           responseTimeLimit: 45,
-          predictabilityLevel: "high"
+          predictabilityLevel: "high",
         };
       case "DeficienciaIntelectual":
-        return { 
-          breakFrequency: 10, 
-          visualComplexity: "low", 
+        return {
+          breakFrequency: 10,
+          visualComplexity: "low",
           instructionType: "visual",
           repetitionRate: 2.0,
           positiveReinforcementFrequency: "high",
@@ -125,12 +124,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "high",
           animationIntensity: "low",
           responseTimeLimit: null,
-          predictabilityLevel: "high"
+          predictabilityLevel: "high",
         };
       case "AltasHabilidades":
-        return { 
-          breakFrequency: 25, 
-          visualComplexity: "high", 
+        return {
+          breakFrequency: 25,
+          visualComplexity: "high",
           instructionType: "text",
           repetitionRate: 0.5,
           positiveReinforcementFrequency: "standard",
@@ -143,12 +142,12 @@ export class AdaptiveEngine {
           reinforcementIntensity: "subtle",
           animationIntensity: "high",
           responseTimeLimit: 15,
-          predictabilityLevel: "low"
+          predictabilityLevel: "low",
         };
       default:
-        return { 
-          breakFrequency: 25, 
-          visualComplexity: "medium", 
+        return {
+          breakFrequency: 25,
+          visualComplexity: "medium",
           instructionType: "mixed",
           repetitionRate: 1.0,
           positiveReinforcementFrequency: "standard",
@@ -161,7 +160,7 @@ export class AdaptiveEngine {
           reinforcementIntensity: "standard",
           animationIntensity: "standard",
           responseTimeLimit: null,
-          predictabilityLevel: "medium"
+          predictabilityLevel: "medium",
         };
     }
   }
@@ -174,7 +173,7 @@ export class AdaptiveEngine {
       TOD: "TOD",
       DeficienciaIntelectual: "Deficiência Intelectual",
       AltasHabilidades: "Altas Habilidades / Superdotação",
-      Neurotipico: "Neurotípico"
+      Neurotipico: "Neurotípico",
     };
     return labels[profile];
   }

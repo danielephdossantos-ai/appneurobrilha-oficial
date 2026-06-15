@@ -1,9 +1,7 @@
-
 import { PedagogicalActivity, PedagogicalActivitySchema } from "./validation/schemas";
 import { NeuroAdaptiveCore } from "@/engines/neuro-engine/core";
 import { NeuroProfile, NeuroAdjustment } from "@/engines/neuro-engine/types";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
-
 
 export interface PedagogicalContext {
   childId: string;
@@ -18,7 +16,7 @@ export class ActivityEngine {
 
   static generateActivity(context: PedagogicalContext): PedagogicalActivity {
     console.log(`[PedagogicalEngine] Iniciando geração INFINITA para: ${context.childId}`, context);
-    
+
     try {
       // 1. Obter Ajustes Neuroadaptativos
       const { adjustment: adjustments } = NeuroAdaptiveCore.processState({
@@ -55,7 +53,7 @@ export class ActivityEngine {
       // 2. Chamar Motor Infinito (Offline & Baseado em Regras)
       const infiniteActivity = InfiniteActivityEngine.generate({
         ...context,
-        adjustments
+        adjustments,
       });
 
       // 3. Mapear para o schema legado (PedagogicalActivity) para manter compatibilidade
@@ -71,16 +69,19 @@ export class ActivityEngine {
         tipoSensorial: adjustments.visualComplexity === "low" ? "visual" : "mixed",
         recompensa: { ...infiniteActivity.reward, energy: 5 },
         content: infiniteActivity.content,
-        fallback: "fallback-default"
+        fallback: "fallback-default",
       };
 
       // 4. Validação
       const validatedActivity = PedagogicalActivitySchema.parse(activityData);
-      
-      this.logPedagogicalAction(context.childId, "infinite_activity_generated", validatedActivity.id);
-      
-      return validatedActivity;
 
+      this.logPedagogicalAction(
+        context.childId,
+        "infinite_activity_generated",
+        validatedActivity.id,
+      );
+
+      return validatedActivity;
     } catch (error) {
       console.error("[PedagogicalEngine] Falha na geração infinita:", error);
       return this.getFallbackActivity();
@@ -104,24 +105,18 @@ export class ActivityEngine {
       tipoSensorial: "visual",
       recompensa: { stars: 1, coins: 1, energy: 1 },
       content: {
-        question: "Vamos fazer algo bem simples?"
-      }
+        question: "Vamos fazer algo bem simples?",
+      },
     };
   }
 
-  static gerarAtividade(
-    templateId?: string, 
-    analysis?: any,
-    preferredType?: string
-  ): any {
+  static gerarAtividade(templateId?: string, analysis?: any, preferredType?: string): any {
     return this.generateActivity({
-        childId: "anonymous",
-        age: 6,
-        grade: 1,
-        neuroProfile: "Tipico",
-        previousPerformance: 0.7
+      childId: "anonymous",
+      age: 6,
+      grade: 1,
+      neuroProfile: "Tipico",
+      previousPerformance: 0.7,
     });
   }
 }
-
-

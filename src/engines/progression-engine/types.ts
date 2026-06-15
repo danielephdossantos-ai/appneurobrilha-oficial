@@ -1,4 +1,3 @@
-
 export interface SkillMastery {
   id: string;
   child_id: string;

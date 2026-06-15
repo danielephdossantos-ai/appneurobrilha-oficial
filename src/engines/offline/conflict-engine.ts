@@ -12,12 +12,12 @@ export class ConflictEngine {
 
     // Se o local for mais novo, mantém o local
     if (localTime > remoteTime) {
-      console.log('[ConflictEngine] Mantendo versão local (mais recente)');
+      console.log("[ConflictEngine] Mantendo versão local (mais recente)");
       return localData;
     }
 
     // Caso contrário, usa o remoto
-    console.log('[ConflictEngine] Usando versão remota');
+    console.log("[ConflictEngine] Usando versão remota");
     return remoteData;
   }
 
@@ -25,8 +25,8 @@ export class ConflictEngine {
    * Mescla arrays de métricas (concatena o que falta)
    */
   static mergeMetrics(localMetrics: any[], remoteMetrics: any[]) {
-    const remoteIds = new Set(remoteMetrics.map(m => m.id));
-    const uniqueLocal = localMetrics.filter(m => !remoteIds.has(m.id));
+    const remoteIds = new Set(remoteMetrics.map((m) => m.id));
+    const uniqueLocal = localMetrics.filter((m) => !remoteIds.has(m.id));
     return [...remoteMetrics, ...uniqueLocal];
   }
 }

@@ -1,6 +1,13 @@
-
-import React from 'react';
-import { ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from 'recharts';
+import React from "react";
+import {
+  ResponsiveContainer,
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Tooltip,
+} from "recharts";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 interface CognitiveRadarProps {
@@ -18,17 +25,15 @@ export const CognitiveRadar: React.FC<CognitiveRadarProps> = ({ data }) => {
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
             <PolarGrid stroke="#e2e8f0" />
-            <PolarAngleAxis dataKey="label" tick={{ fill: '#64748b', fontSize: 12 }} />
+            <PolarAngleAxis dataKey="label" tick={{ fill: "#64748b", fontSize: 12 }} />
             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-            <Radar
-              name="Lucas"
-              dataKey="value"
-              stroke="#8b5cf6"
-              fill="#8b5cf6"
-              fillOpacity={0.6}
-            />
-            <Tooltip 
-              contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+            <Radar name="Lucas" dataKey="value" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.6} />
+            <Tooltip
+              contentStyle={{
+                borderRadius: "8px",
+                border: "none",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+              }}
             />
           </RadarChart>
         </ResponsiveContainer>

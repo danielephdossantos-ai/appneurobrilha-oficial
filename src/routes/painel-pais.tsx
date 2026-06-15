@@ -1,4 +1,3 @@
-
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Brain, AlertTriangle, CheckCircle2, ArrowRight, ArrowLeft, Home } from "lucide-react";
 import { Shell } from "@/components/Layout";
@@ -21,7 +20,6 @@ import { useParentMode } from "@/contexts/ParentModeContext";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 
-
 export const Route = createFileRoute("/painel-pais")({
   component: PainelPremium,
 });
@@ -35,9 +33,9 @@ function PainelPremium() {
 
     if (parentUnlocked) {
       AuditLogService.log({
-        action: 'ACCESS_PARENT_DASHBOARD',
-        module: 'RESPONSIBLE',
-        metadata: { childId: activeChild.id }
+        action: "ACCESS_PARENT_DASHBOARD",
+        module: "RESPONSIBLE",
+        metadata: { childId: activeChild.id },
       });
     } else {
       requestUnlock();
@@ -45,7 +43,11 @@ function PainelPremium() {
   }, [parentUnlocked, activeChild, requestUnlock]);
 
   if (isLoading) {
-    return <Shell><p className="text-center py-10">Carregando…</p></Shell>;
+    return (
+      <Shell>
+        <p className="text-center py-10">Carregando…</p>
+      </Shell>
+    );
   }
 
   if (!activeChild && children.length === 0) {
@@ -53,8 +55,14 @@ function PainelPremium() {
       <Shell>
         <div className="text-center py-20 space-y-4">
           <p className="text-lg font-bold">Nenhuma criança cadastrada ainda</p>
-          <p className="text-sm text-muted-foreground">Cadastre a primeira criança e faça a anamnese para liberar o painel.</p>
-          <Link to="/anamnese/$childId" params={{ childId: "nova" }} className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-black">
+          <p className="text-sm text-muted-foreground">
+            Cadastre a primeira criança e faça a anamnese para liberar o painel.
+          </p>
+          <Link
+            to="/anamnese/$childId"
+            params={{ childId: "nova" }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-black"
+          >
             Iniciar cadastro <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -99,7 +107,6 @@ function PainelPremium() {
     );
   }
 
-
   const analysis = ResponsibleIntelligence.analyzePerformance(mockResponsibleData);
 
   const containerVariants = {
@@ -107,14 +114,14 @@ function PainelPremium() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
   };
 
   return (
@@ -141,27 +148,40 @@ function PainelPremium() {
           </button>
         </div>
 
-        <DashboardHeader 
-
-          studentName={activeChild.nome} 
-          grade={activeChild.serie} 
+        <DashboardHeader
+          studentName={activeChild.nome}
+          grade={activeChild.serie}
           childId={activeChild.id}
         />
 
         {/* Cartão de Anamnese — sempre visível na área dos pais */}
-        <div className={`mb-6 rounded-3xl border-4 p-6 flex flex-col md:flex-row items-start md:items-center gap-4 ${
-          activeChild.anamnese_completa
-            ? 'bg-emerald-50 border-emerald-300'
-            : 'bg-amber-50 border-amber-400 shadow-lg animate-pulse-slow'
-        }`}>
-          <div className={`h-14 w-14 rounded-2xl flex items-center justify-center ${
-            activeChild.anamnese_completa ? 'bg-emerald-500' : 'bg-amber-500'
-          } text-white`}>
-            {activeChild.anamnese_completa ? <CheckCircle2 className="h-7 w-7" /> : <Brain className="h-7 w-7" />}
+        <div
+          className={`mb-6 rounded-3xl border-4 p-6 flex flex-col md:flex-row items-start md:items-center gap-4 ${
+            activeChild.anamnese_completa
+              ? "bg-emerald-50 border-emerald-300"
+              : "bg-amber-50 border-amber-400 shadow-lg animate-pulse-slow"
+          }`}
+        >
+          <div
+            className={`h-14 w-14 rounded-2xl flex items-center justify-center ${
+              activeChild.anamnese_completa ? "bg-emerald-500" : "bg-amber-500"
+            } text-white`}
+          >
+            {activeChild.anamnese_completa ? (
+              <CheckCircle2 className="h-7 w-7" />
+            ) : (
+              <Brain className="h-7 w-7" />
+            )}
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500">
-              {activeChild.anamnese_completa ? 'Anamnese concluída' : <><AlertTriangle className="h-4 w-4 text-amber-600" /> Anamnese pendente</>}
+              {activeChild.anamnese_completa ? (
+                "Anamnese concluída"
+              ) : (
+                <>
+                  <AlertTriangle className="h-4 w-4 text-amber-600" /> Anamnese pendente
+                </>
+              )}
             </div>
             <h2 className="text-xl md:text-2xl font-black text-slate-900 leading-tight mt-1">
               {activeChild.anamnese_completa
@@ -170,8 +190,8 @@ function PainelPremium() {
             </h2>
             <p className="text-sm font-medium text-slate-600 mt-1">
               {activeChild.anamnese_completa
-                ? 'Você pode revisar ou editar as respostas (até 3 edições).'
-                : 'A anamnese é essencial para que o app personalize as atividades.'}
+                ? "Você pode revisar ou editar as respostas (até 3 edições)."
+                : "A anamnese é essencial para que o app personalize as atividades."}
             </p>
           </div>
           <Link
@@ -179,17 +199,16 @@ function PainelPremium() {
             params={{ childId: activeChild.id }}
             className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black uppercase tracking-widest text-sm shadow-md transition-transform hover:scale-105 ${
               activeChild.anamnese_completa
-                ? 'bg-emerald-600 text-white'
-                : 'bg-amber-500 text-white'
+                ? "bg-emerald-600 text-white"
+                : "bg-amber-500 text-white"
             }`}
           >
-            {activeChild.anamnese_completa ? 'Revisar anamnese' : 'Iniciar anamnese'}
+            {activeChild.anamnese_completa ? "Revisar anamnese" : "Iniciar anamnese"}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
@@ -205,7 +224,7 @@ function PainelPremium() {
                 <FocusChart sessions={mockResponsibleData.focusSessions} />
               </motion.div>
             </div>
-            
+
             <motion.div variants={itemVariants}>
               <EmotionalTimeline history={mockResponsibleData.emotionalHistory} />
             </motion.div>
@@ -239,15 +258,19 @@ function PainelPremium() {
             <motion.div variants={itemVariants}>
               <AdaptivePlan recommendations={analysis.recommendations} />
             </motion.div>
-            
+
             <motion.div variants={itemVariants}>
               <PedagogicalAlerts alerts={mockResponsibleData.alerts} childId={activeChild.id} />
             </motion.div>
 
-            <motion.div variants={itemVariants} className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200">
+            <motion.div
+              variants={itemVariants}
+              className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200"
+            >
               <h3 className="text-lg font-bold mb-2">Dica Neuroeducacional</h3>
               <p className="text-indigo-100 text-sm leading-relaxed mb-4">
-                O "hiperfoco" de hoje foi excelente! Aproveite esse engajamento para introduzir novos conceitos de lógica amanhã cedo, quando a energia cognitiva estiver no pico.
+                O "hiperfoco" de hoje foi excelente! Aproveite esse engajamento para introduzir
+                novos conceitos de lógica amanhã cedo, quando a energia cognitiva estiver no pico.
               </p>
               <button className="w-full py-3 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl text-sm font-bold transition-all">
                 Ver Plano de Aula Completo

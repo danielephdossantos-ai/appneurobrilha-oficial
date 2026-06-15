@@ -14,9 +14,11 @@ description: How NeuroBrilha Kids was migrated from Supabase to Replit's native 
 - **Auth**: App already used Replit header auth (`x-replit-user-id`) — no Supabase Auth was in use. `AuthService` is a no-op stub.
 
 ## Why
+
 **Why:** Supabase was the original backend for the Lovable-hosted version. Replit has its own managed PostgreSQL. Preserving the Supabase JS client interface (the shim) avoids rewriting every component.
 
 ## How to apply
+
 - Never re-introduce `@supabase/supabase-js` client calls or Supabase env vars (`VITE_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`).
 - To add new tables: add to `shared/schema.ts`, add server functions in `src/services/db/`, add handler in the shim's `resolveTable`/`execInsert`/etc.
 - DB changes are applied with `npx drizzle-kit push`.

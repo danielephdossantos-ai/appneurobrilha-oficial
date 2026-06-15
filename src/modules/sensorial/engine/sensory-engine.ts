@@ -1,11 +1,20 @@
-export type SensoryMode = "visual" | "auditivo" | "motor" | "combinado" | "foco" | "calmante" | "hiperfoco" | "baixa-estimulacao" | "recompensa-intensa";
+export type SensoryMode =
+  | "visual"
+  | "auditivo"
+  | "motor"
+  | "combinado"
+  | "foco"
+  | "calmante"
+  | "hiperfoco"
+  | "baixa-estimulacao"
+  | "recompensa-intensa";
 
 export class SensoryEngine {
   static adapt(profile: any) {
     return {
       mode: "visual" as SensoryMode,
       brightness: 1,
-      contrast: 1
+      contrast: 1,
     };
   }
 
@@ -14,4 +23,3 @@ export class SensoryEngine {
   static fontSize = 16;
   static colorPalette = "standard";
 }
-

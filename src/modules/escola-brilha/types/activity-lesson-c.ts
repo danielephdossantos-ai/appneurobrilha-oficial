@@ -1,9 +1,9 @@
 export type BNCCArea =
-  | 'linguagens'
-  | 'matematica'
-  | 'ciencias_natureza'
-  | 'ciencias_humanas'
-  | 'ensino_religioso';
+  | "linguagens"
+  | "matematica"
+  | "ciencias_natureza"
+  | "ciencias_humanas"
+  | "ensino_religioso";
 
 export interface ActivityLessonC {
   id: string;
@@ -47,15 +47,23 @@ export interface ActivityLessonC {
       analysis: string[];
       conclusion: string;
       visual_steps?: {
-        build: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren' }>;
+        build: Array<{ text: string; role: "unknown" | "coef" | "number" | "op" | "eq" | "paren" }>;
         steps: Array<{
           id: number;
           action: string;
           action_symbol: string;
           accent: string;
           explanation: string;
-          before: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren'; dim?: boolean; strike?: boolean }>;
-          result: Array<{ text: string; role: 'unknown' | 'coef' | 'number' | 'op' | 'eq' | 'paren' }>;
+          before: Array<{
+            text: string;
+            role: "unknown" | "coef" | "number" | "op" | "eq" | "paren";
+            dim?: boolean;
+            strike?: boolean;
+          }>;
+          result: Array<{
+            text: string;
+            role: "unknown" | "coef" | "number" | "op" | "eq" | "paren";
+          }>;
         }>;
         verification: string;
       };
@@ -64,7 +72,7 @@ export interface ActivityLessonC {
       question: string;
       context?: string;
       options: Array<{
-        letter: 'A' | 'B' | 'C' | 'D';
+        letter: "A" | "B" | "C" | "D";
         text: string;
         isCorrect: boolean;
       }>;

@@ -31,7 +31,10 @@ function ConfigurarHiperfoco() {
   return (
     <Shell>
       <div className="flex items-center gap-3 mb-2">
-        <Link to="/neuro-treino" className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground">
+        <Link
+          to="/neuro-treino"
+          className="flex items-center gap-1 text-sm font-bold text-muted-foreground hover:text-foreground"
+        >
           <ArrowLeft size={16} /> Voltar
         </Link>
       </div>
@@ -50,7 +53,9 @@ function ConfigurarHiperfoco() {
             return (
               <button
                 key={h.id}
-                onClick={() => h.id !== "custom" && setHiperfocoById(h.id as Exclude<HiperfocoId, "custom">)}
+                onClick={() =>
+                  h.id !== "custom" && setHiperfocoById(h.id as Exclude<HiperfocoId, "custom">)
+                }
                 className={`rounded-2xl p-4 border-2 text-left transition-all hover:scale-105 flex flex-col items-center text-center ${
                   ativo
                     ? "border-primary bg-primary/10 shadow-glow"
@@ -59,7 +64,11 @@ function ConfigurarHiperfoco() {
               >
                 <div className="w-16 h-16 mb-3 flex items-center justify-center">
                   {getElementoImg(h.elementos[0]) ? (
-                    <img src={getElementoImg(h.elementos[0])} alt={h.label} className="w-full h-full object-contain drop-shadow-sm" />
+                    <img
+                      src={getElementoImg(h.elementos[0])}
+                      alt={h.label}
+                      className="w-full h-full object-contain drop-shadow-sm"
+                    />
                   ) : null}
                 </div>
                 <div className="font-extrabold text-sm">{h.label}</div>
@@ -73,7 +82,7 @@ function ConfigurarHiperfoco() {
 
         <div className="mt-6 border-t border-border pt-6">
           <label className="block text-sm font-bold mb-3 flex items-center gap-2">
-             Ou escreva um novo hiperfoco:
+            Ou escreva um novo hiperfoco:
           </label>
           <div className="flex gap-2">
             <input
@@ -81,7 +90,7 @@ function ConfigurarHiperfoco() {
               value={custom}
               onChange={(e) => setCustom(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && custom.trim()) {
+                if (e.key === "Enter" && custom.trim()) {
                   setHiperfocoCustom(custom);
                   setCustom("");
                 }
@@ -109,11 +118,17 @@ function ConfigurarHiperfoco() {
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shadow-inner border border-primary/10 overflow-hidden">
                 {getElementoImg(hiperfoco.elementos?.[0]) && (
-                  <img src={getElementoImg(hiperfoco.elementos[0])} alt={hiperfoco.label} className="w-12 h-12 object-contain" />
+                  <img
+                    src={getElementoImg(hiperfoco.elementos[0])}
+                    alt={hiperfoco.label}
+                    className="w-12 h-12 object-contain"
+                  />
                 )}
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-black uppercase tracking-wider text-primary/60">Hiperfoco Ativo</span>
+                <span className="text-xs font-black uppercase tracking-wider text-primary/60">
+                  Hiperfoco Ativo
+                </span>
                 <span className="text-xl font-black text-foreground">{hiperfoco.label}</span>
               </div>
             </div>

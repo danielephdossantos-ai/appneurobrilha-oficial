@@ -8,8 +8,16 @@ export function registerAiRoutes(app: Express): void {
     try {
       const payload = req.body;
       const {
-        mode, child, subject, topic, message, chatHistory,
-        image, mascot, reexplainMethod, bncc_code,
+        mode,
+        child,
+        subject,
+        topic,
+        message,
+        chatHistory,
+        image,
+        mascot,
+        reexplainMethod,
+        bncc_code,
       } = payload;
 
       const mascotName = mascot?.name || "Pip";
@@ -29,10 +37,13 @@ export function registerAiRoutes(app: Express): void {
       }
 
       const AI_API_KEY = process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY;
-      const AI_BASE_URL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || "https://api.openai.com/v1";
+      const AI_BASE_URL =
+        process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || "https://api.openai.com/v1";
 
       if (!AI_API_KEY) {
-        return res.status(500).json({ error: "AI API Key não configurada. Configure OPENAI_API_KEY nos Secrets." });
+        return res
+          .status(500)
+          .json({ error: "AI API Key não configurada. Configure OPENAI_API_KEY nos Secrets." });
       }
 
       let systemPrompt = "";
@@ -60,11 +71,18 @@ export function registerAiRoutes(app: Express): void {
         let tecnicasContext = "";
         if (bncc_code) {
           try {
-            const techs = await db.select({ tecnica: tecnicasPedagogicas }).from(habilidadeTecnica)
-              .leftJoin(tecnicasPedagogicas, eq(habilidadeTecnica.tecnicaId, tecnicasPedagogicas.id))
+            const techs = await db
+              .select({ tecnica: tecnicasPedagogicas })
+              .from(habilidadeTecnica)
+              .leftJoin(
+                tecnicasPedagogicas,
+                eq(habilidadeTecnica.tecnicaId, tecnicasPedagogicas.id),
+              )
               .where(eq(habilidadeTecnica.codigoBncc, bncc_code));
             if (techs.length > 0) {
-              tecnicasContext = "\nTÉCNICAS OBRIGATÓRIAS:\n" + techs.map(t => `- ${t.tecnica?.nome}: ${t.tecnica?.descricao}`).join("\n");
+              tecnicasContext =
+                "\nTÉCNICAS OBRIGATÓRIAS:\n" +
+                techs.map((t) => `- ${t.tecnica?.nome}: ${t.tecnica?.descricao}`).join("\n");
             }
           } catch (_) {}
         }
@@ -80,7 +98,12 @@ export function registerAiRoutes(app: Express): void {
         systemPrompt = `Você é ${mascotName} — PROFESSOR(A) de tarefas via foto. ${mascotPersonaBlock} Respostas curtas, sem emojis. Retorne JSON: materia, ocr_texto, explicacao, passos[], exercicio_similar, video_tema.`;
         userPrompt = [
           { type: "text", text: "Explique como eu faço esta tarefa." },
-          { type: "image_url", image_url: { url: image?.startsWith("data:") ? image : `data:image/jpeg;base64,${image}` } },
+          {
+            type: "image_url",
+            image_url: {
+              url: image?.startsWith("data:") ? image : `data:image/jpeg;base64,${image}`,
+            },
+          },
         ];
       } else if (mode === "amigo-virtual") {
         systemPrompt = `Você é ${mascotName} — AMIGO VIRTUAL da criança. ${mascotPersonaBlock} Frases curtas e acolhedoras. Sem emojis. Máximo 2 linhas. Responda em JSON com campo "response".`;
@@ -113,7 +136,7 @@ export function registerAiRoutes(app: Express): void {
         return res.status(500).json({ error: `AI error ${aiRes.status}` });
       }
 
-      const result = await aiRes.json() as any;
+      const result = (await aiRes.json()) as any;
       const content = result?.choices?.[0]?.message?.content;
       if (!content) return res.status(500).json({ error: "AI returned empty response" });
 

@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { PhonemeData } from '@/data/literacy/phonemes';
+import React from "react";
+import { motion } from "framer-motion";
+import { PhonemeData } from "@/data/literacy/phonemes";
 
 interface PhonemeCardProps {
   phoneme: PhonemeData;
@@ -10,15 +9,15 @@ interface PhonemeCardProps {
   isTEA?: boolean;
 }
 
-export const PhonemeCard: React.FC<PhonemeCardProps> = ({ 
-  phoneme, 
-  onPlaySound, 
+export const PhonemeCard: React.FC<PhonemeCardProps> = ({
+  phoneme,
+  onPlaySound,
   onComplete,
-  isTEA 
+  isTEA,
 }) => {
   return (
     <div className="flex flex-col items-center gap-6">
-      <motion.div 
+      <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => onPlaySound(phoneme.sound)}
@@ -34,7 +33,11 @@ export const PhonemeCard: React.FC<PhonemeCardProps> = ({
         <div className="bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm">
           <h3 className="text-sm font-bold text-slate-400 uppercase mb-2">Exemplo</h3>
           <div className="flex items-center gap-4">
-            <img src={phoneme.imageUrl} alt={phoneme.example} className="w-16 h-16 rounded-lg object-cover" />
+            <img
+              src={phoneme.imageUrl}
+              alt={phoneme.example}
+              className="w-16 h-16 rounded-lg object-cover"
+            />
             <p className="text-2xl font-bold text-slate-700">{phoneme.example}</p>
           </div>
         </div>

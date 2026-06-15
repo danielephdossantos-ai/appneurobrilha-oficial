@@ -1,4 +1,3 @@
-
 export interface Reward {
   id: string;
   type: "badge" | "points" | "item";

@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { ChildProfile } from '../types';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { ChildProfile } from "../types";
 
 interface ChildProfileState {
   activeChildId: string | null;
@@ -18,7 +18,7 @@ export const useChildProfileStore = create<ChildProfileState>()(
       setChildren: (children: ChildProfile[]) => set({ children }),
     }),
     {
-      name: 'child-profile-storage',
-    }
-  )
+      name: "child-profile-storage",
+    },
+  ),
 );

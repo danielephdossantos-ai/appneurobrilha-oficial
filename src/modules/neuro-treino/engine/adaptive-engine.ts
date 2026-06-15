@@ -1,5 +1,5 @@
 // PedagogyEngine import removed during Escola Brilha rebuild
-import { EmotionalEngine } from '@/engines/regulation-engine/emotional-engine';
+import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { AdaptiveEngine as LegacyAdaptiveEngine } from "@/engines/adaptive-engine/engine";
 
 export type NeuroProfile = "Neurotipico" | "TEA" | "TDAH" | "Dislexia";
@@ -7,8 +7,8 @@ export type NeuroProfile = "Neurotipico" | "TEA" | "TDAH" | "Dislexia";
 export class AdaptiveEngine extends LegacyAdaptiveEngine {
   static analyze(profile: NeuroProfile, performance: any) {
     return {
-       recommendedDifficulty: 1,
-       cognitiveLoad: 0.5
+      recommendedDifficulty: 1,
+      cognitiveLoad: 0.5,
     };
   }
 

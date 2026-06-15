@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/database/supabase/client';
-import { useAuth } from '@/modules/auth/hooks/useAuth';
-import { toast } from 'sonner';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "@/database/supabase/client";
+import { useAuth } from "@/modules/auth/hooks/useAuth";
+import { toast } from "sonner";
 
 export interface Mascot {
   id: string;
@@ -46,12 +46,14 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     try {
       setIsLoading(true);
       const { data, error } = await (supabase as any)
-        .from('user_mascots')
-        .select(`
+        .from("user_mascots")
+        .select(
+          `
           *,
           mascot:mascots (*)
-        `)
-        .eq('user_id', user.id);
+        `,
+        )
+        .eq("user_id", user.id);
 
       if (error) throw error;
 
@@ -59,7 +61,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const active = data?.find((m: any) => m.is_active);
       setActiveMascotState((active as any) || null);
     } catch (error) {
-      console.error('Error fetching mascots:', error);
+      console.error("Error fetching mascots:", error);
     } finally {
       setIsLoading(false);
     }
@@ -75,18 +77,18 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     try {
       // First, set all mascots to inactive for this user
       const { error: resetError } = await (supabase as any)
-        .from('user_mascots')
+        .from("user_mascots")
         .update({ is_active: false })
-        .eq('user_id', user.id);
+        .eq("user_id", user.id);
 
       if (resetError) throw resetError;
 
       // Then set the selected mascot as active
       const { error: setActiveError } = await (supabase as any)
-        .from('user_mascots')
+        .from("user_mascots")
         .update({ is_active: true })
-        .eq('user_id', user.id)
-        .eq('mascot_id', mascotId);
+        .eq("user_id", user.id)
+        .eq("mascot_id", mascotId);
 
       if (setActiveError) throw setActiveError;
 
@@ -95,7 +97,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         description: "Seu novo companheiro está pronto!",
       });
     } catch (error) {
-      console.error('Error setting active mascot:', error);
+      console.error("Error setting active mascot:", error);
       toast.error("Erro", {
         description: "Não foi possível trocar o mascote.",
       });
@@ -120,17 +122,17 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       const { error } = await (supabase as any)
-        .from('user_mascots')
-        .update({ 
+        .from("user_mascots")
+        .update({
           experience: finalExp,
-          level: newLevel
+          level: newLevel,
         })
-        .eq('id', activeMascot.id);
+        .eq("id", activeMascot.id);
 
       if (error) throw error;
       await fetchMascots();
     } catch (error) {
-      console.error('Error gaining experience:', error);
+      console.error("Error gaining experience:", error);
     }
   };
 
@@ -139,28 +141,30 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       const { error } = await (supabase as any)
-        .from('user_mascots')
-        .update({ 
-          affinity: Math.min(100, activeMascot.affinity + amount)
+        .from("user_mascots")
+        .update({
+          affinity: Math.min(100, activeMascot.affinity + amount),
         })
-        .eq('id', activeMascot.id);
+        .eq("id", activeMascot.id);
 
       if (error) throw error;
       await fetchMascots();
     } catch (error) {
-      console.error('Error gaining affinity:', error);
+      console.error("Error gaining affinity:", error);
     }
   };
 
   return (
-    <MascotContext.Provider value={{ 
-      activeMascot, 
-      userMascots, 
-      isLoading, 
-      setActiveMascot,
-      gainExperience,
-      gainAffinity
-    }}>
+    <MascotContext.Provider
+      value={{
+        activeMascot,
+        userMascots,
+        isLoading,
+        setActiveMascot,
+        gainExperience,
+        gainAffinity,
+      }}
+    >
       {children}
     </MascotContext.Provider>
   );
@@ -169,7 +173,7 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 export const useMascot = () => {
   const context = useContext(MascotContext);
   if (context === undefined) {
-    throw new Error('useMascot must be used within a MascotProvider');
+    throw new Error("useMascot must be used within a MascotProvider");
   }
   return context;
 };

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CheckCircle2, Circle, Clock, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,9 +26,13 @@ export const RoutineManager: React.FC<RoutineManagerProps> = ({ routine }) => {
               <span className="text-[10px] font-bold text-slate-400 mb-1">{item.time}</span>
               <div className="h-full w-px bg-slate-100 flex-1 min-h-[10px]" />
             </div>
-            <div className={`flex-1 p-3 rounded-xl border transition-all ${item.completed ? 'bg-slate-50 border-slate-100 opacity-60' : 'bg-white border-slate-200 shadow-sm'}`}>
+            <div
+              className={`flex-1 p-3 rounded-xl border transition-all ${item.completed ? "bg-slate-50 border-slate-100 opacity-60" : "bg-white border-slate-200 shadow-sm"}`}
+            >
               <div className="flex items-center justify-between">
-                <span className={`text-sm font-semibold ${item.completed ? 'text-slate-500 line-through' : 'text-slate-800'}`}>
+                <span
+                  className={`text-sm font-semibold ${item.completed ? "text-slate-500 line-through" : "text-slate-800"}`}
+                >
                   {item.activity}
                 </span>
                 {item.completed ? (

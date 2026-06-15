@@ -14,11 +14,7 @@ export class ChildProfileRepository {
   }
 
   async getById(id: string): Promise<ChildProfile | null> {
-    const { data, error } = await supabase
-      .from("children")
-      .select("*")
-      .eq("id", id)
-      .single();
+    const { data, error } = await supabase.from("children").select("*").eq("id", id).single();
 
     if (error) return null;
     return data as unknown as ChildProfile;

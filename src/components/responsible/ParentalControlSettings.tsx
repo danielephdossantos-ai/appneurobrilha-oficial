@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -25,7 +24,9 @@ export const ParentalControlSettings = () => {
             <Clock className="w-5 h-5 text-primary" />
             <CardTitle>Limites de Tempo</CardTitle>
           </div>
-          <CardDescription>Gerencie quanto tempo seu filho pode passar no aplicativo diariamente.</CardDescription>
+          <CardDescription>
+            Gerencie quanto tempo seu filho pode passar no aplicativo diariamente.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
@@ -33,23 +34,17 @@ export const ParentalControlSettings = () => {
               <Label>Limite Diário (minutos)</Label>
               <span className="font-bold text-primary">{timeLimit} min</span>
             </div>
-            <Slider 
-              value={timeLimit} 
-              onValueChange={setTimeLimit} 
-              max={180} 
-              step={5} 
-            />
+            <Slider value={timeLimit} onValueChange={setTimeLimit} max={180} step={5} />
           </div>
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label>Pausas Obrigatórias</Label>
-              <p className="text-xs text-muted-foreground">O sistema sugerirá uma pausa após o intervalo definido.</p>
+              <p className="text-xs text-muted-foreground">
+                O sistema sugerirá uma pausa após o intervalo definido.
+              </p>
             </div>
-            <Switch 
-              checked={mandatoryBreaks} 
-              onCheckedChange={setMandatoryBreaks} 
-            />
+            <Switch checked={mandatoryBreaks} onCheckedChange={setMandatoryBreaks} />
           </div>
 
           {mandatoryBreaks && (
@@ -58,12 +53,7 @@ export const ParentalControlSettings = () => {
                 <Label>Intervalo entre Pausas (minutos)</Label>
                 <span className="font-bold text-primary">{breakInterval} min</span>
               </div>
-              <Slider 
-                value={breakInterval} 
-                onValueChange={setBreakInterval} 
-                max={60} 
-                step={5} 
-              />
+              <Slider value={breakInterval} onValueChange={setBreakInterval} max={60} step={5} />
             </div>
           )}
         </CardContent>

@@ -1,11 +1,11 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Coins, Trophy } from 'lucide-react';
-import { PipPedagogicalGuidance } from './PipPedagogicalGuidance';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Star, Coins, Trophy } from "lucide-react";
+import { PipPedagogicalGuidance } from "./PipPedagogicalGuidance";
 
 interface SoftCelebrationProps {
   isVisible: boolean;
-  type: 'stars' | 'coins' | 'achievement';
+  type: "stars" | "coins" | "achievement";
   amount?: number;
   message?: string;
   onComplete: () => void;
@@ -16,7 +16,7 @@ export const SoftCelebration: React.FC<SoftCelebrationProps> = ({
   type,
   amount,
   message,
-  onComplete
+  onComplete,
 }) => {
   return (
     <AnimatePresence>
@@ -37,23 +37,19 @@ export const SoftCelebration: React.FC<SoftCelebrationProps> = ({
             className="bg-white p-8 rounded-[3rem] shadow-2xl flex flex-col items-center space-y-6 max-w-sm w-full border-4 border-primary/10"
           >
             <PipPedagogicalGuidance stage="celebration" className="scale-125 mb-4" />
-            
+
             <div className="bg-primary/10 p-4 rounded-full">
-              {type === 'stars' && <Star className="w-12 h-12 text-yellow-400 fill-yellow-400" />}
-              {type === 'coins' && <Coins className="w-12 h-12 text-orange-400" />}
-              {type === 'achievement' && <Trophy className="w-12 h-12 text-purple-400" />}
+              {type === "stars" && <Star className="w-12 h-12 text-yellow-400 fill-yellow-400" />}
+              {type === "coins" && <Coins className="w-12 h-12 text-orange-400" />}
+              {type === "achievement" && <Trophy className="w-12 h-12 text-purple-400" />}
             </div>
-            
+
             <h3 className="text-2xl font-bold text-slate-800 text-center">
-              {message || (type === 'achievement' ? 'Nova Conquista!' : 'Muito Bem!')}
+              {message || (type === "achievement" ? "Nova Conquista!" : "Muito Bem!")}
             </h3>
-            
-            {amount && (
-              <div className="text-4xl font-black text-primary">
-                +{amount}
-              </div>
-            )}
-            
+
+            {amount && <div className="text-4xl font-black text-primary">+{amount}</div>}
+
             <p className="text-slate-500 text-center font-bold">
               Cada desafio te deixa mais forte!
             </p>

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useAppState, Hiperfoco } from '@/core/store';
-import { KidCard } from '@/components/ui/KidCard';
-import { KidButton } from '@/components/ui/KidButton';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Sparkles, Check, Trash2, Edit3, Heart } from 'lucide-react';
-import { toast } from 'sonner';
-import { cn } from '@/utils/utils';
+import React, { useState } from "react";
+import { useAppState, Hiperfoco } from "@/core/store";
+import { KidCard } from "@/components/ui/KidCard";
+import { KidButton } from "@/components/ui/KidButton";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, X, Sparkles, Check, Trash2, Edit3, Heart } from "lucide-react";
+import { toast } from "sonner";
+import { cn } from "@/utils/utils";
 
 const HYPERFOCUS_OPTIONS: { value: Hiperfoco; label: string; icon: string }[] = [
   { value: "animais", label: "Animais", icon: "🐾" },
@@ -50,7 +50,7 @@ export const HyperfocusManager: React.FC = () => {
   };
 
   const removeHyperfocus = (focus: Hiperfoco) => {
-    const newList = currentList.filter(f => f !== focus);
+    const newList = currentList.filter((f) => f !== focus);
     updateChild(activeChild.id, { hyperfocus_list: newList });
     toast.info("Interesse removido.");
   };
@@ -64,8 +64,8 @@ export const HyperfocusManager: React.FC = () => {
             Sistema de Hiperfocos
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            {hasHyperfocus 
-              ? "A interface será personalizada com os temas favoritos abaixo." 
+            {hasHyperfocus
+              ? "A interface será personalizada com os temas favoritos abaixo."
               : "A interface usará temas variados e rotativos."}
           </p>
         </div>
@@ -74,7 +74,9 @@ export const HyperfocusManager: React.FC = () => {
             onClick={() => toggleGlobalHyperfocus(true)}
             className={cn(
               "px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
-              hasHyperfocus ? "bg-primary text-white shadow-sm" : "text-muted-foreground hover:bg-muted"
+              hasHyperfocus
+                ? "bg-primary text-white shadow-sm"
+                : "text-muted-foreground hover:bg-muted",
             )}
           >
             Sim
@@ -83,7 +85,9 @@ export const HyperfocusManager: React.FC = () => {
             onClick={() => toggleGlobalHyperfocus(false)}
             className={cn(
               "px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
-              !hasHyperfocus ? "bg-primary text-white shadow-sm" : "text-muted-foreground hover:bg-muted"
+              !hasHyperfocus
+                ? "bg-primary text-white shadow-sm"
+                : "text-muted-foreground hover:bg-muted",
             )}
           >
             Não
@@ -95,13 +99,13 @@ export const HyperfocusManager: React.FC = () => {
         {hasHyperfocus && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4"
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {currentList.map((focus) => {
-                const info = HYPERFOCUS_OPTIONS.find(o => o.value === focus);
+                const info = HYPERFOCUS_OPTIONS.find((o) => o.value === focus);
                 return (
                   <motion.div
                     layout
@@ -125,7 +129,7 @@ export const HyperfocusManager: React.FC = () => {
                   </motion.div>
                 );
               })}
-              
+
               <button
                 onClick={() => setIsAdding(true)}
                 className="flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 transition-all text-center h-full group"
@@ -133,7 +137,9 @@ export const HyperfocusManager: React.FC = () => {
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-1 group-hover:scale-110 transition-transform">
                   <Plus size={20} strokeWidth={3} />
                 </div>
-                <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">Adicionar</span>
+                <span className="text-[10px] font-black text-primary/60 uppercase tracking-widest">
+                  Adicionar
+                </span>
               </button>
             </div>
           </motion.div>
@@ -162,7 +168,10 @@ export const HyperfocusManager: React.FC = () => {
                   <Sparkles size={20} className="text-yellow-500" />
                   Novo Hiperfoco
                 </h4>
-                <button onClick={() => setIsAdding(false)} className="p-2 hover:bg-muted rounded-full transition-colors">
+                <button
+                  onClick={() => setIsAdding(false)}
+                  className="p-2 hover:bg-muted rounded-full transition-colors"
+                >
                   <X size={20} />
                 </button>
               </div>
@@ -177,7 +186,7 @@ export const HyperfocusManager: React.FC = () => {
                         "flex flex-col items-center p-4 rounded-2xl border-2 transition-all text-center",
                         currentList.includes(option.value)
                           ? "bg-muted border-transparent opacity-50 cursor-not-allowed"
-                          : "bg-white border-border hover:border-primary hover:bg-primary/5"
+                          : "bg-white border-border hover:border-primary hover:bg-primary/5",
                       )}
                     >
                       <span className="text-3xl mb-1">{option.icon}</span>
@@ -192,7 +201,9 @@ export const HyperfocusManager: React.FC = () => {
                 </div>
               </div>
               <div className="p-6 bg-muted/30 border-t border-border flex justify-end">
-                <KidButton variant="ghost" onClick={() => setIsAdding(false)}>Fechar</KidButton>
+                <KidButton variant="ghost" onClick={() => setIsAdding(false)}>
+                  Fechar
+                </KidButton>
               </div>
             </motion.div>
           </div>

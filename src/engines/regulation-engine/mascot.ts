@@ -1,6 +1,4 @@
-
 import { Emotion } from "@/engines/regulation-engine/emotional-engine";
-
 
 export interface MascotState {
   name: string;
@@ -14,7 +12,7 @@ export class MascotEngine {
   private static readonly MASCOTS = {
     amigo: { name: "Pip", personality: "acolhedor" },
     mentor: { name: "Pip", personality: "instrutivo" },
-    explorador: { name: "Pip", personality: "energético" }
+    explorador: { name: "Pip", personality: "energético" },
   };
 
   static getMascot(type: keyof typeof MascotEngine.MASCOTS = "amigo"): MascotState {
@@ -24,34 +22,34 @@ export class MascotEngine {
       type,
       currentEmotion: "calmo",
       message: "Olá! Vamos aprender algo novo hoje?",
-      isGuiding: false
+      isGuiding: false,
     };
   }
 
   static processAction(
-    mascot: MascotState, 
-    action: "evolucao" | "erro" | "inatividade" | "inicio_atividade"
+    mascot: MascotState,
+    action: "evolucao" | "erro" | "inatividade" | "inicio_atividade",
   ): Partial<MascotState> {
     switch (action) {
       case "evolucao":
         return {
           currentEmotion: "orgulhoso",
-          message: `Uau! Você completou um grande passo, ${mascot.name} está orgulhoso!`
+          message: `Uau! Você completou um grande passo, ${mascot.name} está orgulhoso!`,
         };
       case "erro":
         return {
           currentEmotion: "frustrado",
-          message: "Não se preocupe, o erro faz parte do aprendizado. Vamos tentar de novo?"
+          message: "Não se preocupe, o erro faz parte do aprendizado. Vamos tentar de novo?",
         };
       case "inatividade":
         return {
           currentEmotion: "distraido",
-          message: "Ainda está por aí? Tenho um desafio legal esperando você!"
+          message: "Ainda está por aí? Tenho um desafio legal esperando você!",
         };
       case "inicio_atividade":
         return {
           isGuiding: true,
-          message: "Siga as instruções e eu te ajudo no caminho!"
+          message: "Siga as instruções e eu te ajudo no caminho!",
         };
       default:
         return {};

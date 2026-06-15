@@ -6,7 +6,6 @@ import { toast } from "sonner";
 export const useCognitiveMemory = (childId?: string) => {
   const queryClient = useQueryClient();
 
-
   const profileQuery = useQuery({
     queryKey: ["cognitive-profile", childId],
     queryFn: () => (childId ? cognitiveMemoryService.getProfile(childId) : null),
@@ -20,27 +19,30 @@ export const useCognitiveMemory = (childId?: string) => {
   });
 
   const updateProfileMutation = useMutation({
-    mutationFn: (updates: Partial<CognitiveProfile>) => 
-      childId ? cognitiveMemoryService.updateProfile(childId, updates) : Promise.reject("No child ID"),
+    mutationFn: (updates: Partial<CognitiveProfile>) =>
+      childId
+        ? cognitiveMemoryService.updateProfile(childId, updates)
+        : Promise.reject("No child ID"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cognitive-profile", childId] });
     },
     onError: (error) => {
       toast.error("Não foi possível salvar as alterações no perfil cognitivo.");
       console.error(error);
-    }
-
+    },
   });
 
   const recordScoresMutation = useMutation({
-    mutationFn: (metrics: CognitiveMetrics) => 
-      childId ? cognitiveMemoryService.recordLongitudinalScores(childId, metrics) : Promise.reject("No child ID"),
+    mutationFn: (metrics: CognitiveMetrics) =>
+      childId
+        ? cognitiveMemoryService.recordLongitudinalScores(childId, metrics)
+        : Promise.reject("No child ID"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["longitudinal-history", childId] });
     },
     onError: (error) => {
       console.error("Error recording longitudinal scores:", error);
-    }
+    },
   });
 
   return {

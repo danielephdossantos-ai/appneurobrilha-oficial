@@ -47,13 +47,26 @@ export const Route = createFileRoute("/jornada-365")({
 
 const CATEGORY_ROUTES: Record<string, string> = {
   "neuro-treino": "/neuro-treino",
-  
 };
 
 type WorldKey =
-  | "dinossauros" | "minecraft" | "carros" | "fazendinha" | "espaco" | "animais"
-  | "herois" | "arte" | "musica" | "princesas" | "trens" | "robos" | "veiculos"
-  | "oceano" | "floresta" | "castelo" | "default";
+  | "dinossauros"
+  | "minecraft"
+  | "carros"
+  | "fazendinha"
+  | "espaco"
+  | "animais"
+  | "herois"
+  | "arte"
+  | "musica"
+  | "princesas"
+  | "trens"
+  | "robos"
+  | "veiculos"
+  | "oceano"
+  | "floresta"
+  | "castelo"
+  | "default";
 
 function mapHiperfocoToWorld(label?: string | null): WorldKey {
   if (!label) return "default";
@@ -66,9 +79,23 @@ function mapHiperfocoToWorld(label?: string | null): WorldKey {
   if (l.includes("music") || l.includes("músic")) return "musica";
   if (l.includes("arte") || l.includes("pint") || l.includes("desenh")) return "arte";
   if (l.includes("carro") || l.includes("auto") || l.includes("pista")) return "carros";
-  if (l.includes("veíc") || l.includes("veic") || l.includes("aviã") || l.includes("avia") || l.includes("barco")) return "veiculos";
+  if (
+    l.includes("veíc") ||
+    l.includes("veic") ||
+    l.includes("aviã") ||
+    l.includes("avia") ||
+    l.includes("barco")
+  )
+    return "veiculos";
   if (l.includes("fazend") || l.includes("campo")) return "fazendinha";
-  if (l.includes("espac") || l.includes("espaç") || l.includes("galá") || l.includes("gala") || l.includes("astro")) return "espaco";
+  if (
+    l.includes("espac") ||
+    l.includes("espaç") ||
+    l.includes("galá") ||
+    l.includes("gala") ||
+    l.includes("astro")
+  )
+    return "espaco";
   if (l.includes("animal") || l.includes("bicho")) return "animais";
   if (l.includes("her") || l.includes("super")) return "herois";
   if (l.includes("ocean") || l.includes("mar") || l.includes("peix")) return "oceano";
@@ -78,23 +105,23 @@ function mapHiperfocoToWorld(label?: string | null): WorldKey {
 }
 
 const WORLD_THEME: Record<WorldKey, { image: string; accent: string; name: string }> = {
-  dinossauros: { image: worldDino,      accent: "ring-amber-300/70",   name: "Mundo Jurassic" },
-  minecraft:   { image: worldMinecraft, accent: "ring-emerald-300/70", name: "Mundo Bloco" },
-  carros:      { image: worldCarros,    accent: "ring-orange-300/70",  name: "Mundo Pista" },
-  fazendinha:  { image: worldFazenda,   accent: "ring-lime-300/70",    name: "Mundo Campo" },
-  espaco:      { image: worldEspaco,    accent: "ring-fuchsia-300/70", name: "Mundo Galáctico" },
-  animais:     { image: worldAnimais,   accent: "ring-amber-300/70",   name: "Mundo Safári" },
-  herois:      { image: worldHerois,    accent: "ring-yellow-300/70",  name: "Mundo Heróis" },
-  arte:        { image: worldArte,      accent: "ring-pink-300/70",    name: "Mundo Arte" },
-  musica:      { image: worldMusica,    accent: "ring-violet-300/70",  name: "Mundo Música" },
-  princesas:   { image: worldPrincesas, accent: "ring-pink-300/70",    name: "Mundo Encantado" },
-  trens:       { image: worldTrens,     accent: "ring-sky-300/70",     name: "Mundo Trilhos" },
-  robos:       { image: worldRobos,     accent: "ring-cyan-300/70",    name: "Mundo Robótico" },
-  veiculos:    { image: worldVeiculos,  accent: "ring-sky-300/70",     name: "Mundo Aventura" },
-  oceano:      { image: worldOceano,    accent: "ring-cyan-300/70",    name: "Mundo Oceano" },
-  floresta:    { image: worldFloresta,  accent: "ring-violet-300/70",  name: "Floresta Encantada" },
-  castelo:     { image: worldCastelo,   accent: "ring-pink-300/70",    name: "Castelo Mágico" },
-  default:     { image: worldDefault,   accent: "ring-white/70",       name: "Mundo Encantado" },
+  dinossauros: { image: worldDino, accent: "ring-amber-300/70", name: "Mundo Jurassic" },
+  minecraft: { image: worldMinecraft, accent: "ring-emerald-300/70", name: "Mundo Bloco" },
+  carros: { image: worldCarros, accent: "ring-orange-300/70", name: "Mundo Pista" },
+  fazendinha: { image: worldFazenda, accent: "ring-lime-300/70", name: "Mundo Campo" },
+  espaco: { image: worldEspaco, accent: "ring-fuchsia-300/70", name: "Mundo Galáctico" },
+  animais: { image: worldAnimais, accent: "ring-amber-300/70", name: "Mundo Safári" },
+  herois: { image: worldHerois, accent: "ring-yellow-300/70", name: "Mundo Heróis" },
+  arte: { image: worldArte, accent: "ring-pink-300/70", name: "Mundo Arte" },
+  musica: { image: worldMusica, accent: "ring-violet-300/70", name: "Mundo Música" },
+  princesas: { image: worldPrincesas, accent: "ring-pink-300/70", name: "Mundo Encantado" },
+  trens: { image: worldTrens, accent: "ring-sky-300/70", name: "Mundo Trilhos" },
+  robos: { image: worldRobos, accent: "ring-cyan-300/70", name: "Mundo Robótico" },
+  veiculos: { image: worldVeiculos, accent: "ring-sky-300/70", name: "Mundo Aventura" },
+  oceano: { image: worldOceano, accent: "ring-cyan-300/70", name: "Mundo Oceano" },
+  floresta: { image: worldFloresta, accent: "ring-violet-300/70", name: "Floresta Encantada" },
+  castelo: { image: worldCastelo, accent: "ring-pink-300/70", name: "Castelo Mágico" },
+  default: { image: worldDefault, accent: "ring-white/70", name: "Mundo Encantado" },
 };
 
 function WorldBackground({ world }: { world: WorldKey }) {
@@ -252,7 +279,13 @@ function Jornada() {
               <Sparkles className="h-4 w-4" /> {theme.name} · Jornada 365
             </div>
             <div className="text-white font-black text-2xl drop-shadow-lg">
-              {hiperfoco ? <>{hiperfoco.emoji} {hiperfoco.label}</> : "Escolha um hiperfoco"}
+              {hiperfoco ? (
+                <>
+                  {hiperfoco.emoji} {hiperfoco.label}
+                </>
+              ) : (
+                "Escolha um hiperfoco"
+              )}
             </div>
           </div>
 
@@ -304,7 +337,7 @@ function Jornada() {
                         ? "border-primary bg-primary/5"
                         : b.status === "done"
                           ? "border-success/30 bg-success/5"
-                          : "border-border bg-card opacity-80"
+                          : "border-border bg-card opacity-80",
                     )}
                   >
                     <div
@@ -312,7 +345,7 @@ function Jornada() {
                         "h-10 w-10 rounded-xl grid place-items-center shrink-0",
                         b.category === "neuro-treino"
                           ? "bg-coral/20 text-coral"
-                          : "bg-success/20 text-success"
+                          : "bg-success/20 text-success",
                       )}
                     >
                       {b.status === "done" ? (
@@ -408,7 +441,7 @@ function DayTrail({
   theme,
 }: {
   currentDay: number;
-  theme: typeof WORLD_THEME[WorldKey];
+  theme: (typeof WORLD_THEME)[WorldKey];
 }) {
   const OFFSETS = [0, 1, 2, 1, 0, -1, -2, -1];
   const totalDays = 365;
@@ -470,7 +503,7 @@ function DayTrail({
                 }}
                 className={cn(
                   "group relative block focus:outline-none",
-                  isLocked && "cursor-not-allowed"
+                  isLocked && "cursor-not-allowed",
                 )}
                 aria-label={`Dia ${day}`}
               >
@@ -478,7 +511,7 @@ function DayTrail({
                   className={cn(
                     "absolute inset-x-2 bottom-0 h-[88%] rounded-full",
                     isLocked ? "bg-slate-500/60" : isDone ? "bg-amber-700" : "bg-primary/80",
-                    "translate-y-[6px] blur-[1px]"
+                    "translate-y-[6px] blur-[1px]",
                   )}
                   aria-hidden
                 />
@@ -495,7 +528,7 @@ function DayTrail({
                         : "bg-gradient-to-b from-white to-white/85",
                     !isLocked && "shadow-[0_8px_0_rgba(0,0,0,0.18),0_14px_22px_rgba(0,0,0,0.25)]",
                     !isLocked && theme.accent,
-                    !isLocked && "ring-4"
+                    !isLocked && "ring-4",
                   )}
                 >
                   {isLocked ? (
@@ -510,7 +543,9 @@ function DayTrail({
                     </div>
                   ) : (
                     <div className="flex flex-col items-center">
-                      <div className="text-[10px] font-extrabold text-primary/70 uppercase tracking-wider">Dia</div>
+                      <div className="text-[10px] font-extrabold text-primary/70 uppercase tracking-wider">
+                        Dia
+                      </div>
                       <div className="text-2xl font-black text-primary leading-none">{day}</div>
                     </div>
                   )}

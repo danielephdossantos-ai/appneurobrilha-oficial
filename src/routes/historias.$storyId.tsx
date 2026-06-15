@@ -107,7 +107,8 @@ function StoryReader() {
 
   const allAnswered = questions.every((q) => showResult[q.id]);
   const correctCount = questions.filter((q) => answers[q.id] === q.correct_answer).length;
-  const finalScore = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 100;
+  const finalScore =
+    questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 100;
 
   // Render highlighted text
   const highlighted = useMemo(() => {
@@ -140,7 +141,10 @@ function StoryReader() {
     <div className="min-h-screen bg-gradient-to-b from-[#F8F7FF] to-[#EEF1FF] pb-24">
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#6C5CE7]/10">
         <div className="max-w-2xl mx-auto px-5 py-4 flex items-center gap-3">
-          <button onClick={() => navigate({ to: "/historias" })} className="p-2 rounded-full hover:bg-[#6C5CE7]/10">
+          <button
+            onClick={() => navigate({ to: "/historias" })}
+            className="p-2 rounded-full hover:bg-[#6C5CE7]/10"
+          >
             <ArrowLeft className="w-6 h-6 text-[#6C5CE7]" />
           </button>
           <div className="flex-1 min-w-0">
@@ -294,7 +298,9 @@ function StoryReader() {
                 )}
                 <div className="mt-4 inline-flex items-center gap-2 bg-[#FFD93D]/20 px-4 py-2 rounded-full">
                   <span className="text-2xl">🪙</span>
-                  <span className="font-black text-[#6C5CE7]">+{Math.max(5, Math.round(finalScore / 10))} BrilhoCoins</span>
+                  <span className="font-black text-[#6C5CE7]">
+                    +{Math.max(5, Math.round(finalScore / 10))} BrilhoCoins
+                  </span>
                 </div>
               </div>
 

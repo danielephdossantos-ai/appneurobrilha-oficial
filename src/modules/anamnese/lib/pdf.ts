@@ -52,7 +52,8 @@ export function generateAnamnesePDF(args: {
   doc.setFont("helvetica", "bold");
   doc.text("AVISO IMPORTANTE", 18, y + 6);
   doc.setFont("helvetica", "normal");
-  const aviso = "Este aplicativo NÃO realiza diagnóstico clínico. Os resultados são apenas indicativos e não substituem avaliação profissional especializada.";
+  const aviso =
+    "Este aplicativo NÃO realiza diagnóstico clínico. Os resultados são apenas indicativos e não substituem avaliação profissional especializada.";
   doc.text(doc.splitTextToSize(aviso, pageW - 36), 18, y + 11);
   y += 24;
 
@@ -114,7 +115,10 @@ export function generateAnamnesePDF(args: {
     .sort((a, b) => scores[b] - scores[a]);
 
   if (focus.length > 0) {
-    if (y > 240) { doc.addPage(); y = 20; }
+    if (y > 240) {
+      doc.addPage();
+      y = 20;
+    }
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text("Áreas de maior atenção", 14, y);
@@ -129,7 +133,10 @@ export function generateAnamnesePDF(args: {
   }
 
   // Recomendações
-  if (y > 220) { doc.addPage(); y = 20; }
+  if (y > 220) {
+    doc.addPage();
+    y = 20;
+  }
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
   doc.text("Recomendações educacionais", 14, y);
@@ -154,7 +161,10 @@ export function generateAnamnesePDF(args: {
 
   // Encaminhamento profissional
   if (needsProfessionalReferral(risk)) {
-    if (y > 250) { doc.addPage(); y = 20; }
+    if (y > 250) {
+      doc.addPage();
+      y = 20;
+    }
     doc.setFillColor(254, 226, 226);
     doc.rect(14, y, pageW - 28, 22, "F");
     doc.setFontSize(10);
@@ -163,7 +173,8 @@ export function generateAnamnesePDF(args: {
     doc.text("Orientação: busca de profissionais", 18, y + 6);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
-    const msg = "Os indicadores apresentados sugerem que uma avaliação profissional especializada (neuropediatra, psicólogo, psicopedagogo, fonoaudiólogo ou terapeuta ocupacional) pode beneficiar o desenvolvimento da criança.";
+    const msg =
+      "Os indicadores apresentados sugerem que uma avaliação profissional especializada (neuropediatra, psicólogo, psicopedagogo, fonoaudiólogo ou terapeuta ocupacional) pode beneficiar o desenvolvimento da criança.";
     doc.text(doc.splitTextToSize(msg, pageW - 36), 18, y + 12);
     doc.setTextColor(0, 0, 0);
     y += 28;

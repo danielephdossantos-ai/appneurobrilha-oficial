@@ -4,11 +4,7 @@ import type { Story, StoryPage, StoryQuestion } from "../types";
 
 const db = supabase as any;
 
-export function useStories(filters?: {
-  theme?: string;
-  age?: number;
-  level?: string;
-}) {
+export function useStories(filters?: { theme?: string; age?: number; level?: string }) {
   return useQuery({
     queryKey: ["stories", filters],
     queryFn: async (): Promise<Story[]> => {

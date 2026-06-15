@@ -11,7 +11,7 @@ export class PedagogicalEngine {
     currentMastery: MasteryNode,
     analysis: AdaptiveAnalysis,
     score: number,
-    repeatedErrors: number = 0
+    repeatedErrors: number = 0,
   ): MasteryNode {
     let newProgress = currentMastery.progress;
     let newStatus = currentMastery.status;
@@ -35,49 +35,47 @@ export class PedagogicalEngine {
       ...currentMastery,
       progress: Math.max(0, newProgress),
       status: newStatus,
-      lastAttempt: new Date()
+      lastAttempt: new Date(),
     };
   }
 
   static getNextSkills(
     allSkills: Skill[],
     mastery: Record<string, MasteryNode>,
-    currentGrade: string
+    currentGrade: string,
   ): Skill[] {
-    return allSkills.filter(skill => {
+    return allSkills.filter((skill) => {
       // Mesma série
       if (skill.grade !== currentGrade) return false;
-      
+
       // Não dominada
       const skillMastery = mastery[skill.id];
       if (skillMastery?.status === "dominado") return false;
 
       // Pré-requisitos atendidos
-      return skill.prerequisites.every(preId => 
-        mastery[preId]?.status === "dominado"
-      );
+      return skill.prerequisites.every((preId) => mastery[preId]?.status === "dominado");
     });
   }
 
   static getRecoveryPath(
     skill: Skill,
-    analysis: AdaptiveAnalysis
+    analysis: AdaptiveAnalysis,
   ): { strategy: string; focus: string } {
     if (analysis.frustration > 0.6) {
       return {
         strategy: "Fragmentação de tarefa",
-        focus: "Redução de carga cognitiva e reforço positivo intenso"
+        focus: "Redução de carga cognitiva e reforço positivo intenso",
       };
     }
     if (analysis.fatigue > 0.7) {
       return {
         strategy: "Pausa lúdica",
-        focus: "Recuperação sensorial antes de retomar"
+        focus: "Recuperação sensorial antes de retomar",
       };
     }
     return {
       strategy: "Reforço paralelo",
-      focus: "Abordagem multi-sensorial da mesma habilidade"
+      focus: "Abordagem multi-sensorial da mesma habilidade",
     };
   }
 }

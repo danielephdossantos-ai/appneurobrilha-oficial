@@ -23,32 +23,32 @@ import pipGen from "@/assets/hiperfocos/sem-hiperfoco/pip-gen.png";
 
 export const ELEMENTO_IMG: Record<string, string> = {
   // Minecraft
-  "STEVE": steve,
-  "ALEX": alex,
-  "CREEPER": creeper,
-  
+  STEVE: steve,
+  ALEX: alex,
+  CREEPER: creeper,
+
   // Dinossauros
   "T-REX": trex,
-  "TRICERÁTOPS": triceratops,
-  "VELOCIRAPTOR": velociraptor,
-  
+  TRICERÁTOPS: triceratops,
+  VELOCIRAPTOR: velociraptor,
+
   // Heróis
   "SUPER-HERÓI": heroi,
-  "HEROÍNA": heroina,
+  HEROÍNA: heroina,
   "ROBÔ-AMIGO": robo,
-  
+
   // Animais
-  "LEÃO": leao,
-  "ELEFANTE": elefante,
-  "CORUJA": coruja,
-  
+  LEÃO: leao,
+  ELEFANTE: elefante,
+  CORUJA: coruja,
+
   // Carros
   "CARRO DE CORRIDA": carroCorrida,
-  "CAMINHÃO": caminhao,
-  "TRATOR": trator,
-  
+  CAMINHÃO: caminhao,
+  TRATOR: trator,
+
   // Fallback
-  "PIP": pipGen,
+  PIP: pipGen,
 };
 
 export function getElementoImg(nome: string): string | undefined {

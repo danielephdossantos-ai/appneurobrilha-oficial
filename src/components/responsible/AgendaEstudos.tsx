@@ -1,9 +1,18 @@
-
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import { Card, Pill } from "@/components/Layout";
-import { Calendar, Plus, Trash2, CheckCircle2, AlertCircle, Clock, BookOpen, Calculator, Pencil } from "lucide-react";
+import {
+  Calendar,
+  Plus,
+  Trash2,
+  CheckCircle2,
+  AlertCircle,
+  Clock,
+  BookOpen,
+  Calculator,
+  Pencil,
+} from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -21,7 +30,7 @@ export interface AgendaItem {
   topic: string;
   description: string;
   exam_date: string;
-  type: 'prova' | 'trabalho' | 'exercicio' | 'estudo' | 'outro';
+  type: "prova" | "trabalho" | "exercicio" | "estudo" | "outro";
   completed: boolean;
   child_id?: string;
 }
@@ -31,13 +40,13 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newTopic, setNewTopic] = useState("");
   const [newDate, setNewDate] = useState("");
-  const [newType, setNewType] = useState<AgendaItem['type']>('prova');
+  const [newType, setNewType] = useState<AgendaItem["type"]>("prova");
   const { sendNotification } = useNotifications();
 
   // Dados locais (Offline-first)
   const localAgenda = useLiveQuery(
-    () => db.records.where({ type: 'study_agenda' }).toArray(),
-    [childId]
+    () => db.records.where({ type: "study_agenda" }).toArray(),
+    [childId],
   );
 
   const { data: agenda = [], isLoading } = useQuery({
@@ -49,16 +58,16 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
           .select("*")
           .eq("child_id", childId)
           .order("exam_date", { ascending: true });
-        
+
         if (error) throw error;
 
         // Sincronizar cache local com dados remotos
-        for (const item of (data || [])) {
+        for (const item of data || []) {
           await db.records.put({
             id: item.id,
-            type: 'study_agenda',
+            type: "study_agenda",
             data: item,
-            updatedAt: Date.now()
+            updatedAt: Date.now(),
           });
         }
 
@@ -66,8 +75,8 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       } catch (error) {
         console.warn("[AgendaEstudos] Servidor inacessível, usando cache local.");
         return (localAgenda || [])
-          .map(r => r.data)
-          .filter(d => d.child_id === childId) as AgendaItem[];
+          .map((r) => r.data)
+          .filter((d) => d.child_id === childId) as AgendaItem[];
       }
     },
   });
@@ -78,21 +87,21 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
         id: crypto.randomUUID(),
         child_id: childId,
         topic: newTopic,
-        exam_date: newDate || new Date().toISOString().split('T')[0],
+        exam_date: newDate || new Date().toISOString().split("T")[0],
         type: newType,
-        completed: false
+        completed: false,
       };
 
       // Persistência Offline Imediata
-      await OfflineEngine.queueAction('study_agenda_upsert', newItem);
-      
+      await OfflineEngine.queueAction("study_agenda_upsert", newItem);
+
       // Enviar notificação para a criança (se online)
       if (navigator.onLine) {
         sendNotification({
           child_id: childId,
           title: `Novo item na sua Agenda!`,
           message: `Mamãe adicionou um(a) ${newType} de ${newTopic}. Vamos nos preparar?`,
-          type: 'estudo'
+          type: "estudo",
         });
       }
     },
@@ -102,22 +111,22 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       setNewTopic("");
       setNewDate("");
       toast.success("Estudo agendado com sucesso!");
-    }
+    },
   });
 
   const toggleMutation = useMutation({
-    mutationFn: async ({ id, completed }: { id: string, completed: boolean }) => {
-      const item = agenda.find(i => i.id === id);
+    mutationFn: async ({ id, completed }: { id: string; completed: boolean }) => {
+      const item = agenda.find((i) => i.id === id);
       if (!item) return;
 
       const updatedItem = { ...item, completed };
 
       // Persistência Offline Imediata
-      await OfflineEngine.queueAction('study_agenda_upsert', updatedItem);
+      await OfflineEngine.queueAction("study_agenda_upsert", updatedItem);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
-    }
+    },
   });
 
   const deleteMutation = useMutation({
@@ -126,25 +135,26 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
       // Simplificando: o sync-engine poderia tratar delete se enviarmos um flag.
       // Por agora, deletamos localmente e tentamos no remoto.
       await db.records.delete(id);
-      
-      const { error } = await supabase
-        .from("study_agenda")
-        .delete()
-        .eq("id", id);
+
+      const { error } = await supabase.from("study_agenda").delete().eq("id", id);
       if (error && navigator.onLine) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["study_agenda", childId] });
       toast.info("Item removido da agenda.");
-    }
+    },
   });
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'prova': return <AlertCircle className="h-4 w-4 text-red-500" />;
-      case 'trabalho': return <BookOpen className="h-4 w-4 text-purple-500" />;
-      case 'exercicio': return <Calculator className="h-4 w-4 text-blue-500" />;
-      default: return <Clock className="h-4 w-4 text-slate-500" />;
+      case "prova":
+        return <AlertCircle className="h-4 w-4 text-red-500" />;
+      case "trabalho":
+        return <BookOpen className="h-4 w-4 text-purple-500" />;
+      case "exercicio":
+        return <Calculator className="h-4 w-4 text-blue-500" />;
+      default:
+        return <Clock className="h-4 w-4 text-slate-500" />;
     }
   };
 
@@ -156,13 +166,15 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
             <Calendar className="h-5 w-5 text-indigo-600" />
             Agenda de Estudos (Mãe)
           </h3>
-          <p className="text-sm text-slate-500 mt-1">Defina o que a criança precisa estudar esta semana.</p>
+          <p className="text-sm text-slate-500 mt-1">
+            Defina o que a criança precisa estudar esta semana.
+          </p>
         </div>
-        <button 
+        <button
           onClick={() => setIsAdding(!isAdding)}
           className="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition-colors"
         >
-          <Plus className={`h-5 w-5 transition-transform ${isAdding ? 'rotate-45' : ''}`} />
+          <Plus className={`h-5 w-5 transition-transform ${isAdding ? "rotate-45" : ""}`} />
         </button>
       </div>
 
@@ -185,7 +197,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
               />
             </div>
             <div className="flex items-center gap-2">
-              <select 
+              <select
                 className="flex-1 px-4 py-2 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                 value={newType}
                 onChange={(e) => setNewType(e.target.value as any)}
@@ -195,7 +207,7 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
                 <option value="exercicio">Exercício</option>
                 <option value="estudo">Estudo Regular</option>
               </select>
-              <button 
+              <button
                 disabled={!newTopic || addMutation.isPending}
                 onClick={() => addMutation.mutate()}
                 className="bg-indigo-600 text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-indigo-700 disabled:opacity-50"
@@ -212,41 +224,52 @@ export function AgendaEstudos({ childId }: AgendaEstudosProps) {
               <p className="text-sm">Nenhum estudo agendado para esta semana.</p>
             </div>
           )}
-          
+
           {agenda.map((item) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={`group flex items-center gap-4 p-4 rounded-2xl border transition-all ${
-                item.completed 
-                ? 'bg-slate-50 border-slate-100 opacity-60' 
-                : 'bg-white border-slate-200 hover:border-indigo-200 hover:shadow-sm'
+                item.completed
+                  ? "bg-slate-50 border-slate-100 opacity-60"
+                  : "bg-white border-slate-200 hover:border-indigo-200 hover:shadow-sm"
               }`}
             >
-              <button 
+              <button
                 onClick={() => toggleMutation.mutate({ id: item.id, completed: !item.completed })}
                 className={`h-6 w-6 rounded-full border-2 flex items-center justify-center transition-colors ${
-                  item.completed ? 'bg-green-500 border-green-500 text-white' : 'border-slate-300 hover:border-indigo-400'
+                  item.completed
+                    ? "bg-green-500 border-green-500 text-white"
+                    : "border-slate-300 hover:border-indigo-400"
                 }`}
               >
                 {item.completed && <CheckCircle2 className="h-4 w-4" />}
               </button>
-              
+
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-slate-800 truncate">{item.topic}</span>
-                  <Pill tone={item.type === 'prova' ? 'danger' : 'info'} className="text-[10px] uppercase py-0 px-1.5 h-auto">
+                  <Pill
+                    tone={item.type === "prova" ? "danger" : "info"}
+                    className="text-[10px] uppercase py-0 px-1.5 h-auto"
+                  >
                     {item.type}
                   </Pill>
                 </div>
                 <div className="flex items-center gap-3 mt-0.5 text-[11px] text-slate-500">
                   <div className="flex items-center gap-1">
                     {getIcon(item.type)}
-                    <span>{item.exam_date ? format(new Date(item.exam_date + 'T12:00:00'), "dd 'de' MMMM", { locale: ptBR }) : 'Sem data'}</span>
+                    <span>
+                      {item.exam_date
+                        ? format(new Date(item.exam_date + "T12:00:00"), "dd 'de' MMMM", {
+                            locale: ptBR,
+                          })
+                        : "Sem data"}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={() => deleteMutation.mutate(item.id)}
                 className="opacity-0 group-hover:opacity-100 h-8 w-8 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all flex items-center justify-center"
               >

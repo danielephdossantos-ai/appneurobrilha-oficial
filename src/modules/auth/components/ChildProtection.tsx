@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Lock } from 'lucide-react';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Lock } from "lucide-react";
 
 interface ChildProtectionProps {
   onSuccess: () => void;
@@ -15,7 +22,7 @@ export const ChildProtection: React.FC<ChildProtectionProps> = ({
   onSuccess,
   onCancel,
   title = "Área Restrita aos Pais",
-  description = "Para sua segurança, resolva esta conta matemática simples para provar que você é um adulto."
+  description = "Para sua segurança, resolva esta conta matemática simples para provar que você é um adulto.",
 }) => {
   const [num1] = useState(Math.floor(Math.random() * 10) + 5);
   const [num2] = useState(Math.floor(Math.random() * 10) + 5);
@@ -55,7 +62,11 @@ export const ChildProtection: React.FC<ChildProtectionProps> = ({
               className={`text-center text-xl h-12 ${error ? "border-destructive shake" : ""}`}
               autoFocus
             />
-            {error && <p className="text-xs text-destructive text-center">Resposta incorreta. Tente novamente.</p>}
+            {error && (
+              <p className="text-xs text-destructive text-center">
+                Resposta incorreta. Tente novamente.
+              </p>
+            )}
           </form>
         </CardContent>
         <CardFooter className="flex gap-2">

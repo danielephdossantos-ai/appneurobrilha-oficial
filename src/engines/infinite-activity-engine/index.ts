@@ -1,4 +1,3 @@
-
 import { BNCCEngine } from "./bncc-engine";
 import { TemplateEngine } from "./template-engine";
 import { RandomizerEngine } from "./randomizer-engine";
@@ -7,7 +6,6 @@ import { CognitiveAdaptationEngine } from "./cognitive-adaptation-engine";
 import { PedagogicalValidationEngine } from "./validation-engine";
 import { GeneratedActivity } from "./types";
 import { NeuroAdjustment } from "../neuro-engine/types";
-
 
 export interface InfiniteEngineContext {
   childId: string;
@@ -32,14 +30,19 @@ export class InfiniteActivityEngine {
       validation = PedagogicalValidationEngine.validate(activity, context);
 
       if (!validation.isValid) {
-        console.warn(`[InfiniteActivityEngine] Rejeição pedagógica na tentativa ${attempts}:`, validation.errors);
+        console.warn(
+          `[InfiniteActivityEngine] Rejeição pedagógica na tentativa ${attempts}:`,
+          validation.errors,
+        );
       }
     } while (!validation.isValid && attempts < this.MAX_ATTEMPTS);
 
     if (!validation.isValid) {
-      console.error("[InfiniteActivityEngine] Falha ao gerar atividade válida após 5 tentativas. Retornando fallback.");
+      console.error(
+        "[InfiniteActivityEngine] Falha ao gerar atividade válida após 5 tentativas. Retornando fallback.",
+      );
       // Fallback básico garantido
-      return activity; 
+      return activity;
     }
 
     return activity;
@@ -49,20 +52,30 @@ export class InfiniteActivityEngine {
     // 1. Get BNCC Skills for the grade
     const skills = BNCCEngine.getSkillsByLevel(context.grade);
     if (!skills || skills.length === 0) {
-      console.warn(`[InfiniteActivityEngine] No skills found for grade ${context.grade}, using fallback.`);
+      console.warn(
+        `[InfiniteActivityEngine] No skills found for grade ${context.grade}, using fallback.`,
+      );
     }
-    const skill = (skills && skills.length > 0) 
-      ? skills[Math.floor(Math.random() * skills.length)] 
-      : { code: "EF01MA01", description: "Contagem básica" };
+    const skill =
+      skills && skills.length > 0
+        ? skills[Math.floor(Math.random() * skills.length)]
+        : { code: "EF01MA01", description: "Contagem básica" };
 
     // 2. Find suitable templates
     const templates = TemplateEngine.findTemplatesBySkill(skill.code, context.age);
-    const template = (templates && templates.length > 0) 
-      ? TemplateEngine.getRandomTemplate(templates) 
-      : TemplateEngine.findTemplatesBySkill("EF01MA01", context.age)[0] || { id: "temp_fallback", type: "selection" };
+    const template =
+      templates && templates.length > 0
+        ? TemplateEngine.getRandomTemplate(templates)
+        : TemplateEngine.findTemplatesBySkill("EF01MA01", context.age)[0] || {
+            id: "temp_fallback",
+            type: "selection",
+          };
 
     // 3. Calculate Difficulty
-    const difficulty = DifficultyEngine.calculateDifficulty(context.previousPerformance, context.adjustments);
+    const difficulty = DifficultyEngine.calculateDifficulty(
+      context.previousPerformance,
+      context.adjustments,
+    );
 
     // 4. Randomize Content
     const baseContent = RandomizerEngine.generateContent(template, difficulty);
@@ -81,9 +94,8 @@ export class InfiniteActivityEngine {
       reward: {
         stars: difficulty === "easy" ? 5 : difficulty === "medium" ? 10 : 20,
         coins: difficulty === "easy" ? 10 : difficulty === "medium" ? 20 : 40,
-        xp: difficulty === "easy" ? 50 : 100
-      }
+        xp: difficulty === "easy" ? 50 : 100,
+      },
     };
   }
 }
-

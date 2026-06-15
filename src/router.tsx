@@ -15,7 +15,7 @@ export const getRouter = () => {
   });
 
   // Only persist on the client side
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     persistQueryClient({
       queryClient,
       persister,

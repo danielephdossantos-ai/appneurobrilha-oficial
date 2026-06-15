@@ -1,4 +1,3 @@
-
 import { NeuroAdjustment } from "../neuro-engine/types";
 import { GeneratedActivity } from "./types";
 
@@ -6,7 +5,7 @@ export class CognitiveAdaptationEngine {
   static apply(activity: any, adjustments: NeuroAdjustment): any {
     if (!activity) return { question: "Atividade indisponível" };
     const adapted = { ...activity };
-    
+
     // 1. Visual adaptation
     if (adjustments?.visualComplexity === "low") {
       adapted.visualStyle = "minimalist";
@@ -23,7 +22,7 @@ export class CognitiveAdaptationEngine {
       adapted.maxOptions = Math.min(adapted.maxOptions || 4, 3);
       adapted.hideBackgroundElements = true;
     }
-    
+
     // 3. Pacing and Audio
     if (adjustments?.audioAdaptation) {
       adapted.audioPacing = adjustments.audioAdaptation.pacing || "normal";

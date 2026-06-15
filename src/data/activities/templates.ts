@@ -1,4 +1,3 @@
-
 import { ActivityTemplate } from "@/engines/pedagogical-engine/types";
 
 export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
@@ -10,9 +9,9 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
     instruction: "Quantas frutas você vê?",
     baseDifficulty: "easy",
     contentPool: ["ei-001", "ei-002"],
-    requiredSkills: ["EI03ET07"]
+    requiredSkills: ["EI03ET07"],
   },
-  
+
   // 1º Ano
   {
     id: "tpl-ef1-phonics-1",
@@ -21,7 +20,7 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
     instruction: "Qual é esta palavra?",
     baseDifficulty: "easy",
     contentPool: ["ef1-001", "ef1-002"],
-    requiredSkills: ["EF01LP02"]
+    requiredSkills: ["EF01LP02"],
   },
 
   // 3º Ano
@@ -32,7 +31,7 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
     instruction: "Leia a frase em voz alta",
     baseDifficulty: "medium",
     contentPool: ["ef3-001"],
-    requiredSkills: ["EF03LP01"]
+    requiredSkills: ["EF03LP01"],
   },
 
   // 5º Ano
@@ -43,7 +42,7 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
     instruction: "Sobre o que fala o texto?",
     baseDifficulty: "hard",
     contentPool: ["ef5-001"],
-    requiredSkills: ["EF05LP01"]
+    requiredSkills: ["EF05LP01"],
   },
 
   // 9º Ano
@@ -54,6 +53,6 @@ export const ACTIVITY_TEMPLATES: ActivityTemplate[] = [
     instruction: "Resolva a equação de segundo grau",
     baseDifficulty: "hard",
     contentPool: ["ef9-001"],
-    requiredSkills: ["EF09MA01"]
-  }
+    requiredSkills: ["EF09MA01"],
+  },
 ];

@@ -1,13 +1,10 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { MascotState, MascotEngine } from "@/engines/regulation-engine/mascot";
 import { Emotion, EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { SimpleMascotRenderer } from "@/components/rewards/SimpleMascotRenderer";
 
-import { 
-  MessageCircle,
-} from 'lucide-react';
-import { cn } from '@/utils/utils';
+import { MessageCircle } from "lucide-react";
+import { cn } from "@/utils/utils";
 
 interface MascotProps {
   type?: "amigo" | "mentor" | "explorador";
@@ -16,23 +13,22 @@ interface MascotProps {
   className?: string;
 }
 
-
-export const Mascot: React.FC<MascotProps> = ({ 
-  type = "amigo", 
+export const Mascot: React.FC<MascotProps> = ({
+  type = "amigo",
   emotion = "calmo",
   customMessage,
-  className
+  className,
 }) => {
   const [state, setState] = useState<MascotState>(MascotEngine.getMascot(type));
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       currentEmotion: emotion,
-      message: customMessage || prev.message
+      message: customMessage || prev.message,
     }));
-    
+
     setIsAnimating(true);
     const timer = setTimeout(() => setIsAnimating(false), 1000);
     return () => clearTimeout(timer);
@@ -40,7 +36,7 @@ export const Mascot: React.FC<MascotProps> = ({
 
   const getMascotEmoji = (): string => {
     switch (type) {
-      case "mentor": 
+      case "mentor":
         return "🦁";
       case "explorador":
         return "🤖";
@@ -51,26 +47,30 @@ export const Mascot: React.FC<MascotProps> = ({
 
   const getAnimation = () => {
     switch (emotion) {
-      case "orgulhoso": return "happy";
-      case "focado": return "bounce";
-      case "frustrado": return "idle";
-      default: return "idle";
+      case "orgulhoso":
+        return "happy";
+      case "focado":
+        return "bounce";
+      case "frustrado":
+        return "idle";
+      default:
+        return "idle";
     }
   };
 
-
   return (
-    <div className={cn("flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl", className)}>
+    <div
+      className={cn(
+        "flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl",
+        className,
+      )}
+    >
       <div className="relative">
         <div className="absolute -inset-2 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 rounded-full blur-xl opacity-50" />
         <div className="relative z-10 p-0 bg-transparent rounded-full border-none shadow-none">
-          <SimpleMascotRenderer 
-            emoji={getMascotEmoji()} 
-            size={120} 
-          />
+          <SimpleMascotRenderer emoji={getMascotEmoji()} size={120} />
         </div>
 
-        
         {state.isGuiding && (
           <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground p-1 rounded-full animate-pulse">
             <MessageCircle size={16} />
@@ -89,15 +89,15 @@ export const Mascot: React.FC<MascotProps> = ({
 
       <div className="flex gap-1 mt-2">
         {[1, 2, 3].map((i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className={cn(
               "h-1 w-8 rounded-full bg-muted-foreground/20 overflow-hidden",
-              emotion === "orgulhoso" && i === 1 && "bg-yellow-500/50"
+              emotion === "orgulhoso" && i === 1 && "bg-yellow-500/50",
             )}
           >
             {emotion === "orgulhoso" && i <= 2 && (
-              <div className="h-full bg-yellow-500 animate-progress" style={{ width: '100%' }} />
+              <div className="h-full bg-yellow-500 animate-progress" style={{ width: "100%" }} />
             )}
           </div>
         ))}

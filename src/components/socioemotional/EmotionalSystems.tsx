@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { SOCIOEMOTIONAL_SYSTEM } from '../../data/socioemotional';
+import React from "react";
+import { motion } from "framer-motion";
+import { SOCIOEMOTIONAL_SYSTEM } from "../../data/socioemotional";
 
 export const EmotionalCheckIn = ({ onSelect }: { onSelect: (id: string) => void }) => {
   return (
@@ -9,7 +8,7 @@ export const EmotionalCheckIn = ({ onSelect }: { onSelect: (id: string) => void 
       <h2 className="text-3xl font-black text-indigo-900 text-center mb-10">
         {SOCIOEMOTIONAL_SYSTEM.dailyCheckIn.title}
       </h2>
-      
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {SOCIOEMOTIONAL_SYSTEM.emotions.map((emotion) => (
           <motion.button
@@ -39,7 +38,7 @@ export const BreathingExercise = ({ onComplete }: { onComplete: () => void }) =>
         transition={{
           duration: 4,
           repeat: 3,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
         onAnimationComplete={() => onComplete()}
         className="w-48 h-48 bg-teal-400 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(45,212,191,0.5)]"

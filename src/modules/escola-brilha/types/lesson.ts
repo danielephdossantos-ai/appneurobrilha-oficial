@@ -1,27 +1,26 @@
-export type BNCC_Field = 
-  | 'escuta_fala' // Escuta, Fala, Pensamento e Imaginação
-  | 'espacos_tempos' // Espaços, Tempos, Quantidades, Relações e Transformações
-  | 'corpo_gestos' // Corpo, Gestos e Movimentos
-  | 'tracos_sons' // Traços, Sons, Cores e Formas
-  | 'eu_outro_nos' // O Eu, o Outro e o Nós
-  | 'lingua_portuguesa'
-  | 'matematica';
+export type BNCC_Field =
+  | "escuta_fala" // Escuta, Fala, Pensamento e Imaginação
+  | "espacos_tempos" // Espaços, Tempos, Quantidades, Relações e Transformações
+  | "corpo_gestos" // Corpo, Gestos e Movimentos
+  | "tracos_sons" // Traços, Sons, Cores e Formas
+  | "eu_outro_nos" // O Eu, o Outro e o Nós
+  | "lingua_portuguesa"
+  | "matematica";
 
-export type LessonPhase = 
-
-  | 'explanation' 
-  | 'demonstration' 
-  | 'guided_training' 
-  | 'practice' 
-  | 'challenge' 
-  | 'mastery' 
-  | 'spaced_review';
+export type LessonPhase =
+  | "explanation"
+  | "demonstration"
+  | "guided_training"
+  | "practice"
+  | "challenge"
+  | "mastery"
+  | "spaced_review";
 
 export interface LessonStep {
   id: string;
   phase: LessonPhase;
-  type: 'explanation' | 'interaction' | 'demonstration';
-  mascot: 'pip' | 'pipa';
+  type: "explanation" | "interaction" | "demonstration";
+  mascot: "pip" | "pipa";
   speech: string;
   elements?: LessonElement[];
   interaction?: LessonInteraction;
@@ -31,15 +30,15 @@ export interface LessonStep {
 
 export interface LessonElement {
   id: string;
-  type: 'image' | 'icon' | 'text' | 'shape';
+  type: "image" | "icon" | "text" | "shape";
   content: string;
   position: { x: number; y: number };
-  animation: 'fade' | 'bounce' | 'slide' | 'pop';
+  animation: "fade" | "bounce" | "slide" | "pop";
   delay: number;
 }
 
 export interface LessonInteraction {
-  type: 'choice' | 'drag' | 'click';
+  type: "choice" | "drag" | "click";
   options?: string[];
   correctAnswer?: string;
   hint?: string;
@@ -60,4 +59,3 @@ export interface Lesson {
   skill_bncc?: string;
   steps: LessonStep[];
 }
-

@@ -27,20 +27,23 @@ export function ParentModeProvider({ children }: { children: React.ReactNode }) 
     }
   }, []);
 
-  const value = useMemo<ParentModeContextValue>(() => ({
-    unlocked,
-    hasPin: !!pin,
-    unlock: () => setUnlocked(true),
-    lock: () => setUnlocked(false),
-    setPin: (newPin: string) => {
-      localStorage.setItem(PIN_KEY, newPin);
-      setPinState(newPin);
-    },
-    verifyPin: (input: string) => input === pin,
-    requestUnlock: () => setPromptOpen(true),
-    promptOpen,
-    closePrompt: () => setPromptOpen(false),
-  }), [unlocked, pin, promptOpen]);
+  const value = useMemo<ParentModeContextValue>(
+    () => ({
+      unlocked,
+      hasPin: !!pin,
+      unlock: () => setUnlocked(true),
+      lock: () => setUnlocked(false),
+      setPin: (newPin: string) => {
+        localStorage.setItem(PIN_KEY, newPin);
+        setPinState(newPin);
+      },
+      verifyPin: (input: string) => input === pin,
+      requestUnlock: () => setPromptOpen(true),
+      promptOpen,
+      closePrompt: () => setPromptOpen(false),
+    }),
+    [unlocked, pin, promptOpen],
+  );
 
   return <ParentModeContext.Provider value={value}>{children}</ParentModeContext.Provider>;
 }

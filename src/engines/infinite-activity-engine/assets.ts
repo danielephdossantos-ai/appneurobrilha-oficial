@@ -1,4 +1,3 @@
-
 export const SCENARIOS = [
   { id: "space", name: "Espaço Sideral", theme: "adventure", visualComplexity: "medium" },
   { id: "jungle", name: "Floresta Tropical", theme: "nature", visualComplexity: "high" },
@@ -13,13 +12,23 @@ export const SCENARIOS = [
   { id: "hospital", name: "Hospital da Saúde", theme: "health", visualComplexity: "low" },
   { id: "museum", name: "Museu de História", theme: "culture", visualComplexity: "medium" },
   { id: "park", name: "Parque das Cores", theme: "arts", visualComplexity: "low" },
-  { id: "laboratory", name: "Laboratório de Ciências", theme: "science", visualComplexity: "medium" },
+  {
+    id: "laboratory",
+    name: "Laboratório de Ciências",
+    theme: "science",
+    visualComplexity: "medium",
+  },
   { id: "mountain", name: "Montanha Alta", theme: "nature", visualComplexity: "medium" },
   { id: "volcano", name: "Vulcão de Fogo", theme: "nature", visualComplexity: "high" },
-  { id: "supermarket", name: "Supermercado Brilha", theme: "economics", visualComplexity: "medium" },
+  {
+    id: "supermarket",
+    name: "Supermercado Brilha",
+    theme: "economics",
+    visualComplexity: "medium",
+  },
   { id: "beach", name: "Praia do Sol", theme: "nature", visualComplexity: "low" },
   { id: "theater", name: "Teatro de Sombras", theme: "arts", visualComplexity: "medium" },
-  { id: "library", name: "Biblioteca Mágica", theme: "education", visualComplexity: "low" }
+  { id: "library", name: "Biblioteca Mágica", theme: "education", visualComplexity: "low" },
 ];
 
 export const OBJECTS = [
@@ -60,7 +69,7 @@ export const OBJECTS = [
   // Artes
   { id: "art_1", name: "Pincel", category: "arts", tags: ["pintura"] },
   { id: "art_2", name: "Tinta Guache", category: "arts", tags: ["colorir"] },
-  { id: "art_3", name: "Flauta", category: "arts", tags: ["musica"] }
+  { id: "art_3", name: "Flauta", category: "arts", tags: ["musica"] },
 ];
 
 export const CHARACTERS = [
@@ -72,7 +81,7 @@ export const CHARACTERS = [
   { id: "char_6", name: "Pipa Doutora", role: "science", personality: "smart" },
   { id: "char_7", name: "Pipa Artista", role: "arts", personality: "creative" },
   { id: "char_8", name: "Pip Dino", role: "history", personality: "friendly" },
-  { id: "char_9", name: "Pip Amigo", role: "emocional", personality: "peaceful" }
+  { id: "char_9", name: "Pip Amigo", role: "emocional", personality: "peaceful" },
 ];
 
 export const EMOTIONS = [
@@ -80,22 +89,36 @@ export const EMOTIONS = [
   { id: "emo_sad", name: "Triste", emoji: "😢", color: "text-sky" },
   { id: "emo_angry", name: "Bravo", emoji: "😠", color: "text-coral" },
   { id: "emo_calm", name: "Calmo", emoji: "😌", color: "text-success" },
-  { id: "emo_fear", name: "Medo", emoji: "😨", color: "text-lilac" }
+  { id: "emo_fear", name: "Medo", emoji: "😨", color: "text-lilac" },
 ];
 
 export const SOCIAL_SITUATIONS = [
-  { id: "sit_friend", title: "Dividindo o Brinquedo", context: "Você tem um carrinho e seu amigo quer brincar também.", options: ["Emprestar", "Esconder", "Gritar"], correct: "Emprestar" },
-  { id: "sit_help", title: "Amigo Triste", context: "Seu amigo caiu e está chorando.", options: ["Rir", "Ajudar a levantar", "Ignorar"], correct: "Ajudar a levantar" },
-  { id: "sit_wait", title: "Hora de Esperar", context: "Você quer muito falar, mas a professora está conversando.", options: ["Interromper", "Esperar a vez", "Sair de perto"], correct: "Esperar a vez" }
+  {
+    id: "sit_friend",
+    title: "Dividindo o Brinquedo",
+    context: "Você tem um carrinho e seu amigo quer brincar também.",
+    options: ["Emprestar", "Esconder", "Gritar"],
+    correct: "Emprestar",
+  },
+  {
+    id: "sit_help",
+    title: "Amigo Triste",
+    context: "Seu amigo caiu e está chorando.",
+    options: ["Rir", "Ajudar a levantar", "Ignorar"],
+    correct: "Ajudar a levantar",
+  },
+  {
+    id: "sit_wait",
+    title: "Hora de Esperar",
+    context: "Você quer muito falar, mas a professora está conversando.",
+    options: ["Interromper", "Esperar a vez", "Sair de perto"],
+    correct: "Esperar a vez",
+  },
 ];
-
 
 export const CREATIVE_ASSETS = {
   colors: ["#FF5733", "#33FF57", "#3357FF", "#F333FF", "#FFF333", "#33FFF3"],
   shapes: ["square", "circle", "triangle", "star", "diamond"],
   patterns: ["dots", "stripes", "grid", "zigzag"],
-  textures: ["silk", "wool", "cotton", "denim"]
+  textures: ["silk", "wool", "cotton", "denim"],
 };
-
-
-

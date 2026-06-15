@@ -43,7 +43,10 @@ export interface StoryQuestion {
   difficulty: number;
 }
 
-export const THEME_META: Record<StoryTheme, { label: string; emoji: string; color: string; bg: string }> = {
+export const THEME_META: Record<
+  StoryTheme,
+  { label: string; emoji: string; color: string; bg: string }
+> = {
   dinossauros: { label: "Dinossauros", emoji: "🦕", color: "#16A34A", bg: "#DCFCE7" },
   animais: { label: "Animais", emoji: "🦊", color: "#EA580C", bg: "#FFEDD5" },
   espaco: { label: "Espaço", emoji: "🚀", color: "#7C3AED", bg: "#EDE9FE" },

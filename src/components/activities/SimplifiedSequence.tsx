@@ -1,13 +1,18 @@
-
-import React, { useState } from 'react';
-import { motion, Reorder } from 'framer-motion';
+import React, { useState } from "react";
+import { motion, Reorder } from "framer-motion";
 
 interface SequenceItem {
   id: string;
   content: string;
 }
 
-export const SimplifiedSequence = ({ items, onComplete }: { items: SequenceItem[], onComplete: (success: boolean) => void }) => {
+export const SimplifiedSequence = ({
+  items,
+  onComplete,
+}: {
+  items: SequenceItem[];
+  onComplete: (success: boolean) => void;
+}) => {
   const [order, setOrder] = useState(items);
   const correctOrder = [...items].sort((a, b) => a.id.localeCompare(b.id));
 

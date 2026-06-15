@@ -1,8 +1,10 @@
-
 import { SensoryMetrics, NeuroAdjustment } from "./types";
 
 export class SensoryRegulationEngine {
-  static calculateAdjustment(metrics: SensoryMetrics, currentAdjustment: NeuroAdjustment): NeuroAdjustment {
+  static calculateAdjustment(
+    metrics: SensoryMetrics,
+    currentAdjustment: NeuroAdjustment,
+  ): NeuroAdjustment {
     const adjusted = { ...currentAdjustment };
 
     // Sobrecarga visual detectada

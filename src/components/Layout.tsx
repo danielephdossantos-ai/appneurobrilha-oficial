@@ -2,10 +2,45 @@ import { Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-route
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import {
-  Home, GraduationCap, Sparkles, Brain, CalendarDays, ListChecks,
-  Compass, ShieldCheck, MessagesSquare, FileBarChart2, SlidersHorizontal,
-  ClipboardList, LogOut, ChevronLeft, ChevronRight, Camera, Heart, ShoppingBag, BookOpen, ClipboardCheck,
-  Target, Sprout, Star, Apple, Bird, Rainbow, Trees, Bug, Library, Telescope, TestTube, Map, Satellite, Ruler, Trophy, Users, Gift, School, PenTool
+  Home,
+  GraduationCap,
+  Sparkles,
+  Brain,
+  CalendarDays,
+  ListChecks,
+  Compass,
+  ShieldCheck,
+  MessagesSquare,
+  FileBarChart2,
+  SlidersHorizontal,
+  ClipboardList,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  Camera,
+  Heart,
+  ShoppingBag,
+  BookOpen,
+  ClipboardCheck,
+  Target,
+  Sprout,
+  Star,
+  Apple,
+  Bird,
+  Rainbow,
+  Trees,
+  Bug,
+  Library,
+  Telescope,
+  TestTube,
+  Map,
+  Satellite,
+  Ruler,
+  Trophy,
+  Users,
+  Gift,
+  School,
+  PenTool,
 } from "lucide-react";
 import { ReactNode, ComponentType } from "react";
 import { supabase } from "@/database/supabase/client";
@@ -18,18 +53,17 @@ import { CoinDisplay } from "./rewards/CoinDisplay";
 import { useParentMode } from "@/contexts/ParentModeContext";
 import { Lock, LockOpen } from "lucide-react";
 
-
 function SidebarMascot() {
   const { activeMascot } = useMascot();
-  
+
   if (!activeMascot) return <KidLiveMascot emotion="happy" size="sm" className="scale-75 -my-4" />;
 
   return (
     <Link to="/mascotes" className="relative group cursor-pointer">
-      <KidLiveMascot 
-        emotion="happy" 
-        size="sm" 
-        className="scale-75 -my-4 transition-transform group-hover:scale-90" 
+      <KidLiveMascot
+        emotion="happy"
+        size="sm"
+        className="scale-75 -my-4 transition-transform group-hover:scale-90"
       />
       <div className="absolute -bottom-1 right-2 bg-primary text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-white shadow-sm">
         LV {activeMascot.level}
@@ -38,13 +72,12 @@ function SidebarMascot() {
   );
 }
 
-
 const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
   { to: "/historias", label: "Histórias", icon: BookOpen },
-  
+
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
@@ -85,7 +118,10 @@ function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: t
     <Link
       to={to}
       className="group flex items-center gap-3 rounded-2xl px-4 py-3 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all btn-tap font-bold"
-      activeProps={{ className: "bg-primary text-primary-foreground shadow-kid [--shadow-color:oklch(var(--primary-dark))] font-black" }}
+      activeProps={{
+        className:
+          "bg-primary text-primary-foreground shadow-kid [--shadow-color:oklch(var(--primary-dark))] font-black",
+      }}
       activeOptions={{ exact: to === "/" }}
     >
       <Icon className="h-5 w-5 shrink-0" />
@@ -101,22 +137,28 @@ export function Shell({ children }: { children?: ReactNode }) {
   const navigate = useNavigate();
   const { unlocked: parentUnlocked, requestUnlock, lock: lockParent } = useParentMode();
 
-
-
   const currentIndex = navigationSequence.indexOf(path);
   const prevPath = currentIndex > 0 ? navigationSequence[currentIndex - 1] : null;
-  const nextPath = currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
+  const nextPath =
+    currentIndex < navigationSequence.length - 1 ? navigationSequence[currentIndex + 1] : null;
 
   // Apply neuro-adaptive CSS variables
-  const adaptiveStyles = engine?.adaptive ? {
-    "--visual-scale": engine.adaptive.visualScale,
-    "--animation-speed-multiplier": 1 / engine.adaptive.animationSpeed,
-    "--stimuli-opacity": engine.adaptive.stimuliLevel === "low" ? "0.3" : engine.adaptive.stimuliLevel === "high" ? "1" : "0.7",
-    fontSize: `${16 * (engine.adaptive.visualScale ?? 1)}px`
-  } as React.CSSProperties : {};
+  const adaptiveStyles = engine?.adaptive
+    ? ({
+        "--visual-scale": engine.adaptive.visualScale,
+        "--animation-speed-multiplier": 1 / engine.adaptive.animationSpeed,
+        "--stimuli-opacity":
+          engine.adaptive.stimuliLevel === "low"
+            ? "0.3"
+            : engine.adaptive.stimuliLevel === "high"
+              ? "1"
+              : "0.7",
+        fontSize: `${16 * (engine.adaptive.visualScale ?? 1)}px`,
+      } as React.CSSProperties)
+    : {};
 
   return (
-    <div 
+    <div
       className="min-h-screen flex flex-col md:flex-row neuro-adaptive-container"
       style={adaptiveStyles}
     >
@@ -126,18 +168,29 @@ export function Shell({ children }: { children?: ReactNode }) {
             <Sprout className="h-7 w-7" />
           </div>
           <div>
-            <div className="font-black text-2xl text-sidebar-foreground leading-none tracking-tight">NeuroBrilha</div>
-            <div className="text-xs font-bold text-primary/60 uppercase tracking-widest mt-1">Premium Kids</div>
+            <div className="font-black text-2xl text-sidebar-foreground leading-none tracking-tight">
+              NeuroBrilha
+            </div>
+            <div className="text-xs font-bold text-primary/60 uppercase tracking-widest mt-1">
+              Premium Kids
+            </div>
           </div>
         </Link>
 
         {activeChild && (
-          <KidCard variant="white" className="p-4 border-2 border-primary/20 hover:border-primary/40 transition-colors">
+          <KidCard
+            variant="white"
+            className="p-4 border-2 border-primary/20 hover:border-primary/40 transition-colors"
+          >
             <div className="flex items-center gap-4">
-              <div className="h-14 w-14 rounded-2xl bg-secondary grid place-items-center text-3xl shadow-inner">{activeChild.avatar}</div>
+              <div className="h-14 w-14 rounded-2xl bg-secondary grid place-items-center text-3xl shadow-inner">
+                {activeChild.avatar}
+              </div>
               <div className="min-w-0">
                 <div className="font-black text-lg truncate leading-tight">{activeChild.nome}</div>
-                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{activeChild.idade} anos · {activeChild.serie}</div>
+                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  {activeChild.idade} anos · {activeChild.serie}
+                </div>
               </div>
             </div>
             {allChildren.length > 1 && (
@@ -147,7 +200,9 @@ export function Shell({ children }: { children?: ReactNode }) {
                 className="mt-3 w-full text-xs font-bold rounded-xl bg-muted px-3 py-2 border-2 border-transparent focus:border-primary transition-all outline-none"
               >
                 {allChildren.map((c: any) => (
-                  <option key={c.id} value={c.id}>{c.avatar} {c.nome}</option>
+                  <option key={c.id} value={c.id}>
+                    {c.avatar} {c.nome}
+                  </option>
                 ))}
               </select>
             )}
@@ -162,12 +217,13 @@ export function Shell({ children }: { children?: ReactNode }) {
           <SidebarMascot />
         </div>
 
-
         <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-4 mb-2">
           Explorar
         </div>
         <nav className="flex flex-col gap-1">
-          {navCrianca.map((i) => <NavItem key={i.to} {...i} />)}
+          {navCrianca.map((i) => (
+            <NavItem key={i.to} {...i} />
+          ))}
         </nav>
 
         <div className="text-xs uppercase tracking-[0.2em] font-black text-sidebar-foreground/40 px-3 mt-6 mb-2 flex items-center justify-between">
@@ -178,7 +234,8 @@ export function Shell({ children }: { children?: ReactNode }) {
               className="text-[10px] font-bold text-primary hover:underline normal-case tracking-normal"
               title="Bloquear área dos pais"
             >
-              <LockOpen className="h-3 w-3 inline mr-1" />sair
+              <LockOpen className="h-3 w-3 inline mr-1" />
+              sair
             </button>
           )}
         </div>
@@ -192,16 +249,21 @@ export function Shell({ children }: { children?: ReactNode }) {
           </button>
         ) : (
           <nav className="flex flex-col gap-1">
-            {navPais.map((i) => <NavItem key={i.to} {...i} />)}
+            {navPais.map((i) => (
+              <NavItem key={i.to} {...i} />
+            ))}
             {activeChild && (
-              <NavItem to={`/ajuste-dificuldades/${activeChild.id}`} label="Ajuste fino" icon={SlidersHorizontal} />
+              <NavItem
+                to={`/ajuste-dificuldades/${activeChild.id}`}
+                label="Ajuste fino"
+                icon={SlidersHorizontal}
+              />
             )}
             {activeChild && (
               <NavItem to={`/anamnese/${activeChild.id}`} label="Anamnese" icon={ClipboardList} />
             )}
           </nav>
         )}
-
 
         <div className="mt-auto flex flex-col gap-1 pt-4">
           <button
@@ -215,7 +277,6 @@ export function Shell({ children }: { children?: ReactNode }) {
             v0.1 · protótipo navegável
           </div>
         </div>
-
       </aside>
 
       <div className="flex-1 min-w-0 flex flex-col">
@@ -231,7 +292,7 @@ export function Shell({ children }: { children?: ReactNode }) {
               </div>
             )}
           </div>
-          
+
           <div className="flex items-center gap-3">
             <CoinDisplay className="md:hidden" />
             <NotificationBell />
@@ -245,11 +306,9 @@ export function Shell({ children }: { children?: ReactNode }) {
         </header>
 
         <main className="flex-1 px-4 md:px-8 py-6 md:py-10 pb-32 md:pb-32 max-w-6xl w-full mx-auto relative">
-          <div className="max-w-5xl w-full mx-auto">
-            {children ?? <Outlet />}
-          </div>
+          <div className="max-w-5xl w-full mx-auto">{children ?? <Outlet />}</div>
           <MobileNav path={path} />
-          
+
           <div className="fixed bottom-24 left-0 right-0 px-6 flex justify-between pointer-events-none z-50 md:hidden">
             <div className="pointer-events-auto">
               {prevPath && (
@@ -319,7 +378,11 @@ function MobileNav({ path }: { path: string }) {
         const active = path === i.to;
         const Icon = i.icon;
         return (
-          <Link key={i.to} to={i.to} className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg btn-tap ${active ? "text-primary font-bold" : "text-muted-foreground"}`}>
+          <Link
+            key={i.to}
+            to={i.to}
+            className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg btn-tap ${active ? "text-primary font-bold" : "text-muted-foreground"}`}
+          >
             <Icon className="h-5 w-5" />
             <span className="text-[10px]">{i.label}</span>
           </Link>
@@ -342,8 +405,17 @@ function MobileNav({ path }: { path: string }) {
   );
 }
 
-
-export function PageHeader({ title, subtitle, emoji, icon: Icon }: { title: string; subtitle?: string; emoji?: string; icon?: ComponentType<{ className?: string }> }) {
+export function PageHeader({
+  title,
+  subtitle,
+  emoji,
+  icon: Icon,
+}: {
+  title: string;
+  subtitle?: string;
+  emoji?: string;
+  icon?: ComponentType<{ className?: string }>;
+}) {
   return (
     <div className="mb-6 md:mb-8">
       <div className="flex items-center gap-3">
@@ -371,7 +443,15 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
   );
 }
 
-export function Pill({ children, tone = "default", className = "" }: { children: ReactNode; tone?: "default" | "success" | "warning" | "info" | "danger"; className?: string }) {
+export function Pill({
+  children,
+  tone = "default",
+  className = "",
+}: {
+  children: ReactNode;
+  tone?: "default" | "success" | "warning" | "info" | "danger";
+  className?: string;
+}) {
   const tones: Record<string, string> = {
     default: "bg-muted text-muted-foreground",
     success: "bg-success/15 text-success",
@@ -379,5 +459,11 @@ export function Pill({ children, tone = "default", className = "" }: { children:
     info: "bg-sky/30 text-foreground",
     danger: "bg-destructive/15 text-destructive",
   };
-  return <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]} ${className}`}>{children}</span>;
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${tones[tone]} ${className}`}
+    >
+      {children}
+    </span>
+  );
 }

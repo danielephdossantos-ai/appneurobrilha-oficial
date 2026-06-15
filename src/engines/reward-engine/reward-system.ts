@@ -1,7 +1,13 @@
-
 import { z } from "zod";
 
-export const MascotEmotionSchema = z.enum(['happy', 'calm', 'sleepy', 'excited', 'focused', 'proud']);
+export const MascotEmotionSchema = z.enum([
+  "happy",
+  "calm",
+  "sleepy",
+  "excited",
+  "focused",
+  "proud",
+]);
 export type MascotEmotion = z.infer<typeof MascotEmotionSchema>;
 
 export interface RewardState {
@@ -21,14 +27,13 @@ export interface MascotState {
   affinityPoints: number;
 }
 
-
 export class RewardSystem {
   private static state: RewardState = {
     totalStars: 0,
     totalCoins: 0,
     energy: 100,
     mascotLevel: 1,
-    unlockedItems: []
+    unlockedItems: [],
   };
 
   /**
@@ -37,7 +42,7 @@ export class RewardSystem {
    */
   static calculateRewards(params: {
     accuracy: number;
-    timeInZone: boolean; 
+    timeInZone: boolean;
     attempts: number;
     wasCalm: boolean;
   }) {
@@ -68,7 +73,7 @@ export class RewardSystem {
     this.state.totalStars += stars;
     this.state.totalCoins += coins;
     this.state.energy = Math.min(100, this.state.energy + energy);
-    
+
     this.checkLevelUp();
     return { ...this.state };
   }

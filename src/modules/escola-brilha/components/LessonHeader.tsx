@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Star } from 'lucide-react';
-import { useNavigate } from '@tanstack/react-router';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft, Star } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 interface LessonHeaderProps {
   progress: number;
@@ -23,7 +23,7 @@ export const LessonHeader: React.FC<LessonHeaderProps> = ({
       <div className="max-w-xl mx-auto flex items-center gap-3">
         {/* Back button */}
         <button
-          onClick={() => navigate({ to: '/escola-brilha' })}
+          onClick={() => navigate({ to: "/escola-brilha" })}
           className="shrink-0 w-11 h-11 rounded-full bg-violet-500 hover:bg-violet-600 text-white flex items-center justify-center shadow-lg active:scale-95 transition"
           aria-label="Voltar"
         >
@@ -35,7 +35,7 @@ export const LessonHeader: React.FC<LessonHeaderProps> = ({
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ type: 'spring', stiffness: 80 }}
+            transition={{ type: "spring", stiffness: 80 }}
             className="h-full bg-gradient-to-r from-yellow-300 to-yellow-400"
           />
         </div>

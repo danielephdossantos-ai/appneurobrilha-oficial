@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface LessonEnvironmentProps {
   children: React.ReactNode;
@@ -16,9 +16,7 @@ export const LessonEnvironment: React.FC<LessonEnvironmentProps> = ({ children }
       <div className="absolute bottom-0 w-full h-[28vh] bg-gradient-to-t from-green-300 to-green-200 rounded-t-[60%]" />
 
       {/* Content */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col items-center">
-        {children}
-      </div>
+      <div className="relative z-10 w-full min-h-screen flex flex-col items-center">{children}</div>
     </div>
   );
 };

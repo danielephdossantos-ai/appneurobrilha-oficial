@@ -3,7 +3,7 @@ import { supabase } from "@/database/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export type NotificationType = 'estudo' | 'rotina' | 'seguranca' | 'reforco' | 'amigo';
+export type NotificationType = "estudo" | "rotina" | "seguranca" | "reforco" | "amigo";
 
 export interface Notification {
   id: string;
@@ -34,33 +34,32 @@ export function useNotifications() {
   });
 
   const sendNotification = useMutation({
-    mutationFn: async (notif: Omit<Notification, "id" | "user_id" | "read" | "created_at" | "scheduled_for">) => {
-      const { error } = await supabase
-        .from("notifications")
-        .insert([{
+    mutationFn: async (
+      notif: Omit<Notification, "id" | "user_id" | "read" | "created_at" | "scheduled_for">,
+    ) => {
+      const { error } = await supabase.from("notifications").insert([
+        {
           ...notif,
           user_id: "replit",
           read: false,
-          scheduled_for: new Date().toISOString()
-        }]);
+          scheduled_for: new Date().toISOString(),
+        },
+      ]);
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-    }
+    },
   });
 
   const markAsRead = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase
-        .from("notifications")
-        .update({ read: true })
-        .eq("id", id);
+      const { error } = await supabase.from("notifications").update({ read: true }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-    }
+    },
   });
 
   const markAllAsRead = useMutation({
@@ -73,7 +72,7 @@ export function useNotifications() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-    }
+    },
   });
 
   return {
@@ -82,6 +81,6 @@ export function useNotifications() {
     sendNotification: sendNotification.mutate,
     markAsRead: markAsRead.mutate,
     markAllAsRead: markAllAsRead.mutate,
-    unreadCount: notifications.filter(n => !n.read).length
+    unreadCount: notifications.filter((n) => !n.read).length,
   };
 }

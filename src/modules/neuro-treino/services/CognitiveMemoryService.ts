@@ -1,6 +1,6 @@
 import { supabase } from "@/database/supabase/client";
 import { CognitiveProfile, LongitudinalScore, CognitiveMetrics } from "../types";
-import { get, set } from 'idb-keyval';
+import { get, set } from "idb-keyval";
 
 export class CognitiveMemoryService {
   private static CACHE_KEY_PREFIX = "cognitive_cache_";
@@ -19,7 +19,7 @@ export class CognitiveMemoryService {
    */
   async getProfile(childId: string): Promise<CognitiveProfile | null> {
     try {
-      if (typeof window !== 'undefined' && !navigator.onLine) {
+      if (typeof window !== "undefined" && !navigator.onLine) {
         return await this.getCache<CognitiveProfile>(`profile_${childId}`);
       }
 
@@ -47,18 +47,23 @@ export class CognitiveMemoryService {
    */
   async updateProfile(childId: string, updates: Partial<CognitiveProfile>): Promise<void> {
     const profile = await this.getProfile(childId);
-    const updatedProfile = { ...profile, ...updates, child_id: childId, updated_at: new Date().toISOString() };
-    
+    const updatedProfile = {
+      ...profile,
+      ...updates,
+      child_id: childId,
+      updated_at: new Date().toISOString(),
+    };
+
     // Update local cache immediately
     await this.setCache(`profile_${childId}`, updatedProfile);
 
-    if (typeof window !== 'undefined' && !navigator.onLine) {
+    if (typeof window !== "undefined" && !navigator.onLine) {
       return;
     }
 
     const { error } = await supabase
       .from("cognitive_profile")
-      .upsert(updatedProfile, { onConflict: 'child_id' });
+      .upsert(updatedProfile, { onConflict: "child_id" });
 
     if (error) {
       console.error("Error updating cognitive profile:", error);
@@ -69,7 +74,11 @@ export class CognitiveMemoryService {
   /**
    * Records a new set of developmental scores for longitudinal tracking.
    */
-  async recordLongitudinalScores(childId: string, metrics: CognitiveMetrics, date?: Date): Promise<void> {
+  async recordLongitudinalScores(
+    childId: string,
+    metrics: CognitiveMetrics,
+    date?: Date,
+  ): Promise<void> {
     const scoreData = {
       child_id: childId,
       attention_score: metrics.attention,
@@ -80,20 +89,18 @@ export class CognitiveMemoryService {
       coordination_score: metrics.coordination,
       reading_score: metrics.reading,
       math_score: metrics.math,
-      recorded_at: (date || new Date()).toISOString()
+      recorded_at: (date || new Date()).toISOString(),
     };
 
     // Store in local history cache
     const history = await this.getLongitudinalHistory(childId);
     await this.setCache(`history_${childId}`, [...history, scoreData]);
 
-    if (typeof window !== 'undefined' && !navigator.onLine) {
+    if (typeof window !== "undefined" && !navigator.onLine) {
       return;
     }
 
-    const { error } = await supabase
-      .from("longitudinal_scores")
-      .insert(scoreData);
+    const { error } = await supabase.from("longitudinal_scores").insert(scoreData);
 
     if (error) {
       console.error("Error recording longitudinal scores:", error);
@@ -106,7 +113,7 @@ export class CognitiveMemoryService {
    */
   async getLongitudinalHistory(childId: string): Promise<LongitudinalScore[]> {
     try {
-      if (typeof window !== 'undefined' && !navigator.onLine) {
+      if (typeof window !== "undefined" && !navigator.onLine) {
         const cached = await this.getCache<LongitudinalScore[]>(`history_${childId}`);
         return cached || [];
       }

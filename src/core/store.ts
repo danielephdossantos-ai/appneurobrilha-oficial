@@ -137,7 +137,9 @@ const DEFAULT_CHILD_PROFILE: Pick<
   observacoes: "",
 };
 
-function normalizeChild(row: Partial<Child> & { id: string; user_id: string; nome: string }): Child {
+function normalizeChild(
+  row: Partial<Child> & { id: string; user_id: string; nome: string },
+): Child {
   return {
     ...DEFAULT_CHILD_PROFILE,
     ...row,
@@ -154,7 +156,9 @@ function normalizeChild(row: Partial<Child> & { id: string; user_id: string; nom
     serie: row.serie ?? "1º ano",
     anamnese_completa: row.anamnese_completa ?? false,
     has_hyperfocus: row.has_hyperfocus ?? DEFAULT_CHILD_PROFILE.has_hyperfocus,
-    hyperfocus_list: Array.isArray(row.hyperfocus_list) ? row.hyperfocus_list : DEFAULT_CHILD_PROFILE.hyperfocus_list,
+    hyperfocus_list: Array.isArray(row.hyperfocus_list)
+      ? row.hyperfocus_list
+      : DEFAULT_CHILD_PROFILE.hyperfocus_list,
     perfil: { ...DEFAULT_CHILD_PROFILE.perfil, ...(row.perfil ?? {}) },
     niveis: { ...DEFAULT_CHILD_PROFILE.niveis, ...(row.niveis ?? {}) },
     flags: { ...DEFAULT_CHILD_PROFILE.flags, ...(row.flags ?? {}) },

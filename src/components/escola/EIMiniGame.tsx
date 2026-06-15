@@ -1,14 +1,55 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { 
-  Apple, Dog, Cat, Fish, Flower, Star, Moon, Sun, 
-  Circle, Square, Triangle, Heart, Cloud, Bird,
-  Gamepad2, Book, Pencil, Music, Camera, Gift,
-  Coffee, Pizza, Car, Plane, Ship, Tractor,
-  Beef, Banana, Grape, Home, Waves,
-  Egg, Crown, Trash2, Rocket, IceCream,
-  Trees, Bug, MousePointer2, HelpCircle,
-  Eye, EyeOff, Check, X, Volume2, 
-  Bike, GlassWater, Ghost, Zap, Sprout
+import {
+  Apple,
+  Dog,
+  Cat,
+  Fish,
+  Flower,
+  Star,
+  Moon,
+  Sun,
+  Circle,
+  Square,
+  Triangle,
+  Heart,
+  Cloud,
+  Bird,
+  Gamepad2,
+  Book,
+  Pencil,
+  Music,
+  Camera,
+  Gift,
+  Coffee,
+  Pizza,
+  Car,
+  Plane,
+  Ship,
+  Tractor,
+  Beef,
+  Banana,
+  Grape,
+  Home,
+  Waves,
+  Egg,
+  Crown,
+  Trash2,
+  Rocket,
+  IceCream,
+  Trees,
+  Bug,
+  MousePointer2,
+  HelpCircle,
+  Eye,
+  EyeOff,
+  Check,
+  X,
+  Volume2,
+  Bike,
+  GlassWater,
+  Ghost,
+  Zap,
+  Sprout,
 } from "lucide-react";
 
 // Simple proxy for Bone since it might not be in the initial import set or standard lucide
@@ -30,20 +71,60 @@ const PALETTE = [
 ];
 
 const EMOJI_MAP: Record<string, any> = {
-  '🍎': Apple, '🍏': Apple, '🐶': Dog, '🐱': Cat, '🐟': Fish, '🌻': Flower, '⭐': Star, '🌙': Moon, '☀️': Sun,
-  '⭕': Circle, '🟦': Square, '🔺': Triangle, '❤️': Heart, '☁️': Cloud, '🐔': Bird, '🐮': Beef,
-  '🐄': Beef, '🐝': Bug, '🐘': Beef, '⛪': Home, '🥚': Egg, '🍇': Grape, '🍌': Banana,
-  '🦴': Bone, '🏠': Home, '🥣': Coffee, '🚜': Tractor, '🌿': Trees,
-  '💻': Gamepad2, '⚽': Gamepad2, '🌊': Waves, '🌽': Sprout, '🏚️': Home, '🍕': Pizza,
-  '🥩': Beef, '🌳': Trees, '👑': Crown, '🍦': IceCream, '🧶': Music, '🧺': Gift,
-  '🚀': Rocket, '👜': Gift, '🥛': GlassWater, '🚲': Bike, '🚗': Car, '✈️': Plane, '🚢': Ship,
+  "🍎": Apple,
+  "🍏": Apple,
+  "🐶": Dog,
+  "🐱": Cat,
+  "🐟": Fish,
+  "🌻": Flower,
+  "⭐": Star,
+  "🌙": Moon,
+  "☀️": Sun,
+  "⭕": Circle,
+  "🟦": Square,
+  "🔺": Triangle,
+  "❤️": Heart,
+  "☁️": Cloud,
+  "🐔": Bird,
+  "🐮": Beef,
+  "🐄": Beef,
+  "🐝": Bug,
+  "🐘": Beef,
+  "⛪": Home,
+  "🥚": Egg,
+  "🍇": Grape,
+  "🍌": Banana,
+  "🦴": Bone,
+  "🏠": Home,
+  "🥣": Coffee,
+  "🚜": Tractor,
+  "🌿": Trees,
+  "💻": Gamepad2,
+  "⚽": Gamepad2,
+  "🌊": Waves,
+  "🌽": Sprout,
+  "🏚️": Home,
+  "🍕": Pizza,
+  "🥩": Beef,
+  "🌳": Trees,
+  "👑": Crown,
+  "🍦": IceCream,
+  "🧶": Music,
+  "🧺": Gift,
+  "🚀": Rocket,
+  "👜": Gift,
+  "🥛": GlassWater,
+  "🚲": Bike,
+  "🚗": Car,
+  "✈️": Plane,
+  "🚢": Ship,
 };
 
 const getIcon = (key: string, className = "w-12 h-12") => {
   if (!key) return <HelpCircle className={className} />;
-  
+
   // Se for uma URL de imagem
-  if (key.startsWith('http') || key.startsWith('/src/assets') || key.startsWith('data:image')) {
+  if (key.startsWith("http") || key.startsWith("/src/assets") || key.startsWith("data:image")) {
     return <img src={key} alt="visual" className={className + " object-contain"} />;
   }
 
@@ -52,9 +133,20 @@ const getIcon = (key: string, className = "w-12 h-12") => {
 };
 
 const SHAPE_GLYPHS: Record<string, string> = {
-  TRIANGULO: "▲", "TRIÂNGULO": "▲", CIRCULO: "●", "CÍRCULO": "●",
-  QUADRADO: "■", RETANGULO: "▬", "RETÂNGULO": "▬", ESTRELA: "★",
-  CORACAO: "❤", "CORAÇÃO": "❤", LOSANGO: "◆", OVAL: "⬭", HEXAGONO: "⬢", "HEXÁGONO": "⬢",
+  TRIANGULO: "▲",
+  TRIÂNGULO: "▲",
+  CIRCULO: "●",
+  CÍRCULO: "●",
+  QUADRADO: "■",
+  RETANGULO: "▬",
+  RETÂNGULO: "▬",
+  ESTRELA: "★",
+  CORACAO: "❤",
+  CORAÇÃO: "❤",
+  LOSANGO: "◆",
+  OVAL: "⬭",
+  HEXAGONO: "⬢",
+  HEXÁGONO: "⬢",
 };
 
 function Confetti() {
@@ -110,8 +202,14 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
   const handleDrop = (opt: string) => {
     if (disabled || done) return;
     const ok = opt.toUpperCase() === correct;
-    if (ok) { setDone(true); fire(true, opt); }
-    else { setWrongId(opt); setTimeout(() => setWrongId(null), 700); fire(false, opt); }
+    if (ok) {
+      setDone(true);
+      fire(true, opt);
+    } else {
+      setWrongId(opt);
+      setTimeout(() => setWrongId(null), 700);
+      fire(false, opt);
+    }
   };
 
   return (
@@ -119,15 +217,27 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
       {celebrate && <Confetti />}
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8">
         <div className="flex flex-col gap-4 items-center">
-          {(aula.opcoes || []).slice(0, Math.ceil((aula.opcoes||[]).length/2)).map((opt: string, i: number) => (
-            <DraggableOption key={opt} opt={opt} color={PALETTE[i % PALETTE.length]}
-              glyph={SHAPE_GLYPHS[opt.toUpperCase()] || "◆"}
-              wrong={wrongId === opt} disabled={disabled || done}
-              onDrop={() => handleDrop(opt)} />
-          ))}
+          {(aula.opcoes || [])
+            .slice(0, Math.ceil((aula.opcoes || []).length / 2))
+            .map((opt: string, i: number) => (
+              <DraggableOption
+                key={opt}
+                opt={opt}
+                color={PALETTE[i % PALETTE.length]}
+                glyph={SHAPE_GLYPHS[opt.toUpperCase()] || "◆"}
+                wrong={wrongId === opt}
+                disabled={disabled || done}
+                onDrop={() => handleDrop(opt)}
+              />
+            ))}
         </div>
-        <div className={`relative w-48 h-48 md:w-64 md:h-64 grid place-items-center rounded-3xl border-4 border-dashed border-slate-400/60 bg-white/40 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}>
-          <div className={`text-[8rem] md:text-[10rem] leading-none ${done ? "text-primary" : "text-slate-300"}`} style={{ filter: done ? "drop-shadow(0 0 20px gold)" : "none" }}>
+        <div
+          className={`relative w-48 h-48 md:w-64 md:h-64 grid place-items-center rounded-3xl border-4 border-dashed border-slate-400/60 bg-white/40 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}
+        >
+          <div
+            className={`text-[8rem] md:text-[10rem] leading-none ${done ? "text-primary" : "text-slate-300"}`}
+            style={{ filter: done ? "drop-shadow(0 0 20px gold)" : "none" }}
+          >
             {silhouette}
           </div>
           <div className="absolute -bottom-8 text-center text-lg font-black tracking-widest text-slate-700">
@@ -135,20 +245,39 @@ function ShapeMatch({ aula, disabled, onAnswer }: Props) {
           </div>
         </div>
         <div className="flex flex-col gap-4 items-center">
-          {(aula.opcoes || []).slice(Math.ceil((aula.opcoes||[]).length/2)).map((opt: string, i: number) => (
-            <DraggableOption key={opt} opt={opt} color={PALETTE[(i+3) % PALETTE.length]}
-              glyph={SHAPE_GLYPHS[opt.toUpperCase()] || "◆"}
-              wrong={wrongId === opt} disabled={disabled || done}
-              onDrop={() => handleDrop(opt)} />
-          ))}
+          {(aula.opcoes || [])
+            .slice(Math.ceil((aula.opcoes || []).length / 2))
+            .map((opt: string, i: number) => (
+              <DraggableOption
+                key={opt}
+                opt={opt}
+                color={PALETTE[(i + 3) % PALETTE.length]}
+                glyph={SHAPE_GLYPHS[opt.toUpperCase()] || "◆"}
+                wrong={wrongId === opt}
+                disabled={disabled || done}
+                onDrop={() => handleDrop(opt)}
+              />
+            ))}
         </div>
       </div>
     </div>
   );
 }
 
-function DraggableOption({ opt, color, glyph, wrong, disabled, onDrop }:{
-  opt:string; color:string; glyph:string; wrong:boolean; disabled?:boolean; onDrop:()=>void;
+function DraggableOption({
+  opt,
+  color,
+  glyph,
+  wrong,
+  disabled,
+  onDrop,
+}: {
+  opt: string;
+  color: string;
+  glyph: string;
+  wrong: boolean;
+  disabled?: boolean;
+  onDrop: () => void;
 }) {
   return (
     <button
@@ -177,8 +306,15 @@ function PhonemeSum({ aula, disabled, onAnswer }: Props) {
     setTapped(next);
     if (next.join("") === correct || next.length >= correct.length) {
       const ok = next.join("") === correct;
-      if (ok) { setFused(true); setTimeout(() => fire(true, next.join("")), 300); }
-      else { setTimeout(() => { setTapped([]); }, 700); fire(false, next.join("")); }
+      if (ok) {
+        setFused(true);
+        setTimeout(() => fire(true, next.join("")), 300);
+      } else {
+        setTimeout(() => {
+          setTapped([]);
+        }, 700);
+        fire(false, next.join(""));
+      }
     }
   };
 
@@ -222,7 +358,9 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
   const letters = useMemo(() => {
     const opts = (aula.opcoes || []).map((o: string) => String(o).toUpperCase());
     if (opts.length >= target.length) return opts;
-    const extras = ["A","E","I","O","U","M","P","B","S","T"].filter(l => !target.includes(l)).slice(0,2);
+    const extras = ["A", "E", "I", "O", "U", "M", "P", "B", "S", "T"]
+      .filter((l) => !target.includes(l))
+      .slice(0, 2);
     return Array.from(new Set([...target.split(""), ...extras])).sort(() => Math.random() - 0.5);
   }, [aula.opcoes, target]);
 
@@ -237,7 +375,10 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
     if (target[pos] === l) {
       const next = [...filled, l + "::" + idx];
       setFilled(next);
-      if (next.length === target.length) { setDone(true); setTimeout(() => fire(true, target), 300); }
+      if (next.length === target.length) {
+        setDone(true);
+        setTimeout(() => fire(true, target), 300);
+      }
     } else {
       setWrong(l + "::" + idx);
       setTimeout(() => setWrong(null), 600);
@@ -249,12 +390,21 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
     <div className="relative">
       {celebrate && <Confetti />}
       <div className="flex flex-col items-center gap-8">
-        {aula.visual && <div className="text-8xl md:text-9xl drop-shadow-xl">{getIcon(aula.visual, "w-24 h-24")}</div>}
-        <div className={`flex gap-3 md:gap-4 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite] rounded-2xl p-2" : ""}`}>
+        {aula.visual && (
+          <div className="text-8xl md:text-9xl drop-shadow-xl">
+            {getIcon(aula.visual, "w-24 h-24")}
+          </div>
+        )}
+        <div
+          className={`flex gap-3 md:gap-4 ${done ? "animate-[magicGlow_1s_ease-in-out_infinite] rounded-2xl p-2" : ""}`}
+        >
           {target.split("").map((ch, i) => {
             const got = filled[i]?.split("::")[0];
             return (
-              <div key={i} className={`w-16 h-20 md:w-20 md:h-24 rounded-2xl border-4 border-dashed grid place-items-center text-4xl md:text-5xl font-black ${got ? "bg-gradient-to-br from-success to-success/70 text-white border-success" : "border-slate-400 bg-white/60 text-slate-300"}`}>
+              <div
+                key={i}
+                className={`w-16 h-20 md:w-20 md:h-24 rounded-2xl border-4 border-dashed grid place-items-center text-4xl md:text-5xl font-black ${got ? "bg-gradient-to-br from-success to-success/70 text-white border-success" : "border-slate-400 bg-white/60 text-slate-300"}`}
+              >
                 {got || "_"}
               </div>
             );
@@ -263,7 +413,7 @@ function WordBuild({ aula, disabled, onAnswer }: Props) {
         <div className="flex flex-wrap gap-3 md:gap-4 justify-center max-w-xl">
           {letters.map((l: string, i: number) => {
             const id = l + "::" + i;
-            const used = filled.some(f => f === id);
+            const used = filled.some((f) => f === id);
             const isWrong = wrong === id;
             return (
               <button
@@ -297,10 +447,14 @@ function Bubbles({ aula, disabled, onAnswer }: Props) {
         style={{
           background: aula.visualHex
             ? `radial-gradient(circle at 50% 40%, ${aula.visualHex}66, ${aula.visualHex}11 70%)`
-            : 'radial-gradient(circle at 50% 40%, hsl(var(--sky)/.45), hsl(var(--petal)/.2) 70%)',
+            : "radial-gradient(circle at 50% 40%, hsl(var(--sky)/.45), hsl(var(--petal)/.2) 70%)",
         }}
       >
-        {aula.visual && <div className="text-[8rem] md:text-[10rem] leading-none drop-shadow-2xl">{getIcon(aula.visual, "w-32 h-32 text-primary")}</div>}
+        {aula.visual && (
+          <div className="text-[8rem] md:text-[10rem] leading-none drop-shadow-2xl">
+            {getIcon(aula.visual, "w-32 h-32 text-primary")}
+          </div>
+        )}
         <div className="mt-3 text-4xl md:text-5xl font-black tracking-[0.18em] text-primary drop-shadow-md">
           {(aula.palavra || aula.topic || "").toString().toUpperCase()}
         </div>
@@ -310,12 +464,21 @@ function Bubbles({ aula, disabled, onAnswer }: Props) {
           const isWrong = wrong === opt;
           const isCorrect = String(opt) === correct;
           return (
-            <button key={`${opt}-${i}`} disabled={disabled || done}
+            <button
+              key={`${opt}-${i}`}
+              disabled={disabled || done}
               onClick={() => {
-                if (isCorrect) { setDone(true); fire(true, opt); }
-                else { setWrong(opt); setTimeout(() => setWrong(null), 600); fire(false, opt); }
+                if (isCorrect) {
+                  setDone(true);
+                  fire(true, opt);
+                } else {
+                  setWrong(opt);
+                  setTimeout(() => setWrong(null), 600);
+                  fire(false, opt);
+                }
               }}
-              className={`btn-tap w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center text-4xl md:text-5xl font-black uppercase text-white shadow-[0_10px_0_rgba(0,0,0,0.15)] border-4 border-white bg-gradient-to-br ${PALETTE[i % PALETTE.length]} ${isWrong ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"} ${done && isCorrect ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}>
+              className={`btn-tap w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center text-4xl md:text-5xl font-black uppercase text-white shadow-[0_10px_0_rgba(0,0,0,0.15)] border-4 border-white bg-gradient-to-br ${PALETTE[i % PALETTE.length]} ${isWrong ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"} ${done && isCorrect ? "animate-[magicGlow_1s_ease-in-out_infinite]" : ""}`}
+            >
               {opt.toString().toUpperCase()}
             </button>
           );
@@ -340,7 +503,7 @@ function MemoryGame({ aula, disabled, onAnswer }: Props) {
 
   const flip = (id: number) => {
     if (disabled || selected.length === 2 || state[id].flipped || state[id].solved) return;
-    const next = state.map(c => c.id === id ? { ...c, flipped: true } : c);
+    const next = state.map((c) => (c.id === id ? { ...c, flipped: true } : c));
     setState(next);
     const newSel = [...selected, id];
     setSelected(newSel);
@@ -349,16 +512,22 @@ function MemoryGame({ aula, disabled, onAnswer }: Props) {
       const [i1, i2] = newSel;
       if (state[i1].symbol === state[i2].symbol) {
         setTimeout(() => {
-          setState(prev => prev.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c));
+          setState((prev) =>
+            prev.map((c) => (c.id === i1 || c.id === i2 ? { ...c, solved: true } : c)),
+          );
           setSelected([]);
-          const newState = next.map(c => (c.id === i1 || c.id === i2) ? { ...c, solved: true } : c);
-          if (newState.every(c => c.solved)) {
+          const newState = next.map((c) =>
+            c.id === i1 || c.id === i2 ? { ...c, solved: true } : c,
+          );
+          if (newState.every((c) => c.solved)) {
             fire(true, "victory");
           }
         }, 600);
       } else {
         setTimeout(() => {
-          setState(prev => prev.map(c => (c.id === i1 || c.id === i2) ? { ...c, flipped: false } : c));
+          setState((prev) =>
+            prev.map((c) => (c.id === i1 || c.id === i2 ? { ...c, flipped: false } : c)),
+          );
           setSelected([]);
           fire(false, "mismatch");
         }, 1000);
@@ -375,10 +544,14 @@ function MemoryGame({ aula, disabled, onAnswer }: Props) {
           onClick={() => flip(card.id)}
           className={`w-24 h-32 md:w-32 md:h-40 rounded-2xl border-4 transition-all duration-500 preserve-3d relative ${card.flipped || card.solved ? "[transform:rotateY(180deg)]" : ""}`}
         >
-          <div className={`absolute inset-0 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center backface-hidden border-2 border-white shadow-lg`}>
+          <div
+            className={`absolute inset-0 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center backface-hidden border-2 border-white shadow-lg`}
+          >
             <HelpCircle className="w-12 h-12 text-white" />
           </div>
-          <div className={`absolute inset-0 bg-white rounded-xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden border-2 border-primary shadow-lg`}>
+          <div
+            className={`absolute inset-0 bg-white rounded-xl flex items-center justify-center [transform:rotateY(180deg)] backface-hidden border-2 border-primary shadow-lg`}
+          >
             {getIcon(card.symbol, "w-16 h-16 text-primary")}
           </div>
         </button>
@@ -403,7 +576,10 @@ function MissingSequence({ aula, disabled, onAnswer }: Props) {
     <div className="flex flex-col items-center gap-8">
       <div className="flex gap-4 items-center">
         {sequence.map((item: string, i: number) => (
-          <div key={i} className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white border-4 border-dashed border-primary/30 flex items-center justify-center shadow-inner">
+          <div
+            key={i}
+            className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white border-4 border-dashed border-primary/30 flex items-center justify-center shadow-inner"
+          >
             {!revealed || i !== hiddenIdx ? (
               getIcon(item, "w-12 h-12 text-primary animate-bounce")
             ) : (
@@ -451,32 +627,45 @@ function VisualOp({ aula, disabled, onAnswer }: Props) {
       {celebrate && <Confetti />}
       <div className="flex flex-wrap items-center justify-center gap-4 bg-white/60 p-6 rounded-3xl border-4 border-white shadow-soft">
         <div className="flex flex-wrap gap-1 max-w-[150px] justify-center">
-           {Array.from({length: a}).map((_, i) => <div key={i}>{getIcon(visual, "w-8 h-8")}</div>)}
+          {Array.from({ length: a }).map((_, i) => (
+            <div key={i}>{getIcon(visual, "w-8 h-8")}</div>
+          ))}
         </div>
         <div className="text-4xl font-black text-sun">{op}</div>
         <div className="flex flex-wrap gap-1 max-w-[150px] justify-center">
-           {Array.from({length: b}).map((_, i) => <div key={i}>{getIcon(visual, "w-8 h-8")}</div>)}
+          {Array.from({ length: b }).map((_, i) => (
+            <div key={i}>{getIcon(visual, "w-8 h-8")}</div>
+          ))}
         </div>
         <div className="text-4xl font-black text-primary">= ?</div>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {(aula.opcoes || [result, result+1, result-1]).map((opt: any, i: number) => {
+        {(aula.opcoes || [result, result + 1, result - 1]).map((opt: any, i: number) => {
           const n = Number(opt);
           const isCorrect = n === result;
           return (
-            <button key={i} disabled={disabled || done}
+            <button
+              key={i}
+              disabled={disabled || done}
               onClick={() => {
-                if (isCorrect) { setDone(true); fire(true, n.toString()); }
-                else { setWrong(n); setTimeout(() => setWrong(null), 600); fire(false, n.toString()); }
+                if (isCorrect) {
+                  setDone(true);
+                  fire(true, n.toString());
+                } else {
+                  setWrong(n);
+                  setTimeout(() => setWrong(null), 600);
+                  fire(false, n.toString());
+                }
               }}
-              className={`w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${PALETTE[i % PALETTE.length]} border-4 border-white text-4xl md:text-5xl font-black text-white shadow-lg ${wrong === n ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"}`}>
+              className={`w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${PALETTE[i % PALETTE.length]} border-4 border-white text-4xl md:text-5xl font-black text-white shadow-lg ${wrong === n ? "animate-[wiggle_0.5s]" : "hover:-translate-y-1"}`}
+            >
               {n}
             </button>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
 /* ---------- MODE: QUANTITY DRAG ---------- */
@@ -505,7 +694,11 @@ function QuantityDrag({ aula, disabled, onAnswer }: Props) {
             {getIcon(aula.symbol || "⭐", "w-10 h-10")}
           </div>
         ))}
-        {count === 0 && <div className="text-slate-300 font-bold uppercase tracking-widest text-center px-4">Arraste para cá</div>}
+        {count === 0 && (
+          <div className="text-slate-300 font-bold uppercase tracking-widest text-center px-4">
+            Arraste para cá
+          </div>
+        )}
       </div>
       <div className="flex gap-4">
         {Array.from({ length: 3 }).map((_, i) => (
@@ -529,15 +722,25 @@ export function EIMiniGame(props: Props) {
   const type = aula.miniGameType || "bubbles";
 
   switch (type) {
-    case "memory": return <MemoryGame {...props} />;
-    case "sequence": return <MissingSequence {...props} />;
-    case "quantity": return <QuantityDrag {...props} />;
-    case "shape": return <ShapeMatch {...props} />;
-    case "sum": return <PhonemeSum {...props} />;
-    case "alfa-syllable": return <PhonemeSum {...props} />;
-    case "alfa-sum": return <VisualOp {...props} />;
-    case "alfa-sub": return <VisualOp {...props} />;
-    case "word": return <WordBuild {...props} />;
-    default: return <Bubbles {...props} />;
+    case "memory":
+      return <MemoryGame {...props} />;
+    case "sequence":
+      return <MissingSequence {...props} />;
+    case "quantity":
+      return <QuantityDrag {...props} />;
+    case "shape":
+      return <ShapeMatch {...props} />;
+    case "sum":
+      return <PhonemeSum {...props} />;
+    case "alfa-syllable":
+      return <PhonemeSum {...props} />;
+    case "alfa-sum":
+      return <VisualOp {...props} />;
+    case "alfa-sub":
+      return <VisualOp {...props} />;
+    case "word":
+      return <WordBuild {...props} />;
+    default:
+      return <Bubbles {...props} />;
   }
 }

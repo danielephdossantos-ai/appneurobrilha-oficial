@@ -22,7 +22,7 @@ export interface InternalProfile {
 }
 
 export class AnamnesisProcessor {
-  static process(data: AnamnesisData['responses']): InternalProfile {
+  static process(data: AnamnesisData["responses"]): InternalProfile {
     const profile: InternalProfile = {
       leitura: 50,
       atencao: 50,
@@ -33,15 +33,15 @@ export class AnamnesisProcessor {
       niveis: {
         geral: 2,
         portugues: 2,
-        matematica: 2
+        matematica: 2,
       },
       flags: {
         apoioVisual: true,
         passoAPasso: true,
         preferAudio: false,
         focoComunicao: false,
-        atividadesCurtas: false
-      }
+        atividadesCurtas: false,
+      },
     };
 
     // 1. Desenvolvimento - Leitura
@@ -89,17 +89,26 @@ export class AnamnesisProcessor {
     }
 
     // 5. Comunicação
-    if (!data.comunicacao.usa_palavras && (data.comunicacao.aponta_quer || data.comunicacao.usa_gestos)) {
+    if (
+      !data.comunicacao.usa_palavras &&
+      (data.comunicacao.aponta_quer || data.comunicacao.usa_gestos)
+    ) {
       profile.flags.focoComunicao = true;
     }
 
     return profile;
   }
 
-  static mapToChildPatch(internal: InternalProfile, originalResponses: AnamnesisData['responses']): Partial<Child> {
+  static mapToChildPatch(
+    internal: InternalProfile,
+    originalResponses: AnamnesisData["responses"],
+  ): Partial<Child> {
     // Try to map professional diagnosis to app's categories
     let diagnostico: any = "nenhum";
-    if (originalResponses.diagnostico_profissional.possui && originalResponses.diagnostico_profissional.quais) {
+    if (
+      originalResponses.diagnostico_profissional.possui &&
+      originalResponses.diagnostico_profissional.quais
+    ) {
       const q = originalResponses.diagnostico_profissional.quais.toLowerCase();
       if (q.includes("tea") || q.includes("autis")) diagnostico = "tea";
       else if (q.includes("tdah")) diagnostico = "tdah";
@@ -135,7 +144,7 @@ export class AnamnesisProcessor {
         contaNosDedos: false,
         trocaLetras: false,
         palavrasLongas: internal.leitura < 40,
-      }
+      },
     };
   }
 }

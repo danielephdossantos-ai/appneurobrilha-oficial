@@ -1,8 +1,7 @@
-
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GeneratedActivity } from '@/engines/pedagogical-engine/types';
-import { ActivityPerformance } from '@/engines/pedagogical-engine/types';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GeneratedActivity } from "@/engines/pedagogical-engine/types";
+import { ActivityPerformance } from "@/engines/pedagogical-engine/types";
 
 interface Props {
   activity: GeneratedActivity;
@@ -16,9 +15,9 @@ export const SequenceActivity: React.FC<Props> = ({ activity, onComplete }) => {
   useEffect(() => {
     // Simulated sequence data from engine
     const baseItems = [
-      { id: '1', content: '🍎' },
-      { id: '2', content: '🍌' },
-      { id: '3', content: '🍇' }
+      { id: "1", content: "🍎" },
+      { id: "2", content: "🍌" },
+      { id: "3", content: "🍇" },
     ].sort(() => Math.random() - 0.5);
     setItems(baseItems);
   }, [activity]);
@@ -31,7 +30,7 @@ export const SequenceActivity: React.FC<Props> = ({ activity, onComplete }) => {
       timeSpent: Date.now() - startTime,
       attempts: 1,
       errors: 0,
-      success
+      success,
     });
   };
 
@@ -48,8 +47,8 @@ export const SequenceActivity: React.FC<Props> = ({ activity, onComplete }) => {
           </motion.div>
         ))}
       </div>
-      
-      <button 
+
+      <button
         onClick={handleCheck}
         className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors shadow-lg"
       >

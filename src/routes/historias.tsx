@@ -11,7 +11,11 @@ export const Route = createFileRoute("/historias")({
   head: () => ({
     meta: [
       { title: "Histórias — NeuroBrilha Kids" },
-      { name: "description", content: "Biblioteca de histórias para alfabetização infantil com leitura guiada e narração." },
+      {
+        name: "description",
+        content:
+          "Biblioteca de histórias para alfabetização infantil com leitura guiada e narração.",
+      },
     ],
   }),
 });
@@ -102,7 +106,9 @@ function HistoriasLibrary() {
               key={l.id}
               onClick={() => setLevel(l.id)}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition ${
-                level === l.id ? "bg-[#FFD93D] text-[#6C5CE7]" : "bg-white text-gray-500 border border-gray-200"
+                level === l.id
+                  ? "bg-[#FFD93D] text-[#6C5CE7]"
+                  : "bg-white text-gray-500 border border-gray-200"
               }`}
             >
               {l.label}
@@ -114,7 +120,8 @@ function HistoriasLibrary() {
           <div className="bg-gradient-to-r from-[#FFD93D]/20 to-[#FF7675]/20 rounded-2xl p-4 flex items-center gap-3">
             <Sparkles className="w-5 h-5 text-[#6C5CE7]" />
             <p className="text-sm text-[#6C5CE7] font-bold">
-              Histórias sobre <span className="capitalize">{activeChild.hiperfoco}</span> em destaque para {activeChild.nome}!
+              Histórias sobre <span className="capitalize">{activeChild.hiperfoco}</span> em
+              destaque para {activeChild.nome}!
             </p>
           </div>
         )}

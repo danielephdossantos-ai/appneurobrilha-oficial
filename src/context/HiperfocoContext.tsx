@@ -52,7 +52,12 @@ export function HiperfocoProvider({ children }: { children: ReactNode }) {
     }
     const stored: StoredHiperfoco =
       hiperfoco.id === "custom"
-        ? { id: "custom", label: hiperfoco.label, emoji: hiperfoco.emoji, elementos: hiperfoco.elementos }
+        ? {
+            id: "custom",
+            label: hiperfoco.label,
+            emoji: hiperfoco.emoji,
+            elementos: hiperfoco.elementos,
+          }
         : { id: hiperfoco.id };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
   }, [hiperfoco]);
@@ -77,7 +82,7 @@ export function HiperfocoProvider({ children }: { children: ReactNode }) {
       },
       limpar: () => setHiperfoco(null),
     }),
-    [hiperfoco]
+    [hiperfoco],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

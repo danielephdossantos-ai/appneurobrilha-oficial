@@ -1,7 +1,7 @@
-import { supabase } from '@/database/supabase/client';
+import { supabase } from "@/database/supabase/client";
 // Note: sync engine uses the supabase shim which routes to Replit PostgreSQL
-import { db, type OfflineSyncQueue } from './database';
-import { toast } from 'sonner';
+import { db, type OfflineSyncQueue } from "./database";
+import { toast } from "sonner";
 
 export class SyncEngine {
   private static isSyncing = false;
@@ -11,9 +11,9 @@ export class SyncEngine {
     if (!navigator.onLine) return;
 
     const pending = await db.syncQueue
-      .where('status')
-      .anyOf(['pending', 'failed'])
-      .sortBy('timestamp');
+      .where("status")
+      .anyOf(["pending", "failed"])
+      .sortBy("timestamp");
 
     if (pending.length === 0) return;
 
@@ -22,14 +22,14 @@ export class SyncEngine {
 
     for (const item of pending) {
       try {
-        await db.syncQueue.update(item.id!, { status: 'syncing' });
-        
+        await db.syncQueue.update(item.id!, { status: "syncing" });
+
         const success = await this.processItem(item);
-        
+
         if (success) {
           await db.syncQueue.delete(item.id!);
         } else {
-          await this.handleFailure(item, 'Falha no processamento');
+          await this.handleFailure(item, "Falha no processamento");
         }
       } catch (error: any) {
         await this.handleFailure(item, error.message);
@@ -39,7 +39,7 @@ export class SyncEngine {
     this.isSyncing = false;
     const remaining = await db.syncQueue.count();
     if (remaining === 0) {
-      toast.success('Todos os dados foram sincronizados!');
+      toast.success("Todos os dados foram sincronizados!");
     }
   }
 
@@ -48,16 +48,16 @@ export class SyncEngine {
 
     // Mapeamento de tipos para tabelas Supabase
     const typeToTable: Record<string, string> = {
-      'activity_result': 'activity_results',
-      'attention_metric': 'attention_metrics',
-      'fatigue_metric': 'fatigue_metrics',
-      'adaptation_log': 'adaptation_logs',
-      'progression_update': 'progression',
-      'daily_session': 'daily_sessions',
-      'achievement_unlock': 'achievements',
-      'gamification_profile_update': 'gamification_profiles',
-      'mascot_state_update': 'mascot_states',
-      'study_agenda_upsert': 'study_agenda'
+      activity_result: "activity_results",
+      attention_metric: "attention_metrics",
+      fatigue_metric: "fatigue_metrics",
+      adaptation_log: "adaptation_logs",
+      progression_update: "progression",
+      daily_session: "daily_sessions",
+      achievement_unlock: "achievements",
+      gamification_profile_update: "gamification_profiles",
+      mascot_state_update: "mascot_states",
+      study_agenda_upsert: "study_agenda",
     };
 
     const table = typeToTable[type];
@@ -67,7 +67,7 @@ export class SyncEngine {
     }
 
     const { error } = await supabase.from(table as any).upsert(data);
-    
+
     if (error) {
       console.error(`[SyncEngine] Erro no Supabase (${table}):`, error);
       return false;
@@ -78,9 +78,9 @@ export class SyncEngine {
 
   private static async handleFailure(item: OfflineSyncQueue, error: string) {
     await db.syncQueue.update(item.id!, {
-      status: 'failed',
+      status: "failed",
       attempts: (item.attempts || 0) + 1,
-      lastError: error
+      lastError: error,
     });
   }
 }

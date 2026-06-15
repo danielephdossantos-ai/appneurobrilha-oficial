@@ -1,4 +1,3 @@
-
 import { NeuroState, NeuroAdjustment, NeuroLog, NeuroStateSchema } from "./types";
 import { AdaptiveProfileEngine } from "./adaptive-profile-engine";
 import { FatigueEngine } from "./fatigue-engine";
@@ -35,14 +34,14 @@ export class NeuroAdaptiveCore {
     };
 
     this.logs.push(log);
-    
+
     // Limitar logs em memória
     if (this.logs.length > 100) this.logs.shift();
 
     console.log("[NeuroAdaptiveCore] Adjustment applied:", {
       profile: validatedState.profile,
       adjustment,
-      trigger: log.trigger
+      trigger: log.trigger,
     });
 
     return { adjustment, log };

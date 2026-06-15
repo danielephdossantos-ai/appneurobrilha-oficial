@@ -2,13 +2,22 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useAnamneseV2 } from "@/modules/anamnese/hooks/useAnamneseV2";
 import { DisclaimerBanner } from "@/modules/anamnese/components/DisclaimerBanner";
 import { PERFIL_LABEL, RISK_BG, RISK_COLOR, RISK_LABEL } from "@/modules/anamnese/v2/scoring";
-import { getRecommendations, focusAreas, needsProfessionalReferral } from "@/modules/anamnese/v2/recommendations";
+import {
+  getRecommendations,
+  focusAreas,
+  needsProfessionalReferral,
+} from "@/modules/anamnese/v2/recommendations";
 import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle } from "lucide-react";
 import {
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
 } from "recharts";
 import type { PerfilScores } from "@/modules/anamnese/v2/types";
 
@@ -49,7 +58,9 @@ function ResultadoRoute() {
       <div className="max-w-3xl mx-auto p-3 md:p-6 space-y-4">
         <div className="flex items-center justify-between gap-2">
           <Button variant="ghost" size="sm" asChild>
-            <Link to="/"><ArrowLeft className="h-4 w-4 mr-1" /> Início</Link>
+            <Link to="/">
+              <ArrowLeft className="h-4 w-4 mr-1" /> Início
+            </Link>
           </Button>
           <Button size="sm" onClick={handlePDF}>
             <Download className="h-4 w-4 mr-1" /> Baixar PDF
@@ -72,18 +83,25 @@ function ResultadoRoute() {
               <Card key={k} className={`p-4 border-2 ${RISK_BG[lvl]}`}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-bold">{PERFIL_LABEL[k]}</span>
-                  <span className="text-xs uppercase font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: RISK_COLOR[lvl], color: "white" }}>
+                  <span
+                    className="text-xs uppercase font-bold px-2 py-0.5 rounded-full"
+                    style={{ background: RISK_COLOR[lvl], color: "white" }}
+                  >
                     {lvl}
                   </span>
                 </div>
                 <div className="h-2 bg-white/40 rounded-full overflow-hidden mb-1">
-                  <div className="h-full rounded-full" style={{
-                    width: `${v}%`,
-                    background: RISK_COLOR[lvl],
-                  }} />
+                  <div
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${v}%`,
+                      background: RISK_COLOR[lvl],
+                    }}
+                  />
                 </div>
-                <p className="text-xs">{v}% de indicadores — {RISK_LABEL[lvl]}</p>
+                <p className="text-xs">
+                  {v}% de indicadores — {RISK_LABEL[lvl]}
+                </p>
               </Card>
             );
           })}
@@ -130,7 +148,9 @@ function ResultadoRoute() {
                   {PERFIL_LABEL[r.area]} — {r.level}
                 </p>
                 <ul className="list-disc pl-5 text-sm space-y-1 text-muted-foreground">
-                  {r.items.map((it, i) => <li key={i}>{it}</li>)}
+                  {r.items.map((it, i) => (
+                    <li key={i}>{it}</li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -146,9 +166,9 @@ function ResultadoRoute() {
                   Avaliação profissional recomendada
                 </h3>
                 <p className="text-sm text-red-800 dark:text-red-300 mt-1">
-                  Os indicadores sugerem que uma avaliação especializada (neuropediatra,
-                  psicólogo, psicopedagogo, fonoaudiólogo ou terapeuta ocupacional) pode
-                  beneficiar o desenvolvimento da criança.
+                  Os indicadores sugerem que uma avaliação especializada (neuropediatra, psicólogo,
+                  psicopedagogo, fonoaudiólogo ou terapeuta ocupacional) pode beneficiar o
+                  desenvolvimento da criança.
                 </p>
               </div>
             </div>
@@ -156,7 +176,11 @@ function ResultadoRoute() {
         )}
 
         <div className="flex gap-2 pb-6">
-          <Button variant="outline" className="flex-1" onClick={() => nav({ to: "/anamnese/$childId", params: { childId } })}>
+          <Button
+            variant="outline"
+            className="flex-1"
+            onClick={() => nav({ to: "/anamnese/$childId", params: { childId } })}
+          >
             <RefreshCw className="h-4 w-4 mr-1" /> Revisar respostas
           </Button>
           <Button className="flex-1" onClick={handlePDF}>

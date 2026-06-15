@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
 
 interface TracingProps {
   text: string;
@@ -15,7 +15,7 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Set canvas size
@@ -31,34 +31,33 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
     const drawText = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font = 'bold 80px "Comic Sans MS", "Chalkboard SE", cursive';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
       // Draw background text for tracing
-      ctx.strokeStyle = '#E2E8F0';
+      ctx.strokeStyle = "#E2E8F0";
       ctx.lineWidth = 1;
       ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
-      
+
       // Draw dashed line in the middle of letters (simplified)
       ctx.setLineDash([5, 5]);
-      ctx.strokeStyle = '#CBD5E1';
+      ctx.strokeStyle = "#CBD5E1";
       ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
       ctx.setLineDash([]);
 
       // Draw starting points (Simplified: one green dot at the top-left-ish of the first letter)
-      ctx.fillStyle = '#10B981';
+      ctx.fillStyle = "#10B981";
       ctx.beginPath();
-      ctx.arc(canvas.width / 2 - (text.length * 20), canvas.height / 2 - 30, 8, 0, Math.PI * 2);
+      ctx.arc(canvas.width / 2 - text.length * 20, canvas.height / 2 - 30, 8, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = 'white';
-      ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('1', canvas.width / 2 - (text.length * 20), canvas.height / 2 - 30);
-
+      ctx.fillStyle = "white";
+      ctx.font = "bold 12px sans-serif";
+      ctx.fillText("1", canvas.width / 2 - text.length * 20, canvas.height / 2 - 30);
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    return () => window.removeEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resizeCanvas);
   }, [text]);
 
   const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
@@ -70,7 +69,7 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
   const draw = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDrawing || completed) return;
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
+    const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
     const pos = getPos(e);
@@ -78,8 +77,8 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
 
     ctx.strokeStyle = color;
     ctx.lineWidth = 15;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
     ctx.beginPath();
     ctx.moveTo(lastPoint.x, lastPoint.y);
@@ -99,7 +98,7 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
     setIsDrawing(false);
     // After some drawing, show completion button
     if (points.length > 50) {
-       // setCompleted(true);
+      // setCompleted(true);
     }
   };
 
@@ -107,11 +106,11 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
     const rect = canvas.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
     return {
       x: clientX - rect.left,
-      y: clientY - rect.top
+      y: clientY - rect.top,
     };
   };
 
@@ -130,33 +129,33 @@ export const Tracing: React.FC<TracingProps> = ({ text, onComplete, color = "#FF
           className="w-full cursor-crosshair"
         />
         <div className="absolute top-2 right-2 flex gap-2">
-           <button 
-             onClick={() => {
-               const canvas = canvasRef.current;
-               const ctx = canvas?.getContext('2d');
-               if (ctx && canvas) {
-                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                 // Redraw background
-                 ctx.font = 'bold 80px "Comic Sans MS", "Chalkboard SE", cursive';
-                 ctx.textAlign = 'center';
-                 ctx.textBaseline = 'middle';
-                 ctx.strokeStyle = '#E2E8F0';
-                 ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
-                 ctx.setLineDash([5, 5]);
-                 ctx.strokeStyle = '#CBD5E1';
-                 ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
-                 ctx.setLineDash([]);
-               }
-               setPoints([]);
-             }}
-             className="bg-muted p-2 rounded-full hover:bg-muted/80 transition"
-           >
-             🔄
-           </button>
+          <button
+            onClick={() => {
+              const canvas = canvasRef.current;
+              const ctx = canvas?.getContext("2d");
+              if (ctx && canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // Redraw background
+                ctx.font = 'bold 80px "Comic Sans MS", "Chalkboard SE", cursive';
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.strokeStyle = "#E2E8F0";
+                ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
+                ctx.setLineDash([5, 5]);
+                ctx.strokeStyle = "#CBD5E1";
+                ctx.strokeText(text.toUpperCase(), canvas.width / 2, canvas.height / 2);
+                ctx.setLineDash([]);
+              }
+              setPoints([]);
+            }}
+            className="bg-muted p-2 rounded-full hover:bg-muted/80 transition"
+          >
+            🔄
+          </button>
         </div>
       </div>
-      
-      <button 
+
+      <button
         onClick={() => {
           setCompleted(true);
           onComplete();

@@ -1,4 +1,3 @@
-
 import { ActivityTemplate } from "./types";
 
 export const TEMPLATES: ActivityTemplate[] = [
@@ -12,7 +11,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 2,
     minAge: 4,
     maxAge: 12,
-    logic: "Escolha um objeto alvo entre várias opções."
+    logic: "Escolha um objeto alvo entre várias opções.",
   },
   {
     id: "temp_seq_1",
@@ -23,7 +22,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 6,
     maxAge: 14,
-    logic: "Ordenar itens de acordo com uma regra."
+    logic: "Ordenar itens de acordo com uma regra.",
   },
   {
     id: "temp_comp_1",
@@ -34,7 +33,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 3,
     minAge: 4,
     maxAge: 16,
-    logic: "Identificar onde há mais ou menos objetos."
+    logic: "Identificar onde há mais ou menos objetos.",
   },
   {
     id: "temp_money_1",
@@ -45,7 +44,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 5,
     minAge: 7,
     maxAge: 10,
-    logic: "Associar valores a moedas e cédulas."
+    logic: "Associar valores a moedas e cédulas.",
   },
 
   // PORTUGUÊS
@@ -58,7 +57,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 3,
     minAge: 4,
     maxAge: 10,
-    logic: "Ligar imagem ao nome ou som correspondente."
+    logic: "Ligar imagem ao nome ou som correspondente.",
   },
   {
     id: "temp_syll_1",
@@ -69,7 +68,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 5,
     maxAge: 13,
-    logic: "Ordenar sílabas para formar o nome do objeto."
+    logic: "Ordenar sílabas para formar o nome do objeto.",
   },
   {
     id: "temp_interp_1",
@@ -80,9 +79,8 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 6,
     minAge: 9,
     maxAge: 16,
-    logic: "Escolher a resposta correta sobre um tema ou imagem."
+    logic: "Escolher a resposta correta sobre um tema ou imagem.",
   },
-
 
   // CIÊNCIAS
   {
@@ -94,7 +92,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 3,
     minAge: 5,
     maxAge: 8,
-    logic: "Identificar partes do corpo e suas funções."
+    logic: "Identificar partes do corpo e suas funções.",
   },
   {
     id: "temp_sci_animals",
@@ -105,7 +103,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 6,
     maxAge: 10,
-    logic: "Separar animais por características (habitat, pele, alimentação)."
+    logic: "Separar animais por características (habitat, pele, alimentação).",
   },
   {
     id: "temp_sci_matter",
@@ -116,7 +114,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 5,
     minAge: 8,
     maxAge: 12,
-    logic: "Associar materiais aos seus estados físicos (sólido, líquido, gasoso)."
+    logic: "Associar materiais aos seus estados físicos (sólido, líquido, gasoso).",
   },
 
   // GEOGRAFIA
@@ -129,7 +127,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 3,
     minAge: 5,
     maxAge: 12,
-    logic: "Identificar pontos de referência em um mapa simples."
+    logic: "Identificar pontos de referência em um mapa simples.",
   },
   {
     id: "temp_geo_landscape",
@@ -140,7 +138,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 7,
     maxAge: 12,
-    logic: "Comparar paisagens naturais e urbanas."
+    logic: "Comparar paisagens naturais e urbanas.",
   },
 
   // HISTÓRIA
@@ -153,7 +151,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 2,
     minAge: 5,
     maxAge: 9,
-    logic: "Identificar membros da família e graus de parentesco."
+    logic: "Identificar membros da família e graus de parentesco.",
   },
   {
     id: "temp_his_timeline",
@@ -164,7 +162,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 5,
     minAge: 8,
     maxAge: 13,
-    logic: "Ordenar fatos históricos ou identificar patrimônios culturais."
+    logic: "Ordenar fatos históricos ou identificar patrimônios culturais.",
   },
 
   // ARTES
@@ -177,7 +175,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 2,
     minAge: 4,
     maxAge: 10,
-    logic: "Agrupar objetos por cores primárias e secundárias."
+    logic: "Agrupar objetos por cores primárias e secundárias.",
   },
 
   // OFICINA CRIATIVA
@@ -190,7 +188,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 4,
     maxAge: 10,
-    logic: "Completar um padrão visual usando formas e cores."
+    logic: "Completar um padrão visual usando formas e cores.",
   },
   {
     id: "temp_cre_patterns",
@@ -201,7 +199,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 3,
     minAge: 3,
     maxAge: 6,
-    logic: "Seguir a ordem lógica de cores para completar o colar."
+    logic: "Seguir a ordem lógica de cores para completar o colar.",
   },
 
   // BRILHA VIDA (SOCIOEMOCIONAL)
@@ -214,7 +212,7 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 2,
     minAge: 3,
     maxAge: 12,
-    logic: "Associar o rosto ou situação ao sentimento correspondente."
+    logic: "Associar o rosto ou situação ao sentimento correspondente.",
   },
   {
     id: "temp_bv_story",
@@ -225,19 +223,14 @@ export const TEMPLATES: ActivityTemplate[] = [
     cognitiveLoad: 4,
     minAge: 4,
     maxAge: 14,
-    logic: "Escolher a melhor atitude para uma situação de convivência."
-  }
+    logic: "Escolher a melhor atitude para uma situação de convivência.",
+  },
 ];
-
-
-
 
 export class TemplateEngine {
   static findTemplatesBySkill(bnccCode: string, age: number): ActivityTemplate[] {
-    return TEMPLATES.filter(t => 
-      t.bnccCodes.includes(bnccCode) && 
-      age >= t.minAge && 
-      age <= t.maxAge
+    return TEMPLATES.filter(
+      (t) => t.bnccCodes.includes(bnccCode) && age >= t.minAge && age <= t.maxAge,
     );
   }
 

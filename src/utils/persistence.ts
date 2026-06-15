@@ -1,10 +1,10 @@
-import { Persister } from '@tanstack/react-query-persist-client';
-import { get, set, del } from 'idb-keyval';
+import { Persister } from "@tanstack/react-query-persist-client";
+import { get, set, del } from "idb-keyval";
 
 /**
  * Async persister for TanStack Query using IndexedDB via idb-keyval
  */
-export const createIDBPersister = (idbKey: string = 'react-query-cache'): Persister => {
+export const createIDBPersister = (idbKey: string = "react-query-cache"): Persister => {
   return {
     persistClient: async (client) => {
       await set(idbKey, client);
@@ -19,4 +19,3 @@ export const createIDBPersister = (idbKey: string = 'react-query-cache'): Persis
 };
 
 export const persister = createIDBPersister();
-

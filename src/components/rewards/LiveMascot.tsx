@@ -1,12 +1,11 @@
-
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MascotEmotion } from '@/engines/reward-engine/reward-system';
-import { cn } from '@/utils/utils';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MascotEmotion } from "@/engines/reward-engine/reward-system";
+import { cn } from "@/utils/utils";
 
 interface LiveMascotProps {
   emotion: MascotEmotion;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
@@ -16,7 +15,7 @@ const emotionMap: Record<MascotEmotion, string> = {
   sleepy: "😴",
   excited: "🤩",
   focused: "🧐",
-  proud: "🥳"
+  proud: "🥳",
 };
 
 const emotionColors: Record<MascotEmotion, string> = {
@@ -25,18 +24,18 @@ const emotionColors: Record<MascotEmotion, string> = {
   sleepy: "bg-indigo-100 border-indigo-200",
   excited: "bg-orange-100 border-orange-200",
   focused: "bg-green-100 border-green-200",
-  proud: "bg-purple-100 border-purple-200"
+  proud: "bg-purple-100 border-purple-200",
 };
 
-export const LiveMascot: React.FC<LiveMascotProps> = ({ 
-  emotion = 'happy', 
-  size = 'md',
-  className 
+export const LiveMascot: React.FC<LiveMascotProps> = ({
+  emotion = "happy",
+  size = "md",
+  className,
 }) => {
   const sizeClasses = {
     sm: "w-16 h-16 text-2xl",
     md: "w-32 h-32 text-5xl",
-    lg: "w-48 h-48 text-7xl"
+    lg: "w-48 h-48 text-7xl",
   };
 
   return (
@@ -47,7 +46,7 @@ export const LiveMascot: React.FC<LiveMascotProps> = ({
         "relative flex items-center justify-center rounded-full border-4 shadow-sm",
         emotionColors[emotion],
         sizeClasses[size],
-        className
+        className,
       )}
     >
       <AnimatePresence mode="wait">
@@ -61,10 +60,10 @@ export const LiveMascot: React.FC<LiveMascotProps> = ({
           {emotionMap[emotion]}
         </motion.span>
       </AnimatePresence>
-      
+
       {/* Halo de calma/foco suave */}
-      {emotion === 'calm' && (
-        <motion.div 
+      {emotion === "calm" && (
+        <motion.div
           className="absolute inset-0 rounded-full bg-blue-400/20"
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 3, repeat: Infinity }}

@@ -1,6 +1,12 @@
-
 import { Difficulty, ActivityTemplate } from "./types";
-import { OBJECTS, SCENARIOS, CHARACTERS, CREATIVE_ASSETS, EMOTIONS, SOCIAL_SITUATIONS } from "./assets";
+import {
+  OBJECTS,
+  SCENARIOS,
+  CHARACTERS,
+  CREATIVE_ASSETS,
+  EMOTIONS,
+  SOCIAL_SITUATIONS,
+} from "./assets";
 import { DifficultyEngine } from "./difficulty-engine";
 
 export class RandomizerEngine {
@@ -8,7 +14,7 @@ export class RandomizerEngine {
     const itemsCount = DifficultyEngine.getItemsCount(difficulty);
     const scenario = this.getRandomItem(SCENARIOS);
     const character = this.getRandomItem(CHARACTERS);
-    
+
     switch (template?.type) {
       case "selection":
         return this.generateSelection(itemsCount, scenario, character);
@@ -31,8 +37,11 @@ export class RandomizerEngine {
 
   private static generateEmotionMatch(count: number, scenario: any, character: any) {
     const targetEmotion = this.getRandomItem(EMOTIONS);
-    const otherEmotions = EMOTIONS.filter(e => e.id !== targetEmotion.id);
-    const options = this.shuffle([targetEmotion, ...this.shuffle(otherEmotions).slice(0, count - 1)]);
+    const otherEmotions = EMOTIONS.filter((e) => e.id !== targetEmotion.id);
+    const options = this.shuffle([
+      targetEmotion,
+      ...this.shuffle(otherEmotions).slice(0, count - 1),
+    ]);
 
     return {
       type: "emotion-match",
@@ -41,18 +50,18 @@ export class RandomizerEngine {
       title: "Brilha Vida: Emoções",
       question: `O ${character.name} está se sentindo ${targetEmotion.name}. Qual emoji combina com o que ele sente?`,
       targetId: targetEmotion.id,
-      options: options.map(e => ({
+      options: options.map((e) => ({
         id: e.id,
         content: e.emoji,
         type: "text",
-        isCorrect: e.id === targetEmotion.id
-      }))
+        isCorrect: e.id === targetEmotion.id,
+      })),
     };
   }
 
   private static generateSocialStory(count: number, scenario: any, character: any) {
     const situation = this.getRandomItem(SOCIAL_SITUATIONS);
-    
+
     return {
       type: "social-story",
       scenario: scenario.id,
@@ -63,16 +72,15 @@ export class RandomizerEngine {
         id: opt,
         content: opt,
         type: "text",
-        isCorrect: opt === situation.correct
-      }))
+        isCorrect: opt === situation.correct,
+      })),
     };
   }
-
 
   private static generateCreative(count: number, scenario: any, character: any) {
     const shapes = this.shuffle([...CREATIVE_ASSETS.shapes]).slice(0, 3);
     const colors = this.shuffle([...CREATIVE_ASSETS.colors]).slice(0, count);
-    
+
     return {
       type: "creative",
       scenario: scenario.id,
@@ -85,20 +93,19 @@ export class RandomizerEngine {
           id: `cre_${i}`,
           type: shapes[i % shapes.length],
           color: color,
-          position: { x: 10 * i, y: 50 }
-        }))
-      }
+          position: { x: 10 * i, y: 50 },
+        })),
+      },
     };
   }
-
 
   private static generateSelection(count: number, scenario: any, character: any) {
     const allObjects = [...(OBJECTS || [])];
     if (allObjects.length === 0) return { type: "selection", question: "Objeto não encontrado" };
-    
+
     const selected = this.shuffle(allObjects).slice(0, Math.max(1, count));
     const target = selected[0] || allObjects[0];
-    
+
     return {
       type: "selection",
       scenario: scenario?.id || "sc_default",
@@ -106,54 +113,54 @@ export class RandomizerEngine {
       title: `Missão com ${character?.name || "seu amigo"}`,
       question: `Olá! Eu sou o ${character?.name || "seu amigo"}. Você pode me ajudar a encontrar o(a) ${target?.name || "item"} aqui no(a) ${scenario?.name || "lugar"}?`,
       targetId: target.id,
-      options: selected.map(obj => ({
+      options: selected.map((obj) => ({
         id: obj.id,
         content: obj.name,
         type: "text",
-        isCorrect: obj.id === target.id
-      }))
+        isCorrect: obj.id === target.id,
+      })),
     };
   }
 
   private static generateSequence(count: number, scenario: any, character: any) {
     const allObjects = [...OBJECTS];
     const selected = this.shuffle(allObjects).slice(0, count);
-    
+
     return {
       type: "sequence",
       scenario: scenario.id,
       character: character.id,
       title: `Organização no(a) ${scenario.name}`,
       question: `${character.name} precisa da sua ajuda para organizar estes itens na ordem em que apareceram:`,
-      items: selected.map(obj => ({
+      items: selected.map((obj) => ({
         id: obj.id,
-        content: obj.name
-      }))
+        content: obj.name,
+      })),
     };
   }
 
   private static generateMatching(count: number, scenario: any, character: any) {
     const allObjects = [...OBJECTS];
     const selected = this.shuffle(allObjects).slice(0, count);
-    
+
     return {
       type: "matching",
       scenario: scenario.id,
       character: character.id,
       title: `Pares Mágicos`,
       question: `Combine cada item com seu nome correto para ajudar ${character.name}:`,
-      pairs: selected.map(obj => ({
+      pairs: selected.map((obj) => ({
         left: obj.id,
-        right: obj.name
-      }))
+        right: obj.name,
+      })),
     };
   }
 
   private static generateSorting(count: number, scenario: any, character: any) {
     const allObjects = [...OBJECTS];
     const selected = this.shuffle(allObjects).slice(0, count);
-    const categories = Array.from(new Set(selected.map(o => o.category)));
-    
+    const categories = Array.from(new Set(selected.map((o) => o.category)));
+
     return {
       type: "sorting",
       scenario: scenario.id,
@@ -161,11 +168,11 @@ export class RandomizerEngine {
       title: `Separação Coletiva`,
       question: `Ajude ${character.name} a separar os itens por categoria:`,
       categories: categories,
-      items: selected.map(obj => ({
+      items: selected.map((obj) => ({
         id: obj.id,
         content: obj.name,
-        category: obj.category
-      }))
+        category: obj.category,
+      })),
     };
   }
 
@@ -178,4 +185,3 @@ export class RandomizerEngine {
     return [...array].sort(() => Math.random() - 0.5);
   }
 }
-

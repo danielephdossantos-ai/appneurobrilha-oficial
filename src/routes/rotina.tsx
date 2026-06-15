@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
-import { Sun, GraduationCap, Apple, Flower, Calculator, Utensils, MessageSquare, ToyBrick, Bath, Calendar } from "lucide-react";
+import {
+  Sun,
+  GraduationCap,
+  Apple,
+  Flower,
+  Calculator,
+  Utensils,
+  MessageSquare,
+  ToyBrick,
+  Bath,
+  Calendar,
+} from "lucide-react";
 
 export const Route = createFileRoute("/rotina")({
   component: Rotina,
@@ -31,9 +42,14 @@ function Rotina() {
 
       <div className="space-y-2">
         {itens.map((i, idx) => (
-          <div key={idx} className={`rounded-2xl p-4 flex items-center gap-4 shadow-soft ${cores[i.cat]}`}>
+          <div
+            key={idx}
+            className={`rounded-2xl p-4 flex items-center gap-4 shadow-soft ${cores[i.cat]}`}
+          >
             <div className="font-mono font-extrabold text-lg w-16">{i.h}</div>
-            <div className="text-primary"><i.e className="h-8 w-8" /></div>
+            <div className="text-primary">
+              <i.e className="h-8 w-8" />
+            </div>
             <div className="flex-1 font-bold">{i.t}</div>
           </div>
         ))}
@@ -41,7 +57,11 @@ function Rotina() {
 
       <Card className="mt-8">
         <h3 className="font-extrabold mb-2">Sugestão inteligente</h3>
-        <p className="text-sm text-muted-foreground">O hook <code className="text-xs bg-muted px-1 py-0.5 rounded">useSmartRoutine</code> sugere encaixar 5 min de Rastreamento Sacádico depois do almoço — alinhado ao perfil de leitura.</p>
+        <p className="text-sm text-muted-foreground">
+          O hook <code className="text-xs bg-muted px-1 py-0.5 rounded">useSmartRoutine</code>{" "}
+          sugere encaixar 5 min de Rastreamento Sacádico depois do almoço — alinhado ao perfil de
+          leitura.
+        </p>
       </Card>
     </Shell>
   );

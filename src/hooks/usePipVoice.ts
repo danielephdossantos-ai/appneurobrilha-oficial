@@ -45,7 +45,7 @@ export function usePipVoice() {
         setIsSpeaking(false);
       }
     },
-    [speakFn, stop]
+    [speakFn, stop],
   );
 
   return { speak, stop, isSpeaking };

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,7 +13,11 @@ interface DashboardHeaderProps {
   childId?: string;
 }
 
-export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, grade, childId }) => {
+export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
+  studentName,
+  grade,
+  childId,
+}) => {
   const { sendNotification } = useNotifications();
 
   const handleStudyReminder = () => {
@@ -23,7 +26,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
       child_id: childId,
       title: `${studentName}, hora de brilhar!`,
       message: "Mamãe mandou um lembrete: que tal estudar um pouquinho agora?",
-      type: 'estudo'
+      type: "estudo",
     });
     toast.success("Lembrete enviado com sucesso!");
   };
@@ -40,16 +43,18 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
           <h1 className="text-2xl font-bold tracking-tight">{studentName}</h1>
           <div className="flex items-center gap-2 text-muted-foreground">
             <span className="text-sm font-medium">{grade}</span>
-            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">Plano Premium Ativo</Badge>
+            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+              Plano Premium Ativo
+            </Badge>
           </div>
         </div>
       </div>
-      
+
       <div className="flex flex-wrap items-center gap-2">
         {childId && (
-          <Button 
-            variant="default" 
-            size="sm" 
+          <Button
+            variant="default"
+            size="sm"
             className="gap-2 bg-indigo-600 hover:bg-indigo-700 shadow-glow animate-pulse hover:animate-none"
             onClick={handleStudyReminder}
           >
@@ -57,11 +62,11 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
           </Button>
         )}
         {childId && (
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             className="gap-2 bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary"
-            onClick={() => window.location.href = `/anamnese/${childId}`}
+            onClick={() => (window.location.href = `/anamnese/${childId}`)}
           >
             <Brain className="h-4 w-4" /> Anamnese
           </Button>
@@ -69,9 +74,9 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ studentName, g
         <Button variant="outline" size="icon" className="rounded-full">
           <Bell className="h-4 w-4" />
         </Button>
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           className="gap-2 hidden sm:flex"
           onClick={() => window.print()}
         >

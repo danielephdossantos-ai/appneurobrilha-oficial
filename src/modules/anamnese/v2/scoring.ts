@@ -142,8 +142,10 @@ export function computeRiskMap(scores: PerfilScores): RiskMap {
     socioemocional: classifyRisk(scores.socioemocional),
     adaptativo: classifyRisk(scores.adaptativo),
   };
-  const max = Object.values(each).reduce((acc, r) =>
-    order.indexOf(r) > order.indexOf(acc) ? r : acc, "verde" as RiskLevel);
+  const max = Object.values(each).reduce(
+    (acc, r) => (order.indexOf(r) > order.indexOf(acc) ? r : acc),
+    "verde" as RiskLevel,
+  );
   return { ...each, global: max };
 }
 

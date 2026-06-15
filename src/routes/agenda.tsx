@@ -7,17 +7,24 @@ export const Route = createFileRoute("/agenda")({
 });
 
 const eventos = [
-  { dia: "Hoje · Qua", itens: [
-    { h: "14:00", t: "Terapia · Lia (fono)", cat: "terapia", c: "bg-petal/30" },
-    { h: "16:30", t: "Tarefa de Português", cat: "escola", c: "bg-primary/15" },
-  ]},
-  { dia: "Amanhã · Qui", itens: [
-    { h: "09:00", t: "Pediatra · Dr. Marcos", cat: "medico", c: "bg-coral/25" },
-    { h: "15:00", t: "Remédio · Metilfenidato", cat: "remedio", c: "bg-warning/30" },
-  ]},
-  { dia: "Sexta", itens: [
-    { h: "10:00", t: "Psicopedagoga · Aline", cat: "terapia", c: "bg-petal/30" },
-  ]},
+  {
+    dia: "Hoje · Qua",
+    itens: [
+      { h: "14:00", t: "Terapia · Lia (fono)", cat: "terapia", c: "bg-petal/30" },
+      { h: "16:30", t: "Tarefa de Português", cat: "escola", c: "bg-primary/15" },
+    ],
+  },
+  {
+    dia: "Amanhã · Qui",
+    itens: [
+      { h: "09:00", t: "Pediatra · Dr. Marcos", cat: "medico", c: "bg-coral/25" },
+      { h: "15:00", t: "Remédio · Metilfenidato", cat: "remedio", c: "bg-warning/30" },
+    ],
+  },
+  {
+    dia: "Sexta",
+    itens: [{ h: "10:00", t: "Psicopedagoga · Aline", cat: "terapia", c: "bg-petal/30" }],
+  },
 ];
 
 function Agenda() {
@@ -34,7 +41,9 @@ function Agenda() {
       <div className="space-y-6">
         {eventos.map((g) => (
           <section key={g.dia}>
-            <h2 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-2">{g.dia}</h2>
+            <h2 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-2">
+              {g.dia}
+            </h2>
             <div className="space-y-2">
               {g.itens.map((i, idx) => (
                 <Card key={idx} className={`${i.c} border-0 flex items-center gap-4`}>

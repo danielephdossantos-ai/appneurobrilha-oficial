@@ -1,4 +1,3 @@
-
 export interface StudentBehaviorMetrics {
   repeatedErrors: number;
   consecutiveHits: number;
@@ -26,27 +25,28 @@ export class AdaptiveMotor {
   static analyze(metrics: StudentBehaviorMetrics): AdaptiveAnalysis {
     const now = Date.now();
     const sessionDuration = (now - metrics.sessionStartTime) / 1000 / 60; // minutes
-    
+
     // 1. Analisar Frustração
     // Baseada em erros repetidos e cliques rápidos após erro
     let frustration = 0;
     if (metrics.repeatedErrors > 2) frustration += 0.4;
     if (metrics.rapidClicksCount > 5) frustration += 0.3;
     if (metrics.totalErrors > metrics.totalHits * 2) frustration += 0.3;
-    
+
     // 2. Analisar Fadiga
     // Baseada no tempo de sessão e aumento no tempo de resposta
     let fatigue = Math.min(sessionDuration / 30, 0.5); // Aumenta com o tempo (max 30min)
     const recentResponseTimes = metrics.responseTimeHistory.slice(-5);
     if (recentResponseTimes.length >= 3) {
       const avgRecent = recentResponseTimes.reduce((a, b) => a + b, 0) / recentResponseTimes.length;
-      const avgTotal = metrics.responseTimeHistory.reduce((a, b) => a + b, 0) / metrics.responseTimeHistory.length;
+      const avgTotal =
+        metrics.responseTimeHistory.reduce((a, b) => a + b, 0) / metrics.responseTimeHistory.length;
       if (avgRecent > avgTotal * 1.5) fatigue += 0.3; // Ficando mais lento
     }
 
     // 3. Analisar Impulsividade
     // Baseada em tempos de resposta extremamente curtos (< 1s)
-    const veryFastResponses = metrics.responseTimeHistory.filter(t => t < 1000).length;
+    const veryFastResponses = metrics.responseTimeHistory.filter((t) => t < 1000).length;
     const impulsivity = Math.min(veryFastResponses / 10, 1);
 
     // 4. Analisar Distração
@@ -55,7 +55,7 @@ export class AdaptiveMotor {
 
     // 5. Risco de Abandono
     // Combinação de fadiga, frustração e distrações
-    const abandonmentRisk = Math.min((frustration * 0.4) + (fatigue * 0.3) + (distraction * 0.3), 1);
+    const abandonmentRisk = Math.min(frustration * 0.4 + fatigue * 0.3 + distraction * 0.3, 1);
 
     // 6. Nível de Performance (Acertos consecutivos)
     const performanceLevel = Math.min(metrics.consecutiveHits / 10, 1);
@@ -70,18 +70,42 @@ export class AdaptiveMotor {
       distraction: Math.min(distraction, 1),
       abandonmentRisk: Math.min(abandonmentRisk, 1),
       performanceLevel,
-      focusLevel
+      focusLevel,
     };
   }
 
-  static getIntervention(analysis: AdaptiveAnalysis): { message: string; intensity: number; type: string } | null {
-    if (analysis.abandonmentRisk > 0.8) return { message: "Sugerir pausa lúdica imediata", intensity: 0.9, type: "pausa" };
-    if (analysis.frustration > 0.7) return { message: "Reduzir dificuldade e oferecer dica visual", intensity: 0.8, type: "ajuda" };
-    if (analysis.fatigue > 0.6) return { message: "Mudar para atividade de baixa estimulação", intensity: 0.7, type: "descanso" };
-    if (analysis.impulsivity > 0.7) return { message: "Inserir barreira de confirmação (pense antes de clicar)", intensity: 0.7, type: "foco" };
-    if (analysis.distraction > 0.6) return { message: "Reforço sonoro de atenção ou mudança de estímulo", intensity: 0.6, type: "alerta" };
-    if (analysis.performanceLevel > 0.9) return { message: "Aumentar desafio e complexidade", intensity: 0.5, type: "desafio" };
-    
+  static getIntervention(
+    analysis: AdaptiveAnalysis,
+  ): { message: string; intensity: number; type: string } | null {
+    if (analysis.abandonmentRisk > 0.8)
+      return { message: "Sugerir pausa lúdica imediata", intensity: 0.9, type: "pausa" };
+    if (analysis.frustration > 0.7)
+      return {
+        message: "Reduzir dificuldade e oferecer dica visual",
+        intensity: 0.8,
+        type: "ajuda",
+      };
+    if (analysis.fatigue > 0.6)
+      return {
+        message: "Mudar para atividade de baixa estimulação",
+        intensity: 0.7,
+        type: "descanso",
+      };
+    if (analysis.impulsivity > 0.7)
+      return {
+        message: "Inserir barreira de confirmação (pense antes de clicar)",
+        intensity: 0.7,
+        type: "foco",
+      };
+    if (analysis.distraction > 0.6)
+      return {
+        message: "Reforço sonoro de atenção ou mudança de estímulo",
+        intensity: 0.6,
+        type: "alerta",
+      };
+    if (analysis.performanceLevel > 0.9)
+      return { message: "Aumentar desafio e complexidade", intensity: 0.5, type: "desafio" };
+
     return null;
   }
 }

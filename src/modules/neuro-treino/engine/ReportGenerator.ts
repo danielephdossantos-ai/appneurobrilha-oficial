@@ -5,13 +5,13 @@ export interface ReportData {
   initialProfile: {
     label: string;
     value: number;
-    status: 'adequate' | 'developing' | 'attention';
+    status: "adequate" | "developing" | "attention";
     bnccCodes?: string[];
   }[];
   evolution: {
     label: string;
     description: string;
-    trend: 'up' | 'stable' | 'down';
+    trend: "up" | "stable" | "down";
   }[];
   comparisons: {
     category: string;
@@ -31,26 +31,52 @@ export interface ReportData {
 export class ReportGenerator {
   static generate(profile: InternalProfile, childName: string, dynamicStats?: any[]): ReportData {
     const initialProfile = [
-      { label: "Linguagem", value: profile.linguagem, status: this.getStatus(profile.linguagem), bnccCodes: ["EI03EF", "EF01LP"] },
-      { label: "Atenção", value: profile.atencao, status: this.getStatus(profile.atencao), bnccCodes: ["Cognição"] },
-      { label: "Comunicação", value: profile.linguagem > 50 ? profile.linguagem : 40, status: this.getStatus(profile.linguagem > 50 ? profile.linguagem : 40), bnccCodes: ["EI03EF01"] },
-      { label: "Aprendizagem", value: profile.leitura, status: this.getStatus(profile.leitura), bnccCodes: ["EF01LP05", "EF01LP07"] },
-      { label: "Cognição", value: (profile.leitura + profile.atencao) / 2, status: this.getStatus((profile.leitura + profile.atencao) / 2), bnccCodes: ["Lógica"] },
+      {
+        label: "Linguagem",
+        value: profile.linguagem,
+        status: this.getStatus(profile.linguagem),
+        bnccCodes: ["EI03EF", "EF01LP"],
+      },
+      {
+        label: "Atenção",
+        value: profile.atencao,
+        status: this.getStatus(profile.atencao),
+        bnccCodes: ["Cognição"],
+      },
+      {
+        label: "Comunicação",
+        value: profile.linguagem > 50 ? profile.linguagem : 40,
+        status: this.getStatus(profile.linguagem > 50 ? profile.linguagem : 40),
+        bnccCodes: ["EI03EF01"],
+      },
+      {
+        label: "Aprendizagem",
+        value: profile.leitura,
+        status: this.getStatus(profile.leitura),
+        bnccCodes: ["EF01LP05", "EF01LP07"],
+      },
+      {
+        label: "Cognição",
+        value: (profile.leitura + profile.atencao) / 2,
+        status: this.getStatus((profile.leitura + profile.atencao) / 2),
+        bnccCodes: ["Lógica"],
+      },
     ];
 
-    const evolution: ReportData['evolution'] = [];
+    const evolution: ReportData["evolution"] = [];
     if (dynamicStats && dynamicStats.length > 0) {
       // Logic to interpret real app usage
       evolution.push({
         label: "Progresso Recente",
         description: "Melhora na atenção nos últimos dias ao completar atividades de lógica.",
-        trend: 'up'
+        trend: "up",
       });
     } else {
       evolution.push({
         label: "Início da Jornada",
-        description: "A criança está começando a explorar o app. Complete mais atividades para ver a evolução dinâmica.",
-        trend: 'stable'
+        description:
+          "A criança está começando a explorar o app. Complete mais atividades para ver a evolução dinâmica.",
+        trend: "stable",
       });
     }
 
@@ -73,7 +99,7 @@ export class ReportGenerator {
 
     // Logic for humanized text
     let summary = `Observamos que ${childName} apresenta um perfil único de desenvolvimento. `;
-    
+
     if (profile.flags.apoioVisual) {
       summary += `Apresenta boa interação e melhor engajamento em atividades visuais. `;
       strengths.push("Excelente resposta a estímulos visuais");
@@ -108,13 +134,13 @@ export class ReportGenerator {
       monthlyTrend,
       strengths,
       attentionPoints,
-      recommendations
+      recommendations,
     };
   }
 
-  private static getStatus(value: number): 'adequate' | 'developing' | 'attention' {
-    if (value >= 70) return 'adequate';
-    if (value >= 40) return 'developing';
-    return 'attention';
+  private static getStatus(value: number): "adequate" | "developing" | "attention" {
+    if (value >= 70) return "adequate";
+    if (value >= 40) return "developing";
+    return "attention";
   }
 }

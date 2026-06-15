@@ -31,7 +31,7 @@ export function useAnamneseV2(childId: string) {
         .eq("child_id", childId)
         .maybeSingle();
       if (error && (error as any).code !== "PGRST116") throw error;
-      return (data as any) as Row | null;
+      return data as any as Row | null;
     },
   });
 

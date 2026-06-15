@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface ModuleContainerProps {
   children: React.ReactNode;
@@ -9,9 +9,7 @@ interface ModuleContainerProps {
 export const ModuleContainer: React.FC<ModuleContainerProps> = ({ children, fallback }) => {
   return (
     <ErrorBoundary fallback={<div>Algo deu errado neste módulo.</div>}>
-      <Suspense fallback={fallback || <div>Carregando módulo...</div>}>
-        {children}
-      </Suspense>
+      <Suspense fallback={fallback || <div>Carregando módulo...</div>}>{children}</Suspense>
     </ErrorBoundary>
   );
 };

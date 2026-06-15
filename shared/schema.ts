@@ -1,4 +1,16 @@
-import { pgTable, text, uuid, integer, boolean, jsonb, timestamp, numeric, date, time, serial } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  uuid,
+  integer,
+  boolean,
+  jsonb,
+  timestamp,
+  numeric,
+  date,
+  time,
+  serial,
+} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const users = pgTable("users", {
@@ -54,7 +66,9 @@ export const children = pgTable("children", {
 
 export const childAnamnesis = pgTable("child_anamnesis", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   responses: jsonb("responses").notNull(),
   internalProfile: jsonb("internal_profile").notNull(),
   editCount: integer("edit_count").default(1),
@@ -64,7 +78,9 @@ export const childAnamnesis = pgTable("child_anamnesis", {
 
 export const anamneseV2 = pgTable("anamnese_v2", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   userId: text("user_id").notNull(),
   currentStep: integer("current_step").default(1),
   responses: jsonb("responses").default({}),
@@ -90,7 +106,9 @@ export const activities = pgTable("activities", {
 
 export const childJourney = pgTable("child_journey", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   currentDay: integer("current_day").default(1),
   lastCompletedDay: integer("last_completed_day").default(0),
   createdAt: timestamp("created_at").defaultNow(),
@@ -99,7 +117,9 @@ export const childJourney = pgTable("child_journey", {
 
 export const activityLogs = pgTable("activity_logs", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   activityId: uuid("activity_id"),
   dayNumber: integer("day_number").notNull(),
   score: numeric("score"),
@@ -110,7 +130,9 @@ export const activityLogs = pgTable("activity_logs", {
 
 export const childSkillMastery = pgTable("child_skill_mastery", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   skillCode: text("skill_code").notNull(),
   materia: text("materia").notNull(),
   masteryLevel: numeric("mastery_level").default("0"),
@@ -127,7 +149,9 @@ export const childSkillMastery = pgTable("child_skill_mastery", {
 
 export const childProgressionStats = pgTable("child_progression_stats", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   materia: text("materia").notNull(),
   evolutionPercentage: numeric("evolution_percentage").default("0"),
   activitiesCompleted: integer("activities_completed").default(0),
@@ -139,7 +163,9 @@ export const childProgressionStats = pgTable("child_progression_stats", {
 
 export const cognitiveProfile = pgTable("cognitive_profile", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   frequentErrors: jsonb("frequent_errors").default([]),
   masteredSkills: text("mastered_skills").array().default([]),
   fragileSkills: text("fragile_skills").array().default([]),
@@ -155,7 +181,9 @@ export const cognitiveProfile = pgTable("cognitive_profile", {
 
 export const longitudinalScores = pgTable("longitudinal_scores", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   attentionScore: numeric("attention_score").default("0"),
   selfRegulationScore: numeric("self_regulation_score").default("0"),
   autonomyScore: numeric("autonomy_score").default("0"),
@@ -181,7 +209,9 @@ export const notifications = pgTable("notifications", {
 
 export const studyAgenda = pgTable("study_agenda", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   topic: text("topic").notNull(),
   description: text("description"),
   examDate: date("exam_date"),
@@ -193,7 +223,9 @@ export const studyAgenda = pgTable("study_agenda", {
 
 export const examMissions = pgTable("exam_missions", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   subject: text("subject").notNull(),
   examDate: date("exam_date").notNull(),
   notes: text("notes"),
@@ -203,7 +235,9 @@ export const examMissions = pgTable("exam_missions", {
 
 export const examMissionContents = pgTable("exam_mission_contents", {
   id: uuid("id").primaryKey().defaultRandom(),
-  missionId: uuid("mission_id").notNull().references(() => examMissions.id, { onDelete: "cascade" }),
+  missionId: uuid("mission_id")
+    .notNull()
+    .references(() => examMissions.id, { onDelete: "cascade" }),
   contentTitle: text("content_title").notNull(),
   bnccCode: text("bncc_code"),
   completed: boolean("completed").default(false),
@@ -212,7 +246,9 @@ export const examMissionContents = pgTable("exam_mission_contents", {
 
 export const examStudyPlans = pgTable("exam_study_plans", {
   id: uuid("id").primaryKey().defaultRandom(),
-  missionId: uuid("mission_id").notNull().references(() => examMissions.id, { onDelete: "cascade" }),
+  missionId: uuid("mission_id")
+    .notNull()
+    .references(() => examMissions.id, { onDelete: "cascade" }),
   scheduledDate: date("scheduled_date").notNull(),
   title: text("title").notNull(),
   description: text("description"),
@@ -234,7 +270,9 @@ export const mascots = pgTable("mascots", {
 export const userMascots = pgTable("user_mascots", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull(),
-  mascotId: uuid("mascot_id").notNull().references(() => mascots.id, { onDelete: "cascade" }),
+  mascotId: uuid("mascot_id")
+    .notNull()
+    .references(() => mascots.id, { onDelete: "cascade" }),
   isActive: boolean("is_active").default(false),
   level: integer("level").default(1),
   affinity: integer("affinity").default(0),
@@ -245,7 +283,9 @@ export const userMascots = pgTable("user_mascots", {
 
 export const gamificationProfiles = pgTable("gamification_profiles", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   coins: integer("coins").default(0),
   totalStars: integer("total_stars").default(0),
   level: integer("level").default(1),
@@ -258,7 +298,9 @@ export const gamificationProfiles = pgTable("gamification_profiles", {
 
 export const mascotStates = pgTable("mascot_states", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
   name: text("name").default("Brilhante"),
   type: text("type").default("star"),
   evolutionStage: integer("evolution_stage").default(1),
@@ -282,8 +324,12 @@ export const achievements = pgTable("achievements", {
 
 export const childAchievements = pgTable("child_achievements", {
   id: uuid("id").primaryKey().defaultRandom(),
-  childId: uuid("child_id").notNull().references(() => children.id, { onDelete: "cascade" }),
-  achievementId: uuid("achievement_id").notNull().references(() => achievements.id, { onDelete: "cascade" }),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
+  achievementId: uuid("achievement_id")
+    .notNull()
+    .references(() => achievements.id, { onDelete: "cascade" }),
   unlockedAt: timestamp("unlocked_at").defaultNow(),
 });
 

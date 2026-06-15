@@ -1,5 +1,5 @@
-import { db } from './database';
-import { SyncEngine } from './sync-engine';
+import { db } from "./database";
+import { SyncEngine } from "./sync-engine";
 
 export class OfflineEngine {
   /**
@@ -8,13 +8,13 @@ export class OfflineEngine {
    */
   static async queueAction(type: string, data: any) {
     const id = data.id || crypto.randomUUID();
-    
+
     // 1. Salva o registro completo no cache local de "records" para leitura offline imediata
     await db.records.put({
       id,
       type,
       data,
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     });
 
     // 2. Adiciona na fila de sincronização
@@ -22,8 +22,8 @@ export class OfflineEngine {
       type,
       data,
       timestamp: Date.now(),
-      status: 'pending',
-      attempts: 0
+      status: "pending",
+      attempts: 0,
     });
 
     // 3. Tenta disparar sync se houver internet
@@ -43,7 +43,7 @@ export class OfflineEngine {
    * Limpa cache antigo (ex: dados com mais de 30 dias)
    */
   static async cleanup() {
-    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
-    await db.records.where('updatedAt').below(thirtyDaysAgo).delete();
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    await db.records.where("updatedAt").below(thirtyDaysAgo).delete();
   }
 }

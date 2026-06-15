@@ -1,5 +1,4 @@
-
-export type ActivityType = 
+export type ActivityType =
   | "drag-drop"
   | "multiple-choice"
   | "association"
@@ -16,7 +15,7 @@ export type ActivityType =
   | "writing-practice";
 
 export type DifficultyLevel = "easy" | "medium" | "hard" | "expert";
-export type NivelDificuldade = 'simples' | 'intermediario' | 'complexo';
+export type NivelDificuldade = "simples" | "intermediario" | "complexo";
 
 export type MasteryLevel = "initiated" | "in-progress" | "mastered" | "review-needed";
 

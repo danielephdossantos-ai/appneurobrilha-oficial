@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/utils/utils';
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/utils/utils";
 
 interface LearningMapProps {
   currentStage: number;
@@ -14,7 +13,7 @@ export const LearningMap: React.FC<LearningMapProps> = ({
   currentStage,
   totalStages,
   completedStages,
-  onStageClick
+  onStageClick,
 }) => {
   return (
     <div className="relative w-full max-w-4xl mx-auto p-12 overflow-hidden bg-sky-50 rounded-[3rem] border-8 border-white shadow-inner">
@@ -46,13 +45,15 @@ export const LearningMap: React.FC<LearningMapProps> = ({
               onClick={() => !isLocked && onStageClick?.(stageNum)}
               className={cn(
                 "relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold transition-colors shadow-lg",
-                isCompleted ? "bg-green-400 text-white" : 
-                isCurrent ? "bg-primary text-white ring-4 ring-primary/30" : 
-                "bg-slate-200 text-slate-400 grayscale"
+                isCompleted
+                  ? "bg-green-400 text-white"
+                  : isCurrent
+                    ? "bg-primary text-white ring-4 ring-primary/30"
+                    : "bg-slate-200 text-slate-400 grayscale",
               )}
             >
               {stageNum}
-              
+
               {isCurrent && (
                 <motion.div
                   layoutId="current-marker"

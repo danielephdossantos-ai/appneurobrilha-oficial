@@ -90,7 +90,9 @@ export function useSpeechMatcher() {
           if (resolved) return;
           resolved = true;
           setIsListening(false);
-          try { rec.stop(); } catch {}
+          try {
+            rec.stop();
+          } catch {}
           resolve(r);
         };
 
@@ -98,11 +100,18 @@ export function useSpeechMatcher() {
           const alts: string[] = [];
           for (let i = 0; i < ev.results[0].length; i++) alts.push(ev.results[0][i].transcript);
           // Pega o melhor entre as alternativas
-          let best: SpeechMatchResult = { transcript: alts[0] || "", matched: false, similarity: 0 };
+          let best: SpeechMatchResult = {
+            transcript: alts[0] || "",
+            matched: false,
+            similarity: 0,
+          };
           for (const a of alts) {
             const cmp = compareSpeech(a, target);
             if (cmp.similarity > best.similarity) best = cmp;
-            if (cmp.matched) { best = cmp; break; }
+            if (cmp.matched) {
+              best = cmp;
+              break;
+            }
           }
           finish(best);
         };
@@ -126,11 +135,13 @@ export function useSpeechMatcher() {
         const timeout = opts?.timeoutMs ?? 6000;
         setTimeout(() => finish({ transcript: "", matched: false, similarity: 0 }), timeout);
       }),
-    []
+    [],
   );
 
   const cancel = useCallback(() => {
-    try { recRef.current?.abort?.(); } catch {}
+    try {
+      recRef.current?.abort?.();
+    } catch {}
     setIsListening(false);
   }, []);
 

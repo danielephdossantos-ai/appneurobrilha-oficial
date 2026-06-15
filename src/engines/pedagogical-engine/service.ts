@@ -1,4 +1,3 @@
-
 import { supabase } from "@/database/supabase/client";
 import { PedagogicalActivity, NivelDificuldade } from "./types";
 
@@ -12,7 +11,7 @@ export class PedagogyService {
       materia: item.materia,
       habilidadeBNCC: item.habilidade_bncc || undefined,
       microHabilidade: item.micro_habilidade || undefined,
-      nivelDificuldade: (item.nivel_dificuldade as NivelDificuldade) || 'simples',
+      nivelDificuldade: (item.nivel_dificuldade as NivelDificuldade) || "simples",
       neuroPerfil: Array.isArray(item.neuro_perfil) ? item.neuro_perfil : [],
       tipoSensorial: Array.isArray(item.tipo_sensorial) ? item.tipo_sensorial : [],
       tempoMedio: item.tempo_medio || undefined,
@@ -27,7 +26,7 @@ export class PedagogyService {
       adaptacoes: item.adaptacoes || {},
       tags: item.tags || [],
       created_at: item.created_at || undefined,
-      updated_at: item.updated_at || undefined
+      updated_at: item.updated_at || undefined,
     };
   }
 
@@ -36,31 +35,29 @@ export class PedagogyService {
     nivelDificuldade?: string;
     serie?: string;
   }): Promise<PedagogicalActivity[]> {
-    let query = supabase
-      .from('pedagogical_activities_base')
-      .select('*');
+    let query = supabase.from("pedagogical_activities_base").select("*");
 
     if (filters?.materia) {
-      query = query.eq('materia', filters.materia);
+      query = query.eq("materia", filters.materia);
     }
     if (filters?.nivelDificuldade) {
-      query = query.eq('nivel_dificuldade', filters.nivelDificuldade);
+      query = query.eq("nivel_dificuldade", filters.nivelDificuldade);
     }
     if (filters?.serie) {
-      query = query.eq('serie', filters.serie);
+      query = query.eq("serie", filters.serie);
     }
 
     const { data, error } = await query;
     if (error) throw error;
-    
-    return (data || []).map(item => this.mapFromDb(item));
+
+    return (data || []).map((item) => this.mapFromDb(item));
   }
 
   static async getActivityById(id: string): Promise<PedagogicalActivity | null> {
     const { data, error } = await supabase
-      .from('pedagogical_activities_base')
-      .select('*')
-      .eq('id', id)
+      .from("pedagogical_activities_base")
+      .select("*")
+      .eq("id", id)
       .maybeSingle();
 
     if (error || !data) return null;

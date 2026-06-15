@@ -1,8 +1,10 @@
-
 import { ResponseMetrics, NeuroAdjustment } from "./types";
 
 export class RewardRegulationEngine {
-  static calculateAdjustment(metrics: ResponseMetrics, currentAdjustment: NeuroAdjustment): NeuroAdjustment {
+  static calculateAdjustment(
+    metrics: ResponseMetrics,
+    currentAdjustment: NeuroAdjustment,
+  ): NeuroAdjustment {
     const adjusted = { ...currentAdjustment };
 
     // Se a taxa de acerto for baixa (< 0.5), aumentar reforço positivo para evitar frustração
@@ -15,7 +17,8 @@ export class RewardRegulationEngine {
     }
 
     // Se o tempo de resposta for muito alto, pode indicar fadiga ou dificuldade inadequada
-    if (metrics.averageResponseTime > 30) { // 30 segundos
+    if (metrics.averageResponseTime > 30) {
+      // 30 segundos
       adjusted.difficultyScale *= 0.9;
       adjusted.interfaceSimplification = true;
     }

@@ -1,8 +1,10 @@
-
 import { FatigueMetrics, NeuroAdjustment } from "./types";
 
 export class FatigueEngine {
-  static calculateAdjustment(metrics: FatigueMetrics, currentAdjustment: NeuroAdjustment): NeuroAdjustment {
+  static calculateAdjustment(
+    metrics: FatigueMetrics,
+    currentAdjustment: NeuroAdjustment,
+  ): NeuroAdjustment {
     const adjusted = { ...currentAdjustment };
 
     // Se o nível de fadiga for alto (> 0.7), reduzir drasticamente complexidade

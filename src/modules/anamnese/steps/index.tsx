@@ -41,7 +41,13 @@ function calcAge(iso: string): number {
 }
 
 // ─── ETAPA 1 ──────────────────────────────────────────────────────
-export function Step1({ value, onChange }: { value: Partial<Step01_Identificacao>; onChange: Updater<"step1"> }) {
+export function Step1({
+  value,
+  onChange,
+}: {
+  value: Partial<Step01_Identificacao>;
+  onChange: Updater<"step1">;
+}) {
   const set = (patch: Partial<Step01_Identificacao>) => onChange(patch);
   return (
     <div className="space-y-4">
@@ -52,8 +58,12 @@ export function Step1({ value, onChange }: { value: Partial<Step01_Identificacao
       <div className="grid grid-cols-2 gap-3">
         <div>
           <Label>Data de nascimento</Label>
-          <Input type="date" value={value.data_nascimento ?? ""}
-            onChange={(e) => set({ data_nascimento: e.target.value, idade: calcAge(e.target.value) })}
+          <Input
+            type="date"
+            value={value.data_nascimento ?? ""}
+            onChange={(e) =>
+              set({ data_nascimento: e.target.value, idade: calcAge(e.target.value) })
+            }
           />
         </div>
         <div>
@@ -70,9 +80,12 @@ export function Step1({ value, onChange }: { value: Partial<Step01_Identificacao
             { v: "outro", l: "Outro" },
             { v: "nao_informado", l: "Não informar" },
           ].map((o) => (
-            <button key={o.v} type="button"
+            <button
+              key={o.v}
+              type="button"
               onClick={() => set({ sexo: o.v as any })}
-              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${value.sexo === o.v ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}>
+              className={`rounded-lg border-2 px-2 py-2 text-xs font-medium ${value.sexo === o.v ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"}`}
+            >
               {o.l}
             </button>
           ))}
@@ -80,12 +93,18 @@ export function Step1({ value, onChange }: { value: Partial<Step01_Identificacao
       </div>
       <div>
         <Label>Série escolar</Label>
-        <Input value={value.serie ?? ""} onChange={(e) => set({ serie: e.target.value })}
-          placeholder="Ex: Pré II, 1º ano, 3º ano…" />
+        <Input
+          value={value.serie ?? ""}
+          onChange={(e) => set({ serie: e.target.value })}
+          placeholder="Ex: Pré II, 1º ano, 3º ano…"
+        />
       </div>
       <div>
         <Label>Nome do responsável</Label>
-        <Input value={value.responsavel ?? ""} onChange={(e) => set({ responsavel: e.target.value })} />
+        <Input
+          value={value.responsavel ?? ""}
+          onChange={(e) => set({ responsavel: e.target.value })}
+        />
       </div>
       <div>
         <Label>Escola</Label>
@@ -100,10 +119,19 @@ export function Step1({ value, onChange }: { value: Partial<Step01_Identificacao
 }
 
 // ─── ETAPA 2 ──────────────────────────────────────────────────────
-export function Step2({ value, onChange }: { value: Partial<Step02_Gestacao>; onChange: Updater<"step2"> }) {
+export function Step2({
+  value,
+  onChange,
+}: {
+  value: Partial<Step02_Gestacao>;
+  onChange: Updater<"step2">;
+}) {
   const yn = (k: keyof Step02_Gestacao, label: string) => (
-    <YesNoField label={label} value={value[k] as SimNao | undefined}
-      onChange={(v) => onChange({ [k]: v } as any)} />
+    <YesNoField
+      label={label}
+      value={value[k] as SimNao | undefined}
+      onChange={(v) => onChange({ [k]: v } as any)}
+    />
   );
   return (
     <div className="space-y-1">
@@ -112,13 +140,24 @@ export function Step2({ value, onChange }: { value: Partial<Step02_Gestacao>; on
       <div className="grid grid-cols-2 gap-3 py-3">
         <div>
           <Label>Semanas de gestação</Label>
-          <Input type="number" value={value.semanas_gestacao ?? ""}
-            onChange={(e) => onChange({ semanas_gestacao: e.target.value ? Number(e.target.value) : null })} />
+          <Input
+            type="number"
+            value={value.semanas_gestacao ?? ""}
+            onChange={(e) =>
+              onChange({ semanas_gestacao: e.target.value ? Number(e.target.value) : null })
+            }
+          />
         </div>
         <div>
           <Label>Peso ao nascer (kg)</Label>
-          <Input type="number" step="0.1" value={value.peso_nascer_kg ?? ""}
-            onChange={(e) => onChange({ peso_nascer_kg: e.target.value ? Number(e.target.value) : null })} />
+          <Input
+            type="number"
+            step="0.1"
+            value={value.peso_nascer_kg ?? ""}
+            onChange={(e) =>
+              onChange({ peso_nascer_kg: e.target.value ? Number(e.target.value) : null })
+            }
+          />
         </div>
       </div>
       {yn("uti_neonatal", "Houve internação em UTI neonatal?")}
@@ -132,18 +171,32 @@ export function Step2({ value, onChange }: { value: Partial<Step02_Gestacao>; on
 }
 
 // ─── ETAPA 3 ──────────────────────────────────────────────────────
-export function Step3({ value, onChange }: { value: Partial<Step03_Marcos>; onChange: Updater<"step3"> }) {
+export function Step3({
+  value,
+  onChange,
+}: {
+  value: Partial<Step03_Marcos>;
+  onChange: Updater<"step3">;
+}) {
   const num = (k: keyof Step03_Marcos, label: string) => (
     <div className="py-2">
-      <Label className="text-sm">{label} <span className="text-xs text-muted-foreground">(meses)</span></Label>
-      <Input type="number" value={(value[k] as number | null) ?? ""}
+      <Label className="text-sm">
+        {label} <span className="text-xs text-muted-foreground">(meses)</span>
+      </Label>
+      <Input
+        type="number"
+        value={(value[k] as number | null) ?? ""}
         onChange={(e) => onChange({ [k]: e.target.value ? Number(e.target.value) : null } as any)}
-        placeholder="Idade em meses" />
+        placeholder="Idade em meses"
+      />
     </div>
   );
   const lk = (k: keyof Step03_Marcos, label: string) => (
-    <LikertScale label={label} value={value[k] as Likert | undefined}
-      onChange={(v) => onChange({ [k]: v } as any)} />
+    <LikertScale
+      label={label}
+      value={value[k] as Likert | undefined}
+      onChange={(v) => onChange({ [k]: v } as any)}
+    />
   );
   return (
     <div className="space-y-3">
@@ -165,10 +218,19 @@ export function Step3({ value, onChange }: { value: Partial<Step03_Marcos>; onCh
 }
 
 // ─── ETAPA 4 ──────────────────────────────────────────────────────
-export function Step4({ value, onChange }: { value: Partial<Step04_HistoricoMedico>; onChange: Updater<"step4"> }) {
+export function Step4({
+  value,
+  onChange,
+}: {
+  value: Partial<Step04_HistoricoMedico>;
+  onChange: Updater<"step4">;
+}) {
   const yn = (k: keyof Step04_HistoricoMedico, label: string) => (
-    <YesNoField label={label} value={value[k] as SimNao | undefined}
-      onChange={(v) => onChange({ [k]: v } as any)} />
+    <YesNoField
+      label={label}
+      value={value[k] as SimNao | undefined}
+      onChange={(v) => onChange({ [k]: v } as any)}
+    />
   );
   return (
     <div className="space-y-1">
@@ -179,29 +241,44 @@ export function Step4({ value, onChange }: { value: Partial<Step04_HistoricoMedi
       {yn("transtornos_neurologicos", "Possui transtornos neurológicos diagnosticados?")}
       <div className="py-3">
         <Label>Medicamentos em uso</Label>
-        <Textarea value={value.medicamentos_uso ?? ""}
+        <Textarea
+          value={value.medicamentos_uso ?? ""}
           onChange={(e) => onChange({ medicamentos_uso: e.target.value })}
-          placeholder="Liste os medicamentos atuais" />
+          placeholder="Liste os medicamentos atuais"
+        />
       </div>
       <div className="py-3">
         <Label>Terapias atuais</Label>
-        <Textarea value={value.terapias_atuais ?? ""}
+        <Textarea
+          value={value.terapias_atuais ?? ""}
           onChange={(e) => onChange({ terapias_atuais: e.target.value })}
-          placeholder="Ex: fonoaudiologia, TO, psicologia…" />
+          placeholder="Ex: fonoaudiologia, TO, psicologia…"
+        />
       </div>
     </div>
   );
 }
 
 // ─── ETAPA 5 ──────────────────────────────────────────────────────
-export function Step5({ value, onChange }: { value: Partial<Step05_HistoricoFamiliar>; onChange: Updater<"step5"> }) {
+export function Step5({
+  value,
+  onChange,
+}: {
+  value: Partial<Step05_HistoricoFamiliar>;
+  onChange: Updater<"step5">;
+}) {
   const yn = (k: keyof Step05_HistoricoFamiliar, label: string) => (
-    <YesNoField label={label} value={value[k] as SimNao | undefined}
-      onChange={(v) => onChange({ [k]: v } as any)} />
+    <YesNoField
+      label={label}
+      value={value[k] as SimNao | undefined}
+      onChange={(v) => onChange({ [k]: v } as any)}
+    />
   );
   return (
     <div className="space-y-1">
-      <p className="text-xs text-muted-foreground mb-2">Há na família (pais, irmãos, avós, tios)?</p>
+      <p className="text-xs text-muted-foreground mb-2">
+        Há na família (pais, irmãos, avós, tios)?
+      </p>
       {yn("tdah", "TDAH")}
       {yn("tea", "TEA (autismo)")}
       {yn("dislexia", "Dislexia")}
@@ -213,10 +290,19 @@ export function Step5({ value, onChange }: { value: Partial<Step05_HistoricoFami
 }
 
 // ─── ETAPA 6 ──────────────────────────────────────────────────────
-export function Step6({ value, onChange }: { value: Partial<Step06_Escolar>; onChange: Updater<"step6"> }) {
+export function Step6({
+  value,
+  onChange,
+}: {
+  value: Partial<Step06_Escolar>;
+  onChange: Updater<"step6">;
+}) {
   const lk = (k: keyof Step06_Escolar, label: string) => (
-    <LikertScale label={label} value={value[k] as Likert | undefined}
-      onChange={(v) => onChange({ [k]: v } as any)} />
+    <LikertScale
+      label={label}
+      value={value[k] as Likert | undefined}
+      onChange={(v) => onChange({ [k]: v } as any)}
+    />
   );
   return (
     <div className="space-y-1">
@@ -250,15 +336,24 @@ function likertList<T extends Record<string, any>>(
   return (
     <div className="space-y-1">
       {items.map(({ k, l }) => (
-        <LikertScale key={String(k)} label={l}
+        <LikertScale
+          key={String(k)}
+          label={l}
           value={value[k] as Likert | undefined}
-          onChange={(v) => onChange({ [k]: v } as any)} />
+          onChange={(v) => onChange({ [k]: v } as any)}
+        />
       ))}
     </div>
   );
 }
 
-export function Step7({ value, onChange }: { value: Partial<Step07_Atencao>; onChange: Updater<"step7"> }) {
+export function Step7({
+  value,
+  onChange,
+}: {
+  value: Partial<Step07_Atencao>;
+  onChange: Updater<"step7">;
+}) {
   return likertList(value, onChange, [
     { k: "distrai_facil", l: "Distrai-se facilmente" },
     { k: "esquece_instrucoes", l: "Esquece instruções" },
@@ -269,7 +364,13 @@ export function Step7({ value, onChange }: { value: Partial<Step07_Atencao>; onC
   ]);
 }
 
-export function Step8({ value, onChange }: { value: Partial<Step08_Hiperatividade>; onChange: Updater<"step8"> }) {
+export function Step8({
+  value,
+  onChange,
+}: {
+  value: Partial<Step08_Hiperatividade>;
+  onChange: Updater<"step8">;
+}) {
   return likertList(value, onChange, [
     { k: "levanta_constantemente", l: "Levanta constantemente" },
     { k: "corre_excessivamente", l: "Corre excessivamente" },
@@ -279,7 +380,13 @@ export function Step8({ value, onChange }: { value: Partial<Step08_Hiperatividad
   ]);
 }
 
-export function Step9({ value, onChange }: { value: Partial<Step09_ComunicacaoSocial>; onChange: Updater<"step9"> }) {
+export function Step9({
+  value,
+  onChange,
+}: {
+  value: Partial<Step09_ComunicacaoSocial>;
+  onChange: Updater<"step9">;
+}) {
   return likertList(value, onChange, [
     { k: "responde_chamado", l: "Responde quando chamado(a) pelo nome" },
     { k: "mantem_contato_visual", l: "Mantém contato visual" },
@@ -289,7 +396,13 @@ export function Step9({ value, onChange }: { value: Partial<Step09_ComunicacaoSo
   ]);
 }
 
-export function Step10({ value, onChange }: { value: Partial<Step10_Repetitivos>; onChange: Updater<"step10"> }) {
+export function Step10({
+  value,
+  onChange,
+}: {
+  value: Partial<Step10_Repetitivos>;
+  onChange: Updater<"step10">;
+}) {
   return likertList(value, onChange, [
     { k: "alinha_objetos", l: "Alinha objetos" },
     { k: "movimentos_repetitivos", l: "Movimentos repetitivos (balança, gira)" },
@@ -299,7 +412,13 @@ export function Step10({ value, onChange }: { value: Partial<Step10_Repetitivos>
   ]);
 }
 
-export function Step11({ value, onChange }: { value: Partial<Step11_Sensorial>; onChange: Updater<"step11"> }) {
+export function Step11({
+  value,
+  onChange,
+}: {
+  value: Partial<Step11_Sensorial>;
+  onChange: Updater<"step11">;
+}) {
   return likertList(value, onChange, [
     { k: "sensibilidade_sons", l: "Sensibilidade a sons" },
     { k: "sensibilidade_luz", l: "Sensibilidade à luz" },
@@ -309,7 +428,13 @@ export function Step11({ value, onChange }: { value: Partial<Step11_Sensorial>; 
   ]);
 }
 
-export function Step12({ value, onChange }: { value: Partial<Step12_Linguagem>; onChange: Updater<"step12"> }) {
+export function Step12({
+  value,
+  onChange,
+}: {
+  value: Partial<Step12_Linguagem>;
+  onChange: Updater<"step12">;
+}) {
   return likertList(value, onChange, [
     { k: "compreende_instrucoes", l: "Compreende instruções" },
     { k: "nomeia_objetos", l: "Nomeia objetos" },
@@ -319,7 +444,13 @@ export function Step12({ value, onChange }: { value: Partial<Step12_Linguagem>; 
   ]);
 }
 
-export function Step13({ value, onChange }: { value: Partial<Step13_Memoria>; onChange: Updater<"step13"> }) {
+export function Step13({
+  value,
+  onChange,
+}: {
+  value: Partial<Step13_Memoria>;
+  onChange: Updater<"step13">;
+}) {
   return likertList(value, onChange, [
     { k: "recorda_instrucoes", l: "Recorda instruções dadas" },
     { k: "recorda_historias", l: "Recorda histórias ouvidas" },
@@ -328,7 +459,13 @@ export function Step13({ value, onChange }: { value: Partial<Step13_Memoria>; on
   ]);
 }
 
-export function Step14({ value, onChange }: { value: Partial<Step14_Motora>; onChange: Updater<"step14"> }) {
+export function Step14({
+  value,
+  onChange,
+}: {
+  value: Partial<Step14_Motora>;
+  onChange: Updater<"step14">;
+}) {
   return (
     <div className="space-y-1">
       <p className="text-sm font-bold text-primary mb-2">Motricidade fina</p>
@@ -349,7 +486,13 @@ export function Step14({ value, onChange }: { value: Partial<Step14_Motora>; onC
   );
 }
 
-export function Step15({ value, onChange }: { value: Partial<Step15_Emocional>; onChange: Updater<"step15"> }) {
+export function Step15({
+  value,
+  onChange,
+}: {
+  value: Partial<Step15_Emocional>;
+  onChange: Updater<"step15">;
+}) {
   return likertList(value, onChange, [
     { k: "ansiedade", l: "Apresenta ansiedade" },
     { k: "irritabilidade", l: "Apresenta irritabilidade" },
@@ -359,7 +502,13 @@ export function Step15({ value, onChange }: { value: Partial<Step15_Emocional>; 
   ]);
 }
 
-export function Step16({ value, onChange }: { value: Partial<Step16_Autonomia>; onChange: Updater<"step16"> }) {
+export function Step16({
+  value,
+  onChange,
+}: {
+  value: Partial<Step16_Autonomia>;
+  onChange: Updater<"step16">;
+}) {
   return likertList(value, onChange, [
     { k: "alimentacao", l: "Alimenta-se sozinho(a)" },
     { k: "higiene", l: "Cuida da higiene pessoal" },

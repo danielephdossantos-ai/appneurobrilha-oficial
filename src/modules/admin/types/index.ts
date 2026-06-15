@@ -1,17 +1,17 @@
 import { z } from "zod";
 
 export const AdminRoleSchema = z.enum([
-  'super_admin',
-  'administrator',
-  'support',
-  'pedagogical_editor'
+  "super_admin",
+  "administrator",
+  "support",
+  "pedagogical_editor",
 ]);
 
 export type AdminRole = z.infer<typeof AdminRoleSchema>;
 
 export interface AdminPermission {
-  module: 'users' | 'activities' | 'bncc' | 'mascots' | 'content' | 'plans' | 'system';
-  actions: ('create' | 'read' | 'update' | 'delete' | 'manage')[];
+  module: "users" | "activities" | "bncc" | "mascots" | "content" | "plans" | "system";
+  actions: ("create" | "read" | "update" | "delete" | "manage")[];
 }
 
 export interface AdminUser {

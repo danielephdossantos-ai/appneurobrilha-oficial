@@ -1,4 +1,3 @@
-
 import { z } from "zod";
 
 export const NeuroProfileSchema = z.enum([
@@ -7,7 +6,7 @@ export const NeuroProfileSchema = z.enum([
   "DeficienciaIntelectual",
   "AtrasoAprendizagem",
   "Dislexia",
-  "Tipico"
+  "Tipico",
 ]);
 
 export type NeuroProfile = z.infer<typeof NeuroProfileSchema>;

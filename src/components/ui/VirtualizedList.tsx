@@ -1,6 +1,6 @@
-import React from 'react';
-import { useVirtualizer } from '@tanstack/react-virtual';
-import { cn } from '@/utils/utils';
+import React from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { cn } from "@/utils/utils";
 
 interface VirtualizedListProps<T> {
   items: T[];
@@ -19,9 +19,9 @@ export function VirtualizedList<T>({
   items,
   renderItem,
   estimateSize = 60,
-  height = '400px',
+  height = "400px",
   className,
-  itemClassName
+  itemClassName,
 }: VirtualizedListProps<T>) {
   const parentRef = React.useRef<HTMLDivElement>(null);
 
@@ -37,14 +37,14 @@ export function VirtualizedList<T>({
       ref={parentRef}
       className={cn("overflow-auto outline-none", className)}
       style={{
-        height: typeof height === 'number' ? `${height}px` : height,
+        height: typeof height === "number" ? `${height}px` : height,
       }}
     >
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
-          width: '100%',
-          position: 'relative',
+          width: "100%",
+          position: "relative",
         }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => (
@@ -52,10 +52,10 @@ export function VirtualizedList<T>({
             key={virtualItem.key}
             className={itemClassName}
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
-              width: '100%',
+              width: "100%",
               height: `${virtualItem.size}px`,
               transform: `translateY(${virtualItem.start}px)`,
             }}

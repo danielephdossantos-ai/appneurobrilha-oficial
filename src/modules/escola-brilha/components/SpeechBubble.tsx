@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface SpeechBubbleProps {
   text: string;
@@ -7,7 +7,7 @@ interface SpeechBubbleProps {
 
 export const SpeechBubble: React.FC<SpeechBubbleProps> = ({ text }) => {
   // Logic to enforce limits or warn during development
-  const wordCount = text.split(' ').length;
+  const wordCount = text.split(" ").length;
   if (wordCount > 15) {
     console.warn(`Speech too long: ${wordCount} words. Limit is 15.`);
   }
@@ -22,7 +22,7 @@ export const SpeechBubble: React.FC<SpeechBubbleProps> = ({ text }) => {
       <p className="text-xl md:text-2xl font-bold text-center text-gray-800 leading-tight">
         {text}
       </p>
-      
+
       {/* Triangle pointer */}
       <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[20px] border-t-white" />
     </motion.div>

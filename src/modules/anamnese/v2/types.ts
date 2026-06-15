@@ -182,7 +182,7 @@ export interface AnamneseV2Responses {
 }
 
 export interface PerfilScores {
-  cognitivo: number;       // 0-100 (maior = mais indicadores)
+  cognitivo: number; // 0-100 (maior = mais indicadores)
   escolar: number;
   comportamental: number;
   socioemocional: number;

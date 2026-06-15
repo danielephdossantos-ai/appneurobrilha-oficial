@@ -2,7 +2,7 @@ import { NeuroAnalyticsEvent, Insight, EvolutionData } from "../../modules/relat
 import { CognitiveAnalytics } from "./CognitiveAnalytics";
 import { PedagogicalAnalytics } from "./PedagogicalAnalytics";
 import { ParentalAnalytics } from "./ParentalAnalytics";
-import { get, set } from 'idb-keyval';
+import { get, set } from "idb-keyval";
 
 export class AnalyticsEngine {
   private static STORAGE_KEY = "neuro_analytics_events";
@@ -10,7 +10,9 @@ export class AnalyticsEngine {
   private static pedagogical = new PedagogicalAnalytics();
   private static parental = new ParentalAnalytics();
 
-  static async logEvent(event: Omit<NeuroAnalyticsEvent, "id" | "created_at" | "timestamp">): Promise<void> {
+  static async logEvent(
+    event: Omit<NeuroAnalyticsEvent, "id" | "created_at" | "timestamp">,
+  ): Promise<void> {
     const newEvent: NeuroAnalyticsEvent = {
       ...event,
       id: crypto.randomUUID(),
@@ -20,7 +22,7 @@ export class AnalyticsEngine {
 
     const events = await this.getStoredEvents();
     events.push(newEvent);
-    
+
     // Limit local storage to last 1000 events for performance
     const prunedEvents = events.slice(-1000);
     await set(this.STORAGE_KEY, prunedEvents);
@@ -43,7 +45,7 @@ export class AnalyticsEngine {
 
   static async getFullAnalysis(childId: string): Promise<EvolutionData> {
     const events = await this.getStoredEvents();
-    const childEvents = events.filter(e => e.child_id === childId);
+    const childEvents = events.filter((e) => e.child_id === childId);
 
     const cognitive = this.cognitive.analyze(childEvents);
     const pedagogical = this.pedagogical.analyze(childEvents);
@@ -52,18 +54,18 @@ export class AnalyticsEngine {
     return {
       ...cognitive,
       ...pedagogical,
-      trends
+      trends,
     };
   }
 
   static async getInsights(childId: string): Promise<Insight[]> {
     const events = await this.getStoredEvents();
-    const childEvents = events.filter(e => e.child_id === childId);
+    const childEvents = events.filter((e) => e.child_id === childId);
 
     return [
       ...this.cognitive.generateInsights(childEvents),
       ...this.pedagogical.generateInsights(childEvents),
-      ...this.parental.generateInsights(childEvents)
+      ...this.parental.generateInsights(childEvents),
     ];
   }
 }

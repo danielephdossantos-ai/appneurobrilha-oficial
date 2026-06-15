@@ -1,13 +1,27 @@
 import { z } from "zod";
 
 export const DiagnosticoSchema = z.enum([
-  "tdah", "tea", "dislexia", "tod", "deficiencia_intelectual", 
-  "altas_habilidades", "neurotipico", "discalculia", "multiplo", "nenhum"
+  "tdah",
+  "tea",
+  "dislexia",
+  "tod",
+  "deficiencia_intelectual",
+  "altas_habilidades",
+  "neurotipico",
+  "discalculia",
+  "multiplo",
+  "nenhum",
 ]);
 
 export const HiperfocoSchema = z.enum([
-  "animais", "dinossauros", "espaco", "veiculos",
-  "princesas", "super-herois", "robos", "musica"
+  "animais",
+  "dinossauros",
+  "espaco",
+  "veiculos",
+  "princesas",
+  "super-herois",
+  "robos",
+  "musica",
 ]);
 
 export const ChildProfileSchema = z.object({

@@ -19,12 +19,12 @@ export const NeuroAnalyticsEventSchema = z.object({
     "evolution_milestone",
     "sensory_distraction",
     "focus_lost",
-    "focus_gained"
+    "focus_gained",
   ]),
   metadata: z.record(z.string(), z.any()).default({}),
   duration_ms: z.number().optional(),
   timestamp: z.number().optional(), // Unix timestamp for better calc
-  created_at: z.string().datetime().optional()
+  created_at: z.string().datetime().optional(),
 });
 
 export type NeuroAnalyticsEvent = z.infer<typeof NeuroAnalyticsEventSchema>;
@@ -55,7 +55,7 @@ export interface BNCCCompetence {
   code: string;
   name: string;
   progress: number;
-  mastery_level: 'beginner' | 'intermediate' | 'advanced' | 'master';
+  mastery_level: "beginner" | "intermediate" | "advanced" | "master";
 }
 
 export interface EvolutionData {

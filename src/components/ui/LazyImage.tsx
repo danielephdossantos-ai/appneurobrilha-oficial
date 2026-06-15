@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { cn } from '@/utils/utils';
+import React, { useState, useEffect } from "react";
+import { cn } from "@/utils/utils";
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   placeholder?: string;
@@ -14,13 +14,13 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
  * - Smooth transition on load
  * - Fallback for broken images
  */
-export const LazyImage: React.FC<LazyImageProps> = ({ 
-  src, 
-  alt, 
-  className, 
-  placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', // Transparent 1x1
-  fallback = '/placeholder-error.png',
-  ...props 
+export const LazyImage: React.FC<LazyImageProps> = ({
+  src,
+  alt,
+  className,
+  placeholder = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", // Transparent 1x1
+  fallback = "/placeholder-error.png",
+  ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -49,7 +49,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
         className={cn(
           "transition-opacity duration-500 ease-in-out",
           isLoaded ? "opacity-100" : "opacity-0 blur-sm",
-          error && "opacity-50 grayscale"
+          error && "opacity-50 grayscale",
         )}
         loading="lazy"
         {...props}

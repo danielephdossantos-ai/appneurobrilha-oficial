@@ -6,8 +6,22 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight, Loader2, Save, CheckCircle2 } from "lucide-react";
 import {
-  Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8,
-  Step9, Step10, Step11, Step12, Step13, Step14, Step15, Step16,
+  Step1,
+  Step2,
+  Step3,
+  Step4,
+  Step5,
+  Step6,
+  Step7,
+  Step8,
+  Step9,
+  Step10,
+  Step11,
+  Step12,
+  Step13,
+  Step14,
+  Step15,
+  Step16,
 } from "../steps";
 import { STEP_TITLES, TOTAL_STEPS } from "../v2/types";
 import { toast } from "sonner";
@@ -29,23 +43,40 @@ export function AnamneseWizard({ childId }: { childId: string }) {
 
   const renderStep = () => {
     switch (step) {
-      case 1: return <Step1 value={r.step1 ?? {}} onChange={(p) => a.updateStep("step1", p)} />;
-      case 2: return <Step2 value={r.step2 ?? {}} onChange={(p) => a.updateStep("step2", p)} />;
-      case 3: return <Step3 value={r.step3 ?? {}} onChange={(p) => a.updateStep("step3", p)} />;
-      case 4: return <Step4 value={r.step4 ?? {}} onChange={(p) => a.updateStep("step4", p)} />;
-      case 5: return <Step5 value={r.step5 ?? {}} onChange={(p) => a.updateStep("step5", p)} />;
-      case 6: return <Step6 value={r.step6 ?? {}} onChange={(p) => a.updateStep("step6", p)} />;
-      case 7: return <Step7 value={r.step7 ?? {}} onChange={(p) => a.updateStep("step7", p)} />;
-      case 8: return <Step8 value={r.step8 ?? {}} onChange={(p) => a.updateStep("step8", p)} />;
-      case 9: return <Step9 value={r.step9 ?? {}} onChange={(p) => a.updateStep("step9", p)} />;
-      case 10: return <Step10 value={r.step10 ?? {}} onChange={(p) => a.updateStep("step10", p)} />;
-      case 11: return <Step11 value={r.step11 ?? {}} onChange={(p) => a.updateStep("step11", p)} />;
-      case 12: return <Step12 value={r.step12 ?? {}} onChange={(p) => a.updateStep("step12", p)} />;
-      case 13: return <Step13 value={r.step13 ?? {}} onChange={(p) => a.updateStep("step13", p)} />;
-      case 14: return <Step14 value={r.step14 ?? {}} onChange={(p) => a.updateStep("step14", p)} />;
-      case 15: return <Step15 value={r.step15 ?? {}} onChange={(p) => a.updateStep("step15", p)} />;
-      case 16: return <Step16 value={r.step16 ?? {}} onChange={(p) => a.updateStep("step16", p)} />;
-      default: return null;
+      case 1:
+        return <Step1 value={r.step1 ?? {}} onChange={(p) => a.updateStep("step1", p)} />;
+      case 2:
+        return <Step2 value={r.step2 ?? {}} onChange={(p) => a.updateStep("step2", p)} />;
+      case 3:
+        return <Step3 value={r.step3 ?? {}} onChange={(p) => a.updateStep("step3", p)} />;
+      case 4:
+        return <Step4 value={r.step4 ?? {}} onChange={(p) => a.updateStep("step4", p)} />;
+      case 5:
+        return <Step5 value={r.step5 ?? {}} onChange={(p) => a.updateStep("step5", p)} />;
+      case 6:
+        return <Step6 value={r.step6 ?? {}} onChange={(p) => a.updateStep("step6", p)} />;
+      case 7:
+        return <Step7 value={r.step7 ?? {}} onChange={(p) => a.updateStep("step7", p)} />;
+      case 8:
+        return <Step8 value={r.step8 ?? {}} onChange={(p) => a.updateStep("step8", p)} />;
+      case 9:
+        return <Step9 value={r.step9 ?? {}} onChange={(p) => a.updateStep("step9", p)} />;
+      case 10:
+        return <Step10 value={r.step10 ?? {}} onChange={(p) => a.updateStep("step10", p)} />;
+      case 11:
+        return <Step11 value={r.step11 ?? {}} onChange={(p) => a.updateStep("step11", p)} />;
+      case 12:
+        return <Step12 value={r.step12 ?? {}} onChange={(p) => a.updateStep("step12", p)} />;
+      case 13:
+        return <Step13 value={r.step13 ?? {}} onChange={(p) => a.updateStep("step13", p)} />;
+      case 14:
+        return <Step14 value={r.step14 ?? {}} onChange={(p) => a.updateStep("step14", p)} />;
+      case 15:
+        return <Step15 value={r.step15 ?? {}} onChange={(p) => a.updateStep("step15", p)} />;
+      case 16:
+        return <Step16 value={r.step16 ?? {}} onChange={(p) => a.updateStep("step16", p)} />;
+      default:
+        return null;
     }
   };
 
@@ -90,9 +121,13 @@ export function AnamneseWizard({ childId }: { childId: string }) {
         </Button>
         <Button size="sm" onClick={handleNext}>
           {step >= TOTAL_STEPS ? (
-            <>Concluir <CheckCircle2 className="h-4 w-4 ml-1" /></>
+            <>
+              Concluir <CheckCircle2 className="h-4 w-4 ml-1" />
+            </>
           ) : (
-            <>Próxima <ArrowRight className="h-4 w-4 ml-1" /></>
+            <>
+              Próxima <ArrowRight className="h-4 w-4 ml-1" />
+            </>
           )}
         </Button>
       </div>

@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { useMascot } from '@/contexts/MascotContext';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/utils/utils';
-import { useLocation } from '@tanstack/react-router';
-import { useAppState } from '@/core/store';
-import { PipPedagogicalSystem } from '@/engines/pedagogical-engine/PipPedagogicalSystem';
-import KidLiveMascot from '@/components/ui/KidLiveMascot';
+import React, { useState, useEffect } from "react";
+import { useMascot } from "@/contexts/MascotContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/utils/utils";
+import { useLocation } from "@tanstack/react-router";
+import { useAppState } from "@/core/store";
+import { PipPedagogicalSystem } from "@/engines/pedagogical-engine/PipPedagogicalSystem";
+import KidLiveMascot from "@/components/ui/KidLiveMascot";
 
 export const MascotGlobalContainer: React.FC = () => {
   const { activeMascot, isLoading } = useMascot();
   const { activeChild } = useAppState();
   const [isMinimized, setIsMinimized] = useState(false);
   const [currentMessage, setCurrentMessage] = useState<string | null>(null);
-  const [emotion, setEmotion] = useState<any>('happy');
+  const [emotion, setEmotion] = useState<any>("happy");
   const location = useLocation();
 
   useEffect(() => {
     if (!activeChild) return;
 
     // Reagir a mudanças de rota com o PipPedagogicalSystem
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       setCurrentMessage("Bem-vindo de volta! Vamos brilhar hoje?");
-      setEmotion('happy');
+      setEmotion("happy");
     } else {
       const guidance = PipPedagogicalSystem.getEncouragement(activeChild);
       setCurrentMessage(guidance.text);
       setEmotion(guidance.emotion);
     }
-    
+
     const timer = setTimeout(() => setCurrentMessage(null), 5000);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
   // Esconde mascote global em telas que já mostram Pip + Pipa fixos (Escola Brilha)
-  if (location.pathname.startsWith('/escola-brilha')) return null;
+  if (location.pathname.startsWith("/escola-brilha")) return null;
   if (isLoading || !activeMascot) return null;
 
   return (
@@ -58,26 +58,23 @@ export const MascotGlobalContainer: React.FC = () => {
         layout
         className={cn(
           "pointer-events-auto cursor-pointer relative",
-          isMinimized ? "opacity-50 hover:opacity-100" : ""
+          isMinimized ? "opacity-50 hover:opacity-100" : "",
         )}
         onClick={() => setIsMinimized(!isMinimized)}
       >
-        <div className={cn(
-          "transition-all duration-300",
-          isMinimized ? "w-16 h-16" : "w-32 h-32"
-        )}>
-           <KidLiveMascot 
-             emotion={emotion} 
-             size={isMinimized ? "sm" : "md"}
-             className="cursor-pointer"
-           />
-           
-           {/* Badge de Nível Flutuante */}
-           {!isMinimized && (
-             <div className="absolute -bottom-2 right-4 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-lg">
-               LV {activeMascot.level}
-             </div>
-           )}
+        <div className={cn("transition-all duration-300", isMinimized ? "w-16 h-16" : "w-32 h-32")}>
+          <KidLiveMascot
+            emotion={emotion}
+            size={isMinimized ? "sm" : "md"}
+            className="cursor-pointer"
+          />
+
+          {/* Badge de Nível Flutuante */}
+          {!isMinimized && (
+            <div className="absolute -bottom-2 right-4 bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-lg">
+              LV {activeMascot.level}
+            </div>
+          )}
         </div>
       </motion.div>
     </div>

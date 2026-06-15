@@ -6,7 +6,7 @@ export class ParentalAnalytics {
       regression: false,
       improvement: 15,
       main_bottleneck: "Coordenação motora fina (cliques precisos)",
-      peak_performance_hour: "10:00 - 11:30"
+      peak_performance_hour: "10:00 - 11:30",
     };
   }
 
@@ -17,9 +17,10 @@ export class ParentalAnalytics {
         type: "recommendation",
         category: "behavior",
         severity: "low",
-        message: "Seu filho(a) performa melhor pela manhã. Tente agendar atividades complexas antes do almoço.",
-        created_at: new Date().toISOString()
-      }
+        message:
+          "Seu filho(a) performa melhor pela manhã. Tente agendar atividades complexas antes do almoço.",
+        created_at: new Date().toISOString(),
+      },
     ];
   }
 }

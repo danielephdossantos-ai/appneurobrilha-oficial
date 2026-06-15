@@ -9,7 +9,9 @@ export function StepIndicator({ current }: Props) {
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-xs md:text-sm font-medium">
-        <span className="text-primary">Etapa {current} de {TOTAL_STEPS}</span>
+        <span className="text-primary">
+          Etapa {current} de {TOTAL_STEPS}
+        </span>
         <span className="text-muted-foreground">{pct}%</span>
       </div>
       <Progress value={pct} className="h-2" />

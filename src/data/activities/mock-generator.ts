@@ -1,4 +1,3 @@
-
 import { CONTENT_DATABASE, ContentItem } from "./content";
 import { PRE1_DATA, PRE2_DATA } from "../early-childhood/index";
 
@@ -8,7 +7,7 @@ export const generateEarlyChildhoodContent = () => {
 
   // PRÉ 1 - Cores (100 variations)
   const colors = ["Vermelho", "Azul", "Amarelo", "Verde", "Rosa", "Laranja"];
-  colors.forEach(color => {
+  colors.forEach((color) => {
     for (let i = 0; i < 20; i++) {
       content.push({
         id: `pre1-color-${color.toLowerCase()}-${i}`,
@@ -16,7 +15,7 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "colors",
         difficulty: 1,
-        tags: ["pre1", "visual-perception"]
+        tags: ["pre1", "visual-perception"],
       });
     }
   });
@@ -31,14 +30,14 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "animals",
         difficulty: 1,
-        tags: ["pre1", "visual-perception"]
+        tags: ["pre1", "visual-perception"],
       });
     }
   });
 
   // PRÉ 2 - Alfabetização Inicial (300 variations)
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  letters.forEach(letter => {
+  letters.forEach((letter) => {
     // Letter identification (10 per letter)
     for (let i = 0; i < 10; i++) {
       content.push({
@@ -47,7 +46,7 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "letters",
         difficulty: 2,
-        tags: ["pre2", "literacy", "identification"]
+        tags: ["pre2", "literacy", "identification"],
       });
     }
     // Initial sounds (5 per letter)
@@ -58,14 +57,35 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "initial-sounds",
         difficulty: 2,
-        tags: ["pre2", "literacy", "phonics"]
+        tags: ["pre2", "literacy", "phonics"],
       });
     }
   });
 
   // PRÉ 2 - Sílabas (200 variations)
-  const syllables = ["BA", "BE", "BI", "BO", "BU", "CA", "CE", "CI", "CO", "CU", "DA", "DE", "DI", "DO", "DU", "FA", "FE", "FI", "FO", "FU"];
-  syllables.forEach(syl => {
+  const syllables = [
+    "BA",
+    "BE",
+    "BI",
+    "BO",
+    "BU",
+    "CA",
+    "CE",
+    "CI",
+    "CO",
+    "CU",
+    "DA",
+    "DE",
+    "DI",
+    "DO",
+    "DU",
+    "FA",
+    "FE",
+    "FI",
+    "FO",
+    "FU",
+  ];
+  syllables.forEach((syl) => {
     for (let i = 0; i < 10; i++) {
       content.push({
         id: `pre2-syllable-${syl}-${i}`,
@@ -73,7 +93,7 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "syllables",
         difficulty: 2,
-        tags: ["pre2", "literacy", "syllables"]
+        tags: ["pre2", "literacy", "syllables"],
       });
     }
   });
@@ -87,7 +107,7 @@ export const generateEarlyChildhoodContent = () => {
         type: "text",
         category: "numbers",
         difficulty: 2,
-        tags: ["pre2", "math", "counting"]
+        tags: ["pre2", "math", "counting"],
       });
     }
   }
@@ -100,7 +120,7 @@ export const generateEarlyChildhoodContent = () => {
       type: "text",
       category: "logic",
       difficulty: 2,
-      tags: ["pre2", "cognitive", "logic-sequence"]
+      tags: ["pre2", "cognitive", "logic-sequence"],
     });
   }
 
@@ -112,14 +132,11 @@ export const generateEarlyChildhoodContent = () => {
       type: "text",
       category: "auditory",
       difficulty: 2,
-      tags: ["pre2", "cognitive", "auditory-memory"]
+      tags: ["pre2", "cognitive", "auditory-memory"],
     });
   }
 
   return content;
 };
 
-export const MOCK_ACTIVITIES_DATABASE = [
-  ...CONTENT_DATABASE,
-  ...generateEarlyChildhoodContent()
-];
+export const MOCK_ACTIVITIES_DATABASE = [...CONTENT_DATABASE, ...generateEarlyChildhoodContent()];

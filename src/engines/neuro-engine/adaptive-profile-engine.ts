@@ -1,4 +1,3 @@
-
 import { NeuroProfile, NeuroAdjustment } from "./types";
 
 export class AdaptiveProfileEngine {

@@ -1,4 +1,3 @@
-
 import { Bell, Check, Clock, AlertTriangle, BookOpen, User } from "lucide-react";
 import { useNotifications, Notification } from "@/hooks/useNotifications";
 import { useState } from "react";
@@ -11,20 +10,25 @@ export function NotificationBell() {
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
   const [isOpen, setIsOpen] = useState(false);
 
-  const getTypeIcon = (type: Notification['type']) => {
+  const getTypeIcon = (type: Notification["type"]) => {
     switch (type) {
-      case 'estudo': return <BookOpen className="h-4 w-4 text-indigo-500" />;
-      case 'seguranca': return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      case 'rotina': return <Clock className="h-4 w-4 text-sun" />;
-      case 'amigo': return <User className="h-4 w-4 text-pink-500" />;
-      default: return <Bell className="h-4 w-4 text-slate-400" />;
+      case "estudo":
+        return <BookOpen className="h-4 w-4 text-indigo-500" />;
+      case "seguranca":
+        return <AlertTriangle className="h-4 w-4 text-red-500" />;
+      case "rotina":
+        return <Clock className="h-4 w-4 text-sun" />;
+      case "amigo":
+        return <User className="h-4 w-4 text-pink-500" />;
+      default:
+        return <Bell className="h-4 w-4 text-slate-400" />;
     }
   };
 
   return (
     <div className="relative flex items-center gap-3">
       <CoinDisplay className="hidden sm:flex" />
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 rounded-xl bg-muted/50 hover:bg-muted transition-colors btn-tap"
       >
@@ -40,7 +44,7 @@ export function NotificationBell() {
         {isOpen && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -49,7 +53,7 @@ export function NotificationBell() {
               <div className="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
                 <h3 className="font-extrabold text-slate-800">Notificações</h3>
                 {unreadCount > 0 && (
-                  <button 
+                  <button
                     onClick={() => markAllAsRead()}
                     className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
                   >
@@ -75,25 +79,36 @@ export function NotificationBell() {
                           markAsRead(n.id);
                           // Ação opcional ao clicar
                         }}
-                        className={`w-full text-left p-4 flex gap-3 transition-colors hover:bg-slate-50 ${!n.read ? 'bg-indigo-50/30' : ''}`}
+                        className={`w-full text-left p-4 flex gap-3 transition-colors hover:bg-slate-50 ${!n.read ? "bg-indigo-50/30" : ""}`}
                       >
-                        <div className={`h-10 w-10 shrink-0 rounded-2xl flex items-center justify-center ${
-                          n.type === 'seguranca' ? 'bg-red-50' : 
-                          n.type === 'estudo' ? 'bg-indigo-50' : 
-                          'bg-slate-100'
-                        }`}>
+                        <div
+                          className={`h-10 w-10 shrink-0 rounded-2xl flex items-center justify-center ${
+                            n.type === "seguranca"
+                              ? "bg-red-50"
+                              : n.type === "estudo"
+                                ? "bg-indigo-50"
+                                : "bg-slate-100"
+                          }`}
+                        >
                           {getTypeIcon(n.type)}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <p className={`text-sm font-bold truncate ${!n.read ? 'text-slate-900' : 'text-slate-600'}`}>
+                            <p
+                              className={`text-sm font-bold truncate ${!n.read ? "text-slate-900" : "text-slate-600"}`}
+                            >
                               {n.title}
                             </p>
                             <span className="text-[10px] text-slate-400 whitespace-nowrap">
-                              {formatDistanceToNow(new Date(n.created_at), { addSuffix: true, locale: ptBR })}
+                              {formatDistanceToNow(new Date(n.created_at), {
+                                addSuffix: true,
+                                locale: ptBR,
+                              })}
                             </span>
                           </div>
-                          <p className={`text-xs mt-0.5 line-clamp-2 ${!n.read ? 'text-slate-700' : 'text-slate-500'}`}>
+                          <p
+                            className={`text-xs mt-0.5 line-clamp-2 ${!n.read ? "text-slate-700" : "text-slate-500"}`}
+                          >
                             {n.message}
                           </p>
                         </div>
@@ -107,7 +122,7 @@ export function NotificationBell() {
               </div>
 
               <div className="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                <button 
+                <button
                   onClick={() => setIsOpen(false)}
                   className="text-xs font-bold text-slate-500 hover:text-slate-700"
                 >

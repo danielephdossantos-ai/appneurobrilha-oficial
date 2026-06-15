@@ -7,7 +7,12 @@ export interface TTSHandle {
 
 export function speak(
   text: string,
-  opts?: { lang?: string; rate?: number; onWord?: (charIndex: number, word: string) => void; onEnd?: () => void },
+  opts?: {
+    lang?: string;
+    rate?: number;
+    onWord?: (charIndex: number, word: string) => void;
+    onEnd?: () => void;
+  },
 ): TTSHandle {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) {
     opts?.onEnd?.();
