@@ -161,6 +161,268 @@ export const childProgressionStats = pgTable("child_progression_stats", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+export const parentProfiles = pgTable("parent_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  profileId: uuid("profile_id")
+    .notNull()
+    .references(() => profiles.id, { onDelete: "cascade" }),
+  phone: text("phone"),
+  cpf: text("cpf").unique(),
+  consentGiven: boolean("consent_given").default(false),
+  consentDate: timestamp("consent_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const childrenProfiles = pgTable("children_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  parentId: uuid("parent_id")
+    .notNull()
+    .references(() => parentProfiles.id, { onDelete: "cascade" }),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name"),
+  birthDate: date("birth_date").notNull(),
+  gender: text("gender"),
+  diagnosis: text("diagnosis").array().default([]),
+  active: boolean("active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const bnccSkills = pgTable("bncc_skills", {
+  code: text("code").primaryKey(),
+  description: text("description").notNull(),
+  segment: text("segment").notNull(),
+  fieldOfExperience: text("field_of_experience"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const bnccLevels = pgTable("bncc_levels", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  minAge: integer("min_age").notNull(),
+  maxAge: integer("max_age").notNull(),
+});
+
+export const activityTemplates = pgTable("activity_templates", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  title: text("title").notNull(),
+  description: text("description"),
+  category: text("category").notNull(),
+  bnccSkillCode: text("bncc_skill_code").references(() => bnccSkills.code),
+  baseDifficulty: integer("base_difficulty").default(1),
+  cognitiveWeight: jsonb("cognitive_weight").default({}),
+  sensoryType: text("sensory_type"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const difficultyRules = pgTable("difficulty_rules", {
+  id: serial("id").primaryKey(),
+  templateId: uuid("template_id").references(() => activityTemplates.id),
+  level: integer("level").notNull(),
+  config: jsonb("config").notNull(),
+});
+
+export const rewardRules = pgTable("reward_rules", {
+  id: serial("id").primaryKey(),
+  category: text("category").notNull(),
+  minScore: integer("min_score").notNull(),
+  xpReward: integer("xp_reward").notNull(),
+  coinsReward: integer("coins_reward").notNull(),
+});
+
+export const activityResults = pgTable("activity_results", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  activityId: uuid("activity_id").references(() => activities.id, { onDelete: "cascade" }),
+  childId: uuid("child_id").references(() => childrenProfiles.id),
+  score: numeric("score"),
+  timeSpentSeconds: integer("time_spent_seconds"),
+  errorsCount: integer("errors_count"),
+  helpRequestedCount: integer("help_requested_count"),
+  completionData: jsonb("completion_data").default({}),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const therapistProfiles = pgTable("therapist_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  profileId: uuid("profile_id")
+    .notNull()
+    .references(() => profiles.id, { onDelete: "cascade" }),
+  specialty: text("specialty"),
+  crpCrm: text("crp_crm"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const anamnesis = pgTable("anamnesis", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  history: text("history"),
+  milestones: jsonb("milestones").default({}),
+  observations: text("observations"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const neuroProfiles = pgTable("neuro_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  mainDiagnosis: text("main_diagnosis").notNull(),
+  severityLevel: integer("severity_level"),
+  comorbidities: text("comorbidities").array().default([]),
+  focusDurationMinutes: integer("focus_duration_minutes").default(15),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const sensoryProfiles = pgTable("sensory_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  visualSensitivity: integer("visual_sensitivity").default(5),
+  auditorySensitivity: integer("auditory_sensitivity").default(5),
+  tactileSensitivity: integer("tactile_sensitivity").default(5),
+  preferredColors: text("preferred_colors").array().default([]),
+  triggerSounds: text("trigger_sounds").array().default([]),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const progression = pgTable("progression", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  skillCode: text("skill_code").references(() => bnccSkills.code),
+  masteryLevel: numeric("mastery_level").default("0"),
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
+export const dailySessions = pgTable("daily_sessions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  startTime: timestamp("start_time").defaultNow(),
+  endTime: timestamp("end_time"),
+  totalActivities: integer("total_activities").default(0),
+  moodStart: text("mood_start"),
+  moodEnd: text("mood_end"),
+});
+
+export const attentionMetrics = pgTable("attention_metrics", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  sessionId: uuid("session_id")
+    .notNull()
+    .references(() => dailySessions.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp").defaultNow(),
+  focusScore: integer("focus_score"),
+  distractionEvents: integer("distraction_events"),
+  latencyMs: integer("latency_ms"),
+});
+
+export const fatigueMetrics = pgTable("fatigue_metrics", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  sessionId: uuid("session_id")
+    .notNull()
+    .references(() => dailySessions.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp").defaultNow(),
+  reactionTimeTrend: text("reaction_time_trend"),
+  errorRateSpike: boolean("error_rate_spike").default(false),
+  recommendedPause: boolean("recommended_pause").default(false),
+});
+
+export const adaptationLogs = pgTable("adaptation_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id").references(() => childrenProfiles.id),
+  triggerReason: text("trigger_reason"),
+  actionTaken: text("action_taken"),
+  timestamp: timestamp("timestamp").defaultNow(),
+});
+
+export const reports = pgTable("reports", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  type: text("type"),
+  periodStart: date("period_start"),
+  periodEnd: date("period_end"),
+  data: jsonb("data").default({}),
+  generatedAt: timestamp("generated_at").defaultNow(),
+});
+
+export const parentalControls = pgTable("parental_controls", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => childrenProfiles.id, { onDelete: "cascade" }),
+  dailyTimeLimitMinutes: integer("daily_time_limit_minutes").default(60),
+  breakIntervalMinutes: integer("break_interval_minutes").default(20),
+  allowedStartTime: time("allowed_start_time"),
+  allowedEndTime: time("allowed_end_time"),
+  forcedPauseDurationMinutes: integer("forced_pause_duration_minutes").default(5),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const stories = pgTable("stories", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  title: text("title").notNull(),
+  description: text("description"),
+  coverImage: text("cover_image"),
+  readingLevel: text("reading_level").default("iniciante"),
+  ageMin: integer("age_min").default(4),
+  ageMax: integer("age_max").default(10),
+  theme: text("theme").notNull(),
+  difficulty: integer("difficulty").default(1),
+  aiGenerated: boolean("ai_generated").default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const storyPages = pgTable("story_pages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  storyId: uuid("story_id")
+    .notNull()
+    .references(() => stories.id, { onDelete: "cascade" }),
+  pageNumber: integer("page_number").notNull(),
+  text: text("text").notNull(),
+  imageUrl: text("image_url"),
+  audioUrl: text("audio_url"),
+  highlightWords: jsonb("highlight_words").default([]),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const storyQuestions = pgTable("story_questions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  storyId: uuid("story_id")
+    .notNull()
+    .references(() => stories.id, { onDelete: "cascade" }),
+  question: text("question").notNull(),
+  optionA: text("option_a").notNull(),
+  optionB: text("option_b").notNull(),
+  optionC: text("option_c").notNull(),
+  correctAnswer: text("correct_answer").notNull(),
+  difficulty: integer("difficulty").default(1),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const storyProgress = pgTable("story_progress", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  childId: uuid("child_id")
+    .notNull()
+    .references(() => children.id, { onDelete: "cascade" }),
+  storyId: uuid("story_id")
+    .notNull()
+    .references(() => stories.id, { onDelete: "cascade" }),
+  currentPage: integer("current_page").default(1),
+  completed: boolean("completed").default(false),
+  score: integer("score").default(0),
+  completedAt: timestamp("completed_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const cognitiveProfile = pgTable("cognitive_profile", {
   id: uuid("id").primaryKey().defaultRandom(),
   childId: uuid("child_id")
