@@ -25,10 +25,11 @@ function HistoriasLibrary() {
   const { activeChild } = useAppState();
   const [theme, setTheme] = useState<string>("todos");
   const [level, setLevel] = useState<string>("todos");
+  const [category, setCategory] = useState<string>("todos");
   const [search, setSearch] = useState("");
 
   const childAge = activeChild?.idade ?? undefined;
-  const { data: stories = [], isLoading } = useStories({ theme, level, age: childAge });
+  const { data: stories = [], isLoading } = useStories({ theme, level, age: childAge, category });
 
   const hyperfocus = (activeChild?.hiperfoco ?? "").toLowerCase();
   const sorted = useMemo(() => {
@@ -90,6 +91,30 @@ function HistoriasLibrary() {
             >
               <span className="mr-1">{t.emoji}</span>
               {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Category filter */}
+        <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+          {[
+            { id: "todos", label: "Todas" },
+            { id: "pre-escola", label: "Pré-escola" },
+            { id: "alfabetizacao", label: "Alfabetização" },
+            { id: "emocoes", label: "Emoções" },
+            { id: "inclusao", label: "Inclusão" },
+            { id: "habilidades-sociais", label: "Habilidades sociais" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setCategory(item.id)}
+              className={`shrink-0 px-4 py-2 rounded-full font-bold text-sm transition-all ${
+                category === item.id
+                  ? "bg-[#6C5CE7] text-white shadow-md scale-105"
+                  : "bg-white text-gray-600 border border-gray-200"
+              }`}
+            >
+              {item.label}
             </button>
           ))}
         </div>
