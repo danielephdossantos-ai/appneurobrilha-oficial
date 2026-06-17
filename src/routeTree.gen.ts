@@ -25,6 +25,7 @@ import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedur
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
+import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
@@ -122,6 +123,11 @@ const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
   path: '/brilha-vida',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
+  id: '/biblioteca-alfa',
+  path: '/biblioteca-alfa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -213,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
@@ -281,6 +289,7 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
@@ -317,6 +326,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/escola-brilha'
@@ -351,6 +361,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/gerador-procedural'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/escola-brilha'
@@ -419,6 +431,7 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
+  BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
@@ -551,6 +564,13 @@ declare module '@tanstack/react-router' {
       path: '/brilha-vida'
       fullPath: '/brilha-vida'
       preLoaderRoute: typeof BrilhaVidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca-alfa': {
+      id: '/biblioteca-alfa'
+      path: '/biblioteca-alfa'
+      fullPath: '/biblioteca-alfa'
+      preLoaderRoute: typeof BibliotecaAlfaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -730,6 +750,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
+  BibliotecaAlfaRoute: BibliotecaAlfaRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,

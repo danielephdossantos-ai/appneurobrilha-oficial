@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Lock, Check, Play, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Lock, Check, Play, Sparkles, BookOpen } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
+import { calcularNivelLeitor } from "../data/historias-graduadas";
 
 interface Props {
   childId: string;
@@ -13,6 +15,7 @@ export function TrilhaAlfa({ childId, childName }: Props) {
   const { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida } =
     useProgressoAlfa(childId);
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
+  const nivelLeitor = calcularNivelLeitor(progresso);
 
   const etapaAtiva = ETAPAS.find((e) => e.id === etapaAtivaId) ?? null;
 
@@ -33,6 +36,12 @@ export function TrilhaAlfa({ childId, childName }: Props) {
             Siga a trilha pelos castelos. Cada castelo só destrava depois que você terminar o
             anterior — assim seu cérebro vira um craque das letras!
           </p>
+          <Link
+            to="/biblioteca-alfa"
+            className="inline-flex items-center gap-2 mt-4 px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold shadow hover:scale-105 transition-transform text-sm"
+          >
+            <BookOpen className="w-4 h-4" /> Biblioteca (Nível leitor {nivelLeitor})
+          </Link>
         </header>
 
         <div className="relative space-y-4">
