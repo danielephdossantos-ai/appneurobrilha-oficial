@@ -5,6 +5,20 @@ import { YesNoField } from "../components/YesNoField";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/utils/utils";
+import {
+  SNAP_DESATENCAO,
+  SNAP_HIPERATIVIDADE,
+  SNAP_IMPULSIVIDADE,
+  SNAP_LABELS,
+  type SnapIVResponses,
+  type SnapAnswer,
+} from "../v2/snap-iv";
+import {
+  MCHAT_ITEMS,
+  type MCHATResponses,
+  type YesNo,
+} from "../v2/mchat-r";
 import type {
   AnamneseV2Responses,
   Likert,
