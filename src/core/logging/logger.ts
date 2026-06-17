@@ -7,7 +7,7 @@ import { LogLevel, LogCategory, type LogEntry, type PerformanceMetric, type Peda
 class Logger {
   private logs: LogEntry[] = [];
   private maxLogs = 1000;
-  private isDevelopment = process.env.NODE_ENV === 'development';
+  private isDevelopment = import.meta.env.DEV;
 
   /**
    * Log genérico
