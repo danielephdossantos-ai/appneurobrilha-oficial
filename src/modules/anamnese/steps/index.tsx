@@ -582,3 +582,155 @@ export function Step17({
     </div>
   );
 }
+
+// ─── ETAPA 18 — SNAP-IV ───────────────────────────────────────────
+import {
+  SNAP_DESATENCAO,
+  SNAP_HIPERATIVIDADE,
+  SNAP_IMPULSIVIDADE,
+  SNAP_LABELS,
+  type SnapIVResponses,
+  type SnapAnswer,
+} from "../v2/snap-iv";
+import {
+  MCHAT_ITEMS,
+  type MCHATResponses,
+  type YesNo,
+} from "../v2/mchat-r";
+import { cn } from "@/utils/utils";
+
+function SnapItem({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: SnapAnswer | undefined;
+  onChange: (v: SnapAnswer) => void;
+}) {
+  return (
+    <div className="space-y-2 py-3 border-b border-border last:border-b-0">
+      <p className="font-medium text-sm md:text-base">{label}</p>
+      <div className="grid grid-cols-4 gap-1.5">
+        {SNAP_LABELS.map((lbl, i) => {
+          const active = value === i;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onChange(i as SnapAnswer)}
+              className={cn(
+                "rounded-lg border-2 px-1 py-2 text-[10px] md:text-xs font-medium transition-all",
+                "hover:border-primary hover:bg-primary/5",
+                active
+                  ? "border-primary bg-primary text-primary-foreground shadow-md"
+                  : "border-border bg-card text-foreground",
+              )}
+            >
+              <div className="text-base md:text-lg font-bold">{i}</div>
+              <div className="leading-tight">{lbl}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function Step18({
+  value,
+  onChange,
+}: {
+  value: Partial<SnapIVResponses>;
+  onChange: Updater<"step18">;
+}) {
+  const renderGroup = (
+    title: string,
+    items: { k: keyof SnapIVResponses; l: string }[],
+  ) => (
+    <div>
+      <p className="text-sm font-bold text-primary mt-2 mb-1">{title}</p>
+      {items.map(({ k, l }) => (
+        <SnapItem
+          key={String(k)}
+          label={l}
+          value={value[k] as SnapAnswer | undefined}
+          onChange={(v) => onChange({ [k]: v } as any)}
+        />
+      ))}
+    </div>
+  );
+  return (
+    <div className="space-y-1">
+      <p className="text-xs text-muted-foreground mb-3">
+        Escala SNAP-IV (Swanson, Nolan, Pelham — versão IV). 18 itens. Considere o comportamento
+        habitual da criança nos últimos 6 meses. 0 = Nem um pouco · 3 = Demais.
+      </p>
+      {renderGroup("Desatenção (9 itens)", SNAP_DESATENCAO)}
+      {renderGroup("Hiperatividade (5 itens)", SNAP_HIPERATIVIDADE)}
+      {renderGroup("Impulsividade (4 itens)", SNAP_IMPULSIVIDADE)}
+    </div>
+  );
+}
+
+// ─── ETAPA 19 — M-CHAT-R ──────────────────────────────────────────
+function MchatItem({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: YesNo | undefined;
+  onChange: (v: YesNo) => void;
+}) {
+  return (
+    <div className="space-y-2 py-3 border-b border-border last:border-b-0">
+      <p className="font-medium text-sm md:text-base">{label}</p>
+      <div className="grid grid-cols-2 gap-2">
+        {(["sim", "nao"] as YesNo[]).map((opt) => {
+          const active = value === opt;
+          return (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => onChange(opt)}
+              className={cn(
+                "rounded-lg border-2 px-3 py-2 text-sm font-medium transition-all",
+                active
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-card hover:border-primary/50",
+              )}
+            >
+              {opt === "sim" ? "Sim" : "Não"}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function Step19({
+  value,
+  onChange,
+}: {
+  value: Partial<MCHATResponses>;
+  onChange: Updater<"step19">;
+}) {
+  return (
+    <div className="space-y-1">
+      <p className="text-xs text-muted-foreground mb-3">
+        M-CHAT-R (Modified Checklist for Autism in Toddlers, Revised). 20 perguntas sim/não.
+        Indicado entre 16 e 30 meses, mas útil como triagem orientadora em idades posteriores.
+      </p>
+      {MCHAT_ITEMS.map((it, idx) => (
+        <MchatItem
+          key={String(it.k)}
+          label={`${idx + 1}. ${it.l}`}
+          value={value[it.k] as YesNo | undefined}
+          onChange={(v) => onChange({ [it.k]: v } as any)}
+        />
+      ))}
+    </div>
+  );
+}
