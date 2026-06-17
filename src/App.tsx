@@ -18,6 +18,18 @@ function App() {
           localStorage.removeItem(key);
         }
       });
+
+      if ("caches" in window) {
+        caches.keys().then((keys) => keys.forEach((key) => caches.delete(key))).catch(() => undefined);
+      }
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((registrations) => registrations.forEach((registration) => registration.unregister()))
+          .catch(() => undefined);
+      }
+
       localStorage.setItem("app_version", CACHE_VERSION);
     }
   }, []);
