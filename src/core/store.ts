@@ -244,13 +244,16 @@ export function useAppState() {
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
+      const { data: auth } = await supabase.auth.getUser();
+      const uid = auth?.user?.id;
+      if (!uid) throw new Error("NOT_AUTHENTICATED");
       const existing = await ChildProfileService.getAll();
       if (existing.length >= 2) {
         throw new Error("LIMIT_REACHED");
       }
       const created = await ChildProfileService.create({
         ...newChild,
-        user_id: "anonymous",
+        user_id: uid,
       } as unknown as Omit<ChildProfile, "id">);
       return normalizeChild(created as unknown as Partial<Child> & { id: string; user_id: string; nome: string });
     },
@@ -304,17 +307,27 @@ export function useAppState() {
 
   const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
 
+  const { data: sessionData } = useQuery({
+    queryKey: ["auth-session"],
+    queryFn: async () => {
+      const { data } = await supabase.auth.getSession();
+      return data.session;
+    },
+    staleTime: 1000 * 60,
+  });
+
   const logout = async () => {
     localStorage.removeItem(ACTIVE_CHILD_KEY);
+    await supabase.auth.signOut();
     queryClient.clear();
-    window.location.href = "/api/logout";
+    window.location.href = "/auth";
   };
 
   return {
     children,
     activeChild,
     isLoading,
-    session: null,
+    session: sessionData ?? null,
     logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);
