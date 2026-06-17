@@ -23,6 +23,8 @@ import {
   Step15,
   Step16,
   Step17,
+  Step18,
+  Step19,
 } from "../steps";
 import { STEP_TITLES, TOTAL_STEPS } from "../v2/types";
 import { toast } from "sonner";
@@ -78,6 +80,10 @@ export function AnamneseWizard({ childId }: { childId: string }) {
         return <Step16 value={r.step16 ?? {}} onChange={(p) => a.updateStep("step16", p)} />;
       case 17:
         return <Step17 value={r.step17 ?? {}} onChange={(p) => a.updateStep("step17", p)} />;
+      case 18:
+        return <Step18 value={r.step18 ?? {}} onChange={(p) => a.updateStep("step18", p)} />;
+      case 19:
+        return <Step19 value={r.step19 ?? {}} onChange={(p) => a.updateStep("step19", p)} />;
       default:
         return null;
     }
