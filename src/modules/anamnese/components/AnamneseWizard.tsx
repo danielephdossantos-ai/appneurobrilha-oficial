@@ -134,7 +134,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
           <Save className="h-4 w-4 mr-1" /> Continuar depois
         </Button>
         <Button size="sm" onClick={handleNext}>
-          {step >= TOTAL_STEPS ? (
+          {isLast ? (
             <>
               Concluir <CheckCircle2 className="h-4 w-4 ml-1" />
             </>
