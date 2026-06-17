@@ -46,7 +46,7 @@ export const getNotifications = createServerFn({ method: "GET" }).handler(async 
 });
 
 export const createNotification = createServerFn({ method: "POST" })
-  .validator(z.object({ notif: z.record(z.unknown()) }))
+  .inputValidator(z.object({ notif: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     const [row] = await db
@@ -57,7 +57,7 @@ export const createNotification = createServerFn({ method: "POST" })
   });
 
 export const markNotificationRead = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     await db
@@ -69,7 +69,7 @@ export const markNotificationRead = createServerFn({ method: "POST" })
 
 // ── STUDY AGENDA ─────────────────────────────────────────────────────────────
 export const getStudyAgenda = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db
       .select()
@@ -79,7 +79,7 @@ export const getStudyAgenda = createServerFn({ method: "POST" })
   });
 
 export const upsertStudyAgendaItem = createServerFn({ method: "POST" })
-  .validator(z.object({ item: z.record(z.unknown()), id: z.string().optional() }))
+  .inputValidator(z.object({ item: z.record(z.unknown()), id: z.string().optional() }))
   .handler(async ({ data }) => {
     if (data.id) {
       const [row] = await db
@@ -97,7 +97,7 @@ export const upsertStudyAgendaItem = createServerFn({ method: "POST" })
   });
 
 export const deleteStudyAgendaItem = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
     await db.delete(studyAgenda).where(eq(studyAgenda.id, data.id));
     return { ok: true };
@@ -105,13 +105,13 @@ export const deleteStudyAgendaItem = createServerFn({ method: "POST" })
 
 // ── EXAM MISSIONS ─────────────────────────────────────────────────────────────
 export const getExamMissions = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db.select().from(examMissions).where(eq(examMissions.childId, data.childId));
   });
 
 export const createExamMission = createServerFn({ method: "POST" })
-  .validator(z.object({ mission: z.record(z.unknown()) }))
+  .inputValidator(z.object({ mission: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const {
       exam_study_plans: plans,
@@ -129,14 +129,14 @@ export const createExamMission = createServerFn({ method: "POST" })
   });
 
 export const deleteExamMission = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
     await db.delete(examMissions).where(eq(examMissions.id, data.id));
     return { ok: true };
   });
 
 export const updateExamMissionContent = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
+  .inputValidator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .update(examMissionContents)
@@ -147,7 +147,7 @@ export const updateExamMissionContent = createServerFn({ method: "POST" })
   });
 
 export const updateExamStudyPlan = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
+  .inputValidator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .update(examStudyPlans)
@@ -168,7 +168,7 @@ export const getUserMascots = createServerFn({ method: "GET" }).handler(async ()
 });
 
 export const upsertUserMascot = createServerFn({ method: "POST" })
-  .validator(z.object({ mascot: z.record(z.unknown()), id: z.string().optional() }))
+  .inputValidator(z.object({ mascot: z.record(z.unknown()), id: z.string().optional() }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     if (data.id) {
@@ -188,7 +188,7 @@ export const upsertUserMascot = createServerFn({ method: "POST" })
 
 // ── GAMIFICATION ─────────────────────────────────────────────────────────────
 export const getGamificationProfile = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     const [row] = await db
       .select()
@@ -198,7 +198,7 @@ export const getGamificationProfile = createServerFn({ method: "POST" })
   });
 
 export const upsertGamificationProfile = createServerFn({ method: "POST" })
-  .validator(z.object({ profile: z.record(z.unknown()) }))
+  .inputValidator(z.object({ profile: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(gamificationProfiles)
@@ -212,7 +212,7 @@ export const upsertGamificationProfile = createServerFn({ method: "POST" })
   });
 
 export const getMascotState = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     const [row] = await db
       .select()
@@ -222,7 +222,7 @@ export const getMascotState = createServerFn({ method: "POST" })
   });
 
 export const upsertMascotState = createServerFn({ method: "POST" })
-  .validator(z.object({ state: z.record(z.unknown()) }))
+  .inputValidator(z.object({ state: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(mascotStates)
@@ -240,14 +240,14 @@ export const getAchievements = createServerFn({ method: "GET" }).handler(async (
 });
 
 export const getChildAchievements = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db.select().from(childAchievements).where(eq(childAchievements.childId, data.childId));
   });
 
 // ── ACTIVITY LOGS ─────────────────────────────────────────────────────────────
 export const getActivityLogs = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string(), limit: z.number().optional() }))
+  .inputValidator(z.object({ childId: z.string(), limit: z.number().optional() }))
   .handler(async ({ data }) => {
     return db
       .select()
@@ -258,7 +258,7 @@ export const getActivityLogs = createServerFn({ method: "POST" })
   });
 
 export const insertActivityLog = createServerFn({ method: "POST" })
-  .validator(z.object({ log: z.record(z.unknown()) }))
+  .inputValidator(z.object({ log: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(activityLogs)
@@ -269,13 +269,13 @@ export const insertActivityLog = createServerFn({ method: "POST" })
 
 // ── SKILL MASTERY ─────────────────────────────────────────────────────────────
 export const getChildSkillMastery = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db.select().from(childSkillMastery).where(eq(childSkillMastery.childId, data.childId));
   });
 
 export const upsertChildSkillMastery = createServerFn({ method: "POST" })
-  .validator(z.object({ mastery: z.record(z.unknown()) }))
+  .inputValidator(z.object({ mastery: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(childSkillMastery)
@@ -290,7 +290,7 @@ export const upsertChildSkillMastery = createServerFn({ method: "POST" })
 
 // ── PROGRESSION STATS ─────────────────────────────────────────────────────────
 export const getChildProgressionStats = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db
       .select()
@@ -299,7 +299,7 @@ export const getChildProgressionStats = createServerFn({ method: "POST" })
   });
 
 export const upsertChildProgressionStats = createServerFn({ method: "POST" })
-  .validator(z.object({ stats: z.record(z.unknown()) }))
+  .inputValidator(z.object({ stats: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(childProgressionStats)
@@ -314,7 +314,7 @@ export const upsertChildProgressionStats = createServerFn({ method: "POST" })
 
 // ── COGNITIVE PROFILE ─────────────────────────────────────────────────────────
 export const getCognitiveProfile = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     const [row] = await db
       .select()
@@ -324,7 +324,7 @@ export const getCognitiveProfile = createServerFn({ method: "POST" })
   });
 
 export const upsertCognitiveProfile = createServerFn({ method: "POST" })
-  .validator(z.object({ profile: z.record(z.unknown()) }))
+  .inputValidator(z.object({ profile: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(cognitiveProfile)
@@ -338,7 +338,7 @@ export const upsertCognitiveProfile = createServerFn({ method: "POST" })
   });
 
 export const insertLongitudinalScore = createServerFn({ method: "POST" })
-  .validator(z.object({ score: z.record(z.unknown()) }))
+  .inputValidator(z.object({ score: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(longitudinalScores)
@@ -358,7 +358,7 @@ export const getUserPrivacySettings = createServerFn({ method: "GET" }).handler(
 });
 
 export const upsertUserPrivacySettings = createServerFn({ method: "POST" })
-  .validator(z.object({ settings: z.record(z.unknown()) }))
+  .inputValidator(z.object({ settings: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     const [row] = await db
@@ -374,14 +374,14 @@ export const upsertUserPrivacySettings = createServerFn({ method: "POST" })
 
 // ── ANAMNESE V2 ──────────────────────────────────────────────────────────────
 export const getAnamneseV2 = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     const [row] = await db.select().from(anamneseV2).where(eq(anamneseV2.childId, data.childId));
     return row ?? null;
   });
 
 export const upsertAnamneseV2 = createServerFn({ method: "POST" })
-  .validator(z.object({ row: z.record(z.unknown()) }))
+  .inputValidator(z.object({ row: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     const [row] = await db
@@ -397,7 +397,7 @@ export const upsertAnamneseV2 = createServerFn({ method: "POST" })
 
 // ── BNCC & PEDAGOGICAL ───────────────────────────────────────────────────────
 export const getBnccHabilidades = createServerFn({ method: "POST" })
-  .validator(z.object({ ano: z.string().optional(), disciplina: z.string().optional() }))
+  .inputValidator(z.object({ ano: z.string().optional(), disciplina: z.string().optional() }))
   .handler(async ({ data }) => {
     const rows = await db.select().from(bnccHabilidades);
     return rows.filter(
@@ -407,14 +407,14 @@ export const getBnccHabilidades = createServerFn({ method: "POST" })
   });
 
 export const getAtividades = createServerFn({ method: "POST" })
-  .validator(z.object({ codigoBncc: z.string().optional() }))
+  .inputValidator(z.object({ codigoBncc: z.string().optional() }))
   .handler(async ({ data }) => {
     const rows = await db.select().from(atividades);
     return data.codigoBncc ? rows.filter((r) => r.codigoBncc === data.codigoBncc) : rows;
   });
 
 export const getPedagogicalActivities = createServerFn({ method: "POST" })
-  .validator(z.object({ serie: z.string().optional(), materia: z.string().optional() }))
+  .inputValidator(z.object({ serie: z.string().optional(), materia: z.string().optional() }))
   .handler(async ({ data }) => {
     const rows = await db.select().from(pedagogicalActivitiesBase);
     return rows.filter(
@@ -424,7 +424,7 @@ export const getPedagogicalActivities = createServerFn({ method: "POST" })
   });
 
 export const getNeuroAtividades = createServerFn({ method: "POST" })
-  .validator(z.object({ categoriaSlug: z.string().optional() }))
+  .inputValidator(z.object({ categoriaSlug: z.string().optional() }))
   .handler(async ({ data }) => {
     const rows = await db.select().from(neuroAtividades);
     return data.categoriaSlug ? rows.filter((r) => r.categoriaSlug === data.categoriaSlug) : rows;
@@ -432,13 +432,13 @@ export const getNeuroAtividades = createServerFn({ method: "POST" })
 
 // ── PROGRESSO ALUNO ──────────────────────────────────────────────────────────
 export const getProgressoAluno = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     return db.select().from(progressoAluno).where(eq(progressoAluno.alunoId, data.childId));
   });
 
 export const upsertProgressoAluno = createServerFn({ method: "POST" })
-  .validator(z.object({ progresso: z.record(z.unknown()) }))
+  .inputValidator(z.object({ progresso: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const [row] = await db
       .insert(progressoAluno)
@@ -453,7 +453,7 @@ export const upsertProgressoAluno = createServerFn({ method: "POST" })
 
 // ── AUDIT LOGS ──────────────────────────────────────────────────────────────
 export const insertAuditLog = createServerFn({ method: "POST" })
-  .validator(z.object({ log: z.record(z.unknown()) }))
+  .inputValidator(z.object({ log: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const userId = getUid(getRequest());
     const [row] = await db
