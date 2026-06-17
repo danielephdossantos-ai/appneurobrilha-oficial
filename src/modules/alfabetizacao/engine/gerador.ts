@@ -178,4 +178,3 @@ export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
     default: return gerarSomInicial(nivel);
   }
 }
-}
