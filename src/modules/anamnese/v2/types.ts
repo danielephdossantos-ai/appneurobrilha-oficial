@@ -219,7 +219,27 @@ export interface RiskMap {
   global: RiskLevel;
 }
 
-export const TOTAL_STEPS = 19;
+// Etapas ativas no wizard. Pulamos 7, 8 (cobertas pelo SNAP-IV)
+// e 9, 10 (cobertas pelo M-CHAT-R) para evitar perguntas repetitivas.
+export const ACTIVE_STEPS: number[] = [1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+export const TOTAL_STEPS = ACTIVE_STEPS.length;
+
+export function stepPosition(stepNumber: number): number {
+  const idx = ACTIVE_STEPS.indexOf(stepNumber);
+  return idx === -1 ? 1 : idx + 1;
+}
+
+export function nextActiveStep(stepNumber: number): number | null {
+  const idx = ACTIVE_STEPS.indexOf(stepNumber);
+  if (idx === -1 || idx >= ACTIVE_STEPS.length - 1) return null;
+  return ACTIVE_STEPS[idx + 1];
+}
+
+export function prevActiveStep(stepNumber: number): number | null {
+  const idx = ACTIVE_STEPS.indexOf(stepNumber);
+  if (idx <= 0) return null;
+  return ACTIVE_STEPS[idx - 1];
+}
 
 export const STEP_TITLES: Record<number, string> = {
   1: "Identificação",
