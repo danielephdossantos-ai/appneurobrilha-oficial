@@ -127,7 +127,7 @@ export function AnamneseWizard({ childId }: { childId: string }) {
       </Card>
 
       <div className="flex items-center justify-between gap-2 sticky bottom-2 bg-background/90 backdrop-blur p-2 rounded-xl border shadow-lg">
-        <Button variant="outline" size="sm" onClick={handleBack} disabled={step === 1}>
+        <Button variant="outline" size="sm" onClick={handleBack} disabled={isFirst}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Voltar
         </Button>
         <Button variant="ghost" size="sm" onClick={() => nav({ to: "/" })}>
