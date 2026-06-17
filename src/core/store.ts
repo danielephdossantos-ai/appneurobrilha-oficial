@@ -261,7 +261,10 @@ export function useAppState() {
       toast.success("Criança cadastrada com sucesso!");
     },
     onError: (error: unknown) => {
-      if (isAuthExpiredError(error)) {
+      const msg = (error as { message?: string })?.message;
+      if (msg === "LIMIT_REACHED") {
+        toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
+      } else if (isAuthExpiredError(error)) {
         toast.error("Erro de autenticação. Por favor, atualize a página.");
       } else {
         toast.error("Erro ao cadastrar criança");
