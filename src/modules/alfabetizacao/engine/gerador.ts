@@ -1,6 +1,11 @@
 // Geradores de atividades a partir do banco PALAVRAS.
 import { PALAVRAS, Palavra, VOGAIS } from "../data/palavras";
 import { FRASES, HISTORIAS } from "../data/historias";
+import {
+  validarAntesDeGerar,
+  sugerirAlternativa,
+  type ContextoPedagogico,
+} from "./validacaoPedagogica";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -177,4 +182,22 @@ export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
     case "texto-compreensao": return gerarTextoCompreensao(nivel);
     default: return gerarSomInicial(nivel);
   }
+}
+
+// Geração com validação pedagógica obrigatória.
+// Bloqueia conteúdos inadequados à idade/série/nível/objetivos antes de gerar.
+export function gerarComValidacao(
+  ctx: ContextoPedagogico,
+): { rodada: Rodada; validacao: ReturnType<typeof validarAntesDeGerar> } {
+  let v = validarAntesDeGerar(ctx);
+  let tipo = ctx.tipoAtividade;
+  let nivel = ctx.nivelCognitivo;
+
+  if (!v.permitido) {
+    tipo = sugerirAlternativa(ctx);
+    v = validarAntesDeGerar({ ...ctx, tipoAtividade: tipo });
+  }
+  if (v.ajustes?.nivelCognitivo) nivel = v.ajustes.nivelCognitivo;
+
+  return { rodada: gerarPorTipo(tipo, nivel), validacao: v };
 }
