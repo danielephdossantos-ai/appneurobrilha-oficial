@@ -1,16 +1,17 @@
 import { Progress } from "@/components/ui/progress";
-import { STEP_TITLES, TOTAL_STEPS } from "../v2/types";
+import { STEP_TITLES, TOTAL_STEPS, stepPosition } from "../v2/types";
 
 interface Props {
   current: number;
 }
 export function StepIndicator({ current }: Props) {
-  const pct = Math.round((current / TOTAL_STEPS) * 100);
+  const pos = stepPosition(current);
+  const pct = Math.round((pos / TOTAL_STEPS) * 100);
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-xs md:text-sm font-medium">
         <span className="text-primary">
-          Etapa {current} de {TOTAL_STEPS}
+          Etapa {pos} de {TOTAL_STEPS}
         </span>
         <span className="text-muted-foreground">{pct}%</span>
       </div>
