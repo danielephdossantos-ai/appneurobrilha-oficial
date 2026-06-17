@@ -17,6 +17,11 @@ function Auth() {
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(true);
 
+  const isAlreadyRegisteredError = (message?: string) => {
+    const normalized = message?.toLowerCase() ?? "";
+    return normalized.includes("already registered") || normalized.includes("already exists");
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
@@ -38,7 +43,21 @@ function Auth() {
           password,
           options: { emailRedirectTo: window.location.origin },
         });
-        if (error) throw error;
+        if (error) {
+          if (isAlreadyRegisteredError(error.message)) {
+            const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
+            if (!loginError) {
+              toast.success("Conta encontrada. Você já entrou neste aparelho.");
+              navigate({ to: "/", replace: true });
+              return;
+            }
+
+            setMode("login");
+            toast.error("Este email já tem conta. Toque em Entrar ou use o Google.");
+            return;
+          }
+          throw error;
+        }
         // If session returned (auto-confirm on), redirect; else show msg
         const { data } = await supabase.auth.getSession();
         if (data.session) {
@@ -55,7 +74,12 @@ function Auth() {
         navigate({ to: "/", replace: true });
       }
     } catch (err: any) {
-      toast.error(err?.message ?? "Erro ao autenticar");
+      if (isAlreadyRegisteredError(err?.message)) {
+        setMode("login");
+        toast.error("Este email já tem conta. Toque em Entrar ou use o Google.");
+      } else {
+        toast.error(err?.message ?? "Erro ao autenticar");
+      }
     } finally {
       setLoading(false);
     }
