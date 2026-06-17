@@ -89,8 +89,11 @@ export function AnamneseWizard({ childId }: { childId: string }) {
     }
   };
 
+  const isLast = step === ACTIVE_STEPS[ACTIVE_STEPS.length - 1];
+  const isFirst = step === ACTIVE_STEPS[0];
+
   const handleNext = async () => {
-    if (step >= TOTAL_STEPS) {
+    if (isLast) {
       try {
         await a.finish();
         toast.success("Anamnese concluída!");
@@ -99,14 +102,16 @@ export function AnamneseWizard({ childId }: { childId: string }) {
         toast.error(e?.message ?? "Erro ao salvar");
       }
     } else {
-      a.goTo(step + 1);
+      const next = nextActiveStep(step) ?? step;
+      a.goTo(next);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handleBack = () => {
-    if (step > 1) {
-      a.goTo(step - 1);
+    if (!isFirst) {
+      const prev = prevActiveStep(step) ?? step;
+      a.goTo(prev);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
