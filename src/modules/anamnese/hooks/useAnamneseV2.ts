@@ -46,17 +46,26 @@ export function useAnamneseV2(childId: string) {
     }
   }, [row, isLoading]);
 
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
   const upsert = useMutation({
     mutationFn: async (payload: {
       responses: AnamneseV2Responses;
       current_step: number;
       completed?: boolean;
     }) => {
+      if (!UUID_RE.test(childId)) {
+        throw new Error("Criança inválida. Recarregue a página.");
+      }
+      const { data: auth } = await supabase.auth.getUser();
+      const userId = auth?.user?.id;
+      if (!userId) throw new Error("Faça login para salvar a anamnese.");
+
       const scores = computeScores(payload.responses);
       const risk_levels = computeRiskMap(scores);
       const insertRow = {
         child_id: childId,
-        user_id: "replit",
+        user_id: userId,
         responses: payload.responses,
         current_step: payload.current_step,
         completed: payload.completed ?? false,
