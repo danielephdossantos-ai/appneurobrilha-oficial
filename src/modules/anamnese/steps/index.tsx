@@ -598,20 +598,7 @@ export function Step17({
 }
 
 // ─── ETAPA 18 — SNAP-IV ───────────────────────────────────────────
-import {
-  SNAP_DESATENCAO,
-  SNAP_HIPERATIVIDADE,
-  SNAP_IMPULSIVIDADE,
-  SNAP_LABELS,
-  type SnapIVResponses,
-  type SnapAnswer,
-} from "../v2/snap-iv";
-import {
-  MCHAT_ITEMS,
-  type MCHATResponses,
-  type YesNo,
-} from "../v2/mchat-r";
-import { cn } from "@/utils/utils";
+
 
 function SnapItem({
   label,
