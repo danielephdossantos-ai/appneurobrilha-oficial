@@ -14,7 +14,13 @@ export class ErrorHandler {
     const appError = this.classifyError(error, context);
     
     // Registra o erro
-    logger.error(appError);
+    logger.error(appError.message, {
+      type: appError.type,
+      code: appError.code,
+      statusCode: appError.statusCode,
+      context: appError.context,
+      details: appError.details,
+    });
     
     return appError;
   }
@@ -36,7 +42,7 @@ export class ErrorHandler {
     }
 
     if (typeof error === 'object' && error !== null) {
-      return this.classifyObjectError(error, context);
+      return this.classifyObjectError(error as Record<string, unknown>, context);
     }
 
     return new CustomError(
