@@ -99,14 +99,47 @@ export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSai
             />
           </div>
         </div>
-        <button
-          onClick={() => falar(rodada.instrucaoFalada)}
-          className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
-          aria-label="Ouvir de novo"
-        >
-          <Volume2 className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-2">
+          <div
+            className="px-3 py-1 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-wider text-slate-600"
+            title="Dificuldade adaptativa atual"
+          >
+            Nível {nivel}
+          </div>
+          <button
+            onClick={() => falar(rodada.instrucaoFalada)}
+            className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
+            aria-label="Ouvir de novo"
+          >
+            <Volume2 className="w-6 h-6" />
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {ajuste && (
+          <motion.div
+            initial={{ y: -40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -40, opacity: 0 }}
+            className={`mx-auto mt-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider shadow flex items-center gap-2 ${
+              ajuste === "subiu"
+                ? "bg-emerald-500 text-white"
+                : "bg-amber-500 text-white"
+            }`}
+          >
+            {ajuste === "subiu" ? (
+              <>
+                <TrendingUp className="w-4 h-4" /> Você está craque! Ficou mais difícil
+              </>
+            ) : (
+              <>
+                <TrendingDown className="w-4 h-4" /> Vou facilitar um pouquinho
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Conteúdo */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-8">
