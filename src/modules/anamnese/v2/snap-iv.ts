@@ -63,7 +63,11 @@ const CUTOFF_DESATENCAO = 1.78;
 const CUTOFF_HIPER_IMPULS = 1.44;
 
 function meanOf(r: SnapIVResponses, keys: (keyof SnapIVResponses)[]): number {
-  const vals = keys.map((k) => r[k]).filter((v): v is SnapAnswer => typeof v === "number");
+  const vals: number[] = [];
+  for (const k of keys) {
+    const v = r[k];
+    if (typeof v === "number") vals.push(v);
+  }
   if (vals.length === 0) return 0;
   return vals.reduce((a, b) => a + b, 0) / vals.length;
 }
