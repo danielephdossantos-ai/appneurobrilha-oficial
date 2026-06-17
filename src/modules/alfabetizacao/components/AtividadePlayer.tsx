@@ -3,23 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import { EtapaCurricular } from "../data/etapas";
 import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
+import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { Volume2, X, Check, Sparkles } from "lucide-react";
+import { Volume2, X, Check, Sparkles, TrendingUp, TrendingDown } from "lucide-react";
 
 interface Props {
   etapa: EtapaCurricular;
   acertosAtuais: number;
+  childId: string;
   onAcerto: () => void;
   onSair: () => void;
 }
 
-export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Props) {
+export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSair }: Props) {
   const { falar, parar } = useVoz();
+  const { nivel, registrar } = useAdaptiveDifficulty(childId);
   const [rodada, setRodada] = useState<Rodada>(() =>
-    gerarPorTipo(etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)]),
+    gerarPorTipo(
+      etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)],
+      nivel,
+    ),
   );
   const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
   const [travado, setTravado] = useState(false);
+  const [ajuste, setAjuste] = useState<"subiu" | "desceu" | null>(null);
 
   const progressoPct = useMemo(
     () => Math.min(100, Math.round((acertosAtuais / etapa.alvo) * 100)),
@@ -33,9 +40,9 @@ export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Prop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rodada]);
 
-  function proximaRodada() {
+  function proximaRodada(nivelAtual: number) {
     const tipo = etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)];
-    setRodada(gerarPorTipo(tipo));
+    setRodada(gerarPorTipo(tipo, nivelAtual));
     setFeedback(null);
     setTravado(false);
   }
@@ -45,10 +52,19 @@ export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Prop
     setTravado(true);
     const ok = resposta === rodada.correta;
     setFeedback(ok ? "acerto" : "erro");
+    const nivelAntes = nivel;
+    const nivelDepois = registrar(ok);
+    if (nivelDepois > nivelAntes) {
+      setAjuste("subiu");
+      setTimeout(() => setAjuste(null), 1800);
+    } else if (nivelDepois < nivelAntes) {
+      setAjuste("desceu");
+      setTimeout(() => setAjuste(null), 1800);
+    }
     if (ok) {
       falar("Muito bem!");
       onAcerto();
-      setTimeout(proximaRodada, 1400);
+      setTimeout(() => proximaRodada(nivelDepois), 1400);
     } else {
       falar("Quase! Tenta de novo.");
       setTimeout(() => {
@@ -83,14 +99,47 @@ export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Prop
             />
           </div>
         </div>
-        <button
-          onClick={() => falar(rodada.instrucaoFalada)}
-          className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
-          aria-label="Ouvir de novo"
-        >
-          <Volume2 className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-2">
+          <div
+            className="px-3 py-1 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-wider text-slate-600"
+            title="Dificuldade adaptativa atual"
+          >
+            Nível {nivel}
+          </div>
+          <button
+            onClick={() => falar(rodada.instrucaoFalada)}
+            className="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-lg hover:bg-indigo-600"
+            aria-label="Ouvir de novo"
+          >
+            <Volume2 className="w-6 h-6" />
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {ajuste && (
+          <motion.div
+            initial={{ y: -40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -40, opacity: 0 }}
+            className={`mx-auto mt-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider shadow flex items-center gap-2 ${
+              ajuste === "subiu"
+                ? "bg-emerald-500 text-white"
+                : "bg-amber-500 text-white"
+            }`}
+          >
+            {ajuste === "subiu" ? (
+              <>
+                <TrendingUp className="w-4 h-4" /> Você está craque! Ficou mais difícil
+              </>
+            ) : (
+              <>
+                <TrendingDown className="w-4 h-4" /> Vou facilitar um pouquinho
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Conteúdo */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 gap-8">
