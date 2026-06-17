@@ -10,6 +10,19 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// Dificuldade adaptativa:
+// 1 = fácil  → palavras até 2 sílabas, 2 opções
+// 2 = médio  → palavras até 3 sílabas, 3 opções
+// 3 = difícil → qualquer palavra,       3 opções, distratores parecidos
+function poolPorNivel(nivel: number): Palavra[] {
+  if (nivel <= 1) return PALAVRAS.filter((p) => p.silabas.length <= 2);
+  if (nivel === 2) return PALAVRAS.filter((p) => p.silabas.length <= 3);
+  return PALAVRAS;
+}
+function numDistratores(nivel: number): number {
+  return nivel <= 1 ? 1 : 2;
+}
+
 export interface Rodada {
   tipo: string;
   instrucaoFalada: string;
