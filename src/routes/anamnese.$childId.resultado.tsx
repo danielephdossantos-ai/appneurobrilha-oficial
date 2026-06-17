@@ -10,7 +10,7 @@ import {
 import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle } from "lucide-react";
+import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, BarChart3 } from "lucide-react";
 import {
   Radar,
   RadarChart,
@@ -62,9 +62,16 @@ function ResultadoRoute() {
               <ArrowLeft className="h-4 w-4 mr-1" /> Início
             </Link>
           </Button>
-          <Button size="sm" onClick={handlePDF}>
-            <Download className="h-4 w-4 mr-1" /> Baixar PDF
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/anamnese/$childId/escalas" params={{ childId }}>
+                <BarChart3 className="h-4 w-4 mr-1" /> Escalas (SNAP-IV / M-CHAT-R)
+              </Link>
+            </Button>
+            <Button size="sm" onClick={handlePDF}>
+              <Download className="h-4 w-4 mr-1" /> Baixar PDF
+            </Button>
+          </div>
         </div>
 
         <DisclaimerBanner />

@@ -198,10 +198,12 @@ export interface AnamneseV2Responses {
   step15?: Partial<Step15_Emocional>;
   step16?: Partial<Step16_Autonomia>;
   step17?: Partial<Step17_FuncoesExecutivas>;
+  step18?: Partial<import("./snap-iv").SnapIVResponses>;
+  step19?: Partial<import("./mchat-r").MCHATResponses>;
 }
 
 export interface PerfilScores {
-  cognitivo: number; // 0-100 (maior = mais indicadores)
+  cognitivo: number;
   escolar: number;
   comportamental: number;
   socioemocional: number;
@@ -217,7 +219,7 @@ export interface RiskMap {
   global: RiskLevel;
 }
 
-export const TOTAL_STEPS = 17;
+export const TOTAL_STEPS = 19;
 
 export const STEP_TITLES: Record<number, string> = {
   1: "Identificação",
@@ -237,4 +239,6 @@ export const STEP_TITLES: Record<number, string> = {
   15: "Aspectos emocionais",
   16: "Autonomia",
   17: "Funções executivas",
+  18: "Escala SNAP-IV (triagem TDAH)",
+  19: "Escala M-CHAT-R (triagem TEA)",
 };

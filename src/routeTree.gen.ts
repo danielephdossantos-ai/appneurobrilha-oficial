@@ -39,6 +39,7 @@ import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aul
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
+import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 
 const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
   id: '/terapeuta-brilha',
@@ -192,6 +193,11 @@ const AnamneseChildIdResultadoRoute =
     path: '/resultado',
     getParentRoute: () => AnamneseChildIdRoute,
   } as any)
+const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
+  id: '/escalas',
+  path: '/escalas',
+  getParentRoute: () => AnamneseChildIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -223,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRoutesByTo {
@@ -254,6 +261,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
+  '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRoutesById {
@@ -287,6 +295,7 @@ export interface FileRoutesById {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
 export interface FileRouteTypes {
@@ -321,6 +330,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
+    | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -352,6 +362,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
+    | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   id:
     | '__root__'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
+    | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   fileRoutesById: FileRoutesById
 }
@@ -626,6 +638,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdResultadoRouteImport
       parentRoute: typeof AnamneseChildIdRoute
     }
+    '/anamnese/$childId/escalas': {
+      id: '/anamnese/$childId/escalas'
+      path: '/escalas'
+      fullPath: '/anamnese/$childId/escalas'
+      preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
+      parentRoute: typeof AnamneseChildIdRoute
+    }
   }
 }
 
@@ -670,10 +689,12 @@ const NeuroTreinoRouteWithChildren = NeuroTreinoRoute._addFileChildren(
 )
 
 interface AnamneseChildIdRouteChildren {
+  AnamneseChildIdEscalasRoute: typeof AnamneseChildIdEscalasRoute
   AnamneseChildIdResultadoRoute: typeof AnamneseChildIdResultadoRoute
 }
 
 const AnamneseChildIdRouteChildren: AnamneseChildIdRouteChildren = {
+  AnamneseChildIdEscalasRoute: AnamneseChildIdEscalasRoute,
   AnamneseChildIdResultadoRoute: AnamneseChildIdResultadoRoute,
 }
 
