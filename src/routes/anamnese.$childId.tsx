@@ -30,6 +30,16 @@ function AnamneseRoute() {
           navigate({ to: "/auth", replace: true });
           return;
         }
+        const { data: existing, error: listErr } = await supabase
+          .from("children")
+          .select("id")
+          .eq("user_id", userId);
+        if (listErr) throw listErr;
+        if ((existing?.length ?? 0) >= 2) {
+          toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
+          navigate({ to: "/painel-pais", replace: true });
+          return;
+        }
         const { data, error } = await supabase
           .from("children")
           .insert({ user_id: userId, nome: "Nova criança" })
