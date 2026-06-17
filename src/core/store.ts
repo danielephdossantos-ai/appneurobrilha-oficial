@@ -244,6 +244,10 @@ export function useAppState() {
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
+      const existing = await ChildProfileService.getAll();
+      if (existing.length >= 2) {
+        throw new Error("LIMIT_REACHED");
+      }
       const created = await ChildProfileService.create({
         ...newChild,
         user_id: "anonymous",
