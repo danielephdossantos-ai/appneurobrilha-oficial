@@ -29,6 +29,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AmigoVirtualRouteImport } from './routes/amigo-virtual'
+import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
@@ -141,6 +142,11 @@ const AmigoVirtualRoute = AmigoVirtualRouteImport.update({
   path: '/amigo-virtual',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
+  id: '/alfabetizacao',
+  path: '/alfabetizacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AgendaRoute = AgendaRouteImport.update({
   id: '/agenda',
   path: '/agenda',
@@ -202,6 +208,7 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
@@ -268,6 +276,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/amigo-virtual': typeof AmigoVirtualRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auditoria-pedagogica'
@@ -336,6 +346,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auditoria-pedagogica'
@@ -368,6 +379,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/amigo-virtual'
     | '/analytics'
     | '/auditoria-pedagogica'
@@ -402,6 +414,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
+  AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AmigoVirtualRoute: typeof AmigoVirtualRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
@@ -568,6 +581,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AmigoVirtualRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alfabetizacao': {
+      id: '/alfabetizacao'
+      path: '/alfabetizacao'
+      fullPath: '/alfabetizacao'
+      preLoaderRoute: typeof AlfabetizacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/agenda': {
       id: '/agenda'
       path: '/agenda'
@@ -705,6 +725,7 @@ const AnamneseChildIdRouteWithChildren = AnamneseChildIdRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
+  AlfabetizacaoRoute: AlfabetizacaoRoute,
   AmigoVirtualRoute: AmigoVirtualRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
