@@ -20,7 +20,7 @@ export const getChildren = createServerFn({ method: "GET" }).handler(async () =>
 });
 
 export const createChild = createServerFn({ method: "POST" })
-  .validator(z.object({ child: z.record(z.unknown()) }))
+  .inputValidator(z.object({ child: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const req = getRequest();
     const userId = getUserIdFromRequest(req);
@@ -32,7 +32,7 @@ export const createChild = createServerFn({ method: "POST" })
   });
 
 export const updateChild = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
+  .inputValidator(z.object({ id: z.string(), patch: z.record(z.unknown()) }))
   .handler(async ({ data }) => {
     const { id, patch } = data;
     const sanitized = { ...(patch as any), updatedAt: new Date() };
@@ -42,14 +42,14 @@ export const updateChild = createServerFn({ method: "POST" })
   });
 
 export const deleteChild = createServerFn({ method: "POST" })
-  .validator(z.object({ id: z.string() }))
+  .inputValidator(z.object({ id: z.string() }))
   .handler(async ({ data }) => {
     await db.delete(children).where(eq(children.id, data.id));
     return { ok: true };
   });
 
 export const addBrilhocoins = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string(), amount: z.number() }))
+  .inputValidator(z.object({ childId: z.string(), amount: z.number() }))
   .handler(async ({ data }) => {
     const [current] = await db.select().from(children).where(eq(children.id, data.childId));
     if (!current) throw new Error("Child not found");
@@ -66,7 +66,7 @@ export const addBrilhocoins = createServerFn({ method: "POST" })
   });
 
 export const getChildAnamnesis = createServerFn({ method: "POST" })
-  .validator(z.object({ childId: z.string() }))
+  .inputValidator(z.object({ childId: z.string() }))
   .handler(async ({ data }) => {
     const [row] = await db
       .select()
@@ -76,7 +76,7 @@ export const getChildAnamnesis = createServerFn({ method: "POST" })
   });
 
 export const saveChildAnamnesis = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     z.object({
       child_id: z.string(),
       responses: z.record(z.unknown()),

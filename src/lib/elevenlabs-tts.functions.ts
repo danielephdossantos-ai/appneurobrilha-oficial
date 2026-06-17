@@ -10,7 +10,7 @@ const InputSchema = z.object({
 const DEFAULT_VOICE = "EXAVITQu4vr4xnSDxMaL";
 
 export const speakWithElevenLabs = createServerFn({ method: "POST" })
-  .validator((input) => InputSchema.parse(input))
+  .inputValidator((input) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const apiKey = process.env.ELEVENLABS_API_KEY;
     if (!apiKey) {

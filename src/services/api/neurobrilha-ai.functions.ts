@@ -25,7 +25,7 @@ const chatMessageSchema = z.object({
 });
 
 export const callNeuroBrilhaAI = createServerFn({ method: "POST" })
-  .validator(
+  .inputValidator(
     z.discriminatedUnion("mode", [
       z.object({
         mode: z.literal("amigo-virtual"),
