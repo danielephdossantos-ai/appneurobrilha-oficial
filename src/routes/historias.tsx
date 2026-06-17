@@ -108,7 +108,7 @@ function HistoriasLibrary() {
           ].map((item) => (
             <button
               key={item.id}
-              onClick={() => setCategory(item.id)}
+              onClick={() => setCategory(item.id as StoryCategory | "todos")}
               className={`shrink-0 px-4 py-2 rounded-full font-bold text-sm transition-all ${
                 category === item.id
                   ? "bg-[#6C5CE7] text-white shadow-md scale-105"

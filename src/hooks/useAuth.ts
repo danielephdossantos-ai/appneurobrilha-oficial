@@ -29,7 +29,7 @@ export function useAuth(): UseAuthReturn {
       try {
         setIsLoading(true);
         const currentUser = await AuthService.getCurrentUser();
-        setUser(currentUser as User);
+        setUser(currentUser as unknown as User);
       } catch (err) {
         // Usuário não autenticado é esperado
         setUser(null);
@@ -60,7 +60,7 @@ export function useAuth(): UseAuthReturn {
       setIsLoading(true);
       await AuthService.login(email, password);
       const currentUser = await AuthService.getCurrentUser();
-      setUser(currentUser as User);
+      setUser(currentUser as unknown as User);
       logger.success('Login realizado com sucesso');
     } catch (err) {
       handleError(err, 'useAuth.login');
