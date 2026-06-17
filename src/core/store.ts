@@ -5,6 +5,7 @@ import { SensoryMode } from "@/engines/regulation-engine/sensory-engine";
 import { ChildProfileService } from "@/modules/child-profile/services/ChildProfileService";
 import type { ChildProfile } from "@/modules/child-profile/types";
 import { supabase } from "@/database/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 
 export type Diagnostico =
   | "tdah"
@@ -210,7 +211,7 @@ export interface AnamnesisData {
       tem_terapia: boolean;
     };
   };
-  internal_profile: unknown;
+  internal_profile: Json;
   edit_count: number;
 }
 
@@ -237,7 +238,7 @@ export function useAppState() {
     queryKey: ["children"],
     queryFn: async () => {
       const profiles = await ChildProfileService.getAll();
-      return profiles.map((child) => normalizeChild(child));
+      return profiles.map((child) => normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }));
     },
   });
 
@@ -246,8 +247,8 @@ export function useAppState() {
       const created = await ChildProfileService.create({
         ...newChild,
         user_id: "anonymous",
-      });
-      return normalizeChild(created);
+      } as unknown as Omit<ChildProfile, "id">);
+      return normalizeChild(created as unknown as Partial<Child> & { id: string; user_id: string; nome: string });
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
@@ -266,7 +267,7 @@ export function useAppState() {
 
   const updateChildMutation = useMutation({
     mutationFn: async ({ id, patch }: { id: string; patch: Partial<Child> }) => {
-      await ChildProfileService.update(id, patch);
+      await ChildProfileService.update(id, patch as unknown as Partial<ChildProfile>);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
