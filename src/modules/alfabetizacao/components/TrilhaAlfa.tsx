@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Lock, Check, Play, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Lock, Check, Play, Sparkles, BookOpen } from "lucide-react";
 import { ETAPAS } from "../data/etapas";
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { AtividadePlayer } from "./AtividadePlayer";
+import { calcularNivelLeitor } from "../data/historias-graduadas";
 
 interface Props {
   childId: string;
@@ -13,6 +15,7 @@ export function TrilhaAlfa({ childId, childName }: Props) {
   const { progresso, registrarAcerto, etapaDesbloqueada, etapaConcluida } =
     useProgressoAlfa(childId);
   const [etapaAtivaId, setEtapaAtivaId] = useState<string | null>(null);
+  const nivelLeitor = calcularNivelLeitor(progresso);
 
   const etapaAtiva = ETAPAS.find((e) => e.id === etapaAtivaId) ?? null;
 
