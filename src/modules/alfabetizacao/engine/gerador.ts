@@ -1,6 +1,11 @@
 // Geradores de atividades a partir do banco PALAVRAS.
 import { PALAVRAS, Palavra, VOGAIS } from "../data/palavras";
 import { FRASES, HISTORIAS } from "../data/historias";
+import {
+  validarAntesDeGerar,
+  sugerirAlternativa,
+  type ContextoPedagogico,
+} from "./validacaoPedagogica";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
