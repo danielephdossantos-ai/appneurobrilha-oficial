@@ -33,17 +33,20 @@ export interface Rodada {
   numeroOpcoes?: number[];
 }
 
-export function gerarRima(): Rodada {
+export function gerarRima(nivel = 2): Rodada {
+  const pool = poolPorNivel(nivel);
   const grupos = new Map<string, Palavra[]>();
-  PALAVRAS.forEach((p) => {
+  pool.forEach((p) => {
     if (!grupos.has(p.rima)) grupos.set(p.rima, []);
     grupos.get(p.rima)!.push(p);
   });
   const rimasValidas = [...grupos.values()].filter((g) => g.length >= 2);
+  if (rimasValidas.length === 0) return gerarSomInicial(nivel);
   const par = pick(rimasValidas);
   const [a, b] = shuffle(par).slice(0, 2);
-  const distrator = pick(PALAVRAS.filter((p) => p.rima !== a.rima));
-  const opcoes = shuffle([b.palavra, distrator.palavra]);
+  const distrator = pick(pool.filter((p) => p.rima !== a.rima));
+  const extras = numDistratores(nivel) === 1 ? [distrator] : shuffle(pool.filter((p) => p.rima !== a.rima && p.palavra !== distrator.palavra)).slice(0, 1).concat(distrator);
+  const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "rima",
     instrucaoFalada: `Qual palavra rima com ${a.palavra.toLowerCase()}?`,
@@ -52,17 +55,19 @@ export function gerarRima(): Rodada {
   };
 }
 
-export function gerarAliteracao(): Rodada {
+export function gerarAliteracao(nivel = 2): Rodada {
+  const pool = poolPorNivel(nivel);
   const grupos = new Map<string, Palavra[]>();
-  PALAVRAS.forEach((p) => {
+  pool.forEach((p) => {
     if (!grupos.has(p.inicial)) grupos.set(p.inicial, []);
     grupos.get(p.inicial)!.push(p);
   });
   const validos = [...grupos.values()].filter((g) => g.length >= 2);
+  if (validos.length === 0) return gerarSomInicial(nivel);
   const grupo = pick(validos);
   const [a, b] = shuffle(grupo).slice(0, 2);
-  const distrator = pick(PALAVRAS.filter((p) => p.inicial !== a.inicial));
-  const opcoes = shuffle([b.palavra, distrator.palavra]);
+  const extras = shuffle(pool.filter((p) => p.inicial !== a.inicial)).slice(0, numDistratores(nivel));
+  const opcoes = shuffle([b.palavra, ...extras.map((p) => p.palavra)]);
   return {
     tipo: "aliteracao",
     instrucaoFalada: `Qual começa com o mesmo som de ${a.palavra.toLowerCase()}?`,
@@ -71,9 +76,13 @@ export function gerarAliteracao(): Rodada {
   };
 }
 
-export function gerarSomInicial(): Rodada {
-  const alvo = pick(PALAVRAS);
-  const distratores = shuffle(PALAVRAS.filter((p) => p.inicial !== alvo.inicial)).slice(0, 2);
+export function gerarSomInicial(nivel = 2): Rodada {
+  const pool = poolPorNivel(nivel);
+  const alvo = pick(pool);
+  const distratores = shuffle(pool.filter((p) => p.inicial !== alvo.inicial)).slice(
+    0,
+    numDistratores(nivel),
+  );
   const opcoes = shuffle([alvo, ...distratores]);
   return {
     tipo: "som-inicial",
@@ -83,8 +92,9 @@ export function gerarSomInicial(): Rodada {
   };
 }
 
-export function gerarSegmentacao(): Rodada {
-  const alvo = pick(PALAVRAS.filter((p) => p.silabas.length <= 4));
+export function gerarSegmentacao(nivel = 2): Rodada {
+  const maxSil = nivel <= 1 ? 2 : nivel === 2 ? 3 : 4;
+  const alvo = pick(PALAVRAS.filter((p) => p.silabas.length <= maxSil));
   const correto = alvo.silabas.length;
   const opcoesNum = shuffle([1, 2, 3, 4]);
   return {
@@ -97,9 +107,13 @@ export function gerarSegmentacao(): Rodada {
   };
 }
 
-export function gerarFusao(): Rodada {
-  const alvo = pick(PALAVRAS.filter((p) => p.silabas.length >= 2 && p.silabas.length <= 3));
-  const distratores = shuffle(PALAVRAS.filter((p) => p.palavra !== alvo.palavra)).slice(0, 2);
+export function gerarFusao(nivel = 2): Rodada {
+  const pool = poolPorNivel(nivel).filter((p) => p.silabas.length >= 2);
+  const alvo = pick(pool);
+  const distratores = shuffle(pool.filter((p) => p.palavra !== alvo.palavra)).slice(
+    0,
+    numDistratores(nivel),
+  );
   const opcoes = shuffle([alvo.palavra, ...distratores.map((p) => p.palavra)]);
   const fala = alvo.silabas.join("... ").toLowerCase();
   return {
@@ -110,12 +124,16 @@ export function gerarFusao(): Rodada {
   };
 }
 
-export function gerarVogalSom(): Rodada {
+export function gerarVogalSom(nivel = 2): Rodada {
+  const pool = poolPorNivel(nivel);
   const vogal = pick([...VOGAIS]);
-  const candidatos = PALAVRAS.filter((p) => p.palavra.startsWith(vogal));
-  if (candidatos.length === 0) return gerarSomInicial();
+  const candidatos = pool.filter((p) => p.palavra.startsWith(vogal));
+  if (candidatos.length === 0) return gerarSomInicial(nivel);
   const alvo = pick(candidatos);
-  const distratores = shuffle(PALAVRAS.filter((p) => !p.palavra.startsWith(vogal))).slice(0, 2);
+  const distratores = shuffle(pool.filter((p) => !p.palavra.startsWith(vogal))).slice(
+    0,
+    numDistratores(nivel),
+  );
   const opcoes = shuffle([alvo, ...distratores]);
   return {
     tipo: "vogal-som",
@@ -125,7 +143,7 @@ export function gerarVogalSom(): Rodada {
   };
 }
 
-export function gerarFraseImagem(): Rodada {
+export function gerarFraseImagem(_nivel = 2): Rodada {
   const f = pick(FRASES);
   const opcoes = shuffle([f.respostaCorreta, ...f.distratores]);
   return {
@@ -136,7 +154,7 @@ export function gerarFraseImagem(): Rodada {
   };
 }
 
-export function gerarTextoCompreensao(): Rodada {
+export function gerarTextoCompreensao(_nivel = 2): Rodada {
   const h = pick(HISTORIAS);
   const opcoes = shuffle([h.respostaCorreta, ...h.distratores]);
   return {
@@ -147,16 +165,17 @@ export function gerarTextoCompreensao(): Rodada {
   };
 }
 
-export function gerarPorTipo(tipo: string): Rodada {
+export function gerarPorTipo(tipo: string, nivel = 2): Rodada {
   switch (tipo) {
-    case "vogal-som": return gerarVogalSom();
-    case "rima": return gerarRima();
-    case "aliteracao": return gerarAliteracao();
-    case "som-inicial": return gerarSomInicial();
-    case "segmentacao": return gerarSegmentacao();
-    case "fusao": return gerarFusao();
-    case "frase-imagem": return gerarFraseImagem();
-    case "texto-compreensao": return gerarTextoCompreensao();
-    default: return gerarSomInicial();
+    case "vogal-som": return gerarVogalSom(nivel);
+    case "rima": return gerarRima(nivel);
+    case "aliteracao": return gerarAliteracao(nivel);
+    case "som-inicial": return gerarSomInicial(nivel);
+    case "segmentacao": return gerarSegmentacao(nivel);
+    case "fusao": return gerarFusao(nivel);
+    case "frase-imagem": return gerarFraseImagem(nivel);
+    case "texto-compreensao": return gerarTextoCompreensao(nivel);
+    default: return gerarSomInicial(nivel);
   }
+}
 }
