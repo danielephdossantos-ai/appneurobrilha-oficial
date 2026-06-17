@@ -118,6 +118,7 @@ export function TrilhaAlfa({ childId, childName }: Props) {
         <AtividadePlayer
           etapa={etapaAtiva}
           acertosAtuais={progresso[etapaAtiva.id] ?? 0}
+          childId={childId}
           onAcerto={() => registrarAcerto(etapaAtiva.id)}
           onSair={() => setEtapaAtivaId(null)}
         />
