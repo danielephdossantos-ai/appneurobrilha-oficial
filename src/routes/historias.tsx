@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useStories } from "@/modules/historias/hooks/useStories";
 import { THEME_META, type StoryTheme } from "@/modules/historias/types";
+import type { StoryCategory } from "@/modules/historias/lib/story-library";
 import { useAppState } from "@/core/store";
 
 export const Route = createFileRoute("/historias")({
@@ -25,7 +26,7 @@ function HistoriasLibrary() {
   const { activeChild } = useAppState();
   const [theme, setTheme] = useState<string>("todos");
   const [level, setLevel] = useState<string>("todos");
-  const [category, setCategory] = useState<string>("todos");
+  const [category, setCategory] = useState<StoryCategory | "todos">("todos");
   const [search, setSearch] = useState("");
 
   const childAge = activeChild?.idade ?? undefined;
@@ -107,7 +108,7 @@ function HistoriasLibrary() {
           ].map((item) => (
             <button
               key={item.id}
-              onClick={() => setCategory(item.id)}
+              onClick={() => setCategory(item.id as StoryCategory | "todos")}
               className={`shrink-0 px-4 py-2 rounded-full font-bold text-sm transition-all ${
                 category === item.id
                   ? "bg-[#6C5CE7] text-white shadow-md scale-105"

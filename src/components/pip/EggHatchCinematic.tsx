@@ -567,7 +567,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     style={{ originX: "31%", originY: "30%" }}
                   >
                     <circle cx="70" cy="65" r="14" fill="#fff" />
-                    <circle
+                    <motion.circle
                       cx="70"
                       cy="65"
                       r="6"
@@ -588,7 +588,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     style={{ originX: "69%", originY: "30%" }}
                   >
                     <circle cx="150" cy="65" r="14" fill="#fff" />
-                    <circle
+                    <motion.circle
                       cx="150"
                       cy="65"
                       r="6"
