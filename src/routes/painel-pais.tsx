@@ -154,6 +154,46 @@ function PainelPremium() {
           childId={activeChild.id}
         />
 
+        {/* Abas por criança (máx. 2) */}
+        <div className="mb-6 flex flex-wrap items-center gap-2">
+          {children.map((c: any) => {
+            const isActive = c.id === activeChild.id;
+            return (
+              <button
+                key={c.id}
+                onClick={() => setActiveChild(c.id)}
+                className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-sm shadow-sm border-2 transition ${
+                  isActive
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-white text-slate-700 border-slate-200 hover:border-primary"
+                }`}
+              >
+                <span className="text-lg">{c.avatar || "🧒"}</span>
+                {c.nome}
+                {!c.anamnese_completa && (
+                  <span className="ml-1 text-[10px] uppercase tracking-wider bg-amber-500 text-white px-2 py-0.5 rounded-full">
+                    anamnese
+                  </span>
+                )}
+              </button>
+            );
+          })}
+          {children.length < 2 && (
+            <Link
+              to="/anamnese/$childId"
+              params={{ childId: "nova" }}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-sm border-2 border-dashed border-slate-300 hover:border-primary text-slate-600 hover:text-primary"
+            >
+              + Adicionar 2ª criança
+            </Link>
+          )}
+          {children.length >= 2 && (
+            <span className="text-xs font-bold text-slate-500 px-3">
+              Limite de 2 crianças atingido
+            </span>
+          )}
+        </div>
+
         {/* Cartão de Anamnese — sempre visível na área dos pais */}
         <div
           className={`mb-6 rounded-3xl border-4 p-6 flex flex-col md:flex-row items-start md:items-center gap-4 ${

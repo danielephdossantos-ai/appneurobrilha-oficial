@@ -244,6 +244,10 @@ export function useAppState() {
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
+      const existing = await ChildProfileService.getAll();
+      if (existing.length >= 2) {
+        throw new Error("LIMIT_REACHED");
+      }
       const created = await ChildProfileService.create({
         ...newChild,
         user_id: "anonymous",
@@ -257,7 +261,10 @@ export function useAppState() {
       toast.success("Criança cadastrada com sucesso!");
     },
     onError: (error: unknown) => {
-      if (isAuthExpiredError(error)) {
+      const msg = (error as { message?: string })?.message;
+      if (msg === "LIMIT_REACHED") {
+        toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
+      } else if (isAuthExpiredError(error)) {
         toast.error("Erro de autenticação. Por favor, atualize a página.");
       } else {
         toast.error("Erro ao cadastrar criança");
