@@ -3,23 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import { EtapaCurricular } from "../data/etapas";
 import { gerarPorTipo, Rodada } from "../engine/gerador";
 import { useVoz } from "../hooks/useVoz";
+import { useAdaptiveDifficulty } from "../hooks/useAdaptiveDifficulty";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { Volume2, X, Check, Sparkles } from "lucide-react";
+import { Volume2, X, Check, Sparkles, TrendingUp, TrendingDown } from "lucide-react";
 
 interface Props {
   etapa: EtapaCurricular;
   acertosAtuais: number;
+  childId: string;
   onAcerto: () => void;
   onSair: () => void;
 }
 
-export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Props) {
+export function AtividadePlayer({ etapa, acertosAtuais, childId, onAcerto, onSair }: Props) {
   const { falar, parar } = useVoz();
+  const { nivel, registrar } = useAdaptiveDifficulty(childId);
   const [rodada, setRodada] = useState<Rodada>(() =>
-    gerarPorTipo(etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)]),
+    gerarPorTipo(
+      etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)],
+      nivel,
+    ),
   );
   const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
   const [travado, setTravado] = useState(false);
+  const [ajuste, setAjuste] = useState<"subiu" | "desceu" | null>(null);
 
   const progressoPct = useMemo(
     () => Math.min(100, Math.round((acertosAtuais / etapa.alvo) * 100)),
@@ -33,9 +40,9 @@ export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Prop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rodada]);
 
-  function proximaRodada() {
+  function proximaRodada(nivelAtual: number) {
     const tipo = etapa.atividades[Math.floor(Math.random() * etapa.atividades.length)];
-    setRodada(gerarPorTipo(tipo));
+    setRodada(gerarPorTipo(tipo, nivelAtual));
     setFeedback(null);
     setTravado(false);
   }
@@ -45,10 +52,19 @@ export function AtividadePlayer({ etapa, acertosAtuais, onAcerto, onSair }: Prop
     setTravado(true);
     const ok = resposta === rodada.correta;
     setFeedback(ok ? "acerto" : "erro");
+    const nivelAntes = nivel;
+    const nivelDepois = registrar(ok);
+    if (nivelDepois > nivelAntes) {
+      setAjuste("subiu");
+      setTimeout(() => setAjuste(null), 1800);
+    } else if (nivelDepois < nivelAntes) {
+      setAjuste("desceu");
+      setTimeout(() => setAjuste(null), 1800);
+    }
     if (ok) {
       falar("Muito bem!");
       onAcerto();
-      setTimeout(proximaRodada, 1400);
+      setTimeout(() => proximaRodada(nivelDepois), 1400);
     } else {
       falar("Quase! Tenta de novo.");
       setTimeout(() => {
