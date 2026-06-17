@@ -26,7 +26,7 @@ import {
   Step18,
   Step19,
 } from "../steps";
-import { STEP_TITLES, TOTAL_STEPS } from "../v2/types";
+import { ACTIVE_STEPS, STEP_TITLES, nextActiveStep, prevActiveStep, stepPosition } from "../v2/types";
 import { toast } from "sonner";
 
 export function AnamneseWizard({ childId }: { childId: string }) {
