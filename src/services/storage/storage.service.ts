@@ -5,7 +5,7 @@
  * Nenhum componente deve acessar storage diretamente.
  */
 
-import { supabaseClient } from './client';
+import { supabase as supabaseClient } from '@/database/supabase/client';
 import { logger } from '../../core/logging/logger';
 import { ErrorHandler } from '../../core/error-handling/errorHandler';
 import { ErrorType } from '../../core/error-handling/errorTypes';

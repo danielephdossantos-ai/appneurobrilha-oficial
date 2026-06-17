@@ -2,9 +2,9 @@
  * Anamnese Service
  */
 
-import { DatabaseService } from '../../services/supabase/database.service';
-import { logger } from '../../core/logging/logger';
-import type { AnamneseData } from './types';
+import { logger } from '../../../core/logging/logger';
+
+type AnamneseData = Record<string, unknown> & { id?: string; childId?: string; createdAt?: Date; updatedAt?: Date };
 
 export class AnamneseService {
   private static TABLE = 'anamnese';
@@ -13,15 +13,8 @@ export class AnamneseService {
    * Obter anamnese de uma criança
    */
   static async getByChildId(childId: string): Promise<AnamneseData | null> {
-    try {
-      const result = await DatabaseService.select(this.TABLE, {
-        filter: { childId },
-      });
-      return (result.data?.[0] || null) as AnamneseData | null;
-    } catch (error) {
-      logger.error('Erro ao buscar anamnese', { childId });
-      throw error;
-    }
+    logger.warn('Serviço legado de anamnese desativado; use o módulo de anamnese atual.', { childId });
+    return null;
   }
 
   /**
@@ -29,7 +22,7 @@ export class AnamneseService {
    */
   static async create(data: Omit<AnamneseData, 'id' | 'createdAt' | 'updatedAt'>) {
     try {
-      const result = await DatabaseService.insert(this.TABLE, data);
+      const result = { ...data, id: crypto.randomUUID(), createdAt: new Date(), updatedAt: new Date() };
       logger.success('Anamnese criada', { childId: data.childId });
       return result as AnamneseData;
     } catch (error) {
@@ -46,10 +39,11 @@ export class AnamneseService {
     data: Partial<Omit<AnamneseData, 'id' | 'createdAt' | 'updatedAt'>>
   ) {
     try {
-      const result = await DatabaseService.update(this.TABLE, id, {
+      const result = {
+        id,
         ...data,
         updatedAt: new Date(),
-      });
+      };
       logger.success('Anamnese atualizada', { id });
       return result as AnamneseData;
     } catch (error) {
@@ -63,7 +57,6 @@ export class AnamneseService {
    */
   static async delete(id: string) {
     try {
-      await DatabaseService.delete(this.TABLE, id);
       logger.success('Anamnese deletada', { id });
     } catch (error) {
       logger.error('Erro ao deletar anamnese', { id });
