@@ -22,6 +22,7 @@ import { useHiperfoco } from "@/context/HiperfocoContext";
 import LiveMascot from "@/components/ui/KidLiveMascot";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
+import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
 
 // Mundos (backgrounds)
 import worldDino from "@/assets/neuro-treino/worlds/dinossauros.jpg";
@@ -323,6 +324,11 @@ function Jornada() {
               style={{ width: `${progress}%` }}
             />
           </div>
+        </div>
+
+        {/* PEI · Aula de hoje (gerada automaticamente) */}
+        <div className="relative z-10 mb-6">
+          <AulaDeHoje childId={activeChild.id} />
         </div>
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6">
