@@ -134,6 +134,15 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Contagem, sílaba inicial, sílaba final e formação silábica",
     instrucao: "Leia a tarefa e toque na figura certa.",
   },
+  "compreensao-leitora": {
+    slug: "compreensao-leitora",
+    nome: "Compreensão Leitora",
+    emoji: "📖",
+    grupo: "Alfabetização",
+    cor: "from-amber/25 to-amber/5",
+    objetivo: "Perguntas literais, inferenciais e interpretativas adaptadas ao nível",
+    instrucao: "Leia o texto e escolha a resposta certa.",
+  },
 
   "onde-esta": {
     slug: "onde-esta",
