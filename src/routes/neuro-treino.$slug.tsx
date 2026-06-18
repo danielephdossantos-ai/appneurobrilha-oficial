@@ -336,6 +336,8 @@ function MechanicRenderer({
       return <ConscienciaFonologica p={variation.payload} onDone={onConcluir} />;
     case "consciencia-silabica":
       return <ConscienciaSilabica p={variation.payload} onDone={onConcluir} />;
+    case "compreensao-leitora":
+      return <CompreensaoLeitora p={variation.payload} onDone={onConcluir} />;
     case "rimas":
       return <Rimas p={variation.payload} onDone={onConcluir} />;
     case "pedacinhos-da-palavra":
@@ -555,6 +557,67 @@ function ConscienciaSilabica({ p, onDone }: any) {
             </button>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+// ============== Compreensão Leitora (literal / inferencial / interpretativa) ==============
+function CompreensaoLeitora({ p, onDone }: any) {
+  const tipoLabel: Record<string, string> = {
+    literal: "Pergunta Literal",
+    inferencial: "Pergunta Inferencial",
+    interpretativa: "Pergunta Interpretativa",
+  };
+  const tipoCor: Record<string, string> = {
+    literal: "bg-sky-100 text-sky-700",
+    inferencial: "bg-violet-100 text-violet-700",
+    interpretativa: "bg-amber-100 text-amber-700",
+  };
+  const nivelLabel = ["", "Nível 1 · Iniciante", "Nível 2 · Intermediário", "Nível 3 · Avançado"];
+  const textoClasse =
+    p.nivel === 1
+      ? "text-2xl md:text-3xl leading-snug"
+      : p.nivel === 2
+        ? "text-lg md:text-xl leading-relaxed"
+        : "text-base md:text-lg leading-relaxed";
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="flex flex-wrap items-center gap-2 mb-3 justify-center">
+        <span
+          className={`inline-block px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider ${tipoCor[p.tipo] || "bg-muted text-muted-foreground"}`}
+        >
+          {tipoLabel[p.tipo] || p.tipo}
+        </span>
+        <span className="inline-block px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-700">
+          {nivelLabel[p.nivel] || `Nível ${p.nivel}`}
+        </span>
+      </div>
+
+      <div
+        className={`bg-card border-2 border-border rounded-2xl p-5 mb-5 font-bold text-foreground ${textoClasse}`}
+      >
+        {p.texto}
+      </div>
+
+      <div className="text-xl md:text-2xl font-black mb-4 text-center text-foreground">
+        {p.pergunta}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {p.opcoes.map((op: string, i: number) => (
+          <button
+            key={i}
+            onClick={() => onDone(i === p.correta)}
+            className="text-left bg-card border-2 border-border rounded-2xl px-4 py-3 hover:border-primary hover:scale-[1.02] transition-all font-bold text-foreground"
+          >
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-black mr-2">
+              {String.fromCharCode(65 + i)}
+            </span>
+            {op}
+          </button>
+        ))}
       </div>
     </div>
   );

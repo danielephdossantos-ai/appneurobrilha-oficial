@@ -27,6 +27,7 @@ export type CategoriaSlug =
   | "pedacinhos-da-palavra"
   | "consciencia-fonologica"
   | "consciencia-silabica"
+  | "compreensao-leitora"
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
@@ -132,6 +133,15 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-coral/25 to-sun/5",
     objetivo: "Contagem, sílaba inicial, sílaba final e formação silábica",
     instrucao: "Leia a tarefa e toque na figura certa.",
+  },
+  "compreensao-leitora": {
+    slug: "compreensao-leitora",
+    nome: "Compreensão Leitora",
+    emoji: "📖",
+    grupo: "Alfabetização",
+    cor: "from-amber/25 to-amber/5",
+    objetivo: "Perguntas literais, inferenciais e interpretativas adaptadas ao nível",
+    instrucao: "Leia o texto e escolha a resposta certa.",
   },
 
   "onde-esta": {
@@ -1947,6 +1957,163 @@ const CONSCIENCIA_SILABICA_VARS: Variation[] = (() => {
   return out;
 })();
 
+// 24c. COMPREENSÃO LEITORA — literal / inferencial / interpretativa, com nível 1-3
+// nivel: 1 = leitor iniciante (1 frase curta), 2 = intermediário (2-3 frases), 3 = avançado (parágrafo)
+type ClTipo = "literal" | "inferencial" | "interpretativa";
+interface ClItem {
+  nivel: 1 | 2 | 3;
+  tipo: ClTipo;
+  texto: string;
+  pergunta: string;
+  opcoes: string[];
+  correta: number; // índice da opção certa
+}
+
+const CL_BANK: ClItem[] = [
+  // ── NÍVEL 1 ─────────────────────────────────────────────────────────
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "O gato preto subiu no telhado.",
+    pergunta: "Quem subiu no telhado?",
+    opcoes: ["O cachorro", "O gato", "O passarinho", "O menino"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "A Ana comeu uma maçã vermelha.",
+    pergunta: "Que cor era a maçã?",
+    opcoes: ["Verde", "Amarela", "Vermelha", "Azul"],
+    correta: 2,
+  },
+  {
+    nivel: 1,
+    tipo: "inferencial",
+    texto: "O Léo pegou o guarda-chuva antes de sair.",
+    pergunta: "Como devia estar o tempo lá fora?",
+    opcoes: ["Ensolarado", "Chovendo", "Nevando", "Ventando"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "interpretativa",
+    texto: "A Bia sorriu quando ganhou o presente.",
+    pergunta: "Como a Bia se sentiu?",
+    opcoes: ["Triste", "Feliz", "Com raiva", "Com medo"],
+    correta: 1,
+  },
+
+  // ── NÍVEL 2 ─────────────────────────────────────────────────────────
+  {
+    nivel: 2,
+    tipo: "literal",
+    texto: "O João foi à feira com a mãe. Ele comprou banana, maçã e uva. Pagou com uma nota azul.",
+    pergunta: "Quais frutas o João comprou?",
+    opcoes: [
+      "Banana, maçã e uva",
+      "Banana, pera e laranja",
+      "Maçã, melancia e uva",
+      "Uva, abacaxi e pera",
+    ],
+    correta: 0,
+  },
+  {
+    nivel: 2,
+    tipo: "inferencial",
+    texto:
+      "A Lia chegou em casa com o uniforme molhado e os sapatos cheios de areia. Ela estava sorrindo.",
+    pergunta: "Onde a Lia provavelmente esteve?",
+    opcoes: ["Na biblioteca", "Na praia", "No dentista", "No supermercado"],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "inferencial",
+    texto: "O cachorro do Pedro latia sem parar perto da porta, balançando o rabo bem rápido.",
+    pergunta: "O que o cachorro provavelmente queria?",
+    opcoes: ["Dormir", "Sair para passear", "Beber água", "Ficar quieto"],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "interpretativa",
+    texto:
+      "A Mia plantou uma sementinha e regou todo dia. Depois de muitas semanas, uma flor amarela nasceu.",
+    pergunta: "Qual é a melhor lição dessa história?",
+    opcoes: [
+      "Plantas não precisam de água",
+      "Ter paciência traz bons frutos",
+      "Flores são sempre amarelas",
+      "É melhor desistir cedo",
+    ],
+    correta: 1,
+  },
+
+  // ── NÍVEL 3 ─────────────────────────────────────────────────────────
+  {
+    nivel: 3,
+    tipo: "literal",
+    texto:
+      "Era sábado de manhã. O Tomás acordou cedo, preparou a mochila com lanche, água e binóculo, e seguiu com o pai para a trilha da floresta. No caminho, viu três tucanos e ouviu o barulho de um riacho.",
+    pergunta: "O que o Tomás colocou na mochila?",
+    opcoes: [
+      "Lanche, água e binóculo",
+      "Lanche, livro e câmera",
+      "Água, lanterna e mapa",
+      "Binóculo, mapa e câmera",
+    ],
+    correta: 0,
+  },
+  {
+    nivel: 3,
+    tipo: "inferencial",
+    texto:
+      "A Júlia estudou a semana inteira para a prova de matemática. Quando o professor entregou os resultados, ela abraçou a folha bem forte e correu para mostrar à mãe.",
+    pergunta: "O que provavelmente aconteceu na prova?",
+    opcoes: [
+      "Ela tirou uma nota baixa",
+      "Ela tirou uma nota muito boa",
+      "Ela não fez a prova",
+      "Ela esqueceu a prova em casa",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "interpretativa",
+    texto:
+      "O leão era o rei da floresta e rugia para todos. Um dia, ficou preso numa rede. Um ratinho pequenino mordeu as cordas e o libertou. Desde então, o leão entendeu que até os pequenos podem ajudar os grandes.",
+    pergunta: "Qual é a ideia principal do texto?",
+    opcoes: [
+      "Leões são mais fortes que ratos",
+      "Ratos vivem em florestas",
+      "Ninguém é tão pequeno que não possa ajudar",
+      "É perigoso ficar preso em redes",
+    ],
+    correta: 2,
+  },
+  {
+    nivel: 3,
+    tipo: "interpretativa",
+    texto:
+      "O Davi sempre quis tocar violão, mas tinha vergonha de errar na frente dos amigos. Um dia, decidiu praticar sozinho no quintal toda tarde. Meses depois, surpreendeu a turma tocando uma música inteira sem errar.",
+    pergunta: "O que essa história ensina?",
+    opcoes: [
+      "Tocar violão é fácil",
+      "Praticar com dedicação supera a vergonha",
+      "Amigos atrapalham os ensaios",
+      "É melhor não tentar coisas novas",
+    ],
+    correta: 1,
+  },
+];
+
+const COMPREENSAO_LEITORA_VARS: Variation[] = CL_BANK.map((it, i) => ({
+  id: `cl-${i + 1}`,
+  payload: it,
+}));
+
 export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sons-iniciais": SONS_INICIAIS_VARS,
   "motorzinho-dos-sons": MOTORZINHO_VARS,
@@ -1954,6 +2121,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "pedacinhos-da-palavra": PEDACINHOS_VARS,
   "consciencia-fonologica": CONSCIENCIA_VARS,
   "consciencia-silabica": CONSCIENCIA_SILABICA_VARS,
+  "compreensao-leitora": COMPREENSAO_LEITORA_VARS,
   "onde-esta": ONDE_VARS,
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
@@ -2051,6 +2219,7 @@ export const GRUPOS = [
       "pedacinhos-da-palavra",
       "consciencia-fonologica",
       "consciencia-silabica",
+      "compreensao-leitora",
     ] as CategoriaSlug[],
   },
   {
