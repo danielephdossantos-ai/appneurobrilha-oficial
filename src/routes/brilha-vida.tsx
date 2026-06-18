@@ -140,6 +140,15 @@ function BrilhaVida() {
     );
   }
 
+  if (customActivity === "termometro") {
+    return (
+      <Shell>
+        <TermometroEmocoes onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+
 
 
   if (activeActivity) {
