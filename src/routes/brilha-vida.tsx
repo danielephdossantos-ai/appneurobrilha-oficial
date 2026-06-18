@@ -14,6 +14,9 @@ import { EmojiMagico } from "@/components/brilha-vida/EmojiMagico";
 import { HistoriasSociais } from "@/components/brilha-vida/HistoriasSociais";
 import { DividindoBrinquedo } from "@/components/brilha-vida/DividindoBrinquedo";
 import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
+import { MinhaVezSuaVez } from "@/components/brilha-vida/MinhaVezSuaVez";
+import { RegrasCasa } from "@/components/brilha-vida/RegrasCasa";
+import { ResolucaoConflitos } from "@/components/brilha-vida/ResolucaoConflitos";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -90,7 +93,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -130,6 +133,18 @@ function BrilhaVida() {
     }
     if (tipo === "Cuidando do Amigo") {
       setCustomActivity("cuidando");
+      return;
+    }
+    if (tipo === "Minha vez, sua vez") {
+      setCustomActivity("minhavez");
+      return;
+    }
+    if (tipo === "Regras da Casa") {
+      setCustomActivity("regras");
+      return;
+    }
+    if (tipo === "Resolução de Conflitos") {
+      setCustomActivity("conflitos");
       return;
     }
     setIsLoading(true);
@@ -238,6 +253,31 @@ function BrilhaVida() {
       </Shell>
     );
   }
+
+  if (customActivity === "minhavez") {
+    return (
+      <Shell>
+        <MinhaVezSuaVez onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "regras") {
+    return (
+      <Shell>
+        <RegrasCasa onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "conflitos") {
+    return (
+      <Shell>
+        <ResolucaoConflitos onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
 
 
 
