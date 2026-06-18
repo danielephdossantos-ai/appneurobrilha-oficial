@@ -29,10 +29,21 @@ export const SINONIMOS_LESSON: ActivityLesson = {
     exemplo_visual: {
       title: "Veja este exemplo:",
       sentences: [
-        { text: "Ele está alegre.", emoji: "" },
-        { text: "Ele está feliz.", emoji: "" },
+        { text: "Ele está alegre.", emoji: "😀" },
+        { text: "Ele está feliz.", emoji: "😊" },
       ],
       conclusion: "As duas palavras têm o mesmo significado.",
+      visual: {
+        type: "word_visual",
+        word_visual: {
+          items: [
+            { label: "ALEGRE", emoji: "😀" },
+            { label: "FELIZ", emoji: "😊" },
+          ],
+          connector: "=",
+          connectorLabel: "mesmo sentido",
+        },
+      },
     },
     praticar: {
       question: "Qual palavra é sinônimo de",
