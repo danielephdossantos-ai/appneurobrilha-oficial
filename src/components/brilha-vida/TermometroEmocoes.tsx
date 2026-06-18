@@ -130,7 +130,7 @@ export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
             className="mt-6 bg-white rounded-3xl p-5 shadow-lg border-2 max-w-md text-center"
             style={{ borderColor: nivel.cor }}
           >
-            <div className="text-5xl mb-2">{nivel.emoji}</div>
+            <img src={nivel.img} alt={nivel.nome} width={96} height={96} className="w-24 h-24 object-contain mx-auto mb-2 drop-shadow-md" />
             <div className="font-black text-lg text-slate-800 mb-1">
               Você está {nivel.nome.toLowerCase()}
             </div>
