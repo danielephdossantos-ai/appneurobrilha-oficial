@@ -1,52 +1,44 @@
 // ============================================================
 // PEI — Gerador de Plano Trimestral (motor puro, sem DB)
 // ============================================================
-// Recebe perfil da criança + habilidades BNCC disponíveis
-// e devolve um plano de 90 aulas adaptado.
-//
-// NÃO grava no banco. Quem grava é a camada de orquestração
-// (próximo passo). Aqui é só lógica pura — fácil de testar
-// e validar antes de plugar na UI.
+// Jornada 365 = BNCC puro. Nenhum bloco neuro-treino aqui.
+// Cada bloco aponta para uma aula real de aulas_bncc.
 // ============================================================
 
 export type PerfilCrianca = {
   idade: number | null;
   serie: string | null;
   diagnostico: string | null;
-  tempoAtencaoMin: number | null; // minutos sustentados
+  tempoAtencaoMin: number | null;
   hiperfoco: string | null;
   niveis?: {
-    alfabetizacao?: number; // 1..5
+    alfabetizacao?: number;
     matematica?: number;
     atencao?: number;
     coordenacao?: number;
   } | null;
 };
 
-export type BnccHabilidade = {
+export type AulaBnccRef = {
   id: string;
   codigo_bncc: string;
+  serie: string | null;
   disciplina: string | null;
-  ano: string | null;
   titulo: string | null;
-  objetivo: string | null;
+  descricao: string | null;
+  ordem: number | null;
 };
 
 export type AtividadeBloco = {
-  tipo:
-    | "neuro-treino"
-    | "alfabetizacao"
-    | "matematica"
-    | "leitura"
-    | "movimento";
-  slug: string;
-  payload?: Record<string, unknown>;
+  tipo: "bncc";
+  slug: string;            // codigo_bncc (referência humana)
+  payload: { aula_id: string; disciplina: string | null };
   tempo_min: number;
 };
 
 export type AulaGerada = {
   ordem: number;
-  data_prevista: string; // ISO yyyy-mm-dd
+  data_prevista: string;
   titulo: string;
   objetivo: string;
   bncc_codigos: string[];
@@ -54,17 +46,25 @@ export type AulaGerada = {
   tempo_total_min: number;
 };
 
+export type AdaptacaoCtx = {
+  fadigaAlta: boolean;            // últimos 7 dias com pausas recomendadas
+  habilidadesParaReforco: string[]; // codigo_bncc com mastery < 0.6
+};
+
 export type PlanoGerado = {
   trimestre_inicio: string;
   trimestre_fim: string;
   tempo_aula_min: number;
   perfil_snapshot: PerfilCrianca;
+  adaptacao: AdaptacaoCtx;
   aulas: AulaGerada[];
 };
 
 // ---- adaptação de tempo por perfil ------------------------------
-function tempoAulaParaPerfil(p: PerfilCrianca): number {
-  // base 15min. Ajusta por atenção sustentada e idade.
+export function tempoAulaParaPerfil(
+  p: PerfilCrianca,
+  ctx: AdaptacaoCtx,
+): number {
   let t = 15;
   const ta = p.tempoAtencaoMin ?? 0;
   if (ta && ta < 5) t = 8;
@@ -75,133 +75,77 @@ function tempoAulaParaPerfil(p: PerfilCrianca): number {
   if ((p.idade ?? 0) <= 5) t = Math.min(t, 10);
   if ((p.idade ?? 0) >= 9) t = Math.max(t, 15);
 
-  // TEA / TDAH severos puxam pra baixo
   const d = (p.diagnostico ?? "").toLowerCase();
   if (d.includes("tdah") || d.includes("tea") || d.includes("autis")) {
     t = Math.min(t, 12);
   }
+
+  // ADAPTATIVO: fadiga alta → corta 25%
+  if (ctx.fadigaAlta) t = Math.max(6, Math.round(t * 0.75));
+
   return t;
 }
 
-// Slugs reais das CATEGORIAS de neuro-treino (precisam casar com /neuro-treino/$slug)
-const SLUGS_AQUECIMENTO = ["foco-total", "reacao-rapida", "alvo-movel"];
-const SLUGS_PORT = [
-  "consciencia-silabica",
-  "rimas",
-  "letra-som",
-  "formando-palavras",
-  "leitura-palavras",
-  "palavra-imagem",
-  "completar-letra",
-];
-const SLUGS_MAT = [
-  "sequencia-e-padrao",
-  "triagem-categorias",
-  "memoria-visual",
-  "toque-sequencia",
-];
-const SLUGS_NEURO = [
-  "foco-sustentado",
-  "memoria-visual",
-  "achar-diferente",
-  "copiar-figura",
-];
-const SLUGS_NEURO_HIPER = ["onde-esta", "cade-o-par", "seguir-instrucao"];
-const SLUGS_LEITURA = ["compreensao-leitora"];
-const SLUGS_MOV = ["ritmo-batidas", "ritmo-e-sopro"];
-
-function pick<T>(arr: T[], i: number): T {
-  return arr[i % arr.length];
+// Mapeia idade → série BNCC (formato igual ao da tabela aulas_bncc)
+export function serieParaIdade(idade: number | null): string {
+  const i = idade ?? 6;
+  if (i <= 5) return "Pré-Escola";
+  if (i === 6) return "1º Ano";
+  if (i === 7) return "2º Ano";
+  if (i === 8) return "3º Ano";
+  if (i === 9) return "4º Ano";
+  if (i === 10) return "5º Ano";
+  if (i === 11) return "6º Ano";
+  if (i === 12) return "7º Ano";
+  if (i === 13) return "8º Ano";
+  return "9º Ano";
 }
 
-// ---- divisão do tempo total em blocos curtos --------------------
+// ---- montagem dos blocos de uma aula ----------------------------
 function montarBlocos(
   tempoTotal: number,
-  hab: BnccHabilidade,
-  perfil: PerfilCrianca,
-  ordem: number,
+  principal: AulaBnccRef,
+  reforco: AulaBnccRef | null,
+  ctx: AdaptacaoCtx,
 ): AtividadeBloco[] {
-  const disc = (hab.disciplina ?? "").toLowerCase();
-  const blocoMov: AtividadeBloco = {
-    tipo: "movimento",
-    slug: pick(SLUGS_MOV, ordem),
-    tempo_min: 1,
-  };
+  const blocos: AtividadeBloco[] = [];
 
-  // Atividade principal alinhada à disciplina BNCC
-  let principal: AtividadeBloco;
-  if (disc.includes("port") || disc.includes("língu") || disc.includes("lingu")) {
-    principal = {
-      tipo: "alfabetizacao",
-      slug: pick(SLUGS_PORT, ordem),
-      payload: { bncc: hab.codigo_bncc },
-      tempo_min: Math.max(4, tempoTotal - 6),
-    };
-  } else if (disc.includes("mat")) {
-    principal = {
-      tipo: "matematica",
-      slug: pick(SLUGS_MAT, ordem),
-      payload: { bncc: hab.codigo_bncc },
-      tempo_min: Math.max(4, tempoTotal - 6),
-    };
-  } else {
-    principal = {
-      tipo: "neuro-treino",
-      slug: perfil.hiperfoco
-        ? pick(SLUGS_NEURO_HIPER, ordem)
-        : pick(SLUGS_NEURO, ordem),
-      payload: { bncc: hab.codigo_bncc, hiperfoco: perfil.hiperfoco },
-      tempo_min: Math.max(4, tempoTotal - 6),
-    };
+  // Reforço (se houver) vem primeiro com tempo curto
+  if (reforco) {
+    blocos.push({
+      tipo: "bncc",
+      slug: reforco.codigo_bncc,
+      payload: { aula_id: reforco.id, disciplina: reforco.disciplina },
+      tempo_min: Math.max(3, Math.round(tempoTotal * 0.3)),
+    });
   }
 
-  // Aquecimento neuro (sempre) + leitura curta + movimento
-  const aquecimento: AtividadeBloco = {
-    tipo: "neuro-treino",
-    slug: pick(SLUGS_AQUECIMENTO, ordem),
-    tempo_min: 2,
-  };
-  const leitura: AtividadeBloco = {
-    tipo: "leitura",
-    slug: pick(SLUGS_LEITURA, ordem),
-    payload: { hiperfoco: perfil.hiperfoco },
-    tempo_min: Math.max(2, tempoTotal - principal.tempo_min - 3),
-  };
+  blocos.push({
+    tipo: "bncc",
+    slug: principal.codigo_bncc,
+    payload: { aula_id: principal.id, disciplina: principal.disciplina },
+    tempo_min: reforco
+      ? Math.max(4, tempoTotal - Math.round(tempoTotal * 0.3))
+      : tempoTotal,
+  });
 
-  const blocos = [aquecimento, principal, leitura, blocoMov];
-  const soma = blocos.reduce((a, b) => a + b.tempo_min, 0);
-  if (soma > tempoTotal) {
-    const excesso = soma - tempoTotal;
-    principal.tempo_min = Math.max(3, principal.tempo_min - excesso);
+  // Se fadiga alta, evita 3 blocos
+  if (!ctx.fadigaAlta && !reforco && tempoTotal >= 12) {
+    // espaço pra um bloco extra opcional fica reservado pelo orquestrador
   }
+
   return blocos;
 }
 
-
-// ---- selecionar habilidades adequadas ---------------------------
-function filtrarHabilidades(
-  todas: BnccHabilidade[],
-  perfil: PerfilCrianca,
-): BnccHabilidade[] {
-  // Mapeia idade -> ano BNCC esperado
-  const idade = perfil.idade ?? 6;
-  const anoAlvo = (() => {
-    if (idade <= 5) return ["EI", "Educação Infantil"];
-    if (idade === 6) return ["1", "1º", "1º ano"];
-    if (idade === 7) return ["2", "2º"];
-    if (idade === 8) return ["3", "3º"];
-    if (idade === 9) return ["4", "4º"];
-    if (idade === 10) return ["5", "5º"];
-    return ["6", "6º"];
-  })();
-
-  const filtrados = todas.filter((h) =>
-    anoAlvo.some((a) => (h.ano ?? "").toLowerCase().includes(a.toLowerCase())),
-  );
-  return filtrados.length >= 30 ? filtrados : todas;
+// ---- selecionar aulas adequadas à série -------------------------
+function filtrarAulasPorSerie(
+  aulas: AulaBnccRef[],
+  serie: string,
+): AulaBnccRef[] {
+  const filt = aulas.filter((a) => (a.serie ?? "") === serie);
+  return filt.length >= 10 ? filt : aulas;
 }
 
-// ---- montagem do calendário 90 dias -----------------------------
 function addDaysISO(base: Date, d: number): string {
   const x = new Date(base);
   x.setDate(x.getDate() + d);
@@ -210,26 +154,27 @@ function addDaysISO(base: Date, d: number): string {
 
 export function gerarPlanoTrimestral(
   perfil: PerfilCrianca,
-  habilidades: BnccHabilidade[],
+  aulasBncc: AulaBnccRef[],
+  ctx: AdaptacaoCtx,
   opts: { inicio?: Date; totalAulas?: number } = {},
 ): PlanoGerado {
   const inicio = opts.inicio ?? new Date();
   const total = opts.totalAulas ?? 90;
-  const tempoAula = tempoAulaParaPerfil(perfil);
+  const tempoAula = tempoAulaParaPerfil(perfil, ctx);
 
-  const pool = filtrarHabilidades(habilidades, perfil);
+  const serie = serieParaIdade(perfil.idade);
+  const pool = filtrarAulasPorSerie(aulasBncc, serie);
   if (pool.length === 0) {
-    throw new Error("Sem habilidades BNCC disponíveis para este perfil");
+    throw new Error("Sem aulas BNCC disponíveis para esta série");
   }
 
-  // Alterna disciplinas pra evitar fadiga (port / mat / outras)
-  const port = pool.filter((h) => /port|lingu|língu/i.test(h.disciplina ?? ""));
-  const mat = pool.filter((h) => /mat/i.test(h.disciplina ?? ""));
+  // Alterna disciplinas para evitar fadiga
+  const port = pool.filter((a) => /port|lingu|língu/i.test(a.disciplina ?? ""));
+  const mat = pool.filter((a) => /mat/i.test(a.disciplina ?? ""));
   const outras = pool.filter(
-    (h) =>
-      !/port|lingu|língu|mat/i.test(h.disciplina ?? ""),
+    (a) => !/port|lingu|língu|mat/i.test(a.disciplina ?? ""),
   );
-  const ciclo: BnccHabilidade[] = [];
+  const ciclo: AulaBnccRef[] = [];
   const max = Math.max(port.length, mat.length, outras.length);
   for (let i = 0; i < max; i++) {
     if (port[i]) ciclo.push(port[i]);
@@ -238,16 +183,29 @@ export function gerarPlanoTrimestral(
   }
   const sequencia = ciclo.length > 0 ? ciclo : pool;
 
+  // Mapa de reforço: códigos a revisitar (mastery < 0.6)
+  const reforcoSet = new Set(ctx.habilidadesParaReforco);
+  const reforcoPool = pool.filter((a) => reforcoSet.has(a.codigo_bncc));
+
   const aulas: AulaGerada[] = [];
   for (let i = 0; i < total; i++) {
-    const hab = sequencia[i % sequencia.length];
-    const blocos = montarBlocos(tempoAula, hab, perfil, i);
+    const principal = sequencia[i % sequencia.length];
+
+    // A cada 3 dias, se há habilidades fracas, insere reforço
+    let reforco: AulaBnccRef | null = null;
+    if (reforcoPool.length > 0 && i % 3 === 0) {
+      reforco = reforcoPool[Math.floor(i / 3) % reforcoPool.length];
+    }
+
+    const blocos = montarBlocos(tempoAula, principal, reforco, ctx);
     aulas.push({
       ordem: i + 1,
       data_prevista: addDaysISO(inicio, i),
-      titulo: hab.titulo ?? `Aula ${i + 1}`,
-      objetivo: hab.objetivo ?? "Trabalhar habilidade BNCC",
-      bncc_codigos: [hab.codigo_bncc],
+      titulo: principal.titulo ?? `Aula ${i + 1}`,
+      objetivo: principal.descricao ?? "Trabalhar habilidade BNCC",
+      bncc_codigos: reforco
+        ? [reforco.codigo_bncc, principal.codigo_bncc]
+        : [principal.codigo_bncc],
       atividades: blocos,
       tempo_total_min: blocos.reduce((a, b) => a + b.tempo_min, 0),
     });
@@ -258,6 +216,7 @@ export function gerarPlanoTrimestral(
     trimestre_fim: addDaysISO(inicio, total - 1),
     tempo_aula_min: tempoAula,
     perfil_snapshot: perfil,
+    adaptacao: ctx,
     aulas,
   };
 }
