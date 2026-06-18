@@ -50,17 +50,17 @@ import icVocabularioSemantico from "@/assets/neuro-treino/icons/v2/vocabulario-s
 import icNomeacaoRapida from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.png";
 import icToqueSequencia from "@/assets/neuro-treino/icons/v2/toque-sequencia.png";
 import icRitmoBatidas from "@/assets/neuro-treino/icons/v2/ritmo-batidas.svg";
-import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.svg";
-import icAlvoMovel from "@/assets/neuro-treino/icons/v2/alvo-movel.svg";
+import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.png";
+import icAlvoMovel from "@/assets/neuro-treino/icons/v2/alvo-movel.png";
 import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.png";
 import icMemoriaVisual from "@/assets/neuro-treino/icons/v2/memoria-visual.png";
 import icReacaoRapida from "@/assets/neuro-treino/icons/v2/reacao-rapida.png";
 import icSeguirInstrucao from "@/assets/neuro-treino/icons/v2/seguir-instrucao.png";
 import icLetraSom from "@/assets/neuro-treino/icons/v2/letra-som.png";
 import icPalavraImagem from "@/assets/neuro-treino/icons/v2/palavra-imagem.svg";
-import icFormandoPalavras from "@/assets/neuro-treino/icons/v2/formando-palavras.svg";
+import icFormandoPalavras from "@/assets/neuro-treino/icons/v2/formando-palavras.png";
 import icLeituraPalavras from "@/assets/neuro-treino/icons/v2/leitura-palavras.svg";
-import icCompletarLetra from "@/assets/neuro-treino/icons/v2/completar-letra.svg";
+import icCompletarLetra from "@/assets/neuro-treino/icons/v2/completar-letra.png";
 
 const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sons-iniciais": icSonsIniciais,
