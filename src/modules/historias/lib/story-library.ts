@@ -311,6 +311,11 @@ export function getLibraryStories(filters?: { theme?: string; age?: number; leve
 }
 
 export function getLibraryStoryDetails(storyId: string, profile?: SpecialNeedsProfile): GeneratedLibraryStory | null {
+  const narrada = getHistoriaNarrada(storyId);
+  if (narrada) {
+    const adapter = profile ? PROFILE_ADAPTERS[profile] : undefined;
+    return adapter ? adapter(narrada.story, narrada.pages, narrada.questions) : narrada;
+  }
   const story = LIBRARY_STORIES.find((item) => item.id === storyId);
   if (!story) return null;
   const pages = buildStoryPages(story, CATEGORY_CONFIG[story.category].pageCount, profile);
