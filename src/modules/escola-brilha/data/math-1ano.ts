@@ -107,7 +107,7 @@ function mkSub(
     phase: "practice",
     type: "interaction",
     mascot,
-    speech: `Você tinha ${total} ${plural(obj)} e tirou ${take}. Quantas sobraram?`,
+    speech: `Você tinha ${total} ${plural(obj)}. Vamos tirar ${take}!`,
     elements: row(total).map((p, i) => ({
       id: eid(id),
       type: "text",
@@ -116,6 +116,7 @@ function mkSub(
       animation: "pop",
       delay: 0.2 + i * 0.15,
     })),
+    meta: { take },
     interaction: {
       type: "click",
       correctAnswer: String(total - take),
@@ -123,6 +124,7 @@ function mkSub(
     },
   };
 }
+
 
 function mkNext(
   id: string,
