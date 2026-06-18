@@ -93,7 +93,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -133,6 +133,18 @@ function BrilhaVida() {
     }
     if (tipo === "Cuidando do Amigo") {
       setCustomActivity("cuidando");
+      return;
+    }
+    if (tipo === "Minha vez, sua vez") {
+      setCustomActivity("minhavez");
+      return;
+    }
+    if (tipo === "Regras da Casa") {
+      setCustomActivity("regras");
+      return;
+    }
+    if (tipo === "Resolução de Conflitos") {
+      setCustomActivity("conflitos");
       return;
     }
     setIsLoading(true);
