@@ -40,6 +40,7 @@ import { Route as HistoriasStoryIdRouteImport } from './routes/historias.$storyI
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
+import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 
@@ -199,6 +200,11 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
+  id: '/db/$aulaId',
+  path: '/db/$aulaId',
+  getParentRoute: () => EscolaBrilhaRoute,
+} as any)
 const AnamneseChildIdResultadoRoute =
   AnamneseChildIdResultadoRouteImport.update({
     id: '/resultado',
@@ -245,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -279,6 +286,7 @@ export interface FileRoutesByTo {
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -315,6 +323,7 @@ export interface FileRoutesById {
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
+  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -352,6 +361,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/escola-brilha/db/$aulaId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -386,6 +396,7 @@ export interface FileRouteTypes {
     | '/escola-brilha'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/escola-brilha/db/$aulaId'
   id:
     | '__root__'
     | '/'
@@ -421,6 +432,7 @@ export interface FileRouteTypes {
     | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
+    | '/escola-brilha/db/$aulaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -671,6 +683,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escola-brilha/db/$aulaId': {
+      id: '/escola-brilha/db/$aulaId'
+      path: '/db/$aulaId'
+      fullPath: '/escola-brilha/db/$aulaId'
+      preLoaderRoute: typeof EscolaBrilhaDbAulaIdRouteImport
+      parentRoute: typeof EscolaBrilhaRoute
+    }
     '/anamnese/$childId/resultado': {
       id: '/anamnese/$childId/resultado'
       path: '/resultado'
@@ -691,11 +710,13 @@ declare module '@tanstack/react-router' {
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
+  EscolaBrilhaDbAulaIdRoute: typeof EscolaBrilhaDbAulaIdRoute
 }
 
 const EscolaBrilhaRouteChildren: EscolaBrilhaRouteChildren = {
   EscolaBrilhaAulaRoute: EscolaBrilhaAulaRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
+  EscolaBrilhaDbAulaIdRoute: EscolaBrilhaDbAulaIdRoute,
 }
 
 const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
