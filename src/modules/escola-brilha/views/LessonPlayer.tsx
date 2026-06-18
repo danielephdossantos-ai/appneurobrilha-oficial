@@ -60,6 +60,13 @@ const EARLY_MAP: Record<string, typeof VOGAIS_LESSON> = {
   subtracao: SUBTRACAO_LESSON,
 };
 
+const NUMBER_WORDS = [
+  "Um", "Dois", "Três", "Quatro", "Cinco",
+  "Seis", "Sete", "Oito", "Nove", "Dez",
+];
+
+const isPictograph = (s: string) => /\p{Extended_Pictographic}/u.test(s);
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: "/escola-brilha/aula" }) as { category: string; type: string };
 
@@ -146,7 +153,7 @@ const LegacyLessonPlayer: React.FC = () => {
     if (step.type === "interaction" && step.interaction?.options) {
       const options = step.interaction.options;
       const textOptions = options.filter(
-        (opt: string) => !/\p{Emoji}/u.test(opt) && !objetoImg(opt),
+        (opt: string) => !isPictograph(opt) && !objetoImg(opt),
       );
       if (textOptions.length > 0) {
         const optionsText =
@@ -165,11 +172,25 @@ const LegacyLessonPlayer: React.FC = () => {
     setFeedback(null);
     setHighlightedElementId(null);
     await new Promise((r) => setTimeout(r, 300));
+    // Conta em voz alta os elementos visuais (ensino guiado).
+    const countables = (currentStep.elements || []).filter(
+      (el: any) => el.type === "text" && objetoImg(el.content),
+    );
+    const shouldCountAloud =
+      countables.length >= 2 && currentStep.type === "interaction";
+    let countedSoFar = 0;
     if (currentStep.elements) {
       for (const el of currentStep.elements) {
         await new Promise((r) => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements((prev) => [...prev, el.id]);
-        if (currentStep.type === "demonstration" || currentStep.type === "explanation") {
+        if (shouldCountAloud && el.type === "text" && objetoImg(el.content)) {
+          countedSoFar++;
+          setHighlightedElementId(el.id);
+          setIsSpeaking(true);
+          await AudioSpeechService.speak(NUMBER_WORDS[countedSoFar - 1] || String(countedSoFar));
+          setIsSpeaking(false);
+          setHighlightedElementId(null);
+        } else if (currentStep.type === "demonstration" || currentStep.type === "explanation") {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           await AudioSpeechService.speak(el.content);
@@ -179,6 +200,7 @@ const LegacyLessonPlayer: React.FC = () => {
         }
       }
     }
+
     const fullSpeech = getStepSpeech(currentStep);
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
@@ -292,7 +314,7 @@ const LegacyLessonPlayer: React.FC = () => {
                         }
                         className={`flex flex-col items-center justify-center transition-all duration-300 ${highlightedElementId === el.id ? "scale-110" : "scale-100"}`}
                       >
-                        {/\p{Emoji}/u.test(el.content) || objetoImg(el.content) ? (
+                        {isPictograph(el.content) || objetoImg(el.content) ? (
                           <div
                             className={
                               highlightedElementId === el.id
@@ -326,7 +348,7 @@ const LegacyLessonPlayer: React.FC = () => {
                     "bg-pink-500 border-pink-700",
                   ];
                   const color = palette[i % palette.length];
-                  const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
+                  const hasIllust = isPictograph(opt) || objetoImg(opt);
                   return (
                     <motion.button
                       key={opt}
