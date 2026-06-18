@@ -257,24 +257,24 @@ function DayTrail({
 
                 <div
                   className={cn(
-                    "relative w-[78px] h-[78px] rounded-full grid place-items-center overflow-hidden",
-                    "border-[5px] border-white",
+                    "relative w-[156px] h-[156px] rounded-full grid place-items-center overflow-hidden",
+                    "border-[8px] border-white",
                     isLocked
                       ? "bg-gradient-to-b from-slate-300 to-slate-400 grayscale opacity-90"
                       : isDone
                         ? "bg-gradient-to-b from-amber-300 to-amber-500"
                         : "bg-gradient-to-b from-white to-white/85",
-                    !isLocked && "shadow-[0_8px_0_rgba(0,0,0,0.18),0_14px_22px_rgba(0,0,0,0.25)]",
+                    !isLocked && "shadow-[0_10px_0_rgba(0,0,0,0.18),0_18px_28px_rgba(0,0,0,0.25)]",
                     !isLocked && theme.accent,
                     !isLocked && "ring-4",
                   )}
                 >
                   {isLocked ? (
-                    <Lock className="h-6 w-6 text-white drop-shadow" />
+                    <Lock className="h-12 w-12 text-white drop-shadow" />
                   ) : isDone ? (
-                    <Star className="h-7 w-7 text-white fill-white drop-shadow" />
+                    <Star className="h-14 w-14 text-white fill-white drop-shadow" />
                   ) : (
-                    <div className="text-3xl font-black text-primary leading-none">{day}</div>
+                    <div className="text-6xl font-black text-primary leading-none">{day}</div>
                   )}
                 </div>
               </button>
