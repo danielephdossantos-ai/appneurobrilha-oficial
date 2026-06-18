@@ -218,6 +218,26 @@ export const OBJETO_IMG: Record<string, string> = {
   STEVE: hfSteve,
   ALEX: hfAlex,
   DIAMANTE: diamante,
+  FOGO: fogo,
+  TOCHA: fogo,
+  VULCÃO: fogo,
+  VULCAO: fogo,
+  MORANGO: morango,
+  UVA: uva,
+  CENOURA: cenoura,
+  BROCOLIS: brocolis,
+  BRÓCOLIS: brocolis,
+  CAMISETA: camiseta,
+  ROUPA: camiseta,
+  FELIZ: feliz,
+  TRISTE: triste,
+  BRAVO: bravo,
+  SURPRESO: surpreso,
+  MEDO: medo,
+  SONO: sono,
+  ZUMBI: hfCreeper,
+};
+
 
 // Mapeia emojis para a mesma biblioteca de ilustrações premium
 export const EMOJI_IMG: Record<string, string> = {
