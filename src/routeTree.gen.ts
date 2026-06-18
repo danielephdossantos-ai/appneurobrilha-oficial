@@ -174,9 +174,9 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
 const HistoriasStoryIdRoute = HistoriasStoryIdRouteImport.update({
-  id: '/$storyId',
-  path: '/$storyId',
-  getParentRoute: () => HistoriasRoute,
+  id: '/historias/$storyId',
+  path: '/historias/$storyId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
   id: '/aula',
@@ -449,6 +449,7 @@ export interface RootRouteChildren {
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
+  HistoriasStoryIdRoute: typeof HistoriasStoryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -637,10 +638,10 @@ declare module '@tanstack/react-router' {
     }
     '/historias/$storyId': {
       id: '/historias/$storyId'
-      path: '/$storyId'
+      path: '/historias/$storyId'
       fullPath: '/historias/$storyId'
       preLoaderRoute: typeof HistoriasStoryIdRouteImport
-      parentRoute: typeof HistoriasRoute
+      parentRoute: typeof rootRouteImport
     }
     '/escola-brilha/aula': {
       id: '/escola-brilha/aula'
@@ -757,17 +758,8 @@ const rootRouteChildren: RootRouteChildren = {
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
+  HistoriasStoryIdRoute: HistoriasStoryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
