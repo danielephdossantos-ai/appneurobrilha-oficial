@@ -182,18 +182,17 @@ export const HyperfocusManager: React.FC = () => {
                       onClick={() => addHyperfocus(option.value)}
                       disabled={currentList.includes(option.value)}
                       className={cn(
-                        "flex flex-col items-center p-4 rounded-2xl border-2 transition-all text-center",
+                        "flex items-center justify-center gap-2 p-4 rounded-2xl border-2 transition-all text-center min-h-[64px]",
                         currentList.includes(option.value)
                           ? "bg-muted border-transparent opacity-50 cursor-not-allowed"
                           : "bg-white border-border hover:border-primary hover:bg-primary/5",
                       )}
                     >
-                      <span className="text-3xl mb-1">{option.icon}</span>
-                      <span className="text-xs font-black uppercase tracking-tighter truncate w-full">
+                      <span className="text-xs font-black uppercase tracking-tight truncate">
                         {option.label}
                       </span>
                       {currentList.includes(option.value) && (
-                        <Check size={12} className="text-success mt-1" strokeWidth={4} />
+                        <Check size={14} className="text-success shrink-0" strokeWidth={4} />
                       )}
                     </button>
                   ))}
