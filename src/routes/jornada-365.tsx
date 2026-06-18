@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
-import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
+
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
 // Mundos (backgrounds)
