@@ -5,6 +5,7 @@ import { applyDeficienciaInteligenciaSupport } from "./engines/deficiencia-intel
 import { applyDislexiaSupport } from "./engines/dislexia-engine";
 import { applySindromeDownSupport } from "./engines/sindrome-down-engine";
 import { applyTdahSupport } from "./engines/tdah-engine";
+import { getHistoriaNarrada, listHistoriasNarradas } from "../data/historias-narradas";
 
 export type StoryCategory =
   | "pre-escola"
@@ -285,9 +286,12 @@ function buildLibraryStory(category: StoryCategory, index: number) {
   };
 }
 
-const LIBRARY_STORIES = Object.entries(CATEGORY_CONFIG).flatMap(([category, config]) =>
-  Array.from({ length: config.count }, (_, index) => buildLibraryStory(category as StoryCategory, index)),
-) as Array<Story & { category: StoryCategory }>;
+const LIBRARY_STORIES = [
+  ...listHistoriasNarradas(),
+  ...Object.entries(CATEGORY_CONFIG).flatMap(([category, config]) =>
+    Array.from({ length: config.count }, (_, index) => buildLibraryStory(category as StoryCategory, index)),
+  ),
+] as Array<Story & { category: StoryCategory }>;
 
 export function getLibraryStories(filters?: { theme?: string; age?: number; level?: string }) {
   return LIBRARY_STORIES.filter((story) => {
@@ -307,6 +311,11 @@ export function getLibraryStories(filters?: { theme?: string; age?: number; leve
 }
 
 export function getLibraryStoryDetails(storyId: string, profile?: SpecialNeedsProfile): GeneratedLibraryStory | null {
+  const narrada = getHistoriaNarrada(storyId);
+  if (narrada) {
+    const adapter = profile ? PROFILE_ADAPTERS[profile] : undefined;
+    return adapter ? adapter(narrada.story, narrada.pages, narrada.questions) : narrada;
+  }
   const story = LIBRARY_STORIES.find((item) => item.id === storyId);
   if (!story) return null;
   const pages = buildStoryPages(story, CATEGORY_CONFIG[story.category].pageCount, profile);
