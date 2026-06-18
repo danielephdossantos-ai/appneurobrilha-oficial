@@ -23,6 +23,7 @@ import LiveMascot from "@/components/ui/KidLiveMascot";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
 import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
+import { DinoWorld } from "@/components/worlds/DinoWorld";
 
 // Mundos (backgrounds)
 import worldDino from "@/assets/neuro-treino/worlds/dinossauros.jpg";
@@ -278,7 +279,7 @@ function Jornada() {
   return (
     <Shell>
       <div className="relative min-h-[calc(100vh-6rem)] -mx-4 -my-2 px-4 py-6 rounded-3xl overflow-hidden">
-        <WorldBackground world={world} />
+        {world === "dinossauros" ? <DinoWorld /> : <WorldBackground world={world} />}
 
         {/* Header */}
         <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-6">
