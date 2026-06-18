@@ -192,6 +192,17 @@ function Jornada() {
         <div className="relative z-10">
           <DayTrail currentDay={currentDay} theme={theme} />
         </div>
+
+        {/* Mascote da criança — flutua no canto, sem cobrir trilha */}
+        {activeMascot?.mascot?.image_url && (
+          <div className="pointer-events-none fixed bottom-24 right-3 z-20 sm:bottom-28 sm:right-6">
+            <img
+              src={activeMascot.mascot.image_url}
+              alt={activeMascot.mascot.name ?? "Mascote"}
+              className="w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-[0_8px_12px_rgba(0,0,0,0.35)]"
+            />
+          </div>
+        )}
       </div>
     </Shell>
   );
