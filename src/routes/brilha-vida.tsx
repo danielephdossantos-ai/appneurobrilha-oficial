@@ -281,13 +281,20 @@ function BrilhaVida() {
       </Shell>
     );
   }
+  if (customActivity === "diario") {
+    return (<Shell><DiarioSentir onClose={() => setCustomActivity(null)} /></Shell>);
+  }
 
-  if (customActivity === "regras") {
-    return (
-      <Shell>
-        <RegrasCasa onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
+  if (customActivity === "elogio") {
+    return (<Shell><ElogioMagico onClose={() => setCustomActivity(null)} /></Shell>);
+  }
+
+  if (customActivity === "bolha") {
+    return (<Shell><BolhaBemEstar onClose={() => setCustomActivity(null)} /></Shell>);
+  }
+
+  if (customActivity === "roda") {
+    return (<Shell><RodaDoDia onClose={() => setCustomActivity(null)} /></Shell>);
   }
 
   if (customActivity === "conflitos") {
