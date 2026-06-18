@@ -127,6 +127,14 @@ function BrilhaVida() {
     }, 800);
   };
 
+  if (customActivity === "respirar") {
+    return (
+      <Shell>
+        <PausaRespirar onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
   if (activeActivity) {
     return (
       <Shell>
