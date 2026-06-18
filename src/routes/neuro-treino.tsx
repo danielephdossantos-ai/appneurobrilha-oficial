@@ -44,10 +44,10 @@ import icLabPrecisao from "@/assets/neuro-treino/icons/v2/labirinto-precisao.png
 import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
 import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
 import icConscienciaFono from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png";
-import icDiscriminacaoAuditiva from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.svg";
-import icArticulacaoSons from "@/assets/neuro-treino/icons/v2/articulacao-sons.svg";
-import icVocabularioSemantico from "@/assets/neuro-treino/icons/v2/vocabulario-semantico.svg";
-import icNomeacaoRapida from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.svg";
+import icDiscriminacaoAuditiva from "@/assets/neuro-treino/icons/v2/discriminacao-auditiva.png";
+import icArticulacaoSons from "@/assets/neuro-treino/icons/v2/articulacao-sons.png";
+import icVocabularioSemantico from "@/assets/neuro-treino/icons/v2/vocabulario-semantico.png";
+import icNomeacaoRapida from "@/assets/neuro-treino/icons/v2/nomeacao-rapida.png";
 import icToqueSequencia from "@/assets/neuro-treino/icons/v2/toque-sequencia.png";
 import icRitmoBatidas from "@/assets/neuro-treino/icons/v2/ritmo-batidas.svg";
 import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.svg";
