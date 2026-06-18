@@ -7,9 +7,12 @@ import { AudioSpeechService } from "../services/AudioSpeechService";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
+import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
+import type { LessonRef } from "../hooks/useNextLesson";
 
 interface ActivityPlayerProps {
   lesson: ActivityLesson;
+  currentRef?: LessonRef;
 }
 
 type ScreenId = "explicacao" | "exploracao" | "explicacao_curta" | "exemplo_visual" | "praticar";
