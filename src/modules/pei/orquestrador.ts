@@ -183,7 +183,7 @@ export async function gerarESalvarPlanoTrimestral(
   // NÃO repetir aulas já dadas em bimestres anteriores
   const usadasSet = new Set(jaUsadas);
   const inedidas = aulasBncc.filter(
-    (a) => !usadasSet.has(a.id),
+    (a: AulaBnccRef) => !usadasSet.has(a.id),
   );
   // Se esgotou tudo da série, reinicia o ciclo (criança já fez todas)
   const pool = inedidas.length >= 6 ? inedidas : aulasBncc;
