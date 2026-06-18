@@ -5,7 +5,9 @@ export type BNCC_Field =
   | "tracos_sons" // Traços, Sons, Cores e Formas
   | "eu_outro_nos" // O Eu, o Outro e o Nós
   | "lingua_portuguesa"
-  | "matematica";
+  | "matematica"
+  | "ciencias_natureza"
+  | "ciencias_humanas";
 
 export type LessonPhase =
   | "explanation"

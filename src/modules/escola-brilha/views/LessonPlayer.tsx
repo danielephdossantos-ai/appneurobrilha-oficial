@@ -92,6 +92,10 @@ const LegacyLessonPlayer: React.FC = () => {
         return Lessons.MATH_1ANO_LESSON;
       case "portugues_1ano":
         return Lessons.PORTUGUES_1ANO_LESSON;
+      case "ciencias_1ano":
+        return Lessons.CIENCIAS_1ANO_LESSON;
+      case "historia_1ano":
+        return Lessons.HISTORIA_1ANO_LESSON;
       case "portugues_2ano":
         return Lessons.PORTUGUES_2ANO_LESSON;
       case "matematica_2ano":

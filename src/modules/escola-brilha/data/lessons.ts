@@ -2,10 +2,13 @@ import { Lesson } from "../types/lesson";
 
 export { MATH_1ANO_LESSON } from "./math-1ano";
 export { PORTUGUES_1ANO_LESSON } from "./portugues-1ano";
+export { CIENCIAS_1ANO_LESSON } from "./ciencias-1ano";
+export { HISTORIA_1ANO_LESSON } from "./historia-1ano";
 
 
 export { PORTUGUES_2ANO_LESSON } from "./portugues-2ano";
 export { MATH_2ANO_LESSON } from "./math-2ano";
+
 
 
 
