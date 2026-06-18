@@ -35,7 +35,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
-import { Route as HistoriasStoryIdRouteImport } from './routes/historias.$storyId'
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -173,11 +172,6 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
-const HistoriasStoryIdRoute = HistoriasStoryIdRouteImport.update({
-  id: '/historias/$storyId',
-  path: '/historias/$storyId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
   id: '/aula',
   path: '/aula',
@@ -238,7 +232,6 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
-  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -272,7 +265,6 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
-  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
@@ -308,7 +300,6 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
-  '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -345,7 +336,6 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
-    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -379,7 +369,6 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
-    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
@@ -414,7 +403,6 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
-    | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -449,7 +437,6 @@ export interface RootRouteChildren {
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
-  HistoriasStoryIdRoute: typeof HistoriasStoryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -636,13 +623,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
-    '/historias/$storyId': {
-      id: '/historias/$storyId'
-      path: '/historias/$storyId'
-      fullPath: '/historias/$storyId'
-      preLoaderRoute: typeof HistoriasStoryIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/escola-brilha/aula': {
       id: '/escola-brilha/aula'
       path: '/aula'
@@ -758,7 +738,6 @@ const rootRouteChildren: RootRouteChildren = {
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
-  HistoriasStoryIdRoute: HistoriasStoryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
