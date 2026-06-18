@@ -16,6 +16,8 @@ import schoolImg from "@/assets/illustrations/school.png";
 import churchImg from "@/assets/illustrations/church.png";
 import eggImg from "@/assets/illustrations/egg.png";
 import bearImg from "@/assets/illustrations/bear.png";
+import macawImg from "@/assets/illustrations/macaw.png";
+import ringImg from "@/assets/illustrations/ring.png";
 
 /* ── SVG-based premium flat illustrations ─────────────── */
 
@@ -287,6 +289,8 @@ export type IllustrationName =
   | "church"
   | "egg"
   | "bear"
+  | "macaw"
+  | "ring"
   | "iguana"
   | "sheep"
   | "grape"
@@ -310,6 +314,8 @@ const PNG_ASSETS: Partial<Record<IllustrationName, string>> = {
   church: churchImg,
   egg: eggImg,
   bear: bearImg,
+  macaw: macawImg,
+  ring: ringImg,
 };
 
 const SVG_COMPONENTS: Partial<Record<IllustrationName, React.FC<{ className?: string }>>> = {
