@@ -917,7 +917,8 @@ const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({
    MAIN PLAYER
    ════════════════════════════════════════════════ */
 
-export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson }) => {
+export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson, currentRef }) => {
+  const fallbackRef: LessonRef = currentRef ?? { kind: "static", id: lesson.id };
   const navigate = useNavigate();
   const [screenIndex, setScreenIndex] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
