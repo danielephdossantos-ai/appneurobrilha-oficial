@@ -83,16 +83,48 @@ function tempoAulaParaPerfil(p: PerfilCrianca): number {
   return t;
 }
 
+// Slugs reais das CATEGORIAS de neuro-treino (precisam casar com /neuro-treino/$slug)
+const SLUGS_AQUECIMENTO = ["foco-total", "reacao-rapida", "alvo-movel"];
+const SLUGS_PORT = [
+  "consciencia-silabica",
+  "rimas",
+  "letra-som",
+  "formando-palavras",
+  "leitura-palavras",
+  "palavra-imagem",
+  "completar-letra",
+];
+const SLUGS_MAT = [
+  "sequencia-e-padrao",
+  "triagem-categorias",
+  "memoria-visual",
+  "toque-sequencia",
+];
+const SLUGS_NEURO = [
+  "foco-sustentado",
+  "memoria-visual",
+  "achar-diferente",
+  "copiar-figura",
+];
+const SLUGS_NEURO_HIPER = ["onde-esta", "cade-o-par", "seguir-instrucao"];
+const SLUGS_LEITURA = ["compreensao-leitora"];
+const SLUGS_MOV = ["ritmo-batidas", "ritmo-e-sopro"];
+
+function pick<T>(arr: T[], i: number): T {
+  return arr[i % arr.length];
+}
+
 // ---- divisão do tempo total em blocos curtos --------------------
 function montarBlocos(
   tempoTotal: number,
   hab: BnccHabilidade,
   perfil: PerfilCrianca,
+  ordem: number,
 ): AtividadeBloco[] {
   const disc = (hab.disciplina ?? "").toLowerCase();
   const blocoMov: AtividadeBloco = {
     tipo: "movimento",
-    slug: "pausa-ativa",
+    slug: pick(SLUGS_MOV, ordem),
     tempo_min: 1,
   };
 
@@ -101,21 +133,23 @@ function montarBlocos(
   if (disc.includes("port") || disc.includes("língu") || disc.includes("lingu")) {
     principal = {
       tipo: "alfabetizacao",
-      slug: "consciencia-silabica",
+      slug: pick(SLUGS_PORT, ordem),
       payload: { bncc: hab.codigo_bncc },
       tempo_min: Math.max(4, tempoTotal - 6),
     };
   } else if (disc.includes("mat")) {
     principal = {
       tipo: "matematica",
-      slug: "contagem-padroes",
+      slug: pick(SLUGS_MAT, ordem),
       payload: { bncc: hab.codigo_bncc },
       tempo_min: Math.max(4, tempoTotal - 6),
     };
   } else {
     principal = {
       tipo: "neuro-treino",
-      slug: perfil.hiperfoco ? "exploracao-hiperfoco" : "atencao-focada",
+      slug: perfil.hiperfoco
+        ? pick(SLUGS_NEURO_HIPER, ordem)
+        : pick(SLUGS_NEURO, ordem),
       payload: { bncc: hab.codigo_bncc, hiperfoco: perfil.hiperfoco },
       tempo_min: Math.max(4, tempoTotal - 6),
     };
@@ -124,18 +158,17 @@ function montarBlocos(
   // Aquecimento neuro (sempre) + leitura curta + movimento
   const aquecimento: AtividadeBloco = {
     tipo: "neuro-treino",
-    slug: "aquecimento-atencao",
+    slug: pick(SLUGS_AQUECIMENTO, ordem),
     tempo_min: 2,
   };
   const leitura: AtividadeBloco = {
     tipo: "leitura",
-    slug: "historia-curta",
+    slug: pick(SLUGS_LEITURA, ordem),
     payload: { hiperfoco: perfil.hiperfoco },
     tempo_min: Math.max(2, tempoTotal - principal.tempo_min - 3),
   };
 
   const blocos = [aquecimento, principal, leitura, blocoMov];
-  // garante soma ≤ tempoTotal
   const soma = blocos.reduce((a, b) => a + b.tempo_min, 0);
   if (soma > tempoTotal) {
     const excesso = soma - tempoTotal;
@@ -143,6 +176,7 @@ function montarBlocos(
   }
   return blocos;
 }
+
 
 // ---- selecionar habilidades adequadas ---------------------------
 function filtrarHabilidades(
