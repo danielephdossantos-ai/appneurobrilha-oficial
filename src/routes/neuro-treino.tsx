@@ -4,7 +4,6 @@ import { Component, ReactNode, useEffect } from "react";
 import {
   AlertCircle,
   Coffee,
-  ChevronRight,
   Brain,
   Mic,
   Dumbbell,
