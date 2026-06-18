@@ -381,23 +381,29 @@ function embaralhar<T>(a: T[]): T[] {
 // ───────────────────────── COMPARTILHADOS ─────────────────────────
 function SinalFigura({ sinal, compact }: { sinal: Sinal; compact?: boolean }) {
   const size = compact ? "w-full h-full" : "w-24 h-24 sm:w-28 sm:h-28";
-  if (sinal.imagem) {
-    return (
-      <img
-        src={sinal.imagem}
-        alt={sinal.nome}
-        loading="lazy"
-        className={`${size} object-contain drop-shadow`}
-        draggable={false}
-      />
-    );
-  }
-  // Placeholder enquanto a imagem real não foi gerada
+  const ehLetra = sinal.nome.length === 1;
   return (
-    <div
-      className={`${size} grid place-items-center rounded-2xl bg-white/70 border-2 border-dashed border-slate-300`}
-    >
-      <Hand className="h-10 w-10 text-slate-400" />
+    <div className="flex flex-col items-center">
+      {sinal.imagem ? (
+        <img
+          src={sinal.imagem}
+          alt={sinal.nome}
+          loading="lazy"
+          className={`${size} object-contain drop-shadow`}
+          draggable={false}
+        />
+      ) : (
+        <div
+          className={`${size} grid place-items-center rounded-2xl bg-white/70 border-2 border-dashed border-slate-300`}
+        >
+          <Hand className="h-10 w-10 text-slate-400" />
+        </div>
+      )}
+      {ehLetra && !compact && (
+        <div className="mt-1 text-3xl font-black text-slate-800 leading-none">
+          {sinal.nome}
+        </div>
+      )}
     </div>
   );
 }
