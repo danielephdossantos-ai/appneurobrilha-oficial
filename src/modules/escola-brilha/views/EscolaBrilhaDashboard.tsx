@@ -380,6 +380,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
 
       {/* Content */}
       <div className="px-4 max-w-lg mx-auto">
+        <BancoBnccPanel aulas={aulasBanco} onOpen={goToAulaBanco} />
         <AnimatePresence mode="wait">
           {tab === "fundamental2" && (
             <motion.div
