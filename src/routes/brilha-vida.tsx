@@ -14,6 +14,9 @@ import { EmojiMagico } from "@/components/brilha-vida/EmojiMagico";
 import { HistoriasSociais } from "@/components/brilha-vida/HistoriasSociais";
 import { DividindoBrinquedo } from "@/components/brilha-vida/DividindoBrinquedo";
 import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
+import { MinhaVezSuaVez } from "@/components/brilha-vida/MinhaVezSuaVez";
+import { RegrasCasa } from "@/components/brilha-vida/RegrasCasa";
+import { ResolucaoConflitos } from "@/components/brilha-vida/ResolucaoConflitos";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
