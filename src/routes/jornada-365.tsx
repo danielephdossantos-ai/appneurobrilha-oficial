@@ -23,6 +23,7 @@ import LiveMascot from "@/components/ui/KidLiveMascot";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
 import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
+import { DinoWorld } from "@/components/worlds/DinoWorld";
 
 // Mundos (backgrounds)
 import worldDino from "@/assets/neuro-treino/worlds/dinossauros.jpg";
