@@ -81,6 +81,13 @@ export const BiomasBrasilMap: React.FC = () => {
 
   return (
     <div className="space-y-3">
+      <div className="flex justify-center">
+        <img
+          src={amazoniaImg}
+          alt="Ilustração da Amazônia"
+          className="w-40 h-40 object-contain drop-shadow-lg"
+        />
+      </div>
       <p className="text-xs font-black text-slate-400 uppercase tracking-widest text-center">
         Mapa dos Biomas
       </p>
