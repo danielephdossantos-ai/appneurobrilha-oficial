@@ -646,3 +646,56 @@ const CardB: React.FC<{ cat: (typeof ACTIVITY_B)[0]; index: number; onClick: () 
     </div>
   </motion.button>
 );
+
+/* ─── Banco BNCC (lições vindas do Supabase) ─── */
+const BancoBnccPanel: React.FC<{
+  aulas: { id: string; titulo: string; serie: string; disciplina: string; codigo_bncc: string; xp: number; tipo_player: string }[];
+  onOpen: (aulaId: string) => void;
+}> = ({ aulas, onOpen }) => {
+  if (!aulas?.length) return null;
+
+  const porSerie = aulas.reduce<Record<string, typeof aulas>>((acc, a) => {
+    (acc[a.serie] ||= []).push(a);
+    return acc;
+  }, {});
+
+  return (
+    <div className="mb-6">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-2 h-2 rounded-full bg-emerald-400" />
+        <p className="text-emerald-400 text-xs font-black uppercase tracking-widest">
+          Banco BNCC • {aulas.length} aulas
+        </p>
+      </div>
+      <div className="space-y-4">
+        {Object.entries(porSerie).map(([serie, lista]) => (
+          <div key={serie}>
+            <p className="text-white/50 text-[11px] font-black uppercase tracking-widest mb-2 px-1">
+              {serie} • {lista.length}
+            </p>
+            <div className="space-y-2">
+              {lista.map((a) => (
+                <button
+                  key={a.id}
+                  onClick={() => onOpen(a.id)}
+                  className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-3 py-2.5 text-left flex items-center gap-3 transition"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-black text-sm truncate">{a.titulo}</p>
+                    <p className="text-white/40 text-[11px] font-semibold truncate">
+                      {a.disciplina} • {a.codigo_bncc}
+                    </p>
+                  </div>
+                  <span className="text-yellow-400 text-[11px] font-black shrink-0">
+                    {a.xp} XP
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-white/40 shrink-0" />
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
