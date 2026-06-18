@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
+import { useMascot } from "@/contexts/MascotContext";
 
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
