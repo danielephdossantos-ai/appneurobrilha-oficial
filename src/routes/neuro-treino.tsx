@@ -52,7 +52,7 @@ import icToqueSequencia from "@/assets/neuro-treino/icons/v2/toque-sequencia.svg
 import icRitmoBatidas from "@/assets/neuro-treino/icons/v2/ritmo-batidas.svg";
 import icCopiarFigura from "@/assets/neuro-treino/icons/v2/copiar-figura.svg";
 import icAlvoMovel from "@/assets/neuro-treino/icons/v2/alvo-movel.svg";
-import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.svg";
+import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.png";
 import icMemoriaVisual from "@/assets/neuro-treino/icons/v2/memoria-visual.svg";
 import icReacaoRapida from "@/assets/neuro-treino/icons/v2/reacao-rapida.svg";
 import icSeguirInstrucao from "@/assets/neuro-treino/icons/v2/seguir-instrucao.svg";
