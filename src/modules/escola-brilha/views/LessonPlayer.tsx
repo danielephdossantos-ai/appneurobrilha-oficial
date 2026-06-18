@@ -153,7 +153,7 @@ const LegacyLessonPlayer: React.FC = () => {
     if (step.type === "interaction" && step.interaction?.options) {
       const options = step.interaction.options;
       const textOptions = options.filter(
-        (opt: string) => !/\p{Emoji}/u.test(opt) && !objetoImg(opt),
+        (opt: string) => !isPictograph(opt) && !objetoImg(opt),
       );
       if (textOptions.length > 0) {
         const optionsText =
@@ -314,7 +314,7 @@ const LegacyLessonPlayer: React.FC = () => {
                         }
                         className={`flex flex-col items-center justify-center transition-all duration-300 ${highlightedElementId === el.id ? "scale-110" : "scale-100"}`}
                       >
-                        {/\p{Emoji}/u.test(el.content) || objetoImg(el.content) ? (
+                        {isPictograph(el.content) || objetoImg(el.content) ? (
                           <div
                             className={
                               highlightedElementId === el.id
@@ -348,7 +348,7 @@ const LegacyLessonPlayer: React.FC = () => {
                     "bg-pink-500 border-pink-700",
                   ];
                   const color = palette[i % palette.length];
-                  const hasIllust = /\p{Emoji}/u.test(opt) || objetoImg(opt);
+                  const hasIllust = isPictograph(opt) || objetoImg(opt);
                   return (
                     <motion.button
                       key={opt}
