@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
