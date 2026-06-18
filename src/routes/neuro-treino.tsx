@@ -56,7 +56,7 @@ import icAcharDiferente from "@/assets/neuro-treino/icons/v2/achar-diferente.png
 import icMemoriaVisual from "@/assets/neuro-treino/icons/v2/memoria-visual.png";
 import icReacaoRapida from "@/assets/neuro-treino/icons/v2/reacao-rapida.png";
 import icSeguirInstrucao from "@/assets/neuro-treino/icons/v2/seguir-instrucao.png";
-import icLetraSom from "@/assets/neuro-treino/icons/v2/letra-som.svg";
+import icLetraSom from "@/assets/neuro-treino/icons/v2/letra-som.png";
 import icPalavraImagem from "@/assets/neuro-treino/icons/v2/palavra-imagem.svg";
 import icFormandoPalavras from "@/assets/neuro-treino/icons/v2/formando-palavras.svg";
 import icLeituraPalavras from "@/assets/neuro-treino/icons/v2/leitura-palavras.svg";
