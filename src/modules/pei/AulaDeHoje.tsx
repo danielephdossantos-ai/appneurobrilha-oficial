@@ -29,14 +29,7 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-// Tipos de bloco que abrem o player de neuro-treino com slug específico.
-const TIPOS_NEURO = new Set([
-  "neuro-treino",
-  "alfabetizacao",
-  "matematica",
-  "leitura",
-  "movimento",
-]);
+// Jornada 365 = BNCC puro. Todo bloco abre o player do Escola Brilha.
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
@@ -92,10 +85,14 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         .eq("id", aula.id);
       queryClient.invalidateQueries({ queryKey: ["pei-aula-hoje", childId, hoje] });
     }
-    if (TIPOS_NEURO.has(bloco.tipo) && bloco.slug) {
-      navigate({ to: "/neuro-treino/$slug", params: { slug: bloco.slug } });
+    const aulaId =
+      bloco.payload && typeof bloco.payload.aula_id === "string"
+        ? (bloco.payload.aula_id as string)
+        : null;
+    if (aulaId) {
+      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
     } else {
-      navigate({ to: "/neuro-treino" });
+      navigate({ to: "/escola-brilha" });
     }
   }
 
