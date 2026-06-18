@@ -7,6 +7,7 @@ import { LessonHeader } from "../components/LessonHeader";
 import { AudioSpeechService } from "../services/AudioSpeechService";
 import { Lesson, LessonPerformance } from "../types/lesson";
 import { useSearch } from "@tanstack/react-router";
+import { getRotationHead, advanceRotationHead, rotateFrom } from "../utils/lessonRotation";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { semEmoji, objetoImg } from "@/data/neuro-treino/objetos";
 import * as Lessons from "../data/lessons";
