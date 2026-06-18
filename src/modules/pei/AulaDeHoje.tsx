@@ -85,10 +85,14 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         .eq("id", aula.id);
       queryClient.invalidateQueries({ queryKey: ["pei-aula-hoje", childId, hoje] });
     }
-    if (TIPOS_NEURO.has(bloco.tipo) && bloco.slug) {
-      navigate({ to: "/neuro-treino/$slug", params: { slug: bloco.slug } });
+    const aulaId =
+      bloco.payload && typeof bloco.payload.aula_id === "string"
+        ? (bloco.payload.aula_id as string)
+        : null;
+    if (aulaId) {
+      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
     } else {
-      navigate({ to: "/neuro-treino" });
+      navigate({ to: "/escola-brilha" });
     }
   }
 
