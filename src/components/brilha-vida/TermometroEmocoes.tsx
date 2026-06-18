@@ -2,15 +2,21 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
 
+import imgBravo from "@/assets/neuro-treino/emocoes/bravo.png";
+import imgTriste from "@/assets/neuro-treino/emocoes/triste.png";
+import imgSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
+import imgSono from "@/assets/neuro-treino/emocoes/sono.png";
+import imgFeliz from "@/assets/neuro-treino/emocoes/feliz.png";
+
 /**
  * Termômetro das Emoções
- * A criança arrasta (ou toca) o indicador num termômetro vertical com 5 níveis
- * ilustrados. Cada nível dá uma sugestão de regulação.
+ * Escala vertical de 5 níveis ilustrados (ilustrações kawaii do neuro-treino).
+ * Cada nível dá uma sugestão de regulação.
  */
 const NIVEIS = [
   {
     id: 5,
-    emoji: "🤯",
+    img: imgBravo,
     nome: "Explodindo",
     cor: "#ef4444",
     bg: "from-red-100 to-red-200",
@@ -18,23 +24,23 @@ const NIVEIS = [
   },
   {
     id: 4,
-    emoji: "😠",
-    nome: "Bem bravo(a)",
+    img: imgTriste,
+    nome: "Triste",
     cor: "#f97316",
     bg: "from-orange-100 to-orange-200",
-    dica: "Conte até 10 devagarinho. Pode pedir um abraço também 🤗",
+    dica: "Tudo bem chorar. Pode pedir um abraço pra alguém de confiança 🤗",
   },
   {
     id: 3,
-    emoji: "😕",
-    nome: "Incomodado(a)",
+    img: imgSurpreso,
+    nome: "Confuso(a)",
     cor: "#eab308",
     bg: "from-yellow-100 to-yellow-200",
-    dica: "Que tal beber água e contar pra alguém o que sentiu? 💧",
+    dica: "Beba água e conte pra alguém o que você sentiu 💧",
   },
   {
     id: 2,
-    emoji: "🙂",
+    img: imgSono,
     nome: "Tranquilo(a)",
     cor: "#22c55e",
     bg: "from-emerald-100 to-emerald-200",
@@ -42,13 +48,14 @@ const NIVEIS = [
   },
   {
     id: 1,
-    emoji: "😄",
+    img: imgFeliz,
     nome: "Muito feliz",
     cor: "#06b6d4",
     bg: "from-sky-100 to-sky-200",
     dica: "Uhul! Compartilhe esse sorriso com alguém especial ✨",
   },
 ];
+
 
 export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
   const [selecionado, setSelecionado] = useState<number | null>(null);
@@ -104,7 +111,7 @@ export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
               }`}
               style={selecionado === n.id ? { borderColor: n.cor } : {}}
             >
-              <span className="text-3xl">{n.emoji}</span>
+              <img src={n.img} alt={n.nome} width={48} height={48} className="w-12 h-12 object-contain drop-shadow-sm" />
               <span className="font-black text-slate-700 text-sm">{n.nome}</span>
             </button>
           ))}
@@ -123,7 +130,7 @@ export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
             className="mt-6 bg-white rounded-3xl p-5 shadow-lg border-2 max-w-md text-center"
             style={{ borderColor: nivel.cor }}
           >
-            <div className="text-5xl mb-2">{nivel.emoji}</div>
+            <img src={nivel.img} alt={nivel.nome} width={96} height={96} className="w-24 h-24 object-contain mx-auto mb-2 drop-shadow-md" />
             <div className="font-black text-lg text-slate-800 mb-1">
               Você está {nivel.nome.toLowerCase()}
             </div>
