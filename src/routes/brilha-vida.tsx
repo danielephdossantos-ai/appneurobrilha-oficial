@@ -211,7 +211,7 @@ function BrilhaVida() {
     }, 800);
   };
 
-  const CUSTOM_MAP: Record<string, { node: JSX.Element; contexto: string }> = {
+  const CUSTOM_MAP: Record<string, { node: React.ReactNode; contexto: string }> = {
     respirar: { node: <PausaRespirar onClose={() => setCustomActivity(null)} />, contexto: "Pausa para Respirar" },
     termometro: { node: <TermometroEmocoes onClose={() => setCustomActivity(null)} />, contexto: "Termômetro das Emoções" },
     semaforo: { node: <SemaforoSentir onClose={() => setCustomActivity(null)} />, contexto: "Semáforo do Sentir" },
