@@ -124,6 +124,15 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Habilidades fonológicas: som inicial/final, sílabas, rima e junção",
     instrucao: "Leia a tarefa e toque na figura certa.",
   },
+  "consciencia-silabica": {
+    slug: "consciencia-silabica",
+    nome: "Consciência Silábica",
+    emoji: "👐",
+    grupo: "Fala e Som",
+    cor: "from-coral/25 to-sun/5",
+    objetivo: "Contagem, sílaba inicial, sílaba final e formação silábica",
+    instrucao: "Leia a tarefa e toque na figura certa.",
+  },
 
   "onde-esta": {
     slug: "onde-esta",
