@@ -178,8 +178,9 @@ function BrilhaVida() {
         {categorias.map((cat) => (
           <section key={cat.id}>
             <div className="flex flex-col mb-4">
-              <h2 className="text-xl font-black flex items-center gap-2">
-                <span className="text-3xl">{cat.emoji}</span> {cat.nome}
+              <h2 className="text-xl font-black flex items-center gap-3">
+                <img src={cat.img} alt={cat.nome} loading="lazy" width={64} height={64} className="w-16 h-16 object-contain drop-shadow-sm" />
+                {cat.nome}
               </h2>
               <p className="text-sm text-muted-foreground font-medium">{cat.descricao}</p>
             </div>
