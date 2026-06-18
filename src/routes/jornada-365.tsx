@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import LiveMascot from "@/components/ui/KidLiveMascot";
 import { cn } from "@/utils/utils";
+import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
 
 // Mundos (backgrounds)
 import worldDino from "@/assets/neuro-treino/worlds/dinossauros.jpg";
@@ -156,6 +157,14 @@ function Jornada() {
   const { hiperfoco } = useHiperfoco();
   const world = mapHiperfocoToWorld(hiperfoco?.label);
   const theme = WORLD_THEME[world];
+
+  // PEI: o sistema gera o plano trimestral automaticamente.
+  // O pai não escolhe nem dispara nada — roda em segundo plano
+  // quando a anamnese está completa e não existe plano vigente.
+  usePEIAutoGenerate({
+    childId: activeChild?.id ?? null,
+    anamneseCompleta: !!activeChild?.anamnese_completa,
+  });
 
   const { data: journeyState, isLoading: loadingJourney } = useQuery({
     queryKey: ["child-journey", activeChild?.id],
