@@ -218,6 +218,8 @@ const LegacyLessonPlayer: React.FC = () => {
       await AudioSpeechService.speak("Isso mesmo! Você é demais!");
       setIsSpeaking(false);
       await new Promise((r) => setTimeout(r, 600));
+      /* Cada atividade concluída avança a cabeça da fila rotativa. */
+      advanceRotationHead(baseLesson.id, baseLesson.steps.length);
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex((prev) => prev + 1);
       } else {
