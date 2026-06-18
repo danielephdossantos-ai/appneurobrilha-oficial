@@ -82,7 +82,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "balao" | "escolher-respirar">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
