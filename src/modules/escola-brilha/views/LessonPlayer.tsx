@@ -79,7 +79,7 @@ export const LessonPlayer: React.FC = () => {
 const LegacyLessonPlayer: React.FC = () => {
   const search = useSearch({ from: "/escola-brilha/aula" }) as { category: string };
 
-  const currentLesson = React.useMemo((): Lesson => {
+  const baseLesson = React.useMemo((): Lesson => {
     switch (search.category) {
       case "matematica":
         return Lessons.MATH_1ANO_LESSON;
@@ -93,6 +93,14 @@ const LegacyLessonPlayer: React.FC = () => {
         return Lessons.LANG_LESSON;
     }
   }, [search.category]);
+
+  /* Fila rotativa: cada execução continua de onde parou (localStorage por lesson.id). */
+  const currentLesson = React.useMemo((): Lesson => {
+    const total = baseLesson.steps.length;
+    if (total <= 1) return baseLesson;
+    const head = getRotationHead(baseLesson.id, total);
+    return { ...baseLesson, steps: rotateFrom(baseLesson.steps, head) };
+  }, [baseLesson]);
 
   const isSecondYear = search.category.includes("2ano");
 
