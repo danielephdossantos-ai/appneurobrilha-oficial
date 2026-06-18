@@ -57,6 +57,10 @@ const ATIVIDADE_IMG: Record<string, string> = {
   "Minha vez, sua vez": atvMinhaVezImg,
   "Regras da Casa": atvRegrasImg,
   "Resolução de Conflitos": atvConflitosImg,
+  "Diário do Sentir": atvDiarioImg,
+  "Elogio Mágico": atvElogioImg,
+  "Bolha de Bem-Estar": atvBolhaImg,
+  "Roda do Dia": atvRodaImg,
 };
 
 export const Route = createFileRoute("/brilha-vida")({
