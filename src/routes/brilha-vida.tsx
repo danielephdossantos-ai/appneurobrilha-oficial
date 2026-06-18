@@ -17,6 +17,10 @@ import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
 import { MinhaVezSuaVez } from "@/components/brilha-vida/MinhaVezSuaVez";
 import { RegrasCasa } from "@/components/brilha-vida/RegrasCasa";
 import { ResolucaoConflitos } from "@/components/brilha-vida/ResolucaoConflitos";
+import { DiarioSentir } from "@/components/brilha-vida/DiarioSentir";
+import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
+import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
+import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -62,7 +66,7 @@ const categorias = [
     img: catEmocoesImg,
     cor: "from-sun/30 to-sun/5",
     descricao: "Reconhecer e nomear o que sentimos",
-    atividades: ["Termômetro das Emoções", "Como estou agora?", "Emoji Mágico"],
+    atividades: ["Termômetro das Emoções", "Como estou agora?", "Emoji Mágico", "Diário do Sentir"],
   },
   {
     id: "social",
@@ -70,7 +74,7 @@ const categorias = [
     img: catAmizadeImg,
     cor: "from-emerald/30 to-emerald/5",
     descricao: "Aprender a conviver e respeitar",
-    atividades: ["Histórias Sociais", "Dividindo o Brinquedo", "Cuidando do Amigo"],
+    atividades: ["Histórias Sociais", "Dividindo o Brinquedo", "Cuidando do Amigo", "Elogio Mágico"],
   },
   {
     id: "autocontrole",
@@ -78,7 +82,7 @@ const categorias = [
     img: catAutocontroleImg,
     cor: "from-sky/30 to-sky/5",
     descricao: "Estratégias para se acalmar",
-    atividades: ["Pausa para Respirar", "Cantinho da Calma", "Semáforo do Sentir"],
+    atividades: ["Pausa para Respirar", "Cantinho da Calma", "Semáforo do Sentir", "Bolha de Bem-Estar"],
   },
   {
     id: "rotina",
@@ -86,7 +90,7 @@ const categorias = [
     img: catRotinaImg,
     cor: "from-lilac/30 to-lilac/5",
     descricao: "Regras e harmonia no dia a dia",
-    atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos"],
+    atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos", "Roda do Dia"],
   },
 ];
 
