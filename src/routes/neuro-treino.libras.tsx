@@ -178,7 +178,7 @@ function ModoMenu({ onPick, count }: { onPick: (m: Modo) => void; count: number 
   );
 }
 
-// ───────────────────────── APRENDER ─────────────────────────
+// ───────────────────────── APRENDER (AULA) ─────────────────────────
 function ModoAprender({
   sinais,
   trilha,
@@ -188,22 +188,141 @@ function ModoAprender({
   trilha: Trilha;
   onBack: () => void;
 }) {
+  const [aulaIdx, setAulaIdx] = useState<number | null>(null);
+
+  function abrir(i: number) {
+    setAulaIdx(i);
+    falar(sinais[i].instrucao);
+  }
+
   return (
     <div>
       <BotaoVoltar onBack={onBack} />
+      <p className="text-center text-xs text-muted-foreground font-bold mb-3">
+        Toque num sinal para a Profe Lia ensinar
+      </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {sinais.map((s) => (
+        {sinais.map((s, i) => (
           <button
             key={s.id}
-            onClick={() => falar(s.nome)}
+            onClick={() => abrir(i)}
             className={`bg-gradient-to-br ${trilha.bg} rounded-3xl p-3 border-2 border-white shadow active:scale-95 transition-all flex flex-col items-center`}
           >
             <SinalFigura sinal={s} />
             <div className="mt-2 inline-flex items-center gap-1 text-xs font-black text-slate-700 bg-white/70 rounded-full px-2 py-0.5">
-              <Volume2 className="h-3 w-3" /> Ouvir
+              <Play className="h-3 w-3" /> Aula
             </div>
           </button>
         ))}
+      </div>
+
+      {aulaIdx !== null && (
+        <AulaSinal
+          sinal={sinais[aulaIdx]}
+          trilha={trilha}
+          temProximo={aulaIdx < sinais.length - 1}
+          onProximo={() => abrir(aulaIdx + 1)}
+          onClose={() => {
+            if (typeof window !== "undefined") window.speechSynthesis?.cancel();
+            setAulaIdx(null);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function AulaSinal({
+  sinal,
+  trilha,
+  temProximo,
+  onProximo,
+  onClose,
+}: {
+  sinal: Sinal;
+  trilha: Trilha;
+  temProximo: boolean;
+  onProximo: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3">
+      <div className="bg-card rounded-3xl w-full max-w-md max-h-[92vh] overflow-y-auto shadow-2xl border border-border">
+        {/* Topo */}
+        <div className={`bg-gradient-to-br ${trilha.bg} px-4 pt-4 pb-3 rounded-t-3xl relative`}>
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 bg-white/70 hover:bg-white rounded-full p-1.5 shadow"
+            aria-label="Fechar"
+          >
+            <X className="h-4 w-4 text-slate-700" />
+          </button>
+          <div className="flex items-center justify-center">
+            <SinalFigura sinal={sinal} />
+          </div>
+          {sinal.nome.length === 1 ? null : (
+            <div className="text-center mt-1 text-lg font-black text-slate-800">
+              {sinal.nome}
+            </div>
+          )}
+        </div>
+
+        {/* Profe Lia + instrução */}
+        <div className="p-4">
+          <div className="flex items-start gap-3 mb-4">
+            <img
+              src={professoraImg}
+              alt="Profe Lia"
+              width={72}
+              height={72}
+              className="w-16 h-16 object-contain shrink-0 drop-shadow"
+            />
+            <div className="flex-1 bg-teal-50 border border-teal-100 rounded-2xl rounded-tl-sm p-3">
+              <p className="text-sm font-bold text-slate-700 leading-snug">
+                {sinal.instrucao}
+              </p>
+              <button
+                onClick={() => falar(sinal.instrucao)}
+                className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-teal-700"
+              >
+                <Volume2 className="h-3.5 w-3.5" /> Ouvir de novo
+              </button>
+            </div>
+          </div>
+
+          {/* Passos numerados */}
+          <div className="space-y-2 mb-4">
+            {sinal.passos.map((p, i) => (
+              <button
+                key={i}
+                onClick={() => falar(`Passo ${i + 1}. ${p}`)}
+                className="w-full flex items-center gap-3 bg-muted/40 hover:bg-muted rounded-2xl p-3 text-left active:scale-[0.98] transition-all"
+              >
+                <div className="w-8 h-8 rounded-full bg-violet-500 text-white font-black grid place-items-center shrink-0">
+                  {i + 1}
+                </div>
+                <span className="flex-1 text-sm font-bold text-slate-700">{p}</span>
+                <Volume2 className="h-4 w-4 text-violet-500 shrink-0" />
+              </button>
+            ))}
+          </div>
+
+          {/* Ações */}
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => falar(sinal.instrucao)}
+              className="bg-violet-500 hover:bg-violet-600 text-white rounded-2xl py-3 font-black shadow flex items-center justify-center gap-1.5 active:scale-95"
+            >
+              <Play className="h-4 w-4" /> Repetir
+            </button>
+            <button
+              onClick={temProximo ? onProximo : onClose}
+              className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl py-3 font-black shadow active:scale-95"
+            >
+              {temProximo ? "Próximo →" : "Concluir"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
