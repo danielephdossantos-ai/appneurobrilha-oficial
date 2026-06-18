@@ -78,7 +78,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "iguana",
       word: "Iguana",
       word2: "Igreja",
-      speech: "I! Essa é a letra I, igual ao I de Iguana! I de Igreja! Repita comigo: I!",
+      speech: "Iii! Iii! Esta letra tem o som I, como em Iguana e Igreja. Repita comigo: Iii!",
     },
     {
       kind: "vowel-practice",
