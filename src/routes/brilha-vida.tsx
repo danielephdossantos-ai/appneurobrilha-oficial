@@ -17,6 +17,10 @@ import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
 import { MinhaVezSuaVez } from "@/components/brilha-vida/MinhaVezSuaVez";
 import { RegrasCasa } from "@/components/brilha-vida/RegrasCasa";
 import { ResolucaoConflitos } from "@/components/brilha-vida/ResolucaoConflitos";
+import { DiarioSentir } from "@/components/brilha-vida/DiarioSentir";
+import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
+import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
+import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -35,6 +39,10 @@ import atvSemaforoImg from "@/assets/brilha-vida/semaforo-sentir.png";
 import atvMinhaVezImg from "@/assets/brilha-vida/minha-vez.png";
 import atvRegrasImg from "@/assets/brilha-vida/regras-casa.png";
 import atvConflitosImg from "@/assets/brilha-vida/resolucao-conflitos.png";
+import atvDiarioImg from "@/assets/brilha-vida/diario-sentir.png";
+import atvElogioImg from "@/assets/brilha-vida/elogio-magico.png";
+import atvBolhaImg from "@/assets/brilha-vida/bolha-bemestar.png";
+import atvRodaImg from "@/assets/brilha-vida/roda-do-dia.png";
 
 const ATIVIDADE_IMG: Record<string, string> = {
   "Termômetro das Emoções": atvTermometroImg,
@@ -49,6 +57,10 @@ const ATIVIDADE_IMG: Record<string, string> = {
   "Minha vez, sua vez": atvMinhaVezImg,
   "Regras da Casa": atvRegrasImg,
   "Resolução de Conflitos": atvConflitosImg,
+  "Diário do Sentir": atvDiarioImg,
+  "Elogio Mágico": atvElogioImg,
+  "Bolha de Bem-Estar": atvBolhaImg,
+  "Roda do Dia": atvRodaImg,
 };
 
 export const Route = createFileRoute("/brilha-vida")({
@@ -62,7 +74,7 @@ const categorias = [
     img: catEmocoesImg,
     cor: "from-sun/30 to-sun/5",
     descricao: "Reconhecer e nomear o que sentimos",
-    atividades: ["Termômetro das Emoções", "Como estou agora?", "Emoji Mágico"],
+    atividades: ["Termômetro das Emoções", "Como estou agora?", "Emoji Mágico", "Diário do Sentir"],
   },
   {
     id: "social",
@@ -70,7 +82,7 @@ const categorias = [
     img: catAmizadeImg,
     cor: "from-emerald/30 to-emerald/5",
     descricao: "Aprender a conviver e respeitar",
-    atividades: ["Histórias Sociais", "Dividindo o Brinquedo", "Cuidando do Amigo"],
+    atividades: ["Histórias Sociais", "Dividindo o Brinquedo", "Cuidando do Amigo", "Elogio Mágico"],
   },
   {
     id: "autocontrole",
@@ -78,7 +90,7 @@ const categorias = [
     img: catAutocontroleImg,
     cor: "from-sky/30 to-sky/5",
     descricao: "Estratégias para se acalmar",
-    atividades: ["Pausa para Respirar", "Cantinho da Calma", "Semáforo do Sentir"],
+    atividades: ["Pausa para Respirar", "Cantinho da Calma", "Semáforo do Sentir", "Bolha de Bem-Estar"],
   },
   {
     id: "rotina",
@@ -86,14 +98,14 @@ const categorias = [
     img: catRotinaImg,
     cor: "from-lilac/30 to-lilac/5",
     descricao: "Regras e harmonia no dia a dia",
-    atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos"],
+    atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos", "Roda do Dia"],
   },
 ];
 
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -145,6 +157,22 @@ function BrilhaVida() {
     }
     if (tipo === "Resolução de Conflitos") {
       setCustomActivity("conflitos");
+      return;
+    }
+    if (tipo === "Diário do Sentir") {
+      setCustomActivity("diario");
+      return;
+    }
+    if (tipo === "Elogio Mágico") {
+      setCustomActivity("elogio");
+      return;
+    }
+    if (tipo === "Bolha de Bem-Estar") {
+      setCustomActivity("bolha");
+      return;
+    }
+    if (tipo === "Roda do Dia") {
+      setCustomActivity("roda");
       return;
     }
     setIsLoading(true);
@@ -261,13 +289,20 @@ function BrilhaVida() {
       </Shell>
     );
   }
+  if (customActivity === "diario") {
+    return (<Shell><DiarioSentir onClose={() => setCustomActivity(null)} /></Shell>);
+  }
 
-  if (customActivity === "regras") {
-    return (
-      <Shell>
-        <RegrasCasa onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
+  if (customActivity === "elogio") {
+    return (<Shell><ElogioMagico onClose={() => setCustomActivity(null)} /></Shell>);
+  }
+
+  if (customActivity === "bolha") {
+    return (<Shell><BolhaBemEstar onClose={() => setCustomActivity(null)} /></Shell>);
+  }
+
+  if (customActivity === "roda") {
+    return (<Shell><RodaDoDia onClose={() => setCustomActivity(null)} /></Shell>);
   }
 
   if (customActivity === "conflitos") {
@@ -375,7 +410,7 @@ function BrilhaVida() {
               </h2>
               <p className="text-sm text-muted-foreground font-medium">{cat.descricao}</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {cat.atividades.map((atv) => (
                 <button
                   key={atv}
