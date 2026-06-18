@@ -24,7 +24,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "pineapple",
       word: "Abacaxi",
       word2: "Abelha",
-      speech: "Á! Essa é a letra Á! Á de Abacaxi! Á de Abelha! Repita comigo: Á!",
+      speech: "Ááá! Ááá! Esta letra tem o som Á, como em Abacaxi e Abelha. Repita comigo: Ááá!",
     },
     {
       kind: "vowel-practice",
