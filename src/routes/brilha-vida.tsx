@@ -218,11 +218,24 @@ function BrilhaVida() {
                   onClick={() => startLevel(atv)}
                   className={`group relative overflow-hidden text-left p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap`}
                 >
-                  <div className="font-extrabold text-slate-800 text-lg mb-1">{atv}</div>
+                  <div className="flex items-center gap-3 mb-2">
+                    {ATIVIDADE_IMG[atv] && (
+                      <img
+                        src={ATIVIDADE_IMG[atv]}
+                        alt={atv}
+                        loading="lazy"
+                        width={72}
+                        height={72}
+                        className="w-18 h-18 object-contain drop-shadow-sm shrink-0"
+                        style={{ width: 72, height: 72 }}
+                      />
+                    )}
+                    <div className="font-extrabold text-slate-800 text-lg leading-tight">{atv}</div>
+                  </div>
                   <div className="text-[10px] font-bold text-primary/60 uppercase tracking-widest flex items-center gap-1">
                     Atividade Brilha Vida <Zap className="h-3 w-3 fill-primary" />
                   </div>
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-3 flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-500 italic">Começar agora</span>
                     <Smile className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
