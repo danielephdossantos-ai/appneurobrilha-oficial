@@ -7,6 +7,7 @@ import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
 import { TermometroEmocoes } from "@/components/brilha-vida/TermometroEmocoes";
+import { SemaforoSentir } from "@/components/brilha-vida/SemaforoSentir";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -83,7 +84,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -95,6 +96,10 @@ function BrilhaVida() {
     }
     if (tipo === "Termômetro das Emoções") {
       setCustomActivity("termometro");
+      return;
+    }
+    if (tipo === "Semáforo do Sentir") {
+      setCustomActivity("semaforo");
       return;
     }
     setIsLoading(true);
@@ -147,6 +152,16 @@ function BrilhaVida() {
       </Shell>
     );
   }
+
+  if (customActivity === "semaforo") {
+    return (
+      <Shell>
+        <SemaforoSentir onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+
 
 
 
