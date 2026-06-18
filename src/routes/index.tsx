@@ -69,15 +69,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.12)",
   },
   {
-    to: "/historias",
-    title: "Histórias",
-    subtitle: "Aventuras Incríveis",
-    gradient: "from-[#06B6D4] via-[#0891B2] to-[#0E7490]",
-    glow: "rgba(6,182,212,0.7)",
-    emoji: "📖",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
     to: "/brilha-vida",
     title: "Brilha Vida",
     subtitle: "Bem-Estar e Saúde",

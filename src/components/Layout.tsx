@@ -76,7 +76,7 @@ const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
-  { to: "/historias", label: "Histórias", icon: BookOpen },
+  
 
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
@@ -98,7 +98,7 @@ const navPais = [
 const navigationSequence = [
   "/",
   "/missao-prova",
-  "/historias",
+  
   "/reforco-brilha",
   "/neuro-treino",
   "/brilha-vida",
