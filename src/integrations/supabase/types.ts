@@ -2187,6 +2187,191 @@ export type Database = {
           },
         ]
       }
+      pei_aulas: {
+        Row: {
+          atividades: Json
+          bncc_codigos: string[]
+          child_id: string
+          concluida_em: string | null
+          created_at: string
+          data_prevista: string
+          desempenho: Json | null
+          id: string
+          objetivo: string | null
+          ordem: number
+          plano_id: string
+          status: string
+          tempo_total_min: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          atividades?: Json
+          bncc_codigos?: string[]
+          child_id: string
+          concluida_em?: string | null
+          created_at?: string
+          data_prevista: string
+          desempenho?: Json | null
+          id?: string
+          objetivo?: string | null
+          ordem: number
+          plano_id: string
+          status?: string
+          tempo_total_min?: number
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          atividades?: Json
+          bncc_codigos?: string[]
+          child_id?: string
+          concluida_em?: string | null
+          created_at?: string
+          data_prevista?: string
+          desempenho?: Json | null
+          id?: string
+          objetivo?: string | null
+          ordem?: number
+          plano_id?: string
+          status?: string
+          tempo_total_min?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pei_aulas_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pei_aulas_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "pei_planos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pei_planos: {
+        Row: {
+          anamnese_id: string | null
+          aulas_concluidas: number
+          child_id: string
+          created_at: string
+          id: string
+          perfil_snapshot: Json
+          status: string
+          tempo_aula_min: number
+          total_aulas: number
+          trimestre_fim: string
+          trimestre_inicio: string
+          updated_at: string
+        }
+        Insert: {
+          anamnese_id?: string | null
+          aulas_concluidas?: number
+          child_id: string
+          created_at?: string
+          id?: string
+          perfil_snapshot?: Json
+          status?: string
+          tempo_aula_min?: number
+          total_aulas?: number
+          trimestre_fim: string
+          trimestre_inicio: string
+          updated_at?: string
+        }
+        Update: {
+          anamnese_id?: string | null
+          aulas_concluidas?: number
+          child_id?: string
+          created_at?: string
+          id?: string
+          perfil_snapshot?: Json
+          status?: string
+          tempo_aula_min?: number
+          total_aulas?: number
+          trimestre_fim?: string
+          trimestre_inicio?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pei_planos_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pei_relatorios: {
+        Row: {
+          child_id: string
+          created_at: string
+          evolucao: Json
+          id: string
+          periodo_fim: string
+          periodo_inicio: string
+          plano_id: string
+          pontos_atencao: string[]
+          pontos_fortes: string[]
+          recomendacoes: string | null
+          resumo: Json
+          updated_at: string
+          visualizado_em: string | null
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          evolucao?: Json
+          id?: string
+          periodo_fim: string
+          periodo_inicio: string
+          plano_id: string
+          pontos_atencao?: string[]
+          pontos_fortes?: string[]
+          recomendacoes?: string | null
+          resumo?: Json
+          updated_at?: string
+          visualizado_em?: string | null
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          evolucao?: Json
+          id?: string
+          periodo_fim?: string
+          periodo_inicio?: string
+          plano_id?: string
+          pontos_atencao?: string[]
+          pontos_fortes?: string[]
+          recomendacoes?: string | null
+          resumo?: Json
+          updated_at?: string
+          visualizado_em?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pei_relatorios_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pei_relatorios_plano_id_fkey"
+            columns: ["plano_id"]
+            isOneToOne: false
+            referencedRelation: "pei_planos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
