@@ -105,7 +105,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "sheep",
       word: "Ovelha",
       word2: "Ovo",
-      speech: "O! Essa é a letra O! O de Ovelha! O de Ovo! Repita comigo: O!",
+      speech: "Ó! Essa é a letra Ó! Ó de Ovelha! Ó de Ovo! Repita comigo: Ó!",
     },
     {
       kind: "vowel-practice",
