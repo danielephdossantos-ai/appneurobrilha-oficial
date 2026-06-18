@@ -163,6 +163,44 @@ const COUNT_WORDS = [
   "Dez",
 ];
 
+type IllustName =
+  | "apple" | "dog" | "star" | "fish" | "lollipop" | "banana"
+  | "tropical-fish" | "balloon" | "pineapple" | "elephant" | "bee"
+  | "bear" | "egg" | "macaw" | "ring" | "ladder" | "unicorn" | "grape";
+
+/* Banco de cenas para contagem — reutiliza ilustrações já registradas */
+const COUNT_SCENES: { illustration: IllustName; name: string; plural: string }[] = [
+  { illustration: "dog", name: "cachorrinho", plural: "cachorrinhos" },
+  { illustration: "star", name: "estrelinha", plural: "estrelinhas" },
+  { illustration: "fish", name: "peixinho", plural: "peixinhos" },
+  { illustration: "lollipop", name: "pirulito", plural: "pirulitos" },
+  { illustration: "apple", name: "maçã", plural: "maçãs" },
+  { illustration: "banana", name: "banana", plural: "bananas" },
+  { illustration: "balloon", name: "balão", plural: "balões" },
+  { illustration: "tropical-fish", name: "peixinho", plural: "peixinhos" },
+  { illustration: "bee", name: "abelhinha", plural: "abelhinhas" },
+  { illustration: "egg", name: "ovinho", plural: "ovinhos" },
+  { illustration: "bear", name: "ursinho", plural: "ursinhos" },
+  { illustration: "macaw", name: "ararinha", plural: "ararinhas" },
+  { illustration: "pineapple", name: "abacaxi", plural: "abacaxis" },
+  { illustration: "elephant", name: "elefantinho", plural: "elefantinhos" },
+  { illustration: "ring", name: "anelzinho", plural: "anelzinhos" },
+];
+
+/* 15 quantidades variadas de 1 a 10 */
+const COUNT_QUANTITIES = [3, 2, 5, 4, 6, 1, 7, 8, 5, 9, 4, 10, 6, 7, 3];
+
+const buildCountOptions = (n: number): number[] => {
+  const opts = new Set<number>([n]);
+  let a = Math.max(1, n - 1);
+  let b = Math.min(10, n + 1);
+  if (a === n) a = Math.min(10, n + 2);
+  if (b === n) b = Math.max(1, n - 2);
+  opts.add(a);
+  opts.add(b);
+  return Array.from(opts).sort(() => Math.random() - 0.5);
+};
+
 export const CONTAGEM_LESSON: EarlyLesson = {
   id: "contagem",
   title: "Vamos Contar!",
@@ -172,73 +210,69 @@ export const CONTAGEM_LESSON: EarlyLesson = {
       id: "intro",
       illustration: "counting-icon",
       title: "Vamos Contar!",
-      speech: "Olá! Agora vamos aprender a contar! Olha como é divertido! Vamos lá!",
+      speech:
+        "Olá! Vamos contar juntos! Vou te mostrar várias coisinhas. Você conta e toca no número certo! Vamos lá!",
     },
-    {
-      kind: "count-teach",
-      id: "teach-3",
-      illustration: "dog",
-      count: 3,
-      speech: "Olha que legal! Vamos contar os cachorrinhos juntos!",
-      count_words: COUNT_WORDS.slice(0, 3),
-    },
-    {
-      kind: "count-practice",
-      id: "practice-3",
-      illustration: "dog",
-      count: 3,
-      question_speech: "Muito bem! Quantos cachorrinhos você vê? Toque no número certo!",
-      options: [2, 3, 4],
-    },
-    {
-      kind: "count-teach",
-      id: "teach-5",
-      illustration: "star",
-      count: 5,
-      speech: "Agora vamos contar as estrelinhas! Pronto? Vamos lá!",
-      count_words: COUNT_WORDS.slice(0, 5),
-    },
-    {
-      kind: "count-practice",
-      id: "practice-5",
-      illustration: "star",
-      count: 5,
-      question_speech: "Quantas estrelinhas tem aqui? Toque no número!",
-      options: [4, 5, 6],
-    },
-    {
-      kind: "count-teach",
-      id: "teach-7",
-      illustration: "fish",
-      count: 7,
-      speech: "Uau! Olha os peixinhos! Vamos contar todos eles!",
-      count_words: COUNT_WORDS.slice(0, 7),
-    },
-    {
-      kind: "count-practice",
-      id: "practice-7",
-      illustration: "fish",
-      count: 7,
-      question_speech: "Quantos peixinhos tem? Você sabe! Toque no número!",
-      options: [6, 7, 8],
-    },
-    {
-      kind: "count-teach",
-      id: "teach-10",
-      illustration: "lollipop",
-      count: 10,
-      speech: "Agora o maior desafio! Dez pirulitos! Vamos contar juntos!",
-      count_words: COUNT_WORDS.slice(0, 10),
-    },
-    {
-      kind: "count-practice",
-      id: "practice-10",
-      illustration: "lollipop",
-      count: 10,
-      question_speech: "Quantos pirulitos tem? Você consegue! Toque no número!",
-      options: [8, 9, 10],
-    },
+    ...COUNT_QUANTITIES.flatMap((count, idx) => {
+      const scene = COUNT_SCENES[idx % COUNT_SCENES.length];
+      const noun = count === 1 ? scene.name : scene.plural;
+      return [
+        {
+          kind: "count-teach" as const,
+          id: `teach-${idx + 1}`,
+          illustration: scene.illustration,
+          count,
+          speech: `Olha que legal! Vamos contar ${count === 1 ? "este" : "estes"} ${noun} juntos!`,
+          count_words: COUNT_WORDS.slice(0, count),
+        },
+        {
+          kind: "count-practice" as const,
+          id: `practice-${idx + 1}`,
+          illustration: scene.illustration,
+          count,
+          question_speech: `Quantos ${noun} você vê? Toque no número certo!`,
+          options: buildCountOptions(count),
+        },
+      ];
+    }),
   ],
+};
+
+/* Banco de cenas para subtração — 15 variações */
+const SUBTRACT_SCENES: {
+  illustration: IllustName;
+  name: string;
+  plural: string;
+  total: number;
+  remove: number;
+  remove_action: string;
+}[] = [
+  { illustration: "apple", name: "maçã", plural: "maçãs", total: 4, remove: 1, remove_action: "Uma maçã caiu!" },
+  { illustration: "banana", name: "banana", plural: "bananas", total: 5, remove: 2, remove_action: "Duas bananas foram comidas!" },
+  { illustration: "star", name: "estrelinha", plural: "estrelinhas", total: 6, remove: 3, remove_action: "Três estrelinhas se apagaram!" },
+  { illustration: "tropical-fish", name: "peixinho", plural: "peixinhos", total: 7, remove: 4, remove_action: "Quatro peixinhos nadaram para longe!" },
+  { illustration: "balloon", name: "balão", plural: "balões", total: 8, remove: 5, remove_action: "Cinco balões voaram para o céu!" },
+  { illustration: "dog", name: "cachorrinho", plural: "cachorrinhos", total: 3, remove: 1, remove_action: "Um cachorrinho foi passear!" },
+  { illustration: "lollipop", name: "pirulito", plural: "pirulitos", total: 5, remove: 3, remove_action: "Três pirulitos foram dados aos amigos!" },
+  { illustration: "fish", name: "peixinho", plural: "peixinhos", total: 6, remove: 2, remove_action: "Dois peixinhos saíram do aquário!" },
+  { illustration: "bee", name: "abelhinha", plural: "abelhinhas", total: 4, remove: 2, remove_action: "Duas abelhinhas foram para o jardim!" },
+  { illustration: "egg", name: "ovinho", plural: "ovinhos", total: 6, remove: 4, remove_action: "Quatro ovinhos chocaram!" },
+  { illustration: "bear", name: "ursinho", plural: "ursinhos", total: 5, remove: 1, remove_action: "Um ursinho foi dormir!" },
+  { illustration: "macaw", name: "ararinha", plural: "ararinhas", total: 7, remove: 3, remove_action: "Três ararinhas voaram!" },
+  { illustration: "pineapple", name: "abacaxi", plural: "abacaxis", total: 4, remove: 3, remove_action: "Três abacaxis foram para a feira!" },
+  { illustration: "elephant", name: "elefantinho", plural: "elefantinhos", total: 5, remove: 2, remove_action: "Dois elefantinhos foram tomar banho!" },
+  { illustration: "ring", name: "anelzinho", plural: "anelzinhos", total: 6, remove: 3, remove_action: "Três anelzinhos foram guardados!" },
+];
+
+const buildSubOptions = (result: number): number[] => {
+  const opts = new Set<number>([result]);
+  let a = Math.max(0, result - 1);
+  let b = result + 1;
+  if (a === result) a = result + 2;
+  if (b === result) b = Math.max(0, result - 2);
+  opts.add(a);
+  opts.add(b);
+  return Array.from(opts).sort((x, y) => x - y);
 };
 
 export const SUBTRACAO_LESSON: EarlyLesson = {
@@ -251,62 +285,23 @@ export const SUBTRACAO_LESSON: EarlyLesson = {
       illustration: "subtract-icon",
       title: "Subtrair é Tirar!",
       speech:
-        "Olá! Agora vamos aprender subtração! Subtrair significa tirar! Quando você tira alguma coisa, a quantidade fica menor! Vamos ver como funciona!",
+        "Olá! Vamos aprender subtração! Subtrair significa tirar! Quando você tira alguma coisa, a quantidade fica menor! Vamos ver como funciona!",
     },
-    {
-      kind: "subtract",
-      id: "sub-4-1",
-      illustration: "apple",
-      total: 4,
-      remove: 1,
-      teach_speech: "Olha! Temos quatro maçãs aqui! Quatro!",
-      remove_speech: "Agora vamos tirar uma maçã! Uma saiu!",
-      question_speech: "Quantas maçãs sobraram? Toque no número certo!",
-      options: [2, 3, 4],
-    },
-    {
-      kind: "subtract",
-      id: "sub-5-2",
-      illustration: "banana",
-      total: 5,
-      remove: 2,
-      teach_speech: "Agora temos cinco bananas! Vamos contar? Um, dois, três, quatro, cinco!",
-      remove_speech: "Vamos tirar duas bananas! Olha só!",
-      question_speech: "Quantas bananas ficaram? Toque no número!",
-      options: [2, 3, 4],
-    },
-    {
-      kind: "subtract",
-      id: "sub-6-3",
-      illustration: "star",
-      total: 6,
-      remove: 3,
-      teach_speech: "Seis estrelinhas brilhando! Que lindo! Seis estrelas!",
-      remove_speech: "Vamos apagar três estrelas! Olha o que acontece!",
-      question_speech: "Quantas estrelas ainda brilham? Toque no número!",
-      options: [2, 3, 4],
-    },
-    {
-      kind: "subtract",
-      id: "sub-7-4",
-      illustration: "tropical-fish",
-      total: 7,
-      remove: 4,
-      teach_speech: "Sete peixinhos nadando! Que turma grande!",
-      remove_speech: "Quatro peixinhos nadaram para longe!",
-      question_speech: "Quantos peixinhos ficaram? Você sabe!",
-      options: [2, 3, 4],
-    },
-    {
-      kind: "subtract",
-      id: "sub-8-5",
-      illustration: "balloon",
-      total: 8,
-      remove: 5,
-      teach_speech: "Oito balões coloridos! Que festa!",
-      remove_speech: "Cinco balões voaram para o céu!",
-      question_speech: "Quantos balões ainda estão aqui? Toque no número!",
-      options: [2, 3, 4],
-    },
+    ...SUBTRACT_SCENES.map((scene, idx) => {
+      const totalNoun = scene.total === 1 ? scene.name : scene.plural;
+      const result = scene.total - scene.remove;
+      const resultNoun = result === 1 ? scene.name : scene.plural;
+      return {
+        kind: "subtract" as const,
+        id: `sub-${idx + 1}`,
+        illustration: scene.illustration,
+        total: scene.total,
+        remove: scene.remove,
+        teach_speech: `Olha! Temos ${scene.total} ${totalNoun} aqui!`,
+        remove_speech: `Agora vamos tirar ${scene.remove}! ${scene.remove_action}`,
+        question_speech: `Quantos ${resultNoun} sobraram? Toque no número certo!`,
+        options: buildSubOptions(result),
+      };
+    }),
   ],
 };
