@@ -57,6 +57,56 @@ import surpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
 import medo from "@/assets/neuro-treino/emocoes/medo.png";
 import sono from "@/assets/neuro-treino/emocoes/sono.png";
 
+// ===== Banco premium reutilizado dos hiperfocos (mesmo padrão visual kawaii/Pixar) =====
+import hfLeao from "@/assets/hiperfocos/animais/leao.png";
+import hfCoruja from "@/assets/hiperfocos/animais/coruja.png";
+import hfMacaco from "@/assets/hiperfocos/animais/macaco.png";
+import hfElefante from "@/assets/hiperfocos/animais/elefante.png";
+import hfTartaruga from "@/assets/hiperfocos/animais/tartaruga.png";
+import hfTrex from "@/assets/hiperfocos/dinossauros/trex.png";
+import hfTriceratops from "@/assets/hiperfocos/dinossauros/triceratops.png";
+import hfRaptor from "@/assets/hiperfocos/dinossauros/velociraptor.png";
+import hfBraquio from "@/assets/hiperfocos/dinossauros/braquiossauro.png";
+import hfEstegossauro from "@/assets/hiperfocos/dinossauros/estegossauro.png";
+import hfLua from "@/assets/hiperfocos/espaco/lua.png";
+import hfEstrela from "@/assets/hiperfocos/espaco/estrela.png";
+import hfPlaneta from "@/assets/hiperfocos/espaco/planeta.png";
+import hfFoguete from "@/assets/hiperfocos/espaco/foguete.png";
+import hfAstronauta from "@/assets/hiperfocos/espaco/astronauta.png";
+import hfCometa from "@/assets/hiperfocos/espaco/cometa.png";
+import hfVaca from "@/assets/hiperfocos/fazendinha/vaquinha.png";
+import hfPorco from "@/assets/hiperfocos/fazendinha/porquinho.png";
+import hfGalinha from "@/assets/hiperfocos/fazendinha/galinha.png";
+import hfOvelha from "@/assets/hiperfocos/fazendinha/ovelha.png";
+import hfCavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
+import hfHeroi from "@/assets/hiperfocos/herois/heroi.png";
+import hfHeroina from "@/assets/hiperfocos/herois/heroina.png";
+import hfRoboHeroi from "@/assets/hiperfocos/herois/robo.png";
+import hfPrincesa from "@/assets/hiperfocos/princesas/princesa.png";
+import hfCastelo from "@/assets/hiperfocos/princesas/castelo.png";
+import hfCoroa from "@/assets/hiperfocos/princesas/coroa.png";
+import hfFada from "@/assets/hiperfocos/princesas/fada.png";
+import hfUnicornio from "@/assets/hiperfocos/princesas/unicornio.png";
+import hfBailarina from "@/assets/hiperfocos/bailarinas/bailarina.png";
+import hfCisne from "@/assets/hiperfocos/bailarinas/cisne.png";
+import hfSereia from "@/assets/hiperfocos/sereias/sereia.png";
+import hfPeixinho from "@/assets/hiperfocos/sereias/peixinho.png";
+import hfConcha from "@/assets/hiperfocos/sereias/concha.png";
+import hfCavaloMarinho from "@/assets/hiperfocos/sereias/cavalo-marinho.png";
+import hfRoboBot from "@/assets/hiperfocos/robos/robo.png";
+import hfDrone from "@/assets/hiperfocos/robos/drone.png";
+import hfTrem from "@/assets/hiperfocos/trens/locomotiva.png";
+import hfVagao from "@/assets/hiperfocos/trens/vagao.png";
+import hfCaminhao from "@/assets/hiperfocos/carros/caminhao.png";
+import hfMoto from "@/assets/hiperfocos/carros/moto.png";
+import hfOnibus from "@/assets/hiperfocos/carros/onibus.png";
+import hfViolao from "@/assets/hiperfocos/musica/violao.png";
+import hfNota from "@/assets/hiperfocos/musica/nota-musical.png";
+import hfPincel from "@/assets/hiperfocos/arte/pincel.png";
+import hfCreeper from "@/assets/hiperfocos/minecraft/creeper.png";
+import hfSteve from "@/assets/hiperfocos/minecraft/steve.png";
+import hfAlex from "@/assets/hiperfocos/minecraft/alex.png";
+
 export const OBJETO_IMG: Record<string, string> = {
   BOLA: bola,
   GATO: gato,
