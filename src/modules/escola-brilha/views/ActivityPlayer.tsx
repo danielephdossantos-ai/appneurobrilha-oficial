@@ -1339,7 +1339,7 @@ const ExemploVisualScreen: React.FC<{
               transition={{ delay: i * 0.15 }}
               className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5"
             >
-              {sentence.emoji && <span className="text-base leading-none">{sentence.emoji}</span>}
+              {sentence.emoji && <RenderEmoji e={sentence.emoji} className="w-6 h-6" />}
               <span className="text-slate-700 font-semibold text-xs leading-snug">
                 {sentence.text}
               </span>
