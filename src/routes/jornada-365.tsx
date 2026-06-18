@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
+import { useMascot } from "@/contexts/MascotContext";
 
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
@@ -103,6 +104,7 @@ function WorldBackground({ world }: { world: WorldKey }) {
 
 function Jornada() {
   const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
   const { hiperfoco } = useHiperfoco();
   const world = mapHiperfocoToWorld(hiperfoco?.label);
   const theme = WORLD_THEME[world];
@@ -190,6 +192,17 @@ function Jornada() {
         <div className="relative z-10">
           <DayTrail currentDay={currentDay} theme={theme} />
         </div>
+
+        {/* Mascote da criança — flutua no canto, sem cobrir trilha */}
+        {activeMascot?.mascot?.image_url && (
+          <div className="pointer-events-none fixed bottom-24 right-3 z-20 sm:bottom-28 sm:right-6">
+            <img
+              src={activeMascot.mascot.image_url}
+              alt={activeMascot.mascot.name ?? "Mascote"}
+              className="w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-[0_8px_12px_rgba(0,0,0,0.35)]"
+            />
+          </div>
+        )}
       </div>
     </Shell>
   );
@@ -231,7 +244,7 @@ function DayTrail({
             <div
               ref={isCurrent ? currentRef : null}
               className="relative my-2"
-              style={{ transform: `translateX(${offset * 38}px)` }}
+              style={{ transform: `translateX(${offset * 60}px)` }}
             >
               <button
                 type="button"
@@ -257,24 +270,24 @@ function DayTrail({
 
                 <div
                   className={cn(
-                    "relative w-[78px] h-[78px] rounded-full grid place-items-center overflow-hidden",
-                    "border-[5px] border-white",
+                    "relative w-[156px] h-[156px] rounded-full grid place-items-center overflow-hidden",
+                    "border-[8px] border-white",
                     isLocked
                       ? "bg-gradient-to-b from-slate-300 to-slate-400 grayscale opacity-90"
                       : isDone
                         ? "bg-gradient-to-b from-amber-300 to-amber-500"
                         : "bg-gradient-to-b from-white to-white/85",
-                    !isLocked && "shadow-[0_8px_0_rgba(0,0,0,0.18),0_14px_22px_rgba(0,0,0,0.25)]",
+                    !isLocked && "shadow-[0_10px_0_rgba(0,0,0,0.18),0_18px_28px_rgba(0,0,0,0.25)]",
                     !isLocked && theme.accent,
                     !isLocked && "ring-4",
                   )}
                 >
                   {isLocked ? (
-                    <Lock className="h-6 w-6 text-white drop-shadow" />
+                    <Lock className="h-12 w-12 text-white drop-shadow" />
                   ) : isDone ? (
-                    <Star className="h-7 w-7 text-white fill-white drop-shadow" />
+                    <Star className="h-14 w-14 text-white fill-white drop-shadow" />
                   ) : (
-                    <div className="text-3xl font-black text-primary leading-none">{day}</div>
+                    <div className="text-6xl font-black text-primary leading-none">{day}</div>
                   )}
                 </div>
               </button>
