@@ -105,11 +105,22 @@ export function useAnamneseV2(childId: string) {
   };
 
   const finish = async () => {
-    return upsert.mutateAsync({
+    const res = await upsert.mutateAsync({
       responses: localResponses,
       current_step: 16,
       completed: true,
     });
+    // Marca a criança como tendo anamnese concluída → libera painel dos pais
+    // e o nascimento do Pip/Pipa na área da criança.
+    if (UUID_RE.test(childId)) {
+      const { error } = await supabase
+        .from("children")
+        .update({ anamnese_completa: true })
+        .eq("id", childId);
+      if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
+      qc.invalidateQueries({ queryKey: ["children"] });
+    }
+    return res;
   };
 
   const scores = useMemo(() => computeScores(localResponses), [localResponses]);
