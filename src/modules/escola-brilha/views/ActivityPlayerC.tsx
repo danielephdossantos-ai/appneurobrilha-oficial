@@ -447,9 +447,10 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
                     +{lesson.xp} XP • BNCC {lesson.bncc_code}
                   </p>
                 </div>
+                <NextLessonInlineButton current={fallbackRef} />
                 <button
                   onClick={() => navigate({ to: "/escola-brilha" })}
-                  className={`w-full ${ac.bg} text-white font-black py-3.5 rounded-2xl shadow-md hover:opacity-90 active:scale-[0.98] transition`}
+                  className={`w-full bg-white ${ac.text} border-2 ${ac.border} font-black py-3.5 rounded-2xl shadow-sm hover:opacity-90 active:scale-[0.98] transition`}
                 >
                   Voltar para o início
                 </button>
