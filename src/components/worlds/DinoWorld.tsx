@@ -6,19 +6,11 @@
 // objetos voando. Cena previsível, sem sobrecarga sensorial.
 // ============================================================
 
-import { useMemo } from "react";
 import worldDinossauros from "@/assets/neuro-treino/worlds/dinossauros.jpg";
+import dinossauroImg from "@/assets/neuro-treino/objetos/dinossauro.png";
+import solImg from "@/assets/neuro-treino/objetos/sol.png";
 
 export function DinoWorld() {
-  // Posições das nuvens estáveis (não re-randomiza a cada render)
-  const nuvens = useMemo(
-    () => [
-      { top: "10%", delay: "0s", duracao: "120s", escala: 1 },
-      { top: "18%", delay: "-60s", duracao: "150s", escala: 0.8 },
-    ],
-    [],
-  );
-
   return (
     <div className="fixed inset-0 z-0 overflow-hidden bg-slate-900">
       {/* Cenário base */}
@@ -33,59 +25,50 @@ export function DinoWorld() {
       {/* Véu suave para contraste com os ícones da jornada */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35 pointer-events-none" />
 
-      {/* Sol — respiração muito lenta, sem rotação */}
-      <div
-        className="absolute top-[10%] right-[12%] text-[64px] pointer-events-none select-none"
+      {/* Sol — apenas respiração lenta */}
+      <img
+        src={solImg}
+        alt=""
+        className="absolute top-[8%] right-[11%] h-20 w-20 pointer-events-none select-none opacity-90"
         style={{
-          filter: "drop-shadow(0 0 24px rgba(255,200,80,0.55))",
+          filter: "drop-shadow(0 0 22px rgba(255,200,80,0.45))",
           animation: "dinoSolCalmo 10s ease-in-out infinite",
         }}
         aria-hidden
-      >
-        ☀️
-      </div>
+      />
 
-      {/* Nuvens — atravessam o céu muito devagar */}
-      {nuvens.map((n, i) => (
-        <div
-          key={i}
-          className="absolute text-[56px] pointer-events-none select-none opacity-85"
-          style={{
-            top: n.top,
-            left: "-15%",
-            transform: `scale(${n.escala})`,
-            animation: `dinoNuvemCalma ${n.duracao} linear ${n.delay} infinite`,
-          }}
-          aria-hidden
-        >
-          ☁️
-        </div>
-      ))}
+      {/* Nuvens — quase paradas, balanço suave */}
+      <div className="absolute left-[9%] top-[11%] h-8 w-28 rounded-full bg-white/80 blur-[1px] pointer-events-none" style={{ animation: "dinoNuvemRespira 28s ease-in-out infinite" }} />
+      <div className="absolute left-[62%] top-[17%] h-7 w-24 rounded-full bg-white/70 blur-[1px] pointer-events-none" style={{ animation: "dinoNuvemRespira 34s ease-in-out -8s infinite" }} />
 
-      {/* Dinossauro — caminhada lenta e contínua */}
-      <div
-        className="absolute bottom-[14%] text-[56px] pointer-events-none select-none"
+      {/* Dinossauro — fica no chão, só respira/balança devagar */}
+      <img
+        src={dinossauroImg}
+        alt=""
+        className="absolute bottom-[13%] left-[14%] h-24 w-24 pointer-events-none select-none"
         style={{
-          left: "-10%",
-          animation: "dinoCaminhaCalmo 80s linear infinite",
+          filter: "drop-shadow(0 10px 12px rgba(0,0,0,0.22))",
+          animation: "dinoRespiraCalmo 12s ease-in-out infinite",
         }}
         aria-hidden
-      >
-        🦖
-      </div>
+      />
 
       <style>{`
         @keyframes dinoSolCalmo {
           0%, 100% { transform: scale(1); opacity: 0.95; }
           50%      { transform: scale(1.04); opacity: 1; }
         }
-        @keyframes dinoNuvemCalma {
-          0%   { transform: translateX(0) scale(var(--s, 1)); }
-          100% { transform: translateX(130vw) scale(var(--s, 1)); }
+        @keyframes dinoNuvemRespira {
+          0%, 100% { transform: translateX(0); opacity: 0.68; }
+          50%      { transform: translateX(18px); opacity: 0.82; }
         }
-        @keyframes dinoCaminhaCalmo {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(120vw); }
+        @keyframes dinoRespiraCalmo {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50%      { transform: translateY(-3px) rotate(-1deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          img, div { animation: none !important; }
         }
       `}</style>
     </div>
