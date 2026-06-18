@@ -6,6 +6,7 @@ import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
+import { TermometroEmocoes } from "@/components/brilha-vida/TermometroEmocoes";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -82,7 +83,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -90,6 +91,10 @@ function BrilhaVida() {
     // Atividades com componente próprio (não passam pelo engine)
     if (tipo === "Pausa para Respirar") {
       setCustomActivity("respirar");
+      return;
+    }
+    if (tipo === "Termômetro das Emoções") {
+      setCustomActivity("termometro");
       return;
     }
     setIsLoading(true);
@@ -134,6 +139,15 @@ function BrilhaVida() {
       </Shell>
     );
   }
+
+  if (customActivity === "termometro") {
+    return (
+      <Shell>
+        <TermometroEmocoes onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
 
 
 
