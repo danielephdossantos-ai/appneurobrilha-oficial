@@ -473,6 +473,63 @@ export type Database = {
         }
         Relationships: []
       }
+      aulas_bncc: {
+        Row: {
+          ativo: boolean
+          codigo_bncc: string
+          created_at: string
+          descricao: string | null
+          disciplina: string
+          eixo: string | null
+          etapa: Database["public"]["Enums"]["etapa_escolar"]
+          id: string
+          ordem: number
+          payload: Json
+          pre_requisitos: string[]
+          serie: string
+          tipo_player: Database["public"]["Enums"]["tipo_player"]
+          titulo: string
+          updated_at: string
+          xp: number
+        }
+        Insert: {
+          ativo?: boolean
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string | null
+          disciplina: string
+          eixo?: string | null
+          etapa: Database["public"]["Enums"]["etapa_escolar"]
+          id?: string
+          ordem?: number
+          payload: Json
+          pre_requisitos?: string[]
+          serie: string
+          tipo_player: Database["public"]["Enums"]["tipo_player"]
+          titulo: string
+          updated_at?: string
+          xp?: number
+        }
+        Update: {
+          ativo?: boolean
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string | null
+          disciplina?: string
+          eixo?: string | null
+          etapa?: Database["public"]["Enums"]["etapa_escolar"]
+          id?: string
+          ordem?: number
+          payload?: Json
+          pre_requisitos?: string[]
+          serie?: string
+          tipo_player?: Database["public"]["Enums"]["tipo_player"]
+          titulo?: string
+          updated_at?: string
+          xp?: number
+        }
+        Relationships: []
+      }
       bncc_habilidades: {
         Row: {
           ano: string | null
@@ -2486,6 +2543,63 @@ export type Database = {
           },
         ]
       }
+      progresso_aluno_aula: {
+        Row: {
+          acertos: number
+          aula_id: string
+          child_id: string
+          concluida_em: string | null
+          created_at: string
+          dominio: number
+          erros: number
+          id: string
+          tentativas: number
+          ultima_tentativa_em: string | null
+          updated_at: string
+        }
+        Insert: {
+          acertos?: number
+          aula_id: string
+          child_id: string
+          concluida_em?: string | null
+          created_at?: string
+          dominio?: number
+          erros?: number
+          id?: string
+          tentativas?: number
+          ultima_tentativa_em?: string | null
+          updated_at?: string
+        }
+        Update: {
+          acertos?: number
+          aula_id?: string
+          child_id?: string
+          concluida_em?: string | null
+          created_at?: string
+          dominio?: number
+          erros?: number
+          id?: string
+          tentativas?: number
+          ultima_tentativa_em?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progresso_aluno_aula_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "aulas_bncc"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "progresso_aluno_aula_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           child_id: string | null
@@ -3068,6 +3182,7 @@ export type Database = {
       reset_daily_coins: { Args: never; Returns: undefined }
     }
     Enums: {
+      etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       mascot_emotion:
         | "happy"
         | "calm"
@@ -3075,6 +3190,7 @@ export type Database = {
         | "excited"
         | "focused"
         | "proud"
+      tipo_player: "early" | "b" | "c" | "legacy"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -3202,6 +3318,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       mascot_emotion: [
         "happy",
         "calm",
@@ -3210,6 +3327,7 @@ export const Constants = {
         "focused",
         "proud",
       ],
+      tipo_player: ["early", "b", "c", "legacy"],
     },
   },
 } as const
