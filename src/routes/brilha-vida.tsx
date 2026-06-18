@@ -11,6 +11,9 @@ import { SemaforoSentir } from "@/components/brilha-vida/SemaforoSentir";
 import { CantinhoCalma } from "@/components/brilha-vida/CantinhoCalma";
 import { ComoEstouAgora } from "@/components/brilha-vida/ComoEstouAgora";
 import { EmojiMagico } from "@/components/brilha-vida/EmojiMagico";
+import { HistoriasSociais } from "@/components/brilha-vida/HistoriasSociais";
+import { DividindoBrinquedo } from "@/components/brilha-vida/DividindoBrinquedo";
+import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
