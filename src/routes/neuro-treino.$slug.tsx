@@ -334,6 +334,8 @@ function MechanicRenderer({
       return <Motorzinho p={variation.payload} onDone={onConcluir} />;
     case "consciencia-fonologica":
       return <ConscienciaFonologica p={variation.payload} onDone={onConcluir} />;
+    case "consciencia-silabica":
+      return <ConscienciaSilabica p={variation.payload} onDone={onConcluir} />;
     case "rimas":
       return <Rimas p={variation.payload} onDone={onConcluir} />;
     case "pedacinhos-da-palavra":
