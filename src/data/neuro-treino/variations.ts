@@ -27,6 +27,7 @@ export type CategoriaSlug =
   | "pedacinhos-da-palavra"
   | "consciencia-fonologica"
   | "consciencia-silabica"
+  | "compreensao-leitora"
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
