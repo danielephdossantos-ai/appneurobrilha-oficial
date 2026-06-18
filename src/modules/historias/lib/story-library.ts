@@ -286,9 +286,12 @@ function buildLibraryStory(category: StoryCategory, index: number) {
   };
 }
 
-const LIBRARY_STORIES = Object.entries(CATEGORY_CONFIG).flatMap(([category, config]) =>
-  Array.from({ length: config.count }, (_, index) => buildLibraryStory(category as StoryCategory, index)),
-) as Array<Story & { category: StoryCategory }>;
+const LIBRARY_STORIES = [
+  ...listHistoriasNarradas(),
+  ...Object.entries(CATEGORY_CONFIG).flatMap(([category, config]) =>
+    Array.from({ length: config.count }, (_, index) => buildLibraryStory(category as StoryCategory, index)),
+  ),
+] as Array<Story & { category: StoryCategory }>;
 
 export function getLibraryStories(filters?: { theme?: string; age?: number; level?: string }) {
   return LIBRARY_STORIES.filter((story) => {
