@@ -82,6 +82,22 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
 
+  // Migração única: limpa cache antigo da categoria "Alfabetização" do 1º Ano
+  // (a categoria foi movida para o Neuro-Treino e o card 1º Ano virou "Língua Portuguesa").
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const FLAG = "escola-brilha:cleanup:alfabetizacao-1ano:v1";
+    try {
+      if (localStorage.getItem(FLAG)) return;
+      localStorage.removeItem("escola-brilha:rot:portugues-1ano");
+      localStorage.removeItem("escola-brilha:rot:alfabetizacao");
+      localStorage.removeItem("escola-brilha:rot:alfabetizacao-1ano");
+      localStorage.setItem(FLAG, "1");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   const goToActivity = (id: string, type: string) =>
     navigate({ to: "/escola-brilha/aula", search: { category: id, type } });
 
