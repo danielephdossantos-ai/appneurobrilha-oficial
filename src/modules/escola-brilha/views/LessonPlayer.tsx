@@ -351,18 +351,25 @@ const LegacyLessonPlayer: React.FC = () => {
                             ? { duration: 0.2 }
                             : { type: "spring", stiffness: 200, damping: 14 }
                         }
-                        className={`flex flex-col items-center justify-center transition-all duration-300 ${highlightedElementId === el.id ? "scale-110" : "scale-100"}`}
+                        className={`flex flex-col items-center justify-center gap-1 transition-all duration-300 ${highlightedElementId === el.id ? "scale-110" : "scale-100"}`}
                       >
                         {isPictograph(el.content) || objetoImg(el.content) ? (
-                          <div
-                            className={
-                              highlightedElementId === el.id
-                                ? "drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"
-                                : ""
-                            }
-                          >
-                            <RenderEmoji e={el.content} className="w-24 h-24 sm:w-32 sm:h-32" />
-                          </div>
+                          <>
+                            <div
+                              className={
+                                highlightedElementId === el.id
+                                  ? "drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"
+                                  : ""
+                              }
+                            >
+                              <RenderEmoji e={el.content} className="w-24 h-24 sm:w-32 sm:h-32" />
+                            </div>
+                            {!isSecondYear && (
+                              <span className="text-xl sm:text-2xl font-black text-slate-700 uppercase tracking-wider">
+                                {semEmoji(el.content)}
+                              </span>
+                            )}
+                          </>
                         ) : (
                           <div
                             className={`text-5xl sm:text-6xl font-black px-2 transition-all duration-300 ${highlightedElementId === el.id ? "text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]" : "text-blue-600"}`}
