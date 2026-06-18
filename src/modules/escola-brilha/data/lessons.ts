@@ -1,5 +1,7 @@
 import { Lesson } from "../types/lesson";
 
+export { MATH_1ANO_LESSON } from "./math-1ano";
+
 export const PORTUGUES_1ANO_LESSON: Lesson = {
   id: "leitura-primeiros-passos",
   title: "Primeiros Passos na Leitura",
