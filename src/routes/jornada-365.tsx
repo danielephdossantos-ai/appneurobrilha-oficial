@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
-import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
+
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
 // Mundos (backgrounds)
@@ -184,10 +184,7 @@ function Jornada() {
       <div className="relative min-h-[calc(100vh-6rem)] -mx-4 -my-2 px-4 py-6 rounded-3xl overflow-hidden">
         {world === "dinossauros" ? <DinoWorld /> : <WorldBackground world={world} />}
 
-        {/* Aula de hoje */}
-        <div className="relative z-10 mb-6 max-w-[560px] mx-auto">
-          <AulaDeHoje childId={activeChild.id} />
-        </div>
+        {/* Aula de hoje fica escondida da criança — só sistema/relatório dos pais usa */}
 
         {/* Trilha */}
         <div className="relative z-10">
