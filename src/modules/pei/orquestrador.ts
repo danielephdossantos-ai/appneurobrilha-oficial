@@ -1,15 +1,14 @@
 // ============================================================
-// PEI — Orquestrador: lê perfil + BNCC, gera plano e persiste
-// ============================================================
-// Roda no cliente usando o supabase client (RLS scope auth.uid).
-// Não usa server fn porque a middleware atual não expõe supabase
-// autenticado — RLS já filtra por children.user_id.
+// PEI — Orquestrador: lê perfil + BNCC + sinais adaptativos,
+// gera plano e persiste. Roda no cliente (RLS auth.uid).
 // ============================================================
 
 import { supabase } from "@/integrations/supabase/client";
 import {
   gerarPlanoTrimestral,
-  type BnccHabilidade,
+  serieParaIdade,
+  type AulaBnccRef,
+  type AdaptacaoCtx,
   type PerfilCrianca,
   type PlanoGerado,
 } from "./gerador";
@@ -17,7 +16,7 @@ import {
 export type GerarOpts = {
   anamneseId?: string | null;
   inicio?: Date;
-  totalAulas?: number; // default 90
+  totalAulas?: number;
 };
 
 export type GerarResultado = {
@@ -26,6 +25,7 @@ export type GerarResultado = {
   inicio: string;
   fim: string;
   tempoAulaMin: number;
+  adaptacao: AdaptacaoCtx;
 };
 
 async function carregarPerfil(childId: string): Promise<PerfilCrianca> {
@@ -45,14 +45,93 @@ async function carregarPerfil(childId: string): Promise<PerfilCrianca> {
   };
 }
 
-async function carregarBncc(): Promise<BnccHabilidade[]> {
+async function carregarAulasBncc(serie: string): Promise<AulaBnccRef[]> {
+  // Tenta filtrar pela série; se vier vazio, traz todas (gerador trata).
   const { data, error } = await supabase
-    .from("bncc_habilidades")
-    .select("id, codigo_bncc, disciplina, ano, titulo, objetivo")
+    .from("aulas_bncc")
+    .select("id, codigo_bncc, serie, disciplina, titulo, descricao, ordem")
+    .eq("ativo", true)
+    .eq("serie", serie)
     .order("ordem", { ascending: true })
     .limit(500);
-  if (error) throw new Error(`Falha ao carregar BNCC: ${error.message}`);
-  return (data ?? []) as BnccHabilidade[];
+  if (error) throw new Error(`Falha ao carregar aulas BNCC: ${error.message}`);
+  if ((data ?? []).length === 0) {
+    const { data: fb, error: fbErr } = await supabase
+      .from("aulas_bncc")
+      .select("id, codigo_bncc, serie, disciplina, titulo, descricao, ordem")
+      .eq("ativo", true)
+      .order("ordem", { ascending: true })
+      .limit(500);
+    if (fbErr) throw new Error(`Falha ao carregar BNCC fallback: ${fbErr.message}`);
+    return (fb ?? []) as AulaBnccRef[];
+  }
+  return (data ?? []) as AulaBnccRef[];
+}
+
+// ---- SINAIS ADAPTATIVOS -----------------------------------------
+
+// 1) Habilidades para reforço: mastery < 0.6
+async function carregarReforco(childId: string): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("child_skill_mastery")
+    .select("skill_code, mastery_level")
+    .eq("child_id", childId)
+    .lt("mastery_level", 0.6)
+    .limit(50);
+  if (error) {
+    console.warn("[PEI] reforço indisponível:", error.message);
+    return [];
+  }
+  return (data ?? [])
+    .map((r) => r.skill_code)
+    .filter((c): c is string => !!c);
+}
+
+// 2) Fadiga: pausas recomendadas nos últimos 7 dias
+async function detectarFadiga(childId: string): Promise<boolean> {
+  // fatigue_metrics não tem child_id direto; via daily_sessions.
+  const seteDias = new Date(Date.now() - 7 * 86400 * 1000).toISOString();
+  const { data: sess } = await supabase
+    .from("daily_sessions")
+    .select("id")
+    .eq("child_id", childId)
+    .gte("created_at", seteDias)
+    .limit(50);
+  const ids = (sess ?? []).map((s) => s.id);
+  if (ids.length === 0) return false;
+  const { data: fm, error } = await supabase
+    .from("fatigue_metrics")
+    .select("recommended_pause")
+    .in("session_id", ids);
+  if (error) {
+    console.warn("[PEI] fadiga indisponível:", error.message);
+    return false;
+  }
+  const pausas = (fm ?? []).filter((r) => r.recommended_pause).length;
+  return pausas >= 3;
+}
+
+// 3) Log da adaptação aplicada
+async function registrarAdaptacao(
+  childId: string,
+  ctx: AdaptacaoCtx,
+  tempoAula: number,
+) {
+  const trigger = [
+    ctx.fadigaAlta ? "fadiga_alta" : null,
+    ctx.habilidadesParaReforco.length > 0
+      ? `reforco:${ctx.habilidadesParaReforco.length}`
+      : null,
+  ]
+    .filter(Boolean)
+    .join("|") || "perfil_base";
+  const action = `plano_gerado:tempo_aula=${tempoAula}min`;
+  const { error } = await supabase.from("adaptation_logs").insert({
+    child_id: childId,
+    trigger_reason: trigger,
+    action_taken: action,
+  });
+  if (error) console.warn("[PEI] log adaptação falhou:", error.message);
 }
 
 async function expirarPlanosAnteriores(childId: string) {
@@ -67,12 +146,21 @@ export async function gerarESalvarPlanoTrimestral(
   childId: string,
   opts: GerarOpts = {},
 ): Promise<GerarResultado> {
-  const [perfil, habilidades] = await Promise.all([
-    carregarPerfil(childId),
-    carregarBncc(),
+  const perfil = await carregarPerfil(childId);
+  const serie = serieParaIdade(perfil.idade);
+
+  const [aulasBncc, reforco, fadigaAlta] = await Promise.all([
+    carregarAulasBncc(serie),
+    carregarReforco(childId),
+    detectarFadiga(childId),
   ]);
 
-  const plano: PlanoGerado = gerarPlanoTrimestral(perfil, habilidades, {
+  const ctx: AdaptacaoCtx = {
+    fadigaAlta,
+    habilidadesParaReforco: reforco,
+  };
+
+  const plano: PlanoGerado = gerarPlanoTrimestral(perfil, aulasBncc, ctx, {
     inicio: opts.inicio,
     totalAulas: opts.totalAulas ?? 90,
   });
@@ -111,16 +199,16 @@ export async function gerarESalvarPlanoTrimestral(
     status: a.data_prevista <= hoje ? "disponivel" : "bloqueada",
   }));
 
-  // Insere em lotes de 50 (limite seguro p/ Data API)
   for (let i = 0; i < aulasRows.length; i += 50) {
     const lote = aulasRows.slice(i, i + 50);
     const { error } = await supabase.from("pei_aulas").insert(lote);
     if (error) {
-      // Rollback manual: derruba o plano pra não ficar parcial
       await supabase.from("pei_planos").delete().eq("id", planoRow.id);
       throw new Error(`Falha ao inserir aulas (lote ${i}): ${error.message}`);
     }
   }
+
+  await registrarAdaptacao(childId, ctx, plano.tempo_aula_min);
 
   return {
     planoId: planoRow.id,
@@ -128,5 +216,6 @@ export async function gerarESalvarPlanoTrimestral(
     inicio: plano.trimestre_inicio,
     fim: plano.trimestre_fim,
     tempoAulaMin: plano.tempo_aula_min,
+    adaptacao: ctx,
   };
 }
