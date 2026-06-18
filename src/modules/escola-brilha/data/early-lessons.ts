@@ -1,4 +1,103 @@
-import { EarlyLesson } from "../types/early-lesson";
+import { EarlyLesson, VowelPracticeStep } from "../types/early-lesson";
+
+type VowelInfo = {
+  letter: "A" | "E" | "I" | "O" | "U";
+  color: string;
+  bg: string;
+  text: string;
+  illustration: "pineapple" | "elephant" | "iguana" | "sheep" | "grape";
+  word: string;
+  word2: string;
+  speech: string;
+  teachId: string;
+};
+
+const VOWELS: VowelInfo[] = [
+  {
+    letter: "A",
+    color: "text-rose-600",
+    bg: "bg-rose-100",
+    text: "border-rose-400",
+    illustration: "pineapple",
+    word: "Abacaxi",
+    word2: "Abelha",
+    speech: "Ááá! Ááá! Esta letra tem o som Á, como em Abacaxi e Abelha. Repita comigo: Ááá!",
+    teachId: "teach-a",
+  },
+  {
+    letter: "E",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
+    text: "border-emerald-400",
+    illustration: "elephant",
+    word: "Elefante",
+    word2: "Estrela",
+    speech: "Ééé! Ééé! Esta letra tem o som É, como em Elefante e Estrela. Repita comigo: Ééé!",
+    teachId: "teach-e",
+  },
+  {
+    letter: "I",
+    color: "text-amber-600",
+    bg: "bg-amber-100",
+    text: "border-amber-400",
+    illustration: "iguana",
+    word: "Iguana",
+    word2: "Igreja",
+    speech: "Iii! Iii! Esta letra tem o som I, como em Iguana e Igreja. Repita comigo: Iii!",
+    teachId: "teach-i",
+  },
+  {
+    letter: "O",
+    color: "text-blue-600",
+    bg: "bg-blue-100",
+    text: "border-blue-400",
+    illustration: "sheep",
+    word: "Ovelha",
+    word2: "Ovo",
+    speech: "Óóó! Óóó! Esta letra tem o som Ó, como em Ovelha e Ovo. Repita comigo: Óóó!",
+    teachId: "teach-o",
+  },
+  {
+    letter: "U",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
+    text: "border-violet-400",
+    illustration: "grape",
+    word: "Uva",
+    word2: "Urso",
+    speech: "Uuu! Uuu! Esta letra tem o som U, como em Uva e Urso. Repita comigo: Uuu!",
+    teachId: "teach-u",
+  },
+];
+
+const VOWEL_PROMPTS = [
+  (v: VowelInfo) =>
+    `Encontre a letra com som ${v.letter}${v.letter}${v.letter}! Toque na letra de ${v.word}!`,
+  (v: VowelInfo) => `Qual é a letra ${v.letter}? Toque nela!`,
+  (v: VowelInfo) => `${v.word} começa com qual letra? Toque na letra certa!`,
+  (v: VowelInfo) =>
+    `Ouça: ${v.letter}${v.letter}${v.letter}! Toque na letra que faz esse som!`,
+  (v: VowelInfo) => `Vamos achar a letra ${v.letter} de ${v.word2}! Toque nela!`,
+];
+
+const buildVowelPractice = (target: VowelInfo, variation: number): VowelPracticeStep => {
+  const others = VOWELS.filter((v) => v.letter !== target.letter);
+  const shift = variation % others.length;
+  const shifted = [...others.slice(shift), ...others.slice(0, shift)];
+  const distractors = shifted.slice(0, 2);
+  const pos = variation % 3;
+  const opts = [...distractors];
+  opts.splice(pos, 0, target);
+  return {
+    kind: "vowel-practice",
+    id: `practice-${target.letter.toLowerCase()}-${variation + 1}`,
+    target: target.letter,
+    target_color: target.color,
+    target_bg: target.bg,
+    question_speech: VOWEL_PROMPTS[variation % VOWEL_PROMPTS.length](target),
+    options: opts.map((v) => ({ letter: v.letter, color: v.color, bg: v.bg })),
+  };
+};
 
 export const VOGAIS_LESSON: EarlyLesson = {
   id: "vogais",
@@ -12,141 +111,23 @@ export const VOGAIS_LESSON: EarlyLesson = {
       speech:
         "Olá! Vou te ensinar as vogais! As vogais são letras muito especiais. Elas são: A, E, I, O, U! Vamos aprender juntos?",
     },
-
-    /* ── A ── */
-    {
-      kind: "vowel-teach",
-      id: "teach-a",
-      vowel: "A",
-      color: "text-rose-600",
-      bg: "bg-rose-100",
-      text: "border-rose-400",
-      illustration: "pineapple",
-      word: "Abacaxi",
-      word2: "Abelha",
-      speech: "Ááá! Ááá! Esta letra tem o som Á, como em Abacaxi e Abelha. Repita comigo: Ááá!",
-    },
-    {
-      kind: "vowel-practice",
-      id: "practice-a",
-      target: "A",
-      target_color: "text-rose-600",
-      target_bg: "bg-rose-100",
-      question_speech: "Encontre a letra com som Ááá! Toque na letra de Abacaxi!",
-      options: [
-        { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
-        { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
-        { letter: "O", color: "text-blue-600", bg: "bg-blue-100" },
-      ],
-    },
-
-    /* ── E ── */
-    {
-      kind: "vowel-teach",
-      id: "teach-e",
-      vowel: "E",
-      color: "text-emerald-600",
-      bg: "bg-emerald-100",
-      text: "border-emerald-400",
-      illustration: "elephant",
-      word: "Elefante",
-      word2: "Estrela",
-      speech: "Ééé! Ééé! Esta letra tem o som É, como em Elefante e Estrela. Repita comigo: Ééé!",
-    },
-    {
-      kind: "vowel-practice",
-      id: "practice-e",
-      target: "E",
-      target_color: "text-emerald-600",
-      target_bg: "bg-emerald-100",
-      question_speech: "Encontre a letra com som Ééé! Toque na letra de Elefante!",
-      options: [
-        { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
-        { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
-        { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
-      ],
-    },
-
-    /* ── I ── */
-    {
-      kind: "vowel-teach",
-      id: "teach-i",
-      vowel: "I",
-      color: "text-amber-600",
-      bg: "bg-amber-100",
-      text: "border-amber-400",
-      illustration: "iguana",
-      word: "Iguana",
-      word2: "Igreja",
-      speech: "Iii! Iii! Esta letra tem o som I, como em Iguana e Igreja. Repita comigo: Iii!",
-    },
-    {
-      kind: "vowel-practice",
-      id: "practice-i",
-      target: "I",
-      target_color: "text-amber-600",
-      target_bg: "bg-amber-100",
-      question_speech: "Encontre a letra com som Iii! Toque na letra de Iguana!",
-      options: [
-        { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
-        { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
-        { letter: "O", color: "text-blue-600", bg: "bg-blue-100" },
-      ],
-    },
-
-    /* ── O ── */
-    {
-      kind: "vowel-teach",
-      id: "teach-o",
-      vowel: "O",
-      color: "text-blue-600",
-      bg: "bg-blue-100",
-      text: "border-blue-400",
-      illustration: "sheep",
-      word: "Ovelha",
-      word2: "Ovo",
-      speech: "Óóó! Óóó! Esta letra tem o som Ó, como em Ovelha e Ovo. Repita comigo: Óóó!",
-    },
-    {
-      kind: "vowel-practice",
-      id: "practice-o",
-      target: "O",
-      target_color: "text-blue-600",
-      target_bg: "bg-blue-100",
-      question_speech: "Encontre a letra com som Óóó! Toque na letra de Ovelha!",
-      options: [
-        { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
-        { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
-        { letter: "O", color: "text-blue-600", bg: "bg-blue-100" },
-      ],
-    },
-
-    /* ── U ── */
-    {
-      kind: "vowel-teach",
-      id: "teach-u",
-      vowel: "U",
-      color: "text-violet-600",
-      bg: "bg-violet-100",
-      text: "border-violet-400",
-      illustration: "grape",
-      word: "Uva",
-      word2: "Urso",
-      speech: "Uuu! Uuu! Esta letra tem o som U, como em Uva e Urso. Repita comigo: Uuu!",
-    },
-    {
-      kind: "vowel-practice",
-      id: "practice-u",
-      target: "U",
-      target_color: "text-violet-600",
-      target_bg: "bg-violet-100",
-      question_speech: "Encontre a letra com som Uuu! Toque na letra de Uva!",
-      options: [
-        { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
-        { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
-        { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
-      ],
-    },
+    // Para cada vogal: 1 teach + 5 variações de prática.
+    // Total: 1 intro + 5 teach + 25 practice = 31 atividades (mesmo padrão de Vamos Contar).
+    ...VOWELS.flatMap((v) => [
+      {
+        kind: "vowel-teach" as const,
+        id: v.teachId,
+        vowel: v.letter,
+        color: v.color,
+        bg: v.bg,
+        text: v.text,
+        illustration: v.illustration,
+        word: v.word,
+        word2: v.word2,
+        speech: v.speech,
+      },
+      ...Array.from({ length: 5 }, (_, i) => buildVowelPractice(v, i)),
+    ]),
   ],
 };
 
