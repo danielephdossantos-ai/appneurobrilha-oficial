@@ -149,20 +149,29 @@ export async function gerarESalvarPlanoTrimestral(
   const perfil = await carregarPerfil(childId);
   const serie = serieParaIdade(perfil.idade);
 
-  const [aulasBncc, reforco, fadigaAlta] = await Promise.all([
+  const [aulasBncc, reforco, fadigaAlta, jaUsadas] = await Promise.all([
     carregarAulasBncc(serie),
     carregarReforco(childId),
     detectarFadiga(childId),
+    carregarAulasJaUsadas(childId),
   ]);
+
+  // NÃO repetir aulas já dadas em bimestres anteriores
+  const usadasSet = new Set(jaUsadas);
+  const inedidas = aulasBncc.filter(
+    (a) => !usadasSet.has(a.id),
+  );
+  // Se esgotou tudo da série, reinicia o ciclo (criança já fez todas)
+  const pool = inedidas.length >= 6 ? inedidas : aulasBncc;
 
   const ctx: AdaptacaoCtx = {
     fadigaAlta,
     habilidadesParaReforco: reforco,
   };
 
-  const plano: PlanoGerado = gerarPlanoTrimestral(perfil, aulasBncc, ctx, {
+  const plano: PlanoGerado = gerarPlanoTrimestral(perfil, pool, ctx, {
     inicio: opts.inicio,
-    totalAulas: opts.totalAulas ?? 90,
+    totalAulas: opts.totalAulas ?? 60,
   });
 
   await expirarPlanosAnteriores(childId);
