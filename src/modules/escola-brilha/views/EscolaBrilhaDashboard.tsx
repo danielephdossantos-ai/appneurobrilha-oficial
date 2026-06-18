@@ -175,40 +175,17 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2.5">
-                    {staticCards.map((cat, i) => (
-                      <LessonCard
-                        key={`s-${cat.id}`}
-                        index={i}
-                        title={cat.title}
-                        subtitle={cat.subtitle}
-                        badge={cat.badge}
-                        badgeColor={cat.badgeColor}
-                        gradient={cat.gradient}
-                        xp={cat.xp}
-                        bncc={cat.bncc}
-                        illustration={cat.illustration}
-                        onClick={() => goToActivity(cat.id, cat.type)}
-                      />
-                    ))}
-                    {dbCards.map((a, i) => (
-                      <LessonCard
-                        key={`d-${a.id}`}
-                        index={staticCards.length + i}
-                        title={a.titulo}
-                        subtitle={a.descricao ?? a.disciplina}
-                        badge={a.disciplina}
-                        badgeColor="bg-emerald-100 text-emerald-700"
-                        gradient="from-emerald-500 to-teal-600"
-                        xp={a.xp}
-                        bncc={a.codigo_bncc}
-                        onClick={() => goToAulaBanco(a.id)}
-                      />
-                    ))}
-                  </div>
+                  <SubjectFolders
+                    serie={serie}
+                    staticCards={staticCards}
+                    dbCards={dbCards}
+                    onStaticClick={goToActivity}
+                    onDbClick={goToAulaBanco}
+                  />
                 </section>
               );
             })}
+
 
             {!loading && allSeries.every((s) =>
               !staticItems.some((x) => x.serie === s) && !aulasBanco.some((x) => x.serie === s),
