@@ -29,13 +29,14 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-const ROTAS: Record<string, string> = {
-  "neuro-treino": "/neuro-treino",
-  alfabetizacao: "/neuro-treino",
-  matematica: "/neuro-treino",
-  leitura: "/neuro-treino",
-  movimento: "/neuro-treino",
-};
+// Tipos de bloco que abrem o player de neuro-treino com slug específico.
+const TIPOS_NEURO = new Set([
+  "neuro-treino",
+  "alfabetizacao",
+  "matematica",
+  "leitura",
+  "movimento",
+]);
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
@@ -91,8 +92,11 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         .eq("id", aula.id);
       queryClient.invalidateQueries({ queryKey: ["pei-aula-hoje", childId, hoje] });
     }
-    const rota = ROTAS[bloco.tipo] ?? "/neuro-treino";
-    navigate({ to: rota });
+    if (TIPOS_NEURO.has(bloco.tipo) && bloco.slug) {
+      navigate({ to: "/neuro-treino/$slug", params: { slug: bloco.slug } });
+    } else {
+      navigate({ to: "/neuro-treino" });
+    }
   }
 
   async function concluirAula() {
