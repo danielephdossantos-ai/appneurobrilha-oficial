@@ -2,11 +2,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw } from "lucide-react";
 
-import imgBravo from "@/assets/neuro-treino/emocoes/bravo.png";
-import imgTriste from "@/assets/neuro-treino/emocoes/triste.png";
-import imgSurpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
-import imgSono from "@/assets/neuro-treino/emocoes/sono.png";
-import imgFeliz from "@/assets/neuro-treino/emocoes/feliz.png";
+import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
+import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
+import imgSurpreso from "@/assets/brilha-vida/emocoes/confuso.png";
+import imgSono from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
 
 /**
  * Termômetro das Emoções
