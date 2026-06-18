@@ -15,6 +15,11 @@ import {
   CountPracticeStep,
   SubtractStep,
 } from "../types/early-lesson";
+import {
+  getRotationHead,
+  advanceRotationHead,
+  rotateFrom,
+} from "../utils/lessonRotation";
 
 interface Props {
   lesson: EarlyLesson;
