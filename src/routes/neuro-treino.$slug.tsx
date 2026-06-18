@@ -508,6 +508,58 @@ function ConscienciaFonologica({ p, onDone }: any) {
   );
 }
 
+// ============== Consciência Silábica (4 sub-tarefas, padrão 2D) ==============
+function ConscienciaSilabica({ p, onDone }: any) {
+  const headers: Record<string, string> = {
+    contar: `Qual palavra tem ${p.n} pedacinhos?`,
+    inicial: `Qual começa com a sílaba ${p.silaba}?`,
+    final: `Qual termina com a sílaba ${p.silaba}?`,
+    formar: `Junte as sílabas: ${(p.partes || []).join(" + ")}`,
+  };
+  const tipoLabel: Record<string, string> = {
+    contar: "Contar Sílabas",
+    inicial: "Sílaba Inicial",
+    final: "Sílaba Final",
+    formar: "Formar Palavra",
+  };
+  return (
+    <div className="text-center">
+      <div className="inline-block px-4 py-1 mb-3 rounded-full bg-coral/15 text-coral text-xs font-extrabold uppercase tracking-wider">
+        {tipoLabel[p.tipo] || p.tipo}
+      </div>
+      <div className="text-2xl md:text-3xl font-black mb-6 text-foreground">{headers[p.tipo]}</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {p.options.map((o: any, i: number) => {
+          const img = objetoImg(o.nome);
+          return (
+            <button
+              key={i}
+              onClick={() => onDone(o.nome === p.correctName)}
+              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-primary hover:scale-105 transition-all flex flex-col items-center gap-2"
+            >
+              {img ? (
+                <img
+                  src={img}
+                  alt={o.nome}
+                  width={128}
+                  height={128}
+                  loading="lazy"
+                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                />
+              ) : (
+                <div className="w-24 h-24 md:w-28 md:h-28 grid place-items-center rounded-xl bg-muted text-2xl font-black text-muted-foreground">
+                  {o.nome.slice(0, 2)}
+                </div>
+              )}
+              <div className="font-bold text-sm">{o.nome}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ============== 2. Motorzinho dos Sons (Clínico Fono + Voz IA + Mic) ==============
 function Motorzinho({ p, onDone }: any) {
   const { hiperfoco } = useHiperfoco();
