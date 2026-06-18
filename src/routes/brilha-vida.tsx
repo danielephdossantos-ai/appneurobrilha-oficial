@@ -97,7 +97,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando" | "minhavez" | "regras" | "conflitos" | "diario" | "elogio" | "bolha" | "roda">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -149,6 +149,22 @@ function BrilhaVida() {
     }
     if (tipo === "Resolução de Conflitos") {
       setCustomActivity("conflitos");
+      return;
+    }
+    if (tipo === "Diário do Sentir") {
+      setCustomActivity("diario");
+      return;
+    }
+    if (tipo === "Elogio Mágico") {
+      setCustomActivity("elogio");
+      return;
+    }
+    if (tipo === "Bolha de Bem-Estar") {
+      setCustomActivity("bolha");
+      return;
+    }
+    if (tipo === "Roda do Dia") {
+      setCustomActivity("roda");
       return;
     }
     setIsLoading(true);
