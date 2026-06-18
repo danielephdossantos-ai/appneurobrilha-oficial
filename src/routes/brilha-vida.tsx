@@ -11,6 +11,9 @@ import { SemaforoSentir } from "@/components/brilha-vida/SemaforoSentir";
 import { CantinhoCalma } from "@/components/brilha-vida/CantinhoCalma";
 import { ComoEstouAgora } from "@/components/brilha-vida/ComoEstouAgora";
 import { EmojiMagico } from "@/components/brilha-vida/EmojiMagico";
+import { HistoriasSociais } from "@/components/brilha-vida/HistoriasSociais";
+import { DividindoBrinquedo } from "@/components/brilha-vida/DividindoBrinquedo";
+import { CuidandoAmigo } from "@/components/brilha-vida/CuidandoAmigo";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -87,7 +90,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico" | "historias" | "dividindo" | "cuidando">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -115,6 +118,18 @@ function BrilhaVida() {
     }
     if (tipo === "Emoji Mágico") {
       setCustomActivity("emojimagico");
+      return;
+    }
+    if (tipo === "Histórias Sociais") {
+      setCustomActivity("historias");
+      return;
+    }
+    if (tipo === "Dividindo o Brinquedo") {
+      setCustomActivity("dividindo");
+      return;
+    }
+    if (tipo === "Cuidando do Amigo") {
+      setCustomActivity("cuidando");
       return;
     }
     setIsLoading(true);
@@ -196,6 +211,30 @@ function BrilhaVida() {
     return (
       <Shell>
         <EmojiMagico onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "historias") {
+    return (
+      <Shell>
+        <HistoriasSociais onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "dividindo") {
+    return (
+      <Shell>
+        <DividindoBrinquedo onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "cuidando") {
+    return (
+      <Shell>
+        <CuidandoAmigo onClose={() => setCustomActivity(null)} />
       </Shell>
     );
   }
