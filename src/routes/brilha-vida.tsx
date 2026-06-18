@@ -135,9 +135,7 @@ function BrilhaVida() {
     );
   }
 
-      </Shell>
-    );
-  }
+
 
   if (activeActivity) {
     return (
