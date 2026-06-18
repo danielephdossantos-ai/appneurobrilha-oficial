@@ -107,6 +107,14 @@ import hfCreeper from "@/assets/hiperfocos/minecraft/creeper.png";
 import hfSteve from "@/assets/hiperfocos/minecraft/steve.png";
 import hfAlex from "@/assets/hiperfocos/minecraft/alex.png";
 
+// Sentidos (Ciências 1º Ano)
+import sOlho from "@/assets/neuro-treino/sentidos/olho.png";
+import sOuvido from "@/assets/neuro-treino/sentidos/ouvido.png";
+import sNariz from "@/assets/neuro-treino/sentidos/nariz.png";
+import sLingua from "@/assets/neuro-treino/sentidos/lingua.png";
+import sMao from "@/assets/neuro-treino/sentidos/mao.png";
+
+
 export const OBJETO_IMG: Record<string, string> = {
   BOLA: bola,
   GATO: gato,
@@ -236,6 +244,23 @@ export const OBJETO_IMG: Record<string, string> = {
   MEDO: medo,
   SONO: sono,
   ZUMBI: hfCreeper,
+  // Sentidos
+  OLHO: sOlho,
+  OLHOS: sOlho,
+  VISAO: sOlho,
+  VISÃO: sOlho,
+  OUVIDO: sOuvido,
+  ORELHA: sOuvido,
+  AUDIÇÃO: sOuvido,
+  AUDICAO: sOuvido,
+  NARIZ: sNariz,
+  OLFATO: sNariz,
+  LINGUA: sLingua,
+  LÍNGUA: sLingua,
+  PALADAR: sLingua,
+  MAO: sMao,
+  MÃO: sMao,
+  TATO: sMao,
 };
 
 
