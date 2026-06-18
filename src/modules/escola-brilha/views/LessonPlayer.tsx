@@ -152,8 +152,10 @@ const LegacyLessonPlayer: React.FC = () => {
     }
     if (step.type === "interaction" && step.interaction?.options) {
       const options = step.interaction.options;
+      // Não ler números das opções em voz alta — a criança lê visualmente
+      // e clica. Só lê opções textuais não-numéricas (ex.: palavras).
       const textOptions = options.filter(
-        (opt: string) => !isPictograph(opt) && !objetoImg(opt),
+        (opt: string) => !isPictograph(opt) && !objetoImg(opt) && !/^\d+$/.test(String(opt).trim()),
       );
       if (textOptions.length > 0) {
         const optionsText =
@@ -163,6 +165,7 @@ const LegacyLessonPlayer: React.FC = () => {
         text += ". " + optionsText + "?";
       }
     }
+
     return text;
   };
 
