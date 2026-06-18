@@ -105,7 +105,7 @@ export const EarlyChildhoodPlayer: React.FC<Props> = ({ lesson, onBack }) => {
           </button>
         </div>
         <p className="text-center text-xs font-bold text-slate-400 mt-1">
-          {stepIdx + 1} / {lesson.steps.length}
+          {stepIdx + 1} / {rotatedSteps.length}
         </p>
       </div>
 
