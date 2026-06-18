@@ -24,7 +24,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "pineapple",
       word: "Abacaxi",
       word2: "Abelha",
-      speech: "A! Essa é a letra A! A de Abacaxi! A de Abelha! Repita comigo: A!",
+      speech: "Á! Essa é a letra Á! Á de Abacaxi! Á de Abelha! Repita comigo: Á!",
     },
     {
       kind: "vowel-practice",
@@ -32,7 +32,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "A",
       target_color: "text-rose-600",
       target_bg: "bg-rose-100",
-      question_speech: "Encontre a letra A! Toque na letra A!",
+      question_speech: "Encontre a letra Á! Toque na letra Á!",
       options: [
         { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
@@ -51,7 +51,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "elephant",
       word: "Elefante",
       word2: "Estrela",
-      speech: "E! Essa é a letra E! E de Elefante! E de Estrela! Repita comigo: E!",
+      speech: "É! Essa é a letra É! É de Elefante! É de Estrela! Repita comigo: É!",
     },
     {
       kind: "vowel-practice",
@@ -59,7 +59,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "E",
       target_color: "text-emerald-600",
       target_bg: "bg-emerald-100",
-      question_speech: "Encontre a letra E! Qual é a letra E?",
+      question_speech: "Encontre a letra É! Qual é a letra É?",
       options: [
         { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
@@ -78,7 +78,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "iguana",
       word: "Iguana",
       word2: "Igreja",
-      speech: "I! Essa é a letra I! I de Iguana! I de Igreja! Repita comigo: I!",
+      speech: "I! Essa é a letra I, igual ao I de Iguana! I de Igreja! Repita comigo: I!",
     },
     {
       kind: "vowel-practice",
@@ -105,7 +105,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "sheep",
       word: "Ovelha",
       word2: "Ovo",
-      speech: "O! Essa é a letra O! O de Ovelha! O de Ovo! Repita comigo: O!",
+      speech: "Ó! Essa é a letra Ó! Ó de Ovelha! Ó de Ovo! Repita comigo: Ó!",
     },
     {
       kind: "vowel-practice",
@@ -113,7 +113,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "O",
       target_color: "text-blue-600",
       target_bg: "bg-blue-100",
-      question_speech: "Qual é a letra O? Toque na letra O!",
+      question_speech: "Qual é a letra Ó? Toque na letra Ó!",
       options: [
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
         { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
@@ -132,7 +132,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "grape",
       word: "Uva",
       word2: "Urso",
-      speech: "U! Essa é a letra U! U de Uva! U de Urso! Repita comigo: U!",
+      speech: "U! Essa é a letra U, igual ao U de Uva! U de Urso! Repita comigo: U!",
     },
     {
       kind: "vowel-practice",
