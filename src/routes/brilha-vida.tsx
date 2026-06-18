@@ -9,6 +9,8 @@ import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
 import { TermometroEmocoes } from "@/components/brilha-vida/TermometroEmocoes";
 import { SemaforoSentir } from "@/components/brilha-vida/SemaforoSentir";
 import { CantinhoCalma } from "@/components/brilha-vida/CantinhoCalma";
+import { ComoEstouAgora } from "@/components/brilha-vida/ComoEstouAgora";
+import { EmojiMagico } from "@/components/brilha-vida/EmojiMagico";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -85,7 +87,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro" | "semaforo" | "cantinho" | "comoestou" | "emojimagico">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -105,6 +107,14 @@ function BrilhaVida() {
     }
     if (tipo === "Cantinho da Calma") {
       setCustomActivity("cantinho");
+      return;
+    }
+    if (tipo === "Como estou agora?") {
+      setCustomActivity("comoestou");
+      return;
+    }
+    if (tipo === "Emoji Mágico") {
+      setCustomActivity("emojimagico");
       return;
     }
     setIsLoading(true);
@@ -170,6 +180,22 @@ function BrilhaVida() {
     return (
       <Shell>
         <CantinhoCalma onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "comoestou") {
+    return (
+      <Shell>
+        <ComoEstouAgora onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "emojimagico") {
+    return (
+      <Shell>
+        <EmojiMagico onClose={() => setCustomActivity(null)} />
       </Shell>
     );
   }
