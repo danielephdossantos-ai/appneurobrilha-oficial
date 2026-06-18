@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
+import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -81,10 +82,16 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
     if (!activeChild) return;
+    // Atividades com componente próprio (não passam pelo engine)
+    if (tipo === "Pausa para Respirar") {
+      setCustomActivity("respirar");
+      return;
+    }
     setIsLoading(true);
 
     // Simular atraso para feedback visual lúdico
@@ -119,6 +126,14 @@ function BrilhaVida() {
       }
     }, 800);
   };
+
+  if (customActivity === "respirar") {
+    return (
+      <Shell>
+        <PausaRespirar onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
 
   if (activeActivity) {
     return (
