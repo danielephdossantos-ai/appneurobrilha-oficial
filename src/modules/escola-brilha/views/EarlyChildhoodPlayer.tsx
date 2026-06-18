@@ -33,6 +33,12 @@ function delay(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+const NUMBER_WORDS = [
+  "Um", "Dois", "Três", "Quatro", "Cinco",
+  "Seis", "Sete", "Oito", "Nove", "Dez",
+];
+
+
 /* ─── MAIN PLAYER ────────────────────────────────────── */
 export const EarlyChildhoodPlayer: React.FC<Props> = ({ lesson, onBack }) => {
   /* Fila rotativa: separa o intro das atividades e rotaciona a partir da cabeça salva. */
