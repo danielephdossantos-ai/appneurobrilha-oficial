@@ -2107,6 +2107,199 @@ const CL_BANK: ClItem[] = [
     ],
     correta: 1,
   },
+
+  // ── NÍVEL 1 — extras ────────────────────────────────────────────────
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "A Ana ganhou um balão vermelho.",
+    pergunta: "De que cor era o balão?",
+    opcoes: ["Azul", "Amarelo", "Vermelho", "Verde"],
+    correta: 2,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "O Léo comeu duas maçãs no café da manhã.",
+    pergunta: "Quantas maçãs o Léo comeu?",
+    opcoes: ["Uma", "Duas", "Três", "Nenhuma"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "inferencial",
+    texto: "A Bia colocou o casaco, o gorro e as luvas antes de sair.",
+    pergunta: "Como provavelmente estava o tempo?",
+    opcoes: ["Quente", "Frio", "Chovendo", "Ventando areia"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "O Theo brincou na praia com a pá e o baldinho.",
+    pergunta: "Onde o Theo estava brincando?",
+    opcoes: ["No parque", "Na praia", "Na escola", "Em casa"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "inferencial",
+    texto: "A Lara bocejou várias vezes e esfregou os olhos.",
+    pergunta: "Como a Lara estava se sentindo?",
+    opcoes: ["Animada", "Com sono", "Com fome", "Com medo"],
+    correta: 1,
+  },
+  {
+    nivel: 1,
+    tipo: "literal",
+    texto: "O pintinho amarelo seguia a galinha pelo terreiro.",
+    pergunta: "Quem o pintinho estava seguindo?",
+    opcoes: ["O pato", "O cachorro", "A galinha", "A vaca"],
+    correta: 2,
+  },
+
+  // ── NÍVEL 2 — extras ────────────────────────────────────────────────
+  {
+    nivel: 2,
+    tipo: "literal",
+    texto: "A Sofia foi à feira com a avó e comprou três bananas, duas mangas e uma melancia.",
+    pergunta: "O que a Sofia NÃO comprou na feira?",
+    opcoes: ["Bananas", "Mangas", "Melancia", "Uvas"],
+    correta: 3,
+  },
+  {
+    nivel: 2,
+    tipo: "inferencial",
+    texto: "O Caio olhou pela janela e viu o céu cheio de nuvens cinzas. Pegou rapidinho o guarda-chuva antes de sair.",
+    pergunta: "Por que o Caio pegou o guarda-chuva?",
+    opcoes: [
+      "Porque estava com calor",
+      "Porque achou que ia chover",
+      "Porque queria brincar",
+      "Porque o pai pediu",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "interpretativa",
+    texto:
+      "A Helena ficou triste porque ninguém quis sentar com ela no recreio. A Manu viu, foi até lá e perguntou se podia almoçar junto.",
+    pergunta: "O que a Manu mostrou nessa atitude?",
+    opcoes: ["Egoísmo", "Empatia", "Raiva", "Pressa"],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "literal",
+    texto: "O Bento guardou os brinquedos, escovou os dentes e pegou o livro favorito para ler antes de dormir.",
+    pergunta: "Qual foi a última coisa que o Bento fez?",
+    opcoes: [
+      "Guardou os brinquedos",
+      "Escovou os dentes",
+      "Pegou o livro",
+      "Apagou a luz",
+    ],
+    correta: 2,
+  },
+  {
+    nivel: 2,
+    tipo: "inferencial",
+    texto: "A Clara entrou em casa toda molhada, tirando os sapatos cheios de água.",
+    pergunta: "O que provavelmente estava acontecendo lá fora?",
+    opcoes: ["Sol forte", "Chuva", "Neve", "Vento seco"],
+    correta: 1,
+  },
+  {
+    nivel: 2,
+    tipo: "interpretativa",
+    texto:
+      "O Rafa quebrou sem querer o vaso da mãe. Pensou em esconder, mas chamou a mãe e contou o que aconteceu.",
+    pergunta: "O que o Rafa demonstrou ao contar a verdade?",
+    opcoes: ["Medo", "Honestidade", "Distração", "Pressa"],
+    correta: 1,
+  },
+
+  // ── NÍVEL 3 — extras ────────────────────────────────────────────────
+  {
+    nivel: 3,
+    tipo: "literal",
+    texto:
+      "A turma da professora Iris organizou uma feira de ciências. A Lia apresentou um vulcão de bicarbonato, o Murilo mostrou um circuito com lâmpada e a Bea trouxe formigas num formigueiro de vidro.",
+    pergunta: "O que o Murilo apresentou na feira?",
+    opcoes: [
+      "Um vulcão de bicarbonato",
+      "Um circuito com lâmpada",
+      "Um formigueiro de vidro",
+      "Um foguete de papel",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "inferencial",
+    texto:
+      "Quando o sinal do recreio tocou, o Vitor continuou na carteira terminando o desenho. A professora se aproximou e sorriu sem dizer nada, deixando ele continuar.",
+    pergunta: "Por que a professora deixou o Vitor continuar?",
+    opcoes: [
+      "Porque ele estava de castigo",
+      "Porque ele estava muito concentrado no que fazia",
+      "Porque ela tinha esquecido do recreio",
+      "Porque o sinal estava quebrado",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "interpretativa",
+    texto:
+      "O João tinha medo de subir no escorregador grande do parque. Todo dia ia até a escadinha, olhava pra cima e voltava. Numa tarde, respirou fundo, subiu degrau por degrau e desceu rindo. Quando chegou em casa, contou pra todo mundo.",
+    pergunta: "Qual é a melhor lição dessa história?",
+    opcoes: [
+      "Escorregadores grandes são perigosos",
+      "Enfrentar o medo aos poucos dá coragem",
+      "É melhor não tentar nada novo",
+      "Crianças não devem ir ao parque sozinhas",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "literal",
+    texto:
+      "Para a viagem de fim de semana, a família do Nico arrumou as malas: roupas de banho, protetor solar, óculos escuros e dois livros de aventura. Saíram cedo de carro e demoraram quatro horas até chegar.",
+    pergunta: "Como a família do Nico foi para a viagem?",
+    opcoes: ["De avião", "De ônibus", "De carro", "De barco"],
+    correta: 2,
+  },
+  {
+    nivel: 3,
+    tipo: "inferencial",
+    texto:
+      "A Cecília treinava ballet há dois anos. Na apresentação de final de ano, ela errou um passo e parou no meio do palco. Respirou fundo, sorriu e voltou a dançar como se nada tivesse acontecido. No fim, todos aplaudiram em pé.",
+    pergunta: "O que a atitude da Cecília mostra sobre ela?",
+    opcoes: [
+      "Que não se importava com ballet",
+      "Que sabe se recuperar dos erros",
+      "Que dança melhor do que todos",
+      "Que estava com medo do palco",
+    ],
+    correta: 1,
+  },
+  {
+    nivel: 3,
+    tipo: "interpretativa",
+    texto:
+      "O Pedro queria muito o brinquedo novo da loja. Em vez de pedir aos pais, juntou as moedinhas que ganhava por ajudar em casa durante três meses. Quando finalmente comprou, ele cuidava do brinquedo com muito mais carinho do que dos outros.",
+    pergunta: "Por que o Pedro cuidava tanto desse brinquedo?",
+    opcoes: [
+      "Porque era o mais caro de todos",
+      "Porque o brinquedo era frágil",
+      "Porque tinha conquistado com o próprio esforço",
+      "Porque os pais mandaram cuidar",
+    ],
+    correta: 2,
+  },
 ];
 
 const COMPREENSAO_LEITORA_VARS: Variation[] = CL_BANK.map((it, i) => ({
