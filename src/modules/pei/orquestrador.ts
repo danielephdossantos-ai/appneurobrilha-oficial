@@ -134,6 +134,30 @@ async function registrarAdaptacao(
   if (error) console.warn("[PEI] log adaptação falhou:", error.message);
 }
 
+// Lê todas as aulas BNCC já gastas em planos anteriores (qualquer status)
+async function carregarAulasJaUsadas(childId: string): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("pei_aulas")
+    .select("atividades")
+    .eq("child_id", childId)
+    .limit(2000);
+  if (error) {
+    console.warn("[PEI] histórico indisponível:", error.message);
+    return [];
+  }
+  const ids: string[] = [];
+  for (const row of data ?? []) {
+    const ats = (row.atividades ?? []) as Array<{
+      payload?: { aula_id?: string };
+    }>;
+    for (const a of ats) {
+      const id = a?.payload?.aula_id;
+      if (typeof id === "string") ids.push(id);
+    }
+  }
+  return ids;
+}
+
 async function expirarPlanosAnteriores(childId: string) {
   await supabase
     .from("pei_planos")
