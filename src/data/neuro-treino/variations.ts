@@ -2219,6 +2219,7 @@ export const GRUPOS = [
       "pedacinhos-da-palavra",
       "consciencia-fonologica",
       "consciencia-silabica",
+      "compreensao-leitora",
     ] as CategoriaSlug[],
   },
   {
