@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import planetaOceanoImg from "@/assets/escola-brilha/ciencias6/planeta-oceano.png";
+import amazoniaImg from "@/assets/escola-brilha/geografia6/amazonia.png";
 
 /* ════════════════════════════════════
    BIOMAS BRASILEIROS  (EF06GE08)
