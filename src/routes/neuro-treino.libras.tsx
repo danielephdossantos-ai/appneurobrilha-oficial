@@ -13,7 +13,7 @@ type Modo = "menu" | "aprender" | "memoria" | "identificar" | "associacao";
 
 function LibrasModulo() {
   const [trilhaSlug, setTrilhaSlug] = useState<TrilhaSlug>("alfabeto");
-  const [nivel, setNivel] = useState<1 | 2 | 3>(1);
+  const [nivel, setNivel] = useState<1 | 2 | 3>(3);
   const [modo, setModo] = useState<Modo>("menu");
   const [estrelas, setEstrelas] = useState(0);
 
