@@ -7,6 +7,7 @@ import { LessonHeader } from "../components/LessonHeader";
 import { AudioSpeechService } from "../services/AudioSpeechService";
 import { Lesson, LessonPerformance } from "../types/lesson";
 import { useSearch } from "@tanstack/react-router";
+import { getRotationHead, advanceRotationHead, rotateFrom } from "../utils/lessonRotation";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 import { semEmoji, objetoImg } from "@/data/neuro-treino/objetos";
 import * as Lessons from "../data/lessons";
@@ -78,7 +79,7 @@ export const LessonPlayer: React.FC = () => {
 const LegacyLessonPlayer: React.FC = () => {
   const search = useSearch({ from: "/escola-brilha/aula" }) as { category: string };
 
-  const currentLesson = React.useMemo((): Lesson => {
+  const baseLesson = React.useMemo((): Lesson => {
     switch (search.category) {
       case "matematica":
         return Lessons.MATH_1ANO_LESSON;
@@ -92,6 +93,14 @@ const LegacyLessonPlayer: React.FC = () => {
         return Lessons.LANG_LESSON;
     }
   }, [search.category]);
+
+  /* Fila rotativa: cada execução continua de onde parou (localStorage por lesson.id). */
+  const currentLesson = React.useMemo((): Lesson => {
+    const total = baseLesson.steps.length;
+    if (total <= 1) return baseLesson;
+    const head = getRotationHead(baseLesson.id, total);
+    return { ...baseLesson, steps: rotateFrom(baseLesson.steps, head) };
+  }, [baseLesson]);
 
   const isSecondYear = search.category.includes("2ano");
 
@@ -209,6 +218,8 @@ const LegacyLessonPlayer: React.FC = () => {
       await AudioSpeechService.speak("Isso mesmo! Você é demais!");
       setIsSpeaking(false);
       await new Promise((r) => setTimeout(r, 600));
+      /* Cada atividade concluída avança a cabeça da fila rotativa. */
+      advanceRotationHead(baseLesson.id, baseLesson.steps.length);
       if (currentStepIndex < currentLesson.steps.length - 1) {
         setCurrentStepIndex((prev) => prev + 1);
       } else {
