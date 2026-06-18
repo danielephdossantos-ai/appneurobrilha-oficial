@@ -1,62 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check, BookOpen } from "lucide-react";
-
-import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
-
-/**
- * Histórias Sociais
- * Pequenas histórias do dia a dia em que a criança escolhe a melhor atitude.
- * Cada escolha mostra a consequência e ensina por que aquela é a melhor.
- */
-
-type Opcao = { texto: string; certo: boolean; feedback: string };
-type Historia = { titulo: string; cena: string; img: string; opcoes: Opcao[] };
-
-const HISTORIAS: Historia[] = [
-  {
-    titulo: "O lápis emprestado",
-    cena: "Lucas esqueceu o estojo e pede seu lápis emprestado. Você tem dois iguais.",
-    img: imgConfuso,
-    opcoes: [
-      { texto: "Empresto e digo que devolva no fim da aula.", certo: true, feedback: "Ajudar amigos com gentileza fortalece a amizade. 💛" },
-      { texto: "Digo que não emprestou e guardo na mochila.", certo: false, feedback: "Lucas ficaria triste. Quando podemos ajudar, vale a pena." },
-      { texto: "Empresto, mas fico bravo sem dizer.", certo: false, feedback: "Se algo te incomoda, é melhor falar com calma." },
-    ],
-  },
-  {
-    titulo: "A nova colega",
-    cena: "Chegou uma aluna nova e ninguém quer brincar com ela no recreio.",
-    img: imgTriste,
-    opcoes: [
-      { texto: "Convido para brincar comigo e meus amigos.", certo: true, feedback: "Acolher quem está sozinho é um superpoder! ✨" },
-      { texto: "Olho de longe e continuo brincando.", certo: false, feedback: "Imagine como ela está se sentindo. Um 'oi' já ajuda muito." },
-      { texto: "Rio com os colegas porque ela está sozinha.", certo: false, feedback: "Isso magoa. Trate o outro como você gosta de ser tratado." },
-    ],
-  },
-  {
-    titulo: "O brinquedo quebrado",
-    cena: "Sem querer, você quebrou o carrinho do seu primo.",
-    img: imgConfuso,
-    opcoes: [
-      { texto: "Conto a verdade e peço desculpa.", certo: true, feedback: "Ser honesto e pedir desculpa mostra coragem de verdade." },
-      { texto: "Escondo o carrinho atrás do sofá.", certo: false, feedback: "Esconder só piora. A verdade sempre aparece." },
-      { texto: "Falo que foi o cachorro.", certo: false, feedback: "Mentir machuca a confiança de quem te ama." },
-    ],
-  },
-  {
-    titulo: "A vez do amigo",
-    cena: "Você está jogando há muito tempo e seu irmão também quer jogar.",
-    img: imgFeliz,
-    opcoes: [
-      { texto: "Termino essa fase e passo o controle.", certo: true, feedback: "Dividir o tempo é uma forma de cuidado. 🎮" },
-      { texto: "Falo 'mais cinco minutinhos' e jogo o dia todo.", certo: false, feedback: "Combinar e cumprir é importante para a confiança." },
-      { texto: "Grito que é meu e não solto.", certo: false, feedback: "Gritar afasta. Conversar aproxima." },
-    ],
-  },
-];
+import { HISTORIAS } from "@/data/brilha-vida/cenarios";
 
 export function HistoriasSociais({ onClose }: { onClose: () => void }) {
   const historias = useMemo(() => [...HISTORIAS].sort(() => Math.random() - 0.5), []);
