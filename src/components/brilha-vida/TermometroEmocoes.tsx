@@ -111,7 +111,7 @@ export function TermometroEmocoes({ onClose }: { onClose: () => void }) {
               }`}
               style={selecionado === n.id ? { borderColor: n.cor } : {}}
             >
-              <span className="text-3xl">{n.emoji}</span>
+              <img src={n.img} alt={n.nome} width={48} height={48} className="w-12 h-12 object-contain drop-shadow-sm" />
               <span className="font-black text-slate-700 text-sm">{n.nome}</span>
             </button>
           ))}
