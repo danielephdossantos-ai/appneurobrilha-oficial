@@ -11,6 +11,33 @@ import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
 import catAmizadeImg from "@/assets/brilha-vida/categoria-amizade.png";
 import catAutocontroleImg from "@/assets/brilha-vida/categoria-autocontrole.png";
 import catRotinaImg from "@/assets/brilha-vida/categoria-rotina.png";
+import atvTermometroImg from "@/assets/brilha-vida/termometro-emocoes.png";
+import atvComoEstouImg from "@/assets/brilha-vida/como-estou.png";
+import atvEmojiMagicoImg from "@/assets/brilha-vida/emoji-magico.png";
+import atvHistoriasImg from "@/assets/brilha-vida/historias-sociais.png";
+import atvDividindoImg from "@/assets/brilha-vida/dividindo-brinquedo.png";
+import atvCuidandoImg from "@/assets/brilha-vida/cuidando-amigo.png";
+import atvRespirarImg from "@/assets/brilha-vida/pausa-respirar.png";
+import atvCantinhoImg from "@/assets/brilha-vida/cantinho-calma.png";
+import atvSemaforoImg from "@/assets/brilha-vida/semaforo-sentir.png";
+import atvMinhaVezImg from "@/assets/brilha-vida/minha-vez.png";
+import atvRegrasImg from "@/assets/brilha-vida/regras-casa.png";
+import atvConflitosImg from "@/assets/brilha-vida/resolucao-conflitos.png";
+
+const ATIVIDADE_IMG: Record<string, string> = {
+  "Termômetro das Emoções": atvTermometroImg,
+  "Como estou agora?": atvComoEstouImg,
+  "Emoji Mágico": atvEmojiMagicoImg,
+  "Histórias Sociais": atvHistoriasImg,
+  "Dividindo o Brinquedo": atvDividindoImg,
+  "Cuidando do Amigo": atvCuidandoImg,
+  "Pausa para Respirar": atvRespirarImg,
+  "Cantinho da Calma": atvCantinhoImg,
+  "Semáforo do Sentir": atvSemaforoImg,
+  "Minha vez, sua vez": atvMinhaVezImg,
+  "Regras da Casa": atvRegrasImg,
+  "Resolução de Conflitos": atvConflitosImg,
+};
 
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
@@ -191,11 +218,24 @@ function BrilhaVida() {
                   onClick={() => startLevel(atv)}
                   className={`group relative overflow-hidden text-left p-5 rounded-[2rem] bg-gradient-to-br ${cat.cor} border-2 border-transparent hover:border-primary/20 transition-all hover:shadow-glow btn-tap`}
                 >
-                  <div className="font-extrabold text-slate-800 text-lg mb-1">{atv}</div>
+                  <div className="flex items-center gap-3 mb-2">
+                    {ATIVIDADE_IMG[atv] && (
+                      <img
+                        src={ATIVIDADE_IMG[atv]}
+                        alt={atv}
+                        loading="lazy"
+                        width={72}
+                        height={72}
+                        className="w-18 h-18 object-contain drop-shadow-sm shrink-0"
+                        style={{ width: 72, height: 72 }}
+                      />
+                    )}
+                    <div className="font-extrabold text-slate-800 text-lg leading-tight">{atv}</div>
+                  </div>
                   <div className="text-[10px] font-bold text-primary/60 uppercase tracking-widest flex items-center gap-1">
                     Atividade Brilha Vida <Zap className="h-3 w-3 fill-primary" />
                   </div>
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-3 flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-500 italic">Começar agora</span>
                     <Smile className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
