@@ -6,6 +6,7 @@ import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
+import { TermometroEmocoes } from "@/components/brilha-vida/TermometroEmocoes";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
