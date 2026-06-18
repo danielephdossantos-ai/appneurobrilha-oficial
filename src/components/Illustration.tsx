@@ -18,6 +18,13 @@ import eggImg from "@/assets/illustrations/egg.png";
 import bearImg from "@/assets/illustrations/bear.png";
 import macawImg from "@/assets/illustrations/macaw.png";
 import ringImg from "@/assets/illustrations/ring.png";
+import ladderImg from "@/assets/illustrations/ladder.png";
+import islandImg from "@/assets/illustrations/island.png";
+import iglooImg from "@/assets/illustrations/igloo.png";
+import eyeImg from "@/assets/illustrations/eye.png";
+import boneImg from "@/assets/illustrations/bone.png";
+import vultureImg from "@/assets/illustrations/vulture.png";
+import unicornImg from "@/assets/illustrations/unicorn.png";
 
 /* ── SVG-based premium flat illustrations ─────────────── */
 
@@ -291,6 +298,13 @@ export type IllustrationName =
   | "bear"
   | "macaw"
   | "ring"
+  | "ladder"
+  | "island"
+  | "igloo"
+  | "eye"
+  | "bone"
+  | "vulture"
+  | "unicorn"
   | "iguana"
   | "sheep"
   | "grape"
@@ -316,6 +330,13 @@ const PNG_ASSETS: Partial<Record<IllustrationName, string>> = {
   bear: bearImg,
   macaw: macawImg,
   ring: ringImg,
+  ladder: ladderImg,
+  island: islandImg,
+  igloo: iglooImg,
+  eye: eyeImg,
+  bone: boneImg,
+  vulture: vultureImg,
+  unicorn: unicornImg,
 };
 
 const SVG_COMPONENTS: Partial<Record<IllustrationName, React.FC<{ className?: string }>>> = {
