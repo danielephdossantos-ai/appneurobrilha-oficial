@@ -1115,9 +1115,10 @@ export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson, currentR
                   +{lesson.xp} XP conquistados!
                 </p>
               </div>
+              <NextLessonInlineButton current={fallbackRef} />
               <button
                 onClick={() => navigate({ to: "/escola-brilha" })}
-                className="w-full bg-violet-500 hover:bg-violet-600 text-white font-black py-3 rounded-2xl shadow-lg transition active:scale-95"
+                className="w-full bg-white text-violet-600 border-2 border-violet-300 hover:bg-violet-50 font-black py-3 rounded-2xl shadow-sm transition active:scale-95"
               >
                 Voltar para o início
               </button>
