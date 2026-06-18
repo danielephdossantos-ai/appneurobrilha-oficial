@@ -1,56 +1,7 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check, Shuffle } from "lucide-react";
-
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
-
-/**
- * Resolução de Conflitos
- * Mostra um conflito real e leva a criança pelos 3 passos:
- * 1) Identificar o problema  2) Pensar em soluções  3) Escolher a melhor.
- */
-
-type Conflito = {
-  img: string;
-  cor: string;
-  problema: string;
-  solucoes: { texto: string; pontos: number; comentario: string }[];
-};
-
-const CONFLITOS: Conflito[] = [
-  {
-    img: imgBravo,
-    cor: "#ef4444",
-    problema: "Dois amigos querem o mesmo balanço no parque ao mesmo tempo.",
-    solucoes: [
-      { texto: "Combinar quanto tempo cada um vai usar.", pontos: 3, comentario: "Combinar é a melhor solução!" },
-      { texto: "Cara ou coroa pra ver quem começa.", pontos: 2, comentario: "Boa! Mas combinar tempo também é importante." },
-      { texto: "Empurrar o outro pra sair.", pontos: 0, comentario: "Isso machuca. Conflito não se resolve com força." },
-    ],
-  },
-  {
-    img: imgTriste,
-    cor: "#f97316",
-    problema: "Seu irmão pegou seu livro favorito sem avisar.",
-    solucoes: [
-      { texto: "Falar calmamente que prefere que peça antes.", pontos: 3, comentario: "Comunicação clara resolve quase tudo." },
-      { texto: "Pegar algo dele de volta sem avisar.", pontos: 0, comentario: "Repetir o erro não resolve. Vira briga." },
-      { texto: "Reclamar com a mãe gritando.", pontos: 1, comentario: "Tudo bem buscar ajuda, mas sem gritos." },
-    ],
-  },
-  {
-    img: imgConfuso,
-    cor: "#eab308",
-    problema: "Você e um colega têm opiniões diferentes sobre a regra do jogo.",
-    solucoes: [
-      { texto: "Cada um explica, e escolhem juntos uma regra.", pontos: 3, comentario: "Negociar é sinal de maturidade." },
-      { texto: "Chamar um adulto pra ajudar a decidir.", pontos: 2, comentario: "Pedir ajuda é uma boa solução!" },
-      { texto: "Largar o jogo e ficar bravo.", pontos: 0, comentario: "Desistir não resolve. Conversar resolve." },
-    ],
-  },
-];
+import { CONFLITOS } from "@/data/brilha-vida/cenarios";
 
 const PASSOS = [
   { n: 1, titulo: "Parar e perceber", desc: "Respire e veja qual é o problema." },
@@ -58,8 +9,10 @@ const PASSOS = [
   { n: 3, titulo: "Escolher a melhor", desc: "Qual cuida de todos?" },
 ];
 
+const pickConflito = () => CONFLITOS[Math.floor(Math.random() * CONFLITOS.length)];
+
 export function ResolucaoConflitos({ onClose }: { onClose: () => void }) {
-  const conflito = useMemo(() => CONFLITOS[Math.floor(Math.random() * CONFLITOS.length)], []);
+  const [conflito, setConflito] = useState(() => pickConflito());
   const [passo, setPasso] = useState(1);
   const [escolha, setEscolha] = useState<number | null>(null);
 
@@ -68,7 +21,7 @@ export function ResolucaoConflitos({ onClose }: { onClose: () => void }) {
   const novo = () => {
     setPasso(1);
     setEscolha(null);
-    window.location.reload(); // simples para sortear outro conflito
+    setConflito(pickConflito());
   };
 
   return (

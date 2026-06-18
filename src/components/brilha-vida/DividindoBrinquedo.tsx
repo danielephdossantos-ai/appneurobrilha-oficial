@@ -1,33 +1,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check, Heart } from "lucide-react";
+import { ITENS_BRINQUEDO as ITENS } from "@/data/brilha-vida/cenarios";
 
 import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
 import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
 
 /**
- * Dividindo o Brinquedo
- * Tela única: dois personagens e uma "caixa" com brinquedos.
- * A criança escolhe COMO dividir; respostas certas aumentam o "Medidor da Amizade".
+ * Dividindo o Brinquedo — 30 brinquedos para variar a cena.
  */
-
-type Item = { emoji: string; nome: string };
-const ITENS: Item[] = [
-  { emoji: "🧸", nome: "Ursinho" },
-  { emoji: "🚗", nome: "Carrinho" },
-  { emoji: "🪀", nome: "Ioiô" },
-  { emoji: "🎨", nome: "Tintas" },
-  { emoji: "⚽", nome: "Bola" },
-  { emoji: "🧩", nome: "Quebra-cabeça" },
-];
 
 type Acao = { texto: string; pts: number; feedback: string };
 const ACOES: Acao[] = [
   { texto: "Dou um para o amigo e fico com outro.", pts: 2, feedback: "Dividir é cuidar do outro. 💛" },
   { texto: "Brincamos juntos com os dois.", pts: 3, feedback: "Brincar junto é ainda mais divertido!" },
   { texto: "Combinamos um tempo pra cada um.", pts: 2, feedback: "Combinar regras evita briga." },
-  { texto: "Fico com todos. Depois ele brinca.", pts: 0, feedback: "Esperar muito deixa o amigo triste. Vamos tentar de novo." },
-  { texto: "Escondo pra ele não pegar.", pts: -1, feedback: "Esconder machuca a amizade. Que tal compartilhar?" },
+  { texto: "Fico com todos. Depois ele brinca.", pts: 0, feedback: "Esperar muito deixa o amigo triste." },
+  { texto: "Escondo pra ele não pegar.", pts: -1, feedback: "Esconder machuca a amizade." },
 ];
 
 export function DividindoBrinquedo({ onClose }: { onClose: () => void }) {
