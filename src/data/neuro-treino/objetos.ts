@@ -57,6 +57,56 @@ import surpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
 import medo from "@/assets/neuro-treino/emocoes/medo.png";
 import sono from "@/assets/neuro-treino/emocoes/sono.png";
 
+// ===== Banco premium reutilizado dos hiperfocos (mesmo padrão visual kawaii/Pixar) =====
+import hfLeao from "@/assets/hiperfocos/animais/leao.png";
+import hfCoruja from "@/assets/hiperfocos/animais/coruja.png";
+import hfMacaco from "@/assets/hiperfocos/animais/macaco.png";
+import hfElefante from "@/assets/hiperfocos/animais/elefante.png";
+import hfTartaruga from "@/assets/hiperfocos/animais/tartaruga.png";
+import hfTrex from "@/assets/hiperfocos/dinossauros/trex.png";
+import hfTriceratops from "@/assets/hiperfocos/dinossauros/triceratops.png";
+import hfRaptor from "@/assets/hiperfocos/dinossauros/velociraptor.png";
+import hfBraquio from "@/assets/hiperfocos/dinossauros/braquiossauro.png";
+import hfEstegossauro from "@/assets/hiperfocos/dinossauros/estegossauro.png";
+import hfLua from "@/assets/hiperfocos/espaco/lua.png";
+import hfEstrela from "@/assets/hiperfocos/espaco/estrela.png";
+import hfPlaneta from "@/assets/hiperfocos/espaco/planeta.png";
+import hfFoguete from "@/assets/hiperfocos/espaco/foguete.png";
+import hfAstronauta from "@/assets/hiperfocos/espaco/astronauta.png";
+import hfCometa from "@/assets/hiperfocos/espaco/cometa.png";
+import hfVaca from "@/assets/hiperfocos/fazendinha/vaquinha.png";
+import hfPorco from "@/assets/hiperfocos/fazendinha/porquinho.png";
+import hfGalinha from "@/assets/hiperfocos/fazendinha/galinha.png";
+import hfOvelha from "@/assets/hiperfocos/fazendinha/ovelha.png";
+import hfCavalo from "@/assets/hiperfocos/fazendinha/cavalo.png";
+import hfHeroi from "@/assets/hiperfocos/herois/heroi.png";
+import hfHeroina from "@/assets/hiperfocos/herois/heroina.png";
+import hfRoboHeroi from "@/assets/hiperfocos/herois/robo.png";
+import hfPrincesa from "@/assets/hiperfocos/princesas/princesa.png";
+import hfCastelo from "@/assets/hiperfocos/princesas/castelo.png";
+import hfCoroa from "@/assets/hiperfocos/princesas/coroa.png";
+import hfFada from "@/assets/hiperfocos/princesas/fada.png";
+import hfUnicornio from "@/assets/hiperfocos/princesas/unicornio.png";
+import hfBailarina from "@/assets/hiperfocos/bailarinas/bailarina.png";
+import hfCisne from "@/assets/hiperfocos/bailarinas/cisne.png";
+import hfSereia from "@/assets/hiperfocos/sereias/sereia.png";
+import hfPeixinho from "@/assets/hiperfocos/sereias/peixinho.png";
+import hfConcha from "@/assets/hiperfocos/sereias/concha.png";
+import hfCavaloMarinho from "@/assets/hiperfocos/sereias/cavalo-marinho.png";
+import hfRoboBot from "@/assets/hiperfocos/robos/robo.png";
+import hfDrone from "@/assets/hiperfocos/robos/drone.png";
+import hfTrem from "@/assets/hiperfocos/trens/locomotiva.png";
+import hfVagao from "@/assets/hiperfocos/trens/vagao.png";
+import hfCaminhao from "@/assets/hiperfocos/carros/caminhao.png";
+import hfMoto from "@/assets/hiperfocos/carros/moto.png";
+import hfOnibus from "@/assets/hiperfocos/carros/onibus.png";
+import hfViolao from "@/assets/hiperfocos/musica/violao.png";
+import hfNota from "@/assets/hiperfocos/musica/nota-musical.png";
+import hfPincel from "@/assets/hiperfocos/arte/pincel.png";
+import hfCreeper from "@/assets/hiperfocos/minecraft/creeper.png";
+import hfSteve from "@/assets/hiperfocos/minecraft/steve.png";
+import hfAlex from "@/assets/hiperfocos/minecraft/alex.png";
+
 export const OBJETO_IMG: Record<string, string> = {
   BOLA: bola,
   GATO: gato,
@@ -73,22 +123,37 @@ export const OBJETO_IMG: Record<string, string> = {
   FLOR: flor,
   CARRO: carro,
   OUTRO: carro,
-  TREM: trem,
+  CAMINHAO: hfCaminhao,
+  CAMINHÃO: hfCaminhao,
+  MOTO: hfMoto,
+  ONIBUS: hfOnibus,
+  ÔNIBUS: hfOnibus,
+  TREM: hfTrem,
+  LOCOMOTIVA: hfTrem,
+  VAGAO: hfVagao,
+  VAGÃO: hfVagao,
   ASA: asa,
   BOLO: bolo,
   PATO: pato,
   CACHORRO: cachorro,
   DOG: cachorro,
-  LUA: lua,
-  ESTRELA: estrela,
+  LUA: hfLua,
+  ESTRELA: hfEstrela,
+  PLANETA: hfPlaneta,
+  FOGUETE: hfFoguete,
+  ASTRONAUTA: hfAstronauta,
+  COMETA: hfCometa,
   SOL: sol,
   CHUVA: chuva,
   RATO: rato,
   BANANA: banana,
-  VACA: vaca,
-  PORCO: porco,
-  GALINHA: galinha,
-  OVELHA: ovelha,
+  VACA: hfVaca,
+  VAQUINHA: hfVaca,
+  PORCO: hfPorco,
+  PORQUINHO: hfPorco,
+  GALINHA: hfGalinha,
+  OVELHA: hfOvelha,
+  CAVALO: hfCavalo,
   CABRA: cabra,
   PINTINHO: pintinho,
   GALO: galo,
@@ -96,15 +161,21 @@ export const OBJETO_IMG: Record<string, string> = {
   PASSARINHOS: passaro,
   PÁSSARO: passaro,
   PASSARO: passaro,
-  CORUJA: coruja,
+  CORUJA: hfCoruja,
   BIKE: carro,
-  AVIÃO: carro,
-  AVIAO: carro,
+  AVIÃO: hfFoguete,
+  AVIAO: hfFoguete,
   BORBOLETA: borboleta,
-  PEIXE: peixe,
-  DINOSSAURO: dinossauro,
-  "T-REX": dinossauro,
-  RAPTOR: dinossauro,
+  PEIXE: hfPeixinho,
+  PEIXINHO: hfPeixinho,
+  DINOSSAURO: hfTrex,
+  "T-REX": hfTrex,
+  TREX: hfTrex,
+  RAPTOR: hfRaptor,
+  VELOCIRAPTOR: hfRaptor,
+  TRICERATOPS: hfTriceratops,
+  BRAQUIOSSAURO: hfBraquio,
+  ESTEGOSSAURO: hfEstegossauro,
   PTERODÁCTILO: passaro,
   CORAÇÃO: coracao,
   CORACAO: coracao,
@@ -112,18 +183,40 @@ export const OBJETO_IMG: Record<string, string> = {
   RAPOSA: raposa,
   COELHO: coelho,
   PANDA: panda,
-  LEÃO: leao,
-  LEAO: leao,
+  LEÃO: hfLeao,
+  LEAO: hfLeao,
   TIGRE: tigre,
-  MACACO: panda,
+  MACACO: hfMacaco,
+  ELEFANTE: hfElefante,
+  TARTARUGA: hfTartaruga,
   URSINHO: ursinho,
   URSO: ursinho,
   PRESENTE: presente,
-  PRINCESA: princesa,
-  HEROI: heroi,
-  HERÓI: heroi,
-  ROBO: robo,
-  ROBÔ: robo,
+  PRINCESA: hfPrincesa,
+  CASTELO: hfCastelo,
+  COROA: hfCoroa,
+  FADA: hfFada,
+  UNICORNIO: hfUnicornio,
+  UNICÓRNIO: hfUnicornio,
+  BAILARINA: hfBailarina,
+  CISNE: hfCisne,
+  SEREIA: hfSereia,
+  CONCHA: hfConcha,
+  "CAVALO-MARINHO": hfCavaloMarinho,
+  HEROI: hfHeroi,
+  HERÓI: hfHeroi,
+  HEROINA: hfHeroina,
+  HEROÍNA: hfHeroina,
+  ROBO: hfRoboBot,
+  ROBÔ: hfRoboBot,
+  DRONE: hfDrone,
+  VIOLAO: hfViolao,
+  VIOLÃO: hfViolao,
+  "NOTA MUSICAL": hfNota,
+  PINCEL: hfPincel,
+  CREEPER: hfCreeper,
+  STEVE: hfSteve,
+  ALEX: hfAlex,
   DIAMANTE: diamante,
   FOGO: fogo,
   TOCHA: fogo,
@@ -142,9 +235,9 @@ export const OBJETO_IMG: Record<string, string> = {
   SURPRESO: surpreso,
   MEDO: medo,
   SONO: sono,
-  CREEPER: dinossauro,
-  ZUMBI: dinossauro,
+  ZUMBI: hfCreeper,
 };
+
 
 // Mapeia emojis para a mesma biblioteca de ilustrações premium
 export const EMOJI_IMG: Record<string, string> = {
@@ -169,19 +262,23 @@ export const EMOJI_IMG: Record<string, string> = {
   "🚗": carro,
   "🚙": carro,
   "🚲": carro,
-  "✈️": carro,
-  "🚌": carro,
-  "🏍️": carro,
-  "🚑": carro,
-  "🚂": trem,
+  "✈️": hfFoguete,
+  "🚌": hfOnibus,
+  "🏍️": hfMoto,
+  "🚑": hfCaminhao,
+  "🚛": hfCaminhao,
+  "🚚": hfCaminhao,
+  "🚂": hfTrem,
+  "🚆": hfTrem,
+  "🚃": hfVagao,
   "🦆": pato,
   "🐶": cachorro,
   "🐕": cachorro,
   "🐺": cachorro,
-  "🌙": lua,
-  "⭐": estrela,
-  "🌟": estrela,
-  "✨": estrela,
+  "🌙": hfLua,
+  "⭐": hfEstrela,
+  "🌟": hfEstrela,
+  "✨": hfEstrela,
   "☀️": sol,
   "🌞": sol,
   "🌧️": chuva,
@@ -196,26 +293,37 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐭": rato,
   "🍌": banana,
   "🍋": banana,
-  "🐮": vaca,
-  "🐄": vaca,
-  "🐷": porco,
-  "🐖": porco,
-  "🐔": galinha,
-  "🐑": ovelha,
+  "🐮": hfVaca,
+  "🐄": hfVaca,
+  "🐷": hfPorco,
+  "🐖": hfPorco,
+  "🐔": hfGalinha,
+  "🐑": hfOvelha,
   "🐐": cabra,
+  "🐴": hfCavalo,
+  "🐎": hfCavalo,
   "🐥": pintinho,
   "🐤": pintinho,
   "🐓": galo,
   "🐦": passaro,
   "🦅": passaro,
-  "🦉": coruja,
+  "🦉": hfCoruja,
   "🦋": borboleta,
-  "🐠": peixe,
-  "🐟": peixe,
-  "🐙": peixe,
-  "🦀": peixe,
-  "🐚": peixe,
-  "🦖": dinossauro,
+  "🐠": hfPeixinho,
+  "🐟": hfPeixinho,
+  "🐙": hfPeixinho,
+  "🦀": hfPeixinho,
+  "🐚": hfConcha,
+  "🦄": hfUnicornio,
+  "🧜": hfSereia,
+  "🧜‍♀️": hfSereia,
+  "🧚": hfFada,
+  "🩰": hfBailarina,
+  "🦢": hfCisne,
+  "🐢": hfTartaruga,
+  "🐘": hfElefante,
+  "🦖": hfTrex,
+  "🦕": hfBraquio,
   "❤️": coracao,
   "💔": coracao,
   "🤗": coracao,
@@ -224,21 +332,29 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐰": coelho,
   "🐼": panda,
   "🐨": panda,
-  "🐵": panda,
-  "🦁": leao,
+  "🐵": hfMacaco,
+  "🐒": hfMacaco,
+  "🦁": hfLeao,
   "🐯": tigre,
   "🧸": ursinho,
   "🎁": presente,
   "🎀": presente,
-  "👸": princesa,
-  "🦸": heroi,
-  "🦸‍♂️": heroi,
-  "🦸‍♀️": heroi,
-  "🤖": robo,
+  "👸": hfPrincesa,
+  "🤴": hfHeroi,
+  "👑": hfCoroa,
+  "🏰": hfCastelo,
+  "🦸": hfHeroi,
+  "🦸‍♂️": hfHeroi,
+  "🦸‍♀️": hfHeroina,
+  "🤖": hfRoboBot,
   "💎": diamante,
   "🔥": fogo,
   "🌋": fogo,
   "🕯️": fogo,
+  "🎸": hfViolao,
+  "🎵": hfNota,
+  "🎶": hfNota,
+  "🎨": hfPincel,
   "🍓": morango,
   "🍇": uva,
   "🥕": cenoura,
@@ -268,13 +384,13 @@ export const EMOJI_IMG: Record<string, string> = {
   "😰": medo,
   "😴": sono,
   "💤": sono,
-  "🧟": dinossauro,
-  "🟩": dinossauro,
+  "🧟": hfCreeper,
+  "🟩": hfCreeper,
   "⛏️": diamante,
   "🗡️": diamante,
   "🛡️": diamante,
   "⚔️": diamante,
-  "🥚": ovelha,
+  "🥚": hfGalinha,
   "🦴": ursinho,
   "🌱": arvore,
   "🌿": arvore,
@@ -283,10 +399,13 @@ export const EMOJI_IMG: Record<string, string> = {
   "🐞": abelha,
   "🦗": abelha,
   "🐌": abelha,
-  "🪐": lua,
-  "☄️": estrela,
-  "👽": robo,
-  "🚀": carro,
+  "🪐": hfPlaneta,
+  "☄️": hfCometa,
+  "👽": hfRoboBot,
+  "🚀": hfFoguete,
+  "🧑‍🚀": hfAstronauta,
+  "👨‍🚀": hfAstronauta,
+  "👩‍🚀": hfAstronauta,
   "⛵": carro,
   "🛏️": casa,
   "🪑": casa,
