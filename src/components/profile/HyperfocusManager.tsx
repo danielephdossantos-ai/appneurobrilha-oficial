@@ -7,21 +7,21 @@ import { Plus, X, Sparkles, Check, Trash2, Edit3, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/utils/utils";
 
-const HYPERFOCUS_OPTIONS: { value: Hiperfoco; label: string; icon: string }[] = [
-  { value: "animais", label: "Animais", icon: "🐾" },
-  { value: "dinossauros", label: "Dinossauros", icon: "🦖" },
-  { value: "espaco", label: "Espaço", icon: "🚀" },
-  { value: "veiculos", label: "Veículos", icon: "🚗" },
-  { value: "princesas", label: "Princesas", icon: "👑" },
-  { value: "super-herois", label: "Super-heróis", icon: "🦸‍♂️" },
-  { value: "robos", label: "Robôs", icon: "🤖" },
-  { value: "musica", label: "Música", icon: "🎵" },
-  { value: "minecraft", label: "Minecraft", icon: "⛏️" },
-  { value: "carros", label: "Carros", icon: "🏎️" },
-  { value: "trens", label: "Trens", icon: "🚂" },
-  { value: "arte", label: "Arte", icon: "🎨" },
-  { value: "fazendinha", label: "Fazendinha", icon: "🐥" },
-  { value: "outros", label: "Outros", icon: "✨" },
+const HYPERFOCUS_OPTIONS: { value: Hiperfoco; label: string }[] = [
+  { value: "dinossauros", label: "Dinossauros" },
+  { value: "animais", label: "Animais" },
+  { value: "carros", label: "Carros e Veículos" },
+  { value: "super-herois", label: "Super-heróis" },
+  { value: "minecraft", label: "Minecraft" },
+  { value: "espaco", label: "Espaço" },
+  { value: "princesas", label: "Princesas e Castelo" },
+  { value: "fazendinha", label: "Fazendinha" },
+  { value: "bailarinas", label: "Bailarinas" },
+  { value: "sereias", label: "Sereias" },
+  { value: "robos", label: "Robôs" },
+  { value: "musica", label: "Música" },
+  { value: "arte", label: "Arte" },
+  { value: "trens", label: "Trens" },
 ];
 
 export const HyperfocusManager: React.FC = () => {
@@ -114,9 +114,8 @@ export const HyperfocusManager: React.FC = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     className="group relative"
                   >
-                    <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white border-2 border-primary/20 hover:border-primary shadow-sm transition-all text-center h-full">
-                      <span className="text-3xl mb-1">{info?.icon || "✨"}</span>
-                      <span className="text-xs font-black text-primary uppercase tracking-tighter truncate w-full">
+                    <div className="flex items-center justify-center px-4 py-3 rounded-2xl bg-primary/5 border-2 border-primary/20 hover:border-primary shadow-sm transition-all text-center h-full">
+                      <span className="text-sm font-black text-primary uppercase tracking-tight truncate w-full">
                         {info?.label || focus}
                       </span>
                       <button
@@ -183,18 +182,17 @@ export const HyperfocusManager: React.FC = () => {
                       onClick={() => addHyperfocus(option.value)}
                       disabled={currentList.includes(option.value)}
                       className={cn(
-                        "flex flex-col items-center p-4 rounded-2xl border-2 transition-all text-center",
+                        "flex items-center justify-center gap-2 p-4 rounded-2xl border-2 transition-all text-center min-h-[64px]",
                         currentList.includes(option.value)
                           ? "bg-muted border-transparent opacity-50 cursor-not-allowed"
                           : "bg-white border-border hover:border-primary hover:bg-primary/5",
                       )}
                     >
-                      <span className="text-3xl mb-1">{option.icon}</span>
-                      <span className="text-xs font-black uppercase tracking-tighter truncate w-full">
+                      <span className="text-xs font-black uppercase tracking-tight truncate">
                         {option.label}
                       </span>
                       {currentList.includes(option.value) && (
-                        <Check size={12} className="text-success mt-1" strokeWidth={4} />
+                        <Check size={14} className="text-success shrink-0" strokeWidth={4} />
                       )}
                     </button>
                   ))}

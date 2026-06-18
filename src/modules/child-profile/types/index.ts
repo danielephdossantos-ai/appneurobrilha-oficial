@@ -22,6 +22,14 @@ export const HiperfocoSchema = z.enum([
   "super-herois",
   "robos",
   "musica",
+  "minecraft",
+  "carros",
+  "trens",
+  "arte",
+  "fazendinha",
+  "bailarinas",
+  "sereias",
+  "outros",
 ]);
 
 export const ChildProfileSchema = z.object({
