@@ -9,7 +9,7 @@ export const Route = createFileRoute("/neuro-treino/libras")({
   component: LibrasModulo,
 });
 
-type Modo = "menu" | "aprender" | "memoria" | "identificar";
+type Modo = "menu" | "aprender" | "memoria" | "identificar" | "associacao";
 
 function LibrasModulo() {
   const [trilhaSlug, setTrilhaSlug] = useState<TrilhaSlug>("alfabeto");
@@ -45,8 +45,8 @@ function LibrasModulo() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div className="flex-1">
-              <div className="flex items-center gap-1.5 text-white/80 text-xs font-bold uppercase tracking-widest">
-                <Hand className="h-3 w-3" /> Módulo LIBRAS
+              <div className="flex items-center gap-1.5 text-white/80 text-[10px] font-bold uppercase tracking-widest">
+                <Hand className="h-3 w-3" /> Introdução à LIBRAS
               </div>
               <h1 className="text-xl font-black text-white">Mãos que falam</h1>
             </div>
@@ -55,6 +55,9 @@ function LibrasModulo() {
               <span className="text-white font-black text-sm">{estrelas}</span>
             </div>
           </div>
+          <p className="mt-2 text-[10px] text-white/80 font-bold">
+            Conteúdo lúdico de introdução. Não substitui aula formal de LIBRAS.
+          </p>
         </div>
 
         {/* Professora apresentando */}
@@ -92,13 +95,14 @@ function LibrasModulo() {
                 setTrilhaSlug(t.slug);
                 setModo("menu");
               }}
-              className={`rounded-2xl p-3 border-2 font-black text-xs transition-all ${
+              className={`rounded-2xl p-2.5 border-2 font-black text-xs transition-all leading-tight ${
                 trilhaSlug === t.slug
                   ? `bg-gradient-to-br ${t.bg} ${t.cor} border-current shadow-md scale-105`
                   : "bg-card border-border text-muted-foreground hover:border-primary/30"
               }`}
             >
               {t.nome}
+              <div className="text-[9px] font-bold opacity-70 mt-0.5">{t.descricao}</div>
             </button>
           ))}
         </div>
@@ -144,6 +148,13 @@ function LibrasModulo() {
             onBack={() => setModo("menu")}
           />
         )}
+        {modo === "associacao" && (
+          <ModoAssociacao
+            sinais={sinaisNivel}
+            onAcerto={() => setEstrelas((e) => e + 1)}
+            onBack={() => setModo("menu")}
+          />
+        )}
       </div>
     </Shell>
   );
@@ -152,7 +163,8 @@ function LibrasModulo() {
 // ───────────────────────── MENU DE EXERCÍCIOS ─────────────────────────
 function ModoMenu({ onPick, count }: { onPick: (m: Modo) => void; count: number }) {
   const opts: { modo: Modo; titulo: string; emoji: string; bg: string }[] = [
-    { modo: "aprender", titulo: "Aprender", emoji: "👀", bg: "from-sky-400 to-blue-500" },
+    { modo: "aprender", titulo: "Conhecer os sinais", emoji: "👀", bg: "from-sky-400 to-blue-500" },
+    { modo: "associacao", titulo: "Ligue mão e palavra", emoji: "🤝", bg: "from-amber-400 to-orange-500" },
     { modo: "memoria", titulo: "Jogo da Memória", emoji: "🧠", bg: "from-emerald-400 to-green-500" },
     { modo: "identificar", titulo: "Qual é o sinal?", emoji: "🎯", bg: "from-rose-400 to-pink-500" },
   ];
