@@ -57,7 +57,8 @@ const LETTER_COLORS: Record<string, string> = {
   D: "bg-amber-500  border-amber-700 ",
 };
 
-export const ActivityPlayerC: React.FC<Props> = ({ lesson }) => {
+export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
+  const fallbackRef: LessonRef = currentRef ?? { kind: "static", id: lesson.id };
   const navigate = useNavigate();
   const [screenIndex, setScreenIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
