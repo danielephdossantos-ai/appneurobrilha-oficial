@@ -1,49 +1,9 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Sparkles, RotateCcw } from "lucide-react";
+import { CENAS_ELOGIO as CENAS } from "@/data/brilha-vida/cenarios";
 
 import imgFeliz from "@/assets/brilha-vida/emocoes/feliz.png";
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-
-type Cena = {
-  texto: string;
-  opcoes: { texto: string; bom: boolean; feedback: string }[];
-};
-
-const CENAS: Cena[] = [
-  {
-    texto: "Sua amiga fez um desenho que ela amou e mostrou pra você.",
-    opcoes: [
-      { texto: "Adorei suas cores! Você caprichou muito.", bom: true, feedback: "Elogiar o esforço aquece o coração de quem fez." },
-      { texto: "Tá legal.", bom: false, feedback: "Elogios curtos demais não mostram que você viu de verdade." },
-      { texto: "O meu fica melhor.", bom: false, feedback: "Comparar diminui o outro. Elogiar fortalece a amizade." },
-    ],
-  },
-  {
-    texto: "Seu colega ajudou um amigo a entender a lição.",
-    opcoes: [
-      { texto: "Foi muito gentil em explicar pra ele!", bom: true, feedback: "Reconhecer gestos bons inspira mais gentileza." },
-      { texto: "Sorte dele que você tinha tempo.", bom: false, feedback: "Isso parece reclamação, não elogio." },
-      { texto: "Eu também sei explicar.", bom: false, feedback: "Bom para você! Mas agora era hora de elogiar o outro." },
-    ],
-  },
-  {
-    texto: "Sua irmã se vestiu sozinha pela primeira vez.",
-    opcoes: [
-      { texto: "Você ficou linda e fez tudo sozinha!", bom: true, feedback: "Elogio com carinho dá coragem pra continuar tentando." },
-      { texto: "Tá com a camisa do avesso…", bom: false, feedback: "Você pode ajudar a ajeitar DEPOIS de elogiar o esforço." },
-      { texto: "Já não era sem tempo.", bom: false, feedback: "Comentários desse tipo magoam. Conquistas merecem festa." },
-    ],
-  },
-  {
-    texto: "Seu amigo cantou uma música na frente da turma.",
-    opcoes: [
-      { texto: "Que coragem! Adorei te ver cantando.", bom: true, feedback: "Reconhecer a coragem é o melhor elogio." },
-      { texto: "Sua voz tá meio estranha.", bom: false, feedback: "Apontar defeitos em hora frágil machuca." },
-      { texto: "Nem prestei atenção.", bom: false, feedback: "Ignorar dói tanto quanto criticar." },
-    ],
-  },
-];
 
 export function ElogioMagico({ onClose }: { onClose: () => void }) {
   const cenas = useMemo(() => [...CENAS].sort(() => Math.random() - 0.5), []);
