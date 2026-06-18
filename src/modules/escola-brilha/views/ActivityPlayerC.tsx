@@ -22,12 +22,19 @@ import { ActivityLessonC } from "../types/activity-lesson-c";
 import { AudioSpeechService } from "../services/AudioSpeechService";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
+import planetaOceanoImg from "@/assets/escola-brilha/ciencias6/planeta-oceano.png";
+import amazoniaImg from "@/assets/escola-brilha/geografia6/amazonia.png";
 import { LessonVisualMap } from "../components/LessonVisualMap";
 import { MathVisualizer } from "../components/MathVisualizer";
 
 interface Props {
   lesson: ActivityLessonC;
 }
+
+const LESSON_ILLUSTRATIONS: Record<string, { src: string; alt: string }> = {
+  "oceanos-6ano": { src: planetaOceanoImg, alt: "Ilustração infantil do planeta Terra com oceanos" },
+  "biomas-6ano": { src: amazoniaImg, alt: "Ilustração infantil da Amazônia" },
+};
 
 type ScreenId = "missao" | "exploracao" | "pontos_chave" | "exemplo_aplicado" | "desafio";
 type TabId = "texto" | "pontos" | "info";
@@ -454,6 +461,7 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson }) => {
 /* ─── TELA 1: MISSÃO ─── */
 const MissaoScreen: React.FC<{ lesson: ActivityLessonC; ac: any }> = ({ lesson, ac }) => {
   const s = lesson.screens.missao;
+  const illustration = LESSON_ILLUSTRATIONS[lesson.id];
   return (
     <div className="space-y-4">
       {/* Mission header card */}
@@ -485,6 +493,17 @@ const MissaoScreen: React.FC<{ lesson: ActivityLessonC; ac: any }> = ({ lesson, 
           ))}
         </ul>
       </div>
+
+      {illustration && (
+        <div className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm flex justify-center">
+          <img
+            src={illustration.src}
+            alt={illustration.alt}
+            className="w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-lg select-none"
+            draggable={false}
+          />
+        </div>
+      )}
 
       {/* Context fact */}
       <div className="bg-white border border-slate-100 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
@@ -533,6 +552,7 @@ const ExploracaoScreen: React.FC<{
   ac: any;
 }> = ({ lesson, activeTab, setActiveTab, ac }) => {
   const s = lesson.screens.exploracao;
+  const illustration = LESSON_ILLUSTRATIONS[lesson.id];
   return (
     <div className="space-y-4">
       <p className="text-slate-600 font-semibold text-sm">{s.instruction}</p>
@@ -565,6 +585,16 @@ const ExploracaoScreen: React.FC<{
             exit={{ opacity: 0 }}
             className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm"
           >
+            {illustration && (
+              <div className="mb-3 flex justify-center">
+                <img
+                  src={illustration.src}
+                  alt={illustration.alt}
+                  className="w-40 h-40 sm:w-48 sm:h-48 object-contain drop-shadow-lg select-none"
+                  draggable={false}
+                />
+              </div>
+            )}
             <p className="text-slate-700 font-medium text-sm leading-relaxed">{s.texto}</p>
             {/* Mascot tip at bottom */}
             <div
