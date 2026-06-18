@@ -32,6 +32,8 @@ export type Hiperfoco =
   | "trens"
   | "arte"
   | "fazendinha"
+  | "bailarinas"
+  | "sereias"
   | "outros";
 
 export interface Child {
