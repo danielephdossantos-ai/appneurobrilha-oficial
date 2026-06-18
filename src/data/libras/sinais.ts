@@ -41,6 +41,10 @@ import sauTchau from "@/assets/libras/saudacoes/tchau.png";
 import sauObrigado from "@/assets/libras/saudacoes/obrigado.png";
 import sauSim from "@/assets/libras/saudacoes/sim.png";
 import sauNao from "@/assets/libras/saudacoes/nao.png";
+import sauFeliz from "@/assets/libras/saudacoes/feliz.png";
+import sauTriste from "@/assets/libras/saudacoes/triste.png";
+import sauTeAmo from "@/assets/libras/saudacoes/teamo.png";
+import sauDesculpa from "@/assets/libras/saudacoes/desculpa.png";
 import numUm from "@/assets/libras/numeros/um.png";
 import numDois from "@/assets/libras/numeros/dois.png";
 import numTres from "@/assets/libras/numeros/tres.png";
@@ -107,6 +111,18 @@ export const TRILHAS: Trilha[] = [
       { id: "nao", nome: "Não", imagem: sauNao, nivel: 1,
         instrucao: "Para dizer Não, balance o indicador para os lados, dizendo não com a cabeça.",
         passos: ["Indicador esticado", "Balance para os lados", "Cabeça diz não"] },
+      { id: "feliz", nome: "Feliz", imagem: sauFeliz, nivel: 2,
+        instrucao: "Para dizer Feliz, abra a mão e suba pelo peito, com um sorriso bem grande.",
+        passos: ["Mão aberta no peito", "Suba a mão", "Sorria bem feliz"] },
+      { id: "triste", nome: "Triste", imagem: sauTriste, nivel: 2,
+        instrucao: "Para dizer Triste, abra a mão na frente do rosto e desça devagar, com cara de tristinho.",
+        passos: ["Mão aberta no rosto", "Desça a mão devagar", "Faça cara de triste"] },
+      { id: "teamo", nome: "Te amo", imagem: sauTeAmo, nivel: 2,
+        instrucao: "Para dizer Te amo, levante o polegar, o indicador e o dedinho mindinho ao mesmo tempo.",
+        passos: ["Polegar para cima", "Indicador para cima", "Mindinho para cima"] },
+      { id: "desculpa", nome: "Desculpa", imagem: sauDesculpa, nivel: 2,
+        instrucao: "Para dizer Desculpa, feche a mãozinha com o polegar para fora e faça uma rodinha no peito.",
+        passos: ["Mão fechada com polegar", "Encoste no peito", "Faça uma rodinha"] },
     ],
   },
   {
