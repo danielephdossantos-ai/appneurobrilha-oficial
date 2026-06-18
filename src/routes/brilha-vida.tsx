@@ -11,6 +11,33 @@ import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
 import catAmizadeImg from "@/assets/brilha-vida/categoria-amizade.png";
 import catAutocontroleImg from "@/assets/brilha-vida/categoria-autocontrole.png";
 import catRotinaImg from "@/assets/brilha-vida/categoria-rotina.png";
+import atvTermometroImg from "@/assets/brilha-vida/termometro-emocoes.png";
+import atvComoEstouImg from "@/assets/brilha-vida/como-estou.png";
+import atvEmojiMagicoImg from "@/assets/brilha-vida/emoji-magico.png";
+import atvHistoriasImg from "@/assets/brilha-vida/historias-sociais.png";
+import atvDividindoImg from "@/assets/brilha-vida/dividindo-brinquedo.png";
+import atvCuidandoImg from "@/assets/brilha-vida/cuidando-amigo.png";
+import atvRespirarImg from "@/assets/brilha-vida/pausa-respirar.png";
+import atvCantinhoImg from "@/assets/brilha-vida/cantinho-calma.png";
+import atvSemaforoImg from "@/assets/brilha-vida/semaforo-sentir.png";
+import atvMinhaVezImg from "@/assets/brilha-vida/minha-vez.png";
+import atvRegrasImg from "@/assets/brilha-vida/regras-casa.png";
+import atvConflitosImg from "@/assets/brilha-vida/resolucao-conflitos.png";
+
+const ATIVIDADE_IMG: Record<string, string> = {
+  "Termômetro das Emoções": atvTermometroImg,
+  "Como estou agora?": atvComoEstouImg,
+  "Emoji Mágico": atvEmojiMagicoImg,
+  "Histórias Sociais": atvHistoriasImg,
+  "Dividindo o Brinquedo": atvDividindoImg,
+  "Cuidando do Amigo": atvCuidandoImg,
+  "Pausa para Respirar": atvRespirarImg,
+  "Cantinho da Calma": atvCantinhoImg,
+  "Semáforo do Sentir": atvSemaforoImg,
+  "Minha vez, sua vez": atvMinhaVezImg,
+  "Regras da Casa": atvRegrasImg,
+  "Resolução de Conflitos": atvConflitosImg,
+};
 
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
