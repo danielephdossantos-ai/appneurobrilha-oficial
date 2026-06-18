@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import planetaOceanoImg from "@/assets/escola-brilha/ciencias6/planeta-oceano.png";
+import amazoniaImg from "@/assets/escola-brilha/geografia6/amazonia.png";
 
 /* ════════════════════════════════════
    BIOMAS BRASILEIROS  (EF06GE08)
@@ -79,6 +81,13 @@ export const BiomasBrasilMap: React.FC = () => {
 
   return (
     <div className="space-y-3">
+      <div className="flex justify-center">
+        <img
+          src={amazoniaImg}
+          alt="Ilustração da Amazônia"
+          className="w-40 h-40 object-contain drop-shadow-lg"
+        />
+      </div>
       <p className="text-xs font-black text-slate-400 uppercase tracking-widest text-center">
         Mapa dos Biomas
       </p>
@@ -210,6 +219,13 @@ export const OceanosMap: React.FC = () => {
 
   return (
     <div className="space-y-2">
+      <div className="flex justify-center">
+        <img
+          src={planetaOceanoImg}
+          alt="Planeta Terra e oceanos"
+          className="w-40 h-40 object-contain drop-shadow-lg"
+        />
+      </div>
       <p className="text-xs font-black text-slate-400 uppercase tracking-widest text-center mb-2">
         Zonas do Oceano
       </p>
