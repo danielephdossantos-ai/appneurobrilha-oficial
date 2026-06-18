@@ -51,7 +51,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "elephant",
       word: "Elefante",
       word2: "Estrela",
-      speech: "E! Essa é a letra E! E de Elefante! E de Estrela! Repita comigo: E!",
+      speech: "É! Essa é a letra É! É de Elefante! É de Estrela! Repita comigo: É!",
     },
     {
       kind: "vowel-practice",
