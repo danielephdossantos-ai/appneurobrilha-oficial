@@ -373,17 +373,16 @@ function BrilhaVida() {
         </div>
         <div className="relative z-10">
           <h3 className="text-xl font-black mb-2 flex items-center gap-2">
-            <Smile className="h-6 w-6 text-sun" /> Momento Ursinho Calma
+            <Smile className="h-6 w-6 text-sun" /> Momento Calma
           </h3>
           <p className="text-slate-400 max-w-md">
-            Precisa de uma pausa? O Ursinho Calma está aqui para ajudar com exercícios de respiração
-            e regulação sensorial.
+            Precisa de uma pausa? Nossa terapeuta amiga está aqui pra te ouvir e te ajudar com
+            respiração e regulação. É só tocar no coraçãozinho.
           </p>
-          <button className="mt-6 px-6 py-2.5 bg-primary text-white rounded-xl font-bold shadow-glow hover:scale-105 transition-transform">
-            Pedir Ajuda
-          </button>
         </div>
       </Card>
+
+      <TerapeutaFlutuante />
     </Shell>
   );
 }
