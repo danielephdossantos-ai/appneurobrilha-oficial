@@ -21,6 +21,7 @@ import { DiarioSentir } from "@/components/brilha-vida/DiarioSentir";
 import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
 import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
 import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
+import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
