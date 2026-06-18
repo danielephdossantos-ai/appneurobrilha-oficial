@@ -165,11 +165,25 @@ const LegacyLessonPlayer: React.FC = () => {
     setFeedback(null);
     setHighlightedElementId(null);
     await new Promise((r) => setTimeout(r, 300));
+    // Conta em voz alta os elementos visuais (ensino guiado).
+    const countables = (currentStep.elements || []).filter(
+      (el: any) => el.type === "text" && objetoImg(el.content),
+    );
+    const shouldCountAloud =
+      countables.length >= 2 && currentStep.type === "interaction";
+    let countedSoFar = 0;
     if (currentStep.elements) {
       for (const el of currentStep.elements) {
         await new Promise((r) => setTimeout(r, (el.delay || 0) * 1000));
         setShowElements((prev) => [...prev, el.id]);
-        if (currentStep.type === "demonstration" || currentStep.type === "explanation") {
+        if (shouldCountAloud && el.type === "text" && objetoImg(el.content)) {
+          countedSoFar++;
+          setHighlightedElementId(el.id);
+          setIsSpeaking(true);
+          await AudioSpeechService.speak(NUMBER_WORDS[countedSoFar - 1] || String(countedSoFar));
+          setIsSpeaking(false);
+          setHighlightedElementId(null);
+        } else if (currentStep.type === "demonstration" || currentStep.type === "explanation") {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
           await AudioSpeechService.speak(el.content);
@@ -179,6 +193,7 @@ const LegacyLessonPlayer: React.FC = () => {
         }
       }
     }
+
     const fullSpeech = getStepSpeech(currentStep);
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
