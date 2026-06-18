@@ -67,6 +67,7 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   rimas: icRimas,
   "pedacinhos-da-palavra": icPedacinhos,
   "consciencia-fonologica": icConscienciaFono,
+  "consciencia-silabica": icPedacinhos,
   "onde-esta": icOndeEsta,
   "sequencia-e-padrao": icSeqPadrao,
   "cade-o-par": icCadePar,

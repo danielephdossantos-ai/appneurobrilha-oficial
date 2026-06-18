@@ -26,6 +26,7 @@ export type CategoriaSlug =
   | "rimas"
   | "pedacinhos-da-palavra"
   | "consciencia-fonologica"
+  | "consciencia-silabica"
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
@@ -121,6 +122,15 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     grupo: "Fala e Som",
     cor: "from-coral/25 to-sun/5",
     objetivo: "Habilidades fonológicas: som inicial/final, sílabas, rima e junção",
+    instrucao: "Leia a tarefa e toque na figura certa.",
+  },
+  "consciencia-silabica": {
+    slug: "consciencia-silabica",
+    nome: "Consciência Silábica",
+    emoji: "👐",
+    grupo: "Fala e Som",
+    cor: "from-coral/25 to-sun/5",
+    objetivo: "Contagem, sílaba inicial, sílaba final e formação silábica",
     instrucao: "Leia a tarefa e toque na figura certa.",
   },
 
@@ -1851,12 +1861,99 @@ const CONSCIENCIA_VARS: Variation[] = (() => {
   return out;
 })();
 
+// 24b. CONSCIÊNCIA SILÁBICA — 4 sub-tarefas (contar / inicial / final / formar)
+// Mecânica: pergunta + 4 opções de imagem 2D. Reutiliza biblioteca OBJETO_IMG.
+type CsExtra =
+  | { tipo: "contar"; n: number }
+  | { tipo: "inicial"; silaba: string }
+  | { tipo: "final"; silaba: string }
+  | { tipo: "formar"; partes: string[] };
+
+const csMake = (correta: string, distratores: string[], extra: CsExtra, idx: number) => {
+  const options = cfShuffle(
+    [correta, ...distratores].map((nome) => ({ nome })),
+    idx,
+  );
+  return { ...extra, options, correctName: correta };
+};
+
+const CS_CONTAR = [
+  { n: 2, correta: "BOLA", distra: ["BANANA", "BORBOLETA", "DINOSSAURO"] },
+  { n: 2, correta: "GATO", distra: ["BANANA", "BORBOLETA", "DINOSSAURO"] },
+  { n: 2, correta: "CASA", distra: ["BANANA", "BORBOLETA", "DINOSSAURO"] },
+  { n: 3, correta: "BANANA", distra: ["SOL", "BOLA", "DINOSSAURO"] },
+  { n: 3, correta: "MORANGO", distra: ["SOL", "BOLA", "GATO"] },
+  { n: 4, correta: "BORBOLETA", distra: ["BOLA", "SOL", "CASA"] },
+  { n: 4, correta: "DINOSSAURO", distra: ["GATO", "SOL", "BOLA"] },
+  { n: 2, correta: "SAPO", distra: ["BANANA", "BORBOLETA", "DINOSSAURO"] },
+];
+const CS_INICIAL = [
+  { silaba: "BO", correta: "BOLA", distra: ["GATO", "FLOR", "LUA"] },
+  { silaba: "GA", correta: "GATO", distra: ["SOL", "FLOR", "RATO"] },
+  { silaba: "CA", correta: "CASA", distra: ["PATO", "MAÇÃ", "RATO"] },
+  { silaba: "SA", correta: "SAPO", distra: ["BOLA", "LUA", "GATO"] },
+  { silaba: "PA", correta: "PATO", distra: ["SOL", "FLOR", "GATO"] },
+  { silaba: "VA", correta: "VACA", distra: ["BOLA", "FLOR", "RATO"] },
+  { silaba: "BA", correta: "BANANA", distra: ["SOL", "CASA", "GATO"] },
+  { silaba: "MO", correta: "MORANGO", distra: ["BOLA", "SOL", "GATO"] },
+];
+const CS_FINAL = [
+  { silaba: "LA", correta: "BOLA", distra: ["GATO", "SOL", "PATO"] },
+  { silaba: "TO", correta: "GATO", distra: ["BOLA", "SOL", "FLOR"] },
+  { silaba: "SA", correta: "CASA", distra: ["PATO", "LUA", "FLOR"] },
+  { silaba: "PO", correta: "SAPO", distra: ["BOLA", "LUA", "GATO"] },
+  { silaba: "CA", correta: "VACA", distra: ["GATO", "SOL", "FLOR"] },
+  { silaba: "TO", correta: "PATO", distra: ["BOLA", "FLOR", "SOL"] },
+  { silaba: "NA", correta: "BANANA", distra: ["GATO", "SOL", "FLOR"] },
+  { silaba: "GO", correta: "MORANGO", distra: ["BOLA", "GATO", "SOL"] },
+];
+const CS_FORMAR = [
+  { partes: ["BO", "LA"], correta: "BOLA", distra: ["GATO", "CASA", "LUA"] },
+  { partes: ["GA", "TO"], correta: "GATO", distra: ["BOLA", "RATO", "SOL"] },
+  { partes: ["CA", "SA"], correta: "CASA", distra: ["GATO", "PATO", "BOLA"] },
+  { partes: ["SA", "PO"], correta: "SAPO", distra: ["BOLA", "GATO", "MAÇÃ"] },
+  { partes: ["VA", "CA"], correta: "VACA", distra: ["PATO", "FLOR", "GATO"] },
+  { partes: ["PA", "TO"], correta: "PATO", distra: ["GATO", "RATO", "BOLA"] },
+  { partes: ["BA", "NA", "NA"], correta: "BANANA", distra: ["SOL", "BOLA", "GATO"] },
+  { partes: ["MO", "RAN", "GO"], correta: "MORANGO", distra: ["BOLA", "SOL", "GATO"] },
+];
+
+const CONSCIENCIA_SILABICA_VARS: Variation[] = (() => {
+  const out: Variation[] = [];
+  CS_CONTAR.forEach((b, i) =>
+    out.push({
+      id: `cs-c-${i + 1}`,
+      payload: csMake(b.correta, b.distra, { tipo: "contar", n: b.n }, i),
+    }),
+  );
+  CS_INICIAL.forEach((b, i) =>
+    out.push({
+      id: `cs-i-${i + 1}`,
+      payload: csMake(b.correta, b.distra, { tipo: "inicial", silaba: b.silaba }, i + 8),
+    }),
+  );
+  CS_FINAL.forEach((b, i) =>
+    out.push({
+      id: `cs-f-${i + 1}`,
+      payload: csMake(b.correta, b.distra, { tipo: "final", silaba: b.silaba }, i + 16),
+    }),
+  );
+  CS_FORMAR.forEach((b, i) =>
+    out.push({
+      id: `cs-fm-${i + 1}`,
+      payload: csMake(b.correta, b.distra, { tipo: "formar", partes: b.partes }, i + 24),
+    }),
+  );
+  return out;
+})();
+
 export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sons-iniciais": SONS_INICIAIS_VARS,
   "motorzinho-dos-sons": MOTORZINHO_VARS,
   rimas: RIMAS_VARS,
   "pedacinhos-da-palavra": PEDACINHOS_VARS,
   "consciencia-fonologica": CONSCIENCIA_VARS,
+  "consciencia-silabica": CONSCIENCIA_SILABICA_VARS,
   "onde-esta": ONDE_VARS,
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
@@ -1953,6 +2050,7 @@ export const GRUPOS = [
       "rimas",
       "pedacinhos-da-palavra",
       "consciencia-fonologica",
+      "consciencia-silabica",
     ] as CategoriaSlug[],
   },
   {
