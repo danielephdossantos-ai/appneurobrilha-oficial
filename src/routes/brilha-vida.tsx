@@ -6,6 +6,7 @@ import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { PausaRespirar } from "@/components/brilha-vida/PausaRespirar";
+import { BalaoSopro } from "@/components/brilha-vida/BalaoSopro";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -82,14 +83,14 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "balao" | "escolher-respirar">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
     if (!activeChild) return;
     // Atividades com componente próprio (não passam pelo engine)
     if (tipo === "Pausa para Respirar") {
-      setCustomActivity("respirar");
+      setCustomActivity("escolher-respirar");
       return;
     }
     setIsLoading(true);
@@ -131,6 +132,48 @@ function BrilhaVida() {
     return (
       <Shell>
         <PausaRespirar onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "balao") {
+    return (
+      <Shell>
+        <BalaoSopro onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "escolher-respirar") {
+    return (
+      <Shell>
+        <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 gap-6">
+          <h2 className="text-2xl font-black text-slate-800">Como quer se acalmar?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+            <button
+              onClick={() => setCustomActivity("respirar")}
+              className="p-6 bg-gradient-to-br from-sky-100 to-sky-200 rounded-3xl border-2 border-sky-300 hover:scale-105 transition-transform text-left"
+            >
+              <div className="text-5xl mb-2">🫁</div>
+              <div className="text-lg font-black text-slate-800">Respiração Guiada</div>
+              <div className="text-sm text-slate-600">Inspira, segura e solta seguindo o círculo</div>
+            </button>
+            <button
+              onClick={() => setCustomActivity("balao")}
+              className="p-6 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-3xl border-2 border-emerald-300 hover:scale-105 transition-transform text-left"
+            >
+              <div className="text-5xl mb-2">🎈</div>
+              <div className="text-lg font-black text-slate-800">Balão Mágico</div>
+              <div className="text-sm text-slate-600">Assopre no microfone pra encher o balão</div>
+            </button>
+          </div>
+          <button
+            onClick={() => setCustomActivity(null)}
+            className="px-5 py-2 text-slate-500 font-bold hover:text-slate-700"
+          >
+            Voltar
+          </button>
+        </div>
       </Shell>
     );
   }
