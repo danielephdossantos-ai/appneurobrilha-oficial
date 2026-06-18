@@ -7,6 +7,11 @@ import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
 import { motion, AnimatePresence } from "framer-motion";
 
+import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
+import catAmizadeImg from "@/assets/brilha-vida/categoria-amizade.png";
+import catAutocontroleImg from "@/assets/brilha-vida/categoria-autocontrole.png";
+import catRotinaImg from "@/assets/brilha-vida/categoria-rotina.png";
+
 export const Route = createFileRoute("/brilha-vida")({
   component: BrilhaVida,
 });
@@ -15,7 +20,7 @@ const categorias = [
   {
     id: "emocoes",
     nome: "Emoções",
-    emoji: "😊",
+    img: catEmocoesImg,
     cor: "from-sun/30 to-sun/5",
     descricao: "Reconhecer e nomear o que sentimos",
     atividades: ["Termômetro das Emoções", "Como estou agora?", "Emoji Mágico"],
@@ -23,7 +28,7 @@ const categorias = [
   {
     id: "social",
     nome: "Amizade e Empatia",
-    emoji: "🤝",
+    img: catAmizadeImg,
     cor: "from-emerald/30 to-emerald/5",
     descricao: "Aprender a conviver e respeitar",
     atividades: ["Histórias Sociais", "Dividindo o Brinquedo", "Cuidando do Amigo"],
@@ -31,7 +36,7 @@ const categorias = [
   {
     id: "autocontrole",
     nome: "Autocontrole",
-    emoji: "🧘",
+    img: catAutocontroleImg,
     cor: "from-sky/30 to-sky/5",
     descricao: "Estratégias para se acalmar",
     atividades: ["Pausa para Respirar", "Cantinho da Calma", "Semáforo do Sentir"],
@@ -39,7 +44,7 @@ const categorias = [
   {
     id: "rotina",
     nome: "Rotina e Convivência",
-    emoji: "🏠",
+    img: catRotinaImg,
     cor: "from-lilac/30 to-lilac/5",
     descricao: "Regras e harmonia no dia a dia",
     atividades: ["Minha vez, sua vez", "Regras da Casa", "Resolução de Conflitos"],
@@ -173,8 +178,9 @@ function BrilhaVida() {
         {categorias.map((cat) => (
           <section key={cat.id}>
             <div className="flex flex-col mb-4">
-              <h2 className="text-xl font-black flex items-center gap-2">
-                <span className="text-3xl">{cat.emoji}</span> {cat.nome}
+              <h2 className="text-xl font-black flex items-center gap-3">
+                <img src={cat.img} alt={cat.nome} loading="lazy" width={64} height={64} className="w-16 h-16 object-contain drop-shadow-sm" />
+                {cat.nome}
               </h2>
               <p className="text-sm text-muted-foreground font-medium">{cat.descricao}</p>
             </div>
