@@ -24,7 +24,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "pineapple",
       word: "Abacaxi",
       word2: "Abelha",
-      speech: "Á! Essa é a letra Á! Á de Abacaxi! Á de Abelha! Repita comigo: Á!",
+      speech: "Ááá! Ááá! Esta letra tem o som Á, como em Abacaxi e Abelha. Repita comigo: Ááá!",
     },
     {
       kind: "vowel-practice",
@@ -32,7 +32,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "A",
       target_color: "text-rose-600",
       target_bg: "bg-rose-100",
-      question_speech: "Encontre a letra Á! Toque na letra Á!",
+      question_speech: "Encontre a letra com som Ááá! Toque na letra de Abacaxi!",
       options: [
         { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
@@ -51,7 +51,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "elephant",
       word: "Elefante",
       word2: "Estrela",
-      speech: "É! Essa é a letra É! É de Elefante! É de Estrela! Repita comigo: É!",
+      speech: "Ééé! Ééé! Esta letra tem o som É, como em Elefante e Estrela. Repita comigo: Ééé!",
     },
     {
       kind: "vowel-practice",
@@ -59,7 +59,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "E",
       target_color: "text-emerald-600",
       target_bg: "bg-emerald-100",
-      question_speech: "Encontre a letra É! Qual é a letra É?",
+      question_speech: "Encontre a letra com som Ééé! Toque na letra de Elefante!",
       options: [
         { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
@@ -78,7 +78,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "iguana",
       word: "Iguana",
       word2: "Igreja",
-      speech: "I! Essa é a letra I, igual ao I de Iguana! I de Igreja! Repita comigo: I!",
+      speech: "Iii! Iii! Esta letra tem o som I, como em Iguana e Igreja. Repita comigo: Iii!",
     },
     {
       kind: "vowel-practice",
@@ -86,7 +86,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "I",
       target_color: "text-amber-600",
       target_bg: "bg-amber-100",
-      question_speech: "Agora ache a letra I! Toque na letra I!",
+      question_speech: "Encontre a letra com som Iii! Toque na letra de Iguana!",
       options: [
         { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
         { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
@@ -105,7 +105,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "sheep",
       word: "Ovelha",
       word2: "Ovo",
-      speech: "Ó! Essa é a letra Ó! Ó de Ovelha! Ó de Ovo! Repita comigo: Ó!",
+      speech: "Óóó! Óóó! Esta letra tem o som Ó, como em Ovelha e Ovo. Repita comigo: Óóó!",
     },
     {
       kind: "vowel-practice",
@@ -113,7 +113,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "O",
       target_color: "text-blue-600",
       target_bg: "bg-blue-100",
-      question_speech: "Qual é a letra Ó? Toque na letra Ó!",
+      question_speech: "Encontre a letra com som Óóó! Toque na letra de Ovelha!",
       options: [
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
         { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
@@ -132,7 +132,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "grape",
       word: "Uva",
       word2: "Urso",
-      speech: "U! Essa é a letra U, igual ao U de Uva! U de Urso! Repita comigo: U!",
+      speech: "Uuu! Uuu! Esta letra tem o som U, como em Uva e Urso. Repita comigo: Uuu!",
     },
     {
       kind: "vowel-practice",
@@ -140,7 +140,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "U",
       target_color: "text-violet-600",
       target_bg: "bg-violet-100",
-      question_speech: "Qual é a letra U? Ache a letra U!",
+      question_speech: "Encontre a letra com som Uuu! Toque na letra de Uva!",
       options: [
         { letter: "U", color: "text-violet-600", bg: "bg-violet-100" },
         { letter: "A", color: "text-rose-600", bg: "bg-rose-100" },
