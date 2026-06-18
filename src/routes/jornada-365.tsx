@@ -110,7 +110,7 @@ function Jornada() {
   const theme = WORLD_THEME[world];
 
   // PEI gera o plano em segundo plano — o pai não dispara nada.
-  usePEIAutoGenerate({
+  const pei = usePEIAutoGenerate({
     childId: activeChild?.id ?? null,
     anamneseCompleta: !!activeChild?.anamnese_completa,
   });
@@ -163,6 +163,32 @@ function Jornada() {
             className="btn-tap rounded-2xl bg-primary text-primary-foreground px-8 py-4 font-bold text-lg flex items-center gap-2 shadow-glow"
           >
             <ClipboardList className="h-5 w-5" /> Começar
+          </Link>
+        </div>
+      </Shell>
+    );
+  }
+
+  if (pei.anamneseVencida && activeChild.anamnese_completa) {
+    return (
+      <Shell>
+        <div className="flex flex-col items-center text-center p-12 py-16 bg-gradient-to-b from-warning/10 to-background border-2 border-dashed border-warning rounded-3xl">
+          <div className="h-20 w-20 rounded-full bg-warning/20 flex items-center justify-center mb-6">
+            <ClipboardList className="h-10 w-10 text-warning" />
+          </div>
+          <h2 className="text-2xl font-extrabold mb-3">Hora de atualizar a anamnese</h2>
+          <p className="text-muted-foreground max-w-md mb-6">
+            Faz {pei.diasDesdeAnamnese} dias desde a última anamnese de{" "}
+            <strong>{activeChild.nome}</strong>. Pra continuar gerando
+            atividades novas e adaptadas, o pai precisa refazer a anamnese
+            (a cada 2 meses).
+          </p>
+          <Link
+            to="/anamnese/$childId"
+            params={{ childId: activeChild.id }}
+            className="btn-tap rounded-2xl bg-warning text-warning-foreground px-8 py-4 font-bold text-lg flex items-center gap-2 shadow-glow"
+          >
+            <ClipboardList className="h-5 w-5" /> Refazer anamnese
           </Link>
         </div>
       </Shell>
