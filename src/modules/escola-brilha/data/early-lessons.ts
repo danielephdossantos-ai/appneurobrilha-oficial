@@ -132,7 +132,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       illustration: "grape",
       word: "Uva",
       word2: "Urso",
-      speech: "U! Essa é a letra U! U de Uva! U de Urso! Repita comigo: U!",
+      speech: "U! Essa é a letra U, igual ao U de Uva! U de Urso! Repita comigo: U!",
     },
     {
       kind: "vowel-practice",
