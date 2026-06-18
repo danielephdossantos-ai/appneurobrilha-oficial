@@ -303,8 +303,14 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("fundamental2");
 
+  const etapaAtual: "infantil" | "fundamental1" | "fundamental2" = tab;
+  const { aulas: aulasBanco } = useAulasBnccByEtapa(etapaAtual);
+
   const goToActivity = (id: string, type: string) =>
     navigate({ to: "/escola-brilha/aula", search: { category: id, type } });
+
+  const goToAulaBanco = (aulaId: string) =>
+    navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-950 to-violet-950 pb-12">
