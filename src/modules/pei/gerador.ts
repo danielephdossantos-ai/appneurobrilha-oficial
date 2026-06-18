@@ -241,7 +241,7 @@ export function gerarPlanoTrimestral(
   const aulas: AulaGerada[] = [];
   for (let i = 0; i < total; i++) {
     const hab = sequencia[i % sequencia.length];
-    const blocos = montarBlocos(tempoAula, hab, perfil);
+    const blocos = montarBlocos(tempoAula, hab, perfil, i);
     aulas.push({
       ordem: i + 1,
       data_prevista: addDaysISO(inicio, i),
