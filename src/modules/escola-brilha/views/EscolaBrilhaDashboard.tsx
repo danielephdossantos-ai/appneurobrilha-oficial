@@ -41,7 +41,7 @@ const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
     { id: "subtracao", type: "early", serie: "Pré-Escola", title: "Subtrair é Tirar!", subtitle: "Tirar objetos", badge: "Matemática", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-500 to-red-600", xp: 90, illustration: "subtract-icon" },
   ],
   fundamental1: [
-    { id: "portugues_1ano", type: "legacy", serie: "1º Ano", title: "Sílabas", subtitle: "Primeiras sílabas", badge: "Alfabetização", badgeColor: "bg-emerald-100 text-emerald-700", gradient: "from-emerald-400 to-green-500", xp: 100 },
+    { id: "portugues_1ano", type: "legacy", serie: "1º Ano", title: "Sílabas", subtitle: "Primeiras sílabas", badge: "Língua Portuguesa", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-400 to-pink-500", xp: 100 },
     { id: "matematica", type: "legacy", serie: "1º Ano", title: "Contas", subtitle: "Somar e subtrair", badge: "Matemática", badgeColor: "bg-sky-100 text-sky-700", gradient: "from-sky-400 to-blue-500", xp: 100 },
     { id: "ciencias_1ano", type: "legacy", serie: "1º Ano", title: "Os 5 Sentidos", subtitle: "Ver, ouvir, cheirar, provar, tocar", badge: "Ciências", badgeColor: "bg-emerald-100 text-emerald-700", gradient: "from-emerald-500 to-teal-600", xp: 100 },
     { id: "historia_1ano", type: "legacy", serie: "1º Ano", title: "Vivendo e Lembrando", subtitle: "Família e transportes", badge: "História", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-stone-500 to-amber-700", xp: 100 },
