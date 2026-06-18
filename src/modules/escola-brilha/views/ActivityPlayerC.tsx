@@ -26,9 +26,12 @@ import planetaOceanoImg from "@/assets/escola-brilha/ciencias6/planeta-oceano.pn
 import amazoniaImg from "@/assets/escola-brilha/geografia6/amazonia.png";
 import { LessonVisualMap } from "../components/LessonVisualMap";
 import { MathVisualizer } from "../components/MathVisualizer";
+import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
+import type { LessonRef } from "../hooks/useNextLesson";
 
 interface Props {
   lesson: ActivityLessonC;
+  currentRef?: LessonRef;
 }
 
 const LESSON_ILLUSTRATIONS: Record<string, { src: string; alt: string }> = {
@@ -54,7 +57,8 @@ const LETTER_COLORS: Record<string, string> = {
   D: "bg-amber-500  border-amber-700 ",
 };
 
-export const ActivityPlayerC: React.FC<Props> = ({ lesson }) => {
+export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
+  const fallbackRef: LessonRef = currentRef ?? { kind: "static", id: lesson.id };
   const navigate = useNavigate();
   const [screenIndex, setScreenIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -443,9 +447,10 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson }) => {
                     +{lesson.xp} XP • BNCC {lesson.bncc_code}
                   </p>
                 </div>
+                <NextLessonInlineButton current={fallbackRef} />
                 <button
                   onClick={() => navigate({ to: "/escola-brilha" })}
-                  className={`w-full ${ac.bg} text-white font-black py-3.5 rounded-2xl shadow-md hover:opacity-90 active:scale-[0.98] transition`}
+                  className={`w-full bg-white ${ac.text} border-2 ${ac.border} font-black py-3.5 rounded-2xl shadow-sm hover:opacity-90 active:scale-[0.98] transition`}
                 >
                   Voltar para o início
                 </button>

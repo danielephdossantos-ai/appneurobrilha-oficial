@@ -75,13 +75,14 @@ function AulaDbPage() {
   const back = () => navigate({ to: "/escola-brilha" });
 
   const renderPlayer = () => {
+    const ref = { kind: "db" as const, id: aulaId };
     switch (aula.tipo_player) {
       case "early":
         return <EarlyChildhoodPlayer lesson={aula.payload} />;
       case "b":
-        return <ActivityPlayer lesson={aula.payload} />;
+        return <ActivityPlayer lesson={aula.payload} currentRef={ref} />;
       case "c":
-        return <ActivityPlayerC lesson={normalizeLessonC(aula)} />;
+        return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
       default:
         return (
           <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">

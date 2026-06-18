@@ -7,9 +7,12 @@ import { AudioSpeechService } from "../services/AudioSpeechService";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
 import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
+import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
+import type { LessonRef } from "../hooks/useNextLesson";
 
 interface ActivityPlayerProps {
   lesson: ActivityLesson;
+  currentRef?: LessonRef;
 }
 
 type ScreenId = "explicacao" | "exploracao" | "explicacao_curta" | "exemplo_visual" | "praticar";
@@ -914,7 +917,8 @@ const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({
    MAIN PLAYER
    ════════════════════════════════════════════════ */
 
-export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson }) => {
+export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson, currentRef }) => {
+  const fallbackRef: LessonRef = currentRef ?? { kind: "static", id: lesson.id };
   const navigate = useNavigate();
   const [screenIndex, setScreenIndex] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -1111,9 +1115,10 @@ export const ActivityPlayer: React.FC<ActivityPlayerProps> = ({ lesson }) => {
                   +{lesson.xp} XP conquistados!
                 </p>
               </div>
+              <NextLessonInlineButton current={fallbackRef} />
               <button
                 onClick={() => navigate({ to: "/escola-brilha" })}
-                className="w-full bg-violet-500 hover:bg-violet-600 text-white font-black py-3 rounded-2xl shadow-lg transition active:scale-95"
+                className="w-full bg-white text-violet-600 border-2 border-violet-300 hover:bg-violet-50 font-black py-3 rounded-2xl shadow-sm transition active:scale-95"
               >
                 Voltar para o início
               </button>
