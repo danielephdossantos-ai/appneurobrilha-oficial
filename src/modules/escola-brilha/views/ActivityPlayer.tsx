@@ -859,7 +859,7 @@ const WordVisual: React.FC<{ items: Array<{ label: string; emoji: string; captio
             transition={{ delay: i * 0.25, type: "spring", stiffness: 200, damping: 16 }}
             className="flex flex-col items-center gap-1 bg-white rounded-2xl border-2 border-slate-200 px-3 py-3 shadow-sm min-w-[88px]"
           >
-            <div className="text-5xl leading-none drop-shadow-sm">{it.emoji}</div>
+            <RenderEmoji e={it.emoji} className="w-16 h-16" />
             <div className="font-black text-slate-800 text-sm uppercase tracking-wide">{it.label}</div>
             {it.caption && <div className="text-[10px] text-slate-500 font-semibold">{it.caption}</div>}
           </motion.div>
