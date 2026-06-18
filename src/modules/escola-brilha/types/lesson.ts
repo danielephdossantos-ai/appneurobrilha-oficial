@@ -26,7 +26,10 @@ export interface LessonStep {
   interaction?: LessonInteraction;
   audioUrl?: string;
   showHelp?: boolean;
+  /** Metadados opcionais usados pelo player (ex.: subtração visual). */
+  meta?: { take?: number };
 }
+
 
 export interface LessonElement {
   id: string;
