@@ -1,66 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, RotateCcw, Check, HeartHandshake } from "lucide-react";
-
-import imgTriste from "@/assets/brilha-vida/emocoes/triste.png";
-import imgBravo from "@/assets/brilha-vida/emocoes/bravo.png";
-import imgConfuso from "@/assets/brilha-vida/emocoes/confuso.png";
-
-/**
- * Cuidando do Amigo
- * A criança vê um amigo em situação difícil e escolhe a melhor forma de cuidar.
- * Foca em empatia e gentileza ativa.
- */
-
-type Situacao = {
-  img: string;
-  cor: string;
-  texto: string;
-  acoes: { emoji: string; texto: string; certo: boolean; feedback: string }[];
-};
-
-const SITUACOES: Situacao[] = [
-  {
-    img: imgTriste,
-    cor: "#fb923c",
-    texto: "Sua amiga está chorando porque perdeu o lanche.",
-    acoes: [
-      { emoji: "🍎", texto: "Divido o meu lanche com ela.", certo: true, feedback: "Gentileza alimenta o coração também. 💛" },
-      { emoji: "🙈", texto: "Finjo que não vi.", certo: false, feedback: "Ela precisa de alguém. Um gesto pequeno ajuda muito." },
-      { emoji: "😂", texto: "Rio da situação.", certo: false, feedback: "Rir do outro magoa. Imagine se fosse com você." },
-    ],
-  },
-  {
-    img: imgBravo,
-    cor: "#ef4444",
-    texto: "Seu amigo está bravo porque perdeu no jogo.",
-    acoes: [
-      { emoji: "🤗", texto: "Digo que tudo bem perder, vamos jogar de novo.", certo: true, feedback: "Acolher a frustração ajuda o amigo a se acalmar." },
-      { emoji: "🏆", texto: "Fico falando que eu venci o tempo todo.", certo: false, feedback: "Provocar deixa tudo pior. Comemorar com humildade é melhor." },
-      { emoji: "🚪", texto: "Saio e deixo ele bravo sozinho.", certo: false, feedback: "Às vezes precisamos de espaço, mas um amigo por perto conforta." },
-    ],
-  },
-  {
-    img: imgConfuso,
-    cor: "#eab308",
-    texto: "Um colega caiu e machucou o joelho no recreio.",
-    acoes: [
-      { emoji: "🩹", texto: "Ajudo ele a levantar e chamo um adulto.", certo: true, feedback: "Ajudar com calma e chamar quem pode cuidar é o ideal." },
-      { emoji: "🏃", texto: "Continuo correndo pra não atrasar a brincadeira.", certo: false, feedback: "Cuidar de quem se machucou vem antes da brincadeira." },
-      { emoji: "📸", texto: "Tiro foto pra mostrar pros amigos.", certo: false, feedback: "Isso constrange. Empatia é se colocar no lugar do outro." },
-    ],
-  },
-  {
-    img: imgTriste,
-    cor: "#60a5fa",
-    texto: "Seu irmãozinho menor está com medo do trovão.",
-    acoes: [
-      { emoji: "🫂", texto: "Dou um abraço e fico perto dele.", certo: true, feedback: "Presença e afeto acalmam quem ama a gente." },
-      { emoji: "👻", texto: "Faço barulhos pra assustar mais ainda.", certo: false, feedback: "Brincar com o medo do outro magoa de verdade." },
-      { emoji: "🙄", texto: "Falo que é coisa de bebê.", certo: false, feedback: "Cada um tem seus medos. Respeitar é cuidar." },
-    ],
-  },
-];
+import { SITUACOES_CUIDAR as SITUACOES } from "@/data/brilha-vida/cenarios";
 
 export function CuidandoAmigo({ onClose }: { onClose: () => void }) {
   const situacoes = useMemo(() => [...SITUACOES].sort(() => Math.random() - 0.5), []);
