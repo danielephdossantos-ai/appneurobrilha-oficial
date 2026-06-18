@@ -16,6 +16,7 @@ import {
 import { Illustration } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
+import { useAulasBnccByEtapa } from "../hooks/useAulasBncc";
 
 /* ─── 2º ao 5º Ano (Interface B) ─── */
 const ACTIVITY_B = [
