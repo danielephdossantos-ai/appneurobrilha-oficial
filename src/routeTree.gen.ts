@@ -34,6 +34,7 @@ import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
+import { Route as NeuroTreinoLibrasRouteImport } from './routes/neuro-treino.libras'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as HistoriasStoryIdRouteImport } from './routes/historias.$storyId'
@@ -168,6 +169,11 @@ const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
   path: '/',
   getParentRoute: () => EscolaBrilhaRoute,
 } as any)
+const NeuroTreinoLibrasRoute = NeuroTreinoLibrasRouteImport.update({
+  id: '/libras',
+  path: '/libras',
+  getParentRoute: () => NeuroTreinoRoute,
+} as any)
 const NeuroTreinoConfigurarRoute = NeuroTreinoConfigurarRouteImport.update({
   id: '/configurar',
   path: '/configurar',
@@ -242,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/neuro-treino/libras': typeof NeuroTreinoLibrasRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -276,6 +283,7 @@ export interface FileRoutesByTo {
   '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/neuro-treino/libras': typeof NeuroTreinoLibrasRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -312,6 +320,7 @@ export interface FileRoutesById {
   '/historias/$storyId': typeof HistoriasStoryIdRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
+  '/neuro-treino/libras': typeof NeuroTreinoLibrasRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
@@ -349,6 +358,7 @@ export interface FileRouteTypes {
     | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/neuro-treino/libras'
     | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -383,6 +393,7 @@ export interface FileRouteTypes {
     | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/neuro-treino/libras'
     | '/escola-brilha'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -418,6 +429,7 @@ export interface FileRouteTypes {
     | '/historias/$storyId'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
+    | '/neuro-treino/libras'
     | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
@@ -629,6 +641,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
       parentRoute: typeof EscolaBrilhaRoute
     }
+    '/neuro-treino/libras': {
+      id: '/neuro-treino/libras'
+      path: '/libras'
+      fullPath: '/neuro-treino/libras'
+      preLoaderRoute: typeof NeuroTreinoLibrasRouteImport
+      parentRoute: typeof NeuroTreinoRoute
+    }
     '/neuro-treino/configurar': {
       id: '/neuro-treino/configurar'
       path: '/configurar'
@@ -717,11 +736,13 @@ const HistoriasRouteWithChildren = HistoriasRoute._addFileChildren(
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
+  NeuroTreinoLibrasRoute: typeof NeuroTreinoLibrasRoute
 }
 
 const NeuroTreinoRouteChildren: NeuroTreinoRouteChildren = {
   NeuroTreinoSlugRoute: NeuroTreinoSlugRoute,
   NeuroTreinoConfigurarRoute: NeuroTreinoConfigurarRoute,
+  NeuroTreinoLibrasRoute: NeuroTreinoLibrasRoute,
 }
 
 const NeuroTreinoRouteWithChildren = NeuroTreinoRoute._addFileChildren(

@@ -11,7 +11,9 @@ import {
   BookOpen,
   Sparkles,
   Zap,
+  Hand,
 } from "lucide-react";
+import professoraLibras from "@/assets/libras/professora.png";
 import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
@@ -321,6 +323,33 @@ function Treino() {
             </div>
           </div>
         )}
+
+        {/* ── DESTAQUE LIBRAS ─────────────────────────────────────── */}
+        <Link
+          to="/neuro-treino/libras"
+          className="group block mb-5 rounded-3xl overflow-hidden bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 p-4 shadow-lg active:scale-[0.98] transition-all"
+        >
+          <div className="flex items-center gap-3">
+            <img
+              src={professoraLibras}
+              alt="Professora de LIBRAS"
+              width={96}
+              height={96}
+              loading="lazy"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-lg group-hover:scale-105 transition-transform"
+            />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 text-white/80 text-[10px] font-bold uppercase tracking-widest">
+                <Hand className="h-3 w-3" /> Novo módulo
+              </div>
+              <h2 className="text-white font-black text-lg leading-tight">LIBRAS</h2>
+              <p className="text-white/90 text-xs font-bold">
+                Alfabeto, família, cores · 3 jogos
+              </p>
+            </div>
+            <Sparkles className="h-6 w-6 text-amber-300" />
+          </div>
+        </Link>
 
         {/* ── GRUPOS CLÍNICOS ─────────────────────────────────────── */}
         <div className="space-y-5">
