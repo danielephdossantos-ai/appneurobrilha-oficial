@@ -5,6 +5,7 @@ import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildh
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
+import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,
