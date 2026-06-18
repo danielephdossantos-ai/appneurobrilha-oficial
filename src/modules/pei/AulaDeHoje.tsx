@@ -29,13 +29,14 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-const ROTAS: Record<string, string> = {
-  "neuro-treino": "/neuro-treino",
-  alfabetizacao: "/neuro-treino",
-  matematica: "/neuro-treino",
-  leitura: "/neuro-treino",
-  movimento: "/neuro-treino",
-};
+// Tipos de bloco que abrem o player de neuro-treino com slug específico.
+const TIPOS_NEURO = new Set([
+  "neuro-treino",
+  "alfabetizacao",
+  "matematica",
+  "leitura",
+  "movimento",
+]);
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
