@@ -652,6 +652,8 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
   const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
   const [chosen, setChosen] = useState<number | null>(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [shownTotal, setShownTotal] = useState(0);
+  const [countWord, setCountWord] = useState<string | null>(null);
 
   const total = step.total;
   const remove = step.remove;
@@ -663,6 +665,8 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
     setFeedback(null);
     setChosen(null);
     setShowButtons(false);
+    setShownTotal(0);
+    setCountWord(null);
 
     (async () => {
       await delay(400);
@@ -670,7 +674,22 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
       setIsSpeaking(true);
       await speak(step.teach_speech);
       if (!live || cancelRef.current) return;
-      await delay(500);
+
+      // Conta cada item junto com a criança
+      for (let i = 0; i < total; i++) {
+        await delay(180);
+        if (!live || cancelRef.current) return;
+        const word = NUMBER_WORDS[i] ?? String(i + 1);
+        setShownTotal(i + 1);
+        setCountWord(word);
+        await speak(word + "!", true);
+        if (!live || cancelRef.current) return;
+        setCountWord(null);
+        await delay(150);
+      }
+
+      await delay(400);
+      if (!live || cancelRef.current) return;
 
       setSubPhase("removing");
       await speak(step.remove_speech);
@@ -693,6 +712,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
       live = false;
     };
   }, [step.id]);
+
 
   const handlePick = async (n: number) => {
     if (chosen !== null) return;
