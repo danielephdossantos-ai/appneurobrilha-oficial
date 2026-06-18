@@ -6,6 +6,7 @@ import { ActivityLesson, PraticarOption, MathStep, VisualConfig } from "../types
 import { AudioSpeechService } from "../services/AudioSpeechService";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
+import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 
 interface ActivityPlayerProps {
   lesson: ActivityLesson;
