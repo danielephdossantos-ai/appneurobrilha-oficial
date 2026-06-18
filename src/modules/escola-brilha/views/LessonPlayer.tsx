@@ -395,6 +395,8 @@ const LegacyLessonPlayer: React.FC = () => {
                   ];
                   const color = palette[i % palette.length];
                   const hasIllust = isPictograph(opt) || objetoImg(opt);
+                  const isNumber = /^\d+$/.test(String(opt).trim());
+                  const isLetterOrSyllable = !hasIllust && /^[A-ZÇÃÕÁÉÍÓÚÂÊÔ]{1,3}$/.test(String(opt).trim());
                   return (
                     <motion.button
                       key={opt}
@@ -402,12 +404,19 @@ const LegacyLessonPlayer: React.FC = () => {
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       transition={{ type: "spring", stiffness: 220 }}
                       onClick={() => handleInteraction(opt)}
-                      className={`${color} text-white w-24 h-24 sm:w-28 sm:h-28 rounded-3xl text-3xl sm:text-4xl font-black shadow-xl border-b-8 hover:scale-105 active:scale-95 transition flex items-center justify-center p-4`}
+                      className={`${color} text-white ${hasIllust ? "w-28 h-32 sm:w-32 sm:h-36" : "w-24 h-24 sm:w-28 sm:h-28"} rounded-3xl font-black shadow-xl border-b-8 hover:scale-105 active:scale-95 transition flex flex-col items-center justify-center gap-1 p-2`}
                     >
                       {hasIllust ? (
-                        <RenderEmoji e={opt} className="w-full h-full" label={semEmoji(opt)} />
+                        <>
+                          <RenderEmoji e={opt} className="w-16 h-16 sm:w-20 sm:h-20" label={semEmoji(opt)} />
+                          <span className="text-sm sm:text-base font-black uppercase tracking-wide leading-none">
+                            {semEmoji(opt)}
+                          </span>
+                        </>
                       ) : (
-                        <span>{opt}</span>
+                        <span className={isNumber || isLetterOrSyllable ? "text-5xl sm:text-6xl drop-shadow-[0_3px_0_rgba(0,0,0,0.25)]" : "text-3xl sm:text-4xl"}>
+                          {opt}
+                        </span>
                       )}
                     </motion.button>
                   );
