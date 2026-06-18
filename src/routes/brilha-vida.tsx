@@ -39,6 +39,10 @@ import atvSemaforoImg from "@/assets/brilha-vida/semaforo-sentir.png";
 import atvMinhaVezImg from "@/assets/brilha-vida/minha-vez.png";
 import atvRegrasImg from "@/assets/brilha-vida/regras-casa.png";
 import atvConflitosImg from "@/assets/brilha-vida/resolucao-conflitos.png";
+import atvDiarioImg from "@/assets/brilha-vida/diario-sentir.png";
+import atvElogioImg from "@/assets/brilha-vida/elogio-magico.png";
+import atvBolhaImg from "@/assets/brilha-vida/bolha-bemestar.png";
+import atvRodaImg from "@/assets/brilha-vida/roda-do-dia.png";
 
 const ATIVIDADE_IMG: Record<string, string> = {
   "Termômetro das Emoções": atvTermometroImg,
