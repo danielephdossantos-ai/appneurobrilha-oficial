@@ -83,7 +83,7 @@ const categorias = [
 function BrilhaVida() {
   const { activeChild } = useAppState();
   const [activeActivity, setActiveActivity] = useState<any>(null);
-  const [customActivity, setCustomActivity] = useState<null | "respirar">(null);
+  const [customActivity, setCustomActivity] = useState<null | "respirar" | "termometro">(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const startLevel = async (tipo: string) => {
@@ -91,6 +91,10 @@ function BrilhaVida() {
     // Atividades com componente próprio (não passam pelo engine)
     if (tipo === "Pausa para Respirar") {
       setCustomActivity("respirar");
+      return;
+    }
+    if (tipo === "Termômetro das Emoções") {
+      setCustomActivity("termometro");
       return;
     }
     setIsLoading(true);
