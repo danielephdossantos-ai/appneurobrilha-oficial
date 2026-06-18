@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell, PageHeader, Card } from "@/components/Layout";
 import { Heart, Users, Shield, Zap, Smile, BookOpen, Loader2, X } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useAppState } from "@/core/store";
 import { InfiniteActivityEngine } from "@/engines/infinite-activity-engine";
 import { ActivityContainer } from "@/components/activities/ActivityContainer";
@@ -21,6 +21,7 @@ import { DiarioSentir } from "@/components/brilha-vida/DiarioSentir";
 import { ElogioMagico } from "@/components/brilha-vida/ElogioMagico";
 import { BolhaBemEstar } from "@/components/brilha-vida/BolhaBemEstar";
 import { RodaDoDia } from "@/components/brilha-vida/RodaDoDia";
+import { TerapeutaFlutuante } from "@/components/brilha-vida/TerapeutaFlutuante";
 import { motion, AnimatePresence } from "framer-motion";
 
 import catEmocoesImg from "@/assets/brilha-vida/categoria-emocoes.png";
@@ -210,114 +211,34 @@ function BrilhaVida() {
     }, 800);
   };
 
-  if (customActivity === "respirar") {
+  const CUSTOM_MAP: Record<string, { node: ReactNode; contexto: string }> = {
+    respirar: { node: <PausaRespirar onClose={() => setCustomActivity(null)} />, contexto: "Pausa para Respirar" },
+    termometro: { node: <TermometroEmocoes onClose={() => setCustomActivity(null)} />, contexto: "Termômetro das Emoções" },
+    semaforo: { node: <SemaforoSentir onClose={() => setCustomActivity(null)} />, contexto: "Semáforo do Sentir" },
+    cantinho: { node: <CantinhoCalma onClose={() => setCustomActivity(null)} />, contexto: "Cantinho da Calma" },
+    comoestou: { node: <ComoEstouAgora onClose={() => setCustomActivity(null)} />, contexto: "Como estou agora?" },
+    emojimagico: { node: <EmojiMagico onClose={() => setCustomActivity(null)} />, contexto: "Emoji Mágico" },
+    historias: { node: <HistoriasSociais onClose={() => setCustomActivity(null)} />, contexto: "Histórias Sociais" },
+    dividindo: { node: <DividindoBrinquedo onClose={() => setCustomActivity(null)} />, contexto: "Dividindo o Brinquedo" },
+    cuidando: { node: <CuidandoAmigo onClose={() => setCustomActivity(null)} />, contexto: "Cuidando do Amigo" },
+    minhavez: { node: <MinhaVezSuaVez onClose={() => setCustomActivity(null)} />, contexto: "Minha vez, sua vez" },
+    regras: { node: <RegrasCasa onClose={() => setCustomActivity(null)} />, contexto: "Regras da Casa" },
+    conflitos: { node: <ResolucaoConflitos onClose={() => setCustomActivity(null)} />, contexto: "Resolução de Conflitos" },
+    diario: { node: <DiarioSentir onClose={() => setCustomActivity(null)} />, contexto: "Diário do Sentir" },
+    elogio: { node: <ElogioMagico onClose={() => setCustomActivity(null)} />, contexto: "Elogio Mágico" },
+    bolha: { node: <BolhaBemEstar onClose={() => setCustomActivity(null)} />, contexto: "Bolha de Bem-Estar" },
+    roda: { node: <RodaDoDia onClose={() => setCustomActivity(null)} />, contexto: "Roda do Dia" },
+  };
+
+  if (customActivity && CUSTOM_MAP[customActivity]) {
+    const { node, contexto } = CUSTOM_MAP[customActivity];
     return (
       <Shell>
-        <PausaRespirar onClose={() => setCustomActivity(null)} />
+        {node}
+        <TerapeutaFlutuante contexto={contexto} />
       </Shell>
     );
   }
-
-  if (customActivity === "termometro") {
-    return (
-      <Shell>
-        <TermometroEmocoes onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "semaforo") {
-    return (
-      <Shell>
-        <SemaforoSentir onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "cantinho") {
-    return (
-      <Shell>
-        <CantinhoCalma onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "comoestou") {
-    return (
-      <Shell>
-        <ComoEstouAgora onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "emojimagico") {
-    return (
-      <Shell>
-        <EmojiMagico onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "historias") {
-    return (
-      <Shell>
-        <HistoriasSociais onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "dividindo") {
-    return (
-      <Shell>
-        <DividindoBrinquedo onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "cuidando") {
-    return (
-      <Shell>
-        <CuidandoAmigo onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-  if (customActivity === "minhavez") {
-    return (
-      <Shell>
-        <MinhaVezSuaVez onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-  if (customActivity === "diario") {
-    return (<Shell><DiarioSentir onClose={() => setCustomActivity(null)} /></Shell>);
-  }
-
-  if (customActivity === "elogio") {
-    return (<Shell><ElogioMagico onClose={() => setCustomActivity(null)} /></Shell>);
-  }
-
-  if (customActivity === "bolha") {
-    return (<Shell><BolhaBemEstar onClose={() => setCustomActivity(null)} /></Shell>);
-  }
-
-  if (customActivity === "roda") {
-    return (<Shell><RodaDoDia onClose={() => setCustomActivity(null)} /></Shell>);
-  }
-
-  if (customActivity === "conflitos") {
-    return (
-      <Shell>
-        <ResolucaoConflitos onClose={() => setCustomActivity(null)} />
-      </Shell>
-    );
-  }
-
-
-
-
-
-
 
   if (activeActivity) {
     return (
@@ -332,7 +253,6 @@ function BrilhaVida() {
           <ActivityContainer
             activity={{
               ...activeActivity,
-              // Adaptar para o formato que o Container espera se necessário
               type:
                 activeActivity.content.type === "emotion-match" ||
                 activeActivity.content.type === "social-story"
@@ -347,9 +267,11 @@ function BrilhaVida() {
             emotion={{ current: "happy" }}
           />
         </div>
+        <TerapeutaFlutuante contexto="atividade Brilha Vida" />
       </Shell>
     );
   }
+
 
   return (
     <Shell>
@@ -451,17 +373,16 @@ function BrilhaVida() {
         </div>
         <div className="relative z-10">
           <h3 className="text-xl font-black mb-2 flex items-center gap-2">
-            <Smile className="h-6 w-6 text-sun" /> Momento Ursinho Calma
+            <Smile className="h-6 w-6 text-sun" /> Momento Calma
           </h3>
           <p className="text-slate-400 max-w-md">
-            Precisa de uma pausa? O Ursinho Calma está aqui para ajudar com exercícios de respiração
-            e regulação sensorial.
+            Precisa de uma pausa? Nossa terapeuta amiga está aqui pra te ouvir e te ajudar com
+            respiração e regulação. É só tocar no coraçãozinho.
           </p>
-          <button className="mt-6 px-6 py-2.5 bg-primary text-white rounded-xl font-bold shadow-glow hover:scale-105 transition-transform">
-            Pedir Ajuda
-          </button>
         </div>
       </Card>
+
+      <TerapeutaFlutuante />
     </Shell>
   );
 }
