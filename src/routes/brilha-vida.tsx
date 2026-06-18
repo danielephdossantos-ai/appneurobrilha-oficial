@@ -254,6 +254,31 @@ function BrilhaVida() {
     );
   }
 
+  if (customActivity === "minhavez") {
+    return (
+      <Shell>
+        <MinhaVezSuaVez onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "regras") {
+    return (
+      <Shell>
+        <RegrasCasa onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+  if (customActivity === "conflitos") {
+    return (
+      <Shell>
+        <ResolucaoConflitos onClose={() => setCustomActivity(null)} />
+      </Shell>
+    );
+  }
+
+
 
 
 
