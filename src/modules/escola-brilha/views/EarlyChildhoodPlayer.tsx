@@ -764,12 +764,27 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
         </AnimatePresence>
       </div>
 
+      {/* Palavra do número sendo contado */}
+      <AnimatePresence mode="wait">
+        {countWord && (
+          <motion.div
+            key={countWord}
+            initial={{ scale: 0.5, opacity: 0, y: -10 }}
+            animate={{ scale: 1.2, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="text-3xl font-black text-rose-600"
+          >
+            {countWord}!
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Illustration objects */}
       <div className="flex flex-wrap justify-center gap-2 min-h-[72px] items-center">
         {allItems.map((i) => {
           const isRemoved = i >= remaining;
           const shouldShow =
-            subPhase === "show-all" ||
+            (subPhase === "show-all" && i < shownTotal) ||
             subPhase === "removing" ||
             (subPhase === "question" && !isRemoved);
           return (
@@ -805,6 +820,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
           );
         })}
       </div>
+
 
       <AnimatePresence mode="wait">
         <motion.p
