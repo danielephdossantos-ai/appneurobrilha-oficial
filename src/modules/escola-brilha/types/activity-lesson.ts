@@ -57,6 +57,14 @@ export interface VisualConfig {
     question: string;
     answer: number;
   };
+  word_visual?: {
+    /** Par/lista de palavras com emoji grande e legenda — pra conceitos abstratos
+     *  (sinônimos, antônimos, substantivos) ficarem visualmente concretos. */
+    items: Array<{ label: string; emoji: string; caption?: string }>;
+    /** Símbolo de conexão entre os items (= sinônimo, ≠ antônimo, → etc). */
+    connector?: string;
+    connectorLabel?: string;
+  };
 }
 
 export interface ActivityLesson {
