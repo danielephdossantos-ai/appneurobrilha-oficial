@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Volume2, Star, Trophy, Hand, Sparkles } from "lucide-react";
+import { ArrowLeft, Volume2, Star, Trophy, Hand, Sparkles, X, Play } from "lucide-react";
 import { TRILHAS, type Sinal, type Trilha, type TrilhaSlug, falar } from "@/data/libras/sinais";
 import professoraImg from "@/assets/libras/professora.png";
 
