@@ -114,9 +114,8 @@ export const HyperfocusManager: React.FC = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     className="group relative"
                   >
-                    <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white border-2 border-primary/20 hover:border-primary shadow-sm transition-all text-center h-full">
-                      <span className="text-3xl mb-1">{info?.icon || "✨"}</span>
-                      <span className="text-xs font-black text-primary uppercase tracking-tighter truncate w-full">
+                    <div className="flex items-center justify-center px-4 py-3 rounded-2xl bg-primary/5 border-2 border-primary/20 hover:border-primary shadow-sm transition-all text-center h-full">
+                      <span className="text-sm font-black text-primary uppercase tracking-tight truncate w-full">
                         {info?.label || focus}
                       </span>
                       <button
