@@ -1,29 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Home } from "lucide-react";
+import { REGRAS_CASA as REGRAS } from "@/data/brilha-vida/cenarios";
 
 /**
- * Regras da Casa
- * Checklist visual de combinados de convivência. A criança marca cada regra
- * conforme cumpre durante o dia. Mostra estrelas conforme avança.
+ * Regras da Casa — 30 combinados pra marcar conforme a criança cumpre.
  */
-
-type Regra = {
-  id: string;
-  emoji: string;
-  texto: string;
-};
-
-const REGRAS: Regra[] = [
-  { id: "dentes", emoji: "🪥", texto: "Escovar os dentes" },
-  { id: "cama", emoji: "🛏️", texto: "Arrumar a cama" },
-  { id: "brinquedos", emoji: "🧸", texto: "Guardar os brinquedos" },
-  { id: "tela", emoji: "📱", texto: "Respeitar o tempo de tela" },
-  { id: "obrigado", emoji: "🙏", texto: "Dizer 'por favor' e 'obrigado'" },
-  { id: "comer", emoji: "🍽️", texto: "Comer na mesa, sem correr" },
-  { id: "ajudar", emoji: "🤝", texto: "Ajudar em uma tarefa" },
-  { id: "ouvir", emoji: "👂", texto: "Ouvir antes de falar" },
-];
 
 export function RegrasCasa({ onClose }: { onClose: () => void }) {
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
