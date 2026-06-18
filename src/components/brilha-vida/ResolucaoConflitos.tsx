@@ -9,8 +9,10 @@ const PASSOS = [
   { n: 3, titulo: "Escolher a melhor", desc: "Qual cuida de todos?" },
 ];
 
+const pickConflito = () => CONFLITOS[Math.floor(Math.random() * CONFLITOS.length)];
+
 export function ResolucaoConflitos({ onClose }: { onClose: () => void }) {
-  const conflito = useMemo(() => CONFLITOS[Math.floor(Math.random() * CONFLITOS.length)], []);
+  const [conflito, setConflito] = useState(() => pickConflito());
   const [passo, setPasso] = useState(1);
   const [escolha, setEscolha] = useState<number | null>(null);
 
@@ -19,7 +21,7 @@ export function ResolucaoConflitos({ onClose }: { onClose: () => void }) {
   const novo = () => {
     setPasso(1);
     setEscolha(null);
-    window.location.reload(); // simples para sortear outro conflito
+    setConflito(pickConflito());
   };
 
   return (
