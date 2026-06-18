@@ -89,7 +89,7 @@ function BrilhaVida() {
     if (!activeChild) return;
     // Atividades com componente próprio (não passam pelo engine)
     if (tipo === "Pausa para Respirar") {
-      setCustomActivity("escolher-respirar");
+      setCustomActivity("respirar");
       return;
     }
     setIsLoading(true);
