@@ -254,3 +254,140 @@ const LessonCard: React.FC<{
     </div>
   </motion.button>
 );
+
+/* ─── Pastas por matéria (Português, Matemática, etc.) ─── */
+type AulaBanco = {
+  id: string;
+  titulo: string;
+  descricao?: string | null;
+  disciplina: string;
+  serie: string;
+  xp: number;
+  codigo_bncc?: string | null;
+};
+
+const SUBJECT_META: Record<string, { gradient: string; Icon: React.FC<{ className?: string }> }> = {
+  "Língua Portuguesa": { gradient: "from-rose-500 to-pink-600", Icon: BookOpen },
+  "Português": { gradient: "from-rose-500 to-pink-600", Icon: BookOpen },
+  "Alfabetização": { gradient: "from-rose-400 to-pink-500", Icon: BookOpen },
+  "Leitura": { gradient: "from-fuchsia-400 to-violet-500", Icon: BookOpen },
+  "Matemática": { gradient: "from-sky-500 to-blue-600", Icon: Calculator },
+  "Ciências": { gradient: "from-emerald-500 to-teal-600", Icon: FlaskConical },
+  "Geografia": { gradient: "from-green-600 to-emerald-700", Icon: Globe },
+  "História": { gradient: "from-stone-500 to-amber-700", Icon: Landmark },
+};
+
+const subjectKey = (raw: string) => {
+  const s = (raw || "").toLowerCase();
+  if (s.includes("portug") || s.includes("língua") || s.includes("lingua")) return "Língua Portuguesa";
+  if (s.includes("alfabet")) return "Alfabetização";
+  if (s.includes("leitur")) return "Leitura";
+  if (s.includes("matem")) return "Matemática";
+  if (s.includes("ciênc") || s.includes("cienc")) return "Ciências";
+  if (s.includes("geograf")) return "Geografia";
+  if (s.includes("histó") || s.includes("histo")) return "História";
+  return raw || "Outros";
+};
+
+const SubjectFolders: React.FC<{
+  serie: string;
+  staticCards: StaticLesson[];
+  dbCards: AulaBanco[];
+  onStaticClick: (id: string, type: string) => void;
+  onDbClick: (id: string) => void;
+}> = ({ serie, staticCards, dbCards, onStaticClick, onDbClick }) => {
+  const [openSubject, setOpenSubject] = useState<string | null>(null);
+
+  // Agrupa atividades pela disciplina normalizada
+  const grouped: Record<string, { statics: StaticLesson[]; dbs: AulaBanco[] }> = {};
+  for (const c of staticCards) {
+    const k = subjectKey(c.badge);
+    (grouped[k] ||= { statics: [], dbs: [] }).statics.push(c);
+  }
+  for (const a of dbCards) {
+    const k = subjectKey(a.disciplina);
+    (grouped[k] ||= { statics: [], dbs: [] }).dbs.push(a);
+  }
+  const subjects = Object.keys(grouped).sort();
+
+  return (
+    <div className="space-y-2.5">
+      {subjects.map((subj, i) => {
+        const meta = SUBJECT_META[subj] ?? { gradient: "from-slate-500 to-slate-700", Icon: BookOpen };
+        const { statics, dbs } = grouped[subj];
+        const total = statics.length + dbs.length;
+        const isOpen = openSubject === subj;
+        return (
+          <div key={`${serie}-${subj}`}>
+            <motion.button
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04, type: "spring", stiffness: 160 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setOpenSubject(isOpen ? null : subj)}
+              className="w-full bg-white rounded-2xl shadow-lg overflow-hidden text-left flex items-stretch border border-white/10"
+            >
+              <div className={`bg-gradient-to-b ${meta.gradient} w-16 flex items-center justify-center shrink-0`}>
+                <meta.Icon className="w-7 h-7 text-white" />
+              </div>
+              <div className="flex-1 p-3.5 min-w-0">
+                <p className="font-black text-slate-800 text-sm leading-tight truncate">{subj}</p>
+                <p className="text-slate-500 text-xs font-medium mt-0.5">
+                  {total} {total === 1 ? "atividade" : "atividades"}
+                </p>
+              </div>
+              <div className="flex items-center pr-3">
+                <ChevronRight
+                  className={`w-5 h-5 text-slate-400 transition-transform ${isOpen ? "rotate-90" : ""}`}
+                />
+              </div>
+            </motion.button>
+
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pl-5 pr-1 pt-2.5 pb-1 space-y-2.5 border-l-2 border-white/10 ml-5 mt-2">
+                    {statics.map((cat, j) => (
+                      <LessonCard
+                        key={`s-${cat.id}`}
+                        index={j}
+                        title={cat.title}
+                        subtitle={cat.subtitle}
+                        badge={cat.badge}
+                        badgeColor={cat.badgeColor}
+                        gradient={cat.gradient}
+                        xp={cat.xp}
+                        bncc={cat.bncc}
+                        illustration={cat.illustration}
+                        onClick={() => onStaticClick(cat.id, cat.type)}
+                      />
+                    ))}
+                    {dbs.map((a, j) => (
+                      <LessonCard
+                        key={`d-${a.id}`}
+                        index={statics.length + j}
+                        title={a.titulo}
+                        subtitle={a.descricao ?? a.disciplina}
+                        badge={a.disciplina}
+                        badgeColor="bg-emerald-100 text-emerald-700"
+                        gradient="from-emerald-500 to-teal-600"
+                        xp={a.xp}
+                        bncc={a.codigo_bncc ?? undefined}
+                        onClick={() => onDbClick(a.id)}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
