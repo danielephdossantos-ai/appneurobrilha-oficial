@@ -20,7 +20,6 @@ import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
-import { Route as HistoriasRouteImport } from './routes/historias'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
@@ -97,11 +96,6 @@ const LojaMascotesRoute = LojaMascotesRouteImport.update({
 const Jornada365Route = Jornada365RouteImport.update({
   id: '/jornada-365',
   path: '/jornada-365',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HistoriasRoute = HistoriasRouteImport.update({
-  id: '/historias',
-  path: '/historias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
@@ -230,7 +224,6 @@ export interface FileRoutesByFullPath {
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -265,7 +258,6 @@ export interface FileRoutesByTo {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -302,7 +294,6 @@ export interface FileRoutesById {
   '/colecao-pip': typeof ColecaoPipRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/historias': typeof HistoriasRouteWithChildren
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
@@ -340,7 +331,6 @@ export interface FileRouteTypes {
     | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
-    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
@@ -375,7 +365,6 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/gerador-procedural'
-    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
@@ -411,7 +400,6 @@ export interface FileRouteTypes {
     | '/colecao-pip'
     | '/escola-brilha'
     | '/gerador-procedural'
-    | '/historias'
     | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
@@ -448,7 +436,6 @@ export interface RootRouteChildren {
   ColecaoPipRoute: typeof ColecaoPipRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
   GeradorProceduralRoute: typeof GeradorProceduralRoute
-  HistoriasRoute: typeof HistoriasRouteWithChildren
   Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
@@ -541,13 +528,6 @@ declare module '@tanstack/react-router' {
       path: '/jornada-365'
       fullPath: '/jornada-365'
       preLoaderRoute: typeof Jornada365RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/historias': {
-      id: '/historias'
-      path: '/historias'
-      fullPath: '/historias'
-      preLoaderRoute: typeof HistoriasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gerador-procedural': {
@@ -723,18 +703,6 @@ const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
   EscolaBrilhaRouteChildren,
 )
 
-interface HistoriasRouteChildren {
-  HistoriasStoryIdRoute: typeof HistoriasStoryIdRoute
-}
-
-const HistoriasRouteChildren: HistoriasRouteChildren = {
-  HistoriasStoryIdRoute: HistoriasStoryIdRoute,
-}
-
-const HistoriasRouteWithChildren = HistoriasRoute._addFileChildren(
-  HistoriasRouteChildren,
-)
-
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
   NeuroTreinoConfigurarRoute: typeof NeuroTreinoConfigurarRoute
@@ -776,7 +744,6 @@ const rootRouteChildren: RootRouteChildren = {
   ColecaoPipRoute: ColecaoPipRoute,
   EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,
   GeradorProceduralRoute: GeradorProceduralRoute,
-  HistoriasRoute: HistoriasRouteWithChildren,
   Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
