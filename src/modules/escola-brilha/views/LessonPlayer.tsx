@@ -204,9 +204,39 @@ const LegacyLessonPlayer: React.FC = () => {
       }
     }
 
-    const fullSpeech = getStepSpeech(currentStep);
+    // Subtração visual: tira os últimos N objetos, depois conta os que sobraram.
+    const take = (currentStep as any).meta?.take ?? 0;
+    if (take > 0 && countables.length > 0) {
+      await new Promise((r) => setTimeout(r, 500));
+      const toRemove = countables.slice(-take);
+      for (const el of toRemove) {
+        setHighlightedElementId(el.id);
+        setIsSpeaking(true);
+        await AudioSpeechService.speak("Tirou um!");
+        setIsSpeaking(false);
+        setShowElements((prev) => prev.filter((x) => x !== el.id));
+        await new Promise((r) => setTimeout(r, 250));
+      }
+      setHighlightedElementId(null);
+      const remaining = countables.slice(0, countables.length - take);
+      await new Promise((r) => setTimeout(r, 350));
+      setIsSpeaking(true);
+      await AudioSpeechService.speak("Agora vamos contar quantos sobraram!");
+      setIsSpeaking(false);
+      for (let i = 0; i < remaining.length; i++) {
+        setHighlightedElementId(remaining[i].id);
+        setIsSpeaking(true);
+        await AudioSpeechService.speak(NUMBER_WORDS[i] || String(i + 1));
+        setIsSpeaking(false);
+      }
+      setHighlightedElementId(null);
+    }
+
+    const fullSpeech =
+      take > 0 ? "Quantos sobraram?" : getStepSpeech(currentStep);
     setIsSpeaking(true);
     const speechPromise = AudioSpeechService.speak(fullSpeech);
+
     if (currentStep.type === "interaction" && currentStep.interaction?.options) {
       await new Promise((r) => setTimeout(r, 1500));
       const opts = Array.from(new Set(currentStep.interaction.options));
