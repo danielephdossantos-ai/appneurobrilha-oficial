@@ -59,7 +59,7 @@ export const VOGAIS_LESSON: EarlyLesson = {
       target: "E",
       target_color: "text-emerald-600",
       target_bg: "bg-emerald-100",
-      question_speech: "Encontre a letra E! Qual é a letra E?",
+      question_speech: "Encontre a letra É! Qual é a letra É?",
       options: [
         { letter: "I", color: "text-amber-600", bg: "bg-amber-100" },
         { letter: "E", color: "text-emerald-600", bg: "bg-emerald-100" },
