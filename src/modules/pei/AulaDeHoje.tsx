@@ -29,14 +29,7 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-// Tipos de bloco que abrem o player de neuro-treino com slug específico.
-const TIPOS_NEURO = new Set([
-  "neuro-treino",
-  "alfabetizacao",
-  "matematica",
-  "leitura",
-  "movimento",
-]);
+// Jornada 365 = BNCC puro. Todo bloco abre o player do Escola Brilha.
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
