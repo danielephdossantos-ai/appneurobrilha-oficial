@@ -110,7 +110,7 @@ function Jornada() {
   const theme = WORLD_THEME[world];
 
   // PEI gera o plano em segundo plano — o pai não dispara nada.
-  usePEIAutoGenerate({
+  const pei = usePEIAutoGenerate({
     childId: activeChild?.id ?? null,
     anamneseCompleta: !!activeChild?.anamnese_completa,
   });
