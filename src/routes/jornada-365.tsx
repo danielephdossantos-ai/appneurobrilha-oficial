@@ -104,6 +104,7 @@ function WorldBackground({ world }: { world: WorldKey }) {
 
 function Jornada() {
   const { activeChild } = useAppState();
+  const { activeMascot } = useMascot();
   const { hiperfoco } = useHiperfoco();
   const world = mapHiperfocoToWorld(hiperfoco?.label);
   const theme = WORLD_THEME[world];
