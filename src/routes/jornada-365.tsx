@@ -231,7 +231,7 @@ function DayTrail({
             <div
               ref={isCurrent ? currentRef : null}
               className="relative my-2"
-              style={{ transform: `translateX(${offset * 38}px)` }}
+              style={{ transform: `translateX(${offset * 60}px)` }}
             >
               <button
                 type="button"
