@@ -91,5 +91,10 @@ function AulaDbPage() {
     }
   };
 
-  return <PlayerBoundary onBack={back}>{renderPlayer()}</PlayerBoundary>;
+  return (
+    <PlayerBoundary onBack={back}>
+      {renderPlayer()}
+      <NextLessonCTA current={{ kind: "db", id: aulaId }} />
+    </PlayerBoundary>
+  );
 }
