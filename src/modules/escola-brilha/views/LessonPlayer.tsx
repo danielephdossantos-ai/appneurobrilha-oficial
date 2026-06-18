@@ -206,11 +206,13 @@ const LegacyLessonPlayer: React.FC = () => {
     const speechPromise = AudioSpeechService.speak(fullSpeech);
     if (currentStep.type === "interaction" && currentStep.interaction?.options) {
       await new Promise((r) => setTimeout(r, 1500));
-      for (const opt of currentStep.interaction.options) {
-        setVisibleOptions((prev) => [...prev, opt]);
+      const opts = Array.from(new Set(currentStep.interaction.options));
+      for (let i = 0; i < opts.length; i++) {
+        setVisibleOptions(opts.slice(0, i + 1));
         await new Promise((r) => setTimeout(r, 500));
       }
     }
+
     await speechPromise;
     setIsSpeaking(false);
     if (currentStep.type === "explanation" || currentStep.type === "demonstration") {
