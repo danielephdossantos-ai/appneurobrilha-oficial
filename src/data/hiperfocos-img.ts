@@ -85,8 +85,6 @@ import trilho from "@/assets/hiperfocos/trens/trilho.png";
 import estacao from "@/assets/hiperfocos/trens/estacao.png";
 import maquinista from "@/assets/hiperfocos/trens/maquinista.png";
 
-import pipGen from "@/assets/hiperfocos/sem-hiperfoco/pip-gen.png";
-
 /** Normaliza chave: maiúsculas + sem acentos + espaços/hífens unificados. */
 function norm(s: string): string {
   return s
@@ -200,8 +198,10 @@ const RAW: Record<string, string> = {
   ESTACAO: estacao,
   MAQUINISTA: maquinista,
 
-  // Fallback
-  PIP: pipGen,
+  // Sem hiperfoco / fallback bonito
+  PIP: estrela,
+  BRILHO: estrela,
+  CORACAO: unicornio,
 };
 
 export const ELEMENTO_IMG: Record<string, string> = Object.fromEntries(

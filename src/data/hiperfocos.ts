@@ -203,7 +203,7 @@ export const HIPERFOCOS: Record<Exclude<HiperfocoId, "custom">, Hiperfoco> = {
     id: "nenhum",
     label: "Sem Hiperfoco",
     emoji: "✨",
-    elementos: ["PIP", "Estrela", "Coração"],
+    elementos: ["Estrela", "Unicórnio", "Coruja"],
     som: "plim! (brilho)",
     formaPontilhado: "uma estrela",
     pipAcertos: ["Boa! Você é brilhante!", "Mandou muito bem!", "Incrível! Continue assim!"],
