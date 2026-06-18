@@ -336,6 +336,8 @@ function MechanicRenderer({
       return <ConscienciaFonologica p={variation.payload} onDone={onConcluir} />;
     case "consciencia-silabica":
       return <ConscienciaSilabica p={variation.payload} onDone={onConcluir} />;
+    case "compreensao-leitora":
+      return <CompreensaoLeitora p={variation.payload} onDone={onConcluir} />;
     case "rimas":
       return <Rimas p={variation.payload} onDone={onConcluir} />;
     case "pedacinhos-da-palavra":
