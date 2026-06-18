@@ -219,7 +219,7 @@ export const CONTAGEM_LESSON: EarlyLesson = {
   ],
 };
 
-/* Banco de cenas para subtração — 15 variações */
+/* Banco de cenas para subtração — 30 variações (mesmo padrão de Vamos Contar: 31 telas) */
 const SUBTRACT_SCENES: {
   illustration: IllustName;
   name: string;
@@ -243,6 +243,22 @@ const SUBTRACT_SCENES: {
   { illustration: "pineapple", name: "abacaxi", plural: "abacaxis", total: 4, remove: 3, remove_action: "Três abacaxis foram para a feira!" },
   { illustration: "elephant", name: "elefantinho", plural: "elefantinhos", total: 5, remove: 2, remove_action: "Dois elefantinhos foram tomar banho!" },
   { illustration: "ring", name: "anelzinho", plural: "anelzinhos", total: 6, remove: 3, remove_action: "Três anelzinhos foram guardados!" },
+  /* ── lote 2 ── novas variações com cenas e quantidades diferentes ── */
+  { illustration: "apple", name: "maçã", plural: "maçãs", total: 7, remove: 2, remove_action: "Duas maçãs foram para a cesta!" },
+  { illustration: "banana", name: "banana", plural: "bananas", total: 8, remove: 3, remove_action: "Três bananas o macaco levou!" },
+  { illustration: "star", name: "estrelinha", plural: "estrelinhas", total: 9, remove: 4, remove_action: "Quatro estrelinhas se esconderam!" },
+  { illustration: "tropical-fish", name: "peixinho", plural: "peixinhos", total: 5, remove: 1, remove_action: "Um peixinho foi explorar!" },
+  { illustration: "balloon", name: "balão", plural: "balões", total: 6, remove: 4, remove_action: "Quatro balões estouraram!" },
+  { illustration: "dog", name: "cachorrinho", plural: "cachorrinhos", total: 7, remove: 2, remove_action: "Dois cachorrinhos foram comer!" },
+  { illustration: "lollipop", name: "pirulito", plural: "pirulitos", total: 8, remove: 4, remove_action: "Quatro pirulitos foram chupados!" },
+  { illustration: "fish", name: "peixinho", plural: "peixinhos", total: 9, remove: 5, remove_action: "Cinco peixinhos foram passear!" },
+  { illustration: "bee", name: "abelhinha", plural: "abelhinhas", total: 6, remove: 3, remove_action: "Três abelhinhas voltaram pra colmeia!" },
+  { illustration: "egg", name: "ovinho", plural: "ovinhos", total: 8, remove: 5, remove_action: "Cinco ovinhos viraram pintinhos!" },
+  { illustration: "bear", name: "ursinho", plural: "ursinhos", total: 7, remove: 3, remove_action: "Três ursinhos foram brincar!" },
+  { illustration: "macaw", name: "ararinha", plural: "ararinhas", total: 9, remove: 6, remove_action: "Seis ararinhas voaram pra floresta!" },
+  { illustration: "pineapple", name: "abacaxi", plural: "abacaxis", total: 6, remove: 2, remove_action: "Dois abacaxis foram comidos!" },
+  { illustration: "elephant", name: "elefantinho", plural: "elefantinhos", total: 7, remove: 4, remove_action: "Quatro elefantinhos foram dormir!" },
+  { illustration: "ring", name: "anelzinho", plural: "anelzinhos", total: 8, remove: 5, remove_action: "Cinco anelzinhos foram presenteados!" },
 ];
 
 const buildSubOptions = (result: number): number[] => {
