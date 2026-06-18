@@ -33,6 +33,12 @@ function delay(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+const NUMBER_WORDS = [
+  "Um", "Dois", "Três", "Quatro", "Cinco",
+  "Seis", "Sete", "Oito", "Nove", "Dez",
+];
+
+
 /* ─── MAIN PLAYER ────────────────────────────────────── */
 export const EarlyChildhoodPlayer: React.FC<Props> = ({ lesson, onBack }) => {
   /* Fila rotativa: separa o intro das atividades e rotaciona a partir da cabeça salva. */
@@ -485,17 +491,46 @@ const CountPracticeSlide: React.FC<StepProps & { step: CountPracticeStep }> = ({
   const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
   const [chosen, setChosen] = useState<number | null>(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [shown, setShown] = useState(0);
+  const [currentWord, setCurrentWord] = useState<string | null>(null);
 
   useEffect(() => {
+    let live = true;
     setFeedback(null);
     setChosen(null);
     setShowButtons(false);
+    setShown(0);
+    setCurrentWord(null);
+
     (async () => {
       setIsSpeaking(true);
+      await speak("Vamos contar juntos!");
+      if (!live) return;
+
+      // Acende item por item, contando em voz alta
+      for (let i = 0; i < step.count; i++) {
+        await delay(200);
+        if (!live) return;
+        const word = NUMBER_WORDS[i] ?? String(i + 1);
+        setShown(i + 1);
+        setCurrentWord(word);
+        await speak(word + "!", true);
+        if (!live) return;
+        setCurrentWord(null);
+        await delay(180);
+      }
+
+      await delay(300);
+      if (!live) return;
       await speak(step.question_speech);
+      if (!live) return;
       setIsSpeaking(false);
       setShowButtons(true);
     })();
+
+    return () => {
+      live = false;
+    };
   }, [step.id]);
 
   const handlePick = async (n: number) => {
@@ -521,16 +556,38 @@ const CountPracticeSlide: React.FC<StepProps & { step: CountPracticeStep }> = ({
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border-4 border-amber-200 p-6 flex flex-col items-center gap-5">
+      {/* Contador animado em destaque */}
+      <div className="w-20 h-20 rounded-full bg-amber-400 flex items-center justify-center shadow-lg">
+        <span className="text-4xl font-black text-white">{shown}</span>
+      </div>
+
+      <AnimatePresence mode="wait">
+        {currentWord && (
+          <motion.div
+            key={currentWord}
+            initial={{ scale: 0.5, opacity: 0, y: -10 }}
+            animate={{ scale: 1.2, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="text-3xl font-black text-amber-600"
+          >
+            {currentWord}!
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex flex-wrap justify-center gap-2 min-h-[80px] items-center">
         {Array.from({ length: step.count }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: i * 0.06, type: "spring" }}
-          >
-            <Illustration name={step.illustration} className="w-14 h-14" />
-          </motion.div>
+          <AnimatePresence key={i}>
+            {shown > i && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0, y: -20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 16 }}
+              >
+                <Illustration name={step.illustration} className="w-14 h-14" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         ))}
       </div>
 
@@ -581,6 +638,7 @@ const CountPracticeSlide: React.FC<StepProps & { step: CountPracticeStep }> = ({
   );
 };
 
+
 /* ─── SUBTRACT ───────────────────────────────────────── */
 type SubPhase = "show-all" | "removing" | "question";
 
@@ -594,6 +652,8 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
   const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
   const [chosen, setChosen] = useState<number | null>(null);
   const [showButtons, setShowButtons] = useState(false);
+  const [shownTotal, setShownTotal] = useState(0);
+  const [countWord, setCountWord] = useState<string | null>(null);
 
   const total = step.total;
   const remove = step.remove;
@@ -605,6 +665,8 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
     setFeedback(null);
     setChosen(null);
     setShowButtons(false);
+    setShownTotal(0);
+    setCountWord(null);
 
     (async () => {
       await delay(400);
@@ -612,7 +674,22 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
       setIsSpeaking(true);
       await speak(step.teach_speech);
       if (!live || cancelRef.current) return;
-      await delay(500);
+
+      // Conta cada item junto com a criança
+      for (let i = 0; i < total; i++) {
+        await delay(180);
+        if (!live || cancelRef.current) return;
+        const word = NUMBER_WORDS[i] ?? String(i + 1);
+        setShownTotal(i + 1);
+        setCountWord(word);
+        await speak(word + "!", true);
+        if (!live || cancelRef.current) return;
+        setCountWord(null);
+        await delay(150);
+      }
+
+      await delay(400);
+      if (!live || cancelRef.current) return;
 
       setSubPhase("removing");
       await speak(step.remove_speech);
@@ -635,6 +712,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
       live = false;
     };
   }, [step.id]);
+
 
   const handlePick = async (n: number) => {
     if (chosen !== null) return;
@@ -686,12 +764,27 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
         </AnimatePresence>
       </div>
 
+      {/* Palavra do número sendo contado */}
+      <AnimatePresence mode="wait">
+        {countWord && (
+          <motion.div
+            key={countWord}
+            initial={{ scale: 0.5, opacity: 0, y: -10 }}
+            animate={{ scale: 1.2, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="text-3xl font-black text-rose-600"
+          >
+            {countWord}!
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Illustration objects */}
       <div className="flex flex-wrap justify-center gap-2 min-h-[72px] items-center">
         {allItems.map((i) => {
           const isRemoved = i >= remaining;
           const shouldShow =
-            subPhase === "show-all" ||
+            (subPhase === "show-all" && i < shownTotal) ||
             subPhase === "removing" ||
             (subPhase === "question" && !isRemoved);
           return (
@@ -727,6 +820,7 @@ const SubtractSlide: React.FC<StepProps & { step: SubtractStep }> = ({
           );
         })}
       </div>
+
 
       <AnimatePresence mode="wait">
         <motion.p
