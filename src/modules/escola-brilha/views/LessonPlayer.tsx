@@ -60,6 +60,13 @@ const EARLY_MAP: Record<string, typeof VOGAIS_LESSON> = {
   subtracao: SUBTRACAO_LESSON,
 };
 
+const NUMBER_WORDS = [
+  "Um", "Dois", "Três", "Quatro", "Cinco",
+  "Seis", "Sete", "Oito", "Nove", "Dez",
+];
+
+const isPictograph = (s: string) => /\p{Extended_Pictographic}/u.test(s);
+
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: "/escola-brilha/aula" }) as { category: string; type: string };
 
