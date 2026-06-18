@@ -847,6 +847,40 @@ const GroupBuildVisual: React.FC<{ gb: NonNullable<VisualConfig["group_build"]> 
 };
 
 /** Dispatch the right visual component */
+const WordVisual: React.FC<{ items: Array<{ label: string; emoji: string; caption?: string }>; connector?: string; connectorLabel?: string }> = ({ items, connector, connectorLabel }) => (
+  <div className="py-4">
+    <div className="flex items-center justify-center gap-3 flex-wrap">
+      {items.map((it, i) => (
+        <React.Fragment key={i}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: i * 0.25, type: "spring", stiffness: 200, damping: 16 }}
+            className="flex flex-col items-center gap-1 bg-white rounded-2xl border-2 border-slate-200 px-3 py-3 shadow-sm min-w-[88px]"
+          >
+            <div className="text-5xl leading-none drop-shadow-sm">{it.emoji}</div>
+            <div className="font-black text-slate-800 text-sm uppercase tracking-wide">{it.label}</div>
+            {it.caption && <div className="text-[10px] text-slate-500 font-semibold">{it.caption}</div>}
+          </motion.div>
+          {connector && i < items.length - 1 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.25 + 0.15, type: "spring", stiffness: 220 }}
+              className="flex flex-col items-center"
+            >
+              <div className="text-3xl font-black text-amber-500">{connector}</div>
+              {connectorLabel && (
+                <div className="text-[9px] font-black text-amber-600 uppercase tracking-widest">{connectorLabel}</div>
+              )}
+            </motion.div>
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  </div>
+);
+
 const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({
   visual,
   startDelay,
@@ -868,6 +902,9 @@ const VisualBlock: React.FC<{ visual: VisualConfig; startDelay?: number }> = ({
   }
   if (visual.type === "counter_grid" && visual.counter) {
     return <CounterGridVisual counter={visual.counter} />;
+  }
+  if (visual.type === "word_visual" && visual.word_visual) {
+    return <WordVisual {...visual.word_visual} />;
   }
   return null;
 };
