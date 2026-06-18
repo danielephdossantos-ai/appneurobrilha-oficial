@@ -6,6 +6,7 @@ import { ActivityLesson, PraticarOption, MathStep, VisualConfig } from "../types
 import { AudioSpeechService } from "../services/AudioSpeechService";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
+import { RenderEmoji } from "@/components/neuro-treino/RenderEmoji";
 
 interface ActivityPlayerProps {
   lesson: ActivityLesson;
@@ -858,7 +859,7 @@ const WordVisual: React.FC<{ items: Array<{ label: string; emoji: string; captio
             transition={{ delay: i * 0.25, type: "spring", stiffness: 200, damping: 16 }}
             className="flex flex-col items-center gap-1 bg-white rounded-2xl border-2 border-slate-200 px-3 py-3 shadow-sm min-w-[88px]"
           >
-            <div className="text-5xl leading-none drop-shadow-sm">{it.emoji}</div>
+            <RenderEmoji e={it.emoji} className="w-16 h-16" />
             <div className="font-black text-slate-800 text-sm uppercase tracking-wide">{it.label}</div>
             {it.caption && <div className="text-[10px] text-slate-500 font-semibold">{it.caption}</div>}
           </motion.div>
@@ -1338,7 +1339,7 @@ const ExemploVisualScreen: React.FC<{
               transition={{ delay: i * 0.15 }}
               className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5"
             >
-              {sentence.emoji && <span className="text-base leading-none">{sentence.emoji}</span>}
+              {sentence.emoji && <RenderEmoji e={sentence.emoji} className="w-6 h-6" />}
               <span className="text-slate-700 font-semibold text-xs leading-snug">
                 {sentence.text}
               </span>
