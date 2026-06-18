@@ -5,6 +5,7 @@ import { applyDeficienciaInteligenciaSupport } from "./engines/deficiencia-intel
 import { applyDislexiaSupport } from "./engines/dislexia-engine";
 import { applySindromeDownSupport } from "./engines/sindrome-down-engine";
 import { applyTdahSupport } from "./engines/tdah-engine";
+import { getHistoriaNarrada, listHistoriasNarradas } from "../data/historias-narradas";
 
 export type StoryCategory =
   | "pre-escola"
