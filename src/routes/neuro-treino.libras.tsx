@@ -9,7 +9,7 @@ export const Route = createFileRoute("/neuro-treino/libras")({
   component: LibrasModulo,
 });
 
-type Modo = "menu" | "aprender" | "memoria" | "identificar";
+type Modo = "menu" | "aprender" | "memoria" | "identificar" | "associacao";
 
 function LibrasModulo() {
   const [trilhaSlug, setTrilhaSlug] = useState<TrilhaSlug>("alfabeto");
@@ -45,8 +45,8 @@ function LibrasModulo() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div className="flex-1">
-              <div className="flex items-center gap-1.5 text-white/80 text-xs font-bold uppercase tracking-widest">
-                <Hand className="h-3 w-3" /> Módulo LIBRAS
+              <div className="flex items-center gap-1.5 text-white/80 text-[10px] font-bold uppercase tracking-widest">
+                <Hand className="h-3 w-3" /> Introdução à LIBRAS
               </div>
               <h1 className="text-xl font-black text-white">Mãos que falam</h1>
             </div>
@@ -55,6 +55,9 @@ function LibrasModulo() {
               <span className="text-white font-black text-sm">{estrelas}</span>
             </div>
           </div>
+          <p className="mt-2 text-[10px] text-white/80 font-bold">
+            Conteúdo lúdico de introdução. Não substitui aula formal de LIBRAS.
+          </p>
         </div>
 
         {/* Professora apresentando */}
@@ -92,13 +95,14 @@ function LibrasModulo() {
                 setTrilhaSlug(t.slug);
                 setModo("menu");
               }}
-              className={`rounded-2xl p-3 border-2 font-black text-xs transition-all ${
+              className={`rounded-2xl p-2.5 border-2 font-black text-xs transition-all leading-tight ${
                 trilhaSlug === t.slug
                   ? `bg-gradient-to-br ${t.bg} ${t.cor} border-current shadow-md scale-105`
                   : "bg-card border-border text-muted-foreground hover:border-primary/30"
               }`}
             >
               {t.nome}
+              <div className="text-[9px] font-bold opacity-70 mt-0.5">{t.descricao}</div>
             </button>
           ))}
         </div>
@@ -144,6 +148,13 @@ function LibrasModulo() {
             onBack={() => setModo("menu")}
           />
         )}
+        {modo === "associacao" && (
+          <ModoAssociacao
+            sinais={sinaisNivel}
+            onAcerto={() => setEstrelas((e) => e + 1)}
+            onBack={() => setModo("menu")}
+          />
+        )}
       </div>
     </Shell>
   );
@@ -152,7 +163,8 @@ function LibrasModulo() {
 // ───────────────────────── MENU DE EXERCÍCIOS ─────────────────────────
 function ModoMenu({ onPick, count }: { onPick: (m: Modo) => void; count: number }) {
   const opts: { modo: Modo; titulo: string; emoji: string; bg: string }[] = [
-    { modo: "aprender", titulo: "Aprender", emoji: "👀", bg: "from-sky-400 to-blue-500" },
+    { modo: "aprender", titulo: "Conhecer os sinais", emoji: "👀", bg: "from-sky-400 to-blue-500" },
+    { modo: "associacao", titulo: "Ligue mão e palavra", emoji: "🤝", bg: "from-amber-400 to-orange-500" },
     { modo: "memoria", titulo: "Jogo da Memória", emoji: "🧠", bg: "from-emerald-400 to-green-500" },
     { modo: "identificar", titulo: "Qual é o sinal?", emoji: "🎯", bg: "from-rose-400 to-pink-500" },
   ];
@@ -495,6 +507,104 @@ function embaralhar<T>(a: T[]): T[] {
     [b[i], b[j]] = [b[j], b[i]];
   }
   return b;
+}
+
+// ───────────────────────── ASSOCIAÇÃO (mão ↔ palavra) ─────────────────────────
+function ModoAssociacao({
+  sinais,
+  onAcerto,
+  onBack,
+}: {
+  sinais: Sinal[];
+  onAcerto: () => void;
+  onBack: () => void;
+}) {
+  const [rodada, setRodada] = useState(0);
+  const [feedback, setFeedback] = useState<"ok" | "err" | null>(null);
+
+  const desafio = useMemo(() => {
+    const alvo = sinais[Math.floor(Math.random() * sinais.length)];
+    const outras = sinais.filter((s) => s.id !== alvo.id);
+    const opcoes = embaralhar([alvo, ...embaralhar(outras).slice(0, 2)]);
+    return { alvo, opcoes };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rodada]);
+
+  useEffect(() => {
+    const t = setTimeout(() => falar("Qual é o nome deste sinal?"), 300);
+    return () => clearTimeout(t);
+  }, [desafio]);
+
+  function escolher(s: Sinal) {
+    if (s.id === desafio.alvo.id) {
+      setFeedback("ok");
+      falar(`Isso! ${desafio.alvo.nome}!`);
+      onAcerto();
+      setTimeout(() => {
+        setFeedback(null);
+        setRodada((r) => r + 1);
+      }, 1000);
+    } else {
+      setFeedback("err");
+      falar("Tenta de novo!");
+      setTimeout(() => setFeedback(null), 700);
+    }
+  }
+
+  return (
+    <div>
+      <BotaoVoltar onBack={onBack} />
+      <p className="text-center text-xs text-muted-foreground font-bold mb-3">
+        Toque na palavra que combina com a mão
+      </p>
+      <div className="grid grid-cols-2 gap-3 items-center">
+        {/* Mão à esquerda */}
+        <div
+          className={`rounded-3xl p-3 border-4 transition-all bg-gradient-to-br from-violet-50 to-fuchsia-50 ${
+            feedback === "ok"
+              ? "border-emerald-400 scale-105"
+              : feedback === "err"
+              ? "border-rose-400"
+              : "border-violet-200"
+          }`}
+        >
+          <SinalFigura sinal={desafio.alvo} />
+        </div>
+
+        {/* Palavras à direita */}
+        <div className="space-y-2">
+          {desafio.opcoes.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => escolher(s)}
+              className={`w-full rounded-2xl py-4 px-3 font-black text-lg border-2 transition-all active:scale-95 ${
+                feedback === "ok" && s.id === desafio.alvo.id
+                  ? "bg-emerald-500 text-white border-emerald-600"
+                  : feedback === "err"
+                  ? "bg-card text-foreground border-border opacity-60"
+                  : "bg-card text-foreground border-border hover:border-violet-400"
+              }`}
+            >
+              {s.nome}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="text-center mt-4">
+        <button
+          onClick={() => falar(`Qual é o nome deste sinal?`)}
+          className="inline-flex items-center gap-2 bg-violet-500 text-white rounded-full px-4 py-2 text-sm font-black shadow active:scale-95"
+        >
+          <Volume2 className="h-4 w-4" /> Ouvir pergunta
+        </button>
+      </div>
+      {feedback === "ok" && (
+        <div className="mt-4 text-center text-xl font-black text-emerald-600">
+          <Trophy className="h-6 w-6 inline mr-2" /> Muito bem!
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ───────────────────────── COMPARTILHADOS ─────────────────────────
