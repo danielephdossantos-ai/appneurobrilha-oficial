@@ -26,9 +26,12 @@ import planetaOceanoImg from "@/assets/escola-brilha/ciencias6/planeta-oceano.pn
 import amazoniaImg from "@/assets/escola-brilha/geografia6/amazonia.png";
 import { LessonVisualMap } from "../components/LessonVisualMap";
 import { MathVisualizer } from "../components/MathVisualizer";
+import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
+import type { LessonRef } from "../hooks/useNextLesson";
 
 interface Props {
   lesson: ActivityLessonC;
+  currentRef?: LessonRef;
 }
 
 const LESSON_ILLUSTRATIONS: Record<string, { src: string; alt: string }> = {
