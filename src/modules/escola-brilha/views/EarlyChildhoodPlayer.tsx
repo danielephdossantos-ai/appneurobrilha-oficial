@@ -35,24 +35,37 @@ function delay(ms: number) {
 
 /* ─── MAIN PLAYER ────────────────────────────────────── */
 export const EarlyChildhoodPlayer: React.FC<Props> = ({ lesson, onBack }) => {
+  /* Fila rotativa: separa o intro das atividades e rotaciona a partir da cabeça salva. */
+  const rotatedSteps = React.useMemo(() => {
+    const intros = lesson.steps.filter((s) => s.kind === "intro");
+    const activities = lesson.steps.filter((s) => s.kind !== "intro");
+    const head = getRotationHead(lesson.id, activities.length);
+    return [...intros, ...rotateFrom(activities, head)];
+  }, [lesson.id, lesson.steps]);
+
   const [stepIdx, setStepIdx] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [done, setDone] = useState(false);
   const cancelRef = useRef(false);
 
-  const step = lesson.steps[stepIdx];
-  const progress = ((stepIdx + 1) / lesson.steps.length) * 100;
+  const step = rotatedSteps[stepIdx];
+  const progress = ((stepIdx + 1) / rotatedSteps.length) * 100;
 
   const goNext = useCallback(() => {
     cancelRef.current = true;
     AudioSpeechService.stop();
-    if (stepIdx < lesson.steps.length - 1) {
+    /* Cada atividade concluída (não-intro) avança a cabeça da fila. */
+    if (step && step.kind !== "intro") {
+      const totalActivities = lesson.steps.filter((s) => s.kind !== "intro").length;
+      advanceRotationHead(lesson.id, totalActivities);
+    }
+    if (stepIdx < rotatedSteps.length - 1) {
       cancelRef.current = false;
       setStepIdx((s) => s + 1);
     } else {
       setDone(true);
     }
-  }, [stepIdx, lesson.steps.length]);
+  }, [stepIdx, rotatedSteps.length, step, lesson.id, lesson.steps]);
 
   const replayStep = useCallback(async () => {
     AudioSpeechService.stop();
