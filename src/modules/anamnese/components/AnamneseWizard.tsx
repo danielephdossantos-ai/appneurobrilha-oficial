@@ -96,8 +96,10 @@ export function AnamneseWizard({ childId }: { childId: string }) {
     if (isLast) {
       try {
         await a.finish();
-        toast.success("Anamnese concluída!");
-        nav({ to: "/anamnese/$childId/resultado", params: { childId } });
+        toast.success("Anamnese concluída! Veja o relatório no painel dos pais.");
+        // Vai direto pro painel dos pais com o relatório do que o sistema observou.
+        // De lá os pais entram na categoria da criança → nascimento do Pip/Pipa.
+        nav({ to: "/painel-pais" });
       } catch (e: any) {
         toast.error(e?.message ?? "Erro ao salvar");
       }
