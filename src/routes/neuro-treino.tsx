@@ -4,7 +4,6 @@ import { Component, ReactNode, useEffect } from "react";
 import {
   AlertCircle,
   Coffee,
-  ChevronRight,
   Brain,
   Mic,
   Dumbbell,
@@ -363,11 +362,11 @@ function Treino() {
                         key={slug}
                         to="/neuro-treino/$slug"
                         params={{ slug }}
-                        className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                        className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
                       >
                         {/* Indicador de variações */}
                         {varCount > 0 && (
-                          <div className="absolute top-2 right-2">
+                          <div className="absolute top-1.5 right-1.5">
                             <div
                               className={`w-5 h-5 rounded-full ${cfg?.accent ?? "bg-primary"} flex items-center justify-center`}
                             >
@@ -376,26 +375,21 @@ function Treino() {
                           </div>
                         )}
 
-                        {/* Ícone */}
-                        <div className="w-16 h-16 grid place-items-center mb-2 rounded-xl">
+                        {/* Ícone GRANDE — foco visual para a criança */}
+                        <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
                           <img
                             src={iconSrc ?? ""}
                             alt={c?.nome ?? slug}
                             loading="lazy"
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-contain drop-shadow group-hover:scale-105 transition-transform"
+                            width={128}
+                            height={128}
+                            className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
                             draggable={false}
                           />
                         </div>
 
-                        <div className="font-extrabold text-xs leading-tight text-foreground">
+                        <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
                           {c?.nome ?? slug}
-                        </div>
-
-                        <div className="mt-1.5 flex items-center gap-0.5 text-muted-foreground group-hover:text-primary transition-colors">
-                          <span className="text-[10px] font-bold">Praticar</span>
-                          <ChevronRight className="h-3 w-3" />
                         </div>
                       </Link>
                     );
