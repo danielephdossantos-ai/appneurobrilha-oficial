@@ -38,12 +38,22 @@ const OBJETOS_PASTAS = [
   "objetos", "frutas",
 ];
 const COTIDIANO_PASTAS = ["brilha-vida"];
-const MAPAS_PASTAS = ["geografia", "ciencias"];
+const MAPAS_PASTAS = ["geografia", "ciencias", "mapas"];
 const ICONES_PASTAS = ["icons", "icones"];
 const EMOCOES_PASTAS = ["emocoes"];
+const LETRAS_PASTAS = ["letras"];
+const SILABAS_PASTAS = ["silabas"];
+const NUMEROS_PASTAS = ["numeros"];
+const FORMAS_PASTAS = ["formas"];
+const GRAFICOS_PASTAS = ["graficos"];
 
 function inferirCategoria(path: string): CategoriaBanco {
   const p = path.toLowerCase();
+  if (LETRAS_PASTAS.some((k) => p.includes(`/${k}/`))) return "letras";
+  if (SILABAS_PASTAS.some((k) => p.includes(`/${k}/`))) return "silabas";
+  if (NUMEROS_PASTAS.some((k) => p.includes(`/${k}/`))) return "numeros";
+  if (FORMAS_PASTAS.some((k) => p.includes(`/${k}/`))) return "formas";
+  if (GRAFICOS_PASTAS.some((k) => p.includes(`/${k}/`))) return "graficos";
   if (EMOCOES_PASTAS.some((k) => p.includes(`/${k}/`))) return "emocoes";
   if (ICONES_PASTAS.some((k) => p.includes(`/${k}/`))) return "icones";
   if (ANIMAIS_PASTAS.some((k) => p.includes(`/${k}/`))) return "animais";
