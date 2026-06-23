@@ -42,6 +42,7 @@ import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
+import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
