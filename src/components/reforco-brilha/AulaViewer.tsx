@@ -75,6 +75,9 @@ function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
       partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}.`),
     );
   return partes.join(". ");
+}
+
+
 
 function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   const c = pagina.conteudo || {};
