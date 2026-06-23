@@ -61,6 +61,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
   const [tempo, setTempo] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState<Recomendacao[]>([]);
+  const [descricaoDif, setDescricaoDif] = useState<string>("");
 
   const areaSel = AREAS.find((a) => a.id === area);
 
@@ -71,7 +72,9 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
     setSerie("");
     setTempo("");
     setRecs([]);
+    setDescricaoDif("");
   };
+
 
   const gerarRecomendacoes = async () => {
     if (!areaSel) return;
