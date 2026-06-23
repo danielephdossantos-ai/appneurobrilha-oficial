@@ -47,7 +47,9 @@ function MissaoProva() {
   const engine = usePedagogicalEngine();
   const [isStudying, setIsStudying] = useState(false);
   const [currentSession, setCurrentSession] = useState<any>(null);
+  const [currentMission, setCurrentMission] = useState<any>(null);
   const [lessonContent, setLessonContent] = useState<any>(null);
+  const [tutorAberto, setTutorAberto] = useState(false);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
