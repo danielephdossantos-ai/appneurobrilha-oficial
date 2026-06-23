@@ -304,24 +304,14 @@ export const TOQUE_SEQUENCIA_VARS: Variation[] = TS_NIVEIS.map((nv, i) => {
   };
 });
 
-// C2. RITMO DE BATIDAS — mostrar padrão (curto/longo), reproduzir na ordem
-const RITMO_BANK = [
-  { padrao: ["●", "●"], simbolos: ["curto", "curto"], durMs: [200, 200] },
-  { padrao: ["●", "─"], simbolos: ["curto", "longo"], durMs: [200, 600] },
-  { padrao: ["─", "●", "●"], simbolos: ["longo", "curto", "curto"], durMs: [600, 200, 200] },
-  { padrao: ["●", "●", "─"], simbolos: ["curto", "curto", "longo"], durMs: [200, 200, 600] },
-  { padrao: ["─", "─"], simbolos: ["longo", "longo"], durMs: [600, 600] },
-  { padrao: ["●", "─", "●"], simbolos: ["curto", "longo", "curto"], durMs: [200, 600, 200] },
-  {
-    padrao: ["●", "●", "●", "─"],
-    simbolos: ["curto", "curto", "curto", "longo"],
-    durMs: [200, 200, 200, 600],
-  },
-  { padrao: ["─", "●", "─"], simbolos: ["longo", "curto", "longo"], durMs: [600, 200, 600] },
-];
+// C2. RITMO DE BATIDAS — tambor: criança bate N vezes conforme o comando
+const RITMO_BANK: number[] = [2, 3, 1, 4, 2, 3, 5, 4, 2, 6];
 export const RITMO_BATIDAS_VARS: Variation[] = range(30).map((i) => {
-  const b = RITMO_BANK[i % RITMO_BANK.length];
-  return { id: `rb-${i + 1}`, payload: { ...b, nivel: 1 + (i % 5) } };
+  const batidas = RITMO_BANK[i % RITMO_BANK.length];
+  return {
+    id: `rb-${i + 1}`,
+    payload: { batidas, comando: `Bata ${batidas} ${batidas === 1 ? "vez" : "vezes"}!` },
+  };
 });
 
 // C3. COPIAR FIGURA — grade 4×4, lado esquerdo mostrado, copiar na grade em branco

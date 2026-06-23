@@ -2587,77 +2587,119 @@ function ToqueSequencia({ p, onDone }: any) {
 }
 
 // 29. RITMO DE BATIDAS — exibe padrão, usuário reproduz tocando
+// 29. RITMO DE BATIDAS — tambor: criança bate N vezes conforme o comando
 function RitmoBatidas({ p, onDone }: any) {
-  const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
-  const [ativo, setAtivo] = useState(-1);
-  const [tentativas, setTentativas] = useState<string[]>([]);
+  const { speak } = usePipVoice();
+  const [fase, setFase] = useState<"demo" | "vezDela" | "done">("demo");
+  const [pulseDemo, setPulseDemo] = useState(false);
+  const [contagem, setContagem] = useState(0);
   const [feedback, setFeedback] = useState<"ok" | "erro" | null>(null);
+  const audioRef = useRef<AudioContext | null>(null);
 
+  const tocarSom = () => {
+    try {
+      if (!audioRef.current) {
+        audioRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const ctx = audioRef.current;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.18);
+      gain.gain.setValueAtTime(0.6, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.22);
+    } catch {}
+  };
+
+  // Demo: narra o comando e bate o tambor N vezes
   useEffect(() => {
-    if (fase !== "mostrar") return;
-    let delay = 0;
-    p.padrao.forEach((_: any, i: number) => {
-      const dur = p.durMs[i] ?? 200;
-      setTimeout(() => setAtivo(i), delay + 500);
-      setTimeout(() => setAtivo(-1), delay + 500 + dur);
-      delay += dur + 400;
-    });
-    setTimeout(() => setFase("reproduzir"), delay + 1000);
-    return () => setAtivo(-1);
-  }, [fase]);
+    if (fase !== "demo") return;
+    speak(p.comando);
+    let cancelado = false;
+    const inicio = 1100;
+    for (let k = 0; k < p.batidas; k++) {
+      setTimeout(() => {
+        if (cancelado) return;
+        setPulseDemo(true);
+        tocarSom();
+        setTimeout(() => setPulseDemo(false), 180);
+      }, inicio + k * 550);
+    }
+    const total = inicio + p.batidas * 550 + 400;
+    const t = setTimeout(() => {
+      if (!cancelado) setFase("vezDela");
+    }, total);
+    return () => {
+      cancelado = true;
+      clearTimeout(t);
+    };
+  }, [fase, p.batidas, p.comando]);
 
-  const handleBatida = (tipo: string) => {
-    if (fase !== "reproduzir") return;
-    const novos = [...tentativas, tipo];
-    setTentativas(novos);
-    if (novos.length === p.padrao.length) {
-      const correto = novos.every((v, i) => v === p.padrao[i]);
-      setFeedback(correto ? "ok" : "erro");
-      setTimeout(() => onDone(correto), 800);
+  const bater = () => {
+    if (fase !== "vezDela" || feedback) return;
+    const nova = contagem + 1;
+    setContagem(nova);
+    tocarSom();
+    speak(String(nova));
+    if (nova === p.batidas) {
+      setFeedback("ok");
+      setTimeout(() => {
+        speak("Mandou bem!");
+        onDone(true);
+      }, 700);
+    } else if (nova > p.batidas) {
+      setFeedback("erro");
+      setTimeout(() => {
+        speak("Quase! Vamos tentar de novo.");
+        onDone(false);
+      }, 700);
     }
   };
 
   return (
-    <div className="space-y-6 text-center">
+    <div className="space-y-5 text-center">
+      <div className="rounded-3xl border-2 border-amber-300 bg-gradient-to-b from-amber-50 to-orange-100 p-5">
+        <div className="text-2xl font-black text-amber-800 mb-1">{p.comando}</div>
+        <div className="text-sm text-amber-700 font-bold">
+          {fase === "demo" && "Escute o ritmo..."}
+          {fase === "vezDela" && `Sua vez! ${contagem} / ${p.batidas}`}
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={bater}
+          disabled={fase !== "vezDela" || !!feedback}
+          aria-label="Tambor"
+          className={`relative w-44 h-44 rounded-full border-8 border-amber-700 bg-gradient-to-b from-red-500 to-red-700 shadow-2xl flex items-center justify-center transition-all
+            ${pulseDemo ? "scale-110 ring-8 ring-amber-300" : ""}
+            ${fase === "vezDela" && !feedback ? "active:scale-90 hover:scale-105 cursor-pointer animate-pulse" : ""}
+            ${feedback === "ok" ? "ring-8 ring-emerald-400" : ""}
+            ${feedback === "erro" ? "ring-8 ring-rose-400" : ""}`}
+        >
+          <span className="text-7xl drop-shadow-lg">🥁</span>
+        </button>
+      </div>
+
+      {/* Bolinhas indicando quantas batidas */}
       <div className="flex gap-2 justify-center">
-        {p.padrao.map((s: string, i: number) => (
+        {Array.from({ length: p.batidas }).map((_, i) => (
           <div
             key={i}
-            className={`rounded-xl border-2 px-3 py-2 font-black transition-all ${ativo === i ? "bg-emerald-400 text-white border-emerald-500 scale-110" : "border-border bg-card"}`}
-          >
-            {s === "●" ? "curto" : "longo"}
-          </div>
+            className={`w-4 h-4 rounded-full border-2 transition-all ${
+              i < contagem ? "bg-emerald-500 border-emerald-600 scale-110" : "border-amber-400 bg-amber-100"
+            }`}
+          />
         ))}
       </div>
-      {fase === "mostrar" && (
-        <div className="text-muted-foreground text-sm animate-pulse">Preste atenção no padrão!</div>
-      )}
-      {fase === "reproduzir" && (
-        <div className="space-y-3">
-          <div className="text-sm font-bold text-emerald-700">
-            Sua vez! ({tentativas.length}/{p.padrao.length})
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              onClick={() => handleBatida("●")}
-              className="py-6 rounded-2xl bg-emerald-100 border-2 border-emerald-300 font-black text-emerald-700 active:scale-95 transition-all text-lg"
-            >
-              ● Curto
-            </button>
-            <button
-              onClick={() => handleBatida("─")}
-              className="py-6 rounded-2xl bg-emerald-50 border-2 border-emerald-200 font-black text-emerald-600 active:scale-95 transition-all text-lg"
-            >
-              ─ Longo
-            </button>
-          </div>
-        </div>
-      )}
+
       {feedback && (
-        <div
-          className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}
-        >
-          {feedback === "ok" ? "Perfeito!" : "Tente de novo!"}
+        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}>
+          {feedback === "ok" ? "Perfeito! 🎉" : "Vamos de novo!"}
         </div>
       )}
     </div>
