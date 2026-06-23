@@ -253,7 +253,7 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       }
     }
 
-    // 2) buscar em paralelo nas 5 fontes públicas
+    // 2) buscar em paralelo nas fontes públicas
     const [wiki, yt, books, wikiv, arch] = await Promise.all([
       buscarWikipedia(queryN).catch(() => []),
       buscarYoutube(queryN).catch(() => []),
@@ -261,8 +261,12 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       buscarWikiversity(queryN).catch(() => []),
       buscarArchive(queryN).catch(() => []),
     ]);
-    // intercalar pra diversificar fontes
+    const khan = buscarKhanAcademy(queryN);
+    const ytEdu = buscarYoutubeEdu(queryN);
+
+    // intercalar pra diversificar fontes — Khan e YouTube EDU sempre aparecem no topo
     const resultados: RecursoExterno[] = [];
+    resultados.push(...khan, ...ytEdu);
     const max = Math.max(wiki.length, yt.length, books.length, wikiv.length, arch.length);
     for (let i = 0; i < max; i++) {
       if (wiki[i]) resultados.push(wiki[i]);
