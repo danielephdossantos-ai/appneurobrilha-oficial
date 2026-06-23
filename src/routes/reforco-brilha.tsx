@@ -494,7 +494,7 @@ function ReforcoBrilha() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">
-                          SISTEMA INFINITO
+                          TRILHA PEDAGÓGICA
                         </span>
                         <Pill tone="success" className="text-[10px] font-black">
                           SISTEMA BNCC ATIVO
