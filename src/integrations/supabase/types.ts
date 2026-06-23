@@ -1249,6 +1249,7 @@ export type Database = {
           id: string
           notes: string | null
           subject: string
+          tipo: string
           updated_at: string
         }
         Insert: {
@@ -1258,6 +1259,7 @@ export type Database = {
           id?: string
           notes?: string | null
           subject: string
+          tipo?: string
           updated_at?: string
         }
         Update: {
@@ -1267,6 +1269,7 @@ export type Database = {
           id?: string
           notes?: string | null
           subject?: string
+          tipo?: string
           updated_at?: string
         }
         Relationships: [
@@ -3470,6 +3473,53 @@ export type Database = {
           slug?: string
         }
         Relationships: []
+      }
+      rb_trabalhos: {
+        Row: {
+          blocos: Json
+          child_id: string
+          created_at: string
+          data_entrega: string | null
+          fontes: Json
+          id: string
+          materia: string | null
+          tema: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          blocos?: Json
+          child_id: string
+          created_at?: string
+          data_entrega?: string | null
+          fontes?: Json
+          id?: string
+          materia?: string | null
+          tema: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          blocos?: Json
+          child_id?: string
+          created_at?: string
+          data_entrega?: string | null
+          fontes?: Json
+          id?: string
+          materia?: string | null
+          tema?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_trabalhos_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       reports: {
         Row: {
