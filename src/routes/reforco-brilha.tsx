@@ -48,6 +48,7 @@ import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamil
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
 
 class ReforcoErrorBoundary extends Component<
@@ -591,17 +592,11 @@ function ReforcoBrilha() {
             </div>
           )}
 
-          {searchResult && !searchResult.main && (
-            <Card className="border-dashed border-2 text-center py-8">
-              <AlertCircle className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
-              <p className="font-bold">Nenhuma habilidade encontrada para "{searchResult.query}"</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Tente termos mais simples ou escolha uma categoria abaixo.
-              </p>
-            </Card>
+          {searchResult && !searchResult.main && searchQuery.trim().length >= 3 && (
+            <AulaInfinita query={searchQuery.trim()} />
           )}
 
-          {searchQuery.trim().length >= 3 && (
+          {searchResult && searchResult.main && searchQuery.trim().length >= 3 && (
             <BibliotecaInternet query={searchQuery.trim()} />
           )}
 
