@@ -607,6 +607,10 @@ function ReforcoBrilha() {
 
           <RelatoriosReforco />
 
+          <CalendarioProvas childId={activeChild?.id ?? null} />
+
+
+
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
 
