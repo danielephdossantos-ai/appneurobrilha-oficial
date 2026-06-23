@@ -249,7 +249,11 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         .limit(20);
 
       if (cached && cached.length > 0) {
-        return { resultados: cached as RecursoExterno[], fonte: "cache" as const };
+        const extras = [...buscarKhanAcademy(queryN), ...buscarYoutubeEdu(queryN)];
+        const cachedClean = (cached as RecursoExterno[]).filter(
+          (r) => r.fonte !== "khan" && r.fonte !== "youtube-edu",
+        );
+        return { resultados: [...extras, ...cachedClean], fonte: "cache" as const };
       }
     }
 
