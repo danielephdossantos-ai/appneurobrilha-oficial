@@ -2765,6 +2765,116 @@ export type Database = {
           },
         ]
       }
+      rb_dominio_habilidade: {
+        Row: {
+          created_at: string
+          habilidade_id: string
+          id: string
+          observacoes: string | null
+          percentual: number
+          status: string
+          ultima_atualizacao: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          habilidade_id: string
+          id?: string
+          observacoes?: string | null
+          percentual?: number
+          status?: string
+          ultima_atualizacao?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          habilidade_id?: string
+          id?: string
+          observacoes?: string | null
+          percentual?: number
+          status?: string
+          ultima_atualizacao?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_dominio_habilidade_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_habilidade_prerequisitos: {
+        Row: {
+          created_at: string
+          habilidade_id: string
+          pre_requisito_id: string
+        }
+        Insert: {
+          created_at?: string
+          habilidade_id: string
+          pre_requisito_id: string
+        }
+        Update: {
+          created_at?: string
+          habilidade_id?: string
+          pre_requisito_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_habilidade_prerequisitos_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_habilidade_prerequisitos_pre_requisito_id_fkey"
+            columns: ["pre_requisito_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_habilidade_relacionadas: {
+        Row: {
+          created_at: string
+          habilidade_id: string
+          relacionada_id: string
+        }
+        Insert: {
+          created_at?: string
+          habilidade_id: string
+          relacionada_id: string
+        }
+        Update: {
+          created_at?: string
+          habilidade_id?: string
+          relacionada_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_habilidade_relacionadas_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_habilidade_relacionadas_relacionada_id_fkey"
+            columns: ["relacionada_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_habilidade_tags: {
         Row: {
           created_at: string
@@ -2800,33 +2910,45 @@ export type Database = {
       }
       rb_habilidades: {
         Row: {
+          ano_escolar: string | null
           categoria_id: string
           created_at: string
           descricao: string | null
+          faixa_etaria: string | null
           id: string
+          nivel_dificuldade: string | null
           nome: string
           ordem: number
           palavras_chave: string[]
+          subcategoria: string | null
           updated_at: string
         }
         Insert: {
+          ano_escolar?: string | null
           categoria_id: string
           created_at?: string
           descricao?: string | null
+          faixa_etaria?: string | null
           id?: string
+          nivel_dificuldade?: string | null
           nome: string
           ordem?: number
           palavras_chave?: string[]
+          subcategoria?: string | null
           updated_at?: string
         }
         Update: {
+          ano_escolar?: string | null
           categoria_id?: string
           created_at?: string
           descricao?: string | null
+          faixa_etaria?: string | null
           id?: string
+          nivel_dificuldade?: string | null
           nome?: string
           ordem?: number
           palavras_chave?: string[]
+          subcategoria?: string | null
           updated_at?: string
         }
         Relationships: [
