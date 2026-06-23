@@ -580,6 +580,15 @@ function EditorTrabalho({
         </div>
       </div>
     </Card>
+    {tutorAberto && (
+      <TutorTrabalho
+        tema={tema}
+        materia={materia}
+        modo="trabalho"
+        onFechar={() => setTutorAberto(false)}
+      />
+    )}
+  </>
   );
 }
 
