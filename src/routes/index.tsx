@@ -279,6 +279,9 @@ function Index() {
           </Link>
         )}
 
+        {/* Lembretes de provas e trabalhos — clicáveis */}
+        {activeChild && <LembretesDiarios childId={activeChild.id} />}
+
         {/* Grade completa — todas as 12 categorias */}
         <div>
           <div className="flex items-center gap-2 mb-2 px-0.5">
