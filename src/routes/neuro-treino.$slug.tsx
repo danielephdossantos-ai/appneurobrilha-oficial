@@ -1957,28 +1957,39 @@ function TracadoLetras({ p, onDone }: any) {
     })
     .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: number }[];
 
+  // Guia: a letra é o próprio caminho dos pontos (thick stroke claro)
+  const guias = pontos
+    .map((pt, i) => {
+      if (i === 0) return null;
+      if (pt.lift) return null;
+      const prev = pontos[i - 1];
+      return { x1: prev.x, y1: prev.y, x2: pt.x, y2: pt.y, key: `g-${i}` };
+    })
+    .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: string }[];
+
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Toque os pontinhos em ordem para escrever a letra
+        Toque os pontinhos em ordem para escrever a letra {p.letra}
       </div>
       <div className="mx-auto bg-gradient-to-br from-amber-50 to-rose-50 border-4 border-amber-200 rounded-3xl p-3" style={{ maxWidth: 340 }}>
         <svg viewBox="0 0 100 100" className="w-full aspect-square">
-          {/* Letra fantasma como guia visual */}
-          <text
-            x={50}
-            y={50}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fontSize={90}
-            fontWeight={900}
-            fontFamily='"Comic Sans MS","Chalkboard SE",sans-serif'
-            fill="hsl(var(--success) / 0.15)"
-          >
-            {p.letra}
-          </text>
+          {/* Guia da letra: traços largos cinza-claros ligando os pontos */}
+          {guias.map((l) => (
+            <line
+              key={l.key}
+              x1={l.x1}
+              y1={l.y1}
+              x2={l.x2}
+              y2={l.y2}
+              stroke="#fde68a"
+              strokeWidth={11}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ))}
 
-          {/* Traços já feitos */}
+          {/* Traços já completados pela criança (verde por cima do guia) */}
           {linhas.map((l) => (
             <line
               key={l.key}
@@ -1987,8 +1998,9 @@ function TracadoLetras({ p, onDone }: any) {
               x2={l.x2}
               y2={l.y2}
               stroke="hsl(var(--success))"
-              strokeWidth={4}
+              strokeWidth={8}
               strokeLinecap="round"
+              strokeLinejoin="round"
             />
           ))}
 
