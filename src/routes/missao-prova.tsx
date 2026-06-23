@@ -36,7 +36,8 @@ import { toast } from "sonner";
 import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
-import { GraduationCap } from "lucide-react";
+import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { GraduationCap, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -53,6 +54,7 @@ function MissaoProva() {
   const [tutorAberto, setTutorAberto] = useState(false);
   const [autoStarted, setAutoStarted] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
+  const [recursosVistos, setRecursosVistos] = useState(0);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
@@ -149,6 +151,7 @@ function MissaoProva() {
     setCurrentSession(session);
     setCurrentMission(mission);
     setLessonContent(null);
+    setRecursosVistos(0);
 
     try {
       // Usar o ReforcoEngine para gerar uma aula baseada no tópico da sessão
@@ -247,6 +250,22 @@ function MissaoProva() {
                     ))}
                   </div>
 
+                  <div className="mb-6 p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40">
+                    <div className="flex items-center gap-2 mb-3">
+                      <BookOpen className="h-5 w-5 text-emerald-700" />
+                      <h4 className="font-black text-emerald-800 text-sm uppercase tracking-wider">
+                        Material de estudo (Wikipédia, YouTube, Khan, livros)
+                      </h4>
+                    </div>
+                    <p className="text-xs text-emerald-700 mb-3">
+                      Abra pelo menos 1 material abaixo antes de marcar como concluído. Tudo abre dentro do app.
+                    </p>
+                    <BibliotecaInternet
+                      query={`${currentSession.title} ${currentMission.subject}`}
+                      onAbrirRecurso={() => setRecursosVistos((n) => n + 1)}
+                    />
+                  </div>
+
                   <div className="flex flex-wrap justify-center gap-3">
                     <button
                       onClick={() => setTutorAberto(true)}
@@ -255,14 +274,22 @@ function MissaoProva() {
                       <GraduationCap className="h-5 w-5" /> Tutor Brilha
                     </button>
                     <button
-                      onClick={completeSession}
-                      className="bg-success text-white px-10 py-4 rounded-2xl font-black text-xl shadow-glow hover:scale-105 transition-all flex items-center gap-3"
+                      onClick={() => {
+                        if (recursosVistos === 0) {
+                          toast.error("Abra pelo menos 1 material de estudo antes de concluir 📚");
+                          return;
+                        }
+                        completeSession();
+                      }}
+                      disabled={recursosVistos === 0}
+                      className="bg-success text-white px-10 py-4 rounded-2xl font-black text-xl shadow-glow hover:scale-105 transition-all flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       CONCLUÍDO! <CheckCircle2 className="h-6 w-6" />
                     </button>
                   </div>
                 </Card>
               </div>
+
 
               <div className="lg:col-span-1">
                 <div className="sticky top-24 space-y-4">
