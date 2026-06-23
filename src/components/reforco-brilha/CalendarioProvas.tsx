@@ -25,6 +25,8 @@ interface Prova {
 
 interface Props {
   childId: string | null;
+  filtroTipo?: "prova" | "trabalho" | "todos";
+  titulo?: string;
 }
 
 const MESES = [
@@ -40,7 +42,7 @@ function ymd(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-export function CalendarioProvas({ childId }: Props) {
+export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Props) {
   const qc = useQueryClient();
   const today = new Date();
   const [cursor, setCursor] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
@@ -48,7 +50,9 @@ export function CalendarioProvas({ childId }: Props) {
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
-  const [tipo, setTipo] = useState<"prova" | "trabalho">("prova");
+  const [tipo, setTipo] = useState<"prova" | "trabalho">(
+    filtroTipo === "trabalho" ? "trabalho" : "prova"
+  );
 
   const monthStart = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
   const monthEnd = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
