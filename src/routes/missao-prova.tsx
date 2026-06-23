@@ -176,7 +176,13 @@ function MissaoProva() {
                     ))}
                   </div>
 
-                  <div className="flex justify-center">
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                      onClick={() => setTutorAberto(true)}
+                      className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-4 rounded-2xl font-black text-base shadow-kid hover:scale-105 transition-all flex items-center gap-2"
+                    >
+                      <GraduationCap className="h-5 w-5" /> Tutor Brilha
+                    </button>
                     <button
                       onClick={completeSession}
                       className="bg-success text-white px-10 py-4 rounded-2xl font-black text-xl shadow-glow hover:scale-105 transition-all flex items-center gap-3"
