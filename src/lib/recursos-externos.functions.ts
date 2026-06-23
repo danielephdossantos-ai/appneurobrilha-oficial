@@ -197,21 +197,8 @@ async function buscarArchive(query: string): Promise<RecursoExterno[]> {
   }
 }
 
-// ---------- Khan Academy (link de busca, sem API) ----------
-function buscarKhanAcademy(query: string): RecursoExterno[] {
-  const q = encodeURIComponent(query);
-  return [
-    {
-      fonte: "khan",
-      titulo: `Khan Academy: aulas sobre "${query}"`,
-      descricao:
-        "Vídeos e exercícios gratuitos da Khan Academy em português. Toque para ver os resultados.",
-      url: `https://pt.khanacademy.org/search?page_search_query=${q}`,
-      thumbnail: "https://cdn.kastatic.org/images/khan-logo-vertical-transparent.png",
-      conteudo: null,
-    },
-  ];
-}
+// Khan Academy removido: bloqueia iframe e exige login externo.
+
 
 // ---------- YouTube EDU (link de busca filtrada, sem API) ----------
 function buscarYoutubeEdu(query: string): RecursoExterno[] {
