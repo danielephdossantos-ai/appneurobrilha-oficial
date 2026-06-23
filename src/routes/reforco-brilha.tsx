@@ -161,6 +161,29 @@ function ReforcoBrilha() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
   const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string } | null>(null);
+  const [aulasExtras, setAulasExtras] = useState<import("@/lib/reforco-brilha-search").RBAula[]>([]);
+  const [carregandoMaisAulas, setCarregandoMaisAulas] = useState(false);
+  const [semMaisAulas, setSemMaisAulas] = useState(false);
+
+  useEffect(() => {
+    setAulasExtras([]);
+    setSemMaisAulas(false);
+  }, [searchResult?.main?.id]);
+
+  const carregarMaisAulas = async () => {
+    if (!searchResult?.main?.id) return;
+    setCarregandoMaisAulas(true);
+    try {
+      const { listAulasDaHabilidade } = await import("@/lib/reforco-brilha-search");
+      const offset = searchResult.aulas.length + aulasExtras.length;
+      const novas = await listAulasDaHabilidade(searchResult.main.id, { limit: 20, offset });
+      if (novas.length === 0) setSemMaisAulas(true);
+      else setAulasExtras((prev) => [...prev, ...novas]);
+      if (novas.length < 20) setSemMaisAulas(true);
+    } finally {
+      setCarregandoMaisAulas(false);
+    }
+  };
   const queryClient = useQueryClient();
 
   const runSearch = async (q: string) => {
