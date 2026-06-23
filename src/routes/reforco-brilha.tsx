@@ -1,6 +1,6 @@
 // ============= Full file contents =============
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
