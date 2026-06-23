@@ -154,7 +154,12 @@ function expandWithSynonyms(rawQuery: string, baseTokens: string[]): string[] {
 function tokenize(query: string): string[] {
   const base = normalize(query)
     .split(" ")
-    .filter((t) => t.length >= 3 && !STOPWORDS.has(t));
+    .filter((t) => {
+      if (!t || STOPWORDS.has(t)) return false;
+      // mantém dígitos (ex: "9" na "tabuada do 9") mesmo curtos
+      if (/^\d+$/.test(t)) return true;
+      return t.length >= 3;
+    });
   return expandWithSynonyms(query, base);
 }
 
