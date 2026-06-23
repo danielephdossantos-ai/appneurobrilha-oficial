@@ -175,7 +175,7 @@ export function PlanoIntervencao({
     setPlano({ ...plano, aulas_concluidas: novas, progresso: novoProgresso });
     const { error } = await supabase
       .from("rb_planos_intervencao")
-      .update({ aulas_concluidas: novas, progresso: novoProgresso })
+      .update({ aulas_concluidas: novas as any, progresso: novoProgresso })
       .eq("id", plano.id);
     if (error) {
       toast.error("Erro ao salvar progresso.");
