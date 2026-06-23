@@ -37,6 +37,7 @@ import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { SpeakButton } from "@/components/ui/SpeakButton";
 import { GraduationCap, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
