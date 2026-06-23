@@ -2999,6 +2999,7 @@ export type Database = {
       rb_midias: {
         Row: {
           altura: number | null
+          categoria: string | null
           created_at: string
           descricao: string | null
           duracao_seg: number | null
@@ -3014,6 +3015,7 @@ export type Database = {
         }
         Insert: {
           altura?: number | null
+          categoria?: string | null
           created_at?: string
           descricao?: string | null
           duracao_seg?: number | null
@@ -3029,6 +3031,7 @@ export type Database = {
         }
         Update: {
           altura?: number | null
+          categoria?: string | null
           created_at?: string
           descricao?: string | null
           duracao_seg?: number | null
