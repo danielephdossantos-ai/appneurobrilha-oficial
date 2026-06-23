@@ -132,7 +132,7 @@ const CATALOGO_DIFICULDADES: Dificuldade[] = [
     habilidades: ["Regulação emocional", "Tolerância à frustração"] },
 ];
 
-function ReforcoBrilhaInner() {
+function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
   const { sendNotification } = useNotifications();
