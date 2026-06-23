@@ -411,7 +411,7 @@ function ReforcoBrilha() {
                       <div className="flex flex-col">
                         <span className="text-sm font-bold">{s}</span>
                         <span className="text-[10px] text-muted-foreground">
-                          Sistema Infinito · BNCC
+                          Trilha pedagógica · BNCC
                         </span>
                       </div>
                       <div className="h-8 w-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
