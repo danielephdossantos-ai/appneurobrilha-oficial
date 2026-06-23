@@ -10,11 +10,12 @@ type Msg = { role: "user" | "assistant"; content: string };
 interface Props {
   tema: string;
   materia?: string;
-  modo?: "trabalho" | "plano-diario";
+  modo?: "trabalho" | "plano-diario" | "missao-prova";
+  diasAteProva?: number;
   onFechar: () => void;
 }
 
-export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Props) {
+export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, onFechar }: Props) {
   const { activeChild } = useAppState();
   const conversar = useServerFn(conversarTutorIA);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,13 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Pr
   // Mensagem inicial automática
   useEffect(() => {
     if (msgs.length === 0 && tema.trim()) {
-      enviar("Oi! Quero começar a montar meu trabalho.", true);
+      const inicial =
+        modo === "trabalho"
+          ? "Oi! Quero começar a montar meu trabalho."
+          : modo === "missao-prova"
+            ? "Oi! Quero estudar pra prova."
+            : "Oi! Vamos montar meu plano de estudo de hoje?";
+      enviar(inicial, true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
