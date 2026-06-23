@@ -694,38 +694,8 @@ function ReforcoBrilha() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CATEGORIAS.map((cat) => (
-              <div key={cat.id} className="space-y-3">
-                <h4 className="font-bold flex items-center gap-2 px-1 text-base">
-                  <cat.icon className={`h-5 w-5 ${cat.color}`} />
-                  {cat.label}
-                </h4>
-                <div className="grid grid-cols-1 gap-2">
-                  {cat.suggestions.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        setTopic(s);
-                        startLesson(s);
-                      }}
-                      className="text-left p-3.5 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 hover:shadow-glow transition-all flex justify-between items-center group"
-                    >
-                      <div className="flex flex-col">
-                        <span className="text-sm font-bold">{s}</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          Trilha pedagógica · BNCC
-                        </span>
-                      </div>
-                      <div className="h-8 w-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-                        <PlayCircle className="h-5 w-5" />
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="bg-success/5 border-success/20">
