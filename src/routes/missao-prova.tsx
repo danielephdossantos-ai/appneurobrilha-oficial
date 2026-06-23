@@ -36,7 +36,8 @@ import { toast } from "sonner";
 import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
-import { GraduationCap } from "lucide-react";
+import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { GraduationCap, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -53,6 +54,7 @@ function MissaoProva() {
   const [tutorAberto, setTutorAberto] = useState(false);
   const [autoStarted, setAutoStarted] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
+  const [recursosVistos, setRecursosVistos] = useState(0);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
@@ -149,6 +151,7 @@ function MissaoProva() {
     setCurrentSession(session);
     setCurrentMission(mission);
     setLessonContent(null);
+    setRecursosVistos(0);
 
     try {
       // Usar o ReforcoEngine para gerar uma aula baseada no tópico da sessão
