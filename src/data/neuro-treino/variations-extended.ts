@@ -196,105 +196,110 @@ export const NOMEACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
 // GRUPO 2: COORDENAÇÃO MOTORA (4 categorias)
 // ──────────────────────────────────────────────
 
-// C1. TOQUE EM SEQUÊNCIA — 10 categorias com variedade (números, letras, animais, objetos)
-const TS_CATEGORIAS: Array<{
+// C1. TOQUE EM SEQUÊNCIA — só números (até 100) e alfabeto (começa com vogais)
+type TSNivel = {
   nome: string;
-  tipo: "numero" | "letra" | "imagem";
+  tipo: "numero" | "letra";
   bg: "ceu" | "grama" | "selva" | "espaco" | "fazenda" | "oceano";
-  itens: Array<{ id: string; label: string }>;
-}> = [
+  itens: string[]; // já em ordem correta de toque
+};
+
+const NUM_RANGES: Array<{ ate: number; bg: TSNivel["bg"]; qtd: number }> = [
+  { ate: 5, bg: "ceu", qtd: 5 },
+  { ate: 10, bg: "grama", qtd: 6 },
+  { ate: 15, bg: "fazenda", qtd: 7 },
+  { ate: 20, bg: "oceano", qtd: 8 },
+  { ate: 30, bg: "selva", qtd: 8 },
+  { ate: 50, bg: "espaco", qtd: 10 },
+  { ate: 75, bg: "ceu", qtd: 10 },
+  { ate: 100, bg: "espaco", qtd: 10 },
+];
+
+const ALFA_NIVEIS: Array<{ letras: string[]; bg: TSNivel["bg"] }> = [
+  { letras: ["A", "E", "I", "O", "U"], bg: "ceu" },
+  { letras: ["A", "E", "I", "O", "U", "B", "C", "D"], bg: "grama" },
+  { letras: ["A", "E", "I", "O", "U", "B", "C", "D", "F", "G"], bg: "fazenda" },
+  { letras: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"], bg: "oceano" },
   {
-    nome: "Números 1-5", tipo: "numero", bg: "ceu",
-    itens: [1, 2, 3, 4, 5].map((n) => ({ id: `n${n}`, label: String(n) })),
+    letras: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"],
+    bg: "selva",
   },
   {
-    nome: "Números 1-7", tipo: "numero", bg: "grama",
-    itens: [1, 2, 3, 4, 5, 6, 7].map((n) => ({ id: `n${n}`, label: String(n) })),
-  },
-  {
-    nome: "Letras A-E", tipo: "letra", bg: "ceu",
-    itens: ["A", "B", "C", "D", "E"].map((l) => ({ id: l, label: l })),
-  },
-  {
-    nome: "Letras A-H", tipo: "letra", bg: "grama",
-    itens: ["A", "B", "C", "D", "E", "F", "G", "H"].map((l) => ({ id: l, label: l })),
-  },
-  {
-    nome: "Animais fofos", tipo: "imagem", bg: "grama",
-    itens: [
-      { id: "gato", label: "GATO" }, { id: "cachorro", label: "CACHORRO" },
-      { id: "coelho", label: "COELHO" }, { id: "pato", label: "PATO" },
-      { id: "passaro", label: "PÁSSARO" },
+    letras: [
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+      "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
     ],
-  },
-  {
-    nome: "Selva", tipo: "imagem", bg: "selva",
-    itens: [
-      { id: "leao", label: "LEÃO" }, { id: "tigre", label: "TIGRE" },
-      { id: "elefante", label: "ELEFANTE" }, { id: "macaco", label: "MACACO" },
-      { id: "raposa", label: "RAPOSA" }, { id: "tartaruga", label: "TARTARUGA" },
-    ],
-  },
-  {
-    nome: "Frutas", tipo: "imagem", bg: "grama",
-    itens: [
-      { id: "maca", label: "MAÇÃ" }, { id: "banana", label: "BANANA" },
-      { id: "morango", label: "MORANGO" }, { id: "uva", label: "UVA" },
-    ],
-  },
-  {
-    nome: "Veículos", tipo: "imagem", bg: "ceu",
-    itens: [
-      { id: "carro", label: "CARRO" }, { id: "moto", label: "MOTO" },
-      { id: "onibus", label: "ÔNIBUS" }, { id: "trem", label: "TREM" },
-      { id: "caminhao", label: "CAMINHÃO" },
-    ],
-  },
-  {
-    nome: "Espaço", tipo: "imagem", bg: "espaco",
-    itens: [
-      { id: "sol", label: "SOL" }, { id: "lua", label: "LUA" },
-      { id: "estrela", label: "ESTRELA" }, { id: "foguete", label: "FOGUETE" },
-      { id: "planeta", label: "PLANETA" }, { id: "astronauta", label: "ASTRONAUTA" },
-    ],
-  },
-  {
-    nome: "Fazenda", tipo: "imagem", bg: "fazenda",
-    itens: [
-      { id: "vaca", label: "VACA" }, { id: "porco", label: "PORCO" },
-      { id: "galinha", label: "GALINHA" }, { id: "ovelha", label: "OVELHA" },
-      { id: "cavalo", label: "CAVALO" }, { id: "pintinho", label: "PINTINHO" },
-    ],
+    bg: "espaco",
   },
 ];
 
-export const TOQUE_SEQUENCIA_VARS: Variation[] = range(30).map((i) => {
-  const cat = TS_CATEGORIAS[i % TS_CATEGORIAS.length];
-  // Variedade por rodada: aumenta a quantidade (3..N) conforme cresce o índice
-  const qtdMax = cat.itens.length;
-  const qtd = Math.min(qtdMax, 3 + Math.floor(i / TS_CATEGORIAS.length));
-  // Embaralha itens pseudo-aleatoriamente, mantém posição
+const TS_NIVEIS: TSNivel[] = [];
+
+// Números: amostra ordenada do intervalo, sempre incluindo 1 e o teto
+NUM_RANGES.forEach((r, idx) => {
+  const seed = (idx + 1) * 17;
+  const todos = Array.from({ length: r.ate }, (_, k) => k + 1);
+  let escolhidos: number[];
+  if (todos.length <= r.qtd) {
+    escolhidos = todos;
+  } else {
+    const set = new Set<number>([1, r.ate]);
+    let s = seed;
+    while (set.size < r.qtd) {
+      s = (s * 9301 + 49297) % 233280;
+      set.add(1 + (s % r.ate));
+    }
+    escolhidos = [...set].sort((a, b) => a - b);
+  }
+  TS_NIVEIS.push({
+    nome: `Números 1 até ${r.ate}`,
+    tipo: "numero",
+    bg: r.bg,
+    itens: escolhidos.map(String),
+  });
+});
+
+// Letras: amostra ordenada (alfabética) do conjunto
+ALFA_NIVEIS.forEach((n, idx) => {
+  const maxNaTela = 12;
+  let escolhidos: string[];
+  if (n.letras.length <= maxNaTela) {
+    escolhidos = [...n.letras];
+  } else {
+    const set = new Set<string>([n.letras[0], n.letras[n.letras.length - 1]]);
+    let s = (idx + 1) * 31;
+    while (set.size < maxNaTela) {
+      s = (s * 9301 + 49297) % 233280;
+      set.add(n.letras[s % n.letras.length]);
+    }
+    const ALFA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    escolhidos = [...set].sort((a, b) => ALFA.indexOf(a) - ALFA.indexOf(b));
+  }
+  TS_NIVEIS.push({
+    nome: `Letras ${n.letras[0]}-${n.letras[n.letras.length - 1]}`,
+    tipo: "letra",
+    bg: n.bg,
+    itens: escolhidos,
+  });
+});
+
+export const TOQUE_SEQUENCIA_VARS: Variation[] = TS_NIVEIS.map((nv, i) => {
   const seed = i + 1;
-  const ordemBase = [...cat.itens]
-    .map((it, k) => ({ it, w: (k * 13 + seed * 7) % 100 }))
-    .sort((a, b) => a.w - b.w)
-    .slice(0, qtd)
-    .map(({ it }) => it);
-  const pontos = ordemBase.map((it, k) => ({
-    id: it.id,
-    label: it.label,
-    x: 12 + ((k * 19 + seed * 11) % 76),
-    y: 12 + ((k * 27 + seed * 9) % 70),
+  const pontos = nv.itens.map((label, k) => ({
+    id: `${label}-${k}`,
+    label,
+    x: 10 + ((k * 19 + seed * 11) % 78),
+    y: 12 + ((k * 27 + seed * 9) % 72),
   }));
   return {
     id: `ts-${i + 1}`,
     payload: {
-      tipo: cat.tipo,
-      bg: cat.bg,
-      categoria: cat.nome,
+      tipo: nv.tipo,
+      bg: nv.bg,
+      categoria: nv.nome,
       pontos,
       ordem: pontos.map((p) => p.id),
-      tempoLimite: 20 + qtd * 4,
+      tempoLimite: 20 + pontos.length * 4,
     },
   };
 });
