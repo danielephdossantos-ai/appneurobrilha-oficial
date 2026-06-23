@@ -108,6 +108,34 @@ async function buscarWikipedia(query: string): Promise<RecursoExterno[]> {
   return summaries.filter((x): x is RecursoExterno => x !== null);
 }
 
+// ---------- OpenLibrary (livros, sem chave) ----------
+async function buscarOpenLibrary(query: string): Promise<RecursoExterno[]> {
+  try {
+    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=6&language=por`;
+    const r = await fetch(url, { headers: { "User-Agent": "NeuroBrilhaKids/1.0" } });
+    if (!r.ok) return [];
+    const data: any = await r.json();
+    const docs: any[] = data.docs || [];
+    return docs.slice(0, 6).map((d) => {
+      const key = d.key as string; // "/works/OL12345W"
+      const coverId = d.cover_i;
+      const autor = Array.isArray(d.author_name) ? d.author_name.slice(0, 2).join(", ") : null;
+      const ano = d.first_publish_year ? ` (${d.first_publish_year})` : "";
+      const rec: RecursoExterno = {
+        fonte: "openlibrary",
+        titulo: d.title || "Livro",
+        descricao: autor ? `${autor}${ano}` : ano || null,
+        url: `https://openlibrary.org${key}`,
+        thumbnail: coverId ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg` : null,
+        conteudo: null,
+      };
+      return rec;
+    });
+  } catch {
+    return [];
+  }
+}
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
@@ -131,18 +159,19 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       }
     }
 
-    // 2) buscar nas APIs públicas (por enquanto só Wikipédia)
-    // 2) buscar nas APIs públicas (Wikipédia + YouTube em paralelo)
-    const [wiki, yt] = await Promise.all([
+    // 2) buscar nas APIs públicas (Wikipédia + YouTube + OpenLibrary em paralelo)
+    const [wiki, yt, books] = await Promise.all([
       buscarWikipedia(queryN).catch(() => []),
       buscarYoutube(queryN).catch(() => []),
+      buscarOpenLibrary(queryN).catch(() => []),
     ]);
-    // intercalar: 1 wiki, 1 yt, ... para diversificar
+    // intercalar: wiki, yt, livro, wiki, yt, livro... para diversificar
     const resultados: RecursoExterno[] = [];
-    const max = Math.max(wiki.length, yt.length);
+    const max = Math.max(wiki.length, yt.length, books.length);
     for (let i = 0; i < max; i++) {
       if (wiki[i]) resultados.push(wiki[i]);
       if (yt[i]) resultados.push(yt[i]);
+      if (books[i]) resultados.push(books[i]);
     }
 
     // 3) salvar no cache
