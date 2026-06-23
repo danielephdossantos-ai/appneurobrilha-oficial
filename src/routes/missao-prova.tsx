@@ -29,8 +29,8 @@ import {
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { supabase } from "@/database/supabase/client";
-import { useQuery } from "@tanstack/react-query";
-import { format, differenceInDays } from "date-fns";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { format, differenceInDays, addDays, startOfDay, isBefore } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { toast } from "sonner";
 import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
@@ -45,11 +45,14 @@ export const Route = createFileRoute("/missao-prova")({
 function MissaoProva() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
+  const queryClient = useQueryClient();
   const [isStudying, setIsStudying] = useState(false);
   const [currentSession, setCurrentSession] = useState<any>(null);
   const [currentMission, setCurrentMission] = useState<any>(null);
   const [lessonContent, setLessonContent] = useState<any>(null);
   const [tutorAberto, setTutorAberto] = useState(false);
+  const [autoStarted, setAutoStarted] = useState(false);
+  const [autoGenerating, setAutoGenerating] = useState(false);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
@@ -72,6 +75,74 @@ function MissaoProva() {
     },
     enabled: !!activeChild,
   });
+
+  // 🤖 AUTOMÁTICO: Gera plano de estudos se faltar
+  useEffect(() => {
+    if (!missions.length || autoGenerating) return;
+    const semPlano = missions.find(
+      (m: any) =>
+        (!m.study_plan || m.study_plan.length === 0) &&
+        m.contents &&
+        m.contents.length > 0 &&
+        differenceInDays(new Date(m.exam_date + "T12:00:00"), new Date()) > 0,
+    );
+    if (!semPlano) return;
+
+    setAutoGenerating(true);
+    (async () => {
+      try {
+        const daysUntil = differenceInDays(
+          new Date(semPlano.exam_date + "T12:00:00"),
+          new Date(),
+        );
+        const contents = semPlano.contents;
+        const dias = Math.min(daysUntil, 7);
+        const perDay = Math.ceil(contents.length / dias);
+        const sessions: any[] = [];
+        let idx = 0;
+        for (let i = 0; i < dias; i++) {
+          const date = addDays(startOfDay(new Date()), i);
+          if (!isBefore(date, new Date(semPlano.exam_date + "T12:00:00"))) break;
+          const slice = contents.slice(idx, idx + perDay);
+          if (slice.length === 0) break;
+          sessions.push({
+            mission_id: semPlano.id,
+            scheduled_date: format(date, "yyyy-MM-dd"),
+            title: `Aula: ${slice.map((c: any) => c.content_title).join(" + ")}`,
+            description: `Estudo guiado de ${semPlano.subject}: ${slice.map((c: any) => c.content_title).join(", ")}`,
+          });
+          idx += perDay;
+        }
+        if (sessions.length > 0) {
+          await (supabase as any).from("exam_study_plans").insert(sessions);
+          await queryClient.invalidateQueries({
+            queryKey: ["exam_missions_child", activeChild?.id],
+          });
+          toast.success("✨ Plano de aulas gerado automaticamente!");
+        }
+      } catch (e) {
+        console.error("Auto-gerar plano falhou:", e);
+      } finally {
+        setAutoGenerating(false);
+      }
+    })();
+  }, [missions, autoGenerating, queryClient, activeChild?.id]);
+
+  // 🤖 AUTOMÁTICO: Abre a aula de hoje + Tutor sem precisar clicar
+  useEffect(() => {
+    if (autoStarted || isStudying || !missions.length) return;
+    for (const mission of missions) {
+      const todaySession = mission.study_plan?.find(
+        (s: any) => !s.completed && s.scheduled_date === format(new Date(), "yyyy-MM-dd"),
+      );
+      if (todaySession) {
+        setAutoStarted(true);
+        startSession(todaySession, mission);
+        setTutorAberto(true);
+        return;
+      }
+    }
+  }, [missions, autoStarted, isStudying]);
 
   const startSession = async (session: any, mission: any) => {
     setIsStudying(true);
