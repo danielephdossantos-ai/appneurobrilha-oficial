@@ -84,39 +84,60 @@ export const Route = createFileRoute("/reforco-brilha")({
 
 const CATEGORIAS = [
   {
-    id: "tabuada",
-    label: "Tabuada",
-    icon: Calculator,
-    color: "text-blue-500",
-    suggestions: ["Tabuada do 7", "Tabuada do 9", "Multiplicação por 5"],
-  },
-  {
-    id: "portugues",
-    label: "Português",
+    id: "vogais",
+    label: "Vogais",
     icon: Pencil,
-    color: "text-orange-500",
-    suggestions: ["Verbos no passado", "Acentuação", "Ortografia do S e Z"],
+    color: "text-pink-500",
+    suggestions: ["Vogais A E I", "Vogais O U", "Reconhecer vogais em palavras"],
   },
   {
-    id: "problemas",
-    label: "Problemas",
-    icon: BookOpen,
-    color: "text-purple-500",
-    suggestions: ["Problemas de divisão", "Lógica matemática", "Sistema monetário"],
+    id: "silabas",
+    label: "Sílabas",
+    icon: MessageSquare,
+    color: "text-orange-500",
+    suggestions: ["Sílabas simples (BA BE BI)", "Sílabas com R", "Formação de palavras"],
   },
   {
     id: "leitura",
-    label: "Alfabetização",
-    icon: MessageSquare,
+    label: "Leitura",
+    icon: BookOpen,
     color: "text-green-500",
-    suggestions: ["Leitura de sílabas", "Formação de frases", "Interpretação de texto"],
+    suggestions: ["Leitura de palavras curtas", "Leitura de frases", "Interpretação de texto"],
   },
   {
-    id: "oficina",
-    label: "Oficina Criativa",
+    id: "escrita",
+    label: "Escrita",
+    icon: PenTool,
+    color: "text-blue-500",
+    suggestions: ["Escrita do nome", "Cópia de palavras", "Pequenas frases"],
+  },
+  {
+    id: "tabuada",
+    label: "Tabuada",
+    icon: Calculator,
+    color: "text-indigo-500",
+    suggestions: ["Tabuada do 2", "Tabuada do 5", "Tabuada do 9"],
+  },
+  {
+    id: "atencao",
+    label: "Atenção",
+    icon: Target,
+    color: "text-red-500",
+    suggestions: ["Achar diferenças", "Foco visual", "Atenção sustentada"],
+  },
+  {
+    id: "coordenacao",
+    label: "Coordenação motora",
     icon: Palette,
-    color: "text-pink-500",
-    suggestions: ["Mosaico de Formas", "Sequência de Cores", "Artesanato Virtual"],
+    color: "text-amber-500",
+    suggestions: ["Traçado de linhas", "Pinça fina", "Recortar e colar"],
+  },
+  {
+    id: "memoria",
+    label: "Memória",
+    icon: Brain,
+    color: "text-purple-500",
+    suggestions: ["Jogo da memória", "Sequência de figuras", "Memória auditiva"],
   },
 ];
 
@@ -260,14 +281,15 @@ function ReforcoBrilha() {
       <PageHeader
         icon={Sparkles}
         title="REFORÇO BRILHA"
-        subtitle="O professor particular infinito que ensina qualquer assunto"
+        subtitle="Biblioteca pedagógica para pais, responsáveis e professores"
       />
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
           <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />O que vamos reforçar hoje?
+              <Sparkles className="h-5 w-5 text-primary" />
+              O que a criança está precisando aprender?
             </h3>
             <div className="relative">
               <input
@@ -275,19 +297,20 @@ function ReforcoBrilha() {
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && startLesson()}
-                placeholder="Ex: Tabuada do 7, Verbos, Ortografia..."
-                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-lg transition-all"
+                placeholder="Ex: Vogais, Sílabas, Leitura, Escrita, Tabuada, Atenção, Coordenação motora, Memória..."
+                className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
               <button
                 onClick={() => startLesson()}
                 className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity"
+                aria-label="Buscar trilha pedagógica"
               >
                 <ArrowRight className="h-6 w-6" />
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              A mãe escreve o tema e o Sistema Brilha cria a aula perfeita.
+              Pesquise a dificuldade e receba uma trilha pedagógica estruturada (sem uso de IA generativa).
             </p>
           </Card>
 
@@ -388,7 +411,7 @@ function ReforcoBrilha() {
                       <div className="flex flex-col">
                         <span className="text-sm font-bold">{s}</span>
                         <span className="text-[10px] text-muted-foreground">
-                          Sistema Infinito · BNCC
+                          Trilha pedagógica · BNCC
                         </span>
                       </div>
                       <div className="h-8 w-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
@@ -471,7 +494,7 @@ function ReforcoBrilha() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="bg-primary/20 text-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">
-                          SISTEMA INFINITO
+                          TRILHA PEDAGÓGICA
                         </span>
                         <Pill tone="success" className="text-[10px] font-black">
                           SISTEMA BNCC ATIVO
@@ -519,8 +542,7 @@ function ReforcoBrilha() {
                       Roteiro de Estudos (Gerado pelo Sistema)
                     </h3>
                     <div className="bg-indigo-600/10 border border-indigo-200 rounded-2xl p-4 mb-4 text-xs text-indigo-700 font-medium">
-                      ✨ O Professor IA está ensinando agora o roteiro que o sistema preparou
-                      baseado na BNCC.
+                      📚 Trilha pedagógica estruturada com base na BNCC, sem uso de IA generativa.
                     </div>
                     {lessonContent.levels[currentLevel]
                       .slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6)
