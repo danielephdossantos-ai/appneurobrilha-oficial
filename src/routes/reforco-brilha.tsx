@@ -669,6 +669,39 @@ function ReforcoBrilha() {
               </div>
             </Card>
           </div>
+
+          {/* Catálogo de Dificuldades */}
+          <div className="mt-6">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertCircle className="h-5 w-5 text-amber-500" />
+              <h3 className="font-extrabold text-base">Catálogo de Dificuldades</h3>
+              <span className="text-xs text-muted-foreground">
+                Toque em uma dificuldade para abrir um plano de reforço com habilidades da matriz pedagógica.
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              {CATALOGO_DIFICULDADES.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => {
+                    setSearchQuery(d.busca);
+                    runSearch(d.busca);
+                  }}
+                  className="text-left p-3 rounded-2xl border-2 border-border bg-card hover:border-primary hover:bg-primary/5 transition-all"
+                >
+                  <div className="flex items-start gap-2">
+                    <span className="text-xl shrink-0">{d.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm">{d.titulo}</div>
+                      <div className="text-[11px] text-muted-foreground mt-0.5">
+                        {d.habilidades.join(" · ")}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
