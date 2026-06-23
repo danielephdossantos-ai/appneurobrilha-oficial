@@ -89,7 +89,48 @@ export const Route = createFileRoute("/reforco-brilha")({
 });
 
 
+type Dificuldade = {
+  id: string;
+  emoji: string;
+  titulo: string;
+  busca: string;
+  habilidades: string[];
+};
 
+const CATALOGO_DIFICULDADES: Dificuldade[] = [
+  { id: "rec-letras", emoji: "🔤", titulo: "Não reconhece letras", busca: "reconhecimento de letras alfabeto",
+    habilidades: ["Alfabeto", "Letras maiúsculas/minúsculas", "Consciência fonêmica"] },
+  { id: "troca-letras", emoji: "🔁", titulo: "Troca letras (b/d, p/q)", busca: "troca de letras espelhamento",
+    habilidades: ["Discriminação visual", "Lateralidade", "Ortografia inicial"] },
+  { id: "silabas", emoji: "🧩", titulo: "Não junta sílabas", busca: "junção de sílabas formar palavras",
+    habilidades: ["Consciência silábica", "Decodificação", "Sílabas simples"] },
+  { id: "leitura-lenta", emoji: "🐢", titulo: "Leitura lenta / silabada", busca: "fluência de leitura",
+    habilidades: ["Fluência leitora", "Automaticidade", "Prosódia"] },
+  { id: "interpretacao", emoji: "📖", titulo: "Dificuldade de interpretação", busca: "interpretação de texto",
+    habilidades: ["Compreensão leitora", "Inferência", "Ideia principal"] },
+  { id: "ortografia", emoji: "✍️", titulo: "Erros de ortografia", busca: "ortografia palavras",
+    habilidades: ["Regras ortográficas", "Memória ortográfica"] },
+  { id: "mat-basica", emoji: "➕", titulo: "Dificuldade em matemática", busca: "operações matemáticas básicas",
+    habilidades: ["Numeralização", "Adição/Subtração", "Valor posicional"] },
+  { id: "tabuada", emoji: "✖️", titulo: "Não memoriza tabuada", busca: "tabuada multiplicação",
+    habilidades: ["Multiplicação", "Fato básico", "Memória de longo prazo"] },
+  { id: "problemas", emoji: "🧮", titulo: "Não resolve problemas", busca: "resolução de problemas matemáticos",
+    habilidades: ["Interpretação de enunciado", "Raciocínio lógico"] },
+  { id: "atencao", emoji: "🎯", titulo: "Dificuldade de atenção", busca: "atenção concentração",
+    habilidades: ["Atenção sustentada", "Foco", "Funções executivas"] },
+  { id: "memoria", emoji: "🧠", titulo: "Dificuldade de memória", busca: "memória de trabalho",
+    habilidades: ["Memória de trabalho", "Memória de curto prazo"] },
+  { id: "letra", emoji: "🖊️", titulo: "Letra ilegível", busca: "caligrafia coordenação motora fina",
+    habilidades: ["Caligrafia", "Coordenação motora fina", "Preensão do lápis"] },
+  { id: "copiar", emoji: "📋", titulo: "Dificuldade para copiar do quadro", busca: "cópia do quadro coordenação visomotora",
+    habilidades: ["Coordenação visomotora", "Atenção visual"] },
+  { id: "organizacao", emoji: "🗂️", titulo: "Dificuldade para organizar tarefas", busca: "organização e planejamento",
+    habilidades: ["Funções executivas", "Planejamento", "Sequenciamento"] },
+  { id: "tempo", emoji: "⏱️", titulo: "Não termina no tempo", busca: "ritmo de execução tempo",
+    habilidades: ["Velocidade de processamento", "Autorregulação"] },
+  { id: "frustracao", emoji: "😣", titulo: "Frustra-se com erros", busca: "regulação emocional frustração",
+    habilidades: ["Regulação emocional", "Tolerância à frustração"] },
+];
 
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
@@ -668,6 +709,39 @@ function ReforcoBrilha() {
                 </div>
               </div>
             </Card>
+          </div>
+
+          {/* Catálogo de Dificuldades */}
+          <div className="mt-6">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertCircle className="h-5 w-5 text-amber-500" />
+              <h3 className="font-extrabold text-base">Catálogo de Dificuldades</h3>
+              <span className="text-xs text-muted-foreground">
+                Toque em uma dificuldade para abrir um plano de reforço com habilidades da matriz pedagógica.
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              {CATALOGO_DIFICULDADES.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => {
+                    setSearchQuery(d.busca);
+                    runSearch(d.busca);
+                  }}
+                  className="text-left p-3 rounded-2xl border-2 border-border bg-card hover:border-primary hover:bg-primary/5 transition-all"
+                >
+                  <div className="flex items-start gap-2">
+                    <span className="text-xl shrink-0">{d.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm">{d.titulo}</div>
+                      <div className="text-[11px] text-muted-foreground mt-0.5">
+                        {d.habilidades.join(" · ")}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       ) : (
