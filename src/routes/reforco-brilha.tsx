@@ -48,6 +48,7 @@ import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamil
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
