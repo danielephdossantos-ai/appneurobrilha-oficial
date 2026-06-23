@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { buscarRecursosExternos, type RecursoExterno } from "@/lib/recursos-externos.functions";
 import { Card } from "@/components/Layout";
-import { Globe, ExternalLink, Loader2, RefreshCw } from "lucide-react";
+import { Globe, ExternalLink, Loader2, RefreshCw, X, Play } from "lucide-react";
 
 interface Props {
   query: string;
+}
+
+function extractYoutubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
+  return m ? m[1] : null;
 }
 
 export function BibliotecaInternet({ query }: Props) {
@@ -14,6 +19,8 @@ export function BibliotecaInternet({ query }: Props) {
   const [erro, setErro] = useState<string | null>(null);
   const [resultados, setResultados] = useState<RecursoExterno[]>([]);
   const [fonte, setFonte] = useState<"cache" | "api" | "vazio" | null>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const [videoTitle, setVideoTitle] = useState<string>("");
 
   async function rodar(force = false) {
     if (!query || query.trim().length < 3) return;
