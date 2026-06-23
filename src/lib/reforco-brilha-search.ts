@@ -6,6 +6,7 @@ export interface RBHabilidade {
   nome: string;
   descricao: string | null;
   palavras_chave: string[];
+  tags?: string[];
 }
 
 export interface RBCategoria {
