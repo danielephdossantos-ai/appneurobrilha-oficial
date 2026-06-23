@@ -188,9 +188,9 @@ function ReforcoBrilha() {
       if (!res.main) {
         toast.info("Nenhuma habilidade encontrada. Tente outras palavras.");
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error("Busca Reforço Brilha:", e);
-      toast.error("Erro ao buscar habilidades.");
+      toast.error(`Erro ao buscar: ${e?.message || "tente novamente"}`);
     } finally {
       setIsSearching(false);
     }
