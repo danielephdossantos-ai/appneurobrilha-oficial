@@ -90,14 +90,20 @@ export function AulaInfinita({ query }: Props) {
             <p className="text-sm text-muted-foreground mt-1">
               Aula montada agora com {resultados.length} recurso(s) reais de Wikipédia, YouTube, Wikiversidade, OpenLibrary e Internet Archive — tudo gratuito.
             </p>
-            <button
-              onClick={() => rodar(true)}
-              disabled={loading}
-              className="mt-3 text-xs font-bold text-primary hover:text-primary/80 flex items-center gap-1 disabled:opacity-50"
-            >
-              <RefreshCw className={`h-3 w-3 ${loading ? "animate-spin" : ""}`} />
-              Atualizar aula
-            </button>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <SpeakButton
+                text={`${query}. Aula montada agora com ${resultados.length} recursos de bibliotecas públicas.`}
+                label="Ouvir intro"
+              />
+              <button
+                onClick={() => rodar(true)}
+                disabled={loading}
+                className="text-xs font-bold text-primary hover:text-primary/80 flex items-center gap-1 disabled:opacity-50"
+              >
+                <RefreshCw className={`h-3 w-3 ${loading ? "animate-spin" : ""}`} />
+                Atualizar aula
+              </button>
+            </div>
           </div>
         </div>
       </Card>
