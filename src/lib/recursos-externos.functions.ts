@@ -9,7 +9,6 @@ export interface RecursoExterno {
     | "openlibrary"
     | "wikiversity"
     | "archive"
-    | "khan"
     | "youtube-edu";
   titulo: string;
   descricao: string | null;
@@ -17,6 +16,7 @@ export interface RecursoExterno {
   thumbnail: string | null;
   conteudo?: string | null;
 }
+
 
 // ---------- YouTube (Data API v3) ----------
 async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
