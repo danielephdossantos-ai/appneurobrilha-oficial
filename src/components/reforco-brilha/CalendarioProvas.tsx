@@ -49,6 +49,7 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
   const today = new Date();
   const [cursor, setCursor] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState<string>(ymd(today));
+  const [selectedProvaId, setSelectedProvaId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
@@ -304,65 +305,114 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
 
           {provasDoDia.map((p) => {
             const isTrab = p.tipo === "trabalho";
+            const isSel = selectedProvaId === p.id;
             return (
-              <div
+              <button
                 key={p.id}
+                type="button"
+                onClick={() => setSelectedProvaId(isSel ? null : p.id)}
                 className={[
-                  "bg-white border-2 rounded-xl p-3 space-y-2",
+                  "w-full text-left bg-white border-2 rounded-xl p-3 flex items-start gap-3 transition",
                   isTrab ? "border-amber-200" : "border-rose-100",
+                  isSel ? "ring-2 ring-indigo-400 shadow-md" : "hover:border-indigo-300",
                 ].join(" ")}
               >
-                <div className="flex items-start gap-3">
-                  <div
-                    className={[
-                      "h-9 w-9 rounded-lg grid place-items-center shrink-0",
-                      isTrab ? "bg-amber-100" : "bg-rose-100",
-                    ].join(" ")}
-                  >
-                    {isTrab ? (
-                      <FileText className="h-5 w-5 text-amber-600" />
-                    ) : (
-                      <GraduationCap className="h-5 w-5 text-rose-600" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
-                      {isTrab ? "Trabalho" : "Prova"}
-                    </p>
-                    <p className="text-sm font-bold text-foreground">{p.subject}</p>
-                    {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
-                  </div>
-                  <button
-                    onClick={() => removerProva(p.id)}
-                    className="p-1 text-muted-foreground hover:text-rose-600"
-                    aria-label="Remover"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                <div
+                  className={[
+                    "h-9 w-9 rounded-lg grid place-items-center shrink-0",
+                    isTrab ? "bg-amber-100" : "bg-rose-100",
+                  ].join(" ")}
+                >
+                  {isTrab ? (
+                    <FileText className="h-5 w-5 text-amber-600" />
+                  ) : (
+                    <GraduationCap className="h-5 w-5 text-rose-600" />
+                  )}
                 </div>
-                {!isTrab && (
-                  <>
-                    <PlanoEstudoProva
-                      missionId={p.id}
-                      subject={p.subject}
-                      examDate={p.exam_date}
-                      notes={p.notes}
-                    />
-                    {childId && (
-                      <EstudosRecomendados
-                        childId={childId}
-                        subject={p.subject}
-                        notes={p.notes}
-                      />
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                    {isTrab ? "Trabalho" : "Prova"}
+                    {!isTrab && (
+                      <span className="ml-2 normal-case tracking-normal text-indigo-700 font-bold">
+                        {isSel ? "• aberto" : "• tocar p/ ver estudos"}
+                      </span>
                     )}
-                  </>
-                )}
-              </div>
+                  </p>
+                  <p className="text-sm font-bold text-foreground">{p.subject}</p>
+                  {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
+                </div>
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removerProva(p.id);
+                  }}
+                  role="button"
+                  className="p-1 text-muted-foreground hover:text-rose-600"
+                  aria-label="Remover"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </span>
+              </button>
             );
           })}
-
         </div>
       </div>
+
+      {/* PAINEL DE ESTUDO — fora do calendário, separado por categoria */}
+      {(() => {
+        const sel = provas.find((p) => p.id === selectedProvaId);
+        if (!sel || sel.tipo === "trabalho") return null;
+        return (
+          <div className="mt-5 space-y-4 border-t-2 border-dashed border-indigo-200 pt-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700">
+                  Estudo para a prova
+                </p>
+                <p className="text-base font-black text-foreground">{sel.subject}</p>
+                <p className="text-[11px] text-muted-foreground">
+                  {new Date(sel.exam_date + "T00:00:00").toLocaleDateString("pt-BR", {
+                    weekday: "long",
+                    day: "2-digit",
+                    month: "long",
+                  })}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedProvaId(null)}
+                className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground hover:text-foreground px-2 py-1"
+              >
+                Fechar
+              </button>
+            </div>
+
+            <section className="bg-indigo-50/40 border-2 border-indigo-100 rounded-xl p-3">
+              <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700 mb-2">
+                Plano de estudo
+              </p>
+              <PlanoEstudoProva
+                missionId={sel.id}
+                subject={sel.subject}
+                examDate={sel.exam_date}
+                notes={sel.notes}
+              />
+            </section>
+
+            {childId && (
+              <section className="bg-emerald-50/40 border-2 border-emerald-100 rounded-xl p-3">
+                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-2">
+                  Materiais recomendados
+                </p>
+                <EstudosRecomendados
+                  childId={childId}
+                  subject={sel.subject}
+                  notes={sel.notes}
+                />
+              </section>
+            )}
+          </div>
+        );
+      })()}
 
       {!childId && (
         <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-3">
@@ -372,3 +422,4 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
     </Card>
   );
 }
+
