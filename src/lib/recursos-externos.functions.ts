@@ -108,6 +108,34 @@ async function buscarWikipedia(query: string): Promise<RecursoExterno[]> {
   return summaries.filter((x): x is RecursoExterno => x !== null);
 }
 
+// ---------- OpenLibrary (livros, sem chave) ----------
+async function buscarOpenLibrary(query: string): Promise<RecursoExterno[]> {
+  try {
+    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=6&language=por`;
+    const r = await fetch(url, { headers: { "User-Agent": "NeuroBrilhaKids/1.0" } });
+    if (!r.ok) return [];
+    const data: any = await r.json();
+    const docs: any[] = data.docs || [];
+    return docs.slice(0, 6).map((d) => {
+      const key = d.key as string; // "/works/OL12345W"
+      const coverId = d.cover_i;
+      const autor = Array.isArray(d.author_name) ? d.author_name.slice(0, 2).join(", ") : null;
+      const ano = d.first_publish_year ? ` (${d.first_publish_year})` : "";
+      const rec: RecursoExterno = {
+        fonte: "openlibrary",
+        titulo: d.title || "Livro",
+        descricao: autor ? `${autor}${ano}` : ano || null,
+        url: `https://openlibrary.org${key}`,
+        thumbnail: coverId ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg` : null,
+        conteudo: null,
+      };
+      return rec;
+    });
+  } catch {
+    return [];
+  }
+}
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
