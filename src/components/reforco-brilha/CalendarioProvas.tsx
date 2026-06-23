@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { PlanoEstudoProva } from "./PlanoEstudoProva";
+import { EstudosRecomendados } from "./EstudosRecomendados";
 
 interface Prova {
   id: string;
@@ -340,12 +341,21 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
                   </button>
                 </div>
                 {!isTrab && (
-                  <PlanoEstudoProva
-                    missionId={p.id}
-                    subject={p.subject}
-                    examDate={p.exam_date}
-                    notes={p.notes}
-                  />
+                  <>
+                    <PlanoEstudoProva
+                      missionId={p.id}
+                      subject={p.subject}
+                      examDate={p.exam_date}
+                      notes={p.notes}
+                    />
+                    {childId && (
+                      <EstudosRecomendados
+                        childId={childId}
+                        subject={p.subject}
+                        notes={p.notes}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             );
