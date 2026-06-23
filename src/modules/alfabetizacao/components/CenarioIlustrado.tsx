@@ -73,7 +73,12 @@ interface Props {
 
 export function CenarioIlustrado({ imagem, vocabBase, onTocarPersonagem }: Props) {
   const cen = inferCenario(imagem, vocabBase);
-  const bgImg: Partial<Record<Cenario, string>> = { castelo: casteloBg };
+  const bgImg: Partial<Record<Cenario, string>> = {
+    castelo: casteloBg,
+    jardim: jardimBg,
+    lago: lagoBg,
+    magico: magicoBg,
+  };
   const fundoIlustrado = bgImg[cen];
 
   return (
