@@ -148,7 +148,10 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         <div className="flex justify-between items-end px-4 -mb-6 relative z-10 max-w-xs mx-auto mt-4">
           <motion.img src={pipaImg} alt="Pipa" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
           <motion.img src={pipImg} alt="Pip" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
+        </div>
       </div>
+
+
 
       {/* Sistema interno: Matriz Pedagógica */}
       <div className="px-4 max-w-lg mx-auto mt-6">
