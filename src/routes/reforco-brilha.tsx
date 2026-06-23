@@ -172,7 +172,50 @@ function ReforcoBrilha() {
   const [skills, setSkills] = useState<SkillMastery[]>([]);
   const [pendingReviews, setPendingReviews] = useState<any[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
+  const [parentGuidance, setParentGuidance] = useState<string | null>(null);
+  const [parentQuestion, setParentQuestion] = useState<string>("");
+  const [loadingGuidance, setLoadingGuidance] = useState(false);
   const queryClient = useQueryClient();
+
+  const askParentGuide = async (q: string) => {
+    const pergunta = q.trim();
+    if (!pergunta) return;
+    setParentQuestion(pergunta);
+    setParentGuidance(null);
+    setLoadingGuidance(true);
+    try {
+      const prefacio = `[Você está conversando com a MÃE/PAI de uma criança neuroatípica, não com a criança. Aja como uma equipe multidisciplinar (psicopedagoga + fonoaudióloga + terapeuta ABA + pediatra do desenvolvimento) com acesso a uma biblioteca infinita de estratégias baseadas em evidência (DSM-5, BNCC, Denver Model, TEACCH, PECS, ABA, Wilson Reading, Orton-Gillingham, Método das Boquinhas, etc).
+
+Criança: ${activeChild?.nome ?? "não informado"}, ${activeChild?.idade ?? "?"} anos, perfil: ${(activeChild as any)?.diagnostico ?? (activeChild as any)?.perfil_neuro ?? "em avaliação"}.
+
+Responda em PORTUGUÊS, formato MARKDOWN, com esta estrutura:
+**🎯 O que está acontecendo** (1 parágrafo curto, acolhedor, validando o sentimento da mãe)
+**🧠 Por que acontece** (explicação neuropsicopedagógica em linguagem simples)
+**🛠️ 5 estratégias práticas pra hoje** (lista numerada, passo a passo, materiais simples de casa)
+**📚 Atividades do app que ajudam** (sugira 2-3 atividades do NeuroBrilha Kids — ex: Alfabetização, Reforço Brilha, Brilha Vida, Escola Brilha)
+**🚨 Quando procurar ajuda profissional** (sinais de alerta objetivos)
+
+Seja específica, calorosa e nunca julgue.]
+
+PERGUNTA DA MÃE: "${pergunta}"`;
+
+      const resposta = await callNeuroBrilhaAI({
+        data: {
+          mode: "terapeuta",
+          child: (activeChild ?? {}) as any,
+          mascot: null,
+          message: prefacio,
+        },
+      });
+      setParentGuidance((resposta as string) || "Não consegui gerar a orientação agora. Tente novamente.");
+    } catch (e) {
+      console.error("[orientação mãe] erro:", e);
+      setParentGuidance("Tive um problema ao consultar a base. Tente novamente em instantes.");
+    } finally {
+      setLoadingGuidance(false);
+    }
+  };
+
 
   const { data: agenda = [] } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
