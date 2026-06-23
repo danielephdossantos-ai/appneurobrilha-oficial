@@ -29,8 +29,8 @@ import {
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { supabase } from "@/database/supabase/client";
-import { useQuery } from "@tanstack/react-query";
-import { format, differenceInDays } from "date-fns";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { format, differenceInDays, addDays, startOfDay, isBefore } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { toast } from "sonner";
 import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
