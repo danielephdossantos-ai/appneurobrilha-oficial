@@ -114,6 +114,7 @@ const navigationSequence = [
   "/agenda",
   "/relatorio",
   "/perfil-aluno",
+  "/curadoria-aulas",
   "/auditoria-pedagogica",
 ];
 
