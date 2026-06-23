@@ -189,6 +189,15 @@ function scoreHabilidade(h: RBHabilidade, tokens: string[], rawQuery: string): {
     }
   }
 
+  // bônus por tags pedagógicas
+  const tagsN = (h.tags || []).map(normalize);
+  for (const t of tokens) {
+    if (tagsN.some((tag) => tag === t || tag.includes(t) || t.includes(tag))) {
+      score += 7;
+      if (!matches.includes(t)) matches.push(t);
+    }
+  }
+
   return { score, matches };
 }
 
