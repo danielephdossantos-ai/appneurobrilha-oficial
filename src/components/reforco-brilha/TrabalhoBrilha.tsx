@@ -337,7 +337,7 @@ function EditorTrabalho({
       const res = await buscar({ data: { query: q } });
       // Missão Trabalho: somente texto e imagem (sem vídeos / sem links de busca externos)
       const filtrados = (res.resultados || []).filter((r) => {
-        if (r.fonte === "youtube" || r.fonte === "youtube-edu") return false;
+        if (r.fonte === "youtube") return false;
         if (r.fonte === "archive") {
           const d = (r.descricao || "").toLowerCase();
           // archive marca tipo no início da descrição
@@ -907,7 +907,7 @@ function RecursoPreviewModal({
   onAdicionarTexto: (r: RecursoExterno) => void;
   onAdicionarImagem: (r: RecursoExterno) => void;
 }) {
-  const ytId = recurso.fonte === "youtube" || recurso.fonte === "youtube-edu"
+  const ytId = recurso.fonte === "youtube"
     ? youtubeIdFromUrl(recurso.url)
     : null;
   const archive = recurso.fonte === "archive" ? archiveEmbed(recurso.url) : null;

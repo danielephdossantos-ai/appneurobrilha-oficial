@@ -1,0 +1,1 @@
+DELETE FROM public.rb_recursos_externos WHERE fonte = 'youtube-edu';
