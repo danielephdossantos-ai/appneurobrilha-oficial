@@ -459,6 +459,21 @@ function MissaoProva() {
         }
         changeLabel="Trocar sessão"
       />
+      {tutorAberto && currentSession && currentMission && (
+        <TutorTrabalho
+          modo="missao-prova"
+          tema={`${currentSession.title} (${currentMission.subject})`}
+          materia={currentMission.subject}
+          diasAteProva={Math.max(
+            0,
+            differenceInDays(
+              new Date(currentMission.exam_date + "T12:00:00"),
+              new Date(),
+            ),
+          )}
+          onFechar={() => setTutorAberto(false)}
+        />
+      )}
     </Shell>
   );
 }
