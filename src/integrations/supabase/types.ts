@@ -2800,6 +2800,53 @@ export type Database = {
           },
         ]
       }
+      rb_orientacoes_familia: {
+        Row: {
+          como_ajudar: string | null
+          created_at: string
+          dicas_praticas: Json
+          erros_comuns: Json
+          habilidade_id: string
+          id: string
+          materiais: Json
+          sinais_progresso: Json
+          tempo_recomendado: string | null
+          updated_at: string
+        }
+        Insert: {
+          como_ajudar?: string | null
+          created_at?: string
+          dicas_praticas?: Json
+          erros_comuns?: Json
+          habilidade_id: string
+          id?: string
+          materiais?: Json
+          sinais_progresso?: Json
+          tempo_recomendado?: string | null
+          updated_at?: string
+        }
+        Update: {
+          como_ajudar?: string | null
+          created_at?: string
+          dicas_praticas?: Json
+          erros_comuns?: Json
+          habilidade_id?: string
+          id?: string
+          materiais?: Json
+          sinais_progresso?: Json
+          tempo_recomendado?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_orientacoes_familia_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: true
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_paginas_aula: {
         Row: {
           aula_id: string
