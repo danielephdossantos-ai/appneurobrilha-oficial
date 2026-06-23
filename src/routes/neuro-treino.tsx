@@ -324,28 +324,8 @@ function Treino() {
           </div>
         )}
 
-        {/* ── ALFABETIZAÇÃO BRILHA (destaque) ─────────────────────── */}
-        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
 
 
-          <Link
-            to="/biblioteca-alfa"
-            className="group relative overflow-hidden rounded-3xl p-4 shadow-lg bg-gradient-to-br from-rose-500 via-orange-500 to-amber-500 text-white hover:scale-[1.01] active:scale-95 transition-transform flex items-center gap-3"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-white/25 grid place-items-center text-4xl shrink-0">
-              📚
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
-                Biblioteca Alfa
-              </div>
-              <div className="text-base font-black leading-tight">Histórias por Nível</div>
-              <div className="text-[11px] opacity-90 leading-tight mt-0.5">
-                Leitura guiada por níveis de leitor
-              </div>
-            </div>
-          </Link>
-        </div>
 
 
         <div className="space-y-5">
