@@ -17,6 +17,16 @@ interface Habilidade {
   faixa_etaria: string | null;
   ano_escolar: string | null;
   nivel_dificuldade: string | null;
+  o_que_e: string | null;
+  por_que_importante: string | null;
+  como_identificar: string | null;
+  como_ensinar: string | null;
+  exemplos_praticos: string | null;
+  atividades_recomendadas: string | null;
+  dicas_familia: string | null;
+  dicas_professores: string | null;
+  como_avaliar_evolucao: string | null;
+  proximo_passo: string | null;
 }
 interface Categoria { id: string; nome: string }
 interface Prereq { habilidade_id: string; pre_requisito_id: string }
