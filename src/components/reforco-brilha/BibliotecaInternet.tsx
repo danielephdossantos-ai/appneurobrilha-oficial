@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { buscarRecursosExternos, type RecursoExterno } from "@/lib/recursos-externos.functions";
 import { Card } from "@/components/Layout";
-import { Globe, ExternalLink, Loader2, RefreshCw } from "lucide-react";
+import { Globe, ExternalLink, Loader2, RefreshCw, X, Play } from "lucide-react";
 
 interface Props {
   query: string;
+}
+
+function extractYoutubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
+  return m ? m[1] : null;
 }
 
 export function BibliotecaInternet({ query }: Props) {
@@ -14,6 +19,8 @@ export function BibliotecaInternet({ query }: Props) {
   const [erro, setErro] = useState<string | null>(null);
   const [resultados, setResultados] = useState<RecursoExterno[]>([]);
   const [fonte, setFonte] = useState<"cache" | "api" | "vazio" | null>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const [videoTitle, setVideoTitle] = useState<string>("");
 
   async function rodar(force = false) {
     if (!query || query.trim().length < 3) return;
@@ -82,54 +89,116 @@ export function BibliotecaInternet({ query }: Props) {
 
       {!loading && resultados.length > 0 && (
         <div className="grid gap-3 md:grid-cols-2">
-          {resultados.map((r, i) => (
-            <a
-              key={r.id ?? `${r.fonte}-${i}`}
-              href={r.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
+          {resultados.map((r, i) => {
+            const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
+            const handleClick = (e: React.MouseEvent) => {
+              if (ytId) {
+                e.preventDefault();
+                setVideoId(ytId);
+                setVideoTitle(r.titulo);
+              } else {
                 e.preventDefault();
                 window.open(r.url, "_blank", "noopener,noreferrer");
-              }}
-              className="block group cursor-pointer"
-            >
-              <Card className="h-full border-2 border-emerald-100 hover:border-emerald-400 hover:shadow-lg transition-all bg-white">
-                <div className="flex gap-3">
-                  {r.thumbnail ? (
-                    <img
-                      src={r.thumbnail}
-                      alt=""
-                      loading="lazy"
-                      className="h-20 w-20 rounded-xl object-cover shrink-0 border border-emerald-100"
-                    />
-                  ) : (
-                    <div className="h-20 w-20 rounded-xl bg-emerald-100 grid place-items-center shrink-0">
-                      <Globe className="h-8 w-8 text-emerald-600" />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
-                        {r.fonte}
-                      </span>
-                    </div>
-                    <h4 className="font-bold text-sm text-foreground group-hover:text-emerald-700 line-clamp-2">
-                      {r.titulo}
-                    </h4>
-                    {r.descricao && (
-                      <p className="text-xs text-muted-foreground line-clamp-3 mt-1">
-                        {r.descricao}
-                      </p>
+              }
+            };
+            return (
+              <a
+                key={r.id ?? `${r.fonte}-${i}`}
+                href={r.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
+                className="block group cursor-pointer"
+              >
+                <Card className="h-full border-2 border-emerald-100 hover:border-emerald-400 hover:shadow-lg transition-all bg-white">
+                  <div className="flex gap-3">
+                    {r.thumbnail ? (
+                      <div className="relative h-20 w-20 shrink-0">
+                        <img
+                          src={r.thumbnail}
+                          alt=""
+                          loading="lazy"
+                          className="h-20 w-20 rounded-xl object-cover border border-emerald-100"
+                        />
+                        {ytId && (
+                          <div className="absolute inset-0 grid place-items-center rounded-xl bg-black/30">
+                            <Play className="h-7 w-7 text-white fill-white" />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="h-20 w-20 rounded-xl bg-emerald-100 grid place-items-center shrink-0">
+                        <Globe className="h-8 w-8 text-emerald-600" />
+                      </div>
                     )}
-                    <div className="flex items-center gap-1 mt-2 text-[11px] font-bold text-emerald-700">
-                      Ver mais <ExternalLink className="h-3 w-3" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                          {r.fonte}
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-sm text-foreground group-hover:text-emerald-700 line-clamp-2">
+                        {r.titulo}
+                      </h4>
+                      {r.descricao && (
+                        <p className="text-xs text-muted-foreground line-clamp-3 mt-1">
+                          {r.descricao}
+                        </p>
+                      )}
+                      <div className="flex items-center gap-1 mt-2 text-[11px] font-bold text-emerald-700">
+                        {ytId ? "Assistir aqui" : "Ver mais"}{" "}
+                        {ytId ? <Play className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            </a>
-          ))}
+                </Card>
+              </a>
+            );
+          })}
+        </div>
+      )}
+
+      {videoId && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 grid place-items-center p-4 animate-in fade-in"
+          onClick={() => setVideoId(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoId(null)}
+              className="absolute top-2 right-2 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg"
+              aria-label="Fechar"
+            >
+              <X className="h-4 w-4 text-black" />
+            </button>
+            <div className="aspect-video w-full">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+                title={videoTitle}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="bg-white px-4 py-3 flex items-center justify-between gap-3">
+              <p className="text-sm font-bold text-foreground line-clamp-1">{videoTitle}</p>
+              <a
+                href={`https://www.youtube.com/watch?v=${videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank", "noopener,noreferrer");
+                }}
+                className="text-xs font-bold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 shrink-0"
+              >
+                Abrir no YouTube <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </div>
