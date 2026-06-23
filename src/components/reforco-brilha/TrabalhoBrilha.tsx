@@ -17,12 +17,14 @@ import {
   Wand2,
   ExternalLink,
   Loader2,
+  GraduationCap,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
   type RecursoExterno,
 } from "@/lib/recursos-externos.functions";
+import { TutorTrabalho } from "./TutorTrabalho";
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem";
 interface Bloco {
