@@ -3,7 +3,14 @@ import { createClient } from "@supabase/supabase-js";
 
 export interface RecursoExterno {
   id?: string;
-  fonte: "wikipedia" | "youtube" | "openlibrary" | "wikiversity" | "archive";
+  fonte:
+    | "wikipedia"
+    | "youtube"
+    | "openlibrary"
+    | "wikiversity"
+    | "archive"
+    | "khan"
+    | "youtube-edu";
   titulo: string;
   descricao: string | null;
   url: string;
@@ -190,6 +197,39 @@ async function buscarArchive(query: string): Promise<RecursoExterno[]> {
   }
 }
 
+// ---------- Khan Academy (link de busca, sem API) ----------
+function buscarKhanAcademy(query: string): RecursoExterno[] {
+  const q = encodeURIComponent(query);
+  return [
+    {
+      fonte: "khan",
+      titulo: `Khan Academy: aulas sobre "${query}"`,
+      descricao:
+        "Vídeos e exercícios gratuitos da Khan Academy em português. Toque para ver os resultados.",
+      url: `https://pt.khanacademy.org/search?page_search_query=${q}`,
+      thumbnail: "https://cdn.kastatic.org/images/khan-logo-vertical-transparent.png",
+      conteudo: null,
+    },
+  ];
+}
+
+// ---------- YouTube EDU (link de busca filtrada, sem API) ----------
+function buscarYoutubeEdu(query: string): RecursoExterno[] {
+  // sp=EgIYAQ%253D%253D filtra apenas vídeos longos/educativos no YouTube
+  const q = encodeURIComponent(`${query} aula educativa infantil`);
+  return [
+    {
+      fonte: "youtube-edu",
+      titulo: `YouTube EDU: vídeos sobre "${query}"`,
+      descricao:
+        "Vídeos educativos selecionados no YouTube com busca segura. Toque para ver os resultados.",
+      url: `https://www.youtube.com/results?search_query=${q}&sp=EgIQAQ%253D%253D`,
+      thumbnail: null,
+      conteudo: null,
+    },
+  ];
+}
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
@@ -209,11 +249,15 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         .limit(20);
 
       if (cached && cached.length > 0) {
-        return { resultados: cached as RecursoExterno[], fonte: "cache" as const };
+        const extras = [...buscarKhanAcademy(queryN), ...buscarYoutubeEdu(queryN)];
+        const cachedClean = (cached as RecursoExterno[]).filter(
+          (r) => r.fonte !== "khan" && r.fonte !== "youtube-edu",
+        );
+        return { resultados: [...extras, ...cachedClean], fonte: "cache" as const };
       }
     }
 
-    // 2) buscar em paralelo nas 5 fontes públicas
+    // 2) buscar em paralelo nas fontes públicas
     const [wiki, yt, books, wikiv, arch] = await Promise.all([
       buscarWikipedia(queryN).catch(() => []),
       buscarYoutube(queryN).catch(() => []),
@@ -221,8 +265,12 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       buscarWikiversity(queryN).catch(() => []),
       buscarArchive(queryN).catch(() => []),
     ]);
-    // intercalar pra diversificar fontes
+    const khan = buscarKhanAcademy(queryN);
+    const ytEdu = buscarYoutubeEdu(queryN);
+
+    // intercalar pra diversificar fontes — Khan e YouTube EDU sempre aparecem no topo
     const resultados: RecursoExterno[] = [];
+    resultados.push(...khan, ...ytEdu);
     const max = Math.max(wiki.length, yt.length, books.length, wikiv.length, arch.length);
     for (let i = 0; i < max; i++) {
       if (wiki[i]) resultados.push(wiki[i]);
@@ -232,9 +280,12 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       if (arch[i]) resultados.push(arch[i]);
     }
 
-    // 3) salvar no cache
-    if (resultados.length > 0) {
-      const rows = resultados.map((r, i) => ({
+    // 3) salvar no cache (sem khan/youtube-edu — são links de busca dinâmicos)
+    const cacheaveis = resultados.filter(
+      (r) => r.fonte !== "khan" && r.fonte !== "youtube-edu",
+    );
+    if (cacheaveis.length > 0) {
+      const rows = cacheaveis.map((r, i) => ({
         query_normalizada: queryN,
         fonte: r.fonte,
         titulo: r.titulo,

@@ -10,11 +10,12 @@ type Msg = { role: "user" | "assistant"; content: string };
 interface Props {
   tema: string;
   materia?: string;
-  modo?: "trabalho" | "plano-diario";
+  modo?: "trabalho" | "plano-diario" | "missao-prova";
+  diasAteProva?: number;
   onFechar: () => void;
 }
 
-export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Props) {
+export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, onFechar }: Props) {
   const { activeChild } = useAppState();
   const conversar = useServerFn(conversarTutorIA);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,13 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Pr
   // Mensagem inicial automática
   useEffect(() => {
     if (msgs.length === 0 && tema.trim()) {
-      enviar("Oi! Quero começar a montar meu trabalho.", true);
+      const inicial =
+        modo === "trabalho"
+          ? "Oi! Quero começar a montar meu trabalho."
+          : modo === "missao-prova"
+            ? "Oi! Quero estudar pra prova."
+            : "Oi! Vamos montar meu plano de estudo de hoje?";
+      enviar(inicial, true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -62,6 +69,7 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Pr
           idade: activeChild?.idade,
           serie: (activeChild as any)?.serie,
           nome: activeChild?.nome,
+          diasAteProva,
           historico: novasMsgs.slice(-20),
           mensagem,
         },
@@ -103,7 +111,11 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", onFechar }: Pr
                 Tutor Brilha <Sparkles className="h-3.5 w-3.5" />
               </p>
               <p className="text-[11px] text-amber-700">
-                {modo === "trabalho" ? "Vamos montar seu trabalho juntos" : "Plano diário de estudo"}
+                {modo === "trabalho"
+                  ? "Vamos montar seu trabalho juntos"
+                  : modo === "missao-prova"
+                    ? "Vamos estudar pra prova juntos"
+                    : "Plano diário de estudo"}
               </p>
             </div>
           </div>

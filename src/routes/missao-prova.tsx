@@ -35,6 +35,8 @@ import { ptBR } from "date-fns/locale";
 import { toast } from "sonner";
 import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
+import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
+import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
@@ -45,7 +47,9 @@ function MissaoProva() {
   const engine = usePedagogicalEngine();
   const [isStudying, setIsStudying] = useState(false);
   const [currentSession, setCurrentSession] = useState<any>(null);
+  const [currentMission, setCurrentMission] = useState<any>(null);
   const [lessonContent, setLessonContent] = useState<any>(null);
+  const [tutorAberto, setTutorAberto] = useState(false);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
@@ -72,6 +76,7 @@ function MissaoProva() {
   const startSession = async (session: any, mission: any) => {
     setIsStudying(true);
     setCurrentSession(session);
+    setCurrentMission(mission);
     setLessonContent(null);
 
     try {
@@ -171,7 +176,13 @@ function MissaoProva() {
                     ))}
                   </div>
 
-                  <div className="flex justify-center">
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                      onClick={() => setTutorAberto(true)}
+                      className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-4 rounded-2xl font-black text-base shadow-kid hover:scale-105 transition-all flex items-center gap-2"
+                    >
+                      <GraduationCap className="h-5 w-5" /> Tutor Brilha
+                    </button>
                     <button
                       onClick={completeSession}
                       className="bg-success text-white px-10 py-4 rounded-2xl font-black text-xl shadow-glow hover:scale-105 transition-all flex items-center gap-3"
@@ -205,6 +216,21 @@ function MissaoProva() {
             </div>
           )}
         </div>
+        {tutorAberto && currentSession && currentMission && (
+          <TutorTrabalho
+            modo="missao-prova"
+            tema={`${currentSession.title} (${currentMission.subject})`}
+            materia={currentMission.subject}
+            diasAteProva={Math.max(
+              0,
+              differenceInDays(
+                new Date(currentMission.exam_date + "T12:00:00"),
+                new Date(),
+              ),
+            )}
+            onFechar={() => setTutorAberto(false)}
+          />
+        )}
       </Shell>
     );
   }
