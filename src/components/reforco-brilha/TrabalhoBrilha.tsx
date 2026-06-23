@@ -589,17 +589,26 @@ function EditorTrabalho({
             )}
 
             {blocos.map((b, idx) => (
-              <BlocoEditor
-                key={b.id}
-                bloco={b}
-                primeiro={idx === 0}
-                ultimo={idx === blocos.length - 1}
-                onChange={(patch) => atualizarBloco(b.id, patch)}
-                onRemover={() => removerBloco(b.id)}
-                onSubir={() => moverBloco(b.id, -1)}
-                onDescer={() => moverBloco(b.id, +1)}
-              />
+              <div key={b.id}>
+                <BlocoEditor
+                  bloco={b}
+                  primeiro={idx === 0}
+                  ultimo={idx === blocos.length - 1}
+                  onChange={(patch) => atualizarBloco(b.id, patch)}
+                  onRemover={() => removerBloco(b.id)}
+                  onSubir={() => moverBloco(b.id, -1)}
+                  onDescer={() => moverBloco(b.id, +1)}
+                />
+                {problemasPorBloco[b.id]?.length ? (
+                  <ul className="mt-1 ml-2 text-[11px] text-emerald-800 bg-emerald-50/60 border-l-2 border-emerald-400 pl-2 py-1 space-y-0.5">
+                    {problemasPorBloco[b.id].map((p, i) => (
+                      <li key={i}>✓ {p}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
             ))}
+
 
             {fontes.length > 0 && (
               <section className="border-t-2 border-amber-300 pt-3 mt-4">
