@@ -12,22 +12,23 @@ const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 
 // F1. DISCRIMINAÇÃO AUDITIVA — par mínimo: duas palavras parecidas, escolher a certa
 const DISCR_BANK = [
-  { pista: "Pato", par1: "PATO", par2: "BATO", correta: "PATO", emoji1: "🦆", emoji2: "🦇" },
-  { pista: "Faca", par1: "FACA", par2: "VACA", correta: "FACA", emoji1: "🔪", emoji2: "🐮" },
-  { pista: "Gato", par1: "GATO", par2: "RATO", correta: "GATO", emoji1: "🐱", emoji2: "🐭" },
-  { pista: "Bola", par1: "BOLA", par2: "COLA", correta: "BOLA", emoji1: "⚽", emoji2: "🧴" },
-  { pista: "Carro", par1: "CARRO", par2: "BARRO", correta: "CARRO", emoji1: "🚗", emoji2: "🟫" },
-  { pista: "Sapo", par1: "SAPO", par2: "TRAPO", correta: "SAPO", emoji1: "🐸", emoji2: "🧹" },
-  { pista: "Lua", par1: "LUA", par2: "RUA", correta: "LUA", emoji1: "🌙", emoji2: "🛣️" },
-  { pista: "Mala", par1: "MALA", par2: "FALA", correta: "MALA", emoji1: "🧳", emoji2: "💬" },
-  { pista: "Peixe", par1: "PEIXE", par2: "LEITE", correta: "PEIXE", emoji1: "🐟", emoji2: "🥛" },
-  { pista: "Casa", par1: "CASA", par2: "VAZA", correta: "CASA", emoji1: "🏠", emoji2: "💧" },
-  { pista: "Dedo", par1: "DEDO", par2: "MEDO", correta: "DEDO", emoji1: "👆", emoji2: "😨" },
-  { pista: "Flor", par1: "FLOR", par2: "FLAUTA", correta: "FLOR", emoji1: "🌸", emoji2: "🎵" },
-  { pista: "Lobo", par1: "LOBO", par2: "LOBO-GUARÁ", correta: "LOBO", emoji1: "🐺", emoji2: "🦊" },
-  { pista: "Trem", par1: "TREM", par2: "TRÊS", correta: "TREM", emoji1: "🚂", emoji2: "3️⃣" },
-  { pista: "Copo", par1: "COPO", par2: "CORPO", correta: "COPO", emoji1: "🥤", emoji2: "💪" },
+  { pista: "Gato", par1: "GATO", par2: "PATO", correta: "GATO", emoji1: "🐱", emoji2: "🦆" },
+  { pista: "Pato", par1: "PATO", par2: "RATO", correta: "PATO", emoji1: "🦆", emoji2: "🐭" },
+  { pista: "Rato", par1: "RATO", par2: "GATO", correta: "RATO", emoji1: "🐭", emoji2: "🐱" },
+  { pista: "Bola", par1: "BOLA", par2: "BOLO", correta: "BOLA", emoji1: "⚽", emoji2: "🎂" },
+  { pista: "Bolo", par1: "BOLO", par2: "BOLA", correta: "BOLO", emoji1: "🎂", emoji2: "⚽" },
+  { pista: "Vaca", par1: "VACA", par2: "CASA", correta: "VACA", emoji1: "🐮", emoji2: "🏠" },
+  { pista: "Casa", par1: "CASA", par2: "VACA", correta: "CASA", emoji1: "🏠", emoji2: "🐮" },
+  { pista: "Sol", par1: "SOL", par2: "LUA", correta: "SOL", emoji1: "☀️", emoji2: "🌙" },
+  { pista: "Lua", par1: "LUA", par2: "SOL", correta: "LUA", emoji1: "🌙", emoji2: "☀️" },
+  { pista: "Galo", par1: "GALO", par2: "GATO", correta: "GALO", emoji1: "🐓", emoji2: "🐱" },
+  { pista: "Sapo", par1: "SAPO", par2: "PEIXE", correta: "SAPO", emoji1: "🐸", emoji2: "🐟" },
+  { pista: "Coelho", par1: "COELHO", par2: "COROA", correta: "COELHO", emoji1: "🐰", emoji2: "👑" },
+  { pista: "Carro", par1: "CARRO", par2: "TREM", correta: "CARRO", emoji1: "🚗", emoji2: "🚂" },
+  { pista: "Maçã", par1: "MAÇÃ", par2: "BANANA", correta: "MAÇÃ", emoji1: "🍎", emoji2: "🍌" },
+  { pista: "Flor", par1: "FLOR", par2: "FOGO", correta: "FLOR", emoji1: "🌸", emoji2: "🔥" },
 ];
+
 export const DISCRIMINACAO_AUDITIVA_VARS: Variation[] = range(30).map((i) => {
   const b = DISCR_BANK[i % DISCR_BANK.length];
   return {
