@@ -111,7 +111,7 @@ function BancoMidiasPage() {
       categoria: fCategoria,
       tipo: fTipo,
       descricao: fDesc.trim() || null,
-      tags: tags.length ? tags : null,
+      tags: tags.length ? tags : undefined,
     });
     setSaving(false);
     if (!error) {
