@@ -3359,6 +3359,62 @@ export type Database = {
           },
         ]
       }
+      rb_recursos_externos: {
+        Row: {
+          conteudo: string | null
+          created_at: string
+          descricao: string | null
+          expires_at: string
+          fonte: string
+          habilidade_id: string | null
+          id: string
+          idioma: string | null
+          ordem: number | null
+          query_normalizada: string
+          thumbnail: string | null
+          titulo: string
+          url: string
+        }
+        Insert: {
+          conteudo?: string | null
+          created_at?: string
+          descricao?: string | null
+          expires_at?: string
+          fonte: string
+          habilidade_id?: string | null
+          id?: string
+          idioma?: string | null
+          ordem?: number | null
+          query_normalizada: string
+          thumbnail?: string | null
+          titulo: string
+          url: string
+        }
+        Update: {
+          conteudo?: string | null
+          created_at?: string
+          descricao?: string | null
+          expires_at?: string
+          fonte?: string
+          habilidade_id?: string | null
+          id?: string
+          idioma?: string | null
+          ordem?: number | null
+          query_normalizada?: string
+          thumbnail?: string | null
+          titulo?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_recursos_externos_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_sinais_alerta: {
         Row: {
           created_at: string
