@@ -169,7 +169,22 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           </div>
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
+        <button
+          onClick={() => navigate({ to: "/banco-midias" })}
+          className="w-full mt-2 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shrink-0">
+            <ImageIcon className="w-5 h-5 text-white" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white font-black text-sm">Banco de Mídias</p>
+            <p className="text-white/50 text-[11px] font-semibold">Imagens reutilizáveis em aulas e atividades</p>
+          </div>
+          <ChevronRight className="w-5 h-5 text-white/40" />
+        </button>
       </div>
+
+
 
 
       {/* Tab switcher */}
