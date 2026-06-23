@@ -254,7 +254,7 @@ function MissaoProva() {
                     <div className="flex items-center gap-2 mb-3">
                       <BookOpen className="h-5 w-5 text-emerald-700" />
                       <h4 className="font-black text-emerald-800 text-sm uppercase tracking-wider">
-                        Material de estudo (Wikipédia, YouTube, Khan, livros)
+                        Material de estudo (Wikipédia, YouTube, livros, Archive)
                       </h4>
                     </div>
                     <p className="text-xs text-emerald-700 mb-3">

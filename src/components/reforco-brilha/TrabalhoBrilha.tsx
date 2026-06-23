@@ -337,7 +337,7 @@ function EditorTrabalho({
       const res = await buscar({ data: { query: q } });
       // Missão Trabalho: somente texto e imagem (sem vídeos / sem links de busca externos)
       const filtrados = (res.resultados || []).filter((r) => {
-        if (r.fonte === "youtube" || r.fonte === "youtube-edu" || r.fonte === "khan") return false;
+        if (r.fonte === "youtube" || r.fonte === "youtube-edu") return false;
         if (r.fonte === "archive") {
           const d = (r.descricao || "").toLowerCase();
           // archive marca tipo no início da descrição

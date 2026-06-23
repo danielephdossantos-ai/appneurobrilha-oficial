@@ -110,7 +110,7 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
         <div className="grid gap-3 md:grid-cols-2">
           {resultados.map((r, i) => {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
-            const abreExterno = r.fonte === "khan" || r.fonte === "youtube-edu";
+            const abreExterno = r.fonte === "youtube-edu";
             const handleClick = (e: React.MouseEvent) => {
               onAbrirRecurso?.(r);
               if (abreExterno) return; // deixa o <a target="_blank"> abrir normalmente
