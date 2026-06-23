@@ -76,6 +76,7 @@ function MissaoProva() {
   const startSession = async (session: any, mission: any) => {
     setIsStudying(true);
     setCurrentSession(session);
+    setCurrentMission(mission);
     setLessonContent(null);
 
     try {
