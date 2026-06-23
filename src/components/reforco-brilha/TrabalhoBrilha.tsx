@@ -666,8 +666,12 @@ function EditorTrabalho({
               </button>
             </div>
             <p className="text-[10px] text-amber-700">
-              Wikipédia · YouTube · OpenLibrary · Wikiversidade · Archive
+              Wikipédia · Livros (OpenLibrary) · Wikiversidade · Textos do Archive
             </p>
+            <p className="text-[10px] text-amber-600 italic">
+              Apenas textos e imagens — sem vídeos.
+            </p>
+
           </div>
 
           <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
