@@ -163,7 +163,7 @@ export function BibliotecaInternet({ query }: Props) {
                         </p>
                       )}
                       <div className="flex items-center gap-1 mt-2 text-[11px] font-bold text-emerald-700">
-                        {ytId ? "Assistir aqui" : "Ver mais"}{" "}
+                        {ytId ? "Assistir aqui" : "Abrir aqui"}{" "}
                         {ytId ? <Play className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />}
                       </div>
                     </div>
@@ -215,6 +215,51 @@ export function BibliotecaInternet({ query }: Props) {
                 Abrir no YouTube <ExternalLink className="h-3 w-3" />
               </a>
             </div>
+          </div>
+        </div>
+      )}
+
+      {preview && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 grid place-items-center p-2 sm:p-4 animate-in fade-in"
+          onClick={() => setPreview(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 px-3 py-2 border-b bg-emerald-50">
+              <div className="min-w-0">
+                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">
+                  {preview.fonte}
+                </p>
+                <p className="text-sm font-bold text-foreground line-clamp-1">{preview.title}</p>
+              </div>
+              <div className="flex items-center gap-1 shrink-0">
+                <button
+                  onClick={() =>
+                    window.open(preview.url, "_blank", "noopener,noreferrer")
+                  }
+                  className="text-xs font-bold text-emerald-700 hover:bg-emerald-100 px-2 py-1 rounded flex items-center gap-1"
+                >
+                  Abrir fora <ExternalLink className="h-3 w-3" />
+                </button>
+                <button
+                  onClick={() => setPreview(null)}
+                  className="p-1.5 rounded-full hover:bg-emerald-100"
+                  aria-label="Fechar"
+                >
+                  <X className="h-4 w-4 text-black" />
+                </button>
+              </div>
+            </div>
+            <iframe
+              src={preview.url}
+              title={preview.title}
+              className="flex-1 w-full bg-white"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              referrerPolicy="no-referrer"
+            />
           </div>
         </div>
       )}
