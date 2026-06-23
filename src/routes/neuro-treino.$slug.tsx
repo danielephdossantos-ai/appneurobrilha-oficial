@@ -2876,79 +2876,78 @@ function CopiarFigura({ p, onDone }: any) {
   );
 }
 
-// 31. ALVO MÓVEL — círculo move pela tela, toca nele
+// 31. ALVO MÓVEL — bichinho do banco se move pela tela, criança toca (tempo livre, sem voz)
 function AlvoMovel({ p, onDone }: any) {
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [round, setRound] = useState(1);
   const [tocou, setTocou] = useState(false);
-  const [perdeu, setPerdeu] = useState(false);
-  const angRef = useRef(0);
   const animRef = useRef<number | undefined>(undefined);
+  const img = emojiImg(p.emoji) ?? objetoImg(p.nome);
+
+  // Silencia qualquer voz enquanto a atividade roda
+  useEffect(() => {
+    try {
+      window.speechSynthesis?.cancel();
+    } catch {}
+    const id = setInterval(() => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {}
+    }, 400);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
-    let t = 0;
+    let t = Math.random() * 10;
     const move = () => {
-      t += 0.02 * p.velocidade;
-      angRef.current = t;
-      setPos({ x: 50 + 35 * Math.cos(t), y: 50 + 30 * Math.sin(t * 1.3) });
+      t += 0.012 * p.velocidade;
+      setPos({ x: 50 + 38 * Math.cos(t), y: 50 + 32 * Math.sin(t * 1.3) });
       animRef.current = requestAnimationFrame(move);
     };
     animRef.current = requestAnimationFrame(move);
-    const timeout = setTimeout(() => {
-      cancelAnimationFrame(animRef.current!);
-      if (!tocou) {
-        setPerdeu(true);
-        setTimeout(() => onDone(false), 600);
-      }
-    }, p.tempoMs);
     return () => {
-      cancelAnimationFrame(animRef.current!);
-      clearTimeout(timeout);
+      if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [round]);
+  }, [round, p.velocidade]);
 
   const handleToque = () => {
-    if (tocou || perdeu) return;
+    if (tocou) return;
     setTocou(true);
-    cancelAnimationFrame(animRef.current!);
+    if (animRef.current) cancelAnimationFrame(animRef.current);
     if (round >= p.rounds) {
       setTimeout(() => onDone(true), 400);
     } else {
       setTimeout(() => {
         setTocou(false);
         setRound((r) => r + 1);
-      }, 400);
+      }, 350);
     }
   };
 
   return (
     <div className="space-y-3 text-center">
       <div className="text-sm text-muted-foreground font-bold">
-        Rodada {round} / {p.rounds}
+        Toque no {p.nome.toLowerCase()} — Rodada {round} / {p.rounds}
       </div>
       <div
-        className="relative bg-gradient-to-br from-emerald/10 to-emerald/5 border-2 border-emerald/20 rounded-3xl overflow-hidden"
-        style={{ height: 280 }}
+        className="relative bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 border-4 border-emerald-200 rounded-3xl overflow-hidden touch-none"
+        style={{ height: 360 }}
       >
-        {!perdeu && (
-          <button
-            onClick={handleToque}
-            style={{
-              left: `${pos.x}%`,
-              top: `${pos.y}%`,
-              transform: "translate(-50%,-50%)",
-              backgroundColor: p.cor,
-            }}
-            className="absolute w-16 h-16 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform"
-          >
-            <RenderEmoji e={p.emoji} className="w-10 h-10" />
-          </button>
-        )}
-        {perdeu && (
-          <div className="flex items-center justify-center h-full text-xl font-black text-muted-foreground">
-            Tempo!
-          </div>
-        )}
+        <button
+          onClick={handleToque}
+          style={{
+            left: `${pos.x}%`,
+            top: `${pos.y}%`,
+            transform: "translate(-50%,-50%)",
+          }}
+          className="absolute w-24 h-24 rounded-full bg-white/70 backdrop-blur shadow-xl flex items-center justify-center active:scale-90 transition-transform ring-4"
+        >
+          {img ? (
+            <img src={img} alt={p.nome} draggable={false} className="w-20 h-20 object-contain" />
+          ) : (
+            <RenderEmoji e={p.emoji} className="w-16 h-16" />
+          )}
+        </button>
       </div>
     </div>
   );
