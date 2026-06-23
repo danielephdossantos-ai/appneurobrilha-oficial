@@ -586,9 +586,10 @@ function EditorTrabalho({
           {/* Documento (alvo do PDF) */}
           <div
             ref={documentoRef}
-            className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4 min-h-[400px]"
-            style={{ fontFamily: "Georgia, serif", color: "#1f2937" }}
+            className="bg-white border-2 border-gray-200 rounded-xl p-8 sm:p-10 space-y-5 min-h-[800px] shadow-inner"
+            style={{ fontFamily: "Georgia, serif", color: "#1f2937", lineHeight: 1.7 }}
           >
+
             <header className="border-b-2 border-amber-300 pb-3 mb-2">
               <h1 className="text-2xl font-bold text-amber-900">{titulo || "Título do trabalho"}</h1>
               <p className="text-sm text-gray-600 mt-1">
