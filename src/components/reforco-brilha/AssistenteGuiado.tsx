@@ -92,13 +92,21 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         const links = (tag as any)?.rb_habilidade_tags || [];
         links.forEach((l: any) => ids.add(l.habilidade_id));
       }
-      // 2) habilidades por palavras_chave
+      // 2) habilidades por palavras_chave (área + descrição livre dos pais)
+      const tokensDescricao = descricaoDif
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .split(/[^a-z0-9]+/)
+        .filter((t) => t.length >= 4);
+      const keywords = Array.from(new Set([...areaSel.keywords, ...tokensDescricao]));
       const { data: byKw } = await supabase
         .from("rb_habilidades")
         .select("id")
-        .overlaps("palavras_chave", areaSel.keywords)
-        .limit(20);
+        .overlaps("palavras_chave", keywords)
+        .limit(30);
       (byKw || []).forEach((h: any) => ids.add(h.id));
+
 
       if (ids.size === 0) {
         setRecs([]);
