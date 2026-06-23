@@ -69,11 +69,21 @@ interface Props {
 
 export function CenarioIlustrado({ imagem, vocabBase, onTocarPersonagem }: Props) {
   const cen = inferCenario(imagem, vocabBase);
+  const bgImg: Partial<Record<Cenario, string>> = { castelo: casteloBg };
+  const fundoIlustrado = bgImg[cen];
 
   return (
-    <div className={`w-full h-full relative ${BG[cen]}`}>
-      <Decoracoes cenario={cen} />
-      <Chao cenario={cen} />
+    <div className={`w-full h-full relative overflow-hidden ${fundoIlustrado ? "" : BG[cen]}`}>
+      {fundoIlustrado && (
+        <img
+          src={fundoIlustrado}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          draggable={false}
+        />
+      )}
+      {!fundoIlustrado && <Decoracoes cenario={cen} />}
+      {!fundoIlustrado && <Chao cenario={cen} />}
 
       {/* Personagem principal */}
       <motion.button
