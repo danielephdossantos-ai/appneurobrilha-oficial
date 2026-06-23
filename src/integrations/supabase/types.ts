@@ -2765,6 +2765,39 @@ export type Database = {
           },
         ]
       }
+      rb_habilidade_tags: {
+        Row: {
+          created_at: string
+          habilidade_id: string
+          tag_id: string
+        }
+        Insert: {
+          created_at?: string
+          habilidade_id: string
+          tag_id: string
+        }
+        Update: {
+          created_at?: string
+          habilidade_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_habilidade_tags_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_habilidade_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "rb_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_habilidades: {
         Row: {
           categoria_id: string
@@ -3070,6 +3103,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      rb_tags: {
+        Row: {
+          created_at: string
+          id: string
+          nome: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nome: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nome?: string
+          slug?: string
+        }
+        Relationships: []
       }
       reports: {
         Row: {
