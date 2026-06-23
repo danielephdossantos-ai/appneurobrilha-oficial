@@ -605,9 +605,8 @@ function ReforcoBrilha() {
             <BibliotecaInternet query={searchQuery.trim()} />
           )}
 
-          <RelatoriosReforco />
-
           <CategoriasReforco childId={activeChild?.id ?? null} />
+
 
 
 
@@ -998,6 +997,11 @@ function ReforcoBrilha() {
               </div>
             </div>
           )}
+
+          {/* Relatório da criança — sempre no final da página */}
+          <div className="pt-4 border-t-2 border-dashed border-indigo-200">
+            <RelatoriosReforco />
+          </div>
         </div>
       )}
       <FloatingActivityControls
