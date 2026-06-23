@@ -47,6 +47,7 @@ import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
+import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -597,6 +598,10 @@ function ReforcoBrilha() {
                 Tente termos mais simples ou escolha uma categoria abaixo.
               </p>
             </Card>
+          )}
+
+          {searchQuery.trim().length >= 3 && (
+            <BibliotecaInternet query={searchQuery.trim()} />
           )}
 
           <RelatoriosReforco />
