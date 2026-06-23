@@ -117,7 +117,7 @@ function MatrizPedagogicaPage() {
   return (
     <Shell>
       <PageHeader
-        icon={<Network className="h-6 w-6" />}
+        icon={Network}
         title="Matriz Pedagógica"
         subtitle="Mapa completo das habilidades do Pré ao 9º ano"
       />
