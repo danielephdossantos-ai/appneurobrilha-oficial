@@ -57,12 +57,19 @@ export function LembretesDiarios({ childId }: Props) {
           .in("mission_id", missionIds)
           .eq("scheduled_date", hoje)
           .eq("completed", false);
-        estudos = (plans || []).map((p: any) => ({
-          id: p.id,
-          title: p.title,
-          subject: subjMap.get(p.mission_id)?.subject || "",
-          exam_date: subjMap.get(p.mission_id)?.exam_date || "",
-        }));
+        // Agrupar por prova (mission_id): 1 item por matéria+data
+        const porMissao = new Map<string, ItemEstudo>();
+        for (const p of (plans || []) as any[]) {
+          if (porMissao.has(p.mission_id)) continue;
+          const info = subjMap.get(p.mission_id);
+          porMissao.set(p.mission_id, {
+            id: p.id,
+            title: `Estudar: ${info?.subject || p.title}`,
+            subject: info?.subject || "",
+            exam_date: info?.exam_date || "",
+          });
+        }
+        estudos = Array.from(porMissao.values());
       }
 
       // Trabalhos pendentes
