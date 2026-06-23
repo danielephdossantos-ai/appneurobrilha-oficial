@@ -479,6 +479,10 @@ function EditorTrabalho({
                   ? "⚠ Erro ao salvar"
                   : "Auto-salvar ativo"}
           </span>
+          <SpeakButton
+            text={`${titulo}. ${blocos.map((b) => b.tipo === "imagem" ? (b.legenda || "") : (b.texto || "")).filter(Boolean).join(". ")}`}
+            label="Ouvir trabalho"
+          />
           <button
             onClick={rodarRevisao}
             disabled={revisando}
