@@ -160,7 +160,11 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
                     ? "Vamos estudar pra prova juntos"
                     : "Plano diário de estudo"}
               </p>
+              <p className="text-[10px] text-amber-600 font-semibold mt-0.5">
+                Mensagens de hoje: {uso}/{LIMITE_DIARIO}
+              </p>
             </div>
+
           </div>
           <button
             onClick={onFechar}
