@@ -57,7 +57,7 @@ function MatrizPedagogicaPage() {
   const carregar = async () => {
     setLoading(true);
     const [habsRes, catsRes, preRes, relRes, userRes] = await Promise.all([
-      supabase.from("rb_habilidades").select("id,nome,descricao,categoria_id,subcategoria,faixa_etaria,ano_escolar,nivel_dificuldade").order("ano_escolar", { ascending: true }).order("ordem", { ascending: true }).limit(500),
+      supabase.from("rb_habilidades").select("id,nome,descricao,categoria_id,subcategoria,faixa_etaria,ano_escolar,nivel_dificuldade,o_que_e,por_que_importante,como_identificar,como_ensinar,exemplos_praticos,atividades_recomendadas,dicas_familia,dicas_professores,como_avaliar_evolucao,proximo_passo").order("ano_escolar", { ascending: true }).order("ordem", { ascending: true }).limit(500),
       supabase.from("rb_categorias").select("id,nome"),
       supabase.from("rb_habilidade_prerequisitos").select("habilidade_id,pre_requisito_id"),
       supabase.from("rb_habilidade_relacionadas").select("habilidade_id,relacionada_id"),
