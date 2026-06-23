@@ -44,6 +44,7 @@ import { FloatingActivityControls } from "@/components/activities/FloatingActivi
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
+import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -566,8 +567,11 @@ function ReforcoBrilha() {
             </Card>
           )}
 
+          <RelatoriosReforco />
+
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
+
               <h3 className="text-sm font-bold flex items-center gap-2 px-1 text-indigo-600">
                 <Calendar className="h-4 w-4" />
                 PLANO DE ESTUDOS DA SEMANA (DEFINIDO PELA MÃE)
