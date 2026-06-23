@@ -468,14 +468,14 @@ function ReforcoBrilha() {
                   <div className="px-1">
                     <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                       <BookOpen className="h-3.5 w-3.5" />
-                      Aulas disponíveis ({searchResult.aulas.length})
+                      Aulas disponíveis ({searchResult.aulas.length + aulasExtras.length})
                     </h4>
                     <p className="text-xs text-muted-foreground mt-1">
                       👇 Toque em uma aula abaixo para começar
                     </p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {searchResult.aulas.map((aula) => (
+                    {[...searchResult.aulas, ...aulasExtras].map((aula) => (
                       <button
                         key={aula.id}
                         onClick={() => setAulaAberta({ id: aula.id, titulo: aula.titulo })}
@@ -508,6 +508,18 @@ function ReforcoBrilha() {
                       </button>
                     ))}
                   </div>
+                  {searchResult.aulas.length >= 20 && !semMaisAulas && (
+                    <button
+                      onClick={carregarMaisAulas}
+                      disabled={carregandoMaisAulas}
+                      className="w-full py-3 rounded-xl border-2 border-dashed border-primary/40 text-sm font-bold text-primary hover:bg-primary/5 disabled:opacity-60"
+                    >
+                      {carregandoMaisAulas ? "Carregando..." : "Ver mais aulas"}
+                    </button>
+                  )}
+                  {semMaisAulas && aulasExtras.length > 0 && (
+                    <p className="text-center text-xs text-muted-foreground">Todas as aulas carregadas.</p>
+                  )}
                 </div>
               )}
 
