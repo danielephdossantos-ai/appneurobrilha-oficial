@@ -58,16 +58,18 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
   const monthEnd = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
 
   const { data: provas = [] } = useQuery({
-    queryKey: ["exam_missions", childId, cursor.getFullYear(), cursor.getMonth()],
+    queryKey: ["exam_missions", childId, cursor.getFullYear(), cursor.getMonth(), filtroTipo],
     queryFn: async (): Promise<Prova[]> => {
       if (!childId) return [];
-      const { data, error } = await supabase
+      let q = supabase
         .from("exam_missions")
         .select("id,child_id,subject,exam_date,notes,tipo")
         .eq("child_id", childId)
         .gte("exam_date", ymd(monthStart))
         .lte("exam_date", ymd(monthEnd))
         .order("exam_date", { ascending: true });
+      if (filtroTipo !== "todos") q = q.eq("tipo", filtroTipo);
+      const { data, error } = await q;
       if (error) {
         console.warn("[calendario] erro:", error);
         return [];
