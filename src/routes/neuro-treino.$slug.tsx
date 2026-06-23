@@ -2452,40 +2452,40 @@ function NomeacaoRapida({ p, onDone }: any) {
       <div
         className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}
       >
-        {fase === "flash" ? (
-          <div className="animate-pulse">
-            <RenderEmoji e={p.emoji} className="w-28 h-28" />
-          </div>
-        ) : (
-          <div className="text-muted-foreground font-bold text-lg">Qual era?</div>
-        )}
+        <div className={fase === "flash" ? "animate-pulse" : "opacity-90"}>
+          <RenderEmoji e={p.emoji} label={p.nome} className="w-32 h-32" />
+        </div>
       </div>
       {fase !== "flash" && (
-        <div className="grid grid-cols-2 gap-3">
-          {p.opts.map((opt: string, i: number) => {
-            const certa = opt === p.nome;
-            const bg =
-              escolhido === opt
-                ? certa
-                  ? "border-success bg-success/10 text-success"
-                  : "border-destructive bg-destructive/10"
-                : escolhido && certa
-                  ? "border-success bg-success/10"
-                  : "border-border bg-card hover:border-amber/60";
-            return (
-              <button
-                key={i}
-                onClick={() => handleClick(opt)}
-                className={`rounded-2xl border-2 p-4 font-black text-lg transition-all ${bg}`}
-              >
-                {opt}
-              </button>
-            );
-          })}
-        </div>
+        <>
+          <div className="text-muted-foreground font-bold text-base">Qual é?</div>
+          <div className="grid grid-cols-2 gap-3">
+            {p.opts.map((opt: string, i: number) => {
+              const certa = opt === p.nome;
+              const bg =
+                escolhido === opt
+                  ? certa
+                    ? "border-success bg-success/10 text-success"
+                    : "border-destructive bg-destructive/10"
+                  : escolhido && certa
+                    ? "border-success bg-success/10"
+                    : "border-border bg-card hover:border-amber/60";
+              return (
+                <button
+                  key={i}
+                  onClick={() => handleClick(opt)}
+                  className={`rounded-2xl border-2 p-3 transition-all flex flex-col items-center gap-2 ${bg}`}
+                >
+                  <RenderEmoji label={opt} className="w-20 h-20" />
+                  <span className="font-black text-base">{opt}</span>
+                </button>
+              );
+            })}
+          </div>
+        </>
       )}
       {fase === "flash" && (
-        <div className="text-sm text-muted-foreground animate-pulse">Memorize a figura!</div>
+        <div className="text-sm text-muted-foreground animate-pulse">Olha a figura!</div>
       )}
     </div>
   );
