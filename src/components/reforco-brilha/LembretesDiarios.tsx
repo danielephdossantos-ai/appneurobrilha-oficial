@@ -1,8 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { supabase } from "@/database/supabase/client";
-import { Bell, BellOff, BellRing, FileText, GraduationCap } from "lucide-react";
+import { Bell, BellOff, BellRing, FileText, GraduationCap, ChevronRight } from "lucide-react";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+
 
 interface Props {
   childId: string | null;
