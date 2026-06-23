@@ -608,6 +608,8 @@ function ReforcoBrilha() {
 
           <RelatoriosReforco />
 
+          <CalendarioProvas childId={activeChild?.id ?? null} />
+
           <TrabalhoBrilha childId={activeChild?.id ?? null} />
 
 
