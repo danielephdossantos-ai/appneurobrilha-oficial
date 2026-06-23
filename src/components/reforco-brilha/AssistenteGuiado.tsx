@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
+import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
+import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
 
 type Area =
   | "leitura"
