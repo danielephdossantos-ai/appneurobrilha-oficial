@@ -271,9 +271,11 @@ function Jornada() {
 function DayTrail({
   currentDay,
   theme,
+  onSpeakDay,
 }: {
   currentDay: number;
   theme: (typeof WORLD_THEME)[WorldKey];
+  onSpeakDay?: (day: number) => void;
 }) {
   const OFFSETS = [0, 1, 2, 1, 0, -1, -2, -1];
   const totalDays = 365;
