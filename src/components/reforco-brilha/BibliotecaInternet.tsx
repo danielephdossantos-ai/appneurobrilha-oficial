@@ -88,7 +88,11 @@ export function BibliotecaInternet({ query }: Props) {
               href={r.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(r.url, "_blank", "noopener,noreferrer");
+              }}
+              className="block group cursor-pointer"
             >
               <Card className="h-full border-2 border-emerald-100 hover:border-emerald-400 hover:shadow-lg transition-all bg-white">
                 <div className="flex gap-3">
