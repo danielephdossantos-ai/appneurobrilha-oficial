@@ -3201,6 +3201,13 @@ export type Database = {
             referencedRelation: "rb_aulas"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "rb_paginas_aula_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas_premium_status"
+            referencedColumns: ["aula_id"]
+          },
         ]
       }
       rb_planos_intervencao: {
@@ -4000,7 +4007,28 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      rb_aulas_premium_status: {
+        Row: {
+          aula_id: string | null
+          etapas_faltantes: string[] | null
+          etapas_obrigatorias: number | null
+          etapas_presentes: number | null
+          etapas_presentes_list: string[] | null
+          habilidade_id: string | null
+          is_premium_completa: boolean | null
+          pct_premium: number | null
+          titulo: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_aulas_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       add_brilhocoins: {
@@ -4015,6 +4043,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      rb_etapas_faltantes: { Args: { _aula_id: string }; Returns: string[] }
       reset_daily_coins: { Args: never; Returns: undefined }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
