@@ -280,9 +280,12 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       if (arch[i]) resultados.push(arch[i]);
     }
 
-    // 3) salvar no cache
-    if (resultados.length > 0) {
-      const rows = resultados.map((r, i) => ({
+    // 3) salvar no cache (sem khan/youtube-edu — são links de busca dinâmicos)
+    const cacheaveis = resultados.filter(
+      (r) => r.fonte !== "khan" && r.fonte !== "youtube-edu",
+    );
+    if (cacheaveis.length > 0) {
+      const rows = cacheaveis.map((r, i) => ({
         query_normalizada: queryN,
         fonte: r.fonte,
         titulo: r.titulo,
