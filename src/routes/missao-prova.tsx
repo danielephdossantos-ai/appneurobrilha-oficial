@@ -37,6 +37,7 @@ import { ReforcoEngine } from "@/engines/pedagogical-engine/reforco-engine";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { SpeakButton } from "@/components/ui/SpeakButton";
 import { GraduationCap, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
@@ -228,10 +229,16 @@ function MissaoProva() {
                 </Card>
 
                 <Card className="p-8">
-                  <h3 className="text-2xl font-black mb-4 flex items-center gap-2">
-                    <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
-                    {lessonContent.title}
-                  </h3>
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <h3 className="text-2xl font-black flex items-center gap-2">
+                      <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
+                      {lessonContent.title}
+                    </h3>
+                    <SpeakButton
+                      text={`${lessonContent.title}. ${lessonContent.explanation || ""}. ${(lessonContent.steps || []).map((s: any, i: number) => `Passo ${i + 1}: ${s}`).join(". ")}`}
+                      label="Ouvir aula"
+                    />
+                  </div>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                     {lessonContent.explanation}
                   </p>

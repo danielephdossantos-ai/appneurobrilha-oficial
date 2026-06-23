@@ -28,6 +28,7 @@ import {
 } from "@/lib/recursos-externos.functions";
 import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
+import { SpeakButton } from "@/components/ui/SpeakButton";
 
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem";
@@ -478,6 +479,10 @@ function EditorTrabalho({
                   ? "⚠ Erro ao salvar"
                   : "Auto-salvar ativo"}
           </span>
+          <SpeakButton
+            text={`${titulo}. ${blocos.map((b) => b.tipo === "imagem" ? (b.legenda || "") : (b.texto || "")).filter(Boolean).join(". ")}`}
+            label="Ouvir trabalho"
+          />
           <button
             onClick={rodarRevisao}
             disabled={revisando}
