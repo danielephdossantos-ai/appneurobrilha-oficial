@@ -109,7 +109,20 @@ function scoreHabilidade(h: RBHabilidade, tokens: string[], rawQuery: string): {
   return { score, matches };
 }
 
-export async function searchReforcoBrilha(query: string): Promise<SearchResult> {
+// Limites pensados para escala (milhares de habilidades/aulas)
+const MAX_HABILIDADES_FETCH = 100;      // candidatas trazidas do banco
+const MAX_RELATED = 8;                  // habilidades relacionadas exibidas
+const DEFAULT_PAGE_SIZE = 20;           // aulas e atividades por página
+
+export interface PageOptions {
+  limit?: number;
+  offset?: number;
+}
+
+export async function searchReforcoBrilha(
+  query: string,
+  opts: PageOptions = {},
+): Promise<SearchResult> {
   const tokens = tokenize(query);
   const result: SearchResult = {
     main: null,
@@ -122,7 +135,10 @@ export async function searchReforcoBrilha(query: string): Promise<SearchResult> 
 
   if (tokens.length === 0) return result;
 
-  // Monta filtro OR: nome ilike token + palavras_chave overlap token
+  const limit = Math.min(opts.limit ?? DEFAULT_PAGE_SIZE, 50);
+  const offset = Math.max(opts.offset ?? 0, 0);
+
+  // Filtro OR sobre nome + descrição (usa índices GIN trigram)
   const orParts: string[] = [];
   for (const t of tokens) {
     const safe = t.replace(/[%,]/g, "");
@@ -130,20 +146,22 @@ export async function searchReforcoBrilha(query: string): Promise<SearchResult> 
     orParts.push(`descricao.ilike.%${safe}%`);
   }
 
-  const { data: byText } = await supabase
-    .from("rb_habilidades")
-    .select("id,categoria_id,nome,descricao,palavras_chave")
-    .or(orParts.join(","))
-    .limit(50);
-
-  const { data: byArray } = await supabase
-    .from("rb_habilidades")
-    .select("id,categoria_id,nome,descricao,palavras_chave")
-    .overlaps("palavras_chave", tokens)
-    .limit(50);
+  // Duas consultas paralelas com LIMIT para evitar puxar tudo em escala
+  const [byTextRes, byArrayRes] = await Promise.all([
+    supabase
+      .from("rb_habilidades")
+      .select("id,categoria_id,nome,descricao,palavras_chave")
+      .or(orParts.join(","))
+      .limit(MAX_HABILIDADES_FETCH),
+    supabase
+      .from("rb_habilidades")
+      .select("id,categoria_id,nome,descricao,palavras_chave")
+      .overlaps("palavras_chave", tokens)
+      .limit(MAX_HABILIDADES_FETCH),
+  ]);
 
   const merged = new Map<string, RBHabilidade>();
-  for (const h of [...(byText || []), ...(byArray || [])]) {
+  for (const h of [...(byTextRes.data || []), ...(byArrayRes.data || [])]) {
     merged.set(h.id, h as RBHabilidade);
   }
   if (merged.size === 0) return result;
@@ -158,34 +176,73 @@ export async function searchReforcoBrilha(query: string): Promise<SearchResult> 
 
   if (scored.length === 0) return result;
 
-  // Buscar categorias dos resultados
-  const catIds = Array.from(new Set(scored.map((s) => s.categoria_id)));
+  // Categorias apenas do top-N exibido (não da lista inteira)
+  const top = scored.slice(0, MAX_RELATED + 1);
+  const catIds = Array.from(new Set(top.map((s) => s.categoria_id)));
   const { data: cats } = await supabase
     .from("rb_categorias")
     .select("id,nome,cor,icone")
     .in("id", catIds);
   const catMap = new Map<string, RBCategoria>();
   (cats || []).forEach((c: any) => catMap.set(c.id, c as RBCategoria));
-  scored.forEach((s) => (s.categoria = catMap.get(s.categoria_id)));
+  top.forEach((s) => (s.categoria = catMap.get(s.categoria_id)));
 
-  result.main = scored[0];
-  result.related = scored.slice(1, 8);
+  result.main = top[0];
+  result.related = top.slice(1, MAX_RELATED + 1);
 
-  // Aulas da habilidade principal
-  const { data: aulas } = await supabase
-    .from("rb_aulas")
-    .select("id,habilidade_id,titulo,objetivo,faixa_etaria,nivel")
-    .eq("habilidade_id", result.main.id)
-    .order("ordem", { ascending: true });
-  result.aulas = (aulas || []) as RBAula[];
-
-  // Atividades relacionadas da habilidade principal
-  const { data: atividades } = await supabase
-    .from("rb_atividades_relacionadas")
-    .select("id,habilidade_id,atividade_id,titulo,modulo,rota")
-    .eq("habilidade_id", result.main.id)
-    .order("ordem", { ascending: true });
-  result.atividades = (atividades || []) as RBAtividadeRel[];
+  // Listas paginadas (aulas + atividades) em paralelo
+  const [aulasRes, atividadesRes] = await Promise.all([
+    listAulasDaHabilidade(result.main.id, { limit, offset }),
+    listAtividadesDaHabilidade(result.main.id, { limit, offset }),
+  ]);
+  result.aulas = aulasRes;
+  result.atividades = atividadesRes;
 
   return result;
 }
+
+export async function listAulasDaHabilidade(
+  habilidadeId: string,
+  opts: PageOptions = {},
+): Promise<RBAula[]> {
+  const limit = Math.min(opts.limit ?? DEFAULT_PAGE_SIZE, 50);
+  const offset = Math.max(opts.offset ?? 0, 0);
+  const { data } = await supabase
+    .from("rb_aulas")
+    .select("id,habilidade_id,titulo,objetivo,faixa_etaria,nivel")
+    .eq("habilidade_id", habilidadeId)
+    .order("ordem", { ascending: true })
+    .range(offset, offset + limit - 1);
+  return (data || []) as RBAula[];
+}
+
+export async function listAtividadesDaHabilidade(
+  habilidadeId: string,
+  opts: PageOptions = {},
+): Promise<RBAtividadeRel[]> {
+  const limit = Math.min(opts.limit ?? DEFAULT_PAGE_SIZE, 50);
+  const offset = Math.max(opts.offset ?? 0, 0);
+  const { data } = await supabase
+    .from("rb_atividades_relacionadas")
+    .select("id,habilidade_id,atividade_id,titulo,modulo,rota")
+    .eq("habilidade_id", habilidadeId)
+    .order("ordem", { ascending: true })
+    .range(offset, offset + limit - 1);
+  return (data || []) as RBAtividadeRel[];
+}
+
+export async function listHabilidadesDaCategoria(
+  categoriaId: string,
+  opts: PageOptions = {},
+): Promise<RBHabilidade[]> {
+  const limit = Math.min(opts.limit ?? DEFAULT_PAGE_SIZE, 100);
+  const offset = Math.max(opts.offset ?? 0, 0);
+  const { data } = await supabase
+    .from("rb_habilidades")
+    .select("id,categoria_id,nome,descricao,palavras_chave")
+    .eq("categoria_id", categoriaId)
+    .order("ordem", { ascending: true })
+    .range(offset, offset + limit - 1);
+  return (data || []) as RBHabilidade[];
+}
+
