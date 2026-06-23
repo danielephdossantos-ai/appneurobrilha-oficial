@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
@@ -18,13 +18,17 @@ import {
   ExternalLink,
   Loader2,
   GraduationCap,
+  SpellCheck,
+  CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
   type RecursoExterno,
 } from "@/lib/recursos-externos.functions";
+import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
+
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem";
 interface Bloco {
