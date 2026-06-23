@@ -84,7 +84,6 @@ const navCrianca = [
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
   { to: "/jornada-365", label: "Jornada 365", icon: Compass },
-  { to: "/amigo-virtual", label: "Amigo Virtual", icon: Heart },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
@@ -108,7 +107,6 @@ const navigationSequence = [
   "/neuro-treino",
   "/brilha-vida",
   "/jornada-365",
-  "/amigo-virtual",
   "/rotina",
   "/painel-pais",
   "/progressao",
@@ -377,7 +375,7 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/neuro-treino", icon: Brain, label: "Treino" },
-    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
+    { to: "/jornada-365", icon: Compass, label: "Jornada" },
   ];
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
