@@ -12,7 +12,8 @@ import {
   Landmark,
   GraduationCap,
   Sprout,
-  Network,
+ Network,
+ Image as ImageIcon,
 } from "lucide-react";
 import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
