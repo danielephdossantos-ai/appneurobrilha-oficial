@@ -2493,38 +2493,94 @@ function NomeacaoRapida({ p, onDone }: any) {
 
 // ── COORDENAÇÃO MOTORA ──────────────────────────────────────
 
-// 28. TOQUE EM SEQUÊNCIA — pontos numerados, tocar em ordem
+// 28. TOQUE EM SEQUÊNCIA — pontos em ordem, voz fala o item, fundo temático
+const TS_BG: Record<string, string> = {
+  ceu: "bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50 border-sky-300",
+  grama: "bg-gradient-to-b from-sky-100 via-emerald-100 to-emerald-200 border-emerald-300",
+  selva: "bg-gradient-to-b from-emerald-200 via-emerald-300 to-emerald-500 border-emerald-600",
+  espaco: "bg-gradient-to-b from-indigo-900 via-purple-900 to-slate-900 border-indigo-700",
+  fazenda: "bg-gradient-to-b from-amber-100 via-yellow-100 to-lime-200 border-amber-300",
+  oceano: "bg-gradient-to-b from-cyan-200 via-sky-300 to-blue-500 border-blue-600",
+};
+const TS_BG_DECOR: Record<string, string[]> = {
+  ceu: ["☁️", "☁️", "☀️"],
+  grama: ["🌳", "🌸", "🦋"],
+  selva: ["🌴", "🌿", "🐒"],
+  espaco: ["⭐", "✨", "🪐"],
+  fazenda: ["🌾", "🌻", "🚜"],
+  oceano: ["🐚", "🐟", "🌊"],
+};
 function ToqueSequencia({ p, onDone }: any) {
-  const [proximo, setProximo] = useState(1);
-  const [acertos, setAcertos] = useState<number[]>([]);
-  const handlePonto = (id: number) => {
-    if (id !== proximo) return;
-    const novos = [...acertos, id];
+  const { speak } = usePipVoice();
+  const [proximoIdx, setProximoIdx] = useState(0);
+  const [acertos, setAcertos] = useState<string[]>([]);
+  const ordem: string[] = p.ordem;
+  const proximo = ordem[proximoIdx];
+  const escuro = p.bg === "espaco";
+
+  const labelDe = (id: string) =>
+    p.pontos.find((pt: any) => pt.id === id)?.label ?? id;
+
+  const handlePonto = (pt: any) => {
+    if (pt.id !== proximo) return;
+    const novos = [...acertos, pt.id];
     setAcertos(novos);
-    if (novos.length === p.pontos.length) {
-      setTimeout(() => onDone(true), 400);
-    } else setProximo(id + 1);
+    speak(pt.label);
+    if (novos.length === ordem.length) {
+      setTimeout(() => onDone(true), 600);
+    } else setProximoIdx(proximoIdx + 1);
   };
+
+  const renderConteudo = (label: string) => {
+    if (p.tipo === "imagem") {
+      return <RenderEmoji label={label} className="w-12 h-12" />;
+    }
+    return <span className="font-black text-2xl">{label}</span>;
+  };
+
   return (
     <div className="space-y-4">
-      <div className="text-center text-sm text-muted-foreground font-bold">
-        Toque o número <span className="text-emerald-600 text-xl">{proximo}</span>
+      <div className={`text-center text-sm font-bold ${escuro ? "text-white" : "text-muted-foreground"}`}>
+        {p.categoria} — toque{" "}
+        {p.tipo === "imagem" ? (
+          <span className="inline-flex items-center gap-1 align-middle">
+            <RenderEmoji label={labelDe(proximo)} className="w-7 h-7 inline-block" />
+            <span className="text-emerald-600 font-black">{labelDe(proximo)}</span>
+          </span>
+        ) : (
+          <span className="text-emerald-600 text-xl">{labelDe(proximo)}</span>
+        )}
       </div>
       <div
-        className="relative bg-gradient-to-br from-emerald/10 to-emerald/5 border-2 border-emerald/20 rounded-3xl"
-        style={{ height: 280 }}
+        className={`relative border-2 rounded-3xl overflow-hidden ${TS_BG[p.bg] ?? TS_BG.grama}`}
+        style={{ height: 320 }}
       >
-        {p.pontos.map((pt: any) => (
-          <button
-            key={pt.id}
-            onClick={() => handlePonto(pt.id)}
-            style={{ left: `${pt.x}%`, top: `${pt.y}%`, transform: "translate(-50%,-50%)" }}
-            className={`absolute w-12 h-12 rounded-full border-3 font-black text-lg flex items-center justify-center transition-all active:scale-90
-              ${acertos.includes(pt.id) ? "bg-emerald-500 text-white border-emerald-600 scale-90" : pt.id === proximo ? "bg-white border-emerald-500 text-emerald-700 shadow-lg scale-110 animate-pulse" : "bg-card border-border text-muted-foreground"}`}
+        {/* Decoração de fundo */}
+        {(TS_BG_DECOR[p.bg] ?? []).map((d, i) => (
+          <span
+            key={i}
+            className="absolute text-3xl opacity-40 select-none pointer-events-none"
+            style={{ left: `${10 + i * 30}%`, top: `${i % 2 ? 70 : 8}%` }}
           >
-            {pt.id}
-          </button>
+            {d}
+          </span>
         ))}
+        {p.pontos.map((pt: any) => {
+          const feito = acertos.includes(pt.id);
+          const ativo = pt.id === proximo;
+          return (
+            <button
+              key={pt.id}
+              onClick={() => handlePonto(pt)}
+              style={{ left: `${pt.x}%`, top: `${pt.y}%`, transform: "translate(-50%,-50%)" }}
+              className={`absolute w-16 h-16 rounded-2xl border-3 flex items-center justify-center transition-all active:scale-90 shadow-lg
+                ${feito ? "bg-emerald-500 text-white border-emerald-600 scale-90 opacity-80" : ativo ? "bg-white border-emerald-500 text-emerald-700 scale-110 animate-pulse ring-4 ring-emerald-300/50" : "bg-white/90 border-white text-slate-700"}`}
+              aria-label={pt.label}
+            >
+              {renderConteudo(pt.label)}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
