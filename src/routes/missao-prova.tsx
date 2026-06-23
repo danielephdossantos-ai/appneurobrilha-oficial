@@ -143,6 +143,8 @@ function MissaoProva() {
       }
     }
   }, [missions, autoStarted, isStudying]);
+
+  const startSession = async (session: any, mission: any) => {
     setIsStudying(true);
     setCurrentSession(session);
     setCurrentMission(mission);
