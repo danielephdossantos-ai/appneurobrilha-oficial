@@ -843,3 +843,157 @@ function BlocoEditor({
     </div>
   );
 }
+
+// ---------------------------------------------------------------- Preview inline de recursos
+
+function youtubeIdFromUrl(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes("youtu.be")) return u.pathname.slice(1) || null;
+    if (u.hostname.includes("youtube.com")) {
+      const v = u.searchParams.get("v");
+      if (v) return v;
+      const m = u.pathname.match(/\/embed\/([^/?]+)/);
+      if (m) return m[1];
+    }
+  } catch {}
+  return null;
+}
+
+function archiveEmbed(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (!u.hostname.includes("archive.org")) return null;
+    // archive.org/details/<id> → archive.org/embed/<id>
+    const m = u.pathname.match(/\/details\/([^/]+)/);
+    if (m) return `https://archive.org/embed/${m[1]}`;
+  } catch {}
+  return null;
+}
+
+function RecursoPreviewModal({
+  recurso,
+  onFechar,
+  onAdicionarTexto,
+  onAdicionarImagem,
+}: {
+  recurso: RecursoExterno;
+  onFechar: () => void;
+  onAdicionarTexto: (r: RecursoExterno) => void;
+  onAdicionarImagem: (r: RecursoExterno) => void;
+}) {
+  const ytId = recurso.fonte === "youtube" || recurso.fonte === "youtube-edu"
+    ? youtubeIdFromUrl(recurso.url)
+    : null;
+  const archive = recurso.fonte === "archive" ? archiveEmbed(recurso.url) : null;
+  const temConteudo = !!(recurso.conteudo && recurso.conteudo.trim().length > 0);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-3"
+      onClick={onFechar}
+    >
+      <div
+        className="bg-white w-full max-w-4xl max-h-[92vh] rounded-2xl border-4 border-amber-300 shadow-2xl flex flex-col overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* header */}
+        <div className="flex items-start justify-between gap-3 px-4 py-3 border-b-2 border-amber-200 bg-amber-50">
+          <div className="min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-widest text-amber-700">
+              {FONTE_LABEL[recurso.fonte] || recurso.fonte}
+            </p>
+            <h3 className="text-base font-black text-amber-900 truncate">{recurso.titulo}</h3>
+          </div>
+          <button
+            onClick={onFechar}
+            className="p-1.5 rounded-lg hover:bg-amber-100 text-amber-800 shrink-0"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* corpo */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          {ytId && (
+            <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
+              <iframe
+                src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1`}
+                title={recurso.titulo}
+                className="w-full h-full"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          )}
+
+          {archive && (
+            <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
+              <iframe
+                src={archive}
+                title={recurso.titulo}
+                className="w-full h-full"
+                allowFullScreen
+              />
+            </div>
+          )}
+
+          {!ytId && !archive && recurso.thumbnail && (
+            <img
+              src={recurso.thumbnail}
+              alt=""
+              crossOrigin="anonymous"
+              className="max-h-72 mx-auto rounded-lg"
+            />
+          )}
+
+          {recurso.descricao && (
+            <p className="text-sm text-gray-700 italic leading-relaxed">
+              {recurso.descricao}
+            </p>
+          )}
+
+          {temConteudo && (
+            <div
+              className="text-sm leading-relaxed text-gray-900 whitespace-pre-wrap bg-amber-50/40 border border-amber-100 rounded-lg p-3"
+              style={{ fontFamily: "Georgia, serif" }}
+            >
+              {recurso.conteudo}
+            </div>
+          )}
+
+          {!ytId && !archive && !temConteudo && !recurso.descricao && (
+            <p className="text-xs text-muted-foreground italic">
+              Sem prévia de texto. Adicione como fonte ou imagem ao seu trabalho.
+            </p>
+          )}
+        </div>
+
+        {/* footer ações */}
+        <div className="border-t-2 border-amber-200 p-3 bg-amber-50/60 flex flex-wrap gap-2 justify-end">
+          <button
+            onClick={onFechar}
+            className="text-xs font-bold bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded-lg"
+          >
+            Fechar
+          </button>
+          {recurso.thumbnail && (
+            <button
+              onClick={() => onAdicionarImagem(recurso)}
+              className="text-xs font-bold bg-white border-2 border-amber-300 text-amber-800 hover:bg-amber-100 px-3 py-1.5 rounded-lg flex items-center gap-1"
+            >
+              <ImageIcon className="h-3 w-3" /> Adicionar imagem
+            </button>
+          )}
+          <button
+            onClick={() => onAdicionarTexto(recurso)}
+            className="text-xs font-black bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1"
+          >
+            <Wand2 className="h-3 w-3" /> Adicionar ao trabalho
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
