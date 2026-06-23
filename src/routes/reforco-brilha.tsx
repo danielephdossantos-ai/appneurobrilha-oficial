@@ -281,14 +281,15 @@ function ReforcoBrilha() {
       <PageHeader
         icon={Sparkles}
         title="REFORÇO BRILHA"
-        subtitle="O professor particular infinito que ensina qualquer assunto"
+        subtitle="Biblioteca pedagógica para pais, responsáveis e professores"
       />
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
           <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />O que vamos reforçar hoje?
+              <Sparkles className="h-5 w-5 text-primary" />
+              O que a criança está precisando aprender?
             </h3>
             <div className="relative">
               <input
@@ -296,19 +297,20 @@ function ReforcoBrilha() {
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && startLesson()}
-                placeholder="Ex: Tabuada do 7, Verbos, Ortografia..."
-                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-lg transition-all"
+                placeholder="Ex: Vogais, Sílabas, Leitura, Escrita, Tabuada, Atenção, Coordenação motora, Memória..."
+                className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
               <button
                 onClick={() => startLesson()}
                 className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity"
+                aria-label="Buscar trilha pedagógica"
               >
                 <ArrowRight className="h-6 w-6" />
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              A mãe escreve o tema e o Sistema Brilha cria a aula perfeita.
+              Pesquise a dificuldade e receba uma trilha pedagógica estruturada (sem uso de IA generativa).
             </p>
           </Card>
 
