@@ -136,6 +136,60 @@ async function buscarOpenLibrary(query: string): Promise<RecursoExterno[]> {
   }
 }
 
+// ---------- Wikiversidade PT (cursos/aulas wiki, sem chave) ----------
+async function buscarWikiversity(query: string): Promise<RecursoExterno[]> {
+  try {
+    const searchUrl = `https://pt.wikiversity.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=5&srsearch=${encodeURIComponent(query)}`;
+    const r = await fetch(searchUrl, { headers: { "User-Agent": "NeuroBrilhaKids/1.0" } });
+    if (!r.ok) return [];
+    const data: any = await r.json();
+    const hits: any[] = data.query?.search || [];
+    return hits.slice(0, 5).map((h) => {
+      const snippet = (h.snippet || "").replace(/<[^>]+>/g, "").trim();
+      const rec: RecursoExterno = {
+        fonte: "wikiversity",
+        titulo: h.title,
+        descricao: snippet || null,
+        url: `https://pt.wikiversity.org/wiki/${encodeURIComponent(h.title.replace(/ /g, "_"))}`,
+        thumbnail: null,
+        conteudo: null,
+      };
+      return rec;
+    });
+  } catch {
+    return [];
+  }
+}
+
+// ---------- Internet Archive (livros/vídeos/áudios públicos, sem chave) ----------
+async function buscarArchive(query: string): Promise<RecursoExterno[]> {
+  try {
+    // foco em materiais educacionais em português
+    const q = `(${query}) AND (language:Portuguese OR language:"por") AND (mediatype:texts OR mediatype:movies OR mediatype:audio)`;
+    const url = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=description&fl[]=mediatype&rows=6&page=1&output=json`;
+    const r = await fetch(url);
+    if (!r.ok) return [];
+    const data: any = await r.json();
+    const docs: any[] = data.response?.docs || [];
+    return docs.map((d) => {
+      const desc = Array.isArray(d.description) ? d.description[0] : d.description;
+      const autor = Array.isArray(d.creator) ? d.creator.join(", ") : d.creator;
+      const tipo = d.mediatype === "movies" ? "Vídeo" : d.mediatype === "audio" ? "Áudio" : "Texto";
+      const rec: RecursoExterno = {
+        fonte: "archive",
+        titulo: d.title || d.identifier,
+        descricao: [tipo, autor, desc].filter(Boolean).join(" · ").slice(0, 240),
+        url: `https://archive.org/details/${d.identifier}`,
+        thumbnail: `https://archive.org/services/img/${d.identifier}`,
+        conteudo: null,
+      };
+      return rec;
+    });
+  } catch {
+    return [];
+  }
+}
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
