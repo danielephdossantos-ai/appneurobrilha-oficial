@@ -207,6 +207,25 @@ function Jornada() {
   }
 
   const currentDay = journeyState?.current_day || 1;
+  const { speak, stop, speaking, supported } = useDeviceTTS("pt-BR");
+
+  const nome = activeChild.nome?.split(" ")[0] ?? "amiguinho";
+  const tema = hiperfoco?.label ? ` no mundo de ${hiperfoco.label}` : "";
+  const greeting = `Olá ${nome}! Hoje é o dia ${currentDay} da sua jornada${tema}. Vamos brincar e aprender juntos?`;
+
+  // Saudação automática ao abrir (browsers podem bloquear sem interação prévia — botão Ouvir é o fallback).
+  useEffect(() => {
+    if (!supported) return;
+    const t = setTimeout(() => speak(greeting, { rate: 0.95 }), 600);
+    return () => {
+      clearTimeout(t);
+      stop();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supported, currentDay, activeChild.id]);
+
+  const speakDay = (day: number) =>
+    speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
 
   return (
     <Shell>
@@ -217,8 +236,20 @@ function Jornada() {
 
         {/* Trilha */}
         <div className="relative z-10">
-          <DayTrail currentDay={currentDay} theme={theme} />
+          <DayTrail currentDay={currentDay} theme={theme} onSpeakDay={speakDay} />
         </div>
+
+        {/* Botão Ouvir flutuante */}
+        {supported && (
+          <button
+            type="button"
+            onClick={() => (speaking ? stop() : speak(greeting, { rate: 0.95 }))}
+            aria-label={speaking ? "Parar leitura" : "Ouvir"}
+            className="fixed bottom-24 left-3 z-30 sm:bottom-28 sm:left-6 h-14 w-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-[0_8px_24px_rgba(0,0,0,0.35)] active:scale-95"
+          >
+            {speaking ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
+          </button>
+        )}
 
         {/* Mascote da criança — flutua no canto, sem cobrir trilha */}
         {activeMascot?.mascot?.image_url && (
