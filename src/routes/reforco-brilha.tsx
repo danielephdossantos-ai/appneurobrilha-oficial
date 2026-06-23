@@ -45,6 +45,7 @@ import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
+import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -372,6 +373,14 @@ function ReforcoBrilha() {
               Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
             </p>
           </Card>
+
+          <AssistenteGuiado
+            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+            onBuscar={(q) => {
+              setSearchQuery(q);
+              runSearch(q);
+            }}
+          />
 
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
