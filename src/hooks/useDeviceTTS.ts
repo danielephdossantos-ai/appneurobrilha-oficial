@@ -32,16 +32,43 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
   const speak = useCallback(
     (text: string, opts?: { rate?: number; pitch?: number; lang?: string }) => {
       if (!supported || !text) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = opts?.lang || defaultLang;
-      u.rate = opts?.rate ?? 1;
-      u.pitch = opts?.pitch ?? 1;
-      if (voiceRef.current) u.voice = voiceRef.current;
-      u.onstart = () => setSpeaking(true);
-      u.onend = () => setSpeaking(false);
-      u.onerror = () => setSpeaking(false);
-      window.speechSynthesis.speak(u);
+      const synth = window.speechSynthesis;
+      synth.cancel();
+      // Chunking: Chrome trunca utterances > ~200 chars / 15s. Quebrar em frases.
+      const clean = text.replace(/\s+/g, " ").trim();
+      const max = 160;
+      const chunks: string[] = [];
+      if (clean.length <= max) {
+        chunks.push(clean);
+      } else {
+        const sentences = clean.split(/(?<=[.!?;])\s+|\n+/).map((s) => s.trim()).filter(Boolean);
+        for (const s of sentences) {
+          if (s.length <= max) { chunks.push(s); continue; }
+          let rest = s;
+          while (rest.length > max) {
+            let cut = rest.lastIndexOf(",", max);
+            if (cut < max / 2) cut = rest.lastIndexOf(" ", max);
+            if (cut < max / 2) cut = max;
+            chunks.push(rest.slice(0, cut).trim());
+            rest = rest.slice(cut).trim();
+          }
+          if (rest) chunks.push(rest);
+        }
+      }
+      let i = 0;
+      setSpeaking(true);
+      const next = () => {
+        if (i >= chunks.length) { setSpeaking(false); return; }
+        const u = new SpeechSynthesisUtterance(chunks[i++]);
+        u.lang = opts?.lang || defaultLang;
+        u.rate = opts?.rate ?? 1;
+        u.pitch = opts?.pitch ?? 1;
+        if (voiceRef.current) u.voice = voiceRef.current;
+        u.onend = next;
+        u.onerror = next;
+        synth.speak(u);
+      };
+      next();
     },
     [supported, defaultLang],
   );
