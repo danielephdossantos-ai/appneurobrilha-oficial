@@ -26,7 +26,7 @@ import {
   Target,
   PenTool,
   Brain,
-  Network,
+  
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
