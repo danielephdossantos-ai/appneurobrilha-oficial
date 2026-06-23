@@ -238,8 +238,14 @@ export async function searchReforcoBrilha(
     orParts.push(`descricao.ilike.%${safe}%`);
   }
 
-  // Duas consultas paralelas com LIMIT para evitar puxar tudo em escala
-  const [byTextRes, byArrayRes] = await Promise.all([
+  // OR sobre slug/nome das tags para casar tokens com tags pedagógicas
+  const tagOr = tokens
+    .map((t) => t.replace(/[%,]/g, ""))
+    .flatMap((t) => [`slug.ilike.%${t}%`, `nome.ilike.%${t}%`])
+    .join(",");
+
+  // Três consultas paralelas com LIMIT para evitar puxar tudo em escala
+  const [byTextRes, byArrayRes, tagsRes] = await Promise.all([
     supabase
       .from("rb_habilidades")
       .select("id,categoria_id,nome,descricao,palavras_chave")
@@ -250,11 +256,33 @@ export async function searchReforcoBrilha(
       .select("id,categoria_id,nome,descricao,palavras_chave")
       .overlaps("palavras_chave", tokens)
       .limit(MAX_HABILIDADES_FETCH),
+    supabase
+      .from("rb_tags")
+      .select("id,nome,slug,rb_habilidade_tags(habilidade_id,rb_habilidades(id,categoria_id,nome,descricao,palavras_chave))")
+      .or(tagOr)
+      .limit(50),
   ]);
 
   const merged = new Map<string, RBHabilidade>();
   for (const h of [...(byTextRes.data || []), ...(byArrayRes.data || [])]) {
     merged.set(h.id, h as RBHabilidade);
+  }
+  // Mapa habilidade_id → nomes das tags que casaram
+  const tagNamesByHab = new Map<string, Set<string>>();
+  for (const tag of (tagsRes.data as any[]) || []) {
+    const links = tag.rb_habilidade_tags || [];
+    for (const link of links) {
+      const hab = link.rb_habilidades;
+      if (!hab) continue;
+      if (!merged.has(hab.id)) merged.set(hab.id, hab as RBHabilidade);
+      if (!tagNamesByHab.has(hab.id)) tagNamesByHab.set(hab.id, new Set());
+      tagNamesByHab.get(hab.id)!.add(tag.nome);
+    }
+  }
+  // injeta tags no objeto da habilidade para o scoreHabilidade considerar
+  for (const [id, tagSet] of tagNamesByHab) {
+    const h = merged.get(id);
+    if (h) (h as RBHabilidade).tags = Array.from(tagSet);
   }
   if (merged.size === 0) return result;
 
