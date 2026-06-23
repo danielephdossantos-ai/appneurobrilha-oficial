@@ -218,6 +218,46 @@ function MatrizPedagogicaPage() {
                         </div>
                       )}
 
+                      {/* Estrutura padronizada — 10 seções */}
+                      {(() => {
+                        const SECOES: { key: keyof Habilidade; label: string; emoji: string }[] = [
+                          { key: "o_que_e", label: "O que é", emoji: "📘" },
+                          { key: "por_que_importante", label: "Por que é importante", emoji: "⭐" },
+                          { key: "como_identificar", label: "Como identificar dificuldades", emoji: "🔍" },
+                          { key: "como_ensinar", label: "Como ensinar", emoji: "🎓" },
+                          { key: "exemplos_praticos", label: "Exemplos práticos", emoji: "💡" },
+                          { key: "atividades_recomendadas", label: "Atividades recomendadas", emoji: "🎯" },
+                          { key: "dicas_familia", label: "Dicas para família", emoji: "👨‍👩‍👧" },
+                          { key: "dicas_professores", label: "Dicas para professores", emoji: "🍎" },
+                          { key: "como_avaliar_evolucao", label: "Como avaliar evolução", emoji: "📈" },
+                          { key: "proximo_passo", label: "Próximo passo recomendado", emoji: "➡️" },
+                        ];
+                        const preenchidas = SECOES.filter((s) => (h as any)[s.key]);
+                        if (preenchidas.length === 0) {
+                          return (
+                            <div className="rounded-xl border border-dashed border-border bg-muted/30 p-3 text-xs text-muted-foreground">
+                              Estrutura padrão (10 seções) ainda não preenchida para esta habilidade.
+                            </div>
+                          );
+                        }
+                        return (
+                          <div className="space-y-2">
+                            <div className="text-[10px] font-black uppercase text-muted-foreground">Estrutura padrão da habilidade</div>
+                            {SECOES.map((s) => {
+                              const val = (h as any)[s.key] as string | null;
+                              if (!val) return null;
+                              return (
+                                <div key={s.key as string} className="rounded-xl bg-muted/40 p-3">
+                                  <div className="text-xs font-bold mb-1">{s.emoji} {s.label}</div>
+                                  <p className="text-xs text-muted-foreground whitespace-pre-wrap">{val}</p>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })()}
+
+
                       <div>
                         <div className="text-[10px] font-black uppercase text-muted-foreground mb-1">Marcar status</div>
                         <div className="flex gap-2">
