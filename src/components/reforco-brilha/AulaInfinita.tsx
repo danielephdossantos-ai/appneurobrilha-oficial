@@ -87,7 +87,7 @@ export function AulaInfinita({ query }: Props) {
             </div>
             <h4 className="text-xl font-black text-foreground capitalize">{query}</h4>
             <p className="text-sm text-muted-foreground mt-1">
-              Esta habilidade ainda não está no catálogo interno, mas o sistema montou uma aula com {resultados.length} recurso(s) reais de Wikipédia, YouTube, Wikiversidade, OpenLibrary e Internet Archive — tudo gratuito.
+              Aula montada agora com {resultados.length} recurso(s) reais de Wikipédia, YouTube, Wikiversidade, OpenLibrary e Internet Archive — tudo gratuito.
             </p>
             <button
               onClick={() => rodar(true)}

@@ -188,7 +188,7 @@ function ReforcoBrilha() {
       const res = await searchReforcoBrilha(text);
       setSearchResult(res);
       if (!res.main) {
-        toast.info("Nenhuma habilidade encontrada. Tente outras palavras.");
+        // Sem match no catálogo interno: o AulaInfinita assume e monta a aula com bibliotecas públicas.
       }
     } catch (e: any) {
       console.error("Busca Reforço Brilha:", e);
