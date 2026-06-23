@@ -7,12 +7,13 @@ const MessageSchema = z.object({
 });
 
 const InputSchema = z.object({
-  modo: z.enum(["trabalho", "plano-diario"]),
+  modo: z.enum(["trabalho", "plano-diario", "missao-prova"]),
   tema: z.string().min(1).max(200),
   materia: z.string().max(80).optional(),
   idade: z.number().int().min(3).max(18).optional(),
   serie: z.string().max(40).optional(),
   nome: z.string().max(80).optional(),
+  diasAteProva: z.number().int().min(0).max(365).optional(),
   historico: z.array(MessageSchema).max(40).optional(),
   mensagem: z.string().min(1).max(2000),
 });
