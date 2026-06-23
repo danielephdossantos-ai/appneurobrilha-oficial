@@ -249,8 +249,9 @@ export async function searchReforcoBrilha(
     .flatMap((t) => [`slug.ilike.%${t}%`, `nome.ilike.%${t}%`])
     .join(",");
 
-  // Três consultas paralelas com LIMIT para evitar puxar tudo em escala
-  const [byTextRes, byArrayRes, tagsRes] = await Promise.all([
+  // Três consultas paralelas tolerantes a falha (allSettled): se uma quebrar,
+  // ainda usamos os resultados das outras em vez de derrubar a busca inteira.
+  const [byTextSettled, byArraySettled, tagsSettled] = await Promise.allSettled([
     supabase
       .from("rb_habilidades")
       .select("id,categoria_id,nome,descricao,palavras_chave")
@@ -268,13 +269,28 @@ export async function searchReforcoBrilha(
       .limit(50),
   ]);
 
+  const unwrap = (s: PromiseSettledResult<any>, label: string): any[] => {
+    if (s.status === "rejected") {
+      console.warn(`[reforco-brilha] ${label} rejeitou:`, s.reason);
+      return [];
+    }
+    if (s.value?.error) {
+      console.warn(`[reforco-brilha] ${label} erro:`, s.value.error);
+      return [];
+    }
+    return s.value?.data || [];
+  };
+  const byTextData = unwrap(byTextSettled, "byText");
+  const byArrayData = unwrap(byArraySettled, "byArray");
+  const tagsData = unwrap(tagsSettled, "tags");
+
   const merged = new Map<string, RBHabilidade>();
-  for (const h of [...(byTextRes.data || []), ...(byArrayRes.data || [])]) {
+  for (const h of [...byTextData, ...byArrayData]) {
     merged.set(h.id, h as RBHabilidade);
   }
   // Mapa habilidade_id → nomes das tags que casaram
   const tagNamesByHab = new Map<string, Set<string>>();
-  for (const tag of (tagsRes.data as any[]) || []) {
+  for (const tag of tagsData) {
     const links = tag.rb_habilidade_tags || [];
     for (const link of links) {
       const hab = link.rb_habilidades;
