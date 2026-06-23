@@ -798,26 +798,35 @@ function BlocoEditor({
   onDescer: () => void;
 }) {
   return (
-    <div className="group relative">
-      <div className="absolute -left-8 top-1 hidden group-hover:flex flex-col gap-0.5 print:hidden">
+    <div className="group relative pl-1">
+      <div className="absolute -left-1 -top-2 flex items-center gap-1 print:hidden bg-white border border-amber-200 rounded-md shadow-sm px-1 py-0.5 opacity-70 hover:opacity-100">
         <button
           onClick={onSubir}
           disabled={primeiro}
-          className="text-[10px] text-gray-400 hover:text-amber-700 disabled:opacity-30"
+          className="text-xs text-gray-500 hover:text-amber-700 disabled:opacity-30 px-1"
+          title="Subir"
         >
           ▲
         </button>
         <button
           onClick={onDescer}
           disabled={ultimo}
-          className="text-[10px] text-gray-400 hover:text-amber-700 disabled:opacity-30"
+          className="text-xs text-gray-500 hover:text-amber-700 disabled:opacity-30 px-1"
+          title="Descer"
         >
           ▼
         </button>
-        <button onClick={onRemover} className="text-gray-400 hover:text-rose-600">
-          <Trash2 className="h-3 w-3" />
+        <button
+          onClick={() => {
+            if (confirm("Apagar este bloco?")) onRemover();
+          }}
+          className="text-rose-600 hover:bg-rose-50 rounded px-1 flex items-center gap-1 text-[10px] font-bold"
+          title="Apagar bloco"
+        >
+          <Trash2 className="h-3 w-3" /> Apagar
         </button>
       </div>
+
 
       {bloco.tipo === "titulo" && (
         <input
