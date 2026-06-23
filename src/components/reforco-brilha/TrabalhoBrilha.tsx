@@ -907,7 +907,7 @@ function RecursoPreviewModal({
   onAdicionarTexto: (r: RecursoExterno) => void;
   onAdicionarImagem: (r: RecursoExterno) => void;
 }) {
-  const ytId = recurso.fonte === "youtube" || recurso.fonte === "youtube-edu"
+  const ytId = recurso.fonte === "youtube"
     ? youtubeIdFromUrl(recurso.url)
     : null;
   const archive = recurso.fonte === "archive" ? archiveEmbed(recurso.url) : null;
