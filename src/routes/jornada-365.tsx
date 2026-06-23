@@ -310,7 +310,9 @@ function DayTrail({
                 type="button"
                 disabled={isLocked}
                 onClick={() => {
-                  if (isLocked || isDone) return;
+                  if (isLocked) return;
+                  if (isCurrent) onSpeakDay?.(day);
+                  if (isDone) return;
                   window.scrollTo({ top: 0, behavior: "auto" });
                 }}
                 className={cn(
