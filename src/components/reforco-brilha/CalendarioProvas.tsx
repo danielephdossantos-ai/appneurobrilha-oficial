@@ -49,6 +49,7 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
   const today = new Date();
   const [cursor, setCursor] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState<string>(ymd(today));
+  const [selectedProvaId, setSelectedProvaId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
