@@ -107,7 +107,6 @@ const navigationSequence = [
   "/neuro-treino",
   "/brilha-vida",
   "/jornada-365",
-  "/amigo-virtual",
   "/rotina",
   "/painel-pais",
   "/progressao",
