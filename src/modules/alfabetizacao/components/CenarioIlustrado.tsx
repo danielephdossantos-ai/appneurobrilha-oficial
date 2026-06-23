@@ -37,7 +37,8 @@ const MAPA_CENARIO: Record<string, Cenario> = {
   PORQUINHO: "fazenda",
   SOL: "ceu", CHUVA: "ceu", AVIAO: "ceu", DRONE: "ceu",
   GATO: "quintal", CACHORRO: "quintal", DOG: "quintal", RATO: "quintal",
-  BOLA: "quintal", BOLO: "quintal", PRESENTE: "quintal", CORACAO: "quintal",
+  BOLA: "quintal", BOLO: "quintal", PRESENTE: "quintal",
+  CORACAO: "magico", FELIZ: "magico", TRISTE: "jardim", MEDO: "magico",
   CASA: "quintal",
 };
 
