@@ -15,6 +15,30 @@ interface Props {
   onFechar: () => void;
 }
 
+const LIMITE_DIARIO = 20;
+
+function chaveLimite(childId: string | undefined) {
+  const hoje = new Date().toISOString().slice(0, 10);
+  return `tutor-brilha:uso:${childId ?? "anon"}:${hoje}`;
+}
+
+function lerUso(childId: string | undefined): number {
+  try {
+    const v = localStorage.getItem(chaveLimite(childId));
+    return v ? parseInt(v, 10) || 0 : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function incrementarUso(childId: string | undefined): number {
+  const novo = lerUso(childId) + 1;
+  try {
+    localStorage.setItem(chaveLimite(childId), String(novo));
+  } catch {}
+  return novo;
+}
+
 export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, onFechar }: Props) {
   const { activeChild } = useAppState();
   const conversar = useServerFn(conversarTutorIA);
@@ -24,6 +48,8 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [encerrado, setEncerrado] = useState(false);
+  const [uso, setUso] = useState<number>(() => lerUso(activeChild?.id));
+
 
   // Mensagem inicial automática
   useEffect(() => {
@@ -51,6 +77,20 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
       return;
     }
 
+    const usoAtual = lerUso(activeChild?.id);
+    if (usoAtual >= LIMITE_DIARIO) {
+      setEncerrado(true);
+      setMsgs((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content: `🌙 Por hoje você já usou suas ${LIMITE_DIARIO} mensagens com o Tutor Brilha. Amanhã a gente continua! 💛`,
+        },
+      ]);
+      return;
+    }
+
+
     const novasMsgs: Msg[] = inicial
       ? msgs
       : [...msgs, { role: "user", content: mensagem }];
@@ -59,6 +99,9 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
       setInput("");
     }
     setCarregando(true);
+    const novoUso = incrementarUso(activeChild?.id);
+    setUso(novoUso);
+
 
     try {
       const res = await conversar({
@@ -117,7 +160,11 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
                     ? "Vamos estudar pra prova juntos"
                     : "Plano diário de estudo"}
               </p>
+              <p className="text-[10px] text-amber-600 font-semibold mt-0.5">
+                Mensagens de hoje: {uso}/{LIMITE_DIARIO}
+              </p>
             </div>
+
           </div>
           <button
             onClick={onFechar}
