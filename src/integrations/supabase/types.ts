@@ -3069,6 +3069,48 @@ export type Database = {
           },
         ]
       }
+      rb_planos_semanais: {
+        Row: {
+          area: string
+          created_at: string
+          id: string
+          progresso: number
+          semana_atual: number
+          semanas: Json
+          semanas_concluidas: Json
+          status: string
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area: string
+          created_at?: string
+          id?: string
+          progresso?: number
+          semana_atual?: number
+          semanas?: Json
+          semanas_concluidas?: Json
+          status?: string
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          id?: string
+          progresso?: number
+          semana_atual?: number
+          semanas?: Json
+          semanas_concluidas?: Json
+          status?: string
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       rb_sinais_alerta: {
         Row: {
           created_at: string
