@@ -153,7 +153,33 @@ function ReforcoBrilha() {
   const [skills, setSkills] = useState<SkillMastery[]>([]);
   const [pendingReviews, setPendingReviews] = useState<any[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
   const queryClient = useQueryClient();
+
+  const runSearch = async (q: string) => {
+    const text = q.trim();
+    if (!text) {
+      setSearchResult(null);
+      return;
+    }
+    setIsSearching(true);
+    try {
+      const { searchReforcoBrilha } = await import("@/lib/reforco-brilha-search");
+      const res = await searchReforcoBrilha(text);
+      setSearchResult(res);
+      if (!res.main) {
+        toast.info("Nenhuma habilidade encontrada. Tente outras palavras.");
+      }
+    } catch (e) {
+      console.error("Busca Reforço Brilha:", e);
+      toast.error("Erro ao buscar habilidades.");
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
 
   const { data: agenda = [] } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
