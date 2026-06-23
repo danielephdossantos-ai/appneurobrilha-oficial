@@ -10,7 +10,7 @@ interface Props {
 
 const SECOES: { fonte: RecursoExterno["fonte"]; titulo: string; icone: any; cor: string; bg: string; border: string }[] = [
   { fonte: "wikipedia",   titulo: "📖 Leia e entenda",       icone: BookOpen,       cor: "text-sky-700",     bg: "bg-sky-50",     border: "border-sky-200" },
-  { fonte: "youtube",     titulo: "🎥 Assista em vídeo",     icone: Youtube,        cor: "text-red-700",     bg: "bg-red-50",     border: "border-red-200" },
+  { fonte: "youtube",     titulo: "🎥 Assista em vídeo",     icone: Video,          cor: "text-red-700",     bg: "bg-red-50",     border: "border-red-200" },
   { fonte: "wikiversity", titulo: "🎓 Curso completo",       icone: GraduationCap,  cor: "text-violet-700",  bg: "bg-violet-50",  border: "border-violet-200" },
   { fonte: "openlibrary", titulo: "📚 Livros recomendados",  icone: Library,        cor: "text-amber-700",   bg: "bg-amber-50",   border: "border-amber-200" },
   { fonte: "archive",     titulo: "🗄️ Acervo digital",       icone: Archive,        cor: "text-stone-700",   bg: "bg-stone-50",   border: "border-stone-200" },
