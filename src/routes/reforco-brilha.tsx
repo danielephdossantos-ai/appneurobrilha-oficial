@@ -41,6 +41,46 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
+import { callNeuroBrilhaAI } from "@/services/api/neurobrilha-ai.functions";
+import { Heart, Loader2, Lightbulb } from "lucide-react";
+
+// Detecta quando a mãe está fazendo uma pergunta/desabafo sobre o filho,
+// em vez de pedir uma aula sobre um tema escolar.
+const PARENT_PATTERNS = [
+  /\bmeu filho\b/i,
+  /\bminha filha\b/i,
+  /\bmeu\(a\) filho\(a\)\b/i,
+  /\bnão sabe\b/i,
+  /\bnao sabe\b/i,
+  /\bnão consegue\b/i,
+  /\bnao consegue\b/i,
+  /\btem dificuldade\b/i,
+  /\bcomo (ajud|fazer|ensinar|lidar)/i,
+  /\bo que (faço|fazer|devo)\b/i,
+  /\bestou preocupad/i,
+  /\bnão quer\b/i,
+  /\bnao quer\b/i,
+  /\bnão gosta\b/i,
+  /\bnao gosta\b/i,
+  /\bbirra\b/i,
+  /\bcrise\b/i,
+  /\bagressiv/i,
+  /\bansied/i,
+  /\bautism/i,
+  /\btdah\b/i,
+  /\?$/,
+];
+const isParentQuestion = (text: string) =>
+  PARENT_PATTERNS.some((re) => re.test(text.trim()));
+
+const SUGESTOES_MAE = [
+  "Meu filho não sabe ler",
+  "Meu filho não quer fazer lição",
+  "Como ensinar tabuada para autista",
+  "Meu filho tem birra na hora de estudar",
+  "Como ajudar com atraso na fala",
+  "Meu filho não presta atenção",
+];
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
