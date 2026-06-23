@@ -38,6 +38,7 @@ import {
   Ruler,
   Trophy,
   Users,
+  Network,
   Gift,
   School,
   PenTool,
