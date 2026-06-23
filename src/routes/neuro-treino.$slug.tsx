@@ -1928,42 +1928,102 @@ function SonsCorpo({ p, onDone }: any) {
 }
 
 // ============== 19. Traçado de Letras ==============
-// Mecânica única: tocar setas direcionais na ordem correta (1→2→3)
+// Pontos numerados SOBRE a letra; criança toca em ordem e os traços aparecem.
 function TracadoLetras({ p, onDone }: any) {
   const [step, setStep] = useState(0);
+  const pontos: { x: number; y: number; lift?: boolean }[] = p.pontos;
+
   const tap = (i: number) => {
-    if (i === step) {
-      if (step + 1 >= p.passos.length) {
-        toast.success("Letra completa!");
-        onDone(true);
-      } else setStep(step + 1);
+    if (i !== step) {
+      toast(`Toque no ponto ${step + 1}`);
+      return;
+    }
+    if (i + 1 >= pontos.length) {
+      toast.success("Letra completa! ✨");
+      onDone(true);
     } else {
-      toast("Ops, comece pela seta 1");
+      setStep(i + 1);
     }
   };
+
+  // Linhas: liga ponto i ao i+1 se NÃO tiver lift no i+1, e só se i < step.
+  const linhas = pontos
+    .map((pt, i) => {
+      if (i === 0) return null;
+      if (pt.lift) return null;
+      if (i > step) return null;
+      const prev = pontos[i - 1];
+      return { x1: prev.x, y1: prev.y, x2: pt.x, y2: pt.y, key: i };
+    })
+    .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: number }[];
+
   return (
-    <div className="text-center">
-      <div className="text-[10rem] leading-none font-black text-success/20 select-none mb-4">
-        {p.letra}
+    <div className="text-center space-y-3">
+      <div className="text-sm text-muted-foreground font-bold">
+        Toque os pontinhos em ordem para escrever a letra
       </div>
-      <div className="text-sm text-muted-foreground mb-3">Toque as setas em ordem:</div>
-      <div className="flex justify-center gap-3 flex-wrap">
-        {p.passos.map((seta: string, i: number) => {
-          const done = i < step;
-          const current = i === step;
-          return (
-            <button
-              key={i}
-              onClick={() => tap(i)}
-              className={`relative w-24 h-24 rounded-3xl border-4 transition-all flex items-center justify-center ${done ? "bg-success text-white border-success" : current ? "bg-card border-success animate-pulse shadow-glow" : "bg-muted border-border"}`}
-            >
-              <span className="absolute -top-2 -left-2 text-sm font-black bg-success text-white rounded-full w-7 h-7 flex items-center justify-center border-2 border-white shadow-sm z-10">
-                {i + 1}
-              </span>
-              <RenderEmoji e={seta} className="w-12 h-12" />
-            </button>
-          );
-        })}
+      <div className="mx-auto bg-gradient-to-br from-amber-50 to-rose-50 border-4 border-amber-200 rounded-3xl p-3" style={{ maxWidth: 340 }}>
+        <svg viewBox="0 0 100 100" className="w-full aspect-square">
+          {/* Letra fantasma como guia visual */}
+          <text
+            x={50}
+            y={50}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fontSize={90}
+            fontWeight={900}
+            fontFamily='"Comic Sans MS","Chalkboard SE",sans-serif'
+            fill="hsl(var(--success) / 0.15)"
+          >
+            {p.letra}
+          </text>
+
+          {/* Traços já feitos */}
+          {linhas.map((l) => (
+            <line
+              key={l.key}
+              x1={l.x1}
+              y1={l.y1}
+              x2={l.x2}
+              y2={l.y2}
+              stroke="hsl(var(--success))"
+              strokeWidth={4}
+              strokeLinecap="round"
+            />
+          ))}
+
+          {/* Pontos numerados sobre a letra */}
+          {pontos.map((pt, i) => {
+            const done = i < step;
+            const current = i === step;
+            return (
+              <g key={i} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
+                <circle
+                  cx={pt.x}
+                  cy={pt.y}
+                  r={current ? 5.5 : 4.5}
+                  fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
+                  stroke={done ? "hsl(var(--success))" : current ? "#f97316" : "#94a3b8"}
+                  strokeWidth={1.2}
+                  className={current ? "animate-pulse" : ""}
+                />
+                {!done && (
+                  <text
+                    x={pt.x}
+                    y={pt.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={4.2}
+                    fontWeight={900}
+                    fill={current ? "white" : "#475569"}
+                  >
+                    {i + 1}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
       </div>
     </div>
   );
