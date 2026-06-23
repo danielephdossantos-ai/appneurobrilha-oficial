@@ -1,8 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { supabase } from "@/database/supabase/client";
-import { Bell, BellOff, BellRing, FileText, GraduationCap } from "lucide-react";
+import { Bell, BellOff, BellRing, FileText, GraduationCap, ChevronRight } from "lucide-react";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+
 
 interface Props {
   childId: string | null;
@@ -153,9 +155,10 @@ export function LembretesDiarios({ childId }: Props) {
       </div>
       <div className="space-y-1.5">
         {estudos.map((e) => (
-          <div
+          <Link
             key={e.id}
-            className="bg-white border border-rose-200 rounded-lg px-2.5 py-1.5 flex items-center gap-2"
+            to="/missao-prova"
+            className="bg-white border border-rose-200 rounded-lg px-2.5 py-1.5 flex items-center gap-2 hover:bg-rose-50 hover:border-rose-400 transition-colors group"
           >
             <GraduationCap className="h-4 w-4 text-rose-600 shrink-0" />
             <div className="flex-1 min-w-0">
@@ -168,12 +171,16 @@ export function LembretesDiarios({ childId }: Props) {
                 })}
               </p>
             </div>
-          </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 opacity-0 group-hover:opacity-100 flex items-center gap-0.5">
+              Estudar <ChevronRight className="h-3 w-3" />
+            </span>
+          </Link>
         ))}
         {trabalhos.map((t) => (
-          <div
+          <Link
             key={t.id}
-            className="bg-white border border-amber-200 rounded-lg px-2.5 py-1.5 flex items-center gap-2"
+            to="/missao-trabalho"
+            className="bg-white border border-amber-200 rounded-lg px-2.5 py-1.5 flex items-center gap-2 hover:bg-amber-50 hover:border-amber-400 transition-colors group"
           >
             <FileText className="h-4 w-4 text-amber-600 shrink-0" />
             <div className="flex-1 min-w-0">
@@ -184,9 +191,13 @@ export function LembretesDiarios({ childId }: Props) {
                   : "Sem data de entrega"}
               </p>
             </div>
-          </div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 opacity-0 group-hover:opacity-100 flex items-center gap-0.5">
+              Abrir <ChevronRight className="h-3 w-3" />
+            </span>
+          </Link>
         ))}
       </div>
+
     </div>
   );
 }
