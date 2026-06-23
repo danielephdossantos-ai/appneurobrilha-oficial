@@ -61,6 +61,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
   const [tempo, setTempo] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState<Recomendacao[]>([]);
+  const [descricaoDif, setDescricaoDif] = useState<string>("");
 
   const areaSel = AREAS.find((a) => a.id === area);
 
@@ -71,7 +72,9 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
     setSerie("");
     setTempo("");
     setRecs([]);
+    setDescricaoDif("");
   };
+
 
   const gerarRecomendacoes = async () => {
     if (!areaSel) return;
@@ -89,13 +92,21 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         const links = (tag as any)?.rb_habilidade_tags || [];
         links.forEach((l: any) => ids.add(l.habilidade_id));
       }
-      // 2) habilidades por palavras_chave
+      // 2) habilidades por palavras_chave (área + descrição livre dos pais)
+      const tokensDescricao = descricaoDif
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .split(/[^a-z0-9]+/)
+        .filter((t) => t.length >= 4);
+      const keywords = Array.from(new Set([...areaSel.keywords, ...tokensDescricao]));
       const { data: byKw } = await supabase
         .from("rb_habilidades")
         .select("id")
-        .overlaps("palavras_chave", areaSel.keywords)
-        .limit(20);
+        .overlaps("palavras_chave", keywords)
+        .limit(30);
       (byKw || []).forEach((h: any) => ids.add(h.id));
+
 
       if (ids.size === 0) {
         setRecs([]);
@@ -193,8 +204,24 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
               </button>
             ))}
           </div>
+
+          <div className="mt-4 space-y-2">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+              Descreva a dificuldade (opcional)
+            </label>
+            <textarea
+              value={descricaoDif}
+              onChange={(e) => setDescricaoDif(e.target.value)}
+              placeholder="Ex: troca letras ao escrever, não consegue ler sílabas com R, esquece a tabuada do 7..."
+              className="w-full min-h-[90px] rounded-xl border-2 border-border bg-background px-3 py-2 text-sm focus:border-violet-500 focus:outline-none resize-none"
+            />
+            <p className="text-[11px] text-muted-foreground">
+              Quanto mais detalhe, melhor o app ajuda a encontrar habilidades e aulas certas.
+            </p>
+          </div>
         </Pergunta>
       )}
+
 
       {/* STEP 2 — idade */}
       {step === 2 && (
