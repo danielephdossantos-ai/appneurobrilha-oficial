@@ -60,6 +60,25 @@ function speak(text: string) {
   }
 }
 
+function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
+  const c = pagina.conteudo || {};
+  const partes: string[] = [];
+  if (pagina.titulo || metaLabel) partes.push(String(pagina.titulo || metaLabel));
+  if (c.texto) partes.push(String(c.texto));
+  if (c.destaque) partes.push(`Destaque: ${c.destaque}`);
+  if (Array.isArray(c.bullets)) c.bullets.forEach((b: string, i: number) => partes.push(`${i + 1}. ${b}`));
+  if (Array.isArray(c.passos)) c.passos.forEach((p: string, i: number) => partes.push(`Passo ${i + 1}: ${p}`));
+  if (Array.isArray(c.exemplos))
+    c.exemplos.forEach((ex: any) => partes.push(`${ex.silaba} forma ${ex.palavra}.`));
+  if (Array.isArray(c.perguntas))
+    c.perguntas.forEach((p: any, i: number) =>
+      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}.`),
+    );
+  return partes.join(". ");
+}
+
+
+
 function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   const c = pagina.conteudo || {};
 
@@ -323,14 +342,12 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                     {atual.titulo || meta?.label}
                   </h3>
                 </div>
-                {(atual.conteudo?.texto || atual.titulo) && (
+                {(atual.conteudo?.texto || atual.titulo || atual.conteudo?.bullets || atual.conteudo?.passos) && (
                   <button
-                    onClick={() =>
-                      speak(`${atual.titulo || meta?.label}. ${atual.conteudo?.texto || ""}`)
-                    }
+                    onClick={() => speak(textoCompletoPagina(atual, meta?.label))}
                     className="h-11 w-11 rounded-full bg-primary/10 hover:bg-primary/20 grid place-items-center shrink-0 transition-colors"
-                    aria-label="Ouvir página"
-                    title="Ouvir página"
+                    aria-label="Ouvir página inteira"
+                    title="Ouvir página inteira (voz do aparelho)"
                   >
                     <Volume2 className="h-5 w-5 text-primary" />
                   </button>
