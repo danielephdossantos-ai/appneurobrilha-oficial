@@ -77,6 +77,20 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
       return;
     }
 
+    const usoAtual = lerUso(activeChild?.id);
+    if (usoAtual >= LIMITE_DIARIO) {
+      setEncerrado(true);
+      setMsgs((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content: `🌙 Por hoje você já usou suas ${LIMITE_DIARIO} mensagens com o Tutor Brilha. Amanhã a gente continua! 💛`,
+        },
+      ]);
+      return;
+    }
+
+
     const novasMsgs: Msg[] = inicial
       ? msgs
       : [...msgs, { role: "user", content: mensagem }];
