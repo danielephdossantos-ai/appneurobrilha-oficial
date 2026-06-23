@@ -69,10 +69,92 @@ function normalize(s: string): string {
     .trim();
 }
 
+// Dicionário de sinônimos / expressões → palavras-chave pedagógicas.
+// Permite busca semântica SEM IA. Chave: trecho normalizado (sem acento, minúsculo).
+// Valor: tokens pedagógicos para expandir a busca.
+const SYNONYMS: Record<string, string[]> = {
+  // copiar da lousa / quadro
+  "copiar da lousa": ["atencao", "visual", "coordenacao", "motora", "grafomotricidade", "escrita"],
+  "copiar do quadro": ["atencao", "visual", "coordenacao", "motora", "grafomotricidade", "escrita"],
+  "copiar lousa": ["atencao", "visual", "coordenacao", "motora", "grafomotricidade", "escrita"],
+  "copiar quadro": ["atencao", "visual", "coordenacao", "motora", "grafomotricidade", "escrita"],
+  lousa: ["atencao", "visual", "escrita", "grafomotricidade"],
+  quadro: ["atencao", "visual", "escrita", "grafomotricidade"],
+  // leitura
+  "juntar silabas": ["silabas", "leitura", "consciencia", "fonologica", "alfabetizacao"],
+  "juntar letras": ["silabas", "leitura", "consciencia", "fonologica", "alfabetizacao"],
+  silabar: ["silabas", "leitura", "alfabetizacao"],
+  ler: ["leitura", "alfabetizacao", "decodificacao"],
+  letra: ["alfabeto", "letras", "alfabetizacao"],
+  letras: ["alfabeto", "alfabetizacao"],
+  vogal: ["vogais", "alfabeto", "alfabetizacao"],
+  vogais: ["alfabeto", "alfabetizacao"],
+  alfabeto: ["letras", "alfabetizacao"],
+  // escrita
+  escrever: ["escrita", "grafomotricidade", "coordenacao", "motora"],
+  caligrafia: ["escrita", "grafomotricidade", "coordenacao", "motora"],
+  letrinha: ["escrita", "grafomotricidade"],
+  // matematica
+  conta: ["matematica", "calculo", "operacoes"],
+  contas: ["matematica", "calculo", "operacoes"],
+  somar: ["adicao", "matematica", "operacoes"],
+  soma: ["adicao", "matematica", "operacoes"],
+  subtrair: ["subtracao", "matematica", "operacoes"],
+  diminuir: ["subtracao", "matematica", "operacoes"],
+  multiplicar: ["multiplicacao", "tabuada", "matematica"],
+  tabuada: ["multiplicacao", "matematica"],
+  dividir: ["divisao", "matematica"],
+  numero: ["numeros", "matematica", "contagem"],
+  numeros: ["matematica", "contagem"],
+  contar: ["contagem", "numeros", "matematica"],
+  // atencao / foco
+  "nao presta atencao": ["atencao", "foco", "concentracao"],
+  "nao consegue prestar atencao": ["atencao", "foco", "concentracao"],
+  "se distrai": ["atencao", "foco", "concentracao"],
+  distrai: ["atencao", "foco", "concentracao"],
+  distraido: ["atencao", "foco", "concentracao"],
+  foco: ["atencao", "concentracao"],
+  concentracao: ["atencao", "foco"],
+  // coordenacao
+  recortar: ["coordenacao", "motora", "fina", "tesoura"],
+  desenhar: ["coordenacao", "motora", "fina", "grafomotricidade"],
+  pintar: ["coordenacao", "motora", "fina"],
+  amarrar: ["coordenacao", "motora", "fina"],
+  // fala / linguagem
+  fala: ["linguagem", "oralidade", "comunicacao"],
+  falar: ["linguagem", "oralidade", "comunicacao"],
+  gagueja: ["linguagem", "fala", "oralidade"],
+  // emocional / comportamento
+  birra: ["autorregulacao", "emocional", "comportamento"],
+  raiva: ["autorregulacao", "emocional"],
+  ansiedade: ["autorregulacao", "emocional"],
+  // memoria
+  esquece: ["memoria", "atencao"],
+  esquecer: ["memoria", "atencao"],
+  memoria: ["memoria"],
+};
+
+function expandWithSynonyms(rawQuery: string, baseTokens: string[]): string[] {
+  const queryN = normalize(rawQuery);
+  const expanded = new Set(baseTokens);
+  // frases primeiro (mais específicas)
+  for (const key of Object.keys(SYNONYMS)) {
+    if (key.includes(" ") && queryN.includes(key)) {
+      SYNONYMS[key].forEach((t) => expanded.add(t));
+    }
+  }
+  // depois tokens individuais
+  for (const t of baseTokens) {
+    if (SYNONYMS[t]) SYNONYMS[t].forEach((s) => expanded.add(s));
+  }
+  return Array.from(expanded);
+}
+
 function tokenize(query: string): string[] {
-  return normalize(query)
+  const base = normalize(query)
     .split(" ")
     .filter((t) => t.length >= 3 && !STOPWORDS.has(t));
+  return expandWithSynonyms(query, base);
 }
 
 function scoreHabilidade(h: RBHabilidade, tokens: string[], rawQuery: string): { score: number; matches: string[] } {
