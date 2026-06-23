@@ -112,6 +112,7 @@ const navigationSequence = [
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
+  "/perfil-aluno",
   "/auditoria-pedagogica",
 ];
 
