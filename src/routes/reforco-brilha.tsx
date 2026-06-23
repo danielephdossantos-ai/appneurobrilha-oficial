@@ -45,6 +45,7 @@ import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
+import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
