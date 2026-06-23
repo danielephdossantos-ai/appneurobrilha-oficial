@@ -1496,22 +1496,56 @@ const CORPO_VARS: Variation[] = range(30).map((i) => {
   return { id: `pc-${i + 1}`, payload: { som: b.som, opts, correta: b.correta } };
 });
 
-// 19. TRAÇADO DE LETRAS — sequência de setas numeradas (mecânica única: tocar setas em ordem)
-const TRACADO_BANK = [
-  { letra: "A", passos: ["⬇️", "↗️", "➡️"] },
-  { letra: "L", passos: ["⬇️", "➡️"] },
-  { letra: "T", passos: ["➡️", "⬇️"] },
-  { letra: "I", passos: ["⬇️"] },
-  { letra: "O", passos: ["↪️", "↩️", "⤴️"] },
-  { letra: "E", passos: ["⬇️", "➡️", "➡️", "➡️"] },
-  { letra: "H", passos: ["⬇️", "⬇️", "➡️"] },
-  { letra: "F", passos: ["⬇️", "➡️", "➡️"] },
-  { letra: "V", passos: ["↘️", "↗️"] },
-  { letra: "M", passos: ["⬆️", "↘️", "↗️", "⬇️"] },
+// 19. TRAÇADO DE LETRAS — pontos numerados POR CIMA da letra; criança toca em ordem.
+// Cada ponto: {x,y} em viewBox 100x100. lift=true inicia novo traço (não liga ao anterior).
+type LetraPonto = { x: number; y: number; lift?: boolean };
+const TRACADO_BANK: { letra: string; pontos: LetraPonto[] }[] = [
+  // A: lado esq, topo, lado dir; traço da barra
+  { letra: "A", pontos: [
+    { x: 20, y: 88 }, { x: 50, y: 12 }, { x: 80, y: 88 },
+    { x: 32, y: 58, lift: true }, { x: 68, y: 58 },
+  ]},
+  // L: desce, vira direita
+  { letra: "L", pontos: [{ x: 30, y: 12 }, { x: 30, y: 88 }, { x: 80, y: 88 }] },
+  // T: barra horizontal + haste
+  { letra: "T", pontos: [
+    { x: 15, y: 18 }, { x: 85, y: 18 },
+    { x: 50, y: 18, lift: true }, { x: 50, y: 88 },
+  ]},
+  // I: só desce
+  { letra: "I", pontos: [{ x: 50, y: 14 }, { x: 50, y: 88 }] },
+  // O: 8 pontos ao redor da elipse
+  { letra: "O", pontos: [
+    { x: 50, y: 12 }, { x: 78, y: 25 }, { x: 88, y: 50 }, { x: 78, y: 75 },
+    { x: 50, y: 88 }, { x: 22, y: 75 }, { x: 12, y: 50 }, { x: 22, y: 25 },
+    { x: 50, y: 12 },
+  ]},
+  // E: contorno e traço do meio
+  { letra: "E", pontos: [
+    { x: 80, y: 14 }, { x: 25, y: 14 }, { x: 25, y: 88 }, { x: 80, y: 88 },
+    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
+  ]},
+  // H: duas hastes + barra
+  { letra: "H", pontos: [
+    { x: 25, y: 14 }, { x: 25, y: 88 },
+    { x: 25, y: 50, lift: true }, { x: 75, y: 50 },
+    { x: 75, y: 14, lift: true }, { x: 75, y: 88 },
+  ]},
+  // F: lado, topo, barra do meio
+  { letra: "F", pontos: [
+    { x: 25, y: 88 }, { x: 25, y: 14 }, { x: 78, y: 14 },
+    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
+  ]},
+  // V: dois traços diagonais
+  { letra: "V", pontos: [{ x: 15, y: 14 }, { x: 50, y: 88 }, { x: 85, y: 14 }] },
+  // M: 4 segmentos
+  { letra: "M", pontos: [
+    { x: 15, y: 88 }, { x: 15, y: 14 }, { x: 50, y: 60 }, { x: 85, y: 14 }, { x: 85, y: 88 },
+  ]},
 ];
 const TRACADO_VARS: Variation[] = range(30).map((i) => {
   const b = TRACADO_BANK[i % TRACADO_BANK.length];
-  return { id: `tl-${i + 1}`, payload: { letra: b.letra, passos: b.passos } };
+  return { id: `tl-${i + 1}`, payload: { letra: b.letra, pontos: b.pontos } };
 });
 
 // 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
