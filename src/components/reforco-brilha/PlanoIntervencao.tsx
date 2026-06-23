@@ -148,7 +148,7 @@ export function PlanoIntervencao({
       };
       const { data, error } = await supabase
         .from("rb_planos_intervencao")
-        .insert(payload)
+        .insert(payload as any)
         .select(
           "id,dificuldade,objetivo,sequencia_aulas,atividades_sugeridas,tempo_estimado_min,aulas_concluidas,progresso,observacoes,updated_at",
         )
