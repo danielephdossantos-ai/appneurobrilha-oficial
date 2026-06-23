@@ -17,6 +17,7 @@ import { Route as ProgressaoRouteImport } from './routes/progressao'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
+import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as MascotesRouteImport } from './routes/mascotes'
@@ -84,6 +85,11 @@ const PainelPaisRoute = PainelPaisRouteImport.update({
 const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
   id: '/neuro-treino',
   path: '/neuro-treino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
+  id: '/missao-trabalho',
+  path: '/missao-trabalho',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
@@ -249,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
@@ -286,6 +293,7 @@ export interface FileRoutesByTo {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
@@ -325,6 +333,7 @@ export interface FileRoutesById {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
@@ -402,6 +412,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
@@ -440,6 +451,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
@@ -479,6 +491,7 @@ export interface RootRouteChildren {
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
+  MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRoute
   PerfilAlunoRoute: typeof PerfilAlunoRoute
@@ -547,6 +560,13 @@ declare module '@tanstack/react-router' {
       path: '/neuro-treino'
       fullPath: '/neuro-treino'
       preLoaderRoute: typeof NeuroTreinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-trabalho': {
+      id: '/missao-trabalho'
+      path: '/missao-trabalho'
+      fullPath: '/missao-trabalho'
+      preLoaderRoute: typeof MissaoTrabalhoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missao-prova': {
@@ -812,6 +832,7 @@ const rootRouteChildren: RootRouteChildren = {
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
   MissaoProvaRoute: MissaoProvaRoute,
+  MissaoTrabalhoRoute: MissaoTrabalhoRoute,
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRoute,
   PerfilAlunoRoute: PerfilAlunoRoute,
