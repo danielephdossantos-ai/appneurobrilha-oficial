@@ -102,6 +102,7 @@ const navPais = [
 const navigationSequence = [
   "/",
   "/missao-prova",
+  "/missao-trabalho",
   
   "/reforco-brilha",
   "/neuro-treino",
