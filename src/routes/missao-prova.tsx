@@ -45,11 +45,14 @@ export const Route = createFileRoute("/missao-prova")({
 function MissaoProva() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
+  const queryClient = useQueryClient();
   const [isStudying, setIsStudying] = useState(false);
   const [currentSession, setCurrentSession] = useState<any>(null);
   const [currentMission, setCurrentMission] = useState<any>(null);
   const [lessonContent, setLessonContent] = useState<any>(null);
   const [tutorAberto, setTutorAberto] = useState(false);
+  const [autoStarted, setAutoStarted] = useState(false);
+  const [autoGenerating, setAutoGenerating] = useState(false);
 
   const { data: missions = [], isLoading } = useQuery({
     queryKey: ["exam_missions_child", activeChild?.id],
