@@ -244,32 +244,34 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
 
           {showForm && (
             <form onSubmit={salvarProva} className="space-y-2 bg-white border-2 border-indigo-200 rounded-xl p-3">
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setTipo("prova")}
-                  className={[
-                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
-                    tipo === "prova"
-                      ? "bg-rose-100 border-rose-400 text-rose-800"
-                      : "bg-white border-gray-200 text-gray-500",
-                  ].join(" ")}
-                >
-                  Prova
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setTipo("trabalho")}
-                  className={[
-                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
-                    tipo === "trabalho"
-                      ? "bg-amber-100 border-amber-400 text-amber-800"
-                      : "bg-white border-gray-200 text-gray-500",
-                  ].join(" ")}
-                >
-                  Trabalho
-                </button>
-              </div>
+              {filtroTipo === "todos" && (
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTipo("prova")}
+                    className={[
+                      "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                      tipo === "prova"
+                        ? "bg-rose-100 border-rose-400 text-rose-800"
+                        : "bg-white border-gray-200 text-gray-500",
+                    ].join(" ")}
+                  >
+                    Prova
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTipo("trabalho")}
+                    className={[
+                      "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                      tipo === "trabalho"
+                        ? "bg-amber-100 border-amber-400 text-amber-800"
+                        : "bg-white border-gray-200 text-gray-500",
+                    ].join(" ")}
+                  >
+                    Trabalho
+                  </button>
+                </div>
+              )}
               <input
                 type="text"
                 value={subject}
