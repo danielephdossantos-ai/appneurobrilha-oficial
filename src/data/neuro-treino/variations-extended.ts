@@ -162,32 +162,33 @@ export const VOCABULARIO_SEMANTICO_VARS: Variation[] = range(30).map((i) => {
 });
 
 // F4. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções de nome, clique rápido (RAN simplificado)
+// Apenas itens com IMAGEM garantida em OBJETO_IMG/EMOJI_IMG — palavras simples e concretas
 const NOMEACAO_BANK = [
-  { emoji: "🐱", nome: "GATO", outros: ["RATO", "LEÃO", "TIGRE"] },
-  { emoji: "🚗", nome: "CARRO", outros: ["MOTO", "ÔNIBUS", "AVIÃO"] },
-  { emoji: "🍎", nome: "MAÇÃ", outros: ["UVA", "PERA", "BANANA"] },
-  { emoji: "🌙", nome: "LUA", outros: ["SOL", "ESTRELA", "NUVEM"] },
-  { emoji: "⚽", nome: "BOLA", outros: ["CUBO", "DISCO", "ANEL"] },
-  { emoji: "🏠", nome: "CASA", outros: ["PRÉDIO", "CASTELO", "PALÁCIO"] },
-  { emoji: "🌸", nome: "FLOR", outros: ["FOLHA", "GALHO", "RAIZ"] },
-  { emoji: "🐶", nome: "CACHORRO", outros: ["LOBO", "RAPOSA", "URSO"] },
-  { emoji: "🍌", nome: "BANANA", outros: ["ABACAXI", "MANGA", "LIMÃO"] },
-  { emoji: "✏️", nome: "LÁPIS", outros: ["CANETA", "PINCEL", "BORRACHA"] },
-  { emoji: "🌊", nome: "ONDA", outros: ["RIO", "LAGO", "POÇO"] },
-  { emoji: "🦋", nome: "BORBOLETA", outros: ["ABELHA", "BESOURO", "MOSCA"] },
-  { emoji: "🎈", nome: "BALÃO", outros: ["PIPA", "FOGUETE", "AVIÃO"] },
-  { emoji: "👑", nome: "COROA", outros: ["CHAPÉU", "CAPACETE", "TIARA"] },
-  { emoji: "🦁", nome: "LEÃO", outros: ["TIGRE", "LEOPARDO", "ONÇA"] },
-  { emoji: "🚂", nome: "TREM", outros: ["METRÔ", "BONDE", "LOCOMOTIVA"] },
-  { emoji: "🎸", nome: "GUITARRA", outros: ["VIOLÃO", "BAIXO", "UKULELE"] },
-  { emoji: "🦅", nome: "ÁGUIA", outros: ["POMBO", "PAPAGAIO", "CORUJA"] },
-  { emoji: "🍕", nome: "PIZZA", outros: ["LASANHA", "MACARRÃO", "RISOTO"] },
-  { emoji: "🌵", nome: "CACTO", outros: ["BAMBU", "SAMAMBAIA", "PALMEIRA"] },
+  { emoji: "🐱", nome: "GATO", outros: ["RATO", "CACHORRO", "COELHO"] },
+  { emoji: "🚗", nome: "CARRO", outros: ["MOTO", "ÔNIBUS", "TREM"] },
+  { emoji: "🍎", nome: "MAÇÃ", outros: ["BANANA", "MORANGO", "UVA"] },
+  { emoji: "🌙", nome: "LUA", outros: ["SOL", "ESTRELA", "CHUVA"] },
+  { emoji: "⚽", nome: "BOLA", outros: ["CARRO", "CASA", "FLOR"] },
+  { emoji: "🏠", nome: "CASA", outros: ["CASTELO", "ÁRVORE", "CARRO"] },
+  { emoji: "🌸", nome: "FLOR", outros: ["ÁRVORE", "ABELHA", "BORBOLETA"] },
+  { emoji: "🐶", nome: "CACHORRO", outros: ["GATO", "RAPOSA", "URSO"] },
+  { emoji: "🍌", nome: "BANANA", outros: ["MAÇÃ", "MORANGO", "UVA"] },
+  { emoji: "🦋", nome: "BORBOLETA", outros: ["ABELHA", "SAPO", "PEIXE"] },
+  { emoji: "👑", nome: "COROA", outros: ["CASTELO", "PRINCESA", "FADA"] },
+  { emoji: "🦁", nome: "LEÃO", outros: ["TIGRE", "MACACO", "ELEFANTE"] },
+  { emoji: "🚂", nome: "TREM", outros: ["CARRO", "MOTO", "ÔNIBUS"] },
+  { emoji: "🦅", nome: "PÁSSARO", outros: ["CORUJA", "PATO", "GALINHA"] },
+  { emoji: "🐮", nome: "VACA", outros: ["PORCO", "OVELHA", "CAVALO"] },
+  { emoji: "🐸", nome: "SAPO", outros: ["PEIXE", "TARTARUGA", "RATO"] },
+  { emoji: "🦖", nome: "DINOSSAURO", outros: ["TIGRE", "LEÃO", "ELEFANTE"] },
+  { emoji: "🌳", nome: "ÁRVORE", outros: ["FLOR", "CASA", "SOL"] },
+  { emoji: "☀️", nome: "SOL", outros: ["LUA", "ESTRELA", "CHUVA"] },
+  { emoji: "🐰", nome: "COELHO", outros: ["GATO", "RAPOSA", "URSO"] },
 ];
 export const NOMEACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
   const b = NOMEACAO_BANK[i % NOMEACAO_BANK.length];
   const opts = [b.nome, ...b.outros].sort(() => (i % 2 ? -1 : 1));
-  const flashMs = Math.max(400, 1200 - i * 20);
+  const flashMs = Math.max(700, 1400 - i * 20);
   return { id: `nr-${i + 1}`, payload: { emoji: b.emoji, nome: b.nome, opts, flashMs } };
 });
 
