@@ -15,6 +15,30 @@ interface Props {
   onFechar: () => void;
 }
 
+const LIMITE_DIARIO = 20;
+
+function chaveLimite(childId: string | undefined) {
+  const hoje = new Date().toISOString().slice(0, 10);
+  return `tutor-brilha:uso:${childId ?? "anon"}:${hoje}`;
+}
+
+function lerUso(childId: string | undefined): number {
+  try {
+    const v = localStorage.getItem(chaveLimite(childId));
+    return v ? parseInt(v, 10) || 0 : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function incrementarUso(childId: string | undefined): number {
+  const novo = lerUso(childId) + 1;
+  try {
+    localStorage.setItem(chaveLimite(childId), String(novo));
+  } catch {}
+  return novo;
+}
+
 export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, onFechar }: Props) {
   const { activeChild } = useAppState();
   const conversar = useServerFn(conversarTutorIA);
@@ -24,6 +48,8 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [encerrado, setEncerrado] = useState(false);
+  const [uso, setUso] = useState<number>(() => lerUso(activeChild?.id));
+
 
   // Mensagem inicial automática
   useEffect(() => {
