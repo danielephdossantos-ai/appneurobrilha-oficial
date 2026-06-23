@@ -599,6 +599,10 @@ function ReforcoBrilha() {
             </Card>
           )}
 
+          {searchQuery.trim().length >= 3 && (
+            <BibliotecaInternet query={searchQuery.trim()} />
+          )}
+
           <RelatoriosReforco />
 
           {agenda.length > 0 && (
