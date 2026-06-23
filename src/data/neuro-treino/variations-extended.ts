@@ -347,9 +347,9 @@ const TEMAS_ALVO = [
 ];
 export const ALVO_MOVEL_VARS: Variation[] = range(30).map((i) => {
   const t = TEMAS_ALVO[i % TEMAS_ALVO.length];
-  const velocidade = 1.2 + (i % 6) * 0.3;
+  const velocidade = 0.4 + (i % 6) * 0.1; // bem mais lento (0.4 → 0.9)
   const rounds = 3 + (i % 4);
-  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds, tempoMs: 2500 - i * 30 } };
+  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds, tempoMs: 6000 - i * 40 } };
 });
 
 // ──────────────────────────────────────────────
