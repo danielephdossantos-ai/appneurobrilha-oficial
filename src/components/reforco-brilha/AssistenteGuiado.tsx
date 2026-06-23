@@ -204,8 +204,24 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
               </button>
             ))}
           </div>
+
+          <div className="mt-4 space-y-2">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+              Descreva a dificuldade (opcional)
+            </label>
+            <textarea
+              value={descricaoDif}
+              onChange={(e) => setDescricaoDif(e.target.value)}
+              placeholder="Ex: troca letras ao escrever, não consegue ler sílabas com R, esquece a tabuada do 7..."
+              className="w-full min-h-[90px] rounded-xl border-2 border-border bg-background px-3 py-2 text-sm focus:border-violet-500 focus:outline-none resize-none"
+            />
+            <p className="text-[11px] text-muted-foreground">
+              Quanto mais detalhe, melhor o app ajuda a encontrar habilidades e aulas certas.
+            </p>
+          </div>
         </Pergunta>
       )}
+
 
       {/* STEP 2 — idade */}
       {step === 2 && (
