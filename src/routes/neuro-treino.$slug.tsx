@@ -2037,33 +2037,34 @@ function TracadoLetras({ p, onDone }: any) {
           {/* Esqueleto da letra: linhas grossas pontilhadas (guia única) */}
           {guia.map((s) => (
             <g key={s.k}>
-              {/* contorno pontilhado gordinho */}
               <line
-                x1={s.x1}
-                y1={s.y1}
-                x2={s.x2}
-                y2={s.y2}
-                stroke={COR}
-                strokeOpacity={0.3}
-                strokeWidth={16}
-                strokeDasharray="2.5 3"
-                strokeLinecap="round"
+                x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2}
+                stroke={COR} strokeOpacity={0.3} strokeWidth={16}
+                strokeDasharray="2.5 3" strokeLinecap="round"
               />
-              {/* preenchimento laranja que aparece conforme a criança escreve */}
               <line
-                x1={s.x1}
-                y1={s.y1}
-                x2={s.x2}
-                y2={s.y2}
-                stroke={COR}
-                strokeOpacity={fillOp}
-                strokeWidth={16}
+                x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2}
+                stroke={COR} strokeOpacity={fillOp} strokeWidth={16}
                 strokeLinecap="round"
               />
             </g>
           ))}
 
+          {/* Setas de direção (início de cada traço) */}
+          {setas.map((s) => (
+            <g key={`seta-${s.num}`} transform={`translate(${s.x} ${s.y}) rotate(${s.angle})`}>
+              {/* círculo numerado verde */}
+              <circle cx={0} cy={0} r={5} fill="#16a34a" stroke="#fff" strokeWidth={0.8} />
+              <text x={0} y={0} textAnchor="middle" dominantBaseline="central"
+                fontSize={6} fontWeight={900} fill="#fff" transform={`rotate(${-s.angle})`}>
+                {s.num}
+              </text>
+              {/* seta apontando na direção do traço */}
+              <polygon points="8,-3 14,0 8,3" fill="#16a34a" />
+            </g>
+          ))}
         </svg>
+
 
         <canvas
           ref={canvasRef}
