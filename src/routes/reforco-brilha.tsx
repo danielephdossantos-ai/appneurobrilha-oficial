@@ -414,10 +414,7 @@ function ReforcoBrilha() {
                     {searchResult.aulas.map((aula) => (
                       <button
                         key={aula.id}
-                        onClick={() => {
-                          setTopic(aula.titulo);
-                          startLesson(aula.titulo);
-                        }}
+                        onClick={() => setAulaAberta({ id: aula.id, titulo: aula.titulo })}
                         className="text-left p-4 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 transition-all flex justify-between items-start gap-3"
                       >
                         <div className="flex-1 min-w-0">
