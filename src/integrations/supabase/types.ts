@@ -2650,33 +2650,39 @@ export type Database = {
           faixa_etaria: string | null
           habilidade_id: string
           id: string
+          imagem_capa_url: string | null
           nivel: string
           objetivo: string | null
           ordem: number
           titulo: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           created_at?: string
           faixa_etaria?: string | null
           habilidade_id: string
           id?: string
+          imagem_capa_url?: string | null
           nivel?: string
           objetivo?: string | null
           ordem?: number
           titulo: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           created_at?: string
           faixa_etaria?: string | null
           habilidade_id?: string
           id?: string
+          imagem_capa_url?: string | null
           nivel?: string
           objetivo?: string | null
           ordem?: number
           titulo?: string
           updated_at?: string
+          video_url?: string | null
         }
         Relationships: [
           {
@@ -2799,6 +2805,89 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      rb_midia_vinculos: {
+        Row: {
+          created_at: string
+          entidade_id: string
+          entidade_tipo: string
+          id: string
+          midia_id: string
+          ordem: number
+        }
+        Insert: {
+          created_at?: string
+          entidade_id: string
+          entidade_tipo: string
+          id?: string
+          midia_id: string
+          ordem?: number
+        }
+        Update: {
+          created_at?: string
+          entidade_id?: string
+          entidade_tipo?: string
+          id?: string
+          midia_id?: string
+          ordem?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_midia_vinculos_midia_id_fkey"
+            columns: ["midia_id"]
+            isOneToOne: false
+            referencedRelation: "rb_midias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_midias: {
+        Row: {
+          altura: number | null
+          created_at: string
+          descricao: string | null
+          duracao_seg: number | null
+          id: string
+          largura: number | null
+          tags: string[]
+          tamanho_bytes: number | null
+          thumbnail_url: string | null
+          tipo: string
+          titulo: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          altura?: number | null
+          created_at?: string
+          descricao?: string | null
+          duracao_seg?: number | null
+          id?: string
+          largura?: number | null
+          tags?: string[]
+          tamanho_bytes?: number | null
+          thumbnail_url?: string | null
+          tipo: string
+          titulo?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          altura?: number | null
+          created_at?: string
+          descricao?: string | null
+          duracao_seg?: number | null
+          id?: string
+          largura?: number | null
+          tags?: string[]
+          tamanho_bytes?: number | null
+          thumbnail_url?: string | null
+          tipo?: string
+          titulo?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
       }
       rb_orientacoes_familia: {
         Row: {
