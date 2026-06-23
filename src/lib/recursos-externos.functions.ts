@@ -31,16 +31,16 @@ function getServerClient() {
 
 // ---------- Wikipédia (PT) ----------
 async function buscarWikipedia(query: string): Promise<RecursoExterno[]> {
-  // 1) opensearch retorna lista de títulos relacionados
-  const searchUrl = `https://pt.wikipedia.org/w/api.php?action=opensearch&format=json&limit=5&search=${encodeURIComponent(
+  // 1) fulltext search retorna lista de artigos relevantes
+  const searchUrl = `https://pt.wikipedia.org/w/api.php?action=query&list=search&format=json&srlimit=5&srsearch=${encodeURIComponent(
     query,
-  )}&origin=*`;
+  )}`;
   const searchRes = await fetch(searchUrl, {
     headers: { "User-Agent": "NeuroBrilhaKids/1.0 (educacional)" },
   });
   if (!searchRes.ok) return [];
-  const data = (await searchRes.json()) as [string, string[], string[], string[]];
-  const titles = data[1] || [];
+  const data = (await searchRes.json()) as { query?: { search?: Array<{ title: string }> } };
+  const titles = (data.query?.search || []).map((h) => h.title);
   if (titles.length === 0) return [];
 
   // 2) buscar summary REST de cada título (em paralelo)
