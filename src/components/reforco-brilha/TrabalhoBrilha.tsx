@@ -28,6 +28,7 @@ import {
 } from "@/lib/recursos-externos.functions";
 import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
+import { SpeakButton } from "@/components/ui/SpeakButton";
 
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem";
