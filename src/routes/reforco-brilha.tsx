@@ -156,6 +156,7 @@ function ReforcoBrilha() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<import("@/lib/reforco-brilha-search").SearchResult | null>(null);
+  const [aulaAberta, setAulaAberta] = useState<{ id: string; titulo: string } | null>(null);
   const queryClient = useQueryClient();
 
   const runSearch = async (q: string) => {
