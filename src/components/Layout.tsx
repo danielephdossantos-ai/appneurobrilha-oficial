@@ -94,6 +94,7 @@ const navPais = [
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
   { to: "/perfil-aluno", label: "Perfil do Aluno", icon: ClipboardList },
+  { to: "/curadoria-aulas", label: "Curadoria de Aulas", icon: Sparkles },
   { to: "/auditoria-pedagogica", label: "Auditoria", icon: ClipboardCheck },
 ] as const;
 
@@ -113,6 +114,7 @@ const navigationSequence = [
   "/agenda",
   "/relatorio",
   "/perfil-aluno",
+  "/curadoria-aulas",
   "/auditoria-pedagogica",
 ];
 

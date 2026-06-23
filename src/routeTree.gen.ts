@@ -24,6 +24,7 @@ import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
+import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
 import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
@@ -118,6 +119,11 @@ const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
 const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
   id: '/escola-brilha',
   path: '/escola-brilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
+  id: '/curadoria-aulas',
+  path: '/curadoria-aulas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ColecaoPipRoute = ColecaoPipRouteImport.update({
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
@@ -272,6 +279,7 @@ export interface FileRoutesByTo {
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
@@ -309,6 +317,7 @@ export interface FileRoutesById {
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
+  '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/curadoria-aulas'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
@@ -385,6 +395,7 @@ export interface FileRouteTypes {
     | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/curadoria-aulas'
     | '/gerador-procedural'
     | '/jornada-365'
     | '/loja-mascotes'
@@ -421,6 +432,7 @@ export interface FileRouteTypes {
     | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
+    | '/curadoria-aulas'
     | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
@@ -459,6 +471,7 @@ export interface RootRouteChildren {
   BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
+  CuradoriaAulasRoute: typeof CuradoriaAulasRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   Jornada365Route: typeof Jornada365Route
@@ -583,6 +596,13 @@ declare module '@tanstack/react-router' {
       path: '/escola-brilha'
       fullPath: '/escola-brilha'
       preLoaderRoute: typeof EscolaBrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/curadoria-aulas': {
+      id: '/curadoria-aulas'
+      path: '/curadoria-aulas'
+      fullPath: '/curadoria-aulas'
+      preLoaderRoute: typeof CuradoriaAulasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/colecao-pip': {
@@ -784,6 +804,7 @@ const rootRouteChildren: RootRouteChildren = {
   BibliotecaAlfaRoute: BibliotecaAlfaRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
+  CuradoriaAulasRoute: CuradoriaAulasRoute,
   EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,
   GeradorProceduralRoute: GeradorProceduralRoute,
   Jornada365Route: Jornada365Route,
