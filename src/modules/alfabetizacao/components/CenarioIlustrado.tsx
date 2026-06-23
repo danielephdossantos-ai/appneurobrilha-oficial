@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { objetoImg } from "@/data/neuro-treino/objetos";
 import casteloBg from "@/assets/cenarios/castelo.jpg";
+import jardimBg from "@/assets/cenarios/jardim.jpg";
+import lagoBg from "@/assets/cenarios/lago.jpg";
+import magicoBg from "@/assets/cenarios/magico.jpg";
 
 type Cenario =
   | "castelo"
@@ -34,7 +37,8 @@ const MAPA_CENARIO: Record<string, Cenario> = {
   PORQUINHO: "fazenda",
   SOL: "ceu", CHUVA: "ceu", AVIAO: "ceu", DRONE: "ceu",
   GATO: "quintal", CACHORRO: "quintal", DOG: "quintal", RATO: "quintal",
-  BOLA: "quintal", BOLO: "quintal", PRESENTE: "quintal", CORACAO: "quintal",
+  BOLA: "quintal", BOLO: "quintal", PRESENTE: "quintal",
+  CORACAO: "magico", FELIZ: "magico", TRISTE: "jardim", MEDO: "magico",
   CASA: "quintal",
 };
 
@@ -69,7 +73,12 @@ interface Props {
 
 export function CenarioIlustrado({ imagem, vocabBase, onTocarPersonagem }: Props) {
   const cen = inferCenario(imagem, vocabBase);
-  const bgImg: Partial<Record<Cenario, string>> = { castelo: casteloBg };
+  const bgImg: Partial<Record<Cenario, string>> = {
+    castelo: casteloBg,
+    jardim: jardimBg,
+    lago: lagoBg,
+    magico: magicoBg,
+  };
   const fundoIlustrado = bgImg[cen];
 
   return (
