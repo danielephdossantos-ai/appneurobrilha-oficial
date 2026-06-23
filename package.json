@@ -70,6 +70,7 @@
     "express-session": "^1.19.0",
     "framer-motion": "^12.40.0",
     "h3-v2": "npm:h3@2.0.1-rc.20",
+    "html2pdf.js": "^0.14.0",
     "idb-keyval": "^6.2.4",
     "input-otp": "^1.4.2",
     "jspdf": "^4.2.1",
