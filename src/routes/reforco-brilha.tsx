@@ -42,6 +42,7 @@ import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
+import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -404,6 +405,31 @@ function ReforcoBrilha() {
                   </div>
                 </div>
               </Card>
+
+              <PlanoIntervencao
+                habilidade={{
+                  id: searchResult.main.id,
+                  nome: searchResult.main.nome,
+                  descricao: searchResult.main.descricao,
+                }}
+                dificuldadeBuscada={searchQuery}
+                aulas={searchResult.aulas.map((a) => ({
+                  id: a.id,
+                  titulo: a.titulo,
+                  nivel: a.nivel,
+                  faixa_etaria: a.faixa_etaria,
+                  objetivo: a.objetivo,
+                }))}
+                atividades={searchResult.atividades.map((at) => ({
+                  id: at.id,
+                  titulo: at.titulo,
+                  modulo: at.modulo,
+                  rota: at.rota,
+                }))}
+                onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+              />
+
+
 
               {searchResult.aulas.length > 0 && (
                 <div className="space-y-3">

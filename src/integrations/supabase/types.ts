@@ -2841,6 +2841,65 @@ export type Database = {
           },
         ]
       }
+      rb_planos_intervencao: {
+        Row: {
+          atividades_sugeridas: Json
+          aulas_concluidas: Json
+          created_at: string
+          dificuldade: string
+          habilidade_id: string
+          id: string
+          objetivo: string | null
+          observacoes: string | null
+          progresso: number
+          sequencia_aulas: Json
+          status: string
+          tempo_estimado_min: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          atividades_sugeridas?: Json
+          aulas_concluidas?: Json
+          created_at?: string
+          dificuldade: string
+          habilidade_id: string
+          id?: string
+          objetivo?: string | null
+          observacoes?: string | null
+          progresso?: number
+          sequencia_aulas?: Json
+          status?: string
+          tempo_estimado_min?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          atividades_sugeridas?: Json
+          aulas_concluidas?: Json
+          created_at?: string
+          dificuldade?: string
+          habilidade_id?: string
+          id?: string
+          objetivo?: string | null
+          observacoes?: string | null
+          progresso?: number
+          sequencia_aulas?: Json
+          status?: string
+          tempo_estimado_min?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_planos_intervencao_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_sinais_alerta: {
         Row: {
           created_at: string
