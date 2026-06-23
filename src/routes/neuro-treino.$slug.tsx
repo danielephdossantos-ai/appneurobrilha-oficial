@@ -2034,40 +2034,35 @@ function TracadoLetras({ p, onDone }: any) {
         style={{ maxWidth: 340 }}
       >
         <svg ref={svgRef} viewBox="0 0 100 100" className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] pointer-events-none">
-          {/* Letra contorno delicado */}
-          <text
-            x={50}
-            y={52}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fontSize={88}
-            fontWeight={900}
-            fontFamily='"Comic Sans MS","Chalkboard SE",sans-serif'
-            fill={COR}
-            fillOpacity={fillOp * 0.85}
-            stroke={COR}
-            strokeOpacity={0.55}
-            strokeWidth={0.5}
-            strokeDasharray="1.5 1.5"
-          >
-            {p.letra}
-          </text>
-
-          {/* Linhas guia pontilhadas dentro do traço */}
+          {/* Esqueleto da letra: linhas grossas pontilhadas (guia única) */}
           {guia.map((s) => (
-            <line
-              key={s.k}
-              x1={s.x1}
-              y1={s.y1}
-              x2={s.x2}
-              y2={s.y2}
-              stroke={COR}
-              strokeOpacity={0.45}
-              strokeWidth={1.2}
-              strokeDasharray="2 2"
-              strokeLinecap="round"
-            />
+            <g key={s.k}>
+              {/* contorno pontilhado delicado */}
+              <line
+                x1={s.x1}
+                y1={s.y1}
+                x2={s.x2}
+                y2={s.y2}
+                stroke={COR}
+                strokeOpacity={0.35}
+                strokeWidth={10}
+                strokeDasharray="2.5 2.5"
+                strokeLinecap="round"
+              />
+              {/* preenchimento que aparece conforme criança traça */}
+              <line
+                x1={s.x1}
+                y1={s.y1}
+                x2={s.x2}
+                y2={s.y2}
+                stroke={COR}
+                strokeOpacity={fillOp}
+                strokeWidth={10}
+                strokeLinecap="round"
+              />
+            </g>
           ))}
+
 
           {/* Setas de direção numeradas */}
           {setas.map((s) => (
