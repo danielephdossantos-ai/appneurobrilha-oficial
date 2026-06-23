@@ -377,9 +377,62 @@ PERGUNTA DA MÃE: "${pergunta}"`;
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              A mãe escreve o tema e o Sistema Brilha cria a aula perfeita.
+              Digite um tema (ex: "Tabuada do 7") <b>ou</b> uma dúvida sobre seu filho
+              (ex: <i>"Meu filho não sabe ler"</i>) — a IA detecta automaticamente.
             </p>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {SUGESTOES_MAE.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => {
+                    setTopic(s);
+                    askParentGuide(s);
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold hover:bg-rose-100 flex items-center gap-1"
+                >
+                  <Heart className="h-3 w-3" /> {s}
+                </button>
+              ))}
+            </div>
           </Card>
+
+          {(loadingGuidance || parentGuidance) && (
+            <Card className="bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 animate-in slide-in-from-top-4">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-500 grid place-items-center text-white shrink-0">
+                  <Lightbulb className="h-5 w-5" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-black text-rose-900">Orientação para a Mãe</h3>
+                  <p className="text-xs text-rose-700/80 italic">"{parentQuestion}"</p>
+                </div>
+                {!loadingGuidance && (
+                  <button
+                    onClick={() => {
+                      setParentGuidance(null);
+                      setParentQuestion("");
+                      setTopic("");
+                    }}
+                    className="text-xs font-bold text-rose-600 hover:underline"
+                  >
+                    Fechar
+                  </button>
+                )}
+              </div>
+              {loadingGuidance ? (
+                <div className="flex items-center gap-3 py-6 text-rose-700">
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <span className="font-bold text-sm">
+                    Consultando a biblioteca de estratégias…
+                  </span>
+                </div>
+              ) : (
+                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap leading-relaxed">
+                  {parentGuidance}
+                </div>
+              )}
+            </Card>
+          )}
 
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
