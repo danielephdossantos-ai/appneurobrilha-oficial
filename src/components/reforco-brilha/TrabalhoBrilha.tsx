@@ -454,6 +454,24 @@ function EditorTrabalho({
           {trabalhoExistente ? "Editar trabalho" : "Novo trabalho"}
         </h3>
         <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 px-2 py-1 rounded bg-amber-50 border border-amber-200">
+            {autoStatus === "salvando"
+              ? "Salvando..."
+              : autoStatus === "salvo"
+                ? "✓ Salvo"
+                : autoStatus === "erro"
+                  ? "⚠ Erro ao salvar"
+                  : "Auto-salvar ativo"}
+          </span>
+          <button
+            onClick={rodarRevisao}
+            disabled={revisando}
+            className="text-xs font-black bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
+            title="Revisar ortografia e acentuação"
+          >
+            {revisando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <SpellCheck className="h-3.5 w-3.5" />}
+            Revisar Português
+          </button>
           <button
             onClick={() => {
               if (!tema.trim()) {
@@ -466,6 +484,7 @@ function EditorTrabalho({
           >
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
+
           <button
             onClick={exportarPDF}
             className="text-xs font-bold bg-white border-2 border-amber-300 text-amber-800 hover:bg-amber-50 px-3 py-1.5 rounded-lg flex items-center gap-1"
