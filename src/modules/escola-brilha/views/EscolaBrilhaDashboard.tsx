@@ -148,8 +148,25 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         <div className="flex justify-between items-end px-4 -mb-6 relative z-10 max-w-xs mx-auto mt-4">
           <motion.img src={pipaImg} alt="Pipa" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
           <motion.img src={pipImg} alt="Pip" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
-        </div>
       </div>
+
+      {/* Sistema interno: Matriz Pedagógica */}
+      <div className="px-4 max-w-lg mx-auto mt-6">
+        <button
+          onClick={() => navigate({ to: "/matriz-pedagogica" })}
+          className="w-full flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
+            <Network className="w-5 h-5 text-white" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white font-black text-sm">Matriz Pedagógica</p>
+            <p className="text-white/50 text-[11px] font-semibold">Sistema interno • Pré ao 9º Ano</p>
+          </div>
+          <ChevronRight className="w-5 h-5 text-white/40" />
+        </button>
+      </div>
+
 
       {/* Tab switcher */}
       <div className="mx-4 mt-8 mb-5 bg-white/10 rounded-2xl p-1 flex gap-1 max-w-lg mx-auto">
