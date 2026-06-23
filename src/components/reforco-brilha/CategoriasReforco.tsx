@@ -2,6 +2,8 @@ import { useState } from "react";
 import { GraduationCap, FileText } from "lucide-react";
 import { CalendarioProvas } from "./CalendarioProvas";
 import { TrabalhoBrilha } from "./TrabalhoBrilha";
+import { LembretesDiarios } from "./LembretesDiarios";
+
 
 interface Props {
   childId: string | null;
@@ -14,6 +16,9 @@ export function CategoriasReforco({ childId }: Props) {
 
   return (
     <div className="space-y-3">
+      {/* Lembretes do dia (in-app + push) */}
+      <LembretesDiarios childId={childId} />
+
       {/* Tabs */}
       <div className="flex gap-2 bg-white border-2 border-gray-200 rounded-xl p-1">
         <button
