@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { objetoImg } from "@/data/neuro-treino/objetos";
 import casteloBg from "@/assets/cenarios/castelo.jpg";
+import jardimBg from "@/assets/cenarios/jardim.jpg";
+import lagoBg from "@/assets/cenarios/lago.jpg";
+import magicoBg from "@/assets/cenarios/magico.jpg";
 
 type Cenario =
   | "castelo"
