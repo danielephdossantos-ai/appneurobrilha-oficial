@@ -3478,6 +3478,7 @@ export type Database = {
         Row: {
           blocos: Json
           child_id: string
+          concluido: boolean
           created_at: string
           data_entrega: string | null
           fontes: Json
@@ -3490,6 +3491,7 @@ export type Database = {
         Insert: {
           blocos?: Json
           child_id: string
+          concluido?: boolean
           created_at?: string
           data_entrega?: string | null
           fontes?: Json
@@ -3502,6 +3504,7 @@ export type Database = {
         Update: {
           blocos?: Json
           child_id?: string
+          concluido?: boolean
           created_at?: string
           data_entrega?: string | null
           fontes?: Json

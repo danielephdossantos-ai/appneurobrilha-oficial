@@ -48,8 +48,7 @@ import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamil
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
-import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
-import { TrabalhoBrilha } from "@/components/reforco-brilha/TrabalhoBrilha";
+import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -608,9 +607,7 @@ function ReforcoBrilha() {
 
           <RelatoriosReforco />
 
-          <CalendarioProvas childId={activeChild?.id ?? null} />
-
-          <TrabalhoBrilha childId={activeChild?.id ?? null} />
+          <CategoriasReforco childId={activeChild?.id ?? null} />
 
 
 

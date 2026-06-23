@@ -25,6 +25,8 @@ interface Prova {
 
 interface Props {
   childId: string | null;
+  filtroTipo?: "prova" | "trabalho" | "todos";
+  titulo?: string;
 }
 
 const MESES = [
@@ -40,7 +42,7 @@ function ymd(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-export function CalendarioProvas({ childId }: Props) {
+export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Props) {
   const qc = useQueryClient();
   const today = new Date();
   const [cursor, setCursor] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
@@ -48,22 +50,26 @@ export function CalendarioProvas({ childId }: Props) {
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
-  const [tipo, setTipo] = useState<"prova" | "trabalho">("prova");
+  const [tipo, setTipo] = useState<"prova" | "trabalho">(
+    filtroTipo === "trabalho" ? "trabalho" : "prova"
+  );
 
   const monthStart = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
   const monthEnd = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
 
   const { data: provas = [] } = useQuery({
-    queryKey: ["exam_missions", childId, cursor.getFullYear(), cursor.getMonth()],
+    queryKey: ["exam_missions", childId, cursor.getFullYear(), cursor.getMonth(), filtroTipo],
     queryFn: async (): Promise<Prova[]> => {
       if (!childId) return [];
-      const { data, error } = await supabase
+      let q = supabase
         .from("exam_missions")
         .select("id,child_id,subject,exam_date,notes,tipo")
         .eq("child_id", childId)
         .gte("exam_date", ymd(monthStart))
         .lte("exam_date", ymd(monthEnd))
         .order("exam_date", { ascending: true });
+      if (filtroTipo !== "todos") q = q.eq("tipo", filtroTipo);
+      const { data, error } = await q;
       if (error) {
         console.warn("[calendario] erro:", error);
         return [];
@@ -140,7 +146,7 @@ export function CalendarioProvas({ childId }: Props) {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-black uppercase tracking-widest text-indigo-700 flex items-center gap-2">
           <CalendarDays className="h-4 w-4" />
-          Calendário Escolar
+          {titulo ?? "Calendário Escolar"}
         </h3>
         <div className="flex items-center gap-1">
           <button
@@ -238,32 +244,34 @@ export function CalendarioProvas({ childId }: Props) {
 
           {showForm && (
             <form onSubmit={salvarProva} className="space-y-2 bg-white border-2 border-indigo-200 rounded-xl p-3">
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setTipo("prova")}
-                  className={[
-                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
-                    tipo === "prova"
-                      ? "bg-rose-100 border-rose-400 text-rose-800"
-                      : "bg-white border-gray-200 text-gray-500",
-                  ].join(" ")}
-                >
-                  Prova
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setTipo("trabalho")}
-                  className={[
-                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
-                    tipo === "trabalho"
-                      ? "bg-amber-100 border-amber-400 text-amber-800"
-                      : "bg-white border-gray-200 text-gray-500",
-                  ].join(" ")}
-                >
-                  Trabalho
-                </button>
-              </div>
+              {filtroTipo === "todos" && (
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTipo("prova")}
+                    className={[
+                      "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                      tipo === "prova"
+                        ? "bg-rose-100 border-rose-400 text-rose-800"
+                        : "bg-white border-gray-200 text-gray-500",
+                    ].join(" ")}
+                  >
+                    Prova
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTipo("trabalho")}
+                    className={[
+                      "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                      tipo === "trabalho"
+                        ? "bg-amber-100 border-amber-400 text-amber-800"
+                        : "bg-white border-gray-200 text-gray-500",
+                    ].join(" ")}
+                  >
+                    Trabalho
+                  </button>
+                </div>
+              )}
               <input
                 type="text"
                 value={subject}
