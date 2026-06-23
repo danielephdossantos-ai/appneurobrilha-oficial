@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import {
   X,
   ChevronLeft,
@@ -47,18 +48,10 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
 };
 
 function speak(text: string) {
-  try {
-    const synth = window.speechSynthesis;
-    if (!synth) return;
-    synth.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "pt-BR";
-    u.rate = 0.95;
-    synth.speak(u);
-  } catch {
-    // ignore
-  }
+  stopSpeaking();
+  speakChunked(text, { rate: 0.95, pitch: 1 });
 }
+
 
 function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
   const c = pagina.conteudo || {};
