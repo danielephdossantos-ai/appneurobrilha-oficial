@@ -326,23 +326,7 @@ function Treino() {
 
         {/* ── ALFABETIZAÇÃO BRILHA (destaque) ─────────────────────── */}
         <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Link
-            to="/alfabetizacao"
-            className="group relative overflow-hidden rounded-3xl p-4 shadow-lg bg-gradient-to-br from-pink-500 via-fuchsia-500 to-indigo-500 text-white hover:scale-[1.01] active:scale-95 transition-transform flex items-center gap-3"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-white/25 grid place-items-center text-4xl shrink-0">
-              🅰️
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
-                Alfabetização Brilha
-              </div>
-              <div className="text-base font-black leading-tight">Aventura das Palavras</div>
-              <div className="text-[11px] opacity-90 leading-tight mt-0.5">
-                Trilha com castelos · só imagens e voz
-              </div>
-            </div>
-          </Link>
+
 
           <Link
             to="/biblioteca-alfa"
