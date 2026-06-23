@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
+import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
+import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
 
 type Area =
   | "leitura"
@@ -272,6 +274,9 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
             <strong>Resumo:</strong> {areaSel?.label} · {idade} anos · {serie} ·{" "}
             {TEMPOS.find((t) => t.id === tempo)?.label}
           </div>
+
+          {areaSel && <PlanoAutomatico area={areaSel.id as AreaPlano} onAbrirAula={onAbrirAula} />}
+
 
           {loading && (
             <div className="py-8 text-center text-sm text-muted-foreground">Buscando recomendações...</div>
