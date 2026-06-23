@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { EggHatchCinematic, shouldShowEggHatch } from "@/components/pip/EggHatchCinematic";
 import { cn } from "@/utils/utils";
+import { LembretesDiarios } from "@/components/reforco-brilha/LembretesDiarios";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -277,6 +278,9 @@ function Index() {
             </div>
           </Link>
         )}
+
+        {/* Lembretes de provas e trabalhos — clicáveis */}
+        {activeChild && <LembretesDiarios childId={activeChild.id} />}
 
         {/* Grade completa — todas as 12 categorias */}
         <div>
