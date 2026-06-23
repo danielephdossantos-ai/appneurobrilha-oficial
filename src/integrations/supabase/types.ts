@@ -2600,6 +2600,282 @@ export type Database = {
           },
         ]
       }
+      rb_atividades_relacionadas: {
+        Row: {
+          atividade_id: string
+          created_at: string
+          habilidade_id: string
+          id: string
+          modulo: string | null
+          ordem: number
+          rota: string | null
+          titulo: string | null
+          updated_at: string
+        }
+        Insert: {
+          atividade_id: string
+          created_at?: string
+          habilidade_id: string
+          id?: string
+          modulo?: string | null
+          ordem?: number
+          rota?: string | null
+          titulo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          atividade_id?: string
+          created_at?: string
+          habilidade_id?: string
+          id?: string
+          modulo?: string | null
+          ordem?: number
+          rota?: string | null
+          titulo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_atividades_relacionadas_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_aulas: {
+        Row: {
+          created_at: string
+          faixa_etaria: string | null
+          habilidade_id: string
+          id: string
+          nivel: string
+          objetivo: string | null
+          ordem: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          faixa_etaria?: string | null
+          habilidade_id: string
+          id?: string
+          nivel?: string
+          objetivo?: string | null
+          ordem?: number
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          faixa_etaria?: string | null
+          habilidade_id?: string
+          id?: string
+          nivel?: string
+          objetivo?: string | null
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_aulas_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_categorias: {
+        Row: {
+          cor: string | null
+          created_at: string
+          descricao: string | null
+          icone: string | null
+          id: string
+          nome: string
+          ordem: number
+          updated_at: string
+        }
+        Insert: {
+          cor?: string | null
+          created_at?: string
+          descricao?: string | null
+          icone?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          updated_at?: string
+        }
+        Update: {
+          cor?: string | null
+          created_at?: string
+          descricao?: string | null
+          icone?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      rb_dicas: {
+        Row: {
+          created_at: string
+          habilidade_id: string
+          id: string
+          ordem: number
+          publico: string
+          texto: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          habilidade_id: string
+          id?: string
+          ordem?: number
+          publico?: string
+          texto: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          habilidade_id?: string
+          id?: string
+          ordem?: number
+          publico?: string
+          texto?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_dicas_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_habilidades: {
+        Row: {
+          categoria_id: string
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          ordem: number
+          palavras_chave: string[]
+          updated_at: string
+        }
+        Insert: {
+          categoria_id: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          palavras_chave?: string[]
+          updated_at?: string
+        }
+        Update: {
+          categoria_id?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          palavras_chave?: string[]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_habilidades_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "rb_categorias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_paginas_aula: {
+        Row: {
+          aula_id: string
+          conteudo: Json
+          created_at: string
+          id: string
+          ordem: number
+          tipo: string
+          titulo: string | null
+          updated_at: string
+        }
+        Insert: {
+          aula_id: string
+          conteudo?: Json
+          created_at?: string
+          id?: string
+          ordem?: number
+          tipo?: string
+          titulo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          aula_id?: string
+          conteudo?: Json
+          created_at?: string
+          id?: string
+          ordem?: number
+          tipo?: string
+          titulo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_paginas_aula_aula_id_fkey"
+            columns: ["aula_id"]
+            isOneToOne: false
+            referencedRelation: "rb_aulas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rb_sinais_alerta: {
+        Row: {
+          created_at: string
+          descricao: string
+          habilidade_id: string
+          id: string
+          severidade: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descricao: string
+          habilidade_id: string
+          id?: string
+          severidade?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string
+          habilidade_id?: string
+          id?: string
+          severidade?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_sinais_alerta_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           child_id: string | null
@@ -3169,6 +3445,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -3179,9 +3476,19 @@ export type Database = {
         Returns: undefined
       }
       get_auth_user_id: { Args: never; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       reset_daily_coins: { Args: never; Returns: undefined }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
     }
     Enums: {
+      app_role: "admin" | "moderator" | "user"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       mascot_emotion:
         | "happy"
@@ -3318,6 +3625,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      app_role: ["admin", "moderator", "user"],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       mascot_emotion: [
         "happy",
