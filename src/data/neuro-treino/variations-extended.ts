@@ -196,17 +196,106 @@ export const NOMEACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
 // GRUPO 2: COORDENAÇÃO MOTORA (4 categorias)
 // ──────────────────────────────────────────────
 
-// C1. TOQUE EM SEQUÊNCIA — numeros/pontos na tela, tocar em ordem crescente
+// C1. TOQUE EM SEQUÊNCIA — 10 categorias com variedade (números, letras, animais, objetos)
+const TS_CATEGORIAS: Array<{
+  nome: string;
+  tipo: "numero" | "letra" | "imagem";
+  bg: "ceu" | "grama" | "selva" | "espaco" | "fazenda" | "oceano";
+  itens: Array<{ id: string; label: string }>;
+}> = [
+  {
+    nome: "Números 1-5", tipo: "numero", bg: "ceu",
+    itens: [1, 2, 3, 4, 5].map((n) => ({ id: `n${n}`, label: String(n) })),
+  },
+  {
+    nome: "Números 1-7", tipo: "numero", bg: "grama",
+    itens: [1, 2, 3, 4, 5, 6, 7].map((n) => ({ id: `n${n}`, label: String(n) })),
+  },
+  {
+    nome: "Letras A-E", tipo: "letra", bg: "ceu",
+    itens: ["A", "B", "C", "D", "E"].map((l) => ({ id: l, label: l })),
+  },
+  {
+    nome: "Letras A-H", tipo: "letra", bg: "grama",
+    itens: ["A", "B", "C", "D", "E", "F", "G", "H"].map((l) => ({ id: l, label: l })),
+  },
+  {
+    nome: "Animais fofos", tipo: "imagem", bg: "grama",
+    itens: [
+      { id: "gato", label: "GATO" }, { id: "cachorro", label: "CACHORRO" },
+      { id: "coelho", label: "COELHO" }, { id: "pato", label: "PATO" },
+      { id: "passaro", label: "PÁSSARO" },
+    ],
+  },
+  {
+    nome: "Selva", tipo: "imagem", bg: "selva",
+    itens: [
+      { id: "leao", label: "LEÃO" }, { id: "tigre", label: "TIGRE" },
+      { id: "elefante", label: "ELEFANTE" }, { id: "macaco", label: "MACACO" },
+      { id: "raposa", label: "RAPOSA" }, { id: "tartaruga", label: "TARTARUGA" },
+    ],
+  },
+  {
+    nome: "Frutas", tipo: "imagem", bg: "grama",
+    itens: [
+      { id: "maca", label: "MAÇÃ" }, { id: "banana", label: "BANANA" },
+      { id: "morango", label: "MORANGO" }, { id: "uva", label: "UVA" },
+    ],
+  },
+  {
+    nome: "Veículos", tipo: "imagem", bg: "ceu",
+    itens: [
+      { id: "carro", label: "CARRO" }, { id: "moto", label: "MOTO" },
+      { id: "onibus", label: "ÔNIBUS" }, { id: "trem", label: "TREM" },
+      { id: "caminhao", label: "CAMINHÃO" },
+    ],
+  },
+  {
+    nome: "Espaço", tipo: "imagem", bg: "espaco",
+    itens: [
+      { id: "sol", label: "SOL" }, { id: "lua", label: "LUA" },
+      { id: "estrela", label: "ESTRELA" }, { id: "foguete", label: "FOGUETE" },
+      { id: "planeta", label: "PLANETA" }, { id: "astronauta", label: "ASTRONAUTA" },
+    ],
+  },
+  {
+    nome: "Fazenda", tipo: "imagem", bg: "fazenda",
+    itens: [
+      { id: "vaca", label: "VACA" }, { id: "porco", label: "PORCO" },
+      { id: "galinha", label: "GALINHA" }, { id: "ovelha", label: "OVELHA" },
+      { id: "cavalo", label: "CAVALO" }, { id: "pintinho", label: "PINTINHO" },
+    ],
+  },
+];
+
 export const TOQUE_SEQUENCIA_VARS: Variation[] = range(30).map((i) => {
-  const qtd = 3 + (i % 5); // 3..7 pontos
-  const pontos = Array.from({ length: qtd }, (_, k) => ({
-    id: k + 1,
-    x: 10 + ((k * 17 + i * 11) % 80),
-    y: 10 + ((k * 23 + i * 7) % 80),
+  const cat = TS_CATEGORIAS[i % TS_CATEGORIAS.length];
+  // Variedade por rodada: aumenta a quantidade (3..N) conforme cresce o índice
+  const qtdMax = cat.itens.length;
+  const qtd = Math.min(qtdMax, 3 + Math.floor(i / TS_CATEGORIAS.length));
+  // Embaralha itens pseudo-aleatoriamente, mantém posição
+  const seed = i + 1;
+  const ordemBase = [...cat.itens]
+    .map((it, k) => ({ it, w: (k * 13 + seed * 7) % 100 }))
+    .sort((a, b) => a.w - b.w)
+    .slice(0, qtd)
+    .map(({ it }) => it);
+  const pontos = ordemBase.map((it, k) => ({
+    id: it.id,
+    label: it.label,
+    x: 12 + ((k * 19 + seed * 11) % 76),
+    y: 12 + ((k * 27 + seed * 9) % 70),
   }));
   return {
     id: `ts-${i + 1}`,
-    payload: { pontos, ordem: pontos.map((p) => p.id), tempoLimite: 20 + qtd * 3 },
+    payload: {
+      tipo: cat.tipo,
+      bg: cat.bg,
+      categoria: cat.nome,
+      pontos,
+      ordem: pontos.map((p) => p.id),
+      tempoLimite: 20 + qtd * 4,
+    },
   };
 });
 
