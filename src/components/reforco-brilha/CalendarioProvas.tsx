@@ -13,6 +13,7 @@ import {
   FileText,
 } from "lucide-react";
 import { toast } from "sonner";
+import { PlanoEstudoProva } from "./PlanoEstudoProva";
 
 interface Prova {
   id: string;
@@ -306,39 +307,50 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
               <div
                 key={p.id}
                 className={[
-                  "flex items-start gap-3 bg-white border-2 rounded-xl p-3",
+                  "bg-white border-2 rounded-xl p-3 space-y-2",
                   isTrab ? "border-amber-200" : "border-rose-100",
                 ].join(" ")}
               >
-                <div
-                  className={[
-                    "h-9 w-9 rounded-lg grid place-items-center shrink-0",
-                    isTrab ? "bg-amber-100" : "bg-rose-100",
-                  ].join(" ")}
-                >
-                  {isTrab ? (
-                    <FileText className="h-5 w-5 text-amber-600" />
-                  ) : (
-                    <GraduationCap className="h-5 w-5 text-rose-600" />
-                  )}
+                <div className="flex items-start gap-3">
+                  <div
+                    className={[
+                      "h-9 w-9 rounded-lg grid place-items-center shrink-0",
+                      isTrab ? "bg-amber-100" : "bg-rose-100",
+                    ].join(" ")}
+                  >
+                    {isTrab ? (
+                      <FileText className="h-5 w-5 text-amber-600" />
+                    ) : (
+                      <GraduationCap className="h-5 w-5 text-rose-600" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                      {isTrab ? "Trabalho" : "Prova"}
+                    </p>
+                    <p className="text-sm font-bold text-foreground">{p.subject}</p>
+                    {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
+                  </div>
+                  <button
+                    onClick={() => removerProva(p.id)}
+                    className="p-1 text-muted-foreground hover:text-rose-600"
+                    aria-label="Remover"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
-                    {isTrab ? "Trabalho" : "Prova"}
-                  </p>
-                  <p className="text-sm font-bold text-foreground">{p.subject}</p>
-                  {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
-                </div>
-                <button
-                  onClick={() => removerProva(p.id)}
-                  className="p-1 text-muted-foreground hover:text-rose-600"
-                  aria-label="Remover"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                {!isTrab && (
+                  <PlanoEstudoProva
+                    missionId={p.id}
+                    subject={p.subject}
+                    examDate={p.exam_date}
+                    notes={p.notes}
+                  />
+                )}
               </div>
             );
           })}
+
         </div>
       </div>
 
