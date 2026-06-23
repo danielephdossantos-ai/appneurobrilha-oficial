@@ -708,7 +708,7 @@ function ReforcoBrilha() {
                 <div>
                   <h4 className="font-bold text-sm">Neuro-Adaptação Ativa</h4>
                   <p className="text-[11px] text-muted-foreground">
-                    O sistema ensina muito melhor que um professor comum.
+                    Um reforço extra em casa para apoiar o trabalho dos professores.
                   </p>
                 </div>
               </div>
