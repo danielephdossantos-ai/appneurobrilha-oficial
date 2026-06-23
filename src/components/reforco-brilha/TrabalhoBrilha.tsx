@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
@@ -18,13 +18,17 @@ import {
   ExternalLink,
   Loader2,
   GraduationCap,
+  SpellCheck,
+  CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
   buscarRecursosExternos,
   type RecursoExterno,
 } from "@/lib/recursos-externos.functions";
+import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
+
 
 type BlocoTipo = "titulo" | "paragrafo" | "imagem";
 interface Bloco {
@@ -199,6 +203,7 @@ function EditorTrabalho({
   onFechar: () => void;
 }) {
   const buscar = useServerFn(buscarRecursosExternos);
+  const revisar = useServerFn(revisarPortugues);
   const documentoRef = useRef<HTMLDivElement>(null);
 
   const [titulo, setTitulo] = useState(trabalhoExistente?.titulo || "");
@@ -212,6 +217,110 @@ function EditorTrabalho({
   const [recursos, setRecursos] = useState<RecursoExterno[]>([]);
   const [salvando, setSalvando] = useState(false);
   const [tutorAberto, setTutorAberto] = useState(false);
+
+  // Auto-save
+  const [idAtual, setIdAtual] = useState<string | null>(trabalhoExistente?.id ?? null);
+  const [autoStatus, setAutoStatus] = useState<"idle" | "salvando" | "salvo" | "erro">("idle");
+  const ultimoSalvoRef = useRef<string>("");
+
+  // Revisão
+  const [revisando, setRevisando] = useState(false);
+  const [problemasPorBloco, setProblemasPorBloco] = useState<Record<string, string[]>>({});
+  const [resumoRevisao, setResumoRevisao] = useState<string | null>(null);
+  const [avisoCreditos, setAvisoCreditos] = useState<string | null>(null);
+
+  // Debounced auto-save
+  useEffect(() => {
+    if (!childId) return;
+    if (!titulo.trim() || !tema.trim()) return;
+    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes });
+    if (snapshot === ultimoSalvoRef.current) return;
+    const t = setTimeout(async () => {
+      setAutoStatus("salvando");
+      const payload = {
+        child_id: childId,
+        titulo: titulo.trim(),
+        tema: tema.trim(),
+        materia: materia.trim() || null,
+        blocos: blocos as any,
+        fontes: fontes as any,
+      };
+      try {
+        if (idAtual) {
+          const r = await supabase
+            .from("rb_trabalhos" as any)
+            .update(payload)
+            .eq("id", idAtual);
+          if (r.error) throw r.error;
+        } else {
+          const r = await supabase
+            .from("rb_trabalhos" as any)
+            .insert(payload)
+            .select("id")
+            .single();
+          if (r.error) throw r.error;
+          setIdAtual((r.data as any)?.id ?? null);
+        }
+        ultimoSalvoRef.current = snapshot;
+        setAutoStatus("salvo");
+      } catch (e) {
+        console.error("auto-save", e);
+        setAutoStatus("erro");
+      }
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [titulo, tema, materia, blocos, fontes, childId, idAtual]);
+
+  async function rodarRevisao() {
+    if (revisando) return;
+    const blocosTexto = blocos
+      .filter((b) => (b.tipo === "paragrafo" || b.tipo === "titulo") && b.texto)
+      .map((b) => ({ id: b.id, texto: b.texto || "" }));
+    if (!titulo.trim() && blocosTexto.length === 0) {
+      toast.info("Escreva algo primeiro para eu revisar.");
+      return;
+    }
+    setRevisando(true);
+    setAvisoCreditos(null);
+    try {
+      const res = await revisar({ data: { titulo, blocos: blocosTexto } });
+      if (!res.ok) {
+        setAvisoCreditos(res.mensagem);
+        toast.error(res.mensagem);
+        return;
+      }
+      let mudou = 0;
+      const mapaProblemas: Record<string, string[]> = {};
+      if (res.tituloCorrigido && res.tituloCorrigido !== titulo) {
+        setTitulo(res.tituloCorrigido);
+        mudou++;
+      }
+      setBlocos((prev) =>
+        prev.map((b) => {
+          const corr = res.blocos.find((x) => x.id === b.id);
+          if (!corr) return b;
+          if (corr.problemas.length) mapaProblemas[b.id] = corr.problemas;
+          if (corr.textoCorrigido && corr.textoCorrigido !== b.texto) {
+            mudou++;
+            return { ...b, texto: corr.textoCorrigido };
+          }
+          return b;
+        }),
+      );
+      setProblemasPorBloco(mapaProblemas);
+      setResumoRevisao(
+        mudou > 0
+          ? `${res.resumo} (${mudou} correção(ões) aplicadas)`
+          : "Português está perfeito! Nenhum erro encontrado.",
+      );
+      toast.success("Revisão concluída");
+    } catch (e: any) {
+      toast.error("Erro na revisão: " + (e?.message || ""));
+    } finally {
+      setRevisando(false);
+    }
+  }
+
 
   async function pesquisar() {
     const q = buscaQuery.trim();
@@ -345,6 +454,24 @@ function EditorTrabalho({
           {trabalhoExistente ? "Editar trabalho" : "Novo trabalho"}
         </h3>
         <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 px-2 py-1 rounded bg-amber-50 border border-amber-200">
+            {autoStatus === "salvando"
+              ? "Salvando..."
+              : autoStatus === "salvo"
+                ? "✓ Salvo"
+                : autoStatus === "erro"
+                  ? "⚠ Erro ao salvar"
+                  : "Auto-salvar ativo"}
+          </span>
+          <button
+            onClick={rodarRevisao}
+            disabled={revisando}
+            className="text-xs font-black bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
+            title="Revisar ortografia e acentuação"
+          >
+            {revisando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <SpellCheck className="h-3.5 w-3.5" />}
+            Revisar Português
+          </button>
           <button
             onClick={() => {
               if (!tema.trim()) {
@@ -357,6 +484,7 @@ function EditorTrabalho({
           >
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
+
           <button
             onClick={exportarPDF}
             className="text-xs font-bold bg-white border-2 border-amber-300 text-amber-800 hover:bg-amber-50 px-3 py-1.5 rounded-lg flex items-center gap-1"
@@ -379,6 +507,23 @@ function EditorTrabalho({
           </button>
         </div>
       </div>
+
+      {(resumoRevisao || avisoCreditos) && (
+        <div
+          className={`mb-3 rounded-lg border-2 px-3 py-2 text-xs ${
+            avisoCreditos
+              ? "border-amber-300 bg-amber-50 text-amber-900"
+              : "border-emerald-300 bg-emerald-50 text-emerald-900"
+          }`}
+        >
+          <div className="flex items-start gap-2">
+            {avisoCreditos ? null : <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" />}
+            <p className="font-bold">{avisoCreditos || resumoRevisao}</p>
+          </div>
+        </div>
+      )}
+
+
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-4">
         {/* Documento + edição */}
@@ -444,17 +589,26 @@ function EditorTrabalho({
             )}
 
             {blocos.map((b, idx) => (
-              <BlocoEditor
-                key={b.id}
-                bloco={b}
-                primeiro={idx === 0}
-                ultimo={idx === blocos.length - 1}
-                onChange={(patch) => atualizarBloco(b.id, patch)}
-                onRemover={() => removerBloco(b.id)}
-                onSubir={() => moverBloco(b.id, -1)}
-                onDescer={() => moverBloco(b.id, +1)}
-              />
+              <div key={b.id}>
+                <BlocoEditor
+                  bloco={b}
+                  primeiro={idx === 0}
+                  ultimo={idx === blocos.length - 1}
+                  onChange={(patch) => atualizarBloco(b.id, patch)}
+                  onRemover={() => removerBloco(b.id)}
+                  onSubir={() => moverBloco(b.id, -1)}
+                  onDescer={() => moverBloco(b.id, +1)}
+                />
+                {problemasPorBloco[b.id]?.length ? (
+                  <ul className="mt-1 ml-2 text-[11px] text-emerald-800 bg-emerald-50/60 border-l-2 border-emerald-400 pl-2 py-1 space-y-0.5">
+                    {problemasPorBloco[b.id].map((p, i) => (
+                      <li key={i}>✓ {p}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
             ))}
+
 
             {fontes.length > 0 && (
               <section className="border-t-2 border-amber-300 pt-3 mt-4">

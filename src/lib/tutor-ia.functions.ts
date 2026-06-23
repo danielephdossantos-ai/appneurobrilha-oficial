@@ -157,9 +157,10 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
           ok: false,
           motivo: "creditos",
           mensagem:
-            "Por hoje sua aula terminou! 🌙 Os créditos diários do Tutor Brilha acabaram. Volte amanhã que a gente continua. Enquanto isso, pode explorar outras categorias do app!",
+            "Por hoje meus créditos acabaram 🌙 Mas calma — seu trabalho está SALVO automaticamente. Pode continuar escrevendo do seu jeito que, quando os créditos voltarem, eu revejo tudo, aponto erros de português e ajudo você a terminar com perfeição. 💛",
         };
       }
+
       if (!res.ok) {
         return {
           ok: false,
