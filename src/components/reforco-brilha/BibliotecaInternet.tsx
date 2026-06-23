@@ -21,6 +21,7 @@ export function BibliotecaInternet({ query }: Props) {
   const [fonte, setFonte] = useState<"cache" | "api" | "vazio" | null>(null);
   const [videoId, setVideoId] = useState<string | null>(null);
   const [videoTitle, setVideoTitle] = useState<string>("");
+  const [preview, setPreview] = useState<{ url: string; title: string; fonte: string } | null>(null);
 
   async function rodar(force = false) {
     if (!query || query.trim().length < 3) return;
