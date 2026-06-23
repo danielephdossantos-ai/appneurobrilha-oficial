@@ -228,18 +228,30 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   }, [total, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6 animate-in fade-in">
-      <div className="bg-background rounded-[2rem] w-full max-w-4xl max-h-[95vh] flex flex-col shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-        {/* Capa da aula */}
+    <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 animate-in fade-in">
+      <div className="relative w-full max-w-4xl max-h-[95vh] flex flex-col animate-in zoom-in-95 duration-300">
+        {/* Capa da apostila */}
         <div
-          className={`relative px-6 py-4 text-white bg-gradient-to-br ${meta?.cor ?? "from-primary to-primary"}`}
+          className={`relative px-6 py-5 text-white bg-gradient-to-br ${meta?.cor ?? "from-primary to-primary"} rounded-t-[2rem] shadow-xl`}
         >
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
-                Aula · {idx + 1} de {total || "…"}
+          {/* bolinhas decorativas estilo apostila */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden rounded-t-[2rem]">
+            <div className="absolute -top-6 -right-6 h-32 w-32 rounded-full bg-white" />
+            <div className="absolute top-10 right-20 h-6 w-6 rounded-full bg-white" />
+            <div className="absolute -bottom-8 left-10 h-20 w-20 rounded-full bg-white" />
+          </div>
+
+          <div className="relative flex items-center justify-between gap-3">
+            <div className="min-w-0 flex items-center gap-3">
+              <div className="h-12 w-12 rounded-2xl bg-white/25 backdrop-blur grid place-items-center shrink-0">
+                <BookOpen className="h-6 w-6" />
               </div>
-              <h2 className="text-lg sm:text-xl font-black truncate">{titulo}</h2>
+              <div className="min-w-0">
+                <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
+                  Apostila Brilha
+                </div>
+                <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
+              </div>
             </div>
             <button
               onClick={onClose}
@@ -250,14 +262,29 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
             </button>
           </div>
 
-          {/* Trilha de progresso (capítulos) */}
+          {/* Indicador grande de progresso */}
           {total > 0 && (
-            <div className="flex gap-1 mt-3 overflow-x-auto scrollbar-hide pb-1">
+            <div className="relative mt-4 flex items-center gap-3">
+              <div className="px-3 py-1.5 rounded-full bg-white text-foreground text-xs font-black shadow-md whitespace-nowrap">
+                📖 Página {idx + 1} de {total}
+              </div>
+              <div className="flex-1 h-2.5 rounded-full bg-white/25 overflow-hidden">
+                <div
+                  className="h-full bg-white rounded-full transition-all duration-500"
+                  style={{ width: `${((idx + 1) / total) * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Mini-trilha clicável */}
+          {total > 0 && (
+            <div className="relative flex gap-1 mt-2 overflow-x-auto scrollbar-hide pb-1">
               {paginas.map((p, i) => (
                 <button
                   key={p.id}
                   onClick={() => setIdx(i)}
-                  className={`h-1.5 flex-1 min-w-[20px] rounded-full transition-all ${
+                  className={`h-1.5 flex-1 min-w-[18px] rounded-full transition-all ${
                     i === idx ? "bg-white" : i < idx ? "bg-white/70" : "bg-white/25"
                   }`}
                   aria-label={`Ir para página ${i + 1}`}
@@ -267,8 +294,8 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
           )}
         </div>
 
-        {/* Página */}
-        <div className="flex-1 overflow-y-auto px-5 sm:px-10 py-8">
+        {/* Página estilo papel de apostila */}
+        <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50/40 to-white px-5 sm:px-12 py-8 border-x-4 border-amber-100 shadow-2xl">
           {loading ? (
             <div className="h-64 grid place-items-center text-muted-foreground">
               Carregando aula…
@@ -279,19 +306,20 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
             </div>
           ) : (
             <div key={atual.id} className="animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="flex items-center gap-3 mb-4">
+              {/* Cabeçalho do capítulo */}
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-dashed border-amber-200">
                 {meta?.icon && (
                   <div
-                    className={`h-12 w-12 rounded-2xl text-white grid place-items-center bg-gradient-to-br ${meta.cor}`}
+                    className={`h-14 w-14 rounded-2xl text-white grid place-items-center bg-gradient-to-br ${meta.cor} shadow-lg shrink-0`}
                   >
-                    <meta.icon className="h-6 w-6" />
+                    <meta.icon className="h-7 w-7" />
                   </div>
                 )}
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                    {meta?.label}
+                    Capítulo {idx + 1} · {meta?.label}
                   </div>
-                  <h3 className="text-2xl font-black leading-tight">
+                  <h3 className="text-2xl sm:text-3xl font-black leading-tight text-foreground">
                     {atual.titulo || meta?.label}
                   </h3>
                 </div>
@@ -300,7 +328,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                     onClick={() =>
                       speak(`${atual.titulo || meta?.label}. ${atual.conteudo?.texto || ""}`)
                     }
-                    className="ml-auto h-10 w-10 rounded-full bg-secondary hover:bg-primary/10 grid place-items-center"
+                    className="h-11 w-11 rounded-full bg-primary/10 hover:bg-primary/20 grid place-items-center shrink-0 transition-colors"
                     aria-label="Ouvir página"
                     title="Ouvir página"
                   >
@@ -314,31 +342,36 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
           )}
         </div>
 
-        {/* Navegação inferior */}
-        <div className="border-t border-border bg-card px-4 py-3 flex items-center justify-between gap-3">
+        {/* Rodapé navegação grande */}
+        <div className="bg-white border-x-4 border-b-4 border-amber-100 rounded-b-[2rem] px-4 sm:px-6 py-4 flex items-center justify-between gap-3 shadow-2xl">
           <button
             onClick={() => setIdx((i) => Math.max(0, i - 1))}
             disabled={idx === 0}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm disabled:opacity-30 hover:bg-secondary transition-colors"
+            className="flex items-center gap-2 px-4 sm:px-5 py-3 rounded-2xl font-black text-sm bg-secondary text-foreground disabled:opacity-30 hover:bg-secondary/70 transition-colors"
           >
             <ChevronLeft className="h-5 w-5" /> Voltar
           </button>
 
-          <div className="text-xs text-muted-foreground font-bold">
-            {total > 0 ? `${idx + 1} / ${total}` : ""}
+          <div className="text-center">
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+              Você está em
+            </div>
+            <div className="text-base font-black text-foreground">
+              {total > 0 ? `Página ${idx + 1} de ${total}` : ""}
+            </div>
           </div>
 
           {idx < total - 1 ? (
             <button
               onClick={() => setIdx((i) => Math.min(total - 1, i + 1))}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-sm bg-primary text-white shadow-glow hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 px-5 sm:px-6 py-3 rounded-2xl font-black text-sm bg-primary text-white shadow-lg hover:opacity-90 hover:scale-105 transition-all"
             >
-              Próxima <ChevronRight className="h-5 w-5" />
+              Avançar <ChevronRight className="h-5 w-5" />
             </button>
           ) : (
             <button
               onClick={onClose}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-sm bg-success text-white hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 px-5 sm:px-6 py-3 rounded-2xl font-black text-sm bg-success text-white shadow-lg hover:opacity-90 hover:scale-105 transition-all"
             >
               Concluir <CheckCircle2 className="h-5 w-5" />
             </button>
