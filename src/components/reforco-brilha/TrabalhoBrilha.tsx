@@ -508,6 +508,23 @@ function EditorTrabalho({
         </div>
       </div>
 
+      {(resumoRevisao || avisoCreditos) && (
+        <div
+          className={`mb-3 rounded-lg border-2 px-3 py-2 text-xs ${
+            avisoCreditos
+              ? "border-amber-300 bg-amber-50 text-amber-900"
+              : "border-emerald-300 bg-emerald-50 text-emerald-900"
+          }`}
+        >
+          <div className="flex items-start gap-2">
+            {avisoCreditos ? null : <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" />}
+            <p className="font-bold">{avisoCreditos || resumoRevisao}</p>
+          </div>
+        </div>
+      )}
+
+
+
       <div className="grid lg:grid-cols-[1fr_320px] gap-4">
         {/* Documento + edição */}
         <div className="space-y-3">
