@@ -275,6 +275,9 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
             {TEMPOS.find((t) => t.id === tempo)?.label}
           </div>
 
+          {areaSel && <PlanoAutomatico area={areaSel.id as AreaPlano} onAbrirAula={onAbrirAula} />}
+
+
           {loading && (
             <div className="py-8 text-center text-sm text-muted-foreground">Buscando recomendações...</div>
           )}
