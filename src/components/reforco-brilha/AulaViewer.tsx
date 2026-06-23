@@ -60,6 +60,22 @@ function speak(text: string) {
   }
 }
 
+function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
+  const c = pagina.conteudo || {};
+  const partes: string[] = [];
+  if (pagina.titulo || metaLabel) partes.push(String(pagina.titulo || metaLabel));
+  if (c.texto) partes.push(String(c.texto));
+  if (c.destaque) partes.push(`Destaque: ${c.destaque}`);
+  if (Array.isArray(c.bullets)) c.bullets.forEach((b: string, i: number) => partes.push(`${i + 1}. ${b}`));
+  if (Array.isArray(c.passos)) c.passos.forEach((p: string, i: number) => partes.push(`Passo ${i + 1}: ${p}`));
+  if (Array.isArray(c.exemplos))
+    c.exemplos.forEach((ex: any) => partes.push(`${ex.silaba} forma ${ex.palavra}.`));
+  if (Array.isArray(c.perguntas))
+    c.perguntas.forEach((p: any, i: number) =>
+      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}.`),
+    );
+  return partes.join(". ");
+
 function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   const c = pagina.conteudo || {};
 
