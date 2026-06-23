@@ -93,6 +93,7 @@ const navPais = [
   { to: "/terapeuta-brilha", label: "Terapeuta Brilha", icon: MessagesSquare },
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
+  { to: "/perfil-aluno", label: "Perfil do Aluno", icon: ClipboardList },
   { to: "/auditoria-pedagogica", label: "Auditoria", icon: ClipboardCheck },
 ] as const;
 
@@ -111,6 +112,7 @@ const navigationSequence = [
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
+  "/perfil-aluno",
   "/auditoria-pedagogica",
 ];
 
