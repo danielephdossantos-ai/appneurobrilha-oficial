@@ -746,7 +746,22 @@ function EditorTrabalho({
         onFechar={() => setTutorAberto(false)}
       />
     )}
+    {preview && (
+      <RecursoPreviewModal
+        recurso={preview}
+        onFechar={() => setPreview(null)}
+        onAdicionarTexto={(r) => {
+          addRecursoComoTexto(r);
+          setPreview(null);
+        }}
+        onAdicionarImagem={(r) => {
+          addRecursoImagem(r);
+          setPreview(null);
+        }}
+      />
+    )}
   </>
+
   );
 }
 
