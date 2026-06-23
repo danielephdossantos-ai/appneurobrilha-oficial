@@ -245,15 +245,16 @@ function MissaoProva() {
 
       <div className="space-y-8 animate-in fade-in duration-500">
         {missions.length === 0 ? (
-          <Card className="py-20 text-center">
-            <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto mb-6">
+          <Card className="py-16 text-center space-y-5">
+            <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto">
               <Target className="h-12 w-12 text-muted-foreground" />
             </div>
-            <h3 className="text-2xl font-bold">Nenhuma missão ativa!</h3>
-            <p className="text-muted-foreground mt-2 max-w-md mx-auto">
-              Peça para o papai ou a mamãe cadastrar sua próxima prova no Painel dos Pais para
-              começarmos os treinos!
+            <h3 className="text-2xl font-bold">Nenhuma prova cadastrada!</h3>
+            <p className="text-muted-foreground max-w-md mx-auto text-sm">
+              Peça para o papai ou a mamãe cadastrar sua próxima prova no Painel dos Pais.
+              Enquanto isso, você pode estudar qualquer tema com o Tutor Brilha 👇
             </p>
+            <TutorLivre />
           </Card>
         ) : (
           <div className="grid grid-cols-1 gap-6">
