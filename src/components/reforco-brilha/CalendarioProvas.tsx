@@ -146,7 +146,7 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-black uppercase tracking-widest text-indigo-700 flex items-center gap-2">
           <CalendarDays className="h-4 w-4" />
-          Calendário Escolar
+          {titulo ?? "Calendário Escolar"}
         </h3>
         <div className="flex items-center gap-1">
           <button
