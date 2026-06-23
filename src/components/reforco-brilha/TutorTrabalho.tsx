@@ -111,7 +111,11 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
                 Tutor Brilha <Sparkles className="h-3.5 w-3.5" />
               </p>
               <p className="text-[11px] text-amber-700">
-                {modo === "trabalho" ? "Vamos montar seu trabalho juntos" : "Plano diário de estudo"}
+                {modo === "trabalho"
+                  ? "Vamos montar seu trabalho juntos"
+                  : modo === "missao-prova"
+                    ? "Vamos estudar pra prova juntos"
+                    : "Plano diário de estudo"}
               </p>
             </div>
           </div>
