@@ -703,18 +703,17 @@ function EditorTrabalho({
                   >
                     <Plus className="h-3 w-3" /> Fonte
                   </button>
-                  <a
-                    href={r.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[10px] font-bold bg-white border border-gray-200 text-gray-600 px-2 py-1 rounded flex items-center gap-1"
+                  <button
+                    onClick={() => setPreview(r)}
+                    className="text-[10px] font-bold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-2 py-1 rounded flex items-center gap-1"
                   >
-                    <ExternalLink className="h-3 w-3" /> Abrir
-                  </a>
+                    <ExternalLink className="h-3 w-3" /> Ver aqui
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+
 
           {fontes.length > 0 && (
             <div className="bg-white border-2 border-amber-200 rounded-xl p-3">
