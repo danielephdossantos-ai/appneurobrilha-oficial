@@ -97,15 +97,6 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.15)",
   },
   {
-    to: "/amigo-virtual",
-    title: "Amigo Virtual",
-    subtitle: "Seu Companheiro IA",
-    gradient: "from-[#8B5CF6] via-[#7C3AED] to-[#5B21B6]",
-    glow: "rgba(139,92,246,0.7)",
-    emoji: "🤖",
-    shine: "rgba(255,255,255,0.12)",
-  },
-  {
     to: "/rotina",
     title: "Rotina",
     subtitle: "Organize o Dia",
