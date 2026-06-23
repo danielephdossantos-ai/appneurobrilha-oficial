@@ -2911,43 +2911,73 @@ export type Database = {
       rb_habilidades: {
         Row: {
           ano_escolar: string | null
+          atividades_recomendadas: string | null
           categoria_id: string
+          como_avaliar_evolucao: string | null
+          como_ensinar: string | null
+          como_identificar: string | null
           created_at: string
           descricao: string | null
+          dicas_familia: string | null
+          dicas_professores: string | null
+          exemplos_praticos: string | null
           faixa_etaria: string | null
           id: string
           nivel_dificuldade: string | null
           nome: string
+          o_que_e: string | null
           ordem: number
           palavras_chave: string[]
+          por_que_importante: string | null
+          proximo_passo: string | null
           subcategoria: string | null
           updated_at: string
         }
         Insert: {
           ano_escolar?: string | null
+          atividades_recomendadas?: string | null
           categoria_id: string
+          como_avaliar_evolucao?: string | null
+          como_ensinar?: string | null
+          como_identificar?: string | null
           created_at?: string
           descricao?: string | null
+          dicas_familia?: string | null
+          dicas_professores?: string | null
+          exemplos_praticos?: string | null
           faixa_etaria?: string | null
           id?: string
           nivel_dificuldade?: string | null
           nome: string
+          o_que_e?: string | null
           ordem?: number
           palavras_chave?: string[]
+          por_que_importante?: string | null
+          proximo_passo?: string | null
           subcategoria?: string | null
           updated_at?: string
         }
         Update: {
           ano_escolar?: string | null
+          atividades_recomendadas?: string | null
           categoria_id?: string
+          como_avaliar_evolucao?: string | null
+          como_ensinar?: string | null
+          como_identificar?: string | null
           created_at?: string
           descricao?: string | null
+          dicas_familia?: string | null
+          dicas_professores?: string | null
+          exemplos_praticos?: string | null
           faixa_etaria?: string | null
           id?: string
           nivel_dificuldade?: string | null
           nome?: string
+          o_que_e?: string | null
           ordem?: number
           palavras_chave?: string[]
+          por_que_importante?: string | null
+          proximo_passo?: string | null
           subcategoria?: string | null
           updated_at?: string
         }
