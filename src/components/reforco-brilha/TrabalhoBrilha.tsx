@@ -336,6 +336,7 @@ function EditorTrabalho({
   }
 
   return (
+    <>
     <Card className="border-2 border-amber-200 bg-white">
       {/* Topo */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
