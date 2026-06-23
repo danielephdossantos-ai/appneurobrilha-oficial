@@ -269,8 +269,15 @@ PERGUNTA DA MÃE: "${pergunta}"`;
     const finalTopic = customTopic || topic;
     if (!finalTopic) return;
 
+    // Mãe escreveu uma dúvida/preocupação → abre orientação parental (não a aula da criança)
+    if (isParentQuestion(finalTopic)) {
+      askParentGuide(finalTopic);
+      return;
+    }
+
     setIsTeaching(true);
     setLessonContent(null);
+
 
     // Generating structured lesson
     const loadLesson = async () => {
