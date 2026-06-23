@@ -13,6 +13,23 @@ function extractYoutubeId(url: string): string | null {
   return m ? m[1] : null;
 }
 
+// transforma URL para uma versão amigável a iframe (mobile / embed)
+function toEmbedUrl(url: string, fonte: string): string {
+  try {
+    if (fonte === "wikipedia") {
+      return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/");
+    }
+    if (fonte === "wikiversity") {
+      return url
+        .replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/")
+        .replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
+    }
+    return url;
+  } catch {
+    return url;
+  }
+}
+
 export function BibliotecaInternet({ query }: Props) {
   const buscar = useServerFn(buscarRecursosExternos);
   const [loading, setLoading] = useState(false);
@@ -93,13 +110,12 @@ export function BibliotecaInternet({ query }: Props) {
           {resultados.map((r, i) => {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
             const handleClick = (e: React.MouseEvent) => {
+              e.preventDefault();
               if (ytId) {
-                e.preventDefault();
                 setVideoId(ytId);
                 setVideoTitle(r.titulo);
               } else {
-                e.preventDefault();
-                window.open(r.url, "_blank", "noopener,noreferrer");
+                setPreview({ url: toEmbedUrl(r.url, r.fonte), title: r.titulo, fonte: r.fonte });
               }
             };
             return (
