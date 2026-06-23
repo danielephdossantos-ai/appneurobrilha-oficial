@@ -3,7 +3,14 @@ import { createClient } from "@supabase/supabase-js";
 
 export interface RecursoExterno {
   id?: string;
-  fonte: "wikipedia" | "youtube" | "openlibrary" | "wikiversity" | "archive";
+  fonte:
+    | "wikipedia"
+    | "youtube"
+    | "openlibrary"
+    | "wikiversity"
+    | "archive"
+    | "khan"
+    | "youtube-edu";
   titulo: string;
   descricao: string | null;
   url: string;
