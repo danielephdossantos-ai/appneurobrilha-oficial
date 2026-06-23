@@ -41,46 +41,6 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNotifications } from "@/hooks/useNotifications";
 import { FloatingActivityControls } from "@/components/activities/FloatingActivityControls";
-import { callNeuroBrilhaAI } from "@/services/api/neurobrilha-ai.functions";
-import { Heart, Loader2, Lightbulb } from "lucide-react";
-
-// Detecta quando a mãe está fazendo uma pergunta/desabafo sobre o filho,
-// em vez de pedir uma aula sobre um tema escolar.
-const PARENT_PATTERNS = [
-  /\bmeu filho\b/i,
-  /\bminha filha\b/i,
-  /\bmeu\(a\) filho\(a\)\b/i,
-  /\bnão sabe\b/i,
-  /\bnao sabe\b/i,
-  /\bnão consegue\b/i,
-  /\bnao consegue\b/i,
-  /\btem dificuldade\b/i,
-  /\bcomo (ajud|fazer|ensinar|lidar)/i,
-  /\bo que (faço|fazer|devo)\b/i,
-  /\bestou preocupad/i,
-  /\bnão quer\b/i,
-  /\bnao quer\b/i,
-  /\bnão gosta\b/i,
-  /\bnao gosta\b/i,
-  /\bbirra\b/i,
-  /\bcrise\b/i,
-  /\bagressiv/i,
-  /\bansied/i,
-  /\bautism/i,
-  /\btdah\b/i,
-  /\?$/,
-];
-const isParentQuestion = (text: string) =>
-  PARENT_PATTERNS.some((re) => re.test(text.trim()));
-
-const SUGESTOES_MAE = [
-  "Meu filho não sabe ler",
-  "Meu filho não quer fazer lição",
-  "Como ensinar tabuada para autista",
-  "Meu filho tem birra na hora de estudar",
-  "Como ajudar com atraso na fala",
-  "Meu filho não presta atenção",
-];
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -172,50 +132,7 @@ function ReforcoBrilha() {
   const [skills, setSkills] = useState<SkillMastery[]>([]);
   const [pendingReviews, setPendingReviews] = useState<any[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
-  const [parentGuidance, setParentGuidance] = useState<string | null>(null);
-  const [parentQuestion, setParentQuestion] = useState<string>("");
-  const [loadingGuidance, setLoadingGuidance] = useState(false);
   const queryClient = useQueryClient();
-
-  const askParentGuide = async (q: string) => {
-    const pergunta = q.trim();
-    if (!pergunta) return;
-    setParentQuestion(pergunta);
-    setParentGuidance(null);
-    setLoadingGuidance(true);
-    try {
-      const prefacio = `[Você está conversando com a MÃE/PAI de uma criança neuroatípica, não com a criança. Aja como uma equipe multidisciplinar (psicopedagoga + fonoaudióloga + terapeuta ABA + pediatra do desenvolvimento) com acesso a uma biblioteca infinita de estratégias baseadas em evidência (DSM-5, BNCC, Denver Model, TEACCH, PECS, ABA, Wilson Reading, Orton-Gillingham, Método das Boquinhas, etc).
-
-Criança: ${activeChild?.nome ?? "não informado"}, ${activeChild?.idade ?? "?"} anos, perfil: ${(activeChild as any)?.diagnostico ?? (activeChild as any)?.perfil_neuro ?? "em avaliação"}.
-
-Responda em PORTUGUÊS, formato MARKDOWN, com esta estrutura:
-**🎯 O que está acontecendo** (1 parágrafo curto, acolhedor, validando o sentimento da mãe)
-**🧠 Por que acontece** (explicação neuropsicopedagógica em linguagem simples)
-**🛠️ 5 estratégias práticas pra hoje** (lista numerada, passo a passo, materiais simples de casa)
-**📚 Atividades do app que ajudam** (sugira 2-3 atividades do NeuroBrilha Kids — ex: Alfabetização, Reforço Brilha, Brilha Vida, Escola Brilha)
-**🚨 Quando procurar ajuda profissional** (sinais de alerta objetivos)
-
-Seja específica, calorosa e nunca julgue.]
-
-PERGUNTA DA MÃE: "${pergunta}"`;
-
-      const resposta = await callNeuroBrilhaAI({
-        data: {
-          mode: "terapeuta",
-          child: (activeChild ?? {}) as any,
-          mascot: null,
-          message: prefacio,
-        },
-      });
-      setParentGuidance((resposta as string) || "Não consegui gerar a orientação agora. Tente novamente.");
-    } catch (e) {
-      console.error("[orientação mãe] erro:", e);
-      setParentGuidance("Tive um problema ao consultar a base. Tente novamente em instantes.");
-    } finally {
-      setLoadingGuidance(false);
-    }
-  };
-
 
   const { data: agenda = [] } = useQuery({
     queryKey: ["study_agenda", activeChild?.id],
@@ -269,15 +186,8 @@ PERGUNTA DA MÃE: "${pergunta}"`;
     const finalTopic = customTopic || topic;
     if (!finalTopic) return;
 
-    // Mãe escreveu uma dúvida/preocupação → abre orientação parental (não a aula da criança)
-    if (isParentQuestion(finalTopic)) {
-      askParentGuide(finalTopic);
-      return;
-    }
-
     setIsTeaching(true);
     setLessonContent(null);
-
 
     // Generating structured lesson
     const loadLesson = async () => {
@@ -377,62 +287,9 @@ PERGUNTA DA MÃE: "${pergunta}"`;
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              Digite um tema (ex: "Tabuada do 7") <b>ou</b> uma dúvida sobre seu filho
-              (ex: <i>"Meu filho não sabe ler"</i>) — a IA detecta automaticamente.
+              A mãe escreve o tema e o Sistema Brilha cria a aula perfeita.
             </p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {SUGESTOES_MAE.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => {
-                    setTopic(s);
-                    askParentGuide(s);
-                  }}
-                  className="text-xs px-3 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold hover:bg-rose-100 flex items-center gap-1"
-                >
-                  <Heart className="h-3 w-3" /> {s}
-                </button>
-              ))}
-            </div>
           </Card>
-
-          {(loadingGuidance || parentGuidance) && (
-            <Card className="bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 animate-in slide-in-from-top-4">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-500 grid place-items-center text-white shrink-0">
-                  <Lightbulb className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-black text-rose-900">Orientação para a Mãe</h3>
-                  <p className="text-xs text-rose-700/80 italic">"{parentQuestion}"</p>
-                </div>
-                {!loadingGuidance && (
-                  <button
-                    onClick={() => {
-                      setParentGuidance(null);
-                      setParentQuestion("");
-                      setTopic("");
-                    }}
-                    className="text-xs font-bold text-rose-600 hover:underline"
-                  >
-                    Fechar
-                  </button>
-                )}
-              </div>
-              {loadingGuidance ? (
-                <div className="flex items-center gap-3 py-6 text-rose-700">
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  <span className="font-bold text-sm">
-                    Consultando a biblioteca de estratégias…
-                  </span>
-                </div>
-              ) : (
-                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap leading-relaxed">
-                  {parentGuidance}
-                </div>
-              )}
-            </Card>
-          )}
 
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
