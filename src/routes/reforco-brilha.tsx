@@ -48,6 +48,7 @@ import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamil
 import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
+import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -605,6 +606,10 @@ function ReforcoBrilha() {
           )}
 
           <RelatoriosReforco />
+
+          <CalendarioProvas childId={activeChild?.id ?? null} />
+
+
 
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
