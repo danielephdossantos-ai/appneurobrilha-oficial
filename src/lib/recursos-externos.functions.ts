@@ -159,18 +159,19 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       }
     }
 
-    // 2) buscar nas APIs públicas (por enquanto só Wikipédia)
-    // 2) buscar nas APIs públicas (Wikipédia + YouTube em paralelo)
-    const [wiki, yt] = await Promise.all([
+    // 2) buscar nas APIs públicas (Wikipédia + YouTube + OpenLibrary em paralelo)
+    const [wiki, yt, books] = await Promise.all([
       buscarWikipedia(queryN).catch(() => []),
       buscarYoutube(queryN).catch(() => []),
+      buscarOpenLibrary(queryN).catch(() => []),
     ]);
-    // intercalar: 1 wiki, 1 yt, ... para diversificar
+    // intercalar: wiki, yt, livro, wiki, yt, livro... para diversificar
     const resultados: RecursoExterno[] = [];
-    const max = Math.max(wiki.length, yt.length);
+    const max = Math.max(wiki.length, yt.length, books.length);
     for (let i = 0; i < max; i++) {
       if (wiki[i]) resultados.push(wiki[i]);
       if (yt[i]) resultados.push(yt[i]);
+      if (books[i]) resultados.push(books[i]);
     }
 
     // 3) salvar no cache
