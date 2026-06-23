@@ -88,64 +88,8 @@ export const Route = createFileRoute("/reforco-brilha")({
   ),
 });
 
-const CATEGORIAS = [
-  {
-    id: "vogais",
-    label: "Vogais",
-    icon: Pencil,
-    color: "text-pink-500",
-    suggestions: ["Vogais A E I", "Vogais O U", "Reconhecer vogais em palavras"],
-  },
-  {
-    id: "silabas",
-    label: "Sílabas",
-    icon: MessageSquare,
-    color: "text-orange-500",
-    suggestions: ["Sílabas simples (BA BE BI)", "Sílabas com R", "Formação de palavras"],
-  },
-  {
-    id: "leitura",
-    label: "Leitura",
-    icon: BookOpen,
-    color: "text-green-500",
-    suggestions: ["Leitura de palavras curtas", "Leitura de frases", "Interpretação de texto"],
-  },
-  {
-    id: "escrita",
-    label: "Escrita",
-    icon: PenTool,
-    color: "text-blue-500",
-    suggestions: ["Escrita do nome", "Cópia de palavras", "Pequenas frases"],
-  },
-  {
-    id: "tabuada",
-    label: "Tabuada",
-    icon: Calculator,
-    color: "text-indigo-500",
-    suggestions: ["Tabuada do 2", "Tabuada do 5", "Tabuada do 9"],
-  },
-  {
-    id: "atencao",
-    label: "Atenção",
-    icon: Target,
-    color: "text-red-500",
-    suggestions: ["Achar diferenças", "Foco visual", "Atenção sustentada"],
-  },
-  {
-    id: "coordenacao",
-    label: "Coordenação motora",
-    icon: Palette,
-    color: "text-amber-500",
-    suggestions: ["Traçado de linhas", "Pinça fina", "Recortar e colar"],
-  },
-  {
-    id: "memoria",
-    label: "Memória",
-    icon: Brain,
-    color: "text-purple-500",
-    suggestions: ["Jogo da memória", "Sequência de figuras", "Memória auditiva"],
-  },
-];
+
+
 
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
@@ -694,38 +638,8 @@ function ReforcoBrilha() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CATEGORIAS.map((cat) => (
-              <div key={cat.id} className="space-y-3">
-                <h4 className="font-bold flex items-center gap-2 px-1 text-base">
-                  <cat.icon className={`h-5 w-5 ${cat.color}`} />
-                  {cat.label}
-                </h4>
-                <div className="grid grid-cols-1 gap-2">
-                  {cat.suggestions.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        setTopic(s);
-                        startLesson(s);
-                      }}
-                      className="text-left p-3.5 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 hover:shadow-glow transition-all flex justify-between items-center group"
-                    >
-                      <div className="flex flex-col">
-                        <span className="text-sm font-bold">{s}</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          Trilha pedagógica · BNCC
-                        </span>
-                      </div>
-                      <div className="h-8 w-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-                        <PlayCircle className="h-5 w-5" />
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="bg-success/5 border-success/20">
