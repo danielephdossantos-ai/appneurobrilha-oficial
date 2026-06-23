@@ -392,6 +392,82 @@ function MissaoProva() {
                         </div>
                       )}
                     </div>
+
+                    {/* Todas as aulas do plano diário */}
+                    {mission.study_plan && mission.study_plan.length > 0 && (
+                      <div className="lg:col-span-3 mt-2">
+                        <h4 className="font-black text-xs uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
+                          <Calendar className="h-4 w-4" /> Plano de Aulas Diárias
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {[...mission.study_plan]
+                            .sort((a: any, b: any) =>
+                              (a.scheduled_date || "").localeCompare(b.scheduled_date || ""),
+                            )
+                            .map((sess: any) => {
+                              const dia = sess.scheduled_date
+                                ? format(
+                                    new Date(sess.scheduled_date + "T12:00:00"),
+                                    "dd/MM (EEE)",
+                                    { locale: ptBR },
+                                  )
+                                : "—";
+                              return (
+                                <div
+                                  key={sess.id}
+                                  className={`flex items-center gap-3 p-3 rounded-xl border-2 ${
+                                    sess.completed
+                                      ? "bg-success/5 border-success/20"
+                                      : "bg-white border-slate-100 hover:border-primary/30"
+                                  }`}
+                                >
+                                  <div
+                                    className={`shrink-0 h-9 w-9 rounded-lg grid place-items-center text-xs font-black ${
+                                      sess.completed
+                                        ? "bg-success text-white"
+                                        : "bg-primary/10 text-primary"
+                                    }`}
+                                  >
+                                    {sess.completed ? (
+                                      <CheckCircle2 className="h-5 w-5" />
+                                    ) : (
+                                      <PlayCircle className="h-5 w-5" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                      {dia}
+                                    </p>
+                                    <p className="font-bold text-sm text-slate-700 truncate">
+                                      {sess.title}
+                                    </p>
+                                  </div>
+                                  {!sess.completed && (
+                                    <div className="flex flex-col gap-1 shrink-0">
+                                      <button
+                                        onClick={() => startSession(sess, mission)}
+                                        className="bg-primary text-white px-3 py-1.5 rounded-lg font-black text-[11px] hover:scale-105 transition-all"
+                                      >
+                                        Abrir aula
+                                      </button>
+                                      <button
+                                        onClick={() => {
+                                          setCurrentSession(sess);
+                                          setCurrentMission(mission);
+                                          setTutorAberto(true);
+                                        }}
+                                        className="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg font-black text-[11px] flex items-center gap-1 justify-center"
+                                      >
+                                        <GraduationCap className="h-3 w-3" /> Tutor
+                                      </button>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </Card>
               );
