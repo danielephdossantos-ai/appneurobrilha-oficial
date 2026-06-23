@@ -335,14 +335,25 @@ function EditorTrabalho({
     setBuscando(true);
     try {
       const res = await buscar({ data: { query: q } });
-      setRecursos(res.resultados || []);
-      if ((res.resultados || []).length === 0) toast.info("Nada encontrado");
+      // Missão Trabalho: somente texto e imagem (sem vídeos / sem links de busca externos)
+      const filtrados = (res.resultados || []).filter((r) => {
+        if (r.fonte === "youtube" || r.fonte === "youtube-edu" || r.fonte === "khan") return false;
+        if (r.fonte === "archive") {
+          const d = (r.descricao || "").toLowerCase();
+          // archive marca tipo no início da descrição
+          if (d.startsWith("vídeo") || d.startsWith("video") || d.startsWith("áudio") || d.startsWith("audio")) return false;
+        }
+        return true;
+      });
+      setRecursos(filtrados);
+      if (filtrados.length === 0) toast.info("Nada encontrado");
     } catch (e: any) {
       toast.error("Erro na busca: " + (e?.message || ""));
     } finally {
       setBuscando(false);
     }
   }
+
 
   function addBlocoTitulo() {
     setBlocos((b) => [...b, { id: uid(), tipo: "titulo", texto: "Novo título" }]);
