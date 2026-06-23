@@ -10,6 +10,7 @@ import {
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
+import { CenarioIlustrado } from "./CenarioIlustrado";
 
 interface Props {
   childId: string;
