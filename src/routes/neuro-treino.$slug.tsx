@@ -2706,64 +2706,172 @@ function RitmoBatidas({ p, onDone }: any) {
   );
 }
 
-// 30. COPIAR FIGURA — grade modelo à esquerda, grade em branco à direita
+// 30. COPIAR FIGURA — criança desenha por cima da figura real (tracing com dedo)
 function CopiarFigura({ p, onDone }: any) {
-  const [copia, setCopia] = useState<number[][]>(() =>
-    p.modelo.map((r: number[]) => r.map(() => 0)),
-  );
-  const [validado, setValidado] = useState(false);
+  const img = emojiImg(p.emoji) ?? objetoImg(p.nome);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const drawing = useRef(false);
+  const last = useRef<{ x: number; y: number } | null>(null);
+  const pixelsRef = useRef(0);
+  const [progresso, setProgresso] = useState(0);
+  const [feito, setFeito] = useState(false);
+  const META = 1400; // pixels desenhados pra considerar "copiou"
 
-  const toggle = (r: number, c: number) => {
-    if (validado) return;
-    setCopia((prev) =>
-      prev.map((row, ri) => row.map((v, ci) => (ri === r && ci === c ? (v ? 0 : 1) : v))),
-    );
-  };
-  const validar = () => {
-    const correto = copia.every((row, r) => row.every((v, c) => v === p.modelo[r][c]));
-    setValidado(true);
-    setTimeout(() => onDone(correto), 700);
+  useEffect(() => {
+    speakOnceRef.current = false;
+  }, []);
+  const speakOnceRef = useRef(false);
+  useEffect(() => {
+    if (!speakOnceRef.current) {
+      speakOnceRef.current = true;
+      try {
+        window.speechSynthesis?.cancel();
+        const u = new SpeechSynthesisUtterance(
+          `Desenhe a ${p.nome.toLowerCase()} com o dedo!`,
+        );
+        u.lang = "pt-BR";
+        u.rate = 0.95;
+        window.speechSynthesis?.speak(u);
+      } catch {}
+    }
+  }, [p.nome]);
+
+  const pos = (e: React.PointerEvent) => {
+    const c = canvasRef.current!;
+    const r = c.getBoundingClientRect();
+    return {
+      x: ((e.clientX - r.left) / r.width) * c.width,
+      y: ((e.clientY - r.top) / r.height) * c.height,
+    };
   };
 
-  const CellGrid = ({
-    data,
-    onClick,
-  }: {
-    data: number[][];
-    onClick?: (r: number, c: number) => void;
-  }) => (
-    <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${p.cols}, 1fr)` }}>
-      {data.map((row: number[], r: number) =>
-        row.map((v: number, c: number) => (
-          <button
-            key={`${r}-${c}`}
-            onClick={() => onClick?.(r, c)}
-            className={`w-10 h-10 rounded-md border-2 transition-all ${v ? "bg-emerald-500 border-emerald-600" : "bg-card border-border hover:border-emerald/50"}`}
-          />
-        )),
-      )}
-    </div>
-  );
+  const start = (e: React.PointerEvent) => {
+    if (feito) return;
+    drawing.current = true;
+    last.current = pos(e);
+  };
+  const move = (e: React.PointerEvent) => {
+    if (!drawing.current || feito) return;
+    const c = canvasRef.current!;
+    const ctx = c.getContext("2d")!;
+    const cur = pos(e);
+    const prev = last.current!;
+    ctx.strokeStyle = p.cor;
+    ctx.lineWidth = 16;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(prev.x, prev.y);
+    ctx.lineTo(cur.x, cur.y);
+    ctx.stroke();
+    const dx = cur.x - prev.x;
+    const dy = cur.y - prev.y;
+    pixelsRef.current += Math.hypot(dx, dy);
+    last.current = cur;
+    const pct = Math.min(100, (pixelsRef.current / META) * 100);
+    setProgresso(pct);
+    if (pct >= 100 && !feito) {
+      setFeito(true);
+      try {
+        const u = new SpeechSynthesisUtterance("Que linda figura! Mandou bem!");
+        u.lang = "pt-BR";
+        window.speechSynthesis?.speak(u);
+      } catch {}
+      setTimeout(() => onDone(true), 900);
+    }
+  };
+  const end = () => {
+    drawing.current = false;
+    last.current = null;
+  };
+  const limpar = () => {
+    const c = canvasRef.current;
+    if (!c) return;
+    c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
+    pixelsRef.current = 0;
+    setProgresso(0);
+  };
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="text-center">
-          <div className="text-xs font-bold text-muted-foreground mb-2">MODELO</div>
-          <CellGrid data={p.modelo} />
+      <div className="text-center">
+        <div className="text-sm font-bold text-muted-foreground">
+          Desenhe por cima com o dedinho 👆
         </div>
-        <div className="text-center">
-          <div className="text-xs font-bold text-muted-foreground mb-2">SUA CÓPIA</div>
-          <CellGrid data={copia} onClick={toggle} />
+        <div className="text-2xl font-black mt-1" style={{ color: p.cor }}>
+          {p.nome}
         </div>
       </div>
-      <button
-        onClick={validar}
-        disabled={validado}
-        className="w-full py-4 rounded-2xl bg-emerald-500 text-white font-black text-lg active:scale-95 transition-all disabled:opacity-50"
-      >
-        Pronto!
-      </button>
+
+      <div className="grid grid-cols-2 gap-3">
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-4 border-4 border-slate-200 flex flex-col items-center justify-center">
+          <div className="text-xs font-black text-slate-500 mb-2">MODELO</div>
+          {img ? (
+            <img src={img} alt={p.nome} className="w-32 h-32 object-contain drop-shadow" />
+          ) : (
+            <div className="text-7xl">{p.emoji}</div>
+          )}
+        </div>
+
+        <div
+          className="relative bg-white rounded-3xl border-4 border-dashed p-2 touch-none select-none"
+          style={{ borderColor: p.cor + "80" }}
+        >
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 text-xs font-black text-slate-400 z-10">
+            SUA VEZ
+          </div>
+          {img ? (
+            <img
+              src={img}
+              alt=""
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-contain p-4 opacity-20 pointer-events-none"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-7xl opacity-20 pointer-events-none">
+              {p.emoji}
+            </div>
+          )}
+          <canvas
+            ref={canvasRef}
+            width={300}
+            height={300}
+            onPointerDown={start}
+            onPointerMove={move}
+            onPointerUp={end}
+            onPointerLeave={end}
+            className="relative w-full aspect-square touch-none cursor-crosshair"
+          />
+        </div>
+      </div>
+
+      <div className="h-3 rounded-full bg-slate-200 overflow-hidden">
+        <div
+          className="h-full transition-all duration-200"
+          style={{ width: `${progresso}%`, background: p.cor }}
+        />
+      </div>
+
+      <div className="flex gap-2">
+        <button
+          onClick={limpar}
+          disabled={feito}
+          className="flex-1 py-3 rounded-2xl bg-slate-200 text-slate-700 font-black active:scale-95 disabled:opacity-50"
+        >
+          🔄 Limpar
+        </button>
+        <button
+          onClick={() => {
+            setFeito(true);
+            onDone(true);
+          }}
+          disabled={feito || progresso < 30}
+          className="flex-1 py-3 rounded-2xl text-white font-black active:scale-95 disabled:opacity-40"
+          style={{ background: p.cor }}
+        >
+          Terminei! ✨
+        </button>
+      </div>
     </div>
   );
 }

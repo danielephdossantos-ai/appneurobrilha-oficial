@@ -314,14 +314,27 @@ export const RITMO_BATIDAS_VARS: Variation[] = range(30).map((i) => {
   };
 });
 
-// C3. COPIAR FIGURA — grade 4×4, lado esquerdo mostrado, copiar na grade em branco
+// C3. COPIAR FIGURA — criança desenha por cima da figura (tracing com o dedo)
+const COPIAR_FIG_BANK = [
+  { emoji: "⭐", nome: "ESTRELA", cor: "#facc15" },
+  { emoji: "❤️", nome: "CORAÇÃO", cor: "#ef4444" },
+  { emoji: "🌙", nome: "LUA", cor: "#fbbf24" },
+  { emoji: "☀️", nome: "SOL", cor: "#f59e0b" },
+  { emoji: "🍎", nome: "MAÇÃ", cor: "#ef4444" },
+  { emoji: "🌳", nome: "ÁRVORE", cor: "#16a34a" },
+  { emoji: "🏠", nome: "CASA", cor: "#f97316" },
+  { emoji: "🐱", nome: "GATO", cor: "#a855f7" },
+  { emoji: "🐶", nome: "CACHORRO", cor: "#7c3aed" },
+  { emoji: "🐟", nome: "PEIXE", cor: "#06b6d4" },
+  { emoji: "🦋", nome: "BORBOLETA", cor: "#ec4899" },
+  { emoji: "🌸", nome: "FLOR", cor: "#f472b6" },
+  { emoji: "🐝", nome: "ABELHA", cor: "#eab308" },
+  { emoji: "🐢", nome: "TARTARUGA", cor: "#22c55e" },
+  { emoji: "🚗", nome: "CARRO", cor: "#3b82f6" },
+];
 export const COPIAR_FIGURA_VARS: Variation[] = range(30).map((i) => {
-  const rows = 4,
-    cols = 4;
-  const cells: number[][] = range(rows).map((r) =>
-    range(cols).map((c) => ((i + r * 3 + c * 7) % 3 === 0 ? 1 : 0)),
-  );
-  return { id: `cf-${i + 1}`, payload: { rows, cols, modelo: cells } };
+  const f = COPIAR_FIG_BANK[i % COPIAR_FIG_BANK.length];
+  return { id: `cf-${i + 1}`, payload: { ...f } };
 });
 
 // C4. ALVO MÓVEL — círculo move pela tela, toca nele antes de sair
