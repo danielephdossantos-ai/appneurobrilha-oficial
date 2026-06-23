@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell } from "@/components/Layout";
 import { useAppState } from "@/core/store";
-import { Lock, ClipboardList, Loader2, Star } from "lucide-react";
+import { Lock, ClipboardList, Loader2, Star, Volume2, VolumeX } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import { useEffect, useRef } from "react";
@@ -9,6 +9,7 @@ import { useHiperfoco } from "@/context/HiperfocoContext";
 import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
 import { useMascot } from "@/contexts/MascotContext";
+import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
