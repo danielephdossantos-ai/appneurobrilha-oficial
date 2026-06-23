@@ -10,6 +10,7 @@ import {
   Trash2,
   X,
   GraduationCap,
+  FileText,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,6 +20,7 @@ interface Prova {
   subject: string;
   exam_date: string; // YYYY-MM-DD
   notes: string | null;
+  tipo: "prova" | "trabalho";
 }
 
 interface Props {
@@ -46,6 +48,7 @@ export function CalendarioProvas({ childId }: Props) {
   const [showForm, setShowForm] = useState(false);
   const [subject, setSubject] = useState("");
   const [notes, setNotes] = useState("");
+  const [tipo, setTipo] = useState<"prova" | "trabalho">("prova");
 
   const monthStart = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
   const monthEnd = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
@@ -56,7 +59,7 @@ export function CalendarioProvas({ childId }: Props) {
       if (!childId) return [];
       const { data, error } = await supabase
         .from("exam_missions")
-        .select("id,child_id,subject,exam_date,notes")
+        .select("id,child_id,subject,exam_date,notes,tipo")
         .eq("child_id", childId)
         .gte("exam_date", ymd(monthStart))
         .lte("exam_date", ymd(monthEnd))
@@ -108,12 +111,13 @@ export function CalendarioProvas({ childId }: Props) {
       subject: subject.trim(),
       exam_date: selectedDate,
       notes: notes.trim() || null,
-    });
+      tipo,
+    } as any);
     if (error) {
       toast.error("Erro ao salvar: " + error.message);
       return;
     }
-    toast.success("Prova agendada!");
+    toast.success(tipo === "prova" ? "Prova agendada!" : "Trabalho agendado!");
     setSubject("");
     setNotes("");
     setShowForm(false);
@@ -136,7 +140,7 @@ export function CalendarioProvas({ childId }: Props) {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-black uppercase tracking-widest text-indigo-700 flex items-center gap-2">
           <CalendarDays className="h-4 w-4" />
-          Calendário de Provas
+          Calendário Escolar
         </h3>
         <div className="flex items-center gap-1">
           <button
@@ -191,12 +195,21 @@ export function CalendarioProvas({ childId }: Props) {
                 >
                   {date.getDate()}
                   {tem && (
-                    <span
-                      className={[
-                        "absolute bottom-1 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full",
-                        isSelected ? "bg-white" : "bg-rose-500",
-                      ].join(" ")}
-                    />
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
+                      {(provasPorDia.get(s) || []).slice(0, 3).map((p, idx) => (
+                        <span
+                          key={idx}
+                          className={[
+                            "h-1.5 w-1.5 rounded-full",
+                            isSelected
+                              ? "bg-white"
+                              : p.tipo === "trabalho"
+                              ? "bg-amber-500"
+                              : "bg-rose-500",
+                          ].join(" ")}
+                        />
+                      ))}
+                    </span>
                   )}
                 </button>
               );
@@ -219,17 +232,43 @@ export function CalendarioProvas({ childId }: Props) {
               className="text-[11px] font-black uppercase tracking-wider bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1"
             >
               {showForm ? <X className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
-              {showForm ? "Fechar" : "Nova prova"}
+              {showForm ? "Fechar" : "Novo evento"}
             </button>
           </div>
 
           {showForm && (
             <form onSubmit={salvarProva} className="space-y-2 bg-white border-2 border-indigo-200 rounded-xl p-3">
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setTipo("prova")}
+                  className={[
+                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                    tipo === "prova"
+                      ? "bg-rose-100 border-rose-400 text-rose-800"
+                      : "bg-white border-gray-200 text-gray-500",
+                  ].join(" ")}
+                >
+                  Prova
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTipo("trabalho")}
+                  className={[
+                    "flex-1 text-xs font-bold py-1.5 rounded-lg border-2 transition",
+                    tipo === "trabalho"
+                      ? "bg-amber-100 border-amber-400 text-amber-800"
+                      : "bg-white border-gray-200 text-gray-500",
+                  ].join(" ")}
+                >
+                  Trabalho
+                </button>
+              </div>
               <input
                 type="text"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                placeholder="Matéria (ex: Matemática)"
+                placeholder={tipo === "prova" ? "Matéria (ex: Matemática)" : "Tema do trabalho"}
                 className="w-full text-sm border border-indigo-200 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500"
                 required
               />
@@ -253,27 +292,45 @@ export function CalendarioProvas({ childId }: Props) {
             <p className="text-xs text-muted-foreground italic">Nenhuma prova nesse dia.</p>
           )}
 
-          {provasDoDia.map((p) => (
-            <div
-              key={p.id}
-              className="flex items-start gap-3 bg-white border-2 border-rose-100 rounded-xl p-3"
-            >
-              <div className="h-9 w-9 rounded-lg bg-rose-100 grid place-items-center shrink-0">
-                <GraduationCap className="h-5 w-5 text-rose-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-foreground">{p.subject}</p>
-                {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
-              </div>
-              <button
-                onClick={() => removerProva(p.id)}
-                className="p-1 text-muted-foreground hover:text-rose-600"
-                aria-label="Remover"
+          {provasDoDia.map((p) => {
+            const isTrab = p.tipo === "trabalho";
+            return (
+              <div
+                key={p.id}
+                className={[
+                  "flex items-start gap-3 bg-white border-2 rounded-xl p-3",
+                  isTrab ? "border-amber-200" : "border-rose-100",
+                ].join(" ")}
               >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </div>
-          ))}
+                <div
+                  className={[
+                    "h-9 w-9 rounded-lg grid place-items-center shrink-0",
+                    isTrab ? "bg-amber-100" : "bg-rose-100",
+                  ].join(" ")}
+                >
+                  {isTrab ? (
+                    <FileText className="h-5 w-5 text-amber-600" />
+                  ) : (
+                    <GraduationCap className="h-5 w-5 text-rose-600" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
+                    {isTrab ? "Trabalho" : "Prova"}
+                  </p>
+                  <p className="text-sm font-bold text-foreground">{p.subject}</p>
+                  {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
+                </div>
+                <button
+                  onClick={() => removerProva(p.id)}
+                  className="p-1 text-muted-foreground hover:text-rose-600"
+                  aria-label="Remover"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 
