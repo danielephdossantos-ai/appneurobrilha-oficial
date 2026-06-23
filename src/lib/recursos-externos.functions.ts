@@ -11,6 +11,42 @@ export interface RecursoExterno {
   conteudo?: string | null;
 }
 
+// ---------- YouTube (Data API v3) ----------
+async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
+  const key = process.env.YOUTUBE_API_KEY;
+  if (!key) return [];
+  // foco educativo infantil em PT-BR; embeddable + safeSearch strict
+  const q = `${query} educativo infantil`;
+  const url =
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6` +
+    `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
+    `&q=${encodeURIComponent(q)}&key=${key}`;
+  try {
+    const r = await fetch(url);
+    if (!r.ok) return [];
+    const data: any = await r.json();
+    const items: any[] = data.items || [];
+    return items
+      .filter((it) => it.id?.videoId)
+      .map((it) => {
+        const sn = it.snippet || {};
+        const thumb =
+          sn.thumbnails?.high?.url || sn.thumbnails?.medium?.url || sn.thumbnails?.default?.url || null;
+        const rec: RecursoExterno = {
+          fonte: "youtube",
+          titulo: sn.title || "Vídeo",
+          descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
+          url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
+          thumbnail: thumb,
+          conteudo: null,
+        };
+        return rec;
+      });
+  } catch {
+    return [];
+  }
+}
+
 function normalize(s: string): string {
   return s
     .toLowerCase()
@@ -96,7 +132,18 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
     }
 
     // 2) buscar nas APIs públicas (por enquanto só Wikipédia)
-    const resultados = await buscarWikipedia(queryN);
+    // 2) buscar nas APIs públicas (Wikipédia + YouTube em paralelo)
+    const [wiki, yt] = await Promise.all([
+      buscarWikipedia(queryN).catch(() => []),
+      buscarYoutube(queryN).catch(() => []),
+    ]);
+    // intercalar: 1 wiki, 1 yt, ... para diversificar
+    const resultados: RecursoExterno[] = [];
+    const max = Math.max(wiki.length, yt.length);
+    for (let i = 0; i < max; i++) {
+      if (wiki[i]) resultados.push(wiki[i]);
+      if (yt[i]) resultados.push(yt[i]);
+    }
 
     // 3) salvar no cache
     if (resultados.length > 0) {
