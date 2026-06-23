@@ -340,6 +340,17 @@ function ReforcoBrilha() {
         subtitle="Biblioteca pedagógica para pais, responsáveis e professores"
       />
 
+      <div className="mb-6">
+        <Link
+          to="/matriz-pedagogica"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 text-sm font-bold text-primary transition-colors"
+        >
+          <Network className="h-4 w-4" />
+          Abrir Matriz Pedagógica
+        </Link>
+      </div>
+
+
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
           <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
