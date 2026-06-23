@@ -77,6 +77,7 @@ const navCrianca = [
   { to: "/", label: "Início", icon: Home },
   { to: "/loja-mascotes", label: "Loja de Mascotes", icon: ShoppingBag },
   { to: "/missao-prova", label: "Missão Prova", icon: Target },
+  { to: "/missao-trabalho", label: "Missão Trabalho", icon: ClipboardList },
   
 
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
