@@ -10,7 +10,6 @@ import {
 import { useProgressoAlfa } from "../hooks/useProgressoAlfa";
 import { useVoz } from "../hooks/useVoz";
 import { objetoImg } from "@/data/neuro-treino/objetos";
-import { CenarioIlustrado } from "./CenarioIlustrado";
 
 interface Props {
   childId: string;
@@ -201,61 +200,33 @@ function LeitorHistoria({
       </div>
 
       {fase === "leitura" && (
-        <div className="flex-1 relative overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pagina}
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -60 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="absolute inset-0"
-            >
-              <CenarioIlustrado
-                imagem={pAtual.imagem}
-                vocabBase={historia.vocabBase}
-                onTocarPersonagem={() => falar(pAtual.texto)}
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Texto da história em faixa estilo livro */}
-          <div className="absolute left-0 right-0 bottom-24 px-6 pointer-events-none">
-            <motion.div
-              key={`txt-${pagina}`}
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="max-w-xl mx-auto bg-white/95 backdrop-blur rounded-3xl shadow-2xl px-6 py-4 border-4 border-amber-200"
-            >
-              <p className="text-center text-xl sm:text-2xl font-bold text-slate-800 leading-snug">
-                {pAtual.texto}
-              </p>
-            </motion.div>
+        <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+          <div className="bg-white rounded-3xl shadow-xl p-6 max-w-md w-full flex flex-col items-center gap-4">
+            <img src={objetoImg(pAtual.imagem)} alt="" className="h-48 object-contain" />
+            <p className="text-center text-lg font-medium text-slate-700">
+              {pAtual.texto}
+            </p>
           </div>
-
-          {/* Navegação */}
-          <div className="absolute left-0 right-0 bottom-4 flex items-center justify-center gap-3">
+          <div className="flex items-center gap-3">
             <button
               onClick={antPag}
               disabled={pagina === 0}
-              className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center disabled:opacity-30"
+              className="w-12 h-12 rounded-full bg-white shadow flex items-center justify-center disabled:opacity-30"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
-            <div className="px-4 py-2 rounded-full bg-white/90 shadow text-sm font-bold text-slate-600">
+            <div className="text-sm font-bold text-slate-500">
               {pagina + 1} / {totalPag}
             </div>
             <button
               onClick={proxPag}
-              className="w-14 h-14 rounded-full bg-rose-500 text-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+              className="w-12 h-12 rounded-full bg-rose-500 text-white shadow flex items-center justify-center"
             >
-              <ArrowRight className="w-6 h-6" />
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>
       )}
-
 
       {fase === "perguntas" && (
         <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
