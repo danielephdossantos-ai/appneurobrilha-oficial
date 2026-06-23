@@ -211,6 +211,7 @@ function EditorTrabalho({
   const [buscando, setBuscando] = useState(false);
   const [recursos, setRecursos] = useState<RecursoExterno[]>([]);
   const [salvando, setSalvando] = useState(false);
+  const [tutorAberto, setTutorAberto] = useState(false);
 
   async function pesquisar() {
     const q = buscaQuery.trim();
