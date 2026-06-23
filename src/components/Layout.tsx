@@ -89,6 +89,7 @@ const navCrianca = [
 
 const navPais = [
   { to: "/painel-pais", label: "Painel dos Pais", icon: ShieldCheck },
+  { to: "/matriz-pedagogica", label: "Matriz Pedagógica", icon: Network },
   { to: "/progressao", label: "Progressão", icon: FileBarChart2 },
   { to: "/terapeuta-brilha", label: "Terapeuta Brilha", icon: MessagesSquare },
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
