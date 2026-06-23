@@ -406,37 +406,47 @@ function ReforcoBrilha() {
               </Card>
 
               {searchResult.aulas.length > 0 && (
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1 flex items-center gap-2">
-                    <BookOpen className="h-3.5 w-3.5" />
-                    Aulas disponíveis ({searchResult.aulas.length})
-                  </h4>
+                <div className="space-y-3">
+                  <div className="px-1">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                      <BookOpen className="h-3.5 w-3.5" />
+                      Aulas disponíveis ({searchResult.aulas.length})
+                    </h4>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      👇 Toque em uma aula abaixo para começar
+                    </p>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {searchResult.aulas.map((aula) => (
                       <button
                         key={aula.id}
                         onClick={() => setAulaAberta({ id: aula.id, titulo: aula.titulo })}
-                        className="text-left p-4 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 transition-all flex justify-between items-start gap-3"
+                        className="group text-left p-4 rounded-2xl bg-card border-2 border-primary/30 hover:border-primary hover:bg-primary/5 hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col gap-3 cursor-pointer"
                       >
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-black uppercase text-primary tracking-wider">
-                              {aula.nivel}
-                            </span>
-                            {aula.faixa_etaria && (
-                              <span className="text-[10px] text-muted-foreground">
-                                {aula.faixa_etaria}
+                        <div className="flex justify-between items-start gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-[10px] font-black uppercase text-primary tracking-wider">
+                                {aula.nivel}
                               </span>
+                              {aula.faixa_etaria && (
+                                <span className="text-[10px] text-muted-foreground">
+                                  {aula.faixa_etaria}
+                                </span>
+                              )}
+                            </div>
+                            <div className="font-bold text-sm">{aula.titulo}</div>
+                            {aula.objetivo && (
+                              <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                                {aula.objetivo}
+                              </div>
                             )}
                           </div>
-                          <div className="font-bold text-sm">{aula.titulo}</div>
-                          {aula.objetivo && (
-                            <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                              {aula.objetivo}
-                            </div>
-                          )}
                         </div>
-                        <PlayCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <div className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm group-hover:bg-primary/90 transition-colors">
+                          <PlayCircle className="h-5 w-5" />
+                          Começar aula
+                        </div>
                       </button>
                     ))}
                   </div>
