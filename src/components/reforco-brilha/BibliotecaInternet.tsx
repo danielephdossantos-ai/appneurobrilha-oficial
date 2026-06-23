@@ -6,6 +6,7 @@ import { Globe, ExternalLink, Loader2, RefreshCw, X, Play } from "lucide-react";
 
 interface Props {
   query: string;
+  onAbrirRecurso?: (recurso: RecursoExterno) => void;
 }
 
 function extractYoutubeId(url: string): string | null {
@@ -30,7 +31,7 @@ function toEmbedUrl(url: string, fonte: string): string {
   }
 }
 
-export function BibliotecaInternet({ query }: Props) {
+export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
   const buscar = useServerFn(buscarRecursosExternos);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -111,6 +112,7 @@ export function BibliotecaInternet({ query }: Props) {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
             const abreExterno = r.fonte === "khan" || r.fonte === "youtube-edu";
             const handleClick = (e: React.MouseEvent) => {
+              onAbrirRecurso?.(r);
               if (abreExterno) return; // deixa o <a target="_blank"> abrir normalmente
               e.preventDefault();
               if (ytId) {
