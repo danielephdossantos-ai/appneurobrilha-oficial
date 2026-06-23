@@ -337,19 +337,24 @@ export const COPIAR_FIGURA_VARS: Variation[] = range(30).map((i) => {
   return { id: `cf-${i + 1}`, payload: { ...f } };
 });
 
-// C4. ALVO MÓVEL — círculo move pela tela, toca nele antes de sair
+// C4. ALVO MÓVEL — bichinho do banco se move, criança toca (tempo livre)
 const TEMAS_ALVO = [
-  { emoji: "⭐", cor: "#facc15" },
-  { emoji: "❤️", cor: "#ef4444" },
-  { emoji: "💎", cor: "#3b82f6" },
-  { emoji: "🌟", cor: "#f59e0b" },
-  { emoji: "🍀", cor: "#22c55e" },
+  { emoji: "🐱", nome: "GATO", cor: "#a855f7" },
+  { emoji: "🐶", nome: "CACHORRO", cor: "#7c3aed" },
+  { emoji: "🐰", nome: "COELHO", cor: "#f472b6" },
+  { emoji: "🦊", nome: "RAPOSA", cor: "#f97316" },
+  { emoji: "🐢", nome: "TARTARUGA", cor: "#22c55e" },
+  { emoji: "🐝", nome: "ABELHA", cor: "#eab308" },
+  { emoji: "🦋", nome: "BORBOLETA", cor: "#ec4899" },
+  { emoji: "🐸", nome: "SAPO", cor: "#16a34a" },
+  { emoji: "🐟", nome: "PEIXE", cor: "#06b6d4" },
+  { emoji: "🦉", nome: "CORUJA", cor: "#a16207" },
 ];
 export const ALVO_MOVEL_VARS: Variation[] = range(30).map((i) => {
   const t = TEMAS_ALVO[i % TEMAS_ALVO.length];
-  const velocidade = 0.4 + (i % 6) * 0.1; // bem mais lento (0.4 → 0.9)
+  const velocidade = 0.4 + (i % 6) * 0.08;
   const rounds = 3 + (i % 4);
-  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds, tempoMs: 6000 - i * 40 } };
+  return { id: `am-${i + 1}`, payload: { ...t, velocidade, rounds } };
 });
 
 // ──────────────────────────────────────────────
