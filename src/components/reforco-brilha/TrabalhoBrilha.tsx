@@ -229,6 +229,10 @@ function EditorTrabalho({
   const [resumoRevisao, setResumoRevisao] = useState<string | null>(null);
   const [avisoCreditos, setAvisoCreditos] = useState<string | null>(null);
 
+  // Preview inline
+  const [preview, setPreview] = useState<RecursoExterno | null>(null);
+
+
   // Debounced auto-save
   useEffect(() => {
     if (!childId) return;
