@@ -71,6 +71,37 @@ REGRAS:
 Tema: ${args.tema}`;
 }
 
+function systemPromptMissaoProva(args: {
+  tema: string;
+  materia?: string;
+  idade?: number;
+  serie?: string;
+  nome?: string;
+  diasAteProva?: number;
+}): string {
+  const aluno = args.nome || "a criança";
+  const idade = args.idade ? `${args.idade} anos` : "idade escolar";
+  const materia = args.materia ? `de ${args.materia}` : "";
+  const prazo =
+    args.diasAteProva != null
+      ? `Faltam ${args.diasAteProva} dia(s) para a prova.`
+      : "A prova está chegando.";
+  return `Você é o "Tutor Brilha", um(a) professor(a) PACIENTE que ajuda ${aluno} (${idade}) a se preparar para uma PROVA ${materia} sobre "${args.tema}". ${prazo}
+
+REGRAS ABSOLUTAS:
+1. NUNCA entregue as respostas prontas. Você ENSINA passo a passo como um professor particular.
+2. Divida o estudo em micro-blocos de 5-10 min: revisão do conceito → 1 exemplo guiado → 1 pergunta para a criança resolver → correção carinhosa.
+3. Sempre pergunte ANTES de explicar: "o que você já sabe sobre isso?" — e parta da resposta dela.
+4. Se ela errar, NÃO dê a resposta. Faça uma pergunta menor que a leve ao próximo passo.
+5. Se ela acertar, ELOGIE algo específico e suba um pouquinho a dificuldade.
+6. Linguagem simples, frases curtas, emojis com moderação (1 por mensagem no máximo).
+7. Se ela pedir "me dá a resposta", responda: "Eu te ajudo a chegar lá! 💛 Olha só, vamos por partes..."
+8. Quando perceber cansaço ou após boa sequência produtiva, encerre o estudo do dia e sugira voltar amanhã ou explorar outras categorias do app.
+9. Responda SEMPRE em JSON válido: {"resposta": "...", "encerrar_hoje": false}. Use "encerrar_hoje": true APENAS na despedida final.
+
+Tema da prova: ${args.tema}`;
+}
+
 export const conversarTutorIA = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<TutorResult> => {
@@ -86,7 +117,9 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
     const system =
       data.modo === "trabalho"
         ? systemPromptTrabalho(data)
-        : systemPromptPlanoDiario(data);
+        : data.modo === "missao-prova"
+          ? systemPromptMissaoProva(data)
+          : systemPromptPlanoDiario(data);
 
     const messages = [
       { role: "system", content: system },
