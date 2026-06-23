@@ -8,14 +8,14 @@ export interface RecursoExterno {
     | "youtube"
     | "openlibrary"
     | "wikiversity"
-    | "archive"
-    | "youtube-edu";
+    | "archive";
   titulo: string;
   descricao: string | null;
   url: string;
   thumbnail: string | null;
   conteudo?: string | null;
 }
+
 
 
 // ---------- YouTube (Data API v3) ----------
