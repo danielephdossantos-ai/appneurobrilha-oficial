@@ -352,18 +352,42 @@ function MissaoProva() {
                               {todaySession.description}
                             </p>
                           </div>
-                          <button
-                            onClick={() => startSession(todaySession, mission)}
-                            className="bg-primary text-white px-8 py-3 rounded-2xl font-black text-sm shadow-kid hover:scale-105 transition-all flex items-center gap-2 whitespace-nowrap"
-                          >
-                            COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
-                          </button>
+                          <div className="flex flex-col gap-2 shrink-0">
+                            <button
+                              onClick={() => startSession(todaySession, mission)}
+                              className="bg-primary text-white px-8 py-3 rounded-2xl font-black text-sm shadow-kid hover:scale-105 transition-all flex items-center gap-2 whitespace-nowrap"
+                            >
+                              COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setCurrentSession(todaySession);
+                                setCurrentMission(mission);
+                                setTutorAberto(true);
+                              }}
+                              className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-2xl font-black text-xs flex items-center gap-2 justify-center"
+                            >
+                              <GraduationCap className="h-4 w-4" /> Tutor Brilha
+                            </button>
+                          </div>
                         </div>
                       ) : (
-                        <div className="h-full flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-100 rounded-[2rem] text-center text-slate-400">
-                          <Clock className="h-10 w-10 mb-2 opacity-20" />
+                        <div className="h-full flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-100 rounded-[2rem] text-center text-slate-400 gap-3">
+                          <Clock className="h-10 w-10 opacity-20" />
                           <p className="font-bold">Nenhum treino agendado para hoje.</p>
-                          <p className="text-xs">Descanse um pouco e recarregue suas energias!</p>
+                          <button
+                            onClick={() => {
+                              setCurrentSession({
+                                title: `Estudo livre — ${mission.subject}`,
+                                description: `Conteúdos da prova de ${mission.subject}`,
+                              });
+                              setCurrentMission(mission);
+                              setTutorAberto(true);
+                            }}
+                            className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-2xl font-black text-xs flex items-center gap-2"
+                          >
+                            <GraduationCap className="h-4 w-4" /> Estudar com Tutor Brilha
+                          </button>
                         </div>
                       )}
                     </div>
@@ -435,6 +459,21 @@ function MissaoProva() {
         }
         changeLabel="Trocar sessão"
       />
+      {tutorAberto && currentSession && currentMission && (
+        <TutorTrabalho
+          modo="missao-prova"
+          tema={`${currentSession.title} (${currentMission.subject})`}
+          materia={currentMission.subject}
+          diasAteProva={Math.max(
+            0,
+            differenceInDays(
+              new Date(currentMission.exam_date + "T12:00:00"),
+              new Date(),
+            ),
+          )}
+          onFechar={() => setTutorAberto(false)}
+        />
+      )}
     </Shell>
   );
 }
