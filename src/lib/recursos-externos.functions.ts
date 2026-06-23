@@ -197,6 +197,39 @@ async function buscarArchive(query: string): Promise<RecursoExterno[]> {
   }
 }
 
+// ---------- Khan Academy (link de busca, sem API) ----------
+function buscarKhanAcademy(query: string): RecursoExterno[] {
+  const q = encodeURIComponent(query);
+  return [
+    {
+      fonte: "khan",
+      titulo: `Khan Academy: aulas sobre "${query}"`,
+      descricao:
+        "Vídeos e exercícios gratuitos da Khan Academy em português. Toque para ver os resultados.",
+      url: `https://pt.khanacademy.org/search?page_search_query=${q}`,
+      thumbnail: "https://cdn.kastatic.org/images/khan-logo-vertical-transparent.png",
+      conteudo: null,
+    },
+  ];
+}
+
+// ---------- YouTube EDU (link de busca filtrada, sem API) ----------
+function buscarYoutubeEdu(query: string): RecursoExterno[] {
+  // sp=EgIYAQ%253D%253D filtra apenas vídeos longos/educativos no YouTube
+  const q = encodeURIComponent(`${query} aula educativa infantil`);
+  return [
+    {
+      fonte: "youtube-edu",
+      titulo: `YouTube EDU: vídeos sobre "${query}"`,
+      descricao:
+        "Vídeos educativos selecionados no YouTube com busca segura. Toque para ver os resultados.",
+      url: `https://www.youtube.com/results?search_query=${q}&sp=EgIQAQ%253D%253D`,
+      thumbnail: null,
+      conteudo: null,
+    },
+  ];
+}
+
 export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
