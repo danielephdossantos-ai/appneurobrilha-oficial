@@ -2991,6 +2991,44 @@ export type Database = {
           },
         ]
       }
+      rb_indicadores: {
+        Row: {
+          created_at: string
+          descricao: string | null
+          habilidade_id: string
+          id: string
+          ordem: number
+          texto: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string | null
+          habilidade_id: string
+          id?: string
+          ordem?: number
+          texto: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string | null
+          habilidade_id?: string
+          id?: string
+          ordem?: number
+          texto?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_indicadores_habilidade_id_fkey"
+            columns: ["habilidade_id"]
+            isOneToOne: false
+            referencedRelation: "rb_habilidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_midia_vinculos: {
         Row: {
           created_at: string
@@ -3265,6 +3303,54 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      rb_progresso_indicadores: {
+        Row: {
+          atingido: boolean
+          child_id: string
+          created_at: string
+          id: string
+          indicador_id: string
+          marcado_em: string | null
+          observacao: string | null
+          updated_at: string
+        }
+        Insert: {
+          atingido?: boolean
+          child_id: string
+          created_at?: string
+          id?: string
+          indicador_id: string
+          marcado_em?: string | null
+          observacao?: string | null
+          updated_at?: string
+        }
+        Update: {
+          atingido?: boolean
+          child_id?: string
+          created_at?: string
+          id?: string
+          indicador_id?: string
+          marcado_em?: string | null
+          observacao?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_progresso_indicadores_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rb_progresso_indicadores_indicador_id_fkey"
+            columns: ["indicador_id"]
+            isOneToOne: false
+            referencedRelation: "rb_indicadores"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rb_sinais_alerta: {
         Row: {
