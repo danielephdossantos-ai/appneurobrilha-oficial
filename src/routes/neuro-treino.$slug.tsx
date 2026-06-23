@@ -2037,19 +2037,19 @@ function TracadoLetras({ p, onDone }: any) {
           {/* Esqueleto da letra: linhas grossas pontilhadas (guia única) */}
           {guia.map((s) => (
             <g key={s.k}>
-              {/* contorno pontilhado delicado */}
+              {/* contorno pontilhado gordinho */}
               <line
                 x1={s.x1}
                 y1={s.y1}
                 x2={s.x2}
                 y2={s.y2}
                 stroke={COR}
-                strokeOpacity={0.35}
-                strokeWidth={10}
-                strokeDasharray="2.5 2.5"
+                strokeOpacity={0.3}
+                strokeWidth={16}
+                strokeDasharray="2.5 3"
                 strokeLinecap="round"
               />
-              {/* preenchimento que aparece conforme criança traça */}
+              {/* preenchimento laranja que aparece conforme a criança escreve */}
               <line
                 x1={s.x1}
                 y1={s.y1}
@@ -2057,32 +2057,12 @@ function TracadoLetras({ p, onDone }: any) {
                 y2={s.y2}
                 stroke={COR}
                 strokeOpacity={fillOp}
-                strokeWidth={10}
+                strokeWidth={16}
                 strokeLinecap="round"
               />
             </g>
           ))}
 
-
-          {/* Setas de direção numeradas */}
-          {setas.map((s) => (
-            <g key={s.num} transform={`translate(${s.x} ${s.y}) rotate(${s.angle})`}>
-              <circle r={4} fill="white" stroke={COR} strokeWidth={1} />
-              <text
-                x={0}
-                y={0}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={4}
-                fontWeight={900}
-                fill={COR}
-                transform={`rotate(${-s.angle})`}
-              >
-                {s.num}
-              </text>
-              <polygon points="6,0 2.5,-2 2.5,2" fill={COR} />
-            </g>
-          ))}
         </svg>
 
         <canvas
