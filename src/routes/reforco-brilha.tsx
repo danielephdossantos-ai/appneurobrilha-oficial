@@ -430,6 +430,13 @@ function ReforcoBrilha() {
                 onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
               />
 
+              <OrientacoesFamilia
+                habilidadeId={searchResult.main.id}
+                habilidadeNome={searchResult.main.nome}
+              />
+
+
+
 
 
               {searchResult.aulas.length > 0 && (
