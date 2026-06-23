@@ -375,7 +375,7 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/neuro-treino", icon: Brain, label: "Treino" },
-    { to: "/amigo-virtual", icon: Heart, label: "Amigo" },
+    { to: "/jornada-365", icon: Compass, label: "Jornada" },
   ];
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">
