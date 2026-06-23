@@ -16,7 +16,7 @@ const DISCR_BANK = [
   { pista: "Faca", par1: "FACA", par2: "VACA", correta: "FACA", emoji1: "🔪", emoji2: "🐮" },
   { pista: "Gato", par1: "GATO", par2: "RATO", correta: "GATO", emoji1: "🐱", emoji2: "🐭" },
   { pista: "Bola", par1: "BOLA", par2: "COLA", correta: "BOLA", emoji1: "⚽", emoji2: "🧴" },
-  { pista: "Caro", par1: "CARO", par2: "CARRO", correta: "CARRO", emoji1: "💸", emoji2: "🚗" },
+  { pista: "Carro", par1: "CARRO", par2: "BARRO", correta: "CARRO", emoji1: "🚗", emoji2: "🟫" },
   { pista: "Sapo", par1: "SAPO", par2: "TRAPO", correta: "SAPO", emoji1: "🐸", emoji2: "🧹" },
   { pista: "Lua", par1: "LUA", par2: "RUA", correta: "LUA", emoji1: "🌙", emoji2: "🛣️" },
   { pista: "Mala", par1: "MALA", par2: "FALA", correta: "MALA", emoji1: "🧳", emoji2: "💬" },
