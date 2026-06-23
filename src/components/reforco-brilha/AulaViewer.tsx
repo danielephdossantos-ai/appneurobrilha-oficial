@@ -323,14 +323,12 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                     {atual.titulo || meta?.label}
                   </h3>
                 </div>
-                {(atual.conteudo?.texto || atual.titulo) && (
+                {(atual.conteudo?.texto || atual.titulo || atual.conteudo?.bullets || atual.conteudo?.passos) && (
                   <button
-                    onClick={() =>
-                      speak(`${atual.titulo || meta?.label}. ${atual.conteudo?.texto || ""}`)
-                    }
+                    onClick={() => speak(textoCompletoPagina(atual, meta?.label))}
                     className="h-11 w-11 rounded-full bg-primary/10 hover:bg-primary/20 grid place-items-center shrink-0 transition-colors"
-                    aria-label="Ouvir página"
-                    title="Ouvir página"
+                    aria-label="Ouvir página inteira"
+                    title="Ouvir página inteira (voz do aparelho)"
                   >
                     <Volume2 className="h-5 w-5 text-primary" />
                   </button>
