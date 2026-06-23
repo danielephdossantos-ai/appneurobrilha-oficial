@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { buscarRecursosExternos, type RecursoExterno } from "@/lib/recursos-externos.functions";
 import { Card } from "@/components/Layout";
 import { Sparkles, Loader2, RefreshCw, X, Play, ExternalLink, BookOpen, Video, Library, GraduationCap, Archive } from "lucide-react";
+import { SpeakButton } from "@/components/ui/SpeakButton";
 
 interface Props {
   query: string;
