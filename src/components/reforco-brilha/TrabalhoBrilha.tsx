@@ -343,7 +343,19 @@ function EditorTrabalho({
           <FileText className="h-4 w-4" />
           {trabalhoExistente ? "Editar trabalho" : "Novo trabalho"}
         </h3>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => {
+              if (!tema.trim()) {
+                toast.error("Defina o tema do trabalho primeiro");
+                return;
+              }
+              setTutorAberto(true);
+            }}
+            className="text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
+          >
+            <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
+          </button>
           <button
             onClick={exportarPDF}
             className="text-xs font-bold bg-white border-2 border-amber-300 text-amber-800 hover:bg-amber-50 px-3 py-1.5 rounded-lg flex items-center gap-1"
