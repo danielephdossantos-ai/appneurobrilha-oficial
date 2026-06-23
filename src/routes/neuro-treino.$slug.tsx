@@ -2013,10 +2013,10 @@ function TracadoLetras({ p, onDone }: any) {
                 <circle
                   cx={pt.x}
                   cy={pt.y}
-                  r={current ? 5.5 : 4.5}
+                  r={current ? 6.5 : 5.5}
                   fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
-                  stroke={done ? "hsl(var(--success))" : current ? "#f97316" : "#94a3b8"}
-                  strokeWidth={1.2}
+                  stroke={done ? "white" : current ? "white" : "#475569"}
+                  strokeWidth={1.5}
                   className={current ? "animate-pulse" : ""}
                 />
                 {!done && (
@@ -2025,7 +2025,7 @@ function TracadoLetras({ p, onDone }: any) {
                     y={pt.y}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    fontSize={4.2}
+                    fontSize={5.5}
                     fontWeight={900}
                     fill={current ? "white" : "#475569"}
                   >
