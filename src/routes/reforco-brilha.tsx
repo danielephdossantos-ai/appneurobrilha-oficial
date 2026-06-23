@@ -374,6 +374,14 @@ function ReforcoBrilha() {
             </p>
           </Card>
 
+          <AssistenteGuiado
+            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+            onBuscar={(q) => {
+              setSearchQuery(q);
+              runSearch(q);
+            }}
+          />
+
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
               <div className="flex items-center justify-between px-1">
