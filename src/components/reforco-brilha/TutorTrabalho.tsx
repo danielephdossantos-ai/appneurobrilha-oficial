@@ -99,6 +99,9 @@ export function TutorTrabalho({ tema, materia, modo = "trabalho", diasAteProva, 
       setInput("");
     }
     setCarregando(true);
+    const novoUso = incrementarUso(activeChild?.id);
+    setUso(novoUso);
+
 
     try {
       const res = await conversar({
