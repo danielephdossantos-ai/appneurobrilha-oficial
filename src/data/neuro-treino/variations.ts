@@ -1500,140 +1500,53 @@ const CORPO_VARS: Variation[] = range(30).map((i) => {
 // Cada ponto: {x,y} em viewBox 100x100. lift=true inicia novo traço (não liga ao anterior).
 type LetraPonto = { x: number; y: number; lift?: boolean };
 const TRACADO_BANK: { letra: string; pontos: LetraPonto[] }[] = [
-  // ===================== MAIÚSCULAS A–Z =====================
-  { letra: "A", pontos: [{ x: 20, y: 88 }, { x: 50, y: 12 }, { x: 80, y: 88 }, { x: 32, y: 58, lift: true }, { x: 68, y: 58 }] },
-  { letra: "B", pontos: [
-    { x: 25, y: 12 }, { x: 25, y: 88 },
-    { x: 25, y: 12, lift: true }, { x: 60, y: 18 }, { x: 70, y: 35 }, { x: 60, y: 48 }, { x: 25, y: 50 },
-    { x: 25, y: 50, lift: true }, { x: 65, y: 55 }, { x: 78, y: 70 }, { x: 65, y: 85 }, { x: 25, y: 88 },
+  // A: lado esq, topo, lado dir; traço da barra
+  { letra: "A", pontos: [
+    { x: 20, y: 88 }, { x: 50, y: 12 }, { x: 80, y: 88 },
+    { x: 32, y: 58, lift: true }, { x: 68, y: 58 },
   ]},
-  { letra: "C", pontos: [{ x: 80, y: 25 }, { x: 60, y: 14 }, { x: 30, y: 22 }, { x: 18, y: 50 }, { x: 30, y: 78 }, { x: 60, y: 86 }, { x: 80, y: 75 }] },
-  { letra: "D", pontos: [
-    { x: 25, y: 12 }, { x: 25, y: 88 },
-    { x: 25, y: 12, lift: true }, { x: 60, y: 18 }, { x: 78, y: 40 }, { x: 78, y: 60 }, { x: 60, y: 82 }, { x: 25, y: 88 },
+  // L: desce, vira direita
+  { letra: "L", pontos: [{ x: 30, y: 12 }, { x: 30, y: 88 }, { x: 80, y: 88 }] },
+  // T: barra horizontal + haste
+  { letra: "T", pontos: [
+    { x: 15, y: 18 }, { x: 85, y: 18 },
+    { x: 50, y: 18, lift: true }, { x: 50, y: 88 },
   ]},
-  { letra: "E", pontos: [{ x: 80, y: 14 }, { x: 25, y: 14 }, { x: 25, y: 88 }, { x: 80, y: 88 }, { x: 25, y: 50, lift: true }, { x: 65, y: 50 }] },
-  { letra: "F", pontos: [{ x: 25, y: 88 }, { x: 25, y: 14 }, { x: 78, y: 14 }, { x: 25, y: 50, lift: true }, { x: 65, y: 50 }] },
-  { letra: "G", pontos: [
-    { x: 80, y: 25 }, { x: 55, y: 14 }, { x: 28, y: 25 }, { x: 18, y: 50 }, { x: 28, y: 75 }, { x: 55, y: 86 }, { x: 78, y: 78 }, { x: 78, y: 55 }, { x: 55, y: 55 },
+  // I: só desce
+  { letra: "I", pontos: [{ x: 50, y: 14 }, { x: 50, y: 88 }] },
+  // O: 8 pontos ao redor da elipse
+  { letra: "O", pontos: [
+    { x: 50, y: 12 }, { x: 78, y: 25 }, { x: 88, y: 50 }, { x: 78, y: 75 },
+    { x: 50, y: 88 }, { x: 22, y: 75 }, { x: 12, y: 50 }, { x: 22, y: 25 },
+    { x: 50, y: 12 },
   ]},
+  // E: contorno e traço do meio
+  { letra: "E", pontos: [
+    { x: 80, y: 14 }, { x: 25, y: 14 }, { x: 25, y: 88 }, { x: 80, y: 88 },
+    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
+  ]},
+  // H: duas hastes + barra
   { letra: "H", pontos: [
     { x: 25, y: 14 }, { x: 25, y: 88 },
-    { x: 75, y: 14, lift: true }, { x: 75, y: 88 },
     { x: 25, y: 50, lift: true }, { x: 75, y: 50 },
+    { x: 75, y: 14, lift: true }, { x: 75, y: 88 },
   ]},
-  { letra: "I", pontos: [{ x: 50, y: 14 }, { x: 50, y: 88 }, { x: 30, y: 14, lift: true }, { x: 70, y: 14 }, { x: 30, y: 88, lift: true }, { x: 70, y: 88 }] },
-  { letra: "J", pontos: [{ x: 65, y: 14 }, { x: 65, y: 70 }, { x: 55, y: 85 }, { x: 38, y: 88 }, { x: 25, y: 78 }] },
-  { letra: "K", pontos: [
-    { x: 25, y: 12 }, { x: 25, y: 88 },
-    { x: 75, y: 14, lift: true }, { x: 25, y: 50 },
-    { x: 40, y: 55, lift: true }, { x: 78, y: 88 },
+  // F: lado, topo, barra do meio
+  { letra: "F", pontos: [
+    { x: 25, y: 88 }, { x: 25, y: 14 }, { x: 78, y: 14 },
+    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
   ]},
-  { letra: "L", pontos: [{ x: 30, y: 12 }, { x: 30, y: 88 }, { x: 80, y: 88 }] },
-  { letra: "M", pontos: [{ x: 15, y: 88 }, { x: 15, y: 14 }, { x: 50, y: 60 }, { x: 85, y: 14 }, { x: 85, y: 88 }] },
-  { letra: "N", pontos: [{ x: 20, y: 88 }, { x: 20, y: 14 }, { x: 80, y: 88 }, { x: 80, y: 14 }] },
-  { letra: "O", pontos: [
-    { x: 50, y: 12 }, { x: 78, y: 25 }, { x: 88, y: 50 }, { x: 78, y: 75 }, { x: 50, y: 88 }, { x: 22, y: 75 }, { x: 12, y: 50 }, { x: 22, y: 25 }, { x: 50, y: 12 },
-  ]},
-  { letra: "P", pontos: [{ x: 25, y: 88 }, { x: 25, y: 14 }, { x: 65, y: 14 }, { x: 78, y: 28 }, { x: 78, y: 42 }, { x: 65, y: 52 }, { x: 25, y: 52 }] },
-  { letra: "Q", pontos: [
-    { x: 50, y: 12 }, { x: 78, y: 25 }, { x: 88, y: 50 }, { x: 78, y: 75 }, { x: 50, y: 88 }, { x: 22, y: 75 }, { x: 12, y: 50 }, { x: 22, y: 25 }, { x: 50, y: 12 },
-    { x: 60, y: 70, lift: true }, { x: 88, y: 95 },
-  ]},
-  { letra: "R", pontos: [
-    { x: 25, y: 88 }, { x: 25, y: 14 }, { x: 65, y: 14 }, { x: 78, y: 28 }, { x: 78, y: 42 }, { x: 65, y: 52 }, { x: 25, y: 52 },
-    { x: 50, y: 52, lift: true }, { x: 80, y: 88 },
-  ]},
-  { letra: "S", pontos: [{ x: 80, y: 25 }, { x: 55, y: 14 }, { x: 30, y: 22 }, { x: 25, y: 38 }, { x: 45, y: 48 }, { x: 70, y: 56 }, { x: 78, y: 72 }, { x: 60, y: 86 }, { x: 30, y: 82 }, { x: 20, y: 70 }] },
-  { letra: "T", pontos: [{ x: 15, y: 18 }, { x: 85, y: 18 }, { x: 50, y: 18, lift: true }, { x: 50, y: 88 }] },
-  { letra: "U", pontos: [{ x: 20, y: 14 }, { x: 20, y: 70 }, { x: 35, y: 85 }, { x: 65, y: 85 }, { x: 80, y: 70 }, { x: 80, y: 14 }] },
+  // V: dois traços diagonais
   { letra: "V", pontos: [{ x: 15, y: 14 }, { x: 50, y: 88 }, { x: 85, y: 14 }] },
-  { letra: "W", pontos: [{ x: 12, y: 14 }, { x: 30, y: 88 }, { x: 50, y: 40 }, { x: 70, y: 88 }, { x: 88, y: 14 }] },
-  { letra: "X", pontos: [{ x: 18, y: 12 }, { x: 82, y: 88 }, { x: 82, y: 12, lift: true }, { x: 18, y: 88 }] },
-  { letra: "Y", pontos: [{ x: 18, y: 14 }, { x: 50, y: 50 }, { x: 82, y: 14 }, { x: 50, y: 50, lift: true }, { x: 50, y: 88 }] },
-  { letra: "Z", pontos: [{ x: 20, y: 14 }, { x: 80, y: 14 }, { x: 20, y: 88 }, { x: 80, y: 88 }] },
-
-  // ===================== MINÚSCULAS a–z =====================
-  // Use x-height ~45, baseline ~85, descida ~100
-  { letra: "a", pontos: [
-    { x: 70, y: 50 }, { x: 55, y: 42 }, { x: 35, y: 48 }, { x: 28, y: 65 }, { x: 38, y: 82 }, { x: 60, y: 82 }, { x: 70, y: 70 },
-    { x: 70, y: 50, lift: true }, { x: 70, y: 85 },
-  ]},
-  { letra: "b", pontos: [
-    { x: 28, y: 14 }, { x: 28, y: 85 },
-    { x: 28, y: 60, lift: true }, { x: 48, y: 48 }, { x: 68, y: 60 }, { x: 70, y: 72 }, { x: 55, y: 85 }, { x: 28, y: 80 },
-  ]},
-  { letra: "c", pontos: [{ x: 72, y: 52 }, { x: 50, y: 45 }, { x: 30, y: 58 }, { x: 28, y: 75 }, { x: 45, y: 85 }, { x: 72, y: 80 }] },
-  { letra: "d", pontos: [
-    { x: 72, y: 14 }, { x: 72, y: 85 },
-    { x: 72, y: 55, lift: true }, { x: 50, y: 45 }, { x: 30, y: 58 }, { x: 30, y: 75 }, { x: 50, y: 85 }, { x: 72, y: 78 },
-  ]},
-  { letra: "e", pontos: [{ x: 28, y: 65 }, { x: 72, y: 65 }, { x: 68, y: 50 }, { x: 50, y: 45 }, { x: 30, y: 55 }, { x: 28, y: 75 }, { x: 50, y: 85 }, { x: 72, y: 78 }] },
-  { letra: "f", pontos: [{ x: 72, y: 18 }, { x: 55, y: 16 }, { x: 42, y: 28 }, { x: 42, y: 88 }, { x: 25, y: 48, lift: true }, { x: 60, y: 48 }] },
-  { letra: "g", pontos: [
-    { x: 70, y: 50 }, { x: 55, y: 42 }, { x: 35, y: 48 }, { x: 28, y: 65 }, { x: 38, y: 82 }, { x: 60, y: 82 }, { x: 70, y: 70 },
-    { x: 70, y: 50, lift: true }, { x: 70, y: 92 }, { x: 55, y: 100 }, { x: 32, y: 96 },
-  ]},
-  { letra: "h", pontos: [
-    { x: 28, y: 14 }, { x: 28, y: 85 },
-    { x: 28, y: 58, lift: true }, { x: 48, y: 46 }, { x: 70, y: 56 }, { x: 70, y: 85 },
-  ]},
-  { letra: "i", pontos: [{ x: 50, y: 45 }, { x: 50, y: 85 }, { x: 50, y: 28, lift: true }, { x: 50, y: 32 }] },
-  { letra: "j", pontos: [{ x: 55, y: 45 }, { x: 55, y: 90 }, { x: 45, y: 100 }, { x: 28, y: 95 }, { x: 55, y: 28, lift: true }, { x: 55, y: 32 }] },
-  { letra: "k", pontos: [
-    { x: 28, y: 14 }, { x: 28, y: 85 },
-    { x: 70, y: 50, lift: true }, { x: 28, y: 70 },
-    { x: 40, y: 65, lift: true }, { x: 72, y: 85 },
-  ]},
-  { letra: "l", pontos: [{ x: 50, y: 14 }, { x: 50, y: 85 }] },
-  { letra: "m", pontos: [
-    { x: 20, y: 85 }, { x: 20, y: 45 }, { x: 35, y: 45 }, { x: 50, y: 55 }, { x: 50, y: 85 },
-    { x: 50, y: 55, lift: true }, { x: 65, y: 45 }, { x: 80, y: 55 }, { x: 80, y: 85 },
-  ]},
-  { letra: "n", pontos: [{ x: 28, y: 85 }, { x: 28, y: 45 }, { x: 45, y: 45 }, { x: 70, y: 58 }, { x: 70, y: 85 }] },
-  { letra: "o", pontos: [{ x: 50, y: 45 }, { x: 70, y: 55 }, { x: 75, y: 70 }, { x: 60, y: 84 }, { x: 40, y: 84 }, { x: 25, y: 70 }, { x: 30, y: 55 }, { x: 50, y: 45 }] },
-  { letra: "p", pontos: [
-    { x: 28, y: 100 }, { x: 28, y: 45 },
-    { x: 28, y: 58, lift: true }, { x: 48, y: 45 }, { x: 70, y: 58 }, { x: 70, y: 72 }, { x: 50, y: 85 }, { x: 28, y: 80 },
-  ]},
-  { letra: "q", pontos: [
-    { x: 70, y: 100 }, { x: 70, y: 45 },
-    { x: 70, y: 55, lift: true }, { x: 50, y: 45 }, { x: 30, y: 58 }, { x: 30, y: 75 }, { x: 50, y: 85 }, { x: 70, y: 78 },
-  ]},
-  { letra: "r", pontos: [{ x: 28, y: 85 }, { x: 28, y: 45 }, { x: 45, y: 45 }, { x: 65, y: 55 }] },
-  { letra: "s", pontos: [{ x: 70, y: 52 }, { x: 50, y: 45 }, { x: 30, y: 52 }, { x: 30, y: 60 }, { x: 65, y: 70 }, { x: 70, y: 78 }, { x: 50, y: 86 }, { x: 28, y: 80 }] },
-  { letra: "t", pontos: [{ x: 42, y: 25 }, { x: 42, y: 80 }, { x: 55, y: 88 }, { x: 25, y: 45, lift: true }, { x: 60, y: 45 }] },
-  { letra: "u", pontos: [{ x: 28, y: 45 }, { x: 28, y: 75 }, { x: 45, y: 85 }, { x: 65, y: 80 }, { x: 70, y: 65 }, { x: 70, y: 45 }, { x: 70, y: 65, lift: true }, { x: 70, y: 85 }] },
-  { letra: "v", pontos: [{ x: 25, y: 45 }, { x: 50, y: 85 }, { x: 75, y: 45 }] },
-  { letra: "w", pontos: [{ x: 18, y: 45 }, { x: 32, y: 85 }, { x: 50, y: 58 }, { x: 68, y: 85 }, { x: 82, y: 45 }] },
-  { letra: "x", pontos: [{ x: 25, y: 45 }, { x: 75, y: 85 }, { x: 75, y: 45, lift: true }, { x: 25, y: 85 }] },
-  { letra: "y", pontos: [{ x: 25, y: 45 }, { x: 50, y: 80 }, { x: 75, y: 45 }, { x: 50, y: 80, lift: true }, { x: 40, y: 100 }, { x: 22, y: 100 }] },
-  { letra: "z", pontos: [{ x: 25, y: 45 }, { x: 72, y: 45 }, { x: 25, y: 85 }, { x: 72, y: 85 }] },
-
-  // ===================== NÚMEROS 1–10 =====================
-  { letra: "1", pontos: [{ x: 32, y: 28 }, { x: 50, y: 14 }, { x: 50, y: 88 }, { x: 28, y: 88, lift: true }, { x: 72, y: 88 }] },
-  { letra: "2", pontos: [{ x: 25, y: 30 }, { x: 50, y: 14 }, { x: 75, y: 30 }, { x: 25, y: 88 }, { x: 80, y: 88 }] },
-  { letra: "3", pontos: [{ x: 25, y: 22 }, { x: 70, y: 18 }, { x: 40, y: 50 }, { x: 75, y: 58 }, { x: 75, y: 78 }, { x: 45, y: 88 }, { x: 20, y: 75 }] },
-  { letra: "4", pontos: [{ x: 60, y: 14 }, { x: 20, y: 62 }, { x: 82, y: 62 }, { x: 60, y: 14, lift: true }, { x: 60, y: 88 }] },
-  { letra: "5", pontos: [{ x: 75, y: 14 }, { x: 32, y: 14 }, { x: 28, y: 48 }, { x: 60, y: 45 }, { x: 78, y: 62 }, { x: 70, y: 82 }, { x: 32, y: 86 }] },
-  { letra: "6", pontos: [{ x: 75, y: 22 }, { x: 50, y: 14 }, { x: 28, y: 38 }, { x: 25, y: 70 }, { x: 40, y: 86 }, { x: 65, y: 86 }, { x: 78, y: 70 }, { x: 65, y: 52 }, { x: 40, y: 52 }, { x: 25, y: 62 }] },
-  { letra: "7", pontos: [{ x: 22, y: 14 }, { x: 80, y: 14 }, { x: 42, y: 88 }] },
-  { letra: "8", pontos: [
-    { x: 50, y: 14 }, { x: 32, y: 22 }, { x: 32, y: 38 }, { x: 50, y: 48 }, { x: 68, y: 38 }, { x: 68, y: 22 }, { x: 50, y: 14 },
-    { x: 50, y: 48, lift: true }, { x: 28, y: 60 }, { x: 25, y: 78 }, { x: 50, y: 88 }, { x: 75, y: 78 }, { x: 72, y: 60 }, { x: 50, y: 48 },
-  ]},
-  { letra: "9", pontos: [{ x: 70, y: 55 }, { x: 50, y: 50 }, { x: 30, y: 42 }, { x: 32, y: 25 }, { x: 50, y: 14 }, { x: 72, y: 25 }, { x: 75, y: 50 }, { x: 75, y: 80 }, { x: 55, y: 88 }, { x: 30, y: 80 }] },
-  { letra: "10", pontos: [
-    { x: 18, y: 28 }, { x: 30, y: 14 }, { x: 30, y: 88 }, { x: 12, y: 88, lift: true }, { x: 48, y: 88 },
-    { x: 70, y: 14, lift: true }, { x: 60, y: 22 }, { x: 56, y: 50 }, { x: 60, y: 78 }, { x: 70, y: 88 }, { x: 82, y: 78 }, { x: 86, y: 50 }, { x: 82, y: 22 }, { x: 70, y: 14 },
+  // M: 4 segmentos
+  { letra: "M", pontos: [
+    { x: 15, y: 88 }, { x: 15, y: 14 }, { x: 50, y: 60 }, { x: 85, y: 14 }, { x: 85, y: 88 },
   ]},
 ];
-
-const TRACADO_VARS: Variation[] = TRACADO_BANK.map((b, i) => ({
-  id: `tl-${i + 1}`,
-  payload: { letra: b.letra, pontos: b.pontos },
-}));
-
+const TRACADO_VARS: Variation[] = range(30).map((i) => {
+  const b = TRACADO_BANK[i % TRACADO_BANK.length];
+  return { id: `tl-${i + 1}`, payload: { letra: b.letra, pontos: b.pontos } };
+});
 
 // 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
 const CAMINHO_BANK = [

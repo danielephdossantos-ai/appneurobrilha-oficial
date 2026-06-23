@@ -1928,167 +1928,103 @@ function SonsCorpo({ p, onDone }: any) {
 }
 
 // ============== 19. Traçado de Letras ==============
-// Letra delicada com pontilhado por dentro + setas de direção; criança traça com o dedo
-// e a letra vai ganhando cor conforme desenha.
+// Pontos numerados SOBRE a letra; criança toca em ordem e os traços aparecem.
 function TracadoLetras({ p, onDone }: any) {
+  const [step, setStep] = useState(0);
   const pontos: { x: number; y: number; lift?: boolean }[] = p.pontos;
-  const COR = "#f97316";
-  const META = 1200; // distância em px desenhada pra considerar "completo"
 
-  const svgRef = useRef<SVGSVGElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const drawing = useRef(false);
-  const last = useRef<{ x: number; y: number } | null>(null);
-  const pixelsRef = useRef(0);
-  const [progresso, setProgresso] = useState(0);
-  const [feito, setFeito] = useState(false);
-
-  // Setas de direção: para cada início de traço, calcula ângulo do 1º segmento
-  const setas = useMemo(() => {
-    const out: { x: number; y: number; angle: number; num: number }[] = [];
-    let traco = 0;
-    for (let i = 0; i < pontos.length - 1; i++) {
-      const a = pontos[i];
-      const b = pontos[i + 1];
-      if (b.lift) continue;
-      const isStart = i === 0 || pontos[i].lift;
-      if (isStart) {
-        traco++;
-        const angle = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
-        out.push({ x: a.x, y: a.y, angle, num: traco });
-      }
+  const tap = (i: number) => {
+    if (i !== step) {
+      toast(`Toque no ponto ${step + 1}`);
+      return;
     }
-    return out;
-  }, [pontos]);
-
-  // Caminho pontilhado da letra (linhas guia entre os pontos do mesmo traço)
-  const guia = useMemo(() => {
-    const segs: { x1: number; y1: number; x2: number; y2: number; k: number }[] = [];
-    for (let i = 1; i < pontos.length; i++) {
-      if (pontos[i].lift) continue;
-      const a = pontos[i - 1];
-      const b = pontos[i];
-      segs.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, k: i });
-    }
-    return segs;
-  }, [pontos]);
-
-  const pos = (e: React.PointerEvent) => {
-    const c = canvasRef.current!;
-    const r = c.getBoundingClientRect();
-    return {
-      x: ((e.clientX - r.left) / r.width) * c.width,
-      y: ((e.clientY - r.top) / r.height) * c.height,
-    };
-  };
-  const start = (e: React.PointerEvent) => {
-    if (feito) return;
-    drawing.current = true;
-    last.current = pos(e);
-  };
-  const move = (e: React.PointerEvent) => {
-    if (!drawing.current || feito) return;
-    const c = canvasRef.current!;
-    const ctx = c.getContext("2d")!;
-    const cur = pos(e);
-    const prev = last.current!;
-    ctx.strokeStyle = COR;
-    ctx.lineWidth = 14;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.beginPath();
-    ctx.moveTo(prev.x, prev.y);
-    ctx.lineTo(cur.x, cur.y);
-    ctx.stroke();
-    pixelsRef.current += Math.hypot(cur.x - prev.x, cur.y - prev.y);
-    last.current = cur;
-    const pct = Math.min(100, (pixelsRef.current / META) * 100);
-    setProgresso(pct);
-    if (pct >= 100 && !feito) {
-      setFeito(true);
-      setTimeout(() => onDone(true), 900);
+    if (i + 1 >= pontos.length) {
+      toast.success("Letra completa! ✨");
+      onDone(true);
+    } else {
+      setStep(i + 1);
     }
   };
-  const end = () => {
-    drawing.current = false;
-    last.current = null;
-  };
-  const limpar = () => {
-    const c = canvasRef.current;
-    if (!c) return;
-    c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
-    pixelsRef.current = 0;
-    setProgresso(0);
-  };
 
-  // opacidade da letra preenchida cresce com o progresso
-  const fillOp = Math.min(1, progresso / 100);
+  // Linhas: liga ponto i ao i+1 se NÃO tiver lift no i+1, e só se i < step.
+  const linhas = pontos
+    .map((pt, i) => {
+      if (i === 0) return null;
+      if (pt.lift) return null;
+      if (i > step) return null;
+      const prev = pontos[i - 1];
+      return { x1: prev.x, y1: prev.y, x2: pt.x, y2: pt.y, key: i };
+    })
+    .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: number }[];
 
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Siga as setinhas e escreva a letra com o dedo
+        Toque os pontinhos em ordem para escrever a letra
       </div>
-      <div
-        className="relative mx-auto bg-white border-4 border-amber-200 rounded-3xl p-2 select-none touch-none"
-        style={{ maxWidth: 340 }}
-      >
-        <svg ref={svgRef} viewBox="0 0 100 100" className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] pointer-events-none">
-          {/* Esqueleto da letra: linhas grossas pontilhadas (guia única) */}
-          {guia.map((s) => (
-            <g key={s.k}>
-              <line
-                x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2}
-                stroke={COR} strokeOpacity={0.3} strokeWidth={16}
-                strokeDasharray="2.5 3" strokeLinecap="round"
-              />
-              <line
-                x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2}
-                stroke={COR} strokeOpacity={fillOp} strokeWidth={16}
-                strokeLinecap="round"
-              />
-            </g>
+      <div className="mx-auto bg-gradient-to-br from-amber-50 to-rose-50 border-4 border-amber-200 rounded-3xl p-3" style={{ maxWidth: 340 }}>
+        <svg viewBox="0 0 100 100" className="w-full aspect-square">
+          {/* Letra fantasma como guia visual */}
+          <text
+            x={50}
+            y={50}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fontSize={90}
+            fontWeight={900}
+            fontFamily='"Comic Sans MS","Chalkboard SE",sans-serif'
+            fill="hsl(var(--success) / 0.15)"
+          >
+            {p.letra}
+          </text>
+
+          {/* Traços já feitos */}
+          {linhas.map((l) => (
+            <line
+              key={l.key}
+              x1={l.x1}
+              y1={l.y1}
+              x2={l.x2}
+              y2={l.y2}
+              stroke="hsl(var(--success))"
+              strokeWidth={4}
+              strokeLinecap="round"
+            />
           ))}
 
-          {/* Setas de direção (início de cada traço) */}
-          {setas.map((s) => (
-            <g key={`seta-${s.num}`} transform={`translate(${s.x} ${s.y}) rotate(${s.angle})`}>
-              {/* círculo numerado verde */}
-              <circle cx={0} cy={0} r={5} fill="#16a34a" stroke="#fff" strokeWidth={0.8} />
-              <text x={0} y={0} textAnchor="middle" dominantBaseline="central"
-                fontSize={6} fontWeight={900} fill="#fff" transform={`rotate(${-s.angle})`}>
-                {s.num}
-              </text>
-              {/* seta apontando na direção do traço */}
-              <polygon points="8,-3 14,0 8,3" fill="#16a34a" />
-            </g>
-          ))}
+          {/* Pontos numerados sobre a letra */}
+          {pontos.map((pt, i) => {
+            const done = i < step;
+            const current = i === step;
+            return (
+              <g key={i} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
+                <circle
+                  cx={pt.x}
+                  cy={pt.y}
+                  r={current ? 5.5 : 4.5}
+                  fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
+                  stroke={done ? "hsl(var(--success))" : current ? "#f97316" : "#94a3b8"}
+                  strokeWidth={1.2}
+                  className={current ? "animate-pulse" : ""}
+                />
+                {!done && (
+                  <text
+                    x={pt.x}
+                    y={pt.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={4.2}
+                    fontWeight={900}
+                    fill={current ? "white" : "#475569"}
+                  >
+                    {i + 1}
+                  </text>
+                )}
+              </g>
+            );
+          })}
         </svg>
-
-
-        <canvas
-          ref={canvasRef}
-          width={320}
-          height={320}
-          onPointerDown={start}
-          onPointerMove={move}
-          onPointerUp={end}
-          onPointerLeave={end}
-          className="relative w-full aspect-square touch-none cursor-crosshair"
-        />
       </div>
-
-      <div className="h-2 rounded-full bg-slate-200 overflow-hidden mx-auto" style={{ maxWidth: 340 }}>
-        <div className="h-full transition-all duration-200" style={{ width: `${progresso}%`, background: COR }} />
-      </div>
-
-      <button
-        onClick={limpar}
-        disabled={feito}
-        className="px-5 py-2 rounded-full bg-slate-200 text-slate-700 font-black text-sm active:scale-95 disabled:opacity-50"
-      >
-        🔄 Limpar
-      </button>
     </div>
   );
 }
