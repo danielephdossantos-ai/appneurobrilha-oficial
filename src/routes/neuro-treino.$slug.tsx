@@ -2247,114 +2247,183 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
   );
 }
 
-// 25. ARTICULAÇÃO DE SONS — criança fala a sílaba, sistema escuta (mic).
-// Na 3ª tentativa errada: pula a sílaba e volta no fim. Feedback sempre positivo.
+// 25. ARTICULAÇÃO DE SONS — criança fala a PALAVRA INTEIRA.
+// Conforme cada sílaba é reconhecida, ela acende (pisca/escala). No fim, palavra
+// toda acende junto com a imagem para associar palavra→imagem→leitura.
+// 3 tentativas sem completar → pula e volta no fim. Feedback sempre positivo.
 function ArticulacaoSons({ p, onDone }: any) {
-  const { listen, isListening, supported } = useSpeechMatcher();
-  const [ordem, setOrdem] = useState<number[]>(() => p.silabas.map((_: string, i: number) => i));
-  const [pos, setPos] = useState(0);
+  const palavra: string = p.palavra;
+  const silabas: string[] = p.silabas;
+  const [acesas, setAcesas] = useState<Set<number>>(new Set());
+  const [recAtual, setRecAtual] = useState<number | null>(null); // sílaba piscando agora
   const [tentativas, setTentativas] = useState(0);
-  const [feedback, setFeedback] = useState<string>("Toque no microfone e fale a sílaba 🎤");
-  const [feitas, setFeitas] = useState<Set<number>>(new Set());
+  const [feedback, setFeedback] = useState("Toque no microfone e fale a palavra inteira 🎤");
+  const [ouvindo, setOuvindo] = useState(false);
   const [done, setDone] = useState(false);
-
-  const silIdx = ordem[pos];
-  const silabaAtual: string = p.silabas[silIdx];
+  const [celebrar, setCelebrar] = useState(false);
+  const [supported, setSupported] = useState(true);
+  const recRef = useRef<any>(null);
 
   const PRAISES = ["Muito bem! 🌟", "Isso aí! 👏", "Mandou bem! 💪", "Você arrasou! ✨"];
-  const ENCORAJA = [
-    "Quase! Vamos tentar mais uma vez 💛",
-    "Tá indo bem! Respira e tenta de novo 🌈",
-  ];
 
-  const proximo = (skipQueue = false) => {
-    setTentativas(0);
-    if (!skipQueue) {
-      const nf = new Set(feitas);
-      nf.add(silIdx);
-      setFeitas(nf);
-      const novaPos = pos + 1;
-      if (novaPos >= ordem.length) {
-        setDone(true);
-        setFeedback("Parabéns! Você falou tudo! 🎉");
-        setTimeout(() => onDone(true), 900);
-      } else {
-        setPos(novaPos);
-        setFeedback("Agora a próxima! 🎤");
-      }
-    } else {
-      const novaOrdem = [...ordem.slice(0, pos), ...ordem.slice(pos + 1), silIdx];
-      setOrdem(novaOrdem);
-      if (pos >= novaOrdem.length) {
-        setDone(true);
-        setFeedback("Parabéns! Você tentou tudo! 🎉");
-        setTimeout(() => onDone(true), 900);
-      } else {
-        setFeedback("Tudo bem! A gente volta nessa depois 💛");
-      }
-    }
+  useEffect(() => {
+    const w = window as any;
+    setSupported(Boolean(w.SpeechRecognition || w.webkitSpeechRecognition));
+    return () => {
+      try { recRef.current?.abort?.(); } catch {}
+    };
+  }, []);
+
+  const norm = (s: string) =>
+    s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+
+  const celebrarPalavra = () => {
+    setAcesas(new Set(silabas.map((_, i) => i)));
+    setCelebrar(true);
+    setFeedback(PRAISES[Math.floor(Math.random() * PRAISES.length)]);
+    setDone(true);
+    setTimeout(() => onDone(true), 1400);
   };
 
-  const gravar = async () => {
-    if (done || isListening) return;
-    setFeedback("Estou ouvindo... 🎧");
-    const r = await listen(silabaAtual, { timeoutMs: 5000 });
-    if (r.matched) {
-      setFeedback(PRAISES[Math.floor(Math.random() * PRAISES.length)]);
-      setTimeout(() => proximo(false), 700);
-    } else {
-      const nova = tentativas + 1;
-      setTentativas(nova);
-      if (nova >= 3) {
-        setFeedback("Você tentou muito bem! Vamos seguir e voltar depois 🌟");
-        setTimeout(() => proximo(true), 1100);
-      } else {
-        setFeedback(ENCORAJA[nova - 1] || ENCORAJA[0]);
+  const pularPalavra = () => {
+    setFeedback("Você tentou muito bem! Vamos seguir 🌟");
+    setDone(true);
+    setTimeout(() => onDone(true), 1100);
+  };
+
+  const gravar = () => {
+    if (done || ouvindo) return;
+    const w = window as any;
+    const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
+    if (!SR) return;
+    const rec = new SR();
+    rec.lang = "pt-BR";
+    rec.continuous = false;
+    rec.interimResults = true;
+    rec.maxAlternatives = 3;
+    recRef.current = rec;
+    setOuvindo(true);
+    setAcesas(new Set());
+    setFeedback("Estou ouvindo... fale a palavra 🎧");
+
+    const palavraNorm = norm(palavra);
+    const silabasNorm = silabas.map(norm);
+    let melhor = "";
+
+    const processar = (txt: string) => {
+      melhor = txt;
+      const t = norm(txt);
+      // acende sílabas em ordem conforme aparecem
+      const novas = new Set<number>();
+      let cursor = 0;
+      for (let i = 0; i < silabasNorm.length; i++) {
+        const s = silabasNorm[i];
+        const idx = t.indexOf(s, cursor);
+        if (idx >= 0) {
+          novas.add(i);
+          cursor = idx + s.length;
+          setRecAtual(i);
+        }
       }
-    }
+      setAcesas(novas);
+    };
+
+    rec.onresult = (ev: any) => {
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const r = ev.results[i];
+        for (let j = 0; j < r.length; j++) processar(r[j].transcript);
+      }
+    };
+
+    let encerrado = false;
+    const encerrar = () => {
+      if (encerrado) return;
+      encerrado = true;
+      setOuvindo(false);
+      setRecAtual(null);
+      try { rec.stop(); } catch {}
+      const t = norm(melhor);
+      const acertouPalavra = t.includes(palavraNorm);
+      const todasSilabas = silabasNorm.every((s) => t.includes(s));
+      if (acertouPalavra || todasSilabas) {
+        celebrarPalavra();
+      } else {
+        const nova = tentativas + 1;
+        setTentativas(nova);
+        if (nova >= 3) {
+          setTimeout(pularPalavra, 600);
+        } else {
+          setFeedback(
+            acesas.size > 0
+              ? `Quase! Você falou ${acesas.size}/${silabas.length}. Tenta de novo a palavra toda 💛`
+              : "Boa tentativa! Fale a palavra toda devagarinho 🌈",
+          );
+          setAcesas(new Set());
+        }
+      }
+    };
+
+    rec.onerror = encerrar;
+    rec.onend = encerrar;
+    try { rec.start(); } catch { encerrar(); }
+    setTimeout(encerrar, 7000);
   };
 
   return (
     <div className="text-center space-y-5">
-      <div className="flex justify-center">
-        <RenderEmoji e={p.emoji} className="w-28 h-28" />
+      <div className={`flex justify-center transition-transform ${celebrar ? "scale-110" : ""}`}>
+        <RenderEmoji
+          e={p.emoji}
+          className={`w-28 h-28 ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
+        />
       </div>
-      <div className="text-3xl font-black tracking-widest">
-        {p.silabas.map((s: string, i: number) => (
-          <span
-            key={i}
-            className={`px-1 rounded-lg transition-all ${i === silIdx && !done ? "bg-rose/30 text-rose-700 scale-110 inline-block" : feitas.has(i) ? "text-emerald-600" : "text-muted-foreground"}`}
-          >
-            {s}
-          </span>
-        ))}
+      <div className="text-3xl font-black tracking-widest flex justify-center gap-1">
+        {silabas.map((s, i) => {
+          const acesa = acesas.has(i);
+          const piscando = recAtual === i && ouvindo;
+          return (
+            <span
+              key={i}
+              className={`px-2 rounded-lg transition-all duration-200 ${
+                celebrar
+                  ? "text-rose-600 scale-125 animate-pulse"
+                  : piscando
+                    ? "bg-rose-200 text-rose-700 scale-150 animate-pulse"
+                    : acesa
+                      ? "bg-emerald-100 text-emerald-700 scale-110"
+                      : "text-muted-foreground/60"
+              }`}
+            >
+              {s}
+            </span>
+          );
+        })}
       </div>
       <div className="bg-card border-2 border-rose/20 rounded-2xl p-4">
-        <div className="text-xs uppercase text-muted-foreground">Fale a sílaba</div>
-        <div className="text-4xl font-black text-rose-600">{silabaAtual}</div>
+        <div className="text-xs uppercase text-muted-foreground">Fale a palavra</div>
+        <div className="text-4xl font-black text-rose-600">{palavra}</div>
       </div>
       <div className="min-h-[2.5rem] text-base font-bold text-rose-700">{feedback}</div>
       {supported ? (
         <button
           onClick={gravar}
-          disabled={done || isListening}
-          className={`w-full py-5 rounded-3xl text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${isListening ? "bg-emerald-500 animate-pulse" : "bg-rose-500"}`}
+          disabled={done || ouvindo}
+          className={`w-full py-5 rounded-3xl text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? "bg-emerald-500 animate-pulse" : "bg-rose-500"}`}
         >
           <Mic className="w-7 h-7" />
-          {done ? "Muito bem!" : isListening ? "Ouvindo..." : "Falar 🎤"}
+          {done ? "Muito bem!" : ouvindo ? "Ouvindo..." : `Falar: ${palavra} 🎤`}
         </button>
       ) : (
         <button
-          onClick={() => proximo(false)}
+          onClick={celebrarPalavra}
           disabled={done}
           className="w-full py-5 rounded-3xl bg-rose-500 text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-50"
         >
-          {done ? "Muito bem!" : `Falei: ${silabaAtual}`}
+          {done ? "Muito bem!" : `Falei: ${palavra}`}
         </button>
       )}
       <div className="text-sm text-muted-foreground">
-        {feitas.size} / {p.silabas.length} sílabas
-        {tentativas > 0 && !done && ` • tentativa ${tentativas}/3`}
+        {tentativas > 0 && !done && `tentativa ${tentativas}/3`}
       </div>
     </div>
   );
