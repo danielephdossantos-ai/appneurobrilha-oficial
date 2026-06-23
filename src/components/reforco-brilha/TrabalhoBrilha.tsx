@@ -335,14 +335,25 @@ function EditorTrabalho({
     setBuscando(true);
     try {
       const res = await buscar({ data: { query: q } });
-      setRecursos(res.resultados || []);
-      if ((res.resultados || []).length === 0) toast.info("Nada encontrado");
+      // Missão Trabalho: somente texto e imagem (sem vídeos / sem links de busca externos)
+      const filtrados = (res.resultados || []).filter((r) => {
+        if (r.fonte === "youtube" || r.fonte === "youtube-edu" || r.fonte === "khan") return false;
+        if (r.fonte === "archive") {
+          const d = (r.descricao || "").toLowerCase();
+          // archive marca tipo no início da descrição
+          if (d.startsWith("vídeo") || d.startsWith("video") || d.startsWith("áudio") || d.startsWith("audio")) return false;
+        }
+        return true;
+      });
+      setRecursos(filtrados);
+      if (filtrados.length === 0) toast.info("Nada encontrado");
     } catch (e: any) {
       toast.error("Erro na busca: " + (e?.message || ""));
     } finally {
       setBuscando(false);
     }
   }
+
 
   function addBlocoTitulo() {
     setBlocos((b) => [...b, { id: uid(), tipo: "titulo", texto: "Novo título" }]);
@@ -575,9 +586,10 @@ function EditorTrabalho({
           {/* Documento (alvo do PDF) */}
           <div
             ref={documentoRef}
-            className="bg-white border-2 border-gray-200 rounded-xl p-6 space-y-4 min-h-[400px]"
-            style={{ fontFamily: "Georgia, serif", color: "#1f2937" }}
+            className="bg-white border-2 border-gray-200 rounded-xl p-8 sm:p-10 space-y-5 min-h-[800px] shadow-inner"
+            style={{ fontFamily: "Georgia, serif", color: "#1f2937", lineHeight: 1.7 }}
           >
+
             <header className="border-b-2 border-amber-300 pb-3 mb-2">
               <h1 className="text-2xl font-bold text-amber-900">{titulo || "Título do trabalho"}</h1>
               <p className="text-sm text-gray-600 mt-1">
@@ -655,8 +667,12 @@ function EditorTrabalho({
               </button>
             </div>
             <p className="text-[10px] text-amber-700">
-              Wikipédia · YouTube · OpenLibrary · Wikiversidade · Archive
+              Wikipédia · Livros (OpenLibrary) · Wikiversidade · Textos do Archive
             </p>
+            <p className="text-[10px] text-amber-600 italic">
+              Apenas textos e imagens — sem vídeos.
+            </p>
+
           </div>
 
           <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
@@ -783,26 +799,35 @@ function BlocoEditor({
   onDescer: () => void;
 }) {
   return (
-    <div className="group relative">
-      <div className="absolute -left-8 top-1 hidden group-hover:flex flex-col gap-0.5 print:hidden">
+    <div className="group relative pl-1">
+      <div className="absolute -left-1 -top-2 flex items-center gap-1 print:hidden bg-white border border-amber-200 rounded-md shadow-sm px-1 py-0.5 opacity-70 hover:opacity-100">
         <button
           onClick={onSubir}
           disabled={primeiro}
-          className="text-[10px] text-gray-400 hover:text-amber-700 disabled:opacity-30"
+          className="text-xs text-gray-500 hover:text-amber-700 disabled:opacity-30 px-1"
+          title="Subir"
         >
           ▲
         </button>
         <button
           onClick={onDescer}
           disabled={ultimo}
-          className="text-[10px] text-gray-400 hover:text-amber-700 disabled:opacity-30"
+          className="text-xs text-gray-500 hover:text-amber-700 disabled:opacity-30 px-1"
+          title="Descer"
         >
           ▼
         </button>
-        <button onClick={onRemover} className="text-gray-400 hover:text-rose-600">
-          <Trash2 className="h-3 w-3" />
+        <button
+          onClick={() => {
+            if (confirm("Apagar este bloco?")) onRemover();
+          }}
+          className="text-rose-600 hover:bg-rose-50 rounded px-1 flex items-center gap-1 text-[10px] font-bold"
+          title="Apagar bloco"
+        >
+          <Trash2 className="h-3 w-3" /> Apagar
         </button>
       </div>
+
 
       {bloco.tipo === "titulo" && (
         <input
