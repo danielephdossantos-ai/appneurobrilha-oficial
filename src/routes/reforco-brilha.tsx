@@ -924,6 +924,13 @@ function ReforcoBrilha() {
         }
         changeLabel="Trocar tópico"
       />
+      {aulaAberta && (
+        <AulaViewer
+          aulaId={aulaAberta.id}
+          titulo={aulaAberta.titulo}
+          onClose={() => setAulaAberta(null)}
+        />
+      )}
     </Shell>
   );
 }
