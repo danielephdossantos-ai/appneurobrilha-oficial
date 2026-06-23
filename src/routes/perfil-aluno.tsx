@@ -129,7 +129,7 @@ function PerfilAlunoPage() {
             {children.map((c: any) => (
               <button
                 key={c.id}
-                onClick={() => setActiveChild(c)}
+                onClick={() => setActiveChild(c.id)}
                 className="px-4 py-2 rounded-xl border-2 border-border hover:border-primary text-sm font-bold"
               >
                 {c.nome}
