@@ -320,25 +320,208 @@ function ReforcoBrilha() {
             <div className="relative">
               <input
                 type="text"
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && startLesson()}
-                placeholder="Ex: Vogais, Sílabas, Leitura, Escrita, Tabuada, Atenção, Coordenação motora, Memória..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
+                placeholder='Ex: "não consegue juntar sílabas", "tabuada do 7", "atenção"...'
                 className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
               <button
-                onClick={() => startLesson()}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity"
-                aria-label="Buscar trilha pedagógica"
+                onClick={() => runSearch(searchQuery)}
+                disabled={isSearching}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+                aria-label="Buscar habilidade"
               >
-                <ArrowRight className="h-6 w-6" />
+                {isSearching ? (
+                  <RefreshCw className="h-6 w-6 animate-spin" />
+                ) : (
+                  <ArrowRight className="h-6 w-6" />
+                )}
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              Pesquise a dificuldade e receba uma trilha pedagógica estruturada (sem uso de IA generativa).
+              Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
             </p>
           </Card>
+
+          {searchResult && searchResult.main && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
+              <div className="flex items-center justify-between px-1">
+                <h3 className="text-sm font-black uppercase tracking-widest text-primary flex items-center gap-2">
+                  <Target className="h-4 w-4" />
+                  Resultado da busca
+                </h3>
+                <button
+                  onClick={() => {
+                    setSearchResult(null);
+                    setSearchQuery("");
+                  }}
+                  className="text-xs font-bold text-muted-foreground hover:text-primary"
+                >
+                  Limpar
+                </button>
+              </div>
+
+              <Card className="border-2 border-primary/30 bg-primary/5">
+                <div className="flex items-start gap-4">
+                  <div className="h-14 w-14 rounded-2xl bg-primary text-white grid place-items-center shrink-0 shadow-glow">
+                    <Sparkles className="h-7 w-7" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      {searchResult.main.categoria && (
+                        <span className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                          {searchResult.main.categoria.nome}
+                        </span>
+                      )}
+                      <span className="text-[10px] font-bold text-muted-foreground">
+                        Habilidade principal
+                      </span>
+                    </div>
+                    <h4 className="text-xl font-black text-foreground">
+                      {searchResult.main.nome}
+                    </h4>
+                    {searchResult.main.descricao && (
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {searchResult.main.descricao}
+                      </p>
+                    )}
+                    {searchResult.main.matches.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-3">
+                        {searchResult.main.matches.map((m) => (
+                          <span
+                            key={m}
+                            className="text-[10px] font-bold bg-success/10 text-success px-2 py-0.5 rounded-full"
+                          >
+                            ✓ {m}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Card>
+
+              {searchResult.aulas.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1 flex items-center gap-2">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    Aulas disponíveis ({searchResult.aulas.length})
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {searchResult.aulas.map((aula) => (
+                      <button
+                        key={aula.id}
+                        onClick={() => {
+                          setTopic(aula.titulo);
+                          startLesson(aula.titulo);
+                        }}
+                        className="text-left p-4 rounded-2xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 transition-all flex justify-between items-start gap-3"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] font-black uppercase text-primary tracking-wider">
+                              {aula.nivel}
+                            </span>
+                            {aula.faixa_etaria && (
+                              <span className="text-[10px] text-muted-foreground">
+                                {aula.faixa_etaria}
+                              </span>
+                            )}
+                          </div>
+                          <div className="font-bold text-sm">{aula.titulo}</div>
+                          {aula.objetivo && (
+                            <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                              {aula.objetivo}
+                            </div>
+                          )}
+                        </div>
+                        <PlayCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {searchResult.atividades.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1 flex items-center gap-2">
+                    <Zap className="h-3.5 w-3.5" />
+                    Atividades do NeuroBrilha ({searchResult.atividades.length})
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {searchResult.atividades.map((at) => (
+                      <a
+                        key={at.id}
+                        href={at.rota || "#"}
+                        className="p-4 rounded-2xl bg-amber-50 border border-amber-200 hover:bg-amber-100 transition-all flex justify-between items-center gap-3"
+                      >
+                        <div className="flex-1 min-w-0">
+                          {at.modulo && (
+                            <div className="text-[10px] font-black uppercase text-amber-700 tracking-wider mb-0.5">
+                              {at.modulo}
+                            </div>
+                          )}
+                          <div className="font-bold text-sm text-amber-900">
+                            {at.titulo || "Atividade"}
+                          </div>
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-amber-700 shrink-0" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {searchResult.related.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1 flex items-center gap-2">
+                    <Brain className="h-3.5 w-3.5" />
+                    Habilidades relacionadas ({searchResult.related.length})
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {searchResult.related.map((h) => (
+                      <button
+                        key={h.id}
+                        onClick={() =>
+                          setSearchResult({
+                            ...searchResult,
+                            main: h,
+                            related: [
+                              searchResult.main!,
+                              ...searchResult.related.filter((r) => r.id !== h.id),
+                            ],
+                          })
+                        }
+                        className="text-left p-3 rounded-xl bg-card border border-border hover:border-primary/40 transition-all flex items-center justify-between gap-2"
+                      >
+                        <div className="min-w-0">
+                          {h.categoria && (
+                            <div className="text-[9px] font-black uppercase text-muted-foreground tracking-wider">
+                              {h.categoria.nome}
+                            </div>
+                          )}
+                          <div className="font-bold text-sm truncate">{h.nome}</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {searchResult && !searchResult.main && (
+            <Card className="border-dashed border-2 text-center py-8">
+              <AlertCircle className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
+              <p className="font-bold">Nenhuma habilidade encontrada para "{searchResult.query}"</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Tente termos mais simples ou escolha uma categoria abaixo.
+              </p>
+            </Card>
+          )}
 
           {agenda.length > 0 && (
             <div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
