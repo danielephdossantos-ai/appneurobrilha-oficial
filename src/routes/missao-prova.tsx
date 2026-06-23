@@ -245,15 +245,16 @@ function MissaoProva() {
 
       <div className="space-y-8 animate-in fade-in duration-500">
         {missions.length === 0 ? (
-          <Card className="py-20 text-center">
-            <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto mb-6">
+          <Card className="py-16 text-center space-y-5">
+            <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto">
               <Target className="h-12 w-12 text-muted-foreground" />
             </div>
-            <h3 className="text-2xl font-bold">Nenhuma missão ativa!</h3>
-            <p className="text-muted-foreground mt-2 max-w-md mx-auto">
-              Peça para o papai ou a mamãe cadastrar sua próxima prova no Painel dos Pais para
-              começarmos os treinos!
+            <h3 className="text-2xl font-bold">Nenhuma prova cadastrada!</h3>
+            <p className="text-muted-foreground max-w-md mx-auto text-sm">
+              Peça para o papai ou a mamãe cadastrar sua próxima prova no Painel dos Pais.
+              Enquanto isso, você pode estudar qualquer tema com o Tutor Brilha 👇
             </p>
+            <TutorLivre />
           </Card>
         ) : (
           <div className="grid grid-cols-1 gap-6">
@@ -475,5 +476,38 @@ function MissaoProva() {
         />
       )}
     </Shell>
+  );
+}
+
+function TutorLivre() {
+  const [tema, setTema] = useState("");
+  const [aberto, setAberto] = useState(false);
+  return (
+    <>
+      <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto px-4">
+        <input
+          type="text"
+          value={tema}
+          onChange={(e) => setTema(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && tema.trim() && setAberto(true)}
+          placeholder="Ex: sistema solar, frações, verbos..."
+          className="flex-1 text-sm border-2 border-amber-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-amber-500"
+        />
+        <button
+          onClick={() => tema.trim() && setAberto(true)}
+          disabled={!tema.trim()}
+          className="bg-amber-500 hover:bg-amber-600 disabled:opacity-40 text-white px-5 py-2.5 rounded-xl font-black text-xs flex items-center gap-2 justify-center whitespace-nowrap"
+        >
+          <GraduationCap className="h-4 w-4" /> Estudar com Tutor
+        </button>
+      </div>
+      {aberto && (
+        <TutorTrabalho
+          modo="missao-prova"
+          tema={tema}
+          onFechar={() => setAberto(false)}
+        />
+      )}
+    </>
   );
 }
