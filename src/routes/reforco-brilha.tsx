@@ -1,6 +1,6 @@
 // ============= Full file contents =============
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
@@ -26,6 +26,7 @@ import {
   Target,
   PenTool,
   Brain,
+  Network,
 } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
@@ -338,6 +339,17 @@ function ReforcoBrilha() {
         title="REFORÇO BRILHA"
         subtitle="Biblioteca pedagógica para pais, responsáveis e professores"
       />
+
+      <div className="mb-6">
+        <Link
+          to="/matriz-pedagogica"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 text-sm font-bold text-primary transition-colors"
+        >
+          <Network className="h-4 w-4" />
+          Abrir Matriz Pedagógica
+        </Link>
+      </div>
+
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
