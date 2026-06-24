@@ -59,7 +59,7 @@ function Rotina() {
         <h3 className="font-extrabold mb-2">Sugestão inteligente</h3>
         <p className="text-sm text-muted-foreground">
           O hook <code className="text-xs bg-muted px-1 py-0.5 rounded">useSmartRoutine</code>{" "}
-          sugere encaixar 5 min de Foco Total depois do almoço — alinhado ao perfil de leitura.
+          sugere encaixar 5 min de Achar o Diferente depois do almoço — alinhado ao perfil de leitura.
         </p>
       </Card>
     </Shell>
