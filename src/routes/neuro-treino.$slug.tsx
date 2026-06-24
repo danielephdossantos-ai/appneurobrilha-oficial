@@ -3288,8 +3288,13 @@ function PalavraImagem({ p, onDone }: any) {
 
 // 38. FORMANDO PALAVRAS — tocar sílabas em ordem
 function FormandoPalavras({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [sequencia, setSequencia] = useState<string[]>([]);
   const [erro, setErro] = useState(false);
+  const errorTxt = sens.softColors ? "text-amber-600" : "text-destructive";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const btnPad = sens.largerTargets ? "px-8 py-6 text-2xl" : "px-6 py-4 text-xl";
 
   const handleSilaba = (sil: string) => {
     if (erro) return;
@@ -3311,7 +3316,7 @@ function FormandoPalavras({ p, onDone }: any) {
     <div className="space-y-5 text-center">
       <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/20 rounded-3xl p-4 min-h-[72px] flex items-center justify-center">
         <div
-          className={`text-4xl font-black tracking-widest transition-all ${erro ? "text-destructive animate-pulse" : sequencia.length === p.silabas.length ? "text-success" : "text-foreground"}`}
+          className={`text-4xl font-black tracking-widest transition-all ${erro ? `${errorTxt} ${pulseCls}` : sequencia.length === p.silabas.length ? "text-success" : "text-foreground"}`}
         >
           {sequencia.length === 0 ? "..." : sequencia.join("") || "..."}
         </div>
@@ -3325,7 +3330,7 @@ function FormandoPalavras({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleSilaba(sil)}
-              className={`px-6 py-4 rounded-2xl border-2 font-black text-xl transition-all active:scale-95
+              className={`${btnPad} rounded-2xl border-2 font-black transition-all ${press}
                 ${usada ? "border-muted bg-muted/20 text-muted-foreground" : "border-amber/50 bg-amber/10 text-amber-800 hover:border-amber hover:bg-amber/20"}`}
             >
               {sil}
@@ -3339,6 +3344,7 @@ function FormandoPalavras({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 39. LEITURA DE PALAVRAS — lê palavra, escolhe emoji correto
 function LeituraPalavras({ p, onDone }: any) {
