@@ -462,7 +462,7 @@ export const REACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
   const nivel = faixa + 1;
   const opcoes = 2 + faixa; // 2/3/4
   const rounds = 6 + faixa * 2; // 6/8/10
-  const intervaloMs = [2400, 1700, 1200][faixa];
+  const intervaloMs = [5000, 3800, 2800][faixa];
   const seq = range(rounds).map((k) => {
     const alvo = REACAO_BANCO[(i * 3 + k * 5) % REACAO_BANCO.length];
     const distratores = pickN(REACAO_BANCO, opcoes - 1, i * 31 + k * 7, alvo);
