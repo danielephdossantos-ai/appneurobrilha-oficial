@@ -197,10 +197,14 @@ const LegacyLessonPlayer: React.FC = () => {
           await AudioSpeechService.speak(NUMBER_WORDS[countedSoFar - 1] || String(countedSoFar));
           setIsSpeaking(false);
           setHighlightedElementId(null);
-        } else if (currentStep.type === "demonstration" || currentStep.type === "explanation") {
+        } else if (
+          currentStep.type === "demonstration" ||
+          currentStep.type === "explanation"
+        ) {
           setHighlightedElementId(el.id);
           setIsSpeaking(true);
-          await AudioSpeechService.speak(el.content);
+          const speechText = el.content === "↓" ? "junta" : el.content;
+          await AudioSpeechService.speak(speechText);
           setIsSpeaking(false);
           setHighlightedElementId(null);
           await new Promise((r) => setTimeout(r, 400));

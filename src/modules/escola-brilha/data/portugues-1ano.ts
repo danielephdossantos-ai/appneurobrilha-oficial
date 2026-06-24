@@ -14,6 +14,80 @@ type Mascot = "pip" | "pipa";
 let _uid = 0;
 const eid = (id: string) => `${id}-e${_uid++}`;
 
+/** Leitura guiada no padrão: BO / LO / ↓ / BOLO. */
+function mkGuidedRead(
+  id: string,
+  mascot: Mascot,
+  word: string,
+  syllables: string[],
+  spoken: string,
+): LessonStep {
+  return {
+    id,
+    phase: "guided_training",
+    type: "demonstration",
+    mascot,
+    speech: "Vamos ler juntos.",
+    elements: [
+      ...syllables.map((syllable, index) => ({
+        id: eid(`${id}-syllable-${index}`),
+        type: "text" as const,
+        content: syllable,
+        position: { x: (index - (syllables.length - 1) / 2) * 90, y: -52 },
+        animation: "pop" as const,
+        delay: 0.25 + index * 0.25,
+      })),
+      {
+        id: eid(`${id}-arrow`),
+        type: "text" as const,
+        content: "↓",
+        position: { x: 0, y: 8 },
+        animation: "fade" as const,
+        delay: 0.9,
+      },
+      {
+        id: eid(`${id}-word`),
+        type: "text" as const,
+        content: word,
+        position: { x: 0, y: 62 },
+        animation: "pop" as const,
+        delay: 1.1,
+      },
+    ],
+    showHelp: true,
+    audioUrl: spoken,
+  };
+}
+
+/** Associação: palavra + escolha da imagem correta. */
+function mkAssociation(
+  id: string,
+  mascot: Mascot,
+  word: string,
+  spoken: string,
+  correctObj: string,
+  options: string[],
+): LessonStep {
+  return {
+    id,
+    phase: "practice",
+    type: "interaction",
+    mascot,
+    speech: `Escolha a imagem correta para ${spoken}.`,
+    elements: [
+      {
+        id: eid(`${id}-word`),
+        type: "text",
+        content: word,
+        position: { x: 0, y: 0 },
+        animation: "pop",
+        delay: 0.25,
+      },
+    ],
+    interaction: { type: "click", correctAnswer: correctObj, options },
+  };
+}
+
 /** Sílaba: "Qual a primeira sílaba de [imagem]?" */
 function mkSyllable(
   id: string,
@@ -91,6 +165,9 @@ function mkPick(
 }
 
 const STEPS: LessonStep[] = [
+  mkGuidedRead("p00-leitura-bolo", "pip", "BOLO", ["BO", "LO"], "bolo"),
+  mkAssociation("p00-associacao-bolo", "pip", "BOLO", "bolo", "BOLO", ["BOLO", "CARRO", "CACHORRO"]),
+
   // Primeira sílaba (10)
   mkSyllable("p01", "pipa", "CASA", "casa", "CA", ["CA", "BO", "PA"]),
   mkSyllable("p02", "pip", "BOLA", "bola", "BO", ["BO", "CA", "MA"]),
