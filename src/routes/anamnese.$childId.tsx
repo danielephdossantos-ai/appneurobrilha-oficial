@@ -69,10 +69,13 @@ function AnamneseRoute() {
         await ensureUserProfile(user);
         const { data: existing, error: listErr } = await supabase
           .from("children")
-          .select("id")
+          .select("id, nome, anamnese_completa")
           .eq("user_id", userId);
         if (listErr) throw listErr;
-        if ((existing?.length ?? 0) >= 2) {
+        const realChildren = (existing ?? []).filter(
+          (child) => child.nome?.trim().toLowerCase() !== "nova criança" || child.anamnese_completa,
+        );
+        if (realChildren.length >= 2) {
           toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
           navigate({ to: "/painel-pais", replace: true });
           return;
