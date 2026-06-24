@@ -1448,58 +1448,143 @@ function SequenciaCores({ p, onDone }: any) {
 
 
 // ============== 15. Decoração Criativa ==============
+// ============== 15. Decoração Criativa — montagem por slots ==============
 function Decoracao({ p, onDone }: any) {
-  const [placed, setPlaced] = useState<{ e: string; x: number; y: number }[]>([]);
-  const [dragging, setDragging] = useState<string | null>(null);
-  const drop = (e: React.DragEvent) => {
-    if (!dragging) return;
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    setPlaced((p) => [...p, { e: dragging, x: e.clientX - rect.left, y: e.clientY - rect.top }]);
-    setDragging(null);
+  const slots = p.slots as {
+    id: string;
+    emoji: string;
+    label: string;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  }[];
+  const [placed, setPlaced] = useState<Record<string, boolean>>({});
+  const [picked, setPicked] = useState<string | null>(null);
+  const [erro, setErro] = useState<string | null>(null);
+
+  const restantes = slots.filter((s) => !placed[s.id]);
+
+  const tentarEncaixar = (slotId: string) => {
+    if (!picked) return;
+    const slot = slots.find((s) => s.id === slotId)!;
+    if (slot.emoji === picked && !placed[slotId]) {
+      setPlaced((prev) => ({ ...prev, [slotId]: true }));
+      const novoTotal = Object.keys(placed).length + 1;
+      setPicked(null);
+      if (novoTotal >= slots.length) {
+        setTimeout(() => onDone(true), 600);
+      }
+    } else {
+      setErro(slotId);
+      setTimeout(() => setErro(null), 400);
+    }
   };
+
   return (
     <div className="text-center">
-      <div className="text-2xl font-black mb-2">{semEmoji(p.cenario)}</div>
+      <div className="text-xl font-black mb-2">{p.nome}</div>
+      <div className="text-xs text-muted-foreground mb-3">
+        {restantes.length === 0
+          ? "Cenário completo! 🎉"
+          : `Faltam ${restantes.length} para encaixar`}
+      </div>
+
+      {/* Cena */}
       <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={drop}
-        className={`relative h-72 rounded-2xl bg-gradient-to-b ${p.fundo} border-2 border-dashed border-border mb-4 overflow-hidden`}
+        className="relative w-full mx-auto rounded-2xl overflow-hidden border-4 border-border shadow-lg"
+        style={{ maxWidth: 560, aspectRatio: "4/3" }}
       >
-        {placed.map((it, i) => (
-          <div key={i} className="absolute" style={{ left: it.x - 32, top: it.y - 32 }}>
-            <RenderEmoji e={it.e} className="w-16 h-16" />
-          </div>
-        ))}
-        {placed.length === 0 && (
-          <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-            Arraste para cá
-          </div>
-        )}
+        {/* céu */}
+        <div
+          className={`absolute inset-x-0 top-0 bg-gradient-to-b ${p.ceu}`}
+          style={{ height: `${p.ceuPct}%` }}
+        />
+        {/* chão */}
+        <div
+          className={`absolute inset-x-0 bottom-0 bg-gradient-to-b ${p.chao}`}
+          style={{ height: `${100 - p.ceuPct}%` }}
+        />
+
+        {/* slots */}
+        {slots.map((s) => {
+          const done = placed[s.id];
+          const isErro = erro === s.id;
+          return (
+            <button
+              key={s.id}
+              onClick={() => tentarEncaixar(s.id)}
+              className={`absolute flex items-center justify-center transition-all ${
+                done
+                  ? ""
+                  : isErro
+                    ? "animate-pulse"
+                    : picked
+                      ? "hover:scale-105 cursor-pointer"
+                      : "cursor-default"
+              }`}
+              style={{
+                left: `${s.x}%`,
+                top: `${s.y}%`,
+                width: `${s.w}%`,
+                height: `${s.h}%`,
+              }}
+              aria-label={s.label}
+            >
+              {done ? (
+                <RenderEmoji e={s.emoji} className="w-full h-full drop-shadow-md" />
+              ) : (
+                <div
+                  className={`w-full h-full rounded-xl border-[3px] border-dashed flex items-center justify-center ${
+                    isErro
+                      ? "border-coral bg-coral/10"
+                      : picked === s.emoji
+                        ? "border-success bg-success/15"
+                        : "border-foreground/40 bg-white/30"
+                  }`}
+                >
+                  <RenderEmoji e={s.emoji} className="w-2/3 h-2/3 opacity-30" />
+                </div>
+              )}
+            </button>
+          );
+        })}
       </div>
-      <div className="flex gap-2 justify-center mb-4 flex-wrap">
-        {p.stickers.map((s: string, i: number) => (
-          <div
-            key={i}
-            draggable
-            onDragStart={() => setDragging(s)}
-            className="w-20 h-20 flex items-center justify-center bg-card border-2 border-border rounded-2xl cursor-grab active:cursor-grabbing hover:border-primary transition-all shadow-sm"
-          >
-            <RenderEmoji e={s} className="w-14 h-14" />
-          </div>
-        ))}
+
+      {/* Paleta de peças */}
+      <div className="flex gap-2 justify-center mt-4 flex-wrap">
+        {slots.map((s) => {
+          const usado = placed[s.id];
+          const ativo = picked === s.emoji;
+          return (
+            <button
+              key={s.id}
+              disabled={usado}
+              onClick={() => setPicked(ativo ? null : s.emoji)}
+              className={`w-20 h-20 flex items-center justify-center rounded-2xl border-2 transition-all shadow-sm ${
+                usado
+                  ? "bg-muted border-border opacity-30"
+                  : ativo
+                    ? "bg-primary/20 border-primary scale-110 shadow-glow"
+                    : "bg-card border-border hover:border-primary"
+              }`}
+              aria-label={s.label}
+            >
+              <RenderEmoji e={s.emoji} className="w-14 h-14" />
+            </button>
+          );
+        })}
       </div>
-      <div className="flex gap-2 justify-center">
+
+      <div className="flex gap-2 justify-center mt-4">
         <button
-          onClick={() => setPlaced([])}
+          onClick={() => {
+            setPlaced({});
+            setPicked(null);
+          }}
           className="bg-muted px-4 py-2 rounded-xl font-bold flex items-center gap-1"
         >
-          <RotateCcw size={14} /> Limpar
-        </button>
-        <button
-          onClick={() => onDone(placed.length >= 3)}
-          className="bg-success text-white px-6 py-2 rounded-xl font-black flex items-center gap-1"
-        >
-          <Sparkles size={16} /> Finalizar arte
+          <RotateCcw size={14} /> Recomeçar
         </button>
       </div>
     </div>
