@@ -2157,11 +2157,17 @@ function CaminhoPontos({ p, onDone }: any) {
           />
         ))}
         {p.pontos.map((pt: any, i: number) => (
-          <g key={i} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
+          <g
+            key={i}
+            onPointerDown={(e) => { e.preventDefault(); tap(i); }}
+            style={{ cursor: "pointer", touchAction: "none" }}
+          >
+            {/* área de toque invisível bem maior */}
+            <circle cx={pt.x} cy={pt.y} r={8} fill="transparent" />
             <circle
               cx={pt.x}
               cy={pt.y}
-              r={i === next ? 4 : 3}
+              r={i === next ? 5 : 4}
               fill={
                 i < next
                   ? "hsl(var(--success))"
@@ -2169,14 +2175,19 @@ function CaminhoPontos({ p, onDone }: any) {
                     ? "hsl(var(--coral))"
                     : "hsl(var(--muted-foreground))"
               }
+              stroke="white"
+              strokeWidth={0.6}
+              style={{ pointerEvents: "none" }}
             />
             <text
               x={pt.x}
-              y={pt.y - 5}
-              fontSize={4.5}
+              y={pt.y + 1.2}
+              fontSize={3.6}
               textAnchor="middle"
+              dominantBaseline="middle"
               fontWeight="900"
-              fill="hsl(var(--foreground))"
+              fill="white"
+              style={{ pointerEvents: "none" }}
             >
               {i + 1}
             </text>
