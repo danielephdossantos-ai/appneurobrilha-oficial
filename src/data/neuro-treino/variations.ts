@@ -2294,7 +2294,7 @@ export const GRUPOS = [
       "alvo-movel",
       "tracado-letras",
       
-      "labirinto-precisao",
+      
     ] as CategoriaSlug[],
   },
   {
