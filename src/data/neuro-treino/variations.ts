@@ -2308,8 +2308,6 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "ritmo-e-sopro": SOPRO_VARS,
   "paromatopeias-corpo": CORPO_VARS,
   "tracado-letras": TRACADO_VARS,
-  
-  "labirinto-precisao": LABPRE_VARS,
   "triagem-categorias": TRIAGEM_VARS,
   "expressao-emocao": EMOCAO_VARS,
   // FONO CLÍNICO
