@@ -566,11 +566,16 @@ function ConscienciaSilabica({ p, onDone }: any) {
 
 // ============== Compreensão Leitora (literal / inferencial / interpretativa) ==============
 function CompreensaoLeitora({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-[1.02]";
+  const optPad = sens.largerTargets ? "px-5 py-5 text-lg" : "px-4 py-3";
+  const badgeSize = sens.largerTargets ? "w-9 h-9 text-base" : "w-7 h-7 text-sm";
   const tipoLabel: Record<string, string> = {
     literal: "Pergunta Literal",
     inferencial: "Pergunta Inferencial",
     interpretativa: "Pergunta Interpretativa",
   };
+
   const tipoCor: Record<string, string> = {
     literal: "bg-sky-100 text-sky-700",
     inferencial: "bg-violet-100 text-violet-700",
@@ -612,13 +617,14 @@ function CompreensaoLeitora({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(i === p.correta)}
-            className="text-left bg-card border-2 border-border rounded-2xl px-4 py-3 hover:border-primary hover:scale-[1.02] transition-all font-bold text-foreground"
+            className={`text-left bg-card border-2 border-border rounded-2xl ${optPad} transition-all font-bold text-foreground ${hoverCls}`}
           >
-            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary text-sm font-black mr-2">
+            <span className={`inline-flex items-center justify-center ${badgeSize} rounded-full bg-primary/10 text-primary font-black mr-2`}>
               {String.fromCharCode(65 + i)}
             </span>
             {op}
           </button>
+
         ))}
       </div>
     </div>
