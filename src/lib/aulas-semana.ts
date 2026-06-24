@@ -55,7 +55,7 @@ export async function gerarAulasSemana(opts: {
     .eq("child_id", childId)
     .maybeSingle();
   const perfil = inferPerfil(anamnese?.responses);
-  const serie = (child as { serie?: string | null }).serie || "1º Ano";
+  const serie = normalizeSerie((child as { serie?: string | null }).serie) || "1º Ano";
 
   // 3. BNCC (com fallback)
   type HabRow = { codigo_bncc: string; disciplina: string | null; titulo: string | null; objetivo: string | null; ano: string | null };
