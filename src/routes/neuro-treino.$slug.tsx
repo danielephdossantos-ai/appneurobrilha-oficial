@@ -3199,7 +3199,10 @@ function SeguirInstrucao({ p, onDone }: any) {
 
 // 36. LETRA-SOM — fonema → escolher imagem
 function LetraSom({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
   const handleClick = (nome: string) => {
     if (selecionado) return;
     setSelecionado(nome);
@@ -3218,7 +3221,7 @@ function LetraSom({ p, onDone }: any) {
             selecionado === img.n
               ? certa
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-amber/60";
@@ -3228,7 +3231,7 @@ function LetraSom({ p, onDone }: any) {
               onClick={() => handleClick(img.n)}
               className={`rounded-2xl border-2 p-5 flex flex-col items-center gap-2 transition-all font-bold ${bg}`}
             >
-              <RenderEmoji e={img.e} label={img.n} className="w-16 h-16" />
+              <RenderEmoji e={img.e} label={img.n} className={imgSize} />
               <span className="text-sm">{img.n}</span>
             </button>
           );
@@ -3237,6 +3240,7 @@ function LetraSom({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 37. PALAVRA-IMAGEM — ver imagem, escolher palavra correta
 function PalavraImagem({ p, onDone }: any) {
