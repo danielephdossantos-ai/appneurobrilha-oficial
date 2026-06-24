@@ -44,7 +44,7 @@ export type CategoriaSlug =
   | "paromatopeias-corpo"
   | "tracado-letras"
   
-  | "labirinto-precisao"
+  
   | "triagem-categorias"
   | "expressao-emocao"
   // FONO CLÍNICO
