@@ -348,7 +348,14 @@ function MissaoProva() {
         subtitle="Sua jornada para o sucesso nas provas escolares!"
       />
 
+      {activeChild && (
+        <div className="mb-6">
+          <MissaoProvaManager childId={activeChild.id} />
+        </div>
+      )}
+
       <div className="space-y-8 animate-in fade-in duration-500">
+
         {missions.length === 0 ? (
           <Card className="py-16 text-center space-y-5">
             <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto">
