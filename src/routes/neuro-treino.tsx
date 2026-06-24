@@ -17,7 +17,7 @@ import {
 import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
-
+import { STATIC_LESSONS } from "@/modules/escola-brilha/data/library";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
@@ -326,7 +326,43 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-
+          {/* ── CATEGORIAS DA ESCOLA BRILHA (Pré-Escola + 1º Ano) ── */}
+          {(() => {
+            const preEscola = STATIC_LESSONS.infantil.filter((l) => l.serie === "Pré-Escola");
+            const primeiroAno = STATIC_LESSONS.fundamental1.filter((l) => l.serie === "1º Ano");
+            const blocos = [
+              { serie: "Pré-Escola", emoji: "🧸", lessons: preEscola, accent: "from-pink-500 to-rose-500", border: "border-pink-200 dark:border-pink-800", bg: "from-pink-50 to-pink-100/50 dark:from-pink-950/30 dark:to-pink-900/20", color: "text-pink-600" },
+              { serie: "1º Ano", emoji: "🎒", lessons: primeiroAno, accent: "from-sky-500 to-blue-500", border: "border-sky-200 dark:border-sky-800", bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20", color: "text-sky-600" },
+            ];
+            return blocos.map((b) => (
+              <section key={b.serie} className={`rounded-3xl border ${b.border} overflow-hidden shadow-sm`}>
+                <div className={`bg-gradient-to-r ${b.bg} px-4 py-3 flex items-center gap-2 border-b ${b.border}`}>
+                  <div className="text-xl">{b.emoji}</div>
+                  <div>
+                    <h2 className={`font-black text-sm ${b.color} uppercase tracking-wider`}>{b.serie}</h2>
+                    <div className="text-xs text-muted-foreground">{b.lessons.length} aulas · Escola Brilha</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
+                  {b.lessons.map((l) => (
+                    <Link
+                      key={l.id}
+                      to="/escola-brilha/aula"
+                      search={{ category: l.id, type: l.type }}
+                      className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col text-left transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                    >
+                      <div className={`w-full h-20 rounded-xl bg-gradient-to-br ${l.gradient} mb-2 flex items-center justify-center text-3xl`}>
+                        {b.emoji}
+                      </div>
+                      <div className="font-black text-xs leading-tight text-foreground line-clamp-1">{l.title}</div>
+                      <div className="text-[10px] text-muted-foreground line-clamp-1">{l.subtitle}</div>
+                      <div className={`mt-1 inline-block text-[9px] font-bold px-1.5 py-0.5 rounded ${l.badgeColor}`}>{l.badge}</div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ));
+          })()}
 
           {GRUPOS.map((g) => {
 

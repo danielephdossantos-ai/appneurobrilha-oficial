@@ -6,23 +6,17 @@ const router = getRouter();
 
 function App() {
   useEffect(() => {
-    // Limpeza de cache: remoção de Escola Brilha e Jornada 365
-    const CACHE_VERSION = "3.0.0-remove-escola-jornada";
+    // Limpeza de cache solicitada para reconstrução do Escola Brilha
+    const CACHE_VERSION = "2.1.0-remove-libras";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
-      console.log("Limpando cache (Escola Brilha e Jornada 365 removidos)...");
+      console.log("Limpando cache (LIBRAS removido)...");
       Object.keys(localStorage).forEach((key) => {
         if (
           key.startsWith("neurobrilha:") ||
           key.startsWith("pip:") ||
-          key.toLowerCase().includes("libras") ||
-          key.toLowerCase().includes("escola-brilha") ||
-          key.toLowerCase().includes("escola_brilha") ||
-          key.toLowerCase().includes("escolabrilha") ||
-          key.toLowerCase().includes("jornada-365") ||
-          key.toLowerCase().includes("jornada365") ||
-          key.toLowerCase().includes("jornada_365")
+          key.toLowerCase().includes("libras")
         ) {
           localStorage.removeItem(key);
         }

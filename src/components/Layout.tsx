@@ -8,7 +8,7 @@ import {
   Brain,
   CalendarDays,
   ListChecks,
-  
+  Compass,
   ShieldCheck,
   MessagesSquare,
   FileBarChart2,
@@ -83,6 +83,7 @@ const navCrianca = [
   { to: "/reforco-brilha", label: "REFORÇO BRILHA", icon: Sparkles },
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
+  { to: "/jornada-365", label: "Jornada 365", icon: Compass },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
@@ -105,6 +106,7 @@ const navigationSequence = [
   "/reforco-brilha",
   "/neuro-treino",
   "/brilha-vida",
+  "/jornada-365",
   "/rotina",
   "/painel-pais",
   "/progressao",
@@ -373,7 +375,7 @@ function MobileNav({ path }: { path: string }) {
   const items = [
     { to: "/", icon: Home, label: "Início" },
     { to: "/neuro-treino", icon: Brain, label: "Treino" },
-    { to: "/rotina", icon: ListChecks, label: "Rotina" },
+    { to: "/jornada-365", icon: Compass, label: "Jornada" },
   ];
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-10 bg-card border-t border-border px-2 py-2 flex justify-around">

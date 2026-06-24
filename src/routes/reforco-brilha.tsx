@@ -51,7 +51,6 @@ import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaIntern
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
 
-
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
   { hasError: boolean; error: Error | null }
@@ -602,9 +601,6 @@ function ReforcoBrilha() {
           )}
 
           <CategoriasReforco childId={activeChild?.id ?? null} />
-
-          
-
 
 
 
