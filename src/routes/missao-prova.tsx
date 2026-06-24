@@ -39,6 +39,8 @@ import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 import { GraduationCap, BookOpen } from "lucide-react";
+import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
+
 
 export const Route = createFileRoute("/missao-prova")({
   component: MissaoProva,
