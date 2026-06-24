@@ -50,6 +50,7 @@ import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
+import { AulasEscolaBrilha } from "@/components/reforco-brilha/AulasEscolaBrilha";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -601,6 +602,9 @@ function ReforcoBrilha() {
           )}
 
           <CategoriasReforco childId={activeChild?.id ?? null} />
+
+          <AulasEscolaBrilha />
+
 
 
 
