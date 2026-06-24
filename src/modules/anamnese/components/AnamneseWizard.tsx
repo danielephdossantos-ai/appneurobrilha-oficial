@@ -22,9 +22,6 @@ import {
   Step14,
   Step15,
   Step16,
-  Step17,
-  Step18,
-  Step19,
 } from "../steps";
 import { ACTIVE_STEPS, STEP_TITLES, nextActiveStep, prevActiveStep } from "../v2/types";
 import { toast } from "sonner";
@@ -78,12 +75,6 @@ export function AnamneseWizard({ childId }: { childId: string }) {
         return <Step15 value={r.step15 ?? {}} onChange={(p) => a.updateStep("step15", p)} />;
       case 16:
         return <Step16 value={r.step16 ?? {}} onChange={(p) => a.updateStep("step16", p)} />;
-      case 17:
-        return <Step17 value={r.step17 ?? {}} onChange={(p) => a.updateStep("step17", p)} />;
-      case 18:
-        return <Step18 value={r.step18 ?? {}} onChange={(p) => a.updateStep("step18", p)} />;
-      case 19:
-        return <Step19 value={r.step19 ?? {}} onChange={(p) => a.updateStep("step19", p)} />;
       default:
         return null;
     }
@@ -96,10 +87,8 @@ export function AnamneseWizard({ childId }: { childId: string }) {
     if (isLast) {
       try {
         await a.finish();
-        toast.success("Anamnese concluída! Veja o relatório no painel dos pais.");
-        // Vai direto pro painel dos pais com o relatório do que o sistema observou.
-        // De lá os pais entram na categoria da criança → nascimento do Pip/Pipa.
-        nav({ to: "/painel-pais" });
+        toast.success("Anamnese concluída! Relatório gerado.");
+        nav({ to: "/anamnese/$childId/resultado", params: { childId } });
       } catch (e: any) {
         toast.error(e?.message ?? "Erro ao salvar");
       }

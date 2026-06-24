@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
+import { ACTIVE_STEPS } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
+import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 
 interface Row {
   id: string;
@@ -39,7 +41,7 @@ export function useAnamneseV2(childId: string) {
   useEffect(() => {
     if (!hydratedRef.current && row) {
       setLocalResponses(row.responses ?? {});
-      setLocalStep(row.current_step ?? 1);
+      setLocalStep(ACTIVE_STEPS.includes(row.current_step) ? row.current_step : ACTIVE_STEPS[0]);
       hydratedRef.current = true;
     } else if (!hydratedRef.current && !isLoading && !row) {
       hydratedRef.current = true;
@@ -107,15 +109,17 @@ export function useAnamneseV2(childId: string) {
   const finish = async () => {
     const res = await upsert.mutateAsync({
       responses: localResponses,
-      current_step: 16,
+      current_step: ACTIVE_STEPS[ACTIVE_STEPS.length - 1] ?? 16,
       completed: true,
     });
     // Marca a criança como tendo anamnese concluída → libera painel dos pais
     // e o nascimento do Pip/Pipa na área da criança.
     if (UUID_RE.test(childId)) {
+      const internal = AnamnesisProcessor.processV2(localResponses, res.scores);
+      const childPatch = AnamnesisProcessor.mapV2ToChildPatch(internal, localResponses, res.scores);
       const { error } = await supabase
         .from("children")
-        .update({ anamnese_completa: true })
+        .update(childPatch as any)
         .eq("id", childId);
       if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
       qc.invalidateQueries({ queryKey: ["children"] });

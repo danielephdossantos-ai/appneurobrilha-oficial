@@ -1,4 +1,5 @@
-import { Child, AnamnesisData } from "@/core/store";
+import type { Child, AnamnesisData } from "@/core/store";
+import type { AnamneseV2Responses, PerfilScores } from "@/modules/anamnese/v2/types";
 
 export interface InternalProfile {
   leitura: number;
@@ -145,6 +146,100 @@ export class AnamnesisProcessor {
         trocaLetras: false,
         palavrasLongas: internal.leitura < 40,
       },
+    };
+  }
+
+  static processV2(responses: AnamneseV2Responses, scores: PerfilScores): InternalProfile {
+    const competence = (riskScore: number) => Math.max(0, Math.min(100, 100 - riskScore));
+    const levelFromCompetence = (value: number): 1 | 2 | 3 | 4 => {
+      if (value < 35) return 1;
+      if (value < 60) return 2;
+      if (value < 80) return 3;
+      return 4;
+    };
+
+    const escolar = competence(scores.escolar);
+    const cognitivo = competence(scores.cognitivo);
+    const adaptativo = competence(scores.adaptativo);
+    const socioemocional = competence(scores.socioemocional);
+
+    return {
+      leitura: escolar,
+      atencao: cognitivo,
+      linguagem: Math.round((adaptativo + socioemocional) / 2),
+      autonomia: adaptativo,
+      emocional: socioemocional,
+      social: socioemocional,
+      niveis: {
+        geral: levelFromCompetence(Math.round((escolar + cognitivo + adaptativo + socioemocional) / 4)),
+        portugues: levelFromCompetence(escolar),
+        matematica: levelFromCompetence(escolar),
+      },
+      flags: {
+        apoioVisual: scores.escolar >= 35 || scores.adaptativo >= 35,
+        passoAPasso: scores.cognitivo >= 35 || scores.escolar >= 35,
+        preferAudio: scores.escolar >= 55 || scores.adaptativo >= 55,
+        focoComunicao: scores.socioemocional >= 45 || scores.adaptativo >= 55,
+        atividadesCurtas: scores.cognitivo >= 45 || scores.comportamental >= 45,
+      },
+    };
+  }
+
+  static mapV2ToChildPatch(
+    internal: InternalProfile,
+    responses: AnamneseV2Responses,
+    scores: PerfilScores,
+  ): Partial<Child> {
+    const hasFamilyTea = responses.step5?.tea === "sim";
+    const hasFamilyTdah = responses.step5?.tdah === "sim";
+    const diagnostico = hasFamilyTea && scores.socioemocional >= 65
+      ? "tea"
+      : hasFamilyTdah && scores.cognitivo >= 65
+        ? "tdah"
+        : "nenhum";
+
+    return {
+      ...this.mapToChildPatch(internal, {
+        dados_crianca: {
+          nome: responses.step1?.nome ?? "",
+          idade: responses.step1?.idade ?? 0,
+          sexo: responses.step1?.sexo,
+        },
+        desenvolvimento: {
+          fala: internal.linguagem < 35 ? "fala_pouco" : "fala_bem",
+          leitura: internal.leitura < 35 ? "nao_sabe_ler" : internal.leitura < 70 ? "aprendendo" : "ja_le",
+        },
+        comportamento: {
+          dificuldade_atencao: scores.cognitivo >= 45,
+          distrai_facil: scores.cognitivo >= 45,
+          frustrado_facil: scores.socioemocional >= 45,
+        },
+        comunicacao: {
+          aponta_quer: true,
+          usa_gestos: true,
+          usa_palavras: internal.linguagem >= 35,
+        },
+        aprendizagem: {
+          dificuldade_letras: scores.escolar >= 45,
+          dificuldade_numeros: scores.escolar >= 55,
+        },
+        diagnostico_profissional: {
+          possui: false,
+        },
+        preferencias: {
+          musica: false,
+          desenho: false,
+          jogos: true,
+          historias: true,
+        },
+        rotina: {
+          periodo_estudo: "",
+          tem_terapia: Boolean(responses.step4?.terapias_atuais?.trim()),
+        },
+      }),
+      diagnostico,
+      anamnese_completa: true,
+      observacoes: "Perfil pedagógico atualizado pela anamnese científica completa.",
     };
   }
 }

@@ -1,16 +1,42 @@
 // Motor de pontuação da Anamnese Científica v2.
 // IMPORTANTE: NÃO emite diagnóstico — apenas níveis de indicadores.
-import type { AnamneseV2Responses, Likert, PerfilScores, RiskLevel, RiskMap } from "./types";
+import type { AnamneseV2Responses, PerfilScores, RiskLevel, RiskMap } from "./types";
 
-const L = (v: any): number => (typeof v === "number" ? v : 0);
-const INV = (v: any): number => 4 - L(v); // inverte itens "positivos"
+const L = (v: any): number | null => (typeof v === "number" ? v : null);
+const INV = (v: any): number | null => (typeof v === "number" ? 4 - v : null); // inverte itens "positivos"
 
-const SN_BAD = (v: any) => (v === "sim" ? 4 : 0);
+function avg(values: Array<number | null>): number {
+  const answered = values.filter((v): v is number => typeof v === "number");
+  if (answered.length === 0) return 0;
+  const s = answered.reduce((a, b) => a + b, 0);
+  return s / answered.length;
+}
 
-function avg(values: number[]): number {
-  if (values.length === 0) return 0;
-  const s = values.reduce((a, b) => a + b, 0);
-  return s / values.length;
+function yesRisk(v: any): number | null {
+  if (v === "sim") return 4;
+  if (v === "nao" || v === "nao_sei") return 0;
+  return null;
+}
+
+function lateMilestone(value: any, expectedMonths: number): number | null {
+  if (typeof value !== "number") return null;
+  if (value <= expectedMonths) return 0;
+  if (value <= expectedMonths + 3) return 2;
+  return 4;
+}
+
+function lowBirthWeight(value: any): number | null {
+  if (typeof value !== "number") return null;
+  if (value >= 2.5) return 0;
+  if (value >= 1.5) return 2;
+  return 4;
+}
+
+function prematureWeeks(value: any): number | null {
+  if (typeof value !== "number") return null;
+  if (value >= 37) return 0;
+  if (value >= 32) return 2;
+  return 4;
 }
 
 /** Converte média 0-4 em score 0-100 (% de indicadores presentes) */
@@ -22,7 +48,7 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
   // ATENÇÃO + FUNÇÕES EXECUTIVAS + MEMÓRIA  → Cognitivo
   const at = r.step7 ?? {};
   const mem = r.step13 ?? {};
-  const fe = r.step17 ?? {}; // funções executivas
+  const marcos = r.step3 ?? {};
   const cognitivoMean = avg([
     L(at.distrai_facil),
     L(at.esquece_instrucoes),
@@ -34,12 +60,9 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     INV(mem.recorda_historias),
     INV(mem.memoriza_sequencias),
     INV(mem.reconhece_informacoes),
-    INV(fe.memoria_trabalho),
-    INV(fe.planejamento),
-    INV(fe.controle_inibitorio),
-    INV(fe.flexibilidade_cognitiva),
-    INV(fe.organizacao_pensamento),
-    INV(fe.iniciativa),
+    INV(marcos.compreensao_verbal),
+    lateMilestone(marcos.primeiras_palavras, 18),
+    lateMilestone(marcos.frases, 30),
   ]);
 
   // ESCOLAR (leitura/escrita/matemática — todos "positivos", invertidos)
@@ -65,6 +88,7 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
   // COMPORTAMENTAL: hiperatividade + repetitivos
   const h = r.step8 ?? {};
   const rep = r.step10 ?? {};
+  const fam = r.step5 ?? {};
   const comportamentalMean = avg([
     L(h.levanta_constantemente),
     L(h.corre_excessivamente),
@@ -76,6 +100,8 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     L(rep.interesses_restritos),
     L(rep.resistencia_mudancas),
     L(rep.rotinas_rigidas),
+    yesRisk(fam.tdah),
+    yesRisk(fam.tea),
   ]);
 
   // SOCIOEMOCIONAL: comunicação social (invertida) + emocional
@@ -92,6 +118,9 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     L(em.baixa_autoestima),
     L(em.frustracao),
     L(em.mudancas_humor),
+    INV(marcos.contato_visual),
+    INV(marcos.brincadeiras_compartilhadas),
+    INV(marcos.interacao_outras_criancas),
   ]);
 
   // ADAPTATIVO: autonomia (invertida) + motora (invertida) + sensorial
@@ -99,6 +128,8 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
   const mot = r.step14 ?? {};
   const sen = r.step11 ?? {};
   const ling = r.step12 ?? {};
+  const gest = r.step2 ?? {};
+  const med = r.step4 ?? {};
   const adaptativoMean = avg([
     INV(au.alimentacao),
     INV(au.higiene),
@@ -123,6 +154,19 @@ export function computeScores(r: AnamneseV2Responses): PerfilScores {
     INV(ling.conta_historias),
     INV(ling.formula_frases),
     L(ling.trocas_fonologicas),
+    lateMilestone(marcos.sustentou_cabeca, 4),
+    lateMilestone(marcos.sentou_sozinho, 8),
+    lateMilestone(marcos.engatinhou, 10),
+    lateMilestone(marcos.andou, 18),
+    yesRisk(gest.prematuro),
+    prematureWeeks(gest.semanas_gestacao),
+    lowBirthWeight(gest.peso_nascer_kg),
+    yesRisk(gest.uti_neonatal),
+    yesRisk(med.convulsoes),
+    yesRisk(med.epilepsia),
+    yesRisk(med.deficiencia_auditiva),
+    yesRisk(med.deficiencia_visual),
+    yesRisk(med.transtornos_neurologicos),
   ]);
 
   return {
