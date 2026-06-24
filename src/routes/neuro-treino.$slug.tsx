@@ -352,8 +352,6 @@ function MechanicRenderer({
       return <Mosaico p={variation.payload} onDone={onConcluir} />;
     case "sequencia-de-cores":
       return <SequenciaCores p={variation.payload} onDone={onConcluir} />;
-    case "simetria":
-      return <Simetria p={variation.payload} onDone={onConcluir} />;
     case "decoracao-criativa":
       return <Decoracao p={variation.payload} onDone={onConcluir} />;
     case "onomatopeias-animadas":
@@ -1448,57 +1446,6 @@ function SequenciaCores({ p, onDone }: any) {
   );
 }
 
-// ============== 14. Simetria ==============
-function Simetria({ p, onDone }: any) {
-  const [right, setRight] = useState<number[][]>(() =>
-    Array(p.rows)
-      .fill(0)
-      .map(() => Array(p.halfCols).fill(0)),
-  );
-  const toggle = (r: number, c: number) =>
-    setRight((rt) =>
-      rt.map((row, i) => (i === r ? row.map((v, j) => (j === c ? (v ? 0 : 1) : v)) : row)),
-    );
-  const conferir = () => {
-    // mirror: right[r][c] deve corresponder a left[r][halfCols-1-c]
-    const ok = p.left.every((row: number[], r: number) =>
-      row.every((v: number, c: number) => v === right[r][p.halfCols - 1 - c]),
-    );
-    onDone(ok);
-  };
-  return (
-    <div className="text-center">
-      <div className="flex justify-center gap-1 mb-4">
-        <div>
-          {p.left.map((row: number[], r: number) => (
-            <div key={r} className="flex gap-1">
-              {row.map((v: number, c: number) => (
-                <div key={c} className={`w-10 h-10 rounded ${v ? "bg-primary" : "bg-muted"}`} />
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="w-px bg-foreground/30 mx-1" />
-        <div>
-          {right.map((row, r) => (
-            <div key={r} className="flex gap-1">
-              {row.map((v, c) => (
-                <button
-                  key={c}
-                  onClick={() => toggle(r, c)}
-                  className={`w-10 h-10 rounded border ${v ? "bg-lilac" : "bg-card border-border"}`}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      <button onClick={conferir} className="bg-success text-white px-8 py-3 rounded-xl font-black">
-        Conferir simetria
-      </button>
-    </div>
-  );
-}
 
 // ============== 15. Decoração Criativa ==============
 function Decoracao({ p, onDone }: any) {
