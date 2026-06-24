@@ -3348,7 +3348,11 @@ function FormandoPalavras({ p, onDone }: any) {
 
 // 39. LEITURA DE PALAVRAS — lê palavra, escolhe emoji correto
 function LeituraPalavras({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const btnPad = sens.largerTargets ? "py-6" : "py-4";
   const handleClick = (e: string) => {
     if (selecionado) return;
     setSelecionado(e);
@@ -3367,7 +3371,7 @@ function LeituraPalavras({ p, onDone }: any) {
             selecionado === e
               ? certa
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-amber/60";
@@ -3375,9 +3379,9 @@ function LeituraPalavras({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleClick(e)}
-              className={`rounded-2xl border-2 py-4 flex items-center justify-center transition-all ${bg}`}
+              className={`rounded-2xl border-2 ${btnPad} flex items-center justify-center transition-all ${bg}`}
             >
-              <RenderEmoji e={e} className="w-16 h-16" />
+              <RenderEmoji e={e} className={imgSize} />
             </button>
           );
         })}
@@ -3385,6 +3389,7 @@ function LeituraPalavras({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 40. COMPLETAR LETRA — palavra com lacuna, escolher letra certa
 function CompletarLetra({ p, onDone }: any) {
