@@ -9,11 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as RotinaRouteImport } from './routes/rotina'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as ReforcoBrilhaRouteImport } from './routes/reforco-brilha'
 import { Route as ProgressaoRouteImport } from './routes/progressao'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
@@ -46,6 +48,11 @@ import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TerapeutaBrilhaRoute = TerapeutaBrilhaRouteImport.update({
   id: '/terapeuta-brilha',
   path: '/terapeuta-brilha',
@@ -69,6 +76,11 @@ const ReforcoBrilhaRoute = ReforcoBrilhaRouteImport.update({
 const ProgressaoRoute = ProgressaoRouteImport.update({
   id: '/progressao',
   path: '/progressao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerfilAlunoRoute = PerfilAlunoRouteImport.update({
@@ -252,11 +264,13 @@ export interface FileRoutesByFullPath {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -289,11 +303,13 @@ export interface FileRoutesByTo {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -328,11 +344,13 @@ export interface FileRoutesById {
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
   '/perfil-aluno': typeof PerfilAlunoRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/progressao': typeof ProgressaoRoute
   '/reforco-brilha': typeof ReforcoBrilhaRoute
   '/relatorio': typeof RelatorioRoute
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
+  '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -368,11 +386,13 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
+    | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -405,11 +425,13 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
+    | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -443,11 +465,13 @@ export interface FileRouteTypes {
     | '/neuro-treino'
     | '/painel-pais'
     | '/perfil-aluno'
+    | '/privacidade'
     | '/progressao'
     | '/reforco-brilha'
     | '/relatorio'
     | '/rotina'
     | '/terapeuta-brilha'
+    | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -482,17 +506,26 @@ export interface RootRouteChildren {
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRoute
   PerfilAlunoRoute: typeof PerfilAlunoRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
   ProgressaoRoute: typeof ProgressaoRoute
   ReforcoBrilhaRoute: typeof ReforcoBrilhaRoute
   RelatorioRoute: typeof RelatorioRoute
   RotinaRoute: typeof RotinaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
+  TermosRoute: typeof TermosRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terapeuta-brilha': {
       id: '/terapeuta-brilha'
       path: '/terapeuta-brilha'
@@ -526,6 +559,13 @@ declare module '@tanstack/react-router' {
       path: '/progressao'
       fullPath: '/progressao'
       preLoaderRoute: typeof ProgressaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/perfil-aluno': {
@@ -815,11 +855,13 @@ const rootRouteChildren: RootRouteChildren = {
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRoute,
   PerfilAlunoRoute: PerfilAlunoRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
   ProgressaoRoute: ProgressaoRoute,
   ReforcoBrilhaRoute: ReforcoBrilhaRoute,
   RelatorioRoute: RelatorioRoute,
   RotinaRoute: RotinaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
+  TermosRoute: TermosRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
 }
