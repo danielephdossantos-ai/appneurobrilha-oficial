@@ -141,6 +141,7 @@ function RootComponent() {
                 <ConnectivityStatus />
                 <MascotGlobalContainer />
                 <ParentPinGate />
+                <GlobalLearningBootstrap />
               </div>
             </HiperfocoProvider>
           </ParentModeProvider>
