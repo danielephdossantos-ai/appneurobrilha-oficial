@@ -2998,24 +2998,47 @@ function AcharDiferente({ p, onDone }: any) {
 
 // 33. MEMÓRIA VISUAL — flash de grade colorida, depois reproduzir
 function MemoriaVisual({ p, onDone }: any) {
+  // Tempo base mais generoso para memorizar (mínimo 5s, escala com o flashMs do nível).
+  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * 2.5);
   const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<boolean | null>(null);
+  const [restante, setRestante] = useState(Math.round(tempoBase / 1000));
+  const [revisoes, setRevisoes] = useState(0); // quantas vezes voltou pra ver
+  const maxRevisoes = 3;
 
+  // Countdown só na fase de mostrar; expira sozinho ou avança pelo botão.
   useEffect(() => {
     if (fase !== "mostrar") return;
-    const t = setTimeout(() => setFase("reproduzir"), p.flashMs);
-    return () => clearTimeout(t);
-  }, [fase, p.flashMs]);
+    setRestante(Math.round(tempoBase / 1000));
+    const iv = setInterval(() => {
+      setRestante((r) => {
+        if (r <= 1) {
+          clearInterval(iv);
+          setFase("reproduzir");
+          return 0;
+        }
+        return r - 1;
+      });
+    }, 1000);
+    return () => clearInterval(iv);
+  }, [fase, tempoBase]);
 
-  const handleCor = (cor: string, i: number) => {
+  const verDeNovo = () => {
+    if (revisoes >= maxRevisoes) return;
+    setRevisoes((n) => n + 1);
+    setSelecionados([]);
+    setFase("mostrar");
+  };
+
+  const handleCor = (cor: string) => {
     if (fase !== "reproduzir" || selecionados.length >= p.grid.length) return;
     const novos = [...selecionados, cor];
     setSelecionados(novos);
     if (novos.length === p.grid.length) {
       const correto = novos.every((c, idx) => c === p.grid[idx]);
       setFeedback(correto);
-      setTimeout(() => onDone(correto), 700);
+      setTimeout(() => onDone(correto), 800);
     }
   };
 
@@ -3023,9 +3046,9 @@ function MemoriaVisual({ p, onDone }: any) {
   return (
     <div className="space-y-4 text-center">
       {fase === "mostrar" ? (
-        <div>
-          <div className="text-sm font-bold text-muted-foreground mb-3 animate-pulse">
-            Memorize as cores!
+        <div className="space-y-3">
+          <div className="text-sm font-bold text-muted-foreground">
+            Memorize as cores! ({restante}s)
           </div>
           <div
             className="grid gap-2 mx-auto max-w-xs"
@@ -3039,6 +3062,12 @@ function MemoriaVisual({ p, onDone }: any) {
               />
             ))}
           </div>
+          <button
+            onClick={() => setFase("reproduzir")}
+            className="px-5 py-2 rounded-xl bg-violet text-white font-bold shadow active:scale-95"
+          >
+            Estou pronto! ➜
+          </button>
         </div>
       ) : (
         <div className="space-y-3">
@@ -3061,12 +3090,21 @@ function MemoriaVisual({ p, onDone }: any) {
             {cores.map((cor, i) => (
               <button
                 key={i}
-                onClick={() => handleCor(cor, selecionados.length)}
+                onClick={() => handleCor(cor)}
                 className="w-14 h-14 rounded-xl border-2 border-white/30 active:scale-90 transition-all shadow"
                 style={{ backgroundColor: cor }}
               />
             ))}
           </div>
+          {feedback === null && (
+            <button
+              onClick={verDeNovo}
+              disabled={revisoes >= maxRevisoes}
+              className="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold shadow active:scale-95 disabled:opacity-40"
+            >
+              ↺ Ver de novo {revisoes > 0 ? `(${revisoes}/${maxRevisoes})` : ""}
+            </button>
+          )}
         </div>
       )}
       {feedback !== null && (
