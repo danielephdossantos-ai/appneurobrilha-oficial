@@ -667,52 +667,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     />
                   </motion.g>
 
-                  <motion.g
-                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      repeatDelay: 2,
-                    }}
-                    style={{ originX: "31%", originY: "30%" }}
-                  >
-                    <circle cx="70" cy="65" r="14" fill="#fff" />
-                    <motion.circle
-                      cx="70"
-                      cy="65"
-                      r="6"
-                      fill="#0f172a"
-                      animate={{ x: [0, 1.5, 0], y: [0, 0.5, 0] }}
-                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                  </motion.g>
-                  <motion.g
-                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      repeatDelay: 2,
-                      delay: 0.25,
-                    }}
-                    style={{ originX: "69%", originY: "30%" }}
-                  >
-                    <circle cx="150" cy="65" r="14" fill="#fff" />
-                    <motion.circle
-                      cx="150"
-                      cy="65"
-                      r="6"
-                      fill="#0f172a"
-                      animate={{ x: [0, -1.5, 0], y: [0, 0.5, 0] }}
-                      transition={{
-                        duration: 2.2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 0.1,
-                      }}
-                    />
-                  </motion.g>
+                  {/* olhos removidos — bolha sem rosto */}
                 </svg>
               </div>
               <p className="text-white/90 text-lg max-w-md mx-auto">
