@@ -202,8 +202,11 @@ export function PipEvolution() {
       {/* Timeline */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {STAGES.map((stage, i) => {
-          const unlocked = i <= currentStageIndex;
+          // Fases 1, 2 e 3 (Ovo, Nascendo, Bebê) já nascem liberadas.
+          // Só o Guardião (fase 4) precisa de moedas pra desbloquear.
+          const unlocked = i <= Math.max(currentStageIndex, 2);
           const isCurrent = i === currentStageIndex;
+
           return (
             <motion.div
               key={stage.key}
