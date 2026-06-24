@@ -170,6 +170,19 @@ function normalizeChild(
   };
 }
 
+function isDraftPlaceholderChild(child: Child) {
+  return child.nome.trim().toLowerCase() === "nova criança" && !child.anamnese_completa;
+}
+
+function getPreferredChild(children: Child[]) {
+  return (
+    children.find((child) => child.anamnese_completa && !isDraftPlaceholderChild(child)) ??
+    children.find((child) => !isDraftPlaceholderChild(child)) ??
+    children[0] ??
+    null
+  );
+}
+
 export interface AnamnesisData {
   id?: string;
   child_id: string;
@@ -262,14 +275,21 @@ export function useAppState() {
     localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
     const key = activeChildStorageKey(authUserId);
     const stored = localStorage.getItem(key);
-    const storedBelongsToUser = stored ? children.some((child) => child.id === stored) : false;
+    const storedChild = stored ? children.find((child) => child.id === stored) : null;
+    const preferredChild = getPreferredChild(children);
+    const shouldReplaceStoredDraft =
+      !!storedChild &&
+      isDraftPlaceholderChild(storedChild) &&
+      !!preferredChild &&
+      preferredChild.id !== storedChild.id &&
+      !isDraftPlaceholderChild(preferredChild);
 
-    if (storedBelongsToUser) {
+    if (storedChild && !shouldReplaceStoredDraft) {
       setActiveChildId(stored);
       return;
     }
 
-    const firstChildId = children[0]?.id ?? null;
+    const firstChildId = preferredChild?.id ?? null;
     setActiveChildId(firstChildId);
     if (firstChildId) {
       localStorage.setItem(key, firstChildId);
@@ -348,7 +368,18 @@ export function useAppState() {
     },
   });
 
-  const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
+  const selectedChild = children.find((c) => c.id === activeChildId) ?? null;
+  const preferredChild = getPreferredChild(children);
+  const activeChild =
+    selectedChild &&
+    !(
+      isDraftPlaceholderChild(selectedChild) &&
+      preferredChild &&
+      preferredChild.id !== selectedChild.id &&
+      !isDraftPlaceholderChild(preferredChild)
+    )
+      ? selectedChild
+      : preferredChild;
 
   const { data: sessionData } = useQuery({
     queryKey: ["auth-session"],
