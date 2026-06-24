@@ -13,7 +13,7 @@ export const Route = createFileRoute("/banco-midias")({
   component: BancoMidiasPage,
 });
 
-const CATEGORIAS: { id: CategoriaBanco; label: string; emoji: string }[] = [
+const CATEGORIAS_FALLBACK: { id: CategoriaBanco; label: string; emoji: string }[] = [
   { id: "letras", label: "Letras", emoji: "🔤" },
   { id: "silabas", label: "Sílabas", emoji: "🔠" },
   { id: "numeros", label: "Números", emoji: "🔢" },
@@ -26,6 +26,7 @@ const CATEGORIAS: { id: CategoriaBanco; label: string; emoji: string }[] = [
   { id: "icones", label: "Ícones", emoji: "✨" },
   { id: "emocoes", label: "Emoções", emoji: "😊" },
 ];
+
 
 interface Midia {
   id: string;
