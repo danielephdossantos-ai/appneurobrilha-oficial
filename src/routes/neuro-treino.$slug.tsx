@@ -352,8 +352,6 @@ function MechanicRenderer({
       return <FocoTotal p={variation.payload} onDone={onConcluir} />;
     case "labirinto-do-som":
       return <LabirintoSom p={variation.payload} onDone={onConcluir} />;
-    case "rastreamento-sacadico":
-      return <Sacadico p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas":
       return <Mosaico p={variation.payload} onDone={onConcluir} />;
     case "sequencia-de-cores":
@@ -1194,57 +1192,6 @@ function FocoSustentado({ p, onDone }: any) {
   );
 }
 
-// ============== 11. Rastreamento Sacádico ==============
-function Sacadico({ p, onDone }: any) {
-  const [fase, setFase] = useState<"mostrar" | "jogar" | "fim">("mostrar");
-  const [showIdx, setShowIdx] = useState(0);
-  const [piscando, setPiscando] = useState<number | null>(null);
-  const [userSeq, setUserSeq] = useState<number[]>([]);
-  useEffect(() => {
-    if (fase !== "mostrar") return;
-    if (showIdx >= p.sequencia.length) {
-      setFase("jogar");
-      setPiscando(null);
-      return;
-    }
-    setPiscando(p.sequencia[showIdx]);
-    const t = setTimeout(() => {
-      setPiscando(null);
-      setTimeout(() => setShowIdx(showIdx + 1), 150);
-    }, p.flashMs);
-    return () => clearTimeout(t);
-  }, [showIdx, fase]);
-  const tap = (pos: number) => {
-    if (fase !== "jogar") return;
-    const next = [...userSeq, pos];
-    setUserSeq(next);
-    if (p.sequencia[next.length - 1] !== pos) {
-      onDone(false);
-      return;
-    }
-    if (next.length === p.sequencia.length) onDone(true);
-  };
-  const posClass = (pos: number) => {
-    const map = ["top-2 left-2", "top-2 right-2", "bottom-2 left-2", "bottom-2 right-2"];
-    return map[pos];
-  };
-  return (
-    <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">
-        {fase === "mostrar" ? "Observe a ordem…" : "Toque na mesma ordem"}
-      </div>
-      <div className="relative h-64 w-64 mx-auto bg-card border-2 border-border rounded-2xl">
-        {[0, 1, 2, 3].map((pos) => (
-          <button
-            key={pos}
-            onClick={() => tap(pos)}
-            className={`absolute ${posClass(pos)} w-16 h-16 rounded-full transition-all ${piscando === pos ? "bg-sun scale-125 shadow-glow" : "bg-muted"}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ============== 12. Mosaico de Formas — tangram com SVG real ==============
 
