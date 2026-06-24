@@ -214,7 +214,7 @@ export function PipEvolution() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               className={cn(
-                "relative bg-white rounded-3xl p-4 text-center border-4 transition-all",
+                "relative bg-white rounded-3xl px-4 pt-6 pb-4 text-center border-4 transition-all flex flex-col items-center justify-start",
                 isCurrent
                   ? mascot === "pip"
                     ? "border-sky-400 shadow-lg scale-105"
@@ -223,12 +223,12 @@ export function PipEvolution() {
                 !unlocked && "opacity-60",
               )}
             >
-              <div className="relative w-24 h-24 mx-auto mb-3 flex items-center justify-center">
+              <div className="relative w-28 h-28 mx-auto mb-3 flex items-center justify-center p-2">
                 <img
                   src={mascot === "pip" ? stage.imagePip : stage.imagePipa}
                   alt={stage.name}
                   className={cn(
-                    "w-full h-full object-contain drop-shadow-xl transition-all",
+                    "max-w-full max-h-full object-contain drop-shadow-xl transition-all",
                     !unlocked && "grayscale",
                   )}
                   width={512}
@@ -248,6 +248,7 @@ export function PipEvolution() {
               <p className="text-[10px] text-muted-foreground mt-1">
                 {stage.minCoins === 0 ? "Inicial" : `${stage.minCoins} 💰`}
               </p>
+
               {isCurrent && (
                 <div
                   className={cn(
