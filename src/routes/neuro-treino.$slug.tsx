@@ -3393,7 +3393,11 @@ function LeituraPalavras({ p, onDone }: any) {
 
 // 40. COMPLETAR LETRA — palavra com lacuna, escolher letra certa
 function CompletarLetra({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const btnPad = sens.largerTargets ? "py-7 text-4xl" : "py-5 text-3xl";
   const handleClick = (letra: string) => {
     if (selecionado) return;
     setSelecionado(letra);
@@ -3402,7 +3406,7 @@ function CompletarLetra({ p, onDone }: any) {
   return (
     <div className="space-y-5 text-center">
       <div className="flex justify-center mb-2">
-        <RenderEmoji e={p.emoji} className="w-24 h-24" />
+        <RenderEmoji e={p.emoji} className={imgSize} />
       </div>
       <div className="bg-gradient-to-br from-amber/20 to-amber/5 border-2 border-amber/30 rounded-3xl p-6">
         <div className="text-xs uppercase text-muted-foreground mb-2">Complete a palavra</div>
@@ -3430,7 +3434,7 @@ function CompletarLetra({ p, onDone }: any) {
             selecionado === letra
               ? certa
                 ? "border-success bg-success/10 text-success"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-amber/60";
@@ -3438,7 +3442,7 @@ function CompletarLetra({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleClick(letra)}
-              className={`rounded-2xl border-2 py-5 text-3xl font-black transition-all ${bg}`}
+              className={`rounded-2xl border-2 ${btnPad} font-black transition-all ${bg}`}
             >
               {letra}
             </button>
@@ -3448,3 +3452,4 @@ function CompletarLetra({ p, onDone }: any) {
     </div>
   );
 }
+
