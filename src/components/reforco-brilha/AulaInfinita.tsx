@@ -42,8 +42,6 @@ export function AulaInfinita({ query }: Props) {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [resultados, setResultados] = useState<RecursoExterno[]>([]);
-  const [videoId, setVideoId] = useState<string | null>(null);
-  const [videoTitle, setVideoTitle] = useState("");
   const [preview, setPreview] = useState<{ url: string; title: string; fonte: string } | null>(null);
 
   async function rodar(force = false) {
@@ -236,28 +234,6 @@ export function AulaInfinita({ query }: Props) {
             </div>
           );
         })}
-
-      {videoId && (
-        <div className="fixed inset-0 z-[100] bg-black/80 grid place-items-center p-4 animate-in fade-in" onClick={() => setVideoId(null)}>
-          <div className="relative w-full max-w-xl bg-white rounded-2xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setVideoId(null)} className="absolute top-2 right-2 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg" aria-label="Fechar">
-              <X className="h-4 w-4 text-black" />
-            </button>
-            <div className="p-6 pr-12 space-y-3">
-              <p className="text-sm font-black text-foreground line-clamp-2">{videoTitle}</p>
-              <p className="text-xs font-bold text-muted-foreground">
-                Para evitar o bloqueio do player dentro do app, este vídeo abre fora do Neuro Brilha Kids.
-              </p>
-              <button
-                onClick={() => window.open(youtubeWatchUrl(videoId), "_blank", "noopener,noreferrer")}
-                className="w-full text-xs font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl py-3 flex items-center justify-center gap-2"
-              >
-                Abrir fora do app <ExternalLink className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {preview && (
         <div className="fixed inset-0 z-[100] bg-black/80 grid place-items-center p-2 sm:p-4 animate-in fade-in" onClick={() => setPreview(null)}>

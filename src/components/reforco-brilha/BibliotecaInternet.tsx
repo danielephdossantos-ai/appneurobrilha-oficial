@@ -41,8 +41,6 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
   const [erro, setErro] = useState<string | null>(null);
   const [resultados, setResultados] = useState<RecursoExterno[]>([]);
   const [fonte, setFonte] = useState<"cache" | "api" | "vazio" | null>(null);
-  const [videoId, setVideoId] = useState<string | null>(null);
-  const [videoTitle, setVideoTitle] = useState<string>("");
   const [preview, setPreview] = useState<{ url: string; title: string; fonte: string } | null>(null);
 
   async function rodar(force = false) {
@@ -177,41 +175,6 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
               </a>
             );
           })}
-        </div>
-      )}
-
-      {videoId && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/80 grid place-items-center p-4 animate-in fade-in"
-          onClick={() => setVideoId(null)}
-        >
-          <div
-            className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setVideoId(null)}
-              className="absolute top-2 right-2 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg"
-              aria-label="Fechar"
-            >
-              <X className="h-4 w-4 text-black" />
-            </button>
-            <div className="bg-white px-4 py-3 flex items-center justify-between gap-3">
-              <p className="text-sm font-bold text-foreground line-clamp-1">{videoTitle}</p>
-              <a
-                href={youtubeWatchUrl(videoId)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(youtubeWatchUrl(videoId), "_blank", "noopener,noreferrer");
-                }}
-                className="text-xs font-bold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 shrink-0"
-              >
-                Abrir fora do app <ExternalLink className="h-3 w-3" />
-              </a>
-            </div>
-          </div>
         </div>
       )}
 
