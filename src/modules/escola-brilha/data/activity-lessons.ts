@@ -278,3 +278,184 @@ export const MULTIPLICACAO_LESSON: ActivityLesson = {
     },
   },
 };
+
+export const DIVISAO_LESSON: ActivityLesson = {
+  id: "divisao-4ano",
+  title: "Divisão",
+  topic: "DIVISÃO",
+  subject: "Matemática — 4º Ano",
+  xp: 150,
+  screens: {
+    explicacao: {
+      instruction: "Vamos aprender sobre",
+      highlight: "DIVISÃO!",
+      summary: "Dividir é repartir uma quantidade em partes iguais.",
+      visual_emoji: "",
+    },
+    exploracao: {
+      instruction: "Observe as divisões abaixo.",
+      pairs: [
+        { left: "6 ÷ 2", right: "3" },
+        { left: "10 ÷ 5", right: "2" },
+        { left: "12 ÷ 3", right: "4" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Divisão reparte um total em grupos iguais. 12 ÷ 3 = 4 significa 12 repartidos em 3 grupos de 4.",
+      highlights: ["repartir em partes iguais"],
+      tip: "Total ÷ grupos = quanto cabe em cada grupo!",
+    },
+    exemplo_visual: {
+      title: "Veja a divisão acontecendo:",
+      sentences: [
+        { text: "10 balas para repartir entre 2 amigos.", emoji: "" },
+        { text: "Cada amigo recebe a mesma quantidade.", emoji: "" },
+      ],
+      conclusion: "10 ÷ 2 = 5 balas para cada um!",
+    },
+    praticar: {
+      question: "Quanto é 15 ÷ 3?",
+      options: [
+        { text: "3", isCorrect: false, color: "red" },
+        { text: "5", isCorrect: true, color: "green" },
+        { text: "6", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
+export const ADJETIVOS_LESSON: ActivityLesson = {
+  id: "adjetivos-4ano",
+  title: "Adjetivos",
+  topic: "ADJETIVOS",
+  subject: "Língua Portuguesa — 4º Ano",
+  xp: 130,
+  screens: {
+    explicacao: {
+      instruction: "Vamos aprender sobre",
+      highlight: "ADJETIVOS!",
+      summary: "Adjetivos são palavras que descrevem como algo é.",
+      visual_emoji: "",
+    },
+    exploracao: {
+      instruction: "Veja substantivos com seus adjetivos.",
+      pairs: [
+        { left: "casa", right: "bonita" },
+        { left: "cachorro", right: "peludo" },
+        { left: "dia", right: "ensolarado" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Adjetivos qualificam os substantivos — dizem como, de que jeito ou qual a característica.",
+      highlights: ["qualificam os substantivos"],
+      tip: "Descreveu como algo é? É adjetivo!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "O gato preto dormiu.", emoji: "" },
+        { text: '"preto" é adjetivo: descreve o gato.', emoji: "" },
+      ],
+      conclusion: "Adjetivo descreve o substantivo!",
+    },
+    praticar: {
+      question: "Qual palavra é um adjetivo?",
+      options: [
+        { text: "MENINO", isCorrect: false, color: "red" },
+        { text: "FELIZ", isCorrect: true, color: "green" },
+        { text: "CORRER", isCorrect: false, color: "orange" },
+      ],
+    },
+  },
+};
+
+export const PORCENTAGEM_LESSON: ActivityLesson = {
+  id: "porcentagem-5ano",
+  title: "Porcentagem",
+  topic: "PORCENTAGEM",
+  subject: "Matemática — 5º Ano",
+  xp: 160,
+  screens: {
+    explicacao: {
+      instruction: "Vamos aprender sobre",
+      highlight: "PORCENTAGEM!",
+      summary: "Porcentagem é uma fração com denominador 100.",
+      visual_emoji: "",
+    },
+    exploracao: {
+      instruction: "Observe as porcentagens abaixo.",
+      pairs: [
+        { left: "50%", right: "metade" },
+        { left: "25%", right: "um quarto" },
+        { left: "100%", right: "tudo" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Porcentagem (%) mostra quantas partes de 100 você tem. 30% = 30 de cada 100.",
+      highlights: ["partes de 100"],
+      tip: "% significa 'por cento' = de cada 100!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "Uma blusa custava R$100 e teve 20% de desconto.", emoji: "" },
+        { text: "20% de 100 = 20 reais de desconto.", emoji: "" },
+      ],
+      conclusion: "Ela passou a custar R$80!",
+    },
+    praticar: {
+      question: "Quanto é 50% de 200?",
+      options: [
+        { text: "50", isCorrect: false, color: "red" },
+        { text: "100", isCorrect: true, color: "green" },
+        { text: "150", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
+export const VERBOS_LESSON: ActivityLesson = {
+  id: "verbos-5ano",
+  title: "Verbos",
+  topic: "VERBOS",
+  subject: "Língua Portuguesa — 5º Ano",
+  xp: 140,
+  screens: {
+    explicacao: {
+      instruction: "Vamos aprender sobre",
+      highlight: "VERBOS!",
+      summary: "Verbos são palavras que indicam ações, estados ou fenômenos.",
+      visual_emoji: "",
+    },
+    exploracao: {
+      instruction: "Veja exemplos de verbos.",
+      pairs: [
+        { left: "ação", right: "correr" },
+        { left: "estado", right: "ser" },
+        { left: "fenômeno", right: "chover" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Verbo é a palavra que mostra o que alguém faz, sente ou o que acontece.",
+      highlights: ["o que alguém faz"],
+      tip: "Indica ação? É verbo!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "O cachorro late.", emoji: "" },
+        { text: '"late" é o verbo: mostra a ação.', emoji: "" },
+      ],
+      conclusion: "Verbo = ação na frase!",
+    },
+    praticar: {
+      question: "Qual palavra é um verbo?",
+      options: [
+        { text: "BONITO", isCorrect: false, color: "red" },
+        { text: "PULAR", isCorrect: true, color: "green" },
+        { text: "MESA", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
