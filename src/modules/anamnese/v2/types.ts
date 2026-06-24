@@ -1,4 +1,4 @@
-// Tipos da Anamnese Científica v2 (17 etapas)
+// Tipos da Anamnese Científica v2 (16 etapas)
 // Inspirada em: SNAP-IV, M-CHAT-R, CARS-2, ABAS, Vineland (escalas adaptadas para triagem)
 // IMPORTANTE: este sistema NÃO realiza diagnóstico clínico.
 
@@ -219,9 +219,9 @@ export interface RiskMap {
   global: RiskLevel;
 }
 
-// Etapas ativas no wizard. Pulamos 7, 8 (cobertas pelo SNAP-IV)
-// e 9, 10 (cobertas pelo M-CHAT-R) para evitar perguntas repetitivas.
-export const ACTIVE_STEPS: number[] = [1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+// Etapas ativas no wizard principal: triagem completa em 16 etapas.
+// Escalas SNAP-IV / M-CHAT-R ficam na rota separada de escalas.
+export const ACTIVE_STEPS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 export const TOTAL_STEPS = ACTIVE_STEPS.length;
 
 export function stepPosition(stepNumber: number): number {

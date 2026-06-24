@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
+import { ACTIVE_STEPS } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
 
 interface Row {
@@ -39,7 +40,7 @@ export function useAnamneseV2(childId: string) {
   useEffect(() => {
     if (!hydratedRef.current && row) {
       setLocalResponses(row.responses ?? {});
-      setLocalStep(row.current_step ?? 1);
+      setLocalStep(ACTIVE_STEPS.includes(row.current_step) ? row.current_step : ACTIVE_STEPS[0]);
       hydratedRef.current = true;
     } else if (!hydratedRef.current && !isLoading && !row) {
       hydratedRef.current = true;
@@ -107,7 +108,7 @@ export function useAnamneseV2(childId: string) {
   const finish = async () => {
     const res = await upsert.mutateAsync({
       responses: localResponses,
-      current_step: 16,
+      current_step: ACTIVE_STEPS[ACTIVE_STEPS.length - 1],
       completed: true,
     });
     // Marca a criança como tendo anamnese concluída → libera painel dos pais
