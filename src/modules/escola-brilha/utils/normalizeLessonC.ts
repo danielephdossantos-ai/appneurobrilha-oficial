@@ -1,6 +1,7 @@
 import type { ActivityLessonC, BNCCArea } from "../types/activity-lesson-c";
 import type { AulaBncc } from "../hooks/useAulasBncc";
 import { cleanVisibleLessonText, friendlyLessonTitle, friendlySubject } from "./bnccDisplayText";
+import { buildSkillLessonC, isLowQualitySkillLesson } from "./skillLessonBuilder";
 
 const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }> = {
   "Língua Portuguesa": { area: "linguagens", area_label: "Linguagens" },
@@ -34,6 +35,15 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
   const color = raw.color ?? COLOR_BY_AREA[meta.area];
 
   const subject = raw.subject || aula.disciplina;
+  if (isLowQualitySkillLesson(raw)) {
+    return buildSkillLessonC({
+      source: aula,
+      area: raw.area || meta.area,
+      areaLabel: raw.area_label || meta.area_label,
+      color,
+    });
+  }
+
   const title = friendlyLessonTitle({ title: raw.title || aula.titulo, subject });
   const subjectFallback = friendlySubject(subject).toLowerCase();
   const desc = cleanVisibleLessonText(
