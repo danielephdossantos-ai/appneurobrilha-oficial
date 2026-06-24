@@ -10,7 +10,9 @@ import {
 import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, BarChart3 } from "lucide-react";
+import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, BarChart3, Bell, BellRing } from "lucide-react";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { toast } from "sonner";
 import {
   Radar,
   RadarChart,
@@ -29,8 +31,19 @@ function ResultadoRoute() {
   const { childId } = Route.useParams();
   const nav = useNavigate();
   const a = useAnamneseV2(childId);
+  const push = usePushNotifications();
 
-
+  const ativarLembretes = async () => {
+    const ok = await push.request();
+    if (ok) {
+      toast.success("Lembretes ativados! Vamos avisar todo dia a hora de estudar.");
+      push.notify("Pronto!", "Os lembretes diários da Jornada 365 estão ativos.", {
+        tag: `jornada-onboard-${childId}`,
+      });
+    } else {
+      toast.error("Não foi possível ativar. Verifique as permissões do navegador.");
+    }
+  };
 
   if (a.isLoading) {
     return (
@@ -185,7 +198,30 @@ function ResultadoRoute() {
         )}
 
 
-
+        <Card className="p-4 bg-primary/5 border-2 border-primary/30">
+          <div className="flex items-start gap-3">
+            <BellRing className="h-6 w-6 text-primary shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h3 className="font-bold mb-1">Jornada 365 pronta!</h3>
+              <p className="text-sm text-muted-foreground mb-3">
+                As aulas diárias de {childName} já estão sendo geradas com base nesta anamnese.
+                Ative os lembretes pra receber no celular toda hora de estudar.
+              </p>
+              <Button
+                size="sm"
+                onClick={ativarLembretes}
+                disabled={push.permission === "granted" || push.permission === "unsupported"}
+              >
+                <Bell className="h-4 w-4 mr-1" />
+                {push.permission === "granted"
+                  ? "Lembretes ativos"
+                  : push.permission === "unsupported"
+                    ? "Não suportado neste dispositivo"
+                    : "Ativar lembretes diários"}
+              </Button>
+            </div>
+          </div>
+        </Card>
 
         <div className="flex gap-2 pb-6">
           <Button

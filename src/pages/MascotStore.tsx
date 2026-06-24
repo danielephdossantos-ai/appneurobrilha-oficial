@@ -965,7 +965,7 @@ const WorldsSection: React.FC = () => {
       setHiperfocoCustom(w.customLabel);
     }
     toast.success(`Mundo ${w.label} escolhido! 🌟`, {
-      description: "Pronto para brincar.",
+      description: "Pronto para brincar na Jornada 365.",
     });
   };
 
@@ -988,7 +988,8 @@ const WorldsSection: React.FC = () => {
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent rounded-full" />
       </div>
       <p className="text-center text-muted-foreground font-bold mb-8 max-w-2xl mx-auto">
-        Escolha o mundo que você mais ama! Tudo vai se transformar para a sua aventura favorita. ✨
+        Escolha o mundo que você mais ama! Tudo na Jornada 365 vai se transformar para a sua
+        aventura favorita. ✨
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">

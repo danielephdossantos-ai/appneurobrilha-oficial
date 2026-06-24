@@ -12,14 +12,14 @@ import {
   Landmark,
   GraduationCap,
   Sprout,
-  CalendarDays,
+ Network,
+ Image as ImageIcon,
 } from "lucide-react";
 import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
 import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
-import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
 type StaticLesson = {
@@ -144,7 +144,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <br />
             aprender hoje?
           </h1>
-          <p className="text-white/50 text-sm font-semibold mt-2">Educação Adaptativa</p>
+          <p className="text-white/50 text-sm font-semibold mt-2">BNCC • Educação Adaptativa</p>
         </div>
         <div className="flex justify-between items-end px-4 -mb-6 relative z-10 max-w-xs mx-auto mt-4">
           <motion.img src={pipaImg} alt="Pipa" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
@@ -154,24 +154,35 @@ export const EscolaBrilhaDashboard: React.FC = () => {
 
 
 
-      {/* Aulas da Semana — categoria adaptada ao perfil neuro */}
+      {/* Sistema interno: Matriz Pedagógica */}
       <div className="px-4 max-w-lg mx-auto mt-6">
         <button
-          onClick={() => navigate({ to: "/escola-brilha/semana" })}
-          className="w-full flex items-center gap-3 rounded-2xl border border-yellow-300/30 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 px-4 py-4 text-left transition shadow-lg"
+          onClick={() => navigate({ to: "/matriz-pedagogica" })}
+          className="w-full flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
         >
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0 shadow-md">
-            <CalendarDays className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
+            <Network className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-white font-black text-base">Aulas da Semana</p>
-            <p className="text-white/70 text-xs font-semibold">5 aulas adaptadas • Seg a Sex</p>
+            <p className="text-white font-black text-sm">Matriz Pedagógica</p>
+            <p className="text-white/50 text-[11px] font-semibold">Sistema interno • Pré ao 9º Ano</p>
           </div>
-          <ChevronRight className="w-5 h-5 text-white/60" />
+          <ChevronRight className="w-5 h-5 text-white/40" />
+        </button>
+        <button
+          onClick={() => navigate({ to: "/banco-midias" })}
+          className="w-full mt-2 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shrink-0">
+            <ImageIcon className="w-5 h-5 text-white" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white font-black text-sm">Banco de Mídias</p>
+            <p className="text-white/50 text-[11px] font-semibold">Imagens reutilizáveis em aulas e atividades</p>
+          </div>
+          <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
       </div>
-
-
 
 
 
@@ -214,7 +225,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                     <div>
                       <h2 className="text-white font-black text-lg leading-tight">{serie}</h2>
                       <p className="text-white/40 text-[11px] font-semibold uppercase tracking-widest">
-                        {total} {total === 1 ? "aula" : "aulas"}
+                        {total} {total === 1 ? "aula" : "aulas"} • BNCC
                       </p>
                     </div>
                   </div>
@@ -282,6 +293,11 @@ const LessonCard: React.FC<{
         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${badgeColor}`}>
           {badge}
         </span>
+        {bncc && (
+          <span className="text-[10px] font-mono text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
+            {bncc}
+          </span>
+        )}
         <span className="flex items-center gap-0.5 text-[10px] font-black text-yellow-600">
           <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
           {xp}
@@ -401,6 +417,7 @@ const SubjectFolders: React.FC<{
                         badgeColor={cat.badgeColor}
                         gradient={cat.gradient}
                         xp={cat.xp}
+                        bncc={cat.bncc}
                         illustration={cat.illustration}
                         onClick={() => onStaticClick(cat.id, cat.type)}
                       />
@@ -409,12 +426,13 @@ const SubjectFolders: React.FC<{
                       <LessonCard
                         key={`d-${a.id}`}
                         index={statics.length + j}
-                        title={friendlyLessonTitle({ title: a.titulo, subject: a.disciplina })}
-                        subtitle={a.disciplina}
+                        title={a.titulo}
+                        subtitle={a.descricao ?? a.disciplina}
                         badge={a.disciplina}
                         badgeColor="bg-emerald-100 text-emerald-700"
                         gradient="from-emerald-500 to-teal-600"
                         xp={a.xp}
+                        bncc={a.codigo_bncc ?? undefined}
                         onClick={() => onDbClick(a.id)}
                       />
                     ))}

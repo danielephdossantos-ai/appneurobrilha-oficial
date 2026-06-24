@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
@@ -28,8 +28,6 @@ import { LessonVisualMap } from "../components/LessonVisualMap";
 import { MathVisualizer } from "../components/MathVisualizer";
 import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
 import type { LessonRef } from "../hooks/useNextLesson";
-import { cleanVisibleLessonText, friendlyLessonTitle } from "../utils/bnccDisplayText";
-import { buildSkillLessonC, isLowQualitySkillLesson } from "../utils/skillLessonBuilder";
 
 interface Props {
   lesson: ActivityLessonC;
@@ -59,131 +57,7 @@ const LETTER_COLORS: Record<string, string> = {
   D: "bg-amber-500  border-amber-700 ",
 };
 
-function sanitizeLesson(lesson: ActivityLessonC): ActivityLessonC {
-  if (isLowQualitySkillLesson(lesson)) {
-    return buildSkillLessonC({
-      source: {
-        id: lesson.id,
-        codigo_bncc: lesson.bncc_code,
-        serie: lesson.grade,
-        disciplina: lesson.subject,
-        titulo: lesson.title,
-        descricao: lesson.bncc_description,
-        xp: lesson.xp,
-      },
-      area: lesson.area,
-      areaLabel: lesson.area_label,
-      color: lesson.color,
-    });
-  }
-
-  const title = friendlyLessonTitle({ title: lesson.title, subject: lesson.subject });
-  const description = cleanVisibleLessonText(
-    lesson.bncc_description,
-    `Vamos praticar ${title.toLowerCase()} com exemplos simples.`,
-  );
-
-  return {
-    ...lesson,
-    title,
-    bncc_code: "",
-    bncc_description: description,
-    mission_question: cleanVisibleLessonText(
-      lesson.mission_question,
-      `Como usar ${title.toLowerCase()} no dia a dia?`,
-    ),
-    screens: {
-      missao: {
-        ...lesson.screens.missao,
-        intro: cleanVisibleLessonText(lesson.screens.missao.intro, `Missão: ${title}`),
-        objectives: lesson.screens.missao.objectives.map((obj, index) =>
-          cleanVisibleLessonText(
-            obj,
-            [`Entender ${title}`, "Aplicar em situações reais", "Resolver o desafio final"][index] ||
-              "Praticar com atenção",
-          ),
-        ),
-        context_text: cleanVisibleLessonText(lesson.screens.missao.context_text, description),
-      },
-      exploracao: {
-        ...lesson.screens.exploracao,
-        instruction: cleanVisibleLessonText(lesson.screens.exploracao.instruction, "Vamos explorar o tema:"),
-        texto: cleanVisibleLessonText(lesson.screens.exploracao.texto, description),
-        pontos_destaque: lesson.screens.exploracao.pontos_destaque.map((point, index) => ({
-          ...point,
-          text: cleanVisibleLessonText(
-            point.text,
-            [`Conceito-chave de ${title}`, "Observe os detalhes com atenção", "Aplique no desafio"][index] ||
-              "Pratique com calma",
-          ),
-        })),
-        mascot_tip: cleanVisibleLessonText(
-          lesson.screens.exploracao.mascot_tip,
-          "Leia com calma. Você pode voltar quando quiser!",
-        ),
-      },
-      pontos_chave: {
-        ...lesson.screens.pontos_chave,
-        intro: cleanVisibleLessonText(lesson.screens.pontos_chave.intro, "Os pontos mais importantes:"),
-        points: lesson.screens.pontos_chave.points.map((point, index) => ({
-          ...point,
-          title: cleanVisibleLessonText(
-            point.title,
-            [title, "Por que importa", "Como aplicar"][index] || "Ponto importante",
-          ),
-          text: cleanVisibleLessonText(
-            point.text,
-            [description, "Aparece em situações do dia a dia.", "Use a ideia para resolver problemas."][index] ||
-              "Pratique um passo de cada vez.",
-          ),
-        })),
-      },
-      exemplo_aplicado: {
-        ...lesson.screens.exemplo_aplicado,
-        title: cleanVisibleLessonText(lesson.screens.exemplo_aplicado.title, "Exemplo na prática"),
-        scenario: cleanVisibleLessonText(
-          lesson.screens.exemplo_aplicado.scenario,
-          `Veja um caso de ${title} acontecendo na vida real.`,
-        ),
-        analysis: lesson.screens.exemplo_aplicado.analysis.map((step, index) =>
-          cleanVisibleLessonText(
-            step,
-            ["Identifique o que está acontecendo.", "Aplique o conceito que aprendeu.", "Confira o resultado."][index] ||
-              "Siga para o próximo passo.",
-          ),
-        ),
-        conclusion: cleanVisibleLessonText(
-          lesson.screens.exemplo_aplicado.conclusion,
-          "Entendendo a ideia, fica fácil aplicar em outros casos.",
-        ),
-      },
-      desafio: {
-        ...lesson.screens.desafio,
-        context: lesson.screens.desafio.context
-          ? cleanVisibleLessonText(lesson.screens.desafio.context, "") || undefined
-          : undefined,
-        question: cleanVisibleLessonText(
-          lesson.screens.desafio.question,
-          `Qual é a melhor resposta sobre ${title}?`,
-        ),
-        options: lesson.screens.desafio.options.map((option) => ({
-          ...option,
-          text: cleanVisibleLessonText(
-            option.text,
-            option.isCorrect ? "Aplicar a ideia da aula." : "Responder observando as pistas.",
-          ),
-        })),
-        explanation: cleanVisibleLessonText(
-          lesson.screens.desafio.explanation,
-          "A resposta correta aplica o conceito visto na aula.",
-        ),
-      },
-    },
-  };
-}
-
-export const ActivityPlayerC: React.FC<Props> = ({ lesson: rawLesson, currentRef }) => {
-  const lesson = useMemo(() => sanitizeLesson(rawLesson), [rawLesson]);
+export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
   const fallbackRef: LessonRef = currentRef ?? { kind: "static", id: lesson.id };
   const navigate = useNavigate();
   const [screenIndex, setScreenIndex] = useState(0);
@@ -476,18 +350,20 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson: rawLesson, currentRef
           </div>
         </div>
 
-        {/* Área e ano (sem código BNCC) */}
+        {/* BNCC badge */}
         <div className="px-4 pt-3 pb-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`text-xs font-black px-3 py-1 rounded-full ${ac.bg} text-white`}>
               {lesson.area_label}
             </span>
             <span className="text-xs font-bold text-slate-400">
-              {lesson.grade}
+              {lesson.grade} • BNCC {lesson.bncc_code}
+            </span>
+            <span className="text-xs text-slate-400 hidden sm:block">
+              — {lesson.bncc_description}
             </span>
           </div>
         </div>
-
 
         {/* Screen content */}
         <div className="flex-1 px-4 py-3 max-w-2xl w-full mx-auto">
@@ -568,10 +444,9 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson: rawLesson, currentRef
                 <div className={`${ac.light} ${ac.border} border-2 rounded-2xl p-4 text-center`}>
                   <p className={`text-xl font-black ${ac.text}`}>Missão Concluída!</p>
                   <p className="text-slate-500 text-sm mt-1">
-                    +{lesson.xp} XP
+                    +{lesson.xp} XP • BNCC {lesson.bncc_code}
                   </p>
                 </div>
-
                 <NextLessonInlineButton current={fallbackRef} />
                 <button
                   onClick={() => navigate({ to: "/escola-brilha" })}
