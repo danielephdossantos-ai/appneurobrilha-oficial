@@ -150,36 +150,64 @@ export function TrabalhoBrilha({ childId }: Props) {
         </p>
       ) : (
         <div className="grid sm:grid-cols-2 gap-3">
-          {trabalhos.map((t) => (
-            <div
-              key={t.id}
-              className="bg-white border-2 border-amber-100 rounded-xl p-3 flex flex-col gap-2"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="text-sm font-bold text-foreground truncate">{t.titulo}</p>
-                  <p className="text-[11px] text-muted-foreground truncate">
-                    {t.materia || "Tema"}: {t.tema}
-                  </p>
+          {trabalhos.map((t) => {
+            const dias = t.data_entrega
+              ? Math.ceil(
+                  (new Date(t.data_entrega + "T12:00:00").getTime() - Date.now()) /
+                    (1000 * 60 * 60 * 24),
+                )
+              : null;
+            return (
+              <div
+                key={t.id}
+                className="bg-white border-2 border-amber-100 rounded-xl p-3 flex flex-col gap-2"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-foreground truncate">{t.titulo}</p>
+                    <p className="text-[11px] text-muted-foreground truncate">
+                      {t.materia || "Tema"}: {t.tema}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => remover(t.id)}
+                    className="p-1 text-muted-foreground hover:text-rose-600 shrink-0"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => remover(t.id)}
-                  className="p-1 text-muted-foreground hover:text-rose-600 shrink-0"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                {t.data_entrega && (
+                  <div
+                    className={`text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1 px-2 py-1 rounded-md w-fit ${
+                      dias !== null && dias < 3
+                        ? "bg-rose-50 text-rose-700"
+                        : "bg-amber-50 text-amber-700"
+                    }`}
+                  >
+                    📅 Entrega:{" "}
+                    {new Date(t.data_entrega + "T12:00:00").toLocaleDateString("pt-BR")}
+                    {dias !== null &&
+                      (dias < 0
+                        ? " · atrasado"
+                        : dias === 0
+                          ? " · hoje!"
+                          : ` · em ${dias} dia${dias === 1 ? "" : "s"}`)}
+                  </div>
+                )}
+                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>
+                    {t.blocos?.length || 0} blocos · {t.fontes?.length || 0} fontes
+                  </span>
+                  <button
+                    onClick={() => setEditandoId(t.id)}
+                    className="font-bold text-amber-700 hover:text-amber-900"
+                  >
+                    Abrir →
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-                <span>{t.blocos?.length || 0} blocos · {t.fontes?.length || 0} fontes</span>
-                <button
-                  onClick={() => setEditandoId(t.id)}
-                  className="font-bold text-amber-700 hover:text-amber-900"
-                >
-                  Abrir →
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
