@@ -44,7 +44,7 @@ export function removeBnccCodes(text: string | null | undefined) {
 
 // Extracts the first meaningful pedagogical sentence, dropping PDF junk
 // like "LÍNGUA PORTUGUESA – 6º E 7º ANOS (Continuação) ... HABILIDADES ...".
-function stripPdfTail(text: string) {
+export function stripPdfTail(text: string) {
   let t = text;
   // Cut at the first occurrence of any PDF section marker
   const cutMarkers = [
@@ -99,7 +99,23 @@ export function isSystemBnccText(text: string | null | undefined) {
 }
 
 export function cleanVisibleLessonText(text: string | null | undefined, fallback: string) {
-  return bnccActivityName(text, fallback, 180);
+  const clean = removeBnccCodes(text);
+  if (!clean) return fallback;
+
+  const stripped = stripPdfTail(clean);
+  if (!stripped || stripped.length < 3) return fallback;
+
+  const normalized = normalizeKey(stripped);
+  const markerCount = SYSTEM_MARKERS.filter((marker) => normalized.includes(marker)).length;
+  const candidate = markerCount >= 2 ? firstSentence(stripped) : stripped;
+  if (!candidate || candidate.length < 3) return fallback;
+
+  if (candidate.length <= 420) return candidate;
+  const sentence = firstSentence(candidate);
+  if (sentence && sentence.length <= 220) return sentence;
+  const cut = candidate.slice(0, 420);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 320 ? cut.slice(0, lastSpace) : cut).trim()}…`;
 }
 
 export function friendlySubject(subject: string | null | undefined) {
