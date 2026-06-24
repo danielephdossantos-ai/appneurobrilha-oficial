@@ -3154,7 +3154,7 @@ function ReacaoRapida({ p, onDone }: any) {
         const finalAcertos = acertos + (acerto ? 1 : 0);
         onDone(finalAcertos >= Math.ceil(p.seq.length * 0.6));
       }
-    }, 500);
+    }, 1100);
   };
 
   const round = p.seq[idx] ?? p.seq[0];

@@ -403,8 +403,8 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     emoji: "⚡",
     grupo: "Atenção & Concentração",
     cor: "from-violet/25 to-primary/5",
-    objetivo: "Controle inibitório e tempo de reação (Go/No-Go)",
-    instrucao: "Toque SOMENTE no alvo verde — ignore o vermelho!",
+    objetivo: "Atenção seletiva e tempo de reação",
+    instrucao: "Olhe o bichinho pedido lá em cima e toque nele entre as figuras!",
   },
   "seguir-instrucao": {
     slug: "seguir-instrucao",
