@@ -5,11 +5,13 @@
  * Rota pública (/api/public/*) — autenticação via apikey (anon key).
  */
 import { createFileRoute } from "@tanstack/react-router";
+import { createClient } from "@supabase/supabase-js";
 import {
   planWeek,
   getSegundaDaSemana,
   type PerfilNeuro,
 } from "@/modules/escola-brilha/engine/weekly-planner";
+import type { Database } from "@/integrations/supabase/types";
 
 function inferPerfil(responses: unknown): PerfilNeuro {
   const raw = JSON.stringify(responses || {}).toLowerCase();
