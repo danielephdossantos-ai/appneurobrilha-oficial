@@ -106,7 +106,6 @@ const navigationSequence = [
   "/neuro-treino",
   "/brilha-vida",
   "/rotina",
-  "/rotina",
   "/painel-pais",
   "/progressao",
   "/terapeuta-brilha",
