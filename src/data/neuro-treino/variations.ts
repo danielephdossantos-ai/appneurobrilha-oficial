@@ -2341,7 +2341,7 @@ export const GRUPOS = [
       "memoria-visual",
       "reacao-rapida",
       "seguir-instrucao",
-      "foco-sustentado",
+      
       "rastreamento-sacadico",
       "foco-total",
     ] as CategoriaSlug[],
