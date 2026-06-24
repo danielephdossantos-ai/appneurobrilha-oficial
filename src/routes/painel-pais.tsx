@@ -19,9 +19,15 @@ import { useState, useEffect } from "react";
 import { useParentMode } from "@/contexts/ParentModeContext";
 import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
+import { ConsentGate } from "@/components/legal/ConsentGate";
+import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
 
 export const Route = createFileRoute("/painel-pais")({
-  component: PainelPremium,
+  component: () => (
+    <ConsentGate>
+      <PainelPremium />
+    </ConsentGate>
+  ),
 });
 
 function PainelPremium() {
@@ -336,6 +342,10 @@ function PainelPremium() {
               <button className="w-full py-3 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl text-sm font-bold transition-all">
                 Ver Plano de Aula Completo
               </button>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <PrivacyPanel />
             </motion.div>
           </div>
         </motion.div>
