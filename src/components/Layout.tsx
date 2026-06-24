@@ -8,7 +8,7 @@ import {
   Brain,
   CalendarDays,
   ListChecks,
-  Compass,
+  
   ShieldCheck,
   MessagesSquare,
   FileBarChart2,
