@@ -27,10 +27,12 @@ const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}
 
 export function EggHatchCinematic({ childId, childName, onClose }: Props) {
   const [phase, setPhase] = useState<
-    "intro" | "choose" | "shake" | "spin" | "crack" | "open" | "reveal"
+    "intro" | "choose" | "shake" | "spin" | "stop" | "crack" | "open" | "bubble" | "reveal"
   >("intro");
   const [mascot, setMascot] = useState<MascotChoice>("pip");
   const [speechSupported, setSpeechSupported] = useState(false);
+  const [poppedTaps, setPoppedTaps] = useState(0);
+  const [bubbleBurst, setBubbleBurst] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -38,22 +40,29 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
     }
   }, []);
 
+  // Timing slow + suspense — cada fase tem espaço pra criança observar.
   useEffect(() => {
     if (phase === "shake") {
-      const t1 = setTimeout(() => setPhase("spin"), 1800);
-      return () => clearTimeout(t1);
+      const t = setTimeout(() => setPhase("spin"), 3000);
+      return () => clearTimeout(t);
     }
     if (phase === "spin") {
-      const t2 = setTimeout(() => setPhase("crack"), 1800);
-      return () => clearTimeout(t2);
+      const t = setTimeout(() => setPhase("stop"), 3200);
+      return () => clearTimeout(t);
+    }
+    if (phase === "stop") {
+      // Pausa dramática: ovo para de girar, suspense
+      const t = setTimeout(() => setPhase("crack"), 1800);
+      return () => clearTimeout(t);
     }
     if (phase === "crack") {
-      const t3 = setTimeout(() => setPhase("open"), 1400);
-      return () => clearTimeout(t3);
+      // 4 pedaços caem um por um — 4 x 700ms + margem
+      const t = setTimeout(() => setPhase("open"), 3600);
+      return () => clearTimeout(t);
     }
     if (phase === "open") {
-      const t4 = setTimeout(() => setPhase("reveal"), 2500);
-      return () => clearTimeout(t4);
+      const t = setTimeout(() => setPhase("bubble"), 2200);
+      return () => clearTimeout(t);
     }
   }, [phase]);
 
@@ -317,8 +326,8 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                 O ovo está girando...
               </h2>
               <motion.div
-                animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.05, 1, 1.05, 1] }}
-                transition={{ duration: 2, ease: "easeInOut" }}
+                animate={{ rotate: [0, 360, 720, 1080], scale: [1, 1.06, 1, 1.06, 1] }}
+                transition={{ duration: 3, ease: "easeInOut" }}
                 className="relative"
               >
                 <img
@@ -326,14 +335,45 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   alt="Ovo girando"
                   className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain drop-shadow-2xl"
                 />
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-white/30 via-transparent to-white/30"
-                  animate={{ opacity: [0, 0.6, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
               </motion.div>
               <p className="text-white/80 text-lg">
                 Cada volta deixa a casca mais pronta para nascer.
+              </p>
+            </motion.div>
+          )}
+
+          {phase === "stop" && (
+            <motion.div
+              key="stop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
+                Shhh... O ovo parou!
+              </h2>
+              <motion.div
+                className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
+                animate={{
+                  scale: [1, 1.04, 1, 1.04, 1],
+                  rotate: [0, -1.5, 1.5, -1.5, 0],
+                }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <img
+                  src={eggImg}
+                  alt="Ovo parado, prestes a abrir"
+                  className="w-full h-full object-contain drop-shadow-2xl"
+                />
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-white/30 blur-2xl"
+                  animate={{ opacity: [0.2, 0.6, 0.2] }}
+                  transition={{ duration: 1.6, repeat: Infinity }}
+                />
+              </motion.div>
+              <p className="text-white/80 text-lg">
+                Algo está prestes a acontecer... olha bem de pertinho.
               </p>
             </motion.div>
           )}
@@ -347,31 +387,47 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                Olha! A casca está abrindo em pedaços!
+                A casca está se abrindo em pedaços!
               </h2>
-              <motion.div
-                className="relative w-64 h-64 md:w-80 md:h-80 mx-auto"
-                initial={{ scale: 0.8 }}
-                animate={{
-                  scale: [0.8, 1.05, 1],
-                  rotate: [-2, 2, -2, 2, 0],
-                }}
-                transition={{ duration: 0.6 }}
-              >
-                <img
-                  src={eggImg}
-                  alt="Ovo rachando"
-                  className="w-full h-full object-contain drop-shadow-2xl brightness-110"
-                />
+              {/* Quebra-cabeça: 4 pedaços da casca caindo um por um */}
+              <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                {/* Glow central crescente */}
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-white/70 blur-2xl"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 0.8 }}
+                  className="absolute inset-0 rounded-full bg-yellow-200/50 blur-2xl"
+                  animate={{ opacity: [0, 0.6, 0.9], scale: [0.6, 1.1, 1.3] }}
+                  transition={{ duration: 3.4, ease: "easeInOut" }}
                 />
-              </motion.div>
+                {/* 4 pedaços do ovo, cada um com clip de um quadrante */}
+                {[
+                  { clip: "inset(0 50% 50% 0)", x: -80, y: -90, r: -35, delay: 0 },
+                  { clip: "inset(0 0 50% 50%)", x: 80, y: -90, r: 35, delay: 0.7 },
+                  { clip: "inset(50% 50% 0 0)", x: -90, y: 90, r: -25, delay: 1.4 },
+                  { clip: "inset(50% 0 0 50%)", x: 90, y: 90, r: 25, delay: 2.1 },
+                ].map((p, i) => (
+                  <motion.img
+                    key={i}
+                    src={eggImg}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-contain drop-shadow-lg"
+                    style={{ clipPath: p.clip, WebkitClipPath: p.clip }}
+                    initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
+                    animate={{
+                      x: [0, 0, p.x],
+                      y: [0, -6, p.y],
+                      rotate: [0, 0, p.r],
+                      opacity: [1, 1, 0],
+                    }}
+                    transition={{
+                      duration: 1.1,
+                      delay: p.delay,
+                      times: [0, 0.3, 1],
+                      ease: "easeIn",
+                    }}
+                  />
+                ))}
+              </div>
               <p className="text-white/80 text-lg">
-                A casca se abre em pedaços, revelando a surpresa dentro.
+                Um pedaço de cada vez... que surpresa vem dentro?
               </p>
             </motion.div>
           )}
@@ -385,51 +441,120 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                Quase lá! O seu mascote está quase pronto.
+                Apareceu! Quem será?
               </h2>
               <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-                <motion.div
-                  initial={{ y: 0, opacity: 1 }}
-                  animate={{ y: -40, rotate: -20, opacity: 0 }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                  className="absolute top-0 left-0 w-full h-1/2 overflow-hidden"
-                >
-                  <img
-                    src={eggImg}
-                    className="w-full h-[200%] object-contain drop-shadow-lg"
-                    style={{ clipPath: "inset(0 0 50% 0)" }}
-                    alt="Casca topo"
-                  />
-                </motion.div>
-                <motion.div
-                  initial={{ y: 0, opacity: 1 }}
-                  animate={{ y: 40, rotate: 20, opacity: 0 }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                  className="absolute bottom-0 left-0 w-full h-1/2 overflow-hidden"
-                >
-                  <img
-                    src={eggImg}
-                    className="w-full h-[200%] object-contain drop-shadow-lg"
-                    style={{ clipPath: "inset(50% 0 0 0)" }}
-                    alt="Casca fundo"
-                  />
-                </motion.div>
                 <motion.img
                   src={hatchImg}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 1, type: "spring" }}
+                  initial={{ scale: 0.4, opacity: 0, y: 30 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  transition={{ duration: 1.4, type: "spring", bounce: 0.4 }}
                   className="w-full h-full object-contain drop-shadow-2xl"
                   alt="Nascendo"
                 />
                 <motion.div
                   className="absolute inset-0 bg-yellow-200/40 blur-3xl rounded-full"
-                  animate={{ scale: [1, 1.5, 1], opacity: [0, 0.8, 0] }}
-                  transition={{ duration: 1.2 }}
+                  animate={{ scale: [1, 1.6, 1.2], opacity: [0, 0.9, 0.4] }}
+                  transition={{ duration: 1.6 }}
                 />
               </div>
             </motion.div>
           )}
+
+          {phase === "bubble" && (
+            <motion.div
+              key="bubble"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
+                Toque na bolha para estourar! 👆
+              </h2>
+              <p className="text-white/80 text-lg">
+                {poppedTaps === 0 && "Toca 3 vezes pra libertar o mascote!"}
+                {poppedTaps === 1 && "Mais 2 vezes!"}
+                {poppedTaps === 2 && "Última! Toca de novo!"}
+                {poppedTaps >= 3 && "Boooom! 🎉"}
+              </p>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                {/* Mascote dentro da bolha */}
+                <motion.img
+                  src={babyImg}
+                  alt="Mascote dentro da bolha"
+                  className="absolute inset-4 w-[calc(100%-2rem)] h-[calc(100%-2rem)] object-contain drop-shadow-2xl"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                {/* A bolha — clicável */}
+                {!bubbleBurst && (
+                  <motion.button
+                    type="button"
+                    aria-label="Estourar bolha"
+                    onClick={() => {
+                      playPopSound();
+                      const next = poppedTaps + 1;
+                      setPoppedTaps(next);
+                      if (next >= 3) {
+                        setBubbleBurst(true);
+                        setTimeout(() => setPhase("reveal"), 700);
+                      }
+                    }}
+                    className="absolute inset-0 rounded-full cursor-pointer focus:outline-none"
+                    animate={{
+                      scale: poppedTaps === 0 ? [1, 1.04, 1] : [1, 1.08, 0.96, 1],
+                    }}
+                    transition={{ duration: poppedTaps === 0 ? 2.4 : 0.35, repeat: poppedTaps === 0 ? Infinity : 0 }}
+                    whileTap={{ scale: 0.92 }}
+                    style={{
+                      background:
+                        "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 35%, rgba(180,220,255,0.08) 60%, rgba(180,220,255,0.25) 100%)",
+                      boxShadow:
+                        "inset 0 0 40px rgba(255,255,255,0.5), 0 0 60px rgba(180,220,255,0.4)",
+                      border: "2px solid rgba(255,255,255,0.6)",
+                    }}
+                  >
+                    {/* Reflexo no topo da bolha */}
+                    <span
+                      className="absolute top-[12%] left-[20%] w-[28%] h-[18%] rounded-full bg-white/70 blur-md"
+                      aria-hidden
+                    />
+                    <span
+                      className="absolute top-[22%] left-[60%] w-[10%] h-[10%] rounded-full bg-white/80 blur-sm"
+                      aria-hidden
+                    />
+                  </motion.button>
+                )}
+
+                {/* Partículas de pop quando estoura */}
+                {bubbleBurst && (
+                  <>
+                    {Array.from({ length: 12 }).map((_, i) => {
+                      const angle = (i / 12) * Math.PI * 2;
+                      const dist = 140;
+                      return (
+                        <motion.div
+                          key={i}
+                          className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-white"
+                          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                          animate={{
+                            x: Math.cos(angle) * dist,
+                            y: Math.sin(angle) * dist,
+                            opacity: 0,
+                            scale: 0.3,
+                          }}
+                          transition={{ duration: 0.6, ease: "easeOut" }}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            </motion.div>
+          )}
+
 
           {phase === "reveal" && (
             <motion.div
@@ -513,34 +638,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     animate={{ x: [0, 3, 0], y: [0, 8, 0], rotate: [0, -15, 0] }}
                     transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut", delay: 0.05 }}
                   />
-                  <motion.path
-                    d="M36 152 C50 142 70 146 90 164"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.72)"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                    animate={{ x: [0, 2, 0, 2, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M184 152 C170 142 150 146 130 164"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.72)"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                    animate={{ x: [0, -2, 0, -2, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M80 100 C100 118 120 118 140 100"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.95)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    animate={{ scale: [0.8, 1, 0.8], opacity: [0.85, 1, 0.85] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ originX: "50%", originY: "50%" }}
-                  />
+                  {/* bochechas e sorriso removidos — bolha sem rosto */}
 
                   <motion.g
                     animate={{ rotate: [0, -8, 0, -8, 0], y: [0, -2, 0, -2, 0] }}
@@ -569,52 +667,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     />
                   </motion.g>
 
-                  <motion.g
-                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      repeatDelay: 2,
-                    }}
-                    style={{ originX: "31%", originY: "30%" }}
-                  >
-                    <circle cx="70" cy="65" r="14" fill="#fff" />
-                    <motion.circle
-                      cx="70"
-                      cy="65"
-                      r="6"
-                      fill="#0f172a"
-                      animate={{ x: [0, 1.5, 0], y: [0, 0.5, 0] }}
-                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                  </motion.g>
-                  <motion.g
-                    animate={{ scaleY: [1, 0.25, 1], y: [0, -2, 0] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      repeatDelay: 2,
-                      delay: 0.25,
-                    }}
-                    style={{ originX: "69%", originY: "30%" }}
-                  >
-                    <circle cx="150" cy="65" r="14" fill="#fff" />
-                    <motion.circle
-                      cx="150"
-                      cy="65"
-                      r="6"
-                      fill="#0f172a"
-                      animate={{ x: [0, -1.5, 0], y: [0, 0.5, 0] }}
-                      transition={{
-                        duration: 2.2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 0.1,
-                      }}
-                    />
-                  </motion.g>
+                  {/* olhos removidos — bolha sem rosto */}
                 </svg>
               </div>
               <p className="text-white/90 text-lg max-w-md mx-auto">
