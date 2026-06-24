@@ -2120,30 +2120,31 @@ function TracadoLetras({ p, onDone }: any) {
 // Mecânica única: arrastar bolinha; sair dos corredores reseta progresso
 // Padrão visual Sons Iniciais premium
 function LabirintoPrecisao({ p, onDone }: any) {
-  const [pos, setPos] = useState({ x: 12, y: 53 });
+  const inicioSeg = p.segmentos[0];
+  const startPos = { x: inicioSeg.x + Math.min(inicioSeg.w, 8) / 2, y: inicioSeg.y + inicioSeg.h / 2 };
+  const [pos, setPos] = useState(startPos);
   const [erros, setErros] = useState(0);
-  const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const dentroDeAlgum = (x: number, y: number) =>
     p.segmentos.some((s: any) => x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h);
 
   const move = (clientX: number, clientY: number) => {
-    if (!dragging || !containerRef.current) return;
+    if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = ((clientX - rect.left) / rect.width) * 100;
     const y = ((clientY - rect.top) / rect.height) * 100;
     if (dentroDeAlgum(x, y)) {
       setPos({ x, y });
-      // chegou no fim (último segmento, canto inferior direito)
       const last = p.segmentos[p.segmentos.length - 1];
-      if (x >= last.x + last.w - 6 && y >= last.y + last.h - 6) {
+      const fimX = last.x + last.w / 2;
+      const fimY = last.y + last.h / 2;
+      if (Math.hypot(x - fimX, y - fimY) < 5) {
         onDone(true);
       }
     } else {
       setErros((e) => e + 1);
-      setDragging(false);
       toast("Saiu do caminho — recomece");
-      setPos({ x: 12, y: 53 });
+      setPos(startPos);
     }
   };
 
