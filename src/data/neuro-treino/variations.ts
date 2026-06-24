@@ -33,7 +33,7 @@ export type CategoriaSlug =
   | "cade-o-par"
   | "foco-total"
   | "labirinto-do-som"
-  | "foco-sustentado"
+  
   | "rastreamento-sacadico"
   | "mosaico-de-formas"
   | "sequencia-de-cores"
