@@ -361,22 +361,43 @@ export const ALVO_MOVEL_VARS: Variation[] = range(30).map((i) => {
 // GRUPO 3: ATENÇÃO & CONCENTRAÇÃO (4 categorias)
 // ──────────────────────────────────────────────
 
-// A1. ACHAR O DIFERENTE — grade de emojis, um é diferente dos demais
+// A1. ACHAR O DIFERENTE — grade de ilustrações premium (sem bolinhas/quadrados);
+// 30 pares únicos garantindo que cada atividade mostre um "diferente" exclusivo.
 const DIFER_BANK = [
-  { maioria: "🔵", diferente: "🔴" },
-  { maioria: "⭐", diferente: "🌟" },
   { maioria: "🐱", diferente: "🐶" },
-  { maioria: "🍎", diferente: "🍊" },
-  { maioria: "🌸", diferente: "🌺" },
-  { maioria: "🚗", diferente: "🚙" },
-  { maioria: "🟦", diferente: "🟥" },
-  { maioria: "🦋", diferente: "🐝" },
-  { maioria: "⬆️", diferente: "⬇️" },
-  { maioria: "🌙", diferente: "☀️" },
+  { maioria: "🍎", diferente: "🍌" },
+  { maioria: "🌳", diferente: "🌸" },
+  { maioria: "🏠", diferente: "🏰" },
+  { maioria: "🐝", diferente: "🦋" },
+  { maioria: "🚗", diferente: "🚂" },
+  { maioria: "✈️", diferente: "🚌" },
+  { maioria: "🦆", diferente: "🐔" },
+  { maioria: "🌙", diferente: "⭐" },
+  { maioria: "☀️", diferente: "🌧️" },
+  { maioria: "🐮", diferente: "🐷" },
+  { maioria: "🐑", diferente: "🐐" },
+  { maioria: "🐴", diferente: "🐰" },
+  { maioria: "🐥", diferente: "🐓" },
+  { maioria: "🐦", diferente: "🦉" },
+  { maioria: "🐠", diferente: "🐚" },
+  { maioria: "🦄", diferente: "🧜‍♀️" },
+  { maioria: "🧚", diferente: "🩰" },
+  { maioria: "🦢", diferente: "🐢" },
+  { maioria: "🐘", diferente: "🦖" },
+  { maioria: "🦕", diferente: "🐸" },
+  { maioria: "🦊", diferente: "🐼" },
+  { maioria: "🐵", diferente: "🦁" },
+  { maioria: "🐯", diferente: "🧸" },
+  { maioria: "🎁", diferente: "👑" },
+  { maioria: "👸", diferente: "🦸" },
+  { maioria: "🤖", diferente: "💎" },
+  { maioria: "🔥", diferente: "🍓" },
+  { maioria: "🎸", diferente: "🎨" },
+  { maioria: "😄", diferente: "😢" },
 ];
 export const ACHAR_DIFERENTE_VARS: Variation[] = range(30).map((i) => {
   const b = DIFER_BANK[i % DIFER_BANK.length];
-  const tam = 9 + (i % 4) * 3; // 9..21 células
+  const tam = 9 + (i % 4) * 3;
   const posAlvo = (i * 7) % tam;
   const grid = Array(tam).fill(b.maioria);
   grid[posAlvo] = b.diferente;
