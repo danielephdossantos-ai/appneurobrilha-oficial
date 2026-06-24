@@ -442,8 +442,9 @@ const ADDITIONAL_CHARACTERS = [
 ];
 
 // Gamificação: requisito de Moedas Brilha para cada mascote da loja
-// Ovo (0) → Nascendo (50) → Bebê (200) → Guardião + Fantasias (500)
-const STAGE_THRESHOLDS = { ovo: 0, nascendo: 50, bebe: 200, guardiao: 500 } as const;
+// Ovo, Nascendo e Bebê já vêm liberados (Fases 1–3).
+// Só o Guardião (Fase 4) e as fantasias exigem moedas.
+const STAGE_THRESHOLDS = { ovo: 0, nascendo: 0, bebe: 0, guardiao: 500 } as const;
 
 function getRequiredCoins(mascotId: string, mascotName: string): number {
   const id = (mascotId || "").toLowerCase();
@@ -455,6 +456,7 @@ function getRequiredCoins(mascotId: string, mascotName: string): number {
   // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
   return STAGE_THRESHOLDS.guardiao;
 }
+
 
 const MascotStorePage: React.FC = () => {
   const { userMascots } = useMascot();
