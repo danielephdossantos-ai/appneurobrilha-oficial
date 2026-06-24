@@ -1937,6 +1937,25 @@ function TracadoLetras({ p, onDone }: any) {
   const [step, setStep] = useState(0);
   const strokes: Stroke[] = p.strokes;
 
+  // Offset start markers quando vários traços começam no mesmo ponto (ex.: A apex, B topo).
+  const startMarkers = (() => {
+    const seen = new Map<string, number>();
+    return strokes.map((s) => {
+      const start = s.path[0];
+      const key = `${Math.round(start.x)},${Math.round(start.y)}`;
+      const count = seen.get(key) ?? 0;
+      seen.set(key, count + 1);
+      if (count === 0) return start;
+      const next = s.path[1] ?? start;
+      const dx = next.x - start.x;
+      const dy = next.y - start.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const off = 7 * count;
+      return { x: start.x + (dx / len) * off, y: start.y + (dy / len) * off };
+    });
+  })();
+
+
   const tap = (i: number) => {
     if (i !== step) {
       toast(`Toque no ponto ${step + 1}`);
