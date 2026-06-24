@@ -133,10 +133,9 @@ function AulasSemanaPage() {
               concluida: boolean; perfil_neuro: string | null;
             };
             return (
-              <button
+              <div
                 key={a.id}
-                onClick={() => abrirAula(a.habilidade_bncc)}
-                className="w-full rounded-2xl border border-white/15 bg-white/5 p-4 text-left transition hover:bg-white/10 active:scale-[0.99]"
+                className="rounded-2xl border border-white/15 bg-white/5 p-4"
               >
                 <div className="flex items-start gap-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex flex-col items-center justify-center shrink-0">
@@ -165,12 +164,16 @@ function AulasSemanaPage() {
                       />
                       {a.concluida && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
                     </div>
-                    <p className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-black text-amber-200">
+                    <button
+                      type="button"
+                      onClick={() => abrirAula(a.habilidade_bncc)}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-400/20 px-3 py-2 text-[11px] font-black text-amber-100 transition hover:bg-amber-400/30"
+                    >
                       <PlayCircle className="w-3.5 h-3.5" /> Abrir aula
-                    </p>
+                    </button>
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
