@@ -1057,41 +1057,96 @@ function btnDir() {
 
 // ============== 10. Foco Sustentado ==============
 function FocoSustentado({ p, onDone }: any) {
-  const [k, setK] = useState(0);
-  const [score, setScore] = useState(0);
-  const [missed, setMissed] = useState(0);
-  useEffect(() => {
-    if (k >= p.stream.length) {
-      onDone(score > 0 && missed === 0);
-      return;
-    }
-    const t = setTimeout(() => setK(k + 1), p.intervaloMs);
-    return () => clearTimeout(t);
-  }, [k]);
-  const handleTap = () => {
-    if (p.stream[k] === p.alvo) setScore((s) => s + 1);
-    else setMissed((m) => m + 1);
-    setK(k + 1);
+  const [rIdx, setRIdx] = useState(0);
+  const [acertos, setAcertos] = useState(0);
+  const [erros, setErros] = useState(0);
+  const [feedback, setFeedback] = useState<"ok" | "erro" | null>(null);
+  const [travado, setTravado] = useState(false);
+
+  const round = p.rounds[rIdx];
+
+  // Posições e parâmetros de flutuação fixos por rodada.
+  const layout = useMemo(() => {
+    return round.itens.map((_: any, i: number) => {
+      const seed = (rIdx + 1) * 31 + i * 17;
+      const rnd = (n: number) => ((Math.sin(seed * n) + 1) / 2);
+      return {
+        top: 8 + rnd(1.3) * 70,        // %
+        left: 6 + rnd(2.7) * 78,       // %
+        dx: -18 + rnd(3.1) * 36,        // px
+        dy: -14 + rnd(4.3) * 28,        // px
+        delay: rnd(5.7) * 1.8,          // s
+        dur: p.flutuarMs / 1000 + rnd(6.1) * 1.2,
+      };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rIdx]);
+
+  const proximo = (acerto: boolean) => {
+    if (travado) return;
+    setTravado(true);
+    if (acerto) setAcertos((a) => a + 1);
+    else setErros((e) => e + 1);
+    setFeedback(acerto ? "ok" : "erro");
+    setTimeout(() => {
+      setFeedback(null);
+      setTravado(false);
+      if (rIdx < p.rounds.length - 1) setRIdx((i) => i + 1);
+      else onDone(acertos + (acerto ? 1 : 0) >= Math.ceil(p.rounds.length * 0.6));
+    }, 1200);
   };
-  const atual = p.stream[k];
+
   return (
-    <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-2">
-        Alvo:
-        <RenderEmoji e={p.alvo} className="w-12 h-12" />
+    <div className="space-y-4">
+      <style>{`
+        @keyframes foco-float {
+          0%   { transform: translate(0,0) }
+          50%  { transform: translate(var(--dx), var(--dy)) }
+          100% { transform: translate(0,0) }
+        }
+      `}</style>
+
+      <div className="bg-gradient-to-br from-violet/20 to-violet/5 border-2 border-violet/30 rounded-2xl p-4 text-center">
+        <div className="text-xs uppercase text-muted-foreground mb-1">Encontre e toque</div>
+        <div className="flex items-center justify-center gap-2">
+          <RenderEmoji e={round.alvo.emoji} className="w-12 h-12" />
+          <div className="text-2xl font-black">{round.alvo.nome}</div>
+        </div>
       </div>
-      <button
-        onClick={handleTap}
-        className="p-6 bg-card border-4 border-primary rounded-3xl my-6 mx-auto active:scale-95 w-48 h-48 flex items-center justify-center"
-      >
-        <RenderEmoji e={atual} className="w-full h-full" />
-      </button>
-      <div className="text-sm text-muted-foreground">
-        Acertos: <b className="text-success">{score}</b> · Enganos:{" "}
-        <b className="text-destructive">{missed}</b>
+
+      <div className="relative w-full h-[360px] rounded-3xl border-2 border-dashed border-violet/30 bg-gradient-to-br from-sky-50 to-violet-50 overflow-hidden">
+        {round.itens.map((item: any, i: number) => {
+          const certa = item.nome === round.alvo.nome;
+          const L = layout[i];
+          const ring =
+            feedback && certa
+              ? "ring-4 ring-success rounded-full bg-success/10"
+              : feedback === "erro" && !certa
+                ? "opacity-40"
+                : "";
+          return (
+            <button
+              key={`${rIdx}-${i}`}
+              disabled={travado}
+              onClick={() => proximo(certa)}
+              className={`absolute w-16 h-16 flex items-center justify-center active:scale-90 transition ${ring}`}
+              style={{
+                top: `${L.top}%`,
+                left: `${L.left}%`,
+                animation: `foco-float ${L.dur}s ease-in-out ${L.delay}s infinite`,
+                // CSS custom props for keyframes
+                ['--dx' as any]: `${L.dx}px`,
+                ['--dy' as any]: `${L.dy}px`,
+              }}
+            >
+              <RenderEmoji e={item.emoji} className="w-full h-full" />
+            </button>
+          );
+        })}
       </div>
-      <div className="text-xs text-muted-foreground mt-1">
-        {k}/{p.stream.length}
+
+      <div className="text-center text-sm text-muted-foreground">
+        Rodada {rIdx + 1}/{p.rounds.length} · ✓ {acertos} · ✕ {erros}
       </div>
     </div>
   );
