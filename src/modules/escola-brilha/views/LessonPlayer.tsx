@@ -23,6 +23,10 @@ import {
   FRACOES_LESSON,
   SUBSTANTIVOS_LESSON,
   MULTIPLICACAO_LESSON,
+  DIVISAO_LESSON,
+  ADJETIVOS_LESSON,
+  PORCENTAGEM_LESSON,
+  VERBOS_LESSON,
 } from "../data/activity-lessons";
 import {
   OCEANOS_LESSON,
@@ -41,6 +45,10 @@ const ACTIVITY_MAP: Record<string, ActivityLesson> = {
   fracoes: FRACOES_LESSON,
   substantivos: SUBSTANTIVOS_LESSON,
   multiplicacao: MULTIPLICACAO_LESSON,
+  divisao: DIVISAO_LESSON,
+  adjetivos: ADJETIVOS_LESSON,
+  porcentagem: PORCENTAGEM_LESSON,
+  verbos: VERBOS_LESSON,
 };
 
 const ACTIVITY_C_MAP: Record<string, ActivityLessonC> = {

@@ -31,6 +31,10 @@ export const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
     { id: "substantivos", type: "activity", serie: "3º Ano", title: "Substantivos", subtitle: "Nomes de seres e objetos", badge: "Língua Portuguesa", badgeColor: "bg-blue-100 text-blue-700", gradient: "from-blue-500 to-indigo-600", xp: 130 },
     { id: "fracoes", type: "activity", serie: "3º Ano", title: "Frações", subtitle: "Partes de um todo", badge: "Matemática", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-500 to-orange-600", xp: 150 },
     { id: "multiplicacao", type: "activity", serie: "3º Ano", title: "Multiplicação", subtitle: "Tabuada e grupos iguais", badge: "Matemática", badgeColor: "bg-pink-100 text-pink-700", gradient: "from-pink-500 to-rose-600", xp: 140 },
+    { id: "divisao", type: "activity", serie: "4º Ano", title: "Divisão", subtitle: "Repartir em partes iguais", badge: "Matemática", badgeColor: "bg-sky-100 text-sky-700", gradient: "from-sky-500 to-blue-600", xp: 150 },
+    { id: "adjetivos", type: "activity", serie: "4º Ano", title: "Adjetivos", subtitle: "Palavras que descrevem", badge: "Língua Portuguesa", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-500 to-pink-600", xp: 130 },
+    { id: "porcentagem", type: "activity", serie: "5º Ano", title: "Porcentagem", subtitle: "Frações de 100", badge: "Matemática", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 160 },
+    { id: "verbos", type: "activity", serie: "5º Ano", title: "Verbos", subtitle: "Ações, estados e fenômenos", badge: "Língua Portuguesa", badgeColor: "bg-emerald-100 text-emerald-700", gradient: "from-emerald-500 to-teal-600", xp: 140 },
   ],
   fundamental2: [
     { id: "oceanos", type: "activity-c", serie: "6º Ano", title: "Oceanos e Clima", subtitle: "Regulação climática", badge: "Ciências", badgeColor: "bg-blue-100 text-blue-800", gradient: "from-blue-600 to-cyan-600", xp: 230, bncc: "EF06CI04" },
