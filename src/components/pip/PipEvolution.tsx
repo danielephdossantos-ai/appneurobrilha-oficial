@@ -211,21 +211,40 @@ export function PipEvolution() {
           // Só o Guardião (fase 4) precisa de moedas pra desbloquear.
           const unlocked = i <= Math.max(currentStageIndex, 2);
           const isCurrent = i === currentStageIndex;
+          const isChosen = chosenStage === stage.key;
+
+          const handlePick = () => {
+            if (!unlocked || !activeChild?.id) return;
+            setMascotStage(activeChild.id, stage.key);
+            toast.success(`Agora você é ${stage.name}!`, {
+              description: "Seu mascote já apareceu com a nova forma. ✨",
+            });
+          };
 
           return (
-            <motion.div
+            <motion.button
               key={stage.key}
+              type="button"
+              onClick={handlePick}
+              disabled={!unlocked}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
+              whileHover={unlocked ? { scale: 1.03, y: -2 } : undefined}
+              whileTap={unlocked ? { scale: 0.98 } : undefined}
               className={cn(
                 "relative bg-white rounded-3xl px-4 pt-6 pb-4 text-center border-4 transition-all flex flex-col items-center justify-start",
-                isCurrent
+                isChosen
                   ? mascot === "pip"
-                    ? "border-sky-400 shadow-lg scale-105"
-                    : "border-pink-400 shadow-lg scale-105"
-                  : "border-primary/10",
-                !unlocked && "opacity-60",
+                    ? "border-sky-500 ring-4 ring-sky-300/40 shadow-xl scale-105"
+                    : "border-pink-500 ring-4 ring-pink-300/40 shadow-xl scale-105"
+                  : isCurrent
+                    ? mascot === "pip"
+                      ? "border-sky-400 shadow-lg"
+                      : "border-pink-400 shadow-lg"
+                    : "border-primary/10",
+                !unlocked && "opacity-60 cursor-not-allowed",
+                unlocked && "cursor-pointer",
               )}
             >
               <div className="relative w-28 h-28 mx-auto mb-3 flex items-center justify-center p-2">
@@ -254,20 +273,32 @@ export function PipEvolution() {
                 {stage.minCoins === 0 ? "Inicial" : `${stage.minCoins} 💰`}
               </p>
 
-              {isCurrent && (
+              {isChosen ? (
                 <div
                   className={cn(
-                    "absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[9px] font-black text-white uppercase tracking-wider",
+                    "absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[9px] font-black text-white uppercase tracking-wider flex items-center gap-1",
                     themeAccent,
                   )}
                 >
-                  Você está aqui
+                  <Check size={10} strokeWidth={3} /> Em uso
                 </div>
-              )}
-            </motion.div>
+              ) : unlocked ? (
+                <span
+                  className={cn(
+                    "mt-2 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full",
+                    mascot === "pip"
+                      ? "bg-sky-100 text-sky-700"
+                      : "bg-pink-100 text-pink-700",
+                  )}
+                >
+                  Toque pra usar
+                </span>
+              ) : null}
+            </motion.button>
           );
         })}
       </div>
+
     </section>
   );
 }
