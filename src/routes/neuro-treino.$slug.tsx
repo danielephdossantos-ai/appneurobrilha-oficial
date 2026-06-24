@@ -1151,7 +1151,7 @@ function FocoSustentado({ p, onDone }: any) {
               <button
                 disabled={pego}
                 onClick={() => tocar(i)}
-                className={`w-16 h-16 flex items-center justify-center active:scale-90 transition ${
+                className={`w-24 h-24 md:w-28 md:h-28 flex items-center justify-center active:scale-90 transition drop-shadow-lg ${
                   pego
                     ? "opacity-30 grayscale"
                     : erro
