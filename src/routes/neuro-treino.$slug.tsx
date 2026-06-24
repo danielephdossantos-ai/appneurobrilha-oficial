@@ -2726,6 +2726,9 @@ function CopiarFigura({ p, onDone }: any) {
 
 // 31. ALVO MÓVEL — bichinho do banco se move pela tela, criança toca (tempo livre, sem voz)
 function AlvoMovel({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  // Em low-stim: velocidade -40% (anti-dispraxia/TDC)
+  const velocidade = sens.lowStim ? p.velocidade * 0.6 : p.velocidade;
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [round, setRound] = useState(1);
   const [tocou, setTocou] = useState(false);
@@ -2748,7 +2751,7 @@ function AlvoMovel({ p, onDone }: any) {
   useEffect(() => {
     let t = Math.random() * 10;
     const move = () => {
-      t += 0.012 * p.velocidade;
+      t += 0.012 * velocidade;
       setPos({ x: 50 + 38 * Math.cos(t), y: 50 + 32 * Math.sin(t * 1.3) });
       animRef.current = requestAnimationFrame(move);
     };
@@ -2756,7 +2759,7 @@ function AlvoMovel({ p, onDone }: any) {
     return () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [round, p.velocidade]);
+  }, [round, velocidade]);
 
   const handleToque = () => {
     if (tocou) return;
@@ -2772,13 +2775,23 @@ function AlvoMovel({ p, onDone }: any) {
     }
   };
 
+  // Fundo mais calmo no low-stim
+  const bgClass = sens.softColors
+    ? "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800"
+    : "bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 border-emerald-200";
+  // Alvo maior pra TDC / motor fino
+  const btnSize = sens.largerTargets ? "w-32 h-32" : "w-24 h-24";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-20 h-20";
+  const emojiSize = sens.largerTargets ? "w-24 h-24" : "w-16 h-16";
+  const press = sens.reduceMotion ? "" : " active:scale-90 transition-transform";
+
   return (
     <div className="space-y-3 text-center">
       <div className="text-sm text-muted-foreground font-bold">
         Toque no {p.nome.toLowerCase()} — Rodada {round} / {p.rounds}
       </div>
       <div
-        className="relative bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 border-4 border-emerald-200 rounded-3xl overflow-hidden touch-none"
+        className={`relative border-4 rounded-3xl overflow-hidden touch-none ${bgClass}`}
         style={{ height: 360 }}
       >
         <button
@@ -2788,12 +2801,12 @@ function AlvoMovel({ p, onDone }: any) {
             top: `${pos.y}%`,
             transform: "translate(-50%,-50%)",
           }}
-          className="absolute w-24 h-24 rounded-full bg-white/70 backdrop-blur shadow-xl flex items-center justify-center active:scale-90 transition-transform ring-4"
+          className={`absolute rounded-full bg-white/70 backdrop-blur shadow-xl flex items-center justify-center ring-4 ${btnSize}${press}`}
         >
           {img ? (
-            <img src={img} alt={p.nome} draggable={false} className="w-20 h-20 object-contain" />
+            <img src={img} alt={p.nome} draggable={false} className={`${imgSize} object-contain`} />
           ) : (
-            <RenderEmoji e={p.emoji} className="w-16 h-16" />
+            <RenderEmoji e={p.emoji} className={emojiSize} />
           )}
         </button>
       </div>
