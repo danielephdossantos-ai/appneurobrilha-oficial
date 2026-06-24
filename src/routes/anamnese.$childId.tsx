@@ -75,9 +75,20 @@ function AnamneseRoute() {
         const realChildren = (existing ?? []).filter(
           (child) => child.nome?.trim().toLowerCase() !== "nova criança" || child.anamnese_completa,
         );
+        const reusableDraft = (existing ?? []).find(
+          (child) => child.nome?.trim().toLowerCase() === "nova criança" && !child.anamnese_completa,
+        );
         if (realChildren.length >= 2) {
           toast.error("Limite atingido: o app permite no máximo 2 crianças cadastradas.");
           navigate({ to: "/painel-pais", replace: true });
+          return;
+        }
+        if (reusableDraft?.id) {
+          navigate({
+            to: "/anamnese/$childId",
+            params: { childId: reusableDraft.id },
+            replace: true,
+          });
           return;
         }
         let { data, error } = await createPlaceholderChild(userId);
