@@ -189,16 +189,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Caminho guiado por pistas sonoras",
     instrucao: "Siga a direção indicada pela pista sonora para sair do labirinto.",
   },
-
-  "foco-sustentado": {
-    slug: "foco-sustentado",
-    nome: "Foco Sustentado",
-    emoji: "👁️",
-    grupo: "Atenção Avançada",
-    cor: "from-sky/30 to-sky/5",
-    objetivo: "Monitoramento contínuo de alvo",
-    instrucao: "Toque SOMENTE quando o alvo aparecer na tela.",
-  },
   "rastreamento-sacadico": {
     slug: "rastreamento-sacadico",
     nome: "Rastreamento Sacádico",
