@@ -1949,14 +1949,46 @@ const CORES_DIR = [
 function TracadoLetras({ p, onDone }: any) {
   const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
   const [nomeCor, setNomeCor] = useState<string>(CORES_ESQ[0].nome);
-  const [fill, setFill] = useState<string>("white");
+  const [strokes, setStrokes] = useState<{ d: string; cor: string }[]>([]);
+  const [drawing, setDrawing] = useState(false);
+  const [pintado, setPintado] = useState(false);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const clipId = `letra-clip-${p.letra}`;
 
   const escolher = (c: { nome: string; hex: string }) => {
     setCor(c.hex);
     setNomeCor(c.nome);
   };
 
-  const pintar = () => setFill(cor);
+  const getPt = (e: React.PointerEvent) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const r = svg.getBoundingClientRect();
+    return {
+      x: ((e.clientX - r.left) / r.width) * 100,
+      y: ((e.clientY - r.top) / r.height) * 100,
+    };
+  };
+
+  const onDown = (e: React.PointerEvent) => {
+    (e.target as Element).setPointerCapture(e.pointerId);
+    setDrawing(true);
+    const { x, y } = getPt(e);
+    setStrokes((s) => [...s, { d: `M ${x} ${y}`, cor }]);
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!drawing) return;
+    const { x, y } = getPt(e);
+    setStrokes((s) => {
+      const copy = s.slice();
+      const last = copy[copy.length - 1];
+      copy[copy.length - 1] = { ...last, d: `${last.d} L ${x} ${y}` };
+      return copy;
+    });
+    setPintado(true);
+  };
+  const onUp = () => setDrawing(false);
+  const limpar = () => { setStrokes([]); setPintado(false); };
 
   const Bolinha = ({ c }: { c: { nome: string; hex: string } }) => (
     <button
@@ -1972,7 +2004,7 @@ function TracadoLetras({ p, onDone }: any) {
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Escolha uma cor e toque na letra <span className="text-coral">{p.letra}</span> para pintar
+        Escolha uma cor e contorne a letra <span className="text-coral">{p.letra}</span> com o dedo
       </div>
 
       <div className="flex items-center justify-center gap-3 md:gap-5">
@@ -1981,10 +2013,36 @@ function TracadoLetras({ p, onDone }: any) {
         </div>
 
         <div
-          className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
+          className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md relative"
           style={{ width: 320 }}
         >
-          <svg viewBox="0 0 100 100" className="w-full cursor-pointer" onClick={pintar}>
+          <svg
+            ref={svgRef}
+            viewBox="0 0 100 100"
+            className="w-full touch-none select-none"
+            style={{ cursor: "crosshair" }}
+            onPointerDown={onDown}
+            onPointerMove={onMove}
+            onPointerUp={onUp}
+            onPointerCancel={onUp}
+          >
+            <defs>
+              <clipPath id={clipId}>
+                <text
+                  x={50}
+                  y={54}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize={108}
+                  fontWeight={900}
+                  fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
+                >
+                  {p.letra}
+                </text>
+              </clipPath>
+            </defs>
+
+            {/* Letra-guia (fundo claro) */}
             <text
               x={50}
               y={54}
@@ -1993,19 +2051,41 @@ function TracadoLetras({ p, onDone }: any) {
               fontSize={108}
               fontWeight={900}
               fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
-              fill={fill}
-              stroke="#0f172a"
-              strokeWidth={2}
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              paintOrder="stroke"
+              fill="#f1f5f9"
+              stroke="#cbd5e1"
+              strokeWidth={1}
+              strokeDasharray="2 2"
             >
               {p.letra}
             </text>
+
+            {/* Tinta do dedo: só aparece DENTRO da letra */}
+            <g clipPath={`url(#${clipId})`}>
+              {strokes.map((s, i) => (
+                <path
+                  key={i}
+                  d={s.d}
+                  stroke={s.cor}
+                  strokeWidth={18}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              ))}
+            </g>
           </svg>
+
+          <button
+            onClick={limpar}
+            className="absolute top-2 right-2 bg-slate-100 hover:bg-slate-200 rounded-full w-8 h-8 text-sm"
+            aria-label="Limpar"
+          >
+            🔄
+          </button>
+
           <div className="flex items-center justify-between px-2 pt-1">
             <div className="font-black text-xl tracking-wide">
-              <span style={{ color: fill === "white" ? "#dc2626" : fill }}>{p.letra}</span>
+              <span style={{ color: cor }}>{p.letra}</span>
               <span className="text-slate-900">{p.palavra.slice(p.letra.length)}</span>
             </div>
             <div className="text-3xl leading-none">{p.emoji}</div>
@@ -2023,10 +2103,10 @@ function TracadoLetras({ p, onDone }: any) {
 
       <button
         onClick={() => {
-          toast.success(`Letra ${p.letra} pintada de ${nomeCor}! 🎨`);
+          toast.success(`Letra ${p.letra} contornada de ${nomeCor}! 🎨`);
           onDone(true);
         }}
-        disabled={fill === "white"}
+        disabled={!pintado}
         className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
       >
         Terminei! ✨
