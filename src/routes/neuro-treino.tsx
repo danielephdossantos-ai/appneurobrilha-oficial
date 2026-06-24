@@ -85,7 +85,6 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "ritmo-e-sopro": icRitmoSopro,
   "paromatopeias-corpo": icSonsCorpo,
   "tracado-letras": icTracado,
-  "labirinto-precisao": icLabPrecisao,
   "triagem-categorias": icTriagem,
   "expressao-emocao": icExpressao,
   "discriminacao-auditiva": icDiscriminacaoAuditiva,
