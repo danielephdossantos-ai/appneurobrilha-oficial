@@ -285,15 +285,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Cobertura de pontilhado com setas direcionais",
     instrucao: "Siga as setas em ordem para cobrir a letra.",
   },
-  "caminho-dos-pontos": {
-    slug: "caminho-dos-pontos",
-    nome: "Caminho dos Pontos",
-    emoji: "🔢",
-    grupo: "Coordenação Motor-Escrita",
-    cor: "from-success/25 to-success/5",
-    objetivo: "Unir pontos em sequência para formar figura",
-    instrucao: "Toque nos pontos em ordem para revelar a figura.",
-  },
   "labirinto-precisao": {
     slug: "labirinto-precisao",
     nome: "Labirinto de Precisão",
