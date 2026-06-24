@@ -70,6 +70,15 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
         .single();
 
       if (error) throw error;
+
+      const { error: contentError } = await (supabase as any).from("exam_mission_contents").insert([
+        {
+          mission_id: data.id,
+          content_title: newSubject,
+        },
+      ]);
+
+      if (contentError) throw contentError;
       return data;
     },
     onSuccess: () => {
@@ -80,7 +89,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       setNewSubject("");
       setNewDate("");
       setNewNotes("");
-      toast.success("Missão Prova criada! Agora adicione os conteúdos.");
+      toast.success("Missão Prova criada e conectada ao plano de estudos.");
     },
     onError: (error: any) => {
       toast.error(error?.message || "Não consegui salvar a Missão Prova.");
@@ -195,6 +204,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
           </p>
         </div>
         <button
+          aria-label={isAdding ? "Fechar cadastro de prova" : "Cadastrar prova"}
           onClick={() => setIsAdding(!isAdding)}
           className="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all"
         >
