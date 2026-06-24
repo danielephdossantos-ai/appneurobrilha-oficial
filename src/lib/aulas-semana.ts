@@ -129,6 +129,26 @@ export async function gerarAulasSemana(opts: {
     descricao: h.titulo || h.objetivo || h.codigo_bncc,
     ano: h.ano,
   }));
+  const habByCodigo = new Map(habilidades.map((h) => [h.codigo, h]));
+
+  // 3b. Trilha anual fixa — semana do calendário escolar correspondente
+  const ANCHOR = new Date("2026-02-02T00:00:00Z"); // primeira segunda do ano letivo
+  const diffWeeks = Math.floor((semanaInicio.getTime() - ANCHOR.getTime()) / (7 * 24 * 60 * 60 * 1000));
+  const semanaEscolar = ((diffWeeks % 40) + 40) % 40 + 1;
+  const { data: trilhaRows } = await supabase
+    .from("trilha_anual")
+    .select("dia, ordem_no_dia, codigo_bncc, ano")
+    .in("ano", anoFilters)
+    .eq("semana", semanaEscolar)
+    .eq("ordem_no_dia", 1)
+    .order("dia", { ascending: true });
+  const trilhaSemana = ((trilhaRows || []) as Array<{ dia: number; codigo_bncc: string }>)
+    .map((t) => {
+      const h = habByCodigo.get(t.codigo_bncc);
+      if (!h) return null;
+      return { dia: t.dia, habilidade: h };
+    })
+    .filter((x): x is { dia: number; habilidade: typeof habilidades[number] } => x !== null);
 
   // 4. Matriz pedagógica
   const { data: matrizRaw } = await supabase
@@ -168,7 +188,7 @@ export async function gerarAulasSemana(opts: {
       .map((p) => p.codigo_bncc as string),
   );
 
-  // 7. Planeja
+  // 7. Planeja (usa trilha fixa quando disponível)
   const plano = planWeek({
     childId,
     userId,
@@ -176,6 +196,7 @@ export async function gerarAulasSemana(opts: {
     serie,
     semanaInicio,
     habilidades,
+    trilhaSemana,
     matriz: (matriz || []) as never,
     midias: (midias || []) as never,
     jaDominadas,
