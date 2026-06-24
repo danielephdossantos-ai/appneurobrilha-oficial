@@ -268,7 +268,7 @@ function EditorTrabalho({
   useEffect(() => {
     if (!childId) return;
     if (!titulo.trim() || !tema.trim()) return;
-    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes });
+    const snapshot = JSON.stringify({ titulo, tema, materia, dataEntrega, blocos, fontes });
     if (snapshot === ultimoSalvoRef.current) return;
     const t = setTimeout(async () => {
       setAutoStatus("salvando");
@@ -277,6 +277,7 @@ function EditorTrabalho({
         titulo: titulo.trim(),
         tema: tema.trim(),
         materia: materia.trim() || null,
+        data_entrega: dataEntrega || null,
         blocos: blocos as any,
         fontes: fontes as any,
       };
