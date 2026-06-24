@@ -1568,10 +1568,15 @@ function Onomatopeias({ p, onDone }: any) {
 // A criança sopra/faz o som no microfone — o volume captado anima a cena (carrinho anda,
 // vela apaga, balão sobe...). Sem botão "SOPRE AQUI": é a voz/sopro real que move tudo.
 function RitmoSopro({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const ctaPad = sens.largerTargets ? "px-12 py-6 text-xl" : "px-10 py-5 text-lg";
   const [micOn, setMicOn] = useState(false);
   const [level, setLevel] = useState(0); // 0..1 volume instantâneo
   const [progress, setProgress] = useState(0); // 0..100
   const [erro, setErro] = useState<string | null>(null);
+
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
