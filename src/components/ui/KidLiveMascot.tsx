@@ -4,8 +4,15 @@ import { cn } from "@/utils/utils";
 import { useMascot } from "@/contexts/MascotContext";
 import pipaMascot from "@/assets/pip-girl-mascot.png";
 import { useAppState } from "@/core/store";
+import { useMascotStage } from "@/lib/mascot-stage";
 
 import pipMascot from "@/assets/pip-mascot.png";
+import pipEgg from "@/assets/pip-egg.png";
+import pipHatching from "@/assets/pip-hatching.png";
+import pipBaby from "@/assets/pip-baby.png";
+import pipaEgg from "@/assets/pipa-egg.png";
+import pipaHatching from "@/assets/pipa-hatching.png";
+import pipaBaby from "@/assets/pipa-baby.png";
 import pipDinossauros from "@/assets/pip-dinossauros.png";
 import pipEspaco from "@/assets/pip-espaco.png";
 import pipArte from "@/assets/pip-arte.png";
@@ -19,6 +26,7 @@ import pipCarros from "@/assets/pip-carros.png";
 import pipTrens from "@/assets/pip-trens.png";
 import pipRobos from "@/assets/pip-robos.png";
 import pipVeiculos from "@/assets/pip-veiculos.png";
+
 
 export const PIP_SKINS: Record<string, string> = {
   dinossauros: pipDinossauros,
@@ -54,10 +62,11 @@ const LiveMascot = ({
   showBadge = true,
 }: LiveMascotProps) => {
   const { activeChild } = useAppState();
+  const stage = useMascotStage(activeChild?.id);
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // Mantemos a consistência entre dispositivos para evitar confusão.
-  // Lê o mascote ativo do usuário (Pip ou Pipa) escolhido no ovo mágico.
+  // A criança pode alternar entre Ovo → Nascendo → Bebê → Guardião (criança)
+  // dentre as fases já liberadas.
   let activeMascotName: string | undefined;
   try {
     activeMascotName = useMascot().activeMascot?.mascot?.name;
@@ -65,7 +74,12 @@ const LiveMascot = ({
     activeMascotName = undefined;
   }
   const isPipa = activeMascotName?.toLowerCase() === "pipa";
-  const mascotImage = isPipa ? pipaMascot : pipMascot;
+
+  const stageImages: Record<string, string> = isPipa
+    ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
+    : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
+  const mascotImage = stageImages[stage] ?? stageImages.crianca;
+
 
   const sizes = {
     sm: "w-12 h-12 md:w-16 md:h-16",
