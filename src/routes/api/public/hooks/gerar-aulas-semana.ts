@@ -21,6 +21,43 @@ function inferPerfil(responses: unknown): PerfilNeuro {
   return "Neurotipico";
 }
 
+function normalizeSerie(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const s = String(raw).trim();
+  if (!s) return null;
+  if (/º\s*ano/i.test(s) || /infantil|médio|medio|fundamental/i.test(s)) return s;
+  const n = s.match(/^(\d{1,2})$/);
+  if (n) return `${n[1]}º Ano`;
+  const m = s.match(/^(\d{1,2})\s*[ºo°]?\s*ano/i);
+  if (m) return `${m[1]}º Ano`;
+  return s;
+}
+
+function getSerieNumber(serie: string): number | null {
+  const match = serie.match(/(\d{1,2})/);
+  if (!match) return null;
+  const n = Number(match[1]);
+  return Number.isFinite(n) ? n : null;
+}
+
+function getAnoFilters(serie: string): string[] {
+  const lower = serie.toLowerCase();
+  if (lower.includes("infantil") || lower.includes("pré") || lower.includes("pre")) return ["Educação Infantil"];
+  if (lower.includes("médio") || lower.includes("medio")) return ["Ensino Médio"];
+
+  const n = getSerieNumber(serie);
+  if (!n) return [serie];
+
+  const filters = [`${n}º Ano`];
+  if (n >= 1 && n <= 2) filters.push("1º ao 2º Ano");
+  if (n >= 1 && n <= 5) filters.push("1º ao 5º Ano");
+  if (n >= 3 && n <= 5) filters.push("3º ao 5º Ano");
+  if (n >= 6 && n <= 7) filters.push("6º ao 7º Ano");
+  if (n >= 6 && n <= 9) filters.push("6º ao 9º Ano");
+  if (n >= 8 && n <= 9) filters.push("8º ao 9º Ano");
+  return Array.from(new Set(filters));
+}
+
 export const Route = createFileRoute("/api/public/hooks/gerar-aulas-semana")({
   server: {
     handlers: {
@@ -59,19 +96,22 @@ export const Route = createFileRoute("/api/public/hooks/gerar-aulas-semana")({
               .eq("child_id", child.id)
               .maybeSingle();
             const perfil = inferPerfil(anam?.responses);
-            const serie = child.serie || "1º Ano";
+            const serie = normalizeSerie(child.serie) || "1º Ano";
+            const anoFilters = getAnoFilters(serie);
 
             const { data: habs } = await supabaseAdmin
               .from("bncc_habilidades")
               .select("codigo_bncc, disciplina, titulo, objetivo, ano")
-              .eq("ano", serie)
-              .limit(30);
+              .in("ano", anoFilters)
+              .order("codigo_bncc", { ascending: true })
+              .limit(1000);
             let habRows = habs || [];
             if (habRows.length === 0) {
               const { data: fb } = await supabaseAdmin
                 .from("bncc_habilidades")
                 .select("codigo_bncc, disciplina, titulo, objetivo, ano")
-                .limit(10);
+                .order("codigo_bncc", { ascending: true })
+                .limit(1000);
               habRows = fb || [];
             }
             if (habRows.length === 0) continue;
