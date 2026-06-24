@@ -1701,15 +1701,16 @@ function RitmoSopro({ p, onDone }: any) {
       {!micOn ? (
         <button
           onClick={iniciar}
-          className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground px-10 py-5 rounded-full font-black text-lg shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3"
+          className={`bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ${ctaPad} rounded-full font-black shadow-xl ${press} border-4 border-white inline-flex items-center gap-3`}
         >
           <Mic size={22} /> Ligar microfone
         </button>
       ) : (
-        <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-3 rounded-full font-black animate-pulse">
+        <div className={`inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-3 rounded-full font-black ${pulseCls}`}>
           <Mic size={20} /> Ouvindo... sopre agora!
         </div>
       )}
+
     </div>
   );
 }
