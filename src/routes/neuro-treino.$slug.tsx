@@ -2863,8 +2863,9 @@ function AcharDiferente({ p, onDone }: any) {
 
 // 33. MEMÓRIA VISUAL — flash de grade colorida, depois reproduzir
 function MemoriaVisual({ p, onDone }: any) {
-  // Tempo base mais generoso para memorizar (mínimo 5s, escala com o flashMs do nível).
-  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * 2.5);
+  const { effective: sens } = useSensoryProfile();
+  // Em low-stim: +50% no tempo de memorização (alívio de fadiga cognitiva)
+  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * (sens.lowStim ? 3.75 : 2.5));
   const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<boolean | null>(null);
