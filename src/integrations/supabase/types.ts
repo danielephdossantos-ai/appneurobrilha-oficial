@@ -530,6 +530,56 @@ export type Database = {
         }
         Relationships: []
       }
+      aulas_geradas_ia: {
+        Row: {
+          ano: string
+          aprovada: boolean
+          codigo_bncc: string
+          disciplina: string | null
+          gerada_em: string
+          id: string
+          modelo: string
+          screens: Json
+          titulo: string
+          updated_at: string
+          versao: number
+        }
+        Insert: {
+          ano: string
+          aprovada?: boolean
+          codigo_bncc: string
+          disciplina?: string | null
+          gerada_em?: string
+          id?: string
+          modelo?: string
+          screens: Json
+          titulo: string
+          updated_at?: string
+          versao?: number
+        }
+        Update: {
+          ano?: string
+          aprovada?: boolean
+          codigo_bncc?: string
+          disciplina?: string | null
+          gerada_em?: string
+          id?: string
+          modelo?: string
+          screens?: Json
+          titulo?: string
+          updated_at?: string
+          versao?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aulas_geradas_ia_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
       aulas_semana: {
         Row: {
           agenda_horario: string | null
@@ -4060,6 +4110,44 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      trilha_anual: {
+        Row: {
+          ano: string
+          codigo_bncc: string
+          created_at: string
+          dia: number
+          id: string
+          ordem_no_dia: number
+          semana: number
+        }
+        Insert: {
+          ano: string
+          codigo_bncc: string
+          created_at?: string
+          dia: number
+          id?: string
+          ordem_no_dia?: number
+          semana: number
+        }
+        Update: {
+          ano?: string
+          codigo_bncc?: string
+          created_at?: string
+          dia?: number
+          id?: string
+          ordem_no_dia?: number
+          semana?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trilha_anual_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
           },
         ]
       }
