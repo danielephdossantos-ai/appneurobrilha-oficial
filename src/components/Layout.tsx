@@ -93,9 +93,6 @@ const navPais = [
   { to: "/terapeuta-brilha", label: "Terapeuta Brilha", icon: MessagesSquare },
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
   { to: "/relatorio", label: "Relatórios", icon: FileBarChart2 },
-  { to: "/perfil-aluno", label: "Perfil do Aluno", icon: ClipboardList },
-  { to: "/curadoria-aulas", label: "Curadoria de Aulas", icon: Sparkles },
-  { to: "/auditoria-pedagogica", label: "Auditoria", icon: ClipboardCheck },
 ] as const;
 
 const navigationSequence = [
@@ -113,9 +110,6 @@ const navigationSequence = [
   "/terapeuta-brilha",
   "/agenda",
   "/relatorio",
-  "/perfil-aluno",
-  "/curadoria-aulas",
-  "/auditoria-pedagogica",
 ];
 
 function NavItem({ to, label, icon: Icon }: { to: string; label: string; icon: typeof Home }) {
