@@ -1969,14 +1969,14 @@ function TracadoLetras({ p, onDone }: any) {
         className="mx-auto bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
         style={{ maxWidth: 340 }}
       >
-        <svg viewBox="0 0 100 110" className="w-full">
+        <svg viewBox="0 0 100 100" className="w-full">
           {/* Letra OCA — contorno real do glifo */}
           <text
             x={50}
-            y={55}
+            y={52}
             textAnchor="middle"
             dominantBaseline="central"
-            fontSize={95}
+            fontSize={92}
             fontWeight={900}
             fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
             fill="none"
@@ -2037,21 +2037,17 @@ function TracadoLetras({ p, onDone }: any) {
               </g>
             );
           })}
-
-          {/* Palavra + emoji embaixo */}
-          <text
-            x={20} y={104}
-            fontSize={9}
-            fontWeight={900}
-            fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
-            fill="#0f172a"
-          >
-            <tspan fill="#dc2626">{p.letra}</tspan>
-            <tspan>{p.palavra.slice(1)}</tspan>
-          </text>
-          <text x={88} y={106} fontSize={14} textAnchor="middle">{p.emoji}</text>
         </svg>
+        {/* Palavra + figura embaixo (HTML pra fonte de emoji do sistema) */}
+        <div className="flex items-center justify-between px-2 pt-1">
+          <div className="font-black text-xl tracking-wide">
+            <span className="text-red-600">{p.letra}</span>
+            <span className="text-slate-900">{p.palavra.slice(1)}</span>
+          </div>
+          <div className="text-3xl leading-none">{p.emoji}</div>
+        </div>
       </div>
+
     </div>
   );
 }
