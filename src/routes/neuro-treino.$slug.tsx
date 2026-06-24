@@ -3216,7 +3216,10 @@ function ReacaoRapida({ p, onDone }: any) {
 
 // 35. SEGUIR INSTRUÇÃO — lê instrução, toca item correto
 function SeguirInstrucao({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
@@ -3235,7 +3238,7 @@ function SeguirInstrucao({ p, onDone }: any) {
             selecionado === item
               ? certa
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-violet/50";
@@ -3245,7 +3248,7 @@ function SeguirInstrucao({ p, onDone }: any) {
               onClick={() => handleClick(item)}
               className={`rounded-2xl border-2 p-4 font-bold flex flex-col items-center gap-2 transition-all ${bg}`}
             >
-              <RenderEmoji e={item} className="w-14 h-14" />
+              <RenderEmoji e={item} className={imgSize} />
             </button>
           );
         })}
@@ -3253,6 +3256,7 @@ function SeguirInstrucao({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ── ALFABETIZAÇÃO ─────────────────────────────────────────────
 
