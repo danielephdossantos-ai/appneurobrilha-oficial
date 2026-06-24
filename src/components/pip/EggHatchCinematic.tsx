@@ -56,10 +56,11 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
       return () => clearTimeout(t);
     }
     if (phase === "crack") {
-      // 4 pedaços caem um por um — 4 x 700ms + margem
-      const t = setTimeout(() => setPhase("open"), 3600);
+      // Topo abre (1.6s) + 3 pedaços de baixo caem (3 x 0.7s) + margem
+      const t = setTimeout(() => setPhase("open"), 4200);
       return () => clearTimeout(t);
     }
+
     if (phase === "open") {
       const t = setTimeout(() => setPhase("bubble"), 2200);
       return () => clearTimeout(t);
