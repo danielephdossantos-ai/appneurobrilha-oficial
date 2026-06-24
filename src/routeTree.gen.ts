@@ -24,7 +24,6 @@ import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
-import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
 import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
@@ -119,11 +118,6 @@ const MascotesRoute = MascotesRouteImport.update({
 const LojaMascotesRoute = LojaMascotesRouteImport.update({
   id: '/loja-mascotes',
   path: '/loja-mascotes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Jornada365Route = Jornada365RouteImport.update({
-  id: '/jornada-365',
-  path: '/jornada-365',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
@@ -241,7 +235,6 @@ export interface FileRoutesByFullPath {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -278,7 +271,6 @@ export interface FileRoutesByTo {
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -317,7 +309,6 @@ export interface FileRoutesById {
   '/curadoria-aulas': typeof CuradoriaAulasRoute
   '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
-  '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
@@ -357,7 +348,6 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/escola-brilha'
     | '/gerador-procedural'
-    | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -394,7 +384,6 @@ export interface FileRouteTypes {
     | '/colecao-pip'
     | '/curadoria-aulas'
     | '/gerador-procedural'
-    | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -432,7 +421,6 @@ export interface FileRouteTypes {
     | '/curadoria-aulas'
     | '/escola-brilha'
     | '/gerador-procedural'
-    | '/jornada-365'
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
@@ -471,7 +459,6 @@ export interface RootRouteChildren {
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
   EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
   GeradorProceduralRoute: typeof GeradorProceduralRoute
-  Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
@@ -596,13 +583,6 @@ declare module '@tanstack/react-router' {
       path: '/loja-mascotes'
       fullPath: '/loja-mascotes'
       preLoaderRoute: typeof LojaMascotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/jornada-365': {
-      id: '/jornada-365'
-      path: '/jornada-365'
-      fullPath: '/jornada-365'
-      preLoaderRoute: typeof Jornada365RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gerador-procedural': {
@@ -804,7 +784,6 @@ const rootRouteChildren: RootRouteChildren = {
   CuradoriaAulasRoute: CuradoriaAulasRoute,
   EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,
   GeradorProceduralRoute: GeradorProceduralRoute,
-  Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
