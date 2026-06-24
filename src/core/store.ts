@@ -170,6 +170,19 @@ function normalizeChild(
   };
 }
 
+function isDraftPlaceholderChild(child: Child) {
+  return child.nome.trim().toLowerCase() === "nova criança" && !child.anamnese_completa;
+}
+
+function getPreferredChild(children: Child[]) {
+  return (
+    children.find((child) => child.anamnese_completa && !isDraftPlaceholderChild(child)) ??
+    children.find((child) => !isDraftPlaceholderChild(child)) ??
+    children[0] ??
+    null
+  );
+}
+
 export interface AnamnesisData {
   id?: string;
   child_id: string;
@@ -249,7 +262,11 @@ export function useAppState() {
     queryFn: async () => {
       if (!authUserId) return [];
       const profiles = await ChildProfileService.getAllByUserId(authUserId);
-      return profiles.map((child) => normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }));
+      const normalized = profiles.map((child) =>
+        normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }),
+      );
+      const hasRealChild = normalized.some((child) => !isDraftPlaceholderChild(child));
+      return hasRealChild ? normalized.filter((child) => !isDraftPlaceholderChild(child)) : normalized;
     },
   });
 
@@ -262,14 +279,21 @@ export function useAppState() {
     localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
     const key = activeChildStorageKey(authUserId);
     const stored = localStorage.getItem(key);
-    const storedBelongsToUser = stored ? children.some((child) => child.id === stored) : false;
+    const storedChild = stored ? children.find((child) => child.id === stored) : null;
+    const preferredChild = getPreferredChild(children);
+    const shouldReplaceStoredDraft =
+      !!storedChild &&
+      isDraftPlaceholderChild(storedChild) &&
+      !!preferredChild &&
+      preferredChild.id !== storedChild.id &&
+      !isDraftPlaceholderChild(preferredChild);
 
-    if (storedBelongsToUser) {
+    if (storedChild && !shouldReplaceStoredDraft) {
       setActiveChildId(stored);
       return;
     }
 
-    const firstChildId = children[0]?.id ?? null;
+    const firstChildId = preferredChild?.id ?? null;
     setActiveChildId(firstChildId);
     if (firstChildId) {
       localStorage.setItem(key, firstChildId);
@@ -283,7 +307,7 @@ export function useAppState() {
       const { data: auth } = await supabase.auth.getUser();
       const uid = auth?.user?.id;
       if (!uid) throw new Error("NOT_AUTHENTICATED");
-      const existing = await ChildProfileService.getAll();
+      const existing = await ChildProfileService.getAllByUserId(uid);
       if (existing.length >= 2) {
         throw new Error("LIMIT_REACHED");
       }
@@ -348,7 +372,18 @@ export function useAppState() {
     },
   });
 
-  const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
+  const selectedChild = children.find((c) => c.id === activeChildId) ?? null;
+  const preferredChild = getPreferredChild(children);
+  const activeChild =
+    selectedChild &&
+    !(
+      isDraftPlaceholderChild(selectedChild) &&
+      preferredChild &&
+      preferredChild.id !== selectedChild.id &&
+      !isDraftPlaceholderChild(preferredChild)
+    )
+      ? selectedChild
+      : preferredChild;
 
   const { data: sessionData } = useQuery({
     queryKey: ["auth-session"],
