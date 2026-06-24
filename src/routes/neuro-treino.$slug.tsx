@@ -2395,12 +2395,18 @@ function VocabularioSemantico({ p, onDone }: any) {
 
 // 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
 function NomeacaoRapida({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [fase, setFase] = useState<"flash" | "resposta" | "done">("flash");
   const [escolhido, setEscolhido] = useState<string | null>(null);
+  const flashMsAdj = sens.lowStim ? Math.round(p.flashMs * 1.5) : p.flashMs;
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const flashImg = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
+  const optImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
   useEffect(() => {
-    const t = setTimeout(() => setFase("resposta"), p.flashMs);
+    const t = setTimeout(() => setFase("resposta"), flashMsAdj);
     return () => clearTimeout(t);
-  }, [p.flashMs]);
+  }, [flashMsAdj]);
   const handleClick = (opt: string) => {
     if (fase !== "resposta" || escolhido) return;
     setEscolhido(opt);
@@ -2412,8 +2418,8 @@ function NomeacaoRapida({ p, onDone }: any) {
       <div
         className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}
       >
-        <div className={fase === "flash" ? "animate-pulse" : "opacity-90"}>
-          <RenderEmoji e={p.emoji} label={p.nome} className="w-32 h-32" />
+        <div className={fase === "flash" ? pulseCls : "opacity-90"}>
+          <RenderEmoji e={p.emoji} label={p.nome} className={flashImg} />
         </div>
       </div>
       {fase !== "flash" && (
@@ -2426,7 +2432,7 @@ function NomeacaoRapida({ p, onDone }: any) {
                 escolhido === opt
                   ? certa
                     ? "border-success bg-success/10 text-success"
-                    : "border-destructive bg-destructive/10"
+                    : errorBg
                   : escolhido && certa
                     ? "border-success bg-success/10"
                     : "border-border bg-card hover:border-amber/60";
@@ -2436,7 +2442,7 @@ function NomeacaoRapida({ p, onDone }: any) {
                   onClick={() => handleClick(opt)}
                   className={`rounded-2xl border-2 p-3 transition-all flex flex-col items-center gap-2 ${bg}`}
                 >
-                  <RenderEmoji label={opt} className="w-20 h-20" />
+                  <RenderEmoji label={opt} className={optImg} />
                   <span className="font-black text-base">{opt}</span>
                 </button>
               );
@@ -2445,11 +2451,12 @@ function NomeacaoRapida({ p, onDone }: any) {
         </>
       )}
       {fase === "flash" && (
-        <div className="text-sm text-muted-foreground animate-pulse">Olha a figura!</div>
+        <div className={`text-sm text-muted-foreground ${pulseCls}`}>Olha a figura!</div>
       )}
     </div>
   );
 }
+
 
 // ── COORDENAÇÃO MOTORA ──────────────────────────────────────
 
