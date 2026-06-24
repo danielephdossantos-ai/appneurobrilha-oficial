@@ -793,13 +793,17 @@ function Motorzinho({ p, onDone }: any) {
 
 // ============== 3. Rimas ==============
 function Rimas({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hoverCls = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
+  const palavraImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
+  const optImg = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Que palavra rima com</div>
       <div className="text-5xl font-black text-coral mb-6 flex items-center justify-center gap-4">
         {p.palavra}
         {objetoImg(p.palavra) && (
-          <img src={objetoImg(p.palavra)} className="w-20 h-20 object-contain drop-shadow-sm" />
+          <img src={objetoImg(p.palavra)} className={`${palavraImg} object-contain drop-shadow-sm`} />
         )}
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -807,9 +811,9 @@ function Rimas({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(o === p.correta)}
-            className="bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+            className={`bg-card border-2 border-border rounded-xl py-6 px-4 font-black text-xl transition-all flex flex-col items-center gap-2 ${hoverCls}`}
           >
-            {objetoImg(o) && <img src={objetoImg(o)} className="w-16 h-16 object-contain" />}
+            {objetoImg(o) && <img src={objetoImg(o)} className={`${optImg} object-contain`} />}
             <span>{o}</span>
           </button>
         ))}
@@ -817,6 +821,7 @@ function Rimas({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ============== 4. Pedacinhos da Palavra ==============
 function Pedacinhos({ p, onDone }: any) {
