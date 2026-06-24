@@ -2359,6 +2359,7 @@ const TS_BG_DECOR: Record<string, string[]> = {
   oceano: ["🐚", "🐟", "🌊"],
 };
 function ToqueSequencia({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const { speak } = usePipVoice();
   const [proximoIdx, setProximoIdx] = useState(0);
   const [acertos, setAcertos] = useState<string[]>([]);
@@ -2421,8 +2422,8 @@ function ToqueSequencia({ p, onDone }: any) {
               key={pt.id}
               onClick={() => handlePonto(pt)}
               style={{ left: `${pt.x}%`, top: `${pt.y}%`, transform: "translate(-50%,-50%)" }}
-              className={`absolute w-16 h-16 rounded-2xl border-3 flex items-center justify-center transition-all active:scale-90 shadow-lg
-                ${feito ? "bg-emerald-500 text-white border-emerald-600 scale-90 opacity-80" : ativo ? "bg-white border-emerald-500 text-emerald-700 scale-110 animate-pulse ring-4 ring-emerald-300/50" : "bg-white/90 border-white text-slate-700"}`}
+              className={`absolute ${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-2xl border-3 flex items-center justify-center transition-all shadow-lg${sens.reduceMotion ? "" : " active:scale-90"}
+                ${feito ? `bg-emerald-500 text-white border-emerald-600 opacity-80${sens.reduceMotion ? "" : " scale-90"}` : ativo ? `bg-white border-emerald-500 text-emerald-700 ring-4 ring-emerald-300/50${sens.reduceMotion ? "" : " scale-110 animate-pulse"}` : "bg-white/90 border-white text-slate-700"}`}
               aria-label={pt.label}
             >
               {renderConteudo(pt.label)}
@@ -2437,6 +2438,7 @@ function ToqueSequencia({ p, onDone }: any) {
 // 29. RITMO DE BATIDAS — exibe padrão, usuário reproduz tocando
 // 29. RITMO DE BATIDAS — tambor: criança bate N vezes conforme o comando
 function RitmoBatidas({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const { speak } = usePipVoice();
   const [fase, setFase] = useState<"demo" | "vezDela" | "done">("demo");
   const [pulseDemo, setPulseDemo] = useState(false);
@@ -2445,6 +2447,7 @@ function RitmoBatidas({ p, onDone }: any) {
   const audioRef = useRef<AudioContext | null>(null);
 
   const tocarSom = () => {
+    if (sens.reduceSound) return;
     try {
       if (!audioRef.current) {
         audioRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -2455,7 +2458,7 @@ function RitmoBatidas({ p, onDone }: any) {
       osc.type = "sine";
       osc.frequency.setValueAtTime(180, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.18);
-      gain.gain.setValueAtTime(0.6, ctx.currentTime);
+      gain.gain.setValueAtTime(sens.softColors ? 0.3 : 0.6, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
       osc.connect(gain).connect(ctx.destination);
       osc.start();
@@ -2523,11 +2526,11 @@ function RitmoBatidas({ p, onDone }: any) {
           onClick={bater}
           disabled={fase !== "vezDela" || !!feedback}
           aria-label="Tambor"
-          className={`relative w-44 h-44 rounded-full border-8 border-amber-700 bg-gradient-to-b from-red-500 to-red-700 shadow-2xl flex items-center justify-center transition-all
-            ${pulseDemo ? "scale-110 ring-8 ring-amber-300" : ""}
-            ${fase === "vezDela" && !feedback ? "active:scale-90 hover:scale-105 cursor-pointer animate-pulse" : ""}
+          className={`relative ${sens.largerTargets ? "w-52 h-52" : "w-44 h-44"} rounded-full border-8 ${sens.softColors ? "border-amber-600 bg-gradient-to-b from-amber-400 to-amber-600" : "border-amber-700 bg-gradient-to-b from-red-500 to-red-700"} shadow-2xl flex items-center justify-center transition-all
+            ${pulseDemo && !sens.reduceMotion ? "scale-110 ring-8 ring-amber-300" : pulseDemo ? "ring-8 ring-amber-300" : ""}
+            ${fase === "vezDela" && !feedback ? (sens.reduceMotion ? "cursor-pointer" : "active:scale-90 hover:scale-105 cursor-pointer animate-pulse") : ""}
             ${feedback === "ok" ? "ring-8 ring-emerald-400" : ""}
-            ${feedback === "erro" ? "ring-8 ring-rose-400" : ""}`}
+            ${feedback === "erro" ? (sens.softColors ? "ring-8 ring-amber-400" : "ring-8 ring-rose-400") : ""}`}
         >
           <span className="text-7xl drop-shadow-lg">🥁</span>
         </button>
@@ -2539,14 +2542,14 @@ function RitmoBatidas({ p, onDone }: any) {
           <div
             key={i}
             className={`w-4 h-4 rounded-full border-2 transition-all ${
-              i < contagem ? "bg-emerald-500 border-emerald-600 scale-110" : "border-amber-400 bg-amber-100"
+              i < contagem ? `bg-emerald-500 border-emerald-600${sens.reduceMotion ? "" : " scale-110"}` : "border-amber-400 bg-amber-100"
             }`}
           />
         ))}
       </div>
 
       {feedback && (
-        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}>
+        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : sens.softColors ? "text-amber-600" : "text-destructive"}`}>
           {feedback === "ok" ? "Perfeito! 🎉" : "Vamos de novo!"}
         </div>
       )}
