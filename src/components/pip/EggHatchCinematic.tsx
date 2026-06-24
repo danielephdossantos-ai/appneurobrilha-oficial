@@ -27,10 +27,12 @@ const STORAGE_KEY = (childId: string) => `neurobrilha:hasSeenEggHatch:${childId}
 
 export function EggHatchCinematic({ childId, childName, onClose }: Props) {
   const [phase, setPhase] = useState<
-    "intro" | "choose" | "shake" | "spin" | "crack" | "open" | "reveal"
+    "intro" | "choose" | "shake" | "spin" | "stop" | "crack" | "open" | "bubble" | "reveal"
   >("intro");
   const [mascot, setMascot] = useState<MascotChoice>("pip");
   const [speechSupported, setSpeechSupported] = useState(false);
+  const [poppedTaps, setPoppedTaps] = useState(0);
+  const [bubbleBurst, setBubbleBurst] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -38,22 +40,29 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
     }
   }, []);
 
+  // Timing slow + suspense — cada fase tem espaço pra criança observar.
   useEffect(() => {
     if (phase === "shake") {
-      const t1 = setTimeout(() => setPhase("spin"), 1800);
-      return () => clearTimeout(t1);
+      const t = setTimeout(() => setPhase("spin"), 3000);
+      return () => clearTimeout(t);
     }
     if (phase === "spin") {
-      const t2 = setTimeout(() => setPhase("crack"), 1800);
-      return () => clearTimeout(t2);
+      const t = setTimeout(() => setPhase("stop"), 3200);
+      return () => clearTimeout(t);
+    }
+    if (phase === "stop") {
+      // Pausa dramática: ovo para de girar, suspense
+      const t = setTimeout(() => setPhase("crack"), 1800);
+      return () => clearTimeout(t);
     }
     if (phase === "crack") {
-      const t3 = setTimeout(() => setPhase("open"), 1400);
-      return () => clearTimeout(t3);
+      // 4 pedaços caem um por um — 4 x 700ms + margem
+      const t = setTimeout(() => setPhase("open"), 3600);
+      return () => clearTimeout(t);
     }
     if (phase === "open") {
-      const t4 = setTimeout(() => setPhase("reveal"), 2500);
-      return () => clearTimeout(t4);
+      const t = setTimeout(() => setPhase("bubble"), 2200);
+      return () => clearTimeout(t);
     }
   }, [phase]);
 
