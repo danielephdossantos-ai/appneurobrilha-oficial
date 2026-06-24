@@ -33,7 +33,7 @@ export type CategoriaSlug =
   | "cade-o-par"
   | "foco-total"
   | "labirinto-do-som"
-  | "foco-sustentado"
+  
   | "rastreamento-sacadico"
   | "mosaico-de-formas"
   | "sequencia-de-cores"
@@ -188,16 +188,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-primary/20 to-primary/5",
     objetivo: "Caminho guiado por pistas sonoras",
     instrucao: "Siga a direção indicada pela pista sonora para sair do labirinto.",
-  },
-
-  "foco-sustentado": {
-    slug: "foco-sustentado",
-    nome: "Foco Sustentado",
-    emoji: "👁️",
-    grupo: "Atenção Avançada",
-    cor: "from-sky/30 to-sky/5",
-    objetivo: "Monitoramento contínuo de alvo",
-    instrucao: "Toque SOMENTE quando o alvo aparecer na tela.",
   },
   "rastreamento-sacadico": {
     slug: "rastreamento-sacadico",
@@ -2281,7 +2271,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "cade-o-par": PAR_VARS,
   "foco-total": FOCO_VARS,
   "labirinto-do-som": LABIRINTO_VARS,
-  "foco-sustentado": FOCOSUS_VARS,
+  
   "rastreamento-sacadico": SACADICO_VARS,
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
@@ -2351,7 +2341,7 @@ export const GRUPOS = [
       "memoria-visual",
       "reacao-rapida",
       "seguir-instrucao",
-      "foco-sustentado",
+      
       "rastreamento-sacadico",
       "foco-total",
     ] as CategoriaSlug[],

@@ -352,8 +352,6 @@ function MechanicRenderer({
       return <FocoTotal p={variation.payload} onDone={onConcluir} />;
     case "labirinto-do-som":
       return <LabirintoSom p={variation.payload} onDone={onConcluir} />;
-    case "foco-sustentado":
-      return <FocoSustentado p={variation.payload} onDone={onConcluir} />;
     case "rastreamento-sacadico":
       return <Sacadico p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas":
