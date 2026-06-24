@@ -970,6 +970,9 @@ function SequenciaPadrao({ p, onDone }: any) {
 
 // ============== 7. Cadê o Par ==============
 function CadeOPar({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const maxW = sens.largerTargets ? "max-w-lg" : "max-w-md";
+  const qSize = sens.largerTargets ? "text-4xl" : "text-3xl";
   const cards = useMemo(() => {
     const dup = [...p.pares, ...p.pares].map((v, i) => ({ v, i, id: Math.random() }));
     return dup.sort(() => Math.random() - 0.5);
@@ -991,7 +994,8 @@ function CadeOPar({ p, onDone }: any) {
     }
   };
   return (
-    <div className="grid grid-cols-4 gap-3 max-w-md mx-auto">
+    <div className={`grid grid-cols-4 gap-3 ${maxW} mx-auto`}>
+
       {cards.map((c, i) => {
         const show = flipped.includes(i) || matched.includes(c.v);
         return (
@@ -1003,7 +1007,7 @@ function CadeOPar({ p, onDone }: any) {
             {show ? (
               <RenderEmoji e={c.v} className="w-full h-full" />
             ) : (
-              <span className="text-3xl text-primary/70 font-black">?</span>
+              <span className={`${qSize} text-primary/70 font-black`}>?</span>
             )}
           </button>
         );
