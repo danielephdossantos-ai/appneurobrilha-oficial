@@ -170,19 +170,6 @@ function normalizeChild(
   };
 }
 
-function isDraftPlaceholderChild(child: Child) {
-  return child.nome.trim().toLowerCase() === "nova criança" && !child.anamnese_completa;
-}
-
-function getPreferredChild(children: Child[]) {
-  return (
-    children.find((child) => child.anamnese_completa && !isDraftPlaceholderChild(child)) ??
-    children.find((child) => !isDraftPlaceholderChild(child)) ??
-    children[0] ??
-    null
-  );
-}
-
 export interface AnamnesisData {
   id?: string;
   child_id: string;
@@ -230,10 +217,7 @@ export interface AnamnesisData {
   edit_count: number;
 }
 
-const ACTIVE_CHILD_LEGACY_KEY = "neurobrilha:activeChildId";
-const ACTIVE_CHILD_KEY_PREFIX = "neurobrilha:activeChildId:";
-
-const activeChildStorageKey = (userId: string) => `${ACTIVE_CHILD_KEY_PREFIX}${userId}`;
+const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
 
 const isAuthExpiredError = (error: unknown) => {
   const possibleError = error as { message?: unknown; status?: unknown };
@@ -245,69 +229,27 @@ const isAuthExpiredError = (error: unknown) => {
 
 export function useAppState() {
   const queryClient = useQueryClient();
-  const [activeChildId, setActiveChildId] = useState<string | null>(null);
-
-  const { data: authUserId = null, isLoading: isAuthLoading } = useQuery({
-    queryKey: ["auth-user-id"],
-    queryFn: async () => {
-      const { data } = await supabase.auth.getUser();
-      return data.user?.id ?? null;
-    },
-    staleTime: 1000 * 30,
+  const [activeChildId, setActiveChildId] = useState<string | null>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(ACTIVE_CHILD_KEY);
+    }
+    return null;
   });
 
-  const { data: children = [], isLoading: isChildrenLoading } = useQuery({
-    queryKey: ["children", authUserId],
-    enabled: !!authUserId,
+  const { data: children = [], isLoading } = useQuery({
+    queryKey: ["children"],
     queryFn: async () => {
-      if (!authUserId) return [];
-      const profiles = await ChildProfileService.getAllByUserId(authUserId);
-      const normalized = profiles.map((child) =>
-        normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }),
-      );
-      const hasRealChild = normalized.some((child) => !isDraftPlaceholderChild(child));
-      return hasRealChild ? normalized.filter((child) => !isDraftPlaceholderChild(child)) : normalized;
+      const profiles = await ChildProfileService.getAll();
+      return profiles.map((child) => normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }));
     },
   });
-
-  useEffect(() => {
-    if (!authUserId || typeof window === "undefined") {
-      setActiveChildId(null);
-      return;
-    }
-
-    localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
-    const key = activeChildStorageKey(authUserId);
-    const stored = localStorage.getItem(key);
-    const storedChild = stored ? children.find((child) => child.id === stored) : null;
-    const preferredChild = getPreferredChild(children);
-    const shouldReplaceStoredDraft =
-      !!storedChild &&
-      isDraftPlaceholderChild(storedChild) &&
-      !!preferredChild &&
-      preferredChild.id !== storedChild.id &&
-      !isDraftPlaceholderChild(preferredChild);
-
-    if (storedChild && !shouldReplaceStoredDraft) {
-      setActiveChildId(stored);
-      return;
-    }
-
-    const firstChildId = preferredChild?.id ?? null;
-    setActiveChildId(firstChildId);
-    if (firstChildId) {
-      localStorage.setItem(key, firstChildId);
-    } else {
-      localStorage.removeItem(key);
-    }
-  }, [authUserId, children]);
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
       const { data: auth } = await supabase.auth.getUser();
       const uid = auth?.user?.id;
       if (!uid) throw new Error("NOT_AUTHENTICATED");
-      const existing = await ChildProfileService.getAllByUserId(uid);
+      const existing = await ChildProfileService.getAll();
       if (existing.length >= 2) {
         throw new Error("LIMIT_REACHED");
       }
@@ -320,7 +262,7 @@ export function useAppState() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
       setActiveChildId(data.id);
-      if (authUserId) localStorage.setItem(activeChildStorageKey(authUserId), data.id);
+      localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
       toast.success("Criança cadastrada com sucesso!");
     },
     onError: (error: unknown) => {
@@ -372,18 +314,7 @@ export function useAppState() {
     },
   });
 
-  const selectedChild = children.find((c) => c.id === activeChildId) ?? null;
-  const preferredChild = getPreferredChild(children);
-  const activeChild =
-    selectedChild &&
-    !(
-      isDraftPlaceholderChild(selectedChild) &&
-      preferredChild &&
-      preferredChild.id !== selectedChild.id &&
-      !isDraftPlaceholderChild(preferredChild)
-    )
-      ? selectedChild
-      : preferredChild;
+  const activeChild = children.find((c) => c.id === activeChildId) || children[0] || null;
 
   const { data: sessionData } = useQuery({
     queryKey: ["auth-session"],
@@ -395,9 +326,7 @@ export function useAppState() {
   });
 
   const logout = async () => {
-    await queryClient.cancelQueries();
-    if (authUserId) localStorage.removeItem(activeChildStorageKey(authUserId));
-    localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
+    localStorage.removeItem(ACTIVE_CHILD_KEY);
     await supabase.auth.signOut();
     queryClient.clear();
     window.location.href = "/auth";
@@ -406,12 +335,12 @@ export function useAppState() {
   return {
     children,
     activeChild,
-    isLoading: isAuthLoading || isChildrenLoading,
+    isLoading,
     session: sessionData ?? null,
     logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);
-      if (authUserId) localStorage.setItem(activeChildStorageKey(authUserId), id);
+      localStorage.setItem(ACTIVE_CHILD_KEY, id);
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),

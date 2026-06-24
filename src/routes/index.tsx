@@ -503,6 +503,18 @@ function Index() {
                 </div>
               </button>
             ))}
+            <Link
+              to="/anamnese/$childId"
+              params={{ childId: "nova" }}
+              className="flex items-center gap-2 rounded-2xl px-4 py-3 border-4 border-dashed border-[#4C9EFF]/40 bg-white/60 hover:bg-white hover:border-[#4C9EFF] transition-all"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#4C9EFF] text-white grid place-items-center">
+                <Plus strokeWidth={3} className="h-5 w-5" />
+              </div>
+              <span className="font-black text-[#0d1f55] uppercase tracking-wider text-xs">
+                Nova Criança
+              </span>
+            </Link>
           </div>
 
           {activeChild && !activeChild.anamnese_completa && (

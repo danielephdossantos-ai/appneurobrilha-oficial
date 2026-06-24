@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 
@@ -13,30 +12,22 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const [authed, setAuthed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     let mounted = true;
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
-      setAuthed(!!data.user);
+      setAuthed(!!data.session);
       setReady(true);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       setAuthed(!!session);
-      if (event === "SIGNED_OUT") {
-        queryClient.cancelQueries();
-        queryClient.clear();
-      }
-      if (event === "SIGNED_IN" || event === "USER_UPDATED") {
-        queryClient.invalidateQueries();
-      }
     });
     return () => {
       mounted = false;
       sub.subscription.unsubscribe();
     };
-  }, [queryClient]);
+  }, []);
 
   useEffect(() => {
     if (!ready) return;

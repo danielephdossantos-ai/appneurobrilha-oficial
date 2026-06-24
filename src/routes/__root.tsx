@@ -141,7 +141,6 @@ function RootComponent() {
                 <ConnectivityStatus />
                 <MascotGlobalContainer />
                 <ParentPinGate />
-                <GlobalLearningBootstrap />
               </div>
             </HiperfocoProvider>
           </ParentModeProvider>
@@ -161,4 +160,3 @@ import { ParentModeProvider } from "@/contexts/ParentModeContext";
 import { ParentPinGate } from "@/components/auth/ParentPinGate";
 import { HiperfocoProvider } from "@/context/HiperfocoContext";
 import { AuthGuard } from "@/modules/auth/components/AuthGuard";
-import { GlobalLearningBootstrap } from "@/components/GlobalLearningBootstrap";

@@ -7,18 +7,16 @@ const router = getRouter();
 function App() {
   useEffect(() => {
     // Limpeza de cache solicitada para reconstrução do Escola Brilha
-    const CACHE_VERSION = "2.2.0-remove-alfabetizacao";
+    const CACHE_VERSION = "2.1.0-remove-libras";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
-      console.log("Limpando cache (Alfabetização Brilha removida)...");
+      console.log("Limpando cache (LIBRAS removido)...");
       Object.keys(localStorage).forEach((key) => {
         if (
           key.startsWith("neurobrilha:") ||
           key.startsWith("pip:") ||
-          key.toLowerCase().includes("libras") ||
-          key.toLowerCase().includes("alfa") ||
-          key.toLowerCase().includes("alfabetiz")
+          key.toLowerCase().includes("libras")
         ) {
           localStorage.removeItem(key);
         }

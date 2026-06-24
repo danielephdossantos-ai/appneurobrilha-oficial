@@ -22,13 +22,11 @@ export interface RecursoExterno {
 async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
   const key = process.env.YOUTUBE_API_KEY;
   if (!key) return [];
-  // foco educativo infantil em PT-BR; embeddable + sindicalizado + safeSearch strict
-  // videoSyndicated=true é o filtro que remove vídeos que mostram o aviso
-  // "Faça login para confirmar que você não é um bot" no embed.
+  // foco educativo infantil em PT-BR; embeddable + safeSearch strict
   const q = `${query} educativo infantil`;
   const url =
     `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6` +
-    `&safeSearch=strict&videoEmbeddable=true&videoSyndicated=true&relevanceLanguage=pt&regionCode=BR` +
+    `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
     `&q=${encodeURIComponent(q)}&key=${key}`;
   try {
     const r = await fetch(url);
@@ -45,7 +43,7 @@ async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
           fonte: "youtube",
           titulo: sn.title || "Vídeo",
           descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
-          url: `https://youtu.be/${it.id.videoId}`,
+          url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
           thumbnail: thumb,
           conteudo: null,
         };

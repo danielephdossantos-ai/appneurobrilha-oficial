@@ -30,10 +30,12 @@ import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
+import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
 import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
@@ -151,6 +153,11 @@ const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
   path: '/brilha-vida',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
+  id: '/biblioteca-alfa',
+  path: '/biblioteca-alfa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BancoMidiasRoute = BancoMidiasRouteImport.update({
   id: '/banco-midias',
   path: '/banco-midias',
@@ -169,6 +176,11 @@ const AuditoriaPedagogicaRoute = AuditoriaPedagogicaRouteImport.update({
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
+  id: '/alfabetizacao',
+  path: '/alfabetizacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgendaRoute = AgendaRouteImport.update({
@@ -232,10 +244,12 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -270,10 +284,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -308,10 +324,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
+  '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
+  '/biblioteca-alfa': typeof BibliotecaAlfaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -348,10 +366,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -386,10 +406,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -423,10 +445,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agenda'
+    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
     | '/banco-midias'
+    | '/biblioteca-alfa'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -462,10 +486,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
+  AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
   BancoMidiasRoute: typeof BancoMidiasRoute
+  BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
@@ -640,6 +666,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrilhaVidaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca-alfa': {
+      id: '/biblioteca-alfa'
+      path: '/biblioteca-alfa'
+      fullPath: '/biblioteca-alfa'
+      preLoaderRoute: typeof BibliotecaAlfaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/banco-midias': {
       id: '/banco-midias'
       path: '/banco-midias'
@@ -666,6 +699,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics'
       preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alfabetizacao': {
+      id: '/alfabetizacao'
+      path: '/alfabetizacao'
+      fullPath: '/alfabetizacao'
+      preLoaderRoute: typeof AlfabetizacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agenda': {
@@ -795,10 +835,12 @@ const AnamneseChildIdRouteWithChildren = AnamneseChildIdRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
+  AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
   BancoMidiasRoute: BancoMidiasRoute,
+  BibliotecaAlfaRoute: BibliotecaAlfaRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   CuradoriaAulasRoute: CuradoriaAulasRoute,
