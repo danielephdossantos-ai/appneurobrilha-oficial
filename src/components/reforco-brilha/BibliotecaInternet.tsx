@@ -110,18 +110,18 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
         <div className="grid gap-3 md:grid-cols-2">
           {resultados.map((r, i) => {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
-            const abreExterno = false;
             const handleClick = (e: React.MouseEvent) => {
               onAbrirRecurso?.(r);
-              if (abreExterno) return; // deixa o <a target="_blank"> abrir normalmente
-              e.preventDefault();
+              // YouTube bloqueia embeds em iframe (tela "faça login"). Abrir direto no YouTube sempre funciona.
               if (ytId) {
-                setVideoId(ytId);
-                setVideoTitle(r.titulo);
-              } else {
-                setPreview({ url: toEmbedUrl(r.url, r.fonte), title: r.titulo, fonte: r.fonte });
+                e.preventDefault();
+                window.open(`https://www.youtube.com/watch?v=${ytId}`, "_blank", "noopener,noreferrer");
+                return;
               }
+              e.preventDefault();
+              setPreview({ url: toEmbedUrl(r.url, r.fonte), title: r.titulo, fonte: r.fonte });
             };
+
             return (
               <a
                 key={r.id ?? `${r.fonte}-${i}`}
