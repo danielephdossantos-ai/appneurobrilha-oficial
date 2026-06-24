@@ -3120,56 +3120,90 @@ function MemoriaVisual({ p, onDone }: any) {
 function ReacaoRapida({ p, onDone }: any) {
   const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
-  const [mostrar, setMostrar] = useState(true);
   const [feedbackLocal, setFeedbackLocal] = useState<"ok" | "erro" | null>(null);
+  const [tempo, setTempo] = useState(p.intervaloMs);
+  const [travado, setTravado] = useState(false);
 
+  // Countdown por rodada — se acabar, conta como erro e avança.
   useEffect(() => {
-    setMostrar(true);
+    setTempo(p.intervaloMs);
     setFeedbackLocal(null);
-    const t = setTimeout(() => {
-      if (idx < p.seq.length - 1) {
-        setMostrar(false);
-        setTimeout(() => setIdx((i) => i + 1), 300);
+    setTravado(false);
+    const inicio = Date.now();
+    const iv = setInterval(() => {
+      const rest = p.intervaloMs - (Date.now() - inicio);
+      if (rest <= 0) {
+        clearInterval(iv);
+        proximo(false);
       } else {
-        setTimeout(() => onDone(acertos >= Math.ceil(p.seq.length * 0.6)), 500);
+        setTempo(rest);
       }
-    }, p.intervaloMs);
-    return () => clearTimeout(t);
+    }, 80);
+    return () => clearInterval(iv);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx]);
 
-  const handleToque = () => {
-    if (!mostrar) return;
-    const item = p.seq[idx];
-    if (item.tipo === "alvo") {
-      setAcertos((a) => a + 1);
-      setFeedbackLocal("ok");
-    } else setFeedbackLocal("erro");
-    setMostrar(false);
+  const proximo = (acerto: boolean) => {
+    if (travado) return;
+    setTravado(true);
+    if (acerto) setAcertos((a) => a + 1);
+    setFeedbackLocal(acerto ? "ok" : "erro");
     setTimeout(() => {
       if (idx < p.seq.length - 1) setIdx((i) => i + 1);
-      else onDone(acertos >= Math.ceil(p.seq.length * 0.6));
-    }, 300);
+      else {
+        const finalAcertos = acertos + (acerto ? 1 : 0);
+        onDone(finalAcertos >= Math.ceil(p.seq.length * 0.6));
+      }
+    }, 500);
   };
 
-  const item = p.seq[idx] ?? p.seq[0];
+  const round = p.seq[idx] ?? p.seq[0];
+  const pct = Math.max(0, Math.min(100, (tempo / p.intervaloMs) * 100));
+
   return (
     <div className="text-center space-y-5">
-      <div className="text-xs text-muted-foreground font-bold">
-        <span className="text-success">✓ Toque em {p.alvo}</span> <span className="mx-1">|</span>{" "}
-        <span className="text-destructive">✕ Ignore {p.erro}</span>
+      <div className="bg-gradient-to-br from-violet/20 to-violet/5 border-2 border-violet/30 rounded-2xl p-4">
+        <div className="text-xs uppercase text-muted-foreground mb-1">Toque rápido em</div>
+        <div className="flex items-center justify-center gap-2">
+          <RenderEmoji e={round.alvo.emoji} className="w-12 h-12" />
+          <div className="text-2xl font-black">{round.alvo.nome}</div>
+        </div>
       </div>
-      <button
-        onClick={handleToque}
-        className={`w-full rounded-3xl border-2 py-8 flex items-center justify-center transition-all active:scale-95 ${feedbackLocal === "ok" ? "border-success bg-success/10" : feedbackLocal === "erro" ? "border-destructive bg-destructive/10" : "border-border bg-card hover:border-violet/50"}`}
+
+      <div className="h-2 rounded-full bg-muted overflow-hidden">
+        <div
+          className={`h-full transition-[width] duration-75 ${pct > 40 ? "bg-success" : pct > 15 ? "bg-amber-500" : "bg-destructive"}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
+      <div
+        className="grid gap-3"
+        style={{ gridTemplateColumns: `repeat(${round.grade.length}, 1fr)` }}
       >
-        {mostrar ? (
-          <RenderEmoji e={item.emoji} className="w-24 h-24" />
-        ) : (
-          <span className="text-3xl font-black text-muted-foreground">···</span>
-        )}
-      </button>
+        {round.grade.map((item: any, i: number) => {
+          const certa = item.nome === round.alvo.nome;
+          const bg =
+            feedbackLocal && certa
+              ? "border-success bg-success/15"
+              : feedbackLocal === "erro" && !certa
+                ? "border-border bg-card opacity-50"
+                : "border-border bg-card hover:border-violet/50 active:scale-95";
+          return (
+            <button
+              key={i}
+              disabled={travado}
+              onClick={() => proximo(certa)}
+              className={`rounded-2xl border-2 p-3 flex items-center justify-center transition-all ${bg}`}
+            >
+              <RenderEmoji e={item.emoji} className="w-16 h-16" />
+            </button>
+          );
+        })}
+      </div>
+
       <div className="text-sm text-muted-foreground">
-        {idx + 1} / {p.seq.length}
+        {idx + 1} / {p.seq.length} · acertos {acertos}
       </div>
     </div>
   );

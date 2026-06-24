@@ -420,22 +420,56 @@ export const MEMORIA_VISUAL_VARS: Variation[] = range(30).map((i) => {
   return { id: `mv-${i + 1}`, payload: { grid, rows, cols, flashMs, nivel } };
 });
 
-// A3. REAÇÃO RÁPIDA — verde aparece → toca; vermelho aparece → não toca (Go/No-Go)
-const GONGO_ICONS = [
-  { alvo: "🟢", erro: "🔴" },
-  { alvo: "⭐", erro: "❌" },
-  { alvo: "🦋", erro: "🐝" },
-  { alvo: "💚", erro: "❤️" },
+// A3. REAÇÃO RÁPIDA — aparecem vários bichinhos/objetos; toque rápido no alvo pedido.
+// 10 fáceis (2 opções), 10 médias (3 opções), 10 difíceis (4 opções).
+const REACAO_BANCO = [
+  { emoji: "🐱", nome: "GATO" },
+  { emoji: "🐶", nome: "CACHORRO" },
+  { emoji: "🦁", nome: "LEÃO" },
+  { emoji: "🐯", nome: "TIGRE" },
+  { emoji: "🐵", nome: "MACACO" },
+  { emoji: "🐰", nome: "COELHO" },
+  { emoji: "🐼", nome: "PANDA" },
+  { emoji: "🦊", nome: "RAPOSA" },
+  { emoji: "🐻", nome: "URSO" },
+  { emoji: "🐮", nome: "VACA" },
+  { emoji: "🐷", nome: "PORCO" },
+  { emoji: "🐔", nome: "GALINHA" },
+  { emoji: "🐴", nome: "CAVALO" },
+  { emoji: "🦉", nome: "CORUJA" },
+  { emoji: "🦋", nome: "BORBOLETA" },
+  { emoji: "🐝", nome: "ABELHA" },
+  { emoji: "🐸", nome: "SAPO" },
+  { emoji: "🐢", nome: "TARTARUGA" },
+  { emoji: "🐠", nome: "PEIXE" },
+  { emoji: "🦄", nome: "UNICÓRNIO" },
+  { emoji: "🦖", nome: "DINOSSAURO" },
+  { emoji: "🐘", nome: "ELEFANTE" },
 ];
+function pickN<T>(arr: T[], n: number, seed: number, exclude?: T): T[] {
+  const pool = exclude ? arr.filter((x) => x !== exclude) : arr.slice();
+  const out: T[] = [];
+  let s = seed + 1;
+  while (out.length < n && pool.length) {
+    s = (s * 9301 + 49297) % 233280;
+    const idx = s % pool.length;
+    out.push(pool.splice(idx, 1)[0]);
+  }
+  return out;
+}
 export const REACAO_RAPIDA_VARS: Variation[] = range(30).map((i) => {
-  const t = GONGO_ICONS[i % GONGO_ICONS.length];
-  const rounds = 5 + (i % 5);
-  const seq = range(rounds).map((k) => ({
-    tipo: (k + i) % 3 === 0 ? "erro" : "alvo",
-    emoji: (k + i) % 3 === 0 ? t.erro : t.alvo,
-  }));
-  const intervaloMs = Math.max(600, 1400 - i * 25);
-  return { id: `rr-${i + 1}`, payload: { ...t, seq, intervaloMs } };
+  const faixa = Math.floor(i / 10); // 0 fácil, 1 médio, 2 difícil
+  const nivel = faixa + 1;
+  const opcoes = 2 + faixa; // 2/3/4
+  const rounds = 6 + faixa * 2; // 6/8/10
+  const intervaloMs = [2400, 1700, 1200][faixa];
+  const seq = range(rounds).map((k) => {
+    const alvo = REACAO_BANCO[(i * 3 + k * 5) % REACAO_BANCO.length];
+    const distratores = pickN(REACAO_BANCO, opcoes - 1, i * 31 + k * 7, alvo);
+    const grade = pickN([alvo, ...distratores], opcoes, i * 13 + k * 3);
+    return { alvo, grade };
+  });
+  return { id: `rr-${i + 1}`, payload: { seq, intervaloMs, rounds, nivel } };
 });
 
 // A4. SEGUIR INSTRUÇÃO — ler instrução, executar toque no item correto na grade
