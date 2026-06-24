@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { AnamneseWizard } from "@/modules/anamnese/components/AnamneseWizard";
@@ -14,6 +14,7 @@ export const Route = createFileRoute("/anamnese/$childId")({
 function AnamneseRoute() {
   const { childId } = Route.useParams();
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ function AnamneseRoute() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AnamneseWizard childId={childId} />
+      {pathname === `/anamnese/${childId}` ? <AnamneseWizard childId={childId} /> : <Outlet />}
     </div>
   );
 }
