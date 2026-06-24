@@ -1496,43 +1496,126 @@ const CORPO_VARS: Variation[] = range(30).map((i) => {
   return { id: `pc-${i + 1}`, payload: { som: b.som, opts, correta: b.correta } };
 });
 
-// 19. TRAÇADO DE LETRAS — letra oca + pontos numerados nos inícios dos traços + setas
-// Mecânica: criança toca os pontos em ordem (1, 2, 3...). Cada toque "pinta" o ponto.
-// dir: direção da seta de orientação (down/up/right/left/dr/dl/ur/ul/cw/ccw).
-type LetraGuia = { x: number; y: number; dir: "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw" };
-type LetraDef = { letra: string; palavra: string; emoji: string; guias: LetraGuia[] };
+// 19. TRAÇADO DE LETRAS — letra branca com borda + linhas tracejadas DENTRO seguindo o caminho de escrita.
+// Cada stroke = polyline (centerline) que a criança "ativa" tocando no número de início.
+type LetraStroke = { path: { x: number; y: number }[] };
+type LetraDef = { letra: string; palavra: string; emoji: string; strokes: LetraStroke[] };
+const _p = (...pts: number[]): { x: number; y: number }[] => {
+  const out: { x: number; y: number }[] = [];
+  for (let i = 0; i < pts.length; i += 2) out.push({ x: pts[i], y: pts[i + 1] });
+  return out;
+};
 const ALFABETO_BANK: LetraDef[] = [
-  { letra: "A", palavra: "ABELHA",     emoji: "🐝", guias: [{x:35,y:35,dir:"dl"},{x:65,y:35,dir:"dr"},{x:30,y:60,dir:"right"}]},
-  { letra: "B", palavra: "BOLA",       emoji: "⚽", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"right"},{x:28,y:52,dir:"right"}]},
-  { letra: "C", palavra: "CASA",       emoji: "🏠", guias: [{x:72,y:24,dir:"ccw"}]},
-  { letra: "D", palavra: "DADO",       emoji: "🎲", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"}]},
-  { letra: "E", palavra: "ELEFANTE",   emoji: "🐘", guias: [{x:72,y:20,dir:"left"},{x:28,y:20,dir:"down"},{x:28,y:50,dir:"right"},{x:28,y:82,dir:"right"}]},
-  { letra: "F", palavra: "FOCA",       emoji: "🦭", guias: [{x:72,y:20,dir:"left"},{x:28,y:20,dir:"down"},{x:28,y:50,dir:"right"}]},
-  { letra: "G", palavra: "GATO",       emoji: "🐱", guias: [{x:72,y:24,dir:"ccw"},{x:70,y:55,dir:"left"}]},
-  { letra: "H", palavra: "HIPOPOTAMO", emoji: "🦛", guias: [{x:28,y:20,dir:"down"},{x:72,y:20,dir:"down"},{x:30,y:50,dir:"right"}]},
-  { letra: "I", palavra: "IGREJA",     emoji: "⛪", guias: [{x:50,y:20,dir:"down"}]},
-  { letra: "J", palavra: "JACARE",     emoji: "🐊", guias: [{x:60,y:20,dir:"down"}]},
-  { letra: "K", palavra: "KIWI",       emoji: "🥝", guias: [{x:28,y:20,dir:"down"},{x:30,y:50,dir:"ur"},{x:30,y:50,dir:"dr"}]},
-  { letra: "L", palavra: "LEAO",       emoji: "🦁", guias: [{x:30,y:20,dir:"down"},{x:30,y:82,dir:"right"}]},
-  { letra: "M", palavra: "MACACO",     emoji: "🐵", guias: [{x:20,y:82,dir:"up"},{x:22,y:20,dir:"dr"},{x:50,y:58,dir:"ur"},{x:80,y:20,dir:"down"}]},
-  { letra: "N", palavra: "NAVIO",      emoji: "🚢", guias: [{x:28,y:82,dir:"up"},{x:28,y:20,dir:"dr"},{x:72,y:82,dir:"up"}]},
-  { letra: "O", palavra: "OVO",        emoji: "🥚", guias: [{x:50,y:20,dir:"ccw"}]},
-  { letra: "P", palavra: "PATO",       emoji: "🦆", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"}]},
-  { letra: "Q", palavra: "QUEIJO",     emoji: "🧀", guias: [{x:50,y:20,dir:"ccw"},{x:60,y:65,dir:"dr"}]},
-  { letra: "R", palavra: "RATO",       emoji: "🐭", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"},{x:45,y:55,dir:"dr"}]},
-  { letra: "S", palavra: "SAPO",       emoji: "🐸", guias: [{x:72,y:25,dir:"ccw"}]},
-  { letra: "T", palavra: "TARTARUGA",  emoji: "🐢", guias: [{x:20,y:20,dir:"right"},{x:50,y:20,dir:"down"}]},
-  { letra: "U", palavra: "UVA",        emoji: "🍇", guias: [{x:28,y:20,dir:"down"},{x:72,y:20,dir:"down"}]},
-  { letra: "V", palavra: "VACA",       emoji: "🐄", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"}]},
-  { letra: "W", palavra: "WAFFLE",     emoji: "🧇", guias: [{x:18,y:20,dir:"dr"},{x:38,y:80,dir:"ur"},{x:62,y:80,dir:"ur"},{x:82,y:20,dir:"dl"}]},
-  { letra: "X", palavra: "XICARA",     emoji: "☕", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"}]},
-  { letra: "Y", palavra: "IOGURTE",    emoji: "🥛", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"},{x:50,y:52,dir:"down"}]},
-  { letra: "Z", palavra: "ZEBRA",      emoji: "🦓", guias: [{x:22,y:20,dir:"right"},{x:75,y:25,dir:"dl"},{x:22,y:82,dir:"right"}]},
+  { letra: "A", palavra: "ABELHA",     emoji: "🐝", strokes: [
+    { path: _p(50,18, 22,84) }, { path: _p(50,18, 78,84) }, { path: _p(33,58, 67,58) },
+  ]},
+  { letra: "B", palavra: "BOLA",       emoji: "⚽", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(28,16, 52,16, 62,24, 62,40, 52,48, 28,48) },
+    { path: _p(28,48, 56,48, 68,58, 68,74, 56,84, 28,84) },
+  ]},
+  { letra: "C", palavra: "CASA",       emoji: "🏠", strokes: [
+    { path: _p(78,28, 60,15, 40,15, 25,28, 20,50, 25,72, 40,85, 60,85, 78,72) },
+  ]},
+  { letra: "D", palavra: "DADO",       emoji: "🎲", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(28,16, 54,16, 70,28, 76,50, 70,72, 54,84, 28,84) },
+  ]},
+  { letra: "E", palavra: "ELEFANTE",   emoji: "🐘", strokes: [
+    { path: _p(75,16, 25,16) },
+    { path: _p(25,16, 25,84) },
+    { path: _p(25,50, 62,50) },
+    { path: _p(25,84, 75,84) },
+  ]},
+  { letra: "F", palavra: "FOCA",       emoji: "🦭", strokes: [
+    { path: _p(75,16, 25,16) },
+    { path: _p(25,16, 25,84) },
+    { path: _p(25,50, 60,50) },
+  ]},
+  { letra: "G", palavra: "GATO",       emoji: "🐱", strokes: [
+    { path: _p(78,28, 60,15, 40,15, 25,28, 20,50, 25,72, 40,85, 60,85, 78,72, 78,55, 55,55) },
+  ]},
+  { letra: "H", palavra: "HIPOPOTAMO", emoji: "🦛", strokes: [
+    { path: _p(28,16, 28,84) }, { path: _p(72,16, 72,84) }, { path: _p(28,50, 72,50) },
+  ]},
+  { letra: "I", palavra: "IGREJA",     emoji: "⛪", strokes: [
+    { path: _p(50,16, 50,84) },
+  ]},
+  { letra: "J", palavra: "JACARE",     emoji: "🐊", strokes: [
+    { path: _p(60,16, 60,70, 52,82, 38,82, 28,72) },
+  ]},
+  { letra: "K", palavra: "KIWI",       emoji: "🥝", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(72,18, 28,52) },
+    { path: _p(28,52, 72,84) },
+  ]},
+  { letra: "L", palavra: "LEAO",       emoji: "🦁", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(28,84, 75,84) },
+  ]},
+  { letra: "M", palavra: "MACACO",     emoji: "🐵", strokes: [
+    { path: _p(18,84, 18,16) },
+    { path: _p(18,16, 50,60) },
+    { path: _p(50,60, 82,16) },
+    { path: _p(82,16, 82,84) },
+  ]},
+  { letra: "N", palavra: "NAVIO",      emoji: "🚢", strokes: [
+    { path: _p(28,84, 28,16) },
+    { path: _p(28,16, 72,84) },
+    { path: _p(72,84, 72,16) },
+  ]},
+  { letra: "O", palavra: "OVO",        emoji: "🥚", strokes: [
+    { path: _p(50,15, 72,22, 82,40, 82,60, 72,78, 50,85, 28,78, 18,60, 18,40, 28,22, 50,15) },
+  ]},
+  { letra: "P", palavra: "PATO",       emoji: "🦆", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(28,16, 54,16, 68,26, 68,42, 54,52, 28,52) },
+  ]},
+  { letra: "Q", palavra: "QUEIJO",     emoji: "🧀", strokes: [
+    { path: _p(50,15, 72,22, 82,40, 82,60, 72,78, 50,85, 28,78, 18,60, 18,40, 28,22, 50,15) },
+    { path: _p(56,62, 82,88) },
+  ]},
+  { letra: "R", palavra: "RATO",       emoji: "🐭", strokes: [
+    { path: _p(28,16, 28,84) },
+    { path: _p(28,16, 54,16, 68,26, 68,42, 54,52, 28,52) },
+    { path: _p(45,52, 75,84) },
+  ]},
+  { letra: "S", palavra: "SAPO",       emoji: "🐸", strokes: [
+    { path: _p(78,26, 60,15, 38,15, 24,26, 28,42, 50,50, 72,58, 78,72, 64,84, 40,84, 22,74) },
+  ]},
+  { letra: "T", palavra: "TARTARUGA",  emoji: "🐢", strokes: [
+    { path: _p(18,18, 82,18) },
+    { path: _p(50,18, 50,84) },
+  ]},
+  { letra: "U", palavra: "UVA",        emoji: "🍇", strokes: [
+    { path: _p(28,16, 28,64, 38,80, 62,80, 72,64, 72,16) },
+  ]},
+  { letra: "V", palavra: "VACA",       emoji: "🐄", strokes: [
+    { path: _p(20,16, 50,84, 80,16) },
+  ]},
+  { letra: "W", palavra: "WAFFLE",     emoji: "🧇", strokes: [
+    { path: _p(15,16, 32,84, 50,40, 68,84, 85,16) },
+  ]},
+  { letra: "X", palavra: "XICARA",     emoji: "☕", strokes: [
+    { path: _p(20,16, 80,84) },
+    { path: _p(80,16, 20,84) },
+  ]},
+  { letra: "Y", palavra: "IOGURTE",    emoji: "🥛", strokes: [
+    { path: _p(20,16, 50,52) },
+    { path: _p(80,16, 50,52) },
+    { path: _p(50,52, 50,84) },
+  ]},
+  { letra: "Z", palavra: "ZEBRA",      emoji: "🦓", strokes: [
+    { path: _p(22,18, 78,18) },
+    { path: _p(78,18, 22,82) },
+    { path: _p(22,82, 78,82) },
+  ]},
 ];
 const TRACADO_VARS: Variation[] = range(52).map((i) => {
   const b = ALFABETO_BANK[i % ALFABETO_BANK.length];
-  return { id: `tl-${i + 1}`, payload: { letra: b.letra, palavra: b.palavra, emoji: b.emoji, guias: b.guias } };
+  return { id: `tl-${i + 1}`, payload: { letra: b.letra, palavra: b.palavra, emoji: b.emoji, strokes: b.strokes } };
 });
+
 
 
 // 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
