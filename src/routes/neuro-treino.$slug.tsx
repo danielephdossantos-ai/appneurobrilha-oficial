@@ -1928,31 +1928,40 @@ function SonsCorpo({ p, onDone }: any) {
 }
 
 // ============== 19. Traçado de Letras ==============
-// Letra oca (contorno SVG real) + pontos numerados nos inícios + setas direcionais + palavra/figura.
-type GuiaDir = "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw";
-const ARROW_MAP: Record<GuiaDir, { dx: number; dy: number; rot: number }> = {
-  right: { dx:  9, dy:  0, rot:   0 },
-  left:  { dx: -9, dy:  0, rot: 180 },
-  down:  { dx:  0, dy:  9, rot:  90 },
-  up:    { dx:  0, dy: -9, rot: -90 },
-  dr:    { dx:  7, dy:  7, rot:  45 },
-  dl:    { dx: -7, dy:  7, rot: 135 },
-  ur:    { dx:  7, dy: -7, rot: -45 },
-  ul:    { dx: -7, dy: -7, rot:-135 },
-  cw:    { dx:  6, dy:  6, rot:  90 },
-  ccw:   { dx: -6, dy:  6, rot:  90 },
-};
+// Letra branca com borda preta grossa + polylines tracejadas DENTRO seguindo o caminho de escrita +
+// setas no fim de cada traço + números pequenos nos inícios. Estilo cartilha.
+type Pt = { x: number; y: number };
+type Stroke = { path: Pt[] };
 
 function TracadoLetras({ p, onDone }: any) {
   const [step, setStep] = useState(0);
-  const guias: { x: number; y: number; dir: GuiaDir }[] = p.guias;
+  const strokes: Stroke[] = p.strokes;
+
+  // Offset start markers quando vários traços começam no mesmo ponto (ex.: A apex, B topo).
+  const startMarkers = (() => {
+    const seen = new Map<string, number>();
+    return strokes.map((s) => {
+      const start = s.path[0];
+      const key = `${Math.round(start.x)},${Math.round(start.y)}`;
+      const count = seen.get(key) ?? 0;
+      seen.set(key, count + 1);
+      if (count === 0) return start;
+      const next = s.path[1] ?? start;
+      const dx = next.x - start.x;
+      const dy = next.y - start.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const off = 7 * count;
+      return { x: start.x + (dx / len) * off, y: start.y + (dy / len) * off };
+    });
+  })();
+
 
   const tap = (i: number) => {
     if (i !== step) {
       toast(`Toque no ponto ${step + 1}`);
       return;
     }
-    if (i + 1 >= guias.length) {
+    if (i + 1 >= strokes.length) {
       toast.success(`Letra ${p.letra} de ${p.palavra}! ✨`);
       onDone(true);
     } else {
@@ -1970,65 +1979,79 @@ function TracadoLetras({ p, onDone }: any) {
         style={{ maxWidth: 340 }}
       >
         <svg viewBox="0 0 100 100" className="w-full">
-          {/* Letra OCA — contorno real do glifo */}
+          {/* Letra gorda: fill branco + borda preta grossa (paint-order: stroke fill faz borda atrás) */}
           <text
             x={50}
             y={52}
             textAnchor="middle"
             dominantBaseline="central"
-            fontSize={92}
+            fontSize={94}
             fontWeight={900}
             fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
-            fill="none"
+            fill="white"
             stroke="#0f172a"
-            strokeWidth={1.6}
+            strokeWidth={2.4}
             strokeLinejoin="round"
+            style={{ paintOrder: "stroke fill" } as any}
           >
             {p.letra}
           </text>
 
-          {/* Setas direcionais (tracejado leve) */}
-          {guias.map((g, i) => {
-            const m = ARROW_MAP[g.dir];
-            const tx = g.x + m.dx;
-            const ty = g.y + m.dy;
+          {/* Polylines tracejadas internas + setas no fim de cada traço */}
+          {strokes.map((s, i) => {
             const done = i < step;
-            const color = done ? "hsl(var(--success))" : i === step ? "#f97316" : "#94a3b8";
+            const current = i === step;
+            const color = done ? "hsl(var(--success))" : current ? "#ea580c" : "#334155";
+            const pts = s.path.map((pt) => `${pt.x},${pt.y}`).join(" ");
+            const last = s.path[s.path.length - 1];
+            const prev = s.path[s.path.length - 2] ?? last;
+            const angle = (Math.atan2(last.y - prev.y, last.x - prev.x) * 180) / Math.PI;
             return (
-              <g key={`arr-${i}`}>
-                <line
-                  x1={g.x} y1={g.y} x2={tx} y2={ty}
-                  stroke={color} strokeWidth={1.2} strokeDasharray="2 2"
+              <g key={`s-${i}`}>
+                <polyline
+                  points={pts}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth={done ? 2.6 : 2.0}
+                  strokeDasharray={done ? undefined : "3 2"}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <polygon
-                  points="0,-2.5 5,0 0,2.5"
+                  points="0,-2.8 5.5,0 0,2.8"
                   fill={color}
-                  transform={`translate(${tx} ${ty}) rotate(${m.rot})`}
+                  transform={`translate(${last.x} ${last.y}) rotate(${angle})`}
                 />
               </g>
             );
           })}
 
-          {/* Pontos numerados nos inícios dos traços */}
-          {guias.map((g, i) => {
+
+          {/* Números delicados nos inícios — tocáveis em ordem */}
+          {strokes.map((_s, i) => {
+            const start = startMarkers[i];
+
             const done = i < step;
             const current = i === step;
             return (
-              <g key={`pt-${i}`} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
+              <g key={`n-${i}`} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
                 <circle
-                  cx={g.x} cy={g.y}
-                  r={current ? 5.2 : 4.4}
+                  cx={start.x}
+                  cy={start.y}
+                  r={current ? 3.6 : 3}
                   fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
-                  stroke={done ? "white" : "#0f172a"}
-                  strokeWidth={1.2}
+                  stroke="#0f172a"
+                  strokeWidth={0.7}
                   className={current ? "animate-pulse" : ""}
                 />
                 {!done && (
                   <text
-                    x={g.x} y={g.y}
-                    textAnchor="middle" dominantBaseline="central"
-                    fontSize={5}
-                    fontWeight={900}
+                    x={start.x}
+                    y={start.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={3.4}
+                    fontWeight={700}
                     fill={current ? "white" : "#0f172a"}
                   >
                     {i + 1}
@@ -2038,7 +2061,7 @@ function TracadoLetras({ p, onDone }: any) {
             );
           })}
         </svg>
-        {/* Palavra + figura embaixo (HTML pra fonte de emoji do sistema) */}
+        {/* Palavra + figura (HTML pra emoji renderizar) */}
         <div className="flex items-center justify-between px-2 pt-1">
           <div className="font-black text-xl tracking-wide">
             <span className="text-red-600">{p.letra}</span>
@@ -2047,10 +2070,10 @@ function TracadoLetras({ p, onDone }: any) {
           <div className="text-3xl leading-none">{p.emoji}</div>
         </div>
       </div>
-
     </div>
   );
 }
+
 
 
 // ============== 20. Caminho dos Pontos ==============
