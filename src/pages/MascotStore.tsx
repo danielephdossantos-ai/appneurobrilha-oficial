@@ -965,7 +965,7 @@ const WorldsSection: React.FC = () => {
       setHiperfocoCustom(w.customLabel);
     }
     toast.success(`Mundo ${w.label} escolhido! 🌟`, {
-      description: "Pronto para brincar na Jornada 365.",
+      description: "Pronto para brincar.",
     });
   };
 
