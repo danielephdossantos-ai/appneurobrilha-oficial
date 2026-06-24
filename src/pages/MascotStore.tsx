@@ -559,16 +559,50 @@ const ADDITIONAL_CHARACTERS = [
 // Só o Guardião (Fase 4) e as fantasias exigem moedas.
 const STAGE_THRESHOLDS = { ovo: 0, nascendo: 0, bebe: 0, guardiao: 500 } as const;
 
+// Preço (Moedas Brilha) por tipo de mascote. A criança joga, ganha moedas e
+// desbloqueia. Quanto mais raro/fantasioso, mais alto.
 function getRequiredCoins(mascotId: string, mascotName: string): number {
-  const id = (mascotId || "").toLowerCase();
-  const name = (mascotName || "").toLowerCase();
-  if (id.includes("ovo") || name.includes("ovo")) return STAGE_THRESHOLDS.ovo;
-  if (id.includes("nascendo") || name.includes("nascendo")) return STAGE_THRESHOLDS.nascendo;
-  if (id.includes("bebe") || name.includes("bebê") || name.includes("bebe"))
-    return STAGE_THRESHOLDS.bebe;
-  // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
+  const key = `${mascotId} ${mascotName}`.toLowerCase();
+
+  // Fases base (já vêm liberadas)
+  if (/(ovo|nascendo)/.test(key)) return 0;
+  if (/bebê|bebe/.test(key)) return 0;
+
+  // Teens com fantasias raras
+  if (/teen-(super|principe|princesa|roqueir|cyber)/.test(key)) return 2500;
+  if (/teen-(ursinho|carrinho|boneca|bola|trator)/.test(key)) return 1800;
+  if (/teen/.test(key)) return 2000;
+
+  // Princesas / Super-heróis / Fantasia
+  if (/(princesa|principe|super-her|fada|sereia|unicornio|unicórnio)/.test(key)) return 1500;
+
+  // Profissões
+  if (/(doutora|veterinaria|veterinária|professora|confeiteira|astronauta|bailarina)/.test(key))
+    return 1200;
+
+  // Hobbies / arte / música
+  if (/(arte|musica|música)/.test(key)) return 1000;
+
+  // Mundos (espaço, animais, dinos, fazendinha, robos, trens, carros, veículos, minecraft)
+  if (/(espaco|espaço|animais|dinossauros|fazendinha|robos|robôs|trens|carros|veiculos|veículos|minecraft)/.test(key))
+    return 900;
+
+  // Pip / Pipa principal (Guardião)
   return STAGE_THRESHOLDS.guardiao;
 }
+
+// Paletas vibrantes para os cards (rotaciona pelo index — visual colorido,
+// não cinza). Cada card recebe uma cor diferente.
+const CARD_PALETTES = [
+  "from-pink-200 via-fuchsia-100 to-purple-200",
+  "from-amber-200 via-yellow-100 to-orange-200",
+  "from-sky-200 via-cyan-100 to-blue-200",
+  "from-emerald-200 via-green-100 to-teal-200",
+  "from-violet-200 via-indigo-100 to-blue-200",
+  "from-rose-200 via-pink-100 to-red-200",
+  "from-lime-200 via-emerald-100 to-green-200",
+  "from-orange-200 via-amber-100 to-yellow-200",
+];
 
 
 const MascotStorePage: React.FC = () => {
@@ -787,22 +821,24 @@ const MascotStoreCard = ({
       <KidCard
         className={cn(
           "group h-full flex flex-col overflow-hidden border-2 transition-all duration-300",
-          unlocked ? "border-border hover:border-primary/30" : "border-muted/40",
+          unlocked
+            ? "border-border hover:border-primary/40"
+            : "border-amber-300/60 hover:border-amber-400",
         )}
       >
-        <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center p-8 overflow-hidden">
+        <div
+          className={cn(
+            "relative h-56 bg-gradient-to-br flex items-center justify-center p-8 overflow-hidden",
+            CARD_PALETTES[index % CARD_PALETTES.length],
+          )}
+        >
           {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
 
-          <div
-            className={cn(
-              "relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110",
-              !unlocked && "grayscale opacity-50",
-            )}
-          >
+          <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
               <KidLiveMascot
                 size="xl"
@@ -821,11 +857,10 @@ const MascotStoreCard = ({
             )}
           </div>
 
+          {/* Cadeado pequeno no canto superior esquerdo — não cobre o mascote */}
           {!unlocked && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px]">
-              <div className="bg-white/95 rounded-full p-4 shadow-2xl">
-                <Lock className="text-primary" size={32} strokeWidth={2.5} />
-              </div>
+            <div className="absolute top-3 left-3 z-20 bg-amber-400 text-amber-950 rounded-full p-2 shadow-lg ring-2 ring-white">
+              <Lock size={16} strokeWidth={3} />
             </div>
           )}
 
@@ -839,7 +874,7 @@ const MascotStoreCard = ({
           </div>
 
           {isOwned && unlocked && (
-            <div className="absolute top-4 left-4 bg-success text-white p-1.5 rounded-full shadow-lg">
+            <div className="absolute bottom-3 left-3 bg-success text-white p-1.5 rounded-full shadow-lg">
               <Star size={14} fill="white" />
             </div>
           )}
@@ -876,9 +911,9 @@ const MascotStoreCard = ({
               </div>
             ) : !unlocked ? (
               <div className="flex flex-col gap-2">
-                <div className="w-full py-3 rounded-2xl bg-muted/40 border-2 border-muted text-muted-foreground text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                <div className="w-full py-3 rounded-2xl bg-amber-100 border-2 border-amber-300 text-amber-900 text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
                   <Lock size={14} />
-                  Bloqueado
+                  {requiredCoins} Moedas Brilha
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-[10px] font-bold text-primary/70">
