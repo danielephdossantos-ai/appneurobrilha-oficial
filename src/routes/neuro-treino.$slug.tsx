@@ -825,20 +825,25 @@ function Rimas({ p, onDone }: any) {
 
 // ============== 4. Pedacinhos da Palavra ==============
 function Pedacinhos({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [claps, setClaps] = useState(0);
+  const palavraImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
+  const silabaCls = sens.largerTargets ? "px-6 py-3 text-lg" : "px-4 py-2";
+  const btnCls = sens.largerTargets ? "px-14 py-10" : "px-12 py-8";
+  const btnPress = sens.reduceMotion ? "" : "active:scale-95";
   return (
     <div className="text-center">
       <div className="text-5xl font-black mb-4 flex items-center justify-center gap-4">
         {p.palavra}
         {objetoImg(p.palavra) && (
-          <img src={objetoImg(p.palavra)} className="w-20 h-20 object-contain drop-shadow-sm" />
+          <img src={objetoImg(p.palavra)} className={`${palavraImg} object-contain drop-shadow-sm`} />
         )}
       </div>
       <div className="flex justify-center gap-2 mb-6">
         {p.silabas.map((s: string, i: number) => (
           <div
             key={i}
-            className={`px-4 py-2 rounded-xl font-bold ${i < claps ? "bg-success text-white" : "bg-muted"}`}
+            className={`${silabaCls} rounded-xl font-bold ${i < claps ? "bg-success text-white" : "bg-muted"}`}
           >
             {s}
           </div>
@@ -846,11 +851,12 @@ function Pedacinhos({ p, onDone }: any) {
       </div>
       <button
         onClick={() => setClaps((c) => c + 1)}
-        className="bg-coral text-white px-12 py-8 rounded-2xl shadow-lg active:scale-95 mb-4 flex items-center gap-3 mx-auto"
+        className={`bg-coral text-white ${btnCls} rounded-2xl shadow-lg ${btnPress} mb-4 flex items-center gap-3 mx-auto`}
       >
-        <Hand size={40} />
+        <Hand size={sens.largerTargets ? 48 : 40} />
         <span className="text-2xl font-black">BATER PALMA</span>
       </button>
+
       <div className="text-muted-foreground mb-4">
         Palmas: <b>{claps}</b>
       </div>
