@@ -7,6 +7,7 @@
  * player atual do Escola Brilha (reusa LessonStep).
  */
 import type { LessonStep } from "../types/lesson";
+import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 export type PerfilNeuro = "TEA" | "TDAH" | "Dislexia" | "Neurotipico";
 
@@ -136,13 +137,14 @@ function buildSteps(
   midias: Array<{ id: string; url: string; tipo: string }>,
 ): LessonStep[] {
   const rules = PERFIL_RULES[perfil];
+  const title = friendlyLessonTitle({ title: habilidade.descricao, subject: habilidade.disciplina });
   const base: LessonStep[] = [
     {
       id: "intro",
       phase: "explanation",
       type: "explanation",
       mascot: "pip",
-      speech: `${rules.speechPrefix} Hoje vamos aprender: ${habilidade.descricao}`,
+      speech: `${rules.speechPrefix} Hoje vamos aprender: ${title}`,
     },
     {
       id: "demo",
@@ -232,6 +234,7 @@ export function planWeek(inputs: PlannerInputs): AulaSemanaPlan[] {
       )?.tecnica || null;
     const midiasAula = pickMidias(midias, disc, perfil);
     const steps = buildSteps(perfil, hab, tecnica, midiasAula);
+    const titulo = friendlyLessonTitle({ title: hab.descricao, subject: disc });
 
     aulas.push({
       child_id: inputs.childId,
@@ -239,7 +242,7 @@ export function planWeek(inputs: PlannerInputs): AulaSemanaPlan[] {
       data: fmtDate(addDays(semanaInicio, i)),
       habilidade_bncc: hab.codigo,
       materia: disc,
-      titulo: hab.descricao.slice(0, 80),
+      titulo,
       steps,
       midias: midiasAula,
       perfil_neuro: perfil,
