@@ -4,8 +4,15 @@ import { cn } from "@/utils/utils";
 import { useMascot } from "@/contexts/MascotContext";
 import pipaMascot from "@/assets/pip-girl-mascot.png";
 import { useAppState } from "@/core/store";
+import { useMascotStage } from "@/lib/mascot-stage";
 
 import pipMascot from "@/assets/pip-mascot.png";
+import pipEgg from "@/assets/pip-egg.png";
+import pipHatching from "@/assets/pip-hatching.png";
+import pipBaby from "@/assets/pip-baby.png";
+import pipaEgg from "@/assets/pipa-egg.png";
+import pipaHatching from "@/assets/pipa-hatching.png";
+import pipaBaby from "@/assets/pipa-baby.png";
 import pipDinossauros from "@/assets/pip-dinossauros.png";
 import pipEspaco from "@/assets/pip-espaco.png";
 import pipArte from "@/assets/pip-arte.png";
@@ -19,6 +26,7 @@ import pipCarros from "@/assets/pip-carros.png";
 import pipTrens from "@/assets/pip-trens.png";
 import pipRobos from "@/assets/pip-robos.png";
 import pipVeiculos from "@/assets/pip-veiculos.png";
+
 
 export const PIP_SKINS: Record<string, string> = {
   dinossauros: pipDinossauros,
