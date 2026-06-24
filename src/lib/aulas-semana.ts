@@ -36,6 +36,35 @@ function normalizeSerie(raw: string | null | undefined): string | null {
   return s;
 }
 
+function getSerieNumber(serie: string): number | null {
+  const match = serie.match(/(\d{1,2})/);
+  if (!match) return null;
+  const n = Number(match[1]);
+  return Number.isFinite(n) ? n : null;
+}
+
+function getAnoFilters(serie: string): string[] {
+  const lower = serie.toLowerCase();
+  if (lower.includes("infantil") || lower.includes("pré") || lower.includes("pre")) {
+    return ["Educação Infantil"];
+  }
+  if (lower.includes("médio") || lower.includes("medio")) {
+    return ["Ensino Médio"];
+  }
+
+  const n = getSerieNumber(serie);
+  if (!n) return [serie];
+
+  const filters = [`${n}º Ano`];
+  if (n >= 1 && n <= 2) filters.push("1º ao 2º Ano");
+  if (n >= 1 && n <= 5) filters.push("1º ao 5º Ano");
+  if (n >= 3 && n <= 5) filters.push("3º ao 5º Ano");
+  if (n >= 6 && n <= 7) filters.push("6º ao 7º Ano");
+  if (n >= 6 && n <= 9) filters.push("6º ao 9º Ano");
+  if (n >= 8 && n <= 9) filters.push("8º ao 9º Ano");
+  return Array.from(new Set(filters));
+}
+
 export interface GerarAulasResult {
   ok: true;
   criadas: number;
@@ -72,20 +101,23 @@ export async function gerarAulasSemana(opts: {
   const perfil = inferPerfil(anamnese?.responses);
   const serie = normalizeSerie((child as { serie?: string | null }).serie) || "1º Ano";
 
-  // 3. BNCC (com fallback)
+  // 3. BNCC (série exata + habilidades de faixa, ex.: 6º ao 9º Ano)
   type HabRow = { codigo_bncc: string; disciplina: string | null; titulo: string | null; objetivo: string | null; ano: string | null };
   let habRows: HabRow[] = [];
+  const anoFilters = getAnoFilters(serie);
   const { data: habsSerie } = await supabase
     .from("bncc_habilidades")
     .select("codigo_bncc, disciplina, titulo, objetivo, ano")
-    .eq("ano", serie)
-    .limit(30);
+    .in("ano", anoFilters)
+    .order("codigo_bncc", { ascending: true })
+    .limit(1000);
   habRows = (habsSerie || []) as unknown as HabRow[];
   if (habRows.length === 0) {
     const { data: fb } = await supabase
       .from("bncc_habilidades")
       .select("codigo_bncc, disciplina, titulo, objetivo, ano")
-      .limit(10);
+      .order("codigo_bncc", { ascending: true })
+      .limit(1000);
     habRows = (fb || []) as unknown as HabRow[];
   }
   if (habRows.length === 0) {
