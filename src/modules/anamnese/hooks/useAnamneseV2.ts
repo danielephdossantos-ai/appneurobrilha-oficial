@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/database/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
+
+type ChildUpdate = Database["public"]["Tables"]["children"]["Update"];
 
 interface Row {
   id: string;
@@ -19,9 +22,9 @@ function cleanText(value: unknown) {
   return typeof value === "string" ? value.trim().replace(/\s+/g, " ") : "";
 }
 
-function childIdentityPatchFromResponses(responses: AnamneseV2Responses) {
+function childIdentityPatchFromResponses(responses: AnamneseV2Responses): ChildUpdate {
   const step1 = responses.step1 ?? {};
-  const patch: Record<string, string | number | boolean> = {
+  const patch: ChildUpdate = {
     anamnese_completa: true,
   };
 
