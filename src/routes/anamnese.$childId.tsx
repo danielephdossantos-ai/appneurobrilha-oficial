@@ -7,6 +7,40 @@ import { toast } from "sonner";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
+async function ensureUserProfile(user: { id: string; email?: string | null; user_metadata?: Record<string, unknown> }) {
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (profileError) throw profileError;
+  if (profile) return;
+
+  const displayName =
+    typeof user.user_metadata?.full_name === "string"
+      ? user.user_metadata.full_name
+      : user.email?.split("@")[0] ?? null;
+  const avatarUrl =
+    typeof user.user_metadata?.avatar_url === "string" ? user.user_metadata.avatar_url : null;
+
+  const { error } = await supabase.from("profiles").insert({
+    id: user.id,
+    display_name: displayName,
+    avatar_url: avatarUrl,
+  });
+
+  if (error) throw error;
+}
+
+async function createPlaceholderChild(userId: string) {
+  return supabase
+    .from("children")
+    .insert({ user_id: userId, nome: "Nova criança" })
+    .select("id")
+    .single();
+}
+
 export const Route = createFileRoute("/anamnese/$childId")({
   component: AnamneseRoute,
 });
@@ -24,13 +58,15 @@ function AnamneseRoute() {
       setCreating(true);
       try {
         const { data: auth, error: authErr } = await supabase.auth.getUser();
-        const userId = auth?.user?.id;
-        if (authErr || !userId) {
+        const user = auth?.user;
+        const userId = user?.id;
+        if (authErr || !userId || !user) {
           await supabase.auth.signOut().catch(() => {});
           toast.error("Sessão expirada. Faça login novamente.");
           navigate({ to: "/auth", replace: true });
           return;
         }
+        await ensureUserProfile(user);
         const { data: existing, error: listErr } = await supabase
           .from("children")
           .select("id")
@@ -41,19 +77,14 @@ function AnamneseRoute() {
           navigate({ to: "/painel-pais", replace: true });
           return;
         }
-        const { data, error } = await supabase
-          .from("children")
-          .insert({ user_id: userId, nome: "Nova criança" })
-          .select("id")
-          .single();
+        let { data, error } = await createPlaceholderChild(userId);
+        if (error && ((error as any).code === "23503" || /foreign key/i.test(error.message))) {
+          await ensureUserProfile(user);
+          const retry = await createPlaceholderChild(userId);
+          data = retry.data;
+          error = retry.error;
+        }
         if (error) {
-          // Sessão antiga referenciando um usuário que não existe mais em auth.users
-          if ((error as any).code === "23503" || /foreign key/i.test(error.message)) {
-            await supabase.auth.signOut().catch(() => {});
-            toast.error("Sua sessão expirou. Entre novamente para continuar.");
-            navigate({ to: "/auth", replace: true });
-            return;
-          }
           throw error;
         }
         if (!cancelled && data?.id) {

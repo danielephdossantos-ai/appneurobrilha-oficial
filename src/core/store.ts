@@ -217,7 +217,10 @@ export interface AnamnesisData {
   edit_count: number;
 }
 
-const ACTIVE_CHILD_KEY = "neurobrilha:activeChildId";
+const ACTIVE_CHILD_LEGACY_KEY = "neurobrilha:activeChildId";
+const ACTIVE_CHILD_KEY_PREFIX = "neurobrilha:activeChildId:";
+
+const activeChildStorageKey = (userId: string) => `${ACTIVE_CHILD_KEY_PREFIX}${userId}`;
 
 const isAuthExpiredError = (error: unknown) => {
   const possibleError = error as { message?: unknown; status?: unknown };
@@ -229,20 +232,51 @@ const isAuthExpiredError = (error: unknown) => {
 
 export function useAppState() {
   const queryClient = useQueryClient();
-  const [activeChildId, setActiveChildId] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem(ACTIVE_CHILD_KEY);
-    }
-    return null;
+  const [activeChildId, setActiveChildId] = useState<string | null>(null);
+
+  const { data: authUserId = null, isLoading: isAuthLoading } = useQuery({
+    queryKey: ["auth-user-id"],
+    queryFn: async () => {
+      const { data } = await supabase.auth.getUser();
+      return data.user?.id ?? null;
+    },
+    staleTime: 1000 * 30,
   });
 
-  const { data: children = [], isLoading } = useQuery({
-    queryKey: ["children"],
+  const { data: children = [], isLoading: isChildrenLoading } = useQuery({
+    queryKey: ["children", authUserId],
+    enabled: !!authUserId,
     queryFn: async () => {
-      const profiles = await ChildProfileService.getAll();
+      if (!authUserId) return [];
+      const profiles = await ChildProfileService.getAllByUserId(authUserId);
       return profiles.map((child) => normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }));
     },
   });
+
+  useEffect(() => {
+    if (!authUserId || typeof window === "undefined") {
+      setActiveChildId(null);
+      return;
+    }
+
+    localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
+    const key = activeChildStorageKey(authUserId);
+    const stored = localStorage.getItem(key);
+    const storedBelongsToUser = stored ? children.some((child) => child.id === stored) : false;
+
+    if (storedBelongsToUser) {
+      setActiveChildId(stored);
+      return;
+    }
+
+    const firstChildId = children[0]?.id ?? null;
+    setActiveChildId(firstChildId);
+    if (firstChildId) {
+      localStorage.setItem(key, firstChildId);
+    } else {
+      localStorage.removeItem(key);
+    }
+  }, [authUserId, children]);
 
   const addChildMutation = useMutation({
     mutationFn: async (newChild: Omit<Child, "id" | "user_id">) => {
@@ -262,7 +296,7 @@ export function useAppState() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
       setActiveChildId(data.id);
-      localStorage.setItem(ACTIVE_CHILD_KEY, data.id);
+      if (authUserId) localStorage.setItem(activeChildStorageKey(authUserId), data.id);
       toast.success("Criança cadastrada com sucesso!");
     },
     onError: (error: unknown) => {
@@ -326,7 +360,9 @@ export function useAppState() {
   });
 
   const logout = async () => {
-    localStorage.removeItem(ACTIVE_CHILD_KEY);
+    await queryClient.cancelQueries();
+    if (authUserId) localStorage.removeItem(activeChildStorageKey(authUserId));
+    localStorage.removeItem(ACTIVE_CHILD_LEGACY_KEY);
     await supabase.auth.signOut();
     queryClient.clear();
     window.location.href = "/auth";
@@ -335,12 +371,12 @@ export function useAppState() {
   return {
     children,
     activeChild,
-    isLoading,
+    isLoading: isAuthLoading || isChildrenLoading,
     session: sessionData ?? null,
     logout,
     setActiveChild: (id: string) => {
       setActiveChildId(id);
-      localStorage.setItem(ACTIVE_CHILD_KEY, id);
+      if (authUserId) localStorage.setItem(activeChildStorageKey(authUserId), id);
     },
     addChild: addChildMutation.mutate,
     updateChild: (id: string, patch: Partial<Child>) => updateChildMutation.mutate({ id, patch }),
