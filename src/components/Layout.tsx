@@ -102,7 +102,6 @@ const navigationSequence = [
   "/reforco-brilha",
   "/neuro-treino",
   "/brilha-vida",
-  "/jornada-365",
   "/rotina",
   "/painel-pais",
   "/progressao",
