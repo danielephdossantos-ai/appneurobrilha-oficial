@@ -596,7 +596,7 @@ function ReforcoBrilha() {
             <AulaInfinita query={searchQuery.trim()} />
           )}
 
-          {searchResult && searchResult.main && searchQuery.trim().length >= 3 && (
+          {searchQuery.trim().length >= 3 && (
             <BibliotecaInternet query={searchQuery.trim()} />
           )}
 
