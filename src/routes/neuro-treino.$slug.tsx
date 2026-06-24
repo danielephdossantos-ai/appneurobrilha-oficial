@@ -1965,6 +1965,7 @@ function TracadoLetras({ p, onDone }: any) {
 // ============== 22. Triagem de Categorias ==============
 // Mecânica única: arrastar itens para caixas; valida ao colocar todos
 function TriagemCategorias({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [assigned, setAssigned] = useState<Record<number, string>>({}); // itemIndex → caixaName
   const [dragging, setDragging] = useState<number | null>(null);
   const drop = (caixa: string) => {
@@ -1978,6 +1979,8 @@ function TriagemCategorias({ p, onDone }: any) {
       onDone(acertou);
     }
   }, [assigned]);
+  const itemSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const slotEmoji = sens.largerTargets ? "w-12 h-12" : "w-10 h-10";
   return (
     <div className="text-center">
       <div className="flex gap-3 justify-center mb-4 flex-wrap">
@@ -1988,7 +1991,7 @@ function TriagemCategorias({ p, onDone }: any) {
               key={i}
               draggable
               onDragStart={() => setDragging(i)}
-              className="p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing w-16 h-16 flex items-center justify-center"
+              className={`p-2 bg-card border-2 border-border rounded-xl cursor-grab active:cursor-grabbing ${itemSize} flex items-center justify-center`}
             >
               <RenderEmoji e={it.e} className="w-full h-full" />
             </div>
@@ -2004,13 +2007,13 @@ function TriagemCategorias({ p, onDone }: any) {
             className="min-h-[140px] bg-lilac/10 border-2 border-dashed border-lilac rounded-2xl p-3"
           >
             <div className="font-black mb-2 flex items-center justify-center gap-2">
-              <RenderEmoji e={c.emoji} label={c.nome} className="w-10 h-10" />
+              <RenderEmoji e={c.emoji} label={c.nome} className={slotEmoji} />
               {c.nome}
             </div>
             <div className="flex flex-wrap gap-1 justify-center">
               {p.itens.map((it: any, i: number) => {
                 if (assigned[i] !== c.nome) return null;
-                return <RenderEmoji key={i} e={it.e} className="w-10 h-10" />;
+                return <RenderEmoji key={i} e={it.e} className={slotEmoji} />;
               })}
             </div>
           </div>
@@ -2022,6 +2025,9 @@ function TriagemCategorias({ p, onDone }: any) {
 
 // ============== 23. Expressão e Emoção ==============
 function ExpressaoEmocao({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const emojiSize = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
+  const hover = sens.reduceMotion ? "hover:border-lilac" : "hover:border-lilac hover:scale-105";
   return (
     <div className="text-center">
       <div className="bg-card border-2 border-border rounded-2xl p-6 mb-6">
@@ -2036,9 +2042,9 @@ function ExpressaoEmocao({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o === p.correta)}
-              className="bg-card border-2 border-border rounded-2xl py-6 px-3 font-black text-lg hover:border-lilac hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-2xl py-6 px-3 font-black text-lg ${hover} transition-all flex flex-col items-center gap-2`}
             >
-              <RenderEmoji e={emoji} label={limpo} className="w-20 h-20" />
+              <RenderEmoji e={emoji} label={limpo} className={emojiSize} />
               <span>{limpo}</span>
             </button>
           );
