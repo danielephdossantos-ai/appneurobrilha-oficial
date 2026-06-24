@@ -38,6 +38,7 @@ import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
+import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import soproCarro from "@/assets/neuro-treino/sopro/carro.png";
 import soproVela from "@/assets/neuro-treino/sopro/vela.png";
 import soproBalao from "@/assets/neuro-treino/sopro/balao.png";
@@ -2804,6 +2805,7 @@ function AlvoMovel({ p, onDone }: any) {
 
 // 32. ACHAR O DIFERENTE — grade com um item diferente
 function AcharDiferente({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<number | null>(null);
   const handleClick = (idx: number) => {
     if (selecionado !== null) return;
@@ -2811,6 +2813,9 @@ function AcharDiferente({ p, onDone }: any) {
     setTimeout(() => onDone(idx === p.posAlvo), 600);
   };
   const cols = p.colunas ?? 3;
+  const errBorder = sens.softColors ? "border-amber-400" : "border-destructive";
+  const errBg = sens.softColors ? "bg-amber-100 dark:bg-amber-900/30" : "bg-destructive/20";
+  const emojiSize = sens.largerTargets ? "w-14 h-14" : "w-10 h-10";
   return (
     <div className="space-y-4">
       <div className="text-center text-sm text-muted-foreground font-bold">
@@ -2819,21 +2824,22 @@ function AcharDiferente({ p, onDone }: any) {
       <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
         {p.grid.map((emoji: string, i: number) => {
           const certa = i === p.posAlvo;
+          const isPick = selecionado === i;
           const bg =
-            selecionado === i
+            isPick
               ? certa
-                ? "bg-success/20 border-success scale-110"
-                : "bg-destructive/20 border-destructive"
+                ? `bg-success/20 border-success${sens.reduceMotion ? "" : " scale-110"}`
+                : `${errBg} ${errBorder}`
               : selecionado !== null && certa
                 ? "bg-success/20 border-success"
-                : "bg-card border-border hover:border-violet/50 hover:scale-105";
+                : `bg-card border-border hover:border-violet/50${sens.reduceMotion ? "" : " hover:scale-105"}`;
           return (
             <button
               key={i}
               onClick={() => handleClick(i)}
               className={`rounded-xl border-2 p-1 flex items-center justify-center transition-all ${bg}`}
             >
-              <RenderEmoji e={emoji} className="w-10 h-10" />
+              <RenderEmoji e={emoji} className={emojiSize} />
             </button>
           );
         })}
