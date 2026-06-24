@@ -1946,17 +1946,56 @@ const CORES_DIR = [
   { nome: "Pêssego", hex: "#fdba74" },
 ];
 
+type Traco = { color: string; pts: { x: number; y: number }[] };
+
 function TracadoLetras({ p, onDone }: any) {
   const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
   const [nomeCor, setNomeCor] = useState<string>(CORES_ESQ[0].nome);
-  const [fill, setFill] = useState<string>("white");
+  const [tracos, setTracos] = useState<Traco[]>([]);
+  const desenhando = useRef(false);
+  const svgRef = useRef<SVGSVGElement | null>(null);
 
   const escolher = (c: { nome: string; hex: string }) => {
     setCor(c.hex);
     setNomeCor(c.nome);
   };
 
-  const pintar = () => setFill(cor);
+  const ptDe = (e: React.PointerEvent): { x: number; y: number } | null => {
+    const svg = svgRef.current;
+    if (!svg) return null;
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    };
+  };
+
+  const start = (e: React.PointerEvent) => {
+    e.preventDefault();
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    const pt = ptDe(e);
+    if (!pt) return;
+    desenhando.current = true;
+    setTracos((t) => [...t, { color: cor, pts: [pt] }]);
+  };
+  const move = (e: React.PointerEvent) => {
+    if (!desenhando.current) return;
+    const pt = ptDe(e);
+    if (!pt) return;
+    setTracos((t) => {
+      const cp = t.slice();
+      const last = cp[cp.length - 1];
+      cp[cp.length - 1] = { ...last, pts: [...last.pts, pt] };
+      return cp;
+    });
+  };
+  const end = () => { desenhando.current = false; };
+
+  const limpar = () => setTracos([]);
+  const desfazer = () => setTracos((t) => t.slice(0, -1));
+
+  const toPath = (pts: { x: number; y: number }[]) =>
+    pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
 
   const Bolinha = ({ c }: { c: { nome: string; hex: string } }) => (
     <button
@@ -1972,7 +2011,7 @@ function TracadoLetras({ p, onDone }: any) {
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Escolha uma cor e toque na letra <span className="text-coral">{p.letra}</span> para pintar
+        Escolha uma cor e desenhe com o dedo dentro da letra <span className="text-coral">{p.letra}</span>
       </div>
 
       <div className="flex items-center justify-center gap-3 md:gap-5">
@@ -1984,7 +2023,18 @@ function TracadoLetras({ p, onDone }: any) {
           className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
           style={{ width: 320 }}
         >
-          <svg viewBox="0 0 100 100" className="w-full cursor-pointer" onClick={pintar}>
+          <svg
+            ref={svgRef}
+            viewBox="0 0 100 100"
+            className="w-full touch-none select-none"
+            style={{ cursor: "crosshair" }}
+            onPointerDown={start}
+            onPointerMove={move}
+            onPointerUp={end}
+            onPointerCancel={end}
+            onPointerLeave={end}
+          >
+            {/* Letra oca (guia) */}
             <text
               x={50}
               y={54}
@@ -1993,19 +2043,32 @@ function TracadoLetras({ p, onDone }: any) {
               fontSize={108}
               fontWeight={900}
               fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
-              fill={fill}
-              stroke="#0f172a"
+              fill="none"
+              stroke="#cbd5e1"
               strokeWidth={2}
               strokeLinejoin="round"
               strokeLinecap="round"
-              paintOrder="stroke"
+              style={{ pointerEvents: "none" }}
             >
               {p.letra}
             </text>
+            {/* Traços da criança */}
+            {tracos.map((t, i) => (
+              <path
+                key={i}
+                d={toPath(t.pts)}
+                fill="none"
+                stroke={t.color}
+                strokeWidth={5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ pointerEvents: "none" }}
+              />
+            ))}
           </svg>
           <div className="flex items-center justify-between px-2 pt-1">
             <div className="font-black text-xl tracking-wide">
-              <span style={{ color: fill === "white" ? "#dc2626" : fill }}>{p.letra}</span>
+              <span style={{ color: cor }}>{p.letra}</span>
               <span className="text-slate-900">{p.palavra.slice(p.letra.length)}</span>
             </div>
             <div className="text-3xl leading-none">{p.emoji}</div>
@@ -2018,22 +2081,39 @@ function TracadoLetras({ p, onDone }: any) {
       </div>
 
       <div className="text-xs text-muted-foreground">
-        Cor escolhida: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span>
+        Cor: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span>
       </div>
 
-      <button
-        onClick={() => {
-          toast.success(`Letra ${p.letra} pintada de ${nomeCor}! 🎨`);
-          onDone(true);
-        }}
-        disabled={fill === "white"}
-        className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
-      >
-        Terminei! ✨
-      </button>
+      <div className="flex items-center justify-center gap-2">
+        <button
+          onClick={desfazer}
+          disabled={!tracos.length}
+          className="bg-muted text-foreground font-bold px-4 py-2 rounded-full shadow-sm disabled:opacity-40"
+        >
+          ↶ Desfazer
+        </button>
+        <button
+          onClick={limpar}
+          disabled={!tracos.length}
+          className="bg-muted text-foreground font-bold px-4 py-2 rounded-full shadow-sm disabled:opacity-40"
+        >
+          🔄 Limpar
+        </button>
+        <button
+          onClick={() => {
+            toast.success(`Mandou bem na letra ${p.letra}! 🎨`);
+            onDone(true);
+          }}
+          disabled={!tracos.length}
+          className="bg-success text-white font-black px-6 py-2 rounded-full shadow-md disabled:opacity-40"
+        >
+          Terminei! ✨
+        </button>
+      </div>
     </div>
   );
 }
+
 
 
 
