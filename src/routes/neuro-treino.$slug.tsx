@@ -2201,8 +2201,14 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
 // Detecta SOM no microfone (volume), não palavras → reconhece na hora.
 // Sempre celebra. Sem reconhecimento de voz que demora e frustra.
 function ArticulacaoSons({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const scaleCls = sens.reduceMotion ? "" : "scale-110";
+  const emojiSize = sens.largerTargets ? "w-32 h-32" : "w-28 h-28";
   const palavra: string = p.palavra;
   const silabas: string[] = p.silabas;
+
   const [acesas, setAcesas] = useState<Set<number>>(new Set());
   const [feedback, setFeedback] = useState("Toque no microfone e fale a palavra 🎤");
   const [ouvindo, setOuvindo] = useState(false);
