@@ -45,7 +45,7 @@ async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
           fonte: "youtube",
           titulo: sn.title || "Vídeo",
           descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
-          url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
+          url: `https://youtu.be/${it.id.videoId}`,
           thumbnail: thumb,
           conteudo: null,
         };
