@@ -84,7 +84,6 @@ const navCrianca = [
   { to: "/neuro-treino", label: "Neuro-Treino", icon: Brain },
   { to: "/brilha-vida", label: "Brilha Vida", icon: Heart },
   { to: "/rotina", label: "Rotina", icon: ListChecks },
-  { to: "/rotina", label: "Rotina", icon: ListChecks },
 ];
 
 const navPais = [
