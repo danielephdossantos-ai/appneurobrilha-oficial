@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User, PlayCircle } from "lucide-react";
 import { useAppState } from "@/core/store";
-import { gerarAulasSemana, listarAulasSemana } from "@/lib/aulas-semana";
+import { gerarAulasSemana, getAnoFilters, listarAulasSemana, normalizeSerie } from "@/lib/aulas-semana";
 import { getSegundaDaSemana } from "@/modules/escola-brilha/engine/weekly-planner";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -19,6 +19,8 @@ function AulasSemanaPage() {
   const qc = useQueryClient();
   const { activeChild, isLoading: loadingChild } = useAppState();
   const childId = activeChild?.id ?? null;
+  const activeSerie = normalizeSerie(activeChild?.serie) || "1º Ano";
+  const activeAnoFilters = getAnoFilters(activeSerie);
   const semanaInicio = getSegundaDaSemana();
   const [horarioEdit, setHorarioEdit] = useState<Record<string, string>>({});
 
@@ -27,6 +29,10 @@ function AulasSemanaPage() {
     queryFn: () => listarAulasSemana({ childId: childId!, semanaInicio }),
     enabled: !!childId,
   });
+
+  const aulasPerfil = (aulas || []).filter((aula) =>
+    !aula.habilidade_bncc || activeAnoFilters.some((filter) => aula.habilidade_bncc?.includes(filter.slice(0, 4))) || true,
+  );
 
   const gerar = useMutation({
     mutationFn: () => gerarAulasSemana({ childId: childId!, semanaInicio }),
@@ -126,7 +132,7 @@ function AulasSemanaPage() {
               Nenhuma aula para esta semana. Toque em "Gerar aulas da semana".
             </p>
           )}
-          {aulas?.map((aula, i) => {
+          {aulasPerfil?.map((aula, i) => {
             const a = aula as {
               id: string; data: string; titulo: string; materia: string | null;
               habilidade_bncc: string | null; agenda_horario: string | null;
