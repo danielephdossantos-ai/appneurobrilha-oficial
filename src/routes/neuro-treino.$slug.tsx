@@ -1927,130 +1927,112 @@ function SonsCorpo({ p, onDone }: any) {
   );
 }
 
-// ============== 19. Traçado de Letras ==============
-// Letra oca (contorno SVG real) + pontos numerados nos inícios + setas direcionais + palavra/figura.
-type GuiaDir = "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw";
-const ARROW_MAP: Record<GuiaDir, { dx: number; dy: number; rot: number }> = {
-  right: { dx:  9, dy:  0, rot:   0 },
-  left:  { dx: -9, dy:  0, rot: 180 },
-  down:  { dx:  0, dy:  9, rot:  90 },
-  up:    { dx:  0, dy: -9, rot: -90 },
-  dr:    { dx:  7, dy:  7, rot:  45 },
-  dl:    { dx: -7, dy:  7, rot: 135 },
-  ur:    { dx:  7, dy: -7, rot: -45 },
-  ul:    { dx: -7, dy: -7, rot:-135 },
-  cw:    { dx:  6, dy:  6, rot:  90 },
-  ccw:   { dx: -6, dy:  6, rot:  90 },
-};
+// ============== 19. Colorir a Letra ==============
+// Letra oca grande + paleta de 12 cores (6 de cada lado). Criança escolhe cor e toca na letra para pintar.
+const CORES_ESQ = [
+  { nome: "Rosa",     hex: "#ec4899" },
+  { nome: "Vermelho", hex: "#ef4444" },
+  { nome: "Laranja",  hex: "#f97316" },
+  { nome: "Amarelo",  hex: "#facc15" },
+  { nome: "Verde",    hex: "#22c55e" },
+  { nome: "Azul",     hex: "#3b82f6" },
+];
+const CORES_DIR = [
+  { nome: "Roxo",    hex: "#a855f7" },
+  { nome: "Ciano",   hex: "#06b6d4" },
+  { nome: "Marrom",  hex: "#92400e" },
+  { nome: "Preto",   hex: "#0f172a" },
+  { nome: "Cinza",   hex: "#94a3b8" },
+  { nome: "Pêssego", hex: "#fdba74" },
+];
 
 function TracadoLetras({ p, onDone }: any) {
-  const [step, setStep] = useState(0);
-  const guias: { x: number; y: number; dir: GuiaDir }[] = p.guias;
+  const [cor, setCor] = useState<string>(CORES_ESQ[0].hex);
+  const [nomeCor, setNomeCor] = useState<string>(CORES_ESQ[0].nome);
+  const [fill, setFill] = useState<string>("white");
 
-  const tap = (i: number) => {
-    if (i !== step) {
-      toast(`Toque no ponto ${step + 1}`);
-      return;
-    }
-    if (i + 1 >= guias.length) {
-      toast.success(`Letra ${p.letra} de ${p.palavra}! ✨`);
-      onDone(true);
-    } else {
-      setStep(i + 1);
-    }
+  const escolher = (c: { nome: string; hex: string }) => {
+    setCor(c.hex);
+    setNomeCor(c.nome);
   };
+
+  const pintar = () => setFill(cor);
+
+  const Bolinha = ({ c }: { c: { nome: string; hex: string } }) => (
+    <button
+      onClick={() => escolher(c)}
+      aria-label={c.nome}
+      className={`w-10 h-10 md:w-12 md:h-12 rounded-full border-4 transition-transform ${
+        cor === c.hex ? "border-slate-900 scale-110" : "border-white"
+      } shadow-md hover:scale-110`}
+      style={{ background: c.hex }}
+    />
+  );
 
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
-        Toque os pontinhos em ordem para escrever a letra {p.letra}
+        Escolha uma cor e toque na letra <span className="text-coral">{p.letra}</span> para pintar
       </div>
-      <div
-        className="mx-auto bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
-        style={{ maxWidth: 340 }}
-      >
-        <svg viewBox="0 0 100 100" className="w-full">
-          {/* Letra OCA — contorno real do glifo */}
-          <text
-            x={50}
-            y={52}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fontSize={92}
-            fontWeight={900}
-            fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
-            fill="none"
-            stroke="#0f172a"
-            strokeWidth={1.6}
-            strokeLinejoin="round"
-          >
-            {p.letra}
-          </text>
 
-          {/* Setas direcionais (tracejado leve) */}
-          {guias.map((g, i) => {
-            const m = ARROW_MAP[g.dir];
-            const tx = g.x + m.dx;
-            const ty = g.y + m.dy;
-            const done = i < step;
-            const color = done ? "hsl(var(--success))" : i === step ? "#f97316" : "#94a3b8";
-            return (
-              <g key={`arr-${i}`}>
-                <line
-                  x1={g.x} y1={g.y} x2={tx} y2={ty}
-                  stroke={color} strokeWidth={1.2} strokeDasharray="2 2"
-                />
-                <polygon
-                  points="0,-2.5 5,0 0,2.5"
-                  fill={color}
-                  transform={`translate(${tx} ${ty}) rotate(${m.rot})`}
-                />
-              </g>
-            );
-          })}
+      <div className="flex items-center justify-center gap-3 md:gap-5">
+        <div className="flex flex-col gap-2">
+          {CORES_ESQ.map((c) => <Bolinha key={c.hex} c={c} />)}
+        </div>
 
-          {/* Pontos numerados nos inícios dos traços */}
-          {guias.map((g, i) => {
-            const done = i < step;
-            const current = i === step;
-            return (
-              <g key={`pt-${i}`} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
-                <circle
-                  cx={g.x} cy={g.y}
-                  r={current ? 5.2 : 4.4}
-                  fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
-                  stroke={done ? "white" : "#0f172a"}
-                  strokeWidth={1.2}
-                  className={current ? "animate-pulse" : ""}
-                />
-                {!done && (
-                  <text
-                    x={g.x} y={g.y}
-                    textAnchor="middle" dominantBaseline="central"
-                    fontSize={5}
-                    fontWeight={900}
-                    fill={current ? "white" : "#0f172a"}
-                  >
-                    {i + 1}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-        {/* Palavra + figura embaixo (HTML pra fonte de emoji do sistema) */}
-        <div className="flex items-center justify-between px-2 pt-1">
-          <div className="font-black text-xl tracking-wide">
-            <span className="text-red-600">{p.letra}</span>
-            <span className="text-slate-900">{p.palavra.slice(1)}</span>
+        <div
+          className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
+          style={{ width: 260 }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full cursor-pointer" onClick={pintar}>
+            <text
+              x={50}
+              y={52}
+              textAnchor="middle"
+              dominantBaseline="central"
+              fontSize={92}
+              fontWeight={900}
+              fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
+              fill={fill}
+              stroke="#0f172a"
+              strokeWidth={1.6}
+              strokeLinejoin="round"
+            >
+              {p.letra}
+            </text>
+          </svg>
+          <div className="flex items-center justify-between px-2 pt-1">
+            <div className="font-black text-xl tracking-wide">
+              <span style={{ color: fill === "white" ? "#dc2626" : fill }}>{p.letra}</span>
+              <span className="text-slate-900">{p.palavra.slice(1)}</span>
+            </div>
+            <div className="text-3xl leading-none">{p.emoji}</div>
           </div>
-          <div className="text-3xl leading-none">{p.emoji}</div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          {CORES_DIR.map((c) => <Bolinha key={c.hex} c={c} />)}
         </div>
       </div>
 
+      <div className="text-xs text-muted-foreground">
+        Cor escolhida: <span className="font-bold" style={{ color: cor }}>{nomeCor}</span>
+      </div>
+
+      <button
+        onClick={() => {
+          toast.success(`Letra ${p.letra} pintada de ${nomeCor}! 🎨`);
+          onDone(true);
+        }}
+        disabled={fill === "white"}
+        className="mt-2 bg-success text-white font-black px-6 py-3 rounded-full shadow-md disabled:opacity-40"
+      >
+        Terminei! ✨
+      </button>
     </div>
   );
 }
+
 
 
 // ============== 20. Caminho dos Pontos ==============
