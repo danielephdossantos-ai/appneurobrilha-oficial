@@ -29,6 +29,7 @@ import { MathVisualizer } from "../components/MathVisualizer";
 import { NextLessonInlineButton } from "../components/NextLessonInlineButton";
 import type { LessonRef } from "../hooks/useNextLesson";
 import { cleanVisibleLessonText, friendlyLessonTitle } from "../utils/bnccDisplayText";
+import { buildSkillLessonC, isLowQualitySkillLesson } from "../utils/skillLessonBuilder";
 
 interface Props {
   lesson: ActivityLessonC;
@@ -59,6 +60,23 @@ const LETTER_COLORS: Record<string, string> = {
 };
 
 function sanitizeLesson(lesson: ActivityLessonC): ActivityLessonC {
+  if (isLowQualitySkillLesson(lesson)) {
+    return buildSkillLessonC({
+      source: {
+        id: lesson.id,
+        codigo_bncc: lesson.bncc_code,
+        serie: lesson.grade,
+        disciplina: lesson.subject,
+        titulo: lesson.title,
+        descricao: lesson.bncc_description,
+        xp: lesson.xp,
+      },
+      area: lesson.area,
+      areaLabel: lesson.area_label,
+      color: lesson.color,
+    });
+  }
+
   const title = friendlyLessonTitle({ title: lesson.title, subject: lesson.subject });
   const description = cleanVisibleLessonText(
     lesson.bncc_description,
