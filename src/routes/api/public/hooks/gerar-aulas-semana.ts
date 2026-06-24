@@ -122,6 +122,26 @@ export const Route = createFileRoute("/api/public/hooks/gerar-aulas-semana")({
               descricao: h.titulo || h.objetivo || h.codigo_bncc,
               ano: h.ano,
             }));
+            const habByCodigo = new Map(habilidades.map((h) => [h.codigo, h]));
+
+            // Trilha anual fixa — busca a semana do calendário escolar
+            const ANCHOR = new Date("2026-02-02T00:00:00Z");
+            const sIni = new Date(semanaInicio);
+            const diffWeeks = Math.floor((sIni.getTime() - ANCHOR.getTime()) / (7 * 24 * 60 * 60 * 1000));
+            const semanaEscolar = ((diffWeeks % 40) + 40) % 40 + 1;
+            const { data: trilhaRows } = await supabaseAdmin
+              .from("trilha_anual")
+              .select("dia, codigo_bncc")
+              .in("ano", anoFilters)
+              .eq("semana", semanaEscolar)
+              .eq("ordem_no_dia", 1)
+              .order("dia", { ascending: true });
+            const trilhaSemana = ((trilhaRows || []) as Array<{ dia: number; codigo_bncc: string }>)
+              .map((t) => {
+                const h = habByCodigo.get(t.codigo_bncc);
+                return h ? { dia: t.dia, habilidade: h } : null;
+              })
+              .filter((x): x is { dia: number; habilidade: typeof habilidades[number] } => x !== null);
 
             const { data: matrizRaw } = await supabaseAdmin
               .from("pedagogical_activities_base")
@@ -159,8 +179,9 @@ export const Route = createFileRoute("/api/public/hooks/gerar-aulas-semana")({
               userId: child.user_id,
               perfil,
               serie,
-              semanaInicio: new Date(semanaInicio),
+              semanaInicio: sIni,
               habilidades,
+              trilhaSemana,
               matriz: matriz as never,
               midias: (midias || []) as never,
               jaDominadas,

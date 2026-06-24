@@ -11,18 +11,26 @@ import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 export type PerfilNeuro = "TEA" | "TDAH" | "Dislexia" | "Neurotipico";
 
+export interface HabilidadeTrilha {
+  codigo: string;
+  disciplina: string;
+  descricao: string;
+  ano?: string | null;
+}
+
 export interface PlannerInputs {
   childId: string;
   userId: string;
   perfil: PerfilNeuro;
   serie: string; // "1º Ano", "6º Ano", "Pré-Escola"...
   semanaInicio: Date; // segunda-feira da semana alvo
-  habilidades: Array<{
-    codigo: string; // ex.: EF01LP01
-    disciplina: string; // ex.: "Língua Portuguesa"
-    descricao: string;
-    ano?: string | null;
-  }>;
+  habilidades: HabilidadeTrilha[];
+  /**
+   * Trilha anual fixa: lista [dia 1..5] de habilidades vindas de `trilha_anual`.
+   * Quando presente, substitui o sorteio por disciplina e garante a sequência
+   * pedagógica determinística do calendário escolar.
+   */
+  trilhaSemana?: Array<{ dia: number; habilidade: HabilidadeTrilha }>;
   matriz: Array<{
     id: string;
     serie?: string | null;
@@ -204,28 +212,46 @@ function buildSteps(
 
 // ── Função principal ────────────────────────────────────────────────────────
 export function planWeek(inputs: PlannerInputs): AulaSemanaPlan[] {
-  const { perfil, semanaInicio, habilidades, matriz, midias, jaDominadas } = inputs;
+  const { perfil, semanaInicio, habilidades, matriz, midias, jaDominadas, trilhaSemana } = inputs;
   const rules = PERFIL_RULES[perfil];
 
-  const candidatas = habilidades.filter(
-    (h) => !jaDominadas || !jaDominadas.has(h.codigo),
-  );
-  if (candidatas.length === 0) return [];
+  // Sequência diária: prioriza trilha_anual fixa; cai para sorteio antigo se ausente.
+  let sequenciaDia: Array<HabilidadeTrilha> = [];
 
-  // Garante diversidade de disciplinas ao longo da semana
-  const porDisciplina = new Map<string, typeof candidatas>();
-  for (const h of candidatas) {
-    const k = h.disciplina || "Geral";
-    if (!porDisciplina.has(k)) porDisciplina.set(k, []);
-    porDisciplina.get(k)!.push(h);
+  if (trilhaSemana && trilhaSemana.length > 0) {
+    const porDia = new Map<number, HabilidadeTrilha>();
+    for (const t of trilhaSemana) {
+      if (!porDia.has(t.dia)) porDia.set(t.dia, t.habilidade);
+    }
+    for (let d = 1; d <= 5; d++) {
+      const h = porDia.get(d);
+      if (h) sequenciaDia.push(h);
+    }
   }
-  const disciplinas = [...porDisciplina.keys()];
+
+  if (sequenciaDia.length === 0) {
+    const candidatas = habilidades.filter(
+      (h) => !jaDominadas || !jaDominadas.has(h.codigo),
+    );
+    if (candidatas.length === 0) return [];
+    const porDisciplina = new Map<string, HabilidadeTrilha[]>();
+    for (const h of candidatas) {
+      const k = h.disciplina || "Geral";
+      if (!porDisciplina.has(k)) porDisciplina.set(k, []);
+      porDisciplina.get(k)!.push(h);
+    }
+    const disciplinas = [...porDisciplina.keys()];
+    for (let i = 0; i < 5; i++) {
+      const disc = disciplinas[i % disciplinas.length];
+      const lista = porDisciplina.get(disc)!;
+      sequenciaDia.push(lista[i % lista.length]);
+    }
+  }
 
   const aulas: AulaSemanaPlan[] = [];
-  for (let i = 0; i < 5; i++) {
-    const disc = disciplinas[i % disciplinas.length];
-    const lista = porDisciplina.get(disc)!;
-    const hab = lista[i % lista.length];
+  for (let i = 0; i < sequenciaDia.length; i++) {
+    const hab = sequenciaDia[i];
+    const disc = hab.disciplina || "Geral";
     const tecnica =
       matriz.find(
         (m) =>
