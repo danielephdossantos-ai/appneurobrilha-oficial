@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User, 
 import { useAppState } from "@/core/store";
 import { gerarAulasSemana, listarAulasSemana } from "@/lib/aulas-semana";
 import { getSegundaDaSemana } from "@/modules/escola-brilha/engine/weekly-planner";
+import { friendlyLessonTitle } from "@/modules/escola-brilha/utils/bnccDisplayText";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -149,7 +150,9 @@ function AulasSemanaPage() {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-black text-sm truncate">{a.titulo}</p>
+                    <p className="text-white font-black text-sm truncate">
+                      {friendlyLessonTitle({ title: a.titulo, subject: a.materia })}
+                    </p>
                     <p className="text-white/50 text-[11px] font-semibold">
                       {a.materia}
                     </p>

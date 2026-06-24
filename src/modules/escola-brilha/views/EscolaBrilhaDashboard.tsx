@@ -19,6 +19,7 @@ import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
 import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
 type StaticLesson = {
@@ -143,7 +144,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <br />
             aprender hoje?
           </h1>
-          <p className="text-white/50 text-sm font-semibold mt-2">BNCC • Educação Adaptativa</p>
+          <p className="text-white/50 text-sm font-semibold mt-2">Educação Adaptativa</p>
         </div>
         <div className="flex justify-between items-end px-4 -mb-6 relative z-10 max-w-xs mx-auto mt-4">
           <motion.img src={pipaImg} alt="Pipa" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />
@@ -213,7 +214,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                     <div>
                       <h2 className="text-white font-black text-lg leading-tight">{serie}</h2>
                       <p className="text-white/40 text-[11px] font-semibold uppercase tracking-widest">
-                        {total} {total === 1 ? "aula" : "aulas"} • BNCC
+                        {total} {total === 1 ? "aula" : "aulas"}
                       </p>
                     </div>
                   </div>
@@ -281,11 +282,6 @@ const LessonCard: React.FC<{
         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${badgeColor}`}>
           {badge}
         </span>
-        {bncc && (
-          <span className="text-[10px] font-mono text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
-            {bncc}
-          </span>
-        )}
         <span className="flex items-center gap-0.5 text-[10px] font-black text-yellow-600">
           <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
           {xp}
@@ -405,7 +401,6 @@ const SubjectFolders: React.FC<{
                         badgeColor={cat.badgeColor}
                         gradient={cat.gradient}
                         xp={cat.xp}
-                        bncc={cat.bncc}
                         illustration={cat.illustration}
                         onClick={() => onStaticClick(cat.id, cat.type)}
                       />
@@ -414,13 +409,12 @@ const SubjectFolders: React.FC<{
                       <LessonCard
                         key={`d-${a.id}`}
                         index={statics.length + j}
-                        title={a.titulo}
-                        subtitle={a.descricao ?? a.disciplina}
+                        title={friendlyLessonTitle({ title: a.titulo, subject: a.disciplina })}
+                        subtitle={a.disciplina}
                         badge={a.disciplina}
                         badgeColor="bg-emerald-100 text-emerald-700"
                         gradient="from-emerald-500 to-teal-600"
                         xp={a.xp}
-                        bncc={a.codigo_bncc ?? undefined}
                         onClick={() => onDbClick(a.id)}
                       />
                     ))}
