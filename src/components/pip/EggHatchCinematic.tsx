@@ -638,34 +638,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     animate={{ x: [0, 3, 0], y: [0, 8, 0], rotate: [0, -15, 0] }}
                     transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut", delay: 0.05 }}
                   />
-                  <motion.path
-                    d="M36 152 C50 142 70 146 90 164"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.72)"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                    animate={{ x: [0, 2, 0, 2, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M184 152 C170 142 150 146 130 164"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.72)"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                    animate={{ x: [0, -2, 0, -2, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M80 100 C100 118 120 118 140 100"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.95)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    animate={{ scale: [0.8, 1, 0.8], opacity: [0.85, 1, 0.85] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ originX: "50%", originY: "50%" }}
-                  />
+                  {/* bochechas e sorriso removidos — bolha sem rosto */}
 
                   <motion.g
                     animate={{ rotate: [0, -8, 0, -8, 0], y: [0, -2, 0, -2, 0] }}
