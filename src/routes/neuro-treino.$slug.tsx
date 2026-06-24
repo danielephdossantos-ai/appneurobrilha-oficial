@@ -509,6 +509,9 @@ function ConscienciaFonologica({ p, onDone }: any) {
 
 // ============== Consciência Silábica (4 sub-tarefas, padrão 2D) ==============
 function ConscienciaSilabica({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-105";
+  const imgSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   const headers: Record<string, string> = {
     contar: `Qual palavra tem ${p.n} pedacinhos?`,
     inicial: `Qual começa com a sílaba ${p.silaba}?`,
@@ -521,6 +524,7 @@ function ConscienciaSilabica({ p, onDone }: any) {
     final: "Sílaba Final",
     formar: "Formar Palavra",
   };
+
   return (
     <div className="text-center">
       <div className="inline-block px-4 py-1 mb-3 rounded-full bg-coral/15 text-coral text-xs font-extrabold uppercase tracking-wider">
@@ -534,7 +538,7 @@ function ConscienciaSilabica({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-primary hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hoverCls}`}
             >
               {img ? (
                 <img
@@ -543,13 +547,14 @@ function ConscienciaSilabica({ p, onDone }: any) {
                   width={128}
                   height={128}
                   loading="lazy"
-                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                  className={`${imgSize} object-contain drop-shadow-md`}
                 />
               ) : (
-                <div className="w-24 h-24 md:w-28 md:h-28 grid place-items-center rounded-xl bg-muted text-2xl font-black text-muted-foreground">
+                <div className={`${imgSize} grid place-items-center rounded-xl bg-muted text-2xl font-black text-muted-foreground`}>
                   {o.nome.slice(0, 2)}
                 </div>
               )}
+
               <div className="font-bold text-sm">{o.nome}</div>
             </button>
           );
