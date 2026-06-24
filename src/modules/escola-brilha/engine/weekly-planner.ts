@@ -11,18 +11,26 @@ import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 export type PerfilNeuro = "TEA" | "TDAH" | "Dislexia" | "Neurotipico";
 
+export interface HabilidadeTrilha {
+  codigo: string;
+  disciplina: string;
+  descricao: string;
+  ano?: string | null;
+}
+
 export interface PlannerInputs {
   childId: string;
   userId: string;
   perfil: PerfilNeuro;
   serie: string; // "1º Ano", "6º Ano", "Pré-Escola"...
   semanaInicio: Date; // segunda-feira da semana alvo
-  habilidades: Array<{
-    codigo: string; // ex.: EF01LP01
-    disciplina: string; // ex.: "Língua Portuguesa"
-    descricao: string;
-    ano?: string | null;
-  }>;
+  habilidades: HabilidadeTrilha[];
+  /**
+   * Trilha anual fixa: lista [dia 1..5] de habilidades vindas de `trilha_anual`.
+   * Quando presente, substitui o sorteio por disciplina e garante a sequência
+   * pedagógica determinística do calendário escolar.
+   */
+  trilhaSemana?: Array<{ dia: number; habilidade: HabilidadeTrilha }>;
   matriz: Array<{
     id: string;
     serie?: string | null;
