@@ -14,6 +14,10 @@ function extractYoutubeId(url: string): string | null {
   return m ? m[1] : null;
 }
 
+function youtubeWatchUrl(videoId: string): string {
+  return `https://youtu.be/${videoId}`;
+}
+
 // transforma URL para uma versão amigável a iframe (mobile / embed)
 function toEmbedUrl(url: string, fonte: string): string {
   try {
@@ -110,14 +114,11 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
         <div className="grid gap-3 md:grid-cols-2">
           {resultados.map((r, i) => {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
-            const abreExterno = false;
             const handleClick = (e: React.MouseEvent) => {
               onAbrirRecurso?.(r);
-              if (abreExterno) return; // deixa o <a target="_blank"> abrir normalmente
               e.preventDefault();
               if (ytId) {
-                setVideoId(ytId);
-                setVideoTitle(r.titulo);
+                  window.open(youtubeWatchUrl(ytId), "_blank", "noopener,noreferrer");
               } else {
                 setPreview({ url: toEmbedUrl(r.url, r.fonte), title: r.titulo, fonte: r.fonte });
               }
@@ -195,28 +196,19 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
             >
               <X className="h-4 w-4 text-black" />
             </button>
-            <div className="aspect-video w-full">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
-                title={videoTitle}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
             <div className="bg-white px-4 py-3 flex items-center justify-between gap-3">
               <p className="text-sm font-bold text-foreground line-clamp-1">{videoTitle}</p>
               <a
-                href={`https://www.youtube.com/watch?v=${videoId}`}
+                href={youtubeWatchUrl(videoId)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => {
                   e.preventDefault();
-                  window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank", "noopener,noreferrer");
+                  window.open(youtubeWatchUrl(videoId), "_blank", "noopener,noreferrer");
                 }}
                 className="text-xs font-bold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 shrink-0"
               >
-                Abrir no YouTube <ExternalLink className="h-3 w-3" />
+                Abrir fora do app <ExternalLink className="h-3 w-3" />
               </a>
             </div>
           </div>

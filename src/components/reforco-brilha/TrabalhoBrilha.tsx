@@ -890,6 +890,10 @@ function youtubeIdFromUrl(url: string): string | null {
   return null;
 }
 
+function youtubeWatchUrl(videoId: string): string {
+  return `https://youtu.be/${videoId}`;
+}
+
 function archiveEmbed(url: string): string | null {
   try {
     const u = new URL(url);
@@ -947,23 +951,17 @@ function RecursoPreviewModal({
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {ytId && (
             <div className="space-y-2">
-              <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1`}
-                  title={recurso.titulo}
-                  className="w-full h-full"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="rounded-lg border-2 border-amber-200 bg-amber-50 p-4 space-y-3">
+                <p className="text-sm font-bold text-amber-950">
+                  Para evitar o bloqueio do player dentro do app, este vídeo abre fora do Neuro Brilha Kids.
+                </p>
+                <button
+                  onClick={() => window.open(youtubeWatchUrl(ytId), "_blank", "noopener,noreferrer")}
+                  className="w-full text-xs font-bold text-amber-950 bg-amber-200 hover:bg-amber-300 rounded-lg py-3 flex items-center justify-center gap-2"
+                >
+                  Abrir fora do app <ExternalLink className="h-4 w-4" />
+                </button>
               </div>
-              <button
-                onClick={() =>
-                  window.open(`https://www.youtube.com/watch?v=${ytId}`, "_blank", "noopener,noreferrer")
-                }
-                className="w-full text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 rounded-lg py-2"
-              >
-                Se aparecer um aviso do YouTube, abrir o vídeo aqui →
-              </button>
             </div>
           )}
 
