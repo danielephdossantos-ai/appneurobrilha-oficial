@@ -4176,9 +4176,21 @@ export type Database = {
       }
     }
     Functions: {
+      activate_user_mascot: {
+        Args: { p_mascot_id: string }
+        Returns: undefined
+      }
       add_brilhocoins: {
         Args: { amount: number; child_id: string }
         Returns: undefined
+      }
+      gain_active_mascot_xp: {
+        Args: { p_amount: number }
+        Returns: {
+          leveled_up: boolean
+          new_experience: number
+          new_level: number
+        }[]
       }
       get_auth_user_id: { Args: never; Returns: string }
       has_role: {
