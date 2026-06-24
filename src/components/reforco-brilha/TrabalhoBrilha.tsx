@@ -602,6 +602,24 @@ function EditorTrabalho({
               placeholder="Tema (ex: Sistema solar)"
               className="sm:col-span-2 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
             />
+            <label className="sm:col-span-2 flex items-center gap-2 text-xs font-bold text-amber-800">
+              📅 Data de entrega:
+              <input
+                type="date"
+                value={dataEntrega}
+                onChange={(e) => setDataEntrega(e.target.value)}
+                className="flex-1 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
+              />
+              {dataEntrega && (
+                <button
+                  type="button"
+                  onClick={() => setDataEntrega("")}
+                  className="text-[11px] text-muted-foreground hover:text-rose-600 underline"
+                >
+                  limpar
+                </button>
+              )}
+            </label>
           </div>
 
           {/* Botões de bloco */}
