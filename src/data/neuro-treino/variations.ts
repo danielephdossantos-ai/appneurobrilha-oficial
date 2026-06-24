@@ -285,15 +285,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     objetivo: "Cobertura de pontilhado com setas direcionais",
     instrucao: "Siga as setas em ordem para cobrir a letra.",
   },
-  "labirinto-precisao": {
-    slug: "labirinto-precisao",
-    nome: "Labirinto de Precisão",
-    emoji: "🟢",
-    grupo: "Coordenação Motor-Escrita",
-    cor: "from-success/25 to-success/5",
-    objetivo: "Arraste fino sem encostar nas paredes",
-    instrucao: "Arraste a bolinha até o final sem tocar as bordas.",
-  },
 
   "triagem-categorias": {
     slug: "triagem-categorias",
