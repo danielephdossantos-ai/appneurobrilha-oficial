@@ -350,20 +350,18 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
           </div>
         </div>
 
-        {/* BNCC badge */}
+        {/* Área e ano (sem código BNCC) */}
         <div className="px-4 pt-3 pb-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`text-xs font-black px-3 py-1 rounded-full ${ac.bg} text-white`}>
               {lesson.area_label}
             </span>
             <span className="text-xs font-bold text-slate-400">
-              {lesson.grade} • BNCC {lesson.bncc_code}
-            </span>
-            <span className="text-xs text-slate-400 hidden sm:block">
-              — {lesson.bncc_description}
+              {lesson.grade}
             </span>
           </div>
         </div>
+
 
         {/* Screen content */}
         <div className="flex-1 px-4 py-3 max-w-2xl w-full mx-auto">
