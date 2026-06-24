@@ -301,9 +301,16 @@ export function useAppState() {
         amount: amount,
       });
       if (error) throw error;
+      // Também dá XP ao mascote ativo (Pip/Pipa) — desbloqueia evolução.
+      try {
+        await supabase.rpc("gain_active_mascot_xp" as any, { p_amount: amount });
+      } catch (e) {
+        console.error("Falha ao dar XP ao mascote", e);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["children"] });
+      queryClient.invalidateQueries({ queryKey: ["mascots"] });
     },
   });
 
