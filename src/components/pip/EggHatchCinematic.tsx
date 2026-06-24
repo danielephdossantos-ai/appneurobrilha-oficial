@@ -56,10 +56,11 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
       return () => clearTimeout(t);
     }
     if (phase === "crack") {
-      // 4 pedaços caem um por um — 4 x 700ms + margem
-      const t = setTimeout(() => setPhase("open"), 3600);
+      // Topo abre (1.6s) + 3 pedaços de baixo caem (3 x 0.7s) + margem
+      const t = setTimeout(() => setPhase("open"), 4200);
       return () => clearTimeout(t);
     }
+
     if (phase === "open") {
       const t = setTimeout(() => setPhase("bubble"), 2200);
       return () => clearTimeout(t);
@@ -387,48 +388,67 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
               className="space-y-6"
             >
               <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-lg">
-                A casca está se abrindo em pedaços!
+                A casca está se abrindo!
               </h2>
-              {/* Quebra-cabeça: 4 pedaços da casca caindo um por um */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
                 {/* Glow central crescente */}
                 <motion.div
                   className="absolute inset-0 rounded-full bg-yellow-200/50 blur-2xl"
                   animate={{ opacity: [0, 0.6, 0.9], scale: [0.6, 1.1, 1.3] }}
-                  transition={{ duration: 3.4, ease: "easeInOut" }}
+                  transition={{ duration: 4, ease: "easeInOut" }}
                 />
-                {/* 4 pedaços do ovo, cada um com clip de um quadrante */}
+
+                {/* Cabeça do mascote aparece por trás quando o topo abre */}
+                <motion.img
+                  src={hatchImg}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl"
+                  initial={{ opacity: 0, y: 20, scale: 0.85 }}
+                  animate={{ opacity: [0, 0, 1, 1], y: [20, 20, 0, 0], scale: [0.85, 0.85, 1, 1] }}
+                  transition={{ duration: 4, times: [0, 0.25, 0.5, 1], ease: "easeOut" }}
+                />
+
+                {/* Topo da casca: abre como tampinha (sobe e tomba) */}
+                <motion.img
+                  src={eggImg}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full object-contain drop-shadow-lg"
+                  style={{ clipPath: "inset(0 0 55% 0)", WebkitClipPath: "inset(0 0 55% 0)", transformOrigin: "50% 45%" }}
+                  initial={{ y: 0, rotate: 0, opacity: 1 }}
+                  animate={{ y: [0, -40, -120], rotate: [0, -18, -55], opacity: [1, 1, 0] }}
+                  transition={{ duration: 1.6, times: [0, 0.5, 1], ease: "easeOut" }}
+                />
+
+                {/* 3 pedaços da parte de baixo caem depois que o topo abriu */}
                 {[
-                  { clip: "inset(0 50% 50% 0)", x: -80, y: -90, r: -35, delay: 0 },
-                  { clip: "inset(0 0 50% 50%)", x: 80, y: -90, r: 35, delay: 0.7 },
-                  { clip: "inset(50% 50% 0 0)", x: -90, y: 90, r: -25, delay: 1.4 },
-                  { clip: "inset(50% 0 0 50%)", x: 90, y: 90, r: 25, delay: 2.1 },
+                  { clip: "inset(45% 66% 0 0)", x: -90, y: 100, r: -30, delay: 1.8 },
+                  { clip: "inset(45% 33% 0 33%)", x: 0, y: 130, r: 8, delay: 2.5 },
+                  { clip: "inset(45% 0 0 66%)", x: 90, y: 100, r: 30, delay: 3.2 },
                 ].map((p, i) => (
                   <motion.img
                     key={i}
                     src={eggImg}
                     alt=""
+                    aria-hidden
                     className="absolute inset-0 w-full h-full object-contain drop-shadow-lg"
                     style={{ clipPath: p.clip, WebkitClipPath: p.clip }}
                     initial={{ x: 0, y: 0, rotate: 0, opacity: 1 }}
                     animate={{
                       x: [0, 0, p.x],
-                      y: [0, -6, p.y],
+                      y: [0, -4, p.y],
                       rotate: [0, 0, p.r],
                       opacity: [1, 1, 0],
                     }}
-                    transition={{
-                      duration: 1.1,
-                      delay: p.delay,
-                      times: [0, 0.3, 1],
-                      ease: "easeIn",
-                    }}
+                    transition={{ duration: 0.9, delay: p.delay, times: [0, 0.25, 1], ease: "easeIn" }}
                   />
                 ))}
               </div>
               <p className="text-white/80 text-lg">
-                Um pedaço de cada vez... que surpresa vem dentro?
+                Primeiro a tampinha... depois cada pedacinho da casca!
               </p>
+
             </motion.div>
           )}
 
@@ -580,16 +600,10 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   : "Se o som não aparecer, pode ler a mensagem comigo."}
               </p>
               <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80">
-                <motion.div
-                  initial={{ opacity: 0.85, scale: 0.95 }}
-                  animate={{ opacity: [0.85, 1, 0.85], y: [0, -8, 0], scale: [0.96, 1, 0.96] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-white/10"
-                />
                 <motion.img
                   src={babyImg}
                   alt="Mascote bebê"
-                  className="w-full h-full object-contain drop-shadow-2xl"
+                  className="w-full h-full object-contain drop-shadow-2xl relative z-10"
                   animate={{
                     y: [0, -14, 0],
                     rotate: [-2, 2, -2, 2, 0],
@@ -598,6 +612,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
 
+                {/* Brilhinhos soltos (sem bolha) */}
                 <svg
                   viewBox="0 0 220 220"
                   className="absolute inset-0 w-full h-full pointer-events-none"
@@ -638,36 +653,6 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     animate={{ x: [0, 3, 0], y: [0, 8, 0], rotate: [0, -15, 0] }}
                     transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut", delay: 0.05 }}
                   />
-                  {/* bochechas e sorriso removidos — bolha sem rosto */}
-
-                  <motion.g
-                    animate={{ rotate: [0, -8, 0, -8, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ originX: "20%", originY: "60%" }}
-                  >
-                    <path
-                      d="M20 140 C40 120 60 110 80 118"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </motion.g>
-                  <motion.g
-                    animate={{ rotate: [0, 8, 0, 8, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                    style={{ originX: "80%", originY: "60%" }}
-                  >
-                    <path
-                      d="M200 140 C180 120 160 110 140 118"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </motion.g>
-
-                  {/* olhos removidos — bolha sem rosto */}
                 </svg>
               </div>
               <p className="text-white/90 text-lg max-w-md mx-auto">
@@ -678,6 +663,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
               </KidButton>
             </motion.div>
           )}
+
         </AnimatePresence>
       </div>
     </motion.div>
