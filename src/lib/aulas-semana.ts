@@ -21,7 +21,7 @@ function inferPerfil(responses: unknown): PerfilNeuro {
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
-function normalizeSerie(raw: string | null | undefined): string | null {
+export function normalizeSerie(raw: string | null | undefined): string | null {
   if (!raw) return null;
   const s = String(raw).trim();
   if (!s) return null;
@@ -43,7 +43,7 @@ function getSerieNumber(serie: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function getAnoFilters(serie: string): string[] {
+export function getAnoFilters(serie: string): string[] {
   const lower = serie.toLowerCase();
   if (lower.includes("infantil") || lower.includes("pré") || lower.includes("pre")) {
     return ["Educação Infantil"];
