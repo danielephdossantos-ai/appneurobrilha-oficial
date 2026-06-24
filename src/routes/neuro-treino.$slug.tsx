@@ -348,8 +348,6 @@ function MechanicRenderer({
       return <SequenciaPadrao p={variation.payload} onDone={onConcluir} />;
     case "cade-o-par":
       return <CadeOPar p={variation.payload} onDone={onConcluir} />;
-    case "labirinto-do-som":
-      return <LabirintoSom p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas":
       return <Mosaico p={variation.payload} onDone={onConcluir} />;
     case "sequencia-de-cores":
@@ -967,56 +965,6 @@ function CadeOPar({ p, onDone }: any) {
   );
 }
 
-
-// ============== 9. Labirinto do Som ==============
-function LabirintoSom({ p, onDone }: any) {
-  const [passo, setPasso] = useState(0);
-  const atual = p.caminho[passo];
-  return (
-    <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2 flex items-center justify-center gap-1">
-        <Volume2 size={14} /> Pista sonora
-      </div>
-      <div className="text-4xl font-black text-primary mb-6">"{atual.nome}"</div>
-      <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto">
-        <div />
-        <button onClick={() => handleDir("CIMA")} className={btnDir()}>
-          <ArrowUp className="w-10 h-10 mx-auto" />
-        </button>
-        <div />
-        <button onClick={() => handleDir("ESQUERDA")} className={btnDir()}>
-          <ArrowLeftIcon className="w-10 h-10 mx-auto" />
-        </button>
-        <div className="flex items-center justify-center bg-primary/10 rounded-full border-2 border-primary/30 w-16 h-16 mx-auto">
-          <RotateCcw className="w-8 h-8 text-primary" />
-        </div>
-        <button onClick={() => handleDir("DIREITA")} className={btnDir()}>
-          <ArrowRight className="w-10 h-10 mx-auto" />
-        </button>
-        <div />
-        <button onClick={() => handleDir("BAIXO")} className={btnDir()}>
-          <ArrowDown className="w-10 h-10 mx-auto" />
-        </button>
-        <div />
-      </div>
-      <div className="mt-4 text-sm text-muted-foreground">
-        Passo {passo + 1} de {p.caminho.length}
-      </div>
-    </div>
-  );
-  function handleDir(d: string) {
-    if (d === atual.nome) {
-      if (passo + 1 >= p.caminho.length) onDone(true);
-      else {
-        setPasso(passo + 1);
-        toast.success("Boa!");
-      }
-    } else onDone(false);
-  }
-}
-function btnDir() {
-  return "p-4 bg-card border-2 border-border rounded-xl hover:border-primary text-primary";
-}
 
 // ============== 10. Foco Sustentado ==============
 function FocoSustentado({ p, onDone }: any) {
