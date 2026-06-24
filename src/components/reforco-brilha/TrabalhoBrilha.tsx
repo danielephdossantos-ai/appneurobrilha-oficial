@@ -305,7 +305,7 @@ function EditorTrabalho({
       }
     }, 1500);
     return () => clearTimeout(t);
-  }, [titulo, tema, materia, blocos, fontes, childId, idAtual]);
+  }, [titulo, tema, materia, dataEntrega, blocos, fontes, childId, idAtual]);
 
   async function rodarRevisao() {
     if (revisando) return;
