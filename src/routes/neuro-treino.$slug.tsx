@@ -38,6 +38,7 @@ import { useAppState } from "@/core/store";
 import { applyHiperfoco, pickElemento, pipFraseAcerto, pipFraseIncentivo } from "@/data/hiperfocos";
 import { usePipVoice } from "@/hooks/usePipVoice";
 import { useSpeechMatcher } from "@/hooks/useSpeechMatcher";
+import { useSensoryProfile } from "@/hooks/useSensoryProfile";
 import soproCarro from "@/assets/neuro-treino/sopro/carro.png";
 import soproVela from "@/assets/neuro-treino/sopro/vela.png";
 import soproBalao from "@/assets/neuro-treino/sopro/balao.png";
@@ -2804,6 +2805,7 @@ function AlvoMovel({ p, onDone }: any) {
 
 // 32. ACHAR O DIFERENTE — grade com um item diferente
 function AcharDiferente({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<number | null>(null);
   const handleClick = (idx: number) => {
     if (selecionado !== null) return;
@@ -2811,6 +2813,9 @@ function AcharDiferente({ p, onDone }: any) {
     setTimeout(() => onDone(idx === p.posAlvo), 600);
   };
   const cols = p.colunas ?? 3;
+  const errBorder = sens.softColors ? "border-amber-400" : "border-destructive";
+  const errBg = sens.softColors ? "bg-amber-100 dark:bg-amber-900/30" : "bg-destructive/20";
+  const emojiSize = sens.largerTargets ? "w-14 h-14" : "w-10 h-10";
   return (
     <div className="space-y-4">
       <div className="text-center text-sm text-muted-foreground font-bold">
@@ -2819,21 +2824,22 @@ function AcharDiferente({ p, onDone }: any) {
       <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
         {p.grid.map((emoji: string, i: number) => {
           const certa = i === p.posAlvo;
+          const isPick = selecionado === i;
           const bg =
-            selecionado === i
+            isPick
               ? certa
-                ? "bg-success/20 border-success scale-110"
-                : "bg-destructive/20 border-destructive"
+                ? `bg-success/20 border-success${sens.reduceMotion ? "" : " scale-110"}`
+                : `${errBg} ${errBorder}`
               : selecionado !== null && certa
                 ? "bg-success/20 border-success"
-                : "bg-card border-border hover:border-violet/50 hover:scale-105";
+                : `bg-card border-border hover:border-violet/50${sens.reduceMotion ? "" : " hover:scale-105"}`;
           return (
             <button
               key={i}
               onClick={() => handleClick(i)}
               className={`rounded-xl border-2 p-1 flex items-center justify-center transition-all ${bg}`}
             >
-              <RenderEmoji e={emoji} className="w-10 h-10" />
+              <RenderEmoji e={emoji} className={emojiSize} />
             </button>
           );
         })}
@@ -2964,20 +2970,28 @@ function MemoriaVisual({ p, onDone }: any) {
 
 // 34. REAÇÃO RÁPIDA — Go / No-Go
 function ReacaoRapida({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  // Janela mínima anti-impulsividade: ignora cliques nos primeiros 250ms
+  const MIN_RESPONSE_MS = 250;
+  // Em modo low-stim, intervalo 50% maior para reduzir pressão
+  const intervaloMs = sens.lowStim
+    ? Math.round(p.intervaloMs * 1.5)
+    : p.intervaloMs;
+
   const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [feedbackLocal, setFeedbackLocal] = useState<"ok" | "erro" | null>(null);
-  const [tempo, setTempo] = useState(p.intervaloMs);
+  const [tempo, setTempo] = useState(intervaloMs);
   const [travado, setTravado] = useState(false);
+  const startRef = useRef(0);
 
-  // Countdown por rodada — se acabar, conta como erro e avança.
   useEffect(() => {
-    setTempo(p.intervaloMs);
+    setTempo(intervaloMs);
     setFeedbackLocal(null);
     setTravado(false);
-    const inicio = Date.now();
+    startRef.current = Date.now();
     const iv = setInterval(() => {
-      const rest = p.intervaloMs - (Date.now() - inicio);
+      const rest = intervaloMs - (Date.now() - startRef.current);
       if (rest <= 0) {
         clearInterval(iv);
         proximo(false);
@@ -2987,7 +3001,7 @@ function ReacaoRapida({ p, onDone }: any) {
     }, 80);
     return () => clearInterval(iv);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idx]);
+  }, [idx, intervaloMs]);
 
   const proximo = (acerto: boolean) => {
     if (travado) return;
@@ -3003,8 +3017,17 @@ function ReacaoRapida({ p, onDone }: any) {
     }, 1100);
   };
 
+  const onClick = (certa: boolean) => {
+    // Anti-impulsividade: clique antes da janela mínima é descartado
+    if (Date.now() - startRef.current < MIN_RESPONSE_MS) return;
+    proximo(certa);
+  };
+
   const round = p.seq[idx] ?? p.seq[0];
-  const pct = Math.max(0, Math.min(100, (tempo / p.intervaloMs) * 100));
+  const pct = Math.max(0, Math.min(100, (tempo / intervaloMs) * 100));
+  const dangerColor = sens.softColors ? "bg-amber-500" : "bg-destructive";
+  const emojiSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const press = sens.reduceMotion ? "" : " active:scale-95";
 
   return (
     <div className="text-center space-y-5">
@@ -3018,7 +3041,7 @@ function ReacaoRapida({ p, onDone }: any) {
 
       <div className="h-2 rounded-full bg-muted overflow-hidden">
         <div
-          className={`h-full transition-[width] duration-75 ${pct > 40 ? "bg-success" : pct > 15 ? "bg-amber-500" : "bg-destructive"}`}
+          className={`h-full transition-[width] duration-75 ${pct > 40 ? "bg-success" : pct > 15 ? "bg-amber-500" : dangerColor}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -3034,15 +3057,15 @@ function ReacaoRapida({ p, onDone }: any) {
               ? "border-success bg-success/15"
               : feedbackLocal === "erro" && !certa
                 ? "border-border bg-card opacity-50"
-                : "border-border bg-card hover:border-violet/50 active:scale-95";
+                : `border-border bg-card hover:border-violet/50${press}`;
           return (
             <button
               key={i}
               disabled={travado}
-              onClick={() => proximo(certa)}
+              onClick={() => onClick(certa)}
               className={`rounded-2xl border-2 p-3 flex items-center justify-center transition-all ${bg}`}
             >
-              <RenderEmoji e={item.emoji} className="w-16 h-16" />
+              <RenderEmoji e={item.emoji} className={emojiSize} />
             </button>
           );
         })}
