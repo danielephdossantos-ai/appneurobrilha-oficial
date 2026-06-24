@@ -154,35 +154,24 @@ export const EscolaBrilhaDashboard: React.FC = () => {
 
 
 
-      {/* Sistema interno: Matriz Pedagógica */}
+      {/* Aulas da Semana — categoria adaptada ao perfil neuro */}
       <div className="px-4 max-w-lg mx-auto mt-6">
         <button
-          onClick={() => navigate({ to: "/matriz-pedagogica" })}
-          className="w-full flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
+          onClick={() => navigate({ to: "/escola-brilha/semana" })}
+          className="w-full flex items-center gap-3 rounded-2xl border border-yellow-300/30 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 px-4 py-4 text-left transition shadow-lg"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
-            <Network className="w-5 h-5 text-white" />
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0 shadow-md">
+            <CalendarDays className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-white font-black text-sm">Matriz Pedagógica</p>
-            <p className="text-white/50 text-[11px] font-semibold">Sistema interno • Pré ao 9º Ano</p>
+            <p className="text-white font-black text-base">Aulas da Semana</p>
+            <p className="text-white/70 text-xs font-semibold">5 aulas adaptadas • Seg a Sex</p>
           </div>
-          <ChevronRight className="w-5 h-5 text-white/40" />
-        </button>
-        <button
-          onClick={() => navigate({ to: "/banco-midias" })}
-          className="w-full mt-2 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-3 text-left transition"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shrink-0">
-            <ImageIcon className="w-5 h-5 text-white" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-white font-black text-sm">Banco de Mídias</p>
-            <p className="text-white/50 text-[11px] font-semibold">Imagens reutilizáveis em aulas e atividades</p>
-          </div>
-          <ChevronRight className="w-5 h-5 text-white/40" />
+          <ChevronRight className="w-5 h-5 text-white/60" />
         </button>
       </div>
+
+
 
 
 
