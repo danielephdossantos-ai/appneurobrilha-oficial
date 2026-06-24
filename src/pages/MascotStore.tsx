@@ -50,6 +50,12 @@ import pipTeenRoqueiro from "@/assets/pip-teen-roqueiro.png";
 import pipaTeenRoqueira from "@/assets/pipa-teen-roqueira.png";
 import pipTeenCyber from "@/assets/pip-teen-cyber.png";
 import pipaTeenCyber from "@/assets/pipa-teen-cyber.png";
+import pipTeenUrsinho from "@/assets/pip-teen-ursinho.png";
+import pipaTeenUrsinho from "@/assets/pipa-teen-ursinho.png";
+import pipTeenCarrinho from "@/assets/pip-teen-carrinho.png";
+import pipaTeenBoneca from "@/assets/pipa-teen-boneca.png";
+import pipTeenBola from "@/assets/pip-teen-bola.png";
+import pipaTeenBola from "@/assets/pipa-teen-bola.png";
 import KidLiveMascot from "@/components/ui/KidLiveMascot";
 import { PipEvolution } from "@/components/pip/PipEvolution";
 import { cn } from "@/utils/utils";
@@ -502,6 +508,49 @@ const ADDITIONAL_CHARACTERS = [
     description: "Pipa adolescente em estilo cyberpunk com neon brilhante.",
     category: "premium",
     image_url: pipaTeenCyber,
+  },
+  // ===== Onda 1 — Brinquedos clássicos =====
+  {
+    id: "pip-teen-ursinho",
+    name: "Pip Teen Ursinho",
+    description: "Pip adolescente abraçando um ursinho de pelúcia gigante.",
+    category: "premium",
+    image_url: pipTeenUrsinho,
+  },
+  {
+    id: "pipa-teen-ursinho",
+    name: "Pipa Teen Ursinho",
+    description: "Pipa adolescente abraçando um ursinho rosa fofo.",
+    category: "premium",
+    image_url: pipaTeenUrsinho,
+  },
+  {
+    id: "pip-teen-carrinho",
+    name: "Pip Teen Carrinho",
+    description: "Pip adolescente brincando com um carrinho de corrida.",
+    category: "premium",
+    image_url: pipTeenCarrinho,
+  },
+  {
+    id: "pipa-teen-boneca",
+    name: "Pipa Teen Boneca",
+    description: "Pipa adolescente com sua boneca de pano colorida.",
+    category: "premium",
+    image_url: pipaTeenBoneca,
+  },
+  {
+    id: "pip-teen-bola",
+    name: "Pip Teen Futebol",
+    description: "Pip adolescente em uniforme com bola de futebol quebra-cabeça.",
+    category: "premium",
+    image_url: pipTeenBola,
+  },
+  {
+    id: "pipa-teen-bola",
+    name: "Pipa Teen Vôlei",
+    description: "Pipa adolescente em uniforme esportivo com bola colorida.",
+    category: "premium",
+    image_url: pipaTeenBola,
   },
 ];
 
