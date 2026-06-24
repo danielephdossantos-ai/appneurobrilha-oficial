@@ -2447,6 +2447,7 @@ function RitmoBatidas({ p, onDone }: any) {
   const audioRef = useRef<AudioContext | null>(null);
 
   const tocarSom = () => {
+    if (sens.reduceSound) return;
     try {
       if (!audioRef.current) {
         audioRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -2457,7 +2458,7 @@ function RitmoBatidas({ p, onDone }: any) {
       osc.type = "sine";
       osc.frequency.setValueAtTime(180, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.18);
-      gain.gain.setValueAtTime(0.6, ctx.currentTime);
+      gain.gain.setValueAtTime(sens.softColors ? 0.3 : 0.6, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
       osc.connect(gain).connect(ctx.destination);
       osc.start();
@@ -2525,11 +2526,11 @@ function RitmoBatidas({ p, onDone }: any) {
           onClick={bater}
           disabled={fase !== "vezDela" || !!feedback}
           aria-label="Tambor"
-          className={`relative w-44 h-44 rounded-full border-8 border-amber-700 bg-gradient-to-b from-red-500 to-red-700 shadow-2xl flex items-center justify-center transition-all
-            ${pulseDemo ? "scale-110 ring-8 ring-amber-300" : ""}
-            ${fase === "vezDela" && !feedback ? "active:scale-90 hover:scale-105 cursor-pointer animate-pulse" : ""}
+          className={`relative ${sens.largerTargets ? "w-52 h-52" : "w-44 h-44"} rounded-full border-8 ${sens.softColors ? "border-amber-600 bg-gradient-to-b from-amber-400 to-amber-600" : "border-amber-700 bg-gradient-to-b from-red-500 to-red-700"} shadow-2xl flex items-center justify-center transition-all
+            ${pulseDemo && !sens.reduceMotion ? "scale-110 ring-8 ring-amber-300" : pulseDemo ? "ring-8 ring-amber-300" : ""}
+            ${fase === "vezDela" && !feedback ? (sens.reduceMotion ? "cursor-pointer" : "active:scale-90 hover:scale-105 cursor-pointer animate-pulse") : ""}
             ${feedback === "ok" ? "ring-8 ring-emerald-400" : ""}
-            ${feedback === "erro" ? "ring-8 ring-rose-400" : ""}`}
+            ${feedback === "erro" ? (sens.softColors ? "ring-8 ring-amber-400" : "ring-8 ring-rose-400") : ""}`}
         >
           <span className="text-7xl drop-shadow-lg">🥁</span>
         </button>
@@ -2541,14 +2542,14 @@ function RitmoBatidas({ p, onDone }: any) {
           <div
             key={i}
             className={`w-4 h-4 rounded-full border-2 transition-all ${
-              i < contagem ? "bg-emerald-500 border-emerald-600 scale-110" : "border-amber-400 bg-amber-100"
+              i < contagem ? `bg-emerald-500 border-emerald-600${sens.reduceMotion ? "" : " scale-110"}` : "border-amber-400 bg-amber-100"
             }`}
           />
         ))}
       </div>
 
       {feedback && (
-        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : "text-destructive"}`}>
+        <div className={`text-2xl font-black ${feedback === "ok" ? "text-success" : sens.softColors ? "text-amber-600" : "text-destructive"}`}>
           {feedback === "ok" ? "Perfeito! 🎉" : "Vamos de novo!"}
         </div>
       )}
