@@ -34,15 +34,6 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-    to: "/escola-brilha",
-    title: "Escola Brilha",
-    subtitle: "Aulas Mágicas",
-    gradient: "from-[#3B8BFF] via-[#4C9EFF] to-[#1E5FCC]",
-    glow: "rgba(76,158,255,0.7)",
-    emoji: "🏫",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
@@ -85,15 +76,6 @@ const DESTINOS_KIDS: Destino[] = [
     gradient: "from-[#22C55E] via-[#16A34A] to-[#15803D]",
     glow: "rgba(34,197,94,0.7)",
     emoji: "💚",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
-    to: "/jornada-365",
-    title: "Jornada 365",
-    subtitle: "Um Dia de Cada Vez",
-    gradient: "from-[#F59E0B] via-[#D97706] to-[#B45309]",
-    glow: "rgba(245,158,11,0.7)",
-    emoji: "🗓️",
     shine: "rgba(255,255,255,0.15)",
   },
   {

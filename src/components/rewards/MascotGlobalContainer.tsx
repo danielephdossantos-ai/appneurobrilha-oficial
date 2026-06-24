@@ -33,7 +33,7 @@ export const MascotGlobalContainer: React.FC = () => {
   }, [location.pathname]);
 
   // Esconde mascote global em telas que já mostram Pip + Pipa fixos (Escola Brilha)
-  if (location.pathname.startsWith("/escola-brilha")) return null;
+  
   if (isLoading || !activeMascot) return null;
 
   return (

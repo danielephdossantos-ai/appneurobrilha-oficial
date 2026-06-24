@@ -90,9 +90,9 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         ? (bloco.payload.aula_id as string)
         : null;
     if (aulaId) {
-      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
+      navigate({ to: "/reforco-brilha" });
     } else {
-      navigate({ to: "/escola-brilha" });
+      navigate({ to: "/reforco-brilha" });
     }
   }
 
