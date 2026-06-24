@@ -2422,8 +2422,8 @@ function ToqueSequencia({ p, onDone }: any) {
               key={pt.id}
               onClick={() => handlePonto(pt)}
               style={{ left: `${pt.x}%`, top: `${pt.y}%`, transform: "translate(-50%,-50%)" }}
-              className={`absolute w-16 h-16 rounded-2xl border-3 flex items-center justify-center transition-all active:scale-90 shadow-lg
-                ${feito ? "bg-emerald-500 text-white border-emerald-600 scale-90 opacity-80" : ativo ? "bg-white border-emerald-500 text-emerald-700 scale-110 animate-pulse ring-4 ring-emerald-300/50" : "bg-white/90 border-white text-slate-700"}`}
+              className={`absolute ${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-2xl border-3 flex items-center justify-center transition-all shadow-lg${sens.reduceMotion ? "" : " active:scale-90"}
+                ${feito ? `bg-emerald-500 text-white border-emerald-600 opacity-80${sens.reduceMotion ? "" : " scale-90"}` : ativo ? `bg-white border-emerald-500 text-emerald-700 ring-4 ring-emerald-300/50${sens.reduceMotion ? "" : " scale-110 animate-pulse"}` : "bg-white/90 border-white text-slate-700"}`}
               aria-label={pt.label}
             >
               {renderConteudo(pt.label)}
@@ -2438,6 +2438,7 @@ function ToqueSequencia({ p, onDone }: any) {
 // 29. RITMO DE BATIDAS — exibe padrão, usuário reproduz tocando
 // 29. RITMO DE BATIDAS — tambor: criança bate N vezes conforme o comando
 function RitmoBatidas({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const { speak } = usePipVoice();
   const [fase, setFase] = useState<"demo" | "vezDela" | "done">("demo");
   const [pulseDemo, setPulseDemo] = useState(false);
