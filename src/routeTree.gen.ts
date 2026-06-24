@@ -45,6 +45,7 @@ import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-d
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
+import { Route as ApiPublicHooksGerarAulasSemanaRouteImport } from './routes/api/public/hooks/gerar-aulas-semana'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -228,6 +229,12 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
   path: '/escalas',
   getParentRoute: () => AnamneseChildIdRoute,
 } as any)
+const ApiPublicHooksGerarAulasSemanaRoute =
+  ApiPublicHooksGerarAulasSemanaRouteImport.update({
+    id: '/api/public/hooks/gerar-aulas-semana',
+    path: '/api/public/hooks/gerar-aulas-semana',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -266,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
+  '/api/public/hooks/gerar-aulas-semana': typeof ApiPublicHooksGerarAulasSemanaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -303,6 +311,7 @@ export interface FileRoutesByTo {
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
+  '/api/public/hooks/gerar-aulas-semana': typeof ApiPublicHooksGerarAulasSemanaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -342,6 +351,7 @@ export interface FileRoutesById {
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
+  '/api/public/hooks/gerar-aulas-semana': typeof ApiPublicHooksGerarAulasSemanaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
+    | '/api/public/hooks/gerar-aulas-semana'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -419,6 +430,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
+    | '/api/public/hooks/gerar-aulas-semana'
   id:
     | '__root__'
     | '/'
@@ -457,6 +469,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
+    | '/api/public/hooks/gerar-aulas-semana'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -488,6 +501,7 @@ export interface RootRouteChildren {
   TermosRoute: typeof TermosRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
+  ApiPublicHooksGerarAulasSemanaRoute: typeof ApiPublicHooksGerarAulasSemanaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -744,6 +758,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
       parentRoute: typeof AnamneseChildIdRoute
     }
+    '/api/public/hooks/gerar-aulas-semana': {
+      id: '/api/public/hooks/gerar-aulas-semana'
+      path: '/api/public/hooks/gerar-aulas-semana'
+      fullPath: '/api/public/hooks/gerar-aulas-semana'
+      preLoaderRoute: typeof ApiPublicHooksGerarAulasSemanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -822,6 +843,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermosRoute: TermosRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
+  ApiPublicHooksGerarAulasSemanaRoute: ApiPublicHooksGerarAulasSemanaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
