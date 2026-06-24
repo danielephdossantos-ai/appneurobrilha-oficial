@@ -1236,18 +1236,23 @@ function PieceCard({
   state: "idle" | "selected" | "wrong" | "placed";
   onClick: () => void;
 }) {
+  const { effective: sens } = useSensoryProfile();
   const pad = 10;
-  const size = 72;
+  const size = sens.largerTargets ? 92 : 72;
   const inner = size - pad * 2;
+  const selectedScale = sens.reduceMotion ? "" : "scale-110";
+  const idleHover = sens.reduceMotion ? "border-white/70" : "border-white/70 hover:scale-105 active:scale-95";
+  const wrongRing = sens.softColors ? "ring-amber-400 border-amber-300" : "ring-red-500 border-red-400";
+  const wrongShake = sens.reduceMotion ? "" : "animate-[wiggle_0.4s_ease]";
 
   const ringCls =
     state === "selected"
-      ? "ring-4 ring-[#0d1f55] border-[#0d1f55] scale-110 shadow-xl"
+      ? `ring-4 ring-[#0d1f55] border-[#0d1f55] ${selectedScale} shadow-xl`
       : state === "wrong"
-        ? "ring-4 ring-red-500 border-red-400 animate-[wiggle_0.4s_ease]"
+        ? `ring-4 ${wrongRing} ${wrongShake}`
         : state === "placed"
           ? "opacity-30 cursor-default"
-          : "border-white/70 hover:scale-105 active:scale-95";
+          : idleHover;
 
   return (
     <button
@@ -1264,6 +1269,7 @@ function PieceCard({
     </button>
   );
 }
+
 
 function Mosaico({
   p,
