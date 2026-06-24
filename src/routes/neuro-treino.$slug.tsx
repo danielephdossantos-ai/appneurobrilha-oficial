@@ -3244,7 +3244,11 @@ function LetraSom({ p, onDone }: any) {
 
 // 37. PALAVRA-IMAGEM — ver imagem, escolher palavra correta
 function PalavraImagem({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
+  const optPad = sens.largerTargets ? "py-6 text-xl" : "py-4 text-lg";
   const handleClick = (opt: string) => {
     if (selecionado) return;
     setSelecionado(opt);
@@ -3253,7 +3257,7 @@ function PalavraImagem({ p, onDone }: any) {
   return (
     <div className="space-y-5 text-center">
       <div className="bg-gradient-to-br from-amber/15 to-amber/5 border-2 border-amber/25 rounded-3xl py-8 flex items-center justify-center">
-        <RenderEmoji e={p.emoji} className="w-32 h-32" />
+        <RenderEmoji e={p.emoji} className={imgSize} />
       </div>
       <div className="grid grid-cols-2 gap-3">
         {p.opts.map((opt: string, i: number) => {
@@ -3262,7 +3266,7 @@ function PalavraImagem({ p, onDone }: any) {
             selecionado === opt
               ? certa
                 ? "border-success bg-success/10 text-success"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-amber/60";
@@ -3270,7 +3274,7 @@ function PalavraImagem({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => handleClick(opt)}
-              className={`rounded-2xl border-2 py-4 font-black text-lg tracking-wider transition-all ${bg}`}
+              className={`rounded-2xl border-2 ${optPad} font-black tracking-wider transition-all ${bg}`}
             >
               {opt}
             </button>
@@ -3280,6 +3284,7 @@ function PalavraImagem({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 38. FORMANDO PALAVRAS — tocar sílabas em ordem
 function FormandoPalavras({ p, onDone }: any) {
