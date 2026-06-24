@@ -1019,9 +1019,15 @@ function CadeOPar({ p, onDone }: any) {
 
 // ============== 10. Foco Sustentado ==============
 function FocoSustentado({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const speedMul = sens.lowStim ? 1.6 : 1; // mais lento = menos estímulo
+  const press = sens.reduceMotion ? "" : "active:scale-90";
+  const errorRing = sens.softColors ? "ring-amber-400 bg-amber-100/40" : "ring-destructive bg-destructive/10";
+  const btnSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   const [capturados, setCapturados] = useState<number[]>([]); // índices de alvos pegos
   const [erros, setErros] = useState(0);
   const [piscarErro, setPiscarErro] = useState<number | null>(null);
+
 
   // Layout fixo por atividade: faixa vertical + sentido + atraso para cada item.
   const layout = useMemo(() => {
@@ -1130,17 +1136,17 @@ function FocoSustentado({ p, onDone }: any) {
                 top: `${L.topPct}%`,
                 left: 0,
                 width: "100%",
-                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur}s ease-in-out ${L.delay}s infinite`,
+                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur * speedMul}s ease-in-out ${L.delay}s infinite`,
               }}
             >
               <button
                 disabled={pego}
                 onClick={() => tocar(i)}
-                className={`w-24 h-24 md:w-28 md:h-28 flex items-center justify-center active:scale-90 transition drop-shadow-lg ${
+                className={`${btnSize} flex items-center justify-center ${press} transition drop-shadow-lg ${
                   pego
                     ? "opacity-30 grayscale"
                     : erro
-                      ? "ring-4 ring-destructive rounded-full bg-destructive/10"
+                      ? `ring-4 rounded-full ${errorRing}`
                       : ""
                 }`}
               >
@@ -1150,6 +1156,7 @@ function FocoSustentado({ p, onDone }: any) {
           );
         })}
       </div>
+
 
       <div className="text-center text-sm text-muted-foreground">
         ✓ {capturados.length}/{alvosIdx.length} · ✕ enganos {erros}
