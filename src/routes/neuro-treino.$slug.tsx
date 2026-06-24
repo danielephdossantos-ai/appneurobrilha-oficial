@@ -1488,13 +1488,17 @@ function Mosaico({
 
 // ============== 13. Sequência de Cores ==============
 function SequenciaCores({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const seqSize = sens.largerTargets ? "w-16 h-16" : "w-12 h-12";
+  const optSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const hover = sens.reduceMotion ? "" : "hover:scale-110";
   return (
     <div className="text-center">
       <div className="flex justify-center gap-2 mb-6">
         {p.sequencia.map((c: string, i: number) => (
-          <div key={i} className="w-12 h-12 rounded-lg shadow" style={{ background: c }} />
+          <div key={i} className={`${seqSize} rounded-lg shadow`} style={{ background: c }} />
         ))}
-        <div className="w-12 h-12 rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black">
+        <div className={`${seqSize} rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black`}>
           ?
         </div>
       </div>
@@ -1503,7 +1507,7 @@ function SequenciaCores({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(c === p.next)}
-            className="w-16 h-16 rounded-xl shadow-lg hover:scale-110 transition-all"
+            className={`${optSize} rounded-xl shadow-lg ${hover} transition-all`}
             style={{ background: c }}
           />
         ))}
@@ -1514,9 +1518,13 @@ function SequenciaCores({ p, onDone }: any) {
 
 
 
+
 // ============== 16. Onomatopeias Animadas ==============
 // Som textual + opções com ilustrações premium 2D (padrão Sons Iniciais)
 function Onomatopeias({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
+  const imgSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   return (
     <div className="text-center">
       <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
@@ -1532,7 +1540,7 @@ function Onomatopeias({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hover}`}
             >
               {img ? (
                 <img
@@ -1541,10 +1549,10 @@ function Onomatopeias({ p, onDone }: any) {
                   width={128}
                   height={128}
                   loading="lazy"
-                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                  className={`${imgSize} object-contain drop-shadow-md`}
                 />
               ) : (
-                <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
+                <RenderEmoji e={o.emoji} label={o.nome} className={imgSize} />
               )}
               <div className="font-bold text-xs">{o.nome}</div>
             </button>
@@ -1555,14 +1563,20 @@ function Onomatopeias({ p, onDone }: any) {
   );
 }
 
+
 // ============== 17. Ritmo e Sopro Visual (Microfone real) ==============
 // A criança sopra/faz o som no microfone — o volume captado anima a cena (carrinho anda,
 // vela apaga, balão sobe...). Sem botão "SOPRE AQUI": é a voz/sopro real que move tudo.
 function RitmoSopro({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const ctaPad = sens.largerTargets ? "px-12 py-6 text-xl" : "px-10 py-5 text-lg";
   const [micOn, setMicOn] = useState(false);
   const [level, setLevel] = useState(0); // 0..1 volume instantâneo
   const [progress, setProgress] = useState(0); // 0..100
   const [erro, setErro] = useState<string | null>(null);
+
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -1687,15 +1701,16 @@ function RitmoSopro({ p, onDone }: any) {
       {!micOn ? (
         <button
           onClick={iniciar}
-          className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground px-10 py-5 rounded-full font-black text-lg shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3"
+          className={`bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ${ctaPad} rounded-full font-black shadow-xl ${press} border-4 border-white inline-flex items-center gap-3`}
         >
           <Mic size={22} /> Ligar microfone
         </button>
       ) : (
-        <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-3 rounded-full font-black animate-pulse">
+        <div className={`inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-3 rounded-full font-black ${pulseCls}`}>
           <Mic size={20} /> Ouvindo... sopre agora!
         </div>
       )}
+
     </div>
   );
 }
@@ -1810,6 +1825,9 @@ function CenaSopro({ cena, progress, level }: { cena: string; progress: number; 
 // ============== 18. Sons do Corpo / Paromatopeias ==============
 // Mecânica única: som textual → escolher ação (texto + emoji)
 function SonsCorpo({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
   return (
     <div className="text-center">
       <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1">
@@ -1825,9 +1843,9 @@ function SonsCorpo({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o === p.correta)}
-              className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg transition-all flex flex-col items-center gap-2 ${hover}`}
             >
-              <RenderEmoji e={emoji} label={limpo} className="w-16 h-16" />
+              <RenderEmoji e={emoji} label={limpo} className={imgSize} />
               <span>{limpo}</span>
             </button>
           );
@@ -1836,6 +1854,7 @@ function SonsCorpo({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ============== 19. Colorir a Letra ==============
 // Letra oca grande + paleta de 12 cores (6 de cada lado). Criança escolhe cor e toca na letra para pintar.
@@ -1900,16 +1919,21 @@ function TracadoLetras({ p, onDone }: any) {
   const onUp = () => setDrawing(false);
   const limpar = () => { setStrokes([]); setPintado(false); };
 
+  const { effective: sens } = useSensoryProfile();
+  const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
+  const selectedScale = sens.reduceMotion ? "" : "scale-110";
+  const hoverScale = sens.reduceMotion ? "" : "hover:scale-110";
   const Bolinha = ({ c }: { c: { nome: string; hex: string } }) => (
     <button
       onClick={() => escolher(c)}
       aria-label={c.nome}
-      className={`w-10 h-10 md:w-12 md:h-12 rounded-full border-4 transition-transform ${
-        cor === c.hex ? "border-slate-900 scale-110" : "border-white"
-      } shadow-md hover:scale-110`}
+      className={`${bolinhaSize} rounded-full border-4 transition-transform ${
+        cor === c.hex ? `border-slate-900 ${selectedScale}` : "border-white"
+      } shadow-md ${hoverScale}`}
       style={{ background: c.hex }}
     />
   );
+
 
   return (
     <div className="text-center space-y-3">
@@ -2177,8 +2201,14 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
 // Detecta SOM no microfone (volume), não palavras → reconhece na hora.
 // Sempre celebra. Sem reconhecimento de voz que demora e frustra.
 function ArticulacaoSons({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const scaleCls = sens.reduceMotion ? "" : "scale-110";
+  const emojiSize = sens.largerTargets ? "w-32 h-32" : "w-28 h-28";
   const palavra: string = p.palavra;
   const silabas: string[] = p.silabas;
+
   const [acesas, setAcesas] = useState<Set<number>>(new Set());
   const [feedback, setFeedback] = useState("Toque no microfone e fale a palavra 🎤");
   const [ouvindo, setOuvindo] = useState(false);
@@ -2274,10 +2304,10 @@ function ArticulacaoSons({ p, onDone }: any) {
 
   return (
     <div className="text-center space-y-5">
-      <div className={`flex justify-center transition-transform ${celebrar ? "scale-110" : ""}`}>
+      <div className={`flex justify-center transition-transform ${celebrar ? scaleCls : ""}`}>
         <RenderEmoji
           e={p.emoji}
-          className={`w-28 h-28 ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
+          className={`${emojiSize} ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
         />
       </div>
       <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
@@ -2288,9 +2318,9 @@ function ArticulacaoSons({ p, onDone }: any) {
               key={i}
               className={`px-3 py-1 rounded-xl transition-all duration-300 ${
                 celebrar
-                  ? "bg-rose-100 text-rose-600 scale-125 animate-pulse"
+                  ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
                   : acesa
-                    ? "bg-emerald-100 text-emerald-700 scale-125"
+                    ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
                     : "text-muted-foreground/50"
               }`}
             >
@@ -2307,18 +2337,22 @@ function ArticulacaoSons({ p, onDone }: any) {
       <button
         onClick={gravar}
         disabled={done || ouvindo}
-        className={`w-full py-5 rounded-3xl text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? "bg-emerald-500 animate-pulse" : "bg-rose-500"}`}
+        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
       >
         <Mic className="w-7 h-7" />
         {done ? "Muito bem!" : ouvindo ? "Ouvindo..." : `Falar 🎤`}
       </button>
+
     </div>
   );
 }
 
 // 26. VOCABULÁRIO SEMÂNTICO — qual item NÃO pertence ao grupo?
 function VocabularioSemantico({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
@@ -2340,7 +2374,7 @@ function VocabularioSemantico({ p, onDone }: any) {
             selecionado === item
               ? certo
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : "border-border bg-card hover:border-rose/50";
           return (
             <button
@@ -2348,7 +2382,7 @@ function VocabularioSemantico({ p, onDone }: any) {
               onClick={() => handleClick(item)}
               className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}
             >
-              <RenderEmoji e={emoji} label={nome} className="w-14 h-14" />
+              <RenderEmoji e={emoji} label={nome} className={imgSize} />
               <span className="font-bold text-sm">{nome}</span>
             </button>
           );
@@ -2358,14 +2392,21 @@ function VocabularioSemantico({ p, onDone }: any) {
   );
 }
 
+
 // 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
 function NomeacaoRapida({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [fase, setFase] = useState<"flash" | "resposta" | "done">("flash");
   const [escolhido, setEscolhido] = useState<string | null>(null);
+  const flashMsAdj = sens.lowStim ? Math.round(p.flashMs * 1.5) : p.flashMs;
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const flashImg = sens.largerTargets ? "w-40 h-40" : "w-32 h-32";
+  const optImg = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
   useEffect(() => {
-    const t = setTimeout(() => setFase("resposta"), p.flashMs);
+    const t = setTimeout(() => setFase("resposta"), flashMsAdj);
     return () => clearTimeout(t);
-  }, [p.flashMs]);
+  }, [flashMsAdj]);
   const handleClick = (opt: string) => {
     if (fase !== "resposta" || escolhido) return;
     setEscolhido(opt);
@@ -2377,8 +2418,8 @@ function NomeacaoRapida({ p, onDone }: any) {
       <div
         className={`transition-all duration-300 rounded-3xl border-2 p-8 flex items-center justify-center ${fase === "flash" ? "border-amber/50 bg-amber/10" : "border-muted bg-muted/20"}`}
       >
-        <div className={fase === "flash" ? "animate-pulse" : "opacity-90"}>
-          <RenderEmoji e={p.emoji} label={p.nome} className="w-32 h-32" />
+        <div className={fase === "flash" ? pulseCls : "opacity-90"}>
+          <RenderEmoji e={p.emoji} label={p.nome} className={flashImg} />
         </div>
       </div>
       {fase !== "flash" && (
@@ -2391,7 +2432,7 @@ function NomeacaoRapida({ p, onDone }: any) {
                 escolhido === opt
                   ? certa
                     ? "border-success bg-success/10 text-success"
-                    : "border-destructive bg-destructive/10"
+                    : errorBg
                   : escolhido && certa
                     ? "border-success bg-success/10"
                     : "border-border bg-card hover:border-amber/60";
@@ -2401,7 +2442,7 @@ function NomeacaoRapida({ p, onDone }: any) {
                   onClick={() => handleClick(opt)}
                   className={`rounded-2xl border-2 p-3 transition-all flex flex-col items-center gap-2 ${bg}`}
                 >
-                  <RenderEmoji label={opt} className="w-20 h-20" />
+                  <RenderEmoji label={opt} className={optImg} />
                   <span className="font-black text-base">{opt}</span>
                 </button>
               );
@@ -2410,11 +2451,12 @@ function NomeacaoRapida({ p, onDone }: any) {
         </>
       )}
       {fase === "flash" && (
-        <div className="text-sm text-muted-foreground animate-pulse">Olha a figura!</div>
+        <div className={`text-sm text-muted-foreground ${pulseCls}`}>Olha a figura!</div>
       )}
     </div>
   );
 }
+
 
 // ── COORDENAÇÃO MOTORA ──────────────────────────────────────
 
@@ -3174,7 +3216,10 @@ function ReacaoRapida({ p, onDone }: any) {
 
 // 35. SEGUIR INSTRUÇÃO — lê instrução, toca item correto
 function SeguirInstrucao({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
@@ -3193,7 +3238,7 @@ function SeguirInstrucao({ p, onDone }: any) {
             selecionado === item
               ? certa
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : selecionado && certa
                 ? "border-success bg-success/10"
                 : "border-border bg-card hover:border-violet/50";
@@ -3203,7 +3248,7 @@ function SeguirInstrucao({ p, onDone }: any) {
               onClick={() => handleClick(item)}
               className={`rounded-2xl border-2 p-4 font-bold flex flex-col items-center gap-2 transition-all ${bg}`}
             >
-              <RenderEmoji e={item} className="w-14 h-14" />
+              <RenderEmoji e={item} className={imgSize} />
             </button>
           );
         })}
@@ -3211,6 +3256,7 @@ function SeguirInstrucao({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ── ALFABETIZAÇÃO ─────────────────────────────────────────────
 
