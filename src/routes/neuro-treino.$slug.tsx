@@ -2349,7 +2349,10 @@ function ArticulacaoSons({ p, onDone }: any) {
 
 // 26. VOCABULÁRIO SEMÂNTICO — qual item NÃO pertence ao grupo?
 function VocabularioSemantico({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-14 h-14";
   const handleClick = (item: string) => {
     if (selecionado) return;
     setSelecionado(item);
@@ -2371,7 +2374,7 @@ function VocabularioSemantico({ p, onDone }: any) {
             selecionado === item
               ? certo
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : "border-border bg-card hover:border-rose/50";
           return (
             <button
@@ -2379,7 +2382,7 @@ function VocabularioSemantico({ p, onDone }: any) {
               onClick={() => handleClick(item)}
               className={`rounded-2xl border-2 p-4 flex flex-col items-center gap-2 transition-all ${bg}`}
             >
-              <RenderEmoji e={emoji} label={nome} className="w-14 h-14" />
+              <RenderEmoji e={emoji} label={nome} className={imgSize} />
               <span className="font-bold text-sm">{nome}</span>
             </button>
           );
@@ -2388,6 +2391,7 @@ function VocabularioSemantico({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 27. NOMEAÇÃO RÁPIDA — flash de figura, 4 opções, clicar rápido
 function NomeacaoRapida({ p, onDone }: any) {
