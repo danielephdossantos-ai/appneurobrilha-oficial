@@ -150,36 +150,64 @@ export function TrabalhoBrilha({ childId }: Props) {
         </p>
       ) : (
         <div className="grid sm:grid-cols-2 gap-3">
-          {trabalhos.map((t) => (
-            <div
-              key={t.id}
-              className="bg-white border-2 border-amber-100 rounded-xl p-3 flex flex-col gap-2"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="text-sm font-bold text-foreground truncate">{t.titulo}</p>
-                  <p className="text-[11px] text-muted-foreground truncate">
-                    {t.materia || "Tema"}: {t.tema}
-                  </p>
+          {trabalhos.map((t) => {
+            const dias = t.data_entrega
+              ? Math.ceil(
+                  (new Date(t.data_entrega + "T12:00:00").getTime() - Date.now()) /
+                    (1000 * 60 * 60 * 24),
+                )
+              : null;
+            return (
+              <div
+                key={t.id}
+                className="bg-white border-2 border-amber-100 rounded-xl p-3 flex flex-col gap-2"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-foreground truncate">{t.titulo}</p>
+                    <p className="text-[11px] text-muted-foreground truncate">
+                      {t.materia || "Tema"}: {t.tema}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => remover(t.id)}
+                    className="p-1 text-muted-foreground hover:text-rose-600 shrink-0"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => remover(t.id)}
-                  className="p-1 text-muted-foreground hover:text-rose-600 shrink-0"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                {t.data_entrega && (
+                  <div
+                    className={`text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-1 px-2 py-1 rounded-md w-fit ${
+                      dias !== null && dias < 3
+                        ? "bg-rose-50 text-rose-700"
+                        : "bg-amber-50 text-amber-700"
+                    }`}
+                  >
+                    📅 Entrega:{" "}
+                    {new Date(t.data_entrega + "T12:00:00").toLocaleDateString("pt-BR")}
+                    {dias !== null &&
+                      (dias < 0
+                        ? " · atrasado"
+                        : dias === 0
+                          ? " · hoje!"
+                          : ` · em ${dias} dia${dias === 1 ? "" : "s"}`)}
+                  </div>
+                )}
+                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>
+                    {t.blocos?.length || 0} blocos · {t.fontes?.length || 0} fontes
+                  </span>
+                  <button
+                    onClick={() => setEditandoId(t.id)}
+                    className="font-bold text-amber-700 hover:text-amber-900"
+                  >
+                    Abrir →
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-                <span>{t.blocos?.length || 0} blocos · {t.fontes?.length || 0} fontes</span>
-                <button
-                  onClick={() => setEditandoId(t.id)}
-                  className="font-bold text-amber-700 hover:text-amber-900"
-                >
-                  Abrir →
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -210,6 +238,8 @@ function EditorTrabalho({
   const [titulo, setTitulo] = useState(trabalhoExistente?.titulo || "");
   const [tema, setTema] = useState(trabalhoExistente?.tema || "");
   const [materia, setMateria] = useState(trabalhoExistente?.materia || "");
+  const [dataEntrega, setDataEntrega] = useState<string>(trabalhoExistente?.data_entrega || "");
+
   const [blocos, setBlocos] = useState<Bloco[]>(trabalhoExistente?.blocos || []);
   const [fontes, setFontes] = useState<Fonte[]>(trabalhoExistente?.fontes || []);
 
@@ -238,7 +268,7 @@ function EditorTrabalho({
   useEffect(() => {
     if (!childId) return;
     if (!titulo.trim() || !tema.trim()) return;
-    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes });
+    const snapshot = JSON.stringify({ titulo, tema, materia, dataEntrega, blocos, fontes });
     if (snapshot === ultimoSalvoRef.current) return;
     const t = setTimeout(async () => {
       setAutoStatus("salvando");
@@ -247,6 +277,7 @@ function EditorTrabalho({
         titulo: titulo.trim(),
         tema: tema.trim(),
         materia: materia.trim() || null,
+        data_entrega: dataEntrega || null,
         blocos: blocos as any,
         fontes: fontes as any,
       };
@@ -274,7 +305,7 @@ function EditorTrabalho({
       }
     }, 1500);
     return () => clearTimeout(t);
-  }, [titulo, tema, materia, blocos, fontes, childId, idAtual]);
+  }, [titulo, tema, materia, dataEntrega, blocos, fontes, childId, idAtual]);
 
   async function rodarRevisao() {
     if (revisando) return;
@@ -426,6 +457,7 @@ function EditorTrabalho({
       titulo: titulo.trim(),
       tema: tema.trim(),
       materia: materia.trim() || null,
+      data_entrega: dataEntrega || null,
       blocos: blocos as any,
       fontes: fontes as any,
     };
@@ -570,6 +602,24 @@ function EditorTrabalho({
               placeholder="Tema (ex: Sistema solar)"
               className="sm:col-span-2 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
             />
+            <label className="sm:col-span-2 flex items-center gap-2 text-xs font-bold text-amber-800">
+              📅 Data de entrega:
+              <input
+                type="date"
+                value={dataEntrega}
+                onChange={(e) => setDataEntrega(e.target.value)}
+                className="flex-1 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
+              />
+              {dataEntrega && (
+                <button
+                  type="button"
+                  onClick={() => setDataEntrega("")}
+                  className="text-[11px] text-muted-foreground hover:text-rose-600 underline"
+                >
+                  limpar
+                </button>
+              )}
+            </label>
           </div>
 
           {/* Botões de bloco */}
