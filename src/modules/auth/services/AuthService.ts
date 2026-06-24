@@ -2,19 +2,20 @@ import { supabase } from "@/database/supabase/client";
 
 export class AuthService {
   static async signOut() {
-    window.location.href = "/api/logout";
+    await supabase.auth.signOut();
+    window.location.href = "/auth";
   }
 
   static async getSession() {
-    return { data: { session: null }, error: null };
+    return supabase.auth.getSession();
   }
 
   static async getUser() {
-    return { data: { user: null }, error: null };
+    return supabase.auth.getUser();
   }
 
-  static onAuthStateChange(_callback: (event: string, session: any) => void) {
-    return { data: { subscription: { unsubscribe: () => {} } } };
+  static onAuthStateChange(callback: (event: string, session: any) => void) {
+    return supabase.auth.onAuthStateChange(callback);
   }
 
   static async updatePrivacySettings(settings: {
@@ -23,10 +24,38 @@ export class AuthService {
     analytics_consent?: boolean;
     data_usage_consent?: boolean;
   }) {
-    return { error: null };
+    const { data: auth } = await supabase.auth.getUser();
+    const userId = auth?.user?.id;
+    if (!userId) return { error: new Error("NOT_AUTHENTICATED") };
+
+    const { data: existing } = await supabase
+      .from("user_privacy_settings")
+      .select("id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (existing) {
+      const { error } = await supabase
+        .from("user_privacy_settings")
+        .update(settings)
+        .eq("user_id", userId);
+      return { error };
+    }
+    const { error } = await supabase
+      .from("user_privacy_settings")
+      .insert([{ user_id: userId, ...settings }]);
+    return { error };
   }
 
   static async getPrivacySettings() {
-    return null;
+    const { data: auth } = await supabase.auth.getUser();
+    const userId = auth?.user?.id;
+    if (!userId) return null;
+    const { data } = await supabase
+      .from("user_privacy_settings")
+      .select("*")
+      .eq("user_id", userId)
+      .maybeSingle();
+    return data;
   }
 }

@@ -13,51 +13,54 @@ import {
 import { ShieldCheck, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-const LGPD_KEY = "lgpd_accepted_v1";
+const LGPD_KEY_PREFIX = "lgpd_accepted_v1:";
 
 export const LGPDConsent: React.FC = () => {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const checkedRef = useRef(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const checkedRef = useRef<string | null>(null);
   const mountedRef = useRef(true);
   const location = useLocation();
 
   useEffect(() => {
     mountedRef.current = true;
 
-    // Não mostrar na tela de autenticação
     if (location.pathname === "/auth") {
       setShow(false);
       return;
     }
-
-    // Se já aceitou (persistido em localStorage), nunca mais mostrar nesta máquina
-    if (localStorage.getItem(LGPD_KEY)) {
-      setShow(false);
-      return;
-    }
-
-    // Evitar re-checagem (TOKEN_REFRESHED, navegação, etc. não devem disparar o modal de novo)
-    if (checkedRef.current) return;
 
     const checkConsent = async () => {
       try {
         const {
           data: { session },
         } = await AuthService.getSession();
-        checkedRef.current = true;
-        if (!session || !mountedRef.current) return;
+        if (!session || !mountedRef.current) {
+          setShow(false);
+          return;
+        }
+        const uid = session.user.id;
+        setUserId(uid);
 
-        const settings = (await AuthService.getPrivacySettings()) as any;
-        if (settings?.terms_accepted) {
-          localStorage.setItem(LGPD_KEY, "true");
+        // Per-user device cache: avoid blocking modal for OTHER users on same device
+        const key = LGPD_KEY_PREFIX + uid;
+        if (localStorage.getItem(key)) {
+          setShow(false);
           return;
         }
 
-        // Só mostrar depois de confirmar que realmente falta aceitar
-        if (mountedRef.current && !localStorage.getItem(LGPD_KEY)) {
-          setShow(true);
+        if (checkedRef.current === uid) return;
+        checkedRef.current = uid;
+
+        const settings = (await AuthService.getPrivacySettings()) as any;
+        if (settings?.terms_accepted) {
+          localStorage.setItem(key, "true");
+          setShow(false);
+          return;
         }
+
+        if (mountedRef.current) setShow(true);
       } catch (error) {
         console.error("Erro ao verificar consentimento:", error);
       }
@@ -70,9 +73,10 @@ export const LGPDConsent: React.FC = () => {
     };
   }, [location.pathname]);
 
+
   const handleAccept = async () => {
     setLoading(true);
-    localStorage.setItem(LGPD_KEY, "true");
+    if (userId) localStorage.setItem(LGPD_KEY_PREFIX + userId, "true");
     setShow(false);
 
     try {
