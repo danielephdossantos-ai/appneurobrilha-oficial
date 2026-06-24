@@ -348,8 +348,6 @@ function MechanicRenderer({
       return <SequenciaPadrao p={variation.payload} onDone={onConcluir} />;
     case "cade-o-par":
       return <CadeOPar p={variation.payload} onDone={onConcluir} />;
-    case "foco-total":
-      return <FocoTotal p={variation.payload} onDone={onConcluir} />;
     case "labirinto-do-som":
       return <LabirintoSom p={variation.payload} onDone={onConcluir} />;
     case "mosaico-de-formas":
@@ -969,37 +967,6 @@ function CadeOPar({ p, onDone }: any) {
   );
 }
 
-// ============== 8. Foco Total (Stroop) ==============
-function FocoTotal({ p, onDone }: any) {
-  return (
-    <div className="text-center">
-      <div
-        className="font-black text-8xl mb-8 flex flex-col items-center gap-4"
-        style={{ color: p.corExibida }}
-      >
-        <div className="bg-card border-4 border-white rounded-full p-6 shadow-xl w-32 h-32 flex items-center justify-center">
-          <div
-            className="w-20 h-20 rounded-full shadow-inner"
-            style={{ background: p.corExibida }}
-          />
-        </div>
-        <span>{p.palavra}</span>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {p.options.map((c: any, i: number) => (
-          <button
-            key={i}
-            onClick={() => onDone(c.nome === p.corCerta)}
-            className="rounded-xl py-8 font-black text-white shadow-lg hover:scale-105 transition-all flex items-center justify-center"
-            style={{ background: c.hex }}
-          >
-            <div className="w-8 h-8 rounded-full bg-white/40 border-2 border-white shadow-inner" />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ============== 9. Labirinto do Som ==============
 function LabirintoSom({ p, onDone }: any) {

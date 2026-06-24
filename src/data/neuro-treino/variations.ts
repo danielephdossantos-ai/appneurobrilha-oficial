@@ -31,7 +31,7 @@ export type CategoriaSlug =
   | "onde-esta"
   | "sequencia-e-padrao"
   | "cade-o-par"
-  | "foco-total"
+  
   | "labirinto-do-som"
   
   | "mosaico-de-formas"
@@ -169,15 +169,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-primary/20 to-primary/5",
     objetivo: "Memória associativa direta",
     instrucao: "Vire duas cartas para encontrar os pares iguais.",
-  },
-  "foco-total": {
-    slug: "foco-total",
-    nome: "Foco Total",
-    emoji: "🎯",
-    grupo: "Funções Executivas",
-    cor: "from-primary/20 to-primary/5",
-    objetivo: "Controle inibitório (Stroop infantil)",
-    instrucao: "Toque na COR da palavra — ignore o que está escrito.",
   },
   "labirinto-do-som": {
     slug: "labirinto-do-som",
@@ -894,29 +885,6 @@ const PAR_VARS: Variation[] = range(30).map((i) => {
   return { id: `cp-${i + 1}`, payload: { pares: items } };
 });
 
-// 8. FOCO TOTAL — Stroop infantil
-const FOCO_CORES = [
-  { nome: "VERMELHO", hex: "#ef4444" },
-  { nome: "AZUL", hex: "#3b82f6" },
-  { nome: "VERDE", hex: "#22c55e" },
-  { nome: "AMARELO", hex: "#facc15" },
-  { nome: "ROXO", hex: "#a855f7" },
-];
-const FOCO_VARS: Variation[] = range(30).map((i) => {
-  const wordIdx = i % FOCO_CORES.length;
-  const colorIdx = (i + 2) % FOCO_CORES.length; // garante mismatch
-  const opts = FOCO_CORES.slice(0, 4);
-  if (!opts.find((c) => c.nome === FOCO_CORES[colorIdx].nome)) opts[0] = FOCO_CORES[colorIdx];
-  return {
-    id: `ft-${i + 1}`,
-    payload: {
-      palavra: FOCO_CORES[wordIdx].nome,
-      corExibida: FOCO_CORES[colorIdx].hex,
-      corCerta: FOCO_CORES[colorIdx].nome,
-      options: opts,
-    },
-  };
-});
 
 // 9. LABIRINTO DO SOM — escolher direção por pista sonora (texto)
 const DIRECOES = [
@@ -2250,7 +2218,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "onde-esta": ONDE_VARS,
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
-  "foco-total": FOCO_VARS,
+  
   "labirinto-do-som": LABIRINTO_VARS,
   
   "mosaico-de-formas": MOSAICO_VARS,
@@ -2321,7 +2289,6 @@ export const GRUPOS = [
       "memoria-visual",
       "reacao-rapida",
       "seguir-instrucao",
-      "foco-total",
     ] as CategoriaSlug[],
   },
   {
