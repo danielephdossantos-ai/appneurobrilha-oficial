@@ -2970,20 +2970,28 @@ function MemoriaVisual({ p, onDone }: any) {
 
 // 34. REAÇÃO RÁPIDA — Go / No-Go
 function ReacaoRapida({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  // Janela mínima anti-impulsividade: ignora cliques nos primeiros 250ms
+  const MIN_RESPONSE_MS = 250;
+  // Em modo low-stim, intervalo 50% maior para reduzir pressão
+  const intervaloMs = sens.lowStim
+    ? Math.round(p.intervaloMs * 1.5)
+    : p.intervaloMs;
+
   const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [feedbackLocal, setFeedbackLocal] = useState<"ok" | "erro" | null>(null);
-  const [tempo, setTempo] = useState(p.intervaloMs);
+  const [tempo, setTempo] = useState(intervaloMs);
   const [travado, setTravado] = useState(false);
+  const startRef = useRef(0);
 
-  // Countdown por rodada — se acabar, conta como erro e avança.
   useEffect(() => {
-    setTempo(p.intervaloMs);
+    setTempo(intervaloMs);
     setFeedbackLocal(null);
     setTravado(false);
-    const inicio = Date.now();
+    startRef.current = Date.now();
     const iv = setInterval(() => {
-      const rest = p.intervaloMs - (Date.now() - inicio);
+      const rest = intervaloMs - (Date.now() - startRef.current);
       if (rest <= 0) {
         clearInterval(iv);
         proximo(false);
@@ -2993,7 +3001,7 @@ function ReacaoRapida({ p, onDone }: any) {
     }, 80);
     return () => clearInterval(iv);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idx]);
+  }, [idx, intervaloMs]);
 
   const proximo = (acerto: boolean) => {
     if (travado) return;
@@ -3009,8 +3017,17 @@ function ReacaoRapida({ p, onDone }: any) {
     }, 1100);
   };
 
+  const onClick = (certa: boolean) => {
+    // Anti-impulsividade: clique antes da janela mínima é descartado
+    if (Date.now() - startRef.current < MIN_RESPONSE_MS) return;
+    proximo(certa);
+  };
+
   const round = p.seq[idx] ?? p.seq[0];
-  const pct = Math.max(0, Math.min(100, (tempo / p.intervaloMs) * 100));
+  const pct = Math.max(0, Math.min(100, (tempo / intervaloMs) * 100));
+  const dangerColor = sens.softColors ? "bg-amber-500" : "bg-destructive";
+  const emojiSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const press = sens.reduceMotion ? "" : " active:scale-95";
 
   return (
     <div className="text-center space-y-5">
@@ -3024,7 +3041,7 @@ function ReacaoRapida({ p, onDone }: any) {
 
       <div className="h-2 rounded-full bg-muted overflow-hidden">
         <div
-          className={`h-full transition-[width] duration-75 ${pct > 40 ? "bg-success" : pct > 15 ? "bg-amber-500" : "bg-destructive"}`}
+          className={`h-full transition-[width] duration-75 ${pct > 40 ? "bg-success" : pct > 15 ? "bg-amber-500" : dangerColor}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -3040,15 +3057,15 @@ function ReacaoRapida({ p, onDone }: any) {
               ? "border-success bg-success/15"
               : feedbackLocal === "erro" && !certa
                 ? "border-border bg-card opacity-50"
-                : "border-border bg-card hover:border-violet/50 active:scale-95";
+                : `border-border bg-card hover:border-violet/50${press}`;
           return (
             <button
               key={i}
               disabled={travado}
-              onClick={() => proximo(certa)}
+              onClick={() => onClick(certa)}
               className={`rounded-2xl border-2 p-3 flex items-center justify-center transition-all ${bg}`}
             >
-              <RenderEmoji e={item.emoji} className="w-16 h-16" />
+              <RenderEmoji e={item.emoji} className={emojiSize} />
             </button>
           );
         })}
