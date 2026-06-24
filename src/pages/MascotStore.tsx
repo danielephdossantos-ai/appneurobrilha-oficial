@@ -559,16 +559,50 @@ const ADDITIONAL_CHARACTERS = [
 // Só o Guardião (Fase 4) e as fantasias exigem moedas.
 const STAGE_THRESHOLDS = { ovo: 0, nascendo: 0, bebe: 0, guardiao: 500 } as const;
 
+// Preço (Moedas Brilha) por tipo de mascote. A criança joga, ganha moedas e
+// desbloqueia. Quanto mais raro/fantasioso, mais alto.
 function getRequiredCoins(mascotId: string, mascotName: string): number {
-  const id = (mascotId || "").toLowerCase();
-  const name = (mascotName || "").toLowerCase();
-  if (id.includes("ovo") || name.includes("ovo")) return STAGE_THRESHOLDS.ovo;
-  if (id.includes("nascendo") || name.includes("nascendo")) return STAGE_THRESHOLDS.nascendo;
-  if (id.includes("bebe") || name.includes("bebê") || name.includes("bebe"))
-    return STAGE_THRESHOLDS.bebe;
-  // Pip (mascote principal) e Pipa Clássica liberam ao virar Guardião
+  const key = `${mascotId} ${mascotName}`.toLowerCase();
+
+  // Fases base (já vêm liberadas)
+  if (/(ovo|nascendo)/.test(key)) return 0;
+  if (/bebê|bebe/.test(key)) return 0;
+
+  // Teens com fantasias raras
+  if (/teen-(super|principe|princesa|roqueir|cyber)/.test(key)) return 2500;
+  if (/teen-(ursinho|carrinho|boneca|bola|trator)/.test(key)) return 1800;
+  if (/teen/.test(key)) return 2000;
+
+  // Princesas / Super-heróis / Fantasia
+  if (/(princesa|principe|super-her|fada|sereia|unicornio|unicórnio)/.test(key)) return 1500;
+
+  // Profissões
+  if (/(doutora|veterinaria|veterinária|professora|confeiteira|astronauta|bailarina)/.test(key))
+    return 1200;
+
+  // Hobbies / arte / música
+  if (/(arte|musica|música)/.test(key)) return 1000;
+
+  // Mundos (espaço, animais, dinos, fazendinha, robos, trens, carros, veículos, minecraft)
+  if (/(espaco|espaço|animais|dinossauros|fazendinha|robos|robôs|trens|carros|veiculos|veículos|minecraft)/.test(key))
+    return 900;
+
+  // Pip / Pipa principal (Guardião)
   return STAGE_THRESHOLDS.guardiao;
 }
+
+// Paletas vibrantes para os cards (rotaciona pelo index — visual colorido,
+// não cinza). Cada card recebe uma cor diferente.
+const CARD_PALETTES = [
+  "from-pink-200 via-fuchsia-100 to-purple-200",
+  "from-amber-200 via-yellow-100 to-orange-200",
+  "from-sky-200 via-cyan-100 to-blue-200",
+  "from-emerald-200 via-green-100 to-teal-200",
+  "from-violet-200 via-indigo-100 to-blue-200",
+  "from-rose-200 via-pink-100 to-red-200",
+  "from-lime-200 via-emerald-100 to-green-200",
+  "from-orange-200 via-amber-100 to-yellow-200",
+];
 
 
 const MascotStorePage: React.FC = () => {
