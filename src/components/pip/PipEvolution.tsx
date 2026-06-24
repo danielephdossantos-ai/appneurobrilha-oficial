@@ -1,8 +1,11 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Lock, Trophy } from "lucide-react";
+import { Sparkles, Lock, Trophy, Check } from "lucide-react";
+import { toast } from "sonner";
 import { cn } from "@/utils/utils";
 import { useAppState } from "@/core/store";
+import { useMascotStage, setMascotStage } from "@/lib/mascot-stage";
+
 
 // Pip (menino)
 import pipEgg from "@/assets/pip-egg.png";
