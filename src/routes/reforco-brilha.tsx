@@ -603,7 +603,7 @@ function ReforcoBrilha() {
 
           <CategoriasReforco childId={activeChild?.id ?? null} />
 
-          <AulasEscolaBrilha />
+          
 
 
 
