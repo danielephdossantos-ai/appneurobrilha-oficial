@@ -2028,8 +2028,9 @@ function TracadoLetras({ p, onDone }: any) {
 
 
           {/* Números delicados nos inícios — tocáveis em ordem */}
-          {strokes.map((s, i) => {
-            const start = s.path[0];
+          {strokes.map((_s, i) => {
+            const start = startMarkers[i];
+
             const done = i < step;
             const current = i === step;
             return (
