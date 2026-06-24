@@ -1982,21 +1982,23 @@ function TracadoLetras({ p, onDone }: any) {
 
         <div
           className="bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
-          style={{ width: 260 }}
+          style={{ width: 320 }}
         >
           <svg viewBox="0 0 100 100" className="w-full cursor-pointer" onClick={pintar}>
             <text
               x={50}
-              y={52}
+              y={54}
               textAnchor="middle"
               dominantBaseline="central"
-              fontSize={92}
+              fontSize={108}
               fontWeight={900}
-              fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
+              fontFamily='"Nunito","Quicksand","Comic Sans MS",system-ui,sans-serif'
               fill={fill}
               stroke="#0f172a"
-              strokeWidth={1.6}
+              strokeWidth={2}
               strokeLinejoin="round"
+              strokeLinecap="round"
+              paintOrder="stroke"
             >
               {p.letra}
             </text>
