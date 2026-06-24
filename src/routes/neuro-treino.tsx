@@ -40,7 +40,7 @@ import icRitmoSopro from "@/assets/neuro-treino/icons/v2/ritmo-e-sopro.png";
 import icSonsCorpo from "@/assets/neuro-treino/icons/v2/paromatopeias-corpo.png";
 import icTracado from "@/assets/neuro-treino/icons/v2/tracado-letras.png";
 
-import icLabPrecisao from "@/assets/neuro-treino/icons/v2/labirinto-precisao.png";
+
 import icTriagem from "@/assets/neuro-treino/icons/v2/triagem-categorias.png";
 import icExpressao from "@/assets/neuro-treino/icons/v2/expressao-emocao.png";
 import icConscienciaFono from "@/assets/neuro-treino/icons/v2/consciencia-fonologica.png";
