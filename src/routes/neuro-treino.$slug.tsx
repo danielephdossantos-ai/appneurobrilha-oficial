@@ -2146,46 +2146,124 @@ function LabirintoPrecisao({ p, onDone }: any) {
       setPos({ x: 12, y: 53 });
     }
   };
+
+  // Tema visual (cores do fundo/decoração) pelo nome do tema
+  const temaKey = (p.tema || "").toLowerCase();
+  const tema = temaKey.includes("verde")
+    ? { bg: "from-emerald-200 via-green-100 to-lime-100", parede: "#14532d", deco: "🌿", inicio: "🏠", fim: "⭐" }
+    : temaKey.includes("azul") || temaKey.includes("agua") || temaKey.includes("água")
+    ? { bg: "from-sky-200 via-cyan-100 to-blue-100", parede: "#0c4a6e", deco: "🐠", inicio: "🚤", fim: "🏝️" }
+    : temaKey.includes("rox") || temaKey.includes("magia")
+    ? { bg: "from-violet-200 via-fuchsia-100 to-purple-100", parede: "#4c1d95", deco: "✨", inicio: "🧙", fim: "🏰" }
+    : temaKey.includes("amarel") || temaKey.includes("sol") || temaKey.includes("praia")
+    ? { bg: "from-yellow-200 via-amber-100 to-orange-100", parede: "#7c2d12", deco: "🌻", inicio: "🐝", fim: "🍯" }
+    : temaKey.includes("rosa") || temaKey.includes("doce")
+    ? { bg: "from-pink-200 via-rose-100 to-red-100", parede: "#9f1239", deco: "🌸", inicio: "🦄", fim: "🍰" }
+    : { bg: "from-slate-200 via-zinc-100 to-stone-100", parede: "#1f2937", deco: "🌟", inicio: "🚀", fim: "🏁" };
+
+  const last = p.segmentos[p.segmentos.length - 1];
+  const fimX = last.x + last.w / 2;
+  const fimY = last.y + last.h / 2;
+  const inicioSeg = p.segmentos[0];
+  const inicioX = inicioSeg.x + 4;
+  const inicioY = inicioSeg.y + inicioSeg.h / 2;
+
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2">
-        Tema: {semEmoji(p.tema)} · Erros: {erros}
+      <div className="text-sm text-muted-foreground mb-2 font-bold">
+        Tema: {semEmoji(p.tema)} · Erros: <span className="text-coral">{erros}</span>
       </div>
       <div
         ref={containerRef}
         onMouseMove={(e) => move(e.clientX, e.clientY)}
         onMouseUp={() => setDragging(false)}
+        onMouseLeave={() => setDragging(false)}
         onTouchMove={(e) => {
           const t = e.touches[0];
           move(t.clientX, t.clientY);
         }}
         onTouchEnd={() => setDragging(false)}
-        className="relative mx-auto bg-muted/30 border-2 border-border rounded-2xl"
-        style={{ width: 360, height: 280 }}
+        className={`relative mx-auto bg-gradient-to-br ${tema.bg} border-[6px] border-white rounded-3xl shadow-2xl overflow-hidden`}
+        style={{ width: 360, height: 280, touchAction: "none" }}
       >
+        {/* Decoração de fundo (folhinhas/peixinhos espalhados) */}
+        <div className="absolute inset-0 pointer-events-none select-none opacity-30 text-2xl">
+          {[
+            { x: 6, y: 8 }, { x: 90, y: 6 }, { x: 4, y: 92 }, { x: 92, y: 90 },
+            { x: 50, y: 4 }, { x: 6, y: 50 }, { x: 92, y: 50 }, { x: 50, y: 94 },
+          ].map((d, i) => (
+            <span key={i} className="absolute" style={{ left: `${d.x}%`, top: `${d.y}%` }}>
+              {tema.deco}
+            </span>
+          ))}
+        </div>
+
+        {/* Paredes escuras (fundo coberto) + corredor recortado em branco */}
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+          <defs>
+            <mask id="corridor-mask">
+              <rect width="100" height="100" fill="white" />
+              {p.segmentos.map((s: any, i: number) => (
+                <rect key={i} x={s.x} y={s.y} width={s.w} height={s.h} rx="3" ry="3" fill="black" />
+              ))}
+            </mask>
+          </defs>
+          {/* Paredes com tema */}
+          <rect width="100" height="100" fill={tema.parede} opacity="0.85" mask="url(#corridor-mask)" />
+        </svg>
+
+        {/* Corredor branco com sombra interna suave */}
         {p.segmentos.map((s: any, i: number) => (
           <div
             key={i}
-            className="absolute bg-success/20 border border-success/40 rounded"
-            style={{ left: `${s.x}%`, top: `${s.y}%`, width: `${s.w}%`, height: `${s.h}%` }}
+            className="absolute bg-white/95 rounded-xl"
+            style={{
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: `${s.w}%`,
+              height: `${s.h}%`,
+              boxShadow: "inset 0 2px 6px rgba(0,0,0,0.08)",
+            }}
           />
         ))}
+
+        {/* Marcador de início */}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 text-2xl pointer-events-none"
+          style={{ left: `${inicioX}%`, top: `${inicioY}%` }}
+        >
+          {tema.inicio}
+        </div>
+
+        {/* Marcador de fim (pulsante) */}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 text-3xl pointer-events-none animate-pulse"
+          style={{ left: `${fimX}%`, top: `${fimY}%`, filter: "drop-shadow(0 2px 4px rgba(0,0,0,.3))" }}
+        >
+          {tema.fim}
+        </div>
+
+        {/* Bolinha (jogador) */}
         <button
           onMouseDown={() => setDragging(true)}
           onTouchStart={() => setDragging(true)}
-          className="absolute w-12 h-12 bg-coral rounded-full shadow-xl border-4 border-white cursor-grab active:cursor-grabbing flex items-center justify-center transition-transform hover:scale-110 z-20"
-          style={{ left: `calc(${pos.x}% - 24px)`, top: `calc(${pos.y}% - 24px)` }}
+          className="absolute w-12 h-12 rounded-full shadow-xl border-4 border-white cursor-grab active:cursor-grabbing flex items-center justify-center transition-transform hover:scale-110 z-20"
+          style={{
+            left: `calc(${pos.x}% - 24px)`,
+            top: `calc(${pos.y}% - 24px)`,
+            background: "radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b)",
+          }}
           aria-label="Bolinha"
         >
           {ilustracao(undefined, "BOLA") ? (
             <img src={ilustracao(undefined, "BOLA")} className="w-full h-full object-contain" />
           ) : (
-            <div className="w-6 h-6 bg-white rounded-full" />
+            <span className="text-xl">🐞</span>
           )}
         </button>
       </div>
-      <div className="text-xs text-muted-foreground mt-2">
-        Arraste a bolinha pelo corredor verde até o final
+      <div className="text-xs text-muted-foreground mt-2 font-medium">
+        Arraste a bolinha pelo caminho claro até {tema.fim}
       </div>
     </div>
   );
