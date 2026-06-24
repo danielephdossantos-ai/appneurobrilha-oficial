@@ -2355,7 +2355,7 @@ export const GRUPOS = [
       "copiar-figura",
       "alvo-movel",
       "tracado-letras",
-      "caminho-dos-pontos",
+      
       "labirinto-precisao",
     ] as CategoriaSlug[],
   },
