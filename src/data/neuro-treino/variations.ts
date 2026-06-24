@@ -1502,7 +1502,7 @@ const CORPO_VARS: Variation[] = range(30).map((i) => {
 type LetraGuia = { x: number; y: number; dir: "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw" };
 type LetraDef = { letra: string; palavra: string; emoji: string; guias: LetraGuia[] };
 const ALFABETO_BANK: LetraDef[] = [
-  { letra: "A", palavra: "ABELHA",     emoji: "🐝", guias: [{x:38,y:22,dir:"dl"},{x:62,y:22,dir:"dr"},{x:30,y:58,dir:"right"}]},
+  { letra: "A", palavra: "ABELHA",     emoji: "🐝", guias: [{x:35,y:35,dir:"dl"},{x:65,y:35,dir:"dr"},{x:30,y:60,dir:"right"}]},
   { letra: "B", palavra: "BOLA",       emoji: "⚽", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"right"},{x:28,y:52,dir:"right"}]},
   { letra: "C", palavra: "CASA",       emoji: "🏠", guias: [{x:72,y:24,dir:"ccw"}]},
   { letra: "D", palavra: "DADO",       emoji: "🎲", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"}]},
