@@ -844,16 +844,16 @@ const PEDACINHOS_VARS: Variation[] = range(30).map((i) => {
 
 // 5. ONDE ESTÁ — busca visual em grade com distratores
 const ONDE_BANK = [
-  { alvo: "🌟", distrator: "⭐" },
-  { alvo: "🍎", distrator: "🍏" },
-  { alvo: "🐱", distrator: "🐶" },
-  { alvo: "🦋", distrator: "🐝" },
-  { alvo: "🚗", distrator: "🚙" },
-  { alvo: "🌸", distrator: "🌺" },
-  { alvo: "⚽", distrator: "🏀" },
-  { alvo: "🐶", distrator: "🐺" },
-  { alvo: "🍌", distrator: "🍋" },
-  { alvo: "🐠", distrator: "🐟" },
+  { alvo: "🍎", distrator: "🚗" },
+  { alvo: "🐱", distrator: "🌳" },
+  { alvo: "🦋", distrator: "🍌" },
+  { alvo: "⚽", distrator: "🐶" },
+  { alvo: "🌟", distrator: "🍇" },
+  { alvo: "🚙", distrator: "🐟" },
+  { alvo: "🌸", distrator: "🐝" },
+  { alvo: "🐰", distrator: "🍉" },
+  { alvo: "🍌", distrator: "🐘" },
+  { alvo: "🐠", distrator: "🌼" },
 ];
 const ONDE_VARS: Variation[] = range(30).map((i) => {
   const b = ONDE_BANK[i % ONDE_BANK.length];
