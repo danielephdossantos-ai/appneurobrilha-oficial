@@ -75,7 +75,6 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "cade-o-par": icCadePar,
   "foco-total": icFocoTotal,
   "labirinto-do-som": icLabSom,
-  "foco-sustentado": icFocoSust,
   "rastreamento-sacadico": icRastreio,
   "mosaico-de-formas": icMosaico,
   "sequencia-de-cores": icSeqCores,
