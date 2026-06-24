@@ -951,22 +951,64 @@ const LABIRINTO_VARS: Variation[] = range(30).map((i) => {
   return { id: `ls-${i + 1}`, payload: { caminho } };
 });
 
-// 10. FOCO SUSTENTADO — alvo que aparece raramente no fluxo
-const STREAM_BANK = ["🐝", "🌸", "🐛", "🐞", "🦗", "🐌", "🍄", "🌿", "🌷", "🌻"];
-const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
-  const alvo = ["🦋", "⭐", "💎", "🌟", "❤️"][i % 5];
-  const tamanho = 20 + (i % 3) * 5;
-  const stream: string[] = [];
-  const alvoIndices: number[] = [];
-  for (let k = 0; k < tamanho; k++) {
-    if ((k + i) % 5 === 0) {
-      stream.push(alvo);
-      alvoIndices.push(k);
-    } else stream.push(STREAM_BANK[(k + i) % STREAM_BANK.length]);
+// 10. FOCO SUSTENTADO — várias figuras flutuam; criança toca o alvo pedido.
+// 10 fáceis (4 figuras), 10 médias (6), 10 difíceis (8). Ritmo bem calmo.
+const FOCO_BANCO = [
+  { emoji: "🐱", nome: "GATO" },
+  { emoji: "🐶", nome: "CACHORRO" },
+  { emoji: "🦁", nome: "LEÃO" },
+  { emoji: "🐯", nome: "TIGRE" },
+  { emoji: "🐵", nome: "MACACO" },
+  { emoji: "🐰", nome: "COELHO" },
+  { emoji: "🐼", nome: "PANDA" },
+  { emoji: "🦊", nome: "RAPOSA" },
+  { emoji: "🐮", nome: "VACA" },
+  { emoji: "🐷", nome: "PORCO" },
+  { emoji: "🐔", nome: "GALINHA" },
+  { emoji: "🐴", nome: "CAVALO" },
+  { emoji: "🦉", nome: "CORUJA" },
+  { emoji: "🦋", nome: "BORBOLETA" },
+  { emoji: "🐝", nome: "ABELHA" },
+  { emoji: "🐸", nome: "SAPO" },
+  { emoji: "🐢", nome: "TARTARUGA" },
+  { emoji: "🐠", nome: "PEIXE" },
+  { emoji: "🦄", nome: "UNICÓRNIO" },
+  { emoji: "🦖", nome: "DINOSSAURO" },
+  { emoji: "🐘", nome: "ELEFANTE" },
+  { emoji: "🍎", nome: "MAÇÃ" },
+  { emoji: "🍌", nome: "BANANA" },
+  { emoji: "🍓", nome: "MORANGO" },
+  { emoji: "🚗", nome: "CARRO" },
+  { emoji: "✈️", nome: "AVIÃO" },
+  { emoji: "⭐", nome: "ESTRELA" },
+  { emoji: "🌙", nome: "LUA" },
+];
+function _focoPick<T>(arr: T[], n: number, seed: number, exclude?: T): T[] {
+  const pool = exclude ? arr.filter((x) => x !== exclude) : arr.slice();
+  const out: T[] = [];
+  let s = seed + 1;
+  while (out.length < n && pool.length) {
+    s = (s * 9301 + 49297) % 233280;
+    const idx = s % pool.length;
+    out.push(pool.splice(idx, 1)[0]);
   }
+  return out;
+}
+const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
+  const faixa = Math.floor(i / 10); // 0,1,2
+  const nivel = faixa + 1;
+  const totalFiguras = [4, 6, 8][faixa];
+  const rodadas = [4, 5, 6][faixa];
+  const flutuarMs = [4200, 3600, 3000][faixa]; // duração do ciclo de flutuação
+  const rounds = range(rodadas).map((k) => {
+    const alvo = FOCO_BANCO[(i * 5 + k * 7) % FOCO_BANCO.length];
+    const distratores = _focoPick(FOCO_BANCO, totalFiguras - 1, i * 31 + k * 11, alvo);
+    const itens = _focoPick([alvo, ...distratores], totalFiguras, i * 17 + k * 3);
+    return { alvo, itens };
+  });
   return {
     id: `fs-${i + 1}`,
-    payload: { alvo, stream, alvoIndices, intervaloMs: 900 - (i % 5) * 80 },
+    payload: { rounds, nivel, totalFiguras, flutuarMs },
   };
 });
 
