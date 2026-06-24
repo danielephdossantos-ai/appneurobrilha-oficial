@@ -85,6 +85,17 @@ function AulasSemanaPage() {
           </div>
         </div>
 
+        <div className="mt-3 flex items-center gap-2 rounded-xl bg-white/10 border border-white/15 px-3 py-2">
+          <User className="w-4 h-4 text-amber-300" />
+          <p className="text-white text-xs font-bold">
+            {activeChild.nome}
+            <span className="text-white/60 font-semibold">
+              {activeChild.idade ? ` • ${activeChild.idade} anos` : ""}
+              {activeChild.serie ? ` • ${activeChild.serie}` : ""}
+            </span>
+          </p>
+        </div>
+
         <button
           onClick={() => gerar.mutate()}
           disabled={gerar.isPending}
