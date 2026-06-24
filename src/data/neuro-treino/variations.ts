@@ -1000,7 +1000,7 @@ const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
   const alvosQtd = [2, 4, 6][faixa];          // quantos alvos achar
   const distratores = [3, 4, 5][faixa];        // distratores caminhando junto
   const totalFiguras = alvosQtd + distratores;
-  const flutuarMs = [16000, 13000, 10500][faixa]; // travessia bem lenta (vai e volta)
+  const flutuarMs = [32000, 26000, 20000][faixa]; // travessia BEM lenta, calma
   const alvo = FOCO_BANCO[(i * 5) % FOCO_BANCO.length];
   const distList = _focoPick(FOCO_BANCO, distratores, i * 31 + 7, alvo);
   // itens: várias cópias do mesmo alvo + distratores variados
