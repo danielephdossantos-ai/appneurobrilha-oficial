@@ -2726,6 +2726,9 @@ function CopiarFigura({ p, onDone }: any) {
 
 // 31. ALVO MÓVEL — bichinho do banco se move pela tela, criança toca (tempo livre, sem voz)
 function AlvoMovel({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  // Em low-stim: velocidade -40% (anti-dispraxia/TDC)
+  const velocidade = sens.lowStim ? p.velocidade * 0.6 : p.velocidade;
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [round, setRound] = useState(1);
   const [tocou, setTocou] = useState(false);
@@ -2748,7 +2751,7 @@ function AlvoMovel({ p, onDone }: any) {
   useEffect(() => {
     let t = Math.random() * 10;
     const move = () => {
-      t += 0.012 * p.velocidade;
+      t += 0.012 * velocidade;
       setPos({ x: 50 + 38 * Math.cos(t), y: 50 + 32 * Math.sin(t * 1.3) });
       animRef.current = requestAnimationFrame(move);
     };
@@ -2756,7 +2759,7 @@ function AlvoMovel({ p, onDone }: any) {
     return () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [round, p.velocidade]);
+  }, [round, velocidade]);
 
   const handleToque = () => {
     if (tocou) return;
@@ -2772,13 +2775,23 @@ function AlvoMovel({ p, onDone }: any) {
     }
   };
 
+  // Fundo mais calmo no low-stim
+  const bgClass = sens.softColors
+    ? "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800"
+    : "bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 border-emerald-200";
+  // Alvo maior pra TDC / motor fino
+  const btnSize = sens.largerTargets ? "w-32 h-32" : "w-24 h-24";
+  const imgSize = sens.largerTargets ? "w-28 h-28" : "w-20 h-20";
+  const emojiSize = sens.largerTargets ? "w-24 h-24" : "w-16 h-16";
+  const press = sens.reduceMotion ? "" : " active:scale-90 transition-transform";
+
   return (
     <div className="space-y-3 text-center">
       <div className="text-sm text-muted-foreground font-bold">
         Toque no {p.nome.toLowerCase()} — Rodada {round} / {p.rounds}
       </div>
       <div
-        className="relative bg-gradient-to-br from-sky-100 via-emerald-50 to-amber-50 border-4 border-emerald-200 rounded-3xl overflow-hidden touch-none"
+        className={`relative border-4 rounded-3xl overflow-hidden touch-none ${bgClass}`}
         style={{ height: 360 }}
       >
         <button
@@ -2788,12 +2801,12 @@ function AlvoMovel({ p, onDone }: any) {
             top: `${pos.y}%`,
             transform: "translate(-50%,-50%)",
           }}
-          className="absolute w-24 h-24 rounded-full bg-white/70 backdrop-blur shadow-xl flex items-center justify-center active:scale-90 transition-transform ring-4"
+          className={`absolute rounded-full bg-white/70 backdrop-blur shadow-xl flex items-center justify-center ring-4 ${btnSize}${press}`}
         >
           {img ? (
-            <img src={img} alt={p.nome} draggable={false} className="w-20 h-20 object-contain" />
+            <img src={img} alt={p.nome} draggable={false} className={`${imgSize} object-contain`} />
           ) : (
-            <RenderEmoji e={p.emoji} className="w-16 h-16" />
+            <RenderEmoji e={p.emoji} className={emojiSize} />
           )}
         </button>
       </div>
@@ -2850,8 +2863,9 @@ function AcharDiferente({ p, onDone }: any) {
 
 // 33. MEMÓRIA VISUAL — flash de grade colorida, depois reproduzir
 function MemoriaVisual({ p, onDone }: any) {
-  // Tempo base mais generoso para memorizar (mínimo 5s, escala com o flashMs do nível).
-  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * 2.5);
+  const { effective: sens } = useSensoryProfile();
+  // Em low-stim: +50% no tempo de memorização (alívio de fadiga cognitiva)
+  const tempoBase = Math.max(5000, (p.flashMs ?? 2000) * (sens.lowStim ? 3.75 : 2.5));
   const [fase, setFase] = useState<"mostrar" | "reproduzir" | "done">("mostrar");
   const [selecionados, setSelecionados] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<boolean | null>(null);
@@ -2916,7 +2930,7 @@ function MemoriaVisual({ p, onDone }: any) {
           </div>
           <button
             onClick={() => setFase("reproduzir")}
-            className="px-5 py-2 rounded-xl bg-violet text-white font-bold shadow active:scale-95"
+            className={`px-5 py-2 rounded-xl bg-violet text-white font-bold shadow${sens.reduceMotion ? "" : " active:scale-95"}`}
           >
             Estou pronto! ➜
           </button>
@@ -2933,7 +2947,7 @@ function MemoriaVisual({ p, onDone }: any) {
             {p.grid.map((_: any, i: number) => (
               <div
                 key={i}
-                className="w-16 h-16 rounded-xl border-2 border-dashed border-muted-foreground"
+                className={`${sens.largerTargets ? "w-20 h-20" : "w-16 h-16"} rounded-xl border-2 border-dashed border-muted-foreground`}
                 style={{ backgroundColor: selecionados[i] ?? "transparent" }}
               />
             ))}
@@ -2943,7 +2957,7 @@ function MemoriaVisual({ p, onDone }: any) {
               <button
                 key={i}
                 onClick={() => handleCor(cor)}
-                className="w-14 h-14 rounded-xl border-2 border-white/30 active:scale-90 transition-all shadow"
+                className={`${sens.largerTargets ? "w-16 h-16" : "w-14 h-14"} rounded-xl border-2 border-white/30 transition-all shadow${sens.reduceMotion ? "" : " active:scale-90"}`}
                 style={{ backgroundColor: cor }}
               />
             ))}
@@ -2952,7 +2966,7 @@ function MemoriaVisual({ p, onDone }: any) {
             <button
               onClick={verDeNovo}
               disabled={revisoes >= maxRevisoes}
-              className="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold shadow active:scale-95 disabled:opacity-40"
+              className={`px-4 py-2 rounded-xl bg-amber-500 text-white font-bold shadow disabled:opacity-40${sens.reduceMotion ? "" : " active:scale-95"}`}
             >
               ↺ Ver de novo {revisoes > 0 ? `(${revisoes}/${maxRevisoes})` : ""}
             </button>
@@ -2960,7 +2974,7 @@ function MemoriaVisual({ p, onDone }: any) {
         </div>
       )}
       {feedback !== null && (
-        <div className={`text-2xl font-black ${feedback ? "text-success" : "text-destructive"}`}>
+        <div className={`text-2xl font-black ${feedback ? "text-success" : sens.softColors ? "text-amber-600" : "text-destructive"}`}>
           {feedback ? "Incrível!" : "Quase!"}
         </div>
       )}
