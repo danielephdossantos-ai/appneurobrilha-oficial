@@ -23,10 +23,11 @@ function AnamneseRoute() {
     (async () => {
       setCreating(true);
       try {
-        const { data: auth } = await supabase.auth.getUser();
+        const { data: auth, error: authErr } = await supabase.auth.getUser();
         const userId = auth?.user?.id;
-        if (!userId) {
-          toast.error("Faça login para iniciar a anamnese.");
+        if (authErr || !userId) {
+          await supabase.auth.signOut().catch(() => {});
+          toast.error("Sessão expirada. Faça login novamente.");
           navigate({ to: "/auth", replace: true });
           return;
         }
@@ -45,7 +46,16 @@ function AnamneseRoute() {
           .insert({ user_id: userId, nome: "Nova criança" })
           .select("id")
           .single();
-        if (error) throw error;
+        if (error) {
+          // Sessão antiga referenciando um usuário que não existe mais em auth.users
+          if ((error as any).code === "23503" || /foreign key/i.test(error.message)) {
+            await supabase.auth.signOut().catch(() => {});
+            toast.error("Sua sessão expirou. Entre novamente para continuar.");
+            navigate({ to: "/auth", replace: true });
+            return;
+          }
+          throw error;
+        }
         if (!cancelled && data?.id) {
           navigate({
             to: "/anamnese/$childId",
@@ -59,6 +69,7 @@ function AnamneseRoute() {
       } finally {
         if (!cancelled) setCreating(false);
       }
+
     })();
     return () => {
       cancelled = true;
