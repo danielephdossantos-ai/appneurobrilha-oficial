@@ -10,6 +10,7 @@ import { cn } from "@/utils/utils";
 import { usePEIAutoGenerate } from "@/modules/pei/usePEIAutoGenerate";
 import { useMascot } from "@/contexts/MascotContext";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
+import { AulaDeHoje } from "@/modules/pei/AulaDeHoje";
 
 import { DinoWorld } from "@/components/worlds/DinoWorld";
 
