@@ -43,7 +43,7 @@ export type CategoriaSlug =
   | "ritmo-e-sopro"
   | "paromatopeias-corpo"
   | "tracado-letras"
-  | "caminho-dos-pontos"
+  
   | "labirinto-precisao"
   | "triagem-categorias"
   | "expressao-emocao"
