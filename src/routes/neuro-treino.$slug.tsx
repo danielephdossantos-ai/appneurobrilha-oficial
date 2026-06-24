@@ -633,9 +633,16 @@ function CompreensaoLeitora({ p, onDone }: any) {
 
 // ============== 2. Motorzinho dos Sons (Clínico Fono + Voz IA + Mic) ==============
 function Motorzinho({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const press = sens.reduceMotion ? "" : "active:scale-95";
+  const pulseCls = sens.reduceMotion ? "" : "animate-pulse";
+  const imgSize = sens.largerTargets ? "w-56 h-56 sm:w-64 sm:h-64" : "w-48 h-48 sm:w-56 sm:h-56";
+  const ctaPad = sens.largerTargets ? "px-12 py-7 text-2xl" : "px-10 py-6 text-xl";
+  const micPad = sens.largerTargets ? "px-10 py-6 text-xl" : "px-8 py-5 text-lg";
   const { hiperfoco } = useHiperfoco();
   const { activeChild } = useAppState();
   const nome = activeChild?.nome?.split(" ")[0] || "amigão";
+
 
   const tag: MotorzinhoTag = (() => {
     const id = hiperfoco?.id;
@@ -697,7 +704,6 @@ function Motorzinho({ p, onDone }: any) {
 
   return (
     <div className="text-center">
-      {/* Balão do PIP */}
       <div className="flex items-start gap-3 mb-6 text-left">
         <div className="shrink-0">
           {ilustracao(undefined, hiperfoco?.id === "minecraft" ? "CREEPER" : "LEÃO") ? (
@@ -713,7 +719,7 @@ function Motorzinho({ p, onDone }: any) {
         <div className="relative bg-card border-2 border-primary/30 rounded-2xl px-4 py-3 shadow-sm flex-1">
           <div className="absolute -left-2 top-4 w-3 h-3 bg-card border-l-2 border-b-2 border-primary/30 rotate-45" />
           <div className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
-            PIP – Professora {isSpeaking && <Volume2 size={12} className="animate-pulse" />}
+            PIP – Professora {isSpeaking && <Volume2 size={12} className={pulseCls} />}
           </div>
           <p className="text-base font-bold text-foreground">{pipMsg}</p>
         </div>
@@ -725,10 +731,10 @@ function Motorzinho({ p, onDone }: any) {
           <RenderEmoji
             e={item.imagem_url_ou_emoji}
             label={item.palavra_alvo}
-            className="w-48 h-48 sm:w-56 sm:h-56 drop-shadow-2xl animate-fade-in"
+            className={`${imgSize} drop-shadow-2xl animate-fade-in`}
           />
           {(phase === "your-turn" || phase === "listening") && (
-            <div className="absolute -inset-3 rounded-full border-4 border-primary/40 animate-pulse pointer-events-none" />
+            <div className={`absolute -inset-3 rounded-full border-4 border-primary/40 ${pulseCls} pointer-events-none`} />
           )}
         </div>
         <div className="text-7xl sm:text-8xl font-black text-coral select-none leading-none tracking-wide">
@@ -759,14 +765,14 @@ function Motorzinho({ p, onDone }: any) {
         <button
           onClick={iniciarDemo}
           disabled={isSpeaking}
-          className="bg-gradient-to-br from-coral to-coral/80 text-white px-10 py-6 rounded-full font-black text-xl shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 disabled:opacity-60"
+          className={`bg-gradient-to-br from-coral to-coral/80 text-white ${ctaPad} rounded-full font-black shadow-xl ${press} border-4 border-white inline-flex items-center gap-3 disabled:opacity-60`}
         >
           <Sparkles size={28} /> LIGAR MOTORZINHO
         </button>
       )}
 
       {phase === "demo" && (
-        <div className="text-sm font-bold text-primary animate-pulse flex items-center justify-center gap-2">
+        <div className={`text-sm font-bold text-primary ${pulseCls} flex items-center justify-center gap-2`}>
           <Volume2 size={16} /> Professora falando...
         </div>
       )}
@@ -776,7 +782,7 @@ function Motorzinho({ p, onDone }: any) {
           <button
             onClick={ouvirCrianca}
             disabled={isListening || isSpeaking || !micSupported}
-            className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground px-8 py-5 rounded-full font-black text-lg shadow-xl active:scale-95 border-4 border-white inline-flex items-center gap-3 disabled:opacity-60"
+            className={`bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ${micPad} rounded-full font-black shadow-xl ${press} border-4 border-white inline-flex items-center gap-3 disabled:opacity-60`}
           >
             <Mic size={22} /> {phase === "result" ? "Falar de novo" : "Minha vez de falar"}
           </button>
@@ -799,7 +805,7 @@ function Motorzinho({ p, onDone }: any) {
       )}
 
       {phase === "listening" && (
-        <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-4 rounded-full font-black animate-pulse">
+        <div className={`inline-flex items-center gap-3 bg-primary/10 border-2 border-primary text-primary px-6 py-4 rounded-full font-black ${pulseCls}`}>
           <MicOff size={22} /> Ouvindo... fala agora!
         </div>
       )}
@@ -807,7 +813,6 @@ function Motorzinho({ p, onDone }: any) {
   );
 }
 
-// ============== 3. Rimas ==============
 function Rimas({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const hoverCls = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
