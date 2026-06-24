@@ -2006,7 +2006,7 @@ function TracadoLetras({ p, onDone }: any) {
           <div className="flex items-center justify-between px-2 pt-1">
             <div className="font-black text-xl tracking-wide">
               <span style={{ color: fill === "white" ? "#dc2626" : fill }}>{p.letra}</span>
-              <span className="text-slate-900">{p.palavra.slice(1)}</span>
+              <span className="text-slate-900">{p.palavra.slice(p.letra.length)}</span>
             </div>
             <div className="text-3xl leading-none">{p.emoji}</div>
           </div>
