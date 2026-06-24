@@ -15,6 +15,27 @@ interface Row {
   completed: boolean;
 }
 
+function cleanText(value: unknown) {
+  return typeof value === "string" ? value.trim().replace(/\s+/g, " ") : "";
+}
+
+function childIdentityPatchFromResponses(responses: AnamneseV2Responses) {
+  const step1 = responses.step1 ?? {};
+  const patch: Record<string, string | number | boolean> = {
+    anamnese_completa: true,
+  };
+
+  const nome = cleanText(step1.nome);
+  const serie = cleanText(step1.serie);
+  const idade = typeof step1.idade === "number" && Number.isFinite(step1.idade) ? step1.idade : null;
+
+  if (nome) patch.nome = nome;
+  if (serie) patch.serie = serie;
+  if (idade !== null && idade >= 0) patch.idade = idade;
+
+  return patch;
+}
+
 export function useAnamneseV2(childId: string) {
   const qc = useQueryClient();
   const [localResponses, setLocalResponses] = useState<AnamneseV2Responses>({});
@@ -77,7 +98,7 @@ export function useAnamneseV2(childId: string) {
         .from("anamnese_v2" as any)
         .upsert(insertRow, { onConflict: "child_id" });
       if (error) throw error;
-      return { scores, risk_levels };
+      return { scores, risk_levels, userId };
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["anamnese_v2", childId] });
@@ -105,7 +126,7 @@ export function useAnamneseV2(childId: string) {
   };
 
   const finish = async () => {
-    const res = await upsert.mutateAsync({
+      const res = await upsert.mutateAsync({
       responses: localResponses,
       current_step: 16,
       completed: true,
@@ -113,10 +134,12 @@ export function useAnamneseV2(childId: string) {
     // Marca a criança como tendo anamnese concluída → libera painel dos pais
     // e o nascimento do Pip/Pipa na área da criança.
     if (UUID_RE.test(childId)) {
+        const childPatch = childIdentityPatchFromResponses(localResponses);
       const { error } = await supabase
         .from("children")
-        .update({ anamnese_completa: true })
-        .eq("id", childId);
+          .update(childPatch)
+          .eq("id", childId)
+          .eq("user_id", res.userId);
       if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
       qc.invalidateQueries({ queryKey: ["children"] });
     }
