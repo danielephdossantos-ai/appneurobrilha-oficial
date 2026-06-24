@@ -190,23 +190,37 @@ export function AulaInfinita({ query }: Props) {
                             {r.descricao && (
                               <p className="text-xs text-muted-foreground line-clamp-3 mt-1">{r.descricao}</p>
                             )}
-                            <div className="flex items-center justify-between gap-2 mt-2">
+                            <div className="flex items-center justify-between gap-2 mt-2 flex-wrap">
                               <div className={`flex items-center gap-1 text-[11px] font-bold ${sec.cor}`}>
                                 {ytId ? "Assistir aqui" : "Abrir aqui"}{" "}
                                 {ytId ? <Play className="h-3 w-3" /> : <ExternalLink className="h-3 w-3" />}
                               </div>
-                              <span
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                }}
-                              >
-                                <SpeakButton
-                                  size="sm"
-                                  text={`${r.titulo}. ${r.descricao || ""}`}
-                                  label="Ouvir"
-                                />
-                              </span>
+                              <div className="flex items-center gap-1">
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    window.open(r.url, "_blank", "noopener,noreferrer");
+                                  }}
+                                  className="flex items-center gap-1 text-[10px] font-bold text-muted-foreground hover:text-primary px-2 py-1 rounded hover:bg-primary/5"
+                                  title="Abrir fora do Neuro Brilha Kids"
+                                >
+                                  Abrir fora <ExternalLink className="h-3 w-3" />
+                                </button>
+                                <span
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                  }}
+                                >
+                                  <SpeakButton
+                                    size="sm"
+                                    text={`${r.titulo}. ${r.descricao || ""}`}
+                                    label="Ouvir"
+                                  />
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
