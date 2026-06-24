@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User } from "lucide-react";
+import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User, PlayCircle } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { gerarAulasSemana, listarAulasSemana } from "@/lib/aulas-semana";
 import { getSegundaDaSemana } from "@/modules/escola-brilha/engine/weekly-planner";
@@ -45,6 +45,20 @@ function AulasSemanaPage() {
     if (error) return toast.error(error.message);
     toast.success("Horário atualizado");
     qc.invalidateQueries({ queryKey: ["aulas-semana", childId] });
+  };
+
+  const abrirAula = async (codigoBncc: string | null) => {
+    if (!codigoBncc) return toast.error("Aula sem habilidade BNCC vinculada");
+    const { data, error } = await supabase
+      .from("aulas_bncc")
+      .select("id")
+      .eq("codigo_bncc", codigoBncc)
+      .eq("ativo", true)
+      .limit(1)
+      .maybeSingle();
+    if (error) return toast.error(error.message);
+    if (!data?.id) return toast.error(`Aula BNCC ${codigoBncc} ainda não encontrada`);
+    navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId: data.id } });
   };
 
   if (loadingChild) {
@@ -119,9 +133,10 @@ function AulasSemanaPage() {
               concluida: boolean; perfil_neuro: string | null;
             };
             return (
-              <div
+              <button
                 key={a.id}
-                className="rounded-2xl border border-white/15 bg-white/5 p-4"
+                onClick={() => abrirAula(a.habilidade_bncc)}
+                className="w-full rounded-2xl border border-white/15 bg-white/5 p-4 text-left transition hover:bg-white/10 active:scale-[0.99]"
               >
                 <div className="flex items-start gap-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex flex-col items-center justify-center shrink-0">
@@ -150,9 +165,12 @@ function AulasSemanaPage() {
                       />
                       {a.concluida && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
                     </div>
+                    <p className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-black text-amber-200">
+                      <PlayCircle className="w-3.5 h-3.5" /> Abrir aula
+                    </p>
                   </div>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
