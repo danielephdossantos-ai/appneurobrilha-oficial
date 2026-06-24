@@ -18,6 +18,7 @@ import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
 import { useHiperfoco } from "@/context/HiperfocoContext";
+import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
 // Ícones por categoria (v2 - ilustrações premium 2D)
 import icSonsIniciais from "@/assets/neuro-treino/icons/v2/sons-iniciais.png";
@@ -319,9 +320,8 @@ function Treino() {
           </div>
         )}
 
-
-
-
+        {/* ── MODO SENSORIAL ──────────────────────────────────────── */}
+        <SensoryPanel />
 
         <div className="space-y-5">
           {GRUPOS.map((g) => {
