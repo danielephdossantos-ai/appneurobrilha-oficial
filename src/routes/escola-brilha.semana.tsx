@@ -1,8 +1,8 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2 } from "lucide-react";
-import { useChildProfileStore } from "@/modules/child-profile/stores/useChildProfileStore";
+import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User } from "lucide-react";
+import { useAppState } from "@/core/store";
 import { gerarAulasSemana, listarAulasSemana } from "@/lib/aulas-semana";
 import { getSegundaDaSemana } from "@/modules/escola-brilha/engine/weekly-planner";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,7 +17,8 @@ const DIAS = ["Seg", "Ter", "Qua", "Qui", "Sex"];
 function AulasSemanaPage() {
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const childId = useChildProfileStore((s) => s.activeChildId);
+  const { activeChild, isLoading: loadingChild } = useAppState();
+  const childId = activeChild?.id ?? null;
   const semanaInicio = getSegundaDaSemana();
   const [horarioEdit, setHorarioEdit] = useState<Record<string, string>>({});
 
@@ -30,7 +31,7 @@ function AulasSemanaPage() {
   const gerar = useMutation({
     mutationFn: () => gerarAulasSemana({ childId: childId!, semanaInicio }),
     onSuccess: (res) => {
-      toast.success(`${res.criadas} aulas criadas (perfil ${res.perfil})`);
+      toast.success(`${res.criadas} aulas criadas para ${activeChild?.nome} (perfil ${res.perfil})`);
       qc.invalidateQueries({ queryKey: ["aulas-semana", childId] });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -46,7 +47,15 @@ function AulasSemanaPage() {
     qc.invalidateQueries({ queryKey: ["aulas-semana", childId] });
   };
 
-  if (!childId) {
+  if (loadingChild) {
+    return (
+      <div className="min-h-screen bg-slate-900 text-white p-6 flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin" />
+      </div>
+    );
+  }
+
+  if (!childId || !activeChild) {
     return (
       <div className="min-h-screen bg-slate-900 text-white p-6">
         <p>Selecione uma criança primeiro.</p>
@@ -54,6 +63,7 @@ function AulasSemanaPage() {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-950 to-violet-950 pb-12">
