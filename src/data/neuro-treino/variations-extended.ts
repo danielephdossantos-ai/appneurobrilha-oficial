@@ -404,15 +404,20 @@ export const ACHAR_DIFERENTE_VARS: Variation[] = range(30).map((i) => {
   return { id: `ad-${i + 1}`, payload: { ...b, grid, posAlvo, colunas: 3 + (i % 2) } };
 });
 
-// A2. MEMÓRIA VISUAL — flash de grade colorida, depois reproduzir
+// A2. MEMÓRIA VISUAL — flash de grade colorida; 10 fáceis, 10 médias, 10 difíceis.
 export const MEMORIA_VISUAL_VARS: Variation[] = range(30).map((i) => {
   const cores = ["#ef4444", "#3b82f6", "#22c55e", "#facc15", "#a855f7", "#f97316"];
-  const tam = 2 + (i % 3); // grid 2×2, 3×2, 3×3
-  const cols = tam,
-    rows = Math.ceil(tam * 0.8);
+  // Faixa: 0-9 fácil (2x2), 10-19 médio (3x3), 20-29 difícil (4x4)
+  const faixa = Math.floor(i / 10); // 0,1,2
+  const nivel = faixa + 1; // 1,2,3
+  const cols = 2 + faixa; // 2, 3, 4
+  const rows = 2 + faixa; // 2, 3, 4
+  // Dentro de cada faixa, pequenas variações em flash e padrão.
+  const passo = i % 10;
   const grid = range(rows * cols).map((k) => cores[(i * 3 + k) % cores.length]);
-  const flashMs = Math.max(800, 2000 - i * 40);
-  return { id: `mv-${i + 1}`, payload: { grid, rows, cols, flashMs } };
+  const flashMsBase = [2200, 1700, 1300][faixa];
+  const flashMs = Math.max(700, flashMsBase - passo * 80);
+  return { id: `mv-${i + 1}`, payload: { grid, rows, cols, flashMs, nivel } };
 });
 
 // A3. REAÇÃO RÁPIDA — verde aparece → toca; vermelho aparece → não toca (Go/No-Go)
