@@ -197,6 +197,32 @@ function ResultadoRoute() {
           </Card>
         )}
 
+
+        <Card className="p-4 bg-primary/5 border-2 border-primary/30">
+          <div className="flex items-start gap-3">
+            <BellRing className="h-6 w-6 text-primary shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h3 className="font-bold mb-1">Jornada 365 pronta!</h3>
+              <p className="text-sm text-muted-foreground mb-3">
+                As aulas diárias de {childName} já estão sendo geradas com base nesta anamnese.
+                Ative os lembretes pra receber no celular toda hora de estudar.
+              </p>
+              <Button
+                size="sm"
+                onClick={ativarLembretes}
+                disabled={push.permission === "granted" || push.permission === "unsupported"}
+              >
+                <Bell className="h-4 w-4 mr-1" />
+                {push.permission === "granted"
+                  ? "Lembretes ativos"
+                  : push.permission === "unsupported"
+                    ? "Não suportado neste dispositivo"
+                    : "Ativar lembretes diários"}
+              </Button>
+            </div>
+          </div>
+        </Card>
+
         <div className="flex gap-2 pb-6">
           <Button
             variant="outline"
