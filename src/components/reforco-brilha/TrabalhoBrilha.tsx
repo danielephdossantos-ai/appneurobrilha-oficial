@@ -237,7 +237,9 @@ function EditorTrabalho({
 
   const [titulo, setTitulo] = useState(trabalhoExistente?.titulo || "");
   const [tema, setTema] = useState(trabalhoExistente?.tema || "");
+  const [materia, setMateria] = useState(trabalhoExistente?.materia || "");
   const [dataEntrega, setDataEntrega] = useState<string>(trabalhoExistente?.data_entrega || "");
+
   const [blocos, setBlocos] = useState<Bloco[]>(trabalhoExistente?.blocos || []);
   const [fontes, setFontes] = useState<Fonte[]>(trabalhoExistente?.fontes || []);
 
