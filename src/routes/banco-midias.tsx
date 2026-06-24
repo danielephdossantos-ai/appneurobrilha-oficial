@@ -52,6 +52,7 @@ interface ItemUnificado {
 }
 
 function BancoMidiasPage() {
+  const [CATEGORIAS, setCategorias] = useState(CATEGORIAS_FALLBACK);
   const [midiasDb, setMidiasDb] = useState<Midia[]>([]);
   const [vincCount, setVincCount] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,21 @@ function BancoMidiasPage() {
 
   useEffect(() => {
     void carregar();
+    void carregarCategorias();
   }, []);
+
+  const carregarCategorias = async () => {
+    const { data } = await supabase
+      .from("banco_midias_categorias" as any)
+      .select("id,label,emoji,ordem")
+      .order("ordem", { ascending: true });
+    if (data && data.length) {
+      setCategorias(
+        (data as any[]).map((c) => ({ id: c.id as CategoriaBanco, label: c.label, emoji: c.emoji || "" })),
+      );
+    }
+  };
+
 
   const carregar = async () => {
     setLoading(true);
