@@ -70,8 +70,10 @@ type MascotChoice = "pip" | "pipa";
 export function PipEvolution() {
   const { activeChild } = useAppState();
   const [mascot, setMascot] = useState<MascotChoice>("pip");
+  const chosenStage = useMascotStage(activeChild?.id);
 
   const totalEarned = activeChild?.total_earned ?? 0;
+
 
   const currentStageIndex = useMemo(() => {
     let idx = 0;
