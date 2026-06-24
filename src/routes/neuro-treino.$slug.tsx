@@ -2304,10 +2304,10 @@ function ArticulacaoSons({ p, onDone }: any) {
 
   return (
     <div className="text-center space-y-5">
-      <div className={`flex justify-center transition-transform ${celebrar ? "scale-110" : ""}`}>
+      <div className={`flex justify-center transition-transform ${celebrar ? scaleCls : ""}`}>
         <RenderEmoji
           e={p.emoji}
-          className={`w-28 h-28 ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
+          className={`${emojiSize} ${celebrar ? "drop-shadow-[0_0_25px_rgba(244,63,94,0.6)]" : ""}`}
         />
       </div>
       <div className="text-4xl font-black tracking-widest flex justify-center gap-2">
@@ -2318,9 +2318,9 @@ function ArticulacaoSons({ p, onDone }: any) {
               key={i}
               className={`px-3 py-1 rounded-xl transition-all duration-300 ${
                 celebrar
-                  ? "bg-rose-100 text-rose-600 scale-125 animate-pulse"
+                  ? `bg-rose-100 text-rose-600 ${sens.reduceMotion ? "" : "scale-125"} ${pulseCls}`
                   : acesa
-                    ? "bg-emerald-100 text-emerald-700 scale-125"
+                    ? `bg-emerald-100 text-emerald-700 ${sens.reduceMotion ? "" : "scale-125"}`
                     : "text-muted-foreground/50"
               }`}
             >
@@ -2337,11 +2337,12 @@ function ArticulacaoSons({ p, onDone }: any) {
       <button
         onClick={gravar}
         disabled={done || ouvindo}
-        className={`w-full py-5 rounded-3xl text-white font-black text-xl active:scale-95 transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? "bg-emerald-500 animate-pulse" : "bg-rose-500"}`}
+        className={`w-full py-5 rounded-3xl text-white font-black text-xl ${press} transition-all shadow-lg disabled:opacity-60 flex items-center justify-center gap-3 ${ouvindo ? `bg-emerald-500 ${pulseCls}` : "bg-rose-500"}`}
       >
         <Mic className="w-7 h-7" />
         {done ? "Muito bem!" : ouvindo ? "Ouvindo..." : `Falar 🎤`}
       </button>
+
     </div>
   );
 }
