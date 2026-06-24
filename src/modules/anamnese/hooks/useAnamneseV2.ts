@@ -4,6 +4,7 @@ import { supabase } from "@/database/supabase/client";
 import type { AnamneseV2Responses, PerfilScores, RiskMap } from "../v2/types";
 import { ACTIVE_STEPS } from "../v2/types";
 import { computeRiskMap, computeScores } from "../v2/scoring";
+import { AnamnesisProcessor } from "@/modules/neuro-treino/engine/AnamnesisProcessor";
 
 interface Row {
   id: string;
@@ -114,9 +115,11 @@ export function useAnamneseV2(childId: string) {
     // Marca a criança como tendo anamnese concluída → libera painel dos pais
     // e o nascimento do Pip/Pipa na área da criança.
     if (UUID_RE.test(childId)) {
+      const internal = AnamnesisProcessor.processV2(localResponses, res.scores);
+      const childPatch = AnamnesisProcessor.mapV2ToChildPatch(internal, localResponses, res.scores);
       const { error } = await supabase
         .from("children")
-        .update({ anamnese_completa: true })
+        .update(childPatch as any)
         .eq("id", childId);
       if (error) console.warn("[anamnese] falha ao marcar anamnese_completa", error);
       qc.invalidateQueries({ queryKey: ["children"] });
