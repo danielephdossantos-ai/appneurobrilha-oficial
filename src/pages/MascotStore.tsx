@@ -821,22 +821,24 @@ const MascotStoreCard = ({
       <KidCard
         className={cn(
           "group h-full flex flex-col overflow-hidden border-2 transition-all duration-300",
-          unlocked ? "border-border hover:border-primary/30" : "border-muted/40",
+          unlocked
+            ? "border-border hover:border-primary/40"
+            : "border-amber-300/60 hover:border-amber-400",
         )}
       >
-        <div className="relative h-56 bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center p-8 overflow-hidden">
+        <div
+          className={cn(
+            "relative h-56 bg-gradient-to-br flex items-center justify-center p-8 overflow-hidden",
+            CARD_PALETTES[index % CARD_PALETTES.length],
+          )}
+        >
           {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-32 h-32 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
           </div>
 
-          <div
-            className={cn(
-              "relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110",
-              !unlocked && "grayscale opacity-50",
-            )}
-          >
+          <div className="relative z-10 w-48 h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             {isPip ? (
               <KidLiveMascot
                 size="xl"
@@ -855,11 +857,10 @@ const MascotStoreCard = ({
             )}
           </div>
 
+          {/* Cadeado pequeno no canto superior esquerdo — não cobre o mascote */}
           {!unlocked && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px]">
-              <div className="bg-white/95 rounded-full p-4 shadow-2xl">
-                <Lock className="text-primary" size={32} strokeWidth={2.5} />
-              </div>
+            <div className="absolute top-3 left-3 z-20 bg-amber-400 text-amber-950 rounded-full p-2 shadow-lg ring-2 ring-white">
+              <Lock size={16} strokeWidth={3} />
             </div>
           )}
 
@@ -873,7 +874,7 @@ const MascotStoreCard = ({
           </div>
 
           {isOwned && unlocked && (
-            <div className="absolute top-4 left-4 bg-success text-white p-1.5 rounded-full shadow-lg">
+            <div className="absolute bottom-3 left-3 bg-success text-white p-1.5 rounded-full shadow-lg">
               <Star size={14} fill="white" />
             </div>
           )}
@@ -910,9 +911,9 @@ const MascotStoreCard = ({
               </div>
             ) : !unlocked ? (
               <div className="flex flex-col gap-2">
-                <div className="w-full py-3 rounded-2xl bg-muted/40 border-2 border-muted text-muted-foreground text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                <div className="w-full py-3 rounded-2xl bg-amber-100 border-2 border-amber-300 text-amber-900 text-center font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2">
                   <Lock size={14} />
-                  Bloqueado
+                  {requiredCoins} Moedas Brilha
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-[10px] font-bold text-primary/70">
