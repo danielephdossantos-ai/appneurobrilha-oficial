@@ -21,6 +21,21 @@ function inferPerfil(responses: unknown): PerfilNeuro {
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
+function normalizeSerie(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const s = String(raw).trim();
+  if (!s) return null;
+  // Já formatado: "1º Ano", "Educação Infantil", etc
+  if (/º\s*ano/i.test(s) || /infantil|médio|medio|fundamental/i.test(s)) return s;
+  // Número puro: "7" → "7º Ano"
+  const n = s.match(/^(\d{1,2})$/);
+  if (n) return `${n[1]}º Ano`;
+  // "7 ano" / "7o ano" → "7º Ano"
+  const m = s.match(/^(\d{1,2})\s*[ºo°]?\s*ano/i);
+  if (m) return `${m[1]}º Ano`;
+  return s;
+}
+
 export interface GerarAulasResult {
   ok: true;
   criadas: number;
