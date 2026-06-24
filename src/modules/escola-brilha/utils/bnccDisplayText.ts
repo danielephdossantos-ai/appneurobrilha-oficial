@@ -75,5 +75,8 @@ export function friendlyLessonTitle(opts: {
   title?: string | null;
   subject?: string | null;
 }) {
-  return cleanVisibleLessonText(opts.title, friendlySubject(opts.subject));
+  const fallback = friendlySubject(opts.subject);
+  const clean = cleanVisibleLessonText(opts.title, fallback);
+  if (clean.includes("...") || clean.length > 52) return fallback;
+  return clean;
 }

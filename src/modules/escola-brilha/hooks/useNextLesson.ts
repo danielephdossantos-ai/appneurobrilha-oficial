@@ -8,6 +8,7 @@ import {
   type StaticLesson,
 } from "../data/library";
 import type { AulaBncc, EtapaEscolar } from "./useAulasBncc";
+import { friendlyLessonTitle } from "../utils/bnccDisplayText";
 
 export type LessonRef =
   | { kind: "static"; id: string }
@@ -73,7 +74,7 @@ export function useNextLesson(current: LessonRef): NextLessonTarget | null {
     ...dbAulas.map(
       (a): NextLessonTarget => ({
         ref: { kind: "db", id: a.id },
-        title: a.titulo,
+        title: friendlyLessonTitle({ title: a.titulo, subject: a.disciplina }),
         subject: subjectKey(a.disciplina),
         serie: a.serie,
         to: "/escola-brilha/db/$aulaId",
