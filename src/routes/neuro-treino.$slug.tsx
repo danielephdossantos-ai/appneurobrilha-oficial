@@ -862,13 +862,15 @@ function Pedacinhos({ p, onDone }: any) {
 
 // ============== 5. Onde Está ==============
 function OndeEsta({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const cols = Math.ceil(Math.sqrt(p.grid.length));
-  const alvoImg = emojiImg(p.alvo);
+  const alvoSize = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-105";
   return (
     <div className="text-center">
       <div className="text-sm text-muted-foreground mb-2">Encontre:</div>
       <div className="mb-4 flex justify-center">
-        <RenderEmoji e={p.alvo} className="w-20 h-20" />
+        <RenderEmoji e={p.alvo} className={alvoSize} />
       </div>
       <div
         className="grid gap-2 mx-auto"
@@ -878,7 +880,7 @@ function OndeEsta({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(i === p.correctIndex)}
-            className="aspect-square p-1.5 bg-card border-2 border-border rounded-lg hover:border-primary hover:scale-105 transition-all flex items-center justify-center"
+            className={`aspect-square p-1.5 bg-card border-2 border-border rounded-lg transition-all flex items-center justify-center ${hoverCls}`}
           >
             <RenderEmoji e={e} className="w-full h-full" />
           </button>
@@ -890,15 +892,20 @@ function OndeEsta({ p, onDone }: any) {
 
 // ============== 6. Sequência e Padrão ==============
 function SequenciaPadrao({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const seqSize = sens.largerTargets ? "w-24 h-24" : "w-20 h-20";
+  const optSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-110";
   return (
     <div className="text-center">
       <div className="flex justify-center gap-3 mb-6 items-center">
         {p.seq.map((s: string, i: number) => (
           <div
             key={i}
-            className="w-20 h-20 flex items-center justify-center bg-card rounded-2xl border shadow-sm"
+            className={`${seqSize} flex items-center justify-center bg-card rounded-2xl border shadow-sm`}
           >
-            <RenderEmoji e={s} className="w-16 h-16" />
+            <RenderEmoji e={s} className={imgSize} />
           </div>
         ))}
         <span className="text-primary text-6xl font-black">?</span>
@@ -908,15 +915,17 @@ function SequenciaPadrao({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(o === p.next)}
-            className="w-24 h-24 flex items-center justify-center bg-card border-2 border-border rounded-2xl hover:border-primary hover:scale-110 transition-all shadow-md"
+            className={`${optSize} flex items-center justify-center bg-card border-2 border-border rounded-2xl transition-all shadow-md ${hoverCls}`}
           >
-            <RenderEmoji e={o} className="w-16 h-16" />
+            <RenderEmoji e={o} className={imgSize} />
           </button>
         ))}
       </div>
     </div>
   );
 }
+
+
 
 // ============== 7. Cadê o Par ==============
 function CadeOPar({ p, onDone }: any) {
@@ -2062,12 +2071,15 @@ function ExpressaoEmocao({ p, onDone }: any) {
 
 // 24. DISCRIMINAÇÃO AUDITIVA — par mínimo: vê/ouve palavra → escolhe figura
 function DiscriminacaoAuditiva({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const [escolhida, setEscolhida] = useState<string | null>(null);
   const handleClick = (palavra: string) => {
     if (escolhida) return;
     setEscolhida(palavra);
     setTimeout(() => onDone(palavra === p.correta), 700);
   };
+  const errorBg = sens.softColors ? "border-amber-400 bg-amber-100/40" : "border-destructive bg-destructive/10";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
   return (
     <div className="text-center space-y-6">
       <div className="bg-gradient-to-br from-rose/20 to-rose/5 border-2 border-rose/30 rounded-3xl p-6">
@@ -2083,7 +2095,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
             escolhida === palavra
               ? certa
                 ? "border-success bg-success/10"
-                : "border-destructive bg-destructive/10"
+                : errorBg
               : "border-border bg-card hover:border-rose/60";
           return (
             <button
@@ -2091,7 +2103,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
               onClick={() => handleClick(palavra)}
               className={`rounded-3xl border-2 p-5 flex flex-col items-center gap-3 transition-all font-black text-lg ${bg}`}
             >
-              <RenderEmoji e={emoji} className="w-16 h-16" />
+              <RenderEmoji e={emoji} className={imgSize} />
               <span>{palavra}</span>
             </button>
           );
@@ -2100,6 +2112,7 @@ function DiscriminacaoAuditiva({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // 25. ARTICULAÇÃO DE SONS — SIMPLES, sem exigir perfeição.
 // Criança aperta o mic, vê as sílabas acendendo uma a uma enquanto fala.
