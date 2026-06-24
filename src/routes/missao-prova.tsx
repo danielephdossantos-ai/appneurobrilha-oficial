@@ -559,8 +559,23 @@ function MissaoProva() {
                               );
                             })}
                         </div>
+
+                        {/* Biblioteca interna grátis (Wikipédia, YouTube, livros) — fica salva enquanto o plano existir */}
+                        <div className="mt-4 p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40">
+                          <div className="flex items-center gap-2 mb-3">
+                            <BookOpen className="h-5 w-5 text-emerald-700" />
+                            <h4 className="font-black text-emerald-800 text-sm uppercase tracking-wider">
+                              Material de estudo da prova ({mission.subject})
+                            </h4>
+                          </div>
+                          <p className="text-xs text-emerald-700 mb-3">
+                            Categorias de ajuda do Reforço Brilha: Wikipédia, YouTube, livros e Archive. Ficam salvas até você apagar o plano.
+                          </p>
+                          <BibliotecaInternet query={mission.subject} />
+                        </div>
                       </div>
                     )}
+
                   </div>
                 </Card>
               );
