@@ -29,18 +29,7 @@ function ResultadoRoute() {
   const { childId } = Route.useParams();
   const nav = useNavigate();
   const a = useAnamneseV2(childId);
-  const push = usePushNotifications();
 
-  const ativarLembretes = async () => {
-    const ok = await push.request();
-    if (ok) {
-      toast.success("Lembretes ativados! Vamos avisar todo dia a hora de estudar.");
-      push.notify("Pronto!", "Os lembretes diários da Jornada 365 estão ativos.", {
-        tag: `jornada-onboard-${childId}`,
-      });
-    } else {
-      toast.error("Não foi possível ativar. Verifique as permissões do navegador.");
-    }
   };
 
   if (a.isLoading) {
