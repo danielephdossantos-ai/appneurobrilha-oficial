@@ -1528,9 +1528,48 @@ const ALFABETO_BANK: LetraDef[] = [
   { letra: "X", palavra: "XICARA",     emoji: "☕", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"}]},
   { letra: "Y", palavra: "IOGURTE",    emoji: "🥛", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"},{x:50,y:52,dir:"down"}]},
   { letra: "Z", palavra: "ZEBRA",      emoji: "🦓", guias: [{x:22,y:20,dir:"right"},{x:75,y:25,dir:"dl"},{x:22,y:82,dir:"right"}]},
+  // Minúsculas (atividade de colorir não usa guias)
+  { letra: "a", palavra: "abelha",     emoji: "🐝", guias: [] },
+  { letra: "b", palavra: "bola",       emoji: "⚽", guias: [] },
+  { letra: "c", palavra: "casa",       emoji: "🏠", guias: [] },
+  { letra: "d", palavra: "dado",       emoji: "🎲", guias: [] },
+  { letra: "e", palavra: "elefante",   emoji: "🐘", guias: [] },
+  { letra: "f", palavra: "foca",       emoji: "🦭", guias: [] },
+  { letra: "g", palavra: "gato",       emoji: "🐱", guias: [] },
+  { letra: "h", palavra: "hipopotamo", emoji: "🦛", guias: [] },
+  { letra: "i", palavra: "igreja",     emoji: "⛪", guias: [] },
+  { letra: "j", palavra: "jacare",     emoji: "🐊", guias: [] },
+  { letra: "k", palavra: "kiwi",       emoji: "🥝", guias: [] },
+  { letra: "l", palavra: "leao",       emoji: "🦁", guias: [] },
+  { letra: "m", palavra: "macaco",     emoji: "🐵", guias: [] },
+  { letra: "n", palavra: "navio",      emoji: "🚢", guias: [] },
+  { letra: "o", palavra: "ovo",        emoji: "🥚", guias: [] },
+  { letra: "p", palavra: "pato",       emoji: "🦆", guias: [] },
+  { letra: "q", palavra: "queijo",     emoji: "🧀", guias: [] },
+  { letra: "r", palavra: "rato",       emoji: "🐭", guias: [] },
+  { letra: "s", palavra: "sapo",       emoji: "🐸", guias: [] },
+  { letra: "t", palavra: "tartaruga",  emoji: "🐢", guias: [] },
+  { letra: "u", palavra: "uva",        emoji: "🍇", guias: [] },
+  { letra: "v", palavra: "vaca",       emoji: "🐄", guias: [] },
+  { letra: "w", palavra: "waffle",     emoji: "🧇", guias: [] },
+  { letra: "x", palavra: "xicara",     emoji: "☕", guias: [] },
+  { letra: "y", palavra: "iogurte",    emoji: "🥛", guias: [] },
+  { letra: "z", palavra: "zebra",      emoji: "🦓", guias: [] },
+  // Números 0-10
+  { letra: "0",  palavra: "0 zero",    emoji: "🥚", guias: [] },
+  { letra: "1",  palavra: "1 um",      emoji: "☝️", guias: [] },
+  { letra: "2",  palavra: "2 dois",    emoji: "✌️", guias: [] },
+  { letra: "3",  palavra: "3 três",    emoji: "🍀", guias: [] },
+  { letra: "4",  palavra: "4 quatro",  emoji: "🍀", guias: [] },
+  { letra: "5",  palavra: "5 cinco",   emoji: "✋", guias: [] },
+  { letra: "6",  palavra: "6 seis",    emoji: "🎲", guias: [] },
+  { letra: "7",  palavra: "7 sete",    emoji: "🌈", guias: [] },
+  { letra: "8",  palavra: "8 oito",    emoji: "🐙", guias: [] },
+  { letra: "9",  palavra: "9 nove",    emoji: "🎾", guias: [] },
+  { letra: "10", palavra: "10 dez",    emoji: "🔟", guias: [] },
 ];
-const TRACADO_VARS: Variation[] = range(52).map((i) => {
-  const b = ALFABETO_BANK[i % ALFABETO_BANK.length];
+const TRACADO_VARS: Variation[] = range(ALFABETO_BANK.length).map((i) => {
+  const b = ALFABETO_BANK[i];
   return { id: `tl-${i + 1}`, payload: { letra: b.letra, palavra: b.palavra, emoji: b.emoji, guias: b.guias } };
 });
 
