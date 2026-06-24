@@ -457,6 +457,7 @@ function EditorTrabalho({
       titulo: titulo.trim(),
       tema: tema.trim(),
       materia: materia.trim() || null,
+      data_entrega: dataEntrega || null,
       blocos: blocos as any,
       fontes: fontes as any,
     };
