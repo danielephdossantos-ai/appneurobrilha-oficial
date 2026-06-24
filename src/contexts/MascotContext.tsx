@@ -71,6 +71,37 @@ export const MascotProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     fetchMascots();
   }, [user]);
 
+  // Toast de desbloqueio: quando o mascote ativo sobe de nível,
+  // checa itens do catálogo liberados nesse novo nível.
+  useEffect(() => {
+    if (!activeMascot || !user) return;
+    const level = activeMascot.level;
+    const key = `neurobrilha:lastSeenUnlockLevel:${user.id}`;
+    let lastSeen = 0;
+    try {
+      lastSeen = Number(localStorage.getItem(key) || "0");
+    } catch {}
+    if (level <= lastSeen) return;
+
+    (async () => {
+      const { data } = await (supabase as any)
+        .from("mascot_catalog_items")
+        .select("name, required_level")
+        .gt("required_level", lastSeen)
+        .lte("required_level", level);
+      if (data && data.length > 0) {
+        data.forEach((item: any) => {
+          toast.success(`🎉 Desbloqueado: ${item.name}`, {
+            description: `Disponível na Loja do Pip (nível ${item.required_level}).`,
+          });
+        });
+      }
+      try {
+        localStorage.setItem(key, String(level));
+      } catch {}
+    })();
+  }, [activeMascot?.level, user]);
+
   const setActiveMascot = async (mascotId: string) => {
     if (!user) return;
 
