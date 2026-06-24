@@ -39,12 +39,6 @@ function prematureWeeks(value: any): number | null {
   return 4;
 }
 
-function avgNumber(values: number[]): number {
-  if (values.length === 0) return 0;
-  const s = values.reduce((a, b) => a + b, 0);
-  return s / values.length;
-}
-
 /** Converte média 0-4 em score 0-100 (% de indicadores presentes) */
 function toScore(meanLikert: number): number {
   return Math.round((meanLikert / 4) * 100);

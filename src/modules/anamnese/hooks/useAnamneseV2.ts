@@ -108,7 +108,7 @@ export function useAnamneseV2(childId: string) {
   const finish = async () => {
     const res = await upsert.mutateAsync({
       responses: localResponses,
-      current_step: ACTIVE_STEPS[ACTIVE_STEPS.length - 1],
+      current_step: ACTIVE_STEPS[ACTIVE_STEPS.length - 1] ?? 16,
       completed: true,
     });
     // Marca a criança como tendo anamnese concluída → libera painel dos pais
