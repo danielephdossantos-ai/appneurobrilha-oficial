@@ -48,7 +48,7 @@ function AulasSemanaPage() {
   };
 
   const abrirAula = async (codigoBncc: string | null) => {
-    if (!codigoBncc) return toast.error("Aula sem habilidade BNCC vinculada");
+    if (!codigoBncc) return toast.error("Esta aula ainda não está disponível");
     const { data, error } = await supabase
       .from("aulas_bncc")
       .select("id")
@@ -57,7 +57,7 @@ function AulasSemanaPage() {
       .limit(1)
       .maybeSingle();
     if (error) return toast.error(error.message);
-    if (!data?.id) return toast.error(`Aula BNCC ${codigoBncc} ainda não encontrada`);
+    if (!data?.id) return toast.error("Esta aula ainda não está disponível");
     navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId: data.id } });
   };
 
@@ -71,12 +71,16 @@ function AulasSemanaPage() {
 
   if (!childId || !activeChild) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white p-6">
-        <p>Selecione uma criança primeiro.</p>
-        <Link to="/perfil-aluno" className="underline">Ir para perfil</Link>
+      <div className="min-h-screen bg-slate-900 text-white p-6 flex flex-col items-center justify-center gap-4 text-center">
+        <User className="w-10 h-10 text-amber-300" />
+        <p className="text-white font-bold">Cadastre ou selecione um aluno para ver as aulas.</p>
+        <Link to="/perfil-aluno" className="rounded-xl bg-amber-500 px-4 py-2 font-black text-white">
+          Ir para perfil
+        </Link>
       </div>
     );
   }
+
 
 
   return (
