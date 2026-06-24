@@ -58,30 +58,51 @@ export async function gerarAulasSemana(opts: {
   const serie = (child as { serie?: string | null }).serie || "1º Ano";
 
   // 3. BNCC (com fallback)
-  let habilidades: Array<{ codigo: string; disciplina: string; descricao: string; ano?: string | null }> = [];
+  type HabRow = { codigo_bncc: string; disciplina: string | null; titulo: string | null; objetivo: string | null; ano: string | null };
+  let habRows: HabRow[] = [];
   const { data: habsSerie } = await supabase
     .from("bncc_habilidades")
-    .select("codigo, disciplina, descricao, ano")
+    .select("codigo_bncc, disciplina, titulo, objetivo, ano")
     .eq("ano", serie)
     .limit(30);
-  habilidades = (habsSerie || []) as typeof habilidades;
-  if (habilidades.length === 0) {
+  habRows = (habsSerie || []) as unknown as HabRow[];
+  if (habRows.length === 0) {
     const { data: fb } = await supabase
       .from("bncc_habilidades")
-      .select("codigo, disciplina, descricao, ano")
+      .select("codigo_bncc, disciplina, titulo, objetivo, ano")
       .limit(10);
-    habilidades = (fb || []) as typeof habilidades;
+    habRows = (fb || []) as unknown as HabRow[];
   }
-  if (habilidades.length === 0) {
+  if (habRows.length === 0) {
     throw new Error("Sem habilidades BNCC cadastradas para gerar aulas");
   }
+  const habilidades = habRows.map((h) => ({
+    codigo: h.codigo_bncc,
+    disciplina: h.disciplina || "Geral",
+    descricao: h.titulo || h.objetivo || h.codigo_bncc,
+    ano: h.ano,
+  }));
 
   // 4. Matriz pedagógica
-  const { data: matriz } = await supabase
+  const { data: matrizRaw } = await supabase
     .from("pedagogical_activities_base")
-    .select("id, serie, materia, tecnica, formato, codigo_bncc, titulo, descricao")
+    .select("id, serie, materia, estrategia_pedagogica, titulo, objetivo_pedagogico, habilidade_bncc")
     .or(`serie.eq.${serie},serie.is.null`)
     .limit(200);
+  const matriz = ((matrizRaw || []) as unknown as Array<{
+    id: string; serie: string | null; materia: string | null;
+    estrategia_pedagogica: string | null; titulo: string | null;
+    objetivo_pedagogico: string | null; habilidade_bncc: string | null;
+  }>).map((m) => ({
+    id: m.id,
+    serie: m.serie,
+    materia: m.materia,
+    tecnica: m.estrategia_pedagogica,
+    formato: null,
+    codigo_bncc: m.habilidade_bncc,
+    titulo: m.titulo,
+    descricao: m.objetivo_pedagogico,
+  }));
 
   // 5. Mídias
   const { data: midias } = await supabase
