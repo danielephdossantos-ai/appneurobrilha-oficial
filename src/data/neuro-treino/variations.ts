@@ -997,18 +997,21 @@ function _focoPick<T>(arr: T[], n: number, seed: number, exclude?: T): T[] {
 const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
   const faixa = Math.floor(i / 10); // 0,1,2
   const nivel = faixa + 1;
-  const totalFiguras = [4, 6, 8][faixa];
-  const rodadas = [4, 5, 6][faixa];
-  const flutuarMs = [4200, 3600, 3000][faixa]; // duração do ciclo de flutuação
-  const rounds = range(rodadas).map((k) => {
-    const alvo = FOCO_BANCO[(i * 5 + k * 7) % FOCO_BANCO.length];
-    const distratores = _focoPick(FOCO_BANCO, totalFiguras - 1, i * 31 + k * 11, alvo);
-    const itens = _focoPick([alvo, ...distratores], totalFiguras, i * 17 + k * 3);
-    return { alvo, itens };
-  });
+  const alvosQtd = [2, 4, 6][faixa];          // quantos alvos achar
+  const distratores = [3, 4, 5][faixa];        // distratores caminhando junto
+  const totalFiguras = alvosQtd + distratores;
+  const flutuarMs = [6000, 5200, 4400][faixa]; // tempo do vai-e-volta (mais lento = mais fácil)
+  const alvo = FOCO_BANCO[(i * 5) % FOCO_BANCO.length];
+  const distList = _focoPick(FOCO_BANCO, distratores, i * 31 + 7, alvo);
+  // itens: várias cópias do mesmo alvo + distratores variados
+  const itens = _focoPick(
+    [...Array(alvosQtd).fill(alvo), ...distList],
+    totalFiguras,
+    i * 17 + 3,
+  );
   return {
     id: `fs-${i + 1}`,
-    payload: { rounds, nivel, totalFiguras, flutuarMs },
+    payload: { alvo, itens, alvosQtd, nivel, totalFiguras, flutuarMs },
   };
 });
 
