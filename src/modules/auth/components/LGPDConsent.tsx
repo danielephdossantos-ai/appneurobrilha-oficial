@@ -76,7 +76,7 @@ export const LGPDConsent: React.FC = () => {
 
   const handleAccept = async () => {
     setLoading(true);
-    localStorage.setItem(LGPD_KEY, "true");
+    if (userId) localStorage.setItem(LGPD_KEY_PREFIX + userId, "true");
     setShow(false);
 
     try {
