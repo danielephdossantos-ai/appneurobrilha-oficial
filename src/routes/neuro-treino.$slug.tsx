@@ -1488,13 +1488,17 @@ function Mosaico({
 
 // ============== 13. Sequência de Cores ==============
 function SequenciaCores({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const seqSize = sens.largerTargets ? "w-16 h-16" : "w-12 h-12";
+  const optSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
+  const hover = sens.reduceMotion ? "" : "hover:scale-110";
   return (
     <div className="text-center">
       <div className="flex justify-center gap-2 mb-6">
         {p.sequencia.map((c: string, i: number) => (
-          <div key={i} className="w-12 h-12 rounded-lg shadow" style={{ background: c }} />
+          <div key={i} className={`${seqSize} rounded-lg shadow`} style={{ background: c }} />
         ))}
-        <div className="w-12 h-12 rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black">
+        <div className={`${seqSize} rounded-lg border-2 border-dashed border-muted-foreground flex items-center justify-center font-black`}>
           ?
         </div>
       </div>
@@ -1503,7 +1507,7 @@ function SequenciaCores({ p, onDone }: any) {
           <button
             key={i}
             onClick={() => onDone(c === p.next)}
-            className="w-16 h-16 rounded-xl shadow-lg hover:scale-110 transition-all"
+            className={`${optSize} rounded-xl shadow-lg ${hover} transition-all`}
             style={{ background: c }}
           />
         ))}
@@ -1514,9 +1518,13 @@ function SequenciaCores({ p, onDone }: any) {
 
 
 
+
 // ============== 16. Onomatopeias Animadas ==============
 // Som textual + opções com ilustrações premium 2D (padrão Sons Iniciais)
 function Onomatopeias({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
+  const imgSize = sens.largerTargets ? "w-28 h-28 md:w-32 md:h-32" : "w-24 h-24 md:w-28 md:h-28";
   return (
     <div className="text-center">
       <div className="inline-block bg-card border-4 border-coral rounded-3xl px-8 py-6 mb-6 shadow-glow">
@@ -1532,7 +1540,7 @@ function Onomatopeias({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hover}`}
             >
               {img ? (
                 <img
@@ -1541,10 +1549,10 @@ function Onomatopeias({ p, onDone }: any) {
                   width={128}
                   height={128}
                   loading="lazy"
-                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                  className={`${imgSize} object-contain drop-shadow-md`}
                 />
               ) : (
-                <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
+                <RenderEmoji e={o.emoji} label={o.nome} className={imgSize} />
               )}
               <div className="font-bold text-xs">{o.nome}</div>
             </button>
@@ -1554,6 +1562,7 @@ function Onomatopeias({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ============== 17. Ritmo e Sopro Visual (Microfone real) ==============
 // A criança sopra/faz o som no microfone — o volume captado anima a cena (carrinho anda,
