@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User } from "lucide-react";
+import { ArrowLeft, CalendarDays, Sparkles, Clock, CheckCircle2, Loader2, User, PlayCircle } from "lucide-react";
 import { useAppState } from "@/core/store";
 import { gerarAulasSemana, listarAulasSemana } from "@/lib/aulas-semana";
 import { getSegundaDaSemana } from "@/modules/escola-brilha/engine/weekly-planner";
@@ -45,6 +45,20 @@ function AulasSemanaPage() {
     if (error) return toast.error(error.message);
     toast.success("Horário atualizado");
     qc.invalidateQueries({ queryKey: ["aulas-semana", childId] });
+  };
+
+  const abrirAula = async (codigoBncc: string | null) => {
+    if (!codigoBncc) return toast.error("Aula sem habilidade BNCC vinculada");
+    const { data, error } = await supabase
+      .from("aulas_bncc")
+      .select("id")
+      .eq("codigo_bncc", codigoBncc)
+      .eq("ativo", true)
+      .limit(1)
+      .maybeSingle();
+    if (error) return toast.error(error.message);
+    if (!data?.id) return toast.error(`Aula BNCC ${codigoBncc} ainda não encontrada`);
+    navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId: data.id } });
   };
 
   if (loadingChild) {
@@ -150,6 +164,13 @@ function AulasSemanaPage() {
                       />
                       {a.concluida && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => abrirAula(a.habilidade_bncc)}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-amber-400/20 px-3 py-2 text-[11px] font-black text-amber-100 transition hover:bg-amber-400/30"
+                    >
+                      <PlayCircle className="w-3.5 h-3.5" /> Abrir aula
+                    </button>
                   </div>
                 </div>
               </div>
