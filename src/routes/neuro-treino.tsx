@@ -109,20 +109,6 @@ const GROUP_CONFIG: Record<
   string,
   { icon: ReactNode; color: string; bg: string; border: string; accent: string }
 > = {
-  "Pré-Escola": {
-    icon: <Sparkles className="h-5 w-5" />,
-    color: "text-pink-600",
-    bg: "from-pink-50 to-pink-100/50 dark:from-pink-950/30 dark:to-pink-900/20",
-    border: "border-pink-200 dark:border-pink-800",
-    accent: "bg-pink-500",
-  },
-  "1º Ano": {
-    icon: <BookOpen className="h-5 w-5" />,
-    color: "text-sky-600",
-    bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20",
-    border: "border-sky-200 dark:border-sky-800",
-    accent: "bg-sky-500",
-  },
   "Fono Clínico": {
 
     icon: <Mic className="h-5 w-5" />,
