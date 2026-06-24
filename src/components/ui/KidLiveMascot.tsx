@@ -62,10 +62,11 @@ const LiveMascot = ({
   showBadge = true,
 }: LiveMascotProps) => {
   const { activeChild } = useAppState();
+  const stage = useMascotStage(activeChild?.id);
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
-  // Mantemos a consistência entre dispositivos para evitar confusão.
-  // Lê o mascote ativo do usuário (Pip ou Pipa) escolhido no ovo mágico.
+  // A criança pode alternar entre Ovo → Nascendo → Bebê → Guardião (criança)
+  // dentre as fases já liberadas.
   let activeMascotName: string | undefined;
   try {
     activeMascotName = useMascot().activeMascot?.mascot?.name;
@@ -73,7 +74,12 @@ const LiveMascot = ({
     activeMascotName = undefined;
   }
   const isPipa = activeMascotName?.toLowerCase() === "pipa";
-  const mascotImage = isPipa ? pipaMascot : pipMascot;
+
+  const stageImages: Record<string, string> = isPipa
+    ? { ovo: pipaEgg, nascendo: pipaHatching, bebe: pipaBaby, crianca: pipaMascot }
+    : { ovo: pipEgg, nascendo: pipHatching, bebe: pipBaby, crianca: pipMascot };
+  const mascotImage = stageImages[stage] ?? stageImages.crianca;
+
 
   const sizes = {
     sm: "w-12 h-12 md:w-16 md:h-16",
