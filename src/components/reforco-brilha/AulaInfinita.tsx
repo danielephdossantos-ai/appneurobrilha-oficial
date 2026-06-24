@@ -234,6 +234,14 @@ export function AulaInfinita({ query }: Props) {
                 allowFullScreen
               />
             </div>
+            <button
+              onClick={() =>
+                window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank", "noopener,noreferrer")
+              }
+              className="w-full text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-2"
+            >
+              Se aparecer um aviso do YouTube, abrir o vídeo aqui →
+            </button>
           </div>
         </div>
       )}
