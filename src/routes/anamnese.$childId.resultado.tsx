@@ -10,7 +10,9 @@ import {
 import { generateAnamnesePDF } from "@/modules/anamnese/lib/pdf";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, BarChart3 } from "lucide-react";
+import { Loader2, Download, RefreshCw, ArrowLeft, AlertTriangle, BarChart3, Bell, BellRing } from "lucide-react";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { toast } from "sonner";
 import {
   Radar,
   RadarChart,
