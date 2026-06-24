@@ -53,6 +53,9 @@ export function isSystemBnccText(text: string | null | undefined) {
 
 export function cleanVisibleLessonText(text: string | null | undefined, fallback: string) {
   const clean = removeBnccCodes(text);
+  const normalized = normalizeKey(clean);
+  if (/\bBNCC\b/i.test(String(text || ""))) return fallback;
+  if (normalized.includes("habilidade") && !normalized.includes("habilidades sociais")) return fallback;
   if (!clean || isSystemBnccText(clean)) return fallback;
   return clean;
 }
