@@ -22,6 +22,11 @@ interface MissaoProvaManagerProps {
   childId: string;
 }
 
+const missionQueryKeys = (childId: string) => [
+  ["exam_missions", childId] as const,
+  ["exam_missions_child", childId] as const,
+];
+
 export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
   const queryClient = useQueryClient();
   const [isAdding, setIsAdding] = useState(false);
@@ -65,15 +70,29 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
         .single();
 
       if (error) throw error;
+
+      const { error: contentError } = await (supabase as any).from("exam_mission_contents").insert([
+        {
+          mission_id: data.id,
+          content_title: newSubject,
+        },
+      ]);
+
+      if (contentError) throw contentError;
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       setIsAdding(false);
       setNewSubject("");
       setNewDate("");
       setNewNotes("");
-      toast.success("Missão Prova criada! Agora adicione os conteúdos.");
+      toast.success("Missão Prova criada e conectada ao plano de estudos.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui salvar a Missão Prova.");
     },
   });
 
@@ -83,8 +102,13 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       toast.info("Missão removida.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui remover a Missão Prova.");
     },
   });
 
@@ -99,7 +123,13 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
+      toast.success("Conteúdo adicionado à Missão Prova.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui adicionar o conteúdo.");
     },
   });
 
@@ -151,7 +181,9 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       toast.success("Plano de estudos gerado com sucesso pelo Sistema Infinito!");
     },
     onError: (error: any) => {
@@ -172,6 +204,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
           </p>
         </div>
         <button
+          aria-label={isAdding ? "Fechar cadastro de prova" : "Cadastrar prova"}
           onClick={() => setIsAdding(!isAdding)}
           className="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all"
         >

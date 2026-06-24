@@ -54,7 +54,6 @@ function MissaoProva() {
   const [currentMission, setCurrentMission] = useState<any>(null);
   const [lessonContent, setLessonContent] = useState<any>(null);
   const [tutorAberto, setTutorAberto] = useState(false);
-  const [autoStarted, setAutoStarted] = useState(false);
   const [autoGenerating, setAutoGenerating] = useState(false);
   const [recursosVistos, setRecursosVistos] = useState(0);
 
@@ -131,22 +130,6 @@ function MissaoProva() {
       }
     })();
   }, [missions, autoGenerating, queryClient, activeChild?.id]);
-
-  // 🤖 AUTOMÁTICO: Abre a aula de hoje + Tutor sem precisar clicar
-  useEffect(() => {
-    if (autoStarted || isStudying || !missions.length) return;
-    for (const mission of missions) {
-      const todaySession = mission.study_plan?.find(
-        (s: any) => !s.completed && s.scheduled_date === format(new Date(), "yyyy-MM-dd"),
-      );
-      if (todaySession) {
-        setAutoStarted(true);
-        startSession(todaySession, mission);
-        setTutorAberto(true);
-        return;
-      }
-    }
-  }, [missions, autoStarted, isStudying]);
 
   const startSession = async (session: any, mission: any) => {
     setIsStudying(true);
@@ -361,7 +344,7 @@ function MissaoProva() {
             </div>
             <h3 className="text-2xl font-bold">Nenhuma prova cadastrada!</h3>
             <p className="text-muted-foreground max-w-md mx-auto text-sm">
-              Peça para o papai ou a mamãe cadastrar sua próxima prova no Painel dos Pais.
+              Cadastre sua próxima prova no calendário acima.
               Enquanto isso, você pode estudar qualquer tema com o Tutor Brilha 👇
             </p>
             <TutorLivre />
