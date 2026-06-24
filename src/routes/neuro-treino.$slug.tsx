@@ -1057,96 +1057,113 @@ function btnDir() {
 
 // ============== 10. Foco Sustentado ==============
 function FocoSustentado({ p, onDone }: any) {
-  const [rIdx, setRIdx] = useState(0);
-  const [acertos, setAcertos] = useState(0);
+  const [capturados, setCapturados] = useState<number[]>([]); // índices de alvos pegos
   const [erros, setErros] = useState(0);
-  const [feedback, setFeedback] = useState<"ok" | "erro" | null>(null);
-  const [travado, setTravado] = useState(false);
+  const [piscarErro, setPiscarErro] = useState<number | null>(null);
 
-  const round = p.rounds[rIdx];
-
-  // Posições e parâmetros de flutuação fixos por rodada.
+  // Layout fixo por atividade: faixa vertical + sentido + atraso para cada item.
   const layout = useMemo(() => {
-    return round.itens.map((_: any, i: number) => {
-      const seed = (rIdx + 1) * 31 + i * 17;
-      const rnd = (n: number) => ((Math.sin(seed * n) + 1) / 2);
+    return p.itens.map((_: any, i: number) => {
+      const seed = i * 17 + 3;
+      const rnd = (n: number) => (Math.sin(seed * n) + 1) / 2;
       return {
-        top: 8 + rnd(1.3) * 70,        // %
-        left: 6 + rnd(2.7) * 78,       // %
-        dx: -18 + rnd(3.1) * 36,        // px
-        dy: -14 + rnd(4.3) * 28,        // px
-        delay: rnd(5.7) * 1.8,          // s
-        dur: p.flutuarMs / 1000 + rnd(6.1) * 1.2,
+        topPct: 6 + rnd(1.3) * 78,        // faixa vertical
+        delay: rnd(2.7) * 2.5,             // atraso inicial
+        reverse: rnd(3.1) > 0.5,           // sentido (vai/volta invertido)
+        dur: p.flutuarMs / 1000 + rnd(4.3) * 1.2,
       };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rIdx]);
+  }, []);
 
-  const proximo = (acerto: boolean) => {
-    if (travado) return;
-    setTravado(true);
-    if (acerto) setAcertos((a) => a + 1);
-    else setErros((e) => e + 1);
-    setFeedback(acerto ? "ok" : "erro");
-    setTimeout(() => {
-      setFeedback(null);
-      setTravado(false);
-      if (rIdx < p.rounds.length - 1) setRIdx((i) => i + 1);
-      else onDone(acertos + (acerto ? 1 : 0) >= Math.ceil(p.rounds.length * 0.6));
-    }, 1200);
+  const alvoNome = p.alvo.nome;
+  const alvosIdx = p.itens
+    .map((it: any, i: number) => (it.nome === alvoNome ? i : -1))
+    .filter((x: number) => x >= 0);
+  const faltam = alvosIdx.length - capturados.length;
+
+  // Conclui quando todos os alvos foram capturados.
+  useEffect(() => {
+    if (faltam === 0) {
+      const t = setTimeout(() => onDone(erros <= alvosIdx.length), 700);
+      return () => clearTimeout(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [faltam]);
+
+  const tocar = (i: number) => {
+    if (capturados.includes(i)) return;
+    const certa = p.itens[i].nome === alvoNome;
+    if (certa) {
+      setCapturados((c) => [...c, i]);
+    } else {
+      setErros((e) => e + 1);
+      setPiscarErro(i);
+      setTimeout(() => setPiscarErro(null), 350);
+    }
   };
 
   return (
     <div className="space-y-4">
       <style>{`
-        @keyframes foco-float {
-          0%   { transform: translate(0,0) }
-          50%  { transform: translate(var(--dx), var(--dy)) }
-          100% { transform: translate(0,0) }
+        @keyframes foco-walk {
+          0%   { transform: translateX(-110%) }
+          50%  { transform: translateX(110%) }
+          100% { transform: translateX(-110%) }
+        }
+        @keyframes foco-walk-rev {
+          0%   { transform: translateX(110%) }
+          50%  { transform: translateX(-110%) }
+          100% { transform: translateX(110%) }
         }
       `}</style>
 
       <div className="bg-gradient-to-br from-violet/20 to-violet/5 border-2 border-violet/30 rounded-2xl p-4 text-center">
-        <div className="text-xs uppercase text-muted-foreground mb-1">Encontre e toque</div>
-        <div className="flex items-center justify-center gap-2">
-          <RenderEmoji e={round.alvo.emoji} className="w-12 h-12" />
-          <div className="text-2xl font-black">{round.alvo.nome}</div>
+        <div className="text-xs uppercase text-muted-foreground mb-1">
+          Toque em todos os <b>{p.alvo.nome}</b> que passarem
+        </div>
+        <div className="flex items-center justify-center gap-2 mt-1">
+          <RenderEmoji e={p.alvo.emoji} className="w-12 h-12" />
+          <div className="text-xl font-black">Faltam {faltam}/{alvosIdx.length}</div>
         </div>
       </div>
 
       <div className="relative w-full h-[360px] rounded-3xl border-2 border-dashed border-violet/30 bg-gradient-to-br from-sky-50 to-violet-50 overflow-hidden">
-        {round.itens.map((item: any, i: number) => {
-          const certa = item.nome === round.alvo.nome;
+        {p.itens.map((item: any, i: number) => {
           const L = layout[i];
-          const ring =
-            feedback && certa
-              ? "ring-4 ring-success rounded-full bg-success/10"
-              : feedback === "erro" && !certa
-                ? "opacity-40"
-                : "";
+          const pego = capturados.includes(i);
+          const erro = piscarErro === i;
           return (
-            <button
-              key={`${rIdx}-${i}`}
-              disabled={travado}
-              onClick={() => proximo(certa)}
-              className={`absolute w-16 h-16 flex items-center justify-center active:scale-90 transition ${ring}`}
+            <div
+              key={i}
+              className="absolute"
               style={{
-                top: `${L.top}%`,
-                left: `${L.left}%`,
-                animation: `foco-float ${L.dur}s ease-in-out ${L.delay}s infinite`,
-                // CSS custom props for keyframes
-                ['--dx' as any]: `${L.dx}px`,
-                ['--dy' as any]: `${L.dy}px`,
+                top: `${L.topPct}%`,
+                left: 0,
+                width: "100%",
+                animation: `${L.reverse ? "foco-walk-rev" : "foco-walk"} ${L.dur}s linear ${L.delay}s infinite`,
               }}
             >
-              <RenderEmoji e={item.emoji} className="w-full h-full" />
-            </button>
+              <button
+                disabled={pego}
+                onClick={() => tocar(i)}
+                className={`w-16 h-16 flex items-center justify-center active:scale-90 transition ${
+                  pego
+                    ? "opacity-30 grayscale"
+                    : erro
+                      ? "ring-4 ring-destructive rounded-full bg-destructive/10"
+                      : ""
+                }`}
+              >
+                <RenderEmoji e={item.emoji} className="w-full h-full" />
+              </button>
+            </div>
           );
         })}
       </div>
 
       <div className="text-center text-sm text-muted-foreground">
-        Rodada {rIdx + 1}/{p.rounds.length} · ✓ {acertos} · ✕ {erros}
+        ✓ {capturados.length}/{alvosIdx.length} · ✕ enganos {erros}
       </div>
     </div>
   );
