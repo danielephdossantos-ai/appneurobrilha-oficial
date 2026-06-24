@@ -408,6 +408,12 @@ function MechanicRenderer({
 
 // ============== 1. Sons Iniciais ==============
 function SonsIniciais({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hoverCls = sens.reduceMotion ? "hover:border-primary" : "hover:border-primary hover:scale-105";
+  const imgSize = sens.largerTargets
+    ? "w-28 h-28 md:w-32 md:h-32"
+    : "w-24 h-24 md:w-28 md:h-28";
+  const emojiSize = sens.largerTargets ? "w-28 h-28" : "w-24 h-24";
   return (
     <div className="text-center">
       <div className="text-7xl font-black text-primary mb-6">{p.letra}</div>
@@ -418,7 +424,7 @@ function SonsIniciais({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o.nome === p.correctName)}
-              className="bg-card border-2 border-border rounded-2xl p-4 hover:border-primary hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-2xl p-4 transition-all flex flex-col items-center gap-2 ${hoverCls}`}
             >
               {img ? (
                 <img
@@ -427,10 +433,10 @@ function SonsIniciais({ p, onDone }: any) {
                   width={128}
                   height={128}
                   loading="lazy"
-                  className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-md"
+                  className={`${imgSize} object-contain drop-shadow-md`}
                 />
               ) : (
-                <RenderEmoji e={o.emoji} label={o.nome} className="w-24 h-24" />
+                <RenderEmoji e={o.emoji} label={o.nome} className={emojiSize} />
               )}
               <div className="font-bold text-sm">{o.nome}</div>
             </button>
@@ -440,6 +446,7 @@ function SonsIniciais({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ============== Consciência Fonológica (5 sub-tarefas, padrão 2D) ==============
 function ConscienciaFonologica({ p, onDone }: any) {
