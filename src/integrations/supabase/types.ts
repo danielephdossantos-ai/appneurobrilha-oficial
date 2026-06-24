@@ -642,6 +642,33 @@ export type Database = {
           },
         ]
       }
+      banco_midias_categorias: {
+        Row: {
+          created_at: string
+          emoji: string | null
+          id: string
+          label: string
+          ordem: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          emoji?: string | null
+          id: string
+          label: string
+          ordem?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          emoji?: string | null
+          id?: string
+          label?: string
+          ordem?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bncc_habilidades: {
         Row: {
           ano: string | null
