@@ -600,16 +600,10 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   : "Se o som não aparecer, pode ler a mensagem comigo."}
               </p>
               <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80">
-                <motion.div
-                  initial={{ opacity: 0.85, scale: 0.95 }}
-                  animate={{ opacity: [0.85, 1, 0.85], y: [0, -8, 0], scale: [0.96, 1, 0.96] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-white/10"
-                />
                 <motion.img
                   src={babyImg}
                   alt="Mascote bebê"
-                  className="w-full h-full object-contain drop-shadow-2xl"
+                  className="w-full h-full object-contain drop-shadow-2xl relative z-10"
                   animate={{
                     y: [0, -14, 0],
                     rotate: [-2, 2, -2, 2, 0],
@@ -618,6 +612,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
 
+                {/* Brilhinhos soltos (sem bolha) */}
                 <svg
                   viewBox="0 0 220 220"
                   className="absolute inset-0 w-full h-full pointer-events-none"
@@ -658,36 +653,6 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
                     animate={{ x: [0, 3, 0], y: [0, 8, 0], rotate: [0, -15, 0] }}
                     transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut", delay: 0.05 }}
                   />
-                  {/* bochechas e sorriso removidos — bolha sem rosto */}
-
-                  <motion.g
-                    animate={{ rotate: [0, -8, 0, -8, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ originX: "20%", originY: "60%" }}
-                  >
-                    <path
-                      d="M20 140 C40 120 60 110 80 118"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </motion.g>
-                  <motion.g
-                    animate={{ rotate: [0, 8, 0, 8, 0], y: [0, -2, 0, -2, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                    style={{ originX: "80%", originY: "60%" }}
-                  >
-                    <path
-                      d="M200 140 C180 120 160 110 140 118"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </motion.g>
-
-                  {/* olhos removidos — bolha sem rosto */}
                 </svg>
               </div>
               <p className="text-white/90 text-lg max-w-md mx-auto">
@@ -698,6 +663,7 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
               </KidButton>
             </motion.div>
           )}
+
         </AnimatePresence>
       </div>
     </motion.div>
