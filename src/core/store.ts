@@ -262,7 +262,11 @@ export function useAppState() {
     queryFn: async () => {
       if (!authUserId) return [];
       const profiles = await ChildProfileService.getAllByUserId(authUserId);
-      return profiles.map((child) => normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }));
+      const normalized = profiles.map((child) =>
+        normalizeChild(child as unknown as Partial<Child> & { id: string; user_id: string; nome: string }),
+      );
+      const hasRealChild = normalized.some((child) => !isDraftPlaceholderChild(child));
+      return hasRealChild ? normalized.filter((child) => !isDraftPlaceholderChild(child)) : normalized;
     },
   });
 
@@ -303,7 +307,7 @@ export function useAppState() {
       const { data: auth } = await supabase.auth.getUser();
       const uid = auth?.user?.id;
       if (!uid) throw new Error("NOT_AUTHENTICATED");
-      const existing = await ChildProfileService.getAll();
+      const existing = await ChildProfileService.getAllByUserId(uid);
       if (existing.length >= 2) {
         throw new Error("LIMIT_REACHED");
       }
