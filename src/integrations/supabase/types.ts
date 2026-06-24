@@ -530,6 +530,68 @@ export type Database = {
         }
         Relationships: []
       }
+      aulas_semana: {
+        Row: {
+          agenda_horario: string | null
+          child_id: string
+          concluida: boolean
+          created_at: string
+          data: string
+          editavel: boolean
+          habilidade_bncc: string | null
+          id: string
+          materia: string | null
+          midias: Json
+          perfil_neuro: string | null
+          steps: Json
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agenda_horario?: string | null
+          child_id: string
+          concluida?: boolean
+          created_at?: string
+          data: string
+          editavel?: boolean
+          habilidade_bncc?: string | null
+          id?: string
+          materia?: string | null
+          midias?: Json
+          perfil_neuro?: string | null
+          steps?: Json
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          agenda_horario?: string | null
+          child_id?: string
+          concluida?: boolean
+          created_at?: string
+          data?: string
+          editavel?: boolean
+          habilidade_bncc?: string | null
+          id?: string
+          materia?: string | null
+          midias?: Json
+          perfil_neuro?: string | null
+          steps?: Json
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aulas_semana_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bncc_habilidades: {
         Row: {
           ano: string | null
