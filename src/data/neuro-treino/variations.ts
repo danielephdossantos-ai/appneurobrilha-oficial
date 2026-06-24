@@ -36,7 +36,7 @@ export type CategoriaSlug =
   
   | "mosaico-de-formas"
   | "sequencia-de-cores"
-  | "simetria"
+  
   | "decoracao-criativa"
   | "onomatopeias-animadas"
   | "ritmo-e-sopro"
@@ -188,15 +188,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-lilac/30 to-lilac/5",
     objetivo: "Padrão cromático puro",
     instrucao: "Toque na cor que continua a sequência.",
-  },
-  simetria: {
-    slug: "simetria",
-    nome: "Simetria",
-    emoji: "🦋",
-    grupo: "Oficina Criativa",
-    cor: "from-lilac/30 to-lilac/5",
-    objetivo: "Espelhamento em grade pixelada",
-    instrucao: "Pinte o lado direito para espelhar a figura da esquerda.",
   },
   "decoracao-criativa": {
     slug: "decoracao-criativa",
@@ -1262,13 +1253,6 @@ const SEQC_VARS: Variation[] = range(30).map((i) => {
   return { id: `sc-${i + 1}`, payload: { sequencia: padrao, next, options: cores.slice(0, 4) } };
 });
 
-// 14. SIMETRIA — grade 4x4, lado esquerdo preenchido; usuário espelha no lado direito
-const SIMETRIA_VARS: Variation[] = range(30).map((i) => {
-  const rows = 4,
-    halfCols = 2;
-  const left: number[][] = range(rows).map((r) => range(halfCols).map((c) => (i + r * 3 + c) % 2));
-  return { id: `sm-${i + 1}`, payload: { rows, halfCols, left } };
-});
 
 // 15. DECORAÇÃO CRIATIVA — cenário livre arrastar e soltar
 const DECOR_BANK = [
@@ -2200,7 +2184,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
-  simetria: SIMETRIA_VARS,
+  
   "decoracao-criativa": DECOR_VARS,
   "onomatopeias-animadas": ONOMA_VARS,
   "ritmo-e-sopro": SOPRO_VARS,
@@ -2317,7 +2301,6 @@ export const GRUPOS = [
     slugs: [
       "mosaico-de-formas",
       "sequencia-de-cores",
-      "simetria",
       "decoracao-criativa",
     ] as CategoriaSlug[],
   },
