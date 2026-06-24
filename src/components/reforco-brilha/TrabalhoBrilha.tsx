@@ -946,14 +946,24 @@ function RecursoPreviewModal({
         {/* corpo */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {ytId && (
-            <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
-              <iframe
-                src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1`}
-                title={recurso.titulo}
-                className="w-full h-full"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="space-y-2">
+              <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1`}
+                  title={recurso.titulo}
+                  className="w-full h-full"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <button
+                onClick={() =>
+                  window.open(`https://www.youtube.com/watch?v=${ytId}`, "_blank", "noopener,noreferrer")
+                }
+                className="w-full text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 rounded-lg py-2"
+              >
+                Se aparecer um aviso do YouTube, abrir o vídeo aqui →
+              </button>
             </div>
           )}
 
