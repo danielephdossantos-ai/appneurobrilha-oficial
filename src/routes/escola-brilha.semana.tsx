@@ -151,8 +151,9 @@ function AulasSemanaPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-white font-black text-sm truncate">{a.titulo}</p>
                     <p className="text-white/50 text-[11px] font-semibold">
-                      {a.materia} • {a.habilidade_bncc}
+                      {a.materia}
                     </p>
+
                     <div className="flex items-center gap-2 mt-2">
                       <Clock className="w-3.5 h-3.5 text-white/60" />
                       <input
