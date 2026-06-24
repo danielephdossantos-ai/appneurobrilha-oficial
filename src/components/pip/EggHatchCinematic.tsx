@@ -8,6 +8,12 @@ import pipaEgg from "@/assets/pipa-egg.png";
 import pipaHatching from "@/assets/pipa-hatching.png";
 import pipaBaby from "@/assets/pipa-baby.png";
 import { KidButton } from "@/components/ui/KidButton";
+import { supabase } from "@/database/supabase/client";
+
+const MASCOT_IDS: Record<"pip" | "pipa", string> = {
+  pip: "00000000-0000-0000-0000-000000000001",
+  pipa: "00000000-0000-0000-0000-000000000002",
+};
 
 type MascotChoice = "pip" | "pipa";
 
@@ -51,11 +57,18 @@ export function EggHatchCinematic({ childId, childName, onClose }: Props) {
     }
   }, [phase]);
 
-  const finish = () => {
+  const finish = async () => {
     try {
       localStorage.setItem(STORAGE_KEY(childId), "1");
       localStorage.setItem(`neurobrilha:starterMascot:${childId}`, mascot);
     } catch {}
+    try {
+      await supabase.rpc("activate_user_mascot" as any, {
+        p_mascot_id: MASCOT_IDS[mascot],
+      });
+    } catch (e) {
+      console.error("Falha ao ativar mascote", e);
+    }
     onClose();
   };
 

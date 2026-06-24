@@ -1,6 +1,8 @@
 import React from "react";
 
 import { cn } from "@/utils/utils";
+import { useMascot } from "@/contexts/MascotContext";
+import pipaMascot from "@/assets/pip-girl-mascot.png";
 import { useAppState } from "@/core/store";
 
 import pipMascot from "@/assets/pip-mascot.png";
@@ -55,12 +57,15 @@ const LiveMascot = ({
 
   // REGRA OFICIAL NEUROBRILHA: apenas Pip ou Pipa aparecem no app.
   // Mantemos a consistência entre dispositivos para evitar confusão.
-  const getMascotImage = () => {
-    // Se a criança for menina, podemos usar Pipa (futuro), por enquanto apenas Pip clássico.
-    return pipMascot;
-  };
-
-  const mascotImage = getMascotImage();
+  // Lê o mascote ativo do usuário (Pip ou Pipa) escolhido no ovo mágico.
+  let activeMascotName: string | undefined;
+  try {
+    activeMascotName = useMascot().activeMascot?.mascot?.name;
+  } catch {
+    activeMascotName = undefined;
+  }
+  const isPipa = activeMascotName?.toLowerCase() === "pipa";
+  const mascotImage = isPipa ? pipaMascot : pipMascot;
 
   const sizes = {
     sm: "w-12 h-12 md:w-16 md:h-16",
