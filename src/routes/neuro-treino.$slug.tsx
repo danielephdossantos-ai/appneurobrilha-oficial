@@ -1982,7 +1982,7 @@ function TracadoLetras({ p, onDone }: any) {
           {strokes.map((s, i) => {
             const done = i < step;
             const current = i === step;
-            const color = done ? "hsl(var(--success))" : current ? "#f97316" : "#64748b";
+            const color = done ? "hsl(var(--success))" : current ? "#ea580c" : "#334155";
             const pts = s.path.map((pt) => `${pt.x},${pt.y}`).join(" ");
             const last = s.path[s.path.length - 1];
             const prev = s.path[s.path.length - 2] ?? last;
@@ -1993,19 +1993,20 @@ function TracadoLetras({ p, onDone }: any) {
                   points={pts}
                   fill="none"
                   stroke={color}
-                  strokeWidth={done ? 2.2 : 1.5}
-                  strokeDasharray={done ? undefined : "2.4 1.8"}
+                  strokeWidth={done ? 2.6 : 2.0}
+                  strokeDasharray={done ? undefined : "3 2"}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <polygon
-                  points="0,-2.2 4.4,0 0,2.2"
+                  points="0,-2.8 5.5,0 0,2.8"
                   fill={color}
                   transform={`translate(${last.x} ${last.y}) rotate(${angle})`}
                 />
               </g>
             );
           })}
+
 
           {/* Números delicados nos inícios — tocáveis em ordem */}
           {strokes.map((s, i) => {
