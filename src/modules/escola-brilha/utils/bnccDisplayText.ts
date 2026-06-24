@@ -42,22 +42,64 @@ export function removeBnccCodes(text: string | null | undefined) {
     .trim();
 }
 
+// Extracts the first meaningful pedagogical sentence, dropping PDF junk
+// like "LÍNGUA PORTUGUESA – 6º E 7º ANOS (Continuação) ... HABILIDADES ...".
+function stripPdfTail(text: string) {
+  let t = text;
+  // Cut at the first occurrence of any PDF section marker
+  const cutMarkers = [
+    /\bL[IÍ]NGUA PORTUGUESA\b/i,
+    /\bENSINO FUNDAMENTAL\b/i,
+    /\bPR[AÁ]TICAS DE LINGUAGEM\b/i,
+    /\bOBJETOS DE CONHECIMENTO\b/i,
+    /\bHABILIDADES\b/i,
+    /\bTODOS OS CAMPOS DE ATUA[CÇ][AÃ]O\b/i,
+    /\(Continua[cç][aã]o\)/i,
+    /\bAn[aá]lise lingu[ií]stica\b/i,
+    /\bMorfossintaxe\b/i,
+    /\bLINGUAGENS\b/i,
+  ];
+  for (const re of cutMarkers) {
+    const m = t.match(re);
+    if (m && m.index !== undefined) t = t.slice(0, m.index);
+  }
+  return t.trim().replace(/[\s–—-]+$/g, "").trim();
+}
+
+function firstSentence(text: string) {
+  const stripped = stripPdfTail(text);
+  // First sentence ends at period/colon/semicolon followed by space or end
+  const m = stripped.match(/^[^.;:]{3,180}([.;:]|$)/);
+  const s = (m ? m[0] : stripped).replace(/[.;:]\s*$/, "").trim();
+  return s;
+}
+
+export function bnccActivityName(
+  text: string | null | undefined,
+  fallback: string,
+  maxLen = 70,
+) {
+  const clean = removeBnccCodes(text);
+  if (!clean) return fallback;
+  const sentence = firstSentence(clean);
+  if (!sentence || sentence.length < 4) return fallback;
+  if (sentence.length <= maxLen) return sentence;
+  // Try to cut at last space before maxLen
+  const cut = sentence.slice(0, maxLen);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut).trim() + "…";
+}
+
 export function isSystemBnccText(text: string | null | undefined) {
   const clean = removeBnccCodes(text);
   if (!clean) return true;
-
   const normalized = normalizeKey(clean);
   const markerCount = SYSTEM_MARKERS.filter((marker) => normalized.includes(marker)).length;
   return markerCount >= 2 || clean.length > 180;
 }
 
 export function cleanVisibleLessonText(text: string | null | undefined, fallback: string) {
-  const clean = removeBnccCodes(text);
-  const normalized = normalizeKey(clean);
-  if (/\bBNCC\b/i.test(String(text || ""))) return fallback;
-  if (normalized.includes("habilidade") && !normalized.includes("habilidades sociais")) return fallback;
-  if (!clean || isSystemBnccText(clean)) return fallback;
-  return clean;
+  return bnccActivityName(text, fallback, 180);
 }
 
 export function friendlySubject(subject: string | null | undefined) {
@@ -76,7 +118,5 @@ export function friendlyLessonTitle(opts: {
   subject?: string | null;
 }) {
   const fallback = friendlySubject(opts.subject);
-  const clean = cleanVisibleLessonText(opts.title, fallback);
-  if (clean.includes("...") || clean.length > 52) return fallback;
-  return clean;
+  return bnccActivityName(opts.title, fallback, 70);
 }
