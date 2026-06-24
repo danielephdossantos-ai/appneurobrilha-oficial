@@ -2306,7 +2306,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "ritmo-e-sopro": SOPRO_VARS,
   "paromatopeias-corpo": CORPO_VARS,
   "tracado-letras": TRACADO_VARS,
-  "caminho-dos-pontos": CAMINHO_VARS,
+  
   "labirinto-precisao": LABPRE_VARS,
   "triagem-categorias": TRIAGEM_VARS,
   "expressao-emocao": EMOCAO_VARS,
