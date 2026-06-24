@@ -2174,7 +2174,32 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "completar-letra": COMPLETAR_LETRA_VARS,
 };
 
+const TODAS_ATIVIDADES: CategoriaSlug[] = [
+  "sons-iniciais","motorzinho-dos-sons","rimas","pedacinhos-da-palavra",
+  "consciencia-fonologica","consciencia-silabica","compreensao-leitora",
+  "onde-esta","sequencia-e-padrao","cade-o-par","mosaico-de-formas",
+  "sequencia-de-cores","onomatopeias-animadas","ritmo-e-sopro",
+  "paromatopeias-corpo","tracado-letras","triagem-categorias","expressao-emocao",
+  "discriminacao-auditiva","articulacao-sons","vocabulario-semantico","nomeacao-rapida",
+  "toque-sequencia","ritmo-batidas","copiar-figura","alvo-movel",
+  "achar-diferente","memoria-visual","reacao-rapida","seguir-instrucao",
+  "letra-som","palavra-imagem","formando-palavras","leitura-palavras","completar-letra",
+];
+
 export const GRUPOS = [
+  {
+    nome: "Pré-Escola",
+    emoji: "🧸",
+    cor: "from-pink/25 to-pink/5",
+    slugs: TODAS_ATIVIDADES,
+  },
+  {
+    nome: "1º Ano",
+    emoji: "🎒",
+    cor: "from-sky/25 to-sky/5",
+    slugs: TODAS_ATIVIDADES,
+  },
+
   {
     nome: "Fono Clínico 🏥",
     emoji: "👂",
