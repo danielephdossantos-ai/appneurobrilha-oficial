@@ -22,6 +22,11 @@ interface MissaoProvaManagerProps {
   childId: string;
 }
 
+const missionQueryKeys = (childId: string) => [
+  ["exam_missions", childId] as const,
+  ["exam_missions_child", childId] as const,
+];
+
 export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
   const queryClient = useQueryClient();
   const [isAdding, setIsAdding] = useState(false);
@@ -68,12 +73,17 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       setIsAdding(false);
       setNewSubject("");
       setNewDate("");
       setNewNotes("");
       toast.success("Missão Prova criada! Agora adicione os conteúdos.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui salvar a Missão Prova.");
     },
   });
 
@@ -83,8 +93,13 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       toast.info("Missão removida.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui remover a Missão Prova.");
     },
   });
 
@@ -99,7 +114,13 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
+      toast.success("Conteúdo adicionado à Missão Prova.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Não consegui adicionar o conteúdo.");
     },
   });
 
@@ -151,7 +172,9 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["exam_missions", childId] });
+      missionQueryKeys(childId).forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      });
       toast.success("Plano de estudos gerado com sucesso pelo Sistema Infinito!");
     },
     onError: (error: any) => {
