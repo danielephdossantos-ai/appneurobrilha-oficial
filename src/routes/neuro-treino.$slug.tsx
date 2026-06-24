@@ -1129,10 +1129,33 @@ function FocoSustentado({ p, onDone }: any) {
       </div>
 
       <div className="relative w-full h-[440px] rounded-3xl border-4 border-sky-300 bg-gradient-to-b from-sky-300 via-sky-200 to-sky-100 overflow-hidden shadow-inner">
-        {/* nuvenzinhas decorativas */}
-        <div className="absolute top-4 left-6 w-20 h-8 bg-white/80 rounded-full blur-[2px]" />
-        <div className="absolute top-10 right-10 w-28 h-10 bg-white/70 rounded-full blur-[2px]" />
-        <div className="absolute top-24 left-1/3 w-16 h-6 bg-white/60 rounded-full blur-[2px]" />
+        {/* nuvenzinhas (SVG cartoon) */}
+        {[
+          { top: "6%", left: "4%", scale: 1 },
+          { top: "12%", left: "65%", scale: 1.3 },
+          { top: "30%", left: "30%", scale: 0.9 },
+          { top: "55%", left: "78%", scale: 1.1 },
+        ].map((c, i) => (
+          <svg
+            key={i}
+            viewBox="0 0 120 60"
+            className="absolute pointer-events-none"
+            style={{
+              top: c.top,
+              left: c.left,
+              width: `${120 * c.scale}px`,
+              height: `${60 * c.scale}px`,
+              opacity: 0.92,
+            }}
+          >
+            <g fill="white">
+              <ellipse cx="35" cy="40" rx="28" ry="18" />
+              <ellipse cx="65" cy="32" rx="30" ry="22" />
+              <ellipse cx="92" cy="42" rx="22" ry="16" />
+              <ellipse cx="55" cy="46" rx="34" ry="14" />
+            </g>
+          </svg>
+        ))}
         {p.itens.map((item: any, i: number) => {
           const L = layout[i];
           const pego = capturados.includes(i);
