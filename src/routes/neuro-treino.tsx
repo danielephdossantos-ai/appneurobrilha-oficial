@@ -30,7 +30,6 @@ import icCadePar from "@/assets/neuro-treino/icons/v2/cade-o-par.png";
 import icFocoTotal from "@/assets/neuro-treino/icons/v2/foco-total.png";
 import icLabSom from "@/assets/neuro-treino/icons/v2/labirinto-do-som.png";
 
-import icRastreio from "@/assets/neuro-treino/icons/v2/rastreamento-sacadico.png";
 import icMosaico from "@/assets/neuro-treino/icons/v2/mosaico-de-formas.png";
 import icSeqCores from "@/assets/neuro-treino/icons/v2/sequencia-de-cores.png";
 import icSimetria from "@/assets/neuro-treino/icons/v2/simetria.png";
@@ -75,7 +74,6 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "cade-o-par": icCadePar,
   "foco-total": icFocoTotal,
   "labirinto-do-som": icLabSom,
-  "rastreamento-sacadico": icRastreio,
   "mosaico-de-formas": icMosaico,
   "sequencia-de-cores": icSeqCores,
   simetria: icSimetria,

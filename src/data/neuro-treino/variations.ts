@@ -34,7 +34,6 @@ export type CategoriaSlug =
   | "foco-total"
   | "labirinto-do-som"
   
-  | "rastreamento-sacadico"
   | "mosaico-de-formas"
   | "sequencia-de-cores"
   | "simetria"
@@ -188,15 +187,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-primary/20 to-primary/5",
     objetivo: "Caminho guiado por pistas sonoras",
     instrucao: "Siga a direção indicada pela pista sonora para sair do labirinto.",
-  },
-  "rastreamento-sacadico": {
-    slug: "rastreamento-sacadico",
-    nome: "Rastreamento Sacádico",
-    emoji: "⚡",
-    grupo: "Atenção Avançada",
-    cor: "from-sky/30 to-sky/5",
-    objetivo: "Rastreio visual de estímulos rápidos",
-    instrucao: "Toque nos pontos na mesma ordem em que piscaram.",
   },
 
   "mosaico-de-formas": {
@@ -1005,15 +995,6 @@ const FOCOSUS_VARS: Variation[] = range(30).map((i) => {
   };
 });
 
-// 11. RASTREAMENTO SACÁDICO — pontos fixos piscam em ordem
-const SACADICO_VARS: Variation[] = range(30).map((i) => {
-  const tamanho = 3 + (i % 5); // 3..7
-  const seq: number[] = range(tamanho).map((k) => (i * 3 + k * 5) % 4);
-  return {
-    id: `rs-${i + 1}`,
-    payload: { sequencia: seq, posicoes: 4, flashMs: 600 - (i % 4) * 80 },
-  };
-});
 
 // 12. MOSAICO DE FORMAS — montar figuras com peças geométricas reais (Tangram)
 export type ShapeType =
@@ -2272,7 +2253,6 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "foco-total": FOCO_VARS,
   "labirinto-do-som": LABIRINTO_VARS,
   
-  "rastreamento-sacadico": SACADICO_VARS,
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
   simetria: SIMETRIA_VARS,
@@ -2341,8 +2321,6 @@ export const GRUPOS = [
       "memoria-visual",
       "reacao-rapida",
       "seguir-instrucao",
-      
-      "rastreamento-sacadico",
       "foco-total",
     ] as CategoriaSlug[],
   },
