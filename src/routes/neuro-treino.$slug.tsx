@@ -372,8 +372,6 @@ function MechanicRenderer({
       return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
     case "tracado-letras":
       return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
-    case "caminho-dos-pontos":
-      return <CaminhoPontos p={variation.payload} onDone={onConcluir} />;
     case "labirinto-precisao":
       return <LabirintoPrecisao p={variation.payload} onDone={onConcluir} />;
     case "triagem-categorias":
@@ -2117,86 +2115,6 @@ function TracadoLetras({ p, onDone }: any) {
 
 
 
-// ============== 20. Caminho dos Pontos ==============
-// Mecânica única: SVG com pontos numerados; tocar em ordem desenha linhas
-function CaminhoPontos({ p, onDone }: any) {
-  const [next, setNext] = useState(0);
-  const [linhas, setLinhas] = useState<{ x1: number; y1: number; x2: number; y2: number }[]>([]);
-  const tap = (i: number) => {
-    if (i !== next) {
-      toast("Próximo é o " + (next + 1));
-      return;
-    }
-    if (i > 0) {
-      const a = p.pontos[i - 1],
-        b = p.pontos[i];
-      setLinhas((l) => [...l, { x1: a.x, y1: a.y, x2: b.x, y2: b.y }]);
-    }
-    if (i + 1 >= p.pontos.length) {
-      toast.success("Figura completa!");
-      onDone(true);
-    } else setNext(i + 1);
-  };
-  return (
-    <div className="text-center">
-      <div className="text-lg font-black mb-2">{semEmoji(p.figura)}</div>
-      <svg
-        viewBox="0 0 100 100"
-        className="mx-auto bg-card border-2 border-border rounded-2xl"
-        style={{ width: 280, height: 280 }}
-      >
-        {linhas.map((l, i) => (
-          <line
-            key={i}
-            x1={l.x1}
-            y1={l.y1}
-            x2={l.x2}
-            y2={l.y2}
-            stroke="hsl(var(--success))"
-            strokeWidth={1.2}
-          />
-        ))}
-        {p.pontos.map((pt: any, i: number) => (
-          <g
-            key={i}
-            onPointerDown={(e) => { e.preventDefault(); tap(i); }}
-            style={{ cursor: "pointer", touchAction: "none" }}
-          >
-            {/* área de toque invisível bem maior */}
-            <circle cx={pt.x} cy={pt.y} r={8} fill="transparent" />
-            <circle
-              cx={pt.x}
-              cy={pt.y}
-              r={i === next ? 5 : 4}
-              fill={
-                i < next
-                  ? "hsl(var(--success))"
-                  : i === next
-                    ? "hsl(var(--coral))"
-                    : "hsl(var(--muted-foreground))"
-              }
-              stroke="white"
-              strokeWidth={0.6}
-              style={{ pointerEvents: "none" }}
-            />
-            <text
-              x={pt.x}
-              y={pt.y + 1.2}
-              fontSize={3.6}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fontWeight="900"
-              fill="white"
-              style={{ pointerEvents: "none" }}
-            >
-              {i + 1}
-            </text>
-          </g>
-        ))}
-      </svg>
-    </div>
-  );
-}
 
 // ============== 21. Labirinto de Precisão ==============
 // Mecânica única: arrastar bolinha; sair dos corredores reseta progresso

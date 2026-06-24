@@ -43,7 +43,7 @@ export type CategoriaSlug =
   | "ritmo-e-sopro"
   | "paromatopeias-corpo"
   | "tracado-letras"
-  | "caminho-dos-pontos"
+  
   | "labirinto-precisao"
   | "triagem-categorias"
   | "expressao-emocao"
@@ -284,15 +284,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-success/25 to-success/5",
     objetivo: "Cobertura de pontilhado com setas direcionais",
     instrucao: "Siga as setas em ordem para cobrir a letra.",
-  },
-  "caminho-dos-pontos": {
-    slug: "caminho-dos-pontos",
-    nome: "Caminho dos Pontos",
-    emoji: "🔢",
-    grupo: "Coordenação Motor-Escrita",
-    cor: "from-success/25 to-success/5",
-    objetivo: "Unir pontos em sequência para formar figura",
-    instrucao: "Toque nos pontos em ordem para revelar a figura.",
   },
   "labirinto-precisao": {
     slug: "labirinto-precisao",
@@ -1574,81 +1565,6 @@ const TRACADO_VARS: Variation[] = range(ALFABETO_BANK.length).map((i) => {
 });
 
 
-// 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
-const CAMINHO_BANK = [
-  {
-    figura: "Estrela ⭐",
-    pontos: [
-      { x: 50, y: 10 },
-      { x: 60, y: 40 },
-      { x: 90, y: 40 },
-      { x: 65, y: 60 },
-      { x: 75, y: 90 },
-      { x: 50, y: 70 },
-      { x: 25, y: 90 },
-      { x: 35, y: 60 },
-      { x: 10, y: 40 },
-      { x: 40, y: 40 },
-    ],
-  },
-  {
-    figura: "Casa 🏠",
-    pontos: [
-      { x: 20, y: 80 },
-      { x: 20, y: 40 },
-      { x: 50, y: 15 },
-      { x: 80, y: 40 },
-      { x: 80, y: 80 },
-    ],
-  },
-  {
-    figura: "Coração ❤️",
-    pontos: [
-      { x: 50, y: 85 },
-      { x: 15, y: 50 },
-      { x: 25, y: 20 },
-      { x: 50, y: 40 },
-      { x: 75, y: 20 },
-      { x: 85, y: 50 },
-    ],
-  },
-  {
-    figura: "Peixe 🐟",
-    pontos: [
-      { x: 15, y: 50 },
-      { x: 40, y: 25 },
-      { x: 75, y: 25 },
-      { x: 85, y: 50 },
-      { x: 75, y: 75 },
-      { x: 40, y: 75 },
-    ],
-  },
-  {
-    figura: "Lua 🌙",
-    pontos: [
-      { x: 60, y: 15 },
-      { x: 30, y: 35 },
-      { x: 25, y: 60 },
-      { x: 45, y: 80 },
-      { x: 70, y: 75 },
-    ],
-  },
-  {
-    figura: "Barco ⛵",
-    pontos: [
-      { x: 50, y: 15 },
-      { x: 50, y: 60 },
-      { x: 15, y: 60 },
-      { x: 85, y: 60 },
-      { x: 20, y: 80 },
-      { x: 80, y: 80 },
-    ],
-  },
-];
-const CAMINHO_VARS: Variation[] = range(30).map((i) => ({
-  id: `cp-${i + 1}`,
-  payload: CAMINHO_BANK[i % CAMINHO_BANK.length],
-}));
 
 // 21. LABIRINTO DE PRECISÃO — arrastar bolinha em corredor estreito
 const LABPRE_BANK = [
@@ -2390,7 +2306,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "ritmo-e-sopro": SOPRO_VARS,
   "paromatopeias-corpo": CORPO_VARS,
   "tracado-letras": TRACADO_VARS,
-  "caminho-dos-pontos": CAMINHO_VARS,
+  
   "labirinto-precisao": LABPRE_VARS,
   "triagem-categorias": TRIAGEM_VARS,
   "expressao-emocao": EMOCAO_VARS,
@@ -2439,7 +2355,7 @@ export const GRUPOS = [
       "copiar-figura",
       "alvo-movel",
       "tracado-letras",
-      "caminho-dos-pontos",
+      
       "labirinto-precisao",
     ] as CategoriaSlug[],
   },
