@@ -14,10 +14,10 @@ import {
 
 const inputSchema = z.object({
   childId: z.string().uuid(),
-  semanaInicioIso: z.string().optional(), // YYYY-MM-DD da segunda; default = semana corrente
+  semanaInicioIso: z.string().optional(),
 });
 
-function inferPerfil(responses: any): PerfilNeuro {
+function inferPerfil(responses: unknown): PerfilNeuro {
   const raw = JSON.stringify(responses || {}).toLowerCase();
   if (raw.includes("tea") || raw.includes("autis")) return "TEA";
   if (raw.includes("tdah") || raw.includes("dficit")) return "TDAH";
@@ -29,11 +29,12 @@ export const gerarAulasSemana = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => inputSchema.parse(data))
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const userId = context.userId;
     const { childId } = data;
 
-    // 1. Criança + anamnese
-    const { data: child, error: childErr } = await supabase
+    // 1. Criança + verificação de propriedade
+    const { data: child, error: childErr } = await supabaseAdmin
       .from("children")
       .select("id, user_id, serie, idade, nome")
       .eq("id", childId)
@@ -42,56 +43,56 @@ export const gerarAulasSemana = createServerFn({ method: "POST" })
     if (!child) throw new Error("Criança não encontrada");
     if (child.user_id !== userId) throw new Error("Sem permissão para esta criança");
 
-    const { data: anamnese } = await supabase
+    const { data: anamnese } = await supabaseAdmin
       .from("anamnese_v2")
       .select("responses")
       .eq("child_id", childId)
       .maybeSingle();
 
     const perfil = inferPerfil(anamnese?.responses);
-    const serie = (child as any).serie || "1º Ano";
+    const serie = (child as { serie?: string }).serie || "1º Ano";
 
-    // 2. BNCC para a série
-    const { data: habilidades } = await supabase
+    // 2. BNCC para a série (com fallback)
+    let habilidades: Array<{ codigo: string; disciplina: string; descricao: string; ano?: string | null }> = [];
+    const { data: habsSerie } = await supabaseAdmin
       .from("bncc_habilidades")
       .select("codigo, disciplina, descricao, ano")
       .eq("ano", serie)
       .limit(30);
-
-    if (!habilidades || habilidades.length === 0) {
-      // Fallback: pega qualquer 10 da BNCC pra não bloquear
-      const { data: fallback } = await supabase
+    habilidades = (habsSerie || []) as typeof habilidades;
+    if (habilidades.length === 0) {
+      const { data: fallback } = await supabaseAdmin
         .from("bncc_habilidades")
         .select("codigo, disciplina, descricao, ano")
         .limit(10);
-      if (!fallback || fallback.length === 0) {
+      habilidades = (fallback || []) as typeof habilidades;
+      if (habilidades.length === 0) {
         throw new Error("Sem habilidades BNCC cadastradas para gerar aulas");
       }
-      habilidades?.push(...fallback);
     }
 
     // 3. Matriz pedagógica
-    const { data: matriz } = await supabase
+    const { data: matriz } = await supabaseAdmin
       .from("pedagogical_activities_base")
       .select("id, serie, materia, tecnica, formato, codigo_bncc, titulo, descricao")
       .or(`serie.eq.${serie},serie.is.null`)
       .limit(200);
 
-    // 4. Mídias aprovadas
-    const { data: midias } = await supabase
+    // 4. Mídias
+    const { data: midias } = await supabaseAdmin
       .from("rb_midias")
       .select("id, url, tipo, tags, titulo")
       .limit(100);
 
-    // 5. Progresso (habilidades já dominadas — evita repetir)
-    const { data: progresso } = await supabase
+    // 5. Progresso
+    const { data: progresso } = await supabaseAdmin
       .from("progresso_aluno")
       .select("codigo_bncc, dominio")
       .eq("aluno_id", childId);
-    const jaDominadas = new Set(
-      (progresso || [])
-        .filter((p: any) => (p.dominio ?? 0) >= 0.8)
-        .map((p: any) => p.codigo_bncc),
+    const jaDominadas = new Set<string>(
+      ((progresso || []) as Array<{ codigo_bncc: string | null; dominio: number | null }>)
+        .filter((p) => (p.dominio ?? 0) >= 0.8 && p.codigo_bncc)
+        .map((p) => p.codigo_bncc as string),
     );
 
     // 6. Plano
@@ -105,9 +106,9 @@ export const gerarAulasSemana = createServerFn({ method: "POST" })
       perfil,
       serie,
       semanaInicio,
-      habilidades: (habilidades || []) as any,
-      matriz: (matriz || []) as any,
-      midias: (midias || []) as any,
+      habilidades,
+      matriz: (matriz || []) as never,
+      midias: (midias || []) as never,
       jaDominadas,
     });
 
@@ -115,10 +116,10 @@ export const gerarAulasSemana = createServerFn({ method: "POST" })
       return { ok: true, criadas: 0, perfil, mensagem: "Sem habilidades novas a treinar." };
     }
 
-    // 7. Upsert na tabela aulas_semana
-    const { error: upErr } = await supabase
+    // 7. Upsert
+    const { error: upErr } = await supabaseAdmin
       .from("aulas_semana")
-      .upsert(plano as any, { onConflict: "child_id,data" });
+      .upsert(plano as never, { onConflict: "child_id,data" });
     if (upErr) throw upErr;
 
     return { ok: true, criadas: plano.length, perfil };
@@ -127,15 +128,22 @@ export const gerarAulasSemana = createServerFn({ method: "POST" })
 export const listarAulasSemana = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) =>
-    z
-      .object({
-        childId: z.string().uuid(),
-        semanaInicioIso: z.string().optional(),
-      })
-      .parse(data),
+    z.object({ childId: z.string().uuid(), semanaInicioIso: z.string().optional() }).parse(data),
   )
   .handler(async ({ data, context }) => {
-    const { supabase } = context;
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const userId = context.userId;
+
+    // Verifica propriedade
+    const { data: child } = await supabaseAdmin
+      .from("children")
+      .select("user_id")
+      .eq("id", data.childId)
+      .maybeSingle();
+    if (!child || (child as { user_id: string }).user_id !== userId) {
+      throw new Error("Sem permissão para esta criança");
+    }
+
     const inicio = data.semanaInicioIso
       ? new Date(data.semanaInicioIso + "T00:00:00")
       : getSegundaDaSemana();
@@ -143,7 +151,7 @@ export const listarAulasSemana = createServerFn({ method: "POST" })
     fim.setDate(fim.getDate() + 4);
     const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
-    const { data: aulas, error } = await supabase
+    const { data: aulas, error } = await supabaseAdmin
       .from("aulas_semana")
       .select("*")
       .eq("child_id", data.childId)
