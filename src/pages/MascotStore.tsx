@@ -447,6 +447,62 @@ const ADDITIONAL_CHARACTERS = [
     category: "premium",
     image_url: pipaSuperHeroina,
   },
+  {
+    id: "pip-teen-super-heroi",
+    name: "Pip Teen Super-Herói",
+    description: "Versão adolescente do Pip pronta para salvar o dia com estilo.",
+    category: "premium",
+    image_url: pipTeenSuperHeroi,
+  },
+  {
+    id: "pipa-teen-super-heroina",
+    name: "Pipa Teen Super-Heroína",
+    description: "Pipa adolescente em traje de heroína moderna e poderosa.",
+    category: "premium",
+    image_url: pipaTeenSuperHeroina,
+  },
+  {
+    id: "pip-teen-principe",
+    name: "Pip Teen Príncipe",
+    description: "Pip adolescente com traje de gala real e coroa estilosa.",
+    category: "premium",
+    image_url: pipTeenPrincipe,
+  },
+  {
+    id: "pipa-teen-princesa",
+    name: "Pipa Teen Princesa",
+    description: "Pipa adolescente com vestido de gala e tiara delicada.",
+    category: "premium",
+    image_url: pipaTeenPrincesa,
+  },
+  {
+    id: "pip-teen-roqueiro",
+    name: "Pip Teen Roqueiro",
+    description: "Jaqueta de couro, guitarra na mão e atitude rock'n'roll.",
+    category: "premium",
+    image_url: pipTeenRoqueiro,
+  },
+  {
+    id: "pipa-teen-roqueira",
+    name: "Pipa Teen Roqueira",
+    description: "Pipa adolescente com guitarra e estilo punk-rock.",
+    category: "premium",
+    image_url: pipaTeenRoqueira,
+  },
+  {
+    id: "pip-teen-cyber",
+    name: "Pip Teen Cyber",
+    description: "Visor holográfico, fones neon e vibe gamer futurista.",
+    category: "premium",
+    image_url: pipTeenCyber,
+  },
+  {
+    id: "pipa-teen-cyber",
+    name: "Pipa Teen Cyber",
+    description: "Pipa adolescente em estilo cyberpunk com neon brilhante.",
+    category: "premium",
+    image_url: pipaTeenCyber,
+  },
 ];
 
 // Gamificação: requisito de Moedas Brilha para cada mascote da loja
