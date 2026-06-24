@@ -350,6 +350,10 @@ function MissaoProva() {
       />
 
       <div className="space-y-8 animate-in fade-in duration-500">
+        {activeChild && (
+          <MissaoProvaManager childId={activeChild.id} />
+        )}
+
         {missions.length === 0 ? (
           <Card className="py-16 text-center space-y-5">
             <div className="h-24 w-24 bg-muted rounded-full grid place-items-center mx-auto">
