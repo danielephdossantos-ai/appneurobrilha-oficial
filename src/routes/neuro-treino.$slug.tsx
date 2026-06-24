@@ -372,8 +372,6 @@ function MechanicRenderer({
       return <SonsCorpo p={variation.payload} onDone={onConcluir} />;
     case "tracado-letras":
       return <TracadoLetras p={variation.payload} onDone={onConcluir} />;
-    case "labirinto-precisao":
-      return <LabirintoPrecisao p={variation.payload} onDone={onConcluir} />;
     case "triagem-categorias":
       return <TriagemCategorias p={variation.payload} onDone={onConcluir} />;
     case "expressao-emocao":
