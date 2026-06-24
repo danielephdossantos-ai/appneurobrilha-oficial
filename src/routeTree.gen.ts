@@ -38,6 +38,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
+import { Route as EscolaBrilhaSemanaRouteImport } from './routes/escola-brilha.semana'
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
@@ -190,6 +191,11 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
+const EscolaBrilhaSemanaRoute = EscolaBrilhaSemanaRouteImport.update({
+  id: '/semana',
+  path: '/semana',
+  getParentRoute: () => EscolaBrilhaRoute,
+} as any)
 const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
   id: '/aula',
   path: '/aula',
@@ -253,6 +259,7 @@ export interface FileRoutesByFullPath {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/escola-brilha/semana': typeof EscolaBrilhaSemanaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -289,6 +296,7 @@ export interface FileRoutesByTo {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/escola-brilha/semana': typeof EscolaBrilhaSemanaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
@@ -327,6 +335,7 @@ export interface FileRoutesById {
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
+  '/escola-brilha/semana': typeof EscolaBrilhaSemanaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
@@ -366,6 +375,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/escola-brilha/semana'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -402,6 +412,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/escola-brilha/semana'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
@@ -439,6 +450,7 @@ export interface FileRouteTypes {
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
+    | '/escola-brilha/semana'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
@@ -683,6 +695,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
+    '/escola-brilha/semana': {
+      id: '/escola-brilha/semana'
+      path: '/semana'
+      fullPath: '/escola-brilha/semana'
+      preLoaderRoute: typeof EscolaBrilhaSemanaRouteImport
+      parentRoute: typeof EscolaBrilhaRoute
+    }
     '/escola-brilha/aula': {
       id: '/escola-brilha/aula'
       path: '/aula'
@@ -730,12 +749,14 @@ declare module '@tanstack/react-router' {
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
+  EscolaBrilhaSemanaRoute: typeof EscolaBrilhaSemanaRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
   EscolaBrilhaDbAulaIdRoute: typeof EscolaBrilhaDbAulaIdRoute
 }
 
 const EscolaBrilhaRouteChildren: EscolaBrilhaRouteChildren = {
   EscolaBrilhaAulaRoute: EscolaBrilhaAulaRoute,
+  EscolaBrilhaSemanaRoute: EscolaBrilhaSemanaRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
   EscolaBrilhaDbAulaIdRoute: EscolaBrilhaDbAulaIdRoute,
 }
