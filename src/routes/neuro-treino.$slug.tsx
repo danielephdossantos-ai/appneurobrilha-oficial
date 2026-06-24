@@ -1825,6 +1825,9 @@ function CenaSopro({ cena, progress, level }: { cena: string; progress: number; 
 // ============== 18. Sons do Corpo / Paromatopeias ==============
 // Mecânica única: som textual → escolher ação (texto + emoji)
 function SonsCorpo({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
+  const hover = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
+  const imgSize = sens.largerTargets ? "w-20 h-20" : "w-16 h-16";
   return (
     <div className="text-center">
       <div className="text-xs uppercase text-muted-foreground tracking-widest mb-1 flex items-center justify-center gap-1">
@@ -1840,9 +1843,9 @@ function SonsCorpo({ p, onDone }: any) {
             <button
               key={i}
               onClick={() => onDone(o === p.correta)}
-              className="bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg hover:border-coral hover:scale-105 transition-all flex flex-col items-center gap-2"
+              className={`bg-card border-2 border-border rounded-xl py-5 px-3 font-bold text-lg transition-all flex flex-col items-center gap-2 ${hover}`}
             >
-              <RenderEmoji e={emoji} label={limpo} className="w-16 h-16" />
+              <RenderEmoji e={emoji} label={limpo} className={imgSize} />
               <span>{limpo}</span>
             </button>
           );
@@ -1851,6 +1854,7 @@ function SonsCorpo({ p, onDone }: any) {
     </div>
   );
 }
+
 
 // ============== 19. Colorir a Letra ==============
 // Letra oca grande + paleta de 12 cores (6 de cada lado). Criança escolhe cor e toca na letra para pintar.
@@ -1915,16 +1919,21 @@ function TracadoLetras({ p, onDone }: any) {
   const onUp = () => setDrawing(false);
   const limpar = () => { setStrokes([]); setPintado(false); };
 
+  const { effective: sens } = useSensoryProfile();
+  const bolinhaSize = sens.largerTargets ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
+  const selectedScale = sens.reduceMotion ? "" : "scale-110";
+  const hoverScale = sens.reduceMotion ? "" : "hover:scale-110";
   const Bolinha = ({ c }: { c: { nome: string; hex: string } }) => (
     <button
       onClick={() => escolher(c)}
       aria-label={c.nome}
-      className={`w-10 h-10 md:w-12 md:h-12 rounded-full border-4 transition-transform ${
-        cor === c.hex ? "border-slate-900 scale-110" : "border-white"
-      } shadow-md hover:scale-110`}
+      className={`${bolinhaSize} rounded-full border-4 transition-transform ${
+        cor === c.hex ? `border-slate-900 ${selectedScale}` : "border-white"
+      } shadow-md ${hoverScale}`}
       style={{ background: c.hex }}
     />
   );
+
 
   return (
     <div className="text-center space-y-3">
