@@ -28,7 +28,7 @@ import icOndeEsta from "@/assets/neuro-treino/icons/v2/onde-esta.png";
 import icSeqPadrao from "@/assets/neuro-treino/icons/v2/sequencia-e-padrao.png";
 import icCadePar from "@/assets/neuro-treino/icons/v2/cade-o-par.png";
 
-import icLabSom from "@/assets/neuro-treino/icons/v2/labirinto-do-som.png";
+
 
 import icMosaico from "@/assets/neuro-treino/icons/v2/mosaico-de-formas.png";
 import icSeqCores from "@/assets/neuro-treino/icons/v2/sequencia-de-cores.png";
@@ -73,7 +73,7 @@ const ICONS: Partial<Record<CategoriaSlug, string>> = {
   "sequencia-e-padrao": icSeqPadrao,
   "cade-o-par": icCadePar,
   
-  "labirinto-do-som": icLabSom,
+  
   "mosaico-de-formas": icMosaico,
   "sequencia-de-cores": icSeqCores,
   simetria: icSimetria,

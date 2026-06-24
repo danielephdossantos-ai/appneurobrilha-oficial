@@ -32,7 +32,7 @@ export type CategoriaSlug =
   | "sequencia-e-padrao"
   | "cade-o-par"
   
-  | "labirinto-do-som"
+  
   
   | "mosaico-de-formas"
   | "sequencia-de-cores"
@@ -169,15 +169,6 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     cor: "from-primary/20 to-primary/5",
     objetivo: "Memória associativa direta",
     instrucao: "Vire duas cartas para encontrar os pares iguais.",
-  },
-  "labirinto-do-som": {
-    slug: "labirinto-do-som",
-    nome: "Labirinto do Som",
-    emoji: "🌀",
-    grupo: "Funções Executivas",
-    cor: "from-primary/20 to-primary/5",
-    objetivo: "Caminho guiado por pistas sonoras",
-    instrucao: "Siga a direção indicada pela pista sonora para sair do labirinto.",
   },
 
   "mosaico-de-formas": {
@@ -885,19 +876,6 @@ const PAR_VARS: Variation[] = range(30).map((i) => {
   return { id: `cp-${i + 1}`, payload: { pares: items } };
 });
 
-
-// 9. LABIRINTO DO SOM — escolher direção por pista sonora (texto)
-const DIRECOES = [
-  { simbolo: "⬆️", nome: "CIMA" },
-  { simbolo: "⬇️", nome: "BAIXO" },
-  { simbolo: "⬅️", nome: "ESQUERDA" },
-  { simbolo: "➡️", nome: "DIREITA" },
-];
-const LABIRINTO_VARS: Variation[] = range(30).map((i) => {
-  const passos = 3 + (i % 4);
-  const caminho = range(passos).map((p) => DIRECOES[(i + p) % 4]);
-  return { id: `ls-${i + 1}`, payload: { caminho } };
-});
 
 // 10. FOCO SUSTENTADO — várias figuras flutuam; criança toca o alvo pedido.
 // 10 fáceis (4 figuras), 10 médias (6), 10 difíceis (8). Ritmo bem calmo.
@@ -2219,7 +2197,6 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "sequencia-e-padrao": SEQ_VARS,
   "cade-o-par": PAR_VARS,
   
-  "labirinto-do-som": LABIRINTO_VARS,
   
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
@@ -2329,7 +2306,6 @@ export const GRUPOS = [
       "onde-esta",
       "sequencia-e-padrao",
       "cade-o-par",
-      "labirinto-do-som",
       "triagem-categorias",
       "expressao-emocao",
     ] as CategoriaSlug[],
