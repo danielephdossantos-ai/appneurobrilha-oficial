@@ -1496,57 +1496,44 @@ const CORPO_VARS: Variation[] = range(30).map((i) => {
   return { id: `pc-${i + 1}`, payload: { som: b.som, opts, correta: b.correta } };
 });
 
-// 19. TRAÇADO DE LETRAS — pontos numerados POR CIMA da letra; criança toca em ordem.
-// Cada ponto: {x,y} em viewBox 100x100. lift=true inicia novo traço (não liga ao anterior).
-type LetraPonto = { x: number; y: number; lift?: boolean };
-const TRACADO_BANK: { letra: string; pontos: LetraPonto[] }[] = [
-  // A: lado esq, topo, lado dir; traço da barra
-  { letra: "A", pontos: [
-    { x: 20, y: 88 }, { x: 50, y: 12 }, { x: 80, y: 88 },
-    { x: 32, y: 58, lift: true }, { x: 68, y: 58 },
-  ]},
-  // L: desce, vira direita
-  { letra: "L", pontos: [{ x: 30, y: 12 }, { x: 30, y: 88 }, { x: 80, y: 88 }] },
-  // T: barra horizontal + haste
-  { letra: "T", pontos: [
-    { x: 15, y: 18 }, { x: 85, y: 18 },
-    { x: 50, y: 18, lift: true }, { x: 50, y: 88 },
-  ]},
-  // I: só desce
-  { letra: "I", pontos: [{ x: 50, y: 14 }, { x: 50, y: 88 }] },
-  // O: 8 pontos ao redor da elipse
-  { letra: "O", pontos: [
-    { x: 50, y: 12 }, { x: 78, y: 25 }, { x: 88, y: 50 }, { x: 78, y: 75 },
-    { x: 50, y: 88 }, { x: 22, y: 75 }, { x: 12, y: 50 }, { x: 22, y: 25 },
-    { x: 50, y: 12 },
-  ]},
-  // E: contorno e traço do meio
-  { letra: "E", pontos: [
-    { x: 80, y: 14 }, { x: 25, y: 14 }, { x: 25, y: 88 }, { x: 80, y: 88 },
-    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
-  ]},
-  // H: duas hastes + barra
-  { letra: "H", pontos: [
-    { x: 25, y: 14 }, { x: 25, y: 88 },
-    { x: 25, y: 50, lift: true }, { x: 75, y: 50 },
-    { x: 75, y: 14, lift: true }, { x: 75, y: 88 },
-  ]},
-  // F: lado, topo, barra do meio
-  { letra: "F", pontos: [
-    { x: 25, y: 88 }, { x: 25, y: 14 }, { x: 78, y: 14 },
-    { x: 25, y: 50, lift: true }, { x: 65, y: 50 },
-  ]},
-  // V: dois traços diagonais
-  { letra: "V", pontos: [{ x: 15, y: 14 }, { x: 50, y: 88 }, { x: 85, y: 14 }] },
-  // M: 4 segmentos
-  { letra: "M", pontos: [
-    { x: 15, y: 88 }, { x: 15, y: 14 }, { x: 50, y: 60 }, { x: 85, y: 14 }, { x: 85, y: 88 },
-  ]},
+// 19. TRAÇADO DE LETRAS — letra oca + pontos numerados nos inícios dos traços + setas
+// Mecânica: criança toca os pontos em ordem (1, 2, 3...). Cada toque "pinta" o ponto.
+// dir: direção da seta de orientação (down/up/right/left/dr/dl/ur/ul/cw/ccw).
+type LetraGuia = { x: number; y: number; dir: "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw" };
+type LetraDef = { letra: string; palavra: string; emoji: string; guias: LetraGuia[] };
+const ALFABETO_BANK: LetraDef[] = [
+  { letra: "A", palavra: "ABELHA",     emoji: "🐝", guias: [{x:38,y:22,dir:"dl"},{x:62,y:22,dir:"dr"},{x:30,y:58,dir:"right"}]},
+  { letra: "B", palavra: "BOLA",       emoji: "⚽", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"right"},{x:28,y:52,dir:"right"}]},
+  { letra: "C", palavra: "CASA",       emoji: "🏠", guias: [{x:72,y:24,dir:"ccw"}]},
+  { letra: "D", palavra: "DADO",       emoji: "🎲", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"}]},
+  { letra: "E", palavra: "ELEFANTE",   emoji: "🐘", guias: [{x:72,y:20,dir:"left"},{x:28,y:20,dir:"down"},{x:28,y:50,dir:"right"},{x:28,y:82,dir:"right"}]},
+  { letra: "F", palavra: "FOCA",       emoji: "🦭", guias: [{x:72,y:20,dir:"left"},{x:28,y:20,dir:"down"},{x:28,y:50,dir:"right"}]},
+  { letra: "G", palavra: "GATO",       emoji: "🐱", guias: [{x:72,y:24,dir:"ccw"},{x:70,y:55,dir:"left"}]},
+  { letra: "H", palavra: "HIPOPOTAMO", emoji: "🦛", guias: [{x:28,y:20,dir:"down"},{x:72,y:20,dir:"down"},{x:30,y:50,dir:"right"}]},
+  { letra: "I", palavra: "IGREJA",     emoji: "⛪", guias: [{x:50,y:20,dir:"down"}]},
+  { letra: "J", palavra: "JACARE",     emoji: "🐊", guias: [{x:60,y:20,dir:"down"}]},
+  { letra: "K", palavra: "KIWI",       emoji: "🥝", guias: [{x:28,y:20,dir:"down"},{x:30,y:50,dir:"ur"},{x:30,y:50,dir:"dr"}]},
+  { letra: "L", palavra: "LEAO",       emoji: "🦁", guias: [{x:30,y:20,dir:"down"},{x:30,y:82,dir:"right"}]},
+  { letra: "M", palavra: "MACACO",     emoji: "🐵", guias: [{x:20,y:82,dir:"up"},{x:22,y:20,dir:"dr"},{x:50,y:58,dir:"ur"},{x:80,y:20,dir:"down"}]},
+  { letra: "N", palavra: "NAVIO",      emoji: "🚢", guias: [{x:28,y:82,dir:"up"},{x:28,y:20,dir:"dr"},{x:72,y:82,dir:"up"}]},
+  { letra: "O", palavra: "OVO",        emoji: "🥚", guias: [{x:50,y:20,dir:"ccw"}]},
+  { letra: "P", palavra: "PATO",       emoji: "🦆", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"}]},
+  { letra: "Q", palavra: "QUEIJO",     emoji: "🧀", guias: [{x:50,y:20,dir:"ccw"},{x:60,y:65,dir:"dr"}]},
+  { letra: "R", palavra: "RATO",       emoji: "🐭", guias: [{x:28,y:20,dir:"down"},{x:28,y:20,dir:"cw"},{x:45,y:55,dir:"dr"}]},
+  { letra: "S", palavra: "SAPO",       emoji: "🐸", guias: [{x:72,y:25,dir:"ccw"}]},
+  { letra: "T", palavra: "TARTARUGA",  emoji: "🐢", guias: [{x:20,y:20,dir:"right"},{x:50,y:20,dir:"down"}]},
+  { letra: "U", palavra: "UVA",        emoji: "🍇", guias: [{x:28,y:20,dir:"down"},{x:72,y:20,dir:"down"}]},
+  { letra: "V", palavra: "VACA",       emoji: "🐄", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"}]},
+  { letra: "W", palavra: "WAFFLE",     emoji: "🧇", guias: [{x:18,y:20,dir:"dr"},{x:38,y:80,dir:"ur"},{x:62,y:80,dir:"ur"},{x:82,y:20,dir:"dl"}]},
+  { letra: "X", palavra: "XICARA",     emoji: "☕", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"}]},
+  { letra: "Y", palavra: "IOGURTE",    emoji: "🥛", guias: [{x:22,y:20,dir:"dr"},{x:78,y:20,dir:"dl"},{x:50,y:52,dir:"down"}]},
+  { letra: "Z", palavra: "ZEBRA",      emoji: "🦓", guias: [{x:22,y:20,dir:"right"},{x:75,y:25,dir:"dl"},{x:22,y:82,dir:"right"}]},
 ];
-const TRACADO_VARS: Variation[] = range(30).map((i) => {
-  const b = TRACADO_BANK[i % TRACADO_BANK.length];
-  return { id: `tl-${i + 1}`, payload: { letra: b.letra, pontos: b.pontos } };
+const TRACADO_VARS: Variation[] = range(52).map((i) => {
+  const b = ALFABETO_BANK[i % ALFABETO_BANK.length];
+  return { id: `tl-${i + 1}`, payload: { letra: b.letra, palavra: b.palavra, emoji: b.emoji, guias: b.guias } };
 });
+
 
 // 20. CAMINHO DOS PONTOS — unir pontos numerados (mecânica única: ordem crescente em coords)
 const CAMINHO_BANK = [

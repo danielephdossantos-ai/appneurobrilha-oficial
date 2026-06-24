@@ -1928,106 +1928,108 @@ function SonsCorpo({ p, onDone }: any) {
 }
 
 // ============== 19. Traçado de Letras ==============
-// Pontos numerados SOBRE a letra; criança toca em ordem e os traços aparecem.
+// Letra oca (contorno SVG real) + pontos numerados nos inícios + setas direcionais + palavra/figura.
+type GuiaDir = "down"|"up"|"right"|"left"|"dr"|"dl"|"ur"|"ul"|"cw"|"ccw";
+const ARROW_MAP: Record<GuiaDir, { dx: number; dy: number; rot: number }> = {
+  right: { dx:  9, dy:  0, rot:   0 },
+  left:  { dx: -9, dy:  0, rot: 180 },
+  down:  { dx:  0, dy:  9, rot:  90 },
+  up:    { dx:  0, dy: -9, rot: -90 },
+  dr:    { dx:  7, dy:  7, rot:  45 },
+  dl:    { dx: -7, dy:  7, rot: 135 },
+  ur:    { dx:  7, dy: -7, rot: -45 },
+  ul:    { dx: -7, dy: -7, rot:-135 },
+  cw:    { dx:  6, dy:  6, rot:  90 },
+  ccw:   { dx: -6, dy:  6, rot:  90 },
+};
+
 function TracadoLetras({ p, onDone }: any) {
   const [step, setStep] = useState(0);
-  const pontos: { x: number; y: number; lift?: boolean }[] = p.pontos;
+  const guias: { x: number; y: number; dir: GuiaDir }[] = p.guias;
 
   const tap = (i: number) => {
     if (i !== step) {
       toast(`Toque no ponto ${step + 1}`);
       return;
     }
-    if (i + 1 >= pontos.length) {
-      toast.success("Letra completa! ✨");
+    if (i + 1 >= guias.length) {
+      toast.success(`Letra ${p.letra} de ${p.palavra}! ✨`);
       onDone(true);
     } else {
       setStep(i + 1);
     }
   };
 
-  // Linhas: liga ponto i ao i+1 se NÃO tiver lift no i+1, e só se i < step.
-  const linhas = pontos
-    .map((pt, i) => {
-      if (i === 0) return null;
-      if (pt.lift) return null;
-      if (i > step) return null;
-      const prev = pontos[i - 1];
-      return { x1: prev.x, y1: prev.y, x2: pt.x, y2: pt.y, key: i };
-    })
-    .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: number }[];
-
-  // Guia: a letra é o próprio caminho dos pontos (thick stroke claro)
-  const guias = pontos
-    .map((pt, i) => {
-      if (i === 0) return null;
-      if (pt.lift) return null;
-      const prev = pontos[i - 1];
-      return { x1: prev.x, y1: prev.y, x2: pt.x, y2: pt.y, key: `g-${i}` };
-    })
-    .filter(Boolean) as { x1: number; y1: number; x2: number; y2: number; key: string }[];
-
   return (
     <div className="text-center space-y-3">
       <div className="text-sm text-muted-foreground font-bold">
         Toque os pontinhos em ordem para escrever a letra {p.letra}
       </div>
-      <div className="mx-auto bg-gradient-to-br from-amber-50 to-rose-50 border-4 border-amber-200 rounded-3xl p-3" style={{ maxWidth: 340 }}>
-        <svg viewBox="0 0 100 100" className="w-full aspect-square">
-          {/* Guia da letra: traços largos cinza-claros ligando os pontos */}
-          {guias.map((l) => (
-            <line
-              key={l.key}
-              x1={l.x1}
-              y1={l.y1}
-              x2={l.x2}
-              y2={l.y2}
-              stroke="#fde68a"
-              strokeWidth={11}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          ))}
+      <div
+        className="mx-auto bg-white border-4 border-sky-300 rounded-3xl p-3 shadow-md"
+        style={{ maxWidth: 340 }}
+      >
+        <svg viewBox="0 0 100 110" className="w-full">
+          {/* Letra OCA — contorno real do glifo */}
+          <text
+            x={50}
+            y={55}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fontSize={95}
+            fontWeight={900}
+            fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
+            fill="none"
+            stroke="#0f172a"
+            strokeWidth={1.6}
+            strokeLinejoin="round"
+          >
+            {p.letra}
+          </text>
 
-          {/* Traços já completados pela criança (verde por cima do guia) */}
-          {linhas.map((l) => (
-            <line
-              key={l.key}
-              x1={l.x1}
-              y1={l.y1}
-              x2={l.x2}
-              y2={l.y2}
-              stroke="hsl(var(--success))"
-              strokeWidth={8}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          ))}
+          {/* Setas direcionais (tracejado leve) */}
+          {guias.map((g, i) => {
+            const m = ARROW_MAP[g.dir];
+            const tx = g.x + m.dx;
+            const ty = g.y + m.dy;
+            const done = i < step;
+            const color = done ? "hsl(var(--success))" : i === step ? "#f97316" : "#94a3b8";
+            return (
+              <g key={`arr-${i}`}>
+                <line
+                  x1={g.x} y1={g.y} x2={tx} y2={ty}
+                  stroke={color} strokeWidth={1.2} strokeDasharray="2 2"
+                />
+                <polygon
+                  points="0,-2.5 5,0 0,2.5"
+                  fill={color}
+                  transform={`translate(${tx} ${ty}) rotate(${m.rot})`}
+                />
+              </g>
+            );
+          })}
 
-          {/* Pontos numerados sobre a letra */}
-          {pontos.map((pt, i) => {
+          {/* Pontos numerados nos inícios dos traços */}
+          {guias.map((g, i) => {
             const done = i < step;
             const current = i === step;
             return (
-              <g key={i} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
+              <g key={`pt-${i}`} onClick={() => tap(i)} style={{ cursor: "pointer" }}>
                 <circle
-                  cx={pt.x}
-                  cy={pt.y}
-                  r={current ? 6.5 : 5.5}
+                  cx={g.x} cy={g.y}
+                  r={current ? 5.2 : 4.4}
                   fill={done ? "hsl(var(--success))" : current ? "#f97316" : "white"}
-                  stroke={done ? "white" : current ? "white" : "#475569"}
-                  strokeWidth={1.5}
+                  stroke={done ? "white" : "#0f172a"}
+                  strokeWidth={1.2}
                   className={current ? "animate-pulse" : ""}
                 />
                 {!done && (
                   <text
-                    x={pt.x}
-                    y={pt.y}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fontSize={5.5}
+                    x={g.x} y={g.y}
+                    textAnchor="middle" dominantBaseline="central"
+                    fontSize={5}
                     fontWeight={900}
-                    fill={current ? "white" : "#475569"}
+                    fill={current ? "white" : "#0f172a"}
                   >
                     {i + 1}
                   </text>
@@ -2035,11 +2037,25 @@ function TracadoLetras({ p, onDone }: any) {
               </g>
             );
           })}
+
+          {/* Palavra + emoji embaixo */}
+          <text
+            x={20} y={104}
+            fontSize={9}
+            fontWeight={900}
+            fontFamily='"Arial Black","Helvetica Neue",Arial,sans-serif'
+            fill="#0f172a"
+          >
+            <tspan fill="#dc2626">{p.letra}</tspan>
+            <tspan>{p.palavra.slice(1)}</tspan>
+          </text>
+          <text x={88} y={106} fontSize={14} textAnchor="middle">{p.emoji}</text>
         </svg>
       </div>
     </div>
   );
 }
+
 
 // ============== 20. Caminho dos Pontos ==============
 // Mecânica única: SVG com pontos numerados; tocar em ordem desenha linhas
