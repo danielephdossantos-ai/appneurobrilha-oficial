@@ -195,8 +195,8 @@ export const CATEGORIAS: Record<CategoriaSlug, CategoriaMeta> = {
     emoji: "🎨",
     grupo: "Oficina Criativa",
     cor: "from-lilac/30 to-lilac/5",
-    objetivo: "Cenário livre com arrastar e soltar",
-    instrucao: "Arraste os elementos para decorar o cenário do seu jeito.",
+    objetivo: "Montagem espacial: peças no lugar e no tamanho certos",
+    instrucao: "Toque numa figura embaixo e depois no contorno tracejado do cenário para encaixar.",
   },
 
   // Fono & Onomatopeias
@@ -1254,32 +1254,111 @@ const SEQC_VARS: Variation[] = range(30).map((i) => {
 });
 
 
-// 15. DECORAÇÃO CRIATIVA — cenário livre arrastar e soltar
-const DECOR_BANK = [
+// 15. DECORAÇÃO CRIATIVA — cenários estruturados com slots de encaixe
+// Cada slot tem posição (%) e tamanho (%) na cena. A criança toca a peça e o slot.
+export interface DecorSlot {
+  id: string;
+  emoji: string;
+  label: string;
+  x: number; // % left
+  y: number; // % top
+  w: number; // % width
+  h: number; // % height
+}
+export interface DecorScene {
+  cenario: string;
+  nome: string;
+  // camadas visuais (CSS gradients via classes Tailwind)
+  ceu: string; // gradient classes
+  chao: string; // gradient classes
+  ceuPct: number; // % de altura do céu (resto = chão)
+  slots: DecorSlot[];
+}
+
+const DECOR_BANK: DecorScene[] = [
   {
-    cenario: "Jardim 🌳",
-    fundo: "from-success/30 to-success/5",
-    stickers: ["🌸", "🌼", "🦋", "🌳", "🐝", "☀️"],
+    cenario: "Quarto",
+    nome: "Quarto",
+    ceu: "from-lilac/40 to-lilac/10",
+    chao: "from-amber-200 to-amber-400",
+    ceuPct: 55,
+    slots: [
+      { id: "janela", emoji: "🪟", label: "Janela", x: 62, y: 8, w: 30, h: 32 },
+      { id: "abajur", emoji: "💡", label: "Abajur", x: 8, y: 24, w: 14, h: 18 },
+      { id: "cama", emoji: "🛏️", label: "Cama", x: 4, y: 58, w: 48, h: 32 },
+      { id: "ursinho", emoji: "🧸", label: "Ursinho", x: 14, y: 50, w: 14, h: 16 },
+      { id: "livro", emoji: "📚", label: "Livro", x: 70, y: 60, w: 20, h: 18 },
+    ],
   },
   {
-    cenario: "Praia 🏖️",
-    fundo: "from-sky/30 to-sun/10",
-    stickers: ["🌊", "⛱️", "🐚", "🌞", "🐠", "⛵"],
+    cenario: "Jardim",
+    nome: "Jardim",
+    ceu: "from-sky-300 to-sky-100",
+    chao: "from-green-300 to-green-500",
+    ceuPct: 55,
+    slots: [
+      { id: "sol", emoji: "☀️", label: "Sol", x: 72, y: 4, w: 22, h: 22 },
+      { id: "arvore", emoji: "🌳", label: "Árvore", x: 4, y: 18, w: 32, h: 48 },
+      { id: "borboleta", emoji: "🦋", label: "Borboleta", x: 44, y: 28, w: 16, h: 16 },
+      { id: "abelha", emoji: "🐝", label: "Abelha", x: 62, y: 32, w: 14, h: 14 },
+      { id: "flor", emoji: "🌸", label: "Flor", x: 50, y: 70, w: 18, h: 20 },
+    ],
   },
   {
-    cenario: "Quarto 🛏️",
-    fundo: "from-lilac/30 to-lilac/5",
-    stickers: ["🛏️", "🪑", "🧸", "📚", "🌙", "⭐"],
+    cenario: "Praia",
+    nome: "Praia",
+    ceu: "from-sky-300 to-sky-100",
+    chao: "from-yellow-200 to-yellow-400",
+    ceuPct: 50,
+    slots: [
+      { id: "sol", emoji: "🌞", label: "Sol", x: 70, y: 4, w: 24, h: 24 },
+      { id: "veleiro", emoji: "⛵", label: "Veleiro", x: 8, y: 24, w: 22, h: 24 },
+      { id: "guardaSol", emoji: "⛱️", label: "Guarda-sol", x: 40, y: 38, w: 22, h: 32 },
+      { id: "concha", emoji: "🐚", label: "Concha", x: 8, y: 72, w: 14, h: 16 },
+      { id: "peixe", emoji: "🐠", label: "Peixe", x: 70, y: 70, w: 22, h: 18 },
+    ],
   },
   {
-    cenario: "Floresta 🌲",
-    fundo: "from-success/30 to-primary/10",
-    stickers: ["🌲", "🍄", "🦊", "🐿️", "🌸", "🦉"],
+    cenario: "Floresta",
+    nome: "Floresta",
+    ceu: "from-emerald-200 to-emerald-50",
+    chao: "from-amber-200 to-amber-400",
+    ceuPct: 60,
+    slots: [
+      { id: "pinheiro", emoji: "🌲", label: "Pinheiro", x: 38, y: 8, w: 28, h: 52 },
+      { id: "coruja", emoji: "🦉", label: "Coruja", x: 44, y: 26, w: 14, h: 16 },
+      { id: "raposa", emoji: "🦊", label: "Raposa", x: 6, y: 64, w: 22, h: 26 },
+      { id: "cogumelo", emoji: "🍄", label: "Cogumelo", x: 72, y: 70, w: 16, h: 20 },
+      { id: "flor", emoji: "🌸", label: "Flor", x: 32, y: 74, w: 14, h: 16 },
+    ],
   },
   {
-    cenario: "Espaço 🚀",
-    fundo: "from-primary/30 to-primary/5",
-    stickers: ["🚀", "🪐", "⭐", "🌙", "👽", "☄️"],
+    cenario: "Espaço",
+    nome: "Espaço",
+    ceu: "from-indigo-900 to-indigo-700",
+    chao: "from-indigo-700 to-indigo-500",
+    ceuPct: 80,
+    slots: [
+      { id: "estrela", emoji: "⭐", label: "Estrela", x: 8, y: 8, w: 12, h: 14 },
+      { id: "lua", emoji: "🌙", label: "Lua", x: 70, y: 6, w: 18, h: 20 },
+      { id: "planeta", emoji: "🪐", label: "Planeta", x: 50, y: 26, w: 22, h: 24 },
+      { id: "foguete", emoji: "🚀", label: "Foguete", x: 20, y: 36, w: 20, h: 32 },
+      { id: "alien", emoji: "👽", label: "Alien", x: 64, y: 60, w: 18, h: 22 },
+    ],
+  },
+  {
+    cenario: "Escola",
+    nome: "Escola",
+    ceu: "from-sky-200 to-sky-50",
+    chao: "from-stone-300 to-stone-500",
+    ceuPct: 50,
+    slots: [
+      { id: "globo", emoji: "🌍", label: "Globo", x: 70, y: 10, w: 22, h: 24 },
+      { id: "mochila", emoji: "🎒", label: "Mochila", x: 6, y: 50, w: 22, h: 32 },
+      { id: "livros", emoji: "📚", label: "Livros", x: 38, y: 58, w: 22, h: 22 },
+      { id: "lapis", emoji: "✏️", label: "Lápis", x: 32, y: 80, w: 20, h: 12 },
+      { id: "maca", emoji: "🍎", label: "Maçã", x: 70, y: 68, w: 16, h: 18 },
+    ],
   },
 ];
 const DECOR_VARS: Variation[] = range(30).map((i) => ({
