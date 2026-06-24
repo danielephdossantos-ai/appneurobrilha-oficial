@@ -2165,29 +2165,34 @@ function LabirintoPrecisao({ p, onDone }: any) {
   const last = p.segmentos[p.segmentos.length - 1];
   const fimX = last.x + last.w / 2;
   const fimY = last.y + last.h / 2;
-  const inicioSeg = p.segmentos[0];
-  const inicioX = inicioSeg.x + 4;
+  const inicioX = inicioSeg.x + Math.min(inicioSeg.w, 8) / 2;
   const inicioY = inicioSeg.y + inicioSeg.h / 2;
+
+  const nivelCor =
+    p.nivel === "Difícil" ? "bg-rose-500" : p.nivel === "Médio" ? "bg-amber-500" : "bg-emerald-500";
 
   return (
     <div className="text-center">
-      <div className="text-sm text-muted-foreground mb-2 font-bold">
-        Tema: {semEmoji(p.tema)} · Erros: <span className="text-coral">{erros}</span>
+      <div className="text-sm text-muted-foreground mb-2 font-bold flex items-center justify-center gap-2">
+        <span>Tema: {semEmoji(p.tema)}</span>
+        {p.nivel && (
+          <span className={`text-white text-xs font-black px-2 py-0.5 rounded-full ${nivelCor}`}>
+            {p.nivel}
+          </span>
+        )}
+        <span>· Erros: <span className="text-coral">{erros}</span></span>
       </div>
       <div
         ref={containerRef}
-        onMouseMove={(e) => move(e.clientX, e.clientY)}
-        onMouseUp={() => setDragging(false)}
-        onMouseLeave={() => setDragging(false)}
+        onPointerMove={(e) => move(e.clientX, e.clientY)}
         onTouchMove={(e) => {
           const t = e.touches[0];
           move(t.clientX, t.clientY);
         }}
-        onTouchEnd={() => setDragging(false)}
-        className={`relative mx-auto bg-gradient-to-br ${tema.bg} border-[6px] border-white rounded-3xl shadow-2xl overflow-hidden`}
+        className={`relative mx-auto bg-gradient-to-br ${tema.bg} border-[6px] border-white rounded-3xl shadow-2xl overflow-hidden cursor-crosshair`}
         style={{ width: 360, height: 280, touchAction: "none" }}
       >
-        {/* Decoração de fundo (folhinhas/peixinhos espalhados) */}
+        {/* Decoração de fundo */}
         <div className="absolute inset-0 pointer-events-none select-none opacity-30 text-2xl">
           {[
             { x: 6, y: 8 }, { x: 90, y: 6 }, { x: 4, y: 92 }, { x: 92, y: 90 },
@@ -2199,25 +2204,24 @@ function LabirintoPrecisao({ p, onDone }: any) {
           ))}
         </div>
 
-        {/* Paredes escuras (fundo coberto) + corredor recortado em branco */}
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+        {/* Paredes via máscara SVG */}
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none">
           <defs>
-            <mask id="corridor-mask">
+            <mask id={`corridor-mask-${p.tema}`}>
               <rect width="100" height="100" fill="white" />
               {p.segmentos.map((s: any, i: number) => (
-                <rect key={i} x={s.x} y={s.y} width={s.w} height={s.h} rx="3" ry="3" fill="black" />
+                <rect key={i} x={s.x} y={s.y} width={s.w} height={s.h} rx="2" ry="2" fill="black" />
               ))}
             </mask>
           </defs>
-          {/* Paredes com tema */}
-          <rect width="100" height="100" fill={tema.parede} opacity="0.85" mask="url(#corridor-mask)" />
+          <rect width="100" height="100" fill={tema.parede} opacity="0.88" mask={`url(#corridor-mask-${p.tema})`} />
         </svg>
 
-        {/* Corredor branco com sombra interna suave */}
+        {/* Corredor branco */}
         {p.segmentos.map((s: any, i: number) => (
           <div
             key={i}
-            className="absolute bg-white/95 rounded-xl"
+            className="absolute bg-white/95 rounded-lg pointer-events-none"
             style={{
               left: `${s.x}%`,
               top: `${s.y}%`,
@@ -2230,41 +2234,35 @@ function LabirintoPrecisao({ p, onDone }: any) {
 
         {/* Marcador de início */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-1/2 text-2xl pointer-events-none"
+          className="absolute -translate-x-1/2 -translate-y-1/2 text-xl pointer-events-none"
           style={{ left: `${inicioX}%`, top: `${inicioY}%` }}
         >
           {tema.inicio}
         </div>
 
-        {/* Marcador de fim (pulsante) */}
+        {/* Marcador de fim */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-1/2 text-3xl pointer-events-none animate-pulse"
+          className="absolute -translate-x-1/2 -translate-y-1/2 text-2xl pointer-events-none animate-pulse"
           style={{ left: `${fimX}%`, top: `${fimY}%`, filter: "drop-shadow(0 2px 4px rgba(0,0,0,.3))" }}
         >
           {tema.fim}
         </div>
 
-        {/* Bolinha (jogador) */}
-        <button
-          onMouseDown={() => setDragging(true)}
-          onTouchStart={() => setDragging(true)}
-          className="absolute w-12 h-12 rounded-full shadow-xl border-4 border-white cursor-grab active:cursor-grabbing flex items-center justify-center transition-transform hover:scale-110 z-20"
+        {/* Bolinha (segue o cursor/dedo) */}
+        <div
+          className="absolute w-7 h-7 rounded-full shadow-lg border-[3px] border-white flex items-center justify-center pointer-events-none z-20 transition-[left,top] duration-75"
           style={{
-            left: `calc(${pos.x}% - 24px)`,
-            top: `calc(${pos.y}% - 24px)`,
+            left: `calc(${pos.x}% - 14px)`,
+            top: `calc(${pos.y}% - 14px)`,
             background: "radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b)",
           }}
           aria-label="Bolinha"
         >
-          {ilustracao(undefined, "BOLA") ? (
-            <img src={ilustracao(undefined, "BOLA")} className="w-full h-full object-contain" />
-          ) : (
-            <span className="text-xl">🐞</span>
-          )}
-        </button>
+          <span className="text-xs">🐞</span>
+        </div>
       </div>
       <div className="text-xs text-muted-foreground mt-2 font-medium">
-        Arraste a bolinha pelo caminho claro até {tema.fim}
+        Guie a bolinha pelo caminho claro até {tema.fim} — sem encostar nas paredes
       </div>
     </div>
   );
