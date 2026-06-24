@@ -442,9 +442,10 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
                 <div className={`${ac.light} ${ac.border} border-2 rounded-2xl p-4 text-center`}>
                   <p className={`text-xl font-black ${ac.text}`}>Missão Concluída!</p>
                   <p className="text-slate-500 text-sm mt-1">
-                    +{lesson.xp} XP • BNCC {lesson.bncc_code}
+                    +{lesson.xp} XP
                   </p>
                 </div>
+
                 <NextLessonInlineButton current={fallbackRef} />
                 <button
                   onClick={() => navigate({ to: "/escola-brilha" })}
