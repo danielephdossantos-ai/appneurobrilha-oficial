@@ -30,7 +30,7 @@ function ResultadoRoute() {
   const nav = useNavigate();
   const a = useAnamneseV2(childId);
 
-  };
+
 
   if (a.isLoading) {
     return (
