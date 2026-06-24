@@ -2359,6 +2359,7 @@ const TS_BG_DECOR: Record<string, string[]> = {
   oceano: ["🐚", "🐟", "🌊"],
 };
 function ToqueSequencia({ p, onDone }: any) {
+  const { effective: sens } = useSensoryProfile();
   const { speak } = usePipVoice();
   const [proximoIdx, setProximoIdx] = useState(0);
   const [acertos, setAcertos] = useState<string[]>([]);
