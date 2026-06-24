@@ -2271,7 +2271,7 @@ export const VARIATIONS: Record<CategoriaSlug, Variation[]> = {
   "cade-o-par": PAR_VARS,
   "foco-total": FOCO_VARS,
   "labirinto-do-som": LABIRINTO_VARS,
-  "foco-sustentado": FOCOSUS_VARS,
+  
   "rastreamento-sacadico": SACADICO_VARS,
   "mosaico-de-formas": MOSAICO_VARS,
   "sequencia-de-cores": SEQC_VARS,
