@@ -31,7 +31,11 @@ export const Route = createFileRoute("/api/public/hooks/gerar-aulas-semana")({
           return new Response("Unauthorized", { status: 401 });
         }
 
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        const supabaseAdmin = createClient<Database>(
+          process.env.SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          { auth: { persistSession: false, autoRefreshToken: false } },
+        );
 
         const semanaInicio = getSegundaDaSemana();
         // próxima semana se rodando no domingo
