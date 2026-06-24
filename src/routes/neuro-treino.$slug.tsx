@@ -813,6 +813,8 @@ function Motorzinho({ p, onDone }: any) {
   );
 }
 
+// ============== 3. Rimas ==============
+
 function Rimas({ p, onDone }: any) {
   const { effective: sens } = useSensoryProfile();
   const hoverCls = sens.reduceMotion ? "hover:border-coral" : "hover:border-coral hover:scale-105";
