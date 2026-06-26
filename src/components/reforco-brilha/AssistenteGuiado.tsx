@@ -4,6 +4,7 @@ import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
 import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
+import { stripBncc } from "@/lib/strip-bncc";
 
 type Area =
   | "leitura"
