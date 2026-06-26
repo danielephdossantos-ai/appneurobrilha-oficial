@@ -333,7 +333,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                     Capítulo {idx + 1} · {meta?.label}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black leading-tight text-foreground">
-                    {atual.titulo || meta?.label}
+                    {stripBncc(atual.titulo || meta?.label)}
                   </h3>
                 </div>
                 {(atual.conteudo?.texto || atual.titulo || atual.conteudo?.bullets || atual.conteudo?.passos) && (
