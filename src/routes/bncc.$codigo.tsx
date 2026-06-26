@@ -10,8 +10,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 type BnccMeta = {
   codigo: string;
   ano: number;
-  disciplina: string;
-  descricao: string | null;
+  componente: string;
   habilidade: string | null;
 };
 
