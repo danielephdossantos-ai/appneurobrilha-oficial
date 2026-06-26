@@ -98,7 +98,6 @@ const LegacyLessonPlayer: React.FC = () => {
         return Lessons.HISTORIA_1ANO_LESSON;
       default:
 
-      default:
         return Lessons.LANG_LESSON;
     }
   }, [search.category]);
