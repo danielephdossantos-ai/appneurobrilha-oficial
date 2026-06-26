@@ -103,7 +103,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         if (!k) continue;
         if (
           k.includes("pre-escola") ||
-          k.includes("1ano") ||
+          (k.includes("1ano") && !k.includes("vogais_1ano") && !k.includes("alfabeto_1ano") && !k.includes("rimas_1ano") && !k.includes("silabas_1ano")) ||
           k.includes("infantil") ||
           k.includes("portugues_1ano") ||
           k.includes("portugues-2ano") ||
