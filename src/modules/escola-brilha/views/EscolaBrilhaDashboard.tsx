@@ -74,23 +74,36 @@ const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: stri
 export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
-  const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
-
-  // Migração única: limpa cache antigo da categoria "Alfabetização" do 1º Ano
-  // (a categoria foi movida para o Neuro-Treino e o card 1º Ano virou "Língua Portuguesa").
+  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const FLAG = "escola-brilha:cleanup:alfabetizacao-1ano:v1";
+    const FLAG = "escola-brilha:cleanup:pre-1ano:v1";
     try {
       if (localStorage.getItem(FLAG)) return;
-      localStorage.removeItem("escola-brilha:rot:portugues-1ano");
-      localStorage.removeItem("escola-brilha:rot:alfabetizacao");
-      localStorage.removeItem("escola-brilha:rot:alfabetizacao-1ano");
+      const keysToRemove = [
+        "escola-brilha:rot:portugues-1ano",
+        "escola-brilha:rot:alfabetizacao",
+        "escola-brilha:rot:alfabetizacao-1ano",
+        "escola-brilha:rot:vogais",
+        "escola-brilha:rot:contagem",
+        "escola-brilha:rot:subtracao",
+        "escola-brilha:rot:matematica",
+        "escola-brilha:etapa",
+      ];
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (!k) continue;
+        if (k.includes("pre-escola") || k.includes("1ano") || k.includes("infantil") || k.includes("portugues_1ano")) {
+          localStorage.removeItem(k);
+        }
+      }
       localStorage.setItem(FLAG, "1");
     } catch {
       /* ignore */
     }
   }, []);
+
 
   const goToActivity = (id: string, type: string) =>
     navigate({ to: "/escola-brilha/aula", search: { category: id, type } });
