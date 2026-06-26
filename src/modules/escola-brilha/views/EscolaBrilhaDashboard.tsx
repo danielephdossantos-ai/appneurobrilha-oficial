@@ -76,7 +76,7 @@ const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: stri
 
 export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
+  const [tab, setTab] = useState<EtapaEscolar>("fundamental1");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
 
   // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
