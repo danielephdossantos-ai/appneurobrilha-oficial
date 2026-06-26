@@ -252,7 +252,7 @@ export class ReforcoEngine {
       levels.advanced.push({ type: "explanation", text: "Desafio mestre para você!" });
 
     return {
-      title: activity.titulo,
+      title: stripBncc(activity.titulo),
       topic: activity.materia,
       category: activity.materia,
       levels,
