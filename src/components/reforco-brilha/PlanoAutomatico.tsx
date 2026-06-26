@@ -267,11 +267,11 @@ export function PlanoAutomatico({ area, onAbrirAula }: Props) {
                       {s.aulas.map((a) => (
                         <button
                           key={a.id}
-                          onClick={() => onAbrirAula?.(a.id, a.titulo)}
+                          onClick={() => onAbrirAula?.(a.id, stripBncc(a.titulo))}
                           className="w-full flex items-center gap-2 text-left px-2.5 py-1.5 rounded-lg bg-background hover:bg-amber-500/10 text-xs"
                         >
                           <PlayCircle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-                          <span className="flex-1 font-medium">{a.titulo}</span>
+                          <span className="flex-1 font-medium">{stripBncc(a.titulo)}</span>
                           <span className="text-[10px] uppercase font-black text-amber-500">{a.nivel}</span>
                         </button>
                       ))}
