@@ -119,7 +119,7 @@ export function AulaDeHoje({ childId }: { childId: string }) {
           <Clock className="h-3 w-3" /> {aula.tempo_total_min} min
         </div>
       </div>
-      <h3 className="font-black text-lg leading-tight">{aula.titulo}</h3>
+      <h3 className="font-black text-lg leading-tight">{stripBncc(aula.titulo)}</h3>
       {aula.objetivo && (
         <p className="text-xs text-muted-foreground mt-1">{aula.objetivo}</p>
       )}
