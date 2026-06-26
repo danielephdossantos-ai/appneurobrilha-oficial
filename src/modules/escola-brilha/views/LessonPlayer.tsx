@@ -96,11 +96,8 @@ const LegacyLessonPlayer: React.FC = () => {
         return Lessons.CIENCIAS_1ANO_LESSON;
       case "historia_1ano":
         return Lessons.HISTORIA_1ANO_LESSON;
-      case "portugues_2ano":
-        return Lessons.PORTUGUES_2ANO_LESSON;
-      case "matematica_2ano":
-        return Lessons.MATH_2ANO_LESSON;
       default:
+
         return Lessons.LANG_LESSON;
     }
   }, [search.category]);

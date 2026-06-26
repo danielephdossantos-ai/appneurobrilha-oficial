@@ -39,8 +39,6 @@ type StaticLesson = {
 const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
   infantil: [],
   fundamental1: [
-    { id: "portugues_2ano", type: "legacy", serie: "2º Ano", title: "Leitura", subtitle: "Ler frases", badge: "Leitura", badgeColor: "bg-fuchsia-100 text-fuchsia-700", gradient: "from-fuchsia-400 to-violet-500", xp: 110 },
-    { id: "matematica_2ano", type: "legacy", serie: "2º Ano", title: "Cálculos", subtitle: "Contas maiores", badge: "Matemática", badgeColor: "bg-orange-100 text-orange-700", gradient: "from-orange-400 to-red-500", xp: 110 },
     { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120 },
     { id: "antonimos", type: "activity", serie: "2º Ano", title: "Antônimos", subtitle: "Palavras com sentido oposto", badge: "Língua Portuguesa", badgeColor: "bg-teal-100 text-teal-700", gradient: "from-teal-500 to-emerald-600", xp: 120 },
     { id: "substantivos", type: "activity", serie: "3º Ano", title: "Substantivos", subtitle: "Nomes de seres e objetos", badge: "Língua Portuguesa", badgeColor: "bg-blue-100 text-blue-700", gradient: "from-blue-500 to-indigo-600", xp: 130 },
@@ -76,10 +74,10 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
 
-  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano).
+  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const FLAG = "escola-brilha:cleanup:pre-1ano:v1";
+    const FLAG = "escola-brilha:cleanup:pre-1-2ano:v2";
     try {
       if (localStorage.getItem(FLAG)) return;
       const keysToRemove = [
@@ -90,13 +88,24 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         "escola-brilha:rot:contagem",
         "escola-brilha:rot:subtracao",
         "escola-brilha:rot:matematica",
+        "escola-brilha:rot:portugues-2ano",
+        "escola-brilha:rot:matematica-2ano",
         "escola-brilha:etapa",
       ];
       keysToRemove.forEach((k) => localStorage.removeItem(k));
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
         if (!k) continue;
-        if (k.includes("pre-escola") || k.includes("1ano") || k.includes("infantil") || k.includes("portugues_1ano")) {
+        if (
+          k.includes("pre-escola") ||
+          k.includes("1ano") ||
+          k.includes("infantil") ||
+          k.includes("portugues_1ano") ||
+          k.includes("portugues-2ano") ||
+          k.includes("matematica-2ano") ||
+          k.includes("portugues_2ano") ||
+          k.includes("matematica_2ano")
+        ) {
           localStorage.removeItem(k);
         }
       }
@@ -105,6 +114,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       /* ignore */
     }
   }, []);
+
 
 
   const goToActivity = (id: string, type: string) =>

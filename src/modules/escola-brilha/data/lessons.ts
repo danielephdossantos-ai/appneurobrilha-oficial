@@ -6,8 +6,6 @@ export { CIENCIAS_1ANO_LESSON } from "./ciencias-1ano";
 export { HISTORIA_1ANO_LESSON } from "./historia-1ano";
 
 
-export { PORTUGUES_2ANO_LESSON } from "./portugues-2ano";
-export { MATH_2ANO_LESSON } from "./math-2ano";
 
 
 
