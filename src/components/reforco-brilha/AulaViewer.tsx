@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { stripBncc } from "@/lib/strip-bncc";
 import {
   X,
   ChevronLeft,
@@ -262,7 +263,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                 <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
                   Apostila Brilha
                 </div>
-                <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
+                <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{stripBncc(titulo)}</h2>
               </div>
             </div>
             <button
@@ -332,7 +333,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                     Capítulo {idx + 1} · {meta?.label}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black leading-tight text-foreground">
-                    {atual.titulo || meta?.label}
+                    {stripBncc(atual.titulo || meta?.label)}
                   </h3>
                 </div>
                 {(atual.conteudo?.texto || atual.titulo || atual.conteudo?.bullets || atual.conteudo?.passos) && (
