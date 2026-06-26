@@ -1,5 +1,194 @@
 import { ActivityLesson } from "../types/activity-lesson";
 
+/* ─── 1º Ano LP — BNCC ─── */
+
+export const VOGAIS_1ANO_LESSON: ActivityLesson = {
+  id: "vogais-1ano",
+  title: "Vogais",
+  topic: "VOGAIS",
+  subject: "Língua Portuguesa — 1º Ano (EF01LP04)",
+  xp: 100,
+  screens: {
+    explicacao: {
+      instruction: "Vamos aprender sobre",
+      highlight: "AS VOGAIS!",
+      summary: "As vogais são cinco letrinhas muito especiais: A, E, I, O, U.",
+      visual_emoji: "🅰️",
+    },
+    exploracao: {
+      instruction: "Veja cada vogal com uma palavra que começa com ela.",
+      pairs: [
+        { left: "A", right: "ABELHA 🐝" },
+        { left: "E", right: "ELEFANTE 🐘" },
+        { left: "I", right: "IGREJA ⛪" },
+        { left: "O", right: "OVO 🥚" },
+        { left: "U", right: "UVA 🍇" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Toda palavra precisa de pelo menos uma vogal. Sem vogal, não dá pra falar!",
+      highlights: ["A, E, I, O, U"],
+      tip: "5 vogais = A E I O U",
+    },
+    exemplo_visual: {
+      title: "Observe estas palavras:",
+      sentences: [
+        { text: "ABELHA começa com A.", emoji: "🐝" },
+        { text: "UVA começa com U.", emoji: "🍇" },
+      ],
+      conclusion: "Cada palavra começa com uma vogal diferente!",
+    },
+    praticar: {
+      question: "Qual é a primeira vogal da palavra",
+      reference: "ELEFANTE",
+      options: [
+        { text: "A", isCorrect: false, color: "red" },
+        { text: "E", isCorrect: true, color: "green" },
+        { text: "O", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
+export const ALFABETO_1ANO_LESSON: ActivityLesson = {
+  id: "alfabeto-1ano",
+  title: "Alfabeto",
+  topic: "ALFABETO",
+  subject: "Língua Portuguesa — 1º Ano (EF01LP01)",
+  xp: 100,
+  screens: {
+    explicacao: {
+      instruction: "Vamos conhecer",
+      highlight: "O ALFABETO!",
+      summary: "O alfabeto tem 26 letras que formam todas as palavras.",
+      visual_emoji: "🔤",
+    },
+    exploracao: {
+      instruction: "Veja a letra e a palavra que começa com ela.",
+      pairs: [
+        { left: "B", right: "BOLA ⚽" },
+        { left: "C", right: "CASA 🏠" },
+        { left: "D", right: "DADO 🎲" },
+        { left: "F", right: "FLOR 🌸" },
+      ],
+    },
+    explicacao_curta: {
+      text: "As letras se juntam e formam palavras. Cada letrinha tem um som especial.",
+      highlights: ["26 letras"],
+      tip: "Letra + Letra = PALAVRA!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "C + A + S + A formam CASA.", emoji: "🏠" },
+        { text: "Cada letra ajuda a montar a palavra.", emoji: "✨" },
+      ],
+      conclusion: "Juntando as letras nascem as palavras!",
+    },
+    praticar: {
+      question: "Com qual letra começa a palavra",
+      reference: "BOLA",
+      options: [
+        { text: "A", isCorrect: false, color: "red" },
+        { text: "B", isCorrect: true, color: "green" },
+        { text: "D", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
+export const RIMAS_1ANO_LESSON: ActivityLesson = {
+  id: "rimas-1ano",
+  title: "Rimas",
+  topic: "RIMAS",
+  subject: "Língua Portuguesa — 1º Ano (EF01LP09)",
+  xp: 110,
+  screens: {
+    explicacao: {
+      instruction: "Vamos brincar com",
+      highlight: "AS RIMAS!",
+      summary: "Rimas são palavras que terminam com sons parecidos.",
+      visual_emoji: "🎵",
+    },
+    exploracao: {
+      instruction: "Escute o final destas palavras:",
+      pairs: [
+        { left: "PATO 🦆", right: "GATO 🐱" },
+        { left: "MÃO ✋", right: "PÃO 🍞" },
+        { left: "FLOR 🌸", right: "COR 🎨" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Quando duas palavras terminam com o mesmo som, elas rimam!",
+      highlights: ["mesmo som no final"],
+      tip: "Som igual no fim = RIMA!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "PATO termina com -ATO.", emoji: "🦆" },
+        { text: "GATO também termina com -ATO.", emoji: "🐱" },
+      ],
+      conclusion: "PATO e GATO rimam!",
+    },
+    praticar: {
+      question: "Qual palavra rima com",
+      reference: "PÃO",
+      options: [
+        { text: "BOLA", isCorrect: false, color: "red" },
+        { text: "MÃO", isCorrect: true, color: "green" },
+        { text: "CASA", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
+export const SILABAS_1ANO_LESSON: ActivityLesson = {
+  id: "silabas-1ano",
+  title: "Sílabas",
+  topic: "SÍLABAS",
+  subject: "Língua Portuguesa — 1º Ano (EF01LP06)",
+  xp: 110,
+  screens: {
+    explicacao: {
+      instruction: "Vamos descobrir",
+      highlight: "AS SÍLABAS!",
+      summary: "Sílaba é um pedacinho da palavra que falamos de uma vez só.",
+      visual_emoji: "👏",
+    },
+    exploracao: {
+      instruction: "Bata palma a cada pedaço da palavra:",
+      pairs: [
+        { left: "BO-LA", right: "2 sílabas ⚽" },
+        { left: "CA-SA", right: "2 sílabas 🏠" },
+        { left: "BO-NE-CA", right: "3 sílabas 🪆" },
+      ],
+    },
+    explicacao_curta: {
+      text: "Cada palma é uma sílaba. As sílabas se juntam para formar a palavra.",
+      highlights: ["pedacinho da palavra"],
+      tip: "Bateu palma = 1 sílaba!",
+    },
+    exemplo_visual: {
+      title: "Veja este exemplo:",
+      sentences: [
+        { text: "BO + LA = BOLA.", emoji: "⚽" },
+        { text: "Duas palmas, duas sílabas!", emoji: "👏" },
+      ],
+      conclusion: "Juntando sílabas nasce a palavra!",
+    },
+    praticar: {
+      question: "Quantas sílabas tem a palavra",
+      reference: "CASA",
+      options: [
+        { text: "1", isCorrect: false, color: "red" },
+        { text: "2", isCorrect: true, color: "green" },
+        { text: "3", isCorrect: false, color: "blue" },
+      ],
+    },
+  },
+};
+
 export const SINONIMOS_LESSON: ActivityLesson = {
   id: "sinonimos-2ano",
   title: "Sinônimos",

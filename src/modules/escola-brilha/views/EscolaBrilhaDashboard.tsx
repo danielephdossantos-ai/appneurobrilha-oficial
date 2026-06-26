@@ -39,6 +39,10 @@ type StaticLesson = {
 const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
   infantil: [],
   fundamental1: [
+    { id: "vogais_1ano", type: "activity", serie: "1º Ano", title: "Vogais", subtitle: "A, E, I, O, U", badge: "Língua Portuguesa", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-500 to-pink-600", xp: 100, bncc: "EF01LP04" },
+    { id: "alfabeto_1ano", type: "activity", serie: "1º Ano", title: "Alfabeto", subtitle: "As 26 letras", badge: "Língua Portuguesa", badgeColor: "bg-fuchsia-100 text-fuchsia-700", gradient: "from-fuchsia-500 to-purple-600", xp: 100, bncc: "EF01LP01" },
+    { id: "rimas_1ano", type: "activity", serie: "1º Ano", title: "Rimas", subtitle: "Palavras com som parecido", badge: "Língua Portuguesa", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-500 to-orange-600", xp: 110, bncc: "EF01LP09" },
+    { id: "silabas_1ano", type: "activity", serie: "1º Ano", title: "Sílabas", subtitle: "Pedacinhos das palavras", badge: "Língua Portuguesa", badgeColor: "bg-sky-100 text-sky-700", gradient: "from-sky-500 to-blue-600", xp: 110, bncc: "EF01LP06" },
     { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120 },
     { id: "antonimos", type: "activity", serie: "2º Ano", title: "Antônimos", subtitle: "Palavras com sentido oposto", badge: "Língua Portuguesa", badgeColor: "bg-teal-100 text-teal-700", gradient: "from-teal-500 to-emerald-600", xp: 120 },
     { id: "substantivos", type: "activity", serie: "3º Ano", title: "Substantivos", subtitle: "Nomes de seres e objetos", badge: "Língua Portuguesa", badgeColor: "bg-blue-100 text-blue-700", gradient: "from-blue-500 to-indigo-600", xp: 130 },
@@ -59,14 +63,15 @@ const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
 
 const SERIE_ORDER: Record<EtapaEscolar, string[]> = {
   infantil: [],
-  fundamental1: ["2º Ano", "3º Ano", "4º Ano", "5º Ano"],
+  fundamental1: ["1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano"],
   fundamental2: ["6º Ano", "7º Ano", "8º Ano", "9º Ano"],
 };
 
 const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: string }> }[] = [
   { id: "fundamental2", label: "6º ao 9º Ano", Icon: GraduationCap },
-  { id: "fundamental1", label: "2º ao 5º Ano", Icon: BookOpen },
+  { id: "fundamental1", label: "1º ao 5º Ano", Icon: BookOpen },
 ];
+
 
 
 export const EscolaBrilhaDashboard: React.FC = () => {
@@ -98,7 +103,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         if (!k) continue;
         if (
           k.includes("pre-escola") ||
-          k.includes("1ano") ||
+          (k.includes("1ano") && !k.includes("vogais_1ano") && !k.includes("alfabeto_1ano") && !k.includes("rimas_1ano") && !k.includes("silabas_1ano")) ||
           k.includes("infantil") ||
           k.includes("portugues_1ano") ||
           k.includes("portugues-2ano") ||
@@ -202,7 +207,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             {allSeries.map((serie) => {
               const staticCards = staticItems.filter((s) => s.serie === serie);
-              const dbCards = serie === "1º Ano" ? [] : aulasBanco.filter((a) => a.serie === serie);
+              const dbCards = aulasBanco.filter((a) => a.serie === serie);
               if (!staticCards.length && !dbCards.length) return null;
               const total = staticCards.length + dbCards.length;
 
