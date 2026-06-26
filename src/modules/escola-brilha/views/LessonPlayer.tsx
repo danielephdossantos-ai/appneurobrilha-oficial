@@ -38,6 +38,9 @@ import {
   GENETICA_LESSON,
   ILUMINISMO_LESSON,
 } from "../data/activity-lessons-c";
+import { useAppState } from "@/core/store";
+import { diagnosticoToNeuroProfile } from "@/lib/neuro-profile";
+import { resolveLesson, hasAdaptedVariants } from "../engine/lesson-resolver";
 
 const ACTIVITY_MAP: Record<string, ActivityLesson> = {
   sinonimos: SINONIMOS_LESSON,
@@ -77,12 +80,19 @@ const isPictograph = (s: string) => /\p{Extended_Pictographic}/u.test(s);
 
 export const LessonPlayer: React.FC = () => {
   const search = useSearch({ from: "/escola-brilha/aula" }) as { category: string; type: string };
+  const { activeChild } = useAppState();
+  const neuroProfile = diagnosticoToNeuroProfile(activeChild?.diagnostico);
 
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) return <ActivityPlayerC lesson={lessonC} />;
 
   const lessonB = ACTIVITY_MAP[search.category];
-  if (lessonB) return <ActivityPlayer lesson={lessonB} />;
+  if (lessonB) {
+    const resolved = hasAdaptedVariants(search.category)
+      ? (resolveLesson(search.category, neuroProfile) ?? lessonB)
+      : lessonB;
+    return <ActivityPlayer lesson={resolved} />;
+  }
 
   const earlyLesson = EARLY_MAP[search.category];
   if (earlyLesson) return <EarlyChildhoodPlayer lesson={earlyLesson} />;

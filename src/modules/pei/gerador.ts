@@ -29,12 +29,24 @@ export type AulaBnccRef = {
   ordem: number | null;
 };
 
+export type NeuroProfilePayload = "Tipico" | "TDAH" | "TEA" | "Dislexia" | "DeficienciaIntelectual";
+
 export type AtividadeBloco = {
   tipo: "bncc";
   slug: string;            // codigo_bncc (referência humana)
-  payload: { aula_id: string; disciplina: string | null };
+  payload: { aula_id: string; disciplina: string | null; neuro_profile: NeuroProfilePayload };
   tempo_min: number;
 };
+
+function diagnosticoToNeuroPayload(d: string | null | undefined): NeuroProfilePayload {
+  switch (d) {
+    case "tea": return "TEA";
+    case "tdah": return "TDAH";
+    case "dislexia": return "Dislexia";
+    case "deficiencia_intelectual": return "DeficienciaIntelectual";
+    default: return "Tipico";
+  }
+}
 
 export type AulaGerada = {
   ordem: number;
@@ -107,6 +119,7 @@ function montarBlocos(
   principal: AulaBnccRef,
   reforco: AulaBnccRef | null,
   ctx: AdaptacaoCtx,
+  neuroProfile: NeuroProfilePayload,
 ): AtividadeBloco[] {
   const blocos: AtividadeBloco[] = [];
 
@@ -115,7 +128,7 @@ function montarBlocos(
     blocos.push({
       tipo: "bncc",
       slug: reforco.codigo_bncc,
-      payload: { aula_id: reforco.id, disciplina: reforco.disciplina },
+      payload: { aula_id: reforco.id, disciplina: reforco.disciplina, neuro_profile: neuroProfile },
       tempo_min: Math.max(3, Math.round(tempoTotal * 0.3)),
     });
   }
@@ -123,7 +136,7 @@ function montarBlocos(
   blocos.push({
     tipo: "bncc",
     slug: principal.codigo_bncc,
-    payload: { aula_id: principal.id, disciplina: principal.disciplina },
+    payload: { aula_id: principal.id, disciplina: principal.disciplina, neuro_profile: neuroProfile },
     tempo_min: reforco
       ? Math.max(4, tempoTotal - Math.round(tempoTotal * 0.3))
       : tempoTotal,
@@ -197,7 +210,7 @@ export function gerarPlanoTrimestral(
       reforco = reforcoPool[Math.floor(i / 3) % reforcoPool.length];
     }
 
-    const blocos = montarBlocos(tempoAula, principal, reforco, ctx);
+    const blocos = montarBlocos(tempoAula, principal, reforco, ctx, diagnosticoToNeuroPayload(perfil.diagnostico));
     aulas.push({
       ordem: i + 1,
       data_prevista: addDaysISO(inicio, i),
