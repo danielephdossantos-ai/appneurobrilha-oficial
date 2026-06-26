@@ -139,7 +139,7 @@ function AdminPage() {
               {seeding ? "Criando..." : demosCriados ? "Recriar faltantes" : "Criar perfis demo"}
             </Button>
           </CardContent>
-        </Card>}
+        </Card>
 
         <section>
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
