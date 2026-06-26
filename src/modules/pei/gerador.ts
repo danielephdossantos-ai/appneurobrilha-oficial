@@ -119,6 +119,7 @@ function montarBlocos(
   principal: AulaBnccRef,
   reforco: AulaBnccRef | null,
   ctx: AdaptacaoCtx,
+  neuroProfile: NeuroProfilePayload,
 ): AtividadeBloco[] {
   const blocos: AtividadeBloco[] = [];
 
@@ -127,7 +128,7 @@ function montarBlocos(
     blocos.push({
       tipo: "bncc",
       slug: reforco.codigo_bncc,
-      payload: { aula_id: reforco.id, disciplina: reforco.disciplina },
+      payload: { aula_id: reforco.id, disciplina: reforco.disciplina, neuro_profile: neuroProfile },
       tempo_min: Math.max(3, Math.round(tempoTotal * 0.3)),
     });
   }
@@ -135,7 +136,7 @@ function montarBlocos(
   blocos.push({
     tipo: "bncc",
     slug: principal.codigo_bncc,
-    payload: { aula_id: principal.id, disciplina: principal.disciplina },
+    payload: { aula_id: principal.id, disciplina: principal.disciplina, neuro_profile: neuroProfile },
     tempo_min: reforco
       ? Math.max(4, tempoTotal - Math.round(tempoTotal * 0.3))
       : tempoTotal,
