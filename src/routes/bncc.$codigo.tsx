@@ -133,13 +133,13 @@ function BnccCodigoPage() {
             {meta.codigo}
           </Badge>
           <Badge variant="outline">{meta.ano}º Ano</Badge>
-          <Badge variant="outline">{meta.disciplina}</Badge>
+          <Badge variant="outline">{meta.componente}</Badge>
         </div>
         <h1 className="text-3xl font-bold">
           {conteudo?.titulo || meta.habilidade || meta.codigo}
         </h1>
-        {meta.descricao && (
-          <p className="text-muted-foreground">{meta.descricao}</p>
+        {meta.habilidade && !conteudo?.titulo && (
+          <p className="text-muted-foreground">{meta.habilidade}</p>
         )}
       </header>
 
