@@ -193,30 +193,21 @@ export const gerarAulasBncc = createServerFn({ method: "POST" })
           },
         };
 
-        const { data: ins, error: insErr } = await supabaseAdmin
-          .from("aulas_bncc")
-          .insert({
-            codigo_bncc: code,
-            etapa: "fundamental2",
-            serie: "6º Ano",
-            disciplina: meta.disciplina,
-            titulo,
-            descricao: desc,
-            tipo_player: "c",
-            payload,
-            xp: 200,
-            ordem: 1,
-            ativo: true,
-            pre_requisitos: [],
-          })
-          .select("id")
-          .maybeSingle();
-
-        if (insErr || !ins) {
-          results.push({ code, ok: false, motivo: `insert: ${insErr?.message ?? "sem id"}` });
+        const inserted = (await db.execute(sql`
+          insert into aulas_bncc
+            (codigo_bncc, etapa, serie, disciplina, titulo, descricao, tipo_player, payload, xp, ordem, ativo, pre_requisitos)
+          values
+            (${code}, 'fundamental2', '6º Ano', ${meta.disciplina}, ${titulo}, ${desc}, 'c',
+             ${JSON.stringify(payload)}::jsonb, 200, 1, true, '{}')
+          returning id
+        `)) as any;
+        const insRows: any[] = inserted.rows ?? inserted;
+        const insId = insRows?.[0]?.id;
+        if (!insId) {
+          results.push({ code, ok: false, motivo: "insert: sem id" });
           continue;
         }
-        results.push({ code, ok: true, aulaId: ins.id, titulo });
+        results.push({ code, ok: true, aulaId: insId, titulo });
       } catch (e: any) {
         results.push({ code, ok: false, motivo: e?.message || "exceção" });
       }
