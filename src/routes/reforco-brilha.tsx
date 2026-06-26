@@ -50,7 +50,6 @@ import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
-import { stripBncc } from "@/lib/strip-bncc";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -494,7 +493,7 @@ function ReforcoBrilha() {
                                 </span>
                               )}
                             </div>
-                            <div className="font-bold text-sm">{stripBncc(aula.titulo)}</div>
+                            <div className="font-bold text-sm">{aula.titulo}</div>
                             {aula.objetivo && (
                               <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
                                 {aula.objetivo}
@@ -663,14 +662,14 @@ function ReforcoBrilha() {
                 {pendingReviews.map((review) => (
                   <button
                     key={review.id}
-                    onClick={() => startLesson(stripBncc(review.activity?.titulo || review.skill_code))}
+                    onClick={() => startLesson(review.activity?.titulo || review.skill_code)}
                     className="flex-shrink-0 w-48 p-4 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-left group"
                   >
                     <div className="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">
                       Revisão Sugerida
                     </div>
                     <div className="font-bold text-sm line-clamp-1">
-                      {stripBncc(review.activity?.titulo || review.skill_code) || "Revisão"}
+                      {review.activity?.titulo || review.skill_code}
                     </div>
                     <div className="mt-3 flex items-center justify-between">
                       <div className="h-1.5 flex-1 bg-primary/10 rounded-full overflow-hidden mr-2">
@@ -738,7 +737,7 @@ function ReforcoBrilha() {
                   <div className="flex items-start gap-2">
                     <span className="text-xl shrink-0">{d.emoji}</span>
                     <div className="flex-1 min-w-0">
-                      <div className="font-bold text-sm">{stripBncc(d.titulo)}</div>
+                      <div className="font-bold text-sm">{d.titulo}</div>
                       <div className="text-[11px] text-muted-foreground mt-0.5">
                         {d.habilidades.join(" · ")}
                       </div>
@@ -952,8 +951,8 @@ function ReforcoBrilha() {
                               key={skill.id}
                               className="bg-card border border-border/50 rounded-xl p-3 flex items-center justify-between"
                             >
-                              <span className="text-[11px] font-bold truncate max-w-[140px] capitalize">
-                                {skill.materia || "Habilidade"}
+                              <span className="text-[10px] font-bold truncate max-w-[120px]">
+                                {skill.skill_code}
                               </span>
                               <div className="flex items-center gap-2">
                                 <div className="w-20 h-1.5 bg-secondary rounded-full overflow-hidden">

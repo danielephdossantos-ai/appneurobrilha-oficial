@@ -169,6 +169,18 @@ function RelatorioPremium() {
                 >
                   {STATUS_LABELS[item.status as keyof typeof STATUS_LABELS]}
                 </span>
+                {item.bnccCodes && item.bnccCodes.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {item.bnccCodes.map((code) => (
+                      <span
+                        key={code}
+                        className="text-[9px] font-bold bg-indigo-50 text-indigo-500 px-1.5 py-0.5 rounded border border-indigo-100"
+                      >
+                        {code}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
