@@ -494,7 +494,7 @@ function ReforcoBrilha() {
                                 </span>
                               )}
                             </div>
-                            <div className="font-bold text-sm">{aula.titulo}</div>
+                            <div className="font-bold text-sm">{stripBncc(aula.titulo)}</div>
                             {aula.objetivo && (
                               <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
                                 {aula.objetivo}
