@@ -62,7 +62,7 @@ const LESSONS = [
 function AdminPage() {
   const { activeChild, updateChild, session } = useAppState();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+
 
   useEffect(() => {
     let active = true;
@@ -86,27 +86,6 @@ function AdminPage() {
     };
   }, [session]);
 
-  const bootstrap = async () => {
-    setChecking(true);
-    try {
-      const { error } = await supabase.rpc("grant_first_admin" as never);
-      if (error) throw error;
-      toast.success("Pronto! Você agora é admin.");
-      setIsAdmin(true);
-    } catch (e: unknown) {
-      const msg = (e as { message?: string })?.message || "";
-      if (msg.includes("ADMIN_ALREADY_EXISTS")) {
-        toast.error("Já existe outro admin. Peça para ele te promover.");
-      } else if (msg.includes("NOT_AUTHENTICATED")) {
-        toast.error("Faça login primeiro.");
-      } else {
-        toast.error("Falha ao virar admin: " + msg);
-      }
-    } finally {
-      setChecking(false);
-    }
-  };
-
   const aplicarPerfil = (d: Diagnostico) => {
     if (!activeChild) {
       toast.error("Selecione uma criança ativa primeiro (Painel dos Pais).");
@@ -118,32 +97,28 @@ function AdminPage() {
   if (isAdmin === null) {
     return (
       <div className="min-h-screen flex items-center justify-center text-muted-foreground">
-        Verificando permissões...
+        Carregando...
       </div>
     );
   }
 
   if (!isAdmin) {
+    // Área restrita: não expor existência do painel para pais/usuários comuns
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <Card className="max-w-md w-full">
-          <CardHeader className="text-center">
-            <Shield className="w-12 h-12 mx-auto mb-2 text-primary" />
-            <CardTitle>Área Administrativa</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              Esta área é restrita ao administrador do app. Se você é o dono do projeto e ainda não
-              existe nenhum admin, clique abaixo para se tornar o primeiro.
-            </p>
-            <Button onClick={bootstrap} disabled={checking} className="w-full">
-              {checking ? "Processando..." : "Tornar-me administrador"}
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen flex items-center justify-center p-6 text-center">
+        <div>
+          <h1 className="text-2xl font-bold mb-2">Página não encontrada</h1>
+          <p className="text-sm text-muted-foreground mb-4">
+            A página que você procura não existe.
+          </p>
+          <Link to="/" className="text-primary underline text-sm">
+            Voltar para o início
+          </Link>
+        </div>
       </div>
     );
   }
+
 
   const perfilAtivo = diagnosticoToNeuroProfile(activeChild?.diagnostico);
   const labelAtivo = NEURO_PROFILE_LABEL[perfilAtivo];
