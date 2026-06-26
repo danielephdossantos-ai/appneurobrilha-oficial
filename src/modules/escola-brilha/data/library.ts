@@ -16,14 +16,8 @@ export type StaticLesson = {
 };
 
 export const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
-  infantil: [
-    { id: "vogais", type: "early", serie: "Pré-Escola", title: "As Vogais", subtitle: "A E I O U", badge: "Alfabetização", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-400 to-pink-500", xp: 80, illustration: "vowels-icon" },
-    { id: "contagem", type: "early", serie: "Pré-Escola", title: "Vamos Contar!", subtitle: "1 ao 10", badge: "Matemática", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-400 to-orange-500", xp: 80, illustration: "counting-icon" },
-    { id: "subtracao", type: "early", serie: "Pré-Escola", title: "Subtrair é Tirar!", subtitle: "Tirar objetos", badge: "Matemática", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-500 to-red-600", xp: 90, illustration: "subtract-icon" },
-  ],
+  infantil: [],
   fundamental1: [
-    { id: "portugues_1ano", type: "legacy", serie: "1º Ano", title: "Sílabas", subtitle: "Primeiras sílabas", badge: "Língua Portuguesa", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-400 to-pink-500", xp: 100 },
-    { id: "matematica", type: "legacy", serie: "1º Ano", title: "Contas", subtitle: "Somar e subtrair", badge: "Matemática", badgeColor: "bg-sky-100 text-sky-700", gradient: "from-sky-400 to-blue-500", xp: 100 },
     { id: "portugues_2ano", type: "legacy", serie: "2º Ano", title: "Leitura", subtitle: "Ler frases", badge: "Leitura", badgeColor: "bg-fuchsia-100 text-fuchsia-700", gradient: "from-fuchsia-400 to-violet-500", xp: 110 },
     { id: "matematica_2ano", type: "legacy", serie: "2º Ano", title: "Cálculos", subtitle: "Contas maiores", badge: "Matemática", badgeColor: "bg-orange-100 text-orange-700", gradient: "from-orange-400 to-red-500", xp: 110 },
     { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120 },
@@ -45,10 +39,11 @@ export const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
 };
 
 export const SERIE_ORDER: Record<EtapaEscolar, string[]> = {
-  infantil: ["Pré-Escola"],
-  fundamental1: ["1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano"],
+  infantil: [],
+  fundamental1: ["2º Ano", "3º Ano", "4º Ano", "5º Ano"],
   fundamental2: ["6º Ano", "7º Ano", "8º Ano", "9º Ano"],
 };
+
 
 export function subjectKey(raw: string): string {
   const s = (raw || "").toLowerCase();
