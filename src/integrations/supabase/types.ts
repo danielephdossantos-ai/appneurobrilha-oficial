@@ -717,6 +717,66 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_conteudo: {
+        Row: {
+          atividade_imprimir: string | null
+          aula_ilustrada: Json | null
+          codigo: string
+          created_at: string
+          criterios_avaliacao: Json | null
+          exemplos: Json | null
+          exercicios_dificeis: Json | null
+          exercicios_faceis: Json | null
+          exercicios_medios: Json | null
+          explicacao: string | null
+          gabarito: Json | null
+          habilidades_relacionadas: Json | null
+          id: string
+          objetivos: Json | null
+          titulo: string | null
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          atividade_imprimir?: string | null
+          aula_ilustrada?: Json | null
+          codigo: string
+          created_at?: string
+          criterios_avaliacao?: Json | null
+          exemplos?: Json | null
+          exercicios_dificeis?: Json | null
+          exercicios_faceis?: Json | null
+          exercicios_medios?: Json | null
+          explicacao?: string | null
+          gabarito?: Json | null
+          habilidades_relacionadas?: Json | null
+          id?: string
+          objetivos?: Json | null
+          titulo?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          atividade_imprimir?: string | null
+          aula_ilustrada?: Json | null
+          codigo?: string
+          created_at?: string
+          criterios_avaliacao?: Json | null
+          exemplos?: Json | null
+          exercicios_dificeis?: Json | null
+          exercicios_faceis?: Json | null
+          exercicios_medios?: Json | null
+          explicacao?: string | null
+          gabarito?: Json | null
+          habilidades_relacionadas?: Json | null
+          id?: string
+          objetivos?: Json | null
+          titulo?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       bncc_habilidades: {
         Row: {
           ano: string | null
