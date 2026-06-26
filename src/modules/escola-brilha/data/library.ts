@@ -58,10 +58,10 @@ export function subjectKey(raw: string): string {
 }
 
 export function etapaForSerie(serie: string): EtapaEscolar {
-  if (serie === "Pré-Escola") return "infantil";
   if (["6º Ano", "7º Ano", "8º Ano", "9º Ano"].includes(serie)) return "fundamental2";
   return "fundamental1";
 }
+
 
 export function findStaticById(id: string): StaticLesson | null {
   for (const list of Object.values(STATIC_LESSONS)) {
