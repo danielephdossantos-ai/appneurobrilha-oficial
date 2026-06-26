@@ -87,7 +87,8 @@ export const gerarAulasBncc = createServerFn({ method: "POST" })
     const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) return { ok: false, motivo: "LOVABLE_API_KEY ausente" };
 
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
+    const { sql } = await import("drizzle-orm");
     const results: CodeResult[] = [];
 
     for (const code of data.codes) {
