@@ -100,17 +100,17 @@ export const gerarAulasBncc = createServerFn({ method: "POST" })
 
       // Se já existe aula ATIVA real para esse código, pula (a não ser force)
       if (!data.force) {
-        const { data: existing } = await supabaseAdmin
-          .from("aulas_bncc")
-          .select("id, payload")
-          .eq("codigo_bncc", code)
-          .eq("ativo", true)
-          .limit(1);
-        if (existing && existing.length > 0) {
-          const pts = (existing[0] as any)?.payload?.screens?.pontos_chave?.points;
+        const existing = (await db.execute(sql`
+          select id, payload from aulas_bncc
+          where codigo_bncc = ${code} and ativo = true
+          limit 1
+        `)) as any;
+        const rows: any[] = existing.rows ?? existing;
+        if (rows && rows.length > 0) {
+          const pts = rows[0]?.payload?.screens?.pontos_chave?.points;
           const firstTitle = pts?.[0]?.title;
           if (Array.isArray(pts) && pts.length >= 3 && firstTitle && firstTitle !== code) {
-            results.push({ code, ok: true, aulaId: (existing[0] as any).id, titulo: "(já existia)" });
+            results.push({ code, ok: true, aulaId: rows[0].id, titulo: "(já existia)" });
             continue;
           }
         }
