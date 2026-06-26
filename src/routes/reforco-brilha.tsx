@@ -738,7 +738,7 @@ function ReforcoBrilha() {
                   <div className="flex items-start gap-2">
                     <span className="text-xl shrink-0">{d.emoji}</span>
                     <div className="flex-1 min-w-0">
-                      <div className="font-bold text-sm">{d.titulo}</div>
+                      <div className="font-bold text-sm">{stripBncc(d.titulo)}</div>
                       <div className="text-[11px] text-muted-foreground mt-0.5">
                         {d.habilidades.join(" · ")}
                       </div>
