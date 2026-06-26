@@ -952,8 +952,8 @@ function ReforcoBrilha() {
                               key={skill.id}
                               className="bg-card border border-border/50 rounded-xl p-3 flex items-center justify-between"
                             >
-                              <span className="text-[10px] font-bold truncate max-w-[120px]">
-                                {skill.skill_code}
+                              <span className="text-[11px] font-bold truncate max-w-[140px] capitalize">
+                                {skill.materia || "Habilidade"}
                               </span>
                               <div className="flex items-center gap-2">
                                 <div className="w-20 h-1.5 bg-secondary rounded-full overflow-hidden">
