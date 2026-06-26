@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
+import { stripBncc } from "@/lib/strip-bncc";
 import { toast } from "sonner";
 import {
   ClipboardList,
@@ -371,7 +372,7 @@ export function PlanoIntervencao({
                       {at.modulo}
                     </div>
                   )}
-                  <div className="font-bold text-amber-900 truncate">{at.titulo || "Atividade"}</div>
+                  <div className="font-bold text-amber-900 truncate">{stripBncc(at.titulo) || "Atividade"}</div>
                 </div>
                 <PlayCircle className="h-5 w-5 text-amber-700 shrink-0" />
               </a>

@@ -60,8 +60,7 @@ export const InfiniteActivityShowcase = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="md:col-span-2 overflow-hidden border-2 border-primary/20">
           <CardHeader className="bg-primary/5">
-            <div className="flex justify-between items-center">
-              <Badge variant="secondary">{activity.bnccCode}</Badge>
+            <div className="flex justify-end items-center">
               <Badge variant="outline" className="capitalize">
                 {activity.difficulty}
               </Badge>

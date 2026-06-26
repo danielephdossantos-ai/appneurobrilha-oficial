@@ -1,6 +1,7 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
 import { NeuroAdjustment } from "@/engines/adaptive-engine/engine";
+import { stripBncc } from "@/lib/strip-bncc";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
@@ -186,7 +187,7 @@ export class ReforcoEngine {
     }
 
     // Adiciona selo de autenticidade BNCC/Sistema
-    lesson.title = `[SISTEMA BNCC] ${lesson.title}`;
+    lesson.title = stripBncc(lesson.title);
 
     return lesson;
   }
@@ -251,7 +252,7 @@ export class ReforcoEngine {
       levels.advanced.push({ type: "explanation", text: "Desafio mestre para você!" });
 
     return {
-      title: activity.titulo,
+      title: stripBncc(activity.titulo),
       topic: activity.materia,
       category: activity.materia,
       levels,

@@ -4,6 +4,7 @@ import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
 import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
+import { stripBncc } from "@/lib/strip-bncc";
 
 type Area =
   | "leitura"
@@ -338,7 +339,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
                           className="w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg bg-violet-500/5 hover:bg-violet-500/15 transition-colors text-xs"
                         >
                           <PlayCircle className="h-4 w-4 text-violet-500 shrink-0" />
-                          <span className="flex-1 font-medium">{a.titulo}</span>
+                          <span className="flex-1 font-medium">{stripBncc(a.titulo)}</span>
                           <span className="text-[10px] uppercase font-black text-violet-500">{a.nivel}</span>
                         </button>
                       ))}
