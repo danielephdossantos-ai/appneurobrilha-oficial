@@ -4428,6 +4428,7 @@ export type Database = {
         }[]
       }
       get_auth_user_id: { Args: never; Returns: string }
+      grant_first_admin: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
