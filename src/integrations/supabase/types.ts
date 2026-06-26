@@ -669,6 +669,54 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_biblioteca: {
+        Row: {
+          ano: number
+          ativo: boolean
+          codigo: string
+          componente: string
+          created_at: string
+          etapa: string
+          habilidade: string
+          id: string
+          objeto_conhecimento: string | null
+          ordem: number | null
+          palavras_chave: string[] | null
+          unidade_tematica: string | null
+          updated_at: string
+        }
+        Insert: {
+          ano: number
+          ativo?: boolean
+          codigo: string
+          componente: string
+          created_at?: string
+          etapa?: string
+          habilidade: string
+          id?: string
+          objeto_conhecimento?: string | null
+          ordem?: number | null
+          palavras_chave?: string[] | null
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ano?: number
+          ativo?: boolean
+          codigo?: string
+          componente?: string
+          created_at?: string
+          etapa?: string
+          habilidade?: string
+          id?: string
+          objeto_conhecimento?: string | null
+          ordem?: number | null
+          palavras_chave?: string[] | null
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bncc_habilidades: {
         Row: {
           ano: string | null
@@ -4329,6 +4377,16 @@ export type Database = {
       }
     }
     Views: {
+      bncc_biblioteca_por_ano: {
+        Row: {
+          ano: number | null
+          componente: string | null
+          habilidades: Json | null
+          rotulo: string | null
+          total_codigos: number | null
+        }
+        Relationships: []
+      }
       rb_aulas_premium_status: {
         Row: {
           aula_id: string | null
