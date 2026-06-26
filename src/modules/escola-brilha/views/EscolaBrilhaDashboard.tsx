@@ -37,14 +37,8 @@ type StaticLesson = {
 };
 
 const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
-  infantil: [
-    { id: "vogais", type: "early", serie: "Pré-Escola", title: "As Vogais", subtitle: "A E I O U", badge: "Alfabetização", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-400 to-pink-500", xp: 80, illustration: "vowels-icon" },
-    { id: "contagem", type: "early", serie: "Pré-Escola", title: "Vamos Contar!", subtitle: "1 ao 10", badge: "Matemática", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-400 to-orange-500", xp: 80, illustration: "counting-icon" },
-    { id: "subtracao", type: "early", serie: "Pré-Escola", title: "Subtrair é Tirar!", subtitle: "Tirar objetos", badge: "Matemática", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-500 to-red-600", xp: 90, illustration: "subtract-icon" },
-  ],
+  infantil: [],
   fundamental1: [
-    { id: "portugues_1ano", type: "legacy", serie: "1º Ano", title: "Sílabas", subtitle: "Primeiras sílabas", badge: "Língua Portuguesa", badgeColor: "bg-rose-100 text-rose-700", gradient: "from-rose-400 to-pink-500", xp: 100 },
-    { id: "matematica", type: "legacy", serie: "1º Ano", title: "Contas", subtitle: "Somar e subtrair", badge: "Matemática", badgeColor: "bg-sky-100 text-sky-700", gradient: "from-sky-400 to-blue-500", xp: 100 },
     { id: "portugues_2ano", type: "legacy", serie: "2º Ano", title: "Leitura", subtitle: "Ler frases", badge: "Leitura", badgeColor: "bg-fuchsia-100 text-fuchsia-700", gradient: "from-fuchsia-400 to-violet-500", xp: 110 },
     { id: "matematica_2ano", type: "legacy", serie: "2º Ano", title: "Cálculos", subtitle: "Contas maiores", badge: "Matemática", badgeColor: "bg-orange-100 text-orange-700", gradient: "from-orange-400 to-red-500", xp: 110 },
     { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120 },
@@ -66,37 +60,52 @@ const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
 };
 
 const SERIE_ORDER: Record<EtapaEscolar, string[]> = {
-  infantil: ["Pré-Escola"],
-  fundamental1: ["1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano"],
+  infantil: [],
+  fundamental1: ["2º Ano", "3º Ano", "4º Ano", "5º Ano"],
   fundamental2: ["6º Ano", "7º Ano", "8º Ano", "9º Ano"],
 };
 
 const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: string }> }[] = [
   { id: "fundamental2", label: "6º ao 9º Ano", Icon: GraduationCap },
-  { id: "fundamental1", label: "1º ao 5º Ano", Icon: BookOpen },
-  { id: "infantil", label: "Pré-Escola", Icon: Sprout },
+  { id: "fundamental1", label: "2º ao 5º Ano", Icon: BookOpen },
 ];
+
 
 export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
 
-  // Migração única: limpa cache antigo da categoria "Alfabetização" do 1º Ano
-  // (a categoria foi movida para o Neuro-Treino e o card 1º Ano virou "Língua Portuguesa").
+  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const FLAG = "escola-brilha:cleanup:alfabetizacao-1ano:v1";
+    const FLAG = "escola-brilha:cleanup:pre-1ano:v1";
     try {
       if (localStorage.getItem(FLAG)) return;
-      localStorage.removeItem("escola-brilha:rot:portugues-1ano");
-      localStorage.removeItem("escola-brilha:rot:alfabetizacao");
-      localStorage.removeItem("escola-brilha:rot:alfabetizacao-1ano");
+      const keysToRemove = [
+        "escola-brilha:rot:portugues-1ano",
+        "escola-brilha:rot:alfabetizacao",
+        "escola-brilha:rot:alfabetizacao-1ano",
+        "escola-brilha:rot:vogais",
+        "escola-brilha:rot:contagem",
+        "escola-brilha:rot:subtracao",
+        "escola-brilha:rot:matematica",
+        "escola-brilha:etapa",
+      ];
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (!k) continue;
+        if (k.includes("pre-escola") || k.includes("1ano") || k.includes("infantil") || k.includes("portugues_1ano")) {
+          localStorage.removeItem(k);
+        }
+      }
       localStorage.setItem(FLAG, "1");
     } catch {
       /* ignore */
     }
   }, []);
+
 
   const goToActivity = (id: string, type: string) =>
     navigate({ to: "/escola-brilha/aula", search: { category: id, type } });

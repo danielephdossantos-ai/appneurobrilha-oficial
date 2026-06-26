@@ -334,7 +334,7 @@ function Treino() {
               { serie: "Pré-Escola", emoji: "🧸", lessons: preEscola, accent: "from-pink-500 to-rose-500", border: "border-pink-200 dark:border-pink-800", bg: "from-pink-50 to-pink-100/50 dark:from-pink-950/30 dark:to-pink-900/20", color: "text-pink-600" },
               { serie: "1º Ano", emoji: "🎒", lessons: primeiroAno, accent: "from-sky-500 to-blue-500", border: "border-sky-200 dark:border-sky-800", bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20", color: "text-sky-600" },
             ];
-            return blocos.map((b) => (
+            return blocos.filter((b) => b.lessons.length > 0).map((b) => (
               <section key={b.serie} className={`rounded-3xl border ${b.border} overflow-hidden shadow-sm`}>
                 <div className={`bg-gradient-to-r ${b.bg} px-4 py-3 flex items-center gap-2 border-b ${b.border}`}>
                   <div className="text-xl">{b.emoji}</div>
