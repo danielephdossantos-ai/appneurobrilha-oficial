@@ -663,14 +663,14 @@ function ReforcoBrilha() {
                 {pendingReviews.map((review) => (
                   <button
                     key={review.id}
-                    onClick={() => startLesson(review.activity?.titulo || review.skill_code)}
+                    onClick={() => startLesson(stripBncc(review.activity?.titulo || review.skill_code))}
                     className="flex-shrink-0 w-48 p-4 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-left group"
                   >
                     <div className="text-[10px] font-bold text-primary mb-1 uppercase tracking-wider">
                       Revisão Sugerida
                     </div>
                     <div className="font-bold text-sm line-clamp-1">
-                      {review.activity?.titulo || review.skill_code}
+                      {stripBncc(review.activity?.titulo || review.skill_code) || "Revisão"}
                     </div>
                     <div className="mt-3 flex items-center justify-between">
                       <div className="h-1.5 flex-1 bg-primary/10 rounded-full overflow-hidden mr-2">
