@@ -123,22 +123,23 @@ function AdminPage() {
           </div>
         </header>
 
-        {!demosCriados && (
-          <Card className="border-primary/30 bg-primary/5">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base"><Sparkles className="w-5 h-5" /> Criar 4 perfis demo</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <p className="text-sm text-muted-foreground">
-                Cria automaticamente 4 crianças (Neurotípica, TDAH, TEA, Dislexia) com anamnese marcada como concluída.
-                Disponível apenas no email administrador.
-              </p>
-              <Button onClick={seedDemos} disabled={seeding}>
-                {seeding ? "Criando..." : "Criar perfis demo"}
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+        <Card className="border-primary/30 bg-primary/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Sparkles className="w-5 h-5" /> Criar 4 perfis demo
+              {demosCriados && <Badge variant="secondary" className="ml-2">já criados</Badge>}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Cria automaticamente as 4 crianças (Neurotípica, TDAH, TEA, Dislexia) com anamnese concluída.
+              Se algum já existir, ele é pulado e só os faltantes são criados.
+            </p>
+            <Button onClick={seedDemos} disabled={seeding}>
+              {seeding ? "Criando..." : demosCriados ? "Recriar faltantes" : "Criar perfis demo"}
+            </Button>
+          </CardContent>
+        </Card>
 
         <section>
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
