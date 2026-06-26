@@ -38,6 +38,9 @@ import {
   GENETICA_LESSON,
   ILUMINISMO_LESSON,
 } from "../data/activity-lessons-c";
+import { useAppState } from "@/core/store";
+import { diagnosticoToNeuroProfile } from "@/lib/neuro-profile";
+import { resolveLesson, hasAdaptedVariants } from "../engine/lesson-resolver";
 
 const ACTIVITY_MAP: Record<string, ActivityLesson> = {
   sinonimos: SINONIMOS_LESSON,
