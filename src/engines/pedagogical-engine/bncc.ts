@@ -462,6 +462,105 @@ export const BNCC_SKILLS: BNCCSkill[] = [
       description: descs[n],
     };
   }),
+
+  // ===== 6º Ano — Arte (EF06AR01..EF06AR08) =====
+  ...Array.from({ length: 8 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    const descs: Record<string, string> = {
+      "01": "Pesquisar e analisar formas distintas das artes visuais.",
+      "02": "Experimentar técnicas de desenho, pintura e colagem.",
+      "03": "Reconhecer manifestações artísticas de diferentes culturas.",
+      "04": "Explorar elementos da linguagem visual: ponto, linha, forma e cor.",
+      "05": "Apreciar e interpretar obras musicais de variados gêneros.",
+      "06": "Experimentar a criação musical com voz, corpo e objetos sonoros.",
+      "07": "Investigar movimentos corporais como linguagem da dança.",
+      "08": "Vivenciar processos teatrais de improvisação e cena.",
+    };
+    return {
+      id: `ef06ar${n}`,
+      code: `EF06AR${n}`,
+      field: "artes" as const,
+      level: 6,
+      description: descs[n],
+    };
+  }),
+
+  // ===== 6º Ano — Educação Física (EF06EF01..EF06EF12) =====
+  ...Array.from({ length: 12 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    const descs: Record<string, string> = {
+      "01": "Experimentar e fruir jogos eletrônicos e de salão.",
+      "02": "Planejar estratégias coletivas em jogos populares.",
+      "03": "Reconhecer transformações históricas dos esportes.",
+      "04": "Praticar esportes de marca e de precisão.",
+      "05": "Vivenciar esportes de invasão respeitando regras.",
+      "06": "Experimentar ginásticas de condicionamento físico.",
+      "07": "Identificar capacidades físicas envolvidas em práticas corporais.",
+      "08": "Praticar danças urbanas valorizando a diversidade.",
+      "09": "Diferenciar lutas de outras práticas corporais.",
+      "10": "Vivenciar lutas do contexto comunitário e regional.",
+      "11": "Refletir sobre saúde, lazer e qualidade de vida.",
+      "12": "Construir regras coletivas para práticas corporais seguras.",
+    };
+    return {
+      id: `ef06ef${n}`,
+      code: `EF06EF${n}`,
+      field: "educacao-fisica" as const,
+      level: 6,
+      description: descs[n],
+    };
+  }),
+
+  // ===== 6º Ano — Inglês (EF06LI01..EF06LI16) =====
+  ...Array.from({ length: 16 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    const descs: Record<string, string> = {
+      "01": "Interagir em situações de intercâmbio oral demonstrando iniciativa.",
+      "02": "Coletar informações do grupo, perguntando e respondendo em inglês.",
+      "03": "Solicitar esclarecimentos em inglês sobre o que não foi compreendido.",
+      "04": "Reconhecer com o apoio de palavras cognatas o assunto de um texto oral.",
+      "05": "Aplicar conhecimentos da língua materna para compreender textos orais em inglês.",
+      "06": "Antecipar o sentido global de textos em inglês por inferências.",
+      "07": "Identificar o assunto de um texto reconhecendo sua organização textual.",
+      "08": "Distinguir fatos de opiniões em textos argumentativos em inglês.",
+      "09": "Localizar informações específicas em texto em inglês.",
+      "10": "Conhecer a organização de um dicionário bilíngue para resolver dúvidas.",
+      "11": "Explorar ambientes virtuais e/ou aplicativos para construir repertório lexical.",
+      "12": "Planejar a escrita de textos em função do contexto comunicativo.",
+      "13": "Produzir textos escritos em inglês de diferentes gêneros.",
+      "14": "Utilizar o presente simples e o contínuo para descrever rotinas e ações em curso.",
+      "15": "Construir repertório lexical relativo a temas familiares (escola, família, rotina).",
+      "16": "Reconhecer a presença da língua inglesa na sociedade brasileira.",
+    };
+    return {
+      id: `ef06li${n}`,
+      code: `EF06LI${n}`,
+      field: "ingles" as const,
+      level: 6,
+      description: descs[n],
+    };
+  }),
+
+  // ===== 6º Ano — Ensino Religioso (EF06ER01..EF06ER07) =====
+  ...Array.from({ length: 7 }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    const descs: Record<string, string> = {
+      "01": "Reconhecer o papel das tradições religiosas e filosóficas como possibilidade de respostas existenciais.",
+      "02": "Identificar e respeitar diferentes experiências religiosas, filosóficas e de não crença.",
+      "03": "Reconhecer mitos cosmogônicos de diferentes culturas e tradições religiosas.",
+      "04": "Reconhecer a importância dos mitos para a vida em sociedade.",
+      "05": "Identificar mitos de criação em diversas culturas como expressão simbólica.",
+      "06": "Identificar mitos de origem do mundo em diferentes culturas religiosas.",
+      "07": "Reconhecer a diversidade dos sentidos atribuídos à existência humana.",
+    };
+    return {
+      id: `ef06er${n}`,
+      code: `EF06ER${n}`,
+      field: "ensino-religioso" as const,
+      level: 6,
+      description: descs[n],
+    };
+  }),
   {
     id: "ef07ma01",
     code: "EF07MA01",
