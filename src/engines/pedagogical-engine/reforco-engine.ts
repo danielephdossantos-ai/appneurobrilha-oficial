@@ -187,7 +187,7 @@ export class ReforcoEngine {
     }
 
     // Adiciona selo de autenticidade BNCC/Sistema
-    lesson.title = `[SISTEMA BNCC] ${lesson.title}`;
+    lesson.title = stripBncc(lesson.title);
 
     return lesson;
   }
