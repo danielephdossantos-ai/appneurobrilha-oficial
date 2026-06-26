@@ -63,9 +63,14 @@ const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
 
 const SERIE_ORDER: Record<EtapaEscolar, string[]> = {
   infantil: [],
-  fundamental1: ["2º Ano", "3º Ano", "4º Ano", "5º Ano"],
+  fundamental1: ["1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano"],
   fundamental2: ["6º Ano", "7º Ano", "8º Ano", "9º Ano"],
 };
+
+const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: string }> }[] = [
+  { id: "fundamental2", label: "6º ao 9º Ano", Icon: GraduationCap },
+  { id: "fundamental1", label: "1º ao 5º Ano", Icon: BookOpen },
+];
 
 const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: string }> }[] = [
   { id: "fundamental2", label: "6º ao 9º Ano", Icon: GraduationCap },
