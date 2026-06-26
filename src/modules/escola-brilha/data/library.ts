@@ -18,14 +18,13 @@ export type StaticLesson = {
 export const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
   infantil: [],
   fundamental1: [
-    { id: "portugues_2ano", type: "legacy", serie: "2º Ano", title: "Leitura", subtitle: "Ler frases", badge: "Leitura", badgeColor: "bg-fuchsia-100 text-fuchsia-700", gradient: "from-fuchsia-400 to-violet-500", xp: 110 },
-    { id: "matematica_2ano", type: "legacy", serie: "2º Ano", title: "Cálculos", subtitle: "Contas maiores", badge: "Matemática", badgeColor: "bg-orange-100 text-orange-700", gradient: "from-orange-400 to-red-500", xp: 110 },
     { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120 },
     { id: "antonimos", type: "activity", serie: "2º Ano", title: "Antônimos", subtitle: "Palavras com sentido oposto", badge: "Língua Portuguesa", badgeColor: "bg-teal-100 text-teal-700", gradient: "from-teal-500 to-emerald-600", xp: 120 },
     { id: "substantivos", type: "activity", serie: "3º Ano", title: "Substantivos", subtitle: "Nomes de seres e objetos", badge: "Língua Portuguesa", badgeColor: "bg-blue-100 text-blue-700", gradient: "from-blue-500 to-indigo-600", xp: 130 },
     { id: "fracoes", type: "activity", serie: "3º Ano", title: "Frações", subtitle: "Partes de um todo", badge: "Matemática", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-500 to-orange-600", xp: 150 },
     { id: "multiplicacao", type: "activity", serie: "3º Ano", title: "Multiplicação", subtitle: "Tabuada e grupos iguais", badge: "Matemática", badgeColor: "bg-pink-100 text-pink-700", gradient: "from-pink-500 to-rose-600", xp: 140 },
   ],
+
   fundamental2: [
     { id: "oceanos", type: "activity-c", serie: "6º Ano", title: "Oceanos e Clima", subtitle: "Regulação climática", badge: "Ciências", badgeColor: "bg-blue-100 text-blue-800", gradient: "from-blue-600 to-cyan-600", xp: 230, bncc: "EF06CI04" },
     { id: "biomas", type: "activity-c", serie: "6º Ano", title: "Biomas Brasileiros", subtitle: "Os 6 grandes biomas", badge: "Geografia", badgeColor: "bg-green-100 text-green-800", gradient: "from-green-600 to-emerald-600", xp: 220, bncc: "EF06GE08" },
