@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
+import { stripBncc } from "@/lib/strip-bncc";
 import { toast } from "sonner";
 import {
   ClipboardList,
