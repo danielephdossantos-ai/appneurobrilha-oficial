@@ -37,7 +37,6 @@ import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-peda
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
@@ -189,11 +188,6 @@ const AgendaRoute = AgendaRouteImport.update({
   path: '/agenda',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -249,7 +243,6 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -290,7 +283,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -331,7 +323,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -374,7 +365,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
@@ -415,7 +405,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
@@ -455,7 +444,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/admin'
     | '/agenda'
     | '/alfabetizacao'
     | '/analytics'
@@ -497,7 +485,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
   AgendaRoute: typeof AgendaRoute
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
@@ -728,13 +715,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgendaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -854,7 +834,6 @@ const AnamneseChildIdRouteWithChildren = AnamneseChildIdRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
   AgendaRoute: AgendaRoute,
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
