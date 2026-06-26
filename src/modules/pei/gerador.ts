@@ -29,12 +29,24 @@ export type AulaBnccRef = {
   ordem: number | null;
 };
 
+export type NeuroProfilePayload = "Tipico" | "TDAH" | "TEA" | "Dislexia" | "DeficienciaIntelectual";
+
 export type AtividadeBloco = {
   tipo: "bncc";
   slug: string;            // codigo_bncc (referência humana)
-  payload: { aula_id: string; disciplina: string | null };
+  payload: { aula_id: string; disciplina: string | null; neuro_profile: NeuroProfilePayload };
   tempo_min: number;
 };
+
+function diagnosticoToNeuroPayload(d: string | null | undefined): NeuroProfilePayload {
+  switch (d) {
+    case "tea": return "TEA";
+    case "tdah": return "TDAH";
+    case "dislexia": return "Dislexia";
+    case "deficiencia_intelectual": return "DeficienciaIntelectual";
+    default: return "Tipico";
+  }
+}
 
 export type AulaGerada = {
   ordem: number;
