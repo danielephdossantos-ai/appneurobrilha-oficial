@@ -207,7 +207,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             {allSeries.map((serie) => {
               const staticCards = staticItems.filter((s) => s.serie === serie);
-              const dbCards = serie === "1º Ano" ? [] : aulasBanco.filter((a) => a.serie === serie);
+              const dbCards = aulasBanco.filter((a) => a.serie === serie);
               if (!staticCards.length && !dbCards.length) return null;
               const total = staticCards.length + dbCards.length;
 
