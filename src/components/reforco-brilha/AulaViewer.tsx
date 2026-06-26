@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { stripBncc } from "@/lib/strip-bncc";
 import {
   X,
   ChevronLeft,
