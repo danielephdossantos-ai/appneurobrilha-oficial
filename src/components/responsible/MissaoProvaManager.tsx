@@ -170,7 +170,7 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
               mission_id: mission.id,
               scheduled_date: format(sessionDate, "yyyy-MM-dd"),
               title: `Estudo: ${mission.subject}`,
-              description: `Revisar: ${sessionContents.map((c: any) => c.content_title).join(", ")}. Habilidades: ${sessionContents.map((c: any) => c.bncc_code).join(", ")}`,
+              description: `Revisar: ${sessionContents.map((c: any) => c.content_title).join(", ")}.`,
             });
           }
           contentIndex += contentsPerDay;
