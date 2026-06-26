@@ -1,6 +1,7 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
 import { NeuroAdjustment } from "@/engines/adaptive-engine/engine";
+import { stripBncc } from "@/lib/strip-bncc";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
