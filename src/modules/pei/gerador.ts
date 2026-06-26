@@ -210,7 +210,7 @@ export function gerarPlanoTrimestral(
       reforco = reforcoPool[Math.floor(i / 3) % reforcoPool.length];
     }
 
-    const blocos = montarBlocos(tempoAula, principal, reforco, ctx);
+    const blocos = montarBlocos(tempoAula, principal, reforco, ctx, diagnosticoToNeuroPayload(perfil.diagnostico));
     aulas.push({
       ordem: i + 1,
       data_prevista: addDaysISO(inicio, i),
