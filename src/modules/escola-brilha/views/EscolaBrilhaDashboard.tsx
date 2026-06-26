@@ -72,10 +72,6 @@ const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: stri
   { id: "fundamental1", label: "1º ao 5º Ano", Icon: BookOpen },
 ];
 
-const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: string }> }[] = [
-  { id: "fundamental2", label: "6º ao 9º Ano", Icon: GraduationCap },
-  { id: "fundamental1", label: "2º ao 5º Ano", Icon: BookOpen },
-];
 
 
 export const EscolaBrilhaDashboard: React.FC = () => {
