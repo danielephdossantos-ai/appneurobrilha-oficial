@@ -67,7 +67,7 @@ function BnccCodigoPage() {
       const [m, c] = await Promise.all([
         supabase
           .from("bncc_biblioteca")
-          .select("codigo,ano,disciplina,descricao,habilidade")
+          .select("codigo,ano,componente,habilidade")
           .eq("codigo", codigo)
           .maybeSingle(),
         supabase
