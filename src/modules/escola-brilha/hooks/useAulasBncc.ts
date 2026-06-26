@@ -21,6 +21,24 @@ export interface AulaBncc {
   ativo: boolean;
 }
 
+export interface BnccBibliotecaItem {
+  id: string;
+  codigo: string;
+  ano: number;
+  componente: string;
+  unidade_tematica: string | null;
+  objeto_conhecimento: string | null;
+  habilidade: string | null;
+  ordem: number | null;
+  ativo: boolean | null;
+}
+
+const etapaAnoRange = (etapa: EtapaEscolar) => {
+  if (etapa === "fundamental1") return { from: 1, to: 5 };
+  if (etapa === "fundamental2") return { from: 6, to: 9 };
+  return null;
+};
+
 export function useAulasBnccByEtapa(etapa: EtapaEscolar) {
   const [aulas, setAulas] = useState<AulaBncc[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +66,54 @@ export function useAulasBnccByEtapa(etapa: EtapaEscolar) {
   }, [etapa]);
 
   return { aulas, loading, error };
+}
+
+export function useBnccBibliotecaByEtapa(etapa: EtapaEscolar) {
+  const [habilidades, setHabilidades] = useState<BnccBibliotecaItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancel = false;
+    const range = etapaAnoRange(etapa);
+
+    if (!range) {
+      setHabilidades([]);
+      setLoading(false);
+      return () => {
+        cancel = true;
+      };
+    }
+
+    (async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("bncc_biblioteca")
+        .select("id,codigo,ano,componente,unidade_tematica,objeto_conhecimento,habilidade,ordem,ativo")
+        .gte("ano", range.from)
+        .lte("ano", range.to)
+        .eq("ativo", true)
+        .order("ano", { ascending: true })
+        .order("componente", { ascending: true })
+        .order("ordem", { ascending: true });
+
+      if (cancel) return;
+      if (error) {
+        setError(error.message);
+        setHabilidades([]);
+      } else {
+        setError(null);
+        setHabilidades((data ?? []) as BnccBibliotecaItem[]);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      cancel = true;
+    };
+  }, [etapa]);
+
+  return { habilidades, loading, error };
 }
 
 export function useAulaBnccById(id: string | undefined) {
