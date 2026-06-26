@@ -263,7 +263,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                 <div className="text-[10px] font-black uppercase tracking-widest opacity-90">
                   Apostila Brilha
                 </div>
-                <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
+                <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{stripBncc(titulo)}</h2>
               </div>
             </div>
             <button
