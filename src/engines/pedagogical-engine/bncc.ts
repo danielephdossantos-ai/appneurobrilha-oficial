@@ -10,6 +10,8 @@ export interface BNCCSkill {
     | "historia"
     | "artes"
     | "educacao-fisica"
+    | "ingles"
+    | "ensino-religioso"
     | "psicomotricidade"
     | "socioemocional";
   level: number; // 0 (Preschool), 1 to 9 (year)
