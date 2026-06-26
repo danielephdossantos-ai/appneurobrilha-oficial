@@ -74,10 +74,10 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const [tab, setTab] = useState<EtapaEscolar>("fundamental2");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
 
-  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano).
+  // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const FLAG = "escola-brilha:cleanup:pre-1ano:v1";
+    const FLAG = "escola-brilha:cleanup:pre-1-2ano:v2";
     try {
       if (localStorage.getItem(FLAG)) return;
       const keysToRemove = [
@@ -88,13 +88,24 @@ export const EscolaBrilhaDashboard: React.FC = () => {
         "escola-brilha:rot:contagem",
         "escola-brilha:rot:subtracao",
         "escola-brilha:rot:matematica",
+        "escola-brilha:rot:portugues-2ano",
+        "escola-brilha:rot:matematica-2ano",
         "escola-brilha:etapa",
       ];
       keysToRemove.forEach((k) => localStorage.removeItem(k));
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
         if (!k) continue;
-        if (k.includes("pre-escola") || k.includes("1ano") || k.includes("infantil") || k.includes("portugues_1ano")) {
+        if (
+          k.includes("pre-escola") ||
+          k.includes("1ano") ||
+          k.includes("infantil") ||
+          k.includes("portugues_1ano") ||
+          k.includes("portugues-2ano") ||
+          k.includes("matematica-2ano") ||
+          k.includes("portugues_2ano") ||
+          k.includes("matematica_2ano")
+        ) {
           localStorage.removeItem(k);
         }
       }
@@ -103,6 +114,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       /* ignore */
     }
   }, []);
+
 
 
   const goToActivity = (id: string, type: string) =>
