@@ -44,7 +44,6 @@ import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
-import { Route as AdminGerarAulasBnccRouteImport } from './routes/admin.gerar-aulas-bncc'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
@@ -225,11 +224,6 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AdminGerarAulasBnccRoute = AdminGerarAulasBnccRouteImport.update({
-  id: '/admin/gerar-aulas-bncc',
-  path: '/admin/gerar-aulas-bncc',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
   id: '/db/$aulaId',
   path: '/db/$aulaId',
@@ -277,7 +271,6 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-bncc': typeof AdminGerarAulasBnccRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -317,7 +310,6 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-bncc': typeof AdminGerarAulasBnccRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -359,7 +351,6 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-bncc': typeof AdminGerarAulasBnccRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
@@ -402,7 +393,6 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-bncc'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -442,7 +432,6 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-bncc'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -483,7 +472,6 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-bncc'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/escola-brilha/aula'
@@ -525,7 +513,6 @@ export interface RootRouteChildren {
   RotinaRoute: typeof RotinaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
-  AdminGerarAulasBnccRoute: typeof AdminGerarAulasBnccRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
 }
@@ -777,13 +764,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/gerar-aulas-bncc': {
-      id: '/admin/gerar-aulas-bncc'
-      path: '/admin/gerar-aulas-bncc'
-      fullPath: '/admin/gerar-aulas-bncc'
-      preLoaderRoute: typeof AdminGerarAulasBnccRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/escola-brilha/db/$aulaId': {
       id: '/escola-brilha/db/$aulaId'
       path: '/db/$aulaId'
@@ -882,7 +862,6 @@ const rootRouteChildren: RootRouteChildren = {
   RotinaRoute: RotinaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
-  AdminGerarAulasBnccRoute: AdminGerarAulasBnccRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
 }
