@@ -14,8 +14,20 @@ export function pickPtBrVoice(): SpeechSynthesisVoice | null {
 
 /** Divide texto longo em pedaços de no máximo ~160 chars cortando em
  *  pontuação ou espaço para não travar a leitura no meio de uma palavra. */
+/** Remove códigos BNCC (ex.: EF06MA01, EF01LP06-10) para que o TTS nunca os leia. */
+export function stripBnccCodes(text: string): string {
+  return text
+    // intervalos: EF01LP06-10
+    .replace(/\bEF\d{2}[A-Z]{2}\d{2}(?:\s*-\s*\d{2})?\b/gi, "")
+    // listas separadas por vírgula: "EF06MA01, EF06MA02"
+    .replace(/\s*\(\s*\)\s*/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([.,;:!?])/g, "$1")
+    .trim();
+}
+
 export function chunkText(text: string, max = 160): string[] {
-  const clean = text.replace(/\s+/g, " ").trim();
+  const clean = stripBnccCodes(text).replace(/\s+/g, " ").trim();
   if (clean.length <= max) return [clean];
   // Primeiro corta em frases (. ! ? ; \n)
   const sentences = clean
