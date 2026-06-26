@@ -10,6 +10,7 @@ import { CheckCircle2, Loader2, PlayCircle, Sparkles, Clock } from "lucide-react
 import { useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/utils/utils";
+import { stripBncc } from "@/lib/strip-bncc";
 
 type AtividadeBloco = {
   tipo: string;
