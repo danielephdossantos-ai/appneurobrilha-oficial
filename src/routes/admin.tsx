@@ -62,7 +62,7 @@ const LESSONS = [
 function AdminPage() {
   const { activeChild, updateChild, session } = useAppState();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [checking, setChecking] = useState(false);
+
 
   useEffect(() => {
     let active = true;
