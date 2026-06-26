@@ -4,6 +4,7 @@ import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PLANOS_TEMPLATES, AreaPlano, SemanaTemplate } from "@/lib/reforco-brilha-planos-templates";
+import { stripBncc } from "@/lib/strip-bncc";
 
 interface SemanaPlano extends SemanaTemplate {
   habilidade_id: string | null;
