@@ -352,7 +352,52 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
       />
       <Stepper current={step} onJump={setStep} />
 
+      {lesson.templateMeta && (
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 mt-3">
+          <div className="rounded-2xl border-2 border-indigo-200 bg-indigo-50/60 p-4">
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-wider text-indigo-600 font-black">
+                  Template Pedagógico carregado
+                </div>
+                <div className="text-sm font-black text-indigo-900 truncate">
+                  {lesson.templateMeta.name}
+                  <span className="ml-2 text-indigo-500 font-mono text-xs">
+                    {lesson.templateMeta.slug}
+                  </span>
+                </div>
+              </div>
+              <span className="shrink-0 text-xs font-bold text-indigo-700 bg-white border border-indigo-200 rounded-full px-2 py-0.5">
+                {lesson.templateMeta.steps.filter((s) => s.applied).length}/9 passos
+              </span>
+            </div>
+            <ol className="grid grid-cols-3 sm:grid-cols-9 gap-1.5">
+              {lesson.templateMeta.steps.map((p) => (
+                <li
+                  key={p.n}
+                  className={`flex flex-col items-center text-center rounded-lg px-1 py-1.5 border ${
+                    p.applied
+                      ? "bg-emerald-100 border-emerald-300 text-emerald-800"
+                      : "bg-slate-100 border-slate-200 text-slate-400"
+                  }`}
+                  title={`${p.label} — fonte: ${p.source}`}
+                >
+                  <span className="text-[10px] font-black leading-none">PASSO {p.n}</span>
+                  <span className="text-[10px] font-bold leading-tight mt-0.5">{p.label}</span>
+                  {p.applied ? (
+                    <Check className="w-3 h-3 mt-0.5" />
+                  ) : (
+                    <X className="w-3 h-3 mt-0.5" />
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
