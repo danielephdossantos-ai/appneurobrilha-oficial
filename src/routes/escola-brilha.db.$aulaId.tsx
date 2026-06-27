@@ -6,7 +6,8 @@ import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
-import { getKidsLesson } from "../modules/escola-brilha/data/kids-lessons-1ano";
+import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
+import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
 const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano"]);
@@ -50,6 +51,7 @@ class PlayerBoundary extends React.Component<
 
 function AulaDbPage() {
   const { aulaId } = Route.useParams();
+  const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
 
@@ -83,8 +85,14 @@ function AulaDbPage() {
 
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
-      const kids = getKidsLesson(aula.codigo_bncc);
-      if (kids) return <KidsLessonPlayer lesson={kids} currentRef={ref} />;
+      const kidsList = getKidsLessons(aula.codigo_bncc);
+      if (kidsList.length > 1 && levelIdx === null) {
+        return <LevelPicker lessons={kidsList} onPick={setLevelIdx} onBack={back} />;
+      }
+      if (kidsList.length > 0) {
+        const chosen = kidsList[levelIdx ?? 0];
+        return <KidsLessonPlayer lesson={chosen} currentRef={ref} />;
+      }
     }
 
     switch (aula.tipo_player) {
