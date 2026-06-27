@@ -46,6 +46,8 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
   proximos_passos: { label: "Próximos passos", icon: ArrowRight, cor: "from-rose-400 to-pink-500" },
   exemplo: { label: "Exemplo", icon: Lightbulb, cor: "from-amber-400 to-orange-500" },
   exercicio: { label: "Exercício", icon: Hand, cor: "from-sky-400 to-blue-500" },
+  desafio: { label: "Desafio", icon: CheckCircle2, cor: "from-violet-400 to-fuchsia-500" },
+  revisao: { label: "Revisão", icon: ArrowRight, cor: "from-rose-400 to-pink-500" },
   dica: { label: "Dica", icon: Lightbulb, cor: "from-amber-400 to-yellow-500" },
   video: { label: "Vídeo", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   imagem: { label: "Imagem", icon: Eye, cor: "from-emerald-400 to-teal-500" },
