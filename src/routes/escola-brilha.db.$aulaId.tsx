@@ -60,7 +60,11 @@ function AulaDbPage() {
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
-  const fund2Lesson = useLessonV2(aula?.codigo_bncc ?? "", aula?.titulo ?? "");
+  const fund2Lesson = useLessonV2(
+    aula?.codigo_bncc ?? "",
+    aula?.titulo ?? "",
+    aula?.descricao ?? "",
+  );
 
   if (loading) {
     return (
