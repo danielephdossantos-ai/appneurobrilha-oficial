@@ -214,7 +214,7 @@ const isEquationLine = (s: string) => /[=]/.test(s);
 const looksLikeOperation = (s: string) =>
   /dos dois lados/i.test(s) || /^[\s]*[+\-−×÷xX·*\/][\s]*\d/.test(s.trim());
 
-const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" | "why" }> = ({ text, tone = "eq" }) => {
+const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" }> = ({ text, tone = "eq" }) => {
   if (tone === "op") {
     return (
       <div className="flex flex-col items-center my-1">
@@ -229,13 +229,6 @@ const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" | "why" }> 
   if (tone === "note") {
     return <div className="text-center text-xs text-slate-500 mt-1">{text}</div>;
   }
-  if (tone === "why") {
-    return (
-      <div className="mx-auto my-2 max-w-md rounded-xl bg-sky-50 border border-sky-200 px-4 py-2 text-center text-sm text-sky-900 font-semibold">
-        💡 {text}
-      </div>
-    );
-  }
   return (
     <div className="text-center font-mono text-3xl sm:text-4xl font-black text-slate-900 tracking-wider py-2">
       {text}
@@ -243,83 +236,24 @@ const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" | "why" }> 
   );
 };
 
-/* Normaliza símbolos para conta real */
-const normOp = (s: string): "+" | "-" | "*" | "/" | null => {
-  if (/[+]/.test(s)) return "+";
-  if (/[-−]/.test(s)) return "-";
-  if (/[×*xX·]/.test(s)) return "*";
-  if (/[÷\/]/.test(s)) return "/";
-  return null;
-};
-const calc = (a: number, op: "+" | "-" | "*" | "/", b: number) =>
-  op === "+" ? a + b : op === "-" ? a - b : op === "*" ? a * b : a / b;
-const opSym = (op: "+" | "-" | "*" | "/") =>
-  op === "+" ? "+" : op === "-" ? "−" : op === "*" ? "×" : "÷";
-
-/* Extrai (lhs, rhs) numéricos simples de uma equação tipo "x + 3 = 11" */
-const rhsNumber = (eq: string): number | null => {
-  const parts = eq.split("=");
-  if (parts.length < 2) return null;
-  const m = parts[parts.length - 1].match(/-?\d+(?:[.,]\d+)?/);
-  if (!m) return null;
-  return parseFloat(m[0].replace(",", "."));
-};
-
-/* A partir de uma op tipo "−3 dos dois lados" devolve {op,n} */
-const parseOp = (s: string): { op: "+" | "-" | "*" | "/"; n: number } | null => {
-  const m = s.match(/([+\-−×÷xX*\/])\s*(\d+(?:[.,]\d+)?)/);
-  if (!m) return null;
-  const op = normOp(m[1]);
-  if (!op) return null;
-  return { op, n: parseFloat(m[2].replace(",", ".")) };
-};
-
 const MathBoard: React.FC<{ steps: { step: string; detail: string }[] }> = ({ steps }) => {
-  const lines: { text: string; tone: "eq" | "op" | "note" | "why"; tag?: string }[] = [];
-  let lastEq: string | null = null;
-  let pendingOp: { op: "+" | "-" | "*" | "/"; n: number } | null = null;
-
-  const pushEq = (eq: string, tag?: string) => {
-    // se temos op pendente + equação anterior, gera a explicação "porque a ⊙ b = c"
-    if (pendingOp && lastEq) {
-      const prevR = rhsNumber(lastEq);
-      const newR = rhsNumber(eq);
-      if (prevR !== null && newR !== null) {
-        const expected = calc(prevR, pendingOp.op, pendingOp.n);
-        if (Math.abs(expected - newR) < 1e-6) {
-          lines.push({
-            text: `porque ${prevR} ${opSym(pendingOp.op)} ${pendingOp.n} = ${newR}`,
-            tone: "why",
-          });
-        }
-      }
-    }
-    lines.push({ text: eq, tone: "eq", tag });
-    lastEq = eq;
-    pendingOp = null;
-  };
-
+  // Flatten cada passo em uma sequência de linhas (equação / operação / nota).
+  const lines: { text: string; tone: "eq" | "op" | "note"; tag?: string }[] = [];
   steps.forEach((p, idx) => {
     const head = p.step.includes("—") ? p.step.split("—").slice(1).join("—").trim() : p.step.trim();
     const detail = (p.detail || "").trim();
     const tag = `Passo ${idx + 1}`;
     if (isEquationLine(head)) {
-      pushEq(head, tag);
+      lines.push({ text: head, tone: "eq", tag });
       if (detail && !isEquationLine(detail)) lines.push({ text: detail, tone: "note" });
-      else if (detail) pushEq(detail);
+      else if (detail) lines.push({ text: detail, tone: "eq" });
     } else if (looksLikeOperation(head)) {
       lines.push({ text: head, tone: "op", tag });
-      pendingOp = parseOp(head);
-      if (detail) {
-        if (isEquationLine(detail)) pushEq(detail);
-        else lines.push({ text: detail, tone: "note" });
-      }
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
     } else {
+      // header genérico — vira nota acima da equação seguinte
       if (head) lines.push({ text: head, tone: "note" });
-      if (detail) {
-        if (isEquationLine(detail)) pushEq(detail);
-        else lines.push({ text: detail, tone: "note" });
-      }
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
     }
   });
 
@@ -491,8 +425,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                     )}
                   </div>
                 )}
-                {lesson.discipline === "Matemática" &&
-                s.exploracao.pairs.some((p) => isEquationLine(p.left) || isEquationLine(p.right)) ? (
+                {lesson.discipline === "Matemática" ? (
                   <MathBoard
                     steps={s.exploracao.pairs.map((p) => ({ step: p.left, detail: p.right }))}
                   />
@@ -517,8 +450,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                 <p className="text-slate-800 mb-6">{s.explicacao.conceito}</p>
 
                 <h3 className="font-black text-slate-900 mb-3">Passo a passo</h3>
-                {lesson.discipline === "Matemática" &&
-                s.explicacao.passoAPasso.some((p) => isEquationLine(p.step) || isEquationLine(p.detail)) ? (
+                {lesson.discipline === "Matemática" ? (
                   <div className="mb-6">
                     <MathBoard steps={s.explicacao.passoAPasso} />
                   </div>
