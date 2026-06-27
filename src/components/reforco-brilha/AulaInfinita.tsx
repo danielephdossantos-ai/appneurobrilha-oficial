@@ -18,7 +18,7 @@ const SECOES: { fonte: RecursoExterno["fonte"]; titulo: string; icone: any; cor:
 ];
 
 function extractYoutubeId(url: string): string | null {
-  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
+  const m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
   return m ? m[1] : null;
 }
 function toEmbedUrl(url: string, fonte: string): string {
@@ -26,9 +26,9 @@ function toEmbedUrl(url: string, fonte: string): string {
     if (fonte === "wikipedia") return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/");
     if (fonte === "wikiversity")
       return url.replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/").replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
-    // YouTube watch/shorts/youtu.be -> embed (nocookie) — evita ERR_BLOCKED_BY_RESPONSE
+    // YouTube watch/shorts/youtu.be -> player embed — evita ERR_BLOCKED_BY_RESPONSE
     const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
-    if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0`;
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}?rel=0&modestbranding=1&playsinline=1`;
     return url;
   } catch {
     return url;
@@ -243,7 +243,7 @@ export function AulaInfinita({ query }: Props) {
             </button>
             <div className="aspect-video w-full">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
                 title={videoTitle}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

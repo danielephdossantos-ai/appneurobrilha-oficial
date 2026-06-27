@@ -35,8 +35,8 @@ const toArr = (v: any): any[] => (Array.isArray(v) ? v : []);
 
 const youtubeEmbed = (url: string | null) => {
   if (!url) return null;
-  const m = url.match(/(?:youtu\.be\/|v=)([\w-]{6,})/);
-  return m ? `https://www.youtube.com/embed/${m[1]}` : url;
+  const m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+  return m ? `https://www.youtube.com/embed/${m[1]}` : null;
 };
 
 export const Route = createFileRoute("/bncc/$codigo")({
