@@ -1,5 +1,6 @@
 import type { ActivityLessonC, BNCCArea } from "../types/activity-lesson-c";
 import type { AulaBncc } from "../hooks/useAulasBncc";
+import { isGenericDesafio, synthesizeDesafio } from "./desafioBank";
 
 const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }> = {
   "Língua Portuguesa": { area: "linguagens", area_label: "Linguagens" },
