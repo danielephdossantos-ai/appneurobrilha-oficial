@@ -162,18 +162,19 @@ const MA06: KidsLesson[] = [
 
 const MA07: KidsLesson[] = [
   mk("EF02MA07", "Multiplicar — somar de novo o mesmo número", "Matemática", "blue", [
-    { kind: "intro", mascot: "pipa", titulo: "Atalho da soma!", fala: "Multiplicar é um atalho pra somar várias vezes o mesmo número." },
-    { kind: "concept", titulo: "Sinal de vezes", simbolo: "×", fala: "Esse sinal de xis quer dizer vezes. 3 × 4 lê assim: três vezes quatro." },
-    { kind: "step_count", titulo: "3 grupos de 4 estrelas", a: 4, b: 8, objeto: "⭐", fala: "Imagine três caixas com quatro estrelas em cada uma." },
-    { kind: "step_vertical_sum", titulo: "Somando 4 + 4 + 4", a: 8, b: 4, fala: "Quatro mais quatro é oito. Mais quatro, doze!" },
-    { kind: "concept", titulo: "Atalho!", simbolo: "3 × 4 = 12", fala: "Em vez de somar três vezes, escreve 3 × 4 = 12. É a mesma coisa, só mais rápido." },
+    { kind: "intro", mascot: "pipa", titulo: "Atalho da soma!", fala: "Multiplicar é um jeito rápido de somar várias vezes o mesmo número." },
+    { kind: "concept", titulo: "Sinal de vezes", simbolo: "×", fala: "Esse sinal é o vezes. A gente lê: três vezes quatro." },
+    { kind: "concept", titulo: "3 grupos iguais", simbolo: "⭐⭐⭐⭐", fala: "Imagine um grupo com quatro estrelas. Agora pense em três grupos iguais a esse." },
+    { kind: "step_vertical_sum", titulo: "Primeiro: 4 + 4", a: 4, b: 4, fala: "Dois grupos de quatro juntos dão oito." },
+    { kind: "step_vertical_sum", titulo: "Agora: 8 + 4", a: 8, b: 4, fala: "Somando o terceiro grupo de quatro, chegamos em doze." },
+    { kind: "concept", titulo: "3 × 4 = 12", simbolo: "3 × 4 = 12", fala: "Em vez de somar quatro mais quatro mais quatro, escreve três vezes quatro igual a doze." },
     { kind: "usecase", titulo: "Onde usamos?", cenas: [
       { emoji: "🥚", texto: "Caixas iguais de ovos" },
       { emoji: "🚗", texto: "Filas de carrinhos" },
       { emoji: "🪑", texto: "Cadeiras por mesa" },
     ], fala: "Sempre que tem grupos iguais, dá pra usar multiplicação." },
-    { kind: "concept", titulo: "Tabuada do 2", emoji: "✌️", fala: "2 × 1 = 2, 2 × 2 = 4, 2 × 3 = 6, 2 × 4 = 8, 2 × 5 = 10. É só somar de 2 em 2." },
-    { kind: "summary", titulo: "Você aprendeu!", itens: ["× é vezes", "Soma o mesmo número", "É atalho da adição"], fala: "Você desbloqueou multiplicação!" },
+    { kind: "concept", titulo: "Dica: tabuada do 2", simbolo: "2 · 4 · 6 · 8 · 10", fala: "Somando de dois em dois você já sabe a tabuada do dois." },
+    { kind: "summary", titulo: "Você aprendeu!", itens: ["× quer dizer vezes", "Multiplicar é somar grupos iguais", "3 × 4 é igual a 4 + 4 + 4"], fala: "Você desbloqueou a multiplicação!" },
     { kind: "celebrate", titulo: "Parabéns!", fala: "Ganhou cento e trinta de experiência." },
   ]),
 ];
