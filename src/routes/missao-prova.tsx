@@ -258,6 +258,14 @@ function MissaoProva() {
                     />
                   </div>
 
+                  <div className="mb-6 p-4 rounded-2xl border-2 border-indigo-100 bg-indigo-50/30">
+                    <MissaoProvaQuiz
+                      topico={currentSession.title}
+                      materia={currentMission.subject}
+                      idade={activeChild?.age ?? activeChild?.idade ?? undefined}
+                    />
+                  </div>
+
                   <div className="flex flex-wrap justify-center gap-3">
                     <button
                       onClick={() => setTutorAberto(true)}
