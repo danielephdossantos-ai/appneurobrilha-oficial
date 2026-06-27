@@ -1,6 +1,7 @@
 import type { ActivityLessonC, BNCCArea } from "../types/activity-lesson-c";
 import type { AulaBncc } from "../hooks/useAulasBncc";
 import { isGenericDesafio, synthesizeDesafio } from "./desafioBank";
+import { getFirstYearLessonOverride } from "../data/first-year-lesson-overrides";
 
 const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }> = {
   "Língua Portuguesa": { area: "linguagens", area_label: "Linguagens" },
@@ -25,6 +26,21 @@ const COLOR_BY_AREA: Record<BNCCArea, ActivityLessonC["color"]> = {
  * nunca quebre caso o JSON salvo esteja incompleto.
  */
 export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
+  const firstYearOverride = getFirstYearLessonOverride({
+    codigo_bncc: aula.codigo_bncc,
+    serie: aula.serie,
+    disciplina: aula.disciplina,
+  });
+
+  if (firstYearOverride) {
+    return {
+      ...firstYearOverride,
+      id: firstYearOverride.id || aula.id,
+      xp: aula.xp ?? firstYearOverride.xp,
+      bncc_code: aula.codigo_bncc || firstYearOverride.bncc_code,
+    };
+  }
+
   const raw = (aula.payload ?? {}) as Partial<ActivityLessonC> & {
     screens?: any;
   };
