@@ -262,7 +262,7 @@ function MissaoProva() {
                     <MissaoProvaQuiz
                       topico={currentSession.title}
                       materia={currentMission.subject}
-                      idade={activeChild?.age ?? activeChild?.idade ?? undefined}
+                      idade={(activeChild as any)?.idade ?? (activeChild as any)?.age ?? undefined}
                     />
                   </div>
 
