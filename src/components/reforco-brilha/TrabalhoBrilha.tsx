@@ -426,6 +426,29 @@ function EditorTrabalho({
   function addBlocoImagem(url: string, legenda = "") {
     setBlocos((b) => [...b, { id: uid(), tipo: "imagem", url, legenda }]);
   }
+  function addCapa() {
+    if (blocos.some((b) => b.tipo === "capa")) {
+      toast.info("Seu trabalho já tem capa.");
+      return;
+    }
+    const anoAtual = String(new Date().getFullYear());
+    const capa: Bloco = {
+      id: uid(),
+      tipo: "capa",
+      subtitulo: "",
+      alunos: [""],
+      serie: "",
+      professor: "",
+      escola: "",
+      cidade: "",
+      ano: anoAtual,
+    };
+    setBlocos((b) => [capa, ...b]);
+    toast.success("Capa adicionada na 1ª página!");
+  }
+  function addQuebra() {
+    setBlocos((b) => [...b, { id: uid(), tipo: "quebra" }]);
+  }
   function removerBloco(id: string) {
     setBlocos((b) => b.filter((x) => x.id !== id));
   }
