@@ -10,6 +10,7 @@ import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLesson
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
+import { buildLessonV2 } from "../modules/escola-brilha/engine/lesson-builder-v2";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
@@ -113,15 +114,13 @@ function AulaDbPage() {
 
     // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
-      const f2 = generateActivityLesson6a9(aula.codigo_bncc, aula.titulo);
-      if (f2) {
+      const v2 = buildLessonV2(aula.codigo_bncc, aula.titulo);
+      if (v2) {
         return (
           <Fund2Player
-            lesson={f2}
+            lesson={v2}
             currentRef={ref}
-            disciplina={aula.disciplina ?? f2.subject}
-            serie={aula.serie}
-            codigoBncc={aula.codigo_bncc}
+            capitulo={aula.codigo_bncc}
           />
         );
       }
