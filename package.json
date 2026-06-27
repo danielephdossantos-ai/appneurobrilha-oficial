@@ -11,8 +11,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "check:bncc-coverage": "tsx scripts/check-bncc-template-coverage.ts"
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
