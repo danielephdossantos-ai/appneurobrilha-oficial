@@ -10,7 +10,7 @@ interface Props {
 }
 
 function extractYoutubeId(url: string): string | null {
-  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
+  const m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
   return m ? m[1] : null;
 }
 
@@ -25,9 +25,9 @@ function toEmbedUrl(url: string, fonte: string): string {
         .replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/")
         .replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
     }
-    // YouTube watch/shorts/youtu.be -> embed (nocookie) — evita ERR_BLOCKED_BY_RESPONSE
+    // YouTube watch/shorts/youtu.be -> player embed — evita ERR_BLOCKED_BY_RESPONSE
     const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
-    if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&modestbranding=1&playsinline=1`;
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}?rel=0&modestbranding=1&playsinline=1`;
     return url;
   } catch {
     return url;
@@ -127,10 +127,13 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
           {resultados.map((r, i) => {
             const ytId = r.fonte === "youtube" ? extractYoutubeId(r.url) : null;
             const handleClick = (e: React.MouseEvent) => {
-              onAbrirRecurso?.(r);
-              // YouTube: deixa o <a target="_blank"> abrir nativo (window.open dentro do iframe da preview é bloqueado).
-              if (ytId) return;
               e.preventDefault();
+              onAbrirRecurso?.(r);
+              if (ytId) {
+                setVideoId(ytId);
+                setVideoTitle(r.titulo);
+                return;
+              }
               setPreview({ url: toEmbedUrl(r.url, r.fonte), title: r.titulo, fonte: r.fonte });
             };
 
@@ -210,7 +213,7 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
             </button>
             <div className="aspect-video w-full">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin : "")}`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin : "")}`}
                 title={videoTitle}
                 className="w-full h-full"
                 referrerPolicy="strict-origin-when-cross-origin"

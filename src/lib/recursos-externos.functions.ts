@@ -88,7 +88,7 @@ async function buscarYoutube(query: string): Promise<{ resultados: RecursoExtern
             fonte: "youtube",
             titulo: sn.title || "Vídeo",
             descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
-            url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
+            url: `https://www.youtube.com/embed/${it.id.videoId}`,
             thumbnail: thumb,
             conteudo: null,
           };

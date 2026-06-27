@@ -1353,6 +1353,8 @@ function youtubeIdFromUrl(url: string): string | null {
       if (v) return v;
       const m = u.pathname.match(/\/embed\/([^/?]+)/);
       if (m) return m[1];
+      const shorts = u.pathname.match(/\/shorts\/([^/?]+)/);
+      if (shorts) return shorts[1];
     }
   } catch {}
   return null;
@@ -1439,7 +1441,7 @@ function RecursoPreviewModal({
           {ytId && (
             <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1`}
+                src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1`}
                 title={recurso.titulo}
                 className="w-full h-full"
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
