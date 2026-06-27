@@ -1033,6 +1033,9 @@ function webEmbedUrl(url: string, fonte: string): string | null {
   } catch {
     return null;
   }
+}
+
+
 
 function RecursoPreviewModal({
   recurso,
