@@ -102,6 +102,7 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
           { type: "explanation", text: "No desafio, além de acertar, você precisa explicar o caminho: dados, operação e conclusão." },
           { type: "example", text: `Modelo: “Eu vi ${n} em cada grupo e 5 grupos. Usei multiplicação porque são grupos iguais. ${n} × 5 = ${n * 5}.”` },
           { type: "exercise", text: "Resolva e explique.", content: { question: `Uma turma fez 5 cartazes com ${n} estrelas em cada. Quantas estrelas há ao todo?`, options: [String(5 * n), String(5 + n), String(Math.max(0, n - 5))], answer: String(5 * n), explanation: `São 5 grupos de ${n}: 5 × ${n} = ${5 * n}.` } },
+          { type: "example", text: `Como conferir: ${5 * n} é maior que ${n}, porque juntamos 5 grupos. Se desse menos que ${n}, teria algo errado.` },
           { type: "tip", text: "Uma resposta completa termina com unidade: estrelas, lápis, pontos, reais." },
         ],
       },
@@ -138,6 +139,7 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
           { type: "explanation", text: "No nível avançado, você vai comparar duas pistas do texto para responder com mais segurança." },
           { type: "example", text: "Se o texto diz “estava nublado” e depois “pegou o guarda-chuva”, as duas pistas indicam possibilidade de chuva." },
           { type: "exercise", text: "Responda pela pista.", content: { question: "“O céu escureceu, então Marta fechou a janela.” Por que ela fechou?", options: ["porque parecia que ia chover", "porque queria dormir", "porque a janela quebrou"], answer: "porque parecia que ia chover", explanation: "O céu escurecido é a pista que explica a ação." } },
+          { type: "example", text: "Resposta completa: “Marta fechou a janela porque o céu escureceu, uma pista de que poderia chover.”" },
           { type: "tip", text: "Não invente informação: resposta boa nasce do texto." },
         ],
       },
@@ -171,6 +173,7 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
       ],
       advanced: [
         { type: "explanation", text: "No desafio, explique o conteúdo para outra pessoa. Quem consegue ensinar mostra que entendeu." },
+        { type: "example", text: `Modelo de explicação para ${topic}: “primeiro eu observo o tema, depois encontro a pista principal e por fim explico com um exemplo.”` },
         { type: "exercise", text: "Explique o tema", content: { question: `Complete: ${topic} é importante porque...`, options: ["ajuda a entender e resolver situações", "não serve para nada", "só precisa copiar"], answer: "ajuda a entender e resolver situações", explanation: "Aprender é usar o conhecimento para pensar melhor." } },
         { type: "tip", text: "Fale em voz alta: “primeiro..., depois..., por isso...”" },
         { type: "example", text: "Resposta completa: “Eu observei a pista, usei a regra e conferi a resposta.”" },
