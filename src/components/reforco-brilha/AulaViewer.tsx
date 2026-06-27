@@ -265,7 +265,7 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   }, [aulaId]);
 
   const total = paginas.length;
-  const atual = paginas[idx];
+  const atual = paginas[idx] ? transformarParaCrianca(paginas[idx]) : paginas[idx];
   const meta = useMemo(
     () => (atual ? TIPO_META[atual.tipo] || TIPO_META.explicacao : null),
     [atual],
