@@ -31,6 +31,7 @@ interface Props {
 export function PlanoAutomatico({ area, onAbrirAula }: Props) {
   const [loading, setLoading] = useState(true);
   const [plano, setPlano] = useState<PlanoSalvo | null>(null);
+  const [aulaAberta, setAulaAberta] = useState<SemanaPlano | null>(null);
   const template = PLANOS_TEMPLATES[area];
 
   useEffect(() => {
