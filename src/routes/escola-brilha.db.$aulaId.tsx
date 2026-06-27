@@ -10,7 +10,7 @@ import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano"
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
-const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano"]);
+const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano", "1º ao 2º Ano"]);
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,

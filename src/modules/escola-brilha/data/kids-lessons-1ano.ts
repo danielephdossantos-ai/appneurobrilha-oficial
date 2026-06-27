@@ -1,5 +1,6 @@
 import type { KidsLesson, KidsScene } from "../types/kids-lesson";
 import { getKidsLessons2Ano } from "./kids-lessons-2ano";
+import { getKidsLessons12Ano } from "./kids-lessons-12ano";
 
 /**
  * Banco local de aulas Kids (1º Ano).
@@ -554,6 +555,8 @@ export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
  */
 export function getKidsLessons(codigo: string | undefined): KidsLesson[] {
   if (!codigo) return [];
+  const shared = getKidsLessons12Ano(codigo);
+  if (shared.length > 0) return shared.map(enrichLesson);
   const twoAno = getKidsLessons2Ano(codigo);
   if (twoAno.length > 0) return twoAno.map(enrichLesson);
   const variantsMat = getKidsLessonVariants(codigo);
