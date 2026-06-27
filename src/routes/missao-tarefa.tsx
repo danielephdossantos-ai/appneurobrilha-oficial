@@ -18,7 +18,6 @@ function MissaoTarefaPage() {
           icon={ClipboardList}
           title="MISSÃO TAREFA BRILHA"
           subtitle="A tarefa de casa do dia a dia, com dicas da IA — sem entregar a resposta."
-          backTo="/dashboard"
         />
         {!activeChild ? (
           <div className="text-center text-sm text-muted-foreground py-10">
