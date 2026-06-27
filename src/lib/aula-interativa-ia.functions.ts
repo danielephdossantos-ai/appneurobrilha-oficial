@@ -135,7 +135,19 @@ function buildFallbackAulaInterativa(d: z.infer<typeof InputSchema>): AulaIntera
     };
   }
 
-  if (area.includes("leitura") || area.includes("escrita") || area.includes("linguagem")) {
+  if (area.includes("escrita") || area.includes("coord")) {
+    return {
+      titulo: `Aula: ${tema}`.slice(0, 80),
+      telas: [
+        { tipo: "exemplo", titulo: "Escreva em blocos", conteudo: "Leia CASA, copie CA, depois SA.", emoji: "✏️" },
+        { tipo: "pergunta", titulo: "Antes de copiar", conteudo: "O que ajuda antes de escrever a palavra?", emoji: "👀", alternativas: ["Ler inteira", "Correr", "Apagar"], resposta: "Ler inteira", dica: "Olhar primeiro evita pular letra." },
+        { tipo: "completar", titulo: "Complete a regra", conteudo: "Copiar em ____ pequenos ajuda a mão.", emoji: "🧩", alternativas: ["blocos", "gritos", "saltos"], resposta: "blocos", dica: "Um pedaço por vez." },
+        { tipo: "pergunta", titulo: "Confira", conteudo: "Depois de escrever BOLA, o que confiro?", emoji: "🔎", alternativas: ["Se faltou letra", "Se corri", "Se pulei aula"], resposta: "Se faltou letra", dica: "Conferir corrige sem refazer tudo." },
+      ],
+    };
+  }
+
+  if (area.includes("leitura") || area.includes("linguagem")) {
     return {
       titulo: `Aula: ${tema}`.slice(0, 80),
       telas: [
