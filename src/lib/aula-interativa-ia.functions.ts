@@ -119,12 +119,63 @@ function parseAula(raw: string): AulaInterativa {
   return AulaSchema.parse(normalized);
 }
 
+function buildFallbackAulaInterativa(d: z.infer<typeof InputSchema>): AulaInterativa {
+  const area = d.area.toLowerCase();
+  const tema = d.semanaTema || "aprender passo a passo";
+
+  if (area.includes("mat")) {
+    return {
+      titulo: `Aula: ${tema}`.slice(0, 80),
+      telas: [
+        { tipo: "exemplo", titulo: "Veja com objetos", conteudo: "3 grupos com 2 bolinhas fazem 6 bolinhas.", emoji: "🔢" },
+        { tipo: "pergunta", titulo: "Conte os grupos", conteudo: "2 grupos com 4 lápis dão quantos lápis?", emoji: "✏️", alternativas: ["6", "8", "4"], resposta: "8", dica: "Some 4 + 4." },
+        { tipo: "completar", titulo: "Complete", conteudo: "5 + 5 + 5 é igual a ____.", emoji: "🧩", alternativas: ["10", "15", "20"], resposta: "15", dica: "Conte três vezes o 5." },
+        { tipo: "pergunta", titulo: "Qual estratégia?", conteudo: "Quando há grupos iguais, qual conta ajuda?", emoji: "💡", alternativas: ["Multiplicação", "Apagar", "Copiar"], resposta: "Multiplicação", dica: "Grupos iguais combinam com vezes." },
+      ],
+    };
+  }
+
+  if (area.includes("leitura") || area.includes("escrita") || area.includes("linguagem")) {
+    return {
+      titulo: `Aula: ${tema}`.slice(0, 80),
+      telas: [
+        { tipo: "exemplo", titulo: "Som da palavra", conteudo: "BOLA começa com o som BO.", emoji: "📖" },
+        { tipo: "pergunta", titulo: "Primeiro som", conteudo: "Qual é o primeiro som de CASA?", emoji: "🏠", alternativas: ["CA", "SA", "LA"], resposta: "CA", dica: "Fale devagar: CA-SA." },
+        { tipo: "completar", titulo: "Monte a palavra", conteudo: "BO + LA forma ____.", emoji: "🧩", alternativas: ["BOLA", "LATA", "BOLO"], resposta: "BOLA", dica: "Junte os dois pedacinhos." },
+        { tipo: "pergunta", titulo: "Leia com pista", conteudo: "Em 'O gato mia', quem mia?", emoji: "🐱", alternativas: ["O gato", "A bola", "A casa"], resposta: "O gato", dica: "A resposta está no começo da frase." },
+      ],
+    };
+  }
+
+  if (area.includes("aten") || area.includes("mem")) {
+    return {
+      titulo: `Aula: ${tema}`.slice(0, 80),
+      telas: [
+        { tipo: "exemplo", titulo: "Olhe com calma", conteudo: "Primeiro olho, depois penso, depois respondo.", emoji: "🎯" },
+        { tipo: "pergunta", titulo: "Sequência", conteudo: "Memorize: sol, lua, estrela. Qual veio no meio?", emoji: "🧠", alternativas: ["Lua", "Sol", "Estrela"], resposta: "Lua", dica: "Repita a sequência em voz baixa." },
+        { tipo: "completar", titulo: "Regra do foco", conteudo: "Antes de responder, eu preciso ____.", emoji: "👀", alternativas: ["observar", "correr", "gritar"], resposta: "observar", dica: "Olhar com atenção vem primeiro." },
+        { tipo: "pergunta", titulo: "Boa estratégia", conteudo: "O que ajuda a lembrar uma ordem?", emoji: "💡", alternativas: ["Repetir devagar", "Chutar", "Fechar a tela"], resposta: "Repetir devagar", dica: "Repetir organiza a memória." },
+      ],
+    };
+  }
+
+  return {
+    titulo: `Aula: ${tema}`.slice(0, 80),
+    telas: [
+      { tipo: "exemplo", titulo: "Aprender em passos", conteudo: "Uma tarefa fica fácil quando faço uma parte por vez.", emoji: "✨" },
+      { tipo: "pergunta", titulo: "Primeiro passo", conteudo: "O que faço antes de responder?", emoji: "👀", alternativas: ["Observo", "Chuto", "Pulo"], resposta: "Observo", dica: "A pista vem antes da resposta." },
+      { tipo: "completar", titulo: "Complete", conteudo: "Eu aprendo melhor quando faço ____ passo por vez.", emoji: "🧩", alternativas: ["um", "dez", "nenhum"], resposta: "um", dica: "Pequenos passos ajudam." },
+      { tipo: "pergunta", titulo: "Fechamento", conteudo: "Qual atitude mostra aprendizagem?", emoji: "🌟", alternativas: ["Tentar e corrigir", "Desistir", "Copiar sem ler"], resposta: "Tentar e corrigir", dica: "Erro corrigido ensina." },
+    ],
+  };
+}
+
 export const gerarAulaInterativa = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", aula: null };
+      return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula local", aula: buildFallbackAulaInterativa(data) };
     }
     try {
       const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -147,19 +198,19 @@ export const gerarAulaInterativa = createServerFn({ method: "POST" })
       if (!res.ok) {
         const errText = await res.text();
         console.error("[aula-interativa] HTTP", res.status, errText.slice(0, 300));
-        return { ok: false as const, error: `Groq ${res.status}`, aula: null };
+        return { ok: true as const, error: `Groq ${res.status}; usando aula local`, aula: buildFallbackAulaInterativa(data) };
       }
       const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) return { ok: false as const, error: "Resposta vazia", aula: null };
+      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula local", aula: buildFallbackAulaInterativa(data) };
       const aula = parseAula(raw);
       return { ok: true as const, aula, error: null };
     } catch (e) {
       console.error("[aula-interativa]", e);
       return {
-        ok: false as const,
-        error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        aula: null,
+        ok: true as const,
+        error: e instanceof Error ? `${e.message}; usando aula local` : "Falha ao gerar aula; usando aula local",
+        aula: buildFallbackAulaInterativa(data),
       };
     }
   });
