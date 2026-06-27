@@ -26,6 +26,9 @@ function toEmbedUrl(url: string, fonte: string): string {
     if (fonte === "wikipedia") return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/");
     if (fonte === "wikiversity")
       return url.replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/").replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
+    // YouTube watch/shorts/youtu.be -> embed (nocookie) — evita ERR_BLOCKED_BY_RESPONSE
+    const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0`;
     return url;
   } catch {
     return url;
