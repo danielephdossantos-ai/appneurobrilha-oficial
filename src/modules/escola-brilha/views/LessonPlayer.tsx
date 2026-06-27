@@ -14,7 +14,7 @@ import * as Lessons from "../data/lessons";
 import { ActivityPlayer } from "./ActivityPlayer";
 import { ActivityPlayerC } from "./ActivityPlayerC";
 import { Fund2Player } from "./Fund2Player";
-import { generateActivityLesson6a9 } from "../data/activity-lesson-generator-6a9";
+import { buildLessonV2 } from "../engine/lesson-builder-v2";
 import { EarlyChildhoodPlayer } from "./EarlyChildhoodPlayer";
 import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from "../data/early-lessons";
 import { ActivityLesson } from "../types/activity-lesson";
