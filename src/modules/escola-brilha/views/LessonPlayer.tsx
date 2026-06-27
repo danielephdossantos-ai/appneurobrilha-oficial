@@ -14,7 +14,7 @@ import * as Lessons from "../data/lessons";
 import { ActivityPlayer } from "./ActivityPlayer";
 import { ActivityPlayerC } from "./ActivityPlayerC";
 import { Fund2Player } from "./Fund2Player";
-import { buildLessonV2 } from "../engine/lesson-builder-v2";
+import { resolveLessonV2Sync, prefetchLessonV2 } from "../engine/pedagogical-library";
 import { EarlyChildhoodPlayer } from "./EarlyChildhoodPlayer";
 import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from "../data/early-lessons";
 import { ActivityLesson } from "../types/activity-lesson";
@@ -88,7 +88,8 @@ export const LessonPlayer: React.FC = () => {
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) {
     // 6º–9º Ano: novo player de 9 telas com Templates Pedagógicos (Fund2Player).
-    const v2 = buildLessonV2(lessonC.bncc_code, lessonC.title);
+    void prefetchLessonV2(lessonC.bncc_code, lessonC.title);
+    const v2 = resolveLessonV2Sync(lessonC.bncc_code, lessonC.title);
     if (v2) {
       return (
         <Fund2Player
