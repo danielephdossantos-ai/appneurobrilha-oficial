@@ -80,7 +80,8 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
   const isMemory = /mem[oó]ria|memoriza|trabalho/.test(lower);
   const isExecutive = /organiza|planejamento|sequenciamento|tempo|ritmo|execu/.test(lower);
   const isEmotion = /frustra|emo[cç][aã]o|toler[aâ]ncia|autorregula/.test(lower);
-  const category = isMath ? "Matemática" : isMotor ? "Coordenação" : isPort ? "Português" : isAttention ? "Atenção" : isMemory ? "Memória" : isExecutive ? "Funções executivas" : isEmotion ? "Regulação emocional" : "Geral";
+  const isLanguage = /linguagem|oralidade|fala|comunica|vocabul[aá]rio|narrar|hist[oó]ria oral/.test(lower);
+  const category = isMath ? "Matemática" : isMotor ? "Coordenação" : isPort ? "Português" : isLanguage ? "Linguagem" : isAttention ? "Atenção" : isMemory ? "Memória" : isExecutive ? "Funções executivas" : isEmotion ? "Regulação emocional" : "Geral";
 
   if (isMath) {
     const n = Number(topic.match(/\d+/)?.[0] ?? 6);
@@ -219,6 +220,43 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
         "Leia apontando com o dedo para não pular palavras.",
         "Circule palavras como porque, mas, então, quando e onde.",
         "Responda sempre com uma prova do texto.",
+      ],
+    };
+  }
+
+  if (isLanguage) {
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category,
+      explanation: `Hoje você vai treinar ${topic} falando, organizando ideias e respondendo com começo, meio e fim, usando exemplos reais.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: "Quando a gente fala uma resposta, o cérebro precisa escolher palavras e colocar em ordem. Uma fala boa tem uma ideia principal e pelo menos um detalhe." },
+          { type: "example", text: "Exemplo: em vez de dizer só 'cachorro', diga 'O cachorro correu no quintal'. Agora a frase tem quem fez, o que fez e onde aconteceu." },
+          { type: "exercise", text: "Complete a fala com detalhe.", content: { question: "Qual resposta está mais completa?", options: ["O menino brincou no parque", "menino", "brincou"], answer: "O menino brincou no parque", explanation: "Ela tem personagem, ação e lugar: menino + brincou + parque." } },
+          { type: "example", text: "Treino de vocabulário: feliz pode virar contente, animado ou alegre. Palavras diferentes deixam a fala mais clara." },
+          { type: "tip", text: "Use a frase mágica: quem fez, o que fez, onde ou por quê?" },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora vamos contar uma mini-história em ordem. Começo apresenta quem aparece; meio mostra o problema; fim mostra o que aconteceu depois." },
+          { type: "example", text: "Começo: Ana viu uma pipa presa. Meio: ela chamou o irmão. Fim: os dois soltaram a pipa com cuidado." },
+          { type: "exercise", text: "Escolha a parte que vem no meio da história.", content: { question: "Começo: João perdeu o lápis. Fim: João achou o lápis na mochila. Qual meio combina?", options: ["Ele procurou embaixo da mesa", "O céu ficou azul", "A bola pulou"], answer: "Ele procurou embaixo da mesa", explanation: "Procurar o lápis combina com perder e achar." } },
+          { type: "example", text: "Boa resposta oral: 'Primeiro ele perdeu, depois procurou, por fim encontrou'." },
+          { type: "tip", text: "Use palavras de ordem: primeiro, depois, por fim." },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, você vai explicar uma opinião com motivo. Não basta dizer 'gostei'; precisa dizer por quê." },
+          { type: "example", text: "Modelo: 'Eu gostei da história porque o personagem ajudou o amigo'. A palavra porque apresenta o motivo." },
+          { type: "exercise", text: "Explique com motivo.", content: { question: "Qual frase explica melhor?", options: ["Gostei do jogo porque treinei memória", "Gostei", "Jogo legal"], answer: "Gostei do jogo porque treinei memória", explanation: "Ela traz opinião e motivo, então comunica melhor." } },
+          { type: "example", text: "Resposta completa: 'Eu penso isso porque...'" },
+          { type: "tip", text: "Depois de responder, pergunte: minha frase contou a ideia toda?" },
+        ],
+      },
+      premiumTips: [
+        "Responda usando frase completa, não só uma palavra.",
+        "Conte histórias com começo, meio e fim.",
+        "Use porque para explicar o motivo da sua resposta.",
       ],
     };
   }
