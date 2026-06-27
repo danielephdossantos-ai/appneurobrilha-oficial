@@ -314,7 +314,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
         return { ok: false as const, error: "Resposta vazia", aulaJson: null };
       }
 
-      const aula = extractJson(raw);
+      const aula = parseAndValidateAula(raw);
       return { ok: true as const, aulaJson: JSON.stringify(aula), error: null };
     } catch (e) {
       console.error("[groq:aula]", e);
