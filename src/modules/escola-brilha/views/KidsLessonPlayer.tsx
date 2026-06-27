@@ -152,6 +152,12 @@ const SceneView: React.FC<{
       return <StepJoinScene scene={scene} accent={accent} />;
     case "step_vertical_sum":
       return <StepVerticalSumScene scene={scene} accent={accent} />;
+    case "step_subtract":
+      return <StepSubtractScene scene={scene} accent={accent} />;
+    case "step_vertical_sub":
+      return <StepVerticalSubScene scene={scene} accent={accent} />;
+    case "step_equal":
+      return <StepEqualScene scene={scene} accent={accent} />;
     case "practice_count":
       return <PracticeCountScene scene={scene} accent={accent} />;
     case "summary":
