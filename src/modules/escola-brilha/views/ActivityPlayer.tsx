@@ -1151,25 +1151,45 @@ const ExplicacaoScreen: React.FC<{ lesson: ActivityLesson; isSpeaking: boolean }
           {s.highlight}
         </h2>
       </div>
-      <div className="relative -mt-20 flex justify-between items-end px-4 pb-2">
-        <motion.img
-          src={pipaImg}
-          alt="Pipa"
-          animate={isSpeaking ? { y: [0, -6, 0], scale: [1, 1.04, 1] } : { y: 0 }}
-          transition={isSpeaking ? { repeat: Infinity, duration: 0.8 } : {}}
-          className="w-32 h-32 sm:w-36 sm:h-36 object-contain drop-shadow-xl select-none"
-          draggable={false}
-        />
-        <motion.img
-          src={pipImg}
-          alt="Pip"
-          animate={isSpeaking ? { y: [0, -8, 0], scale: [1, 1.03, 1] } : { y: 0 }}
-          transition={isSpeaking ? { repeat: Infinity, duration: 0.9, delay: 0.2 } : {}}
-          className="w-32 h-32 sm:w-36 sm:h-36 object-contain drop-shadow-xl select-none"
-          draggable={false}
-        />
-      </div>
-      <div className="px-5 pb-6 pt-2">
+      {s.image_url && (
+        <div className="-mt-16 px-4">
+          <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white">
+            <img
+              src={s.image_url}
+              alt={s.image_caption ?? s.highlight}
+              className="w-full h-48 sm:h-56 object-cover"
+              loading="lazy"
+              draggable={false}
+            />
+            {s.image_caption && (
+              <p className="text-center text-xs font-bold text-slate-600 px-3 py-2 bg-slate-50">
+                {s.image_caption}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+      {!s.image_url && (
+        <div className="relative -mt-20 flex justify-between items-end px-4 pb-2">
+          <motion.img
+            src={pipaImg}
+            alt="Pipa"
+            animate={isSpeaking ? { y: [0, -6, 0], scale: [1, 1.04, 1] } : { y: 0 }}
+            transition={isSpeaking ? { repeat: Infinity, duration: 0.8 } : {}}
+            className="w-32 h-32 sm:w-36 sm:h-36 object-contain drop-shadow-xl select-none"
+            draggable={false}
+          />
+          <motion.img
+            src={pipImg}
+            alt="Pip"
+            animate={isSpeaking ? { y: [0, -8, 0], scale: [1, 1.03, 1] } : { y: 0 }}
+            transition={isSpeaking ? { repeat: Infinity, duration: 0.9, delay: 0.2 } : {}}
+            className="w-32 h-32 sm:w-36 sm:h-36 object-contain drop-shadow-xl select-none"
+            draggable={false}
+          />
+        </div>
+      )}
+      <div className="px-5 pb-6 pt-4">
         <div className="bg-violet-50 border-2 border-violet-100 rounded-2xl p-4 text-center">
           <p className="text-violet-800 font-bold text-base leading-snug">{s.summary}</p>
         </div>
