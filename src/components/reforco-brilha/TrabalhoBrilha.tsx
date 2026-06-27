@@ -842,16 +842,10 @@ function BlocoEditor({
         />
       )}
       {bloco.tipo === "paragrafo" && (
-        <textarea
+        <AutoGrowTextarea
           value={bloco.texto || ""}
-          onChange={(e) => {
-            onChange({ texto: e.target.value });
-            e.target.style.height = "auto";
-            e.target.style.height = e.target.scrollHeight + "px";
-          }}
-          rows={3}
-          className="w-full text-sm leading-relaxed bg-transparent border-0 focus:outline-none resize-none"
-          style={{ fontFamily: "Georgia, serif" }}
+          onChange={(v) => onChange({ texto: v })}
+          placeholder="Escreva um parágrafo do seu trabalho..."
         />
       )}
       {bloco.tipo === "imagem" && bloco.url && (
