@@ -11,12 +11,12 @@ import type { ActivityLesson, PraticarOption } from "../types/activity-lesson";
  *  - Conteúdo derivado do título BNCC + tema detectado por palavras-chave.
  */
 
-type SubjectKey = "CI" | "ER" | "GE" | "HI" | "LP" | "MA";
+type SubjectKey = "CI" | "ER" | "GE" | "HI" | "LP" | "MA" | "AR";
 
 const COLORS: PraticarOption["color"][] = ["green", "blue", "orange", "purple", "yellow", "red"];
 
 function subjectFromCode(code: string): SubjectKey | null {
-  const m = code.match(/^EF0\d(CI|ER|GE|HI|LP|MA)\d{2,}$/i);
+  const m = code.match(/^EF0\d(CI|ER|GE|HI|LP|MA|AR)\d{2,}$/i);
   return (m?.[1].toUpperCase() as SubjectKey) ?? null;
 }
 
