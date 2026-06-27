@@ -37,6 +37,7 @@ const SUBJECT_NAME: Record<SubjectKey, string> = {
   HI: "História",
   LP: "Língua Portuguesa",
   MA: "Matemática",
+  AR: "Arte",
 };
 
 const SUBJECT_EMOJI: Record<SubjectKey, string> = {
@@ -46,6 +47,7 @@ const SUBJECT_EMOJI: Record<SubjectKey, string> = {
   HI: "📜",
   LP: "📖",
   MA: "🔢",
+  AR: "🎨",
 };
 
 // ============== Pacotes temáticos por palavra-chave ==============
