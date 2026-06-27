@@ -475,7 +475,21 @@ export const KIDS_LESSONS_1ANO: Record<string, KidsLesson> = {
   EF01MA59: aliasLegado("EF01MA59", MA06, "Tabuada - 1º Ano (somar grupos iguais)"),
 };
 
+import { getKidsLessonVariants } from "./kids-lesson-variants-1ano";
+
 export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
   if (!codigo) return null;
   return KIDS_LESSONS_1ANO[codigo] ?? null;
+}
+
+/**
+ * Retorna todas as aulas disponíveis para um código BNCC:
+ * a aula base + variantes por nível (se houver).
+ */
+export function getKidsLessons(codigo: string | undefined): KidsLesson[] {
+  if (!codigo) return [];
+  const variants = getKidsLessonVariants(codigo);
+  if (variants.length > 0) return variants;
+  const base = KIDS_LESSONS_1ANO[codigo];
+  return base ? [base] : [];
 }

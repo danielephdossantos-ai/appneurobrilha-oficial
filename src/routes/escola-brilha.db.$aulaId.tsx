@@ -6,7 +6,8 @@ import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
-import { getKidsLesson } from "../modules/escola-brilha/data/kids-lessons-1ano";
+import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
+import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
 const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano"]);
@@ -50,6 +51,7 @@ class PlayerBoundary extends React.Component<
 
 function AulaDbPage() {
   const { aulaId } = Route.useParams();
+  const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
 
@@ -83,8 +85,14 @@ function AulaDbPage() {
 
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
-      const kids = getKidsLesson(aula.codigo_bncc);
-      if (kids) return <KidsLessonPlayer lesson={kids} currentRef={ref} />;
+      const kidsList = getKidsLessons(aula.codigo_bncc);
+      if (kidsList.length > 1 && levelIdx === null) {
+        return <LevelPicker lessons={kidsList} onPick={setLevelIdx} onBack={back} />;
+      }
+      if (kidsList.length > 0) {
+        const chosen = kidsList[levelIdx ?? 0];
+        return <KidsLessonPlayer lesson={chosen} currentRef={ref} />;
+      }
     }
 
     switch (aula.tipo_player) {
@@ -108,5 +116,58 @@ function AulaDbPage() {
       {renderPlayer()}
       <NextLessonCTA current={{ kind: "db", id: aulaId }} />
     </PlayerBoundary>
+  );
+}
+
+function LevelPicker({
+  lessons,
+  onPick,
+  onBack,
+}: {
+  lessons: KidsLesson[];
+  onPick: (idx: number) => void;
+  onBack: () => void;
+}) {
+  const palette: Record<string, string> = {
+    blue: "from-sky-500 to-indigo-600",
+    green: "from-emerald-500 to-teal-600",
+    violet: "from-violet-500 to-fuchsia-600",
+    amber: "from-amber-500 to-orange-600",
+    pink: "from-pink-500 to-rose-600",
+  };
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6">
+      <div className="max-w-3xl mx-auto">
+        <button
+          onClick={onBack}
+          className="mb-4 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-bold"
+        >
+          ← Voltar
+        </button>
+        <h1 className="text-3xl md:text-4xl font-black mb-2">Escolha a aula</h1>
+        <p className="text-white/70 mb-6">
+          Cada nível ensina um pedacinho. Faça na ordem para aprender melhor!
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {lessons.map((l, i) => (
+            <button
+              key={i}
+              onClick={() => onPick(i)}
+              className={`text-left p-5 rounded-2xl bg-gradient-to-br ${
+                palette[l.cor] ?? palette.blue
+              } shadow-lg hover:scale-[1.02] transition-transform`}
+            >
+              <div className="text-xs font-bold uppercase opacity-80">
+                Aula {i + 1}
+              </div>
+              <div className="text-xl font-black mt-1">{l.titulo}</div>
+              <div className="text-sm mt-2 opacity-90">
+                {l.scenes.length} telinhas • +{l.xp} XP
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
