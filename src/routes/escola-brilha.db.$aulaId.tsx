@@ -137,16 +137,16 @@ function LevelPicker({
     pink: "from-pink-500 to-rose-600",
   };
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-indigo-50 text-slate-900 p-6">
       <div className="max-w-3xl mx-auto">
         <button
           onClick={onBack}
-          className="mb-4 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-bold"
+          className="mb-4 px-4 py-2 rounded-xl bg-white shadow text-slate-800 hover:bg-slate-100 text-sm font-bold"
         >
           ← Voltar
         </button>
-        <h1 className="text-3xl md:text-4xl font-black mb-2">Escolha a aula</h1>
-        <p className="text-white/70 mb-6">
+        <h1 className="text-3xl md:text-4xl font-black mb-2 text-slate-900">Escolha a aula</h1>
+        <p className="text-slate-700 mb-6 font-semibold">
           Cada nível ensina um pedacinho. Faça na ordem para aprender melhor!
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -154,20 +154,20 @@ function LevelPicker({
             <button
               key={i}
               onClick={() => onPick(i)}
-              className={`text-left p-5 rounded-2xl bg-gradient-to-br ${
-                palette[l.cor] ?? palette.blue
-              } shadow-lg hover:scale-[1.02] transition-transform`}
+              className={`text-left p-5 rounded-2xl bg-white border-4 shadow-lg hover:scale-[1.02] transition-transform`}
+              style={{ borderColor: ({ blue: "#0ea5e9", green: "#10b981", violet: "#8b5cf6", amber: "#f59e0b", pink: "#ec4899" } as Record<string, string>)[l.cor] ?? "#0ea5e9" }}
             >
-              <div className="text-xs font-bold uppercase opacity-80">
+              <div className="text-xs font-black uppercase text-slate-500">
                 Aula {i + 1}
               </div>
-              <div className="text-xl font-black mt-1">{l.titulo}</div>
-              <div className="text-sm mt-2 opacity-90">
+              <div className="text-xl font-black mt-1 text-slate-900">{l.titulo}</div>
+              <div className="text-sm mt-2 text-slate-700 font-bold">
                 {l.scenes.length} telinhas • +{l.xp} XP
               </div>
             </button>
           ))}
         </div>
+
       </div>
     </div>
   );
