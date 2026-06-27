@@ -349,6 +349,7 @@ function ReforcoBrilha() {
         <div className="space-y-8 animate-in fade-in duration-500">
           <AssistenteGuiado
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+            onComecarAulaLivre={(tema) => startLesson(tema)}
             onBuscar={(q) => {
               setSearchQuery(q);
               runSearch(q);
