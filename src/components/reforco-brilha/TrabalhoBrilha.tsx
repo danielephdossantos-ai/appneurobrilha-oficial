@@ -854,6 +854,12 @@ function EditorTrabalho({
               <Quote className="h-3 w-3" /> Parágrafo
             </button>
             <button
+              onClick={addBlocoRico}
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white font-black px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
+              title="Editor de Texto (negrito, itálico, alinhamento, tamanho) — cole texto da Wikipédia aqui"
+            >
+              <Sparkles className="h-3 w-3" /> Texto Word
+            </button>
               onClick={addQuebra}
               className="bg-white border-2 border-amber-200 hover:bg-amber-50 text-amber-800 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1"
               title="Quebra de página — o que vier depois imprime na próxima página"
