@@ -63,10 +63,9 @@ function AulaIaPage() {
   if (!aula) {
     return (
       <div className="mx-auto max-w-xl p-6 space-y-4 text-center">
-        <h1 className="text-2xl font-bold">Aula IA · {bnccCode}</h1>
+        <h1 className="text-2xl font-bold">Nova aula</h1>
         <p className="text-muted-foreground">
-          Vamos pedir para o Professor Brilho preparar uma aula dinâmica para
-          esta habilidade BNCC.
+          Vamos pedir para o Professor Brilho preparar uma aula dinâmica para você.
         </p>
         <button
           onClick={() => carregar(false)}
@@ -89,7 +88,7 @@ function AulaIaPage() {
   return (
     <div>
       <div className="text-center text-xs text-muted-foreground pt-3">
-        {info} · BNCC {bnccCode}{" "}
+        {info}{" "}
         <button onClick={() => carregar(true)} className="underline ml-2">
           regenerar
         </button>
