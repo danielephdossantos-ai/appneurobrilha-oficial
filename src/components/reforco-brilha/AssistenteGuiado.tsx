@@ -53,9 +53,10 @@ interface Recomendacao {
 interface Props {
   onAbrirAula?: (id: string, titulo: string) => void;
   onBuscar?: (query: string) => void;
+  onComecarAulaLivre?: (tema: string) => void;
 }
 
-export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
+export function AssistenteGuiado({ onAbrirAula, onBuscar, onComecarAulaLivre }: Props) {
   const [step, setStep] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
   const [area, setArea] = useState<Area | null>(null);
   const [idade, setIdade] = useState<number | "">("");
@@ -435,7 +436,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
                 exemplo, pergunta, dica e correção.
               </p>
               <button
-                onClick={() => onBuscar?.(areaSel.label)}
+                onClick={() => (onComecarAulaLivre ? onComecarAulaLivre(areaSel.label) : onBuscar?.(areaSel.label))}
                 className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-sm font-black text-white hover:bg-violet-600"
               >
                 <PlayCircle className="h-4 w-4" />
