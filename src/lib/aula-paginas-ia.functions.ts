@@ -280,7 +280,7 @@ export const gerarPaginasAula = createServerFn({ method: "POST" })
         faixa_etaria: aula.faixa_etaria,
         habilidade: habilidadeNome,
         area: areaNome,
-      });
+      }).map(compactPagina);
       await admin.from("rb_paginas_aula").delete().eq("aula_id", data.aulaId);
       const rows = paginas.map((p, i) => ({
         aula_id: data.aulaId,
