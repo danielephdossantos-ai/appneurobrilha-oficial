@@ -343,9 +343,9 @@ const AulaDinamicaInputSchema = z.object({
 });
 
 const InteractiveItemSchema = z.object({
-  label: s(1, 40),
+  label: s(1, 80),
   termoBusca: s(2, 80),
-  explicacao: s(2, 240),
+  explicacao: s(2, 360),
 });
 
 export const AulaDinamicaSchema = z.object({
@@ -359,18 +359,18 @@ export const AulaDinamicaSchema = z.object({
     }),
     exploracao: z.object({
       titulo: s(2, 80),
-      texto: s(2, 600),
+      texto: s(2, 800),
       termoBusca: s(2, 80),
       interativos: z.array(InteractiveItemSchema).min(2).max(5),
     }),
     explicacao: z.object({
       titulo: s(2, 80),
-      paragrafos: z.array(s(2, 400)).min(2).max(6),
+      paragrafos: z.array(s(2, 600)).min(2).max(6),
       termoBusca: s(2, 80),
     }),
     passoAPasso: z.object({
       titulo: s(2, 80),
-      passos: z.array(s(2, 300)).min(2).max(8),
+      passos: z.array(s(2, 450)).min(2).max(8),
       termoBusca: s(2, 80),
     }),
     exemploAplicado: z.object({
