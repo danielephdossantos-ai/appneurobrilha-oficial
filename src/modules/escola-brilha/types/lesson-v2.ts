@@ -88,6 +88,20 @@ export interface DominioScreen {
   recommendation: string;
 }
 
+export interface TemplateStepMeta {
+  n: number;
+  label: string;
+  applied: boolean;
+  source: string;
+}
+
+export interface TemplateMeta {
+  slug: string;
+  name: string;
+  disciplina: string;
+  steps: TemplateStepMeta[];
+}
+
 export interface LessonV2 {
   id: string;
   title: string;
@@ -96,6 +110,7 @@ export interface LessonV2 {
   bnccCode: string;
   bnccObjective: string;
   xp: number;
+  templateMeta?: TemplateMeta;
   screens: {
     missao: MissaoScreen;
     exploracao: ExploracaoScreen;
@@ -108,6 +123,7 @@ export interface LessonV2 {
     dominio: DominioScreen;
   };
 }
+
 
 export const LESSON_V2_STEPS = [
   "missao",
