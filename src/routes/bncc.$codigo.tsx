@@ -62,31 +62,72 @@ function BnccCodigoPage() {
   const [meta, setMeta] = useState<BnccMeta | null>(null);
   const [conteudo, setConteudo] = useState<BnccConteudo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [gerando, setGerando] = useState<null | "tudo" | "explicacao" | "exercicios">(null);
+  const gerar = useServerFn(gerarConteudoBncc);
+
+  const carregar = async () => {
+    const [m, c] = await Promise.all([
+      supabase
+        .from("bncc_biblioteca")
+        .select("codigo,ano,componente,habilidade")
+        .eq("codigo", codigo)
+        .maybeSingle(),
+      supabase
+        .from("bncc_conteudo")
+        .select("*")
+        .eq("codigo", codigo)
+        .maybeSingle(),
+    ]);
+    setMeta((m.data as BnccMeta | null) ?? null);
+    setConteudo((c.data as BnccConteudo | null) ?? null);
+    return { meta: m.data as BnccMeta | null, conteudo: c.data as BnccConteudo | null };
+  };
+
+  const acionarIA = async (modo: "tudo" | "explicacao" | "exercicios") => {
+    setGerando(modo);
+    try {
+      const r = await gerar({
+        data: {
+          codigo,
+          force: modo === "tudo",
+          regenerarExplicacao: modo === "explicacao",
+          regenerarExercicios: modo === "exercicios",
+        },
+      });
+      if (!r.ok) {
+        toast.error(r.error || "Não consegui gerar a aula agora.");
+        return;
+      }
+      if (r.regenerated) {
+        toast.success("Aula completa pronta! ✨");
+        await carregar();
+      }
+    } finally {
+      setGerando(null);
+    }
+  };
 
   useEffect(() => {
     let active = true;
     (async () => {
       setLoading(true);
-      const [m, c] = await Promise.all([
-        supabase
-          .from("bncc_biblioteca")
-          .select("codigo,ano,componente,habilidade")
-          .eq("codigo", codigo)
-          .maybeSingle(),
-        supabase
-          .from("bncc_conteudo")
-          .select("*")
-          .eq("codigo", codigo)
-          .maybeSingle(),
-      ]);
+      const { meta: m, conteudo: c } = await carregar();
       if (!active) return;
-      setMeta((m.data as any) ?? null);
-      setConteudo((c.data as any) ?? null);
       setLoading(false);
+      // Auto-gera se ausente ou muito raso
+      const raso =
+        !c ||
+        (c.explicacao?.length ?? 0) < 120 ||
+        !Array.isArray(c.exercicios_faceis) ||
+        (c.exercicios_faceis as unknown[]).length < 2;
+      if (m && raso) {
+        await acionarIA("tudo");
+      }
     })();
     return () => {
       active = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codigo]);
 
   if (loading) {
