@@ -153,7 +153,7 @@ function AulaDbPage() {
   return (
     <PlayerBoundary onBack={back}>
       {renderPlayer()}
-      {!hasKidsLesson && <NextLessonCTA current={{ kind: "db", id: aulaId }} />}
+      {!hasInlineNext && <NextLessonCTA current={{ kind: "db", id: aulaId }} />}
     </PlayerBoundary>
   );
 }
