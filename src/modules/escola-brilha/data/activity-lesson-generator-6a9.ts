@@ -514,6 +514,90 @@ const MA_PACKS: Array<{ keys: string[]; pack: Pack }> = [
 // =================== PACOTES — LÍNGUA PORTUGUESA ===================
 const LP_PACKS: Array<{ keys: string[]; pack: Pack }> = [
   {
+    keys: [
+      "leitura",
+      "compreensão",
+      "compreensao",
+      "localizar",
+      "inferir",
+      "informação",
+      "informacao",
+      "avaliar o texto",
+      "propósito",
+      "proposito",
+    ],
+    pack: {
+      topic: "LEITURA COM PROPÓSITO",
+      highlight: "LER, PROVAR E CONCLUIR",
+      summary:
+        "Ler bem é encontrar pistas no texto: primeiro localizar o que está escrito, depois inferir o que ficou nas entrelinhas.",
+      emoji: "📖",
+      heroImage: IMG.livro,
+      heroCaption: "A leitura fica mais forte quando a resposta volta para o texto.",
+      pairs: [
+        { left: "Localizar", right: "Copiar a informação que aparece no texto" },
+        { left: "Inferir", right: "Juntar pistas para descobrir algo não dito diretamente" },
+        { left: "Relacionar", right: "Ligar começo, meio e fim para entender a ideia central" },
+        { left: "Avaliar", right: "Dar opinião usando uma prova retirada do texto" },
+      ],
+      shortText:
+        "Texto-base: Na segunda-feira, a turma encontrou a horta seca. Bia percebeu pegadas perto do canteiro e uma torneira pingando. No recreio, combinou com os colegas um rodízio de rega. Na sexta, as folhas estavam verdes outra vez.",
+      highlights: ["horta seca", "pegadas", "torneira pingando", "rodízio de rega", "folhas verdes"],
+      tip: "Antes de responder, marque uma pista do texto. Sem pista, a resposta vira chute.",
+      exampleTitle: "Como responder usando pistas",
+      exampleSentences: [
+        { text: "Pergunta de localizar: Quando a turma encontrou a horta seca? → Na segunda-feira." },
+        { text: "Pergunta de inferir: Por que a horta melhorou? → Porque a turma organizou um rodízio de rega." },
+        { text: "Pergunta de avaliar: A atitude de Bia foi importante? → Sim, porque ela observou o problema e mobilizou os colegas." },
+      ],
+      exampleImage: IMG.livro,
+      exampleConclusion:
+        "A resposta completa tem ideia + prova: a horta melhorou porque os alunos passaram a regar com organização.",
+      question: "No texto da horta, qual pista mostra uma possível causa do problema?",
+      options: [
+        { text: "A torneira estava pingando", isCorrect: true },
+        { text: "As folhas estavam verdes na sexta", isCorrect: false },
+        { text: "A turma estudava na escola", isCorrect: false },
+      ],
+    },
+  },
+  {
+    keys: ["parcialidade", "imparcialidade", "jornal", "jornalístico", "jornalistico", "notícia", "noticia", "relato de fatos", "proposta editorial"],
+    pack: {
+      topic: "LEITURA CRÍTICA DE NOTÍCIAS",
+      highlight: "FATO NÃO É OPINIÃO",
+      summary:
+        "Uma notícia pode informar o mesmo fato com escolhas diferentes de palavras, imagens e destaques. Essas escolhas mudam o efeito no leitor.",
+      emoji: "📰",
+      heroImage: IMG.livro,
+      heroCaption: "Comparar manchetes ajuda a perceber recortes e intenções.",
+      pairs: [
+        { left: "Fato", right: "Acontecimento verificável: algo que pode ser conferido" },
+        { left: "Opinião", right: "Julgamento: mostra o que alguém pensa sobre o fato" },
+        { left: "Recorte", right: "Parte escolhida para aparecer com mais destaque" },
+        { left: "Efeito de sentido", right: "Sensação que a palavra provoca no leitor" },
+      ],
+      shortText:
+        "Compare as manchetes: A) 'Alunos ocupam praça para cobrar limpeza'. B) 'Grupo causa tumulto em praça pública'. O fato pode ser o mesmo, mas as palavras criam leituras diferentes.",
+      highlights: ["ocupam", "cobrar limpeza", "causa tumulto", "praça pública"],
+      tip: "Pergunte: esta palavra informa ou tenta me fazer sentir algo?",
+      exampleTitle: "Comparando duas manchetes",
+      exampleSentences: [
+        { text: "Manchete A destaca reivindicação: 'cobrar limpeza'." },
+        { text: "Manchete B destaca conflito: 'causa tumulto'." },
+        { text: "Conclusão: a escolha das palavras muda a imagem dos alunos." },
+      ],
+      exampleConclusion:
+        "Leitura crítica é separar fato, escolha de linguagem e opinião antes de concluir.",
+      question: "Qual palavra deixa a manchete B mais negativa?",
+      options: [
+        { text: "Tumulto", isCorrect: true },
+        { text: "Praça", isCorrect: false },
+        { text: "Grupo", isCorrect: false },
+      ],
+    },
+  },
+  {
     keys: ["oração", "oracao", "sujeito", "predicado"],
     pack: {
       topic: "SUJEITO E PREDICADO",
@@ -937,19 +1021,61 @@ const PACKS_BY_SUBJECT: Record<SubjectKey, Array<{ keys: string[]; pack: Pack }>
   ER: ER_PACKS,
 };
 
-function pickPack(subject: SubjectKey, titulo: string): Pack | null {
-  const t = (titulo ?? "").toLowerCase();
+function pickPack(subject: SubjectKey, titulo: string, bnccObjective = ""): Pack | null {
+  const t = `${titulo ?? ""} ${bnccObjective ?? ""}`.toLowerCase();
   for (const entry of PACKS_BY_SUBJECT[subject]) {
     if (entry.keys.some((k) => t.includes(k))) return entry.pack;
   }
   return null;
 }
 
+function lpFallbackPack(titulo: string, grade: string, bnccObjective = ""): Pack {
+  const cleanTitle = titulo.replace(/\s*-\s*\d+º\s*Ano\s*$/i, "").trim() || "Leitura e produção de sentido";
+  const foco = bnccObjective || cleanTitle;
+
+  return {
+    topic: cleanTitle.toUpperCase().slice(0, 40),
+    highlight: "AULA COM TEXTO-BASE",
+    summary:
+      "Nesta aula você vai trabalhar com um texto curto, marcar pistas e responder com prova — não apenas decorar a habilidade.",
+    emoji: "📚",
+    heroImage: IMG.livro,
+    heroCaption: `Língua Portuguesa — ${grade}`,
+    pairs: [
+      { left: "Texto-base", right: "O bairro ganhou uma biblioteca comunitária em uma sala antiga da estação." },
+      { left: "Pista 1", right: "Moradores doaram livros e organizaram prateleiras por assunto." },
+      { left: "Pista 2", right: "Depois da abertura, mais crianças passaram a ler no fim da tarde." },
+      { left: "Ideia central", right: "Quando a comunidade participa, um espaço abandonado vira oportunidade de aprendizagem." },
+    ],
+    shortText:
+      `Texto-base: O bairro ganhou uma biblioteca comunitária em uma sala antiga da estação. Moradores doaram livros, limparam o espaço e organizaram prateleiras por assunto. Depois da abertura, mais crianças passaram a ler no fim da tarde. Foco da aula: ${foco}`,
+    highlights: ["biblioteca comunitária", "moradores doaram", "crianças passaram a ler"],
+    tip: "Resposta forte cita uma pista do texto e explica o que ela mostra.",
+    exampleTitle: "Modelo de resposta completa",
+    exampleSentences: [
+      { text: "Localizar: Onde surgiu a biblioteca? → Em uma sala antiga da estação." },
+      { text: "Inferir: Por que o projeto deu certo? → Porque os moradores participaram com doações e organização." },
+      { text: "Relacionar: O espaço mudou de função: antes sala antiga; depois lugar de leitura." },
+    ],
+    exampleImage: IMG.livro,
+    exampleConclusion:
+      "A resposta ensina porque junta texto + raciocínio: a comunidade transformou um espaço parado em aprendizagem.",
+    question: "Qual informação prova que a comunidade participou da biblioteca?",
+    options: [
+      { text: "Moradores doaram livros e organizaram prateleiras", isCorrect: true },
+      { text: "A estação era antiga", isCorrect: false },
+      { text: "As crianças liam no fim da tarde", isCorrect: false },
+    ],
+  };
+}
+
 // Fallback enxuto — mantém padrão visual + pergunta real, sem texto cansativo.
-function genericPack(subject: SubjectKey, titulo: string, grade: string): Pack {
+function genericPack(subject: SubjectKey, titulo: string, grade: string, bnccObjective = ""): Pack {
   const cleanTitle = titulo.replace(/\s*-\s*\d+º\s*Ano\s*$/i, "").trim();
   const subjectName = SUBJECT_NAME[subject];
   const emoji = SUBJECT_EMOJI[subject];
+
+  if (subject === "LP") return lpFallbackPack(cleanTitle, grade, bnccObjective);
 
   return {
     topic: cleanTitle.toUpperCase().slice(0, 40),
@@ -980,12 +1106,12 @@ function genericPack(subject: SubjectKey, titulo: string, grade: string): Pack {
   };
 }
 
-function buildLesson(code: string, titulo: string): ActivityLesson | null {
+function buildLesson(code: string, titulo: string, bnccObjective = ""): ActivityLesson | null {
   const subject = subjectFromCode(code);
   const grade = gradeFromCode(code);
   if (!subject || !grade) return null;
 
-  const pack = pickPack(subject, titulo) ?? genericPack(subject, titulo, grade);
+  const pack = pickPack(subject, titulo, bnccObjective) ?? genericPack(subject, titulo, grade, bnccObjective);
 
   const optionsWithColor = pack.options.map((o, i) => ({
     ...o,
@@ -1034,6 +1160,7 @@ function buildLesson(code: string, titulo: string): ActivityLesson | null {
 export function generateActivityLesson6a9(
   codigo: string,
   titulo: string,
+  bnccObjective = "",
 ): ActivityLesson | null {
-  return buildLesson(codigo, titulo);
+  return buildLesson(codigo, titulo, bnccObjective);
 }
