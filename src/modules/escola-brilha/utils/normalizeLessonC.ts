@@ -26,6 +26,7 @@ const COLOR_BY_AREA: Record<BNCCArea, ActivityLessonC["color"]> = {
  * nunca quebre caso o JSON salvo esteja incompleto.
  */
 export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
+  const isFirstYear = (aula.serie || "").includes("1º") || (aula.serie || "").includes("1°");
   const firstYearOverride = getFirstYearLessonOverride({
     codigo_bncc: aula.codigo_bncc,
     serie: aula.serie,
@@ -55,12 +56,30 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
   const screens = raw.screens ?? {};
   const missao = screens.missao ?? {};
   const desafio = screens.desafio ?? {};
+  const rawMissionQuestion = raw.mission_question || missao.intro || "";
+  const missionQuestion =
+    isFirstYear && /bncc|habilidade/i.test(rawMissionQuestion)
+      ? `Vamos aprender: ${title}`
+      : rawMissionQuestion || `Vamos aprender sobre ${title}!`;
+  const missionIntro =
+    isFirstYear && /bncc|habilidade/i.test(missao.intro || "")
+      ? "Aula guiada do 1º ano"
+      : missao.intro || `Missão: ${title}`;
+  const missionObjectives =
+    isFirstYear
+      ? [
+          "Ouvir a explicação com calma",
+          "Observar o exemplo com ajuda visual",
+          "Responder uma pergunta da aula",
+        ]
+      : missao.objectives && missao.objectives.length
+        ? missao.objectives
+        : [`Entender ${title}`, "Aplicar em situações reais", "Resolver o desafio final"];
 
   return {
     id: raw.id || aula.id,
     title,
-    mission_question:
-      raw.mission_question || missao.intro || `Vamos aprender sobre ${title}!`,
+    mission_question: missionQuestion,
     subject: raw.subject || aula.disciplina,
     area: raw.area || meta.area,
     area_label: raw.area_label || meta.area_label,
@@ -72,11 +91,8 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
     color,
     screens: {
       missao: {
-        intro: missao.intro || `Missão: ${title}`,
-        objectives:
-          missao.objectives && missao.objectives.length
-            ? missao.objectives
-            : [`Entender ${title}`, "Aplicar em situações reais", "Resolver o desafio final"],
+        intro: missionIntro,
+        objectives: missionObjectives,
         context_emoji: missao.context_emoji || "✨",
         context_text: missao.context_text || desc || `Vamos descobrir sobre ${title}.`,
       },
