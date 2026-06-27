@@ -86,6 +86,9 @@ function AulaDbPage() {
 
   const back = () => navigate({ to: "/escola-brilha" });
   const hasKidsLesson = KIDS_GRADES.has(aula.serie) && getKidsLessons(aula.codigo_bncc).length > 0;
+  // Players premium (Fund2, 3-5 ano, Kids) já têm botão "Próxima atividade" inline.
+  // Só mostramos o CTA flutuante para players legacy que não possuem.
+  const hasInlineNext = hasKidsLesson || AL_GRADES.has(aula.serie) || FUND2_GRADES.has(aula.serie);
 
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
