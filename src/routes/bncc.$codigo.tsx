@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2, Sparkles, RefreshCw, Youtube } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, RefreshCw, Film } from "lucide-react";
 import { gerarConteudoBncc } from "@/lib/bncc-conteudo-ia.functions";
 import { buscarVideoBncc } from "@/lib/bncc-video.functions";
 
