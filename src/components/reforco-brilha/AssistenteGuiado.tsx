@@ -67,6 +67,96 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
 
   const areaSel = AREAS.find((a) => a.id === area);
 
+  // ===== Conexão com a Anamnese =====
+  interface AnamneseInfo {
+    childId: string;
+    nome: string;
+    idade?: number;
+    serie?: string;
+    scores: PerfilScores;
+    risk: RiskMap;
+    sugestoes: { area: Area; motivo: string; nivel: keyof typeof RISK_COLOR }[];
+  }
+  const [anamnese, setAnamnese] = useState<AnamneseInfo | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: auth } = await supabase.auth.getUser();
+      const uid = auth?.user?.id;
+      if (!uid) return;
+      const { data } = await supabase
+        .from("anamnese_v2" as any)
+        .select("child_id, responses, scores, risk_levels, completed, updated_at")
+        .eq("user_id", uid)
+        .eq("completed", true)
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (cancelled || !data) return;
+      const row = data as any;
+      const scores = row.scores as PerfilScores;
+      const risk = row.risk_levels as RiskMap;
+      const step1 = row.responses?.step1 ?? {};
+      const idadeNum = typeof step1.idade === "number"
+        ? step1.idade
+        : (typeof step1.idade === "string" && /^\d+$/.test(step1.idade) ? parseInt(step1.idade, 10) : undefined);
+
+      // Mapeia áreas críticas → áreas do plano
+      const sugestoes: AnamneseInfo["sugestoes"] = [];
+      const order: (keyof PerfilScores)[] = ["escolar", "cognitivo", "comportamental", "socioemocional", "adaptativo"];
+      const mapping: Record<keyof PerfilScores, Area[]> = {
+        escolar: ["leitura", "escrita", "matematica"],
+        cognitivo: ["atencao", "memoria"],
+        comportamental: ["atencao"],
+        socioemocional: ["linguagem"],
+        adaptativo: ["coordenacao-motora"],
+      };
+      const seen = new Set<Area>();
+      for (const key of order) {
+        const lvl = risk?.[key];
+        if (lvl === "verde" || !lvl) continue;
+        for (const a of mapping[key]) {
+          if (seen.has(a)) continue;
+          seen.add(a);
+          sugestoes.push({
+            area: a,
+            motivo: `${PERFIL_LABEL[key]} — ${lvl}`,
+            nivel: lvl as keyof typeof RISK_COLOR,
+          });
+        }
+      }
+
+      setAnamnese({
+        childId: row.child_id,
+        nome: step1.nome ?? "Criança",
+        idade: idadeNum,
+        serie: step1.serie,
+        scores,
+        risk,
+        sugestoes,
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const aplicarSugestaoAnamnese = (a: Area) => {
+    setArea(a);
+    if (anamnese?.idade) setIdade(anamnese.idade);
+    if (anamnese?.serie) setSerie(anamnese.serie);
+    setTempo("meses");
+    setDescricaoDif(
+      `Plano sugerido pela anamnese de ${anamnese?.nome ?? "criança"}. Indicadores em atenção: ` +
+        (anamnese?.sugestoes.map((s) => s.motivo).join("; ") ?? ""),
+    );
+    setStep(5);
+    setTimeout(() => {
+      gerarRecomendacoes();
+    }, 0);
+  };
+
   const reset = () => {
     setStep(0);
     setArea(null);
