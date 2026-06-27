@@ -136,7 +136,7 @@ describe("ActivityPlayerC layout preservado", () => {
       "Exemplo",
       "Desafio",
     ].forEach((label) => {
-      expect(screen.getAllByText(label).length).toBeGreaterThan(0);
+      expect(screen.getByTitle(label)).toBeInTheDocument();
     });
   });
 
