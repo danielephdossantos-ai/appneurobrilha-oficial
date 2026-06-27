@@ -19,7 +19,10 @@ import { dirname } from "node:path";
 
 const SUPABASE_URL =
   process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+// Prioriza SERVICE_ROLE para CI (tabela aulas_bncc tem RLS só para
+// authenticated). Cai para anon/publishable se rodando local com login.
 const SUPABASE_KEY =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ??
   process.env.SUPABASE_PUBLISHABLE_KEY ??
   process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
   process.env.SUPABASE_ANON_KEY ??
