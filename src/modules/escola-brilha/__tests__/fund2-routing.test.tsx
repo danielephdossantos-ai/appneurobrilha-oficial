@@ -154,7 +154,7 @@ describe("Fund2Player layout (stepper + novo layout)", () => {
       />,
     );
     expect(screen.getByText(/BNCC · EF06CI04/)).toBeInTheDocument();
-    expect(screen.getByText(/XP/)).toBeInTheDocument();
+    expect(screen.getAllByText(/XP/).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Ouvir explicação")).toBeInTheDocument();
     expect(screen.getByLabelText("Menu")).toBeInTheDocument();
   });
