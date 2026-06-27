@@ -278,12 +278,35 @@ export function PlanoAutomatico({ area, onAbrirAula }: Props) {
                       ))}
                     </div>
                   )}
+                  <button
+                    onClick={() => setAulaAberta(s)}
+                    className="mt-2 w-full flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 text-xs font-bold"
+                  >
+                    <Wand2 className="h-3.5 w-3.5" />
+                    Aula interativa Brilha
+                  </button>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
+
+      {aulaAberta && (
+        <AulaInterativaIA
+          area={area}
+          semanaNumero={aulaAberta.numero}
+          semanaTema={aulaAberta.tema}
+          semanaDescricao={aulaAberta.descricao}
+          habilidadeNome={aulaAberta.habilidade_nome ?? undefined}
+          onClose={() => setAulaAberta(null)}
+          onConcluir={() => {
+            if (!plano?.semanas_concluidas.includes(aulaAberta.numero)) {
+              void concluirSemana(aulaAberta.numero);
+            }
+          }}
+        />
+      )}
     </Card>
   );
 }
