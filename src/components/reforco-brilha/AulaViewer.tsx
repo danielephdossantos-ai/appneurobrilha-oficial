@@ -144,7 +144,13 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
 
       {c.texto && (
         <p className="text-lg leading-relaxed text-foreground font-medium whitespace-pre-line">
-          {c.texto}
+          {String(c.texto)
+            // "1O resultado" -> "1. O resultado" (item de lista numerada sem ponto)
+            .replace(/(^|\n)\s*(\d{1,2})([A-ZÀ-ÚÇ])/g, "$1$2. $3")
+            // "1) texto" -> "1. texto"
+            .replace(/(^|\n)\s*(\d{1,2})\)\s*/g, "$1$2. ")
+            // garante quebra de linha antes de itens numerados colados no parágrafo
+            .replace(/([.!?])\s+(\d{1,2}\.\s)/g, "$1\n\n$2")}
         </p>
       )}
 
