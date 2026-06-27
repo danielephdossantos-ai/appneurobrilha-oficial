@@ -38,6 +38,7 @@ import { FloatingActivityControls } from "@/components/activities/FloatingActivi
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
+import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
