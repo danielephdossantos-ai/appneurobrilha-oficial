@@ -214,7 +214,7 @@ export function buildLessonV2(
   titulo: string,
   bnccObjective: string = "",
 ): LessonV2 | null {
-  const src = generateActivityLesson6a9(bnccCode, titulo);
+  const src = generateActivityLesson6a9(bnccCode, titulo, bnccObjective);
   if (!src) return null;
 
   const subject = subjectFromCode(bnccCode);
