@@ -1,5 +1,6 @@
 import type { KidsLesson, KidsScene } from "../types/kids-lesson";
 import { getKidsLessons2Ano } from "./kids-lessons-2ano";
+import { getKidsLessons12Ano } from "./kids-lessons-12ano";
 
 /**
  * Banco local de aulas Kids (1º Ano).
