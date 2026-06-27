@@ -915,8 +915,6 @@ Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
 // da criança direto do banco (children) e injeta hiperfoco.
 // ============================================================
 
-import { requireSupabaseAuth } from "@/database/supabase/auth-middleware";
-
 const TarefaInputSchema = z.object({
   titulo: z.string().trim().min(1).max(120),
   materia: z.string().trim().max(60).optional(),
