@@ -33,13 +33,15 @@ import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { analisarTrabalho } from "@/lib/groq-professor.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
+import { RichEditor, insertIntoActiveEditor } from "./RichEditor";
 
 
-type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra";
+type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra" | "rico";
 interface Bloco {
   id: string;
   tipo: BlocoTipo;
   texto?: string;
+  html?: string;
   url?: string;
   legenda?: string;
   // campos extras pra "capa"
@@ -423,6 +425,9 @@ function EditorTrabalho({
   function addBlocoParagrafo(texto = "Escreva aqui...") {
     setBlocos((b) => [...b, { id: uid(), tipo: "paragrafo", texto }]);
   }
+  function addBlocoRico() {
+    setBlocos((b) => [...b, { id: uid(), tipo: "rico", html: "<p>Escreva aqui com formatação...</p>" }]);
+  }
   function addBlocoImagem(url: string, legenda = "") {
     setBlocos((b) => [...b, { id: uid(), tipo: "imagem", url, legenda }]);
   }
@@ -468,10 +473,17 @@ function EditorTrabalho({
   }
 
   function addRecursoComoTexto(r: RecursoExterno) {
+    const texto = r.conteudo || r.descricao || "";
+    const html = `<h3>${r.titulo}</h3><p>${texto.replace(/\n+/g, "</p><p>")}</p>`;
+    if (insertIntoActiveEditor({ html })) {
+      addFonte(r);
+      toast.success("Inserido no editor");
+      return;
+    }
     setBlocos((b) => [
       ...b,
       { id: uid(), tipo: "titulo", texto: r.titulo },
-      { id: uid(), tipo: "paragrafo", texto: r.conteudo || r.descricao || "" },
+      { id: uid(), tipo: "paragrafo", texto },
     ]);
     addFonte(r);
     toast.success("Adicionado ao trabalho");
@@ -479,6 +491,11 @@ function EditorTrabalho({
   function addRecursoImagem(r: RecursoExterno) {
     if (!r.thumbnail) {
       toast.error("Este item não tem imagem");
+      return;
+    }
+    if (insertIntoActiveEditor({ imageUrl: r.thumbnail, text: r.titulo })) {
+      addFonte(r);
+      toast.success("Imagem inserida no editor");
       return;
     }
     addBlocoImagem(r.thumbnail, r.titulo);
@@ -614,6 +631,13 @@ function EditorTrabalho({
         }
         if (bloco.tipo === "paragrafo") {
           writeWrapped(bloco.texto || "", { size: 12, style: "normal", gap: 5 });
+          continue;
+        }
+        if (bloco.tipo === "rico") {
+          const tmp = document.createElement("div");
+          tmp.innerHTML = bloco.html || "";
+          const plain = tmp.innerText || tmp.textContent || "";
+          writeWrapped(plain, { size: 12, style: "normal", gap: 5 });
           continue;
         }
         if (bloco.tipo === "imagem") {
@@ -835,6 +859,13 @@ function EditorTrabalho({
               className="bg-white border-2 border-amber-200 hover:bg-amber-50 text-amber-800 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1"
             >
               <Quote className="h-3 w-3" /> Parágrafo
+            </button>
+            <button
+              onClick={addBlocoRico}
+              className="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white font-black px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
+              title="Editor de Texto (negrito, itálico, alinhamento, tamanho) — cole texto da Wikipédia aqui"
+            >
+              <Sparkles className="h-3 w-3" /> Texto Word
             </button>
             <button
               onClick={addQuebra}
@@ -1104,6 +1135,13 @@ function BlocoEditor({
           value={bloco.texto || ""}
           onChange={(v) => onChange({ texto: v })}
           placeholder="Escreva um parágrafo do seu trabalho..."
+        />
+      )}
+      {bloco.tipo === "rico" && (
+        <RichEditor
+          html={bloco.html || ""}
+          onChange={(html) => onChange({ html })}
+          placeholder="Escreva com formatação..."
         />
       )}
       {bloco.tipo === "imagem" && bloco.url && (
