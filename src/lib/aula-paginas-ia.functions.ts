@@ -69,6 +69,7 @@ REGRAS DE LINGUAGEM:
 - Português do Brasil. Sem markdown. Sem emojis dentro dos textos (os emojis do título já vêm no app).
  - ZERO frases vagas. Se o tema for "tabuada do 3", os exemplos são "3 x 1 = 3", "3 x 2 = 6"... Se for leitura, use palavras reais. Se for interpretação, use um mini-texto real de 3 linhas.
  - Toda resposta errada deve ter explicação pedagógica curta no campo "explicacao".
+ - REGRA DE TAMANHO (OBRIGATÓRIA): o campo "texto" de cada página tem NO MÁXIMO 2 FRASES CURTAS (até 140 caracteres cada). Nada de parágrafos. Bullets e passos com no máximo 90 caracteres cada. "destaque" com no máximo 100. Use frases muito objetivas e diretas.
 
 FORMATO (responda APENAS este JSON, sem markdown):
 {
