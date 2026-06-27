@@ -815,9 +815,80 @@ export const IluminismoVisual: React.FC = () => {
 };
 
 /* ════════════════════════════════════
+   VISUAL INFANTIL — 1º ANO (MA/CI)
+   ════════════════════════════════════ */
+const FIRST_YEAR_VISUALS: Record<string, { title: string; emoji: string; steps: string[] }> = {
+  EF01MA03: { title: "Compare os grupos", emoji: "🍎🍎🍎  🍎", steps: ["Olhe os dois grupos", "Faça pares", "Veja onde sobrou"] },
+  EF01MA04: { title: "Conte um por vez", emoji: "🌼🌼🌼🌼🌼", steps: ["Aponte", "Conte na ordem", "O último número é o total"] },
+  EF01MA05: { title: "Maior ou menor", emoji: "9  ➜  15", steps: ["Leia os números", "Veja qual vem depois", "Quem vem depois é maior"] },
+  EF01MA07: { title: "Dezena e unidade", emoji: "🔟 + 4", steps: ["Junte 10", "Conte as unidades", "Forme o número"] },
+  EF01MA09: { title: "Organize por regra", emoji: "🔴🔴  🔵🔵", steps: ["Escolha cor, forma ou tamanho", "Observe", "Agrupe os parecidos"] },
+  EF01MA10: { title: "Ache o padrão", emoji: "2  4  6  ?", steps: ["Veja o começo", "Descubra a regra", "Continue igual"] },
+  EF01MA11: { title: "Onde está?", emoji: "⬅️ 🙂 ➡️", steps: ["Use seu corpo", "Diga frente ou atrás", "Diga direita ou esquerda"] },
+  EF01MA12: { title: "Use referência", emoji: "📍 ➡️", steps: ["Escolha o ponto", "Olhe de lá", "Diga a posição"] },
+  EF01MA13: { title: "Sólidos", emoji: "⚽ 🎲 🥫", steps: ["Observe o objeto", "Veja a forma", "Nomeie o sólido"] },
+  EF01MA14: { title: "Figuras planas", emoji: "⭕ ◼️ 🔺", steps: ["Veja o contorno", "Conte os lados", "Diga o nome"] },
+  EF01MA15: { title: "Compare medidas", emoji: "📏 ⚖️", steps: ["Coloque lado a lado", "Compare tamanho ou peso", "Use a palavra certa"] },
+  EF01MA16: { title: "Ordem do dia", emoji: "🌅 ➜ 🍽️ ➜ 🌙", steps: ["Primeiro", "Depois", "Por último"] },
+  EF01MA17: { title: "Calendário", emoji: "📅 7", steps: ["Veja o dia", "Veja a semana", "Veja o mês"] },
+  EF01MA18: { title: "Data", emoji: "12 / 05 / 2026", steps: ["Dia", "Mês", "Ano"] },
+  EF01MA19: { title: "Dinheiro", emoji: "🪙 + 🪙 = 💵", steps: ["Veja o valor", "Junte", "Descubra o total"] },
+  EF01MA20: { title: "Chance", emoji: "✅ ❓ 🚫", steps: ["Certeza", "Talvez", "Impossível"] },
+  EF01MA21: { title: "Tabela", emoji: "🍎 5  |  🍌 2", steps: ["Leia o nome", "Leia a quantidade", "Compare"] },
+  EF01MA22: { title: "Pesquisa", emoji: "❓ ✋ 📊", steps: ["Pergunte", "Conte respostas", "Mostre o resultado"] },
+  EF01CI01: { title: "Materiais", emoji: "🪵 🥛 🧴", steps: ["Observe", "Diga do que é feito", "Use com cuidado"] },
+  EF01CI02: { title: "Corpo humano", emoji: "👀 👂 👃 🖐️", steps: ["Nomeie a parte", "Perceba a função", "Cuide do corpo"] },
+  EF01CI03: { title: "Higiene", emoji: "🧼 💧 🦷", steps: ["Lave as mãos", "Escove os dentes", "Proteja a saúde"] },
+  EF01CI04: { title: "Respeito", emoji: "🌈 🤝 💛", steps: ["Perceba diferenças", "Trate bem", "Acolha o colega"] },
+  EF01CI05: { title: "Períodos do dia", emoji: "🌅 ☀️ 🌙", steps: ["Manhã", "Tarde", "Noite"] },
+  EF01CI06: { title: "Dia e noite", emoji: "🌞 🔁 🌙", steps: ["Observe a luz", "Veja a rotina", "Descanse à noite"] },
+};
+
+const FirstYearVisualMap: React.FC<{ lessonId: string }> = ({ lessonId }) => {
+  const code = lessonId.toUpperCase();
+  const visual = FIRST_YEAR_VISUALS[code] ?? {
+    title: code.startsWith("EF01MA") ? "Aula de Matemática" : "Aula de Ciências",
+    emoji: code.startsWith("EF01MA") ? "🔢 ✨" : "🔎 🌱",
+    steps: ["Observe", "Pense com calma", "Responda com ajuda"],
+  };
+  const isMath = code.startsWith("EF01MA");
+  const tone = isMath
+    ? { bg: "from-blue-50 to-cyan-50", chip: "bg-blue-500", border: "border-blue-100", text: "text-blue-700" }
+    : { bg: "from-emerald-50 to-teal-50", chip: "bg-emerald-500", border: "border-emerald-100", text: "text-emerald-700" };
+
+  return (
+    <div className={`rounded-3xl border ${tone.border} bg-gradient-to-br ${tone.bg} p-4 shadow-sm space-y-4`}>
+      <div className="text-center">
+        <div className="text-5xl leading-none mb-2" aria-hidden="true">{visual.emoji}</div>
+        <p className={`font-black text-base ${tone.text}`}>{visual.title}</p>
+        <p className="text-slate-500 text-xs font-semibold mt-1">Mapa visual da aula</p>
+      </div>
+      <div className="grid gap-2">
+        {visual.steps.map((step, i) => (
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.12, type: "spring", stiffness: 180 }}
+            className="bg-white rounded-2xl border border-white/70 p-3 flex items-center gap-3"
+          >
+            <div className={`${tone.chip} w-8 h-8 rounded-xl flex items-center justify-center text-white font-black text-sm shrink-0`}>
+              {i + 1}
+            </div>
+            <p className="text-slate-700 font-bold text-sm leading-snug">{step}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════
    DISPATCHER — escolhe o visual certo
    ════════════════════════════════════ */
 export const LessonVisualMap: React.FC<{ lessonId: string }> = ({ lessonId }) => {
+  const code = lessonId.toUpperCase();
+  if (code.startsWith("EF01MA") || code.startsWith("EF01CI")) return <FirstYearVisualMap lessonId={code} />;
   if (lessonId.startsWith("biomas")) return <BiomasBrasilMap />;
   if (lessonId.startsWith("oceanos")) return <OceanosMap />;
   if (lessonId.startsWith("celulas")) return <CelulaDiagram />;
