@@ -554,7 +554,17 @@ function EditorTrabalho({
             className="text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
           >
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
+          <button
+            onClick={rodarAnalise}
+            disabled={analisando}
+            className="text-xs font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
+            title="A IA analisa seu trabalho e dá dicas pra melhorar"
+          >
+            {analisando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+            Análise da IA
           </button>
+
+
 
           <button
             onClick={exportarPDF}
