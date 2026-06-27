@@ -4,8 +4,12 @@ import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
+import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
+import { getKidsLesson } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
+
+const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano"]);
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,
@@ -76,6 +80,13 @@ function AulaDbPage() {
 
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
+
+    // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
+    if (KIDS_GRADES.has(aula.serie)) {
+      const kids = getKidsLesson(aula.codigo_bncc);
+      if (kids) return <KidsLessonPlayer lesson={kids} currentRef={ref} />;
+    }
+
     switch (aula.tipo_player) {
       case "early":
         return <EarlyChildhoodPlayer lesson={aula.payload} />;
