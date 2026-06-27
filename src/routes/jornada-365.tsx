@@ -140,6 +140,19 @@ function Jornada() {
     enabled: !!activeChild,
   });
 
+  // Redireciona automaticamente pra anamnese:
+  // - 1ª vez (anamnese ainda não preenchida)
+  // - A cada 2 meses (anamnese vencida)
+  const precisaAnamnese =
+    !!activeChild &&
+    (!activeChild.anamnese_completa || pei.anamneseVencida);
+
+  useEffect(() => {
+    if (precisaAnamnese && activeChild) {
+      navigate({ to: "/anamnese/$childId", params: { childId: activeChild.id }, replace: true });
+    }
+  }, [precisaAnamnese, activeChild?.id]);
+
   if (!activeChild)
     return (
       <Shell>
@@ -147,55 +160,17 @@ function Jornada() {
       </Shell>
     );
 
-  if (!activeChild.anamnese_completa) {
+  if (precisaAnamnese) {
     return (
       <Shell>
-        <div className="flex flex-col items-center text-center p-12 py-16 bg-gradient-to-b from-muted/50 to-background border-2 border-dashed border-border rounded-3xl">
-          <div className="h-20 w-20 rounded-full bg-warning/10 flex items-center justify-center mb-6">
-            <Lock className="h-10 w-10 text-warning" />
-          </div>
-          <h2 className="text-2xl font-extrabold mb-4">Vamos começar?</h2>
-          <p className="text-muted-foreground max-w-md mb-8">
-            Antes da jornada de <strong>{activeChild.nome}</strong> começar,
-            preencha algumas informações.
-          </p>
-          <Link
-            to="/anamnese/$childId"
-            params={{ childId: activeChild.id }}
-            className="btn-tap rounded-2xl bg-primary text-primary-foreground px-8 py-4 font-bold text-lg flex items-center gap-2 shadow-glow"
-          >
-            <ClipboardList className="h-5 w-5" /> Começar
-          </Link>
+        <div className="flex flex-col items-center justify-center p-20 text-center">
+          <Loader2 className="h-10 w-10 text-primary animate-spin mb-4" />
+          <p className="text-muted-foreground">Abrindo anamnese de {activeChild.nome}…</p>
         </div>
       </Shell>
     );
   }
 
-  if (pei.anamneseVencida && activeChild.anamnese_completa) {
-    return (
-      <Shell>
-        <div className="flex flex-col items-center text-center p-12 py-16 bg-gradient-to-b from-warning/10 to-background border-2 border-dashed border-warning rounded-3xl">
-          <div className="h-20 w-20 rounded-full bg-warning/20 flex items-center justify-center mb-6">
-            <ClipboardList className="h-10 w-10 text-warning" />
-          </div>
-          <h2 className="text-2xl font-extrabold mb-3">Hora de atualizar a anamnese</h2>
-          <p className="text-muted-foreground max-w-md mb-6">
-            Faz {pei.diasDesdeAnamnese} dias desde a última anamnese de{" "}
-            <strong>{activeChild.nome}</strong>. Pra continuar gerando
-            atividades novas e adaptadas, o pai precisa refazer a anamnese
-            (a cada 2 meses).
-          </p>
-          <Link
-            to="/anamnese/$childId"
-            params={{ childId: activeChild.id }}
-            className="btn-tap rounded-2xl bg-warning text-warning-foreground px-8 py-4 font-bold text-lg flex items-center gap-2 shadow-glow"
-          >
-            <ClipboardList className="h-5 w-5" /> Refazer anamnese
-          </Link>
-        </div>
-      </Shell>
-    );
-  }
 
   if (loadingJourney) {
     return (
