@@ -107,6 +107,7 @@ function Jornada() {
   const { activeChild } = useAppState();
   const { activeMascot } = useMascot();
   const { hiperfoco } = useHiperfoco();
+  const navigate = useNavigate();
   const world = mapHiperfocoToWorld(hiperfoco?.label);
   const theme = WORLD_THEME[world];
 
