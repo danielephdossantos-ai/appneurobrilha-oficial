@@ -561,3 +561,269 @@ Gere a aula JSON completa.`;
       };
     }
   });
+
+// ============================================================
+// LESSON V2 GROQ — Fund2Player (6º–9º ano)
+// Gera aula no formato LessonV2 e cacheia em
+// public.pedagogical_lessons_cache (RPC chamada pelo prefetch
+// de pedagogical-library).
+// ============================================================
+
+const DISCIPLINES_V2 = [
+  "Língua Portuguesa",
+  "Matemática",
+  "Ciências",
+  "História",
+  "Geografia",
+  "Arte",
+  "Língua Inglesa",
+  "Ensino Religioso",
+  "Educação Física",
+] as const;
+
+function normalizeDiscipline(input?: string | null): (typeof DISCIPLINES_V2)[number] {
+  const s = (input ?? "").toLowerCase();
+  if (s.includes("portug")) return "Língua Portuguesa";
+  if (s.includes("matem")) return "Matemática";
+  if (s.includes("ciênc") || s.includes("cienc")) return "Ciências";
+  if (s.includes("hist")) return "História";
+  if (s.includes("geog")) return "Geografia";
+  if (s.includes("ingl")) return "Língua Inglesa";
+  if (s.includes("relig")) return "Ensino Religioso";
+  if (s.includes("fís") || s.includes("fisica")) return "Educação Física";
+  if (s.includes("arte")) return "Arte";
+  return "Língua Portuguesa";
+}
+
+const LessonV2InputSchema = z.object({
+  bnccCode: z.string().trim().min(3).max(20),
+  titulo: z.string().trim().min(2).max(160),
+  bnccObjective: z.string().max(1200).optional(),
+  serie: z.string().max(40).optional(),
+  disciplina: z.string().max(60).optional(),
+  idade: z.number().int().min(8).max(18).optional(),
+  force: z.boolean().optional(),
+});
+
+function mapAulaToLessonV2(
+  aula: Aula,
+  args: {
+    bnccCode: string;
+    titulo: string;
+    bnccObjective: string;
+    serie: string;
+    disciplina: (typeof DISCIPLINES_V2)[number];
+  },
+): Record<string, unknown> {
+  const t = aula.telas;
+  const letterToIdx: Record<"A" | "B" | "C", number> = { A: 0, B: 1, C: 2 };
+  const correctIdx = letterToIdx[t.desafio.respostaCorreta];
+  const stripPrefix = (s: string) => s.replace(/^[A-C]\)\s*/i, "").trim();
+  const desafioOptions = t.desafio.opcoes.map((opt, i) => ({
+    text: stripPrefix(opt),
+    isCorrect: i === correctIdx,
+    reason:
+      i === correctIdx
+        ? t.desafio.explicacaoResposta
+        : "Reveja o passo a passo e tente identificar o que está diferente nesta opção.",
+  }));
+
+  const passoAPasso = t.passoAPasso.passos.map((step, i) => ({
+    step: `Passo ${i + 1}`,
+    detail: step,
+  }));
+
+  return {
+    id: `groq:${args.bnccCode}`,
+    title: aula.titulo || args.titulo,
+    discipline: args.disciplina,
+    grade: args.serie,
+    bnccCode: args.bnccCode,
+    bnccObjective: args.bnccObjective,
+    xp: 30,
+    templateMeta: {
+      slug: "groq-llama-3.3-70b",
+      name: "Professor Brilho (IA)",
+      disciplina: args.disciplina,
+      steps: [
+        { n: 1, label: "Missão", applied: true, source: "groq" },
+        { n: 2, label: "Exploração", applied: true, source: "groq" },
+        { n: 3, label: "Explicação", applied: true, source: "groq" },
+        { n: 4, label: "Exemplo", applied: true, source: "groq" },
+        { n: 5, label: "Prática Guiada", applied: true, source: "groq" },
+        { n: 6, label: "Atividade", applied: true, source: "groq" },
+        { n: 7, label: "Desafio", applied: true, source: "groq" },
+        { n: 8, label: "Resumo", applied: true, source: "groq" },
+        { n: 9, label: "Domínio", applied: true, source: "groq" },
+      ],
+    },
+    screens: {
+      missao: {
+        studentObjective: t.missao.texto,
+        contextEmoji: "🎯",
+        contextLine: aula.metafora,
+        whatYouWillDo: t.passoAPasso.passos.slice(0, 3),
+      },
+      exploracao: {
+        provokingQuestion: t.exploracao.titulo,
+        observation: t.exploracao.texto,
+        pairs: [],
+        caption: t.exploracao.imagemSugestao,
+      },
+      explicacao: {
+        conceito: t.explicacao.paragrafos[0] ?? aula.metafora,
+        passoAPasso,
+        exemplo: t.exemploAplicado.enunciado,
+        aplicacao: t.exemploAplicado.resolucao.join(" "),
+        resumo: t.revisao.pontosChave.join(" • "),
+      },
+      exemplo: {
+        question: t.exemploAplicado.enunciado,
+        resolution: t.exemploAplicado.resolucao.map((line) => ({ line })),
+        answer: t.exemploAplicado.resolucao[t.exemploAplicado.resolucao.length - 1] ?? "",
+        why: aula.metafora,
+      },
+      guiada: {
+        prompt: t.atividadeGuiada.pergunta,
+        hint: t.atividadeGuiada.dica,
+        options: desafioOptions,
+      },
+      atividade: {
+        items: [
+          {
+            question: t.desafio.enunciado,
+            options: desafioOptions,
+          },
+        ],
+      },
+      desafio: {
+        contextualScenario: t.exemploAplicado.enunciado,
+        question: t.desafio.enunciado,
+        options: desafioOptions,
+      },
+      resumo: {
+        format: "list",
+        title: t.revisao.titulo,
+        nodes: t.revisao.pontosChave.map((p) => ({ label: p })),
+        takeaways: t.revisao.pontosChave,
+      },
+      dominio: {
+        bnccCode: args.bnccCode,
+        bnccObjective: args.bnccObjective || `Habilidade ${args.bnccCode}.`,
+        recommendation: t.conclusao.mensagemFinal,
+      },
+    },
+  };
+}
+
+export const gerarLessonV2Groq = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => LessonV2InputSchema.parse(input))
+  .handler(async ({ data }) => {
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+
+    // 1) Cache lookup
+    if (!data.force) {
+      const { data: cached } = await supabaseAdmin
+        .from("pedagogical_lessons_cache")
+        .select("lesson")
+        .eq("bncc_code", data.bnccCode)
+        .order("version", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (cached?.lesson) {
+        return { ok: true as const, cached: true, lessonJson: JSON.stringify(cached.lesson), error: null };
+      }
+    }
+
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, cached: false, error: "GROQ_API_KEY ausente", lessonJson: null };
+    }
+
+    const disciplina = normalizeDiscipline(data.disciplina);
+    const idade = data.idade ?? 12;
+    const descricao = data.bnccObjective?.trim() || `Habilidade ${data.bnccCode}.`;
+
+    const userPrompt = `Código BNCC: ${data.bnccCode}
+Descrição da Habilidade: ${descricao}
+Idade do Aluno: ${idade} anos${data.serie ? `\nSérie: ${data.serie}` : ""}\nDisciplina: ${disciplina}\nTítulo: ${data.titulo}
+
+Gere a aula completa em JSON conforme o schema definido.`;
+
+    try {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            { role: "system", content: AULA_SYSTEM_PROMPT },
+            { role: "user", content: userPrompt },
+          ],
+          temperature: 0.7,
+          max_tokens: 2800,
+          top_p: 0.9,
+          response_format: { type: "json_object" },
+        }),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:lessonV2] HTTP", res.status, errText.slice(0, 400));
+        return {
+          ok: false as const,
+          cached: false,
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          lessonJson: null,
+        };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
+      if (!raw) {
+        return { ok: false as const, cached: false, error: "Resposta vazia", lessonJson: null };
+      }
+
+      const aula = parseAndValidateAula(raw);
+      const lesson = mapAulaToLessonV2(aula, {
+        bnccCode: data.bnccCode,
+        titulo: data.titulo,
+        bnccObjective: descricao,
+        serie: data.serie ?? "",
+        disciplina,
+      });
+
+      const { error: upErr } = await supabaseAdmin
+        .from("pedagogical_lessons_cache")
+        .upsert(
+          {
+            bncc_code: data.bnccCode,
+            lesson: lesson as unknown as Record<string, unknown>,
+            template_id: null,
+            version: 1,
+          },
+          { onConflict: "bncc_code" },
+        );
+      if (upErr) console.error("[groq:lessonV2] upsert", upErr.message);
+
+      return { ok: true as const, cached: false, lessonJson: JSON.stringify(lesson), error: null };
+    } catch (e) {
+      console.error("[groq:lessonV2]", e);
+      return {
+        ok: false as const,
+        cached: false,
+        error: e instanceof Error ? e.message : "Falha ao gerar aula",
+        lessonJson: null,
+      };
+    }
+  });

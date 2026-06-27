@@ -14,7 +14,23 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { buildLessonV2 } from "./lesson-builder-v2";
+import { gerarLessonV2Groq } from "@/lib/groq-professor.functions";
 import type { LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
+
+const FUND2_SERIES = new Set([
+  "6º Ano",
+  "7º Ano",
+  "8º Ano",
+  "9º Ano",
+  "6º ao 7º Ano",
+  "8º ao 9º Ano",
+  "6º ao 9º Ano",
+]);
+
+export interface LessonV2Hints {
+  serie?: string;
+  disciplina?: string;
+}
 
 // ----------------------------- caches separados ----------------------------
 
@@ -236,6 +252,7 @@ export async function prefetchLessonV2(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
+  hints: LessonV2Hints = {},
 ): Promise<LessonV2 | null> {
   const key = cacheKey(bnccCode, titulo);
   if (templateCache.has(key)) return templateCache.get(key)!;
@@ -245,7 +262,7 @@ export async function prefetchLessonV2(
 
   const work = (async () => {
     try {
-      // 1) Cache versionado no Supabase (lesson já montada).
+      // 1) Cache versionado no Supabase (lesson já montada, inclusive Groq).
       const { data: cached } = await supabase
         .from("pedagogical_lessons_cache")
         .select("lesson, version")
@@ -289,6 +306,33 @@ export async function prefetchLessonV2(
           return lesson;
         }
       }
+
+      // 3) 6º–9º Ano: gera com Groq (llama-3.3-70b) e grava em
+      //    pedagogical_lessons_cache para não regenerar de graça.
+      if (hints.serie && FUND2_SERIES.has(hints.serie)) {
+        try {
+          const res = await gerarLessonV2Groq({
+            data: {
+              bnccCode,
+              titulo,
+              bnccObjective,
+              serie: hints.serie,
+              disciplina: hints.disciplina,
+            },
+          });
+          if (res?.ok && res.lessonJson) {
+            const lesson = JSON.parse(res.lessonJson) as LessonV2;
+            templateCache.set(key, lesson);
+            emit();
+            return lesson;
+          }
+          if (res && !res.ok) {
+            console.warn("[pedagogical-library] Groq fallback:", res.error);
+          }
+        } catch (err) {
+          console.warn("[pedagogical-library] Groq call failed:", err);
+        }
+      }
     } catch (err) {
       console.warn("[pedagogical-library] prefetch failed:", err);
     }
@@ -309,17 +353,20 @@ export function useLessonV2(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
+  hints: LessonV2Hints = {},
 ): LessonV2 | null {
   const [, force] = useState(0);
+  const hintsKey = `${hints.serie ?? ""}::${hints.disciplina ?? ""}`;
 
   useEffect(() => {
     const sub = () => force((n) => n + 1);
     listeners.add(sub);
-    void prefetchLessonV2(bnccCode, titulo, bnccObjective);
+    void prefetchLessonV2(bnccCode, titulo, bnccObjective, hints);
     return () => {
       listeners.delete(sub);
     };
-  }, [bnccCode, titulo, bnccObjective]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bnccCode, titulo, bnccObjective, hintsKey]);
 
   return resolveLessonV2Sync(bnccCode, titulo, bnccObjective);
 }
