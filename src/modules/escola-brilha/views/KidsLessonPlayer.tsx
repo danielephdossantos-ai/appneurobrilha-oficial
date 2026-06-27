@@ -140,7 +140,10 @@ const SceneView: React.FC<{
   accent: (typeof COLORS)[keyof typeof COLORS];
   lesson: KidsLesson;
 }> = ({ scene, accent, lesson }) => {
-  const coachMascot = lesson.scenes.find((s) => s.kind === "intro")?.mascot ?? "pip";
+  const introScene = lesson.scenes.find(
+    (s): s is Extract<KidsScene, { kind: "intro" }> => s.kind === "intro",
+  );
+  const coachMascot = introScene?.mascot ?? "pip";
   switch (scene.kind) {
     case "intro":
       return <IntroScene scene={scene} accent={accent} />;
