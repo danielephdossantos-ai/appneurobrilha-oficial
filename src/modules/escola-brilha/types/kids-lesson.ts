@@ -52,6 +52,31 @@ export type KidsScene =
       b: number;
       fala: string;
     }
+  /** Mostra A objetos, e B deles "saem voando" (subtração visual). */
+  | {
+      kind: "step_subtract";
+      titulo: string;
+      a: number;
+      b: number;
+      objeto: string;
+      fala: string;
+    }
+  /** Escreve a conta de subtração na vertical. */
+  | {
+      kind: "step_vertical_sub";
+      titulo: string;
+      a: number;
+      b: number;
+      fala: string;
+    }
+  /** Mostra duas quantidades iguais com o sinal de igual. */
+  | {
+      kind: "step_equal";
+      titulo: string;
+      n: number;
+      objeto: string;
+      fala: string;
+    }
   /** "Vamos praticar" — criança toca os itens, app conta junto. Sem errar. */
   | {
       kind: "practice_count";

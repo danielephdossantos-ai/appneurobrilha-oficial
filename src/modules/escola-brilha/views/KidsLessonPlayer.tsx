@@ -152,6 +152,12 @@ const SceneView: React.FC<{
       return <StepJoinScene scene={scene} accent={accent} />;
     case "step_vertical_sum":
       return <StepVerticalSumScene scene={scene} accent={accent} />;
+    case "step_subtract":
+      return <StepSubtractScene scene={scene} accent={accent} />;
+    case "step_vertical_sub":
+      return <StepVerticalSubScene scene={scene} accent={accent} />;
+    case "step_equal":
+      return <StepEqualScene scene={scene} accent={accent} />;
     case "practice_count":
       return <PracticeCountScene scene={scene} accent={accent} />;
     case "summary":
@@ -441,6 +447,138 @@ const SummaryScene: React.FC<{
     </div>
   </div>
 );
+
+/* ── Subtração visual: A maçãs, B saem voando ── */
+const StepSubtractScene: React.FC<{
+  scene: Extract<KidsScene, { kind: "step_subtract" }>;
+  accent: any;
+}> = ({ scene, accent }) => {
+  const [removed, setRemoved] = useState(0);
+  useEffect(() => {
+    setRemoved(0);
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setRemoved(i);
+      if (i >= scene.b) clearInterval(id);
+    }, 700);
+    return () => clearInterval(id);
+  }, [scene.a, scene.b]);
+
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center gap-4">
+      <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
+      <div className={`${accent.soft} rounded-3xl p-5 w-full max-w-xl`}>
+        <div className="flex flex-wrap justify-center gap-2 min-h-[5rem]">
+          {Array.from({ length: scene.a }).map((_, i) => {
+            const gone = i >= scene.a - removed;
+            return (
+              <motion.span
+                key={i}
+                initial={{ scale: 1, opacity: 1 }}
+                animate={
+                  gone
+                    ? { y: -120, x: 80, opacity: 0, rotate: 90, scale: 0.5 }
+                    : { y: 0, x: 0, opacity: 1, scale: 1 }
+                }
+                transition={{ duration: 0.6 }}
+                style={{ fontSize: "3rem" }}
+              >
+                {scene.objeto}
+              </motion.span>
+            );
+          })}
+        </div>
+        <div className="flex items-center justify-center gap-3 mt-3">
+          <span className="text-4xl font-black text-slate-700">{scene.a}</span>
+          <span className="text-4xl font-black text-rose-500">−</span>
+          <span className="text-4xl font-black text-slate-700">{scene.b}</span>
+          <span className="text-4xl font-black text-slate-400">=</span>
+          <span className={`text-5xl font-black ${accent.text}`}>{scene.a - scene.b}</span>
+        </div>
+      </div>
+      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+    </div>
+  );
+};
+
+/* ── Subtração na vertical ── */
+const StepVerticalSubScene: React.FC<{
+  scene: Extract<KidsScene, { kind: "step_vertical_sub" }>;
+  accent: any;
+}> = ({ scene, accent }) => {
+  const total = scene.a - scene.b;
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center gap-5">
+      <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
+      <div className={`${accent.soft} rounded-3xl p-8 flex flex-col items-end font-mono`}>
+        <motion.span initial={{ x: 30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="text-7xl font-black text-slate-800">
+          {scene.a}
+        </motion.span>
+        <motion.div
+          initial={{ x: 30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="flex items-center gap-4"
+        >
+          <span className="text-5xl font-black text-rose-500">−</span>
+          <span className="text-7xl font-black text-slate-800">{scene.b}</span>
+        </motion.div>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 1.2 }}
+          className="h-1.5 bg-slate-800 w-full my-2 origin-left rounded"
+        />
+        <motion.span
+          initial={{ scale: 0 }}
+          animate={{ scale: [0, 1.4, 1] }}
+          transition={{ delay: 1.6 }}
+          className={`text-7xl font-black ${accent.text}`}
+        >
+          {total}
+        </motion.span>
+      </div>
+      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+    </div>
+  );
+};
+
+/* ── Sinal de igual: duas quantidades iguais ── */
+const StepEqualScene: React.FC<{
+  scene: Extract<KidsScene, { kind: "step_equal" }>;
+  accent: any;
+}> = ({ scene, accent }) => (
+  <div className="flex-1 flex flex-col items-center justify-center gap-4">
+    <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
+    <div className="flex items-center gap-4 flex-wrap justify-center">
+      <div className={`${accent.soft} rounded-2xl p-4 flex flex-wrap gap-1 justify-center max-w-[10rem]`}>
+        {Array.from({ length: scene.n }).map((_, i) => (
+          <span key={i} style={{ fontSize: "2rem" }}>
+            {scene.objeto}
+          </span>
+        ))}
+      </div>
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: [0, 1.4, 1] }}
+        className="text-6xl font-black text-amber-500"
+      >
+        =
+      </motion.span>
+      <div className={`${accent.soft} rounded-2xl p-4 flex flex-wrap gap-1 justify-center max-w-[10rem]`}>
+        {Array.from({ length: scene.n }).map((_, i) => (
+          <span key={i} style={{ fontSize: "2rem" }}>
+            {scene.objeto}
+          </span>
+        ))}
+      </div>
+    </div>
+    <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+  </div>
+);
+
+
 
 const CelebrateScene: React.FC<{
   scene: Extract<KidsScene, { kind: "celebrate" }>;
