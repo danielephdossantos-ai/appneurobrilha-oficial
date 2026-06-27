@@ -227,7 +227,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+    if (!apiKey) return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
 
     try {
       const subject = subjectFromCode(data.bnccCode);
