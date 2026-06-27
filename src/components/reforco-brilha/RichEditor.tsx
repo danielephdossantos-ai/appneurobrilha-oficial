@@ -67,8 +67,22 @@ export function RichEditor({ html, onChange, placeholder }: Props) {
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm max-w-none min-h-[140px] px-3 py-2 focus:outline-none [&_p]:my-1 [&_img]:max-h-72 [&_img]:mx-auto [&_img]:rounded",
+          "prose prose-sm max-w-none min-h-[160px] px-3 py-2 focus:outline-none text-base [&_p]:my-1 [&_img]:max-h-72 [&_img]:mx-auto [&_img]:rounded",
         contenteditable: "true",
+        autocorrect: "on",
+        autocapitalize: "sentences",
+        spellcheck: "true",
+        inputmode: "text",
+        enterkeyhint: "enter",
+        style: "font-size:16px; -webkit-user-select:text; user-select:text; touch-action:manipulation; -webkit-touch-callout:default;",
+      },
+      handleDOMEvents: {
+        // Em mobile, alguns wrappers comem o touchstart antes do ProseMirror focar.
+        touchend: (view) => {
+          if (!view.hasFocus()) view.focus();
+          activeEditor = view.state ? (editor as any) : activeEditor;
+          return false;
+        },
       },
     },
   });
