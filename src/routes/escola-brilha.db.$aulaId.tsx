@@ -7,10 +7,12 @@ import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC"
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
+import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
-const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "3º Ano", "1º ao 2º Ano"]);
+const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "1º ao 2º Ano"]);
+const AL_GRADES = new Set(["3º Ano", "4º Ano", "5º Ano"]);
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,
