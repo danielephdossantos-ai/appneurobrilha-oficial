@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { gerarPaginasAula } from "@/lib/aula-paginas-ia.functions";
+import { toast } from "sonner";
 import {
   X,
   ChevronLeft,
@@ -14,6 +17,8 @@ import {
   CheckCircle2,
   ArrowRight,
   Volume2,
+  Sparkles,
+  Loader2,
 } from "lucide-react";
 
 export interface AulaViewerProps {
