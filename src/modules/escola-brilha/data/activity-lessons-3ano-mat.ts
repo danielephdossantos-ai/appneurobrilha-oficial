@@ -891,17 +891,18 @@ LESSONS_3ANO_MAT.EF03MA58 = LESSONS_3ANO_MAT.EF03MA24; // Dinheiro
 LESSONS_3ANO_MAT.EF03MA59 = LESSONS_3ANO_MAT.EF03MA03; // Tabuada
 
 import { LESSONS_3ANO_LP } from "./activity-lessons-3ano-lp";
-import { generateActivityLesson3a5 } from "./activity-lesson-generator-3a5";
 
+/**
+ * Busca uma aula 3º–5º Ano APENAS no conteúdo já armazenado.
+ * Sem geração dinâmica: se o código não existir, devolve null e a UI
+ * decide o fallback (ex.: aviso "em manutenção").
+ */
 export function getActivityLesson3a5(
   codigo: string,
-  titulo?: string,
+  _titulo?: string,
 ): ActivityLesson | null {
-  return (
-    LESSONS_3ANO_MAT[codigo] ??
-    LESSONS_3ANO_LP[codigo] ??
-    generateActivityLesson3a5(codigo, titulo ?? codigo)
-  );
+  return LESSONS_3ANO_MAT[codigo] ?? LESSONS_3ANO_LP[codigo] ?? null;
 }
+
 
 
