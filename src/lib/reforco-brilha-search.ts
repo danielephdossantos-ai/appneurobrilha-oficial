@@ -176,6 +176,26 @@ function scoreHabilidade(h: RBHabilidade, tokens: string[], rawQuery: string): {
   // query inteira aparece no nome
   if (queryN.length >= 3 && nomeN.includes(queryN)) score += 20;
 
+  // NÚMEROS: quando a query traz um número (ex: "tabuada do 10"),
+  // o candidato cujo NOME contém esse número vence; nomes com número
+  // diferente são fortemente penalizados.
+  const queryNums: string[] = queryN.match(/\b\d+\b/g) || [];
+  const nomeNums: string[] = nomeN.match(/\b\d+\b/g) || [];
+
+  if (queryNums.length > 0) {
+    const hit = queryNums.some((n) => nomeNums.includes(n));
+    if (hit) {
+      score += 100;
+      for (const n of queryNums) {
+        if (nomeNums.includes(n) && !matches.includes(n)) matches.push(n);
+      }
+    } else if (nomeNums.length > 0) {
+      score -= 60;
+    }
+  }
+
+
+
   for (const t of tokens) {
     if (nomeN.includes(t)) {
       score += 8;
