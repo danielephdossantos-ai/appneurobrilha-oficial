@@ -73,8 +73,14 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
   const topic = data.topic.trim();
   const lower = topic.toLowerCase();
   const isMath = /matem|conta|soma|subtra|multiplica|divis|fraç|frac|tabuada|número|numero|problema/.test(lower);
-  const isPort = /port|leitura|texto|frase|palavra|sílaba|silaba|verbo|ortografia|escrita|interpreta/.test(lower);
-  const category = isMath ? "Matemática" : isPort ? "Português" : "Geral";
+  const isPort = /port|leitura|texto|frase|palavra|sílaba|silaba|verbo|ortografia|escrita|interpreta|letra|alfabeto/.test(lower);
+  const isMotor = /caligraf|coordena|motora|lápis|lapis|ileg[ií]vel|copiar|quadro|visomotora|preensão|preensao/.test(lower);
+  const isAlfa = /alfabeto|letra|s[ií]laba|silaba|b\/d|p\/q|troca|espelhamento|decodifica|junta/.test(lower);
+  const isAttention = /aten[çc][aã]o|concentra|foco/.test(lower);
+  const isMemory = /mem[oó]ria|memoriza|trabalho/.test(lower);
+  const isExecutive = /organiza|planejamento|sequenciamento|tempo|ritmo|execu/.test(lower);
+  const isEmotion = /frustra|emo[cç][aã]o|toler[aâ]ncia|autorregula/.test(lower);
+  const category = isMath ? "Matemática" : isMotor ? "Coordenação" : isPort ? "Português" : isAttention ? "Atenção" : isMemory ? "Memória" : isExecutive ? "Funções executivas" : isEmotion ? "Regulação emocional" : "Geral";
 
   if (isMath) {
     const n = Number(topic.match(/\d+/)?.[0] ?? 6);
@@ -114,6 +120,72 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
     };
   }
 
+  if (isMotor) {
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category,
+      explanation: `Hoje você vai treinar ${topic} com postura, traçado, cópia curta e conferência visual, sem ficar só ouvindo conselho.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: "Para escrever melhor, o corpo precisa ajudar: pés apoiados, folha parada, lápis seguro sem apertar demais e olhos acompanhando a linha." },
+          { type: "example", text: "Treino real: escreva a sequência l, i, t, u. Todas começam com traço para baixo. O objetivo é manter tamanho parecido, não correr." },
+          { type: "exercise", text: "Escolha o primeiro cuidado antes de copiar.", content: { question: "Antes de copiar do quadro, o que ajuda mais?", options: ["olhar a palavra inteira", "copiar uma letra e esquecer", "apertar o lápis com força"], answer: "olhar a palavra inteira", explanation: "Olhar a palavra inteira evita perder letras e melhora a organização no caderno." } },
+          { type: "example", text: "Modelo de cópia: leia 'casa', diga as letras c-a-s-a, escreva, depois confira se não pulou nenhuma." },
+          { type: "tip", text: "Faça uma pausa de 5 segundos entre uma linha e outra para soltar a mão." },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora vamos copiar em blocos. Em vez de copiar letra por letra, leia uma palavra curta, memorize o bloco e escreva de uma vez." },
+          { type: "example", text: "Frase: 'O pato nada'. Blocos: O / pato / nada. Copie um bloco, confira, depois siga para o próximo." },
+          { type: "exercise", text: "Treino de bloco visual", content: { question: "Qual jeito reduz erro ao copiar 'bola azul'?", options: ["copiar 'bola' e conferir, depois 'azul'", "olhar só a primeira letra", "copiar sem reler"], answer: "copiar 'bola' e conferir, depois 'azul'", explanation: "Blocos pequenos ajudam a memória visual e evitam troca de letras." } },
+          { type: "example", text: "Se a letra ficou grande demais, use a linha como trilho: letras pequenas ficam entre as linhas; letras altas sobem só quando precisam." },
+          { type: "tip", text: "Confira três coisas: faltou letra, sobrou letra, a palavra cabe na linha?" },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, você copia uma frase e revisa como professor: forma, espaço e palavra correta." },
+          { type: "example", text: "Frase modelo: 'A lua ilumina a rua'. Copie em dois blocos: 'A lua' e 'ilumina a rua'." },
+          { type: "exercise", text: "Revisão de cópia", content: { question: "Ao terminar uma frase copiada, qual conferência vem primeiro?", options: ["ver se todas as palavras estão presentes", "apagar tudo sem olhar", "trocar a ordem das palavras"], answer: "ver se todas as palavras estão presentes", explanation: "A primeira conferência é garantir que nenhuma palavra foi pulada." } },
+          { type: "example", text: "Resposta esperada: 'Copiei em blocos, reli e corrigi uma letra que estava faltando'." },
+          { type: "tip", text: "Capricho não é perfeição: é escrever de um jeito que outra pessoa consiga ler." },
+        ],
+      },
+      premiumTips: ["Copie palavras em blocos curtos.", "Confira antes de apagar.", "Segure o lápis firme, mas sem dor."],
+    };
+  }
+
+  if (isAlfa) {
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category: "Alfabetização",
+      explanation: `Hoje você vai trabalhar ${topic} com letras reais, som, sílaba, comparação visual e formação de palavras.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: "Letra tem nome, som e forma. Para reconhecer, olhe a direção do traço e diga o som devagar." },
+          { type: "example", text: "Compare b e d: o b tem barriga depois do pauzinho; o d tem barriga antes do pauzinho. Em 'boca', começa com b; em 'dado', começa com d." },
+          { type: "exercise", text: "Escolha a letra inicial", content: { question: "Qual palavra começa com o som /b/?", options: ["bola", "dado", "pato"], answer: "bola", explanation: "Bola começa com /b/. Dado começa com /d/ e pato com /p/." } },
+          { type: "example", text: "Para juntar sílabas: CA + SA = CASA. Primeiro fale CA, depois SA, depois una sem pausa: CASA." },
+          { type: "tip", text: "Aponte para cada sílaba enquanto fala; isso ajuda o olho e a boca trabalharem juntos." },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora vamos formar palavras trocando apenas uma sílaba. Se muda a primeira sílaba, muda a palavra inteira." },
+          { type: "example", text: "PA + TO = PATO. GA + TO = GATO. Só trocamos PA por GA, então o animal mudou." },
+          { type: "exercise", text: "Monte a palavra", content: { question: "Qual junção forma 'mala'?", options: ["MA + LA", "LA + MA", "PA + LA"], answer: "MA + LA", explanation: "MA primeiro e LA depois formam MA-LA." } },
+          { type: "example", text: "Leitura guiada: BO-LA. Leia cada parte, depois diga rápido: BOLA." },
+          { type: "tip", text: "Se travar, volte uma sílaba e leia de novo sem pressa." },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, você vai ler, comparar e explicar onde percebeu a diferença." },
+          { type: "example", text: "PATO e BATO são parecidas, mas a primeira letra muda o som inicial: /p/ e /b/." },
+          { type: "exercise", text: "Ache a diferença", content: { question: "Em 'faca' e 'vaca', o que muda?", options: ["a primeira letra e o som inicial", "a última sílaba", "nada muda"], answer: "a primeira letra e o som inicial", explanation: "F e V mudam o som do começo da palavra." } },
+          { type: "example", text: "Resposta completa: 'Eu vi que mudou a primeira letra, por isso mudou o som inicial'." },
+          { type: "tip", text: "Olhe começo, meio e fim da palavra antes de responder." },
+        ],
+      },
+      premiumTips: ["Leia sílaba por sílaba e depois una.", "Compare letras parecidas olhando a direção.", "Use palavras reais: bola, dado, pato, casa."],
+    };
+  }
+
   if (isPort) {
     return {
       title: `Aula de verdade: ${topic}`,
@@ -148,6 +220,40 @@ function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonI
         "Circule palavras como porque, mas, então, quando e onde.",
         "Responda sempre com uma prova do texto.",
       ],
+    };
+  }
+
+  if (isAttention || isMemory || isExecutive || isEmotion) {
+    const foco = isAttention ? "atenção" : isMemory ? "memória de trabalho" : isExecutive ? "organização" : "regulação emocional";
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category,
+      explanation: `Hoje você vai treinar ${foco} dentro de tarefas escolares reais: observar, guardar uma regra, executar e corrigir.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: `Treinar ${foco} não é ouvir bronca. É fazer uma tarefa curta com regra clara e conferir o resultado.` },
+          { type: "example", text: "Regra do treino: leia três palavras — gato, bola, casa. Agora marque só a palavra que tem a letra O: bola." },
+          { type: "exercise", text: "Siga a regra", content: { question: "Na lista sol, sapo, lua, qual palavra começa com S?", options: ["sol", "lua", "casa"], answer: "sol", explanation: "A regra pede começo com S. 'Sol' começa com S; 'sapo' também começaria, mas não está entre as opções corretas apresentadas." } },
+          { type: "example", text: "Conferência: repita a regra antes de responder. 'Começa com S'. Depois olhe a primeira letra de cada opção." },
+          { type: "tip", text: "Antes de clicar, pare 2 segundos e pergunte: qual era a regra mesmo?" },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora a regra tem duas partes. Você precisa guardar a ordem: primeiro olhar a letra, depois olhar a quantidade." },
+          { type: "example", text: "Tarefa: escolha a palavra que começa com M e tem 4 letras. Mesa começa com M e tem 4 letras: m-e-s-a." },
+          { type: "exercise", text: "Duas pistas", content: { question: "Qual opção começa com P e tem 4 letras?", options: ["pato", "pé", "bola"], answer: "pato", explanation: "Pato começa com P e tem quatro letras: p-a-t-o." } },
+          { type: "example", text: "Se errar, descubra qual pista esqueceu: a primeira letra ou a quantidade de letras." },
+          { type: "tip", text: "Use os dedos para contar as partes da regra: 1) começa com P; 2) tem 4 letras." },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, você executa uma sequência e aprende a voltar sem desistir quando erra." },
+          { type: "example", text: "Sequência: ler a pergunta, circular a pista, escolher resposta, explicar. Se pular um passo, volte apenas nele." },
+          { type: "exercise", text: "Escolha a melhor estratégia", content: { question: "Quando percebo que errei por pressa, o que ajuda?", options: ["reler a regra e tentar de novo", "desistir da aula", "responder sem olhar"], answer: "reler a regra e tentar de novo", explanation: "Reler a regra corrige o caminho do pensamento e mantém a aprendizagem." } },
+          { type: "example", text: "Frase de autocorreção: 'Eu pulei a pista. Vou ler de novo, marcar a palavra importante e responder'." },
+          { type: "tip", text: "Erro não encerra a aula; erro mostra qual passo precisa de ajuda." },
+        ],
+      },
+      premiumTips: ["Diga a regra em voz alta antes de responder.", "Use uma pausa curta para reduzir impulsividade.", "Corrija um passo por vez, não tudo ao mesmo tempo."],
     };
   }
 
