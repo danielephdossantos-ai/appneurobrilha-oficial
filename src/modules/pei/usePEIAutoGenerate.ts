@@ -75,8 +75,11 @@ export function usePEIAutoGenerate(params: {
     enabled: !!childId && anamneseCompleta,
   });
 
-  const anamneseDias = diasDesde(anamneseQuery.data?.completed_at ?? null);
-  const anamneseVencida = anamneseDias > DIAS_VALIDADE_ANAMNESE;
+  const completedAt = anamneseQuery.data?.completed_at ?? null;
+  const anamneseDias = diasDesde(completedAt);
+  // Só consideramos vencida quando existe registro datado de fato com mais de 60 dias.
+  // Se não há registro em anamnese_v2 (fluxo antigo ou seed), confiamos em children.anamnese_completa.
+  const anamneseVencida = completedAt !== null && anamneseDias > DIAS_VALIDADE_ANAMNESE;
 
   useEffect(() => {
     if (!childId || !anamneseCompleta) return;
