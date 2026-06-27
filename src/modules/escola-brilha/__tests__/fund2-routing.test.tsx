@@ -1,19 +1,14 @@
 /**
  * E2E-style guardrail: garante que TODAS as séries do Fundamental II
- * (6º, 7º, 8º, 9º) sempre renderizam o Fund2Player — nunca o ActivityPlayerC.
- *
- * Cobre:
- *  1. Set FUND2_GRADES que o roteador usa.
- *  2. generateActivityLesson6a9 retorna lesson válida para todos os
- *     códigos legacy do ACTIVITY_C_MAP (6º–9º).
- *  3. Render do Fund2Player com asserts no stepper (8 etapas) e no layout
- *     novo (sem marcas do ActivityPlayerC).
+ * (6º, 7º, 8º, 9º) sempre renderizam o Fund2Player com a nova arquitetura
+ * de 9 telas (LessonV2 + Templates Pedagógicos), nunca o ActivityPlayerC
+ * e nunca o texto cru da BNCC como explicação.
  */
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import { generateActivityLesson6a9 } from "../data/activity-lesson-generator-6a9";
+import { buildLessonV2 } from "../engine/lesson-builder-v2";
 import {
   CELULAS_LESSON,
   OCEANOS_LESSON,
@@ -25,7 +20,6 @@ import {
   ILUMINISMO_LESSON,
 } from "../data/activity-lessons-c";
 
-// ── Mocks de infraestrutura externa ao player ────────────────────────────
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => vi.fn(),
 }));
@@ -48,7 +42,6 @@ vi.mock("framer-motion", () => ({
 
 import { Fund2Player } from "../views/Fund2Player";
 
-// Mesmo set usado em src/routes/escola-brilha.db.$aulaId.tsx
 const FUND2_GRADES = new Set([
   "6º Ano",
   "7º Ano",
@@ -70,7 +63,6 @@ const LEGACY_LESSONS = [
   ILUMINISMO_LESSON,
 ];
 
-// Códigos BNCC representativos para cada série e disciplinas variadas.
 const BNCC_SAMPLES: { code: string; titulo: string; grade: string }[] = [
   { code: "EF06CI04", titulo: "Célula", grade: "6º Ano" },
   { code: "EF06MA01", titulo: "Frações", grade: "6º Ano" },
@@ -94,65 +86,68 @@ describe("Fund2 routing guardrail (6º–9º Ano)", () => {
   });
 
   it.each(BNCC_SAMPLES)(
-    "generateActivityLesson6a9 retorna aula válida para $code ($grade)",
+    "buildLessonV2 retorna aula de 9 telas para $code ($grade)",
     ({ code, titulo }) => {
-      const lesson = generateActivityLesson6a9(code, titulo);
+      const lesson = buildLessonV2(code, titulo);
       expect(lesson).not.toBeNull();
-      expect(lesson!.screens.explicacao).toBeDefined();
-      expect(lesson!.screens.exploracao.pairs.length).toBeGreaterThan(0);
-      expect(lesson!.screens.exemplo_visual.sentences.length).toBeGreaterThan(0);
-      expect(lesson!.screens.praticar.options.length).toBeGreaterThan(0);
+      const s = lesson!.screens;
+      // 9 telas presentes
+      expect(s.missao).toBeDefined();
+      expect(s.exploracao).toBeDefined();
+      expect(s.explicacao).toBeDefined();
+      expect(s.exemplo).toBeDefined();
+      expect(s.guiada).toBeDefined();
+      expect(s.atividade).toBeDefined();
+      expect(s.desafio).toBeDefined();
+      expect(s.resumo).toBeDefined();
+      expect(s.dominio).toBeDefined();
+      // shapes essenciais
+      expect(s.explicacao.passoAPasso.length).toBeGreaterThanOrEqual(3);
+      expect(s.guiada.options.every((o) => typeof o.reason === "string")).toBe(true);
+      expect(s.atividade.items.length).toBeGreaterThanOrEqual(1);
     },
   );
 
   it.each(LEGACY_LESSONS.map((l) => [l.bncc_code, l.title, l.grade] as const))(
-    "aula legacy %s (%s — %s) é roteada para Fund2Player (não ActivityPlayerC)",
+    "aula legacy %s é roteada para Fund2Player (não ActivityPlayerC)",
     (code, title, grade) => {
       expect(FUND2_GRADES.has(grade)).toBe(true);
-      const f2 = generateActivityLesson6a9(code, title);
-      // Mesma condição usada em LessonPlayer.tsx e na rota db/$aulaId:
-      // se generator retorna lesson, dispatcher usa Fund2Player.
-      expect(f2).not.toBeNull();
+      const v2 = buildLessonV2(code, title);
+      expect(v2).not.toBeNull();
     },
   );
+
+  it("explicação NUNCA é igual ao texto cru da BNCC", () => {
+    const fakeBncc = "objetivo da bncc — texto que jamais deve virar explicação";
+    for (const s of BNCC_SAMPLES) {
+      const v2 = buildLessonV2(s.code, s.titulo, fakeBncc)!;
+      expect(v2.screens.explicacao.conceito.toLowerCase()).not.toBe(fakeBncc);
+    }
+  });
 });
 
-describe("Fund2Player layout (stepper + novo layout)", () => {
-  const lesson = generateActivityLesson6a9("EF06CI04", "Célula")!;
+describe("Fund2Player layout (9 telas + novo layout)", () => {
+  const lesson = buildLessonV2("EF06CI04", "Célula")!;
 
-  it("renderiza as 8 etapas do stepper", () => {
-    render(
-      <Fund2Player
-        lesson={lesson}
-        disciplina="Ciências"
-        serie="6º Ano"
-        codigoBncc="EF06CI04"
-      />,
-    );
+  it("renderiza as 9 etapas do stepper", () => {
+    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
     [
       "MISSÃO",
       "EXPLORAÇÃO",
       "EXPLICAÇÃO",
-      "EXEMPLO APLICADO",
-      "ATIVIDADE GUIADA",
+      "EXEMPLO RESOLVIDO",
+      "PRÁTICA GUIADA",
+      "ATIVIDADE",
       "DESAFIO",
-      "REVISÃO E SÍNTESE",
-      "CONCLUSÃO",
+      "RESUMO",
+      "DOMÍNIO BNCC",
     ].forEach((label) => {
-      // labels aparecem >=1x (botões do stepper + título de tela atual)
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     });
   });
 
   it("exibe marcas do novo layout (BNCC pill, XP) e botão de áudio", () => {
-    render(
-      <Fund2Player
-        lesson={lesson}
-        disciplina="Ciências"
-        serie="6º Ano"
-        codigoBncc="EF06CI04"
-      />,
-    );
+    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
     expect(screen.getByText(/BNCC · EF06CI04/)).toBeInTheDocument();
     expect(screen.getAllByText(/XP/).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Ouvir explicação")).toBeInTheDocument();
@@ -160,15 +155,7 @@ describe("Fund2Player layout (stepper + novo layout)", () => {
   });
 
   it("NÃO renderiza marcas exclusivas do ActivityPlayerC (sidebar antiga)", () => {
-    render(
-      <Fund2Player
-        lesson={lesson}
-        disciplina="Ciências"
-        serie="6º Ano"
-        codigoBncc="EF06CI04"
-      />,
-    );
-    // ActivityPlayerC usa um sidebar com "CAPÍTULO" em caps; Fund2Player não.
+    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
     expect(screen.queryByText(/CAPÍTULO/i)).toBeNull();
   });
 });
