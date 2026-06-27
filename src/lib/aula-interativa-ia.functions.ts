@@ -41,7 +41,22 @@ REGRAS ABSOLUTAS:
 - Em "arrasta": "alternativas" são as opções para arrastar; "resposta" é a correta.
 - "exemplo" não precisa de alternativas nem resposta.
 - Use emojis no campo "emoji" (1 emoji por tela). Linguagem de criança da idade indicada.
-- RESPONDA APENAS JSON VÁLIDO no formato: {"titulo":"...","telas":[...]}. Sem markdown, sem comentários.`;
+
+FORMATO OBRIGATÓRIO (responda APENAS este JSON, sem markdown, sem comentários):
+{
+  "titulo": "string curta",
+  "telas": [
+    {
+      "tipo": "exemplo" | "pergunta" | "completar" | "arrasta",
+      "titulo": "string OBRIGATÓRIA (até 80 chars)",
+      "conteudo": "string OBRIGATÓRIA (até 140 chars, o texto/pergunta da tela)",
+      "emoji": "1 emoji",
+      "alternativas": ["opção1","opção2"],
+      "resposta": "string"
+    }
+  ]
+}
+TODA tela DEVE ter os campos "tipo", "titulo" e "conteudo" preenchidos com strings não vazias. NÃO use "title", "text", "texto", "pergunta", "enunciado" — use APENAS "titulo" e "conteudo".`;
 
 function userPrompt(d: z.infer<typeof InputSchema>) {
   const idade = d.idade ? `${d.idade} anos` : "6-8 anos";
@@ -58,11 +73,50 @@ Aluno: ${idade}${serie}${variacao}
 Gere a micro-aula interativa em JSON.`;
 }
 
+function normalizeTela(t: any) {
+  if (!t || typeof t !== "object") return null;
+  const tipoRaw = String(t.tipo ?? t.type ?? t.kind ?? "exemplo").toLowerCase();
+  const tipo = (["exemplo", "pergunta", "completar", "arrasta"].includes(tipoRaw) ? tipoRaw : "exemplo") as
+    | "exemplo" | "pergunta" | "completar" | "arrasta";
+  const titulo = t.titulo ?? t.title ?? t.nome ?? t.name ?? t.cabecalho ?? "";
+  const conteudo =
+    t.conteudo ?? t.content ?? t.texto ?? t.text ?? t.pergunta ?? t.enunciado ?? t.descricao ?? t.description ?? "";
+  const alternativas = t.alternativas ?? t.opcoes ?? t.options ?? t.choices;
+  const resposta = t.resposta ?? t.answer ?? t.correta ?? t.correct;
+  const dica = t.dica ?? t.hint ?? t.tip;
+  const emoji = t.emoji ?? t.icon;
+  const tituloStr = String(titulo || conteudo || "Vamos aprender").slice(0, 80);
+  const conteudoStr = String(conteudo || titulo || "").slice(0, 140);
+  if (!tituloStr || !conteudoStr) return null;
+  return {
+    tipo,
+    titulo: tituloStr,
+    conteudo: conteudoStr,
+    emoji: emoji ? String(emoji).slice(0, 4) : undefined,
+    alternativas: Array.isArray(alternativas)
+      ? alternativas.map((a: any) => String(a).slice(0, 40)).slice(0, 4)
+      : undefined,
+    resposta: resposta != null ? String(resposta).slice(0, 60) : undefined,
+    dica: dica != null ? String(dica).slice(0, 120) : undefined,
+  };
+}
+
 function parseAula(raw: string): AulaInterativa {
   let txt = raw.trim();
   if (txt.startsWith("```")) txt = txt.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
   const parsed = JSON.parse(txt);
-  return AulaSchema.parse(parsed);
+  const telasRaw = Array.isArray(parsed?.telas)
+    ? parsed.telas
+    : Array.isArray(parsed?.screens)
+    ? parsed.screens
+    : Array.isArray(parsed?.aulas)
+    ? parsed.aulas
+    : [];
+  const normalized = {
+    titulo: String(parsed?.titulo ?? parsed?.title ?? "Aula Brilha").slice(0, 80),
+    telas: telasRaw.map(normalizeTela).filter(Boolean).slice(0, 6),
+  };
+  return AulaSchema.parse(normalized);
 }
 
 export const gerarAulaInterativa = createServerFn({ method: "POST" })
