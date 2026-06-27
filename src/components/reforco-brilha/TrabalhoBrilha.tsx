@@ -1105,6 +1105,26 @@ function RecursoPreviewModal({
             </div>
           )}
 
+          {webEmbed && (
+            <div className="space-y-2">
+              <div className="rounded-lg border-2 border-amber-200 bg-amber-50/40 px-3 py-2 text-[11px] text-amber-900 flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 text-amber-700 shrink-0" />
+                Leia abaixo e <b>selecione o trecho</b> que quiser → copie (Ctrl+C ou segurar no celular) e cole no seu trabalho.
+              </div>
+              <div className="w-full h-[65vh] rounded-lg overflow-hidden border-2 border-amber-200 bg-white">
+                <iframe
+                  src={webEmbed}
+                  title={recurso.titulo}
+                  className="w-full h-full"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          )}
+
+
+
           {!ytId && !archive && recurso.thumbnail && (
             <img
               src={recurso.thumbnail}
