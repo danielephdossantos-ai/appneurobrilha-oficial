@@ -53,6 +53,7 @@ const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string; c
 };
 
 const LETTERS = ["A", "B", "C", "D"] as const;
+const letterFor = (idx: number): (typeof LETTERS)[number] => LETTERS[idx] ?? "D";
 
 function hasScreensPayload(payload: unknown) {
   return !!payload && typeof payload === "object" && "screens" in payload;
@@ -66,18 +67,24 @@ function adaptActivityLessonToC(aula: AulaBncc, src: ActivityLesson): ActivityLe
   };
   const correct = src.screens.praticar.options.find((o) => o.isCorrect) ?? src.screens.praticar.options[0];
   const challengeOptions = src.screens.praticar.options.slice(0, 4).map((o, i) => ({
-    letter: LETTERS[i],
+    letter: letterFor(i),
     text: o.text,
     isCorrect: o.isCorrect,
   }));
 
   while (challengeOptions.length < 4) {
     challengeOptions.push({
-      letter: LETTERS[challengeOptions.length],
+      letter: letterFor(challengeOptions.length),
       text: challengeOptions.length === 3 ? "Ainda não é essa" : "Precisa revisar o exemplo",
       isCorrect: false,
     });
   }
+
+  const objectives: string[] = [
+    src.screens.explicacao.highlight,
+    "Ver um exemplo guiado",
+    "Responder um desafio curto",
+  ].filter((item): item is string => Boolean(item)).slice(0, 3);
 
   return {
     id: src.id || aula.id,
@@ -95,11 +102,7 @@ function adaptActivityLessonToC(aula: AulaBncc, src: ActivityLesson): ActivityLe
     screens: {
       missao: {
         intro: "Nesta missão você vai:",
-        objectives: [
-          src.screens.explicacao.highlight,
-          "Ver um exemplo guiado",
-          "Responder um desafio curto",
-        ].filter(Boolean).slice(0, 3),
+        objectives,
         context_emoji: src.screens.explicacao.visual_emoji || "✨",
         context_text: src.screens.explicacao.summary,
       },
@@ -219,7 +222,7 @@ function AulaDbPage() {
         if (aula.payload) return <ActivityPlayer lesson={aula.payload} currentRef={ref} />;
         break;
       case "c":
-        if (aula.payload) return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
+        if (hasScreensPayload(aula.payload)) return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
         break;
     }
 
