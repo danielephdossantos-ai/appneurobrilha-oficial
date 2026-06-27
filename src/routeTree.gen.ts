@@ -20,6 +20,7 @@ import { Route as PerfilAlunoRouteImport } from './routes/perfil-aluno'
 import { Route as PainelPaisRouteImport } from './routes/painel-pais'
 import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
+import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as MascotesRouteImport } from './routes/mascotes'
@@ -104,6 +105,11 @@ const NeuroTreinoRoute = NeuroTreinoRouteImport.update({
 const MissaoTrabalhoRoute = MissaoTrabalhoRouteImport.update({
   id: '/missao-trabalho',
   path: '/missao-trabalho',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
+  id: '/missao-tarefa',
+  path: '/missao-tarefa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
@@ -279,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
@@ -321,6 +328,7 @@ export interface FileRoutesByTo {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
@@ -365,6 +373,7 @@ export interface FileRoutesById {
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
   '/missao-prova': typeof MissaoProvaRoute
+  '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
   '/neuro-treino': typeof NeuroTreinoRouteWithChildren
   '/painel-pais': typeof PainelPaisRoute
@@ -410,6 +419,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -452,6 +462,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -495,6 +506,7 @@ export interface FileRouteTypes {
     | '/mascotes'
     | '/matriz-pedagogica'
     | '/missao-prova'
+    | '/missao-tarefa'
     | '/missao-trabalho'
     | '/neuro-treino'
     | '/painel-pais'
@@ -539,6 +551,7 @@ export interface RootRouteChildren {
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
+  MissaoTarefaRoute: typeof MissaoTarefaRoute
   MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
   NeuroTreinoRoute: typeof NeuroTreinoRouteWithChildren
   PainelPaisRoute: typeof PainelPaisRoute
@@ -633,6 +646,13 @@ declare module '@tanstack/react-router' {
       path: '/missao-trabalho'
       fullPath: '/missao-trabalho'
       preLoaderRoute: typeof MissaoTrabalhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missao-tarefa': {
+      id: '/missao-tarefa'
+      path: '/missao-tarefa'
+      fullPath: '/missao-tarefa'
+      preLoaderRoute: typeof MissaoTarefaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/missao-prova': {
@@ -912,6 +932,7 @@ const rootRouteChildren: RootRouteChildren = {
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
   MissaoProvaRoute: MissaoProvaRoute,
+  MissaoTarefaRoute: MissaoTarefaRoute,
   MissaoTrabalhoRoute: MissaoTrabalhoRoute,
   NeuroTreinoRoute: NeuroTreinoRouteWithChildren,
   PainelPaisRoute: PainelPaisRoute,
