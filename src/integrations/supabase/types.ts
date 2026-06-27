@@ -867,6 +867,41 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_template_map: {
+        Row: {
+          bncc_code: string
+          created_at: string
+          id: string
+          priority: number
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          bncc_code: string
+          created_at?: string
+          id?: string
+          priority?: number
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          bncc_code?: string
+          created_at?: string
+          id?: string
+          priority?: number
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bncc_template_map_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "pedagogical_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_achievements: {
         Row: {
           achievement_id: string
@@ -2110,6 +2145,56 @@ export type Database = {
         }
         Relationships: []
       }
+      mastery_records: {
+        Row: {
+          attempts: number
+          bncc_code: string
+          child_id: string | null
+          created_at: string
+          id: string
+          last_attempt_at: string | null
+          score: number
+          status: string
+          template_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          bncc_code: string
+          child_id?: string | null
+          created_at?: string
+          id?: string
+          last_attempt_at?: string | null
+          score?: number
+          status?: string
+          template_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          bncc_code?: string
+          child_id?: string | null
+          created_at?: string
+          id?: string
+          last_attempt_at?: string | null
+          score?: number
+          status?: string
+          template_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mastery_records_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "pedagogical_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       neuro_profiles: {
         Row: {
           child_id: string
@@ -2529,6 +2614,104 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      pedagogical_lessons_cache: {
+        Row: {
+          bncc_code: string
+          created_at: string
+          id: string
+          lesson: Json
+          template_id: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          bncc_code: string
+          created_at?: string
+          id?: string
+          lesson: Json
+          template_id: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          bncc_code?: string
+          created_at?: string
+          id?: string
+          lesson?: Json
+          template_id?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pedagogical_lessons_cache_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "pedagogical_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pedagogical_templates: {
+        Row: {
+          avaliacao: Json
+          created_at: string
+          desafio: Json
+          disciplina: string
+          erros_comuns: Json
+          exemplos: Json
+          exercicios: Json
+          id: string
+          metodo: string
+          name: string
+          pratica_guiada: Json
+          revisao: Json
+          sequencia_didatica: Json
+          serie: string | null
+          slug: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          avaliacao?: Json
+          created_at?: string
+          desafio?: Json
+          disciplina: string
+          erros_comuns?: Json
+          exemplos?: Json
+          exercicios?: Json
+          id?: string
+          metodo: string
+          name: string
+          pratica_guiada?: Json
+          revisao?: Json
+          sequencia_didatica?: Json
+          serie?: string | null
+          slug: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          avaliacao?: Json
+          created_at?: string
+          desafio?: Json
+          disciplina?: string
+          erros_comuns?: Json
+          exemplos?: Json
+          exercicios?: Json
+          id?: string
+          metodo?: string
+          name?: string
+          pratica_guiada?: Json
+          revisao?: Json
+          sequencia_didatica?: Json
+          serie?: string | null
+          slug?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
       }
       pei_aulas: {
         Row: {
