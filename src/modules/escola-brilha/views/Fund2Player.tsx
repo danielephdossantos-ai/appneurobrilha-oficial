@@ -450,19 +450,25 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                 <p className="text-slate-800 mb-6">{s.explicacao.conceito}</p>
 
                 <h3 className="font-black text-slate-900 mb-3">Passo a passo</h3>
-                <ol className="space-y-3 mb-6">
-                  {s.explicacao.passoAPasso.map((p, i) => (
-                    <li key={i} className="flex gap-3">
-                      <span className="shrink-0 w-7 h-7 rounded-lg bg-[#0b2545] text-white grid place-items-center text-xs font-black">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <p className="font-bold text-slate-900">{p.step}</p>
-                        <p className="text-slate-700 text-sm">{p.detail}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+                {lesson.discipline === "Matemática" ? (
+                  <div className="mb-6">
+                    <MathBoard steps={s.explicacao.passoAPasso} />
+                  </div>
+                ) : (
+                  <ol className="space-y-3 mb-6">
+                    {s.explicacao.passoAPasso.map((p, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="shrink-0 w-7 h-7 rounded-lg bg-[#0b2545] text-white grid place-items-center text-xs font-black">
+                          {i + 1}
+                        </span>
+                        <div>
+                          <p className="font-bold text-slate-900">{p.step}</p>
+                          <p className="text-slate-700 text-sm">{p.detail}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="rounded-xl border border-slate-200 p-4 bg-amber-50/40">
