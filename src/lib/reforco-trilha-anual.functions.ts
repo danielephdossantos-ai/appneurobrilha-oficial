@@ -6,14 +6,13 @@ import { z } from "zod";
 // Trilha Anual do Reforço Brilha
 // - seedTrilhaAnual: lê anamnese premium + habilidades BNCC da
 //   série e cria 1 linha por habilidade (pendente).
-// - gerarAulasHabilidade: para 1 trilha (1 habilidade), gera 15
-//   aulas adaptadas via Groq. Cliente chama em loop com progresso.
-// - listarTrilhaAnual: lê trilha agrupada por componente.
-// REGRAS: nunca mostrar código BNCC pro usuário final.
+// - gerarAulasHabilidade: gera 15 aulas adaptadas via Groq por
+//   habilidade. Cliente chama em loop com progresso.
+// REGRA: nunca mostrar código BNCC pro usuário final.
 // ============================================================
 
 const SeedInput = z.object({ childId: z.string().uuid() });
-const GerarInput = z.object({ trilhaId: z.string().uuid() });
+const TrilhaInput = z.object({ trilhaId: z.string().uuid() });
 const ListInput = z.object({ childId: z.string().uuid() });
 
 const AulaSchema = z.object({
@@ -27,33 +26,54 @@ const AulaSchema = z.object({
 });
 const AulasArraySchema = z.object({ aulas: z.array(AulaSchema).min(10).max(20) });
 
+async function getAdmin() {
+  const { createClient } = await import("@supabase/supabase-js");
+  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
+
+interface HabRow {
+  codigo: string;
+  habilidade: string;
+  componente: string;
+  unidade_tematica: string | null;
+  objeto_conhecimento: string | null;
+  ordem: number | null;
+}
+
+interface ChildRow {
+  id: string;
+  nome: string | null;
+  idade: number | null;
+  serie: string | null;
+  perfil: string | null;
+  niveis: unknown;
+  flags: unknown;
+}
+
 export const seedTrilhaAnual = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => SeedInput.parse(i))
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const supabase = await getAdmin();
 
-    const { data: child, error: childErr } = await supabase
+    const { data: child } = await supabase
       .from("children")
-      .select("id, nome, idade, serie, anamnese_completa, perfil, niveis, flags")
+      .select("id, nome, idade, serie, anamnese_completa, perfil, niveis, flags, user_id")
       .eq("id", data.childId)
-      .eq("user_id", userId)
       .maybeSingle();
 
-    if (childErr || !child) {
+    if (!child || child.user_id !== context.userId) {
       return { ok: false as const, error: "Criança não encontrada" };
     }
     if (!child.anamnese_completa) {
       return { ok: false as const, error: "ANAMNESE_INCOMPLETA" };
     }
 
-    // série -> ano numérico
     const ano = parseAno(child.serie ?? "", child.idade ?? 7);
-    if (!ano) {
-      return { ok: false as const, error: "Série inválida na anamnese" };
-    }
+    if (!ano) return { ok: false as const, error: "Série inválida na anamnese" };
 
-    // habilidades já registradas?
     const { count: existing } = await supabase
       .from("rb_trilha_anual")
       .select("id", { count: "exact", head: true })
@@ -63,8 +83,7 @@ export const seedTrilhaAnual = createServerFn({ method: "POST" })
       return { ok: true as const, ano, inseridas: 0, jaExistia: true };
     }
 
-    // busca habilidades da série (todas as áreas)
-    const { data: habs, error: habErr } = await supabase
+    const { data: habs } = await supabase
       .from("bncc_biblioteca")
       .select("codigo, habilidade, componente, unidade_tematica, objeto_conhecimento, ordem")
       .eq("ano", ano)
@@ -72,15 +91,16 @@ export const seedTrilhaAnual = createServerFn({ method: "POST" })
       .order("componente", { ascending: true })
       .order("ordem", { ascending: true });
 
-    if (habErr || !habs?.length) {
+    const list = (habs ?? []) as HabRow[];
+    if (!list.length) {
       return { ok: false as const, error: "Nenhuma habilidade BNCC encontrada para a série" };
     }
 
-    const rows = habs.map((h, i) => ({
+    const rows = list.map((h: HabRow, i: number) => ({
       child_id: child.id,
       ano,
       componente: h.componente,
-      bimestre: 1 + Math.floor((i % 8)),
+      bimestre: 1 + (i % 4),
       ordem: i,
       habilidade_codigo: h.codigo,
       habilidade_descricao: h.habilidade,
@@ -91,9 +111,7 @@ export const seedTrilhaAnual = createServerFn({ method: "POST" })
     }));
 
     const { error: insErr } = await supabase.from("rb_trilha_anual").insert(rows);
-    if (insErr) {
-      return { ok: false as const, error: insErr.message };
-    }
+    if (insErr) return { ok: false as const, error: insErr.message };
 
     return { ok: true as const, ano, inseridas: rows.length, jaExistia: false };
   });
@@ -102,15 +120,16 @@ export const listarTrilhaAnual = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => ListInput.parse(i))
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const supabase = await getAdmin();
 
     const { data: child } = await supabase
       .from("children")
-      .select("id, nome, serie, idade")
+      .select("id, nome, serie, idade, user_id")
       .eq("id", data.childId)
-      .eq("user_id", userId)
       .maybeSingle();
-    if (!child) return { ok: false as const, error: "Criança não encontrada" };
+    if (!child || child.user_id !== context.userId) {
+      return { ok: false as const, error: "Criança não encontrada" };
+    }
 
     const { data: trilha } = await supabase
       .from("rb_trilha_anual")
@@ -121,30 +140,51 @@ export const listarTrilhaAnual = createServerFn({ method: "POST" })
       .order("componente", { ascending: true })
       .order("ordem", { ascending: true });
 
-    const total = trilha?.length ?? 0;
-    const prontas = trilha?.filter((t) => t.aulas_geradas).length ?? 0;
-    return { ok: true as const, child, trilha: trilha ?? [], total, prontas };
+    const lista = trilha ?? [];
+    const prontas = lista.filter((t: { aulas_geradas: boolean }) => t.aulas_geradas).length;
+    return {
+      ok: true as const,
+      child,
+      trilha: lista,
+      total: lista.length,
+      prontas,
+    };
   });
 
 export const obterAulasTrilha = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) => GerarInput.parse(i))
+  .inputValidator((i: unknown) => TrilhaInput.parse(i))
   .handler(async ({ data, context }) => {
-    const { supabase } = context;
+    const supabase = await getAdmin();
     const { data: row } = await supabase
       .from("rb_trilha_anual")
-      .select("id, habilidade_descricao, componente, aulas, aulas_geradas")
+      .select(
+        "id, child_id, habilidade_descricao, componente, aulas, aulas_geradas, children!inner(user_id)",
+      )
       .eq("id", data.trilhaId)
       .maybeSingle();
     if (!row) return { ok: false as const, error: "Trilha não encontrada" };
-    return { ok: true as const, trilha: row };
+    const childUserId = (row as unknown as { children: { user_id: string } }).children?.user_id;
+    if (childUserId !== context.userId) {
+      return { ok: false as const, error: "Sem permissão" };
+    }
+    return {
+      ok: true as const,
+      trilha: {
+        id: row.id,
+        habilidade_descricao: row.habilidade_descricao,
+        componente: row.componente,
+        aulas: row.aulas,
+        aulas_geradas: row.aulas_geradas,
+      },
+    };
   });
 
 export const gerarAulasHabilidade = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) => GerarInput.parse(i))
+  .inputValidator((i: unknown) => TrilhaInput.parse(i))
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const supabase = await getAdmin();
 
     const { data: row } = await supabase
       .from("rb_trilha_anual")
@@ -158,25 +198,26 @@ export const gerarAulasHabilidade = createServerFn({ method: "POST" })
 
     const { data: child } = await supabase
       .from("children")
-      .select("id, nome, idade, serie, perfil, niveis, flags")
+      .select("id, nome, idade, serie, perfil, niveis, flags, user_id")
       .eq("id", row.child_id)
-      .eq("user_id", userId)
       .maybeSingle();
-    if (!child) return { ok: false as const, error: "Criança não encontrada" };
+    if (!child || child.user_id !== context.userId) {
+      return { ok: false as const, error: "Sem permissão" };
+    }
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) return { ok: false as const, error: "GROQ_API_KEY ausente" };
 
-    const perfilTxt = resumirPerfil(child);
+    const perfilTxt = resumirPerfil(child as ChildRow);
     const system = `Você é um educador especialista em crianças neurodivergentes. Gere 15 aulas DISTINTAS para a MESMA competência pedagógica.
 REGRAS OBRIGATÓRIAS:
-- Nunca cite códigos BNCC ou jargão técnico no texto visível (titulo, objetivo, passos…). A habilidade é apenas referência interna.
+- NUNCA cite códigos BNCC ou jargão técnico no texto visível (titulo, objetivo, passos…). A habilidade é apenas referência interna.
 - Cada aula deve ter um tipo_atividade DIFERENTE (ex: jogo, leitura guiada, desafio rápido, história, vídeo curto, atividade prática, quiz, desenho, dramatização, experimento, música, caça-objetos, sequência lógica, par memória, construção).
 - Linguagem infantil, frases curtas, tom acolhedor em português do Brasil.
 - Passos: 3 a 6 micro-instruções claras.
 - reforco_positivo: 1 frase celebratória.
 - dica_erro: 1 sugestão gentil de como retomar.
-- Adapte ao perfil da criança: ${perfilTxt}.
+- Adapte ao perfil: ${perfilTxt}.
 Retorne EXCLUSIVAMENTE JSON: { "aulas": [ {titulo, objetivo, tipo_atividade, passos:[], pergunta_chave?, reforco_positivo, dica_erro} ... 15 itens ] }`;
 
     const user = `Idade: ${child.idade ?? "—"} | Série: ${child.serie ?? "—"} | Componente: ${row.componente}
@@ -247,8 +288,6 @@ Gere 15 aulas variadas para trabalhar essa competência.`;
     return { ok: true as const, jaGerado: false, total: aulas.length };
   });
 
-// helpers
-
 function stripFences(s: string) {
   return s
     .replace(/^```json\s*/i, "")
@@ -264,16 +303,12 @@ function parseAno(serie: string, idade: number): number | null {
     const n = Number(m[1]);
     if (n >= 1 && n <= 9) return n;
   }
-  if (s.includes("infantil") || s.includes("pré") || s.includes("pre")) return 1; // fallback
+  if (s.includes("infantil") || s.includes("pré") || s.includes("pre")) return 1;
   if (idade >= 6 && idade <= 14) return Math.min(9, Math.max(1, idade - 5));
   return null;
 }
 
-function resumirPerfil(child: {
-  perfil?: string | null;
-  niveis?: unknown;
-  flags?: unknown;
-}): string {
+function resumirPerfil(child: ChildRow): string {
   const parts: string[] = [];
   if (child.perfil) parts.push(`Perfil: ${String(child.perfil).slice(0, 200)}`);
   if (child.niveis && typeof child.niveis === "object") {
