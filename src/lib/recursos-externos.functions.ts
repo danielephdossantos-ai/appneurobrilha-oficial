@@ -16,12 +16,27 @@ export interface RecursoExterno {
   conteudo?: string | null;
 }
 
+export interface AvisoFonteExterna {
+  fonte: "youtube";
+  tipo: "sem_chave" | "chave_invalida" | "api_desativada" | "restricao" | "quota" | "erro";
+  mensagem: string;
+}
+
 
 
 // ---------- YouTube (Data API v3) ----------
-async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
-  const key = process.env.YOUTUBE_API_KEY;
-  if (!key) return [];
+async function buscarYoutube(query: string): Promise<{ resultados: RecursoExterno[]; aviso?: AvisoFonteExterna }> {
+  const key = (process.env.YOUTUBE_API_KEY || "").trim();
+  if (!key) {
+    return {
+      resultados: [],
+      aviso: {
+        fonte: "youtube",
+        tipo: "sem_chave",
+        mensagem: "A chave do YouTube ainda não está disponível no servidor.",
+      },
+    };
+  }
   // foco educativo infantil em PT-BR; embeddable + safeSearch strict
   const q = `${query} educativo infantil`;
   const url =
@@ -30,10 +45,32 @@ async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
     `&q=${encodeURIComponent(q)}&key=${key}`;
   try {
     const r = await fetch(url);
-    if (!r.ok) return [];
     const data: any = await r.json();
+    if (!r.ok) {
+      const reason = String(data?.error?.errors?.[0]?.reason || data?.error?.status || "").toLowerCase();
+      const rawMessage = String(data?.error?.message || "Erro ao consultar o YouTube.");
+      let tipo: AvisoFonteExterna["tipo"] = "erro";
+      let mensagem = "O YouTube recusou a busca. Verifique se a chave está correta e se a API do YouTube Data v3 está ativa.";
+
+      if (reason.includes("keyinvalid") || rawMessage.toLowerCase().includes("api key not valid")) {
+        tipo = "chave_invalida";
+        mensagem = "A chave do YouTube foi rejeitada como inválida. Gere uma nova chave e atualize YOUTUBE_API_KEY pelo formulário seguro.";
+      } else if (reason.includes("accessnotconfigured") || reason.includes("apihasnotbeenused") || reason.includes("disabled")) {
+        tipo = "api_desativada";
+        mensagem = "A chave existe, mas a YouTube Data API v3 não está ativada no projeto do Google Cloud dessa chave.";
+      } else if (reason.includes("iprefererblocked") || reason.includes("referer") || reason.includes("restriction")) {
+        tipo = "restricao";
+        mensagem = "A chave do YouTube tem restrição incompatível. Para chamada pelo servidor, use restrição por API e permita YouTube Data API v3.";
+      } else if (reason.includes("quota") || reason.includes("dailylimit") || r.status === 403) {
+        tipo = "quota";
+        mensagem = "A cota do YouTube pode ter acabado ou a chave não tem permissão para usar essa API.";
+      }
+
+      console.warn("youtube_search_failed", { status: r.status, reason, message: rawMessage });
+      return { resultados: [], aviso: { fonte: "youtube", tipo, mensagem } };
+    }
     const items: any[] = data.items || [];
-    return items
+    const resultados = items
       .filter((it) => it.id?.videoId)
       .map((it) => {
         const sn = it.snippet || {};
@@ -49,8 +86,16 @@ async function buscarYoutube(query: string): Promise<RecursoExterno[]> {
         };
         return rec;
       });
+    return { resultados };
   } catch {
-    return [];
+    return {
+      resultados: [],
+      aviso: {
+        fonte: "youtube",
+        tipo: "erro",
+        mensagem: "Não consegui conectar ao YouTube agora. Tente atualizar a busca em alguns instantes.",
+      },
+    };
   }
 }
 
@@ -203,7 +248,7 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
   .inputValidator((d: { query: string; force?: boolean }) => d)
   .handler(async ({ data }) => {
     const queryN = normalize(data.query);
-    if (queryN.length < 3) return { resultados: [], fonte: "vazio" as const };
+    if (queryN.length < 3) return { resultados: [], fonte: "vazio" as const, avisos: [] as AvisoFonteExterna[] };
 
     const supabase = getServerClient();
 
@@ -221,18 +266,27 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
         const cachedClean = (cached as RecursoExterno[]).filter(
           (r) => (r.fonte as string) !== "khan" && (r.fonte as string) !== "youtube-edu",
         );
-        return { resultados: cachedClean, fonte: "cache" as const };
+        return { resultados: cachedClean, fonte: "cache" as const, avisos: [] as AvisoFonteExterna[] };
       }
     }
 
     // 2) buscar em paralelo nas fontes públicas
-    const [wiki, yt, books, wikiv, arch] = await Promise.all([
+    const [wiki, ytResult, books, wikiv, arch] = await Promise.all([
       buscarWikipedia(queryN).catch(() => []),
-      buscarYoutube(queryN).catch(() => []),
+      buscarYoutube(queryN).catch(() => ({
+        resultados: [],
+        aviso: {
+          fonte: "youtube",
+          tipo: "erro",
+          mensagem: "Não consegui consultar o YouTube agora.",
+        } satisfies AvisoFonteExterna,
+      })),
       buscarOpenLibrary(queryN).catch(() => []),
       buscarWikiversity(queryN).catch(() => []),
       buscarArchive(queryN).catch(() => []),
     ]);
+    const yt = ytResult.resultados;
+    const avisos = ytResult.aviso ? [ytResult.aviso] : [];
 
     // intercalar pra diversificar fontes
     const resultados: RecursoExterno[] = [];
@@ -264,5 +318,5 @@ export const buscarRecursosExternos = createServerFn({ method: "POST" })
       await supabase.from("rb_recursos_externos").insert(rows);
     }
 
-    return { resultados, fonte: "api" as const };
+    return { resultados, fonte: "api" as const, avisos };
   });
