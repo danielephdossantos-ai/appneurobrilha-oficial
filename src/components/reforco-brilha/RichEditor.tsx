@@ -54,7 +54,7 @@ export function RichEditor({ html, onChange, placeholder }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Underline,
+      
       TextStyle,
       Image.configure({ inline: false, allowBase64: true }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
