@@ -21,6 +21,8 @@ import {
   SpellCheck,
   CheckCircle2,
   Sparkles,
+  BookOpen,
+  Scissors,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
