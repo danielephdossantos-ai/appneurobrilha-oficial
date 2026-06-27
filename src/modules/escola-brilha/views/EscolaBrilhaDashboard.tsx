@@ -12,8 +12,9 @@ import {
   Landmark,
   GraduationCap,
   Sprout,
- Network,
- Image as ImageIcon,
+  Network,
+  Image as ImageIcon,
+  ArrowLeft,
 } from "lucide-react";
 import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
@@ -149,6 +150,18 @@ export const EscolaBrilhaDashboard: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-950 to-violet-950 pb-12">
       {/* Hero */}
       <div className="relative overflow-hidden px-5 pt-12 pb-8">
+        {/* Back to home */}
+        <div className="absolute top-4 left-4 z-20">
+          <button
+            onClick={() => navigate({ to: "/" })}
+            className="flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white px-3 py-2 text-xs font-black backdrop-blur-sm transition active:scale-95"
+            aria-label="Voltar para o início"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Início</span>
+          </button>
+        </div>
+
         <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
         <div className="relative z-10 text-center">
