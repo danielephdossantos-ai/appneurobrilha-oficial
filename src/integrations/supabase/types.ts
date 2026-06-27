@@ -4102,6 +4102,68 @@ export type Database = {
           },
         ]
       }
+      rb_trilha_anual: {
+        Row: {
+          ano: number
+          aulas: Json | null
+          aulas_geradas: boolean
+          bimestre: number | null
+          child_id: string
+          componente: string
+          created_at: string
+          habilidade_codigo: string
+          habilidade_descricao: string
+          id: string
+          objeto_conhecimento: string | null
+          ordem: number | null
+          status: string
+          unidade_tematica: string | null
+          updated_at: string
+        }
+        Insert: {
+          ano: number
+          aulas?: Json | null
+          aulas_geradas?: boolean
+          bimestre?: number | null
+          child_id: string
+          componente: string
+          created_at?: string
+          habilidade_codigo: string
+          habilidade_descricao: string
+          id?: string
+          objeto_conhecimento?: string | null
+          ordem?: number | null
+          status?: string
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ano?: number
+          aulas?: Json | null
+          aulas_geradas?: boolean
+          bimestre?: number | null
+          child_id?: string
+          componente?: string
+          created_at?: string
+          habilidade_codigo?: string
+          habilidade_descricao?: string
+          id?: string
+          objeto_conhecimento?: string | null
+          ordem?: number | null
+          status?: string
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rb_trilha_anual_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           child_id: string | null
