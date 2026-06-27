@@ -14,7 +14,23 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { buildLessonV2 } from "./lesson-builder-v2";
+import { gerarLessonV2Groq } from "@/lib/groq-professor.functions";
 import type { LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
+
+const FUND2_SERIES = new Set([
+  "6º Ano",
+  "7º Ano",
+  "8º Ano",
+  "9º Ano",
+  "6º ao 7º Ano",
+  "8º ao 9º Ano",
+  "6º ao 9º Ano",
+]);
+
+export interface LessonV2Hints {
+  serie?: string;
+  disciplina?: string;
+}
 
 // ----------------------------- caches separados ----------------------------
 
