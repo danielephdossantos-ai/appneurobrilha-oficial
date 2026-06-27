@@ -402,7 +402,9 @@ function ReforcoBrilha() {
         }
       } catch (error) {
         console.error("Erro ao carregar aula:", error);
-        setIsTeaching(false);
+        toast.info("A internet falhou, então abri uma aula local para a criança não ficar sem estudar.");
+        setLessonContent(buildEmergencyReforcoLesson(finalTopic));
+        setCurrentLevel("basic");
       }
     };
 
