@@ -5,6 +5,7 @@ import {
   subjectKey,
   etapaForSerie,
   findStaticById,
+  isRemovedEscolaBrilhaSubject,
   type StaticLesson,
 } from "../data/library";
 import type { AulaBncc, EtapaEscolar } from "./useAulasBncc";
@@ -58,7 +59,7 @@ export function useNextLesson(current: LessonRef): NextLessonTarget | null {
 
   if (!currentInfo || !etapa) return null;
 
-  const statics = STATIC_LESSONS[etapa] ?? [];
+  const statics = (STATIC_LESSONS[etapa] ?? []).filter((s) => !isRemovedEscolaBrilhaSubject(s.badge));
   const merged: NextLessonTarget[] = [
     ...statics.map(
       (s): NextLessonTarget => ({
@@ -70,7 +71,7 @@ export function useNextLesson(current: LessonRef): NextLessonTarget | null {
         search: { category: s.id, type: s.type },
       }),
     ),
-    ...dbAulas.map(
+    ...dbAulas.filter((a) => !isRemovedEscolaBrilhaSubject(a.disciplina)).map(
       (a): NextLessonTarget => ({
         ref: { kind: "db", id: a.id },
         title: a.titulo,
