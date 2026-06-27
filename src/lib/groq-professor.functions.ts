@@ -442,9 +442,13 @@ function parseAulaDinamica(raw: string): AulaDinamica {
 export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import(
-      "@/integrations/supabase/client.server"
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
     );
+
 
     // 1) Cache lookup
     if (!data.force) {
