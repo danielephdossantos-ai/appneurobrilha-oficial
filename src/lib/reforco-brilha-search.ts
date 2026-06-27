@@ -179,8 +179,9 @@ function scoreHabilidade(h: RBHabilidade, tokens: string[], rawQuery: string): {
   // NÚMEROS: quando a query traz um número (ex: "tabuada do 10"),
   // o candidato cujo NOME contém esse número vence; nomes com número
   // diferente são fortemente penalizados.
-  const queryNums = queryN.match(/\b\d+\b/g) || [];
-  const nomeNums = nomeN.match(/\b\d+\b/g) || [];
+  const queryNums: string[] = queryN.match(/\b\d+\b/g) || [];
+  const nomeNums: string[] = nomeN.match(/\b\d+\b/g) || [];
+
   if (queryNums.length > 0) {
     const hit = queryNums.some((n) => nomeNums.includes(n));
     if (hit) {
