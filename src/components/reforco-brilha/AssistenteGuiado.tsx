@@ -410,7 +410,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar, onComecarAulaLivre }: 
           </div>
           <Nav
             onBack={() => setStep(3)}
-            onNext={gerarRecomendacoes}
+            onNext={() => gerarRecomendacoes()}
             canNext={!!tempo}
             nextLabel="Gerar recomendações"
           />
