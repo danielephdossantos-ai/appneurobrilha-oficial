@@ -114,7 +114,7 @@ function AulaDbPage() {
 
     // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
-      const v2 = buildLessonV2(aula.codigo_bncc, aula.titulo, aula.objetivo ?? "");
+      const v2 = buildLessonV2(aula.codigo_bncc, aula.titulo);
       if (v2) {
         return (
           <Fund2Player
