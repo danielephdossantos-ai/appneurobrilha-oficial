@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { requireSupabaseAuth } from "@/database/supabase/auth-middleware";
 
 const MessageSchema = z.object({
   role: z.enum(["system", "user", "assistant"]),
