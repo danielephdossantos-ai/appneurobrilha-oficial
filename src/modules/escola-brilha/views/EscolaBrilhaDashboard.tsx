@@ -82,6 +82,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const [tab, setTab] = useState<EtapaEscolar>("fundamental1");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
   const { habilidades: habilidadesBncc, loading: loadingBncc } = useBnccBibliotecaByEtapa(tab);
+  const activeDbCodes = new Set(aulasBanco.map((a) => a.codigo_bncc).filter(Boolean));
 
   // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
   useEffect(() => {
@@ -142,9 +143,9 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const allSeries = Array.from(
     new Set([
       ...seriesOrder,
-      ...staticItems.map((s) => s.serie),
-      ...aulasBanco.map((a) => a.serie),
-      ...habilidadesBncc.map((h) => `${h.ano}º Ano`),
+      ...staticItems.map((s) => s.serie).filter((s) => seriesOrder.includes(s)),
+      ...aulasBanco.map((a) => a.serie).filter((s) => seriesOrder.includes(s)),
+      ...habilidadesBncc.map((h) => `${h.ano}º Ano`).filter((s) => seriesOrder.includes(s)),
     ]),
   ).sort((a, b) => {
     const ai = seriesOrder.indexOf(a);
@@ -215,9 +216,9 @@ export const EscolaBrilhaDashboard: React.FC = () => {
           >
             {allSeries.map((serie) => {
               const staticCards = staticItems.filter((s) => s.serie === serie);
-              const dbCards = aulasBanco.filter((a) => a.serie === serie);
               const ano = Number(serie.match(/\d+/)?.[0] ?? 0);
-              const bnccCards = habilidadesBncc.filter((h) => h.ano === ano);
+              const dbCards = aulasBanco.filter((a) => lessonAppliesToSerie(a.serie, ano, serie));
+              const bnccCards = habilidadesBncc.filter((h) => h.ano === ano && !activeDbCodes.has(h.codigo));
               if (!staticCards.length && !dbCards.length && !bnccCards.length) return null;
               const total = staticCards.length + dbCards.length + bnccCards.length;
               const practicalTotal = staticCards.length + dbCards.length;
@@ -251,7 +252,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
               !staticItems.some((x) => x.serie === s) && !aulasBanco.some((x) => x.serie === s) && !habilidadesBncc.some((x) => `${x.ano}º Ano` === s),
             ) && (
               <p className="text-white/40 text-sm text-center py-12">
-                Nenhuma aula disponível nesta etapa ainda.
+                  Nenhuma aula disponível nesta etapa ainda.
               </p>
             )}
           </motion.div>
@@ -259,6 +260,13 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       </div>
     </div>
   );
+};
+
+const lessonAppliesToSerie = (lessonSerie: string, ano: number, exactSerie: string) => {
+  if (lessonSerie === exactSerie) return true;
+  const nums = Array.from(lessonSerie.matchAll(/\d+/g)).map((m) => Number(m[0]));
+  if (nums.length >= 2) return ano >= nums[0] && ano <= nums[1];
+  return false;
 };
 
 /* ─── Card único e consistente ─── */
