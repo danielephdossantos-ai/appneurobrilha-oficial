@@ -517,7 +517,8 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                 <p className="text-slate-800 mb-6">{s.explicacao.conceito}</p>
 
                 <h3 className="font-black text-slate-900 mb-3">Passo a passo</h3>
-                {lesson.discipline === "Matemática" ? (
+                {lesson.discipline === "Matemática" &&
+                s.explicacao.passoAPasso.some((p) => isEquationLine(p.step) || isEquationLine(p.detail)) ? (
                   <div className="mb-6">
                     <MathBoard steps={s.explicacao.passoAPasso} />
                   </div>
