@@ -574,7 +574,7 @@ Gere a aula JSON completa.`;
             screens: aula as unknown as Record<string, unknown>,
             modelo: "llama-3.1-8b-instant",
             disciplina: data.componente ?? null,
-            ano: data.serie ?? null,
+            ano: data.serie ?? `${data.idade ?? 9} anos`,
             aprovada: false,
             gerada_em: new Date().toISOString(),
           },

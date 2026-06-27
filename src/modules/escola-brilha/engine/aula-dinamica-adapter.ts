@@ -2,8 +2,16 @@ import type { AulaDinamica } from "@/lib/groq-professor.functions";
 import type { Discipline, LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
 
 function imageUrl(term: string, w = 1200, h = 700) {
-  const q = encodeURIComponent(term.trim());
-  return `https://source.unsplash.com/${w}x${h}/?${q}`;
+  const tags = term
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 4)
+    .map(encodeURIComponent)
+    .join(",");
+  return `https://loremflickr.com/${w}/${h}/${tags || "education"}`;
 }
 
 function disciplineFromText(text?: string | null): Discipline {

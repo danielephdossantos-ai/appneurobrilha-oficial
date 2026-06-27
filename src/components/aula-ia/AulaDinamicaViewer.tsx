@@ -2,9 +2,17 @@ import { useState } from "react";
 import type { AulaDinamica } from "@/lib/groq-professor.functions";
 
 function imgUrl(term: string, w = 800, h = 500) {
-  // Free, no-auth illustrative image (Unsplash Source)
-  const q = encodeURIComponent(term.trim());
-  return `https://source.unsplash.com/${w}x${h}/?${q}`;
+  // Free, no-auth real photo source. Query comes from Groq in English.
+  const tags = term
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 4)
+    .map(encodeURIComponent)
+    .join(",");
+  return `https://loremflickr.com/${w}/${h}/${tags || "education"}`;
 }
 
 type Screen = keyof AulaDinamica["telas"];
