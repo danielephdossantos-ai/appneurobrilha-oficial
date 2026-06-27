@@ -53,7 +53,7 @@ export const ActivityPlayerTeen: React.FC<Props> = ({ lesson, currentRef }) => {
 
   return (
     <div
-      ref={currentRef}
+      ref={currentRef as React.Ref<HTMLDivElement> | undefined}
       className="min-h-screen bg-slate-50 text-slate-900"
     >
       {/* Top bar */}
