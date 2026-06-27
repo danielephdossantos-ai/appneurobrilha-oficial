@@ -43,7 +43,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
               Histórias para você {childName ? `, ${childName}` : ""}
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">
-              Seu nível leitor é <strong>{nivelLeitor}</strong> — destrave novos livros completando a trilha.
+              Seu nível leitor é <strong>{nivelLeitor}</strong> — todas as histórias estão abertas para você ler à vontade.
             </p>
           </div>
         </header>
