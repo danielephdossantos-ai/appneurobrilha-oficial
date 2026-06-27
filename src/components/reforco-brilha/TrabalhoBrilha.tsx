@@ -473,10 +473,17 @@ function EditorTrabalho({
   }
 
   function addRecursoComoTexto(r: RecursoExterno) {
+    const texto = r.conteudo || r.descricao || "";
+    const html = `<h3>${r.titulo}</h3><p>${texto.replace(/\n+/g, "</p><p>")}</p>`;
+    if (insertIntoActiveEditor({ html })) {
+      addFonte(r);
+      toast.success("Inserido no editor");
+      return;
+    }
     setBlocos((b) => [
       ...b,
       { id: uid(), tipo: "titulo", texto: r.titulo },
-      { id: uid(), tipo: "paragrafo", texto: r.conteudo || r.descricao || "" },
+      { id: uid(), tipo: "paragrafo", texto },
     ]);
     addFonte(r);
     toast.success("Adicionado ao trabalho");
@@ -484,6 +491,11 @@ function EditorTrabalho({
   function addRecursoImagem(r: RecursoExterno) {
     if (!r.thumbnail) {
       toast.error("Este item não tem imagem");
+      return;
+    }
+    if (insertIntoActiveEditor({ imageUrl: r.thumbnail, text: r.titulo })) {
+      addFonte(r);
+      toast.success("Imagem inserida no editor");
       return;
     }
     addBlocoImagem(r.thumbnail, r.titulo);
