@@ -273,11 +273,13 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
               </div>
             </div>
             <iframe
-              src={preview.url}
+              src={toEmbedUrl(preview.url, preview.fonte)}
               title={preview.title}
               className="flex-1 w-full bg-white"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
               referrerPolicy="no-referrer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
             />
           </div>
         </div>
