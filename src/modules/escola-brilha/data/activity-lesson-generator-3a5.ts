@@ -11,12 +11,12 @@ import type { ActivityLesson, PraticarOption } from "../types/activity-lesson";
  *  - Conteúdo derivado do título BNCC + tema detectado por palavras-chave.
  */
 
-type SubjectKey = "CI" | "ER" | "GE" | "HI" | "LP" | "MA";
+type SubjectKey = "CI" | "ER" | "GE" | "HI" | "LP" | "MA" | "AR";
 
 const COLORS: PraticarOption["color"][] = ["green", "blue", "orange", "purple", "yellow", "red"];
 
 function subjectFromCode(code: string): SubjectKey | null {
-  const m = code.match(/^EF0\d(CI|ER|GE|HI|LP|MA)\d{2,}$/i);
+  const m = code.match(/^EF0\d(CI|ER|GE|HI|LP|MA|AR)\d{2,}$/i);
   return (m?.[1].toUpperCase() as SubjectKey) ?? null;
 }
 
@@ -37,6 +37,7 @@ const SUBJECT_NAME: Record<SubjectKey, string> = {
   HI: "História",
   LP: "Língua Portuguesa",
   MA: "Matemática",
+  AR: "Arte",
 };
 
 const SUBJECT_EMOJI: Record<SubjectKey, string> = {
@@ -46,6 +47,7 @@ const SUBJECT_EMOJI: Record<SubjectKey, string> = {
   HI: "📜",
   LP: "📖",
   MA: "🔢",
+  AR: "🎨",
 };
 
 // ============== Pacotes temáticos por palavra-chave ==============
@@ -1670,6 +1672,96 @@ const MA_PACKS: Array<{ keys: string[]; pack: Pack }> = [
   },
 ];
 
+const AR_PACKS: Array<{ keys: string[]; pack: Pack }> = [
+  {
+    keys: ["cor", "cores", "pintura", "desenho", "visual"],
+    pack: {
+      topic: "CORES E FORMAS",
+      highlight: "MISTURAR CORES",
+      summary: "Cores se misturam e formam novas cores. Vamos descobrir!",
+      emoji: "🎨",
+      pairs: [
+        { left: "🔵 Azul + 🟡 Amarelo", right: "Verde" },
+        { left: "🔴 Vermelho + 🟡 Amarelo", right: "Laranja" },
+        { left: "🔴 Vermelho + 🔵 Azul", right: "Roxo" },
+      ],
+      shortText: "Azul, vermelho e amarelo são cores primárias. Misturando duas, nasce uma nova cor!",
+      highlights: ["primárias", "misturando", "nova cor"],
+      tip: "Experimente em casa com tinta guache!",
+      exampleTitle: "Misture e veja",
+      exampleSentences: [
+        { text: "Azul + Amarelo = Verde 🟢" },
+        { text: "Vermelho + Amarelo = Laranja 🟠" },
+      ],
+      exampleConclusion: "Arte é misturar e criar!",
+      question: "Qual cor sai de vermelho com azul?",
+      options: [
+        { text: "Roxo", isCorrect: true },
+        { text: "Verde", isCorrect: false },
+        { text: "Laranja", isCorrect: false },
+      ],
+    },
+  },
+  {
+    keys: ["música", "som", "ritmo", "instrumento"],
+    pack: {
+      topic: "SONS E RITMO",
+      highlight: "OUVIR E CRIAR SOM",
+      summary: "Música é feita de sons curtos, longos, altos e baixos.",
+      emoji: "🎵",
+      pairs: [
+        { left: "🥁 Tambor", right: "Som grave" },
+        { left: "🎺 Trompete", right: "Som alto" },
+        { left: "🎻 Violino", right: "Som agudo" },
+      ],
+      shortText: "Cada instrumento faz um som diferente. Juntos formam uma música!",
+      highlights: ["instrumento", "som", "música"],
+      tip: "Bata palmas no ritmo de uma música!",
+      exampleTitle: "Som dos instrumentos",
+      exampleSentences: [
+        { text: "Tambor → grave 🥁" },
+        { text: "Flauta → agudo 🪈" },
+      ],
+      exampleConclusion: "Sons diferentes criam música!",
+      question: "Qual instrumento faz som grave?",
+      options: [
+        { text: "Tambor", isCorrect: true },
+        { text: "Apito", isCorrect: false },
+        { text: "Flauta", isCorrect: false },
+      ],
+    },
+  },
+  {
+    keys: ["dança", "corpo", "movimento", "teatro"],
+    pack: {
+      topic: "CORPO E EXPRESSÃO",
+      highlight: "DANÇAR E REPRESENTAR",
+      summary: "O corpo conta histórias com movimentos e expressões.",
+      emoji: "💃",
+      pairs: [
+        { left: "💃 Dança", right: "Movimento no ritmo" },
+        { left: "🎭 Teatro", right: "Contar com o corpo" },
+        { left: "😊 Expressão", right: "Mostrar sentimento" },
+      ],
+      shortText: "Dança, teatro e mímica usam o corpo para se expressar.",
+      highlights: ["corpo", "expressão", "movimento"],
+      tip: "Tente contar uma história sem falar!",
+      exampleTitle: "Mostre com o corpo",
+      exampleSentences: [
+        { text: "Alegria → pulando 🤸" },
+        { text: "Tristeza → ombros baixos 😔" },
+      ],
+      exampleConclusion: "Arte é também o que fazemos com o corpo!",
+      question: "Qual arte usa o corpo no ritmo da música?",
+      options: [
+        { text: "Dança", isCorrect: true },
+        { text: "Pintura", isCorrect: false },
+        { text: "Escultura", isCorrect: false },
+      ],
+    },
+  },
+];
+
 const PACKS_BY_SUBJECT: Record<SubjectKey, Array<{ keys: string[]; pack: Pack }>> = {
   CI: CI_PACKS,
   ER: ER_PACKS,
@@ -1677,6 +1769,7 @@ const PACKS_BY_SUBJECT: Record<SubjectKey, Array<{ keys: string[]; pack: Pack }>
   HI: HI_PACKS,
   LP: LP_PACKS,
   MA: MA_PACKS,
+  AR: AR_PACKS,
 };
 
 function pickPack(subject: SubjectKey, titulo: string): Pack | null {
@@ -1701,6 +1794,7 @@ function genericPack(subject: SubjectKey, titulo: string, grade: string): Pack {
     HI: `Em História do ${grade} descobrimos como as pessoas viviam antes e como tudo mudou.`,
     LP: `Em Língua Portuguesa do ${grade} a gente lê, escreve e descobre como funciona a nossa língua.`,
     MA: `Em Matemática do ${grade} brincamos com números, contas e formas para resolver problemas.`,
+    AR: `Em Arte do ${grade} criamos com cores, sons, movimentos e ideias.`,
   };
 
   return {
