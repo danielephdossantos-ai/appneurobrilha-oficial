@@ -39,6 +39,7 @@ import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
 import { SpeakButton } from "@/components/ui/SpeakButton";
+import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/missao-prova")({
@@ -254,6 +255,14 @@ function MissaoProva() {
                     <BibliotecaInternet
                       query={`${currentSession.title} ${currentMission.subject}`}
                       onAbrirRecurso={() => setRecursosVistos((n) => n + 1)}
+                    />
+                  </div>
+
+                  <div className="mb-6 p-4 rounded-2xl border-2 border-indigo-100 bg-indigo-50/30">
+                    <MissaoProvaQuiz
+                      topico={currentSession.title}
+                      materia={currentMission.subject}
+                      idade={(activeChild as any)?.idade ?? (activeChild as any)?.age ?? undefined}
                     />
                   </div>
 

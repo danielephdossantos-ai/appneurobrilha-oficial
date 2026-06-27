@@ -661,3 +661,117 @@ Explique de forma fofa e pedagógica por que a resposta dele está incorreta e d
     }
   });
 
+
+// ============================================================
+// QUIZ MISSÃO PROVA — gera mini-simulado (3 questões objetivas)
+// sobre o tópico que a criança acabou de estudar. Usado pelo
+// componente MissaoProvaQuiz; o feedback de erro fica a cargo
+// do ProfessorBrilhaErroExplainer.
+// ============================================================
+
+const QuizInputSchema = z.object({
+  topico: z.string().trim().min(2).max(300),
+  materia: z.string().trim().min(2).max(80),
+  idade: z.number().int().min(5).max(16).optional(),
+  bnccCode: z.string().max(20).optional(),
+});
+
+const QuizQuestionSchema = z.object({
+  pergunta: z.string().min(3).max(400),
+  alternativas: z.array(z.string().min(1).max(200)).min(3).max(4),
+  correta: z.number().int().min(0).max(3),
+});
+
+const QuizSchema = z.object({
+  questoes: z.array(QuizQuestionSchema).min(2).max(4),
+});
+
+export type QuizQuestion = z.infer<typeof QuizQuestionSchema>;
+
+const QUIZ_SYSTEM = `Você gera mini-simulados curtos para crianças neurodivergentes em revisão de prova.
+
+REGRAS:
+- Sempre responda APENAS com JSON válido no formato:
+  {"questoes":[{"pergunta":"...","alternativas":["A","B","C","D"],"correta":0}, ...]}
+- Exatamente 3 questões objetivas, 4 alternativas cada.
+- Português do Brasil, frases curtas, vocabulário adequado à idade.
+- Cada questão deve ter UMA única alternativa correta clara.
+- Não inclua explicações, markdown, comentários — só o JSON.`;
+
+function tryExtractJson(raw: string): unknown {
+  const cleaned = raw
+    .replace(/^```(?:json)?/i, "")
+    .replace(/```$/i, "")
+    .trim();
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    const m = cleaned.match(/\{[\s\S]*\}/);
+    if (m) {
+      try {
+        return JSON.parse(m[0]);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+}
+
+export const gerarQuizMissaoProva = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => QuizInputSchema.parse(input))
+  .handler(async ({ data }) => {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, error: "GROQ_API_KEY ausente", quiz: null };
+    }
+
+    const userPrompt = `Tópico: ${data.topico}
+Matéria: ${data.materia}${data.idade ? `\nIdade do aluno: ${data.idade} anos` : ""}${data.bnccCode ? `\nHabilidade BNCC: ${data.bnccCode}` : ""}
+
+Gere 3 questões objetivas de revisão (4 alternativas, 1 correta).`;
+
+    try {
+      const res = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+              { role: "system", content: QUIZ_SYSTEM },
+              { role: "user", content: userPrompt },
+            ],
+            temperature: 0.4,
+            max_tokens: 900,
+            response_format: { type: "json_object" },
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:quiz] HTTP", res.status, errText.slice(0, 300));
+        return { ok: false as const, error: `Groq ${res.status}`, quiz: null };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const raw = json.choices?.[0]?.message?.content ?? "";
+      const parsed = tryExtractJson(raw);
+      const safe = QuizSchema.safeParse(parsed);
+      if (!safe.success) {
+        console.error("[groq:quiz] JSON inválido", safe.error.message);
+        return { ok: false as const, error: "JSON inválido", quiz: null };
+      }
+      return { ok: true as const, quiz: safe.data, error: null };
+    } catch (e) {
+      console.error("[groq:quiz]", e);
+      return { ok: false as const, error: "Falha de rede", quiz: null };
+    }
+  });
