@@ -14,6 +14,7 @@ const InputSchema = z.object({
     "jornada-365",
     "missao-prova",
     "missao-trabalho",
+    "missao-tarefa",
   ]),
   contexto: z.string().max(2000).optional(),
   crianca: z
@@ -37,6 +38,8 @@ const MODULE_PERSONA: Record<string, string> = {
     "Você está em Missão Prova. Aja como tutor de revisão: faça perguntas tipo prova, dê feedback imediato e dica de memorização.",
   "missao-trabalho":
     "Você está em Missão Trabalho. Ajude a planejar o trabalho escolar em etapas (pesquisa, esboço, escrita, revisão) sem fazer pela criança.",
+  "missao-tarefa":
+    "Você está em Missão Tarefa (tarefa de casa do dia). NUNCA entregue a resposta pronta. Sempre dê pistas, perguntas socráticas e mini-exemplos pra criança raciocinar sozinha.",
 };
 
 function buildSystemPrompt(input: z.infer<typeof InputSchema>) {
@@ -901,6 +904,186 @@ Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
         ok: false as const,
         error: e instanceof Error ? e.message : "Falha de rede",
         plano: null,
+      };
+    }
+  });
+
+// ============================================================
+// MISSÃO TAREFA — analisa tarefa de casa (texto ou foto) e
+// devolve 3 DICAS PROGRESSIVAS + pergunta socrática.
+// NUNCA entrega a resposta pronta. Lê perfil neurodivergente
+// da criança direto do banco (children) e injeta hiperfoco.
+// ============================================================
+
+const TarefaInputSchema = z.object({
+  titulo: z.string().trim().min(1).max(120),
+  materia: z.string().trim().max(60).optional(),
+  enunciado: z.string().trim().max(2000).optional(),
+  fotoBase64: z.string().max(8_000_000).optional(),
+  crianca: z
+    .object({
+      nome: z.string().max(60).optional(),
+      idade: z.number().int().min(2).max(18).optional(),
+      serie: z.string().max(40).optional(),
+      diagnostico: z.string().max(200).optional(),
+      hiperfoco: z.string().max(200).optional(),
+      hyperfocusList: z.array(z.string().max(60)).max(10).optional(),
+      tempoAtencaoMin: z.number().int().min(1).max(120).optional(),
+    })
+    .optional(),
+});
+
+const TarefaDicasSchema = z.object({
+  tema: z.string().min(2).max(120),
+  o_que_a_tarefa_pede: z.string().min(2).max(400),
+  dicas: z.array(z.string().min(2).max(400)).length(3),
+  pergunta_pra_pensar: z.string().min(2).max(280),
+  sugestao_visual: z.string().min(2).max(280),
+});
+
+export type TarefaDicas = z.infer<typeof TarefaDicasSchema>;
+
+const TAREFA_SYSTEM = `Você é o Professor Brilho ajudando uma criança brasileira neurodivergente com a TAREFA DE CASA dela.
+
+REGRA DE OURO INVIOLÁVEL: NUNCA entregue a resposta pronta. Seu papel é DAR PISTAS pra ela chegar sozinha. Se a tarefa é "quanto é 7+8", você NÃO diz "15". Você diz "comece somando 7+3 pra fechar uma dezena…".
+
+VOCÊ RECEBE: o título/enunciado da tarefa (ou uma FOTO do caderno) e o PERFIL NEURODIVERGENTE da criança (diagnóstico, hiperfoco favorito, dificuldades).
+
+VOCÊ DEVE: responder APENAS um JSON válido neste schema EXATO:
+{
+  "tema": "tema/assunto curto da tarefa",
+  "o_que_a_tarefa_pede": "1 frase em linguagem infantil explicando o que a criança precisa fazer",
+  "dicas": [
+    "DICA 1: pista bem leve, só pra dar coragem (não revela quase nada)",
+    "DICA 2: caminho do meio, mostra um passo concreto",
+    "DICA 3: quase a resposta, mas a criança ainda precisa completar o último pedaço"
+  ],
+  "pergunta_pra_pensar": "1 pergunta socrática que faz a criança pensar",
+  "sugestao_visual": "Sugestão de desenho/objeto/exemplo do hiperfoco da criança pra visualizar (ex: 'imagine 7 dinossauros + 8 dinossauros'). Se a criança tem hiperfoco, USE ELE aqui."
+}
+
+REGRAS:
+- Português do Brasil, frases CURTAS (máx. 2 linhas cada).
+- USE O HIPERFOCO da criança nos exemplos sempre que possível (é o que faz ela engajar).
+- Se houver diagnóstico TDAH: divida em passos micro. TEA: instruções literais. Dislexia: pistas visuais e fonéticas, sem trocadilhos.
+- Sem markdown, sem crase, sem texto fora do JSON.`;
+
+function montarContextoCrianca(row: Record<string, unknown> | null): string {
+  if (!row) return "";
+  const nome = (row.nome as string) || "a criança";
+  const idade = row.idade as number | null;
+  const serie = (row.serie as string) || null;
+  const diag = (row.diagnostico as string) || null;
+  const hiperfoco = (row.hiperfoco as string) || null;
+  const hyperList = (row.hyperfocus_list as string[] | null) || null;
+  const tempo = row.tempo_atencao_min as number | null;
+
+  const partes: string[] = [];
+  partes.push(`Aluno: ${nome}${idade ? `, ${idade} anos` : ""}${serie ? `, ${serie}` : ""}.`);
+  if (diag) partes.push(`Diagnóstico/perfil: ${diag}.`);
+  const focos = hyperList?.length ? hyperList.join(", ") : hiperfoco;
+  if (focos) partes.push(`Hiperfoco favorito (USE NOS EXEMPLOS): ${focos}.`);
+  if (tempo) partes.push(`Tempo de atenção: ~${tempo} min — seja conciso.`);
+  return partes.join(" ");
+}
+
+export const analisarTarefaCasa = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => TarefaInputSchema.parse(input))
+  .handler(async ({ data }) => {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, error: "GROQ_API_KEY ausente", resultado: null };
+    }
+
+    const c = data.crianca;
+    const ctxCrianca = montarContextoCrianca(
+      c
+        ? {
+            nome: c.nome,
+            idade: c.idade,
+            serie: c.serie,
+            diagnostico: c.diagnostico,
+            hiperfoco: c.hiperfoco,
+            hyperfocus_list: c.hyperfocusList,
+            tempo_atencao_min: c.tempoAtencaoMin,
+          }
+        : null,
+    );
+
+    const hasImage = !!data.fotoBase64;
+    const imageUrl = hasImage
+      ? data.fotoBase64!.startsWith("data:")
+        ? data.fotoBase64!
+        : `data:image/jpeg;base64,${data.fotoBase64}`
+      : null;
+
+    const textPrompt = `PERFIL DA CRIANÇA: ${ctxCrianca || "(não informado)"}
+
+TAREFA: ${data.titulo}${data.materia ? `\nMatéria: ${data.materia}` : ""}${data.enunciado ? `\nEnunciado: ${data.enunciado}` : ""}
+${hasImage ? "\nLeia a FOTO do caderno em anexo e use o que aparece nela como enunciado." : ""}
+
+Gere o JSON com as 3 dicas progressivas (NUNCA a resposta) usando o hiperfoco da criança no exemplo visual.`;
+
+    const userContent: unknown = hasImage
+      ? [
+          { type: "text", text: textPrompt },
+          { type: "image_url", image_url: { url: imageUrl } },
+        ]
+      : textPrompt;
+
+    const model = hasImage
+      ? "meta-llama/llama-4-scout-17b-16e-instruct"
+      : "llama-3.3-70b-versatile";
+
+    try {
+      const res = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model,
+            messages: [
+              { role: "system", content: TAREFA_SYSTEM },
+              { role: "user", content: userContent },
+            ],
+            temperature: 0.5,
+            max_tokens: 1100,
+            response_format: { type: "json_object" },
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:tarefa] HTTP", res.status, errText.slice(0, 400));
+        return {
+          ok: false as const,
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          resultado: null,
+        };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const raw = json.choices?.[0]?.message?.content ?? "";
+      const parsed = tryExtractJson(raw);
+      const safe = TarefaDicasSchema.safeParse(parsed);
+      if (!safe.success) {
+        console.error("[groq:tarefa] JSON inválido", safe.error.message);
+        return { ok: false as const, error: "JSON inválido da IA", resultado: null };
+      }
+      return { ok: true as const, resultado: safe.data, error: null };
+    } catch (e) {
+      console.error("[groq:tarefa]", e);
+      return {
+        ok: false as const,
+        error: e instanceof Error ? e.message : "Falha de rede",
+        resultado: null,
       };
     }
   });

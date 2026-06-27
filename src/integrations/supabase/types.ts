@@ -1819,6 +1819,68 @@ export type Database = {
         }
         Relationships: []
       }
+      homework_tasks: {
+        Row: {
+          child_id: string
+          created_at: string
+          dica_revelada: number
+          dicas_ia: Json | null
+          due_date: string
+          enunciado: string | null
+          foto_texto: string | null
+          foto_url: string | null
+          ia_resumo: Json | null
+          id: string
+          materia: string | null
+          status: string
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          dica_revelada?: number
+          dicas_ia?: Json | null
+          due_date?: string
+          enunciado?: string | null
+          foto_texto?: string | null
+          foto_url?: string | null
+          ia_resumo?: Json | null
+          id?: string
+          materia?: string | null
+          status?: string
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          dica_revelada?: number
+          dicas_ia?: Json | null
+          due_date?: string
+          enunciado?: string | null
+          foto_texto?: string | null
+          foto_url?: string | null
+          ia_resumo?: Json | null
+          id?: string
+          materia?: string | null
+          status?: string
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "homework_tasks_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       inventory: {
         Row: {
           child_id: string
