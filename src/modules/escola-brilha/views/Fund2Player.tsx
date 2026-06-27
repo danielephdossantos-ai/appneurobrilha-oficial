@@ -205,7 +205,76 @@ const Feedback: React.FC<{ picked: OptionV2 | null }> = ({ picked }) =>
     </div>
   ) : null;
 
+/* ─────────── MathBoard — "lousa" de resolução passo a passo ───────────
+   Detecta linhas com '=' como equações e linhas com "dos dois lados",
+   "÷", "×", "+" ou "−" como operações. Renderiza cada passo como linha
+   da lousa, com a operação aplicada visivelmente entre uma equação e
+   a próxima, e setas verticais conectando os passos.                       */
+const isEquationLine = (s: string) => /[=]/.test(s);
+const looksLikeOperation = (s: string) =>
+  /dos dois lados/i.test(s) || /^[\s]*[+\-−×÷xX·*\/][\s]*\d/.test(s.trim());
+
+const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" }> = ({ text, tone = "eq" }) => {
+  if (tone === "op") {
+    return (
+      <div className="flex flex-col items-center my-1">
+        <div className="text-slate-400 text-lg leading-none">↓</div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase tracking-wider border border-amber-200">
+          {text}
+        </div>
+        <div className="text-slate-400 text-lg leading-none">↓</div>
+      </div>
+    );
+  }
+  if (tone === "note") {
+    return <div className="text-center text-xs text-slate-500 mt-1">{text}</div>;
+  }
+  return (
+    <div className="text-center font-mono text-3xl sm:text-4xl font-black text-slate-900 tracking-wider py-2">
+      {text}
+    </div>
+  );
+};
+
+const MathBoard: React.FC<{ steps: { step: string; detail: string }[] }> = ({ steps }) => {
+  // Flatten cada passo em uma sequência de linhas (equação / operação / nota).
+  const lines: { text: string; tone: "eq" | "op" | "note"; tag?: string }[] = [];
+  steps.forEach((p, idx) => {
+    const head = p.step.includes("—") ? p.step.split("—").slice(1).join("—").trim() : p.step.trim();
+    const detail = (p.detail || "").trim();
+    const tag = `Passo ${idx + 1}`;
+    if (isEquationLine(head)) {
+      lines.push({ text: head, tone: "eq", tag });
+      if (detail && !isEquationLine(detail)) lines.push({ text: detail, tone: "note" });
+      else if (detail) lines.push({ text: detail, tone: "eq" });
+    } else if (looksLikeOperation(head)) {
+      lines.push({ text: head, tone: "op", tag });
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
+    } else {
+      // header genérico — vira nota acima da equação seguinte
+      if (head) lines.push({ text: head, tone: "note" });
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
+    }
+  });
+
+  return (
+    <div className="rounded-3xl border-2 border-slate-200 bg-gradient-to-b from-slate-50 to-white p-5 sm:p-8 shadow-inner">
+      {lines.map((ln, i) => (
+        <div key={i} className="relative">
+          {ln.tag && ln.tone === "eq" && (
+            <div className="text-[10px] font-black uppercase tracking-widest text-emerald-700 text-center mb-1">
+              {ln.tag}
+            </div>
+          )}
+          <MathLine text={ln.text} tone={ln.tone} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 /* ════════════════════════════════════════════════ */
+
 
 export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) => {
   const navigate = useNavigate();
@@ -356,14 +425,20 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                     )}
                   </div>
                 )}
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {s.exploracao.pairs.map((p, i) => (
-                    <div key={i} className="rounded-xl border border-slate-200 p-3 bg-slate-50">
-                      <p className="text-sm font-black text-slate-900">{p.left}</p>
-                      <p className="text-sm text-slate-600">{p.right}</p>
-                    </div>
-                  ))}
-                </div>
+                {lesson.discipline === "Matemática" ? (
+                  <MathBoard
+                    steps={s.exploracao.pairs.map((p) => ({ step: p.left, detail: p.right }))}
+                  />
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {s.exploracao.pairs.map((p, i) => (
+                      <div key={i} className="rounded-xl border border-slate-200 p-3 bg-slate-50">
+                        <p className="text-sm font-black text-slate-900">{p.left}</p>
+                        <p className="text-sm text-slate-600">{p.right}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </Card>
             )}
 
@@ -375,19 +450,25 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                 <p className="text-slate-800 mb-6">{s.explicacao.conceito}</p>
 
                 <h3 className="font-black text-slate-900 mb-3">Passo a passo</h3>
-                <ol className="space-y-3 mb-6">
-                  {s.explicacao.passoAPasso.map((p, i) => (
-                    <li key={i} className="flex gap-3">
-                      <span className="shrink-0 w-7 h-7 rounded-lg bg-[#0b2545] text-white grid place-items-center text-xs font-black">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <p className="font-bold text-slate-900">{p.step}</p>
-                        <p className="text-slate-700 text-sm">{p.detail}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+                {lesson.discipline === "Matemática" ? (
+                  <div className="mb-6">
+                    <MathBoard steps={s.explicacao.passoAPasso} />
+                  </div>
+                ) : (
+                  <ol className="space-y-3 mb-6">
+                    {s.explicacao.passoAPasso.map((p, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="shrink-0 w-7 h-7 rounded-lg bg-[#0b2545] text-white grid place-items-center text-xs font-black">
+                          {i + 1}
+                        </span>
+                        <div>
+                          <p className="font-bold text-slate-900">{p.step}</p>
+                          <p className="text-slate-700 text-sm">{p.detail}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="rounded-xl border border-slate-200 p-4 bg-amber-50/40">
