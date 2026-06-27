@@ -79,6 +79,8 @@ export interface ActivityLesson {
       highlight: string;
       summary: string;
       visual_emoji?: string; // big emoji shown in header background
+      image_url?: string; // real photo/illustration shown as hero (Fundamental II)
+      image_caption?: string;
     };
     exploracao: {
       instruction: string;
@@ -92,9 +94,11 @@ export interface ActivityLesson {
     };
     exemplo_visual: {
       title: string;
-      sentences: Array<{ text: string; emoji?: string }>;
+      sentences: Array<{ text: string; emoji?: string; image_url?: string }>;
       conclusion: string;
       visual?: VisualConfig; // step-by-step visual for math
+      image_url?: string; // hero image shown above the visual (Fundamental II)
+      image_caption?: string;
     };
     praticar: {
       question: string;
