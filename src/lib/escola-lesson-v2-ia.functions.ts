@@ -2,59 +2,60 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { Discipline, LessonV2 } from "@/modules/escola-brilha/types/lesson-v2";
 
+// Texto sempre curto: no máximo 2 frases por bloco. Limites max baixos.
 const OptionSchema = z.object({
-  text: z.string().min(1).max(160),
+  text: z.string().min(1).max(120),
   isCorrect: z.boolean(),
-  reason: z.string().min(8).max(320),
+  reason: z.string().min(6).max(140),
 });
 
 const LessonContentSchema = z.object({
-  title: z.string().min(3).max(160),
+  title: z.string().min(3).max(120),
   missao: z.object({
-    studentObjective: z.string().min(20).max(260),
+    studentObjective: z.string().min(10).max(160),
     contextEmoji: z.string().min(1).max(8),
-    contextLine: z.string().min(15).max(220),
-    whatYouWillDo: z.array(z.string().min(8).max(160)).min(3).max(5),
+    contextLine: z.string().min(10).max(140),
+    whatYouWillDo: z.array(z.string().min(6).max(100)).min(3).max(4),
   }),
   exploracao: z.object({
-    provokingQuestion: z.string().min(15).max(220),
-    observation: z.string().min(30).max(520),
-    pairs: z.array(z.object({ left: z.string().max(80), right: z.string().max(180) })).min(3).max(6),
+    provokingQuestion: z.string().min(8).max(140),
+    observation: z.string().min(15).max(180),
+    pairs: z.array(z.object({ left: z.string().max(60), right: z.string().max(120) })).min(3).max(5),
   }),
   explicacao: z.object({
-    conceito: z.string().min(120).max(900),
-    passoAPasso: z.array(z.object({ step: z.string().max(110), detail: z.string().max(260) })).min(4).max(6),
-    exemplo: z.string().min(60).max(420),
-    aplicacao: z.string().min(40).max(260),
-    resumo: z.string().min(35).max(240),
+    conceito: z.string().min(30).max(220),
+    passoAPasso: z.array(z.object({ step: z.string().max(80), detail: z.string().max(140) })).min(3).max(5),
+    exemplo: z.string().min(15).max(180),
+    aplicacao: z.string().min(15).max(140),
+    resumo: z.string().min(15).max(140),
   }),
   exemplo: z.object({
-    question: z.string().min(10).max(240),
-    resolution: z.array(z.object({ line: z.string().min(8).max(240), note: z.string().max(24).optional() })).min(4).max(7),
-    answer: z.string().min(1).max(220),
-    why: z.string().min(20).max(360),
+    question: z.string().min(10).max(180),
+    resolution: z.array(z.object({ line: z.string().min(6).max(140), note: z.string().max(24).optional() })).min(3).max(5),
+    answer: z.string().min(1).max(140),
+    why: z.string().min(10).max(160),
   }),
   guiada: z.object({
-    prompt: z.string().min(10).max(260),
+    prompt: z.string().min(8).max(160),
     options: z.array(OptionSchema).min(3).max(4),
-    hint: z.string().min(15).max(260),
+    hint: z.string().min(8).max(140),
   }),
   atividade: z.object({
-    items: z.array(z.object({ question: z.string().min(10).max(260), options: z.array(OptionSchema).min(3).max(4) })).min(2).max(4),
+    items: z.array(z.object({ question: z.string().min(8).max(160), options: z.array(OptionSchema).min(3).max(4) })).min(2).max(3),
   }),
   desafio: z.object({
-    contextualScenario: z.string().min(20).max(260),
-    question: z.string().min(10).max(260),
+    contextualScenario: z.string().min(10).max(140),
+    question: z.string().min(8).max(160),
     options: z.array(OptionSchema).min(3).max(4),
   }),
   resumo: z.object({
     format: z.enum(["mindmap", "table", "flow", "list", "timeline", "diagram"]),
-    title: z.string().min(3).max(120),
-    nodes: z.array(z.object({ label: z.string().max(80), detail: z.string().max(180).optional() })).min(3).max(7),
-    takeaways: z.array(z.string().min(8).max(180)).min(3).max(5),
+    title: z.string().min(3).max(80),
+    nodes: z.array(z.object({ label: z.string().max(60), detail: z.string().max(120).optional() })).min(3).max(6),
+    takeaways: z.array(z.string().min(6).max(120)).min(3).max(4),
   }),
   dominio: z.object({
-    recommendation: z.string().min(20).max(260),
+    recommendation: z.string().min(15).max(180),
   }),
 });
 
