@@ -219,16 +219,30 @@ function Jornada() {
   const speakDay = (day: number) =>
     speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
 
+  const speakDay = (day: number) =>
+    speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
+
+  const abrirAulaHoje = async () => {
+    const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
+    const aulaId = blocos.find((b) => b?.payload?.aula_id)?.payload?.aula_id;
+    if (aulaHoje && aulaHoje.status === "disponivel") {
+      await supabase.from("pei_aulas").update({ status: "em_andamento" }).eq("id", aulaHoje.id);
+    }
+    if (aulaId) {
+      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
+    } else {
+      navigate({ to: "/escola-brilha" });
+    }
+  };
+
   return (
     <Shell>
       <div className="relative min-h-[calc(100vh-6rem)] -mx-4 -my-2 px-4 py-6 rounded-3xl overflow-hidden">
         {world === "dinossauros" ? <DinoWorld /> : <WorldBackground world={world} />}
 
-        {/* Aula de hoje fica escondida da criança — só sistema/relatório dos pais usa */}
-
         {/* Trilha */}
         <div className="relative z-10">
-          <DayTrail currentDay={currentDay} theme={theme} onSpeakDay={speakDay} />
+          <DayTrail currentDay={currentDay} theme={theme} onSpeakDay={speakDay} onOpenToday={abrirAulaHoje} />
         </div>
 
         {/* Botão Ouvir flutuante */}
