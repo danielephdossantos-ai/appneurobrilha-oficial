@@ -136,63 +136,80 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
     },
   });
 
+  const gerarPlanoFn = useServerFn(gerarPlanoEstudosMissaoProva);
+  const photoInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+  const [photoLoadingId, setPhotoLoadingId] = useState<string | null>(null);
+
   const generatePlanMutation = useMutation({
-    mutationFn: async (mission: any) => {
-      const daysUntilExam = differenceInDays(new Date(mission.exam_date + "T12:00:00"), new Date());
+    mutationFn: async ({ mission, fotoBase64 }: { mission: any; fotoBase64?: string }) => {
+      const examDate = new Date(mission.exam_date + "T12:00:00");
+      const daysUntilExam = differenceInDays(examDate, startOfDay(new Date()));
       if (daysUntilExam <= 0) {
         throw new Error("A data da prova precisa ser no futuro.");
       }
+      const conteudos: string[] =
+        mission.contents?.map((c: any) => c.content_title).filter(Boolean) ?? [];
 
-      const contents = mission.contents;
-      if (contents.length === 0) {
-        throw new Error("Adicione conteúdos antes de gerar o plano.");
+      const res = await gerarPlanoFn({
+        data: {
+          materia: mission.subject,
+          dataProva: mission.exam_date,
+          diasAteProva: daysUntilExam,
+          conteudos: conteudos.length ? conteudos : undefined,
+          observacoes: mission.notes || undefined,
+          fotoBase64,
+        },
+      });
+      if (!res.ok || !res.plano) {
+        throw new Error(res.error || "A IA não conseguiu gerar o plano.");
       }
 
-      // Simular identificação automática de habilidades BNCC
-      const contentsWithBncc = contents.map((c: any) => ({
-        ...c,
-        bncc_code: mission.subject === "Matemática" ? "EF01MA01" : "EF01LP01", // Mock BNCC mapping
-      }));
-
-      // Limpar plano anterior
       await (supabase as any).from("exam_study_plans").delete().eq("mission_id", mission.id);
 
-      const studySessions = [];
-      const contentsPerDay = Math.ceil(contentsWithBncc.length / Math.min(daysUntilExam, 7)); // Distribui em até 7 dias
-
-      let contentIndex = 0;
-      for (let i = 0; i < Math.min(daysUntilExam, 7); i++) {
-        const sessionDate = addDays(startOfDay(new Date()), i + 1);
-        if (isBefore(sessionDate, new Date(mission.exam_date + "T12:00:00"))) {
-          const sessionContents = contentsWithBncc.slice(
-            contentIndex,
-            contentIndex + contentsPerDay,
-          );
-          if (sessionContents.length > 0) {
-            studySessions.push({
-              mission_id: mission.id,
-              scheduled_date: format(sessionDate, "yyyy-MM-dd"),
-              title: `Estudo: ${mission.subject}`,
-              description: `Revisar: ${sessionContents.map((c: any) => c.content_title).join(", ")}. Habilidades: ${sessionContents.map((c: any) => c.bncc_code).join(", ")}`,
-            });
-          }
-          contentIndex += contentsPerDay;
-        }
-      }
-
-      const { error } = await (supabase as any).from("exam_study_plans").insert(studySessions);
+      const sessoes = res.plano.sessoes.map((s) => ({
+        mission_id: mission.id,
+        scheduled_date: s.scheduled_date,
+        title: s.title,
+        description: s.description,
+      }));
+      const { error } = await (supabase as any).from("exam_study_plans").insert(sessoes);
       if (error) throw error;
+      return res.plano;
     },
-    onSuccess: () => {
+    onSuccess: (plano) => {
       missionQueryKeys(childId).forEach((queryKey) => {
         queryClient.invalidateQueries({ queryKey });
       });
-      toast.success("Plano de estudos gerado com sucesso pelo Sistema Infinito!");
+      toast.success(
+        plano?.resumoMaterial
+          ? `Plano gerado! IA leu: ${plano.resumoMaterial.slice(0, 90)}`
+          : "Plano de estudos gerado pela IA!",
+      );
     },
     onError: (error: any) => {
-      toast.error(error.message);
+      toast.error(error?.message || "Falha ao gerar o plano.");
     },
+    onSettled: () => setPhotoLoadingId(null),
   });
+
+  const handlePhotoSelected = async (mission: any, file: File) => {
+    if (file.size > 6 * 1024 * 1024) {
+      toast.error("Foto muito grande (máx 6MB). Tire outra mais leve.");
+      return;
+    }
+    setPhotoLoadingId(mission.id);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fotoBase64 = String(reader.result || "");
+      generatePlanMutation.mutate({ mission, fotoBase64 });
+    };
+    reader.onerror = () => {
+      setPhotoLoadingId(null);
+      toast.error("Não consegui ler a foto.");
+    };
+    reader.readAsDataURL(file);
+  };
+
 
   return (
     <Card className="bg-white border-slate-200 overflow-hidden shadow-sm">
