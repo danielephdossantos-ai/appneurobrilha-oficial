@@ -531,17 +531,41 @@ function EditorTrabalho({
   async function exportarPDF() {
     if (!documentoRef.current) return;
     toast.info("Gerando PDF...");
-    const html2pdf = (await import("html2pdf.js")).default;
-    await html2pdf()
-      .from(documentoRef.current)
-      .set({
-        margin: [15, 12, 15, 12],
-        filename: `${(titulo || "trabalho").replace(/\W+/g, "_")}.pdf`,
-        image: { type: "jpeg", quality: 0.92 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      } as any)
-      .save();
+    try {
+      const html2pdf = (await import("html2pdf.js")).default;
+      const filename = `${(titulo || "trabalho").replace(/\W+/g, "_")}.pdf`;
+      const worker = html2pdf()
+        .from(documentoRef.current)
+        .set({
+          margin: [15, 12, 15, 12],
+          filename,
+          image: { type: "jpeg", quality: 0.92 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        } as any);
+
+      // Gera blob e força download + abre em nova aba (fallback mobile / iframe)
+      const blob: Blob = await worker.outputPdf("blob");
+      const url = URL.createObjectURL(blob);
+
+      // 1) Download forçado
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      // 2) Abre em nova aba pra criança visualizar / compartilhar
+      window.open(url, "_blank", "noopener,noreferrer");
+
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      toast.success("PDF gerado! Verifique os downloads ou a nova aba.");
+    } catch (e: any) {
+      console.error(e);
+      toast.error("Não consegui gerar o PDF. Tente novamente.");
+    }
   }
 
   return (
