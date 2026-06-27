@@ -769,8 +769,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                   </div>
                   <div className="space-y-2">
                     <div className="rounded-xl border border-slate-200 p-3">
-                      <p className="text-xs font-bold uppercase text-slate-500">Competência BNCC</p>
-                      <p className="font-black text-slate-900">{s.dominio.bnccCode}</p>
+                      <p className="text-xs font-bold uppercase text-slate-500">Habilidade trabalhada</p>
                       <p className="text-sm text-slate-700">{s.dominio.bnccObjective}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
