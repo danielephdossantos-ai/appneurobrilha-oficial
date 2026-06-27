@@ -491,7 +491,8 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                     )}
                   </div>
                 )}
-                {lesson.discipline === "Matemática" ? (
+                {lesson.discipline === "Matemática" &&
+                s.exploracao.pairs.some((p) => isEquationLine(p.left) || isEquationLine(p.right)) ? (
                   <MathBoard
                     steps={s.exploracao.pairs.map((p) => ({ step: p.left, detail: p.right }))}
                   />
