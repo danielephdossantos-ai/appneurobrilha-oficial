@@ -1794,6 +1794,7 @@ function genericPack(subject: SubjectKey, titulo: string, grade: string): Pack {
     HI: `Em História do ${grade} descobrimos como as pessoas viviam antes e como tudo mudou.`,
     LP: `Em Língua Portuguesa do ${grade} a gente lê, escreve e descobre como funciona a nossa língua.`,
     MA: `Em Matemática do ${grade} brincamos com números, contas e formas para resolver problemas.`,
+    AR: `Em Arte do ${grade} criamos com cores, sons, movimentos e ideias.`,
   };
 
   return {
