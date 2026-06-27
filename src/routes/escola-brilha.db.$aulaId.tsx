@@ -10,6 +10,7 @@ import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLesson
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
+import { buildLessonV2 } from "../modules/escola-brilha/engine/lesson-builder-v2";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
