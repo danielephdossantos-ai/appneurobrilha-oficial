@@ -425,6 +425,9 @@ function EditorTrabalho({
   function addBlocoParagrafo(texto = "Escreva aqui...") {
     setBlocos((b) => [...b, { id: uid(), tipo: "paragrafo", texto }]);
   }
+  function addBlocoRico() {
+    setBlocos((b) => [...b, { id: uid(), tipo: "rico", html: "<p>Escreva aqui com formatação...</p>" }]);
+  }
   function addBlocoImagem(url: string, legenda = "") {
     setBlocos((b) => [...b, { id: uid(), tipo: "imagem", url, legenda }]);
   }
