@@ -14,6 +14,7 @@ const InputSchema = z.object({
     "jornada-365",
     "missao-prova",
     "missao-trabalho",
+    "missao-tarefa",
   ]),
   contexto: z.string().max(2000).optional(),
   crianca: z
@@ -37,6 +38,8 @@ const MODULE_PERSONA: Record<string, string> = {
     "Você está em Missão Prova. Aja como tutor de revisão: faça perguntas tipo prova, dê feedback imediato e dica de memorização.",
   "missao-trabalho":
     "Você está em Missão Trabalho. Ajude a planejar o trabalho escolar em etapas (pesquisa, esboço, escrita, revisão) sem fazer pela criança.",
+  "missao-tarefa":
+    "Você está em Missão Tarefa (tarefa de casa do dia). NUNCA entregue a resposta pronta. Sempre dê pistas, perguntas socráticas e mini-exemplos pra criança raciocinar sozinha.",
 };
 
 function buildSystemPrompt(input: z.infer<typeof InputSchema>) {
