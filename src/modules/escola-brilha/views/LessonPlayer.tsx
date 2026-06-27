@@ -87,15 +87,13 @@ export const LessonPlayer: React.FC = () => {
 
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) {
-    // 6º–9º Ano: usa o novo player premium de 8 telas (Fund2Player).
-    const f2 = generateActivityLesson6a9(lessonC.bncc_code, lessonC.title);
-    if (f2) {
+    // 6º–9º Ano: novo player de 9 telas com Templates Pedagógicos (Fund2Player).
+    const v2 = buildLessonV2(lessonC.bncc_code, lessonC.title);
+    if (v2) {
       return (
         <Fund2Player
-          lesson={f2}
-          disciplina={lessonC.subject}
-          serie={lessonC.grade}
-          codigoBncc={lessonC.bncc_code}
+          lesson={v2}
+          capitulo={lessonC.bncc_code}
         />
       );
     }
