@@ -885,17 +885,53 @@ function ReforcoBrilha() {
                                   ? "📝"
                                   : "🎯"}
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-3 flex-1">
                               <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider">
                                 {step.type === "explanation"
                                   ? "Explicação"
                                   : step.type === "example"
                                     ? "Exemplo Prático"
-                                    : "Desafio"}
+                                    : step.type === "exercise"
+                                      ? "Exercício com correção"
+                                      : "Dica"}
                               </span>
                               <p className="text-lg font-medium leading-relaxed text-foreground">
                                 {step.text}
                               </p>
+                              {step.content?.question && (
+                                <div className="mt-4 rounded-2xl border border-border bg-muted/30 p-4 space-y-3">
+                                  <p className="font-black text-foreground">{step.content.question}</p>
+                                  {Array.isArray(step.content.options) && step.content.options.length > 0 && (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                      {step.content.options.map((op: string, opIdx: number) => {
+                                        const certo = String(op).trim().toLowerCase() === String(step.content?.answer ?? "").trim().toLowerCase();
+                                        return (
+                                          <div
+                                            key={`${op}-${opIdx}`}
+                                            className={`rounded-xl border px-3 py-2 text-sm font-bold ${
+                                              certo
+                                                ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                                                : "border-border bg-background text-muted-foreground"
+                                            }`}
+                                          >
+                                            {op}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  )}
+                                  {step.content.answer !== undefined && (
+                                    <div className="rounded-xl bg-emerald-500/10 border border-emerald-200 p-3 text-emerald-800 font-black">
+                                      ✓ Resposta: {String(step.content.answer)}
+                                    </div>
+                                  )}
+                                  {step.content.explanation && (
+                                    <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-amber-900 text-sm font-semibold">
+                                      💡 {step.content.explanation}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
