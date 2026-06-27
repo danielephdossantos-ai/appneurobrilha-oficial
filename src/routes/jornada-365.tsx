@@ -223,13 +223,16 @@ function Jornada() {
 
 
   const abrirAulaHoje = async () => {
-    const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
+    const blocos = (aulaHoje?.atividades as Array<{ slug?: string; payload?: { aula_id?: string } }> | null) ?? [];
     const aulaId = blocos.find((b) => b?.payload?.aula_id)?.payload?.aula_id;
+    const bnccCode = blocos.find((b) => b?.slug)?.slug;
     if (aulaHoje && aulaHoje.status === "disponivel") {
       await supabase.from("pei_aulas").update({ status: "em_andamento" }).eq("id", aulaHoje.id);
     }
     if (aulaId) {
       navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
+    } else if (bnccCode) {
+      navigate({ to: "/aula-ia/$bnccCode", params: { bnccCode } });
     } else {
       navigate({ to: "/escola-brilha" });
     }
