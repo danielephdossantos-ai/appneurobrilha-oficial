@@ -145,6 +145,10 @@ function BnccCodigoPage() {
       if (m && raso) {
         await acionarIA("tudo");
       }
+      // Auto-busca vídeo se ainda não tem
+      if (m && !c?.video_url) {
+        acionarBuscaVideo(false);
+      }
     })();
     return () => {
       active = false;
