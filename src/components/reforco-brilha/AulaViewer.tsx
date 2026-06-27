@@ -392,13 +392,22 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
 
         {/* Página estilo papel de apostila */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50/40 to-white px-5 sm:px-12 py-8 border-x-4 border-amber-100 shadow-2xl">
-          {loading ? (
-            <div className="h-64 grid place-items-center text-muted-foreground">
-              Carregando aula…
+          {loading || gerando ? (
+            <div className="h-64 grid place-items-center text-center gap-3">
+              <Loader2 className="h-8 w-8 text-amber-500 animate-spin mx-auto" />
+              <p className="text-sm text-muted-foreground font-semibold">
+                {gerando ? "Brilha está montando a aula completa pra você…" : "Carregando aula…"}
+              </p>
             </div>
           ) : !atual ? (
-            <div className="h-64 grid place-items-center text-muted-foreground text-center">
-              Esta aula ainda não tem páginas cadastradas.
+            <div className="h-64 grid place-items-center text-center gap-3">
+              <p className="text-muted-foreground">Esta aula ainda não tem páginas.</p>
+              <button
+                onClick={() => regenerar(true)}
+                className="px-4 py-2 rounded-xl bg-amber-500 text-white text-sm font-bold inline-flex items-center gap-2"
+              >
+                <Sparkles className="h-4 w-4" /> Gerar com a Brilha
+              </button>
             </div>
           ) : (
             <div key={atual.id} className="animate-in fade-in slide-in-from-right-4 duration-300">
