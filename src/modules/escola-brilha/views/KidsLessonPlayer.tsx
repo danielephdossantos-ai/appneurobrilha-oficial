@@ -100,7 +100,7 @@ export const KidsLessonPlayer: React.FC<Props> = ({ lesson, currentRef }) => {
             transition={{ duration: 0.3 }}
             className="flex-1 bg-white rounded-3xl shadow-xl p-5 flex flex-col"
           >
-            <SceneView scene={scene} accent={c} />
+            <SceneView scene={scene} accent={c} lesson={lesson} />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -138,30 +138,32 @@ export const KidsLessonPlayer: React.FC<Props> = ({ lesson, currentRef }) => {
 const SceneView: React.FC<{
   scene: KidsScene;
   accent: (typeof COLORS)[keyof typeof COLORS];
-}> = ({ scene, accent }) => {
+  lesson: KidsLesson;
+}> = ({ scene, accent, lesson }) => {
+  const coachMascot = lesson.scenes.find((s) => s.kind === "intro")?.mascot ?? "pip";
   switch (scene.kind) {
     case "intro":
       return <IntroScene scene={scene} accent={accent} />;
     case "concept":
-      return <ConceptScene scene={scene} accent={accent} />;
+      return <ConceptScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "usecase":
-      return <UseCaseScene scene={scene} accent={accent} />;
+      return <UseCaseScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_count":
-      return <StepCountScene scene={scene} accent={accent} />;
+      return <StepCountScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_join":
-      return <StepJoinScene scene={scene} accent={accent} />;
+      return <StepJoinScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_vertical_sum":
-      return <StepVerticalSumScene scene={scene} accent={accent} />;
+      return <StepVerticalSumScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_subtract":
-      return <StepSubtractScene scene={scene} accent={accent} />;
+      return <StepSubtractScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_vertical_sub":
-      return <StepVerticalSubScene scene={scene} accent={accent} />;
+      return <StepVerticalSubScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "step_equal":
-      return <StepEqualScene scene={scene} accent={accent} />;
+      return <StepEqualScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "practice_count":
-      return <PracticeCountScene scene={scene} accent={accent} />;
+      return <PracticeCountScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "summary":
-      return <SummaryScene scene={scene} accent={accent} />;
+      return <SummaryScene scene={scene} accent={accent} mascot={coachMascot} />;
     case "celebrate":
       return <CelebrateScene scene={scene} accent={accent} />;
   }
@@ -174,6 +176,25 @@ const SceneTitle: React.FC<{ children: React.ReactNode; accent: any }> = ({
   <h2 className={`text-2xl sm:text-3xl font-black ${accent.text} text-center mb-4`}>
     {children}
   </h2>
+);
+
+const CoachBubble: React.FC<{
+  fala: string;
+  accent: any;
+  mascot?: "pip" | "pipa";
+}> = ({ fala, accent, mascot = "pip" }) => (
+  <div className="w-full max-w-2xl mx-auto flex items-center justify-center gap-3 sm:gap-4">
+    <img
+      src={mascot === "pip" ? pipImg : pipaImg}
+      alt={mascot === "pip" ? "Pip explicando" : "Pipa explicando"}
+      className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-lg shrink-0"
+    />
+    <div className={`${accent.soft} rounded-3xl px-4 py-3 shadow-sm border-2 border-white`}>
+      <p className="text-slate-700 text-base sm:text-lg text-left font-bold leading-snug">
+        {fala}
+      </p>
+    </div>
+  </div>
 );
 
 const IntroScene: React.FC<{ scene: Extract<KidsScene, { kind: "intro" }>; accent: any }> = ({
@@ -197,9 +218,10 @@ const IntroScene: React.FC<{ scene: Extract<KidsScene, { kind: "intro" }>; accen
   </div>
 );
 
-const ConceptScene: React.FC<{ scene: Extract<KidsScene, { kind: "concept" }>; accent: any }> = ({
+const ConceptScene: React.FC<{ scene: Extract<KidsScene, { kind: "concept" }>; accent: any; mascot: "pip" | "pipa" }> = ({
   scene,
   accent,
+  mascot,
 }) => (
   <div className="flex-1 flex flex-col items-center justify-center gap-5">
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
@@ -213,15 +235,14 @@ const ConceptScene: React.FC<{ scene: Extract<KidsScene, { kind: "concept" }>; a
         {scene.simbolo ?? scene.emoji}
       </span>
     </motion.div>
-    <p className="text-slate-700 text-lg text-center font-semibold max-w-md">
-      {scene.fala}
-    </p>
+    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
   </div>
 );
 
-const UseCaseScene: React.FC<{ scene: Extract<KidsScene, { kind: "usecase" }>; accent: any }> = ({
+const UseCaseScene: React.FC<{ scene: Extract<KidsScene, { kind: "usecase" }>; accent: any; mascot: "pip" | "pipa" }> = ({
   scene,
   accent,
+  mascot,
 }) => (
   <div className="flex-1 flex flex-col items-center justify-center gap-5">
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
@@ -239,6 +260,7 @@ const UseCaseScene: React.FC<{ scene: Extract<KidsScene, { kind: "usecase" }>; a
         </motion.div>
       ))}
     </div>
+    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
   </div>
 );
 
@@ -265,7 +287,8 @@ const RowOfObjects: React.FC<{ n: number; emoji: string; delay?: number }> = ({
 const StepCountScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_count" }>;
   accent: any;
-}> = ({ scene, accent }) => (
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => (
   <div className="flex-1 flex flex-col items-center justify-center gap-4">
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
     <div className={`${accent.soft} rounded-3xl p-4 w-full max-w-xl flex flex-col gap-3`}>
@@ -292,14 +315,15 @@ const StepCountScene: React.FC<{
         <RowOfObjects n={scene.b} emoji={scene.objeto} delay={0.8} />
       </div>
     </div>
-    <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
   </div>
 );
 
 const StepJoinScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_join" }>;
   accent: any;
-}> = ({ scene, accent }) => {
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => {
   const total = scene.a + scene.b;
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -331,7 +355,7 @@ const StepJoinScene: React.FC<{
       <div className={`${accent.bg} text-white px-8 py-4 rounded-2xl shadow-xl`}>
         <span className="text-5xl font-black">{count}</span>
       </div>
-      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
     </div>
   );
 };
@@ -339,7 +363,8 @@ const StepJoinScene: React.FC<{
 const StepVerticalSumScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_vertical_sum" }>;
   accent: any;
-}> = ({ scene, accent }) => {
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => {
   const total = scene.a + scene.b;
   return (
     <div className="flex-1 flex flex-col items-center justify-center gap-5">
@@ -372,7 +397,7 @@ const StepVerticalSumScene: React.FC<{
           {total}
         </motion.span>
       </div>
-      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
     </div>
   );
 };
@@ -380,7 +405,8 @@ const StepVerticalSumScene: React.FC<{
 const PracticeCountScene: React.FC<{
   scene: Extract<KidsScene, { kind: "practice_count" }>;
   accent: any;
-}> = ({ scene, accent }) => {
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => {
   const total = scene.a + scene.b;
   const items = useMemo(() => Array.from({ length: total }, (_, i) => i), [total]);
   const [tapped, setTapped] = useState<Set<number>>(new Set());
@@ -418,7 +444,7 @@ const PracticeCountScene: React.FC<{
           {tapped.size} / {total}
         </span>
       </div>
-      <p className="text-slate-700 text-base text-center font-semibold max-w-md">{scene.fala}</p>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
     </div>
   );
 };
@@ -426,7 +452,8 @@ const PracticeCountScene: React.FC<{
 const SummaryScene: React.FC<{
   scene: Extract<KidsScene, { kind: "summary" }>;
   accent: any;
-}> = ({ scene, accent }) => (
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => (
   <div className="flex-1 flex flex-col items-center justify-center gap-4">
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
     <div className="flex flex-col gap-3 w-full max-w-md">
@@ -445,6 +472,7 @@ const SummaryScene: React.FC<{
         </motion.div>
       ))}
     </div>
+    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
   </div>
 );
 
@@ -452,7 +480,8 @@ const SummaryScene: React.FC<{
 const StepSubtractScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_subtract" }>;
   accent: any;
-}> = ({ scene, accent }) => {
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => {
   const [removed, setRemoved] = useState(0);
   useEffect(() => {
     setRemoved(0);
@@ -497,7 +526,7 @@ const StepSubtractScene: React.FC<{
           <span className={`text-5xl font-black ${accent.text}`}>{scene.a - scene.b}</span>
         </div>
       </div>
-      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
     </div>
   );
 };
@@ -506,7 +535,8 @@ const StepSubtractScene: React.FC<{
 const StepVerticalSubScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_vertical_sub" }>;
   accent: any;
-}> = ({ scene, accent }) => {
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => {
   const total = scene.a - scene.b;
   return (
     <div className="flex-1 flex flex-col items-center justify-center gap-5">
@@ -539,7 +569,7 @@ const StepVerticalSubScene: React.FC<{
           {total}
         </motion.span>
       </div>
-      <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
     </div>
   );
 };
@@ -548,7 +578,8 @@ const StepVerticalSubScene: React.FC<{
 const StepEqualScene: React.FC<{
   scene: Extract<KidsScene, { kind: "step_equal" }>;
   accent: any;
-}> = ({ scene, accent }) => (
+  mascot: "pip" | "pipa";
+}> = ({ scene, accent, mascot }) => (
   <div className="flex-1 flex flex-col items-center justify-center gap-4">
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
     <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -574,7 +605,7 @@ const StepEqualScene: React.FC<{
         ))}
       </div>
     </div>
-    <p className="text-slate-700 text-lg text-center font-semibold max-w-md">{scene.fala}</p>
+    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
   </div>
 );
 
