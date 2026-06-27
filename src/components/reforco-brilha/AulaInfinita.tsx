@@ -37,6 +37,7 @@ export function AulaInfinita({ query }: Props) {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [resultados, setResultados] = useState<RecursoExterno[]>([]);
+  const [avisos, setAvisos] = useState<string[]>([]);
   const [videoId, setVideoId] = useState<string | null>(null);
   const [videoTitle, setVideoTitle] = useState("");
   const [preview, setPreview] = useState<{ url: string; title: string; fonte: string } | null>(null);
@@ -48,6 +49,7 @@ export function AulaInfinita({ query }: Props) {
     try {
       const res = await buscar({ data: { query, force } });
       setResultados(res.resultados);
+      setAvisos((res.avisos || []).map((aviso: { mensagem: string }) => aviso.mensagem));
     } catch (e: any) {
       setErro(e?.message || "Erro ao montar a aula");
     } finally {
@@ -119,6 +121,17 @@ export function AulaInfinita({ query }: Props) {
 
       {erro && !loading && (
         <Card className="border-2 border-destructive/30 bg-destructive/5 text-sm text-destructive">{erro}</Card>
+      )}
+
+      {!loading && !erro && avisos.length > 0 && (
+        <Card className="border-2 border-amber-200 bg-amber-50 text-sm text-amber-900">
+          <div className="font-black mb-1">Atenção no YouTube</div>
+          <ul className="list-disc pl-5 space-y-1">
+            {avisos.map((aviso) => (
+              <li key={aviso}>{aviso}</li>
+            ))}
+          </ul>
+        </Card>
       )}
 
       {!loading && !erro && totalSecoes === 0 && (
