@@ -7,8 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2, Sparkles, RefreshCw } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, RefreshCw, Film } from "lucide-react";
 import { gerarConteudoBncc } from "@/lib/bncc-conteudo-ia.functions";
+import { buscarVideoBncc } from "@/lib/bncc-video.functions";
 
 type BnccMeta = {
   codigo: string;
@@ -64,6 +65,27 @@ function BnccCodigoPage() {
   const [loading, setLoading] = useState(true);
   const [gerando, setGerando] = useState<null | "tudo" | "explicacao" | "exercicios">(null);
   const gerar = useServerFn(gerarConteudoBncc);
+  const buscarVideo = useServerFn(buscarVideoBncc);
+  const [buscandoVideo, setBuscandoVideo] = useState(false);
+  const [videoFonte, setVideoFonte] = useState<{ titulo: string; canal: string | null } | null>(null);
+
+  const acionarBuscaVideo = async (force: boolean) => {
+    setBuscandoVideo(true);
+    try {
+      const r = await buscarVideo({ data: { codigo, force } });
+      if (!r.ok || !r.video_url) {
+        toast.error(r.error || "Não encontrei vídeo agora.");
+        return;
+      }
+      setVideoFonte(r.titulo ? { titulo: r.titulo, canal: r.canal } : null);
+      setConteudo((prev) =>
+        prev ? { ...prev, video_url: r.video_url } : prev,
+      );
+      if (force) toast.success("Vídeo atualizado! 🎬");
+    } finally {
+      setBuscandoVideo(false);
+    }
+  };
 
   const carregar = async () => {
     const [m, c] = await Promise.all([
@@ -122,6 +144,10 @@ function BnccCodigoPage() {
         (c.exercicios_faceis as unknown[]).length < 2;
       if (m && raso) {
         await acionarIA("tudo");
+      }
+      // Auto-busca vídeo se ainda não tem
+      if (m && !c?.video_url) {
+        acionarBuscaVideo(false);
       }
     })();
     return () => {
@@ -427,22 +453,64 @@ function BnccCodigoPage() {
 
           <TabsContent value="video" className="mt-4">
             <Card>
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between gap-2">
                 <CardTitle>Vídeo</CardTitle>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => acionarBuscaVideo(true)}
+                  disabled={buscandoVideo}
+                >
+                  {buscandoVideo ? (
+                    <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                  ) : (
+                    <RefreshCw className="w-4 h-4 mr-1" />
+                  )}
+                  Buscar outro vídeo
+                </Button>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-3">
                 {embed ? (
-                  <div className="aspect-video w-full">
-                    <iframe
-                      src={embed}
-                      title="Vídeo BNCC"
-                      className="w-full h-full rounded-md"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                  <>
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src={embed}
+                        title={videoFonte?.titulo || "Vídeo BNCC"}
+                        className="w-full h-full rounded-md"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                      <Badge variant="secondary" className="gap-1">
+                        <Film className="w-3 h-3" /> Fonte: YouTube
+                      </Badge>
+                      {videoFonte?.titulo && <span>{videoFonte.titulo}</span>}
+                      {videoFonte?.canal && <span>· {videoFonte.canal}</span>}
+                      {conteudo?.video_url && (
+                        <a
+                          href={conteudo.video_url.replace("youtube-nocookie.com", "youtube.com")}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="ml-auto text-primary underline"
+                        >
+                          Abrir no YouTube ↗
+                        </a>
+                      )}
+                    </div>
+                  </>
+                ) : buscandoVideo ? (
+                  <div className="py-8 text-center text-muted-foreground">
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
+                    Procurando um vídeo educativo no YouTube…
                   </div>
                 ) : (
-                  <p className="text-muted-foreground">Nenhum vídeo cadastrado.</p>
+                  <div className="py-6 text-center space-y-3">
+                    <p className="text-muted-foreground">Nenhum vídeo cadastrado.</p>
+                    <Button onClick={() => acionarBuscaVideo(true)} disabled={buscandoVideo}>
+                      <Film className="w-4 h-4 mr-1" /> Buscar vídeo BNCC
+                    </Button>
+                  </div>
                 )}
               </CardContent>
             </Card>
