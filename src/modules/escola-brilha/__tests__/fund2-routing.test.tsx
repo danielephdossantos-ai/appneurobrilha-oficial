@@ -1,8 +1,6 @@
 /**
- * E2E-style guardrail: garante que TODAS as séries do Fundamental II
- * (6º, 7º, 8º, 9º) sempre renderizam o Fund2Player com a nova arquitetura
- * de 9 telas (LessonV2 + Templates Pedagógicos), nunca o ActivityPlayerC
- * e nunca o texto cru da BNCC como explicação.
+ * Guardrail: garante que a camada pedagógica de 6º–9º existe, mas NÃO troca
+ * o visual original das aulas interativas já desenhadas no Escola Brilha.
  */
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
@@ -40,7 +38,7 @@ vi.mock("framer-motion", () => ({
   ),
 }));
 
-import { Fund2Player } from "../views/Fund2Player";
+import { ActivityPlayerC } from "../views/ActivityPlayerC";
 
 const FUND2_GRADES = new Set([
   "6º Ano",
@@ -78,7 +76,7 @@ const BNCC_SAMPLES: { code: string; titulo: string; grade: string }[] = [
   { code: "EF09MA10", titulo: "Funções", grade: "9º Ano" },
 ];
 
-describe("Fund2 routing guardrail (6º–9º Ano)", () => {
+describe("Pedagogia 6º–9º sem substituir visual original", () => {
   it("FUND2_GRADES cobre todas as séries do Fundamental II", () => {
     ["6º Ano", "7º Ano", "8º Ano", "9º Ano"].forEach((g) =>
       expect(FUND2_GRADES.has(g)).toBe(true),
@@ -109,7 +107,7 @@ describe("Fund2 routing guardrail (6º–9º Ano)", () => {
   );
 
   it.each(LEGACY_LESSONS.map((l) => [l.bncc_code, l.title, l.grade] as const))(
-    "aula legacy %s é roteada para Fund2Player (não ActivityPlayerC)",
+    "aula legacy %s mantém ActivityPlayerC e ainda tem conteúdo pedagógico",
     (code, title, grade) => {
       expect(FUND2_GRADES.has(grade)).toBe(true);
       const v2 = buildLessonV2(code, title);
@@ -126,36 +124,27 @@ describe("Fund2 routing guardrail (6º–9º Ano)", () => {
   });
 });
 
-describe("Fund2Player layout (9 telas + novo layout)", () => {
-  const lesson = buildLessonV2("EF06CI04", "Célula")!;
+describe("ActivityPlayerC layout preservado", () => {
+  const lesson = CELULAS_LESSON;
 
-  it("renderiza as 9 etapas do stepper", () => {
-    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
+  it("renderiza as telas originais do player interativo", () => {
+    render(<ActivityPlayerC lesson={lesson} />);
     [
-      "MISSÃO",
-      "EXPLORAÇÃO",
-      "EXPLICAÇÃO",
-      "EXEMPLO RESOLVIDO",
-      "PRÁTICA GUIADA",
-      "ATIVIDADE",
-      "DESAFIO",
-      "RESUMO",
-      "DOMÍNIO BNCC",
+      "Missão",
+      "Exploração",
+      "Pontos-Chave",
+      "Exemplo",
+      "Desafio",
     ].forEach((label) => {
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     });
   });
 
-  it("exibe marcas do novo layout (BNCC pill, XP) e botão de áudio", () => {
-    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
-    expect(screen.getByText(/BNCC · EF06CI04/)).toBeInTheDocument();
+  it("exibe marcas do layout antigo/interativo e botão de áudio", () => {
+    render(<ActivityPlayerC lesson={lesson} />);
+    expect(screen.getByText(/CAPÍTULO/i)).toBeInTheDocument();
     expect(screen.getAllByText(/XP/).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Ouvir explicação")).toBeInTheDocument();
     expect(screen.getByLabelText("Menu")).toBeInTheDocument();
-  });
-
-  it("NÃO renderiza marcas exclusivas do ActivityPlayerC (sidebar antiga)", () => {
-    render(<Fund2Player lesson={lesson} capitulo="EF06CI04" />);
-    expect(screen.queryByText(/CAPÍTULO/i)).toBeNull();
   });
 });
