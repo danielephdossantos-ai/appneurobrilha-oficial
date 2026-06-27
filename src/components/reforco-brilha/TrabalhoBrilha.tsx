@@ -1019,6 +1019,132 @@ function BlocoEditor({
   );
 }
 
+function CapaEditor({
+  bloco,
+  onChange,
+}: {
+  bloco: Bloco;
+  onChange: (patch: Partial<Bloco>) => void;
+}) {
+  const alunos = bloco.alunos && bloco.alunos.length > 0 ? bloco.alunos : [""];
+
+  function setAluno(i: number, v: string) {
+    const novo = [...alunos];
+    novo[i] = v;
+    onChange({ alunos: novo });
+  }
+  function addAluno() {
+    onChange({ alunos: [...alunos, ""] });
+  }
+  function removerAluno(i: number) {
+    if (alunos.length <= 1) return;
+    onChange({ alunos: alunos.filter((_, k) => k !== i) });
+  }
+
+  return (
+    <>
+      <div
+        className="capa-trabalho relative bg-gradient-to-br from-amber-50 via-white to-orange-50 border-2 border-amber-300 rounded-xl px-6 sm:px-10 py-10 sm:py-14 text-center flex flex-col gap-5 shadow-inner min-h-[640px] sm:min-h-[760px]"
+        style={{ fontFamily: "Georgia, serif" }}
+      >
+        <div className="flex flex-col items-center gap-1 text-amber-800">
+          <BookOpen className="h-8 w-8" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Capa do trabalho</span>
+        </div>
+
+        <input
+          value={bloco.escola || ""}
+          onChange={(e) => onChange({ escola: e.target.value })}
+          placeholder="Nome da escola"
+          className="text-center text-base sm:text-lg font-bold text-amber-900 bg-transparent border-b border-dashed border-amber-300 focus:border-amber-500 focus:outline-none py-1"
+        />
+
+        <div className="flex-1 flex flex-col items-center justify-center gap-3">
+          <input
+            value={bloco.texto || ""}
+            onChange={(e) => onChange({ texto: e.target.value })}
+            placeholder="Título do trabalho"
+            className="text-center text-2xl sm:text-4xl font-black text-amber-950 bg-transparent border-0 focus:outline-none w-full"
+          />
+          <input
+            value={bloco.subtitulo || ""}
+            onChange={(e) => onChange({ subtitulo: e.target.value })}
+            placeholder="Tema / subtítulo (ex: Sistema Solar)"
+            className="text-center text-base sm:text-xl italic text-amber-800 bg-transparent border-0 focus:outline-none w-full"
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <p className="text-[10px] font-black uppercase tracking-widest text-amber-700">
+            Alunos
+          </p>
+          <div className="space-y-1.5 max-w-md mx-auto">
+            {alunos.map((a, i) => (
+              <div key={i} className="flex gap-1 items-center">
+                <input
+                  value={a}
+                  onChange={(e) => setAluno(i, e.target.value)}
+                  placeholder={`Nome do aluno ${alunos.length > 1 ? i + 1 : ""}`.trim()}
+                  className="flex-1 text-center text-sm sm:text-base font-bold text-gray-800 bg-white/70 border-2 border-amber-200 rounded-md px-2 py-1 focus:border-amber-500 focus:outline-none"
+                />
+                {alunos.length > 1 && (
+                  <button
+                    onClick={() => removerAluno(i)}
+                    className="p-1 text-rose-500 hover:bg-rose-50 rounded print:hidden"
+                    title="Remover aluno"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              onClick={addAluno}
+              className="print:hidden text-[11px] font-bold text-amber-700 hover:text-amber-900 flex items-center gap-1 mx-auto"
+            >
+              <Plus className="h-3 w-3" /> Mais um aluno
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-md mx-auto w-full text-sm">
+          <input
+            value={bloco.serie || ""}
+            onChange={(e) => onChange({ serie: e.target.value })}
+            placeholder="Série / Turma"
+            className="text-center bg-white/70 border-2 border-amber-200 rounded-md px-2 py-1 focus:border-amber-500 focus:outline-none"
+          />
+          <input
+            value={bloco.professor || ""}
+            onChange={(e) => onChange({ professor: e.target.value })}
+            placeholder="Professor(a)"
+            className="text-center bg-white/70 border-2 border-amber-200 rounded-md px-2 py-1 focus:border-amber-500 focus:outline-none"
+          />
+        </div>
+
+        <div className="flex items-center justify-center gap-2 text-sm text-amber-900">
+          <input
+            value={bloco.cidade || ""}
+            onChange={(e) => onChange({ cidade: e.target.value })}
+            placeholder="Cidade"
+            className="text-center bg-transparent border-b border-dashed border-amber-300 focus:border-amber-500 focus:outline-none w-40"
+          />
+          <span>•</span>
+          <input
+            value={bloco.ano || ""}
+            onChange={(e) => onChange({ ano: e.target.value })}
+            placeholder="Ano"
+            className="text-center bg-transparent border-b border-dashed border-amber-300 focus:border-amber-500 focus:outline-none w-20"
+          />
+        </div>
+      </div>
+      {/* Quebra de página automática depois da capa */}
+      <div className="html2pdf__page-break" style={{ pageBreakBefore: "always", breakBefore: "page", height: 0 }} />
+    </>
+  );
+}
+
+
 function AutoGrowTextarea({
   value,
   onChange,
