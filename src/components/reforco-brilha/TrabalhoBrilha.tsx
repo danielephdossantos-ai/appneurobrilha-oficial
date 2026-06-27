@@ -33,13 +33,15 @@ import { revisarPortugues } from "@/lib/revisar-portugues.functions";
 import { analisarTrabalho } from "@/lib/groq-professor.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
+import { RichEditor, insertIntoActiveEditor } from "./RichEditor";
 
 
-type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra";
+type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra" | "rico";
 interface Bloco {
   id: string;
   tipo: BlocoTipo;
   texto?: string;
+  html?: string;
   url?: string;
   legenda?: string;
   // campos extras pra "capa"
