@@ -65,6 +65,27 @@ function BnccCodigoPage() {
   const [loading, setLoading] = useState(true);
   const [gerando, setGerando] = useState<null | "tudo" | "explicacao" | "exercicios">(null);
   const gerar = useServerFn(gerarConteudoBncc);
+  const buscarVideo = useServerFn(buscarVideoBncc);
+  const [buscandoVideo, setBuscandoVideo] = useState(false);
+  const [videoFonte, setVideoFonte] = useState<{ titulo: string; canal: string | null } | null>(null);
+
+  const acionarBuscaVideo = async (force: boolean) => {
+    setBuscandoVideo(true);
+    try {
+      const r = await buscarVideo({ data: { codigo, force } });
+      if (!r.ok || !r.video_url) {
+        toast.error(r.error || "Não encontrei vídeo agora.");
+        return;
+      }
+      setVideoFonte(r.titulo ? { titulo: r.titulo, canal: r.canal } : null);
+      setConteudo((prev) =>
+        prev ? { ...prev, video_url: r.video_url } : prev,
+      );
+      if (force) toast.success("Vídeo atualizado! 🎬");
+    } finally {
+      setBuscandoVideo(false);
+    }
+  };
 
   const carregar = async () => {
     const [m, c] = await Promise.all([
