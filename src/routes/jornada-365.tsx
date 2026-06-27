@@ -219,8 +219,6 @@ function Jornada() {
   const speakDay = (day: number) =>
     speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
 
-  const speakDay = (day: number) =>
-    speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
 
   const abrirAulaHoje = async () => {
     const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
