@@ -561,3 +561,103 @@ Gere a aula JSON completa.`;
       };
     }
   });
+
+// ============================================================
+// EXPLICAR ERRO — Professor Brilho dentro das atividades.
+// Só roda quando a criança erra. Gera explicação curta,
+// fofa e pedagógica, sem entregar a resposta de bandeja.
+// ============================================================
+
+const ExplicarErroSchema = z.object({
+  pergunta: z.string().trim().min(2).max(800),
+  gabarito: z.string().trim().min(1).max(400),
+  respostaErrada: z.string().trim().min(1).max(400),
+  bnccCode: z.string().max(20).optional(),
+  idade: z.number().int().min(5).max(16).optional(),
+  modulo: z
+    .enum([
+      "escola-brilha",
+      "reforco-brilha",
+      "jornada-365",
+      "missao-prova",
+      "missao-trabalho",
+    ])
+    .optional(),
+});
+
+const EXPLICAR_ERRO_SYSTEM = `Você é o Professor Brilho, tutor virtual para crianças neurodivergentes no app Neuro Brilha Kids.
+
+Sua única função aqui: a criança ERROU uma questão. Você deve explicar por que a resposta dela está incorreta, de forma fofa e pedagógica.
+
+REGRAS RÍGIDAS:
+- NUNCA entregue a resposta certa de bandeja. Dê DICAS para a criança raciocinar e chegar sozinha à conclusão.
+- Máximo 3 frases. Português do Brasil, tom acolhedor, frases curtas.
+- Comece reconhecendo o esforço ("Boa tentativa!", "Quase lá!").
+- Explique de forma simples o equívoco no raciocínio dela.
+- Termine com 1 dica de estudo concreta para revisar o conceito.
+- 1 emoji no máximo. Sem markdown, sem listas.`;
+
+export const explicarErroAtividade = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => ExplicarErroSchema.parse(input))
+  .handler(async ({ data }) => {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, error: "GROQ_API_KEY ausente", reply: null };
+    }
+
+    const userPrompt = `A questão era: ${data.pergunta}
+A resposta certa era: ${data.gabarito}
+O aluno marcou: ${data.respostaErrada}${data.bnccCode ? `\nHabilidade BNCC: ${data.bnccCode}` : ""}${data.idade ? `\nIdade do aluno: ${data.idade} anos` : ""}
+
+Explique de forma fofa e pedagógica por que a resposta dele está incorreta e dê uma dica de estudo. Lembre: não entregue o gabarito de bandeja, guie o raciocínio.`;
+
+    try {
+      const res = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+              { role: "system", content: EXPLICAR_ERRO_SYSTEM },
+              { role: "user", content: userPrompt },
+            ],
+            temperature: 0.6,
+            max_tokens: 240,
+            top_p: 0.9,
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:erro] HTTP", res.status, errText.slice(0, 300));
+        return {
+          ok: false as const,
+          error: `Groq ${res.status}`,
+          reply: null,
+        };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const reply = json.choices?.[0]?.message?.content?.trim() ?? "";
+      if (!reply) {
+        return { ok: false as const, error: "Resposta vazia", reply: null };
+      }
+      return { ok: true as const, reply, error: null };
+    } catch (e) {
+      console.error("[groq:erro]", e);
+      return {
+        ok: false as const,
+        error: "Falha de rede ao chamar Groq",
+        reply: null,
+      };
+    }
+  });
+
