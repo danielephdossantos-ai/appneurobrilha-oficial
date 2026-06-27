@@ -868,6 +868,40 @@ function BlocoEditor({
   );
 }
 
+function AutoGrowTextarea({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+}) {
+  const ref = useRef<HTMLTextAreaElement | null>(null);
+
+  // Resize on mount + every time value mudar de fora (ex: revisão, IA, abrir trabalho salvo)
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }, [value]);
+
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      placeholder={placeholder}
+      onChange={(e) => {
+        onChange(e.target.value);
+        e.target.style.height = "auto";
+        e.target.style.height = e.target.scrollHeight + "px";
+      }}
+      className="w-full min-h-[5.5rem] text-base sm:text-sm leading-relaxed bg-transparent border-0 focus:outline-none resize-none placeholder:text-gray-300"
+      style={{ fontFamily: "Georgia, serif" }}
+    />
+  );
+
 // ---------------------------------------------------------------- Preview inline de recursos
 
 function youtubeIdFromUrl(url: string): string | null {
