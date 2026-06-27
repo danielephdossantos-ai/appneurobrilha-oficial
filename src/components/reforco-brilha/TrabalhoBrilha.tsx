@@ -860,6 +860,7 @@ function EditorTrabalho({
             >
               <Sparkles className="h-3 w-3" /> Texto Word
             </button>
+            <button
               onClick={addQuebra}
               className="bg-white border-2 border-amber-200 hover:bg-amber-50 text-amber-800 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1"
               title="Quebra de página — o que vier depois imprime na próxima página"
