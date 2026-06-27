@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Shell } from "@/components/Layout";
-import { PageHeader } from "@/components/responsible/PageHeader";
+import { Shell, PageHeader } from "@/components/Layout";
 import { useAppState } from "@/core/store";
 import { ClipboardList } from "lucide-react";
 import { MissaoTarefa } from "@/components/missao-tarefa/MissaoTarefa";
