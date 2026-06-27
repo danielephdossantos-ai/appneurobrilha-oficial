@@ -1441,7 +1441,7 @@ function RecursoPreviewModal({
           {ytId && (
             <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
               <iframe
-                src={`https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1`}
+                src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1&playsinline=1`}
                 title={recurso.titulo}
                 className="w-full h-full"
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

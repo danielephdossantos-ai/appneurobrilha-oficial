@@ -243,13 +243,24 @@ export function AulaInfinita({ query }: Props) {
             </button>
             <div className="aspect-video w-full">
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
                 title={videoTitle}
                 className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
             </div>
+            <a
+              href={`https://www.youtube.com/watch?v=${videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center text-xs text-white/80 hover:text-white py-2 bg-black"
+            >
+              Se o vídeo não carregar, abrir no YouTube ↗
+            </a>
+
           </div>
         </div>
       )}
