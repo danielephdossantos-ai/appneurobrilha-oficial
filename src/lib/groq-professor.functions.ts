@@ -441,7 +441,7 @@ function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>
   const isHist = code.includes("HI") || comp.includes("hist");
   const isEnglish = code.includes("LI") || comp.includes("ingl");
   const isArt = code.includes("AR") || comp.includes("arte");
-  const isPE = code.includes("EF") || comp.includes("fís") || comp.includes("fis");
+  const isPE = /^EF\d{2}EF/.test(code) || comp.includes("fís") || comp.includes("fis");
   const isReligion = code.includes("ER") || comp.includes("relig");
 
   if (isMath) {
