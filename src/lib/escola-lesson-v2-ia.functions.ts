@@ -249,15 +249,15 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       if (!res.ok) {
         const t = await res.text();
         console.error("[gerarLessonV2Escola] groq", res.status, t.slice(0, 300));
-        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: buildFallbackLessonV2(data) };
+        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: compactLesson(buildFallbackLessonV2(data)) };
       }
 
       const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
 
       const c = LessonContentSchema.parse(extractJson(raw));
-      const lesson = {
+      const lesson = compactLesson({
         id: `ai:${data.bnccCode}`,
         title: c.title,
         discipline: SUBJECT_NAME[subject],
@@ -288,7 +288,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
             recommendation: c.dominio.recommendation,
           },
         },
-      };
+      });
 
       try {
         const { createClient } = await import("@supabase/supabase-js");
@@ -315,7 +315,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       return { ok: true as const, error: null, lesson };
     } catch (e) {
       console.error("[gerarLessonV2Escola]", e);
-      return { ok: true as const, error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+      return { ok: true as const, error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
     }
   });
 
