@@ -13,8 +13,6 @@ import { semEmoji, objetoImg } from "@/data/neuro-treino/objetos";
 import * as Lessons from "../data/lessons";
 import { ActivityPlayer } from "./ActivityPlayer";
 import { ActivityPlayerC } from "./ActivityPlayerC";
-import { Fund2Player } from "./Fund2Player";
-import { resolveLessonV2Sync, prefetchLessonV2 } from "../engine/pedagogical-library";
 import { EarlyChildhoodPlayer } from "./EarlyChildhoodPlayer";
 import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from "../data/early-lessons";
 import { ActivityLesson } from "../types/activity-lesson";
@@ -87,17 +85,8 @@ export const LessonPlayer: React.FC = () => {
 
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) {
-    // 6º–9º Ano: novo player de 9 telas com Templates Pedagógicos (Fund2Player).
-    void prefetchLessonV2(lessonC.bncc_code, lessonC.title);
-    const v2 = resolveLessonV2Sync(lessonC.bncc_code, lessonC.title);
-    if (v2) {
-      return (
-        <Fund2Player
-          lesson={v2}
-          capitulo={lessonC.title}
-        />
-      );
-    }
+    // Preserva o player visual original das aulas interativas.
+    // A camada pedagógica pode melhorar dados/conteúdo, mas não troca a tela.
     return <ActivityPlayerC lesson={lessonC} />;
   }
 

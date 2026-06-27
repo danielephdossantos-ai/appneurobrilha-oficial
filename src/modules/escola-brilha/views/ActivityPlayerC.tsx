@@ -221,6 +221,7 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
             <div className={`bg-gradient-to-b ${lesson.color.from} ${lesson.color.to} p-4 pb-6`}>
               <button
                 onClick={() => setSidebarOpen(false)}
+                aria-label="Fechar menu"
                 className="text-white/70 hover:text-white mb-3"
               >
                 <X className="w-5 h-5" />
@@ -276,6 +277,7 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
       <div className="hidden sm:flex flex-col items-center gap-3 w-14 bg-white border-r border-slate-100 py-4 shrink-0">
         <button
           onClick={() => setSidebarOpen(true)}
+          aria-label="Menu"
           className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition"
         >
           <Menu className="w-4 h-4" />
@@ -318,6 +320,7 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
         <div className="sticky top-0 z-30 bg-white border-b border-slate-100 px-4 py-3 flex items-center gap-3">
           <button
             onClick={() => setSidebarOpen(true)}
+            aria-label="Menu"
             className="sm:hidden w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500"
           >
             <Menu className="w-4 h-4" />
@@ -390,6 +393,7 @@ export const ActivityPlayerC: React.FC<Props> = ({ lesson, currentRef }) => {
                 </div>
                 <button
                   onClick={replayAudio}
+                  aria-label="Ouvir explicação"
                   className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition active:scale-95"
                 >
                   <Volume2 className={`w-4 h-4 ${isSpeaking ? `${ac.text} animate-pulse` : ""}`} />
