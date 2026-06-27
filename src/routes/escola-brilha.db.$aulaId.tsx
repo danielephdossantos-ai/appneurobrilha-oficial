@@ -98,13 +98,16 @@ function AulaDbPage() {
       }
     }
 
-    // 3º–5º Ano: se houver conteúdo ActivityLesson (layout EF03MA17/EF03LP08), usa.
+    // 3º–5º Ano: sempre passa pelo ActivityPlayer com conteúdo 3-5 ano.
+    // Existe um gerador universal de fallback que garante padrão pedagógico
+    // correto (nunca usar conteúdo padrão 6º–9º Ano nessas séries).
     if (AL_GRADES.has(aula.serie)) {
-      const al = getActivityLesson3a5(aula.codigo_bncc);
+      const al = getActivityLesson3a5(aula.codigo_bncc, aula.titulo);
       if (al) {
         return <ActivityPlayer lesson={al} currentRef={ref} />;
       }
     }
+
 
 
 
