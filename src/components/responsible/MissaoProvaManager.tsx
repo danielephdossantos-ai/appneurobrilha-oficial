@@ -408,18 +408,48 @@ export function MissaoProvaManager({ childId }: MissaoProvaManagerProps) {
                       </div>
                     )}
                   </div>
-                  <button
-                    disabled={
-                      !mission.contents ||
-                      mission.contents.length === 0 ||
-                      generatePlanMutation.isPending
-                    }
-                    onClick={() => generatePlanMutation.mutate(mission)}
-                    className="flex items-center gap-1.5 text-indigo-600 font-black text-xs hover:bg-indigo-50 px-4 py-2 rounded-xl transition-all uppercase tracking-wider"
-                  >
-                    {mission.study_plan?.length > 0 ? "Regerar Plano" : "Gerar Plano Automático"}
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <input
+                      ref={(el) => {
+                        photoInputRefs.current[mission.id] = el;
+                      }}
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handlePhotoSelected(mission, file);
+                        e.target.value = "";
+                      }}
+                    />
+                    <button
+                      disabled={generatePlanMutation.isPending}
+                      onClick={() => photoInputRefs.current[mission.id]?.click()}
+                      className="flex items-center gap-1.5 text-pink-600 font-black text-xs hover:bg-pink-50 px-3 py-2 rounded-xl transition-all uppercase tracking-wider disabled:opacity-50"
+                      title="Tirar foto do caderno/livro pra IA montar o plano"
+                    >
+                      {photoLoadingId === mission.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Camera className="h-4 w-4" />
+                      )}
+                      Foto
+                    </button>
+                    <button
+                      disabled={generatePlanMutation.isPending}
+                      onClick={() => generatePlanMutation.mutate({ mission })}
+                      className="flex items-center gap-1.5 text-indigo-600 font-black text-xs hover:bg-indigo-50 px-4 py-2 rounded-xl transition-all uppercase tracking-wider disabled:opacity-50"
+                    >
+                      {generatePlanMutation.isPending && photoLoadingId !== mission.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Sparkles className="h-4 w-4" />
+                      )}
+                      {mission.study_plan?.length > 0 ? "Regerar com IA" : "Gerar com IA"}
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
             );
