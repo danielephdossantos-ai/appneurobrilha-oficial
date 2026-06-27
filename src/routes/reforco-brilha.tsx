@@ -332,40 +332,48 @@ function ReforcoBrilha() {
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
-          <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />
-              O que a criança está precisando aprender?
-            </h3>
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
-                placeholder='Ex: "não consegue juntar sílabas", "tabuada do 7", "atenção"...'
-                className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
-              />
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
-              <button
-                onClick={() => runSearch(searchQuery)}
-                disabled={isSearching}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
-                aria-label="Buscar habilidade"
-              >
-                {isSearching ? (
-                  <RefreshCw className="h-6 w-6 animate-spin" />
-                ) : (
-                  <ArrowRight className="h-6 w-6" />
-                )}
-              </button>
-            </div>
-            <p className="text-xs text-muted-foreground mt-3 italic">
-              Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
-            </p>
-          </Card>
-
           <AssistenteGuiado onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })} />
+
+          <details className="rounded-2xl border-2 border-dashed border-border bg-card/50">
+            <summary className="cursor-pointer select-none p-4 text-sm font-bold text-muted-foreground">
+              Busca avançada por dificuldade (modo antigo)
+            </summary>
+            <div className="p-4 pt-0">
+              <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  O que a criança está precisando aprender?
+                </h3>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
+                    placeholder='Ex: "não consegue juntar sílabas", "tabuada do 7", "atenção"...'
+                    className="w-full pl-12 pr-14 py-4 rounded-2xl bg-background border-2 border-border focus:border-primary outline-none text-base transition-all"
+                  />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-6 w-6" />
+                  <button
+                    onClick={() => runSearch(searchQuery)}
+                    disabled={isSearching}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white p-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+                    aria-label="Buscar habilidade"
+                  >
+                    {isSearching ? (
+                      <RefreshCw className="h-6 w-6 animate-spin" />
+                    ) : (
+                      <ArrowRight className="h-6 w-6" />
+                    )}
+                  </button>
+                </div>
+                <p className="text-xs text-muted-foreground mt-3 italic">
+                  Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave.
+                </p>
+              </Card>
+            </div>
+          </details>
+
 
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
