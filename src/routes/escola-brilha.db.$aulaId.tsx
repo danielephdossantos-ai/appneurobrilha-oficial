@@ -79,6 +79,7 @@ function AulaDbPage() {
   }
 
   const back = () => navigate({ to: "/escola-brilha" });
+  const hasKidsLesson = KIDS_GRADES.has(aula.serie) && getKidsLessons(aula.codigo_bncc).length > 0;
 
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
@@ -114,7 +115,7 @@ function AulaDbPage() {
   return (
     <PlayerBoundary onBack={back}>
       {renderPlayer()}
-      <NextLessonCTA current={{ kind: "db", id: aulaId }} />
+      {!hasKidsLesson && <NextLessonCTA current={{ kind: "db", id: aulaId }} />}
     </PlayerBoundary>
   );
 }
