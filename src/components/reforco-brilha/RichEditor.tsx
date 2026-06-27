@@ -136,7 +136,12 @@ export function RichEditor({ html, onChange, placeholder }: Props) {
           <Btn key={s.value} onClick={() => setSize(s.value)} title={`Fonte ${s.label}`}>{s.label}</Btn>
         ))}
       </div>
-      <EditorContent editor={editor} onClick={() => { activeEditor = editor; }} />
+      <div
+        onMouseDown={() => { activeEditor = editor; }}
+        onTouchStart={() => { activeEditor = editor; editor.commands.focus(); }}
+      >
+        <EditorContent editor={editor} onClick={() => { activeEditor = editor; editor.commands.focus(); }} />
+      </div>
     </div>
   );
 }
