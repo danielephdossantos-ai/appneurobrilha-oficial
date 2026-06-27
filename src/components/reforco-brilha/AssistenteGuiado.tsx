@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles, ClipboardList, Zap } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
 import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
+import { PERFIL_LABEL, RISK_COLOR } from "@/modules/anamnese/v2/scoring";
+import type { PerfilScores, RiskMap } from "@/modules/anamnese/v2/types";
 
 type Area =
   | "leitura"
