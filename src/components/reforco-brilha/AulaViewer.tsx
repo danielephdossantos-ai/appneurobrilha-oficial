@@ -349,13 +349,25 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                 <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
               </div>
             </div>
-            <button
-              onClick={onClose}
-              className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center shrink-0"
-              aria-label="Fechar aula"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => regenerar(true)}
+                disabled={gerando}
+                className="hidden sm:inline-flex h-10 px-3 rounded-full bg-white/20 hover:bg-white/30 items-center gap-1.5 text-xs font-black disabled:opacity-50"
+                aria-label="Refazer aula com a Brilha"
+                title="Refazer aula com a Brilha"
+              >
+                {gerando ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                Refazer com a Brilha
+              </button>
+              <button
+                onClick={onClose}
+                className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center"
+                aria-label="Fechar aula"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
           {/* Indicador grande de progresso */}
