@@ -991,22 +991,27 @@ function montarContextoCrianca(row: Record<string, unknown> | null): string {
 }
 
 export const analisarTarefaCasa = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => TarefaInputSchema.parse(input))
-  .handler(async ({ data, context }) => {
+  .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return { ok: false as const, error: "GROQ_API_KEY ausente", resultado: null };
     }
 
-    // Lê a criança via supabase scoped no user (RLS aplica)
-    const { data: child } = await context.supabase
-      .from("children")
-      .select("nome, idade, serie, diagnostico, hiperfoco, hyperfocus_list, tempo_atencao_min")
-      .eq("id", data.childId)
-      .maybeSingle();
-
-    const ctxCrianca = montarContextoCrianca(child as Record<string, unknown> | null);
+    const c = data.crianca;
+    const ctxCrianca = montarContextoCrianca(
+      c
+        ? {
+            nome: c.nome,
+            idade: c.idade,
+            serie: c.serie,
+            diagnostico: c.diagnostico,
+            hiperfoco: c.hiperfoco,
+            hyperfocus_list: c.hyperfocusList,
+            tempo_atencao_min: c.tempoAtencaoMin,
+          }
+        : null,
+    );
 
     const hasImage = !!data.fotoBase64;
     const imageUrl = hasImage
