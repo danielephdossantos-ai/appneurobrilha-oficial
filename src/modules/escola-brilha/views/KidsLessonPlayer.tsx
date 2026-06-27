@@ -225,22 +225,35 @@ const ConceptScene: React.FC<{ scene: Extract<KidsScene, { kind: "concept" }>; a
   scene,
   accent,
   mascot,
-}) => (
-  <div className="flex-1 flex flex-col items-center justify-center gap-5">
-    <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: [0, 1.2, 1] }}
-      transition={{ duration: 0.7 }}
-      className={`w-44 h-44 sm:w-56 sm:h-56 rounded-3xl ${accent.bg} shadow-2xl flex items-center justify-center`}
-    >
-      <span className="text-slate-900 font-black" style={{ fontSize: "9rem", lineHeight: 1 }}>
-        {scene.simbolo ?? scene.emoji}
-      </span>
-    </motion.div>
-    <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
-  </div>
-);
+}) => {
+  const conteudo = String(scene.simbolo ?? scene.emoji ?? "");
+  const len = conteudo.length;
+  // Escala tipográfica conforme o tamanho do conteúdo, evitando estouro de caixa.
+  const fontSize =
+    len <= 2 ? "8rem" : len <= 4 ? "5.5rem" : len <= 8 ? "3.75rem" : len <= 14 ? "2.5rem" : "1.875rem";
+  const wide = len > 4;
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center gap-5">
+      <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: [0, 1.1, 1] }}
+        transition={{ duration: 0.6 }}
+        className={`${accent.bg} shadow-2xl rounded-3xl flex items-center justify-center px-8 py-6 ${
+          wide ? "min-w-[18rem] max-w-[90%]" : "w-44 h-44 sm:w-56 sm:h-56"
+        }`}
+      >
+        <span
+          className="text-slate-900 font-black text-center leading-none break-words"
+          style={{ fontSize, lineHeight: 1.1 }}
+        >
+          {conteudo}
+        </span>
+      </motion.div>
+      <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
+    </div>
+  );
+};
 
 const UseCaseScene: React.FC<{ scene: Extract<KidsScene, { kind: "usecase" }>; accent: any; mascot: "pip" | "pipa" }> = ({
   scene,
