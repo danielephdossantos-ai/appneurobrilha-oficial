@@ -1137,6 +1137,13 @@ function BlocoEditor({
           placeholder="Escreva um parágrafo do seu trabalho..."
         />
       )}
+      {bloco.tipo === "rico" && (
+        <RichEditor
+          html={bloco.html || ""}
+          onChange={(html) => onChange({ html })}
+          placeholder="Escreva com formatação..."
+        />
+      )}
       {bloco.tipo === "imagem" && bloco.url && (
         <figure className="space-y-1">
           <img
