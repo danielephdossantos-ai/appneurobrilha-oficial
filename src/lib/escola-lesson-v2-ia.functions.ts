@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import type { LessonV2 } from "@/modules/escola-brilha/types/lesson-v2";
 
 const OptionSchema = z.object({
   text: z.string().min(1).max(160),
@@ -130,7 +131,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) return { ok: false as const, error: "GROQ_API_KEY ausente", lesson: null };
+    if (!apiKey) return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
 
     try {
       const subject = subjectFromCode(data.bnccCode);
@@ -152,12 +153,12 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       if (!res.ok) {
         const t = await res.text();
         console.error("[gerarLessonV2Escola] groq", res.status, t.slice(0, 300));
-        return { ok: false as const, error: `Groq ${res.status}`, lesson: null };
+        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: buildFallbackLessonV2(data) };
       }
 
       const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) return { ok: false as const, error: "Resposta vazia", lesson: null };
+      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
 
       const c = LessonContentSchema.parse(extractJson(raw));
       const lesson = {
@@ -218,11 +219,11 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       return { ok: true as const, error: null, lesson };
     } catch (e) {
       console.error("[gerarLessonV2Escola]", e);
-      return { ok: false as const, error: e instanceof Error ? e.message : "Falha ao gerar aula", lesson: null };
+      return { ok: true as const, error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
     }
   });
 
-type LessonGerada = NonNullable<Awaited<ReturnType<typeof gerarLessonV2Escola>>["lesson"]>;
+type LessonGerada = LessonV2;
 
 export function buildFallbackLessonV2(input: z.infer<typeof InputSchema>): LessonGerada {
   const subject = subjectFromCode(input.bnccCode);
