@@ -26,6 +26,9 @@ function toEmbedUrl(url: string, fonte: string): string {
     if (fonte === "wikipedia") return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/");
     if (fonte === "wikiversity")
       return url.replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/").replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
+    // YouTube watch/shorts/youtu.be -> embed (nocookie) — evita ERR_BLOCKED_BY_RESPONSE
+    const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0`;
     return url;
   } catch {
     return url;
@@ -268,7 +271,7 @@ export function AulaInfinita({ query }: Props) {
                 </button>
               </div>
             </div>
-            <iframe src={preview.url} title={preview.title} className="flex-1 w-full bg-white" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerPolicy="no-referrer" />
+            <iframe src={toEmbedUrl(preview.url, preview.fonte)} title={preview.title} className="flex-1 w-full bg-white" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation" referrerPolicy="no-referrer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
           </div>
         </div>
       )}
