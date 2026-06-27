@@ -36,7 +36,6 @@ import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuditoriaPedagogicaRouteImport } from './routes/auditoria-pedagogica'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
-import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -188,11 +187,6 @@ const AnalyticsRoute = AnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AlfabetizacaoRoute = AlfabetizacaoRouteImport.update({
-  id: '/alfabetizacao',
-  path: '/alfabetizacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AgendaRoute = AgendaRouteImport.update({
   id: '/agenda',
   path: '/agenda',
@@ -267,16 +261,15 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
 } as any)
 const AlfabetizacaoEtapaEtapaIdRoute =
   AlfabetizacaoEtapaEtapaIdRouteImport.update({
-    id: '/etapa/$etapaId',
-    path: '/etapa/$etapaId',
-    getParentRoute: () => AlfabetizacaoRoute,
+    id: '/alfabetizacao/etapa/$etapaId',
+    path: '/alfabetizacao/etapa/$etapaId',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -321,7 +314,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -366,7 +358,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -413,7 +404,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/agenda'
-    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
@@ -458,7 +448,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/agenda'
-    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
@@ -502,7 +491,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/agenda'
-    | '/alfabetizacao'
     | '/analytics'
     | '/auditoria-pedagogica'
     | '/auth'
@@ -548,7 +536,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AgendaRoute: typeof AgendaRoute
-  AlfabetizacaoRoute: typeof AlfabetizacaoRouteWithChildren
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
@@ -580,6 +567,7 @@ export interface RootRouteChildren {
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   AulaIaBnccCodeRoute: typeof AulaIaBnccCodeRoute
   BnccCodigoRoute: typeof BnccCodigoRoute
+  AlfabetizacaoEtapaEtapaIdRoute: typeof AlfabetizacaoEtapaEtapaIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -773,13 +761,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/alfabetizacao': {
-      id: '/alfabetizacao'
-      path: '/alfabetizacao'
-      fullPath: '/alfabetizacao'
-      preLoaderRoute: typeof AlfabetizacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/agenda': {
       id: '/agenda'
       path: '/agenda'
@@ -880,25 +861,13 @@ declare module '@tanstack/react-router' {
     }
     '/alfabetizacao/etapa/$etapaId': {
       id: '/alfabetizacao/etapa/$etapaId'
-      path: '/etapa/$etapaId'
+      path: '/alfabetizacao/etapa/$etapaId'
       fullPath: '/alfabetizacao/etapa/$etapaId'
       preLoaderRoute: typeof AlfabetizacaoEtapaEtapaIdRouteImport
-      parentRoute: typeof AlfabetizacaoRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface AlfabetizacaoRouteChildren {
-  AlfabetizacaoEtapaEtapaIdRoute: typeof AlfabetizacaoEtapaEtapaIdRoute
-}
-
-const AlfabetizacaoRouteChildren: AlfabetizacaoRouteChildren = {
-  AlfabetizacaoEtapaEtapaIdRoute: AlfabetizacaoEtapaEtapaIdRoute,
-}
-
-const AlfabetizacaoRouteWithChildren = AlfabetizacaoRoute._addFileChildren(
-  AlfabetizacaoRouteChildren,
-)
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
@@ -948,7 +917,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AgendaRoute: AgendaRoute,
-  AlfabetizacaoRoute: AlfabetizacaoRouteWithChildren,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
@@ -980,6 +948,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   AulaIaBnccCodeRoute: AulaIaBnccCodeRoute,
   BnccCodigoRoute: BnccCodigoRoute,
+  AlfabetizacaoEtapaEtapaIdRoute: AlfabetizacaoEtapaEtapaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
