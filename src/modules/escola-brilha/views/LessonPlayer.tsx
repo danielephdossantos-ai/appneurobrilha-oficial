@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Volume2 } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
-import { gerarAulaDinamica, type AulaDinamica } from "@/lib/groq-professor.functions";
 import { LessonEnvironment } from "../components/LessonEnvironment";
 import { MascotTeacher } from "../components/MascotTeacher";
 import { LessonHeader } from "../components/LessonHeader";
@@ -17,7 +15,6 @@ import { ActivityPlayer } from "./ActivityPlayer";
 import { ActivityPlayerC } from "./ActivityPlayerC";
 import { Fund2Player } from "./Fund2Player";
 import { resolveLessonV2Sync, prefetchLessonV2 } from "../engine/pedagogical-library";
-import { aulaDinamicaToLessonV2 } from "../engine/aula-dinamica-adapter";
 import { EarlyChildhoodPlayer } from "./EarlyChildhoodPlayer";
 import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from "../data/early-lessons";
 import { ActivityLesson } from "../types/activity-lesson";
@@ -90,7 +87,18 @@ export const LessonPlayer: React.FC = () => {
 
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) {
-    return <LegacyFund2Dynamic lessonC={lessonC} />;
+    // 6º–9º Ano: novo player de 9 telas com Templates Pedagógicos (Fund2Player).
+    void prefetchLessonV2(lessonC.bncc_code, lessonC.title);
+    const v2 = resolveLessonV2Sync(lessonC.bncc_code, lessonC.title);
+    if (v2) {
+      return (
+        <Fund2Player
+          lesson={v2}
+          capitulo={lessonC.bncc_code}
+        />
+      );
+    }
+    return <ActivityPlayerC lesson={lessonC} />;
   }
 
   const lessonB = ACTIVITY_MAP[search.category];
@@ -106,77 +114,6 @@ export const LessonPlayer: React.FC = () => {
 
   return <LegacyLessonPlayer />;
 };
-
-const LegacyFund2Dynamic: React.FC<{ lessonC: ActivityLessonC }> = ({ lessonC }) => {
-  const gerarAula = useServerFn(gerarAulaDinamica);
-  const [aiAula, setAiAula] = useState<AulaDinamica | null>(null);
-  const [aiLoading, setAiLoading] = useState(true);
-
-  useEffect(() => {
-    let cancel = false;
-    setAiLoading(true);
-    setAiAula(null);
-    void prefetchLessonV2(lessonC.bncc_code, lessonC.title, lessonC.bncc_description);
-
-    gerarAula({
-      data: {
-        bnccCode: lessonC.bncc_code,
-        descricao: lessonC.bncc_description,
-        idade: Number(lessonC.grade.match(/\d+/)?.[0] ?? 6) + 5,
-        serie: lessonC.grade,
-        componente: lessonC.subject,
-      },
-    })
-      .then((res) => {
-        if (!cancel && res.ok && res.aula) setAiAula(res.aula);
-      })
-      .catch((err) => console.warn("[escola-brilha] legacy AI lesson failed:", err))
-      .finally(() => {
-        if (!cancel) setAiLoading(false);
-      });
-
-    return () => {
-      cancel = true;
-    };
-  }, [gerarAula, lessonC]);
-
-  if (aiAula) {
-    return (
-      <Fund2Player
-        lesson={aulaDinamicaToLessonV2(aiAula, {
-          bnccCode: lessonC.bncc_code,
-          bnccObjective: lessonC.bncc_description,
-          serie: lessonC.grade,
-          disciplina: lessonC.subject,
-          xp: lessonC.xp,
-        })}
-        capitulo={lessonC.bncc_code}
-      />
-    );
-  }
-
-  if (aiLoading) return <AulaRealLoading codigo={lessonC.bncc_code} />;
-
-  const v2 = resolveLessonV2Sync(lessonC.bncc_code, lessonC.title, lessonC.bncc_description);
-  if (v2) return <Fund2Player lesson={v2} capitulo={lessonC.bncc_code} />;
-
-  return <ActivityPlayerC lesson={lessonC} />;
-};
-
-const AulaRealLoading: React.FC<{ codigo: string }> = ({ codigo }) => (
-  <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-6">
-    <div className="max-w-md w-full rounded-2xl bg-white border border-slate-200 shadow-sm p-6 text-center">
-      <div className="mx-auto mb-4 h-12 w-12 rounded-full border-4 border-emerald-200 border-t-emerald-600 animate-spin" />
-      <p className="text-xs font-black uppercase tracking-wider text-emerald-700">
-        BNCC {codigo}
-      </p>
-      <h1 className="mt-2 text-2xl font-black text-slate-900">Gerando aula real…</h1>
-      <p className="mt-2 text-sm text-slate-600">
-        Montando explicação, exemplo, prática, desafio e imagens de apoio.
-      </p>
-    </div>
-  </div>
-);
 
 /* ─── Legacy Player (1º e 2º Ano) ─── */
 const LegacyLessonPlayer: React.FC = () => {

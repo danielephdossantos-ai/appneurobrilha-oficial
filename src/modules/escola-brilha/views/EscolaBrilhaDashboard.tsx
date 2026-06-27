@@ -438,13 +438,7 @@ const SubjectFolders: React.FC<{
                         xp={cat.xp}
                         bncc={cat.bncc}
                         illustration={cat.illustration}
-                        onClick={() => {
-                          const dbEquivalent = cat.bncc
-                            ? dbs.find((a) => a.codigo_bncc === cat.bncc)
-                            : undefined;
-                          if (dbEquivalent) onDbClick(dbEquivalent.id);
-                          else onStaticClick(cat.id, cat.type);
-                        }}
+                        onClick={() => onStaticClick(cat.id, cat.type)}
                       />
                     ))}
                     {dbs.map((a, j) => (

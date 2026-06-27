@@ -343,9 +343,9 @@ const AulaDinamicaInputSchema = z.object({
 });
 
 const InteractiveItemSchema = z.object({
-  label: s(1, 80),
+  label: s(1, 40),
   termoBusca: s(2, 80),
-  explicacao: s(2, 360),
+  explicacao: s(2, 240),
 });
 
 export const AulaDinamicaSchema = z.object({
@@ -359,18 +359,18 @@ export const AulaDinamicaSchema = z.object({
     }),
     exploracao: z.object({
       titulo: s(2, 80),
-      texto: s(2, 800),
+      texto: s(2, 600),
       termoBusca: s(2, 80),
       interativos: z.array(InteractiveItemSchema).min(2).max(5),
     }),
     explicacao: z.object({
       titulo: s(2, 80),
-      paragrafos: z.array(s(2, 600)).min(2).max(6),
+      paragrafos: z.array(s(2, 400)).min(2).max(6),
       termoBusca: s(2, 80),
     }),
     passoAPasso: z.object({
       titulo: s(2, 80),
-      passos: z.array(s(2, 450)).min(2).max(8),
+      passos: z.array(s(2, 300)).min(2).max(8),
       termoBusca: s(2, 80),
     }),
     exemploAplicado: z.object({
@@ -379,26 +379,12 @@ export const AulaDinamicaSchema = z.object({
       resolucao: z.array(s(2, 400)).min(1).max(6),
       termoBusca: s(2, 80),
     }),
-    atividadeGuiada: z.object({
-      titulo: s(2, 80),
-      pergunta: s(2, 500),
-      dica: s(2, 300),
-      opcoes: z.array(s(1, 200)).length(3),
-      respostaCorreta: z.enum(["A", "B", "C"]),
-      explicacaoResposta: s(2, 400),
-      termoBusca: s(2, 80),
-    }),
     desafio: z.object({
       titulo: s(2, 80),
       enunciado: s(2, 500),
       opcoes: z.array(s(1, 200)).length(3),
       respostaCorreta: z.enum(["A", "B", "C"]),
       explicacaoResposta: s(2, 400),
-      termoBusca: s(2, 80),
-    }),
-    revisao: z.object({
-      titulo: s(2, 80),
-      pontosChave: z.array(s(2, 300)).min(3).max(6),
       termoBusca: s(2, 80),
     }),
     conclusao: z.object({
@@ -418,7 +404,6 @@ REGRAS:
 - Metáfora do mundo real (frações = pizza, etc.).
 - Cada tela traz um "termoBusca" em INGLÊS simples (1-4 palavras) para buscar imagem ilustrativa (ex.: "red apple", "pizza slices", "ancient egypt").
 - "interativos" da tela exploracao: 2 a 5 elementos clicáveis. Cada um com label PT-BR (palavra curta), termoBusca em inglês simples (objeto único), e explicação curta que aparece ao clicar.
-- A aula precisa ENSINAR de verdade: nada de repetir só a habilidade BNCC. Traga conceito, exemplo resolvido, prática guiada, desafio e revisão.
 - Desafio: 3 opções (A/B/C), respostaCorreta sendo "A", "B" ou "C".
 - Responda ESTRITAMENTE JSON válido (sem markdown, sem crase) com este schema:
 
@@ -436,9 +421,7 @@ REGRAS:
     "explicacao": { "titulo": "string", "paragrafos": ["...","..."], "termoBusca": "english search" },
     "passoAPasso": { "titulo": "string", "passos": ["...","..."], "termoBusca": "english search" },
     "exemploAplicado": { "titulo": "string", "enunciado": "string", "resolucao": ["...","..."], "termoBusca": "english search" },
-    "atividadeGuiada": { "titulo": "string", "pergunta": "string", "dica": "string", "opcoes": ["A) ...","B) ...","C) ..."], "respostaCorreta": "A", "explicacaoResposta": "string", "termoBusca": "english search" },
     "desafio": { "titulo": "string", "enunciado": "string", "opcoes": ["A) ...","B) ...","C) ..."], "respostaCorreta": "A", "explicacaoResposta": "string", "termoBusca": "english search" },
-    "revisao": { "titulo": "string", "pontosChave": ["...","...","..."], "termoBusca": "english search" },
     "conclusao": { "titulo": "string", "mensagemFinal": "string", "termoBusca": "english search" }
   }
 }`;
@@ -456,195 +439,41 @@ function parseAulaDinamica(raw: string): AulaDinamica {
   return r.data;
 }
 
-function shortTopic(text: string) {
-  const clean = text.replace(/\s+/g, " ").trim();
-  const first = clean.split(/[.!?]/)[0]?.trim() || clean;
-  return first.length > 86 ? `${first.slice(0, 83).trim()}...` : first;
-}
-
-function fallbackImageTerm(componente?: string, descricao?: string) {
-  const raw = `${componente ?? ""} ${descricao ?? ""}`
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  if (raw.includes("medic") || raw.includes("sintet")) return "medicine laboratory";
-  if (raw.includes("celula")) return "microscope cells";
-  if (raw.includes("clima") || raw.includes("oceano")) return "ocean climate";
-  if (raw.includes("fra") || raw.includes("porcent") || raw.includes("equac")) return "math notebook";
-  if (raw.includes("hist")) return "history museum";
-  if (raw.includes("geo")) return "earth map";
-  if (raw.includes("arte")) return "art classroom";
-  return "students science classroom";
-}
-
-function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>): AulaDinamica {
-  const topic = shortTopic(data.descricao);
-  const term = fallbackImageTerm(data.componente, data.descricao);
-  const disciplina = data.componente ?? "componente curricular";
-
-  return {
-    titulo: `Aula real: ${topic}`.slice(0, 120),
-    metafora: `Vamos estudar ${topic} como um investigador: observar, entender, aplicar e testar com calma.`,
-    telas: {
-      missao: {
-        titulo: "Missão do dia",
-        texto: `Entender ${topic} com exemplo do cotidiano, imagem real e uma atividade curta.`,
-        termoBusca: term,
-      },
-      exploracao: {
-        titulo: "Observe antes de responder",
-        texto: `Olhe a situação real. Em ${disciplina}, aprender começa quando percebemos detalhes e fazemos boas perguntas.`,
-        termoBusca: term,
-        interativos: [
-          { label: "Observar", termoBusca: term, explicacao: "Veja detalhes: formas, nomes, relações e mudanças." },
-          { label: "Comparar", termoBusca: "student comparing notes", explicacao: "Compare o que aparece na imagem com o que você já conhece." },
-          { label: "Explicar", termoBusca: "teacher explaining board", explicacao: "Diga com suas palavras o que está acontecendo." },
-        ],
-      },
-      explicacao: {
-        titulo: "Explicação clara",
-        paragrafos: [
-          `${topic} é uma ideia da BNCC que ajuda a entender situações reais, não apenas decorar palavras.`,
-          "Primeiro identificamos o assunto principal. Depois ligamos esse assunto a um exemplo concreto.",
-          "Quando a criança vê, compara e explica, o conteúdo fica mais fácil de lembrar e usar.",
-        ],
-        termoBusca: term,
-      },
-      passoAPasso: {
-        titulo: "Como pensar passo a passo",
-        passos: [
-          `Leia a pergunta e destaque: ${topic}.`,
-          "Procure uma pista visual ou uma palavra importante no exemplo.",
-          "Explique a relação entre a pista e o conceito estudado.",
-          "Confira se sua resposta combina com a situação real apresentada.",
-        ],
-        termoBusca: "step by step learning",
-      },
-      exemploAplicado: {
-        titulo: "Exemplo aplicado",
-        enunciado: `Imagine uma aula sobre ${topic}. O professor mostra uma imagem real e pergunta: qual detalhe ajuda a entender o conceito?`,
-        resolucao: [
-          "1. Identifico o tema principal da habilidade.",
-          "2. Observo a imagem e encontro uma pista concreta.",
-          "3. Relaciono a pista com a explicação.",
-          "Resposta: o detalhe importante é aquele que mostra o conceito funcionando na prática.",
-        ],
-        termoBusca: term,
-      },
-      atividadeGuiada: {
-        titulo: "Prática guiada",
-        pergunta: `Qual é o primeiro passo para estudar ${topic} com segurança?`,
-        dica: "Comece pelo que você consegue ver ou localizar no exemplo.",
-        opcoes: [
-          "A) Observar o exemplo e procurar pistas importantes.",
-          "B) Chutar uma resposta sem ler a situação.",
-          "C) Decorar uma frase sem entender o sentido.",
-        ],
-        respostaCorreta: "A",
-        explicacaoResposta: "Observar primeiro ajuda o cérebro a organizar a informação antes de responder.",
-        termoBusca: "student observing lesson",
-      },
-      desafio: {
-        titulo: "Desafio rápido",
-        enunciado: `Depois de observar e explicar ${topic}, o que mostra que você realmente aprendeu?`,
-        opcoes: [
-          "A) Usar a ideia em um novo exemplo.",
-          "B) Repetir palavras sem saber o que significam.",
-          "C) Ignorar as pistas da atividade.",
-        ],
-        respostaCorreta: "A",
-        explicacaoResposta: "Aprender de verdade é conseguir aplicar a ideia em outra situação.",
-        termoBusca: "student solving challenge",
-      },
-      revisao: {
-        titulo: "Revisão em 3 ideias",
-        pontosChave: [
-          `O tema central da aula é ${topic}.`,
-          "Usamos imagem real, exemplo e prática para aprender melhor.",
-          "A melhor resposta sempre liga observação, conceito e aplicação.",
-        ],
-        termoBusca: "student reviewing notes",
-      },
-      conclusao: {
-        titulo: "Conclusão",
-        mensagemFinal: "Você concluiu uma aula com observação, explicação, exemplo e desafio. Agora pode avançar para a próxima habilidade.",
-        termoBusca: "happy student classroom",
-      },
-    },
-  };
-}
-
 export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
-    const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-    const supabaseKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY ??
-      process.env.SUPABASE_PUBLISHABLE_KEY ??
-      process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-    if (!supabaseUrl || !supabaseKey) {
-      return {
-        ok: false as const,
-        cached: false,
-        error: "Configuração do backend ausente",
-        aula: null,
-      };
-    }
-
-    const supabaseServer = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
-
-    const saveCache = async (aula: AulaDinamica, modelo: string) => {
-      const { error: upErr } = await supabaseServer
-        .from("aulas_geradas_ia")
-        .upsert(
-          {
-            codigo_bncc: data.bnccCode,
-            titulo: aula.titulo,
-            screens: aula as unknown as Record<string, unknown>,
-            modelo,
-            disciplina: data.componente ?? null,
-            ano: data.serie ?? `${data.idade ?? 9} anos`,
-            aprovada: false,
-            gerada_em: new Date().toISOString(),
-          },
-          { onConflict: "codigo_bncc" },
-        );
-      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
-    };
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
 
 
     // 1) Cache lookup
     if (!data.force) {
-      const { data: cached } = await supabaseServer
+      const { data: cached } = await supabaseAdmin
         .from("aulas_geradas_ia")
         .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
         .eq("codigo_bncc", data.bnccCode)
         .maybeSingle();
       if (cached?.screens) {
-        const cachedParsed = AulaDinamicaSchema.safeParse(cached.screens);
-        if (cachedParsed.success) {
-          return {
-            ok: true as const,
-            cached: true,
-            aula: cachedParsed.data,
-            error: null,
-          };
-        }
+        return {
+          ok: true as const,
+          cached: true,
+          aula: cached.screens as unknown as AulaDinamica,
+          error: null,
+        };
       }
     }
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      const aula = buildFallbackAulaDinamica(data);
-      await saveCache(aula, "fallback-sem-groq");
       return {
-        ok: true as const,
+        ok: false as const,
         cached: false,
-        error: null,
-        aula,
+        error: "GROQ_API_KEY ausente",
+        aula: null,
       };
     }
 
@@ -670,7 +499,7 @@ Gere a aula JSON completa.`;
               { role: "user", content: userPrompt },
             ],
             temperature: 0.7,
-            max_tokens: 4096,
+            max_tokens: 2400,
             top_p: 0.9,
             response_format: { type: "json_object" },
           }),
@@ -680,7 +509,12 @@ Gere a aula JSON completa.`;
       if (!res.ok) {
         const errText = await res.text();
         console.error("[groq:dinamica] HTTP", res.status, errText.slice(0, 400));
-        throw new Error(`Groq ${res.status}: ${errText.slice(0, 160)}`);
+        return {
+          ok: false as const,
+          cached: false,
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          aula: null,
+        };
       }
 
       const json = (await res.json()) as {
@@ -688,24 +522,42 @@ Gere a aula JSON completa.`;
       };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
       if (!raw) {
-        throw new Error("Resposta vazia");
+        return {
+          ok: false as const,
+          cached: false,
+          error: "Resposta vazia",
+          aula: null,
+        };
       }
 
       const aula = parseAulaDinamica(raw);
 
       // 2) Save cache (upsert by codigo_bncc)
-      await saveCache(aula, "llama-3.1-8b-instant");
+      const { error: upErr } = await supabaseAdmin
+        .from("aulas_geradas_ia")
+        .upsert(
+          {
+            codigo_bncc: data.bnccCode,
+            titulo: aula.titulo,
+            screens: aula as unknown as Record<string, unknown>,
+            modelo: "llama-3.1-8b-instant",
+            disciplina: data.componente ?? null,
+            ano: data.serie ?? null,
+            aprovada: false,
+            gerada_em: new Date().toISOString(),
+          },
+          { onConflict: "codigo_bncc" },
+        );
+      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
 
       return { ok: true as const, cached: false, aula, error: null };
     } catch (e) {
       console.error("[groq:dinamica]", e);
-      const aula = buildFallbackAulaDinamica(data);
-      await saveCache(aula, "fallback-pos-erro-groq");
       return {
-        ok: true as const,
+        ok: false as const,
         cached: false,
-        error: null,
-        aula,
+        error: e instanceof Error ? e.message : "Falha ao gerar aula",
+        aula: null,
       };
     }
   });
