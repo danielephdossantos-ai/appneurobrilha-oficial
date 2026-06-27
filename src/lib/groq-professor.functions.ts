@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getRequestHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
 
 const MessageSchema = z.object({
@@ -463,6 +462,7 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
     const { createClient } = await import("@supabase/supabase-js");
     const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
     const supabaseKey =
+      process.env.SUPABASE_SERVICE_ROLE_KEY ??
       process.env.SUPABASE_PUBLISHABLE_KEY ??
       process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     if (!supabaseUrl || !supabaseKey) {
@@ -474,10 +474,8 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
       };
     }
 
-    const authHeader = getRequestHeader("authorization") ?? undefined;
     const supabaseServer = createClient(supabaseUrl, supabaseKey, {
       auth: { persistSession: false, autoRefreshToken: false },
-      global: authHeader ? { headers: { Authorization: authHeader } } : undefined,
     });
 
 
@@ -489,12 +487,15 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
         .eq("codigo_bncc", data.bnccCode)
         .maybeSingle();
       if (cached?.screens) {
-        return {
-          ok: true as const,
-          cached: true,
-          aula: cached.screens as unknown as AulaDinamica,
-          error: null,
-        };
+        const cachedParsed = AulaDinamicaSchema.safeParse(cached.screens);
+        if (cachedParsed.success) {
+          return {
+            ok: true as const,
+            cached: true,
+            aula: cachedParsed.data,
+            error: null,
+          };
+        }
       }
     }
 
