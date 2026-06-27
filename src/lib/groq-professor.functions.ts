@@ -736,13 +736,13 @@ export const gerarLessonV2Groq = createServerFn({ method: "POST" })
         .limit(1)
         .maybeSingle();
       if (cached?.lesson) {
-        return { ok: true as const, cached: true, lesson: cached.lesson, error: null };
+        return { ok: true as const, cached: true, lessonJson: JSON.stringify(cached.lesson), error: null };
       }
     }
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return { ok: false as const, cached: false, error: "GROQ_API_KEY ausente", lesson: null };
+      return { ok: false as const, cached: false, error: "GROQ_API_KEY ausente", lessonJson: null };
     }
 
     const disciplina = normalizeDiscipline(data.disciplina);
@@ -782,7 +782,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
           ok: false as const,
           cached: false,
           error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          lesson: null,
+          lessonJson: null,
         };
       }
 
@@ -791,7 +791,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
       };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
       if (!raw) {
-        return { ok: false as const, cached: false, error: "Resposta vazia", lesson: null };
+        return { ok: false as const, cached: false, error: "Resposta vazia", lessonJson: null };
       }
 
       const aula = parseAndValidateAula(raw);
@@ -816,14 +816,14 @@ Gere a aula completa em JSON conforme o schema definido.`;
         );
       if (upErr) console.error("[groq:lessonV2] upsert", upErr.message);
 
-      return { ok: true as const, cached: false, lesson, error: null };
+      return { ok: true as const, cached: false, lessonJson: JSON.stringify(lesson), error: null };
     } catch (e) {
       console.error("[groq:lessonV2]", e);
       return {
         ok: false as const,
         cached: false,
         error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        lesson: null,
+        lessonJson: null,
       };
     }
   });
