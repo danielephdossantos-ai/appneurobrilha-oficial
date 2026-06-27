@@ -140,6 +140,22 @@ function Jornada() {
     enabled: !!activeChild,
   });
 
+  const hojeISO = new Date().toISOString().slice(0, 10);
+  const { data: aulaHoje } = useQuery({
+    queryKey: ["pei-aula-hoje", activeChild?.id, hojeISO],
+    queryFn: async () => {
+      if (!activeChild) return null;
+      const { data } = await supabase
+        .from("pei_aulas")
+        .select("id, atividades, status")
+        .eq("child_id", activeChild.id)
+        .eq("data_prevista", hojeISO)
+        .maybeSingle();
+      return data;
+    },
+    enabled: !!activeChild,
+  });
+
   // Redireciona automaticamente pra anamnese:
   // - 1ª vez (anamnese ainda não preenchida)
   // - A cada 2 meses (anamnese vencida)
