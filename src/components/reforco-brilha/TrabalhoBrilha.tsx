@@ -532,20 +532,120 @@ function EditorTrabalho({
     if (!documentoRef.current) return;
     toast.info("Gerando PDF...");
     try {
-      const html2pdf = (await import("html2pdf.js")).default;
+      const { jsPDF } = await import("jspdf");
       const filename = `${(titulo || "trabalho").replace(/\W+/g, "_")}.pdf`;
-      const worker = html2pdf()
-        .from(documentoRef.current)
-        .set({
-          margin: [15, 12, 15, 12],
-          filename,
-          image: { type: "jpeg", quality: 0.92 },
-          html2canvas: { scale: 2, useCORS: true },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        } as any);
+      const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const marginX = 20;
+      const bottom = 24;
+      const maxW = pageW - marginX * 2;
+      let y = 24;
 
-      // Gera blob e força download + abre em nova aba (fallback mobile / iframe)
-      const blob: Blob = await worker.outputPdf("blob");
+      const clean = (value?: string | null) =>
+        (value || "")
+          .replace(/[\u{1F300}-\u{1FAFF}]/gu, "")
+          .replace(/\s+/g, " ")
+          .trim();
+      const addPageIfNeeded = (extra = 12) => {
+        if (y + extra > pageH - bottom) {
+          pdf.addPage();
+          y = 24;
+        }
+      };
+      const writeWrapped = (text: string, opts?: { size?: number; style?: "normal" | "bold" | "italic"; gap?: number; align?: "left" | "center" }) => {
+        const size = opts?.size ?? 12;
+        const gap = opts?.gap ?? 6;
+        pdf.setFont("times", opts?.style ?? "normal");
+        pdf.setFontSize(size);
+        const lines = pdf.splitTextToSize(clean(text), maxW) as string[];
+        for (const line of lines.length ? lines : [""]) {
+          addPageIfNeeded(size * 0.45 + 3);
+          const x = opts?.align === "center" ? pageW / 2 : marginX;
+          pdf.text(line, x, y, { align: opts?.align ?? "left" });
+          y += size * 0.42 + 2;
+        }
+        y += gap;
+      };
+      const drawCover = (b: Bloco) => {
+        pdf.setDrawColor(245, 158, 11);
+        pdf.setLineWidth(0.6);
+        pdf.rect(16, 16, pageW - 32, pageH - 32);
+        pdf.setFont("times", "bold");
+        pdf.setFontSize(16);
+        pdf.text(clean(b.escola) || "Nome da escola", pageW / 2, 42, { align: "center" });
+        pdf.setFontSize(26);
+        pdf.text(pdf.splitTextToSize(clean(b.texto) || clean(titulo) || "Título do trabalho", pageW - 52), pageW / 2, 118, { align: "center" });
+        pdf.setFont("times", "italic");
+        pdf.setFontSize(15);
+        pdf.text(pdf.splitTextToSize(clean(b.subtitulo) || clean(tema) || "Tema", pageW - 52), pageW / 2, 142, { align: "center" });
+        pdf.setFont("times", "bold");
+        pdf.setFontSize(12);
+        pdf.text("Aluno(s):", pageW / 2, 182, { align: "center" });
+        pdf.setFont("times", "normal");
+        const alunos = (b.alunos || []).map(clean).filter(Boolean);
+        pdf.text(alunos.length ? alunos : ["Nome do aluno"], pageW / 2, 190, { align: "center" });
+        pdf.text(clean(b.serie) || "Série / Turma", pageW / 2, 212, { align: "center" });
+        pdf.text(`Professor(a): ${clean(b.professor) || "________________"}`, pageW / 2, 222, { align: "center" });
+        pdf.text(`${clean(b.cidade) || "Cidade"} - ${clean(b.ano) || String(new Date().getFullYear())}`, pageW / 2, pageH - 36, { align: "center" });
+        pdf.addPage();
+        y = 24;
+      };
+
+      const hasCover = blocos.some((b) => b.tipo === "capa");
+      if (!hasCover) {
+        writeWrapped(titulo || "Título do trabalho", { size: 22, style: "bold", align: "center", gap: 4 });
+        writeWrapped([materia, tema].filter(Boolean).join(" - ") || "Tema", { size: 12, style: "italic", align: "center", gap: 10 });
+      }
+
+      for (const bloco of blocos) {
+        if (bloco.tipo === "capa") {
+          drawCover(bloco);
+          continue;
+        }
+        if (bloco.tipo === "quebra") {
+          pdf.addPage();
+          y = 24;
+          continue;
+        }
+        if (bloco.tipo === "titulo") {
+          writeWrapped(bloco.texto || "Novo título", { size: 16, style: "bold", gap: 5 });
+          continue;
+        }
+        if (bloco.tipo === "paragrafo") {
+          writeWrapped(bloco.texto || "", { size: 12, style: "normal", gap: 5 });
+          continue;
+        }
+        if (bloco.tipo === "imagem") {
+          addPageIfNeeded(18);
+          pdf.setDrawColor(209, 213, 219);
+          pdf.roundedRect(marginX, y, maxW, 16, 2, 2);
+          pdf.setFont("times", "italic");
+          pdf.setFontSize(10);
+          pdf.text(clean(bloco.legenda) || "Imagem do trabalho", pageW / 2, y + 10, { align: "center" });
+          y += 22;
+        }
+      }
+
+      if (fontes.length > 0) {
+        addPageIfNeeded(34);
+        writeWrapped("Fontes", { size: 16, style: "bold", gap: 3 });
+        fontes.forEach((f, index) => {
+          writeWrapped(`${index + 1}. ${f.titulo} - ${FONTE_LABEL[f.fonte] || f.fonte} - ${f.url}`, { size: 10, gap: 2 });
+        });
+      }
+
+      const total = pdf.getNumberOfPages();
+      for (let i = 1; i <= total; i++) {
+        pdf.setPage(i);
+        pdf.setFont("times", "normal");
+        pdf.setFontSize(9);
+        pdf.setTextColor(107, 114, 128);
+        pdf.text(`Página ${i} de ${total}`, pageW / 2, pageH - 10, { align: "center" });
+        pdf.setTextColor(0, 0, 0);
+      }
+
+      const blob = pdf.output("blob");
       const url = URL.createObjectURL(blob);
 
       // 1) Download forçado
@@ -564,7 +664,7 @@ function EditorTrabalho({
       toast.success("PDF gerado! Verifique os downloads ou a nova aba.");
     } catch (e: any) {
       console.error(e);
-      toast.error("Não consegui gerar o PDF. Tente novamente.");
+      toast.error(`Não consegui gerar o PDF: ${e?.message || "erro desconhecido"}`);
     }
   }
 
