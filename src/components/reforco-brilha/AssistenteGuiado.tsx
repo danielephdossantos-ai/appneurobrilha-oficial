@@ -252,6 +252,41 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         )}
       </div>
 
+      {/* Sugestões vindas da Anamnese */}
+      {anamnese && anamnese.sugestoes.length > 0 && step === 0 && (
+        <div className="mb-5 rounded-2xl border-2 border-amber-400/40 bg-amber-50/60 dark:bg-amber-950/20 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <ClipboardList className="h-4 w-4 text-amber-600" />
+            <h4 className="text-sm font-bold">Plano sugerido pela anamnese de {anamnese.nome}</h4>
+          </div>
+          <p className="text-xs text-muted-foreground mb-3">
+            Indicadores em atenção detectados na anamnese. Toque em uma área para o app montar o plano
+            de aulas automaticamente, sem precisar responder o questionário.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {anamnese.sugestoes.map((s) => {
+              const aDef = AREAS.find((x) => x.id === s.area)!;
+              return (
+                <button
+                  key={s.area}
+                  onClick={() => aplicarSugestaoAnamnese(s.area)}
+                  className="px-3 py-2 rounded-xl bg-white dark:bg-background border-2 border-amber-400/50 hover:border-amber-500 text-left flex items-center gap-2 text-xs font-semibold transition-colors"
+                >
+                  <span className="text-lg">{aDef.emoji}</span>
+                  <span>
+                    <div>{aDef.label}</div>
+                    <div className="text-[10px] font-normal" style={{ color: RISK_COLOR[s.nivel] }}>
+                      {s.motivo}
+                    </div>
+                  </span>
+                  <Zap className="h-3 w-3 text-amber-500 ml-1" />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* progresso */}
       {step < 5 && (
         <div className="flex gap-1 mb-5">
@@ -260,6 +295,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
           ))}
         </div>
       )}
+
 
       {/* STEP 0 — intro */}
       {step === 0 && (
