@@ -19,7 +19,7 @@ import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
-import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { type EtapaEscolar } from "../hooks/useAulasBncc";
 import { getFirstYearLessonTitle } from "../data/first-year-lesson-overrides";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
