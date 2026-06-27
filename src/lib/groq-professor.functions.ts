@@ -1087,3 +1087,91 @@ Gere o JSON com as 3 dicas progressivas (NUNCA a resposta) usando o hiperfoco da
       };
     }
   });
+
+
+// ============================================================
+// ANÁLISE DO TRABALHO ESCOLAR — Missão Trabalho
+// Avalia se o trabalho da criança segue o que o professor pediu
+// e devolve pontos fortes, o que melhorar e dicas práticas.
+// ============================================================
+
+const AnaliseTrabalhoInput = z.object({
+  titulo: z.string().max(200).default(""),
+  tema: z.string().max(200).default(""),
+  materia: z.string().max(80).optional().nullable(),
+  instrucoesProfessor: z.string().max(2000).optional().nullable(),
+  texto: z.string().min(1).max(12000),
+  idade: z.number().int().min(4).max(18).optional(),
+  serie: z.string().max(40).optional(),
+});
+
+export const analisarTrabalho = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => AnaliseTrabalhoInput.parse(input))
+  .handler(async ({ data }) => {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, error: "GROQ_API_KEY ausente", analise: null };
+    }
+
+    const sys = `Você é o Professor Brilho, tutor pedagógico para crianças brasileiras neurodivergentes.
+Analise o trabalho escolar de uma criança comparando com o que o professor pediu.
+Devolva em português do Brasil, tom acolhedor, frases curtas, EXATAMENTE neste formato Markdown:
+
+## ✅ O que está bom
+- (3 a 5 pontos curtos e específicos)
+
+## ✏️ O que precisa melhorar
+- (3 a 5 pontos com exemplo concreto do texto, sem reescrever tudo)
+
+## 💡 Dicas pra deixar nota máxima
+- (3 a 5 dicas práticas e acionáveis)
+
+## 🎯 Nota geral
+(uma frase + nota de 0 a 10)
+
+Nunca reescreva o trabalho inteiro pela criança. Aponte e ensine.`;
+
+    const user = [
+      `Matéria: ${data.materia || "não informada"}`,
+      `Tema: ${data.tema || "não informado"}`,
+      `Título: ${data.titulo || "(sem título)"}`,
+      data.serie ? `Série: ${data.serie}` : "",
+      data.idade ? `Idade: ${data.idade} anos` : "",
+      "",
+      `INSTRUÇÕES DO PROFESSOR:`,
+      data.instrucoesProfessor?.trim() ||
+        "(não fornecidas — avalie pelo padrão esperado para a série/idade: introdução, desenvolvimento, conclusão, fontes, clareza, ortografia, coerência com o tema)",
+      "",
+      `TRABALHO DA CRIANÇA:`,
+      data.texto,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    try {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            { role: "system", content: sys },
+            { role: "user", content: user },
+          ],
+          temperature: 0.4,
+          max_tokens: 900,
+        }),
+      });
+      if (!res.ok) {
+        const t = await res.text();
+        return { ok: false as const, error: `Groq ${res.status}: ${t.slice(0, 160)}`, analise: null };
+      }
+      const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
+      const analise = json.choices?.[0]?.message?.content?.trim() ?? "";
+      if (!analise) return { ok: false as const, error: "Resposta vazia", analise: null };
+      return { ok: true as const, analise, error: null };
+    } catch (e) {
+      console.error("[groq:analisarTrabalho]", e);
+      return { ok: false as const, error: "Falha de rede", analise: null };
+    }
+  });
