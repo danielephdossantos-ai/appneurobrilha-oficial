@@ -188,6 +188,20 @@ function DesafioView({ data }: { data: AulaDinamica["telas"]["desafio"] }) {
           {data.explicacaoResposta}
         </div>
       )}
+      {pick && pick !== data.respostaCorreta && (
+        <ProfessorBrilhaErroExplainer
+          pergunta={data.enunciado}
+          gabarito={
+            data.opcoes.find((o) => o.trim().toUpperCase().startsWith(data.respostaCorreta)) ??
+            data.respostaCorreta
+          }
+          respostaErrada={
+            data.opcoes.find((o) => o.trim().toUpperCase().startsWith(pick)) ?? pick
+          }
+          modulo="escola-brilha"
+        />
+      )}
+
     </div>
   );
 }
