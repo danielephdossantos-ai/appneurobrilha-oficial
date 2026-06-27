@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Calendar, CheckCircle2, Circle, PlayCircle, Sparkles, Trash2 } from "lucide-react";
+import { Calendar, CheckCircle2, Circle, PlayCircle, Sparkles, Trash2, Wand2 } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { toast } from "sonner";
 import { PLANOS_TEMPLATES, AreaPlano, SemanaTemplate } from "@/lib/reforco-brilha-planos-templates";
+import { AulaInterativaIA } from "@/components/reforco-brilha/AulaInterativaIA";
 
 interface SemanaPlano extends SemanaTemplate {
   habilidade_id: string | null;
