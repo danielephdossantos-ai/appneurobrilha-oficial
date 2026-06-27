@@ -98,6 +98,16 @@ function AulaDbPage() {
       }
     }
 
+    // 3º–5º Ano: se houver conteúdo ActivityLesson (layout EF03MA17/EF03LP08), usa.
+    if (AL_GRADES.has(aula.serie)) {
+      const al = getActivityLesson3a5(aula.codigo_bncc);
+      if (al) {
+        return <ActivityPlayer lesson={al} currentRef={ref} />;
+      }
+    }
+
+
+
     switch (aula.tipo_player) {
       case "early":
         return <EarlyChildhoodPlayer lesson={aula.payload} />;
