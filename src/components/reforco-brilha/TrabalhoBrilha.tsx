@@ -207,11 +207,15 @@ function EditorTrabalho({
 }) {
   const buscar = useServerFn(buscarRecursosExternos);
   const revisar = useServerFn(revisarPortugues);
+  const analisar = useServerFn(analisarTrabalho);
   const documentoRef = useRef<HTMLDivElement>(null);
 
   const [titulo, setTitulo] = useState(trabalhoExistente?.titulo || "");
   const [tema, setTema] = useState(trabalhoExistente?.tema || "");
   const [materia, setMateria] = useState(trabalhoExistente?.materia || "");
+  const [instrucoesProf, setInstrucoesProf] = useState<string>(
+    (trabalhoExistente as any)?.instrucoes_professor || "",
+  );
   const [blocos, setBlocos] = useState<Bloco[]>(trabalhoExistente?.blocos || []);
   const [fontes, setFontes] = useState<Fonte[]>(trabalhoExistente?.fontes || []);
 
@@ -231,6 +235,10 @@ function EditorTrabalho({
   const [problemasPorBloco, setProblemasPorBloco] = useState<Record<string, string[]>>({});
   const [resumoRevisao, setResumoRevisao] = useState<string | null>(null);
   const [avisoCreditos, setAvisoCreditos] = useState<string | null>(null);
+
+  // Análise IA
+  const [analisando, setAnalisando] = useState(false);
+  const [analiseTexto, setAnaliseTexto] = useState<string | null>(null);
 
   // Preview inline
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
