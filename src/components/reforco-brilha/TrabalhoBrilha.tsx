@@ -1015,6 +1015,25 @@ function archiveEmbed(url: string): string | null {
   return null;
 }
 
+function webEmbedUrl(url: string, fonte: string): string | null {
+  try {
+    const u = new URL(url);
+    if (fonte === "wikipedia" || u.hostname.includes("wikipedia.org")) {
+      return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/")
+                .replace("://en.wikipedia.org/", "://en.m.wikipedia.org/");
+    }
+    if (fonte === "wikiversity" || u.hostname.includes("wikiversity.org")) {
+      return url.replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/")
+                .replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
+    }
+    if (fonte === "openlibrary" || u.hostname.includes("openlibrary.org")) {
+      return url;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+
 function RecursoPreviewModal({
   recurso,
   onFechar,
