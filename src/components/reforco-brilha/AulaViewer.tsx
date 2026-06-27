@@ -36,7 +36,7 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
   explicacao: { label: "Explicação", icon: Lightbulb, cor: "from-amber-400 to-orange-500" },
   demonstracao: { label: "Demonstração", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   pratica_guiada: { label: "Prática guiada", icon: Hand, cor: "from-sky-400 to-blue-500" },
-  dicas_familia: { label: "Dicas para a família", icon: Users, cor: "from-indigo-400 to-purple-500" },
+  dicas_familia: { label: "Vamos fazer juntos", icon: Users, cor: "from-indigo-400 to-purple-500" },
   avaliacao: { label: "Avaliação rápida", icon: CheckCircle2, cor: "from-violet-400 to-fuchsia-500" },
   proximos_passos: { label: "Próximos passos", icon: ArrowRight, cor: "from-rose-400 to-pink-500" },
   exemplo: { label: "Exemplo", icon: Lightbulb, cor: "from-amber-400 to-orange-500" },
