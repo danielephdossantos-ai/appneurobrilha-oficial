@@ -175,11 +175,6 @@ function AulaDbPage() {
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
-  const fund2Lesson = useLessonV2(
-    aula?.codigo_bncc ?? "",
-    aula?.titulo ?? "",
-    aula?.descricao ?? "",
-  );
 
   if (loading) {
     return (
@@ -250,16 +245,19 @@ function AulaDbPage() {
       }
     }
 
-    // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
+    // 6º–9º Ano: preserva o visual interativo original (ActivityPlayerC).
+    // A pedagogia entra como conteúdo estruturado, sem trocar a interface por Fund2Player.
     if (FUND2_GRADES.has(aula.serie)) {
-      if (fund2Lesson) {
-        return (
-          <Fund2Player
-            lesson={fund2Lesson}
-            currentRef={ref}
-            capitulo={aula.codigo_bncc}
-          />
-        );
+      if (hasScreensPayload(aula.payload)) {
+        return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
+      }
+      const generated = generateActivityLesson6a9(
+        aula.codigo_bncc,
+        aula.titulo,
+        aula.descricao ?? "",
+      );
+      if (generated) {
+        return <ActivityPlayerC lesson={adaptActivityLessonToC(aula, generated)} currentRef={ref} />;
       }
     }
     switch (aula.tipo_player) {
