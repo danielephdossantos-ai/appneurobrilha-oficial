@@ -332,11 +332,13 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
                     {isTrab ? "Trabalho" : "Prova"}
-                    {!isTrab && (
-                      <span className="ml-2 normal-case tracking-normal text-indigo-700 font-bold">
-                        {isSel ? "• aberto" : "• tocar p/ ver estudos"}
-                      </span>
-                    )}
+                    <span className="ml-2 normal-case tracking-normal text-indigo-700 font-bold">
+                      {isSel
+                        ? "• aberto"
+                        : isTrab
+                        ? "• tocar p/ ver sugestões"
+                        : "• tocar p/ ver estudos"}
+                    </span>
                   </p>
                   <p className="text-sm font-bold text-foreground">{p.subject}</p>
                   {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
@@ -361,13 +363,14 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
       {/* PAINEL DE ESTUDO — fora do calendário, separado por categoria */}
       {(() => {
         const sel = provas.find((p) => p.id === selectedProvaId);
-        if (!sel || sel.tipo === "trabalho") return null;
+        if (!sel) return null;
+        const isTrab = sel.tipo === "trabalho";
         return (
           <div className="mt-5 space-y-4 border-t-2 border-dashed border-indigo-200 pt-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700">
-                  Estudo para a prova
+                  {isTrab ? "Pesquisa para o trabalho" : "Estudo para a prova"}
                 </p>
                 <p className="text-base font-black text-foreground">{sel.subject}</p>
                 <p className="text-[11px] text-muted-foreground">
@@ -386,22 +389,26 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
               </button>
             </div>
 
-            <section className="bg-indigo-50/40 border-2 border-indigo-100 rounded-xl p-3">
-              <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700 mb-2">
-                Plano de estudo
-              </p>
-              <PlanoEstudoProva
-                missionId={sel.id}
-                subject={sel.subject}
-                examDate={sel.exam_date}
-                notes={sel.notes}
-              />
-            </section>
+            {!isTrab && (
+              <section className="bg-indigo-50/40 border-2 border-indigo-100 rounded-xl p-3">
+                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700 mb-2">
+                  Plano de estudo
+                </p>
+                <PlanoEstudoProva
+                  missionId={sel.id}
+                  subject={sel.subject}
+                  examDate={sel.exam_date}
+                  notes={sel.notes}
+                />
+              </section>
+            )}
 
             {childId && (
               <section className="bg-emerald-50/40 border-2 border-emerald-100 rounded-xl p-3">
                 <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-2">
-                  Materiais recomendados
+                  {isTrab
+                    ? "Sugestões grátis da internet pra montar o trabalho"
+                    : "Materiais recomendados"}
                 </p>
                 <EstudosRecomendados
                   childId={childId}
