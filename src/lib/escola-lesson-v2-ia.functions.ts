@@ -133,6 +133,95 @@ function extractJson(raw: string) {
   return JSON.parse(txt);
 }
 
+// Corta um texto para no máximo `maxChars` mantendo no máximo `maxSentences`
+// frases completas. Garante "máximo 2 frases curtas por tela" mesmo se o
+// modelo desobedecer e devolver parágrafos.
+function shortText(input: string, maxChars: number, maxSentences = 2): string {
+  if (!input) return input;
+  const cleaned = String(input).replace(/\s+/g, " ").trim();
+  const sentences = cleaned.match(/[^.!?]+[.!?]?/g)?.map((s) => s.trim()).filter(Boolean) ?? [cleaned];
+  let out = sentences.slice(0, maxSentences).join(" ").trim();
+  if (out.length <= maxChars) return out;
+  const sliced = out.slice(0, maxChars - 1);
+  const lastSpace = sliced.lastIndexOf(" ");
+  out = (lastSpace > 40 ? sliced.slice(0, lastSpace) : sliced).replace(/[.,;:!?]+$/, "") + "…";
+  return out;
+}
+
+function compactOptions(opts: any[]) {
+  return (opts ?? []).slice(0, 4).map((o) => ({
+    ...o,
+    text: shortText(o.text ?? "", 120, 1),
+    reason: shortText(o.reason ?? "", 140, 1),
+  }));
+}
+
+// Aplica shortText em todo bloco textual da aula (AI ou fallback).
+export function compactLesson<T extends { screens: any; title?: string }>(lesson: T): T {
+  const s = lesson.screens;
+  if (lesson.title) lesson.title = shortText(lesson.title, 120, 1);
+  if (s.missao) {
+    s.missao.studentObjective = shortText(s.missao.studentObjective, 160);
+    s.missao.contextLine = shortText(s.missao.contextLine, 140);
+    s.missao.whatYouWillDo = (s.missao.whatYouWillDo ?? []).slice(0, 4).map((t: string) => shortText(t, 100, 1));
+  }
+  if (s.exploracao) {
+    s.exploracao.provokingQuestion = shortText(s.exploracao.provokingQuestion, 140, 1);
+    s.exploracao.observation = shortText(s.exploracao.observation, 180);
+    s.exploracao.pairs = (s.exploracao.pairs ?? []).slice(0, 5).map((p: any) => ({
+      left: shortText(p.left ?? "", 60, 1),
+      right: shortText(p.right ?? "", 120, 1),
+    }));
+  }
+  if (s.explicacao) {
+    s.explicacao.conceito = shortText(s.explicacao.conceito, 220);
+    s.explicacao.exemplo = shortText(s.explicacao.exemplo, 180);
+    s.explicacao.aplicacao = shortText(s.explicacao.aplicacao, 140);
+    s.explicacao.resumo = shortText(s.explicacao.resumo, 140, 1);
+    s.explicacao.passoAPasso = (s.explicacao.passoAPasso ?? []).slice(0, 5).map((p: any) => ({
+      step: shortText(p.step ?? "", 80, 1),
+      detail: shortText(p.detail ?? "", 140, 1),
+    }));
+  }
+  if (s.exemplo) {
+    s.exemplo.question = shortText(s.exemplo.question, 180, 1);
+    s.exemplo.answer = shortText(s.exemplo.answer, 140, 1);
+    s.exemplo.why = shortText(s.exemplo.why, 160);
+    s.exemplo.resolution = (s.exemplo.resolution ?? []).slice(0, 5).map((r: any) => ({
+      ...r,
+      line: shortText(r.line ?? "", 140, 1),
+    }));
+  }
+  if (s.guiada) {
+    s.guiada.prompt = shortText(s.guiada.prompt, 160, 1);
+    s.guiada.hint = shortText(s.guiada.hint, 140, 1);
+    s.guiada.options = compactOptions(s.guiada.options);
+  }
+  if (s.atividade?.items) {
+    s.atividade.items = s.atividade.items.slice(0, 3).map((it: any) => ({
+      question: shortText(it.question ?? "", 160, 1),
+      options: compactOptions(it.options),
+    }));
+  }
+  if (s.desafio) {
+    s.desafio.contextualScenario = shortText(s.desafio.contextualScenario, 140, 1);
+    s.desafio.question = shortText(s.desafio.question, 160, 1);
+    s.desafio.options = compactOptions(s.desafio.options);
+  }
+  if (s.resumo) {
+    s.resumo.title = shortText(s.resumo.title, 80, 1);
+    s.resumo.nodes = (s.resumo.nodes ?? []).slice(0, 6).map((n: any) => ({
+      label: shortText(n.label ?? "", 60, 1),
+      detail: n.detail ? shortText(n.detail, 120, 1) : undefined,
+    }));
+    s.resumo.takeaways = (s.resumo.takeaways ?? []).slice(0, 4).map((t: string) => shortText(t, 120, 1));
+  }
+  if (s.dominio) {
+    s.dominio.recommendation = shortText(s.dominio.recommendation, 180);
+  }
+  return lesson;
+}
+
 export const gerarLessonV2Escola = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
