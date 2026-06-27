@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import type { LessonV2 } from "@/modules/escola-brilha/types/lesson-v2";
+import type { Discipline, LessonV2 } from "@/modules/escola-brilha/types/lesson-v2";
 
 const OptionSchema = z.object({
   text: z.string().min(1).max(160),
@@ -67,7 +67,7 @@ const InputSchema = z.object({
 
 type SubjectKey = "CI" | "MA" | "LP" | "HI" | "GE" | "LI" | "AR" | "EF" | "ER";
 
-const SUBJECT_NAME: Record<SubjectKey, string> = {
+const SUBJECT_NAME: Record<SubjectKey, Discipline> = {
   CI: "Ciências",
   MA: "Matemática",
   LP: "Língua Portuguesa",
