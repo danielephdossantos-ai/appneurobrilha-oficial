@@ -2,9 +2,17 @@ import { useState } from "react";
 import type { AulaDinamica } from "@/lib/groq-professor.functions";
 
 function imgUrl(term: string, w = 800, h = 500) {
-  // Free, no-auth illustrative image (Unsplash Source)
-  const q = encodeURIComponent(term.trim());
-  return `https://source.unsplash.com/${w}x${h}/?${q}`;
+  // Free, no-auth real photo source. Query comes from Groq in English.
+  const tags = term
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 4)
+    .map(encodeURIComponent)
+    .join(",");
+  return `https://loremflickr.com/${w}/${h}/${tags || "education"}`;
 }
 
 type Screen = keyof AulaDinamica["telas"];
@@ -14,7 +22,9 @@ const ORDER: Screen[] = [
   "explicacao",
   "passoAPasso",
   "exemploAplicado",
+  "atividadeGuiada",
   "desafio",
+  "revisao",
   "conclusao",
 ];
 
@@ -80,8 +90,20 @@ export function AulaDinamicaViewer({ aula }: { aula: AulaDinamica }) {
           </div>
         )}
 
+        {screen === "atividadeGuiada" && (
+          <DesafioView data={t as AulaDinamica["telas"]["atividadeGuiada"]} />
+        )}
+
         {screen === "desafio" && (
           <DesafioView data={t as AulaDinamica["telas"]["desafio"]} />
+        )}
+
+        {screen === "revisao" && (
+          <ul className="list-disc list-inside space-y-1">
+            {(t as AulaDinamica["telas"]["revisao"]).pontosChave.map((p, k) => (
+              <li key={k}>{p}</li>
+            ))}
+          </ul>
         )}
 
         {screen === "conclusao" && (
@@ -152,12 +174,18 @@ function ExploracaoView({
   );
 }
 
-function DesafioView({ data }: { data: AulaDinamica["telas"]["desafio"] }) {
+function DesafioView({
+  data,
+}: {
+  data: AulaDinamica["telas"]["desafio"] | AulaDinamica["telas"]["atividadeGuiada"];
+}) {
   const [pick, setPick] = useState<"A" | "B" | "C" | null>(null);
   const letters: Array<"A" | "B" | "C"> = ["A", "B", "C"];
+  const enunciado = "enunciado" in data ? data.enunciado : data.pergunta;
   return (
     <div className="space-y-3">
-      <p className="font-medium">{data.enunciado}</p>
+      {"dica" in data && <p className="text-sm text-muted-foreground">Dica: {data.dica}</p>}
+      <p className="font-medium">{enunciado}</p>
       <div className="space-y-2">
         {data.opcoes.map((op, k) => {
           const L = letters[k];
