@@ -26,8 +26,11 @@ export interface AvisoFonteExterna {
 
 // ---------- YouTube (Data API v3) ----------
 async function buscarYoutube(query: string): Promise<{ resultados: RecursoExterno[]; aviso?: AvisoFonteExterna }> {
-  const key = (process.env.YOUTUBE_API_KEY_NOVA || process.env.YOUTUBE_API_KEY || "").trim();
-  if (!key) {
+  const keys = [process.env.YOUTUBE_API_KEY, process.env.YOUTUBE_API_KEY_NOVA]
+    .map((key) => (key || "").trim())
+    .filter((key, index, all) => key && all.indexOf(key) === index);
+
+  if (keys.length === 0) {
     return {
       resultados: [],
       aviso: {
@@ -37,66 +40,71 @@ async function buscarYoutube(query: string): Promise<{ resultados: RecursoExtern
       },
     };
   }
+
+  let ultimoAviso: AvisoFonteExterna | undefined;
   // foco educativo infantil em PT-BR; embeddable + safeSearch strict
   const q = `${query} educativo infantil`;
-  const url =
-    `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6` +
-    `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
-    `&q=${encodeURIComponent(q)}&key=${key}`;
-  try {
-    const r = await fetch(url);
-    const data: any = await r.json();
-    if (!r.ok) {
-      const reason = String(data?.error?.errors?.[0]?.reason || data?.error?.status || "").toLowerCase();
-      const rawMessage = String(data?.error?.message || "Erro ao consultar o YouTube.");
-      let tipo: AvisoFonteExterna["tipo"] = "erro";
-      let mensagem = "O YouTube recusou a busca. Verifique se a chave está correta e se a API do YouTube Data v3 está ativa.";
 
-      if (reason.includes("keyinvalid") || rawMessage.toLowerCase().includes("api key not valid")) {
-        tipo = "chave_invalida";
-        mensagem = "A chave do YouTube foi rejeitada como inválida. Gere uma nova chave e atualize YOUTUBE_API_KEY pelo formulário seguro.";
-      } else if (reason.includes("accessnotconfigured") || reason.includes("apihasnotbeenused") || reason.includes("disabled")) {
-        tipo = "api_desativada";
-        mensagem = "A chave existe, mas a YouTube Data API v3 não está ativada no projeto do Google Cloud dessa chave.";
-      } else if (reason.includes("iprefererblocked") || reason.includes("referer") || reason.includes("restriction")) {
-        tipo = "restricao";
-        mensagem = "A chave do YouTube tem restrição incompatível. Para chamada pelo servidor, use restrição por API e permita YouTube Data API v3.";
-      } else if (reason.includes("quota") || reason.includes("dailylimit") || r.status === 403) {
-        tipo = "quota";
-        mensagem = "A cota do YouTube pode ter acabado ou a chave não tem permissão para usar essa API.";
+  for (const [keyIndex, key] of keys.entries()) {
+    const url =
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=6` +
+      `&safeSearch=strict&videoEmbeddable=true&relevanceLanguage=pt&regionCode=BR` +
+      `&q=${encodeURIComponent(q)}&key=${key}`;
+    try {
+      const r = await fetch(url);
+      const data: any = await r.json();
+      if (!r.ok) {
+        const reason = String(data?.error?.errors?.[0]?.reason || data?.error?.status || "").toLowerCase();
+        const rawMessage = String(data?.error?.message || "Erro ao consultar o YouTube.");
+        let tipo: AvisoFonteExterna["tipo"] = "erro";
+        let mensagem = "O YouTube recusou a busca. Verifique se a chave está correta e se a API do YouTube Data v3 está ativa.";
+
+        if (reason.includes("keyinvalid") || rawMessage.toLowerCase().includes("api key not valid")) {
+          tipo = "chave_invalida";
+          mensagem = "A chave do YouTube foi rejeitada como inválida. Atualize a YOUTUBE_API_KEY pelo formulário seguro.";
+        } else if (reason.includes("accessnotconfigured") || reason.includes("apihasnotbeenused") || reason.includes("disabled")) {
+          tipo = "api_desativada";
+          mensagem = "A chave existe, mas a YouTube Data API v3 não está ativada no projeto do Google Cloud dessa chave.";
+        } else if (reason.includes("iprefererblocked") || reason.includes("referer") || reason.includes("restriction")) {
+          tipo = "restricao";
+          mensagem = "A chave do YouTube tem restrição incompatível. Para chamada pelo servidor, use restrição por API e permita YouTube Data API v3.";
+        } else if (reason.includes("quota") || reason.includes("dailylimit") || r.status === 403) {
+          tipo = "quota";
+          mensagem = "A cota do YouTube pode ter acabado ou a chave não tem permissão para usar essa API.";
+        }
+
+        console.warn("youtube_search_failed", { status: r.status, reason, message: rawMessage, keyIndex });
+        ultimoAviso = { fonte: "youtube", tipo, mensagem };
+        continue;
       }
-
-      console.warn("youtube_search_failed", { status: r.status, reason, message: rawMessage });
-      return { resultados: [], aviso: { fonte: "youtube", tipo, mensagem } };
-    }
-    const items: any[] = data.items || [];
-    const resultados = items
-      .filter((it) => it.id?.videoId)
-      .map((it) => {
-        const sn = it.snippet || {};
-        const thumb =
-          sn.thumbnails?.high?.url || sn.thumbnails?.medium?.url || sn.thumbnails?.default?.url || null;
-        const rec: RecursoExterno = {
-          fonte: "youtube",
-          titulo: sn.title || "Vídeo",
-          descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
-          url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
-          thumbnail: thumb,
-          conteudo: null,
-        };
-        return rec;
-      });
-    return { resultados };
-  } catch {
-    return {
-      resultados: [],
-      aviso: {
+      const items: any[] = data.items || [];
+      const resultados = items
+        .filter((it) => it.id?.videoId)
+        .map((it) => {
+          const sn = it.snippet || {};
+          const thumb =
+            sn.thumbnails?.high?.url || sn.thumbnails?.medium?.url || sn.thumbnails?.default?.url || null;
+          const rec: RecursoExterno = {
+            fonte: "youtube",
+            titulo: sn.title || "Vídeo",
+            descricao: sn.channelTitle ? `${sn.channelTitle} — ${sn.description || ""}`.trim() : sn.description || null,
+            url: `https://www.youtube.com/watch?v=${it.id.videoId}`,
+            thumbnail: thumb,
+            conteudo: null,
+          };
+          return rec;
+        });
+      return { resultados };
+    } catch {
+      ultimoAviso = {
         fonte: "youtube",
         tipo: "erro",
         mensagem: "Não consegui conectar ao YouTube agora. Tente atualizar a busca em alguns instantes.",
-      },
-    };
+      };
+    }
   }
+
+  return { resultados: [], aviso: ultimoAviso };
 }
 
 function normalize(s: string): string {
