@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+import { gerarPaginasAula } from "@/lib/aula-paginas-ia.functions";
+import { toast } from "sonner";
 import {
   X,
   ChevronLeft,
@@ -14,6 +17,8 @@ import {
   CheckCircle2,
   ArrowRight,
   Volume2,
+  Sparkles,
+  Loader2,
 } from "lucide-react";
 
 export interface AulaViewerProps {
@@ -244,24 +249,61 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [gerando, setGerando] = useState(false);
+  const gerarPaginas = useServerFn(gerarPaginasAula);
+
+  const carregar = async () => {
+    const { data } = await supabase
+      .from("rb_paginas_aula")
+      .select("id,ordem,tipo,titulo,conteudo")
+      .eq("aula_id", aulaId)
+      .order("ordem", { ascending: true });
+    const list = (data || []) as Pagina[];
+    setPaginas(list);
+    return list;
+  };
+
+  const regenerar = async (force = false) => {
+    setGerando(true);
+    try {
+      const r = await gerarPaginas({ data: { aulaId, force } });
+      if (!r.ok) {
+        toast.error(r.error || "Não consegui gerar a aula agora.");
+        return;
+      }
+      if (r.regenerated) {
+        toast.success("Aula completa pronta! 💛");
+        await carregar();
+        setIdx(0);
+      }
+    } finally {
+      setGerando(false);
+    }
+  };
 
   useEffect(() => {
     let alive = true;
     (async () => {
       setLoading(true);
-      const { data } = await supabase
-        .from("rb_paginas_aula")
-        .select("id,ordem,tipo,titulo,conteudo")
-        .eq("aula_id", aulaId)
-        .order("ordem", { ascending: true });
+      const list = await carregar();
       if (!alive) return;
-      setPaginas((data || []) as Pagina[]);
       setIdx(0);
       setLoading(false);
+      // Heurística: páginas seed/genéricas têm pouco conteúdo. Regenera 1x.
+      const totalChars = list.reduce(
+        (acc, p) => acc + JSON.stringify(p.conteudo ?? {}).length,
+        0,
+      );
+      if (list.length > 0 && totalChars < 900) {
+        await regenerar(true);
+      } else if (list.length === 0) {
+        await regenerar(true);
+      }
     })();
     return () => {
       alive = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aulaId]);
 
   const total = paginas.length;
@@ -307,13 +349,25 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                 <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
               </div>
             </div>
-            <button
-              onClick={onClose}
-              className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center shrink-0"
-              aria-label="Fechar aula"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => regenerar(true)}
+                disabled={gerando}
+                className="hidden sm:inline-flex h-10 px-3 rounded-full bg-white/20 hover:bg-white/30 items-center gap-1.5 text-xs font-black disabled:opacity-50"
+                aria-label="Refazer aula com a Brilha"
+                title="Refazer aula com a Brilha"
+              >
+                {gerando ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                Refazer com a Brilha
+              </button>
+              <button
+                onClick={onClose}
+                className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center"
+                aria-label="Fechar aula"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
           {/* Indicador grande de progresso */}
@@ -350,13 +404,22 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
 
         {/* Página estilo papel de apostila */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50/40 to-white px-5 sm:px-12 py-8 border-x-4 border-amber-100 shadow-2xl">
-          {loading ? (
-            <div className="h-64 grid place-items-center text-muted-foreground">
-              Carregando aula…
+          {loading || gerando ? (
+            <div className="h-64 grid place-items-center text-center gap-3">
+              <Loader2 className="h-8 w-8 text-amber-500 animate-spin mx-auto" />
+              <p className="text-sm text-muted-foreground font-semibold">
+                {gerando ? "Brilha está montando a aula completa pra você…" : "Carregando aula…"}
+              </p>
             </div>
           ) : !atual ? (
-            <div className="h-64 grid place-items-center text-muted-foreground text-center">
-              Esta aula ainda não tem páginas cadastradas.
+            <div className="h-64 grid place-items-center text-center gap-3">
+              <p className="text-muted-foreground">Esta aula ainda não tem páginas.</p>
+              <button
+                onClick={() => regenerar(true)}
+                className="px-4 py-2 rounded-xl bg-amber-500 text-white text-sm font-bold inline-flex items-center gap-2"
+              >
+                <Sparkles className="h-4 w-4" /> Gerar com a Brilha
+              </button>
             </div>
           ) : (
             <div key={atual.id} className="animate-in fade-in slide-in-from-right-4 duration-300">
