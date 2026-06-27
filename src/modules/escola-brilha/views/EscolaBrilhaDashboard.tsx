@@ -19,7 +19,7 @@ import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
-import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { type EtapaEscolar } from "../hooks/useAulasBncc";
 import { getFirstYearLessonTitle } from "../data/first-year-lesson-overrides";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
@@ -75,7 +75,9 @@ const TABS: { id: EtapaEscolar; label: string; Icon: React.FC<{ className?: stri
 export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<EtapaEscolar>("fundamental1");
-  const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
+  // DB BNCC aulas desconectadas — Escola Brilha volta a ser só jogos de ensino estáticos.
+  const aulasBanco: AulaBanco[] = [];
+  const loading = false;
 
   // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
   useEffect(() => {
