@@ -1,4 +1,4 @@
-import type { KidsLesson } from "../types/kids-lesson";
+import type { KidsLesson, KidsScene } from "../types/kids-lesson";
 
 /**
  * Banco local de aulas Kids (1º Ano).
