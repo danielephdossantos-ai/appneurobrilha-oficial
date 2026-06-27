@@ -273,13 +273,9 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
                   className="px-3 py-2 rounded-xl bg-white dark:bg-background border-2 border-amber-400/50 hover:border-amber-500 text-left flex items-center gap-2 text-xs font-semibold transition-colors"
                 >
                   <span className="text-lg">{aDef.emoji}</span>
-                  <span>
-                    <div>{aDef.label}</div>
-                    <div className="text-[10px] font-normal" style={{ color: RISK_COLOR[s.nivel] }}>
-                      {s.motivo}
-                    </div>
-                  </span>
+                  <span>{aDef.label}</span>
                   <Zap className="h-3 w-3 text-amber-500 ml-1" />
+
                 </button>
               );
             })}
