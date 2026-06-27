@@ -115,7 +115,7 @@ function AulaDbPage() {
     if (FUND2_GRADES.has(aula.serie)) {
       const f2 = generateActivityLesson6a9(aula.codigo_bncc, aula.titulo);
       if (f2) {
-        return <ActivityPlayerTeen lesson={f2} currentRef={ref} />;
+        return <ActivityPlayer lesson={f2} currentRef={ref} />;
       }
     }
 
