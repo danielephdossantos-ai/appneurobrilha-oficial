@@ -26,7 +26,7 @@ export interface AvisoFonteExterna {
 
 // ---------- YouTube (Data API v3) ----------
 async function buscarYoutube(query: string): Promise<{ resultados: RecursoExterno[]; aviso?: AvisoFonteExterna }> {
-  const key = (process.env.YOUTUBE_API_KEY || "").trim();
+  const key = (process.env.YOUTUBE_API_KEY_NOVA || process.env.YOUTUBE_API_KEY || "").trim();
   if (!key) {
     return {
       resultados: [],
