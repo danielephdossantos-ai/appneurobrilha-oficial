@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Wand2, ArrowRight, ArrowLeft, RefreshCw, BookOpen, PlayCircle, Sparkles, ClipboardList, Zap } from "lucide-react";
 import { Card } from "@/components/Layout";
 import { supabase } from "@/database/supabase/client";
 import { PlanoAutomatico } from "@/components/reforco-brilha/PlanoAutomatico";
 import type { AreaPlano } from "@/lib/reforco-brilha-planos-templates";
+import { PERFIL_LABEL, RISK_COLOR } from "@/modules/anamnese/v2/scoring";
+import type { PerfilScores, RiskMap } from "@/modules/anamnese/v2/types";
 
 type Area =
   | "leitura"
@@ -64,6 +66,96 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
   const [descricaoDif, setDescricaoDif] = useState<string>("");
 
   const areaSel = AREAS.find((a) => a.id === area);
+
+  // ===== Conexão com a Anamnese =====
+  interface AnamneseInfo {
+    childId: string;
+    nome: string;
+    idade?: number;
+    serie?: string;
+    scores: PerfilScores;
+    risk: RiskMap;
+    sugestoes: { area: Area; motivo: string; nivel: keyof typeof RISK_COLOR }[];
+  }
+  const [anamnese, setAnamnese] = useState<AnamneseInfo | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: auth } = await supabase.auth.getUser();
+      const uid = auth?.user?.id;
+      if (!uid) return;
+      const { data } = await supabase
+        .from("anamnese_v2" as any)
+        .select("child_id, responses, scores, risk_levels, completed, updated_at")
+        .eq("user_id", uid)
+        .eq("completed", true)
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (cancelled || !data) return;
+      const row = data as any;
+      const scores = row.scores as PerfilScores;
+      const risk = row.risk_levels as RiskMap;
+      const step1 = row.responses?.step1 ?? {};
+      const idadeNum = typeof step1.idade === "number"
+        ? step1.idade
+        : (typeof step1.idade === "string" && /^\d+$/.test(step1.idade) ? parseInt(step1.idade, 10) : undefined);
+
+      // Mapeia áreas críticas → áreas do plano
+      const sugestoes: AnamneseInfo["sugestoes"] = [];
+      const order: (keyof PerfilScores)[] = ["escolar", "cognitivo", "comportamental", "socioemocional", "adaptativo"];
+      const mapping: Record<keyof PerfilScores, Area[]> = {
+        escolar: ["leitura", "escrita", "matematica"],
+        cognitivo: ["atencao", "memoria"],
+        comportamental: ["atencao"],
+        socioemocional: ["linguagem"],
+        adaptativo: ["coordenacao-motora"],
+      };
+      const seen = new Set<Area>();
+      for (const key of order) {
+        const lvl = risk?.[key];
+        if (lvl === "verde" || !lvl) continue;
+        for (const a of mapping[key]) {
+          if (seen.has(a)) continue;
+          seen.add(a);
+          sugestoes.push({
+            area: a,
+            motivo: `${PERFIL_LABEL[key]} — ${lvl}`,
+            nivel: lvl as keyof typeof RISK_COLOR,
+          });
+        }
+      }
+
+      setAnamnese({
+        childId: row.child_id,
+        nome: step1.nome ?? "Criança",
+        idade: idadeNum,
+        serie: step1.serie,
+        scores,
+        risk,
+        sugestoes,
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const aplicarSugestaoAnamnese = (a: Area) => {
+    setArea(a);
+    if (anamnese?.idade) setIdade(anamnese.idade);
+    if (anamnese?.serie) setSerie(anamnese.serie);
+    setTempo("meses");
+    setDescricaoDif(
+      `Plano sugerido pela anamnese de ${anamnese?.nome ?? "criança"}. Indicadores em atenção: ` +
+        (anamnese?.sugestoes.map((s) => s.motivo).join("; ") ?? ""),
+    );
+    setStep(5);
+    setTimeout(() => {
+      gerarRecomendacoes();
+    }, 0);
+  };
 
   const reset = () => {
     setStep(0);
@@ -160,6 +252,41 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         )}
       </div>
 
+      {/* Sugestões vindas da Anamnese */}
+      {anamnese && anamnese.sugestoes.length > 0 && step === 0 && (
+        <div className="mb-5 rounded-2xl border-2 border-amber-400/40 bg-amber-50/60 dark:bg-amber-950/20 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <ClipboardList className="h-4 w-4 text-amber-600" />
+            <h4 className="text-sm font-bold">Plano sugerido pela anamnese de {anamnese.nome}</h4>
+          </div>
+          <p className="text-xs text-muted-foreground mb-3">
+            Indicadores em atenção detectados na anamnese. Toque em uma área para o app montar o plano
+            de aulas automaticamente, sem precisar responder o questionário.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {anamnese.sugestoes.map((s) => {
+              const aDef = AREAS.find((x) => x.id === s.area)!;
+              return (
+                <button
+                  key={s.area}
+                  onClick={() => aplicarSugestaoAnamnese(s.area)}
+                  className="px-3 py-2 rounded-xl bg-white dark:bg-background border-2 border-amber-400/50 hover:border-amber-500 text-left flex items-center gap-2 text-xs font-semibold transition-colors"
+                >
+                  <span className="text-lg">{aDef.emoji}</span>
+                  <span>
+                    <div>{aDef.label}</div>
+                    <div className="text-[10px] font-normal" style={{ color: RISK_COLOR[s.nivel] }}>
+                      {s.motivo}
+                    </div>
+                  </span>
+                  <Zap className="h-3 w-3 text-amber-500 ml-1" />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* progresso */}
       {step < 5 && (
         <div className="flex gap-1 mb-5">
@@ -168,6 +295,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
           ))}
         </div>
       )}
+
 
       {/* STEP 0 — intro */}
       {step === 0 && (
