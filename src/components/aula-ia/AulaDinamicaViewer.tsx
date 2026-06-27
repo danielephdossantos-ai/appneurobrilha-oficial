@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { AulaDinamica } from "@/lib/groq-professor.functions";
+import { ProfessorBrilhaErroExplainer } from "@/components/professor/ProfessorBrilhaErroExplainer";
+
 
 function imgUrl(term: string, w = 800, h = 500) {
   // Free, no-auth illustrative image (Unsplash Source)
@@ -186,6 +188,20 @@ function DesafioView({ data }: { data: AulaDinamica["telas"]["desafio"] }) {
           {data.explicacaoResposta}
         </div>
       )}
+      {pick && pick !== data.respostaCorreta && (
+        <ProfessorBrilhaErroExplainer
+          pergunta={data.enunciado}
+          gabarito={
+            data.opcoes.find((o) => o.trim().toUpperCase().startsWith(data.respostaCorreta)) ??
+            data.respostaCorreta
+          }
+          respostaErrada={
+            data.opcoes.find((o) => o.trim().toUpperCase().startsWith(pick)) ?? pick
+          }
+          modulo="escola-brilha"
+        />
+      )}
+
     </div>
   );
 }
