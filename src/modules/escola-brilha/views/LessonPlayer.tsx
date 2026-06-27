@@ -88,8 +88,22 @@ export const LessonPlayer: React.FC = () => {
   const lessonC = ACTIVITY_C_MAP[search.category];
   if (lessonC) {
     // 6º–9º Ano: novo player de 9 telas com Templates Pedagógicos (Fund2Player).
-    void prefetchLessonV2(lessonC.bncc_code, lessonC.title);
-    const v2 = resolveLessonV2Sync(lessonC.bncc_code, lessonC.title);
+    const hints = {
+      serie: lessonC.grade,
+      disciplina: lessonC.area_label,
+    };
+    void prefetchLessonV2(
+      lessonC.bncc_code,
+      lessonC.title,
+      lessonC.bncc_description ?? "",
+      hints,
+    );
+    const v2 = resolveLessonV2Sync(
+      lessonC.bncc_code,
+      lessonC.title,
+      lessonC.bncc_description ?? "",
+      hints,
+    );
     if (v2) {
       return (
         <Fund2Player
@@ -98,6 +112,8 @@ export const LessonPlayer: React.FC = () => {
         />
       );
     }
+    // Sem aula V2 real ainda: usa o player rico com conteúdo local
+    // (mission_question, screens completas) em vez de placeholder genérico.
     return <ActivityPlayerC lesson={lessonC} />;
   }
 
