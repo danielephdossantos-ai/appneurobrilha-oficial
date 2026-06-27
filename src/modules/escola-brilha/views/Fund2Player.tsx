@@ -744,7 +744,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
             {/* 9 — DOMÍNIO BNCC */}
             {step === 8 && (
               <Card className="p-8">
-                <SectionLabel Icon={Award} text="DOMÍNIO BNCC" />
+                <SectionLabel Icon={Award} text="SEU DOMÍNIO" />
                 <h2 className="mt-2 text-2xl font-black mb-1">Excelente trabalho!</h2>
                 <p className="text-slate-600 mb-6">Veja seu domínio nesta habilidade.</p>
 
