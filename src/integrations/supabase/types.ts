@@ -3069,6 +3069,53 @@ export type Database = {
           },
         ]
       }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          child_id: string | null
+          created_at: string
+          endpoint: string
+          id: string
+          last_sent_at: string | null
+          p256dh: string
+          updated_at: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          child_id?: string | null
+          created_at?: string
+          endpoint: string
+          id?: string
+          last_sent_at?: string | null
+          p256dh: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          auth?: string
+          child_id?: string | null
+          created_at?: string
+          endpoint?: string
+          id?: string
+          last_sent_at?: string | null
+          p256dh?: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "push_subscriptions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rb_atividades_relacionadas: {
         Row: {
           atividade_id: string
