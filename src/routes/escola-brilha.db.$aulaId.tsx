@@ -1,6 +1,7 @@
 import React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
+import type { AulaBncc } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
@@ -50,6 +51,87 @@ const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string; c
     color: { from: "from-amber-600", to: "to-orange-600", accent: "amber" },
   },
 };
+
+const LETTERS = ["A", "B", "C", "D"] as const;
+
+function hasScreensPayload(payload: unknown) {
+  return !!payload && typeof payload === "object" && "screens" in payload;
+}
+
+function adaptActivityLessonToC(aula: AulaBncc, src: ActivityLesson): ActivityLessonC {
+  const meta = AREA_BY_DISCIPLINA[aula.disciplina] ?? {
+    area: "linguagens" as BNCCArea,
+    area_label: aula.disciplina || src.subject || "Aula",
+    color: { from: "from-violet-500", to: "to-purple-600", accent: "violet" },
+  };
+  const correct = src.screens.praticar.options.find((o) => o.isCorrect) ?? src.screens.praticar.options[0];
+  const challengeOptions = src.screens.praticar.options.slice(0, 4).map((o, i) => ({
+    letter: LETTERS[i],
+    text: o.text,
+    isCorrect: o.isCorrect,
+  }));
+
+  while (challengeOptions.length < 4) {
+    challengeOptions.push({
+      letter: LETTERS[challengeOptions.length],
+      text: challengeOptions.length === 3 ? "Ainda não é essa" : "Precisa revisar o exemplo",
+      isCorrect: false,
+    });
+  }
+
+  return {
+    id: src.id || aula.id,
+    title: src.title || aula.titulo,
+    mission_question: `Vamos entender ${src.title || aula.titulo} na prática?`,
+    subject: aula.disciplina || src.subject,
+    area: meta.area,
+    area_label: meta.area_label,
+    grade: aula.serie,
+    grade_range: aula.serie,
+    bncc_code: aula.codigo_bncc,
+    bncc_description: aula.descricao || src.screens.explicacao.summary || src.title,
+    xp: aula.xp ?? src.xp ?? 200,
+    color: meta.color,
+    screens: {
+      missao: {
+        intro: "Nesta missão você vai:",
+        objectives: [
+          src.screens.explicacao.highlight,
+          "Ver um exemplo guiado",
+          "Responder um desafio curto",
+        ].filter(Boolean).slice(0, 3),
+        context_emoji: src.screens.explicacao.visual_emoji || "✨",
+        context_text: src.screens.explicacao.summary,
+      },
+      exploracao: {
+        instruction: src.screens.exploracao.instruction,
+        texto: src.screens.explicacao_curta.text,
+        pontos_destaque: src.screens.exploracao.pairs.map((p) => ({ emoji: "•", text: `${p.left}: ${p.right}` })),
+        mascot_tip: src.screens.explicacao_curta.tip || "Observe o exemplo antes de responder.",
+      },
+      pontos_chave: {
+        intro: "O que precisa guardar:",
+        points: src.screens.exploracao.pairs.slice(0, 4).map((p, i) => ({
+          icon: String(i + 1),
+          title: p.left,
+          text: p.right,
+        })),
+      },
+      exemplo_aplicado: {
+        title: src.screens.exemplo_visual.title,
+        scenario: src.screens.exemplo_visual.sentences[0]?.text || src.screens.explicacao.highlight,
+        scenario_emoji: src.screens.exemplo_visual.sentences[0]?.emoji || "💡",
+        analysis: src.screens.exemplo_visual.sentences.map((s) => s.text),
+        conclusion: src.screens.exemplo_visual.conclusion,
+      },
+      desafio: {
+        question: src.screens.praticar.question,
+        options: challengeOptions,
+        explanation: correct ? `A resposta certa é: ${correct.text}.` : "Revise o exemplo e tente novamente.",
+      },
+    },
+  };
+}
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,
