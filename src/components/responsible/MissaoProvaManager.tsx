@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
 import { Card, Pill } from "@/components/Layout";
 import {
@@ -12,11 +13,13 @@ import {
   Sparkles,
   ChevronRight,
   AlertTriangle,
-  Clock,
+  Camera,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
-import { format, differenceInDays, addDays, isBefore, startOfDay } from "date-fns";
+import { format, differenceInDays, startOfDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { gerarPlanoEstudosMissaoProva } from "@/lib/groq-professor.functions";
 
 interface MissaoProvaManagerProps {
   childId: string;
