@@ -318,7 +318,6 @@ function DayTrail({
                 onClick={() => {
                   if (isLocked) return;
                   if (isCurrent) {
-                    onSpeakDay?.(day);
                     onOpenToday?.();
                     return;
                   }
