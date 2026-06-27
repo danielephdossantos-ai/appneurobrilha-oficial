@@ -381,8 +381,9 @@ function ReforcoBrilha() {
           },
         });
         if (!r.ok || !r.lesson) {
-          toast.error(r.error || "Não consegui preparar uma aula de verdade agora.");
-          setIsTeaching(false);
+          toast.info("Vou abrir uma aula local agora para a criança não ficar sem explicação.");
+          setLessonContent(buildEmergencyReforcoLesson(finalTopic));
+          setCurrentLevel("basic");
           return;
         }
         const lesson = r.lesson as ReforcoLesson;
