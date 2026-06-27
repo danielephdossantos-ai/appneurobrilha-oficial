@@ -919,11 +919,21 @@ Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
 import { requireSupabaseAuth } from "@/database/supabase/auth-middleware";
 
 const TarefaInputSchema = z.object({
-  childId: z.string().uuid(),
   titulo: z.string().trim().min(1).max(120),
   materia: z.string().trim().max(60).optional(),
   enunciado: z.string().trim().max(2000).optional(),
   fotoBase64: z.string().max(8_000_000).optional(),
+  crianca: z
+    .object({
+      nome: z.string().max(60).optional(),
+      idade: z.number().int().min(2).max(18).optional(),
+      serie: z.string().max(40).optional(),
+      diagnostico: z.string().max(200).optional(),
+      hiperfoco: z.string().max(200).optional(),
+      hyperfocusList: z.array(z.string().max(60)).max(10).optional(),
+      tempoAtencaoMin: z.number().int().min(1).max(120).optional(),
+    })
+    .optional(),
 });
 
 const TarefaDicasSchema = z.object({
