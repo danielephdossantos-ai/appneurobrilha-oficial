@@ -255,26 +255,6 @@ function PainelPremium() {
           </Link>
         </div>
 
-        {activeChild.anamnese_completa && (
-          <Link
-            to="/alfabetizacao"
-            className="flex items-center gap-4 rounded-3xl bg-gradient-to-r from-pink-500 via-fuchsia-500 to-indigo-500 p-5 text-white shadow-lg hover:scale-[1.01] transition-transform mb-6"
-          >
-            <div className="w-14 h-14 rounded-2xl bg-white/30 flex items-center justify-center text-3xl">
-              🅰️
-            </div>
-            <div className="flex-1">
-              <div className="text-xs font-bold uppercase tracking-widest opacity-90">
-                Novo módulo
-              </div>
-              <div className="text-xl font-black">Alfabetização Brilha</div>
-              <div className="text-xs opacity-90">
-                Consciência fonológica e progressão bloqueada por etapas — só imagens e voz.
-              </div>
-            </div>
-            <ArrowRight className="h-5 w-5" />
-          </Link>
-        )}
 
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
