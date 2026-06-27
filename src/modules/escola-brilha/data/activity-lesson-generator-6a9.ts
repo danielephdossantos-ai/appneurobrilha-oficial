@@ -15,14 +15,18 @@ type SubjectKey = "CI" | "MA" | "LP" | "HI" | "GE" | "LI" | "AR" | "EF" | "ER";
 const COLORS: PraticarOption["color"][] = ["green", "blue", "orange", "purple", "yellow", "red"];
 
 function subjectFromCode(code: string): SubjectKey | null {
-  const m = code.match(/^EF0[6789](CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
+  // Aceita EF06XX, EF07XX, EF08XX, EF09XX e compostos EF67XX, EF69XX, EF89XX.
+  const m = code.match(/^EF(?:0[6789]|67|69|89)(CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
   return (m?.[1].toUpperCase() as SubjectKey) ?? null;
 }
 
 function gradeFromCode(code: string): "6º Ano" | "7º Ano" | "8º Ano" | "9º Ano" | null {
-  const m = code.match(/^EF0([6789])/);
-  if (!m) return null;
-  return `${m[1]}º Ano` as "6º Ano";
+  const single = code.match(/^EF0([6789])/);
+  if (single) return `${single[1]}º Ano` as "6º Ano";
+  // Códigos compostos: usa o primeiro ano como rótulo de referência.
+  const compound = code.match(/^EF([6789])([6789])/);
+  if (compound) return `${compound[1]}º Ano` as "6º Ano";
+  return null;
 }
 
 const SUBJECT_NAME: Record<SubjectKey, string> = {
@@ -921,7 +925,51 @@ const LI_PACKS: Array<{ keys: string[]; pack: Pack }> = [
   },
 ];
 
-const AR_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
+const AR_PACKS: Array<{ keys: string[]; pack: Pack }> = [
+  {
+    keys: ["artes visuais", "obras", "artistas", "matrizes", "contextos", "ef69ar01"],
+    pack: {
+      topic: "ARTES VISUAIS — MOVIMENTOS E ARTISTAS",
+      highlight: "Arte = leitura de obras + contexto histórico",
+      summary:
+        "Cada obra nasce em uma época e cultura. Para analisar uma pintura ou escultura você observa: o que está representado, como foi feito (técnica), quando (período histórico) e por que (intenção do artista).",
+      emoji: "🎨",
+      heroImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Profeta_Daniel_2.jpg/480px-Profeta_Daniel_2.jpg",
+      heroCaption: "Aleijadinho — 'Profeta Daniel' (Congonhas/MG, séc. XVIII, Barroco mineiro).",
+      pairs: [
+        { left: "Renascimento", right: "Itália, séc. XV-XVI — Leonardo, Michelangelo" },
+        { left: "Barroco", right: "Séc. XVII-XVIII — drama, contraste, religiosidade" },
+        { left: "Barroco mineiro", right: "Brasil colonial — Aleijadinho, igrejas de MG" },
+        { left: "Impressionismo", right: "Fim do séc. XIX — Monet, luz e cor" },
+        { left: "Cubismo", right: "Início séc. XX — Picasso, formas geométricas" },
+        { left: "Modernismo brasileiro", right: "Sem. de Arte Moderna 1922 — Tarsila, Anita Malfatti" },
+      ],
+      shortText:
+        "Antônio Francisco Lisboa, o ALEIJADINHO (1738-1814), foi escultor e arquiteto do BARROCO MINEIRO. Esculpiu os 12 Profetas em pedra-sabão em Congonhas (MG). Marca: figuras dramáticas, olhos voltados para o alto, dobras profundas nas roupas.",
+      highlights: ["Aleijadinho", "Barroco mineiro", "séc. XVIII", "pedra-sabão"],
+      tip: "Para analisar uma obra: tema + técnica + período + intenção.",
+      exampleTitle: "Linha do tempo das artes visuais",
+      exampleSentences: [
+        { text: "Renascimento (1400-1600): perspectiva, anatomia — 'Mona Lisa', Leonardo." },
+        { text: "Barroco (1600-1750): drama, luz x sombra — Caravaggio, Aleijadinho." },
+        { text: "Impressionismo (1870-1900): luz e cor ao ar livre — 'Impressão, nascer do sol', Monet." },
+        { text: "Cubismo (1907-1920): múltiplos pontos de vista — 'Les Demoiselles d'Avignon', Picasso." },
+        { text: "Modernismo brasileiro (1922-): identidade nacional — 'Abaporu', Tarsila do Amaral." },
+      ],
+      exampleConclusion: "Cada movimento responde ao seu tempo — arte é leitura de mundo.",
+      exampleImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/360px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
+      exampleCaption: "Leonardo da Vinci — 'Mona Lisa' (Renascimento, c. 1503).",
+      question: "Aleijadinho foi um artista do…",
+      options: [
+        { text: "Barroco mineiro", isCorrect: true },
+        { text: "Renascimento italiano", isCorrect: false },
+        { text: "Cubismo", isCorrect: false },
+      ],
+    },
+  },
+];
 const EF_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
 const ER_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
 
