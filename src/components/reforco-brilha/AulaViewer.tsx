@@ -249,24 +249,61 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [gerando, setGerando] = useState(false);
+  const gerarPaginas = useServerFn(gerarPaginasAula);
+
+  const carregar = async () => {
+    const { data } = await supabase
+      .from("rb_paginas_aula")
+      .select("id,ordem,tipo,titulo,conteudo")
+      .eq("aula_id", aulaId)
+      .order("ordem", { ascending: true });
+    const list = (data || []) as Pagina[];
+    setPaginas(list);
+    return list;
+  };
+
+  const regenerar = async (force = false) => {
+    setGerando(true);
+    try {
+      const r = await gerarPaginas({ data: { aulaId, force } });
+      if (!r.ok) {
+        toast.error(r.error || "Não consegui gerar a aula agora.");
+        return;
+      }
+      if (r.regenerated) {
+        toast.success("Aula completa pronta! 💛");
+        await carregar();
+        setIdx(0);
+      }
+    } finally {
+      setGerando(false);
+    }
+  };
 
   useEffect(() => {
     let alive = true;
     (async () => {
       setLoading(true);
-      const { data } = await supabase
-        .from("rb_paginas_aula")
-        .select("id,ordem,tipo,titulo,conteudo")
-        .eq("aula_id", aulaId)
-        .order("ordem", { ascending: true });
+      const list = await carregar();
       if (!alive) return;
-      setPaginas((data || []) as Pagina[]);
       setIdx(0);
       setLoading(false);
+      // Heurística: páginas seed/genéricas têm pouco conteúdo. Regenera 1x.
+      const totalChars = list.reduce(
+        (acc, p) => acc + JSON.stringify(p.conteudo ?? {}).length,
+        0,
+      );
+      if (list.length > 0 && totalChars < 900) {
+        await regenerar(true);
+      } else if (list.length === 0) {
+        await regenerar(true);
+      }
     })();
     return () => {
       alive = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aulaId]);
 
   const total = paginas.length;
