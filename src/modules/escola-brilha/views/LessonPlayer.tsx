@@ -94,7 +94,7 @@ export const LessonPlayer: React.FC = () => {
       return (
         <Fund2Player
           lesson={v2}
-          capitulo={lessonC.bncc_code}
+          capitulo={lessonC.title}
         />
       );
     }

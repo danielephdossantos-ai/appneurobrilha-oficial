@@ -797,7 +797,7 @@ function ReforcoBrilha() {
                           TRILHA PEDAGÓGICA
                         </span>
                         <Pill tone="success" className="text-[10px] font-black">
-                          SISTEMA BNCC ATIVO
+                          TRILHA ATIVA
                         </Pill>
                       </div>
                       <h2 className="text-3xl font-black text-foreground leading-none">
@@ -842,7 +842,7 @@ function ReforcoBrilha() {
                       Roteiro de Estudos (Gerado pelo Sistema)
                     </h3>
                     <div className="bg-indigo-600/10 border border-indigo-200 rounded-2xl p-4 mb-4 text-xs text-indigo-700 font-medium">
-                      📚 Trilha pedagógica estruturada com base na BNCC, sem uso de IA generativa.
+                      📚 Trilha pedagógica estruturada, sem uso de IA generativa.
                     </div>
                     {lessonContent.levels[currentLevel]
                       .slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6)

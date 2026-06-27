@@ -379,7 +379,7 @@ function Treino() {
                 <BookOpen className="h-5 w-5 text-amber-600" />
                 <div>
                   <h2 className="font-black text-sm text-amber-600 uppercase tracking-wider">Escola Brilha · Aulas</h2>
-                  <div className="text-xs text-muted-foreground">{aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length} aulas · BNCC 1º Ano</div>
+                  <div className="text-xs text-muted-foreground">{aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length} aulas · 1º Ano</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">

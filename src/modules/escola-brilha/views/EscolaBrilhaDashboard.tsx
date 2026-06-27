@@ -164,7 +164,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             <br />
             aprender hoje?
           </h1>
-          <p className="text-white/50 text-sm font-semibold mt-2">BNCC • Educação Adaptativa</p>
+          <p className="text-white/50 text-sm font-semibold mt-2">Educação Adaptativa</p>
         </div>
         <div className="flex justify-between items-end px-4 -mb-6 relative z-10 max-w-xs mx-auto mt-4">
           <motion.img src={pipaImg} alt="Pipa" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring" }} className="w-24 h-24 object-contain drop-shadow-xl select-none" draggable={false} />

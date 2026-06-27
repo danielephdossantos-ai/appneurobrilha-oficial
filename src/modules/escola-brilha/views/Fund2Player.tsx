@@ -53,7 +53,7 @@ const STEPS: { id: StepId; label: string; Icon: typeof Target }[] = [
   { id: "atividade",  label: "ATIVIDADE",         Icon: ClipboardList },
   { id: "desafio",    label: "DESAFIO",           Icon: Sparkles },
   { id: "resumo",     label: "RESUMO",            Icon: ListChecks },
-  { id: "dominio",    label: "DOMÍNIO BNCC",      Icon: Award },
+  { id: "dominio",    label: "SEU DOMÍNIO",       Icon: Award },
 ];
 
 /* ─────────── Top bar ─────────── */
@@ -346,7 +346,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
       <TopBar
         disciplina={lesson.discipline}
         serie={lesson.grade}
-        capitulo={capitulo ?? lesson.bnccCode}
+        capitulo={capitulo}
         xp={lesson.xp}
         onHome={() => navigate({ to: "/escola-brilha" })}
       />
@@ -441,9 +441,6 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                       </li>
                     ))}
                   </ul>
-                  <div className="inline-block bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
-                    BNCC · {lesson.bnccCode}
-                  </div>
                   <button
                     onClick={next}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow"
@@ -747,7 +744,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
             {/* 9 — DOMÍNIO BNCC */}
             {step === 8 && (
               <Card className="p-8">
-                <SectionLabel Icon={Award} text="DOMÍNIO BNCC" />
+                <SectionLabel Icon={Award} text="SEU DOMÍNIO" />
                 <h2 className="mt-2 text-2xl font-black mb-1">Excelente trabalho!</h2>
                 <p className="text-slate-600 mb-6">Veja seu domínio nesta habilidade.</p>
 
@@ -772,8 +769,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                   </div>
                   <div className="space-y-2">
                     <div className="rounded-xl border border-slate-200 p-3">
-                      <p className="text-xs font-bold uppercase text-slate-500">Competência BNCC</p>
-                      <p className="font-black text-slate-900">{s.dominio.bnccCode}</p>
+                      <p className="text-xs font-bold uppercase text-slate-500">Habilidade trabalhada</p>
                       <p className="text-sm text-slate-700">{s.dominio.bnccObjective}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
