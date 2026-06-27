@@ -200,7 +200,7 @@ export const gerarAulaGroq = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", aula: null };
+      return { ok: false as const, error: "GROQ_API_KEY ausente", aulaJson: null };
     }
 
     const userPrompt = `Código BNCC: ${data.bnccCode}
