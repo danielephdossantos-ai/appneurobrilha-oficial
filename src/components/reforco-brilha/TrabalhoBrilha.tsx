@@ -693,6 +693,14 @@ function EditorTrabalho({
           {/* Botões de bloco */}
           <div className="flex flex-wrap gap-2 text-xs">
             <button
+              onClick={addCapa}
+              disabled={blocos.some((b) => b.tipo === "capa")}
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-black px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
+              title="Adiciona uma capa na primeira página (nome, tema, aluno, série, professor)"
+            >
+              <BookOpen className="h-3 w-3" /> Capa
+            </button>
+            <button
               onClick={addBlocoTitulo}
               className="bg-white border-2 border-amber-200 hover:bg-amber-50 text-amber-800 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1"
             >
@@ -704,7 +712,15 @@ function EditorTrabalho({
             >
               <Quote className="h-3 w-3" /> Parágrafo
             </button>
+            <button
+              onClick={addQuebra}
+              className="bg-white border-2 border-amber-200 hover:bg-amber-50 text-amber-800 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1"
+              title="Quebra de página — o que vier depois imprime na próxima página"
+            >
+              <Scissors className="h-3 w-3" /> Nova página
+            </button>
           </div>
+
 
           {/* Documento (alvo do PDF) */}
           <div
