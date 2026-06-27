@@ -20,6 +20,7 @@ import {
   GraduationCap,
   SpellCheck,
   CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -27,6 +28,7 @@ import {
   type RecursoExterno,
 } from "@/lib/recursos-externos.functions";
 import { revisarPortugues } from "@/lib/revisar-portugues.functions";
+import { analisarTrabalho } from "@/lib/groq-professor.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 
