@@ -243,14 +243,20 @@ serve(async (req) => {
       userPrompt = message || "Oi";
     }
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    // Groq: usa modelo com visão quando há imagem (professor-foto), senão llama-3.3-70b
+    const groqModel =
+      mode === "professor-foto"
+        ? "meta-llama/llama-4-scout-17b-16e-instruct"
+        : "llama-3.3-70b-versatile";
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${GROQ_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: groqModel,
         messages: [
           { role: "system", content: systemPrompt },
           ...(chatHistory || []),
