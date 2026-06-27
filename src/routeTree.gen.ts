@@ -44,6 +44,7 @@ import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
 import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
+import { Route as AulaIaBnccCodeRouteImport } from './routes/aula-ia.$bnccCode'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
@@ -225,6 +226,11 @@ const BnccCodigoRoute = BnccCodigoRouteImport.update({
   path: '/bncc/$codigo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AulaIaBnccCodeRoute = AulaIaBnccCodeRouteImport.update({
+  id: '/aula-ia/$bnccCode',
+  path: '/aula-ia/$bnccCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
   id: '/anamnese/$childId',
   path: '/anamnese/$childId',
@@ -286,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -327,6 +334,7 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -370,6 +378,7 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
+  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
@@ -455,6 +465,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
@@ -497,6 +508,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
+    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
     | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
@@ -540,6 +552,7 @@ export interface RootRouteChildren {
   TermosRoute: typeof TermosRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
+  AulaIaBnccCodeRoute: typeof AulaIaBnccCodeRoute
   BnccCodigoRoute: typeof BnccCodigoRoute
 }
 
@@ -790,6 +803,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BnccCodigoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aula-ia/$bnccCode': {
+      id: '/aula-ia/$bnccCode'
+      path: '/aula-ia/$bnccCode'
+      fullPath: '/aula-ia/$bnccCode'
+      preLoaderRoute: typeof AulaIaBnccCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/anamnese/$childId': {
       id: '/anamnese/$childId'
       path: '/anamnese/$childId'
@@ -905,6 +925,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermosRoute: TermosRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
+  AulaIaBnccCodeRoute: AulaIaBnccCodeRoute,
   BnccCodigoRoute: BnccCodigoRoute,
 }
 export const routeTree = rootRouteImport
