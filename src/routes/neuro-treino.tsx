@@ -328,42 +328,41 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-          {/* ── DESTAQUE: TRILHA ALFA (categoria Alfabetização) ── */}
+          {/* ── ALFABETIZAÇÃO — categorias abertas (padrão Neuro-Treino) ── */}
           <section className="rounded-3xl border border-amber-200 dark:border-amber-800 overflow-hidden shadow-sm">
             <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 px-4 py-3 flex items-center gap-2 border-b border-amber-200 dark:border-amber-800">
               <BookOpen className="h-5 w-5 text-amber-600" />
               <div>
                 <h2 className="font-black text-sm text-amber-600 uppercase tracking-wider">Alfabetização 📖</h2>
-                <div className="text-xs text-muted-foreground">Trilha completa · castelos progressivos</div>
+                <div className="text-xs text-muted-foreground">6 categorias · jogos infantis</div>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
-              <Link
-                to="/alfabetizacao"
-                className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
-              >
-                <div className="absolute top-1.5 right-1.5">
-                  <div className="px-1.5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
-                    <span className="text-[9px] font-black text-white">TRILHA</span>
+              {[
+                { id: "vogais", nome: "Vogais", emoji: "🅰️", gradient: "from-pink-400 to-rose-500" },
+                { id: "silabas", nome: "Sílabas Simples", emoji: "🧩", gradient: "from-orange-400 to-amber-500" },
+                { id: "palavras", nome: "Palavras", emoji: "🐾", gradient: "from-emerald-400 to-teal-500" },
+                { id: "frases", nome: "Frases", emoji: "💬", gradient: "from-sky-400 to-blue-500" },
+                { id: "textos", nome: "Textos", emoji: "📖", gradient: "from-violet-400 to-purple-500" },
+                { id: "compreensao", nome: "Compreensão", emoji: "🧠", gradient: "from-fuchsia-400 to-pink-500" },
+              ].map((cat) => (
+                <Link
+                  key={cat.id}
+                  to="/alfabetizacao/etapa/$etapaId"
+                  params={{ etapaId: cat.id }}
+                  className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                >
+                  <div className={`w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl bg-gradient-to-br ${cat.gradient} text-6xl shadow-inner`}>
+                    <span>{cat.emoji}</span>
                   </div>
-                </div>
-                <div className="w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl">
-                  <img
-                    src={icLetraSom}
-                    alt="Trilha Alfa"
-                    loading="lazy"
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-                    draggable={false}
-                  />
-                </div>
-                <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
-                  Trilha Alfa
-                </div>
-              </Link>
+                  <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
+                    {cat.nome}
+                  </div>
+                </Link>
+              ))}
             </div>
           </section>
+
 
 
 

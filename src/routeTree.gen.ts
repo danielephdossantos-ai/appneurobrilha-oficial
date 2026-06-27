@@ -51,6 +51,7 @@ import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-d
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
+import { Route as AlfabetizacaoEtapaEtapaIdRouteImport } from './routes/alfabetizacao.etapa.$etapaId'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -264,12 +265,18 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
   path: '/escalas',
   getParentRoute: () => AnamneseChildIdRoute,
 } as any)
+const AlfabetizacaoEtapaEtapaIdRoute =
+  AlfabetizacaoEtapaEtapaIdRouteImport.update({
+    id: '/etapa/$etapaId',
+    path: '/etapa/$etapaId',
+    getParentRoute: () => AlfabetizacaoRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -305,6 +312,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/alfabetizacao/etapa/$etapaId': typeof AlfabetizacaoEtapaEtapaIdRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
@@ -313,7 +321,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -348,6 +356,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
+  '/alfabetizacao/etapa/$etapaId': typeof AlfabetizacaoEtapaEtapaIdRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
@@ -357,7 +366,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
-  '/alfabetizacao': typeof AlfabetizacaoRoute
+  '/alfabetizacao': typeof AlfabetizacaoRouteWithChildren
   '/analytics': typeof AnalyticsRoute
   '/auditoria-pedagogica': typeof AuditoriaPedagogicaRoute
   '/auth': typeof AuthRoute
@@ -393,6 +402,7 @@ export interface FileRoutesById {
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/alfabetizacao/etapa/$etapaId': typeof AlfabetizacaoEtapaEtapaIdRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
   '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
@@ -439,6 +449,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
+    | '/alfabetizacao/etapa/$etapaId'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
@@ -482,6 +493,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha'
+    | '/alfabetizacao/etapa/$etapaId'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
@@ -526,6 +538,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/escola-brilha/'
+    | '/alfabetizacao/etapa/$etapaId'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
     | '/escola-brilha/db/$aulaId'
@@ -535,7 +548,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AgendaRoute: typeof AgendaRoute
-  AlfabetizacaoRoute: typeof AlfabetizacaoRoute
+  AlfabetizacaoRoute: typeof AlfabetizacaoRouteWithChildren
   AnalyticsRoute: typeof AnalyticsRoute
   AuditoriaPedagogicaRoute: typeof AuditoriaPedagogicaRoute
   AuthRoute: typeof AuthRoute
@@ -865,8 +878,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
       parentRoute: typeof AnamneseChildIdRoute
     }
+    '/alfabetizacao/etapa/$etapaId': {
+      id: '/alfabetizacao/etapa/$etapaId'
+      path: '/etapa/$etapaId'
+      fullPath: '/alfabetizacao/etapa/$etapaId'
+      preLoaderRoute: typeof AlfabetizacaoEtapaEtapaIdRouteImport
+      parentRoute: typeof AlfabetizacaoRoute
+    }
   }
 }
+
+interface AlfabetizacaoRouteChildren {
+  AlfabetizacaoEtapaEtapaIdRoute: typeof AlfabetizacaoEtapaEtapaIdRoute
+}
+
+const AlfabetizacaoRouteChildren: AlfabetizacaoRouteChildren = {
+  AlfabetizacaoEtapaEtapaIdRoute: AlfabetizacaoEtapaEtapaIdRoute,
+}
+
+const AlfabetizacaoRouteWithChildren = AlfabetizacaoRoute._addFileChildren(
+  AlfabetizacaoRouteChildren,
+)
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
@@ -916,7 +948,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AgendaRoute: AgendaRoute,
-  AlfabetizacaoRoute: AlfabetizacaoRoute,
+  AlfabetizacaoRoute: AlfabetizacaoRouteWithChildren,
   AnalyticsRoute: AnalyticsRoute,
   AuditoriaPedagogicaRoute: AuditoriaPedagogicaRoute,
   AuthRoute: AuthRoute,
