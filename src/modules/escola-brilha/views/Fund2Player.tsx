@@ -425,14 +425,20 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                     )}
                   </div>
                 )}
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {s.exploracao.pairs.map((p, i) => (
-                    <div key={i} className="rounded-xl border border-slate-200 p-3 bg-slate-50">
-                      <p className="text-sm font-black text-slate-900">{p.left}</p>
-                      <p className="text-sm text-slate-600">{p.right}</p>
-                    </div>
-                  ))}
-                </div>
+                {lesson.discipline === "Matemática" ? (
+                  <MathBoard
+                    steps={s.exploracao.pairs.map((p) => ({ step: p.left, detail: p.right }))}
+                  />
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {s.exploracao.pairs.map((p, i) => (
+                      <div key={i} className="rounded-xl border border-slate-200 p-3 bg-slate-50">
+                        <p className="text-sm font-black text-slate-900">{p.left}</p>
+                        <p className="text-sm text-slate-600">{p.right}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </Card>
             )}
 
