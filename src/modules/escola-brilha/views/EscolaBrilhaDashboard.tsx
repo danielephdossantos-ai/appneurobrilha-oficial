@@ -211,8 +211,12 @@ export const EscolaBrilhaDashboard: React.FC = () => {
             {allSeries.map((serie) => {
               const staticCards = staticItems.filter((s) => s.serie === serie);
               const ano = Number(serie.match(/\d+/)?.[0] ?? 0);
-              const dbCards = aulasBanco.filter((a) => lessonAppliesToSerie(a.serie, ano, serie));
-              const bnccCards = habilidadesBncc.filter((h) => h.ano === ano);
+              const dbCards = aulasBanco
+                .filter((a) => lessonAppliesToSerie(a.serie, ano, serie))
+                .filter((a) => ano !== 1 || isFirstYearAllowedSubject(a.disciplina));
+              const bnccCards = habilidadesBncc
+                .filter((h) => h.ano === ano)
+                .filter((h) => ano !== 1 || isFirstYearAllowedSubject(h.componente));
               if (!staticCards.length && !dbCards.length && !bnccCards.length) return null;
               const practicalTotal = staticCards.length + dbCards.length + bnccCards.length;
 
@@ -358,6 +362,11 @@ const subjectKey = (raw: string) => {
   if (s.includes("religioso")) return "Ensino Religioso";
   if (s.includes("inglesa") || s.includes("inglês") || s.includes("ingles")) return "Língua Inglesa";
   return raw || "Outros";
+};
+
+const isFirstYearAllowedSubject = (raw: string) => {
+  const key = subjectKey(raw);
+  return ["Matemática", "Língua Portuguesa", "Português", "Alfabetização", "Leitura"].includes(key);
 };
 
 const SubjectFolders: React.FC<{
