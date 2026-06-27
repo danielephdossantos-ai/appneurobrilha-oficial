@@ -33,13 +33,21 @@ import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 
 
-type BlocoTipo = "titulo" | "paragrafo" | "imagem";
+type BlocoTipo = "titulo" | "paragrafo" | "imagem" | "capa" | "quebra";
 interface Bloco {
   id: string;
   tipo: BlocoTipo;
   texto?: string;
   url?: string;
   legenda?: string;
+  // campos extras pra "capa"
+  subtitulo?: string;
+  alunos?: string[];
+  serie?: string;
+  professor?: string;
+  escola?: string;
+  cidade?: string;
+  ano?: string;
 }
 interface Fonte {
   titulo: string;
