@@ -6,9 +6,9 @@
  *   - fallbackCache: aula determinística local (último recurso).
  *
  * O `resolveLessonV2Sync` SEMPRE prefere `templateCache` quando disponível.
- * O hook `useLessonV2` assina mudanças do cache para re-renderizar quando
- * o template do Supabase chegar depois do primeiro paint (que mostra
- * temporariamente o fallback).
+ * Para 6º–9º ano, aula genérica/local NÃO é conteúdo válido: se não houver
+ * cache real, o hook espera a geração Groq e evita renderizar "habilidade BNCC
+ * fantasiada de aula".
  */
 
 import { useEffect, useState } from "react";
@@ -45,6 +45,33 @@ function cacheKey(bnccCode: string, titulo: string) {
 
 function emit() {
   listeners.forEach((l) => l());
+}
+
+function isFund2Serie(serie?: string) {
+  return !!serie && FUND2_SERIES.has(serie);
+}
+
+function lessonText(lesson: LessonV2) {
+  return JSON.stringify(lesson.screens).toLowerCase();
+}
+
+function isGenericPlaceholderLesson(lesson: LessonV2 | null): boolean {
+  if (!lesson) return true;
+  const text = lessonText(lesson);
+  const genericSignals = [
+    "esta aula é da disciplina",
+    "identifique 2 palavras-chave",
+    "procure um exemplo real",
+    "explique com suas palavras",
+    "tema desta aula:",
+    "anote 1 frase no caderno",
+    "quem explica, aprende em dobro",
+    "vamos direto ao ponto",
+    '"disciplina"',
+    '"série"',
+  ];
+  const hits = genericSignals.filter((signal) => text.includes(signal)).length;
+  return hits >= 2;
 }
 
 // ----------------------------- tipos auxiliares -----------------------------
@@ -230,10 +257,16 @@ export function resolveLessonV2Sync(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
+  hints: LessonV2Hints = {},
 ): LessonV2 | null {
+  if (!bnccCode || !titulo) return null;
   const key = cacheKey(bnccCode, titulo);
   const tpl = templateCache.get(key);
-  if (tpl) return tpl;
+  if (tpl && !isGenericPlaceholderLesson(tpl)) return tpl;
+
+  // Fundamental II nunca deve exibir fallback genérico enquanto a IA/cache real
+  // está sendo buscado. A rota mostra estado de geração até o cache chegar.
+  if (isFund2Serie(hints.serie)) return null;
 
   const cached = fallbackCache.get(key);
   if (cached) return cached;
@@ -254,8 +287,10 @@ export async function prefetchLessonV2(
   bnccObjective = "",
   hints: LessonV2Hints = {},
 ): Promise<LessonV2 | null> {
+  if (!bnccCode || !titulo) return null;
   const key = cacheKey(bnccCode, titulo);
   if (templateCache.has(key)) return templateCache.get(key)!;
+  const isFund2 = isFund2Serie(hints.serie);
 
   const pending = inflight.get(key);
   if (pending) return pending;
@@ -271,14 +306,51 @@ export async function prefetchLessonV2(
         .limit(1)
         .maybeSingle();
 
+      let cachedWasGeneric = false;
       if (cached?.lesson) {
         const lesson = cached.lesson as unknown as LessonV2;
-        templateCache.set(key, lesson);
-        emit();
-        return lesson;
+        cachedWasGeneric = isGenericPlaceholderLesson(lesson);
+        if (!isFund2 || !cachedWasGeneric) {
+          templateCache.set(key, lesson);
+          emit();
+          return lesson;
+        }
       }
 
-      // 2) Map BNCC → Template (maior prioridade).
+      // 2) 6º–9º Ano: gera aula real com Groq ANTES de aceitar templates
+      // incompletos. Isso corrige o caso em que o banco tinha apenas esqueleto
+      // e o player mostrava "disciplina/série" como se fosse atividade.
+      if (isFund2) {
+        try {
+          const res = await gerarLessonV2Groq({
+            data: {
+              bnccCode,
+              titulo,
+              bnccObjective,
+              serie: hints.serie,
+              disciplina: hints.disciplina,
+              force: cachedWasGeneric,
+            },
+          });
+          if (res?.ok && res.lessonJson) {
+            const lesson = JSON.parse(res.lessonJson) as LessonV2;
+            if (!isGenericPlaceholderLesson(lesson)) {
+              templateCache.set(key, lesson);
+              emit();
+              return lesson;
+            }
+            console.warn("[pedagogical-library] Groq returned generic lesson", bnccCode);
+          }
+          if (res && !res.ok) {
+            console.warn("[pedagogical-library] Groq fallback:", res.error);
+          }
+        } catch (err) {
+          console.warn("[pedagogical-library] Groq call failed:", err);
+        }
+      }
+
+      // 3) Map BNCC → Template. Para Fundamental II, só aceitamos se não cair
+      // nos sinais de placeholder genérico.
       const { data: map } = await supabase
         .from("bncc_template_map")
         .select("template_id, priority")
@@ -301,36 +373,11 @@ export async function prefetchLessonV2(
             bnccObjective,
             tpl as unknown as TemplateRow,
           );
-          templateCache.set(key, lesson);
-          emit();
-          return lesson;
-        }
-      }
-
-      // 3) 6º–9º Ano: gera com Groq (llama-3.3-70b) e grava em
-      //    pedagogical_lessons_cache para não regenerar de graça.
-      if (hints.serie && FUND2_SERIES.has(hints.serie)) {
-        try {
-          const res = await gerarLessonV2Groq({
-            data: {
-              bnccCode,
-              titulo,
-              bnccObjective,
-              serie: hints.serie,
-              disciplina: hints.disciplina,
-            },
-          });
-          if (res?.ok && res.lessonJson) {
-            const lesson = JSON.parse(res.lessonJson) as LessonV2;
+          if (!isFund2 || !isGenericPlaceholderLesson(lesson)) {
             templateCache.set(key, lesson);
             emit();
             return lesson;
           }
-          if (res && !res.ok) {
-            console.warn("[pedagogical-library] Groq fallback:", res.error);
-          }
-        } catch (err) {
-          console.warn("[pedagogical-library] Groq call failed:", err);
         }
       }
     } catch (err) {
@@ -368,7 +415,7 @@ export function useLessonV2(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bnccCode, titulo, bnccObjective, hintsKey]);
 
-  return resolveLessonV2Sync(bnccCode, titulo, bnccObjective);
+  return resolveLessonV2Sync(bnccCode, titulo, bnccObjective, hints);
 }
 
 /** Limpa caches (testes / admin). */

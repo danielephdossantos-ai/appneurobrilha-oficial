@@ -121,7 +121,8 @@ function AulaDbPage() {
       }
     }
 
-    // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
+    // 6º–9º Ano: sempre Fund2Player. Se ainda não há aula real no cache,
+    // aguarda a geração Groq em vez de cair em player/atividade genérica.
     if (FUND2_GRADES.has(aula.serie)) {
       if (fund2Lesson) {
         return (
@@ -132,6 +133,20 @@ function AulaDbPage() {
           />
         );
       }
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-900 p-6">
+          <div className="max-w-lg text-center bg-white border border-slate-200 rounded-2xl shadow-sm p-8">
+            <p className="text-xs font-black tracking-wider text-teal-700 uppercase mb-2">
+              Escola Brilha
+            </p>
+            <h1 className="text-2xl font-black mb-3">Gerando aula de verdade…</h1>
+            <p className="text-sm text-slate-600 font-semibold leading-relaxed">
+              Estamos montando o conteúdo pedagógico completo desta habilidade:
+              explicação, exemplo resolvido, prática, atividade, desafio e revisão.
+            </p>
+          </div>
+        </div>
+      );
     }
 
 
