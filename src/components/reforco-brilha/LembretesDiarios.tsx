@@ -30,7 +30,7 @@ function ymd(d: Date): string {
 }
 
 export function LembretesDiarios({ childId }: Props) {
-  const { permission, request, notify } = usePushNotifications();
+  const { permission, request, notify } = usePushNotifications(childId);
   const hoje = ymd(new Date());
 
   const { data } = useQuery({
