@@ -15,18 +15,14 @@ type SubjectKey = "CI" | "MA" | "LP" | "HI" | "GE" | "LI" | "AR" | "EF" | "ER";
 const COLORS: PraticarOption["color"][] = ["green", "blue", "orange", "purple", "yellow", "red"];
 
 function subjectFromCode(code: string): SubjectKey | null {
-  // Aceita EF06XX, EF07XX, EF08XX, EF09XX e compostos EF67XX, EF69XX, EF89XX.
-  const m = code.match(/^EF(?:0[6789]|67|69|89)(CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
+  const m = code.match(/^EF0[6789](CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
   return (m?.[1].toUpperCase() as SubjectKey) ?? null;
 }
 
 function gradeFromCode(code: string): "6º Ano" | "7º Ano" | "8º Ano" | "9º Ano" | null {
-  const single = code.match(/^EF0([6789])/);
-  if (single) return `${single[1]}º Ano` as "6º Ano";
-  // Códigos compostos: usa o primeiro ano como rótulo de referência.
-  const compound = code.match(/^EF([6789])([6789])/);
-  if (compound) return `${compound[1]}º Ano` as "6º Ano";
-  return null;
+  const m = code.match(/^EF0([6789])/);
+  if (!m) return null;
+  return `${m[1]}º Ano` as "6º Ano";
 }
 
 const SUBJECT_NAME: Record<SubjectKey, string> = {
@@ -925,51 +921,7 @@ const LI_PACKS: Array<{ keys: string[]; pack: Pack }> = [
   },
 ];
 
-const AR_PACKS: Array<{ keys: string[]; pack: Pack }> = [
-  {
-    keys: ["artes visuais", "obras", "artistas", "matrizes", "contextos", "ef69ar01"],
-    pack: {
-      topic: "ARTES VISUAIS — MOVIMENTOS E ARTISTAS",
-      highlight: "Arte = leitura de obras + contexto histórico",
-      summary:
-        "Cada obra nasce em uma época e cultura. Para analisar uma pintura ou escultura você observa: o que está representado, como foi feito (técnica), quando (período histórico) e por que (intenção do artista).",
-      emoji: "🎨",
-      heroImage:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Profeta_Daniel_2.jpg/480px-Profeta_Daniel_2.jpg",
-      heroCaption: "Aleijadinho — 'Profeta Daniel' (Congonhas/MG, séc. XVIII, Barroco mineiro).",
-      pairs: [
-        { left: "Renascimento", right: "Itália, séc. XV-XVI — Leonardo, Michelangelo" },
-        { left: "Barroco", right: "Séc. XVII-XVIII — drama, contraste, religiosidade" },
-        { left: "Barroco mineiro", right: "Brasil colonial — Aleijadinho, igrejas de MG" },
-        { left: "Impressionismo", right: "Fim do séc. XIX — Monet, luz e cor" },
-        { left: "Cubismo", right: "Início séc. XX — Picasso, formas geométricas" },
-        { left: "Modernismo brasileiro", right: "Sem. de Arte Moderna 1922 — Tarsila, Anita Malfatti" },
-      ],
-      shortText:
-        "Antônio Francisco Lisboa, o ALEIJADINHO (1738-1814), foi escultor e arquiteto do BARROCO MINEIRO. Esculpiu os 12 Profetas em pedra-sabão em Congonhas (MG). Marca: figuras dramáticas, olhos voltados para o alto, dobras profundas nas roupas.",
-      highlights: ["Aleijadinho", "Barroco mineiro", "séc. XVIII", "pedra-sabão"],
-      tip: "Para analisar uma obra: tema + técnica + período + intenção.",
-      exampleTitle: "Linha do tempo das artes visuais",
-      exampleSentences: [
-        { text: "Renascimento (1400-1600): perspectiva, anatomia — 'Mona Lisa', Leonardo." },
-        { text: "Barroco (1600-1750): drama, luz x sombra — Caravaggio, Aleijadinho." },
-        { text: "Impressionismo (1870-1900): luz e cor ao ar livre — 'Impressão, nascer do sol', Monet." },
-        { text: "Cubismo (1907-1920): múltiplos pontos de vista — 'Les Demoiselles d'Avignon', Picasso." },
-        { text: "Modernismo brasileiro (1922-): identidade nacional — 'Abaporu', Tarsila do Amaral." },
-      ],
-      exampleConclusion: "Cada movimento responde ao seu tempo — arte é leitura de mundo.",
-      exampleImage:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/360px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
-      exampleCaption: "Leonardo da Vinci — 'Mona Lisa' (Renascimento, c. 1503).",
-      question: "Aleijadinho foi um artista do…",
-      options: [
-        { text: "Barroco mineiro", isCorrect: true },
-        { text: "Renascimento italiano", isCorrect: false },
-        { text: "Cubismo", isCorrect: false },
-      ],
-    },
-  },
-];
+const AR_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
 const EF_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
 const ER_PACKS: Array<{ keys: string[]; pack: Pack }> = [];
 
@@ -993,284 +945,39 @@ function pickPack(subject: SubjectKey, titulo: string): Pack | null {
   return null;
 }
 
-// Fallback que ENSINA de verdade — usa o título da BNCC como tema e gera
-// conteúdo real por disciplina (definição + passos concretos + pergunta
-// coerente com a explicação). Nunca devolve texto meta ("identifique
-// conceitos", "construa um argumento") porque isso não ensina nada.
+// Fallback enxuto — mantém padrão visual + pergunta real, sem texto cansativo.
+function genericPack(subject: SubjectKey, titulo: string, grade: string): Pack {
+  const cleanTitle = titulo.replace(/\s*-\s*\d+º\s*Ano\s*$/i, "").trim();
+  const subjectName = SUBJECT_NAME[subject];
+  const emoji = SUBJECT_EMOJI[subject];
 
-function extractTopic(titulo: string): string {
-  return titulo
-    .replace(/\s*-\s*\d+º\s*Ano\s*$/i, "")
-    .replace(/^\(EF\d+[A-Z]{2}\d+\)\s*/i, "")
-    .replace(/^(identificar|reconhecer|compreender|analisar|interpretar|aplicar|resolver|relacionar|distinguir|descrever|explicar|produzir|comparar|classificar|utilizar|empregar)\s+/i, "")
-    .trim();
-}
-
-type SubjectFallback = (topic: string, grade: string) => Pack;
-
-const SUBJECT_FALLBACK: Record<SubjectKey, SubjectFallback> = {
-  CI: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Ciências, ${topic} se estuda observando como a natureza funciona. Você vai ver o conceito, um exemplo real e responder.`,
-    emoji: "🔬",
+  return {
+    topic: cleanTitle.toUpperCase().slice(0, 40),
+    highlight: cleanTitle.toUpperCase().slice(0, 40),
+    summary: `Aula de ${subjectName} (${grade}) — vamos direto ao ponto.`,
+    emoji,
     pairs: [
-      { left: "Conceito", right: topic },
-      { left: "Método", right: "Observação + experimento" },
-      { left: "Onde aparece", right: "Natureza e corpo humano" },
-      { left: "Por que importa", right: "Explica fenômenos do dia a dia" },
+      { left: "Conceito", right: cleanTitle },
+      { left: "Disciplina", right: subjectName },
+      { left: "Série", right: grade },
     ],
-    shortText: `${topic.charAt(0).toUpperCase() + topic.slice(1)} faz parte de Ciências Naturais. Para entender, observe: o QUE acontece, COMO acontece e POR QUE acontece. Toda ciência começa com uma pergunta e busca evidências.`,
-    highlights: [topic, "observação", "evidência"],
-    tip: "Pergunta científica boa começa com 'Por que' ou 'Como'.",
-    exampleTitle: `${topic} na prática`,
+    shortText: `Tema desta aula: ${cleanTitle}. Foque nas palavras-chave do título e relacione com exemplos do seu dia a dia.`,
+    highlights: [cleanTitle],
+    tip: "Anote 1 frase no caderno resumindo o que entendeu.",
+    exampleTitle: cleanTitle,
     exampleSentences: [
-      { text: `Observação: identifique o fenômeno de ${topic}.`, emoji: "👀" },
-      { text: "Hipótese: o que você acha que explica?", emoji: "💭" },
-      { text: "Teste: experimento ou fonte confiável.", emoji: "🧪" },
-      { text: "Conclusão: o que os dados mostram.", emoji: "📊" },
+      { text: `Identifique 2 palavras-chave em "${cleanTitle}".` },
+      { text: "Procure um exemplo real (notícia, vídeo, livro)." },
+      { text: "Explique com suas palavras." },
     ],
-    exampleConclusion: `Ciência = observar + testar + concluir.`,
-    question: `Qual é o primeiro passo do método científico para estudar ${topic}?`,
+    exampleConclusion: "Quem explica, aprende em dobro.",
+    question: `Esta aula é da disciplina de…`,
     options: [
-      { text: "Observar o fenômeno", isCorrect: true },
-      { text: "Decorar a resposta", isCorrect: false },
-      { text: "Pular para a conclusão", isCorrect: false },
+      { text: subjectName, isCorrect: true },
+      { text: subject === "MA" ? "História" : "Matemática", isCorrect: false },
+      { text: subject === "CI" ? "Educação Física" : "Ciências", isCorrect: false },
     ],
-  }),
-  MA: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Matemática, ${topic} se aprende com regra clara + exemplo numérico + prática.`,
-    emoji: "📐",
-    pairs: [
-      { left: "Tema", right: topic },
-      { left: "Regra", right: "Existe um padrão a aplicar" },
-      { left: "Prática", right: "Resolver exemplos parecidos" },
-    ],
-    shortText: `Para dominar ${topic}: 1) entenda a regra; 2) veja um exemplo resolvido passo a passo; 3) resolva sozinho casos parecidos. Matemática se aprende fazendo.`,
-    highlights: [topic, "regra", "exemplo", "prática"],
-    tip: "Sempre confira a resposta substituindo no enunciado.",
-    exampleTitle: `Passos para ${topic}`,
-    exampleSentences: [
-      { text: "1) Leia o enunciado e identifique o que pedem." },
-      { text: "2) Anote os dados e a operação envolvida." },
-      { text: "3) Aplique a regra passo a passo." },
-      { text: "4) Verifique se o resultado faz sentido." },
-    ],
-    exampleConclusion: "Sequência clara evita erro bobo.",
-    question: `Ao resolver um problema de ${topic}, o que fazer DEPOIS de identificar os dados?`,
-    options: [
-      { text: "Aplicar a regra passo a passo", isCorrect: true },
-      { text: "Chutar a resposta", isCorrect: false },
-      { text: "Pular para outra questão", isCorrect: false },
-    ],
-  }),
-  LP: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Língua Portuguesa, ${topic} se entende lendo, observando a estrutura e produzindo exemplos próprios.`,
-    emoji: "📚",
-    pairs: [
-      { left: "Tema", right: topic },
-      { left: "Como estudar", right: "Ler + analisar + escrever" },
-      { left: "Atenção", right: "Vocabulário, sentido e estrutura" },
-    ],
-    shortText: `${topic.charAt(0).toUpperCase() + topic.slice(1)}: foque em três coisas — o QUE o texto diz (informação), COMO diz (estrutura e palavras) e PARA QUEM (interlocutor). Esses três passos abrem qualquer texto.`,
-    highlights: [topic, "estrutura", "vocabulário"],
-    tip: "Releia em voz alta — você ouve erros que não vê.",
-    exampleTitle: `Lendo com atenção: ${topic}`,
-    exampleSentences: [
-      { text: "1ª leitura: pegue a ideia geral." },
-      { text: "2ª leitura: marque palavras-chave e conectivos." },
-      { text: "3ª leitura: identifique a intenção do autor." },
-      { text: "Produção: escreva uma frase aplicando o conceito." },
-    ],
-    exampleConclusion: "Ler bem é ler mais de uma vez, com objetivos diferentes.",
-    question: `Para entender bem um texto sobre ${topic}, o ideal é…`,
-    options: [
-      { text: "Ler mais de uma vez, com objetivos diferentes", isCorrect: true },
-      { text: "Ler uma vez rápido e responder", isCorrect: false },
-      { text: "Decorar o texto inteiro", isCorrect: false },
-    ],
-  }),
-  HI: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `História estuda ${topic} respondendo: QUEM, QUANDO, ONDE, POR QUÊ e COM QUAIS CONSEQUÊNCIAS.`,
-    emoji: "🏛️",
-    pairs: [
-      { left: "Quem", right: "Pessoas e grupos envolvidos" },
-      { left: "Quando", right: "Período histórico" },
-      { left: "Onde", right: "Lugar geográfico" },
-      { left: "Por quê", right: "Causas econômicas, sociais, políticas" },
-    ],
-    shortText: `Estudar ${topic} é entender o CONTEXTO. Todo fato histórico tem causas (o que levou a acontecer) e consequências (o que mudou depois). Sem contexto, vira só data decorada.`,
-    highlights: ["contexto", "causas", "consequências"],
-    tip: "Conecte sempre passado e presente — o que sobrou daquele evento hoje?",
-    exampleTitle: `Linha de análise — ${topic}`,
-    exampleSentences: [
-      { text: "Antes: como era a sociedade?" },
-      { text: "Durante: o que aconteceu e por quê?" },
-      { text: "Depois: o que mudou?" },
-      { text: "Hoje: o que ainda nos afeta?" },
-    ],
-    exampleConclusion: "História explica o presente a partir do passado.",
-    question: `Para entender bem ${topic} em História, o mais importante é analisar…`,
-    options: [
-      { text: "Causas, contexto e consequências", isCorrect: true },
-      { text: "Apenas a data exata", isCorrect: false },
-      { text: "Só o nome dos personagens", isCorrect: false },
-    ],
-  }),
-  GE: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Geografia estuda ${topic} relacionando ESPAÇO, NATUREZA e SOCIEDADE.`,
-    emoji: "🗺️",
-    pairs: [
-      { left: "Espaço", right: "Onde acontece (mapa, lugar)" },
-      { left: "Natureza", right: "Relevo, clima, hidrografia" },
-      { left: "Sociedade", right: "População, economia, cultura" },
-      { left: "Relação", right: "Como humanos transformam o espaço" },
-    ],
-    shortText: `Em ${topic}, observe três camadas: o ESPAÇO físico (mapa), os ELEMENTOS NATURAIS (clima, relevo) e a AÇÃO HUMANA (cidades, agricultura, indústria). Geografia conecta essas três.`,
-    highlights: ["espaço", "natureza", "sociedade"],
-    tip: "Diante de um mapa, pergunte: o que explica esse padrão?",
-    exampleTitle: `Olhando ${topic}`,
-    exampleSentences: [
-      { text: "1) Localize no mapa." },
-      { text: "2) Descreva o ambiente natural." },
-      { text: "3) Veja como as pessoas vivem ali." },
-      { text: "4) Identifique problemas e soluções." },
-    ],
-    exampleConclusion: "Geografia = espaço + natureza + gente, sempre juntos.",
-    question: `Em Geografia, estudar ${topic} significa analisar principalmente…`,
-    options: [
-      { text: "Relação entre espaço, natureza e sociedade", isCorrect: true },
-      { text: "Apenas o nome de capitais", isCorrect: false },
-      { text: "Só desenhos de mapas", isCorrect: false },
-    ],
-  }),
-  LI: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `In English class, ${topic} se aprende ouvindo, repetindo e usando em frases reais.`,
-    emoji: "🌐",
-    pairs: [
-      { left: "Listen", right: "Ouvir falantes nativos" },
-      { left: "Repeat", right: "Imitar pronúncia" },
-      { left: "Use", right: "Criar frases próprias" },
-    ],
-    shortText: `Para aprender ${topic}: ouça exemplos reais, repita em voz alta e produza suas próprias frases. Idioma se aprende usando, não decorando lista.`,
-    highlights: ["listen", "repeat", "use"],
-    tip: "Errar faz parte — fale mesmo sem ter certeza.",
-    exampleTitle: `Studying ${topic}`,
-    exampleSentences: [
-      { text: "Step 1: Listen to a native example." },
-      { text: "Step 2: Repeat aloud." },
-      { text: "Step 3: Create your own sentence." },
-    ],
-    exampleConclusion: "Practice > memorization.",
-    question: `Qual é a melhor forma de aprender ${topic} em inglês?`,
-    options: [
-      { text: "Ouvir, repetir e usar em frases próprias", isCorrect: true },
-      { text: "Decorar lista de palavras sem usar", isCorrect: false },
-      { text: "Traduzir tudo no celular", isCorrect: false },
-    ],
-  }),
-  AR: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Arte, ${topic} se entende analisando OBRA + ARTISTA + CONTEXTO + TÉCNICA.`,
-    emoji: "🎨",
-    pairs: [
-      { left: "Obra", right: "O que está representado" },
-      { left: "Artista", right: "Quem fez e por quê" },
-      { left: "Contexto", right: "Quando e onde" },
-      { left: "Técnica", right: "Como foi feito" },
-    ],
-    shortText: `Analisar ${topic}: observe a OBRA (cores, formas, tema), pesquise o ARTISTA, entenda o CONTEXTO histórico e identifique a TÉCNICA usada. Arte é leitura de mundo.`,
-    highlights: ["obra", "artista", "contexto", "técnica"],
-    tip: "Toda obra de arte responde a uma pergunta do seu tempo.",
-    exampleTitle: `Lendo uma obra — ${topic}`,
-    exampleSentences: [
-      { text: "O que você VÊ (descrição objetiva)?" },
-      { text: "O que você SENTE (impressão)?" },
-      { text: "O que você SABE (contexto, artista)?" },
-      { text: "O que você INTERPRETA (significado)?" },
-    ],
-    exampleConclusion: "Arte se lê em camadas: ver, sentir, saber, interpretar.",
-    question: `Para analisar uma obra de arte sobre ${topic}, é fundamental considerar…`,
-    options: [
-      { text: "Obra, artista, contexto e técnica", isCorrect: true },
-      { text: "Só se você achou bonita", isCorrect: false },
-      { text: "Apenas o preço da obra", isCorrect: false },
-    ],
-  }),
-  EF: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Educação Física, ${topic} envolve técnica, regras e trabalho em equipe.`,
-    emoji: "⚽",
-    pairs: [
-      { left: "Técnica", right: "Movimento correto" },
-      { left: "Regras", right: "Como se joga/pratica" },
-      { left: "Equipe", right: "Cooperação e respeito" },
-      { left: "Saúde", right: "Benefício pro corpo" },
-    ],
-    shortText: `${topic}: aprenda a TÉCNICA (movimento correto), respeite as REGRAS, jogue em EQUIPE e cuide da SAÚDE (aquecimento, hidratação, descanso).`,
-    highlights: ["técnica", "regras", "equipe", "saúde"],
-    tip: "Aquecer antes e alongar depois evita 90% das lesões.",
-    exampleTitle: `Praticando ${topic}`,
-    exampleSentences: [
-      { text: "Aqueça por 5 minutos." },
-      { text: "Treine o movimento devagar primeiro." },
-      { text: "Aumente a intensidade aos poucos." },
-      { text: "Alongue ao terminar." },
-    ],
-    exampleConclusion: "Corpo treinado com técnica + descanso rende mais.",
-    question: `Ao praticar ${topic}, o que fazer ANTES da atividade intensa?`,
-    options: [
-      { text: "Aquecimento de pelo menos 5 minutos", isCorrect: true },
-      { text: "Começar no máximo já", isCorrect: false },
-      { text: "Pular o aquecimento", isCorrect: false },
-    ],
-  }),
-  ER: (topic) => ({
-    topic: topic.toUpperCase().slice(0, 40),
-    highlight: topic.toUpperCase().slice(0, 40),
-    summary: `Em Ensino Religioso, ${topic} é estudado com RESPEITO à diversidade de crenças.`,
-    emoji: "🕊️",
-    pairs: [
-      { left: "Diversidade", right: "Muitas tradições religiosas" },
-      { left: "Respeito", right: "Todas merecem consideração" },
-      { left: "Conhecimento", right: "Conhecer ≠ aderir" },
-      { left: "Ética", right: "Valores comuns à humanidade" },
-    ],
-    shortText: `${topic}: a aula apresenta diferentes tradições (cristã, judaica, islâmica, indígenas, afro-brasileiras, budista, sem religião) com RESPEITO. O objetivo é conhecer e conviver, não converter.`,
-    highlights: ["diversidade", "respeito", "convivência"],
-    tip: "Conhecer outras crenças amplia sua visão de mundo.",
-    exampleTitle: `Estudando ${topic}`,
-    exampleSentences: [
-      { text: "Quais tradições falam sobre o tema?" },
-      { text: "Em que se parecem?" },
-      { text: "Em que se diferem?" },
-      { text: "Que valores éticos compartilham?" },
-    ],
-    exampleConclusion: "Conviver bem começa por conhecer o outro.",
-    question: `O objetivo de estudar ${topic} em Ensino Religioso é…`,
-    options: [
-      { text: "Conhecer com respeito a diversidade de crenças", isCorrect: true },
-      { text: "Converter os colegas", isCorrect: false },
-      { text: "Provar qual religião é melhor", isCorrect: false },
-    ],
-  }),
-};
-
-function genericPack(subject: SubjectKey, titulo: string, _grade: string): Pack {
-  const topic = extractTopic(titulo) || SUBJECT_NAME[subject];
-  return SUBJECT_FALLBACK[subject](topic, _grade);
+  };
 }
 
 function buildLesson(code: string, titulo: string): ActivityLesson | null {
