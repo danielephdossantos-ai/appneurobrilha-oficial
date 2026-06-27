@@ -374,10 +374,13 @@ const SubjectFolders: React.FC<{
   const anoNum = Number(serie.match(/\d+/)?.[0] ?? 0);
   const HIDDEN_EARLY = new Set(["Arte", "Educação Física", "História", "Geografia", "Ensino Religioso"]);
   const HIDDEN_1ANO = new Set(["Ciências"]);
+  const HIDDEN_ALL = new Set(["Educação Física"]);
   const subjects = Object.keys(grouped)
+    .filter((s) => !HIDDEN_ALL.has(s))
     .filter((s) => !(anoNum > 0 && anoNum <= 2 && HIDDEN_EARLY.has(s)))
     .filter((s) => !(anoNum === 1 && HIDDEN_1ANO.has(s)))
     .sort();
+
 
   return (
     <div className="space-y-2.5">
