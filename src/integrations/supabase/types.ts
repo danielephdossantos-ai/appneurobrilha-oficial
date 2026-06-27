@@ -1391,25 +1391,40 @@ export type Database = {
       }
       daily_routines: {
         Row: {
+          category: string | null
           child_id: string
           completed_at: string | null
           created_at: string | null
+          icon: string | null
           id: string
           routine_code: string
+          time_of_day: string | null
+          title: string | null
+          updated_at: string
         }
         Insert: {
+          category?: string | null
           child_id: string
           completed_at?: string | null
           created_at?: string | null
+          icon?: string | null
           id?: string
           routine_code: string
+          time_of_day?: string | null
+          title?: string | null
+          updated_at?: string
         }
         Update: {
+          category?: string | null
           child_id?: string
           completed_at?: string | null
           created_at?: string | null
+          icon?: string | null
           id?: string
           routine_code?: string
+          time_of_day?: string | null
+          title?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
@@ -4537,34 +4552,40 @@ export type Database = {
       }
       study_agenda: {
         Row: {
+          category: string | null
           child_id: string
           completed: boolean | null
           created_at: string
           description: string | null
           exam_date: string | null
           id: string
+          time_of_day: string | null
           topic: string
           type: string | null
           updated_at: string
         }
         Insert: {
+          category?: string | null
           child_id: string
           completed?: boolean | null
           created_at?: string
           description?: string | null
           exam_date?: string | null
           id?: string
+          time_of_day?: string | null
           topic: string
           type?: string | null
           updated_at?: string
         }
         Update: {
+          category?: string | null
           child_id?: string
           completed?: boolean | null
           created_at?: string
           description?: string | null
           exam_date?: string | null
           id?: string
+          time_of_day?: string | null
           topic?: string
           type?: string | null
           updated_at?: string
