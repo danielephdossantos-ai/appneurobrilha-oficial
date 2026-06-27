@@ -1,7 +1,6 @@
 // ============= Full file contents =============
 
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
@@ -32,7 +31,7 @@ import {
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
-import type { ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
+import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
 import { ProgressionService } from "@/engines/progression-engine/service";
 import { ProgressionEngine } from "@/engines/progression-engine/engine/progression-engine";
 import { ProgressionStats, SkillMastery } from "@/engines/progression-engine/types";
@@ -46,12 +45,11 @@ import { FloatingActivityControls } from "@/components/activities/FloatingActivi
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
-// RelatoriosReforco foi movido para a Área dos Pais (painel-pais)
+import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
-import { gerarAulaReforco } from "@/lib/reforco-aula-ia.functions";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -137,112 +135,10 @@ const CATALOGO_DIFICULDADES: Dificuldade[] = [
     habilidades: ["Regulação emocional", "Tolerância à frustração"] },
 ];
 
-function buildEmergencyReforcoLesson(topic: string): ReforcoLesson {
-  const lower = topic.toLowerCase();
-  const isMath = /matem|tabuada|conta|soma|subtra|multiplica|divis|problema|número|numero/.test(lower);
-  const isRead = /leitura|ler|s[ií]laba|silaba|letra|alfabeto|palavra|texto|interpreta|ortografia|escrita/.test(lower);
-  const isFocus = /aten[çc][aã]o|mem[oó]ria|foco|organiza|tempo|frustra|linguagem|fala|coordena|motora|copiar/.test(lower);
-
-  if (isMath) {
-    return {
-      title: `Aula real: ${topic}`,
-      topic,
-      category: "Matemática",
-      explanation: "Hoje vamos resolver uma questão olhando a história, escolhendo a conta e conferindo se a resposta faz sentido.",
-      levels: {
-        basic: [
-          { type: "explanation", text: "Problema de matemática é uma história com uma pergunta. Primeiro descubra se a história junta, tira, forma grupos iguais ou reparte." },
-          { type: "example", text: "Exemplo: Lia tinha 6 figurinhas e ganhou 3. Ganhou aumenta, então 6 + 3 = 9." },
-          { type: "exercise", text: "Resolva: Pedro tinha 8 lápis e perdeu 2.", content: { question: "Quantos lápis ficaram?", options: ["6", "10", "16"], answer: "6", explanation: "Perdeu diminui: 8 - 2 = 6." } },
-          { type: "example", text: "Grupos iguais: 3 caixas com 4 balas em cada caixa. Fazemos 3 × 4 = 12." },
-          { type: "tip", text: "Diga a palavra-pista antes da conta: ganhou, perdeu, cada ou repartir." },
-        ],
-        intermediate: [
-          { type: "explanation", text: "Agora vamos fazer duas etapas: ler a pergunta final e montar a conta usando a pista da história." },
-          { type: "example", text: "4 sacolas com 5 maçãs em cada: 'cada' mostra grupos iguais. Conta: 4 × 5 = 20." },
-          { type: "exercise", text: "Escolha a conta certa.", content: { question: "2 pacotes com 7 biscoitos em cada. Qual conta resolve?", options: ["2 × 7", "2 + 7", "7 - 2"], answer: "2 × 7", explanation: "A expressão 'em cada' mostra grupos iguais." } },
-          { type: "example", text: "Conferência: se são dois grupos de 7, a resposta precisa ser maior que 7." },
-          { type: "tip", text: "A resposta completa precisa ter unidade: lápis, maçãs, reais ou pontos." },
-        ],
-        advanced: [
-          { type: "explanation", text: "No desafio, explique o caminho: dados, operação e conclusão." },
-          { type: "example", text: "Rafa comprou 3 pacotes com 6 adesivos e deu 5. Primeiro 3 × 6 = 18; depois 18 - 5 = 13." },
-          { type: "exercise", text: "Resolva em duas etapas.", content: { question: "5 caixas com 4 lápis. Depois 3 lápis quebraram. Quantos sobraram?", options: ["17", "20", "9"], answer: "17", explanation: "Primeiro 5 × 4 = 20. Depois 20 - 3 = 17." } },
-          { type: "tip", text: "Quando tiver duas ações, faça uma conta para cada ação." },
-        ],
-      },
-      premiumTips: ["Leia a pergunta final primeiro.", "Marque a palavra-pista.", "Confira se o resultado combina com a história."],
-    };
-  }
-
-  if (isRead) {
-    return {
-      title: `Aula real: ${topic}`,
-      topic,
-      category: "Português",
-      explanation: "Hoje vamos ler palavras e frases procurando pistas, sem chutar a resposta.",
-      levels: {
-        basic: [
-          { type: "explanation", text: "Para ler, olhe a letra, fale o som e junte as partes. CA + SA vira CASA." },
-          { type: "example", text: "BO + LA = BOLA. Primeiro fale BO, depois LA, depois una sem pausa." },
-          { type: "exercise", text: "Monte a palavra.", content: { question: "PA + TO forma qual palavra?", options: ["pato", "tapa", "bola"], answer: "pato", explanation: "PA primeiro e TO depois formam PA-TO." } },
-          { type: "example", text: "Frase: O gato mia. Pergunta: quem mia? Resposta: o gato." },
-          { type: "tip", text: "Aponte com o dedo para não pular sílabas ou palavras." },
-        ],
-        intermediate: [
-          { type: "explanation", text: "Interpretar é provar sua resposta com uma pista do texto." },
-          { type: "example", text: "A flor murchou porque ficou sem água. A palavra 'porque' mostra o motivo." },
-          { type: "exercise", text: "Ache a pista.", content: { question: "Em 'Pedro correu, mas chegou atrasado', qual palavra mostra oposição?", options: ["mas", "Pedro", "correu"], answer: "mas", explanation: "Mas mostra que aconteceu o contrário do esperado." } },
-          { type: "example", text: "Boa resposta: eu sei porque essa informação aparece no texto." },
-          { type: "tip", text: "Use a frase: 'eu sei disso porque...'" },
-        ],
-        advanced: [
-          { type: "explanation", text: "Agora responda com frase completa: ideia mais prova do texto." },
-          { type: "example", text: "O céu escureceu, então Marta fechou a janela. Ela fechou porque parecia que ia chover." },
-          { type: "exercise", text: "Responda pela pista.", content: { question: "Lia levou guarda-chuva porque o céu estava escuro. Por quê?", options: ["porque o céu estava escuro", "porque era noite", "porque perdeu o caderno"], answer: "porque o céu estava escuro", explanation: "A resposta aparece depois da palavra porque." } },
-          { type: "tip", text: "Não invente informação: use o que apareceu na frase." },
-        ],
-      },
-      premiumTips: ["Leia em voz alta devagar.", "Junte sílabas antes de correr.", "Procure palavras-pista como porque, mas e então."],
-    };
-  }
-
-  return {
-    title: `Aula real: ${topic}`,
-    topic,
-    category: isFocus ? "Neuroaprendizagem" : "Reforço",
-    explanation: "Hoje vamos treinar com uma regra curta, exemplo, tentativa e correção explicada.",
-    levels: {
-      basic: [
-        { type: "explanation", text: "Uma tarefa fica mais fácil quando você sabe a regra antes de responder." },
-        { type: "example", text: "Regra: marque palavra que começa com M. Mesa começa com M; bola não começa." },
-        { type: "exercise", text: "Siga a regra.", content: { question: "Qual palavra começa com S?", options: ["sol", "lua", "casa"], answer: "sol", explanation: "Sol começa com a letra S." } },
-        { type: "example", text: "Antes de clicar, repita: qual era a regra mesmo?" },
-        { type: "tip", text: "Pare dois segundos, leia a regra e só depois responda." },
-      ],
-      intermediate: [
-        { type: "explanation", text: "Agora a regra tem duas partes: começo da palavra e quantidade de letras." },
-        { type: "example", text: "Pato começa com P e tem quatro letras: p-a-t-o." },
-        { type: "exercise", text: "Duas pistas.", content: { question: "Qual começa com P e tem 4 letras?", options: ["pato", "pé", "bola"], answer: "pato", explanation: "Pato começa com P e tem 4 letras." } },
-        { type: "tip", text: "Use os dedos para lembrar cada parte da regra." },
-        { type: "example", text: "Se errou, veja qual pista esqueceu: letra inicial ou quantidade." },
-      ],
-      advanced: [
-        { type: "explanation", text: "No desafio, você corrige o caminho sem desistir." },
-        { type: "example", text: "Frase de autocorreção: eu pulei a pista; vou ler de novo e tentar." },
-        { type: "exercise", text: "Escolha a melhor estratégia.", content: { question: "Quando erro por pressa, o que ajuda?", options: ["reler a regra", "desistir", "chutar"], answer: "reler a regra", explanation: "Reler mostra qual passo faltou." } },
-        { type: "tip", text: "Erro corrigido também é aprendizagem." },
-      ],
-    },
-    premiumTips: ["Leia a regra antes da resposta.", "Faça uma parte por vez.", "Corrija o passo, não se culpe."],
-  };
-}
-
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
   const { sendNotification } = useNotifications();
-  const gerarAula = useServerFn(gerarAulaReforco);
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
@@ -373,20 +269,7 @@ function ReforcoBrilha() {
       }
 
       try {
-        const r = await gerarAula({
-          data: {
-            topic: finalTopic,
-            idade: activeChild?.idade ?? undefined,
-            serie: activeChild?.serie ?? undefined,
-          },
-        });
-        if (!r.ok || !r.lesson) {
-          toast.info("Vou abrir uma aula local agora para a criança não ficar sem explicação.");
-          setLessonContent(buildEmergencyReforcoLesson(finalTopic));
-          setCurrentLevel("basic");
-          return;
-        }
-        const lesson = r.lesson as ReforcoLesson;
+        const lesson = await ReforcoEngine.generateLesson(finalTopic, engine?.adaptive as any);
         setLessonContent(lesson);
         setCurrentLevel("basic");
         if (lesson.category) {
@@ -403,9 +286,7 @@ function ReforcoBrilha() {
         }
       } catch (error) {
         console.error("Erro ao carregar aula:", error);
-        toast.info("A internet falhou, então abri uma aula local para a criança não ficar sem estudar.");
-        setLessonContent(buildEmergencyReforcoLesson(finalTopic));
-        setCurrentLevel("basic");
+        setIsTeaching(false);
       }
     };
 
@@ -453,7 +334,6 @@ function ReforcoBrilha() {
         <div className="space-y-8 animate-in fade-in duration-500">
           <AssistenteGuiado
             onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
-            onComecarAulaLivre={(tema) => startLesson(tema)}
             onBuscar={(q) => {
               setSearchQuery(q);
               runSearch(q);
@@ -489,7 +369,7 @@ function ReforcoBrilha() {
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              Descreva a dificuldade em palavras simples. A Brilha monta uma aula explicada e também busca materiais públicos de apoio.
+              Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
             </p>
           </Card>
 
@@ -549,13 +429,6 @@ function ReforcoBrilha() {
                         ))}
                       </div>
                     )}
-                    <button
-                      onClick={() => startLesson(searchResult.main?.nome || searchQuery)}
-                      className="mt-4 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-black text-primary-foreground shadow-lg hover:opacity-90 transition-all"
-                    >
-                      <PlayCircle className="h-5 w-5" />
-                      Começar aula explicada agora
-                    </button>
                   </div>
                 </div>
               </Card>
@@ -850,7 +723,7 @@ function ReforcoBrilha() {
               <AlertCircle className="h-5 w-5 text-amber-500" />
               <h3 className="font-extrabold text-base">Catálogo de Dificuldades</h3>
               <span className="text-xs text-muted-foreground">
-                Toque em uma dificuldade para começar uma aula explicada agora.
+                Toque em uma dificuldade para abrir um plano de reforço com habilidades da matriz pedagógica.
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -859,7 +732,7 @@ function ReforcoBrilha() {
                   key={d.id}
                   onClick={() => {
                     setSearchQuery(d.busca);
-                    startLesson(d.busca);
+                    runSearch(d.busca);
                   }}
                   className="text-left p-3 rounded-2xl border-2 border-border bg-card hover:border-primary hover:bg-primary/5 transition-all"
                 >
@@ -870,9 +743,6 @@ function ReforcoBrilha() {
                       <div className="text-[11px] text-muted-foreground mt-0.5">
                         {d.habilidades.join(" · ")}
                       </div>
-                      <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-black text-primary">
-                        <PlayCircle className="h-3 w-3" /> Aula real agora
-                      </div>
                     </div>
                   </div>
                 </button>
@@ -880,8 +750,10 @@ function ReforcoBrilha() {
             </div>
           </div>
 
-
-
+          {/* Relatório da criança — sempre no final da página */}
+          <div className="pt-4 border-t-2 border-dashed border-indigo-200">
+            <RelatoriosReforco />
+          </div>
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
@@ -969,10 +841,10 @@ function ReforcoBrilha() {
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-bold flex items-center gap-2 px-2">
                       <BookOpen className="h-5 w-5 text-primary" />
-                      Aula explicada pelo Professor Brilho
+                      Roteiro de Estudos (Gerado pelo Sistema)
                     </h3>
                     <div className="bg-indigo-600/10 border border-indigo-200 rounded-2xl p-4 mb-4 text-xs text-indigo-700 font-medium">
-                      📚 Aula com explicação, exemplo resolvido, prática guiada, exercícios e correção.
+                      📚 Trilha pedagógica estruturada, sem uso de IA generativa.
                     </div>
                     {lessonContent.levels[currentLevel]
                       .slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6)
@@ -1000,53 +872,17 @@ function ReforcoBrilha() {
                                   ? "📝"
                                   : "🎯"}
                             </div>
-                            <div className="space-y-3 flex-1">
+                            <div className="space-y-1">
                               <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider">
                                 {step.type === "explanation"
                                   ? "Explicação"
                                   : step.type === "example"
                                     ? "Exemplo Prático"
-                                    : step.type === "exercise"
-                                      ? "Exercício com correção"
-                                      : "Dica"}
+                                    : "Desafio"}
                               </span>
                               <p className="text-lg font-medium leading-relaxed text-foreground">
                                 {step.text}
                               </p>
-                              {step.content?.question && (
-                                <div className="mt-4 rounded-2xl border border-border bg-muted/30 p-4 space-y-3">
-                                  <p className="font-black text-foreground">{step.content.question}</p>
-                                  {Array.isArray(step.content.options) && step.content.options.length > 0 && (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                      {step.content.options.map((op: string, opIdx: number) => {
-                                        const certo = String(op).trim().toLowerCase() === String(step.content?.answer ?? "").trim().toLowerCase();
-                                        return (
-                                          <div
-                                            key={`${op}-${opIdx}`}
-                                            className={`rounded-xl border px-3 py-2 text-sm font-bold ${
-                                              certo
-                                                ? "border-emerald-300 bg-emerald-50 text-emerald-800"
-                                                : "border-border bg-background text-muted-foreground"
-                                            }`}
-                                          >
-                                            {op}
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  )}
-                                  {step.content.answer !== undefined && (
-                                    <div className="rounded-xl bg-emerald-500/10 border border-emerald-200 p-3 text-emerald-800 font-black">
-                                      ✓ Resposta: {String(step.content.answer)}
-                                    </div>
-                                  )}
-                                  {step.content.explanation && (
-                                    <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-amber-900 text-sm font-semibold">
-                                      💡 {step.content.explanation}
-                                    </div>
-                                  )}
-                                </div>
-                              )}
                             </div>
                           </div>
                         </div>

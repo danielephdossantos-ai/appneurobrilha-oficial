@@ -1,140 +1,22 @@
 import React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
-import type { AulaBncc } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
+import { Fund2Player } from "../modules/escola-brilha/views/Fund2Player";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
-import type { ActivityLesson } from "../modules/escola-brilha/types/activity-lesson";
-import type { ActivityLessonC, BNCCArea } from "../modules/escola-brilha/types/activity-lesson-c";
+import { useLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
 const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "1º ao 2º Ano"]);
 const AL_GRADES = new Set(["3º Ano", "4º Ano", "5º Ano"]);
 const FUND2_GRADES = new Set(["6º Ano", "7º Ano", "8º Ano", "9º Ano", "6º ao 7º Ano", "8º ao 9º Ano", "6º ao 9º Ano"]);
-
-const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string; color: ActivityLessonC["color"] }> = {
-  "Língua Portuguesa": {
-    area: "linguagens",
-    area_label: "Linguagens",
-    color: { from: "from-rose-500", to: "to-pink-600", accent: "pink" },
-  },
-  Português: {
-    area: "linguagens",
-    area_label: "Linguagens",
-    color: { from: "from-rose-500", to: "to-pink-600", accent: "pink" },
-  },
-  Matemática: {
-    area: "matematica",
-    area_label: "Matemática",
-    color: { from: "from-blue-500", to: "to-cyan-600", accent: "blue" },
-  },
-  Ciências: {
-    area: "ciencias_natureza",
-    area_label: "Ciências da Natureza",
-    color: { from: "from-emerald-500", to: "to-teal-600", accent: "green" },
-  },
-  Geografia: {
-    area: "ciencias_humanas",
-    area_label: "Ciências Humanas",
-    color: { from: "from-amber-600", to: "to-orange-600", accent: "amber" },
-  },
-  História: {
-    area: "ciencias_humanas",
-    area_label: "Ciências Humanas",
-    color: { from: "from-amber-600", to: "to-orange-600", accent: "amber" },
-  },
-};
-
-const LETTERS = ["A", "B", "C", "D"] as const;
-const letterFor = (idx: number): (typeof LETTERS)[number] => LETTERS[idx] ?? "D";
-
-function hasScreensPayload(payload: unknown) {
-  return !!payload && typeof payload === "object" && "screens" in payload;
-}
-
-function adaptActivityLessonToC(aula: AulaBncc, src: ActivityLesson): ActivityLessonC {
-  const meta = AREA_BY_DISCIPLINA[aula.disciplina] ?? {
-    area: "linguagens" as BNCCArea,
-    area_label: aula.disciplina || src.subject || "Aula",
-    color: { from: "from-violet-500", to: "to-purple-600", accent: "violet" },
-  };
-  const correct = src.screens.praticar.options.find((o) => o.isCorrect) ?? src.screens.praticar.options[0];
-  const challengeOptions = src.screens.praticar.options.slice(0, 4).map((o, i) => ({
-    letter: letterFor(i),
-    text: o.text,
-    isCorrect: o.isCorrect,
-  }));
-
-  while (challengeOptions.length < 4) {
-    challengeOptions.push({
-      letter: letterFor(challengeOptions.length),
-      text: challengeOptions.length === 3 ? "Ainda não é essa" : "Precisa revisar o exemplo",
-      isCorrect: false,
-    });
-  }
-
-  const objectives: string[] = [
-    src.screens.explicacao.highlight,
-    "Ver um exemplo guiado",
-    "Responder um desafio curto",
-  ].filter((item): item is string => Boolean(item)).slice(0, 3);
-
-  return {
-    id: src.id || aula.id,
-    title: src.title || aula.titulo,
-    mission_question: `Vamos entender ${src.title || aula.titulo} na prática?`,
-    subject: aula.disciplina || src.subject,
-    area: meta.area,
-    area_label: meta.area_label,
-    grade: aula.serie,
-    grade_range: aula.serie,
-    bncc_code: aula.codigo_bncc,
-    bncc_description: aula.descricao || src.screens.explicacao.summary || src.title,
-    xp: aula.xp ?? src.xp ?? 200,
-    color: meta.color,
-    screens: {
-      missao: {
-        intro: "Nesta missão você vai:",
-        objectives,
-        context_emoji: src.screens.explicacao.visual_emoji || "✨",
-        context_text: src.screens.explicacao.summary,
-      },
-      exploracao: {
-        instruction: src.screens.exploracao.instruction,
-        texto: src.screens.explicacao_curta.text,
-        pontos_destaque: src.screens.exploracao.pairs.map((p) => ({ emoji: "•", text: `${p.left}: ${p.right}` })),
-        mascot_tip: src.screens.explicacao_curta.tip || "Observe o exemplo antes de responder.",
-      },
-      pontos_chave: {
-        intro: "O que precisa guardar:",
-        points: src.screens.exploracao.pairs.slice(0, 4).map((p, i) => ({
-          icon: String(i + 1),
-          title: p.left,
-          text: p.right,
-        })),
-      },
-      exemplo_aplicado: {
-        title: src.screens.exemplo_visual.title,
-        scenario: src.screens.exemplo_visual.sentences[0]?.text || src.screens.explicacao.highlight,
-        scenario_emoji: src.screens.exemplo_visual.sentences[0]?.emoji || "💡",
-        analysis: src.screens.exemplo_visual.sentences.map((s) => s.text),
-        conclusion: src.screens.exemplo_visual.conclusion,
-      },
-      desafio: {
-        question: src.screens.praticar.question,
-        options: challengeOptions,
-        explanation: correct ? `A resposta certa é: ${correct.text}.` : "Revise o exemplo e tente novamente.",
-      },
-    },
-  };
-}
 
 export const Route = createFileRoute("/escola-brilha/db/$aulaId")({
   component: AulaDbPage,
@@ -178,6 +60,11 @@ function AulaDbPage() {
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
+  const fund2Lesson = useLessonV2(
+    aula?.codigo_bncc ?? "",
+    aula?.titulo ?? "",
+    aula?.descricao ?? "",
+  );
 
   if (loading) {
     return (
@@ -211,21 +98,6 @@ function AulaDbPage() {
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
 
-    // Regra de preservação visual: se a aula já tem player/payload criado no banco,
-    // renderiza esse player original. IA/pedagogia não pode substituir layout, cores,
-    // mascotes, posições ou telas que já foram desenhadas manualmente.
-    switch (aula.tipo_player) {
-      case "early":
-        if (aula.payload) return <EarlyChildhoodPlayer lesson={aula.payload} />;
-        break;
-      case "b":
-        if (aula.payload) return <ActivityPlayer lesson={aula.payload} currentRef={ref} />;
-        break;
-      case "c":
-        if (hasScreensPayload(aula.payload)) return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
-        break;
-    }
-
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
       const kidsList = getKidsLessons(aula.codigo_bncc);
@@ -248,21 +120,23 @@ function AulaDbPage() {
       }
     }
 
-    // 6º–9º Ano: preserva o visual interativo original (ActivityPlayerC).
-    // A pedagogia entra como conteúdo estruturado, sem trocar a interface por Fund2Player.
+    // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
-      if (hasScreensPayload(aula.payload)) {
-        return <ActivityPlayerC lesson={normalizeLessonC(aula)} currentRef={ref} />;
-      }
-      const generated = generateActivityLesson6a9(
-        aula.codigo_bncc,
-        aula.titulo,
-        aula.descricao ?? "",
-      );
-      if (generated) {
-        return <ActivityPlayerC lesson={adaptActivityLessonToC(aula, generated)} currentRef={ref} />;
+      if (fund2Lesson) {
+        return (
+          <Fund2Player
+            lesson={fund2Lesson}
+            currentRef={ref}
+            capitulo={aula.codigo_bncc}
+          />
+        );
       }
     }
+
+
+
+
+
     switch (aula.tipo_player) {
       case "early":
         return <EarlyChildhoodPlayer lesson={aula.payload} />;

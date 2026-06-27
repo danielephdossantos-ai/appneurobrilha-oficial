@@ -1,15 +1,11 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
-import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2, Sparkles, RefreshCw, Film } from "lucide-react";
-import { gerarConteudoBncc } from "@/lib/bncc-conteudo-ia.functions";
-import { buscarVideoBncc } from "@/lib/bncc-video.functions";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 type BnccMeta = {
   codigo: string;
@@ -63,97 +59,31 @@ function BnccCodigoPage() {
   const [meta, setMeta] = useState<BnccMeta | null>(null);
   const [conteudo, setConteudo] = useState<BnccConteudo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [gerando, setGerando] = useState<null | "tudo" | "explicacao" | "exercicios">(null);
-  const gerar = useServerFn(gerarConteudoBncc);
-  const buscarVideo = useServerFn(buscarVideoBncc);
-  const [buscandoVideo, setBuscandoVideo] = useState(false);
-  const [videoFonte, setVideoFonte] = useState<{ titulo: string; canal: string | null } | null>(null);
-
-  const acionarBuscaVideo = async (force: boolean) => {
-    setBuscandoVideo(true);
-    try {
-      const r = await buscarVideo({ data: { codigo, force } });
-      if (!r.ok || !r.video_url) {
-        toast.error(r.error || "Não encontrei vídeo agora.");
-        return;
-      }
-      setVideoFonte(r.titulo ? { titulo: r.titulo, canal: r.canal } : null);
-      setConteudo((prev) =>
-        prev ? { ...prev, video_url: r.video_url } : prev,
-      );
-      if (force) toast.success("Vídeo atualizado! 🎬");
-    } finally {
-      setBuscandoVideo(false);
-    }
-  };
-
-  const carregar = async () => {
-    const [m, c] = await Promise.all([
-      supabase
-        .from("bncc_biblioteca")
-        .select("codigo,ano,componente,habilidade")
-        .eq("codigo", codigo)
-        .maybeSingle(),
-      supabase
-        .from("bncc_conteudo")
-        .select("*")
-        .eq("codigo", codigo)
-        .maybeSingle(),
-    ]);
-    setMeta((m.data as BnccMeta | null) ?? null);
-    setConteudo((c.data as BnccConteudo | null) ?? null);
-    return { meta: m.data as BnccMeta | null, conteudo: c.data as BnccConteudo | null };
-  };
-
-  const acionarIA = async (modo: "tudo" | "explicacao" | "exercicios") => {
-    setGerando(modo);
-    try {
-      const r = await gerar({
-        data: {
-          codigo,
-          force: modo === "tudo",
-          regenerarExplicacao: modo === "explicacao",
-          regenerarExercicios: modo === "exercicios",
-        },
-      });
-      if (!r.ok) {
-        toast.error(r.error || "Não consegui gerar a aula agora.");
-        return;
-      }
-      if (r.regenerated) {
-        toast.success("Aula completa pronta! ✨");
-        await carregar();
-      }
-    } finally {
-      setGerando(null);
-    }
-  };
 
   useEffect(() => {
     let active = true;
     (async () => {
       setLoading(true);
-      const { meta: m, conteudo: c } = await carregar();
+      const [m, c] = await Promise.all([
+        supabase
+          .from("bncc_biblioteca")
+          .select("codigo,ano,componente,habilidade")
+          .eq("codigo", codigo)
+          .maybeSingle(),
+        supabase
+          .from("bncc_conteudo")
+          .select("*")
+          .eq("codigo", codigo)
+          .maybeSingle(),
+      ]);
       if (!active) return;
+      setMeta((m.data as any) ?? null);
+      setConteudo((c.data as any) ?? null);
       setLoading(false);
-      // Auto-gera se ausente ou muito raso
-      const raso =
-        !c ||
-        (c.explicacao?.length ?? 0) < 120 ||
-        !Array.isArray(c.exercicios_faceis) ||
-        (c.exercicios_faceis as unknown[]).length < 2;
-      if (m && raso) {
-        await acionarIA("tudo");
-      }
-      // Auto-busca vídeo se ainda não tem
-      if (m && !c?.video_url) {
-        acionarBuscaVideo(false);
-      }
     })();
     return () => {
       active = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codigo]);
 
   if (loading) {
@@ -213,67 +143,13 @@ function BnccCodigoPage() {
         )}
       </header>
 
-      <div className="flex flex-wrap gap-2">
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => acionarIA("explicacao")}
-          disabled={gerando !== null}
-        >
-          {gerando === "explicacao" ? (
-            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-          ) : (
-            <Sparkles className="w-4 h-4 mr-1" />
-          )}
-          IA explica novamente
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => acionarIA("exercicios")}
-          disabled={gerando !== null}
-        >
-          {gerando === "exercicios" ? (
-            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-          ) : (
-            <RefreshCw className="w-4 h-4 mr-1" />
-          )}
-          IA cria novos exercícios
-        </Button>
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={() => acionarIA("tudo")}
-          disabled={gerando !== null}
-        >
-          {gerando === "tudo" ? (
-            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-          ) : (
-            <Sparkles className="w-4 h-4 mr-1" />
-          )}
-          Refazer aula inteira
-        </Button>
-      </div>
-
-      {gerando === "tudo" && semConteudo && (
+      {semConteudo && (
         <Card>
-          <CardContent className="py-12 text-center space-y-3">
-            <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-            <p className="font-medium">Brilha está montando a aula completa pra você…</p>
-            <p className="text-sm text-muted-foreground">
-              Objetivo, explicação, exemplos, exercícios e gabarito chegam em alguns segundos.
-            </p>
-          </CardContent>
-        </Card>
-      )}
-
-      {semConteudo && gerando !== "tudo" && (
-        <Card>
-          <CardContent className="py-8 text-center text-muted-foreground space-y-3">
-            <p>Conteúdo pedagógico ainda não cadastrado para {meta.codigo}.</p>
-            <Button onClick={() => acionarIA("tudo")} disabled={gerando !== null}>
-              <Sparkles className="w-4 h-4 mr-1" /> Gerar aula com IA
-            </Button>
+          <CardContent className="py-8 text-center text-muted-foreground">
+            Conteúdo pedagógico desta habilidade ainda não foi cadastrado.
+            <div className="mt-2 text-sm">
+              Em breve: explicação, exemplos, exercícios, gabarito e vídeo.
+            </div>
           </CardContent>
         </Card>
       )}
@@ -453,64 +329,22 @@ function BnccCodigoPage() {
 
           <TabsContent value="video" className="mt-4">
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between gap-2">
+              <CardHeader>
                 <CardTitle>Vídeo</CardTitle>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => acionarBuscaVideo(true)}
-                  disabled={buscandoVideo}
-                >
-                  {buscandoVideo ? (
-                    <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                  ) : (
-                    <RefreshCw className="w-4 h-4 mr-1" />
-                  )}
-                  Buscar outro vídeo
-                </Button>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent>
                 {embed ? (
-                  <>
-                    <div className="aspect-video w-full">
-                      <iframe
-                        src={embed}
-                        title={videoFonte?.titulo || "Vídeo BNCC"}
-                        className="w-full h-full rounded-md"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                      <Badge variant="secondary" className="gap-1">
-                        <Film className="w-3 h-3" /> Fonte: YouTube
-                      </Badge>
-                      {videoFonte?.titulo && <span>{videoFonte.titulo}</span>}
-                      {videoFonte?.canal && <span>· {videoFonte.canal}</span>}
-                      {conteudo?.video_url && (
-                        <a
-                          href={conteudo.video_url.replace("youtube-nocookie.com", "youtube.com")}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="ml-auto text-primary underline"
-                        >
-                          Abrir no YouTube ↗
-                        </a>
-                      )}
-                    </div>
-                  </>
-                ) : buscandoVideo ? (
-                  <div className="py-8 text-center text-muted-foreground">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
-                    Procurando um vídeo educativo no YouTube…
+                  <div className="aspect-video w-full">
+                    <iframe
+                      src={embed}
+                      title="Vídeo BNCC"
+                      className="w-full h-full rounded-md"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
                 ) : (
-                  <div className="py-6 text-center space-y-3">
-                    <p className="text-muted-foreground">Nenhum vídeo cadastrado.</p>
-                    <Button onClick={() => acionarBuscaVideo(true)} disabled={buscandoVideo}>
-                      <Film className="w-4 h-4 mr-1" /> Buscar vídeo BNCC
-                    </Button>
-                  </div>
+                  <p className="text-muted-foreground">Nenhum vídeo cadastrado.</p>
                 )}
               </CardContent>
             </Card>

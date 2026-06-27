@@ -34,7 +34,12 @@ export interface BnccBibliotecaItem {
 }
 
 export function isRemovedEscolaBrilhaSubject(subject: string | null | undefined): boolean {
-  return false;
+  const normalized = (subject ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  return normalized.includes("educacao fisica") || normalized === "ef";
 }
 
 const etapaAnoRange = (etapa: EtapaEscolar) => {

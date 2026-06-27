@@ -20,7 +20,7 @@ interface Props {
 export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
   const { progresso } = useProgressoAlfa(childId);
   const nivelLeitor = useMemo(() => calcularNivelLeitor(progresso), [progresso]);
-  const disponiveis = HISTORIAS_GRADUADAS;
+  const disponiveis = useMemo(() => historiasParaNivel(nivelLeitor), [nivelLeitor]);
   const [ativa, setAtiva] = useState<HistoriaGraduada | null>(null);
 
   return (
@@ -43,7 +43,7 @@ export function BibliotecaHistorias({ childId, childName, onSair }: Props) {
               Histórias para você {childName ? `, ${childName}` : ""}
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">
-              Seu nível leitor é <strong>{nivelLeitor}</strong> — todas as histórias estão abertas para você ler à vontade.
+              Seu nível leitor é <strong>{nivelLeitor}</strong> — destrave novos livros completando a trilha.
             </p>
           </div>
         </header>

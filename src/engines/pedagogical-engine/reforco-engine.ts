@@ -1,7 +1,6 @@
 import { PedagogyService } from "./service";
 import { PedagogicalActivity } from "./types";
 import { NeuroAdjustment } from "@/engines/adaptive-engine/engine";
-import { gerarAulaReforco } from "@/lib/reforco-aula-ia.functions";
 
 export interface LessonStep {
   type: "explanation" | "example" | "exercise" | "tip" | "premium_tip";
@@ -29,15 +28,6 @@ export class ReforcoEngine {
     console.log("[ReforcoEngine] Generating lesson for:", topic, "with adjustment:", adjustment);
     const lowerTopic = topic.toLowerCase();
 
-    try {
-      const r = await gerarAulaReforco({ data: { topic } });
-      if (r.ok && r.lesson) {
-        return r.lesson as ReforcoLesson;
-      }
-    } catch (e) {
-      console.error("Erro ao gerar aula com IA:", e);
-    }
-
     // Tenta buscar no banco pedagógico primeiro
     try {
       const activities = await PedagogyService.getActivities();
@@ -54,37 +44,34 @@ export class ReforcoEngine {
       console.error("Erro ao buscar no banco pedagógico:", e);
     }
 
-    // Fallback estruturado somente se a IA falhar
+    // Fallback para geração estática
     const lesson: ReforcoLesson = {
       title: topic,
       topic: topic,
       category: "Geral",
       levels: {
         basic: [
-          { type: "explanation", text: `Vou pegar uma parte pequena de ${topic} e ensinar com exemplo. Primeiro, observe o que a pergunta pede; depois separe as informações importantes; por fim resolva uma etapa por vez.` },
-          { type: "example", text: `Exemplo de estudo: se o tema é ${topic}, leia o enunciado, circule a palavra principal, escreva o que já sabe e faça uma tentativa curta antes de ver a resposta.` },
-          { type: "exercise", text: `Explique com suas palavras qual é a primeira coisa que você precisa observar em ${topic}.`, content: { question: `Qual é o primeiro passo?`, answer: "Ler com calma e achar a informação principal.", explanation: "Quando achamos a informação principal, o cérebro não tenta resolver tudo de uma vez." } },
+          { type: "explanation", text: `Vamos começar com os conceitos fundamentais de ${topic}.` },
+          { type: "example", text: "Imagine o seguinte cenário prático: [Conceito Base]" },
         ],
         intermediate: [
           {
             type: "explanation",
-            text: `Agora vamos resolver ${topic} em 3 passos: identificar o pedido, escolher a estratégia e conferir se a resposta combina com a pergunta.`,
+            text: `Agora que você já conhece o básico, vamos aprofundar em ${topic}.`,
           },
-          { type: "example", text: `Exemplo resolvido: pergunta → “o que devo descobrir?”; estratégia → “qual regra ou conta uso?”; conferência → “minha resposta faz sentido?”` },
-          { type: "exercise", text: `Monte uma pergunta sobre ${topic} e responda usando os 3 passos.`, content: { question: "Quais são os 3 passos?", answer: "Pedido, estratégia e conferência.", explanation: "Esses passos evitam chute e ajudam a criança explicar como pensou." } },
+          { type: "example", text: "Aqui o desafio aumenta um pouco, mas você consegue!" },
         ],
         advanced: [
-          { type: "explanation", text: `No desafio, você precisa explicar o raciocínio. Uma resposta boa não é só o resultado: ela mostra o caminho usado para chegar lá.` },
-          { type: "example", text: `Modelo de resposta: “Eu percebi que a pergunta queria ____. Usei ____ porque ____. Então a resposta é ____.”` },
-          { type: "exercise", text: `Complete o modelo de resposta para uma questão de ${topic}.`, content: { question: "Por que explicar o caminho é importante?", answer: "Porque mostra que eu entendi e ajuda a corrigir erros.", explanation: "Quando a criança explica, ela transforma tentativa em aprendizagem." } },
+          { type: "explanation", text: `Nível Mestre Brilha: Desafios complexos de ${topic}.` },
+          { type: "example", text: "Neste nível, usamos todo o conhecimento acumulado." },
         ],
       },
       premiumTips: [
-        "Faça uma resposta curta usando: eu observei, eu usei, eu conferi.",
-        "Se errar, procure em qual passo o erro aconteceu: leitura, estratégia ou conferência.",
-        "Treine uma questão por vez e só avance quando conseguir explicar o porquê.",
+        "Use objetos concretos (como feijões ou tampinhas) para visualizar a quantidade.",
+        "Divida o problema em partes menores para não sobrecarregar a memória de trabalho.",
+        "Relacione o conteúdo com algo que a criança já ama (ex: contar heróis ou bonecas).",
       ],
-      explanation: `Aula emergencial de ${topic}: você vai aprender a ler o pedido, resolver por etapas e explicar o raciocínio.`,
+      explanation: `Hoje vamos explorar ${topic} de uma forma divertida e prática!`,
     };
 
     // Specific logic for Math/Tabuada
@@ -197,6 +184,9 @@ export class ReforcoEngine {
         "Tente ler em voz alta para ouvir a melodia das palavras.",
       );
     }
+
+    // Adiciona selo de autenticidade BNCC/Sistema
+    lesson.title = `[SISTEMA BNCC] ${lesson.title}`;
 
     return lesson;
   }

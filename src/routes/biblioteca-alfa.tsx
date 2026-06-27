@@ -29,7 +29,7 @@ function BibliotecaPage() {
     <BibliotecaHistorias
       childId={activeChild.id}
       childName={activeChild.nome}
-      onSair={() => navigate({ to: "/neuro-treino" })}
+      onSair={() => navigate({ to: "/alfabetizacao" })}
     />
   );
 }

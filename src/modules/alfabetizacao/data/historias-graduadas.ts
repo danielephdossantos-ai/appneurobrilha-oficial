@@ -60,7 +60,6 @@ export const HISTORIAS_GRADUADAS: HistoriaGraduada[] = [
     vocabBase: ["BOLA", "GATO"],
     paginas: [
       { texto: "Olha a bola!", imagem: "BOLA" },
-      { texto: "O gato corre atrás.", imagem: "GATO" },
       { texto: "O gato pega a bola.", imagem: "GATO" },
     ],
     perguntas: [

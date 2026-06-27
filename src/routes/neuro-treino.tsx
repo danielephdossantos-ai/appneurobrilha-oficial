@@ -17,8 +17,9 @@ import {
 import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
-
-
+import { STATIC_LESSONS } from "@/modules/escola-brilha/data/library";
+import { useAulasBnccByEtapa } from "@/modules/escola-brilha/hooks/useAulasBncc";
+import { getFirstYearLessonTitle } from "@/modules/escola-brilha/data/first-year-lesson-overrides";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
@@ -212,7 +213,7 @@ function Treino() {
   useAppState();
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
-  
+  const { aulas: aulasEscolaBrilha } = useAulasBnccByEtapa("fundamental1");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -328,45 +329,80 @@ function Treino() {
         <SensoryPanel />
 
         <div className="space-y-5">
-          {/* ── ALFABETIZAÇÃO — categorias abertas (padrão Neuro-Treino) ── */}
-          <section className="rounded-3xl border border-amber-200 dark:border-amber-800 overflow-hidden shadow-sm">
-            <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 px-4 py-3 flex items-center gap-2 border-b border-amber-200 dark:border-amber-800">
-              <BookOpen className="h-5 w-5 text-amber-600" />
-              <div>
-                <h2 className="font-black text-sm text-amber-600 uppercase tracking-wider">Alfabetização 📖</h2>
-                <div className="text-xs text-muted-foreground">7 categorias · jogos infantis</div>
+          {/* ── CATEGORIAS DA ESCOLA BRILHA (Pré-Escola + 1º Ano) ── */}
+          {(() => {
+            const preEscola = STATIC_LESSONS.infantil.filter((l) => l.serie === "Pré-Escola");
+            const primeiroAno = STATIC_LESSONS.fundamental1.filter((l) => l.serie === "1º Ano");
+            const blocos = [
+              { serie: "Pré-Escola", emoji: "🧸", lessons: preEscola, accent: "from-pink-500 to-rose-500", border: "border-pink-200 dark:border-pink-800", bg: "from-pink-50 to-pink-100/50 dark:from-pink-950/30 dark:to-pink-900/20", color: "text-pink-600", mature: false },
+              { serie: "1º Ano", emoji: "🎒", lessons: primeiroAno, accent: "from-sky-500 to-blue-500", border: "border-sky-200 dark:border-sky-800", bg: "from-sky-50 to-sky-100/50 dark:from-sky-950/30 dark:to-sky-900/20", color: "text-sky-600", mature: false },
+            ];
+
+            return blocos.filter((b) => b.lessons.length > 0).map((b) => (
+              <section key={b.serie} className={`rounded-3xl border ${b.border} overflow-hidden shadow-sm`}>
+                <div className={`bg-gradient-to-r ${b.bg} px-4 py-3 flex items-center gap-2 border-b ${b.border}`}>
+                  <div className="text-xl">{b.mature ? <BookOpen className="h-5 w-5" /> : b.emoji}</div>
+                  <div>
+                    <h2 className={`font-black text-sm ${b.color} uppercase tracking-wider`}>{b.serie}</h2>
+                    <div className="text-xs text-muted-foreground">{b.lessons.length} aulas · Escola Brilha</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
+                  {b.lessons.map((l) => (
+                    <Link
+                      key={l.id}
+                      to="/escola-brilha/aula"
+                      search={{ category: l.id, type: l.type }}
+                      className={`group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col text-left transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95`}
+                    >
+                      <div className={`w-full ${b.mature ? "h-16" : "h-20"} rounded-xl bg-gradient-to-br ${l.gradient} mb-2 flex items-center justify-center ${b.mature ? "text-white" : "text-3xl"}`}>
+                        {b.mature ? (
+                          l.badge.toLowerCase().includes("matem") ? <Zap className="h-7 w-7" /> : <BookOpen className="h-7 w-7" />
+                        ) : (
+                          b.emoji
+                        )}
+                      </div>
+                      <div className={`font-black ${b.mature ? "text-sm" : "text-xs"} leading-tight text-foreground line-clamp-1`}>{l.title}</div>
+                      <div className="text-[10px] text-muted-foreground line-clamp-1">{l.subtitle}</div>
+                      <div className={`mt-1 inline-block text-[9px] font-bold px-1.5 py-0.5 rounded ${l.badgeColor}`}>{l.badge}</div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ));
+          })()}
+
+          {/* ── ESCOLA BRILHA AULAS (banco aulas_bncc — 1º Ano) ── */}
+          {aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length > 0 && (
+            <section className="rounded-3xl border border-amber-200 dark:border-amber-800 overflow-hidden shadow-sm">
+              <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 px-4 py-3 flex items-center gap-2 border-b border-amber-200 dark:border-amber-800">
+                <BookOpen className="h-5 w-5 text-amber-600" />
+                <div>
+                  <h2 className="font-black text-sm text-amber-600 uppercase tracking-wider">Escola Brilha · Aulas</h2>
+                  <div className="text-xs text-muted-foreground">{aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length} aulas · 1º Ano</div>
+                </div>
               </div>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
-              {[
-                { id: "vogais", nome: "Vogais", emoji: "🅰️", gradient: "from-pink-400 to-rose-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "vogais" } },
-                { id: "silabas", nome: "Sílabas Simples", emoji: "🧩", gradient: "from-orange-400 to-amber-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "silabas" } },
-                { id: "palavras", nome: "Palavras", emoji: "🐾", gradient: "from-emerald-400 to-teal-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "palavras" } },
-                { id: "frases", nome: "Frases", emoji: "💬", gradient: "from-sky-400 to-blue-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "frases" } },
-                { id: "textos", nome: "Textos", emoji: "📖", gradient: "from-violet-400 to-purple-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "textos" } },
-                { id: "compreensao", nome: "Compreensão", emoji: "🧠", gradient: "from-fuchsia-400 to-pink-500", to: "/alfabetizacao/etapa/$etapaId" as const, params: { etapaId: "compreensao" } },
-                { id: "biblioteca", nome: "Biblioteca", emoji: "📚", gradient: "from-amber-400 to-orange-500", to: "/biblioteca-alfa" as const, params: undefined },
-              ].map((cat) => (
-                <Link
-                  key={cat.id}
-                  to={cat.to as any}
-                  params={cat.params as any}
-                  className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-2 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
-                >
-                  <div className={`w-28 h-28 sm:w-32 sm:h-32 grid place-items-center rounded-2xl bg-gradient-to-br ${cat.gradient} text-6xl shadow-inner`}>
-                    <span>{cat.emoji}</span>
-                  </div>
-                  <div className="mt-1 font-bold text-[10px] leading-tight text-muted-foreground line-clamp-1">
-                    {cat.nome}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-
-
-
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
+                {aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").map((a) => (
+                  <Link
+                    key={a.id}
+                    to="/escola-brilha/db/$aulaId"
+                    params={{ aulaId: a.id }}
+                    className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col text-left transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                  >
+                    <div className="w-full h-20 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 mb-2 flex items-center justify-center">
+                      <BookOpen className="h-7 w-7 text-white" />
+                    </div>
+                    <div className="font-black text-xs leading-tight text-foreground line-clamp-2">{getFirstYearLessonTitle(a)}</div>
+                    <div className="text-[10px] text-muted-foreground line-clamp-1">{a.disciplina}</div>
+                    {a.codigo_bncc && (
+                      <div className="mt-1 inline-block text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">{a.codigo_bncc}</div>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
 
 

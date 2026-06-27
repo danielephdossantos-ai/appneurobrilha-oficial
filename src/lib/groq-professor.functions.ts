@@ -429,306 +429,6 @@ REGRAS:
   }
 }`;
 
-function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>): AulaDinamica {
-  const desc = data.descricao || `Habilidade ${data.bnccCode}`;
-  const assunto = desc.length > 92 ? `${desc.slice(0, 89)}...` : desc;
-  const comp = (data.componente ?? "").toLowerCase();
-  const code = data.bnccCode.toUpperCase();
-  const isMath = code.includes("MA") || comp.includes("mat");
-  const isPort = code.includes("LP") || comp.includes("port") || comp.includes("língua");
-  const isScience = code.includes("CI") || comp.includes("ciênc") || comp.includes("cienc");
-  const isGeo = code.includes("GE") || comp.includes("geograf");
-  const isHist = code.includes("HI") || comp.includes("hist");
-  const isEnglish = code.includes("LI") || comp.includes("ingl");
-  const isArt = code.includes("AR") || comp.includes("arte");
-  const isPE = /^EF\d{2}EF/.test(code) || comp.includes("fís") || comp.includes("fis");
-  const isReligion = code.includes("ER") || comp.includes("relig");
-
-  if (isMath) {
-    return {
-      titulo: `Aula passo a passo: ${data.bnccCode}`,
-      metafora: "Matemática é como montar um brinquedo: uma peça por vez. Se você segue os passos, a resposta aparece.",
-      telas: {
-        missao: { titulo: "Missão de hoje", texto: `Você vai aprender ${assunto} resolvendo uma situação real, sem decorar e sem chutar.`, termoBusca: "child counting blocks" },
-        exploracao: {
-          titulo: "Observe a história",
-          texto: "Imagine uma caixa com grupos de objetos. Antes da conta, descubra se a história quer juntar, tirar, formar grupos iguais ou repartir.",
-          termoBusca: "toy boxes numbers",
-          interativos: [
-            { label: "Juntar", termoBusca: "two piles apples", explicacao: "Quando ganha ou recebe mais, a quantidade aumenta. Normalmente usamos adição." },
-            { label: "Tirar", termoBusca: "empty basket", explicacao: "Quando perde, gasta ou falta, a quantidade diminui. Normalmente usamos subtração." },
-            { label: "Grupos", termoBusca: "equal groups candy", explicacao: "Quando aparece 'cada' ou grupos iguais, a multiplicação pode ajudar." },
-          ],
-        },
-        explicacao: {
-          titulo: "Como pensar",
-          paragrafos: [
-            "Primeiro leia a pergunta final. Ela diz o que você precisa descobrir.",
-            "Depois marque os números importantes. Nem todo número da história precisa entrar na conta.",
-            "Escolha a operação pela ação da história: ganhou, perdeu, cada grupo ou repartir.",
-            "No final, responda com frase completa e confira se faz sentido.",
-          ],
-          termoBusca: "math notebook pencil",
-        },
-        passoAPasso: {
-          titulo: "Passo a passo real",
-          passos: [
-            "Leia: Ana tem 4 caixas com 6 figurinhas em cada caixa.",
-            "Pergunte: quero saber o total de figurinhas.",
-            "Veja a pista: 'em cada caixa' mostra grupos iguais.",
-            "Monte: 4 grupos de 6 = 4 × 6.",
-            "Calcule: 6 + 6 + 6 + 6 = 24.",
-            "Responda: Ana tem 24 figurinhas ao todo.",
-          ],
-          termoBusca: "multiplication blocks",
-        },
-        exemploAplicado: {
-          titulo: "Exemplo resolvido",
-          enunciado: "Uma criança colocou 5 carrinhos em cada uma de 3 prateleiras. Quantos carrinhos há no total?",
-          resolucao: [
-            "A pergunta quer o total de carrinhos.",
-            "São 3 prateleiras e cada uma tem 5 carrinhos.",
-            "Isso forma 3 grupos iguais de 5.",
-            "5 + 5 + 5 = 15, então 3 × 5 = 15.",
-          ],
-          termoBusca: "toy cars shelves",
-        },
-        desafio: {
-          titulo: "Sua vez",
-          enunciado: "Há 4 pacotes com 7 adesivos em cada. Quantos adesivos há ao todo?",
-          opcoes: ["A) 11 adesivos", "B) 28 adesivos", "C) 3 adesivos"],
-          respostaCorreta: "B",
-          explicacaoResposta: "A palavra 'cada' mostra grupos iguais: 4 grupos de 7. Então 7 + 7 + 7 + 7 = 28.",
-          termoBusca: "sticker packs",
-        },
-        conclusao: { titulo: "Você aprendeu", mensagemFinal: "Hoje você treinou leitura do problema, escolha da operação, cálculo e conferência. Isso é aprender de verdade!", termoBusca: "happy student math" },
-      },
-    };
-  }
-
-  if (isPort) {
-    return {
-      titulo: `Aula de leitura: ${data.bnccCode}`,
-      metafora: "Ler é como ser detetive: você encontra pistas no texto para provar sua resposta.",
-      telas: {
-        missao: { titulo: "Missão de hoje", texto: `Você vai aprender ${assunto} usando frases reais, pistas e explicação curta.`, termoBusca: "child reading book" },
-        exploracao: {
-          titulo: "Caça às pistas",
-          texto: "Leia a frase: “A menina guardou o livro porque começou a chover.” A palavra 'porque' abre a pista do motivo.",
-          termoBusca: "rain book child",
-          interativos: [
-            { label: "Porque", termoBusca: "question mark because", explicacao: "Mostra causa ou motivo. Pergunte: por que aconteceu?" },
-            { label: "Mas", termoBusca: "opposite arrows", explicacao: "Mostra oposição. Uma ideia quebra a expectativa da outra." },
-            { label: "Então", termoBusca: "arrow forward", explicacao: "Mostra consequência. Algo acontece por causa do que veio antes." },
-          ],
-        },
-        explicacao: {
-          titulo: "Como responder leitura",
-          paragrafos: [
-            "Primeiro leia a frase inteira, sem pular palavras pequenas.",
-            "Depois procure uma palavra-pista: porque, mas, então, quando, onde ou quem.",
-            "Responda usando uma informação que apareceu no texto.",
-            "Uma boa resposta diz: 'Eu sei disso porque no texto aparece...'.",
-          ],
-          termoBusca: "reading clues notebook",
-        },
-        passoAPasso: {
-          titulo: "Passo a passo real",
-          passos: [
-            "Leia: 'Pedro correu, mas chegou atrasado'.",
-            "Ache a palavra-pista: 'mas'.",
-            "'Mas' mostra oposição entre correr e chegar atrasado.",
-            "Explique: ele se esforçou correndo, porém mesmo assim atrasou.",
-          ],
-          termoBusca: "child reading sentence",
-        },
-        exemploAplicado: {
-          titulo: "Exemplo resolvido",
-          enunciado: "Na frase “A flor murchou porque ficou sem água”, qual é a causa?",
-          resolucao: [
-            "A pergunta pede a causa, ou seja, o motivo.",
-            "A palavra 'porque' mostra onde está o motivo.",
-            "Depois de 'porque' aparece: ficou sem água.",
-            "Resposta: a flor murchou porque ficou sem água.",
-          ],
-          termoBusca: "dry flower water",
-        },
-        desafio: {
-          titulo: "Sua vez",
-          enunciado: "Em “O céu escureceu, então Marta fechou a janela”, por que Marta fechou a janela?",
-          opcoes: ["A) Porque parecia que ia chover", "B) Porque queria dormir", "C) Porque a janela quebrou"],
-          respostaCorreta: "A",
-          explicacaoResposta: "A pista está em 'O céu escureceu'. Isso indica chuva chegando, então ela fechou a janela.",
-          termoBusca: "dark sky window",
-        },
-        conclusao: { titulo: "Você aprendeu", mensagemFinal: "Hoje você leu, achou pistas e explicou com prova do texto. Esse é o caminho para interpretar melhor.", termoBusca: "happy child reading" },
-      },
-    };
-  }
-
-  if (isScience || isGeo || isHist || isEnglish || isArt || isPE || isReligion) {
-    const subject = isScience ? "Ciências" : isGeo ? "Geografia" : isHist ? "História" : isEnglish ? "Inglês" : isArt ? "Arte" : isPE ? "Educação Física" : "Ensino Religioso";
-    const pack = {
-      Ciências: {
-        metafora: "Ciências é como investigar uma cena: você observa pistas, compara mudanças e explica usando evidências.",
-        termo: "science experiment classroom",
-        explorar: "Observe duas plantas: uma recebeu água e luz; outra ficou sem água. A aula começa perguntando o que mudou e qual evidência mostra a causa.",
-        itens: [
-          { label: "Observar", termoBusca: "magnifying glass leaf", explicacao: "Diga o que você vê ou mede, sem inventar." },
-          { label: "Comparar", termoBusca: "two plants", explicacao: "Veja o que ficou igual e o que mudou." },
-          { label: "Evidência", termoBusca: "science notebook", explicacao: "Use uma pista real para provar sua resposta." },
-        ],
-        passos: ["Descreva o fenômeno.", "Separe causa e consequência.", "Compare com outro caso.", "Explique usando a evidência encontrada."],
-        exemplo: "Uma pedra caiu no copo e a água subiu. O que aconteceu?",
-        resolucao: ["A pedra ocupa espaço dentro do copo.", "Quando ela entra, empurra parte da água.", "A evidência é o nível da água mais alto.", "Conclusão: objetos ocupam espaço."],
-        desafio: "Se o gelo ficou fora do congelador e virou água, qual mudança ocorreu?",
-        opcoes: ["A) Derretimento", "B) Congelamento", "C) Evaporação"],
-        correta: "A" as const,
-        explica: "O gelo era sólido e virou líquido. Essa mudança se chama derretimento.",
-      },
-      Geografia: {
-        metafora: "Geografia é como ler um mapa do mundo real: você localiza, observa a paisagem e entende como as pessoas usam o espaço.",
-        termo: "map landscape classroom",
-        explorar: "Olhe uma paisagem com rio, ponte, casas e rua. A tarefa é separar natureza, construção humana e uso do lugar.",
-        itens: [
-          { label: "Lugar", termoBusca: "city map", explicacao: "Mostra onde algo acontece." },
-          { label: "Paisagem", termoBusca: "river bridge houses", explicacao: "É tudo que conseguimos observar no espaço." },
-          { label: "Uso", termoBusca: "public square", explicacao: "Mostra para que as pessoas usam aquele espaço." },
-        ],
-        passos: ["Localize o lugar.", "Observe elementos naturais.", "Observe elementos construídos.", "Explique como as pessoas transformaram o espaço."],
-        exemplo: "Em uma imagem há rio, ponte e casas. O que é natural e o que foi construído?",
-        resolucao: ["Rio é elemento natural.", "Ponte e casas foram construídas por pessoas.", "A ponte transforma o espaço para atravessar o rio.", "Resposta completa separa natureza e construção."],
-        desafio: "Em um mapa, para que serve a legenda?",
-        opcoes: ["A) Explicar símbolos", "B) Esconder ruas", "C) Apagar lugares"],
-        correta: "A" as const,
-        explica: "A legenda mostra o significado dos símbolos do mapa.",
-      },
-      História: {
-        metafora: "História é como montar uma linha do tempo: você entende o que veio antes, o que aconteceu e o que mudou depois.",
-        termo: "history timeline classroom",
-        explorar: "Imagine uma comunidade que mudou de lugar porque o rio secou. Vamos descobrir causa, pessoas envolvidas e consequência.",
-        itens: [
-          { label: "Tempo", termoBusca: "timeline", explicacao: "Ajuda a saber antes, durante e depois." },
-          { label: "Causa", termoBusca: "dry river", explicacao: "É o motivo que levou o fato a acontecer." },
-          { label: "Mudança", termoBusca: "moving village", explicacao: "É a consequência depois do fato." },
-        ],
-        passos: ["Localize o acontecimento no tempo.", "Identifique quem participou.", "Procure a causa.", "Explique a consequência."],
-        exemplo: "Uma estrada nova ligou duas cidades. Que mudança isso pode causar?",
-        resolucao: ["A estrada facilita deslocamento.", "Pessoas e produtos circulam mais.", "Isso altera trabalho, comércio e rotina.", "A consequência é maior ligação entre as cidades."],
-        desafio: "O que é consequência em História?",
-        opcoes: ["A) O que acontece depois de um fato", "B) Uma cor bonita", "C) Um número sem contexto"],
-        correta: "A" as const,
-        explica: "Consequência é o resultado ou mudança que aparece depois de um acontecimento.",
-      },
-      Inglês: {
-        metafora: "Aprender inglês é como montar uma frase com blocos: pessoa, ação e complemento precisam fazer sentido juntos.",
-        termo: "english flashcards classroom",
-        explorar: "Leia: I like apples. Vamos descobrir quem fala, qual é a ação e qual palavra completa a ideia.",
-        itens: [
-          { label: "I", termoBusca: "person icon", explicacao: "I significa eu." },
-          { label: "Like", termoBusca: "heart icon", explicacao: "Like significa gostar." },
-          { label: "Apples", termoBusca: "red apples", explicacao: "Apples são maçãs." },
-        ],
-        passos: ["Ache o sujeito da frase.", "Encontre a ação.", "Veja o complemento.", "Traduza a ideia completa."],
-        exemplo: "She plays soccer. Quem pratica a ação?",
-        resolucao: ["She significa ela.", "Plays é a ação: joga.", "Soccer é futebol.", "Resposta: ela pratica a ação."],
-        desafio: "Qual frase significa 'Eu gosto de banana'?",
-        opcoes: ["A) I like banana", "B) She is banana", "C) Book banana"],
-        correta: "A" as const,
-        explica: "I like significa eu gosto. Banana completa a frase.",
-      },
-      Arte: {
-        metafora: "Arte é como falar usando cor, linha, forma, som e movimento: cada escolha comunica uma ideia.",
-        termo: "color lines art classroom",
-        explorar: "Observe uma pintura com azul escuro e linhas curvas. A pergunta é: que sensação essas escolhas podem passar?",
-        itens: [
-          { label: "Cor", termoBusca: "color palette", explicacao: "A cor pode sugerir alegria, calma, calor ou mistério." },
-          { label: "Linha", termoBusca: "curved lines", explicacao: "Linhas curvas podem sugerir suavidade ou movimento." },
-          { label: "Forma", termoBusca: "geometric shapes", explicacao: "Formas ajudam a organizar a imagem." },
-        ],
-        passos: ["Observe elementos visuais.", "Descreva sem julgar.", "Ligue elemento a sensação.", "Crie uma resposta com evidência."],
-        exemplo: "Uma obra usa vermelho forte e linhas quebradas. Que ideia pode passar?",
-        resolucao: ["Vermelho forte chama atenção.", "Linhas quebradas podem mostrar agitação.", "A resposta precisa citar os elementos.", "Pode passar energia ou tensão."],
-        desafio: "Qual resposta usa evidência artística?",
-        opcoes: ["A) Parece agitada por causa das linhas quebradas", "B) É bonita porque sim", "C) Não observei nada"],
-        correta: "A" as const,
-        explica: "Ela cita um elemento da obra e explica a sensação causada.",
-      },
-      "Educação Física": {
-        metafora: "Educação Física é aprender com o corpo: regra, movimento, segurança e cooperação trabalham juntos.",
-        termo: "children sports teamwork",
-        explorar: "Antes de jogar, observe alvo, espaço, colegas e regra. Movimento bom começa com segurança.",
-        itens: [
-          { label: "Regra", termoBusca: "game rules", explicacao: "Organiza o jogo e evita conflito." },
-          { label: "Corpo", termoBusca: "child balance", explicacao: "Postura, força e equilíbrio melhoram o movimento." },
-          { label: "Equipe", termoBusca: "teamwork children", explicacao: "Cooperar ajuda todos a participar." },
-        ],
-        passos: ["Entenda a regra.", "Observe o movimento.", "Pratique devagar.", "Cuide da segurança dos colegas."],
-        exemplo: "Ao arremessar uma bola, por que olhar para o alvo ajuda?",
-        resolucao: ["O olhar orienta a direção.", "O braço ajusta força e caminho.", "Com foco no alvo, o erro diminui.", "Arremesse sem atingir colegas."],
-        desafio: "Antes de começar um jogo, o que é essencial?",
-        opcoes: ["A) Combinar regras e segurança", "B) Empurrar para ganhar", "C) Ignorar colegas"],
-        correta: "A" as const,
-        explica: "Regras e segurança protegem todos e deixam a atividade organizada.",
-      },
-      "Ensino Religioso": {
-        metafora: "Convivência é como uma roda de conversa: cada pessoa tem voz, e respeito mantém a roda segura.",
-        termo: "children circle conversation",
-        explorar: "Dois colegas têm costumes diferentes no lanche. A aula pergunta como agir com respeito sem zombar nem impor opinião.",
-        itens: [
-          { label: "Escuta", termoBusca: "listening children", explicacao: "Entender antes de responder." },
-          { label: "Respeito", termoBusca: "kindness hands", explicacao: "Tratar o outro com dignidade mesmo quando há diferença." },
-          { label: "Ação", termoBusca: "helping friend", explicacao: "Valor vira atitude concreta no dia a dia." },
-        ],
-        passos: ["Escute a situação.", "Identifique o valor envolvido.", "Compare sem ofender.", "Escolha uma atitude respeitosa."],
-        exemplo: "Um colega ficou isolado no recreio. Qual atitude mostra solidariedade?",
-        resolucao: ["Perceber o colega sozinho é a observação.", "Solidariedade significa cuidado com o outro.", "Convidar para participar é uma ação concreta.", "Isso respeita a dignidade do colega."],
-        desafio: "Qual atitude mostra empatia?",
-        opcoes: ["A) Tentar entender como o outro se sente", "B) Rir da diferença", "C) Mandar todos pensarem igual"],
-        correta: "A" as const,
-        explica: "Empatia é considerar o sentimento do outro antes de agir.",
-      },
-    }[subject];
-
-    return {
-      titulo: `Aula real de ${subject}: ${data.bnccCode}`,
-      metafora: pack.metafora,
-      telas: {
-        missao: { titulo: "Missão de hoje", texto: `Você vai estudar ${assunto} com explicação, exemplo resolvido e desafio corrigido.`, termoBusca: pack.termo },
-        exploracao: { titulo: "Observe a situação", texto: pack.explorar, termoBusca: pack.termo, interativos: pack.itens },
-        explicacao: { titulo: "Explicação do professor", paragrafos: ["Primeiro observe as pistas da situação. Elas mostram o caminho da resposta.", "Depois separe causa, ação, regra ou evidência, conforme a matéria.", "Por fim responda com uma frase que explique o porquê, não apenas com uma palavra solta."], termoBusca: pack.termo },
-        passoAPasso: { titulo: "Passo a passo", passos: pack.passos, termoBusca: pack.termo },
-        exemploAplicado: { titulo: "Exemplo resolvido", enunciado: pack.exemplo, resolucao: pack.resolucao, termoBusca: pack.termo },
-        desafio: { titulo: "Sua vez", enunciado: pack.desafio, opcoes: pack.opcoes, respostaCorreta: pack.correta, explicacaoResposta: pack.explica, termoBusca: pack.termo },
-        conclusao: { titulo: "Fechamento", mensagemFinal: `Hoje você aprendeu ${subject} com situação concreta, pistas, exemplo resolvido e correção.`, termoBusca: pack.termo },
-      },
-    };
-  }
-
-  return {
-    titulo: `Aula guiada: ${data.bnccCode}`,
-    metafora: "Aprender é como acender uma lanterna: primeiro vemos as pistas, depois entendemos o caminho.",
-    telas: {
-      missao: { titulo: "Missão de hoje", texto: `Você vai estudar ${assunto} com observação, exemplo e desafio.`, termoBusca: "student learning" },
-      exploracao: {
-        titulo: "Observe antes de responder",
-        texto: "Olhe para o tema como um investigador: o que acontece, quem participa, qual é a causa e qual é a consequência?",
-        termoBusca: "magnifying glass learning",
-        interativos: [
-          { label: "O quê", termoBusca: "question what", explicacao: "Descubra qual fato ou ideia está sendo estudada." },
-          { label: "Por quê", termoBusca: "question why", explicacao: "Procure a causa ou explicação do acontecimento." },
-          { label: "Como", termoBusca: "question how", explicacao: "Veja o passo a passo ou o jeito que acontece." },
-        ],
-      },
-      explicacao: { titulo: "Entenda o conceito", paragrafos: ["Comece separando o tema em partes pequenas.", "Depois ligue cada parte a um exemplo concreto.", "Para saber se entendeu, tente explicar com suas palavras."], termoBusca: "concept map" },
-      passoAPasso: { titulo: "Passo a passo", passos: ["Leia o tema.", "Marque palavras importantes.", "Veja um exemplo.", "Explique o que aconteceu.", "Responda e confira."], termoBusca: "steps learning" },
-      exemploAplicado: { titulo: "Exemplo aplicado", enunciado: `Exemplo sobre ${assunto}: observe uma situação da escola e diga qual pista ajuda a entender o tema.`, resolucao: ["Primeiro identifico a situação.", "Depois encontro a pista principal.", "Por fim explico a relação entre a pista e a resposta."], termoBusca: "classroom example" },
-      desafio: { titulo: "Desafio", enunciado: "Qual atitude mostra que você entendeu um conteúdo novo?", opcoes: ["A) Copiar sem ler", "B) Explicar com suas palavras e dar exemplo", "C) Chutar rápido"], respostaCorreta: "B", explicacaoResposta: "Quem explica com palavras próprias e dá exemplo mostra compreensão real.", termoBusca: "student explaining" },
-      conclusao: { titulo: "Fechamento", mensagemFinal: "Você praticou observar, entender, exemplificar e responder. Amanhã o Professor Brilho continua com você.", termoBusca: "learning success" },
-    },
-  };
-}
-
 function parseAulaDinamica(raw: string): AulaDinamica {
   const parsed = extractJson(raw);
   const r = AulaDinamicaSchema.safeParse(parsed);
@@ -746,18 +446,15 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
-    const hasSupabaseAdmin = !!process.env.SUPABASE_URL && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
-    const supabaseAdmin = hasSupabaseAdmin
-      ? createClient(
-          process.env.SUPABASE_URL!,
-          process.env.SUPABASE_SERVICE_ROLE_KEY!,
-          { auth: { persistSession: false, autoRefreshToken: false } },
-        )
-      : null;
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
 
 
     // 1) Cache lookup
-    if (!data.force && supabaseAdmin) {
+    if (!data.force) {
       const { data: cached } = await supabaseAdmin
         .from("aulas_geradas_ia")
         .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
@@ -776,10 +473,10 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return {
-        ok: true as const,
+        ok: false as const,
         cached: false,
-        error: "GROQ_API_KEY ausente; usando aula estruturada local",
-        aula: buildFallbackAulaDinamica(data),
+        error: "GROQ_API_KEY ausente",
+        aula: null,
       };
     }
 
@@ -816,10 +513,10 @@ Gere a aula JSON completa.`;
         const errText = await res.text();
         console.error("[groq:dinamica] HTTP", res.status, errText.slice(0, 400));
         return {
-          ok: true as const,
+          ok: false as const,
           cached: false,
-          error: `Groq ${res.status}; usando aula estruturada local`,
-          aula: buildFallbackAulaDinamica(data),
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          aula: null,
         };
       }
 
@@ -829,43 +526,41 @@ Gere a aula JSON completa.`;
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
       if (!raw) {
         return {
-          ok: true as const,
+          ok: false as const,
           cached: false,
-          error: "Resposta vazia; usando aula estruturada local",
-          aula: buildFallbackAulaDinamica(data),
+          error: "Resposta vazia",
+          aula: null,
         };
       }
 
       const aula = parseAulaDinamica(raw);
 
       // 2) Save cache (upsert by codigo_bncc)
-      if (supabaseAdmin) {
-        const { error: upErr } = await supabaseAdmin
-          .from("aulas_geradas_ia")
-          .upsert(
-            {
-              codigo_bncc: data.bnccCode,
-              titulo: aula.titulo,
-              screens: aula as unknown as Record<string, unknown>,
-              modelo: "llama-3.1-8b-instant",
-              disciplina: data.componente ?? null,
-              ano: data.serie ?? null,
-              aprovada: false,
-              gerada_em: new Date().toISOString(),
-            },
-            { onConflict: "codigo_bncc" },
-          );
-        if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
-      }
+      const { error: upErr } = await supabaseAdmin
+        .from("aulas_geradas_ia")
+        .upsert(
+          {
+            codigo_bncc: data.bnccCode,
+            titulo: aula.titulo,
+            screens: aula as unknown as Record<string, unknown>,
+            modelo: "llama-3.1-8b-instant",
+            disciplina: data.componente ?? null,
+            ano: data.serie ?? null,
+            aprovada: false,
+            gerada_em: new Date().toISOString(),
+          },
+          { onConflict: "codigo_bncc" },
+        );
+      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
 
       return { ok: true as const, cached: false, aula, error: null };
     } catch (e) {
       console.error("[groq:dinamica]", e);
       return {
-        ok: true as const,
+        ok: false as const,
         cached: false,
-        error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local",
-        aula: buildFallbackAulaDinamica(data),
+        error: e instanceof Error ? e.message : "Falha ao gerar aula",
+        aula: null,
       };
     }
   });

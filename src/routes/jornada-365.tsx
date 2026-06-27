@@ -83,23 +83,6 @@ const WORLD_THEME: Record<WorldKey, { image: string; accent: string }> = {
   default:     { image: worldDefault,   accent: "ring-white/70" },
 };
 
-function getFallbackDailyBnccCode(serie?: string | null, day = 1) {
-  const ano = Number((serie ?? "").match(/\d+/)?.[0] ?? 1) || 1;
-  const byAno: Record<number, string[]> = {
-    1: ["EF01LP01", "EF01MA01", "EF01LP02", "EF01MA02"],
-    2: ["EF02LP01", "EF02MA01", "EF02LP03", "EF02MA05"],
-    3: ["EF03LP01", "EF03MA01", "EF03CI04", "EF03GE01", "EF03HI01"],
-    4: ["EF04LP01", "EF04MA01", "EF04CI01", "EF04GE01", "EF04HI01"],
-    5: ["EF05LP01", "EF05MA01", "EF05CI01", "EF05GE01", "EF05HI01"],
-    6: ["EF06LP01", "EF06MA01", "EF06CI01", "EF06GE01", "EF06HI01"],
-    7: ["EF07LP01", "EF07MA01", "EF07CI01", "EF07GE01", "EF07HI01"],
-    8: ["EF08LP01", "EF08MA01", "EF08CI01", "EF08GE01", "EF08HI01"],
-    9: ["EF09LP01", "EF09MA01", "EF09CI01", "EF09GE01", "EF09HI01"],
-  };
-  const list = byAno[Math.min(9, Math.max(1, ano))] ?? byAno[1];
-  return list[(Math.max(1, day) - 1) % list.length];
-}
-
 function WorldBackground({ world }: { world: WorldKey }) {
   const theme = WORLD_THEME[world];
   return (
@@ -240,19 +223,15 @@ function Jornada() {
 
 
   const abrirAulaHoje = async () => {
-    const blocos = (aulaHoje?.atividades as Array<{ slug?: string; payload?: { aula_id?: string } }> | null) ?? [];
+    const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
     const aulaId = blocos.find((b) => b?.payload?.aula_id)?.payload?.aula_id;
-    const bnccCode = blocos.find((b) => b?.slug)?.slug;
     if (aulaHoje && aulaHoje.status === "disponivel") {
       await supabase.from("pei_aulas").update({ status: "em_andamento" }).eq("id", aulaHoje.id);
     }
     if (aulaId) {
       navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
-    } else if (bnccCode) {
-      navigate({ to: "/aula-ia/$bnccCode", params: { bnccCode } });
     } else {
-      const fallbackCode = getFallbackDailyBnccCode(activeChild?.serie, currentDay);
-      navigate({ to: "/aula-ia/$bnccCode", params: { bnccCode: fallbackCode } });
+      navigate({ to: "/escola-brilha" });
     }
   };
 

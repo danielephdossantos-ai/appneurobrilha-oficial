@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/database/supabase/client";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
-import { gerarPaginasAula } from "@/lib/aula-paginas-ia.functions";
-import { toast } from "sonner";
 import {
   X,
   ChevronLeft,
@@ -17,8 +14,6 @@ import {
   CheckCircle2,
   ArrowRight,
   Volume2,
-  Sparkles,
-  Loader2,
 } from "lucide-react";
 
 export interface AulaViewerProps {
@@ -41,13 +36,11 @@ const TIPO_META: Record<string, { label: string; icon: any; cor: string }> = {
   explicacao: { label: "Explicação", icon: Lightbulb, cor: "from-amber-400 to-orange-500" },
   demonstracao: { label: "Demonstração", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   pratica_guiada: { label: "Prática guiada", icon: Hand, cor: "from-sky-400 to-blue-500" },
-  dicas_familia: { label: "Vamos fazer juntos", icon: Users, cor: "from-indigo-400 to-purple-500" },
+  dicas_familia: { label: "Dicas para a família", icon: Users, cor: "from-indigo-400 to-purple-500" },
   avaliacao: { label: "Avaliação rápida", icon: CheckCircle2, cor: "from-violet-400 to-fuchsia-500" },
   proximos_passos: { label: "Próximos passos", icon: ArrowRight, cor: "from-rose-400 to-pink-500" },
   exemplo: { label: "Exemplo", icon: Lightbulb, cor: "from-amber-400 to-orange-500" },
   exercicio: { label: "Exercício", icon: Hand, cor: "from-sky-400 to-blue-500" },
-  desafio: { label: "Desafio", icon: CheckCircle2, cor: "from-violet-400 to-fuchsia-500" },
-  revisao: { label: "Revisão", icon: ArrowRight, cor: "from-rose-400 to-pink-500" },
   dica: { label: "Dica", icon: Lightbulb, cor: "from-amber-400 to-yellow-500" },
   video: { label: "Vídeo", icon: Eye, cor: "from-emerald-400 to-teal-500" },
   imagem: { label: "Imagem", icon: Eye, cor: "from-emerald-400 to-teal-500" },
@@ -72,54 +65,12 @@ function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
     c.exemplos.forEach((ex: any) => partes.push(`${ex.silaba} forma ${ex.palavra}.`));
   if (Array.isArray(c.perguntas))
     c.perguntas.forEach((p: any, i: number) =>
-      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}. ${p.explicacao ? `Explicação: ${p.explicacao}.` : ""}`),
+      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}.`),
     );
   return partes.join(". ");
 }
 
 
-
-// Reescreve frases de "dicas para a família" como fala da Brilha dirigida à criança.
-function paraCrianca(s: string): string {
-  let t = " " + s.trim() + " ";
-  // imperativos pros pais → "vamos ..."
-  t = t.replace(/\b(Cante|Cantem)\b/gi, "Vamos cantar");
-  t = t.replace(/\b(Leia|Leiam)\b/gi, "Vamos ler");
-  t = t.replace(/\b(Use|Usem|Utilize|Utilizem)\b/gi, "Vamos usar");
-  t = t.replace(/\b(Pratique|Pratiquem|Treine|Treinem)\b/gi, "Vamos treinar");
-  t = t.replace(/\b(Mostre|Mostrem|Apresente|Apresentem)\b/gi, "Vou te mostrar");
-  t = t.replace(/\b(Escreva|Escrevam)\b/gi, "Vamos escrever");
-  t = t.replace(/\b(Conte|Contem|Narre|Narrem)\b/gi, "Vamos contar");
-  t = t.replace(/\b(Pergunte|Perguntem)\b/gi, "Vou te perguntar");
-  t = t.replace(/\b(Estimule|Estimulem|Incentive|Incentivem)\b/gi, "Vamos brincar");
-  t = t.replace(/\b(Brinque|Brinquem|Jogue|Joguem)\b/gi, "Vamos brincar");
-  t = t.replace(/\b(Comemore|Comemorem|Celebre|Celebrem)\b/gi, "Vamos comemorar");
-  t = t.replace(/\b(Repita|Repitam)\b/gi, "Vamos repetir");
-  t = t.replace(/\b(Ajude|Ajudem|Auxilie|Auxiliem)\b/gi, "Vou te ajudar");
-  t = t.replace(/\b(Ensine|Ensinem)\b/gi, "Vou te ensinar");
-  t = t.replace(/\b(Faça|Façam)\b/gi, "Vamos fazer");
-  // referências à criança/aluno → "você"
-  t = t.replace(/\b(a|à)\s+criança\b/gi, "você");
-  t = t.replace(/\bda\s+criança\b/gi, "seu");
-  t = t.replace(/\bpara\s+a\s+criança\b/gi, "para você");
-  t = t.replace(/\bcom\s+a\s+criança\b/gi, "com você");
-  t = t.replace(/\bo\s+aluno\b/gi, "você");
-  t = t.replace(/\bdo\s+aluno\b/gi, "seu");
-  // suaviza tom de orientação
-  t = t.replace(/\bnunca corrija no tom bravo\b/gi, "se errar, a gente tenta de novo");
-  t = t.replace(/\bnão corrija\b/gi, "vamos tentar de novo juntos");
-  return t.trim().replace(/\s+/g, " ");
-}
-
-function transformarParaCrianca(p: Pagina): Pagina {
-  if (p.tipo !== "dicas_familia") return p;
-  const c = { ...(p.conteudo || {}) };
-  if (typeof c.texto === "string") c.texto = paraCrianca(c.texto);
-  if (typeof c.destaque === "string") c.destaque = paraCrianca(c.destaque);
-  if (Array.isArray(c.bullets)) c.bullets = c.bullets.map((b: string) => paraCrianca(String(b)));
-  if (Array.isArray(c.passos)) c.passos = c.passos.map((b: string) => paraCrianca(String(b)));
-  return { ...p, conteudo: c };
-}
 
 function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   const c = pagina.conteudo || {};
@@ -144,13 +95,7 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
 
       {c.texto && (
         <p className="text-lg leading-relaxed text-foreground font-medium whitespace-pre-line">
-          {String(c.texto)
-            // "1O resultado" -> "1. O resultado" (item de lista numerada sem ponto)
-            .replace(/(^|\n)\s*(\d{1,2})([A-ZÀ-ÚÇ])/g, "$1$2. $3")
-            // "1) texto" -> "1. texto"
-            .replace(/(^|\n)\s*(\d{1,2})\)\s*/g, "$1$2. ")
-            // garante quebra de linha antes de itens numerados colados no parágrafo
-            .replace(/([.!?])\s+(\d{1,2}\.\s)/g, "$1\n\n$2")}
+          {c.texto}
         </p>
       )}
 
@@ -223,30 +168,9 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
                   ver resposta
                 </span>
               </summary>
-              {Array.isArray(p.opcoes) && p.opcoes.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
-                  {p.opcoes.map((op: string) => (
-                    <div
-                      key={op}
-                      className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
-                        String(op).trim().toLowerCase() === String(p.resposta).trim().toLowerCase()
-                          ? "border-success bg-success/10 text-success"
-                          : "border-border bg-muted/40 text-muted-foreground"
-                      }`}
-                    >
-                      {op}
-                    </div>
-                  ))}
-                </div>
-              )}
               <div className="mt-3 p-3 bg-success/10 rounded-xl text-success font-bold">
                 ✓ {p.resposta}
               </div>
-              {p.explicacao && (
-                <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-900 font-medium">
-                  💡 {p.explicacao}
-                </div>
-              )}
             </details>
           ))}
         </div>
@@ -278,65 +202,28 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
   const [paginas, setPaginas] = useState<Pagina[]>([]);
   const [idx, setIdx] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [gerando, setGerando] = useState(false);
-  const gerarPaginas = useServerFn(gerarPaginasAula);
-
-  const carregar = async () => {
-    const { data } = await supabase
-      .from("rb_paginas_aula")
-      .select("id,ordem,tipo,titulo,conteudo")
-      .eq("aula_id", aulaId)
-      .order("ordem", { ascending: true });
-    const list = (data || []) as Pagina[];
-    setPaginas(list);
-    return list;
-  };
-
-  const regenerar = async (force = false) => {
-    setGerando(true);
-    try {
-      const r = await gerarPaginas({ data: { aulaId, force } });
-      if (!r.ok) {
-        toast.error(r.error || "Não consegui gerar a aula agora.");
-        return;
-      }
-      if (r.regenerated) {
-        toast.success("Aula completa pronta! 💛");
-        await carregar();
-        setIdx(0);
-      }
-    } finally {
-      setGerando(false);
-    }
-  };
 
   useEffect(() => {
     let alive = true;
     (async () => {
       setLoading(true);
-      const list = await carregar();
+      const { data } = await supabase
+        .from("rb_paginas_aula")
+        .select("id,ordem,tipo,titulo,conteudo")
+        .eq("aula_id", aulaId)
+        .order("ordem", { ascending: true });
       if (!alive) return;
+      setPaginas((data || []) as Pagina[]);
       setIdx(0);
       setLoading(false);
-      // Heurística: páginas seed/genéricas têm pouco conteúdo. Regenera 1x.
-      const totalChars = list.reduce(
-        (acc, p) => acc + JSON.stringify(p.conteudo ?? {}).length,
-        0,
-      );
-      if (list.length > 0 && totalChars < 900) {
-        await regenerar(true);
-      } else if (list.length === 0) {
-        await regenerar(true);
-      }
     })();
     return () => {
       alive = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aulaId]);
 
   const total = paginas.length;
-  const atual = paginas[idx] ? transformarParaCrianca(paginas[idx]) : paginas[idx];
+  const atual = paginas[idx];
   const meta = useMemo(
     () => (atual ? TIPO_META[atual.tipo] || TIPO_META.explicacao : null),
     [atual],
@@ -378,25 +265,13 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
                 <h2 className="text-lg sm:text-2xl font-black truncate leading-tight">{titulo}</h2>
               </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                onClick={() => regenerar(true)}
-                disabled={gerando}
-                className="hidden sm:inline-flex h-10 px-3 rounded-full bg-white/20 hover:bg-white/30 items-center gap-1.5 text-xs font-black disabled:opacity-50"
-                aria-label="Refazer aula com a Brilha"
-                title="Refazer aula com a Brilha"
-              >
-                {gerando ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                Refazer com a Brilha
-              </button>
-              <button
-                onClick={onClose}
-                className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center"
-                aria-label="Fechar aula"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            <button
+              onClick={onClose}
+              className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 grid place-items-center shrink-0"
+              aria-label="Fechar aula"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
 
           {/* Indicador grande de progresso */}
@@ -433,22 +308,13 @@ export function AulaViewer({ aulaId, titulo, onClose }: AulaViewerProps) {
 
         {/* Página estilo papel de apostila */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50/40 to-white px-5 sm:px-12 py-8 border-x-4 border-amber-100 shadow-2xl">
-          {loading || gerando ? (
-            <div className="h-64 grid place-items-center text-center gap-3">
-              <Loader2 className="h-8 w-8 text-amber-500 animate-spin mx-auto" />
-              <p className="text-sm text-muted-foreground font-semibold">
-                {gerando ? "Brilha está montando a aula completa pra você…" : "Carregando aula…"}
-              </p>
+          {loading ? (
+            <div className="h-64 grid place-items-center text-muted-foreground">
+              Carregando aula…
             </div>
           ) : !atual ? (
-            <div className="h-64 grid place-items-center text-center gap-3">
-              <p className="text-muted-foreground">Esta aula ainda não tem páginas.</p>
-              <button
-                onClick={() => regenerar(true)}
-                className="px-4 py-2 rounded-xl bg-amber-500 text-white text-sm font-bold inline-flex items-center gap-2"
-              >
-                <Sparkles className="h-4 w-4" /> Gerar com a Brilha
-              </button>
+            <div className="h-64 grid place-items-center text-muted-foreground text-center">
+              Esta aula ainda não tem páginas cadastradas.
             </div>
           ) : (
             <div key={atual.id} className="animate-in fade-in slide-in-from-right-4 duration-300">
