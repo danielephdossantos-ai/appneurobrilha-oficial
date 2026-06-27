@@ -213,7 +213,7 @@ export function BibliotecaInternet({ query, onAbrirRecurso }: Props) {
             </button>
             <div className="aspect-video w-full">
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin : "")}`}
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
                 title={videoTitle}
                 className="w-full h-full"
                 referrerPolicy="strict-origin-when-cross-origin"
