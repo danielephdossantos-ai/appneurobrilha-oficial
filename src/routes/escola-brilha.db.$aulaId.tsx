@@ -110,6 +110,15 @@ function AulaDbPage() {
       }
     }
 
+    // 6º–9º Ano: aulas no padrão Fundamental II com imagens reais.
+    if (FUND2_GRADES.has(aula.serie)) {
+      const f2 = generateActivityLesson6a9(aula.codigo_bncc, aula.titulo);
+      if (f2) {
+        return <ActivityPlayer lesson={f2} currentRef={ref} />;
+      }
+    }
+
+
 
 
 
