@@ -344,6 +344,14 @@ function MissaoProva() {
 
       <div className="space-y-8 animate-in fade-in duration-500">
         {activeChild && (
+          <CalendarioProvas
+            childId={activeChild.id}
+            filtroTipo="prova"
+            titulo="Calendário de Provas — toque numa data para agendar"
+          />
+        )}
+
+        {activeChild && (
           <MissaoProvaManager childId={activeChild.id} />
         )}
 
