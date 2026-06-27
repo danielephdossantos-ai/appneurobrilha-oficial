@@ -31,20 +31,21 @@ function AulaIaPage() {
       // Busca descrição da habilidade no banco BNCC
       const { data: hab } = await supabase
         .from("bncc_biblioteca")
-        .select("codigo, descricao, ano, componente, idade_sugerida")
+        .select("codigo, habilidade, ano, componente")
         .eq("codigo", bnccCode)
         .maybeSingle();
 
       const res = await gerar({
         data: {
           bnccCode,
-          descricao: hab?.descricao ?? `Habilidade ${bnccCode} da BNCC`,
-          idade: (hab?.idade_sugerida as number | undefined) ?? 9,
+          descricao: hab?.habilidade ?? `Habilidade ${bnccCode} da BNCC`,
+          idade: 9,
           serie: hab?.ano ?? undefined,
           componente: hab?.componente ?? undefined,
           force,
         },
       });
+
 
       if (!res.ok || !res.aula) {
         setErr(res.error ?? "Falha ao gerar aula");
