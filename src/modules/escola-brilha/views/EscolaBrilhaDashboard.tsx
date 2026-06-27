@@ -20,6 +20,7 @@ import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
 import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { getFirstYearLessonTitle } from "../data/first-year-lesson-overrides";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
 type StaticLesson = {
@@ -438,8 +439,8 @@ const SubjectFolders: React.FC<{
                       <LessonCard
                         key={`d-${a.id}`}
                         index={statics.length + j}
-                        title={a.titulo}
-                        subtitle={a.descricao ?? a.disciplina}
+                        title={getFirstYearLessonTitle(a)}
+                        subtitle={a.disciplina}
                         badge={a.disciplina}
                         badgeColor="bg-emerald-100 text-emerald-700"
                         gradient="from-emerald-500 to-teal-600"
