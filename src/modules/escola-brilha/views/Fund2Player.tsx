@@ -53,7 +53,7 @@ const STEPS: { id: StepId; label: string; Icon: typeof Target }[] = [
   { id: "atividade",  label: "ATIVIDADE",         Icon: ClipboardList },
   { id: "desafio",    label: "DESAFIO",           Icon: Sparkles },
   { id: "resumo",     label: "RESUMO",            Icon: ListChecks },
-  { id: "dominio",    label: "DOMÍNIO BNCC",      Icon: Award },
+  { id: "dominio",    label: "SEU DOMÍNIO",       Icon: Award },
 ];
 
 /* ─────────── Top bar ─────────── */
