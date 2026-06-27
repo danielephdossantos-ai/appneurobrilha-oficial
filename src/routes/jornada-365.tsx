@@ -276,10 +276,12 @@ function DayTrail({
   currentDay,
   theme,
   onSpeakDay,
+  onOpenToday,
 }: {
   currentDay: number;
   theme: (typeof WORLD_THEME)[WorldKey];
   onSpeakDay?: (day: number) => void;
+  onOpenToday?: () => void;
 }) {
   const OFFSETS = [0, 1, 2, 1, 0, -1, -2, -1];
   const totalDays = 365;
@@ -315,9 +317,12 @@ function DayTrail({
                 disabled={isLocked}
                 onClick={() => {
                   if (isLocked) return;
-                  if (isCurrent) onSpeakDay?.(day);
+                  if (isCurrent) {
+                    onSpeakDay?.(day);
+                    onOpenToday?.();
+                    return;
+                  }
                   if (isDone) return;
-                  window.scrollTo({ top: 0, behavior: "auto" });
                 }}
                 className={cn(
                   "group relative block focus:outline-none",
