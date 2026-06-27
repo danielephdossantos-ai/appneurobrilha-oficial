@@ -375,10 +375,12 @@ const SubjectFolders: React.FC<{
   const HIDDEN_EARLY = new Set(["Arte", "Educação Física", "História", "Geografia", "Ensino Religioso"]);
   const HIDDEN_1ANO = new Set(["Ciências"]);
   const HIDDEN_ALL = new Set(["Educação Física"]);
+  const HIDDEN_3A5 = new Set(["Arte"]);
   const subjects = Object.keys(grouped)
     .filter((s) => !HIDDEN_ALL.has(s))
     .filter((s) => !(anoNum > 0 && anoNum <= 2 && HIDDEN_EARLY.has(s)))
     .filter((s) => !(anoNum === 1 && HIDDEN_1ANO.has(s)))
+    .filter((s) => !(anoNum >= 3 && anoNum <= 5 && HIDDEN_3A5.has(s)))
     .sort();
 
 
