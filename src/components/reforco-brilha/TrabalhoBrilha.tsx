@@ -554,6 +554,7 @@ function EditorTrabalho({
             className="text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow"
           >
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
+          </button>
           <button
             onClick={rodarAnalise}
             disabled={analisando}
