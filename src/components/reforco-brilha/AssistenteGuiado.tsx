@@ -293,18 +293,16 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
       )}
 
 
-      {/* STEP 0 — intro */}
-      {step === 0 && (
-        <div className="space-y-4">
+      {/* STEP 0 — aguarda anamnese */}
+      {step === 0 && (!anamnese || anamnese.sugestoes.length === 0) && (
+        <div className="space-y-3">
           <p className="text-sm text-muted-foreground">
-            Responda 4 perguntas rápidas e o sistema vai sugerir habilidades, aulas e atividades certas para a criança — sem usar IA, só o nosso banco de conhecimento pedagógico.
+            O Assistente Guiado usa o resultado da <strong>anamnese</strong> da criança para sugerir
+            habilidades, aulas e atividades certas.
           </p>
-          <button
-            onClick={() => setStep(1)}
-            className="w-full py-3 rounded-xl bg-violet-500 text-white font-bold flex items-center justify-center gap-2 hover:bg-violet-600 transition-colors"
-          >
-            <Sparkles className="h-4 w-4" /> Começar
-          </button>
+          <p className="text-xs text-muted-foreground">
+            Conclua a anamnese na Área dos Pais para liberar as recomendações personalizadas aqui.
+          </p>
         </div>
       )}
 
