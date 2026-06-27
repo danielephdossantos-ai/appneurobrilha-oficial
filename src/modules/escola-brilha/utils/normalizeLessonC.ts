@@ -1,6 +1,7 @@
 import type { ActivityLessonC, BNCCArea } from "../types/activity-lesson-c";
 import type { AulaBncc } from "../hooks/useAulasBncc";
 import { isGenericDesafio, synthesizeDesafio } from "./desafioBank";
+import { getFirstYearLessonOverride } from "../data/first-year-lesson-overrides";
 
 const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }> = {
   "Língua Portuguesa": { area: "linguagens", area_label: "Linguagens" },
@@ -13,11 +14,11 @@ const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }>
 };
 
 const COLOR_BY_AREA: Record<BNCCArea, ActivityLessonC["color"]> = {
-  linguagens: { from: "from-rose-500", to: "to-pink-600", accent: "text-rose-600" },
-  matematica: { from: "from-blue-500", to: "to-cyan-600", accent: "text-blue-600" },
-  ciencias_natureza: { from: "from-emerald-500", to: "to-teal-600", accent: "text-emerald-600" },
-  ciencias_humanas: { from: "from-amber-600", to: "to-orange-600", accent: "text-amber-700" },
-  ensino_religioso: { from: "from-violet-500", to: "to-purple-600", accent: "text-violet-600" },
+  linguagens: { from: "from-rose-500", to: "to-pink-600", accent: "pink" },
+  matematica: { from: "from-blue-500", to: "to-cyan-600", accent: "blue" },
+  ciencias_natureza: { from: "from-emerald-500", to: "to-teal-600", accent: "green" },
+  ciencias_humanas: { from: "from-amber-600", to: "to-orange-600", accent: "amber" },
+  ensino_religioso: { from: "from-violet-500", to: "to-purple-600", accent: "violet" },
 };
 
 /**
@@ -25,6 +26,22 @@ const COLOR_BY_AREA: Record<BNCCArea, ActivityLessonC["color"]> = {
  * nunca quebre caso o JSON salvo esteja incompleto.
  */
 export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
+  const isFirstYear = (aula.serie || "").includes("1º") || (aula.serie || "").includes("1°");
+  const firstYearOverride = getFirstYearLessonOverride({
+    codigo_bncc: aula.codigo_bncc,
+    serie: aula.serie,
+    disciplina: aula.disciplina,
+  });
+
+  if (firstYearOverride) {
+    return {
+      ...firstYearOverride,
+      id: firstYearOverride.id || aula.id,
+      xp: aula.xp ?? firstYearOverride.xp,
+      bncc_code: aula.codigo_bncc || firstYearOverride.bncc_code,
+    };
+  }
+
   const raw = (aula.payload ?? {}) as Partial<ActivityLessonC> & {
     screens?: any;
   };
@@ -39,12 +56,30 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
   const screens = raw.screens ?? {};
   const missao = screens.missao ?? {};
   const desafio = screens.desafio ?? {};
+  const rawMissionQuestion = raw.mission_question || missao.intro || "";
+  const missionQuestion =
+    isFirstYear && /bncc|habilidade/i.test(rawMissionQuestion)
+      ? `Vamos aprender: ${title}`
+      : rawMissionQuestion || `Vamos aprender sobre ${title}!`;
+  const missionIntro =
+    isFirstYear && /bncc|habilidade/i.test(missao.intro || "")
+      ? "Aula guiada do 1º ano"
+      : missao.intro || `Missão: ${title}`;
+  const missionObjectives =
+    isFirstYear
+      ? [
+          "Ouvir a explicação com calma",
+          "Observar o exemplo com ajuda visual",
+          "Responder uma pergunta da aula",
+        ]
+      : missao.objectives && missao.objectives.length
+        ? missao.objectives
+        : [`Entender ${title}`, "Aplicar em situações reais", "Resolver o desafio final"];
 
   return {
     id: raw.id || aula.id,
     title,
-    mission_question:
-      raw.mission_question || missao.intro || `Vamos aprender sobre ${title}!`,
+    mission_question: missionQuestion,
     subject: raw.subject || aula.disciplina,
     area: raw.area || meta.area,
     area_label: raw.area_label || meta.area_label,
@@ -56,11 +91,8 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
     color,
     screens: {
       missao: {
-        intro: missao.intro || `Missão: ${title}`,
-        objectives:
-          missao.objectives && missao.objectives.length
-            ? missao.objectives
-            : [`Entender ${title}`, "Aplicar em situações reais", "Resolver o desafio final"],
+        intro: missionIntro,
+        objectives: missionObjectives,
         context_emoji: missao.context_emoji || "✨",
         context_text: missao.context_text || desc || `Vamos descobrir sobre ${title}.`,
       },

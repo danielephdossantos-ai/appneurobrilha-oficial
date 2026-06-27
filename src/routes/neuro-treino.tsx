@@ -19,6 +19,7 @@ import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
 import { STATIC_LESSONS } from "@/modules/escola-brilha/data/library";
 import { useAulasBnccByEtapa } from "@/modules/escola-brilha/hooks/useAulasBncc";
+import { getFirstYearLessonTitle } from "@/modules/escola-brilha/data/first-year-lesson-overrides";
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
@@ -392,7 +393,7 @@ function Treino() {
                     <div className="w-full h-20 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 mb-2 flex items-center justify-center">
                       <BookOpen className="h-7 w-7 text-white" />
                     </div>
-                    <div className="font-black text-xs leading-tight text-foreground line-clamp-2">{a.titulo}</div>
+                    <div className="font-black text-xs leading-tight text-foreground line-clamp-2">{getFirstYearLessonTitle(a)}</div>
                     <div className="text-[10px] text-muted-foreground line-clamp-1">{a.disciplina}</div>
                     {a.codigo_bncc && (
                       <div className="mt-1 inline-block text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">{a.codigo_bncc}</div>

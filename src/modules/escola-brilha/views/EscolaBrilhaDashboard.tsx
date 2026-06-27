@@ -19,7 +19,8 @@ import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
 import pipImg from "@/assets/pip-mascot.png";
 import pipaImg from "@/assets/pip-girl-mascot.png";
-import { useAulasBnccByEtapa, useBnccBibliotecaByEtapa, type BnccBibliotecaItem, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { useAulasBnccByEtapa, type EtapaEscolar } from "../hooks/useAulasBncc";
+import { getFirstYearLessonTitle } from "../data/first-year-lesson-overrides";
 
 /* ─── Aulas estáticas (já implementadas nos players) ─── */
 type StaticLesson = {
@@ -76,8 +77,6 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<EtapaEscolar>("fundamental1");
   const { aulas: aulasBanco, loading } = useAulasBnccByEtapa(tab);
-  const { habilidades: habilidadesBncc, loading: loadingBncc } = useBnccBibliotecaByEtapa(tab);
-  const activeDbCodes = new Set(aulasBanco.map((a) => a.codigo_bncc).filter(Boolean));
 
   // Limpa cache das categorias removidas (Pré-Escola + 1º Ano + 2º Ano legacy).
   useEffect(() => {
@@ -128,9 +127,6 @@ export const EscolaBrilhaDashboard: React.FC = () => {
   const goToAulaBanco = (aulaId: string) =>
     navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
 
-  const goToBnccCode = (codigo: string) =>
-    navigate({ to: "/bncc/$codigo", params: { codigo } });
-
   const staticItems = STATIC_LESSONS[tab];
 
   // Agrupar por série (mescla estáticas + banco)
@@ -140,7 +136,6 @@ export const EscolaBrilhaDashboard: React.FC = () => {
       ...seriesOrder,
       ...staticItems.map((s) => s.serie).filter((s) => seriesOrder.includes(s)),
       ...aulasBanco.map((a) => a.serie).filter((s) => seriesOrder.includes(s)),
-      ...habilidadesBncc.map((h) => `${h.ano}º Ano`).filter((s) => seriesOrder.includes(s)),
     ]),
   ).sort((a, b) => {
     const ai = seriesOrder.indexOf(a);
@@ -213,9 +208,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
               const staticCards = staticItems.filter((s) => s.serie === serie);
               const ano = Number(serie.match(/\d+/)?.[0] ?? 0);
               const dbCards = aulasBanco.filter((a) => lessonAppliesToSerie(a.serie, ano, serie));
-              const bnccCards = habilidadesBncc.filter((h) => h.ano === ano && !activeDbCodes.has(h.codigo));
-              if (!staticCards.length && !dbCards.length && !bnccCards.length) return null;
-              const total = staticCards.length + dbCards.length + bnccCards.length;
+              if (!staticCards.length && !dbCards.length) return null;
               const practicalTotal = staticCards.length + dbCards.length;
 
               return (
@@ -224,7 +217,7 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                     <div>
                       <h2 className="text-white font-black text-lg leading-tight">{serie}</h2>
                       <p className="text-white/40 text-[11px] font-semibold uppercase tracking-widest">
-                        {practicalTotal} {practicalTotal === 1 ? "aula" : "aulas"} • {bnccCards.length} habilidades BNCC
+                        {practicalTotal} {practicalTotal === 1 ? "aula" : "aulas"}
                       </p>
                     </div>
                   </div>
@@ -233,18 +226,16 @@ export const EscolaBrilhaDashboard: React.FC = () => {
                     serie={serie}
                     staticCards={staticCards}
                     dbCards={dbCards}
-                    bnccCards={bnccCards}
                     onStaticClick={goToActivity}
                     onDbClick={goToAulaBanco}
-                    onBnccClick={goToBnccCode}
                   />
                 </section>
               );
             })}
 
 
-            {!loading && !loadingBncc && allSeries.every((s) =>
-              !staticItems.some((x) => x.serie === s) && !aulasBanco.some((x) => x.serie === s) && !habilidadesBncc.some((x) => `${x.ano}º Ano` === s),
+            {!loading && allSeries.every((s) =>
+              !staticItems.some((x) => x.serie === s) && !aulasBanco.some((x) => x.serie === s),
             ) && (
               <p className="text-white/40 text-sm text-center py-12">
                   Nenhuma aula disponível nesta etapa ainda.
@@ -366,26 +357,20 @@ const SubjectFolders: React.FC<{
   serie: string;
   staticCards: StaticLesson[];
   dbCards: AulaBanco[];
-  bnccCards: BnccBibliotecaItem[];
   onStaticClick: (id: string, type: string) => void;
   onDbClick: (id: string) => void;
-  onBnccClick: (codigo: string) => void;
-}> = ({ serie, staticCards, dbCards, bnccCards, onStaticClick, onDbClick, onBnccClick }) => {
+}> = ({ serie, staticCards, dbCards, onStaticClick, onDbClick }) => {
   const [openSubject, setOpenSubject] = useState<string | null>(null);
 
   // Agrupa atividades pela disciplina normalizada
-  const grouped: Record<string, { statics: StaticLesson[]; dbs: AulaBanco[]; bnccs: BnccBibliotecaItem[] }> = {};
+  const grouped: Record<string, { statics: StaticLesson[]; dbs: AulaBanco[] }> = {};
   for (const c of staticCards) {
     const k = subjectKey(c.badge);
-    (grouped[k] ||= { statics: [], dbs: [], bnccs: [] }).statics.push(c);
+    (grouped[k] ||= { statics: [], dbs: [] }).statics.push(c);
   }
   for (const a of dbCards) {
     const k = subjectKey(a.disciplina);
-    (grouped[k] ||= { statics: [], dbs: [], bnccs: [] }).dbs.push(a);
-  }
-  for (const h of bnccCards) {
-    const k = subjectKey(h.componente);
-    (grouped[k] ||= { statics: [], dbs: [], bnccs: [] }).bnccs.push(h);
+    (grouped[k] ||= { statics: [], dbs: [] }).dbs.push(a);
   }
   const anoNum = Number(serie.match(/\d+/)?.[0] ?? 0);
   const HIDDEN_EARLY = new Set(["Arte", "Educação Física", "História", "Geografia", "Ensino Religioso"]);
@@ -397,8 +382,7 @@ const SubjectFolders: React.FC<{
     <div className="space-y-2.5">
       {subjects.map((subj, i) => {
         const meta = SUBJECT_META[subj] ?? { gradient: "from-slate-500 to-slate-700", Icon: BookOpen };
-        const { statics, dbs, bnccs } = grouped[subj];
-        const total = statics.length + dbs.length + bnccs.length;
+        const { statics, dbs } = grouped[subj];
         const practicalTotal = statics.length + dbs.length;
         const isOpen = openSubject === subj;
         return (
@@ -417,7 +401,7 @@ const SubjectFolders: React.FC<{
               <div className="flex-1 p-3.5 min-w-0">
                 <p className="font-black text-slate-800 text-sm leading-tight truncate">{subj}</p>
                 <p className="text-slate-500 text-xs font-medium mt-0.5">
-                  {practicalTotal} {practicalTotal === 1 ? "aula" : "aulas"} • {bnccs.length} BNCC
+                  {practicalTotal} {practicalTotal === 1 ? "aula" : "aulas"}
                 </p>
               </div>
               <div className="flex items-center pr-3">
@@ -455,8 +439,8 @@ const SubjectFolders: React.FC<{
                       <LessonCard
                         key={`d-${a.id}`}
                         index={statics.length + j}
-                        title={a.titulo}
-                        subtitle={a.descricao ?? a.disciplina}
+                        title={getFirstYearLessonTitle(a)}
+                        subtitle={a.disciplina}
                         badge={a.disciplina}
                         badgeColor="bg-emerald-100 text-emerald-700"
                         gradient="from-emerald-500 to-teal-600"
@@ -465,28 +449,6 @@ const SubjectFolders: React.FC<{
                         onClick={() => onDbClick(a.id)}
                       />
                     ))}
-                    {bnccs.length > 0 && (
-                      <div className="pt-1">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white/45 mb-2">
-                          Biblioteca BNCC
-                        </p>
-                        <div className="space-y-2.5">
-                          {bnccs.map((h, j) => (
-                            <LessonCard
-                              key={`b-${h.codigo}`}
-                              index={statics.length + dbs.length + j}
-                              title={h.codigo}
-                              subtitle={h.objeto_conhecimento || h.habilidade || h.unidade_tematica || "Habilidade BNCC"}
-                              badge={h.componente}
-                              badgeColor="bg-slate-100 text-slate-700"
-                              gradient={meta.gradient}
-                              bncc={h.codigo}
-                              onClick={() => onBnccClick(h.codigo)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               )}
