@@ -6,31 +6,15 @@
  *   - fallbackCache: aula determinística local (último recurso).
  *
  * O `resolveLessonV2Sync` SEMPRE prefere `templateCache` quando disponível.
- * Para 6º–9º ano, aula genérica/local NÃO é conteúdo válido: se não houver
- * cache real, o hook espera a geração Groq e evita renderizar "habilidade BNCC
- * fantasiada de aula".
+ * O hook `useLessonV2` assina mudanças do cache para re-renderizar quando
+ * o template do Supabase chegar depois do primeiro paint (que mostra
+ * temporariamente o fallback).
  */
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { buildLessonV2 } from "./lesson-builder-v2";
-import { gerarLessonV2Groq } from "@/lib/groq-professor.functions";
 import type { LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
-
-const FUND2_SERIES = new Set([
-  "6º Ano",
-  "7º Ano",
-  "8º Ano",
-  "9º Ano",
-  "6º ao 7º Ano",
-  "8º ao 9º Ano",
-  "6º ao 9º Ano",
-]);
-
-export interface LessonV2Hints {
-  serie?: string;
-  disciplina?: string;
-}
 
 // ----------------------------- caches separados ----------------------------
 
@@ -45,33 +29,6 @@ function cacheKey(bnccCode: string, titulo: string) {
 
 function emit() {
   listeners.forEach((l) => l());
-}
-
-function isFund2Serie(serie?: string) {
-  return !!serie && FUND2_SERIES.has(serie);
-}
-
-function lessonText(lesson: LessonV2) {
-  return JSON.stringify(lesson.screens).toLowerCase();
-}
-
-function isGenericPlaceholderLesson(lesson: LessonV2 | null): boolean {
-  if (!lesson) return true;
-  const text = lessonText(lesson);
-  const genericSignals = [
-    "esta aula é da disciplina",
-    "identifique 2 palavras-chave",
-    "procure um exemplo real",
-    "explique com suas palavras",
-    "tema desta aula:",
-    "anote 1 frase no caderno",
-    "quem explica, aprende em dobro",
-    "vamos direto ao ponto",
-    '"disciplina"',
-    '"série"',
-  ];
-  const hits = genericSignals.filter((signal) => text.includes(signal)).length;
-  return hits >= 2;
 }
 
 // ----------------------------- tipos auxiliares -----------------------------
@@ -257,16 +214,10 @@ export function resolveLessonV2Sync(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
-  hints: LessonV2Hints = {},
 ): LessonV2 | null {
-  if (!bnccCode || !titulo) return null;
   const key = cacheKey(bnccCode, titulo);
   const tpl = templateCache.get(key);
-  if (tpl && !isGenericPlaceholderLesson(tpl)) return tpl;
-
-  // Fundamental II nunca deve exibir fallback genérico enquanto a IA/cache real
-  // está sendo buscado. A rota mostra estado de geração até o cache chegar.
-  if (isFund2Serie(hints.serie)) return null;
+  if (tpl) return tpl;
 
   const cached = fallbackCache.get(key);
   if (cached) return cached;
@@ -285,19 +236,16 @@ export async function prefetchLessonV2(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
-  hints: LessonV2Hints = {},
 ): Promise<LessonV2 | null> {
-  if (!bnccCode || !titulo) return null;
   const key = cacheKey(bnccCode, titulo);
   if (templateCache.has(key)) return templateCache.get(key)!;
-  const isFund2 = isFund2Serie(hints.serie);
 
   const pending = inflight.get(key);
   if (pending) return pending;
 
   const work = (async () => {
     try {
-      // 1) Cache versionado no Supabase (lesson já montada, inclusive Groq).
+      // 1) Cache versionado no Supabase (lesson já montada).
       const { data: cached } = await supabase
         .from("pedagogical_lessons_cache")
         .select("lesson, version")
@@ -306,51 +254,14 @@ export async function prefetchLessonV2(
         .limit(1)
         .maybeSingle();
 
-      let cachedWasGeneric = false;
       if (cached?.lesson) {
         const lesson = cached.lesson as unknown as LessonV2;
-        cachedWasGeneric = isGenericPlaceholderLesson(lesson);
-        if (!isFund2 || !cachedWasGeneric) {
-          templateCache.set(key, lesson);
-          emit();
-          return lesson;
-        }
+        templateCache.set(key, lesson);
+        emit();
+        return lesson;
       }
 
-      // 2) 6º–9º Ano: gera aula real com Groq ANTES de aceitar templates
-      // incompletos. Isso corrige o caso em que o banco tinha apenas esqueleto
-      // e o player mostrava "disciplina/série" como se fosse atividade.
-      if (isFund2) {
-        try {
-          const res = await gerarLessonV2Groq({
-            data: {
-              bnccCode,
-              titulo,
-              bnccObjective,
-              serie: hints.serie,
-              disciplina: hints.disciplina,
-              force: cachedWasGeneric,
-            },
-          });
-          if (res?.ok && res.lessonJson) {
-            const lesson = JSON.parse(res.lessonJson) as LessonV2;
-            if (!isGenericPlaceholderLesson(lesson)) {
-              templateCache.set(key, lesson);
-              emit();
-              return lesson;
-            }
-            console.warn("[pedagogical-library] Groq returned generic lesson", bnccCode);
-          }
-          if (res && !res.ok) {
-            console.warn("[pedagogical-library] Groq fallback:", res.error);
-          }
-        } catch (err) {
-          console.warn("[pedagogical-library] Groq call failed:", err);
-        }
-      }
-
-      // 3) Map BNCC → Template. Para Fundamental II, só aceitamos se não cair
-      // nos sinais de placeholder genérico.
+      // 2) Map BNCC → Template (maior prioridade).
       const { data: map } = await supabase
         .from("bncc_template_map")
         .select("template_id, priority")
@@ -373,11 +284,9 @@ export async function prefetchLessonV2(
             bnccObjective,
             tpl as unknown as TemplateRow,
           );
-          if (!isFund2 || !isGenericPlaceholderLesson(lesson)) {
-            templateCache.set(key, lesson);
-            emit();
-            return lesson;
-          }
+          templateCache.set(key, lesson);
+          emit();
+          return lesson;
         }
       }
     } catch (err) {
@@ -400,22 +309,19 @@ export function useLessonV2(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
-  hints: LessonV2Hints = {},
 ): LessonV2 | null {
   const [, force] = useState(0);
-  const hintsKey = `${hints.serie ?? ""}::${hints.disciplina ?? ""}`;
 
   useEffect(() => {
     const sub = () => force((n) => n + 1);
     listeners.add(sub);
-    void prefetchLessonV2(bnccCode, titulo, bnccObjective, hints);
+    void prefetchLessonV2(bnccCode, titulo, bnccObjective);
     return () => {
       listeners.delete(sub);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bnccCode, titulo, bnccObjective, hintsKey]);
+  }, [bnccCode, titulo, bnccObjective]);
 
-  return resolveLessonV2Sync(bnccCode, titulo, bnccObjective, hints);
+  return resolveLessonV2Sync(bnccCode, titulo, bnccObjective);
 }
 
 /** Limpa caches (testes / admin). */

@@ -2621,7 +2621,7 @@ export type Database = {
           created_at: string
           id: string
           lesson: Json
-          template_id: string | null
+          template_id: string
           updated_at: string
           version: number
         }
@@ -2630,7 +2630,7 @@ export type Database = {
           created_at?: string
           id?: string
           lesson: Json
-          template_id?: string | null
+          template_id: string
           updated_at?: string
           version?: number
         }
@@ -2639,7 +2639,7 @@ export type Database = {
           created_at?: string
           id?: string
           lesson?: Json
-          template_id?: string | null
+          template_id?: string
           updated_at?: string
           version?: number
         }
