@@ -72,6 +72,48 @@ function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
 
 
 
+// Reescreve frases de "dicas para a família" como fala da Brilha dirigida à criança.
+function paraCrianca(s: string): string {
+  let t = " " + s.trim() + " ";
+  // imperativos pros pais → "vamos ..."
+  t = t.replace(/\b(Cante|Cantem)\b/gi, "Vamos cantar");
+  t = t.replace(/\b(Leia|Leiam)\b/gi, "Vamos ler");
+  t = t.replace(/\b(Use|Usem|Utilize|Utilizem)\b/gi, "Vamos usar");
+  t = t.replace(/\b(Pratique|Pratiquem|Treine|Treinem)\b/gi, "Vamos treinar");
+  t = t.replace(/\b(Mostre|Mostrem|Apresente|Apresentem)\b/gi, "Vou te mostrar");
+  t = t.replace(/\b(Escreva|Escrevam)\b/gi, "Vamos escrever");
+  t = t.replace(/\b(Conte|Contem|Narre|Narrem)\b/gi, "Vamos contar");
+  t = t.replace(/\b(Pergunte|Perguntem)\b/gi, "Vou te perguntar");
+  t = t.replace(/\b(Estimule|Estimulem|Incentive|Incentivem)\b/gi, "Vamos brincar");
+  t = t.replace(/\b(Brinque|Brinquem|Jogue|Joguem)\b/gi, "Vamos brincar");
+  t = t.replace(/\b(Comemore|Comemorem|Celebre|Celebrem)\b/gi, "Vamos comemorar");
+  t = t.replace(/\b(Repita|Repitam)\b/gi, "Vamos repetir");
+  t = t.replace(/\b(Ajude|Ajudem|Auxilie|Auxiliem)\b/gi, "Vou te ajudar");
+  t = t.replace(/\b(Ensine|Ensinem)\b/gi, "Vou te ensinar");
+  t = t.replace(/\b(Faça|Façam)\b/gi, "Vamos fazer");
+  // referências à criança/aluno → "você"
+  t = t.replace(/\b(a|à)\s+criança\b/gi, "você");
+  t = t.replace(/\bda\s+criança\b/gi, "seu");
+  t = t.replace(/\bpara\s+a\s+criança\b/gi, "para você");
+  t = t.replace(/\bcom\s+a\s+criança\b/gi, "com você");
+  t = t.replace(/\bo\s+aluno\b/gi, "você");
+  t = t.replace(/\bdo\s+aluno\b/gi, "seu");
+  // suaviza tom de orientação
+  t = t.replace(/\bnunca corrija no tom bravo\b/gi, "se errar, a gente tenta de novo");
+  t = t.replace(/\bnão corrija\b/gi, "vamos tentar de novo juntos");
+  return t.trim().replace(/\s+/g, " ");
+}
+
+function transformarParaCrianca(p: Pagina): Pagina {
+  if (p.tipo !== "dicas_familia") return p;
+  const c = { ...(p.conteudo || {}) };
+  if (typeof c.texto === "string") c.texto = paraCrianca(c.texto);
+  if (typeof c.destaque === "string") c.destaque = paraCrianca(c.destaque);
+  if (Array.isArray(c.bullets)) c.bullets = c.bullets.map((b: string) => paraCrianca(String(b)));
+  if (Array.isArray(c.passos)) c.passos = c.passos.map((b: string) => paraCrianca(String(b)));
+  return { ...p, conteudo: c };
+}
+
 function PaginaConteudo({ pagina }: { pagina: Pagina }) {
   const c = pagina.conteudo || {};
 
