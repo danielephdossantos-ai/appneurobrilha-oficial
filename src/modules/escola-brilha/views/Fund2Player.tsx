@@ -346,7 +346,7 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
       <TopBar
         disciplina={lesson.discipline}
         serie={lesson.grade}
-        capitulo={capitulo ?? lesson.bnccCode}
+        capitulo={capitulo}
         xp={lesson.xp}
         onHome={() => navigate({ to: "/escola-brilha" })}
       />
