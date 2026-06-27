@@ -35,8 +35,8 @@ export function AulaInterativaIA(props: Props) {
       setErro(null);
       try {
         // 1) tenta cache
-        const { data: cache } = await supabase
-          .from("rb_aulas_ia" as any)
+        const { data: cache } = await (supabase as any)
+          .from("rb_aulas_ia")
           .select("conteudo")
           .eq("area", area)
           .eq("semana_numero", semanaNumero)
