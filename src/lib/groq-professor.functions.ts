@@ -775,3 +775,132 @@ Gere 3 questões objetivas de revisão (4 alternativas, 1 correta).`;
       return { ok: false as const, error: "Falha de rede", quiz: null };
     }
   });
+
+// ============================================================
+// PLANO DE ESTUDOS MISSÃO PROVA — gera sessões diárias até a
+// data da prova. Aceita opcionalmente uma FOTO do material
+// escolar (caderno, livro, lista) para personalizar o plano.
+// ============================================================
+
+const PlanoEstudosInputSchema = z.object({
+  materia: z.string().trim().min(2).max(80),
+  dataProva: z.string().trim().min(8).max(12), // YYYY-MM-DD
+  diasAteProva: z.number().int().min(1).max(60),
+  conteudos: z.array(z.string().min(1).max(160)).max(20).optional(),
+  observacoes: z.string().max(800).optional(),
+  idade: z.number().int().min(5).max(16).optional(),
+  serie: z.string().max(20).optional(),
+  fotoBase64: z.string().max(8_000_000).optional(), // data URL ou base64 puro
+});
+
+const SessaoSchema = z.object({
+  scheduled_date: z.string().min(8).max(12),
+  title: z.string().min(2).max(120),
+  description: z.string().min(2).max(800),
+});
+
+const PlanoSchema = z.object({
+  resumoMaterial: z.string().max(600).optional(),
+  sessoes: z.array(SessaoSchema).min(1).max(20),
+});
+
+export type SessaoEstudo = z.infer<typeof SessaoSchema>;
+
+const PLANO_SYSTEM = `Você é um tutor pedagógico especialista em crianças neurodivergentes brasileiras. Sua missão: gerar um plano de estudos diário e realista até a data da prova.
+
+REGRAS:
+- Distribua o conteúdo em sessões curtas (20-40 min cada), uma por dia, começando AMANHÃ até o dia ANTERIOR à prova.
+- Sempre responda APENAS com JSON válido neste schema EXATO:
+  {"resumoMaterial":"...","sessoes":[{"scheduled_date":"YYYY-MM-DD","title":"...","description":"..."}]}
+- Se receber uma FOTO de caderno/livro/lista, leia o conteúdo da imagem e use ESSES tópicos para montar o plano (citando o que viu).
+- title curto (ex: "Estudo: Frações - parte 1"). description com 1-3 frases: o que revisar + uma dica prática (mapa mental, flashcard, exemplo do dia a dia).
+- Português do Brasil, vocabulário adequado à idade.
+- Não inclua markdown, comentários ou texto fora do JSON.`;
+
+export const gerarPlanoEstudosMissaoProva = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => PlanoEstudosInputSchema.parse(input))
+  .handler(async ({ data }) => {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return { ok: false as const, error: "GROQ_API_KEY ausente", plano: null };
+    }
+
+    const hasImage = !!data.fotoBase64;
+    const imageUrl = hasImage
+      ? data.fotoBase64!.startsWith("data:")
+        ? data.fotoBase64!
+        : `data:image/jpeg;base64,${data.fotoBase64}`
+      : null;
+
+    const textPrompt = `Matéria: ${data.materia}
+Data da prova: ${data.dataProva}
+Dias disponíveis até a prova: ${data.diasAteProva}${data.idade ? `\nIdade do aluno: ${data.idade} anos` : ""}${data.serie ? `\nSérie: ${data.serie}` : ""}
+Conteúdos informados pela família: ${data.conteudos?.length ? data.conteudos.join(", ") : "(não informados — extraia da foto ou da matéria)"}
+Observações: ${data.observacoes || "(nenhuma)"}
+
+${hasImage ? "Leia a FOTO do material escolar anexada e use o conteúdo que aparece nela para montar o plano." : ""}
+Gere o plano de estudos JSON (uma sessão por dia, até a véspera da prova).`;
+
+    const userContent: unknown = hasImage
+      ? [
+          { type: "text", text: textPrompt },
+          { type: "image_url", image_url: { url: imageUrl } },
+        ]
+      : textPrompt;
+
+    const model = hasImage
+      ? "meta-llama/llama-4-scout-17b-16e-instruct"
+      : "llama-3.3-70b-versatile";
+
+    try {
+      const res = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model,
+            messages: [
+              { role: "system", content: PLANO_SYSTEM },
+              { role: "user", content: userContent },
+            ],
+            temperature: 0.4,
+            max_tokens: 1800,
+            response_format: { type: "json_object" },
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:plano] HTTP", res.status, errText.slice(0, 400));
+        return {
+          ok: false as const,
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          plano: null,
+        };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const raw = json.choices?.[0]?.message?.content ?? "";
+      const parsed = tryExtractJson(raw);
+      const safe = PlanoSchema.safeParse(parsed);
+      if (!safe.success) {
+        console.error("[groq:plano] JSON inválido", safe.error.message);
+        return { ok: false as const, error: "JSON inválido da IA", plano: null };
+      }
+      return { ok: true as const, plano: safe.data, error: null };
+    } catch (e) {
+      console.error("[groq:plano]", e);
+      return {
+        ok: false as const,
+        error: e instanceof Error ? e.message : "Falha de rede",
+        plano: null,
+      };
+    }
+  });
