@@ -23,6 +23,14 @@ function buildLP(
 ): KidsLesson {
   const scenes: KidsScene[] = [
     { kind: "intro", mascot: mascotFor(nivel), titulo, fala: intro },
+    // Contexto: por que aprender isso
+    {
+      kind: "concept",
+      titulo: "Por que aprender?",
+      emoji: "💡",
+      fala: `${intro} Saber isso ajuda a ler, escrever e contar histórias do seu jeitinho.`,
+    },
+    // Conceitos principais (um por bloco)
     ...blocos.map((b) => ({
       kind: "concept" as const,
       titulo: b.titulo,
@@ -30,15 +38,45 @@ function buildLP(
       emoji: b.emoji,
       fala: b.fala,
     })),
+    // Para cada bloco, uma cena extra "Repete comigo" reforçando o som/forma
+    ...blocos.map((b) => ({
+      kind: "concept" as const,
+      titulo: `Repete comigo: ${b.titulo}`,
+      simbolo: b.simbolo,
+      emoji: b.emoji ?? "🗣️",
+      fala: `Vamos repetir juntos: ${b.fala}`,
+    })),
   ];
-  if (exemplos && exemplos.length) {
+  // Caso de uso: usa os exemplos passados, ou gera a partir dos blocos
+  const derivedExemplos =
+    exemplos && exemplos.length
+      ? exemplos
+      : blocos
+          .filter((b) => b.emoji || b.simbolo)
+          .slice(0, 4)
+          .map((b) => ({ emoji: b.emoji ?? "✨", texto: b.titulo }));
+  if (derivedExemplos.length) {
     scenes.push({
       kind: "usecase",
       titulo: "Onde a gente vê?",
-      cenas: exemplos,
+      cenas: derivedExemplos,
       fala: "Olha onde isso aparece no dia a dia.",
     });
   }
+  // Dica do mascote antes de fechar
+  scenes.push({
+    kind: "concept",
+    titulo: "Dica do Pip",
+    emoji: "🐣",
+    fala: "Quando você não souber, fala em voz alta e vai com calma. A gente aprende repetindo!",
+  });
+  // Recapitulação visual
+  scenes.push({
+    kind: "concept",
+    titulo: "Vamos relembrar",
+    emoji: "🔁",
+    fala: `Hoje a gente viu: ${blocos.map((b) => b.titulo).join(", ")}.`,
+  });
   scenes.push({ kind: "summary", titulo: "Você aprendeu!", itens: resumo, fala: falaResumo });
   scenes.push({ kind: "celebrate", titulo: "Parabéns!", fala: "Você ganhou cem pontinhos!" });
   return {
