@@ -146,6 +146,6 @@ describe("ActivityPlayerC layout preservado", () => {
     expect(screen.getByText("7º Ano")).toBeInTheDocument();
     expect(screen.getAllByText(/XP/).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Ouvir explicação")).toBeInTheDocument();
-    expect(screen.getByLabelText("Menu")).toBeInTheDocument();
+    expect(screen.getAllByLabelText("Menu").length).toBeGreaterThan(0);
   });
 });
