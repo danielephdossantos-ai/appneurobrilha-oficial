@@ -31,7 +31,7 @@ const SCREEN_LABEL: Record<Screen, string> = {
 
 interface Props {
   lesson: ActivityLesson;
-  currentRef?: React.RefObject<HTMLDivElement | null>;
+  currentRef?: unknown;
 }
 
 export const ActivityPlayerTeen: React.FC<Props> = ({ lesson, currentRef }) => {
