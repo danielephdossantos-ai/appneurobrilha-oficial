@@ -20,19 +20,19 @@ const PaginaSchema = z.object({
   titulo: z.string().min(1).max(80),
   conteudo: z
     .object({
-      texto: z.string().min(20).max(900),
-      destaque: z.string().max(220).optional(),
-      bullets: z.array(z.string().max(180)).max(6).optional(),
-      passos: z.array(z.string().max(180)).max(6).optional(),
+      texto: z.string().min(1),
+      destaque: z.string().optional(),
+      bullets: z.array(z.string()).max(6).optional(),
+      passos: z.array(z.string()).max(6).optional(),
       exemplos: z
         .array(z.object({ silaba: z.string().max(20), palavra: z.string().max(40) }))
         .max(6)
         .optional(),
       perguntas: z
         .array(z.object({
-          pergunta: z.string().max(220),
-          resposta: z.string().max(220),
-          explicacao: z.string().max(320).optional(),
+          pergunta: z.string(),
+          resposta: z.string(),
+          explicacao: z.string().optional(),
           opcoes: z.array(z.string().max(80)).max(4).optional(),
         }))
         .max(6)
@@ -69,6 +69,7 @@ REGRAS DE LINGUAGEM:
 - Português do Brasil. Sem markdown. Sem emojis dentro dos textos (os emojis do título já vêm no app).
  - ZERO frases vagas. Se o tema for "tabuada do 3", os exemplos são "3 x 1 = 3", "3 x 2 = 6"... Se for leitura, use palavras reais. Se for interpretação, use um mini-texto real de 3 linhas.
  - Toda resposta errada deve ter explicação pedagógica curta no campo "explicacao".
+ - REGRA DE TAMANHO (OBRIGATÓRIA): o campo "texto" de cada página tem NO MÁXIMO 2 FRASES CURTAS (até 140 caracteres cada). Nada de parágrafos. Bullets e passos com no máximo 90 caracteres cada. "destaque" com no máximo 100. Use frases muito objetivas e diretas.
 
 FORMATO (responda APENAS este JSON, sem markdown):
 {
@@ -100,6 +101,33 @@ function parseJson(raw: string): unknown {
   let txt = raw.trim();
   if (txt.startsWith("```")) txt = txt.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
   return JSON.parse(txt);
+}
+
+// Corta um texto para no máximo `maxSentences` frases, respeitando `maxChars`.
+function shortText(input: string, maxChars = 280, maxSentences = 2): string {
+  if (!input) return input;
+  const cleaned = String(input).replace(/\s+/g, " ").trim();
+  const parts = cleaned.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? [cleaned];
+  let out = parts.slice(0, maxSentences).join(" ").trim();
+  if (out.length > maxChars) out = out.slice(0, maxChars - 1).replace(/[,;:\s]+\S*$/, "") + "…";
+  return out;
+}
+
+function compactPagina(p: PaginaGerada): PaginaGerada {
+  const c: any = { ...p.conteudo };
+  if (typeof c.texto === "string") c.texto = shortText(c.texto, 280, 2);
+  if (typeof c.destaque === "string") c.destaque = shortText(c.destaque, 100, 1);
+  if (Array.isArray(c.bullets)) c.bullets = c.bullets.slice(0, 6).map((b: string) => shortText(b, 90, 1));
+  if (Array.isArray(c.passos)) c.passos = c.passos.slice(0, 6).map((b: string) => shortText(b, 90, 1));
+  if (Array.isArray(c.perguntas)) {
+    c.perguntas = c.perguntas.slice(0, 6).map((q: any) => ({
+      ...q,
+      pergunta: shortText(q.pergunta ?? "", 140, 1),
+      resposta: shortText(q.resposta ?? "", 140, 1),
+      explicacao: q.explicacao ? shortText(q.explicacao, 160, 1) : q.explicacao,
+    }));
+  }
+  return { ...p, titulo: shortText(p.titulo, 80, 1), conteudo: c };
 }
 
 type AulaRow = {
@@ -252,7 +280,7 @@ export const gerarPaginasAula = createServerFn({ method: "POST" })
         faixa_etaria: aula.faixa_etaria,
         habilidade: habilidadeNome,
         area: areaNome,
-      });
+      }).map(compactPagina);
       await admin.from("rb_paginas_aula").delete().eq("aula_id", data.aulaId);
       const rows = paginas.map((p, i) => ({
         aula_id: data.aulaId,
@@ -327,7 +355,7 @@ export const gerarPaginasAula = createServerFn({ method: "POST" })
 
     // Replace pages
     await admin.from("rb_paginas_aula").delete().eq("aula_id", data.aulaId);
-    const rows = parsed.paginas.map((p, i) => ({
+    const rows = parsed.paginas.map(compactPagina).map((p, i) => ({
       aula_id: data.aulaId,
       ordem: i + 1,
       tipo: p.tipo,

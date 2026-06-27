@@ -2,59 +2,61 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { Discipline, LessonV2 } from "@/modules/escola-brilha/types/lesson-v2";
 
+// Schema tolerante: aceita texto longo do modelo (não derruba a aula),
+// mas compactLesson() abaixo garante "máx 2 frases curtas por tela".
 const OptionSchema = z.object({
-  text: z.string().min(1).max(160),
+  text: z.string().min(1),
   isCorrect: z.boolean(),
-  reason: z.string().min(8).max(320),
+  reason: z.string().min(4),
 });
 
 const LessonContentSchema = z.object({
-  title: z.string().min(3).max(160),
+  title: z.string().min(3),
   missao: z.object({
-    studentObjective: z.string().min(20).max(260),
+    studentObjective: z.string().min(10),
     contextEmoji: z.string().min(1).max(8),
-    contextLine: z.string().min(15).max(220),
-    whatYouWillDo: z.array(z.string().min(8).max(160)).min(3).max(5),
+    contextLine: z.string().min(10),
+    whatYouWillDo: z.array(z.string().min(4)).min(3).max(5),
   }),
   exploracao: z.object({
-    provokingQuestion: z.string().min(15).max(220),
-    observation: z.string().min(30).max(520),
-    pairs: z.array(z.object({ left: z.string().max(80), right: z.string().max(180) })).min(3).max(6),
+    provokingQuestion: z.string().min(8),
+    observation: z.string().min(10),
+    pairs: z.array(z.object({ left: z.string(), right: z.string() })).min(3).max(6),
   }),
   explicacao: z.object({
-    conceito: z.string().min(120).max(900),
-    passoAPasso: z.array(z.object({ step: z.string().max(110), detail: z.string().max(260) })).min(4).max(6),
-    exemplo: z.string().min(60).max(420),
-    aplicacao: z.string().min(40).max(260),
-    resumo: z.string().min(35).max(240),
+    conceito: z.string().min(20),
+    passoAPasso: z.array(z.object({ step: z.string(), detail: z.string() })).min(3).max(6),
+    exemplo: z.string().min(10),
+    aplicacao: z.string().min(10),
+    resumo: z.string().min(10),
   }),
   exemplo: z.object({
-    question: z.string().min(10).max(240),
-    resolution: z.array(z.object({ line: z.string().min(8).max(240), note: z.string().max(24).optional() })).min(4).max(7),
-    answer: z.string().min(1).max(220),
-    why: z.string().min(20).max(360),
+    question: z.string().min(8),
+    resolution: z.array(z.object({ line: z.string().min(4), note: z.string().optional() })).min(3).max(7),
+    answer: z.string().min(1),
+    why: z.string().min(8),
   }),
   guiada: z.object({
-    prompt: z.string().min(10).max(260),
+    prompt: z.string().min(8),
     options: z.array(OptionSchema).min(3).max(4),
-    hint: z.string().min(15).max(260),
+    hint: z.string().min(6),
   }),
   atividade: z.object({
-    items: z.array(z.object({ question: z.string().min(10).max(260), options: z.array(OptionSchema).min(3).max(4) })).min(2).max(4),
+    items: z.array(z.object({ question: z.string().min(8), options: z.array(OptionSchema).min(3).max(4) })).min(2).max(4),
   }),
   desafio: z.object({
-    contextualScenario: z.string().min(20).max(260),
-    question: z.string().min(10).max(260),
+    contextualScenario: z.string().min(8),
+    question: z.string().min(8),
     options: z.array(OptionSchema).min(3).max(4),
   }),
   resumo: z.object({
     format: z.enum(["mindmap", "table", "flow", "list", "timeline", "diagram"]),
-    title: z.string().min(3).max(120),
-    nodes: z.array(z.object({ label: z.string().max(80), detail: z.string().max(180).optional() })).min(3).max(7),
-    takeaways: z.array(z.string().min(8).max(180)).min(3).max(5),
+    title: z.string().min(3),
+    nodes: z.array(z.object({ label: z.string(), detail: z.string().optional() })).min(3).max(7),
+    takeaways: z.array(z.string().min(4)).min(3).max(5),
   }),
   dominio: z.object({
-    recommendation: z.string().min(20).max(260),
+    recommendation: z.string().min(10),
   }),
 });
 
@@ -90,20 +92,25 @@ function gradeFromCode(code: string) {
 
 const SYSTEM = `Você é Professor Brilho, especialista em didática infantil e Fundamental I/II.
 
-Gere uma AULA REAL de 9 telas no formato LessonV2. A BNCC é só objetivo oculto; a criança precisa receber ensino concreto.
+Gere uma AULA REAL de 9 telas no formato LessonV2. A BNCC é só objetivo oculto; a criança recebe ensino concreto e CURTO.
+
+REGRA DE OURO DE TEXTO (não negociável):
+- Cada campo de texto = NO MÁXIMO 2 frases curtas.
+- Cada frase = no máximo 140 caracteres.
+- ZERO parágrafo longo. ZERO texto enrolado. ZERO "vamos aprender de forma divertida".
+- Se precisar explicar mais, divida em passoAPasso (cada step com 1 frase curta).
 
 PROIBIDO:
-- texto genérico: "compreender", "praticar", "use no cotidiano", "vamos aprender de forma divertida";
+- texto genérico ("compreender", "praticar", "use no cotidiano");
 - repetir o texto oficial da BNCC como explicação;
 - perguntas sem resposta explicada;
 - placeholders.
 
 OBRIGATÓRIO:
 - micro-habilidade concreta adequada ao título/código;
-- explicação de professor, com passo a passo;
-- exemplo resolvido completamente;
-- atividade e desafio com opções, alternativa correta e razão de cada opção;
-- matemática com números reais e cálculo; português com palavra/frase/texto real; humanas/ciências com caso real e comparação concreta.
+- exemplo resolvido com números/palavras reais;
+- atividade e desafio com opções, alternativa correta e razão curta de cada opção;
+- matemática com cálculo real; português com palavra/frase real; humanas/ciências com caso concreto.
 
 Responda APENAS JSON válido com os campos: title, missao, exploracao, explicacao, exemplo, guiada, atividade, desafio, resumo, dominio.`;
 
@@ -127,11 +134,100 @@ function extractJson(raw: string) {
   return JSON.parse(txt);
 }
 
+// Corta um texto para no máximo `maxChars` mantendo no máximo `maxSentences`
+// frases completas. Garante "máximo 2 frases curtas por tela" mesmo se o
+// modelo desobedecer e devolver parágrafos.
+function shortText(input: string, maxChars: number, maxSentences = 2): string {
+  if (!input) return input;
+  const cleaned = String(input).replace(/\s+/g, " ").trim();
+  const sentences = cleaned.match(/[^.!?]+[.!?]?/g)?.map((s) => s.trim()).filter(Boolean) ?? [cleaned];
+  let out = sentences.slice(0, maxSentences).join(" ").trim();
+  if (out.length <= maxChars) return out;
+  const sliced = out.slice(0, maxChars - 1);
+  const lastSpace = sliced.lastIndexOf(" ");
+  out = (lastSpace > 40 ? sliced.slice(0, lastSpace) : sliced).replace(/[.,;:!?]+$/, "") + "…";
+  return out;
+}
+
+function compactOptions(opts: any[]) {
+  return (opts ?? []).slice(0, 4).map((o) => ({
+    ...o,
+    text: shortText(o.text ?? "", 120, 1),
+    reason: shortText(o.reason ?? "", 140, 1),
+  }));
+}
+
+// Aplica shortText em todo bloco textual da aula (AI ou fallback).
+export function compactLesson<T extends { screens: any; title?: string }>(lesson: T): T {
+  const s = lesson.screens;
+  if (lesson.title) lesson.title = shortText(lesson.title, 120, 1);
+  if (s.missao) {
+    s.missao.studentObjective = shortText(s.missao.studentObjective, 160);
+    s.missao.contextLine = shortText(s.missao.contextLine, 140);
+    s.missao.whatYouWillDo = (s.missao.whatYouWillDo ?? []).slice(0, 4).map((t: string) => shortText(t, 100, 1));
+  }
+  if (s.exploracao) {
+    s.exploracao.provokingQuestion = shortText(s.exploracao.provokingQuestion, 140, 1);
+    s.exploracao.observation = shortText(s.exploracao.observation, 180);
+    s.exploracao.pairs = (s.exploracao.pairs ?? []).slice(0, 5).map((p: any) => ({
+      left: shortText(p.left ?? "", 60, 1),
+      right: shortText(p.right ?? "", 120, 1),
+    }));
+  }
+  if (s.explicacao) {
+    s.explicacao.conceito = shortText(s.explicacao.conceito, 220);
+    s.explicacao.exemplo = shortText(s.explicacao.exemplo, 180);
+    s.explicacao.aplicacao = shortText(s.explicacao.aplicacao, 140);
+    s.explicacao.resumo = shortText(s.explicacao.resumo, 140, 1);
+    s.explicacao.passoAPasso = (s.explicacao.passoAPasso ?? []).slice(0, 5).map((p: any) => ({
+      step: shortText(p.step ?? "", 80, 1),
+      detail: shortText(p.detail ?? "", 140, 1),
+    }));
+  }
+  if (s.exemplo) {
+    s.exemplo.question = shortText(s.exemplo.question, 180, 1);
+    s.exemplo.answer = shortText(s.exemplo.answer, 140, 1);
+    s.exemplo.why = shortText(s.exemplo.why, 160);
+    s.exemplo.resolution = (s.exemplo.resolution ?? []).slice(0, 5).map((r: any) => ({
+      ...r,
+      line: shortText(r.line ?? "", 140, 1),
+    }));
+  }
+  if (s.guiada) {
+    s.guiada.prompt = shortText(s.guiada.prompt, 160, 1);
+    s.guiada.hint = shortText(s.guiada.hint, 140, 1);
+    s.guiada.options = compactOptions(s.guiada.options);
+  }
+  if (s.atividade?.items) {
+    s.atividade.items = s.atividade.items.slice(0, 3).map((it: any) => ({
+      question: shortText(it.question ?? "", 160, 1),
+      options: compactOptions(it.options),
+    }));
+  }
+  if (s.desafio) {
+    s.desafio.contextualScenario = shortText(s.desafio.contextualScenario, 140, 1);
+    s.desafio.question = shortText(s.desafio.question, 160, 1);
+    s.desafio.options = compactOptions(s.desafio.options);
+  }
+  if (s.resumo) {
+    s.resumo.title = shortText(s.resumo.title, 80, 1);
+    s.resumo.nodes = (s.resumo.nodes ?? []).slice(0, 6).map((n: any) => ({
+      label: shortText(n.label ?? "", 60, 1),
+      detail: n.detail ? shortText(n.detail, 120, 1) : undefined,
+    }));
+    s.resumo.takeaways = (s.resumo.takeaways ?? []).slice(0, 4).map((t: string) => shortText(t, 120, 1));
+  }
+  if (s.dominio) {
+    s.dominio.recommendation = shortText(s.dominio.recommendation, 180);
+  }
+  return lesson;
+}
+
 export const gerarLessonV2Escola = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+    if (!apiKey) return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
 
     try {
       const subject = subjectFromCode(data.bnccCode);
@@ -153,15 +249,15 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       if (!res.ok) {
         const t = await res.text();
         console.error("[gerarLessonV2Escola] groq", res.status, t.slice(0, 300));
-        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: buildFallbackLessonV2(data) };
+        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: compactLesson(buildFallbackLessonV2(data)) };
       }
 
       const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
 
       const c = LessonContentSchema.parse(extractJson(raw));
-      const lesson = {
+      const lesson = compactLesson({
         id: `ai:${data.bnccCode}`,
         title: c.title,
         discipline: SUBJECT_NAME[subject],
@@ -192,7 +288,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
             recommendation: c.dominio.recommendation,
           },
         },
-      };
+      });
 
       try {
         const { createClient } = await import("@supabase/supabase-js");
@@ -219,7 +315,7 @@ export const gerarLessonV2Escola = createServerFn({ method: "POST" })
       return { ok: true as const, error: null, lesson };
     } catch (e) {
       console.error("[gerarLessonV2Escola]", e);
-      return { ok: true as const, error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local", lesson: buildFallbackLessonV2(data) };
+      return { ok: true as const, error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local", lesson: compactLesson(buildFallbackLessonV2(data)) };
     }
   });
 
