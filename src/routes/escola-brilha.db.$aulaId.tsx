@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
+import { Fund2Player } from "../modules/escola-brilha/views/Fund2Player";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
@@ -110,11 +111,19 @@ function AulaDbPage() {
       }
     }
 
-    // 6º–9º Ano: aulas no padrão Fundamental II com imagens reais.
+    // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
       const f2 = generateActivityLesson6a9(aula.codigo_bncc, aula.titulo);
       if (f2) {
-        return <ActivityPlayer lesson={f2} currentRef={ref} />;
+        return (
+          <Fund2Player
+            lesson={f2}
+            currentRef={ref}
+            disciplina={aula.disciplina ?? f2.subject}
+            serie={aula.serie}
+            codigoBncc={aula.codigo_bncc}
+          />
+        );
       }
     }
 
