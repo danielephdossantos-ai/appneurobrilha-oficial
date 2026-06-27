@@ -355,7 +355,7 @@ export const gerarPaginasAula = createServerFn({ method: "POST" })
 
     // Replace pages
     await admin.from("rb_paginas_aula").delete().eq("aula_id", data.aulaId);
-    const rows = parsed.paginas.map((p, i) => ({
+    const rows = parsed.paginas.map(compactPagina).map((p, i) => ({
       aula_id: data.aulaId,
       ordem: i + 1,
       tipo: p.tipo,
