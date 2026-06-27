@@ -1,4 +1,4 @@
-import type { KidsLesson } from "../types/kids-lesson";
+import type { KidsLesson, KidsScene } from "../types/kids-lesson";
 
 /**
  * Banco local de aulas Kids (1º Ano).
@@ -478,11 +478,73 @@ export const KIDS_LESSONS_1ANO: Record<string, KidsLesson> = {
 import { getKidsLessonVariants } from "./kids-lesson-variants-1ano";
 import { getKidsLessonVariantsLP } from "./kids-lessons-lp-1ano";
 
+const EXPLAIN_KINDS = new Set([
+  "intro", "concept", "usecase",
+  "step_count", "step_join", "step_vertical_sum",
+  "step_subtract", "step_vertical_sub", "step_equal",
+]);
+
+/**
+ * Garante o mínimo de telas explicativas em qualquer aula Kids,
+ * injetando cenas de contexto, dica e recapitulação quando faltarem.
+ * Não toca em práticas, resumo ou comemoração.
+ */
+function enrichLesson(lesson: KidsLesson): KidsLesson {
+  const explainCount = lesson.scenes.filter((s) => EXPLAIN_KINDS.has(s.kind)).length;
+  if (explainCount >= 5) return lesson;
+
+  const conceptTitles = lesson.scenes
+    .filter((s) => s.kind === "concept")
+    .map((s: any) => s.titulo)
+    .filter(Boolean);
+
+  const extras: KidsScene[] = [];
+  extras.push({
+    kind: "concept",
+    titulo: "Por que aprender?",
+    emoji: "💡",
+    fala: `Hoje a gente vai entender ${lesson.titulo.toLowerCase()}. Isso ajuda a pensar, contar e brincar melhor.`,
+  });
+  extras.push({
+    kind: "concept",
+    titulo: "Como funciona",
+    emoji: "👀",
+    fala: "Olha com atenção, fala em voz alta com o Pip e a Pipa, e vai com calma.",
+  });
+  extras.push({
+    kind: "concept",
+    titulo: "Dica do Pip",
+    emoji: "🐣",
+    fala: "Se não entender de primeira, volta uma telinha. A gente aprende repetindo!",
+  });
+  if (conceptTitles.length) {
+    extras.push({
+      kind: "concept",
+      titulo: "Vamos relembrar",
+      emoji: "🔁",
+      fala: `Hoje a gente viu: ${conceptTitles.slice(0, 5).join(", ")}.`,
+    });
+  }
+
+  // Encontra o índice do primeiro practice/summary/celebrate para inserir antes
+  const insertIdx = lesson.scenes.findIndex(
+    (s) => s.kind === "practice_count" || s.kind === "summary" || s.kind === "celebrate",
+  );
+  const before = insertIdx === -1 ? lesson.scenes : lesson.scenes.slice(0, insertIdx);
+  const after = insertIdx === -1 ? [] : lesson.scenes.slice(insertIdx);
+
+  // Pega só o necessário pra chegar em 5 explicações
+  const needed = Math.max(0, 5 - explainCount);
+  const chosen = extras.slice(0, needed);
+
+  return { ...lesson, scenes: [...before, ...chosen, ...after] };
+}
+
 export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
   if (!codigo) return null;
-  if (KIDS_LESSONS_1ANO[codigo]) return KIDS_LESSONS_1ANO[codigo];
+  if (KIDS_LESSONS_1ANO[codigo]) return enrichLesson(KIDS_LESSONS_1ANO[codigo]);
   const lp = getKidsLessonVariantsLP(codigo);
-  return lp[0] ?? null;
+  return lp[0] ? enrichLesson(lp[0]) : null;
 }
 
 /**
@@ -492,10 +554,11 @@ export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
 export function getKidsLessons(codigo: string | undefined): KidsLesson[] {
   if (!codigo) return [];
   const variantsMat = getKidsLessonVariants(codigo);
-  if (variantsMat.length > 0) return variantsMat;
+  if (variantsMat.length > 0) return variantsMat.map(enrichLesson);
   const variantsLp = getKidsLessonVariantsLP(codigo);
-  if (variantsLp.length > 0) return variantsLp;
+  if (variantsLp.length > 0) return variantsLp.map(enrichLesson);
   const base = KIDS_LESSONS_1ANO[codigo];
-  return base ? [base] : [];
+  return base ? [enrichLesson(base)] : [];
 }
+
 

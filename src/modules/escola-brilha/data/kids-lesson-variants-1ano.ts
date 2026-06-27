@@ -55,10 +55,13 @@ function buildEqual(nivel: number, nums: number[], objeto: string): KidsLesson {
   const scenes: KidsScene[] = [
     { kind: "intro", mascot: nivel % 2 ? "pip" : "pipa", titulo: `Nível ${nivel}: quando são iguais?`, fala: "Quando dois grupos têm a mesma quantidade, dizemos que são iguais." },
     { kind: "concept", titulo: "Sinal de igual", simbolo: "=", fala: "O sinal de igual mostra que os dois lados têm a mesma quantidade." },
+    { kind: "concept", titulo: "Como ler o sinal", simbolo: "= ", emoji: "👀", fala: "A gente lê assim: 'é igual a'. Os dois lados pesam o mesmo." },
+    { kind: "concept", titulo: "Quando NÃO é igual", emoji: "⚖️", fala: "Se um lado tem mais, não é igual. Se tem menos, também não é igual." },
   ];
   nums.forEach((n) => {
     scenes.push({ kind: "step_equal", titulo: `${n} = ${n}`, n, objeto, fala: `${numByExt(n)} de um lado, ${numByExt(n)} do outro. Iguais!` });
   });
+  scenes.push({ kind: "concept", titulo: "Vamos relembrar", emoji: "🔁", fala: "Igual quer dizer mesma quantidade dos dois lados." });
   scenes.push({ kind: "summary", titulo: "Você aprendeu!", itens: nums.map((n) => `${n} = ${n}`), fala: "Você é demais!" });
   scenes.push({ kind: "celebrate", titulo: "Parabéns!", fala: "Você ganhou cem pontinhos!" });
   return { codigo_bncc: "EF01MA03", titulo, disciplina: "Matemática", serie: "1º Ano", xp: 100, cor: "green", scenes };
@@ -77,8 +80,11 @@ function buildCount(codigo: string, nivel: number, ate: number, objeto: string):
     scenes: [
       { kind: "intro", mascot: nivel % 2 ? "pip" : "pipa", titulo: `Nível ${nivel}: contar até ${ate}`, fala: `Vamos contar passo a passo até ${numByExt(ate)}.` },
       { kind: "concept", titulo: `Meta: ${ate}`, simbolo: String(ate), fala: `Hoje a missão é chegar até ${numByExt(ate)} sem pular nenhum número.` },
+      { kind: "concept", titulo: "Como contar direito", emoji: "👉", fala: "Aponte com o dedinho e fale o número em voz alta, um de cada vez." },
+      { kind: "concept", titulo: "Sem pular!", emoji: "🚫", fala: "Se pular um número, a conta sai errada. Vai devagar, um por um." },
       { kind: "step_count", titulo: `Primeira parte: ${halfA}`, a: halfA, b: 0, objeto, fala: `Vamos começar contando ${numByExt(halfA)}.` },
       { kind: "step_join", titulo: `Agora até ${ate}`, a: halfA, b: halfB, objeto, fala: `Continuando até ${numByExt(ate)}.` },
+      { kind: "concept", titulo: "Olha como ficou!", emoji: "🎯", fala: `Contamos do um até ${numByExt(ate)}. Cada número veio na ordem certa.` },
       { kind: "practice_count", titulo: "Sua vez!", a: Math.min(5, ate), b: Math.min(3, Math.max(0, ate - 5)), objeto, fala: "Toque em cada um e conte com a gente." },
       { kind: "summary", titulo: "Você aprendeu!", itens: [`Contar até ${ate}`, "Sem pular números", "Um de cada vez"], fala: "Muito bem!" },
       { kind: "celebrate", titulo: "Parabéns!", fala: "Você ganhou cem pontinhos!" },
