@@ -890,6 +890,9 @@ LESSONS_3ANO_MAT.EF03MA57 = LESSONS_3ANO_MAT.EF03MA22; // Hora e tempo
 LESSONS_3ANO_MAT.EF03MA58 = LESSONS_3ANO_MAT.EF03MA24; // Dinheiro
 LESSONS_3ANO_MAT.EF03MA59 = LESSONS_3ANO_MAT.EF03MA03; // Tabuada
 
+import { LESSONS_3ANO_LP } from "./activity-lessons-3ano-lp";
+
 export function getActivityLesson3a5(codigo: string): ActivityLesson | null {
-  return LESSONS_3ANO_MAT[codigo] ?? null;
+  return LESSONS_3ANO_MAT[codigo] ?? LESSONS_3ANO_LP[codigo] ?? null;
 }
+
