@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
 
 const MessageSchema = z.object({
@@ -379,12 +380,26 @@ export const AulaDinamicaSchema = z.object({
       resolucao: z.array(s(2, 400)).min(1).max(6),
       termoBusca: s(2, 80),
     }),
+    atividadeGuiada: z.object({
+      titulo: s(2, 80),
+      pergunta: s(2, 500),
+      dica: s(2, 300),
+      opcoes: z.array(s(1, 200)).length(3),
+      respostaCorreta: z.enum(["A", "B", "C"]),
+      explicacaoResposta: s(2, 400),
+      termoBusca: s(2, 80),
+    }),
     desafio: z.object({
       titulo: s(2, 80),
       enunciado: s(2, 500),
       opcoes: z.array(s(1, 200)).length(3),
       respostaCorreta: z.enum(["A", "B", "C"]),
       explicacaoResposta: s(2, 400),
+      termoBusca: s(2, 80),
+    }),
+    revisao: z.object({
+      titulo: s(2, 80),
+      pontosChave: z.array(s(2, 300)).min(3).max(6),
       termoBusca: s(2, 80),
     }),
     conclusao: z.object({
@@ -404,6 +419,7 @@ REGRAS:
 - Metáfora do mundo real (frações = pizza, etc.).
 - Cada tela traz um "termoBusca" em INGLÊS simples (1-4 palavras) para buscar imagem ilustrativa (ex.: "red apple", "pizza slices", "ancient egypt").
 - "interativos" da tela exploracao: 2 a 5 elementos clicáveis. Cada um com label PT-BR (palavra curta), termoBusca em inglês simples (objeto único), e explicação curta que aparece ao clicar.
+- A aula precisa ENSINAR de verdade: nada de repetir só a habilidade BNCC. Traga conceito, exemplo resolvido, prática guiada, desafio e revisão.
 - Desafio: 3 opções (A/B/C), respostaCorreta sendo "A", "B" ou "C".
 - Responda ESTRITAMENTE JSON válido (sem markdown, sem crase) com este schema:
 
@@ -421,7 +437,9 @@ REGRAS:
     "explicacao": { "titulo": "string", "paragrafos": ["...","..."], "termoBusca": "english search" },
     "passoAPasso": { "titulo": "string", "passos": ["...","..."], "termoBusca": "english search" },
     "exemploAplicado": { "titulo": "string", "enunciado": "string", "resolucao": ["...","..."], "termoBusca": "english search" },
+    "atividadeGuiada": { "titulo": "string", "pergunta": "string", "dica": "string", "opcoes": ["A) ...","B) ...","C) ..."], "respostaCorreta": "A", "explicacaoResposta": "string", "termoBusca": "english search" },
     "desafio": { "titulo": "string", "enunciado": "string", "opcoes": ["A) ...","B) ...","C) ..."], "respostaCorreta": "A", "explicacaoResposta": "string", "termoBusca": "english search" },
+    "revisao": { "titulo": "string", "pontosChave": ["...","...","..."], "termoBusca": "english search" },
     "conclusao": { "titulo": "string", "mensagemFinal": "string", "termoBusca": "english search" }
   }
 }`;
@@ -443,16 +461,29 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
-    const supabaseAdmin = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
-    );
+    const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+    const supabaseKey =
+      process.env.SUPABASE_PUBLISHABLE_KEY ??
+      process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    if (!supabaseUrl || !supabaseKey) {
+      return {
+        ok: false as const,
+        cached: false,
+        error: "Configuração do backend ausente",
+        aula: null,
+      };
+    }
+
+    const authHeader = getRequestHeader("authorization") ?? undefined;
+    const supabaseServer = createClient(supabaseUrl, supabaseKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: authHeader ? { headers: { Authorization: authHeader } } : undefined,
+    });
 
 
     // 1) Cache lookup
     if (!data.force) {
-      const { data: cached } = await supabaseAdmin
+      const { data: cached } = await supabaseServer
         .from("aulas_geradas_ia")
         .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
         .eq("codigo_bncc", data.bnccCode)
@@ -499,7 +530,7 @@ Gere a aula JSON completa.`;
               { role: "user", content: userPrompt },
             ],
             temperature: 0.7,
-            max_tokens: 2400,
+            max_tokens: 4096,
             top_p: 0.9,
             response_format: { type: "json_object" },
           }),
@@ -533,7 +564,7 @@ Gere a aula JSON completa.`;
       const aula = parseAulaDinamica(raw);
 
       // 2) Save cache (upsert by codigo_bncc)
-      const { error: upErr } = await supabaseAdmin
+      const { error: upErr } = await supabaseServer
         .from("aulas_geradas_ia")
         .upsert(
           {

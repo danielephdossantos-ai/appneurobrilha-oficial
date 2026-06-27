@@ -1,5 +1,7 @@
 import React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { gerarAulaDinamica, type AulaDinamica } from "@/lib/groq-professor.functions";
 import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
@@ -11,6 +13,7 @@ import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano"
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
 import { useLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
+import { aulaDinamicaToLessonV2 } from "../modules/escola-brilha/engine/aula-dinamica-adapter";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
@@ -58,9 +61,51 @@ class PlayerBoundary extends React.Component<
 function AulaDbPage() {
   const { aulaId } = Route.useParams();
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
+  const [aiAula, setAiAula] = React.useState<AulaDinamica | null>(null);
+  const [aiLoading, setAiLoading] = React.useState(false);
+  const [aiError, setAiError] = React.useState<string | null>(null);
   const navigate = useNavigate();
+  const gerarAula = useServerFn(gerarAulaDinamica);
   const { aula, loading, error } = useAulaBnccById(aulaId);
   const fund2Lesson = useLessonV2(aula?.codigo_bncc ?? "", aula?.titulo ?? "");
+
+  React.useEffect(() => {
+    if (!aula || !FUND2_GRADES.has(aula.serie)) return;
+    let cancel = false;
+    setAiLoading(true);
+    setAiError(null);
+    setAiAula(null);
+
+    gerarAula({
+      data: {
+        bnccCode: aula.codigo_bncc,
+        descricao: aula.descricao ?? aula.titulo,
+        idade: Number(aula.serie.match(/\d+/)?.[0] ?? 6) + 5,
+        serie: aula.serie,
+        componente: aula.disciplina,
+      },
+    })
+      .then((res) => {
+        if (cancel) return;
+        if (res.ok && res.aula) {
+          setAiAula(res.aula);
+        } else {
+          setAiError(res.error ?? "Não foi possível gerar a aula real agora.");
+        }
+      })
+      .catch((err) => {
+        if (!cancel) {
+          setAiError(err instanceof Error ? err.message : "Falha ao gerar aula real.");
+        }
+      })
+      .finally(() => {
+        if (!cancel) setAiLoading(false);
+      });
+
+    return () => {
+      cancel = true;
+    };
+  }, [aula, gerarAula]);
 
   if (loading) {
     return (
@@ -118,6 +163,24 @@ function AulaDbPage() {
 
     // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
+      if (aiAula) {
+        return (
+          <Fund2Player
+            lesson={aulaDinamicaToLessonV2(aiAula, {
+              bnccCode: aula.codigo_bncc,
+              bnccObjective: aula.descricao,
+              serie: aula.serie,
+              disciplina: aula.disciplina,
+              xp: aula.xp,
+            })}
+            currentRef={ref}
+            capitulo={aula.codigo_bncc}
+          />
+        );
+      }
+      if (aiLoading) {
+        return <AulaRealLoading codigo={aula.codigo_bncc} />;
+      }
       if (fund2Lesson) {
         return (
           <Fund2Player
@@ -127,6 +190,7 @@ function AulaDbPage() {
           />
         );
       }
+      if (aiError) console.warn("[escola-brilha] IA lesson fallback:", aiError);
     }
 
 
@@ -154,6 +218,25 @@ function AulaDbPage() {
       {renderPlayer()}
       {!hasInlineNext && <NextLessonCTA current={{ kind: "db", id: aulaId }} />}
     </PlayerBoundary>
+  );
+}
+
+function AulaRealLoading({ codigo }: { codigo: string }) {
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-6">
+      <div className="max-w-md w-full rounded-2xl bg-white border border-slate-200 shadow-sm p-6 text-center">
+        <div className="mx-auto mb-4 h-12 w-12 rounded-full border-4 border-emerald-200 border-t-emerald-600 animate-spin" />
+        <p className="text-xs font-black uppercase tracking-wider text-emerald-700">
+          BNCC {codigo}
+        </p>
+        <h1 className="mt-2 text-2xl font-black text-slate-900">
+          Gerando aula real…
+        </h1>
+        <p className="mt-2 text-sm text-slate-600">
+          A IA está montando explicação, exemplo, prática, desafio e imagens de apoio.
+        </p>
+      </div>
+    </div>
   );
 }
 
