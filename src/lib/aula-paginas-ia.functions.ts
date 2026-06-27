@@ -103,6 +103,33 @@ function parseJson(raw: string): unknown {
   return JSON.parse(txt);
 }
 
+// Corta um texto para no máximo `maxSentences` frases, respeitando `maxChars`.
+function shortText(input: string, maxChars = 280, maxSentences = 2): string {
+  if (!input) return input;
+  const cleaned = String(input).replace(/\s+/g, " ").trim();
+  const parts = cleaned.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? [cleaned];
+  let out = parts.slice(0, maxSentences).join(" ").trim();
+  if (out.length > maxChars) out = out.slice(0, maxChars - 1).replace(/[,;:\s]+\S*$/, "") + "…";
+  return out;
+}
+
+function compactPagina(p: PaginaGerada): PaginaGerada {
+  const c: any = { ...p.conteudo };
+  if (typeof c.texto === "string") c.texto = shortText(c.texto, 280, 2);
+  if (typeof c.destaque === "string") c.destaque = shortText(c.destaque, 100, 1);
+  if (Array.isArray(c.bullets)) c.bullets = c.bullets.slice(0, 6).map((b: string) => shortText(b, 90, 1));
+  if (Array.isArray(c.passos)) c.passos = c.passos.slice(0, 6).map((b: string) => shortText(b, 90, 1));
+  if (Array.isArray(c.perguntas)) {
+    c.perguntas = c.perguntas.slice(0, 6).map((q: any) => ({
+      ...q,
+      pergunta: shortText(q.pergunta ?? "", 140, 1),
+      resposta: shortText(q.resposta ?? "", 140, 1),
+      explicacao: q.explicacao ? shortText(q.explicacao, 160, 1) : q.explicacao,
+    }));
+  }
+  return { ...p, titulo: shortText(p.titulo, 80, 1), conteudo: c };
+}
+
 type AulaRow = {
   titulo: string;
   objetivo: string | null;
