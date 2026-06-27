@@ -1030,6 +1030,7 @@ function RecursoPreviewModal({
     ? youtubeIdFromUrl(recurso.url)
     : null;
   const archive = recurso.fonte === "archive" ? archiveEmbed(recurso.url) : null;
+  const webEmbed = !ytId && !archive ? webEmbedUrl(recurso.url, recurso.fonte) : null;
   const temConteudo = !!(recurso.conteudo && recurso.conteudo.trim().length > 0);
 
   return (
