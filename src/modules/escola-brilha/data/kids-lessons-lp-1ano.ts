@@ -38,31 +38,18 @@ function buildLP(
       emoji: b.emoji,
       fala: b.fala,
     })),
-    // Para cada bloco, uma cena extra "Repete comigo" reforçando o som/forma
-    ...blocos.map((b) => ({
-      kind: "concept" as const,
-      titulo: `Repete comigo: ${b.titulo}`,
-      simbolo: b.simbolo,
-      emoji: b.emoji ?? "🗣️",
-      fala: `Vamos repetir juntos: ${b.fala}`,
-    })),
   ];
-  // Caso de uso: usa os exemplos passados, ou gera a partir dos blocos
-  const derivedExemplos =
-    exemplos && exemplos.length
-      ? exemplos
-      : blocos
-          .filter((b) => b.emoji || b.simbolo)
-          .slice(0, 4)
-          .map((b) => ({ emoji: b.emoji ?? "✨", texto: b.titulo }));
-  if (derivedExemplos.length) {
+  // Caso de uso: SÓ mostra quando há exemplos reais de uso no dia a dia.
+  // Não geramos mais cenas vazias com "✨" a partir dos blocos.
+  if (exemplos && exemplos.length) {
     scenes.push({
       kind: "usecase",
       titulo: "Onde a gente vê?",
-      cenas: derivedExemplos,
+      cenas: exemplos,
       fala: "Olha onde isso aparece no dia a dia.",
     });
   }
+
   // Dica do mascote antes de fechar
   scenes.push({
     kind: "concept",
@@ -805,16 +792,39 @@ const EF01LP01_VARIANTS = pairText("EF01LP01", "blue", "Tipos de texto",
   ],
   ["Cada texto tem uma função", "História, receita, bilhete, notícia, poesia, lista"]);
 
-const EF01LP03_VARIANTS = pairText("EF01LP03", "amber", "Escrita convencional",
-  "Vamos comparar o que escrevemos com a forma certa.",
-  [
-    { titulo: "Letra de forma", simbolo: "BOLA", fala: "Igual no livro." },
-    { titulo: "Letra de mão", simbolo: "Bola", fala: "Igual no caderno." },
-  ],
-  [
-    { titulo: "Compare e melhore", simbolo: "→", fala: "Olhe a palavra certa e tente igual." },
-  ],
-  ["Comparar ajuda a melhorar", "Errar faz parte"]);
+const EF01LP03_EXEMPLOS = [
+  { emoji: "📖", texto: "Livro (forma)" },
+  { emoji: "✏️", texto: "Caderno (mão)" },
+  { emoji: "🛑", texto: "Placa (forma)" },
+  { emoji: "💌", texto: "Bilhete (mão)" },
+];
+const EF01LP03_RESUMO = [
+  "Existem letra de forma e letra de mão",
+  "A palavra é a mesma nas duas formas",
+  "Letras na ordem certa formam a palavra",
+];
+const EF01LP03_VARIANTS: KidsLesson[] = [
+  buildLP("EF01LP03", "amber", 1, "Escrita convencional — Nível 1",
+    "Tem duas formas de escrever a mesma palavra: letra de forma (do livro) e letra de mão (do caderno).",
+    [
+      { titulo: "Letra de FORMA", simbolo: "BOLA", fala: "Letra de forma é quadradinha. A gente vê nos livros e nas placas da rua." },
+      { titulo: "Letra de mão", simbolo: "Bola", fala: "Letra de mão é arredondinha. A gente escreve assim no caderno." },
+      { titulo: "Mesma palavra!", simbolo: "BOLA = Bola", fala: "Olha: muda o desenho, mas a palavra é a mesma. As duas se leem BOLA." },
+      { titulo: "Letra por letra", simbolo: "B·O·L·A", fala: "Toda palavra é feita de letras, na ordem certinha. Trocar a ordem muda tudo." },
+    ],
+    EF01LP03_EXEMPLOS, EF01LP03_RESUMO),
+  buildLP("EF01LP03", "amber", 2, "Escrita convencional — Nível 2",
+    "Agora vamos comparar palavras inteiras nas duas formas e ver a ordem das letras.",
+    [
+      { titulo: "GATO", simbolo: "GATO", fala: "Na letra de forma é GATO, tudo em quadradinho." },
+      { titulo: "Gato", simbolo: "Gato", fala: "Na letra de mão é Gato, arredondinho. A palavra é a mesma." },
+      { titulo: "Ordem importa", simbolo: "GATO ≠ TOGA", fala: "Se eu troco a ordem das letras, vira outra palavra. Cuidado com a ordem!" },
+      { titulo: "Espaço entre palavras", simbolo: "O GATO MIA", fala: "Entre uma palavra e outra a gente deixa um espacinho." },
+    ],
+    EF01LP03_EXEMPLOS, EF01LP03_RESUMO),
+];
+
+
 
 const EF01LP05_VARIANTS = pairText("EF01LP05", "violet", "Letras representam sons",
   "A escrita é o desenho dos sons que falamos.",
