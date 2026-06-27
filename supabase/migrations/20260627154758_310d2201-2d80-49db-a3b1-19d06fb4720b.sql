@@ -1,0 +1,1 @@
+ALTER TABLE public.rb_trabalhos ADD COLUMN IF NOT EXISTS instrucoes_professor text;
