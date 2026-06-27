@@ -20,19 +20,19 @@ const PaginaSchema = z.object({
   titulo: z.string().min(1).max(80),
   conteudo: z
     .object({
-      texto: z.string().min(20).max(900),
-      destaque: z.string().max(220).optional(),
-      bullets: z.array(z.string().max(180)).max(6).optional(),
-      passos: z.array(z.string().max(180)).max(6).optional(),
+      texto: z.string().min(1),
+      destaque: z.string().optional(),
+      bullets: z.array(z.string()).max(6).optional(),
+      passos: z.array(z.string()).max(6).optional(),
       exemplos: z
         .array(z.object({ silaba: z.string().max(20), palavra: z.string().max(40) }))
         .max(6)
         .optional(),
       perguntas: z
         .array(z.object({
-          pergunta: z.string().max(220),
-          resposta: z.string().max(220),
-          explicacao: z.string().max(320).optional(),
+          pergunta: z.string(),
+          resposta: z.string(),
+          explicacao: z.string().optional(),
           opcoes: z.array(z.string().max(80)).max(4).optional(),
         }))
         .max(6)
