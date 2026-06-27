@@ -15,7 +15,6 @@ import {
   Network,
   Image as ImageIcon,
   ArrowLeft,
-  Home,
 } from "lucide-react";
 import { Illustration } from "@/components/Illustration";
 import type { IllustrationName } from "@/components/Illustration";
