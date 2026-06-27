@@ -555,6 +555,8 @@ export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
  */
 export function getKidsLessons(codigo: string | undefined): KidsLesson[] {
   if (!codigo) return [];
+  const shared = getKidsLessons12Ano(codigo);
+  if (shared.length > 0) return shared.map(enrichLesson);
   const twoAno = getKidsLessons2Ano(codigo);
   if (twoAno.length > 0) return twoAno.map(enrichLesson);
   const variantsMat = getKidsLessonVariants(codigo);
