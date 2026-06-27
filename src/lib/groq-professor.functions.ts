@@ -178,6 +178,56 @@ REGRAS DE FORMATAÇÃO OBRIGATÓRIAS:
 
 Não inclua nenhum texto fora do JSON. Não use crase nem markdown.`;
 
+const s = (min = 1, max = 600) => z.string().trim().min(min).max(max);
+
+export const AulaSchema = z.object({
+  titulo: s(2, 120),
+  metafora: s(5, 400),
+  telas: z.object({
+    missao: z.object({ titulo: s(2, 80), texto: s(2, 400) }),
+    exploracao: z.object({
+      titulo: s(2, 80),
+      texto: s(2, 600),
+      imagemSugestao: s(2, 200),
+    }),
+    explicacao: z.object({
+      titulo: s(2, 80),
+      paragrafos: z.array(s(2, 400)).min(2).max(6),
+    }),
+    passoAPasso: z.object({
+      titulo: s(2, 80),
+      passos: z.array(s(2, 300)).min(2).max(8),
+    }),
+    exemploAplicado: z.object({
+      titulo: s(2, 80),
+      enunciado: s(2, 500),
+      resolucao: z.array(s(2, 400)).min(1).max(6),
+    }),
+    atividadeGuiada: z.object({
+      titulo: s(2, 80),
+      pergunta: s(2, 400),
+      dica: s(2, 300),
+    }),
+    desafio: z.object({
+      titulo: s(2, 80),
+      enunciado: s(2, 500),
+      opcoes: z.array(s(1, 200)).length(3),
+      respostaCorreta: z.enum(["A", "B", "C"]),
+      explicacaoResposta: s(2, 400),
+    }),
+    revisao: z.object({
+      titulo: s(2, 80),
+      pontosChave: z.array(s(2, 300)).min(2).max(6),
+    }),
+    conclusao: z.object({
+      titulo: s(2, 80),
+      mensagemFinal: s(2, 400),
+    }),
+  }),
+});
+
+export type Aula = z.infer<typeof AulaSchema>;
+
 function extractJson(raw: string): unknown {
   let cleaned = raw.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
   const start = cleaned.search(/[{[]/);
@@ -194,6 +244,20 @@ function extractJson(raw: string): unknown {
     return JSON.parse(cleaned);
   }
 }
+
+function parseAndValidateAula(raw: string): Aula {
+  const parsed = extractJson(raw);
+  const result = AulaSchema.safeParse(parsed);
+  if (!result.success) {
+    const issues = result.error.issues
+      .slice(0, 3)
+      .map((i) => `${i.path.join(".")}: ${i.message}`)
+      .join(" | ");
+    throw new Error(`Schema inválido: ${issues}`);
+  }
+  return result.data;
+}
+
 
 export const gerarAulaGroq = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaInputSchema.parse(input))
@@ -250,7 +314,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
         return { ok: false as const, error: "Resposta vazia", aulaJson: null };
       }
 
-      const aula = extractJson(raw);
+      const aula = parseAndValidateAula(raw);
       return { ok: true as const, aulaJson: JSON.stringify(aula), error: null };
     } catch (e) {
       console.error("[groq:aula]", e);
