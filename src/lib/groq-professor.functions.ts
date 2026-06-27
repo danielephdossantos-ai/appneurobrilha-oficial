@@ -429,6 +429,160 @@ REGRAS:
   }
 }`;
 
+function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>): AulaDinamica {
+  const desc = data.descricao || `Habilidade ${data.bnccCode}`;
+  const assunto = desc.length > 92 ? `${desc.slice(0, 89)}...` : desc;
+  const comp = (data.componente ?? "").toLowerCase();
+  const code = data.bnccCode.toUpperCase();
+  const isMath = code.includes("MA") || comp.includes("mat");
+  const isPort = code.includes("LP") || comp.includes("port") || comp.includes("língua");
+
+  if (isMath) {
+    return {
+      titulo: `Aula passo a passo: ${data.bnccCode}`,
+      metafora: "Matemática é como montar um brinquedo: uma peça por vez. Se você segue os passos, a resposta aparece.",
+      telas: {
+        missao: { titulo: "Missão de hoje", texto: `Você vai aprender ${assunto} resolvendo uma situação real, sem decorar e sem chutar.`, termoBusca: "child counting blocks" },
+        exploracao: {
+          titulo: "Observe a história",
+          texto: "Imagine uma caixa com grupos de objetos. Antes da conta, descubra se a história quer juntar, tirar, formar grupos iguais ou repartir.",
+          termoBusca: "toy boxes numbers",
+          interativos: [
+            { label: "Juntar", termoBusca: "two piles apples", explicacao: "Quando ganha ou recebe mais, a quantidade aumenta. Normalmente usamos adição." },
+            { label: "Tirar", termoBusca: "empty basket", explicacao: "Quando perde, gasta ou falta, a quantidade diminui. Normalmente usamos subtração." },
+            { label: "Grupos", termoBusca: "equal groups candy", explicacao: "Quando aparece 'cada' ou grupos iguais, a multiplicação pode ajudar." },
+          ],
+        },
+        explicacao: {
+          titulo: "Como pensar",
+          paragrafos: [
+            "Primeiro leia a pergunta final. Ela diz o que você precisa descobrir.",
+            "Depois marque os números importantes. Nem todo número da história precisa entrar na conta.",
+            "Escolha a operação pela ação da história: ganhou, perdeu, cada grupo ou repartir.",
+            "No final, responda com frase completa e confira se faz sentido.",
+          ],
+          termoBusca: "math notebook pencil",
+        },
+        passoAPasso: {
+          titulo: "Passo a passo real",
+          passos: [
+            "Leia: Ana tem 4 caixas com 6 figurinhas em cada caixa.",
+            "Pergunte: quero saber o total de figurinhas.",
+            "Veja a pista: 'em cada caixa' mostra grupos iguais.",
+            "Monte: 4 grupos de 6 = 4 × 6.",
+            "Calcule: 6 + 6 + 6 + 6 = 24.",
+            "Responda: Ana tem 24 figurinhas ao todo.",
+          ],
+          termoBusca: "multiplication blocks",
+        },
+        exemploAplicado: {
+          titulo: "Exemplo resolvido",
+          enunciado: "Uma criança colocou 5 carrinhos em cada uma de 3 prateleiras. Quantos carrinhos há no total?",
+          resolucao: [
+            "A pergunta quer o total de carrinhos.",
+            "São 3 prateleiras e cada uma tem 5 carrinhos.",
+            "Isso forma 3 grupos iguais de 5.",
+            "5 + 5 + 5 = 15, então 3 × 5 = 15.",
+          ],
+          termoBusca: "toy cars shelves",
+        },
+        desafio: {
+          titulo: "Sua vez",
+          enunciado: "Há 4 pacotes com 7 adesivos em cada. Quantos adesivos há ao todo?",
+          opcoes: ["A) 11 adesivos", "B) 28 adesivos", "C) 3 adesivos"],
+          respostaCorreta: "B",
+          explicacaoResposta: "A palavra 'cada' mostra grupos iguais: 4 grupos de 7. Então 7 + 7 + 7 + 7 = 28.",
+          termoBusca: "sticker packs",
+        },
+        conclusao: { titulo: "Você aprendeu", mensagemFinal: "Hoje você treinou leitura do problema, escolha da operação, cálculo e conferência. Isso é aprender de verdade!", termoBusca: "happy student math" },
+      },
+    };
+  }
+
+  if (isPort) {
+    return {
+      titulo: `Aula de leitura: ${data.bnccCode}`,
+      metafora: "Ler é como ser detetive: você encontra pistas no texto para provar sua resposta.",
+      telas: {
+        missao: { titulo: "Missão de hoje", texto: `Você vai aprender ${assunto} usando frases reais, pistas e explicação curta.`, termoBusca: "child reading book" },
+        exploracao: {
+          titulo: "Caça às pistas",
+          texto: "Leia a frase: “A menina guardou o livro porque começou a chover.” A palavra 'porque' abre a pista do motivo.",
+          termoBusca: "rain book child",
+          interativos: [
+            { label: "Porque", termoBusca: "question mark because", explicacao: "Mostra causa ou motivo. Pergunte: por que aconteceu?" },
+            { label: "Mas", termoBusca: "opposite arrows", explicacao: "Mostra oposição. Uma ideia quebra a expectativa da outra." },
+            { label: "Então", termoBusca: "arrow forward", explicacao: "Mostra consequência. Algo acontece por causa do que veio antes." },
+          ],
+        },
+        explicacao: {
+          titulo: "Como responder leitura",
+          paragrafos: [
+            "Primeiro leia a frase inteira, sem pular palavras pequenas.",
+            "Depois procure uma palavra-pista: porque, mas, então, quando, onde ou quem.",
+            "Responda usando uma informação que apareceu no texto.",
+            "Uma boa resposta diz: 'Eu sei disso porque no texto aparece...'.",
+          ],
+          termoBusca: "reading clues notebook",
+        },
+        passoAPasso: {
+          titulo: "Passo a passo real",
+          passos: [
+            "Leia: 'Pedro correu, mas chegou atrasado'.",
+            "Ache a palavra-pista: 'mas'.",
+            "'Mas' mostra oposição entre correr e chegar atrasado.",
+            "Explique: ele se esforçou correndo, porém mesmo assim atrasou.",
+          ],
+          termoBusca: "child reading sentence",
+        },
+        exemploAplicado: {
+          titulo: "Exemplo resolvido",
+          enunciado: "Na frase “A flor murchou porque ficou sem água”, qual é a causa?",
+          resolucao: [
+            "A pergunta pede a causa, ou seja, o motivo.",
+            "A palavra 'porque' mostra onde está o motivo.",
+            "Depois de 'porque' aparece: ficou sem água.",
+            "Resposta: a flor murchou porque ficou sem água.",
+          ],
+          termoBusca: "dry flower water",
+        },
+        desafio: {
+          titulo: "Sua vez",
+          enunciado: "Em “O céu escureceu, então Marta fechou a janela”, por que Marta fechou a janela?",
+          opcoes: ["A) Porque parecia que ia chover", "B) Porque queria dormir", "C) Porque a janela quebrou"],
+          respostaCorreta: "A",
+          explicacaoResposta: "A pista está em 'O céu escureceu'. Isso indica chuva chegando, então ela fechou a janela.",
+          termoBusca: "dark sky window",
+        },
+        conclusao: { titulo: "Você aprendeu", mensagemFinal: "Hoje você leu, achou pistas e explicou com prova do texto. Esse é o caminho para interpretar melhor.", termoBusca: "happy child reading" },
+      },
+    };
+  }
+
+  return {
+    titulo: `Aula guiada: ${data.bnccCode}`,
+    metafora: "Aprender é como acender uma lanterna: primeiro vemos as pistas, depois entendemos o caminho.",
+    telas: {
+      missao: { titulo: "Missão de hoje", texto: `Você vai estudar ${assunto} com observação, exemplo e desafio.`, termoBusca: "student learning" },
+      exploracao: {
+        titulo: "Observe antes de responder",
+        texto: "Olhe para o tema como um investigador: o que acontece, quem participa, qual é a causa e qual é a consequência?",
+        termoBusca: "magnifying glass learning",
+        interativos: [
+          { label: "O quê", termoBusca: "question what", explicacao: "Descubra qual fato ou ideia está sendo estudada." },
+          { label: "Por quê", termoBusca: "question why", explicacao: "Procure a causa ou explicação do acontecimento." },
+          { label: "Como", termoBusca: "question how", explicacao: "Veja o passo a passo ou o jeito que acontece." },
+        ],
+      },
+      explicacao: { titulo: "Entenda o conceito", paragrafos: ["Comece separando o tema em partes pequenas.", "Depois ligue cada parte a um exemplo concreto.", "Para saber se entendeu, tente explicar com suas palavras."], termoBusca: "concept map" },
+      passoAPasso: { titulo: "Passo a passo", passos: ["Leia o tema.", "Marque palavras importantes.", "Veja um exemplo.", "Explique o que aconteceu.", "Responda e confira."], termoBusca: "steps learning" },
+      exemploAplicado: { titulo: "Exemplo aplicado", enunciado: `Exemplo sobre ${assunto}: observe uma situação da escola e diga qual pista ajuda a entender o tema.`, resolucao: ["Primeiro identifico a situação.", "Depois encontro a pista principal.", "Por fim explico a relação entre a pista e a resposta."], termoBusca: "classroom example" },
+      desafio: { titulo: "Desafio", enunciado: "Qual atitude mostra que você entendeu um conteúdo novo?", opcoes: ["A) Copiar sem ler", "B) Explicar com suas palavras e dar exemplo", "C) Chutar rápido"], respostaCorreta: "B", explicacaoResposta: "Quem explica com palavras próprias e dá exemplo mostra compreensão real.", termoBusca: "student explaining" },
+      conclusao: { titulo: "Fechamento", mensagemFinal: "Você praticou observar, entender, exemplificar e responder. Amanhã o Professor Brilho continua com você.", termoBusca: "learning success" },
+    },
+  };
+}
+
 function parseAulaDinamica(raw: string): AulaDinamica {
   const parsed = extractJson(raw);
   const r = AulaDinamicaSchema.safeParse(parsed);
@@ -446,15 +600,18 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
-    const supabaseAdmin = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
-    );
+    const hasSupabaseAdmin = !!process.env.SUPABASE_URL && !!process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseAdmin = hasSupabaseAdmin
+      ? createClient(
+          process.env.SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          { auth: { persistSession: false, autoRefreshToken: false } },
+        )
+      : null;
 
 
     // 1) Cache lookup
-    if (!data.force) {
+    if (!data.force && supabaseAdmin) {
       const { data: cached } = await supabaseAdmin
         .from("aulas_geradas_ia")
         .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
@@ -473,10 +630,10 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return {
-        ok: false as const,
+        ok: true as const,
         cached: false,
-        error: "GROQ_API_KEY ausente",
-        aula: null,
+        error: "GROQ_API_KEY ausente; usando aula estruturada local",
+        aula: buildFallbackAulaDinamica(data),
       };
     }
 
@@ -513,10 +670,10 @@ Gere a aula JSON completa.`;
         const errText = await res.text();
         console.error("[groq:dinamica] HTTP", res.status, errText.slice(0, 400));
         return {
-          ok: false as const,
+          ok: true as const,
           cached: false,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          aula: null,
+          error: `Groq ${res.status}; usando aula estruturada local`,
+          aula: buildFallbackAulaDinamica(data),
         };
       }
 
@@ -526,41 +683,43 @@ Gere a aula JSON completa.`;
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
       if (!raw) {
         return {
-          ok: false as const,
+          ok: true as const,
           cached: false,
-          error: "Resposta vazia",
-          aula: null,
+          error: "Resposta vazia; usando aula estruturada local",
+          aula: buildFallbackAulaDinamica(data),
         };
       }
 
       const aula = parseAulaDinamica(raw);
 
       // 2) Save cache (upsert by codigo_bncc)
-      const { error: upErr } = await supabaseAdmin
-        .from("aulas_geradas_ia")
-        .upsert(
-          {
-            codigo_bncc: data.bnccCode,
-            titulo: aula.titulo,
-            screens: aula as unknown as Record<string, unknown>,
-            modelo: "llama-3.1-8b-instant",
-            disciplina: data.componente ?? null,
-            ano: data.serie ?? null,
-            aprovada: false,
-            gerada_em: new Date().toISOString(),
-          },
-          { onConflict: "codigo_bncc" },
-        );
-      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
+      if (supabaseAdmin) {
+        const { error: upErr } = await supabaseAdmin
+          .from("aulas_geradas_ia")
+          .upsert(
+            {
+              codigo_bncc: data.bnccCode,
+              titulo: aula.titulo,
+              screens: aula as unknown as Record<string, unknown>,
+              modelo: "llama-3.1-8b-instant",
+              disciplina: data.componente ?? null,
+              ano: data.serie ?? null,
+              aprovada: false,
+              gerada_em: new Date().toISOString(),
+            },
+            { onConflict: "codigo_bncc" },
+          );
+        if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
+      }
 
       return { ok: true as const, cached: false, aula, error: null };
     } catch (e) {
       console.error("[groq:dinamica]", e);
       return {
-        ok: false as const,
+        ok: true as const,
         cached: false,
-        error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        aula: null,
+        error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local",
+        aula: buildFallbackAulaDinamica(data),
       };
     }
   });

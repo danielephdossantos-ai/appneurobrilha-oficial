@@ -70,7 +70,7 @@ function textoCompletoPagina(pagina: Pagina, metaLabel?: string): string {
     c.exemplos.forEach((ex: any) => partes.push(`${ex.silaba} forma ${ex.palavra}.`));
   if (Array.isArray(c.perguntas))
     c.perguntas.forEach((p: any, i: number) =>
-      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}.`),
+      partes.push(`Pergunta ${i + 1}: ${p.pergunta}. Resposta: ${p.resposta}. ${p.explicacao ? `Explicação: ${p.explicacao}.` : ""}`),
     );
   return partes.join(". ");
 }
@@ -215,9 +215,30 @@ function PaginaConteudo({ pagina }: { pagina: Pagina }) {
                   ver resposta
                 </span>
               </summary>
+              {Array.isArray(p.opcoes) && p.opcoes.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+                  {p.opcoes.map((op: string) => (
+                    <div
+                      key={op}
+                      className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
+                        String(op).trim().toLowerCase() === String(p.resposta).trim().toLowerCase()
+                          ? "border-success bg-success/10 text-success"
+                          : "border-border bg-muted/40 text-muted-foreground"
+                      }`}
+                    >
+                      {op}
+                    </div>
+                  ))}
+                </div>
+              )}
               <div className="mt-3 p-3 bg-success/10 rounded-xl text-success font-bold">
                 ✓ {p.resposta}
               </div>
+              {p.explicacao && (
+                <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-900 font-medium">
+                  💡 {p.explicacao}
+                </div>
+              )}
             </details>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useAulaBnccById } from "../modules/escola-brilha/hooks/useAulasBncc";
 import { EarlyChildhoodPlayer } from "../modules/escola-brilha/views/EarlyChildhoodPlayer";
 import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
@@ -13,6 +14,8 @@ import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activit
 import { useLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
+import { gerarLessonV2Escola } from "@/lib/escola-lesson-v2-ia.functions";
+import type { LessonV2 } from "../modules/escola-brilha/types/lesson-v2";
 
 const KIDS_GRADES = new Set(["1º Ano", "2º Ano", "1º ao 2º Ano"]);
 const AL_GRADES = new Set(["3º Ano", "4º Ano", "5º Ano"]);
@@ -58,13 +61,41 @@ class PlayerBoundary extends React.Component<
 function AulaDbPage() {
   const { aulaId } = Route.useParams();
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
+  const [aiLesson, setAiLesson] = React.useState<LessonV2 | null>(null);
+  const [aiLoading, setAiLoading] = React.useState(false);
   const navigate = useNavigate();
+  const gerarAulaReal = useServerFn(gerarLessonV2Escola);
   const { aula, loading, error } = useAulaBnccById(aulaId);
   const fund2Lesson = useLessonV2(
     aula?.codigo_bncc ?? "",
     aula?.titulo ?? "",
     aula?.descricao ?? "",
   );
+
+  React.useEffect(() => {
+    if (!aula) return;
+    let cancelled = false;
+    setAiLesson(null);
+    setAiLoading(true);
+    gerarAulaReal({
+      data: {
+        bnccCode: aula.codigo_bncc,
+        titulo: aula.titulo,
+        bnccObjective: aula.descricao ?? "",
+      },
+    })
+      .then((r) => {
+        if (cancelled) return;
+        if (r.ok && r.lesson) setAiLesson(r.lesson as LessonV2);
+      })
+      .catch((e) => console.error("[escola-brilha] IA lesson failed", e))
+      .finally(() => {
+        if (!cancelled) setAiLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [aula?.id]);
 
   if (loading) {
     return (
@@ -97,6 +128,22 @@ function AulaDbPage() {
 
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
+
+    if (aiLoading && !aiLesson) {
+      return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-slate-900 text-white gap-4 p-6 text-center">
+          <div className="h-14 w-14 rounded-full border-4 border-emerald-300 border-t-transparent animate-spin" />
+          <p className="text-xl font-black">Professor Brilho está montando uma aula de verdade…</p>
+          <p className="text-sm text-white/70 max-w-md">
+            Preparando explicação, exemplo resolvido, exercícios e correção pedagógica para esta criança.
+          </p>
+        </div>
+      );
+    }
+
+    if (aiLesson) {
+      return <Fund2Player lesson={aiLesson} currentRef={ref} capitulo={aula.codigo_bncc} />;
+    }
 
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
