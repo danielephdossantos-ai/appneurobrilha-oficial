@@ -436,6 +436,13 @@ function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>
   const code = data.bnccCode.toUpperCase();
   const isMath = code.includes("MA") || comp.includes("mat");
   const isPort = code.includes("LP") || comp.includes("port") || comp.includes("língua");
+  const isScience = code.includes("CI") || comp.includes("ciênc") || comp.includes("cienc");
+  const isGeo = code.includes("GE") || comp.includes("geograf");
+  const isHist = code.includes("HI") || comp.includes("hist");
+  const isEnglish = code.includes("LI") || comp.includes("ingl");
+  const isArt = code.includes("AR") || comp.includes("arte");
+  const isPE = code.includes("EF") || comp.includes("fís") || comp.includes("fis");
+  const isReligion = code.includes("ER") || comp.includes("relig");
 
   if (isMath) {
     return {
@@ -555,6 +562,145 @@ function buildFallbackAulaDinamica(data: z.infer<typeof AulaDinamicaInputSchema>
           termoBusca: "dark sky window",
         },
         conclusao: { titulo: "Você aprendeu", mensagemFinal: "Hoje você leu, achou pistas e explicou com prova do texto. Esse é o caminho para interpretar melhor.", termoBusca: "happy child reading" },
+      },
+    };
+  }
+
+  if (isScience || isGeo || isHist || isEnglish || isArt || isPE || isReligion) {
+    const subject = isScience ? "Ciências" : isGeo ? "Geografia" : isHist ? "História" : isEnglish ? "Inglês" : isArt ? "Arte" : isPE ? "Educação Física" : "Ensino Religioso";
+    const pack = {
+      Ciências: {
+        metafora: "Ciências é como investigar uma cena: você observa pistas, compara mudanças e explica usando evidências.",
+        termo: "science experiment classroom",
+        explorar: "Observe duas plantas: uma recebeu água e luz; outra ficou sem água. A aula começa perguntando o que mudou e qual evidência mostra a causa.",
+        itens: [
+          { label: "Observar", termoBusca: "magnifying glass leaf", explicacao: "Diga o que você vê ou mede, sem inventar." },
+          { label: "Comparar", termoBusca: "two plants", explicacao: "Veja o que ficou igual e o que mudou." },
+          { label: "Evidência", termoBusca: "science notebook", explicacao: "Use uma pista real para provar sua resposta." },
+        ],
+        passos: ["Descreva o fenômeno.", "Separe causa e consequência.", "Compare com outro caso.", "Explique usando a evidência encontrada."],
+        exemplo: "Uma pedra caiu no copo e a água subiu. O que aconteceu?",
+        resolucao: ["A pedra ocupa espaço dentro do copo.", "Quando ela entra, empurra parte da água.", "A evidência é o nível da água mais alto.", "Conclusão: objetos ocupam espaço."],
+        desafio: "Se o gelo ficou fora do congelador e virou água, qual mudança ocorreu?",
+        opcoes: ["A) Derretimento", "B) Congelamento", "C) Evaporação"],
+        correta: "A" as const,
+        explica: "O gelo era sólido e virou líquido. Essa mudança se chama derretimento.",
+      },
+      Geografia: {
+        metafora: "Geografia é como ler um mapa do mundo real: você localiza, observa a paisagem e entende como as pessoas usam o espaço.",
+        termo: "map landscape classroom",
+        explorar: "Olhe uma paisagem com rio, ponte, casas e rua. A tarefa é separar natureza, construção humana e uso do lugar.",
+        itens: [
+          { label: "Lugar", termoBusca: "city map", explicacao: "Mostra onde algo acontece." },
+          { label: "Paisagem", termoBusca: "river bridge houses", explicacao: "É tudo que conseguimos observar no espaço." },
+          { label: "Uso", termoBusca: "public square", explicacao: "Mostra para que as pessoas usam aquele espaço." },
+        ],
+        passos: ["Localize o lugar.", "Observe elementos naturais.", "Observe elementos construídos.", "Explique como as pessoas transformaram o espaço."],
+        exemplo: "Em uma imagem há rio, ponte e casas. O que é natural e o que foi construído?",
+        resolucao: ["Rio é elemento natural.", "Ponte e casas foram construídas por pessoas.", "A ponte transforma o espaço para atravessar o rio.", "Resposta completa separa natureza e construção."],
+        desafio: "Em um mapa, para que serve a legenda?",
+        opcoes: ["A) Explicar símbolos", "B) Esconder ruas", "C) Apagar lugares"],
+        correta: "A" as const,
+        explica: "A legenda mostra o significado dos símbolos do mapa.",
+      },
+      História: {
+        metafora: "História é como montar uma linha do tempo: você entende o que veio antes, o que aconteceu e o que mudou depois.",
+        termo: "history timeline classroom",
+        explorar: "Imagine uma comunidade que mudou de lugar porque o rio secou. Vamos descobrir causa, pessoas envolvidas e consequência.",
+        itens: [
+          { label: "Tempo", termoBusca: "timeline", explicacao: "Ajuda a saber antes, durante e depois." },
+          { label: "Causa", termoBusca: "dry river", explicacao: "É o motivo que levou o fato a acontecer." },
+          { label: "Mudança", termoBusca: "moving village", explicacao: "É a consequência depois do fato." },
+        ],
+        passos: ["Localize o acontecimento no tempo.", "Identifique quem participou.", "Procure a causa.", "Explique a consequência."],
+        exemplo: "Uma estrada nova ligou duas cidades. Que mudança isso pode causar?",
+        resolucao: ["A estrada facilita deslocamento.", "Pessoas e produtos circulam mais.", "Isso altera trabalho, comércio e rotina.", "A consequência é maior ligação entre as cidades."],
+        desafio: "O que é consequência em História?",
+        opcoes: ["A) O que acontece depois de um fato", "B) Uma cor bonita", "C) Um número sem contexto"],
+        correta: "A" as const,
+        explica: "Consequência é o resultado ou mudança que aparece depois de um acontecimento.",
+      },
+      Inglês: {
+        metafora: "Aprender inglês é como montar uma frase com blocos: pessoa, ação e complemento precisam fazer sentido juntos.",
+        termo: "english flashcards classroom",
+        explorar: "Leia: I like apples. Vamos descobrir quem fala, qual é a ação e qual palavra completa a ideia.",
+        itens: [
+          { label: "I", termoBusca: "person icon", explicacao: "I significa eu." },
+          { label: "Like", termoBusca: "heart icon", explicacao: "Like significa gostar." },
+          { label: "Apples", termoBusca: "red apples", explicacao: "Apples são maçãs." },
+        ],
+        passos: ["Ache o sujeito da frase.", "Encontre a ação.", "Veja o complemento.", "Traduza a ideia completa."],
+        exemplo: "She plays soccer. Quem pratica a ação?",
+        resolucao: ["She significa ela.", "Plays é a ação: joga.", "Soccer é futebol.", "Resposta: ela pratica a ação."],
+        desafio: "Qual frase significa 'Eu gosto de banana'?",
+        opcoes: ["A) I like banana", "B) She is banana", "C) Book banana"],
+        correta: "A" as const,
+        explica: "I like significa eu gosto. Banana completa a frase.",
+      },
+      Arte: {
+        metafora: "Arte é como falar usando cor, linha, forma, som e movimento: cada escolha comunica uma ideia.",
+        termo: "color lines art classroom",
+        explorar: "Observe uma pintura com azul escuro e linhas curvas. A pergunta é: que sensação essas escolhas podem passar?",
+        itens: [
+          { label: "Cor", termoBusca: "color palette", explicacao: "A cor pode sugerir alegria, calma, calor ou mistério." },
+          { label: "Linha", termoBusca: "curved lines", explicacao: "Linhas curvas podem sugerir suavidade ou movimento." },
+          { label: "Forma", termoBusca: "geometric shapes", explicacao: "Formas ajudam a organizar a imagem." },
+        ],
+        passos: ["Observe elementos visuais.", "Descreva sem julgar.", "Ligue elemento a sensação.", "Crie uma resposta com evidência."],
+        exemplo: "Uma obra usa vermelho forte e linhas quebradas. Que ideia pode passar?",
+        resolucao: ["Vermelho forte chama atenção.", "Linhas quebradas podem mostrar agitação.", "A resposta precisa citar os elementos.", "Pode passar energia ou tensão."],
+        desafio: "Qual resposta usa evidência artística?",
+        opcoes: ["A) Parece agitada por causa das linhas quebradas", "B) É bonita porque sim", "C) Não observei nada"],
+        correta: "A" as const,
+        explica: "Ela cita um elemento da obra e explica a sensação causada.",
+      },
+      "Educação Física": {
+        metafora: "Educação Física é aprender com o corpo: regra, movimento, segurança e cooperação trabalham juntos.",
+        termo: "children sports teamwork",
+        explorar: "Antes de jogar, observe alvo, espaço, colegas e regra. Movimento bom começa com segurança.",
+        itens: [
+          { label: "Regra", termoBusca: "game rules", explicacao: "Organiza o jogo e evita conflito." },
+          { label: "Corpo", termoBusca: "child balance", explicacao: "Postura, força e equilíbrio melhoram o movimento." },
+          { label: "Equipe", termoBusca: "teamwork children", explicacao: "Cooperar ajuda todos a participar." },
+        ],
+        passos: ["Entenda a regra.", "Observe o movimento.", "Pratique devagar.", "Cuide da segurança dos colegas."],
+        exemplo: "Ao arremessar uma bola, por que olhar para o alvo ajuda?",
+        resolucao: ["O olhar orienta a direção.", "O braço ajusta força e caminho.", "Com foco no alvo, o erro diminui.", "Arremesse sem atingir colegas."],
+        desafio: "Antes de começar um jogo, o que é essencial?",
+        opcoes: ["A) Combinar regras e segurança", "B) Empurrar para ganhar", "C) Ignorar colegas"],
+        correta: "A" as const,
+        explica: "Regras e segurança protegem todos e deixam a atividade organizada.",
+      },
+      "Ensino Religioso": {
+        metafora: "Convivência é como uma roda de conversa: cada pessoa tem voz, e respeito mantém a roda segura.",
+        termo: "children circle conversation",
+        explorar: "Dois colegas têm costumes diferentes no lanche. A aula pergunta como agir com respeito sem zombar nem impor opinião.",
+        itens: [
+          { label: "Escuta", termoBusca: "listening children", explicacao: "Entender antes de responder." },
+          { label: "Respeito", termoBusca: "kindness hands", explicacao: "Tratar o outro com dignidade mesmo quando há diferença." },
+          { label: "Ação", termoBusca: "helping friend", explicacao: "Valor vira atitude concreta no dia a dia." },
+        ],
+        passos: ["Escute a situação.", "Identifique o valor envolvido.", "Compare sem ofender.", "Escolha uma atitude respeitosa."],
+        exemplo: "Um colega ficou isolado no recreio. Qual atitude mostra solidariedade?",
+        resolucao: ["Perceber o colega sozinho é a observação.", "Solidariedade significa cuidado com o outro.", "Convidar para participar é uma ação concreta.", "Isso respeita a dignidade do colega."],
+        desafio: "Qual atitude mostra empatia?",
+        opcoes: ["A) Tentar entender como o outro se sente", "B) Rir da diferença", "C) Mandar todos pensarem igual"],
+        correta: "A" as const,
+        explica: "Empatia é considerar o sentimento do outro antes de agir.",
+      },
+    }[subject];
+
+    return {
+      titulo: `Aula real de ${subject}: ${data.bnccCode}`,
+      metafora: pack.metafora,
+      telas: {
+        missao: { titulo: "Missão de hoje", texto: `Você vai estudar ${assunto} com explicação, exemplo resolvido e desafio corrigido.`, termoBusca: pack.termo },
+        exploracao: { titulo: "Observe a situação", texto: pack.explorar, termoBusca: pack.termo, interativos: pack.itens },
+        explicacao: { titulo: "Explicação do professor", paragrafos: ["Primeiro observe as pistas da situação. Elas mostram o caminho da resposta.", "Depois separe causa, ação, regra ou evidência, conforme a matéria.", "Por fim responda com uma frase que explique o porquê, não apenas com uma palavra solta."], termoBusca: pack.termo },
+        passoAPasso: { titulo: "Passo a passo", passos: pack.passos, termoBusca: pack.termo },
+        exemploAplicado: { titulo: "Exemplo resolvido", enunciado: pack.exemplo, resolucao: pack.resolucao, termoBusca: pack.termo },
+        desafio: { titulo: "Sua vez", enunciado: pack.desafio, opcoes: pack.opcoes, respostaCorreta: pack.correta, explicacaoResposta: pack.explica, termoBusca: pack.termo },
+        conclusao: { titulo: "Fechamento", mensagemFinal: `Hoje você aprendeu ${subject} com situação concreta, pistas, exemplo resolvido e correção.`, termoBusca: pack.termo },
       },
     };
   }
