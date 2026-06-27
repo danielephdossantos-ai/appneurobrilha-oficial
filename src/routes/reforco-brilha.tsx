@@ -797,7 +797,7 @@ function ReforcoBrilha() {
                           TRILHA PEDAGÓGICA
                         </span>
                         <Pill tone="success" className="text-[10px] font-black">
-                          SISTEMA BNCC ATIVO
+                          TRILHA ATIVA
                         </Pill>
                       </div>
                       <h2 className="text-3xl font-black text-foreground leading-none">
