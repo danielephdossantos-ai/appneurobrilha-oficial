@@ -45,7 +45,7 @@ import { FloatingActivityControls } from "@/components/activities/FloatingActivi
 import { AulaViewer } from "@/components/reforco-brilha/AulaViewer";
 import { PlanoIntervencao } from "@/components/reforco-brilha/PlanoIntervencao";
 import { OrientacoesFamilia } from "@/components/reforco-brilha/OrientacoesFamilia";
-import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
+// RelatoriosReforco foi movido para a Área dos Pais (painel-pais)
 import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
@@ -750,10 +750,8 @@ function ReforcoBrilha() {
             </div>
           </div>
 
-          {/* Relatório da criança — sempre no final da página */}
-          <div className="pt-4 border-t-2 border-dashed border-indigo-200">
-            <RelatoriosReforco />
-          </div>
+
+
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">

@@ -21,6 +21,7 @@ import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 import { ConsentGate } from "@/components/legal/ConsentGate";
 import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
+import { RelatoriosReforco } from "@/components/reforco-brilha/RelatoriosReforco";
 
 export const Route = createFileRoute("/painel-pais")({
   component: () => (
@@ -329,6 +330,11 @@ function PainelPremium() {
             <motion.div variants={itemVariants}>
               <PedagogicalAlerts alerts={mockResponsibleData.alerts} childId={activeChild.id} />
             </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <RelatoriosReforco />
+            </motion.div>
+
 
             <motion.div
               variants={itemVariants}
