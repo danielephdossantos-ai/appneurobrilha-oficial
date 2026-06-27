@@ -268,8 +268,8 @@ serve(async (req) => {
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error("AI Gateway error:", response.status, errText);
-      return new Response(JSON.stringify({ error: `AI Gateway ${response.status}: ${errText}` }), {
+      console.error("Groq error:", response.status, errText);
+      return new Response(JSON.stringify({ error: `Groq ${response.status}: ${errText}` }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
