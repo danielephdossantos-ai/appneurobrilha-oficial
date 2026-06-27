@@ -20,6 +20,7 @@ import {
   GraduationCap,
   SpellCheck,
   CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -27,6 +28,7 @@ import {
   type RecursoExterno,
 } from "@/lib/recursos-externos.functions";
 import { revisarPortugues } from "@/lib/revisar-portugues.functions";
+import { analisarTrabalho } from "@/lib/groq-professor.functions";
 import { TutorTrabalho } from "./TutorTrabalho";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 
@@ -205,11 +207,15 @@ function EditorTrabalho({
 }) {
   const buscar = useServerFn(buscarRecursosExternos);
   const revisar = useServerFn(revisarPortugues);
+  const analisar = useServerFn(analisarTrabalho);
   const documentoRef = useRef<HTMLDivElement>(null);
 
   const [titulo, setTitulo] = useState(trabalhoExistente?.titulo || "");
   const [tema, setTema] = useState(trabalhoExistente?.tema || "");
   const [materia, setMateria] = useState(trabalhoExistente?.materia || "");
+  const [instrucoesProf, setInstrucoesProf] = useState<string>(
+    (trabalhoExistente as any)?.instrucoes_professor || "",
+  );
   const [blocos, setBlocos] = useState<Bloco[]>(trabalhoExistente?.blocos || []);
   const [fontes, setFontes] = useState<Fonte[]>(trabalhoExistente?.fontes || []);
 
@@ -230,6 +236,10 @@ function EditorTrabalho({
   const [resumoRevisao, setResumoRevisao] = useState<string | null>(null);
   const [avisoCreditos, setAvisoCreditos] = useState<string | null>(null);
 
+  // Análise IA
+  const [analisando, setAnalisando] = useState(false);
+  const [analiseTexto, setAnaliseTexto] = useState<string | null>(null);
+
   // Preview inline
   const [preview, setPreview] = useState<RecursoExterno | null>(null);
 
@@ -238,7 +248,7 @@ function EditorTrabalho({
   useEffect(() => {
     if (!childId) return;
     if (!titulo.trim() || !tema.trim()) return;
-    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes });
+    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes, instrucoesProf });
     if (snapshot === ultimoSalvoRef.current) return;
     const t = setTimeout(async () => {
       setAutoStatus("salvando");
@@ -247,6 +257,7 @@ function EditorTrabalho({
         titulo: titulo.trim(),
         tema: tema.trim(),
         materia: materia.trim() || null,
+        instrucoes_professor: instrucoesProf.trim() || null,
         blocos: blocos as any,
         fontes: fontes as any,
       };
@@ -274,7 +285,47 @@ function EditorTrabalho({
       }
     }, 1500);
     return () => clearTimeout(t);
-  }, [titulo, tema, materia, blocos, fontes, childId, idAtual]);
+  }, [titulo, tema, materia, blocos, fontes, instrucoesProf, childId, idAtual]);
+
+  async function rodarAnalise() {
+    if (analisando) return;
+    const texto = [
+      titulo,
+      ...blocos.map((b) =>
+        b.tipo === "imagem" ? (b.legenda ? `[Imagem: ${b.legenda}]` : "") : (b.texto || ""),
+      ),
+    ]
+      .filter(Boolean)
+      .join("\n\n")
+      .trim();
+    if (texto.length < 20) {
+      toast.info("Escreva um pouquinho do trabalho antes de pedir análise.");
+      return;
+    }
+    setAnalisando(true);
+    setAnaliseTexto(null);
+    try {
+      const res = await analisar({
+        data: {
+          titulo,
+          tema,
+          materia: materia || null,
+          instrucoesProfessor: instrucoesProf || null,
+          texto,
+        },
+      });
+      if (!res.ok) {
+        toast.error(res.error || "Erro na análise");
+        return;
+      }
+      setAnaliseTexto(res.analise);
+      toast.success("Análise pronta!");
+    } catch (e: any) {
+      toast.error("Erro: " + (e?.message || ""));
+    } finally {
+      setAnalisando(false);
+    }
+  }
 
   async function rodarRevisao() {
     if (revisando) return;
@@ -504,6 +555,17 @@ function EditorTrabalho({
           >
             <GraduationCap className="h-3.5 w-3.5" /> Tutor Brilha
           </button>
+          <button
+            onClick={rodarAnalise}
+            disabled={analisando}
+            className="text-xs font-black bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 shadow disabled:opacity-50"
+            title="A IA analisa seu trabalho e dá dicas pra melhorar"
+          >
+            {analisando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+            Análise da IA
+          </button>
+
+
 
           <button
             onClick={exportarPDF}
@@ -570,7 +632,30 @@ function EditorTrabalho({
               placeholder="Tema (ex: Sistema solar)"
               className="sm:col-span-2 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
             />
+            <textarea
+              value={instrucoesProf}
+              onChange={(e) => setInstrucoesProf(e.target.value)}
+              placeholder="📋 Instruções do professor (cole aqui o que o professor pediu — a IA usa isso na análise)"
+              rows={3}
+              className="sm:col-span-2 text-sm border-2 border-violet-200 bg-violet-50/40 rounded-lg px-3 py-2 focus:outline-none focus:border-violet-500"
+            />
           </div>
+
+          {analiseTexto && (
+            <div className="border-2 border-violet-300 bg-violet-50 rounded-xl p-3 text-sm whitespace-pre-wrap leading-relaxed text-violet-950 relative">
+              <button
+                onClick={() => setAnaliseTexto(null)}
+                className="absolute top-2 right-2 p-1 rounded hover:bg-violet-100 text-violet-700"
+                aria-label="Fechar análise"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+              <p className="text-[10px] font-black uppercase tracking-widest text-violet-700 mb-2 flex items-center gap-1">
+                <Sparkles className="h-3 w-3" /> Análise do Professor Brilho
+              </p>
+              {analiseTexto}
+            </div>
+          )}
 
           {/* Botões de bloco */}
           <div className="flex flex-wrap gap-2 text-xs">
@@ -930,6 +1015,28 @@ function archiveEmbed(url: string): string | null {
   return null;
 }
 
+function webEmbedUrl(url: string, fonte: string): string | null {
+  try {
+    const u = new URL(url);
+    if (fonte === "wikipedia" || u.hostname.includes("wikipedia.org")) {
+      return url.replace("://pt.wikipedia.org/", "://pt.m.wikipedia.org/")
+                .replace("://en.wikipedia.org/", "://en.m.wikipedia.org/");
+    }
+    if (fonte === "wikiversity" || u.hostname.includes("wikiversity.org")) {
+      return url.replace("://pt.wikiversity.org/", "://pt.m.wikiversity.org/")
+                .replace("://en.wikiversity.org/", "://en.m.wikiversity.org/");
+    }
+    if (fonte === "openlibrary" || u.hostname.includes("openlibrary.org")) {
+      return url;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+
+
 function RecursoPreviewModal({
   recurso,
   onFechar,
@@ -945,6 +1052,7 @@ function RecursoPreviewModal({
     ? youtubeIdFromUrl(recurso.url)
     : null;
   const archive = recurso.fonte === "archive" ? archiveEmbed(recurso.url) : null;
+  const webEmbed = !ytId && !archive ? webEmbedUrl(recurso.url, recurso.fonte) : null;
   const temConteudo = !!(recurso.conteudo && recurso.conteudo.trim().length > 0);
 
   return (
@@ -996,6 +1104,26 @@ function RecursoPreviewModal({
               />
             </div>
           )}
+
+          {webEmbed && (
+            <div className="space-y-2">
+              <div className="rounded-lg border-2 border-amber-200 bg-amber-50/40 px-3 py-2 text-[11px] text-amber-900 flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 text-amber-700 shrink-0" />
+                Leia abaixo e <b>selecione o trecho</b> que quiser → copie (Ctrl+C ou segurar no celular) e cole no seu trabalho.
+              </div>
+              <div className="w-full h-[65vh] rounded-lg overflow-hidden border-2 border-amber-200 bg-white">
+                <iframe
+                  src={webEmbed}
+                  title={recurso.titulo}
+                  className="w-full h-full"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          )}
+
+
 
           {!ytId && !archive && recurso.thumbnail && (
             <img

@@ -4058,6 +4058,7 @@ export type Database = {
           data_entrega: string | null
           fontes: Json
           id: string
+          instrucoes_professor: string | null
           materia: string | null
           tema: string
           titulo: string
@@ -4071,6 +4072,7 @@ export type Database = {
           data_entrega?: string | null
           fontes?: Json
           id?: string
+          instrucoes_professor?: string | null
           materia?: string | null
           tema: string
           titulo: string
@@ -4084,6 +4086,7 @@ export type Database = {
           data_entrega?: string | null
           fontes?: Json
           id?: string
+          instrucoes_professor?: string | null
           materia?: string | null
           tema?: string
           titulo?: string
