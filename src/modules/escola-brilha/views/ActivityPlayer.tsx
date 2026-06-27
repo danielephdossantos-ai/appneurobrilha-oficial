@@ -1354,6 +1354,24 @@ const ExemploVisualScreen: React.FC<{
       </div>
 
       <div className="px-4 pt-3 pb-5 space-y-4">
+        {/* ── Hero image (Fundamental II) ── */}
+        {s.image_url && (
+          <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white">
+            <img
+              src={s.image_url}
+              alt={s.image_caption ?? s.title}
+              className="w-full h-44 sm:h-52 object-cover"
+              loading="lazy"
+              draggable={false}
+            />
+            {s.image_caption && (
+              <p className="text-center text-xs font-bold text-slate-600 px-3 py-2 bg-slate-50">
+                {s.image_caption}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* ── Context chips (o problema concreto) ── */}
         <div className="flex flex-wrap gap-2">
           {s.sentences.map((sentence, i) => (
@@ -1364,7 +1382,16 @@ const ExemploVisualScreen: React.FC<{
               transition={{ delay: i * 0.15 }}
               className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5"
             >
-              {sentence.emoji && <RenderEmoji e={sentence.emoji} className="w-6 h-6" />}
+              {sentence.image_url ? (
+                <img
+                  src={sentence.image_url}
+                  alt=""
+                  className="w-6 h-6 object-cover rounded-full"
+                  loading="lazy"
+                />
+              ) : sentence.emoji ? (
+                <RenderEmoji e={sentence.emoji} className="w-6 h-6" />
+              ) : null}
               <span className="text-slate-700 font-semibold text-xs leading-snug">
                 {sentence.text}
               </span>
@@ -1377,12 +1404,12 @@ const ExemploVisualScreen: React.FC<{
           <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3">
             <VisualBlock visual={s.visual} startDelay={300} />
           </div>
-        ) : (
+        ) : !s.image_url ? (
           /* Fallback when no visual configured */
           <div className="bg-amber-50 border-2 border-amber-100 rounded-2xl p-4 text-center">
             <p className="text-slate-600 font-semibold text-sm">{s.conclusion}</p>
           </div>
-        )}
+        ) : null}
 
         {/* ── Conclusion badge ── */}
         <motion.div
