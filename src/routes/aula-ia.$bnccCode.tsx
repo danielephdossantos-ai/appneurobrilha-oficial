@@ -39,8 +39,8 @@ function AulaIaPage() {
         data: {
           bnccCode,
           descricao: hab?.habilidade ?? `Habilidade ${bnccCode} da BNCC`,
-          idade: 9,
-          serie: hab?.ano ?? undefined,
+          idade: hab?.ano ? Math.min(16, Math.max(5, hab.ano + 5)) : 9,
+          serie: hab?.ano ? `${hab.ano}º Ano` : undefined,
           componente: hab?.componente ?? undefined,
           force,
         },
