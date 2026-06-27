@@ -1,33 +1,34 @@
 /**
  * pedagogical-library — resolve BNCC → Template → Aula (LessonV2)
- * consultando a Biblioteca Pedagógica no Lovable Cloud.
  *
- * Pipeline (em ordem):
- *   1. Cache em memória (síncrono, dropin para os players atuais).
- *   2. `pedagogical_lessons_cache` (LessonV2 já montada e versionada).
- *   3. `bncc_template_map` + `pedagogical_templates` (monta sob demanda).
- *   4. Fallback determinístico: `buildLessonV2` (packs locais 6º–9º).
+ * Caches separados:
+ *   - templateCache: aula real vinda do Supabase (Biblioteca Pedagógica).
+ *   - fallbackCache: aula determinística local (último recurso).
  *
- * Os players Fund2Player chamam `resolveLessonV2Sync` (sync, igual à API
- * antiga). Em paralelo, dispare `prefetchLessonV2` para popular o cache em
- * memória a partir do Supabase — a próxima renderização já usa Templates.
+ * O `resolveLessonV2Sync` SEMPRE prefere `templateCache` quando disponível.
+ * O hook `useLessonV2` assina mudanças do cache para re-renderizar quando
+ * o template do Supabase chegar depois do primeiro paint (que mostra
+ * temporariamente o fallback).
  */
 
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { buildLessonV2 } from "./lesson-builder-v2";
-import type {
-  LessonV2,
-  OptionV2,
-  ResumoFormat,
-} from "../types/lesson-v2";
+import type { LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
 
-// ----------------------------- cache em memória -----------------------------
+// ----------------------------- caches separados ----------------------------
 
-const memCache = new Map<string, LessonV2>();
+const templateCache = new Map<string, LessonV2>();
+const fallbackCache = new Map<string, LessonV2>();
 const inflight = new Map<string, Promise<LessonV2 | null>>();
+const listeners = new Set<() => void>();
 
 function cacheKey(bnccCode: string, titulo: string) {
   return `${bnccCode}::${titulo}`;
+}
+
+function emit() {
+  listeners.forEach((l) => l());
 }
 
 // ----------------------------- tipos auxiliares -----------------------------
@@ -75,8 +76,6 @@ function buildFromTemplate(
   bnccObjective: string,
   tpl: TemplateRow,
 ): LessonV2 {
-  // Base determinística do fallback — garante 100% das telas preenchidas
-  // mesmo quando o template é parcial.
   const fallback = buildLessonV2(bnccCode, titulo, bnccObjective);
 
   const passoAPasso =
@@ -113,10 +112,7 @@ function buildFromTemplate(
       explicacao: {
         conceito: tpl.metodo,
         passoAPasso,
-        exemplo:
-          ex0?.answer ??
-          fallback?.screens.explicacao.exemplo ??
-          "",
+        exemplo: ex0?.answer ?? fallback?.screens.explicacao.exemplo ?? "",
         aplicacao:
           fallback?.screens.explicacao.aplicacao ??
           `Aplique ${titulo.toLowerCase()} no seu dia a dia.`,
@@ -173,12 +169,9 @@ function buildFromTemplate(
         format:
           tpl.revisao?.format ?? fallback?.screens.resumo.format ?? "list",
         title: titulo,
-        nodes:
-          tpl.revisao?.nodes ?? fallback?.screens.resumo.nodes ?? [],
+        nodes: tpl.revisao?.nodes ?? fallback?.screens.resumo.nodes ?? [],
         takeaways:
-          tpl.revisao?.takeaways ??
-          fallback?.screens.resumo.takeaways ??
-          [],
+          tpl.revisao?.takeaways ?? fallback?.screens.resumo.takeaways ?? [],
       },
       dominio: {
         bnccCode,
@@ -197,29 +190,28 @@ function buildFromTemplate(
 
 // ----------------------------- API pública ---------------------------------
 
-/**
- * Sync resolver: drop-in para os players. Retorna do cache em memória
- * (preenchido por `prefetchLessonV2`) ou faz o fallback determinístico
- * imediato com `buildLessonV2`.
- */
+/** Template-first; só usa fallback se o template ainda não chegou. */
 export function resolveLessonV2Sync(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
 ): LessonV2 | null {
   const key = cacheKey(bnccCode, titulo);
-  const hit = memCache.get(key);
-  if (hit) return hit;
+  const tpl = templateCache.get(key);
+  if (tpl) return tpl;
+
+  const cached = fallbackCache.get(key);
+  if (cached) return cached;
 
   const fb = buildLessonV2(bnccCode, titulo, bnccObjective);
-  if (fb) memCache.set(key, fb);
+  if (fb) fallbackCache.set(key, fb);
   return fb;
 }
 
 /**
- * Async resolver: consulta a Biblioteca Pedagógica no Supabase
- * (cache → template) e popula o cache em memória. Quando nada existir
- * ainda na base, mantém o fallback local — sem quebrar a UI.
+ * Busca o template REAL no Supabase e popula `templateCache`.
+ * NÃO consulta `fallbackCache` — sempre tenta puxar o template,
+ * mesmo se já existir fallback. Notifica `useLessonV2` ao terminar.
  */
 export async function prefetchLessonV2(
   bnccCode: string,
@@ -227,59 +219,62 @@ export async function prefetchLessonV2(
   bnccObjective = "",
 ): Promise<LessonV2 | null> {
   const key = cacheKey(bnccCode, titulo);
-  if (memCache.has(key)) return memCache.get(key)!;
+  if (templateCache.has(key)) return templateCache.get(key)!;
 
   const pending = inflight.get(key);
   if (pending) return pending;
 
   const work = (async () => {
-    // 1) Cache versionado no Supabase (lesson já montada).
-    const { data: cached } = await supabase
-      .from("pedagogical_lessons_cache")
-      .select("lesson, version")
-      .eq("bncc_code", bnccCode)
-      .order("version", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (cached?.lesson) {
-      const lesson = cached.lesson as unknown as LessonV2;
-      memCache.set(key, lesson);
-      return lesson;
-    }
-
-    // 2) Map BNCC → Template (maior prioridade).
-    const { data: map } = await supabase
-      .from("bncc_template_map")
-      .select("template_id, priority")
-      .eq("bncc_code", bnccCode)
-      .order("priority", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (map?.template_id) {
-      const { data: tpl } = await supabase
-        .from("pedagogical_templates")
-        .select("*")
-        .eq("id", map.template_id)
+    try {
+      // 1) Cache versionado no Supabase (lesson já montada).
+      const { data: cached } = await supabase
+        .from("pedagogical_lessons_cache")
+        .select("lesson, version")
+        .eq("bncc_code", bnccCode)
+        .order("version", { ascending: false })
+        .limit(1)
         .maybeSingle();
 
-      if (tpl) {
-        const lesson = buildFromTemplate(
-          bnccCode,
-          titulo,
-          bnccObjective,
-          tpl as unknown as TemplateRow,
-        );
-        memCache.set(key, lesson);
+      if (cached?.lesson) {
+        const lesson = cached.lesson as unknown as LessonV2;
+        templateCache.set(key, lesson);
+        emit();
         return lesson;
       }
+
+      // 2) Map BNCC → Template (maior prioridade).
+      const { data: map } = await supabase
+        .from("bncc_template_map")
+        .select("template_id, priority")
+        .eq("bncc_code", bnccCode)
+        .order("priority", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (map?.template_id) {
+        const { data: tpl } = await supabase
+          .from("pedagogical_templates")
+          .select("*")
+          .eq("id", map.template_id)
+          .maybeSingle();
+
+        if (tpl) {
+          const lesson = buildFromTemplate(
+            bnccCode,
+            titulo,
+            bnccObjective,
+            tpl as unknown as TemplateRow,
+          );
+          templateCache.set(key, lesson);
+          emit();
+          return lesson;
+        }
+      }
+    } catch (err) {
+      console.warn("[pedagogical-library] prefetch failed:", err);
     }
 
-    // 3) Fallback determinístico local.
-    const fb = buildLessonV2(bnccCode, titulo, bnccObjective);
-    if (fb) memCache.set(key, fb);
-    return fb;
+    return null;
   })();
 
   inflight.set(key, work);
@@ -290,8 +285,30 @@ export async function prefetchLessonV2(
   }
 }
 
-/** Limpa cache em memória (útil em testes / após admin atualizar template). */
+/** Hook React: retorna a aula e re-renderiza quando o template chega. */
+export function useLessonV2(
+  bnccCode: string,
+  titulo: string,
+  bnccObjective = "",
+): LessonV2 | null {
+  const [, force] = useState(0);
+
+  useEffect(() => {
+    const sub = () => force((n) => n + 1);
+    listeners.add(sub);
+    void prefetchLessonV2(bnccCode, titulo, bnccObjective);
+    return () => {
+      listeners.delete(sub);
+    };
+  }, [bnccCode, titulo, bnccObjective]);
+
+  return resolveLessonV2Sync(bnccCode, titulo, bnccObjective);
+}
+
+/** Limpa caches (testes / admin). */
 export function clearLessonV2Cache() {
-  memCache.clear();
+  templateCache.clear();
+  fallbackCache.clear();
   inflight.clear();
+  emit();
 }

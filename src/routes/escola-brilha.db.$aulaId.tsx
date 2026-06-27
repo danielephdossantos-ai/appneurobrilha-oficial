@@ -10,7 +10,7 @@ import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLesson
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
-import { resolveLessonV2Sync, prefetchLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
+import { useLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
@@ -60,6 +60,7 @@ function AulaDbPage() {
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
+  const fund2Lesson = useLessonV2(aula?.codigo_bncc ?? "", aula?.titulo ?? "");
 
   if (loading) {
     return (
@@ -117,12 +118,10 @@ function AulaDbPage() {
 
     // 6º–9º Ano: player premium de 8 telas estilo Khan/Classroom (sem mascotes).
     if (FUND2_GRADES.has(aula.serie)) {
-      void prefetchLessonV2(aula.codigo_bncc, aula.titulo);
-      const v2 = resolveLessonV2Sync(aula.codigo_bncc, aula.titulo);
-      if (v2) {
+      if (fund2Lesson) {
         return (
           <Fund2Player
-            lesson={v2}
+            lesson={fund2Lesson}
             currentRef={ref}
             capitulo={aula.codigo_bncc}
           />
