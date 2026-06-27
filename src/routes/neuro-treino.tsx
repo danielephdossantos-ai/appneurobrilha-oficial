@@ -371,6 +371,40 @@ function Treino() {
             ));
           })()}
 
+          {/* ── ESCOLA BRILHA AULAS (banco aulas_bncc — 1º Ano) ── */}
+          {aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length > 0 && (
+            <section className="rounded-3xl border border-amber-200 dark:border-amber-800 overflow-hidden shadow-sm">
+              <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 px-4 py-3 flex items-center gap-2 border-b border-amber-200 dark:border-amber-800">
+                <BookOpen className="h-5 w-5 text-amber-600" />
+                <div>
+                  <h2 className="font-black text-sm text-amber-600 uppercase tracking-wider">Escola Brilha · Aulas</h2>
+                  <div className="text-xs text-muted-foreground">{aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").length} aulas · BNCC 1º Ano</div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-card">
+                {aulasEscolaBrilha.filter((a) => a.serie === "1º Ano").map((a) => (
+                  <Link
+                    key={a.id}
+                    to="/escola-brilha/db/$aulaId"
+                    params={{ aulaId: a.id }}
+                    className="group relative bg-background hover:bg-accent/30 border-2 border-border hover:border-primary/30 rounded-2xl p-3 flex flex-col text-left transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-95"
+                  >
+                    <div className="w-full h-20 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 mb-2 flex items-center justify-center">
+                      <BookOpen className="h-7 w-7 text-white" />
+                    </div>
+                    <div className="font-black text-xs leading-tight text-foreground line-clamp-2">{a.titulo}</div>
+                    <div className="text-[10px] text-muted-foreground line-clamp-1">{a.disciplina}</div>
+                    {a.codigo_bncc && (
+                      <div className="mt-1 inline-block text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">{a.codigo_bncc}</div>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+
+
 
           {GRUPOS.map((g) => {
 
