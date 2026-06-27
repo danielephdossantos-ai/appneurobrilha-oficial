@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, CheckCircle2, X, Sparkles, ArrowRight, RotateCw } from "lucide-react";
+import { Loader2, CheckCircle2, X, Sparkles, ArrowRight, RotateCw, BookOpen } from "lucide-react";
 import { supabase } from "@/database/supabase/client";
 import { gerarAulaInterativa, type AulaInterativa, type TelaInterativa } from "@/lib/aula-interativa-ia.functions";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ interface Props {
   serie?: string;
   onClose: () => void;
   onConcluir?: () => void;
+  onAbrirApostila?: () => void;
 }
 
 export function AulaInterativaIA(props: Props) {
@@ -122,9 +123,20 @@ export function AulaInterativaIA(props: Props) {
             <Sparkles className="h-4 w-4 text-amber-500" />
             Aula Brilha · Semana {semanaNumero}
           </div>
-          <button onClick={props.onClose} className="p-1 hover:bg-muted rounded" aria-label="Fechar">
-            <X className="h-4 w-4" />
-          </button>
+          <div className="flex items-center gap-1">
+            {props.onAbrirApostila && (
+              <button
+                onClick={props.onAbrirApostila}
+                className="px-2 py-1 rounded-lg bg-amber-500/10 text-amber-700 hover:bg-amber-500/20 text-[11px] font-black flex items-center gap-1"
+                aria-label="Abrir aula completa"
+              >
+                <BookOpen className="h-3.5 w-3.5" /> Aula completa
+              </button>
+            )}
+            <button onClick={props.onClose} className="p-1 hover:bg-muted rounded" aria-label="Fechar">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         {loading && (

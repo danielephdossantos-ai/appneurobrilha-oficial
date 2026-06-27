@@ -1,6 +1,7 @@
 // ============= Full file contents =============
 
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { Shell, PageHeader, Card, Pill } from "@/components/Layout";
 import { useState, useEffect, Component, ReactNode } from "react";
 import {
@@ -31,7 +32,7 @@ import {
 import { useAppState } from "@/core/store";
 import { usePedagogicalEngine } from "@/hooks/usePedagogicalEngine";
 import { PipPedagogicalGuidance } from "@/components/rewards/PipPedagogicalGuidance";
-import { ReforcoEngine, ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
+import type { ReforcoLesson } from "@/engines/pedagogical-engine/reforco-engine";
 import { ProgressionService } from "@/engines/progression-engine/service";
 import { ProgressionEngine } from "@/engines/progression-engine/engine/progression-engine";
 import { ProgressionStats, SkillMastery } from "@/engines/progression-engine/types";
@@ -50,6 +51,7 @@ import { AssistenteGuiado } from "@/components/reforco-brilha/AssistenteGuiado";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { AulaInfinita } from "@/components/reforco-brilha/AulaInfinita";
 import { CategoriasReforco } from "@/components/reforco-brilha/CategoriasReforco";
+import { gerarAulaReforco } from "@/lib/reforco-aula-ia.functions";
 
 class ReforcoErrorBoundary extends Component<
   { children: ReactNode },
@@ -139,6 +141,7 @@ function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
   const { sendNotification } = useNotifications();
+  const gerarAula = useServerFn(gerarAulaReforco);
   const [topic, setTopic] = useState("");
   const [isTeaching, setIsTeaching] = useState(false);
   const [lessonContent, setLessonContent] = useState<ReforcoLesson | null>(null);
@@ -269,7 +272,19 @@ function ReforcoBrilha() {
       }
 
       try {
-        const lesson = await ReforcoEngine.generateLesson(finalTopic, engine?.adaptive as any);
+        const r = await gerarAula({
+          data: {
+            topic: finalTopic,
+            idade: activeChild?.idade ?? undefined,
+            serie: activeChild?.serie ?? undefined,
+          },
+        });
+        if (!r.ok || !r.lesson) {
+          toast.error(r.error || "Não consegui preparar uma aula de verdade agora.");
+          setIsTeaching(false);
+          return;
+        }
+        const lesson = r.lesson as ReforcoLesson;
         setLessonContent(lesson);
         setCurrentLevel("basic");
         if (lesson.category) {
@@ -369,7 +384,7 @@ function ReforcoBrilha() {
               </button>
             </div>
             <p className="text-xs text-muted-foreground mt-3 italic">
-              Descreva a dificuldade em palavras simples. O sistema localiza habilidades, aulas e atividades por palavras-chave (sem IA generativa).
+              Descreva a dificuldade em palavras simples. A Brilha monta uma aula explicada e também busca materiais públicos de apoio.
             </p>
           </Card>
 
@@ -839,10 +854,10 @@ function ReforcoBrilha() {
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-bold flex items-center gap-2 px-2">
                       <BookOpen className="h-5 w-5 text-primary" />
-                      Roteiro de Estudos (Gerado pelo Sistema)
+                      Aula explicada pelo Professor Brilho
                     </h3>
                     <div className="bg-indigo-600/10 border border-indigo-200 rounded-2xl p-4 mb-4 text-xs text-indigo-700 font-medium">
-                      📚 Trilha pedagógica estruturada, sem uso de IA generativa.
+                      📚 Aula com explicação, exemplo resolvido, prática guiada, exercícios e correção.
                     </div>
                     {lessonContent.levels[currentLevel]
                       .slice(0, engine?.adaptive?.maxItemsPerScreen ?? 6)
