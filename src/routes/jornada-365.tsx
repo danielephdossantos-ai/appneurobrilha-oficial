@@ -169,6 +169,24 @@ function Jornada() {
     }
   }, [precisaAnamnese, activeChild?.id]);
 
+  const currentDay = journeyState?.current_day || 1;
+  const { speak, stop, speaking, supported } = useDeviceTTS("pt-BR");
+
+  const nome = activeChild?.nome?.split(" ")[0] ?? "amiguinho";
+  const tema = hiperfoco?.label ? ` no mundo de ${hiperfoco.label}` : "";
+  const greeting = `Olá ${nome}! Hoje é o dia ${currentDay} da sua jornada${tema}. Vamos brincar e aprender juntos?`;
+
+  // Saudação automática ao abrir (browsers podem bloquear sem interação prévia — botão Ouvir é o fallback).
+  useEffect(() => {
+    if (!supported || !activeChild || precisaAnamnese || loadingJourney) return;
+    const t = setTimeout(() => speak(greeting, { rate: 0.95 }), 600);
+    return () => {
+      clearTimeout(t);
+      stop();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supported, currentDay, activeChild?.id, precisaAnamnese, loadingJourney]);
+
   if (!activeChild)
     return (
       <Shell>
@@ -198,23 +216,7 @@ function Jornada() {
     );
   }
 
-  const currentDay = journeyState?.current_day || 1;
-  const { speak, stop, speaking, supported } = useDeviceTTS("pt-BR");
 
-  const nome = activeChild.nome?.split(" ")[0] ?? "amiguinho";
-  const tema = hiperfoco?.label ? ` no mundo de ${hiperfoco.label}` : "";
-  const greeting = `Olá ${nome}! Hoje é o dia ${currentDay} da sua jornada${tema}. Vamos brincar e aprender juntos?`;
-
-  // Saudação automática ao abrir (browsers podem bloquear sem interação prévia — botão Ouvir é o fallback).
-  useEffect(() => {
-    if (!supported) return;
-    const t = setTimeout(() => speak(greeting, { rate: 0.95 }), 600);
-    return () => {
-      clearTimeout(t);
-      stop();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [supported, currentDay, activeChild.id]);
 
   const speakDay = (day: number) =>
     speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
