@@ -38,6 +38,7 @@ import { FloatingActivityControls } from "@/components/activities/FloatingActivi
 import { TutorTrabalho } from "@/components/reforco-brilha/TutorTrabalho";
 import { BibliotecaInternet } from "@/components/reforco-brilha/BibliotecaInternet";
 import { MissaoProvaManager } from "@/components/responsible/MissaoProvaManager";
+import { CalendarioProvas } from "@/components/reforco-brilha/CalendarioProvas";
 import { SpeakButton } from "@/components/ui/SpeakButton";
 import { MissaoProvaQuiz } from "@/components/professor/MissaoProvaQuiz";
 import { GraduationCap, BookOpen } from "lucide-react";
@@ -342,6 +343,14 @@ function MissaoProva() {
       />
 
       <div className="space-y-8 animate-in fade-in duration-500">
+        {activeChild && (
+          <CalendarioProvas
+            childId={activeChild.id}
+            filtroTipo="prova"
+            titulo="Calendário de Provas — toque numa data para agendar"
+          />
+        )}
+
         {activeChild && (
           <MissaoProvaManager childId={activeChild.id} />
         )}
