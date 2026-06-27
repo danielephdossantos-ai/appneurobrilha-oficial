@@ -187,13 +187,67 @@ function BnccCodigoPage() {
         )}
       </header>
 
-      {semConteudo && (
+      <div className="flex flex-wrap gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => acionarIA("explicacao")}
+          disabled={gerando !== null}
+        >
+          {gerando === "explicacao" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <Sparkles className="w-4 h-4 mr-1" />
+          )}
+          IA explica novamente
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => acionarIA("exercicios")}
+          disabled={gerando !== null}
+        >
+          {gerando === "exercicios" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <RefreshCw className="w-4 h-4 mr-1" />
+          )}
+          IA cria novos exercícios
+        </Button>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => acionarIA("tudo")}
+          disabled={gerando !== null}
+        >
+          {gerando === "tudo" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <Sparkles className="w-4 h-4 mr-1" />
+          )}
+          Refazer aula inteira
+        </Button>
+      </div>
+
+      {gerando === "tudo" && semConteudo && (
         <Card>
-          <CardContent className="py-8 text-center text-muted-foreground">
-            Conteúdo pedagógico desta habilidade ainda não foi cadastrado.
-            <div className="mt-2 text-sm">
-              Em breve: explicação, exemplos, exercícios, gabarito e vídeo.
-            </div>
+          <CardContent className="py-12 text-center space-y-3">
+            <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+            <p className="font-medium">Brilha está montando a aula completa pra você…</p>
+            <p className="text-sm text-muted-foreground">
+              Objetivo, explicação, exemplos, exercícios e gabarito chegam em alguns segundos.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      {semConteudo && gerando !== "tudo" && (
+        <Card>
+          <CardContent className="py-8 text-center text-muted-foreground space-y-3">
+            <p>Conteúdo pedagógico ainda não cadastrado para {meta.codigo}.</p>
+            <Button onClick={() => acionarIA("tudo")} disabled={gerando !== null}>
+              <Sparkles className="w-4 h-4 mr-1" /> Gerar aula com IA
+            </Button>
           </CardContent>
         </Card>
       )}
