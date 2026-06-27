@@ -633,6 +633,13 @@ function EditorTrabalho({
           writeWrapped(bloco.texto || "", { size: 12, style: "normal", gap: 5 });
           continue;
         }
+        if (bloco.tipo === "rico") {
+          const tmp = document.createElement("div");
+          tmp.innerHTML = bloco.html || "";
+          const plain = tmp.innerText || tmp.textContent || "";
+          writeWrapped(plain, { size: 12, style: "normal", gap: 5 });
+          continue;
+        }
         if (bloco.tipo === "imagem") {
           addPageIfNeeded(18);
           pdf.setDrawColor(209, 213, 219);
