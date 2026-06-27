@@ -17,9 +17,8 @@ import {
 import { useAppState } from "@/core/store";
 import { useNeuroAdaptive } from "@/hooks/useNeuroAdaptive";
 import { CATEGORIAS, GRUPOS, VARIATIONS, type CategoriaSlug } from "@/data/neuro-treino/variations";
-import { STATIC_LESSONS } from "@/modules/escola-brilha/data/library";
-import { useAulasBnccByEtapa } from "@/modules/escola-brilha/hooks/useAulasBncc";
-import { getFirstYearLessonTitle } from "@/modules/escola-brilha/data/first-year-lesson-overrides";
+
+
 import { useHiperfoco } from "@/context/HiperfocoContext";
 import { SensoryPanel } from "@/components/neuro-treino/SensoryPanel";
 
