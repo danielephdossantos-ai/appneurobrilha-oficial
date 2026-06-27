@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gerarAulaDinamica, type AulaDinamica } from "@/lib/groq-professor.functions";
 import { AulaDinamicaViewer } from "@/components/aula-ia/AulaDinamicaViewer";
 import { supabase } from "@/integrations/supabase/client";
@@ -51,7 +51,7 @@ function AulaIaPage() {
         setErr(res.error ?? "Falha ao gerar aula");
       } else {
         setAula(res.aula);
-        setInfo(res.cached ? "📚 Aula carregada do cache" : "✨ Aula gerada agora pela IA");
+        setInfo(res.cached ? "📚 Aula carregada do cache" : res.error ? "📚 Aula estruturada pronta" : "✨ Aula gerada agora pela IA");
       }
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Erro inesperado");
@@ -59,6 +59,13 @@ function AulaIaPage() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    setAula(null);
+    setInfo("");
+    carregar(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bnccCode]);
 
   if (!aula) {
     return (
