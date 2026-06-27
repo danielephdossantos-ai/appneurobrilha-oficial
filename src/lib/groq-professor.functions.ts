@@ -325,3 +325,239 @@ Gere a aula completa em JSON conforme o schema definido.`;
       };
     }
   });
+
+// ============================================================
+// AULA DINÂMICA — Groq llama-3.1-8b-instant + cache Supabase
+// Gera aula a partir de um código BNCC, com termos de busca de
+// imagens por tela e elementos interativos. Cacheia em
+// public.aulas_geradas_ia para não regenerar de graça.
+// ============================================================
+
+const AulaDinamicaInputSchema = z.object({
+  bnccCode: z.string().trim().min(3).max(20),
+  descricao: z.string().trim().min(5).max(1200),
+  idade: z.number().int().min(5).max(16).optional(),
+  serie: z.string().max(20).optional(),
+  componente: z.string().max(60).optional(),
+  force: z.boolean().optional(),
+});
+
+const InteractiveItemSchema = z.object({
+  label: s(1, 40),
+  termoBusca: s(2, 80),
+  explicacao: s(2, 240),
+});
+
+export const AulaDinamicaSchema = z.object({
+  titulo: s(2, 120),
+  metafora: s(5, 400),
+  telas: z.object({
+    missao: z.object({
+      titulo: s(2, 80),
+      texto: s(2, 400),
+      termoBusca: s(2, 80),
+    }),
+    exploracao: z.object({
+      titulo: s(2, 80),
+      texto: s(2, 600),
+      termoBusca: s(2, 80),
+      interativos: z.array(InteractiveItemSchema).min(2).max(5),
+    }),
+    explicacao: z.object({
+      titulo: s(2, 80),
+      paragrafos: z.array(s(2, 400)).min(2).max(6),
+      termoBusca: s(2, 80),
+    }),
+    passoAPasso: z.object({
+      titulo: s(2, 80),
+      passos: z.array(s(2, 300)).min(2).max(8),
+      termoBusca: s(2, 80),
+    }),
+    exemploAplicado: z.object({
+      titulo: s(2, 80),
+      enunciado: s(2, 500),
+      resolucao: z.array(s(2, 400)).min(1).max(6),
+      termoBusca: s(2, 80),
+    }),
+    desafio: z.object({
+      titulo: s(2, 80),
+      enunciado: s(2, 500),
+      opcoes: z.array(s(1, 200)).length(3),
+      respostaCorreta: z.enum(["A", "B", "C"]),
+      explicacaoResposta: s(2, 400),
+      termoBusca: s(2, 80),
+    }),
+    conclusao: z.object({
+      titulo: s(2, 80),
+      mensagemFinal: s(2, 400),
+      termoBusca: s(2, 80),
+    }),
+  }),
+});
+
+export type AulaDinamica = z.infer<typeof AulaDinamicaSchema>;
+
+const AULA_DINAMICA_PROMPT = `Você é Designer Pedagógico BNCC. Recebe [Código BNCC], [Descrição da Habilidade] e [Idade]. Gere uma aula viva para crianças neurodivergentes brasileiras.
+
+REGRAS:
+- Linguagem PT-BR acolhedora, frases curtas (máx 2 linhas).
+- Metáfora do mundo real (frações = pizza, etc.).
+- Cada tela traz um "termoBusca" em INGLÊS simples (1-4 palavras) para buscar imagem ilustrativa (ex.: "red apple", "pizza slices", "ancient egypt").
+- "interativos" da tela exploracao: 2 a 5 elementos clicáveis. Cada um com label PT-BR (palavra curta), termoBusca em inglês simples (objeto único), e explicação curta que aparece ao clicar.
+- Desafio: 3 opções (A/B/C), respostaCorreta sendo "A", "B" ou "C".
+- Responda ESTRITAMENTE JSON válido (sem markdown, sem crase) com este schema:
+
+{
+  "titulo": "string",
+  "metafora": "string",
+  "telas": {
+    "missao": { "titulo": "string", "texto": "string", "termoBusca": "english search" },
+    "exploracao": {
+      "titulo": "string", "texto": "string", "termoBusca": "english search",
+      "interativos": [
+        { "label": "Maçã", "termoBusca": "red apple", "explicacao": "..." }
+      ]
+    },
+    "explicacao": { "titulo": "string", "paragrafos": ["...","..."], "termoBusca": "english search" },
+    "passoAPasso": { "titulo": "string", "passos": ["...","..."], "termoBusca": "english search" },
+    "exemploAplicado": { "titulo": "string", "enunciado": "string", "resolucao": ["...","..."], "termoBusca": "english search" },
+    "desafio": { "titulo": "string", "enunciado": "string", "opcoes": ["A) ...","B) ...","C) ..."], "respostaCorreta": "A", "explicacaoResposta": "string", "termoBusca": "english search" },
+    "conclusao": { "titulo": "string", "mensagemFinal": "string", "termoBusca": "english search" }
+  }
+}`;
+
+function parseAulaDinamica(raw: string): AulaDinamica {
+  const parsed = extractJson(raw);
+  const r = AulaDinamicaSchema.safeParse(parsed);
+  if (!r.success) {
+    const issues = r.error.issues
+      .slice(0, 3)
+      .map((i) => `${i.path.join(".")}: ${i.message}`)
+      .join(" | ");
+    throw new Error(`Schema inválido: ${issues}`);
+  }
+  return r.data;
+}
+
+export const gerarAulaDinamica = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
+  .handler(async ({ data }) => {
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+
+
+    // 1) Cache lookup
+    if (!data.force) {
+      const { data: cached } = await supabaseAdmin
+        .from("aulas_geradas_ia")
+        .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
+        .eq("codigo_bncc", data.bnccCode)
+        .maybeSingle();
+      if (cached?.screens) {
+        return {
+          ok: true as const,
+          cached: true,
+          aula: cached.screens as unknown as AulaDinamica,
+          error: null,
+        };
+      }
+    }
+
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      return {
+        ok: false as const,
+        cached: false,
+        error: "GROQ_API_KEY ausente",
+        aula: null,
+      };
+    }
+
+    const userPrompt = `Código BNCC: ${data.bnccCode}
+Descrição: ${data.descricao}
+Idade: ${data.idade ?? 9} anos${data.serie ? `\nSérie: ${data.serie}` : ""}${data.componente ? `\nComponente: ${data.componente}` : ""}
+
+Gere a aula JSON completa.`;
+
+    try {
+      const res = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "llama-3.1-8b-instant",
+            messages: [
+              { role: "system", content: AULA_DINAMICA_PROMPT },
+              { role: "user", content: userPrompt },
+            ],
+            temperature: 0.7,
+            max_tokens: 2400,
+            top_p: 0.9,
+            response_format: { type: "json_object" },
+          }),
+        },
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("[groq:dinamica] HTTP", res.status, errText.slice(0, 400));
+        return {
+          ok: false as const,
+          cached: false,
+          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
+          aula: null,
+        };
+      }
+
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>;
+      };
+      const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
+      if (!raw) {
+        return {
+          ok: false as const,
+          cached: false,
+          error: "Resposta vazia",
+          aula: null,
+        };
+      }
+
+      const aula = parseAulaDinamica(raw);
+
+      // 2) Save cache (upsert by codigo_bncc)
+      const { error: upErr } = await supabaseAdmin
+        .from("aulas_geradas_ia")
+        .upsert(
+          {
+            codigo_bncc: data.bnccCode,
+            titulo: aula.titulo,
+            screens: aula as unknown as Record<string, unknown>,
+            modelo: "llama-3.1-8b-instant",
+            disciplina: data.componente ?? null,
+            ano: data.serie ?? null,
+            aprovada: false,
+            gerada_em: new Date().toISOString(),
+          },
+          { onConflict: "codigo_bncc" },
+        );
+      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
+
+      return { ok: true as const, cached: false, aula, error: null };
+    } catch (e) {
+      console.error("[groq:dinamica]", e);
+      return {
+        ok: false as const,
+        cached: false,
+        error: e instanceof Error ? e.message : "Falha ao gerar aula",
+        aula: null,
+      };
+    }
+  });
