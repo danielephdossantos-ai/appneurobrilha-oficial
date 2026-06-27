@@ -105,7 +105,7 @@ Tema da prova: ${args.tema}`;
 export const conversarTutorIA = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<TutorResult> => {
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return {
         ok: false,
@@ -128,21 +128,21 @@ export const conversarTutorIA = createServerFn({ method: "POST" })
     ];
 
     try {
-      const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
-          "Lovable-API-Key": apiKey,
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "X-Lovable-AIG-SDK": "fetch",
         },
         body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
+          model: "llama-3.3-70b-versatile",
           messages,
           response_format: { type: "json_object" },
           max_tokens: 600,
           temperature: 0.7,
         }),
       });
+
 
       if (res.status === 429) {
         return {
