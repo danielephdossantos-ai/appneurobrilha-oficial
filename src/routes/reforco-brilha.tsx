@@ -746,7 +746,7 @@ function ReforcoBrilha() {
               <AlertCircle className="h-5 w-5 text-amber-500" />
               <h3 className="font-extrabold text-base">Catálogo de Dificuldades</h3>
               <span className="text-xs text-muted-foreground">
-                Toque em uma dificuldade para abrir um plano de reforço com habilidades da matriz pedagógica.
+                Toque em uma dificuldade para começar uma aula explicada agora.
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -755,7 +755,7 @@ function ReforcoBrilha() {
                   key={d.id}
                   onClick={() => {
                     setSearchQuery(d.busca);
-                    runSearch(d.busca);
+                    startLesson(d.busca);
                   }}
                   className="text-left p-3 rounded-2xl border-2 border-border bg-card hover:border-primary hover:bg-primary/5 transition-all"
                 >
@@ -765,6 +765,9 @@ function ReforcoBrilha() {
                       <div className="font-bold text-sm">{d.titulo}</div>
                       <div className="text-[11px] text-muted-foreground mt-0.5">
                         {d.habilidades.join(" · ")}
+                      </div>
+                      <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-black text-primary">
+                        <PlayCircle className="h-3 w-3" /> Aula real agora
                       </div>
                     </div>
                   </div>
