@@ -998,6 +998,23 @@ function BlocoEditor({
           />
         </figure>
       )}
+      {bloco.tipo === "quebra" && (
+        <>
+          {/* marcador visual na edição */}
+          <div className="my-4 print:hidden flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-amber-700">
+            <div className="h-px flex-1 bg-amber-300 border-t border-dashed border-amber-400" />
+            <Scissors className="h-3 w-3" />
+            Nova página
+            <div className="h-px flex-1 bg-amber-300 border-t border-dashed border-amber-400" />
+          </div>
+          {/* marcador real pro html2pdf quebrar a página */}
+          <div className="html2pdf__page-break" style={{ pageBreakBefore: "always", breakBefore: "page", height: 0 }} />
+        </>
+      )}
+      {bloco.tipo === "capa" && (
+        <CapaEditor bloco={bloco} onChange={onChange} />
+      )}
+
     </div>
   );
 }
