@@ -250,8 +250,8 @@ Gere a aula completa em JSON conforme o schema definido.`;
         return { ok: false as const, error: "Resposta vazia", aula: null };
       }
 
-      const aula = extractJson(raw) as Record<string, unknown>;
-      return { ok: true as const, aula, error: null };
+      const aula = extractJson(raw);
+      return { ok: true as const, aulaJson: JSON.stringify(aula), error: null };
     } catch (e) {
       console.error("[groq:aula]", e);
       return {
