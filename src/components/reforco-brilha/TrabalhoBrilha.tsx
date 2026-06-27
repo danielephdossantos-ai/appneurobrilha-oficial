@@ -901,6 +901,7 @@ function AutoGrowTextarea({
       style={{ fontFamily: "Georgia, serif" }}
     />
   );
+}
 
 // ---------------------------------------------------------------- Preview inline de recursos
 
