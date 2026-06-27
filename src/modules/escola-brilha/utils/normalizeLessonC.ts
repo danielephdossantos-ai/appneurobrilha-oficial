@@ -13,11 +13,11 @@ const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }>
 };
 
 const COLOR_BY_AREA: Record<BNCCArea, ActivityLessonC["color"]> = {
-  linguagens: { from: "from-rose-500", to: "to-pink-600", accent: "text-rose-600" },
-  matematica: { from: "from-blue-500", to: "to-cyan-600", accent: "text-blue-600" },
-  ciencias_natureza: { from: "from-emerald-500", to: "to-teal-600", accent: "text-emerald-600" },
-  ciencias_humanas: { from: "from-amber-600", to: "to-orange-600", accent: "text-amber-700" },
-  ensino_religioso: { from: "from-violet-500", to: "to-purple-600", accent: "text-violet-600" },
+  linguagens: { from: "from-rose-500", to: "to-pink-600", accent: "pink" },
+  matematica: { from: "from-blue-500", to: "to-cyan-600", accent: "blue" },
+  ciencias_natureza: { from: "from-emerald-500", to: "to-teal-600", accent: "green" },
+  ciencias_humanas: { from: "from-amber-600", to: "to-orange-600", accent: "amber" },
+  ensino_religioso: { from: "from-violet-500", to: "to-purple-600", accent: "violet" },
 };
 
 /**
