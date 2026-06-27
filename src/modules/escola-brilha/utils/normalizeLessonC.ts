@@ -1,5 +1,6 @@
 import type { ActivityLessonC, BNCCArea } from "../types/activity-lesson-c";
 import type { AulaBncc } from "../hooks/useAulasBncc";
+import { isGenericDesafio, synthesizeDesafio } from "./desafioBank";
 
 const AREA_BY_DISCIPLINA: Record<string, { area: BNCCArea; area_label: string }> = {
   "Língua Portuguesa": { area: "linguagens", area_label: "Linguagens" },
@@ -104,22 +105,29 @@ export function normalizeLessonC(aula: AulaBncc): ActivityLessonC {
           "Entendendo a ideia, fica fácil aplicar em outros casos.",
         visual_steps: screens.exemplo_aplicado?.visual_steps,
       },
-      desafio: {
-        question: desafio.question || raw.mission_question || `Qual a melhor resposta sobre ${title}?`,
-        context: desafio.context,
-        options:
-          desafio.options && desafio.options.length
-            ? desafio.options
-            : [
-                { letter: "A", text: "Opção A", isCorrect: true },
-                { letter: "B", text: "Opção B", isCorrect: false },
-                { letter: "C", text: "Opção C", isCorrect: false },
-                { letter: "D", text: "Opção D", isCorrect: false },
-              ],
-        explanation:
-          desafio.explanation ||
-          "A resposta correta aplica o conceito visto na aula.",
-      },
+      desafio: (() => {
+        if (isGenericDesafio(desafio)) {
+          const synth = synthesizeDesafio(
+            aula.codigo_bncc || raw.bncc_code || "",
+            aula.disciplina || "",
+            aula.serie || "",
+          );
+          return {
+            question: synth.question,
+            context: desafio.context,
+            options: synth.options,
+            explanation: synth.explanation,
+          };
+        }
+        return {
+          question: desafio.question || raw.mission_question || `Qual a melhor resposta sobre ${title}?`,
+          context: desafio.context,
+          options: desafio.options,
+          explanation:
+            desafio.explanation ||
+            "A resposta correta aplica o conceito visto na aula.",
+        };
+      })(),
     },
   };
 }
