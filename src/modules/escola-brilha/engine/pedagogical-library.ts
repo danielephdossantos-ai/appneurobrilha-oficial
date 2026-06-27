@@ -85,6 +85,23 @@ function buildFromTemplate(
 
   const ex0 = tpl.exemplos?.[0];
 
+  const templateMeta = {
+    slug: tpl.slug,
+    name: tpl.name,
+    disciplina: tpl.disciplina,
+    steps: [
+      { n: 1, label: "Motivação",      applied: !!tpl.metodo,                                  source: "metodo" },
+      { n: 2, label: "Observação",     applied: !!(tpl.sequencia_didatica && tpl.sequencia_didatica.length > 0), source: "sequencia_didatica" },
+      { n: 3, label: "Explicação",     applied: !!(tpl.sequencia_didatica && tpl.sequencia_didatica.length > 1), source: "sequencia_didatica" },
+      { n: 4, label: "Exemplo",        applied: !!ex0,                                         source: "exemplos" },
+      { n: 5, label: "Prática Guiada", applied: !!(tpl.pratica_guiada && tpl.pratica_guiada.length > 0),         source: "pratica_guiada" },
+      { n: 6, label: "Treino",         applied: !!(tpl.exercicios && tpl.exercicios.length > 0),                 source: "exercicios" },
+      { n: 7, label: "Desafio",        applied: !!(tpl.desafio?.question && tpl.desafio.options?.length),        source: "desafio" },
+      { n: 8, label: "Resumo",         applied: !!(tpl.revisao?.nodes?.length || tpl.revisao?.takeaways?.length), source: "revisao" },
+      { n: 9, label: "Domínio",        applied: !!tpl.avaliacao?.recommendation,               source: "avaliacao" },
+    ],
+  };
+
   return {
     id: `tpl:${tpl.slug}:${bnccCode}`,
     title: titulo || fallback?.title || bnccCode,
@@ -95,6 +112,8 @@ function buildFromTemplate(
     bnccCode,
     bnccObjective,
     xp: fallback?.xp ?? 30,
+    templateMeta,
+
     screens: {
       missao:
         fallback?.screens.missao ?? {
