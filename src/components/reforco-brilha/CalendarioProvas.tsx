@@ -332,11 +332,13 @@ export function CalendarioProvas({ childId, filtroTipo = "todos", titulo }: Prop
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">
                     {isTrab ? "Trabalho" : "Prova"}
-                    {!isTrab && (
-                      <span className="ml-2 normal-case tracking-normal text-indigo-700 font-bold">
-                        {isSel ? "• aberto" : "• tocar p/ ver estudos"}
-                      </span>
-                    )}
+                    <span className="ml-2 normal-case tracking-normal text-indigo-700 font-bold">
+                      {isSel
+                        ? "• aberto"
+                        : isTrab
+                        ? "• tocar p/ ver sugestões"
+                        : "• tocar p/ ver estudos"}
+                    </span>
                   </p>
                   <p className="text-sm font-bold text-foreground">{p.subject}</p>
                   {p.notes && <p className="text-xs text-muted-foreground line-clamp-2">{p.notes}</p>}
