@@ -140,6 +140,22 @@ function Jornada() {
     enabled: !!activeChild,
   });
 
+  const hojeISO = new Date().toISOString().slice(0, 10);
+  const { data: aulaHoje } = useQuery({
+    queryKey: ["pei-aula-hoje", activeChild?.id, hojeISO],
+    queryFn: async () => {
+      if (!activeChild) return null;
+      const { data } = await supabase
+        .from("pei_aulas")
+        .select("id, atividades, status")
+        .eq("child_id", activeChild.id)
+        .eq("data_prevista", hojeISO)
+        .maybeSingle();
+      return data;
+    },
+    enabled: !!activeChild,
+  });
+
   // Redireciona automaticamente pra anamnese:
   // - 1ª vez (anamnese ainda não preenchida)
   // - A cada 2 meses (anamnese vencida)
@@ -203,16 +219,28 @@ function Jornada() {
   const speakDay = (day: number) =>
     speak(`Dia ${day}${tema}. Vamos começar a atividade de hoje!`, { rate: 0.95 });
 
+
+  const abrirAulaHoje = async () => {
+    const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
+    const aulaId = blocos.find((b) => b?.payload?.aula_id)?.payload?.aula_id;
+    if (aulaHoje && aulaHoje.status === "disponivel") {
+      await supabase.from("pei_aulas").update({ status: "em_andamento" }).eq("id", aulaHoje.id);
+    }
+    if (aulaId) {
+      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
+    } else {
+      navigate({ to: "/escola-brilha" });
+    }
+  };
+
   return (
     <Shell>
       <div className="relative min-h-[calc(100vh-6rem)] -mx-4 -my-2 px-4 py-6 rounded-3xl overflow-hidden">
         {world === "dinossauros" ? <DinoWorld /> : <WorldBackground world={world} />}
 
-        {/* Aula de hoje fica escondida da criança — só sistema/relatório dos pais usa */}
-
         {/* Trilha */}
         <div className="relative z-10">
-          <DayTrail currentDay={currentDay} theme={theme} onSpeakDay={speakDay} />
+          <DayTrail currentDay={currentDay} theme={theme} onSpeakDay={speakDay} onOpenToday={abrirAulaHoje} />
         </div>
 
         {/* Botão Ouvir flutuante */}
@@ -248,10 +276,12 @@ function DayTrail({
   currentDay,
   theme,
   onSpeakDay,
+  onOpenToday,
 }: {
   currentDay: number;
   theme: (typeof WORLD_THEME)[WorldKey];
   onSpeakDay?: (day: number) => void;
+  onOpenToday?: () => void;
 }) {
   const OFFSETS = [0, 1, 2, 1, 0, -1, -2, -1];
   const totalDays = 365;
@@ -287,9 +317,12 @@ function DayTrail({
                 disabled={isLocked}
                 onClick={() => {
                   if (isLocked) return;
-                  if (isCurrent) onSpeakDay?.(day);
+                  if (isCurrent) {
+                    onSpeakDay?.(day);
+                    onOpenToday?.();
+                    return;
+                  }
                   if (isDone) return;
-                  window.scrollTo({ top: 0, behavior: "auto" });
                 }}
                 className={cn(
                   "group relative block focus:outline-none",
