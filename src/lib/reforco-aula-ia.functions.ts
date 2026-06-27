@@ -67,6 +67,123 @@ FORMATO OBRIGATÓRIO: responda APENAS JSON válido com:
   "premiumTips": ["dica para a criança fazer agora", "..."]
 }`;
 
+type ReforcoLessonIA = z.infer<typeof ReforcoLessonSchema>;
+
+function buildFallbackReforco(data: z.infer<typeof InputSchema>): ReforcoLessonIA {
+  const topic = data.topic.trim();
+  const lower = topic.toLowerCase();
+  const isMath = /matem|conta|soma|subtra|multiplica|divis|fraç|frac|tabuada|número|numero|problema/.test(lower);
+  const isPort = /port|leitura|texto|frase|palavra|sílaba|silaba|verbo|ortografia|escrita|interpreta/.test(lower);
+  const category = isMath ? "Matemática" : isPort ? "Português" : "Geral";
+
+  if (isMath) {
+    const n = Number(topic.match(/\d+/)?.[0] ?? 6);
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category,
+      explanation: `Hoje você vai resolver ${topic} sem chute: ler o pedido, separar os números, montar a conta e conferir a resposta dentro da história.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: `Quando aparece uma questão de ${topic}, a primeira missão é descobrir se a quantidade aumenta, diminui, forma grupos iguais ou precisa ser repartida.` },
+          { type: "example", text: `Exemplo: “Tenho ${n} caixas com 3 lápis em cada.” São grupos iguais, então fazemos ${n} × 3 = ${n * 3}.` },
+          { type: "explanation", text: `Se fosse “tinha ${n * 3} lápis e perdi 3”, aí seria subtração: ${n * 3} - 3 = ${n * 3 - 3}. A palavra da história muda a conta.` },
+          { type: "exercise", text: `Resolva olhando a palavra-chave: “ganhou” aumenta ou diminui?`, content: { question: `Lia tinha ${n} adesivos e ganhou 4. Quantos tem agora?`, options: [String(n + 4), String(Math.max(0, n - 4)), String(n * 4)], answer: String(n + 4), explanation: `Ganhou indica juntar: ${n} + 4 = ${n + 4}.` } },
+          { type: "tip", text: "Antes de fazer a conta, diga em voz alta: estou juntando, tirando, formando grupos ou repartindo?" },
+        ],
+        intermediate: [
+          { type: "explanation", text: `Agora vamos resolver em duas etapas: primeiro descubra a operação; depois calcule devagar e confira a frase final.` },
+          { type: "example", text: `Exemplo resolvido: 4 pacotes com ${n} balas. Cada pacote tem ${n}; então 4 grupos de ${n}: ${n} + ${n} + ${n} + ${n} = ${4 * n}.` },
+          { type: "exercise", text: "Escolha a conta que combina com grupos iguais.", content: { question: `3 sacolas com ${n} maçãs em cada. Qual conta resolve?`, options: [`3 × ${n}`, `3 + ${n}`, `${n} - 3`], answer: `3 × ${n}`, explanation: `“Em cada” mostra grupos iguais: 3 grupos de ${n}.` } },
+          { type: "example", text: `Conferência: se cada sacola tem ${n}, o resultado precisa ser maior que ${n}. Por isso ${3 * n} faz sentido.` },
+          { type: "tip", text: "Quando aparecer “cada”, pense em grupos iguais." },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, além de acertar, você precisa explicar o caminho: dados, operação e conclusão." },
+          { type: "example", text: `Modelo: “Eu vi ${n} em cada grupo e 5 grupos. Usei multiplicação porque são grupos iguais. ${n} × 5 = ${n * 5}.”` },
+          { type: "exercise", text: "Resolva e explique.", content: { question: `Uma turma fez 5 cartazes com ${n} estrelas em cada. Quantas estrelas há ao todo?`, options: [String(5 * n), String(5 + n), String(Math.max(0, n - 5))], answer: String(5 * n), explanation: `São 5 grupos de ${n}: 5 × ${n} = ${5 * n}.` } },
+          { type: "tip", text: "Uma resposta completa termina com unidade: estrelas, lápis, pontos, reais." },
+        ],
+      },
+      premiumTips: [
+        "Leia o problema duas vezes: uma para entender a história e outra para achar os números.",
+        "Escreva a conta antes de calcular.",
+        "Depois do resultado, complete a frase: a resposta é ___ .",
+      ],
+    };
+  }
+
+  if (isPort) {
+    return {
+      title: `Aula de verdade: ${topic}`,
+      topic,
+      category,
+      explanation: `Hoje você vai aprender ${topic} lendo uma frase real, procurando pistas e explicando a resposta com palavras do texto.`,
+      levels: {
+        basic: [
+          { type: "explanation", text: "Para entender um texto, não comece chutando. Primeiro leia a frase inteira; depois procure palavras que mostram motivo, tempo, lugar ou oposição." },
+          { type: "example", text: "Frase: “A menina guardou o caderno porque começou a chover.” A palavra “porque” mostra o motivo." },
+          { type: "example", text: "Pergunta: por que ela guardou o caderno? Resposta: porque começou a chover. A resposta saiu do próprio texto." },
+          { type: "exercise", text: "Ache a pista na frase.", content: { question: "Em “Pedro correu, mas chegou atrasado”, qual palavra mostra oposição?", options: ["mas", "Pedro", "correu"], answer: "mas", explanation: "“Mas” mostra que a segunda parte quebra a expectativa da primeira." } },
+          { type: "tip", text: "Quando responder leitura, mostre a palavra do texto que provou sua resposta." },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora vamos separar ideia principal e detalhe. Ideia principal é sobre o que a frase ou parágrafo fala; detalhe explica melhor essa ideia." },
+          { type: "example", text: "Mini-texto: “O cachorro de Ana fugiu pelo portão. Ela chamou o vizinho para ajudar.” Ideia principal: Ana procura o cachorro. Detalhe: ele fugiu pelo portão." },
+          { type: "exercise", text: "Identifique o motivo.", content: { question: "“A flor murchou porque ficou sem água.” Qual foi a causa?", options: ["ficou sem água", "a flor", "murchou"], answer: "ficou sem água", explanation: "A causa vem depois de “porque”." } },
+          { type: "example", text: "Boa resposta: “A causa foi ficar sem água, porque essa informação aparece depois da palavra porque.”" },
+          { type: "tip", text: "Use esta frase: “Eu sei disso porque no texto aparece...”" },
+        ],
+        advanced: [
+          { type: "explanation", text: "No nível avançado, você vai comparar duas pistas do texto para responder com mais segurança." },
+          { type: "example", text: "Se o texto diz “estava nublado” e depois “pegou o guarda-chuva”, as duas pistas indicam possibilidade de chuva." },
+          { type: "exercise", text: "Responda pela pista.", content: { question: "“O céu escureceu, então Marta fechou a janela.” Por que ela fechou?", options: ["porque parecia que ia chover", "porque queria dormir", "porque a janela quebrou"], answer: "porque parecia que ia chover", explanation: "O céu escurecido é a pista que explica a ação." } },
+          { type: "tip", text: "Não invente informação: resposta boa nasce do texto." },
+        ],
+      },
+      premiumTips: [
+        "Leia apontando com o dedo para não pular palavras.",
+        "Circule palavras como porque, mas, então, quando e onde.",
+        "Responda sempre com uma prova do texto.",
+      ],
+    };
+  }
+
+  return {
+    title: `Aula de verdade: ${topic}`,
+    topic,
+    category,
+    explanation: `Hoje você vai estudar ${topic} com um método simples: observar, entender a regra, ver exemplo e praticar com correção.`,
+    levels: {
+      basic: [
+        { type: "explanation", text: `Comece observando ${topic}: o que aparece, que palavras são importantes e qual pergunta precisa ser respondida.` },
+        { type: "example", text: `Exemplo: se o tema é ${topic}, escreva três pistas que você consegue ver ou ler antes de responder.` },
+        { type: "exercise", text: "Treino de observação", content: { question: "Qual é o primeiro passo para aprender um tema novo?", options: ["observar as pistas", "chutar rápido", "pular a explicação"], answer: "observar as pistas", explanation: "Observar evita resposta no impulso e ajuda a entender." } },
+        { type: "example", text: "Depois de observar, explique com suas palavras: “Eu percebi que... por isso acho que...”." },
+        { type: "tip", text: "Uma resposta boa mostra o caminho do pensamento, não só o resultado." },
+      ],
+      intermediate: [
+        { type: "explanation", text: `Agora transforme ${topic} em passos: 1) o que é; 2) como funciona; 3) exemplo; 4) como conferir.` },
+        { type: "example", text: "Modelo: conceito → exemplo → tentativa → correção. Esse ciclo ensina de verdade." },
+        { type: "exercise", text: "Organize a aprendizagem", content: { question: "Qual sequência ajuda mais?", options: ["entender, ver exemplo, praticar, corrigir", "decorar sem entender", "copiar sem ler"], answer: "entender, ver exemplo, praticar, corrigir", explanation: "Essa sequência constrói aprendizagem passo a passo." } },
+        { type: "tip", text: "Se errar, procure em qual passo o erro nasceu." },
+        { type: "example", text: "Correção inteligente: “errei porque pulei a pista principal; vou reler e tentar de novo.”" },
+      ],
+      advanced: [
+        { type: "explanation", text: "No desafio, explique o conteúdo para outra pessoa. Quem consegue ensinar mostra que entendeu." },
+        { type: "exercise", text: "Explique o tema", content: { question: `Complete: ${topic} é importante porque...`, options: ["ajuda a entender e resolver situações", "não serve para nada", "só precisa copiar"], answer: "ajuda a entender e resolver situações", explanation: "Aprender é usar o conhecimento para pensar melhor." } },
+        { type: "tip", text: "Fale em voz alta: “primeiro..., depois..., por isso...”" },
+        { type: "example", text: "Resposta completa: “Eu observei a pista, usei a regra e conferi a resposta.”" },
+      ],
+    },
+    premiumTips: [
+      "Estude em blocos pequenos: explicação, exemplo e uma atividade.",
+      "Corrigir o erro faz parte da aula, não é fracasso.",
+      "Explique o que aprendeu em uma frase curta.",
+    ],
+  };
+}
+
 function prompt(data: z.infer<typeof InputSchema>) {
   return `Tema pedido: ${data.topic}
 Idade: ${data.idade ?? "não informada"}
@@ -89,7 +206,7 @@ export const gerarAulaReforco = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", lesson: null };
+      return { ok: true as const, error: "GROQ_API_KEY ausente; usando aula estruturada local", lesson: buildFallbackReforco(data) };
     }
 
     try {
@@ -114,20 +231,20 @@ export const gerarAulaReforco = createServerFn({ method: "POST" })
       if (!res.ok) {
         const t = await res.text();
         console.error("[gerarAulaReforco] groq", res.status, t.slice(0, 300));
-        return { ok: false as const, error: `Groq ${res.status}`, lesson: null };
+        return { ok: true as const, error: `Groq ${res.status}; usando aula estruturada local`, lesson: buildFallbackReforco(data) };
       }
 
       const json = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) return { ok: false as const, error: "Resposta vazia", lesson: null };
+      if (!raw) return { ok: true as const, error: "Resposta vazia; usando aula estruturada local", lesson: buildFallbackReforco(data) };
       const lesson = ReforcoLessonSchema.parse(extractJson(raw));
       return { ok: true as const, lesson, error: null };
     } catch (e) {
       console.error("[gerarAulaReforco]", e);
       return {
-        ok: false as const,
-        error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        lesson: null,
+        ok: true as const,
+        error: e instanceof Error ? `${e.message}; usando aula estruturada local` : "Falha ao gerar aula; usando aula estruturada local",
+        lesson: buildFallbackReforco(data),
       };
     }
   });
