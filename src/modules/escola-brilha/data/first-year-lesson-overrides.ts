@@ -2581,7 +2581,7 @@ export function getFirstYearLessonOverride(_args: {
   codigo_bncc?: string | null;
   serie?: string | null;
   disciplina?: string | null;
-}) {
+}): ActivityLessonC | null {
   // Padrão unificado: 1º Ano (LP, MA, CI) usa exclusivamente o payload do banco
   // via normalizeLessonC, garantindo o mesmo layout pedagógico de Língua Portuguesa.
   void FIRST_YEAR_LESSON_OVERRIDES;
