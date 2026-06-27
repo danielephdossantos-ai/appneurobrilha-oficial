@@ -137,6 +137,107 @@ const CATALOGO_DIFICULDADES: Dificuldade[] = [
     habilidades: ["Regulação emocional", "Tolerância à frustração"] },
 ];
 
+function buildEmergencyReforcoLesson(topic: string): ReforcoLesson {
+  const lower = topic.toLowerCase();
+  const isMath = /matem|tabuada|conta|soma|subtra|multiplica|divis|problema|número|numero/.test(lower);
+  const isRead = /leitura|ler|s[ií]laba|silaba|letra|alfabeto|palavra|texto|interpreta|ortografia|escrita/.test(lower);
+  const isFocus = /aten[çc][aã]o|mem[oó]ria|foco|organiza|tempo|frustra|linguagem|fala|coordena|motora|copiar/.test(lower);
+
+  if (isMath) {
+    return {
+      title: `Aula real: ${topic}`,
+      topic,
+      category: "Matemática",
+      explanation: "Hoje vamos resolver uma questão olhando a história, escolhendo a conta e conferindo se a resposta faz sentido.",
+      levels: {
+        basic: [
+          { type: "explanation", text: "Problema de matemática é uma história com uma pergunta. Primeiro descubra se a história junta, tira, forma grupos iguais ou reparte." },
+          { type: "example", text: "Exemplo: Lia tinha 6 figurinhas e ganhou 3. Ganhou aumenta, então 6 + 3 = 9." },
+          { type: "exercise", text: "Resolva: Pedro tinha 8 lápis e perdeu 2.", content: { question: "Quantos lápis ficaram?", options: ["6", "10", "16"], answer: "6", explanation: "Perdeu diminui: 8 - 2 = 6." } },
+          { type: "example", text: "Grupos iguais: 3 caixas com 4 balas em cada caixa. Fazemos 3 × 4 = 12." },
+          { type: "tip", text: "Diga a palavra-pista antes da conta: ganhou, perdeu, cada ou repartir." },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Agora vamos fazer duas etapas: ler a pergunta final e montar a conta usando a pista da história." },
+          { type: "example", text: "4 sacolas com 5 maçãs em cada: 'cada' mostra grupos iguais. Conta: 4 × 5 = 20." },
+          { type: "exercise", text: "Escolha a conta certa.", content: { question: "2 pacotes com 7 biscoitos em cada. Qual conta resolve?", options: ["2 × 7", "2 + 7", "7 - 2"], answer: "2 × 7", explanation: "A expressão 'em cada' mostra grupos iguais." } },
+          { type: "example", text: "Conferência: se são dois grupos de 7, a resposta precisa ser maior que 7." },
+          { type: "tip", text: "A resposta completa precisa ter unidade: lápis, maçãs, reais ou pontos." },
+        ],
+        advanced: [
+          { type: "explanation", text: "No desafio, explique o caminho: dados, operação e conclusão." },
+          { type: "example", text: "Rafa comprou 3 pacotes com 6 adesivos e deu 5. Primeiro 3 × 6 = 18; depois 18 - 5 = 13." },
+          { type: "exercise", text: "Resolva em duas etapas.", content: { question: "5 caixas com 4 lápis. Depois 3 lápis quebraram. Quantos sobraram?", options: ["17", "20", "9"], answer: "17", explanation: "Primeiro 5 × 4 = 20. Depois 20 - 3 = 17." } },
+          { type: "tip", text: "Quando tiver duas ações, faça uma conta para cada ação." },
+        ],
+      },
+      premiumTips: ["Leia a pergunta final primeiro.", "Marque a palavra-pista.", "Confira se o resultado combina com a história."],
+    };
+  }
+
+  if (isRead) {
+    return {
+      title: `Aula real: ${topic}`,
+      topic,
+      category: "Português",
+      explanation: "Hoje vamos ler palavras e frases procurando pistas, sem chutar a resposta.",
+      levels: {
+        basic: [
+          { type: "explanation", text: "Para ler, olhe a letra, fale o som e junte as partes. CA + SA vira CASA." },
+          { type: "example", text: "BO + LA = BOLA. Primeiro fale BO, depois LA, depois una sem pausa." },
+          { type: "exercise", text: "Monte a palavra.", content: { question: "PA + TO forma qual palavra?", options: ["pato", "tapa", "bola"], answer: "pato", explanation: "PA primeiro e TO depois formam PA-TO." } },
+          { type: "example", text: "Frase: O gato mia. Pergunta: quem mia? Resposta: o gato." },
+          { type: "tip", text: "Aponte com o dedo para não pular sílabas ou palavras." },
+        ],
+        intermediate: [
+          { type: "explanation", text: "Interpretar é provar sua resposta com uma pista do texto." },
+          { type: "example", text: "A flor murchou porque ficou sem água. A palavra 'porque' mostra o motivo." },
+          { type: "exercise", text: "Ache a pista.", content: { question: "Em 'Pedro correu, mas chegou atrasado', qual palavra mostra oposição?", options: ["mas", "Pedro", "correu"], answer: "mas", explanation: "Mas mostra que aconteceu o contrário do esperado." } },
+          { type: "example", text: "Boa resposta: eu sei porque essa informação aparece no texto." },
+          { type: "tip", text: "Use a frase: 'eu sei disso porque...'" },
+        ],
+        advanced: [
+          { type: "explanation", text: "Agora responda com frase completa: ideia mais prova do texto." },
+          { type: "example", text: "O céu escureceu, então Marta fechou a janela. Ela fechou porque parecia que ia chover." },
+          { type: "exercise", text: "Responda pela pista.", content: { question: "Lia levou guarda-chuva porque o céu estava escuro. Por quê?", options: ["porque o céu estava escuro", "porque era noite", "porque perdeu o caderno"], answer: "porque o céu estava escuro", explanation: "A resposta aparece depois da palavra porque." } },
+          { type: "tip", text: "Não invente informação: use o que apareceu na frase." },
+        ],
+      },
+      premiumTips: ["Leia em voz alta devagar.", "Junte sílabas antes de correr.", "Procure palavras-pista como porque, mas e então."],
+    };
+  }
+
+  return {
+    title: `Aula real: ${topic}`,
+    topic,
+    category: isFocus ? "Neuroaprendizagem" : "Reforço",
+    explanation: "Hoje vamos treinar com uma regra curta, exemplo, tentativa e correção explicada.",
+    levels: {
+      basic: [
+        { type: "explanation", text: "Uma tarefa fica mais fácil quando você sabe a regra antes de responder." },
+        { type: "example", text: "Regra: marque palavra que começa com M. Mesa começa com M; bola não começa." },
+        { type: "exercise", text: "Siga a regra.", content: { question: "Qual palavra começa com S?", options: ["sol", "lua", "casa"], answer: "sol", explanation: "Sol começa com a letra S." } },
+        { type: "example", text: "Antes de clicar, repita: qual era a regra mesmo?" },
+        { type: "tip", text: "Pare dois segundos, leia a regra e só depois responda." },
+      ],
+      intermediate: [
+        { type: "explanation", text: "Agora a regra tem duas partes: começo da palavra e quantidade de letras." },
+        { type: "example", text: "Pato começa com P e tem quatro letras: p-a-t-o." },
+        { type: "exercise", text: "Duas pistas.", content: { question: "Qual começa com P e tem 4 letras?", options: ["pato", "pé", "bola"], answer: "pato", explanation: "Pato começa com P e tem 4 letras." } },
+        { type: "tip", text: "Use os dedos para lembrar cada parte da regra." },
+        { type: "example", text: "Se errou, veja qual pista esqueceu: letra inicial ou quantidade." },
+      ],
+      advanced: [
+        { type: "explanation", text: "No desafio, você corrige o caminho sem desistir." },
+        { type: "example", text: "Frase de autocorreção: eu pulei a pista; vou ler de novo e tentar." },
+        { type: "exercise", text: "Escolha a melhor estratégia.", content: { question: "Quando erro por pressa, o que ajuda?", options: ["reler a regra", "desistir", "chutar"], answer: "reler a regra", explanation: "Reler mostra qual passo faltou." } },
+        { type: "tip", text: "Erro corrigido também é aprendizagem." },
+      ],
+    },
+    premiumTips: ["Leia a regra antes da resposta.", "Faça uma parte por vez.", "Corrija o passo, não se culpe."],
+  };
+}
+
 function ReforcoBrilha() {
   const { activeChild } = useAppState();
   const engine = usePedagogicalEngine();
