@@ -13,6 +13,8 @@ import { semEmoji, objetoImg } from "@/data/neuro-treino/objetos";
 import * as Lessons from "../data/lessons";
 import { ActivityPlayer } from "./ActivityPlayer";
 import { ActivityPlayerC } from "./ActivityPlayerC";
+import { Fund2Player } from "./Fund2Player";
+import { generateActivityLesson6a9 } from "../data/activity-lesson-generator-6a9";
 import { EarlyChildhoodPlayer } from "./EarlyChildhoodPlayer";
 import { VOGAIS_LESSON, CONTAGEM_LESSON, SUBTRACAO_LESSON } from "../data/early-lessons";
 import { ActivityLesson } from "../types/activity-lesson";
@@ -84,7 +86,21 @@ export const LessonPlayer: React.FC = () => {
   const neuroProfile = diagnosticoToNeuroProfile(activeChild?.diagnostico);
 
   const lessonC = ACTIVITY_C_MAP[search.category];
-  if (lessonC) return <ActivityPlayerC lesson={lessonC} />;
+  if (lessonC) {
+    // 6º–9º Ano: usa o novo player premium de 8 telas (Fund2Player).
+    const f2 = generateActivityLesson6a9(lessonC.bncc_code, lessonC.title);
+    if (f2) {
+      return (
+        <Fund2Player
+          lesson={f2}
+          disciplina={lessonC.subject}
+          serie={lessonC.grade}
+          codigoBncc={lessonC.bncc_code}
+        />
+      );
+    }
+    return <ActivityPlayerC lesson={lessonC} />;
+  }
 
   const lessonB = ACTIVITY_MAP[search.category];
   if (lessonB) {
