@@ -248,7 +248,7 @@ function EditorTrabalho({
   useEffect(() => {
     if (!childId) return;
     if (!titulo.trim() || !tema.trim()) return;
-    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes });
+    const snapshot = JSON.stringify({ titulo, tema, materia, blocos, fontes, instrucoesProf });
     if (snapshot === ultimoSalvoRef.current) return;
     const t = setTimeout(async () => {
       setAutoStatus("salvando");
@@ -257,6 +257,7 @@ function EditorTrabalho({
         titulo: titulo.trim(),
         tema: tema.trim(),
         materia: materia.trim() || null,
+        instrucoes_professor: instrucoesProf.trim() || null,
         blocos: blocos as any,
         fontes: fontes as any,
       };
@@ -284,7 +285,47 @@ function EditorTrabalho({
       }
     }, 1500);
     return () => clearTimeout(t);
-  }, [titulo, tema, materia, blocos, fontes, childId, idAtual]);
+  }, [titulo, tema, materia, blocos, fontes, instrucoesProf, childId, idAtual]);
+
+  async function rodarAnalise() {
+    if (analisando) return;
+    const texto = [
+      titulo,
+      ...blocos.map((b) =>
+        b.tipo === "imagem" ? (b.legenda ? `[Imagem: ${b.legenda}]` : "") : (b.texto || ""),
+      ),
+    ]
+      .filter(Boolean)
+      .join("\n\n")
+      .trim();
+    if (texto.length < 20) {
+      toast.info("Escreva um pouquinho do trabalho antes de pedir análise.");
+      return;
+    }
+    setAnalisando(true);
+    setAnaliseTexto(null);
+    try {
+      const res = await analisar({
+        data: {
+          titulo,
+          tema,
+          materia: materia || null,
+          instrucoesProfessor: instrucoesProf || null,
+          texto,
+        },
+      });
+      if (!res.ok) {
+        toast.error(res.error || "Erro na análise");
+        return;
+      }
+      setAnaliseTexto(res.analise);
+      toast.success("Análise pronta!");
+    } catch (e: any) {
+      toast.error("Erro: " + (e?.message || ""));
+    } finally {
+      setAnalisando(false);
+    }
+  }
 
   async function rodarRevisao() {
     if (revisando) return;
