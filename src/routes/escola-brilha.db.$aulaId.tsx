@@ -9,6 +9,7 @@ import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLesson
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 import { generateActivityLesson6a9 } from "../modules/escola-brilha/data/activity-lesson-generator-6a9";
+import { ActivityPlayerTeen } from "../modules/escola-brilha/views/ActivityPlayerTeen";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
@@ -110,11 +111,11 @@ function AulaDbPage() {
       }
     }
 
-    // 6º–9º Ano: aulas no padrão Fundamental II com imagens reais.
+    // 6º–9º Ano: player ESTUDANTIL (11–14 anos) — sem mascotes, tom adulto.
     if (FUND2_GRADES.has(aula.serie)) {
       const f2 = generateActivityLesson6a9(aula.codigo_bncc, aula.titulo);
       if (f2) {
-        return <ActivityPlayer lesson={f2} currentRef={ref} />;
+        return <ActivityPlayerTeen lesson={f2} currentRef={ref} />;
       }
     }
 
