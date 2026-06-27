@@ -332,14 +332,6 @@ function ReforcoBrilha() {
 
       {!isTeaching ? (
         <div className="space-y-8 animate-in fade-in duration-500">
-          <AssistenteGuiado
-            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
-            onBuscar={(q) => {
-              setSearchQuery(q);
-              runSearch(q);
-            }}
-          />
-
           <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
@@ -373,7 +365,13 @@ function ReforcoBrilha() {
             </p>
           </Card>
 
-
+          <AssistenteGuiado
+            onAbrirAula={(id, titulo) => setAulaAberta({ id, titulo })}
+            onBuscar={(q) => {
+              setSearchQuery(q);
+              runSearch(q);
+            }}
+          />
 
           {searchResult && searchResult.main && (
             <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
