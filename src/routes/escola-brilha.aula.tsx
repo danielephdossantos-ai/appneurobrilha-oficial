@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { LessonPlayer } from "../modules/escola-brilha/views/LessonPlayer";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
+import { findStaticById } from "../modules/escola-brilha/data/library";
 
 export const Route = createFileRoute("/escola-brilha/aula")({
   validateSearch: (search: Record<string, unknown>) => {
@@ -14,10 +15,12 @@ export const Route = createFileRoute("/escola-brilha/aula")({
 
 function AulaPage() {
   const { category } = useSearch({ from: "/escola-brilha/aula" });
+  const staticLesson = findStaticById(category);
+  const hasInlineNext = staticLesson?.type === "activity" || staticLesson?.type === "activity-c";
   return (
     <>
       <LessonPlayer />
-      <NextLessonCTA current={{ kind: "static", id: category }} />
+      {!hasInlineNext && <NextLessonCTA current={{ kind: "static", id: category }} />}
     </>
   );
 }

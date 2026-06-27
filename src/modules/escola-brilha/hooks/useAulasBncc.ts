@@ -33,6 +33,15 @@ export interface BnccBibliotecaItem {
   ativo: boolean | null;
 }
 
+export function isRemovedEscolaBrilhaSubject(subject: string | null | undefined): boolean {
+  const normalized = (subject ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  return normalized.includes("educacao fisica") || normalized === "ef";
+}
+
 const etapaAnoRange = (etapa: EtapaEscolar) => {
   if (etapa === "fundamental1") return { from: 1, to: 5 };
   if (etapa === "fundamental2") return { from: 6, to: 9 };
@@ -57,7 +66,7 @@ export function useAulasBnccByEtapa(etapa: EtapaEscolar) {
         .order("ordem", { ascending: true });
       if (cancel) return;
       if (error) setError(error.message);
-      else setAulas((data ?? []) as AulaBncc[]);
+      else setAulas(((data ?? []) as AulaBncc[]).filter((a) => !isRemovedEscolaBrilhaSubject(a.disciplina)));
       setLoading(false);
     })();
     return () => {
@@ -103,7 +112,7 @@ export function useBnccBibliotecaByEtapa(etapa: EtapaEscolar) {
         setHabilidades([]);
       } else {
         setError(null);
-        setHabilidades((data ?? []) as BnccBibliotecaItem[]);
+        setHabilidades(((data ?? []) as BnccBibliotecaItem[]).filter((h) => !isRemovedEscolaBrilhaSubject(h.componente)));
       }
       setLoading(false);
     })();
@@ -133,7 +142,10 @@ export function useAulaBnccById(id: string | undefined) {
         .maybeSingle();
       if (cancel) return;
       if (error) setError(error.message);
-      else setAula((data as AulaBncc) ?? null);
+      else {
+        const lesson = (data as AulaBncc) ?? null;
+        setAula(lesson && !isRemovedEscolaBrilhaSubject(lesson.disciplina) ? lesson : null);
+      }
       setLoading(false);
     })();
     return () => {

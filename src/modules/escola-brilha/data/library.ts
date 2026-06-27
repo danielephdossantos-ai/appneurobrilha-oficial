@@ -43,8 +43,18 @@ export const SERIE_ORDER: Record<EtapaEscolar, string[]> = {
   fundamental2: ["6º Ano", "7º Ano", "8º Ano", "9º Ano"],
 };
 
+export function isRemovedEscolaBrilhaSubject(raw: string | null | undefined): boolean {
+  const s = (raw || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  return s.includes("educacao fisica") || s === "ef";
+}
+
 
 export function subjectKey(raw: string): string {
+  if (isRemovedEscolaBrilhaSubject(raw)) return "__REMOVED__";
   const s = (raw || "").toLowerCase();
   if (s.includes("portug") || s.includes("língua") || s.includes("lingua")) return "Língua Portuguesa";
   if (s.includes("alfabet")) return "Alfabetização";
