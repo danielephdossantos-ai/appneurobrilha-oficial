@@ -2577,13 +2577,17 @@ const isMathOrScience = (disciplina?: string | null) => {
   return d.includes("matem") || d.includes("ciênc") || d.includes("cienc");
 };
 
-export function getFirstYearLessonOverride(args: {
+export function getFirstYearLessonOverride(_args: {
   codigo_bncc?: string | null;
   serie?: string | null;
   disciplina?: string | null;
 }) {
-  if (!isFirstYear(args.serie) || !isMathOrScience(args.disciplina)) return null;
-  return FIRST_YEAR_LESSON_OVERRIDES[args.codigo_bncc ?? ""] ?? null;
+  // Padrão unificado: 1º Ano (LP, MA, CI) usa exclusivamente o payload do banco
+  // via normalizeLessonC, garantindo o mesmo layout pedagógico de Língua Portuguesa.
+  void FIRST_YEAR_LESSON_OVERRIDES;
+  void isFirstYear;
+  void isMathOrScience;
+  return null;
 }
 
 export function getFirstYearLessonTitle(args: {
