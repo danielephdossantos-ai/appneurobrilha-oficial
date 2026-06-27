@@ -1,11 +1,14 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, RefreshCw } from "lucide-react";
+import { gerarConteudoBncc } from "@/lib/bncc-conteudo-ia.functions";
 
 type BnccMeta = {
   codigo: string;
@@ -59,31 +62,72 @@ function BnccCodigoPage() {
   const [meta, setMeta] = useState<BnccMeta | null>(null);
   const [conteudo, setConteudo] = useState<BnccConteudo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [gerando, setGerando] = useState<null | "tudo" | "explicacao" | "exercicios">(null);
+  const gerar = useServerFn(gerarConteudoBncc);
+
+  const carregar = async () => {
+    const [m, c] = await Promise.all([
+      supabase
+        .from("bncc_biblioteca")
+        .select("codigo,ano,componente,habilidade")
+        .eq("codigo", codigo)
+        .maybeSingle(),
+      supabase
+        .from("bncc_conteudo")
+        .select("*")
+        .eq("codigo", codigo)
+        .maybeSingle(),
+    ]);
+    setMeta((m.data as BnccMeta | null) ?? null);
+    setConteudo((c.data as BnccConteudo | null) ?? null);
+    return { meta: m.data as BnccMeta | null, conteudo: c.data as BnccConteudo | null };
+  };
+
+  const acionarIA = async (modo: "tudo" | "explicacao" | "exercicios") => {
+    setGerando(modo);
+    try {
+      const r = await gerar({
+        data: {
+          codigo,
+          force: modo === "tudo",
+          regenerarExplicacao: modo === "explicacao",
+          regenerarExercicios: modo === "exercicios",
+        },
+      });
+      if (!r.ok) {
+        toast.error(r.error || "Não consegui gerar a aula agora.");
+        return;
+      }
+      if (r.regenerated) {
+        toast.success("Aula completa pronta! ✨");
+        await carregar();
+      }
+    } finally {
+      setGerando(null);
+    }
+  };
 
   useEffect(() => {
     let active = true;
     (async () => {
       setLoading(true);
-      const [m, c] = await Promise.all([
-        supabase
-          .from("bncc_biblioteca")
-          .select("codigo,ano,componente,habilidade")
-          .eq("codigo", codigo)
-          .maybeSingle(),
-        supabase
-          .from("bncc_conteudo")
-          .select("*")
-          .eq("codigo", codigo)
-          .maybeSingle(),
-      ]);
+      const { meta: m, conteudo: c } = await carregar();
       if (!active) return;
-      setMeta((m.data as any) ?? null);
-      setConteudo((c.data as any) ?? null);
       setLoading(false);
+      // Auto-gera se ausente ou muito raso
+      const raso =
+        !c ||
+        (c.explicacao?.length ?? 0) < 120 ||
+        !Array.isArray(c.exercicios_faceis) ||
+        (c.exercicios_faceis as unknown[]).length < 2;
+      if (m && raso) {
+        await acionarIA("tudo");
+      }
     })();
     return () => {
       active = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codigo]);
 
   if (loading) {
@@ -143,13 +187,67 @@ function BnccCodigoPage() {
         )}
       </header>
 
-      {semConteudo && (
+      <div className="flex flex-wrap gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => acionarIA("explicacao")}
+          disabled={gerando !== null}
+        >
+          {gerando === "explicacao" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <Sparkles className="w-4 h-4 mr-1" />
+          )}
+          IA explica novamente
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => acionarIA("exercicios")}
+          disabled={gerando !== null}
+        >
+          {gerando === "exercicios" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <RefreshCw className="w-4 h-4 mr-1" />
+          )}
+          IA cria novos exercícios
+        </Button>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => acionarIA("tudo")}
+          disabled={gerando !== null}
+        >
+          {gerando === "tudo" ? (
+            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+          ) : (
+            <Sparkles className="w-4 h-4 mr-1" />
+          )}
+          Refazer aula inteira
+        </Button>
+      </div>
+
+      {gerando === "tudo" && semConteudo && (
         <Card>
-          <CardContent className="py-8 text-center text-muted-foreground">
-            Conteúdo pedagógico desta habilidade ainda não foi cadastrado.
-            <div className="mt-2 text-sm">
-              Em breve: explicação, exemplos, exercícios, gabarito e vídeo.
-            </div>
+          <CardContent className="py-12 text-center space-y-3">
+            <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+            <p className="font-medium">Brilha está montando a aula completa pra você…</p>
+            <p className="text-sm text-muted-foreground">
+              Objetivo, explicação, exemplos, exercícios e gabarito chegam em alguns segundos.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      {semConteudo && gerando !== "tudo" && (
+        <Card>
+          <CardContent className="py-8 text-center text-muted-foreground space-y-3">
+            <p>Conteúdo pedagógico ainda não cadastrado para {meta.codigo}.</p>
+            <Button onClick={() => acionarIA("tudo")} disabled={gerando !== null}>
+              <Sparkles className="w-4 h-4 mr-1" /> Gerar aula com IA
+            </Button>
           </CardContent>
         </Card>
       )}
