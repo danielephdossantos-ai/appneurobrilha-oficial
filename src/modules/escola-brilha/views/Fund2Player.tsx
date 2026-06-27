@@ -441,9 +441,6 @@ export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) =
                       </li>
                     ))}
                   </ul>
-                  <div className="inline-block bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
-                    BNCC · {lesson.bnccCode}
-                  </div>
                   <button
                     onClick={next}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow"
