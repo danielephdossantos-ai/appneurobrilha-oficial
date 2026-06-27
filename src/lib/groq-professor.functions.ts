@@ -238,7 +238,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
         return {
           ok: false as const,
           error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          aula: null,
+          aulaJson: null,
         };
       }
 
@@ -247,7 +247,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
       };
       const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
       if (!raw) {
-        return { ok: false as const, error: "Resposta vazia", aula: null };
+        return { ok: false as const, error: "Resposta vazia", aulaJson: null };
       }
 
       const aula = extractJson(raw);
@@ -257,7 +257,7 @@ Gere a aula completa em JSON conforme o schema definido.`;
       return {
         ok: false as const,
         error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        aula: null,
+        aulaJson: null,
       };
     }
   });
