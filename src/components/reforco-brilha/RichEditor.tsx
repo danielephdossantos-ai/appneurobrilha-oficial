@@ -59,16 +59,24 @@ export function RichEditor({ html, onChange, placeholder }: Props) {
       Image.configure({ inline: false, allowBase64: true }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
-    content: html || `<p>${placeholder || ""}</p>`,
+    content: html || `<p></p>`,
+    editable: true,
+    immediatelyRender: false,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     onFocus: ({ editor }) => { activeEditor = editor; },
     editorProps: {
       attributes: {
         class:
           "prose prose-sm max-w-none min-h-[140px] px-3 py-2 focus:outline-none [&_p]:my-1 [&_img]:max-h-72 [&_img]:mx-auto [&_img]:rounded",
+        contenteditable: "true",
       },
     },
   });
+
+  // Garante modo edição mesmo após hidratação SSR
+  useEffect(() => {
+    if (editor && !editor.isEditable) editor.setEditable(true);
+  }, [editor]);
 
   useEffect(() => {
     return () => { if (activeEditor === editor) activeEditor = null; };
