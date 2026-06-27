@@ -392,7 +392,11 @@ const SubjectFolders: React.FC<{
     const k = subjectKey(h.componente);
     (grouped[k] ||= { statics: [], dbs: [], bnccs: [] }).bnccs.push(h);
   }
-  const subjects = Object.keys(grouped).sort();
+  const anoNum = Number(serie.match(/\d+/)?.[0] ?? 0);
+  const HIDDEN_EARLY = new Set(["Arte", "Educação Física", "História", "Geografia", "Ensino Religioso"]);
+  const subjects = Object.keys(grouped)
+    .filter((s) => !(anoNum > 0 && anoNum <= 2 && HIDDEN_EARLY.has(s)))
+    .sort();
 
   return (
     <div className="space-y-2.5">
