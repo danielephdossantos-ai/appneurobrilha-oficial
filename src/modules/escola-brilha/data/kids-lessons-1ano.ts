@@ -476,10 +476,13 @@ export const KIDS_LESSONS_1ANO: Record<string, KidsLesson> = {
 };
 
 import { getKidsLessonVariants } from "./kids-lesson-variants-1ano";
+import { getKidsLessonVariantsLP } from "./kids-lessons-lp-1ano";
 
 export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
   if (!codigo) return null;
-  return KIDS_LESSONS_1ANO[codigo] ?? null;
+  if (KIDS_LESSONS_1ANO[codigo]) return KIDS_LESSONS_1ANO[codigo];
+  const lp = getKidsLessonVariantsLP(codigo);
+  return lp[0] ?? null;
 }
 
 /**
@@ -488,8 +491,11 @@ export function getKidsLesson(codigo: string | undefined): KidsLesson | null {
  */
 export function getKidsLessons(codigo: string | undefined): KidsLesson[] {
   if (!codigo) return [];
-  const variants = getKidsLessonVariants(codigo);
-  if (variants.length > 0) return variants;
+  const variantsMat = getKidsLessonVariants(codigo);
+  if (variantsMat.length > 0) return variantsMat;
+  const variantsLp = getKidsLessonVariantsLP(codigo);
+  if (variantsLp.length > 0) return variantsLp;
   const base = KIDS_LESSONS_1ANO[codigo];
   return base ? [base] : [];
 }
+
