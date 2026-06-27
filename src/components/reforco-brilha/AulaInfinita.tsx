@@ -268,7 +268,7 @@ export function AulaInfinita({ query }: Props) {
                 </button>
               </div>
             </div>
-            <iframe src={preview.url} title={preview.title} className="flex-1 w-full bg-white" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerPolicy="no-referrer" />
+            <iframe src={toEmbedSrc(preview.url)} title={preview.title} className="flex-1 w-full bg-white" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation" referrerPolicy="no-referrer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
           </div>
         </div>
       )}
