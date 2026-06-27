@@ -15,14 +15,18 @@ type SubjectKey = "CI" | "MA" | "LP" | "HI" | "GE" | "LI" | "AR" | "EF" | "ER";
 const COLORS: PraticarOption["color"][] = ["green", "blue", "orange", "purple", "yellow", "red"];
 
 function subjectFromCode(code: string): SubjectKey | null {
-  const m = code.match(/^EF0[6789](CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
+  // Aceita EF06XX, EF07XX, EF08XX, EF09XX e compostos EF67XX, EF69XX, EF89XX.
+  const m = code.match(/^EF(?:0[6789]|67|69|89)(CI|MA|LP|HI|GE|LI|AR|EF|ER)\d{2,}/i);
   return (m?.[1].toUpperCase() as SubjectKey) ?? null;
 }
 
 function gradeFromCode(code: string): "6º Ano" | "7º Ano" | "8º Ano" | "9º Ano" | null {
-  const m = code.match(/^EF0([6789])/);
-  if (!m) return null;
-  return `${m[1]}º Ano` as "6º Ano";
+  const single = code.match(/^EF0([6789])/);
+  if (single) return `${single[1]}º Ano` as "6º Ano";
+  // Códigos compostos: usa o primeiro ano como rótulo de referência.
+  const compound = code.match(/^EF([6789])([6789])/);
+  if (compound) return `${compound[1]}º Ano` as "6º Ano";
+  return null;
 }
 
 const SUBJECT_NAME: Record<SubjectKey, string> = {
