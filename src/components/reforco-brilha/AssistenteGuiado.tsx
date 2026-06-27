@@ -152,9 +152,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         (anamnese?.sugestoes.map((s) => s.motivo).join("; ") ?? ""),
     );
     setStep(5);
-    setTimeout(() => {
-      gerarRecomendacoes();
-    }, 0);
+    void gerarRecomendacoes(a);
   };
 
   const reset = () => {
@@ -168,18 +166,20 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
   };
 
 
-  const gerarRecomendacoes = async () => {
-    if (!areaSel) return;
+  const gerarRecomendacoes = async (areaOverride?: Area) => {
+    const areaParaBusca = areaOverride ?? area;
+    const areaDef = AREAS.find((a) => a.id === areaParaBusca);
+    if (!areaDef) return;
     setLoading(true);
     setStep(5);
     try {
       // 1) habilidades pela tag (se houver)
       const ids = new Set<string>();
-      if (areaSel.tagSlug) {
+      if (areaDef.tagSlug) {
         const { data: tag } = await supabase
           .from("rb_tags")
           .select("id, rb_habilidade_tags(habilidade_id)")
-          .eq("slug", areaSel.tagSlug)
+          .eq("slug", areaDef.tagSlug)
           .maybeSingle();
         const links = (tag as any)?.rb_habilidade_tags || [];
         links.forEach((l: any) => ids.add(l.habilidade_id));
@@ -191,7 +191,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
         .replace(/[\u0300-\u036f]/g, "")
         .split(/[^a-z0-9]+/)
         .filter((t) => t.length >= 4);
-      const keywords = Array.from(new Set([...areaSel.keywords, ...tokensDescricao]));
+      const keywords = Array.from(new Set([...areaDef.keywords, ...tokensDescricao]));
       const { data: byKw } = await supabase
         .from("rb_habilidades")
         .select("id")
@@ -424,6 +424,26 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
             {TEMPOS.find((t) => t.id === tempo)?.label}
           </div>
 
+          {areaSel && (
+            <div className="rounded-2xl border-2 border-violet-400/30 bg-violet-500/5 p-4">
+              <div className="flex items-center gap-2 mb-1">
+                <Sparkles className="h-4 w-4 text-violet-500" />
+                <h4 className="text-sm font-black">Aula real agora: {areaSel.label}</h4>
+              </div>
+              <p className="text-xs text-muted-foreground mb-3">
+                Mesmo se o banco não encontrar uma aula antiga, o Professor Brilho abre uma aula interativa com explicação,
+                exemplo, pergunta, dica e correção.
+              </p>
+              <button
+                onClick={() => onBuscar?.(areaSel.label)}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-sm font-black text-white hover:bg-violet-600"
+              >
+                <PlayCircle className="h-4 w-4" />
+                Começar aula explicada de {areaSel.label}
+              </button>
+            </div>
+          )}
+
           {areaSel && <PlanoAutomatico area={areaSel.id as AreaPlano} onAbrirAula={onAbrirAula} />}
 
 
@@ -433,7 +453,7 @@ export function AssistenteGuiado({ onAbrirAula, onBuscar }: Props) {
 
           {!loading && recs.length === 0 && (
             <div className="py-6 text-center text-sm text-muted-foreground">
-              Ainda não temos habilidades cadastradas para essa área. Tente a busca por palavras-chave.
+              Não achei uma aula antiga cadastrada para essa área, mas a aula interativa e o plano acima continuam funcionando.
             </div>
           )}
 
