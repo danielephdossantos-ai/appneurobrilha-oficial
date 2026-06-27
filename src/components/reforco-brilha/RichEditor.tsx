@@ -1,6 +1,6 @@
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
+
 import TextAlign from "@tiptap/extension-text-align";
 import { TextStyle } from "@tiptap/extension-text-style";
 import Image from "@tiptap/extension-image";
@@ -54,7 +54,7 @@ export function RichEditor({ html, onChange, placeholder }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Underline,
+      
       TextStyle,
       Image.configure({ inline: false, allowBase64: true }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
