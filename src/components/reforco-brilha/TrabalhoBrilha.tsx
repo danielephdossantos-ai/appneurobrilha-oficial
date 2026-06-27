@@ -632,7 +632,30 @@ function EditorTrabalho({
               placeholder="Tema (ex: Sistema solar)"
               className="sm:col-span-2 text-sm border-2 border-amber-200 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-500"
             />
+            <textarea
+              value={instrucoesProf}
+              onChange={(e) => setInstrucoesProf(e.target.value)}
+              placeholder="📋 Instruções do professor (cole aqui o que o professor pediu — a IA usa isso na análise)"
+              rows={3}
+              className="sm:col-span-2 text-sm border-2 border-violet-200 bg-violet-50/40 rounded-lg px-3 py-2 focus:outline-none focus:border-violet-500"
+            />
           </div>
+
+          {analiseTexto && (
+            <div className="border-2 border-violet-300 bg-violet-50 rounded-xl p-3 text-sm whitespace-pre-wrap leading-relaxed text-violet-950 relative">
+              <button
+                onClick={() => setAnaliseTexto(null)}
+                className="absolute top-2 right-2 p-1 rounded hover:bg-violet-100 text-violet-700"
+                aria-label="Fechar análise"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+              <p className="text-[10px] font-black uppercase tracking-widest text-violet-700 mb-2 flex items-center gap-1">
+                <Sparkles className="h-3 w-3" /> Análise do Professor Brilho
+              </p>
+              {analiseTexto}
+            </div>
+          )}
 
           {/* Botões de bloco */}
           <div className="flex flex-wrap gap-2 text-xs">
