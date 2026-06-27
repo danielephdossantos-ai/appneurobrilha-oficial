@@ -75,15 +75,54 @@ export const KIDS_LESSONS_1ANO: Record<string, KidsLesson> = {
           "Agora é a sua vez! Toque em cada maçã e vamos contar juntos.",
       },
       {
+        kind: "concept",
+        titulo: "Agora o sinal de menos",
+        simbolo: "−",
+        fala:
+          "Olha esse outro sinal. Esse é o sinal de menos. Quando ele aparece, a gente tira uma quantidade. Menos quer dizer tirar.",
+      },
+      {
+        kind: "step_subtract",
+        titulo: "Vamos ver: 7 − 3",
+        a: 7,
+        b: 3,
+        objeto: "🍎",
+        fala:
+          "Olha! A gente tinha sete maçãs. Vamos tirar três. Uma… duas… três! Sobraram quatro maçãs.",
+      },
+      {
+        kind: "step_vertical_sub",
+        titulo: "A conta de menos escrita",
+        a: 7,
+        b: 3,
+        fala:
+          "Veja como escrever. O sete fica em cima. Embaixo, o três com o sinal de menos. Embaixo da linha, o que sobrou: quatro!",
+      },
+      {
+        kind: "concept",
+        titulo: "E o sinal de igual",
+        simbolo: "=",
+        fala:
+          "Este é o sinal de igual. Ele mostra que os dois lados têm a mesma quantidade. Igual quer dizer mesma coisa.",
+      },
+      {
+        kind: "step_equal",
+        titulo: "3 = 3",
+        n: 3,
+        objeto: "🍎",
+        fala:
+          "Olha: três maçãs de um lado, três maçãs do outro. Os dois lados são iguais!",
+      },
+      {
         kind: "summary",
         titulo: "Você aprendeu!",
         itens: [
-          "O sinal + quer dizer juntar",
-          "4 maçãs + 5 maçãs = 9 maçãs",
-          "Escrever em cima, embaixo, e o resultado",
+          "+ quer dizer juntar",
+          "− quer dizer tirar",
+          "= quer dizer mesma quantidade",
         ],
         fala:
-          "Que demais! Você aprendeu o que é o sinal de mais, como juntar e como escrever a conta. Parabéns!",
+          "Que demais! Você aprendeu três sinais: mais, menos e igual. Parabéns!",
       },
       {
         kind: "celebrate",
