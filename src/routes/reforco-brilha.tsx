@@ -750,10 +750,8 @@ function ReforcoBrilha() {
             </div>
           </div>
 
-          {/* Relatório da criança — sempre no final da página */}
-          <div className="pt-4 border-t-2 border-dashed border-indigo-200">
-            <RelatoriosReforco />
-          </div>
+
+
         </div>
       ) : (
         <div className="animate-in slide-in-from-bottom-4 duration-500">
