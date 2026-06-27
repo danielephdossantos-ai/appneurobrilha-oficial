@@ -3272,6 +3272,39 @@ export type Database = {
           },
         ]
       }
+      rb_aulas_ia: {
+        Row: {
+          area: string
+          conteudo: Json
+          created_at: string
+          id: string
+          idade: number | null
+          semana_numero: number
+          serie: string | null
+          tema: string
+        }
+        Insert: {
+          area: string
+          conteudo: Json
+          created_at?: string
+          id?: string
+          idade?: number | null
+          semana_numero: number
+          serie?: string | null
+          tema: string
+        }
+        Update: {
+          area?: string
+          conteudo?: Json
+          created_at?: string
+          id?: string
+          idade?: number | null
+          semana_numero?: number
+          serie?: string | null
+          tema?: string
+        }
+        Relationships: []
+      }
       rb_categorias: {
         Row: {
           cor: string | null
