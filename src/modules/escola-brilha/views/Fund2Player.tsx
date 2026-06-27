@@ -205,7 +205,76 @@ const Feedback: React.FC<{ picked: OptionV2 | null }> = ({ picked }) =>
     </div>
   ) : null;
 
+/* ─────────── MathBoard — "lousa" de resolução passo a passo ───────────
+   Detecta linhas com '=' como equações e linhas com "dos dois lados",
+   "÷", "×", "+" ou "−" como operações. Renderiza cada passo como linha
+   da lousa, com a operação aplicada visivelmente entre uma equação e
+   a próxima, e setas verticais conectando os passos.                       */
+const isEquationLine = (s: string) => /[=]/.test(s);
+const looksLikeOperation = (s: string) =>
+  /dos dois lados/i.test(s) || /^[\s]*[+\-−×÷xX·*\/][\s]*\d/.test(s.trim());
+
+const MathLine: React.FC<{ text: string; tone?: "eq" | "op" | "note" }> = ({ text, tone = "eq" }) => {
+  if (tone === "op") {
+    return (
+      <div className="flex flex-col items-center my-1">
+        <div className="text-slate-400 text-lg leading-none">↓</div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase tracking-wider border border-amber-200">
+          {text}
+        </div>
+        <div className="text-slate-400 text-lg leading-none">↓</div>
+      </div>
+    );
+  }
+  if (tone === "note") {
+    return <div className="text-center text-xs text-slate-500 mt-1">{text}</div>;
+  }
+  return (
+    <div className="text-center font-mono text-3xl sm:text-4xl font-black text-slate-900 tracking-wider py-2">
+      {text}
+    </div>
+  );
+};
+
+const MathBoard: React.FC<{ steps: { step: string; detail: string }[] }> = ({ steps }) => {
+  // Flatten cada passo em uma sequência de linhas (equação / operação / nota).
+  const lines: { text: string; tone: "eq" | "op" | "note"; tag?: string }[] = [];
+  steps.forEach((p, idx) => {
+    const head = p.step.includes("—") ? p.step.split("—").slice(1).join("—").trim() : p.step.trim();
+    const detail = (p.detail || "").trim();
+    const tag = `Passo ${idx + 1}`;
+    if (isEquationLine(head)) {
+      lines.push({ text: head, tone: "eq", tag });
+      if (detail && !isEquationLine(detail)) lines.push({ text: detail, tone: "note" });
+      else if (detail) lines.push({ text: detail, tone: "eq" });
+    } else if (looksLikeOperation(head)) {
+      lines.push({ text: head, tone: "op", tag });
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
+    } else {
+      // header genérico — vira nota acima da equação seguinte
+      if (head) lines.push({ text: head, tone: "note" });
+      if (detail) lines.push({ text: detail, tone: isEquationLine(detail) ? "eq" : "note" });
+    }
+  });
+
+  return (
+    <div className="rounded-3xl border-2 border-slate-200 bg-gradient-to-b from-slate-50 to-white p-5 sm:p-8 shadow-inner">
+      {lines.map((ln, i) => (
+        <div key={i} className="relative">
+          {ln.tag && ln.tone === "eq" && (
+            <div className="text-[10px] font-black uppercase tracking-widest text-emerald-700 text-center mb-1">
+              {ln.tag}
+            </div>
+          )}
+          <MathLine text={ln.text} tone={ln.tone} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 /* ════════════════════════════════════════════════ */
+
 
 export const Fund2Player: React.FC<Props> = ({ lesson, currentRef, capitulo }) => {
   const navigate = useNavigate();
