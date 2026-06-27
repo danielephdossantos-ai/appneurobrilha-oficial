@@ -84,7 +84,7 @@ export const KidsLessonPlayer: React.FC<Props> = ({ lesson, currentRef }) => {
       </div>
 
       <div className="px-4 pb-2">
-        <p className="text-white/90 text-xs font-bold uppercase tracking-wider">
+        <p className="text-slate-900/90 text-xs font-bold uppercase tracking-wider">
           {lesson.disciplina} • {lesson.serie}
         </p>
       </div>
@@ -119,7 +119,7 @@ export const KidsLessonPlayer: React.FC<Props> = ({ lesson, currentRef }) => {
         {!isLast ? (
           <button
             onClick={() => setIdx((i) => i + 1)}
-            className={`flex-1 h-14 rounded-2xl ${c.bg} text-white font-black text-lg shadow-lg flex items-center justify-center gap-2 active:scale-[0.98] transition`}
+            className={`flex-1 h-14 rounded-2xl ${c.bg} text-slate-900 font-black text-lg shadow-lg flex items-center justify-center gap-2 active:scale-[0.98] transition`}
           >
             Continuar <ChevronRight className="w-6 h-6" />
           </button>
@@ -234,7 +234,7 @@ const ConceptScene: React.FC<{ scene: Extract<KidsScene, { kind: "concept" }>; a
       transition={{ duration: 0.7 }}
       className={`w-44 h-44 sm:w-56 sm:h-56 rounded-3xl ${accent.bg} shadow-2xl flex items-center justify-center`}
     >
-      <span className="text-white font-black" style={{ fontSize: "9rem", lineHeight: 1 }}>
+      <span className="text-slate-900 font-black" style={{ fontSize: "9rem", lineHeight: 1 }}>
         {scene.simbolo ?? scene.emoji}
       </span>
     </motion.div>
@@ -296,7 +296,7 @@ const StepCountScene: React.FC<{
     <SceneTitle accent={accent}>{scene.titulo}</SceneTitle>
     <div className={`${accent.soft} rounded-3xl p-4 w-full max-w-xl flex flex-col gap-3`}>
       <div className="flex items-center gap-3">
-        <div className={`w-14 h-14 rounded-2xl ${accent.bg} text-white text-3xl font-black flex items-center justify-center`}>
+        <div className={`w-14 h-14 rounded-2xl ${accent.bg} text-slate-900 text-3xl font-black flex items-center justify-center`}>
           {scene.a}
         </div>
         <RowOfObjects n={scene.a} emoji={scene.objeto} />
@@ -306,13 +306,13 @@ const StepCountScene: React.FC<{
           initial={{ scale: 0 }}
           animate={{ scale: [0, 1.3, 1] }}
           transition={{ delay: 0.4 }}
-          className={`w-14 h-14 rounded-full bg-amber-400 text-white text-4xl font-black flex items-center justify-center shadow-lg`}
+          className={`w-14 h-14 rounded-full bg-amber-400 text-slate-900 text-4xl font-black flex items-center justify-center shadow-lg`}
         >
           +
         </motion.div>
       </div>
       <div className="flex items-center gap-3">
-        <div className={`w-14 h-14 rounded-2xl ${accent.bg} text-white text-3xl font-black flex items-center justify-center`}>
+        <div className={`w-14 h-14 rounded-2xl ${accent.bg} text-slate-900 text-3xl font-black flex items-center justify-center`}>
           {scene.b}
         </div>
         <RowOfObjects n={scene.b} emoji={scene.objeto} delay={0.8} />
@@ -355,7 +355,7 @@ const StepJoinScene: React.FC<{
           </motion.span>
         ))}
       </div>
-      <div className={`${accent.bg} text-white px-8 py-4 rounded-2xl shadow-xl`}>
+      <div className={`${accent.bg} text-slate-900 px-8 py-4 rounded-2xl shadow-xl`}>
         <span className="text-5xl font-black">{count}</span>
       </div>
       <CoachBubble fala={scene.fala} accent={accent} mascot={mascot} />
@@ -442,7 +442,7 @@ const PracticeCountScene: React.FC<{
           );
         })}
       </div>
-      <div className={`${accent.bg} text-white px-6 py-3 rounded-2xl shadow-xl`}>
+      <div className={`${accent.bg} text-slate-900 px-6 py-3 rounded-2xl shadow-xl`}>
         <span className="text-4xl font-black">
           {tapped.size} / {total}
         </span>
@@ -468,7 +468,7 @@ const SummaryScene: React.FC<{
           transition={{ delay: 0.3 + i * 0.4 }}
           className={`${accent.soft} rounded-2xl p-4 flex items-center gap-3`}
         >
-          <div className={`w-10 h-10 rounded-xl ${accent.bg} text-white font-black text-xl flex items-center justify-center shrink-0`}>
+          <div className={`w-10 h-10 rounded-xl ${accent.bg} text-slate-900 font-black text-xl flex items-center justify-center shrink-0`}>
             {i + 1}
           </div>
           <p className="text-slate-700 font-bold text-lg">{it}</p>
