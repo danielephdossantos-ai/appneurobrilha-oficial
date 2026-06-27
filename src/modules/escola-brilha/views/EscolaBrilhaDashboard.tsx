@@ -42,8 +42,7 @@ const STATIC_LESSONS: Record<EtapaEscolar, StaticLesson[]> = {
   fundamental1: [
     // 1º Ano agora vem 100% do banco (aulas_bncc tipo_player="c"), no mesmo padrão pedagógico.
     // LP, MA e CI são exibidas via dbCards — sem joguinho de pré nem aulas legacy aqui.
-    { id: "sinonimos", type: "activity", serie: "2º Ano", title: "Sinônimos", subtitle: "Palavras com sentido parecido", badge: "Língua Portuguesa", badgeColor: "bg-violet-100 text-violet-700", gradient: "from-violet-500 to-purple-600", xp: 120, bncc: "EF02LP13" },
-    { id: "antonimos", type: "activity", serie: "2º Ano", title: "Antônimos", subtitle: "Palavras com sentido oposto", badge: "Língua Portuguesa", badgeColor: "bg-teal-100 text-teal-700", gradient: "from-teal-500 to-emerald-600", xp: 120, bncc: "EF02LP13" },
+    // 2º Ano também vem 100% do banco (padrão Kids igual ao 1º Ano). Sinônimos/Antônimos legacy removidos.
     { id: "substantivos", type: "activity", serie: "3º Ano", title: "Substantivos", subtitle: "Nomes de seres e objetos", badge: "Língua Portuguesa", badgeColor: "bg-blue-100 text-blue-700", gradient: "from-blue-500 to-indigo-600", xp: 130, bncc: "EF03LP08" },
     { id: "fracoes", type: "activity", serie: "3º Ano", title: "Frações", subtitle: "Partes de um todo", badge: "Matemática", badgeColor: "bg-amber-100 text-amber-700", gradient: "from-amber-500 to-orange-600", xp: 150, bncc: "EF03MA17" },
     { id: "multiplicacao", type: "activity", serie: "3º Ano", title: "Multiplicação", subtitle: "Tabuada e grupos iguais", badge: "Matemática", badgeColor: "bg-pink-100 text-pink-700", gradient: "from-pink-500 to-rose-600", xp: 140, bncc: "EF03MA07" },
