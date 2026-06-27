@@ -891,8 +891,17 @@ LESSONS_3ANO_MAT.EF03MA58 = LESSONS_3ANO_MAT.EF03MA24; // Dinheiro
 LESSONS_3ANO_MAT.EF03MA59 = LESSONS_3ANO_MAT.EF03MA03; // Tabuada
 
 import { LESSONS_3ANO_LP } from "./activity-lessons-3ano-lp";
+import { generateActivityLesson3a5 } from "./activity-lesson-generator-3a5";
 
-export function getActivityLesson3a5(codigo: string): ActivityLesson | null {
-  return LESSONS_3ANO_MAT[codigo] ?? LESSONS_3ANO_LP[codigo] ?? null;
+export function getActivityLesson3a5(
+  codigo: string,
+  titulo?: string,
+): ActivityLesson | null {
+  return (
+    LESSONS_3ANO_MAT[codigo] ??
+    LESSONS_3ANO_LP[codigo] ??
+    generateActivityLesson3a5(codigo, titulo ?? codigo)
+  );
 }
+
 
