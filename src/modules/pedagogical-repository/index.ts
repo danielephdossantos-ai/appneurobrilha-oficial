@@ -24,7 +24,15 @@ export {
   type PalavraImportante,
 } from "./types";
 
-// ----------------------------- cache em memória ------------------------------
+// ----------------------------- cache local + memória -------------------------
+//
+// Estratégia: na 1ª abertura buscamos no Supabase e gravamos em localStorage.
+// Nas próximas vezes a aula abre imediatamente do cache local; em paralelo
+// revalidamos contra o banco (stale-while-revalidate). NUNCA regeneramos
+// aula — se o banco devolver null, o cache local é invalidado.
+
+const CACHE_PREFIX = "lc:v1:";
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 dias
 
 const cache = new Map<string, LessonContent | null>();
 const inflight = new Map<string, Promise<LessonContent | null>>();
@@ -36,6 +44,64 @@ function emit() {
 
 function normalizeCode(code: string): string {
   return (code || "").trim().toUpperCase();
+}
+
+function storage(): Storage | null {
+  try {
+    return typeof window !== "undefined" ? window.localStorage : null;
+  } catch {
+    return null;
+  }
+}
+
+function readLocal(key: string): LessonContent | null {
+  const s = storage();
+  if (!s) return null;
+  try {
+    const raw = s.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { savedAt: number; lesson: LessonContent };
+    if (!parsed?.lesson || !parsed.savedAt) return null;
+    if (Date.now() - parsed.savedAt > CACHE_TTL_MS) {
+      s.removeItem(CACHE_PREFIX + key);
+      return null;
+    }
+    return parsed.lesson;
+  } catch {
+    return null;
+  }
+}
+
+function writeLocal(key: string, lesson: LessonContent | null) {
+  const s = storage();
+  if (!s) return;
+  try {
+    if (lesson) {
+      s.setItem(
+        CACHE_PREFIX + key,
+        JSON.stringify({ savedAt: Date.now(), lesson }),
+      );
+    } else {
+      s.removeItem(CACHE_PREFIX + key);
+    }
+  } catch {
+    /* quota / privado — ignora */
+  }
+}
+
+function clearLocal() {
+  const s = storage();
+  if (!s) return;
+  try {
+    const toRemove: string[] = [];
+    for (let i = 0; i < s.length; i++) {
+      const k = s.key(i);
+      if (k && k.startsWith(CACHE_PREFIX)) toRemove.push(k);
+    }
+    toRemove.forEach((k) => s.removeItem(k));
+  } catch {
+    /* ignora */
+  }
 }
 
 // ----------------------------- mapeamento ------------------------------------
