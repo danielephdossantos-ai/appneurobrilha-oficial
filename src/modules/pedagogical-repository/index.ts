@@ -155,52 +155,23 @@ export async function getLessonByBNCC(
   const key = normalizeCode(codigoBncc);
   if (!key) return null;
 
-  if (cache.has(key)) return cache.get(key) ?? null;
+  // 1) hidrata memória a partir do localStorage (1ª vez nesta sessão).
+  if (!cache.has(key)) {
+    const local = readLocal(key);
+    if (local) cache.set(key, local);
+  }
+
+  // 2) já temos algo em memória? devolve imediato e revalida em background.
+  if (cache.has(key)) {
+    const cached = cache.get(key) ?? null;
+    if (cached) void revalidate(key);
+    return cached;
+  }
 
   const pending = inflight.get(key);
   if (pending) return pending;
 
-  const work = (async () => {
-    try {
-      const { data, error } = await (supabase as unknown as {
-        from: (t: string) => {
-          select: (c: string) => {
-            eq: (
-              c: string,
-              v: string,
-            ) => {
-              maybeSingle: () => Promise<{
-                data: Record<string, unknown> | null;
-                error: unknown;
-              }>;
-            };
-          };
-        };
-      })
-        .from("lesson_content")
-        .select("*")
-        .eq("codigo_bncc", key)
-        .maybeSingle();
-
-      if (error) {
-        console.warn("[PedagogicalRepository] erro ao buscar aula:", error);
-        cache.set(key, null);
-        emit();
-        return null;
-      }
-
-      const lesson = data ? mapRow(data) : null;
-      cache.set(key, lesson);
-      emit();
-      return lesson;
-    } catch (err) {
-      console.warn("[PedagogicalRepository] falha inesperada:", err);
-      cache.set(key, null);
-      emit();
-      return null;
-    }
-  })();
-
+  const work = fetchFromDb(key);
   inflight.set(key, work);
   try {
     return await work;
@@ -209,12 +180,66 @@ export async function getLessonByBNCC(
   }
 }
 
-/** Retorna a aula já carregada em memória, sem disparar nova requisição. */
-export function getLessonByBNCCSync(codigoBncc: string): LessonContent | null {
-  return cache.get(normalizeCode(codigoBncc)) ?? null;
+async function fetchFromDb(key: string): Promise<LessonContent | null> {
+  try {
+    const { data, error } = await (supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => {
+          eq: (
+            c: string,
+            v: string,
+          ) => {
+            maybeSingle: () => Promise<{
+              data: Record<string, unknown> | null;
+              error: unknown;
+            }>;
+          };
+        };
+      };
+    })
+      .from("lesson_content")
+      .select("*")
+      .eq("codigo_bncc", key)
+      .maybeSingle();
+
+    if (error) {
+      console.warn("[PedagogicalRepository] erro ao buscar aula:", error);
+      return cache.get(key) ?? null;
+    }
+
+    const lesson = data ? mapRow(data) : null;
+    cache.set(key, lesson);
+    writeLocal(key, lesson);
+    emit();
+    return lesson;
+  } catch (err) {
+    console.warn("[PedagogicalRepository] falha inesperada:", err);
+    return cache.get(key) ?? null;
+  }
 }
 
-/** Hook React: busca a aula no banco e re-renderiza quando ela chega. */
+async function revalidate(key: string) {
+  if (inflight.has(key)) return;
+  const work = fetchFromDb(key);
+  inflight.set(key, work);
+  try {
+    await work;
+  } finally {
+    inflight.delete(key);
+  }
+}
+
+/** Retorna a aula em memória ou já gravada no localStorage. */
+export function getLessonByBNCCSync(codigoBncc: string): LessonContent | null {
+  const key = normalizeCode(codigoBncc);
+  if (!key) return null;
+  if (cache.has(key)) return cache.get(key) ?? null;
+  const local = readLocal(key);
+  if (local) cache.set(key, local);
+  return local;
+}
+
+/** Hook React: abre instantâneo do cache local; revalida contra o banco. */
 export function useLessonByBNCC(codigoBncc: string): {
   lesson: LessonContent | null;
   loading: boolean;
@@ -222,25 +247,34 @@ export function useLessonByBNCC(codigoBncc: string): {
   const key = normalizeCode(codigoBncc);
   const [, force] = useState(0);
 
+  // hidrata sync do localStorage para a 1ª render já ter conteúdo.
+  if (!cache.has(key)) {
+    const local = readLocal(key);
+    if (local) cache.set(key, local);
+  }
+
   useEffect(() => {
     const sub = () => force((n) => n + 1);
     listeners.add(sub);
-    if (!cache.has(key)) void getLessonByBNCC(key);
+    void getLessonByBNCC(key);
     return () => {
       listeners.delete(sub);
     };
   }, [key]);
 
-  const cached = cache.has(key);
+  const has = cache.has(key);
   return {
     lesson: cache.get(key) ?? null,
-    loading: !cached,
+    loading: !has,
   };
 }
 
-/** Limpa o cache (uso em testes / admin). */
+/** Limpa cache em memória + localStorage (testes / admin). */
 export function clearLessonRepositoryCache() {
   cache.clear();
   inflight.clear();
+  clearLocal();
   emit();
+}
+
 }
