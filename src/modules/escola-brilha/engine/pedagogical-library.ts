@@ -1,290 +1,149 @@
 /**
- * pedagogical-library — busca de aulas (LessonV2) APENAS no banco.
+ * pedagogical-library — DEPRECADO como gerador.
  *
- * Nova arquitetura: nenhuma geração dinâmica de aula a partir de código BNCC.
- * O resolver só devolve uma aula quando ela já está armazenada no Supabase
- * (cache versionado em `pedagogical_lessons_cache` ou template real em
- * `pedagogical_templates` mapeado por `bncc_template_map`).
+ * A montagem de aulas a partir de templates / concatenação de strings foi
+ * REMOVIDA. Toda aula agora vem do banco via `LessonService` /
+ * `PedagogicalRepository`. Este arquivo mantém apenas a assinatura usada
+ * pelo player legacy: se o código BNCC não estiver cadastrado em
+ * `lesson_content`, retorna null e a UI deve exibir:
  *
- * Se a aula não existir no banco, `resolveLessonV2Sync` retorna null e
- * `useLessonV2` retorna null — a tela chamadora decide o fallback visual
- * (ex.: mostrar player legacy ou aviso "em manutenção").
+ *     "Aula ainda não cadastrada."
+ *
+ * Nenhuma string é construída aqui. Nenhum template é consultado.
  */
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import type { LessonV2, OptionV2, ResumoFormat } from "../types/lesson-v2";
+import { LessonService } from "@/services/lessons/LessonService";
+import type { LessonContent } from "@/modules/pedagogical-repository";
+import type { LessonV2 } from "../types/lesson-v2";
 
-// ----------------------------- cache (somente DB) ----------------------------
+// ----------------------------------------------------------------------------
+// Adapter: LessonContent (banco) → LessonV2 (formato consumido pelo player).
+// Apenas COPIA campos já salvos no banco — não inventa nada.
+// Se um campo não existir, a seção fica vazia e o player decide o fallback.
+// ----------------------------------------------------------------------------
 
-const templateCache = new Map<string, LessonV2>();
-const inflight = new Map<string, Promise<LessonV2 | null>>();
-const listeners = new Set<() => void>();
+function adapt(lesson: LessonContent): LessonV2 {
+  const passos = (lesson.passo_a_passo ?? []).map((p) => ({
+    step: p.titulo,
+    detail: p.descricao,
+  }));
 
-function cacheKey(bnccCode: string, titulo: string) {
-  return `${bnccCode}::${titulo}`;
-}
-
-function emit() {
-  listeners.forEach((l) => l());
-}
-
-// ----------------------------- tipos auxiliares -----------------------------
-
-interface TemplateRow {
-  id: string;
-  slug: string;
-  name: string;
-  disciplina: string;
-  serie: string | null;
-  metodo: string;
-  sequencia_didatica: Array<{ step: string; detail: string }> | null;
-  exemplos: Array<{
-    question?: string;
-    resolution?: Array<{ line: string; note?: string }>;
-    answer?: string;
-    why?: string;
-    image?: string;
-  }> | null;
-  erros_comuns: Array<{ wrong: string; why: string }> | null;
-  pratica_guiada: Array<{
-    prompt: string;
-    hint?: string;
-    options: OptionV2[];
-  }> | null;
-  exercicios: Array<{ question: string; options: OptionV2[] }> | null;
-  desafio: {
-    contextualScenario?: string;
-    question?: string;
-    options?: OptionV2[];
-  } | null;
-  revisao: {
-    format?: ResumoFormat;
-    nodes?: Array<{ label: string; detail?: string }>;
-    takeaways?: string[];
-  } | null;
-  avaliacao: { recommendation?: string } | null;
-}
-
-// ----------------------------- montagem ------------------------------------
-
-/**
- * Monta a LessonV2 SOMENTE com o conteúdo armazenado no template.
- * Sem fallback dinâmico: se uma seção não existir no banco, fica vazia
- * (a UI já lida com seções vazias).
- */
-function buildFromTemplate(
-  bnccCode: string,
-  titulo: string,
-  bnccObjective: string,
-  tpl: TemplateRow,
-): LessonV2 {
-  const passoAPasso = tpl.sequencia_didatica ?? [];
-  const ex0 = tpl.exemplos?.[0];
-
-  const templateMeta = {
-    slug: tpl.slug,
-    name: tpl.name,
-    disciplina: tpl.disciplina,
-    steps: [
-      { n: 1, label: "Motivação",      applied: !!tpl.metodo,                                                              source: "metodo" },
-      { n: 2, label: "Observação",     applied: !!(tpl.sequencia_didatica && tpl.sequencia_didatica.length > 0),           source: "sequencia_didatica" },
-      { n: 3, label: "Explicação",     applied: !!(tpl.sequencia_didatica && tpl.sequencia_didatica.length > 1),           source: "sequencia_didatica" },
-      { n: 4, label: "Exemplo",        applied: !!ex0,                                                                     source: "exemplos" },
-      { n: 5, label: "Prática Guiada", applied: !!(tpl.pratica_guiada && tpl.pratica_guiada.length > 0),                   source: "pratica_guiada" },
-      { n: 6, label: "Treino",         applied: !!(tpl.exercicios && tpl.exercicios.length > 0),                           source: "exercicios" },
-      { n: 7, label: "Desafio",        applied: !!(tpl.desafio?.question && tpl.desafio.options?.length),                  source: "desafio" },
-      { n: 8, label: "Resumo",         applied: !!(tpl.revisao?.nodes?.length || tpl.revisao?.takeaways?.length),          source: "revisao" },
-      { n: 9, label: "Domínio",        applied: !!tpl.avaliacao?.recommendation,                                           source: "avaliacao" },
-    ],
-  };
+  const guiada = lesson.atividade_guiada?.[0];
+  const pratica = lesson.atividade_pratica ?? [];
+  const desafio = lesson.desafio;
+  const quiz = lesson.quiz ?? [];
 
   return {
-    id: `tpl:${tpl.slug}:${bnccCode}`,
-    title: titulo || bnccCode,
-    discipline: tpl.disciplina as LessonV2["discipline"],
-    grade: tpl.serie ?? "",
-    bnccCode,
-    bnccObjective,
+    id: lesson.id,
+    title: lesson.titulo,
+    discipline: lesson.disciplina as LessonV2["discipline"],
+    grade: lesson.ano,
+    bnccCode: lesson.codigo_bncc,
+    bnccObjective: lesson.objetivo,
     xp: 30,
-    templateMeta,
-
+    templateMeta: {
+      slug: "db",
+      name: "Banco",
+      disciplina: lesson.disciplina,
+      steps: [],
+    },
     screens: {
       missao: {
-        studentObjective: `Você vai aprender ${(titulo || bnccCode).toLowerCase()}.`,
+        studentObjective: lesson.objetivo,
         contextEmoji: "📘",
-        contextLine: tpl.metodo,
-        whatYouWillDo: passoAPasso.slice(0, 3).map((p) => p.step),
+        contextLine: lesson.introducao,
+        whatYouWillDo: passos.slice(0, 3).map((p) => p.step),
       },
       exploracao: {
-        provokingQuestion: `O que você já sabe sobre ${titulo || bnccCode}?`,
-        observation: tpl.metodo,
+        provokingQuestion: lesson.contexto,
+        observation: lesson.introducao,
         pairs: [],
       },
       explicacao: {
-        conceito: tpl.metodo,
-        passoAPasso,
-        exemplo: ex0?.answer ?? "",
-        aplicacao: "",
-        resumo: passoAPasso.map((p) => p.step).join(" → "),
+        conceito: lesson.explicacao,
+        passoAPasso: passos,
+        exemplo: lesson.exemplo1,
+        aplicacao: lesson.exemplo2,
+        resumo: lesson.resumo,
       },
-      exemplo: ex0
+      exemplo: {
+        question: lesson.exemplo1,
+        resolution: [],
+        answer: lesson.exemplo2,
+        why: lesson.analogia,
+      },
+      guiada: guiada
         ? {
-            question: ex0.question ?? titulo,
-            resolution: ex0.resolution ?? [],
-            answer: ex0.answer ?? "",
-            why: ex0.why ?? tpl.metodo,
-            image: ex0.image,
+            prompt: guiada.enunciado,
+            options: [],
+            hint: guiada.dica ?? "",
           }
-        : {
-            question: titulo || bnccCode,
-            resolution: [],
-            answer: "",
-            why: tpl.metodo,
-          },
-      guiada: tpl.pratica_guiada?.[0]
+        : { prompt: "", options: [], hint: "" },
+      atividade: {
+        items: pratica.map((a) => ({ question: a.enunciado, options: [] })),
+      },
+      desafio: desafio
         ? {
-            prompt: tpl.pratica_guiada[0].prompt,
-            options: tpl.pratica_guiada[0].options,
-            hint: tpl.pratica_guiada[0].hint ?? tpl.metodo,
+            contextualScenario: "",
+            question: desafio.enunciado,
+            options: [],
           }
-        : { prompt: titulo || bnccCode, options: [], hint: tpl.metodo },
-      atividade:
-        tpl.exercicios && tpl.exercicios.length > 0
-          ? { items: tpl.exercicios }
-          : { items: [] },
-      desafio:
-        tpl.desafio &&
-        tpl.desafio.question &&
-        tpl.desafio.options &&
-        tpl.desafio.options.length > 0
-          ? {
-              contextualScenario:
-                tpl.desafio.contextualScenario ?? "Resolva o desafio:",
-              question: tpl.desafio.question,
-              options: tpl.desafio.options,
-            }
-          : {
-              contextualScenario: "Resolva o desafio:",
-              question: titulo || bnccCode,
-              options: [],
-            },
+        : { contextualScenario: "", question: "", options: [] },
       resumo: {
-        format: tpl.revisao?.format ?? "list",
-        title: titulo || bnccCode,
-        nodes: tpl.revisao?.nodes ?? [],
-        takeaways: tpl.revisao?.takeaways ?? [],
+        format: "list",
+        title: lesson.titulo,
+        nodes: (lesson.palavras_importantes ?? []).map((p) => ({
+          label: p.termo,
+          detail: p.definicao,
+        })),
+        takeaways: lesson.resumo ? [lesson.resumo] : [],
       },
       dominio: {
-        bnccCode,
-        bnccObjective: bnccObjective || `Habilidade ${bnccCode}.`,
-        recommendation:
-          tpl.avaliacao?.recommendation ??
-          "Se acertar tudo, avance. Se errar, revise o passo a passo.",
+        bnccCode: lesson.codigo_bncc,
+        bnccObjective: lesson.objetivo,
+        recommendation: lesson.revisao,
       },
     },
   };
 }
 
-// ----------------------------- API pública ---------------------------------
+const listeners = new Set<() => void>();
+function emit() {
+  listeners.forEach((l) => l());
+}
 
-/**
- * Retorna SOMENTE aulas já presentes no cache vindo do banco.
- * Sem geração dinâmica: enquanto o prefetch não completar, devolve null.
- */
+// ----------------------------- API pública ----------------------------------
+
 export function resolveLessonV2Sync(
   bnccCode: string,
-  titulo: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _titulo: string,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _bnccObjective = "",
 ): LessonV2 | null {
-  return templateCache.get(cacheKey(bnccCode, titulo)) ?? null;
+  const lesson = LessonService.getLessonSync(bnccCode);
+  return lesson ? adapt(lesson) : null;
 }
 
-/**
- * Busca o conteúdo no banco e popula `templateCache`.
- * Notifica `useLessonV2` quando termina.
- */
 export async function prefetchLessonV2(
   bnccCode: string,
-  titulo: string,
-  bnccObjective = "",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _titulo: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _bnccObjective = "",
 ): Promise<LessonV2 | null> {
-  const key = cacheKey(bnccCode, titulo);
-  if (templateCache.has(key)) return templateCache.get(key)!;
-
-  const pending = inflight.get(key);
-  if (pending) return pending;
-
-  const work = (async () => {
-    try {
-      // 1) Cache versionado no Supabase (lesson já montada).
-      const { data: cached } = await supabase
-        .from("pedagogical_lessons_cache")
-        .select("lesson, version")
-        .eq("bncc_code", bnccCode)
-        .order("version", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (cached?.lesson) {
-        const lesson = cached.lesson as unknown as LessonV2;
-        templateCache.set(key, lesson);
-        emit();
-        return lesson;
-      }
-
-      // 2) Map BNCC → Template (maior prioridade).
-      const { data: map } = await supabase
-        .from("bncc_template_map")
-        .select("template_id, priority")
-        .eq("bncc_code", bnccCode)
-        .order("priority", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (map?.template_id) {
-        const { data: tpl } = await supabase
-          .from("pedagogical_templates")
-          .select("*")
-          .eq("id", map.template_id)
-          .maybeSingle();
-
-        if (tpl) {
-          const lesson = buildFromTemplate(
-            bnccCode,
-            titulo,
-            bnccObjective,
-            tpl as unknown as TemplateRow,
-          );
-          templateCache.set(key, lesson);
-          emit();
-          return lesson;
-        }
-      }
-    } catch (err) {
-      console.warn("[pedagogical-library] prefetch failed:", err);
-    }
-
-    return null;
-  })();
-
-  inflight.set(key, work);
-  try {
-    return await work;
-  } finally {
-    inflight.delete(key);
-  }
+  const lesson = await LessonService.getLesson(bnccCode);
+  emit();
+  return lesson ? adapt(lesson) : null;
 }
 
-/** Hook React: retorna a aula do banco e re-renderiza quando chega. */
 export function useLessonV2(
   bnccCode: string,
   titulo: string,
   bnccObjective = "",
 ): LessonV2 | null {
   const [, force] = useState(0);
-
   useEffect(() => {
     const sub = () => force((n) => n + 1);
     listeners.add(sub);
@@ -293,13 +152,10 @@ export function useLessonV2(
       listeners.delete(sub);
     };
   }, [bnccCode, titulo, bnccObjective]);
-
   return resolveLessonV2Sync(bnccCode, titulo, bnccObjective);
 }
 
-/** Limpa caches (testes / admin). */
 export function clearLessonV2Cache() {
-  templateCache.clear();
-  inflight.clear();
+  LessonService.clearCache();
   emit();
 }
