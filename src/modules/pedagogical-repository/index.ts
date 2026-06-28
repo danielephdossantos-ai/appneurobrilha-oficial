@@ -24,7 +24,15 @@ export {
   type PalavraImportante,
 } from "./types";
 
-// ----------------------------- cache em memória ------------------------------
+// ----------------------------- cache local + memória -------------------------
+//
+// Estratégia: na 1ª abertura buscamos no Supabase e gravamos em localStorage.
+// Nas próximas vezes a aula abre imediatamente do cache local; em paralelo
+// revalidamos contra o banco (stale-while-revalidate). NUNCA regeneramos
+// aula — se o banco devolver null, o cache local é invalidado.
+
+const CACHE_PREFIX = "lc:v1:";
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 dias
 
 const cache = new Map<string, LessonContent | null>();
 const inflight = new Map<string, Promise<LessonContent | null>>();
@@ -36,6 +44,64 @@ function emit() {
 
 function normalizeCode(code: string): string {
   return (code || "").trim().toUpperCase();
+}
+
+function storage(): Storage | null {
+  try {
+    return typeof window !== "undefined" ? window.localStorage : null;
+  } catch {
+    return null;
+  }
+}
+
+function readLocal(key: string): LessonContent | null {
+  const s = storage();
+  if (!s) return null;
+  try {
+    const raw = s.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { savedAt: number; lesson: LessonContent };
+    if (!parsed?.lesson || !parsed.savedAt) return null;
+    if (Date.now() - parsed.savedAt > CACHE_TTL_MS) {
+      s.removeItem(CACHE_PREFIX + key);
+      return null;
+    }
+    return parsed.lesson;
+  } catch {
+    return null;
+  }
+}
+
+function writeLocal(key: string, lesson: LessonContent | null) {
+  const s = storage();
+  if (!s) return;
+  try {
+    if (lesson) {
+      s.setItem(
+        CACHE_PREFIX + key,
+        JSON.stringify({ savedAt: Date.now(), lesson }),
+      );
+    } else {
+      s.removeItem(CACHE_PREFIX + key);
+    }
+  } catch {
+    /* quota / privado — ignora */
+  }
+}
+
+function clearLocal() {
+  const s = storage();
+  if (!s) return;
+  try {
+    const toRemove: string[] = [];
+    for (let i = 0; i < s.length; i++) {
+      const k = s.key(i);
+      if (k && k.startsWith(CACHE_PREFIX)) toRemove.push(k);
+    }
+    toRemove.forEach((k) => s.removeItem(k));
+  } catch {
+    /* ignora */
+  }
 }
 
 // ----------------------------- mapeamento ------------------------------------
@@ -89,52 +155,23 @@ export async function getLessonByBNCC(
   const key = normalizeCode(codigoBncc);
   if (!key) return null;
 
-  if (cache.has(key)) return cache.get(key) ?? null;
+  // 1) hidrata memória a partir do localStorage (1ª vez nesta sessão).
+  if (!cache.has(key)) {
+    const local = readLocal(key);
+    if (local) cache.set(key, local);
+  }
+
+  // 2) já temos algo em memória? devolve imediato e revalida em background.
+  if (cache.has(key)) {
+    const cached = cache.get(key) ?? null;
+    if (cached) void revalidate(key);
+    return cached;
+  }
 
   const pending = inflight.get(key);
   if (pending) return pending;
 
-  const work = (async () => {
-    try {
-      const { data, error } = await (supabase as unknown as {
-        from: (t: string) => {
-          select: (c: string) => {
-            eq: (
-              c: string,
-              v: string,
-            ) => {
-              maybeSingle: () => Promise<{
-                data: Record<string, unknown> | null;
-                error: unknown;
-              }>;
-            };
-          };
-        };
-      })
-        .from("lesson_content")
-        .select("*")
-        .eq("codigo_bncc", key)
-        .maybeSingle();
-
-      if (error) {
-        console.warn("[PedagogicalRepository] erro ao buscar aula:", error);
-        cache.set(key, null);
-        emit();
-        return null;
-      }
-
-      const lesson = data ? mapRow(data) : null;
-      cache.set(key, lesson);
-      emit();
-      return lesson;
-    } catch (err) {
-      console.warn("[PedagogicalRepository] falha inesperada:", err);
-      cache.set(key, null);
-      emit();
-      return null;
-    }
-  })();
-
+  const work = fetchFromDb(key);
   inflight.set(key, work);
   try {
     return await work;
@@ -143,12 +180,66 @@ export async function getLessonByBNCC(
   }
 }
 
-/** Retorna a aula já carregada em memória, sem disparar nova requisição. */
-export function getLessonByBNCCSync(codigoBncc: string): LessonContent | null {
-  return cache.get(normalizeCode(codigoBncc)) ?? null;
+async function fetchFromDb(key: string): Promise<LessonContent | null> {
+  try {
+    const { data, error } = await (supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => {
+          eq: (
+            c: string,
+            v: string,
+          ) => {
+            maybeSingle: () => Promise<{
+              data: Record<string, unknown> | null;
+              error: unknown;
+            }>;
+          };
+        };
+      };
+    })
+      .from("lesson_content")
+      .select("*")
+      .eq("codigo_bncc", key)
+      .maybeSingle();
+
+    if (error) {
+      console.warn("[PedagogicalRepository] erro ao buscar aula:", error);
+      return cache.get(key) ?? null;
+    }
+
+    const lesson = data ? mapRow(data) : null;
+    cache.set(key, lesson);
+    writeLocal(key, lesson);
+    emit();
+    return lesson;
+  } catch (err) {
+    console.warn("[PedagogicalRepository] falha inesperada:", err);
+    return cache.get(key) ?? null;
+  }
 }
 
-/** Hook React: busca a aula no banco e re-renderiza quando ela chega. */
+async function revalidate(key: string) {
+  if (inflight.has(key)) return;
+  const work = fetchFromDb(key);
+  inflight.set(key, work);
+  try {
+    await work;
+  } finally {
+    inflight.delete(key);
+  }
+}
+
+/** Retorna a aula em memória ou já gravada no localStorage. */
+export function getLessonByBNCCSync(codigoBncc: string): LessonContent | null {
+  const key = normalizeCode(codigoBncc);
+  if (!key) return null;
+  if (cache.has(key)) return cache.get(key) ?? null;
+  const local = readLocal(key);
+  if (local) cache.set(key, local);
+  return local;
+}
+
+/** Hook React: abre instantâneo do cache local; revalida contra o banco. */
 export function useLessonByBNCC(codigoBncc: string): {
   lesson: LessonContent | null;
   loading: boolean;
@@ -156,25 +247,32 @@ export function useLessonByBNCC(codigoBncc: string): {
   const key = normalizeCode(codigoBncc);
   const [, force] = useState(0);
 
+  // hidrata sync do localStorage para a 1ª render já ter conteúdo.
+  if (!cache.has(key)) {
+    const local = readLocal(key);
+    if (local) cache.set(key, local);
+  }
+
   useEffect(() => {
     const sub = () => force((n) => n + 1);
     listeners.add(sub);
-    if (!cache.has(key)) void getLessonByBNCC(key);
+    void getLessonByBNCC(key);
     return () => {
       listeners.delete(sub);
     };
   }, [key]);
 
-  const cached = cache.has(key);
+  const has = cache.has(key);
   return {
     lesson: cache.get(key) ?? null,
-    loading: !cached,
+    loading: !has,
   };
 }
 
-/** Limpa o cache (uso em testes / admin). */
+/** Limpa cache em memória + localStorage (testes / admin). */
 export function clearLessonRepositoryCache() {
   cache.clear();
   inflight.clear();
+  clearLocal();
   emit();
 }
