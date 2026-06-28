@@ -1970,6 +1970,108 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_content: {
+        Row: {
+          analogia: string
+          ano: string
+          atividade_guiada: Json
+          atividade_pratica: Json
+          codigo_bncc: string
+          contexto: string
+          created_at: string
+          curiosidade: string
+          desafio: Json
+          disciplina: string
+          erro_comum: string
+          exemplo1: string
+          exemplo2: string
+          explicacao: string
+          id: string
+          imagem_url: string
+          introducao: string
+          materiais: Json
+          nivel: string
+          objetivo: string
+          palavras_importantes: Json
+          passo_a_passo: Json
+          quiz: Json
+          respostas: Json
+          resumo: string
+          revisao: string
+          tags: Json
+          tempo_estimado: number
+          titulo: string
+          updated_at: string
+          video_url: string
+        }
+        Insert: {
+          analogia: string
+          ano: string
+          atividade_guiada: Json
+          atividade_pratica: Json
+          codigo_bncc: string
+          contexto: string
+          created_at?: string
+          curiosidade: string
+          desafio: Json
+          disciplina: string
+          erro_comum: string
+          exemplo1: string
+          exemplo2: string
+          explicacao: string
+          id?: string
+          imagem_url: string
+          introducao: string
+          materiais: Json
+          nivel: string
+          objetivo: string
+          palavras_importantes: Json
+          passo_a_passo: Json
+          quiz: Json
+          respostas: Json
+          resumo: string
+          revisao: string
+          tags: Json
+          tempo_estimado: number
+          titulo: string
+          updated_at?: string
+          video_url: string
+        }
+        Update: {
+          analogia?: string
+          ano?: string
+          atividade_guiada?: Json
+          atividade_pratica?: Json
+          codigo_bncc?: string
+          contexto?: string
+          created_at?: string
+          curiosidade?: string
+          desafio?: Json
+          disciplina?: string
+          erro_comum?: string
+          exemplo1?: string
+          exemplo2?: string
+          explicacao?: string
+          id?: string
+          imagem_url?: string
+          introducao?: string
+          materiais?: Json
+          nivel?: string
+          objetivo?: string
+          palavras_importantes?: Json
+          passo_a_passo?: Json
+          quiz?: Json
+          respostas?: Json
+          resumo?: string
+          revisao?: string
+          tags?: Json
+          tempo_estimado?: number
+          titulo?: string
+          updated_at?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
       lesson_steps: {
         Row: {
           created_at: string | null
