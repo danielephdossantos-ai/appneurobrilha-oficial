@@ -74,12 +74,13 @@ function map(r: any): Exercise {
     pontuacao: r.pontuacao ?? 0,
     competencia: r.competencia ?? "",
     codigoBncc: r.codigo_bncc ?? null,
+    nivelPedagogico: (r.nivel_pedagogico ?? "medio") as NivelPedagogico,
     metadata: (r.metadata as Record<string, unknown>) ?? {},
   };
 }
 
 const COLS =
-  "id,titulo,tipo,enunciado,imagem,alternativas,resposta,explicacao,dificuldade,tempo_segundos,pontuacao,competencia,codigo_bncc,metadata";
+  "id,titulo,tipo,enunciado,imagem,alternativas,resposta,explicacao,dificuldade,tempo_segundos,pontuacao,competencia,codigo_bncc,nivel_pedagogico,metadata";
 
 export const ExerciseRepository = {
   async getById(id: string): Promise<Exercise | null> {
