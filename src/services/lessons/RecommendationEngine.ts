@@ -33,7 +33,7 @@ export const RecommendationEngine = {
     ]);
 
     let proximaAula: Recommendation["proximaAula"] = null;
-    const nextCode = (posteriores as any[])[0]?.codigo_bncc_destino;
+    const nextCode = (posteriores as any[])[0]?.related_codigo_bncc;
     if (nextCode) {
       const { data } = await supabase
         .from("lesson_content" as any)
