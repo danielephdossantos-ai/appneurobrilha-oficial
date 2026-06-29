@@ -2811,6 +2811,56 @@ export type Database = {
           },
         ]
       }
+      lesson_reviews_full: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          dicas: Json
+          erros_comuns: Json
+          id: string
+          lesson_id: string | null
+          mapa_mental: Json
+          palavras_chave: string[]
+          resumo_completo: string
+          resumo_curto: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          dicas?: Json
+          erros_comuns?: Json
+          id?: string
+          lesson_id?: string | null
+          mapa_mental?: Json
+          palavras_chave?: string[]
+          resumo_completo?: string
+          resumo_curto?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          dicas?: Json
+          erros_comuns?: Json
+          id?: string
+          lesson_id?: string | null
+          mapa_mental?: Json
+          palavras_chave?: string[]
+          resumo_completo?: string
+          resumo_curto?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_reviews_full_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_sections: {
         Row: {
           codigo_bncc: string
