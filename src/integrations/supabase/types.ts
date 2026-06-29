@@ -2526,6 +2526,7 @@ export type Database = {
           tags: Json
           tempo_estimado: number
           titulo: string
+          unidade_tematica_id: string | null
           updated_at: string
           video: string
         }
@@ -2559,6 +2560,7 @@ export type Database = {
           tags: Json
           tempo_estimado: number
           titulo: string
+          unidade_tematica_id?: string | null
           updated_at?: string
           video: string
         }
@@ -2592,10 +2594,19 @@ export type Database = {
           tags?: Json
           tempo_estimado?: number
           titulo?: string
+          unidade_tematica_id?: string | null
           updated_at?: string
           video?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "lesson_content_unidade_tematica_id_fkey"
+            columns: ["unidade_tematica_id"]
+            isOneToOne: false
+            referencedRelation: "thematic_units"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lesson_curiosities: {
         Row: {
@@ -5930,6 +5941,36 @@ export type Database = {
           descricao?: string | null
           id?: string
           nome?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      thematic_units: {
+        Row: {
+          created_at: string
+          descricao: string | null
+          disciplina: string
+          id: string
+          nome: string
+          ordem: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string | null
+          disciplina: string
+          id?: string
+          nome: string
+          ordem?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string | null
+          disciplina?: string
+          id?: string
+          nome?: string
+          ordem?: number | null
           updated_at?: string
         }
         Relationships: []
