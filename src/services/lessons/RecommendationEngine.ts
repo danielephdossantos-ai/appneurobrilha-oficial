@@ -62,11 +62,11 @@ export const RecommendationEngine = {
       : null;
 
     const desafio = desafios[0]
-      ? { id: desafios[0].id, codigo_bncc: desafios[0].codigo_bncc, titulo: desafios[0].titulo ?? null }
+      ? { id: desafios[0].id, codigo_bncc: desafios[0].codigoBncc, titulo: desafios[0].titulo ?? null }
       : null;
 
     const conteudoRelacionado = (similares as any[]).map((r) => ({
-      codigo_bncc: r.codigo_bncc_destino,
+      codigo_bncc: r.related_codigo_bncc,
       tipo: "similar",
     }));
 
