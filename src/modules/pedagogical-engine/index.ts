@@ -50,7 +50,7 @@ export const PedagogicalEngine = {
         exemplos: [],
         atividades: [],
         revisao: null,
-        quiz: null,
+        quiz: [],
         ready: false,
         missing: [...PEDAGOGICAL_FLOW],
       };
