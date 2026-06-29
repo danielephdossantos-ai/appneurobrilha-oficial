@@ -67,7 +67,7 @@ export const PedagogicalEngine = {
     if (!exemplos || exemplos.length === 0) missing.push("exemplos");
     if (!atividades || atividades.length === 0) missing.push("atividades");
     if (!revisao) missing.push("revisao");
-    if (!quiz) missing.push("quiz");
+    if (!quiz || quiz.length === 0) missing.push("quiz");
 
     return {
       codigo_bncc,
