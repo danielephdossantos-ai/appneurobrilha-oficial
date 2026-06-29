@@ -89,5 +89,5 @@ export const ReinforcementRepository = {
   desafios: (c: string) => LessonChallengeService.list(c),
 
   /** Aula completa pronta para renderizar (sequência pedagógica). */
-  aulaCompleta: (c: string) => LessonService.getAula(c),
+  aulaCompleta: (c: string) => LessonService.getLesson(c),
 };
