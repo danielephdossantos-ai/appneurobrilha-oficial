@@ -5304,6 +5304,45 @@ export type Database = {
           },
         ]
       }
+      recovery_lessons: {
+        Row: {
+          atividade_simplificada: Json | null
+          aula_simplificada: Json | null
+          codigo_bncc: string
+          created_at: string
+          explicacao_alternativa: Json | null
+          id: string
+          nova_revisao: Json | null
+          novo_exemplo: Json | null
+          novo_quiz: Json | null
+          updated_at: string
+        }
+        Insert: {
+          atividade_simplificada?: Json | null
+          aula_simplificada?: Json | null
+          codigo_bncc: string
+          created_at?: string
+          explicacao_alternativa?: Json | null
+          id?: string
+          nova_revisao?: Json | null
+          novo_exemplo?: Json | null
+          novo_quiz?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          atividade_simplificada?: Json | null
+          aula_simplificada?: Json | null
+          codigo_bncc?: string
+          created_at?: string
+          explicacao_alternativa?: Json | null
+          id?: string
+          nova_revisao?: Json | null
+          novo_exemplo?: Json | null
+          novo_quiz?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       reports: {
         Row: {
           child_id: string | null
