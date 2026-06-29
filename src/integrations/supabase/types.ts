@@ -5642,6 +5642,65 @@ export type Database = {
           },
         ]
       }
+      student_progress: {
+        Row: {
+          acertos: number
+          atividades_concluidas: number
+          child_id: string
+          codigo_bncc: string | null
+          created_at: string
+          erros: number
+          habilidades_dominadas: string[]
+          habilidades_pendentes: string[]
+          id: string
+          metadata: Json
+          nota: number
+          tempo_estudado_seg: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          acertos?: number
+          atividades_concluidas?: number
+          child_id: string
+          codigo_bncc?: string | null
+          created_at?: string
+          erros?: number
+          habilidades_dominadas?: string[]
+          habilidades_pendentes?: string[]
+          id?: string
+          metadata?: Json
+          nota?: number
+          tempo_estudado_seg?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          acertos?: number
+          atividades_concluidas?: number
+          child_id?: string
+          codigo_bncc?: string | null
+          created_at?: string
+          erros?: number
+          habilidades_dominadas?: string[]
+          habilidades_pendentes?: string[]
+          id?: string
+          metadata?: Json
+          nota?: number
+          tempo_estudado_seg?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_progress_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       study_agenda: {
         Row: {
           category: string | null
