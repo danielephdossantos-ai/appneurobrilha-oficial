@@ -102,7 +102,7 @@ export class ReforcoEngine {
       topic: aula.codigo_bncc,
       category: aula.disciplina,
       levels: { basic, intermediate, advanced },
-      premiumTips: (aula.palavras_importantes ?? []).map(
+      premiumTips: (aula.palavras_chave ?? []).map(
         (p) => `${p.termo}: ${p.definicao}`,
       ),
       explanation: aula.introducao || aula.explicacao,

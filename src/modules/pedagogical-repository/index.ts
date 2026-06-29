@@ -116,7 +116,7 @@ function mapRow(row: Record<string, unknown>): LessonContent {
     objetivo: row.objetivo as string,
     introducao: row.introducao as string,
     explicacao: row.explicacao as string,
-    contexto: row.contexto as string,
+    contextualizacao: row.contextualizacao as string,
     exemplo1: row.exemplo1 as string,
     exemplo2: row.exemplo2 as string,
     analogia: row.analogia as string,
@@ -132,13 +132,14 @@ function mapRow(row: Record<string, unknown>): LessonContent {
     respostas: (row.respostas as string[]) ?? [],
     resumo: row.resumo as string,
     revisao: row.revisao as string,
-    palavras_importantes:
-      (row.palavras_importantes as LessonContent["palavras_importantes"]) ?? [],
+    palavras_chave:
+      (row.palavras_chave as LessonContent["palavras_chave"]) ?? [],
     nivel: row.nivel as LessonContent["nivel"],
     tempo_estimado: Number(row.tempo_estimado ?? 0),
     materiais: (row.materiais as string[]) ?? [],
-    video_url: row.video_url as string,
-    imagem_url: row.imagem_url as string,
+    video: row.video as string,
+    imagem: row.imagem as string,
+
     tags: (row.tags as string[]) ?? [],
   };
 }

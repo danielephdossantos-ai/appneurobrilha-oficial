@@ -37,7 +37,7 @@ export interface LessonContent {
   objetivo: string;
   introducao: string;
   explicacao: string;
-  contexto: string;
+  contextualizacao: string;
   exemplo1: string;
   exemplo2: string;
   analogia: string;
@@ -51,13 +51,14 @@ export interface LessonContent {
   respostas: string[];
   resumo: string;
   revisao: string;
-  palavras_importantes: PalavraImportante[];
+  palavras_chave: PalavraImportante[];
   nivel: "facil" | "medio" | "dificil" | string;
   tempo_estimado: number; // minutos
   materiais: string[];
-  video_url: string;
-  imagem_url: string;
+  video: string;
+  imagem: string;
   tags: string[];
+
 }
 
 export const LESSON_CONTENT_REQUIRED_FIELDS: (keyof LessonContent)[] = [
@@ -69,7 +70,7 @@ export const LESSON_CONTENT_REQUIRED_FIELDS: (keyof LessonContent)[] = [
   "objetivo",
   "introducao",
   "explicacao",
-  "contexto",
+  "contextualizacao",
   "exemplo1",
   "exemplo2",
   "analogia",
@@ -83,11 +84,12 @@ export const LESSON_CONTENT_REQUIRED_FIELDS: (keyof LessonContent)[] = [
   "respostas",
   "resumo",
   "revisao",
-  "palavras_importantes",
+  "palavras_chave",
   "nivel",
   "tempo_estimado",
   "materiais",
-  "video_url",
-  "imagem_url",
+  "video",
+  "imagem",
+
   "tags",
 ];
