@@ -669,6 +669,66 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_anos: {
+        Row: {
+          codigo: string
+          created_at: string
+          etapa: string | null
+          id: string
+          nome: string
+          ordem: number
+          updated_at: string
+        }
+        Insert: {
+          codigo: string
+          created_at?: string
+          etapa?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          updated_at?: string
+        }
+        Update: {
+          codigo?: string
+          created_at?: string
+          etapa?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bncc_areas: {
+        Row: {
+          codigo: string
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          ordem: number
+          updated_at: string
+        }
+        Insert: {
+          codigo: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          updated_at?: string
+        }
+        Update: {
+          codigo?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bncc_biblioteca: {
         Row: {
           ano: number
@@ -716,6 +776,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      bncc_componentes: {
+        Row: {
+          area_codigo: string | null
+          codigo: string
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+          ordem: number
+          updated_at: string
+        }
+        Insert: {
+          area_codigo?: string | null
+          codigo: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+          ordem?: number
+          updated_at?: string
+        }
+        Update: {
+          area_codigo?: string | null
+          codigo?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+          ordem?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bncc_componentes_area_codigo_fkey"
+            columns: ["area_codigo"]
+            isOneToOne: false
+            referencedRelation: "bncc_areas"
+            referencedColumns: ["codigo"]
+          },
+        ]
       }
       bncc_conteudo: {
         Row: {
@@ -1970,6 +2071,56 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_activities: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          dica: string | null
+          enunciado: string
+          id: string
+          instrucao: string | null
+          metadata: Json
+          ordem: number
+          resposta: string | null
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          dica?: string | null
+          enunciado: string
+          id?: string
+          instrucao?: string | null
+          metadata?: Json
+          ordem?: number
+          resposta?: string | null
+          tipo: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          dica?: string | null
+          enunciado?: string
+          id?: string
+          instrucao?: string | null
+          metadata?: Json
+          ordem?: number
+          resposta?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_activities_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
       lesson_adaptations: {
         Row: {
           ajustes_atividade: Json
@@ -2064,6 +2215,44 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "lesson_content"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      lesson_cache: {
+        Row: {
+          cache_key: string
+          codigo_bncc: string
+          created_at: string
+          expira_em: string | null
+          id: string
+          payload: Json
+          updated_at: string
+        }
+        Insert: {
+          cache_key: string
+          codigo_bncc: string
+          created_at?: string
+          expira_em?: string | null
+          id?: string
+          payload: Json
+          updated_at?: string
+        }
+        Update: {
+          cache_key?: string
+          codigo_bncc?: string
+          created_at?: string
+          expira_em?: string | null
+          id?: string
+          payload?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_cache_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
           },
         ]
       }
@@ -2225,6 +2414,187 @@ export type Database = {
           },
         ]
       }
+      lesson_library: {
+        Row: {
+          ano_codigo: string | null
+          area_codigo: string | null
+          codigo_bncc: string
+          componente_codigo: string | null
+          created_at: string
+          id: string
+          metadata: Json
+          resumo: string | null
+          status: string
+          subtitulo: string | null
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ano_codigo?: string | null
+          area_codigo?: string | null
+          codigo_bncc: string
+          componente_codigo?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json
+          resumo?: string | null
+          status?: string
+          subtitulo?: string | null
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ano_codigo?: string | null
+          area_codigo?: string | null
+          codigo_bncc?: string
+          componente_codigo?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json
+          resumo?: string | null
+          status?: string
+          subtitulo?: string | null
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_library_ano_codigo_fkey"
+            columns: ["ano_codigo"]
+            isOneToOne: false
+            referencedRelation: "bncc_anos"
+            referencedColumns: ["codigo"]
+          },
+          {
+            foreignKeyName: "lesson_library_area_codigo_fkey"
+            columns: ["area_codigo"]
+            isOneToOne: false
+            referencedRelation: "bncc_areas"
+            referencedColumns: ["codigo"]
+          },
+          {
+            foreignKeyName: "lesson_library_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_library_componente_codigo_fkey"
+            columns: ["componente_codigo"]
+            isOneToOne: false
+            referencedRelation: "bncc_componentes"
+            referencedColumns: ["codigo"]
+          },
+        ]
+      }
+      lesson_progress: {
+        Row: {
+          acertos: number
+          child_id: string | null
+          codigo_bncc: string
+          concluida_em: string | null
+          created_at: string
+          erros: number
+          id: string
+          iniciada_em: string
+          metadata: Json
+          passo_atual: number
+          pontuacao: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          acertos?: number
+          child_id?: string | null
+          codigo_bncc: string
+          concluida_em?: string | null
+          created_at?: string
+          erros?: number
+          id?: string
+          iniciada_em?: string
+          metadata?: Json
+          passo_atual?: number
+          pontuacao?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          acertos?: number
+          child_id?: string | null
+          codigo_bncc?: string
+          concluida_em?: string | null
+          created_at?: string
+          erros?: number
+          id?: string
+          iniciada_em?: string
+          metadata?: Json
+          passo_atual?: number
+          pontuacao?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_progress_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_progress_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
+      lesson_quizzes: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string | null
+          id: string
+          metadata: Json
+          questoes: Json
+          titulo: string | null
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          metadata?: Json
+          questoes?: Json
+          titulo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          metadata?: Json
+          questoes?: Json
+          titulo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_quizzes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
       lesson_resources: {
         Row: {
           created_at: string
@@ -2281,6 +2651,91 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "lesson_content"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      lesson_reviews: {
+        Row: {
+          codigo_bncc: string
+          conteudo: string
+          created_at: string
+          id: string
+          metadata: Json
+          ordem: number
+          titulo: string | null
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          conteudo: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          ordem?: number
+          titulo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          conteudo?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          ordem?: number
+          titulo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_reviews_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
+      }
+      lesson_sections: {
+        Row: {
+          codigo_bncc: string
+          conteudo: string
+          created_at: string
+          id: string
+          metadata: Json
+          ordem: number
+          tipo: string
+          titulo: string | null
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          conteudo: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          ordem?: number
+          tipo: string
+          titulo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          conteudo?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          ordem?: number
+          tipo?: string
+          titulo?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_sections_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
           },
         ]
       }
