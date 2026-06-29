@@ -1970,6 +1970,50 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_assessments: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string
+          id: string
+          lesson_id: string
+          questoes: Json
+          tipo: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string
+          id?: string
+          lesson_id: string
+          questoes?: Json
+          tipo: string
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string
+          id?: string
+          lesson_id?: string
+          questoes?: Json
+          tipo?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_assessments_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_content: {
         Row: {
           analogia: string
