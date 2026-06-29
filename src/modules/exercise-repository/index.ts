@@ -122,4 +122,28 @@ export const ExerciseRepository = {
     if (error || !data) return [];
     return (data as any[]).map(map);
   },
+
+  async listByNivel(nivel: NivelPedagogico): Promise<Exercise[]> {
+    const { data, error } = await db
+      .from("exercises")
+      .select(COLS)
+      .eq("nivel_pedagogico", nivel);
+    if (error || !data) return [];
+    return (data as any[]).map(map);
+  },
+
+  async listByBNCCAndNivel(
+    codigoBncc: string,
+    nivel: NivelPedagogico,
+  ): Promise<Exercise[]> {
+    const key = (codigoBncc || "").trim().toUpperCase();
+    if (!key) return [];
+    const { data, error } = await db
+      .from("exercises")
+      .select(COLS)
+      .eq("codigo_bncc", key)
+      .eq("nivel_pedagogico", nivel);
+    if (error || !data) return [];
+    return (data as any[]).map(map);
+  },
 };
