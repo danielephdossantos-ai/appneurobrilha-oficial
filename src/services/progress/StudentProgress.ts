@@ -145,8 +145,7 @@ export const StudentProgressService = {
       metadata: { ...(current?.metadata ?? {}), ...(delta.metadata ?? {}) },
     };
 
-    const { data, error } = await supabase
-      .from("student_progress" as never)
+    const { data, error } = await (supabase.from("student_progress" as never) as any)
       .upsert(payload, { onConflict: "child_id,codigo_bncc" })
       .select(COLS)
       .maybeSingle();
