@@ -2316,6 +2316,65 @@ export type Database = {
           },
         ]
       }
+      lesson_challenges: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string
+          explicacao: string
+          id: string
+          lesson_id: string | null
+          material: string[]
+          nivel: string
+          objetivo: string
+          ordem: number
+          pontuacao: number
+          resposta: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string
+          explicacao?: string
+          id?: string
+          lesson_id?: string | null
+          material?: string[]
+          nivel?: string
+          objetivo?: string
+          ordem?: number
+          pontuacao?: number
+          resposta?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string
+          explicacao?: string
+          id?: string
+          lesson_id?: string | null
+          material?: string[]
+          nivel?: string
+          objetivo?: string
+          ordem?: number
+          pontuacao?: number
+          resposta?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_challenges_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_content: {
         Row: {
           analogia: string
