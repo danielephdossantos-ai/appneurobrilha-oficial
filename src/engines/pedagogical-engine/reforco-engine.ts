@@ -1,16 +1,11 @@
 /**
- * ReforcoEngine — agora é apenas um adaptador.
+ * ReforcoEngine — adaptador de leitura.
  *
- * Regras absolutas (alinhadas ao PedagogicalRepository / LessonService):
- *  - NADA é gerado, concatenado, derivado de template ou inferido da habilidade BNCC.
+ * Regras absolutas:
+ *  - NÃO gera, concatena, deriva de template, nem cria aula em runtime.
  *  - Toda aula vem do banco (`public.lesson_content`) via LessonService.
- *  - O "topic" é tratado como código BNCC (ex.: "EF01LP01"). Se não houver
- *    aula cadastrada para esse código, devolvemos uma aula vazia com a
+ *  - Se não houver aula cadastrada, retorna estrutura vazia com a
  *    mensagem padrão "Aula ainda não cadastrada.".
- *
- * Os antigos métodos `generateLesson` / `generateStudyRoutine` continuam
- * existindo SÓ para preservar o contrato dos callers (`reforco-brilha` /
- * `missao-prova`), mas internamente apenas leem do repositório.
  */
 
 import { LessonService, LESSON_NOT_FOUND_MESSAGE } from "@/services/lessons/LessonService";
