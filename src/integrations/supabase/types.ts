@@ -2225,6 +2225,48 @@ export type Database = {
           },
         ]
       }
+      inclusive_education_adaptations: {
+        Row: {
+          ajustes_avaliacao: Json
+          codigo_bncc: string
+          condition: Database["public"]["Enums"]["inclusive_condition"]
+          created_at: string
+          descricao: string
+          estrategias: Json
+          id: string
+          observacoes: string | null
+          recursos: Json
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ajustes_avaliacao?: Json
+          codigo_bncc: string
+          condition: Database["public"]["Enums"]["inclusive_condition"]
+          created_at?: string
+          descricao: string
+          estrategias?: Json
+          id?: string
+          observacoes?: string | null
+          recursos?: Json
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ajustes_avaliacao?: Json
+          codigo_bncc?: string
+          condition?: Database["public"]["Enums"]["inclusive_condition"]
+          created_at?: string
+          descricao?: string
+          estrategias?: Json
+          id?: string
+          observacoes?: string | null
+          recursos?: Json
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       inventory: {
         Row: {
           child_id: string
@@ -6482,6 +6524,15 @@ export type Database = {
         | "unidade_tematica"
         | "complementar"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
+      inclusive_condition:
+        | "tea"
+        | "tdah"
+        | "dislexia"
+        | "discalculia"
+        | "deficiencia_intelectual"
+        | "deficiencia_auditiva"
+        | "deficiencia_visual"
+        | "altas_habilidades"
       lesson_example_categoria:
         | "cotidiano"
         | "escola"
@@ -6662,6 +6713,16 @@ export const Constants = {
         "complementar",
       ],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
+      inclusive_condition: [
+        "tea",
+        "tdah",
+        "dislexia",
+        "discalculia",
+        "deficiencia_intelectual",
+        "deficiencia_auditiva",
+        "deficiencia_visual",
+        "altas_habilidades",
+      ],
       lesson_example_categoria: [
         "cotidiano",
         "escola",
