@@ -74,21 +74,22 @@ export class LessonComplete {
       quiz,
       atividadeGuiada,
     ] = await Promise.all([
-      LessonExplanation.get(codigoBNCC).catch(() => null),
-      LessonExamples.list(codigoBNCC).catch(() => []),
-      LessonCuriosity.list(codigoBNCC).catch(() => []),
-      ActivityEngine.list(codigoBNCC).catch(() => []),
-      LessonChallenge.list(codigoBNCC).catch(() => []),
-      LessonAssessment.get(codigoBNCC).catch(() => null),
+      LessonExplanationService.get(codigoBNCC).catch(() => null),
+      LessonExamplesService.list(codigoBNCC).catch(() => []),
+      LessonCuriosityService.list(codigoBNCC).catch(() => []),
+      ActivityEngine.load(codigoBNCC).catch(() => []),
+      LessonChallengeService.list(codigoBNCC).catch(() => []),
+      LessonAssessmentService.get(codigoBNCC).catch(() => null),
       LessonReviewService.get(codigoBNCC).catch(() => null),
       LessonAdaptationsService.list(codigoBNCC).catch(() => []),
-      LessonResources.list(codigoBNCC).catch(() => []),
-      LearningObjectives.list(codigoBNCC).catch(() => []),
+      LessonResourcesService.list(codigoBNCC).catch(() => []),
+      LearningObjectivesService.list(codigoBNCC).catch(() => []),
       this.fetchPreviousKnowledge(codigoBNCC),
       this.fetchVocabulary(codigoBNCC),
       this.fetchQuiz(codigoBNCC),
       this.fetchGuidedActivity(codigoBNCC),
     ]);
+
 
     return {
       lessonId: lesson?.id ?? null,
