@@ -142,7 +142,7 @@ function MissaoProva() {
 
     try {
       // Usar o ReforcoEngine para gerar uma aula baseada no tópico da sessão
-      const lesson = await ReforcoEngine.generateLesson(
+      const lesson = await ReforcoEngine.getLesson(
         session.title + ": " + mission.subject,
         engine?.adaptive as any,
       );
