@@ -68,54 +68,59 @@ export const LibraryTaxonomy = {
   async listEtapas(): Promise<TaxonomyNode[]> {
     const { data } = await supabase
       .from("bncc_levels")
-      .select("id, nome")
-      .order("nome");
+      .select("id, name")
+      .order("name");
     return (data ?? []).map((r: any) => ({
       level: "etapa",
       id: String(r.id),
-      label: r.nome,
+      label: r.name,
     }));
   },
 
-  async listAnos(etapaId?: string): Promise<TaxonomyNode[]> {
-    let q = supabase.from("bncc_anos").select("id, nome, etapa_id").order("nome");
-    if (etapaId) q = q.eq("etapa_id", etapaId);
+  async listAnos(etapa?: string): Promise<TaxonomyNode[]> {
+    let q = supabase.from("bncc_anos").select("id, nome, etapa").order("ordem");
+    if (etapa) q = q.eq("etapa", etapa);
     const { data } = await q;
     return (data ?? []).map((r: any) => ({
       level: "ano_escolar",
       id: String(r.id),
       label: r.nome,
-      parentId: r.etapa_id ?? null,
+      parentId: r.etapa ?? null,
     }));
   },
 
-  async listDisciplinas(anoId?: string): Promise<TaxonomyNode[]> {
-    let q = supabase.from("bncc_componentes").select("id, nome, ano_id").order("nome");
-    if (anoId) q = q.eq("ano_id", anoId);
+  async listDisciplinas(areaCodigo?: string): Promise<TaxonomyNode[]> {
+    let q = supabase
+      .from("bncc_componentes")
+      .select("id, nome, area_codigo")
+      .order("ordem");
+    if (areaCodigo) q = q.eq("area_codigo", areaCodigo);
     const { data } = await q;
     return (data ?? []).map((r: any) => ({
       level: "disciplina",
       id: String(r.id),
       label: r.nome,
-      parentId: r.ano_id ?? null,
+      parentId: r.area_codigo ?? null,
     }));
   },
 
-  async listHabilidades(disciplinaId?: string): Promise<TaxonomyNode[]> {
+  async listHabilidades(filtro?: { disciplina?: string; ano?: string }): Promise<TaxonomyNode[]> {
     let q = supabase
       .from("bncc_habilidades")
-      .select("id, codigo, descricao, componente_id")
-      .order("codigo");
-    if (disciplinaId) q = q.eq("componente_id", disciplinaId);
+      .select("id, codigo_bncc, titulo, disciplina, ano")
+      .order("codigo_bncc");
+    if (filtro?.disciplina) q = q.eq("disciplina", filtro.disciplina);
+    if (filtro?.ano) q = q.eq("ano", filtro.ano);
     const { data } = await q;
     return (data ?? []).map((r: any) => ({
       level: "habilidade_bncc",
       id: String(r.id),
-      label: `${r.codigo} — ${r.descricao ?? ""}`.trim(),
-      parentId: r.componente_id ?? null,
-      codigoBncc: r.codigo,
+      label: `${r.codigo_bncc} — ${r.titulo ?? ""}`.trim(),
+      parentId: r.disciplina ?? null,
+      codigoBncc: r.codigo_bncc,
     }));
   },
+
 
   async countByCodigoBncc(codigoBncc: string) {
     const tables = [
