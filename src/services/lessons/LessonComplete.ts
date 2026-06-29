@@ -104,7 +104,7 @@ export class LessonComplete {
           ? (objetivosBanco[0] as { descricao?: string }).descricao ?? null
           : null),
       introducao: lesson?.introducao ?? null,
-      explicacao,
+      explicacao: Array.isArray(explicacao) && explicacao.length > 0 ? explicacao[0] : null,
       contextualizacao: lesson?.contextualizacao ?? null,
       conhecimentosPrevios,
       exemplos: exemplos as unknown[],
@@ -115,7 +115,8 @@ export class LessonComplete {
       desafio:
         Array.isArray(desafios) && desafios.length > 0 ? desafios[0] : null,
       quiz,
-      avaliacao,
+      avaliacao: Array.isArray(avaliacao) && avaliacao.length > 0 ? avaliacao[0] : null,
+
       revisao,
       resumo: lesson?.resumo ?? null,
       adaptacoes: adaptacoes as unknown[],
