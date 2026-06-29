@@ -1970,6 +1970,59 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_adaptations: {
+        Row: {
+          ajustes_atividade: Json
+          codigo_bncc: string
+          created_at: string
+          estrategias: Json
+          id: string
+          lesson_id: string
+          objetivo: string
+          observacoes: string
+          orientacoes_familia: string
+          perfil: string
+          recursos: Json
+          updated_at: string
+        }
+        Insert: {
+          ajustes_atividade?: Json
+          codigo_bncc: string
+          created_at?: string
+          estrategias?: Json
+          id?: string
+          lesson_id: string
+          objetivo?: string
+          observacoes?: string
+          orientacoes_familia?: string
+          perfil: string
+          recursos?: Json
+          updated_at?: string
+        }
+        Update: {
+          ajustes_atividade?: Json
+          codigo_bncc?: string
+          created_at?: string
+          estrategias?: Json
+          id?: string
+          lesson_id?: string
+          objetivo?: string
+          observacoes?: string
+          orientacoes_familia?: string
+          perfil?: string
+          recursos?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_adaptations_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_assessments: {
         Row: {
           codigo_bncc: string
