@@ -265,69 +265,36 @@ function parseAndValidateAula(raw: string): Aula {
 export const gerarAulaGroq = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaInputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return { ok: false as const, error: "GROQ_API_KEY ausente", aulaJson: null };
-    }
+    // Geração dinâmica de aulas está DESATIVADA no Escola Brilha.
+    // Toda aula deve estar previamente cadastrada no banco.
+    // Esta função permanece apenas para compatibilidade de assinatura:
+    // retorna a aula armazenada em `aulas_geradas_ia` ou erro.
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    const { data: cached } = await supabaseAdmin
+      .from("aulas_geradas_ia")
+      .select("codigo_bncc, titulo, screens")
+      .eq("codigo_bncc", data.bnccCode)
+      .maybeSingle();
 
-    const userPrompt = `Código BNCC: ${data.bnccCode}
-Descrição da Habilidade: ${data.descricao}
-Idade do Aluno: ${data.idade} anos${data.serie ? `\nSérie: ${data.serie}` : ""}${data.componente ? `\nComponente: ${data.componente}` : ""}
-
-Gere a aula completa em JSON conforme o schema definido.`;
-
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-              { role: "system", content: AULA_SYSTEM_PROMPT },
-              { role: "user", content: userPrompt },
-            ],
-            temperature: 0.7,
-            max_tokens: 2400,
-            top_p: 0.9,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:aula] HTTP", res.status, errText.slice(0, 400));
-        return {
-          ok: false as const,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          aulaJson: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) {
-        return { ok: false as const, error: "Resposta vazia", aulaJson: null };
-      }
-
-      const aula = parseAndValidateAula(raw);
-      return { ok: true as const, aulaJson: JSON.stringify(aula), error: null };
-    } catch (e) {
-      console.error("[groq:aula]", e);
+    if (cached?.screens) {
       return {
-        ok: false as const,
-        error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        aulaJson: null,
+        ok: true as const,
+        aulaJson: JSON.stringify(cached.screens),
+        error: null,
       };
     }
+    return {
+      ok: false as const,
+      error: "Aula ainda não cadastrada.",
+      aulaJson: null,
+    };
   });
+
 
 // ============================================================
 // AULA DINÂMICA — Groq llama-3.1-8b-instant + cache Supabase
