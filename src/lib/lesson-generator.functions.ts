@@ -354,16 +354,14 @@ export const generateBatch1Ano = createServerFn({ method: "POST" })
         totalTokens += tokens;
         results.push({ codigo: a.codigo_bncc, ok: true, tokens });
       } catch (e: any) {
-        results.push({
-          codigo: a.codigo_bncc,
-          ok: false,
-          tokens: 0,
-          error: String(e?.message ?? e).slice(0, 200),
-        });
+        const msg = String(e?.message ?? e).slice(0, 300);
+        console.error(`[batch1ano] ${a.codigo_bncc} FAIL:`, msg);
+        results.push({ codigo: a.codigo_bncc, ok: false, tokens: 0, error: msg });
       }
-      // pequena pausa para evitar rate limit
       await new Promise((r) => setTimeout(r, 600));
     }
+
+    const erros = results.filter((r) => !r.ok).slice(0, 3).map((r) => `${r.codigo}: ${r.error}`);
 
     return {
       ok: true as const,
@@ -371,6 +369,7 @@ export const generateBatch1Ano = createServerFn({ method: "POST" })
       sucesso: results.filter((r) => r.ok).length,
       falha: results.filter((r) => !r.ok).length,
       tokensUsados: totalTokens,
+      primeirosErros: erros,
       results,
     };
   });
