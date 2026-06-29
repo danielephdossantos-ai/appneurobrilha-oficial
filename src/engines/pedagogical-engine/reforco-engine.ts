@@ -46,10 +46,9 @@ function emptyLesson(topic: string, explanation: string): ReforcoLesson {
 export class ReforcoEngine {
   /**
    * Lê a aula do PedagogicalRepository pelo código BNCC.
-   * `_adjustment` é mantido na assinatura por compatibilidade, mas não
-   * altera o conteúdo — adaptação é responsabilidade da UI.
+   * `_adjustment` é mantido na assinatura por compatibilidade.
    */
-  static async generateLesson(
+  static async getLesson(
     topic: string,
     _adjustment?: NeuroAdjustment,
   ): Promise<ReforcoLesson> {
@@ -105,10 +104,10 @@ export class ReforcoEngine {
     };
   }
 
-  static generateStudyRoutine(
+  static getStudyRoutine(
     agendaTopic: string,
     adjustment?: NeuroAdjustment,
   ): Promise<ReforcoLesson> {
-    return this.generateLesson(agendaTopic, adjustment);
+    return this.getLesson(agendaTopic, adjustment);
   }
 }
