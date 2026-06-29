@@ -14,7 +14,7 @@ import {
   approveLessonDraft,
 } from "@/lib/seed-lessons.functions";
 
-export const Route = createFileRoute("/admin/seed-lessons")({
+export const Route = createFileRoute("/admin-seed-lessons")({
   component: SeedLessonsPage,
 });
 
