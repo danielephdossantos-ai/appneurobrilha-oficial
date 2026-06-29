@@ -1574,6 +1574,45 @@ export type Database = {
           },
         ]
       }
+      common_mistakes: {
+        Row: {
+          atividades_indicadas: Json
+          causas: Json
+          codigo_bncc: string
+          created_at: string
+          erro: string
+          estrategias_correcao: Json
+          id: string
+          ordem: number
+          severidade: string | null
+          updated_at: string
+        }
+        Insert: {
+          atividades_indicadas?: Json
+          causas?: Json
+          codigo_bncc: string
+          created_at?: string
+          erro: string
+          estrategias_correcao?: Json
+          id?: string
+          ordem?: number
+          severidade?: string | null
+          updated_at?: string
+        }
+        Update: {
+          atividades_indicadas?: Json
+          causas?: Json
+          codigo_bncc?: string
+          created_at?: string
+          erro?: string
+          estrategias_correcao?: Json
+          id?: string
+          ordem?: number
+          severidade?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       daily_routines: {
         Row: {
           category: string | null
