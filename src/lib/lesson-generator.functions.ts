@@ -251,11 +251,11 @@ export const generateLessonDraft = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => GenInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
     const key = process.env.GROQ_API_KEY;
     if (!key) throw new Error("GROQ_API_KEY ausente");
 
-    const { data: aula, error: aErr } = await (context.supabase as any)
+    const { data: aula, error: aErr } = await sb
       .from("aulas_bncc")
       .select("codigo_bncc, titulo, descricao, serie, disciplina")
       .eq("codigo_bncc", data.codigo_bncc)
@@ -271,7 +271,7 @@ export const generateLessonDraft = createServerFn({ method: "POST" })
       aula.disciplina ?? "",
     );
 
-    const { data: ins, error: insErr } = await (context.supabase as any)
+    const { data: ins, error: insErr } = await sb
       .from("lesson_drafts")
       .insert({
         codigo_bncc: aula.codigo_bncc,
@@ -300,11 +300,11 @@ export const generateBatch1Ano = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => BatchInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
     const key = process.env.GROQ_API_KEY;
     if (!key) throw new Error("GROQ_API_KEY ausente");
 
-    const { data: aulas, error } = await (context.supabase as any)
+    const { data: aulas, error } = await sb
       .from("aulas_bncc")
       .select("codigo_bncc, titulo, descricao, serie, disciplina")
       .eq("serie", "1º Ano")
@@ -314,7 +314,7 @@ export const generateBatch1Ano = createServerFn({ method: "POST" })
 
     // pula códigos já com draft/aprovado
     const codigos = (aulas ?? []).map((a: any) => a.codigo_bncc);
-    const { data: existentes } = await (context.supabase as any)
+    const { data: existentes } = await sb
       .from("lesson_drafts")
       .select("codigo_bncc")
       .in("codigo_bncc", codigos)
@@ -340,7 +340,7 @@ export const generateBatch1Ano = createServerFn({ method: "POST" })
           a.serie ?? "",
           a.disciplina ?? "",
         );
-        await (context.supabase as any).from("lesson_drafts").insert({
+        await sb.from("lesson_drafts").insert({
           codigo_bncc: a.codigo_bncc,
           ano: a.serie,
           disciplina: a.disciplina,
@@ -382,8 +382,8 @@ export const approveDraft = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => ApproveInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
-    const { data: lessonId, error } = await (context.supabase as any).rpc(
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
+    const { data: lessonId, error } = await sb.rpc(
       "approve_lesson_draft",
       { _draft_id: data.draftId },
     );
@@ -401,8 +401,8 @@ export const rejectDraft = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => RejectInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
-    const { error } = await (context.supabase as any)
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
+    const { error } = await sb
       .from("lesson_drafts")
       .update({
         status: "rejected",
@@ -426,8 +426,8 @@ export const listDrafts = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => ListInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
-    let q = (context.supabase as any)
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
+    let q = sb
       .from("lesson_drafts")
       .select(
         "id, codigo_bncc, ano, disciplina, titulo, status, model, tokens_used, created_at, reviewed_at, notes",
@@ -449,8 +449,8 @@ export const getDraft = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => GetInput.parse(i))
   .handler(async ({ data, context }) => {
-    await ensureAdmin(context);
-    const { data: row, error } = await (context.supabase as any)
+    const sb = await getAdminClient(); await ensureAdmin(context.userId, sb);
+    const { data: row, error } = await sb
       .from("lesson_drafts")
       .select("*")
       .eq("id", data.draftId)
