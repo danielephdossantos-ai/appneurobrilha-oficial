@@ -2212,6 +2212,39 @@ export type Database = {
         }
         Relationships: []
       }
+      learning_objectives: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string | null
+          id: string
+          objetivo: string
+          ordem: number | null
+          tipo: string | null
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          objetivo: string
+          ordem?: number | null
+          tipo?: string | null
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          objetivo?: string
+          ordem?: number | null
+          tipo?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       learning_trails: {
         Row: {
           created_at: string
