@@ -2225,6 +2225,65 @@ export type Database = {
           },
         ]
       }
+      lesson_resources: {
+        Row: {
+          created_at: string
+          descricao: string | null
+          duracao_segundos: number | null
+          id: string
+          lesson_id: string
+          metadata: Json
+          mime_type: string | null
+          ordem: number
+          tamanho_bytes: number | null
+          thumbnail_url: string | null
+          tipo: string
+          titulo: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string | null
+          duracao_segundos?: number | null
+          id?: string
+          lesson_id: string
+          metadata?: Json
+          mime_type?: string | null
+          ordem?: number
+          tamanho_bytes?: number | null
+          thumbnail_url?: string | null
+          tipo: string
+          titulo?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string | null
+          duracao_segundos?: number | null
+          id?: string
+          lesson_id?: string
+          metadata?: Json
+          mime_type?: string | null
+          ordem?: number
+          tamanho_bytes?: number | null
+          thumbnail_url?: string | null
+          tipo?: string
+          titulo?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_resources_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_steps: {
         Row: {
           created_at: string | null
