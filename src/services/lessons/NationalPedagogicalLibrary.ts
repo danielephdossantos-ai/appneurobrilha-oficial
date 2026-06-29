@@ -29,7 +29,7 @@ import { StudentProgressService } from "@/services/progress/StudentProgress";
 export const NationalPedagogicalLibrary = {
   // Conteúdo da aula
   lessons: LessonService,
-  sequence: LessonSequence,
+  sequence: LessonSequenceService,
   flow: LessonFlow,
   activities: ActivityEngine,
   adaptations: LessonAdaptationsService,
