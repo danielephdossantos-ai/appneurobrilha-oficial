@@ -24,6 +24,21 @@ export type ExerciseTipo =
 
 export type ExerciseDificuldade = "facil" | "medio" | "dificil" | string;
 
+export type NivelPedagogico =
+  | "muito_facil"
+  | "facil"
+  | "medio"
+  | "dificil"
+  | "avancado";
+
+export const NIVEIS_PEDAGOGICOS: { value: NivelPedagogico; label: string }[] = [
+  { value: "muito_facil", label: "Muito Fácil" },
+  { value: "facil", label: "Fácil" },
+  { value: "medio", label: "Médio" },
+  { value: "dificil", label: "Difícil" },
+  { value: "avancado", label: "Avançado" },
+];
+
 export interface Exercise {
   id: string;
   titulo: string;
