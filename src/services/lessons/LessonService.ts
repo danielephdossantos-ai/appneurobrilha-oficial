@@ -78,6 +78,15 @@ export interface LessonAdaptation {
   observacoes: string;
 }
 
+export type LessonExampleCategoria =
+  | "cotidiano"
+  | "escola"
+  | "familia"
+  | "brincadeira"
+  | "natureza"
+  | "ciencia"
+  | "matematica";
+
 export interface LessonExample {
   id: string;
   lessonId: string;
@@ -90,6 +99,7 @@ export interface LessonExample {
   resposta: string;
   explicacao: string;
   imagem: string | null;
+  categoria: LessonExampleCategoria | null;
 }
 
 export type LessonResourceTipo =
