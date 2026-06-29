@@ -14,7 +14,7 @@ export interface Recommendation {
 export const RecommendationEngine = {
   async afterLesson(codigoBncc: string): Promise<Recommendation> {
     const [posteriores, similares, revisao, atividade, desafios] = await Promise.all([
-      RelationshipEngine.list(codigoBncc, "posterior").catch(() => []),
+      RelationshipEngine.list(codigoBncc, "futuro").catch(() => []),
       RelationshipEngine.list(codigoBncc, "similar").catch(() => []),
       supabase
         .from("lesson_reviews_full" as any)
