@@ -989,6 +989,39 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_relationships: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["bncc_relation_kind"]
+          metadata: Json | null
+          peso: number
+          related_codigo_bncc: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          id?: string
+          kind: Database["public"]["Enums"]["bncc_relation_kind"]
+          metadata?: Json | null
+          peso?: number
+          related_codigo_bncc: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["bncc_relation_kind"]
+          metadata?: Json | null
+          peso?: number
+          related_codigo_bncc?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bncc_skills: {
         Row: {
           code: string
@@ -6159,6 +6192,13 @@ export type Database = {
         | "final"
         | "simulado"
         | "recuperacao"
+      bncc_relation_kind:
+        | "similar"
+        | "anterior"
+        | "futuro"
+        | "competencia"
+        | "objeto_conhecimento"
+        | "unidade_tematica"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       lesson_example_categoria:
         | "cotidiano"
@@ -6318,6 +6358,14 @@ export const Constants = {
         "final",
         "simulado",
         "recuperacao",
+      ],
+      bncc_relation_kind: [
+        "similar",
+        "anterior",
+        "futuro",
+        "competencia",
+        "objeto_conhecimento",
+        "unidade_tematica",
       ],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       lesson_example_categoria: [
