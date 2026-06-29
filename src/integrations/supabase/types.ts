@@ -2176,6 +2176,42 @@ export type Database = {
           },
         ]
       }
+      knowledge_objects: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string | null
+          id: string
+          objeto_conhecimento: string
+          ordem: number | null
+          palavras_chave: string[] | null
+          unidade_tematica: string | null
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          objeto_conhecimento: string
+          ordem?: number | null
+          palavras_chave?: string[] | null
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          objeto_conhecimento?: string
+          ordem?: number | null
+          palavras_chave?: string[] | null
+          unidade_tematica?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       learning_trails: {
         Row: {
           created_at: string
