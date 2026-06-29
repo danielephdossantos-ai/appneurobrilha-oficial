@@ -78,6 +78,15 @@ export interface LessonAdaptation {
   observacoes: string;
 }
 
+export type LessonExampleCategoria =
+  | "cotidiano"
+  | "escola"
+  | "familia"
+  | "brincadeira"
+  | "natureza"
+  | "ciencia"
+  | "matematica";
+
 export interface LessonExample {
   id: string;
   lessonId: string;
@@ -90,6 +99,7 @@ export interface LessonExample {
   resposta: string;
   explicacao: string;
   imagem: string | null;
+  categoria: LessonExampleCategoria | null;
 }
 
 export type LessonResourceTipo =
@@ -161,6 +171,7 @@ function mapExample(r: any): LessonExample {
     resposta: r.resposta ?? "",
     explicacao: r.explicacao ?? "",
     imagem: r.imagem,
+    categoria: r.categoria ?? null,
   };
 }
 
@@ -284,12 +295,19 @@ export const LessonService = {
     const { data, error } = await db
       .from("lesson_examples")
       .select(
-        "id,lesson_id,codigo_bncc,ordem,titulo,contexto,enunciado,resolucao,resposta,explicacao,imagem",
+        "id,lesson_id,codigo_bncc,ordem,titulo,contexto,enunciado,resolucao,resposta,explicacao,imagem,categoria",
       )
       .eq("lesson_id", a.id)
       .order("ordem");
     if (error || !data) return [];
     return (data as any[]).map(mapExample);
+  },
+  async getExamplesByCategoria(
+    codigoBncc: string,
+    categoria: LessonExampleCategoria,
+  ): Promise<LessonExample[]> {
+    const todos = await this.getExamples(codigoBncc);
+    return todos.filter((e) => e.categoria === categoria);
   },
 
   // ----- Recursos (lesson_resources) -----
