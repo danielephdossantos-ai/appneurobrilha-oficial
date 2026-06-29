@@ -445,6 +445,8 @@ function parseAulaDinamica(raw: string): AulaDinamica {
 export const gerarAulaDinamica = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => AulaDinamicaInputSchema.parse(input))
   .handler(async ({ data }) => {
+    // Geração de aulas em tempo de execução está DESATIVADA.
+    // Toda aula deve estar previamente cadastrada no banco.
     const { createClient } = await import("@supabase/supabase-js");
     const supabaseAdmin = createClient(
       process.env.SUPABASE_URL!,
@@ -452,117 +454,27 @@ export const gerarAulaDinamica = createServerFn({ method: "POST" })
       { auth: { persistSession: false, autoRefreshToken: false } },
     );
 
+    const { data: cached } = await supabaseAdmin
+      .from("aulas_geradas_ia")
+      .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
+      .eq("codigo_bncc", data.bnccCode)
+      .maybeSingle();
 
-    // 1) Cache lookup
-    if (!data.force) {
-      const { data: cached } = await supabaseAdmin
-        .from("aulas_geradas_ia")
-        .select("codigo_bncc, titulo, screens, modelo, versao, gerada_em")
-        .eq("codigo_bncc", data.bnccCode)
-        .maybeSingle();
-      if (cached?.screens) {
-        return {
-          ok: true as const,
-          cached: true,
-          aula: cached.screens as unknown as AulaDinamica,
-          error: null,
-        };
-      }
-    }
-
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
+    if (cached?.screens) {
       return {
-        ok: false as const,
-        cached: false,
-        error: "GROQ_API_KEY ausente",
-        aula: null,
+        ok: true as const,
+        cached: true,
+        aula: cached.screens as unknown as AulaDinamica,
+        error: null,
       };
     }
 
-    const userPrompt = `Código BNCC: ${data.bnccCode}
-Descrição: ${data.descricao}
-Idade: ${data.idade ?? 9} anos${data.serie ? `\nSérie: ${data.serie}` : ""}${data.componente ? `\nComponente: ${data.componente}` : ""}
-
-Gere a aula JSON completa.`;
-
-    try {
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "llama-3.1-8b-instant",
-            messages: [
-              { role: "system", content: AULA_DINAMICA_PROMPT },
-              { role: "user", content: userPrompt },
-            ],
-            temperature: 0.7,
-            max_tokens: 2400,
-            top_p: 0.9,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("[groq:dinamica] HTTP", res.status, errText.slice(0, 400));
-        return {
-          ok: false as const,
-          cached: false,
-          error: `Groq ${res.status}: ${errText.slice(0, 160)}`,
-          aula: null,
-        };
-      }
-
-      const json = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string } }>;
-      };
-      const raw = json.choices?.[0]?.message?.content?.trim() ?? "";
-      if (!raw) {
-        return {
-          ok: false as const,
-          cached: false,
-          error: "Resposta vazia",
-          aula: null,
-        };
-      }
-
-      const aula = parseAulaDinamica(raw);
-
-      // 2) Save cache (upsert by codigo_bncc)
-      const { error: upErr } = await supabaseAdmin
-        .from("aulas_geradas_ia")
-        .upsert(
-          {
-            codigo_bncc: data.bnccCode,
-            titulo: aula.titulo,
-            screens: aula as unknown as Record<string, unknown>,
-            modelo: "llama-3.1-8b-instant",
-            disciplina: data.componente ?? null,
-            ano: data.serie ?? null,
-            aprovada: false,
-            gerada_em: new Date().toISOString(),
-          },
-          { onConflict: "codigo_bncc" },
-        );
-      if (upErr) console.error("[groq:dinamica] upsert", upErr.message);
-
-      return { ok: true as const, cached: false, aula, error: null };
-    } catch (e) {
-      console.error("[groq:dinamica]", e);
-      return {
-        ok: false as const,
-        cached: false,
-        error: e instanceof Error ? e.message : "Falha ao gerar aula",
-        aula: null,
-      };
-    }
+    return {
+      ok: false as const,
+      cached: false,
+      error: "Aula ainda não cadastrada.",
+      aula: null,
+    };
   });
 
 // ============================================================
