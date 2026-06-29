@@ -100,8 +100,11 @@ export const LessonSelector = {
     items: T[],
   ): Promise<T[]> {
     const checks = await Promise.all(
-      items.map(async (i) => ((await LessonService.exists(i.codigo_bncc)) ? i : null)),
+      items.map(async (i) => ({
+        item: i,
+        exists: await LessonService.exists(i.codigo_bncc),
+      })),
     );
-    return checks.filter((x): x is T => !!x);
+    return checks.filter((c) => c.exists).map((c) => c.item);
   },
 };
