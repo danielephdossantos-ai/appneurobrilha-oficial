@@ -6276,6 +6276,7 @@ export type Database = {
         | "competencia"
         | "objeto_conhecimento"
         | "unidade_tematica"
+        | "complementar"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       lesson_example_categoria:
         | "cotidiano"
@@ -6443,6 +6444,7 @@ export const Constants = {
         "competencia",
         "objeto_conhecimento",
         "unidade_tematica",
+        "complementar",
       ],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       lesson_example_categoria: [

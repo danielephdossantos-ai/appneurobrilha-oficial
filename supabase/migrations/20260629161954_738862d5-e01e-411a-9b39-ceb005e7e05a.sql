@@ -1,0 +1,1 @@
+ALTER TYPE public.bncc_relation_kind ADD VALUE IF NOT EXISTS 'complementar';
