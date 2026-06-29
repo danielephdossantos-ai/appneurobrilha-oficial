@@ -11,10 +11,10 @@
  */
 
 import { LessonService } from "./LessonService";
-import { LessonSequence } from "./LessonSequence";
+import { LessonSequenceService } from "./LessonSequence";
 import { LessonFlow } from "./LessonFlow";
 import { ActivityEngine } from "./ActivityEngine";
-import { LessonAdaptationsService } from "./LessonAdaptationsService";
+import { LessonAdaptationsService } from "./LessonAdaptations";
 import { LessonReviewService } from "./LessonReview";
 import { LessonCuriosityService } from "./LessonCuriosity";
 import { LessonChallengeService } from "./LessonChallenge";
