@@ -2418,6 +2418,53 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_curiosities: {
+        Row: {
+          codigo_bncc: string
+          conteudo: string
+          created_at: string
+          fonte: string
+          id: string
+          imagem_url: string
+          lesson_id: string | null
+          ordem: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          conteudo?: string
+          created_at?: string
+          fonte?: string
+          id?: string
+          imagem_url?: string
+          lesson_id?: string | null
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          conteudo?: string
+          created_at?: string
+          fonte?: string
+          id?: string
+          imagem_url?: string
+          lesson_id?: string | null
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_curiosities_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_examples: {
         Row: {
           categoria:
