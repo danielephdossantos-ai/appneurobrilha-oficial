@@ -2753,6 +2753,51 @@ export type Database = {
           },
         ]
       }
+      lesson_experiments: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          cuidados: Json
+          id: string
+          materiais: Json
+          nivel: string | null
+          objetivo: string
+          ordem: number
+          passos: Json
+          resultado_esperado: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          cuidados?: Json
+          id?: string
+          materiais?: Json
+          nivel?: string | null
+          objetivo: string
+          ordem?: number
+          passos?: Json
+          resultado_esperado: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          cuidados?: Json
+          id?: string
+          materiais?: Json
+          nivel?: string | null
+          objetivo?: string
+          ordem?: number
+          passos?: Json
+          resultado_esperado?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       lesson_explanations: {
         Row: {
           codigo_bncc: string
