@@ -1718,6 +1718,63 @@ export type Database = {
           },
         ]
       }
+      exercises: {
+        Row: {
+          alternativas: Json
+          codigo_bncc: string | null
+          competencia: string
+          created_at: string
+          dificuldade: string
+          enunciado: string
+          explicacao: string
+          id: string
+          imagem: string | null
+          metadata: Json
+          pontuacao: number
+          resposta: string
+          tempo_segundos: number
+          tipo: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          alternativas?: Json
+          codigo_bncc?: string | null
+          competencia?: string
+          created_at?: string
+          dificuldade?: string
+          enunciado: string
+          explicacao?: string
+          id?: string
+          imagem?: string | null
+          metadata?: Json
+          pontuacao?: number
+          resposta?: string
+          tempo_segundos?: number
+          tipo: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          alternativas?: Json
+          codigo_bncc?: string | null
+          competencia?: string
+          created_at?: string
+          dificuldade?: string
+          enunciado?: string
+          explicacao?: string
+          id?: string
+          imagem?: string | null
+          metadata?: Json
+          pontuacao?: number
+          resposta?: string
+          tempo_segundos?: number
+          tipo?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       explicacoes: {
         Row: {
           audio: string | null
