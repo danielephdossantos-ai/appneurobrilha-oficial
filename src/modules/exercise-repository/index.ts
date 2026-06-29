@@ -53,6 +53,7 @@ export interface Exercise {
   pontuacao: number;
   competencia: string;
   codigoBncc: string | null;
+  nivelPedagogico: NivelPedagogico;
   metadata: Record<string, unknown>;
 }
 
