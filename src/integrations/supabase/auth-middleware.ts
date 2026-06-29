@@ -1,24 +1,38 @@
 import { createMiddleware } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 
 export const requireSupabaseAuth = createMiddleware({ type: "function" }).server(
   async ({ next }) => {
     const request = getRequest();
+    const authHeader = request?.headers?.get("authorization") ?? "";
+    const token = authHeader.toLowerCase().startsWith("bearer ")
+      ? authHeader.slice(7).trim()
+      : "";
 
-    if (!request?.headers) {
-      throw new Error("Unauthorized: No request headers available");
+    if (!token) {
+      throw new Error("Unauthorized: No authorization header provided");
     }
 
-    const userId = request.headers.get("x-replit-user-id");
+    const url = process.env.SUPABASE_URL!;
+    const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
 
-    if (!userId) {
-      throw new Error("Unauthorized: Not authenticated");
+    const supabase = createClient<Database>(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false, storage: undefined },
+      global: { headers: { Authorization: `Bearer ${token}` } },
+    });
+
+    const { data, error } = await supabase.auth.getUser(token);
+    if (error || !data.user) {
+      throw new Error("Unauthorized: Invalid session");
     }
 
     return next({
       context: {
-        userId,
-        claims: { sub: userId },
+        supabase,
+        userId: data.user.id,
+        claims: { sub: data.user.id, email: data.user.email },
       },
     });
   },
