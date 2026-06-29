@@ -2414,6 +2414,53 @@ export type Database = {
           },
         ]
       }
+      lesson_explanations: {
+        Row: {
+          codigo_bncc: string
+          conteudo: string
+          created_at: string
+          exemplos: Json
+          id: string
+          lesson_id: string
+          nivel: Database["public"]["Enums"]["lesson_explanation_nivel"]
+          ordem: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          conteudo: string
+          created_at?: string
+          exemplos?: Json
+          id?: string
+          lesson_id: string
+          nivel: Database["public"]["Enums"]["lesson_explanation_nivel"]
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          conteudo?: string
+          created_at?: string
+          exemplos?: Json
+          id?: string
+          lesson_id?: string
+          nivel?: Database["public"]["Enums"]["lesson_explanation_nivel"]
+          ordem?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_explanations_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_library: {
         Row: {
           ano_codigo: string | null
@@ -5684,6 +5731,7 @@ export type Database = {
     Enums: {
       app_role: "admin" | "moderator" | "user"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
+      lesson_explanation_nivel: "infantil" | "intermediaria" | "detalhada"
       mascot_emotion:
         | "happy"
         | "calm"
@@ -5821,6 +5869,7 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "moderator", "user"],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
+      lesson_explanation_nivel: ["infantil", "intermediaria", "detalhada"],
       mascot_emotion: [
         "happy",
         "calm",
