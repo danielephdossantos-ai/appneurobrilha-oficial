@@ -2360,6 +2360,9 @@ export type Database = {
       }
       lesson_examples: {
         Row: {
+          categoria:
+            | Database["public"]["Enums"]["lesson_example_categoria"]
+            | null
           codigo_bncc: string
           contexto: string
           created_at: string
@@ -2375,6 +2378,9 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          categoria?:
+            | Database["public"]["Enums"]["lesson_example_categoria"]
+            | null
           codigo_bncc: string
           contexto?: string
           created_at?: string
@@ -2390,6 +2396,9 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          categoria?:
+            | Database["public"]["Enums"]["lesson_example_categoria"]
+            | null
           codigo_bncc?: string
           contexto?: string
           created_at?: string
@@ -5731,6 +5740,14 @@ export type Database = {
     Enums: {
       app_role: "admin" | "moderator" | "user"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
+      lesson_example_categoria:
+        | "cotidiano"
+        | "escola"
+        | "familia"
+        | "brincadeira"
+        | "natureza"
+        | "ciencia"
+        | "matematica"
       lesson_explanation_nivel: "infantil" | "intermediaria" | "detalhada"
       mascot_emotion:
         | "happy"
@@ -5869,6 +5886,15 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "moderator", "user"],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
+      lesson_example_categoria: [
+        "cotidiano",
+        "escola",
+        "familia",
+        "brincadeira",
+        "natureza",
+        "ciencia",
+        "matematica",
+      ],
       lesson_explanation_nivel: ["infantil", "intermediaria", "detalhada"],
       mascot_emotion: [
         "happy",
