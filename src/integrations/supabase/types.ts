@@ -6080,6 +6080,48 @@ export type Database = {
         }
         Relationships: []
       }
+      teaching_strategies: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string
+          id: string
+          kind: Database["public"]["Enums"]["teaching_strategy_kind"]
+          materiais: Json
+          nivel: string | null
+          observacoes: string | null
+          passos: Json
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao: string
+          id?: string
+          kind: Database["public"]["Enums"]["teaching_strategy_kind"]
+          materiais?: Json
+          nivel?: string | null
+          observacoes?: string | null
+          passos?: Json
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["teaching_strategy_kind"]
+          materiais?: Json
+          nivel?: string | null
+          observacoes?: string | null
+          passos?: Json
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tecnicas_pedagogicas: {
         Row: {
           categoria: string | null
@@ -6462,6 +6504,17 @@ export type Database = {
         | "medio"
         | "dificil"
         | "avancado"
+      teaching_strategy_kind:
+        | "visual"
+        | "concreta"
+        | "jogos"
+        | "investigativa"
+        | "colaborativa"
+        | "auditiva"
+        | "cinestesica"
+        | "projetos"
+        | "resolucao_problemas"
+        | "narrativa"
       tipo_player: "early" | "b" | "c" | "legacy"
     }
     CompositeTypes: {
@@ -6633,6 +6686,18 @@ export const Constants = {
         "medio",
         "dificil",
         "avancado",
+      ],
+      teaching_strategy_kind: [
+        "visual",
+        "concreta",
+        "jogos",
+        "investigativa",
+        "colaborativa",
+        "auditiva",
+        "cinestesica",
+        "projetos",
+        "resolucao_problemas",
+        "narrativa",
       ],
       tipo_player: ["early", "b", "c", "legacy"],
     },
