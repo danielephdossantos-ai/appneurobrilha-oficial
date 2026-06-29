@@ -171,6 +171,7 @@ function mapExample(r: any): LessonExample {
     resposta: r.resposta ?? "",
     explicacao: r.explicacao ?? "",
     imagem: r.imagem,
+    categoria: r.categoria ?? null,
   };
 }
 
