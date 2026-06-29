@@ -115,6 +115,16 @@ export const LessonLibrary = {
   listAulas: (ano: string, disciplina: string): Promise<LessonIndexEntry[]> =>
     listIndex({ ano, disciplina }),
 
+  /**
+   * Lista índice de aulas vinculadas a uma habilidade BNCC.
+   * A BNCC é usada APENAS como chave de localização — nada é gerado a partir
+   * da descrição da habilidade.
+   */
+  listByBNCC: async (codigoBncc: string): Promise<LessonIndexEntry[]> =>
+    (await listIndex()).filter((r) => r.codigo_bncc === codigoBncc),
+
+
+
   /** Pacote completo da aula (tudo vindo do banco). */
   async getBundle(codigoBncc: string): Promise<LessonFullBundle | null> {
     const aula = await LessonService.getLesson(codigoBncc);
