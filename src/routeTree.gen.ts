@@ -48,6 +48,7 @@ import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AulaIaBnccCodeRouteImport } from './routes/aula-ia.$bnccCode'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
+import { Route as AdminSeedLessonsRouteImport } from './routes/admin.seed-lessons'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
@@ -248,6 +249,11 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminSeedLessonsRoute = AdminSeedLessonsRouteImport.update({
+  id: '/seed-lessons',
+  path: '/seed-lessons',
+  getParentRoute: () => AdminRoute,
+} as any)
 const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
   id: '/db/$aulaId',
   path: '/db/$aulaId',
@@ -267,7 +273,7 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -297,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/seed-lessons': typeof AdminSeedLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -311,7 +318,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -340,6 +347,7 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/seed-lessons': typeof AdminSeedLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -355,7 +363,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agenda': typeof AgendaRoute
   '/alfabetizacao': typeof AlfabetizacaoRoute
   '/analytics': typeof AnalyticsRoute
@@ -385,6 +393,7 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/seed-lessons': typeof AdminSeedLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -431,6 +440,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/seed-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -474,6 +484,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/seed-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -518,6 +529,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/seed-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -533,7 +545,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AgendaRoute: typeof AgendaRoute
   AlfabetizacaoRoute: typeof AlfabetizacaoRoute
   AnalyticsRoute: typeof AnalyticsRoute
@@ -844,6 +856,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/seed-lessons': {
+      id: '/admin/seed-lessons'
+      path: '/seed-lessons'
+      fullPath: '/admin/seed-lessons'
+      preLoaderRoute: typeof AdminSeedLessonsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/escola-brilha/db/$aulaId': {
       id: '/escola-brilha/db/$aulaId'
       path: '/db/$aulaId'
@@ -867,6 +886,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminSeedLessonsRoute: typeof AdminSeedLessonsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminSeedLessonsRoute: AdminSeedLessonsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface EscolaBrilhaRouteChildren {
   EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
@@ -914,7 +943,7 @@ const AnamneseChildIdRouteWithChildren = AnamneseChildIdRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AgendaRoute: AgendaRoute,
   AlfabetizacaoRoute: AlfabetizacaoRoute,
   AnalyticsRoute: AnalyticsRoute,
