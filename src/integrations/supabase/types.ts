@@ -2913,60 +2913,6 @@ export type Database = {
           },
         ]
       }
-      lesson_drafts: {
-        Row: {
-          ano: string | null
-          codigo_bncc: string
-          created_at: string
-          disciplina: string | null
-          generated_by: string | null
-          id: string
-          model: string | null
-          notes: string | null
-          payload: Json
-          reviewed_at: string | null
-          reviewed_by: string | null
-          status: string
-          titulo: string | null
-          tokens_used: number | null
-          updated_at: string
-        }
-        Insert: {
-          ano?: string | null
-          codigo_bncc: string
-          created_at?: string
-          disciplina?: string | null
-          generated_by?: string | null
-          id?: string
-          model?: string | null
-          notes?: string | null
-          payload: Json
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          status?: string
-          titulo?: string | null
-          tokens_used?: number | null
-          updated_at?: string
-        }
-        Update: {
-          ano?: string | null
-          codigo_bncc?: string
-          created_at?: string
-          disciplina?: string | null
-          generated_by?: string | null
-          id?: string
-          model?: string | null
-          notes?: string | null
-          payload?: Json
-          reviewed_at?: string | null
-          reviewed_by?: string | null
-          status?: string
-          titulo?: string | null
-          tokens_used?: number | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
       lesson_examples: {
         Row: {
           categoria:
@@ -6637,7 +6583,6 @@ export type Database = {
         Args: { amount: number; child_id: string }
         Returns: undefined
       }
-      approve_lesson_draft: { Args: { _draft_id: string }; Returns: string }
       gain_active_mascot_xp: {
         Args: { p_amount: number }
         Returns: {
