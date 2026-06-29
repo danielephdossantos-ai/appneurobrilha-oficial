@@ -12,16 +12,17 @@
 
 import { supabase } from "@/integrations/supabase/client";
 import { LessonService } from "./LessonService";
-import { LessonExplanation } from "./LessonExplanation";
-import { LessonExamples } from "./LessonExamples";
-import { LessonCuriosity } from "./LessonCuriosity";
+import { LessonExplanationService } from "./LessonExplanation";
+import { LessonExamplesService } from "./LessonExamples";
+import { LessonCuriosityService } from "./LessonCuriosity";
 import { ActivityEngine } from "./ActivityEngine";
-import { LessonChallenge } from "./LessonChallenge";
-import { LessonAssessment } from "./LessonAssessment";
+import { LessonChallengeService } from "./LessonChallenge";
+import { LessonAssessmentService } from "./LessonAssessment";
 import { LessonReviewService } from "./LessonReview";
 import { LessonAdaptationsService } from "./LessonAdaptations";
-import { LessonResources } from "./LessonResources";
-import { LearningObjectives } from "./LearningObjectives";
+import { LessonResourcesService } from "./LessonResources";
+import { LearningObjectivesService } from "./LearningObjectives";
+
 
 export interface LessonCompleteModel {
   lessonId: string | null;
