@@ -2116,6 +2116,62 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_examples: {
+        Row: {
+          codigo_bncc: string
+          contexto: string
+          created_at: string
+          enunciado: string
+          explicacao: string
+          id: string
+          imagem: string | null
+          lesson_id: string
+          ordem: number
+          resolucao: string
+          resposta: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          contexto?: string
+          created_at?: string
+          enunciado: string
+          explicacao?: string
+          id?: string
+          imagem?: string | null
+          lesson_id: string
+          ordem?: number
+          resolucao?: string
+          resposta?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          contexto?: string
+          created_at?: string
+          enunciado?: string
+          explicacao?: string
+          id?: string
+          imagem?: string | null
+          lesson_id?: string
+          ordem?: number
+          resolucao?: string
+          resposta?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_examples_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lesson_steps: {
         Row: {
           created_at: string | null
