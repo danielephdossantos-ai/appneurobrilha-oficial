@@ -129,8 +129,11 @@ function CuradoriaAulasPage() {
     setMsg("Gerando lote... (pode levar minutos)");
     try {
       const r = await batch({ data: { limit: 80 } });
+      const detalhe = r.primeirosErros?.length
+        ? ` | Erros: ${r.primeirosErros.join(" • ")}`
+        : "";
       setMsg(
-        `Lote finalizado: ${r.sucesso}/${r.total} ok, ${r.falha} falhas. ${r.tokensUsados} tokens.`,
+        `Lote finalizado: ${r.sucesso}/${r.total} ok, ${r.falha} falhas. ${r.tokensUsados} tokens.${detalhe}`,
       );
       await reload();
     } catch (e: any) {
