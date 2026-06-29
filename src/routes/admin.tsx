@@ -115,12 +115,19 @@ function AdminPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4 md:p-8">
       <div className="max-w-6xl mx-auto space-y-6">
-        <header className="flex items-center gap-3">
-          <Shield className="w-8 h-8 text-primary" />
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">Painel do Administrador</h1>
-            <p className="text-sm text-muted-foreground">Perfis fictícios prontos — sem anamnese.</p>
+        <header className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Shield className="w-8 h-8 text-primary" />
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold">Painel do Administrador</h1>
+              <p className="text-sm text-muted-foreground">Perfis fictícios prontos — sem anamnese.</p>
+            </div>
           </div>
+          <Link to="/admin-seed-lessons">
+            <Button size="sm" variant="outline">
+              <Sparkles className="w-4 h-4 mr-1" /> Seed Lessons
+            </Button>
+          </Link>
         </header>
 
         <Card className="border-primary/30 bg-primary/5">
