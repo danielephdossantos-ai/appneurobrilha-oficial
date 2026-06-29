@@ -1977,7 +1977,7 @@ export type Database = {
           atividade_guiada: Json
           atividade_pratica: Json
           codigo_bncc: string
-          contexto: string
+          contextualizacao: string
           created_at: string
           curiosidade: string
           desafio: Json
@@ -1987,12 +1987,12 @@ export type Database = {
           exemplo2: string
           explicacao: string
           id: string
-          imagem_url: string
+          imagem: string
           introducao: string
           materiais: Json
           nivel: string
           objetivo: string
-          palavras_importantes: Json
+          palavras_chave: Json
           passo_a_passo: Json
           quiz: Json
           respostas: Json
@@ -2002,7 +2002,7 @@ export type Database = {
           tempo_estimado: number
           titulo: string
           updated_at: string
-          video_url: string
+          video: string
         }
         Insert: {
           analogia: string
@@ -2010,7 +2010,7 @@ export type Database = {
           atividade_guiada: Json
           atividade_pratica: Json
           codigo_bncc: string
-          contexto: string
+          contextualizacao: string
           created_at?: string
           curiosidade: string
           desafio: Json
@@ -2020,12 +2020,12 @@ export type Database = {
           exemplo2: string
           explicacao: string
           id?: string
-          imagem_url: string
+          imagem: string
           introducao: string
           materiais: Json
           nivel: string
           objetivo: string
-          palavras_importantes: Json
+          palavras_chave: Json
           passo_a_passo: Json
           quiz: Json
           respostas: Json
@@ -2035,7 +2035,7 @@ export type Database = {
           tempo_estimado: number
           titulo: string
           updated_at?: string
-          video_url: string
+          video: string
         }
         Update: {
           analogia?: string
@@ -2043,7 +2043,7 @@ export type Database = {
           atividade_guiada?: Json
           atividade_pratica?: Json
           codigo_bncc?: string
-          contexto?: string
+          contextualizacao?: string
           created_at?: string
           curiosidade?: string
           desafio?: Json
@@ -2053,12 +2053,12 @@ export type Database = {
           exemplo2?: string
           explicacao?: string
           id?: string
-          imagem_url?: string
+          imagem?: string
           introducao?: string
           materiais?: Json
           nivel?: string
           objetivo?: string
-          palavras_importantes?: Json
+          palavras_chave?: Json
           passo_a_passo?: Json
           quiz?: Json
           respostas?: Json
@@ -2068,7 +2068,7 @@ export type Database = {
           tempo_estimado?: number
           titulo?: string
           updated_at?: string
-          video_url?: string
+          video?: string
         }
         Relationships: []
       }
