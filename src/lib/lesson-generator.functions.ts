@@ -227,9 +227,18 @@ async function callGroq(
   };
 }
 
-async function ensureAdmin(ctx: { supabase: any; userId: string }) {
-  const { data, error } = await ctx.supabase.rpc("has_role", {
-    _user_id: ctx.userId,
+async function getAdminClient() {
+  const { createClient } = await import("@supabase/supabase-js");
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } },
+  );
+}
+
+async function ensureAdmin(userId: string, sb: any) {
+  const { data, error } = await sb.rpc("has_role", {
+    _user_id: userId,
     _role: "admin",
   });
   if (error || !data) throw new Error("FORBIDDEN");
