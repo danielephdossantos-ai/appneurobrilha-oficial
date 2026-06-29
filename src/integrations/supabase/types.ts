@@ -5790,6 +5790,54 @@ export type Database = {
           },
         ]
       }
+      teacher_lesson_plans: {
+        Row: {
+          adaptacoes: Json | null
+          avaliacao: Json | null
+          codigo_bncc: string
+          competencias: Json | null
+          created_at: string
+          desenvolvimento: Json | null
+          fechamento: Json | null
+          habilidades: Json | null
+          id: string
+          metodologia: Json | null
+          objetivos: Json | null
+          recursos: Json | null
+          updated_at: string
+        }
+        Insert: {
+          adaptacoes?: Json | null
+          avaliacao?: Json | null
+          codigo_bncc: string
+          competencias?: Json | null
+          created_at?: string
+          desenvolvimento?: Json | null
+          fechamento?: Json | null
+          habilidades?: Json | null
+          id?: string
+          metodologia?: Json | null
+          objetivos?: Json | null
+          recursos?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          adaptacoes?: Json | null
+          avaliacao?: Json | null
+          codigo_bncc?: string
+          competencias?: Json | null
+          created_at?: string
+          desenvolvimento?: Json | null
+          fechamento?: Json | null
+          habilidades?: Json | null
+          id?: string
+          metodologia?: Json | null
+          objetivos?: Json | null
+          recursos?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tecnicas_pedagogicas: {
         Row: {
           categoria: string | null
