@@ -1730,6 +1730,7 @@ export type Database = {
           id: string
           imagem: string | null
           metadata: Json
+          nivel_pedagogico: Database["public"]["Enums"]["nivel_pedagogico"]
           pontuacao: number
           resposta: string
           tempo_segundos: number
@@ -1748,6 +1749,7 @@ export type Database = {
           id?: string
           imagem?: string | null
           metadata?: Json
+          nivel_pedagogico?: Database["public"]["Enums"]["nivel_pedagogico"]
           pontuacao?: number
           resposta?: string
           tempo_segundos?: number
@@ -1766,6 +1768,7 @@ export type Database = {
           id?: string
           imagem?: string | null
           metadata?: Json
+          nivel_pedagogico?: Database["public"]["Enums"]["nivel_pedagogico"]
           pontuacao?: number
           resposta?: string
           tempo_segundos?: number
@@ -5813,6 +5816,12 @@ export type Database = {
         | "excited"
         | "focused"
         | "proud"
+      nivel_pedagogico:
+        | "muito_facil"
+        | "facil"
+        | "medio"
+        | "dificil"
+        | "avancado"
       tipo_player: "early" | "b" | "c" | "legacy"
     }
     CompositeTypes: {
@@ -5960,6 +5969,13 @@ export const Constants = {
         "excited",
         "focused",
         "proud",
+      ],
+      nivel_pedagogico: [
+        "muito_facil",
+        "facil",
+        "medio",
+        "dificil",
+        "avancado",
       ],
       tipo_player: ["early", "b", "c", "legacy"],
     },
