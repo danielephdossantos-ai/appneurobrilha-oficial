@@ -989,6 +989,57 @@ export type Database = {
         }
         Relationships: []
       }
+      bncc_projects: {
+        Row: {
+          atividades: Json
+          avaliacao: Json
+          codigo_bncc: string
+          created_at: string
+          cronograma: Json
+          descricao: string
+          duracao_dias: number | null
+          id: string
+          materiais: Json
+          objetivo: string
+          observacoes: string | null
+          produto_final: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          atividades?: Json
+          avaliacao?: Json
+          codigo_bncc: string
+          created_at?: string
+          cronograma?: Json
+          descricao: string
+          duracao_dias?: number | null
+          id?: string
+          materiais?: Json
+          objetivo: string
+          observacoes?: string | null
+          produto_final: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          atividades?: Json
+          avaliacao?: Json
+          codigo_bncc?: string
+          created_at?: string
+          cronograma?: Json
+          descricao?: string
+          duracao_dias?: number | null
+          id?: string
+          materiais?: Json
+          objetivo?: string
+          observacoes?: string | null
+          produto_final?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bncc_relationships: {
         Row: {
           codigo_bncc: string
