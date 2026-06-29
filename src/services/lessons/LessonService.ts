@@ -295,12 +295,19 @@ export const LessonService = {
     const { data, error } = await db
       .from("lesson_examples")
       .select(
-        "id,lesson_id,codigo_bncc,ordem,titulo,contexto,enunciado,resolucao,resposta,explicacao,imagem",
+        "id,lesson_id,codigo_bncc,ordem,titulo,contexto,enunciado,resolucao,resposta,explicacao,imagem,categoria",
       )
       .eq("lesson_id", a.id)
       .order("ordem");
     if (error || !data) return [];
     return (data as any[]).map(mapExample);
+  },
+  async getExamplesByCategoria(
+    codigoBncc: string,
+    categoria: LessonExampleCategoria,
+  ): Promise<LessonExample[]> {
+    const todos = await this.getExamples(codigoBncc);
+    return todos.filter((e) => e.categoria === categoria);
   },
 
   // ----- Recursos (lesson_resources) -----
