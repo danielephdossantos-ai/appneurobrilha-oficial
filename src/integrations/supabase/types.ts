@@ -1698,6 +1698,54 @@ export type Database = {
           },
         ]
       }
+      didactic_sequences: {
+        Row: {
+          avaliacao: Json
+          codigo_bncc: string
+          created_at: string
+          descricao: string
+          duracao_minutos: number | null
+          etapas: Json
+          id: string
+          nivel: Database["public"]["Enums"]["didactic_level"]
+          objetivos: Json
+          observacoes: string | null
+          recursos: Json
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          avaliacao?: Json
+          codigo_bncc: string
+          created_at?: string
+          descricao: string
+          duracao_minutos?: number | null
+          etapas?: Json
+          id?: string
+          nivel: Database["public"]["Enums"]["didactic_level"]
+          objetivos?: Json
+          observacoes?: string | null
+          recursos?: Json
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          avaliacao?: Json
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string
+          duracao_minutos?: number | null
+          etapas?: Json
+          id?: string
+          nivel?: Database["public"]["Enums"]["didactic_level"]
+          objetivos?: Json
+          observacoes?: string | null
+          recursos?: Json
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       difficulty_rules: {
         Row: {
           config: Json
@@ -6523,6 +6571,12 @@ export type Database = {
         | "objeto_conhecimento"
         | "unidade_tematica"
         | "complementar"
+      didactic_level:
+        | "muito_facil"
+        | "facil"
+        | "intermediario"
+        | "dificil"
+        | "avancado"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       inclusive_condition:
         | "tea"
@@ -6711,6 +6765,13 @@ export const Constants = {
         "objeto_conhecimento",
         "unidade_tematica",
         "complementar",
+      ],
+      didactic_level: [
+        "muito_facil",
+        "facil",
+        "intermediario",
+        "dificil",
+        "avancado",
       ],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       inclusive_condition: [
