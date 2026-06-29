@@ -59,7 +59,7 @@ export const LESSON_SEQUENCE: { tipo: LessonStepKind; titulo: string }[] = [
   { tipo: "resultado", titulo: "Resultado" },
 ];
 
-export function buildLessonSequence(aula: LessonContent): LessonStep[] {
+export function composeLessonSequence(aula: LessonContent): LessonStep[] {
   return LESSON_SEQUENCE.map((s, i) => {
     const base: LessonStep = { ordem: i + 1, tipo: s.tipo, titulo: s.titulo };
     switch (s.tipo) {
@@ -82,6 +82,6 @@ export const LessonSequenceService = {
   async getSequence(codigoBncc: string): Promise<LessonStep[] | null> {
     const aula = await LessonService.getLesson(codigoBncc);
     if (!aula) return null;
-    return buildLessonSequence(aula);
+    return composeLessonSequence(aula);
   },
 };
