@@ -26,8 +26,8 @@ import {
   type AtividadeItem,
   type QuizQuestao,
   type LessonContent,
-  type PassoAPasso,
 } from "./LessonService";
+import type { PassoAPasso } from "@/modules/pedagogical-repository/types";
 
 export type LessonFlowKind =
   | "objetivo"
