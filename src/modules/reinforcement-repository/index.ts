@@ -27,9 +27,9 @@ export interface ReinforcementBundle {
   atividades: Array<{
     id: string;
     codigoBncc: string;
-    titulo: string;
     tipo: string;
     enunciado: string;
+    instrucao: string;
   }>;
   revisao: LessonReview | null;
   desafios: LessonChallenge[];
@@ -51,16 +51,16 @@ async function listAulasByBNCC(codigoBncc: string) {
 async function listAtividadesByBNCC(codigoBncc: string) {
   const { data, error } = await supabase
     .from("lesson_activities")
-    .select("id, codigo_bncc, titulo, tipo, enunciado")
+    .select("id, codigo_bncc, tipo, enunciado, instrucao")
     .eq("codigo_bncc", codigoBncc)
     .order("ordem", { ascending: true });
   if (error || !data) return [];
   return data.map((r) => ({
     id: r.id as string,
     codigoBncc: r.codigo_bncc as string,
-    titulo: (r.titulo as string) ?? "",
     tipo: (r.tipo as string) ?? "",
     enunciado: (r.enunciado as string) ?? "",
+    instrucao: (r.instrucao as string) ?? "",
   }));
 }
 
