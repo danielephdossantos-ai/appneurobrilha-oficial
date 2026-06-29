@@ -66,7 +66,7 @@ export function buildLessonSequence(aula: LessonContent): LessonStep[] {
       case "introducao": return { ...base, texto: aula.introducao };
       case "explicacao": return { ...base, texto: aula.explicacao };
       case "exemplo": return { ...base, texto: aula.exemplo1 };
-      case "exemplo_cotidiano": return { ...base, texto: aula.exemplo2 || aula.contexto };
+      case "exemplo_cotidiano": return { ...base, texto: aula.exemplo2 || aula.contextualizacao };
       case "atividade_guiada": return { ...base, itens: aula.atividade_guiada ?? [] };
       case "pratica": return { ...base, itens: aula.atividade_pratica ?? [] };
       case "desafio": return { ...base, desafio: aula.desafio };

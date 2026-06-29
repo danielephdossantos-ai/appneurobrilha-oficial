@@ -56,7 +56,7 @@ function adapt(lesson: LessonContent): LessonV2 {
         whatYouWillDo: passos.slice(0, 3).map((p) => p.step),
       },
       exploracao: {
-        provokingQuestion: lesson.contexto,
+        provokingQuestion: lesson.contextualizacao,
         observation: lesson.introducao,
         pairs: [],
       },
@@ -93,7 +93,7 @@ function adapt(lesson: LessonContent): LessonV2 {
       resumo: {
         format: "list",
         title: lesson.titulo,
-        nodes: (lesson.palavras_importantes ?? []).map((p) => ({
+        nodes: (lesson.palavras_chave ?? []).map((p) => ({
           label: p.termo,
           detail: p.definicao,
         })),
