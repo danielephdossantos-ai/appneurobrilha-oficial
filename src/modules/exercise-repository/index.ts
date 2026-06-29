@@ -24,6 +24,21 @@ export type ExerciseTipo =
 
 export type ExerciseDificuldade = "facil" | "medio" | "dificil" | string;
 
+export type NivelPedagogico =
+  | "muito_facil"
+  | "facil"
+  | "medio"
+  | "dificil"
+  | "avancado";
+
+export const NIVEIS_PEDAGOGICOS: { value: NivelPedagogico; label: string }[] = [
+  { value: "muito_facil", label: "Muito Fácil" },
+  { value: "facil", label: "Fácil" },
+  { value: "medio", label: "Médio" },
+  { value: "dificil", label: "Difícil" },
+  { value: "avancado", label: "Avançado" },
+];
+
 export interface Exercise {
   id: string;
   titulo: string;
@@ -38,6 +53,7 @@ export interface Exercise {
   pontuacao: number;
   competencia: string;
   codigoBncc: string | null;
+  nivelPedagogico: NivelPedagogico;
   metadata: Record<string, unknown>;
 }
 
@@ -58,12 +74,13 @@ function map(r: any): Exercise {
     pontuacao: r.pontuacao ?? 0,
     competencia: r.competencia ?? "",
     codigoBncc: r.codigo_bncc ?? null,
+    nivelPedagogico: (r.nivel_pedagogico ?? "medio") as NivelPedagogico,
     metadata: (r.metadata as Record<string, unknown>) ?? {},
   };
 }
 
 const COLS =
-  "id,titulo,tipo,enunciado,imagem,alternativas,resposta,explicacao,dificuldade,tempo_segundos,pontuacao,competencia,codigo_bncc,metadata";
+  "id,titulo,tipo,enunciado,imagem,alternativas,resposta,explicacao,dificuldade,tempo_segundos,pontuacao,competencia,codigo_bncc,nivel_pedagogico,metadata";
 
 export const ExerciseRepository = {
   async getById(id: string): Promise<Exercise | null> {
@@ -102,6 +119,30 @@ export const ExerciseRepository = {
       .from("exercises")
       .select(COLS)
       .eq("dificuldade", d);
+    if (error || !data) return [];
+    return (data as any[]).map(map);
+  },
+
+  async listByNivel(nivel: NivelPedagogico): Promise<Exercise[]> {
+    const { data, error } = await db
+      .from("exercises")
+      .select(COLS)
+      .eq("nivel_pedagogico", nivel);
+    if (error || !data) return [];
+    return (data as any[]).map(map);
+  },
+
+  async listByBNCCAndNivel(
+    codigoBncc: string,
+    nivel: NivelPedagogico,
+  ): Promise<Exercise[]> {
+    const key = (codigoBncc || "").trim().toUpperCase();
+    if (!key) return [];
+    const { data, error } = await db
+      .from("exercises")
+      .select(COLS)
+      .eq("codigo_bncc", key)
+      .eq("nivel_pedagogico", nivel);
     if (error || !data) return [];
     return (data as any[]).map(map);
   },
