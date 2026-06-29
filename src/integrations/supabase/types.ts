@@ -343,6 +343,57 @@ export type Database = {
           },
         ]
       }
+      assessment_repository: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          criterios: Json
+          descricao: string
+          id: string
+          instrucoes: string
+          nivel: string
+          ordem: number
+          pontuacao_total: number
+          questoes: Json
+          tempo_minutos: number
+          tipo: Database["public"]["Enums"]["assessment_kind"]
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          criterios?: Json
+          descricao?: string
+          id?: string
+          instrucoes?: string
+          nivel?: string
+          ordem?: number
+          pontuacao_total?: number
+          questoes?: Json
+          tempo_minutos?: number
+          tipo: Database["public"]["Enums"]["assessment_kind"]
+          titulo?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          criterios?: Json
+          descricao?: string
+          id?: string
+          instrucoes?: string
+          nivel?: string
+          ordem?: number
+          pontuacao_total?: number
+          questoes?: Json
+          tempo_minutos?: number
+          tipo?: Database["public"]["Enums"]["assessment_kind"]
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       atividades: {
         Row: {
           alternativa_a: string | null
@@ -5955,6 +6006,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      assessment_kind:
+        | "pre_teste"
+        | "diagnostica"
+        | "formativa"
+        | "final"
+        | "simulado"
+        | "recuperacao"
       etapa_escolar: "infantil" | "fundamental1" | "fundamental2"
       lesson_example_categoria:
         | "cotidiano"
@@ -6107,6 +6165,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      assessment_kind: [
+        "pre_teste",
+        "diagnostica",
+        "formativa",
+        "final",
+        "simulado",
+        "recuperacao",
+      ],
       etapa_escolar: ["infantil", "fundamental1", "fundamental2"],
       lesson_example_categoria: [
         "cotidiano",
