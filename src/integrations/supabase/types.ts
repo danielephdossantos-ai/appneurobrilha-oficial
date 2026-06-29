@@ -1688,6 +1688,51 @@ export type Database = {
           },
         ]
       }
+      educational_games: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          descricao: string | null
+          dificuldade: string
+          id: string
+          objetivo: string
+          ordem: number
+          pontuacao_maxima: number
+          tipo: string | null
+          titulo: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          descricao?: string | null
+          dificuldade: string
+          id?: string
+          objetivo: string
+          ordem?: number
+          pontuacao_maxima?: number
+          tipo?: string | null
+          titulo: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          descricao?: string | null
+          dificuldade?: string
+          id?: string
+          objetivo?: string
+          ordem?: number
+          pontuacao_maxima?: number
+          tipo?: string | null
+          titulo?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
       exam_mission_contents: {
         Row: {
           bncc_code: string | null
