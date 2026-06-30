@@ -1,0 +1,38 @@
+{
+  "codigo_bncc": "EF01MA09",
+  "ano": "1º Ano",
+  "disciplina": "Matemática",
+  "titulo": "Formas que estão por toda parte",
+  "objetivo": "Reconhecer e nomear figuras geométricas espaciais (cubo, bloco retangular, pirâmide, cone, cilindro e esfera) presentes em objetos do cotidiano.",
+  "introducao": "Olhe ao redor: a bola, a caixa de sapato, o copo, o chapéu de aniversário... cada um tem uma forma diferente. A matemática tem nomes especiais para essas formas que aparecem nos objetos do nosso dia.",
+  "explicacao": "As formas espaciais são figuras de 3 dimensões (a gente consegue pegar na mão). As principais são: ESFERA (igual a uma bola, redonda de tudo), CUBO (6 lados quadrados iguais, tipo dado), BLOCO RETANGULAR (caixa de sapato), CILINDRO (lata de refrigerante), CONE (chapéu de aniversário) e PIRÂMIDE (igual à do Egito).",
+  "exemplo": "A bola de futebol é uma ESFERA. A caixa de presente quadrada é um CUBO. A lata de leite condensado é um CILINDRO. A casquinha de sorvete vazia é um CONE.",
+  "exemplo_cotidiano": "Na cozinha tem formas por todo lado: a laranja é uma esfera, o pacote de açúcar é um bloco retangular, o copo é um cilindro. Conhecer as formas ajuda a descrever as coisas com mais clareza.",
+  "pratica_guiada": "Pegue 4 objetos diferentes da casa: uma bola, um dado (ou caixinha), uma lata e um chapéu de festa (ou cone de papel). Mostre cada um para a criança e diga o nome da forma. Depois embaralhe e peça que ela aponte 'qual é o cilindro?', 'qual é a esfera?'.",
+  "pratica_independente": "Caça às formas: ande pela casa e encontre 1 esfera, 1 cubo, 1 cilindro e 1 cone. Desenhe cada um numa folha e escreva o nome da forma embaixo.",
+  "curiosidade": "As abelhas constroem favos de mel em forma de hexágonos (6 lados), porque é a forma que aproveita melhor o espaço sem deixar buracos. A natureza é cheia de matemática escondida!",
+  "desafio": "Construa uma 'cidade de formas' empilhando objetos da casa. Use blocos retangulares como prédios, cilindros como torres, cones como telhados e uma esfera como sol. Tire foto e mostre para alguém.",
+  "resumo": "Formas espaciais são as figuras 3D que dá para pegar: esfera (bola), cubo (dado), bloco retangular (caixa), cilindro (lata), cone (chapéu de festa) e pirâmide.",
+  "revisao": "Lembrete: redondo de tudo = esfera; lados quadrados iguais = cubo; rola no chão como uma lata = cilindro; ponta no topo e base redonda = cone.",
+  "quiz": [
+    {
+      "pergunta": "Uma bola de futebol tem o formato de:",
+      "opcoes": ["Cubo", "Esfera", "Cilindro"],
+      "resposta_correta": 1,
+      "explicacao": "A bola é redonda em todos os lados, então é uma esfera."
+    },
+    {
+      "pergunta": "A casquinha de sorvete vazia tem a forma de:",
+      "opcoes": ["Cone", "Cubo", "Pirâmide"],
+      "resposta_correta": 0,
+      "explicacao": "A casquinha tem base redonda e termina em ponta — é um cone."
+    },
+    {
+      "pergunta": "Qual desses objetos é um cilindro?",
+      "opcoes": ["Uma laranja", "Uma lata de refrigerante", "Um dado"],
+      "resposta_correta": 1,
+      "explicacao": "A lata tem o corpo arredondado e dois círculos iguais nas pontas — é um cilindro."
+    }
+  ],
+  "resultado": "Demais! Agora você enxerga matemática em cada cantinho da casa. Continue caçando formas por aí — quanto mais você procurar, mais vai encontrar."
+}
