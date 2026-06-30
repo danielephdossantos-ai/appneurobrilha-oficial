@@ -17,6 +17,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 // Contrato pedagógico único — referência canônica das seções publicadas.
 import { LESSON_CONTRACT } from "./LessonContract";
+import { auditPublishedLesson, type PublishAuditReport } from "./PublishAuditor";
 
 const CHILD_TABLES = [
   "lesson_examples",
@@ -40,6 +41,8 @@ export interface PublishReport {
   empty_tables: string[];
   duration_ms: number;
   errors: string[];
+  audit: PublishAuditReport | null;
+  is_complete: boolean;
 }
 
 export const publishLessonDraft = createServerFn({ method: "POST" })
@@ -105,16 +108,28 @@ export const publishLessonDraft = createServerFn({ method: "POST" })
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       errors.push(`approve_lesson_draft falhou: ${msg}`);
-    } finally {
-      client.release();
     }
+
+    // Auditoria automática pós-publicação. Marca a aula como
+    // incompleta no banco quando qualquer seção obrigatória estiver
+    // ausente — players devem filtrar por lesson_content.is_complete.
+    let audit: PublishAuditReport | null = null;
+    if (codigoBncc) {
+      try {
+        audit = await auditPublishedLesson(client, codigoBncc);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        errors.push(`PublishAuditor falhou: ${msg}`);
+      }
+    }
+    client.release();
 
     const empty_tables = Object.entries(tables)
       .filter(([, n]) => n === 0)
       .map(([k]) => k);
 
     return {
-      ok: errors.length === 0 && lessonContentCreated,
+      ok: errors.length === 0 && lessonContentCreated && !!audit?.is_complete,
       draft_id: data.draft_id,
       lesson_id: lessonId,
       codigo_bncc: codigoBncc,
@@ -123,6 +138,8 @@ export const publishLessonDraft = createServerFn({ method: "POST" })
       empty_tables,
       duration_ms: Date.now() - started,
       errors,
+      audit,
+      is_complete: !!audit?.is_complete,
     };
   });
 

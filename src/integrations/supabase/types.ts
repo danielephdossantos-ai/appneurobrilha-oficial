@@ -2759,6 +2759,8 @@ export type Database = {
           ano: string
           atividade_guiada: Json
           atividade_pratica: Json
+          audit_report: Json
+          audited_at: string | null
           codigo_bncc: string
           contextualizacao: string
           created_at: string
@@ -2772,7 +2774,9 @@ export type Database = {
           id: string
           imagem: string
           introducao: string
+          is_complete: boolean
           materiais: Json
+          missing_sections: string[]
           nivel: string
           objetivo: string
           palavras_chave: Json
@@ -2793,6 +2797,8 @@ export type Database = {
           ano: string
           atividade_guiada: Json
           atividade_pratica: Json
+          audit_report?: Json
+          audited_at?: string | null
           codigo_bncc: string
           contextualizacao: string
           created_at?: string
@@ -2806,7 +2812,9 @@ export type Database = {
           id?: string
           imagem: string
           introducao: string
+          is_complete?: boolean
           materiais: Json
+          missing_sections?: string[]
           nivel: string
           objetivo: string
           palavras_chave: Json
@@ -2827,6 +2835,8 @@ export type Database = {
           ano?: string
           atividade_guiada?: Json
           atividade_pratica?: Json
+          audit_report?: Json
+          audited_at?: string | null
           codigo_bncc?: string
           contextualizacao?: string
           created_at?: string
@@ -2840,7 +2850,9 @@ export type Database = {
           id?: string
           imagem?: string
           introducao?: string
+          is_complete?: boolean
           materiais?: Json
+          missing_sections?: string[]
           nivel?: string
           objetivo?: string
           palavras_chave?: Json
