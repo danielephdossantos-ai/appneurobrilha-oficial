@@ -29,7 +29,7 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-// Jornada 365 = BNCC puro. Escola Brilha foi removida; aulas antigas não abrem mais player legado.
+// Jornada 365 = BNCC puro.
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
@@ -76,7 +76,7 @@ export function AulaDeHoje({ childId }: { childId: string }) {
     );
   }
 
-  async function iniciarBloco(bloco: AtividadeBloco) {
+  async function iniciarBloco() {
     if (!aula) return;
     if (aula.status === "disponivel") {
       await supabase
@@ -131,7 +131,7 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         {aula.atividades.map((b, i) => (
           <button
             key={i}
-            onClick={() => iniciarBloco(b)}
+            onClick={() => iniciarBloco()}
             disabled={isConcluida}
             className={cn(
               "w-full rounded-2xl p-3 flex items-center gap-3 border-2 text-left transition-all",
