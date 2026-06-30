@@ -21,6 +21,23 @@ const SECTION_KEYS = [
   "explicacoes_extra","revisao",
 ];
 
+function jsonResponse(body: Record<string, unknown>, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
+function parseRetryAfterMs(raw: string, fallbackMs = 8000) {
+  const match = raw.match(/try again in\s+([\d.]+)s/i);
+  if (!match) return fallbackMs;
+  return Math.max(Math.ceil(Number(match[1]) * 1000) + 1200, fallbackMs);
+}
+
+function safeErrorMessage(error: unknown) {
+  return String((error as Error)?.message ?? error);
+}
+
 function buildPrompt(h: any) {
   const ano = h.ano || "ano não informado";
   const disc = h.disciplina || "disciplina não informada";
@@ -75,8 +92,7 @@ serve(async (req) => {
       .eq("codigo_bncc", codigo_bncc)
       .eq("status", "pending")
       .maybeSingle();
-    if (existing) return new Response(JSON.stringify({ skipped: true, reason: "draft_exists" }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    if (existing) return jsonResponse({ ok: true, skipped: true, reason: "draft_exists" });
 
     const { data: hab, error: hErr } = await supabase
       .from("bncc_habilidades")
@@ -90,7 +106,8 @@ serve(async (req) => {
       headers: { Authorization: `Bearer ${GROQ_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
-        temperature: 0.7,
+        temperature: 0.55,
+        max_tokens: 2200,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: "Você gera aulas escolares completas em JSON estrito conforme o esquema solicitado." },
@@ -98,7 +115,25 @@ serve(async (req) => {
         ],
       }),
     });
-    if (!r.ok) throw new Error(`Groq ${r.status}: ${await r.text()}`);
+    if (!r.ok) {
+      const errorText = await r.text();
+      console.error("Groq API error:", r.status, errorText);
+      if (r.status === 429 || errorText.toLowerCase().includes("rate limit")) {
+        return jsonResponse({
+          ok: false,
+          retryable: true,
+          errorType: "RATE_LIMIT",
+          retryAfterMs: parseRetryAfterMs(errorText),
+          error: "Limite temporário do Groq. O gerador vai esperar e tentar de novo.",
+        });
+      }
+      return jsonResponse({
+        ok: false,
+        retryable: r.status >= 500,
+        errorType: r.status >= 500 ? "SERVICE_UNAVAILABLE" : "GROQ_ERROR",
+        error: `Falha no Groq (${r.status}).`,
+      }, r.status >= 500 ? 200 : 400);
+    }
     const out = await r.json();
     const content = out?.choices?.[0]?.message?.content;
     if (!content) throw new Error("Groq vazio");
@@ -119,10 +154,9 @@ serve(async (req) => {
     });
     if (insErr) throw new Error("Insert: " + insErr.message);
 
-    return new Response(JSON.stringify({ ok: true, codigo_bncc, tokens: out?.usage?.total_tokens ?? 0 }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return jsonResponse({ ok: true, codigo_bncc, tokens: out?.usage?.total_tokens ?? 0 });
   } catch (e) {
-    return new Response(JSON.stringify({ ok: false, error: String((e as Error).message ?? e) }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    console.error("generate-lesson-draft error:", e);
+    return jsonResponse({ ok: false, retryable: false, errorType: "FUNCTION_ERROR", error: safeErrorMessage(e) });
   }
 });
