@@ -111,9 +111,9 @@ function GerarAulasGroq() {
 
   return (
     <div className="container mx-auto p-6 space-y-6 max-w-5xl">
-      <h1 className="text-2xl font-bold">Gerador de Aulas — Groq (lote)</h1>
+      <h1 className="text-2xl font-bold">Gerador de Aulas — Groq ou Sem Groq</h1>
       <p className="text-sm text-muted-foreground">
-        Gera aulas inéditas via Groq (llama-3.3-70b) e salva em <code>lesson_drafts</code> como <b>pending</b>.
+        Gera rascunhos de aulas por Groq ou pelo modelo pedagógico local e salva em <code>lesson_drafts</code> como <b>pending</b>.
         Use <code>/admin/publish-batch</code> depois para publicar.
       </p>
 
