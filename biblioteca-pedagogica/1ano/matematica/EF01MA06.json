@@ -1,0 +1,38 @@
+{
+  "codigo_bncc": "EF01MA06",
+  "ano": "1º Ano",
+  "disciplina": "Matemática",
+  "titulo": "Juntando e tirando: as primeiras continhas",
+  "objetivo": "Construir fatos básicos de adição e subtração com números pequenos, em situações de juntar, acrescentar, separar e retirar quantidades.",
+  "introducao": "Você tem 3 carrinhos e seu primo te dá mais 2. Quantos ficaram na sua mão? E se um caiu e rolou para baixo do sofá, quantos sobraram? Essas perguntas a gente responde com duas mágicas chamadas 'mais' e 'menos'.",
+  "explicacao": "Adicionar (+) é juntar ou acrescentar quantidades para descobrir um total maior. Subtrair (−) é separar ou tirar uma parte para descobrir quanto sobrou. Para resolver, podemos usar os dedos, desenhar bolinhas ou contar de cabeça com os fatos que já sabemos.",
+  "exemplo": "Adição: 3 carrinhos + 2 carrinhos = 5 carrinhos. Junte os grupos e conte tudo. Subtração: tinha 5 balas, comi 2, sobraram 3 (5 − 2 = 3). Desenhe 5 bolinhas, risque 2 e conte as que ficaram inteiras.",
+  "exemplo_cotidiano": "Na hora do lanche: a mamãe te deu 4 bolachas. Você comeu 1. Quantas sobraram? 4 − 1 = 3. Depois ela te deu mais 2. Quantas você tem agora? 3 + 2 = 5. A gente faz continhas o dia inteiro sem perceber.",
+  "pratica_guiada": "Pegue 6 botões e separe em dois grupinhos: 4 e 2. Pergunte: 'Quantos botões tem ao todo?' Junte e conte (6). Agora tire 3 botões da mesa e pergunte: 'Quantos sobraram?' (3). Repita com 5 e 3, depois 7 e 4.",
+  "pratica_independente": "Desenhe 5 estrelinhas em uma folha. Pinte 2 de amarelo e 3 de azul. Escreva embaixo: 2 + 3 = 5. Depois apague 1 estrelinha azul e escreva: 5 − 1 = 4. Mostre para alguém da família.",
+  "curiosidade": "O sinal de mais (+) foi inventado há mais de 500 anos para representar a palavra latina 'et', que quer dizer 'e'. Por isso ele junta. O sinal de menos (−) é só um risco e veio para mostrar que algo foi 'cortado'.",
+  "desafio": "Pegue uma caixa com até 10 lápis. Tire alguns sem olhar e veja quantos sobraram. Faça a conta de cabeça: quantos eu tirei? Confira contando. Repita 3 vezes.",
+  "resumo": "Mais (+) serve para juntar e descobrir o total. Menos (−) serve para tirar e descobrir o que sobrou. Dá para resolver desenhando, usando os dedos ou guardando os fatos básicos na cabeça.",
+  "revisao": "Lembrete: juntar = +; tirar = −; resultado da soma chama-se total; resultado da subtração chama-se sobra (ou diferença).",
+  "quiz": [
+    {
+      "pergunta": "Tenho 2 balões e ganho mais 3. Com quantos fico?",
+      "opcoes": ["4", "5", "6"],
+      "resposta_correta": 1,
+      "explicacao": "Juntando 2 + 3 = 5 balões."
+    },
+    {
+      "pergunta": "Eu tinha 7 figurinhas e dei 2 ao meu amigo. Quantas sobraram?",
+      "opcoes": ["3", "5", "9"],
+      "resposta_correta": 1,
+      "explicacao": "Tirando: 7 − 2 = 5 figurinhas sobraram."
+    },
+    {
+      "pergunta": "O sinal + serve para:",
+      "opcoes": ["Tirar quantidades", "Juntar quantidades", "Comparar tamanhos"],
+      "resposta_correta": 1,
+      "explicacao": "O sinal + significa juntar ou acrescentar para achar o total."
+    }
+  ],
+  "resultado": "Muito bem! Você já sabe juntar e tirar quantidades pequenas. Essa é a base de toda a matemática que vem pela frente — continue treinando com objetos do dia a dia."
+}
