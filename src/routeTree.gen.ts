@@ -52,6 +52,7 @@ import { Route as AdminPublishBatchRouteImport } from './routes/admin.publish-ba
 import { Route as AdminProducaoBibliotecaRouteImport } from './routes/admin.producao-biblioteca'
 import { Route as AdminImportLessonsRouteImport } from './routes/admin.import-lessons'
 import { Route as AdminImportBibliotecaRouteImport } from './routes/admin.import-biblioteca'
+import { Route as AdminGerarAulasGroqRouteImport } from './routes/admin.gerar-aulas-groq'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
@@ -272,6 +273,11 @@ const AdminImportBibliotecaRoute = AdminImportBibliotecaRouteImport.update({
   path: '/import-biblioteca',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminGerarAulasGroqRoute = AdminGerarAulasGroqRouteImport.update({
+  id: '/gerar-aulas-groq',
+  path: '/gerar-aulas-groq',
+  getParentRoute: () => AdminRoute,
+} as any)
 const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
   id: '/db/$aulaId',
   path: '/db/$aulaId',
@@ -321,6 +327,7 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
@@ -368,6 +375,7 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
@@ -417,6 +425,7 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
@@ -467,6 +476,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/gerar-aulas-groq'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/admin/producao-biblioteca'
@@ -514,6 +524,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/gerar-aulas-groq'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/admin/producao-biblioteca'
@@ -562,6 +573,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/gerar-aulas-groq'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/admin/producao-biblioteca'
@@ -920,6 +932,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminImportBibliotecaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/gerar-aulas-groq': {
+      id: '/admin/gerar-aulas-groq'
+      path: '/gerar-aulas-groq'
+      fullPath: '/admin/gerar-aulas-groq'
+      preLoaderRoute: typeof AdminGerarAulasGroqRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/escola-brilha/db/$aulaId': {
       id: '/escola-brilha/db/$aulaId'
       path: '/db/$aulaId'
@@ -945,6 +964,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminGerarAulasGroqRoute: typeof AdminGerarAulasGroqRoute
   AdminImportBibliotecaRoute: typeof AdminImportBibliotecaRoute
   AdminImportLessonsRoute: typeof AdminImportLessonsRoute
   AdminProducaoBibliotecaRoute: typeof AdminProducaoBibliotecaRoute
@@ -952,6 +972,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminGerarAulasGroqRoute: AdminGerarAulasGroqRoute,
   AdminImportBibliotecaRoute: AdminImportBibliotecaRoute,
   AdminImportLessonsRoute: AdminImportLessonsRoute,
   AdminProducaoBibliotecaRoute: AdminProducaoBibliotecaRoute,
