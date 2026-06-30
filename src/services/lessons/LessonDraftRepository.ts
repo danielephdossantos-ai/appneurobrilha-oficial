@@ -108,7 +108,7 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
         ...row.payload,
         _meta: {
           ...(row.payload && typeof row.payload === "object"
-            ? ((row.payload as Record<string, unknown>)._meta ?? {})
+            ? ((row.payload as unknown as Record<string, unknown>)._meta ?? {})
             : {}),
           version,
           author: context.userId,
