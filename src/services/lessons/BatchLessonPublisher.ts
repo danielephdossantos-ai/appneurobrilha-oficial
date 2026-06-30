@@ -118,12 +118,26 @@ export const publishPendingLessonDrafts = createServerFn({ method: "POST" })
             }
           }
 
+          // Auditoria automática pós-publicação desta aula.
+          let audit: PublishAuditReport | null = null;
+          if (codigo) {
+            try {
+              audit = await auditPublishedLesson(client, codigo);
+            } catch (e) {
+              const msg = e instanceof Error ? e.message : String(e);
+              errors.push({ draft_id: draftId, message: `audit: ${msg}` });
+            }
+          }
+
           items.push({
             draft_id: draftId,
             ok: true,
             lesson_id: lessonId,
             codigo_bncc: codigo,
             error: null,
+            is_complete: !!audit?.is_complete,
+            missing_sections: audit?.missing_sections ?? [],
+            audit,
           });
         } catch (e) {
           const msg = e instanceof Error ? e.message : String(e);
@@ -134,6 +148,9 @@ export const publishPendingLessonDrafts = createServerFn({ method: "POST" })
             lesson_id: null,
             codigo_bncc: null,
             error: msg,
+            is_complete: false,
+            missing_sections: [],
+            audit: null,
           });
           // continua o loop — próximo draft
         }
@@ -144,12 +161,18 @@ export const publishPendingLessonDrafts = createServerFn({ method: "POST" })
 
     const published = items.filter((i) => i.ok).length;
     const failed = items.length - published;
+    const incomplete = items.filter((i) => i.ok && !i.is_complete).length;
+    const codigosIncompletos = items
+      .filter((i) => i.ok && !i.is_complete && i.codigo_bncc)
+      .map((i) => i.codigo_bncc as string);
 
     return {
       total: items.length,
       published,
       failed,
+      incomplete,
       codigos_bncc_publicados: Array.from(codigosPublicados),
+      codigos_bncc_incompletos: codigosIncompletos,
       tabelas_preenchidas: tabelasPreenchidas,
       duration_ms: Date.now() - started,
       items,
