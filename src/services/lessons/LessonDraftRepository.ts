@@ -52,15 +52,6 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
     DraftPayloadValidator.assert(row);
 
     // 3. Garantir status pendente, independente do que veio do builder
-    const insertRow = {
-      codigo_bncc: row.codigo_bncc,
-      ano: row.ano ?? null,
-      disciplina: row.disciplina ?? null,
-      titulo: row.titulo ?? null,
-      payload: row.payload,
-      status: "pending" as const,
-      created_by: context.userId,
-    };
 
     // Conexão direta com Postgres (Drizzle pool) — server-only.
     // Auth já foi validada pelo middleware acima.
