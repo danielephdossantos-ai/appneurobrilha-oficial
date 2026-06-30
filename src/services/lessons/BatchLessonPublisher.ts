@@ -33,13 +33,18 @@ export interface BatchItemResult {
   lesson_id: string | null;
   codigo_bncc: string | null;
   error: string | null;
+  is_complete: boolean;
+  missing_sections: string[];
+  audit: PublishAuditReport | null;
 }
 
 export interface BatchPublishReport {
   total: number;
   published: number;
   failed: number;
+  incomplete: number;
   codigos_bncc_publicados: string[];
+  codigos_bncc_incompletos: string[];
   tabelas_preenchidas: Record<string, number>;
   duration_ms: number;
   items: BatchItemResult[];
