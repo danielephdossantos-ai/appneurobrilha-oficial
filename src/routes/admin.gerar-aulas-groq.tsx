@@ -27,7 +27,8 @@ function GerarAulasGroq() {
   const [filterAno, setFilterAno] = useState<string>("");
   const [filterDisc, setFilterDisc] = useState<string>("");
   const [delayMs, setDelayMs] = useState(7000);
-  const [mode, setMode] = useState<GenerationMode>("auto");
+  const [mode, setMode] = useState<GenerationMode>("local");
+  const [autoPublish, setAutoPublish] = useState(true);
   const stopRef = useRef(false);
 
   useEffect(() => { void load(); }, []);
