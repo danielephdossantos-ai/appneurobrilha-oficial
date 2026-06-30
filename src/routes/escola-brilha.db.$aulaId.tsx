@@ -98,19 +98,6 @@ function AulaDbPage() {
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
 
-    // Preferência absoluta: se a aula existir em `lesson_content` (nova
-    // arquitetura), renderiza via Fund2Player consumindo LessonV2.
-    // Não altera a UI — apenas troca a fonte de dados quando disponível.
-    if (fund2Lesson) {
-      return (
-        <Fund2Player
-          lesson={fund2Lesson}
-          currentRef={ref}
-          capitulo={aula.codigo_bncc}
-        />
-      );
-    }
-
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
       const kidsList = getKidsLessons(aula.codigo_bncc);
