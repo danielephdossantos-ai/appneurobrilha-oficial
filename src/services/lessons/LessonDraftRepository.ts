@@ -62,7 +62,10 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
       created_by: context.userId,
     };
 
-    const { supabase } = context;
+    // Server-side client (service role) — auth já validada pelo middleware.
+    // Mantemos created_by = userId para auditoria.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabase = supabaseAdmin;
 
     // 4. INSERT atômico. Em caso de erro, lançamos -> nada é persistido,
     //    nada é aprovado, nada é publicado.
