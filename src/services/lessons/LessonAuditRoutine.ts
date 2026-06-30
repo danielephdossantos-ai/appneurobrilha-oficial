@@ -118,7 +118,7 @@ async function auditOne(lesson: {
       is_complete: isComplete,
       missing_sections: missing,
       audited_at: auditedAt,
-      audit_report: entry as unknown as Record<string, unknown>,
+      audit_report: JSON.parse(JSON.stringify(entry)),
     })
     .eq("id", lesson.id);
 
