@@ -3564,6 +3564,78 @@ export type Database = {
           },
         ]
       }
+      lesson_versions: {
+        Row: {
+          ano: string | null
+          author: string | null
+          change_reason: string | null
+          codigo_bncc: string
+          created_at: string
+          disciplina: string | null
+          draft_id: string | null
+          id: string
+          is_current: boolean
+          lesson_id: string | null
+          payload: Json
+          published_at: string
+          reviewer: string | null
+          titulo: string | null
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          ano?: string | null
+          author?: string | null
+          change_reason?: string | null
+          codigo_bncc: string
+          created_at?: string
+          disciplina?: string | null
+          draft_id?: string | null
+          id?: string
+          is_current?: boolean
+          lesson_id?: string | null
+          payload: Json
+          published_at?: string
+          reviewer?: string | null
+          titulo?: string | null
+          updated_at?: string
+          version: number
+        }
+        Update: {
+          ano?: string | null
+          author?: string | null
+          change_reason?: string | null
+          codigo_bncc?: string
+          created_at?: string
+          disciplina?: string | null
+          draft_id?: string | null
+          id?: string
+          is_current?: boolean
+          lesson_id?: string | null
+          payload?: Json
+          published_at?: string
+          reviewer?: string | null
+          titulo?: string | null
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_versions_draft_id_fkey"
+            columns: ["draft_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_drafts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_versions_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lessons: {
         Row: {
           bncc_field: string | null
@@ -6667,8 +6739,20 @@ export type Database = {
         }
         Returns: boolean
       }
+      publish_lesson_with_version: {
+        Args: { _change_reason?: string; _draft_id: string }
+        Returns: {
+          lesson_id: string
+          version: number
+          version_id: string
+        }[]
+      }
       rb_etapas_faltantes: { Args: { _aula_id: string }; Returns: string[] }
       reset_daily_coins: { Args: never; Returns: undefined }
+      restore_lesson_version: {
+        Args: { _change_reason?: string; _version_id: string }
+        Returns: string
+      }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
     }
