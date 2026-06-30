@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAppState, type Diagnostico } from "@/core/store";
@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { BarChart3, BookOpen, ClipboardCheck, Rocket, Shield, Sparkles, UploadCloud, Users, WandSparkles } from "lucide-react";
+import { Shield, Sparkles, Users } from "lucide-react";
 import { diagnosticoToNeuroProfile, NEURO_PROFILE_LABEL } from "@/lib/neuro-profile";
 
 export const Route = createFileRoute("/admin/")({
@@ -29,46 +29,6 @@ const DEMO_PROFILES: DemoProfile[] = [
   { diagnostico: "dislexia", emoji: "📖", nome: "Dislexia", resumo: "Consciência fonológica, sílabas separadas, tempo extra.", cor: "from-violet-400 to-fuchsia-500" },
 ];
 
-const LESSONS = [
-  { id: "vogais-1ano", titulo: "Vogais", codigo: "EF01LP04" },
-  { id: "alfabeto-1ano", titulo: "Alfabeto", codigo: "EF01LP01" },
-  { id: "rimas-1ano", titulo: "Rimas", codigo: "EF01LP09" },
-  { id: "silabas-1ano", titulo: "Sílabas", codigo: "EF01LP06" },
-];
-
-const ADMIN_TOOLS = [
-  {
-    title: "Gerar Aulas Groq",
-    description: "Cria aulas reais em lote e salva como rascunho para revisão.",
-    to: "/admin/gerar-aulas-groq" as const,
-    icon: WandSparkles,
-    badge: "Novo",
-  },
-  {
-    title: "Produção da Biblioteca",
-    description: "Acompanha cada habilidade: não iniciada, revisão ou publicada.",
-    to: "/admin/producao-biblioteca" as const,
-    icon: BarChart3,
-  },
-  {
-    title: "Publicar em Lote",
-    description: "Publica os rascunhos pendentes aprovados no sistema de aulas.",
-    to: "/admin/publish-batch" as const,
-    icon: Rocket,
-  },
-  {
-    title: "Importar Biblioteca",
-    description: "Lê os JSONs da biblioteca pedagógica e importa os válidos.",
-    to: "/admin/import-biblioteca" as const,
-    icon: UploadCloud,
-  },
-  {
-    title: "Importar JSON",
-    description: "Envia arquivos JSON manualmente para lesson_drafts.",
-    to: "/admin/import-lessons" as const,
-    icon: ClipboardCheck,
-  },
-];
 
 function AdminPage() {
   const { children, activeChild, setActiveChild } = useAppState();
@@ -129,34 +89,6 @@ function AdminPage() {
           </div>
         </header>
 
-        <section>
-          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <Sparkles className="w-5 h-5" /> Ferramentas da biblioteca de aulas
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {ADMIN_TOOLS.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <Link key={tool.to} to={tool.to} className="block h-full">
-                  <Card className="h-full hover:shadow-md transition cursor-pointer border-primary/10">
-                    <CardContent className="p-4 space-y-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="w-10 h-10 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        {tool.badge && <Badge>{tool.badge}</Badge>}
-                      </div>
-                      <div>
-                        <div className="font-semibold">{tool.title}</div>
-                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{tool.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
 
         <Card className="border-primary/30 bg-primary/5">
           <CardHeader>
@@ -218,23 +150,6 @@ function AdminPage() {
           </Card>
         )}
 
-        <section>
-          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <BookOpen className="w-5 h-5" /> Abrir aulas adaptadas (1º Ano LP)
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {LESSONS.map((l) => (
-              <Link key={l.id} to="/escola-brilha/aula" search={{ category: l.id, type: "activity" }} className="block">
-                <Card className="hover:shadow-md transition cursor-pointer h-full">
-                  <CardContent className="p-4 text-center">
-                    <div className="font-semibold">{l.titulo}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{l.codigo}</div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export const Route = createFileRoute("/rotina")({
 
 const itens = [
   { h: "07:00", t: "Acordar e tomar café", e: Sun, cat: "casa" },
-  { h: "08:30", t: "Escola Brilha · Português", e: GraduationCap, cat: "estudo" },
+  { h: "08:30", t: "Estudo guiado · Português", e: GraduationCap, cat: "estudo" },
   { h: "10:00", t: "Lanchinho", e: Apple, cat: "casa" },
   { h: "10:30", t: "Neuro-Treino · Respiração", e: Flower, cat: "terapia" },
   { h: "11:00", t: "Matemática divertida", e: Calculator, cat: "estudo" },

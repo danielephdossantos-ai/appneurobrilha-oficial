@@ -1,7 +1,7 @@
 /**
  * LessonSelector — escolhe QUAIS códigos BNCC devem ser exibidos.
  *
- * Arquitetura compartilhada por Escola Brilha e Reforço Brilha:
+ * Arquitetura compartilhada para seleção de aulas:
  *   1. Selector decide a lista de códigos BNCC (este arquivo).
  *   2. PedagogicalRepository / LessonService carrega a aula do banco.
  *   3. Renderer apenas exibe (sem inventar texto).

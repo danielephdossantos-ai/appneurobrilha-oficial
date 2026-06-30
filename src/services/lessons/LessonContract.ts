@@ -1,7 +1,7 @@
 /**
  * LessonContract
  * ------------------------------------------------------------------
- * Contrato pedagógico ÚNICO para todas as aulas do Escola Brilha.
+ * Contrato pedagógico reutilizável para aulas.
  *
  * Toda aula salva no sistema deve seguir EXATAMENTE estas 17 seções
  * obrigatórias. Este módulo é a fonte da verdade compartilhada por:

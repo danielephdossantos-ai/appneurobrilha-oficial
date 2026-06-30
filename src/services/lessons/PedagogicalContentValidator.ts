@@ -39,7 +39,7 @@ const isNonEmptyObject = (v: unknown): boolean =>
   Object.keys(v as Record<string, unknown>).length > 0;
 
 /**
- * Seções pedagógicas exigidas pela política do Escola Brilha.
+ * Seções pedagógicas exigidas pela política de aulas.
  * Cada checagem é independente — uma falha não interrompe as outras.
  */
 export const PEDAGOGICAL_CHECKS: readonly PedagogicalCheck[] = [

@@ -4,7 +4,6 @@ import { GraduationCap, Loader2 } from "lucide-react";
 import { explicarErroAtividade } from "@/lib/groq-professor.functions";
 
 type Modulo =
-  | "escola-brilha"
   | "reforco-brilha"
   | "jornada-365"
   | "missao-prova"

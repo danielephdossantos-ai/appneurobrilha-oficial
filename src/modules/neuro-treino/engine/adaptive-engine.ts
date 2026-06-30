@@ -1,4 +1,4 @@
-// PedagogyEngine import removed during Escola Brilha rebuild
+// PedagogyEngine import removed during pedagogical cleanup
 import { EmotionalEngine } from "@/engines/regulation-engine/emotional-engine";
 import { AdaptiveEngine as LegacyAdaptiveEngine } from "@/engines/adaptive-engine/engine";
 
