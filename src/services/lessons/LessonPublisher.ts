@@ -128,6 +128,7 @@ export const publishLessonDraft = createServerFn({ method: "POST" })
 
 export const LessonPublisher = {
   publish: (draft_id: string) => publishLessonDraft({ data: { draft_id } }),
+  contract: LESSON_CONTRACT,
 };
 
 export default LessonPublisher;
