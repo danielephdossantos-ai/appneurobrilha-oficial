@@ -7,18 +7,20 @@ const router = getRouter();
 function App() {
   useEffect(() => {
     // Limpeza de cache solicitada para reconstrução do Escola Brilha
-    const CACHE_VERSION = "2.2.0-remove-escola-brilha-aula";
+    const CACHE_VERSION = "2.3.0-escola-brilha-db-lessons";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
-      console.log("Limpando cache (Escola Brilha-Aula removida do Neuro Treino)...");
+      console.log("Limpando cache para carregar aulas publicadas da Escola Brilha...");
       Object.keys(localStorage).forEach((key) => {
         if (
           key.startsWith("neurobrilha:") ||
           key.startsWith("pip:") ||
           key.toLowerCase().includes("libras") ||
           key.toLowerCase().includes("escola-brilha-aula") ||
-          key.toLowerCase().includes("aulas_bncc")
+          key.toLowerCase().includes("aulas_bncc") ||
+          key.startsWith("lc:v1:") ||
+          key.startsWith("lc:v2:")
         ) {
           localStorage.removeItem(key);
         }

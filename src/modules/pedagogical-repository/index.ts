@@ -31,7 +31,7 @@ export {
 // revalidamos contra o banco (stale-while-revalidate). NUNCA regeneramos
 // aula — se o banco devolver null, o cache local é invalidado.
 
-const CACHE_PREFIX = "lc:v1:";
+const CACHE_PREFIX = "lc:v2:";
 const CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 dias
 
 const cache = new Map<string, LessonContent | null>();

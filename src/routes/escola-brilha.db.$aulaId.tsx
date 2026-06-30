@@ -6,11 +6,13 @@ import { ActivityPlayer } from "../modules/escola-brilha/views/ActivityPlayer";
 import { Fund2Player } from "../modules/escola-brilha/views/Fund2Player";
 import { ActivityPlayerC } from "../modules/escola-brilha/views/ActivityPlayerC";
 import { KidsLessonPlayer } from "../modules/escola-brilha/views/KidsLessonPlayer";
+import { LessonContentPlayer } from "../modules/escola-brilha/views/LessonContentPlayer";
 import { normalizeLessonC } from "../modules/escola-brilha/utils/normalizeLessonC";
 import { getKidsLessons } from "../modules/escola-brilha/data/kids-lessons-1ano";
 import { getActivityLesson3a5 } from "../modules/escola-brilha/data/activity-lessons-3ano-mat";
 
 import { useLessonV2 } from "../modules/escola-brilha/engine/pedagogical-library";
+import { useLessonByBNCC } from "../modules/pedagogical-repository";
 import type { KidsLesson } from "../modules/escola-brilha/types/kids-lesson";
 import { NextLessonCTA } from "../modules/escola-brilha/components/NextLessonCTA";
 
@@ -60,6 +62,9 @@ function AulaDbPage() {
   const [levelIdx, setLevelIdx] = React.useState<number | null>(null);
   const navigate = useNavigate();
   const { aula, loading, error } = useAulaBnccById(aulaId);
+  const { lesson: publishedLesson, loading: loadingPublishedLesson } = useLessonByBNCC(
+    aula?.codigo_bncc ?? "",
+  );
   const fund2Lesson = useLessonV2(
     aula?.codigo_bncc ?? "",
     aula?.titulo ?? "",
@@ -93,10 +98,25 @@ function AulaDbPage() {
   const hasKidsLesson = KIDS_GRADES.has(aula.serie) && getKidsLessons(aula.codigo_bncc).length > 0;
   // Players premium (Fund2, 3-5 ano, Kids) já têm botão "Próxima atividade" inline.
   // Só mostramos o CTA flutuante para players legacy que não possuem.
-  const hasInlineNext = hasKidsLesson || AL_GRADES.has(aula.serie) || FUND2_GRADES.has(aula.serie);
+  const hasInlineNext = Boolean(publishedLesson) || hasKidsLesson || AL_GRADES.has(aula.serie) || FUND2_GRADES.has(aula.serie);
 
   const renderPlayer = () => {
     const ref = { kind: "db" as const, id: aulaId };
+
+    // Fonte principal e obrigatória da Escola Brilha: aula publicada no banco
+    // (`lesson_content`). Isso impede que 1º–5º ano caiam nos players antigos
+    // com textos locais como "Tipos de texto — Nível 1".
+    if (publishedLesson) {
+      return <LessonContentPlayer lesson={publishedLesson} currentRef={ref} />;
+    }
+
+    if (loadingPublishedLesson) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+          <p className="text-lg font-bold">Carregando aula publicada…</p>
+        </div>
+      );
+    }
 
     // 1º–3º Ano: se houver conteúdo Kids para o código, usa o player visual.
     if (KIDS_GRADES.has(aula.serie)) {
