@@ -6,7 +6,6 @@ import ReactMarkdown from "react-markdown";
 import { askProfessorBrilho } from "@/lib/groq-professor.functions";
 
 type Modulo =
-  | "escola-brilha"
   | "reforco-brilha"
   | "jornada-365"
   | "missao-prova"
@@ -21,7 +20,6 @@ interface Props {
 }
 
 const MODULE_LABEL: Record<Modulo, string> = {
-  "escola-brilha": "Escola Brilha",
   "reforco-brilha": "Reforço Brilho",
   "jornada-365": "Jornada 365",
   "missao-prova": "Missão Prova",
