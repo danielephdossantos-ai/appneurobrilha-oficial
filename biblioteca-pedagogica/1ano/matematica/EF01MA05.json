@@ -1,0 +1,38 @@
+{
+  "codigo_bncc": "EF01MA05",
+  "ano": "1º Ano",
+  "disciplina": "Matemática",
+  "titulo": "Cada número tem seu lugar",
+  "objetivo": "Comparar números naturais de até duas ordens, descobrindo qual é maior, menor ou se são iguais, usando a sequência numérica e a posição dos algarismos.",
+  "introducao": "Se eu te dou 7 balas e seu amigo recebe 12, quem ganhou mais? Para responder, a gente precisa comparar os números. Hoje vamos aprender truques para saber rapidinho qual número é maior e qual é menor.",
+  "explicacao": "Para comparar dois números, primeiro olhamos quantos algarismos (carinhas) cada um tem. Um número com 2 algarismos é sempre maior que um número com 1 algarismo. Quando os dois têm 2 algarismos, comparamos o da frente (das dezenas): quem tem o maior na frente ganha. Se forem iguais na frente, olhamos o de trás (das unidades).",
+  "exemplo": "Comparando 7 e 12: o 7 tem só uma carinha, o 12 tem duas. Então 12 é maior. Comparando 23 e 28: os dois têm duas carinhas e começam com 2. Olhamos o de trás: 3 e 8. Como 8 é maior, então 28 é maior que 23.",
+  "exemplo_cotidiano": "Na fila do recreio, a gente sabe quem chegou primeiro pelo número da senha. Se você pegou 9 e seu amigo pegou 15, ele chegou depois. O número maior chegou depois na fila.",
+  "pratica_guiada": "Escreva em pedaços de papel os números 5, 9, 14, 21 e 21. Junto com a criança, coloque em ordem do menor para o maior. Pergunte qual estratégia ela usou. Mostre os dois 21 e pergunte: 'O que dizemos quando dois números são iguais?' (Resposta: são iguais.)",
+  "pratica_independente": "Procure dois objetos com números em casa (idade dos familiares, número do calçado, página de um livro). Anote os dois números e desenhe uma seta apontando para o maior. Se forem iguais, desenhe um sinal de igual (=).",
+  "curiosidade": "Os sinais > (maior) e < (menor) parecem uma boquinha que sempre quer 'comer' o número maior. A pontinha fechada aponta para o menor. Muitas crianças aprendem assim e nunca mais esquecem.",
+  "desafio": "Peça para alguém da família dizer dois números entre 1 e 30. Repita o número maior em voz alta e depois o menor. Faça isso com 5 pares de números diferentes.",
+  "resumo": "Para comparar números: primeiro veja quantos algarismos cada um tem. Mais algarismos = maior. Se tiverem a mesma quantidade, compare da frente para trás. Iguais é quando os dois têm exatamente o mesmo valor.",
+  "revisao": "Recapitulando: 1 algarismo perde para 2 algarismos. Em números de 2 algarismos, ganha quem tem o maior na frente. Empate na frente? Decide o de trás. Tudo igual? São iguais.",
+  "quiz": [
+    {
+      "pergunta": "Qual é maior: 8 ou 13?",
+      "opcoes": ["8", "13", "São iguais"],
+      "resposta_correta": 1,
+      "explicacao": "13 tem duas carinhas (algarismos) e 8 tem só uma, então 13 é maior."
+    },
+    {
+      "pergunta": "Qual é maior: 26 ou 24?",
+      "opcoes": ["26", "24", "São iguais"],
+      "resposta_correta": 0,
+      "explicacao": "Os dois começam com 2, então olhamos o de trás: 6 é maior que 4. Portanto 26 é maior."
+    },
+    {
+      "pergunta": "Comparando 15 e 15, podemos dizer que:",
+      "opcoes": ["15 é maior", "São iguais", "15 é menor"],
+      "resposta_correta": 1,
+      "explicacao": "Quando os dois números têm exatamente o mesmo valor, eles são iguais."
+    }
+  ],
+  "resultado": "Arrasou! Agora você compara qualquer número de até duas carinhas: sabe quem é o maior, quem é o menor e quando são iguais. Esse truque vai ajudar muito em jogos, compras e brincadeiras."
+}
