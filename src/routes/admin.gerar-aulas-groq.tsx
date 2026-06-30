@@ -161,8 +161,12 @@ function GerarAulasGroq() {
             <option value="groq">Somente Groq</option>
           </select>
           <p className="text-xs text-muted-foreground">
-            Use “Sem Groq” para continuar criando rascunhos agora, sem depender do limite diário da API.
+            Use "Sem Groq" para continuar criando rascunhos agora, sem depender do limite diário da API.
           </p>
+          <label className="flex items-center gap-2 text-sm pt-2 border-t">
+            <input type="checkbox" checked={autoPublish} onChange={(e) => setAutoPublish(e.target.checked)} disabled={running} />
+            <span>Publicar automaticamente cada rascunho após gerar (executa <code>approve_lesson_draft</code>)</span>
+          </label>
         </div>
         {running && (
           <div className="space-y-1">
