@@ -13,6 +13,7 @@
 
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { auditPublishedLesson, type PublishAuditReport } from "./PublishAuditor";
 
 const CHILD_TABLES = [
   "lesson_examples",
