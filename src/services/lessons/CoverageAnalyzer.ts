@@ -2,11 +2,7 @@
  * CoverageAnalyzer
  *
  * Compara BNCC × LessonBlueprint × lesson_drafts × lesson_content e gera
- * um relatório de cobertura pedagógica.
- *
- * Filtros suportados: etapa, ano, disciplina, área.
- *
- * Não escreve no banco. Apenas leitura.
+ * relatório de cobertura pedagógica. Apenas leitura.
  */
 
 import { supabase } from "@/integrations/supabase/client";
@@ -16,7 +12,7 @@ export interface CoverageFilters {
   etapa?: string;        // EI | EF | EM
   ano?: string;          // ex.: "1º Ano"
   disciplina?: string;   // ex.: "Matemática"
-  area?: string;         // ex.: "Matemática"
+  area?: string;         // mapeada a partir de disciplina
 }
 
 export interface CoverageSegmentReport {
@@ -27,7 +23,7 @@ export interface CoverageSegmentReport {
   publicadas: number;
   pendentes: number;
   sem_conteudo: number;
-  percentual_cobertura: number; // publicadas / total
+  percentual_cobertura: number;
 }
 
 export interface CoverageReport {
@@ -47,11 +43,35 @@ export interface CoverageReport {
 }
 
 interface HabilidadeRow {
-  codigo: string;
-  etapa: string | null;
+  codigo_bncc: string;
   ano: string | null;
   disciplina: string | null;
-  area: string | null;
+}
+
+const AREA_BY_DISCIPLINA: Record<string, string> = {
+  "Matemática": "Matemática",
+  "Português": "Linguagens",
+  "Língua Portuguesa": "Linguagens",
+  "Inglês": "Linguagens",
+  "Arte": "Linguagens",
+  "Educação Física": "Linguagens",
+  "Ciências": "Ciências da Natureza",
+  "História": "Ciências Humanas",
+  "Geografia": "Ciências Humanas",
+  "Ensino Religioso": "Ensino Religioso",
+};
+
+function etapaFromCodigo(codigo: string): string {
+  const c = (codigo || "").toUpperCase();
+  if (c.startsWith("EI")) return "EI";
+  if (c.startsWith("EM")) return "EM";
+  if (c.startsWith("EF")) return "EF";
+  return "—";
+}
+
+function areaFromDisciplina(d: string | null): string {
+  if (!d) return "—";
+  return AREA_BY_DISCIPLINA[d] ?? d;
 }
 
 function pct(part: number, total: number): number {
@@ -74,30 +94,29 @@ function emptySegment(segmento: string): CoverageSegmentReport {
 
 export class CoverageAnalyzer {
   static async run(filters: CoverageFilters = {}): Promise<CoverageReport> {
-    // 1. BNCC habilidades (universo)
     let q = supabase
       .from("bncc_habilidades")
-      .select("codigo, etapa, ano, disciplina, area");
-    if (filters.etapa) q = q.eq("etapa", filters.etapa);
+      .select("codigo_bncc, ano, disciplina");
     if (filters.ano) q = q.eq("ano", filters.ano);
     if (filters.disciplina) q = q.eq("disciplina", filters.disciplina);
-    if (filters.area) q = q.eq("area", filters.area);
 
-    const { data: habilidades, error: hErr } = await q;
+    const { data, error: hErr } = await q;
     if (hErr) throw hErr;
-    const universo = (habilidades ?? []) as HabilidadeRow[];
-    const codigos = universo.map((h) => h.codigo).filter(Boolean);
 
-    // 2. Drafts (pending/approved) + 3. Conteúdo publicado (lesson_content)
+    let universo: HabilidadeRow[] = (data ?? []) as HabilidadeRow[];
+    if (filters.etapa) {
+      universo = universo.filter((h) => etapaFromCodigo(h.codigo_bncc) === filters.etapa);
+    }
+    if (filters.area) {
+      universo = universo.filter((h) => areaFromDisciplina(h.disciplina) === filters.area);
+    }
+
+    const codigos = universo.map((h) => h.codigo_bncc).filter(Boolean);
+    const inList = codigos.length ? codigos : ["__none__"];
+
     const [draftsRes, contentRes] = await Promise.all([
-      supabase
-        .from("lesson_drafts")
-        .select("codigo_bncc, status")
-        .in("codigo_bncc", codigos.length ? codigos : ["__none__"]),
-      supabase
-        .from("lesson_content")
-        .select("codigo_bncc, is_complete")
-        .in("codigo_bncc", codigos.length ? codigos : ["__none__"]),
+      supabase.from("lesson_drafts").select("codigo_bncc, status").in("codigo_bncc", inList),
+      supabase.from("lesson_content").select("codigo_bncc").in("codigo_bncc", inList),
     ]);
     if (draftsRes.error) throw draftsRes.error;
     if (contentRes.error) throw contentRes.error;
@@ -108,49 +127,35 @@ export class CoverageAnalyzer {
       set.add(d.status);
       draftsByCode.set(d.codigo_bncc, set);
     }
-    const publishedSet = new Set(
-      (contentRes.data ?? []).map((c) => c.codigo_bncc),
-    );
+    const publishedSet = new Set((contentRes.data ?? []).map((c) => c.codigo_bncc));
 
-    // 4. Blueprint disponível: derivamos do próprio universo BNCC
-    //    (LessonBlueprint.build consulta BNCC; se a habilidade existe, há blueprint possível).
-    //    Validamos uma amostra apenas para garantir build estável.
     if (universo.length > 0) {
-      try {
-        await LessonBlueprint.build(universo[0].codigo);
-      } catch {
-        /* tolerante: blueprint indisponível não invalida o relatório */
-      }
+      try { await LessonBlueprint.build(universo[0].codigo_bncc); } catch { /* tolerante */ }
     }
 
-    // Agregação global
     const agg = emptySegment("Total");
-    agg.total = universo.length;
-
     const buckets = {
       etapa: new Map<string, CoverageSegmentReport>(),
       ano: new Map<string, CoverageSegmentReport>(),
       disciplina: new Map<string, CoverageSegmentReport>(),
       area: new Map<string, CoverageSegmentReport>(),
     };
-
     const bump = (
-      map: Map<string, CoverageSegmentReport>,
-      key: string | null | undefined,
+      m: Map<string, CoverageSegmentReport>,
+      key: string,
       patch: (s: CoverageSegmentReport) => void,
     ) => {
-      const k = (key ?? "—").toString();
-      const s = map.get(k) ?? emptySegment(k);
+      const s = m.get(key) ?? emptySegment(key);
       patch(s);
-      map.set(k, s);
+      m.set(key, s);
     };
 
     for (const h of universo) {
-      const statuses = draftsByCode.get(h.codigo);
+      const statuses = draftsByCode.get(h.codigo_bncc);
       const hasDraft = !!statuses && statuses.size > 0;
       const hasPending = !!statuses?.has("pending");
-      const isPublished = publishedSet.has(h.codigo);
-      const hasBlueprint = true; // toda habilidade BNCC mapeia em blueprint
+      const isPublished = publishedSet.has(h.codigo_bncc);
+      const hasBlueprint = true;
       const semConteudo = !hasDraft && !isPublished;
 
       const apply = (s: CoverageSegmentReport) => {
@@ -163,17 +168,16 @@ export class CoverageAnalyzer {
       };
 
       apply(agg);
-      bump(buckets.etapa, h.etapa, apply);
-      bump(buckets.ano, h.ano, apply);
-      bump(buckets.disciplina, h.disciplina, apply);
-      bump(buckets.area, h.area, apply);
+      bump(buckets.etapa, etapaFromCodigo(h.codigo_bncc), apply);
+      bump(buckets.ano, h.ano ?? "—", apply);
+      bump(buckets.disciplina, h.disciplina ?? "—", apply);
+      bump(buckets.area, areaFromDisciplina(h.disciplina), apply);
     }
 
     const finalize = (s: CoverageSegmentReport) => {
       s.percentual_cobertura = pct(s.publicadas, s.total);
       return s;
     };
-
     const toList = (m: Map<string, CoverageSegmentReport>) =>
       Array.from(m.values()).map(finalize).sort((a, b) => a.segmento.localeCompare(b.segmento));
 
