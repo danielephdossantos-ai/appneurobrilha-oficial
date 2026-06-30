@@ -27,7 +27,6 @@ import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
 import { Route as Jornada365RouteImport } from './routes/jornada-365'
 import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedural'
-import { Route as EscolaBrilhaRouteImport } from './routes/escola-brilha'
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
@@ -40,21 +39,12 @@ import { Route as AlfabetizacaoRouteImport } from './routes/alfabetizacao'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
-import { Route as EscolaBrilhaAulaRouteImport } from './routes/escola-brilha.aula'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
-import { Route as AulaIaBnccCodeRouteImport } from './routes/aula-ia.$bnccCode'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
-import { Route as AdminPublishBatchRouteImport } from './routes/admin.publish-batch'
-import { Route as AdminProducaoBibliotecaRouteImport } from './routes/admin.producao-biblioteca'
-import { Route as AdminImportLessonsRouteImport } from './routes/admin.import-lessons'
-import { Route as AdminImportBibliotecaRouteImport } from './routes/admin.import-biblioteca'
-import { Route as AdminGerarAulasGroqRouteImport } from './routes/admin.gerar-aulas-groq'
-import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 
@@ -148,11 +138,6 @@ const GeradorProceduralRoute = GeradorProceduralRouteImport.update({
   path: '/gerador-procedural',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EscolaBrilhaRoute = EscolaBrilhaRouteImport.update({
-  id: '/escola-brilha',
-  path: '/escola-brilha',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CuradoriaAulasRoute = CuradoriaAulasRouteImport.update({
   id: '/curadoria-aulas',
   path: '/curadoria-aulas',
@@ -213,11 +198,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EscolaBrilhaIndexRoute = EscolaBrilhaIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => EscolaBrilhaRoute,
-} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -233,19 +213,9 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
-const EscolaBrilhaAulaRoute = EscolaBrilhaAulaRouteImport.update({
-  id: '/aula',
-  path: '/aula',
-  getParentRoute: () => EscolaBrilhaRoute,
-} as any)
 const BnccCodigoRoute = BnccCodigoRouteImport.update({
   id: '/bncc/$codigo',
   path: '/bncc/$codigo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AulaIaBnccCodeRoute = AulaIaBnccCodeRouteImport.update({
-  id: '/aula-ia/$bnccCode',
-  path: '/aula-ia/$bnccCode',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnamneseChildIdRoute = AnamneseChildIdRouteImport.update({
@@ -259,36 +229,6 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AdminPublishBatchRoute = AdminPublishBatchRouteImport.update({
-  id: '/publish-batch',
-  path: '/publish-batch',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminProducaoBibliotecaRoute = AdminProducaoBibliotecaRouteImport.update({
-  id: '/producao-biblioteca',
-  path: '/producao-biblioteca',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminImportLessonsRoute = AdminImportLessonsRouteImport.update({
-  id: '/import-lessons',
-  path: '/import-lessons',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminImportBibliotecaRoute = AdminImportBibliotecaRouteImport.update({
-  id: '/import-biblioteca',
-  path: '/import-biblioteca',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminGerarAulasGroqRoute = AdminGerarAulasGroqRouteImport.update({
-  id: '/gerar-aulas-groq',
-  path: '/gerar-aulas-groq',
-  getParentRoute: () => AdminRoute,
-} as any)
-const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
-  id: '/db/$aulaId',
-  path: '/db/$aulaId',
-  getParentRoute: () => EscolaBrilhaRoute,
-} as any)
 const AnamneseChildIdResultadoRoute =
   AnamneseChildIdResultadoRouteImport.update({
     id: '/resultado',
@@ -314,7 +254,6 @@ export interface FileRoutesByFullPath {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
-  '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
@@ -333,23 +272,14 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
-  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
-  '/admin/import-lessons': typeof AdminImportLessonsRoute
-  '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
-  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
-  '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -381,23 +311,14 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
-  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
-  '/admin/import-lessons': typeof AdminImportLessonsRoute
-  '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
-  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
-  '/escola-brilha': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -413,7 +334,6 @@ export interface FileRoutesById {
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
-  '/escola-brilha': typeof EscolaBrilhaRouteWithChildren
   '/gerador-procedural': typeof GeradorProceduralRoute
   '/jornada-365': typeof Jornada365Route
   '/loja-mascotes': typeof LojaMascotesRoute
@@ -432,23 +352,14 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
-  '/admin/gerar-aulas-groq': typeof AdminGerarAulasGroqRoute
-  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
-  '/admin/import-lessons': typeof AdminImportLessonsRoute
-  '/admin/producao-biblioteca': typeof AdminProducaoBibliotecaRoute
-  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
-  '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
   '/bncc/$codigo': typeof BnccCodigoRoute
-  '/escola-brilha/aula': typeof EscolaBrilhaAulaRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
-  '/escola-brilha/': typeof EscolaBrilhaIndexRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
-  '/escola-brilha/db/$aulaId': typeof EscolaBrilhaDbAulaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -465,7 +376,6 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
     | '/loja-mascotes'
@@ -484,23 +394,14 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-groq'
-    | '/admin/import-biblioteca'
-    | '/admin/import-lessons'
-    | '/admin/producao-biblioteca'
-    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
-    | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
-    | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/escola-brilha/db/$aulaId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -532,23 +433,14 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-groq'
-    | '/admin/import-biblioteca'
-    | '/admin/import-lessons'
-    | '/admin/producao-biblioteca'
-    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
-    | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin'
-    | '/escola-brilha'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/escola-brilha/db/$aulaId'
   id:
     | '__root__'
     | '/'
@@ -563,7 +455,6 @@ export interface FileRouteTypes {
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
-    | '/escola-brilha'
     | '/gerador-procedural'
     | '/jornada-365'
     | '/loja-mascotes'
@@ -582,23 +473,14 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
-    | '/admin/gerar-aulas-groq'
-    | '/admin/import-biblioteca'
-    | '/admin/import-lessons'
-    | '/admin/producao-biblioteca'
-    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
-    | '/aula-ia/$bnccCode'
     | '/bncc/$codigo'
-    | '/escola-brilha/aula'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
-    | '/escola-brilha/'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
-    | '/escola-brilha/db/$aulaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -614,7 +496,6 @@ export interface RootRouteChildren {
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
-  EscolaBrilhaRoute: typeof EscolaBrilhaRouteWithChildren
   GeradorProceduralRoute: typeof GeradorProceduralRoute
   Jornada365Route: typeof Jornada365Route
   LojaMascotesRoute: typeof LojaMascotesRoute
@@ -635,7 +516,6 @@ export interface RootRouteChildren {
   TermosRoute: typeof TermosRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
-  AulaIaBnccCodeRoute: typeof AulaIaBnccCodeRoute
   BnccCodigoRoute: typeof BnccCodigoRoute
 }
 
@@ -767,13 +647,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GeradorProceduralRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha': {
-      id: '/escola-brilha'
-      path: '/escola-brilha'
-      fullPath: '/escola-brilha'
-      preLoaderRoute: typeof EscolaBrilhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/curadoria-aulas': {
       id: '/curadoria-aulas'
       path: '/curadoria-aulas'
@@ -858,13 +731,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/escola-brilha/': {
-      id: '/escola-brilha/'
-      path: '/'
-      fullPath: '/escola-brilha/'
-      preLoaderRoute: typeof EscolaBrilhaIndexRouteImport
-      parentRoute: typeof EscolaBrilhaRoute
-    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -886,25 +752,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
-    '/escola-brilha/aula': {
-      id: '/escola-brilha/aula'
-      path: '/aula'
-      fullPath: '/escola-brilha/aula'
-      preLoaderRoute: typeof EscolaBrilhaAulaRouteImport
-      parentRoute: typeof EscolaBrilhaRoute
-    }
     '/bncc/$codigo': {
       id: '/bncc/$codigo'
       path: '/bncc/$codigo'
       fullPath: '/bncc/$codigo'
       preLoaderRoute: typeof BnccCodigoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/aula-ia/$bnccCode': {
-      id: '/aula-ia/$bnccCode'
-      path: '/aula-ia/$bnccCode'
-      fullPath: '/aula-ia/$bnccCode'
-      preLoaderRoute: typeof AulaIaBnccCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/anamnese/$childId': {
@@ -920,48 +772,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/ajuste-dificuldades/$childId'
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/admin/publish-batch': {
-      id: '/admin/publish-batch'
-      path: '/publish-batch'
-      fullPath: '/admin/publish-batch'
-      preLoaderRoute: typeof AdminPublishBatchRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/producao-biblioteca': {
-      id: '/admin/producao-biblioteca'
-      path: '/producao-biblioteca'
-      fullPath: '/admin/producao-biblioteca'
-      preLoaderRoute: typeof AdminProducaoBibliotecaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/import-lessons': {
-      id: '/admin/import-lessons'
-      path: '/import-lessons'
-      fullPath: '/admin/import-lessons'
-      preLoaderRoute: typeof AdminImportLessonsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/import-biblioteca': {
-      id: '/admin/import-biblioteca'
-      path: '/import-biblioteca'
-      fullPath: '/admin/import-biblioteca'
-      preLoaderRoute: typeof AdminImportBibliotecaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/gerar-aulas-groq': {
-      id: '/admin/gerar-aulas-groq'
-      path: '/gerar-aulas-groq'
-      fullPath: '/admin/gerar-aulas-groq'
-      preLoaderRoute: typeof AdminGerarAulasGroqRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/escola-brilha/db/$aulaId': {
-      id: '/escola-brilha/db/$aulaId'
-      path: '/db/$aulaId'
-      fullPath: '/escola-brilha/db/$aulaId'
-      preLoaderRoute: typeof EscolaBrilhaDbAulaIdRouteImport
-      parentRoute: typeof EscolaBrilhaRoute
     }
     '/anamnese/$childId/resultado': {
       id: '/anamnese/$childId/resultado'
@@ -981,40 +791,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
-  AdminGerarAulasGroqRoute: typeof AdminGerarAulasGroqRoute
-  AdminImportBibliotecaRoute: typeof AdminImportBibliotecaRoute
-  AdminImportLessonsRoute: typeof AdminImportLessonsRoute
-  AdminProducaoBibliotecaRoute: typeof AdminProducaoBibliotecaRoute
-  AdminPublishBatchRoute: typeof AdminPublishBatchRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminGerarAulasGroqRoute: AdminGerarAulasGroqRoute,
-  AdminImportBibliotecaRoute: AdminImportBibliotecaRoute,
-  AdminImportLessonsRoute: AdminImportLessonsRoute,
-  AdminProducaoBibliotecaRoute: AdminProducaoBibliotecaRoute,
-  AdminPublishBatchRoute: AdminPublishBatchRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
-
-interface EscolaBrilhaRouteChildren {
-  EscolaBrilhaAulaRoute: typeof EscolaBrilhaAulaRoute
-  EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
-  EscolaBrilhaDbAulaIdRoute: typeof EscolaBrilhaDbAulaIdRoute
-}
-
-const EscolaBrilhaRouteChildren: EscolaBrilhaRouteChildren = {
-  EscolaBrilhaAulaRoute: EscolaBrilhaAulaRoute,
-  EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
-  EscolaBrilhaDbAulaIdRoute: EscolaBrilhaDbAulaIdRoute,
-}
-
-const EscolaBrilhaRouteWithChildren = EscolaBrilhaRoute._addFileChildren(
-  EscolaBrilhaRouteChildren,
-)
 
 interface NeuroTreinoRouteChildren {
   NeuroTreinoSlugRoute: typeof NeuroTreinoSlugRoute
@@ -1057,7 +841,6 @@ const rootRouteChildren: RootRouteChildren = {
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   CuradoriaAulasRoute: CuradoriaAulasRoute,
-  EscolaBrilhaRoute: EscolaBrilhaRouteWithChildren,
   GeradorProceduralRoute: GeradorProceduralRoute,
   Jornada365Route: Jornada365Route,
   LojaMascotesRoute: LojaMascotesRoute,
@@ -1078,19 +861,8 @@ const rootRouteChildren: RootRouteChildren = {
   TermosRoute: TermosRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
-  AulaIaBnccCodeRoute: AulaIaBnccCodeRoute,
   BnccCodigoRoute: BnccCodigoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

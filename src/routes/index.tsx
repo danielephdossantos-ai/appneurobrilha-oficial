@@ -34,15 +34,6 @@ type Destino = {
 
 const DESTINOS_KIDS: Destino[] = [
   {
-    to: "/escola-brilha",
-    title: "Escola Brilha",
-    subtitle: "Aulas Mágicas",
-    gradient: "from-[#3B8BFF] via-[#4C9EFF] to-[#1E5FCC]",
-    glow: "rgba(76,158,255,0.7)",
-    emoji: "🏫",
-    shine: "rgba(255,255,255,0.15)",
-  },
-  {
     to: "/neuro-treino",
     title: "Neuro Treino",
     subtitle: "Centro Cerebral",
