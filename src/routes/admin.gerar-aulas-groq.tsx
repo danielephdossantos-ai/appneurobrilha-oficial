@@ -10,6 +10,7 @@ export const Route = createFileRoute("/admin/gerar-aulas-groq")({
 
 type Row = { codigo_bncc: string; ano: string | null; disciplina: string | null };
 type LogItem = { code: string; ok: boolean; msg: string; ts: number };
+type GenerationMode = "auto" | "local" | "groq";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -26,6 +27,7 @@ function GerarAulasGroq() {
   const [filterAno, setFilterAno] = useState<string>("");
   const [filterDisc, setFilterDisc] = useState<string>("");
   const [delayMs, setDelayMs] = useState(7000);
+  const [mode, setMode] = useState<GenerationMode>("auto");
   const stopRef = useRef(false);
 
   useEffect(() => { void load(); }, []);
@@ -70,11 +72,12 @@ function GerarAulasGroq() {
         for (let attempt = 0; attempt < 3 && !completed; attempt++) {
           if (stopRef.current) break;
           const { data, error } = await supabase.functions.invoke("generate-lesson-draft", {
-            body: { codigo_bncc: row.codigo_bncc },
+            body: { codigo_bncc: row.codigo_bncc, mode },
           });
           const ok = !error && (data?.ok || data?.skipped);
           if (ok) {
-            const msg = data?.skipped ? "já existia" : `tokens=${data?.tokens ?? 0}`;
+            const source = data?.mode === "local_fallback" ? "modelo local após limite do Groq" : data?.mode === "local" ? "modelo local" : "Groq";
+            const msg = data?.skipped ? "já existia" : `${source}; tokens=${data?.tokens ?? 0}`;
             setLogs((L) => [{ code: row.codigo_bncc, ok: true, msg, ts: Date.now() }, ...L].slice(0, 200));
             setDone((D) => new Set(D).add(row.codigo_bncc));
             completed = true;
@@ -129,9 +132,23 @@ function GerarAulasGroq() {
           )}
           <Button variant="outline" onClick={load} disabled={running}>Recarregar</Button>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Se o Groq atingir limite temporário, o lote pausa sozinho e tenta novamente sem derrubar a tela.
-        </p>
+        <div className="grid gap-2 rounded border p-3 text-sm">
+          <label className="font-medium" htmlFor="generation-mode">Modo de geração</label>
+          <select
+            id="generation-mode"
+            className="border rounded px-3 py-2 text-sm bg-background"
+            value={mode}
+            onChange={(e) => setMode(e.target.value as GenerationMode)}
+            disabled={running}
+          >
+            <option value="auto">Automático: tenta Groq e usa modelo local se limitar</option>
+            <option value="local">Sem Groq: modelo pedagógico local</option>
+            <option value="groq">Somente Groq</option>
+          </select>
+          <p className="text-xs text-muted-foreground">
+            Use “Sem Groq” para continuar criando rascunhos agora, sem depender do limite diário da API.
+          </p>
+        </div>
         {running && (
           <div className="space-y-1">
             <Progress value={(idx / Math.max(filtered.length, 1)) * 100} />
