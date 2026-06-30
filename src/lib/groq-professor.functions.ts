@@ -140,7 +140,6 @@ const ExplicarErroSchema = z.object({
   idade: z.number().int().min(5).max(16).optional(),
   modulo: z
     .enum([
-      "escola-brilha",
       "reforco-brilha",
       "jornada-365",
       "missao-prova",
