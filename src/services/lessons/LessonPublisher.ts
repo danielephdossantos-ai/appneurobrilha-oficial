@@ -15,6 +15,8 @@
 
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+// Contrato pedagógico único — referência canônica das seções publicadas.
+import { LESSON_CONTRACT } from "./LessonContract";
 
 const CHILD_TABLES = [
   "lesson_examples",
