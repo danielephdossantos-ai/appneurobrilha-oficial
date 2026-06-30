@@ -1,0 +1,10 @@
+DELETE FROM public.lesson_drafts;
+DELETE FROM public.lesson_adaptations;
+DELETE FROM public.lesson_examples;
+DELETE FROM public.lesson_curiosities;
+DELETE FROM public.lesson_quizzes;
+DELETE FROM public.lesson_challenges;
+DELETE FROM public.lesson_assessments;
+DELETE FROM public.lesson_explanations;
+DELETE FROM public.lesson_reviews_full;
+DELETE FROM public.lesson_content;
