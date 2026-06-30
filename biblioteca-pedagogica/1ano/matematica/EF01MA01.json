@@ -1,0 +1,38 @@
+{
+  "codigo_bncc": "EF01MA01",
+  "ano": "1º Ano",
+  "disciplina": "Matemática",
+  "titulo": "Para que servem os números no nosso dia a dia",
+  "objetivo": "Reconhecer que os números podem dizer quantas coisas temos, mostrar a ordem em uma fila ou apenas servir como um nome, como o número da camisa de um jogador.",
+  "introducao": "Você já reparou que os números aparecem em todo lugar? No relógio, no botão do elevador, na placa do carro, na sua idade e até na camisa do seu time. Mas será que todo número conta alguma coisa? Hoje a gente vai descobrir três trabalhos diferentes que os números fazem.",
+  "explicacao": "Os números podem fazer três coisas. Primeiro, contar quantos: três bolinhas, cinco lápis, dez dedos. Segundo, mostrar a ordem: o primeiro da fila, o segundo lugar na corrida, a página dois do livro. Terceiro, servir só de nome, como um apelido: o número da casa, o canal da TV, o número da camisa do jogador. Esses últimos não contam nada, eles só identificam.",
+  "exemplo": "Olhe para a frase: 'A Lulu mora na casa 7, é a 2ª da fila do recreio e levou 4 maçãs para a escola.' O número 7 é só o nome da casa dela. O 2º mostra a ordem na fila. O 4 conta as maçãs. Três números, três trabalhos diferentes na mesma frase.",
+  "exemplo_cotidiano": "Pense no controle da televisão. Quando você aperta o canal 5, o número 5 não quer dizer cinco televisões, ele é só o nome daquele canal. Mas se a mamãe pede cinco morangos no prato, aí o 5 está contando de verdade.",
+  "pratica_guiada": "Vamos fazer juntos. Mostre para a criança três cartões: um com a foto de quatro pipocas, um com o desenho do pódio (1º, 2º, 3º lugar) e um com a placa de um ônibus (linha 42). Pergunte em voz alta: 'Esse número conta, mostra ordem ou só dá nome?' Combine respostas batendo palmas para 'conta', pulando para 'ordem' e fazendo joinha para 'nome'.",
+  "pratica_independente": "Peça que a criança caminhe pela casa e encontre três números: um que conta (quantas colheres na gaveta), um que mostra ordem (a página do livro favorito) e um que só serve de nome (o número do apartamento ou da camisa). Ela desenha cada um em uma folha dividida em três partes.",
+  "curiosidade": "Você sabia que o número do seu time do coração não diz que tem dez jogadores, mas que aquele jogador tem o nome 'Camisa 10'? Pelé usava a 10 e por isso até hoje a camisa 10 é considerada especial no futebol.",
+  "desafio": "Olhe a embalagem de um produto na cozinha. Encontre dois números diferentes nela. Tente descobrir o que cada um significa: um conta quantos gramas? O outro é só o código do produto? Conte para alguém da sua família o que você descobriu.",
+  "resumo": "Os números têm três trabalhos: contar quantos, mostrar a ordem ou apenas dar um nome para algo. Olhando ao redor a gente percebe que eles estão em todo canto, mas cada um faz uma coisa diferente.",
+  "revisao": "Lembre rapidinho: quando você diz 'tenho 6 anos', o número conta. Quando diz 'sou o primeiro a chegar', mostra ordem. Quando aperta o canal 11 da TV, é só o nome do canal. Mesmos números, trabalhos diferentes.",
+  "quiz": [
+    {
+      "pergunta": "Na frase 'O João é o 1º da fila e levou 3 bolas', o que o número 3 está fazendo?",
+      "opcoes": ["Mostrando a ordem", "Contando quantas bolas", "Só dando um nome"],
+      "resposta_correta": 1,
+      "explicacao": "O 3 está contando: são três bolas que o João levou."
+    },
+    {
+      "pergunta": "O número da camisa do jogador serve para:",
+      "opcoes": ["Contar quantos jogadores tem", "Dar um nome para identificar o jogador", "Mostrar quem é o melhor"],
+      "resposta_correta": 1,
+      "explicacao": "A camisa só identifica o jogador, não conta nem coloca em ordem."
+    },
+    {
+      "pergunta": "Quando a professora diz 'abram a página 10', o número 10 está:",
+      "opcoes": ["Contando dez livros", "Mostrando a ordem da página", "Sendo o nome de um aluno"],
+      "resposta_correta": 1,
+      "explicacao": "A página 10 vem depois da 9 e antes da 11: é uma ordem dentro do livro."
+    }
+  ],
+  "resultado": "Parabéns! Agora você sabe que nem todo número serve para contar. Da próxima vez que olhar um número por aí, faça a pergunta mágica: 'esse número conta, mostra ordem ou só é um nome?'"
+}
