@@ -6,12 +6,12 @@ const router = getRouter();
 
 function App() {
   useEffect(() => {
-    // Limpeza de cache solicitada para reconstrução do Escola Brilha
-    const CACHE_VERSION = "2.3.0-escola-brilha-db-lessons";
+    // Limpeza de cache de reconstrução pedagógica
+    const CACHE_VERSION = "2.4.0-remove-escola-brilha";
     const currentVersion = localStorage.getItem("app_version");
 
     if (currentVersion !== CACHE_VERSION) {
-      console.log("Limpando cache para carregar aulas publicadas da Escola Brilha...");
+      console.log("Limpando cache pedagógico antigo...");
       Object.keys(localStorage).forEach((key) => {
         if (
           key.startsWith("neurobrilha:") ||

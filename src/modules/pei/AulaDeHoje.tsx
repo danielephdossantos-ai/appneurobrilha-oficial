@@ -29,7 +29,7 @@ type Aula = {
   status: "bloqueada" | "disponivel" | "em_andamento" | "concluida" | "pulada";
 };
 
-// Jornada 365 = BNCC puro. Todo bloco abre o player do Escola Brilha.
+// Jornada 365 = BNCC puro. Escola Brilha foi removida; aulas antigas não abrem mais player legado.
 
 export function AulaDeHoje({ childId }: { childId: string }) {
   const queryClient = useQueryClient();
@@ -85,15 +85,7 @@ export function AulaDeHoje({ childId }: { childId: string }) {
         .eq("id", aula.id);
       queryClient.invalidateQueries({ queryKey: ["pei-aula-hoje", childId, hoje] });
     }
-    const aulaId =
-      bloco.payload && typeof bloco.payload.aula_id === "string"
-        ? (bloco.payload.aula_id as string)
-        : null;
-    if (aulaId) {
-      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
-    } else {
-      navigate({ to: "/escola-brilha" });
-    }
+    navigate({ to: "/jornada-365" });
   }
 
   async function concluirAula() {

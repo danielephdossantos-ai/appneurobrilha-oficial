@@ -223,16 +223,10 @@ function Jornada() {
 
 
   const abrirAulaHoje = async () => {
-    const blocos = (aulaHoje?.atividades as Array<{ payload?: { aula_id?: string } }> | null) ?? [];
-    const aulaId = blocos.find((b) => b?.payload?.aula_id)?.payload?.aula_id;
     if (aulaHoje && aulaHoje.status === "disponivel") {
       await supabase.from("pei_aulas").update({ status: "em_andamento" }).eq("id", aulaHoje.id);
     }
-    if (aulaId) {
-      navigate({ to: "/escola-brilha/db/$aulaId", params: { aulaId } });
-    } else {
-      navigate({ to: "/escola-brilha" });
-    }
+    navigate({ to: "/jornada-365" });
   };
 
   return (
