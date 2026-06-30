@@ -3,15 +3,12 @@ import { useAppState } from "@/core/store";
 import { ProfessorBrilho } from "./ProfessorBrilho";
 
 type Modulo =
-  | "escola-brilha"
   | "reforco-brilha"
   | "jornada-365"
   | "missao-prova"
   | "missao-trabalho";
 
 function detectModulo(pathname: string): Modulo | null {
-  // Escola Brilha NÃO expõe o Professor Brilho como UI/categoria —
-  // ele é apenas motor interno de geração de aulas (gerarAulaGroq).
   if (pathname.startsWith("/reforco-brilha")) return "reforco-brilha";
   if (pathname.startsWith("/jornada-365")) return "jornada-365";
   if (pathname.startsWith("/missao-prova")) return "missao-prova";
