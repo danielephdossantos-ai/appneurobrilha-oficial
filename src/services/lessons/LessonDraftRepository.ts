@@ -62,18 +62,74 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
       // 4. Transação atômica. Qualquer erro -> ROLLBACK -> nada persiste.
       await client.query("BEGIN");
 
+      // 4.1 Pré-checagem: já existe um draft PENDENTE para este codigo_bncc?
+      // Regra: nunca sobrescrever um draft pendente — bloquear novo INSERT.
+      const pendingCheck = await client.query<{ id: string; created_at: string }>(
+        `SELECT id, created_at
+           FROM public.lesson_drafts
+          WHERE codigo_bncc = $1 AND status = 'pending'
+          LIMIT 1`,
+        [row.codigo_bncc],
+      );
+      if (pendingCheck.rows.length > 0) {
+        await client.query("ROLLBACK");
+        const existing = pendingCheck.rows[0];
+        throw new Error(
+          `DRAFT_PENDING_EXISTS: já existe draft pendente para ${row.codigo_bncc} ` +
+            `(id=${existing.id}, criado em ${existing.created_at}). ` +
+            `Revise ou rejeite o draft pendente antes de criar outro.`,
+        );
+      }
+
+      // 4.2 Versão: nova versão sempre que existir conteúdo já publicado
+      // OU drafts anteriores aprovados/rejeitados. v1 = primeira tentativa.
+      const versionRow = await client.query<{ next_version: number }>(
+        `SELECT (
+            COALESCE((SELECT COUNT(*) FROM public.lesson_drafts WHERE codigo_bncc = $1), 0)
+          + COALESCE((SELECT COUNT(*) FROM public.lesson_content WHERE codigo_bncc = $1), 0)
+          + 1
+         )::int AS next_version`,
+        [row.codigo_bncc],
+      );
+      const version = versionRow.rows[0]?.next_version ?? 1;
+
+      // 4.3 Observações: combina version + autor + obs do input em `notes`.
+      const observacoes =
+        typeof (data as { observacoes?: unknown }).observacoes === "string"
+          ? ((data as { observacoes?: string }).observacoes ?? "").trim()
+          : "";
+      const notes =
+        `v${version} | autor=${context.userId} | ${new Date().toISOString()}` +
+        (observacoes ? ` | obs: ${observacoes}` : "");
+
+      // 4.4 Persistir metadados de versão no próprio payload (._meta) — não
+      // altera a estrutura de aprovação, apenas anexa informação auditável.
+      const payloadWithMeta = {
+        ...row.payload,
+        _meta: {
+          ...(row.payload && typeof row.payload === "object"
+            ? ((row.payload as unknown as Record<string, unknown>)._meta ?? {})
+            : {}),
+          version,
+          author: context.userId,
+          imported_at: new Date().toISOString(),
+          observacoes: observacoes || null,
+        },
+      };
+
       const result = await client.query<{ id: string; codigo_bncc: string }>(
         `INSERT INTO public.lesson_drafts
-           (codigo_bncc, ano, disciplina, titulo, payload, status, created_by)
-         VALUES ($1, $2, $3, $4, $5::jsonb, 'pending', $6)
+           (codigo_bncc, ano, disciplina, titulo, payload, status, generated_by, notes)
+         VALUES ($1, $2, $3, $4, $5::jsonb, 'pending', $6, $7)
          RETURNING id, codigo_bncc`,
         [
           row.codigo_bncc,
           row.ano ?? null,
           row.disciplina ?? null,
           row.titulo ?? null,
-          JSON.stringify(row.payload),
+          JSON.stringify(payloadWithMeta),
           context.userId,
+          notes,
         ],
       );
 
@@ -89,6 +145,7 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
         codigo_bncc: inserted.codigo_bncc,
         status: "pending",
       };
+
     } catch (err) {
       try {
         await client.query("ROLLBACK");
