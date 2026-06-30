@@ -78,7 +78,21 @@ function GerarAulasGroq() {
           const ok = !error && (data?.ok || data?.skipped);
           if (ok) {
             const source = data?.mode === "local_fallback" ? "modelo local após limite do Groq" : data?.mode === "local" ? "modelo local" : "Groq";
-            const msg = data?.skipped ? "já existia" : `${source}; tokens=${data?.tokens ?? 0}`;
+            let msg = data?.skipped ? "já existia" : `${source}; tokens=${data?.tokens ?? 0}`;
+            if (autoPublish && !data?.skipped) {
+              const { data: draft } = await supabase
+                .from("lesson_drafts")
+                .select("id")
+                .eq("codigo_bncc", row.codigo_bncc)
+                .eq("status", "pending")
+                .order("created_at", { ascending: false })
+                .limit(1)
+                .maybeSingle();
+              if (draft?.id) {
+                const { error: pubErr } = await supabase.rpc("approve_lesson_draft", { _draft_id: draft.id });
+                msg += pubErr ? ` | publish ERR: ${pubErr.message}` : " | publicada";
+              }
+            }
             setLogs((L) => [{ code: row.codigo_bncc, ok: true, msg, ts: Date.now() }, ...L].slice(0, 200));
             setDone((D) => new Set(D).add(row.codigo_bncc));
             completed = true;
