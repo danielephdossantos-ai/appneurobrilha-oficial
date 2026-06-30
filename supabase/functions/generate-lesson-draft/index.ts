@@ -31,9 +31,16 @@ function jsonResponse(body: Record<string, unknown>, status = 200) {
 }
 
 function parseRetryAfterMs(raw: string, fallbackMs = 8000) {
-  const match = raw.match(/try again in\s+([\d.]+)s/i);
-  if (!match) return fallbackMs;
-  return Math.max(Math.ceil(Number(match[1]) * 1000) + 1200, fallbackMs);
+  const fullMatch = raw.match(/try again in\s+(?:(\d+)m)?\s*([\d.]+)s/i);
+  if (fullMatch) {
+    const minutes = Number(fullMatch[1] ?? 0);
+    const seconds = Number(fullMatch[2] ?? 0);
+    return Math.max(Math.ceil((minutes * 60 + seconds) * 1000) + 1200, fallbackMs);
+  }
+
+  const secondsOnly = raw.match(/try again in\s+([\d.]+)\s*seconds?/i);
+  if (!secondsOnly) return fallbackMs;
+  return Math.max(Math.ceil(Number(secondsOnly[1]) * 1000) + 1200, fallbackMs);
 }
 
 function safeErrorMessage(error: unknown) {
