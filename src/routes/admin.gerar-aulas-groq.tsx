@@ -11,6 +11,12 @@ export const Route = createFileRoute("/admin/gerar-aulas-groq")({
 type Row = { codigo_bncc: string; ano: string | null; disciplina: string | null };
 type LogItem = { code: string; ok: boolean; msg: string; ts: number };
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function retryDelay(data: any, attempt: number) {
+  return Math.min(Number(data?.retryAfterMs) || 8000 + attempt * 3000, 30000);
+}
+
 function GerarAulasGroq() {
   const [pending, setPending] = useState<Row[]>([]);
   const [done, setDone] = useState<Set<string>>(new Set());
@@ -19,7 +25,7 @@ function GerarAulasGroq() {
   const [logs, setLogs] = useState<LogItem[]>([]);
   const [filterAno, setFilterAno] = useState<string>("");
   const [filterDisc, setFilterDisc] = useState<string>("");
-  const [delayMs, setDelayMs] = useState(1500);
+  const [delayMs, setDelayMs] = useState(7000);
   const stopRef = useRef(false);
 
   useEffect(() => { void load(); }, []);
@@ -60,17 +66,36 @@ function GerarAulasGroq() {
       const row = list[i];
       setIdx(i + 1);
       try {
-        const { data, error } = await supabase.functions.invoke("generate-lesson-draft", {
-          body: { codigo_bncc: row.codigo_bncc },
-        });
-        const ok = !error && (data?.ok || data?.skipped);
-        const msg = error ? error.message : (data?.skipped ? "já existia" : `tokens=${data?.tokens ?? 0}`);
-        setLogs((L) => [{ code: row.codigo_bncc, ok, msg, ts: Date.now() }, ...L].slice(0, 200));
-        if (ok) setDone((D) => new Set(D).add(row.codigo_bncc));
+        let completed = false;
+        for (let attempt = 0; attempt < 3 && !completed; attempt++) {
+          if (stopRef.current) break;
+          const { data, error } = await supabase.functions.invoke("generate-lesson-draft", {
+            body: { codigo_bncc: row.codigo_bncc },
+          });
+          const ok = !error && (data?.ok || data?.skipped);
+          if (ok) {
+            const msg = data?.skipped ? "já existia" : `tokens=${data?.tokens ?? 0}`;
+            setLogs((L) => [{ code: row.codigo_bncc, ok: true, msg, ts: Date.now() }, ...L].slice(0, 200));
+            setDone((D) => new Set(D).add(row.codigo_bncc));
+            completed = true;
+            break;
+          }
+
+          if (!error && data?.retryable) {
+            const waitMs = retryDelay(data, attempt);
+            setLogs((L) => [{ code: row.codigo_bncc, ok: false, msg: `pausa ${Math.ceil(waitMs / 1000)}s: ${data.error}`, ts: Date.now() }, ...L].slice(0, 200));
+            await sleep(waitMs);
+            continue;
+          }
+
+          const msg = error ? error.message : (data?.error ?? "erro desconhecido");
+          setLogs((L) => [{ code: row.codigo_bncc, ok: false, msg, ts: Date.now() }, ...L].slice(0, 200));
+          completed = true;
+        }
       } catch (e: any) {
         setLogs((L) => [{ code: row.codigo_bncc, ok: false, msg: String(e?.message ?? e), ts: Date.now() }, ...L].slice(0, 200));
       }
-      await new Promise((r) => setTimeout(r, delayMs));
+      await sleep(delayMs);
     }
     setRunning(false);
   }
@@ -104,6 +129,9 @@ function GerarAulasGroq() {
           )}
           <Button variant="outline" onClick={load} disabled={running}>Recarregar</Button>
         </div>
+        <p className="text-xs text-muted-foreground">
+          Se o Groq atingir limite temporário, o lote pausa sozinho e tenta novamente sem derrubar a tela.
+        </p>
         {running && (
           <div className="space-y-1">
             <Progress value={(idx / Math.max(filtered.length, 1)) * 100} />
