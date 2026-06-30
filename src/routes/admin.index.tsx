@@ -78,19 +78,8 @@ function AdminPage() {
     }
   };
 
-  if (isAdmin === null) {
-    return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
-  }
-  if (!isAdmin) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6 text-center">
-        <div>
-          <h1 className="text-2xl font-bold mb-2">Página não encontrada</h1>
-          <Link to="/" className="text-primary underline text-sm">Voltar para o início</Link>
-        </div>
-      </div>
-    );
-  }
+
+
 
   const demosCriados = DEMO_PROFILES.every((p) => children.some((c) => c.nome === p.nome));
   const perfilAtivo = activeChild ? diagnosticoToNeuroProfile(activeChild.diagnostico) : null;
