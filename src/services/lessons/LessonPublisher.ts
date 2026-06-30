@@ -17,6 +17,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 // Contrato pedagógico único — referência canônica das seções publicadas.
 import { LESSON_CONTRACT } from "./LessonContract";
+import { auditPublishedLesson, type PublishAuditReport } from "./PublishAuditor";
 
 const CHILD_TABLES = [
   "lesson_examples",
@@ -40,6 +41,8 @@ export interface PublishReport {
   empty_tables: string[];
   duration_ms: number;
   errors: string[];
+  audit: PublishAuditReport | null;
+  is_complete: boolean;
 }
 
 export const publishLessonDraft = createServerFn({ method: "POST" })
