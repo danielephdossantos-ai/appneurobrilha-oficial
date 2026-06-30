@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Shield, Sparkles, BookOpen, Users } from "lucide-react";
 import { diagnosticoToNeuroProfile, NEURO_PROFILE_LABEL } from "@/lib/neuro-profile";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin/")({
   component: AdminPage,
 });
 
