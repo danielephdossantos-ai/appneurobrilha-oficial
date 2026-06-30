@@ -48,6 +48,7 @@ import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AulaIaBnccCodeRouteImport } from './routes/aula-ia.$bnccCode'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
+import { Route as AdminPublishBatchRouteImport } from './routes/admin.publish-batch'
 import { Route as AdminImportLessonsRouteImport } from './routes/admin.import-lessons'
 import { Route as AdminImportBibliotecaRouteImport } from './routes/admin.import-biblioteca'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
@@ -250,6 +251,11 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminPublishBatchRoute = AdminPublishBatchRouteImport.update({
+  id: '/publish-batch',
+  path: '/publish-batch',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminImportLessonsRoute = AdminImportLessonsRouteImport.update({
   id: '/import-lessons',
   path: '/import-lessons',
@@ -311,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
+  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -356,6 +363,7 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
+  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -403,6 +411,7 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
+  '/admin/publish-batch': typeof AdminPublishBatchRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/aula-ia/$bnccCode': typeof AulaIaBnccCodeRoute
@@ -451,6 +460,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
+    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -496,6 +506,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
+    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -542,6 +553,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/admin/import-biblioteca'
     | '/admin/import-lessons'
+    | '/admin/publish-batch'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/aula-ia/$bnccCode'
@@ -868,6 +880,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/publish-batch': {
+      id: '/admin/publish-batch'
+      path: '/publish-batch'
+      fullPath: '/admin/publish-batch'
+      preLoaderRoute: typeof AdminPublishBatchRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/import-lessons': {
       id: '/admin/import-lessons'
       path: '/import-lessons'
@@ -909,11 +928,13 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminImportBibliotecaRoute: typeof AdminImportBibliotecaRoute
   AdminImportLessonsRoute: typeof AdminImportLessonsRoute
+  AdminPublishBatchRoute: typeof AdminPublishBatchRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminImportBibliotecaRoute: AdminImportBibliotecaRoute,
   AdminImportLessonsRoute: AdminImportLessonsRoute,
+  AdminPublishBatchRoute: AdminPublishBatchRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
