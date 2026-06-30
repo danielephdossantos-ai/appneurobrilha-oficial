@@ -49,6 +49,7 @@ import { Route as AulaIaBnccCodeRouteImport } from './routes/aula-ia.$bnccCode'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
 import { Route as AdminImportLessonsRouteImport } from './routes/admin.import-lessons'
+import { Route as AdminImportBibliotecaRouteImport } from './routes/admin.import-biblioteca'
 import { Route as EscolaBrilhaDbAulaIdRouteImport } from './routes/escola-brilha.db.$aulaId'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
@@ -254,6 +255,11 @@ const AdminImportLessonsRoute = AdminImportLessonsRouteImport.update({
   path: '/import-lessons',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminImportBibliotecaRoute = AdminImportBibliotecaRouteImport.update({
+  id: '/import-biblioteca',
+  path: '/import-biblioteca',
+  getParentRoute: () => AdminRoute,
+} as any)
 const EscolaBrilhaDbAulaIdRoute = EscolaBrilhaDbAulaIdRouteImport.update({
   id: '/db/$aulaId',
   path: '/db/$aulaId',
@@ -303,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
@@ -347,6 +354,7 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
@@ -393,6 +401,7 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/admin/import-biblioteca': typeof AdminImportBibliotecaRoute
   '/admin/import-lessons': typeof AdminImportLessonsRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
@@ -440,6 +449,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
@@ -484,6 +494,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
@@ -529,6 +540,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/admin/import-biblioteca'
     | '/admin/import-lessons'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
@@ -863,6 +875,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminImportLessonsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/import-biblioteca': {
+      id: '/admin/import-biblioteca'
+      path: '/import-biblioteca'
+      fullPath: '/admin/import-biblioteca'
+      preLoaderRoute: typeof AdminImportBibliotecaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/escola-brilha/db/$aulaId': {
       id: '/escola-brilha/db/$aulaId'
       path: '/db/$aulaId'
@@ -888,10 +907,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminImportBibliotecaRoute: typeof AdminImportBibliotecaRoute
   AdminImportLessonsRoute: typeof AdminImportLessonsRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminImportBibliotecaRoute: AdminImportBibliotecaRoute,
   AdminImportLessonsRoute: AdminImportLessonsRoute,
 }
 
