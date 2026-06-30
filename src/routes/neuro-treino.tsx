@@ -212,7 +212,7 @@ function Treino() {
   useAppState();
   const { adjustment, metrics } = useNeuroAdaptive();
   const { hiperfoco } = useHiperfoco();
-  const { aulas: aulasEscolaBrilha } = useAulasBnccByEtapa("fundamental1");
+
 
   useEffect(() => {
     if (typeof window === "undefined") return;
