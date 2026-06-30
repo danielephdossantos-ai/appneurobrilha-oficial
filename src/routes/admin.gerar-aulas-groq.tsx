@@ -27,7 +27,8 @@ function GerarAulasGroq() {
   const [filterAno, setFilterAno] = useState<string>("");
   const [filterDisc, setFilterDisc] = useState<string>("");
   const [delayMs, setDelayMs] = useState(7000);
-  const [mode, setMode] = useState<GenerationMode>("auto");
+  const [mode, setMode] = useState<GenerationMode>("local");
+  const [autoPublish, setAutoPublish] = useState(true);
   const stopRef = useRef(false);
 
   useEffect(() => { void load(); }, []);
@@ -77,7 +78,21 @@ function GerarAulasGroq() {
           const ok = !error && (data?.ok || data?.skipped);
           if (ok) {
             const source = data?.mode === "local_fallback" ? "modelo local após limite do Groq" : data?.mode === "local" ? "modelo local" : "Groq";
-            const msg = data?.skipped ? "já existia" : `${source}; tokens=${data?.tokens ?? 0}`;
+            let msg = data?.skipped ? "já existia" : `${source}; tokens=${data?.tokens ?? 0}`;
+            if (autoPublish && !data?.skipped) {
+              const { data: draft } = await supabase
+                .from("lesson_drafts")
+                .select("id")
+                .eq("codigo_bncc", row.codigo_bncc)
+                .eq("status", "pending")
+                .order("created_at", { ascending: false })
+                .limit(1)
+                .maybeSingle();
+              if (draft?.id) {
+                const { error: pubErr } = await supabase.rpc("approve_lesson_draft", { _draft_id: draft.id });
+                msg += pubErr ? ` | publish ERR: ${pubErr.message}` : " | publicada";
+              }
+            }
             setLogs((L) => [{ code: row.codigo_bncc, ok: true, msg, ts: Date.now() }, ...L].slice(0, 200));
             setDone((D) => new Set(D).add(row.codigo_bncc));
             completed = true;
@@ -146,8 +161,12 @@ function GerarAulasGroq() {
             <option value="groq">Somente Groq</option>
           </select>
           <p className="text-xs text-muted-foreground">
-            Use “Sem Groq” para continuar criando rascunhos agora, sem depender do limite diário da API.
+            Use "Sem Groq" para continuar criando rascunhos agora, sem depender do limite diário da API.
           </p>
+          <label className="flex items-center gap-2 text-sm pt-2 border-t">
+            <input type="checkbox" checked={autoPublish} onChange={(e) => setAutoPublish(e.target.checked)} disabled={running} />
+            <span>Publicar automaticamente cada rascunho após gerar (executa <code>approve_lesson_draft</code>)</span>
+          </label>
         </div>
         {running && (
           <div className="space-y-1">
