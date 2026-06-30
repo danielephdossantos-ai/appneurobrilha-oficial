@@ -62,34 +62,53 @@ export const saveLessonDraft = createServerFn({ method: "POST" })
       created_by: context.userId,
     };
 
-    // Server-side client (service role) — auth já validada pelo middleware.
-    // Mantemos created_by = userId para auditoria.
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const supabase = supabaseAdmin;
+    // Conexão direta com Postgres (Drizzle pool) — server-only.
+    // Auth já foi validada pelo middleware acima.
+    const { pool } = await import("../../../server/db");
+    const client = await pool.connect();
 
-    // 4. INSERT atômico. Em caso de erro, lançamos -> nada é persistido,
-    //    nada é aprovado, nada é publicado.
-    const { data: inserted, error } = await supabase
-      .from("lesson_drafts")
-      .insert(insertRow)
-      .select("id, codigo_bncc, status")
-      .single();
+    try {
+      // 4. Transação atômica. Qualquer erro -> ROLLBACK -> nada persiste.
+      await client.query("BEGIN");
 
-    if (error) {
-      throw new Error(
-        `LessonDraftRepository: falha ao salvar draft (${error.code ?? "?"}): ${error.message}`,
+      const result = await client.query<{ id: string; codigo_bncc: string }>(
+        `INSERT INTO public.lesson_drafts
+           (codigo_bncc, ano, disciplina, titulo, payload, status, created_by)
+         VALUES ($1, $2, $3, $4, $5::jsonb, 'pending', $6)
+         RETURNING id, codigo_bncc`,
+        [
+          row.codigo_bncc,
+          row.ano ?? null,
+          row.disciplina ?? null,
+          row.titulo ?? null,
+          JSON.stringify(row.payload),
+          context.userId,
+        ],
       );
-    }
 
-    if (!inserted?.id) {
-      throw new Error("LessonDraftRepository: insert sem id retornado");
-    }
+      await client.query("COMMIT");
 
-    return {
-      draft_id: inserted.id as string,
-      codigo_bncc: inserted.codigo_bncc as string,
-      status: "pending",
-    };
+      const inserted = result.rows[0];
+      if (!inserted?.id) {
+        throw new Error("LessonDraftRepository: insert sem id retornado");
+      }
+
+      return {
+        draft_id: inserted.id,
+        codigo_bncc: inserted.codigo_bncc,
+        status: "pending",
+      };
+    } catch (err) {
+      try {
+        await client.query("ROLLBACK");
+      } catch {
+        /* ignore rollback failure */
+      }
+      const msg = err instanceof Error ? err.message : String(err);
+      throw new Error(`LessonDraftRepository: falha ao salvar draft -> ${msg}`);
+    } finally {
+      client.release();
+    }
   });
 
 /**
