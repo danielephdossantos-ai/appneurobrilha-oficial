@@ -39,7 +39,7 @@ export const LessonVersioning = {
   async publishWithVersion(draftId: string, changeReason?: string) {
     const { data, error } = await supabase.rpc("publish_lesson_with_version", {
       _draft_id: draftId,
-      _change_reason: changeReason ?? null,
+      _change_reason: changeReason ?? undefined,
     });
     if (error) throw new Error(error.message);
     const row = Array.isArray(data) ? data[0] : data;
