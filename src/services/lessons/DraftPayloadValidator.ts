@@ -31,28 +31,14 @@ interface FieldRule {
   kind: FieldKind;
 }
 
-// Campos exigidos dentro de payload
-const REQUIRED_FIELDS: FieldRule[] = [
-  { path: "titulo", kind: "string" },
-  { path: "objetivo", kind: "string" },
-  { path: "introducao", kind: "string" },
-  { path: "explicacao", kind: "string" },
-  { path: "contextualizacao", kind: "string" },
-  { path: "resumo", kind: "string" },
-  { path: "tempo_estimado", kind: "int" },
-  { path: "palavras_chave", kind: "array" },
-  { path: "atividade_guiada", kind: "array" },
-  { path: "atividade_pratica", kind: "array" },
-  { path: "respostas", kind: "array" },
-  { path: "exemplos", kind: "array" },
-  { path: "curiosidades", kind: "array" },
-  { path: "quiz", kind: "object" },
-  { path: "desafios", kind: "array" },
-  { path: "avaliacao", kind: "object" },
-  { path: "adaptacoes", kind: "array" },
-  { path: "explicacoes_extra", kind: "array" },
-  { path: "revisao", kind: "object" },
-];
+// Campos exigidos dentro de payload — DERIVADOS do contrato pedagógico único.
+// Fonte da verdade: src/services/lessons/LessonContract.ts
+import { LESSON_CONTRACT_ALL } from "./LessonContract";
+
+const REQUIRED_FIELDS: FieldRule[] = LESSON_CONTRACT_ALL.map((s) => ({
+  path: s.key,
+  kind: s.kind,
+}));
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;

@@ -17,6 +17,11 @@
  * nome resultaria em campos NULL no banco.
  */
 
+// Contrato pedagógico único — fonte da verdade das chaves do payload.
+// O builder deve produzir todas as chaves listadas em LESSON_CONTRACT_KEYS.
+import { LESSON_CONTRACT_KEYS } from "./LessonContract";
+export { LESSON_CONTRACT_KEYS };
+
 // -------------------- Tipos do objeto pedagógico de entrada --------------------
 
 export interface DraftExample {
