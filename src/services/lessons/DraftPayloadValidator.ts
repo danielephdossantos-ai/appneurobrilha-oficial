@@ -123,7 +123,7 @@ export class DraftPayloadValidator {
   /**
    * Lança erro se inválido. Útil para usar como guarda antes de qualquer save.
    */
-  static assert(draft: DraftLike | null | undefined): void {
+  static assert(draft: unknown): void {
     const result = this.validate(draft);
     if (!result.valid) {
       throw new Error(
