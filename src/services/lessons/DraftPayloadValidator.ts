@@ -86,7 +86,8 @@ function checkKind(value: unknown, kind: FieldKind): string | null {
 }
 
 export class DraftPayloadValidator {
-  static validate(draft: DraftLike | null | undefined): ValidationResult {
+  static validate(input: unknown): ValidationResult {
+    const draft = input as DraftLike | null | undefined;
     const errors: string[] = [];
 
     if (!draft || typeof draft !== "object") {
