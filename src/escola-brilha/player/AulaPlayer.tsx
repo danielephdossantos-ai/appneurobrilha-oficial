@@ -280,6 +280,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
           nomeCrianca={activeChild?.nome}
           acertos={acertos}
           erros={erros}
+          childId={activeChild?.id}
         />
       )}
 

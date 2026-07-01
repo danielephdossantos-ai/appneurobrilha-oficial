@@ -24,13 +24,28 @@ import { disciplinaDoCodigo } from "./missoes-tema";
 
 export type MascoteDisciplina = {
   slug: string;
-  nome: string;         // nome curto exibido pra criança
-  papel: string;        // "Professor de Matemática", etc.
+  nome: string;
+  papel: string;
   emoji: string;
   imagem: string;
-  corPrimaria: string;  // hex, usado nas bordas/badges do balão
+  corPrimaria: string;
   corSecundaria: string;
-  personalidade: string; // tom da fala (interno, guia dos templates)
+  personalidade: string;
+  preco?: number; // BrilhoCoins para desbloquear (resolvido via PRECOS_MASCOTES)
+};
+
+/** Preço oficial em BrilhoCoins para desbloquear cada mascote-professor. */
+export const PRECOS_MASCOTES: Record<string, number> = {
+  default: 0,
+  matematica: 50,
+  portugues: 50,
+  ciencias: 100,
+  historia: 150,
+  geografia: 150,
+  arte: 200,
+  edfisica: 200,
+  ingles: 250,
+  religiao: 250,
 };
 
 /** Mapa oficial: 1 disciplina → 1 mascote. Nunca repete. */
@@ -156,17 +171,46 @@ function slugDisc(d: string): string {
   return "default";
 }
 
+function comPreco(m: MascoteDisciplina): MascoteDisciplina {
+  return { ...m, preco: PRECOS_MASCOTES[m.slug] ?? 0 };
+}
+
 export function mascoteDaDisciplina(disciplina?: string | null): MascoteDisciplina {
-  return MASCOTES[slugDisc(disciplina ?? "")] ?? MASCOTES.default;
+  return comPreco(MASCOTES[slugDisc(disciplina ?? "")] ?? MASCOTES.default);
 }
 
 export function mascoteDoCodigo(codigo: string): MascoteDisciplina {
-  const disc = disciplinaDoCodigo(codigo);
-  return mascoteDaDisciplina(disc);
+  return mascoteDaDisciplina(disciplinaDoCodigo(codigo));
 }
 
-export function mascoteDaAula(aula: { disciplina?: string; codigo: string }): MascoteDisciplina {
-  return aula.disciplina
-    ? mascoteDaDisciplina(aula.disciplina)
-    : mascoteDoCodigo(aula.codigo);
+/** Slug canônico da disciplina (para persistir escolha por disciplina). */
+export function disciplinaDaAula(aula: { disciplina?: string; codigo: string }): string {
+  return slugDisc(aula.disciplina ?? disciplinaDoCodigo(aula.codigo) ?? "");
 }
+
+/** Mascote-padrão da aula. Aceita override por slug já desbloqueado. */
+export function mascoteDaAula(
+  aula: { disciplina?: string; codigo: string },
+  overrideSlug?: string | null,
+): MascoteDisciplina {
+  if (overrideSlug && MASCOTES[overrideSlug]) return comPreco(MASCOTES[overrideSlug]);
+  return aula.disciplina ? mascoteDaDisciplina(aula.disciplina) : mascoteDoCodigo(aula.codigo);
+}
+
+/** Lista completa dos 10 mascotes-professores (pra tela de escolha). */
+export function todosMascotes(): MascoteDisciplina[] {
+  return Object.values(MASCOTES).map(comPreco);
+}
+
+/** Disciplinas oficiais na ordem de apresentação (Pip fica fora — é fallback). */
+export const DISCIPLINAS_OFICIAIS: { slug: string; nome: string }[] = [
+  { slug: "matematica", nome: "Matemática" },
+  { slug: "portugues", nome: "Português" },
+  { slug: "ciencias", nome: "Ciências" },
+  { slug: "historia", nome: "História" },
+  { slug: "geografia", nome: "Geografia" },
+  { slug: "arte", nome: "Arte" },
+  { slug: "edfisica", nome: "Educação Física" },
+  { slug: "ingles", nome: "Inglês" },
+  { slug: "religiao", nome: "Ensino Religioso" },
+];

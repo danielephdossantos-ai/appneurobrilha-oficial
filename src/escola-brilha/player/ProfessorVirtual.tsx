@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
-import { mascoteDaAula } from "../mascotes-disciplina";
+import { mascoteDaAula, disciplinaDaAula } from "../mascotes-disciplina";
+import { mascoteAtribuido } from "../mascote-assign";
 
 type BlocoId =
   | "missao"
@@ -29,6 +30,7 @@ export function ProfessorVirtual({
   nomeCrianca,
   acertos,
   erros,
+  childId,
 }: {
   aula: Aula;
   blocoId: BlocoId;
@@ -36,10 +38,15 @@ export function ProfessorVirtual({
   nomeCrianca?: string;
   acertos: number;
   erros: number;
+  childId?: string | null;
 }) {
   const tts = useDeviceTTS();
   const [aberto, setAberto] = useState(true);
-  const mascote = useMemo(() => mascoteDaAula(aula), [aula.codigo, aula.disciplina]);
+  const mascote = useMemo(() => {
+    const disc = disciplinaDaAula(aula);
+    const override = mascoteAtribuido(childId, disc);
+    return mascoteDaAula(aula, override);
+  }, [aula.codigo, aula.disciplina, childId]);
 
   const faixa = faixaDaIdade(idade);
   const fala = useMemo(
