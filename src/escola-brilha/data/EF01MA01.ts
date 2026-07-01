@@ -12,22 +12,34 @@ const aula: Aula = {
   disciplina: "Matemática",
   titulo: "Para que servem os números?",
 
-  objetivo:
-    "Descobrir que os números podem contar coisas, mostrar a ordem em uma fila ou servir como código, tipo o número da nossa casa.",
+  missao:
+    "Descobrir os três superpoderes secretos dos números: contar, ordenar e identificar.",
 
-  introducao:
-    "Olha ao seu redor! Tem número no relógio, no controle da TV, na sua camisa do time e até na casa da vovó. Mas será que todo número serve pra contar? Vamos investigar juntos!",
+  objetivos: [
+    "Reconhecer quando um número está contando quantidade.",
+    "Reconhecer quando um número mostra a ordem (1º, 2º, 3º…).",
+    "Reconhecer quando um número é só um código de identificação.",
+    "Diferenciar os três usos em situações do dia a dia.",
+  ],
+
+  motivacao:
+    "Olha ao seu redor! Tem número no relógio, no controle da TV, na sua camisa do time e até na casa da vovó. Mas será que TODO número serve pra contar? Se você entender isso hoje, nunca mais vai confundir — e vai ficar bem mais esperto pra ler o mundo.",
 
   explicacao:
     "Os números aparecem no nosso dia a dia de três jeitos diferentes:\n\n• CONTAR quantidade — quando dizemos “tem 5 balas no pote”.\n• MOSTRAR ordem — quando alguém chega em 1º, 2º ou 3º lugar na corrida.\n• SER CÓDIGO — quando o número não conta nada, só identifica, como o número da sua casa ou o número da camisa do jogador.\n\nUm mesmo número pode ter significados diferentes. O que importa é onde ele está e pra que ele foi usado.",
 
-  exemplo:
-    "Camisa do Neymar: número 10. Esse 10 não quer dizer que existem 10 Neymares no time — é só o CÓDIGO da camisa dele.\n\nAgora, se a professora disser “tem 10 crianças na sala”, aí sim o 10 está CONTANDO.",
+  exemploResolvido: {
+    enunciado:
+      "A camisa do Neymar tem o número 10. O que o 10 significa aqui: contagem, ordem ou código?",
+    passos: [
+      "Pergunte: o 10 está dizendo que existem 10 Neymares? Não.",
+      "Pergunte: o Neymar chegou em 10º lugar em alguma coisa? Também não.",
+      "Então o 10 só está identificando a camisa dele — é um código.",
+    ],
+    resposta: "É CÓDIGO — o 10 identifica a camisa do jogador.",
+  },
 
-  exemploCotidiano:
-    "Pense na sua casa: o número da porta (por exemplo, 25) é um CÓDIGO — ele ajuda o carteiro a encontrar você. Já quando você conta os brinquedos no chão e acha 25, aí o 25 está CONTANDO quantidade.",
-
-  praticaGuiada: {
+  atividadeGuiada: {
     enunciado:
       "Ana ficou em 2º lugar na corrida. Nessa frase, o número 2 está sendo usado pra quê?",
     resposta: "Para mostrar a ORDEM em que a Ana chegou.",
@@ -35,15 +47,24 @@ const aula: Aula = {
       "Ela não tem 2 corridas nem é o código dela — é a POSIÇÃO em que ela terminou a corrida. Isso é ordem.",
   },
 
-  praticaIndependente: {
-    enunciado:
-      "O telefone da avó é 3245-7890. Esse número está contando, mostrando ordem ou é um código?",
-    resposta: "É um CÓDIGO — serve pra ligar pra ela, não conta nem ordena nada.",
-    dica: "Pergunte: dá pra contar 3245 avós? Alguém ficou em 3245º lugar? Se não, é código!",
-  },
-
-  curiosidade:
-    "O número zero (0) demorou séculos pra ser inventado! Muitos povos antigos contavam sem ele. Foi só quando pessoas na Índia criaram o zero que a matemática ficou muito mais fácil.",
+  exercicios: [
+    {
+      enunciado: "Tem 8 lápis dentro da caixa. O 8 é contagem, ordem ou código?",
+      resposta: "Contagem — está dizendo QUANTOS lápis existem.",
+      dica: "Pergunte: dá pra contar 8 lápis um por um?",
+    },
+    {
+      enunciado:
+        "O telefone da avó é 3245-7890. Esse número é contagem, ordem ou código?",
+      resposta: "Código — serve pra ligar pra ela, não conta nem ordena nada.",
+      dica: "Dá pra contar 3245 avós? Alguém ficou em 3245º lugar? Se não, é código!",
+    },
+    {
+      enunciado: "João mora no 5º andar do prédio. O 5 é contagem, ordem ou código?",
+      resposta: "Ordem — mostra a posição do andar dele.",
+      dica: "5º com aquele 'zinho' costuma ser ordem.",
+    },
+  ],
 
   desafio: {
     enunciado:
@@ -52,12 +73,14 @@ const aula: Aula = {
       "O 120 CONTA (quantas páginas o livro tem). O 45 mostra ORDEM (é a 45ª página). O 3 também mostra ORDEM (é o 3º capítulo).",
   },
 
-  resumo:
-    "Os números fazem três trabalhos: contam, ordenam ou identificam. Um mesmo número (como o 10) pode contar em um lugar e ser código em outro. O importante é olhar pra onde ele está.",
-
   revisao: {
-    palavrasChave: ["contar", "ordem", "código", "número", "quantidade"],
-    dica: "Quando ver um número, pergunte: ele tá contando algo? Mostrando posição? Ou só identificando? Essa é a chave.",
+    pontos: [
+      "Números podem contar quantidade (5 balas).",
+      "Números podem mostrar ordem (2º lugar).",
+      "Números podem ser código (nº da casa, da camisa).",
+      "Um mesmo número muda de sentido conforme o lugar.",
+    ],
+    dica: "Quando ver um número, pergunte: ele tá CONTANDO, ORDENANDO ou IDENTIFICANDO?",
   },
 
   quiz: [
@@ -69,7 +92,11 @@ const aula: Aula = {
     },
     {
       pergunta: "O número da sua camisa no futebol serve pra quê?",
-      opcoes: ["Contar jogadores", "Ser código de identificação", "Mostrar em que lugar você chegou"],
+      opcoes: [
+        "Contar jogadores",
+        "Ser código de identificação",
+        "Mostrar em que lugar você chegou",
+      ],
       correta: 1,
       explicacao:
         "É só uma identificação sua no jogo. Não conta e nem ordena — é código.",
@@ -89,8 +116,13 @@ const aula: Aula = {
     },
   ],
 
-  fechamento:
+  conclusao:
     "Parabéns! Agora, sempre que ver um número por aí, você já sabe fazer a pergunta certa: ele conta, ordena ou identifica?",
+
+  proximaHabilidade: {
+    codigo: "EF01MA02",
+    titulo: "Jeitos espertos de contar",
+  },
 };
 
 export default aula;
