@@ -339,7 +339,14 @@ function renderBloco(
     case "objetivos":
       return <Objetivos itens={a.objetivos} />;
     case "explicacao":
-      return <Explicacao texto={a.explicacao} aula={a} />;
+      return (
+        <>
+          <Explicacao texto={a.explicacao} aula={a} />
+          <div className="mt-4">
+            <MultiModal aula={a} />
+          </div>
+        </>
+      );
     case "exemplo":
       return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
