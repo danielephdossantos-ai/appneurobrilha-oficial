@@ -56,6 +56,17 @@ const aula: Aula = {
   explicacao:
     "Os números aparecem no nosso dia a dia de três jeitos diferentes:\n\n• CONTAR quantidade — quando dizemos “tem 5 balas no pote”.\n• MOSTRAR ordem — quando alguém chega em 1º, 2º ou 3º lugar na corrida.\n• SER CÓDIGO — quando o número não conta nada, só identifica, como o número da sua casa ou o número da camisa do jogador.\n\nUm mesmo número pode ter significados diferentes. O que importa é onde ele está e pra que ele foi usado.",
 
+  explicacoesNiveis: {
+    nivel1:
+      "Número serve pra três coisas: contar (quantos), ordem (qual lugar) e código (qual é este).",
+    nivel2:
+      "Pensa numa pizzaria: “quero 2 pizzas” conta quantidade. “Sou o 2º da fila” mostra ordem. “Ligo pro telefone 2” é código — o 2 é só o nome do telefone.",
+    nivel3:
+      "Faz de conta que os números usam três chapéus. Chapéu de CONTAR: 3 gatinhos. Chapéu de LUGAR: 3º da fila. Chapéu de NOME: apartamento 3. É o mesmo número 3, mas o chapéu muda tudo.",
+    nivel4:
+      "Agora olha em casa: a hora no relógio (12:00) é código de horário; a sua idade (7 anos) é contagem; a página 7 do livro é ordem. Os três moram juntos no seu dia — só precisa olhar pra que serve.",
+  },
+
   exemploResolvido: {
     enunciado:
       "A camisa do Neymar tem o número 10. O que o 10 significa aqui: contagem, ordem ou código?",
