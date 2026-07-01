@@ -1922,14 +1922,20 @@ export type Database = {
           diagnostico_feito: boolean
           diagnostico_resultado: string | null
           diagnostico_total: number
+          dificuldades: Json
           erros: number
           estrelas: number
+          evolucao_delta: number
+          facilidade: number
+          historico_evolucao: Json
           id: string
           nivel_dominio: Database["public"]["Enums"]["mastery_level"]
           nota: number
           percentual: number
+          revisoes_realizadas: number
           sessoes_dominadas_consecutivas: number
           tempo_estudado_segundos: number
+          tempo_medio_segundos: number
           tentativas: number
           ultima_visita_em: string
           updated_at: string
@@ -1947,14 +1953,20 @@ export type Database = {
           diagnostico_feito?: boolean
           diagnostico_resultado?: string | null
           diagnostico_total?: number
+          dificuldades?: Json
           erros?: number
           estrelas?: number
+          evolucao_delta?: number
+          facilidade?: number
+          historico_evolucao?: Json
           id?: string
           nivel_dominio?: Database["public"]["Enums"]["mastery_level"]
           nota?: number
           percentual?: number
+          revisoes_realizadas?: number
           sessoes_dominadas_consecutivas?: number
           tempo_estudado_segundos?: number
+          tempo_medio_segundos?: number
           tentativas?: number
           ultima_visita_em?: string
           updated_at?: string
@@ -1972,14 +1984,20 @@ export type Database = {
           diagnostico_feito?: boolean
           diagnostico_resultado?: string | null
           diagnostico_total?: number
+          dificuldades?: Json
           erros?: number
           estrelas?: number
+          evolucao_delta?: number
+          facilidade?: number
+          historico_evolucao?: Json
           id?: string
           nivel_dominio?: Database["public"]["Enums"]["mastery_level"]
           nota?: number
           percentual?: number
+          revisoes_realizadas?: number
           sessoes_dominadas_consecutivas?: number
           tempo_estudado_segundos?: number
+          tempo_medio_segundos?: number
           tentativas?: number
           ultima_visita_em?: string
           updated_at?: string
@@ -7174,6 +7192,10 @@ export type Database = {
         Args: { _desempenho: number; _sessoes_consec: number }
         Returns: Database["public"]["Enums"]["mastery_level"]
       }
+      dominio_habilidade: {
+        Args: { _child_id: string; _codigo_bncc: string }
+        Returns: Json
+      }
       gain_active_mascot_xp: {
         Args: { p_amount: number }
         Returns: {
@@ -7214,15 +7236,40 @@ export type Database = {
           variacao: number
         }[]
       }
-      registrar_conclusao_aula: {
-        Args: {
-          _child_id: string
-          _codigo_bncc: string
-          _desempenho: number
-          _tipo?: string
-        }
-        Returns: string
+      recomendar_revisoes_auto: {
+        Args: { _child_id: string }
+        Returns: {
+          codigo_bncc: string
+          evolucao_delta: number
+          motivo: string
+          prioridade: number
+          proxima_revisao: string
+          ultimo_desempenho: number
+        }[]
       }
+      registrar_conclusao_aula:
+        | {
+            Args: {
+              _child_id: string
+              _codigo_bncc: string
+              _desempenho: number
+              _tipo?: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              _acertos?: number
+              _child_id: string
+              _codigo_bncc: string
+              _desempenho: number
+              _dificuldades?: Json
+              _erros?: number
+              _tempo_segundos?: number
+              _tipo?: string
+            }
+            Returns: string
+          }
       registrar_missao_pendente: {
         Args: { _child_id?: string; _codigo_bncc: string }
         Returns: undefined
