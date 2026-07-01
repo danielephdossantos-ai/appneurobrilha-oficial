@@ -268,7 +268,12 @@ function textoDoBloco(a: Aula, i: number): string {
 function renderBloco(
   a: Aula,
   i: number,
-  ctx: { acertos: number; setAcertos: (n: number) => void; onQuizEnd: () => void },
+  ctx: {
+    acertos: number;
+    setAcertos: (n: number) => void;
+    setErros: (n: number) => void;
+    onQuizEnd: () => void;
+  },
 ) {
   switch (BLOCOS[i].id) {
     case "missao":
@@ -295,6 +300,7 @@ function renderBloco(
           questoes={a.quiz}
           onFinish={(n: number) => {
             ctx.setAcertos(n);
+            ctx.setErros(Math.max(0, a.quiz.length - n));
             ctx.onQuizEnd();
           }}
         />
