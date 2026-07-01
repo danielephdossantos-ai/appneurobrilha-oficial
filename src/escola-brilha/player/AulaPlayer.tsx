@@ -98,7 +98,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
     }
   }, [progresso, retomado, salvar, temDiagnostico]);
 
-  const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
+  const texto = useMemo(() => textoDoBloco(aula, BLOCOS[idx].id), [aula, idx, BLOCOS]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
 
