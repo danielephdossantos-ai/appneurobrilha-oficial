@@ -43,6 +43,7 @@ import {
   type MissaoMeta,
 } from "../proxima-missao";
 import { supabase } from "@/integrations/supabase/client";
+import { resolverMissao, parseBNCC, MENSAGEM_MISSAO_EM_CONSTRUCAO } from "./resolver";
 
 // =====================================================================
 // Tipos públicos do Motor
@@ -347,7 +348,11 @@ export const MotorPedagogico = {
   recomendacoes: Recomendacoes,
   conquistas: Conquistas,
 
-  // Utilitários pedagógicos padronizados
+  /** Resolve tudo que uma missão precisa a partir do código BNCC. */
+  resolver: resolverMissao,
+  parseBNCC,
+  MENSAGEM_MISSAO_EM_CONSTRUCAO,
+
   util: {
     metaDaAula,
     estimarTempo,
