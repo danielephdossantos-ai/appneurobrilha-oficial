@@ -3,7 +3,7 @@ import { Secao } from "./Secao";
 
 export function Revisao({ dados }: { dados: { pontos: string[]; dica: string } }) {
   return (
-    <Secao icon={ListChecks} rotulo="Revisão" cor="#A78BFA">
+    <Secao icon={ListChecks} rotulo="Resumo" cor="#A78BFA">
       <ul className="space-y-2 mb-3">
         {dados.pontos.map((p, i) => (
           <li key={i} className="flex items-start gap-2">
