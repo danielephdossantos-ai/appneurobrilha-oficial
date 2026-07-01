@@ -5,6 +5,8 @@ import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
+import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
+
 
 export const Route = createFileRoute("/escola-brilha/")({
   head: () => ({
