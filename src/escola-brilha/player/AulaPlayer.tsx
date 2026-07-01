@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Aula } from "../types";
 import { useProgresso } from "../useProgresso";
 import { Missao } from "./blocos/Missao";
+import { Narrativa } from "./blocos/Narrativa";
 import { Objetivos } from "./blocos/Objetivos";
 import { Explicacao } from "./blocos/Explicacao";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
