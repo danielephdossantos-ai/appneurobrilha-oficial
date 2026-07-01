@@ -163,7 +163,11 @@ function EscolaBrilhaCatalogo() {
           </p>
         </div>
 
+        {/* Revisões automáticas recomendadas */}
+        <RevisoesRecomendadas childId={activeChild?.id} />
+
         {/* Filtro */}
+
         <div className="flex gap-2 mb-4">
           <button
             onClick={() => setFiltro("disponiveis")}
