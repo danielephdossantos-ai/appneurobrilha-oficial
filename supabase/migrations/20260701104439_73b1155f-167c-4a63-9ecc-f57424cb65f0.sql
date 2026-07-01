@@ -1,0 +1,10 @@
+
+ALTER TABLE public.escola_progresso
+  ADD COLUMN IF NOT EXISTS tempo_estudado_segundos integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS percentual integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS estrelas integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS nota numeric(5,2) NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS tentativas integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS erros integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS acertos integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS ultima_visita_em timestamptz NOT NULL DEFAULT now();
