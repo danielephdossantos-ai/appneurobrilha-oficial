@@ -1873,33 +1873,57 @@ export type Database = {
       }
       escola_progresso: {
         Row: {
+          acertos: number
           bloco_atual: number
           child_id: string
           codigo_bncc: string
           concluida: boolean
           concluida_em: string | null
           created_at: string
+          erros: number
+          estrelas: number
           id: string
+          nota: number
+          percentual: number
+          tempo_estudado_segundos: number
+          tentativas: number
+          ultima_visita_em: string
           updated_at: string
         }
         Insert: {
+          acertos?: number
           bloco_atual?: number
           child_id: string
           codigo_bncc: string
           concluida?: boolean
           concluida_em?: string | null
           created_at?: string
+          erros?: number
+          estrelas?: number
           id?: string
+          nota?: number
+          percentual?: number
+          tempo_estudado_segundos?: number
+          tentativas?: number
+          ultima_visita_em?: string
           updated_at?: string
         }
         Update: {
+          acertos?: number
           bloco_atual?: number
           child_id?: string
           codigo_bncc?: string
           concluida?: boolean
           concluida_em?: string | null
           created_at?: string
+          erros?: number
+          estrelas?: number
           id?: string
+          nota?: number
+          percentual?: number
+          tempo_estudado_segundos?: number
+          tentativas?: number
+          ultima_visita_em?: string
           updated_at?: string
         }
         Relationships: [
