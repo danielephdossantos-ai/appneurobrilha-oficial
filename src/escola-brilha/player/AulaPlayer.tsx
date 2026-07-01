@@ -267,7 +267,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.25 }}
             >
-              {renderBloco(aula, idx, {
+              {renderBloco(aula, BLOCOS[idx].id, {
                 acertos,
                 erros,
                 childId: activeChild?.id,
