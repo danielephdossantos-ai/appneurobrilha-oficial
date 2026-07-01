@@ -9,31 +9,35 @@ import type { Aula } from "../types";
 import { useProgresso } from "../useProgresso";
 import { Missao } from "./blocos/Missao";
 import { Objetivos } from "./blocos/Objetivos";
-import { Motivacao } from "./blocos/Motivacao";
 import { Explicacao } from "./blocos/Explicacao";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
 import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
 import { Exercicios } from "./blocos/Exercicios";
 import { Desafio } from "./blocos/Desafio";
-import { Revisao } from "./blocos/Revisao";
 import { Quiz } from "./blocos/Quiz";
+import { Revisao } from "./blocos/Revisao";
 import { Conclusao } from "./blocos/Conclusao";
-import { ProximaHabilidade } from "./blocos/ProximaHabilidade";
 
-// Ordem fixa dos 12 blocos — nenhuma aula pode fugir desse padrão.
+/**
+ * Player único de aulas do Escola Brilha.
+ * Funciona pra Educação Infantil até o 9º Ano — carrega qualquer aula
+ * a partir do código BNCC via registry.
+ *
+ * Fluxo fixo de 10 blocos:
+ *  Missão → Objetivos → Explicação → Exemplo → Prática Guiada →
+ *  Exercícios → Desafio → Quiz → Resumo → Conclusão
+ */
 const BLOCOS = [
-  { id: "missao", nome: "Missão da aula" },
+  { id: "missao", nome: "Missão" },
   { id: "objetivos", nome: "Objetivos" },
-  { id: "motivacao", nome: "Motivação" },
   { id: "explicacao", nome: "Explicação" },
-  { id: "exemplo", nome: "Exemplo resolvido" },
-  { id: "guiada", nome: "Atividade guiada" },
+  { id: "exemplo", nome: "Exemplo" },
+  { id: "guiada", nome: "Prática Guiada" },
   { id: "exercicios", nome: "Exercícios" },
   { id: "desafio", nome: "Desafio" },
-  { id: "revisao", nome: "Revisão" },
   { id: "quiz", nome: "Quiz" },
+  { id: "resumo", nome: "Resumo" },
   { id: "conclusao", nome: "Conclusão" },
-  { id: "proxima", nome: "Próxima habilidade" },
 ] as const;
 
 export function AulaPlayer({ aula }: { aula: Aula }) {
@@ -48,7 +52,6 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const inicioBloco = useRef<number>(Date.now());
   const tentativaContada = useRef(false);
 
-  // Retoma do ponto onde parou assim que o progresso carrega.
   useEffect(() => {
     if (progresso.carregado && !retomado) {
       const alvo = progresso.concluida ? 0 : Math.min(progresso.bloco_atual, BLOCOS.length - 1);
@@ -65,9 +68,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   }, [progresso, retomado, salvar]);
 
   const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
-
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
-
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
 
   const next = async () => {
@@ -146,7 +147,6 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-24">
-      {/* Header */}
       <div className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b-2 border-white/10 px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => navigate({ to: "/escola-brilha" })}
@@ -170,7 +170,6 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
         </button>
       </div>
 
-      {/* Barra de progresso */}
       <div className="px-4 pt-3">
         <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/60 mb-1.5">
           <span>{BLOCOS[idx].nome}</span>
@@ -186,7 +185,6 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
         </div>
       </div>
 
-      {/* Conteúdo */}
       <div className="px-4 pt-5">
         <AnimatePresence mode="wait">
           <motion.div
@@ -201,7 +199,6 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
         </AnimatePresence>
       </div>
 
-      {/* Nav inferior — escondida no quiz (o quiz tem seus próprios botões) */}
       {BLOCOS[idx].id !== "quiz" && (
         <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
           <button
@@ -238,8 +235,6 @@ function textoDoBloco(a: Aula, i: number): string {
       return a.missao;
     case "objetivos":
       return `Objetivos: ${a.objetivos.join(". ")}.`;
-    case "motivacao":
-      return a.motivacao;
     case "explicacao":
       return a.explicacao;
     case "exemplo":
@@ -250,16 +245,12 @@ function textoDoBloco(a: Aula, i: number): string {
       return `Exercícios: ${a.exercicios.map((e, k) => `${k + 1}. ${e.enunciado}`).join(" ")}`;
     case "desafio":
       return a.desafio.enunciado;
-    case "revisao":
-      return `${a.revisao.dica}. ${a.revisao.pontos.join(". ")}.`;
     case "quiz":
       return "Quiz da aula. Escolha a resposta certa.";
+    case "resumo":
+      return `Resumo: ${a.revisao.pontos.join(". ")}. Dica: ${a.revisao.dica}.`;
     case "conclusao":
       return a.conclusao;
-    case "proxima":
-      return a.proximaHabilidade
-        ? `Próxima habilidade: ${a.proximaHabilidade.codigo}.`
-        : "Você chegou ao fim desta aula.";
     default:
       return "";
   }
@@ -280,8 +271,6 @@ function renderBloco(
       return <Missao texto={a.missao} />;
     case "objetivos":
       return <Objetivos itens={a.objetivos} />;
-    case "motivacao":
-      return <Motivacao texto={a.motivacao} />;
     case "explicacao":
       return <Explicacao texto={a.explicacao} />;
     case "exemplo":
@@ -292,8 +281,6 @@ function renderBloco(
       return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;
-    case "revisao":
-      return <Revisao dados={a.revisao} />;
     case "quiz":
       return (
         <Quiz
@@ -305,10 +292,10 @@ function renderBloco(
           }}
         />
       );
+    case "resumo":
+      return <Revisao dados={a.revisao} />;
     case "conclusao":
       return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} />;
-    case "proxima":
-      return <ProximaHabilidade proxima={a.proximaHabilidade} />;
     default:
       return null;
   }
