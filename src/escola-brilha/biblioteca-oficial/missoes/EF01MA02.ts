@@ -7,8 +7,11 @@ import type { MissaoOficial } from "../types";
  */
 const missao: MissaoOficial = {
   codigo: "EF01MA02",
-  disciplina: "Matemática",
+  etapa: "Ensino Fundamental",
   ano: "1º Ano",
+  disciplina: "Matemática",
+  unidadeTematica: "Números",
+  objetoConhecimento: "Quantificação de elementos de uma coleção: estimativas, contagem um a um, pareamento ou outros agrupamentos e comparação",
 
   missaoPrincipal: {
     titulo: "Jeitos Espertos de Contar",
