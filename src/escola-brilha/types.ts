@@ -141,6 +141,29 @@ export type Aula = {
       }
   >;
 
+  /**
+   * Progressão automática por níveis (opcional).
+   *
+   *   fácil  → aprendizagem inicial (reconhecer / identificar).
+   *   médio  → aplicação do conceito (usar em situação nova).
+   *   difícil → problemas mais elaborados (analisar / combinar).
+   *
+   * A criança só avança pro próximo nível após demonstrar DOMÍNIO
+   * (padrão ≥70% de acertos) do nível anterior. O desempenho de cada
+   * etapa fica registrado (localStorage por criança+aula) e é agregado
+   * ao contador global de acertos/erros da aula em `escola_progresso`.
+   *
+   * Se ausente, o bloco Exercícios cai no fallback simples de `exercicios[]`.
+   */
+  niveis?: {
+    facil?: QuizItem[];
+    medio?: QuizItem[];
+    dificil?: QuizItem[];
+    /** Percentual mínimo pra desbloquear o próximo nível. Padrão: 70. */
+    dominioMinimo?: number;
+  };
+
+
   // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
   motivacao?: string;
   proximaHabilidade?: { codigo: string; titulo?: string };
