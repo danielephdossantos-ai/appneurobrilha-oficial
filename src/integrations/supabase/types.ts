@@ -1871,6 +1871,47 @@ export type Database = {
         }
         Relationships: []
       }
+      escola_progresso: {
+        Row: {
+          bloco_atual: number
+          child_id: string
+          codigo_bncc: string
+          concluida: boolean
+          concluida_em: string | null
+          created_at: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          bloco_atual?: number
+          child_id: string
+          codigo_bncc: string
+          concluida?: boolean
+          concluida_em?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          bloco_atual?: number
+          child_id?: string
+          codigo_bncc?: string
+          concluida?: boolean
+          concluida_em?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "escola_progresso_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       exam_mission_contents: {
         Row: {
           bncc_code: string | null
