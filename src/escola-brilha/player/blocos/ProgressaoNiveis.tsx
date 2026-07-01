@@ -143,6 +143,8 @@ export function ProgressaoNiveis({
           nivel={nivelAtual}
           questoes={niveis[nivelAtual]!}
           dominioMinimo={dominio}
+          tracker={tracker}
+          onDificuldadeDetectada={(motivo) => setIntervencao({ motivo })}
           onFim={(acertos, total) => {
             const dominado = Math.round((acertos / total) * 100) >= dominio;
             const anterior = reg[nivelAtual];
@@ -166,9 +168,22 @@ export function ProgressaoNiveis({
           }}
         />
       )}
+
+      {/* painel de reforço automático quando dificuldade é detectada */}
+      {intervencao && (
+        <PainelAdaptativo
+          aula={aula}
+          motivo={intervencao.motivo}
+          onFechar={() => {
+            tracker.zerarSequencia();
+            setIntervencao(null);
+          }}
+        />
+      )}
     </Secao>
   );
 }
+
 
 /* -------------------- rodada de perguntas de um nível -------------------- */
 
