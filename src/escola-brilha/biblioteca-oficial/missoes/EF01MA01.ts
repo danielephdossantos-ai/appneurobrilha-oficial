@@ -7,8 +7,11 @@ import type { MissaoOficial } from "../types";
  */
 const missao: MissaoOficial = {
   codigo: "EF01MA01",
-  disciplina: "Matemática",
+  etapa: "Ensino Fundamental",
   ano: "1º Ano",
+  disciplina: "Matemática",
+  unidadeTematica: "Números",
+  objetoConhecimento: "Contagem de rotina, contagem ascendente e descendente e reconhecimento de números no contexto diário",
 
   missaoPrincipal: {
     titulo: "Os Três Superpoderes dos Números",
