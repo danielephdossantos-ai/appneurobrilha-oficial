@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Clock, Target, BookOpen, Sparkles, Rocket, ArrowRight, Trophy } from "lucide-react";
+import { Clock, Target, Sparkles, Rocket, ArrowRight, Trophy } from "lucide-react";
 import { proximaMissao, type MissaoMeta, type Dificuldade } from "./proxima-missao";
+import { temaDaDisciplina } from "./missoes-tema";
 
 const CORES_DIF: Record<Dificuldade, { bg: string; fg: string }> = {
   Fácil: { bg: "bg-[#22C55E]/20", fg: "text-[#137a3a]" },
@@ -49,8 +50,8 @@ export function ProximaMissao({
           Você concluiu todas as missões disponíveis! 🎉
         </h2>
         <p className="text-sm text-white/85 mt-1">
-          Novas aulas chegam em breve. Enquanto isso, volte para revisar e fortalecer o
-          domínio das habilidades.
+          Novas aventuras chegam em breve. Enquanto isso, volte para revisar e fortalecer as
+          missões conquistadas.
         </p>
       </div>
     );
@@ -58,6 +59,7 @@ export function ProximaMissao({
 
   const { aula, tempoEstimadoMin, dificuldade, objetivo } = meta;
   const dif = CORES_DIF[dificuldade];
+  const tema = temaDaDisciplina(aula.disciplina);
 
   return (
     <div className="rounded-3xl bg-gradient-to-br from-[#0d1f55] via-[#1a2f7a] to-[#4C9EFF] text-white p-5 mb-4 shadow-lg relative overflow-hidden">
@@ -70,12 +72,12 @@ export function ProximaMissao({
           </div>
         </div>
 
+        <div className="text-[11px] font-black uppercase tracking-widest text-[#FFC93C]/90 mb-1">
+          {tema.emoji} {tema.nome}
+        </div>
         <h2 className="text-xl font-black leading-tight mb-2">{aula.titulo}</h2>
 
         <div className="flex flex-wrap gap-1.5 mb-3">
-          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
-            <BookOpen className="h-3 w-3" /> {aula.disciplina}
-          </span>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
             {aula.ano}
           </span>
@@ -87,14 +89,11 @@ export function ProximaMissao({
           >
             <Sparkles className="h-3 w-3" /> {dificuldade}
           </span>
-          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
-            {aula.codigo}
-          </span>
         </div>
 
         <div className="rounded-2xl bg-white/10 border border-white/20 p-3 mb-3">
           <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-white/70 mb-1">
-            <Target className="h-3 w-3" /> Objetivo desta aula
+            <Target className="h-3 w-3" /> Objetivo desta missão
           </div>
           <p className="text-sm font-bold leading-snug">{objetivo}</p>
         </div>

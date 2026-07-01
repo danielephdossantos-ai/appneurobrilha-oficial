@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { RefreshCw, TrendingDown, CalendarClock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { temaDoCodigo } from "./missoes-tema";
+import { getAula } from "./registry";
 
 type Reco = {
   codigo_bncc: string;
@@ -41,7 +43,7 @@ export function RevisoesRecomendadas({ childId }: { childId: string | undefined 
       <div className="flex items-center gap-2 text-[#B0431E] mb-2">
         <RefreshCw className="h-4 w-4" />
         <span className="text-[10px] font-black uppercase tracking-widest">
-          Revisões recomendadas ({items.length})
+          Missões para revisar ({items.length})
         </span>
       </div>
       <p className="text-xs text-[#0d1f55]/70 mb-3">
@@ -50,6 +52,9 @@ export function RevisoesRecomendadas({ childId }: { childId: string | undefined 
       <div className="space-y-2">
         {items.slice(0, 6).map((it) => {
           const caiu = it.motivo === "desempenho_caiu";
+          const tema = temaDoCodigo(it.codigo_bncc);
+          const aula = getAula(it.codigo_bncc);
+          const titulo = aula?.titulo ?? tema.nome;
           return (
             <Link
               key={it.codigo_bncc}
@@ -63,7 +68,10 @@ export function RevisoesRecomendadas({ childId }: { childId: string | undefined 
                 <CalendarClock className="h-4 w-4 text-[#4C9EFF] shrink-0" />
               )}
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-black text-[#0d1f55] truncate">{it.codigo_bncc}</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55 truncate">
+                  {tema.emoji} {tema.nome}
+                </div>
+                <div className="text-sm font-black text-[#0d1f55] truncate">{titulo}</div>
                 <div className="text-[10px] text-[#0d1f55]/60">
                   {caiu
                     ? `Caiu ${Math.abs(it.variacao ?? 0)} pts — revisar`

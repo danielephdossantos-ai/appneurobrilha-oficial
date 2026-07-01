@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Compass } from "lucide-react";
 import { Secao } from "./Secao";
 import { hasAula } from "../../registry";
+import { temaDoCodigo } from "../../missoes-tema";
 
 export function ProximaHabilidade({
   proxima,
@@ -10,25 +11,26 @@ export function ProximaHabilidade({
 }) {
   if (!proxima) {
     return (
-      <Secao icon={Compass} rotulo="Próxima habilidade" cor="#4C9EFF">
+      <Secao icon={Compass} rotulo="Próxima missão" cor="#4C9EFF">
         <p className="text-sm text-white/80">
-          Você chegou ao fim desta aula. Volte ao catálogo pra escolher a próxima!
+          Você chegou ao fim desta missão. Volte ao catálogo pra escolher a próxima aventura!
         </p>
         <Link
           to="/escola-brilha"
           className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-[#0d1f55] font-black text-sm"
         >
-          Voltar ao catálogo <ArrowRight className="h-4 w-4" />
+          Voltar às missões <ArrowRight className="h-4 w-4" />
         </Link>
       </Secao>
     );
   }
   const disponivel = hasAula(proxima.codigo);
+  const tema = temaDoCodigo(proxima.codigo);
   return (
-    <Secao icon={Compass} rotulo="Próxima habilidade" cor="#4C9EFF">
+    <Secao icon={Compass} rotulo="Próxima missão" cor="#4C9EFF">
       <div className="rounded-2xl bg-white/10 border border-white/20 p-3 mb-3">
         <div className="text-[10px] font-black uppercase tracking-widest text-white/60">
-          {proxima.codigo}
+          {tema.emoji} {tema.nome}
         </div>
         {proxima.titulo && <div className="font-black mt-0.5">{proxima.titulo}</div>}
       </div>
@@ -42,7 +44,7 @@ export function ProximaHabilidade({
         </Link>
       ) : (
         <div className="text-sm text-white/70">
-          Essa próxima aula ainda está sendo escrita. Volte em breve!
+          Essa próxima missão ainda está sendo preparada. Volte em breve!
         </div>
       )}
     </Secao>
