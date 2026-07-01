@@ -174,6 +174,13 @@ function EscolaBrilhaCatalogo() {
           </p>
         </div>
 
+        {/* Próxima missão recomendada — experiência contínua */}
+        <ProximaMissao
+          childId={activeChild?.id}
+          serieCrianca={activeChild?.serie}
+          nomeCrianca={activeChild?.nome}
+        />
+
         {/* Revisões automáticas recomendadas */}
         <RevisoesRecomendadas childId={activeChild?.id} />
 
