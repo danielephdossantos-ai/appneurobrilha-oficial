@@ -54,4 +54,101 @@ export function totalMissoesOficiais(): number {
   return Object.keys(registry).length;
 }
 
-export type { MissaoOficial } from "./types";
+/**
+ * Biblioteca Nacional de Missões — árvore hierárquica oficial.
+ *
+ *   Etapa → Ano → Disciplina → Unidade Temática → Objeto de Conhecimento → Código BNCC → Missão
+ *
+ * Regra travada: cada código BNCC aparece uma única vez (garantido pelo registry).
+ */
+export type NoMissaoBiblioteca = {
+  codigo: string;
+  missao: MissaoOficial;
+};
+export type NoObjetoConhecimento = {
+  objetoConhecimento: string;
+  missoes: NoMissaoBiblioteca[];
+};
+export type NoUnidadeTematica = {
+  unidadeTematica: string;
+  objetosConhecimento: NoObjetoConhecimento[];
+};
+export type NoDisciplina = {
+  disciplina: string;
+  unidadesTematicas: NoUnidadeTematica[];
+};
+export type NoAno = {
+  ano: string;
+  disciplinas: NoDisciplina[];
+};
+export type NoEtapa = {
+  etapa: string;
+  anos: NoAno[];
+};
+export type BibliotecaNacionalMissoes = NoEtapa[];
+
+const ORDEM_ETAPA: Record<string, number> = {
+  "Educação Infantil": 0,
+  "Ensino Fundamental": 1,
+  "Ensino Médio": 2,
+};
+
+function grupoOrdenado<T, K extends string>(
+  items: T[],
+  key: (i: T) => K,
+  cmp: (a: K, b: K) => number = (a, b) => a.localeCompare(b),
+): Array<[K, T[]]> {
+  const map = new Map<K, T[]>();
+  for (const it of items) {
+    const k = key(it);
+    const arr = map.get(k) ?? [];
+    arr.push(it);
+    map.set(k, arr);
+  }
+  return [...map.entries()].sort(([a], [b]) => cmp(a, b));
+}
+
+export function getBibliotecaNacionalMissoes(): BibliotecaNacionalMissoes {
+  const todas = listMissoesOficiais();
+  return grupoOrdenado(
+    todas,
+    (m) => m.etapa,
+    (a, b) => (ORDEM_ETAPA[a] ?? 99) - (ORDEM_ETAPA[b] ?? 99) || a.localeCompare(b),
+  ).map(([etapa, porEtapa]) => ({
+    etapa,
+    anos: grupoOrdenado(porEtapa, (m) => m.ano).map(([ano, porAno]) => ({
+      ano,
+      disciplinas: grupoOrdenado(porAno, (m) => m.disciplina).map(([disciplina, porDisc]) => ({
+        disciplina,
+        unidadesTematicas: grupoOrdenado(porDisc, (m) => m.unidadeTematica).map(
+          ([unidadeTematica, porUnid]) => ({
+            unidadeTematica,
+            objetosConhecimento: grupoOrdenado(porUnid, (m) => m.objetoConhecimento).map(
+              ([objetoConhecimento, porObj]) => ({
+                objetoConhecimento,
+                missoes: porObj
+                  .sort((a, b) => a.codigo.localeCompare(b.codigo))
+                  .map((m) => ({ codigo: m.codigo, missao: m })),
+              }),
+            ),
+          }),
+        ),
+      })),
+    })),
+  }));
+}
+
+/** Metadados oficiais da Biblioteca Nacional de Missões. */
+export const BIBLIOTECA_NACIONAL_MISSOES = {
+  hierarquia: [
+    "Etapa",
+    "Ano Escolar",
+    "Disciplina",
+    "Unidade Temática",
+    "Objeto de Conhecimento",
+    "Código BNCC",
+    "Missão",
+  ] as const,
+  regra: "Cada código BNCC possui exatamente UMA missão. Duplicidades são rejeitadas no registry.",
+  viewCobertura: "public.vw_biblioteca_nacional_missoes",
+} as const;
