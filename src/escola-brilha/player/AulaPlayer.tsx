@@ -17,6 +17,7 @@ import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Conclusao } from "./blocos/Conclusao";
+import { Diagnostico } from "./blocos/Diagnostico";
 
 /**
  * Player único de aulas do Escola Brilha.
