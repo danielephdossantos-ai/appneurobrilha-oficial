@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+export type DiagnosticoResultado = "dominio" | "parcial" | "revisao";
+
 export type Progresso = {
   bloco_atual: number;
   concluida: boolean;
@@ -11,6 +13,10 @@ export type Progresso = {
   tentativas: number;
   erros: number;
   acertos: number;
+  diagnostico_feito: boolean;
+  diagnostico_acertos: number;
+  diagnostico_total: number;
+  diagnostico_resultado: DiagnosticoResultado | null;
   carregado: boolean;
 };
 
@@ -28,6 +34,10 @@ const VAZIO: Progresso = {
   tentativas: 0,
   erros: 0,
   acertos: 0,
+  diagnostico_feito: false,
+  diagnostico_acertos: 0,
+  diagnostico_total: 0,
+  diagnostico_resultado: null,
   carregado: false,
 };
 
