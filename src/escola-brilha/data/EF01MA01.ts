@@ -12,6 +12,34 @@ const aula: Aula = {
   disciplina: "Matemática",
   titulo: "Para que servem os números?",
 
+  conhecimentosPrevios: [
+    "Reconhecer os números de 0 a 10 falados e escritos.",
+    "Contar objetos apontando um a um.",
+    "Saber dizer quem chegou em 1º, 2º e 3º lugar.",
+  ],
+
+  diagnostico: [
+    {
+      pergunta: "Quantos dedos você tem em uma mão só?",
+      opcoes: ["3", "5", "10"],
+      correta: 1,
+      explicacao: "Cada mão tem 5 dedos — contar quantidade é o primeiro superpoder dos números.",
+    },
+    {
+      pergunta: "Na fila do lanche, quem chega primeiro é o…",
+      opcoes: ["1º lugar", "10º lugar", "Último"],
+      correta: 0,
+      explicacao: "1º mostra a ordem — quem chegou antes de todo mundo.",
+    },
+    {
+      pergunta: "O número da sua casa serve pra quê?",
+      opcoes: ["Contar as casas do mundo", "Identificar a sua casa", "Dizer em que lugar chegou"],
+      correta: 1,
+      explicacao: "É um código de identificação — não conta nem ordena, só identifica.",
+    },
+  ],
+
+
   missao:
     "Descobrir os três superpoderes secretos dos números: contar, ordenar e identificar.",
 
