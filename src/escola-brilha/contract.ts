@@ -2,25 +2,30 @@
  * Contrato obrigatório de Missões do Escola Brilha.
  * Espelha exatamente a trava do banco (trigger validate_lesson_contract).
  *
- * ORDEM OFICIAL DA MISSÃO — 15 blocos, sem exceção:
- *   1. Abertura              → conteudo_json.abertura
- *   2. História Inicial      → conteudo_json.historia_inicial
- *   3. Objetivo da Missão    → conteudo_json.objetivo_missao
- *   4. Conhecimentos Prévios → conteudo_json.conhecimentos_previos (>=1)
- *   5. Descoberta            → conteudo_json.descoberta
- *   6. Explicação            → conteudo_json.explicacao (>=2 etapas)
- *   7. Demonstração          → conteudo_json.demonstracao
- *   8. Atividade Guiada      → conteudo_json.atividade_guiada
- *   9. Exercícios            → conteudo_json.exercicios (>=1)
- *  10. Desafio               → conteudo_json.desafio
- *  11. Mini Jogo             → conteudo_json.mini_jogo
- *  12. Revisão               → conteudo_json.revisao
- *  13. Quiz                  → conteudo_json.quiz (>=3)
- *  14. Medalha               → conteudo_json.medalha
- *  15. Próxima Missão        → conteudo_json.proxima_missao
+ * ORDEM OFICIAL DA MISSÃO — 20 blocos, sem exceção:
+ *   01. Introdução           → conteudo_json.introducao
+ *   02. História             → conteudo_json.historia
+ *   03. Objetivos            → conteudo_json.objetivos (>=1)
+ *   04. Conhecimentos Prévios→ conteudo_json.conhecimentos_previos (>=1)
+ *   05. Motivação            → conteudo_json.motivacao
+ *   06. Descoberta           → conteudo_json.descoberta
+ *   07. Explicação           → conteudo_json.explicacao (>=2 etapas)
+ *   08. Demonstração         → conteudo_json.demonstracao
+ *   09. Exemplo 1            → conteudo_json.exemplo_1
+ *   10. Exemplo 2            → conteudo_json.exemplo_2
+ *   11. Curiosidade          → conteudo_json.curiosidade
+ *   12. Atividade Guiada     → conteudo_json.atividade_guiada
+ *   13. Exercícios           → conteudo_json.exercicios (>=1)
+ *   14. Desafio              → conteudo_json.desafio
+ *   15. Revisão              → conteudo_json.revisao
+ *   16. Resumo               → conteudo_json.resumo
+ *   17. Quiz                 → conteudo_json.quiz (>=3)
+ *   18. Feedback             → conteudo_json.feedback
+ *   19. Conquista            → conteudo_json.conquista
+ *   20. Próxima Missão       → conteudo_json.proxima_missao
  *
- * O código BNCC (codigo_bncc) continua interno: admin, relatórios e
- * roteamento. Nada disso aparece pra criança.
+ * O código BNCC (codigo_bncc) permanece interno.
+ * Nenhuma missão pode ser publicada incompleta.
  */
 
 export type QuizItem = {
@@ -36,52 +41,62 @@ export type ExercicioItem = {
   explicacao?: string;
 };
 
+export type ExemploResolvido = {
+  titulo?: string;
+  enunciado: string;
+  passos: string[];
+  resposta: string;
+  contexto_cotidiano?: string;
+};
+
 export type MissaoBlocos = {
-  // 1
-  abertura: { titulo: string; texto: string };
-  // 2
-  historia_inicial: { titulo: string; narrativa: string };
-  // 3
-  objetivo_missao: { titulo: string; itens: string[] };
-  // 4
+  // 01
+  introducao: { titulo: string; texto: string };
+  // 02
+  historia: { titulo: string; narrativa: string };
+  // 03
+  objetivos: string[];
+  // 04
   conhecimentos_previos: string[];
-  // 5
+  // 05
+  motivacao: { titulo: string; texto: string };
+  // 06
   descoberta: { titulo: string; pergunta_guia: string; pista: string };
-  // 6 — explicação principal + etapas
+  // 07
   explicacao: { titulo: string; etapas: string[] };
-  // 7
+  // 08
   demonstracao: { enunciado: string; passos: string[]; resposta: string };
-  // 8
-  atividade_guiada: { enunciado: string; resposta: string; explicacao: string };
-  // 9
-  exercicios: ExercicioItem[];
+  // 09
+  exemplo_1: ExemploResolvido;
   // 10
-  desafio: { enunciado: string; resposta: string; explicacao?: string };
+  exemplo_2: ExemploResolvido;
   // 11
-  mini_jogo:
-    | { tipo: "arrastar"; titulo: string; instrucao: string; pares: Array<{ item: string; alvo: string }> }
-    | { tipo: "ordenar"; titulo: string; instrucao: string; itens: string[] }
-    | { tipo: "ligar"; titulo: string; instrucao: string; pares: Array<{ a: string; b: string }> }
-    | { tipo: "colorir"; titulo: string; instrucao: string; regioes: Array<{ nome: string; corCorreta: string }>; paleta: string[] }
-    | { tipo: "montar"; titulo: string; instrucao: string; pecas: string[] };
+  curiosidade: { titulo: string; texto: string };
   // 12
-  revisao: { pontos: string[]; dica: string };
+  atividade_guiada: { enunciado: string; resposta: string; explicacao: string };
   // 13
-  quiz: QuizItem[];
+  exercicios: ExercicioItem[];
   // 14
-  medalha: { nome: string; descricao: string; icone?: string };
+  desafio: { enunciado: string; resposta: string; explicacao?: string };
   // 15
+  revisao: { pontos: string[]; dica: string };
+  // 16
+  resumo: { pontos: string[]; frase_final?: string };
+  // 17
+  quiz: QuizItem[];
+  // 18
+  feedback: { acerto: string; erro: string; parcial?: string };
+  // 19
+  conquista: { nome: string; descricao: string; icone?: string; xp?: number };
+  // 20
   proxima_missao: { codigo_bncc: string; titulo?: string; convite?: string };
 };
 
 export type LessonContract = {
-  // Colunas planas obrigatórias
   codigo_bncc: string;
   ano: string;
   disciplina: string;
   titulo: string;
-
-  // Estrutura oficial da missão
   conteudo_json: MissaoBlocos;
 };
 
@@ -91,14 +106,17 @@ export type LessonValidationResult =
 
 /**
  * Validador local — mesmas regras da trigger do banco.
- * Use antes de gravar pra dar feedback imediato ao autor da missão.
  */
 export function validateLesson(l: Partial<LessonContract>): LessonValidationResult {
   const faltando: string[] = [];
   const s = (v: unknown) => typeof v === "string" && v.trim() !== "";
   const arr = (v: unknown, n = 1) => Array.isArray(v) && v.length >= n;
-  const obj = (v: unknown) =>
-    !!v && typeof v === "object" && !Array.isArray(v);
+  const obj = (v: unknown) => !!v && typeof v === "object" && !Array.isArray(v);
+  const exemplo = (v: unknown) =>
+    obj(v) &&
+    s((v as ExemploResolvido).enunciado) &&
+    arr((v as ExemploResolvido).passos) &&
+    s((v as ExemploResolvido).resposta);
 
   if (!s(l.titulo)) faltando.push("titulo");
   if (!s(l.ano)) faltando.push("ano");
@@ -106,53 +124,42 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
 
   const c = (l.conteudo_json ?? {}) as Partial<MissaoBlocos>;
 
-  // 1. Abertura
-  if (!obj(c.abertura) || !s(c.abertura?.titulo) || !s(c.abertura?.texto))
-    faltando.push("1. abertura");
-  // 2. História Inicial
-  // 2. História Inicial — narrativa curta (≤ 2 min de leitura ≈ 1500 caracteres)
-  //    Deve despertar curiosidade, criar contexto, apresentar um problema e
-  //    convidar a criança a participar. Está diretamente ligada à BNCC da missão.
-  if (!obj(c.historia_inicial) || !s(c.historia_inicial?.titulo) || !s(c.historia_inicial?.narrativa))
-    faltando.push("2. historia_inicial");
-  else if ((c.historia_inicial!.narrativa ?? "").length > 1500)
-    faltando.push("2. historia_inicial (narrativa acima de 2 min de leitura — máx. 1500 caracteres)");
-  // 3. Objetivo
-  if (!obj(c.objetivo_missao) || !s(c.objetivo_missao?.titulo) || !arr(c.objetivo_missao?.itens))
-    faltando.push("3. objetivo_missao (>=1 item)");
-  // 4. Conhecimentos prévios
-  if (!arr(c.conhecimentos_previos)) faltando.push("4. conhecimentos_previos (>=1)");
-  // 5. Descoberta
+  if (!obj(c.introducao) || !s(c.introducao?.titulo) || !s(c.introducao?.texto))
+    faltando.push("01. introducao");
+  if (!obj(c.historia) || !s(c.historia?.titulo) || !s(c.historia?.narrativa))
+    faltando.push("02. historia");
+  else if ((c.historia!.narrativa ?? "").length > 1500)
+    faltando.push("02. historia (narrativa acima de 2 min — máx. 1500 caracteres)");
+  if (!arr(c.objetivos)) faltando.push("03. objetivos (>=1)");
+  if (!arr(c.conhecimentos_previos)) faltando.push("04. conhecimentos_previos (>=1)");
+  if (!obj(c.motivacao) || !s(c.motivacao?.titulo) || !s(c.motivacao?.texto))
+    faltando.push("05. motivacao");
   if (!obj(c.descoberta) || !s(c.descoberta?.titulo) || !s(c.descoberta?.pergunta_guia) || !s(c.descoberta?.pista))
-    faltando.push("5. descoberta");
-  // 6. Explicação (>=2 etapas)
+    faltando.push("06. descoberta");
   if (!obj(c.explicacao) || !s(c.explicacao?.titulo) || !arr(c.explicacao?.etapas, 2))
-    faltando.push("6. explicacao (>=2 etapas)");
-  // 7. Demonstração
+    faltando.push("07. explicacao (>=2 etapas)");
   if (!obj(c.demonstracao) || !s(c.demonstracao?.enunciado) || !arr(c.demonstracao?.passos) || !s(c.demonstracao?.resposta))
-    faltando.push("7. demonstracao");
-  // 8. Atividade Guiada
+    faltando.push("08. demonstracao");
+  if (!exemplo(c.exemplo_1)) faltando.push("09. exemplo_1");
+  if (!exemplo(c.exemplo_2)) faltando.push("10. exemplo_2");
+  if (!obj(c.curiosidade) || !s(c.curiosidade?.titulo) || !s(c.curiosidade?.texto))
+    faltando.push("11. curiosidade");
   if (!obj(c.atividade_guiada) || !s(c.atividade_guiada?.enunciado) || !s(c.atividade_guiada?.resposta) || !s(c.atividade_guiada?.explicacao))
-    faltando.push("8. atividade_guiada");
-  // 9. Exercícios
-  if (!arr(c.exercicios)) faltando.push("9. exercicios (>=1)");
-  // 10. Desafio
+    faltando.push("12. atividade_guiada");
+  if (!arr(c.exercicios)) faltando.push("13. exercicios (>=1)");
   if (!obj(c.desafio) || !s((c.desafio as { enunciado?: string })?.enunciado) || !s((c.desafio as { resposta?: string })?.resposta))
-    faltando.push("10. desafio");
-  // 11. Mini Jogo
-  if (!obj(c.mini_jogo) || !s((c.mini_jogo as { tipo?: string })?.tipo) || !s((c.mini_jogo as { titulo?: string })?.titulo))
-    faltando.push("11. mini_jogo");
-  // 12. Revisão
+    faltando.push("14. desafio");
   if (!obj(c.revisao) || !arr(c.revisao?.pontos) || !s(c.revisao?.dica))
-    faltando.push("12. revisao (pontos>=1 + dica)");
-  // 13. Quiz
-  if (!arr(c.quiz, 3)) faltando.push("13. quiz (>=3 perguntas)");
-  // 14. Medalha
-  if (!obj(c.medalha) || !s(c.medalha?.nome) || !s(c.medalha?.descricao))
-    faltando.push("14. medalha");
-  // 15. Próxima Missão
+    faltando.push("15. revisao (pontos>=1 + dica)");
+  if (!obj(c.resumo) || !arr(c.resumo?.pontos))
+    faltando.push("16. resumo (pontos>=1)");
+  if (!arr(c.quiz, 3)) faltando.push("17. quiz (>=3 perguntas)");
+  if (!obj(c.feedback) || !s(c.feedback?.acerto) || !s(c.feedback?.erro))
+    faltando.push("18. feedback (acerto + erro)");
+  if (!obj(c.conquista) || !s(c.conquista?.nome) || !s(c.conquista?.descricao))
+    faltando.push("19. conquista (nome + descricao)");
   if (!obj(c.proxima_missao) || !s(c.proxima_missao?.codigo_bncc))
-    faltando.push("15. proxima_missao (codigo_bncc)");
+    faltando.push("20. proxima_missao (codigo_bncc)");
 
   return faltando.length === 0 ? { ok: true } : { ok: false, faltando };
 }
