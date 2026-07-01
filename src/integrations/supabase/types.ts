@@ -1965,6 +1965,44 @@ export type Database = {
           },
         ]
       }
+      escola_revisoes_historico: {
+        Row: {
+          child_id: string
+          codigo_bncc: string
+          created_at: string
+          desempenho: number
+          id: string
+          registrado_em: string
+          tipo: string
+        }
+        Insert: {
+          child_id: string
+          codigo_bncc: string
+          created_at?: string
+          desempenho: number
+          id?: string
+          registrado_em?: string
+          tipo?: string
+        }
+        Update: {
+          child_id?: string
+          codigo_bncc?: string
+          created_at?: string
+          desempenho?: number
+          id?: string
+          registrado_em?: string
+          tipo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "escola_revisoes_historico_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       exam_mission_contents: {
         Row: {
           bncc_code: string | null
@@ -7004,6 +7042,25 @@ export type Database = {
         }[]
       }
       rb_etapas_faltantes: { Args: { _aula_id: string }; Returns: string[] }
+      recomendar_revisoes: {
+        Args: { _child_id: string }
+        Returns: {
+          codigo_bncc: string
+          motivo: string
+          proxima_revisao: string
+          ultimo_desempenho: number
+          variacao: number
+        }[]
+      }
+      registrar_conclusao_aula: {
+        Args: {
+          _child_id: string
+          _codigo_bncc: string
+          _desempenho: number
+          _tipo?: string
+        }
+        Returns: string
+      }
       reset_daily_coins: { Args: never; Returns: undefined }
       restore_lesson_version: {
         Args: { _change_reason?: string; _version_id: string }
