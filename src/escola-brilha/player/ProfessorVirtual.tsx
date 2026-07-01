@@ -137,8 +137,9 @@ function construirFala(args: {
   nomeCrianca?: string;
   acertos: number;
   erros: number;
+  mascoteNome?: string;
 }): string {
-  const { aula, blocoId, faixa, nomeCrianca, acertos, erros } = args;
+  const { aula, blocoId, faixa, nomeCrianca, acertos, erros, mascoteNome } = args;
   const nome = nomeCrianca ? `, ${nomeCrianca}` : "";
 
   const T = TEMPLATES[blocoId][faixa];
@@ -151,6 +152,7 @@ function construirFala(args: {
   base = base.replaceAll("{missao}", aula.missao);
   base = base.replaceAll("{dica}", aula.revisao?.dica ?? "capriche na atenção!");
   base = base.replaceAll("{acertos}", String(acertos));
+  base = base.replaceAll("{mascote}", mascoteNome ?? "Pip");
 
   // Feedback dinâmico na conclusão
   if (blocoId === "conclusao") {
