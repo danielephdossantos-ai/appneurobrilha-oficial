@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
+import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
 
 
@@ -172,6 +173,13 @@ function EscolaBrilhaCatalogo() {
             Toque numa série para ver as disciplinas, e numa disciplina para ver as habilidades BNCC.
           </p>
         </div>
+
+        {/* Próxima missão recomendada — experiência contínua */}
+        <ProximaMissao
+          childId={activeChild?.id}
+          serieCrianca={activeChild?.serie}
+          nomeCrianca={activeChild?.nome}
+        />
 
         {/* Revisões automáticas recomendadas */}
         <RevisoesRecomendadas childId={activeChild?.id} />
