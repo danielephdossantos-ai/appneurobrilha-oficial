@@ -1,19 +1,19 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowLeft, BookOpen, CheckCircle2, Lock } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, BookOpen, CheckCircle2, ChevronDown, ChevronRight, Lock } from "lucide-react";
 import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
-import { listAulas, hasAula } from "@/escola-brilha/registry";
+import { listAulas } from "@/escola-brilha/registry";
 
 export const Route = createFileRoute("/escola-brilha/")({
   head: () => ({
     meta: [
-      { title: "Escola Brilha — Aulas de verdade" },
+      { title: "Escola Brilha — Aulas por série e disciplina" },
       {
         name: "description",
         content:
-          "Aulas escritas com carinho, uma por uma, seguindo a BNCC. Sem gerador automático, sem enrolação — só ensino de verdade.",
+          "Catálogo BNCC organizado por série (Educação Infantil ao 9º Ano) e disciplina. Cada aula escrita à mão, pedagogia de verdade.",
       },
     ],
   }),
@@ -22,13 +22,52 @@ export const Route = createFileRoute("/escola-brilha/")({
 
 type HabRow = { codigo: string; titulo: string; ano: string; componente: string };
 
+// Ordem oficial das séries no catálogo.
+const SERIES_ORDEM = [
+  "Educação Infantil",
+  "1º Ano",
+  "2º Ano",
+  "3º Ano",
+  "4º Ano",
+  "5º Ano",
+  "6º Ano",
+  "7º Ano",
+  "8º Ano",
+  "9º Ano",
+] as const;
+type Serie = (typeof SERIES_ORDEM)[number];
+
+// Expande "X ao Y Ano" para cada série que ele cobre.
+function expandirAno(ano: string): Serie[] {
+  const a = (ano || "").trim();
+  if (!a) return [];
+  const direto = SERIES_ORDEM.find((s) => s === a);
+  if (direto) return [direto];
+  if (a === "Educação Infantil") return ["Educação Infantil"];
+  // padrões "1º ao 5º Ano", "6º ao 9º Ano", etc.
+  const m = a.match(/(\d)[ºo]?\s*ao\s*(\d)[ºo]?\s*Ano/i);
+  if (m) {
+    const ini = parseInt(m[1], 10);
+    const fim = parseInt(m[2], 10);
+    const out: Serie[] = [];
+    for (let i = ini; i <= fim; i++) {
+      const label = `${i}º Ano` as Serie;
+      if (SERIES_ORDEM.includes(label)) out.push(label);
+    }
+    return out;
+  }
+  return []; // Ensino Médio e outros ficam de fora conforme escopo
+}
+
 function EscolaBrilhaCatalogo() {
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
-  const [filtro, setFiltro] = useState<string>("disponiveis");
+  const [filtro, setFiltro] = useState<"disponiveis" | "todas">("disponiveis");
+  const [serieAberta, setSerieAberta] = useState<Serie | null>(null);
+  const [discAberta, setDiscAberta] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -62,12 +101,31 @@ function EscolaBrilhaCatalogo() {
   }, [activeChild?.id]);
 
   const aulasEscritas = listAulas();
-  const escritasSet = new Set(aulasEscritas.map((a) => a.codigo));
+  const escritasSet = useMemo(() => new Set(aulasEscritas.map((a) => a.codigo)), [aulasEscritas]);
 
-  const lista =
-    filtro === "disponiveis"
-      ? habilidades.filter((h) => escritasSet.has(h.codigo))
-      : habilidades;
+  // Agrupa: Série -> Disciplina -> [habilidades]
+  const arvore = useMemo(() => {
+    const tree: Record<Serie, Record<string, HabRow[]>> = {} as any;
+    for (const s of SERIES_ORDEM) tree[s] = {};
+    for (const h of habilidades) {
+      if (filtro === "disponiveis" && !escritasSet.has(h.codigo)) continue;
+      const series = expandirAno(h.ano);
+      for (const s of series) {
+        const disc = h.componente || "Outros";
+        (tree[s][disc] ||= []).push(h);
+      }
+    }
+    // ordena habilidades por código dentro de cada disciplina
+    for (const s of SERIES_ORDEM) {
+      for (const d of Object.keys(tree[s])) {
+        tree[s][d].sort((a, b) => a.codigo.localeCompare(b.codigo));
+      }
+    }
+    return tree;
+  }, [habilidades, filtro, escritasSet]);
+
+  const contarSerie = (s: Serie) =>
+    Object.values(arvore[s]).reduce((acc, arr) => acc + arr.length, 0);
 
   return (
     <Shell>
@@ -83,7 +141,7 @@ function EscolaBrilhaCatalogo() {
           </button>
           <div>
             <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55">
-              Aulas de verdade
+              Catálogo por série e disciplina
             </div>
             <h1 className="text-2xl font-black text-[#0d1f55]">Escola Brilha</h1>
           </div>
@@ -95,18 +153,16 @@ function EscolaBrilhaCatalogo() {
             <BookOpen className="h-4 w-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">
               {aulasEscritas.length} aula{aulasEscritas.length === 1 ? "" : "s"} escrita
-              {aulasEscritas.length === 1 ? "" : "s"} · {habilidades.length} habilidades BNCC no
-              currículo
+              {aulasEscritas.length === 1 ? "" : "s"} · {habilidades.length} habilidades BNCC
             </span>
           </div>
           <p className="text-sm text-[#0d1f55] leading-relaxed">
-            Cada aula é escrita à mão, com pedagogia de verdade. Estamos construindo uma por uma —
-            volte sempre pra ver o que há de novo.
+            Toque numa série para ver as disciplinas, e numa disciplina para ver as habilidades BNCC.
           </p>
         </div>
 
         {/* Filtro */}
-        <div className="flex gap-2 mb-3">
+        <div className="flex gap-2 mb-4">
           <button
             onClick={() => setFiltro("disponiveis")}
             className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest ${
@@ -115,7 +171,7 @@ function EscolaBrilhaCatalogo() {
                 : "bg-white text-[#0d1f55]/60 border border-[#0d1f55]/15"
             }`}
           >
-            Disponíveis ({aulasEscritas.length})
+            Disponíveis
           </button>
           <button
             onClick={() => setFiltro("todas")}
@@ -125,67 +181,131 @@ function EscolaBrilhaCatalogo() {
                 : "bg-white text-[#0d1f55]/60 border border-[#0d1f55]/15"
             }`}
           >
-            Todas ({habilidades.length})
+            Todas
           </button>
         </div>
 
-        {/* Lista */}
         {loading ? (
           <div className="text-[#0d1f55]/60 text-sm text-center py-10">Carregando…</div>
-        ) : lista.length === 0 ? (
-          <div className="text-[#0d1f55]/60 text-sm text-center py-10">
-            Nenhuma aula ainda nesse filtro.
-          </div>
         ) : (
           <div className="space-y-2">
-            {lista.slice(0, 200).map((h) => {
-              const disponivel = escritasSet.has(h.codigo);
-              const concluida = progresso[h.codigo];
-              const Card = (
-                <div
-                  className={`rounded-2xl border-2 p-4 flex items-center gap-3 ${
-                    disponivel
-                      ? "bg-white border-white shadow-sm active:scale-[0.99]"
-                      : "bg-white/60 border-[#0d1f55]/10 opacity-70"
-                  }`}
-                >
-                  <div
-                    className={`h-11 w-11 rounded-xl grid place-items-center shrink-0 ${
-                      concluida
-                        ? "bg-[#22C55E] text-white"
-                        : disponivel
-                          ? "bg-[#FFC93C] text-[#0d1f55]"
-                          : "bg-[#0d1f55]/10 text-[#0d1f55]/40"
-                    }`}
+            {SERIES_ORDEM.map((serie) => {
+              const disciplinas = Object.keys(arvore[serie]).sort((a, b) => a.localeCompare(b));
+              const total = contarSerie(serie);
+              const aberta = serieAberta === serie;
+              return (
+                <div key={serie} className="rounded-2xl bg-white border-2 border-white shadow-sm overflow-hidden">
+                  <button
+                    onClick={() => {
+                      setSerieAberta(aberta ? null : serie);
+                      setDiscAberta(null);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 active:scale-[0.995]"
                   >
-                    {concluida ? (
-                      <CheckCircle2 className="h-5 w-5" />
-                    ) : disponivel ? (
-                      <BookOpen className="h-5 w-5" />
-                    ) : (
-                      <Lock className="h-4 w-4" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55">
-                      {h.codigo} · {h.ano} · {h.componente}
+                    <div className="h-11 w-11 rounded-xl bg-[#4C9EFF]/15 text-[#4C9EFF] grid place-items-center shrink-0">
+                      {aberta ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
                     </div>
-                    <div className="text-sm font-black text-[#0d1f55] leading-tight line-clamp-2">
-                      {h.titulo}
+                    <div className="flex-1 text-left">
+                      <div className="text-base font-black text-[#0d1f55]">{serie}</div>
+                      <div className="text-[11px] text-[#0d1f55]/60">
+                        {disciplinas.length} disciplina{disciplinas.length === 1 ? "" : "s"} ·{" "}
+                        {total} habilidade{total === 1 ? "" : "s"}
+                      </div>
                     </div>
-                  </div>
+                  </button>
+
+                  {aberta && (
+                    <div className="border-t border-[#0d1f55]/10 bg-[#F7F9FF] p-2 space-y-2">
+                      {disciplinas.length === 0 && (
+                        <div className="text-[#0d1f55]/50 text-xs text-center py-6">
+                          Nenhuma aula {filtro === "disponiveis" ? "disponível" : ""} nesta série ainda.
+                        </div>
+                      )}
+                      {disciplinas.map((disc) => {
+                        const lista = arvore[serie][disc];
+                        const chave = `${serie}::${disc}`;
+                        const discAtiva = discAberta === chave;
+                        return (
+                          <div key={disc} className="rounded-xl bg-white border border-[#0d1f55]/10 overflow-hidden">
+                            <button
+                              onClick={() => setDiscAberta(discAtiva ? null : chave)}
+                              className="w-full flex items-center gap-3 p-3 active:scale-[0.995]"
+                            >
+                              <div className="h-9 w-9 rounded-lg bg-[#9B6CFF]/15 text-[#9B6CFF] grid place-items-center shrink-0">
+                                {discAtiva ? (
+                                  <ChevronDown className="h-4 w-4" />
+                                ) : (
+                                  <ChevronRight className="h-4 w-4" />
+                                )}
+                              </div>
+                              <div className="flex-1 text-left">
+                                <div className="text-sm font-black text-[#0d1f55]">{disc}</div>
+                                <div className="text-[10px] text-[#0d1f55]/55 font-black uppercase tracking-widest">
+                                  {lista.length} habilidade{lista.length === 1 ? "" : "s"}
+                                </div>
+                              </div>
+                            </button>
+
+                            {discAtiva && (
+                              <div className="border-t border-[#0d1f55]/10 p-2 space-y-2">
+                                {lista.map((h) => {
+                                  const disponivel = escritasSet.has(h.codigo);
+                                  const concluida = progresso[h.codigo];
+                                  const Card = (
+                                    <div
+                                      className={`rounded-xl border-2 p-3 flex items-center gap-3 ${
+                                        disponivel
+                                          ? "bg-white border-white shadow-sm active:scale-[0.99]"
+                                          : "bg-white/60 border-[#0d1f55]/10 opacity-70"
+                                      }`}
+                                    >
+                                      <div
+                                        className={`h-10 w-10 rounded-lg grid place-items-center shrink-0 ${
+                                          concluida
+                                            ? "bg-[#22C55E] text-white"
+                                            : disponivel
+                                              ? "bg-[#FFC93C] text-[#0d1f55]"
+                                              : "bg-[#0d1f55]/10 text-[#0d1f55]/40"
+                                        }`}
+                                      >
+                                        {concluida ? (
+                                          <CheckCircle2 className="h-5 w-5" />
+                                        ) : disponivel ? (
+                                          <BookOpen className="h-5 w-5" />
+                                        ) : (
+                                          <Lock className="h-4 w-4" />
+                                        )}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55">
+                                          {h.codigo}
+                                        </div>
+                                        <div className="text-sm font-black text-[#0d1f55] leading-tight line-clamp-2">
+                                          {h.titulo}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                  return disponivel ? (
+                                    <Link
+                                      key={h.codigo}
+                                      to="/escola-brilha/$codigo"
+                                      params={{ codigo: h.codigo }}
+                                    >
+                                      {Card}
+                                    </Link>
+                                  ) : (
+                                    <div key={h.codigo}>{Card}</div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-              );
-              return disponivel ? (
-                <Link
-                  key={h.codigo}
-                  to="/escola-brilha/$codigo"
-                  params={{ codigo: h.codigo }}
-                >
-                  {Card}
-                </Link>
-              ) : (
-                <div key={h.codigo}>{Card}</div>
               );
             })}
           </div>
