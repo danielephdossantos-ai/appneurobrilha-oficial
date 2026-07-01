@@ -322,8 +322,12 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   );
 }
 
-function textoDoBloco(a: Aula, i: number): string {
-  switch (BLOCOS[i].id) {
+function textoDoBloco(a: Aula, blocoId: BlocoId): string {
+  switch (blocoId) {
+    case "narrativa": {
+      const n = a.narrativa;
+      return n ? `${n.titulo}. ${n.contexto} ${n.problema} ${n.convite}` : "";
+    }
     case "missao":
       return a.missao;
     case "objetivos":
