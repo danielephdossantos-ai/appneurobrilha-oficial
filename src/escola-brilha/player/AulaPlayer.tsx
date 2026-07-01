@@ -254,6 +254,17 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
         )}
       </div>
 
+      {!emDiagnostico && (
+        <ProfessorVirtual
+          aula={aula}
+          blocoId={BLOCOS[idx].id}
+          idade={activeChild?.idade}
+          nomeCrianca={activeChild?.nome}
+          acertos={acertos}
+          erros={erros}
+        />
+      )}
+
       {!emDiagnostico && BLOCOS[idx].id !== "quiz" && (
         <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
           <button
