@@ -1,0 +1,100 @@
+import type { Aula } from "../types";
+
+/**
+ * EF01MA02 — Matemática · 1º Ano
+ * Habilidade BNCC: Contar de maneira exata ou aproximada, utilizando
+ * diferentes estratégias como o pareamento e outros agrupamentos.
+ */
+const aula: Aula = {
+  codigo: "EF01MA02",
+  ano: "1º Ano",
+  disciplina: "Matemática",
+  titulo: "Jeitos espertos de contar",
+
+  objetivo:
+    "Aprender a contar de duas formas: contando cada coisinha (exato) e chutando com esperteza (aproximado), usando truques como parear e agrupar.",
+
+  introducao:
+    "Imagina que a professora esvazia um saco de tampinhas na mesa e pergunta: “Quantas tem aí?”. Você pode contar uma por uma… ou pode ser esperto e usar um truque pra descobrir mais rápido. Bora aprender esses truques?",
+
+  explicacao:
+    "Existem dois jeitos de contar:\n\n• EXATO — você conta cada coisa, uma de cada vez: 1, 2, 3, 4…\n• APROXIMADO — você olha e chuta um número perto do certo, sem contar tudo.\n\nE existem TRUQUES que ajudam a contar rápido:\n\n1) PAREAMENTO — juntar de dois em dois. Se a gente forma 5 pares, sabemos que são 10.\n2) AGRUPAMENTO — juntar em grupinhos iguais (de 2, de 5, de 10). Aí conta os grupos: 5, 10, 15, 20.\n\nQuando tem POUCA coisa, contar exato é fácil. Quando tem MUITA, agrupar salva a vida.",
+
+  exemplo:
+    "Tem 12 lápis espalhados na mesa. Em vez de contar “1, 2, 3, 4…” até 12, a gente pode juntar de 2 em 2 e formar 6 pares. Aí conta os pares: 2, 4, 6, 8, 10, 12. Muito mais rápido!",
+
+  exemploCotidiano:
+    "Na sua mão tem 5 dedos. Se você olhar as duas mãos juntas, não precisa contar dedo por dedo — você já sabe que são 10, porque agrupou de 5 em 5. Isso é agrupamento acontecendo na vida real.",
+
+  praticaGuiada: {
+    enunciado:
+      "Tem 8 balas em cima da mesa. Como contar rápido usando PAREAMENTO?",
+    resposta: "Formo 4 pares (de 2 em 2) e conto: 2, 4, 6, 8.",
+    explicacao:
+      "Pareamento é juntar de dois em dois. Cada par vale 2, então 4 pares valem 8.",
+  },
+
+  praticaIndependente: {
+    enunciado:
+      "Olhando rápido pra um pote com muitas jujubas, você não consegue contar tudo. Você diz “tem umas 30 jujubas”. Isso é contagem exata ou aproximada?",
+    resposta: "É APROXIMADA — você chutou um número perto sem contar uma por uma.",
+    dica: "Se você não contou cada uma, mas deu um palpite bom, é aproximada.",
+  },
+
+  curiosidade:
+    "Pastores de ovelhas antigos, que não sabiam escrever números, contavam suas ovelhas com pedrinhas — uma pedra pra cada ovelha. Isso também é pareamento: uma coisa pra cada coisa!",
+
+  desafio: {
+    enunciado:
+      "Você tem 20 figurinhas. Qual é o jeito mais rápido: contar uma por uma, parear de 2 em 2, ou agrupar de 10 em 10?",
+    resposta:
+      "Agrupar de 10 em 10 — faz só 2 grupinhos e você já sabe: 10 e 10 são 20.",
+  },
+
+  resumo:
+    "Contar EXATO é falar o número de cada coisinha. Contar APROXIMADO é chutar perto. E os truques (parear de 2 em 2, agrupar de 5 em 5 ou 10 em 10) ajudam a contar rápido quando tem muita coisa.",
+
+  revisao: {
+    palavrasChave: ["exato", "aproximado", "pareamento", "agrupamento", "contar"],
+    dica: "Quando tiver muita coisa, não conte uma por uma — junte em grupinhos iguais e conte os grupos.",
+  },
+
+  quiz: [
+    {
+      pergunta: "Contar uma coisinha por vez, sem pular nenhuma, é contagem:",
+      opcoes: ["Exata", "Aproximada", "Errada"],
+      correta: 0,
+      explicacao: "Quando você conta cada uma, o resultado é exato.",
+    },
+    {
+      pergunta:
+        "Você olha um cacho de uvas e diz: 'tem umas 15 uvas'. Isso é:",
+      opcoes: ["Contagem exata", "Contagem aproximada", "Pareamento"],
+      correta: 1,
+      explicacao:
+        "Você chutou um número perto sem contar uma por uma — é aproximado.",
+    },
+    {
+      pergunta: "Juntar 10 pedrinhas de 2 em 2 e formar 5 pares é:",
+      opcoes: ["Pareamento", "Agrupamento de 10", "Chute"],
+      correta: 0,
+      explicacao: "Parear é juntar de 2 em 2. 5 pares dão 10.",
+    },
+    {
+      pergunta: "Qual é o jeito mais rápido de contar 30 tampinhas?",
+      opcoes: [
+        "Contar uma por uma",
+        "Agrupar de 10 em 10 e ter 3 grupinhos",
+        "Fechar os olhos e chutar",
+      ],
+      correta: 1,
+      explicacao:
+        "Com 3 grupos de 10 você já sabe: 10, 20, 30. Muito mais rápido!",
+    },
+  ],
+
+  fechamento:
+    "Agora você tem superpoderes de contagem! Da próxima vez que ver muita coisa junta, lembra: parear de 2, agrupar de 5, agrupar de 10 — escolha o truque e conte rápido.",
+};
+
+export default aula;
