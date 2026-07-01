@@ -39,9 +39,9 @@ function EscolaBrilhaCatalogo() {
         .limit(2000);
       const rows: HabRow[] = (data ?? []).map((r) => ({
         codigo: r.codigo_bncc,
-        titulo: r.titulo,
-        ano: r.ano,
-        componente: r.disciplina,
+        titulo: r.titulo ?? r.codigo_bncc,
+        ano: r.ano ?? "",
+        componente: r.disciplina ?? "",
       }));
       setHabilidades(rows);
       setLoading(false);
