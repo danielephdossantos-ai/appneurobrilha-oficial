@@ -7,6 +7,7 @@ import { mascoteDaAula, disciplinaDaAula } from "../mascotes-disciplina";
 import { mascoteAtribuido } from "../mascote-assign";
 
 type BlocoId =
+  | "narrativa"
   | "missao"
   | "objetivos"
   | "explicacao"
