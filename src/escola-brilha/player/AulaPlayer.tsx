@@ -196,7 +196,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
           >
-            {renderBloco(aula, idx, { acertos, setAcertos, onQuizEnd: next })}
+            {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
           </motion.div>
         </AnimatePresence>
       </div>
