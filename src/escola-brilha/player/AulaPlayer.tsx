@@ -64,6 +64,10 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
+  const BLOCOS = useMemo(
+    () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
+    [aula.narrativa],
+  );
   const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
