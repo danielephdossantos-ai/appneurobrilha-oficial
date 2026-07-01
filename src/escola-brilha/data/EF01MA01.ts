@@ -12,6 +12,18 @@ const aula: Aula = {
   disciplina: "Matemática",
   titulo: "Para que servem os números?",
 
+  narrativa: {
+    titulo: "O sumiço dos números da padaria",
+    contexto:
+      "É segunda de manhã na padaria do seu Zé. Todo dia ele coloca uma plaquinha com o preço do pão, o número da senha e o lugar de cada cliente na fila. Mas hoje, quando o sol nasceu, os números tinham SUMIDO das plaquinhas!",
+    problema:
+      "Sem números, ninguém sabe quantos pães levar, quem chegou primeiro na fila e nem qual é o troco. A padaria virou uma confusão danada — e o seu Zé está quase chorando!",
+    convite:
+      "Bora ajudar o seu Zé a descobrir pra que servem os números e salvar a padaria?",
+  },
+
+
+
   conhecimentosPrevios: [
     "Reconhecer os números de 0 a 10 falados e escritos.",
     "Contar objetos apontando um a um.",
