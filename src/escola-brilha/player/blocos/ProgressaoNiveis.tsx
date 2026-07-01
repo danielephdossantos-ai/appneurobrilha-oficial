@@ -1,8 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, Lock, CheckCircle2, XCircle, Sparkles, RefreshCw } from "lucide-react";
 import { Secao } from "./Secao";
 import type { Aula, QuizItem } from "../../types";
+import { useMetricasAula, precisaIntervir, type Dificuldade } from "../personalizacao";
+import { PainelAdaptativo } from "../PainelAdaptativo";
+
 
 /**
  * Progressão automática Fácil → Médio → Difícil.
@@ -74,9 +77,13 @@ export function ProgressaoNiveis({
     return disponiveis[disponiveis.length - 1];
   });
 
+  const tracker = useMetricasAula(childId, aula.codigo);
+  const [intervencao, setIntervencao] = useState<{ motivo?: string } | null>(null);
+
   useEffect(() => {
     gravar(childId, aula.codigo, reg);
   }, [reg, childId, aula.codigo]);
+
 
   const desbloqueado = (n: Nivel) => {
     const i = disponiveis.indexOf(n);
@@ -136,6 +143,8 @@ export function ProgressaoNiveis({
           nivel={nivelAtual}
           questoes={niveis[nivelAtual]!}
           dominioMinimo={dominio}
+          tracker={tracker}
+          onDificuldadeDetectada={(motivo) => setIntervencao({ motivo })}
           onFim={(acertos, total) => {
             const dominado = Math.round((acertos / total) * 100) >= dominio;
             const anterior = reg[nivelAtual];
@@ -159,9 +168,22 @@ export function ProgressaoNiveis({
           }}
         />
       )}
+
+      {/* painel de reforço automático quando dificuldade é detectada */}
+      {intervencao && (
+        <PainelAdaptativo
+          aula={aula}
+          motivo={intervencao.motivo}
+          onFechar={() => {
+            tracker.zerarSequencia();
+            setIntervencao(null);
+          }}
+        />
+      )}
     </Secao>
   );
 }
+
 
 /* -------------------- rodada de perguntas de um nível -------------------- */
 
@@ -169,36 +191,64 @@ function RodadaNivel({
   nivel,
   questoes,
   dominioMinimo,
+  tracker,
+  onDificuldadeDetectada,
   onFim,
 }: {
   nivel: Nivel;
   questoes: QuizItem[];
   dominioMinimo: number;
+  tracker: ReturnType<typeof useMetricasAula>;
+  onDificuldadeDetectada: (motivo?: string) => void;
   onFim: (acertos: number, total: number) => void;
 }) {
   const [i, setI] = useState(0);
   const [escolha, setEscolha] = useState<number | null>(null);
   const [acertos, setAcertos] = useState(0);
   const [terminado, setTerminado] = useState(false);
+  const registradaRef = useRef(false);
   const q = questoes[i];
+
+  // marca início da questão (base pro tempo de resposta)
+  useEffect(() => {
+    tracker.marcarInicioQuestao();
+    registradaRef.current = false;
+  }, [i, tracker]);
 
   const escolher = (idx: number) => {
     if (escolha !== null) return;
+    const correta = idx === q.correta;
     setEscolha(idx);
-    if (idx === q.correta) setAcertos((n) => n + 1);
+    if (correta) setAcertos((n) => n + 1);
+    if (!correta) tracker.registrarTentativa();
+    if (!registradaRef.current) {
+      registradaRef.current = true;
+      tracker.registrarResposta({
+        bloco: `exercicios:${nivel}`,
+        correta,
+        dificuldade: nivel as Dificuldade,
+      });
+    }
   };
   const avancar = () => {
+    // antes de avançar, checa se precisa de intervenção adaptativa
+    const check = precisaIntervir(tracker.metricas);
+    if (check.intervir) {
+      onDificuldadeDetectada(check.motivo);
+      return;
+    }
     if (i + 1 < questoes.length) {
       setI(i + 1);
       setEscolha(null);
     } else {
       setTerminado(true);
-      onFim(acertos + (escolha === q.correta ? 0 : 0), questoes.length);
+      onFim(acertos, questoes.length);
     }
   };
   const reiniciar = () => {
     setI(0); setEscolha(null); setAcertos(0); setTerminado(false);
   };
+
 
   if (terminado) {
     const pct = Math.round((acertos / questoes.length) * 100);
