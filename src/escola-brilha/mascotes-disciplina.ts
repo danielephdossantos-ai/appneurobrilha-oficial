@@ -171,17 +171,46 @@ function slugDisc(d: string): string {
   return "default";
 }
 
+function comPreco(m: MascoteDisciplina): MascoteDisciplina {
+  return { ...m, preco: PRECOS_MASCOTES[m.slug] ?? 0 };
+}
+
 export function mascoteDaDisciplina(disciplina?: string | null): MascoteDisciplina {
-  return MASCOTES[slugDisc(disciplina ?? "")] ?? MASCOTES.default;
+  return comPreco(MASCOTES[slugDisc(disciplina ?? "")] ?? MASCOTES.default);
 }
 
 export function mascoteDoCodigo(codigo: string): MascoteDisciplina {
-  const disc = disciplinaDoCodigo(codigo);
-  return mascoteDaDisciplina(disc);
+  return mascoteDaDisciplina(disciplinaDoCodigo(codigo));
 }
 
-export function mascoteDaAula(aula: { disciplina?: string; codigo: string }): MascoteDisciplina {
-  return aula.disciplina
-    ? mascoteDaDisciplina(aula.disciplina)
-    : mascoteDoCodigo(aula.codigo);
+/** Slug canônico da disciplina (para persistir escolha por disciplina). */
+export function disciplinaDaAula(aula: { disciplina?: string; codigo: string }): string {
+  return slugDisc(aula.disciplina ?? disciplinaDoCodigo(aula.codigo) ?? "");
 }
+
+/** Mascote-padrão da aula. Aceita override por slug já desbloqueado. */
+export function mascoteDaAula(
+  aula: { disciplina?: string; codigo: string },
+  overrideSlug?: string | null,
+): MascoteDisciplina {
+  if (overrideSlug && MASCOTES[overrideSlug]) return comPreco(MASCOTES[overrideSlug]);
+  return aula.disciplina ? mascoteDaDisciplina(aula.disciplina) : mascoteDoCodigo(aula.codigo);
+}
+
+/** Lista completa dos 10 mascotes-professores (pra tela de escolha). */
+export function todosMascotes(): MascoteDisciplina[] {
+  return Object.values(MASCOTES).map(comPreco);
+}
+
+/** Disciplinas oficiais na ordem de apresentação (Pip fica fora — é fallback). */
+export const DISCIPLINAS_OFICIAIS: { slug: string; nome: string }[] = [
+  { slug: "matematica", nome: "Matemática" },
+  { slug: "portugues", nome: "Português" },
+  { slug: "ciencias", nome: "Ciências" },
+  { slug: "historia", nome: "História" },
+  { slug: "geografia", nome: "Geografia" },
+  { slug: "arte", nome: "Arte" },
+  { slug: "edfisica", nome: "Educação Física" },
+  { slug: "ingles", nome: "Inglês" },
+  { slug: "religiao", nome: "Ensino Religioso" },
+];
