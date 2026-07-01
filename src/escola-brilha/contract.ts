@@ -52,7 +52,8 @@ export type LessonContract = {
     objetivos: string[];               // >=1
     conhecimentos_previos: string[];   // >=1
     materiais: string[];               // >=1
-    exemplos: [Exemplo, Exemplo, Exemplo]; // exatamente 3
+    explicacao_etapas: string[];       // >=2 — Explicação dividida em pequenas etapas
+    exemplos: [Exemplo, Exemplo, Exemplo]; // exatamente 3 (do cotidiano)
     curiosidade: string;
     atividade_guiada: Atividade;
     atividade_pratica: Atividade;
@@ -70,8 +71,10 @@ export type LessonContract = {
       dislexia: Adaptacao;
     };
     criterios_dominio: string[];       // >=1 — critérios de domínio da habilidade
+    mensagem_final: string;            // Mensagem final de incentivo (obrigatória)
   };
 };
+
 
 export type LessonValidationResult =
   | { ok: true }
