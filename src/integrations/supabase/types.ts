@@ -454,6 +454,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "atividades_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       attention_metrics: {
@@ -627,6 +634,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: true
             referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "aulas_geradas_ia_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "vw_biblioteca_nacional"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -2164,6 +2178,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "explicacoes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       fatigue_metrics: {
@@ -2637,6 +2658,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_activities_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_adaptations: {
@@ -2770,6 +2798,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_cache_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -3282,6 +3317,13 @@ export type Database = {
             referencedColumns: ["codigo_bncc"]
           },
           {
+            foreignKeyName: "lesson_library_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
             foreignKeyName: "lesson_library_componente_codigo_fkey"
             columns: ["componente_codigo"]
             isOneToOne: false
@@ -3354,6 +3396,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_progress_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_quizzes: {
@@ -3393,6 +3442,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_quizzes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -3495,6 +3551,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_reviews_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_reviews_full: {
@@ -3587,6 +3650,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_sections_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -3774,7 +3844,22 @@ export type Database = {
           titulo?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "lessons_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lessons_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
+        ]
       }
       lessons_legacy: {
         Row: {
@@ -4838,6 +4923,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "bncc_habilidades"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "progresso_aluno_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -6666,6 +6758,13 @@ export type Database = {
             referencedRelation: "bncc_habilidades"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "trilha_anual_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_biblioteca_nacional"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       trilhas_aprendizagem: {
@@ -6850,6 +6949,23 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      vw_biblioteca_nacional: {
+        Row: {
+          ano: string | null
+          aula_atualizada_em: string | null
+          aula_id: string | null
+          aula_titulo: string | null
+          codigo_bncc: string | null
+          disciplina: string | null
+          nivel: string | null
+          objetivo_habilidade: string | null
+          ordem: number | null
+          status: string | null
+          tem_aula: boolean | null
+          titulo_habilidade: string | null
+        }
+        Relationships: []
       }
     }
     Functions: {
