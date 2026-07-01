@@ -18,6 +18,7 @@ import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Conclusao } from "./blocos/Conclusao";
 import { Diagnostico } from "./blocos/Diagnostico";
+import { MultiModal } from "./MultiModal";
 import { ProfessorVirtual } from "./ProfessorVirtual";
 
 /**
@@ -338,7 +339,14 @@ function renderBloco(
     case "objetivos":
       return <Objetivos itens={a.objetivos} />;
     case "explicacao":
-      return <Explicacao texto={a.explicacao} aula={a} />;
+      return (
+        <>
+          <Explicacao texto={a.explicacao} aula={a} />
+          <div className="mt-4">
+            <MultiModal aula={a} />
+          </div>
+        </>
+      );
     case "exemplo":
       return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
