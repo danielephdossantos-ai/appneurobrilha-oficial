@@ -30,6 +30,7 @@ import { Route as GeradorProceduralRouteImport } from './routes/gerador-procedur
 import { Route as CuradoriaAulasRouteImport } from './routes/curadoria-aulas'
 import { Route as ColecaoPipRouteImport } from './routes/colecao-pip'
 import { Route as BrilhaVidaRouteImport } from './routes/brilha-vida'
+import { Route as BibliotecaPedagogicaRouteImport } from './routes/biblioteca-pedagogica'
 import { Route as BibliotecaAlfaRouteImport } from './routes/biblioteca-alfa'
 import { Route as BancoMidiasRouteImport } from './routes/banco-midias'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -155,6 +156,11 @@ const BrilhaVidaRoute = BrilhaVidaRouteImport.update({
   path: '/brilha-vida',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaPedagogicaRoute = BibliotecaPedagogicaRouteImport.update({
+  id: '/biblioteca-pedagogica',
+  path: '/biblioteca-pedagogica',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BibliotecaAlfaRoute = BibliotecaAlfaRouteImport.update({
   id: '/biblioteca-alfa',
   path: '/biblioteca-alfa',
@@ -263,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
+  '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -304,6 +311,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
+  '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -347,6 +355,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/banco-midias': typeof BancoMidiasRoute
   '/biblioteca-alfa': typeof BibliotecaAlfaRoute
+  '/biblioteca-pedagogica': typeof BibliotecaPedagogicaRoute
   '/brilha-vida': typeof BrilhaVidaRoute
   '/colecao-pip': typeof ColecaoPipRoute
   '/curadoria-aulas': typeof CuradoriaAulasRoute
@@ -391,6 +400,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
+    | '/biblioteca-pedagogica'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -432,6 +442,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
+    | '/biblioteca-pedagogica'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -474,6 +485,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/banco-midias'
     | '/biblioteca-alfa'
+    | '/biblioteca-pedagogica'
     | '/brilha-vida'
     | '/colecao-pip'
     | '/curadoria-aulas'
@@ -517,6 +529,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BancoMidiasRoute: typeof BancoMidiasRoute
   BibliotecaAlfaRoute: typeof BibliotecaAlfaRoute
+  BibliotecaPedagogicaRoute: typeof BibliotecaPedagogicaRoute
   BrilhaVidaRoute: typeof BrilhaVidaRoute
   ColecaoPipRoute: typeof ColecaoPipRoute
   CuradoriaAulasRoute: typeof CuradoriaAulasRoute
@@ -692,6 +705,13 @@ declare module '@tanstack/react-router' {
       path: '/brilha-vida'
       fullPath: '/brilha-vida'
       preLoaderRoute: typeof BrilhaVidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca-pedagogica': {
+      id: '/biblioteca-pedagogica'
+      path: '/biblioteca-pedagogica'
+      fullPath: '/biblioteca-pedagogica'
+      preLoaderRoute: typeof BibliotecaPedagogicaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/biblioteca-alfa': {
@@ -878,6 +898,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BancoMidiasRoute: BancoMidiasRoute,
   BibliotecaAlfaRoute: BibliotecaAlfaRoute,
+  BibliotecaPedagogicaRoute: BibliotecaPedagogicaRoute,
   BrilhaVidaRoute: BrilhaVidaRoute,
   ColecaoPipRoute: ColecaoPipRoute,
   CuradoriaAulasRoute: CuradoriaAulasRoute,
