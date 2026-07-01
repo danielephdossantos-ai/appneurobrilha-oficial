@@ -30,6 +30,7 @@ export function ProfessorVirtual({
   nomeCrianca,
   acertos,
   erros,
+  childId,
 }: {
   aula: Aula;
   blocoId: BlocoId;
@@ -37,10 +38,15 @@ export function ProfessorVirtual({
   nomeCrianca?: string;
   acertos: number;
   erros: number;
+  childId?: string | null;
 }) {
   const tts = useDeviceTTS();
   const [aberto, setAberto] = useState(true);
-  const mascote = useMemo(() => mascoteDaAula(aula), [aula.codigo, aula.disciplina]);
+  const mascote = useMemo(() => {
+    const disc = disciplinaDaAula(aula);
+    const override = mascoteAtribuido(childId, disc);
+    return mascoteDaAula(aula, override);
+  }, [aula.codigo, aula.disciplina, childId]);
 
   const faixa = faixaDaIdade(idade);
   const fala = useMemo(
