@@ -85,6 +85,62 @@ export type Aula = {
   conhecimentosPrevios?: string[];
   diagnostico?: QuizItem[];
 
+  /**
+   * Multi-modalidade (opcional). Atende diferentes estilos de aprendizagem
+   * combinando texto, imagem, áudio, animação, objetos manipuláveis e jogos
+   * educativos (arrastar, ordenar, ligar, colorir, montar).
+   *
+   *   midias         → imagens ilustrativas / áudios (URL) exibidos junto
+   *                    da explicação ou dos exemplos.
+   *   interativas    → mini-jogos manipuláveis intercalados na aula.
+   *
+   * O player renderiza esses recursos após o bloco Explicação. Se ausente,
+   * a aula continua funcionando só com texto/voz (não há regressão).
+   */
+  midias?: Array<
+    | { tipo: "imagem"; url: string; alt: string; legenda?: string }
+    | { tipo: "audio"; url: string; titulo: string }
+    | { tipo: "animacao"; emojis: string[]; legenda?: string } // animação simples inline
+  >;
+  interativas?: Array<
+    | {
+        tipo: "arrastar";
+        titulo: string;
+        instrucao: string;
+        // pares (item → alvo). O jogador arrasta o item pro alvo certo.
+        pares: Array<{ item: string; alvo: string }>;
+      }
+    | {
+        tipo: "ordenar";
+        titulo: string;
+        instrucao: string;
+        // sequência correta; embaralhada na tela.
+        itens: string[];
+      }
+    | {
+        tipo: "ligar";
+        titulo: string;
+        instrucao: string;
+        // colunas A ↔ B; a criança liga cada A ao B correspondente.
+        pares: Array<{ a: string; b: string }>;
+      }
+    | {
+        tipo: "colorir";
+        titulo: string;
+        instrucao: string;
+        // regiões nomeadas + cor esperada (feedback quando acerta).
+        regioes: Array<{ nome: string; corCorreta: string }>;
+        paleta: string[]; // cores disponíveis
+      }
+    | {
+        tipo: "montar";
+        titulo: string;
+        instrucao: string;
+        // peças que devem ser selecionadas na ordem certa pra montar algo.
+        pecas: string[]; // ordem correta
+      }
+  >;
+
   // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
   motivacao?: string;
   proximaHabilidade?: { codigo: string; titulo?: string };
