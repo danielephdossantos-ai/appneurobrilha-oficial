@@ -65,6 +65,13 @@ export type Aula = {
    */
   explicacaoAtiva?: Array<{
     texto: string;
+    /** Exemplo curtíssimo do cotidiano ligado ao bloco. */
+    exemplo?: string;
+    /** URL de ilustração OU um emoji/símbolo grande. */
+    imagem?: string;
+    /** Legenda opcional da imagem. */
+    imagemAlt?: string;
+    /** Micro-interação (quiz de 1 pergunta). Se ausente, o bloco exige o botão "Entendi ✓". */
     checagem?: {
       pergunta: string;
       opcoes: string[];
