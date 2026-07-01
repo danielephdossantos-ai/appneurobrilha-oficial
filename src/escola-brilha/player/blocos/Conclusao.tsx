@@ -4,6 +4,7 @@ import { Secao } from "./Secao";
 import { ProximaHabilidade } from "./ProximaHabilidade";
 import { proximaHabilidade, type HabSeq } from "../../bncc-sequencia";
 import { metaDoCodigo, type MissaoMeta } from "../../proxima-missao";
+import { temaDaDisciplina } from "../../missoes-tema";
 
 const XP_POR_ACERTO = 10;
 const XP_CONCLUSAO = 30;
@@ -18,7 +19,7 @@ type Conquista = {
 function conquistasDoDesempenho(acertos: number, total: number): Conquista[] {
   const pct = total > 0 ? (acertos / total) * 100 : 0;
   const out: Conquista[] = [
-    { icon: "🎓", titulo: "Aula concluída", descricao: "Você chegou até o fim da missão." },
+    { icon: "🎓", titulo: "Missão concluída", descricao: "Você chegou até o fim da aventura." },
   ];
   if (pct >= 100) {
     out.push({ icon: "🏆", titulo: "Nota máxima!", descricao: "Acertou tudo no quiz." });
@@ -128,24 +129,29 @@ export function Conclusao({
         <>
           {proximaMeta ? (
             <Secao icon={Target} rotulo="Próxima missão sugerida" cor="#4C9EFF">
-              <div className="rounded-2xl bg-white/10 border border-white/20 p-3 mb-3">
-                <div className="text-[10px] font-black uppercase tracking-widest text-white/60">
-                  {proximaMeta.aula.codigo} · {proximaMeta.aula.disciplina} · {proximaMeta.aula.ano}
-                </div>
-                <div className="font-black mt-0.5 mb-2">{proximaMeta.aula.titulo}</div>
-                <div className="flex flex-wrap gap-1.5 mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
-                    ~{proximaMeta.tempoEstimadoMin} min
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
-                    {proximaMeta.dificuldade}
-                  </span>
-                </div>
-                <div className="text-xs text-white/80 leading-snug">
-                  <span className="font-black">Objetivo: </span>
-                  {proximaMeta.objetivo}
-                </div>
-              </div>
+              {(() => {
+                const tema = temaDaDisciplina(proximaMeta.aula.disciplina);
+                return (
+                  <div className="rounded-2xl bg-white/10 border border-white/20 p-3 mb-3">
+                    <div className="text-[10px] font-black uppercase tracking-widest text-white/60">
+                      {tema.emoji} {tema.nome} · {proximaMeta.aula.ano}
+                    </div>
+                    <div className="font-black mt-0.5 mb-2">{proximaMeta.aula.titulo}</div>
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      <span className="px-2 py-0.5 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
+                        ~{proximaMeta.tempoEstimadoMin} min
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-white/15 text-[10px] font-black uppercase tracking-widest">
+                        {proximaMeta.dificuldade}
+                      </span>
+                    </div>
+                    <div className="text-xs text-white/80 leading-snug">
+                      <span className="font-black">Objetivo: </span>
+                      {proximaMeta.objetivo}
+                    </div>
+                  </div>
+                );
+              })()}
               <ProximaHabilidade
                 proxima={{ codigo: proximaMeta.aula.codigo, titulo: proximaMeta.aula.titulo }}
               />
