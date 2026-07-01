@@ -36,7 +36,8 @@ import { ProfessorVirtual } from "./ProfessorVirtual";
  *  4. PRATICAR    → Exercícios · Desafio        (guiada → independente)
  *  5. CONQUISTAR  → Quiz · Resumo · Conclusão   (domínio da habilidade)
  */
-const BLOCOS = [
+const BLOCOS_BASE = [
+  { id: "narrativa",  nome: "História",       etapa: 1, etapaNome: "Descobrir"  },
   { id: "missao",     nome: "Missão",         etapa: 1, etapaNome: "Descobrir"  },
   { id: "objetivos",  nome: "Objetivos",      etapa: 1, etapaNome: "Descobrir"  },
   { id: "explicacao", nome: "Explicação",     etapa: 2, etapaNome: "Entender"   },
@@ -48,6 +49,8 @@ const BLOCOS = [
   { id: "resumo",     nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
   { id: "conclusao",  nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
 ] as const;
+
+type BlocoId = typeof BLOCOS_BASE[number]["id"];
 
 const ETAPAS_METODO = [
   { n: 1, nome: "Descobrir",  cor: "#FFC93C" },
