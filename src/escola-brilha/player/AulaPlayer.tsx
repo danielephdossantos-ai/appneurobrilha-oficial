@@ -40,22 +40,72 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
-  const [idx, setIdx] = useState(progresso.bloco_atual);
+  const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
+  const [erros, setErros] = useState(0);
+  const [retomado, setRetomado] = useState(false);
   const tts = useDeviceTTS();
+  const inicioBloco = useRef<number>(Date.now());
+  const tentativaContada = useRef(false);
+
+  // Retoma do ponto onde parou assim que o progresso carrega.
+  useEffect(() => {
+    if (progresso.carregado && !retomado) {
+      const alvo = progresso.concluida ? 0 : Math.min(progresso.bloco_atual, BLOCOS.length - 1);
+      setIdx(alvo);
+      setAcertos(progresso.acertos);
+      setErros(progresso.erros);
+      inicioBloco.current = Date.now();
+      setRetomado(true);
+      if (!tentativaContada.current) {
+        tentativaContada.current = true;
+        void salvar({ tentativas: (progresso.tentativas ?? 0) + 1 });
+      }
+    }
+  }, [progresso, retomado, salvar]);
 
   const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
 
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
 
+  const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
+
   const next = async () => {
     tts.stop();
+    const gasto = tempoDoBloco();
+    inicioBloco.current = Date.now();
     if (idx < BLOCOS.length - 1) {
       const novo = idx + 1;
       setIdx(novo);
-      await salvar(novo);
+      const percentual = Math.round(((novo + 1) / BLOCOS.length) * 100);
+      await salvar({
+        bloco_atual: novo,
+        adicionar_tempo_segundos: gasto,
+        percentual,
+        acertos,
+        erros,
+      });
     } else {
-      await salvar(idx, true);
+      const total = aula.quiz.length || 1;
+      const nota = Math.round((acertos / total) * 100) / 10;
+      const estrelas =
+        acertos >= total
+          ? 3
+          : acertos >= Math.ceil(total * 0.7)
+            ? 2
+            : acertos >= Math.ceil(total * 0.4)
+              ? 1
+              : 0;
+      await salvar({
+        bloco_atual: idx,
+        concluida: true,
+        adicionar_tempo_segundos: gasto,
+        percentual: 100,
+        acertos,
+        erros,
+        nota,
+        estrelas,
+      });
       if (activeChild?.id) {
         await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
       }
@@ -64,8 +114,35 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
 
   const prev = () => {
     tts.stop();
-    if (idx > 0) setIdx(idx - 1);
+    if (idx > 0) {
+      const gasto = tempoDoBloco();
+      inicioBloco.current = Date.now();
+      const novo = idx - 1;
+      setIdx(novo);
+      void salvar({ bloco_atual: novo, adicionar_tempo_segundos: gasto });
+    }
   };
+
+  useEffect(() => {
+    const flush = () => {
+      const gasto = tempoDoBloco();
+      if (gasto > 0) {
+        inicioBloco.current = Date.now();
+        void salvar({ adicionar_tempo_segundos: gasto });
+      }
+    };
+    const onHide = () => {
+      if (document.visibilityState === "hidden") flush();
+    };
+    document.addEventListener("visibilitychange", onHide);
+    window.addEventListener("pagehide", flush);
+    return () => {
+      document.removeEventListener("visibilitychange", onHide);
+      window.removeEventListener("pagehide", flush);
+      flush();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-24">
