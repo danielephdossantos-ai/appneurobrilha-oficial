@@ -13,6 +13,7 @@ import { Explicacao } from "./blocos/Explicacao";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
 import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
 import { Exercicios } from "./blocos/Exercicios";
+import { ProgressaoNiveis } from "./blocos/ProgressaoNiveis";
 import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
