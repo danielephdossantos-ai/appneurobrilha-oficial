@@ -1,7 +1,26 @@
 /**
- * Contrato obrigatório de aulas do Escola Brilha.
+ * Contrato obrigatório de Missões do Escola Brilha.
  * Espelha exatamente a trava do banco (trigger validate_lesson_contract).
- * Toda aula PRECISA ter todos os itens abaixo preenchidos e não vazios.
+ *
+ * ORDEM OFICIAL DA MISSÃO — 15 blocos, sem exceção:
+ *   1. Abertura              → conteudo_json.abertura
+ *   2. História Inicial      → conteudo_json.historia_inicial
+ *   3. Objetivo da Missão    → conteudo_json.objetivo_missao
+ *   4. Conhecimentos Prévios → conteudo_json.conhecimentos_previos (>=1)
+ *   5. Descoberta            → conteudo_json.descoberta
+ *   6. Explicação            → conteudo_json.explicacao (>=2 etapas)
+ *   7. Demonstração          → conteudo_json.demonstracao
+ *   8. Atividade Guiada      → conteudo_json.atividade_guiada
+ *   9. Exercícios            → conteudo_json.exercicios (>=1)
+ *  10. Desafio               → conteudo_json.desafio
+ *  11. Mini Jogo             → conteudo_json.mini_jogo
+ *  12. Revisão               → conteudo_json.revisao
+ *  13. Quiz                  → conteudo_json.quiz (>=3)
+ *  14. Medalha               → conteudo_json.medalha
+ *  15. Próxima Missão        → conteudo_json.proxima_missao
+ *
+ * O código BNCC (codigo_bncc) continua interno: admin, relatórios e
+ * roteamento. Nada disso aparece pra criança.
  */
 
 export type QuizItem = {
@@ -11,70 +30,60 @@ export type QuizItem = {
   explicacao: string;
 };
 
-export type Exemplo = {
-  titulo: string;
-  enunciado: string;
-  resolucao: string;
-  resposta: string;
-};
-
-export type Atividade = {
+export type ExercicioItem = {
   enunciado: string;
   resposta: string;
-  explicacao: string;
+  explicacao?: string;
 };
 
-export type Adaptacao = {
-  estrategias: string[];
-  ajustes: string[];
-  orientacoes_familia: string;
+export type MissaoBlocos = {
+  // 1
+  abertura: { titulo: string; texto: string };
+  // 2
+  historia_inicial: { titulo: string; narrativa: string };
+  // 3
+  objetivo_missao: { titulo: string; itens: string[] };
+  // 4
+  conhecimentos_previos: string[];
+  // 5
+  descoberta: { titulo: string; pergunta_guia: string; pista: string };
+  // 6 — explicação principal + etapas
+  explicacao: { titulo: string; etapas: string[] };
+  // 7
+  demonstracao: { enunciado: string; passos: string[]; resposta: string };
+  // 8
+  atividade_guiada: { enunciado: string; resposta: string; explicacao: string };
+  // 9
+  exercicios: ExercicioItem[];
+  // 10
+  desafio: { enunciado: string; resposta: string; explicacao?: string };
+  // 11
+  mini_jogo:
+    | { tipo: "arrastar"; titulo: string; instrucao: string; pares: Array<{ item: string; alvo: string }> }
+    | { tipo: "ordenar"; titulo: string; instrucao: string; itens: string[] }
+    | { tipo: "ligar"; titulo: string; instrucao: string; pares: Array<{ a: string; b: string }> }
+    | { tipo: "colorir"; titulo: string; instrucao: string; regioes: Array<{ nome: string; corCorreta: string }>; paleta: string[] }
+    | { tipo: "montar"; titulo: string; instrucao: string; pecas: string[] };
+  // 12
+  revisao: { pontos: string[]; dica: string };
+  // 13
+  quiz: QuizItem[];
+  // 14
+  medalha: { nome: string; descricao: string; icone?: string };
+  // 15
+  proxima_missao: { codigo_bncc: string; titulo?: string; convite?: string };
 };
 
-/** Estrutura completa de uma aula (colunas planas + conteudo_json). */
 export type LessonContract = {
   // Colunas planas obrigatórias
   codigo_bncc: string;
   ano: string;
-  etapa: string;
   disciplina: string;
   titulo: string;
-  objetivo: string;
-  missao: string;
-  introducao: string;
-  explicacao: string;              // Explicação Principal
-  contextualizacao: string;
-  resumo: string;
-  tempo_estimado: number;
-  nivel: string;
 
-  // conteudo_json — todos obrigatórios
-  conteudo_json: {
-    objetivos: string[];               // >=1
-    conhecimentos_previos: string[];   // >=1
-    materiais: string[];               // >=1
-    explicacao_etapas: string[];       // >=2 — Explicação dividida em pequenas etapas
-    exemplos: [Exemplo, Exemplo, Exemplo]; // exatamente 3 (do cotidiano)
-    curiosidade: string;
-    atividade_guiada: Atividade;
-    atividade_pratica: Atividade;
-    desafio: { enunciado: string; resposta: string; explicacao: string };
-    quiz: QuizItem[];                  // >=3
-    mapa_mental: {
-      centro: string;
-      ramos: { titulo: string; itens: string[] }[];
-    };
-    erros_comuns: { erro: string; correcao: string }[]; // >=1
-    dicas: string[];                                    // >=1
-    adaptacoes: {
-      tdah: Adaptacao;
-      tea: Adaptacao;
-      dislexia: Adaptacao;
-    };
-    criterios_dominio: string[];       // >=1 — critérios de domínio da habilidade
-    mensagem_final: string;            // Mensagem final de incentivo (obrigatória)
-  };
+  // Estrutura oficial da missão
+  conteudo_json: MissaoBlocos;
 };
-
 
 export type LessonValidationResult =
   | { ok: true }
@@ -82,49 +91,63 @@ export type LessonValidationResult =
 
 /**
  * Validador local — mesmas regras da trigger do banco.
- * Use antes de gravar pra dar feedback imediato ao autor da aula.
+ * Use antes de gravar pra dar feedback imediato ao autor da missão.
  */
 export function validateLesson(l: Partial<LessonContract>): LessonValidationResult {
   const faltando: string[] = [];
-  const nonEmpty = (v: unknown) => typeof v === "string" && v.trim() !== "";
+  const s = (v: unknown) => typeof v === "string" && v.trim() !== "";
   const arr = (v: unknown, n = 1) => Array.isArray(v) && v.length >= n;
   const obj = (v: unknown) =>
-    !!v && typeof v === "object" && !Array.isArray(v) && Object.keys(v as object).length > 0;
+    !!v && typeof v === "object" && !Array.isArray(v);
 
-  if (!nonEmpty(l.titulo)) faltando.push("titulo");
-  if (!nonEmpty(l.objetivo)) faltando.push("objetivo");
-  if (!nonEmpty(l.missao)) faltando.push("missao");
-  if (!nonEmpty(l.introducao)) faltando.push("introducao");
-  if (!nonEmpty(l.explicacao)) faltando.push("explicacao");
-  if (!nonEmpty(l.resumo)) faltando.push("resumo");
+  if (!s(l.titulo)) faltando.push("titulo");
+  if (!s(l.ano)) faltando.push("ano");
+  if (!s(l.disciplina)) faltando.push("disciplina");
 
-  const c = l.conteudo_json ?? ({} as LessonContract["conteudo_json"]);
-  if (!arr(c.objetivos)) faltando.push("objetivos (>=1)");
-  if (!arr(c.conhecimentos_previos)) faltando.push("conhecimentos_previos (>=1)");
-  if (!arr(c.materiais)) faltando.push("materiais (>=1)");
-  if (!arr(c.explicacao_etapas, 2)) faltando.push("explicacao_etapas (>=2)");
-  if (!arr(c.exemplos, 3)) faltando.push("exemplos (3 obrigatórios)");
+  const c = (l.conteudo_json ?? {}) as Partial<MissaoBlocos>;
 
-  if (!nonEmpty(c.curiosidade)) faltando.push("curiosidade");
-  if (!obj(c.atividade_guiada)) faltando.push("atividade_guiada");
-  if (!obj(c.atividade_pratica)) faltando.push("atividade_pratica");
-  if (!obj(c.desafio)) faltando.push("desafio");
-  if (!arr(c.quiz, 3)) faltando.push("quiz (>=3 perguntas)");
-  if (!obj(c.mapa_mental)) faltando.push("mapa_mental");
-  if (!arr(c.erros_comuns)) faltando.push("erros_comuns (>=1)");
-  if (!arr(c.dicas)) faltando.push("dicas (>=1)");
-
-  if (!c.adaptacoes || typeof c.adaptacoes !== "object") {
-    faltando.push("adaptacoes.tdah", "adaptacoes.tea", "adaptacoes.dislexia");
-  } else {
-    if (!obj(c.adaptacoes.tdah)) faltando.push("adaptacoes.tdah");
-    if (!obj(c.adaptacoes.tea)) faltando.push("adaptacoes.tea");
-    if (!obj(c.adaptacoes.dislexia)) faltando.push("adaptacoes.dislexia");
-  }
-
-  if (!arr(c.criterios_dominio)) faltando.push("criterios_dominio (>=1)");
-  if (!nonEmpty(c.mensagem_final)) faltando.push("mensagem_final");
-
+  // 1. Abertura
+  if (!obj(c.abertura) || !s(c.abertura?.titulo) || !s(c.abertura?.texto))
+    faltando.push("1. abertura");
+  // 2. História Inicial
+  if (!obj(c.historia_inicial) || !s(c.historia_inicial?.titulo) || !s(c.historia_inicial?.narrativa))
+    faltando.push("2. historia_inicial");
+  // 3. Objetivo
+  if (!obj(c.objetivo_missao) || !s(c.objetivo_missao?.titulo) || !arr(c.objetivo_missao?.itens))
+    faltando.push("3. objetivo_missao (>=1 item)");
+  // 4. Conhecimentos prévios
+  if (!arr(c.conhecimentos_previos)) faltando.push("4. conhecimentos_previos (>=1)");
+  // 5. Descoberta
+  if (!obj(c.descoberta) || !s(c.descoberta?.titulo) || !s(c.descoberta?.pergunta_guia) || !s(c.descoberta?.pista))
+    faltando.push("5. descoberta");
+  // 6. Explicação (>=2 etapas)
+  if (!obj(c.explicacao) || !s(c.explicacao?.titulo) || !arr(c.explicacao?.etapas, 2))
+    faltando.push("6. explicacao (>=2 etapas)");
+  // 7. Demonstração
+  if (!obj(c.demonstracao) || !s(c.demonstracao?.enunciado) || !arr(c.demonstracao?.passos) || !s(c.demonstracao?.resposta))
+    faltando.push("7. demonstracao");
+  // 8. Atividade Guiada
+  if (!obj(c.atividade_guiada) || !s(c.atividade_guiada?.enunciado) || !s(c.atividade_guiada?.resposta) || !s(c.atividade_guiada?.explicacao))
+    faltando.push("8. atividade_guiada");
+  // 9. Exercícios
+  if (!arr(c.exercicios)) faltando.push("9. exercicios (>=1)");
+  // 10. Desafio
+  if (!obj(c.desafio) || !s((c.desafio as { enunciado?: string })?.enunciado) || !s((c.desafio as { resposta?: string })?.resposta))
+    faltando.push("10. desafio");
+  // 11. Mini Jogo
+  if (!obj(c.mini_jogo) || !s((c.mini_jogo as { tipo?: string })?.tipo) || !s((c.mini_jogo as { titulo?: string })?.titulo))
+    faltando.push("11. mini_jogo");
+  // 12. Revisão
+  if (!obj(c.revisao) || !arr(c.revisao?.pontos) || !s(c.revisao?.dica))
+    faltando.push("12. revisao (pontos>=1 + dica)");
+  // 13. Quiz
+  if (!arr(c.quiz, 3)) faltando.push("13. quiz (>=3 perguntas)");
+  // 14. Medalha
+  if (!obj(c.medalha) || !s(c.medalha?.nome) || !s(c.medalha?.descricao))
+    faltando.push("14. medalha");
+  // 15. Próxima Missão
+  if (!obj(c.proxima_missao) || !s(c.proxima_missao?.codigo_bncc))
+    faltando.push("15. proxima_missao (codigo_bncc)");
 
   return faltando.length === 0 ? { ok: true } : { ok: false, faltando };
 }
