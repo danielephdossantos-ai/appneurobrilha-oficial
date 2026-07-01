@@ -222,20 +222,31 @@ const AdaptacaoPorDesempenho = {
 const Revisao = {
   /**
    * Registra conclusão + agenda próxima revisão (repetição espaçada).
-   * Usa a RPC `registrar_conclusao_aula` (verificada nos DB functions).
+   * Além do desempenho, aceita métricas de domínio:
+   *  - tempoSegundos, acertos, erros, dificuldades[]
    */
   async registrarConclusao(
     childId: string,
     codigoBncc: string,
     desempenho: number,
-    tipo: "aula" | "revisao" | "reforco" = "aula",
+    opts: {
+      tipo?: "aula" | "revisao" | "reforco";
+      tempoSegundos?: number;
+      acertos?: number;
+      erros?: number;
+      dificuldades?: string[];
+    } = {},
   ): Promise<string | null> {
     const { data, error } = await supabase.rpc("registrar_conclusao_aula", {
       _child_id: childId,
       _codigo_bncc: codigoBncc,
       _desempenho: Math.max(0, Math.min(100, Math.round(desempenho))),
-      _tipo: tipo,
-    });
+      _tipo: opts.tipo ?? "aula",
+      _tempo_segundos: Math.max(0, Math.round(opts.tempoSegundos ?? 0)),
+      _acertos: Math.max(0, Math.round(opts.acertos ?? 0)),
+      _erros: Math.max(0, Math.round(opts.erros ?? 0)),
+      _dificuldades: (opts.dificuldades ?? []) as unknown as never,
+    } as never);
     if (error) {
       console.error("[MotorPedagogico] registrarConclusao:", error);
       return null;
@@ -244,11 +255,11 @@ const Revisao = {
   },
 
   async recomendar(childId: string): Promise<Recomendacao[]> {
-    const { data, error } = await supabase.rpc("recomendar_revisoes", {
+    const { data, error } = await supabase.rpc("recomendar_revisoes_auto", {
       _child_id: childId,
-    });
+    } as never);
     if (error) {
-      console.error("[MotorPedagogico] recomendar_revisoes:", error);
+      console.error("[MotorPedagogico] recomendar_revisoes_auto:", error);
       return [];
     }
     return (data ?? []).map((r: { codigo_bncc: string; motivo: string }) => ({
@@ -268,7 +279,7 @@ const Progresso = {
     const { data } = await supabase
       .from("escola_progresso")
       .select(
-        "bloco_atual, concluida, percentual, nivel_dominio, tentativas, acertos, erros, sessoes_dominadas_consecutivas",
+        "bloco_atual, concluida, percentual, nivel_dominio, tentativas, acertos, erros, sessoes_dominadas_consecutivas, facilidade, dificuldades, revisoes_realizadas, evolucao_delta, historico_evolucao, tempo_medio_segundos, tempo_estudado_segundos",
       )
       .eq("child_id", childId)
       .eq("codigo_bncc", codigoBncc)
@@ -289,6 +300,36 @@ const Progresso = {
     const p = await Progresso.carregar(childId, codigoBncc);
     const n = (p?.nivel_dominio as NivelDominio | undefined) ?? "nao_iniciada";
     return n;
+  },
+
+  /** Retrato completo do domínio: nível, facilidade, dificuldades, tentativas, tempo, revisões, evolução. */
+  async dominio(childId: string, codigoBncc: string) {
+    const { data, error } = await supabase.rpc("dominio_habilidade", {
+      _child_id: childId,
+      _codigo_bncc: codigoBncc,
+    } as never);
+    if (error) {
+      console.error("[MotorPedagogico] dominio_habilidade:", error);
+      return null;
+    }
+    return data as {
+      codigo_bncc: string;
+      nivel_dominio: NivelDominio;
+      percentual: number;
+      facilidade: number;
+      dificuldades: string[];
+      tentativas: number;
+      acertos: number;
+      erros: number;
+      tempo_total_segundos: number;
+      tempo_medio_segundos: number;
+      revisoes_realizadas: number;
+      sessoes_dominadas_consecutivas: number;
+      evolucao_delta: number;
+      historico_evolucao: Array<{ em: string; desempenho: number; tempo_segundos: number; acertos: number; erros: number; nivel: string; tipo: string }>;
+      proxima_revisao: string | null;
+      pode_avancar: boolean;
+    } | null;
   },
 };
 
