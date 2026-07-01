@@ -18,6 +18,9 @@ import type { Aula } from "../../types";
 
 type Chunk = {
   texto: string;
+  exemplo?: string;
+  imagem?: string;
+  imagemAlt?: string;
   checagem?: {
     pergunta: string;
     opcoes: string[];
