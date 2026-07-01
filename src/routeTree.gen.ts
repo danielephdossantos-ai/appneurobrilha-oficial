@@ -44,6 +44,7 @@ import { Route as EscolaBrilhaIndexRouteImport } from './routes/escola-brilha.in
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as NeuroTreinoConfigurarRouteImport } from './routes/neuro-treino.configurar'
 import { Route as NeuroTreinoSlugRouteImport } from './routes/neuro-treino.$slug'
+import { Route as EscolaBrilhaProfessoresRouteImport } from './routes/escola-brilha.professores'
 import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$codigo'
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
@@ -226,6 +227,11 @@ const NeuroTreinoSlugRoute = NeuroTreinoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeuroTreinoRoute,
 } as any)
+const EscolaBrilhaProfessoresRoute = EscolaBrilhaProfessoresRouteImport.update({
+  id: '/escola-brilha/professores',
+  path: '/escola-brilha/professores',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EscolaBrilhaCodigoRoute = EscolaBrilhaCodigoRouteImport.update({
   id: '/escola-brilha/$codigo',
   path: '/escola-brilha/$codigo',
@@ -295,6 +301,7 @@ export interface FileRoutesByFullPath {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
@@ -337,6 +344,7 @@ export interface FileRoutesByTo {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
@@ -381,6 +389,7 @@ export interface FileRoutesById {
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
   '/escola-brilha/$codigo': typeof EscolaBrilhaCodigoRoute
+  '/escola-brilha/professores': typeof EscolaBrilhaProfessoresRoute
   '/neuro-treino/$slug': typeof NeuroTreinoSlugRoute
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
@@ -426,6 +435,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
@@ -468,6 +478,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin'
@@ -511,6 +522,7 @@ export interface FileRouteTypes {
     | '/anamnese/$childId'
     | '/bncc/$codigo'
     | '/escola-brilha/$codigo'
+    | '/escola-brilha/professores'
     | '/neuro-treino/$slug'
     | '/neuro-treino/configurar'
     | '/admin/'
@@ -555,6 +567,7 @@ export interface RootRouteChildren {
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
+  EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
 }
 
@@ -805,6 +818,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeuroTreinoSlugRouteImport
       parentRoute: typeof NeuroTreinoRoute
     }
+    '/escola-brilha/professores': {
+      id: '/escola-brilha/professores'
+      path: '/escola-brilha/professores'
+      fullPath: '/escola-brilha/professores'
+      preLoaderRoute: typeof EscolaBrilhaProfessoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/escola-brilha/$codigo': {
       id: '/escola-brilha/$codigo'
       path: '/escola-brilha/$codigo'
@@ -924,6 +944,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
+  EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
 }
 export const routeTree = rootRouteImport
