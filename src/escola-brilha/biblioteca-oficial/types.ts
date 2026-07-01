@@ -52,11 +52,20 @@ export type MiniJogoSugerido = {
 /**
  * MissaoOficial — 14 campos obrigatórios por habilidade BNCC.
  */
+export type EtapaEscolar = "Educação Infantil" | "Ensino Fundamental" | "Ensino Médio";
+
 export type MissaoOficial = {
   /** Código BNCC — chave única. Ex: "EF01MA01". */
   codigo: string;
-  disciplina: string;
+  /** Etapa: Educação Infantil, Ensino Fundamental ou Ensino Médio. */
+  etapa: EtapaEscolar;
+  /** Ano escolar (ex: "Bebês (0-1a6m)", "1º Ano", "6º Ano"). */
   ano: string;
+  disciplina: string;
+  /** Unidade Temática BNCC (ex: "Números", "Grandezas e Medidas"). */
+  unidadeTematica: string;
+  /** Objeto de Conhecimento BNCC (nó imediatamente acima da habilidade). */
+  objetoConhecimento: string;
 
   /** 1. Missão principal (título temático + descrição curta). */
   missaoPrincipal: {
