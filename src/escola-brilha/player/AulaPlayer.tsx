@@ -13,6 +13,7 @@ import { Explicacao } from "./blocos/Explicacao";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
 import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
 import { Exercicios } from "./blocos/Exercicios";
+import { ProgressaoNiveis } from "./blocos/ProgressaoNiveis";
 import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
@@ -249,7 +250,14 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.25 }}
             >
-              {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
+              {renderBloco(aula, idx, {
+                acertos,
+                erros,
+                childId: activeChild?.id,
+                setAcertos,
+                setErros,
+                onQuizEnd: next,
+              })}
             </motion.div>
           </AnimatePresence>
         )}
@@ -328,6 +336,8 @@ function renderBloco(
   i: number,
   ctx: {
     acertos: number;
+    erros: number;
+    childId?: string;
     setAcertos: (n: number) => void;
     setErros: (n: number) => void;
     onQuizEnd: () => void;
@@ -352,6 +362,18 @@ function renderBloco(
     case "guiada":
       return <AtividadeGuiada dados={a.atividadeGuiada} />;
     case "exercicios":
+      if (a.niveis && (a.niveis.facil?.length || a.niveis.medio?.length || a.niveis.dificil?.length)) {
+        return (
+          <ProgressaoNiveis
+            aula={a}
+            childId={ctx.childId}
+            onProgress={({ acertos, erros }) => {
+              ctx.setAcertos(ctx.acertos + acertos);
+              ctx.setErros(ctx.erros + erros);
+            }}
+          />
+        );
+      }
       return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;

@@ -219,6 +219,82 @@ const aula: Aula = {
     },
   ],
 
+  niveis: {
+    dominioMinimo: 70,
+    facil: [
+      {
+        pergunta: "Tem 4 balas no pote. O 4 está…",
+        opcoes: ["Contando", "Ordenando", "Sendo código"],
+        correta: 0,
+        explicacao: "Ele diz quantas balas existem.",
+      },
+      {
+        pergunta: "Quem chegou em 1º lugar. O 1 é…",
+        opcoes: ["Contagem", "Ordem", "Código"],
+        correta: 1,
+        explicacao: "Mostra a posição — quem chegou antes.",
+      },
+      {
+        pergunta: "O número da casa é 27. Ele serve pra…",
+        opcoes: ["Contar casas", "Identificar a casa", "Dizer quem chegou primeiro"],
+        correta: 1,
+        explicacao: "É código: só identifica a casa.",
+      },
+    ],
+    medio: [
+      {
+        pergunta: "Na frase 'Estou no 3º ano', o 3 está sendo usado como:",
+        opcoes: ["Contagem", "Ordem", "Código"],
+        correta: 1,
+        explicacao: "3º com 'zinho' costuma indicar ordem/posição.",
+      },
+      {
+        pergunta: "O telefone 4002-8922 é um número usado como:",
+        opcoes: ["Contagem", "Ordem", "Código"],
+        correta: 2,
+        explicacao: "Não conta nem ordena — só identifica o telefone.",
+      },
+      {
+        pergunta: "Numa festa há 12 crianças. O 12 é:",
+        opcoes: ["Contagem", "Ordem", "Código"],
+        correta: 0,
+        explicacao: "Está contando quantas crianças existem.",
+      },
+      {
+        pergunta: "A camisa do jogador tem o número 7. Isso é:",
+        opcoes: ["Contagem", "Ordem", "Código"],
+        correta: 2,
+        explicacao: "Serve pra identificar o jogador — é código.",
+      },
+    ],
+    dificil: [
+      {
+        pergunta: "Livro com 200 páginas, aberto na página 45, capítulo 3. Qual número CONTA?",
+        opcoes: ["200", "45", "3"],
+        correta: 0,
+        explicacao: "200 conta quantas páginas o livro tem no total.",
+      },
+      {
+        pergunta: "Ana é a 2ª filha, tem 5 anos, mora na casa 18. Qual número é CÓDIGO?",
+        opcoes: ["2", "5", "18"],
+        correta: 2,
+        explicacao: "18 identifica a casa; 2 é ordem; 5 conta idade.",
+      },
+      {
+        pergunta: "Numa corrida com 30 crianças, Léo chegou em 7º e tirou a medalha nº 42. Qual número é ORDEM?",
+        opcoes: ["30", "7", "42"],
+        correta: 1,
+        explicacao: "7º mostra a posição em que Léo chegou.",
+      },
+      {
+        pergunta: "Numa fila com 10 alunos, o 4º chamado atende pelo número 25 da carteirinha. Qual é CONTAGEM?",
+        opcoes: ["10", "4", "25"],
+        correta: 0,
+        explicacao: "10 conta quantos alunos existem na fila.",
+      },
+    ],
+  },
+
   proximaHabilidade: {
     codigo: "EF01MA02",
     titulo: "Jeitos espertos de contar",
