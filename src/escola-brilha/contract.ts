@@ -123,6 +123,8 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
   }
 
   if (!arr(c.criterios_dominio)) faltando.push("criterios_dominio (>=1)");
+  if (!nonEmpty(c.mensagem_final)) faltando.push("mensagem_final");
+
 
   return faltando.length === 0 ? { ok: true } : { ok: false, faltando };
 }
