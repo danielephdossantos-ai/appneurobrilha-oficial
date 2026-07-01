@@ -102,7 +102,9 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
   if (!arr(c.objetivos)) faltando.push("objetivos (>=1)");
   if (!arr(c.conhecimentos_previos)) faltando.push("conhecimentos_previos (>=1)");
   if (!arr(c.materiais)) faltando.push("materiais (>=1)");
+  if (!arr(c.explicacao_etapas, 2)) faltando.push("explicacao_etapas (>=2)");
   if (!arr(c.exemplos, 3)) faltando.push("exemplos (3 obrigatórios)");
+
   if (!nonEmpty(c.curiosidade)) faltando.push("curiosidade");
   if (!obj(c.atividade_guiada)) faltando.push("atividade_guiada");
   if (!obj(c.atividade_pratica)) faltando.push("atividade_pratica");
