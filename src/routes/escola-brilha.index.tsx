@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas, hasAula } from "@/escola-brilha/registry";
 
-export const Route = createFileRoute("/escola-brilha")({
+export const Route = createFileRoute("/escola-brilha/")({
   head: () => ({
     meta: [
       { title: "Escola Brilha — Aulas de verdade" },
