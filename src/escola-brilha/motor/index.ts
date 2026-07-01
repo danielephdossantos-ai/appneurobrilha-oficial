@@ -44,6 +44,15 @@ import {
 } from "../proxima-missao";
 import { supabase } from "@/integrations/supabase/client";
 import { resolverMissao, parseBNCC, MENSAGEM_MISSAO_EM_CONSTRUCAO } from "./resolver";
+import {
+  selecionarAtividades,
+  selecionarAtividadesDetalhado,
+  CATALOGO_ATIVIDADES,
+  TODOS_TIPOS,
+  type TipoAtividade,
+  type AtividadeMeta,
+  type SelecaoAtividades,
+} from "../atividades";
 
 // =====================================================================
 // Tipos públicos do Motor
@@ -348,6 +357,14 @@ export const MotorPedagogico = {
   recomendacoes: Recomendacoes,
   conquistas: Conquistas,
 
+  /** Banco Nacional de Atividades — seleção automática por habilidade BNCC. */
+  atividades: {
+    catalogo: CATALOGO_ATIVIDADES,
+    tipos: TODOS_TIPOS,
+    selecionar: selecionarAtividades,
+    selecionarDetalhado: selecionarAtividadesDetalhado,
+  },
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
@@ -362,4 +379,13 @@ export const MotorPedagogico = {
 
 export type MotorPedagogicoType = typeof MotorPedagogico;
 
-export type { Aula, MissaoOficial, HabSeq, MissaoMeta, Dificuldade };
+export type {
+  Aula,
+  MissaoOficial,
+  HabSeq,
+  MissaoMeta,
+  Dificuldade,
+  TipoAtividade,
+  AtividadeMeta,
+  SelecaoAtividades,
+};
