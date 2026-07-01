@@ -44,6 +44,15 @@ import {
 } from "../proxima-missao";
 import { supabase } from "@/integrations/supabase/client";
 import { resolverMissao, parseBNCC, MENSAGEM_MISSAO_EM_CONSTRUCAO } from "./resolver";
+import {
+  selecionarAtividades,
+  selecionarAtividadesDetalhado,
+  CATALOGO_ATIVIDADES,
+  TODOS_TIPOS,
+  type TipoAtividade,
+  type AtividadeMeta,
+  type SelecaoAtividades,
+} from "../atividades";
 
 // =====================================================================
 // Tipos públicos do Motor
