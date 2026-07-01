@@ -1,6 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { AulaPlayer } from "@/escola-brilha/player/AulaPlayer";
-import { getAula } from "@/escola-brilha/registry";
+import { createFileRoute } from "@tanstack/react-router";
+import { UniversalPlayer } from "@/escola-brilha/player/UniversalPlayer";
 
 export const Route = createFileRoute("/escola-brilha/$codigo")({
   head: () => ({
@@ -27,25 +26,5 @@ export const Route = createFileRoute("/escola-brilha/$codigo")({
 
 function AulaRoute() {
   const { codigo } = Route.useParams();
-  const navigate = useNavigate();
-  const aula = getAula(codigo);
-  if (!aula) {
-    return (
-      <div className="min-h-screen grid place-items-center p-8 text-center text-white bg-[#0d1f55]">
-        <div>
-          <div className="text-2xl font-black mb-2">Missão em preparação</div>
-          <div className="text-sm text-white/70 mb-4">
-            Essa aventura ainda está sendo criada com carinho.
-          </div>
-          <button
-            onClick={() => navigate({ to: "/escola-brilha" })}
-            className="px-5 py-2.5 rounded-2xl bg-[#FFC93C] text-[#0d1f55] font-black"
-          >
-            Voltar às missões
-          </button>
-        </div>
-      </div>
-    );
-  }
-  return <AulaPlayer aula={aula} />;
+  return <UniversalPlayer codigo={codigo} />;
 }
