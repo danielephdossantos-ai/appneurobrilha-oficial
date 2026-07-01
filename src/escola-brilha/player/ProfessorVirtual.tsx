@@ -39,11 +39,12 @@ export function ProfessorVirtual({
 }) {
   const tts = useDeviceTTS();
   const [aberto, setAberto] = useState(true);
+  const mascote = useMemo(() => mascoteDaAula(aula), [aula.codigo, aula.disciplina]);
 
   const faixa = faixaDaIdade(idade);
   const fala = useMemo(
-    () => construirFala({ aula, blocoId, faixa, nomeCrianca, acertos, erros }),
-    [aula, blocoId, faixa, nomeCrianca, acertos, erros],
+    () => construirFala({ aula, blocoId, faixa, nomeCrianca, acertos, erros, mascoteNome: mascote.nome }),
+    [aula, blocoId, faixa, nomeCrianca, acertos, erros, mascote.nome],
   );
 
   // Ao trocar de bloco, abrir a fala novamente
@@ -63,13 +64,17 @@ export function ProfessorVirtual({
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           whileTap={{ scale: 0.95 }}
-          className="shrink-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-gradient-to-br from-[#FFD86B] to-[#FF8A4C] p-1 shadow-lg shadow-orange-500/30"
-          aria-label={aberto ? "Esconder Professora Brilha" : "Chamar Professora Brilha"}
+          className="shrink-0 h-20 w-20 sm:h-24 sm:w-24 rounded-full p-1 shadow-lg"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${mascote.corPrimaria}, ${mascote.corSecundaria})`,
+            boxShadow: `0 10px 25px -8px ${mascote.corPrimaria}80`,
+          }}
+          aria-label={aberto ? `Esconder ${mascote.nome}` : `Chamar ${mascote.nome}`}
         >
           <div className="h-full w-full rounded-full bg-white/95 overflow-hidden grid place-items-center">
             <img
-              src={professoraImg}
-              alt="Professora Brilha"
+              src={mascote.imagem}
+              alt={`${mascote.nome} — ${mascote.papel}`}
               className="h-full w-full object-cover"
             />
           </div>
@@ -81,21 +86,26 @@ export function ProfessorVirtual({
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="relative flex-1 rounded-3xl rounded-bl-md bg-white text-[#0d1f55] px-4 py-3 shadow-xl border-2 border-[#FFD86B]"
+              className="relative flex-1 rounded-3xl rounded-bl-md bg-white text-[#0d1f55] px-4 py-3 shadow-xl border-2"
+              style={{ borderColor: mascote.corPrimaria }}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#FF8A4C]">
-                  Profª Brilha
+                <span
+                  className="text-[10px] font-black uppercase tracking-widest flex items-center gap-1"
+                  style={{ color: mascote.corSecundaria }}
+                >
+                  <span aria-hidden>{mascote.emoji}</span> {mascote.nome} · {mascote.papel}
                 </span>
                 <button
                   onClick={speak}
-                  className="h-7 w-7 rounded-lg bg-[#FFF2D6] grid place-items-center active:scale-95"
-                  aria-label={tts.speaking ? "Parar voz" : "Ouvir Profª Brilha"}
+                  className="h-7 w-7 rounded-lg grid place-items-center active:scale-95"
+                  style={{ background: `${mascote.corPrimaria}22` }}
+                  aria-label={tts.speaking ? `Parar ${mascote.nome}` : `Ouvir ${mascote.nome}`}
                 >
                   {tts.speaking ? (
-                    <VolumeX className="h-3.5 w-3.5 text-[#FF8A4C]" />
+                    <VolumeX className="h-3.5 w-3.5" style={{ color: mascote.corSecundaria }} />
                   ) : (
-                    <Volume2 className="h-3.5 w-3.5 text-[#FF8A4C]" />
+                    <Volume2 className="h-3.5 w-3.5" style={{ color: mascote.corSecundaria }} />
                   )}
                 </button>
               </div>
