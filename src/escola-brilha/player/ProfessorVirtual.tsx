@@ -1,9 +1,9 @@
 import { useMemo, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
-import professoraImg from "@/assets/pip-girl-professora.png";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
+import { mascoteDaAula } from "../mascotes-disciplina";
 
 type BlocoId =
   | "missao"
