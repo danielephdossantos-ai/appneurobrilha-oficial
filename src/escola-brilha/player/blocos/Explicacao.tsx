@@ -79,41 +79,88 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
 
       <div className="space-y-3">
         <AnimatePresence initial={false}>
-          {chunks.slice(0, visiveis).map((c, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="rounded-2xl bg-white/5 border border-white/10 p-4"
-            >
-              <p className="text-base leading-relaxed whitespace-pre-line">{c.texto}</p>
-              {c.checagem && i < visiveis - 1 && (
-                <MicroChecagem checagem={c.checagem} />
-              )}
-              {c.checagem && i === visiveis - 1 && (
-                <MicroChecagem
-                  checagem={c.checagem}
-                  onOk={() => setVisiveis((v) => Math.min(total, v + 1))}
-                  onErrosRepetidos={() => {
-                    if (podeAprofundar) setNivelIdx((n) => n + 1);
-                  }}
-                />
-              )}
-            </motion.div>
-          ))}
+          {chunks.slice(0, visiveis).map((c, i) => {
+            const ehAtual = i === visiveis - 1;
+            const bloqueado = ehAtual && podeAvancar; // aguardando confirmação/checagem
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="rounded-2xl bg-white/5 border border-white/10 p-4"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-white/40">
+                    Bloco {i + 1} de {total}
+                  </div>
+                  {bloqueado && (
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[#FFC93C]">
+                      Confirme para continuar
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-base leading-relaxed whitespace-pre-line">{c.texto}</p>
+
+                {c.imagem && (
+                  <div className="mt-3 rounded-xl bg-white/5 border border-white/10 p-3 flex flex-col items-center">
+                    {/^https?:\/\//i.test(c.imagem) || c.imagem.startsWith("/") ? (
+                      <img
+                        src={c.imagem}
+                        alt={c.imagemAlt ?? ""}
+                        loading="lazy"
+                        className="max-h-40 w-auto rounded-lg object-contain"
+                      />
+                    ) : (
+                      <div className="text-6xl leading-none" aria-hidden>
+                        {c.imagem}
+                      </div>
+                    )}
+                    {c.imagemAlt && (
+                      <div className="mt-1 text-[11px] text-white/60 flex items-center gap-1">
+                        <ImageIcon className="h-3 w-3" /> {c.imagemAlt}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {c.exemplo && (
+                  <div className="mt-3 rounded-xl bg-[#FFC93C]/10 border border-[#FFC93C]/40 p-3">
+                    <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#FFC93C] mb-1">
+                      <Lightbulb className="h-3.5 w-3.5" /> Exemplo
+                    </div>
+                    <p className="text-sm leading-relaxed">{c.exemplo}</p>
+                  </div>
+                )}
+
+                {c.checagem && !ehAtual && <MicroChecagem checagem={c.checagem} />}
+                {c.checagem && ehAtual && (
+                  <MicroChecagem
+                    checagem={c.checagem}
+                    onOk={() => setVisiveis((v) => Math.min(total, v + 1))}
+                    onErrosRepetidos={() => {
+                      if (podeAprofundar) setNivelIdx((n) => n + 1);
+                    }}
+                  />
+                )}
+
+                {!c.checagem && ehAtual && podeAvancar && (
+                  <button
+                    onClick={() => setVisiveis((v) => Math.min(total, v + 1))}
+                    className="mt-3 w-full h-11 rounded-2xl bg-emerald-500/25 border-2 border-emerald-400/60 font-black text-sm text-emerald-100 active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <Check className="h-4 w-4" /> Entendi · Próximo bloco
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                )}
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </div>
 
       <div className="mt-4 grid gap-2">
-        {podeAvancar && chunks[visiveis - 1] && !chunks[visiveis - 1].checagem && (
-          <button
-            onClick={() => setVisiveis((v) => Math.min(total, v + 1))}
-            className="w-full h-11 rounded-2xl bg-white/15 border border-white/20 font-black text-sm active:scale-[0.98] flex items-center justify-center gap-2"
-          >
-            Toque para continuar <ArrowRight className="h-4 w-4" />
-          </button>
-        )}
 
         {podeAprofundar && (
           <button
