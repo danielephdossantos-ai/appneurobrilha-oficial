@@ -11,6 +11,18 @@ const aula: Aula = {
   disciplina: "Matemática",
   titulo: "Jeitos espertos de contar",
 
+  narrativa: {
+    titulo: "A festa de aniversário da Lila",
+    contexto:
+      "Hoje é o aniversário da coelhinha Lila. Ela convidou um monte de amigos e comprou brigadeiros pra caramba. Só que a mãe da Lila pediu ajuda: precisa saber, rapidinho, quantos brigadeiros tem em cada bandeja pra ninguém ficar sem.",
+    problema:
+      "Contar de um em um vai demorar a tarde inteira — e a festa começa em cinco minutos! A Lila precisa de um jeito mais esperto de contar, senão os amigos vão chegar e nada estará pronto.",
+    convite:
+      "Vamos descobrir juntos jeitos espertos de contar rapidinho e salvar a festa da Lila?",
+  },
+
+
+
   conhecimentosPrevios: [
     "Contar oralmente até 20 sem se perder.",
     "Reconhecer grupos iguais (dois a dois, cinco a cinco).",
