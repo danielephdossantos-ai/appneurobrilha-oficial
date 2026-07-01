@@ -132,7 +132,16 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
       });
       if (activeChild?.id) {
         await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
+        // Sistema automático de revisão: registra conclusão + agenda próxima revisão
+        const desempenho = Math.round((acertos / total) * 100);
+        await supabase.rpc("registrar_conclusao_aula", {
+          _child_id: activeChild.id,
+          _codigo_bncc: aula.codigo,
+          _desempenho: desempenho,
+          _tipo: "aula",
+        });
       }
+
     }
   };
 
