@@ -152,3 +152,5 @@ export const BIBLIOTECA_NACIONAL_MISSOES = {
   regra: "Cada código BNCC possui exatamente UMA missão. Duplicidades são rejeitadas no registry.",
   viewCobertura: "public.vw_biblioteca_nacional_missoes",
 } as const;
+
+export type { MissaoOficial } from "./types";
