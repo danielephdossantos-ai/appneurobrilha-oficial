@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
+import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
+
 
 
 export const Route = createFileRoute("/escola-brilha/")({
@@ -66,6 +68,8 @@ function EscolaBrilhaCatalogo() {
   const { activeChild } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
+  const [dominio, setDominio] = useState<Record<string, NivelDominio>>({});
+
   const [loading, setLoading] = useState(true);
   const [filtro, setFiltro] = useState<"disponiveis" | "todas">("disponiveis");
   const [serieAberta, setSerieAberta] = useState<Serie | null>(null);
@@ -94,13 +98,19 @@ function EscolaBrilhaCatalogo() {
     (async () => {
       const { data } = await supabase
         .from("escola_progresso")
-        .select("codigo_bncc, concluida")
+        .select("codigo_bncc, concluida, nivel_dominio")
         .eq("child_id", activeChild.id);
       const map: Record<string, boolean> = {};
-      for (const r of data ?? []) map[r.codigo_bncc] = !!r.concluida;
+      const mapDom: Record<string, NivelDominio> = {};
+      for (const r of (data ?? []) as Array<{ codigo_bncc: string; concluida: boolean | null; nivel_dominio: NivelDominio | null }>) {
+        map[r.codigo_bncc] = !!r.concluida;
+        if (r.nivel_dominio) mapDom[r.codigo_bncc] = r.nivel_dominio;
+      }
       setProgresso(map);
+      setDominio(mapDom);
     })();
   }, [activeChild?.id]);
+
 
   const aulasEscritas = listAulas();
   const escritasSet = useMemo(() => new Set(aulasEscritas.map((a) => a.codigo)), [aulasEscritas]);
@@ -289,7 +299,11 @@ function EscolaBrilhaCatalogo() {
                                         <div className="text-sm font-black text-[#0d1f55] leading-tight line-clamp-2">
                                           {h.titulo}
                                         </div>
+                                        <div className="mt-1">
+                                          <MasteryBadge nivel={dominio[h.codigo] ?? null} />
+                                        </div>
                                       </div>
+
                                     </div>
                                   );
                                   return disponivel ? (

@@ -1902,8 +1902,10 @@ export type Database = {
           erros: number
           estrelas: number
           id: string
+          nivel_dominio: Database["public"]["Enums"]["mastery_level"]
           nota: number
           percentual: number
+          sessoes_dominadas_consecutivas: number
           tempo_estudado_segundos: number
           tentativas: number
           ultima_visita_em: string
@@ -1925,8 +1927,10 @@ export type Database = {
           erros?: number
           estrelas?: number
           id?: string
+          nivel_dominio?: Database["public"]["Enums"]["mastery_level"]
           nota?: number
           percentual?: number
+          sessoes_dominadas_consecutivas?: number
           tempo_estudado_segundos?: number
           tentativas?: number
           ultima_visita_em?: string
@@ -1948,8 +1952,10 @@ export type Database = {
           erros?: number
           estrelas?: number
           id?: string
+          nivel_dominio?: Database["public"]["Enums"]["mastery_level"]
           nota?: number
           percentual?: number
+          sessoes_dominadas_consecutivas?: number
           tempo_estudado_segundos?: number
           tentativas?: number
           ultima_visita_em?: string
@@ -7016,6 +7022,10 @@ export type Database = {
         Returns: undefined
       }
       approve_lesson_draft: { Args: { _draft_id: string }; Returns: string }
+      calcular_nivel_dominio: {
+        Args: { _desempenho: number; _sessoes_consec: number }
+        Returns: Database["public"]["Enums"]["mastery_level"]
+      }
       gain_active_mascot_xp: {
         Args: { p_amount: number }
         Returns: {
@@ -7031,6 +7041,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      pode_avancar_habilidade: {
+        Args: { _child_id: string; _codigo_bncc: string }
         Returns: boolean
       }
       publish_lesson_with_version: {
@@ -7118,6 +7132,11 @@ export type Database = {
         | "excited"
         | "focused"
         | "proud"
+      mastery_level:
+        | "nao_iniciada"
+        | "em_aprendizagem"
+        | "parcialmente_dominada"
+        | "dominada"
       nivel_pedagogico:
         | "muito_facil"
         | "facil"
@@ -7316,6 +7335,12 @@ export const Constants = {
         "excited",
         "focused",
         "proud",
+      ],
+      mastery_level: [
+        "nao_iniciada",
+        "em_aprendizagem",
+        "parcialmente_dominada",
+        "dominada",
       ],
       nivel_pedagogico: [
         "muito_facil",
