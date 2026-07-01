@@ -369,7 +369,7 @@ function renderBloco(
             childId={ctx.childId}
             onProgress={({ acertos, erros }) => {
               ctx.setAcertos(ctx.acertos + acertos);
-              ctx.setErros((ctx.errosAtuais ?? 0) + erros);
+              ctx.setErros(ctx.erros + erros);
             }}
           />
         );
