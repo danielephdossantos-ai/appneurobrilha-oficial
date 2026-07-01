@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
 import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
+import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
+
 
 
 export const Route = createFileRoute("/escola-brilha/")({
