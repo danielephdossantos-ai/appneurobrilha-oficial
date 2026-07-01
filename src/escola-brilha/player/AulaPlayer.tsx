@@ -353,6 +353,18 @@ function renderBloco(
     case "guiada":
       return <AtividadeGuiada dados={a.atividadeGuiada} />;
     case "exercicios":
+      if (a.niveis && (a.niveis.facil?.length || a.niveis.medio?.length || a.niveis.dificil?.length)) {
+        return (
+          <ProgressaoNiveis
+            aula={a}
+            childId={ctx.childId}
+            onProgress={({ acertos, erros }) => {
+              ctx.setAcertos(ctx.acertos + acertos);
+              ctx.setErros((ctx.errosAtuais ?? 0) + erros);
+            }}
+          />
+        );
+      }
       return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;
