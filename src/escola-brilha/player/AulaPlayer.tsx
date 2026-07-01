@@ -24,21 +24,33 @@ import { Diagnostico } from "./blocos/Diagnostico";
  * Funciona pra Educação Infantil até o 9º Ano — carrega qualquer aula
  * a partir do código BNCC via registry.
  *
- * Fluxo fixo de 10 blocos:
- *  Missão → Objetivos → Explicação → Exemplo → Prática Guiada →
- *  Exercícios → Desafio → Quiz → Resumo → Conclusão
+ * === MÉTODO BRILHA DE APRENDIZAGEM ===
+ * Toda aula segue obrigatoriamente 5 etapas, distribuídas em 10 blocos:
+ *  1. DESCOBRIR   → Missão · Objetivos          (curiosidade, cotidiano)
+ *  2. ENTENDER    → Explicação · Exemplo        (teoria em pedaços)
+ *  3. EXPLORAR    → Prática Guiada              (observar, comparar)
+ *  4. PRATICAR    → Exercícios · Desafio        (guiada → independente)
+ *  5. CONQUISTAR  → Quiz · Resumo · Conclusão   (domínio da habilidade)
  */
 const BLOCOS = [
-  { id: "missao", nome: "Missão" },
-  { id: "objetivos", nome: "Objetivos" },
-  { id: "explicacao", nome: "Explicação" },
-  { id: "exemplo", nome: "Exemplo" },
-  { id: "guiada", nome: "Prática Guiada" },
-  { id: "exercicios", nome: "Exercícios" },
-  { id: "desafio", nome: "Desafio" },
-  { id: "quiz", nome: "Quiz" },
-  { id: "resumo", nome: "Resumo" },
-  { id: "conclusao", nome: "Conclusão" },
+  { id: "missao",     nome: "Missão",         etapa: 1, etapaNome: "Descobrir"  },
+  { id: "objetivos",  nome: "Objetivos",      etapa: 1, etapaNome: "Descobrir"  },
+  { id: "explicacao", nome: "Explicação",     etapa: 2, etapaNome: "Entender"   },
+  { id: "exemplo",    nome: "Exemplo",        etapa: 2, etapaNome: "Entender"   },
+  { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
+  { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },
+  { id: "desafio",    nome: "Desafio",        etapa: 4, etapaNome: "Praticar"   },
+  { id: "quiz",       nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
+  { id: "resumo",     nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
+  { id: "conclusao",  nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
+] as const;
+
+const ETAPAS_METODO = [
+  { n: 1, nome: "Descobrir",  cor: "#FFC93C" },
+  { n: 2, nome: "Entender",   cor: "#4C9EFF" },
+  { n: 3, nome: "Explorar",   cor: "#A78BFA" },
+  { n: 4, nome: "Praticar",   cor: "#34D399" },
+  { n: 5, nome: "Conquistar", cor: "#FF8A4C" },
 ] as const;
 
 export function AulaPlayer({ aula }: { aula: Aula }) {
@@ -180,10 +192,28 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
 
       <div className="px-4 pt-3">
         <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/60 mb-1.5">
-          <span>{BLOCOS[idx].nome}</span>
+          <span className="truncate">
+            <span style={{ color: ETAPAS_METODO[BLOCOS[idx].etapa - 1].cor }}>
+              Etapa {BLOCOS[idx].etapa} · {BLOCOS[idx].etapaNome}
+            </span>
+            <span className="text-white/40"> · {BLOCOS[idx].nome}</span>
+          </span>
           <span>
             {idx + 1} / {BLOCOS.length}
           </span>
+        </div>
+        <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
+          {ETAPAS_METODO.map((e) => {
+            const atual = BLOCOS[idx].etapa;
+            const on = e.n <= atual;
+            return (
+              <div
+                key={e.n}
+                className="flex-1 h-1.5 rounded-full transition-all"
+                style={{ background: on ? e.cor : "rgba(255,255,255,0.12)" }}
+              />
+            );
+          })}
         </div>
         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
           <motion.div
