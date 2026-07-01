@@ -77,9 +77,13 @@ export function ProgressaoNiveis({
     return disponiveis[disponiveis.length - 1];
   });
 
+  const tracker = useMetricasAula(childId, aula.codigo);
+  const [intervencao, setIntervencao] = useState<{ motivo?: string } | null>(null);
+
   useEffect(() => {
     gravar(childId, aula.codigo, reg);
   }, [reg, childId, aula.codigo]);
+
 
   const desbloqueado = (n: Nivel) => {
     const i = disponiveis.indexOf(n);
