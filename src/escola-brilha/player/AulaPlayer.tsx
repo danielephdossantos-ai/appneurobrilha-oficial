@@ -336,6 +336,8 @@ function renderBloco(
   i: number,
   ctx: {
     acertos: number;
+    erros: number;
+    childId?: string;
     setAcertos: (n: number) => void;
     setErros: (n: number) => void;
     onQuizEnd: () => void;
