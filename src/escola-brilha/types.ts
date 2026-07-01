@@ -46,6 +46,25 @@ export type Aula = {
       explicacao?: string;
     };
   }>;
+  /**
+   * Níveis de aprofundamento da explicação (opcional).
+   * Todo nível deve ter um texto DIFERENTE — o player nunca repete a mesma
+   * frase quando a criança pede "explicar de outro jeito".
+   *
+   *   nivel1 → explicação extremamente simples (frase-mãe, curtíssima)
+   *   nivel2 → novo exemplo concreto do cotidiano
+   *   nivel3 → outra forma de explicar (analogia, desenho falado, história)
+   *   nivel4 → aplicação prática (onde isso aparece na vida real)
+   *
+   * Se ausente, o player usa o próprio `explicacao` como nível 1 e libera
+   * apenas os níveis que tiverem texto distinto.
+   */
+  explicacoesNiveis?: {
+    nivel1?: string;
+    nivel2?: string;
+    nivel3?: string;
+    nivel4?: string;
+  };
   // 4. Exemplo
   exemploResolvido: { enunciado: string; passos: string[]; resposta: string };
   // 5. Prática Guiada
