@@ -43,6 +43,15 @@ const DESTINOS_KIDS: Destino[] = [
     shine: "rgba(255,255,255,0.12)",
   },
   {
+    to: "/escola-brilha",
+    title: "Escola Brilha",
+    subtitle: "Aulas de verdade",
+    gradient: "from-[#4C9EFF] via-[#3B82F6] to-[#1D4ED8]",
+    glow: "rgba(76,158,255,0.7)",
+    emoji: "📚",
+    shine: "rgba(255,255,255,0.15)",
+  },
+  {
     to: "/reforco-brilha",
     title: "Reforço Brilha",
     subtitle: "Professor Particular",
