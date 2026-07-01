@@ -68,6 +68,8 @@ function EscolaBrilhaCatalogo() {
   const { activeChild } = useAppState();
   const [habilidades, setHabilidades] = useState<HabRow[]>([]);
   const [progresso, setProgresso] = useState<Record<string, boolean>>({});
+  const [dominio, setDominio] = useState<Record<string, NivelDominio>>({});
+
   const [loading, setLoading] = useState(true);
   const [filtro, setFiltro] = useState<"disponiveis" | "todas">("disponiveis");
   const [serieAberta, setSerieAberta] = useState<Serie | null>(null);
