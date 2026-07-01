@@ -52,7 +52,8 @@ export type LessonContract = {
     objetivos: string[];               // >=1
     conhecimentos_previos: string[];   // >=1
     materiais: string[];               // >=1
-    exemplos: [Exemplo, Exemplo, Exemplo]; // exatamente 3
+    explicacao_etapas: string[];       // >=2 — Explicação dividida em pequenas etapas
+    exemplos: [Exemplo, Exemplo, Exemplo]; // exatamente 3 (do cotidiano)
     curiosidade: string;
     atividade_guiada: Atividade;
     atividade_pratica: Atividade;
@@ -70,8 +71,10 @@ export type LessonContract = {
       dislexia: Adaptacao;
     };
     criterios_dominio: string[];       // >=1 — critérios de domínio da habilidade
+    mensagem_final: string;            // Mensagem final de incentivo (obrigatória)
   };
 };
+
 
 export type LessonValidationResult =
   | { ok: true }
@@ -99,7 +102,9 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
   if (!arr(c.objetivos)) faltando.push("objetivos (>=1)");
   if (!arr(c.conhecimentos_previos)) faltando.push("conhecimentos_previos (>=1)");
   if (!arr(c.materiais)) faltando.push("materiais (>=1)");
+  if (!arr(c.explicacao_etapas, 2)) faltando.push("explicacao_etapas (>=2)");
   if (!arr(c.exemplos, 3)) faltando.push("exemplos (3 obrigatórios)");
+
   if (!nonEmpty(c.curiosidade)) faltando.push("curiosidade");
   if (!obj(c.atividade_guiada)) faltando.push("atividade_guiada");
   if (!obj(c.atividade_pratica)) faltando.push("atividade_pratica");
@@ -118,6 +123,8 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
   }
 
   if (!arr(c.criterios_dominio)) faltando.push("criterios_dominio (>=1)");
+  if (!nonEmpty(c.mensagem_final)) faltando.push("mensagem_final");
+
 
   return faltando.length === 0 ? { ok: true } : { ok: false, faltando };
 }
