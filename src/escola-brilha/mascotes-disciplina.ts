@@ -24,13 +24,28 @@ import { disciplinaDoCodigo } from "./missoes-tema";
 
 export type MascoteDisciplina = {
   slug: string;
-  nome: string;         // nome curto exibido pra criança
-  papel: string;        // "Professor de Matemática", etc.
+  nome: string;
+  papel: string;
   emoji: string;
   imagem: string;
-  corPrimaria: string;  // hex, usado nas bordas/badges do balão
+  corPrimaria: string;
   corSecundaria: string;
-  personalidade: string; // tom da fala (interno, guia dos templates)
+  personalidade: string;
+  preco: number; // BrilhoCoins para desbloquear (0 = já vem grátis)
+};
+
+/** Preço oficial em BrilhoCoins para desbloquear cada mascote-professor. */
+export const PRECOS_MASCOTES: Record<string, number> = {
+  default: 0,
+  matematica: 50,
+  portugues: 50,
+  ciencias: 100,
+  historia: 150,
+  geografia: 150,
+  arte: 200,
+  edfisica: 200,
+  ingles: 250,
+  religiao: 250,
 };
 
 /** Mapa oficial: 1 disciplina → 1 mascote. Nunca repete. */
