@@ -1,6 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { AulaPlayer } from "@/escola-brilha/player/AulaPlayer";
-import { getAula } from "@/escola-brilha/registry";
+import { createFileRoute } from "@tanstack/react-router";
+import { UniversalPlayer } from "@/escola-brilha/player/UniversalPlayer";
 
 export const Route = createFileRoute("/escola-brilha/$codigo")({
   head: () => ({
