@@ -185,6 +185,17 @@ function EscolaBrilhaCatalogo() {
         {/* Revisões automáticas recomendadas */}
         <RevisoesRecomendadas childId={activeChild?.id} />
 
+        {/* Atalho para escolher os professores */}
+        <Link
+          to="/escola-brilha/professores"
+          className="mb-4 mt-2 flex items-center justify-between gap-3 rounded-2xl p-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-[#0d1f55] font-black active:scale-[0.98]"
+        >
+          <span className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5" /> Meus Professores
+          </span>
+          <span className="text-xs font-bold opacity-80">Escolher / Desbloquear →</span>
+        </Link>
+
         {/* Filtro */}
 
         <div className="flex gap-2 mb-4">
