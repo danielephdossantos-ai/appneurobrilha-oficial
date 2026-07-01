@@ -49,9 +49,12 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
+  const [emDiagnostico, setEmDiagnostico] = useState(false);
   const tts = useDeviceTTS();
   const inicioBloco = useRef<number>(Date.now());
   const tentativaContada = useRef(false);
+
+  const temDiagnostico = (aula.diagnostico?.length ?? 0) > 0;
 
   useEffect(() => {
     if (progresso.carregado && !retomado) {
@@ -61,12 +64,16 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
       setRetomado(true);
+      // Diagnóstico só entra antes do primeiro bloco e se ainda não foi feito.
+      if (temDiagnostico && !progresso.diagnostico_feito && alvo === 0 && !progresso.concluida) {
+        setEmDiagnostico(true);
+      }
       if (!tentativaContada.current) {
         tentativaContada.current = true;
         void salvar({ tentativas: (progresso.tentativas ?? 0) + 1 });
       }
     }
-  }, [progresso, retomado, salvar]);
+  }, [progresso, retomado, salvar, temDiagnostico]);
 
   const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
