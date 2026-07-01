@@ -221,7 +221,7 @@ function renderBloco(
       return (
         <Quiz
           questoes={a.quiz}
-          onFinish={(n) => {
+          onFinish={(n: number) => {
             ctx.setAcertos(n);
             ctx.onQuizEnd();
           }}
