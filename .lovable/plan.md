@@ -1,109 +1,94 @@
-# Nova Anamnese Científica - NeuroBrilha Kids
 
-## Visão geral
+# Reconstrução do Escola Brilha
 
-Substituir a anamnese atual (curta, 7 seções simples) por uma triagem científica completa em **16 etapas**, com pontuação multi-perfil, classificação por níveis de risco (verde/amarelo/laranja/vermelho) e geração de relatório PDF. Sem diagnóstico — apenas triagem.
+Vamos apagar toda a lógica antiga da Escola Brilha e reconstruir uma arquitetura nova, simples e focada em qualidade pedagógica. Nada do resto do app é tocado (login, crianças, pais, gamificação, progresso, agenda, PEI, NeuroTreino, Reforço Brilha e as 1.451 habilidades BNCC continuam intactas).
 
-## Estrutura técnica
+## Princípios
 
-### 1. Schema de dados (`src/modules/anamnese/types/v2.ts`)
+1. Pedagogia primeiro, código depois. Cada aula é escrita para ensinar de verdade, não para preencher um schema.
+2. Uma aula = um arquivo. Sem builders, pipelines, validators, repositories ou serviços em camadas.
+3. Uma única fonte de verdade: a tabela `escola_aulas` (nova), indexada por código BNCC.
+4. Visual atual do app é preservado (mesmos cards, mesma navegação, mesmo player).
 
-- Tipo `AnamneseV2` com 16 sub-objetos (identificacao, gestacao, marcos, medico, familiar, escolar, atencao, hiperatividade, comunicacao, repetitivos, sensorial, linguagem, memoria, motora, emocional, autonomia).
-- Escala Likert 0-4 reutilizável nas etapas comportamentais (7, 8, 9, 10, 11, 15).
-- Validação com Zod por etapa (permite salvar parcial).
+## O que será excluído
 
-### 2. Banco de dados
+Rotas / componentes / libs antigos do Escola Brilha:
+- Qualquer código que ainda referencie `lesson_content`, `lesson_examples`, `lesson_drafts`, `lesson_quizzes`, `lesson_challenges`, `lesson_adaptations`, `lesson_explanations`, `lesson_reviews_full`, `lesson_assessments`, `lesson_curiosities`, `lesson_versions`, `lesson_cache`, `pedagogical_lessons_cache`.
+- Antigos "LessonService", "DraftBuilder", "LessonPublisher", "PedagogicalContentValidator", "BnccLessonMapper", "LessonBlueprint", "LessonContract", "LessonContentPlayer" e o restante dessa camada.
+- Edge functions de geração antigas (se sobrar alguma).
+- Rotas admin de geração/importação/publicação/produção da biblioteca antiga.
 
-Nova migration:
+Banco: as tabelas antigas de aula ficam sem uso e podem ser dropadas em uma migração de limpeza (sem tocar em `bncc_habilidades`, `aulas_bncc` e nada fora do domínio Escola Brilha).
 
-- Tabela `anamnese_v2` (child_id, current_step, responses JSONB, scores JSONB, risk_levels JSONB, completed BOOL, created_at, updated_at).
-- RLS por `auth.uid()` via `children.user_id`.
-- GRANTs para `authenticated` e `service_role`.
-- Manter `child_anamnesis` antiga intacta (legado).
+## O que será preservado (não tocar)
 
-### 3. Motor de pontuação (`src/modules/anamnese/engine/ScoringEngine.ts`)
+- `bncc_habilidades` (1.451) e `aulas_bncc` como guia de escopo.
+- Todo o resto do app: auth, `children`, `profiles`, `parent_profiles`, gamificação (`user_mascots`, coins, XP), agenda, PEI, NeuroTreino, Reforço Brilha, Missão Prova/Tarefa/Trabalho, Jornada 365.
+- Visual: cards de entrada, cores, tipografia, Pip/Pipa, layout mobile.
 
-Gera 5 perfis (0-100):
+## Nova arquitetura (mínima)
 
-- **Cognitivo**: atenção + memória + funções executivas
-- **Escolar**: leitura + escrita + matemática
-- **Comportamental**: hiperatividade + impulsividade + repetitivos
-- **Socioemocional**: comunicação social + emocional
-- **Adaptativo**: autonomia + motor + sensorial
+```text
+src/escola-brilha/
+  data/                    # aulas escritas à mão, 1 arquivo por habilidade
+    EF01MA01.ts
+    EF01LP01.ts
+    ...
+  types.ts                 # tipo Aula (13 blocos pedagógicos fixos)
+  registry.ts              # mapa { codigoBncc -> Aula } gerado por import.meta.glob
+  useAula.ts               # hook simples: pega aula pelo código
+  player/
+    AulaPlayer.tsx         # renderiza os 13 blocos, um por tela
+    blocos/                # 1 componente por bloco (Objetivo, Introdução, ...)
+src/routes/
+  escola-brilha.tsx        # catálogo (anos → disciplinas → habilidades)
+  escola-brilha.$codigo.tsx  # player da aula
+```
 
-Classificação por área:
+Nova tabela (opcional, só para progresso do aluno na aula):
 
-- Verde (0-25% indicadores), Amarelo (26-50%), Laranja (51-75%), Vermelho (76-100%).
+```text
+escola_progresso
+  id uuid pk
+  child_id uuid fk children
+  codigo_bncc text
+  bloco_atual int
+  concluida bool
+  updated_at timestamptz
+```
 
-Indicadores de atenção cruzados (ex: marcos atrasados + histórico familiar TEA → flag específica, sem diagnóstico).
+Com RLS + GRANT, escopo por `child_id → auth.uid()`. Nenhum conteúdo pedagógico no banco — o conteúdo vive no código (versionado, revisável, com PR).
 
-### 4. UI - Wizard de 16 etapas (`src/routes/anamnese.$childId.tsx`)
+## Estrutura fixa de cada aula (13 blocos)
 
-Refatorar a rota existente:
+Objetivo → Introdução → Explicação → Exemplo → Exemplo do cotidiano → Prática guiada → Prática independente → Curiosidade → Desafio → Resumo → Revisão → Quiz → Resultado.
 
-- Componente `<AnamneseWizard>` com `<StepIndicator>` (barra de progresso 1/16).
-- Cada etapa = componente próprio em `src/modules/anamnese/steps/` (Step01Identificacao…Step16Autonomia).
-- Componentes reutilizáveis: `<LikertScale>`, `<YesNoField>`, `<NumberField>`, `<DateField>`.
-- Botões: Voltar / Salvar e continuar depois / Próxima.
-- Salvamento automático (debounce 1s) no `anamnese_v2`.
-- Retomar de onde parou via `current_step`.
-- Banner fixo no topo: aviso de "não é diagnóstico".
-- Mobile-first (Tailwind, layouts em coluna única).
+O tipo `Aula` obriga esses 13 campos. Sem eles, o TypeScript recusa. Sem gerador automático, sem "genérico".
 
-### 5. Tela de resultados (`src/routes/anamnese.$childId.resultado.tsx`)
+## Fluxo de trabalho pedagógico
 
-- 5 cards de perfil com barra de progresso + selo de cor (verde/amarelo/laranja/vermelho).
-- Gráfico radar (recharts) dos 5 perfis.
-- Lista de áreas de maior atenção.
-- Recomendações educacionais por área (texto pré-definido por nível).
-- Orientação de busca profissional quando houver laranja/vermelho.
-- Botão "Baixar relatório em PDF".
-
-### 6. Geração de PDF (`src/lib/anamnese-pdf.ts`)
-
-- Cliente: usar `jspdf` + `jspdf-autotable` (já cabíveis no bundle, sem servidor).
-- Conteúdo: capa com dados da criança, resumo por etapa, tabela de pontuações, gráfico (canvas → imagem), recomendações, rodapé com aviso legal.
-- Download direto pelo navegador.
-
-### 7. Integração com app existente
-
-- Atualizar `useAppState.saveAnamnesis` para gravar também em `anamnese_v2` (mantém compatibilidade).
-- `AnamnesisProcessor.process()` recebe um adaptador que mapeia `AnamneseV2 → InternalProfile` (alimenta perfil pedagógico, flags e níveis).
-- Botão na home da criança: "Refazer anamnese completa" leva ao novo wizard.
+1. Escolhemos uma habilidade BNCC (ex.: `EF01MA01`).
+2. Escrevemos `EF01MA01.ts` juntos, bloco a bloco, com texto real e exemplos reais.
+3. Revisamos no player (`/escola-brilha/EF01MA01`).
+4. Só depois vamos para a próxima. Sem lote, sem IA gerando aula pronta.
 
 ## Detalhes técnicos
 
-**Stack**: TanStack Start (rotas), TanStack Query (cache), Supabase (persistência), Zod (validação), Tailwind + shadcn/ui (UI), Recharts (gráfico radar), jsPDF (relatório).
+- Registry: `const modules = import.meta.glob('./data/*.ts', { eager: true })` → mapa por código.
+- Catálogo: lista habilidades a partir de `bncc_habilidades` e marca quais já têm aula no registry (`disponivel: true/false`).
+- Player: mesmo visual atual (Pip/Pipa, coins ao concluir bloco, TTS já existente via `useDeviceTTS`).
+- Progresso: escreve em `escola_progresso` a cada bloco concluído; ao terminar o bloco 13, dispara `add_brilhocoins` existente.
+- Sem cache no banco. Sem versões. Se uma aula muda, muda o arquivo.
 
-**Arquivos novos** (~20):
+## Entregas por etapa
 
-- `src/modules/anamnese/types/v2.ts`
-- `src/modules/anamnese/engine/ScoringEngine.ts`
-- `src/modules/anamnese/engine/RiskClassifier.ts`
-- `src/modules/anamnese/engine/RecommendationEngine.ts`
-- `src/modules/anamnese/steps/Step01..Step16.tsx`
-- `src/modules/anamnese/components/AnamneseWizard.tsx`
-- `src/modules/anamnese/components/LikertScale.tsx`
-- `src/modules/anamnese/components/StepIndicator.tsx`
-- `src/modules/anamnese/components/DisclaimerBanner.tsx`
-- `src/modules/anamnese/hooks/useAnamneseV2.ts`
-- `src/lib/anamnese-pdf.ts`
-- `src/routes/anamnese.$childId.resultado.tsx`
+1. Limpeza: remover rotas/libs/edge functions antigos e migração para dropar tabelas `lesson_*` não usadas.
+2. Fundação nova: `types.ts`, `registry.ts`, `AulaPlayer.tsx`, 13 componentes de bloco, rotas `escola-brilha` e `escola-brilha.$codigo`.
+3. Tabela `escola_progresso` + integração com gamificação existente.
+4. Primeira aula real escrita a quatro mãos (você escolhe o código BNCC).
+5. A partir daí, uma aula por vez, no seu ritmo.
 
-**Arquivos modificados**:
+## Perguntas antes de começar
 
-- `src/routes/anamnese.$childId.tsx` (substituir conteúdo pelo wizard)
-- `src/modules/neuro-treino/engine/AnamnesisProcessor.ts` (adicionar adapter v2)
-- `src/core/store.ts` (suportar v2)
-
-**Migration**: 1 nova tabela `anamnese_v2`.
-
-**Dependências novas**: `jspdf`, `jspdf-autotable`.
-
-## Fora de escopo (a confirmar)
-
-- Não vou remover a anamnese antiga do banco (legado preservado).
-- Não vou adicionar fluxo do profissional/terapeuta validar respostas.
-- Sem envio do PDF por email (apenas download).
-
-Posso seguir com essa implementação?
+1. Posso dropar de vez as tabelas antigas (`lesson_content`, `lesson_examples`, `lesson_drafts`, `lesson_quizzes`, `lesson_challenges`, `lesson_adaptations`, `lesson_explanations`, `lesson_reviews_full`, `lesson_assessments`, `lesson_curiosities`, `lesson_versions`, `lesson_cache`, `pedagogical_lessons_cache`) na etapa 1?
+2. Qual habilidade BNCC quer que seja a primeira aula real (etapa 4)? Sugestão: `EF01MA01` (Matemática 1º ano) ou `EF01LP01` (Português 1º ano).
