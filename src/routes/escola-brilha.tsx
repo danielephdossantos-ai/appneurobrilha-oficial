@@ -34,10 +34,16 @@ function EscolaBrilhaCatalogo() {
     (async () => {
       const { data } = await supabase
         .from("bncc_habilidades")
-        .select("codigo, titulo, ano, componente")
-        .order("codigo")
+        .select("codigo_bncc, titulo, ano, disciplina")
+        .order("codigo_bncc")
         .limit(2000);
-      setHabilidades((data ?? []) as HabRow[]);
+      const rows: HabRow[] = (data ?? []).map((r) => ({
+        codigo: r.codigo_bncc,
+        titulo: r.titulo,
+        ano: r.ano,
+        componente: r.disciplina,
+      }));
+      setHabilidades(rows);
       setLoading(false);
     })();
   }, []);
