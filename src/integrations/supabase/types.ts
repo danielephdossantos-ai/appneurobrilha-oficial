@@ -4154,6 +4154,39 @@ export type Database = {
           },
         ]
       }
+      missoes_pendentes: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          id: string
+          primeira_tentativa_em: string
+          tentativas: number
+          ultima_crianca: string | null
+          ultima_tentativa_em: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          id?: string
+          primeira_tentativa_em?: string
+          tentativas?: number
+          ultima_crianca?: string | null
+          ultima_tentativa_em?: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          id?: string
+          primeira_tentativa_em?: string
+          tentativas?: number
+          ultima_crianca?: string | null
+          ultima_tentativa_em?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       neuro_profiles: {
         Row: {
           child_id: string
@@ -7074,6 +7107,10 @@ export type Database = {
           _tipo?: string
         }
         Returns: string
+      }
+      registrar_missao_pendente: {
+        Args: { _child_id?: string; _codigo_bncc: string }
+        Returns: undefined
       }
       reset_daily_coins: { Args: never; Returns: undefined }
       restore_lesson_version: {
