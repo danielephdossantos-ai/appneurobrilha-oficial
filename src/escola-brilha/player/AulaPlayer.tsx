@@ -355,7 +355,7 @@ function textoDoBloco(a: Aula, blocoId: BlocoId): string {
 
 function renderBloco(
   a: Aula,
-  i: number,
+  blocoId: BlocoId,
   ctx: {
     acertos: number;
     erros: number;
@@ -365,7 +365,9 @@ function renderBloco(
     onQuizEnd: () => void;
   },
 ) {
-  switch (BLOCOS[i].id) {
+  switch (blocoId) {
+    case "narrativa":
+      return a.narrativa ? <Narrativa dados={a.narrativa} /> : null;
     case "missao":
       return <Missao texto={a.missao} />;
     case "objetivos":
