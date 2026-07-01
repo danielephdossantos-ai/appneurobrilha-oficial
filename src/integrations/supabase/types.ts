@@ -1880,6 +1880,11 @@ export type Database = {
           concluida: boolean
           concluida_em: string | null
           created_at: string
+          diagnostico_acertos: number
+          diagnostico_em: string | null
+          diagnostico_feito: boolean
+          diagnostico_resultado: string | null
+          diagnostico_total: number
           erros: number
           estrelas: number
           id: string
@@ -1898,6 +1903,11 @@ export type Database = {
           concluida?: boolean
           concluida_em?: string | null
           created_at?: string
+          diagnostico_acertos?: number
+          diagnostico_em?: string | null
+          diagnostico_feito?: boolean
+          diagnostico_resultado?: string | null
+          diagnostico_total?: number
           erros?: number
           estrelas?: number
           id?: string
@@ -1916,6 +1926,11 @@ export type Database = {
           concluida?: boolean
           concluida_em?: string | null
           created_at?: string
+          diagnostico_acertos?: number
+          diagnostico_em?: string | null
+          diagnostico_feito?: boolean
+          diagnostico_resultado?: string | null
+          diagnostico_total?: number
           erros?: number
           estrelas?: number
           id?: string
