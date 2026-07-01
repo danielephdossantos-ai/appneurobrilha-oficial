@@ -279,7 +279,7 @@ const Progresso = {
     const { data } = await supabase
       .from("escola_progresso")
       .select(
-        "bloco_atual, concluida, percentual, nivel_dominio, tentativas, acertos, erros, sessoes_dominadas_consecutivas",
+        "bloco_atual, concluida, percentual, nivel_dominio, tentativas, acertos, erros, sessoes_dominadas_consecutivas, facilidade, dificuldades, revisoes_realizadas, evolucao_delta, historico_evolucao, tempo_medio_segundos, tempo_estudado_segundos",
       )
       .eq("child_id", childId)
       .eq("codigo_bncc", codigoBncc)
@@ -300,6 +300,36 @@ const Progresso = {
     const p = await Progresso.carregar(childId, codigoBncc);
     const n = (p?.nivel_dominio as NivelDominio | undefined) ?? "nao_iniciada";
     return n;
+  },
+
+  /** Retrato completo do domínio: nível, facilidade, dificuldades, tentativas, tempo, revisões, evolução. */
+  async dominio(childId: string, codigoBncc: string) {
+    const { data, error } = await supabase.rpc("dominio_habilidade", {
+      _child_id: childId,
+      _codigo_bncc: codigoBncc,
+    } as never);
+    if (error) {
+      console.error("[MotorPedagogico] dominio_habilidade:", error);
+      return null;
+    }
+    return data as {
+      codigo_bncc: string;
+      nivel_dominio: NivelDominio;
+      percentual: number;
+      facilidade: number;
+      dificuldades: string[];
+      tentativas: number;
+      acertos: number;
+      erros: number;
+      tempo_total_segundos: number;
+      tempo_medio_segundos: number;
+      revisoes_realizadas: number;
+      sessoes_dominadas_consecutivas: number;
+      evolucao_delta: number;
+      historico_evolucao: Array<{ em: string; desempenho: number; tempo_segundos: number; acertos: number; erros: number; nivel: string; tipo: string }>;
+      proxima_revisao: string | null;
+      pode_avancar: boolean;
+    } | null;
   },
 };
 
