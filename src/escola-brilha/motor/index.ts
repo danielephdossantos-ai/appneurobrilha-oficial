@@ -43,6 +43,7 @@ import {
   type MissaoMeta,
 } from "../proxima-missao";
 import { supabase } from "@/integrations/supabase/client";
+import { resolverMissao, parseBNCC, MENSAGEM_MISSAO_EM_CONSTRUCAO } from "./resolver";
 
 // =====================================================================
 // Tipos públicos do Motor
