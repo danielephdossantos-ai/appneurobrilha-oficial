@@ -36,7 +36,7 @@ export function MasteryBadge({ nivel }: { nivel: NivelDominio | null | undefined
   return (
     <span
       className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${cfg.bg} ${cfg.fg}`}
-      title="Nível de domínio da habilidade BNCC"
+      title="Nível de domínio da missão"
     >
       <span className={`h-1.5 w-1.5 rounded-full ${cfg.dot}`} />
       {cfg.label}
