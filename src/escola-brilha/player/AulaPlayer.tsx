@@ -18,6 +18,7 @@ import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Conclusao } from "./blocos/Conclusao";
 import { Diagnostico } from "./blocos/Diagnostico";
+import { ProfessorVirtual } from "./ProfessorVirtual";
 
 /**
  * Player único de aulas do Escola Brilha.
