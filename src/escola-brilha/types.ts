@@ -45,6 +45,11 @@ export type Aula = {
   // 10. Conclusão
   conclusao: string;
 
+  // Opcional — diagnóstico rápido dos conhecimentos prévios (antes da aula).
+  // Se ausente, o player pula direto pra Missão.
+  conhecimentosPrevios?: string[];
+  diagnostico?: QuizItem[];
+
   // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
   motivacao?: string;
   proximaHabilidade?: { codigo: string; titulo?: string };

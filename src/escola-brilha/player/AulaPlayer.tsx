@@ -17,6 +17,7 @@ import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Conclusao } from "./blocos/Conclusao";
+import { Diagnostico } from "./blocos/Diagnostico";
 
 /**
  * Player único de aulas do Escola Brilha.
@@ -48,9 +49,12 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
+  const [emDiagnostico, setEmDiagnostico] = useState(false);
   const tts = useDeviceTTS();
   const inicioBloco = useRef<number>(Date.now());
   const tentativaContada = useRef(false);
+
+  const temDiagnostico = (aula.diagnostico?.length ?? 0) > 0;
 
   useEffect(() => {
     if (progresso.carregado && !retomado) {
@@ -60,12 +64,16 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
       setRetomado(true);
+      // Diagnóstico só entra antes do primeiro bloco e se ainda não foi feito.
+      if (temDiagnostico && !progresso.diagnostico_feito && alvo === 0 && !progresso.concluida) {
+        setEmDiagnostico(true);
+      }
       if (!tentativaContada.current) {
         tentativaContada.current = true;
         void salvar({ tentativas: (progresso.tentativas ?? 0) + 1 });
       }
     }
-  }, [progresso, retomado, salvar]);
+  }, [progresso, retomado, salvar, temDiagnostico]);
 
   const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
@@ -186,20 +194,36 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
       </div>
 
       <div className="px-4 pt-5">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25 }}
-          >
-            {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
-          </motion.div>
-        </AnimatePresence>
+        {emDiagnostico ? (
+          <Diagnostico
+            aula={aula}
+            onFinish={async ({ acertos: a, total, resultado }) => {
+              await salvar({
+                diagnostico_feito: true,
+                diagnostico_acertos: a,
+                diagnostico_total: total,
+                diagnostico_resultado: resultado,
+              });
+              inicioBloco.current = Date.now();
+              setEmDiagnostico(false);
+            }}
+          />
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.25 }}
+            >
+              {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
 
-      {BLOCOS[idx].id !== "quiz" && (
+      {!emDiagnostico && BLOCOS[idx].id !== "quiz" && (
         <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
           <button
             onClick={prev}
