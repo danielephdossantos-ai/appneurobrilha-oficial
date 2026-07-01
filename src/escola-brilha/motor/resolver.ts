@@ -118,7 +118,7 @@ async function registrarAusencia(codigo: string, childId?: string): Promise<void
   try {
     await supabase.rpc("registrar_missao_pendente", {
       _codigo_bncc: codigo,
-      _child_id: childId ?? null,
+      _child_id: childId ?? undefined,
     });
   } catch (e) {
     // silencioso — a tela nunca deve exibir erro técnico.
