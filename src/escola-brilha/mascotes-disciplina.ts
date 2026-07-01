@@ -31,7 +31,7 @@ export type MascoteDisciplina = {
   corPrimaria: string;
   corSecundaria: string;
   personalidade: string;
-  preco: number; // BrilhoCoins para desbloquear (0 = já vem grátis)
+  preco?: number; // BrilhoCoins para desbloquear (resolvido via PRECOS_MASCOTES)
 };
 
 /** Preço oficial em BrilhoCoins para desbloquear cada mascote-professor. */
