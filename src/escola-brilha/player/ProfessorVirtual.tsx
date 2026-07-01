@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
-import { mascoteDaAula } from "../mascotes-disciplina";
+import { mascoteDaAula, disciplinaDaAula } from "../mascotes-disciplina";
+import { mascoteAtribuido } from "../mascote-assign";
 
 type BlocoId =
   | "missao"
