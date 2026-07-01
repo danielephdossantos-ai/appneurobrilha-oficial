@@ -98,13 +98,19 @@ function EscolaBrilhaCatalogo() {
     (async () => {
       const { data } = await supabase
         .from("escola_progresso")
-        .select("codigo_bncc, concluida")
+        .select("codigo_bncc, concluida, nivel_dominio")
         .eq("child_id", activeChild.id);
       const map: Record<string, boolean> = {};
-      for (const r of data ?? []) map[r.codigo_bncc] = !!r.concluida;
+      const mapDom: Record<string, NivelDominio> = {};
+      for (const r of (data ?? []) as Array<{ codigo_bncc: string; concluida: boolean | null; nivel_dominio: NivelDominio | null }>) {
+        map[r.codigo_bncc] = !!r.concluida;
+        if (r.nivel_dominio) mapDom[r.codigo_bncc] = r.nivel_dominio;
+      }
       setProgresso(map);
+      setDominio(mapDom);
     })();
   }, [activeChild?.id]);
+
 
   const aulasEscritas = listAulas();
   const escritasSet = useMemo(() => new Set(aulasEscritas.map((a) => a.codigo)), [aulasEscritas]);
