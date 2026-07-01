@@ -24,56 +24,28 @@ export type Aula = {
   disciplina: string;          // ex: "Matemática"
   titulo: string;              // título curto, amigável à criança
 
-  // 1. Missão da aula — frase curta, tipo desafio, que abre a jornada
+  // 1. Missão
   missao: string;
-
-  // 2. Objetivos — o que a criança vai saber ao final (2 a 4 itens)
+  // 2. Objetivos
   objetivos: string[];
-
-  // 3. Motivação — por que isso importa? gancho emocional / curiosidade
-  motivacao: string;
-
-  // 4. Explicação — o conteúdo em si, em passos pequenos
+  // 3. Explicação
   explicacao: string;
-
-  // 5. Exemplo resolvido — mostra o raciocínio, passo a passo
-  exemploResolvido: {
-    enunciado: string;
-    passos: string[];
-    resposta: string;
-  };
-
-  // 6. Atividade guiada — a criança faz junto, com apoio
-  atividadeGuiada: {
-    enunciado: string;
-    resposta: string;
-    explicacao: string;
-  };
-
-  // 7. Exercícios — a criança pratica sozinha (2 a 4 itens)
+  // 4. Exemplo
+  exemploResolvido: { enunciado: string; passos: string[]; resposta: string };
+  // 5. Prática Guiada
+  atividadeGuiada: { enunciado: string; resposta: string; explicacao: string };
+  // 6. Exercícios
   exercicios: Exercicio[];
-
-  // 8. Desafio — um passo além do básico
-  desafio: {
-    enunciado: string;
-    resposta: string;
-  };
-
-  // 9. Revisão — pontos-chave (3 a 5) + dica de fixação
-  revisao: {
-    pontos: string[];
-    dica: string;
-  };
-
-  // 10. Quiz — 3 a 5 perguntas
+  // 7. Desafio
+  desafio: { enunciado: string; resposta: string };
+  // 8. Quiz
   quiz: QuizItem[];
-
-  // 11. Conclusão — mensagem de fechamento
+  // 9. Resumo (pontos-chave + dica)
+  revisao: { pontos: string[]; dica: string };
+  // 10. Conclusão
   conclusao: string;
 
-  // 12. Próxima habilidade — código BNCC da próxima aula sugerida (+ título opcional)
-  proximaHabilidade?: {
-    codigo: string;
-    titulo?: string;
-  };
+  // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
+  motivacao?: string;
+  proximaHabilidade?: { codigo: string; titulo?: string };
 };
