@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Aula } from "../types";
 import { useProgresso } from "../useProgresso";
 import { Missao } from "./blocos/Missao";
+import { Narrativa } from "./blocos/Narrativa";
 import { Objetivos } from "./blocos/Objetivos";
 import { Explicacao } from "./blocos/Explicacao";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
@@ -35,7 +36,8 @@ import { ProfessorVirtual } from "./ProfessorVirtual";
  *  4. PRATICAR    → Exercícios · Desafio        (guiada → independente)
  *  5. CONQUISTAR  → Quiz · Resumo · Conclusão   (domínio da habilidade)
  */
-const BLOCOS = [
+const BLOCOS_BASE = [
+  { id: "narrativa",  nome: "História",       etapa: 1, etapaNome: "Descobrir"  },
   { id: "missao",     nome: "Missão",         etapa: 1, etapaNome: "Descobrir"  },
   { id: "objetivos",  nome: "Objetivos",      etapa: 1, etapaNome: "Descobrir"  },
   { id: "explicacao", nome: "Explicação",     etapa: 2, etapaNome: "Entender"   },
@@ -47,6 +49,8 @@ const BLOCOS = [
   { id: "resumo",     nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
   { id: "conclusao",  nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
 ] as const;
+
+type BlocoId = typeof BLOCOS_BASE[number]["id"];
 
 const ETAPAS_METODO = [
   { n: 1, nome: "Descobrir",  cor: "#FFC93C" },
@@ -60,6 +64,10 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
+  const BLOCOS = useMemo(
+    () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
+    [aula.narrativa],
+  );
   const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
@@ -90,7 +98,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
     }
   }, [progresso, retomado, salvar, temDiagnostico]);
 
-  const texto = useMemo(() => textoDoBloco(aula, idx), [aula, idx]);
+  const texto = useMemo(() => textoDoBloco(aula, BLOCOS[idx].id), [aula, idx, BLOCOS]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
 
@@ -259,7 +267,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.25 }}
             >
-              {renderBloco(aula, idx, {
+              {renderBloco(aula, BLOCOS[idx].id, {
                 acertos,
                 erros,
                 childId: activeChild?.id,
@@ -314,8 +322,12 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
   );
 }
 
-function textoDoBloco(a: Aula, i: number): string {
-  switch (BLOCOS[i].id) {
+function textoDoBloco(a: Aula, blocoId: BlocoId): string {
+  switch (blocoId) {
+    case "narrativa": {
+      const n = a.narrativa;
+      return n ? `${n.titulo}. ${n.contexto} ${n.problema} ${n.convite}` : "";
+    }
     case "missao":
       return a.missao;
     case "objetivos":
@@ -343,7 +355,7 @@ function textoDoBloco(a: Aula, i: number): string {
 
 function renderBloco(
   a: Aula,
-  i: number,
+  blocoId: BlocoId,
   ctx: {
     acertos: number;
     erros: number;
@@ -353,7 +365,9 @@ function renderBloco(
     onQuizEnd: () => void;
   },
 ) {
-  switch (BLOCOS[i].id) {
+  switch (blocoId) {
+    case "narrativa":
+      return a.narrativa ? <Narrativa dados={a.narrativa} /> : null;
     case "missao":
       return <Missao texto={a.missao} />;
     case "objetivos":

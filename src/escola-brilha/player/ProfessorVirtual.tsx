@@ -7,6 +7,7 @@ import { mascoteDaAula, disciplinaDaAula } from "../mascotes-disciplina";
 import { mascoteAtribuido } from "../mascote-assign";
 
 type BlocoId =
+  | "narrativa"
   | "missao"
   | "objetivos"
   | "explicacao"
@@ -181,6 +182,20 @@ function construirFala(args: {
 
 // Templates por bloco × faixa etária. 2 variações por combinação.
 const TEMPLATES: Record<BlocoId, Record<Faixa, string[]>> = {
+  narrativa: {
+    pequeno: [
+      "Vem cá{nome}, senta que eu vou te contar uma historinha bem legal!",
+      "Presta atenção{nome}, essa história tem um mistério pra gente resolver juntinho!",
+    ],
+    medio: [
+      "Bora começar com uma história{nome}? Ela vai te mostrar por que a gente precisa aprender isso hoje.",
+      "Essa historinha rapidinha esconde um probleminha — quero ver se você percebe qual é!",
+    ],
+    grande: [
+      "Presta atenção na história{nome} — ela contextualiza o problema que a gente vai resolver na missão.",
+      "Leia com calma: a narrativa dá pistas de onde esse conteúdo aparece na vida real.",
+    ],
+  },
   missao: {
     pequeno: [
       "Oi{nome}! Hoje a gente vai brincar de aprender assim: {missao} Vamo lá? 💛",

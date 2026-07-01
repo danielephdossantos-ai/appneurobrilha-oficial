@@ -110,8 +110,13 @@ export function validateLesson(l: Partial<LessonContract>): LessonValidationResu
   if (!obj(c.abertura) || !s(c.abertura?.titulo) || !s(c.abertura?.texto))
     faltando.push("1. abertura");
   // 2. História Inicial
+  // 2. História Inicial — narrativa curta (≤ 2 min de leitura ≈ 1500 caracteres)
+  //    Deve despertar curiosidade, criar contexto, apresentar um problema e
+  //    convidar a criança a participar. Está diretamente ligada à BNCC da missão.
   if (!obj(c.historia_inicial) || !s(c.historia_inicial?.titulo) || !s(c.historia_inicial?.narrativa))
     faltando.push("2. historia_inicial");
+  else if ((c.historia_inicial!.narrativa ?? "").length > 1500)
+    faltando.push("2. historia_inicial (narrativa acima de 2 min de leitura — máx. 1500 caracteres)");
   // 3. Objetivo
   if (!obj(c.objetivo_missao) || !s(c.objetivo_missao?.titulo) || !arr(c.objetivo_missao?.itens))
     faltando.push("3. objetivo_missao (>=1 item)");

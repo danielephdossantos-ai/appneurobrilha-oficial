@@ -24,8 +24,34 @@ export type Aula = {
   disciplina: string;          // ex: "Matemática"
   titulo: string;              // título curto, amigável à criança
 
+  /**
+   * Narrativa de abertura (OBRIGATÓRIA em toda missão nova).
+   * História curta que prepara a explicação pedagógica.
+   *
+   * Regras:
+   *  - Duração alvo: ATÉ 2 MINUTOS de leitura (~1500 caracteres somando os três campos).
+   *  - Deve despertar CURIOSIDADE, criar CONTEXTO, apresentar um PROBLEMA
+   *    e CONVIDAR a criança a participar.
+   *  - Deve estar diretamente relacionada ao conteúdo BNCC da missão.
+   *  - Evitar histórias longas — priorizar frases curtas e concretas.
+   *
+   * Estrutura:
+   *  contexto → onde/quando a história acontece (cenário e personagens).
+   *  problema → o desafio que surge e precisa ser resolvido.
+   *  convite  → chamada direta à criança ("Vamos ajudar?", "Bora descobrir?").
+   *
+   * Se ausente, o player usa `missao` como abertura simples (compatibilidade).
+   */
+  narrativa?: {
+    titulo: string;
+    contexto: string;
+    problema: string;
+    convite: string;
+  };
+
   // 1. Missão
   missao: string;
+
   // 2. Objetivos
   objetivos: string[];
   // 3. Explicação
