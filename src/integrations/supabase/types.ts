@@ -3624,7 +3624,7 @@ export type Database = {
             foreignKeyName: "lesson_steps_lesson_id_fkey"
             columns: ["lesson_id"]
             isOneToOne: false
-            referencedRelation: "lessons"
+            referencedRelation: "lessons_legacy"
             referencedColumns: ["id"]
           },
         ]
@@ -3702,6 +3702,66 @@ export type Database = {
         ]
       }
       lessons: {
+        Row: {
+          ano: string
+          codigo_bncc: string
+          conteudo_json: Json
+          contextualizacao: string
+          created_at: string
+          disciplina: string
+          etapa: string
+          explicacao: string
+          id: string
+          introducao: string
+          missao: string
+          nivel: string
+          objetivo: string
+          resumo: string
+          tempo_estimado: number
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          ano: string
+          codigo_bncc: string
+          conteudo_json?: Json
+          contextualizacao?: string
+          created_at?: string
+          disciplina: string
+          etapa: string
+          explicacao?: string
+          id?: string
+          introducao?: string
+          missao?: string
+          nivel?: string
+          objetivo?: string
+          resumo?: string
+          tempo_estimado?: number
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          ano?: string
+          codigo_bncc?: string
+          conteudo_json?: Json
+          contextualizacao?: string
+          created_at?: string
+          disciplina?: string
+          etapa?: string
+          explicacao?: string
+          id?: string
+          introducao?: string
+          missao?: string
+          nivel?: string
+          objetivo?: string
+          resumo?: string
+          tempo_estimado?: number
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lessons_legacy: {
         Row: {
           bncc_field: string | null
           category: string
