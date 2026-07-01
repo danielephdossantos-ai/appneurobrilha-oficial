@@ -192,10 +192,28 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
 
       <div className="px-4 pt-3">
         <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/60 mb-1.5">
-          <span>{BLOCOS[idx].nome}</span>
+          <span className="truncate">
+            <span style={{ color: ETAPAS_METODO[BLOCOS[idx].etapa - 1].cor }}>
+              Etapa {BLOCOS[idx].etapa} · {BLOCOS[idx].etapaNome}
+            </span>
+            <span className="text-white/40"> · {BLOCOS[idx].nome}</span>
+          </span>
           <span>
             {idx + 1} / {BLOCOS.length}
           </span>
+        </div>
+        <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
+          {ETAPAS_METODO.map((e) => {
+            const atual = BLOCOS[idx].etapa;
+            const on = e.n <= atual;
+            return (
+              <div
+                key={e.n}
+                className="flex-1 h-1.5 rounded-full transition-all"
+                style={{ background: on ? e.cor : "rgba(255,255,255,0.12)" }}
+              />
+            );
+          })}
         </div>
         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
           <motion.div
