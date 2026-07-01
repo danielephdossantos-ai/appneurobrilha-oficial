@@ -158,6 +158,67 @@ const aula: Aula = {
   conclusao:
     "Parabéns! Agora, sempre que ver um número por aí, você já sabe fazer a pergunta certa: ele conta, ordena ou identifica?",
 
+  midias: [
+    {
+      tipo: "animacao",
+      emojis: ["🍎", "🍎", "🍎"],
+      legenda: "Contando quantidade: três maçãs.",
+    },
+    {
+      tipo: "animacao",
+      emojis: ["🥇", "🥈", "🥉"],
+      legenda: "Mostrando ordem: 1º, 2º e 3º lugar.",
+    },
+  ],
+
+  interativas: [
+    {
+      tipo: "ligar",
+      titulo: "Ligue cada situação ao superpoder do número",
+      instrucao: "Toque em um item da esquerda e depois no par certo da direita.",
+      pares: [
+        { a: "5 balas no pote", b: "Contar" },
+        { a: "3º lugar na corrida", b: "Ordem" },
+        { a: "Número da camisa", b: "Código" },
+      ],
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Coloque as posições na ordem certa",
+      instrucao: "Arraste pra deixar do 1º ao 4º lugar.",
+      itens: ["1º", "2º", "3º", "4º"],
+    },
+    {
+      tipo: "arrastar",
+      titulo: "Arraste cada número pra caixa certa",
+      instrucao: "Onde esse número está sendo usado?",
+      pares: [
+        { item: "8 lápis", alvo: "Contar" },
+        { item: "5º andar", alvo: "Ordem" },
+        { item: "Placa ABC-1234", alvo: "Código" },
+        { item: "10 dedos", alvo: "Contar" },
+      ],
+    },
+    {
+      tipo: "colorir",
+      titulo: "Pinte cada frase da cor do superpoder",
+      instrucao: "Amarelo = contar · Verde = ordem · Rosa = código.",
+      paleta: ["#FBBF24", "#34D399", "#F472B6"],
+      regioes: [
+        { nome: "3 gatos", corCorreta: "#FBBF24" },
+        { nome: "2º da fila", corCorreta: "#34D399" },
+        { nome: "Casa nº 42", corCorreta: "#F472B6" },
+        { nome: "1º lugar", corCorreta: "#34D399" },
+      ],
+    },
+    {
+      tipo: "montar",
+      titulo: "Monte a frase do pódio na ordem",
+      instrucao: "Escolha as peças na ordem certa.",
+      pecas: ["1º lugar", "2º lugar", "3º lugar"],
+    },
+  ],
+
   proximaHabilidade: {
     codigo: "EF01MA02",
     titulo: "Jeitos espertos de contar",
