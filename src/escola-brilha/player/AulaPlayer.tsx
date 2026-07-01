@@ -194,20 +194,36 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
       </div>
 
       <div className="px-4 pt-5">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25 }}
-          >
-            {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
-          </motion.div>
-        </AnimatePresence>
+        {emDiagnostico ? (
+          <Diagnostico
+            aula={aula}
+            onFinish={async ({ acertos: a, total, resultado }) => {
+              await salvar({
+                diagnostico_feito: true,
+                diagnostico_acertos: a,
+                diagnostico_total: total,
+                diagnostico_resultado: resultado,
+              });
+              inicioBloco.current = Date.now();
+              setEmDiagnostico(false);
+            }}
+          />
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.25 }}
+            >
+              {renderBloco(aula, idx, { acertos, setAcertos, setErros, onQuizEnd: next })}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
 
-      {BLOCOS[idx].id !== "quiz" && (
+      {!emDiagnostico && BLOCOS[idx].id !== "quiz" && (
         <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
           <button
             onClick={prev}
