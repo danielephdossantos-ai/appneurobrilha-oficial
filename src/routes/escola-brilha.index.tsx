@@ -299,7 +299,11 @@ function EscolaBrilhaCatalogo() {
                                         <div className="text-sm font-black text-[#0d1f55] leading-tight line-clamp-2">
                                           {h.titulo}
                                         </div>
+                                        <div className="mt-1">
+                                          <MasteryBadge nivel={dominio[h.codigo] ?? null} />
+                                        </div>
                                       </div>
+
                                     </div>
                                   );
                                   return disponivel ? (
