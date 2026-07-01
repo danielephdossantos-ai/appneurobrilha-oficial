@@ -295,7 +295,7 @@ function renderBloco(
     case "resumo":
       return <Revisao dados={a.revisao} />;
     case "conclusao":
-      return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} />;
+      return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} codigoAtual={a.codigo} />;
     default:
       return null;
   }
