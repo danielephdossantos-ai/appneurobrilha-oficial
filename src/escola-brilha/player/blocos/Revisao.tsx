@@ -1,22 +1,20 @@
-import { Bookmark } from "lucide-react";
-export function Revisao({ dados }: { dados: { palavrasChave: string[]; dica: string } }) {
+import { ListChecks } from "lucide-react";
+import { Secao } from "./Secao";
+
+export function Revisao({ dados }: { dados: { pontos: string[]; dica: string } }) {
   return (
-    <div className="rounded-3xl bg-white/10 border-2 border-white/20 p-6">
-      <div className="flex items-center gap-2 mb-3 text-[#FFC93C]">
-        <Bookmark className="h-5 w-5" />
-        <span className="text-xs font-black uppercase tracking-widest">Revisão</span>
-      </div>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {dados.palavrasChave.map((p) => (
-          <span
-            key={p}
-            className="px-3 py-1.5 rounded-full bg-[#FFC93C] text-[#0d1f55] font-black text-sm"
-          >
-            {p}
-          </span>
+    <Secao icon={ListChecks} rotulo="Revisão" cor="#A78BFA">
+      <ul className="space-y-2 mb-3">
+        {dados.pontos.map((p, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className="mt-1 h-2 w-2 rounded-full bg-[#A78BFA] shrink-0" />
+            <span>{p}</span>
+          </li>
         ))}
+      </ul>
+      <div className="rounded-2xl bg-white/10 border border-white/20 p-3 text-sm">
+        💡 {dados.dica}
       </div>
-      <p className="text-base leading-relaxed">{dados.dica}</p>
-    </div>
+    </Secao>
   );
 }

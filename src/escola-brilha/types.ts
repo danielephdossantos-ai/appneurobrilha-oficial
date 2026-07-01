@@ -1,9 +1,7 @@
 /**
- * Escola Brilha — arquitetura simples focada em qualidade pedagógica.
- * Uma aula = um arquivo em src/escola-brilha/data/<CODIGO>.ts com este formato.
- *
- * NÃO há builders, validators, pipelines, versões, cache ou publicadores.
- * Se uma aula muda, muda o arquivo. Ponto.
+ * Escola Brilha — modelo único de aula.
+ * Toda habilidade BNCC segue exatamente esta estrutura (12 blocos).
+ * Uma aula = um arquivo em src/escola-brilha/data/<CODIGO>.ts.
  */
 
 export type QuizItem = {
@@ -13,63 +11,69 @@ export type QuizItem = {
   explicacao: string;
 };
 
-/** Uma aula completa em 13 blocos pedagógicos fixos. */
+export type Exercicio = {
+  enunciado: string;
+  resposta: string;
+  dica?: string;
+};
+
+/** Modelo único — 12 blocos fixos. Nenhuma aula pode fugir desse padrão. */
 export type Aula = {
   codigo: string;              // ex: "EF01MA01"
   ano: string;                 // ex: "1º Ano"
   disciplina: string;          // ex: "Matemática"
   titulo: string;              // título curto, amigável à criança
 
-  // 1. Objetivo — o que a criança vai saber ao final, em uma frase
-  objetivo: string;
+  // 1. Missão da aula — frase curta, tipo desafio, que abre a jornada
+  missao: string;
 
-  // 2. Introdução — texto de abertura, contextualiza e desperta curiosidade
-  introducao: string;
+  // 2. Objetivos — o que a criança vai saber ao final (2 a 4 itens)
+  objetivos: string[];
 
-  // 3. Explicação — o conteúdo em si, em passos pequenos
+  // 3. Motivação — por que isso importa? gancho emocional / curiosidade
+  motivacao: string;
+
+  // 4. Explicação — o conteúdo em si, em passos pequenos
   explicacao: string;
 
-  // 4. Exemplo — um exemplo direto do conteúdo
-  exemplo: string;
+  // 5. Exemplo resolvido — mostra o raciocínio, passo a passo
+  exemploResolvido: {
+    enunciado: string;
+    passos: string[];
+    resposta: string;
+  };
 
-  // 5. Exemplo do cotidiano — mesma ideia aplicada à vida da criança
-  exemploCotidiano: string;
-
-  // 6. Prática guiada — a criança faz junto, com apoio (mini-atividade + resposta explicada)
-  praticaGuiada: {
+  // 6. Atividade guiada — a criança faz junto, com apoio
+  atividadeGuiada: {
     enunciado: string;
     resposta: string;
     explicacao: string;
   };
 
-  // 7. Prática independente — a criança tenta sozinha
-  praticaIndependente: {
-    enunciado: string;
-    resposta: string;
-    dica?: string;
-  };
+  // 7. Exercícios — a criança pratica sozinha (2 a 4 itens)
+  exercicios: Exercicio[];
 
-  // 8. Curiosidade — um "você sabia?" relacionado
-  curiosidade: string;
-
-  // 9. Desafio — algo um passo além do básico
+  // 8. Desafio — um passo além do básico
   desafio: {
     enunciado: string;
     resposta: string;
   };
 
-  // 10. Resumo — 2 a 4 linhas do que aprendeu
-  resumo: string;
-
-  // 11. Revisão — 3 a 5 palavras-chave e uma dica de fixação
+  // 9. Revisão — pontos-chave (3 a 5) + dica de fixação
   revisao: {
-    palavrasChave: string[];
+    pontos: string[];
     dica: string;
   };
 
-  // 12. Quiz — 3 a 5 perguntas
+  // 10. Quiz — 3 a 5 perguntas
   quiz: QuizItem[];
 
-  // 13. Resultado — mensagem de fechamento (renderizado dinamicamente com a pontuação)
-  fechamento: string;
+  // 11. Conclusão — mensagem de fechamento
+  conclusao: string;
+
+  // 12. Próxima habilidade — código BNCC da próxima aula sugerida (+ título opcional)
+  proximaHabilidade?: {
+    codigo: string;
+    titulo?: string;
+  };
 };

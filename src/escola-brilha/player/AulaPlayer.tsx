@@ -7,35 +7,34 @@ import { useAppState } from "@/core/store";
 import { supabase } from "@/integrations/supabase/client";
 import type { Aula } from "../types";
 import { useProgresso } from "../useProgresso";
-import { Objetivo } from "./blocos/Objetivo";
-import { Introducao } from "./blocos/Introducao";
+import { Missao } from "./blocos/Missao";
+import { Objetivos } from "./blocos/Objetivos";
+import { Motivacao } from "./blocos/Motivacao";
 import { Explicacao } from "./blocos/Explicacao";
-import { Exemplo } from "./blocos/Exemplo";
-import { ExemploCotidiano } from "./blocos/ExemploCotidiano";
-import { PraticaGuiada } from "./blocos/PraticaGuiada";
-import { PraticaIndependente } from "./blocos/PraticaIndependente";
-import { Curiosidade } from "./blocos/Curiosidade";
+import { ExemploResolvido } from "./blocos/ExemploResolvido";
+import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
+import { Exercicios } from "./blocos/Exercicios";
 import { Desafio } from "./blocos/Desafio";
-import { Resumo } from "./blocos/Resumo";
 import { Revisao } from "./blocos/Revisao";
 import { Quiz } from "./blocos/Quiz";
-import { Resultado } from "./blocos/Resultado";
+import { Conclusao } from "./blocos/Conclusao";
+import { ProximaHabilidade } from "./blocos/ProximaHabilidade";
 
+// Ordem fixa dos 12 blocos — nenhuma aula pode fugir desse padrão.
 const BLOCOS = [
-  { id: "objetivo", nome: "Objetivo" },
-  { id: "introducao", nome: "Introdução" },
+  { id: "missao", nome: "Missão da aula" },
+  { id: "objetivos", nome: "Objetivos" },
+  { id: "motivacao", nome: "Motivação" },
   { id: "explicacao", nome: "Explicação" },
-  { id: "exemplo", nome: "Exemplo" },
-  { id: "cotidiano", nome: "No dia a dia" },
-  { id: "guiada", nome: "Prática guiada" },
-  { id: "independente", nome: "Prática sozinho" },
-  { id: "curiosidade", nome: "Curiosidade" },
+  { id: "exemplo", nome: "Exemplo resolvido" },
+  { id: "guiada", nome: "Atividade guiada" },
+  { id: "exercicios", nome: "Exercícios" },
   { id: "desafio", nome: "Desafio" },
-  { id: "resumo", nome: "Resumo" },
   { id: "revisao", nome: "Revisão" },
   { id: "quiz", nome: "Quiz" },
-  { id: "resultado", nome: "Resultado" },
-];
+  { id: "conclusao", nome: "Conclusão" },
+  { id: "proxima", nome: "Próxima habilidade" },
+] as const;
 
 export function AulaPlayer({ aula }: { aula: Aula }) {
   const navigate = useNavigate();
@@ -125,7 +124,7 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
         </AnimatePresence>
       </div>
 
-      {/* Nav inferior */}
+      {/* Nav inferior — escondida no quiz (o quiz tem seus próprios botões) */}
       {BLOCOS[idx].id !== "quiz" && (
         <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
           <button
@@ -158,32 +157,32 @@ export function AulaPlayer({ aula }: { aula: Aula }) {
 
 function textoDoBloco(a: Aula, i: number): string {
   switch (BLOCOS[i].id) {
-    case "objetivo":
-      return a.objetivo;
-    case "introducao":
-      return a.introducao;
+    case "missao":
+      return a.missao;
+    case "objetivos":
+      return `Objetivos: ${a.objetivos.join(". ")}.`;
+    case "motivacao":
+      return a.motivacao;
     case "explicacao":
       return a.explicacao;
     case "exemplo":
-      return a.exemplo;
-    case "cotidiano":
-      return a.exemploCotidiano;
+      return `${a.exemploResolvido.enunciado}. Passos: ${a.exemploResolvido.passos.join(". ")}. Resposta: ${a.exemploResolvido.resposta}.`;
     case "guiada":
-      return `${a.praticaGuiada.enunciado}. Resposta: ${a.praticaGuiada.resposta}. ${a.praticaGuiada.explicacao}`;
-    case "independente":
-      return a.praticaIndependente.enunciado;
-    case "curiosidade":
-      return a.curiosidade;
+      return `${a.atividadeGuiada.enunciado}. Resposta: ${a.atividadeGuiada.resposta}. ${a.atividadeGuiada.explicacao}`;
+    case "exercicios":
+      return `Exercícios: ${a.exercicios.map((e, k) => `${k + 1}. ${e.enunciado}`).join(" ")}`;
     case "desafio":
       return a.desafio.enunciado;
-    case "resumo":
-      return a.resumo;
     case "revisao":
-      return `${a.revisao.dica}. Palavras-chave: ${a.revisao.palavrasChave.join(", ")}.`;
+      return `${a.revisao.dica}. ${a.revisao.pontos.join(". ")}.`;
     case "quiz":
       return "Quiz da aula. Escolha a resposta certa.";
-    case "resultado":
-      return a.fechamento;
+    case "conclusao":
+      return a.conclusao;
+    case "proxima":
+      return a.proximaHabilidade
+        ? `Próxima habilidade: ${a.proximaHabilidade.codigo}.`
+        : "Você chegou ao fim desta aula.";
     default:
       return "";
   }
@@ -195,26 +194,22 @@ function renderBloco(
   ctx: { acertos: number; setAcertos: (n: number) => void; onQuizEnd: () => void },
 ) {
   switch (BLOCOS[i].id) {
-    case "objetivo":
-      return <Objetivo texto={a.objetivo} />;
-    case "introducao":
-      return <Introducao texto={a.introducao} />;
+    case "missao":
+      return <Missao texto={a.missao} />;
+    case "objetivos":
+      return <Objetivos itens={a.objetivos} />;
+    case "motivacao":
+      return <Motivacao texto={a.motivacao} />;
     case "explicacao":
       return <Explicacao texto={a.explicacao} />;
     case "exemplo":
-      return <Exemplo texto={a.exemplo} />;
-    case "cotidiano":
-      return <ExemploCotidiano texto={a.exemploCotidiano} />;
+      return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
-      return <PraticaGuiada dados={a.praticaGuiada} />;
-    case "independente":
-      return <PraticaIndependente dados={a.praticaIndependente} />;
-    case "curiosidade":
-      return <Curiosidade texto={a.curiosidade} />;
+      return <AtividadeGuiada dados={a.atividadeGuiada} />;
+    case "exercicios":
+      return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;
-    case "resumo":
-      return <Resumo texto={a.resumo} />;
     case "revisao":
       return <Revisao dados={a.revisao} />;
     case "quiz":
@@ -227,8 +222,10 @@ function renderBloco(
           }}
         />
       );
-    case "resultado":
-      return <Resultado texto={a.fechamento} acertos={ctx.acertos} total={a.quiz.length} />;
+    case "conclusao":
+      return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} />;
+    case "proxima":
+      return <ProximaHabilidade proxima={a.proximaHabilidade} />;
     default:
       return null;
   }

@@ -1,29 +1,27 @@
 import { useState } from "react";
-import { Trophy } from "lucide-react";
+import { Trophy, Eye } from "lucide-react";
+import { Secao } from "./Secao";
+
 export function Desafio({ dados }: { dados: { enunciado: string; resposta: string } }) {
-  const [ver, setVer] = useState(false);
+  const [revelar, setRevelar] = useState(false);
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-[#F43F5E]/25 to-[#FFC93C]/25 border-2 border-white/20 p-6">
-      <div className="flex items-center gap-2 mb-3 text-[#FFC93C]">
-        <Trophy className="h-5 w-5" />
-        <span className="text-xs font-black uppercase tracking-widest">Desafio</span>
-      </div>
-      <p className="text-base leading-relaxed mb-4 font-bold">{dados.enunciado}</p>
-      {!ver ? (
+    <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
+      <p className="font-black mb-3">{dados.enunciado}</p>
+      {!revelar ? (
         <button
-          onClick={() => setVer(true)}
-          className="w-full h-12 rounded-2xl bg-[#F43F5E] text-white font-black active:scale-[0.98]"
+          onClick={() => setRevelar(true)}
+          className="w-full h-12 rounded-2xl bg-[#F97316] text-white font-black flex items-center justify-center gap-2 active:scale-[0.98]"
         >
-          Ver solução
+          <Eye className="h-4 w-4" /> Ver resposta
         </button>
       ) : (
-        <div className="rounded-2xl bg-white/10 border-2 border-white/20 p-4">
-          <div className="text-xs font-black uppercase tracking-widest text-[#FFC93C] mb-1.5">
-            Solução
+        <div className="rounded-2xl bg-[#22C55E]/15 border-2 border-[#22C55E]/30 p-3">
+          <div className="text-[10px] font-black uppercase tracking-widest text-[#22C55E] mb-1">
+            Resposta
           </div>
-          <div className="font-black text-lg">{dados.resposta}</div>
+          <div className="font-black">{dados.resposta}</div>
         </div>
       )}
-    </div>
+    </Secao>
   );
 }
