@@ -11,6 +11,34 @@ const aula: Aula = {
   disciplina: "Matemática",
   titulo: "Jeitos espertos de contar",
 
+  conhecimentosPrevios: [
+    "Contar oralmente até 20 sem se perder.",
+    "Reconhecer grupos iguais (dois a dois, cinco a cinco).",
+    "Comparar 'tem mais' e 'tem menos' entre dois grupos.",
+  ],
+
+  diagnostico: [
+    {
+      pergunta: "Se você tem 2 pares de meias, quantas meias tem no total?",
+      opcoes: ["2 meias", "3 meias", "4 meias"],
+      correta: 2,
+      explicacao: "Cada par tem 2 meias. 2 pares = 2 + 2 = 4 meias. Isso é contar de dois em dois!",
+    },
+    {
+      pergunta: "Contando de 5 em 5, qual número vem depois do 10?",
+      opcoes: ["11", "15", "20"],
+      correta: 1,
+      explicacao: "5, 10, 15… a gente pula de 5 em 5. Depois do 10 vem o 15.",
+    },
+    {
+      pergunta: "Se você olha rápido para um punhado de balas e chuta 'mais ou menos 10', isso é contar…",
+      opcoes: ["Exato", "Aproximado", "Errado"],
+      correta: 1,
+      explicacao: "Chutar perto do certo, sem contar uma a uma, é a contagem aproximada.",
+    },
+  ],
+
+
   missao:
     "Aprender truques mágicos pra contar muito mais rápido do que contando uma coisinha por vez.",
 
