@@ -326,7 +326,7 @@ function renderBloco(
     case "objetivos":
       return <Objetivos itens={a.objetivos} />;
     case "explicacao":
-      return <Explicacao texto={a.explicacao} />;
+      return <Explicacao texto={a.explicacao} aula={a} />;
     case "exemplo":
       return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
