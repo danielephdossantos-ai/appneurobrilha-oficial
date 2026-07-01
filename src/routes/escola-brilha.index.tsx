@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, BookOpen, CheckCircle2, ChevronDown, ChevronRight, Lock } from "lucide-react";
+import { ArrowLeft, Compass, CheckCircle2, ChevronDown, ChevronRight, Lock, Sparkles } from "lucide-react";
 import { Shell } from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { useAppState } from "@/core/store";
@@ -8,17 +8,18 @@ import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
+import { temaDaDisciplina } from "@/escola-brilha/missoes-tema";
 
 
 
 export const Route = createFileRoute("/escola-brilha/")({
   head: () => ({
     meta: [
-      { title: "Escola Brilha — Aulas por série e disciplina" },
+      { title: "Escola Brilha — Missões de Aprendizagem" },
       {
         name: "description",
         content:
-          "Catálogo BNCC organizado por série (Educação Infantil ao 9º Ano) e disciplina. Cada aula escrita à mão, pedagogia de verdade.",
+          "Aventuras de aprendizagem organizadas por série e disciplina. Cada missão é uma história — matemática, leitura, ciências, história, arte e muito mais.",
       },
     ],
   }),
@@ -154,7 +155,7 @@ function EscolaBrilhaCatalogo() {
           </button>
           <div>
             <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/55">
-              Catálogo por série e disciplina
+              Missões por série e disciplina
             </div>
             <h1 className="text-2xl font-black text-[#0d1f55]">Escola Brilha</h1>
           </div>
@@ -163,14 +164,14 @@ function EscolaBrilhaCatalogo() {
         {/* Info */}
         <div className="rounded-2xl bg-gradient-to-br from-[#4C9EFF]/15 to-[#9B6CFF]/15 border-2 border-[#4C9EFF]/25 p-4 mb-4">
           <div className="flex items-center gap-2 text-[#4C9EFF] mb-1">
-            <BookOpen className="h-4 w-4" />
+            <Compass className="h-4 w-4" />
             <span className="text-[10px] font-black uppercase tracking-widest">
-              {aulasEscritas.length} aula{aulasEscritas.length === 1 ? "" : "s"} escrita
-              {aulasEscritas.length === 1 ? "" : "s"} · {habilidades.length} habilidades BNCC
+              {aulasEscritas.length} missão{aulasEscritas.length === 1 ? "" : "es"} disponível
+              {aulasEscritas.length === 1 ? "" : "eis"} · {habilidades.length} aventuras no total
             </span>
           </div>
           <p className="text-sm text-[#0d1f55] leading-relaxed">
-            Toque numa série para ver as disciplinas, e numa disciplina para ver as habilidades BNCC.
+            Toque numa série para ver os temas de aventura, e num tema para escolher a próxima missão.
           </p>
         </div>
 
