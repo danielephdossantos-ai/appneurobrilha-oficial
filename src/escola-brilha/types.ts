@@ -30,6 +30,22 @@ export type Aula = {
   objetivos: string[];
   // 3. Explicação
   explicacao: string;
+  /**
+   * Aprendizagem Ativa (opcional): fatia a explicação em pequenos pedaços,
+   * cada um seguido de uma micro-interação (toque, checagem rápida ou
+   * observação). Se ausente, o bloco Explicação fatia automaticamente o
+   * texto de `explicacao` em parágrafos e insere um "toque para continuar"
+   * entre eles — nunca mais um paredão de texto.
+   */
+  explicacaoAtiva?: Array<{
+    texto: string;
+    checagem?: {
+      pergunta: string;
+      opcoes: string[];
+      correta: number;
+      explicacao?: string;
+    };
+  }>;
   // 4. Exemplo
   exemploResolvido: { enunciado: string; passos: string[]; resposta: string };
   // 5. Prática Guiada
