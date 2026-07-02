@@ -209,7 +209,20 @@ export function UniversalPlayer({
           </button>
         </div>
       )}
-      <AulaPlayer aula={aula} />
+      <AulaPlayer
+        aula={aula}
+        onConcluir={({ desempenho }) => {
+          // Auto-redirect: se estamos numa Missão de Recuperação e o
+          // desempenho foi suficiente, voltamos automaticamente para a
+          // missão principal. Limiar mínimo alinhado ao SM-2 (>=70%).
+          if (estaEmRecuperacao && retornoPara && desempenho >= 70) {
+            RetornoMissao.limpar();
+            setTimeout(() => {
+              navigate({ to: "/escola-brilha/$codigo", params: { codigo: retornoPara } });
+            }, 1200);
+          }
+        }}
+      />
     </div>
   );
 }
