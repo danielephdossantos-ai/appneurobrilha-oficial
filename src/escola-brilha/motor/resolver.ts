@@ -100,6 +100,7 @@ export type MissaoResolvida = {
   adaptacoes: {
     idade: import("./index").AdaptacaoIdade;
     desempenho: import("./index").AdaptacaoDesempenho;
+    missao: import("./adaptacao-missao").PlanoAdaptacao;
   };
 };
 
