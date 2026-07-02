@@ -461,8 +461,8 @@ export const BibliotecaNacional = {
         .select("codigo_bncc")
         .range(de, de + passo - 1);
       if (error || !data || data.length === 0) break;
-      for (const row of data as Array<{ codigo: string }>) {
-        if (hasMissaoOficial(row.codigo)) publicadas++;
+      for (const row of data as Array<{ codigo_bncc: string }>) {
+        if (hasMissaoOficial(row.codigo_bncc)) publicadas++;
       }
       if (data.length < passo) break;
       de += passo;
