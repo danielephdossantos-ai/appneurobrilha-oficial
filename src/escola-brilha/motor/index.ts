@@ -53,6 +53,12 @@ import {
   type AtividadeMeta,
   type SelecaoAtividades,
 } from "../atividades";
+import {
+  AdaptacaoMissao,
+  planejarAdaptacao,
+  type PlanoAdaptacao,
+  type SinaisAluno,
+} from "./adaptacao-missao";
 
 // =====================================================================
 // Tipos públicos do Motor
