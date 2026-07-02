@@ -88,6 +88,16 @@ import {
   type IndicadoresContinuos,
   type EstadoAvaliacao,
 } from "./avaliacao-continua";
+import {
+  BancoErrosFrequentes,
+  catalogoDaHabilidade,
+  detectarErro,
+  type EntradaErro,
+  type CausaErro,
+  type CatalogoErrosHabilidade,
+  type SinalErroObservado,
+  type DeteccaoErro,
+} from "./erros-frequentes";
 
 
 // =====================================================================
