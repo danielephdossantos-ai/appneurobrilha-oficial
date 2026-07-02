@@ -103,6 +103,7 @@ function TrilhasPage() {
 
 function TrilhaCard({ trilha }: { trilha: TrilhaDisciplina }) {
   const tema = temaDaDisciplina(trilha.disciplina);
+  const corDisc = corDaDisciplina(trilha.disciplina);
   const [aberto, setAberto] = useState(false);
 
   return (
