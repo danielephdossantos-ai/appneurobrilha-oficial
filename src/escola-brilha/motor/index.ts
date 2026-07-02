@@ -591,9 +591,15 @@ export type {
   ProblemaValidacao,
   ResultadoValidacao,
   ResultadoRegistro,
+  NivelDominioAprendizagem,
+  RotuloNivel,
+  SinaisDominio,
+  DetalheDominio,
+  OrigemInteracao,
+  RegistroInteracao,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS, BibliotecaNacional };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS, BibliotecaNacional, DominioAprendizagem, calcularDominio };
 
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
