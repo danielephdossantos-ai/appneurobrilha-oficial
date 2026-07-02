@@ -104,6 +104,15 @@ import {
   type StatusMissao,
   type TrilhaDisciplina,
 } from "./trilhas";
+import {
+  ConquistasEducacionais,
+  CATALOGO_CONQUISTAS,
+  type Conquista,
+  type CategoriaConquista,
+  type CatalogoConquista,
+  type EventoConquista,
+} from "./conquistas-educacionais";
+
 
 
 // =====================================================================
@@ -502,9 +511,13 @@ export const MotorPedagogico = {
 
 
 
+  /** Sistema de Conquistas Educacionais — reconhece progresso PESSOAL, sem gerar competição entre crianças. */
+  conquistasEducacionais: ConquistasEducacionais,
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
+
   MENSAGEM_MISSAO_EM_CONSTRUCAO,
 
   util: {
@@ -547,9 +560,14 @@ export type {
   NoTrilha,
   StatusMissao,
   TrilhaDisciplina,
+  Conquista,
+  CategoriaConquista,
+  CatalogoConquista,
+  EventoConquista,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS };
+
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
