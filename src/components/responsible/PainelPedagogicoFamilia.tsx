@@ -96,10 +96,10 @@ export function PainelPedagogicoFamilia({ childId, studentName }: Props) {
           MotorPedagogico.recomendacoes.proximaMissao(childId),
           supabase
             .from("escola_progresso")
-            .select("ultima_visita_em, atualizado_em")
+            .select("ultima_visita_em, updated_at")
             .eq("child_id", childId)
             .limit(500)
-            .then((r) => r.data ?? []),
+            .then((r) => (r.data ?? []) as Array<{ ultima_visita_em: string | null; updated_at: string | null }>),
         ]);
         if (!ativo) return;
         setTrilhas(ts);
@@ -116,8 +116,8 @@ export function PainelPedagogicoFamilia({ childId, studentName }: Props) {
             : null,
         );
         setHistorico(
-          (hist as Array<{ ultima_visita_em: string | null; atualizado_em: string | null }>)
-            .map((r) => ({ em: r.ultima_visita_em || r.atualizado_em || "" }))
+          hist
+            .map((r) => ({ em: r.ultima_visita_em || r.updated_at || "" }))
             .filter((r) => !!r.em),
         );
       } finally {
