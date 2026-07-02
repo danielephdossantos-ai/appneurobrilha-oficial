@@ -289,6 +289,21 @@ const Revisao = {
       motivo: r.motivo ?? "revisao_programada",
     }));
   },
+
+  /**
+   * Gera o PACOTE de uma revisão inteligente — questões diferentes,
+   * novos exemplos e novos desafios. Nunca repete exatamente a mesma
+   * atividade da rodada anterior. Chame depois que o SM-2 disparar a
+   * revisão (via `recomendar`) para construir a próxima sessão.
+   */
+  gerarPacote(childId: string, codigoBncc: string, opts?: OpcoesRevisao): PacoteRevisao {
+    return gerarPacoteRevisao(childId, codigoBncc, opts);
+  },
+
+  /** Reinicia o histórico de variantes (novo ciclo pedagógico). */
+  reiniciarHistorico(childId: string, codigoBncc?: string): void {
+    return reiniciarHistoricoRevisao(childId, codigoBncc);
+  },
 };
 
 // =====================================================================
