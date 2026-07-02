@@ -217,6 +217,9 @@ async function buscarHabilidadeBNCC(codigo: string): Promise<HabRow | null> {
     console.warn("[BibliotecaNacional] falha ao consultar BNCC:", error.message);
     return null;
   }
+  if (!data) return null;
+  const row = data as { codigo_bncc: string; ano: string | null; disciplina: string | null };
+  return { codigo: row.codigo_bncc, ano: row.ano, disciplina: row.disciplina };
   return (data as HabRow | null) ?? null;
 }
 
