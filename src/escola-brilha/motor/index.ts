@@ -59,6 +59,14 @@ import {
   type PlanoAdaptacao,
   type SinaisAluno,
 } from "./adaptacao-missao";
+import {
+  ExemplosContexto,
+  exemplosParaHabilidade,
+  CONTEXTOS,
+  type ContextoExemplo,
+  type Exemplo,
+  type OpcoesExemplos,
+} from "./exemplos-contexto";
 
 // =====================================================================
 // Tipos públicos do Motor
