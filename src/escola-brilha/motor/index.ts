@@ -479,6 +479,10 @@ export type {
   ContextoExemplo,
   Exemplo,
   OpcoesExemplos,
+  PacoteRevisao,
+  OpcoesRevisao,
 };
+
+export { RevisaoInteligente };
 
 export { planejarAdaptacao, exemplosParaHabilidade };
