@@ -51,6 +51,23 @@ export function UniversalPlayer({
   const { pendentes, carregando: carregandoPre, reverificar } = usePreRequisitos(childId, codigo);
   const retornoPara = RetornoMissao.ler();
   const estaEmRecuperacao = !!retornoPara && retornoPara !== codigo;
+  const alunoId = childId ?? "anon";
+  const [motivacao, setMotivacao] = useState(() =>
+    MotorPedagogico.motivacao.proxima("inicio_missao", alunoId),
+  );
+  useEffect(() => {
+    const gatilhos: Array<"esforco" | "checkpoint" | "continuar_estudando"> = [
+      "esforco",
+      "checkpoint",
+      "continuar_estudando",
+    ];
+    const id = window.setInterval(() => {
+      const g = gatilhos[Math.floor(Math.random() * gatilhos.length)];
+      setMotivacao(MotorPedagogico.motivacao.proxima(g, alunoId));
+    }, 45000);
+    return () => window.clearInterval(id);
+  }, [alunoId, codigo]);
+
 
   useEffect(() => {
     let vivo = true;
