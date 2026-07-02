@@ -560,9 +560,14 @@ export type {
   NoTrilha,
   StatusMissao,
   TrilhaDisciplina,
+  Conquista,
+  CategoriaConquista,
+  CatalogoConquista,
+  EventoConquista,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS };
+
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
