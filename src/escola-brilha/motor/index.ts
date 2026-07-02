@@ -528,9 +528,14 @@ export type {
   TipoEventoAvaliacao,
   IndicadoresContinuos,
   EstadoAvaliacao,
+  EntradaErro,
+  CausaErro,
+  CatalogoErrosHabilidade,
+  SinalErroObservado,
+  DeteccaoErro,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
