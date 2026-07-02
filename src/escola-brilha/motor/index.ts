@@ -454,6 +454,9 @@ export type {
   SelecaoAtividades,
   PlanoAdaptacao,
   SinaisAluno,
+  ContextoExemplo,
+  Exemplo,
+  OpcoesExemplos,
 };
 
-export { planejarAdaptacao };
+export { planejarAdaptacao, exemplosParaHabilidade };
