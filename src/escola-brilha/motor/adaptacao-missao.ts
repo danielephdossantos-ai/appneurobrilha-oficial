@@ -87,7 +87,7 @@ function inferirLinguagem(idade: number | undefined, serie: string): Linguagem {
  */
 export function planejarAdaptacao(sinais: SinaisAluno): PlanoAdaptacao {
   const motivos: string[] = [];
-  const linguagem = inferirLinguagem(sinais.idade, sinais.serie);
+  const linguagem = inferirLinguagem(sinais.idade, sinais.serie ?? "");
   motivos.push(`linguagem:${linguagem}`);
 
   // Bases por linguagem/idade
