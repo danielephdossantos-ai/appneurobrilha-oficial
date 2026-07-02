@@ -511,9 +511,13 @@ export const MotorPedagogico = {
 
 
 
+  /** Sistema de Conquistas Educacionais — reconhece progresso PESSOAL, sem gerar competição entre crianças. */
+  conquistasEducacionais: ConquistasEducacionais,
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
+
   MENSAGEM_MISSAO_EM_CONSTRUCAO,
 
   util: {
