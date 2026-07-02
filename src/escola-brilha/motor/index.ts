@@ -67,6 +67,13 @@ import {
   type Exemplo,
   type OpcoesExemplos,
 } from "./exemplos-contexto";
+import {
+  RevisaoInteligente,
+  gerarPacoteRevisao,
+  reiniciarHistoricoRevisao,
+  type PacoteRevisao,
+  type OpcoesRevisao,
+} from "./revisao-inteligente";
 
 // =====================================================================
 // Tipos públicos do Motor
