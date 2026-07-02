@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TerapeutaBrilhaRouteImport } from './routes/terapeuta-brilha'
 import { Route as RotinaRouteImport } from './routes/rotina'
@@ -52,6 +53,11 @@ import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-d
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
 
+const TrilhasRoute = TrilhasRouteImport.update({
+  id: '/trilhas',
+  path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
   path: '/termos',
@@ -297,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilhas': typeof TrilhasRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -340,6 +347,7 @@ export interface FileRoutesByTo {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilhas': typeof TrilhasRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -385,6 +393,7 @@ export interface FileRoutesById {
   '/rotina': typeof RotinaRoute
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
+  '/trilhas': typeof TrilhasRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -431,6 +440,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilhas'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -474,6 +484,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilhas'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -518,6 +529,7 @@ export interface FileRouteTypes {
     | '/rotina'
     | '/terapeuta-brilha'
     | '/termos'
+    | '/trilhas'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -563,6 +575,7 @@ export interface RootRouteChildren {
   RotinaRoute: typeof RotinaRoute
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
+  TrilhasRoute: typeof TrilhasRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
@@ -573,6 +586,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trilhas': {
+      id: '/trilhas'
+      path: '/trilhas'
+      fullPath: '/trilhas'
+      preLoaderRoute: typeof TrilhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/termos': {
       id: '/termos'
       path: '/termos'
@@ -940,6 +960,7 @@ const rootRouteChildren: RootRouteChildren = {
   RotinaRoute: RotinaRoute,
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
+  TrilhasRoute: TrilhasRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,

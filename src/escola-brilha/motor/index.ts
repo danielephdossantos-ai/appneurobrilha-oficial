@@ -98,6 +98,12 @@ import {
   type SinalErroObservado,
   type DeteccaoErro,
 } from "./erros-frequentes";
+import {
+  TrilhasAprendizagem,
+  type NoTrilha,
+  type StatusMissao,
+  type TrilhaDisciplina,
+} from "./trilhas";
 
 
 // =====================================================================
@@ -489,6 +495,11 @@ export const MotorPedagogico = {
     banco: BancoErrosFrequentes,
   },
 
+  /** Trilhas de Aprendizagem — sequência BNCC por disciplina, com evolução, concluídas, pendentes e próxima sugerida. */
+  trilhas: TrilhasAprendizagem,
+
+
+
 
 
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
@@ -533,9 +544,12 @@ export type {
   CatalogoErrosHabilidade,
   SinalErroObservado,
   DeteccaoErro,
+  NoTrilha,
+  StatusMissao,
+  TrilhaDisciplina,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
