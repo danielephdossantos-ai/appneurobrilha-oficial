@@ -163,18 +163,30 @@ export async function resolverMissao(
   // Progresso — precisamos do desempenho recente pra sugerir dificuldade.
   let progresso: MissaoResolvida["progresso"] = null;
   let desempenhoAtual = 0;
+  let tentativas = 0;
+  let acertos = 0;
+  let erros = 0;
+  let tempoMedio = 0;
+  let evolucaoDelta = 0;
+  let revisoes = 0;
+  let nivelDom: import("./adaptacao-missao").SinaisAluno["nivelDominio"] = "nao_iniciada";
   if (perfil.childId) {
     const p = await MotorPedagogico.progresso.carregar(perfil.childId, bncc.codigo);
     if (p) {
-      const acertos = (p as { acertos?: number }).acertos ?? 0;
-      const erros = (p as { erros?: number }).erros ?? 0;
+      acertos = (p as { acertos?: number }).acertos ?? 0;
+      erros = (p as { erros?: number }).erros ?? 0;
       const total = acertos + erros;
       desempenhoAtual = total > 0 ? Math.round((acertos / total) * 100) : (p.percentual ?? 0);
+      tentativas = (p as { tentativas?: number }).tentativas ?? 0;
+      tempoMedio = (p as { tempo_medio_segundos?: number }).tempo_medio_segundos ?? 0;
+      evolucaoDelta = (p as { evolucao_delta?: number }).evolucao_delta ?? 0;
+      revisoes = (p as { revisoes_realizadas?: number }).revisoes_realizadas ?? 0;
+      nivelDom = ((p.nivel_dominio as typeof nivelDom) ?? "nao_iniciada");
       progresso = {
         concluida: !!p.concluida,
         percentual: p.percentual ?? 0,
         nivelDominio: (p.nivel_dominio as string) ?? "nao_iniciada",
-        tentativas: (p as { tentativas?: number }).tentativas ?? 0,
+        tentativas,
       };
     }
   }
@@ -183,12 +195,27 @@ export async function resolverMissao(
     desempenho: desempenhoAtual,
   });
 
+  const { planejarAdaptacao } = await import("./adaptacao-missao");
+  const missao = planejarAdaptacao({
+    idade: perfil.idade,
+    serie: perfil.serie ?? bncc.ano,
+    desempenho: desempenhoAtual,
+    desempenhoMedio: desempenhoAtual,
+    tentativas,
+    erros,
+    acertos,
+    tempoMedioSegundos: tempoMedio,
+    nivelDominio: nivelDom,
+    evolucaoDelta,
+    revisoesRealizadas: revisoes,
+  });
+
   return {
     existe: true,
     bncc,
     missaoOficial: oficial,
     aulaBase: base,
     progresso,
-    adaptacoes: { idade, desempenho },
+    adaptacoes: { idade, desempenho, missao },
   };
 }
