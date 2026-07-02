@@ -88,6 +88,16 @@ import {
   type IndicadoresContinuos,
   type EstadoAvaliacao,
 } from "./avaliacao-continua";
+import {
+  BancoErrosFrequentes,
+  catalogoDaHabilidade,
+  detectarErro,
+  type EntradaErro,
+  type CausaErro,
+  type CatalogoErrosHabilidade,
+  type SinalErroObservado,
+  type DeteccaoErro,
+} from "./erros-frequentes";
 
 
 // =====================================================================
@@ -472,6 +482,14 @@ export const MotorPedagogico = {
   /** Avaliação Contínua — coleta compreensão, erros, evolução, tempo, autonomia e persistência DURANTE toda a missão. */
   avaliacao: AvaliacaoContinua,
 
+  /** Banco Nacional de Erros Frequentes — erros comuns por habilidade BNCC + estratégias automáticas de correção. */
+  erros: {
+    catalogo: catalogoDaHabilidade,
+    detectar: detectarErro,
+    banco: BancoErrosFrequentes,
+  },
+
+
 
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
@@ -510,9 +528,14 @@ export type {
   TipoEventoAvaliacao,
   IndicadoresContinuos,
   EstadoAvaliacao,
+  EntradaErro,
+  CausaErro,
+  CatalogoErrosHabilidade,
+  SinalErroObservado,
+  DeteccaoErro,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
