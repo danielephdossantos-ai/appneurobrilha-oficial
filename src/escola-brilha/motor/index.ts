@@ -506,9 +506,13 @@ export type {
   OpcoesRevisao,
   MensagemMotivacional,
   GatilhoMotivacional,
+  EventoAvaliacao,
+  TipoEventoAvaliacao,
+  IndicadoresContinuos,
+  EstadoAvaliacao,
 };
 
-export { RevisaoInteligente, SistemaMotivacao };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
