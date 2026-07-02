@@ -422,6 +422,13 @@ export const MotorPedagogico = {
     selecionarDetalhado: selecionarAtividadesDetalhado,
   },
 
+  /** Exemplos pedagógicos por contexto (família, escola, animais, natureza, esportes, alimentação, brincadeiras, tecnologia, cultura brasileira, cotidiano). */
+  exemplos: {
+    contextos: CONTEXTOS,
+    para: exemplosParaHabilidade,
+    catalogo: ExemplosContexto,
+  },
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
