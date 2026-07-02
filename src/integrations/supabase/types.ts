@@ -7371,6 +7371,14 @@ export type Database = {
         Args: { _child_id: string; _codigo_bncc: string }
         Returns: boolean
       }
+      pre_requisitos_pendentes: {
+        Args: { p_child_id: string; p_codigo_bncc: string }
+        Returns: {
+          codigo_bncc: string
+          motivo: string
+          nivel_dominio: Database["public"]["Enums"]["mastery_level"]
+        }[]
+      }
       proxima_habilidade_oficial: {
         Args: { _child_id: string; _disciplina?: string }
         Returns: {
