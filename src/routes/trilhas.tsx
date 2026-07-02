@@ -6,6 +6,36 @@ import { useAppState } from "@/core/store";
 import { MotorPedagogico, type TrilhaDisciplina, type NoTrilha } from "@/escola-brilha/motor";
 import { temaDaDisciplina } from "@/escola-brilha/missoes-tema";
 
+const PALETA: Record<string, string> = {
+  matematica: "#2563eb",
+  portugues: "#db2777",
+  ciencias: "#059669",
+  historia: "#b45309",
+  geografia: "#0891b2",
+  arte: "#7c3aed",
+  edfisica: "#dc2626",
+  ingles: "#0284c7",
+  religiao: "#4b5563",
+  default: "#6366f1",
+};
+
+function corDaDisciplina(d: string): string {
+  const s = (d || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  if (s.startsWith("mat")) return PALETA.matematica;
+  if (s.startsWith("port")) return PALETA.portugues;
+  if (s.startsWith("cien")) return PALETA.ciencias;
+  if (s.startsWith("hist")) return PALETA.historia;
+  if (s.startsWith("geo")) return PALETA.geografia;
+  if (s.startsWith("art")) return PALETA.arte;
+  if (s.includes("fisica")) return PALETA.edfisica;
+  if (s.startsWith("ingl")) return PALETA.ingles;
+  if (s.includes("religio")) return PALETA.religiao;
+  return PALETA.default;
+}
+
 export const Route = createFileRoute("/trilhas")({
   head: () => ({
     meta: [
