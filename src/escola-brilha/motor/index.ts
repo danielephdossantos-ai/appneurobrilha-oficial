@@ -469,6 +469,10 @@ export const MotorPedagogico = {
   /** Sistema Permanente de Motivação — mensagens rotativas de incentivo. */
   motivacao: SistemaMotivacao,
 
+  /** Avaliação Contínua — coleta compreensão, erros, evolução, tempo, autonomia e persistência DURANTE toda a missão. */
+  avaliacao: AvaliacaoContinua,
+
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
