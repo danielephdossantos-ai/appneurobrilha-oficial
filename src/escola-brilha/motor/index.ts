@@ -544,9 +544,12 @@ export type {
   CatalogoErrosHabilidade,
   SinalErroObservado,
   DeteccaoErro,
+  NoTrilha,
+  StatusMissao,
+  TrilhaDisciplina,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
