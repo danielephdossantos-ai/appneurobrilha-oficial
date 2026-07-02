@@ -119,6 +119,16 @@ import {
   type ResultadoValidacao,
   type ResultadoRegistro,
 } from "./biblioteca-nacional";
+import {
+  DominioAprendizagem,
+  calcularDominio,
+  type NivelDominioAprendizagem,
+  type RotuloNivel,
+  type SinaisDominio,
+  type DetalheDominio,
+  type OrigemInteracao,
+  type RegistroInteracao,
+} from "./dominio-aprendizagem";
 
 
 
