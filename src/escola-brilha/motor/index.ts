@@ -74,6 +74,14 @@ import {
   type PacoteRevisao,
   type OpcoesRevisao,
 } from "./revisao-inteligente";
+import {
+  SistemaMotivacao,
+  proximaMensagem,
+  reiniciarMotivacao,
+  type MensagemMotivacional,
+  type GatilhoMotivacional,
+} from "./motivacao";
+
 
 // =====================================================================
 // Tipos públicos do Motor
@@ -451,6 +459,9 @@ export const MotorPedagogico = {
     catalogo: ExemplosContexto,
   },
 
+  /** Sistema Permanente de Motivação — mensagens rotativas de incentivo. */
+  motivacao: SistemaMotivacao,
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
@@ -462,6 +473,7 @@ export const MotorPedagogico = {
     dificuldadeDe,
   },
 } as const;
+
 
 export type MotorPedagogicoType = typeof MotorPedagogico;
 
@@ -481,8 +493,11 @@ export type {
   OpcoesExemplos,
   PacoteRevisao,
   OpcoesRevisao,
+  MensagemMotivacional,
+  GatilhoMotivacional,
 };
 
-export { RevisaoInteligente };
+export { RevisaoInteligente, SistemaMotivacao };
 
-export { planejarAdaptacao, exemplosParaHabilidade };
+export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
+
