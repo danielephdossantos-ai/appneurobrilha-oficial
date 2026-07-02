@@ -112,6 +112,13 @@ import {
   type CatalogoConquista,
   type EventoConquista,
 } from "./conquistas-educacionais";
+import {
+  BibliotecaNacional,
+  type CategoriaValidacao,
+  type ProblemaValidacao,
+  type ResultadoValidacao,
+  type ResultadoRegistro,
+} from "./biblioteca-nacional";
 
 
 
@@ -514,6 +521,9 @@ export const MotorPedagogico = {
   /** Sistema de Conquistas Educacionais — reconhece progresso PESSOAL, sem gerar competição entre crianças. */
   conquistasEducacionais: ConquistasEducacionais,
 
+  /** Biblioteca Nacional de Missões — portão oficial de validação/cadastro (estrutura, vínculo BNCC, ordem pedagógica, consistência, integridade). */
+  bibliotecaNacional: BibliotecaNacional,
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
@@ -564,9 +574,13 @@ export type {
   CategoriaConquista,
   CatalogoConquista,
   EventoConquista,
+  CategoriaValidacao,
+  ProblemaValidacao,
+  ResultadoValidacao,
+  ResultadoRegistro,
 };
 
-export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua, BancoErrosFrequentes, TrilhasAprendizagem, ConquistasEducacionais, CATALOGO_CONQUISTAS, BibliotecaNacional };
 
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
