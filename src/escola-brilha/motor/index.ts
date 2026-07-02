@@ -104,6 +104,15 @@ import {
   type StatusMissao,
   type TrilhaDisciplina,
 } from "./trilhas";
+import {
+  ConquistasEducacionais,
+  CATALOGO_CONQUISTAS,
+  type Conquista,
+  type CategoriaConquista,
+  type CatalogoConquista,
+  type EventoConquista,
+} from "./conquistas-educacionais";
+
 
 
 // =====================================================================
