@@ -190,6 +190,8 @@ export function UniversalPlayer({
     navigate({ to: "/escola-brilha/$codigo", params: { codigo: retornoPara } });
   };
 
+  const plano = estado.resolvido.existe ? estado.resolvido.adaptacoes.missao : null;
+
   return (
     <div
       className={fonteClasse}
@@ -197,6 +199,9 @@ export function UniversalPlayer({
       data-serie={adaptacao.ano}
       data-etapa={estado.resolvido.existe ? estado.resolvido.bncc.etapaSigla : undefined}
       data-disciplina={estado.resolvido.existe ? estado.resolvido.bncc.disciplinaSigla : undefined}
+      data-linguagem={plano?.linguagem}
+      data-apoio={plano?.nivelApoio}
+      data-ritmo={plano?.ritmo}
     >
       {estaEmRecuperacao && (
         <div className="w-full bg-[#FFC93C] text-[#0d1f55] px-4 py-2 flex items-center justify-between gap-3 text-sm font-bold">
@@ -207,6 +212,16 @@ export function UniversalPlayer({
           >
             Voltar para a missão principal ↩
           </button>
+        </div>
+      )}
+      {plano && (
+        <div className="w-full bg-white/70 text-[#0d1f55] px-4 py-1 text-[11px] flex items-center gap-3 border-b border-[#0d1f55]/10">
+          <span>🧠 Adaptação:</span>
+          <span>linguagem <b>{plano.linguagem}</b></span>
+          <span>· exemplos <b>{plano.quantidadeExemplos}</b></span>
+          <span>· atividades <b>{plano.quantidadeAtividades}</b></span>
+          <span>· apoio <b>{plano.nivelApoio}</b></span>
+          <span>· ritmo <b>{plano.ritmo}</b></span>
         </div>
       )}
       <AulaPlayer
