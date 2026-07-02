@@ -59,6 +59,14 @@ import {
   type PlanoAdaptacao,
   type SinaisAluno,
 } from "./adaptacao-missao";
+import {
+  ExemplosContexto,
+  exemplosParaHabilidade,
+  CONTEXTOS,
+  type ContextoExemplo,
+  type Exemplo,
+  type OpcoesExemplos,
+} from "./exemplos-contexto";
 
 // =====================================================================
 // Tipos públicos do Motor
@@ -414,6 +422,13 @@ export const MotorPedagogico = {
     selecionarDetalhado: selecionarAtividadesDetalhado,
   },
 
+  /** Exemplos pedagógicos por contexto (família, escola, animais, natureza, esportes, alimentação, brincadeiras, tecnologia, cultura brasileira, cotidiano). */
+  exemplos: {
+    contextos: CONTEXTOS,
+    para: exemplosParaHabilidade,
+    catalogo: ExemplosContexto,
+  },
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
@@ -439,6 +454,9 @@ export type {
   SelecaoAtividades,
   PlanoAdaptacao,
   SinaisAluno,
+  ContextoExemplo,
+  Exemplo,
+  OpcoesExemplos,
 };
 
-export { planejarAdaptacao };
+export { planejarAdaptacao, exemplosParaHabilidade };
