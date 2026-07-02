@@ -60,7 +60,16 @@ const ETAPAS_METODO = [
   { n: 5, nome: "Conquistar", cor: "#FF8A4C" },
 ] as const;
 
-export function AulaPlayer({ aula }: { aula: Aula }) {
+export function AulaPlayer({
+  aula,
+  onConcluir,
+}: {
+  aula: Aula;
+  /** Disparado APÓS o registro de conclusão no backend. Usado pelo
+   *  UniversalPlayer para auto-redirecionar quando a missão atual
+   *  é de recuperação e existe uma missão principal aguardando. */
+  onConcluir?: (info: { codigo: string; desempenho: number }) => void;
+}) {
   const navigate = useNavigate();
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
