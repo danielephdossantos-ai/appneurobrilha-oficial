@@ -139,12 +139,11 @@ export function proximoEstilo(
 // ---------- construtores por estilo ----------
 
 function narrativa(o: OpcoesExplicacao, variante: number): Explicacao {
-  const contextos = o.contextos ?? ["cotidiano", "família", "escola"];
-  const exs = exemplosParaHabilidade({
-    codigoBncc: o.codigoBncc,
-    disciplina: o.disciplina,
+  const contextos = o.contextos ?? ["cotidiano", "familia", "escola"];
+  const exs = exemplosParaHabilidade(o.codigoBncc, {
     contextos,
-    quantidade: 3,
+    limite: 3,
+    objetivo: o.conceito,
   });
   const cena = exs[variante % Math.max(1, exs.length)];
   const partes: string[] = [
@@ -164,14 +163,13 @@ function narrativa(o: OpcoesExplicacao, variante: number): Explicacao {
 }
 
 function visual(o: OpcoesExplicacao, variante: number): Explicacao {
-  const exs = exemplosParaHabilidade({
-    codigoBncc: o.codigoBncc,
-    disciplina: o.disciplina,
+  const exs = exemplosParaHabilidade(o.codigoBncc, {
     contextos: o.contextos,
-    quantidade: 4,
+    limite: 4,
+    objetivo: o.conceito,
   });
   const cenas = exs.slice(0, 4).map((e) => ({
-    emoji: e.emoji ?? "✨",
+    emoji: e.titulo.split(" ")[0] ?? "✨",
     legenda: e.enunciado,
   }));
   const fallback = [
@@ -192,11 +190,10 @@ function visual(o: OpcoesExplicacao, variante: number): Explicacao {
 }
 
 function exemplos(o: OpcoesExplicacao, variante: number): Explicacao {
-  const exs = exemplosParaHabilidade({
-    codigoBncc: o.codigoBncc,
-    disciplina: o.disciplina,
+  const exs = exemplosParaHabilidade(o.codigoBncc, {
     contextos: o.contextos,
-    quantidade: 5,
+    limite: 5,
+    objetivo: o.conceito,
   });
   const lista = exs.slice(variante % 3, (variante % 3) + 4).map((e) => e.enunciado);
   return finalizar({
