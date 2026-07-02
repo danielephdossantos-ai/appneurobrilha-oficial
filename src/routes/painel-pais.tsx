@@ -21,6 +21,7 @@ import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 import { ConsentGate } from "@/components/legal/ConsentGate";
 import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
+import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
 
 export const Route = createFileRoute("/painel-pais")({
   component: () => (
@@ -274,6 +275,11 @@ function PainelPremium() {
             <ArrowRight className="h-5 w-5" />
           </Link>
         )}
+        {/* Painel Pedagógico para a Família — visão simples e objetiva */}
+        <div className="mb-6">
+          <PainelPedagogicoFamilia childId={activeChild.id} studentName={activeChild.nome} />
+        </div>
+
 
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
