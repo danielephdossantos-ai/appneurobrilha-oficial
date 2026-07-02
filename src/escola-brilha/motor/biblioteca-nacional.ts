@@ -210,8 +210,8 @@ type HabRow = { codigo: string; ano: string | null; disciplina: string | null };
 async function buscarHabilidadeBNCC(codigo: string): Promise<HabRow | null> {
   const { data, error } = await supabase
     .from("bncc_habilidades")
-    .select("codigo, ano, disciplina")
-    .eq("codigo", codigo.toUpperCase())
+    .select("codigo_bncc, ano, disciplina")
+    .eq("codigo_bncc", codigo.toUpperCase())
     .maybeSingle();
   if (error) {
     console.warn("[BibliotecaNacional] falha ao consultar BNCC:", error.message);
@@ -446,7 +446,7 @@ export const BibliotecaNacional = {
   async cobertura(): Promise<{ total: number; publicadas: number; pendentes: number; percentual: number }> {
     const { count } = await supabase
       .from("bncc_habilidades")
-      .select("codigo", { count: "exact", head: true });
+      .select("codigo_bncc", { count: "exact", head: true });
     const total = count ?? 1451;
     // percorre bncc_habilidades em páginas para contar publicadas
     let publicadas = 0;
@@ -455,7 +455,7 @@ export const BibliotecaNacional = {
     for (;;) {
       const { data, error } = await supabase
         .from("bncc_habilidades")
-        .select("codigo")
+        .select("codigo_bncc")
         .range(de, de + passo - 1);
       if (error || !data || data.length === 0) break;
       for (const row of data as Array<{ codigo: string }>) {
