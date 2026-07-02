@@ -157,6 +157,7 @@ export function AulaPlayer({
           _desempenho: desempenho,
           _tipo: "aula",
         });
+        onConcluir?.({ codigo: aula.codigo, desempenho });
       }
 
     }
