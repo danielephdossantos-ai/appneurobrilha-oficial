@@ -108,13 +108,13 @@ function TrilhaCard({ trilha }: { trilha: TrilhaDisciplina }) {
   return (
     <section
       className="rounded-2xl border bg-card overflow-hidden shadow-sm"
-      style={{ borderColor: `${tema.cor}30` }}
+      style={{ borderColor: `${corDisc}30` }}
     >
       <header className="p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="flex items-center gap-3">
           <div
             className="rounded-2xl h-12 w-12 grid place-items-center text-2xl"
-            style={{ background: `${tema.cor}20`, color: tema.cor }}
+            style={{ background: `${corDisc}20`, color: corDisc }}
             aria-hidden="true"
           >
             {tema.emoji}
@@ -145,7 +145,7 @@ function TrilhaCard({ trilha }: { trilha: TrilhaDisciplina }) {
                 to="/escola-brilha/$codigo"
                 params={{ codigo: trilha.proximaSugerida.codigo }}
                 className="inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium hover:bg-muted"
-                style={{ borderColor: `${tema.cor}60`, color: tema.cor }}
+                style={{ borderColor: `${corDisc}60`, color: corDisc }}
               >
                 <Sparkles className="h-4 w-4" />
                 Próxima missão
@@ -161,11 +161,11 @@ function TrilhaCard({ trilha }: { trilha: TrilhaDisciplina }) {
               className="h-full rounded-full transition-all"
               style={{
                 width: `${trilha.evolucaoPercentual}%`,
-                background: tema.cor,
+                background: corDisc,
               }}
             />
           </div>
-          <span className="text-sm font-semibold tabular-nums" style={{ color: tema.cor }}>
+          <span className="text-sm font-semibold tabular-nums" style={{ color: corDisc }}>
             {trilha.evolucaoPercentual}%
           </span>
         </div>
@@ -185,7 +185,7 @@ function TrilhaCard({ trilha }: { trilha: TrilhaDisciplina }) {
         {aberto && (
           <ol className="divide-y">
             {trilha.nos.map((n) => (
-              <MissaoLinha key={n.codigo} no={n} cor={tema.cor} />
+              <MissaoLinha key={n.codigo} no={n} cor={corDisc} />
             ))}
           </ol>
         )}
