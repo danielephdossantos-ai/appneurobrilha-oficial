@@ -81,6 +81,13 @@ import {
   type MensagemMotivacional,
   type GatilhoMotivacional,
 } from "./motivacao";
+import {
+  AvaliacaoContinua,
+  type EventoAvaliacao,
+  type TipoEventoAvaliacao,
+  type IndicadoresContinuos,
+  type EstadoAvaliacao,
+} from "./avaliacao-continua";
 
 
 // =====================================================================
@@ -462,6 +469,10 @@ export const MotorPedagogico = {
   /** Sistema Permanente de Motivação — mensagens rotativas de incentivo. */
   motivacao: SistemaMotivacao,
 
+  /** Avaliação Contínua — coleta compreensão, erros, evolução, tempo, autonomia e persistência DURANTE toda a missão. */
+  avaliacao: AvaliacaoContinua,
+
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
@@ -495,9 +506,13 @@ export type {
   OpcoesRevisao,
   MensagemMotivacional,
   GatilhoMotivacional,
+  EventoAvaliacao,
+  TipoEventoAvaliacao,
+  IndicadoresContinuos,
+  EstadoAvaliacao,
 };
 
-export { RevisaoInteligente, SistemaMotivacao };
+export { RevisaoInteligente, SistemaMotivacao, AvaliacaoContinua };
 
 export { planejarAdaptacao, exemplosParaHabilidade, proximaMensagem, reiniciarMotivacao };
 
