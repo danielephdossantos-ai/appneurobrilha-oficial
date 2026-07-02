@@ -66,7 +66,7 @@ const GEN_MA: EntradaErro[] = [
       "Se sobraram 3 maçãs, começamos com mais e tiramos → é subtração.",
       "Se juntamos os grupos, é adição.",
     ],
-    atividadesRecomendadas: ["ilustracao_interativa", "arrastar_soltar", "quiz"],
+    atividadesRecomendadas: ["observacao", "arrastar", "multipla_escolha"],
   },
   {
     chave: "contagem_pulou",
@@ -78,7 +78,7 @@ const GEN_MA: EntradaErro[] = [
       "Contar em voz alta e devagar, um número por batida.",
     ],
     exemplosCorretivos: ["1 → 2 → 3 → 4 → 5, tocando cada figura."],
-    atividadesRecomendadas: ["contagem_visual", "sequencia_ordenar"],
+    atividadesRecomendadas: ["observacao", "ordenar"],
   },
   {
     chave: "valor_posicional",
@@ -90,7 +90,7 @@ const GEN_MA: EntradaErro[] = [
       "Escrever o número na tabela D | U antes de responder.",
     ],
     exemplosCorretivos: ["23 = 2 dezenas + 3 unidades = 20 + 3."],
-    atividadesRecomendadas: ["arrastar_soltar", "quiz", "completar_frase"],
+    atividadesRecomendadas: ["arrastar", "multipla_escolha", "completar"],
   },
 ];
 
@@ -105,7 +105,7 @@ const GEN_LP: EntradaErro[] = [
       "Comparar pares mínimos com apoio de imagem.",
     ],
     exemplosCorretivos: ["🐱 gato x 🎂 bolo — o som muda no começo."],
-    atividadesRecomendadas: ["ditado_visual", "correspondencia_som_letra", "quiz"],
+    atividadesRecomendadas: ["completar", "ligar", "multipla_escolha"],
   },
   {
     chave: "omitir_letra",
@@ -117,7 +117,7 @@ const GEN_LP: EntradaErro[] = [
       "Reler a palavra apontando cada letra.",
     ],
     exemplosCorretivos: ["car-ro → 2 batidas → 5 letras."],
-    atividadesRecomendadas: ["ditado_visual", "completar_palavra", "leitura_guiada"],
+    atividadesRecomendadas: ["completar", "completar", "interpretacao"],
   },
   {
     chave: "ignora_pontuacao",
@@ -129,7 +129,7 @@ const GEN_LP: EntradaErro[] = [
       "Ler junto com o professor virtual, imitando o ritmo.",
     ],
     exemplosCorretivos: ["'Vamos, comer, vovó.' x 'Vamos comer, vovó.'"],
-    atividadesRecomendadas: ["leitura_guiada", "quiz"],
+    atividadesRecomendadas: ["interpretacao", "multipla_escolha"],
   },
 ];
 
@@ -144,7 +144,7 @@ const GEN_CI: EntradaErro[] = [
       "Repetir a observação com o vídeo em câmera lenta.",
     ],
     exemplosCorretivos: ["Observar → anotar → só depois concluir."],
-    atividadesRecomendadas: ["experimento_virtual", "quiz"],
+    atividadesRecomendadas: ["observacao", "multipla_escolha"],
   },
 ];
 
@@ -159,7 +159,7 @@ const GEN_HI: EntradaErro[] = [
       "Perguntar sempre: o que veio ANTES disso?",
     ],
     exemplosCorretivos: ["1500 vem antes de 1822."],
-    atividadesRecomendadas: ["sequencia_ordenar", "quiz"],
+    atividadesRecomendadas: ["ordenar", "multipla_escolha"],
   },
 ];
 
@@ -171,7 +171,7 @@ const GEN_GE: EntradaErro[] = [
     causas: ["confusao_conceitual"],
     estrategias: ["Usar bonecas russas mentais: bairro dentro da cidade dentro do estado."],
     exemplosCorretivos: ["🏠 casa → 🏘️ bairro → 🏙️ cidade → 🌎 país."],
-    atividadesRecomendadas: ["ilustracao_interativa", "quiz"],
+    atividadesRecomendadas: ["observacao", "multipla_escolha"],
   },
 ];
 
@@ -183,7 +183,7 @@ const GEN_AR: EntradaErro[] = [
     causas: ["compreensao_enunciado"],
     estrategias: ["Perguntar antes: como você se sente vendo isso?"],
     exemplosCorretivos: ["Mesma paisagem com cores quentes x frias."],
-    atividadesRecomendadas: ["desenho_livre", "quiz"],
+    atividadesRecomendadas: ["desenho", "multipla_escolha"],
   },
 ];
 
@@ -195,7 +195,7 @@ const GEN_EF: EntradaErro[] = [
     causas: ["atencao", "sobrecarga_cognitiva"],
     estrategias: ["Quebrar o movimento em 3 passos e treinar um por vez."],
     exemplosCorretivos: ["1) posição inicial → 2) impulso → 3) chegada."],
-    atividadesRecomendadas: ["sequencia_ordenar", "quiz"],
+    atividadesRecomendadas: ["ordenar", "multipla_escolha"],
   },
 ];
 
@@ -207,7 +207,7 @@ const GEN_ER: EntradaErro[] = [
     causas: ["confusao_conceitual"],
     estrategias: ["Substituir 'errado' por 'diferente' e listar semelhanças."],
     exemplosCorretivos: ["Todas as tradições valorizam a família, de formas diferentes."],
-    atividadesRecomendadas: ["quiz", "completar_frase"],
+    atividadesRecomendadas: ["multipla_escolha", "completar"],
   },
 ];
 
@@ -238,7 +238,7 @@ const CATALOGO_ESPECIFICO: Record<string, EntradaErro[]> = {
         "Usar o ritmo: 'um... dois... três...'.",
       ],
       exemplosCorretivos: ["🎈🎈🎈🎈🎈 = 1,2,3,4,5"],
-      atividadesRecomendadas: ["contagem_visual", "sequencia_ordenar"],
+      atividadesRecomendadas: ["observacao", "ordenar"],
     },
     {
       chave: "recitar_sem_contar",
@@ -247,7 +247,7 @@ const CATALOGO_ESPECIFICO: Record<string, EntradaErro[]> = {
       causas: ["confusao_conceitual"],
       estrategias: ["Tocar cada objeto ao dizer o número (correspondência um-a-um)."],
       exemplosCorretivos: ["🍎(1) 🍎(2) 🍎(3) → total = 3"],
-      atividadesRecomendadas: ["contagem_visual", "arrastar_soltar"],
+      atividadesRecomendadas: ["observacao", "arrastar"],
     },
   ],
   EF01MA02: [
@@ -261,7 +261,7 @@ const CATALOGO_ESPECIFICO: Record<string, EntradaErro[]> = {
         "Comparar duas pilhas de objetos antes de responder.",
       ],
       exemplosCorretivos: ["🍎🍎🍎🍎 (4) > 🍎🍎 (2)"],
-      atividadesRecomendadas: ["quiz", "arrastar_soltar"],
+      atividadesRecomendadas: ["multipla_escolha", "arrastar"],
     },
   ],
 };
@@ -358,7 +358,7 @@ export function detectarErro(
         "Fazer uma pausa curta antes da próxima questão.",
       ],
       exemplosCorretivos: ["Vamos por partes: primeiro entender, depois responder."],
-      atividadesRecomendadas: ["ilustracao_interativa", "quiz"],
+      atividadesRecomendadas: ["observacao", "multipla_escolha"],
     };
     return montar(generica, 0.5);
   }
