@@ -81,6 +81,13 @@ import {
   type MensagemMotivacional,
   type GatilhoMotivacional,
 } from "./motivacao";
+import {
+  AvaliacaoContinua,
+  type EventoAvaliacao,
+  type TipoEventoAvaliacao,
+  type IndicadoresContinuos,
+  type EstadoAvaliacao,
+} from "./avaliacao-continua";
 
 
 // =====================================================================
