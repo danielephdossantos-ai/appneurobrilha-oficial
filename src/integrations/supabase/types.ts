@@ -468,6 +468,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "atividades_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       attention_metrics: {
@@ -655,6 +662,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: true
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "aulas_geradas_ia_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -1023,6 +1037,30 @@ export type Database = {
           max_age?: number
           min_age?: number
           name?: string
+        }
+        Relationships: []
+      }
+      bncc_prerequisitos: {
+        Row: {
+          codigo_bncc: string
+          created_at: string
+          id: string
+          origem: string
+          requer_codigo_bncc: string
+        }
+        Insert: {
+          codigo_bncc: string
+          created_at?: string
+          id?: string
+          origem?: string
+          requer_codigo_bncc: string
+        }
+        Update: {
+          codigo_bncc?: string
+          created_at?: string
+          id?: string
+          origem?: string
+          requer_codigo_bncc?: string
         }
         Relationships: []
       }
@@ -2277,6 +2315,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "explicacoes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       fatigue_metrics: {
@@ -2764,6 +2809,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_activities_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_adaptations: {
@@ -2911,6 +2963,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_cache_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -3437,6 +3496,13 @@ export type Database = {
             referencedColumns: ["codigo_bncc"]
           },
           {
+            foreignKeyName: "lesson_library_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
             foreignKeyName: "lesson_library_componente_codigo_fkey"
             columns: ["componente_codigo"]
             isOneToOne: false
@@ -3523,6 +3589,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_progress_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_quizzes: {
@@ -3576,6 +3649,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_quizzes_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -3692,6 +3772,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "lesson_reviews_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       lesson_reviews_full: {
@@ -3798,6 +3885,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lesson_sections_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -4005,6 +4099,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: true
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "lessons_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: true
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -5118,6 +5219,13 @@ export type Database = {
             columns: ["codigo_bncc"]
             isOneToOne: false
             referencedRelation: "vw_biblioteca_nacional_missoes"
+            referencedColumns: ["codigo_bncc"]
+          },
+          {
+            foreignKeyName: "progresso_aluno_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
             referencedColumns: ["codigo_bncc"]
           },
         ]
@@ -6960,6 +7068,13 @@ export type Database = {
             referencedRelation: "vw_biblioteca_nacional_missoes"
             referencedColumns: ["codigo_bncc"]
           },
+          {
+            foreignKeyName: "trilha_anual_codigo_bncc_fkey"
+            columns: ["codigo_bncc"]
+            isOneToOne: false
+            referencedRelation: "vw_sequencia_oficial_bncc"
+            referencedColumns: ["codigo_bncc"]
+          },
         ]
       }
       trilhas_aprendizagem: {
@@ -7177,6 +7292,45 @@ export type Database = {
         }
         Relationships: []
       }
+      vw_sequencia_oficial_bncc: {
+        Row: {
+          ano: string | null
+          codigo_bncc: string | null
+          disciplina: string | null
+          etapa: string | null
+          objetivo: string | null
+          objeto_conhecimento: string | null
+          ordem_global: number | null
+          tem_missao: boolean | null
+          titulo: string | null
+          unidade_tematica: string | null
+        }
+        Insert: {
+          ano?: string | null
+          codigo_bncc?: string | null
+          disciplina?: string | null
+          etapa?: string | null
+          objetivo?: string | null
+          objeto_conhecimento?: string | null
+          ordem_global?: never
+          tem_missao?: never
+          titulo?: string | null
+          unidade_tematica?: string | null
+        }
+        Update: {
+          ano?: string | null
+          codigo_bncc?: string | null
+          disciplina?: string | null
+          etapa?: string | null
+          objetivo?: string | null
+          objeto_conhecimento?: string | null
+          ordem_global?: never
+          tem_missao?: never
+          titulo?: string | null
+          unidade_tematica?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       activate_user_mascot: {
@@ -7216,6 +7370,20 @@ export type Database = {
       pode_avancar_habilidade: {
         Args: { _child_id: string; _codigo_bncc: string }
         Returns: boolean
+      }
+      proxima_habilidade_oficial: {
+        Args: { _child_id: string; _disciplina?: string }
+        Returns: {
+          ano: string
+          codigo_bncc: string
+          disciplina: string
+          etapa: string
+          objetivo: string
+          objeto_conhecimento: string
+          tem_missao: boolean
+          titulo: string
+          unidade_tematica: string
+        }[]
       }
       publish_lesson_with_version: {
         Args: { _change_reason?: string; _draft_id: string }
