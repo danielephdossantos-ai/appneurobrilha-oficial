@@ -437,4 +437,8 @@ export type {
   TipoAtividade,
   AtividadeMeta,
   SelecaoAtividades,
+  PlanoAdaptacao,
+  SinaisAluno,
 };
+
+export { planejarAdaptacao };
