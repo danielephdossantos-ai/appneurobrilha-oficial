@@ -191,6 +191,23 @@ export function UniversalPlayer({
   };
 
   const plano = estado.resolvido.existe ? estado.resolvido.adaptacoes.missao : null;
+  const alunoId = childId ?? "anon";
+  const [motivacao, setMotivacao] = useState(() =>
+    MotorPedagogico.motivacao.proxima("inicio_missao", alunoId),
+  );
+  // Rotação suave de mensagens de esforço/incentivo a cada 45s.
+  useEffect(() => {
+    const gatilhos: Array<"esforco" | "checkpoint" | "continuar_estudando"> = [
+      "esforco",
+      "checkpoint",
+      "continuar_estudando",
+    ];
+    const id = window.setInterval(() => {
+      const g = gatilhos[Math.floor(Math.random() * gatilhos.length)];
+      setMotivacao(MotorPedagogico.motivacao.proxima(g, alunoId));
+    }, 45000);
+    return () => window.clearInterval(id);
+  }, [alunoId, codigo]);
 
   return (
     <div
@@ -224,9 +241,20 @@ export function UniversalPlayer({
           <span>· ritmo <b>{plano.ritmo}</b></span>
         </div>
       )}
+      <div
+        role="status"
+        aria-live="polite"
+        className="w-full bg-gradient-to-r from-[#FFC93C]/20 via-white/10 to-[#7CE7A6]/20 text-white px-4 py-2 flex items-center gap-2 text-sm font-semibold border-b border-white/10"
+      >
+        <span aria-hidden className="text-lg">{motivacao.emoji}</span>
+        <span className="truncate">{motivacao.texto}</span>
+      </div>
       <AulaPlayer
         aula={aula}
         onConcluir={({ desempenho }) => {
+          // Comemora conclusão com nova mensagem positiva.
+          const gat = desempenho >= 70 ? "conclusao_missao" : "esforco";
+          setMotivacao(MotorPedagogico.motivacao.proxima(gat, alunoId));
           // Auto-redirect: se estamos numa Missão de Recuperação e o
           // desempenho foi suficiente, voltamos automaticamente para a
           // missão principal. Limiar mínimo alinhado ao SM-2 (>=70%).
@@ -241,3 +269,4 @@ export function UniversalPlayer({
     </div>
   );
 }
+
