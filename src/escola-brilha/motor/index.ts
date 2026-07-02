@@ -534,6 +534,9 @@ export const MotorPedagogico = {
   /** Biblioteca Nacional de Missões — portão oficial de validação/cadastro (estrutura, vínculo BNCC, ordem pedagógica, consistência, integridade). */
   bibliotecaNacional: BibliotecaNacional,
 
+  /** Motor de Domínio da Aprendizagem — 4 níveis (não iniciada, em desenvolvimento, quase dominada, dominada) recalculados continuamente a partir de acertos, erros, revisões, tempo, desafios e avaliações posteriores. Concluir a missão NÃO implica dominar. */
+  dominio: DominioAprendizagem,
+
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
   parseBNCC,
