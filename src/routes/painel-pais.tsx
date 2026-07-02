@@ -21,6 +21,7 @@ import { AuditLogService } from "@/modules/auth/services/AuditLogService";
 import { HyperfocusManager } from "@/components/profile/HyperfocusManager";
 import { ConsentGate } from "@/components/legal/ConsentGate";
 import { PrivacyPanel } from "@/components/legal/PrivacyPanel";
+import { PainelPedagogicoFamilia } from "@/components/responsible/PainelPedagogicoFamilia";
 
 export const Route = createFileRoute("/painel-pais")({
   component: () => (
