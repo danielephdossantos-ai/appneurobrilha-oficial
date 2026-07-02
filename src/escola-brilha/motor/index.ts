@@ -482,6 +482,14 @@ export const MotorPedagogico = {
   /** Avaliação Contínua — coleta compreensão, erros, evolução, tempo, autonomia e persistência DURANTE toda a missão. */
   avaliacao: AvaliacaoContinua,
 
+  /** Banco Nacional de Erros Frequentes — erros comuns por habilidade BNCC + estratégias automáticas de correção. */
+  erros: {
+    catalogo: catalogoDaHabilidade,
+    detectar: detectarErro,
+    banco: BancoErrosFrequentes,
+  },
+
+
 
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
   resolver: resolverMissao,
