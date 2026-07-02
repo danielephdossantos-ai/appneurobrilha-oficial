@@ -98,6 +98,12 @@ import {
   type SinalErroObservado,
   type DeteccaoErro,
 } from "./erros-frequentes";
+import {
+  TrilhasAprendizagem,
+  type NoTrilha,
+  type StatusMissao,
+  type TrilhaDisciplina,
+} from "./trilhas";
 
 
 // =====================================================================
