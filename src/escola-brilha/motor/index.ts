@@ -495,6 +495,11 @@ export const MotorPedagogico = {
     banco: BancoErrosFrequentes,
   },
 
+  /** Trilhas de Aprendizagem — sequência BNCC por disciplina, com evolução, concluídas, pendentes e próxima sugerida. */
+  trilhas: TrilhasAprendizagem,
+
+
+
 
 
   /** Resolve tudo que uma missão precisa a partir do código BNCC. */
