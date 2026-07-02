@@ -53,6 +53,12 @@ import {
   type AtividadeMeta,
   type SelecaoAtividades,
 } from "../atividades";
+import {
+  AdaptacaoMissao,
+  planejarAdaptacao,
+  type PlanoAdaptacao,
+  type SinaisAluno,
+} from "./adaptacao-missao";
 
 // =====================================================================
 // Tipos públicos do Motor
@@ -393,6 +399,8 @@ export const MotorPedagogico = {
   sequencia: Sequencia,
   adaptacaoIdade: AdaptacaoPorIdade,
   adaptacaoDesempenho: AdaptacaoPorDesempenho,
+  /** Adaptação unificada da missão (idade + desempenho + tempo + erros + histórico). Nunca altera objetivo BNCC. */
+  adaptacaoMissao: AdaptacaoMissao,
   revisao: Revisao,
   progresso: Progresso,
   recomendacoes: Recomendacoes,
@@ -429,4 +437,8 @@ export type {
   TipoAtividade,
   AtividadeMeta,
   SelecaoAtividades,
+  PlanoAdaptacao,
+  SinaisAluno,
 };
+
+export { planejarAdaptacao };
