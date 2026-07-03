@@ -1,9 +1,77 @@
 import { useState } from "react";
-import { Trophy, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Trophy, Eye, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import { Secao } from "./Secao";
+import type { Aula } from "../../types";
 
-export function Desafio({ dados }: { dados: { enunciado: string; resposta: string } }) {
+const CORES = ["#34D399", "#FB923C", "#F472B6", "#60A5FA", "#A78BFA", "#FBBF24"];
+
+export function Desafio({ dados }: { dados: Aula["desafio"] }) {
   const [revelar, setRevelar] = useState(false);
+  const visual = dados.visual;
+
+  if (visual) {
+    return (
+      <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
+        <p className="font-black mb-3">{dados.enunciado}</p>
+
+        {/* Cena com personagens e itens contáveis */}
+        <div
+          className={`grid gap-2 mb-4 ${
+            visual.cena.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
+          }`}
+        >
+          {visual.cena.map((p, i) => {
+            const cor = p.cor ?? CORES[i % CORES.length];
+            return (
+              <div
+                key={i}
+                className="rounded-2xl border-4 p-2"
+                style={{ borderColor: cor, background: `${cor}18` }}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-1.5">
+                    {p.personagemImagemUrl && (
+                      <img
+                        src={p.personagemImagemUrl}
+                        alt=""
+                        className="h-8 w-8 object-contain drop-shadow"
+                      />
+                    )}
+                    <span
+                      className="text-[10px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
+                      style={{ background: cor }}
+                    >
+                      {p.personagem}
+                    </span>
+                  </div>
+                  <span
+                    className="h-7 w-7 rounded-full text-sm font-black grid place-items-center border-2 border-white"
+                    style={{ background: "#fff", color: cor }}
+                  >
+                    {p.quantidade}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1 justify-center min-h-[70px] items-center bg-white/40 rounded-xl p-1">
+                  {Array.from({ length: p.quantidade }).map((_, k) => (
+                    <img
+                      key={k}
+                      src={p.itemImagemUrl}
+                      alt=""
+                      className="h-8 w-8 sm:h-9 sm:w-9 object-contain drop-shadow"
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <QuizSequencial perguntas={visual.perguntas} />
+      </Secao>
+    );
+  }
+
   return (
     <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
       <p className="font-black mb-3">{dados.enunciado}</p>
@@ -23,5 +91,116 @@ export function Desafio({ dados }: { dados: { enunciado: string; resposta: strin
         </div>
       )}
     </Secao>
+  );
+}
+
+function QuizSequencial({ perguntas }: { perguntas: Aula["desafio"]["visual"] extends infer V ? V extends { perguntas: infer P } ? P : never : never }) {
+  const lista = perguntas as Array<{
+    pergunta: string;
+    opcoes: string[];
+    correta: number;
+    explicacao: string;
+  }>;
+  const [i, setI] = useState(0);
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const [acertos, setAcertos] = useState(0);
+  const [fim, setFim] = useState(false);
+  const q = lista[i];
+
+  function escolher(k: number) {
+    if (escolha !== null) return;
+    setEscolha(k);
+    if (k === q.correta) setAcertos((n) => n + 1);
+  }
+  function avancar() {
+    if (i + 1 < lista.length) {
+      setI(i + 1);
+      setEscolha(null);
+    } else {
+      setFim(true);
+    }
+  }
+  function reiniciar() {
+    setI(0);
+    setEscolha(null);
+    setAcertos(0);
+    setFim(false);
+  }
+
+  if (fim) {
+    const pct = Math.round((acertos / lista.length) * 100);
+    return (
+      <div className="rounded-2xl bg-white/10 p-4 text-center border-2 border-white/20">
+        <div className="text-4xl mb-1">{pct >= 70 ? "🏆" : "💪"}</div>
+        <div className="font-black text-lg mb-1">
+          {acertos} / {lista.length} corretas ({pct}%)
+        </div>
+        <button
+          onClick={reiniciar}
+          className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#0d1f55] font-black"
+        >
+          Tentar de novo
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl bg-white/10 border-2 border-white/20 p-3">
+      <div className="text-[10px] font-black uppercase tracking-widest text-white/70 mb-2">
+        Pergunta {i + 1} de {lista.length}
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+        >
+          <p className="font-black mb-3">{q.pergunta}</p>
+          <div className="space-y-2">
+            {q.opcoes.map((op, k) => {
+              const revelado = escolha !== null;
+              const certa = k === q.correta;
+              const sel = escolha === k;
+              return (
+                <button
+                  key={k}
+                  onClick={() => escolher(k)}
+                  disabled={revelado}
+                  className={`w-full text-left px-3 py-2 rounded-xl font-black flex items-center justify-between ${
+                    revelado
+                      ? certa
+                        ? "bg-[#22C55E] text-[#0d1f55]"
+                        : sel
+                          ? "bg-[#EF4444] text-white"
+                          : "bg-white/15 text-white/70"
+                      : "bg-white text-[#0d1f55]"
+                  }`}
+                >
+                  <span>{op}</span>
+                  {revelado && certa && <CheckCircle2 className="h-4 w-4" />}
+                  {revelado && sel && !certa && <XCircle className="h-4 w-4" />}
+                </button>
+              );
+            })}
+          </div>
+          {escolha !== null && (
+            <div className="mt-3 rounded-xl bg-white/10 p-2 text-sm border border-white/15 flex gap-2 items-start">
+              <Sparkles className="h-4 w-4 shrink-0 mt-0.5" />
+              <span>{q.explicacao}</span>
+            </div>
+          )}
+          {escolha !== null && (
+            <button
+              onClick={avancar}
+              className="mt-3 w-full h-10 rounded-xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black"
+            >
+              {i + 1 < lista.length ? "Próxima" : "Ver resultado"}
+            </button>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }

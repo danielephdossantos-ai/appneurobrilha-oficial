@@ -186,7 +186,27 @@ export type Aula = {
   // 6. Exercícios
   exercicios: Exercicio[];
   // 7. Desafio
-  desafio: { enunciado: string; resposta: string };
+  desafio: {
+    enunciado: string;
+    resposta: string;
+    /**
+     * Desafio VISUAL interativo (opcional). Renderiza a cena com imagens
+     * (ex.: Papagaio com 8 sementes, Esquilo com 5 castanhas, Coelho com 10 cenouras)
+     * e várias perguntas de múltipla escolha em sequência. A criança clica
+     * na resposta certa em cada pergunta.
+     */
+    visual?: {
+      cena: Array<{
+        personagem: string;
+        personagemImagemUrl?: string;
+        itemImagemUrl: string;
+        quantidade: number;
+        cor?: string;
+      }>;
+      perguntas: QuizItem[];
+    };
+  };
+
   // 8. Quiz
   quiz: QuizItem[];
   // 9. Resumo (pontos-chave + dica)
