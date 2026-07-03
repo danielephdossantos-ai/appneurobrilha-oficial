@@ -9,7 +9,28 @@ export type QuizItem = {
   opcoes: string[];
   correta: number; // índice em opcoes
   explicacao: string;
+  /**
+   * Visual OBRIGATÓRIO para crianças não-alfabetizadas (Ed. Infantil / 1º Ano):
+   * mostra a cena da pergunta com imagens de contagem. Uma imagem repetida N vezes
+   * (ex.: 5 cenouras) ou vários grupos coloridos (ex.: 3 grupos de 3 maçãs).
+   */
+  visual?:
+    | {
+        tipo: "itens";
+        imagemUrl: string;
+        quantidade: number;
+        rotulo?: string;
+      }
+    | {
+        tipo: "grupos";
+        grupos: Array<{ imagemUrl: string; quantidade: number; rotulo?: string; cor?: string }>;
+      }
+    | {
+        tipo: "comparar";
+        lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string; cor?: string }>;
+      };
 };
+
 
 export type Exercicio = {
   enunciado: string;
