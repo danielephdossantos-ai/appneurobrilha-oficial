@@ -162,53 +162,46 @@ export function OperacaoVisual({
 
   const Icone = operacao === "soma" ? Plus : Minus;
 
-  // Renderiza um grupo de imagens; destaca as já contadas
+  // Renderiza APENAS as imagens já reveladas (aparecem uma por uma).
   const Grupo = ({
-    total,
-    contados,
+    mostrar,
     riscados = 0,
+    total,
   }: {
-    total: number;
-    contados: number;
+    mostrar: number;
     riscados?: number;
+    total: number; // usado só para reservar largura
   }) => (
-    <div className="flex flex-wrap gap-1.5 items-center justify-center max-w-[160px]">
-      <AnimatePresence>
-        {Array.from({ length: total }).map((_, i) => {
-          const foiContado = i < contados;
-          const foiRiscado = i >= total - riscados;
-          return (
-            <motion.div
-              key={i}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: foiContado ? 1.15 : 1,
-                opacity: foiRiscado ? 0.25 : 1,
-              }}
-              transition={{ duration: 0.35 }}
-              className="relative"
-            >
-              <img
-                src={imagemUrl}
-                alt=""
-                className="h-11 w-11 sm:h-12 sm:w-12 object-contain drop-shadow"
-                style={{
-                  filter: foiContado
-                    ? `drop-shadow(0 0 6px ${cor})`
-                    : undefined,
-                }}
-              />
-              {foiRiscado && (
-                <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
-                  ✕
-                </span>
-              )}
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
+    <div
+      className="flex flex-wrap gap-1.5 items-center justify-center"
+      style={{ minWidth: Math.min(total, 5) * 52 }}
+    >
+      {Array.from({ length: mostrar }).map((_, i) => {
+        const foiRiscado = i >= mostrar - riscados && riscados > 0;
+        return (
+          <motion.div
+            key={i}
+            initial={{ scale: 0, opacity: 0, y: -12 }}
+            animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
+            transition={{ duration: 0.35, ease: "backOut" }}
+            className="relative"
+          >
+            <img
+              src={imagemUrl}
+              alt=""
+              className="h-11 w-11 sm:h-12 sm:w-12 object-contain drop-shadow"
+            />
+            {foiRiscado && (
+              <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
+                ✕
+              </span>
+            )}
+          </motion.div>
+        );
+      })}
     </div>
   );
+
 
   return (
     <div
@@ -242,9 +235,9 @@ export function OperacaoVisual({
         {fase < 4 ? (
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <div className="flex flex-col items-center gap-1">
-              <Grupo total={a} contados={contadoA} />
+              <Grupo total={a} mostrar={fase >= 2 ? a : contadoA} />
               <span className="text-xs font-black" style={{ color: cor }}>
-                {contadoA > 0 ? contadoA : a}
+                {fase >= 2 ? a : contadoA}
               </span>
             </div>
             <Icone
@@ -259,25 +252,14 @@ export function OperacaoVisual({
             <div className="flex flex-col items-center gap-1">
               {operacao === "soma" ? (
                 <>
-                  <Grupo total={b} contados={contadoB} />
+                  <Grupo total={b} mostrar={contadoB} />
                   <span className="text-xs font-black" style={{ color: cor }}>
-                    {contadoB > 0 ? contadoB : b}
+                    {contadoB}
                   </span>
                 </>
               ) : (
                 <>
-                  {/* na subtração o "b" é o que vai ser retirado do A - mostramos um placeholder */}
-                  <div className="flex flex-wrap gap-1.5 items-center justify-center max-w-[90px]">
-                    {Array.from({ length: b }).map((_, i) => (
-                      <img
-                        key={i}
-                        src={imagemUrl}
-                        alt=""
-                        className="h-9 w-9 object-contain opacity-70"
-                        style={{ filter: "grayscale(0.3)" }}
-                      />
-                    ))}
-                  </div>
+                  <Grupo total={b} mostrar={b} />
                   <span className="text-xs font-black" style={{ color: cor }}>
                     tirar {b}
                   </span>
@@ -290,7 +272,7 @@ export function OperacaoVisual({
           <div className="flex flex-col items-center gap-2">
             <Grupo
               total={operacao === "soma" ? a + b : a}
-              contados={contadoTotal}
+              mostrar={contadoTotal}
               riscados={operacao === "subtracao" ? b : 0}
             />
             <span
