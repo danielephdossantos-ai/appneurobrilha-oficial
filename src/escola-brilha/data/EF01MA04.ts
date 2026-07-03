@@ -453,7 +453,6 @@ const aula: Aula = {
 };
 
 // Silence unused-import warnings for personagens usados em ilustrações futuras.
-void macacoImg;
 void corujaImg;
 
 export default aula;
