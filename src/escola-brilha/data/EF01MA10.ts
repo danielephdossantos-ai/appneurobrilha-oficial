@@ -1,5 +1,8 @@
 import type { Aula } from "../types";
 import florImg from "@/assets/neuro-treino/objetos/flor.png";
+import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
+import tulipaImg from "@/assets/neuro-treino/objetos/tulipa.png";
+import rosaImg from "@/assets/neuro-treino/objetos/rosa.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import borboletaImg from "@/assets/neuro-treino/objetos/borboleta.png";
@@ -290,8 +293,12 @@ const aula: Aula = {
       titulo: "Fase 2 · Descubra o Próximo",
       instrucao: "🌻 🌷 🌻 🌷 🌻 ? — qual flor vem agora?",
       grupos: [
-        { imagemUrl: florImg, quantidade: 3, rotulo: "Girassóis 🌻" },
-        { imagemUrl: florImg, quantidade: 2, rotulo: "Tulipas 🌷" },
+        { imagemUrl: girassolImg, quantidade: 1, rotulo: "🌻 Girassol" },
+        { imagemUrl: tulipaImg, quantidade: 1, rotulo: "🌷 Tulipa" },
+        { imagemUrl: girassolImg, quantidade: 1, rotulo: "🌻 Girassol" },
+        { imagemUrl: tulipaImg, quantidade: 1, rotulo: "🌷 Tulipa" },
+        { imagemUrl: girassolImg, quantidade: 1, rotulo: "🌻 Girassol" },
+        { imagemUrl: rosaImg, quantidade: 1, rotulo: "❓ Falta 1" },
       ],
       pergunta: "Qual flor vem agora?",
       opcoes: ["🌻 Girassol", "🌷 Tulipa", "🌹 Rosa"],
