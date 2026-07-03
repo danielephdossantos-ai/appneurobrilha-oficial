@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { HandHelping, Eye } from "lucide-react";
 import { Secao } from "./Secao";
+import { PodioVisual } from "./PodioVisual";
+import type { Aula } from "../../types";
 
 export function AtividadeGuiada({
   dados,
 }: {
-  dados: { enunciado: string; resposta: string; explicacao: string };
+  dados: Aula["atividadeGuiada"];
 }) {
   const [revelar, setRevelar] = useState(false);
+  const visual = dados.visual;
+
+  if (visual?.tipo === "podio") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <PodioVisual
+          pergunta={visual.pergunta}
+          participantes={visual.participantes}
+          respostaCerta={visual.respostaCerta}
+          explicacao={dados.explicacao}
+        />
+      </Secao>
+    );
+  }
+
   return (
     <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
       <p className="font-black mb-3">{dados.enunciado}</p>

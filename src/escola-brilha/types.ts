@@ -99,9 +99,51 @@ export type Aula = {
     nivel4?: string;
   };
   // 4. Exemplo
-  exemploResolvido: { enunciado: string; passos: string[]; resposta: string };
+  exemploResolvido: {
+    enunciado: string;
+    passos: string[];
+    resposta: string;
+    /**
+     * Exemplo INTERATIVO (opcional). Quando presente, o bloco renderiza
+     * a atividade real — a criança toca em cada item, o professor conta
+     * em voz alta e mostra a resposta. Ideal para Ed. Infantil e 1º Ano.
+     */
+    interativo?: {
+      tipo: "contagem";
+      /** URL da imagem do item a contar (ex.: maçã). Vem do Banco de Mídias. */
+      imagemUrl: string;
+      /** Quantidade de itens exibidos. */
+      quantidade: number;
+      /** Nome singular do item (ex.: "maçã"). */
+      nomeItem: string;
+      /** Plural do item (ex.: "maçãs"). Se ausente, adiciona "s". */
+      nomeItemPlural?: string;
+      /** Pergunta lida em voz alta. Padrão: "Quantas <plural> existem?". */
+      pergunta?: string;
+    };
+  };
   // 5. Prática Guiada
-  atividadeGuiada: { enunciado: string; resposta: string; explicacao: string };
+  atividadeGuiada: {
+    enunciado: string;
+    resposta: string;
+    explicacao: string;
+    /**
+     * Prática VISUAL (opcional). Renderiza a cena real com imagens grandes
+     * do Banco de Mídias — não emojis. Ex.: pódio 1º/2º/3º com fotos das
+     * crianças. A criança toca no participante para responder.
+     */
+    visual?: {
+      tipo: "podio";
+      pergunta: string;
+      participantes: Array<{
+        nome: string;
+        imagemUrl: string;
+        posicao: 1 | 2 | 3;
+      }>;
+      /** Nome correto — o toque nesse participante confirma acerto. */
+      respostaCerta: string;
+    };
+  };
   // 6. Exercícios
   exercicios: Exercicio[];
   // 7. Desafio

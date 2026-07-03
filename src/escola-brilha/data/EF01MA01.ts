@@ -1,4 +1,8 @@
 import type { Aula } from "../types";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import anaImg from "@/assets/pip-girl-mascot.png";
+import pedroImg from "@/assets/pip-teen-carrinho.png";
+import lucasImg from "@/assets/pip-teen-cyber.png";
 
 /**
  * EF01MA01 — Aula 001 · Coleção 01 · Biblioteca Pedagógica Escola Brilha
@@ -57,20 +61,38 @@ const aula: Aula = {
   },
 
   exemploResolvido: {
-    enunciado: "Na tela aparecem: 🍎🍎🍎🍎. Quantas maçãs existem?",
+    enunciado: "Quantas maçãs existem na tela?",
     passos: [
-      "Aponte para cada maçã e conte: 1, 2, 3, 4.",
-      "Pare quando não sobrar nenhuma maçã sem contar.",
+      "Toque em cada maçã da tela — uma por vez.",
+      "Para cada toque, diga em voz alta o número: 1, 2, 3, 4.",
+      "Quando não sobrar nenhuma maçã sem tocar, o último número dito é a resposta.",
     ],
     resposta: "4 maçãs — os números também servem para contar.",
+    interativo: {
+      tipo: "contagem",
+      imagemUrl: macaImg,
+      quantidade: 4,
+      nomeItem: "maçã",
+      nomeItemPlural: "maçãs",
+      pergunta: "Quantas maçãs existem?",
+    },
   },
 
   atividadeGuiada: {
-    enunciado:
-      "Três crianças correndo: 🥇 Ana, 🥈 Pedro, 🥉 Lucas. Quem chegou em primeiro lugar?",
-    resposta: "Ana.",
+    enunciado: "Ana, Pedro e Lucas correram uma corrida. Quem chegou em primeiro lugar?",
+    resposta: "Ana chegou em 1º lugar.",
     explicacao:
       "Quando usamos 1º, 2º ou 3º estamos indicando ORDEM — a posição em que cada um chegou.",
+    visual: {
+      tipo: "podio",
+      pergunta: "Quem chegou em 1º lugar?",
+      respostaCerta: "Ana",
+      participantes: [
+        { nome: "Ana", imagemUrl: anaImg, posicao: 1 },
+        { nome: "Pedro", imagemUrl: pedroImg, posicao: 2 },
+        { nome: "Lucas", imagemUrl: lucasImg, posicao: 3 },
+      ],
+    },
   },
 
   exercicios: [
