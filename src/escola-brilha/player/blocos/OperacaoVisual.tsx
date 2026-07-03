@@ -235,16 +235,16 @@ export function OperacaoVisual({
         {fase < 4 ? (
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <div className="flex flex-col items-center gap-1">
-              <Grupo total={a} mostrar={fase >= 2 ? a : contadoA} />
-              <span className="text-xs font-black" style={{ color: cor }}>
-                {fase >= 2 ? a : contadoA}
+              <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} />
+              <span className="text-sm font-black" style={{ color: cor }}>
+                {fase === 1 ? contadoA : a}
               </span>
             </div>
             <Icone
               className="h-8 w-8 shrink-0"
               style={{
                 color: cor,
-                opacity: fase >= 2 ? 1 : 0.25,
+                opacity: fase >= 2 ? 1 : 0.4,
                 transform: fase >= 2 ? "scale(1.2)" : "scale(1)",
                 transition: "all .3s",
               }}
@@ -252,15 +252,15 @@ export function OperacaoVisual({
             <div className="flex flex-col items-center gap-1">
               {operacao === "soma" ? (
                 <>
-                  <Grupo total={b} mostrar={contadoB} />
-                  <span className="text-xs font-black" style={{ color: cor }}>
-                    {contadoB}
+                  <Grupo total={b} mostrar={fase === 0 ? b : contadoB} />
+                  <span className="text-sm font-black" style={{ color: cor }}>
+                    {fase === 3 ? contadoB : b}
                   </span>
                 </>
               ) : (
                 <>
                   <Grupo total={b} mostrar={b} />
-                  <span className="text-xs font-black" style={{ color: cor }}>
+                  <span className="text-sm font-black" style={{ color: cor }}>
                     tirar {b}
                   </span>
                 </>
@@ -272,18 +272,19 @@ export function OperacaoVisual({
           <div className="flex flex-col items-center gap-2">
             <Grupo
               total={operacao === "soma" ? a + b : a}
-              mostrar={contadoTotal}
+              mostrar={operacao === "soma" ? a + b : a}
               riscados={operacao === "subtracao" ? b : 0}
             />
             <span
               className="text-lg font-black"
               style={{ color: fase === 5 ? "#22C55E" : cor }}
             >
-              {contadoTotal || 0}
+              {contadoTotal || "…"}
             </span>
           </div>
         )}
       </div>
+
 
       <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/70 mt-2 min-h-[16px]">
         {fase === 0 && "Toque em Mostrar"}
