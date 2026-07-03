@@ -246,16 +246,38 @@ function JogoArrastar({
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      {quantosNoPrato > 0 ? (
-                        <span className="px-3 py-1 rounded-full bg-white text-[#0d1f55] text-sm font-black shadow">
-                          Comeu! 😋
-                        </span>
-                      ) : (
-                        <span className="px-3 py-1 rounded-full bg-white/90 text-[#0d1f55] text-sm font-black shadow animate-pulse">
-                          Com fome…
-                        </span>
-                      )}
+                      {(() => {
+                        const cap = visual.capacidade ?? 0;
+                        const cheio = cap > 0 && quantosNoPrato >= cap;
+                        // Rótulos por contexto: capacidade 1 = "alimentar" (bicho come);
+                        // capacidade > 1 = "encaixar" (objetos em prateleira/cesta).
+                        const alimenta = cap === 1;
+                        const vazio =
+                          alimenta ? "Com fome…" : cap > 0 ? `Vazia · 0/${cap}` : "Vazio";
+                        const parcial = alimenta
+                          ? "Comeu! 😋"
+                          : cap > 0
+                            ? `${quantosNoPrato}/${cap}`
+                            : `${quantosNoPrato}`;
+                        const completo = alimenta
+                          ? "Comeu! 😋"
+                          : cap > 0
+                            ? `Cheia! ${quantosNoPrato}/${cap} ✓`
+                            : `${quantosNoPrato}`;
+                        const texto =
+                          quantosNoPrato === 0 ? vazio : cheio ? completo : parcial;
+                        return (
+                          <span
+                            className={`px-3 py-1 rounded-full bg-white text-[#0d1f55] text-sm font-black shadow ${
+                              quantosNoPrato === 0 ? "animate-pulse bg-white/90" : ""
+                            }`}
+                          >
+                            {texto}
+                          </span>
+                        );
+                      })()}
                     </div>
+
                   </div>
                 ) : (
                   <>
