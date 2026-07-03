@@ -535,16 +535,23 @@ function JogoOrdenar({
                 className="rounded-2xl bg-white/95 text-[#0d1f55] p-3 cursor-grab active:cursor-grabbing shadow flex items-center gap-3 border-2 border-white/40"
               >
                 <span className="text-[#0d1f55]/60 font-black text-xl">≡</span>
-                <div className="flex flex-wrap gap-1 flex-1 justify-center">
-                  {Array.from({ length: v.quantidade }).map((_, k) => (
-                    <img
-                      key={k}
-                      src={v.imagemUrl}
-                      alt=""
-                      className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
-                      loading="lazy"
-                    />
-                  ))}
+                <div className="flex-1">
+                  {v.rotulo && (
+                    <div className="text-xs font-black uppercase tracking-wider text-[#0d1f55]/70 mb-1 text-center">
+                      {v.rotulo}
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-1 justify-center">
+                    {Array.from({ length: v.quantidade }).map((_, k) => (
+                      <img
+                        key={k}
+                        src={v.imagemUrl}
+                        alt=""
+                        className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
                 </div>
                 <div className="text-2xl font-black tabular-nums bg-[#0d1f55] text-white h-11 w-11 rounded-xl grid place-items-center">
                   {v.quantidade}
