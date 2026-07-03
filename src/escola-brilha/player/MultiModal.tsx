@@ -435,12 +435,13 @@ function JogoLigar({
             {jogo.pares.map((p) => {
               const ligado = ligacoes[p.a];
               const sel = selA === p.a;
+              const temImg = !!(p.aImagem && p.aQuantidade);
               return (
                 <button
                   key={p.a}
                   ref={(el) => { refsA.current[p.a] = el; }}
                   onClick={() => (ligado ? desligar(p.a) : clicarA(p.a))}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-sm border-2 transition-all flex items-center justify-between gap-2 ${
+                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-sm border-2 transition-all flex items-center gap-2 ${
                     sel
                       ? "bg-[#FBBF24] text-[#0d1f55] border-white scale-105"
                       : ligado
@@ -448,7 +449,24 @@ function JogoLigar({
                         : "bg-white text-[#0d1f55] border-transparent"
                   }`}
                 >
-                  <span className="flex-1">{p.a}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-black uppercase tracking-wider mb-1 opacity-70">
+                      {p.a}
+                    </div>
+                    {temImg && (
+                      <div className="flex flex-wrap gap-0.5">
+                        {Array.from({ length: p.aQuantidade! }).map((_, k) => (
+                          <img
+                            key={k}
+                            src={p.aImagem!}
+                            alt=""
+                            className="h-7 w-7 object-contain"
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <span className="inline-block w-3 h-3 rounded-full bg-[#60A5FA] flex-shrink-0" />
                 </button>
               );
@@ -458,19 +476,29 @@ function JogoLigar({
           <div className="space-y-4">
             {colB.map((b) => {
               const usado = Object.values(ligacoes).includes(b);
+              const par = jogo.pares.find((p) => p.b === b);
+              const temImg = !!(par?.bImagem && par?.bQuantidade);
               return (
                 <button
                   key={b}
                   ref={(el) => { refsB.current[b] = el; }}
                   onClick={() => clicarB(b)}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-sm border-2 transition-all flex items-center gap-2 ${
+                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-2xl border-2 transition-all flex items-center gap-2 ${
                     usado
                       ? "bg-white/90 text-[#0d1f55] border-[#F472B6]"
                       : "bg-white/20 text-white border-transparent"
                   } ${selA ? "hover:scale-105" : ""}`}
                 >
                   <span className="inline-block w-3 h-3 rounded-full bg-[#F472B6] flex-shrink-0" />
-                  <span className="flex-1">{b}</span>
+                  <span className="flex-1 text-center">{b}</span>
+                  {temImg && (
+                    <img
+                      src={par!.bImagem!}
+                      alt=""
+                      className="h-8 w-8 object-contain"
+                      loading="lazy"
+                    />
+                  )}
                 </button>
               );
             })}

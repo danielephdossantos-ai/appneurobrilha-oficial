@@ -7,6 +7,8 @@ import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
 import macacoImg from "@/assets/hiperfocos/animais/macaco.png";
 import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
 import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
+import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
+import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
 
 /**
  * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
@@ -193,13 +195,13 @@ const aula: Aula = {
   interativas: [
     {
       tipo: "ligar",
-      titulo: "Ajude cada animal — quantos alimentos ele tem?",
+      titulo: "Conte e ligue: quantos alimentos cada animal tem?",
       instrucao:
-        "Toque no animal da esquerda e depois no número certo da direita.",
+        "Conte os alimentos de cada animal e ligue no número certo à direita.",
       pares: [
-        { a: "Papagaio (sementes)", b: "8" },
-        { a: "Esquilo (castanhas)", b: "5" },
-        { a: "Coelho (cenouras)", b: "10" },
+        { a: "Papagaio · sementes", b: "8", aImagem: sementeImg, aQuantidade: 8 },
+        { a: "Esquilo · castanhas", b: "5", aImagem: castanhaImg, aQuantidade: 5 },
+        { a: "Coelho · cenouras", b: "10", aImagem: cenouraImg, aQuantidade: 10 },
       ],
     },
     {
