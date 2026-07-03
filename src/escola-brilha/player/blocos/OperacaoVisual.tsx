@@ -35,6 +35,8 @@ export function OperacaoVisual({
   const [contadoTotal, setContadoTotal] = useState(0);
   const [removidos, setRemovidos] = useState(0); // para subtração
   const [replayKey, setReplayKey] = useState(0);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const autoPlayStarted = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const runId = useRef(0);
 
@@ -57,7 +59,27 @@ export function OperacaoVisual({
 
   useEffect(() => {
     if (!autoPlay) return;
-    add(() => rodar(), 400);
+    const start = () => {
+      if (autoPlayStarted.current) return;
+      autoPlayStarted.current = true;
+      add(() => rodar(), 400);
+    };
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      start();
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          start();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlay]);
 
@@ -309,6 +331,7 @@ export function OperacaoVisual({
 
   return (
     <div
+      ref={rootRef}
       className={`rounded-3xl border-4 p-3 ${fase === 0 ? "cursor-pointer" : ""}`}
       style={{ borderColor: cor, background: `${cor}18` }}
       onClick={fase === 0 ? rodar : undefined}
