@@ -39,6 +39,7 @@ export function Quiz({
         <span className="text-xs font-black text-[#22C55E]">✓ {acertos}</span>
       </div>
       <p className="text-lg font-black leading-snug mb-4">{q.pergunta}</p>
+      {q.visual && <QuizVisual visual={q.visual} />}
       <div className="space-y-2">
         {q.opcoes.map((op, idx) => {
           const isSel = sel === idx;
