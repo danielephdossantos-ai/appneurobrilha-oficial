@@ -203,16 +203,13 @@ const aula: Aula = {
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Ligando os pares",
+      titulo: "Fase 3 · Cada passarinho no seu ninho",
       instrucao:
-        "6 passarinhos e 6 ninhos. Ligue cada passarinho a um ninho.",
+        "Conte os passarinhos de cada grupo e ligue no ninho com a MESMA quantidade de ovinhos.",
       pares: [
-        { a: "Passarinho 1", b: "Ninho A", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
-        { a: "Passarinho 2", b: "Ninho B", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
-        { a: "Passarinho 3", b: "Ninho C", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
-        { a: "Passarinho 4", b: "Ninho D", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
-        { a: "Passarinho 5", b: "Ninho E", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
-        { a: "Passarinho 6", b: "Ninho F", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Grupo 2", b: "Ninho com 2", aImagem: passaroImg, aQuantidade: 2, bImagem: ninhoImg, bQuantidade: 2 },
+        { a: "Grupo 3", b: "Ninho com 3", aImagem: passaroImg, aQuantidade: 3, bImagem: ninhoImg, bQuantidade: 3 },
+        { a: "Grupo 5", b: "Ninho com 5", aImagem: passaroImg, aQuantidade: 5, bImagem: ninhoImg, bQuantidade: 5 },
       ],
     },
     {
@@ -257,14 +254,24 @@ const aula: Aula = {
     {
       tipo: "ordenar",
       titulo: "Do menor para o maior",
-      instrucao: "Arraste as quantidades em ordem crescente.",
+      instrucao: "Arraste os grupos em ordem crescente (menor em cima, maior embaixo).",
       itens: ["3 estrelas", "5 cenouras", "9 maçãs"],
+      imagens: [
+        { imagemUrl: estrelaImg, quantidade: 3, rotulo: "3 estrelas" },
+        { imagemUrl: cenouraImg, quantidade: 5, rotulo: "5 cenouras" },
+        { imagemUrl: macaImg, quantidade: 9, rotulo: "9 maçãs" },
+      ],
     },
     {
       tipo: "arrastar",
       titulo: "Organizando a festa: 4 doces em cada prato",
       instrucao:
-        "Arraste cada doce para o prato certo. Cada prato deve ter exatamente 4 doces.",
+        "Cada prato deve receber exatamente a quantidade de doces do número. Toque em um doce e depois no prato certo.",
+      itemImagem: doceImg,
+      alvosVisuais: [
+        { nome: "Prato Azul", cor: "#3B82F6", capacidade: 4 },
+        { nome: "Prato Vermelho", cor: "#EF4444", capacidade: 4 },
+      ],
       pares: [
         { item: "Doce 1", alvo: "Prato Azul" },
         { item: "Doce 2", alvo: "Prato Azul" },
