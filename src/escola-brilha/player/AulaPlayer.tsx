@@ -46,10 +46,12 @@ const BLOCOS_BASE = [
   { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
   { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },
   { id: "desafio",    nome: "Desafio",        etapa: 4, etapaNome: "Praticar"   },
-  { id: "quiz",       nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
-  { id: "resumo",     nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
-  { id: "conclusao",  nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
+  { id: "quiz",        nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
+  { id: "resumo",      nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
+  { id: "curiosidade", nome: "Curiosidade",    etapa: 5, etapaNome: "Conquistar" },
+  { id: "conclusao",   nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
 ] as const;
+
 
 type BlocoId = typeof BLOCOS_BASE[number]["id"];
 
