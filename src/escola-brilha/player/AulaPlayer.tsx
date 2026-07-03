@@ -17,7 +17,9 @@ import { ProgressaoNiveis } from "./blocos/ProgressaoNiveis";
 import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
+import { Curiosidade } from "./blocos/Curiosidade";
 import { Conclusao } from "./blocos/Conclusao";
+
 import { Diagnostico } from "./blocos/Diagnostico";
 import { MultiModal } from "./MultiModal";
 import { ProfessorVirtual } from "./ProfessorVirtual";
