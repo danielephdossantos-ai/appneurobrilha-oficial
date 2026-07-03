@@ -4,7 +4,7 @@ import blocoImg from "@/assets/neuro-treino/objetos/bloco.png";
 import laranjaImg from "@/assets/neuro-treino/frutas/laranja.png";
 import livroImg from "@/assets/neuro-treino/objetos/livro.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import macacoImg from "@/assets/neuro-treino/objetos/macaco.png";
+
 import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
 import macaImg from "@/assets/neuro-treino/objetos/maca.png";
 import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
