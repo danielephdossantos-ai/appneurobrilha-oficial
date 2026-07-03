@@ -77,9 +77,15 @@ export function AulaPlayer({
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
   const BLOCOS = useMemo(
-    () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
-    [aula.narrativa],
+    () =>
+      BLOCOS_BASE.filter((b) => {
+        if (b.id === "narrativa" && !aula.narrativa) return false;
+        if (b.id === "curiosidade" && !aula.curiosidade) return false;
+        return true;
+      }),
+    [aula.narrativa, aula.curiosidade],
   );
+
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
