@@ -423,3 +423,75 @@ function renderBloco(
       return null;
   }
 }
+
+/**
+ * Monta o texto completo da aula para o botão "Escutar explicação".
+ * Inclui todos os blocos, na ordem em que aparecem na tela.
+ */
+function montarTextoAula(a: Aula): string {
+  const partes: string[] = [];
+  const add = (s?: string | null) => {
+    const t = (s ?? "").toString().trim();
+    if (t) partes.push(t);
+  };
+
+  add(a.titulo);
+  if (a.narrativa) {
+    add(a.narrativa.titulo);
+    add(a.narrativa.contexto);
+    add(a.narrativa.problema);
+    add(a.narrativa.convite);
+  }
+  add("Missão.");
+  add(a.missao);
+  if (a.objetivos?.length) {
+    add("Nossos objetivos são:");
+    a.objetivos.forEach((o) => add(o));
+  }
+  add("Vamos à explicação.");
+  add(a.explicacao);
+  if (a.explicacaoAtiva?.length) {
+    a.explicacaoAtiva.forEach((p) => {
+      add(p.texto);
+      if (p.exemplo) add(`Exemplo: ${p.exemplo}`);
+    });
+  }
+  if (a.exemploResolvido) {
+    add("Vamos ver um exemplo.");
+    add(a.exemploResolvido.enunciado);
+    a.exemploResolvido.passos?.forEach((p) => add(p));
+    add(`Resposta: ${a.exemploResolvido.resposta}`);
+  }
+  if (a.atividadeGuiada) {
+    add("Agora a prática guiada.");
+    add(a.atividadeGuiada.enunciado);
+    add(a.atividadeGuiada.explicacao);
+    add(`Resposta: ${a.atividadeGuiada.resposta}`);
+  }
+  if (a.exercicios?.length) {
+    add("Vamos treinar.");
+    a.exercicios.forEach((e, i) => {
+      add(`Exercício ${i + 1}. ${e.enunciado}`);
+      if (e.dica) add(`Dica: ${e.dica}`);
+    });
+  }
+  if (a.desafio?.enunciado) {
+    add("Desafio.");
+    add(a.desafio.enunciado);
+  }
+  if (a.revisao) {
+    add("Resumo.");
+    a.revisao.pontos?.forEach((p) => add(p));
+    if (a.revisao.dica) add(`Dica: ${a.revisao.dica}`);
+  }
+  if (a.curiosidade?.texto) {
+    add("Você sabia?");
+    add(a.curiosidade.texto);
+  }
+  if (a.conclusao) {
+    add("Conclusão.");
+    add(a.conclusao);
+  }
+  return partes.join(". ").replace(/\.\.+/g, ".");
+}
+
