@@ -649,3 +649,101 @@ function JogoMontar({
     </Secao>
   );
 }
+
+/* --- Contar Quiz --- */
+function JogoContarQuiz({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "contarQuiz" }>;
+}) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const acertou = escolha === jogo.correta;
+  return (
+    <Secao icon={Sparkles} rotulo="Fase" cor="#FFC93C">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+
+      <div
+        className={`grid gap-3 mb-4 ${
+          jogo.grupos.length === 1
+            ? "grid-cols-1"
+            : jogo.grupos.length === 2
+              ? "grid-cols-2"
+              : "grid-cols-1 sm:grid-cols-3"
+        }`}
+      >
+        {jogo.grupos.map((g, i) => (
+          <div
+            key={i}
+            className="rounded-2xl bg-white/10 border-2 border-white/20 p-3"
+          >
+            {g.rotulo && (
+              <div className="text-xs font-black uppercase tracking-wider text-white/70 text-center mb-2">
+                {g.rotulo}
+              </div>
+            )}
+            <div className="flex flex-wrap justify-center gap-1.5">
+              {Array.from({ length: g.quantidade }).map((_, k) => (
+                <img
+                  key={k}
+                  src={g.imagemUrl}
+                  alt=""
+                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p className="font-black text-base mb-2 text-center">{jogo.pergunta}</p>
+      <div className="grid grid-cols-3 gap-2 mb-2">
+        {jogo.opcoes.map((op, i) => {
+          const selecionada = escolha === i;
+          const certa = escolha !== null && i === jogo.correta;
+          const errada = selecionada && i !== jogo.correta;
+          return (
+            <button
+              key={i}
+              onClick={() => setEscolha(i)}
+              disabled={escolha !== null && acertou}
+              className={`h-14 rounded-2xl font-black text-xl border-4 transition-all ${
+                certa
+                  ? "bg-[#22C55E] text-white border-white"
+                  : errada
+                    ? "bg-[#EF4444] text-white border-white"
+                    : selecionada
+                      ? "bg-[#FBBF24] text-[#0d1f55] border-white"
+                      : "bg-white text-[#0d1f55] border-transparent active:scale-95"
+              }`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <Status
+          ok={acertou}
+          texto={
+            acertou
+              ? jogo.acerto ?? "Excelente! Você acertou!"
+              : jogo.erro ?? "Ainda não é essa. Conte de novo com calma."
+          }
+        />
+      )}
+      {escolha !== null && !acertou && (
+        <button
+          onClick={() => setEscolha(null)}
+          className="mt-2 w-full h-10 rounded-xl bg-white/15 font-black text-white"
+        >
+          Tentar de novo
+        </button>
+      )}
+    </Secao>
+  );
+}
+
