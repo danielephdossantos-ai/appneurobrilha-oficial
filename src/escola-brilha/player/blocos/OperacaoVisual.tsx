@@ -162,53 +162,46 @@ export function OperacaoVisual({
 
   const Icone = operacao === "soma" ? Plus : Minus;
 
-  // Renderiza um grupo de imagens; destaca as já contadas
+  // Renderiza APENAS as imagens já reveladas (aparecem uma por uma).
   const Grupo = ({
-    total,
-    contados,
+    mostrar,
     riscados = 0,
+    total,
   }: {
-    total: number;
-    contados: number;
+    mostrar: number;
     riscados?: number;
+    total: number; // usado só para reservar largura
   }) => (
-    <div className="flex flex-wrap gap-1.5 items-center justify-center max-w-[160px]">
-      <AnimatePresence>
-        {Array.from({ length: total }).map((_, i) => {
-          const foiContado = i < contados;
-          const foiRiscado = i >= total - riscados;
-          return (
-            <motion.div
-              key={i}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: foiContado ? 1.15 : 1,
-                opacity: foiRiscado ? 0.25 : 1,
-              }}
-              transition={{ duration: 0.35 }}
-              className="relative"
-            >
-              <img
-                src={imagemUrl}
-                alt=""
-                className="h-11 w-11 sm:h-12 sm:w-12 object-contain drop-shadow"
-                style={{
-                  filter: foiContado
-                    ? `drop-shadow(0 0 6px ${cor})`
-                    : undefined,
-                }}
-              />
-              {foiRiscado && (
-                <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
-                  ✕
-                </span>
-              )}
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
+    <div
+      className="flex flex-wrap gap-1.5 items-center justify-center"
+      style={{ minWidth: Math.min(total, 5) * 52 }}
+    >
+      {Array.from({ length: mostrar }).map((_, i) => {
+        const foiRiscado = i >= mostrar - riscados && riscados > 0;
+        return (
+          <motion.div
+            key={i}
+            initial={{ scale: 0, opacity: 0, y: -12 }}
+            animate={{ scale: 1, opacity: foiRiscado ? 0.3 : 1, y: 0 }}
+            transition={{ duration: 0.35, ease: "backOut" }}
+            className="relative"
+          >
+            <img
+              src={imagemUrl}
+              alt=""
+              className="h-11 w-11 sm:h-12 sm:w-12 object-contain drop-shadow"
+            />
+            {foiRiscado && (
+              <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
+                ✕
+              </span>
+            )}
+          </motion.div>
+        );
+      })}
     </div>
   );
+
 
   return (
     <div
