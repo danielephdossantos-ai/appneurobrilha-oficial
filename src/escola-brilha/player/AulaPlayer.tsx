@@ -245,6 +245,34 @@ export function AulaPlayer({
         </div>
       </div>
 
+      {tts.supported && (
+        <div className="px-4 pt-3">
+          <button
+            onClick={speakTudo}
+            className={`w-full h-14 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg transition-colors ${
+              tts.speaking
+                ? "bg-gradient-to-r from-[#EF4444] to-[#F97316] text-white"
+                : "bg-gradient-to-r from-[#22C55E] to-[#10B981] text-white"
+            }`}
+            aria-label={tts.speaking ? "Parar leitura da aula" : "Escutar toda a explicação da aula"}
+          >
+            {tts.speaking ? (
+              <>
+                <Square className="h-5 w-5 fill-current" /> Parar leitura
+              </>
+            ) : (
+              <>
+                <Headphones className="h-5 w-5" /> Escutar explicação da aula
+              </>
+            )}
+          </button>
+          <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/60 mt-1">
+            O professor lê a aula toda em voz alta
+          </p>
+        </div>
+      )}
+
+
       <div className="px-4 pt-5">
         {emDiagnostico ? (
           <Diagnostico
