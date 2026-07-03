@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useLayoutEffect } from "react";
 import { motion, Reorder } from "framer-motion";
 import {
   Image as ImageIcon,
