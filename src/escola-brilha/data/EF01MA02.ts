@@ -1,168 +1,318 @@
 import type { Aula } from "../types";
+import cenouraImg from "@/assets/neuro-treino/vegetais/cenoura.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
+import joaninhaImg from "@/assets/neuro-treino/objetos/joaninha.png";
+import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
+import macacoImg from "@/assets/hiperfocos/animais/macaco.png";
+import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
+import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
 
 /**
- * EF01MA02 — Matemática · 1º Ano
- * Habilidade BNCC: Contar de maneira exata ou aproximada, utilizando
- * diferentes estratégias como o pareamento e outros agrupamentos.
+ * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
+ * Ensino Fundamental I · 1º Ano · Matemática
+ * BNCC: Contar, de maneira exata ou aproximada, utilizando diferentes
+ * estratégias, como o pareamento e outros agrupamentos.
+ *
+ * Missão do Dia: "A Floresta das Contagens" (esquilo Brilha).
+ * Padrão: usa banco de mídias real — sem emojis nas atividades interativas.
  */
 const aula: Aula = {
   codigo: "EF01MA02",
   ano: "1º Ano",
   disciplina: "Matemática",
-  titulo: "Jeitos espertos de contar",
+  titulo: "A Floresta das Contagens",
 
   narrativa: {
-    titulo: "A festa de aniversário da Lila",
+    titulo: "A Floresta das Contagens",
     contexto:
-      "Hoje é o aniversário da coelhinha Lila. Ela convidou um monte de amigos e comprou brigadeiros pra caramba. Só que a mãe da Lila pediu ajuda: precisa saber, rapidinho, quantos brigadeiros tem em cada bandeja pra ninguém ficar sem.",
+      "O esquilo Brilha recebeu uma missão importante. Os animais da floresta estão organizando uma grande festa, mas ninguém sabe se há frutas suficientes para todos. A Dona Coelha colheu cenouras, o Macaco separou bananas e a Tartaruga juntou folhas — ninguém contou nada ainda!",
     problema:
-      "Contar de um em um vai demorar a tarde inteira — e a festa começa em cinco minutos! A Lila precisa de um jeito mais esperto de contar, senão os amigos vão chegar e nada estará pronto.",
-    convite:
-      "Vamos descobrir juntos jeitos espertos de contar rapidinho e salvar a festa da Lila?",
+      "Se contarem errado, vai faltar comida na festa. Será que dá pra contar rápido e sem errar?",
+    convite: "Vamos ajudar os animais a contar de vários jeitos?",
   },
 
-
-
   conhecimentosPrevios: [
-    "Contar oralmente até 20 sem se perder.",
-    "Reconhecer grupos iguais (dois a dois, cinco a cinco).",
-    "Comparar 'tem mais' e 'tem menos' entre dois grupos.",
+    "Contar oralmente até 10 sem se perder.",
+    "Apontar cada objeto ao contar (um a um).",
+    "Comparar dois grupos e dizer qual tem mais.",
   ],
-
-  diagnostico: [
-    {
-      pergunta: "Se você tem 2 pares de meias, quantas meias tem no total?",
-      opcoes: ["2 meias", "3 meias", "4 meias"],
-      correta: 2,
-      explicacao: "Cada par tem 2 meias. 2 pares = 2 + 2 = 4 meias. Isso é contar de dois em dois!",
-    },
-    {
-      pergunta: "Contando de 5 em 5, qual número vem depois do 10?",
-      opcoes: ["11", "15", "20"],
-      correta: 1,
-      explicacao: "5, 10, 15… a gente pula de 5 em 5. Depois do 10 vem o 15.",
-    },
-    {
-      pergunta: "Se você olha rápido para um punhado de balas e chuta 'mais ou menos 10', isso é contar…",
-      opcoes: ["Exato", "Aproximado", "Errado"],
-      correta: 1,
-      explicacao: "Chutar perto do certo, sem contar uma a uma, é a contagem aproximada.",
-    },
-  ],
-
 
   missao:
-    "Aprender truques mágicos pra contar muito mais rápido do que contando uma coisinha por vez.",
+    "Descobrir que existem várias maneiras de contar: um a um, formando pares, agrupando e comparando coleções.",
 
   objetivos: [
-    "Contar de maneira exata, sem pular nenhuma coisinha.",
-    "Contar de maneira aproximada (chutando perto do certo).",
-    "Usar pareamento (de 2 em 2) pra contar rápido.",
-    "Usar agrupamento (de 5 em 5, de 10 em 10) pra contar quantidades grandes.",
+    "Contar objetos um a um sem pular nenhum.",
+    "Formar grupos iguais para contar mais rápido.",
+    "Parear objetos (um pra um) para descobrir a quantidade.",
+    "Comparar duas coleções e dizer qual tem mais ou menos.",
   ],
 
   motivacao:
-    "Imagina que a professora esvazia um saco de tampinhas na mesa e pergunta: “Quantas tem aí?”. Você pode contar uma por uma… ou pode ser esperto e usar um truque pra descobrir mais rápido. Bora aprender esses truques?",
+    "Nem sempre a gente precisa contar de um em um. Quando tem muita coisa, dá pra fazer grupinhos e contar bem mais rápido. Bora aprender esses truques com os animais da floresta?",
 
   explicacao:
-    "Existem dois jeitos de contar:\n\n• EXATO — você conta cada coisa, uma de cada vez: 1, 2, 3, 4…\n• APROXIMADO — você olha e chuta um número perto do certo, sem contar tudo.\n\nE existem TRUQUES que ajudam a contar rápido:\n\n1) PAREAMENTO — juntar de dois em dois. Se a gente forma 5 pares, sabemos que são 10.\n2) AGRUPAMENTO — juntar em grupinhos iguais (de 2, de 5, de 10). Aí conta os grupos: 5, 10, 15, 20.\n\nQuando tem POUCA coisa, contar exato é fácil. Quando tem MUITA, agrupar salva a vida.",
+    "Hoje você vai aprender que existem VÁRIAS maneiras de contar:\n\n• UM A UM — aponte cada objeto e diga o número: 1, 2, 3, 4, 5.\n• EM PARES — junte de dois em dois: 2, 4, 6, 8.\n• EM GRUPOS — faça grupinhos iguais (de 3, de 5, de 10) e conte os grupos.\n• COMPARANDO — coloque duas coleções lado a lado e veja qual tem mais.\n\nCada situação pede uma estratégia diferente. Quando tem POUCA coisa, contar um a um é fácil. Quando tem MUITA, agrupar salva a vida.",
+
+  explicacoesNiveis: {
+    nivel1: "Podemos contar de vários jeitos: um a um, em pares ou em grupos.",
+    nivel2:
+      "3 grupos de 3 maçãs = 9 maçãs. Contar em grupos é mais rápido.",
+    nivel3:
+      "Se cada passarinho encontra um ninho, dá pra saber a quantidade sem errar.",
+    nivel4:
+      "Em casa você conta sapatos em pares, ovos em dúzia (grupos de 12) e figurinhas em grupos de 10.",
+  },
 
   exemploResolvido: {
-    enunciado: "Tem 12 lápis espalhados na mesa. Como contar rápido usando pareamento?",
+    enunciado: "A Dona Coelha colheu cenouras. Quantas ela colheu?",
     passos: [
-      "Junte os lápis de 2 em 2 formando pares.",
-      "Com 12 lápis, você forma 6 pares.",
-      "Conte os pares pulando de 2 em 2: 2, 4, 6, 8, 10, 12.",
+      "Toque em cada cenoura da tela — uma por vez.",
+      "Para cada toque, diga em voz alta: 1, 2, 3, 4, 5.",
+      "Quando não sobrar nenhuma cenoura sem tocar, o último número é a resposta.",
     ],
-    resposta: "São 12 lápis — bem mais rápido do que contar um por um!",
+    resposta: "5 cenouras — contar um a um funciona bem com poucas coisas.",
+    interativo: {
+      tipo: "contagem",
+      imagemUrl: cenouraImg,
+      quantidade: 5,
+      nomeItem: "cenoura",
+      nomeItemPlural: "cenouras",
+      pergunta: "Quantas cenouras a Dona Coelha colheu?",
+    },
   },
 
   atividadeGuiada: {
     enunciado:
-      "Tem 8 balas em cima da mesa. Como contar rápido usando PAREAMENTO?",
-    resposta: "Formo 4 pares (de 2 em 2) e conto: 2, 4, 6, 8.",
+      "O Macaco separou as bananas em 3 grupos iguais, com 3 bananas em cada grupo. Quantas bananas ele tem ao todo?",
+    resposta: "9 bananas — 3 grupos de 3 dão 9.",
     explicacao:
-      "Pareamento é juntar de dois em dois. Cada par vale 2, então 4 pares valem 8.",
+      "Quando fazemos grupos iguais, é só somar (ou pular de 3 em 3): 3, 6, 9. Contar em grupos é muito mais rápido do que contar uma por uma.",
   },
 
   exercicios: [
     {
       enunciado:
-        "Olhando rápido pra um pote com muitas jujubas, você diz 'tem umas 30 jujubas'. Isso é exato ou aproximado?",
-      resposta: "APROXIMADO — você chutou um número perto sem contar uma por uma.",
-      dica: "Se você não contou cada uma, mas deu um palpite bom, é aproximado.",
+        "🥕 A Dona Coelha tem 5 cenouras. Qual é o melhor jeito de contar?",
+      resposta: "Um a um — porque tem poucas cenouras.",
+      dica: "Quando tem pouca coisa, apontar uma por vez é rápido.",
     },
     {
       enunciado:
-        "Você tem 20 figurinhas. Qual o jeito mais rápido: contar uma por uma ou agrupar de 10 em 10?",
-      resposta: "Agrupar de 10 em 10 — só 2 grupinhos e você já sabe: 10 e 10 são 20.",
-      dica: "Quantos grupos de 10 cabem em 20?",
+        "🍎 O Macaco tem 9 maçãs organizadas em 3 grupos de 3. Qual estratégia é mais rápida?",
+      resposta: "Contar em grupos: 3, 6, 9.",
+      dica: "Cada grupo tem 3. Pule de 3 em 3.",
     },
     {
-      enunciado: "Tem 15 estrelinhas. Se você agrupar de 5 em 5, quantos grupos formam?",
-      resposta: "3 grupos — porque 5 + 5 + 5 = 15.",
-      dica: "Conte pulando de 5 em 5: 5, 10, 15…",
+      enunciado:
+        "🐦 O passarinho quer saber se cada filhote tem seu ninho. Como descobrir sem errar?",
+      resposta:
+        "Fazendo o PAREAMENTO — cada passarinho para cada ninho. Se sobrar ou faltar, a gente vê na hora.",
+      dica: "Um passarinho pra cada ninho. Sobrou algum? Faltou algum?",
     },
   ],
 
   desafio: {
     enunciado:
-      "Você olha um saco de balas por 2 segundos e não dá pra contar todas. Que tipo de contagem você vai usar, e por quê?",
+      "Desafio Brilha: o Papagaio tem 8 sementes, o Esquilo tem 5 castanhas e o Coelho tem 10 cenouras. Quem tem MAIS alimentos? Quem tem MENOS? Quem tem exatamente 8?",
     resposta:
-      "APROXIMADA — porque não deu tempo de contar exato. Você olha o tamanho do monte e chuta um número perto.",
+      "MAIS: Coelho (10). MENOS: Esquilo (5). Exatamente 8: Papagaio.",
   },
 
   revisao: {
     pontos: [
-      "Contagem exata: contar cada coisinha.",
-      "Contagem aproximada: chutar perto do certo.",
-      "Pareamento: juntar de 2 em 2.",
-      "Agrupamento: juntar de 5 em 5 ou 10 em 10.",
-      "Quando tem muita coisa, agrupar é mais rápido.",
+      "Contar um a um funciona bem quando tem poucas coisas.",
+      "Formar pares (um pra um) mostra se falta ou sobra.",
+      "Agrupar em quantidades iguais ajuda a contar rápido.",
+      "Comparar coleções mostra qual tem mais e qual tem menos.",
     ],
-    dica: "Quando tiver muita coisa, não conte uma por uma — junte em grupinhos iguais e conte os grupos.",
+    dica: "Antes de contar, olha o tamanho do monte e escolhe a estratégia certa.",
   },
 
   quiz: [
     {
-      pergunta: "Contar uma coisinha por vez, sem pular nenhuma, é contagem:",
-      opcoes: ["Exata", "Aproximada", "Errada"],
+      pergunta: "Qual é a melhor maneira de contar MUITOS objetos iguais?",
+      opcoes: ["Contar em grupos", "Fechar os olhos", "Escolher qualquer número"],
       correta: 0,
-      explicacao: "Quando você conta cada uma, o resultado é exato.",
+      explicacao: "Grupos iguais deixam a contagem muito mais rápida.",
     },
     {
-      pergunta: "Você olha um cacho de uvas e diz: 'tem umas 15 uvas'. Isso é:",
-      opcoes: ["Contagem exata", "Contagem aproximada", "Pareamento"],
-      correta: 1,
-      explicacao:
-        "Você chutou um número perto sem contar uma por uma — é aproximado.",
-    },
-    {
-      pergunta: "Juntar 10 pedrinhas de 2 em 2 e formar 5 pares é:",
-      opcoes: ["Pareamento", "Agrupamento de 10", "Chute"],
+      pergunta:
+        "Se existem 7 gatos e 7 potinhos de comida, todos conseguem comer?",
+      opcoes: ["Sim, cada gato recebe um potinho", "Não, vai faltar", "Não, vai sobrar"],
       correta: 0,
-      explicacao: "Parear é juntar de 2 em 2. 5 pares dão 10.",
+      explicacao:
+        "Como as duas quantidades são iguais, o pareamento é perfeito.",
     },
     {
-      pergunta: "Qual é o jeito mais rápido de contar 30 tampinhas?",
-      opcoes: [
-        "Contar uma por uma",
-        "Agrupar de 10 em 10 e ter 3 grupinhos",
-        "Fechar os olhos e chutar",
-      ],
+      pergunta:
+        "Grupo A tem 5 bananas. Grupo B tem 3 bananas. Quem tem MAIS?",
+      opcoes: ["Grupo A", "Grupo B", "Estão iguais"],
+      correta: 0,
+      explicacao: "5 é maior que 3 — o Grupo A tem mais.",
+    },
+    {
+      pergunta:
+        "Você tinha 3 estrelas e agora tem 5. Quantas estrelas foram acrescentadas?",
+      opcoes: ["1", "2", "3"],
       correta: 1,
-      explicacao:
-        "Com 3 grupos de 10 você já sabe: 10, 20, 30. Muito mais rápido!",
+      explicacao: "De 3 pra 5 são 2 estrelas a mais (3 + 2 = 5).",
     },
   ],
 
   conclusao:
-    "Agora você tem superpoderes de contagem! Da próxima vez que ver muita coisa junta, lembra: parear de 2, agrupar de 5, agrupar de 10 — escolha o truque e conte rápido.",
+    "🏅 Medalha conquistada: Contador da Floresta! Agora você conhece vários jeitos de contar — um a um, em pares, em grupos ou comparando. Missão em Casa: conte cadeiras, copos, brinquedos, sapatos e almofadas. Depois diga qual grupo tem MAIS e qual tem MENOS.",
+
+  midias: [
+    {
+      tipo: "imagem",
+      url: cenouraImg,
+      alt: "Cenoura",
+      legenda: "Dona Coelha: cenouras para contar uma a uma.",
+    },
+    {
+      tipo: "imagem",
+      url: macaImg,
+      alt: "Maçã",
+      legenda: "Macaco: 3 grupos de 3 maçãs = 9 maçãs.",
+    },
+    {
+      tipo: "imagem",
+      url: joaninhaImg,
+      alt: "Joaninha",
+      legenda: "Joaninhas: qual grupo tem mais?",
+    },
+    {
+      tipo: "imagem",
+      url: estrelaImg,
+      alt: "Estrela",
+      legenda: "Estrelas: quantas foram acrescentadas?",
+    },
+  ],
+
+  interativas: [
+    {
+      tipo: "ligar",
+      titulo: "Ajude cada animal — quantos alimentos ele tem?",
+      instrucao:
+        "Toque no animal da esquerda e depois no número certo da direita.",
+      pares: [
+        { a: "Papagaio (sementes)", b: "8" },
+        { a: "Esquilo (castanhas)", b: "5" },
+        { a: "Coelho (cenouras)", b: "10" },
+      ],
+    },
+    {
+      tipo: "ordenar",
+      titulo: "Do menor para o maior",
+      instrucao: "Arraste as quantidades em ordem crescente.",
+      itens: ["3 estrelas", "5 cenouras", "9 maçãs"],
+    },
+    {
+      tipo: "arrastar",
+      titulo: "Organizando a festa: 4 doces em cada prato",
+      instrucao:
+        "Arraste cada doce para o prato certo. Cada prato deve ter exatamente 4 doces.",
+      pares: [
+        { item: "Doce 1", alvo: "Prato Azul" },
+        { item: "Doce 2", alvo: "Prato Azul" },
+        { item: "Doce 3", alvo: "Prato Azul" },
+        { item: "Doce 4", alvo: "Prato Azul" },
+        { item: "Doce 5", alvo: "Prato Vermelho" },
+        { item: "Doce 6", alvo: "Prato Vermelho" },
+        { item: "Doce 7", alvo: "Prato Vermelho" },
+        { item: "Doce 8", alvo: "Prato Vermelho" },
+      ],
+    },
+  ],
+
+  niveis: {
+    dominioMinimo: 70,
+    facil: [
+      {
+        pergunta:
+          "A Dona Coelha colheu cenouras. Contando uma a uma dá quantas?",
+        opcoes: ["3", "4", "5"],
+        correta: 2,
+        explicacao: "Apontando uma a uma: 1, 2, 3, 4, 5 cenouras.",
+      },
+      {
+        pergunta:
+          "O Macaco tem 3 grupos com 3 maçãs cada. Contando em grupos (3, 6, 9), quantas maçãs ao todo?",
+        opcoes: ["6", "8", "9"],
+        correta: 2,
+        explicacao: "3 + 3 + 3 = 9 maçãs.",
+      },
+      {
+        pergunta:
+          "Grupo A tem 4 joaninhas. Grupo B tem 6 joaninhas. Quem tem MAIS?",
+        opcoes: ["Grupo A", "Grupo B", "Iguais"],
+        correta: 1,
+        explicacao: "6 é maior que 4 — o Grupo B tem mais joaninhas.",
+      },
+    ],
+    medio: [
+      {
+        pergunta:
+          "Tinha 3 estrelas. Agora tem 5. Quantas estrelas foram acrescentadas?",
+        opcoes: ["1", "2", "3"],
+        correta: 1,
+        explicacao: "3 + 2 = 5. Foram acrescentadas 2 estrelas.",
+      },
+      {
+        pergunta:
+          "6 passarinhos e 6 ninhos. Cada passarinho encontra um ninho?",
+        opcoes: ["Sim, todos", "Não, sobra passarinho", "Não, sobra ninho"],
+        correta: 0,
+        explicacao: "Como as quantidades são iguais, o pareamento é perfeito.",
+      },
+      {
+        pergunta:
+          "Você quer contar 20 tampinhas rápido. Qual estratégia é melhor?",
+        opcoes: [
+          "Uma por uma",
+          "Formando grupos iguais",
+          "Fechar os olhos e chutar",
+        ],
+        correta: 1,
+        explicacao:
+          "Formando grupos (por exemplo, 4 grupos de 5) fica muito mais rápido.",
+      },
+    ],
+    dificil: [
+      {
+        pergunta:
+          "Papagaio tem 8 sementes, Esquilo tem 5 castanhas, Coelho tem 10 cenouras. Quem tem MAIS?",
+        opcoes: ["Papagaio", "Esquilo", "Coelho"],
+        correta: 2,
+        explicacao: "10 é a maior quantidade — o Coelho tem mais.",
+      },
+      {
+        pergunta: "E quem tem MENOS?",
+        opcoes: ["Papagaio", "Esquilo", "Coelho"],
+        correta: 1,
+        explicacao: "5 é a menor quantidade — o Esquilo tem menos.",
+      },
+      {
+        pergunta: "Quem tem EXATAMENTE 8?",
+        opcoes: ["Papagaio", "Esquilo", "Coelho"],
+        correta: 0,
+        explicacao: "O Papagaio tem 8 sementes.",
+      },
+    ],
+  },
 
   proximaHabilidade: {
     codigo: "EF01MA03",
     titulo: "Comparar quantidades e descobrir qual é maior",
   },
 };
+
+// Imports mantidos para futura expansão de mídia visual (Coelha, Macaco,
+// Tartaruga, Banana) sem quebrar o padrão do banco de mídias.
+void coelhoImg;
+void macacoImg;
+void tartarugaImg;
+void bananaImg;
 
 export default aula;
