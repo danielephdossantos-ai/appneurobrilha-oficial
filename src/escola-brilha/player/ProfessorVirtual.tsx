@@ -17,7 +17,9 @@ type BlocoId =
   | "desafio"
   | "quiz"
   | "resumo"
+  | "curiosidade"
   | "conclusao";
+
 
 /**
  * Professor Virtual (Profª Brilha) — mascote fixo que acompanha
