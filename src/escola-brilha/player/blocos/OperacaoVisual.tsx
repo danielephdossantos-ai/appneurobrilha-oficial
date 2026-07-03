@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, RotateCcw, Plus, Minus } from "lucide-react";
-import { speakChunked } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Props = {
   operacao: "soma" | "subtracao";
