@@ -260,24 +260,62 @@ function JogoOrdenar({
   const [ordem, setOrdem] = useState(embaralhados);
   const [checked, setChecked] = useState(false);
   const ok = ordem.every((v, i) => v === jogo.itens[i]);
+  const ehPodio = jogo.itens.every((i) => /^[123]º/.test(i));
+  const estilos: Record<string, { h: string; bg: string; medal: string; label: string }> = {
+    "1º": { h: "h-40", bg: "bg-gradient-to-b from-[#FFD700] to-[#B8860B]", medal: "🥇", label: "1º" },
+    "2º": { h: "h-32", bg: "bg-gradient-to-b from-[#E5E7EB] to-[#9CA3AF]", medal: "🥈", label: "2º" },
+    "3º": { h: "h-24", bg: "bg-gradient-to-b from-[#F59E0B] to-[#92400E]", medal: "🥉", label: "3º" },
+  };
   return (
     <Secao icon={ListOrdered} rotulo="Ordene" cor="#34D399">
-      <p className="font-black mb-1">{jogo.titulo}</p>
-      <p className="text-sm text-white/70 mb-3">{jogo.instrucao}</p>
-      <Reorder.Group axis="y" values={ordem} onReorder={setOrdem} className="space-y-2">
-        {ordem.map((v) => (
-          <Reorder.Item
-            key={v}
-            value={v}
-            className="rounded-xl bg-white text-[#0d1f55] font-black px-3 py-3 cursor-grab active:cursor-grabbing shadow"
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      {ehPodio ? (
+        <>
+          <p className="text-sm text-white/60 mb-2">
+            Arraste os pódios da esquerda para a direita na ordem: 1º, 2º, 3º.
+          </p>
+          <Reorder.Group
+            axis="x"
+            values={ordem}
+            onReorder={setOrdem}
+            className="flex items-end justify-center gap-3 py-3 bg-white/5 rounded-2xl border-2 border-white/10 min-h-[200px]"
           >
-            ≡ {v}
-          </Reorder.Item>
-        ))}
-      </Reorder.Group>
+            {ordem.map((v) => {
+              const key = v.slice(0, 2);
+              const est = estilos[key] ?? estilos["3º"];
+              return (
+                <Reorder.Item
+                  key={v}
+                  value={v}
+                  className={`${est.h} w-24 ${est.bg} rounded-t-2xl shadow-2xl flex flex-col items-center justify-start pt-2 cursor-grab active:cursor-grabbing border-4 border-white/40`}
+                  whileDrag={{ scale: 1.1, zIndex: 10 }}
+                >
+                  <div className="text-5xl">{est.medal}</div>
+                  <div className="text-2xl font-black text-[#0d1f55] mt-1">
+                    {est.label}
+                  </div>
+                </Reorder.Item>
+              );
+            })}
+          </Reorder.Group>
+        </>
+      ) : (
+        <Reorder.Group axis="y" values={ordem} onReorder={setOrdem} className="space-y-2">
+          {ordem.map((v) => (
+            <Reorder.Item
+              key={v}
+              value={v}
+              className="rounded-xl bg-white text-[#0d1f55] font-black px-3 py-3 cursor-grab active:cursor-grabbing shadow"
+            >
+              ≡ {v}
+            </Reorder.Item>
+          ))}
+        </Reorder.Group>
+      )}
       <button
         onClick={() => setChecked(true)}
-        className="mt-3 w-full h-10 rounded-xl bg-[#34D399] text-[#0d1f55] font-black"
+        className="mt-3 w-full h-12 rounded-xl bg-[#34D399] text-[#0d1f55] font-black text-lg"
       >
         Conferir ordem
       </button>
@@ -287,6 +325,7 @@ function JogoOrdenar({
     </Secao>
   );
 }
+
 
 /* --- Ligar --- */
 function JogoLigar({
