@@ -7,6 +7,8 @@ import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
 import macacoImg from "@/assets/hiperfocos/animais/macaco.png";
 import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
 import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
+import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
+import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
 
 /**
  * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
