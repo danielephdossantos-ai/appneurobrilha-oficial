@@ -110,8 +110,13 @@ export function AulaPlayer({
 
   useEffect(() => {
     if (progresso.carregado && !retomado && diagnosticoGlobalFeito !== null) {
-      const alvo = progresso.concluida ? 0 : Math.min(progresso.bloco_atual, BLOCOS.length - 1);
-      setIdx(alvo);
+      // Toda entrada na aula começa do primeiro bloco (Narrativa / Missão).
+      // Motivo: quando o conteúdo da aula é atualizado, o `bloco_atual` salvo
+      // aponta para um índice de uma versão antiga e faz o player pular a
+      // introdução. Recomeçar do zero é rápido (basta clicar "Próximo") e
+      // garante que a criança sempre veja a história, a missão e os
+      // objetivos antes das atividades.
+      setIdx(0);
       setAcertos(progresso.acertos);
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
@@ -122,7 +127,6 @@ export function AulaPlayer({
         temDiagnostico &&
         !progresso.diagnostico_feito &&
         !diagnosticoGlobalFeito &&
-        alvo === 0 &&
         !progresso.concluida
       ) {
         setEmDiagnostico(true);
