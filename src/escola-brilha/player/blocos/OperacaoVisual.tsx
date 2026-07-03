@@ -124,21 +124,34 @@ export function OperacaoVisual({
         t += passo;
       }
     } else {
-      // Subtração: remove um por um
+      // Subtração: aviso antes de começar a tirar
+      add(() => {
+        setFase(2);
+        speakChunked(
+          `Muito bem! Temos ${nome(a)} ${itemPlural}. Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`,
+          { rate: 0.75 },
+        );
+      }, t);
+      t += 4200;
+      // Remove uma por uma explicando quantas sobram a cada passo
       for (let i = 1; i <= b; i++) {
+        const sobram = a - i;
         add(() => {
           setFase(3);
           setRemovidos(i);
-          speakChunked(`tirou ${nome(i)}`, { rate: rateNum });
+          speakChunked(
+            `Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`,
+            { rate: 0.75 },
+          );
         }, t);
-        t += passo + 200;
+        t += passo + 1400;
       }
       t += 600;
       add(() => {
         setFase(4);
-        speakChunked(`Agora vamos contar quantos sobraram.`, { rate: 0.8 });
+        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, { rate: 0.75 });
       }, t);
-      t += 2400;
+      t += 3200;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
