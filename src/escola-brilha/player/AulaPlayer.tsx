@@ -1,6 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Volume2, VolumeX, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import { useAppState } from "@/core/store";
@@ -77,7 +76,6 @@ export function AulaPlayer({
     () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
     [aula.narrativa],
   );
-  const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
@@ -110,19 +108,10 @@ export function AulaPlayer({
 
   useEffect(() => {
     if (progresso.carregado && !retomado && diagnosticoGlobalFeito !== null) {
-      // Toda entrada na aula começa do primeiro bloco (Narrativa / Missão).
-      // Motivo: quando o conteúdo da aula é atualizado, o `bloco_atual` salvo
-      // aponta para um índice de uma versão antiga e faz o player pular a
-      // introdução. Recomeçar do zero é rápido (basta clicar "Próximo") e
-      // garante que a criança sempre veja a história, a missão e os
-      // objetivos antes das atividades.
-      setIdx(0);
       setAcertos(progresso.acertos);
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
       setRetomado(true);
-      // Diagnóstico só entra antes do primeiro bloco, se ainda não foi feito
-      // nesta habilidade E se a criança nunca fez em nenhuma outra habilidade.
       if (
         temDiagnostico &&
         !progresso.diagnostico_feito &&
@@ -138,72 +127,10 @@ export function AulaPlayer({
     }
   }, [progresso, retomado, salvar, temDiagnostico, diagnosticoGlobalFeito]);
 
-  const texto = useMemo(() => textoDoBloco(aula, BLOCOS[idx].id), [aula, idx, BLOCOS]);
+  // Texto para leitura em voz alta do topo: usa a introdução (missão) da aula.
+  const texto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
-
-  const next = async () => {
-    tts.stop();
-    const gasto = tempoDoBloco();
-    inicioBloco.current = Date.now();
-    if (idx < BLOCOS.length - 1) {
-      const novo = idx + 1;
-      setIdx(novo);
-      const percentual = Math.round(((novo + 1) / BLOCOS.length) * 100);
-      await salvar({
-        bloco_atual: novo,
-        adicionar_tempo_segundos: gasto,
-        percentual,
-        acertos,
-        erros,
-      });
-    } else {
-      const total = aula.quiz.length || 1;
-      const nota = Math.round((acertos / total) * 100) / 10;
-      const estrelas =
-        acertos >= total
-          ? 3
-          : acertos >= Math.ceil(total * 0.7)
-            ? 2
-            : acertos >= Math.ceil(total * 0.4)
-              ? 1
-              : 0;
-      await salvar({
-        bloco_atual: idx,
-        concluida: true,
-        adicionar_tempo_segundos: gasto,
-        percentual: 100,
-        acertos,
-        erros,
-        nota,
-        estrelas,
-      });
-      if (activeChild?.id) {
-        await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
-        // Sistema automático de revisão: registra conclusão + agenda próxima revisão
-        const desempenho = Math.round((acertos / total) * 100);
-        await supabase.rpc("registrar_conclusao_aula", {
-          _child_id: activeChild.id,
-          _codigo_bncc: aula.codigo,
-          _desempenho: desempenho,
-          _tipo: "aula",
-        });
-        onConcluir?.({ codigo: aula.codigo, desempenho });
-      }
-
-    }
-  };
-
-  const prev = () => {
-    tts.stop();
-    if (idx > 0) {
-      const gasto = tempoDoBloco();
-      inicioBloco.current = Date.now();
-      const novo = idx - 1;
-      setIdx(novo);
-      void salvar({ bloco_atual: novo, adicionar_tempo_segundos: gasto });
-    }
-  };
 
   useEffect(() => {
     const flush = () => {
@@ -226,8 +153,47 @@ export function AulaPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Modo TELA ÚNICA (rolagem): renderiza todos os blocos empilhados.
+  // A criança rola a página inteira — sem botão "Próximo".
+  const concluirAula = async () => {
+    tts.stop();
+    const gasto = tempoDoBloco();
+    inicioBloco.current = Date.now();
+    const total = aula.quiz.length || 1;
+    const nota = Math.round((acertos / total) * 100) / 10;
+    const estrelas =
+      acertos >= total
+        ? 3
+        : acertos >= Math.ceil(total * 0.7)
+          ? 2
+          : acertos >= Math.ceil(total * 0.4)
+            ? 1
+            : 0;
+    await salvar({
+      bloco_atual: BLOCOS.length - 1,
+      concluida: true,
+      adicionar_tempo_segundos: gasto,
+      percentual: 100,
+      acertos,
+      erros,
+      nota,
+      estrelas,
+    });
+    if (activeChild?.id) {
+      await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
+      const desempenho = Math.round((acertos / total) * 100);
+      await supabase.rpc("registrar_conclusao_aula", {
+        _child_id: activeChild.id,
+        _codigo_bncc: aula.codigo,
+        _desempenho: desempenho,
+        _tipo: "aula",
+      });
+      onConcluir?.({ codigo: aula.codigo, desempenho });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-16">
       <div className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b-2 border-white/10 px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => navigate({ to: "/escola-brilha" })}
@@ -252,35 +218,15 @@ export function AulaPlayer({
       </div>
 
       <div className="px-4 pt-3">
-        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/60 mb-1.5">
-          <span className="truncate">
-            <span style={{ color: ETAPAS_METODO[BLOCOS[idx].etapa - 1].cor }}>
-              Etapa {BLOCOS[idx].etapa} · {BLOCOS[idx].etapaNome}
-            </span>
-            <span className="text-white/40"> · {BLOCOS[idx].nome}</span>
-          </span>
-          <span>
-            {idx + 1} / {BLOCOS.length}
-          </span>
-        </div>
         <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
-          {ETAPAS_METODO.map((e) => {
-            const atual = BLOCOS[idx].etapa;
-            const on = e.n <= atual;
-            return (
-              <div
-                key={e.n}
-                className="flex-1 h-1.5 rounded-full transition-all"
-                style={{ background: on ? e.cor : "rgba(255,255,255,0.12)" }}
-              />
-            );
-          })}
-        </div>
-        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C]"
-            animate={{ width: `${((idx + 1) / BLOCOS.length) * 100}%` }}
-          />
+          {ETAPAS_METODO.map((e) => (
+            <div
+              key={e.n}
+              className="flex-1 h-1.5 rounded-full"
+              style={{ background: e.cor }}
+              title={e.nome}
+            />
+          ))}
         </div>
       </div>
 
@@ -300,99 +246,69 @@ export function AulaPlayer({
             }}
           />
         ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.25 }}
-            >
-              {renderBloco(aula, BLOCOS[idx].id, {
-                acertos,
-                erros,
-                childId: activeChild?.id,
-                setAcertos,
-                setErros,
-                onQuizEnd: next,
-              })}
-            </motion.div>
-          </AnimatePresence>
+          <div className="space-y-8">
+            {BLOCOS.map((bloco, i) => {
+              const etapa = ETAPAS_METODO[bloco.etapa - 1];
+              return (
+                <section
+                  key={bloco.id}
+                  id={`bloco-${bloco.id}`}
+                  className="scroll-mt-24"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full"
+                      style={{ background: etapa.cor }}
+                    />
+                    <span
+                      className="text-[10px] font-black uppercase tracking-widest"
+                      style={{ color: etapa.cor }}
+                    >
+                      Etapa {bloco.etapa} · {etapa.nome}
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
+                      · {bloco.nome}
+                    </span>
+                    <span className="ml-auto text-[10px] font-black text-white/40">
+                      {i + 1}/{BLOCOS.length}
+                    </span>
+                  </div>
+                  {renderBloco(aula, bloco.id, {
+                    acertos,
+                    erros,
+                    childId: activeChild?.id,
+                    setAcertos,
+                    setErros,
+                    onQuizEnd: concluirAula,
+                  })}
+                  <ProfessorVirtual
+                    aula={aula}
+                    blocoId={bloco.id}
+                    idade={activeChild?.idade}
+                    nomeCrianca={activeChild?.nome}
+                    acertos={acertos}
+                    erros={erros}
+                    childId={activeChild?.id}
+                  />
+                </section>
+              );
+            })}
+
+            <div className="pt-4">
+              <button
+                onClick={concluirAula}
+                className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
+              >
+                Concluir aula <CheckCircle2 className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         )}
       </div>
-
-      {!emDiagnostico && (
-        <ProfessorVirtual
-          aula={aula}
-          blocoId={BLOCOS[idx].id}
-          idade={activeChild?.idade}
-          nomeCrianca={activeChild?.nome}
-          acertos={acertos}
-          erros={erros}
-          childId={activeChild?.id}
-        />
-      )}
-
-      {!emDiagnostico && BLOCOS[idx].id !== "quiz" && (
-        <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
-          <button
-            onClick={prev}
-            disabled={idx === 0}
-            className="h-12 w-12 rounded-2xl bg-white/15 grid place-items-center disabled:opacity-30 active:scale-95"
-            aria-label="Anterior"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={next}
-            className="flex-1 h-12 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
-          >
-            {idx === BLOCOS.length - 1 ? (
-              <>
-                Concluir <CheckCircle2 className="h-5 w-5" />
-              </>
-            ) : (
-              <>
-                Próximo <ArrowRight className="h-5 w-5" />
-              </>
-            )}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
 
-function textoDoBloco(a: Aula, blocoId: BlocoId): string {
-  switch (blocoId) {
-    case "narrativa": {
-      const n = a.narrativa;
-      return n ? `${n.titulo}. ${n.contexto} ${n.problema} ${n.convite}` : "";
-    }
-    case "missao":
-      return a.missao;
-    case "objetivos":
-      return `Objetivos: ${a.objetivos.join(". ")}.`;
-    case "explicacao":
-      return a.explicacao;
-    case "exemplo":
-      return `${a.exemploResolvido.enunciado}. Passos: ${a.exemploResolvido.passos.join(". ")}. Resposta: ${a.exemploResolvido.resposta}.`;
-    case "guiada":
-      return `${a.atividadeGuiada.enunciado}. Resposta: ${a.atividadeGuiada.resposta}. ${a.atividadeGuiada.explicacao}`;
-    case "exercicios":
-      return `Exercícios: ${a.exercicios.map((e, k) => `${k + 1}. ${e.enunciado}`).join(" ")}`;
-    case "desafio":
-      return a.desafio.enunciado;
-    case "quiz":
-      return "Quiz da aula. Escolha a resposta certa.";
-    case "resumo":
-      return `Resumo: ${a.revisao.pontos.join(". ")}. Dica: ${a.revisao.dica}.`;
-    case "conclusao":
-      return a.conclusao;
-    default:
-      return "";
-  }
-}
 
 function renderBloco(
   a: Aula,
