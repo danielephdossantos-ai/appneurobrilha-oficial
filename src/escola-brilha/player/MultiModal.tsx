@@ -522,9 +522,6 @@ function JogoOrdenar({
       <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
       {modoVisual ? (
         <>
-          <p className="text-sm text-white/60 mb-2">
-            Arraste os grupos para a ordem certa (do menor para o maior).
-          </p>
           <Reorder.Group
             axis="y"
             values={ordemV}
