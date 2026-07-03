@@ -381,8 +381,11 @@ function renderBloco(
       );
     case "resumo":
       return <Revisao dados={a.revisao} />;
+    case "curiosidade":
+      return a.curiosidade ? <Curiosidade dados={a.curiosidade} /> : null;
     case "conclusao":
       return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} codigoAtual={a.codigo} />;
+
     default:
       return null;
   }
