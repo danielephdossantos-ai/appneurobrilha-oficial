@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
+import { OperacaoVisual } from "./blocos/OperacaoVisual";
 import type { Aula } from "../types";
 
 /**
