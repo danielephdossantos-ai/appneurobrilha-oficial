@@ -184,6 +184,22 @@ export type Aula = {
         instrucao: string;
         // pares (item → alvo). O jogador arrasta o item pro alvo certo.
         pares: Array<{ item: string; alvo: string }>;
+        /**
+         * Suporte visual (opcional). Quando presente, cada item é
+         * renderizado como uma cópia da imagem (em vez de só texto).
+         */
+        itemImagem?: string;
+        /**
+         * Alvos visuais (opcional). Renderiza cada alvo com uma cor de
+         * fundo, número de capacidade e (opcional) imagem central. O
+         * `nome` deve casar com `alvo` dos pares.
+         */
+        alvosVisuais?: Array<{
+          nome: string;
+          cor: string;
+          capacidade?: number;
+          imagemUrl?: string;
+        }>;
       }
     | {
         tipo: "ordenar";
@@ -191,6 +207,16 @@ export type Aula = {
         instrucao: string;
         // sequência correta; embaralhada na tela.
         itens: string[];
+        /**
+         * Suporte visual (opcional). Cada entrada é um grupo de imagens.
+         * A ordem correta é a ordem do array. Usado para Ed. Infantil e
+         * 1º Ano, onde a criança ordena por quantidade visual.
+         */
+        imagens?: Array<{
+          imagemUrl: string;
+          quantidade: number;
+          rotulo?: string;
+        }>;
       }
     | {
         tipo: "ligar";
