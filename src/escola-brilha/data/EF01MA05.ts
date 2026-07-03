@@ -327,8 +327,13 @@ const aula: Aula = {
       tipo: "ordenar",
       titulo: "Mini Jogo · Monte o Pódio",
       instrucao:
-        "Arraste os corredores do MAIOR pro MENOR: quem fez mais pontos fica em 1º.",
-      itens: ["25 pontos (Ouro)", "21 pontos (Prata)", "18 pontos (Bronze)"],
+        "Arraste os corredores do MAIOR pro MENOR: quem fez mais pontos fica em 1º (topo).",
+      itens: ["🥇 25 pontos", "🥈 21 pontos", "🥉 18 pontos"],
+      imagens: [
+        { imagemUrl: estrelaImg, quantidade: 25, rotulo: "🥇 Ouro · 25 pontos" },
+        { imagemUrl: estrelaImg, quantidade: 21, rotulo: "🥈 Prata · 21 pontos" },
+        { imagemUrl: estrelaImg, quantidade: 18, rotulo: "🥉 Bronze · 18 pontos" },
+      ],
     },
   ],
 
