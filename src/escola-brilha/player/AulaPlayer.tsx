@@ -138,10 +138,14 @@ export function AulaPlayer({
     }
   }, [progresso, retomado, salvar, temDiagnostico, diagnosticoGlobalFeito]);
 
-  // Texto para leitura em voz alta do topo: usa a introdução (missão) da aula.
-  const texto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
-  const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
+  // Texto CURTO (só a missão) — usado pelo ícone do topo.
+  const textoCurto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
+  // Texto COMPLETO da aula — lê tudo, do começo ao fim, na ordem dos blocos.
+  const textoCompleto = useMemo(() => montarTextoAula(aula), [aula]);
+  const speak = () => (tts.speaking ? tts.stop() : tts.speak(textoCurto, { rate: 0.95 }));
+  const speakTudo = () => (tts.speaking ? tts.stop() : tts.speak(textoCompleto, { rate: 0.9 }));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
+
 
   useEffect(() => {
     const flush = () => {
