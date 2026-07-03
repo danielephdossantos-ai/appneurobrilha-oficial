@@ -196,8 +196,22 @@ export type Aula = {
         tipo: "ligar";
         titulo: string;
         instrucao: string;
-        // colunas A ↔ B; a criança liga cada A ao B correspondente.
-        pares: Array<{ a: string; b: string }>;
+        /**
+         * colunas A ↔ B; a criança liga cada A ao B correspondente.
+         *
+         * Suporte visual (opcional, ideal Ed. Infantil / 1º ano):
+         *  - `aImagem` + `aQuantidade` renderizam N cópias da imagem na
+         *    coluna A (ex.: 8 cenouras). O rótulo de texto vira legenda.
+         *  - `bImagem` + `bQuantidade` fazem o mesmo na coluna B (raro).
+         */
+        pares: Array<{
+          a: string;
+          b: string;
+          aImagem?: string;
+          aQuantidade?: number;
+          bImagem?: string;
+          bQuantidade?: number;
+        }>;
       }
     | {
         tipo: "colorir";
