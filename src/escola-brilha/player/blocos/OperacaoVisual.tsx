@@ -70,49 +70,56 @@ export function OperacaoVisual({
       operacao === "soma"
         ? `Vamos contar. Primeiro grupo, ${a} ${itemPlural}.`
         : `Vamos ver. Temos ${a} ${itemPlural}.`;
-    speakChunked(intro, { rate: 0.9 });
+    speakChunked(intro, { rate: 0.75 });
 
-    let t = 1400;
-    const passo = 850;
+    let t = 2400;
+    const passo = 1700; // tempo entre cada número contado (bem devagar)
+    const rateNum = 0.7; // ritmo lento do número falado
 
     // Conta grupo A um por um
     for (let i = 1; i <= a; i++) {
       add(() => {
         setContadoA(i);
-        speakChunked(nome(i), { rate: 0.85 });
+        speakChunked(nome(i), { rate: rateNum });
       }, t);
       t += passo;
     }
+
+    // Pausa antes do sinal
+    t += 500;
 
     // Sinal e grupo B
     add(() => {
       setFase(2);
       speakChunked(
         operacao === "soma" ? `Agora, mais ${b}.` : `Agora vamos tirar ${b}.`,
-        { rate: 0.9 },
+        { rate: 0.8 },
       );
     }, t);
-    t += 1400;
+    t += 2200;
 
     if (operacao === "soma") {
       for (let i = 1; i <= b; i++) {
         add(() => {
           setFase(3);
           setContadoB(i);
-          speakChunked(nome(i), { rate: 0.85 });
+          speakChunked(nome(i), { rate: rateNum });
         }, t);
         t += passo;
       }
+      t += 600;
       // Junta e conta total
       add(() => {
         setFase(4);
-        speakChunked(`Juntando tudo, vamos contar de novo.`, { rate: 0.9 });
+        speakChunked(`Agora vamos juntar tudo e contar de novo, bem devagar.`, {
+          rate: 0.8,
+        });
       }, t);
-      t += 1600;
+      t += 3000;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
-          speakChunked(nome(i), { rate: 0.8 });
+          speakChunked(nome(i), { rate: rateNum });
         }, t);
         t += passo;
       }
@@ -122,31 +129,34 @@ export function OperacaoVisual({
         add(() => {
           setFase(3);
           setRemovidos(i);
-          speakChunked(`tirou ${nome(i)}`, { rate: 0.85 });
+          speakChunked(`tirou ${nome(i)}`, { rate: rateNum });
         }, t);
-        t += passo + 100;
+        t += passo + 200;
       }
+      t += 600;
       add(() => {
         setFase(4);
-        speakChunked(`Sobrou. Vamos contar.`, { rate: 0.9 });
+        speakChunked(`Agora vamos contar quantos sobraram.`, { rate: 0.8 });
       }, t);
-      t += 1400;
+      t += 2400;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
-          speakChunked(nome(i), { rate: 0.8 });
+          speakChunked(nome(i), { rate: rateNum });
         }, t);
         t += passo;
       }
     }
 
+
+    t += 800;
     add(() => {
       setFase(5);
       speakChunked(
         operacao === "soma"
           ? `${a} mais ${b} é igual a ${resultado}!`
           : `${a} menos ${b} é igual a ${resultado}!`,
-        { rate: 0.9 },
+        { rate: 0.8 },
       );
     }, t);
   }
