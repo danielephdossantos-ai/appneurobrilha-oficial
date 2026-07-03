@@ -199,68 +199,126 @@ function JogoArrastar({
               }}
             >
               {visual ? (
-                <>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-black uppercase tracking-wider text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
+                visual.imagemUrl ? (
+                  /* --- Passarinho comendo minhoca --- */
+                  <div className="flex flex-col items-center gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
                       {visual.nome}
                     </span>
-                    {visual.capacidade !== undefined && (
-                      <span
-                        className="h-10 w-10 rounded-full font-black text-xl grid place-items-center shadow-lg border-4 border-white"
-                        style={{ background: "#ffffff", color: cor }}
-                      >
-                        {visual.capacidade}
-                      </span>
-                    )}
-                  </div>
-                  {/* Prato circular grande, cor forte */}
-                  <div
-                    className="rounded-full min-h-[110px] p-3 flex flex-wrap gap-1.5 items-center justify-center mx-auto border-8"
-                    style={{
-                      background: "#ffffff",
-                      borderColor: cor,
-                      width: "88%",
-                      boxShadow: `inset 0 4px 12px ${cor}55`,
-                    }}
-                  >
-                    {jogo.itemImagem && quantosNoPrato > 0 ? (
-                      Object.entries(drops)
-                        .filter(([, a]) => a === alvo)
-                        .map(([item]) => (
-                          <img
-                            key={item}
-                            src={jogo.itemImagem}
-                            alt=""
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setDrops((d) => ({ ...d, [item]: null }));
-                            }}
-                            className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                          />
-                        ))
-                    ) : (
-                      Object.entries(drops)
-                        .filter(([, a]) => a === alvo)
-                        .map(([item]) => (
-                          <span
-                            key={item}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setDrops((d) => ({ ...d, [item]: null }));
-                            }}
-                            className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
-                          >
-                            {item}
-                          </span>
-                        ))
-                    )}
-                  </div>
-                  {visual.capacidade !== undefined && (
-                    <div className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white drop-shadow">
-                      {quantosNoPrato} / {visual.capacidade}
+                    <div className="relative h-32 w-32 sm:h-36 sm:w-36">
+                      <motion.img
+                        src={visual.imagemUrl}
+                        alt={visual.nome}
+                        className="h-full w-full object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.35)]"
+                        animate={
+                          quantosNoPrato > 0
+                            ? { rotate: [0, -8, 8, -6, 6, 0], scale: [1, 1.1, 1] }
+                            : { y: [0, -4, 0] }
+                        }
+                        transition={
+                          quantosNoPrato > 0
+                            ? { duration: 0.9, repeat: Infinity, repeatDelay: 0.6 }
+                            : { duration: 1.6, repeat: Infinity }
+                        }
+                      />
+                      {/* Minhoca sendo comida — aparece no bico */}
+                      {jogo.itemImagem && quantosNoPrato > 0 && (
+                        <motion.img
+                          key={`worm-${quantosNoPrato}`}
+                          src={jogo.itemImagem}
+                          alt=""
+                          initial={{ y: -60, opacity: 0, scale: 1.2 }}
+                          animate={{
+                            y: [-60, 0, 8],
+                            opacity: [0, 1, 1, 0],
+                            scale: [1.2, 1, 0.6],
+                          }}
+                          transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const first = Object.entries(drops).find(
+                              ([, a]) => a === alvo,
+                            );
+                            if (first) setDrops((d) => ({ ...d, [first[0]]: null }));
+                          }}
+                          className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                        />
+                      )}
                     </div>
-                  )}
-                </>
+                    <div className="flex items-center gap-2">
+                      {quantosNoPrato > 0 ? (
+                        <span className="px-3 py-1 rounded-full bg-white text-[#0d1f55] text-sm font-black shadow">
+                          Comeu! 😋
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 rounded-full bg-white/90 text-[#0d1f55] text-sm font-black shadow animate-pulse">
+                          Com fome…
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-black uppercase tracking-wider text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
+                        {visual.nome}
+                      </span>
+                      {visual.capacidade !== undefined && (
+                        <span
+                          className="h-10 w-10 rounded-full font-black text-xl grid place-items-center shadow-lg border-4 border-white"
+                          style={{ background: "#ffffff", color: cor }}
+                        >
+                          {visual.capacidade}
+                        </span>
+                      )}
+                    </div>
+                    <div
+                      className="rounded-full min-h-[110px] p-3 flex flex-wrap gap-1.5 items-center justify-center mx-auto border-8"
+                      style={{
+                        background: "#ffffff",
+                        borderColor: cor,
+                        width: "88%",
+                        boxShadow: `inset 0 4px 12px ${cor}55`,
+                      }}
+                    >
+                      {jogo.itemImagem && quantosNoPrato > 0
+                        ? Object.entries(drops)
+                            .filter(([, a]) => a === alvo)
+                            .map(([item]) => (
+                              <img
+                                key={item}
+                                src={jogo.itemImagem}
+                                alt=""
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDrops((d) => ({ ...d, [item]: null }));
+                                }}
+                                className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                              />
+                            ))
+                        : Object.entries(drops)
+                            .filter(([, a]) => a === alvo)
+                            .map(([item]) => (
+                              <span
+                                key={item}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDrops((d) => ({ ...d, [item]: null }));
+                                }}
+                                className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
+                              >
+                                {item}
+                              </span>
+                            ))}
+                    </div>
+                    {visual.capacidade !== undefined && (
+                      <div className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white drop-shadow">
+                        {quantosNoPrato} / {visual.capacidade}
+                      </div>
+                    )}
+                  </>
+                )
+              
 
               ) : (
                 <>
