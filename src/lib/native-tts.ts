@@ -93,15 +93,33 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
         finish();
         return;
       }
-      const u = new SpeechSynthesisUtterance(chunks[i++]);
+      const chunk = chunks[i++];
+      const u = new SpeechSynthesisUtterance(chunk);
       u.lang = "pt-BR";
       u.rate = opts.rate ?? 0.95;
       u.pitch = opts.pitch ?? 1;
       u.volume = opts.volume ?? 1;
       if (voice) u.voice = voice;
-      u.onend = speakNext;
-      u.onerror = speakNext;
+      let advanced = false;
+      const timeout = window.setTimeout(
+        () => {
+          if (advanced) return;
+          advanced = true;
+          speakNext();
+        },
+        Math.max(2500, Math.ceil(chunk.length * 120)),
+      );
+      const advance = () => {
+        if (advanced) return;
+        advanced = true;
+        window.clearTimeout(timeout);
+        speakNext();
+      };
+      u.onend = advance;
+      u.onerror = advance;
+      synth.resume();
       synth.speak(u);
+      synth.resume();
     };
     speakNext();
   });

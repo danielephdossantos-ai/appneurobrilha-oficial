@@ -114,7 +114,6 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
             b={jogo.b}
             cor={jogo.cor}
             legenda={jogo.legenda}
-            autoPlay={jogo.operacao === "subtracao"}
           />
         </Secao>
       );

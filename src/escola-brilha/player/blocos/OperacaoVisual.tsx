@@ -332,9 +332,9 @@ export function OperacaoVisual({
   return (
     <div
       ref={rootRef}
-      className={`rounded-3xl border-4 p-3 ${fase === 0 ? "cursor-pointer" : ""}`}
+      className="rounded-3xl border-4 p-3 cursor-pointer"
       style={{ borderColor: cor, background: `${cor}18` }}
-      onClick={fase === 0 ? rodar : undefined}
+      onClick={rodar}
     >
       {legenda && (
         <div className="text-[11px] font-black uppercase tracking-widest text-white/80 text-center mb-2">
@@ -424,8 +424,8 @@ export function OperacaoVisual({
 
 
       <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/70 mt-2 min-h-[16px]">
-        {fase === 0 && "Toque em Mostrar"}
-        {fase === 1 && `Primeiro vemos as ${a} ${itemPlural}. Contando... ${contadoA}`}
+        {fase === 0 && "Toque na conta ou em Mostrar para começar"}
+        {fase === 1 && `A explicação começou: primeiro vemos as ${a} ${itemPlural}. Contando... ${contadoA}`}
         {fase === 2 && (operacao === "soma" ? `Agora mais ${b}` : `Vamos tirar ${b}`)}
         {fase === 3 && (operacao === "soma" ? `Contando... ${contadoB}` : `Tirou ${removidos} de ${b}`)}
         {fase === 4 && `Contando o que sobrou: ${contadoTotal}`}
