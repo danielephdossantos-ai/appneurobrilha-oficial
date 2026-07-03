@@ -436,7 +436,7 @@ function JogoLigar({
               return (
                 <button
                   key={p.a}
-                  ref={(el) => (refsA.current[p.a] = el)}
+                  ref={(el) => { refsA.current[p.a] = el; }}
                   onClick={() => (ligado ? desligar(p.a) : clicarA(p.a))}
                   className={`w-full text-left px-4 py-3 rounded-2xl font-black text-base border-4 transition-all ${
                     sel
@@ -458,7 +458,7 @@ function JogoLigar({
               return (
                 <button
                   key={b}
-                  ref={(el) => (refsB.current[b] = el)}
+                  ref={(el) => { refsB.current[b] = el; }}
                   onClick={() => clicarB(b)}
                   className={`w-full text-left px-4 py-3 rounded-2xl font-black text-base border-4 transition-all ${
                     usado
