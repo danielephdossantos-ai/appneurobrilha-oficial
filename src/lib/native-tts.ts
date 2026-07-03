@@ -47,10 +47,12 @@ export interface SpeakOpts {
   pitch?: number;
   volume?: number;
   onEnd?: () => void;
+  /** Se true, enfileira sem cancelar o que já está falando. */
+  queue?: boolean;
 }
 
 /** Fala texto longo enfileirando utterances curtos.
- *  Cancela qualquer fala anterior. Retorna Promise que resolve no fim. */
+ *  Por padrão cancela fala anterior; passe { queue: true } para enfileirar. */
 export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> {
   return new Promise((resolve) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window) || !text?.trim()) {
@@ -59,7 +61,7 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       return;
     }
     const synth = window.speechSynthesis;
-    synth.cancel();
+    if (!opts.queue) synth.cancel();
     const chunks = chunkText(text);
     const voice = pickPtBrVoice();
     let i = 0;
