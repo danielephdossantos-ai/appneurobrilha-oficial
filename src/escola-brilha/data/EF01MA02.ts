@@ -9,6 +9,8 @@ import tartarugaImg from "@/assets/hiperfocos/animais/tartaruga.png";
 import bananaImg from "@/assets/neuro-treino/objetos/banana.png";
 import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
 import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
+import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import ninhoImg from "@/assets/neuro-treino/objetos/ninho.png";
 
 /**
  * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
@@ -199,8 +201,22 @@ const aula: Aula = {
       erro: "Some os grupos: 3 + 3 + 3.",
     },
     {
+      tipo: "ligar",
+      titulo: "Fase 3 · Ligando os pares",
+      instrucao:
+        "6 passarinhos e 6 ninhos. Ligue cada passarinho a um ninho.",
+      pares: [
+        { a: "Passarinho 1", b: "Ninho A", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Passarinho 2", b: "Ninho B", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Passarinho 3", b: "Ninho C", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Passarinho 4", b: "Ninho D", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Passarinho 5", b: "Ninho E", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+        { a: "Passarinho 6", b: "Ninho F", aImagem: passaroImg, aQuantidade: 1, bImagem: ninhoImg, bQuantidade: 1 },
+      ],
+    },
+    {
       tipo: "contarQuiz",
-      titulo: "Fase 3 · Quem tem mais?",
+      titulo: "Fase 4 · Quem tem mais?",
       instrucao: "Compare os dois grupos de joaninhas.",
       grupos: [
         { imagemUrl: joaninhaImg, quantidade: 4, rotulo: "Grupo da Esquerda" },
@@ -214,7 +230,7 @@ const aula: Aula = {
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 4 · Complete a coleção",
+      titulo: "Fase 5 · Complete a coleção",
       instrucao: "Antes você tinha 3 estrelas. Agora você tem 5.",
       grupos: [
         { imagemUrl: estrelaImg, quantidade: 3, rotulo: "Antes" },
