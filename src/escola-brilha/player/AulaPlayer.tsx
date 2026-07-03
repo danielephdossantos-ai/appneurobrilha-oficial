@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { ArrowLeft, Volume2, VolumeX, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square } from "lucide-react";
+
 import { useNavigate } from "@tanstack/react-router";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import { useAppState } from "@/core/store";
@@ -137,10 +138,14 @@ export function AulaPlayer({
     }
   }, [progresso, retomado, salvar, temDiagnostico, diagnosticoGlobalFeito]);
 
-  // Texto para leitura em voz alta do topo: usa a introdução (missão) da aula.
-  const texto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
-  const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
+  // Texto CURTO (só a missão) — usado pelo ícone do topo.
+  const textoCurto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
+  // Texto COMPLETO da aula — lê tudo, do começo ao fim, na ordem dos blocos.
+  const textoCompleto = useMemo(() => montarTextoAula(aula), [aula]);
+  const speak = () => (tts.speaking ? tts.stop() : tts.speak(textoCurto, { rate: 0.95 }));
+  const speakTudo = () => (tts.speaking ? tts.stop() : tts.speak(textoCompleto, { rate: 0.9 }));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
+
 
   useEffect(() => {
     const flush = () => {
@@ -239,6 +244,34 @@ export function AulaPlayer({
           ))}
         </div>
       </div>
+
+      {tts.supported && (
+        <div className="px-4 pt-3">
+          <button
+            onClick={speakTudo}
+            className={`w-full h-14 rounded-2xl font-black flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg transition-colors ${
+              tts.speaking
+                ? "bg-gradient-to-r from-[#EF4444] to-[#F97316] text-white"
+                : "bg-gradient-to-r from-[#22C55E] to-[#10B981] text-white"
+            }`}
+            aria-label={tts.speaking ? "Parar leitura da aula" : "Escutar toda a explicação da aula"}
+          >
+            {tts.speaking ? (
+              <>
+                <Square className="h-5 w-5 fill-current" /> Parar leitura
+              </>
+            ) : (
+              <>
+                <Headphones className="h-5 w-5" /> Escutar explicação da aula
+              </>
+            )}
+          </button>
+          <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/60 mt-1">
+            O professor lê a aula toda em voz alta
+          </p>
+        </div>
+      )}
+
 
       <div className="px-4 pt-5">
         {emDiagnostico ? (
@@ -390,3 +423,75 @@ function renderBloco(
       return null;
   }
 }
+
+/**
+ * Monta o texto completo da aula para o botão "Escutar explicação".
+ * Inclui todos os blocos, na ordem em que aparecem na tela.
+ */
+function montarTextoAula(a: Aula): string {
+  const partes: string[] = [];
+  const add = (s?: string | null) => {
+    const t = (s ?? "").toString().trim();
+    if (t) partes.push(t);
+  };
+
+  add(a.titulo);
+  if (a.narrativa) {
+    add(a.narrativa.titulo);
+    add(a.narrativa.contexto);
+    add(a.narrativa.problema);
+    add(a.narrativa.convite);
+  }
+  add("Missão.");
+  add(a.missao);
+  if (a.objetivos?.length) {
+    add("Nossos objetivos são:");
+    a.objetivos.forEach((o) => add(o));
+  }
+  add("Vamos à explicação.");
+  add(a.explicacao);
+  if (a.explicacaoAtiva?.length) {
+    a.explicacaoAtiva.forEach((p) => {
+      add(p.texto);
+      if (p.exemplo) add(`Exemplo: ${p.exemplo}`);
+    });
+  }
+  if (a.exemploResolvido) {
+    add("Vamos ver um exemplo.");
+    add(a.exemploResolvido.enunciado);
+    a.exemploResolvido.passos?.forEach((p) => add(p));
+    add(`Resposta: ${a.exemploResolvido.resposta}`);
+  }
+  if (a.atividadeGuiada) {
+    add("Agora a prática guiada.");
+    add(a.atividadeGuiada.enunciado);
+    add(a.atividadeGuiada.explicacao);
+    add(`Resposta: ${a.atividadeGuiada.resposta}`);
+  }
+  if (a.exercicios?.length) {
+    add("Vamos treinar.");
+    a.exercicios.forEach((e, i) => {
+      add(`Exercício ${i + 1}. ${e.enunciado}`);
+      if (e.dica) add(`Dica: ${e.dica}`);
+    });
+  }
+  if (a.desafio?.enunciado) {
+    add("Desafio.");
+    add(a.desafio.enunciado);
+  }
+  if (a.revisao) {
+    add("Resumo.");
+    a.revisao.pontos?.forEach((p) => add(p));
+    if (a.revisao.dica) add(`Dica: ${a.revisao.dica}`);
+  }
+  if (a.curiosidade?.texto) {
+    add("Você sabia?");
+    add(a.curiosidade.texto);
+  }
+  if (a.conclusao) {
+    add("Conclusão.");
+    add(a.conclusao);
+  }
+  return partes.join(". ").replace(/\.\.+/g, ".");
+}
+
