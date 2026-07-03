@@ -43,6 +43,7 @@ export function OperacaoVisual({
   function limpar() {
     timers.current.forEach((t) => clearTimeout(t));
     timers.current = [];
+    stopSpeaking();
   }
   const add = (fn: () => void, ms: number) => {
     const t = setTimeout(fn, ms);
