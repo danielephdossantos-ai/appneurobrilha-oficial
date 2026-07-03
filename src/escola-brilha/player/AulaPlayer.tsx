@@ -76,7 +76,6 @@ export function AulaPlayer({
     () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
     [aula.narrativa],
   );
-  const [idx, setIdx] = useState(0);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
@@ -109,19 +108,10 @@ export function AulaPlayer({
 
   useEffect(() => {
     if (progresso.carregado && !retomado && diagnosticoGlobalFeito !== null) {
-      // Toda entrada na aula começa do primeiro bloco (Narrativa / Missão).
-      // Motivo: quando o conteúdo da aula é atualizado, o `bloco_atual` salvo
-      // aponta para um índice de uma versão antiga e faz o player pular a
-      // introdução. Recomeçar do zero é rápido (basta clicar "Próximo") e
-      // garante que a criança sempre veja a história, a missão e os
-      // objetivos antes das atividades.
-      setIdx(0);
       setAcertos(progresso.acertos);
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
       setRetomado(true);
-      // Diagnóstico só entra antes do primeiro bloco, se ainda não foi feito
-      // nesta habilidade E se a criança nunca fez em nenhuma outra habilidade.
       if (
         temDiagnostico &&
         !progresso.diagnostico_feito &&
@@ -137,72 +127,10 @@ export function AulaPlayer({
     }
   }, [progresso, retomado, salvar, temDiagnostico, diagnosticoGlobalFeito]);
 
-  const texto = useMemo(() => textoDoBloco(aula, BLOCOS[idx].id), [aula, idx, BLOCOS]);
+  // Texto para leitura em voz alta do topo: usa a introdução (missão) da aula.
+  const texto = useMemo(() => aula.missao ?? aula.titulo, [aula]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
   const tempoDoBloco = () => Math.max(0, Math.round((Date.now() - inicioBloco.current) / 1000));
-
-  const next = async () => {
-    tts.stop();
-    const gasto = tempoDoBloco();
-    inicioBloco.current = Date.now();
-    if (idx < BLOCOS.length - 1) {
-      const novo = idx + 1;
-      setIdx(novo);
-      const percentual = Math.round(((novo + 1) / BLOCOS.length) * 100);
-      await salvar({
-        bloco_atual: novo,
-        adicionar_tempo_segundos: gasto,
-        percentual,
-        acertos,
-        erros,
-      });
-    } else {
-      const total = aula.quiz.length || 1;
-      const nota = Math.round((acertos / total) * 100) / 10;
-      const estrelas =
-        acertos >= total
-          ? 3
-          : acertos >= Math.ceil(total * 0.7)
-            ? 2
-            : acertos >= Math.ceil(total * 0.4)
-              ? 1
-              : 0;
-      await salvar({
-        bloco_atual: idx,
-        concluida: true,
-        adicionar_tempo_segundos: gasto,
-        percentual: 100,
-        acertos,
-        erros,
-        nota,
-        estrelas,
-      });
-      if (activeChild?.id) {
-        await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
-        // Sistema automático de revisão: registra conclusão + agenda próxima revisão
-        const desempenho = Math.round((acertos / total) * 100);
-        await supabase.rpc("registrar_conclusao_aula", {
-          _child_id: activeChild.id,
-          _codigo_bncc: aula.codigo,
-          _desempenho: desempenho,
-          _tipo: "aula",
-        });
-        onConcluir?.({ codigo: aula.codigo, desempenho });
-      }
-
-    }
-  };
-
-  const prev = () => {
-    tts.stop();
-    if (idx > 0) {
-      const gasto = tempoDoBloco();
-      inicioBloco.current = Date.now();
-      const novo = idx - 1;
-      setIdx(novo);
-      void salvar({ bloco_atual: novo, adicionar_tempo_segundos: gasto });
-    }
-  };
 
   useEffect(() => {
     const flush = () => {
