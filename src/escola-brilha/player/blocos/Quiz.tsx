@@ -39,6 +39,7 @@ export function Quiz({
         <span className="text-xs font-black text-[#22C55E]">✓ {acertos}</span>
       </div>
       <p className="text-lg font-black leading-snug mb-4">{q.pergunta}</p>
+      {q.visual && <QuizVisual visual={q.visual} />}
       <div className="space-y-2">
         {q.opcoes.map((op, idx) => {
           const isSel = sel === idx;
@@ -79,6 +80,75 @@ export function Quiz({
           </button>
         </>
       )}
+    </div>
+  );
+}
+
+function QuizVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> }) {
+  if (visual.tipo === "itens") {
+    return (
+      <div className="mb-4 rounded-2xl bg-[#F8FAFC] border-2 border-[#0d1f55]/10 p-3">
+        {visual.rotulo && (
+          <p className="text-center text-sm font-black text-[#0d1f55] mb-2">
+            {visual.rotulo} · {visual.quantidade}
+          </p>
+        )}
+        <div className="flex flex-wrap justify-center gap-1.5">
+          {Array.from({ length: visual.quantidade }).map((_, i) => (
+            <img
+              key={i}
+              src={visual.imagemUrl}
+              alt=""
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain drop-shadow"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (visual.tipo === "grupos") {
+    return (
+      <div className="mb-4 grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.min(visual.grupos.length, 3)}, minmax(0, 1fr))` }}>
+        {visual.grupos.map((g, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-2 border-4"
+            style={{ background: `${g.cor ?? "#4C9EFF"}18`, borderColor: g.cor ?? "#4C9EFF" }}
+          >
+            {g.rotulo && (
+              <p className="text-center text-xs font-black text-[#0d1f55] mb-1 uppercase tracking-wide">
+                {g.rotulo} · {g.quantidade}
+              </p>
+            )}
+            <div className="flex flex-wrap justify-center gap-1">
+              {Array.from({ length: g.quantidade }).map((_, k) => (
+                <img key={k} src={g.imagemUrl} alt="" className="h-8 w-8 sm:h-10 sm:w-10 object-contain drop-shadow" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // comparar
+  return (
+    <div className="mb-4 grid gap-2 grid-cols-2">
+      {visual.lados.map((l, i) => (
+        <div
+          key={i}
+          className="rounded-2xl p-2 border-4"
+          style={{ background: `${l.cor ?? "#4C9EFF"}18`, borderColor: l.cor ?? "#4C9EFF" }}
+        >
+          <p className="text-center text-xs font-black text-[#0d1f55] mb-1 uppercase tracking-wide">
+            {l.rotulo} · {l.quantidade}
+          </p>
+          <div className="flex flex-wrap justify-center gap-1">
+            {Array.from({ length: l.quantidade }).map((_, k) => (
+              <img key={k} src={l.imagemUrl} alt="" className="h-8 w-8 sm:h-10 sm:w-10 object-contain drop-shadow" />
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
