@@ -92,8 +92,21 @@ const aula: Aula = {
       "O Macaco separou as bananas em 3 grupos iguais, com 3 bananas em cada grupo. Quantas bananas ele tem ao todo?",
     resposta: "9 bananas — 3 grupos de 3 dão 9.",
     explicacao:
-      "Quando fazemos grupos iguais, é só somar (ou pular de 3 em 3): 3, 6, 9. Contar em grupos é muito mais rápido do que contar uma por uma.",
+      "Quando fazemos grupos iguais, é só pular de 3 em 3: 3, 6, 9. Contar em grupos é muito mais rápido do que contar uma por uma.",
+    visual: {
+      tipo: "grupos",
+      pergunta:
+        "O Macaco separou as bananas em 3 grupos iguais. Toque em cada grupo para contar — quantas bananas ao todo?",
+      imagemUrl: bananaImg,
+      itemSingular: "banana",
+      itemPlural: "bananas",
+      quantidadeGrupos: 3,
+      itensPorGrupo: 3,
+      opcoes: [6, 9, 12],
+      correta: 1,
+    },
   },
+
 
   exercicios: [
     {
