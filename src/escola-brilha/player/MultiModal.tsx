@@ -337,62 +337,146 @@ function JogoLigar({
     () => [...jogo.pares.map((p) => p.b)].sort(() => Math.random() - 0.5),
     [jogo],
   );
+  const cores = ["#F472B6", "#FBBF24", "#34D399", "#60A5FA", "#A78BFA", "#FB923C"];
   const [selA, setSelA] = useState<string | null>(null);
   const [ligacoes, setLigacoes] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const refsA = useRef<Record<string, HTMLButtonElement | null>>({});
+  const refsB = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [linhas, setLinhas] = useState<
+    { x1: number; y1: number; x2: number; y2: number; cor: string; ok?: boolean }[]
+  >([]);
 
-  const clicarA = (a: string) => setSelA(a);
+  const recalc = () => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const wb = wrap.getBoundingClientRect();
+    const novas: typeof linhas = [];
+    Object.entries(ligacoes).forEach(([a, b], i) => {
+      const na = refsA.current[a];
+      const nb = refsB.current[b];
+      if (!na || !nb) return;
+      const ra = na.getBoundingClientRect();
+      const rb = nb.getBoundingClientRect();
+      const parCerto = jogo.pares.find((p) => p.a === a)?.b === b;
+      novas.push({
+        x1: ra.right - wb.left,
+        y1: ra.top + ra.height / 2 - wb.top,
+        x2: rb.left - wb.left,
+        y2: rb.top + rb.height / 2 - wb.top,
+        cor: cores[i % cores.length],
+        ok: checked ? parCerto : undefined,
+      });
+    });
+    setLinhas(novas);
+  };
+
+  useLayoutEffect(() => {
+    recalc();
+    const ro = new ResizeObserver(() => recalc());
+    if (wrapRef.current) ro.observe(wrapRef.current);
+    window.addEventListener("resize", recalc);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", recalc);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ligacoes, checked]);
+
+  const clicarA = (a: string) => setSelA(a === selA ? null : a);
   const clicarB = (b: string) => {
     if (!selA) return;
-    setLigacoes((l) => ({ ...l, [selA]: b }));
+    setLigacoes((l) => {
+      const filtrado: Record<string, string> = {};
+      Object.entries(l).forEach(([k, v]) => {
+        if (v !== b) filtrado[k] = v;
+      });
+      filtrado[selA] = b;
+      return filtrado;
+    });
     setSelA(null);
+  };
+  const desligar = (a: string) => {
+    setLigacoes((l) => {
+      const n = { ...l };
+      delete n[a];
+      return n;
+    });
   };
   const acertos = jogo.pares.filter((p) => ligacoes[p.a] === p.b).length;
 
   return (
     <Secao icon={Link2} rotulo="Ligue" cor="#60A5FA">
-      <p className="font-black mb-1">{jogo.titulo}</p>
-      <p className="text-sm text-white/70 mb-3">{jogo.instrucao}</p>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-2">
-          {jogo.pares.map((p) => {
-            const ligado = ligacoes[p.a];
-            const sel = selA === p.a;
-            return (
-              <button
-                key={p.a}
-                onClick={() => clicarA(p.a)}
-                className={`w-full text-left px-3 py-2 rounded-xl font-black ${
-                  sel
-                    ? "bg-[#FBBF24] text-[#0d1f55]"
-                    : ligado
-                      ? "bg-white/25 text-white"
-                      : "bg-white text-[#0d1f55]"
-                }`}
-              >
-                {p.a}
-                {ligado && (
-                  <span className="ml-2 text-xs text-white/70">→ {ligado}</span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-        <div className="space-y-2">
-          {colB.map((b) => (
-            <button
-              key={b}
-              onClick={() => clicarB(b)}
-              className="w-full text-left px-3 py-2 rounded-xl bg-white/20 text-white font-black"
-            >
-              {b}
-            </button>
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      <div ref={wrapRef} className="relative">
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ zIndex: 1 }}
+        >
+          {linhas.map((l, i) => (
+            <line
+              key={i}
+              x1={l.x1}
+              y1={l.y1}
+              x2={l.x2}
+              y2={l.y2}
+              stroke={l.ok === false ? "#EF4444" : l.ok === true ? "#22C55E" : l.cor}
+              strokeWidth={5}
+              strokeLinecap="round"
+            />
           ))}
+        </svg>
+        <div className="grid grid-cols-2 gap-8 relative" style={{ zIndex: 2 }}>
+          <div className="space-y-3">
+            {jogo.pares.map((p) => {
+              const ligado = ligacoes[p.a];
+              const sel = selA === p.a;
+              return (
+                <button
+                  key={p.a}
+                  ref={(el) => (refsA.current[p.a] = el)}
+                  onClick={() => (ligado ? desligar(p.a) : clicarA(p.a))}
+                  className={`w-full text-left px-4 py-3 rounded-2xl font-black text-base border-4 transition-all ${
+                    sel
+                      ? "bg-[#FBBF24] text-[#0d1f55] border-white scale-105"
+                      : ligado
+                        ? "bg-white/90 text-[#0d1f55] border-[#60A5FA]"
+                        : "bg-white text-[#0d1f55] border-transparent"
+                  }`}
+                >
+                  <span className="inline-block w-4 h-4 rounded-full bg-[#60A5FA] mr-2 align-middle" />
+                  {p.a}
+                </button>
+              );
+            })}
+          </div>
+          <div className="space-y-3">
+            {colB.map((b) => {
+              const usado = Object.values(ligacoes).includes(b);
+              return (
+                <button
+                  key={b}
+                  ref={(el) => (refsB.current[b] = el)}
+                  onClick={() => clicarB(b)}
+                  className={`w-full text-left px-4 py-3 rounded-2xl font-black text-base border-4 transition-all ${
+                    usado
+                      ? "bg-white/90 text-[#0d1f55] border-[#F472B6]"
+                      : "bg-white/20 text-white border-transparent"
+                  } ${selA ? "hover:scale-105" : ""}`}
+                >
+                  {b}
+                  <span className="inline-block w-4 h-4 rounded-full bg-[#F472B6] ml-2 align-middle float-right mt-1" />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
       <button
         onClick={() => setChecked(true)}
-        className="mt-3 w-full h-10 rounded-xl bg-[#60A5FA] text-[#0d1f55] font-black"
+        className="mt-4 w-full h-12 rounded-xl bg-[#60A5FA] text-[#0d1f55] font-black text-lg"
       >
         Conferir
       </button>
@@ -405,6 +489,7 @@ function JogoLigar({
     </Secao>
   );
 }
+
 
 /* --- Colorir --- */
 function JogoColorir({
