@@ -226,8 +226,47 @@ export function AulaPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Modo TELA ÚNICA (rolagem): renderiza todos os blocos empilhados.
+  // A criança rola a página inteira — sem botão "Próximo".
+  const concluirAula = async () => {
+    tts.stop();
+    const gasto = tempoDoBloco();
+    inicioBloco.current = Date.now();
+    const total = aula.quiz.length || 1;
+    const nota = Math.round((acertos / total) * 100) / 10;
+    const estrelas =
+      acertos >= total
+        ? 3
+        : acertos >= Math.ceil(total * 0.7)
+          ? 2
+          : acertos >= Math.ceil(total * 0.4)
+            ? 1
+            : 0;
+    await salvar({
+      bloco_atual: BLOCOS.length - 1,
+      concluida: true,
+      adicionar_tempo_segundos: gasto,
+      percentual: 100,
+      acertos,
+      erros,
+      nota,
+      estrelas,
+    });
+    if (activeChild?.id) {
+      await supabase.rpc("add_brilhocoins", { child_id: activeChild.id, amount: 20 });
+      const desempenho = Math.round((acertos / total) * 100);
+      await supabase.rpc("registrar_conclusao_aula", {
+        _child_id: activeChild.id,
+        _codigo_bncc: aula.codigo,
+        _desempenho: desempenho,
+        _tipo: "aula",
+      });
+      onConcluir?.({ codigo: aula.codigo, desempenho });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#050a2c] text-white pb-16">
       <div className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b-2 border-white/10 px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => navigate({ to: "/escola-brilha" })}
@@ -252,35 +291,15 @@ export function AulaPlayer({
       </div>
 
       <div className="px-4 pt-3">
-        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-white/60 mb-1.5">
-          <span className="truncate">
-            <span style={{ color: ETAPAS_METODO[BLOCOS[idx].etapa - 1].cor }}>
-              Etapa {BLOCOS[idx].etapa} · {BLOCOS[idx].etapaNome}
-            </span>
-            <span className="text-white/40"> · {BLOCOS[idx].nome}</span>
-          </span>
-          <span>
-            {idx + 1} / {BLOCOS.length}
-          </span>
-        </div>
         <div className="flex gap-1 mb-2" aria-label="Método Brilha: Descobrir, Entender, Explorar, Praticar, Conquistar">
-          {ETAPAS_METODO.map((e) => {
-            const atual = BLOCOS[idx].etapa;
-            const on = e.n <= atual;
-            return (
-              <div
-                key={e.n}
-                className="flex-1 h-1.5 rounded-full transition-all"
-                style={{ background: on ? e.cor : "rgba(255,255,255,0.12)" }}
-              />
-            );
-          })}
-        </div>
-        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C]"
-            animate={{ width: `${((idx + 1) / BLOCOS.length) * 100}%` }}
-          />
+          {ETAPAS_METODO.map((e) => (
+            <div
+              key={e.n}
+              className="flex-1 h-1.5 rounded-full"
+              style={{ background: e.cor }}
+              title={e.nome}
+            />
+          ))}
         </div>
       </div>
 
@@ -300,65 +319,65 @@ export function AulaPlayer({
             }}
           />
         ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.25 }}
-            >
-              {renderBloco(aula, BLOCOS[idx].id, {
-                acertos,
-                erros,
-                childId: activeChild?.id,
-                setAcertos,
-                setErros,
-                onQuizEnd: next,
-              })}
-            </motion.div>
-          </AnimatePresence>
+          <div className="space-y-8">
+            {BLOCOS.map((bloco, i) => {
+              const etapa = ETAPAS_METODO[bloco.etapa - 1];
+              return (
+                <section
+                  key={bloco.id}
+                  id={`bloco-${bloco.id}`}
+                  className="scroll-mt-24"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full"
+                      style={{ background: etapa.cor }}
+                    />
+                    <span
+                      className="text-[10px] font-black uppercase tracking-widest"
+                      style={{ color: etapa.cor }}
+                    >
+                      Etapa {bloco.etapa} · {etapa.nome}
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">
+                      · {bloco.nome}
+                    </span>
+                    <span className="ml-auto text-[10px] font-black text-white/40">
+                      {i + 1}/{BLOCOS.length}
+                    </span>
+                  </div>
+                  {renderBloco(aula, bloco.id, {
+                    acertos,
+                    erros,
+                    childId: activeChild?.id,
+                    setAcertos,
+                    setErros,
+                    onQuizEnd: concluirAula,
+                  })}
+                  <ProfessorVirtual
+                    aula={aula}
+                    blocoId={bloco.id}
+                    idade={activeChild?.idade}
+                    nomeCrianca={activeChild?.nome}
+                    acertos={acertos}
+                    erros={erros}
+                    childId={activeChild?.id}
+                  />
+                </section>
+              );
+            })}
+
+            <div className="pt-4">
+              <button
+                onClick={concluirAula}
+                className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
+              >
+                Concluir aula <CheckCircle2 className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         )}
       </div>
-
-      {!emDiagnostico && (
-        <ProfessorVirtual
-          aula={aula}
-          blocoId={BLOCOS[idx].id}
-          idade={activeChild?.idade}
-          nomeCrianca={activeChild?.nome}
-          acertos={acertos}
-          erros={erros}
-          childId={activeChild?.id}
-        />
-      )}
-
-      {!emDiagnostico && BLOCOS[idx].id !== "quiz" && (
-        <div className="fixed bottom-0 left-0 right-0 z-20 px-4 py-3 bg-[#0d1f55]/95 backdrop-blur border-t-2 border-white/10 flex items-center gap-3">
-          <button
-            onClick={prev}
-            disabled={idx === 0}
-            className="h-12 w-12 rounded-2xl bg-white/15 grid place-items-center disabled:opacity-30 active:scale-95"
-            aria-label="Anterior"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={next}
-            className="flex-1 h-12 rounded-2xl bg-gradient-to-r from-[#FFC93C] to-[#FF8A4C] text-[#0d1f55] font-black flex items-center justify-center gap-2 active:scale-[0.98]"
-          >
-            {idx === BLOCOS.length - 1 ? (
-              <>
-                Concluir <CheckCircle2 className="h-5 w-5" />
-              </>
-            ) : (
-              <>
-                Próximo <ArrowRight className="h-5 w-5" />
-              </>
-            )}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
