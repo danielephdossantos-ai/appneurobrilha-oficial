@@ -511,6 +511,10 @@ function JogoOrdenar({
         imagemUrl: g.imagemUrl,
         quantidade: g.quantidade,
         rotulo: g.rotulo,
+        imagemUrl2: g.imagemUrl2,
+        quantidade2: g.quantidade2,
+        cor: g.cor,
+        cor2: g.cor2,
       })),
     [jogo],
   );
@@ -560,20 +564,44 @@ function JogoOrdenar({
                       {v.rotulo}
                     </div>
                   )}
-                  <div className="flex flex-wrap gap-1 justify-center">
-                    {Array.from({ length: v.quantidade }).map((_, k) => (
-                      <img
-                        key={k}
-                        src={v.imagemUrl}
-                        alt=""
-                        className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
-                        loading="lazy"
-                      />
-                    ))}
+                  <div className="flex flex-wrap gap-2 justify-center items-center">
+                    <div
+                      className="flex flex-wrap gap-1 justify-center p-1.5 rounded-xl"
+                      style={{ background: v.cor ? `${v.cor}22` : "transparent" }}
+                    >
+                      {Array.from({ length: v.quantidade }).map((_, k) => (
+                        <img
+                          key={k}
+                          src={v.imagemUrl}
+                          alt=""
+                          className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
+                          loading="lazy"
+                        />
+                      ))}
+                    </div>
+                    {v.quantidade2 != null && v.quantidade2 > 0 && (
+                      <>
+                        <span className="text-2xl font-black text-[#0d1f55]">+</span>
+                        <div
+                          className="flex flex-wrap gap-1 justify-center p-1.5 rounded-xl"
+                          style={{ background: v.cor2 ? `${v.cor2}22` : "transparent" }}
+                        >
+                          {Array.from({ length: v.quantidade2 }).map((_, k) => (
+                            <img
+                              key={k}
+                              src={v.imagemUrl2 ?? v.imagemUrl}
+                              alt=""
+                              className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
+                              loading="lazy"
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
-                <div className="text-2xl font-black tabular-nums bg-[#0d1f55] text-white h-11 w-11 rounded-xl grid place-items-center">
-                  {v.quantidade}
+                <div className="text-2xl font-black tabular-nums bg-[#0d1f55] text-white h-11 min-w-[2.75rem] px-2 rounded-xl grid place-items-center">
+                  {v.quantidade2 != null ? `${v.quantidade}+${v.quantidade2}` : v.quantidade}
                 </div>
               </Reorder.Item>
             ))}
