@@ -13,6 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Secao } from "./blocos/Secao";
+import { TapCountGroup } from "./blocos/TapCountGroup";
 import type { Aula } from "../types";
 
 /**
