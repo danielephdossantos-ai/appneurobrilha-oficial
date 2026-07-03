@@ -676,27 +676,14 @@ function JogoContarQuiz({
         }`}
       >
         {jogo.grupos.map((g, i) => (
-          <div
+          <TapCountGroup
             key={i}
-            className="rounded-2xl bg-white/10 border-2 border-white/20 p-3"
-          >
-            {g.rotulo && (
-              <div className="text-xs font-black uppercase tracking-wider text-white/70 text-center mb-2">
-                {g.rotulo}
-              </div>
-            )}
-            <div className="flex flex-wrap justify-center gap-1.5">
-              {Array.from({ length: g.quantidade }).map((_, k) => (
-                <img
-                  key={k}
-                  src={g.imagemUrl}
-                  alt=""
-                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          </div>
+            imagemUrl={g.imagemUrl}
+            quantidade={g.quantidade}
+            rotulo={g.rotulo}
+            itemSingular="item"
+            size={jogo.grupos.length === 1 ? "lg" : "md"}
+          />
         ))}
       </div>
 
