@@ -35,6 +35,8 @@ export function OperacaoVisual({
   const [contadoTotal, setContadoTotal] = useState(0);
   const [removidos, setRemovidos] = useState(0); // para subtração
   const [replayKey, setReplayKey] = useState(0);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const autoPlayStarted = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const runId = useRef(0);
 
@@ -57,7 +59,27 @@ export function OperacaoVisual({
 
   useEffect(() => {
     if (!autoPlay) return;
-    add(() => rodar(), 400);
+    const start = () => {
+      if (autoPlayStarted.current) return;
+      autoPlayStarted.current = true;
+      add(() => rodar(), 400);
+    };
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      start();
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          start();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlay]);
 
@@ -309,8 +331,10 @@ export function OperacaoVisual({
 
   return (
     <div
-      className="rounded-3xl border-4 p-3"
+      ref={rootRef}
+      className={`rounded-3xl border-4 p-3 ${fase === 0 ? "cursor-pointer" : ""}`}
       style={{ borderColor: cor, background: `${cor}18` }}
+      onClick={fase === 0 ? rodar : undefined}
     >
       {legenda && (
         <div className="text-[11px] font-black uppercase tracking-widest text-white/80 text-center mb-2">
@@ -341,7 +365,7 @@ export function OperacaoVisual({
             <div className="flex flex-col items-center gap-2">
               <Grupo
                 total={a}
-                mostrar={fase === 0 || fase >= 2 ? a : contadoA}
+                mostrar={fase === 0 || fase >= 1 ? a : contadoA}
                 riscados={fase >= 3 ? removidos : 0}
               />
               <span className="text-sm font-black" style={{ color: cor }}>
@@ -401,7 +425,7 @@ export function OperacaoVisual({
 
       <p className="text-center text-[11px] font-black uppercase tracking-widest text-white/70 mt-2 min-h-[16px]">
         {fase === 0 && "Toque em Mostrar"}
-        {fase === 1 && `Contando... ${contadoA}`}
+        {fase === 1 && `Primeiro vemos as ${a} ${itemPlural}. Contando... ${contadoA}`}
         {fase === 2 && (operacao === "soma" ? `Agora mais ${b}` : `Vamos tirar ${b}`)}
         {fase === 3 && (operacao === "soma" ? `Contando... ${contadoB}` : `Tirou ${removidos} de ${b}`)}
         {fase === 4 && `Contando o que sobrou: ${contadoTotal}`}
@@ -412,7 +436,10 @@ export function OperacaoVisual({
       <div className="flex justify-center gap-2 mt-2">
         <button
           type="button"
-          onClick={rodar}
+          onClick={(e) => {
+            e.stopPropagation();
+            rodar();
+          }}
           className="inline-flex items-center gap-1 px-3 py-2 rounded-xl font-black text-sm text-white"
           style={{ background: cor }}
         >
@@ -421,7 +448,10 @@ export function OperacaoVisual({
         {fase !== 0 && (
           <button
             type="button"
-            onClick={reiniciar}
+            onClick={(e) => {
+              e.stopPropagation();
+              reiniciar();
+            }}
             className="inline-flex items-center gap-1 px-3 py-2 rounded-xl font-black text-sm bg-white text-[#0d1f55]"
           >
             <RotateCcw className="h-4 w-4" /> Reiniciar
