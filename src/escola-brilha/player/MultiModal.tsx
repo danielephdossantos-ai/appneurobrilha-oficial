@@ -151,25 +151,84 @@ function JogoArrastar({
   );
   const [checked, setChecked] = useState(false);
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
   const dragged = useRef<string | null>(null);
+  const tts = useDeviceTTS();
 
-  const conferir = () => setChecked(true);
+  const buscarAlvoVisual = (nome: string) =>
+    jogo.alvosVisuais?.find((a) => a.nome === nome);
+
+  const contarNoAlvo = (mapa: Record<string, string | null>, alvo: string) =>
+    Object.values(mapa).filter((a) => a === alvo).length;
+
+  const falarElogio = (n: number, nome: string) => {
+    const elogios = [
+      `Muito bem! Ficaram ${n} na ${nome}.`,
+      `Isso mesmo! ${n} na ${nome}. Boa!`,
+      `Perfeito! A ${nome} ficou com ${n}.`,
+    ];
+    tts.speak(elogios[Math.floor(Math.random() * elogios.length)], { rate: 1.05 });
+  };
+
+  const conferir = () => {
+    setChecked(true);
+    // Feedback por caixa quando existe capacidade definida
+    const faltando: string[] = [];
+    const sobrando: string[] = [];
+    for (const alvo of alvos) {
+      const visual = buscarAlvoVisual(alvo);
+      const cap = visual?.capacidade;
+      if (cap === undefined) continue;
+      const q = contarNoAlvo(drops, alvo);
+      if (q < cap) faltando.push(`faltam ${cap - q} na ${visual?.nome ?? alvo}`);
+      else if (q > cap) sobrando.push(`passou de ${cap} na ${visual?.nome ?? alvo}`);
+    }
+    if (faltando.length) {
+      tts.speak(`Ainda ${faltando.join(", e ")}. Vamos completar!`, { rate: 1 });
+    } else if (sobrando.length) {
+      tts.speak(`${sobrando.join(", e ")}. Vamos contar de novo!`, { rate: 1 });
+    } else {
+      tts.speak("Muito bem! Todas as caixas estão certinhas!", { rate: 1.05, pitch: 1.1 });
+    }
+  };
   const reset = () => {
     setDrops(Object.fromEntries(jogo.pares.map((p) => [p.item, null])));
     setChecked(false);
     setSelecionado(null);
+    setAviso(null);
+    tts.stop();
   };
   const acertos = jogo.pares.filter(
     (p) => drops[p.item] === p.alvo,
   ).length;
 
   const colocarNoAlvo = (item: string, alvo: string) => {
-    setDrops((d) => ({ ...d, [item]: alvo }));
+    setDrops((d) => {
+      const novo = { ...d, [item]: alvo };
+      const visual = buscarAlvoVisual(alvo);
+      const cap = visual?.capacidade;
+      const q = contarNoAlvo(novo, alvo);
+      const nome = visual?.nome ?? alvo;
+      // Narração: conta o número colocado
+      if (cap === undefined || cap > 1) {
+        if (cap !== undefined && q > cap) {
+          tts.speak(`${q}! Passou de ${cap}. Vamos contar de novo!`, { rate: 1 });
+          setAviso(`Passou! Tire um da ${nome}.`);
+        } else {
+          if (cap !== undefined && q === cap) {
+            falarElogio(q, nome);
+            setAviso(null);
+          } else {
+            tts.speak(String(q), { rate: 1.1 });
+            setAviso(null);
+          }
+        }
+      }
+      return novo;
+    });
     setSelecionado(null);
   };
 
-  const buscarAlvoVisual = (nome: string) =>
-    jogo.alvosVisuais?.find((a) => a.nome === nome);
 
   return (
     <Secao icon={MousePointerClick} rotulo="Arraste" cor="#F472B6">
