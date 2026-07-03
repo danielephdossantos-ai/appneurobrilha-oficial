@@ -15,6 +15,7 @@ import {
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
 import { OperacaoVisual } from "./blocos/OperacaoVisual";
+import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
 
 /**
