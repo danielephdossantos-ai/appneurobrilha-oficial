@@ -511,6 +511,10 @@ function JogoOrdenar({
         imagemUrl: g.imagemUrl,
         quantidade: g.quantidade,
         rotulo: g.rotulo,
+        imagemUrl2: g.imagemUrl2,
+        quantidade2: g.quantidade2,
+        cor: g.cor,
+        cor2: g.cor2,
       })),
     [jogo],
   );
