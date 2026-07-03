@@ -434,10 +434,16 @@ const aula: Aula = {
     },
     {
       tipo: "ordenar",
-      titulo: "Mini Jogo · Ordene as formas do 8",
+      titulo: "Mini Jogo · Ordene as duplas que formam 8",
       instrucao:
-        "Do MENOR pro MAIOR primeiro número da soma. Toda dupla forma o mesmo número: 8.",
+        "Arraste as duplas de baixo pra cima. Coloque a que tem MENOS azuis em cima e a que tem MAIS azuis embaixo. Todas juntas formam 8!",
       itens: ["1 + 7", "2 + 6", "3 + 5", "4 + 4"],
+      imagens: [
+        { imagemUrl: moedaImg, quantidade: 1, imagemUrl2: estrelaImg, quantidade2: 7, rotulo: "1 + 7 = 8", cor: "#60A5FA", cor2: "#FBBF24" },
+        { imagemUrl: moedaImg, quantidade: 2, imagemUrl2: estrelaImg, quantidade2: 6, rotulo: "2 + 6 = 8", cor: "#60A5FA", cor2: "#FBBF24" },
+        { imagemUrl: moedaImg, quantidade: 3, imagemUrl2: estrelaImg, quantidade2: 5, rotulo: "3 + 5 = 8", cor: "#60A5FA", cor2: "#FBBF24" },
+        { imagemUrl: moedaImg, quantidade: 4, imagemUrl2: estrelaImg, quantidade2: 4, rotulo: "4 + 4 = 8", cor: "#60A5FA", cor2: "#FBBF24" },
+      ],
     },
   ],
 
