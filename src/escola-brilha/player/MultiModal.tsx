@@ -95,6 +95,8 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoColorir jogo={jogo} />;
     case "montar":
       return <JogoMontar jogo={jogo} />;
+    case "contarQuiz":
+      return <JogoContarQuiz jogo={jogo} />;
   }
 }
 
