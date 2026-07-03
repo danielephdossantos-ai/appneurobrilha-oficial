@@ -209,6 +209,12 @@ const aula: Aula = {
   conclusao:
     "🏅 Medalha conquistada: Contador da Floresta! Agora você conhece vários jeitos de contar — um a um, em pares, em grupos ou comparando. Missão em Casa: conte cadeiras, copos, brinquedos, sapatos e almofadas. Depois diga qual grupo tem MAIS e qual tem MENOS.",
 
+  curiosidade: {
+    titulo: "Você sabia?",
+    texto:
+      "Os cientistas acreditam que, muito antes de existir a escrita, as pessoas já contavam usando pedras, gravetos e até os próprios dedos. Até hoje usamos os dedos quando estamos aprendendo a contar!",
+  },
+
   // Sem `midias` estáticas — todas as cenas da Explicação são interativas.
 
   interativas: [
