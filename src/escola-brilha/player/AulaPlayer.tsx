@@ -87,17 +87,44 @@ export function AulaPlayer({
   const tentativaContada = useRef(false);
 
   const temDiagnostico = (aula.diagnostico?.length ?? 0) > 0;
+  // Diagnóstico é ÚNICO por criança: se já respondeu em qualquer habilidade,
+  // nunca mais aparece. Verificamos globalmente antes de mostrar.
+  const [diagnosticoGlobalFeito, setDiagnosticoGlobalFeito] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if (progresso.carregado && !retomado) {
+    if (!activeChild?.id) return;
+    let vivo = true;
+    (async () => {
+      const { data } = await supabase
+        .from("escola_progresso")
+        .select("child_id")
+        .eq("child_id", activeChild.id)
+        .eq("diagnostico_feito", true)
+        .limit(1)
+        .maybeSingle();
+      if (!vivo) return;
+      setDiagnosticoGlobalFeito(!!data);
+    })();
+    return () => { vivo = false; };
+  }, [activeChild?.id]);
+
+  useEffect(() => {
+    if (progresso.carregado && !retomado && diagnosticoGlobalFeito !== null) {
       const alvo = progresso.concluida ? 0 : Math.min(progresso.bloco_atual, BLOCOS.length - 1);
       setIdx(alvo);
       setAcertos(progresso.acertos);
       setErros(progresso.erros);
       inicioBloco.current = Date.now();
       setRetomado(true);
-      // Diagnóstico só entra antes do primeiro bloco e se ainda não foi feito.
-      if (temDiagnostico && !progresso.diagnostico_feito && alvo === 0 && !progresso.concluida) {
+      // Diagnóstico só entra antes do primeiro bloco, se ainda não foi feito
+      // nesta habilidade E se a criança nunca fez em nenhuma outra habilidade.
+      if (
+        temDiagnostico &&
+        !progresso.diagnostico_feito &&
+        !diagnosticoGlobalFeito &&
+        alvo === 0 &&
+        !progresso.concluida
+      ) {
         setEmDiagnostico(true);
       }
       if (!tentativaContada.current) {
@@ -105,7 +132,7 @@ export function AulaPlayer({
         void salvar({ tentativas: (progresso.tentativas ?? 0) + 1 });
       }
     }
-  }, [progresso, retomado, salvar, temDiagnostico]);
+  }, [progresso, retomado, salvar, temDiagnostico, diagnosticoGlobalFeito]);
 
   const texto = useMemo(() => textoDoBloco(aula, BLOCOS[idx].id), [aula, idx, BLOCOS]);
   const speak = () => (tts.speaking ? tts.stop() : tts.speak(texto));
