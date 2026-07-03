@@ -258,14 +258,34 @@ function JogoOrdenar({
 }: {
   jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "ordenar" }>;
 }) {
+  // Modo visual: usa `imagens` (grupos com imagem + quantidade).
+  const modoVisual = !!jogo.imagens?.length;
+  const itensVisuais = useMemo(
+    () =>
+      (jogo.imagens ?? []).map((g, i) => ({
+        id: `v${i}`,
+        imagemUrl: g.imagemUrl,
+        quantidade: g.quantidade,
+        rotulo: g.rotulo,
+      })),
+    [jogo],
+  );
+  const embaralhadosV = useMemo(
+    () => [...itensVisuais].sort(() => Math.random() - 0.5),
+    [itensVisuais],
+  );
   const embaralhados = useMemo(
     () => [...jogo.itens].sort(() => Math.random() - 0.5),
     [jogo],
   );
+  const [ordemV, setOrdemV] = useState(embaralhadosV);
   const [ordem, setOrdem] = useState(embaralhados);
   const [checked, setChecked] = useState(false);
-  const ok = ordem.every((v, i) => v === jogo.itens[i]);
-  const ehPodio = jogo.itens.every((i) => /^[123]º/.test(i));
+  const okV = ordemV.every((v, i) => v.id === itensVisuais[i].id);
+  const okT = ordem.every((v, i) => v === jogo.itens[i]);
+  const ok = modoVisual ? okV : okT;
+  const ehPodio =
+    !modoVisual && jogo.itens.every((i) => /^[123]º/.test(i));
   const estilos: Record<string, { h: string; bg: string; medal: string; label: string }> = {
     "1º": { h: "h-40", bg: "bg-gradient-to-b from-[#FFD700] to-[#B8860B]", medal: "🥇", label: "1º" },
     "2º": { h: "h-32", bg: "bg-gradient-to-b from-[#E5E7EB] to-[#9CA3AF]", medal: "🥈", label: "2º" },
@@ -275,7 +295,43 @@ function JogoOrdenar({
     <Secao icon={ListOrdered} rotulo="Ordene" cor="#34D399">
       <p className="font-black text-lg mb-1">{jogo.titulo}</p>
       <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
-      {ehPodio ? (
+      {modoVisual ? (
+        <>
+          <p className="text-sm text-white/60 mb-2">
+            Arraste os grupos para a ordem certa (do menor para o maior).
+          </p>
+          <Reorder.Group
+            axis="y"
+            values={ordemV}
+            onReorder={setOrdemV}
+            className="space-y-2"
+          >
+            {ordemV.map((v) => (
+              <Reorder.Item
+                key={v.id}
+                value={v}
+                className="rounded-2xl bg-white/95 text-[#0d1f55] p-3 cursor-grab active:cursor-grabbing shadow flex items-center gap-3 border-2 border-white/40"
+              >
+                <span className="text-[#0d1f55]/60 font-black text-xl">≡</span>
+                <div className="flex flex-wrap gap-1 flex-1 justify-center">
+                  {Array.from({ length: v.quantidade }).map((_, k) => (
+                    <img
+                      key={k}
+                      src={v.imagemUrl}
+                      alt=""
+                      className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
+                      loading="lazy"
+                    />
+                  ))}
+                </div>
+                <div className="text-2xl font-black tabular-nums bg-[#0d1f55] text-white h-11 w-11 rounded-xl grid place-items-center">
+                  {v.quantidade}
+                </div>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
+        </>
+      ) : ehPodio ? (
         <>
           <p className="text-sm text-white/60 mb-2">
             Arraste os pódios da esquerda para a direita na ordem: 1º, 2º, 3º.
