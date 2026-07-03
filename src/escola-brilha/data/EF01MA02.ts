@@ -132,10 +132,38 @@ const aula: Aula = {
 
   desafio: {
     enunciado:
-      "Desafio Brilha: o Papagaio tem 8 sementes, o Esquilo tem 5 castanhas e o Coelho tem 10 cenouras. Quem tem MAIS alimentos? Quem tem MENOS? Quem tem exatamente 8?",
+      "Desafio Brilha: o Papagaio tem 8 sementes, o Esquilo tem 5 castanhas e o Coelho tem 10 cenouras. Conte cada grupo e responda!",
     resposta:
       "MAIS: Coelho (10). MENOS: Esquilo (5). Exatamente 8: Papagaio.",
+    visual: {
+      cena: [
+        { personagem: "Papagaio", itemImagemUrl: sementeImg, quantidade: 8, cor: "#34D399" },
+        { personagem: "Esquilo",  itemImagemUrl: castanhaImg, quantidade: 5, cor: "#FB923C" },
+        { personagem: "Coelho",   personagemImagemUrl: coelhoImg, itemImagemUrl: cenouraImg, quantidade: 10, cor: "#F472B6" },
+      ],
+      perguntas: [
+        {
+          pergunta: "Quem tem MAIS alimentos?",
+          opcoes: ["Papagaio (8)", "Esquilo (5)", "Coelho (10)"],
+          correta: 2,
+          explicacao: "10 é a maior quantidade — o Coelho tem mais.",
+        },
+        {
+          pergunta: "Quem tem MENOS alimentos?",
+          opcoes: ["Papagaio (8)", "Esquilo (5)", "Coelho (10)"],
+          correta: 1,
+          explicacao: "5 é a menor quantidade — o Esquilo tem menos.",
+        },
+        {
+          pergunta: "Quem tem EXATAMENTE 8 alimentos?",
+          opcoes: ["Papagaio", "Esquilo", "Coelho"],
+          correta: 0,
+          explicacao: "O Papagaio tem 8 sementes.",
+        },
+      ],
+    },
   },
+
 
   revisao: {
     pontos: [
