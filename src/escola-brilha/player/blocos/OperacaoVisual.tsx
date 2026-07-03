@@ -287,6 +287,7 @@ export function OperacaoVisual({
   }
 
   const Icone = operacao === "soma" ? Plus : Minus;
+  const mostrarSubtracao = fase === 0 ? a : fase === 1 ? contadoA : a;
 
   // Renderiza APENAS as imagens já reveladas (aparecem uma por uma).
   const Grupo = ({
@@ -365,7 +366,7 @@ export function OperacaoVisual({
             <div className="flex flex-col items-center gap-2">
               <Grupo
                 total={a}
-                mostrar={fase === 0 || fase >= 1 ? a : contadoA}
+                mostrar={mostrarSubtracao}
                 riscados={fase >= 3 ? removidos : 0}
               />
               <span className="text-sm font-black" style={{ color: cor }}>
