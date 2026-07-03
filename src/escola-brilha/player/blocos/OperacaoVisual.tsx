@@ -369,38 +369,46 @@ export function OperacaoVisual({
       {/* Área visual */}
       <div key={replayKey} className="min-h-[130px] bg-white/60 rounded-2xl p-3">
         {operacao === "subtracao" ? (
-          fase < 3 ? (
-            // Fases 0-2: mostra só o grupo inicial contando
-            <div className="flex flex-col items-center gap-2">
-              <Grupo total={a} mostrar={mostrarSubtracao} />
-              <span className="text-sm font-black" style={{ color: cor }}>
-                {fase <= 1 ? `${contadoA || 0}` : `${a} ${itemPlural}`}
-              </span>
+          <div className="flex flex-col items-center gap-2">
+            <div className="rounded-full bg-white/80 px-3 py-1 text-xs font-black text-[#0d1f55]">
+              Total no baú: {fase === 1 ? `${contadoA}/${a}` : a}
             </div>
-          ) : (
-            // Fase 3+: DOIS grupos lado a lado — ficaram | saíram
-            <div className="flex items-start justify-center gap-2 sm:gap-3">
-              <div className="flex flex-col items-center gap-1 rounded-xl p-2 bg-[#DCFCE7] border-2 border-[#22C55E]">
+
+            <div className="grid w-full grid-cols-2 items-stretch gap-2 sm:gap-3">
+              <div className="flex min-h-[126px] flex-col items-center justify-between gap-1 rounded-xl p-2 bg-[#DCFCE7] border-2 border-[#22C55E]">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#166534]">
                   Ficaram
                 </span>
-                <Grupo total={a} mostrar={a - removidos} />
+                <Grupo total={resultado} mostrar={resultado} compacto />
                 <span className="text-lg font-black text-[#22C55E]">
-                  {fase >= 4 ? (contadoTotal || "…") : (a - removidos)}
+                  {resultado}
                 </span>
               </div>
-              <Minus className="h-8 w-8 shrink-0 mt-8" style={{ color: cor }} />
-              <div className="flex flex-col items-center gap-1 rounded-xl p-2 bg-[#FEE2E2] border-2 border-[#EF4444]">
+
+              <div className="flex min-h-[126px] flex-col items-center justify-between gap-1 rounded-xl p-2 bg-[#FEE2E2] border-2 border-[#EF4444]">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#991B1B]">
                   Saíram
                 </span>
-                <Grupo total={b} mostrar={removidos} riscados={removidos} />
+                <Grupo
+                  total={b}
+                  mostrar={b}
+                  riscados={fase >= 4 ? b : fase >= 3 ? removidos : 0}
+                  compacto
+                />
                 <span className="text-lg font-black text-[#EF4444]">
-                  {removidos}
+                  {b}
                 </span>
               </div>
             </div>
-          )
+
+            <div className="flex items-center justify-center gap-2 text-sm font-black text-[#0d1f55]">
+              <span>{resultado}</span>
+              <span>ficaram</span>
+              <Minus className="h-4 w-4" style={{ color: cor }} />
+              <span>{b}</span>
+              <span>saíram</span>
+            </div>
+          </div>
         ) : fase < 4 ? (
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <div className="flex flex-col items-center gap-1">
