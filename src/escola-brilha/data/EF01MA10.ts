@@ -3,6 +3,8 @@ import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
 import tulipaImg from "@/assets/neuro-treino/objetos/tulipa.png";
 import rosaImg from "@/assets/neuro-treino/objetos/rosa.png";
+import margaridaImg from "@/assets/neuro-treino/objetos/margarida.png";
+import cerejeiraImg from "@/assets/neuro-treino/objetos/cerejeira.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import borboletaImg from "@/assets/neuro-treino/objetos/borboleta.png";
