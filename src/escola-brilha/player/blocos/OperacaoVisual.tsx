@@ -97,6 +97,7 @@ export function OperacaoVisual({
     if (operacao === "soma") {
       for (let i = 1; i <= b; i++) {
         add(() => {
+          setFase(3);
           setContadoB(i);
           speakChunked(nome(i), { rate: 0.85 });
         }, t);
