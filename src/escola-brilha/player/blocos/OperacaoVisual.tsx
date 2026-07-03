@@ -35,12 +35,14 @@ export function OperacaoVisual({
   const [contadoTotal, setContadoTotal] = useState(0);
   const [removidos, setRemovidos] = useState(0); // para subtração
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const runId = useRef(0);
 
   const resultado = operacao === "soma" ? a + b : Math.max(0, a - b);
   const nomesPT = ["", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove", "vinte"];
   const nome = (n: number) => nomesPT[n] ?? String(n);
 
   function limpar() {
+    runId.current += 1;
     timers.current.forEach((t) => clearTimeout(t));
     timers.current = [];
     stopSpeaking();
@@ -59,6 +61,11 @@ export function OperacaoVisual({
   }, [autoPlay]);
 
   function rodar() {
+    if (operacao === "subtracao") {
+      void rodarSubtracao();
+      return;
+    }
+
     limpar();
     setFase(1);
     setContadoA(0);
@@ -174,6 +181,76 @@ export function OperacaoVisual({
         { rate: 0.8 },
       );
     }, t);
+  }
+
+  async function rodarSubtracao() {
+    limpar();
+    const id = runId.current;
+    const vivo = () => id === runId.current;
+    const pausa = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+    const falar = async (texto: string, rate = 0.68) => {
+      if (!vivo()) return;
+      await speakChunked(texto, { rate });
+    };
+
+    setFase(1);
+    setContadoA(0);
+    setContadoB(0);
+    setContadoTotal(0);
+    setRemovidos(0);
+
+    await falar(`Vamos ver. Temos ${a} ${itemPlural}.`, 0.7);
+    await pausa(600);
+    if (!vivo()) return;
+
+    for (let i = 1; i <= a; i++) {
+      setContadoA(i);
+      await falar(nome(i), 0.62);
+      await pausa(1000);
+      if (!vivo()) return;
+    }
+
+    await pausa(1000);
+    if (!vivo()) return;
+    setFase(2);
+    setContadoA(a);
+    await falar(`Temos ${nome(a)} ${itemPlural}.`, 0.66);
+    await pausa(700);
+    if (!vivo()) return;
+    await falar(`Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`, 0.66);
+    await pausa(1200);
+    if (!vivo()) return;
+
+    for (let i = 1; i <= b; i++) {
+      const sobram = a - i;
+      await falar(`Agora vou tirar a moeda ${nome(i)}.`, 0.64);
+      await pausa(450);
+      if (!vivo()) return;
+      setFase(3);
+      setRemovidos(i);
+      await pausa(750);
+      if (!vivo()) return;
+      await falar(`Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`, 0.64);
+      await pausa(1300);
+      if (!vivo()) return;
+    }
+
+    setFase(4);
+    await falar(`Agora vamos contar só as moedas que ficaram.`, 0.66);
+    await pausa(800);
+    if (!vivo()) return;
+
+    for (let i = 1; i <= resultado; i++) {
+      setContadoTotal(i);
+      await falar(nome(i), 0.62);
+      await pausa(1000);
+      if (!vivo()) return;
+    }
+
+    await pausa(1000);
+    if (!vivo()) return;
+    setFase(5);
+    await falar(`${a} menos ${b} é igual a ${resultado}. Ficaram ${nome(resultado)} ${itemPlural}.`, 0.68);
   }
 
   function reiniciar() {
