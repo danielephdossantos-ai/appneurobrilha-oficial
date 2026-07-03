@@ -34,6 +34,7 @@ export function OperacaoVisual({
   const [contadoB, setContadoB] = useState(0);
   const [contadoTotal, setContadoTotal] = useState(0);
   const [removidos, setRemovidos] = useState(0); // para subtração
+  const [replayKey, setReplayKey] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const runId = useRef(0);
 
@@ -61,6 +62,7 @@ export function OperacaoVisual({
   }, [autoPlay]);
 
   function rodar() {
+    setReplayKey((k) => k + 1);
     if (operacao === "subtracao") {
       void rodarSubtracao();
       return;
@@ -333,7 +335,7 @@ export function OperacaoVisual({
       </div>
 
       {/* Área visual */}
-      <div className="min-h-[130px] bg-white/60 rounded-2xl p-3">
+      <div key={replayKey} className="min-h-[130px] bg-white/60 rounded-2xl p-3">
         {operacao === "subtracao" ? (
           fase < 4 ? (
             <div className="flex flex-col items-center gap-2">

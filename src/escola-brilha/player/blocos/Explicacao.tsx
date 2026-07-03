@@ -47,6 +47,16 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
   const podeAvancar = visiveis < total;
   const podeAprofundar = nivelIdx < niveis.length - 1;
   const nivelAtual = niveis[nivelIdx];
+  const reverExplicacao = () => {
+    setVisiveis(1);
+    setNivelIdx(0);
+    requestAnimationFrame(() => {
+      document.getElementById("bloco-explicacao")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   return (
     <Secao icon={BookOpen} rotulo="Explicação" cor="#4C9EFF">
@@ -179,8 +189,17 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
         )}
 
         {!podeAvancar && (
-          <div className="text-[11px] font-bold uppercase tracking-widest text-white/50">
-            Explicação concluída — pronto pra praticar!
+          <div className="grid gap-2">
+            <button
+              type="button"
+              onClick={reverExplicacao}
+              className="w-full h-11 rounded-2xl bg-white/10 border border-white/25 text-white font-black text-sm active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              <RefreshCw className="h-4 w-4" /> Rever explicação desde o começo
+            </button>
+            <div className="text-[11px] font-bold uppercase tracking-widest text-white/50">
+              Explicação concluída — pronto pra praticar!
+            </div>
           </div>
         )}
       </div>
