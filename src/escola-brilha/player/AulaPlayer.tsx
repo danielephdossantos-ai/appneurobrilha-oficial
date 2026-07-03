@@ -17,7 +17,9 @@ import { ProgressaoNiveis } from "./blocos/ProgressaoNiveis";
 import { Desafio } from "./blocos/Desafio";
 import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
+import { Curiosidade } from "./blocos/Curiosidade";
 import { Conclusao } from "./blocos/Conclusao";
+
 import { Diagnostico } from "./blocos/Diagnostico";
 import { MultiModal } from "./MultiModal";
 import { ProfessorVirtual } from "./ProfessorVirtual";
@@ -44,10 +46,12 @@ const BLOCOS_BASE = [
   { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
   { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },
   { id: "desafio",    nome: "Desafio",        etapa: 4, etapaNome: "Praticar"   },
-  { id: "quiz",       nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
-  { id: "resumo",     nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
-  { id: "conclusao",  nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
+  { id: "quiz",        nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
+  { id: "resumo",      nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
+  { id: "curiosidade", nome: "Curiosidade",    etapa: 5, etapaNome: "Conquistar" },
+  { id: "conclusao",   nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
 ] as const;
+
 
 type BlocoId = typeof BLOCOS_BASE[number]["id"];
 
@@ -73,9 +77,15 @@ export function AulaPlayer({
   const { activeChild } = useAppState();
   const { progresso, salvar } = useProgresso(activeChild?.id, aula.codigo);
   const BLOCOS = useMemo(
-    () => (aula.narrativa ? BLOCOS_BASE : BLOCOS_BASE.filter((b) => b.id !== "narrativa")),
-    [aula.narrativa],
+    () =>
+      BLOCOS_BASE.filter((b) => {
+        if (b.id === "narrativa" && !aula.narrativa) return false;
+        if (b.id === "curiosidade" && !aula.curiosidade) return false;
+        return true;
+      }),
+    [aula.narrativa, aula.curiosidade],
   );
+
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [retomado, setRetomado] = useState(false);
@@ -371,8 +381,11 @@ function renderBloco(
       );
     case "resumo":
       return <Revisao dados={a.revisao} />;
+    case "curiosidade":
+      return a.curiosidade ? <Curiosidade dados={a.curiosidade} /> : null;
     case "conclusao":
       return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} codigoAtual={a.codigo} />;
+
     default:
       return null;
   }

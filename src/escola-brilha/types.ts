@@ -213,6 +213,16 @@ export type Aula = {
   revisao: { pontos: string[]; dica: string };
   // 10. Conclusão
   conclusao: string;
+  /**
+   * Curiosidade (opcional mas RECOMENDADA em toda aula). Um "você sabia?"
+   * curto ligado ao tema, para despertar interesse antes da conclusão.
+   */
+  curiosidade?: {
+    titulo?: string;
+    texto: string;
+    imagemUrl?: string;
+  };
+
 
   // Opcional — diagnóstico rápido dos conhecimentos prévios (antes da aula).
   // Se ausente, o player pula direto pra Missão.

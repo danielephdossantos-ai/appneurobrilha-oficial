@@ -17,7 +17,9 @@ type BlocoId =
   | "desafio"
   | "quiz"
   | "resumo"
+  | "curiosidade"
   | "conclusao";
+
 
 /**
  * Professor Virtual (Profª Brilha) — mascote fixo que acompanha
@@ -250,7 +252,13 @@ const TEMPLATES: Record<BlocoId, Record<Faixa, string[]>> = {
     medio: ["Resumo do que você aprendeu hoje. Guarda essas ideias!", "Se você entender o resumo, tá dominando a aula."],
     grande: ["Revisar consolida a memória. Leia o resumo com atenção.", "Se algum ponto do resumo estranhar, volte à explicação antes do quiz."],
   },
+  curiosidade: {
+    pequeno: ["Olha que legal essa curiosidade!", "Você sabia disso? Que interessante!"],
+    medio: ["Uma curiosidade sobre o que a gente aprendeu hoje.", "Sabia disso? Aprender é bem mais divertido com curiosidades."],
+    grande: ["Uma curiosidade pra fixar o conteúdo com contexto real.", "Curiosidades ajudam o cérebro a lembrar melhor do que estudou."],
+  },
   conclusao: {
+
     pequeno: ["Uhuuu{nome}, você conseguiu! Que orgulho de você!", "Missão cumprida{nome}! Você tá brilhando! ✨"],
     medio: ["Boa{nome}! Você chegou até o fim da aula.", "Parabéns{nome}, mais uma habilidade conquistada!"],
     grande: ["Aula concluída{nome}. Consistência hoje vira domínio amanhã.", "Bom trabalho{nome}. Bora pra próxima habilidade?"],
