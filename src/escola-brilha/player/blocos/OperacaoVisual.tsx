@@ -72,67 +72,65 @@ export function OperacaoVisual({
         : `Vamos ver. Temos ${a} ${itemPlural}.`;
     speakChunked(intro, { rate: 0.75 });
 
-    let t = 2400;
-    const passo = 1700; // tempo entre cada número contado (bem devagar)
+    let t = 3000;
+    const passo = 1900; // tempo entre cada número contado (bem devagar)
     const rateNum = 0.7; // ritmo lento do número falado
 
-    // Conta grupo A um por um
+    // Conta grupo A um por um (enfileirado, não corta)
     for (let i = 1; i <= a; i++) {
       add(() => {
         setContadoA(i);
-        speakChunked(nome(i), { rate: rateNum });
+        speakChunked(nome(i), { rate: rateNum, queue: true });
       }, t);
       t += passo;
     }
 
     // Pausa antes do sinal
-    t += 500;
-
-    // Sinal e grupo B
-    add(() => {
-      setFase(2);
-      speakChunked(
-        operacao === "soma" ? `Agora, mais ${b}.` : `Agora vamos tirar ${b}.`,
-        { rate: 0.8 },
-      );
-    }, t);
-    t += 2200;
+    t += 800;
 
     if (operacao === "soma") {
+      // Anuncia grupo B
+      add(() => {
+        setFase(2);
+        speakChunked(`Agora, mais ${nome(b)}.`, { rate: 0.75, queue: true });
+      }, t);
+      t += 2600;
+
       for (let i = 1; i <= b; i++) {
         add(() => {
           setFase(3);
           setContadoB(i);
-          speakChunked(nome(i), { rate: rateNum });
+          speakChunked(nome(i), { rate: rateNum, queue: true });
         }, t);
         t += passo;
       }
-      t += 600;
+      t += 900;
       // Junta e conta total
       add(() => {
         setFase(4);
         speakChunked(`Agora vamos juntar tudo e contar de novo, bem devagar.`, {
-          rate: 0.8,
+          rate: 0.75,
+          queue: true,
         });
       }, t);
-      t += 3000;
+      t += 3800;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum });
+          speakChunked(nome(i), { rate: rateNum, queue: true });
         }, t);
         t += passo;
       }
     } else {
-      // Subtração: aviso antes de começar a tirar
+      // Subtração: aviso ANTES de começar a tirar
       add(() => {
         setFase(2);
         speakChunked(
           `Muito bem! Temos ${nome(a)} ${itemPlural}. Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`,
-          { rate: 0.75 },
+          { rate: 0.75, queue: true },
         );
       }, t);
-      t += 4200;
+      t += 6000;
       // Remove uma por uma explicando quantas sobram a cada passo
       for (let i = 1; i <= b; i++) {
         const sobram = a - i;
@@ -141,21 +139,24 @@ export function OperacaoVisual({
           setRemovidos(i);
           speakChunked(
             `Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`,
-            { rate: 0.75 },
+            { rate: 0.7, queue: true },
           );
         }, t);
-        t += passo + 1400;
+        t += 3800;
       }
-      t += 600;
+      t += 900;
       add(() => {
         setFase(4);
-        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, { rate: 0.75 });
+        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, {
+          rate: 0.75,
+          queue: true,
+        });
       }, t);
-      t += 3200;
+      t += 3800;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
-          speakChunked(nome(i), { rate: rateNum });
+          speakChunked(nome(i), { rate: rateNum, queue: true });
         }, t);
         t += passo;
       }
