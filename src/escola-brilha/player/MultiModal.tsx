@@ -186,28 +186,43 @@ function JogoArrastar({
               onClick={() => {
                 if (selecionado) colocarNoAlvo(selecionado, alvo);
               }}
-              className={`text-left rounded-3xl border-4 p-3 min-h-[160px] transition-all relative overflow-hidden ${
+              className={`text-left rounded-3xl border-4 p-3 min-h-[180px] transition-all relative overflow-hidden ${
                 podeReceber ? "ring-4 ring-[#FBBF24] animate-pulse" : ""
               }`}
               style={{
-                background: visual ? `${cor}` : "rgba(255,255,255,0.05)",
+                background: visual
+                  ? `linear-gradient(180deg, ${cor} 0%, ${cor}dd 100%)`
+                  : "rgba(255,255,255,0.05)",
                 borderColor: visual ? "#ffffff" : "rgba(255,255,255,0.3)",
                 borderStyle: visual ? "solid" : "dashed",
+                boxShadow: visual ? `0 8px 0 ${cor}80, 0 12px 24px rgba(0,0,0,0.35)` : undefined,
               }}
             >
               {visual ? (
                 <>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-black uppercase tracking-wider text-white drop-shadow">
+                    <span className="text-sm font-black uppercase tracking-wider text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
                       {visual.nome}
                     </span>
                     {visual.capacidade !== undefined && (
-                      <span className="h-9 w-9 rounded-full bg-white text-[#0d1f55] font-black text-lg grid place-items-center shadow border-2 border-white">
+                      <span
+                        className="h-10 w-10 rounded-full font-black text-xl grid place-items-center shadow-lg border-4 border-white"
+                        style={{ background: "#ffffff", color: cor }}
+                      >
                         {visual.capacidade}
                       </span>
                     )}
                   </div>
-                  <div className="rounded-2xl bg-white/25 backdrop-blur-sm min-h-[90px] p-2 flex flex-wrap gap-1.5 items-center justify-center">
+                  {/* Prato circular grande, cor forte */}
+                  <div
+                    className="rounded-full min-h-[110px] p-3 flex flex-wrap gap-1.5 items-center justify-center mx-auto border-8"
+                    style={{
+                      background: "#ffffff",
+                      borderColor: cor,
+                      width: "88%",
+                      boxShadow: `inset 0 4px 12px ${cor}55`,
+                    }}
+                  >
                     {jogo.itemImagem && quantosNoPrato > 0 ? (
                       Object.entries(drops)
                         .filter(([, a]) => a === alvo)
@@ -241,11 +256,12 @@ function JogoArrastar({
                     )}
                   </div>
                   {visual.capacidade !== undefined && (
-                    <div className="mt-1 text-center text-[10px] font-black uppercase tracking-widest text-white/90">
+                    <div className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white drop-shadow">
                       {quantosNoPrato} / {visual.capacidade}
                     </div>
                   )}
                 </>
+
               ) : (
                 <>
                   <div className="text-sm font-black uppercase tracking-wider text-white mb-2">
