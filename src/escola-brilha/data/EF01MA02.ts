@@ -303,10 +303,16 @@ const aula: Aula = {
     facil: [
       {
         pergunta:
-          "A Dona Coelha colheu cenouras. Contando uma a uma dá quantas?",
+          "A Dona Coelha colheu estas cenouras. Contando uma a uma, quantas são?",
         opcoes: ["3", "4", "5"],
         correta: 2,
         explicacao: "Apontando uma a uma: 1, 2, 3, 4, 5 cenouras.",
+        visual: {
+          tipo: "itens",
+          imagemUrl: cenouraImg,
+          quantidade: 5,
+          rotulo: "As cenouras da Dona Coelha",
+        },
       },
       {
         pergunta:
@@ -314,6 +320,14 @@ const aula: Aula = {
         opcoes: ["6", "8", "9"],
         correta: 2,
         explicacao: "3 + 3 + 3 = 9 maçãs.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 1" },
+            { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 2" },
+            { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 3" },
+          ],
+        },
       },
       {
         pergunta:
@@ -321,8 +335,16 @@ const aula: Aula = {
         opcoes: ["Grupo A", "Grupo B", "Iguais"],
         correta: 1,
         explicacao: "6 é maior que 4 — o Grupo B tem mais joaninhas.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: joaninhaImg, quantidade: 4, rotulo: "Grupo A", cor: "#F472B6" },
+            { imagemUrl: joaninhaImg, quantidade: 6, rotulo: "Grupo B", cor: "#60A5FA" },
+          ],
+        },
       },
     ],
+
     medio: [
       {
         pergunta:
