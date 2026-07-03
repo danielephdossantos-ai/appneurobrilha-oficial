@@ -124,21 +124,34 @@ export function OperacaoVisual({
         t += passo;
       }
     } else {
-      // Subtração: remove um por um
+      // Subtração: aviso antes de começar a tirar
+      add(() => {
+        setFase(2);
+        speakChunked(
+          `Muito bem! Temos ${nome(a)} ${itemPlural}. Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`,
+          { rate: 0.75 },
+        );
+      }, t);
+      t += 4200;
+      // Remove uma por uma explicando quantas sobram a cada passo
       for (let i = 1; i <= b; i++) {
+        const sobram = a - i;
         add(() => {
           setFase(3);
           setRemovidos(i);
-          speakChunked(`tirou ${nome(i)}`, { rate: rateNum });
+          speakChunked(
+            `Tirou ${nome(i)}. Sobraram ${nome(sobram)}.`,
+            { rate: 0.75 },
+          );
         }, t);
-        t += passo + 200;
+        t += passo + 1400;
       }
       t += 600;
       add(() => {
         setFase(4);
-        speakChunked(`Agora vamos contar quantos sobraram.`, { rate: 0.8 });
+        speakChunked(`Agora vamos contar juntos quantas ficaram, bem devagar.`, { rate: 0.75 });
       }, t);
-      t += 2400;
+      t += 3200;
       for (let i = 1; i <= resultado; i++) {
         add(() => {
           setContadoTotal(i);
@@ -240,9 +253,34 @@ export function OperacaoVisual({
         </span>
       </div>
 
-      {/* Área visual: grupo A + sinal + grupo B, OU total juntado */}
+      {/* Área visual */}
       <div className="min-h-[130px] bg-white/60 rounded-2xl p-3">
-        {fase < 4 ? (
+        {operacao === "subtracao" ? (
+          fase < 4 ? (
+            <div className="flex flex-col items-center gap-2">
+              <Grupo
+                total={a}
+                mostrar={fase === 0 || fase >= 2 ? a : contadoA}
+                riscados={fase >= 3 ? removidos : 0}
+              />
+              <span className="text-sm font-black" style={{ color: cor }}>
+                {fase === 1 && `${contadoA}`}
+                {fase === 2 && `${a} ${itemPlural}`}
+                {fase === 3 && `Tirou ${removidos} — sobram ${a - removidos}`}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-2">
+              <Grupo total={a} mostrar={a} riscados={b} />
+              <span
+                className="text-lg font-black"
+                style={{ color: fase === 5 ? "#22C55E" : cor }}
+              >
+                {contadoTotal || "…"}
+              </span>
+            </div>
+          )
+        ) : fase < 4 ? (
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <div className="flex flex-col items-center gap-1">
               <Grupo total={a} mostrar={fase === 0 || fase >= 2 ? a : contadoA} />
@@ -260,31 +298,15 @@ export function OperacaoVisual({
               }}
             />
             <div className="flex flex-col items-center gap-1">
-              {operacao === "soma" ? (
-                <>
-                  <Grupo total={b} mostrar={fase === 0 ? b : contadoB} />
-                  <span className="text-sm font-black" style={{ color: cor }}>
-                    {fase === 3 ? contadoB : b}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Grupo total={b} mostrar={b} />
-                  <span className="text-sm font-black" style={{ color: cor }}>
-                    tirar {b}
-                  </span>
-                </>
-              )}
+              <Grupo total={b} mostrar={fase === 0 ? b : contadoB} />
+              <span className="text-sm font-black" style={{ color: cor }}>
+                {fase === 3 ? contadoB : b}
+              </span>
             </div>
           </div>
         ) : (
-          // Fase 4/5: mostra o total juntado, contando um por um
           <div className="flex flex-col items-center gap-2">
-            <Grupo
-              total={operacao === "soma" ? a + b : a}
-              mostrar={operacao === "soma" ? a + b : a}
-              riscados={operacao === "subtracao" ? b : 0}
-            />
+            <Grupo total={a + b} mostrar={a + b} />
             <span
               className="text-lg font-black"
               style={{ color: fase === 5 ? "#22C55E" : cor }}
@@ -300,10 +322,11 @@ export function OperacaoVisual({
         {fase === 0 && "Toque em Mostrar"}
         {fase === 1 && `Contando... ${contadoA}`}
         {fase === 2 && (operacao === "soma" ? `Agora mais ${b}` : `Vamos tirar ${b}`)}
-        {fase === 3 && (operacao === "soma" ? `Contando... ${contadoB}` : `Tirando... ${removidos}`)}
-        {fase === 4 && `Juntando: ${contadoTotal}`}
-        {fase === 5 && `Total: ${resultado} ${itemPlural}!`}
+        {fase === 3 && (operacao === "soma" ? `Contando... ${contadoB}` : `Tirou ${removidos} de ${b}`)}
+        {fase === 4 && `Contando o que sobrou: ${contadoTotal}`}
+        {fase === 5 && `Resultado: ${resultado} ${itemPlural}!`}
       </p>
+
 
       <div className="flex justify-center gap-2 mt-2">
         <button
