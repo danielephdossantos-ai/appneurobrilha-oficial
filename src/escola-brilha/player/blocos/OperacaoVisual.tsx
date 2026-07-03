@@ -120,6 +120,7 @@ export function OperacaoVisual({
       // Subtração: remove um por um
       for (let i = 1; i <= b; i++) {
         add(() => {
+          setFase(3);
           setRemovidos(i);
           speakChunked(`tirou ${nome(i)}`, { rate: 0.85 });
         }, t);
