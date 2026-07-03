@@ -1,9 +1,13 @@
 import type { MissaoOficial } from "../types";
 
 /**
- * EF01MA01 — Missão Oficial
+ * EF01MA01 — Aula 001 · Biblioteca Pedagógica Escola Brilha (Coleção 01)
+ * Ensino Fundamental I · 1º Ano · Matemática
  * BNCC: Utilizar números naturais como indicador de quantidade ou de ordem
  * em diferentes situações cotidianas e reconhecer códigos de identificação.
+ *
+ * Duração estimada: 15 a 20 minutos
+ * Faixa etária: 6 anos · Nível: Fácil · Pré-requisito: nenhum
  */
 const missao: MissaoOficial = {
   codigo: "EF01MA01",
@@ -11,177 +15,219 @@ const missao: MissaoOficial = {
   ano: "1º Ano",
   disciplina: "Matemática",
   unidadeTematica: "Números",
-  objetoConhecimento: "Contagem de rotina, contagem ascendente e descendente e reconhecimento de números no contexto diário",
+  objetoConhecimento:
+    "Contagem de rotina, contagem ascendente e descendente e reconhecimento de números no contexto diário",
 
   missaoPrincipal: {
-    titulo: "Os Três Superpoderes dos Números",
+    titulo: "Os Detetives dos Números",
     descricao:
-      "Descobrir que os números podem CONTAR quantidade, mostrar ORDEM ou ser um CÓDIGO de identificação.",
+      "Ajudar o esquilo Brilha a descobrir que os números podem CONTAR, indicar POSIÇÃO ou IDENTIFICAR pessoas, lugares e objetos.",
   },
 
   narrativa: {
-    titulo: "O sumiço dos números da padaria",
+    titulo: "O esquilo Brilha e os números da floresta",
     contexto:
-      "É segunda de manhã na padaria do seu Zé. Ele usa números pra tudo: preço do pão, senha da fila e mesa de cada cliente.",
+      "O esquilo Brilha acordou animado. Quando saiu da sua casinha, percebeu que os números estavam por toda parte: na árvore havia 3 passarinhos, no lago nadavam 5 peixes, a casa do coelho tinha o número 18 e o ônibus da floresta era o 207.",
     problema:
-      "Hoje os números SUMIRAM das plaquinhas! Ninguém sabe quantos pães levar, quem chegou primeiro ou qual o troco.",
-    convite: "Bora ajudar o seu Zé a descobrir pra que servem os números e salvar a padaria?",
+      "Brilha ficou curioso: 'Será que todos esses números servem para a mesma coisa?'",
+    convite: "Vamos ajudá-lo a descobrir!",
   },
 
   explicacao: {
     texto:
-      "Os números aparecem no dia a dia de três jeitos: CONTAR quantidade (5 balas), MOSTRAR ordem (2º lugar) e SER CÓDIGO (número da casa). O mesmo número muda de sentido conforme o lugar em que aparece.",
+      "Hoje você vai aprender que os números podem servir para três coisas diferentes: contar quantidades, indicar posição (1º, 2º, 3º…) e identificar pessoas, lugares e objetos, como o número de uma casa ou de um ônibus.",
     niveis: {
-      nivel1: "Número serve pra três coisas: contar, ordem e código.",
-      nivel2: "Na pizzaria: '2 pizzas' conta; '2º da fila' é ordem; 'telefone 2' é código.",
-      nivel3: "Imagine três chapéus do número 3: contar 3 gatos, chegar em 3º lugar, morar no apto 3.",
-      nivel4: "Em casa: hora do relógio = código; sua idade = contagem; página do livro = ordem.",
+      nivel1: "Números podem: contar, indicar posição ou identificar.",
+      nivel2:
+        "5 peixes = contagem. 1º lugar = posição. Casa 18 = identificação.",
+      nivel3:
+        "Se dá pra contar 1, 2, 3… é quantidade. Se mostra quem chegou antes, é ordem. Se só dá nome ao objeto, é identificação.",
+      nivel4:
+        "Olhe em casa: idade = contagem; página do livro = ordem; número do apartamento = identificação.",
     },
   },
 
   exemplos: [
     {
-      enunciado: "A camisa do Neymar tem o número 10. Contagem, ordem ou código?",
+      enunciado: "Na tela aparecem: 🍎🍎🍎🍎. Quantas maçãs existem?",
       passos: [
-        "Existem 10 Neymares? Não.",
-        "O Neymar chegou em 10º lugar? Não.",
-        "Então o 10 só identifica a camisa dele.",
+        "Aponte para cada maçã e conte: 1, 2, 3, 4.",
+        "Pare quando não sobrar nenhuma maçã sem contar.",
       ],
-      resposta: "É CÓDIGO — o 10 identifica a camisa.",
-      contextoCotidiano: "Números em uniformes de time.",
+      resposta: "4 maçãs — os números também servem para contar.",
+      contextoCotidiano: "Contar frutas na fruteira de casa.",
     },
     {
-      enunciado: "Tem 8 lápis na caixa.",
-      passos: ["Pergunte: dá pra contar 1, 2, 3… até 8 lápis?", "Sim, dá pra contar um a um."],
-      resposta: "É CONTAGEM.",
-      contextoCotidiano: "Material escolar em casa.",
+      enunciado:
+        "Três crianças correndo: 🥇 Ana, 🥈 Pedro, 🥉 Lucas. Quem chegou em primeiro lugar?",
+      passos: [
+        "Observe o pódio: o 🥇 é o primeiro colocado.",
+        "Ana está com a medalha de ouro.",
+      ],
+      resposta: "Ana. Quando usamos 1º, 2º ou 3º estamos indicando ORDEM.",
+      contextoCotidiano: "Fila do lanche na escola.",
+    },
+    {
+      enunciado: "🏠 Casa 25. O número 25 está contando ou identificando?",
+      passos: [
+        "Existem 25 casas ali na tela? Não.",
+        "O 25 só serve para dizer QUAL é aquela casa.",
+      ],
+      resposta: "Identificando.",
+      contextoCotidiano: "Número da casa onde você mora.",
     },
   ],
 
   atividades: [
     {
-      enunciado: "Ana ficou em 2º lugar na corrida. O 2 é o quê?",
-      resposta: "ORDEM — mostra a posição em que Ana chegou.",
-      dica: "'º' pequenininho geralmente é ordem.",
+      enunciado:
+        "🚌 Ônibus 315. O número serve para contar passageiros ou identificar o ônibus?",
+      resposta: "Identificar o ônibus.",
+      dica: "Pergunte: existem 315 passageiros ali dentro? Se não, é identificação.",
       nivel: "facil",
     },
     {
-      enunciado: "O telefone da avó é 3245-7890. Contagem, ordem ou código?",
-      resposta: "CÓDIGO — serve pra ligar pra ela, não conta nem ordena.",
+      enunciado: "Na tela aparecem ⭐⭐⭐⭐⭐⭐. Quantas estrelas existem?",
+      resposta: "6 estrelas.",
+      dica: "Conte apontando uma por uma.",
+      nivel: "facil",
+    },
+    {
+      enunciado: "Camisa 10 do jogador. Contagem, ordem ou identificação?",
+      resposta: "Identificação — o 10 é o número da camisa dele.",
       nivel: "medio",
     },
     {
-      enunciado: "João mora no 5º andar. O 5 é o quê?",
-      resposta: "ORDEM — a posição do andar.",
-      nivel: "facil",
+      enunciado: "Senha 43 na padaria. Contagem, ordem ou identificação?",
+      resposta: "Identificação — a senha só identifica sua vez.",
+      nivel: "medio",
     },
   ],
 
   desafios: [
     {
       enunciado:
-        "Livro com 120 páginas, aberto na página 45, início do capítulo 3. Diga o que cada número faz.",
-      resposta: "120 CONTA páginas; 45 é ORDEM (45ª página); 3 é ORDEM (3º capítulo).",
+        "Desafio Brilha: arraste cada item para o lugar certo — Quantidade, Ordem ou Identificação. Itens: 8 bananas · Casa 72 · 2º lugar · Camisa 10 · 5 gatos · Senha 43.",
+      resposta:
+        "Quantidade: 8 bananas, 5 gatos. Ordem: 2º lugar. Identificação: Casa 72, Camisa 10, Senha 43.",
       nivel: "dificil",
+    },
+    {
+      enunciado:
+        "Missão em Casa: procure com a família 5 números diferentes e diga para que cada um serve (ex.: Casa 18 → identifica; 7 bananas → quantidade; 1º colocado → ordem).",
+      resposta:
+        "Cada número encontrado deve ser classificado em contagem, ordem ou identificação.",
+      nivel: "medio",
     },
   ],
 
   quiz: [
     {
-      pergunta: "Em 'Tem 8 lápis na caixa', o 8 está sendo usado para:",
-      opcoes: ["Contar quantidade", "Mostrar ordem", "Ser código"],
+      pergunta: "Existem 9 lápis. O número indica:",
+      opcoes: ["Ordem", "Quantidade", "Identificação"],
+      correta: 1,
+      explicacao: "O 9 está dizendo QUANTOS lápis existem — é quantidade.",
+    },
+    {
+      pergunta: "Casa número 81. O número indica:",
+      opcoes: ["Identificação", "Quantidade"],
       correta: 0,
-      explicacao: "Ele diz QUANTOS lápis existem.",
+      explicacao: "O 81 apenas identifica qual é aquela casa.",
     },
     {
-      pergunta: "O número da camisa no futebol serve pra:",
-      opcoes: ["Contar jogadores", "Ser código", "Mostrar lugar"],
-      correta: 1,
-      explicacao: "Só identifica o jogador — é código.",
-    },
-    {
-      pergunta: "Quem chegou em 1º lugar. O 1 é:",
-      opcoes: ["Quantidade", "Ordem", "Código"],
-      correta: 1,
-      explicacao: "Mostra a POSIÇÃO — isso é ordem.",
-    },
-    {
-      pergunta: "Qual desses é CÓDIGO?",
-      opcoes: ["3 maçãs", "2º andar", "Placa do carro"],
-      correta: 2,
-      explicacao: "A placa identifica o carro.",
+      pergunta: "Maria ficou em 2º lugar. O número indica:",
+      opcoes: ["Ordem", "Quantidade"],
+      correta: 0,
+      explicacao: "2º mostra a POSIÇÃO em que Maria chegou.",
     },
   ],
 
   resumo: {
     pontos: [
-      "Números podem contar quantidade.",
-      "Números podem mostrar ordem.",
-      "Números podem ser código.",
-      "O mesmo número muda de sentido conforme o lugar.",
+      "Alguns números contam quantidades.",
+      "Outros mostram posição (1º, 2º, 3º…).",
+      "Outros identificam pessoas, lugares e objetos.",
+      "Os números aparecem em casas, relógios, placas, telefones, calendários e até nas camisas dos jogadores.",
     ],
     dica: "Ao ver um número, pergunte: ele CONTA, ORDENA ou IDENTIFICA?",
   },
 
   revisao: {
     retomada:
-      "Relembrar os três superpoderes com exemplos do próprio dia da criança (idade, casa, fila da escola).",
+      "Retomar os três usos com exemplos do dia da criança: idade (contagem), lugar na fila (ordem) e número da casa (identificação).",
     perguntasRevisao: [
-      { pergunta: "Sua idade é contagem, ordem ou código?", resposta: "Contagem." },
-      { pergunta: "O número da sua casa é o quê?", resposta: "Código." },
-      { pergunta: "Chegar em 1º na corrida é o quê?", resposta: "Ordem." },
+      { pergunta: "7 bananas — para que serve o número?", resposta: "Quantidade." },
+      { pergunta: "Casa 18 — para que serve o número?", resposta: "Identificação." },
+      { pergunta: "1º colocado — para que serve o número?", resposta: "Ordem." },
     ],
   },
 
   miniJogo: {
-    nome: "Ligue os Superpoderes",
-    tipo: "ligar",
-    descricao: "Ligar situações do dia a dia ao superpoder do número (contar/ordem/código).",
-    refInterativa: "ligar-superpoderes",
+    nome: "Detetives dos Números",
+    tipo: "arrastar",
+    descricao:
+      "Arraste cada item (8 bananas, Casa 72, 2º lugar, Camisa 10, 5 gatos, Senha 43) para a caixa correta: Quantidade, Ordem ou Identificação.",
+    refInterativa: "detetives-dos-numeros",
   },
 
   adaptacoes: [
     {
       publico: "TEA",
       estrategias: [
-        "Usar cartões visuais fixos representando cada superpoder.",
-        "Sequência previsível e sinalização visual entre blocos.",
+        "Cartões visuais fixos para cada categoria (contar/ordem/identificar).",
+        "Sequência previsível de fases com sinalização visual entre blocos.",
       ],
-      recursos: ["Cartões com pictogramas", "Cronograma visual da missão"],
+      recursos: ["Pictogramas das três categorias", "Cronograma visual da missão"],
     },
     {
       publico: "TDAH",
-      estrategias: ["Blocos curtos com pausas ativas.", "Feedback imediato após cada resposta."],
-      recursos: ["Timer visual", "Recompensas rápidas"],
+      estrategias: [
+        "Fases curtas com feedback imediato após cada resposta.",
+        "Pausas ativas entre a Fase 3 e o Desafio Brilha.",
+      ],
+      recursos: ["Timer visual", "Recompensas rápidas (XP e moedas)"],
     },
     {
       publico: "Discalculia",
-      estrategias: ["Manipular objetos reais antes de simbolizar.", "Repetir com o mesmo modelo."],
+      estrategias: [
+        "Manipular objetos reais (tampinhas, frutas) antes de contar na tela.",
+        "Repetir o mesmo modelo várias vezes com apoio.",
+      ],
       recursos: ["Material dourado ou tampinhas", "Fichas de contagem"],
     },
     {
+      publico: "Dislexia",
+      estrategias: [
+        "Ler enunciados em voz alta com o professor virtual.",
+        "Reforçar com ícones (🍎, 🏠, 🚌) além do número escrito.",
+      ],
+    },
+    {
       publico: "Geral",
-      estrategias: ["Ler em voz alta.", "Permitir explicar com as próprias palavras."],
+      estrategias: [
+        "Permitir que a criança explique com as próprias palavras.",
+        "Valorizar tentativas antes de confirmar a resposta.",
+      ],
     },
   ],
 
   objetivos: [
     "Reconhecer números que contam quantidade.",
-    "Reconhecer números que mostram ordem.",
-    "Reconhecer números usados como código.",
-    "Diferenciar os três usos em situações cotidianas.",
+    "Reconhecer números que indicam posição (ordem).",
+    "Reconhecer números usados como identificação.",
+    "Classificar números do cotidiano nas três categorias.",
   ],
 
   competencias: [
     "BNCC Geral 2 — Pensamento científico, crítico e criativo.",
     "BNCC Geral 4 — Comunicação (leitura de números no cotidiano).",
-    "Matemática — Números: significado e uso.",
+    "Matemática — Números: significado e uso social.",
     "Letramento matemático inicial.",
   ],
 
   meta: {
-    versao: "1.0.0",
-    atualizadoEm: "2026-07-01",
+    versao: "2.0.0",
+    atualizadoEm: "2026-07-03",
     autor: "equipe",
   },
 };
