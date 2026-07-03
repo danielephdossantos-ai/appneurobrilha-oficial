@@ -337,3 +337,109 @@ function RodadaNivel({
     </div>
   );
 }
+
+/* -------------------- visual da pergunta (imagens de contagem) -------------------- */
+
+const CORES_G = ["#F472B6", "#60A5FA", "#FBBF24", "#34D399", "#A78BFA", "#FB923C"];
+
+function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
+  if (!visual) return null;
+
+  if (visual.tipo === "itens") {
+    return (
+      <div className="mb-3 rounded-2xl bg-white/10 border-2 border-white/20 p-3">
+        {visual.rotulo && (
+          <div className="text-[10px] font-black uppercase tracking-widest text-white/70 text-center mb-2">
+            {visual.rotulo}
+          </div>
+        )}
+        <div className="flex flex-wrap gap-2 justify-center items-center min-h-[80px]">
+          {Array.from({ length: visual.quantidade }).map((_, i) => (
+            <img
+              key={i}
+              src={visual.imagemUrl}
+              alt=""
+              className="h-12 w-12 sm:h-14 sm:w-14 object-contain drop-shadow"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (visual.tipo === "grupos") {
+    return (
+      <div className={`mb-3 grid gap-2 ${visual.grupos.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+        {visual.grupos.map((g, gi) => {
+          const cor = g.cor ?? CORES_G[gi % CORES_G.length];
+          return (
+            <div
+              key={gi}
+              className="rounded-2xl border-4 p-2"
+              style={{ borderColor: cor, background: `${cor}18` }}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span
+                  className="text-[9px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
+                  style={{ background: cor }}
+                >
+                  {g.rotulo ?? `Grupo ${gi + 1}`}
+                </span>
+                <span
+                  className="h-6 w-6 rounded-full text-xs font-black grid place-items-center border-2 border-white"
+                  style={{ background: "#fff", color: cor }}
+                >
+                  {g.quantidade}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1 justify-center min-h-[60px] items-center">
+                {Array.from({ length: g.quantidade }).map((_, i) => (
+                  <img
+                    key={i}
+                    src={g.imagemUrl}
+                    alt=""
+                    className="h-9 w-9 sm:h-10 sm:w-10 object-contain drop-shadow"
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // comparar
+  return (
+    <div className={`mb-3 grid gap-2 ${visual.lados.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+      {visual.lados.map((l, li) => {
+        const cor = l.cor ?? CORES_G[li % CORES_G.length];
+        return (
+          <div
+            key={li}
+            className="rounded-2xl border-4 p-2"
+            style={{ borderColor: cor, background: `${cor}18` }}
+          >
+            <div
+              className="text-[10px] font-black uppercase tracking-widest text-white text-center py-1 rounded-lg mb-1"
+              style={{ background: cor }}
+            >
+              {l.rotulo}
+            </div>
+            <div className="flex flex-wrap gap-1 justify-center min-h-[60px] items-center">
+              {Array.from({ length: l.quantidade }).map((_, i) => (
+                <img
+                  key={i}
+                  src={l.imagemUrl}
+                  alt=""
+                  className="h-9 w-9 sm:h-10 sm:w-10 object-contain drop-shadow"
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
