@@ -228,6 +228,32 @@ export type Aula = {
         // peças que devem ser selecionadas na ordem certa pra montar algo.
         pecas: string[]; // ordem correta
       }
+    | {
+        /**
+         * Mini-jogo de contagem visual com alternativas.
+         * Ideal para Ed. Infantil / 1º Ano: mostra 1+ grupos de itens
+         * (imagens do banco de mídias) e uma pergunta de múltipla escolha.
+         *
+         * Casos de uso:
+         *  - Contar um a um (1 grupo).
+         *  - Contar em grupos (N grupos iguais).
+         *  - Comparar coleções (2 grupos rotulados, ex.: "Esquerda" x "Direita").
+         *  - Completar coleção (2 grupos rotulados "Antes" x "Depois").
+         */
+        tipo: "contarQuiz";
+        titulo: string;
+        instrucao?: string;
+        grupos: Array<{
+          imagemUrl: string;
+          quantidade: number;
+          rotulo?: string;
+        }>;
+        pergunta: string;
+        opcoes: string[];
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
   >;
 
   /**
