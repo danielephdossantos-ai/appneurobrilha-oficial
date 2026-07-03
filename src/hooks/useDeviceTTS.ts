@@ -8,6 +8,7 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
   const [speaking, setSpeaking] = useState(false);
   const [supported, setSupported] = useState(false);
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const runRef = useRef(0);
 
   useEffect(() => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -33,6 +34,8 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
     (text: string, opts?: { rate?: number; pitch?: number; lang?: string }) => {
       if (!supported || !text) return;
       const synth = window.speechSynthesis;
+      const runId = runRef.current + 1;
+      runRef.current = runId;
       synth.cancel();
       // Chunking: Chrome trunca utterances > ~200 chars / 15s. Quebrar em frases.
       const clean = text.replace(/\s+/g, " ").trim();
@@ -58,6 +61,7 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
       let i = 0;
       setSpeaking(true);
       const next = () => {
+        if (runRef.current !== runId) return;
         if (i >= chunks.length) { setSpeaking(false); return; }
         const u = new SpeechSynthesisUtterance(chunks[i++]);
         u.lang = opts?.lang || defaultLang;
@@ -75,6 +79,7 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
 
   const stop = useCallback(() => {
     if (!supported) return;
+    runRef.current += 1;
     window.speechSynthesis.cancel();
     setSpeaking(false);
   }, [supported]);
@@ -82,7 +87,10 @@ export function useDeviceTTS(defaultLang: string = "pt-BR") {
   // Para a fala ao desmontar
   useEffect(() => {
     return () => {
-      if (supported) window.speechSynthesis.cancel();
+      if (supported) {
+        runRef.current += 1;
+        window.speechSynthesis.cancel();
+      }
     };
   }, [supported]);
 

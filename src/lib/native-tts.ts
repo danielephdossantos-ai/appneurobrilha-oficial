@@ -52,6 +52,7 @@ export interface SpeakOpts {
 }
 
 const activeSpeechResolvers = new Set<() => void>();
+let speechRunId = 0;
 
 function resolveActiveSpeech() {
   activeSpeechResolvers.forEach((resolve) => resolve());
@@ -69,9 +70,11 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
     }
     const synth = window.speechSynthesis;
     if (!opts.queue) {
+      speechRunId += 1;
       synth.cancel();
       resolveActiveSpeech();
     }
+    const currentRunId = speechRunId;
     const chunks = chunkText(text);
     const voice = pickPtBrVoice();
     let i = 0;
@@ -85,6 +88,7 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
     };
     activeSpeechResolvers.add(finish);
     const speakNext = () => {
+      if (currentRunId !== speechRunId || finished) return;
       if (i >= chunks.length) {
         finish();
         return;
@@ -105,6 +109,7 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
 
 export function stopSpeaking() {
   if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    speechRunId += 1;
     window.speechSynthesis.cancel();
     resolveActiveSpeech();
   }
