@@ -532,6 +532,13 @@ function JogoArrastar({
         )}
       </div>
 
+      {aviso && (
+        <div className="mb-3 rounded-2xl bg-[#FBBF24]/20 border-2 border-[#FBBF24] p-3 text-center text-sm font-black text-[#FDE68A]">
+          ⚠️ {aviso}
+        </div>
+      )}
+
+
       <div className="flex gap-2">
         <button
           onClick={conferir}
