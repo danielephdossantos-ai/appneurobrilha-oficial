@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { ArrowLeft, Volume2, VolumeX, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, CheckCircle2, Headphones, Square } from "lucide-react";
+
 import { useNavigate } from "@tanstack/react-router";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import { useAppState } from "@/core/store";
