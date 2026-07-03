@@ -149,13 +149,14 @@ export function OperacaoVisual({
     }
 
 
+    t += 800;
     add(() => {
       setFase(5);
       speakChunked(
         operacao === "soma"
           ? `${a} mais ${b} é igual a ${resultado}!`
           : `${a} menos ${b} é igual a ${resultado}!`,
-        { rate: 0.9 },
+        { rate: 0.8 },
       );
     }, t);
   }
