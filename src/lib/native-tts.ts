@@ -51,6 +51,13 @@ export interface SpeakOpts {
   queue?: boolean;
 }
 
+const activeSpeechResolvers = new Set<() => void>();
+
+function resolveActiveSpeech() {
+  activeSpeechResolvers.forEach((resolve) => resolve());
+  activeSpeechResolvers.clear();
+}
+
 /** Fala texto longo enfileirando utterances curtos.
  *  Por padrão cancela fala anterior; passe { queue: true } para enfileirar. */
 export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> {
@@ -61,14 +68,25 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       return;
     }
     const synth = window.speechSynthesis;
-    if (!opts.queue) synth.cancel();
+    if (!opts.queue) {
+      synth.cancel();
+      resolveActiveSpeech();
+    }
     const chunks = chunkText(text);
     const voice = pickPtBrVoice();
     let i = 0;
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      activeSpeechResolvers.delete(finish);
+      opts.onEnd?.();
+      resolve();
+    };
+    activeSpeechResolvers.add(finish);
     const speakNext = () => {
       if (i >= chunks.length) {
-        opts.onEnd?.();
-        resolve();
+        finish();
         return;
       }
       const u = new SpeechSynthesisUtterance(chunks[i++]);
@@ -88,5 +106,6 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
 export function stopSpeaking() {
   if (typeof window !== "undefined" && "speechSynthesis" in window) {
     window.speechSynthesis.cancel();
+    resolveActiveSpeech();
   }
 }
