@@ -352,6 +352,13 @@ const aula: Aula = {
         opcoes: ["1", "2", "3"],
         correta: 1,
         explicacao: "3 + 2 = 5. Foram acrescentadas 2 estrelas.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: estrelaImg, quantidade: 3, rotulo: "Antes", cor: "#A78BFA" },
+            { imagemUrl: estrelaImg, quantidade: 5, rotulo: "Agora", cor: "#FBBF24" },
+          ],
+        },
       },
       {
         pergunta:
@@ -359,6 +366,13 @@ const aula: Aula = {
         opcoes: ["Sim, todos", "Não, sobra passarinho", "Não, sobra ninho"],
         correta: 0,
         explicacao: "Como as quantidades são iguais, o pareamento é perfeito.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: passaroImg, quantidade: 6, rotulo: "Passarinhos", cor: "#60A5FA" },
+            { imagemUrl: ninhoImg, quantidade: 6, rotulo: "Ninhos", cor: "#FB923C" },
+          ],
+        },
       },
       {
         pergunta:
@@ -371,6 +385,15 @@ const aula: Aula = {
         correta: 1,
         explicacao:
           "Formando grupos (por exemplo, 4 grupos de 5) fica muito mais rápido.",
+        visual: {
+          tipo: "grupos",
+          grupos: [
+            { imagemUrl: macaImg, quantidade: 5, rotulo: "Grupo 1" },
+            { imagemUrl: macaImg, quantidade: 5, rotulo: "Grupo 2" },
+            { imagemUrl: macaImg, quantidade: 5, rotulo: "Grupo 3" },
+            { imagemUrl: macaImg, quantidade: 5, rotulo: "Grupo 4" },
+          ],
+        },
       },
     ],
     dificil: [
@@ -380,19 +403,44 @@ const aula: Aula = {
         opcoes: ["Papagaio", "Esquilo", "Coelho"],
         correta: 2,
         explicacao: "10 é a maior quantidade — o Coelho tem mais.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: sementeImg, quantidade: 8, rotulo: "Papagaio", cor: "#34D399" },
+            { imagemUrl: castanhaImg, quantidade: 5, rotulo: "Esquilo", cor: "#FB923C" },
+            { imagemUrl: cenouraImg, quantidade: 10, rotulo: "Coelho", cor: "#F472B6" },
+          ],
+        },
       },
       {
         pergunta: "E quem tem MENOS?",
         opcoes: ["Papagaio", "Esquilo", "Coelho"],
         correta: 1,
         explicacao: "5 é a menor quantidade — o Esquilo tem menos.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: sementeImg, quantidade: 8, rotulo: "Papagaio", cor: "#34D399" },
+            { imagemUrl: castanhaImg, quantidade: 5, rotulo: "Esquilo", cor: "#FB923C" },
+            { imagemUrl: cenouraImg, quantidade: 10, rotulo: "Coelho", cor: "#F472B6" },
+          ],
+        },
       },
       {
         pergunta: "Quem tem EXATAMENTE 8?",
         opcoes: ["Papagaio", "Esquilo", "Coelho"],
         correta: 0,
         explicacao: "O Papagaio tem 8 sementes.",
+        visual: {
+          tipo: "comparar",
+          lados: [
+            { imagemUrl: sementeImg, quantidade: 8, rotulo: "Papagaio", cor: "#34D399" },
+            { imagemUrl: castanhaImg, quantidade: 5, rotulo: "Esquilo", cor: "#FB923C" },
+            { imagemUrl: cenouraImg, quantidade: 10, rotulo: "Coelho", cor: "#F472B6" },
+          ],
+        },
       },
+
     ],
   },
 
