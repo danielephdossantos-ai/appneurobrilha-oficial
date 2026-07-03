@@ -1,4 +1,8 @@
 import type { Aula } from "../types";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import anaImg from "@/assets/pip-girl-mascot.png";
+import pedroImg from "@/assets/pip-teen-carrinho.png";
+import lucasImg from "@/assets/pip-teen-cyber.png";
 
 /**
  * EF01MA01 — Aula 001 · Coleção 01 · Biblioteca Pedagógica Escola Brilha
