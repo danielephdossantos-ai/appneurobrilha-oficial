@@ -39,14 +39,16 @@ function Midia({ midia }: { midia: NonNullable<Aula["midias"]>[number] }) {
   if (midia.tipo === "imagem") {
     return (
       <Secao icon={ImageIcon} rotulo="Imagem" cor="#A78BFA">
-        <img
-          src={midia.url}
-          alt={midia.alt}
-          className="w-full rounded-2xl border-2 border-white/20"
-          loading="lazy"
-        />
+        <div className="flex justify-center">
+          <img
+            src={midia.url}
+            alt={midia.alt}
+            className="h-40 w-40 sm:h-48 sm:w-48 object-contain rounded-2xl border-2 border-white/20 bg-white/5"
+            loading="lazy"
+          />
+        </div>
         {midia.legenda && (
-          <p className="mt-2 text-sm text-white/70 italic">{midia.legenda}</p>
+          <p className="mt-2 text-center text-sm text-white/70 italic">{midia.legenda}</p>
         )}
       </Secao>
     );
