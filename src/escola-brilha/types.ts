@@ -132,18 +132,36 @@ export type Aula = {
      * do Banco de Mídias — não emojis. Ex.: pódio 1º/2º/3º com fotos das
      * crianças. A criança toca no participante para responder.
      */
-    visual?: {
-      tipo: "podio";
-      pergunta: string;
-      participantes: Array<{
-        nome: string;
-        imagemUrl: string;
-        posicao: 1 | 2 | 3;
-      }>;
-      /** Nome correto — o toque nesse participante confirma acerto. */
-      respostaCerta: string;
-    };
+    visual?:
+      | {
+          tipo: "podio";
+          pergunta: string;
+          participantes: Array<{
+            nome: string;
+            imagemUrl: string;
+            posicao: 1 | 2 | 3;
+          }>;
+          /** Nome correto — o toque nesse participante confirma acerto. */
+          respostaCerta: string;
+        }
+      | {
+          /** Renderiza N grupos iguais de imagens para ensinar contagem em grupos. */
+          tipo: "grupos";
+          pergunta: string;
+          imagemUrl: string;
+          itemSingular: string;
+          itemPlural: string;
+          /** Quantidade de grupos. */
+          quantidadeGrupos: number;
+          /** Itens em cada grupo (todos iguais). */
+          itensPorGrupo: number;
+          /** Alternativas para a criança tocar. */
+          opcoes: number[];
+          /** Índice da alternativa correta (deve bater com grupos × itens). */
+          correta: number;
+        };
   };
+
   // 6. Exercícios
   exercicios: Exercicio[];
   // 7. Desafio

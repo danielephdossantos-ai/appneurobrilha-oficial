@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HandHelping, Eye } from "lucide-react";
 import { Secao } from "./Secao";
 import { PodioVisual } from "./PodioVisual";
+import { GruposVisual } from "./GruposVisual";
 import type { Aula } from "../../types";
 
 export function AtividadeGuiada({
@@ -24,6 +25,26 @@ export function AtividadeGuiada({
       </Secao>
     );
   }
+
+  if (visual?.tipo === "grupos") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <GruposVisual
+          pergunta={visual.pergunta}
+          imagemUrl={visual.imagemUrl}
+          itemSingular={visual.itemSingular}
+          itemPlural={visual.itemPlural}
+          quantidadeGrupos={visual.quantidadeGrupos}
+          itensPorGrupo={visual.itensPorGrupo}
+          opcoes={visual.opcoes}
+          correta={visual.correta}
+          explicacao={dados.explicacao}
+        />
+      </Secao>
+    );
+  }
+
+
 
   return (
     <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
