@@ -309,36 +309,6 @@ export function AulaPlayer({
   );
 }
 
-function textoDoBloco(a: Aula, blocoId: BlocoId): string {
-  switch (blocoId) {
-    case "narrativa": {
-      const n = a.narrativa;
-      return n ? `${n.titulo}. ${n.contexto} ${n.problema} ${n.convite}` : "";
-    }
-    case "missao":
-      return a.missao;
-    case "objetivos":
-      return `Objetivos: ${a.objetivos.join(". ")}.`;
-    case "explicacao":
-      return a.explicacao;
-    case "exemplo":
-      return `${a.exemploResolvido.enunciado}. Passos: ${a.exemploResolvido.passos.join(". ")}. Resposta: ${a.exemploResolvido.resposta}.`;
-    case "guiada":
-      return `${a.atividadeGuiada.enunciado}. Resposta: ${a.atividadeGuiada.resposta}. ${a.atividadeGuiada.explicacao}`;
-    case "exercicios":
-      return `Exercícios: ${a.exercicios.map((e, k) => `${k + 1}. ${e.enunciado}`).join(" ")}`;
-    case "desafio":
-      return a.desafio.enunciado;
-    case "quiz":
-      return "Quiz da aula. Escolha a resposta certa.";
-    case "resumo":
-      return `Resumo: ${a.revisao.pontos.join(". ")}. Dica: ${a.revisao.dica}.`;
-    case "conclusao":
-      return a.conclusao;
-    default:
-      return "";
-  }
-}
 
 function renderBloco(
   a: Aula,
