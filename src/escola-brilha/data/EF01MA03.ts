@@ -311,10 +311,10 @@ const aula: Aula = {
         "Cada passarinho precisa de uma minhoca. Toque numa minhoca e depois no passarinho pra alimentar.",
       itemImagem: minhocaImg,
       alvosVisuais: [
-        { nome: "Passarinho 1", cor: "#60A5FA", capacidade: 1 },
-        { nome: "Passarinho 2", cor: "#F472B6", capacidade: 1 },
-        { nome: "Passarinho 3", cor: "#FBBF24", capacidade: 1 },
-        { nome: "Passarinho 4", cor: "#34D399", capacidade: 1 },
+        { nome: "Passarinho 1", cor: "#60A5FA", capacidade: 1, imagemUrl: passaroImg },
+        { nome: "Passarinho 2", cor: "#F472B6", capacidade: 1, imagemUrl: passaroImg },
+        { nome: "Passarinho 3", cor: "#FBBF24", capacidade: 1, imagemUrl: passaroImg },
+        { nome: "Passarinho 4", cor: "#34D399", capacidade: 1, imagemUrl: passaroImg },
       ],
       pares: [
         { item: "Minhoca 1", alvo: "Passarinho 1" },
