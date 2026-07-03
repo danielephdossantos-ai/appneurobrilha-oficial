@@ -241,6 +241,12 @@ export function OperacaoVisual({
     await falar(`Temos ${nome(a)} ${itemPlural}.`, 0.66);
     await pausa(700);
     if (!vivo()) return;
+    await falar(
+      `Vou separar em dois grupos: ${nome(resultado)} ${itemPlural} ficaram no baú, e ${nome(b)} ${itemPlural} saíram.`,
+      0.66,
+    );
+    await pausa(900);
+    if (!vivo()) return;
     await falar(`Agora vamos tirar ${nome(b)}, uma por uma, bem devagar.`, 0.66);
     await pausa(1200);
     if (!vivo()) return;
@@ -260,6 +266,7 @@ export function OperacaoVisual({
     }
 
     setFase(4);
+    setRemovidos(b);
     await falar(`Agora vamos contar só as moedas que ficaram.`, 0.66);
     await pausa(800);
     if (!vivo()) return;
@@ -287,21 +294,21 @@ export function OperacaoVisual({
   }
 
   const Icone = operacao === "soma" ? Plus : Minus;
-  const mostrarSubtracao = fase === 0 ? a : fase === 1 ? contadoA : a;
-
   // Renderiza APENAS as imagens já reveladas (aparecem uma por uma).
   const Grupo = ({
     mostrar,
     riscados = 0,
     total,
+    compacto = false,
   }: {
     mostrar: number;
     riscados?: number;
     total: number; // usado só para reservar largura
+    compacto?: boolean;
   }) => (
     <div
-      className="flex flex-wrap gap-1.5 items-center justify-center"
-      style={{ minWidth: Math.min(total, 5) * 52 }}
+      className={`flex flex-wrap items-center justify-center ${compacto ? "gap-1" : "gap-1.5"}`}
+      style={{ minWidth: compacto ? undefined : Math.min(total, 5) * 52, maxWidth: "100%" }}
     >
       {Array.from({ length: mostrar }).map((_, i) => {
         const foiRiscado = i >= mostrar - riscados && riscados > 0;
@@ -316,7 +323,7 @@ export function OperacaoVisual({
             <img
               src={imagemUrl}
               alt=""
-              className="h-11 w-11 sm:h-12 sm:w-12 object-contain drop-shadow"
+              className={`${compacto ? "h-9 w-9 sm:h-10 sm:w-10" : "h-11 w-11 sm:h-12 sm:w-12"} object-contain drop-shadow`}
             />
             {foiRiscado && (
               <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-[#EF4444]">
