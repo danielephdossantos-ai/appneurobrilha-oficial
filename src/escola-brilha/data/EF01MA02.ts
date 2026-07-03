@@ -11,6 +11,7 @@ import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
 import castanhaImg from "@/assets/neuro-treino/objetos/castanha.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
 import ninhoImg from "@/assets/neuro-treino/objetos/ninho.png";
+import doceImg from "@/assets/neuro-treino/objetos/doce.png";
 
 /**
  * EF01MA02 — Aula 002 · Biblioteca Pedagógica Escola Brilha
