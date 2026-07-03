@@ -165,34 +165,67 @@ const aula: Aula = {
   conclusao:
     "🏅 Medalha conquistada: Contador da Floresta! Agora você conhece vários jeitos de contar — um a um, em pares, em grupos ou comparando. Missão em Casa: conte cadeiras, copos, brinquedos, sapatos e almofadas. Depois diga qual grupo tem MAIS e qual tem MENOS.",
 
-  midias: [
-    {
-      tipo: "imagem",
-      url: cenouraImg,
-      alt: "Cenoura",
-      legenda: "Dona Coelha: cenouras para contar uma a uma.",
-    },
-    {
-      tipo: "imagem",
-      url: macaImg,
-      alt: "Maçã",
-      legenda: "Macaco: 3 grupos de 3 maçãs = 9 maçãs.",
-    },
-    {
-      tipo: "imagem",
-      url: joaninhaImg,
-      alt: "Joaninha",
-      legenda: "Joaninhas: qual grupo tem mais?",
-    },
-    {
-      tipo: "imagem",
-      url: estrelaImg,
-      alt: "Estrela",
-      legenda: "Estrelas: quantas foram acrescentadas?",
-    },
-  ],
+  // Sem `midias` estáticas — todas as cenas da Explicação são interativas.
 
   interativas: [
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 1 · Contando um a um",
+      instrucao:
+        "A Dona Coelha colheu cenouras. Toque em cada cenoura e conte em voz alta.",
+      grupos: [{ imagemUrl: cenouraImg, quantidade: 5 }],
+      pergunta: "Quantas cenouras existem?",
+      opcoes: ["4", "5", "6"],
+      correta: 1,
+      acerto:
+        "Excelente! Contar um a um funciona bem quando temos poucos objetos.",
+      erro: "Conte de novo apontando uma cenoura por vez.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Contando em grupos",
+      instrucao:
+        "O Macaco organizou as maçãs em 3 grupos iguais. Cada grupo tem 3 maçãs.",
+      grupos: [
+        { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 1" },
+        { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 2" },
+        { imagemUrl: macaImg, quantidade: 3, rotulo: "Grupo 3" },
+      ],
+      pergunta: "Quantas maçãs existem ao todo?",
+      opcoes: ["6", "8", "9"],
+      correta: 2,
+      acerto:
+        "Isso! Quando fazemos grupos iguais, contar fica muito mais fácil: 3, 6, 9.",
+      erro: "Some os grupos: 3 + 3 + 3.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 3 · Quem tem mais?",
+      instrucao: "Compare os dois grupos de joaninhas.",
+      grupos: [
+        { imagemUrl: joaninhaImg, quantidade: 4, rotulo: "Grupo da Esquerda" },
+        { imagemUrl: joaninhaImg, quantidade: 6, rotulo: "Grupo da Direita" },
+      ],
+      pergunta: "Qual grupo tem MAIS joaninhas?",
+      opcoes: ["Esquerda", "Direita", "Iguais"],
+      correta: 1,
+      acerto: "Muito bem! O grupo da direita tem 6 — mais que 4.",
+      erro: "Conte cada grupo e compare os números.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · Complete a coleção",
+      instrucao: "Antes você tinha 3 estrelas. Agora você tem 5.",
+      grupos: [
+        { imagemUrl: estrelaImg, quantidade: 3, rotulo: "Antes" },
+        { imagemUrl: estrelaImg, quantidade: 5, rotulo: "Depois" },
+      ],
+      pergunta: "Quantas estrelas foram acrescentadas?",
+      opcoes: ["1", "2", "3"],
+      correta: 1,
+      acerto: "Isso! 3 + 2 = 5. Foram acrescentadas 2 estrelas.",
+      erro: "Conte quantas estrelas apareceram a mais do 'Antes' pro 'Depois'.",
+    },
     {
       tipo: "ligar",
       titulo: "Conte e ligue: quantos alimentos cada animal tem?",
