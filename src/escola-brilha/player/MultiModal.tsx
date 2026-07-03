@@ -125,75 +125,103 @@ function JogoArrastar({
     Object.fromEntries(jogo.pares.map((p) => [p.item, null])),
   );
   const [checked, setChecked] = useState(false);
+  const [selecionado, setSelecionado] = useState<string | null>(null);
   const dragged = useRef<string | null>(null);
 
   const conferir = () => setChecked(true);
   const reset = () => {
     setDrops(Object.fromEntries(jogo.pares.map((p) => [p.item, null])));
     setChecked(false);
+    setSelecionado(null);
   };
   const acertos = jogo.pares.filter(
     (p) => drops[p.item] === p.alvo,
   ).length;
 
+  const colocarNoAlvo = (item: string, alvo: string) => {
+    setDrops((d) => ({ ...d, [item]: alvo }));
+    setSelecionado(null);
+  };
+
   return (
     <Secao icon={MousePointerClick} rotulo="Arraste" cor="#F472B6">
-      <p className="font-black mb-1">{jogo.titulo}</p>
-      <p className="text-sm text-white/70 mb-3">{jogo.instrucao}</p>
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      <p className="text-base text-white/80 mb-2">{jogo.instrucao}</p>
+      <p className="text-sm text-white/60 mb-3">
+        Toque no item abaixo e depois na caixa certa.
+      </p>
 
-      <div className="grid grid-cols-2 gap-2 mb-3">
-        {alvos.map((alvo) => (
-          <div
-            key={alvo}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => {
-              if (!dragged.current) return;
-              setDrops((d) => ({ ...d, [dragged.current!]: alvo }));
-              dragged.current = null;
-            }}
-            className="rounded-2xl border-2 border-dashed border-white/30 bg-white/5 p-3 min-h-[72px]"
-          >
-            <div className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1">
-              {alvo}
-            </div>
-            <div className="flex flex-wrap gap-1">
-              {Object.entries(drops)
-                .filter(([, a]) => a === alvo)
-                .map(([item]) => (
-                  <span
-                    key={item}
-                    onClick={() =>
-                      setDrops((d) => ({ ...d, [item]: null }))
-                    }
-                    className="px-2 py-1 rounded-lg bg-[#F472B6] text-[#0d1f55] text-sm font-black cursor-pointer"
-                  >
-                    {item}
-                  </span>
-                ))}
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        {alvos.map((alvo) => {
+          const podeReceber = selecionado !== null;
+          return (
+            <button
+              type="button"
+              key={alvo}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={() => {
+                if (!dragged.current) return;
+                colocarNoAlvo(dragged.current, alvo);
+                dragged.current = null;
+              }}
+              onClick={() => {
+                if (selecionado) colocarNoAlvo(selecionado, alvo);
+              }}
+              className={`text-left rounded-2xl border-4 p-3 min-h-[110px] transition-all ${
+                podeReceber
+                  ? "border-[#FBBF24] bg-[#FBBF24]/10 animate-pulse"
+                  : "border-dashed border-white/30 bg-white/5"
+              }`}
+            >
+              <div className="text-sm font-black uppercase tracking-wider text-white mb-2">
+                {alvo}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(drops)
+                  .filter(([, a]) => a === alvo)
+                  .map(([item]) => (
+                    <span
+                      key={item}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setDrops((d) => ({ ...d, [item]: null }));
+                      }}
+                      className="px-3 py-2 rounded-xl bg-[#F472B6] text-[#0d1f55] text-base font-black cursor-pointer"
+                    >
+                      {item} ✕
+                    </span>
+                  ))}
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       <div className="flex flex-wrap gap-2 mb-3">
         {Object.entries(drops)
           .filter(([, a]) => a === null)
-          .map(([item]) => (
-            <div
-              key={item}
-              draggable
-              onDragStart={() => (dragged.current = item)}
-              onClick={() => {
-                // fallback mobile: seleciona o primeiro alvo vazio
-                const alvo = alvos[0];
-                setDrops((d) => ({ ...d, [item]: alvo }));
-              }}
-              className="px-3 py-2 rounded-xl bg-white text-[#0d1f55] font-black cursor-grab active:cursor-grabbing shadow"
-            >
-              {item}
-            </div>
-          ))}
+          .map(([item]) => {
+            const sel = selecionado === item;
+            return (
+              <button
+                type="button"
+                key={item}
+                draggable
+                onDragStart={() => (dragged.current = item)}
+                onClick={() => setSelecionado(sel ? null : item)}
+                className={`px-4 py-3 rounded-xl font-black text-lg shadow transition-all ${
+                  sel
+                    ? "bg-[#FBBF24] text-[#0d1f55] scale-110 ring-4 ring-white"
+                    : "bg-white text-[#0d1f55]"
+                }`}
+              >
+                {item}
+              </button>
+            );
+          })}
       </div>
+
+
 
       <div className="flex gap-2">
         <button
