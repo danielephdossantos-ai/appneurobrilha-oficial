@@ -211,51 +211,103 @@ function JogoArrastar({
                         alt={visual.nome}
                         className="h-full w-full object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.35)]"
                         animate={
-                          quantosNoPrato > 0
+                          visual.capacidade === 1 && quantosNoPrato > 0
                             ? { rotate: [0, -8, 8, -6, 6, 0], scale: [1, 1.1, 1] }
                             : { y: [0, -4, 0] }
                         }
                         transition={
-                          quantosNoPrato > 0
+                          visual.capacidade === 1 && quantosNoPrato > 0
                             ? { duration: 0.9, repeat: Infinity, repeatDelay: 0.6 }
                             : { duration: 1.6, repeat: Infinity }
                         }
                       />
-                      {/* Minhoca sendo comida — aparece no bico */}
-                      {jogo.itemImagem && quantosNoPrato > 0 && (
-                        <motion.img
-                          key={`worm-${quantosNoPrato}`}
-                          src={jogo.itemImagem}
-                          alt=""
-                          initial={{ y: -60, opacity: 0, scale: 1.2 }}
-                          animate={{
-                            y: [-60, 0, 8],
-                            opacity: [0, 1, 1, 0],
-                            scale: [1.2, 1, 0.6],
-                          }}
-                          transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const first = Object.entries(drops).find(
-                              ([, a]) => a === alvo,
-                            );
-                            if (first) setDrops((d) => ({ ...d, [first[0]]: null }));
-                          }}
-                          className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                        />
-                      )}
+                      {/* Item entrando (só faz sentido para 'alimentar' — capacidade 1). */}
+                      {jogo.itemImagem &&
+                        visual.capacidade === 1 &&
+                        quantosNoPrato > 0 && (
+                          <motion.img
+                            key={`chomp-${quantosNoPrato}`}
+                            src={jogo.itemImagem}
+                            alt=""
+                            initial={{ y: -60, opacity: 0, scale: 1.2 }}
+                            animate={{
+                              y: [-60, 0, 8],
+                              opacity: [0, 1, 1, 0],
+                              scale: [1.2, 1, 0.6],
+                            }}
+                            transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const first = Object.entries(drops).find(
+                                ([, a]) => a === alvo,
+                              );
+                              if (first) setDrops((d) => ({ ...d, [first[0]]: null }));
+                            }}
+                            className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                          />
+                        )}
                     </div>
+                    {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
+                    {jogo.itemImagem &&
+                      (visual.capacidade ?? 0) > 1 &&
+                      quantosNoPrato > 0 && (
+                        <div
+                          className="w-[88%] mx-auto rounded-2xl bg-white/95 border-4 p-2 flex flex-wrap gap-1 justify-center"
+                          style={{ borderColor: cor }}
+                        >
+                          {Object.entries(drops)
+                            .filter(([, a]) => a === alvo)
+                            .map(([item]) => (
+                              <motion.img
+                                key={item}
+                                src={jogo.itemImagem}
+                                alt=""
+                                initial={{ y: -20, opacity: 0, scale: 0.6 }}
+                                animate={{ y: 0, opacity: 1, scale: 1 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDrops((d) => ({ ...d, [item]: null }));
+                                }}
+                                className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
+                              />
+                            ))}
+                        </div>
+                      )}
+
                     <div className="flex items-center gap-2">
-                      {quantosNoPrato > 0 ? (
-                        <span className="px-3 py-1 rounded-full bg-white text-[#0d1f55] text-sm font-black shadow">
-                          Comeu! 😋
-                        </span>
-                      ) : (
-                        <span className="px-3 py-1 rounded-full bg-white/90 text-[#0d1f55] text-sm font-black shadow animate-pulse">
-                          Com fome…
-                        </span>
-                      )}
+                      {(() => {
+                        const cap = visual.capacidade ?? 0;
+                        const cheio = cap > 0 && quantosNoPrato >= cap;
+                        // Rótulos por contexto: capacidade 1 = "alimentar" (bicho come);
+                        // capacidade > 1 = "encaixar" (objetos em prateleira/cesta).
+                        const alimenta = cap === 1;
+                        const vazio =
+                          alimenta ? "Com fome…" : cap > 0 ? `Vazia · 0/${cap}` : "Vazio";
+                        const parcial = alimenta
+                          ? "Comeu! 😋"
+                          : cap > 0
+                            ? `${quantosNoPrato}/${cap}`
+                            : `${quantosNoPrato}`;
+                        const completo = alimenta
+                          ? "Comeu! 😋"
+                          : cap > 0
+                            ? `Cheia! ${quantosNoPrato}/${cap} ✓`
+                            : `${quantosNoPrato}`;
+                        const texto =
+                          quantosNoPrato === 0 ? vazio : cheio ? completo : parcial;
+                        return (
+                          <span
+                            className={`px-3 py-1 rounded-full bg-white text-[#0d1f55] text-sm font-black shadow ${
+                              quantosNoPrato === 0 ? "animate-pulse bg-white/90" : ""
+                            }`}
+                          >
+                            {texto}
+                          </span>
+                        );
+                      })()}
                     </div>
+
                   </div>
                 ) : (
                   <>
