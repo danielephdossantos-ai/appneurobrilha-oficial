@@ -235,9 +235,9 @@ export function OperacaoVisual({
         {fase < 4 ? (
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <div className="flex flex-col items-center gap-1">
-              <Grupo total={a} contados={contadoA} />
+              <Grupo total={a} mostrar={fase >= 2 ? a : contadoA} />
               <span className="text-xs font-black" style={{ color: cor }}>
-                {contadoA > 0 ? contadoA : a}
+                {fase >= 2 ? a : contadoA}
               </span>
             </div>
             <Icone
@@ -252,25 +252,14 @@ export function OperacaoVisual({
             <div className="flex flex-col items-center gap-1">
               {operacao === "soma" ? (
                 <>
-                  <Grupo total={b} contados={contadoB} />
+                  <Grupo total={b} mostrar={contadoB} />
                   <span className="text-xs font-black" style={{ color: cor }}>
-                    {contadoB > 0 ? contadoB : b}
+                    {contadoB}
                   </span>
                 </>
               ) : (
                 <>
-                  {/* na subtração o "b" é o que vai ser retirado do A - mostramos um placeholder */}
-                  <div className="flex flex-wrap gap-1.5 items-center justify-center max-w-[90px]">
-                    {Array.from({ length: b }).map((_, i) => (
-                      <img
-                        key={i}
-                        src={imagemUrl}
-                        alt=""
-                        className="h-9 w-9 object-contain opacity-70"
-                        style={{ filter: "grayscale(0.3)" }}
-                      />
-                    ))}
-                  </div>
+                  <Grupo total={b} mostrar={b} />
                   <span className="text-xs font-black" style={{ color: cor }}>
                     tirar {b}
                   </span>
@@ -283,7 +272,7 @@ export function OperacaoVisual({
           <div className="flex flex-col items-center gap-2">
             <Grupo
               total={operacao === "soma" ? a + b : a}
-              contados={contadoTotal}
+              mostrar={contadoTotal}
               riscados={operacao === "subtracao" ? b : 0}
             />
             <span
