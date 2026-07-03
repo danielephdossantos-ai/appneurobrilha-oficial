@@ -362,28 +362,36 @@ export function OperacaoVisual({
       {/* Área visual */}
       <div key={replayKey} className="min-h-[130px] bg-white/60 rounded-2xl p-3">
         {operacao === "subtracao" ? (
-          fase < 4 ? (
+          fase < 3 ? (
+            // Fases 0-2: mostra só o grupo inicial contando
             <div className="flex flex-col items-center gap-2">
-              <Grupo
-                total={a}
-                mostrar={mostrarSubtracao}
-                riscados={fase >= 3 ? removidos : 0}
-              />
+              <Grupo total={a} mostrar={mostrarSubtracao} />
               <span className="text-sm font-black" style={{ color: cor }}>
-                {fase === 1 && `${contadoA}`}
-                {fase === 2 && `${a} ${itemPlural}`}
-                {fase === 3 && `Tirou ${removidos} — sobram ${a - removidos}`}
+                {fase <= 1 ? `${contadoA || 0}` : `${a} ${itemPlural}`}
               </span>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-2">
-              <Grupo total={a} mostrar={a} riscados={b} />
-              <span
-                className="text-lg font-black"
-                style={{ color: fase === 5 ? "#22C55E" : cor }}
-              >
-                {contadoTotal || "…"}
-              </span>
+            // Fase 3+: DOIS grupos lado a lado — ficaram | saíram
+            <div className="flex items-start justify-center gap-2 sm:gap-3">
+              <div className="flex flex-col items-center gap-1 rounded-xl p-2 bg-[#DCFCE7] border-2 border-[#22C55E]">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#166534]">
+                  Ficaram
+                </span>
+                <Grupo total={a} mostrar={a - removidos} />
+                <span className="text-lg font-black text-[#22C55E]">
+                  {fase >= 4 ? (contadoTotal || "…") : (a - removidos)}
+                </span>
+              </div>
+              <Minus className="h-8 w-8 shrink-0 mt-8" style={{ color: cor }} />
+              <div className="flex flex-col items-center gap-1 rounded-xl p-2 bg-[#FEE2E2] border-2 border-[#EF4444]">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#991B1B]">
+                  Saíram
+                </span>
+                <Grupo total={b} mostrar={removidos} riscados={removidos} />
+                <span className="text-lg font-black text-[#EF4444]">
+                  {removidos}
+                </span>
+              </div>
             </div>
           )
         ) : fase < 4 ? (
