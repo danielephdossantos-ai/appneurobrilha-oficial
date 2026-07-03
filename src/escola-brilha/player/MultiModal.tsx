@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
+import { OperacaoVisual } from "./blocos/OperacaoVisual";
 import type { Aula } from "../types";
 
 /**
@@ -98,6 +99,24 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoMontar jogo={jogo} />;
     case "contarQuiz":
       return <JogoContarQuiz jogo={jogo} />;
+    case "operacao":
+      return (
+        <Secao icon={Sparkles} rotulo="Conta visual" cor={jogo.cor ?? "#60A5FA"}>
+          <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+          {jogo.instrucao && (
+            <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+          )}
+          <OperacaoVisual
+            operacao={jogo.operacao}
+            imagemUrl={jogo.imagemUrl}
+            itemPlural={jogo.itemPlural}
+            a={jogo.a}
+            b={jogo.b}
+            cor={jogo.cor}
+            legenda={jogo.legenda}
+          />
+        </Secao>
+      );
   }
 }
 

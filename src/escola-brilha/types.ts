@@ -349,6 +349,23 @@ export type Aula = {
         acerto?: string;
         erro?: string;
       }
+    | {
+        /**
+         * Conta visual de + ou − com imagens aparecendo (soma) ou
+         * sumindo (subtração). OBRIGATÓRIO para Ed. Infantil, 1º e 2º Ano
+         * — nunca mostrar contas só em texto.
+         */
+        tipo: "operacao";
+        titulo: string;
+        instrucao?: string;
+        operacao: "soma" | "subtracao";
+        imagemUrl: string;
+        itemPlural: string;
+        a: number;
+        b: number;
+        cor?: string;
+        legenda?: string;
+      }
   >;
 
   /**
