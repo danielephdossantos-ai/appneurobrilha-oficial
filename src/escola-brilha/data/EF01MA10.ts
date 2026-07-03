@@ -3,6 +3,8 @@ import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
 import tulipaImg from "@/assets/neuro-treino/objetos/tulipa.png";
 import rosaImg from "@/assets/neuro-treino/objetos/rosa.png";
+import margaridaImg from "@/assets/neuro-treino/objetos/margarida.png";
+import cerejeiraImg from "@/assets/neuro-treino/objetos/cerejeira.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import borboletaImg from "@/assets/neuro-treino/objetos/borboleta.png";
@@ -377,27 +379,27 @@ const aula: Aula = {
       erro: "A regra é aumentar 1: 15, 16, 17, 18, 19.",
     },
 
-    // ==== MINI JOGO 1 · O Jardim Encantado — ordenar 🌼🌸 ====
+    // ==== MINI JOGO 1 · O Jardim Encantado — ordenar 🌼🌸 (cresce +1) ====
     {
       tipo: "ordenar",
-      titulo: "Mini Jogo · Jardim Encantado (padrão de flores)",
+      titulo: "Mini Jogo · Jardim Encantado (padrão que cresce)",
       instrucao:
-        "Coloque na ORDEM CERTA pra formar o padrão: 🌼 🌸 🌼 🌸 🌼 🌸.",
+        "Coloque na ORDEM CERTA — a cada passo, aumenta 1 flor: 1 🌼, 2 🌸, 3 🌼, 4 🌸, 5 🌼, 6 🌸. Conte cada cartão!",
       itens: [
-        "🌼 Margarida (1)",
-        "🌸 Cerejeira (2)",
-        "🌼 Margarida (3)",
-        "🌸 Cerejeira (4)",
-        "🌼 Margarida (5)",
-        "🌸 Cerejeira (6)",
+        "1 Margarida",
+        "2 Cerejeiras",
+        "3 Margaridas",
+        "4 Cerejeiras",
+        "5 Margaridas",
+        "6 Cerejeiras",
       ],
       imagens: [
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌼 pos 1", cor: "#FBBF24" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌸 pos 2", cor: "#F472B6" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌼 pos 3", cor: "#FBBF24" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌸 pos 4", cor: "#F472B6" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌼 pos 5", cor: "#FBBF24" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "🌸 pos 6", cor: "#F472B6" },
+        { imagemUrl: margaridaImg, quantidade: 1, rotulo: "1 🌼 Margarida", cor: "#FBBF24" },
+        { imagemUrl: cerejeiraImg, quantidade: 2, rotulo: "2 🌸 Cerejeiras", cor: "#F472B6" },
+        { imagemUrl: margaridaImg, quantidade: 3, rotulo: "3 🌼 Margaridas", cor: "#FBBF24" },
+        { imagemUrl: cerejeiraImg, quantidade: 4, rotulo: "4 🌸 Cerejeiras", cor: "#F472B6" },
+        { imagemUrl: margaridaImg, quantidade: 5, rotulo: "5 🌼 Margaridas", cor: "#FBBF24" },
+        { imagemUrl: cerejeiraImg, quantidade: 6, rotulo: "6 🌸 Cerejeiras", cor: "#F472B6" },
       ],
     },
 
