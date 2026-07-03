@@ -148,17 +148,31 @@ function JogoArrastar({
     setSelecionado(null);
   };
 
+  const buscarAlvoVisual = (nome: string) =>
+    jogo.alvosVisuais?.find((a) => a.nome === nome);
+
   return (
     <Secao icon={MousePointerClick} rotulo="Arraste" cor="#F472B6">
       <p className="font-black text-lg mb-1">{jogo.titulo}</p>
       <p className="text-base text-white/80 mb-2">{jogo.instrucao}</p>
       <p className="text-sm text-white/60 mb-3">
-        Toque no item abaixo e depois na caixa certa.
+        Toque no item abaixo e depois no prato certo.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+      <div
+        className={`grid gap-3 mb-4 ${
+          alvos.length === 2
+            ? "grid-cols-2"
+            : "grid-cols-1 sm:grid-cols-3"
+        }`}
+      >
         {alvos.map((alvo) => {
           const podeReceber = selecionado !== null;
+          const visual = buscarAlvoVisual(alvo);
+          const quantosNoPrato = Object.values(drops).filter(
+            (a) => a === alvo,
+          ).length;
+          const cor = visual?.cor ?? "#F472B6";
           return (
             <button
               type="button"
@@ -172,41 +186,123 @@ function JogoArrastar({
               onClick={() => {
                 if (selecionado) colocarNoAlvo(selecionado, alvo);
               }}
-              className={`text-left rounded-2xl border-4 p-3 min-h-[110px] transition-all ${
-                podeReceber
-                  ? "border-[#FBBF24] bg-[#FBBF24]/10 animate-pulse"
-                  : "border-dashed border-white/30 bg-white/5"
+              className={`text-left rounded-3xl border-4 p-3 min-h-[160px] transition-all relative overflow-hidden ${
+                podeReceber ? "ring-4 ring-[#FBBF24] animate-pulse" : ""
               }`}
+              style={{
+                background: visual ? `${cor}` : "rgba(255,255,255,0.05)",
+                borderColor: visual ? "#ffffff" : "rgba(255,255,255,0.3)",
+                borderStyle: visual ? "solid" : "dashed",
+              }}
             >
-              <div className="text-sm font-black uppercase tracking-wider text-white mb-2">
-                {alvo}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(drops)
-                  .filter(([, a]) => a === alvo)
-                  .map(([item]) => (
-                    <span
-                      key={item}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDrops((d) => ({ ...d, [item]: null }));
-                      }}
-                      className="px-3 py-2 rounded-xl bg-[#F472B6] text-[#0d1f55] text-base font-black cursor-pointer"
-                    >
-                      {item} ✕
+              {visual ? (
+                <>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-white drop-shadow">
+                      {visual.nome}
                     </span>
-                  ))}
-              </div>
+                    {visual.capacidade !== undefined && (
+                      <span className="h-9 w-9 rounded-full bg-white text-[#0d1f55] font-black text-lg grid place-items-center shadow border-2 border-white">
+                        {visual.capacidade}
+                      </span>
+                    )}
+                  </div>
+                  <div className="rounded-2xl bg-white/25 backdrop-blur-sm min-h-[90px] p-2 flex flex-wrap gap-1.5 items-center justify-center">
+                    {jogo.itemImagem && quantosNoPrato > 0 ? (
+                      Object.entries(drops)
+                        .filter(([, a]) => a === alvo)
+                        .map(([item]) => (
+                          <img
+                            key={item}
+                            src={jogo.itemImagem}
+                            alt=""
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDrops((d) => ({ ...d, [item]: null }));
+                            }}
+                            className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                          />
+                        ))
+                    ) : (
+                      Object.entries(drops)
+                        .filter(([, a]) => a === alvo)
+                        .map(([item]) => (
+                          <span
+                            key={item}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDrops((d) => ({ ...d, [item]: null }));
+                            }}
+                            className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
+                          >
+                            {item}
+                          </span>
+                        ))
+                    )}
+                  </div>
+                  {visual.capacidade !== undefined && (
+                    <div className="mt-1 text-center text-[10px] font-black uppercase tracking-widest text-white/90">
+                      {quantosNoPrato} / {visual.capacidade}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="text-sm font-black uppercase tracking-wider text-white mb-2">
+                    {alvo}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(drops)
+                      .filter(([, a]) => a === alvo)
+                      .map(([item]) => (
+                        <span
+                          key={item}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDrops((d) => ({ ...d, [item]: null }));
+                          }}
+                          className="px-3 py-2 rounded-xl bg-[#F472B6] text-[#0d1f55] text-base font-black cursor-pointer"
+                        >
+                          {item} ✕
+                        </span>
+                      ))}
+                  </div>
+                </>
+              )}
             </button>
           );
         })}
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-3">
+      <div className="flex flex-wrap justify-center gap-2 mb-3 bg-white/5 rounded-2xl p-3 border-2 border-dashed border-white/20 min-h-[80px]">
         {Object.entries(drops)
           .filter(([, a]) => a === null)
           .map(([item]) => {
             const sel = selecionado === item;
+            if (jogo.itemImagem) {
+              return (
+                <button
+                  type="button"
+                  key={item}
+                  draggable
+                  onDragStart={() => (dragged.current = item)}
+                  onClick={() => setSelecionado(sel ? null : item)}
+                  className={`h-14 w-14 rounded-2xl bg-white grid place-items-center shadow transition-all ${
+                    sel
+                      ? "scale-125 ring-4 ring-[#FBBF24]"
+                      : "active:scale-95"
+                  }`}
+                  aria-label={item}
+                >
+                  <img
+                    src={jogo.itemImagem}
+                    alt=""
+                    className="h-10 w-10 object-contain"
+                    draggable={false}
+                  />
+                </button>
+              );
+            }
             return (
               <button
                 type="button"
@@ -224,9 +320,12 @@ function JogoArrastar({
               </button>
             );
           })}
+        {Object.values(drops).every((a) => a !== null) && (
+          <span className="text-white/50 text-sm font-black self-center">
+            Todos colocados
+          </span>
+        )}
       </div>
-
-
 
       <div className="flex gap-2">
         <button
