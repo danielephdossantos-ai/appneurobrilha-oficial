@@ -285,6 +285,11 @@ export type Aula = {
           imagemUrl: string;
           quantidade: number;
           rotulo?: string;
+          // Segundo grupo opcional (para ordenar somas/pares, ex.: 1+7).
+          imagemUrl2?: string;
+          quantidade2?: number;
+          cor?: string;
+          cor2?: string;
         }>;
       }
     | {
