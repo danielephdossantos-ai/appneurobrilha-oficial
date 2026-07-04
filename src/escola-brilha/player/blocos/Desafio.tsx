@@ -53,13 +53,13 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
                     {p.quantidade}
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1 justify-center min-h-[70px] items-center bg-white/40 rounded-xl p-1">
+                <div className={`flex flex-wrap gap-1 justify-center items-center bg-white/40 rounded-xl p-2 ${p.quantidade <= 1 ? "min-h-[56px]" : "min-h-[70px]"}`}>
                   {Array.from({ length: p.quantidade }).map((_, k) => (
                     <img
                       key={k}
                       src={p.itemImagemUrl}
                       alt=""
-                      className="h-8 w-8 sm:h-9 sm:w-9 object-contain drop-shadow"
+                      className={`${p.quantidade === 1 ? "h-14 w-14 sm:h-16 sm:w-16" : p.quantidade <= 3 ? "h-11 w-11 sm:h-12 sm:w-12" : "h-8 w-8 sm:h-9 sm:w-9"} object-contain drop-shadow`}
                     />
                   ))}
                 </div>
