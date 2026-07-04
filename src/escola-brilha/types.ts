@@ -207,6 +207,32 @@ export type Aula = {
           opcoes: number[];
           /** Índice da alternativa correta (deve bater com grupos × itens). */
           correta: number;
+        }
+      | {
+          /**
+           * Cena de POSIÇÃO ESPACIAL — sujeito posicionado de verdade
+           * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+           * frente, ao lado) sobre a referência. A criança escolhe entre
+           * alternativas descritivas.
+           */
+          tipo: "cena";
+          pergunta: string;
+          posicao:
+            | "cima"
+            | "baixo"
+            | "dentro"
+            | "fora"
+            | "direita"
+            | "esquerda"
+            | "atras"
+            | "frente"
+            | "aoLado";
+          referenciaImg: string;
+          referenciaLabel?: string;
+          sujeitoImg: string;
+          sujeitoLabel?: string;
+          opcoes: string[];
+          correta: number;
         };
   };
 
