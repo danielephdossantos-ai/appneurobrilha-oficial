@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, Lock, CheckCircle2, XCircle, Sparkles, RefreshCw } from "lucide-react";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
 import { Secao } from "./Secao";
 import type { Aula, QuizItem } from "../../types";
 import { useMetricasAula, precisaIntervir, type Dificuldade } from "../personalizacao";
