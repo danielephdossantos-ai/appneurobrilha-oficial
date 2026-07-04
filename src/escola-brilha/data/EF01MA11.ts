@@ -1,5 +1,6 @@
 import type { Aula } from "../types";
 
+import brilhaImg from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
 import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
 import coelhoImg from "@/assets/neuro-treino/objetos/coelho.png";
 import ursoImg from "@/assets/neuro-treino/objetos/ursinho.png";
