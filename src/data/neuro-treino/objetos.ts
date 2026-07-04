@@ -56,6 +56,7 @@ import bravo from "@/assets/neuro-treino/emocoes/bravo.png";
 import surpreso from "@/assets/neuro-treino/emocoes/surpreso.png";
 import medo from "@/assets/neuro-treino/emocoes/medo.png";
 import sono from "@/assets/neuro-treino/emocoes/sono.png";
+import esquiloBrilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
 
 // ===== Banco premium reutilizado dos hiperfocos (mesmo padrão visual kawaii/Pixar) =====
 import hfLeao from "@/assets/hiperfocos/animais/leao.png";
