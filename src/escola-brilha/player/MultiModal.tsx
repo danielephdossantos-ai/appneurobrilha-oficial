@@ -15,6 +15,7 @@ import {
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
 import { OperacaoVisual } from "./blocos/OperacaoVisual";
+import { PosicaoEspacial } from "./blocos/PosicaoEspacial";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
 
@@ -118,8 +119,17 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
           />
         </Secao>
       );
+    case "posicaoEspacial":
+      return (
+        <PosicaoEspacial
+          titulo={jogo.titulo}
+          instrucao={jogo.instrucao}
+          cenas={jogo.cenas}
+        />
+      );
   }
 }
+
 
 function Status({ ok, texto }: { ok: boolean; texto: string }) {
   return (
