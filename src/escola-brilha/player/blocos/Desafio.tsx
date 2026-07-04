@@ -95,13 +95,8 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
   );
 }
 
-function QuizSequencial({ perguntas }: { perguntas: Aula["desafio"]["visual"] extends infer V ? V extends { perguntas: infer P } ? P : never : never }) {
-  const lista = perguntas as Array<{
-    pergunta: string;
-    opcoes: string[];
-    correta: number;
-    explicacao: string;
-  }>;
+function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
+  const lista = perguntas;
   const [i, setI] = useState(0);
   const [escolha, setEscolha] = useState<number | null>(null);
   const [acertos, setAcertos] = useState(0);
