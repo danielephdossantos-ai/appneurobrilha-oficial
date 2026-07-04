@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Eye, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import { Secao } from "./Secao";
-import type { Aula } from "../../types";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
+import type { Aula, QuizItem } from "../../types";
 
 const CORES = ["#34D399", "#FB923C", "#F472B6", "#60A5FA", "#A78BFA", "#FBBF24"];
 
