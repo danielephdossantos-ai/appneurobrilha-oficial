@@ -117,6 +117,9 @@ import sMao from "@/assets/neuro-treino/sentidos/mao.png";
 
 
 export const OBJETO_IMG: Record<string, string> = {
+  BRILHA: esquiloBrilha,
+  ESQUILO: esquiloBrilha,
+  "ESQUILO BRILHA": esquiloBrilha,
   BOLA: bola,
   GATO: gato,
   MAÇÃ: maca,
