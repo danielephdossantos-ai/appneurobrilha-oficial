@@ -154,6 +154,7 @@ function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
           exit={{ opacity: 0, y: -8 }}
         >
           <p className="font-black mb-3">{q.pergunta}</p>
+          {q.visual && <PerguntaVisual visual={q.visual} />}
           <div className="space-y-2">
             {q.opcoes.map((op, k) => {
               const revelado = escolha !== null;
