@@ -28,6 +28,33 @@ export type QuizItem = {
     | {
         tipo: "comparar";
         lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string; cor?: string }>;
+      }
+    | {
+        /**
+         * Cena de POSIÇÃO ESPACIAL — mostra o sujeito na posição real
+         * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+         * frente, ao lado) em relação à referência. Sem contagem.
+         */
+        tipo: "cena";
+        posicao:
+          | "cima"
+          | "baixo"
+          | "dentro"
+          | "fora"
+          | "direita"
+          | "esquerda"
+          | "atras"
+          | "frente"
+          | "aoLado";
+        referenciaImg: string;
+        referenciaLabel?: string;
+        sujeitoImg: string;
+        sujeitoLabel?: string;
+      }
+    | {
+        /** Fila de 3 itens para ilustrar "entre" (o do meio é destacado). */
+        tipo: "cenaEntre";
+        fila: Array<{ img: string; label: string }>;
       };
 };
 
