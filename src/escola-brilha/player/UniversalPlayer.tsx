@@ -233,22 +233,22 @@ export function UniversalPlayer({
         </div>
       )}
       {plano && (
-        <div className="w-full bg-white/70 text-[#0d1f55] px-4 py-1 text-[11px] flex items-center gap-3 border-b border-[#0d1f55]/10">
-          <span>🧠 Adaptação:</span>
-          <span>linguagem <b>{plano.linguagem}</b></span>
-          <span>· exemplos <b>{plano.quantidadeExemplos}</b></span>
-          <span>· atividades <b>{plano.quantidadeAtividades}</b></span>
-          <span>· apoio <b>{plano.nivelApoio}</b></span>
-          <span>· ritmo <b>{plano.ritmo}</b></span>
+        <div className="w-full bg-white/80 text-[#0d1f55] px-3 py-1.5 text-[10px] sm:text-[11px] flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-[#0d1f55]/10">
+          <span className="font-black">🧠 Adaptação:</span>
+          <span className="px-1.5 py-0.5 rounded-full bg-[#0d1f55]/10">linguagem <b>{plano.linguagem}</b></span>
+          <span className="px-1.5 py-0.5 rounded-full bg-[#0d1f55]/10">exemplos <b>{plano.quantidadeExemplos}</b></span>
+          <span className="px-1.5 py-0.5 rounded-full bg-[#0d1f55]/10">atividades <b>{plano.quantidadeAtividades}</b></span>
+          <span className="px-1.5 py-0.5 rounded-full bg-[#0d1f55]/10">apoio <b>{plano.nivelApoio}</b></span>
+          <span className="px-1.5 py-0.5 rounded-full bg-[#0d1f55]/10">ritmo <b>{plano.ritmo}</b></span>
         </div>
       )}
       <div
         role="status"
         aria-live="polite"
-        className="w-full bg-gradient-to-r from-[#FFC93C]/20 via-white/10 to-[#7CE7A6]/20 text-white px-4 py-2 flex items-center gap-2 text-sm font-semibold border-b border-white/10"
+        className="w-full bg-[#0d1f55]/60 text-white px-4 py-2 flex items-center gap-2 text-sm font-semibold border-b border-white/10"
       >
-        <span aria-hidden className="text-lg">{motivacao.emoji}</span>
-        <span className="truncate">{motivacao.texto}</span>
+        <span aria-hidden className="text-lg shrink-0">{motivacao.emoji}</span>
+        <span className="min-w-0 flex-1">{motivacao.texto}</span>
       </div>
       <AulaPlayer
         aula={aula}
