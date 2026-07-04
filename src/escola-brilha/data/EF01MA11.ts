@@ -266,85 +266,220 @@ const aula: Aula = {
   },
 
   interativas: [
-    // ==== FASE 1: Onde está o esquilo? (em cima) ====
+    // ==== FASE 1 · EM CIMA / EMBAIXO / DENTRO — cena visual real ====
     {
-      tipo: "contarQuiz",
+      tipo: "posicaoEspacial",
       titulo: "Fase 1 · Onde está o Brilha?",
       instrucao:
-        "O esquilo Brilha subiu na árvore e está lá no alto do galho. Onde ele está?",
-      grupos: [
-        { imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳 Árvore" },
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha (no alto)" },
+        "Olhe a cena com atenção. Onde o esquilo Brilha está em cada figura?",
+      cenas: [
+        {
+          modo: "dupla",
+          referenciaImg: arvoreImg,
+          referenciaLabel: "Árvore",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "cima",
+          pergunta: "Onde está o Brilha?",
+          opcoes: ["Embaixo", "Em cima", "Dentro"],
+          correta: 1,
+          acerto: "🎉 Isso! O Brilha está EM CIMA da árvore.",
+          erro: "Olhe pro alto — o Brilha está bem em cima da árvore.",
+        },
+        {
+          modo: "dupla",
+          referenciaImg: arvoreImg,
+          referenciaLabel: "Árvore",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "baixo",
+          pergunta: "E agora, onde está o Brilha?",
+          opcoes: ["Em cima", "Embaixo", "Ao lado"],
+          correta: 1,
+          acerto: "🎉 EMBAIXO! Ele desceu pro pé da árvore.",
+          erro: "O Brilha está bem lá embaixo da árvore.",
+        },
+        {
+          modo: "dupla",
+          referenciaImg: casaImg,
+          referenciaLabel: "Toca",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "dentro",
+          pergunta: "Onde está o Brilha agora?",
+          opcoes: ["Fora", "Dentro", "Em cima"],
+          correta: 1,
+          acerto: "🏠 Boa! Ele está DENTRO da toca.",
+          erro: "Olhe: ele está no meio da toca — DENTRO.",
+        },
       ],
-      pergunta: "Onde está o Brilha?",
-      opcoes: ["Embaixo", "Em cima", "Dentro"],
-      correta: 1,
-      acerto: "🎉 Isso! No alto do galho = EM CIMA.",
-      erro: "Olhe pro alto da árvore: o Brilha está lá em cima do galho.",
     },
 
-    // ==== FASE 2: Arrastar coelho pra DENTRO da toca ====
+    // ==== FASE 2 · DENTRO x FORA — arrastar o coelho ====
     {
       tipo: "arrastar",
       titulo: "Fase 2 · Coloque o Coelho na Toca",
       instrucao:
-        "Arraste o 🐰 coelho pra DENTRO da toca. Depois arraste outro pra FORA.",
+        "Arraste um coelho pra DENTRO da toca e outro pra FORA. Toque no coelho e depois no lugar certo.",
       itemImagem: coelhoImg,
       alvosVisuais: [
         { nome: "DENTRO da toca 🏠", cor: "#F59E0B", capacidade: 1, imagemUrl: casaImg },
-        { nome: "FORA da toca 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
+        { nome: "FORA (no jardim) 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
       ],
       pares: [
         { item: "Coelho 1", alvo: "DENTRO da toca 🏠" },
-        { item: "Coelho 2", alvo: "FORA da toca 🌳" },
+        { item: "Coelho 2", alvo: "FORA (no jardim) 🌳" },
       ],
     },
 
-    // ==== FASE 3: Quem está ENTRE? ====
+    // ==== FASE 3 · ENTRE — fila de 3 animais ====
     {
-      tipo: "contarQuiz",
+      tipo: "posicaoEspacial",
       titulo: "Fase 3 · Quem está ENTRE?",
-      instrucao: "Olhe a fila: 🐻 🐰 🦊. Quem está ENTRE o urso e a raposa?",
-      grupos: [
-        { imagemUrl: ursoImg, quantidade: 1, rotulo: "🐻 Urso" },
-        { imagemUrl: coelhoImg, quantidade: 1, rotulo: "🐰 Coelho (meio)" },
-        { imagemUrl: raposaImg, quantidade: 1, rotulo: "🦊 Raposa" },
+      instrucao:
+        "Três animais na floresta. Olhe a fila e descubra quem está NO MEIO.",
+      cenas: [
+        {
+          modo: "entre",
+          fila: [
+            { img: ursoImg, label: "🐻 Urso" },
+            { img: coelhoImg, label: "🐰 Coelho" },
+            { img: raposaImg, label: "🦊 Raposa" },
+          ],
+          pergunta: "Quem está ENTRE o urso e a raposa?",
+          opcoes: ["🐻 Urso", "🐰 Coelho", "🦊 Raposa"],
+          correta: 1,
+          acerto: "🐰 Perfeito! O coelho está ENTRE (no meio).",
+          erro: "Entre = no meio. Quem está no meio é o coelho.",
+        },
+        {
+          modo: "entre",
+          fila: [
+            { img: gatoImg, label: "🐱 Gato" },
+            { img: brilhaImg, label: "🐿️ Brilha" },
+            { img: coelhoImg, label: "🐰 Coelho" },
+          ],
+          pergunta: "Quem está ENTRE o gato e o coelho?",
+          opcoes: ["🐱 Gato", "🐿️ Brilha", "🐰 Coelho"],
+          correta: 1,
+          acerto: "🐿️ Isso! O Brilha está no meio.",
+          erro: "Olhe o meio da fila — quem está lá é o Brilha.",
+        },
       ],
-      pergunta: "Quem está ENTRE?",
-      opcoes: ["🐻 Urso", "🐰 Coelho", "🦊 Raposa"],
-      correta: 1,
-      acerto: "🐰 Perfeito! O coelho está no meio, ENTRE o urso e a raposa.",
-      erro: "Entre = NO MEIO. Quem está no meio da fila é o coelho.",
     },
 
-    // ==== FASE 4: Direita ou Esquerda? ====
+    // ==== FASE 4 · DIREITA x ESQUERDA — cenas com o Brilha ====
     {
-      tipo: "contarQuiz",
+      tipo: "posicaoEspacial",
       titulo: "Fase 4 · Direita ou Esquerda?",
       instrucao:
-        "O Brilha ⬅️ está segurando uma lanterna. A mochila 🎒 está do lado ESQUERDO dele. A mochila está à direita ou à esquerda?",
-      grupos: [
-        { imagemUrl: presenteImg, quantidade: 1, rotulo: "🎒 Mochila (⬅️ esquerda)" },
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "🔦 Brilha" },
+        "Olhe pra qual lado o objeto está em relação ao Brilha.",
+      cenas: [
+        {
+          modo: "dupla",
+          referenciaImg: brilhaImg,
+          referenciaLabel: "Brilha",
+          sujeitoImg: presenteImg,
+          sujeitoLabel: "Mochila",
+          posicao: "esquerda",
+          pergunta: "A mochila está:",
+          opcoes: ["À direita", "À esquerda", "Em cima"],
+          correta: 1,
+          acerto: "⬅️ Boa! A mochila está à ESQUERDA do Brilha.",
+          erro: "Olhe a seta ⬅️ — a mochila está do lado esquerdo.",
+        },
+        {
+          modo: "dupla",
+          referenciaImg: brilhaImg,
+          referenciaLabel: "Brilha",
+          sujeitoImg: bauImg,
+          sujeitoLabel: "Baú",
+          posicao: "direita",
+          pergunta: "O baú está:",
+          opcoes: ["À esquerda", "À direita", "Embaixo"],
+          correta: 1,
+          acerto: "➡️ Isso! O baú está à DIREITA do Brilha.",
+          erro: "Olhe a seta ➡️ — o baú está do lado direito.",
+        },
       ],
-      pergunta: "A mochila está:",
-      opcoes: ["À direita", "À esquerda", "Em cima"],
-      correta: 1,
-      acerto: "⬅️ Muito bem! A mochila está à ESQUERDA do Brilha.",
-      erro: "Olhe: a mochila aparece do lado esquerdo (⬅️) do Brilha.",
     },
 
-    // ==== FASE 5: Siga o caminho até o baú ====
+    // ==== FASE 5 · AO LADO / ATRÁS / FRENTE ====
+    {
+      tipo: "posicaoEspacial",
+      titulo: "Fase 5 · Ao lado, Atrás ou na Frente?",
+      instrucao: "Descubra onde o Brilha está em cada cena.",
+      cenas: [
+        {
+          modo: "dupla",
+          referenciaImg: arvoreImg,
+          referenciaLabel: "Árvore",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "aoLado",
+          pergunta: "Onde está o Brilha?",
+          opcoes: ["Em cima", "Ao lado", "Dentro"],
+          correta: 1,
+          acerto: "Boa! Bem pertinho, do lado = AO LADO.",
+          erro: "Ele está grudadinho do lado da árvore = AO LADO.",
+        },
+        {
+          modo: "dupla",
+          referenciaImg: casaImg,
+          referenciaLabel: "Casa",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "atras",
+          pergunta: "Onde está o Brilha?",
+          opcoes: ["Na frente", "Atrás", "Dentro"],
+          correta: 1,
+          acerto: "👀 Isso! Ele está escondidinho ATRÁS.",
+          erro: "Olhe: ele está espiando de trás da casa.",
+        },
+        {
+          modo: "dupla",
+          referenciaImg: casaImg,
+          referenciaLabel: "Casa",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
+          posicao: "frente",
+          pergunta: "E agora?",
+          opcoes: ["Atrás", "Na frente", "Em cima"],
+          correta: 1,
+          acerto: "🎉 Ele saiu e ficou NA FRENTE!",
+          erro: "Olhe: agora ele está bem na frente da casa.",
+        },
+      ],
+    },
+
+    // ==== MINI JOGO · Explorador — arrastar borboleta em cima da flor ====
+    {
+      tipo: "arrastar",
+      titulo: "Mini Jogo · Explorador da Floresta",
+      instrucao:
+        "Coloque a 🦋 borboleta EM CIMA da flor. Coloque o 🐰 coelho AO LADO da árvore.",
+      itemImagem: borboletaImg,
+      alvosVisuais: [
+        { nome: "EM CIMA da flor 🌼", cor: "#F472B6", capacidade: 1, imagemUrl: florImg },
+        { nome: "AO LADO da árvore 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
+      ],
+      pares: [
+        { item: "🦋 Borboleta", alvo: "EM CIMA da flor 🌼" },
+        { item: "🐰 Coelho", alvo: "AO LADO da árvore 🌳" },
+      ],
+    },
+
+    // ==== MINI JOGO · Siga o Caminho do Mapa ====
     {
       tipo: "ordenar",
-      titulo: "Fase 5 · Siga o Caminho do Mapa",
+      titulo: "Mini Jogo · Siga o Caminho do Mapa",
       instrucao:
-        "Coloque as setas na ORDEM do mapa pra levar o Brilha até o baú: ➡️ ➡️ ⬆️ ⬅️",
+        "Coloque as setas na ORDEM certa pra levar o Brilha até o baú: ➡️ ➡️ ⬆️ ⬅️",
       itens: [
         "➡️ Direita 1",
         "➡️ Direita 2",
         "⬆️ Cima",
-        "⬅️ Esquerda",
+        "⬅️ Esquerda (baú)",
       ],
       imagens: [
         { imagemUrl: diamanteImg, quantidade: 1, rotulo: "➡️ Direita 1", cor: "#60A5FA" },
@@ -353,37 +488,8 @@ const aula: Aula = {
         { imagemUrl: bauImg, quantidade: 1, rotulo: "⬅️ Esquerda → 🏆 Baú!", cor: "#F59E0B" },
       ],
     },
-
-    // ==== MINI JOGO 1 · Explorador — arrastar borboleta em cima da flor ====
-    {
-      tipo: "arrastar",
-      titulo: "Mini Jogo · Explorador da Floresta",
-      instrucao:
-        "Coloque a 🦋 borboleta EM CIMA da flor. Coloque o 🐰 coelho ATRÁS da árvore.",
-      itemImagem: borboletaImg,
-      alvosVisuais: [
-        { nome: "EM CIMA da flor 🌼", cor: "#F472B6", capacidade: 1, imagemUrl: florImg },
-        { nome: "ATRÁS da árvore 🌳", cor: "#10B981", capacidade: 1, imagemUrl: arvoreImg },
-      ],
-      pares: [
-        { item: "🦋 Borboleta", alvo: "EM CIMA da flor 🌼" },
-        { item: "🐰 Coelho", alvo: "ATRÁS da árvore 🌳" },
-      ],
-    },
-
-    // ==== MINI JOGO 2 · Ligar palavra à cena ====
-    {
-      tipo: "ligar",
-      titulo: "Mini Jogo · Ligue a palavra à cena certa",
-      instrucao: "Ligue cada palavra de localização à cena que combina.",
-      pares: [
-        { a: "🐿️ no galho alto", b: "EM CIMA", aImagem: arvoreImg, aQuantidade: 1 },
-        { a: "🐰 saiu da toca", b: "FORA", aImagem: coelhoImg, aQuantidade: 1 },
-        { a: "🐱 pulou pra dentro", b: "DENTRO", aImagem: gatoImg, aQuantidade: 1 },
-        { a: "🐻 🐰 🦊 — o coelho", b: "ENTRE", aImagem: coelhoImg, aQuantidade: 1 },
-      ],
-    },
   ],
+
 
   niveis: {
     dominioMinimo: 70,
