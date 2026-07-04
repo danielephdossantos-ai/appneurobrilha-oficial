@@ -24,7 +24,8 @@ import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
  * dentro, fora, direita e esquerda.
  *
  * Missão: "O Mapa do Tesouro da Floresta".
- * Segue o gabarito TRAVADO da EF01MA02 — tudo visual, mini-jogos.
+ * Todas as perguntas de posição mostram a CENA REAL — a criança olha
+ * a imagem e vê onde o sujeito está. Nada de rótulos "1" separados.
  */
 const aula: Aula = {
   codigo: "EF01MA11",
@@ -38,8 +39,7 @@ const aula: Aula = {
       "O esquilo Brilha encontrou um mapa antigo escondido debaixo de uma pedra na floresta.",
     problema:
       "O tesouro está enterrado em algum lugar, mas só quem souber ler as pistas de LOCALIZAÇÃO (em cima, embaixo, ao lado, entre, dentro, fora, direita, esquerda) vai encontrar!",
-    convite:
-      "Vamos explorar a floresta juntos e achar o baú do tesouro?",
+    convite: "Vamos explorar a floresta juntos e achar o baú do tesouro?",
   },
 
   conhecimentosPrevios: [
@@ -70,7 +70,7 @@ const aula: Aula = {
     nivel2:
       "Quando o gato está no telhado, ele está EM CIMA da casa. Quando entra na casa, fica DENTRO.",
     nivel3:
-      "Se três animais estão em fila (🐻 🐰 🦊), o coelho está ENTRE o urso e a raposa.",
+      "Se três animais estão em fila (urso, coelho, raposa), o coelho está ENTRE o urso e a raposa.",
     nivel4:
       "Pilotos, motoristas e até você usam localização todo dia: 'a mochila está ao lado da cama', 'o livro está em cima da mesa'.",
   },
@@ -84,33 +84,27 @@ const aula: Aula = {
       "Ele NÃO está dentro da árvore.",
       "Ele está EM CIMA do galho.",
     ],
-    resposta: "O esquilo Brilha está EM CIMA do galho da árvore.",
-    interativo: {
-      tipo: "contagem",
-      imagemUrl: arvoreImg,
-      quantidade: 1,
-      nomeItem: "árvore",
-      nomeItemPlural: "árvores",
-      pergunta: "Toque na árvore onde o Brilha está em cima!",
-    },
+    resposta: "O esquilo Brilha está EM CIMA da árvore.",
+    // Sem interativo aqui — a resposta já vem com passos ilustrados.
+    // A cena real aparece nos blocos seguintes (Guiada, Desafio, Quiz).
   },
 
   atividadeGuiada: {
     enunciado:
-      "O coelho 🐰 entrou na toca 🏠. Ele está DENTRO ou FORA da toca?",
+      "Olhe a cena: o coelho entrou na toca. Onde ele está?",
     resposta: "DENTRO.",
     explicacao:
       "Quando algo entra em outra coisa, dizemos que está DENTRO. Quando sai, está FORA.",
     visual: {
-      tipo: "grupos",
-      pergunta: "Onde está o coelho depois de entrar na toca?",
-      imagemUrl: coelhoImg,
-      itemSingular: "coelho",
-      itemPlural: "coelhos",
-      quantidadeGrupos: 1,
-      itensPorGrupo: 1,
-      opcoes: [1, 2, 3],
-      correta: 0,
+      tipo: "cena",
+      pergunta: "Onde está o coelho?",
+      posicao: "dentro",
+      referenciaImg: casaImg,
+      referenciaLabel: "Toca",
+      sujeitoImg: coelhoImg,
+      sujeitoLabel: "Coelho",
+      opcoes: ["Fora", "Dentro", "Em cima"],
+      correta: 1,
     },
   },
 
@@ -134,55 +128,59 @@ const aula: Aula = {
       ],
       perguntas: [
         {
-          pergunta: "O Brilha está no galho ALTO da árvore. Ele está:",
+          pergunta: "Olhe a cena. Onde está o Brilha?",
           opcoes: ["Embaixo", "Em cima", "Dentro"],
           correta: 1,
           explicacao: "No alto do galho = EM CIMA.",
           visual: {
-            tipo: "grupos",
-            grupos: [
-              { imagemUrl: arvoreImg, quantidade: 1, rotulo: "Árvore", cor: "#10B981" },
-              { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha (em cima)", cor: "#FBBF24" },
-            ],
+            tipo: "cena",
+            posicao: "cima",
+            referenciaImg: arvoreImg,
+            referenciaLabel: "Árvore",
+            sujeitoImg: brilhaImg,
+            sujeitoLabel: "Brilha",
           },
         },
         {
-          pergunta: "O coelho entrou na toca 🏠. Ele está:",
+          pergunta: "O coelho está na toca. Onde ele está?",
           opcoes: ["Fora", "Ao lado", "Dentro"],
           correta: 2,
-          explicacao: "Entrou na toca = DENTRO.",
+          explicacao: "Ele está no meio da toca = DENTRO.",
           visual: {
-            tipo: "grupos",
-            grupos: [
-              { imagemUrl: casaImg, quantidade: 1, rotulo: "Toca 🏠", cor: "#F59E0B" },
-              { imagemUrl: coelhoImg, quantidade: 1, rotulo: "🐰 Dentro", cor: "#F472B6" },
-            ],
+            tipo: "cena",
+            posicao: "dentro",
+            referenciaImg: casaImg,
+            referenciaLabel: "Toca",
+            sujeitoImg: coelhoImg,
+            sujeitoLabel: "Coelho",
           },
         },
         {
-          pergunta: "🐻 🐰 🦊 — quem está ENTRE o urso e a raposa?",
+          pergunta: "Quem está ENTRE o urso e a raposa?",
           opcoes: ["🐻 Urso", "🐰 Coelho", "🦊 Raposa"],
           correta: 1,
-          explicacao: "Entre = no meio dos dois. O coelho está no meio.",
+          explicacao: "Entre = no meio. Quem está no meio é o coelho.",
           visual: {
-            tipo: "comparar",
-            lados: [
-              { imagemUrl: ursoImg, quantidade: 1, rotulo: "🐻 Urso (fim)", cor: "#92400E" },
-              { imagemUrl: raposaImg, quantidade: 1, rotulo: "🦊 Raposa (fim)", cor: "#EA580C" },
+            tipo: "cenaEntre",
+            fila: [
+              { img: ursoImg, label: "🐻 Urso" },
+              { img: coelhoImg, label: "🐰 Coelho" },
+              { img: raposaImg, label: "🦊 Raposa" },
             ],
           },
         },
         {
-          pergunta: "A bola está bem pertinho da cadeira. Está:",
+          pergunta: "A bola está bem pertinho do baú. Onde ela está?",
           opcoes: ["Em cima", "Ao lado", "Atrás"],
           correta: 1,
           explicacao: "Pertinho, do lado = AO LADO.",
           visual: {
-            tipo: "comparar",
-            lados: [
-              { imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽ Bola", cor: "#EF4444" },
-              { imagemUrl: casaImg, quantidade: 1, rotulo: "🪑 Cadeira", cor: "#78716C" },
-            ],
+            tipo: "cena",
+            posicao: "aoLado",
+            referenciaImg: bauImg,
+            referenciaLabel: "Baú",
+            sujeitoImg: bolaImg,
+            sujeitoLabel: "Bola",
           },
         },
       ],
@@ -204,54 +202,59 @@ const aula: Aula = {
 
   quiz: [
     {
-      pergunta: "📚 O livro está sobre a mesa. O livro está:",
+      pergunta: "Olhe a cena. Onde está o livro?",
       opcoes: ["Embaixo", "Em cima", "Dentro"],
       correta: 1,
-      explicacao: "Sobre a mesa = EM CIMA da mesa.",
+      explicacao: "O livro está no alto do baú — EM CIMA.",
       visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: livroImg, quantidade: 1, rotulo: "📚 Livro (em cima)", cor: "#60A5FA" },
-          { imagemUrl: casaImg, quantidade: 1, rotulo: "🪑 Mesa", cor: "#78716C" },
-        ],
+        tipo: "cena",
+        posicao: "cima",
+        referenciaImg: bauImg,
+        referenciaLabel: "Mesa",
+        sujeitoImg: livroImg,
+        sujeitoLabel: "Livro",
       },
     },
     {
-      pergunta: "🐶 🐱 🐭 — quem está ENTRE?",
-      opcoes: ["🐶 Cachorro", "🐱 Gato", "🐭 Rato"],
+      pergunta: "Quem está ENTRE o urso e o coelho?",
+      opcoes: ["🐻 Urso", "🐱 Gato", "🐰 Coelho"],
       correta: 1,
-      explicacao: "Entre = no meio. O gato está no meio.",
+      explicacao: "Entre = no meio. Quem está no meio é o gato.",
       visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱 no meio", cor: "#F472B6" },
+        tipo: "cenaEntre",
+        fila: [
+          { img: ursoImg, label: "🐻 Urso" },
+          { img: gatoImg, label: "🐱 Gato" },
+          { img: coelhoImg, label: "🐰 Coelho" },
         ],
       },
     },
     {
-      pergunta: "🎁 O presente saiu da caixa. Agora está:",
+      pergunta: "O presente saiu da caixa. Onde ele está?",
       opcoes: ["Dentro", "Fora", "Em cima"],
       correta: 1,
-      explicacao: "Saiu = FORA.",
+      explicacao: "Ele está longe da caixa — FORA.",
       visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: presenteImg, quantidade: 1, rotulo: "🎁 Fora", cor: "#F472B6" },
-          { imagemUrl: casaImg, quantidade: 1, rotulo: "📦 Caixa vazia", cor: "#78716C" },
-        ],
+        tipo: "cena",
+        posicao: "fora",
+        referenciaImg: bauImg,
+        referenciaLabel: "Caixa",
+        sujeitoImg: presenteImg,
+        sujeitoLabel: "Presente",
       },
     },
     {
-      pergunta: "Qual palavra indica POSIÇÃO?",
-      opcoes: ["Grande", "Azul", "Atrás"],
-      correta: 2,
-      explicacao: "Grande = tamanho. Azul = cor. Atrás = POSIÇÃO!",
+      pergunta: "Olhe as duas estrelas. A estrela laranja está à:",
+      opcoes: ["Esquerda", "Direita", "Em cima"],
+      correta: 1,
+      explicacao: "A seta ➡️ mostra: a estrela laranja está à DIREITA.",
       visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: estrelaImg, quantidade: 1, rotulo: "⬅️ À esquerda", cor: "#60A5FA" },
-          { imagemUrl: estrelaImg, quantidade: 1, rotulo: "➡️ À direita", cor: "#FBBF24" },
-        ],
+        tipo: "cena",
+        posicao: "direita",
+        referenciaImg: estrelaImg,
+        referenciaLabel: "Estrela azul",
+        sujeitoImg: estrelaImg,
+        sujeitoLabel: "Estrela",
       },
     },
   ],
@@ -266,7 +269,7 @@ const aula: Aula = {
   },
 
   interativas: [
-    // ==== FASE 1 · EM CIMA / EMBAIXO / DENTRO — cena visual real ====
+    // ==== FASE 1 · EM CIMA / EMBAIXO / DENTRO ====
     {
       tipo: "posicaoEspacial",
       titulo: "Fase 1 · Onde está o Brilha?",
@@ -332,7 +335,7 @@ const aula: Aula = {
       ],
     },
 
-    // ==== FASE 3 · ENTRE — fila de 3 animais ====
+    // ==== FASE 3 · ENTRE ====
     {
       tipo: "posicaoEspacial",
       titulo: "Fase 3 · Quem está ENTRE?",
@@ -368,7 +371,7 @@ const aula: Aula = {
       ],
     },
 
-    // ==== FASE 4 · DIREITA x ESQUERDA — cenas com o Brilha ====
+    // ==== FASE 4 · DIREITA x ESQUERDA ====
     {
       tipo: "posicaoEspacial",
       titulo: "Fase 4 · Direita ou Esquerda?",
@@ -452,7 +455,7 @@ const aula: Aula = {
       ],
     },
 
-    // ==== MINI JOGO · Explorador — arrastar borboleta em cima da flor ====
+    // ==== MINI JOGO · Explorador ====
     {
       tipo: "arrastar",
       titulo: "Mini Jogo · Explorador da Floresta",
@@ -490,90 +493,95 @@ const aula: Aula = {
     },
   ],
 
-
   niveis: {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "🐿️ está no ALTO da árvore. Ele está:",
+        pergunta: "Olhe a cena. Onde está o Brilha?",
         opcoes: ["Embaixo", "Em cima", "Dentro"],
         correta: 1,
-        explicacao: "No alto = EM CIMA.",
+        explicacao: "No alto da árvore = EM CIMA.",
         visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳 Árvore", cor: "#10B981" },
-            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha", cor: "#FBBF24" },
-          ],
+          tipo: "cena",
+          posicao: "cima",
+          referenciaImg: arvoreImg,
+          referenciaLabel: "Árvore",
+          sujeitoImg: brilhaImg,
+          sujeitoLabel: "Brilha",
         },
       },
       {
-        pergunta: "🐰 ENTROU na toca. Está:",
+        pergunta: "O coelho entrou na toca. Onde ele está?",
         opcoes: ["Dentro", "Fora", "Ao lado"],
         correta: 0,
         explicacao: "Entrou = DENTRO.",
         visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: casaImg, quantidade: 1, rotulo: "🏠 Toca", cor: "#F59E0B" },
-            { imagemUrl: coelhoImg, quantidade: 1, rotulo: "🐰 dentro", cor: "#F472B6" },
-          ],
+          tipo: "cena",
+          posicao: "dentro",
+          referenciaImg: casaImg,
+          referenciaLabel: "Toca",
+          sujeitoImg: coelhoImg,
+          sujeitoLabel: "Coelho",
         },
       },
     ],
     medio: [
       {
-        pergunta: "🐻 🐰 🦊 — quem está ENTRE?",
+        pergunta: "Quem está ENTRE o urso e a raposa?",
         opcoes: ["🐻 Urso", "🐰 Coelho", "🦊 Raposa"],
         correta: 1,
         explicacao: "Entre = no meio.",
         visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: ursoImg, quantidade: 1, rotulo: "🐻 Urso", cor: "#92400E" },
-            { imagemUrl: raposaImg, quantidade: 1, rotulo: "🦊 Raposa", cor: "#EA580C" },
+          tipo: "cenaEntre",
+          fila: [
+            { img: ursoImg, label: "🐻 Urso" },
+            { img: coelhoImg, label: "🐰 Coelho" },
+            { img: raposaImg, label: "🦊 Raposa" },
           ],
         },
       },
       {
-        pergunta: "⚽ A bola está pertinho da cadeira. Está:",
+        pergunta: "A bola está pertinho do baú. Onde ela está?",
         opcoes: ["Em cima", "Ao lado", "Atrás"],
         correta: 1,
         explicacao: "Pertinho, do lado = AO LADO.",
         visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽ Bola", cor: "#EF4444" },
-            { imagemUrl: casaImg, quantidade: 1, rotulo: "🪑 Cadeira", cor: "#78716C" },
-          ],
+          tipo: "cena",
+          posicao: "aoLado",
+          referenciaImg: bauImg,
+          referenciaLabel: "Baú",
+          sujeitoImg: bolaImg,
+          sujeitoLabel: "Bola",
         },
       },
     ],
     dificil: [
       {
-        pergunta: "🎁 O presente saiu da caixa. Está:",
+        pergunta: "O presente saiu da caixa. Onde ele está?",
         opcoes: ["Dentro", "Fora", "Em cima"],
         correta: 1,
-        explicacao: "Saiu = FORA.",
+        explicacao: "Longe da caixa = FORA.",
         visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: presenteImg, quantidade: 1, rotulo: "🎁 Fora", cor: "#F472B6" },
-            { imagemUrl: casaImg, quantidade: 1, rotulo: "📦 Caixa", cor: "#78716C" },
-          ],
+          tipo: "cena",
+          posicao: "fora",
+          referenciaImg: bauImg,
+          referenciaLabel: "Caixa",
+          sujeitoImg: presenteImg,
+          sujeitoLabel: "Presente",
         },
       },
       {
-        pergunta: "Qual dessas palavras indica POSIÇÃO?",
-        opcoes: ["Grande", "Azul", "Atrás"],
-        correta: 2,
-        explicacao: "Grande = tamanho. Azul = cor. Atrás = POSIÇÃO.",
+        pergunta: "Olhe: a estrela está de que lado do Brilha?",
+        opcoes: ["Esquerda", "Direita", "Em cima"],
+        correta: 1,
+        explicacao: "A seta ➡️ mostra: à DIREITA.",
         visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "⬅️ Esquerda", cor: "#60A5FA" },
-            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "➡️ Direita", cor: "#FBBF24" },
-          ],
+          tipo: "cena",
+          posicao: "direita",
+          referenciaImg: brilhaImg,
+          referenciaLabel: "Brilha",
+          sujeitoImg: estrelaImg,
+          sujeitoLabel: "Estrela",
         },
       },
     ],
