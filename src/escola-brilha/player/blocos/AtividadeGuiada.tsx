@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { HandHelping, Eye } from "lucide-react";
+import { HandHelping, Eye, CheckCircle2, XCircle } from "lucide-react";
 import { Secao } from "./Secao";
 import { PodioVisual } from "./PodioVisual";
 import { GruposVisual } from "./GruposVisual";
+import { CenaDuplaView } from "./CenaPosicao";
+import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../../types";
 
 export function AtividadeGuiada({
@@ -43,6 +45,15 @@ export function AtividadeGuiada({
       </Secao>
     );
   }
+
+  if (visual?.tipo === "cena") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <CenaGuiada visual={visual} explicacao={dados.explicacao} />
+      </Secao>
+    );
+  }
+
 
 
 
