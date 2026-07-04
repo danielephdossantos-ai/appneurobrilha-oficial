@@ -358,20 +358,13 @@ function JogoArrastar({
                       {(() => {
                         const cap = visual.capacidade ?? 0;
                         const cheio = cap > 0 && quantosNoPrato >= cap;
-                        // Rótulos por contexto: capacidade 1 = "alimentar" (bicho come);
-                        // capacidade > 1 = "encaixar" (objetos em prateleira/cesta).
-                        const alimenta = cap === 1;
                         const vazio =
-                          alimenta ? "Com fome…" : cap > 0 ? `Vazia · 0/${cap}` : "Vazio";
-                        const parcial = alimenta
-                          ? "Comeu! 😋"
-                          : cap > 0
-                            ? `${quantosNoPrato}/${cap}`
-                            : `${quantosNoPrato}`;
-                        const completo = alimenta
-                          ? "Comeu! 😋"
-                          : cap > 0
-                            ? `Cheia! ${quantosNoPrato}/${cap} ✓`
+                          cap > 0 ? `Vazio · 0/${cap}` : "Vazio";
+                        const parcial =
+                          cap > 0 ? `${quantosNoPrato}/${cap}` : `${quantosNoPrato}`;
+                        const completo =
+                          cap > 0
+                            ? `Cheio! ${quantosNoPrato}/${cap} ✓`
                             : `${quantosNoPrato}`;
                         const texto =
                           quantosNoPrato === 0 ? vazio : cheio ? completo : parcial;
@@ -386,6 +379,7 @@ function JogoArrastar({
                         );
                       })()}
                     </div>
+
 
                   </div>
                 ) : (
