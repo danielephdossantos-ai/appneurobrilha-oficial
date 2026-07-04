@@ -371,7 +371,51 @@ export type Aula = {
         cor?: string;
         legenda?: string;
       }
+    | {
+        /**
+         * Cena visual de POSIÇÃO ESPACIAL — mostra de verdade em cima,
+         * embaixo, dentro, fora, direita, esquerda, atrás, frente, ao lado
+         * ou "entre" (fila de 3). Ideal para EF01MA11.
+         */
+        tipo: "posicaoEspacial";
+        titulo: string;
+        instrucao?: string;
+        cenas: Array<
+          | {
+              modo: "dupla";
+              referenciaImg: string;
+              referenciaLabel?: string;
+              sujeitoImg: string;
+              sujeitoLabel?: string;
+              posicao:
+                | "cima"
+                | "baixo"
+                | "dentro"
+                | "fora"
+                | "direita"
+                | "esquerda"
+                | "atras"
+                | "frente"
+                | "aoLado";
+              pergunta: string;
+              opcoes: string[];
+              correta: number;
+              acerto?: string;
+              erro?: string;
+            }
+          | {
+              modo: "entre";
+              fila: Array<{ img: string; label: string }>;
+              pergunta: string;
+              opcoes: string[];
+              correta: number;
+              acerto?: string;
+              erro?: string;
+            }
+        >;
+      }
   >;
+
 
   /**
    * Progressão automática por níveis (opcional).
