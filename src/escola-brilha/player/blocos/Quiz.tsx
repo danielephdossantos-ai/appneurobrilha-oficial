@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, ArrowRight } from "lucide-react";
 import type { QuizItem } from "../../types";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
 
 export function Quiz({
   questoes,
