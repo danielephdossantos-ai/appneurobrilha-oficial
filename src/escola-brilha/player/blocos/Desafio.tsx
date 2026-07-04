@@ -201,3 +201,75 @@ function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
     </div>
   );
 }
+
+function PerguntaVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> }) {
+  if (visual.tipo === "cena") {
+    return (
+      <div className="mb-3">
+        <CenaDuplaView spec={visual} compact />
+      </div>
+    );
+  }
+  if (visual.tipo === "cenaEntre") {
+    return (
+      <div className="mb-3">
+        <CenaEntreView spec={visual} compact />
+      </div>
+    );
+  }
+  if (visual.tipo === "itens") {
+    return (
+      <div className="mb-3 flex flex-wrap justify-center gap-2 rounded-2xl bg-white/10 border border-white/15 p-3">
+        {Array.from({ length: visual.quantidade }).map((_, i) => (
+          <img key={i} src={visual.imagemUrl} alt="" className="h-10 w-10 object-contain drop-shadow" />
+        ))}
+      </div>
+    );
+  }
+  if (visual.tipo === "grupos") {
+    return (
+      <div className="mb-3 grid gap-2 grid-cols-2 sm:grid-cols-3">
+        {visual.grupos.map((g, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-2 border-2 bg-white/10"
+            style={{ borderColor: g.cor ?? "#4C9EFF" }}
+          >
+            {g.rotulo && (
+              <p className="text-center text-[10px] font-black uppercase tracking-wide text-white mb-1">
+                {g.rotulo}
+              </p>
+            )}
+            <div className="flex flex-wrap justify-center gap-1">
+              {Array.from({ length: g.quantidade }).map((_, k) => (
+                <img key={k} src={g.imagemUrl} alt="" className="h-8 w-8 object-contain" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // comparar
+  return (
+    <div className="mb-3 grid gap-2 grid-cols-2">
+      {visual.lados.map((l, i) => (
+        <div
+          key={i}
+          className="rounded-2xl p-2 border-2 bg-white/10"
+          style={{ borderColor: l.cor ?? "#4C9EFF" }}
+        >
+          <p className="text-center text-[10px] font-black uppercase tracking-wide text-white mb-1">
+            {l.rotulo}
+          </p>
+          <div className="flex flex-wrap justify-center gap-1">
+            {Array.from({ length: l.quantidade }).map((_, k) => (
+              <img key={k} src={l.imagemUrl} alt="" className="h-8 w-8 object-contain" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
