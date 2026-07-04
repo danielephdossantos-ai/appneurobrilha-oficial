@@ -119,8 +119,17 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
           />
         </Secao>
       );
+    case "posicaoEspacial":
+      return (
+        <PosicaoEspacial
+          titulo={jogo.titulo}
+          instrucao={jogo.instrucao}
+          cenas={jogo.cenas}
+        />
+      );
   }
 }
+
 
 function Status({ ok, texto }: { ok: boolean; texto: string }) {
   return (
