@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { HandHelping, Eye } from "lucide-react";
+import { HandHelping, Eye, CheckCircle2, XCircle } from "lucide-react";
 import { Secao } from "./Secao";
 import { PodioVisual } from "./PodioVisual";
 import { GruposVisual } from "./GruposVisual";
+import { CenaDuplaView } from "./CenaPosicao";
+import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../../types";
 
 export function AtividadeGuiada({
@@ -44,6 +46,15 @@ export function AtividadeGuiada({
     );
   }
 
+  if (visual?.tipo === "cena") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <CenaGuiada visual={visual} explicacao={dados.explicacao} />
+      </Secao>
+    );
+  }
+
+
 
 
   return (
@@ -72,3 +83,69 @@ export function AtividadeGuiada({
     </Secao>
   );
 }
+
+function CenaGuiada({
+  visual,
+  explicacao,
+}: {
+  visual: Extract<NonNullable<Aula["atividadeGuiada"]["visual"]>, { tipo: "cena" }>;
+  explicacao: string;
+}) {
+  const [resp, setResp] = useState<number | null>(null);
+  const { speak } = useDeviceTTS();
+  const acertou = resp !== null && resp === visual.correta;
+  const errou = resp !== null && resp !== visual.correta;
+
+  function escolher(i: number) {
+    if (resp !== null) return;
+    setResp(i);
+    speak(i === visual.correta ? "Muito bem!" : "Olhe a cena de novo.");
+  }
+
+  return (
+    <div>
+      <p className="font-black mb-3">{visual.pergunta}</p>
+      <div className="mb-4">
+        <CenaDuplaView spec={visual} />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {visual.opcoes.map((op, i) => {
+          const isCorreta = i === visual.correta;
+          const isEscolha = resp === i;
+          const showState = resp !== null;
+          const bg = showState
+            ? isCorreta
+              ? "bg-emerald-500 text-white"
+              : isEscolha
+                ? "bg-rose-500 text-white"
+                : "bg-white/10 text-white/60"
+            : "bg-white text-[#0d1f55] hover:bg-white/90";
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => escolher(i)}
+              disabled={resp !== null}
+              className={`px-4 py-3 rounded-2xl font-black text-base shadow transition-colors ${bg}`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {acertou && (
+        <div className="mt-3 flex items-center gap-2 rounded-xl p-2 border bg-[#22C55E]/15 border-[#22C55E]/30 text-[#86EFAC]">
+          <CheckCircle2 className="h-4 w-4" />
+          <span className="text-sm font-black">Muito bem! 🎉 {explicacao}</span>
+        </div>
+      )}
+      {errou && (
+        <div className="mt-3 flex items-center gap-2 rounded-xl p-2 border bg-[#EF4444]/15 border-[#EF4444]/30 text-[#FCA5A5]">
+          <XCircle className="h-4 w-4" />
+          <span className="text-sm font-black">{explicacao}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, ArrowRight } from "lucide-react";
 import type { QuizItem } from "../../types";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
 
 export function Quiz({
   questoes,
@@ -130,25 +131,39 @@ function QuizVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> }) {
       </div>
     );
   }
-  // comparar
-  return (
-    <div className="mb-4 grid gap-2 grid-cols-2">
-      {visual.lados.map((l, i) => (
-        <div
-          key={i}
-          className="rounded-2xl p-2 border-4"
-          style={{ background: `${l.cor ?? "#4C9EFF"}18`, borderColor: l.cor ?? "#4C9EFF" }}
-        >
-          <p className="text-center text-xs font-black text-[#0d1f55] mb-1 uppercase tracking-wide">
-            {l.rotulo} · {l.quantidade}
-          </p>
-          <div className="flex flex-wrap justify-center gap-1">
-            {Array.from({ length: l.quantidade }).map((_, k) => (
-              <img key={k} src={l.imagemUrl} alt="" className="h-8 w-8 sm:h-10 sm:w-10 object-contain drop-shadow" />
-            ))}
+  if (visual.tipo === "comparar") {
+    return (
+      <div className="mb-4 grid gap-2 grid-cols-2">
+        {visual.lados.map((l, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-2 border-4"
+            style={{ background: `${l.cor ?? "#4C9EFF"}18`, borderColor: l.cor ?? "#4C9EFF" }}
+          >
+            <p className="text-center text-xs font-black text-[#0d1f55] mb-1 uppercase tracking-wide">
+              {l.rotulo} · {l.quantidade}
+            </p>
+            <div className="flex flex-wrap justify-center gap-1">
+              {Array.from({ length: l.quantidade }).map((_, k) => (
+                <img key={k} src={l.imagemUrl} alt="" className="h-8 w-8 sm:h-10 sm:w-10 object-contain drop-shadow" />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+    );
+  }
+  if (visual.tipo === "cena") {
+    return (
+      <div className="mb-4">
+        <CenaDuplaView spec={visual} compact />
+      </div>
+    );
+  }
+  // cenaEntre
+  return (
+    <div className="mb-4">
+      <CenaEntreView spec={visual} compact />
     </div>
   );
 }

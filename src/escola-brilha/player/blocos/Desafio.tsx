@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Eye, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import { Secao } from "./Secao";
-import type { Aula } from "../../types";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
+import type { Aula, QuizItem } from "../../types";
 
 const CORES = ["#34D399", "#FB923C", "#F472B6", "#60A5FA", "#A78BFA", "#FBBF24"];
 
@@ -94,13 +95,8 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
   );
 }
 
-function QuizSequencial({ perguntas }: { perguntas: Aula["desafio"]["visual"] extends infer V ? V extends { perguntas: infer P } ? P : never : never }) {
-  const lista = perguntas as Array<{
-    pergunta: string;
-    opcoes: string[];
-    correta: number;
-    explicacao: string;
-  }>;
+function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
+  const lista = perguntas;
   const [i, setI] = useState(0);
   const [escolha, setEscolha] = useState<number | null>(null);
   const [acertos, setAcertos] = useState(0);
@@ -158,6 +154,7 @@ function QuizSequencial({ perguntas }: { perguntas: Aula["desafio"]["visual"] ex
           exit={{ opacity: 0, y: -8 }}
         >
           <p className="font-black mb-3">{q.pergunta}</p>
+          {q.visual && <PerguntaVisual visual={q.visual} />}
           <div className="space-y-2">
             {q.opcoes.map((op, k) => {
               const revelado = escolha !== null;
@@ -204,3 +201,75 @@ function QuizSequencial({ perguntas }: { perguntas: Aula["desafio"]["visual"] ex
     </div>
   );
 }
+
+function PerguntaVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> }) {
+  if (visual.tipo === "cena") {
+    return (
+      <div className="mb-3">
+        <CenaDuplaView spec={visual} compact />
+      </div>
+    );
+  }
+  if (visual.tipo === "cenaEntre") {
+    return (
+      <div className="mb-3">
+        <CenaEntreView spec={visual} compact />
+      </div>
+    );
+  }
+  if (visual.tipo === "itens") {
+    return (
+      <div className="mb-3 flex flex-wrap justify-center gap-2 rounded-2xl bg-white/10 border border-white/15 p-3">
+        {Array.from({ length: visual.quantidade }).map((_, i) => (
+          <img key={i} src={visual.imagemUrl} alt="" className="h-10 w-10 object-contain drop-shadow" />
+        ))}
+      </div>
+    );
+  }
+  if (visual.tipo === "grupos") {
+    return (
+      <div className="mb-3 grid gap-2 grid-cols-2 sm:grid-cols-3">
+        {visual.grupos.map((g, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-2 border-2 bg-white/10"
+            style={{ borderColor: g.cor ?? "#4C9EFF" }}
+          >
+            {g.rotulo && (
+              <p className="text-center text-[10px] font-black uppercase tracking-wide text-white mb-1">
+                {g.rotulo}
+              </p>
+            )}
+            <div className="flex flex-wrap justify-center gap-1">
+              {Array.from({ length: g.quantidade }).map((_, k) => (
+                <img key={k} src={g.imagemUrl} alt="" className="h-8 w-8 object-contain" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // comparar
+  return (
+    <div className="mb-3 grid gap-2 grid-cols-2">
+      {visual.lados.map((l, i) => (
+        <div
+          key={i}
+          className="rounded-2xl p-2 border-2 bg-white/10"
+          style={{ borderColor: l.cor ?? "#4C9EFF" }}
+        >
+          <p className="text-center text-[10px] font-black uppercase tracking-wide text-white mb-1">
+            {l.rotulo}
+          </p>
+          <div className="flex flex-wrap justify-center gap-1">
+            {Array.from({ length: l.quantidade }).map((_, k) => (
+              <img key={k} src={l.imagemUrl} alt="" className="h-8 w-8 object-contain" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, Lock, CheckCircle2, XCircle, Sparkles, RefreshCw } from "lucide-react";
+import { CenaDuplaView, CenaEntreView } from "./CenaPosicao";
 import { Secao } from "./Secao";
 import type { Aula, QuizItem } from "../../types";
 import { useMetricasAula, precisaIntervir, type Dificuldade } from "../personalizacao";
@@ -409,36 +410,50 @@ function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
     );
   }
 
-  // comparar
-  return (
-    <div className={`mb-3 grid gap-2 ${visual.lados.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
-      {visual.lados.map((l, li) => {
-        const cor = l.cor ?? CORES_G[li % CORES_G.length];
-        return (
-          <div
-            key={li}
-            className="rounded-2xl border-4 p-2"
-            style={{ borderColor: cor, background: `${cor}18` }}
-          >
+  if (visual.tipo === "comparar") {
+    return (
+      <div className={`mb-3 grid gap-2 ${visual.lados.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+        {visual.lados.map((l, li) => {
+          const cor = l.cor ?? CORES_G[li % CORES_G.length];
+          return (
             <div
-              className="text-[10px] font-black uppercase tracking-widest text-white text-center py-1 rounded-lg mb-1"
-              style={{ background: cor }}
+              key={li}
+              className="rounded-2xl border-4 p-2"
+              style={{ borderColor: cor, background: `${cor}18` }}
             >
-              {l.rotulo}
+              <div
+                className="text-[10px] font-black uppercase tracking-widest text-white text-center py-1 rounded-lg mb-1"
+                style={{ background: cor }}
+              >
+                {l.rotulo}
+              </div>
+              <div className="flex flex-wrap gap-1 justify-center min-h-[60px] items-center">
+                {Array.from({ length: l.quantidade }).map((_, i) => (
+                  <img
+                    key={i}
+                    src={l.imagemUrl}
+                    alt=""
+                    className="h-9 w-9 sm:h-10 sm:w-10 object-contain drop-shadow"
+                  />
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-1 justify-center min-h-[60px] items-center">
-              {Array.from({ length: l.quantidade }).map((_, i) => (
-                <img
-                  key={i}
-                  src={l.imagemUrl}
-                  alt=""
-                  className="h-9 w-9 sm:h-10 sm:w-10 object-contain drop-shadow"
-                />
-              ))}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+    );
+  }
+  if (visual.tipo === "cena") {
+    return (
+      <div className="mb-3">
+        <CenaDuplaView spec={visual} compact />
+      </div>
+    );
+  }
+  // cenaEntre
+  return (
+    <div className="mb-3">
+      <CenaEntreView spec={visual} compact />
     </div>
   );
 }

@@ -28,6 +28,33 @@ export type QuizItem = {
     | {
         tipo: "comparar";
         lados: Array<{ imagemUrl: string; quantidade: number; rotulo: string; cor?: string }>;
+      }
+    | {
+        /**
+         * Cena de POSIÇÃO ESPACIAL — mostra o sujeito na posição real
+         * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+         * frente, ao lado) em relação à referência. Sem contagem.
+         */
+        tipo: "cena";
+        posicao:
+          | "cima"
+          | "baixo"
+          | "dentro"
+          | "fora"
+          | "direita"
+          | "esquerda"
+          | "atras"
+          | "frente"
+          | "aoLado";
+        referenciaImg: string;
+        referenciaLabel?: string;
+        sujeitoImg: string;
+        sujeitoLabel?: string;
+      }
+    | {
+        /** Fila de 3 itens para ilustrar "entre" (o do meio é destacado). */
+        tipo: "cenaEntre";
+        fila: Array<{ img: string; label: string }>;
       };
 };
 
@@ -179,6 +206,32 @@ export type Aula = {
           /** Alternativas para a criança tocar. */
           opcoes: number[];
           /** Índice da alternativa correta (deve bater com grupos × itens). */
+          correta: number;
+        }
+      | {
+          /**
+           * Cena de POSIÇÃO ESPACIAL — sujeito posicionado de verdade
+           * (em cima, embaixo, dentro, fora, direita, esquerda, atrás,
+           * frente, ao lado) sobre a referência. A criança escolhe entre
+           * alternativas descritivas.
+           */
+          tipo: "cena";
+          pergunta: string;
+          posicao:
+            | "cima"
+            | "baixo"
+            | "dentro"
+            | "fora"
+            | "direita"
+            | "esquerda"
+            | "atras"
+            | "frente"
+            | "aoLado";
+          referenciaImg: string;
+          referenciaLabel?: string;
+          sujeitoImg: string;
+          sujeitoLabel?: string;
+          opcoes: string[];
           correta: number;
         };
   };
