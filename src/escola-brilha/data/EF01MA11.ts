@@ -142,7 +142,7 @@ const aula: Aula = {
             tipo: "grupos",
             grupos: [
               { imagemUrl: arvoreImg, quantidade: 1, rotulo: "Árvore", cor: "#10B981" },
-              { imagemUrl: estrelaImg, quantidade: 1, rotulo: "⬆️ Brilha (em cima)", cor: "#FBBF24" },
+              { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha (em cima)", cor: "#FBBF24" },
             ],
           },
         },
@@ -274,7 +274,7 @@ const aula: Aula = {
         "O esquilo Brilha subiu na árvore e está lá no alto do galho. Onde ele está?",
       grupos: [
         { imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳 Árvore" },
-        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "⬆️ Brilha (no alto)" },
+        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha (no alto)" },
       ],
       pergunta: "Onde está o Brilha?",
       opcoes: ["Embaixo", "Em cima", "Dentro"],
@@ -325,7 +325,7 @@ const aula: Aula = {
         "O Brilha ⬅️ está segurando uma lanterna. A mochila 🎒 está do lado ESQUERDO dele. A mochila está à direita ou à esquerda?",
       grupos: [
         { imagemUrl: presenteImg, quantidade: 1, rotulo: "🎒 Mochila (⬅️ esquerda)" },
-        { imagemUrl: estrelaImg, quantidade: 1, rotulo: "🔦 Brilha" },
+        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "🔦 Brilha" },
       ],
       pergunta: "A mochila está:",
       opcoes: ["À direita", "À esquerda", "Em cima"],
@@ -397,7 +397,7 @@ const aula: Aula = {
           tipo: "grupos",
           grupos: [
             { imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳 Árvore", cor: "#10B981" },
-            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "⬆️ Brilha", cor: "#FBBF24" },
+            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "⬆️ Brilha", cor: "#FBBF24" },
           ],
         },
       },
