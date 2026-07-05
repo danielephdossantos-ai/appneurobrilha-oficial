@@ -437,35 +437,34 @@ function JogoArrastar({
                         boxShadow: `inset 0 4px 12px ${cor}55`,
                       }}
                     >
-                      {jogo.itemImagem && quantosNoPrato > 0
-                        ? Object.entries(drops)
-                            .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                              />
-                            ))
-                        : Object.entries(drops)
-                            .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <span
-                                key={item}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
-                              >
-                                {item}
-                              </span>
-                            ))}
+                      {Object.entries(drops)
+                        .filter(([, a]) => a === alvo)
+                        .map(([item]) => {
+                          const img = imagemDoItem(item);
+                          return img ? (
+                            <img
+                              key={item}
+                              src={img}
+                              alt=""
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setDrops((d) => ({ ...d, [item]: null }));
+                              }}
+                              className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                            />
+                          ) : (
+                            <span
+                              key={item}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setDrops((d) => ({ ...d, [item]: null }));
+                              }}
+                              className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
+                            >
+                              {item}
+                            </span>
+                          );
+                        })}
                     </div>
                     {visual.capacidade !== undefined && (
                       <div className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white drop-shadow">
