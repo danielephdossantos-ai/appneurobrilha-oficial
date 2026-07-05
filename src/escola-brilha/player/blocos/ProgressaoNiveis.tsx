@@ -413,6 +413,9 @@ function matchOpcaoEmoji(it: ItemCena, opcoes: string[]): number {
   // 2) fallback: match por rótulo textual
   if (it.label) return matchOpcao(it.label, opcoes);
   return -1;
+}
+
+
 
 
 function estiloResposta(
