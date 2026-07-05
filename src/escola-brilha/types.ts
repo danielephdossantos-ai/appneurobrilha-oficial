@@ -430,6 +430,7 @@ export type Aula = {
         correta: number;
         acerto?: string;
         erro?: string;
+      }
     | {
         /**
          * Conta visual de + ou − com imagens aparecendo (soma) ou
