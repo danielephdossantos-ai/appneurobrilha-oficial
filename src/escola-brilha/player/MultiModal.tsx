@@ -349,7 +349,7 @@ function JogoArrastar({
                         })()}
                     </div>
                     {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
-                    {jogo.itemImagem &&
+                    {temImagemDeItem &&
                       (visual.capacidade ?? 0) > 1 &&
                       quantosNoPrato > 0 && (
                         <div
@@ -358,21 +358,25 @@ function JogoArrastar({
                         >
                           {Object.entries(drops)
                             .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <motion.img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                initial={{ y: -20, opacity: 0, scale: 0.6 }}
-                                animate={{ y: 0, opacity: 1, scale: 1 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
-                              />
-                            ))}
+                            .map(([item]) => {
+                              const img = imgDoItem(item);
+                              if (!img) return null;
+                              return (
+                                <motion.img
+                                  key={item}
+                                  src={img}
+                                  alt=""
+                                  initial={{ y: -20, opacity: 0, scale: 0.6 }}
+                                  animate={{ y: 0, opacity: 1, scale: 1 }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDrops((d) => ({ ...d, [item]: null }));
+                                  }}
+                                  className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
+                                />
+                              );
+                            })}
                         </div>
                       )}
 
