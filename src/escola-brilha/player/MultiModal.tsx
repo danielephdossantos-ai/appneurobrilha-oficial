@@ -313,13 +313,19 @@ function JogoArrastar({
                             : { duration: 1.6, repeat: Infinity }
                         }
                       />
-                      {/* Item entrando (só faz sentido para 'alimentar' — capacidade 1). */}
-                      {jogo.itemImagem &&
-                        visual.capacidade === 1 &&
-                        quantosNoPrato > 0 && (
+                      {(() => {
+                        const primeiro = Object.entries(drops).find(
+                          ([, a]) => a === alvo,
+                        );
+                        const imgChomp = primeiro
+                          ? imagemDoItem(primeiro[0])
+                          : undefined;
+                        if (!imgChomp || visual.capacidade !== 1 || quantosNoPrato <= 0)
+                          return null;
+                        return (
                           <motion.img
                             key={`chomp-${quantosNoPrato}`}
-                            src={jogo.itemImagem}
+                            src={imgChomp}
                             alt=""
                             initial={{ y: -60, opacity: 0, scale: 1.2 }}
                             animate={{
