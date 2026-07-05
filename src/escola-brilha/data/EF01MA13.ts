@@ -282,10 +282,10 @@ const aula: Aula = {
         { nome: "🍦 Caixa CONE", cor: "#F97316", capacidade: 1, imagemUrl: coneImg },
       ],
       pares: [
-        { item: "Dado", alvo: "📦 Caixa CUBO", itemImagem: dadoImg },
-        { item: "Bola", alvo: "⚽ Caixa ESFERA", itemImagem: bolaImg },
-        { item: "Lata", alvo: "🥫 Caixa CILINDRO", itemImagem: lataImg },
-        { item: "Casquinha", alvo: "🍦 Caixa CONE", itemImagem: casquinhaImg },
+        { item: "🎲 Dado", alvo: "📦 Caixa CUBO" },
+        { item: "⚽ Bola", alvo: "⚽ Caixa ESFERA" },
+        { item: "🥫 Lata", alvo: "🥫 Caixa CILINDRO" },
+        { item: "🍦 Casquinha", alvo: "🍦 Caixa CONE" },
       ],
     },
 
@@ -301,30 +301,30 @@ const aula: Aula = {
         { nome: "🚫 Não é cilindro", cor: "#94A3B8", capacidade: 2, imagemUrl: cuboImg },
       ],
       pares: [
-        { item: "Lata", alvo: "🥫 Caixa CILINDRO", itemImagem: lataImg },
-        { item: "Vela", alvo: "🥫 Caixa CILINDRO", itemImagem: velaImg },
-        { item: "Bola", alvo: "🚫 Não é cilindro", itemImagem: bolaImg },
-        { item: "Dado", alvo: "🚫 Não é cilindro", itemImagem: dadoImg },
+        { item: "🥫 Lata", alvo: "🥫 Caixa CILINDRO" },
+        { item: "🕯 Vela", alvo: "🥫 Caixa CILINDRO" },
+        { item: "⚽ Bola", alvo: "🚫 Não é cilindro" },
+        { item: "🎲 Dado", alvo: "🚫 Não é cilindro" },
       ],
     },
 
-    // ==== FASE 4 · Monte a Cidade — ORDENAR ====
+    // ==== FASE 5 · Monte a Cidade — ORDENAR ====
     {
       tipo: "ordenar",
       titulo: "Fase 4 · Monte a Cidade das Formas",
       instrucao:
-        "Coloque as peças na ORDEM: primeiro a BASE (Presente = Cubo), depois o POSTE (Vela = Cilindro), a TORRE (Casquinha = Cone) e, no topo, o BALÃO (Bola = Esfera).",
+        "Coloque as peças na ORDEM da cidade: primeiro a CASA (cubo), depois a ÁRVORE (cilindro) e a TORRE PONTUDA (cone). No topo, a bandeira esférica!",
       itens: [
-        "Presente (cubo)",
-        "Vela (cilindro)",
-        "Casquinha (cone)",
-        "Bola (esfera)",
+        "🏠 Casa (cubo)",
+        "🌳 Árvore (cilindro)",
+        "🍦 Torre (cone)",
+        "⚽ Bandeira (esfera)",
       ],
       imagens: [
-        { imagemUrl: presenteImg, quantidade: 1, rotulo: "Presente = Cubo", cor: "#3B82F6" },
-        { imagemUrl: velaImg, quantidade: 1, rotulo: "Vela = Cilindro", cor: "#8B5CF6" },
-        { imagemUrl: casquinhaImg, quantidade: 1, rotulo: "Casquinha = Cone", cor: "#F97316" },
-        { imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola = Esfera", cor: "#10B981" },
+        { imagemUrl: cuboImg, quantidade: 1, rotulo: "🏠 Casa = Cubo", cor: "#3B82F6" },
+        { imagemUrl: cilindroImg, quantidade: 1, rotulo: "🌳 Árvore = Cilindro", cor: "#8B5CF6" },
+        { imagemUrl: coneImg, quantidade: 1, rotulo: "🍦 Torre = Cone", cor: "#F97316" },
+        { imagemUrl: esferaImg, quantidade: 1, rotulo: "⚽ Bandeira = Esfera", cor: "#10B981" },
       ],
     },
 
@@ -342,12 +342,12 @@ const aula: Aula = {
         { nome: "🍦 CONE", cor: "#F97316", capacidade: 1, imagemUrl: coneImg },
       ],
       pares: [
-        { item: "Dado", alvo: "🟦 CUBO", itemImagem: dadoImg },
-        { item: "Presente", alvo: "🟦 CUBO", itemImagem: presenteImg },
-        { item: "Bola", alvo: "⚽ ESFERA", itemImagem: bolaImg },
-        { item: "Lata", alvo: "🥫 CILINDRO", itemImagem: lataImg },
-        { item: "Vela", alvo: "🥫 CILINDRO", itemImagem: velaImg },
-        { item: "Casquinha", alvo: "🍦 CONE", itemImagem: casquinhaImg },
+        { item: "🎲 Dado", alvo: "🟦 CUBO" },
+        { item: "🎁 Presente", alvo: "🟦 CUBO" },
+        { item: "⚽ Bola", alvo: "⚽ ESFERA" },
+        { item: "🥫 Lata", alvo: "🥫 CILINDRO" },
+        { item: "🕯 Vela", alvo: "🥫 CILINDRO" },
+        { item: "🍦 Casquinha", alvo: "🍦 CONE" },
       ],
     },
   ],
