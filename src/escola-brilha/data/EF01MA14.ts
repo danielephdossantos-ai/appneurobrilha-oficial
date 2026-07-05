@@ -138,13 +138,8 @@ const aula: Aula = {
     resposta:
       "Bola = Círculo · Celular = Retângulo · Pizza = Triângulo · Janela = Quadrado.",
     visual: {
-      cena: [
-        { personagem: "Círculo 🔵", itemImagemUrl: circuloImg, quantidade: 1, cor: "#3B82F6" },
-        { personagem: "Quadrado 🟨", itemImagemUrl: quadradoImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Retângulo ▭", itemImagemUrl: retanguloImg, quantidade: 1, cor: "#10B981" },
-        { personagem: "Triângulo 🔺", itemImagemUrl: trianguloImg, quantidade: 1, cor: "#EF4444" },
-      ],
       perguntas: [
+
         {
           pergunta: "A ⚽ BOLA tem forma de…",
           opcoes: ["Círculo", "Quadrado", "Triângulo"],
