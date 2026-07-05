@@ -280,37 +280,37 @@ const aula: Aula = {
       erro: "Conta a coluna da maçã: são 5 crianças.",
     },
 
-    // ==== FASE 4 · Descubra a Menor ====
+    // ==== FASE 4 · Descubra a Menor (gráfico de colunas) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 4 · Menor Quantidade",
-      instrucao: "Pesquisa dos animais 🐶 8 · 🐱 5 · 🐦 2.",
-      grupos: [
-        { imagemUrl: cachorroImg, quantidade: 8, rotulo: "🐶 · 8" },
-        { imagemUrl: gatoImg, quantidade: 5, rotulo: "🐱 · 5" },
-        { imagemUrl: passarinhoImg, quantidade: 2, rotulo: "🐦 · 2" },
+      instrucao: "Pesquisa dos animais 🐶 8 · 🐱 5 · 🐦 2. Olhe qual barra é a MENOR.",
+      colunas: [
+        { imagemUrl: cachorroImg, rotulo: "🐶 Cachorro", valor: 8, cor: "#B45309" },
+        { imagemUrl: gatoImg, rotulo: "🐱 Gato", valor: 5, cor: "#6B7280" },
+        { imagemUrl: passarinhoImg, rotulo: "🐦 Passarinho", valor: 2, cor: "#3B82F6" },
       ],
       pergunta: "Qual animal recebeu MENOS votos?",
       opcoes: ["🐶 Cachorro", "🐱 Gato", "🐦 Passarinho"],
       correta: 2,
-      acerto: "Isso! O passarinho teve só 2 votos — a menor coluna.",
-      erro: "A menor coluna é a do 🐦 passarinho (2 votos).",
+      acerto: "Isso! A coluna do passarinho é a mais baixa — só 2 votos.",
+      erro: "A barra mais baixa é do 🐦 passarinho (2 votos).",
     },
 
-    // ==== FASE 5 · Faça sua Descoberta ====
+    // ==== FASE 5 · Faça sua Descoberta (gráfico de colunas) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 5 · Faça sua Descoberta",
-      instrucao: "Pesquisa dos sorvetes 🍫 6 · 🍓 4 · 🍦 2.",
-      grupos: [
-        { imagemUrl: chocolateImg, quantidade: 6, rotulo: "🍫 · 6" },
-        { imagemUrl: morangoImg, quantidade: 4, rotulo: "🍓 · 4" },
-        { imagemUrl: baunilhaImg, quantidade: 2, rotulo: "🍦 · 2" },
+      instrucao: "Pesquisa dos sorvetes 🍫 6 · 🍓 4 · 🍦 2. Observe as colunas.",
+      colunas: [
+        { imagemUrl: chocolateImg, rotulo: "🍫 Chocolate", valor: 6, cor: "#78350F" },
+        { imagemUrl: morangoImg, rotulo: "🍓 Morango", valor: 4, cor: "#EC4899" },
+        { imagemUrl: baunilhaImg, rotulo: "🍦 Baunilha", valor: 2, cor: "#FBBF24" },
       ],
       pergunta: "Quem ficou em SEGUNDO lugar?",
       opcoes: ["🍫 Chocolate", "🍓 Morango", "🍦 Baunilha"],
       correta: 1,
-      acerto: "Boa! O morango teve 4 votos — segundo lugar.",
+      acerto: "Boa! O morango teve 4 votos — segundo lugar (barra do meio).",
       erro: "1º chocolate (6), 2º morango (4), 3º baunilha (2).",
     },
 
