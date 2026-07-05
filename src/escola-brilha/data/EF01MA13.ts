@@ -94,11 +94,15 @@ const aula: Aula = {
     explicacao:
       "O dado tem 6 lados iguais e planos — essa é a forma do CUBO.",
     visual: {
-      tipo: "grupos",
-      grupos: [
-        { imagemUrl: dadoImg, quantidade: 1, rotulo: "Dado", cor: "#F97316" },
-        { imagemUrl: cuboImg, quantidade: 1, rotulo: "Cubo", cor: "#3B82F6" },
-      ],
+      tipo: "cena",
+      pergunta: "O dado tem forma de…",
+      posicao: "aoLado",
+      referenciaImg: cuboImg,
+      referenciaLabel: "Cubo",
+      sujeitoImg: dadoImg,
+      sujeitoLabel: "Dado",
+      opcoes: ["Cubo", "Esfera", "Cilindro"],
+      correta: 0,
     },
   },
 
