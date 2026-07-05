@@ -249,7 +249,7 @@ export type Aula = {
      * na resposta certa em cada pergunta.
      */
     visual?: {
-      cena: Array<{
+      cena?: Array<{
         personagem: string;
         personagemImagemUrl?: string;
         itemImagemUrl: string;
@@ -258,6 +258,7 @@ export type Aula = {
       }>;
       perguntas: QuizItem[];
     };
+
   };
 
   // 8. Quiz

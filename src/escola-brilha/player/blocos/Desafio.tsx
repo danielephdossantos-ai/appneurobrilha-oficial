@@ -16,57 +16,59 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
       <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
         <p className="font-black mb-3">{dados.enunciado}</p>
 
-        {/* Cena com personagens e itens contáveis */}
-        <div
-          className={`grid gap-2 mb-4 ${
-            visual.cena.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
-          }`}
-        >
-          {visual.cena.map((p, i) => {
-            const cor = p.cor ?? CORES[i % CORES.length];
-            return (
-              <div
-                key={i}
-                className="rounded-2xl border-4 p-2"
-                style={{ borderColor: cor, background: `${cor}18` }}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-1.5">
-                    {p.personagemImagemUrl && (
-                      <img
-                        src={p.personagemImagemUrl}
-                        alt=""
-                        className="h-8 w-8 object-contain drop-shadow"
-                      />
-                    )}
+        {visual.cena && visual.cena.length > 0 && (
+          <div
+            className={`grid gap-2 mb-4 ${
+              visual.cena.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
+            }`}
+          >
+            {visual.cena.map((p, i) => {
+              const cor = p.cor ?? CORES[i % CORES.length];
+              return (
+                <div
+                  key={i}
+                  className="rounded-2xl border-4 p-2"
+                  style={{ borderColor: cor, background: `${cor}18` }}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      {p.personagemImagemUrl && (
+                        <img
+                          src={p.personagemImagemUrl}
+                          alt=""
+                          className="h-8 w-8 object-contain drop-shadow"
+                        />
+                      )}
+                      <span
+                        className="text-[10px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
+                        style={{ background: cor }}
+                      >
+                        {p.personagem}
+                      </span>
+                    </div>
                     <span
-                      className="text-[10px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
-                      style={{ background: cor }}
+                      className="h-7 w-7 rounded-full text-sm font-black grid place-items-center border-2 border-white"
+                      style={{ background: "#fff", color: cor }}
                     >
-                      {p.personagem}
+                      {p.quantidade}
                     </span>
                   </div>
-                  <span
-                    className="h-7 w-7 rounded-full text-sm font-black grid place-items-center border-2 border-white"
-                    style={{ background: "#fff", color: cor }}
-                  >
-                    {p.quantidade}
-                  </span>
+                  <div className={`flex flex-wrap gap-1 justify-center items-center bg-white/40 rounded-xl p-2 ${p.quantidade <= 1 ? "min-h-[56px]" : "min-h-[70px]"}`}>
+                    {Array.from({ length: p.quantidade }).map((_, k) => (
+                      <img
+                        key={k}
+                        src={p.itemImagemUrl}
+                        alt=""
+                        className={`${p.quantidade === 1 ? "h-14 w-14 sm:h-16 sm:w-16" : p.quantidade <= 3 ? "h-11 w-11 sm:h-12 sm:w-12" : "h-8 w-8 sm:h-9 sm:w-9"} object-contain drop-shadow`}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className={`flex flex-wrap gap-1 justify-center items-center bg-white/40 rounded-xl p-2 ${p.quantidade <= 1 ? "min-h-[56px]" : "min-h-[70px]"}`}>
-                  {Array.from({ length: p.quantidade }).map((_, k) => (
-                    <img
-                      key={k}
-                      src={p.itemImagemUrl}
-                      alt=""
-                      className={`${p.quantidade === 1 ? "h-14 w-14 sm:h-16 sm:w-16" : p.quantidade <= 3 ? "h-11 w-11 sm:h-12 sm:w-12" : "h-8 w-8 sm:h-9 sm:w-9"} object-contain drop-shadow`}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
+
 
         <QuizSequencial perguntas={visual.perguntas} />
       </Secao>

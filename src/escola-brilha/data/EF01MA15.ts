@@ -130,13 +130,8 @@ const aula: Aula = {
     resposta:
       "Árvore = mais alta · Pedra = mais pesada · Balde = cabe mais · Lápis = mais curto.",
     visual: {
-      cena: [
-        { personagem: "Comprimento 📏", itemImagemUrl: reguaImg, quantidade: 1, cor: "#3B82F6" },
-        { personagem: "Massa ⚖️", itemImagemUrl: pedraImg, quantidade: 1, cor: "#78716C" },
-        { personagem: "Capacidade 🪣", itemImagemUrl: baldeImg, quantidade: 1, cor: "#10B981" },
-        { personagem: "Altura 📐", itemImagemUrl: arvoreImg, quantidade: 1, cor: "#22C55E" },
-      ],
       perguntas: [
+
         {
           pergunta: "🌳 árvore é __________ que a 🌼 flor.",
           opcoes: ["Mais baixa", "Mais alta", "Igual"],
