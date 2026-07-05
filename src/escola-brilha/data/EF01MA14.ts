@@ -374,7 +374,6 @@ const aula: Aula = {
       titulo: "Mini Jogo · Construindo o Parque",
       instrucao:
         "Monte o parque escolhendo a forma certa pra cada peça: banco, roda-gigante, telhado e piso.",
-      itemImagem: retanguloImg,
       alvosVisuais: [
         { nome: "▭ Banco (retângulo)", cor: "#10B981", capacidade: 1, imagemUrl: retanguloImg },
         { nome: "🔵 Roda-gigante (círculo)", cor: "#3B82F6", capacidade: 1, imagemUrl: circuloImg },
@@ -382,10 +381,10 @@ const aula: Aula = {
         { nome: "🟨 Piso (quadrado)", cor: "#FBBF24", capacidade: 1, imagemUrl: quadradoImg },
       ],
       pares: [
-        { item: "▭ Banco", alvo: "▭ Banco (retângulo)" },
-        { item: "🔵 Roda-gigante", alvo: "🔵 Roda-gigante (círculo)" },
-        { item: "🔺 Telhado", alvo: "🔺 Telhado (triângulo)" },
-        { item: "🟨 Piso", alvo: "🟨 Piso (quadrado)" },
+        { item: "▭ Banco", alvo: "▭ Banco (retângulo)", itemImagem: retanguloImg },
+        { item: "🔵 Roda-gigante", alvo: "🔵 Roda-gigante (círculo)", itemImagem: circuloImg },
+        { item: "🔺 Telhado", alvo: "🔺 Telhado (triângulo)", itemImagem: trianguloImg },
+        { item: "🟨 Piso", alvo: "🟨 Piso (quadrado)", itemImagem: quadradoImg },
       ],
     },
 
