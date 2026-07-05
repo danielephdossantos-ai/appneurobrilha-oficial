@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "neurobrilha-kids-mcp",
+      "version": "0.1.0",
+      "title": "NeuroBrilha Kids MCP"
+    },
+    "tools": [
+      {
+        "name": "list_lessons",
+        "title": "Listar aulas BNCC disponíveis",
+        "description": "Lista os códigos BNCC das aulas de Matemática do 1º Ano disponíveis na biblioteca oficial do NeuroBrilha Kids.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "disciplina": {
+              "description": "Disciplina a filtrar. No momento apenas 'matematica'.",
+              "type": "string",
+              "enum": [
+                "matematica"
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_lesson",
+        "title": "Obter aula BNCC",
+        "description": "Retorna o conteúdo estruturado de uma aula da biblioteca oficial pelo código BNCC (ex: EF01MA02).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "codigo": {
+              "type": "string",
+              "pattern": "^EF\\d{2}[A-Z]{2}\\d{2}$",
+              "description": "Código BNCC da aula."
+            }
+          },
+          "required": [
+            "codigo"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
