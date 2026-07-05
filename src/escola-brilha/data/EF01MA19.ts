@@ -20,10 +20,10 @@ const dinheiroImg = (texto: string, cor: string, fundo: string): string => {
 };
 
 // Moedas
-const moeda05 = dinheiroImg("5¢", "#92400E", "#FEF3C7");
-const moeda10 = dinheiroImg("10¢", "#92400E", "#FDE68A");
-const moeda25 = dinheiroImg("25¢", "#92400E", "#FCD34D");
-const moeda50 = dinheiroImg("50¢", "#92400E", "#FBBF24");
+const moeda05 = dinheiroImg("R$ 0,05", "#92400E", "#FEF3C7");
+const moeda10 = dinheiroImg("R$ 0,10", "#92400E", "#FDE68A");
+const moeda25 = dinheiroImg("R$ 0,25", "#92400E", "#FCD34D");
+const moeda50 = dinheiroImg("R$ 0,50", "#92400E", "#FBBF24");
 const moeda1 = dinheiroImg("R$ 1", "#92400E", "#F59E0B");
 
 // Cédulas
@@ -81,7 +81,7 @@ const aula: Aula = {
     "Aprender o dinheiro ajuda a fazer compras 🛒, pagar o lanche 🍎 e conferir o troco!",
 
   explicacao:
-    "💰 MOEDAS: 5¢, 10¢, 25¢, 50¢ e R$ 1.\n\n💵 CÉDULAS: R$ 2, R$ 5, R$ 10, R$ 20, R$ 50 e R$ 100.\n\nCada moeda e cédula tem um VALOR. Quanto maior o número, mais o dinheiro vale.\n\nDá pra JUNTAR moedas e cédulas pra formar o mesmo valor: R$ 5 = R$ 2 + R$ 2 + R$ 1.",
+    "💰 MOEDAS: 5 centavos, 10 centavos, 25 centavos, 50 centavos e R$ 1.\n\n💵 CÉDULAS: R$ 2, R$ 5, R$ 10, R$ 20, R$ 50 e R$ 100.\n\nCada moeda e cédula tem um VALOR. Quanto maior o número, mais o dinheiro vale.\n\nDá pra JUNTAR moedas e cédulas pra formar o mesmo valor: R$ 5 = R$ 2 + R$ 2 + R$ 1.",
 
   explicacoesNiveis: {
     nivel1: "Moeda 🟡 é redonda. Cédula 💵 é de papel. Cada uma tem um valor.",
@@ -191,7 +191,7 @@ const aula: Aula = {
 
   revisao: {
     pontos: [
-      "💰 Moedas: 5¢, 10¢, 25¢, 50¢, R$ 1.",
+      "💰 Moedas: 5, 10, 25, 50 centavos e R$ 1.",
       "💵 Cédulas: R$ 2, R$ 5, R$ 10, R$ 20, R$ 50, R$ 100.",
       "Número maior = valor maior.",
       "Posso juntar moedas e cédulas pra formar o mesmo valor.",
@@ -208,7 +208,7 @@ const aula: Aula = {
       visual: {
         tipo: "grupos",
         grupos: [
-          { imagemUrl: moeda25, quantidade: 1, rotulo: "25¢", cor: "#F59E0B" },
+          { imagemUrl: moeda25, quantidade: 1, rotulo: "25 centavos", cor: "#F59E0B" },
           { imagemUrl: moeda1, quantidade: 1, rotulo: "R$ 1", cor: "#B45309" },
         ],
       },
@@ -402,7 +402,7 @@ const aula: Aula = {
         visual: {
           tipo: "grupos",
           grupos: [
-            { imagemUrl: moeda10, quantidade: 1, rotulo: "10¢", cor: "#F59E0B" },
+            { imagemUrl: moeda10, quantidade: 1, rotulo: "10 centavos", cor: "#F59E0B" },
             { imagemUrl: moeda1, quantidade: 1, rotulo: "R$ 1", cor: "#B45309" },
           ],
         },
