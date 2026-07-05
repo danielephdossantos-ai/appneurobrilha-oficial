@@ -247,21 +247,21 @@ const aula: Aula = {
       erro: "Compare os números: 7 é o maior → 🍇 Uva venceu.",
     },
 
-    // ==== FASE 2 · Leia o Gráfico ====
+    // ==== FASE 2 · Leia o Gráfico (barras reais) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 2 · Leia o Gráfico",
-      instrucao: "Mesmos dados no gráfico de colunas 📊. Observe a altura das barras.",
-      grupos: [
-        { imagemUrl: macaImg, quantidade: 5, rotulo: "🍎 · 5" },
-        { imagemUrl: bananaImg, quantidade: 3, rotulo: "🍌 · 3" },
-        { imagemUrl: uvaImg, quantidade: 7, rotulo: "🍇 · 7" },
+      instrucao: "Mesmos dados no gráfico de colunas 📊. Observe a ALTURA das barras.",
+      colunas: [
+        { imagemUrl: macaImg, rotulo: "🍎 Maçã", valor: 5, cor: "#EF4444" },
+        { imagemUrl: bananaImg, rotulo: "🍌 Banana", valor: 3, cor: "#FACC15" },
+        { imagemUrl: uvaImg, rotulo: "🍇 Uva", valor: 7, cor: "#8B5CF6" },
       ],
-      pergunta: "Qual COLUNA é a maior?",
+      pergunta: "Qual COLUNA é a MAIOR?",
       opcoes: ["🍎 Maçã", "🍇 Uva", "🍌 Banana"],
       correta: 1,
-      acerto: "Isso! A coluna da uva é a mais alta — 7 votos.",
-      erro: "A coluna mais alta é a da 🍇 uva (7 votos).",
+      acerto: "Isso! A coluna da uva subiu mais — 7 votos.",
+      erro: "Olhe qual barra sobe mais alto → 🍇 Uva (7).",
     },
 
     // ==== FASE 3 · Compare ====
