@@ -101,6 +101,8 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoMontar jogo={jogo} />;
     case "contarQuiz":
       return <JogoContarQuiz jogo={jogo} />;
+    case "graficoQuiz":
+      return <JogoGraficoQuiz jogo={jogo} />;
     case "operacao":
       return (
         <Secao icon={Sparkles} rotulo="Conta visual" cor={jogo.cor ?? "#60A5FA"}>
