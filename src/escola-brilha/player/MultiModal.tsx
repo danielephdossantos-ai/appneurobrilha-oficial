@@ -508,7 +508,8 @@ function JogoArrastar({
           .filter(([, a]) => a === null)
           .map(([item]) => {
             const sel = selecionado === item;
-            if (jogo.itemImagem) {
+            const img = imgDoItem(item);
+            if (img) {
               return (
                 <button
                   type="button"
@@ -516,7 +517,7 @@ function JogoArrastar({
                   draggable
                   onDragStart={() => (dragged.current = item)}
                   onClick={() => setSelecionado(sel ? null : item)}
-                  className={`h-14 w-14 rounded-2xl bg-white grid place-items-center shadow transition-all ${
+                  className={`flex flex-col items-center gap-1 p-2 rounded-2xl bg-white shadow transition-all ${
                     sel
                       ? "scale-125 ring-4 ring-[#FBBF24]"
                       : "active:scale-95"
@@ -524,11 +525,14 @@ function JogoArrastar({
                   aria-label={item}
                 >
                   <img
-                    src={jogo.itemImagem}
+                    src={img}
                     alt=""
-                    className="h-10 w-10 object-contain"
+                    className="h-12 w-12 object-contain"
                     draggable={false}
                   />
+                  <span className="text-[10px] font-black text-[#0d1f55] leading-none max-w-[64px] text-center">
+                    {item}
+                  </span>
                 </button>
               );
             }
