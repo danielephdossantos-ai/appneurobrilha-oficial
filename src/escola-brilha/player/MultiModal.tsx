@@ -479,10 +479,10 @@ function JogoArrastar({
 
               ) : (
                 <>
-                  <div className="text-sm font-black uppercase tracking-wider text-white mb-2">
+                  <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-white mb-2">
                     {alvo}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {Object.entries(drops)
                       .filter(([, a]) => a === alvo)
                       .map(([item]) => (
@@ -492,7 +492,7 @@ function JogoArrastar({
                             e.stopPropagation();
                             setDrops((d) => ({ ...d, [item]: null }));
                           }}
-                          className="px-3 py-2 rounded-xl bg-[#F472B6] text-[#0d1f55] text-base font-black cursor-pointer"
+                          className="px-2 py-1 sm:px-3 sm:py-2 rounded-lg sm:rounded-xl bg-[#F472B6] text-[#0d1f55] text-xs sm:text-base font-black cursor-pointer"
                         >
                           {item} ✕
                         </span>
