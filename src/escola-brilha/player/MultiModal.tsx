@@ -256,10 +256,10 @@ function JogoArrastar({
       </p>
 
       <div
-        className={`grid gap-3 mb-4 ${
+        className={`grid gap-2 sm:gap-3 mb-4 ${
           alvos.length === 2
             ? "grid-cols-2"
-            : "grid-cols-1 sm:grid-cols-3"
+            : "grid-cols-3"
         }`}
       >
         {alvos.map((alvo) => {
@@ -282,7 +282,7 @@ function JogoArrastar({
               onClick={() => {
                 if (selecionado) colocarNoAlvo(selecionado, alvo);
               }}
-              className={`text-left rounded-3xl border-4 p-3 min-h-[180px] transition-all relative overflow-hidden ${
+              className={`text-left rounded-2xl sm:rounded-3xl border-2 sm:border-4 p-2 sm:p-3 min-h-[110px] sm:min-h-[180px] transition-all relative overflow-hidden ${
                 podeReceber ? "ring-4 ring-[#FBBF24] animate-pulse" : ""
               }`}
               style={{
