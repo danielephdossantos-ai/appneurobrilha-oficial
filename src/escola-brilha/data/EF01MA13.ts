@@ -301,10 +301,10 @@ const aula: Aula = {
         { nome: "🚫 Não é cilindro", cor: "#94A3B8", capacidade: 2, imagemUrl: cuboImg },
       ],
       pares: [
-        { item: "🥫 Lata", alvo: "🥫 Caixa CILINDRO" },
-        { item: "🕯 Vela", alvo: "🥫 Caixa CILINDRO" },
-        { item: "⚽ Bola", alvo: "🚫 Não é cilindro" },
-        { item: "🎲 Dado", alvo: "🚫 Não é cilindro" },
+        { item: "Lata", alvo: "🥫 Caixa CILINDRO", itemImagem: lataImg },
+        { item: "Vela", alvo: "🥫 Caixa CILINDRO", itemImagem: velaImg },
+        { item: "Bola", alvo: "🚫 Não é cilindro", itemImagem: bolaImg },
+        { item: "Dado", alvo: "🚫 Não é cilindro", itemImagem: dadoImg },
       ],
     },
 
