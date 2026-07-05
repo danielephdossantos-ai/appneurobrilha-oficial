@@ -168,6 +168,9 @@ function JogoArrastar({
   const buscarAlvoVisual = (nome: string) =>
     jogo.alvosVisuais?.find((a) => a.nome === nome);
 
+  const imagemDoItem = (item: string): string | undefined =>
+    jogo.pares.find((p) => p.item === item)?.itemImagem ?? jogo.itemImagem;
+
   const contarNoAlvo = (mapa: Record<string, string | null>, alvo: string) =>
     Object.values(mapa).filter((a) => a === alvo).length;
 
