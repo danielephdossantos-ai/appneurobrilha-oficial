@@ -132,7 +132,6 @@ const aula: Aula = {
     visual: {
       perguntas: [
 
-      perguntas: [
         {
           pergunta: "🌳 árvore é __________ que a 🌼 flor.",
           opcoes: ["Mais baixa", "Mais alta", "Igual"],
