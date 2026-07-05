@@ -15,11 +15,14 @@ import type { Aula } from "../types";
  * player continua funcionando com `imagemUrl` sem quebrar o padrão.
  */
 
-/** Gera um data-URI SVG com o emoji renderizado grande, para usar em imagemUrl. */
+/**
+ * Gera um data-URI SVG com o emoji renderizado grande, para usar em
+ * imagemUrl. Usa `foreignObject` para que o navegador renderize o emoji
+ * colorido (o elemento `<text>` do SVG NÃO renderiza color emoji na
+ * maioria dos browsers, deixando o "img" aparentemente em branco).
+ */
 const emojiImg = (emoji: string): string => {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
-    <text x='100' y='150' text-anchor='middle' font-size='150' font-family='Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif'>${emoji}</text>
-  </svg>`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><foreignObject x='0' y='0' width='200' height='200'><div xmlns='http://www.w3.org/1999/xhtml' style='width:200px;height:200px;display:flex;align-items:center;justify-content:center;font-size:150px;line-height:1;font-family:Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,EmojiOne Color,Twemoji Mozilla,sans-serif'>${emoji}</div></foreignObject></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
@@ -291,7 +294,6 @@ const aula: Aula = {
       titulo: "Fase 2 · Arraste para a Caixa Certa",
       instrucao:
         "Cada objeto tem uma forma. Arraste pra caixa da forma correspondente.",
-      itemImagem: bolaImg,
       alvosVisuais: [
         { nome: "🔵 CÍRCULO", cor: "#3B82F6", capacidade: 1, imagemUrl: circuloImg },
         { nome: "🟨 QUADRADO", cor: "#FBBF24", capacidade: 1, imagemUrl: quadradoImg },
@@ -299,10 +301,10 @@ const aula: Aula = {
         { nome: "🔺 TRIÂNGULO", cor: "#EF4444", capacidade: 1, imagemUrl: trianguloImg },
       ],
       pares: [
-        { item: "⚽ Bola", alvo: "🔵 CÍRCULO" },
-        { item: "🪟 Janela", alvo: "🟨 QUADRADO" },
-        { item: "📱 Celular", alvo: "▭ RETÂNGULO" },
-        { item: "🍕 Pizza", alvo: "🔺 TRIÂNGULO" },
+        { item: "⚽ Bola", alvo: "🔵 CÍRCULO", itemImagem: bolaImg },
+        { item: "🪟 Janela", alvo: "🟨 QUADRADO", itemImagem: janelaImg },
+        { item: "📱 Celular", alvo: "▭ RETÂNGULO", itemImagem: celularImg },
+        { item: "🍕 Pizza", alvo: "🔺 TRIÂNGULO", itemImagem: pizzaImg },
       ],
     },
 
@@ -312,7 +314,6 @@ const aula: Aula = {
       titulo: "Fase 3 · Caça às Formas no Quarto",
       instrucao:
         "Encontre no quarto: 2 CÍRCULOS, 2 RETÂNGULOS, 1 QUADRADO e 1 TRIÂNGULO. Arraste cada objeto pra caixa da sua forma.",
-      itemImagem: relogioImg,
       alvosVisuais: [
         { nome: "🔵 CÍRCULO", cor: "#3B82F6", capacidade: 2, imagemUrl: circuloImg },
         { nome: "▭ RETÂNGULO", cor: "#10B981", capacidade: 2, imagemUrl: retanguloImg },
@@ -320,12 +321,12 @@ const aula: Aula = {
         { nome: "🔺 TRIÂNGULO", cor: "#EF4444", capacidade: 1, imagemUrl: trianguloImg },
       ],
       pares: [
-        { item: "🕒 Relógio", alvo: "🔵 CÍRCULO" },
-        { item: "🪙 Moeda", alvo: "🔵 CÍRCULO" },
-        { item: "📖 Livro", alvo: "▭ RETÂNGULO" },
-        { item: "🚪 Porta", alvo: "▭ RETÂNGULO" },
-        { item: "🪟 Janela", alvo: "🟨 QUADRADO" },
-        { item: "🚧 Placa", alvo: "🔺 TRIÂNGULO" },
+        { item: "🕒 Relógio", alvo: "🔵 CÍRCULO", itemImagem: relogioImg },
+        { item: "🪙 Moeda", alvo: "🔵 CÍRCULO", itemImagem: moedaImg },
+        { item: "📖 Livro", alvo: "▭ RETÂNGULO", itemImagem: livroImg },
+        { item: "🚪 Porta", alvo: "▭ RETÂNGULO", itemImagem: portaImg },
+        { item: "🪟 Janela", alvo: "🟨 QUADRADO", itemImagem: janelaImg },
+        { item: "🚧 Placa", alvo: "🔺 TRIÂNGULO", itemImagem: placaImg },
       ],
     },
 
@@ -373,7 +374,6 @@ const aula: Aula = {
       titulo: "Mini Jogo · Construindo o Parque",
       instrucao:
         "Monte o parque escolhendo a forma certa pra cada peça: banco, roda-gigante, telhado e piso.",
-      itemImagem: retanguloImg,
       alvosVisuais: [
         { nome: "▭ Banco (retângulo)", cor: "#10B981", capacidade: 1, imagemUrl: retanguloImg },
         { nome: "🔵 Roda-gigante (círculo)", cor: "#3B82F6", capacidade: 1, imagemUrl: circuloImg },
@@ -381,10 +381,10 @@ const aula: Aula = {
         { nome: "🟨 Piso (quadrado)", cor: "#FBBF24", capacidade: 1, imagemUrl: quadradoImg },
       ],
       pares: [
-        { item: "▭ Banco", alvo: "▭ Banco (retângulo)" },
-        { item: "🔵 Roda-gigante", alvo: "🔵 Roda-gigante (círculo)" },
-        { item: "🔺 Telhado", alvo: "🔺 Telhado (triângulo)" },
-        { item: "🟨 Piso", alvo: "🟨 Piso (quadrado)" },
+        { item: "▭ Banco", alvo: "▭ Banco (retângulo)", itemImagem: retanguloImg },
+        { item: "🔵 Roda-gigante", alvo: "🔵 Roda-gigante (círculo)", itemImagem: circuloImg },
+        { item: "🔺 Telhado", alvo: "🔺 Telhado (triângulo)", itemImagem: trianguloImg },
+        { item: "🟨 Piso", alvo: "🟨 Piso (quadrado)", itemImagem: quadradoImg },
       ],
     },
 

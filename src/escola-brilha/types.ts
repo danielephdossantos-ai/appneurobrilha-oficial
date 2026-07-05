@@ -305,10 +305,11 @@ export type Aula = {
         titulo: string;
         instrucao: string;
         // pares (item → alvo). O jogador arrasta o item pro alvo certo.
-        pares: Array<{ item: string; alvo: string }>;
+        pares: Array<{ item: string; alvo: string; itemImagem?: string }>;
         /**
-         * Suporte visual (opcional). Quando presente, cada item é
-         * renderizado como uma cópia da imagem (em vez de só texto).
+         * Suporte visual (opcional). Fallback usado quando o par não
+         * define seu próprio `itemImagem`. Se cada item tem uma imagem
+         * diferente, defina em cada `pares[i].itemImagem`.
          */
         itemImagem?: string;
         /**

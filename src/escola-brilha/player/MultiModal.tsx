@@ -168,6 +168,11 @@ function JogoArrastar({
   const buscarAlvoVisual = (nome: string) =>
     jogo.alvosVisuais?.find((a) => a.nome === nome);
 
+  // Imagem específica de cada item (com fallback para a imagem global).
+  const imgDoItem = (item: string) =>
+    jogo.pares.find((p) => p.item === item)?.itemImagem ?? jogo.itemImagem;
+  const temImagemDeItem = !!jogo.itemImagem || jogo.pares.some((p) => p.itemImagem);
+
   const contarNoAlvo = (mapa: Record<string, string | null>, alvo: string) =>
     Object.values(mapa).filter((a) => a === alvo).length;
 
@@ -311,33 +316,40 @@ function JogoArrastar({
                         }
                       />
                       {/* Item entrando (só faz sentido para 'alimentar' — capacidade 1). */}
-                      {jogo.itemImagem &&
+                      {temImagemDeItem &&
                         visual.capacidade === 1 &&
-                        quantosNoPrato > 0 && (
-                          <motion.img
-                            key={`chomp-${quantosNoPrato}`}
-                            src={jogo.itemImagem}
-                            alt=""
-                            initial={{ y: -60, opacity: 0, scale: 1.2 }}
-                            animate={{
-                              y: [-60, 0, 8],
-                              opacity: [0, 1, 1, 0],
-                              scale: [1.2, 1, 0.6],
-                            }}
-                            transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const first = Object.entries(drops).find(
-                                ([, a]) => a === alvo,
-                              );
-                              if (first) setDrops((d) => ({ ...d, [first[0]]: null }));
-                            }}
-                            className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                          />
-                        )}
+                        quantosNoPrato > 0 &&
+                        (() => {
+                          const first = Object.entries(drops).find(
+                            ([, a]) => a === alvo,
+                          );
+                          const itemNome = first?.[0];
+                          const itemImg = itemNome ? imgDoItem(itemNome) : undefined;
+                          if (!itemImg) return null;
+                          return (
+                            <motion.img
+                              key={`chomp-${quantosNoPrato}`}
+                              src={itemImg}
+                              alt=""
+                              initial={{ y: -60, opacity: 0, scale: 1.2 }}
+                              animate={{
+                                y: [-60, 0, 8],
+                                opacity: [0, 1, 1, 0],
+                                scale: [1.2, 1, 0.6],
+                              }}
+                              transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (itemNome)
+                                  setDrops((d) => ({ ...d, [itemNome]: null }));
+                              }}
+                              className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                            />
+                          );
+                        })()}
                     </div>
                     {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
-                    {jogo.itemImagem &&
+                    {temImagemDeItem &&
                       (visual.capacidade ?? 0) > 1 &&
                       quantosNoPrato > 0 && (
                         <div
@@ -346,21 +358,25 @@ function JogoArrastar({
                         >
                           {Object.entries(drops)
                             .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <motion.img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                initial={{ y: -20, opacity: 0, scale: 0.6 }}
-                                animate={{ y: 0, opacity: 1, scale: 1 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
-                              />
-                            ))}
+                            .map(([item]) => {
+                              const img = imgDoItem(item);
+                              if (!img) return null;
+                              return (
+                                <motion.img
+                                  key={item}
+                                  src={img}
+                                  alt=""
+                                  initial={{ y: -20, opacity: 0, scale: 0.6 }}
+                                  animate={{ y: 0, opacity: 1, scale: 1 }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDrops((d) => ({ ...d, [item]: null }));
+                                  }}
+                                  className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
+                                />
+                              );
+                            })}
                         </div>
                       )}
 
@@ -416,21 +432,25 @@ function JogoArrastar({
                         boxShadow: `inset 0 4px 12px ${cor}55`,
                       }}
                     >
-                      {jogo.itemImagem && quantosNoPrato > 0
+                      {temImagemDeItem && quantosNoPrato > 0
                         ? Object.entries(drops)
                             .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                              />
-                            ))
+                            .map(([item]) => {
+                              const img = imgDoItem(item);
+                              if (!img) return null;
+                              return (
+                                <img
+                                  key={item}
+                                  src={img}
+                                  alt=""
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDrops((d) => ({ ...d, [item]: null }));
+                                  }}
+                                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                                />
+                              );
+                            })
                         : Object.entries(drops)
                             .filter(([, a]) => a === alvo)
                             .map(([item]) => (
@@ -488,7 +508,8 @@ function JogoArrastar({
           .filter(([, a]) => a === null)
           .map(([item]) => {
             const sel = selecionado === item;
-            if (jogo.itemImagem) {
+            const img = imgDoItem(item);
+            if (img) {
               return (
                 <button
                   type="button"
@@ -496,7 +517,7 @@ function JogoArrastar({
                   draggable
                   onDragStart={() => (dragged.current = item)}
                   onClick={() => setSelecionado(sel ? null : item)}
-                  className={`h-14 w-14 rounded-2xl bg-white grid place-items-center shadow transition-all ${
+                  className={`flex flex-col items-center gap-1 p-2 rounded-2xl bg-white shadow transition-all ${
                     sel
                       ? "scale-125 ring-4 ring-[#FBBF24]"
                       : "active:scale-95"
@@ -504,11 +525,14 @@ function JogoArrastar({
                   aria-label={item}
                 >
                   <img
-                    src={jogo.itemImagem}
+                    src={img}
                     alt=""
-                    className="h-10 w-10 object-contain"
+                    className="h-12 w-12 object-contain"
                     draggable={false}
                   />
+                  <span className="text-[10px] font-black text-[#0d1f55] leading-none max-w-[64px] text-center">
+                    {item}
+                  </span>
                 </button>
               );
             }
