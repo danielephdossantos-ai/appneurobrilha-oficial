@@ -15,11 +15,14 @@ import type { Aula } from "../types";
  * player continua funcionando com `imagemUrl` sem quebrar o padrão.
  */
 
-/** Gera um data-URI SVG com o emoji renderizado grande, para usar em imagemUrl. */
+/**
+ * Gera um data-URI SVG com o emoji renderizado grande, para usar em
+ * imagemUrl. Usa `foreignObject` para que o navegador renderize o emoji
+ * colorido (o elemento `<text>` do SVG NÃO renderiza color emoji na
+ * maioria dos browsers, deixando o "img" aparentemente em branco).
+ */
 const emojiImg = (emoji: string): string => {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
-    <text x='100' y='150' text-anchor='middle' font-size='150' font-family='Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif'>${emoji}</text>
-  </svg>`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><foreignObject x='0' y='0' width='200' height='200'><div xmlns='http://www.w3.org/1999/xhtml' style='width:200px;height:200px;display:flex;align-items:center;justify-content:center;font-size:150px;line-height:1;font-family:Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,EmojiOne Color,Twemoji Mozilla,sans-serif'>${emoji}</div></foreignObject></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
