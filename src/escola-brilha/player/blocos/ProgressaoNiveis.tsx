@@ -384,6 +384,37 @@ function matchOpcao(rotulo: string | undefined, opcoes: string[]): number {
   return idx;
 }
 
+/* -------------------- parser: pergunta com emoji+contagem -------------------- */
+type ItemCena = { emoji: string; label: string; quantidade: number };
+
+/** Extrai itens do tipo "🐶 2", "🍊 Laranja = 3", separados por · , ou espaços. */
+function parseEmojiCena(texto: string): ItemCena[] {
+  if (!texto) return [];
+  const emojiSrc = "(\\p{Extended_Pictographic}(?:\\uFE0F)?(?:\\u200D\\p{Extended_Pictographic}(?:\\uFE0F)?)*)";
+  // emoji + rótulo opcional (sem números, sem separadores fortes) + = opcional + número
+  const re = new RegExp(`${emojiSrc}\\s*([^=·,.\\d\\n]{0,20}?)\\s*=?\\s*(\\d{1,2})(?![\\d.,])`, "gu");
+  const itens: ItemCena[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(texto)) !== null) {
+    const emoji = m[1];
+    const label = (m[2] || "").replace(/\s+/g, " ").trim();
+    const quantidade = parseInt(m[3], 10);
+    if (Number.isFinite(quantidade) && quantidade <= 30) {
+      itens.push({ emoji, label, quantidade });
+    }
+  }
+  return itens;
+}
+
+function matchOpcaoEmoji(it: ItemCena, opcoes: string[]): number {
+  // 1) opção contém o mesmo emoji
+  let idx = opcoes.findIndex((o) => o.includes(it.emoji));
+  if (idx >= 0) return idx;
+  // 2) fallback: match por rótulo textual
+  if (it.label) return matchOpcao(it.label, opcoes);
+  return -1;
+
+
 function estiloResposta(
   escolha: number | null,
   correta: number,
