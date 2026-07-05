@@ -99,14 +99,6 @@ const aula: Aula = {
     resposta: "🍇 Uva.",
     explicacao:
       "A uva teve 7 votos — é o número maior. Então é a fruta com MAIS votos.",
-    visual: {
-      tipo: "grupos",
-      grupos: [
-        { imagemUrl: macaImg, quantidade: 5, rotulo: "🍎 Maçã · 5", cor: "#EF4444" },
-        { imagemUrl: bananaImg, quantidade: 3, rotulo: "🍌 Banana · 3", cor: "#FACC15" },
-        { imagemUrl: uvaImg, quantidade: 7, rotulo: "🍇 Uva · 7", cor: "#8B5CF6" },
-      ],
-    },
   },
 
   exercicios: [
