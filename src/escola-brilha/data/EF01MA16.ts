@@ -115,12 +115,17 @@ const aula: Aula = {
     explicacao:
       "Depois do almoço vem o recreio — hora de brincar 🎮. Só à noite 🌙 é que vamos dormir.",
     visual: {
-      tipo: "grupos",
-      grupos: [
-        { imagemUrl: almocoImg, quantidade: 1, rotulo: "Almoço 🍽️", cor: "#F97316" },
-        { imagemUrl: brincarImg, quantidade: 1, rotulo: "Brincar 🎮", cor: "#22C55E" },
-      ],
+      tipo: "cena",
+      pergunta: "O que vem depois do almoço?",
+      posicao: "aoLado",
+      referenciaImg: almocoImg,
+      referenciaLabel: "Almoço 🍽️",
+      sujeitoImg: brincarImg,
+      sujeitoLabel: "Brincar 🎮",
+      opcoes: ["Dormir", "Brincar"],
+      correta: 1,
     },
+
   },
 
   exercicios: [
