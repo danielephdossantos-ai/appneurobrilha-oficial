@@ -411,6 +411,27 @@ export type Aula = {
       }
     | {
         /**
+         * Gráfico de colunas simples (barra vertical proporcional ao valor)
+         * com pergunta de múltipla escolha. Ideal para EF01MA21 — leitura
+         * de gráficos: cada coluna mostra ícone + valor numérico + barra
+         * cuja ALTURA representa a quantidade.
+         */
+        tipo: "graficoQuiz";
+        titulo: string;
+        instrucao?: string;
+        colunas: Array<{
+          imagemUrl: string;
+          rotulo: string;
+          valor: number;
+          cor?: string;
+        }>;
+        pergunta: string;
+        opcoes: string[];
+        correta: number;
+        acerto?: string;
+        erro?: string;
+    | {
+        /**
          * Conta visual de + ou − com imagens aparecendo (soma) ou
          * sumindo (subtração). OBRIGATÓRIO para Ed. Infantil, 1º e 2º Ano
          * — nunca mostrar contas só em texto.
