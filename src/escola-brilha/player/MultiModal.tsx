@@ -168,6 +168,9 @@ function JogoArrastar({
   const buscarAlvoVisual = (nome: string) =>
     jogo.alvosVisuais?.find((a) => a.nome === nome);
 
+  const imagemDoItem = (item: string): string | undefined =>
+    jogo.pares.find((p) => p.item === item)?.itemImagem ?? jogo.itemImagem;
+
   const contarNoAlvo = (mapa: Record<string, string | null>, alvo: string) =>
     Object.values(mapa).filter((a) => a === alvo).length;
 
@@ -310,13 +313,19 @@ function JogoArrastar({
                             : { duration: 1.6, repeat: Infinity }
                         }
                       />
-                      {/* Item entrando (só faz sentido para 'alimentar' — capacidade 1). */}
-                      {jogo.itemImagem &&
-                        visual.capacidade === 1 &&
-                        quantosNoPrato > 0 && (
+                      {(() => {
+                        const primeiro = Object.entries(drops).find(
+                          ([, a]) => a === alvo,
+                        );
+                        const imgChomp = primeiro
+                          ? imagemDoItem(primeiro[0])
+                          : undefined;
+                        if (!imgChomp || visual.capacidade !== 1 || quantosNoPrato <= 0)
+                          return null;
+                        return (
                           <motion.img
                             key={`chomp-${quantosNoPrato}`}
-                            src={jogo.itemImagem}
+                            src={imgChomp}
                             alt=""
                             initial={{ y: -60, opacity: 0, scale: 1.2 }}
                             animate={{
@@ -334,33 +343,45 @@ function JogoArrastar({
                             }}
                             className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
                           />
-                        )}
+                        );
+                      })()}
                     </div>
-                    {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
-                    {jogo.itemImagem &&
-                      (visual.capacidade ?? 0) > 1 &&
-                      quantosNoPrato > 0 && (
+                    {(visual.capacidade ?? 0) > 1 && quantosNoPrato > 0 && (
                         <div
                           className="w-[88%] mx-auto rounded-2xl bg-white/95 border-4 p-2 flex flex-wrap gap-1 justify-center"
                           style={{ borderColor: cor }}
                         >
                           {Object.entries(drops)
                             .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <motion.img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                initial={{ y: -20, opacity: 0, scale: 0.6 }}
-                                animate={{ y: 0, opacity: 1, scale: 1 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
-                              />
-                            ))}
+                            .map(([item]) => {
+                              const img = imagemDoItem(item);
+                              return img ? (
+                                <motion.img
+                                  key={item}
+                                  src={img}
+                                  alt=""
+                                  initial={{ y: -20, opacity: 0, scale: 0.6 }}
+                                  animate={{ y: 0, opacity: 1, scale: 1 }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDrops((d) => ({ ...d, [item]: null }));
+                                  }}
+                                  className="h-8 w-8 sm:h-10 sm:w-10 object-contain cursor-pointer drop-shadow"
+                                />
+                              ) : (
+                                <span
+                                  key={item}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDrops((d) => ({ ...d, [item]: null }));
+                                  }}
+                                  className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-xs font-black cursor-pointer"
+                                >
+                                  {item}
+                                </span>
+                              );
+                            })}
                         </div>
                       )}
 
@@ -416,35 +437,34 @@ function JogoArrastar({
                         boxShadow: `inset 0 4px 12px ${cor}55`,
                       }}
                     >
-                      {jogo.itemImagem && quantosNoPrato > 0
-                        ? Object.entries(drops)
-                            .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <img
-                                key={item}
-                                src={jogo.itemImagem}
-                                alt=""
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                              />
-                            ))
-                        : Object.entries(drops)
-                            .filter(([, a]) => a === alvo)
-                            .map(([item]) => (
-                              <span
-                                key={item}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDrops((d) => ({ ...d, [item]: null }));
-                                }}
-                                className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
-                              >
-                                {item}
-                              </span>
-                            ))}
+                      {Object.entries(drops)
+                        .filter(([, a]) => a === alvo)
+                        .map(([item]) => {
+                          const img = imagemDoItem(item);
+                          return img ? (
+                            <img
+                              key={item}
+                              src={img}
+                              alt=""
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setDrops((d) => ({ ...d, [item]: null }));
+                              }}
+                              className="h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                            />
+                          ) : (
+                            <span
+                              key={item}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setDrops((d) => ({ ...d, [item]: null }));
+                              }}
+                              className="px-2 py-1 rounded-lg bg-white text-[#0d1f55] text-sm font-black cursor-pointer"
+                            >
+                              {item}
+                            </span>
+                          );
+                        })}
                     </div>
                     {visual.capacidade !== undefined && (
                       <div className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white drop-shadow">
@@ -488,7 +508,8 @@ function JogoArrastar({
           .filter(([, a]) => a === null)
           .map(([item]) => {
             const sel = selecionado === item;
-            if (jogo.itemImagem) {
+            const img = imagemDoItem(item);
+            if (img) {
               return (
                 <button
                   type="button"
@@ -504,7 +525,7 @@ function JogoArrastar({
                   aria-label={item}
                 >
                   <img
-                    src={jogo.itemImagem}
+                    src={img}
                     alt=""
                     className="h-10 w-10 object-contain"
                     draggable={false}
