@@ -508,7 +508,8 @@ function JogoArrastar({
           .filter(([, a]) => a === null)
           .map(([item]) => {
             const sel = selecionado === item;
-            if (jogo.itemImagem) {
+            const img = imagemDoItem(item);
+            if (img) {
               return (
                 <button
                   type="button"
@@ -524,7 +525,7 @@ function JogoArrastar({
                   aria-label={item}
                 >
                   <img
-                    src={jogo.itemImagem}
+                    src={img}
                     alt=""
                     className="h-10 w-10 object-contain"
                     draggable={false}
