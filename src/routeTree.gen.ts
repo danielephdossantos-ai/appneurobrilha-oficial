@@ -23,6 +23,7 @@ import { Route as NeuroTreinoRouteImport } from './routes/neuro-treino'
 import { Route as MissaoTrabalhoRouteImport } from './routes/missao-trabalho'
 import { Route as MissaoTarefaRouteImport } from './routes/missao-tarefa'
 import { Route as MissaoProvaRouteImport } from './routes/missao-prova'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MatrizPedagogicaRouteImport } from './routes/matriz-pedagogica'
 import { Route as MascotesRouteImport } from './routes/mascotes'
 import { Route as LojaMascotesRouteImport } from './routes/loja-mascotes'
@@ -50,8 +51,11 @@ import { Route as EscolaBrilhaCodigoRouteImport } from './routes/escola-brilha.$
 import { Route as BnccCodigoRouteImport } from './routes/bncc.$codigo'
 import { Route as AnamneseChildIdRouteImport } from './routes/anamnese.$childId'
 import { Route as AjusteDificuldadesChildIdRouteImport } from './routes/ajuste-dificuldades.$childId'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as AnamneseChildIdResultadoRouteImport } from './routes/anamnese.$childId.resultado'
 import { Route as AnamneseChildIdEscalasRouteImport } from './routes/anamnese.$childId.escalas'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const TrilhasRoute = TrilhasRouteImport.update({
   id: '/trilhas',
@@ -121,6 +125,11 @@ const MissaoTarefaRoute = MissaoTarefaRouteImport.update({
 const MissaoProvaRoute = MissaoProvaRouteImport.update({
   id: '/missao-prova',
   path: '/missao-prova',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatrizPedagogicaRoute = MatrizPedagogicaRouteImport.update({
@@ -259,6 +268,18 @@ const AjusteDificuldadesChildIdRoute =
     path: '/ajuste-dificuldades/$childId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AnamneseChildIdResultadoRoute =
   AnamneseChildIdResultadoRouteImport.update({
     id: '/resultado',
@@ -270,6 +291,12 @@ const AnamneseChildIdEscalasRoute = AnamneseChildIdEscalasRouteImport.update({
   path: '/escalas',
   getParentRoute: () => AnamneseChildIdRoute,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -290,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
+  '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -304,6 +332,8 @@ export interface FileRoutesByFullPath {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -313,6 +343,7 @@ export interface FileRoutesByFullPath {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
@@ -334,6 +365,7 @@ export interface FileRoutesByTo {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
+  '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -348,6 +380,8 @@ export interface FileRoutesByTo {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -357,6 +391,7 @@ export interface FileRoutesByTo {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin': typeof AdminIndexRoute
   '/escola-brilha': typeof EscolaBrilhaIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
@@ -380,6 +415,7 @@ export interface FileRoutesById {
   '/loja-mascotes': typeof LojaMascotesRoute
   '/mascotes': typeof MascotesRoute
   '/matriz-pedagogica': typeof MatrizPedagogicaRoute
+  '/mcp': typeof McpRoute
   '/missao-prova': typeof MissaoProvaRoute
   '/missao-tarefa': typeof MissaoTarefaRoute
   '/missao-trabalho': typeof MissaoTrabalhoRoute
@@ -394,6 +430,8 @@ export interface FileRoutesById {
   '/terapeuta-brilha': typeof TerapeutaBrilhaRoute
   '/termos': typeof TermosRoute
   '/trilhas': typeof TrilhasRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/ajuste-dificuldades/$childId': typeof AjusteDificuldadesChildIdRoute
   '/anamnese/$childId': typeof AnamneseChildIdRouteWithChildren
   '/bncc/$codigo': typeof BnccCodigoRoute
@@ -403,6 +441,7 @@ export interface FileRoutesById {
   '/neuro-treino/configurar': typeof NeuroTreinoConfigurarRoute
   '/admin/': typeof AdminIndexRoute
   '/escola-brilha/': typeof EscolaBrilhaIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/anamnese/$childId/escalas': typeof AnamneseChildIdEscalasRoute
   '/anamnese/$childId/resultado': typeof AnamneseChildIdResultadoRoute
 }
@@ -427,6 +466,7 @@ export interface FileRouteTypes {
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
+    | '/mcp'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -441,6 +481,8 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -450,6 +492,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin/'
     | '/escola-brilha/'
+    | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   fileRoutesByTo: FileRoutesByTo
@@ -471,6 +514,7 @@ export interface FileRouteTypes {
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
+    | '/mcp'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -485,6 +529,8 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -494,6 +540,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin'
     | '/escola-brilha'
+    | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   id:
@@ -516,6 +563,7 @@ export interface FileRouteTypes {
     | '/loja-mascotes'
     | '/mascotes'
     | '/matriz-pedagogica'
+    | '/mcp'
     | '/missao-prova'
     | '/missao-tarefa'
     | '/missao-trabalho'
@@ -530,6 +578,8 @@ export interface FileRouteTypes {
     | '/terapeuta-brilha'
     | '/termos'
     | '/trilhas'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/ajuste-dificuldades/$childId'
     | '/anamnese/$childId'
     | '/bncc/$codigo'
@@ -539,6 +589,7 @@ export interface FileRouteTypes {
     | '/neuro-treino/configurar'
     | '/admin/'
     | '/escola-brilha/'
+    | '/.mcp/invoke-tool/$tool'
     | '/anamnese/$childId/escalas'
     | '/anamnese/$childId/resultado'
   fileRoutesById: FileRoutesById
@@ -562,6 +613,7 @@ export interface RootRouteChildren {
   LojaMascotesRoute: typeof LojaMascotesRoute
   MascotesRoute: typeof MascotesRoute
   MatrizPedagogicaRoute: typeof MatrizPedagogicaRoute
+  McpRoute: typeof McpRoute
   MissaoProvaRoute: typeof MissaoProvaRoute
   MissaoTarefaRoute: typeof MissaoTarefaRoute
   MissaoTrabalhoRoute: typeof MissaoTrabalhoRoute
@@ -576,12 +628,15 @@ export interface RootRouteChildren {
   TerapeutaBrilhaRoute: typeof TerapeutaBrilhaRoute
   TermosRoute: typeof TermosRoute
   TrilhasRoute: typeof TrilhasRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AjusteDificuldadesChildIdRoute: typeof AjusteDificuldadesChildIdRoute
   AnamneseChildIdRoute: typeof AnamneseChildIdRouteWithChildren
   BnccCodigoRoute: typeof BnccCodigoRoute
   EscolaBrilhaCodigoRoute: typeof EscolaBrilhaCodigoRoute
   EscolaBrilhaProfessoresRoute: typeof EscolaBrilhaProfessoresRoute
   EscolaBrilhaIndexRoute: typeof EscolaBrilhaIndexRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -682,6 +737,13 @@ declare module '@tanstack/react-router' {
       path: '/missao-prova'
       fullPath: '/missao-prova'
       preLoaderRoute: typeof MissaoProvaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matriz-pedagogica': {
@@ -873,6 +935,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AjusteDificuldadesChildIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/anamnese/$childId/resultado': {
       id: '/anamnese/$childId/resultado'
       path: '/resultado'
@@ -886,6 +962,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/anamnese/$childId/escalas'
       preLoaderRoute: typeof AnamneseChildIdEscalasRouteImport
       parentRoute: typeof AnamneseChildIdRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -947,6 +1030,7 @@ const rootRouteChildren: RootRouteChildren = {
   LojaMascotesRoute: LojaMascotesRoute,
   MascotesRoute: MascotesRoute,
   MatrizPedagogicaRoute: MatrizPedagogicaRoute,
+  McpRoute: McpRoute,
   MissaoProvaRoute: MissaoProvaRoute,
   MissaoTarefaRoute: MissaoTarefaRoute,
   MissaoTrabalhoRoute: MissaoTrabalhoRoute,
@@ -961,12 +1045,16 @@ const rootRouteChildren: RootRouteChildren = {
   TerapeutaBrilhaRoute: TerapeutaBrilhaRoute,
   TermosRoute: TermosRoute,
   TrilhasRoute: TrilhasRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AjusteDificuldadesChildIdRoute: AjusteDificuldadesChildIdRoute,
   AnamneseChildIdRoute: AnamneseChildIdRouteWithChildren,
   BnccCodigoRoute: BnccCodigoRoute,
   EscolaBrilhaCodigoRoute: EscolaBrilhaCodigoRoute,
   EscolaBrilhaProfessoresRoute: EscolaBrilhaProfessoresRoute,
   EscolaBrilhaIndexRoute: EscolaBrilhaIndexRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
