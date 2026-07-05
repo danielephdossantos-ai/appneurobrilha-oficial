@@ -99,8 +99,8 @@ export function ContagemInterativa({
       </div>
 
       {/* Itens grandes — toque para contar */}
-      <div className="rounded-2xl bg-[#FFF7DC] border-2 border-dashed border-[#FBBF24]/60 p-4 sm:p-6 mb-4">
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+      <div className="rounded-2xl bg-[#FFF7DC] border-2 border-dashed border-[#FBBF24]/60 p-3 sm:p-6 mb-4">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-6">
           {itens.map((idx) => {
             const pos = contados.indexOf(idx);
             const foiContado = pos !== -1;
@@ -111,7 +111,7 @@ export function ContagemInterativa({
                 whileTap={{ scale: 0.9 }}
                 animate={foiContado ? { scale: [1, 1.2, 1] } : { scale: 1 }}
                 transition={{ duration: 0.35 }}
-                className="relative w-24 h-24 sm:w-32 sm:h-32 grid place-items-center active:scale-95"
+                className="relative w-14 h-14 sm:w-32 sm:h-32 grid place-items-center active:scale-95"
                 aria-label={`${nomeItem} ${idx + 1}`}
               >
                 <img
@@ -126,7 +126,7 @@ export function ContagemInterativa({
                       initial={{ scale: 0, y: -10 }}
                       animate={{ scale: 1, y: 0 }}
                       exit={{ scale: 0 }}
-                      className="absolute -top-3 -right-3 h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#22C55E] text-white grid place-items-center text-3xl sm:text-4xl font-black shadow-lg border-4 border-white"
+                      className="absolute -top-1 -right-1 sm:-top-3 sm:-right-3 h-6 w-6 sm:h-14 sm:w-14 rounded-full bg-[#22C55E] text-white grid place-items-center text-sm sm:text-4xl font-black shadow-lg border-2 sm:border-4 border-white"
                     >
                       {pos + 1}
                     </motion.div>
@@ -145,21 +145,21 @@ export function ContagemInterativa({
 
       {/* Contador grande */}
       <div className="flex items-center justify-between gap-3 mb-2">
-        <div className="flex-1 rounded-2xl bg-[#0d1f55] text-white p-4 text-center">
+        <div className="flex-1 rounded-2xl bg-[#0d1f55] text-white p-2 sm:p-4 text-center">
           <div className="text-[10px] font-black uppercase tracking-widest text-white/70">
             Contando
           </div>
-          <div className="text-5xl sm:text-6xl font-black tabular-nums">
+          <div className="text-3xl sm:text-6xl font-black tabular-nums">
             {contados.length}
           </div>
         </div>
         <button
           onClick={reiniciar}
           disabled={contados.length === 0}
-          className="h-16 w-16 rounded-2xl bg-white border-2 border-[#0d1f55]/20 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
+          className="h-11 w-11 sm:h-16 sm:w-16 rounded-2xl bg-white border-2 border-[#0d1f55]/20 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
           aria-label="Reiniciar contagem"
         >
-          <RotateCcw className="h-6 w-6" />
+          <RotateCcw className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
       </div>
 
