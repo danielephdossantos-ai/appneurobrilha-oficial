@@ -844,7 +844,7 @@ function JogoLigar({
     <Secao icon={Link2} rotulo="Ligue" cor="#60A5FA">
       <p className="font-black text-lg mb-1">{jogo.titulo}</p>
       <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
-      <div ref={wrapRef} className="relative">
+      <div ref={wrapRef} className="relative w-full overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{ zIndex: 1 }}
@@ -857,13 +857,13 @@ function JogoLigar({
               x2={l.x2}
               y2={l.y2}
               stroke={l.ok === false ? "#EF4444" : l.ok === true ? "#22C55E" : l.cor}
-              strokeWidth={5}
+              strokeWidth={4}
               strokeLinecap="round"
             />
           ))}
         </svg>
-        <div className="grid grid-cols-[1fr_80px_1fr] gap-2 relative items-center" style={{ zIndex: 2 }}>
-          <div className="space-y-4">
+        <div className="grid grid-cols-[minmax(0,1fr)_16px_minmax(0,1fr)] sm:grid-cols-[minmax(0,1fr)_60px_minmax(0,1fr)] gap-1.5 sm:gap-2 relative items-center" style={{ zIndex: 2 }}>
+          <div className="space-y-3 min-w-0">
             {jogo.pares.map((p) => {
               const ligado = ligacoes[p.a];
               const sel = selA === p.a;
@@ -873,7 +873,7 @@ function JogoLigar({
                   key={p.a}
                   ref={(el) => { refsA.current[p.a] = el; }}
                   onClick={() => (ligado ? desligar(p.a) : clicarA(p.a))}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-sm border-2 transition-all flex items-center gap-2 ${
+                  className={`w-full min-w-0 text-left px-2 py-2 rounded-xl font-black text-xs border-2 transition-all flex items-center gap-1.5 ${
                     sel
                       ? "bg-[#FBBF24] text-[#0d1f55] border-white scale-105"
                       : ligado
@@ -882,7 +882,7 @@ function JogoLigar({
                   }`}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-black uppercase tracking-wider mb-1 opacity-70">
+                    <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider mb-1 opacity-70 break-words leading-tight">
                       {p.a}
                     </div>
                     {temImg && (
@@ -892,20 +892,20 @@ function JogoLigar({
                             key={k}
                             src={p.aImagem!}
                             alt=""
-                            className="h-7 w-7 object-contain"
+                            className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
                             loading="lazy"
                           />
                         ))}
                       </div>
                     )}
                   </div>
-                  <span className="inline-block w-3 h-3 rounded-full bg-[#60A5FA] flex-shrink-0" />
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#60A5FA] shrink-0" />
                 </button>
               );
             })}
           </div>
           <div aria-hidden />
-          <div className="space-y-4">
+          <div className="space-y-3 min-w-0">
             {colB.map((b) => {
               const usado = Object.values(ligacoes).includes(b);
               const par = jogo.pares.find((p) => p.b === b);
@@ -915,19 +915,19 @@ function JogoLigar({
                   key={b}
                   ref={(el) => { refsB.current[b] = el; }}
                   onClick={() => clicarB(b)}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black text-2xl border-2 transition-all flex items-center gap-2 ${
+                  className={`w-full min-w-0 text-left px-2 py-2 rounded-xl font-black text-sm sm:text-lg border-2 transition-all flex items-center gap-1.5 ${
                     usado
                       ? "bg-white/90 text-[#0d1f55] border-[#F472B6]"
                       : "bg-white/20 text-white border-transparent"
                   } ${selA ? "hover:scale-105" : ""}`}
                 >
-                  <span className="inline-block w-3 h-3 rounded-full bg-[#F472B6] flex-shrink-0" />
-                  <span className="flex-1 text-center">{b}</span>
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#F472B6] shrink-0" />
+                  <span className="flex-1 min-w-0 text-center break-words leading-tight">{b}</span>
                   {temImg && (
                     <img
                       src={par!.bImagem!}
                       alt=""
-                      className="h-8 w-8 object-contain"
+                      className="h-6 w-6 sm:h-8 sm:w-8 object-contain shrink-0"
                       loading="lazy"
                     />
                   )}
