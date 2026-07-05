@@ -490,6 +490,8 @@ const aula: Aula = {
       },
     ],
   },
+
+  proximaHabilidade: { codigo: "EF01MA15" },
 };
 
 export default aula;
