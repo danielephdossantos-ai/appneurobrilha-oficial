@@ -119,13 +119,8 @@ const aula: Aula = {
       "Desafio Brilha: ajude o Prefeito a marcar qual forma cada objeto tem!",
     resposta: "Dado = Cubo · Bola = Esfera · Lata = Cilindro · Casquinha = Cone.",
     visual: {
-      cena: [
-        { personagem: "Cubo 🟦", itemImagemUrl: cuboImg, quantidade: 1, cor: "#3B82F6" },
-        { personagem: "Esfera ⚽", itemImagemUrl: esferaImg, quantidade: 1, cor: "#10B981" },
-        { personagem: "Cilindro 🥫", itemImagemUrl: cilindroImg, quantidade: 1, cor: "#8B5CF6" },
-        { personagem: "Cone 🍦", itemImagemUrl: coneImg, quantidade: 1, cor: "#F97316" },
-      ],
       perguntas: [
+
         {
           pergunta: "O DADO tem forma de…",
           opcoes: ["Cubo", "Esfera", "Cone"],
