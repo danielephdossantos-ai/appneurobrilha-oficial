@@ -168,6 +168,11 @@ function JogoArrastar({
   const buscarAlvoVisual = (nome: string) =>
     jogo.alvosVisuais?.find((a) => a.nome === nome);
 
+  // Imagem específica de cada item (com fallback para a imagem global).
+  const imgDoItem = (item: string) =>
+    jogo.pares.find((p) => p.item === item)?.itemImagem ?? jogo.itemImagem;
+  const temImagemDeItem = !!jogo.itemImagem || jogo.pares.some((p) => p.itemImagem);
+
   const contarNoAlvo = (mapa: Record<string, string | null>, alvo: string) =>
     Object.values(mapa).filter((a) => a === alvo).length;
 
