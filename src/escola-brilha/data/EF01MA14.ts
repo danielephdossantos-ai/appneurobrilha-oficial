@@ -294,7 +294,6 @@ const aula: Aula = {
       titulo: "Fase 2 · Arraste para a Caixa Certa",
       instrucao:
         "Cada objeto tem uma forma. Arraste pra caixa da forma correspondente.",
-      itemImagem: bolaImg,
       alvosVisuais: [
         { nome: "🔵 CÍRCULO", cor: "#3B82F6", capacidade: 1, imagemUrl: circuloImg },
         { nome: "🟨 QUADRADO", cor: "#FBBF24", capacidade: 1, imagemUrl: quadradoImg },
@@ -302,10 +301,10 @@ const aula: Aula = {
         { nome: "🔺 TRIÂNGULO", cor: "#EF4444", capacidade: 1, imagemUrl: trianguloImg },
       ],
       pares: [
-        { item: "⚽ Bola", alvo: "🔵 CÍRCULO" },
-        { item: "🪟 Janela", alvo: "🟨 QUADRADO" },
-        { item: "📱 Celular", alvo: "▭ RETÂNGULO" },
-        { item: "🍕 Pizza", alvo: "🔺 TRIÂNGULO" },
+        { item: "⚽ Bola", alvo: "🔵 CÍRCULO", itemImagem: bolaImg },
+        { item: "🪟 Janela", alvo: "🟨 QUADRADO", itemImagem: janelaImg },
+        { item: "📱 Celular", alvo: "▭ RETÂNGULO", itemImagem: celularImg },
+        { item: "🍕 Pizza", alvo: "🔺 TRIÂNGULO", itemImagem: pizzaImg },
       ],
     },
 
