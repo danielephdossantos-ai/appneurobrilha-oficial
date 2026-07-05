@@ -308,23 +308,23 @@ const aula: Aula = {
       ],
     },
 
-    // ==== FASE 5 · Monte a Cidade — ORDENAR ====
+    // ==== FASE 4 · Monte a Cidade — ORDENAR ====
     {
       tipo: "ordenar",
       titulo: "Fase 4 · Monte a Cidade das Formas",
       instrucao:
-        "Coloque as peças na ORDEM da cidade: primeiro a CASA (cubo), depois a ÁRVORE (cilindro) e a TORRE PONTUDA (cone). No topo, a bandeira esférica!",
+        "Coloque as peças na ORDEM: primeiro a BASE (Presente = Cubo), depois o POSTE (Vela = Cilindro), a TORRE (Casquinha = Cone) e, no topo, o BALÃO (Bola = Esfera).",
       itens: [
-        "🏠 Casa (cubo)",
-        "🌳 Árvore (cilindro)",
-        "🍦 Torre (cone)",
-        "⚽ Bandeira (esfera)",
+        "Presente (cubo)",
+        "Vela (cilindro)",
+        "Casquinha (cone)",
+        "Bola (esfera)",
       ],
       imagens: [
-        { imagemUrl: cuboImg, quantidade: 1, rotulo: "🏠 Casa = Cubo", cor: "#3B82F6" },
-        { imagemUrl: cilindroImg, quantidade: 1, rotulo: "🌳 Árvore = Cilindro", cor: "#8B5CF6" },
-        { imagemUrl: coneImg, quantidade: 1, rotulo: "🍦 Torre = Cone", cor: "#F97316" },
-        { imagemUrl: esferaImg, quantidade: 1, rotulo: "⚽ Bandeira = Esfera", cor: "#10B981" },
+        { imagemUrl: presenteImg, quantidade: 1, rotulo: "Presente = Cubo", cor: "#3B82F6" },
+        { imagemUrl: velaImg, quantidade: 1, rotulo: "Vela = Cilindro", cor: "#8B5CF6" },
+        { imagemUrl: casquinhaImg, quantidade: 1, rotulo: "Casquinha = Cone", cor: "#F97316" },
+        { imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola = Esfera", cor: "#10B981" },
       ],
     },
 
