@@ -290,7 +290,13 @@ function RodadaNivel({
           className="rounded-2xl bg-white/10 border border-white/20 p-3"
         >
           <p className="font-black mb-3">{q.pergunta}</p>
-          <VisualQuestao visual={q.visual} />
+          <VisualQuestao
+            visual={q.visual}
+            opcoes={q.opcoes}
+            correta={q.correta}
+            escolha={escolha}
+            onEscolher={escolher}
+          />
 
           <div className="space-y-2">
             {q.opcoes.map((op, k) => {
@@ -343,8 +349,72 @@ function RodadaNivel({
 
 const CORES_G = ["#F472B6", "#60A5FA", "#FBBF24", "#34D399", "#A78BFA", "#FB923C"];
 
-function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
+/** Normaliza texto pra comparar rótulo da caixa visual com o texto da opção. */
+function norm(s: string): string {
+  return (s ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Descobre qual opção este rótulo representa — pra tornar a caixa clicável. */
+function matchOpcao(rotulo: string | undefined, opcoes: string[]): number {
+  if (!rotulo || !opcoes?.length) return -1;
+  const r = norm(rotulo);
+  if (!r) return -1;
+  // 1) match exato (após normalizar)
+  let idx = opcoes.findIndex((o) => norm(o) === r);
+  if (idx >= 0) return idx;
+  // 2) opção contida no rótulo (ex: rotulo "🐶 Cachorro · 2" contém "Cachorro")
+  idx = opcoes.findIndex((o) => {
+    const n = norm(o);
+    return n && r.includes(n);
+  });
+  if (idx >= 0) return idx;
+  // 3) rótulo contido na opção
+  idx = opcoes.findIndex((o) => {
+    const n = norm(o);
+    return n && n.includes(r);
+  });
+  return idx;
+}
+
+function estiloResposta(
+  escolha: number | null,
+  correta: number,
+  idxOpcao: number,
+  corBase: string,
+): { borderColor: string; background: string; ring?: string } {
+  if (idxOpcao < 0 || escolha === null) {
+    return { borderColor: corBase, background: `${corBase}18` };
+  }
+  if (idxOpcao === correta) {
+    return { borderColor: "#22C55E", background: "#22C55E33" };
+  }
+  if (idxOpcao === escolha && idxOpcao !== correta) {
+    return { borderColor: "#EF4444", background: "#EF444433" };
+  }
+  return { borderColor: corBase, background: `${corBase}18` };
+}
+
+function VisualQuestao({
+  visual,
+  opcoes,
+  correta,
+  escolha,
+  onEscolher,
+}: {
+  visual: QuizItem["visual"];
+  opcoes?: string[];
+  correta?: number;
+  escolha?: number | null;
+  onEscolher?: (idx: number) => void;
+}) {
   if (!visual) return null;
+  const podeClicar = !!opcoes && !!onEscolher && (escolha ?? null) === null;
 
   if (visual.tipo === "itens") {
     return (
@@ -372,23 +442,29 @@ function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
     return (
       <div className={`mb-3 grid gap-2 ${visual.grupos.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
         {visual.grupos.map((g, gi) => {
-          const cor = g.cor ?? CORES_G[gi % CORES_G.length];
+          const corBase = g.cor ?? CORES_G[gi % CORES_G.length];
+          const idxOpcao = opcoes ? matchOpcao(g.rotulo, opcoes) : -1;
+          const clicavel = podeClicar && idxOpcao >= 0;
+          const est = estiloResposta(escolha ?? null, correta ?? -1, idxOpcao, corBase);
+          const Comp: any = clicavel ? "button" : "div";
           return (
-            <div
+            <Comp
               key={gi}
-              className="rounded-2xl border-4 p-2"
-              style={{ borderColor: cor, background: `${cor}18` }}
+              onClick={clicavel ? () => onEscolher!(idxOpcao) : undefined}
+              type={clicavel ? "button" : undefined}
+              className={`rounded-2xl border-4 p-2 text-left w-full transition-all ${clicavel ? "hover:scale-[1.02] active:scale-[0.98] cursor-pointer" : ""}`}
+              style={{ borderColor: est.borderColor, background: est.background }}
             >
               <div className="flex items-center justify-between mb-1">
                 <span
                   className="text-[9px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
-                  style={{ background: cor }}
+                  style={{ background: corBase }}
                 >
                   {g.rotulo ?? `Grupo ${gi + 1}`}
                 </span>
                 <span
                   className="h-6 w-6 rounded-full text-xs font-black grid place-items-center border-2 border-white"
-                  style={{ background: "#fff", color: cor }}
+                  style={{ background: "#fff", color: corBase }}
                 >
                   {g.quantidade}
                 </span>
@@ -403,7 +479,12 @@ function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
                   />
                 ))}
               </div>
-            </div>
+              {clicavel && (
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/70 text-center mt-1">
+                  👆 Toque pra responder
+                </div>
+              )}
+            </Comp>
           );
         })}
       </div>
@@ -414,16 +495,22 @@ function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
     return (
       <div className={`mb-3 grid gap-2 ${visual.lados.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
         {visual.lados.map((l, li) => {
-          const cor = l.cor ?? CORES_G[li % CORES_G.length];
+          const corBase = l.cor ?? CORES_G[li % CORES_G.length];
+          const idxOpcao = opcoes ? matchOpcao(l.rotulo, opcoes) : -1;
+          const clicavel = podeClicar && idxOpcao >= 0;
+          const est = estiloResposta(escolha ?? null, correta ?? -1, idxOpcao, corBase);
+          const Comp: any = clicavel ? "button" : "div";
           return (
-            <div
+            <Comp
               key={li}
-              className="rounded-2xl border-4 p-2"
-              style={{ borderColor: cor, background: `${cor}18` }}
+              onClick={clicavel ? () => onEscolher!(idxOpcao) : undefined}
+              type={clicavel ? "button" : undefined}
+              className={`rounded-2xl border-4 p-2 w-full text-left transition-all ${clicavel ? "hover:scale-[1.02] active:scale-[0.98] cursor-pointer" : ""}`}
+              style={{ borderColor: est.borderColor, background: est.background }}
             >
               <div
                 className="text-[10px] font-black uppercase tracking-widest text-white text-center py-1 rounded-lg mb-1"
-                style={{ background: cor }}
+                style={{ background: corBase }}
               >
                 {l.rotulo}
               </div>
@@ -437,7 +524,12 @@ function VisualQuestao({ visual }: { visual: QuizItem["visual"] }) {
                   />
                 ))}
               </div>
-            </div>
+              {clicavel && (
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/70 text-center mt-1">
+                  👆 Toque pra responder
+                </div>
+              )}
+            </Comp>
           );
         })}
       </div>
