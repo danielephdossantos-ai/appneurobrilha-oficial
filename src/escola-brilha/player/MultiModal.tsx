@@ -316,30 +316,37 @@ function JogoArrastar({
                         }
                       />
                       {/* Item entrando (só faz sentido para 'alimentar' — capacidade 1). */}
-                      {jogo.itemImagem &&
+                      {temImagemDeItem &&
                         visual.capacidade === 1 &&
-                        quantosNoPrato > 0 && (
-                          <motion.img
-                            key={`chomp-${quantosNoPrato}`}
-                            src={jogo.itemImagem}
-                            alt=""
-                            initial={{ y: -60, opacity: 0, scale: 1.2 }}
-                            animate={{
-                              y: [-60, 0, 8],
-                              opacity: [0, 1, 1, 0],
-                              scale: [1.2, 1, 0.6],
-                            }}
-                            transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const first = Object.entries(drops).find(
-                                ([, a]) => a === alvo,
-                              );
-                              if (first) setDrops((d) => ({ ...d, [first[0]]: null }));
-                            }}
-                            className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
-                          />
-                        )}
+                        quantosNoPrato > 0 &&
+                        (() => {
+                          const first = Object.entries(drops).find(
+                            ([, a]) => a === alvo,
+                          );
+                          const itemNome = first?.[0];
+                          const itemImg = itemNome ? imgDoItem(itemNome) : undefined;
+                          if (!itemImg) return null;
+                          return (
+                            <motion.img
+                              key={`chomp-${quantosNoPrato}`}
+                              src={itemImg}
+                              alt=""
+                              initial={{ y: -60, opacity: 0, scale: 1.2 }}
+                              animate={{
+                                y: [-60, 0, 8],
+                                opacity: [0, 1, 1, 0],
+                                scale: [1.2, 1, 0.6],
+                              }}
+                              transition={{ duration: 1.2, times: [0, 0.4, 0.8, 1] }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (itemNome)
+                                  setDrops((d) => ({ ...d, [itemNome]: null }));
+                              }}
+                              className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
+                            />
+                          );
+                        })()}
                     </div>
                     {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
                     {jogo.itemImagem &&
