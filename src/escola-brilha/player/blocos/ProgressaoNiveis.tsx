@@ -290,7 +290,13 @@ function RodadaNivel({
           className="rounded-2xl bg-white/10 border border-white/20 p-3"
         >
           <p className="font-black mb-3">{q.pergunta}</p>
-          <VisualQuestao visual={q.visual} />
+          <VisualQuestao
+            visual={q.visual}
+            opcoes={q.opcoes}
+            correta={q.correta}
+            escolha={escolha}
+            onEscolher={escolher}
+          />
 
           <div className="space-y-2">
             {q.opcoes.map((op, k) => {
