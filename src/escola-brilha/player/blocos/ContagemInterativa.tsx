@@ -145,21 +145,21 @@ export function ContagemInterativa({
 
       {/* Contador grande */}
       <div className="flex items-center justify-between gap-3 mb-2">
-        <div className="flex-1 rounded-2xl bg-[#0d1f55] text-white p-4 text-center">
+        <div className="flex-1 rounded-2xl bg-[#0d1f55] text-white p-2 sm:p-4 text-center">
           <div className="text-[10px] font-black uppercase tracking-widest text-white/70">
             Contando
           </div>
-          <div className="text-5xl sm:text-6xl font-black tabular-nums">
+          <div className="text-3xl sm:text-6xl font-black tabular-nums">
             {contados.length}
           </div>
         </div>
         <button
           onClick={reiniciar}
           disabled={contados.length === 0}
-          className="h-16 w-16 rounded-2xl bg-white border-2 border-[#0d1f55]/20 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
+          className="h-11 w-11 sm:h-16 sm:w-16 rounded-2xl bg-white border-2 border-[#0d1f55]/20 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
           aria-label="Reiniciar contagem"
         >
-          <RotateCcw className="h-6 w-6" />
+          <RotateCcw className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
       </div>
 
