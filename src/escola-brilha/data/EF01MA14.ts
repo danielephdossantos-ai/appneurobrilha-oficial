@@ -314,7 +314,6 @@ const aula: Aula = {
       titulo: "Fase 3 · Caça às Formas no Quarto",
       instrucao:
         "Encontre no quarto: 2 CÍRCULOS, 2 RETÂNGULOS, 1 QUADRADO e 1 TRIÂNGULO. Arraste cada objeto pra caixa da sua forma.",
-      itemImagem: relogioImg,
       alvosVisuais: [
         { nome: "🔵 CÍRCULO", cor: "#3B82F6", capacidade: 2, imagemUrl: circuloImg },
         { nome: "▭ RETÂNGULO", cor: "#10B981", capacidade: 2, imagemUrl: retanguloImg },
@@ -322,12 +321,12 @@ const aula: Aula = {
         { nome: "🔺 TRIÂNGULO", cor: "#EF4444", capacidade: 1, imagemUrl: trianguloImg },
       ],
       pares: [
-        { item: "🕒 Relógio", alvo: "🔵 CÍRCULO" },
-        { item: "🪙 Moeda", alvo: "🔵 CÍRCULO" },
-        { item: "📖 Livro", alvo: "▭ RETÂNGULO" },
-        { item: "🚪 Porta", alvo: "▭ RETÂNGULO" },
-        { item: "🪟 Janela", alvo: "🟨 QUADRADO" },
-        { item: "🚧 Placa", alvo: "🔺 TRIÂNGULO" },
+        { item: "🕒 Relógio", alvo: "🔵 CÍRCULO", itemImagem: relogioImg },
+        { item: "🪙 Moeda", alvo: "🔵 CÍRCULO", itemImagem: moedaImg },
+        { item: "📖 Livro", alvo: "▭ RETÂNGULO", itemImagem: livroImg },
+        { item: "🚪 Porta", alvo: "▭ RETÂNGULO", itemImagem: portaImg },
+        { item: "🪟 Janela", alvo: "🟨 QUADRADO", itemImagem: janelaImg },
+        { item: "🚧 Placa", alvo: "🔺 TRIÂNGULO", itemImagem: placaImg },
       ],
     },
 
