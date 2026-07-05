@@ -343,7 +343,8 @@ function JogoArrastar({
                             }}
                             className="absolute top-2 left-1/2 -translate-x-1/2 h-10 w-10 sm:h-12 sm:w-12 object-contain cursor-pointer drop-shadow-md"
                           />
-                        )}
+                        );
+                      })()}
                     </div>
                     {/* Itens empilhados (capacidade > 1: prateleira/cesta/caixa). */}
                     {jogo.itemImagem &&
