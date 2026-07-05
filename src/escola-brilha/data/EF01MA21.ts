@@ -247,21 +247,21 @@ const aula: Aula = {
       erro: "Compare os números: 7 é o maior → 🍇 Uva venceu.",
     },
 
-    // ==== FASE 2 · Leia o Gráfico ====
+    // ==== FASE 2 · Leia o Gráfico (barras reais) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 2 · Leia o Gráfico",
-      instrucao: "Mesmos dados no gráfico de colunas 📊. Observe a altura das barras.",
-      grupos: [
-        { imagemUrl: macaImg, quantidade: 5, rotulo: "🍎 · 5" },
-        { imagemUrl: bananaImg, quantidade: 3, rotulo: "🍌 · 3" },
-        { imagemUrl: uvaImg, quantidade: 7, rotulo: "🍇 · 7" },
+      instrucao: "Mesmos dados no gráfico de colunas 📊. Observe a ALTURA das barras.",
+      colunas: [
+        { imagemUrl: macaImg, rotulo: "🍎 Maçã", valor: 5, cor: "#EF4444" },
+        { imagemUrl: bananaImg, rotulo: "🍌 Banana", valor: 3, cor: "#FACC15" },
+        { imagemUrl: uvaImg, rotulo: "🍇 Uva", valor: 7, cor: "#8B5CF6" },
       ],
-      pergunta: "Qual COLUNA é a maior?",
+      pergunta: "Qual COLUNA é a MAIOR?",
       opcoes: ["🍎 Maçã", "🍇 Uva", "🍌 Banana"],
       correta: 1,
-      acerto: "Isso! A coluna da uva é a mais alta — 7 votos.",
-      erro: "A coluna mais alta é a da 🍇 uva (7 votos).",
+      acerto: "Isso! A coluna da uva subiu mais — 7 votos.",
+      erro: "Olhe qual barra sobe mais alto → 🍇 Uva (7).",
     },
 
     // ==== FASE 3 · Compare ====
@@ -280,37 +280,37 @@ const aula: Aula = {
       erro: "Conta a coluna da maçã: são 5 crianças.",
     },
 
-    // ==== FASE 4 · Descubra a Menor ====
+    // ==== FASE 4 · Descubra a Menor (gráfico de colunas) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 4 · Menor Quantidade",
-      instrucao: "Pesquisa dos animais 🐶 8 · 🐱 5 · 🐦 2.",
-      grupos: [
-        { imagemUrl: cachorroImg, quantidade: 8, rotulo: "🐶 · 8" },
-        { imagemUrl: gatoImg, quantidade: 5, rotulo: "🐱 · 5" },
-        { imagemUrl: passarinhoImg, quantidade: 2, rotulo: "🐦 · 2" },
+      instrucao: "Pesquisa dos animais 🐶 8 · 🐱 5 · 🐦 2. Olhe qual barra é a MENOR.",
+      colunas: [
+        { imagemUrl: cachorroImg, rotulo: "🐶 Cachorro", valor: 8, cor: "#B45309" },
+        { imagemUrl: gatoImg, rotulo: "🐱 Gato", valor: 5, cor: "#6B7280" },
+        { imagemUrl: passarinhoImg, rotulo: "🐦 Passarinho", valor: 2, cor: "#3B82F6" },
       ],
       pergunta: "Qual animal recebeu MENOS votos?",
       opcoes: ["🐶 Cachorro", "🐱 Gato", "🐦 Passarinho"],
       correta: 2,
-      acerto: "Isso! O passarinho teve só 2 votos — a menor coluna.",
-      erro: "A menor coluna é a do 🐦 passarinho (2 votos).",
+      acerto: "Isso! A coluna do passarinho é a mais baixa — só 2 votos.",
+      erro: "A barra mais baixa é do 🐦 passarinho (2 votos).",
     },
 
-    // ==== FASE 5 · Faça sua Descoberta ====
+    // ==== FASE 5 · Faça sua Descoberta (gráfico de colunas) ====
     {
-      tipo: "contarQuiz",
+      tipo: "graficoQuiz",
       titulo: "Fase 5 · Faça sua Descoberta",
-      instrucao: "Pesquisa dos sorvetes 🍫 6 · 🍓 4 · 🍦 2.",
-      grupos: [
-        { imagemUrl: chocolateImg, quantidade: 6, rotulo: "🍫 · 6" },
-        { imagemUrl: morangoImg, quantidade: 4, rotulo: "🍓 · 4" },
-        { imagemUrl: baunilhaImg, quantidade: 2, rotulo: "🍦 · 2" },
+      instrucao: "Pesquisa dos sorvetes 🍫 6 · 🍓 4 · 🍦 2. Observe as colunas.",
+      colunas: [
+        { imagemUrl: chocolateImg, rotulo: "🍫 Chocolate", valor: 6, cor: "#78350F" },
+        { imagemUrl: morangoImg, rotulo: "🍓 Morango", valor: 4, cor: "#EC4899" },
+        { imagemUrl: baunilhaImg, rotulo: "🍦 Baunilha", valor: 2, cor: "#FBBF24" },
       ],
       pergunta: "Quem ficou em SEGUNDO lugar?",
       opcoes: ["🍫 Chocolate", "🍓 Morango", "🍦 Baunilha"],
       correta: 1,
-      acerto: "Boa! O morango teve 4 votos — segundo lugar.",
+      acerto: "Boa! O morango teve 4 votos — segundo lugar (barra do meio).",
       erro: "1º chocolate (6), 2º morango (4), 3º baunilha (2).",
     },
 

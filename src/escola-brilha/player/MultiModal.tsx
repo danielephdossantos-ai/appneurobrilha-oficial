@@ -101,6 +101,8 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoMontar jogo={jogo} />;
     case "contarQuiz":
       return <JogoContarQuiz jogo={jogo} />;
+    case "graficoQuiz":
+      return <JogoGraficoQuiz jogo={jogo} />;
     case "operacao":
       return (
         <Secao icon={Sparkles} rotulo="Conta visual" cor={jogo.cor ?? "#60A5FA"}>
@@ -1147,6 +1149,112 @@ function JogoContarQuiz({
             acertou
               ? jogo.acerto ?? "Excelente! Você acertou!"
               : jogo.erro ?? "Ainda não é essa. Conte de novo com calma."
+          }
+        />
+      )}
+      {escolha !== null && !acertou && (
+        <button
+          onClick={() => setEscolha(null)}
+          className="mt-2 w-full h-10 rounded-xl bg-white/15 font-black text-white"
+        >
+          Tentar de novo
+        </button>
+      )}
+    </Secao>
+  );
+}
+
+/* --- Gráfico Quiz (barras verticais proporcionais) --- */
+function JogoGraficoQuiz({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "graficoQuiz" }>;
+}) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const acertou = escolha === jogo.correta;
+  const maxV = Math.max(1, ...jogo.colunas.map((c) => c.valor));
+  const alturaMax = 180; // px
+  return (
+    <Secao icon={Sparkles} rotulo="Fase · Gráfico" cor="#FFC93C">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+
+      <div className="rounded-2xl bg-white/10 border-2 border-white/20 p-4 mb-4">
+        <div
+          className="grid items-end gap-3"
+          style={{
+            gridTemplateColumns: `repeat(${jogo.colunas.length}, minmax(0,1fr))`,
+            minHeight: alturaMax + 80,
+          }}
+        >
+          {jogo.colunas.map((c, i) => {
+            const h = Math.round((c.valor / maxV) * alturaMax);
+            const cor = c.cor ?? "#FBBF24";
+            return (
+              <div key={i} className="flex flex-col items-center justify-end gap-2">
+                <div
+                  className="text-white font-black text-xl"
+                  aria-label={`valor ${c.valor}`}
+                >
+                  {c.valor}
+                </div>
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: h }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="w-full rounded-t-xl border-2 border-white/40 shadow-lg"
+                  style={{ backgroundColor: cor, height: h }}
+                />
+                <div className="w-full h-1 bg-white/30 rounded-full" />
+                <img
+                  src={c.imagemUrl}
+                  alt={c.rotulo}
+                  className="w-12 h-12 object-contain"
+                />
+                <div className="text-xs font-black text-white/80 text-center">
+                  {c.rotulo}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <p className="font-black text-base mb-2 text-center">{jogo.pergunta}</p>
+      <div className="grid grid-cols-3 gap-2 mb-2">
+        {jogo.opcoes.map((op, i) => {
+          const selecionada = escolha === i;
+          const certa = escolha !== null && i === jogo.correta;
+          const errada = selecionada && i !== jogo.correta;
+          return (
+            <button
+              key={i}
+              onClick={() => setEscolha(i)}
+              disabled={escolha !== null && acertou}
+              className={`h-14 rounded-2xl font-black text-xl border-4 transition-all ${
+                certa
+                  ? "bg-[#22C55E] text-white border-white"
+                  : errada
+                    ? "bg-[#EF4444] text-white border-white"
+                    : selecionada
+                      ? "bg-[#FBBF24] text-[#0d1f55] border-white"
+                      : "bg-white text-[#0d1f55] border-transparent active:scale-95"
+              }`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <Status
+          ok={acertou}
+          texto={
+            acertou
+              ? jogo.acerto ?? "Excelente! Você leu o gráfico direitinho!"
+              : jogo.erro ?? "Olhe a altura das barras com calma."
           }
         />
       )}
