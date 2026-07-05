@@ -404,19 +404,80 @@ function estiloResposta(
 
 function VisualQuestao({
   visual,
+  pergunta,
   opcoes,
   correta,
   escolha,
   onEscolher,
 }: {
   visual: QuizItem["visual"];
+  pergunta?: string;
   opcoes?: string[];
   correta?: number;
   escolha?: number | null;
   onEscolher?: (idx: number) => void;
 }) {
-  if (!visual) return null;
   const podeClicar = !!opcoes && !!onEscolher && (escolha ?? null) === null;
+
+  // Sem visual explícito: tenta sintetizar uma cena a partir da pergunta
+  // (ex.: "🐶 2 · 🐱 1", "🍊 Laranja = 3 · 🍇 Uva = 1"). Toca no ícone pra responder.
+  if (!visual) {
+    const itens = pergunta ? parseEmojiCena(pergunta) : [];
+    if (itens.length < 2) return null;
+    return (
+      <div className={`mb-3 grid gap-2 ${itens.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+        {itens.map((it, i) => {
+          const corBase = CORES_G[i % CORES_G.length];
+          const idxOpcao = opcoes ? matchOpcaoEmoji(it, opcoes) : -1;
+          const clicavel = podeClicar && idxOpcao >= 0;
+          const est = estiloResposta(escolha ?? null, correta ?? -1, idxOpcao, corBase);
+          const Comp: any = clicavel ? "button" : "div";
+          const rotulo = it.label || it.emoji;
+          return (
+            <Comp
+              key={i}
+              onClick={clicavel ? () => onEscolher!(idxOpcao) : undefined}
+              type={clicavel ? "button" : undefined}
+              className={`rounded-2xl border-4 p-2 text-left w-full transition-all ${clicavel ? "hover:scale-[1.02] active:scale-[0.98] cursor-pointer" : ""}`}
+              style={{ borderColor: est.borderColor, background: est.background }}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span
+                  className="text-[9px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
+                  style={{ background: corBase }}
+                >
+                  {rotulo}
+                </span>
+                <span
+                  className="h-6 w-6 rounded-full text-xs font-black grid place-items-center border-2 border-white"
+                  style={{ background: "#fff", color: corBase }}
+                >
+                  {it.quantidade}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1 justify-center min-h-[70px] items-center bg-white/20 rounded-xl p-1">
+                {Array.from({ length: Math.max(it.quantidade, 1) }).map((_, k) => (
+                  <span
+                    key={k}
+                    className={`${it.quantidade <= 1 ? "text-5xl" : it.quantidade <= 3 ? "text-4xl" : "text-2xl"} leading-none`}
+                    aria-hidden="true"
+                  >
+                    {it.emoji}
+                  </span>
+                ))}
+              </div>
+              {clicavel && (
+                <div className="text-[9px] font-black uppercase tracking-widest text-white/70 text-center mt-1">
+                  👆 Toque pra responder
+                </div>
+              )}
+            </Comp>
+          );
+        })}
+      </div>
+    );
+  }
+
 
   if (visual.tipo === "itens") {
     return (
