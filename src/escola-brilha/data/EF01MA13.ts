@@ -282,10 +282,10 @@ const aula: Aula = {
         { nome: "🍦 Caixa CONE", cor: "#F97316", capacidade: 1, imagemUrl: coneImg },
       ],
       pares: [
-        { item: "🎲 Dado", alvo: "📦 Caixa CUBO" },
-        { item: "⚽ Bola", alvo: "⚽ Caixa ESFERA" },
-        { item: "🥫 Lata", alvo: "🥫 Caixa CILINDRO" },
-        { item: "🍦 Casquinha", alvo: "🍦 Caixa CONE" },
+        { item: "Dado", alvo: "📦 Caixa CUBO", itemImagem: dadoImg },
+        { item: "Bola", alvo: "⚽ Caixa ESFERA", itemImagem: bolaImg },
+        { item: "Lata", alvo: "🥫 Caixa CILINDRO", itemImagem: lataImg },
+        { item: "Casquinha", alvo: "🍦 Caixa CONE", itemImagem: casquinhaImg },
       ],
     },
 
