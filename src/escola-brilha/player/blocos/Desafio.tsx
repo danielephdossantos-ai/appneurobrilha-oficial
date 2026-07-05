@@ -157,29 +157,39 @@ function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
         >
           <p className="font-black mb-3">{q.pergunta}</p>
           {q.visual && <PerguntaVisual visual={q.visual} />}
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {q.opcoes.map((op, k) => {
               const revelado = escolha !== null;
               const certa = k === q.correta;
               const sel = escolha === k;
+              // Extrai o primeiro emoji do texto (pra criança que não lê)
+              const emojiMatch = op.match(/^\s*(\p{Extended_Pictographic}(?:\uFE0F)?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F)?)*)/u);
+              const emoji = emojiMatch ? emojiMatch[1] : "";
+              const texto = emoji ? op.replace(emojiMatch![0], "").trim() : op;
               return (
                 <button
                   key={k}
                   onClick={() => escolher(k)}
                   disabled={revelado}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black flex items-center justify-between ${
+                  aria-label={op}
+                  className={`w-full rounded-2xl p-3 font-black flex flex-col items-center justify-center gap-1 min-h-[110px] border-4 transition-transform active:scale-[0.97] ${
                     revelado
                       ? certa
-                        ? "bg-[#22C55E] text-[#0d1f55]"
+                        ? "bg-[#22C55E] text-[#0d1f55] border-[#16A34A]"
                         : sel
-                          ? "bg-[#EF4444] text-white"
-                          : "bg-white/15 text-white/70"
-                      : "bg-white text-[#0d1f55]"
+                          ? "bg-[#EF4444] text-white border-[#B91C1C]"
+                          : "bg-white/15 text-white/70 border-white/20"
+                      : "bg-white text-[#0d1f55] border-white hover:border-[#FFC93C]"
                   }`}
                 >
-                  <span>{op}</span>
-                  {revelado && certa && <CheckCircle2 className="h-4 w-4" />}
-                  {revelado && sel && !certa && <XCircle className="h-4 w-4" />}
+                  {emoji && (
+                    <span className="text-5xl leading-none" aria-hidden="true">
+                      {emoji}
+                    </span>
+                  )}
+                  {texto && <span className="text-sm text-center">{texto}</span>}
+                  {revelado && certa && <CheckCircle2 className="h-5 w-5" />}
+                  {revelado && sel && !certa && <XCircle className="h-5 w-5" />}
                 </button>
               );
             })}
