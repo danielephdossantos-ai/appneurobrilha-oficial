@@ -6,127 +6,104 @@ import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
 import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
+import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import flor from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO02 — Mundo 1 · Amigos da Floresta Encantada · Missão 2
- * Educação Infantil (4 e 5 anos) · Campo O Eu, o Outro e o Nós
- * BNCC EI03EO02: Agir de maneira independente, com confiança em suas
- * capacidades, reconhecendo suas conquistas e limitações.
- *
- * Tema: "Eu Consigo!" — o Brilha quer pegar uma folha dourada num galho
- * alto. Aprende quando dá pra tentar sozinho e quando é hora de pedir ajuda.
- * Estrela recompensa: ⭐ Coragem.
- *
- * Padrão TRAVADO EF01MA02 aplicado a socioemocional visual.
+ * EI03EO02 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Minha Família" — spec EI-01 do usuário.
+ * Estrela: ⭐ Afeto.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO02",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Eu Consigo!",
+  titulo: "Minha Família",
 
   narrativa: {
-    titulo: "Eu Consigo!",
-    contexto:
-      "Na Floresta Encantada, uma folha dourada balança bem alto num galho. O Brilha olha pra cima e pensa: 'Será que eu consigo pegar sozinho?' A Coruja Sábia sorri: 'Tente primeiro — se precisar, chame um amigo.'",
-    problema:
-      "O Brilha nunca tentou algo tão alto. Ele consegue sozinho? Ou é hora de pedir ajuda?",
-    convite: "Bora ajudar o Brilha a descobrir o que ele consegue?",
+    titulo: "Minha Família",
+    contexto: "O Brilha chega em casa e a Coruja Sábia pergunta: 'Quem cuida de você? Quem te dá abraço quando você precisa?' O Brilha lembra da família dele — cada um do seu jeito, todos com muito amor.",
+    problema: "A árvore da amizade acendeu 1 estrela, mas ainda falta a estrela do AFETO. Bora conhecer as famílias da floresta pra acender mais uma?",
+    convite: "Vem conhecer quem cuida da gente!",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer coisas que já sabe fazer sozinho (calçar sapato, comer, brincar).",
-    "Perceber quando algo é difícil demais.",
-    "Saber pedir ajuda quando não consegue.",
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  missao:
-    "Descobrir o que EU CONSIGO fazer sozinho, e quando é bom pedir ajuda.",
+  missao: "Descobrir que família é quem CUIDA e AMA — não importa o tamanho nem o jeito.",
 
   objetivos: [
-    "Reconhecer coisas que já consegue fazer sozinho.",
-    "Perceber que pedir ajuda também é ser corajoso.",
+    "Reconhecer o tema 'Minha Família' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
   ],
 
-  motivacao:
-    "Toda vez que você tenta algo novo, você fica mais forte! E se não conseguir de primeira, tudo bem — a gente tenta de novo ou pede ajuda.",
+  motivacao: "Família é ninho quentinho: pode ser grande, pequena, com pai, mãe, avó, tio, vizinho… o que importa é o AMOR.",
 
-  explicacao:
-    "EU CONSIGO! Tem coisas que eu já faço sozinho:\n\n• Vestir o meu sapato.\n• Guardar meu brinquedo.\n• Escolher a fruta que eu quero.\n\nMas tem coisas difíceis. Aí eu:\n\n• Tento com calma.\n• Se não der, PEÇO AJUDA.\n\nPedir ajuda NÃO é ser fraco — é ser inteligente. Ninguém faz tudo sozinho, nem os adultos!",
+  explicacao: "FAMÍLIA é quem CUIDA de mim.\n\n• Pode ser mãe, pai, avó, avô, tio, tia, irmão.\n• Pode ser adotiva, do coração, de sangue.\n• Cada família tem um TAMANHO e um JEITO.\n• O que importa é o CUIDADO e o AMOR.\n\nToda família é bonita do seu jeito.",
 
   explicacaoAtiva: [
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "O Brilha quer pegar uma folha dourada bem alta. Toque nele pra dar coragem!",
-      imagem: brilhaImg,
-      imagemAlt: "Brilha olhando pra cima com coragem",
-    },
-    {
-      texto: "A Coruja Sábia sussurra: 'Tenta primeiro, Brilha. Você é mais forte do que pensa!'",
-      imagem: corujaImg,
-      imagemAlt: "Coruja Sábia incentivando",
-    },
-    {
-      texto: "O Lupi salta bem alto! Cada amigo é bom em alguma coisa.",
-      imagem: lupiImg,
-      imagemAlt: "Lupi saltando alto",
-    },
-    {
-      texto: "Se a folha estiver ALTA DEMAIS, o Brilha pode chamar o Lupi. Pedir ajuda é ser corajoso!",
-      imagem: lupiImg,
-      imagemAlt: "Lupi ajudando um amigo",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
+      imagem: fifiImg,
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Se você não consegue algo sozinho, o que você faz?",
-        opcoes: ["Peço ajuda com carinho", "Fico bravo e desisto"],
+        pergunta: "Você tá pronto pra aprender sobre Minha Família?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Pedir ajuda é inteligente e corajoso.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Eu consigo fazer muitas coisas sozinho.",
-    nivel2:
-      "Quando algo é difícil, eu tento com calma. Se não der, peço ajuda.",
-    nivel3:
-      "Pedir ajuda não é ser fraco. É saber que a gente cresce junto.",
-    nivel4:
-      "Cada dia você aprende uma coisa nova. Ontem talvez não conseguia; hoje já consegue!",
+    nivel1: "Minha Família é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de minha família — a gente aprende junto.",
+    nivel3: "Praticar minha família deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar minha família com a família também.",
   },
 
   exemploResolvido: {
-    enunciado:
-      "O Brilha tentou pegar a folha 1 vez sozinho e não conseguiu. O que ele deve fazer agora?",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar minha família?",
     passos: [
-      "Respira fundo — está tudo bem não ter conseguido.",
-      "Pensa: 'Alguém pode me ajudar?'",
-      "Chama o Lupi que salta alto.",
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
     ],
-    resposta: "Pedir ajuda! Juntos, o Brilha e o Lupi pegam a folha.",
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
       imagemUrl: estrelaImg,
       quantidade: 1,
-      nomeItem: "folha dourada",
-      nomeItemPlural: "folhas douradas",
-      pergunta: "Quantas folhas douradas o Brilha quer pegar?",
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado:
-      "O Brilha, o Lupi e a Fifi tentam pegar frutas. Cada um consegue no que é bom. Quantos amigos estão tentando?",
-    resposta: "3 amigos — cada um tenta do jeito dele.",
-    explicacao:
-      "3 amigos tentando: Brilha alcança as baixinhas, Lupi salta nas altas, Fifi rola pela floresta.",
+    enunciado: "3 amigos aparecem pra praticar minha família. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver minha família.",
     visual: {
       tipo: "podio",
-      pergunta:
-        "Toque em cada amigo pra contar. Quem está no meio (2º) da cena?",
+      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
         { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
         { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
@@ -137,103 +114,51 @@ const aula: Aula = {
   },
 
   exercicios: [
-    {
-      enunciado:
-        "⭐ O Brilha tenta sozinho primeiro. O que isso mostra?",
-      resposta: "Que ele é corajoso e acredita em si mesmo.",
-      dica: "Tentar é o primeiro passo pra conseguir.",
-    },
-    {
-      enunciado:
-        "🐰 O Lupi salta mais alto que o Brilha. Isso é problema?",
-      resposta:
-        "Não! Cada um é bom em coisas diferentes. E dá pra ajudar um ao outro.",
-      dica: "Quando você não consegue, alguém pode te ajudar.",
-    },
-    {
-      enunciado:
-        "🦉 A Coruja Sábia diz: 'Pedir ajuda é ser esperto.' O que ela quer dizer?",
-      resposta:
-        "Que a gente não precisa fazer tudo sozinho — juntos é melhor.",
-      dica: "Até os grandes pedem ajuda!",
-    },
+    { enunciado: "⭐ Por que a gente pratica minha família?", resposta: "Família é ninho quentinho: pode ser grande, pequena, com pai, mãe, avó, tio, vizinho… o que importa é o AMOR.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado:
-      "Desafio Brilha: olha cada situação e diz — dá pra fazer SOZINHO ou é hora de pedir AJUDA?",
-    resposta:
-      "Guardar brinquedo = sozinho. Alcançar coisa muito alta = pedir ajuda. Amarrar cadarço = tentar, e se não der, ajuda.",
+    enunciado: "Desafio Brilha: 3 cenas mostram minha família. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Brilha guardando brinquedo", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Folha bem alta", itemImagemUrl: estrelaImg, quantidade: 1, cor: "#F59E0B" },
-        { personagem: "Lupi ajudando", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        {
-          pergunta: "Guardar seu brinquedo depois de brincar — dá pra fazer sozinho?",
-          opcoes: ["Sim, eu consigo!", "Não, é impossível"],
-          correta: 0,
-          explicacao: "Isso! Guardar brinquedo é coisa que dá pra fazer sozinho.",
-        },
-        {
-          pergunta: "Alcançar uma folha bem no alto — o que fazer?",
-          opcoes: ["Tentar e depois pedir ajuda", "Ficar bravo"],
-          correta: 0,
-          explicacao: "Certinho! Tentar e, se não der, pedir ajuda com carinho.",
-        },
-        {
-          pergunta: "Amarrar o cadarço da primeira vez — dá certo sempre?",
-          opcoes: ["Nem sempre, e tudo bem tentar de novo", "Tem que dar de primeira"],
-          correta: 0,
-          explicacao: "Errar faz parte de aprender. A gente tenta de novo!",
-        },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar minha família?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "Eu consigo muitas coisas sozinho — cada dia mais!",
-      "Se algo é difícil, tento com calma.",
-      "Pedir ajuda é ser corajoso, não fraco.",
-      "Errar faz parte. A gente tenta de novo.",
+      "Minha Família é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Antes de dizer 'não sei', tenta uma vez. Você vai se surpreender!",
+    dica: "Hoje, pratique minha família com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "O Brilha tenta pegar a folha e não consegue. E agora?",
-      opcoes: ["Fica bravo e chora", "Tenta de novo ou pede ajuda", "Desiste pra sempre"],
-      correta: 1,
-      explicacao: "Isso! A gente tenta de novo — ou chama um amigo.",
-      visual: {
-        tipo: "itens",
-        imagemUrl: brilhaImg,
-        quantidade: 1,
-        rotulo: "Brilha tentando",
-      },
+      pergunta: "Praticar minha família deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
+      correta: 0,
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Pedir ajuda é sinal de quê?",
-      opcoes: ["Fraqueza", "Coragem e inteligência"],
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
+      opcoes: ["2", "3", "4"],
       correta: 1,
-      explicacao: "Pedir ajuda é ser corajoso. Ninguém faz tudo sozinho!",
-      visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha pede", cor: "#FBBF24" },
-          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi ajuda", cor: "#F472B6" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantos amigos aparecem tentando alcançar a folha?",
-      opcoes: ["1", "2", "3"],
-      correta: 2,
-      explicacao: "Brilha, Lupi e Fifi — juntos conseguem!",
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
         tipo: "grupos",
         grupos: [
@@ -243,99 +168,102 @@ const aula: Aula = {
         ],
       },
     },
+    {
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Afeto!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Afeto" },
+    },
   ],
 
-  conclusao:
-    "🏅 Medalha conquistada: Corajoso do Brilha! Você ajudou o Brilha a descobrir que EU CONSIGO — e quando não dá, pedir ajuda é ser esperto. Acendeu a SEGUNDA ESTRELA ⭐ da Árvore da Amizade! Missão em Casa: escolha uma coisa que você quer aprender sozinho hoje (calçar sapato, guardar copo, escovar dente). Tente — e se precisar, peça ajuda com carinho.",
+  conclusao: "🏅 Medalha: Guardião do Afeto! ⭐ Estrela Afeto ACESA na Árvore da Amizade. Missão em Casa: pratique minha família com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto:
-      "Quando você tenta uma coisa nova, seu cérebro cria caminhos novinhos. Cada vez que você tenta de novo, o caminho fica mais forte. Por isso a gente melhora!",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · Coragem do Brilha",
-      instrucao:
-        "O Brilha vai tentar pegar a folha dourada. Toque nele pra dar coragem.",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
       grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
-      pergunta: "Quantos Brilhas estão tentando?",
+      pergunta: "Quantos Brilhas apareceram?",
       opcoes: ["1", "2", "3"],
       correta: 0,
-      acerto: "Isso! Só 1 Brilha, cheio de coragem.",
-      erro: "Olha bem. Quantos Brilhas você vê?",
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 2 · Amigos que podem ajudar",
-      instrucao: "Estes são amigos que podem ajudar o Brilha. Toque em cada um.",
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
       grupos: [
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi salta" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi corre" },
-        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu voa" },
+        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
+        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
+        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
+        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
       ],
-      pergunta: "Quantos amigos podem ajudar?",
-      opcoes: ["2", "3", "4"],
+      pergunta: "Quantos amigos apareceram?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "Muito bem! 3 amigos prontos pra ajudar.",
-      erro: "Aponte um por um: Lupi, Fifi, Piu.",
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Cada um ajuda do seu jeito",
-      instrucao:
-        "Ligue cada amigo à ajuda que ele pode dar.",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
       pares: [
-        { a: "Lupi", b: "salta alto pra pegar", aImagem: lupiImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Piu", b: "voa até o galho", aImagem: piuImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Téo", b: "empurra devagar", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
       ],
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 4 · Sozinho ou com ajuda?",
-      instrucao:
-        "Guardar brinquedo o Brilha faz sozinho. Alcançar coisa alta pede ajuda. Toque nas duas cenas.",
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
       grupos: [
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Sozinho" },
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Com ajuda" },
+        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
+        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
+        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
       ],
-      pergunta: "Quantas escolhas o Brilha tem?",
-      opcoes: ["1", "2", "3"],
+      pergunta: "Quantas carinhas?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "Isso! 2 caminhos: tentar sozinho ou pedir ajuda.",
-      erro: "Toque nas duas figuras: sozinho e com ajuda.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Balão da coragem",
-      instrucao:
-        "Cada amigo que ajudou ganha 1 balão de agradecimento. Toque no balão e depois no amigo.",
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
       itemImagem: balaoImg,
       alvosVisuais: [
         { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
         { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
-        { nome: "Piu", cor: "#60A5FA", capacidade: 1, imagemUrl: piuImg },
-        { nome: "Coruja", cor: "#A78BFA", capacidade: 1, imagemUrl: corujaImg },
+        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
+        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
       ],
       pares: [
-        { item: "Balão do Brilha", alvo: "Brilha" },
-        { item: "Balão do Lupi", alvo: "Lupi" },
-        { item: "Balão do Piu", alvo: "Piu" },
-        { item: "Balão da Coruja", alvo: "Coruja" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Como você se sente ao conseguir?",
-      instrucao:
-        "Ligue cada momento à carinha que combina.",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Consegui sozinho!", b: "carinha feliz", aImagem: brilhaImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "Amigo me ajudou", b: "carinha tranquila", aImagem: lupiImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-        { a: "Tentei com carinho", b: "coração forte", aImagem: brilhaImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -344,104 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Qual dessas é uma coisa que dá pra fazer SOZINHO?",
-        opcoes: ["Guardar meu brinquedo", "Alcançar o teto", "Dirigir um carro"],
+        pergunta: "Praticar minha família é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Guardar brinquedo você já consegue sozinho!",
-        visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Sozinho" },
-            { imagemUrl: estrelaImg, quantidade: 1, rotulo: "Alto demais" },
-            { imagemUrl: lupiImg, quantidade: 1, rotulo: "Adulto faz" },
-          ],
-        },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Se algo é DIFÍCIL demais, o que a gente faz?",
-        opcoes: ["Peço ajuda", "Choro sem tentar", "Bate no amigo"],
-        correta: 0,
-        explicacao: "Pedir ajuda com carinho é sempre a melhor escolha.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: lupiImg,
-          quantidade: 1,
-          rotulo: "Amigo ajudando",
-        },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Afeto!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta:
-          "O Brilha tentou 1 vez e não conseguiu. Ele deve tentar de novo?",
-        opcoes: ["Sim, tentar de novo é aprender", "Não, desistir"],
+        pergunta: "Quando você pratica minha família, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Tentar de novo é como a gente aprende. Cada tentativa deixa mais forte!",
-        visual: {
-          tipo: "itens",
-          imagemUrl: brilhaImg,
-          quantidade: 1,
-          rotulo: "Brilha tentando",
-        },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta:
-          "Um amigo ajudou você. O que você diz pra ele?",
-        opcoes: ["Obrigado!", "Nada", "Some daqui"],
-        correta: 0,
-        explicacao: "Agradecer mostra que você reconheceu o carinho do amigo.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: felizImg,
-          quantidade: 1,
-          rotulo: "Feliz com a ajuda",
-        },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta:
-          "Você quer aprender a amarrar o cadarço. O que faz?",
-        opcoes: [
-          "Tento, e se não der, peço um adulto pra mostrar",
-          "Espero até ficar adulto",
-        ],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao:
-          "Tentar + pedir ajuda = a receita pra aprender qualquer coisa nova.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Eu tento", cor: "#FBBF24" },
-            { imagemUrl: corujaImg, quantidade: 1, rotulo: "Adulto ensina", cor: "#A78BFA" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta:
-          "Você conseguiu algo novo hoje! Como fica seu coração?",
-        opcoes: ["Cheio de alegria", "Do mesmo tamanho", "Fica triste"],
-        correta: 0,
-        explicacao:
-          "Cada conquista deixa a gente MAIS FORTE por dentro.",
-        visual: {
-          tipo: "itens",
-          imagemUrl: coracaoImg,
-          quantidade: 1,
-          rotulo: "Coração forte",
-        },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: {
-    codigo: "EI03EO03",
-    titulo: "Amigos de Verdade — brincar juntos",
-  },
+  proximaHabilidade: { codigo: "EI03EO03", titulo: "Meus Amigos — laços da amizade" },
 };
 
-// Mantém flor/piuImg importados pra futuros expansões visuais.
-void flor;
 void piuImg;
+void bravoImg;
 
 export default aula;

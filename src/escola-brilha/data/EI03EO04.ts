@@ -10,256 +10,260 @@ import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
 import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO04 — Comunicar necessidades, ideias e sentimentos.
- * ⭐ Estrela: Voz.
+ * EI03EO04 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Minhas Emoções" — spec EI-01 do usuário.
+ * Estrela: ⭐ Emoções.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO04",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Eu Falo o Que Sinto",
+  titulo: "Minhas Emoções",
 
   narrativa: {
-    titulo: "Eu Falo o Que Sinto",
-    contexto:
-      "O Brilha está com o coração apertado — não sabe explicar. A Coruja Sábia sorri: 'Fala pra gente, Brilha. Sentimento guardado dentro fica pesado.'",
-    problema: "Como falar o que a gente sente quando nem sabemos o nome?",
-    convite: "Bora aprender a dar nome aos sentimentos?",
+    titulo: "Minhas Emoções",
+    contexto: "O Brilha tá com o coração apertado e nem sabe explicar. A Coruja Sábia mostra 4 carinhas: feliz, triste, bravo, tranquilo. 'Cada sentimento tem um NOME. Quando a gente nomeia, o coração fica LEVE.'",
+    problema: "Como saber o que a gente sente? E o que fazer com esse sentimento?",
+    convite: "Vem descobrir as carinhas dos sentimentos!",
   },
 
   conhecimentosPrevios: [
-    "Reconhecer quando está feliz, triste ou bravo.",
-    "Pedir ajuda com palavras simples.",
-    "Apontar para o que quer.",
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  missao: "Aprender a FALAR o que sente — com palavras, gestos ou desenhos.",
+  missao: "Nomear sentimentos básicos: feliz, triste, bravo, tranquilo — e saber que TODOS são válidos.",
 
   objetivos: [
-    "Nomear sentimentos básicos: feliz, triste, bravo, calmo.",
-    "Pedir ajuda quando algo incomoda.",
+    "Reconhecer o tema 'Minhas Emoções' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
   ],
 
-  motivacao: "Quando você fala o que sente, o coração fica LEVE.",
+  motivacao: "Sentir é normal. Todo sentimento tem lugar no coração — o importante é FALAR.",
 
-  explicacao:
-    "EU POSSO FALAR:\n\n• 'Estou FELIZ!' — coração pulando.\n• 'Estou TRISTE.' — coração apertado.\n• 'Estou BRAVO.' — coração quente.\n• 'Estou com MEDO.' — coração tremendo.\n\nFalar não é reclamar. É se cuidar. Adulto de confiança sempre quer ouvir.",
+  explicacao: "EU POSSO SENTIR:\n\n• FELIZ — coração pulando.\n• TRISTE — coração apertado.\n• BRAVO — coração quente.\n• TRANQUILO — coração calminho.\n\nCada sentimento é OK. Falar deixa o coração leve.",
 
   explicacaoAtiva: [
-    { texto: "O Brilha aponta pro coração. Toque nele.", imagem: brilhaImg, imagemAlt: "Brilha apontando coração" },
-    { texto: "A Coruja pergunta: 'O que você está sentindo?'", imagem: corujaImg, imagemAlt: "Coruja ouvindo" },
-    { texto: "O Lupi mostra a carinha triste. 'Eu tô triste hoje.'", imagem: tristeImg, imagemAlt: "Carinha triste" },
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "Falando, o amigo entende e vem abraçar. Fica tudo mais leve!",
-      imagem: felizImg,
-      imagemAlt: "Carinha feliz",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
+      imagem: fifiImg,
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Quando você fala o que sente, o que acontece?",
-        opcoes: ["Fica mais leve", "Fica mais pesado"],
+        pergunta: "Você tá pronto pra aprender sobre Minhas Emoções?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Falar alivia.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Eu sinto coisas — e posso falar delas.",
-    nivel2: "Cada sentimento tem um nome: feliz, triste, bravo, calmo, medo.",
-    nivel3: "Falar com um adulto de confiança faz o coração ficar leve.",
-    nivel4: "Se não tenho palavra, aponto pra carinha que combina.",
+    nivel1: "Minhas Emoções é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de minhas emoções — a gente aprende junto.",
+    nivel3: "Praticar minhas emoções deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar minhas emoções com a família também.",
   },
 
   exemploResolvido: {
-    enunciado: "O Brilha tá com o coração apertado. O que ele faz?",
-    passos: ["Respira fundo.", "Aponta pra carinha triste.", "Fala pra Coruja: 'Tô triste.'"],
-    resposta: "A Coruja abraça e ajuda. Coração fica mais leve.",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar minhas emoções?",
+    passos: [
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
+    ],
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: coracaoImg,
+      imagemUrl: estrelaImg,
       quantidade: 1,
-      nomeItem: "coração pra cuidar",
-      nomeItemPlural: "corações pra cuidar",
-      pergunta: "Quantos corações o Brilha tem pra cuidar?",
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado: "Cada amigo tá com um sentimento. Quantas carinhas de sentimento aparecem?",
-    resposta: "3 carinhas — feliz, triste e bravo.",
-    explicacao: "Cada sentimento tem uma carinha diferente pra reconhecer.",
+    enunciado: "3 amigos aparecem pra praticar minhas emoções. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver minhas emoções.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada carinha. Qual está no meio (2ª)?",
+      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
-        { nome: "Feliz", imagemUrl: felizImg, posicao: 1 },
-        { nome: "Triste", imagemUrl: tristeImg, posicao: 2 },
-        { nome: "Bravo", imagemUrl: bravoImg, posicao: 3 },
+        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
+        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
+        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
       ],
-      respostaCerta: "Triste",
+      respostaCerta: "Lupi",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Você tá bravo. O que faz?", resposta: "Respiro fundo e falo o que senti.", dica: "Falar é sempre melhor que bater." },
-    { enunciado: "🐰 Amigo tá triste. Como ajudar?", resposta: "Pergunto o que aconteceu e escuto.", dica: "Ouvir é um presente." },
-    { enunciado: "🦉 Por que a Coruja diz pra falar?", resposta: "Porque guardar dentro fica pesado.", dica: "Sentimento contado alivia." },
+    { enunciado: "⭐ Por que a gente pratica minhas emoções?", resposta: "Sentir é normal. Todo sentimento tem lugar no coração — o importante é FALAR.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: em cada cena, qual sentimento combina?",
-    resposta: "Feliz, triste e bravo — cada um com seu nome.",
+    enunciado: "Desafio Brilha: 3 cenas mostram minhas emoções. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Brilha ganhou presente", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi perdeu brinquedo", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi levou empurrão", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        { pergunta: "Brilha ganhou presente. Como está?", opcoes: ["Feliz", "Bravo"], correta: 0, explicacao: "Ganhar presente = felicidade!" },
-        { pergunta: "Lupi perdeu o brinquedo. Como está?", opcoes: ["Triste", "Feliz"], correta: 0, explicacao: "Perder algo dá tristeza — e tudo bem sentir." },
-        { pergunta: "Fifi levou empurrão. Como está?", opcoes: ["Brava", "Tranquila"], correta: 0, explicacao: "Ficar bravo tá tudo bem — o importante é falar." },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar minhas emoções?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "Cada sentimento tem um nome.",
-      "Falar o que sente deixa o coração leve.",
-      "Não sei a palavra? Aponto pra carinha.",
-      "Adulto de confiança sempre quer ouvir.",
+      "Minhas Emoções é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Hoje, fale pra alguém: 'Estou me sentindo ___.'",
+    dica: "Hoje, pratique minhas emoções com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "Guardar sentimento dentro faz o coração ficar:",
-      opcoes: ["Leve", "Pesado"],
-      correta: 1,
-      explicacao: "Pesado! Por isso é bom falar.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
+      pergunta: "Praticar minhas emoções deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
+      correta: 0,
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Qual carinha mostra TRISTEZA?",
-      opcoes: ["Feliz", "Triste", "Bravo"],
-      correta: 1,
-      explicacao: "Boca pra baixo = tristeza.",
-      visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-          { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste", cor: "#60A5FA" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantas carinhas de sentimento apareceram?",
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
       opcoes: ["2", "3", "4"],
-      correta: 2,
-      explicacao: "Feliz, triste, bravo e tranquilo — 4 sentimentos.",
+      correta: 1,
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
         tipo: "grupos",
         grupos: [
-          { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-          { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste", cor: "#60A5FA" },
-          { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo", cor: "#EF4444" },
-          { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo", cor: "#34D399" },
+          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
+          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
+          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
         ],
       },
     },
+    {
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Emoções!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Emoções" },
+    },
   ],
 
-  conclusao:
-    "🏅 Medalha: Voz do Coração! 4ª ESTRELA ⭐ (Voz) acesa. Missão em Casa: à noite, conte pra alguém o melhor E o pior sentimento do seu dia.",
+  conclusao: "🏅 Medalha: Guardião das Emoções! ⭐ Estrela Emoções ACESA na Árvore da Amizade. Missão em Casa: pratique minhas emoções com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Quando a gente coloca nome no que sente, uma parte do cérebro se acalma sozinha. Falar é REMÉDIO!",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · Coração pra cuidar",
-      instrucao: "O Brilha tem 1 coração. Toque nele.",
-      grupos: [{ imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" }],
-      pergunta: "Quantos corações o Brilha tem?",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
+      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
+      pergunta: "Quantos Brilhas apareceram?",
       opcoes: ["1", "2", "3"],
       correta: 0,
-      acerto: "1 coração — e ele é precioso!",
-      erro: "Aponte pro coração.",
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 2 · Carinhas de sentimento",
-      instrucao: "Toque em cada carinha pra descobrir o sentimento.",
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
+      grupos: [
+        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
+        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
+        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
+        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
+      ],
+      pergunta: "Quantos amigos apareceram?",
+      opcoes: ["3", "4", "5"],
+      correta: 1,
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
+    },
+    {
+      tipo: "ligar",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
+      pares: [
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
       grupos: [
         { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
         { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
         { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
         { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
       ],
-      pergunta: "Quantas carinhas de sentimento?",
+      pergunta: "Quantas carinhas?",
       opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "4 sentimentos — cada um com nome!",
-      erro: "Conte um a um.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Amigo e sentimento",
-      instrucao: "Ligue cada amigo à carinha que combina com o que ele viveu.",
-      pares: [
-        { a: "Brilha ganhou presente", b: "feliz", aImagem: brilhaImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "Lupi perdeu brinquedo", b: "triste", aImagem: lupiImg, aQuantidade: 1, bImagem: tristeImg, bQuantidade: 1 },
-        { a: "Fifi levou empurrão", b: "brava", aImagem: fifiImg, aQuantidade: 1, bImagem: bravoImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Quem posso procurar?",
-      instrucao: "Estes são adultos e amigos que ouvem com carinho.",
-      grupos: [
-        { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
-        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
-      ],
-      pergunta: "Quantos amigos posso procurar?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      acerto: "3! Sempre tem alguém pra ouvir.",
-      erro: "Conte cada carinha.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Balão do sentimento",
-      instrucao: "Cada amigo recebe 1 balão colorido do sentimento. Toque no balão e depois no amigo.",
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
       itemImagem: balaoImg,
       alvosVisuais: [
-        { nome: "Feliz", cor: "#FBBF24", capacidade: 1, imagemUrl: felizImg },
-        { nome: "Triste", cor: "#60A5FA", capacidade: 1, imagemUrl: tristeImg },
-        { nome: "Bravo", cor: "#EF4444", capacidade: 1, imagemUrl: bravoImg },
-        { nome: "Calmo", cor: "#34D399", capacidade: 1, imagemUrl: tranquiloImg },
+        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
+        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
+        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
+        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
       ],
       pares: [
-        { item: "Balão feliz", alvo: "Feliz" },
-        { item: "Balão triste", alvo: "Triste" },
-        { item: "Balão bravo", alvo: "Bravo" },
-        { item: "Balão calmo", alvo: "Calmo" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Sentimento e o que fazer",
-      instrucao: "Ligue cada sentimento à ação que ajuda.",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Feliz", b: "comemoro com amigo", aImagem: felizImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Triste", b: "peço abraço", aImagem: tristeImg, aQuantidade: 1, bImagem: corujaImg, bQuantidade: 1 },
-        { a: "Bravo", b: "respiro fundo", aImagem: bravoImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -268,70 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Qual carinha mostra FELICIDADE?",
-        opcoes: ["Feliz", "Triste", "Bravo"],
+        pergunta: "Praticar minhas emoções é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Sorrisão grandão = felicidade.",
-        visual: {
-          tipo: "grupos",
-          grupos: [
-            { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-            { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-            { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-          ],
-        },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Sentimento guardado fica:",
-        opcoes: ["Pesado", "Leve"],
-        correta: 0,
-        explicacao: "Pesado — por isso a gente conta.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Emoções!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta: "Estou triste. O melhor é:",
-        opcoes: ["Contar pra alguém de confiança", "Guardar tudo"],
+        pergunta: "Quando você pratica minhas emoções, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Contar alivia!",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Adulto ouvindo" },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta: "Amigo tá triste. Faço o quê?",
-        opcoes: ["Escuto e abraço", "Faço bagunça"],
-        correta: 0,
-        explicacao: "Escutar é um presente pro amigo.",
-        visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Amigo triste" },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta: "Não sei o nome do que sinto. E agora?",
-        opcoes: ["Aponto pra carinha que combina", "Fico calado pra sempre"],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao: "Apontar já é comunicar!",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-            { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste", cor: "#60A5FA" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta: "Estou bravo. Melhor jeito:",
-        opcoes: ["Respirar e falar", "Bater"],
-        correta: 0,
-        explicacao: "Respirar acalma. Falar resolve.",
-        visual: { tipo: "itens", imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calma" },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: { codigo: "EI03EO05", titulo: "Regras Que Ajudam" },
+  proximaHabilidade: { codigo: "EI03EO05", titulo: "Compartilhar — dividir é multiplicar" },
 };
 
 void piuImg;
+void bravoImg;
 
 export default aula;

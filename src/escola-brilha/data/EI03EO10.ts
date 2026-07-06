@@ -6,255 +6,264 @@ import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
 import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
+import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
+import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
 import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO10 — Pertencimento a grupo, comunidade, lugar.
- * ⭐ Estrela: Pertencer.
+ * EI03EO10 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Festa da Amizade" — spec EI-01 do usuário.
+ * Estrela: ⭐ Amizade Total.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO10",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Nossa Floresta",
+  titulo: "Festa da Amizade",
 
   narrativa: {
-    titulo: "Nossa Floresta",
-    contexto:
-      "As 9 estrelas da Árvore da Amizade estão acesas! A Coruja Sábia reúne todos: 'Vocês agora fazem PARTE desta floresta pra sempre. Aqui é a CASA de vocês.'",
-    problema: "O que é pertencer a um lugar? Como cuidar da nossa casa junta?",
-    convite: "Bora acender a última estrela e celebrar nossa floresta?",
+    titulo: "Festa da Amizade",
+    contexto: "As 9 estrelas acenderam! A Árvore da Amizade brilha de novo, a Floresta Encantada voltou a ter TODAS as cores. É hora da FESTA! Todo mundo dança, canta e agradece o Brilha (e VOCÊ!).",
+    problema: "Nossa jornada tá quase completa. Falta a ÚLTIMA estrela — a estrela da AMIZADE TOTAL. Bora acender juntos?",
+    convite: "Vem pra FESTA final!",
   },
 
-  conhecimentosPrevios: ["Reconhecer a própria casa.", "Nomear pessoas queridas.", "Saber onde é a escola."],
-
-  missao: "Sentir que EU FAÇO PARTE — da minha família, da minha escola, do meu lugar.",
-
-  objetivos: [
-    "Reconhecer os grupos aos quais pertence.",
-    "Perceber que cuidar do lugar é cuidar de todos.",
+  conhecimentosPrevios: [
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  motivacao: "Pertencer é sentir 'aqui eu sou querido, aqui eu importo'.",
+  missao: "Celebrar tudo que aprendeu: identidade, afeto, amizade, emoções, cooperação, respeito, empatia, convivência e participação.",
 
-  explicacao:
-    "EU PERTENÇO A:\n\n• Minha FAMÍLIA (quem me ama em casa).\n• Minha ESCOLA (amigos e professores).\n• Meu BAIRRO/CIDADE (vizinhos, praça).\n• A NATUREZA (árvores, bichos, rios).\n\nCuidar desses lugares é cuidar da gente também.",
+  objetivos: [
+    "Reconhecer o tema 'Festa da Amizade' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
+  ],
+
+  motivacao: "Cada estrela acesa foi um passo. Agora a floresta inteira brilha por SUA causa.",
+
+  explicacao: "NA FESTA a gente celebra:\n\n• Quem EU sou.\n• Minha FAMÍLIA.\n• Meus AMIGOS.\n• As EMOÇÕES.\n• DIVIDIR, RESPEITAR, AJUDAR.\n• Combinar REGRAS.\n• Trabalhar JUNTO.\n\nTudo isso é AMIZADE de verdade.",
 
   explicacaoAtiva: [
-    { texto: "Esta é a Árvore da Amizade. 9 estrelas acesas! Toque nela.", imagem: arvoreImg, imagemAlt: "Árvore com estrelas" },
-    { texto: "A Coruja diz: 'Você agora FAZ PARTE.'", imagem: corujaImg, imagemAlt: "Coruja acolhendo" },
-    { texto: "Sua casa, sua família — você pertence.", imagem: casaImg, imagemAlt: "Casa" },
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "E a floresta é NOSSA — cuidar dela é cuidar de todo mundo.",
-      imagem: florImg,
-      imagemAlt: "Flor",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
+      imagem: fifiImg,
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Cuidar do lugar onde vivo é:",
-        opcoes: ["Cuidar de mim e de todos", "Não faz diferença"],
+        pergunta: "Você tá pronto pra aprender sobre Festa da Amizade?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Meu lugar é parte de mim.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Eu faço parte da minha família e da minha escola.",
-    nivel2: "Pertencer é sentir 'aqui eu sou querido'.",
-    nivel3: "Cuidar do lugar é forma de agradecer por pertencer.",
-    nivel4: "Cada grupo que eu pertenço deixa uma marca boa em mim.",
+    nivel1: "Festa da Amizade é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de festa da amizade — a gente aprende junto.",
+    nivel3: "Praticar festa da amizade deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar festa da amizade com a família também.",
   },
 
   exemploResolvido: {
-    enunciado: "5 amigos da floresta + você = quantos moradores?",
-    passos: ["Brilha.", "Lupi.", "Fifi.", "Téo.", "Piu.", "VOCÊ."],
-    resposta: "6 — porque você também faz parte!",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar festa da amizade?",
+    passos: [
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
+    ],
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
       imagemUrl: estrelaImg,
-      quantidade: 6,
-      nomeItem: "morador da floresta",
-      nomeItemPlural: "moradores da floresta",
-      pergunta: "Quantos moradores contando você?",
+      quantidade: 1,
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado: "3 lugares que eu pertenço. Quantos?",
-    resposta: "3: casa, escola e natureza.",
-    explicacao: "Cada lugar tem gente que gosta de mim.",
+    enunciado: "3 amigos aparecem pra praticar festa da amizade. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver festa da amizade.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada lugar. Qual está no meio (2º)?",
+      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
-        { nome: "Casa", imagemUrl: casaImg, posicao: 1 },
-        { nome: "Árvore", imagemUrl: arvoreImg, posicao: 2 },
-        { nome: "Flor", imagemUrl: florImg, posicao: 3 },
+        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
+        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
+        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
       ],
-      respostaCerta: "Árvore",
+      respostaCerta: "Lupi",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Onde eu moro é meu lugar?", resposta: "Sim! É a minha casa.", dica: "Meu lugar é onde sou querido." },
-    { enunciado: "🐰 Como cuido do meu lugar?", resposta: "Guardo brinquedo, não jogo lixo, respeito.", dica: "Cuidado = amor pelo lugar." },
-    { enunciado: "🦉 Pertencer é o quê?", resposta: "Sentir que sou parte, que importo.", dica: "Pertencer aquece o coração." },
+    { enunciado: "⭐ Por que a gente pratica festa da amizade?", resposta: "Cada estrela acesa foi um passo. Agora a floresta inteira brilha por SUA causa.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: quais são os lugares aos quais você pertence?",
-    resposta: "Casa, escola, cidade, natureza — todos são meus.",
+    enunciado: "Desafio Brilha: 3 cenas mostram festa da amizade. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Casa da família", itemImagemUrl: casaImg, quantidade: 1, cor: "#FB923C" },
-        { personagem: "Árvore da escola", itemImagemUrl: arvoreImg, quantidade: 1, cor: "#34D399" },
-        { personagem: "Flor da natureza", itemImagemUrl: florImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        { pergunta: "Casa é meu lugar?", opcoes: ["Sim, é minha família", "Não"], correta: 0, explicacao: "Casa = primeiro lugar de pertencer." },
-        { pergunta: "Escola é meu lugar?", opcoes: ["Sim, tenho amigos e profes", "Não"], correta: 0, explicacao: "Na escola também pertenço." },
-        { pergunta: "Natureza é minha casa?", opcoes: ["Sim, o planeta é de todos", "Não"], correta: 0, explicacao: "A Terra é lar de todos os seres." },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar festa da amizade?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "Eu pertenço a lugares e a grupos.",
-      "Pertencer é ser querido e importar.",
-      "Cuidar do lugar é agradecer.",
-      "A floresta é NOSSA — de todos.",
+      "Festa da Amizade é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Diga a alguém da família: 'que bom que eu faço parte daqui'.",
+    dica: "Hoje, pratique festa da amizade com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "Pertencer é:",
-      opcoes: ["Ser querido no lugar", "Estar sozinho"],
+      pergunta: "Praticar festa da amizade deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
       correta: 0,
-      explicacao: "Pertencer = ser querido.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Pertencer" },
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Cuidar da minha casa/escola é:",
-      opcoes: ["Amor pelo lugar", "Só obrigação"],
-      correta: 0,
-      explicacao: "Cuidar = amar o lugar.",
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
+      opcoes: ["2", "3", "4"],
+      correta: 1,
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: casaImg, quantidade: 1, rotulo: "Casa", cor: "#FB923C" },
-          { imagemUrl: arvoreImg, quantidade: 1, rotulo: "Escola", cor: "#34D399" },
+        tipo: "grupos",
+        grupos: [
+          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
+          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
+          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
         ],
       },
     },
     {
-      pergunta: "Quantas estrelas acesas na Árvore ao final?",
-      opcoes: ["8", "9", "10"],
-      correta: 2,
-      explicacao: "10 estrelas — 1 pra cada missão cumprida!",
-      visual: {
-        tipo: "itens",
-        imagemUrl: estrelaImg,
-        quantidade: 10,
-        rotulo: "10 estrelas ⭐",
-      },
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Amizade Total!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Amizade Total" },
     },
   ],
 
-  conclusao:
-    "🏅 Medalha: Guardião da Floresta! 10ª ESTRELA ⭐ acesa — a Árvore da Amizade brilha COMPLETA! 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟 Missão em Casa: desenhe sua casa com sua família dentro — e mostre pra alguém dizendo 'este é meu lugar'.",
+  conclusao: "🏅 Medalha: Guardião da Amizade! ⭐ Estrela Amizade Total ACESA na Árvore da Amizade. Missão em Casa: pratique festa da amizade com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Assim como as árvores têm raízes que se ligam embaixo da terra, as pessoas têm 'raízes' nos lugares onde são queridas. Suas raízes já começaram a crescer!",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · Moradores da floresta",
-      instrucao: "Estes são os moradores. Toque em cada um.",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
+      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
+      pergunta: "Quantos Brilhas apareceram?",
+      opcoes: ["1", "2", "3"],
+      correta: 0,
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
       grupos: [
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" },
         { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
         { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
         { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
         { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
       ],
-      pergunta: "Quantos moradores da floresta?",
-      opcoes: ["4", "5", "6"],
+      pergunta: "Quantos amigos apareceram?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "5 amigos + você = 6! Você também faz parte.",
-      erro: "Conte cada um.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Estrelas da Árvore",
-      instrucao: "Cada missão acendeu 1 estrela. Toque em cada.",
-      grupos: [{ imagemUrl: estrelaImg, quantidade: 10, rotulo: "Estrelas" }],
-      pergunta: "Quantas estrelas acesas?",
-      opcoes: ["8", "9", "10"],
-      correta: 2,
-      acerto: "10 estrelas — árvore completa!",
-      erro: "Conte com carinho.",
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Lugar e sentimento",
-      instrucao: "Ligue cada lugar ao que sinto lá.",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
       pares: [
-        { a: "Minha casa", b: "amor", aImagem: casaImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Minha escola", b: "amigos felizes", aImagem: arvoreImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "A natureza", b: "calma", aImagem: florImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
       ],
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 4 · Lugares que pertenço",
-      instrucao: "Estes são meus lugares. Toque em cada um.",
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
       grupos: [
-        { imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
-        { imagemUrl: arvoreImg, quantidade: 1, rotulo: "Escola" },
-        { imagemUrl: florImg, quantidade: 1, rotulo: "Natureza" },
+        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
+        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
+        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
       ],
-      pergunta: "Quantos lugares meus?",
-      opcoes: ["2", "3", "4"],
+      pergunta: "Quantas carinhas?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "3 lugares onde sou querido!",
-      erro: "Conte cada lugar.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Estrela pra cada lugar",
-      instrucao: "Cada lugar meu ganha 1 estrela de amor. Toque na estrela e depois no lugar.",
-      itemImagem: estrelaImg,
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
+      itemImagem: balaoImg,
       alvosVisuais: [
-        { nome: "Casa", cor: "#FB923C", capacidade: 1, imagemUrl: casaImg },
-        { nome: "Escola", cor: "#34D399", capacidade: 1, imagemUrl: arvoreImg },
-        { nome: "Natureza", cor: "#F472B6", capacidade: 1, imagemUrl: florImg },
-        { nome: "Floresta", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
+        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
+        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
+        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
+        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
       ],
       pares: [
-        { item: "Estrela pra casa", alvo: "Casa" },
-        { item: "Estrela pra escola", alvo: "Escola" },
-        { item: "Estrela pra natureza", alvo: "Natureza" },
-        { item: "Estrela pra floresta", alvo: "Floresta" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Fim da jornada — as 10 estrelas",
-      instrucao: "Ligue cada estrela conquistada ao valor dela.",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Identidade", b: "quem sou eu", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Amizade", b: "amigos de verdade", aImagem: lupiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Pertencer", b: "minha floresta", aImagem: arvoreImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -263,61 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Minha casa é meu lugar?",
-        opcoes: ["Sim", "Não"],
+        pergunta: "Praticar festa da amizade é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Sim! Casa = primeiro lugar de pertencer.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Escola tem amigos e profes que me querem?",
-        opcoes: ["Sim", "Não"],
-        correta: 0,
-        explicacao: "Sim! Escola também é meu lugar.",
-        visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "Escola" },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Amizade Total!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta: "Cuidar do meu lugar é:",
-        opcoes: ["Cuidar de mim e de todos", "Perda de tempo"],
+        pergunta: "Quando você pratica festa da amizade, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Cuidar do lugar é cuidar da gente.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Cuidado" },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta: "Pertencer aquece o quê?",
-        opcoes: ["Coração", "Só o corpo"],
-        correta: 0,
-        explicacao: "Coração — sentimento bonito.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta: "Novo amigo chega. Faço:",
-        opcoes: ["Acolho pra ele pertencer também", "Ignoro"],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao: "Acolher é passar o pertencer adiante.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Eu acolho", cor: "#FBBF24" },
-            { imagemUrl: piuImg, quantidade: 1, rotulo: "Amigo novo", cor: "#60A5FA" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta: "10 estrelas acesas. Isso mostra:",
-        opcoes: ["Você cresceu por dentro", "Nada demais"],
-        correta: 0,
-        explicacao: "Cada estrela é um valor que agora mora em você!",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 10, rotulo: "10 estrelas" },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: { codigo: "EI03EO10", titulo: "Missão completa da EI03EO — bora pra EI03EF!" },
+  proximaHabilidade: { codigo: "EI03EO10", titulo: "Mundo 2 desbloqueado! Novas aventuras esperam." },
 };
+
+void piuImg;
+void bravoImg;
 
 export default aula;
