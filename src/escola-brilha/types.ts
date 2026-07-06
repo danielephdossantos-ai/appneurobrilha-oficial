@@ -635,6 +635,8 @@ export type Aula = {
         tempoSegundos?: number;
         /** Elementos a encontrar (imagem + rótulo curto). */
         elementos: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        /** Distratores — objetos que aparecem no cenário só pra confundir. */
+        distratores?: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
         /** Frase falada quando o minijogo é concluído. */
         acerto?: string;
       };
