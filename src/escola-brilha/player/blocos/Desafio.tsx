@@ -15,65 +15,11 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
     return (
       <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
         <p className="font-black mb-3">{dados.enunciado}</p>
-
-        {visual.cena && visual.cena.length > 0 && (
-          <div
-            className={`grid gap-2 mb-4 ${
-              visual.cena.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
-            }`}
-          >
-            {visual.cena.map((p, i) => {
-              const cor = p.cor ?? CORES[i % CORES.length];
-              return (
-                <div
-                  key={i}
-                  className="rounded-2xl border-4 p-2"
-                  style={{ borderColor: cor, background: `${cor}18` }}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-1.5">
-                      {p.personagemImagemUrl && (
-                        <img
-                          src={p.personagemImagemUrl}
-                          alt=""
-                          className="h-8 w-8 object-contain drop-shadow"
-                        />
-                      )}
-                      <span
-                        className="text-[10px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
-                        style={{ background: cor }}
-                      >
-                        {p.personagem}
-                      </span>
-                    </div>
-                    <span
-                      className="h-7 w-7 rounded-full text-sm font-black grid place-items-center border-2 border-white"
-                      style={{ background: "#fff", color: cor }}
-                    >
-                      {p.quantidade}
-                    </span>
-                  </div>
-                  <div className={`flex flex-wrap gap-1 justify-center items-center bg-white/40 rounded-xl p-2 ${p.quantidade <= 1 ? "min-h-[56px]" : "min-h-[70px]"}`}>
-                    {Array.from({ length: p.quantidade }).map((_, k) => (
-                      <img
-                        key={k}
-                        src={p.itemImagemUrl}
-                        alt=""
-                        className={`${p.quantidade === 1 ? "h-14 w-14 sm:h-16 sm:w-16" : p.quantidade <= 3 ? "h-11 w-11 sm:h-12 sm:w-12" : "h-8 w-8 sm:h-9 sm:w-9"} object-contain drop-shadow`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-
-        <QuizSequencial perguntas={visual.perguntas} />
+        <QuizSequencial perguntas={visual.perguntas} cena={visual.cena} />
       </Secao>
     );
   }
+
 
   return (
     <Secao icon={Trophy} rotulo="Desafio" cor="#F97316">
@@ -97,7 +43,9 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
   );
 }
 
-function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
+type CenaItem = NonNullable<NonNullable<Aula["desafio"]["visual"]>["cena"]>[number];
+
+function QuizSequencial({ perguntas, cena }: { perguntas: QuizItem[]; cena?: CenaItem[] }) {
   const lista = perguntas;
   const [i, setI] = useState(0);
   const [escolha, setEscolha] = useState<number | null>(null);
@@ -156,7 +104,32 @@ function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
           exit={{ opacity: 0, y: -8 }}
         >
           <p className="font-black mb-3">{q.pergunta}</p>
-          {q.visual && <PerguntaVisual visual={q.visual} />}
+          {(() => {
+            const cenaAtual = cena?.[i];
+            if (q.visual) return <PerguntaVisual visual={q.visual} />;
+            if (cenaAtual) {
+              const cor = cenaAtual.cor ?? CORES[i % CORES.length];
+              return (
+                <div
+                  className="mb-3 rounded-2xl border-4 p-3 flex flex-col items-center gap-2"
+                  style={{ borderColor: cor, background: `${cor}18` }}
+                >
+                  <img
+                    src={cenaAtual.itemImagemUrl}
+                    alt={cenaAtual.personagem}
+                    className="h-24 w-24 object-contain drop-shadow"
+                  />
+                  <span
+                    className="text-[11px] font-black uppercase tracking-widest text-white px-3 py-1 rounded-full"
+                    style={{ background: cor }}
+                  >
+                    {cenaAtual.personagem}
+                  </span>
+                </div>
+              );
+            }
+            return null;
+          })()}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {q.opcoes.map((op, k) => {
               const revelado = escolha !== null;
