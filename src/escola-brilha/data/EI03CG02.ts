@@ -18,6 +18,9 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import passosImg from "@/assets/escola-brilha/movimentos/passos.svg";
+import correrImg from "@/assets/escola-brilha/movimentos/correr.svg";
+import saltarImg from "@/assets/escola-brilha/movimentos/saltar.svg";
 
 /**
  * EI03CG02 — Mundo 2 · O Corpo que Fala na Floresta · Missão 2
@@ -85,10 +88,10 @@ const aula: Aula = {
     resposta: "2 pezinhos — 1 por passo.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: passosImg,
+      quantidade: 2,
+      nomeItem: "pezinho",
+      nomeItemPlural: "pezinhos",
       pergunta: "O Brilha andou 2 passos. Quantos pezinhos tocaram o chão?",
     },
   },
@@ -120,9 +123,9 @@ const aula: Aula = {
     resposta: "Cada amigo faz um movimento único.",
     visual: {
       cena: [
-        { personagem: "Brilha (passeio)", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi (festa)", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi (corrida)", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }
+        { personagem: "Brilha (passeio)", personagemImagemUrl: brilhaImg, itemImagemUrl: passosImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi (festa)", personagemImagemUrl: lupiImg, itemImagemUrl: saltarImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi (corrida)", personagemImagemUrl: fifiImg, itemImagemUrl: correrImg, quantidade: 1, cor: "#FB923C" }
       ],
       perguntas: [
         { pergunta: "Brilha vai passear devagar. Qual movimento?", opcoes: ["Andar", "Correr", "Pular"], correta: 0, explicacao: "Passeio calmo pede andar." },
@@ -140,9 +143,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Qual movimento é MAIS RÁPIDO?", opcoes: ["Andar", "Correr", "Ficar parado"], correta: 1, explicacao: "Correr é o mais rápido dos três!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Pra ficar BEM ALTO no ar, o que faz?", opcoes: ["Andar", "Correr", "Pular"], correta: 2, explicacao: "Pular sobe pro alto!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Pra caminhar calmo até a escola, o que faz?", opcoes: ["Andar", "Correr", "Pular"], correta: 0, explicacao: "Andar é calmo e seguro.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Qual movimento é MAIS RÁPIDO?", opcoes: ["Andar", "Correr", "Ficar parado"], correta: 1, explicacao: "Correr é o mais rápido dos três!", visual: { tipo: "itens", imagemUrl: correrImg, quantidade: 1, rotulo: "Correr rápido" } },
+    { pergunta: "Pra ficar BEM ALTO no ar, o que faz?", opcoes: ["Andar", "Correr", "Pular"], correta: 2, explicacao: "Pular sobe pro alto!", visual: { tipo: "itens", imagemUrl: saltarImg, quantidade: 1, rotulo: "Pular alto" } },
+    { pergunta: "Pra caminhar calmo até a escola, o que faz?", opcoes: ["Andar", "Correr", "Pular"], correta: 0, explicacao: "Andar é calmo e seguro.", visual: { tipo: "itens", imagemUrl: passosImg, quantidade: 1, rotulo: "Andar calmo" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião da Locomoção! Você trouxe o pular, o correr e o andar pra floresta. Missão em Casa: no quintal ou na sala, ande 5 passos, corra 5 passos e pule 5 vezes. Qual foi o mais divertido?",
@@ -156,9 +159,9 @@ const aula: Aula = {
     { tipo: "contarQuiz", titulo: "Fase 1 · Três movimentos", instrucao: "Cada amigo faz um movimento diferente.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Anda" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Pula" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Corre" }], pergunta: "Quantos movimentos diferentes aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 movimentos: andar, pular, correr!", erro: "Aponte cada amigo." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Todos no parque", instrucao: "Todos os amigos foram brincar de correr no parque.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja" }], pergunta: "Quantos amigos foram brincar?", opcoes: ["5", "6", "7"], correta: 1, acerto: "6 amigos correndo juntos!", erro: "Conte um por um." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, seu movimento favorito", instrucao: "Ligue cada amigo ao par certo.", pares: [
-      { a: "Lupi", b: "adora PULAR", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Fifi", b: "adora CORRER", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-      { a: "Téo", b: "adora ANDAR devagar", aImagem: teoImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 }
+      { a: "Lupi", b: "adora PULAR", aImagem: lupiImg, aQuantidade: 1, bImagem: saltarImg, bQuantidade: 1 },
+      { a: "Fifi", b: "adora CORRER", aImagem: fifiImg, aQuantidade: 1, bImagem: correrImg, bQuantidade: 1 },
+      { a: "Téo", b: "adora ANDAR devagar", aImagem: teoImg, aQuantidade: 1, bImagem: passosImg, bQuantidade: 1 }
     ] },
   ],
 
@@ -170,7 +173,7 @@ const aula: Aula = {
     ],
     medio: [
       { pergunta: "O Lupi pulou. Como o corpo dele fica?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Pulando de alegria!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Téo se cansou de andar. Como está?", opcoes: ["Feliz", "Cansadinho", "Bravo"], correta: 1, explicacao: "Andar demais cansa — precisa descansar.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Téo se cansou de andar. Como está?", opcoes: ["Feliz", "Cansadinho", "Bravo"], correta: 1, explicacao: "Andar demais cansa — precisa descansar.", visual: { tipo: "itens", imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Cansadinho" } }
     ],
     dificil: [
       { pergunta: "Cada amigo prefere um movimento. Isso é bom?", opcoes: ["Bom — cada um tem seu jeito", "Ruim — todos deviam fazer igual"], correta: 0, explicacao: "Cada corpo prefere um movimento.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },
