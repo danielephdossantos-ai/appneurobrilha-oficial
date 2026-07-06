@@ -225,17 +225,20 @@ const aula: Aula = {
     },
 
     {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Complete a palavra",
+      tipo: "escolherFigura",
+      titulo: "Fase 2 · Ouça e toque na figura",
       instrucao:
-        "A palavra da figura é BA _ ANA. Qual letra falta no meio?",
-      grupos: [{ imagemUrl: bananaImg, quantidade: 1, rotulo: "BA _ ANA" }],
-      pergunta: "Qual letra completa a palavra BA_ANA?",
-      opcoes: ["N", "M", "L"],
-      correta: 0,
+        "O Brilha falou a palavra 'BANANA' (B · A · N · A · N · A). Toque na figura certa.",
+      opcoes: [
+        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
+        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
+        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
+      ],
+      correta: 1,
       acerto: "Muito bem! BANANA — B · A · N · A · N · A.",
-      erro: "Fala devagar: ba-NA-na. Qual letra faz o som NNN?",
+      erro: "Escute: ba-NA-na. Toque na fruta amarelinha.",
     },
+
     {
       tipo: "ordenar",
       titulo: "Fase 3 · Monte a palavra",
