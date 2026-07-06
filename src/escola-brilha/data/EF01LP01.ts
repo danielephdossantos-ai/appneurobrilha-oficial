@@ -22,7 +22,7 @@ import escolaImg from "@/assets/neuro-treino/objetos/escola.png";
 const aula: Aula = {
   codigo: "EF01LP01",
   ano: "1º Ano",
-  disciplina: "Língua Portuguesa",
+  disciplina: "Português",
   titulo: "O Caminho das Letras",
 
   narrativa: {
