@@ -15,10 +15,13 @@ type BlocoId =
   | "guiada"
   | "exercicios"
   | "desafio"
+  | "minijogo"
   | "quiz"
   | "resumo"
   | "curiosidade"
+  | "familia"
   | "conclusao";
+
 
 
 /**
