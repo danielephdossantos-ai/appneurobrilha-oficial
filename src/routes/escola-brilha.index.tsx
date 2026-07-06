@@ -8,7 +8,7 @@ import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
-import { temaDaDisciplina } from "@/escola-brilha/missoes-tema";
+import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 
 
 
