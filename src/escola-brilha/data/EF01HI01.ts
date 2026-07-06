@@ -413,34 +413,49 @@ const aula: Aula = {
   },
 
   minijogo: {
-    tipo: "esteira",
+    tipo: "sequencia",
     titulo: "Linha Do Tempo Mágica",
     objetivo:
-      "Os momentos passam na esteira. Toque na fase certa — BEBÊ, CRIANÇA ou ESCOLA — antes que caiam!",
+      "As cartas aparecem embaralhadas. Toque nelas na ORDEM correta — do começo da vida até agora. Cada sequência ilumina uma página do álbum!",
     tempoSegundos: 90,
-    minAcertos: 10,
-    categorias: [
-      { nome: "BEBÊ", cor: "#F472B6", emoji: "👶" },
-      { nome: "CRIANÇA", cor: "#FBBF24", emoji: "🧒" },
-      { nome: "ESCOLA", cor: "#34D399", emoji: "🏫" },
+    sequencias: [
+      {
+        titulo: "Como você cresceu",
+        cards: [
+          { nome: "Bebê", imagemUrl: bebeImg, rotulo: "👶 BEBÊ" },
+          { nome: "Bebê engatinhando", imagemUrl: bebeEngatinhandoImg, rotulo: "🍼 ENGATINHA" },
+          { nome: "Criança andando", imagemUrl: criancaAndandoImg, rotulo: "🚶 ANDA" },
+          { nome: "Grupo de crianças", imagemUrl: criancasGrupoImg, rotulo: "👦 AMIGOS" },
+        ],
+      },
+      {
+        titulo: "Do bebê ao idoso",
+        cards: [
+          { nome: "Bebê", imagemUrl: bebeImg, rotulo: "👶 BEBÊ" },
+          { nome: "Menina", imagemUrl: meninaImg, rotulo: "👧 CRIANÇA" },
+          { nome: "Idoso", imagemUrl: idosoImg, rotulo: "🧓 IDOSO" },
+        ],
+      },
+      {
+        titulo: "Meu dia de escola",
+        cards: [
+          { nome: "Menino", imagemUrl: meninoImg, rotulo: "🧒 ACORDEI" },
+          { nome: "Mochila", imagemUrl: mochilaImg, rotulo: "🎒 MOCHILA" },
+          { nome: "Escola", imagemUrl: escolaImg, rotulo: "🏫 ESCOLA" },
+          { nome: "Álbum", imagemUrl: albumImg, rotulo: "📖 LEMBRANÇA" },
+        ],
+      },
+      {
+        titulo: "Meu aniversário",
+        cards: [
+          { nome: "Bolo de aniversário", imagemUrl: boloImg, rotulo: "🎂 BOLO" },
+          { nome: "Presente", imagemUrl: presenteImg, rotulo: "🎁 PRESENTE" },
+          { nome: "Grupo de crianças", imagemUrl: criancasGrupoImg, rotulo: "👦 AMIGOS" },
+        ],
+      },
     ],
-    objetos: [
-      { nome: "Bebê", imagemUrl: bebeImg, categoria: "BEBÊ" },
-      { nome: "Bebê engatinhando", imagemUrl: bebeEngatinhandoImg, categoria: "BEBÊ" },
-      { nome: "Mamadeira", imagemUrl: mamadeiraImg, categoria: "BEBÊ" },
-      { nome: "Chocalho", imagemUrl: chocalhoImg, categoria: "BEBÊ" },
-      { nome: "Menino", imagemUrl: meninoImg, categoria: "CRIANÇA" },
-      { nome: "Menina", imagemUrl: meninaImg, categoria: "CRIANÇA" },
-      { nome: "Criança andando", imagemUrl: criancaAndandoImg, categoria: "CRIANÇA" },
-      { nome: "Bola", imagemUrl: bolaImg, categoria: "CRIANÇA" },
-      { nome: "Boneca de pano", imagemUrl: bonecaPanoImg, categoria: "CRIANÇA" },
-      { nome: "Bolo de aniversário", imagemUrl: boloImg, categoria: "CRIANÇA" },
-      { nome: "Mochila", imagemUrl: mochilaImg, categoria: "ESCOLA" },
-      { nome: "Escola", imagemUrl: escolaImg, categoria: "ESCOLA" },
-      { nome: "Grupo de crianças", imagemUrl: criancasGrupoImg, categoria: "ESCOLA" },
-      { nome: "Presente", imagemUrl: presenteImg, categoria: "CRIANÇA" },
-      { nome: "Álbum", imagemUrl: albumImg, categoria: "ESCOLA" },
-    ],
+    minSequencias: 3,
+    acerto: "Álbum iluminado! Você organizou a sua história.",
   },
 
   missaoFamilia: {
