@@ -12,6 +12,11 @@ import solImg from "@/assets/neuro-treino/objetos/sol.png";
 import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
 import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
+import maoImg from "@/assets/neuro-treino/sentidos/mao.png";
+import peImg from "@/assets/neuro-treino/sentidos/pe.png";
+import cabecaImg from "@/assets/neuro-treino/sentidos/cabeca.png";
+import palmasImg from "@/assets/neuro-treino/sentidos/palmas.png";
+import olhoImg from "@/assets/neuro-treino/sentidos/olho.png";
 
 /**
  * EI03CG01 — Mundo 2 · Corpo, Gestos e Movimentos
@@ -55,21 +60,21 @@ const aula: Aula = {
   },
 
   exemploResolvido: {
-    enunciado: "A Fifi vai bater palma. Quantas mãos ela usa?",
+    enunciado: "Vamos bater palma! Quantas mãos a gente usa?",
     passos: ["Toque na primeira mão.", "Toque na segunda mão.", "Uma, duas — 2 mãos batem palma!"],
-    resposta: "A Fifi usa 2 mãos pra bater palma — uma bate na outra.",
-    interativo: { tipo: "contagem", imagemUrl: fifiImg, quantidade: 2, nomeItem: "mão", nomeItemPlural: "mãos", pergunta: "Quantas mãos batem palma?" },
+    resposta: "A gente usa 2 mãos pra bater palma — uma bate na outra.",
+    interativo: { tipo: "contagem", imagemUrl: maoImg, quantidade: 2, nomeItem: "mão", nomeItemPlural: "mãos", pergunta: "Quantas mãos batem palma?" },
   },
 
   atividadeGuiada: {
-    enunciado: "Três amigos fizeram uma pose. Toque neles pra ver. Quem está no MEIO?",
-    resposta: "A Fifi está no meio — é ela quem lidera a dança.",
-    explicacao: "No pódio, quem fica no 2º lugar é a Fifi — no meio dos amigos.",
+    enunciado: "Qual parte do corpo BATE PALMA? Toque na resposta certa.",
+    resposta: "A mão bate palma.",
+    explicacao: "As mãos se encontram e fazem barulho: palma-palma-palma!",
     visual: {
       tipo: "podio",
-      pergunta: "Quem está no meio do movimento?",
-      participantes: [{ nome: "Lupi", imagemUrl: lupiImg, posicao: 1 }, { nome: "Fifi", imagemUrl: fifiImg, posicao: 2 }, { nome: "Téo", imagemUrl: teoImg, posicao: 3 }],
-      respostaCerta: "Fifi",
+      pergunta: "Qual parte do corpo bate palma?",
+      participantes: [{ nome: "Mão", imagemUrl: maoImg, posicao: 1 }, { nome: "Pé", imagemUrl: peImg, posicao: 2 }, { nome: "Cabeça", imagemUrl: cabecaImg, posicao: 3 }],
+      respostaCerta: "Mão",
     },
   },
 
@@ -80,11 +85,11 @@ const aula: Aula = {
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: 3 amigos fizeram movimentos diferentes. Descubra o que cada um usou.",
-    resposta: "Cada movimento tem sua parte do corpo — e todos ajudam.",
+    enunciado: "Desafio Brilha: cada parte do corpo faz um movimento diferente. Descubra qual usa em cada ação.",
+    resposta: "Mão bate palma. Pé pula. Cabeça balança.",
     visual: {
-      cena: [{ personagem: "Lupi pulando", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" }, { personagem: "Fifi acenando", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FBBF24" }, { personagem: "Téo batendo palma", itemImagemUrl: teoImg, quantidade: 1, cor: "#60A5FA" }],
-      perguntas: [{ pergunta: "O Lupi pula. O que ele usa?", opcoes: ["As pernas", "As orelhas"], correta: 0, explicacao: "Pra pular, precisa das pernas fortes." }, { pergunta: "A Fifi acena. O que ela usa?", opcoes: ["A mão", "O nariz"], correta: 0, explicacao: "A mão sobe e vai de um lado pro outro." }, { pergunta: "O Téo bate palma. Quantas mãos?", opcoes: ["1", "2"], correta: 1, explicacao: "São 2 mãos que se encontram." }],
+      cena: [{ personagem: "Mãos batendo palma", itemImagemUrl: palmasImg, quantidade: 2, cor: "#F472B6" }, { personagem: "Pé pulando", itemImagemUrl: peImg, quantidade: 2, cor: "#FBBF24" }, { personagem: "Cabeça balançando", itemImagemUrl: cabecaImg, quantidade: 1, cor: "#60A5FA" }],
+      perguntas: [{ pergunta: "Qual parte do corpo PULA?", opcoes: ["Pé", "Orelha"], correta: 0, explicacao: "Os pés impulsionam o pulo." }, { pergunta: "Qual parte do corpo ACENA?", opcoes: ["Mão", "Joelho"], correta: 0, explicacao: "A mão sobe e balança." }, { pergunta: "Quantas mãos batem palma juntas?", opcoes: ["1", "2"], correta: 1, explicacao: "São 2 mãos que se encontram." }],
     },
   },
 
@@ -94,9 +99,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Com o que a gente ANDA?", opcoes: ["Com as pernas", "Com o cotovelo"], correta: 0, explicacao: "As pernas levam a gente pra qualquer lugar.", visual: { tipo: "itens", imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi caminhando" } },
-    { pergunta: "Com o que a gente OLHA o mundo?", opcoes: ["Com os olhos", "Com os pés"], correta: 0, explicacao: "Os olhos enxergam tudo.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Rostinho feliz" } },
-    { pergunta: "Quantos braços eu tenho?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "Todo mundo tem 2 braços.", visual: { tipo: "grupos", grupos: [{ imagemUrl: fifiImg, quantidade: 1, rotulo: "Braço direito", cor: "#F472B6" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Braço esquerdo", cor: "#60A5FA" }] } }
+    { pergunta: "Com o que a gente ANDA?", opcoes: ["Com as pernas", "Com o cotovelo"], correta: 0, explicacao: "As pernas levam a gente pra qualquer lugar.", visual: { tipo: "itens", imagemUrl: peImg, quantidade: 2, rotulo: "Pés" } },
+    { pergunta: "Com o que a gente OLHA o mundo?", opcoes: ["Com os olhos", "Com os pés"], correta: 0, explicacao: "Os olhos enxergam tudo.", visual: { tipo: "itens", imagemUrl: olhoImg, quantidade: 2, rotulo: "Olhos" } },
+    { pergunta: "Quantas mãos eu tenho?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "Todo mundo tem 2 mãos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: maoImg, quantidade: 1, rotulo: "Mão direita", cor: "#F472B6" }, { imagemUrl: maoImg, quantidade: 1, rotulo: "Mão esquerda", cor: "#60A5FA" }] } }
   ],
 
   conclusao: "🏅 Medalha conquistada: Explorador do Corpo! A PRIMEIRA ESTRELA ⭐ do Mundo 2 acendeu. Missão em Casa: mostre pra sua família 3 movimentos que você aprendeu.",
@@ -107,10 +112,10 @@ const aula: Aula = {
   },
 
   interativas: [
-    { tipo: "contarQuiz", titulo: "Fase 1 · Quantas mãos?", instrucao: "Toque em cada mão da Fifi.", grupos: [{ imagemUrl: fifiImg, quantidade: 2, rotulo: "Mãos" }], pergunta: "Quantas mãos a Fifi tem?", opcoes: ["1", "2", "3"], correta: 1, acerto: "Isso! 2 mãos pra fazer tudo.", erro: "Conte de novo: uma, duas." },
-    { tipo: "contarQuiz", titulo: "Fase 2 · Quantos pés?", instrucao: "Toque em cada pé do Téo.", grupos: [{ imagemUrl: teoImg, quantidade: 2, rotulo: "Pés" }], pergunta: "Quantos pés levam o Téo pra brincar?", opcoes: ["2", "4"], correta: 0, acerto: "Muito bem! 2 pés.", erro: "Um pé, dois pés — só 2." },
-    { tipo: "ligar", titulo: "Fase 3 · Parte do corpo e o que faz", instrucao: "Ligue a parte do corpo à ação certa.", pares: [{ a: "Mãos", b: "batem palma", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }, { a: "Pernas", b: "correm", aImagem: lupiImg, aQuantidade: 1, bImagem: bolaImg, bQuantidade: 1 }, { a: "Olhos", b: "olham o sol", aImagem: felizImg, aQuantidade: 1, bImagem: solImg, bQuantidade: 1 }] },
-    { tipo: "arrastar", titulo: "Fase 4 · Uma estrela pra cada amigo em movimento", instrucao: "Toque na estrela e depois no amigo.", itemImagem: estrelaImg, alvosVisuais: [{ nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg }, { nome: "Fifi", cor: "#FBBF24", capacidade: 1, imagemUrl: fifiImg }, { nome: "Téo", cor: "#60A5FA", capacidade: 1, imagemUrl: teoImg }], pares: [{ item: "Estrela pro Lupi", alvo: "Lupi" }, { item: "Estrela pra Fifi", alvo: "Fifi" }, { item: "Estrela pro Téo", alvo: "Téo" }] }
+    { tipo: "contarQuiz", titulo: "Fase 1 · Quantas mãos?", instrucao: "Toque em cada mão.", grupos: [{ imagemUrl: maoImg, quantidade: 2, rotulo: "Mãos" }], pergunta: "Quantas mãos temos?", opcoes: ["1", "2", "3"], correta: 1, acerto: "Isso! 2 mãos pra fazer tudo.", erro: "Conte de novo: uma, duas." },
+    { tipo: "contarQuiz", titulo: "Fase 2 · Quantos pés?", instrucao: "Toque em cada pé.", grupos: [{ imagemUrl: peImg, quantidade: 2, rotulo: "Pés" }], pergunta: "Quantos pés temos pra brincar?", opcoes: ["2", "4"], correta: 0, acerto: "Muito bem! 2 pés.", erro: "Um pé, dois pés — só 2." },
+    { tipo: "ligar", titulo: "Fase 3 · Parte do corpo e o que faz", instrucao: "Ligue a parte do corpo à ação certa.", pares: [{ a: "Mãos", b: "batem palma", aImagem: maoImg, aQuantidade: 2, bImagem: palmasImg, bQuantidade: 1 }, { a: "Pés", b: "pulam", aImagem: peImg, aQuantidade: 2, bImagem: bolaImg, bQuantidade: 1 }, { a: "Olhos", b: "olham o sol", aImagem: olhoImg, aQuantidade: 2, bImagem: solImg, bQuantidade: 1 }] },
+    { tipo: "arrastar", titulo: "Fase 4 · Cada parte no lugar certo", instrucao: "Toque na estrela e depois na parte do corpo.", itemImagem: estrelaImg, alvosVisuais: [{ nome: "Mão", cor: "#F472B6", capacidade: 1, imagemUrl: maoImg }, { nome: "Pé", cor: "#FBBF24", capacidade: 1, imagemUrl: peImg }, { nome: "Cabeça", cor: "#60A5FA", capacidade: 1, imagemUrl: cabecaImg }], pares: [{ item: "Estrela pra mão", alvo: "Mão" }, { item: "Estrela pro pé", alvo: "Pé" }, { item: "Estrela pra cabeça", alvo: "Cabeça" }] }
   ],
 
   niveis: {
@@ -123,6 +128,6 @@ const aula: Aula = {
   proximaHabilidade: { codigo: "EI03CG02", titulo: "Gestos falam — comunicando com o corpo" },
 };
 
-void piuImg; void corujaImg; void arvoreImg;
+void piuImg; void corujaImg; void arvoreImg; void lupiImg; void teoImg; void fifiImg; void coracaoImg;
 
 export default aula;
