@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Pernas pulando">
-  <rect x="18" y="18" width="220" height="220" rx="42" fill="#ECFDF5"/>
-  <path d="M88 68c9 33 21 58 40 82 20-24 32-49 40-82" fill="none" stroke="#60A5FA" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M128 150l-34 49M128 150l40 44" fill="none" stroke="#FDE68A" stroke-width="22" stroke-linecap="round"/>
-  <path d="M128 150l-34 49M128 150l40 44" fill="none" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
-  <path d="M84 54c12-18 26-28 44-30 18 2 32 12 44 30" stroke="#FBBF24" stroke-width="9" stroke-linecap="round" fill="none"/>
-</svg>

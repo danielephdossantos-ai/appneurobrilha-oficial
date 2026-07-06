@@ -156,29 +156,19 @@ export type Aula = {
      * a atividade real — a criança toca em cada item, o professor conta
      * em voz alta e mostra a resposta. Ideal para Ed. Infantil e 1º Ano.
      */
-    interativo?:
-      | {
-          tipo: "contagem";
-          /** URL da imagem do item a contar (ex.: maçã). Vem do Banco de Mídias. */
-          imagemUrl: string;
-          /** Quantidade de itens exibidos. */
-          quantidade: number;
-          /** Nome singular do item (ex.: "maçã"). */
-          nomeItem: string;
-          /** Plural do item (ex.: "maçãs"). Se ausente, adiciona "s". */
-          nomeItemPlural?: string;
-          /** Pergunta lida em voz alta. Padrão: "Quantas <plural> existem?". */
-          pergunta?: string;
-        }
-      | {
-          tipo: "encaixar";
-          itemImagemUrl: string;
-          alvoImagemUrl: string;
-          quantidade: number;
-          nomeItem: string;
-          nomeItemPlural?: string;
-          pergunta?: string;
-        };
+    interativo?: {
+      tipo: "contagem";
+      /** URL da imagem do item a contar (ex.: maçã). Vem do Banco de Mídias. */
+      imagemUrl: string;
+      /** Quantidade de itens exibidos. */
+      quantidade: number;
+      /** Nome singular do item (ex.: "maçã"). */
+      nomeItem: string;
+      /** Plural do item (ex.: "maçãs"). Se ausente, adiciona "s". */
+      nomeItemPlural?: string;
+      /** Pergunta lida em voz alta. Padrão: "Quantas <plural> existem?". */
+      pergunta?: string;
+    };
   };
   // 5. Prática Guiada
   atividadeGuiada: {
@@ -243,18 +233,6 @@ export type Aula = {
           sujeitoLabel?: string;
           opcoes: string[];
           correta: number;
-        }
-      | {
-          /** Cartões de escolha visual: personagem + imagem da ação/objeto. */
-          tipo: "cartoes";
-          pergunta: string;
-          cartoes: Array<{
-            nome: string;
-            imagemUrl: string;
-            acaoImagemUrl?: string;
-            rotulo?: string;
-          }>;
-          respostaCerta: string;
         };
   };
 

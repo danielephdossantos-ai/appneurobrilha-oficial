@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Equilibrar na linha">
-  <rect x="18" y="18" width="220" height="220" rx="42" fill="#F0FDFA"/>
-  <path d="M48 204h160" stroke="#0d1f55" stroke-width="10" stroke-linecap="round" stroke-dasharray="16 12"/>
-  <circle cx="128" cy="66" r="24" fill="#FDE68A" stroke="#0d1f55" stroke-width="8"/>
-  <path d="M128 93v76" stroke="#A78BFA" stroke-width="24" stroke-linecap="round"/>
-  <path d="M52 116c35-21 62-25 76-20 14-5 41-1 76 20" fill="none" stroke="#FDE68A" stroke-width="20" stroke-linecap="round"/>
-  <path d="M52 116c35-21 62-25 76-20 14-5 41-1 76 20M128 169l-38 35M128 169l38 35" fill="none" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
-</svg>

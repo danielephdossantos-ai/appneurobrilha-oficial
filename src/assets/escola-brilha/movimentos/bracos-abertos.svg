@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Braços abertos">
-  <rect x="18" y="18" width="220" height="220" rx="42" fill="#E0F2FE"/>
-  <circle cx="128" cy="72" r="26" fill="#FDE68A" stroke="#0d1f55" stroke-width="8"/>
-  <path d="M128 101v75" stroke="#60A5FA" stroke-width="28" stroke-linecap="round"/>
-  <path d="M48 116c28-19 51-26 80-14 29-12 52-5 80 14" fill="none" stroke="#FDE68A" stroke-width="24" stroke-linecap="round"/>
-  <path d="M48 116c28-19 51-26 80-14 29-12 52-5 80 14" fill="none" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
-  <path d="M96 216l32-40 32 40" fill="none" stroke="#0d1f55" stroke-width="10" stroke-linecap="round"/>
-</svg>
