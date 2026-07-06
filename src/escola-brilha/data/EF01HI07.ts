@@ -265,13 +265,12 @@ const aula: Aula = {
       tipo: "ordenar",
       titulo: "Fase 1 · Do Menor Pro Maior",
       instrucao: "Toque nas famílias na ordem: MENOR ➜ MAIOR.",
-      itens: [
-        { nome: "Mãe e filho", imagemUrl: familiaMaeFilhoImg, rotulo: "👩‍👦 2 pessoas", ordem: 1 },
-        { nome: "Família tradicional", imagemUrl: familiaTradImg, rotulo: "👨‍👩‍👧 4 pessoas", ordem: 2 },
-        { nome: "Família grande", imagemUrl: familiaGrandeImg, rotulo: "👨‍👩‍👧‍👦 7 pessoas", ordem: 3 },
+      itens: ["MÃE E FILHO", "TRADICIONAL", "GRANDE"],
+      imagens: [
+        { imagemUrl: familiaMaeFilhoImg, quantidade: 1, rotulo: "👩‍👦 2 pessoas", cor: "#F472B6" },
+        { imagemUrl: familiaTradImg, quantidade: 1, rotulo: "👨‍👩‍👧 4 pessoas", cor: "#FBBF24" },
+        { imagemUrl: familiaGrandeImg, quantidade: 1, rotulo: "👨‍👩‍👧‍👦 7 pessoas", cor: "#34D399" },
       ],
-      acerto: "👏 Isso! As famílias vêm em vários tamanhos.",
-      erro: "Conte quantas pessoas tem em cada família e ordene do menor pro maior.",
     },
 
     // FASE 2 — Selecionar múltiplos: TODAS são famílias
