@@ -79,12 +79,22 @@ function EscolaBrilhaCatalogo() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
-        .from("bncc_habilidades")
-        .select("codigo_bncc, titulo, ano, disciplina")
-        .order("codigo_bncc")
-        .limit(2000);
-      const rows: HabRow[] = (data ?? []).map((r) => ({
+      // Pagina em blocos para contornar o limite de 1000 do PostgREST
+      // (a coleção BNCC tem ~1500 habilidades e alfabéticamente as EI
+      // ficam depois das EF — sem paginar, a Educação Infantil somem).
+      const PAGE = 1000;
+      const acumulado: Array<{ codigo_bncc: string; titulo: string | null; ano: string | null; disciplina: string | null }> = [];
+      for (let offset = 0; ; offset += PAGE) {
+        const { data, error } = await supabase
+          .from("bncc_habilidades")
+          .select("codigo_bncc, titulo, ano, disciplina")
+          .order("codigo_bncc")
+          .range(offset, offset + PAGE - 1);
+        if (error || !data || data.length === 0) break;
+        acumulado.push(...data);
+        if (data.length < PAGE) break;
+      }
+      const rows: HabRow[] = acumulado.map((r) => ({
         codigo: r.codigo_bncc,
         titulo: r.titulo ?? r.codigo_bncc,
         ano: r.ano ?? "",
@@ -92,6 +102,7 @@ function EscolaBrilhaCatalogo() {
       }));
       setHabilidades(rows);
       setLoading(false);
+
     })();
   }, []);
 
