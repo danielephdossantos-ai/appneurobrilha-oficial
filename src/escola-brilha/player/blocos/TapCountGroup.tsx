@@ -123,30 +123,34 @@ export function TapCountGroup({
         })}
       </div>
 
-      <div className="flex items-center justify-between gap-2 mt-3">
-        <div className="flex-1 rounded-xl bg-[#0d1f55] text-white px-3 py-1.5 text-center">
-          <span className="text-[9px] font-black uppercase tracking-widest text-white/60 mr-2">
-            Contando
-          </span>
-          <span className="text-2xl font-black tabular-nums">
-            {contados.length}
-          </span>
-          <span className="text-white/50 font-black">/{quantidade}</span>
-        </div>
-        <button
-          type="button"
-          onClick={reiniciar}
-          disabled={contados.length === 0}
-          className="h-9 w-9 rounded-xl bg-white/90 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
-          aria-label="Reiniciar contagem"
-        >
-          <RotateCcw className="h-4 w-4" />
-        </button>
-      </div>
-      {!completo && contados.length === 0 && (
-        <p className="text-center text-[11px] font-bold text-white/70 mt-2">
-          Toque em cada imagem para contar
-        </p>
+      {quantidade > 1 && (
+        <>
+          <div className="flex items-center justify-between gap-2 mt-3">
+            <div className="flex-1 rounded-xl bg-[#0d1f55] text-white px-3 py-1.5 text-center">
+              <span className="text-[9px] font-black uppercase tracking-widest text-white/60 mr-2">
+                Contando
+              </span>
+              <span className="text-2xl font-black tabular-nums">
+                {contados.length}
+              </span>
+              <span className="text-white/50 font-black">/{quantidade}</span>
+            </div>
+            <button
+              type="button"
+              onClick={reiniciar}
+              disabled={contados.length === 0}
+              className="h-9 w-9 rounded-xl bg-white/90 text-[#0d1f55] grid place-items-center active:scale-95 disabled:opacity-30"
+              aria-label="Reiniciar contagem"
+            >
+              <RotateCcw className="h-4 w-4" />
+            </button>
+          </div>
+          {!completo && contados.length === 0 && (
+            <p className="text-center text-[11px] font-bold text-white/70 mt-2">
+              Toque em cada imagem para contar
+            </p>
+          )}
+        </>
       )}
     </div>
   );
