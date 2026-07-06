@@ -882,19 +882,17 @@ function JogoLigar({
                   }`}
                 >
                   <div className="flex-1 min-w-0">
-                    {!temImg && (
-                      <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider opacity-70 break-words leading-tight">
-                        {p.a}
-                      </div>
-                    )}
+                    <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider mb-1 opacity-70 break-words leading-tight">
+                      {p.a}
+                    </div>
                     {temImg && (
-                      <div className="flex flex-wrap gap-0.5 justify-center">
+                      <div className="flex flex-wrap gap-0.5">
                         {Array.from({ length: p.aQuantidade! }).map((_, k) => (
                           <img
                             key={k}
                             src={p.aImagem!}
                             alt=""
-                            className="h-10 w-10 sm:h-14 sm:w-14 object-contain"
+                            className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
                             loading="lazy"
                           />
                         ))}
@@ -924,18 +922,14 @@ function JogoLigar({
                   } ${selA ? "hover:scale-105" : ""}`}
                 >
                   <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#F472B6] shrink-0" />
-                  {!temImg && (
-                    <span className="flex-1 min-w-0 text-center break-words leading-tight">{b}</span>
-                  )}
+                  <span className="flex-1 min-w-0 text-center break-words leading-tight">{b}</span>
                   {temImg && (
-                    <div className="flex-1 flex justify-center">
-                      <img
-                        src={par!.bImagem!}
-                        alt=""
-                        className="h-10 w-10 sm:h-14 sm:w-14 object-contain shrink-0"
-                        loading="lazy"
-                      />
-                    </div>
+                    <img
+                      src={par!.bImagem!}
+                      alt=""
+                      className="h-6 w-6 sm:h-8 sm:w-8 object-contain shrink-0"
+                      loading="lazy"
+                    />
                   )}
                 </button>
               );
