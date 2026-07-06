@@ -209,12 +209,6 @@ const aula: Aula = {
   },
 
   interativas: [
-    {
-      tipo: "escolherImagem" as never, // fallback: usaremos contarQuiz + ligar + ordenar
-      titulo: "",
-      instrucao: "",
-    } as never,
-    {
       tipo: "contarQuiz",
       titulo: "Fase 1 · Ouça e escolha",
       instrucao:
