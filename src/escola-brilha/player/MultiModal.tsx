@@ -141,7 +141,139 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoLupa jogo={jogo} />;
     case "selecionarMultiplos":
       return <JogoSelecionarMultiplos jogo={jogo} />;
+    case "album":
+      return <JogoAlbum jogo={jogo} />;
   }
+}
+
+function JogoAlbum({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "album" }>;
+}) {
+  const { speak } = useDeviceTTS();
+  const [escolhas, setEscolhas] = useState<Record<number, number>>({});
+  const total = jogo.escolhas.length;
+  const feitas = Object.keys(escolhas).length;
+  const pronto = feitas === total;
+
+  return (
+    <Secao icon={Sparkles} rotulo="Álbum" cor="#F472B6">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+
+      <div className="space-y-4">
+        {jogo.escolhas.map((esc, ei) => (
+          <div key={ei} className="rounded-2xl bg-white/10 border-2 border-white/20 p-3">
+            <button
+              onClick={() => speak(esc.label)}
+              className="w-full text-left font-black text-white text-base mb-2 flex items-center gap-2"
+            >
+              <Volume2 className="w-4 h-4" /> {esc.label}
+            </button>
+            {esc.modo === "cor" ? (
+              <div className="flex flex-wrap gap-2 justify-center">
+                {esc.opcoes.map((op, oi) => {
+                  const sel = escolhas[ei] === oi;
+                  return (
+                    <button
+                      key={oi}
+                      onClick={() => {
+                        setEscolhas((prev) => ({ ...prev, [ei]: oi }));
+                        speak(op.nome);
+                      }}
+                      className={`h-14 w-14 rounded-full border-4 transition ${
+                        sel ? "border-white scale-110 shadow-xl" : "border-white/30"
+                      }`}
+                      style={{ background: op.cor }}
+                      aria-label={op.nome}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                {esc.opcoes.map((op, oi) => {
+                  const sel = escolhas[ei] === oi;
+                  return (
+                    <button
+                      key={oi}
+                      onClick={() => {
+                        setEscolhas((prev) => ({ ...prev, [ei]: oi }));
+                        speak(op.rotulo ?? op.nome);
+                      }}
+                      className={`rounded-2xl p-2 border-4 transition bg-white ${
+                        sel ? "border-[#F472B6] scale-105 shadow-xl" : "border-white/30"
+                      }`}
+                    >
+                      {op.imagemUrl && (
+                        <img
+                          src={op.imagemUrl}
+                          alt={op.nome}
+                          className="h-16 w-full object-contain"
+                          loading="lazy"
+                        />
+                      )}
+                      {op.rotulo && (
+                        <div className="text-xs font-black text-[#0d1f55] mt-1 text-center">
+                          {op.rotulo}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {pronto && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-4 rounded-2xl bg-gradient-to-br from-[#F472B6] to-[#FBBF24] p-4 text-[#0d1f55] shadow-2xl border-4 border-white"
+        >
+          <div className="text-center font-black text-lg mb-2">
+            📖 Sua Página Do Álbum
+          </div>
+          <div className="space-y-2">
+            {jogo.escolhas.map((esc, ei) => {
+              const op = esc.opcoes[escolhas[ei]];
+              return (
+                <div
+                  key={ei}
+                  className="flex items-center gap-3 rounded-xl bg-white/80 p-2"
+                >
+                  <div className="text-xs font-black uppercase tracking-wider flex-1">
+                    {esc.label}
+                  </div>
+                  {esc.modo === "cor" ? (
+                    <div
+                      className="h-10 w-10 rounded-full border-2 border-[#0d1f55]"
+                      style={{ background: op.cor }}
+                    />
+                  ) : (
+                    op.imagemUrl && (
+                      <img
+                        src={op.imagemUrl}
+                        alt={op.nome}
+                        className="h-12 w-12 object-contain"
+                      />
+                    )
+                  )}
+                  <div className="font-black text-sm">{op.rotulo ?? op.nome}</div>
+                </div>
+              );
+            })}
+          </div>
+          {jogo.acerto && (
+            <p className="mt-3 text-center font-black text-sm">{jogo.acerto}</p>
+          )}
+        </motion.div>
+      )}
+    </Secao>
+  );
 }
 
 function JogoSelecionarMultiplos({
