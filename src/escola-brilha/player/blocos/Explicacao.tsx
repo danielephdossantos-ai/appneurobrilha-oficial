@@ -119,18 +119,17 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                 {c.imagem && (
                   <div className="mt-3 rounded-xl bg-white/5 border border-white/10 p-3 flex flex-col items-center">
                     {/^https?:\/\//i.test(c.imagem) || c.imagem.startsWith("/") ? (
-                      <img
-                        src={c.imagem}
-                        alt={c.imagemAlt ?? ""}
-                        loading="lazy"
-                        className="max-h-40 w-auto rounded-lg object-contain"
+                      <PersonagemInterativo
+                        imagem={c.imagem}
+                        imagemAlt={c.imagemAlt}
+                        contexto={`${c.texto ?? ""} ${c.imagemAlt ?? ""}`}
                       />
                     ) : (
                       <div className="text-6xl leading-none" aria-hidden>
                         {c.imagem}
                       </div>
                     )}
-                    {c.imagemAlt && (
+                    {c.imagemAlt && !/^https?:\/\//i.test(c.imagem) && !c.imagem.startsWith("/") && (
                       <div className="mt-1 text-[11px] text-white/60 flex items-center gap-1">
                         <ImageIcon className="h-3 w-3" /> {c.imagemAlt}
                       </div>
