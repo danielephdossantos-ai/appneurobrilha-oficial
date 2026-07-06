@@ -79,18 +79,27 @@ function EscolaBrilhaCatalogo() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
-        .from("bncc_habilidades")
-        .select("codigo_bncc, titulo, ano, disciplina")
-        .order("codigo_bncc")
-        .limit(2000);
-      const rows: HabRow[] = (data ?? []).map((r) => ({
-        codigo: r.codigo_bncc,
-        titulo: r.titulo ?? r.codigo_bncc,
-        ano: r.ano ?? "",
-        componente: r.disciplina ?? "",
-      }));
-      setHabilidades(rows);
+      // PostgREST limita respostas a 1000 linhas por padrão — paginar com .range().
+      const PAGE = 1000;
+      const all: HabRow[] = [];
+      for (let offset = 0; ; offset += PAGE) {
+        const { data, error } = await supabase
+          .from("bncc_habilidades")
+          .select("codigo_bncc, titulo, ano, disciplina")
+          .order("codigo_bncc")
+          .range(offset, offset + PAGE - 1);
+        if (error || !data || data.length === 0) break;
+        for (const r of data) {
+          all.push({
+            codigo: r.codigo_bncc,
+            titulo: r.titulo ?? r.codigo_bncc,
+            ano: r.ano ?? "",
+            componente: r.disciplina ?? "",
+          });
+        }
+        if (data.length < PAGE) break;
+      }
+      setHabilidades(all);
       setLoading(false);
     })();
   }, []);
