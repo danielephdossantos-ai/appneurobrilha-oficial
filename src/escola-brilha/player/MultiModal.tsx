@@ -11,7 +11,9 @@ import {
   Puzzle,
   CheckCircle2,
   RefreshCw,
+  Search,
 } from "lucide-react";
+
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
 import { OperacaoVisual } from "./blocos/OperacaoVisual";
