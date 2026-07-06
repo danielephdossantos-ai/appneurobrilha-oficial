@@ -139,8 +139,120 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoSelecionarLetras jogo={jogo} />;
     case "lupa":
       return <JogoLupa jogo={jogo} />;
+    case "selecionarMultiplos":
+      return <JogoSelecionarMultiplos jogo={jogo} />;
   }
 }
+
+function JogoSelecionarMultiplos({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "selecionarMultiplos" }>;
+}) {
+  const [escolhidos, setEscolhidos] = useState<Set<number>>(new Set());
+  const [erros, setErros] = useState<Set<number>>(new Set());
+  const { speak } = useDeviceTTS();
+
+  const totalCorretos = jogo.opcoes.filter((o) => o.correto).length;
+  const acertosAtuais = Array.from(escolhidos).filter(
+    (i) => jogo.opcoes[i]?.correto,
+  ).length;
+  const concluiu = acertosAtuais === totalCorretos && totalCorretos > 0;
+
+  function tocar(i: number) {
+    if (escolhidos.has(i) || erros.has(i)) return;
+    const op = jogo.opcoes[i];
+    speak(op.nome, { rate: 1 });
+    if (op.correto) {
+      setEscolhidos((prev) => new Set(prev).add(i));
+    } else {
+      setErros((prev) => new Set(prev).add(i));
+      window.setTimeout(() => {
+        setErros((prev) => {
+          const s = new Set(prev);
+          s.delete(i);
+          return s;
+        });
+      }, 900);
+    }
+  }
+
+  return (
+    <Secao icon={Search} rotulo="Mochila do Cientista" cor="#F59E0B">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-2">{jogo.instrucao}</p>
+      )}
+      <div className="rounded-xl bg-amber-500/20 border-2 border-amber-300/50 px-3 py-2 mb-3">
+        <p className="text-xs font-black uppercase tracking-widest text-amber-200">
+          Missão
+        </p>
+        <p className="font-black text-white">{jogo.criterio}</p>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {jogo.opcoes.map((op, i) => {
+          const ok = escolhidos.has(i);
+          const erro = erros.has(i);
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocar(i)}
+              className={`relative rounded-2xl p-3 flex flex-col items-center gap-2 transition ${
+                ok
+                  ? "ring-4 ring-emerald-300 bg-emerald-500/20"
+                  : erro
+                    ? "ring-4 ring-rose-400 bg-rose-500/20 animate-pulse"
+                    : "bg-white/15 hover:bg-white/25 active:scale-95"
+              }`}
+              aria-label={op.nome}
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28">
+                <img
+                  src={op.imagemUrl}
+                  alt={op.nome}
+                  className="w-full h-full object-contain drop-shadow"
+                  draggable={false}
+                />
+              </div>
+              <span className="text-sm font-black text-white text-center">
+                {op.rotulo ?? op.nome}
+              </span>
+              {ok && (
+                <span className="absolute top-1 right-1 h-7 w-7 rounded-full bg-emerald-400 text-[#0d1f55] grid place-items-center">
+                  <CheckCircle2 className="h-4 w-4" />
+                </span>
+              )}
+              {erro && (
+                <span className="absolute top-1 right-1 h-7 w-7 rounded-full bg-rose-500 text-white grid place-items-center font-black">
+                  ✕
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {!concluiu && (
+        <p className="mt-3 text-center text-xs font-black uppercase tracking-widest text-white/60">
+          {acertosAtuais}/{totalCorretos} guardados na mochila
+        </p>
+      )}
+      {concluiu && (
+        <Status
+          ok
+          texto={
+            jogo.acerto ??
+            "Mochila cheia! Só objetos certos — o cientista aprovou!"
+          }
+        />
+      )}
+    </Secao>
+  );
+}
+
+
 
 
 /* --- Selecionar Letras (multi-select por categoria + TTS por cartão) --- */

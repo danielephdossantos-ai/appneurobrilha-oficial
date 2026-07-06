@@ -589,6 +589,27 @@ export type Aula = {
         }>;
         acerto?: string;
       }
+    | {
+        /**
+         * Selecionar vários itens que atendem a UM critério (ex.: "encontre
+         * apenas objetos de madeira"). A criança toca em cada item; verde
+         * quando bate no critério, vermelho quando não. A fase é concluída
+         * quando todos os corretos foram escolhidos.
+         */
+        tipo: "selecionarMultiplos";
+        titulo: string;
+        instrucao?: string;
+        /** Critério mostrado em destaque (ex.: "Objetos de madeira"). */
+        criterio: string;
+        opcoes: Array<{
+          nome: string;
+          imagemUrl: string;
+          rotulo?: string;
+          correto: boolean;
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
   >;
 
 
@@ -638,6 +659,30 @@ export type Aula = {
         /** Distratores — objetos que aparecem no cenário só pra confundir. */
         distratores?: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
         /** Frase falada quando o minijogo é concluído. */
+        acerto?: string;
+      }
+    | {
+        /**
+         * Fábrica dos Materiais — objetos deslizam por uma esteira e a criança
+         * arrasta cada um pro recipiente da categoria correta antes do tempo
+         * acabar. Cada acerto faz a fábrica "produzir" uma peça.
+         */
+        tipo: "esteira";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Categorias (recipientes) na parte de baixo da tela. */
+        categorias: Array<{ nome: string; cor: string; emoji?: string }>;
+        /** Objetos que passam na esteira, cada um pertence a uma categoria. */
+        objetos: Array<{
+          nome: string;
+          imagemUrl: string;
+          categoria: string;
+          rotulo?: string;
+        }>;
+        /** Meta mínima de acertos pra concluir. Padrão: 10. */
+        minAcertos?: number;
         acerto?: string;
       };
 
