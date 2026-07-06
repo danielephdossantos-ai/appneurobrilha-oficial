@@ -305,3 +305,222 @@ function MinijogoCaca({ dados }: { dados: CacaDados }) {
     </Secao>
   );
 }
+
+/* ------------------------- ESTEIRA ------------------------- */
+
+type EsteiraDados = Extract<NonNullable<Aula["minijogo"]>, { tipo: "esteira" }>;
+
+type ObjetoEsteira = EsteiraDados["objetos"][number] & { id: string };
+
+/**
+ * Fábrica dos Materiais — objetos deslizam por uma esteira da esquerda
+ * pra direita e a criança toca no recipiente da categoria correta antes
+ * do objeto sair da tela. Cada acerto conta ponto; cada erro tira uma
+ * vida. Encerra por tempo ou por meta de acertos.
+ */
+function MinijogoEsteira({ dados }: { dados: EsteiraDados }) {
+  const tempoInicial = dados.tempoSegundos ?? 90;
+  const meta = dados.minAcertos ?? 10;
+
+  const [rodando, setRodando] = useState(false);
+  const [tempo, setTempo] = useState(tempoInicial);
+  const [acertos, setAcertos] = useState(0);
+  const [erros, setErros] = useState(0);
+  const [atual, setAtual] = useState<ObjetoEsteira | null>(null);
+  const [feedback, setFeedback] = useState<null | "ok" | "erro">(null);
+  const finalizadoRef = useRef(false);
+  const { speak } = useDeviceTTS();
+
+  const concluido = acertos >= meta;
+  const acabou = tempo === 0;
+
+  function proximoObjeto(): ObjetoEsteira {
+    const o = dados.objetos[Math.floor(Math.random() * dados.objetos.length)];
+    return { ...o, id: `${Date.now()}-${Math.random()}` };
+  }
+
+  function iniciar() {
+    setAcertos(0);
+    setErros(0);
+    setTempo(tempoInicial);
+    setFeedback(null);
+    finalizadoRef.current = false;
+    setAtual(proximoObjeto());
+    setRodando(true);
+  }
+
+  // cronômetro
+  useEffect(() => {
+    if (!rodando) return;
+    if (concluido || acabou) {
+      setRodando(false);
+      if (!finalizadoRef.current) {
+        finalizadoRef.current = true;
+        if (concluido) speak(dados.acerto ?? "Fábrica em produção!", { rate: 0.95 });
+      }
+      return;
+    }
+    const id = window.setTimeout(() => setTempo((t) => Math.max(0, t - 1)), 1000);
+    return () => window.clearTimeout(id);
+  }, [rodando, tempo, concluido, acabou, dados.acerto, speak]);
+
+  // se o objeto atravessou a esteira sem categorização, conta como erro leve e vai pro próximo
+  function quandoSaiu() {
+    if (!rodando || !atual) return;
+    setErros((e) => e + 1);
+    setFeedback("erro");
+    window.setTimeout(() => {
+      setFeedback(null);
+      setAtual(proximoObjeto());
+    }, 350);
+  }
+
+  function classificar(categoria: string) {
+    if (!rodando || !atual) return;
+    if (categoria === atual.categoria) {
+      setAcertos((a) => a + 1);
+      setFeedback("ok");
+      speak(atual.nome, { rate: 1 });
+    } else {
+      setErros((e) => e + 1);
+      setFeedback("erro");
+      speak("Tenta de novo!", { rate: 1 });
+    }
+    window.setTimeout(() => {
+      setFeedback(null);
+      setAtual(proximoObjeto());
+    }, 300);
+  }
+
+  return (
+    <Secao icon={Gamepad2} rotulo="Minijogo Brilha" cor="#F97316">
+      <p className="font-black text-lg mb-1">{dados.titulo}</p>
+      <p className="text-base text-white/80 mb-3">{dados.objetivo}</p>
+
+      {/* HUD */}
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <div className="flex items-center gap-1">
+          <Timer className="h-4 w-4 text-orange-300" />
+          <span className="font-black text-white">{tempo}s</span>
+        </div>
+        <span className="text-xs font-black text-emerald-300">
+          ✓ {acertos}/{meta}
+        </span>
+        <span className="text-xs font-black text-rose-300">✗ {erros}</span>
+        {!rodando && !concluido && (
+          <button
+            onClick={iniciar}
+            className="ml-auto h-10 px-4 rounded-xl bg-gradient-to-r from-orange-400 to-rose-500 text-white font-black flex items-center gap-1 active:scale-95"
+          >
+            <Play className="h-4 w-4" /> {acabou ? "Jogar de novo" : "Começar"}
+          </button>
+        )}
+        {rodando && (
+          <span className="ml-auto text-[10px] font-black uppercase tracking-widest text-emerald-300 animate-pulse">
+            ● no ar
+          </span>
+        )}
+      </div>
+
+      {/* Esteira */}
+      <div className="relative w-full h-40 sm:h-48 rounded-2xl bg-gradient-to-b from-zinc-800 to-zinc-950 border-2 border-zinc-500/40 overflow-hidden">
+        {/* trilhos */}
+        <div className="absolute inset-x-0 bottom-3 h-8 bg-zinc-700 border-y-4 border-zinc-500" />
+        <div className="absolute inset-x-0 bottom-3 h-8 opacity-30 bg-[repeating-linear-gradient(90deg,transparent_0_20px,rgba(255,255,255,0.4)_20px_22px)]" />
+
+        {rodando && atual && feedback === null && (
+          <motion.div
+            key={atual.id}
+            className="absolute bottom-4 grid place-items-center"
+            initial={{ x: "-20%" }}
+            animate={{ x: "110%" }}
+            transition={{ duration: 4.5, ease: "linear" }}
+            onAnimationComplete={quandoSaiu}
+            style={{ top: "auto", height: 96, width: 96 }}
+          >
+            <img
+              src={atual.imagemUrl}
+              alt={atual.nome}
+              className="w-24 h-24 object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)]"
+              draggable={false}
+            />
+          </motion.div>
+        )}
+
+        {feedback && (
+          <div
+            className={`absolute inset-0 grid place-items-center pointer-events-none ${
+              feedback === "ok" ? "bg-emerald-500/30" : "bg-rose-500/30"
+            }`}
+          >
+            <span className="text-5xl">{feedback === "ok" ? "✅" : "❌"}</span>
+          </div>
+        )}
+
+        {!rodando && !concluido && !acabou && (
+          <div className="absolute inset-0 grid place-items-center p-4 text-center">
+            <div>
+              <div className="text-4xl mb-2">🏭</div>
+              <p className="font-black text-white">
+                Encaixe {meta} objetos na categoria certa em {tempoInicial}s!
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Recipientes */}
+      <div
+        className="grid gap-2 mt-3"
+        style={{
+          gridTemplateColumns: `repeat(${Math.min(dados.categorias.length, 5)}, minmax(0, 1fr))`,
+        }}
+      >
+        {dados.categorias.map((cat) => (
+          <button
+            key={cat.nome}
+            onClick={() => classificar(cat.nome)}
+            disabled={!rodando || !atual}
+            className="rounded-xl border-2 px-2 py-3 flex flex-col items-center gap-1 font-black text-white active:scale-95 disabled:opacity-50"
+            style={{ backgroundColor: `${cat.cor}30`, borderColor: cat.cor }}
+          >
+            {cat.emoji && <span className="text-2xl leading-none">{cat.emoji}</span>}
+            <span className="text-[11px] sm:text-xs text-center leading-tight">
+              {cat.nome}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {concluido && (
+        <div className="mt-3 rounded-xl bg-emerald-500/20 border-2 border-emerald-400 p-4 text-center">
+          <CheckCircle2 className="h-8 w-8 text-emerald-300 mx-auto mb-1" />
+          <p className="font-black text-white">
+            {dados.acerto ?? "🏭 Fábrica em produção total!"}
+          </p>
+          <button
+            onClick={iniciar}
+            className="mt-2 h-10 px-4 rounded-xl bg-white/20 font-black text-white inline-flex items-center gap-1 active:scale-95"
+          >
+            <RefreshCw className="h-4 w-4" /> Jogar de novo
+          </button>
+        </div>
+      )}
+
+      {acabou && !concluido && (
+        <div className="mt-3 rounded-xl bg-rose-500/20 border-2 border-rose-400 p-4 text-center">
+          <p className="font-black text-white">⏰ Tempo esgotado!</p>
+          <p className="text-sm text-white/80">
+            Você acertou {acertos} de {meta}. Tenta de novo!
+          </p>
+          <button
+            onClick={iniciar}
+            className="mt-2 h-10 px-4 rounded-xl bg-white/20 font-black text-white inline-flex items-center gap-1 active:scale-95"
+          >
+            <RefreshCw className="h-4 w-4" /> Jogar de novo
+          </button>
+        </div>
+      )}
+    </Secao>
+  );
+}
