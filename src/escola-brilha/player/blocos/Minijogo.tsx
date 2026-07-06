@@ -82,12 +82,12 @@ export function Minijogo({ dados }: { dados: NonNullable<Aula["minijogo"]> }) {
         x,
         y,
         drift: {
-          dx: (Math.random() - 0.5) * 8,
-          dy: (Math.random() - 0.5) * 8,
-          dur: 2 + Math.random() * 2,
-          delay: Math.random() * 1.5,
+          dx: (Math.random() < 0.5 ? -1 : 1) * (18 + Math.random() * 22),
+          dy: (Math.random() < 0.5 ? -1 : 1) * (14 + Math.random() * 18),
+          dur: 3 + Math.random() * 2.5,
+          delay: Math.random() * 2,
         },
-        size: 44 + Math.random() * 12,
+        size: 46 + Math.random() * 14,
       };
     });
   }
