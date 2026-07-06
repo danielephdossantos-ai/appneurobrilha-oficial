@@ -43,7 +43,9 @@ export function Desafio({ dados }: { dados: Aula["desafio"] }) {
   );
 }
 
-function QuizSequencial({ perguntas }: { perguntas: QuizItem[] }) {
+type CenaItem = NonNullable<NonNullable<Aula["desafio"]["visual"]>["cena"]>[number];
+
+function QuizSequencial({ perguntas, cena }: { perguntas: QuizItem[]; cena?: CenaItem[] }) {
   const lista = perguntas;
   const [i, setI] = useState(0);
   const [escolha, setEscolha] = useState<number | null>(null);
