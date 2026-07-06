@@ -88,10 +88,13 @@ export function AulaPlayer({
       BLOCOS_BASE.filter((b) => {
         if (b.id === "narrativa" && !aula.narrativa) return false;
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
+        if (b.id === "minijogo" && !aula.minijogo) return false;
+        if (b.id === "familia" && !aula.missaoFamilia) return false;
         return true;
       }),
-    [aula.narrativa, aula.curiosidade],
+    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
   );
+
 
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
