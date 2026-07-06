@@ -589,6 +589,27 @@ export type Aula = {
         }>;
         acerto?: string;
       }
+    | {
+        /**
+         * Selecionar vários itens que atendem a UM critério (ex.: "encontre
+         * apenas objetos de madeira"). A criança toca em cada item; verde
+         * quando bate no critério, vermelho quando não. A fase é concluída
+         * quando todos os corretos foram escolhidos.
+         */
+        tipo: "selecionarMultiplos";
+        titulo: string;
+        instrucao?: string;
+        /** Critério mostrado em destaque (ex.: "Objetos de madeira"). */
+        criterio: string;
+        opcoes: Array<{
+          nome: string;
+          imagemUrl: string;
+          rotulo?: string;
+          correto: boolean;
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
   >;
 
 
