@@ -133,8 +133,97 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoEscolherFigura jogo={jogo} />;
     case "escolherEscrita":
       return <JogoEscolherEscrita jogo={jogo} />;
+    case "selecionarLetras":
+      return <JogoSelecionarLetras jogo={jogo} />;
   }
 }
+
+/* --- Selecionar Letras (multi-select por categoria + TTS por cartão) --- */
+function JogoSelecionarLetras({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "selecionarLetras" }>;
+}) {
+  const alvo = jogo.alvo ?? "letra";
+  const { speak } = useDeviceTTS();
+  const [tocados, setTocados] = useState<Record<number, "certo" | "errado">>({});
+  const totalCertos = jogo.cartoes.filter((c) => c.tipo === alvo).length;
+  const acertos = Object.values(tocados).filter((v) => v === "certo").length;
+  const completo = acertos === totalCertos && totalCertos > 0;
+
+  function tocar(i: number) {
+    if (tocados[i]) return;
+    const c = jogo.cartoes[i];
+    speak(c.fala ?? c.simbolo);
+    setTocados((prev) => ({
+      ...prev,
+      [i]: c.tipo === alvo ? "certo" : "errado",
+    }));
+  }
+
+  function reiniciar() {
+    setTocados({});
+  }
+
+  const rotuloAlvo =
+    alvo === "letra" ? "letras" : alvo === "numero" ? "números" : "símbolos";
+
+  return (
+    <Secao icon={Sparkles} rotulo="Fase" cor="#FFC93C">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+      <p className="font-black text-sm mb-3 text-center text-white/70">
+        Toque só nas {rotuloAlvo}. ({acertos} / {totalCertos})
+      </p>
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3 mb-3">
+        {jogo.cartoes.map((c, i) => {
+          const estado = tocados[i];
+          const cls =
+            estado === "certo"
+              ? "bg-[#22C55E] text-white border-white"
+              : estado === "errado"
+                ? "bg-[#EF4444] text-white border-white"
+                : "bg-white text-[#0d1f55] border-transparent active:scale-95";
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocar(i)}
+              disabled={!!estado || completo}
+              className={`aspect-square rounded-2xl font-black text-3xl sm:text-4xl border-4 transition-all flex items-center justify-center ${cls}`}
+              aria-label={c.fala ?? c.simbolo}
+            >
+              {c.simbolo}
+            </button>
+          );
+        })}
+      </div>
+      {completo && (
+        <Status
+          ok={true}
+          texto={jogo.acerto ?? `Muito bem! Você achou todas as ${rotuloAlvo}!`}
+        />
+      )}
+      {!completo && Object.values(tocados).some((v) => v === "errado") && (
+        <Status
+          ok={false}
+          texto={jogo.erro ?? `Esse não é ${alvo === "letra" ? "uma letra" : alvo === "numero" ? "um número" : "um símbolo"}. Continue procurando.`}
+        />
+      )}
+      {(completo || Object.keys(tocados).length > 0) && (
+        <button
+          onClick={reiniciar}
+          className="mt-2 w-full h-10 rounded-xl bg-white/15 font-black text-white"
+        >
+          Recomeçar
+        </button>
+      )}
+    </Secao>
+  );
+}
+
 
 /* --- Escolher Escrita (grafia correta com figura de referência + TTS por opção) --- */
 function JogoEscolherEscrita({
