@@ -431,18 +431,18 @@ const aula: Aula = {
     objetivo:
       "Os objetos aparecem rapidamente! Toque APENAS naqueles que pertencem à ESCOLA. Cada acerto recupera uma estrela ⭐.",
     tempoSegundos: 90,
-    criterio: "Objetos da escola 🏫",
     elementos: [
-      { nome: "Livro", imagemUrl: livroImg, rotulo: "📖 LIVRO", correto: true },
-      { nome: "Mochila", imagemUrl: mochilaImg, rotulo: "🎒 MOCHILA", correto: true },
-      { nome: "Lápis", imagemUrl: lapisImg, rotulo: "✏️ LÁPIS", correto: true },
-      { nome: "Cadeira", imagemUrl: cadeiraImg, rotulo: "🪑 CADEIRA", correto: true },
-      { nome: "Lixeira", imagemUrl: lixeiraImg, rotulo: "🗑️ LIXEIRA", correto: true },
-      { nome: "Estrela", imagemUrl: estrelaImg, rotulo: "⭐ ESTRELA", correto: true },
-      { nome: "Bola de praia", imagemUrl: bolaPraiaImg, rotulo: "🏖️ BOLA DE PRAIA", correto: false },
-      { nome: "Geladeira", imagemUrl: geladeiraImg, rotulo: "🧊 GELADEIRA", correto: false },
+      { nome: "Livro", imagemUrl: livroImg, rotulo: "📖 LIVRO" },
+      { nome: "Mochila", imagemUrl: mochilaImg, rotulo: "🎒 MOCHILA" },
+      { nome: "Lápis", imagemUrl: lapisImg, rotulo: "✏️ LÁPIS" },
+      { nome: "Cadeira", imagemUrl: cadeiraImg, rotulo: "🪑 CADEIRA" },
+      { nome: "Lixeira", imagemUrl: lixeiraImg, rotulo: "🗑️ LIXEIRA" },
+      { nome: "Estrela", imagemUrl: estrelaImg, rotulo: "⭐ ESTRELA" },
     ],
-    minAcertos: 5,
+    distratores: [
+      { nome: "Bola de praia", imagemUrl: bolaPraiaImg, rotulo: "❌ BOLA DE PRAIA" },
+      { nome: "Geladeira", imagemUrl: geladeiraImg, rotulo: "❌ GELADEIRA" },
+    ],
     acerto: "🏆 Você recuperou todas as estrelas — é um verdadeiro AMIGO DA ESCOLA!",
   },
 
