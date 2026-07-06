@@ -264,23 +264,21 @@ const aula: Aula = {
       ],
     },
     {
-      tipo: "contarQuiz",
+      tipo: "escolherFigura",
       titulo: "Fase 5 · Oficina do Brilha",
       instrucao:
-        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Veja as figuras e toque no botão com o nome certo.",
-
-      grupos: [
-        { imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" },
-        { imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
-        { imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸" },
+        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Toque na figura certa.",
+      opcoes: [
+        { nome: "CACHORRO", imagemUrl: cachorroImg, rotulo: "🐶 CACHORRO" },
+        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
+        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
       ],
-      pergunta: "Qual figura tem o nome CACHORRO?",
-      opcoes: ["Gato", "Cachorro", "Sapo"],
-      correta: 1,
+      correta: 0,
       acerto: "Excelente! CACHORRO começa com o som C — é o amigo que late.",
-      erro: "Fala devagar: ca-CHO-rro. Que animal é esse?",
+      erro: "Escute: ca-CHO-rro. Toque no animal que late.",
     },
   ],
+
 
   niveis: {
     dominioMinimo: 70,
