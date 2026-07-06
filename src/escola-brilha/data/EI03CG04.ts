@@ -18,6 +18,8 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import equilibrioLinhaImg from "@/assets/escola-brilha/movimentos/equilibrio-linha.svg";
+import bracosAbertosImg from "@/assets/escola-brilha/movimentos/bracos-abertos.svg";
 
 /**
  * EI03CG04 — Mundo 2 · O Corpo que Fala na Floresta · Missão 4
@@ -85,10 +87,10 @@ const aula: Aula = {
     resposta: "0 quedas — ele conseguiu!",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: equilibrioLinhaImg,
+      quantidade: 0,
+      nomeItem: "queda",
+      nomeItemPlural: "quedas",
       pergunta: "O Brilha fica em um pé só por 3 segundos. Quantas vezes ele cai?",
     },
   },
@@ -120,9 +122,9 @@ const aula: Aula = {
     resposta: "Cada amigo faz um movimento único.",
     visual: {
       cena: [
-        { personagem: "Brilha (um pé só)", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi (na linha)", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi (braços abertos)", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }
+        { personagem: "Brilha (um pé só)", personagemImagemUrl: brilhaImg, itemImagemUrl: equilibrioLinhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi (na linha)", personagemImagemUrl: lupiImg, itemImagemUrl: equilibrioLinhaImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi (braços abertos)", personagemImagemUrl: fifiImg, itemImagemUrl: bracosAbertosImg, quantidade: 1, cor: "#FB923C" }
       ],
       perguntas: [
         { pergunta: "Quem fica em UM PÉ SÓ?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha é o mestre do um pé só." },
@@ -140,9 +142,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "O que ajuda a NÃO CAIR?", opcoes: ["Braços abertos", "Braços colados", "Olhos fechados"], correta: 0, explicacao: "Braços abertos são asas do equilíbrio.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Onde devemos olhar pra equilibrar?", opcoes: ["Pro chão", "Pra frente", "Pro céu"], correta: 1, explicacao: "Pra frente firma o corpo.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Qual é o desafio MAIS DIFÍCIL de equilíbrio?", opcoes: ["Sentar", "Ficar em um pé só", "Andar"], correta: 1, explicacao: "Um pé só = nível avançado!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "O que ajuda a NÃO CAIR?", opcoes: ["Braços abertos", "Braços colados", "Olhos fechados"], correta: 0, explicacao: "Braços abertos são asas do equilíbrio.", visual: { tipo: "itens", imagemUrl: bracosAbertosImg, quantidade: 1, rotulo: "Braços abertos" } },
+    { pergunta: "Onde devemos olhar pra equilibrar?", opcoes: ["Pro chão", "Pra frente", "Pro céu"], correta: 1, explicacao: "Pra frente firma o corpo.", visual: { tipo: "itens", imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Olhar para frente" } },
+    { pergunta: "Qual é o desafio MAIS DIFÍCIL de equilíbrio?", opcoes: ["Sentar", "Ficar em um pé só", "Andar"], correta: 1, explicacao: "Um pé só = nível avançado!", visual: { tipo: "itens", imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Um pé só" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião do Equilíbrio! A ponte da floresta agora tem passagem segura. Missão em Casa: fique em um pé só e conte até 5. Depois troque de pé!",
@@ -156,9 +158,9 @@ const aula: Aula = {
     { tipo: "contarQuiz", titulo: "Fase 1 · Treino de equilíbrio", instrucao: "Três amigos treinam equilíbrio de jeitos diferentes.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Um pé só" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Na linha" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Braços abertos" }], pergunta: "Quantos amigos treinam equilíbrio?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 amigos — cada um do seu jeito!", erro: "Conte cada um." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Todo mundo firme", instrucao: "Todos os amigos ficaram firmes sem cair.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }], pergunta: "Quantos ficaram firmes?", opcoes: ["4", "5", "6"], correta: 1, acerto: "5 amigos firmes!", erro: "Aponte cada um." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, sua técnica", instrucao: "Ligue cada amigo ao par certo.", pares: [
-      { a: "Brilha", b: "fica em UM PÉ SÓ", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-      { a: "Lupi", b: "anda NA LINHA", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Fifi", b: "abre BRAÇOS", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }
+      { a: "Brilha", b: "fica em UM PÉ SÓ", aImagem: brilhaImg, aQuantidade: 1, bImagem: equilibrioLinhaImg, bQuantidade: 1 },
+      { a: "Lupi", b: "anda NA LINHA", aImagem: lupiImg, aQuantidade: 1, bImagem: equilibrioLinhaImg, bQuantidade: 1 },
+      { a: "Fifi", b: "abre BRAÇOS", aImagem: fifiImg, aQuantidade: 1, bImagem: bracosAbertosImg, bQuantidade: 1 }
     ] },
   ],
 
@@ -170,7 +172,7 @@ const aula: Aula = {
     ],
     medio: [
       { pergunta: "O Brilha ficou firme sem cair. Como se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Conseguiu — orgulho!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Lupi caiu da linha. Como está?", opcoes: ["Tranquilo", "Chateado", "Bravo"], correta: 1, explicacao: "Cair pode chatear — é normal.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Lupi caiu da linha. Como está?", opcoes: ["Tranquilo", "Chateado", "Bravo"], correta: 1, explicacao: "Cair pode chatear — é normal.", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Chateado" } }
     ],
     dificil: [
       { pergunta: "Se cair, o que fazer?", opcoes: ["Tentar de novo", "Desistir"], correta: 0, explicacao: "Cair faz parte de aprender.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },

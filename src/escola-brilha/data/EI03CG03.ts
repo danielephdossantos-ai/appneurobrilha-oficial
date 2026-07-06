@@ -85,10 +85,10 @@ const aula: Aula = {
     resposta: "3 pulos.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: sapoImg,
+      quantidade: 3,
+      nomeItem: "pulo",
+      nomeItemPlural: "pulos",
       pergunta: "O Brilha imita o sapo. Quantos pulos ele dá pra chegar na flor?",
     },
   },
@@ -140,9 +140,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Qual animal PULA de agachado?", opcoes: ["Sapo", "Cobra", "Pássaro"], correta: 0, explicacao: "Sapo é o campeão do pulo agachado!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Qual animal VOA com asas abertas?", opcoes: ["Sapo", "Pássaro", "Leão"], correta: 1, explicacao: "Pássaro voa com as asas!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Qual animal RASTEJA sem levantar?", opcoes: ["Cobra", "Leão", "Macaco"], correta: 0, explicacao: "Cobra desliza no chão.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Qual animal PULA de agachado?", opcoes: ["Sapo", "Cobra", "Pássaro"], correta: 0, explicacao: "Sapo é o campeão do pulo agachado!", visual: { tipo: "itens", imagemUrl: sapoImg, quantidade: 1, rotulo: "Sapo pula" } },
+    { pergunta: "Qual animal VOA com asas abertas?", opcoes: ["Sapo", "Pássaro", "Leão"], correta: 1, explicacao: "Pássaro voa com as asas!", visual: { tipo: "itens", imagemUrl: passaroImg, quantidade: 1, rotulo: "Pássaro voa" } },
+    { pergunta: "Qual animal RASTEJA sem levantar?", opcoes: ["Cobra", "Leão", "Macaco"], correta: 0, explicacao: "Cobra desliza no chão.", visual: { tipo: "itens", imagemUrl: teoImg, quantidade: 1, rotulo: "Cobra rasteja" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião da Imitação! A dança dos animais voltou à floresta. Missão em Casa: escolha 1 animal e imite ele por 30 segundos. Alguém acertou qual era?",
@@ -170,7 +170,7 @@ const aula: Aula = {
     ],
     medio: [
       { pergunta: "O Lupi virou sapo e pulou. Como ele se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Imitar é diversão pura!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Téo virou cobra devagarinho. Como está?", opcoes: ["Tranquilo", "Bravo", "Cansado"], correta: 0, explicacao: "Cobra é calminha.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Téo virou cobra devagarinho. Como está?", opcoes: ["Tranquilo", "Bravo", "Cansado"], correta: 0, explicacao: "Cobra é calminha.", visual: { tipo: "itens", imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Tranquilo" } }
     ],
     dificil: [
       { pergunta: "Cada um imita um bicho diferente. Isso é bom?", opcoes: ["Bom — cada corpo aprende", "Ruim — devia ser igual"], correta: 0, explicacao: "Variedade treina o corpo.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },
