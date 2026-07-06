@@ -207,17 +207,19 @@ const aula: Aula = {
 
   interativas: [
     {
-      tipo: "escolherImagem",
+      tipo: "escolherFigura",
       titulo: "Fase 1 · Escute o Som",
       instrucao:
         "Toque na figura pra ouvir. Qual palavra começa com o som /B/?",
       pergunta: "Qual figura começa com o som /B/?",
       opcoes: [
-        { nome: "bola", imagemUrl: bolaImg },
-        { nome: "maçã", imagemUrl: macaImg },
-        { nome: "peixe", imagemUrl: peixeImg },
+        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
+        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
+        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
       ],
-      respostaCerta: "bola",
+      correta: 0,
+      acerto: "🎉 BOLA começa com o som /B/ — letra B!",
+      erro: "Escute de novo: /B/... busque a figura que começa assim.",
     },
     {
       tipo: "arrastar",
