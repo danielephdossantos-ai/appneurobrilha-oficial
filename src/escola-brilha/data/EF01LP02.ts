@@ -266,7 +266,8 @@ const aula: Aula = {
       tipo: "contarQuiz",
       titulo: "Fase 5 · Oficina do Brilha",
       instrucao:
-        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Qual figura é?",
+        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Veja as figuras e toque no botão com o nome certo.",
+
       grupos: [
         { imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" },
         { imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
