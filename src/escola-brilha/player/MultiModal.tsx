@@ -137,8 +137,11 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoEscolherEscrita jogo={jogo} />;
     case "selecionarLetras":
       return <JogoSelecionarLetras jogo={jogo} />;
+    case "lupa":
+      return <JogoLupa jogo={jogo} />;
   }
 }
+
 
 /* --- Selecionar Letras (multi-select por categoria + TTS por cartão) --- */
 function JogoSelecionarLetras({
