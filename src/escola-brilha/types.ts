@@ -610,6 +610,33 @@ export type Aula = {
         acerto?: string;
         erro?: string;
       }
+    | {
+        /**
+         * Álbum personalizado — a criança faz escolhas pessoais (cor
+         * favorita, brincadeira preferida, momento feliz) e o sistema
+         * monta uma PÁGINA DO ÁLBUM com o que ela escolheu. Ideal para
+         * História / Identidade (EF01HI01+). Não há resposta certa —
+         * a fase conclui quando todas as escolhas foram feitas.
+         */
+        tipo: "album";
+        titulo: string;
+        instrucao: string;
+        escolhas: Array<{
+          /** Pergunta lida em voz alta (ex.: "Sua cor favorita"). */
+          label: string;
+          /** "cor" mostra swatches; "imagem" mostra cartões com imagem. */
+          modo: "cor" | "imagem";
+          opcoes: Array<{
+            nome: string;
+            /** Hex para modo "cor". */
+            cor?: string;
+            /** URL para modo "imagem". */
+            imagemUrl?: string;
+            rotulo?: string;
+          }>;
+        }>;
+        acerto?: string;
+      }
   >;
 
 
