@@ -545,7 +545,32 @@ export type Aula = {
         acerto?: string;
         erro?: string;
       }
+    | {
+        /**
+         * Selecionar cartões que pertencem a UMA categoria (ex.: só as
+         * letras entre letras/números/símbolos). Ideal para EF01LP04.
+         * Ao tocar em um cartão, o TTS fala o símbolo. Cartões corretos
+         * ficam verdes, incorretos ficam vermelhos. A fase é concluída
+         * quando todos os cartões corretos foram encontrados.
+         */
+        tipo: "selecionarLetras";
+        titulo: string;
+        instrucao?: string;
+        cartoes: Array<{
+          /** Símbolo mostrado (ex.: "A", "7", "%"). */
+          simbolo: string;
+          /** Categoria do cartão. */
+          tipo: "letra" | "numero" | "simbolo";
+          /** Nome falado pelo TTS (padrão: o próprio símbolo). */
+          fala?: string;
+        }>;
+        /** Categoria que a criança deve selecionar. Padrão: "letra". */
+        alvo?: "letra" | "numero" | "simbolo";
+        acerto?: string;
+        erro?: string;
+      }
   >;
+
 
 
 
