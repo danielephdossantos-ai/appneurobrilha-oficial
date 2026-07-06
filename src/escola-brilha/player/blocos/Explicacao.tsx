@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Check, X, ArrowRight, Sparkles, RefreshCw, LifeBuoy, Lightbulb, ImageIcon } from "lucide-react";
 import { Secao } from "./Secao";
 import type { Aula } from "../../types";
+import { PersonagemInterativo } from "./PersonagemInterativo";
 
 /**
  * Aprendizagem Ativa — Bloco Explicação com Níveis de Aprofundamento.
