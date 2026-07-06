@@ -247,23 +247,16 @@ const aula: Aula = {
       erro: "Antes você engatinhava. AGORA você já ANDA — isso é crescer!",
     },
 
-    // FASE 3 — Organizar minha história em ordem
+    // FASE 3 — Minha História: ordenar acontecimentos na linha do tempo
     {
-      tipo: "arrastar",
-      titulo: "Fase 3 · Minha História Em Ordem",
-      instrucao: "Arraste cada momento pra fase certa da vida.",
-      pares: [
-        { item: "👶 NASCI", alvo: "PRIMEIRO" },
-        { item: "🍼 MAMADEIRA", alvo: "PRIMEIRO" },
-        { item: "🎂 ANIVERSÁRIO", alvo: "DEPOIS" },
-        { item: "🚶 APRENDI A ANDAR", alvo: "DEPOIS" },
-        { item: "🏫 ENTREI NA ESCOLA", alvo: "AGORA" },
-        { item: "🎒 GANHEI MOCHILA", alvo: "AGORA" },
-      ],
-      alvosVisuais: [
-        { nome: "PRIMEIRO", cor: "#F472B6", capacidade: 2 },
-        { nome: "DEPOIS", cor: "#FBBF24", capacidade: 2 },
-        { nome: "AGORA", cor: "#34D399", capacidade: 2 },
+      tipo: "ordenar",
+      titulo: "Fase 3 · Minha História",
+      instrucao: "Arraste os cartões pra ORDEM certa: o que veio primeiro, depois e agora.",
+      itens: ["NASCI", "ANIVERSÁRIO", "ESCOLA"],
+      imagens: [
+        { imagemUrl: bebeImg, quantidade: 1, rotulo: "👶 NASCI", cor: "#F472B6" },
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "🎂 ANIVERSÁRIO", cor: "#FBBF24" },
+        { imagemUrl: escolaImg, quantidade: 1, rotulo: "🏫 ENTREI NA ESCOLA", cor: "#34D399" },
       ],
     },
 
@@ -319,23 +312,44 @@ const aula: Aula = {
       acerto: "🔬 Descoberta feita! Cada objeto guarda uma lembrança.",
     },
 
-    // FASE 5 — Álbum da vida: selecionar pessoas na fase CRIANÇA (identidade)
+    // FASE 5 — Álbum da Vida: personalização (cor + brincadeira + momento feliz)
     {
-      tipo: "selecionarMultiplos",
+      tipo: "album",
       titulo: "Fase 5 · Álbum Da Vida",
-      instrucao: "Marque TODAS as pessoas que estão na fase CRIANÇA — como você é hoje.",
-      criterio: "Fase criança 🧒",
-      opcoes: [
-        { nome: "Menino", imagemUrl: meninoImg, rotulo: "🧒 MENINO", correto: true },
-        { nome: "Menina", imagemUrl: meninaImg, rotulo: "👧 MENINA", correto: true },
-        { nome: "Criança andando", imagemUrl: criancaAndandoImg, rotulo: "🚶 CRIANÇA", correto: true },
-        { nome: "Grupo de crianças", imagemUrl: criancasGrupoImg, rotulo: "👦 GRUPO", correto: true },
-        { nome: "Bebê", imagemUrl: bebeImg, rotulo: "👶 BEBÊ", correto: false },
-        { nome: "Bebê engatinhando", imagemUrl: bebeEngatinhandoImg, rotulo: "🍼 BEBÊ", correto: false },
-        { nome: "Idoso", imagemUrl: idosoImg, rotulo: "🧓 IDOSO", correto: false },
+      instrucao: "Escolha o que faz parte da SUA história. O Brilha vai montar sua página do álbum!",
+      escolhas: [
+        {
+          label: "Sua cor favorita",
+          modo: "cor",
+          opcoes: [
+            { nome: "Rosa", cor: "#F472B6" },
+            { nome: "Amarelo", cor: "#FBBF24" },
+            { nome: "Verde", cor: "#34D399" },
+            { nome: "Azul", cor: "#60A5FA" },
+            { nome: "Vermelho", cor: "#EF4444" },
+            { nome: "Roxo", cor: "#A78BFA" },
+          ],
+        },
+        {
+          label: "Uma brincadeira que você gosta",
+          modo: "imagem",
+          opcoes: [
+            { nome: "Bola", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
+            { nome: "Boneca", imagemUrl: bonecaPanoImg, rotulo: "🧸 BONECA" },
+            { nome: "Brincar em grupo", imagemUrl: criancasGrupoImg, rotulo: "👦 AMIGOS" },
+          ],
+        },
+        {
+          label: "Um momento feliz da sua vida",
+          modo: "imagem",
+          opcoes: [
+            { nome: "Aniversário", imagemUrl: boloImg, rotulo: "🎂 ANIVERSÁRIO" },
+            { nome: "Primeiro dia de escola", imagemUrl: escolaImg, rotulo: "🏫 ESCOLA" },
+            { nome: "Ganhar um presente", imagemUrl: presenteImg, rotulo: "🎁 PRESENTE" },
+          ],
+        },
       ],
-      acerto: "📖 Sua página do álbum ficou pronta! Você é uma CRIANÇA.",
-      erro: "Bebê e idoso são outras fases da vida — você é CRIANÇA agora.",
+      acerto: "📖 Sua página do álbum ficou linda! Essa é a SUA história.",
     },
   ],
 
