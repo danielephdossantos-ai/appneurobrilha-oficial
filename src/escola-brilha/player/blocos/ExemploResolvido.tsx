@@ -36,6 +36,33 @@ export function ExemploResolvido({
             </ol>
           </details>
         </div>
+      ) : interativo?.tipo === "encaixar" ? (
+        <div className="space-y-4">
+          <ContagemInterativa
+            imagemUrl={interativo.itemImagemUrl}
+            quantidade={interativo.quantidade}
+            nomeItem={interativo.nomeItem}
+            nomeItemPlural={interativo.nomeItemPlural}
+            pergunta={interativo.pergunta ?? dados.enunciado}
+            alvoImagemUrl={interativo.alvoImagemUrl}
+            modo="encaixar"
+          />
+          <details className="rounded-2xl bg-white/10 border border-white/20 p-3 text-sm">
+            <summary className="cursor-pointer font-black">
+              Como o professor pensa
+            </summary>
+            <ol className="space-y-2 mt-3">
+              {dados.passos.map((p, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="h-6 w-6 rounded-full bg-[#FBBF24] text-[#0d1f55] font-black text-xs grid place-items-center shrink-0">
+                    {i + 1}
+                  </span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ol>
+          </details>
+        </div>
       ) : (
         <>
           <p className="font-black mb-3">{dados.enunciado}</p>
