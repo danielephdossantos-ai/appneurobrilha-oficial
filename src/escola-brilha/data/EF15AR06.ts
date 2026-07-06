@@ -16,6 +16,9 @@ import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import solImg from "@/assets/neuro-treino/objetos/sol.png";
 import arcoIrisImg from "@/assets/neuro-treino/objetos/arco-iris.png";
 import esculturaImg from "@/assets/neuro-treino/objetos/escultura.png";
+import quadroAlegreImg from "@/assets/neuro-treino/objetos/quadro-alegre.png";
+import quadroTristeImg from "@/assets/neuro-treino/objetos/quadro-triste.png";
+import quadroSurpresoImg from "@/assets/neuro-treino/objetos/quadro-surpreso.png";
 
 /**
  * EF15AR06 — Arte · 1º Ano (adaptado, código compartilhado 1º–5º)
@@ -77,18 +80,18 @@ const aula: Aula = {
   },
 
   atividadeGuiada: {
-    enunciado: "Olhe o quadro e diga: qual EMOÇÃO ele mais passa?",
-    resposta: "😄 Feliz — cores fortes e sol!",
+    enunciado: "Olhe os quadros e escolha o que passa ALEGRIA.",
+    resposta: "😄 O quadro com SOL, FLORES e ARCO-ÍRIS!",
     explicacao: "Cores quentes (vermelho, amarelo) e figuras alegres passam alegria.",
     visual: {
       tipo: "escolherImagem",
-      pergunta: "Qual emoção este quadro alegre e colorido passa?",
+      pergunta: "Qual destes quadros passa ALEGRIA?",
       opcoes: [
-        { nome: "feliz", imagemUrl: felizImg },
-        { nome: "triste", imagemUrl: tristeImg },
-        { nome: "surpreso", imagemUrl: surpresoImg },
+        { nome: "alegre", imagemUrl: quadroAlegreImg },
+        { nome: "triste", imagemUrl: quadroTristeImg },
+        { nome: "surpreso", imagemUrl: quadroSurpresoImg },
       ],
-      respostaCerta: "feliz",
+      respostaCerta: "alegre",
     },
   },
 
@@ -216,33 +219,33 @@ const aula: Aula = {
     // FASE 1 — Ler emoção de obra alegre
     {
       tipo: "escolherFigura",
-      titulo: "Fase 1 · O Que Esta Obra Sente?",
-      instrucao: "Olhe uma obra com sol e flores. Que emoção ela passa?",
-      pergunta: "Qual emoção combina com sol + flores?",
+      titulo: "Fase 1 · Qual Quadro É Alegre?",
+      instrucao: "Olhe os três quadros. Qual deles passa ALEGRIA?",
+      pergunta: "Qual quadro tem cores vivas, sol e flores?",
       opcoes: [
-        { nome: "FELIZ", imagemUrl: felizImg, rotulo: "😄 FELIZ" },
-        { nome: "TRISTE", imagemUrl: tristeImg, rotulo: "😢 TRISTE" },
-        { nome: "SURPRESO", imagemUrl: surpresoImg, rotulo: "😲 SURPRESO" },
+        { nome: "ALEGRE", imagemUrl: quadroAlegreImg, rotulo: "😄 ALEGRE" },
+        { nome: "TRISTE", imagemUrl: quadroTristeImg, rotulo: "😢 TRISTE" },
+        { nome: "SURPRESO", imagemUrl: quadroSurpresoImg, rotulo: "😲 SURPRESA" },
       ],
       correta: 0,
       acerto: "😄 Isso! Cores vivas e sol passam alegria.",
-      erro: "Sol e flores costumam passar alegria.",
+      erro: "Sol, flores e cores vivas = alegria.",
     },
 
     // FASE 2 — Ler emoção de obra escura
     {
       tipo: "escolherFigura",
-      titulo: "Fase 2 · E Esta Obra Aqui?",
-      instrucao: "Olhe uma obra com cores escuras e chuva. Que emoção passa?",
-      pergunta: "Qual emoção combina com cores escuras e chuva?",
+      titulo: "Fase 2 · Qual Quadro É Triste?",
+      instrucao: "Olhe os três quadros. Qual deles passa TRISTEZA?",
+      pergunta: "Qual quadro tem cores escuras e chuva?",
       opcoes: [
-        { nome: "TRISTE", imagemUrl: tristeImg, rotulo: "😢 TRISTE" },
-        { nome: "FELIZ", imagemUrl: felizImg, rotulo: "😄 FELIZ" },
-        { nome: "SURPRESO", imagemUrl: surpresoImg, rotulo: "😲 SURPRESO" },
+        { nome: "TRISTE", imagemUrl: quadroTristeImg, rotulo: "😢 TRISTE" },
+        { nome: "ALEGRE", imagemUrl: quadroAlegreImg, rotulo: "😄 ALEGRE" },
+        { nome: "SURPRESO", imagemUrl: quadroSurpresoImg, rotulo: "😲 SURPRESA" },
       ],
       correta: 0,
       acerto: "😢 Isso! Cores escuras e chuva costumam passar tristeza.",
-      erro: "Cores escuras e chuva passam tristeza ou calma.",
+      erro: "Cores frias e chuva = tristeza ou calma.",
     },
 
     // FASE 3 — Arrastar: obras/cenas → emoção
