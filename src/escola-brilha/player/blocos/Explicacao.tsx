@@ -47,6 +47,10 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
   const podeAvancar = visiveis < total;
   const podeAprofundar = nivelIdx < niveis.length - 1;
   const nivelAtual = niveis[nivelIdx];
+  // Educação Infantil: crianças não alfabetizadas — esconde texto na tela,
+  // mantém apenas imagem grande + narração por voz.
+  const semTexto = (aula?.codigo ?? "").toUpperCase().startsWith("EI");
+
   const reverExplicacao = () => {
     setVisiveis(1);
     setNivelIdx(0);
@@ -83,7 +87,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
           <div className="text-[10px] font-black uppercase tracking-widest text-[#4C9EFF] mb-1">
             Explicando de outro jeito — {nivelAtual.rotulo}
           </div>
-          <p className="text-sm leading-relaxed whitespace-pre-line">{nivelAtual.texto}</p>
+          <p className={`text-sm leading-relaxed whitespace-pre-line ${semTexto ? "sr-only" : ""}`}>{nivelAtual.texto}</p>
         </motion.div>
       )}
 
@@ -111,7 +115,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                   )}
                 </div>
 
-                <p className="text-base leading-relaxed whitespace-pre-line">{c.texto}</p>
+                <p className={`text-base leading-relaxed whitespace-pre-line ${semTexto ? "sr-only" : ""}`}>{c.texto}</p>
 
                 {c.imagem && (
                   <div className="mt-3 rounded-xl bg-white/5 border border-white/10 p-3 flex flex-col items-center">
