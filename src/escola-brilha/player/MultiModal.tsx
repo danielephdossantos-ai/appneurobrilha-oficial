@@ -152,80 +152,106 @@ function JogoAlbum({
   jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "album" }>;
 }) {
   const { speak } = useDeviceTTS();
-  const [escolhas, setEscolhas] = useState<Record<number, number>>({});
+  const [escolhas, setEscolhas] = useState<Record<number, number[]>>({});
   const total = jogo.escolhas.length;
-  const feitas = Object.keys(escolhas).length;
+  const feitas = Object.values(escolhas).filter((v) => v && v.length > 0).length;
   const pronto = feitas === total;
+
+  const toggle = (ei: number, oi: number) => {
+    setEscolhas((prev) => {
+      const atual = prev[ei] ?? [];
+      const existe = atual.includes(oi);
+      const proximo = existe ? atual.filter((x) => x !== oi) : [...atual, oi];
+      return { ...prev, [ei]: proximo };
+    });
+  };
 
   return (
     <Secao icon={Sparkles} rotulo="Álbum" cor="#F472B6">
       <p className="font-black text-lg mb-1">{jogo.titulo}</p>
       <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      <p className="text-xs text-white/70 mb-3">
+        ✨ Pode escolher UMA ou VÁRIAS opções — toque em todas que combinam com você!
+      </p>
 
       <div className="space-y-4">
-        {jogo.escolhas.map((esc, ei) => (
-          <div key={ei} className="rounded-2xl bg-white/10 border-2 border-white/20 p-3">
-            <button
-              onClick={() => speak(esc.label)}
-              className="w-full text-left font-black text-white text-base mb-2 flex items-center gap-2"
+        {jogo.escolhas.map((esc, ei) => {
+          const selecionadas = escolhas[ei] ?? [];
+          const respondida = selecionadas.length > 0;
+          return (
+            <div
+              key={ei}
+              className={`rounded-2xl bg-white/10 border-2 p-3 transition ${
+                respondida ? "border-[#34D399]" : "border-white/20"
+              }`}
             >
-              <Volume2 className="w-4 h-4" /> {esc.label}
-            </button>
-            {esc.modo === "cor" ? (
-              <div className="flex flex-wrap gap-2 justify-center">
-                {esc.opcoes.map((op, oi) => {
-                  const sel = escolhas[ei] === oi;
-                  return (
-                    <button
-                      key={oi}
-                      onClick={() => {
-                        setEscolhas((prev) => ({ ...prev, [ei]: oi }));
-                        speak(op.nome);
-                      }}
-                      className={`h-14 w-14 rounded-full border-4 transition ${
-                        sel ? "border-white scale-110 shadow-xl" : "border-white/30"
-                      }`}
-                      style={{ background: op.cor }}
-                      aria-label={op.nome}
-                    />
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="grid grid-cols-3 gap-2">
-                {esc.opcoes.map((op, oi) => {
-                  const sel = escolhas[ei] === oi;
-                  return (
-                    <button
-                      key={oi}
-                      onClick={() => {
-                        setEscolhas((prev) => ({ ...prev, [ei]: oi }));
-                        speak(op.rotulo ?? op.nome);
-                      }}
-                      className={`rounded-2xl p-2 border-4 transition bg-white ${
-                        sel ? "border-[#F472B6] scale-105 shadow-xl" : "border-white/30"
-                      }`}
-                    >
-                      {op.imagemUrl && (
-                        <img
-                          src={op.imagemUrl}
-                          alt={op.nome}
-                          className="h-16 w-full object-contain"
-                          loading="lazy"
-                        />
-                      )}
-                      {op.rotulo && (
-                        <div className="text-xs font-black text-[#0d1f55] mt-1 text-center">
-                          {op.rotulo}
-                        </div>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        ))}
+              <button
+                onClick={() => speak(esc.label)}
+                className="w-full text-left font-black text-white text-base mb-2 flex items-center gap-2"
+              >
+                <Volume2 className="w-4 h-4" /> {esc.label}
+                {respondida && (
+                  <span className="ml-auto text-xs bg-[#34D399] text-[#0d1f55] px-2 py-0.5 rounded-full">
+                    ✓ {selecionadas.length}
+                  </span>
+                )}
+              </button>
+              {esc.modo === "cor" ? (
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {esc.opcoes.map((op, oi) => {
+                    const sel = selecionadas.includes(oi);
+                    return (
+                      <button
+                        key={oi}
+                        onClick={() => {
+                          toggle(ei, oi);
+                          speak(op.nome);
+                        }}
+                        className={`h-14 w-14 rounded-full border-4 transition ${
+                          sel ? "border-white scale-110 shadow-xl" : "border-white/30"
+                        }`}
+                        style={{ background: op.cor }}
+                        aria-label={op.nome}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="grid grid-cols-3 gap-2">
+                  {esc.opcoes.map((op, oi) => {
+                    const sel = selecionadas.includes(oi);
+                    return (
+                      <button
+                        key={oi}
+                        onClick={() => {
+                          toggle(ei, oi);
+                          speak(op.rotulo ?? op.nome);
+                        }}
+                        className={`rounded-2xl p-2 border-4 transition bg-white ${
+                          sel ? "border-[#F472B6] scale-105 shadow-xl" : "border-white/30"
+                        }`}
+                      >
+                        {op.imagemUrl && (
+                          <img
+                            src={op.imagemUrl}
+                            alt={op.nome}
+                            className="h-16 w-full object-contain"
+                            loading="lazy"
+                          />
+                        )}
+                        {op.rotulo && (
+                          <div className="text-xs font-black text-[#0d1f55] mt-1 text-center">
+                            {op.rotulo}
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {pronto && (
@@ -239,30 +265,37 @@ function JogoAlbum({
           </div>
           <div className="space-y-2">
             {jogo.escolhas.map((esc, ei) => {
-              const op = esc.opcoes[escolhas[ei]];
+              const selecionadas = escolhas[ei] ?? [];
+              const ops = selecionadas.map((oi) => esc.opcoes[oi]).filter(Boolean);
               return (
                 <div
                   key={ei}
-                  className="flex items-center gap-3 rounded-xl bg-white/80 p-2"
+                  className="rounded-xl bg-white/80 p-2"
                 >
-                  <div className="text-xs font-black uppercase tracking-wider flex-1">
+                  <div className="text-xs font-black uppercase tracking-wider mb-1">
                     {esc.label}
                   </div>
-                  {esc.modo === "cor" ? (
-                    <div
-                      className="h-10 w-10 rounded-full border-2 border-[#0d1f55]"
-                      style={{ background: op.cor }}
-                    />
-                  ) : (
-                    op.imagemUrl && (
-                      <img
-                        src={op.imagemUrl}
-                        alt={op.nome}
-                        className="h-12 w-12 object-contain"
-                      />
-                    )
-                  )}
-                  <div className="font-black text-sm">{op.rotulo ?? op.nome}</div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {ops.map((op, i) => (
+                      <div key={i} className="flex items-center gap-1 bg-white rounded-lg px-2 py-1 border border-[#0d1f55]/20">
+                        {esc.modo === "cor" ? (
+                          <div
+                            className="h-8 w-8 rounded-full border-2 border-[#0d1f55]"
+                            style={{ background: op.cor }}
+                          />
+                        ) : (
+                          op.imagemUrl && (
+                            <img
+                              src={op.imagemUrl}
+                              alt={op.nome}
+                              className="h-10 w-10 object-contain"
+                            />
+                          )
+                        )}
+                        <div className="font-black text-xs">{op.rotulo ?? op.nome}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               );
             })}
@@ -275,6 +308,7 @@ function JogoAlbum({
     </Secao>
   );
 }
+
 
 function JogoSelecionarMultiplos({
   jogo,
