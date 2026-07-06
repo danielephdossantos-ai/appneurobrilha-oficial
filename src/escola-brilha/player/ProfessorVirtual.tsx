@@ -266,7 +266,18 @@ const TEMPLATES: Record<BlocoId, Record<Faixa, string[]>> = {
     medio: ["Boa{nome}! Você chegou até o fim da aula.", "Parabéns{nome}, mais uma habilidade conquistada!"],
     grande: ["Aula concluída{nome}. Consistência hoje vira domínio amanhã.", "Bom trabalho{nome}. Bora pra próxima habilidade?"],
   },
+  minijogo: {
+    pequeno: ["Hora do joguinho{nome}! Toca rapidinho antes do tempo acabar!", "Bora se divertir{nome}? Cuidado com o cronômetro!"],
+    medio: ["Minijogo{nome}! Foca no cenário e não deixa nada escapar.", "Bora testar sua atenção{nome}? Tempo curtinho, mira rápida!"],
+    grande: ["Minijogo{nome}: estratégia + rapidez. Escaneia o cenário antes de sair clicando.", "Cronômetro rodando{nome} — priorize os alvos mais visíveis primeiro."],
+  },
+  familia: {
+    pequeno: ["Chama alguém da família{nome} pra fazer essa parte juntinho! 💕", "Essa é pra fazer com quem te ama{nome} — vai ser especial!"],
+    medio: ["Missão em família{nome}: leva o aprendizado pra vida real com quem mora com você.", "Bora envolver a família{nome}? Aprender junto é muito melhor!"],
+    grande: ["Missão em família{nome}: transferir o conteúdo pra prática consolida o aprendizado.", "Registra tudo direitinho{nome} — o Diário do Cientista guarda sua evolução."],
+  },
 };
+
 
 function simpleHash(s: string): number {
   let h = 0;
