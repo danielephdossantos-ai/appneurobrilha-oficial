@@ -209,6 +209,7 @@ const aula: Aula = {
   },
 
   interativas: [
+    {
       tipo: "contarQuiz",
       titulo: "Fase 1 · Ouça e escolha",
       instrucao:
