@@ -319,22 +319,23 @@ const aula: Aula = {
       acerto: "🔬 Descoberta feita! Cada objeto guarda uma lembrança.",
     },
 
-    // FASE 5 — Álbum da vida: selecionar objetos de bebê
+    // FASE 5 — Álbum da vida: selecionar pessoas na fase CRIANÇA (identidade)
     {
       tipo: "selecionarMultiplos",
       titulo: "Fase 5 · Álbum Da Vida",
-      instrucao: "Marque TUDO que a gente usa quando é BEBÊ.",
-      criterio: "Coisas de bebê 👶",
+      instrucao: "Marque TODAS as pessoas que estão na fase CRIANÇA — como você é hoje.",
+      criterio: "Fase criança 🧒",
       opcoes: [
-        { nome: "Mamadeira", imagemUrl: mamadeiraImg, rotulo: "🍼 MAMADEIRA", correto: true },
-        { nome: "Chocalho", imagemUrl: chocalhoImg, rotulo: "🔔 CHOCALHO", correto: true },
-        { nome: "Boneca de pano", imagemUrl: bonecaPanoImg, rotulo: "🧸 BONECA", correto: true },
-        { nome: "Mochila", imagemUrl: mochilaImg, rotulo: "🎒 MOCHILA", correto: false },
-        { nome: "Bola", imagemUrl: bolaImg, rotulo: "⚽ BOLA", correto: false },
-        { nome: "Bolo de aniversário", imagemUrl: boloImg, rotulo: "🎂 BOLO", correto: false },
+        { nome: "Menino", imagemUrl: meninoImg, rotulo: "🧒 MENINO", correto: true },
+        { nome: "Menina", imagemUrl: meninaImg, rotulo: "👧 MENINA", correto: true },
+        { nome: "Criança andando", imagemUrl: criancaAndandoImg, rotulo: "🚶 CRIANÇA", correto: true },
+        { nome: "Grupo de crianças", imagemUrl: criancasGrupoImg, rotulo: "👦 GRUPO", correto: true },
+        { nome: "Bebê", imagemUrl: bebeImg, rotulo: "👶 BEBÊ", correto: false },
+        { nome: "Bebê engatinhando", imagemUrl: bebeEngatinhandoImg, rotulo: "🍼 BEBÊ", correto: false },
+        { nome: "Idoso", imagemUrl: idosoImg, rotulo: "🧓 IDOSO", correto: false },
       ],
-      acerto: "📖 Sua página do álbum ficou pronta!",
-      erro: "Mochila, bola e bolo são de quando a gente JÁ cresceu um pouquinho.",
+      acerto: "📖 Sua página do álbum ficou pronta! Você é uma CRIANÇA.",
+      erro: "Bebê e idoso são outras fases da vida — você é CRIANÇA agora.",
     },
   ],
 
