@@ -9,258 +9,261 @@ import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
 import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO08 — Reconhecer sentimentos próprios e dos outros (empatia).
- * ⭐ Estrela: Empatia.
+ * EI03EO08 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Regras da Floresta" — spec EI-01 do usuário.
+ * Estrela: ⭐ Convivência.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO08",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Nome dos Sentimentos",
+  titulo: "Regras da Floresta",
 
   narrativa: {
-    titulo: "Nome dos Sentimentos",
-    contexto:
-      "A Coruja Sábia abriu uma caixinha mágica com 5 carinhas de sentimento. 'Cada carinha tem um nome. Conhecer os nomes dá SUPERPODER!'",
-    problema: "Como saber o que o amigo sente só de olhar?",
-    convite: "Bora aprender a ler as carinhas dos amigos?",
+    titulo: "Regras da Floresta",
+    contexto: "Bagunça no parque! Todo mundo quer o balanço ao mesmo tempo, ninguém guarda os brinquedos, tem lixo no chão. A Coruja Sábia reúne todo mundo: 'Vamos combinar REGRAS que ajudam a gente a brincar junto.'",
+    problema: "Sem regras, ninguém consegue brincar em paz. Que regras vamos criar juntos?",
+    convite: "Vem ajudar a Floresta a ter regras BOAS!",
   },
 
-  conhecimentosPrevios: ["Reconhecer feliz e triste.", "Notar quando alguém está bravo.", "Perceber calma."],
-
-  missao: "Aprender a NOMEAR sentimentos — meus e dos amigos.",
-
-  objetivos: [
-    "Reconhecer 5 sentimentos: feliz, triste, bravo, calmo, confuso.",
-    "Ler o sentimento do amigo pela carinha.",
+  conhecimentosPrevios: [
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  motivacao: "Quando você entende o sentimento do amigo, vira SUPER-AMIGO!",
+  missao: "Entender que REGRAS não são pra atrapalhar — são pra todo mundo ficar bem.",
 
-  explicacao:
-    "AS 5 CARINHAS:\n\n😊 FELIZ — sorriso grande.\n😢 TRISTE — boca pra baixo.\n😠 BRAVO — sobrancelhas fechadas.\n😌 CALMO — carinha tranquila.\n😕 CONFUSO — não sabe direito.\n\nCada sentimento é REAL e vale a pena.",
+  objetivos: [
+    "Reconhecer o tema 'Regras da Floresta' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
+  ],
+
+  motivacao: "Regra é combinado. Combinado bom = brincadeira boa.",
+
+  explicacao: "REGRAS BOAS ajudam a gente:\n\n• ESPERAR a vez no balanço.\n• GUARDAR o brinquedo depois de usar.\n• NÃO JOGAR lixo no chão.\n• FALAR baixo perto de quem dorme.\n\nQuando todos seguem, todos ficam felizes.",
 
   explicacaoAtiva: [
-    { texto: "Toque na carinha FELIZ.", imagem: felizImg, imagemAlt: "Feliz" },
-    { texto: "Toque na carinha TRISTE. Boca pra baixo.", imagem: tristeImg, imagemAlt: "Triste" },
-    { texto: "Toque na carinha BRAVA. Sobrancelhas fechadas.", imagem: bravoImg, imagemAlt: "Bravo" },
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "Toque na carinha CONFUSA. 'Hmm, sei lá…'",
-      imagem: confusoImg,
-      imagemAlt: "Confuso",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
+      imagem: fifiImg,
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Todo sentimento vale a pena?",
-        opcoes: ["Sim, todo sentimento é real", "Não, só o feliz vale"],
+        pergunta: "Você tá pronto pra aprender sobre Regras da Floresta?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Todo sentimento é bem-vindo.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Existem vários sentimentos, não só feliz e triste.",
-    nivel2: "Feliz, triste, bravo, calmo, confuso — cada um tem carinha.",
-    nivel3: "Reconhecer o sentimento do amigo é ser SUPER-AMIGO.",
-    nivel4: "Nenhum sentimento é ruim — todos servem pra alguma coisa.",
+    nivel1: "Regras da Floresta é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de regras da floresta — a gente aprende junto.",
+    nivel3: "Praticar regras da floresta deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar regras da floresta com a família também.",
   },
 
   exemploResolvido: {
-    enunciado: "5 carinhas diferentes na caixinha da Coruja. Quantas?",
-    passos: ["Feliz.", "Triste.", "Bravo.", "Calmo.", "Confuso."],
-    resposta: "5 sentimentos com nome!",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar regras da floresta?",
+    passos: [
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
+    ],
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: felizImg,
-      quantidade: 5,
-      nomeItem: "carinha",
-      nomeItemPlural: "carinhas",
-      pergunta: "Quantas carinhas de sentimento?",
+      imagemUrl: estrelaImg,
+      quantidade: 1,
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos, 3 sentimentos diferentes. Quantos?",
-    resposta: "3 amigos, 3 sentimentos.",
-    explicacao: "Cada amigo pode estar sentindo algo diferente ao mesmo tempo.",
+    enunciado: "3 amigos aparecem pra praticar regras da floresta. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver regras da floresta.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada carinha. Qual está no meio (2ª)?",
+      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
-        { nome: "Feliz", imagemUrl: felizImg, posicao: 1 },
-        { nome: "Bravo", imagemUrl: bravoImg, posicao: 2 },
-        { nome: "Calmo", imagemUrl: tranquiloImg, posicao: 3 },
+        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
+        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
+        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
       ],
-      respostaCerta: "Bravo",
+      respostaCerta: "Lupi",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Amigo com boca pra baixo. Está:", resposta: "Triste.", dica: "Boca pra baixo = tristeza." },
-    { enunciado: "🐰 Amigo com sobrancelha fechada. Está:", resposta: "Bravo.", dica: "Sobrancelha fechada = raiva." },
-    { enunciado: "🦉 Amigo dizendo 'sei lá...'. Está:", resposta: "Confuso.", dica: "Confuso = não sabe ainda." },
+    { enunciado: "⭐ Por que a gente pratica regras da floresta?", resposta: "Regra é combinado. Combinado bom = brincadeira boa.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: leia a carinha de cada amigo.",
-    resposta: "Feliz, triste, bravo.",
+    enunciado: "Desafio Brilha: 3 cenas mostram regras da floresta. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Brilha feliz", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi triste", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi brava", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        { pergunta: "Brilha ganhou estrela. Está:", opcoes: ["Feliz", "Bravo"], correta: 0, explicacao: "Estrela = alegria!" },
-        { pergunta: "Lupi perdeu cenoura. Está:", opcoes: ["Triste", "Feliz"], correta: 0, explicacao: "Perder algo = tristeza." },
-        { pergunta: "Fifi levou empurrão. Está:", opcoes: ["Brava", "Calma"], correta: 0, explicacao: "Empurrão dá raiva mesmo!" },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar regras da floresta?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "5 sentimentos: feliz, triste, bravo, calmo, confuso.",
-      "Todo sentimento é real e válido.",
-      "Ler a carinha do amigo é ser super-amigo.",
-      "Sentimento não é bonzinho nem malzinho — só é.",
+      "Regras da Floresta é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Hoje observe 1 amigo/família e adivinhe pela carinha o sentimento dele.",
+    dica: "Hoje, pratique regras da floresta com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "Boca pra baixo = qual sentimento?",
-      opcoes: ["Feliz", "Triste", "Bravo"],
-      correta: 1,
-      explicacao: "Triste!",
-      visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-    },
-    {
-      pergunta: "Sobrancelha fechada = qual?",
-      opcoes: ["Bravo", "Feliz"],
+      pergunta: "Praticar regras da floresta deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
       correta: 0,
-      explicacao: "Bravo!",
-      visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-          { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo", cor: "#EF4444" },
-        ],
-      },
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Quantas carinhas na caixa da Coruja?",
-      opcoes: ["3", "4", "5"],
-      correta: 2,
-      explicacao: "5 sentimentos com nome!",
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
+      opcoes: ["2", "3", "4"],
+      correta: 1,
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
         tipo: "grupos",
         grupos: [
-          { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-          { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste", cor: "#60A5FA" },
-          { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo", cor: "#EF4444" },
-          { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo", cor: "#34D399" },
-          { imagemUrl: confusoImg, quantidade: 1, rotulo: "Confuso", cor: "#A78BFA" },
+          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
+          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
+          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
         ],
       },
     },
+    {
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Convivência!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Convivência" },
+    },
   ],
 
-  conclusao:
-    "🏅 Medalha: Leitor de Carinhas! 8ª ESTRELA ⭐ (Empatia) acesa. Missão em Casa: aponte pra 1 pessoa da família e adivinhe como ela tá se sentindo — depois pergunte se acertou.",
+  conclusao: "🏅 Medalha: Guardião da Convivência! ⭐ Estrela Convivência ACESA na Árvore da Amizade. Missão em Casa: pratique regras da floresta com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Bebês recém-nascidos já sabem imitar carinhas! Sentimento é a primeira 'língua' que a gente aprende.",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · A caixinha de sentimentos",
-      instrucao: "Toque em cada carinha da caixinha da Coruja.",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
+      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
+      pergunta: "Quantos Brilhas apareceram?",
+      opcoes: ["1", "2", "3"],
+      correta: 0,
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
+      grupos: [
+        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
+        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
+        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
+        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
+      ],
+      pergunta: "Quantos amigos apareceram?",
+      opcoes: ["3", "4", "5"],
+      correta: 1,
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
+    },
+    {
+      tipo: "ligar",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
+      pares: [
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
+      ],
+    },
+    {
+      tipo: "contarQuiz",
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
       grupos: [
         { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
         { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
         { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
         { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
-        { imagemUrl: confusoImg, quantidade: 1, rotulo: "Confuso" },
       ],
-      pergunta: "Quantos sentimentos com nome?",
-      opcoes: ["4", "5", "6"],
+      pergunta: "Quantas carinhas?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "5 sentimentos — que superpoder!",
-      erro: "Conte cada carinha.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Só as tristes",
-      instrucao: "Encontre a carinha triste.",
-      grupos: [{ imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" }],
-      pergunta: "Quantas tristes?",
-      opcoes: ["1", "2", "3"],
-      correta: 0,
-      acerto: "1 triste — reconheci!",
-      erro: "Aponte pra boca pra baixo.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Amigo e carinha",
-      instrucao: "Ligue cada amigo à carinha dele.",
-      pares: [
-        { a: "Brilha ganhou presente", b: "feliz", aImagem: brilhaImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "Lupi perdeu brinquedo", b: "triste", aImagem: lupiImg, aQuantidade: 1, bImagem: tristeImg, bQuantidade: 1 },
-        { a: "Téo meditando", b: "calmo", aImagem: teoImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Todo sentimento vale",
-      instrucao: "Toque em cada carinha diferente.",
-      grupos: [
-        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-        { imagemUrl: confusoImg, quantidade: 1, rotulo: "Confuso" },
-      ],
-      pergunta: "Quantas carinhas diferentes?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      acerto: "3! Todas valem — nenhuma é errada.",
-      erro: "Conte cada uma.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Balão da carinha",
-      instrucao: "Cada carinha ganha 1 balão da cor dela. Toque no balão e depois na carinha.",
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
       itemImagem: balaoImg,
       alvosVisuais: [
-        { nome: "Feliz", cor: "#FBBF24", capacidade: 1, imagemUrl: felizImg },
-        { nome: "Triste", cor: "#60A5FA", capacidade: 1, imagemUrl: tristeImg },
-        { nome: "Bravo", cor: "#EF4444", capacidade: 1, imagemUrl: bravoImg },
-        { nome: "Calmo", cor: "#34D399", capacidade: 1, imagemUrl: tranquiloImg },
-        { nome: "Confuso", cor: "#A78BFA", capacidade: 1, imagemUrl: confusoImg },
+        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
+        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
+        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
+        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
       ],
       pares: [
-        { item: "Balão feliz", alvo: "Feliz" },
-        { item: "Balão triste", alvo: "Triste" },
-        { item: "Balão bravo", alvo: "Bravo" },
-        { item: "Balão calmo", alvo: "Calmo" },
-        { item: "Balão confuso", alvo: "Confuso" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Sentimento e o que ajuda",
-      instrucao: "Cada sentimento tem uma ação que ajuda.",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Triste", b: "abraço", aImagem: tristeImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Bravo", b: "respirar fundo", aImagem: bravoImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-        { a: "Confuso", b: "perguntar pra alguém", aImagem: confusoImg, aQuantidade: 1, bImagem: corujaImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -269,63 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Sorrisão grande é:",
-        opcoes: ["Feliz", "Triste"],
+        pergunta: "Praticar regras da floresta é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Sorriso = felicidade.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Carinha 'sei lá' é:",
-        opcoes: ["Confuso", "Feliz"],
-        correta: 0,
-        explicacao: "Confuso — quando não sei.",
-        visual: { tipo: "itens", imagemUrl: confusoImg, quantidade: 1, rotulo: "Confuso" },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Convivência!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta: "Amigo bravo. Ajudo com:",
-        opcoes: ["Respirar junto", "Gritar de volta"],
+        pergunta: "Quando você pratica regras da floresta, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Respirar acalma.",
-        visual: { tipo: "itens", imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta: "Amigo triste. Ofereço:",
-        opcoes: ["Abraço", "Nada"],
-        correta: 0,
-        explicacao: "Abraço aquece.",
-        visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta: "Sentimento ruim existe?",
-        opcoes: ["Não — só existem sentimentos", "Sim, tem sentimento proibido"],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao: "Todo sentimento é válido — o que importa é o que faço com ele.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo vale", cor: "#EF4444" },
-            { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz vale", cor: "#FBBF24" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta: "Amigo confuso. Ajudo:",
-        opcoes: ["Pergunto pra entender junto", "Rio dele"],
-        correta: 0,
-        explicacao: "Entender junto é ser super-amigo.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Perguntar" },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: { codigo: "EI03EO09", titulo: "Juntos a Gente Consegue" },
+  proximaHabilidade: { codigo: "EI03EO09", titulo: "Trabalhar em Grupo — juntos a gente consegue" },
 };
 
 void piuImg;
+void bravoImg;
 
 export default aula;

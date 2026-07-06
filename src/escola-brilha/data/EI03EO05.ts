@@ -6,228 +6,243 @@ import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
 import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
+import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
-import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO05 — Regras de convivência: respeitar combinados.
- * ⭐ Estrela: Combinado.
+ * EI03EO05 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Compartilhar" — spec EI-01 do usuário.
+ * Estrela: ⭐ Cooperação.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO05",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Regras Que Ajudam",
+  titulo: "Compartilhar",
 
   narrativa: {
-    titulo: "Regras Que Ajudam",
-    contexto:
-      "Na Floresta Encantada, cada um queria brincar do seu jeito ao mesmo tempo. Virou uma bagunça! A Coruja Sábia reúne todo mundo: 'Vamos combinar algumas regrinhas?'",
-    problema: "Como brincar juntos sem bagunçar tudo?",
-    convite: "Bora criar regras que deixam a brincadeira mais gostosa?",
+    titulo: "Compartilhar",
+    contexto: "O Brilha ganhou um monte de frutinhas da árvore mágica. A Fifi e o Lupi olham com fominha. A Coruja Sábia diz: 'Quando a gente divide, todo mundo fica feliz — inclusive quem deu.'",
+    problema: "Será que dividir DIMINUI o que a gente tem? Ou AUMENTA a alegria?",
+    convite: "Vem ver a mágica de compartilhar!",
   },
 
-  conhecimentosPrevios: ["Esperar a vez.", "Ouvir quando alguém fala.", "Guardar o brinquedo depois de usar."],
-
-  missao: "Descobrir que REGRAS não são pra atrapalhar — são pra proteger a diversão.",
-
-  objetivos: [
-    "Reconhecer regras simples de convivência.",
-    "Entender que combinado se cumpre com carinho.",
+  conhecimentosPrevios: [
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  motivacao: "Regra boa é igual abraço: cuida de todo mundo ao mesmo tempo.",
+  missao: "Aprender que DIVIDIR brinquedo, lanche e brincadeira faz todo mundo (inclusive eu!) ficar mais feliz.",
 
-  explicacao:
-    "REGRAS DA FLORESTA:\n\n• Esperar a vez.\n• Ouvir quando alguém fala.\n• Guardar o brinquedo depois.\n• Falar sem gritar.\n• Não bater — CONVERSAR.\n\nRegra combinada = ninguém sai chateado.",
+  objetivos: [
+    "Reconhecer o tema 'Compartilhar' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
+  ],
+
+  motivacao: "Dividir NÃO tira nada de você — MULTIPLICA a alegria.",
+
+  explicacao: "COMPARTILHAR é:\n\n• Dar UM PEDAÇO pro amigo.\n• Emprestar o brinquedo por um tempinho.\n• Chamar pra brincar junto.\n\nQuando divido, tenho MENOS na mão — mas MAIS alegria no peito.",
 
   explicacaoAtiva: [
-    { texto: "A bagunça começou. Toque no Brilha pra ele ver.", imagem: brilhaImg, imagemAlt: "Brilha vendo bagunça" },
-    { texto: "A Coruja diz: 'Vamos combinar!'", imagem: corujaImg, imagemAlt: "Coruja reunindo" },
-    { texto: "O Téo devagarzinho ajuda a guardar tudo.", imagem: teoImg, imagemAlt: "Téo guardando" },
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "Regra combinada + todo mundo cumpriu = floresta feliz!",
-      imagem: felizImg,
-      imagemAlt: "Carinha feliz",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
+      imagem: fifiImg,
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Regra serve pra:",
-        opcoes: ["Cuidar de todo mundo", "Só atrapalhar"],
+        pergunta: "Você tá pronto pra aprender sobre Compartilhar?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Regra cuida da diversão de todos.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Regra ajuda a brincadeira ser gostosa.",
-    nivel2: "Combinado a gente cumpre com carinho.",
-    nivel3: "Se todo mundo cumpre, ninguém sai machucado nem chateado.",
-    nivel4: "Regras em casa e na escola são o jeito de dizer 'a gente se importa'.",
+    nivel1: "Compartilhar é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de compartilhar — a gente aprende junto.",
+    nivel3: "Praticar compartilhar deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar compartilhar com a família também.",
   },
 
   exemploResolvido: {
-    enunciado: "3 amigos combinaram esperar a vez. Quantos vão brincar?",
-    passos: ["1º brinca.", "2º espera e brinca depois.", "3º espera e brinca por último."],
-    resposta: "Todos os 3 vão brincar — cada um na sua vez!",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar compartilhar?",
+    passos: [
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
+    ],
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
       imagemUrl: estrelaImg,
-      quantidade: 3,
-      nomeItem: "amigo que cumpriu",
-      nomeItemPlural: "amigos que cumpriram",
-      pergunta: "Quantos amigos cumpriram a regra?",
+      quantidade: 1,
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos guardaram o brinquedo. Quantos ajudaram?",
-    resposta: "3 amigos — juntos deixaram tudo lindo.",
-    explicacao: "Cada um fez sua parte. Regra cumprida!",
+    enunciado: "3 amigos aparecem pra praticar compartilhar. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver compartilhar.",
     visual: {
       tipo: "podio",
       pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
         { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Téo", imagemUrl: teoImg, posicao: 2 },
+        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
         { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
       ],
-      respostaCerta: "Téo",
+      respostaCerta: "Lupi",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Alguém tá falando. O que faço?", resposta: "Ouço com carinho.", dica: "Ouvir é respeitar." },
-    { enunciado: "🐰 Combinei guardar o brinquedo. Devo?", resposta: "Sim! Combinado se cumpre.", dica: "Palavra dada é palavra cumprida." },
-    { enunciado: "🦉 Por que regras ajudam?", resposta: "Porque protegem a diversão de todo mundo.", dica: "Sem regra vira bagunça." },
+    { enunciado: "⭐ Por que a gente pratica compartilhar?", resposta: "Dividir NÃO tira nada de você — MULTIPLICA a alegria.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: em cada cena, qual escolha CUMPRE a regra?",
-    resposta: "Esperar, ouvir, guardar.",
+    enunciado: "Desafio Brilha: 3 cenas mostram compartilhar. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Fila do escorrega", itemImagemUrl: brilhaImg, quantidade: 3, cor: "#FBBF24" },
-        { personagem: "Coruja falando", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
-        { personagem: "Brinquedos no chão", itemImagemUrl: balaoImg, quantidade: 3, cor: "#F472B6" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        { pergunta: "Tem fila no escorrega. O que faço?", opcoes: ["Espero a vez", "Fujo pra frente"], correta: 0, explicacao: "Esperar a vez é regra de amizade." },
-        { pergunta: "A Coruja tá explicando. Faço o quê?", opcoes: ["Ouço em silêncio", "Grito"], correta: 0, explicacao: "Ouvir mostra que respeito." },
-        { pergunta: "Terminei de brincar. Faço o quê?", opcoes: ["Guardo o brinquedo", "Deixo no chão"], correta: 0, explicacao: "Guardar mantém o espaço bonito pra todos." },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar compartilhar?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "Regra cuida da brincadeira.",
-      "Combinado se cumpre com carinho.",
-      "Ouvir quem fala é respeito.",
-      "Guardar o brinquedo é cuidar do lugar.",
+      "Compartilhar é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Combine 1 regrinha em casa hoje — e cumpra!",
+    dica: "Hoje, pratique compartilhar com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "Regra serve pra:",
-      opcoes: ["Atrapalhar", "Cuidar de todo mundo", "Nada"],
-      correta: 1,
-      explicacao: "Regra é cuidado coletivo.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Cuidado" },
-    },
-    {
-      pergunta: "Alguém falando. Melhor:",
-      opcoes: ["Ouvir", "Interromper"],
+      pergunta: "Praticar compartilhar deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
       correta: 0,
-      explicacao: "Ouvir é respeito.",
-      visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: corujaImg, quantidade: 1, rotulo: "Fala", cor: "#A78BFA" },
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Ouve", cor: "#FBBF24" },
-        ],
-      },
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Quantos amigos guardaram o brinquedo?",
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
       opcoes: ["2", "3", "4"],
       correta: 1,
-      explicacao: "Brilha, Téo e Fifi — 3 cumpriram.",
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
         tipo: "grupos",
         grupos: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" },
-          { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
+          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
+          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
+          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
         ],
       },
     },
+    {
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Cooperação!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Cooperação" },
+    },
   ],
 
-  conclusao:
-    "🏅 Medalha: Guardião do Combinado! 5ª ESTRELA ⭐ acesa. Missão em Casa: combine 1 regrinha nova com a família (ex.: 'depois do lanche, guardo o copo').",
+  conclusao: "🏅 Medalha: Guardião da Cooperação! ⭐ Estrela Cooperação ACESA na Árvore da Amizade. Missão em Casa: pratique compartilhar com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Toda cidade tem regras (semáforo, faixa de pedestre). Sem elas, ninguém sabia por onde ir. Regra pequena hoje = mundo bom amanhã!",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · Amigos na fila",
-      instrucao: "Cada amigo espera a vez. Toque em cada um.",
-      grupos: [
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "1º" },
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "2º" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "3º" },
-      ],
-      pergunta: "Quantos amigos na fila?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      acerto: "3 esperando com paciência!",
-      erro: "Conte um a um.",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
+      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
+      pergunta: "Quantos Brilhas apareceram?",
+      opcoes: ["1", "2", "3"],
+      correta: 0,
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 2 · Brinquedos guardados",
-      instrucao: "Balões guardados no lugar. Toque em cada um.",
-      grupos: [{ imagemUrl: balaoImg, quantidade: 3, rotulo: "Guardados" }],
-      pergunta: "Quantos brinquedos guardados?",
-      opcoes: ["2", "3", "4"],
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
+      grupos: [
+        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
+        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
+        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
+        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
+      ],
+      pergunta: "Quantos amigos apareceram?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "3 no lugar certinho!",
-      erro: "Aponte cada balão.",
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Regra e ação",
-      instrucao: "Ligue cada situação à regra que combina.",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
       pares: [
-        { a: "Fila do escorrega", b: "esperar a vez", aImagem: brilhaImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-        { a: "Coruja falando", b: "ouvir", aImagem: corujaImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Fim da brincadeira", b: "guardar", aImagem: teoImg, aQuantidade: 1, bImagem: balaoImg, bQuantidade: 1 },
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
       ],
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 4 · Estrelas do combinado",
-      instrucao: "Cada regra cumprida ganha 1 estrela. Toque nas estrelas.",
-      grupos: [{ imagemUrl: estrelaImg, quantidade: 3, rotulo: "Estrelas" }],
-      pergunta: "Quantas estrelas conquistadas?",
-      opcoes: ["2", "3", "4"],
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
+      grupos: [
+        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
+        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
+        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
+      ],
+      pergunta: "Quantas carinhas?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "3 estrelas — combinado cumprido!",
-      erro: "Conte cada estrela.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Estrela pra cada amigo",
-      instrucao: "Cada amigo que cumpriu a regra ganha 1 estrela. Toque na estrela e depois no amigo.",
-      itemImagem: estrelaImg,
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
+      itemImagem: balaoImg,
       alvosVisuais: [
         { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
         { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
@@ -235,20 +250,20 @@ const aula: Aula = {
         { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
       ],
       pares: [
-        { item: "Estrela do Brilha", alvo: "Brilha" },
-        { item: "Estrela do Lupi", alvo: "Lupi" },
-        { item: "Estrela da Fifi", alvo: "Fifi" },
-        { item: "Estrela do Téo", alvo: "Téo" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Regra e sentimento",
-      instrucao: "Como fica o coração quando a regra é cumprida?",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Todos esperaram", b: "feliz", aImagem: brilhaImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "Todos ouviram", b: "tranquilo", aImagem: corujaImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-        { a: "Todos guardaram", b: "coração cheio", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -257,63 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Regra ajuda ou atrapalha?",
-        opcoes: ["Ajuda", "Atrapalha"],
+        pergunta: "Praticar compartilhar é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Ajuda — cuida de todo mundo.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Cuidado" },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Terminei de brincar. Faço:",
-        opcoes: ["Guardo", "Deixo jogado"],
-        correta: 0,
-        explicacao: "Guardar é cuidar do lugar.",
-        visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "Guardar" },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Cooperação!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta: "Amigo falando. Faço:",
-        opcoes: ["Ouço", "Grito por cima"],
+        pergunta: "Quando você pratica compartilhar, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Ouvir é respeito.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Ouvir" },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta: "Combinado é pra:",
-        opcoes: ["Cumprir", "Ignorar"],
-        correta: 0,
-        explicacao: "Combinado cumprido = confiança.",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Combinado" },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta: "Amigo não cumpriu. Melhor:",
-        opcoes: ["Lembrar com carinho", "Brigar"],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao: "Lembrar com carinho ensina sem machucar.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Eu lembro", cor: "#FBBF24" },
-            { imagemUrl: lupiImg, quantidade: 1, rotulo: "Amigo aprende", cor: "#F472B6" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta: "Sem regra a brincadeira fica:",
-        opcoes: ["Bagunça", "Perfeita"],
-        correta: 0,
-        explicacao: "Sem regra vira caos — ninguém se diverte.",
-        visual: { tipo: "itens", imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Com regra = calma" },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: { codigo: "EI03EO06", titulo: "Cuidar do Amigo" },
+  proximaHabilidade: { codigo: "EI03EO06", titulo: "Respeito às Diferenças — cada um é único" },
 };
 
 void piuImg;
+void bravoImg;
 
 export default aula;

@@ -7,250 +7,263 @@ import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
-import florImg from "@/assets/neuro-treino/objetos/flor.png";
+import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
+import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
 import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
 
 /**
- * EI03EO06 — Empatia e cuidado com o outro.
- * ⭐ Estrela: Cuidado.
+ * EI03EO06 — Mundo 1 · Amigos da Floresta Encantada
+ * Educação Infantil · Campo O Eu, o Outro e o Nós
+ * Tema: "Respeito às Diferenças" — spec EI-01 do usuário.
+ * Estrela: ⭐ Respeito.
+ * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
  */
 const aula: Aula = {
   codigo: "EI03EO06",
   ano: "Educação Infantil",
   disciplina: "Campos de Experiência",
-  titulo: "Cuidar do Amigo",
+  titulo: "Respeito às Diferenças",
 
   narrativa: {
-    titulo: "Cuidar do Amigo",
-    contexto:
-      "O Piu machucou a asinha e não consegue voar. Ele está triste sozinho no galho. O Brilha vê e sente o coração apertar. 'A gente precisa cuidar dele!'",
-    problema: "Como ajudar um amigo que está machucado ou triste?",
-    convite: "Bora aprender a cuidar dos amigos?",
+    titulo: "Respeito às Diferenças",
+    contexto: "Na floresta tem bichos de todos os jeitos: grande, pequeno, rápido, devagar, colorido, quieto. O Brilha percebe que NINGUÉM é igual — e isso é bonito. A Coruja Sábia sorri: 'Respeitar é gostar do outro do jeito dele.'",
+    problema: "E se todo mundo fosse igualzinho? Que sem graça, né? Bora entender por que ser diferente é BOM.",
+    convite: "Vem celebrar as diferenças com a gente!",
   },
 
-  conhecimentosPrevios: ["Perceber quando alguém está triste.", "Dar abraço.", "Perguntar 'você tá bem?'."],
-
-  missao: "Aprender a cuidar do amigo com atenção, escuta e carinho.",
-
-  objetivos: [
-    "Perceber quando um amigo precisa de ajuda.",
-    "Oferecer cuidado com gestos simples.",
+  conhecimentosPrevios: [
+    "Reconhecer o próprio nome quando alguém chama.",
+    "Nomear alguém de quem gosta.",
+    "Apontar carinhas de sentimento simples.",
   ],
 
-  motivacao: "Cuidar do outro é a forma mais bonita de dizer 'você importa'.",
+  missao: "Reconhecer que somos DIFERENTES — e que cada um importa do jeito que é.",
 
-  explicacao:
-    "COMO CUIDAR:\n\n• PERGUNTAR: 'Você tá bem?'\n• OUVIR de verdade.\n• OFERECER: abraço, água, ajuda pra chamar adulto.\n• FICAR JUNTO — ninguém gosta de ficar sozinho quando tá mal.\n\nCuidar não é resolver tudo. É estar ali.",
+  objetivos: [
+    "Reconhecer o tema 'Respeito às Diferenças' no dia a dia.",
+    "Praticar a atitude em cenas com os amigos da floresta.",
+  ],
+
+  motivacao: "Se todos fossem iguais, a floresta seria de UMA cor só. A beleza tá na variedade.",
+
+  explicacao: "RESPEITAR é:\n\n• Aceitar que o amigo é DIFERENTE de mim.\n• Não rir do jeito do outro.\n• Escutar quem fala diferente.\n• Brincar com quem se move diferente.\n\nCada um é ÚNICO. Todos importam IGUAL.",
 
   explicacaoAtiva: [
-    { texto: "O Piu machucou a asinha. Toque nele com carinho.", imagem: piuImg, imagemAlt: "Piu machucado" },
-    { texto: "O Brilha se aproxima. 'Você tá bem?'", imagem: brilhaImg, imagemAlt: "Brilha perguntando" },
-    { texto: "A Coruja Sábia chega pra ajudar de verdade — adulto sempre resolve.", imagem: corujaImg, imagemAlt: "Coruja ajudando" },
+    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
+    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
+    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
     {
-      texto: "Um abraço da Fifi. O Piu já se sente melhor.",
+      texto: "Bora começar? Toque na Fifi pra ir junto!",
       imagem: fifiImg,
-      imagemAlt: "Fifi abraçando",
+      imagemAlt: "Fifi",
       checagem: {
-        pergunta: "Amigo triste. O melhor primeiro passo é:",
-        opcoes: ["Perguntar 'você tá bem?'", "Fingir que não viu"],
+        pergunta: "Você tá pronto pra aprender sobre Respeito às Diferenças?",
+        opcoes: ["Sim, bora!", "Ainda não"],
         correta: 0,
-        explicacao: "Isso! Perguntar mostra que você se importa.",
+        explicacao: "Isso! Bora acender mais uma estrela.",
       },
     },
   ],
 
   explicacoesNiveis: {
-    nivel1: "Cuidar é se importar.",
-    nivel2: "Pergunto, escuto, ofereço ajuda.",
-    nivel3: "Se é grave, chamo um adulto — cuidar não é resolver sozinho.",
-    nivel4: "Ficar do lado já é cuidar — ninguém gosta de ficar mal sozinho.",
+    nivel1: "Respeito às Diferenças é uma atitude boa que a gente pratica todo dia.",
+    nivel2: "Os amigos da floresta mostram cenas de respeito às diferenças — a gente aprende junto.",
+    nivel3: "Praticar respeito às diferenças deixa a floresta (e a gente) mais feliz.",
+    nivel4: "Em casa, você pode praticar respeito às diferenças com a família também.",
   },
 
   exemploResolvido: {
-    enunciado: "O Piu está triste. 3 amigos vão ajudar de jeitos diferentes. Quantos vão?",
-    passos: ["Brilha pergunta 'tá bem?'.", "Fifi abraça.", "Coruja chama adulto."],
-    resposta: "3 amigos, 3 formas de cuidar.",
+    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar respeito às diferenças?",
+    passos: [
+      "Toque na estrela apagada.",
+      "Repita: 'vou acender!'",
+      "Cada boa atitude acende UMA estrela.",
+    ],
+    resposta: "1 estrela — e ela vai acender no final da missão.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: coracaoImg,
-      quantidade: 3,
-      nomeItem: "coração cuidando",
-      nomeItemPlural: "corações cuidando",
-      pergunta: "Quantos corações se juntaram pra cuidar?",
+      imagemUrl: estrelaImg,
+      quantidade: 1,
+      nomeItem: "estrela",
+      nomeItemPlural: "estrelas",
+      pergunta: "Quantas estrelas vamos acender nesta missão?",
     },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos oferecem flor pro Piu se sentir melhor. Quantos amigos?",
-    resposta: "3 amigos com flor — que gesto lindo!",
-    explicacao: "Um gesto pequeno pode alegrar muito quem tá mal.",
+    enunciado: "3 amigos aparecem pra praticar respeito às diferenças. Quantos amigos você vê?",
+    resposta: "3 amigos — todos participando juntos.",
+    explicacao: "Cada amigo mostra um jeito diferente de viver respeito às diferenças.",
     visual: {
       tipo: "podio",
       pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
       participantes: [
         { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Fifi", imagemUrl: fifiImg, posicao: 2 },
-        { nome: "Téo", imagemUrl: teoImg, posicao: 3 },
+        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
+        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
       ],
-      respostaCerta: "Fifi",
+      respostaCerta: "Lupi",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Vi um amigo chorando. Faço o quê?", resposta: "Vou até ele e pergunto se tá bem.", dica: "Perguntar é o começo do cuidado." },
-    { enunciado: "🐰 Amigo caiu. Ajudo como?", resposta: "Estendo a mão e chamo adulto se precisar.", dica: "Cuidar é agir com carinho." },
-    { enunciado: "🦉 Cuidar é resolver tudo?", resposta: "Não! Cuidar é ESTAR JUNTO, mesmo sem resolver.", dica: "Presença já é cuidado." },
+    { enunciado: "⭐ Por que a gente pratica respeito às diferenças?", resposta: "Se todos fossem iguais, a floresta seria de UMA cor só. A beleza tá na variedade.", dica: "Pensa em como o coração fica." },
+    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
+    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: em cada cena, qual é o jeito CUIDADOSO de agir?",
-    resposta: "Perguntar, oferecer, chamar adulto.",
+    enunciado: "Desafio Brilha: 3 cenas mostram respeito às diferenças. Responda cada uma!",
+    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
     visual: {
       cena: [
-        { personagem: "Piu machucado", itemImagemUrl: piuImg, quantidade: 1, cor: "#60A5FA" },
-        { personagem: "Fifi triste", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
-        { personagem: "Coruja adulta", itemImagemUrl: corujaImg, quantidade: 1, cor: "#A78BFA" },
+        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
       ],
       perguntas: [
-        { pergunta: "Amigo machucado. Faço:", opcoes: ["Chamo um adulto", "Vou embora"], correta: 0, explicacao: "Adulto sabe cuidar de machucado." },
-        { pergunta: "Amiga triste. Faço:", opcoes: ["Ofereço abraço", "Rio dela"], correta: 0, explicacao: "Abraço aquece o coração." },
-        { pergunta: "Adulto chegou pra ajudar. Faço:", opcoes: ["Fico junto e ajudo", "Corro embora"], correta: 0, explicacao: "Ficar junto é apoiar." },
+        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar respeito às diferenças?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
+        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
+        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
       ],
     },
   },
 
   revisao: {
     pontos: [
-      "Cuidar começa perguntando.",
-      "Ficar junto já é cuidar.",
-      "Machucado grave = chamar adulto.",
-      "Um gesto pequeno alegra muito.",
+      "Respeito às Diferenças é uma atitude BOA da floresta.",
+      "A gente pratica no dia a dia com amigos e família.",
+      "Cada boa atitude acende uma estrela.",
+      "Quando todos praticam, a floresta brilha!",
     ],
-    dica: "Hoje, pergunte pra alguém: 'você tá bem?' — e escute a resposta.",
+    dica: "Hoje, pratique respeito às diferenças com alguém da sua casa.",
   },
 
   quiz: [
     {
-      pergunta: "Cuidar é:",
-      opcoes: ["Se importar com o outro", "Resolver tudo sozinho"],
+      pergunta: "Praticar respeito às diferenças deixa a gente:",
+      opcoes: ["Mais feliz", "Mais triste"],
       correta: 0,
-      explicacao: "Cuidar = se importar.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Cuidado" },
+      explicacao: "Mais feliz! Boa atitude acende o coração.",
+      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
     },
     {
-      pergunta: "Amigo machucado. Primeiro passo:",
-      opcoes: ["Perguntar 'tá bem?'", "Sair de perto"],
-      correta: 0,
-      explicacao: "Perguntar mostra que você viu.",
-      visual: {
-        tipo: "comparar",
-        lados: [
-          { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu", cor: "#60A5FA" },
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantos amigos foram cuidar do Piu?",
+      pergunta: "Quantos amigos da floresta apareceram na missão?",
       opcoes: ["2", "3", "4"],
       correta: 1,
-      explicacao: "Brilha, Fifi e Coruja — 3 amigos.",
+      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
       visual: {
         tipo: "grupos",
         grupos: [
           { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
+          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
           { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
-          { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja", cor: "#A78BFA" },
         ],
       },
     },
+    {
+      pergunta: "Quantas estrelas acendemos ao terminar?",
+      opcoes: ["Nenhuma", "1", "Muitas"],
+      correta: 1,
+      explicacao: "1 estrela — a estrela Respeito!",
+      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Respeito" },
+    },
   ],
 
-  conclusao:
-    "🏅 Medalha: Coração Cuidador! 6ª ESTRELA ⭐ (Cuidado) acesa. Missão em Casa: pergunte pra alguém da família 'você tá bem hoje?' — e ouça.",
+  conclusao: "🏅 Medalha: Guardião do Respeito! ⭐ Estrela Respeito ACESA na Árvore da Amizade. Missão em Casa: pratique respeito às diferenças com alguém da família hoje. +100 XP · +50 moedas.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Quando a gente cuida de alguém, o cérebro nosso solta uma química chamada oxitocina — a 'química do abraço'. Cuidar cuida da gente também!",
+    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
   },
 
   interativas: [
     {
       tipo: "contarQuiz",
-      titulo: "Fase 1 · Piu precisa de ajuda",
-      instrucao: "O Piu machucou a asinha. Toque nele com carinho.",
-      grupos: [{ imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }],
-      pergunta: "Quantos amigos precisam de ajuda?",
+      titulo: "Fase 1 · Boas-vindas do Brilha",
+      instrucao: "O Brilha veio te receber. Toque nele!",
+      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
+      pergunta: "Quantos Brilhas apareceram?",
       opcoes: ["1", "2", "3"],
       correta: 0,
-      acerto: "1 amigo — e ele precisa de nós!",
-      erro: "Aponte pro Piu.",
+      acerto: "Isso! Um Brilha lindo pra começar.",
+      erro: "Toque bem no meio da estrela.",
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 2 · Amigos que vão cuidar",
-      instrucao: "Estes vão cuidar do Piu. Toque em cada um.",
+      titulo: "Fase 2 · Os amigos da floresta",
+      instrucao: "Toque em cada amigo pra contar.",
       grupos: [
-        { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" },
+        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
         { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
         { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja" },
+        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
       ],
-      pergunta: "Quantos amigos cuidadores?",
+      pergunta: "Quantos amigos apareceram?",
       opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "4 amigos juntos — Piu não tá sozinho!",
-      erro: "Conte um a um.",
+      acerto: "4 amigos, cada um do seu jeito!",
+      erro: "Aponte um por um.",
     },
     {
       tipo: "ligar",
-      titulo: "Fase 3 · Cada um cuida de um jeito",
-      instrucao: "Ligue cada amigo à forma de cuidar.",
+      titulo: "Fase 3 · Cada amigo com seu par",
+      instrucao: "Ligue cada amigo ao objeto que combina.",
       pares: [
-        { a: "Brilha", b: "pergunta 'tá bem?'", aImagem: brilhaImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-        { a: "Fifi", b: "dá abraço", aImagem: fifiImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
-        { a: "Coruja", b: "chama adulto", aImagem: corujaImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
+        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
+        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
+        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
       ],
     },
     {
       tipo: "contarQuiz",
-      titulo: "Fase 4 · Flores pro Piu",
-      instrucao: "Cada amigo trouxe 1 flor. Toque em cada flor.",
-      grupos: [{ imagemUrl: florImg, quantidade: 3, rotulo: "Flores" }],
-      pergunta: "Quantas flores pro Piu?",
-      opcoes: ["2", "3", "4"],
+      titulo: "Fase 4 · Carinhas de sentimento",
+      instrucao: "Quantas carinhas de sentimento aparecem?",
+      grupos: [
+        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
+        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
+        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
+        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
+      ],
+      pergunta: "Quantas carinhas?",
+      opcoes: ["3", "4", "5"],
       correta: 1,
-      acerto: "3 flores! O Piu vai amar.",
-      erro: "Conte cada flor.",
+      acerto: "4 sentimentos — todos valem!",
+      erro: "Conte de novo, uma a uma.",
     },
     {
       tipo: "arrastar",
-      titulo: "Fase 5 · Presente do carinho",
-      instrucao: "Cada amigo cuidador ganha 1 presente da amizade. Toque no presente e depois no amigo.",
-      itemImagem: presenteImg,
+      titulo: "Fase 5 · Presente pra cada amigo",
+      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
+      itemImagem: balaoImg,
       alvosVisuais: [
         { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
+        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
         { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
         { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
-        { nome: "Coruja", cor: "#A78BFA", capacidade: 1, imagemUrl: corujaImg },
       ],
       pares: [
-        { item: "Presente do Brilha", alvo: "Brilha" },
-        { item: "Presente da Fifi", alvo: "Fifi" },
-        { item: "Presente do Téo", alvo: "Téo" },
-        { item: "Presente da Coruja", alvo: "Coruja" },
+        { item: "Balão 1", alvo: "Brilha" },
+        { item: "Balão 2", alvo: "Lupi" },
+        { item: "Balão 3", alvo: "Fifi" },
+        { item: "Balão 4", alvo: "Téo" },
       ],
     },
     {
       tipo: "ligar",
-      titulo: "Minijogo · Como o Piu se sentiu",
-      instrucao: "Ligue cada momento à carinha do Piu.",
+      titulo: "Minijogo · Amigo e o que ele leva",
+      instrucao: "Ligue cada amigo ao objeto da cena.",
       pares: [
-        { a: "Machucado sozinho", b: "triste", aImagem: piuImg, aQuantidade: 1, bImagem: tristeImg, bQuantidade: 1 },
-        { a: "Amigos chegaram", b: "tranquilo", aImagem: brilhaImg, aQuantidade: 1, bImagem: tranquiloImg, bQuantidade: 1 },
-        { a: "Ganhou flores e abraço", b: "feliz", aImagem: florImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 },
+        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
+        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
+        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
       ],
     },
   ],
@@ -259,61 +272,58 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Amigo triste. Faço:",
-        opcoes: ["Pergunto 'tá bem?'", "Ignoro"],
+        pergunta: "Praticar respeito às diferenças é uma atitude:",
+        opcoes: ["BOA", "Ruim"],
         correta: 0,
-        explicacao: "Perguntar é o começo.",
-        visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Amigo triste" },
+        explicacao: "Boa! Sempre.",
+        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
       },
       {
-        pergunta: "Amigo machucado grave. Faço:",
-        opcoes: ["Chamo adulto", "Fico só olhando"],
-        correta: 0,
-        explicacao: "Adulto resolve o que a gente não consegue.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Adulto" },
+        pergunta: "Quantas estrelas você acende nesta missão?",
+        opcoes: ["0", "1", "5"],
+        correta: 1,
+        explicacao: "1 estrela — a de Respeito!",
+        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
       },
     ],
     medio: [
       {
-        pergunta: "Cuidar é resolver tudo?",
-        opcoes: ["Não, é estar junto", "Sim, tenho que resolver"],
+        pergunta: "Quando você pratica respeito às diferenças, o coração fica:",
+        opcoes: ["Feliz", "Triste"],
         correta: 0,
-        explicacao: "Estar junto já é cuidar!",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Presença" },
+        explicacao: "Feliz! Boa atitude acende o coração.",
+        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
       },
       {
-        pergunta: "Amigo caiu. Ofereço:",
-        opcoes: ["A mão pra levantar", "Risada"],
-        correta: 0,
-        explicacao: "Mão estendida = cuidado.",
-        visual: { tipo: "itens", imagemUrl: lupiImg, quantidade: 1, rotulo: "Ajudar" },
+        pergunta: "Onde posso praticar?",
+        opcoes: ["Só na escola", "Em todo lugar"],
+        correta: 1,
+        explicacao: "Em qualquer lugar — casa, escola, parque.",
+        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
       },
     ],
     dificil: [
       {
-        pergunta: "Como me sinto ao cuidar de alguém?",
-        opcoes: ["Coração cheio", "Vazio"],
+        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
+        opcoes: ["Mostro com carinho", "Rio dele"],
         correta: 0,
-        explicacao: "Cuidar enche o coração — de quem cuida também.",
-        visual: {
-          tipo: "comparar",
-          lados: [
-            { imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração", cor: "#EF4444" },
-            { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz", cor: "#FBBF24" },
-          ],
-        },
+        explicacao: "Ensinar com carinho é o melhor.",
+        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
       },
       {
-        pergunta: "Amigo não quer falar. Faço:",
-        opcoes: ["Fico do lado em silêncio", "Insisto até irritar"],
-        correta: 0,
-        explicacao: "Silêncio ao lado também é cuidado.",
-        visual: { tipo: "itens", imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Presença" },
+        pergunta: "Praticar boas atitudes serve pra:",
+        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
+        correta: 1,
+        explicacao: "É pra viver melhor com todo mundo.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
       },
     ],
   },
 
-  proximaHabilidade: { codigo: "EI03EO07", titulo: "Cada Um É Diferente" },
+  proximaHabilidade: { codigo: "EI03EO07", titulo: "Ajudar os Outros — mão amiga" },
 };
+
+void piuImg;
+void bravoImg;
 
 export default aula;
