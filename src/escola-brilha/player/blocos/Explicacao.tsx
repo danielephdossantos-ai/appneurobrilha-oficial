@@ -87,7 +87,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
           <div className="text-[10px] font-black uppercase tracking-widest text-[#4C9EFF] mb-1">
             Explicando de outro jeito — {nivelAtual.rotulo}
           </div>
-          <p className="text-sm leading-relaxed whitespace-pre-line">{nivelAtual.texto}</p>
+          <p className={`text-sm leading-relaxed whitespace-pre-line ${semTexto ? "sr-only" : ""}`}>{nivelAtual.texto}</p>
         </motion.div>
       )}
 
