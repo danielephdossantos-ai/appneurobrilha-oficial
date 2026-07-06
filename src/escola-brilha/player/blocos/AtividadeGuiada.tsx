@@ -54,6 +54,14 @@ export function AtividadeGuiada({
     );
   }
 
+  if (visual?.tipo === "escolherImagem") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <EscolherImagem visual={visual} explicacao={dados.explicacao} />
+      </Secao>
+    );
+  }
+
 
 
 
