@@ -113,7 +113,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
                   )}
                 </div>
 
-                <p className={`text-base leading-relaxed whitespace-pre-line ${semTexto ? "sr-only" : ""}`}>{c.texto}</p>
+                <p className="text-base leading-relaxed whitespace-pre-line">{c.texto}</p>
 
                 {c.imagem && (
                   <div className="mt-3 rounded-xl bg-white/5 border border-white/10 p-3 flex flex-col items-center">
