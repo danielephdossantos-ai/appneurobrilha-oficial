@@ -277,7 +277,7 @@ const aula: Aula = {
       acerto: "Excelente! CACHORRO começa com o som C — é o amigo que late.",
       erro: "Fala devagar: ca-CHO-rro. Que animal é esse?",
     },
-  ].filter((x: any) => x.tipo !== "escolherImagem" && x.titulo) as Aula["interativas"],
+  ],
 
   niveis: {
     dominioMinimo: 70,
