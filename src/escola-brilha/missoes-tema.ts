@@ -22,7 +22,7 @@ const TEMAS: Record<string, TemaMissao> = {
   default: { nome: "Aventura de Aprender", emoji: "✨" },
 };
 
-function slugDisc(d: string): string {
+export function slugDisc(d: string): string {
   const s = (d || "")
     .toLowerCase()
     .normalize("NFD")
@@ -40,6 +40,7 @@ function slugDisc(d: string): string {
   if (s.includes("religio")) return "religiao";
   return "default";
 }
+
 
 export function temaDaDisciplina(disciplina: string | undefined | null): TemaMissao {
   return TEMAS[slugDisc(disciplina ?? "")] ?? TEMAS.default;
