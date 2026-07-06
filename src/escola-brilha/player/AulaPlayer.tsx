@@ -20,6 +20,9 @@ import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Curiosidade } from "./blocos/Curiosidade";
 import { Conclusao } from "./blocos/Conclusao";
+import { Minijogo } from "./blocos/Minijogo";
+import { MissaoFamilia } from "./blocos/MissaoFamilia";
+
 
 import { Diagnostico } from "./blocos/Diagnostico";
 import { MultiModal } from "./MultiModal";
@@ -47,11 +50,14 @@ const BLOCOS_BASE = [
   { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
   { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },
   { id: "desafio",    nome: "Desafio",        etapa: 4, etapaNome: "Praticar"   },
+  { id: "minijogo",   nome: "Minijogo",       etapa: 4, etapaNome: "Praticar"   },
   { id: "quiz",        nome: "Quiz",           etapa: 5, etapaNome: "Conquistar" },
   { id: "resumo",      nome: "Resumo",         etapa: 5, etapaNome: "Conquistar" },
   { id: "curiosidade", nome: "Curiosidade",    etapa: 5, etapaNome: "Conquistar" },
+  { id: "familia",     nome: "Missão em Família", etapa: 5, etapaNome: "Conquistar" },
   { id: "conclusao",   nome: "Conclusão",      etapa: 5, etapaNome: "Conquistar" },
 ] as const;
+
 
 
 type BlocoId = typeof BLOCOS_BASE[number]["id"];
@@ -82,10 +88,13 @@ export function AulaPlayer({
       BLOCOS_BASE.filter((b) => {
         if (b.id === "narrativa" && !aula.narrativa) return false;
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
+        if (b.id === "minijogo" && !aula.minijogo) return false;
+        if (b.id === "familia" && !aula.missaoFamilia) return false;
         return true;
       }),
-    [aula.narrativa, aula.curiosidade],
+    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
   );
+
 
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
@@ -401,6 +410,8 @@ function renderBloco(
       return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;
+    case "minijogo":
+      return a.minijogo ? <Minijogo dados={a.minijogo} /> : null;
     case "quiz":
       return (
         <Quiz
@@ -416,8 +427,11 @@ function renderBloco(
       return <Revisao dados={a.revisao} />;
     case "curiosidade":
       return a.curiosidade ? <Curiosidade dados={a.curiosidade} /> : null;
+    case "familia":
+      return a.missaoFamilia ? <MissaoFamilia dados={a.missaoFamilia} /> : null;
     case "conclusao":
       return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} codigoAtual={a.codigo} />;
+
 
     default:
       return null;
