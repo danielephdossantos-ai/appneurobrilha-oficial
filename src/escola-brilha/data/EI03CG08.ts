@@ -86,9 +86,9 @@ const aula: Aula = {
     interativo: {
       tipo: "contagem",
       imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      quantidade: 2,
+      nomeItem: "amigo perto",
+      nomeItemPlural: "amigos perto",
       pergunta: "Tem 2 amigos PERTO do Brilha e 1 LONGE. Quantos estão perto?",
     },
   },
@@ -140,9 +140,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Se algo está BEM COLADO em você, está…", opcoes: ["Perto", "Longe", "Dentro"], correta: 0, explicacao: "Colado = perto.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Se um brinquedo está DENTRO da caixa, ele está…", opcoes: ["Fora", "Dentro", "Em cima"], correta: 1, explicacao: "Dentro é por dentro.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Se algo está EMBAIXO da mesa, está…", opcoes: ["Em cima", "Embaixo", "Do lado"], correta: 1, explicacao: "Embaixo é abaixo.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Se algo está BEM COLADO em você, está…", opcoes: ["Perto", "Longe", "Dentro"], correta: 0, explicacao: "Colado = perto.", visual: { tipo: "cena", posicao: "aoLado", referenciaImg: arvoreImg, referenciaLabel: "Árvore", sujeitoImg: brilhaImg, sujeitoLabel: "Perto" } },
+    { pergunta: "Se um brinquedo está DENTRO da caixa, ele está…", opcoes: ["Fora", "Dentro", "Em cima"], correta: 1, explicacao: "Dentro é por dentro.", visual: { tipo: "cena", posicao: "dentro", referenciaImg: bauImg, referenciaLabel: "Caixa", sujeitoImg: blocoImg, sujeitoLabel: "Brinquedo" } },
+    { pergunta: "Se algo está EMBAIXO da mesa, está…", opcoes: ["Em cima", "Embaixo", "Do lado"], correta: 1, explicacao: "Embaixo é abaixo.", visual: { tipo: "cena", posicao: "baixo", referenciaImg: arvoreImg, referenciaLabel: "Mesa", sujeitoImg: blocoImg, sujeitoLabel: "Embaixo" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião do Espaço! A neblina se dissipou e a floresta voltou a ter posição certa. Missão em Casa: coloque um brinquedo DENTRO da caixa e outro EM CIMA da mesa.",
@@ -158,7 +158,7 @@ const aula: Aula = {
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, sua posição", instrucao: "Ligue cada amigo ao par certo.", pares: [
       { a: "Brilha", b: "PERTO da árvore", aImagem: brilhaImg, aQuantidade: 1, bImagem: arvoreImg, bQuantidade: 1 },
       { a: "Lupi", b: "LONGE, na flor", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Fifi", b: "DENTRO do coração", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }
+      { a: "Fifi", b: "DENTRO da caixa", aImagem: fifiImg, aQuantidade: 1, bImagem: bauImg, bQuantidade: 1 }
     ] },
   ],
 
@@ -170,7 +170,7 @@ const aula: Aula = {
     ],
     medio: [
       { pergunta: "O Brilha está pertinho da Fifi. Como se sente?", opcoes: ["Feliz", "Bravo", "Sozinho"], correta: 0, explicacao: "Perto de amigo = feliz.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Lupi está longe. Como se sente?", opcoes: ["Acompanhado", "Sozinho", "Bravo"], correta: 1, explicacao: "Longe pode dar solidão.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Lupi está longe. Como se sente?", opcoes: ["Acompanhado", "Sozinho", "Bravo"], correta: 1, explicacao: "Longe pode dar solidão.", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Sozinho" } }
     ],
     dificil: [
       { pergunta: "É bom saber onde as coisas estão?", opcoes: ["Sim — evita tropeço", "Não faz diferença"], correta: 0, explicacao: "Espaço evita acidentes.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },

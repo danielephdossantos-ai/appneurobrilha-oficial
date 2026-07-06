@@ -175,7 +175,7 @@ const aula: Aula = {
     ],
     medio: [
       { pergunta: "O Téo encaixou tudo. Como se sente?", opcoes: ["Feliz", "Bravo", "Cansado"], correta: 0, explicacao: "Feliz por conseguir!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "A Fifi tentou e não encaixou. Como está?", opcoes: ["Tranquila", "Chateada", "Brava"], correta: 1, explicacao: "Chateia — tenta de novo!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "A Fifi tentou e não encaixou. Como está?", opcoes: ["Tranquila", "Chateada", "Brava"], correta: 1, explicacao: "Chateia — tenta de novo!", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Chateada" } }
     ],
     dificil: [
       { pergunta: "Se não conseguir de primeira, o que fazer?", opcoes: ["Tentar de novo com calma", "Chutar longe"], correta: 0, explicacao: "Calma + tentar de novo.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },
