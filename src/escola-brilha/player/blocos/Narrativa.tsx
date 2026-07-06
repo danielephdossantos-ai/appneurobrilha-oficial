@@ -43,7 +43,7 @@ export function Narrativa({
           </div>
           <TextoComMascotes
             texto={dados.convite}
-            className="text-lg font-black leading-snug flex-1"
+            className="text-lg font-black leading-snug w-full text-center"
           />
         </div>
       </div>
