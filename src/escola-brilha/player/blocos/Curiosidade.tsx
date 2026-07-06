@@ -1,6 +1,7 @@
 import { Lightbulb } from "lucide-react";
 import { Secao } from "./Secao";
 import type { Aula } from "../../types";
+import { TextoComMascotes } from "./TextoComMascotes";
 
 export function Curiosidade({ dados }: { dados: NonNullable<Aula["curiosidade"]> }) {
   return (
@@ -14,7 +15,7 @@ export function Curiosidade({ dados }: { dados: NonNullable<Aula["curiosidade"]>
                 {dados.titulo}
               </div>
             )}
-            <p className="font-black text-base leading-snug">{dados.texto}</p>
+            <TextoComMascotes texto={dados.texto} className="font-black text-base leading-snug flex-1" />
           </div>
         </div>
         {dados.imagemUrl && (

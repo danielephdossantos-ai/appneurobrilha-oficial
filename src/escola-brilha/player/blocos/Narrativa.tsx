@@ -1,32 +1,14 @@
 import { BookOpen, Sparkles, HelpCircle, Hand } from "lucide-react";
 import { Secao } from "./Secao";
-import brilhaImg from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import { TextoComMascotes } from "./TextoComMascotes";
 
 /**
  * Bloco Narrativa — abertura obrigatória de toda missão.
- * História curta (≤ 2 min de leitura) que desperta curiosidade,
- * cria contexto, apresenta um problema e convida a criança a participar.
+ * História curta que desperta curiosidade, cria contexto,
+ * apresenta um problema e convida a criança a participar.
+ * Cada mascote nomeado no texto aparece com sua imagem oficial
+ * (Brilha = estrela, Coruja, Lupi, Fifi, Téo, Piu, Esquilo).
  */
-
-// Mapa de mascotes reconhecidos no texto → imagem oficial.
-const MASCOTES: Array<{ regex: RegExp; img: string; alt: string }> = [
-  { regex: /\besquilo\s+brilha\b|\bbrilha\b/i, img: brilhaImg, alt: "Esquilo Brilha" },
-];
-
-function TextoComMascote({ texto }: { texto: string }) {
-  const mascote = MASCOTES.find((m) => m.regex.test(texto));
-  if (!mascote) return <p className="text-base leading-relaxed">{texto}</p>;
-  return (
-    <div className="flex items-start gap-3">
-      <img
-        src={mascote.img}
-        alt={mascote.alt}
-        className="h-20 w-20 shrink-0 object-contain drop-shadow-lg"
-      />
-      <p className="text-base leading-relaxed flex-1">{texto}</p>
-    </div>
-  );
-}
 
 export function Narrativa({
   dados,
@@ -43,7 +25,7 @@ export function Narrativa({
             <Sparkles className="h-3.5 w-3.5" />
             Era uma vez…
           </div>
-          <TextoComMascote texto={dados.contexto} />
+          <TextoComMascotes texto={dados.contexto} />
         </div>
 
         <div className="rounded-2xl bg-white/10 border border-white/15 p-4">
@@ -51,7 +33,7 @@ export function Narrativa({
             <HelpCircle className="h-3.5 w-3.5" />
             Só que apareceu um probleminha…
           </div>
-          <TextoComMascote texto={dados.problema} />
+          <TextoComMascotes texto={dados.problema} />
         </div>
 
         <div className="rounded-2xl bg-gradient-to-br from-[#FFC93C]/25 to-[#FF8A4C]/25 border-2 border-[#FFC93C]/40 p-4">
@@ -59,7 +41,10 @@ export function Narrativa({
             <Hand className="h-3.5 w-3.5" />
             E aí, topa entrar nessa?
           </div>
-          <p className="text-lg font-black leading-snug">{dados.convite}</p>
+          <TextoComMascotes
+            texto={dados.convite}
+            className="text-lg font-black leading-snug flex-1"
+          />
         </div>
       </div>
     </Secao>
