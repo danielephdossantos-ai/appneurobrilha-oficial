@@ -684,6 +684,26 @@ export type Aula = {
         /** Meta mínima de acertos pra concluir. Padrão: 10. */
         minAcertos?: number;
         acerto?: string;
+      }
+    | {
+        /**
+         * Sequência — cartas aparecem embaralhadas e a criança toca em cada
+         * uma na ORDEM correta (ex.: linha do tempo). Cada sequência
+         * completa "ilumina uma página". Encerra por tempo ou por meta.
+         */
+        tipo: "sequencia";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Cada sequência é uma lista de cartas na ORDEM correta. */
+        sequencias: Array<{
+          titulo?: string;
+          cards: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        }>;
+        /** Meta mínima de sequências pra concluir. Padrão: todas. */
+        minSequencias?: number;
+        acerto?: string;
       };
 
   /**

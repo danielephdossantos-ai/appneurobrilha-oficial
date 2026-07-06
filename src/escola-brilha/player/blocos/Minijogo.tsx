@@ -22,6 +22,7 @@ type Posicionado = Item & {
 export function Minijogo({ dados }: { dados: NonNullable<Aula["minijogo"]> }) {
   if (dados.tipo === "esteira") return <MinijogoEsteira dados={dados} />;
   if (dados.tipo === "cacaElementos") return <MinijogoCaca dados={dados} />;
+  if (dados.tipo === "sequencia") return <MinijogoSequencia dados={dados} />;
   return null;
 }
 
@@ -521,6 +522,228 @@ function MinijogoEsteira({ dados }: { dados: EsteiraDados }) {
           </button>
         </div>
       )}
+    </Secao>
+  );
+}
+
+/* ------------------------- SEQUÊNCIA ------------------------- */
+
+type SequenciaDados = Extract<NonNullable<Aula["minijogo"]>, { tipo: "sequencia" }>;
+
+/**
+ * Minijogo Sequência — as cartas de uma sequência aparecem embaralhadas.
+ * A criança TOCA nelas na ordem correta (ex.: linha do tempo da vida).
+ * Cada sequência completa "ilumina uma página". Encerra por tempo ou meta.
+ */
+function MinijogoSequencia({ dados }: { dados: SequenciaDados }) {
+  const tempoInicial = dados.tempoSegundos ?? 90;
+  const meta = dados.minSequencias ?? dados.sequencias.length;
+  const { speak } = useDeviceTTS();
+
+  const [rodando, setRodando] = useState(false);
+  const [tempo, setTempo] = useState(tempoInicial);
+  const [idx, setIdx] = useState(0); // qual sequência
+  const [passo, setPasso] = useState(0); // próximo card correto esperado
+  const [ordem, setOrdem] = useState<number[]>([]); // ordem embaralhada dos índices originais
+  const [colocados, setColocados] = useState<number[]>([]); // índices já acertados
+  const [erro, setErro] = useState<number | null>(null);
+  const [concluidas, setConcluidas] = useState(0);
+  const finalizadoRef = useRef(false);
+
+  const seqAtual = dados.sequencias[idx];
+  const concluido = concluidas >= meta;
+  const acabou = tempo === 0;
+
+  function embaralhar(n: number) {
+    const arr = Array.from({ length: n }, (_, i) => i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function iniciarSequencia(i: number) {
+    setIdx(i);
+    setPasso(0);
+    setColocados([]);
+    setErro(null);
+    setOrdem(embaralhar(dados.sequencias[i]?.cards.length ?? 0));
+  }
+
+  function iniciar() {
+    setTempo(tempoInicial);
+    setConcluidas(0);
+    finalizadoRef.current = false;
+    iniciarSequencia(0);
+    setRodando(true);
+  }
+
+  useEffect(() => {
+    if (!rodando) return;
+    if (concluido || acabou) {
+      setRodando(false);
+      if (!finalizadoRef.current) {
+        finalizadoRef.current = true;
+        if (concluido) speak(dados.acerto ?? "Página iluminada!", { rate: 0.95 });
+      }
+      return;
+    }
+    const t = setTimeout(() => setTempo((v) => Math.max(0, v - 1)), 1000);
+    return () => clearTimeout(t);
+  }, [rodando, tempo, concluido, acabou, dados.acerto, speak]);
+
+  function tocarCard(cardIdx: number) {
+    if (!rodando || colocados.includes(cardIdx)) return;
+    if (cardIdx === passo) {
+      const novos = [...colocados, cardIdx];
+      setColocados(novos);
+      setPasso(passo + 1);
+      if (novos.length === seqAtual.cards.length) {
+        // sequência completa
+        speak("Muito bem! Página iluminada!", { rate: 0.95 });
+        const novasConcluidas = concluidas + 1;
+        setConcluidas(novasConcluidas);
+        setTimeout(() => {
+          if (novasConcluidas < dados.sequencias.length) {
+            iniciarSequencia((idx + 1) % dados.sequencias.length);
+          }
+        }, 900);
+      }
+    } else {
+      setErro(cardIdx);
+      speak("Essa não é a próxima!", { rate: 1 });
+      setTimeout(() => setErro(null), 500);
+    }
+  }
+
+  return (
+    <Secao icon={Gamepad2} rotulo="Minijogo Brilha" cor="#F472B6">
+      <div className="rounded-2xl p-4 bg-gradient-to-br from-[#4C1D95] to-[#7C3AED] text-white">
+        <div className="flex items-center gap-2 mb-1">
+          <p className="font-black text-lg flex-1">{dados.titulo}</p>
+          <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2 py-1 text-xs font-black">
+            <Timer className="h-3.5 w-3.5" /> {tempo}s
+          </span>
+        </div>
+        <p className="text-sm text-white/85 mb-3">{dados.objetivo}</p>
+
+        {!rodando && !concluido && !acabou && (
+          <button
+            onClick={iniciar}
+            className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#FBBF24] to-[#F472B6] text-[#0d1f55] font-black inline-flex items-center justify-center gap-2 active:scale-[0.98]"
+          >
+            <Play className="h-5 w-5" /> Começar!
+          </button>
+        )}
+
+        {rodando && seqAtual && (
+          <>
+            <div className="flex items-center justify-between mb-2 text-xs font-black uppercase tracking-widest text-white/70">
+              <span>
+                Sequência {idx + 1}/{dados.sequencias.length}
+                {seqAtual.titulo ? ` · ${seqAtual.titulo}` : ""}
+              </span>
+              <span>
+                Iluminadas: {concluidas}/{meta}
+              </span>
+            </div>
+
+            {/* Slots de destino (ordem correta) */}
+            <div className="grid grid-flow-col auto-cols-fr gap-2 mb-3">
+              {seqAtual.cards.map((_, i) => {
+                const acertado = i < colocados.length;
+                const cardIdx = acertado ? colocados[i] : null;
+                const card = cardIdx !== null ? seqAtual.cards[cardIdx] : null;
+                return (
+                  <div
+                    key={i}
+                    className={`aspect-square rounded-xl border-2 grid place-items-center relative ${
+                      acertado
+                        ? "border-[#FBBF24] bg-white"
+                        : "border-white/30 bg-white/10 border-dashed"
+                    }`}
+                  >
+                    <span className="absolute top-1 left-1 text-[10px] font-black bg-black/40 rounded px-1">
+                      {i + 1}º
+                    </span>
+                    {card && (
+                      <img
+                        src={card.imagemUrl}
+                        alt={card.nome}
+                        className="w-full h-full object-contain p-2"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Cartas embaralhadas para tocar */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+              {ordem.map((originalIdx) => {
+                const card = seqAtual.cards[originalIdx];
+                const feito = colocados.includes(originalIdx);
+                const err = erro === originalIdx;
+                return (
+                  <motion.button
+                    key={originalIdx}
+                    onClick={() => tocarCard(originalIdx)}
+                    disabled={feito}
+                    animate={err ? { x: [-6, 6, -4, 4, 0] } : {}}
+                    transition={{ duration: 0.35 }}
+                    className={`rounded-xl p-2 flex flex-col items-center gap-1 border-2 transition ${
+                      feito
+                        ? "opacity-30 border-white/20 bg-white/5"
+                        : err
+                          ? "border-red-400 bg-red-500/20"
+                          : "border-white/30 bg-white/15 hover:bg-white/25 active:scale-95"
+                    }`}
+                  >
+                    <img
+                      src={card.imagemUrl}
+                      alt={card.nome}
+                      className="w-16 h-16 object-contain"
+                      loading="lazy"
+                    />
+                    {card.rotulo && (
+                      <span className="text-[11px] font-black text-center leading-tight">
+                        {card.rotulo}
+                      </span>
+                    )}
+                  </motion.button>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {(concluido || acabou) && (
+          <div className="mt-3 rounded-xl bg-white/15 p-4 text-center">
+            <p className="font-black text-lg flex items-center justify-center gap-2">
+              {concluido ? (
+                <>
+                  <CheckCircle2 className="h-5 w-5 text-[#FBBF24]" /> Álbum iluminado!
+                </>
+              ) : (
+                <>
+                  <X className="h-5 w-5 text-red-300" /> Tempo esgotado!
+                </>
+              )}
+            </p>
+            <p className="text-sm text-white/85 mt-1">
+              Páginas iluminadas: {concluidas}/{dados.sequencias.length}
+            </p>
+            <button
+              onClick={iniciar}
+              className="mt-2 h-10 px-4 rounded-xl bg-white/20 font-black text-white inline-flex items-center gap-1 active:scale-95"
+            >
+              <RefreshCw className="h-4 w-4" /> Jogar de novo
+            </button>
+          </div>
+        )}
+      </div>
     </Secao>
   );
 }
