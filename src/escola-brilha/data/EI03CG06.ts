@@ -18,6 +18,7 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import bracosAbertosImg from "@/assets/escola-brilha/movimentos/bracos-abertos.svg";
 
 /**
  * EI03CG06 — Mundo 2 · O Corpo que Fala na Floresta · Missão 6
@@ -85,10 +86,10 @@ const aula: Aula = {
     resposta: "2 braços pra cima!",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: bracosAbertosImg,
+      quantidade: 2,
+      nomeItem: "braço levantado",
+      nomeItemPlural: "braços levantados",
       pergunta: "O Brilha está alegre. Quantos braços ele levanta?",
     },
   },
@@ -140,9 +141,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Qual emoção deixa o corpo pra CIMA e ABERTO?", opcoes: ["Alegria", "Tristeza", "Raiva"], correta: 0, explicacao: "Alegria é expansiva!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Qual emoção ENCOLHE o corpo?", opcoes: ["Alegria", "Tristeza", "Animação"], correta: 1, explicacao: "Tristeza encolhe.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Qual emoção TENSIONA as mãos?", opcoes: ["Alegria", "Tranquilidade", "Raiva"], correta: 2, explicacao: "Raiva fecha as mãos.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Qual emoção deixa o corpo pra CIMA e ABERTO?", opcoes: ["Alegria", "Tristeza", "Raiva"], correta: 0, explicacao: "Alegria é expansiva!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Alegria" } },
+    { pergunta: "Qual emoção ENCOLHE o corpo?", opcoes: ["Alegria", "Tristeza", "Animação"], correta: 1, explicacao: "Tristeza encolhe.", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Tristeza" } },
+    { pergunta: "Qual emoção TENSIONA as mãos?", opcoes: ["Alegria", "Tranquilidade", "Raiva"], correta: 2, explicacao: "Raiva fecha as mãos.", visual: { tipo: "itens", imagemUrl: bravoImg, quantidade: 1, rotulo: "Raiva" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião da Expressão! As cores das emoções voltaram à floresta. Missão em Casa: faça alegria, tristeza e raiva com o corpo pra alguém adivinhar!",
@@ -165,12 +166,12 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Corpo pra cima = qual emoção?", opcoes: ["Alegria", "Tristeza", "Raiva"], correta: 0, explicacao: "Corpo pra cima = alegria.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantas emoções aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 emoções.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Corpo pra cima = qual emoção?", opcoes: ["Alegria", "Tristeza", "Raiva"], correta: 0, explicacao: "Corpo pra cima = alegria.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Alegria" } },
+      { pergunta: "Quantas emoções aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 emoções.", visual: { tipo: "grupos", grupos: [{ imagemUrl: felizImg, quantidade: 1, rotulo: "Alegria", cor: "#FBBF24" }, { imagemUrl: tristeImg, quantidade: 1, rotulo: "Tristeza", cor: "#60A5FA" }, { imagemUrl: bravoImg, quantidade: 1, rotulo: "Raiva", cor: "#EF4444" }] } }
     ],
     medio: [
       { pergunta: "O Brilha está com braços pra cima. Como se sente?", opcoes: ["Alegre", "Triste", "Bravo"], correta: 0, explicacao: "Alegre demais!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Lupi está encolhido. Como está?", opcoes: ["Alegre", "Triste", "Animado"], correta: 1, explicacao: "Triste.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Lupi está encolhido. Como está?", opcoes: ["Alegre", "Triste", "Animado"], correta: 1, explicacao: "Triste.", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" } }
     ],
     dificil: [
       { pergunta: "É bom mostrar como se sente?", opcoes: ["Sim, sempre", "Não, esconder"], correta: 0, explicacao: "Mostrar é saudável.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },

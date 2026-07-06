@@ -18,6 +18,9 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import dancarImg from "@/assets/escola-brilha/movimentos/dancar.svg";
+import saltarImg from "@/assets/escola-brilha/movimentos/saltar.svg";
+import girarImg from "@/assets/escola-brilha/movimentos/girar.svg";
 
 /**
  * EI03CG10 — Mundo 2 · O Corpo que Fala na Floresta · Missão 10
@@ -86,9 +89,9 @@ const aula: Aula = {
     interativo: {
       tipo: "contagem",
       imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      quantidade: 6,
+      nomeItem: "amigo",
+      nomeItemPlural: "amigos",
       pergunta: "Vieram 6 amigos pra dança. Vamos contar juntos?",
     },
   },
@@ -120,9 +123,9 @@ const aula: Aula = {
     resposta: "Cada amigo faz um movimento único.",
     visual: {
       cena: [
-        { personagem: "Brilha (dança)", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi (salta)", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi (gira)", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }
+        { personagem: "Brilha (dança)", personagemImagemUrl: brilhaImg, itemImagemUrl: dancarImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi (salta)", personagemImagemUrl: lupiImg, itemImagemUrl: saltarImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi (gira)", personagemImagemUrl: fifiImg, itemImagemUrl: girarImg, quantidade: 1, cor: "#FB923C" }
       ],
       perguntas: [
         { pergunta: "Quem DANÇA no centro?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lidera a dança." },
@@ -140,9 +143,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Na Grande Dança, quem participa?", opcoes: ["Só o Brilha", "Todos os amigos", "Ninguém"], correta: 1, explicacao: "Todos juntos!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Pra dançar em grupo, precisa de…", opcoes: ["Ritmo comum", "Silêncio", "Bagunça"], correta: 0, explicacao: "Ritmo une o grupo.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Depois de aprender os 10 movimentos, o corpo fica…", opcoes: ["Preparado pra tudo", "Cansado", "Parado"], correta: 0, explicacao: "Corpo pronto pra tudo!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Na Grande Dança, quem participa?", opcoes: ["Só o Brilha", "Todos os amigos", "Ninguém"], correta: 1, explicacao: "Todos juntos!", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" }] } },
+    { pergunta: "Pra dançar em grupo, precisa de…", opcoes: ["Ritmo comum", "Silêncio", "Bagunça"], correta: 0, explicacao: "Ritmo une o grupo.", visual: { tipo: "itens", imagemUrl: dancarImg, quantidade: 3, rotulo: "Dança em grupo" } },
+    { pergunta: "Depois de aprender os 10 movimentos, o corpo fica…", opcoes: ["Preparado pra tudo", "Cansado", "Parado"], correta: 0, explicacao: "Corpo pronto pra tudo!", visual: { tipo: "grupos", grupos: [{ imagemUrl: dancarImg, quantidade: 1, rotulo: "Dança", cor: "#FBBF24" }, { imagemUrl: saltarImg, quantidade: 1, rotulo: "Salta", cor: "#F472B6" }, { imagemUrl: girarImg, quantidade: 1, rotulo: "Gira", cor: "#60A5FA" }] } }
   ],
 
   conclusao: "🏅 MEDALHA FINAL: Guardião SUPREMO do Movimento! Você concluiu o Mundo 2 — O Corpo que Fala na Floresta! A DÉCIMA ESTRELA ⭐ brilha no céu! Missão em Casa: convide sua família pra uma dança coletiva de 1 minuto.",
@@ -156,17 +159,17 @@ const aula: Aula = {
     { tipo: "contarQuiz", titulo: "Fase 1 · Todos na dança", instrucao: "Todos os amigos que a gente conheceu vieram dançar.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja" }], pergunta: "Quantos amigos dançam?", opcoes: ["4", "5", "6"], correta: 2, acerto: "6 amigos — a floresta inteira!", erro: "Aponte todos: Brilha, Lupi, Fifi, Téo, Piu, Coruja." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Três estilos de dança", instrucao: "Cada amigo dança de um jeito.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Dança" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Salta" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Gira" }], pergunta: "Quantos estilos aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 estilos: dançar, saltar, girar!", erro: "Conte cada amigo." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, seu jeito de dançar", instrucao: "Ligue cada amigo ao par certo.", pares: [
-      { a: "Brilha", b: "DANÇA no centro", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-      { a: "Lupi", b: "SALTA feliz", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Fifi", b: "GIRA leve", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }
+      { a: "Brilha", b: "DANÇA no centro", aImagem: brilhaImg, aQuantidade: 1, bImagem: dancarImg, bQuantidade: 1 },
+      { a: "Lupi", b: "SALTA feliz", aImagem: lupiImg, aQuantidade: 1, bImagem: saltarImg, bQuantidade: 1 },
+      { a: "Fifi", b: "GIRA leve", aImagem: fifiImg, aQuantidade: 1, bImagem: girarImg, bQuantidade: 1 }
     ] },
   ],
 
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem DANÇA no centro?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lidera.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos amigos vieram?", opcoes: ["4", "5", "6"], correta: 2, explicacao: "6 amigos!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem DANÇA no centro?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lidera.", visual: { tipo: "itens", imagemUrl: dancarImg, quantidade: 1, rotulo: "Dança no centro" } },
+      { pergunta: "Quantos amigos vieram?", opcoes: ["4", "5", "6"], correta: 2, explicacao: "6 amigos!", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo", cor: "#34D399" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu", cor: "#60A5FA" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja", cor: "#A78BFA" }] } }
     ],
     medio: [
       { pergunta: "Na festa, todos estão felizes. Como o corpo mostra?", opcoes: ["Braços abertos", "Encolhido", "Fechado"], correta: 0, explicacao: "Alegria abre o corpo!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

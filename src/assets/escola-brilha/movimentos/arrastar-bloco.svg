@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Arrastar o bloco">
+  <rect x="18" y="18" width="220" height="220" rx="42" fill="#ECFDF5"/>
+  <path d="M45 184h112" stroke="#0d1f55" stroke-width="10" stroke-linecap="round" stroke-dasharray="10 12" opacity=".45"/>
+  <path d="M166 184l-24-17v34l24-17Z" fill="#0d1f55" opacity=".45"/>
+  <rect x="62" y="92" width="74" height="74" rx="14" fill="#60A5FA" stroke="#fff" stroke-width="8"/>
+  <path d="M80 111h38" stroke="#DBEAFE" stroke-width="8" stroke-linecap="round"/>
+  <path d="M139 102c17-8 38-1 47 16l13 25c7 13 2 29-11 36-13 7-29 2-36-11l-13-25" fill="#FDE68A" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="96" cy="129" r="12" fill="#FBBF24"/>
+</svg>

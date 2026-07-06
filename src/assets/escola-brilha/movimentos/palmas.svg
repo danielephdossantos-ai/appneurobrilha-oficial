@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Bater palmas">
+  <rect x="18" y="18" width="220" height="220" rx="42" fill="#FEF3C7"/>
+  <path d="M82 179 45 96c-6-14 1-30 15-36 14-6 30 1 36 15l35 79" fill="#FDE68A" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
+  <path d="M174 179 211 96c6-14-1-30-15-36-14-6-30 1-36 15l-35 79" fill="#FDE68A" stroke="#0d1f55" stroke-width="8" stroke-linecap="round"/>
+  <path d="M111 70c10-14 24-22 41-23M90 48c6-12 16-21 29-26M166 70c-10-14-24-22-41-23" stroke="#F59E0B" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -9,6 +9,8 @@ type Props = {
   nomeItem: string;
   nomeItemPlural?: string;
   pergunta?: string;
+  alvoImagemUrl?: string;
+  modo?: "contagem" | "encaixar";
 };
 
 /**
@@ -24,6 +26,8 @@ export function ContagemInterativa({
   nomeItem,
   nomeItemPlural,
   pergunta,
+  alvoImagemUrl,
+  modo = "contagem",
 }: Props) {
   const plural = nomeItemPlural ?? `${nomeItem}s`;
   const perguntaTexto = pergunta ?? `Quantas ${plural} existem?`;
@@ -98,8 +102,23 @@ export function ContagemInterativa({
         </p>
       </div>
 
-      {/* Itens grandes — toque para contar */}
+      {/* Itens grandes — toque para contar/encaixar */}
       <div className="rounded-2xl bg-[#FFF7DC] border-2 border-dashed border-[#FBBF24]/60 p-3 sm:p-6 mb-4">
+        {modo === "encaixar" && alvoImagemUrl && (
+          <div className="mb-3 flex justify-center">
+            <div className="relative h-24 w-32 sm:h-32 sm:w-44 rounded-2xl bg-white/70 border-2 border-[#FBBF24]/50 grid place-items-center shadow-inner">
+              <img
+                src={alvoImagemUrl}
+                alt="Lugar para encaixar"
+                className="h-20 w-20 sm:h-28 sm:w-28 object-contain opacity-90"
+                draggable={false}
+              />
+              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#0d1f55]/60">
+                lugar certo
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex flex-wrap justify-center gap-2 sm:gap-6">
           {itens.map((idx) => {
             const pos = contados.indexOf(idx);
@@ -117,9 +136,19 @@ export function ContagemInterativa({
                 <img
                   src={imagemUrl}
                   alt={nomeItem}
-                  className="w-full h-full object-contain drop-shadow-md"
+                  className={`w-full h-full object-contain drop-shadow-md ${foiContado && modo === "encaixar" ? "opacity-35" : ""}`}
                   draggable={false}
                 />
+                {foiContado && modo === "encaixar" && alvoImagemUrl && (
+                  <motion.img
+                    src={imagemUrl}
+                    alt=""
+                    initial={{ y: -24, scale: 0.8, opacity: 0 }}
+                    animate={{ y: -72, scale: 0.62, opacity: 1 }}
+                    className="absolute left-1/2 top-1/2 h-12 w-12 sm:h-20 sm:w-20 -translate-x-1/2 object-contain drop-shadow-lg"
+                    draggable={false}
+                  />
+                )}
                 <AnimatePresence>
                   {foiContado && (
                     <motion.div
@@ -138,7 +167,7 @@ export function ContagemInterativa({
         </div>
         {!completo && (
           <p className="text-center text-sm sm:text-base font-bold text-[#0d1f55]/70 mt-4">
-            👆 Toque em cada {nomeItem} para contar
+            👆 Toque em cada {nomeItem} para {modo === "encaixar" ? "encaixar" : "contar"}
           </p>
         )}
       </div>

@@ -886,13 +886,13 @@ function JogoLigar({
                       {p.a}
                     </div>
                     {temImg && (
-                      <div className="flex flex-wrap gap-0.5">
+                      <div className="flex flex-wrap gap-1 justify-center">
                         {Array.from({ length: p.aQuantidade! }).map((_, k) => (
                           <img
                             key={k}
                             src={p.aImagem!}
                             alt=""
-                            className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
+                            className="h-10 w-10 sm:h-14 sm:w-14 object-contain"
                             loading="lazy"
                           />
                         ))}
@@ -927,7 +927,7 @@ function JogoLigar({
                     <img
                       src={par!.bImagem!}
                       alt=""
-                      className="h-6 w-6 sm:h-8 sm:w-8 object-contain shrink-0"
+                      className="h-12 w-12 sm:h-16 sm:w-16 object-contain shrink-0"
                       loading="lazy"
                     />
                   )}

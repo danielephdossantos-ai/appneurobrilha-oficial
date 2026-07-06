@@ -54,6 +54,14 @@ export function AtividadeGuiada({
     );
   }
 
+  if (visual?.tipo === "cartoes") {
+    return (
+      <Secao icon={HandHelping} rotulo="Atividade guiada" cor="#34D399">
+        <CartoesGuiados visual={visual} explicacao={dados.explicacao} />
+      </Secao>
+    );
+  }
+
 
 
 
@@ -81,6 +89,72 @@ export function AtividadeGuiada({
         </div>
       )}
     </Secao>
+  );
+}
+
+function CartoesGuiados({
+  visual,
+  explicacao,
+}: {
+  visual: Extract<NonNullable<Aula["atividadeGuiada"]["visual"]>, { tipo: "cartoes" }>;
+  explicacao: string;
+}) {
+  const [escolhido, setEscolhido] = useState<string | null>(null);
+  const { speak } = useDeviceTTS();
+  const acertou = escolhido === visual.respostaCerta;
+
+  function tocar(nome: string) {
+    if (escolhido) return;
+    setEscolhido(nome);
+    speak(nome === visual.respostaCerta ? "Muito bem!" : "Olhe as imagens de novo.");
+    if (nome !== visual.respostaCerta) {
+      window.setTimeout(() => setEscolhido(null), 1300);
+    }
+  }
+
+  return (
+    <div className="rounded-3xl bg-white/95 text-[#0d1f55] p-4 sm:p-6 border-2 border-[#34D399]/40 shadow-inner">
+      <p className="text-2xl sm:text-3xl font-black leading-tight mb-4">{visual.pergunta}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {visual.cartoes.map((c) => {
+          const isEscolha = escolhido === c.nome;
+          const isCerta = c.nome === visual.respostaCerta;
+          return (
+            <button
+              key={c.nome}
+              type="button"
+              onClick={() => tocar(c.nome)}
+              className={`rounded-3xl p-3 min-h-[190px] border-4 bg-[#F8FAFC] shadow-lg active:scale-[0.98] transition-all ${
+                isEscolha
+                  ? isCerta
+                    ? "border-[#22C55E] scale-[1.03]"
+                    : "border-[#EF4444]"
+                  : "border-[#0d1f55]/10 hover:border-[#34D399]"
+              }`}
+            >
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <img src={c.imagemUrl} alt="" className="h-16 w-16 object-contain" draggable={false} />
+                {c.acaoImagemUrl && (
+                  <img src={c.acaoImagemUrl} alt="" className="h-16 w-16 object-contain" draggable={false} />
+                )}
+              </div>
+              <div className="text-xl font-black">{c.nome}</div>
+              {c.rotulo && (
+                <div className="mt-2 rounded-2xl bg-[#0d1f55] text-white px-3 py-2 text-sm font-black uppercase tracking-wide">
+                  {c.rotulo}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {acertou && (
+        <div className="mt-4 flex items-center gap-2 rounded-xl p-3 border bg-[#22C55E] border-[#16A34A] text-white">
+          <CheckCircle2 className="h-5 w-5" />
+          <span className="text-sm font-black">Muito bem! {explicacao}</span>
+        </div>
+      )}
+    </div>
   );
 }
 

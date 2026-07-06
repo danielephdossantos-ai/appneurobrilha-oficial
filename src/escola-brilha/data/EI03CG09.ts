@@ -18,6 +18,10 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import correrImg from "@/assets/escola-brilha/movimentos/correr.svg";
+import saltarImg from "@/assets/escola-brilha/movimentos/saltar.svg";
+import equilibrioLinhaImg from "@/assets/escola-brilha/movimentos/equilibrio-linha.svg";
+import encaixarCaixaImg from "@/assets/escola-brilha/movimentos/encaixar-caixa.svg";
 
 /**
  * EI03CG09 — Mundo 2 · O Corpo que Fala na Floresta · Missão 9
@@ -85,10 +89,10 @@ const aula: Aula = {
     resposta: "4 desafios.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: correrImg,
+      quantidade: 4,
+      nomeItem: "desafio",
+      nomeItemPlural: "desafios",
       pergunta: "O circuito tem 4 desafios. Quantos o Brilha precisa passar?",
     },
   },
@@ -120,9 +124,9 @@ const aula: Aula = {
     resposta: "Cada amigo faz um movimento único.",
     visual: {
       cena: [
-        { personagem: "Brilha (corre)", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi (salta)", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi (equilibra)", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }
+        { personagem: "Brilha (corre)", personagemImagemUrl: brilhaImg, itemImagemUrl: correrImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi (salta)", personagemImagemUrl: lupiImg, itemImagemUrl: saltarImg, quantidade: 1, cor: "#F472B6" },
+        { personagem: "Fifi (equilibra)", personagemImagemUrl: fifiImg, itemImagemUrl: equilibrioLinhaImg, quantidade: 1, cor: "#FB923C" }
       ],
       perguntas: [
         { pergunta: "Quem CORRE?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha acelerado." },
@@ -140,9 +144,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "O que dá IMPULSO antes de saltar?", opcoes: ["Correr", "Parar", "Sentar"], correta: 0, explicacao: "Correr dá impulso!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Depois de saltar, precisa de…", opcoes: ["Equilíbrio", "Preguiça", "Sono"], correta: 0, explicacao: "Equilíbrio pra não cair.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Coordenação global usa…", opcoes: ["Só as mãos", "O corpo todo"], correta: 1, explicacao: "Corpo inteiro!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "O que dá IMPULSO antes de saltar?", opcoes: ["Correr", "Parar", "Sentar"], correta: 0, explicacao: "Correr dá impulso!", visual: { tipo: "itens", imagemUrl: correrImg, quantidade: 1, rotulo: "Correr antes" } },
+    { pergunta: "Depois de saltar, precisa de…", opcoes: ["Equilíbrio", "Preguiça", "Sono"], correta: 0, explicacao: "Equilíbrio pra não cair.", visual: { tipo: "itens", imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Equilíbrio" } },
+    { pergunta: "Coordenação global usa…", opcoes: ["Só as mãos", "O corpo todo"], correta: 1, explicacao: "Corpo inteiro!", visual: { tipo: "grupos", grupos: [{ imagemUrl: correrImg, quantidade: 1, rotulo: "Correr", cor: "#FBBF24" }, { imagemUrl: saltarImg, quantidade: 1, rotulo: "Saltar", cor: "#F472B6" }, { imagemUrl: encaixarCaixaImg, quantidade: 1, rotulo: "Encaixar", cor: "#34D399" }] } }
   ],
 
   conclusao: "🏅 Medalha: Guardião da Coordenação Global! O circuito foi vencido! Missão em Casa: faça 3 movimentos em sequência: pular, girar, encaixar peça.",
@@ -156,21 +160,21 @@ const aula: Aula = {
     { tipo: "contarQuiz", titulo: "Fase 1 · Estações do circuito", instrucao: "Cada amigo passa por uma estação diferente.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Corre" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Salta" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Equilibra" }], pergunta: "Quantas estações aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 estações!", erro: "Conte cada amigo." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Circuito completo", instrucao: "Todos os amigos completaram o circuito.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja" }], pergunta: "Quantos completaram?", opcoes: ["5", "6", "7"], correta: 1, acerto: "6 amigos completaram!", erro: "Aponte cada um." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, sua estação", instrucao: "Ligue cada amigo ao par certo.", pares: [
-      { a: "Brilha", b: "CORRE", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-      { a: "Lupi", b: "SALTA", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Téo", b: "ENCAIXA", aImagem: teoImg, aQuantidade: 1, bImagem: blocoImg, bQuantidade: 1 }
+      { a: "Brilha", b: "CORRE", aImagem: brilhaImg, aQuantidade: 1, bImagem: correrImg, bQuantidade: 1 },
+      { a: "Lupi", b: "SALTA", aImagem: lupiImg, aQuantidade: 1, bImagem: saltarImg, bQuantidade: 1 },
+      { a: "Téo", b: "ENCAIXA", aImagem: teoImg, aQuantidade: 1, bImagem: encaixarCaixaImg, bQuantidade: 1 }
     ] },
   ],
 
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem CORRE?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha veloz.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantas estações?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 estações.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem CORRE?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha veloz.", visual: { tipo: "itens", imagemUrl: correrImg, quantidade: 1, rotulo: "Corre" } },
+      { pergunta: "Quantas estações?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 estações.", visual: { tipo: "grupos", grupos: [{ imagemUrl: correrImg, quantidade: 1, rotulo: "Corre", cor: "#FBBF24" }, { imagemUrl: saltarImg, quantidade: 1, rotulo: "Salta", cor: "#F472B6" }, { imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Equilibra", cor: "#FB923C" }] } }
     ],
     medio: [
       { pergunta: "O Brilha completou o circuito. Como se sente?", opcoes: ["Feliz", "Bravo", "Triste"], correta: 0, explicacao: "Orgulho de conseguir!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "O Lupi caiu no meio. Como está?", opcoes: ["Feliz", "Chateado", "Bravo"], correta: 1, explicacao: "Chateia — tenta de novo!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "O Lupi caiu no meio. Como está?", opcoes: ["Feliz", "Chateado", "Bravo"], correta: 1, explicacao: "Chateia — tenta de novo!", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Chateado" } }
     ],
     dificil: [
       { pergunta: "Se um passo falhar, o que fazer?", opcoes: ["Voltar e tentar", "Desistir"], correta: 0, explicacao: "Tentar de novo.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },

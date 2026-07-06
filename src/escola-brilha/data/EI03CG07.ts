@@ -18,6 +18,8 @@ import bauImg from "@/assets/neuro-treino/objetos/bau.png";
 import leaoImg from "@/assets/neuro-treino/objetos/leao.png";
 import sapoImg from "@/assets/neuro-treino/objetos/sapo.png";
 import passaroImg from "@/assets/neuro-treino/objetos/passaro.png";
+import palmasImg from "@/assets/escola-brilha/movimentos/palmas.svg";
+import passosImg from "@/assets/escola-brilha/movimentos/passos.svg";
 
 /**
  * EI03CG07 — Mundo 2 · O Corpo que Fala na Floresta · Missão 7
@@ -85,10 +87,10 @@ const aula: Aula = {
     resposta: "5 palmas.",
     interativo: {
       tipo: "contagem",
-      imagemUrl: brilhaImg,
-      quantidade: 1,
-      nomeItem: "movimento",
-      nomeItemPlural: "movimentos",
+      imagemUrl: palmasImg,
+      quantidade: 5,
+      nomeItem: "palma",
+      nomeItemPlural: "palmas",
       pergunta: "O Brilha bate 5 palmas devagar. Vamos contar juntos.",
     },
   },
@@ -120,9 +122,9 @@ const aula: Aula = {
     resposta: "Cada amigo faz um movimento único.",
     visual: {
       cena: [
-        { personagem: "Brilha (devagar)", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi (rápido)", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi (sequência)", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }
+        { personagem: "Brilha (devagar)", personagemImagemUrl: brilhaImg, itemImagemUrl: palmasImg, quantidade: 1, cor: "#FBBF24" },
+        { personagem: "Lupi (rápido)", personagemImagemUrl: lupiImg, itemImagemUrl: palmasImg, quantidade: 3, cor: "#F472B6" },
+        { personagem: "Fifi (palma-pé)", personagemImagemUrl: fifiImg, itemImagemUrl: passosImg, quantidade: 1, cor: "#FB923C" }
       ],
       perguntas: [
         { pergunta: "Quem bate DEVAGAR?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha no ritmo lento." },
@@ -140,9 +142,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Ritmo é…", opcoes: ["Bagunça", "Tempo certo", "Silêncio"], correta: 1, explicacao: "Ritmo é tempo organizado.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Palma-pé-palma-pé é…", opcoes: ["Sequência", "Só palma", "Só pé"], correta: 0, explicacao: "É sequência de 2 movimentos!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-    { pergunta: "Todo mundo junto no mesmo ritmo forma…", opcoes: ["Música", "Silêncio", "Bagunça"], correta: 0, explicacao: "Forma música!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+    { pergunta: "Ritmo é…", opcoes: ["Bagunça", "Tempo certo", "Silêncio"], correta: 1, explicacao: "Ritmo é tempo organizado.", visual: { tipo: "itens", imagemUrl: palmasImg, quantidade: 2, rotulo: "Batidas no tempo" } },
+    { pergunta: "Palma-pé-palma-pé é…", opcoes: ["Sequência", "Só palma", "Só pé"], correta: 0, explicacao: "É sequência de 2 movimentos!", visual: { tipo: "grupos", grupos: [{ imagemUrl: palmasImg, quantidade: 1, rotulo: "Palma", cor: "#FBBF24" }, { imagemUrl: passosImg, quantidade: 1, rotulo: "Pé", cor: "#60A5FA" }, { imagemUrl: palmasImg, quantidade: 1, rotulo: "Palma", cor: "#FBBF24" }] } },
+    { pergunta: "Todo mundo junto no mesmo ritmo forma…", opcoes: ["Música", "Silêncio", "Bagunça"], correta: 0, explicacao: "Forma música!", visual: { tipo: "itens", imagemUrl: palmasImg, quantidade: 3, rotulo: "Palmas juntas" } }
   ],
 
   conclusao: "🏅 Medalha: Guardião do Ritmo! Os tambores da floresta voltaram a tocar. Missão em Casa: crie um ritmo com palmas e pés e ensine pra alguém.",
@@ -156,21 +158,21 @@ const aula: Aula = {
     { tipo: "contarQuiz", titulo: "Fase 1 · Três ritmos", instrucao: "Cada amigo bate no seu ritmo.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Devagar" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Rápido" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Sequência" }], pergunta: "Quantos ritmos aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 ritmos diferentes!", erro: "Conte cada amigo." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Todos no mesmo ritmo", instrucao: "Todos os amigos entraram no ritmo da floresta.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja" }], pergunta: "Quantos amigos entraram no ritmo?", opcoes: ["5", "6", "7"], correta: 1, acerto: "6 amigos no ritmo!", erro: "Aponte cada um." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, um ritmo", instrucao: "Ligue cada amigo ao par certo.", pares: [
-      { a: "Brilha", b: "ritmo LENTO", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-      { a: "Lupi", b: "ritmo RÁPIDO", aImagem: lupiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 },
-      { a: "Fifi", b: "SEQUÊNCIA", aImagem: fifiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }
+      { a: "Brilha", b: "ritmo LENTO", aImagem: brilhaImg, aQuantidade: 1, bImagem: palmasImg, bQuantidade: 1 },
+      { a: "Lupi", b: "ritmo RÁPIDO", aImagem: lupiImg, aQuantidade: 1, bImagem: palmasImg, bQuantidade: 3 },
+      { a: "Fifi", b: "SEQUÊNCIA", aImagem: fifiImg, aQuantidade: 1, bImagem: passosImg, bQuantidade: 1 }
     ] },
   ],
 
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem bate DEVAGAR?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lento.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos ritmos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 ritmos.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem bate DEVAGAR?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lento.", visual: { tipo: "itens", imagemUrl: palmasImg, quantidade: 1, rotulo: "Palma devagar" } },
+      { pergunta: "Quantos ritmos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 ritmos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: palmasImg, quantidade: 1, rotulo: "Lento", cor: "#FBBF24" }, { imagemUrl: palmasImg, quantidade: 3, rotulo: "Rápido", cor: "#F472B6" }, { imagemUrl: passosImg, quantidade: 1, rotulo: "Sequência", cor: "#60A5FA" }] } }
     ],
     medio: [
       { pergunta: "Quando você segue o ritmo, como se sente?", opcoes: ["Feliz", "Bravo", "Triste"], correta: 0, explicacao: "Ritmo dá alegria!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
-      { pergunta: "Se perde o ritmo, como fica?", opcoes: ["Tranquilo", "Confuso", "Feliz"], correta: 1, explicacao: "Confuso — tenta de novo!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } }
+      { pergunta: "Se perde o ritmo, como fica?", opcoes: ["Tranquilo", "Confuso", "Feliz"], correta: 1, explicacao: "Confuso — tenta de novo!", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Confuso" } }
     ],
     dificil: [
       { pergunta: "É bom todos baterem no mesmo ritmo?", opcoes: ["Sim — vira música", "Não — vira bagunça"], correta: 0, explicacao: "Junto vira música.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Reflexão" } },
