@@ -20,8 +20,19 @@ type Posicionado = Item & {
  * balançando levemente pra criar o efeito de "escondidos na floresta".
  */
 export function Minijogo({ dados }: { dados: NonNullable<Aula["minijogo"]> }) {
-  if (dados.tipo !== "cacaElementos") return null;
+  if (dados.tipo === "esteira") return <MinijogoEsteira dados={dados} />;
+  if (dados.tipo === "cacaElementos") return <MinijogoCaca dados={dados} />;
+  return null;
+}
 
+type CacaDados = Extract<NonNullable<Aula["minijogo"]>, { tipo: "cacaElementos" }>;
+
+/**
+ * Minijogo Brilha — Caça aos Elementos.
+ * Elementos-alvo + distratores misturados no cenário, sem sobreposição,
+ * balançando levemente pra criar o efeito de "escondidos na floresta".
+ */
+function MinijogoCaca({ dados }: { dados: CacaDados }) {
   const total = dados.elementos.length;
   const tempoInicial = dados.tempoSegundos ?? 90;
   const distratores = dados.distratores ?? [];
