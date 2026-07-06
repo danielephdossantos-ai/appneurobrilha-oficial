@@ -136,9 +136,10 @@ function EscolaBrilhaCatalogo() {
       if (filtro === "disponiveis" && !escritasSet.has(h.codigo)) continue;
       const series = expandirAno(h.ano);
       for (const s of series) {
-        const disc = h.componente || "Outros";
+        const disc = slugDisc(h.componente);
         (tree[s][disc] ||= []).push(h);
       }
+
     }
     // ordena habilidades por código dentro de cada disciplina
     for (const s of SERIES_ORDEM) {
