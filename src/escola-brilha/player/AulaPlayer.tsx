@@ -20,6 +20,9 @@ import { Quiz } from "./blocos/Quiz";
 import { Revisao } from "./blocos/Revisao";
 import { Curiosidade } from "./blocos/Curiosidade";
 import { Conclusao } from "./blocos/Conclusao";
+import { Minijogo } from "./blocos/Minijogo";
+import { MissaoFamilia } from "./blocos/MissaoFamilia";
+
 
 import { Diagnostico } from "./blocos/Diagnostico";
 import { MultiModal } from "./MultiModal";
