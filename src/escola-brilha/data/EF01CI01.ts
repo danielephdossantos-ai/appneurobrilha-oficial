@@ -385,9 +385,39 @@ const aula: Aula = {
     ],
   },
 
+  minijogo: {
+    tipo: "cacaElementos",
+    titulo: "Caça aos Cientistas",
+    objetivo:
+      "Encontre 5 elementos da natureza escondidos na floresta. Cada descoberta ilumina uma parte do mapa!",
+    tempoSegundos: 90,
+    elementos: [
+      { nome: "Flor", imagemUrl: florImg, rotulo: "🌼 Flor" },
+      { nome: "Folha", imagemUrl: arvoreImg, rotulo: "🍃 Folha" },
+      { nome: "Semente", imagemUrl: sementeImg, rotulo: "🌰 Semente" },
+      { nome: "Pássaro", imagemUrl: passaroImg, rotulo: "🐦 Pássaro" },
+      { nome: "Girassol", imagemUrl: girassolImg, rotulo: "🌻 Girassol" },
+    ],
+    acerto: "🔦 Mapa iluminado! Você é um caçador de descobertas!",
+  },
+
+  missaoFamilia: {
+    titulo: "Caminhada do Cientista",
+    instrucao:
+      "Faça uma caminhada com um familiar. Observem 5 elementos da natureza e depois registrem juntos aqui embaixo.",
+    permitirFoto: true,
+    registros: [
+      { label: "O que você encontrou?", tipo: "texto" },
+      { label: "Qual era a cor?", tipo: "cor" },
+      { label: "Era um ser vivo?", tipo: "sim_nao" },
+      { label: "O que chamou mais atenção?", tipo: "texto" },
+    ],
+  },
+
   proximaHabilidade: {
     codigo: "EF01CI02",
   },
+
 };
 
 export default aula;
