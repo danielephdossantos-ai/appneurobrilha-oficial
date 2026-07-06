@@ -387,11 +387,11 @@ const aula: Aula = {
         visual: { tipo: "itens", imagemUrl: bebeEngatinhandoImg, quantidade: 1, rotulo: "👶" },
       },
       {
-        pergunta: "Qual desses é da ESCOLA?",
-        opcoes: ["Mochila", "Chocalho", "Mamadeira"],
+        pergunta: "Qual desses é um brinquedo de CRIANÇA maior?",
+        opcoes: ["Bola", "Chocalho", "Mamadeira"],
         correta: 0,
-        explicacao: "Mochila é da escola.",
-        visual: { tipo: "itens", imagemUrl: mochilaImg, quantidade: 1, rotulo: "🎒" },
+        explicacao: "Chocalho e mamadeira são de bebê. Bola é de criança.",
+        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽" },
       },
       {
         pergunta: "O ANIVERSÁRIO comemora:",
