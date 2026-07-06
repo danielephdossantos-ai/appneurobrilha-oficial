@@ -250,6 +250,9 @@ function JogoSelecionarMultiplos({
       )}
     </Secao>
   );
+}
+
+
 
 
 /* --- Selecionar Letras (multi-select por categoria + TTS por cartão) --- */
