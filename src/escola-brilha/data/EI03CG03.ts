@@ -165,8 +165,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Qual amigo imita o LEÃO?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha é o leão da festa.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos bichos aparecem sendo imitados?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Leão, sapo, pássaro — 3.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Qual amigo imita o LEÃO?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha é o leão da festa.", visual: { tipo: "itens", imagemUrl: leaoImg, quantidade: 1, rotulo: "Leão" } },
+      { pergunta: "Quantos bichos aparecem sendo imitados?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Leão, sapo, pássaro — 3.", visual: { tipo: "grupos", grupos: [{ imagemUrl: leaoImg, quantidade: 1, rotulo: "Leão", cor: "#FBBF24" }, { imagemUrl: sapoImg, quantidade: 1, rotulo: "Sapo", cor: "#34D399" }, { imagemUrl: passaroImg, quantidade: 1, rotulo: "Pássaro", cor: "#60A5FA" }] } }
     ],
     medio: [
       { pergunta: "O Lupi virou sapo e pulou. Como ele se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Imitar é diversão pura!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

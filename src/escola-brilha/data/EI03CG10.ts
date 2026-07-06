@@ -168,8 +168,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem DANÇA no centro?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lidera.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos amigos vieram?", opcoes: ["4", "5", "6"], correta: 2, explicacao: "6 amigos!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem DANÇA no centro?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lidera.", visual: { tipo: "itens", imagemUrl: dancarImg, quantidade: 1, rotulo: "Dança no centro" } },
+      { pergunta: "Quantos amigos vieram?", opcoes: ["4", "5", "6"], correta: 2, explicacao: "6 amigos!", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo", cor: "#34D399" }, { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu", cor: "#60A5FA" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja", cor: "#A78BFA" }] } }
     ],
     medio: [
       { pergunta: "Na festa, todos estão felizes. Como o corpo mostra?", opcoes: ["Braços abertos", "Encolhido", "Fechado"], correta: 0, explicacao: "Alegria abre o corpo!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

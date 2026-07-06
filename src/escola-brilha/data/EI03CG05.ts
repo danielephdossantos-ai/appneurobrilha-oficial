@@ -158,7 +158,7 @@ const aula: Aula = {
   },
 
   interativas: [
-    { tipo: "contarQuiz", titulo: "Fase 1 · Três movimentos das mãos", instrucao: "Cada amigo faz um movimento com as mãos.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Toca" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Arrasta" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Encaixa" }], pergunta: "Quantos movimentos aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 movimentos das mãos!", erro: "Conte cada amigo." },
+    { tipo: "contarQuiz", titulo: "Fase 1 · Três movimentos das mãos", instrucao: "Cada amigo faz um movimento com as mãos.", grupos: [{ imagemUrl: toquePontoImg, quantidade: 1, rotulo: "Toca" }, { imagemUrl: arrastarBlocoImg, quantidade: 1, rotulo: "Arrasta" }, { imagemUrl: encaixarCaixaImg, quantidade: 1, rotulo: "Encaixa" }], pergunta: "Quantos movimentos aparecem?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 movimentos das mãos!", erro: "Conte cada movimento." },
     { tipo: "contarQuiz", titulo: "Fase 2 · Todos com as mãos ativas", instrucao: "Todos os amigos treinam as mãozinhas.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }], pergunta: "Quantos amigos treinam?", opcoes: ["3", "4", "5"], correta: 1, acerto: "4 amigos treinando as mãozinhas!", erro: "Aponte cada um." },
     { tipo: "ligar", titulo: "Fase 3 · Cada amigo, seu movimento", instrucao: "Ligue cada amigo ao par certo.", pares: [
       { a: "Brilha", b: "TOCA no ponto", aImagem: brilhaImg, aQuantidade: 1, bImagem: toquePontoImg, bQuantidade: 1 },

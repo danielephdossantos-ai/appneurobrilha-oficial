@@ -167,8 +167,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Qual amigo está em UM PÉ SÓ?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha equilibrista.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos treinam equilíbrio?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 amigos treinando.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Qual amigo está em UM PÉ SÓ?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha equilibrista.", visual: { tipo: "itens", imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Um pé só" } },
+      { pergunta: "Quantos treinam equilíbrio?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 amigos treinando.", visual: { tipo: "grupos", grupos: [{ imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Um pé só", cor: "#FBBF24" }, { imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Na linha", cor: "#F472B6" }, { imagemUrl: bracosAbertosImg, quantidade: 1, rotulo: "Braços", cor: "#FB923C" }] } }
     ],
     medio: [
       { pergunta: "O Brilha ficou firme sem cair. Como se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Conseguiu — orgulho!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

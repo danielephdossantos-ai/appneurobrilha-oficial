@@ -168,8 +168,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Qual amigo LEVANTA os braços?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "O Brilha alonga os bracinhos pro alto.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos amigos aparecem se mexendo?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Brilha, Lupi e Fifi — 3 amigos em movimento.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Qual amigo LEVANTA os braços?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "O Brilha alonga os bracinhos pro alto.", visual: { tipo: "itens", imagemUrl: bracosAbertosImg, quantidade: 1, rotulo: "Brilha levanta braços" } },
+      { pergunta: "Quantos amigos aparecem se mexendo?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Brilha, Lupi e Fifi — 3 amigos em movimento.", visual: { tipo: "grupos", grupos: [{ imagemUrl: bracosAbertosImg, quantidade: 1, rotulo: "Braços", cor: "#FBBF24" }, { imagemUrl: pernasPuloImg, quantidade: 1, rotulo: "Pernas", cor: "#F472B6" }, { imagemUrl: palmasImg, quantidade: 1, rotulo: "Mãos", cor: "#FB923C" }] } }
     ],
     medio: [
       { pergunta: "O Brilha está com o corpo assim. Como ele se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Corpo esticado pro alto mostra alegria!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

@@ -168,8 +168,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Qual amigo está PULANDO?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 1, explicacao: "O Lupi coelho é o rei do pulo!", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos movimentos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Andar, correr e pular — 3 movimentos.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Qual amigo está PULANDO?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 1, explicacao: "O Lupi coelho é o rei do pulo!", visual: { tipo: "itens", imagemUrl: saltarImg, quantidade: 1, rotulo: "Lupi pulando" } },
+      { pergunta: "Quantos movimentos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Andar, correr e pular — 3 movimentos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: passosImg, quantidade: 1, rotulo: "Andar", cor: "#FBBF24" }, { imagemUrl: correrImg, quantidade: 1, rotulo: "Correr", cor: "#60A5FA" }, { imagemUrl: saltarImg, quantidade: 1, rotulo: "Pular", cor: "#F472B6" }] } }
     ],
     medio: [
       { pergunta: "O Lupi pulou. Como o corpo dele fica?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Pulando de alegria!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

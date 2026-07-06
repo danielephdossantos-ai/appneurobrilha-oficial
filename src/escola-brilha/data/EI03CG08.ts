@@ -165,8 +165,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem está PERTO?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha coladinho.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantas posições?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 posições.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem está PERTO?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha coladinho.", visual: { tipo: "cena", posicao: "aoLado", referenciaImg: arvoreImg, referenciaLabel: "Árvore", sujeitoImg: brilhaImg, sujeitoLabel: "Perto" } },
+      { pergunta: "Quantas posições?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 posições.", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Perto", cor: "#FBBF24" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Longe", cor: "#60A5FA" }, { imagemUrl: bauImg, quantidade: 1, rotulo: "Dentro", cor: "#FB923C" }] } }
     ],
     medio: [
       { pergunta: "O Brilha está pertinho da Fifi. Como se sente?", opcoes: ["Feliz", "Bravo", "Sozinho"], correta: 0, explicacao: "Perto de amigo = feliz.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

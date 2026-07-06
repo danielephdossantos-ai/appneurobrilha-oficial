@@ -169,8 +169,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem CORRE?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha veloz.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantas estações?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 estações.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem CORRE?", opcoes: ["Brilha", "Lupi", "Téo"], correta: 0, explicacao: "Brilha veloz.", visual: { tipo: "itens", imagemUrl: correrImg, quantidade: 1, rotulo: "Corre" } },
+      { pergunta: "Quantas estações?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 estações.", visual: { tipo: "grupos", grupos: [{ imagemUrl: correrImg, quantidade: 1, rotulo: "Corre", cor: "#FBBF24" }, { imagemUrl: saltarImg, quantidade: 1, rotulo: "Salta", cor: "#F472B6" }, { imagemUrl: equilibrioLinhaImg, quantidade: 1, rotulo: "Equilibra", cor: "#FB923C" }] } }
     ],
     medio: [
       { pergunta: "O Brilha completou o circuito. Como se sente?", opcoes: ["Feliz", "Bravo", "Triste"], correta: 0, explicacao: "Orgulho de conseguir!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },

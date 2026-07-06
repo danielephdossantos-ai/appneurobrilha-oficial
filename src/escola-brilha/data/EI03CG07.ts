@@ -167,8 +167,8 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Quem bate DEVAGAR?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lento.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } },
-      { pergunta: "Quantos ritmos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 ritmos.", visual: { tipo: "itens", imagemUrl: brilhaImg, quantidade: 1, rotulo: "Movimento" } }
+      { pergunta: "Quem bate DEVAGAR?", opcoes: ["Brilha", "Lupi", "Fifi"], correta: 0, explicacao: "Brilha lento.", visual: { tipo: "itens", imagemUrl: palmasImg, quantidade: 1, rotulo: "Palma devagar" } },
+      { pergunta: "Quantos ritmos aparecem?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 ritmos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: palmasImg, quantidade: 1, rotulo: "Lento", cor: "#FBBF24" }, { imagemUrl: palmasImg, quantidade: 3, rotulo: "Rápido", cor: "#F472B6" }, { imagemUrl: passosImg, quantidade: 1, rotulo: "Sequência", cor: "#60A5FA" }] } }
     ],
     medio: [
       { pergunta: "Quando você segue o ritmo, como se sente?", opcoes: ["Feliz", "Bravo", "Triste"], correta: 0, explicacao: "Ritmo dá alegria!", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Emoção" } },
