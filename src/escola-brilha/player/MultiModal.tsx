@@ -924,14 +924,18 @@ function JogoLigar({
                   } ${selA ? "hover:scale-105" : ""}`}
                 >
                   <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#F472B6] shrink-0" />
-                  <span className="flex-1 min-w-0 text-center break-words leading-tight">{b}</span>
+                  {!temImg && (
+                    <span className="flex-1 min-w-0 text-center break-words leading-tight">{b}</span>
+                  )}
                   {temImg && (
-                    <img
-                      src={par!.bImagem!}
-                      alt=""
-                      className="h-6 w-6 sm:h-8 sm:w-8 object-contain shrink-0"
-                      loading="lazy"
-                    />
+                    <div className="flex-1 flex justify-center">
+                      <img
+                        src={par!.bImagem!}
+                        alt=""
+                        className="h-10 w-10 sm:h-14 sm:w-14 object-contain shrink-0"
+                        loading="lazy"
+                      />
+                    </div>
                   )}
                 </button>
               );
