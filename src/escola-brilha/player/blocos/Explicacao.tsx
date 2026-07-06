@@ -47,9 +47,7 @@ export function Explicacao({ texto, aula }: { texto: string; aula?: Aula }) {
   const podeAvancar = visiveis < total;
   const podeAprofundar = nivelIdx < niveis.length - 1;
   const nivelAtual = niveis[nivelIdx];
-  // Educação Infantil: crianças não alfabetizadas — esconde texto na tela,
-  // mantém apenas imagem grande + narração por voz.
-  const semTexto = (aula?.codigo ?? "").toUpperCase().startsWith("EI");
+
 
   const reverExplicacao = () => {
     setVisiveis(1);
