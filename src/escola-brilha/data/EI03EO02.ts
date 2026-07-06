@@ -7,23 +7,28 @@ import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
+import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
+import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
 import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
+import livroImg from "@/assets/neuro-treino/objetos/livro.png";
+import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
 
 /**
  * EI03EO02 — Mundo 1 · Amigos da Floresta Encantada
- * Educação Infantil · Campo O Eu, o Outro e o Nós
- * Tema: "Minha Família" — spec EI-01 do usuário.
- * Estrela: ⭐ Afeto.
- * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
+ * Educação Infantil (4 e 5 anos) · Campo O Eu, o Outro e o Nós
+ * Tema: "Minha Família"
+ * Estrela recompensa: ⭐ Afeto
+ * Medalha: 🏅 Guardião do Afeto
  */
 const aula: Aula = {
   codigo: "EI03EO02",
@@ -33,297 +38,109 @@ const aula: Aula = {
 
   narrativa: {
     titulo: "Minha Família",
-    contexto: "O Brilha chega em casa e a Coruja Sábia pergunta: 'Quem cuida de você? Quem te dá abraço quando você precisa?' O Brilha lembra da família dele — cada um do seu jeito, todos com muito amor.",
-    problema: "A árvore da amizade acendeu 1 estrela, mas ainda falta a estrela do AFETO. Bora conhecer as famílias da floresta pra acender mais uma?",
-    convite: "Vem conhecer quem cuida da gente!",
+    contexto: "O Brilha volta pra casa depois de brincar na floresta. Na casinha do Brilha tem a Mamãe Estrela, o Papai Estrela e o Vovô Coruja, que contam histórias. Cada um cuida do Brilha de um jeito.",
+    problema: "A segunda estrela da Árvore da Amizade só acende quando a gente lembra QUEM cuida da gente. Será que a criança sabe apontar quem faz parte da família dela?",
+    convite: "Bora entrar na casa do Brilha e conhecer a família?",
   },
 
-  conhecimentosPrevios: [
-    "Reconhecer o próprio nome quando alguém chama.",
-    "Nomear alguém de quem gosta.",
-    "Apontar carinhas de sentimento simples.",
-  ],
+  conhecimentosPrevios: ["Reconhecer mamãe, papai (ou quem cuida) pelo rosto.", "Saber quem mora na sua casa.", "Sentir carinho quando alguém da família abraça."],
 
-  missao: "Descobrir que família é quem CUIDA e AMA — não importa o tamanho nem o jeito.",
+  missao: "Descobrir que a família é o primeiro lugar onde recebemos e damos amor — cada família é diferente e todas são bonitas.",
 
-  objetivos: [
-    "Reconhecer o tema 'Minha Família' no dia a dia.",
-    "Praticar a atitude em cenas com os amigos da floresta.",
-  ],
+  objetivos: ["Reconhecer as pessoas que cuidam de mim.", "Perceber que todo mundo tem uma família, mesmo que diferente."],
 
-  motivacao: "Família é ninho quentinho: pode ser grande, pequena, com pai, mãe, avó, tio, vizinho… o que importa é o AMOR.",
+  motivacao: "Família é onde o coração mora. Não importa quantos são — importa quanto se ama!",
 
-  explicacao: "FAMÍLIA é quem CUIDA de mim.\n\n• Pode ser mãe, pai, avó, avô, tio, tia, irmão.\n• Pode ser adotiva, do coração, de sangue.\n• Cada família tem um TAMANHO e um JEITO.\n• O que importa é o CUIDADO e o AMOR.\n\nToda família é bonita do seu jeito.",
+  explicacao: "MINHA FAMÍLIA cuida de mim.\n\n• Alguém faz COMIDA pra mim.\n• Alguém me dá ABRAÇO quando eu tô triste.\n• Alguém me leva pra DORMIR.\n• Alguém BRINCA comigo.\n\nCada família é diferente: tem família só com mamãe, só com papai, com os dois, com vovó, com tios. TODAS as famílias são certas quando têm amor.",
 
   explicacaoAtiva: [
-    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
-    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
-    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
-    {
-      texto: "Bora começar? Toque na Fifi pra ir junto!",
-      imagem: fifiImg,
-      imagemAlt: "Fifi",
-      checagem: {
-        pergunta: "Você tá pronto pra aprender sobre Minha Família?",
-        opcoes: ["Sim, bora!", "Ainda não"],
-        correta: 0,
-        explicacao: "Isso! Bora acender mais uma estrela.",
-      },
-    },
+    { texto: "Esta é a casa do Brilha. Toque na casinha!", imagem: casaImg, imagemAlt: "Casa da família Brilha" },
+    { texto: "Esta é a Mamãe Estrela do Brilha. Ela faz comida gostosa.", imagem: brilhaImg, imagemAlt: "Mamãe Estrela" },
+    { texto: "Este é o Vovô Coruja — sábio, ele conta histórias antes de dormir.", imagem: corujaImg, imagemAlt: "Vovô Coruja", checagem: { pergunta: "Sua família é a mesma que a do amiguinho do lado?", opcoes: ["Cada família é diferente e tudo bem", "Todas as famílias têm que ser iguais"], correta: 0, explicacao: "Isso! Cada família tem seu jeito, e todas são cheias de amor." } }
   ],
 
   explicacoesNiveis: {
-    nivel1: "Minha Família é uma atitude boa que a gente pratica todo dia.",
-    nivel2: "Os amigos da floresta mostram cenas de minha família — a gente aprende junto.",
-    nivel3: "Praticar minha família deixa a floresta (e a gente) mais feliz.",
-    nivel4: "Em casa, você pode praticar minha família com a família também.",
+    nivel1: "Família é quem cuida de mim todos os dias.",
+    nivel2: "Na família do Brilha tem mamãe, papai e vovô coruja. Na minha família tem…",
+    nivel3: "Família pode ser grande ou pequena — o que importa é o amor.",
+    nivel4: "Em casa, cada pessoa da família ajuda de um jeito: cozinha, arruma, brinca, conta história.",
   },
 
   exemploResolvido: {
-    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar minha família?",
-    passos: [
-      "Toque na estrela apagada.",
-      "Repita: 'vou acender!'",
-      "Cada boa atitude acende UMA estrela.",
-    ],
-    resposta: "1 estrela — e ela vai acender no final da missão.",
-    interativo: {
-      tipo: "contagem",
-      imagemUrl: estrelaImg,
-      quantidade: 1,
-      nomeItem: "estrela",
-      nomeItemPlural: "estrelas",
-      pergunta: "Quantas estrelas vamos acender nesta missão?",
-    },
+    enunciado: "Na casa do Brilha moram 3 pessoas: Mamãe, Papai e Vovô Coruja. Quantas pessoas cuidam do Brilha em casa?",
+    passos: ["Toque na casa pra abrir a porta.", "Aponte pra Mamãe, pro Papai e pro Vovô Coruja — um, dois, três.", "Diga em voz alta: '3 pessoas cuidam do Brilha!'"],
+    resposta: "3 pessoas fazem parte da família do Brilha e cuidam dele.",
+    interativo: { tipo: "contagem", imagemUrl: casaImg, quantidade: 3, nomeItem: "pessoa da família", nomeItemPlural: "pessoas da família", pergunta: "Quantas pessoas moram na casa do Brilha?" },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos aparecem pra praticar minha família. Quantos amigos você vê?",
-    resposta: "3 amigos — todos participando juntos.",
-    explicacao: "Cada amigo mostra um jeito diferente de viver minha família.",
+    enunciado: "O Brilha vai apresentar a família dele. Toque na Mamãe, no Papai e no Vovô Coruja. Quem fica no lugar do MEIO da foto?",
+    resposta: "Papai Brilha está no meio — cada um da família tem seu lugar.",
+    explicacao: "Na foto da família tem 3 pessoas. Quem está no meio é o Papai Brilha.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
-      participantes: [
-        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
-        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
-      ],
-      respostaCerta: "Lupi",
+      pergunta: "Toque em cada elemento pra descobrir. Quem está no 2º lugar (meio)?",
+      participantes: [{ nome: "Mamãe", imagemUrl: brilhaImg, posicao: 1 }, { nome: "Papai", imagemUrl: brilhaImg, posicao: 2 }, { nome: "Vovô Coruja", imagemUrl: corujaImg, posicao: 3 }],
+      respostaCerta: "Papai",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Por que a gente pratica minha família?", resposta: "Família é ninho quentinho: pode ser grande, pequena, com pai, mãe, avó, tio, vizinho… o que importa é o AMOR.", dica: "Pensa em como o coração fica." },
-    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
-    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
+    { enunciado: "👨‍👩‍👧 O Brilha abraça a Mamãe Estrela. Por que a gente abraça a família?", resposta: "Porque a família é quem a gente ama e que cuida da gente.", dica: "Pensa em quem te abraça em casa." },
+    { enunciado: "🏠 Na casa do Brilha, o Vovô Coruja conta história antes de dormir. Isso é o quê?", resposta: "Isso é CARINHO. A família faz coisinhas gostosas pra gente todo dia.", dica: "Alguém faz algo assim com você?" },
+    { enunciado: "💛 Toda família é igual à do Brilha?", resposta: "Não! Cada família é diferente — e todas são bonitas do seu jeito.", dica: "Quem mora na sua casa?" }
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: 3 cenas mostram minha família. Responda cada uma!",
-    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
+    enunciado: "Desafio Brilha: apareceram 3 famílias diferentes na floresta. Toque em cada uma e diga se é uma família DE VERDADE.",
+    resposta: "Todas são famílias de verdade — porque todas cuidam umas das outras.",
     visual: {
-      cena: [
-        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
-      ],
-      perguntas: [
-        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar minha família?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
-        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
-        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
-      ],
+      cena: [{ personagem: "Família Estrela (mamãe e filho)", itemImagemUrl: brilhaImg, quantidade: 2, cor: "#FBBF24" }, { personagem: "Família Coruja (vovô e neta)", itemImagemUrl: corujaImg, quantidade: 2, cor: "#A78BFA" }, { personagem: "Família Coelho (pai e 2 filhotes)", itemImagemUrl: lupiImg, quantidade: 3, cor: "#F472B6" }],
+      perguntas: [{ pergunta: "A Mamãe Estrela cuida do Brilha. Isso é família?", opcoes: ["Sim, é família", "Não, precisa ser maior"], correta: 0, explicacao: "É família sim! Duas pessoas que se cuidam já são uma família." }, { pergunta: "O Vovô Coruja mora com a netinha. Isso é família?", opcoes: ["Sim, é família", "Não, precisa ter mamãe e papai"], correta: 0, explicacao: "Sim! Vovô e neta também são uma família de verdade." }, { pergunta: "Papai Coelho cuida sozinho dos filhotinhos. É família?", opcoes: ["Sim, é família", "Não é família"], correta: 0, explicacao: "Sim! Onde tem alguém cuidando, tem família." }],
     },
   },
 
   revisao: {
-    pontos: [
-      "Minha Família é uma atitude BOA da floresta.",
-      "A gente pratica no dia a dia com amigos e família.",
-      "Cada boa atitude acende uma estrela.",
-      "Quando todos praticam, a floresta brilha!",
-    ],
-    dica: "Hoje, pratique minha família com alguém da sua casa.",
+    pontos: ["Família é quem cuida de mim.", "Cada família é diferente — e todas são certas.", "Abraço, comida e história são jeitos de mostrar amor.", "Eu também posso cuidar da minha família com carinho."],
+    dica: "Hoje em casa, dê um abraço bem grande em alguém da sua família.",
   },
 
   quiz: [
-    {
-      pergunta: "Praticar minha família deixa a gente:",
-      opcoes: ["Mais feliz", "Mais triste"],
-      correta: 0,
-      explicacao: "Mais feliz! Boa atitude acende o coração.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
-    },
-    {
-      pergunta: "Quantos amigos da floresta apareceram na missão?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
-      visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
-          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
-          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantas estrelas acendemos ao terminar?",
-      opcoes: ["Nenhuma", "1", "Muitas"],
-      correta: 1,
-      explicacao: "1 estrela — a estrela Afeto!",
-      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Afeto" },
-    },
+    { pergunta: "Quem CUIDA de você em casa?", opcoes: ["A minha família", "Ninguém"], correta: 0, explicacao: "A família é quem cuida com amor.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Minha casa" } },
+    { pergunta: "O Vovô Coruja conta história pro Brilha. Isso é o quê?", opcoes: ["Amor da família", "Só uma obrigação"], correta: 0, explicacao: "Contar história é um jeito de mostrar amor.", visual: { tipo: "comparar", lados: [{ imagemUrl: corujaImg, quantidade: 1, rotulo: "Vovô Coruja", cor: "#A78BFA" }, { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }] } },
+    { pergunta: "Quantas pessoas moram na casinha do Brilha? (Mamãe, Papai, Vovô)", opcoes: ["2", "3", "4"], correta: 1, explicacao: "São 3 pessoas na família do Brilha.", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Mamãe", cor: "#FBBF24" }, { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Papai", cor: "#F59E0B" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Vovô", cor: "#A78BFA" }] } }
   ],
 
-  conclusao: "🏅 Medalha: Guardião do Afeto! ⭐ Estrela Afeto ACESA na Árvore da Amizade. Missão em Casa: pratique minha família com alguém da família hoje. +100 XP · +50 moedas.",
+  conclusao: "🏅 Medalha conquistada: Guardião do Afeto! A SEGUNDA ESTRELA ⭐ da Árvore da Amizade acendeu. Missão em Casa: dê um abraço bem apertado em alguém que cuida de você e diga 'eu te amo'.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
+    texto: "Você sabia que quando a gente abraça alguém que ama, o coração da gente e o coração dela batem no mesmo ritmo? É verdade — é o amor sincronizando os corações.",
   },
 
   interativas: [
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Boas-vindas do Brilha",
-      instrucao: "O Brilha veio te receber. Toque nele!",
-      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
-      pergunta: "Quantos Brilhas apareceram?",
-      opcoes: ["1", "2", "3"],
-      correta: 0,
-      acerto: "Isso! Um Brilha lindo pra começar.",
-      erro: "Toque bem no meio da estrela.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Os amigos da floresta",
-      instrucao: "Toque em cada amigo pra contar.",
-      grupos: [
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
-        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
-      ],
-      pergunta: "Quantos amigos apareceram?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 amigos, cada um do seu jeito!",
-      erro: "Aponte um por um.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Cada amigo com seu par",
-      instrucao: "Ligue cada amigo ao objeto que combina.",
-      pares: [
-        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
-        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Carinhas de sentimento",
-      instrucao: "Quantas carinhas de sentimento aparecem?",
-      grupos: [
-        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
-      ],
-      pergunta: "Quantas carinhas?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 sentimentos — todos valem!",
-      erro: "Conte de novo, uma a uma.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 5 · Presente pra cada amigo",
-      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
-      itemImagem: balaoImg,
-      alvosVisuais: [
-        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
-        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
-        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
-        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
-      ],
-      pares: [
-        { item: "Balão 1", alvo: "Brilha" },
-        { item: "Balão 2", alvo: "Lupi" },
-        { item: "Balão 3", alvo: "Fifi" },
-        { item: "Balão 4", alvo: "Téo" },
-      ],
-    },
-    {
-      tipo: "ligar",
-      titulo: "Minijogo · Amigo e o que ele leva",
-      instrucao: "Ligue cada amigo ao objeto da cena.",
-      pares: [
-        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
-        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
-        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
-      ],
-    },
+    { tipo: "contarQuiz", titulo: "Fase 1 · A casa do Brilha", instrucao: "Esta é a casa onde o Brilha mora com a família.", grupos: [{ imagemUrl: casaImg, quantidade: 1, rotulo: "Casa do Brilha" }], pergunta: "Quantas casas o Brilha tem?", opcoes: ["1", "2", "3"], correta: 0, acerto: "Isso! Cada família tem SUA casinha — o lugar do amor.", erro: "Olha bem: quantas casinhas você vê?" },
+    { tipo: "contarQuiz", titulo: "Fase 2 · A família do Brilha", instrucao: "Estas são as pessoas que cuidam do Brilha em casa.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Mamãe" }, { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Papai" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Vovô" }], pergunta: "Quantas pessoas fazem parte da família?", opcoes: ["2", "3", "4"], correta: 1, acerto: "Muito bem! São 3 pessoas na família do Brilha.", erro: "Conte um por um: Mamãe, Papai, Vovô." },
+    { tipo: "ligar", titulo: "Fase 3 · Cada um cuida de um jeito", instrucao: "Ligue cada pessoa da família ao que ela faz pelo Brilha.", pares: [{ a: "Mamãe Estrela", b: "faz comida gostosa", aImagem: brilhaImg, aQuantidade: 1, bImagem: boloImg, bQuantidade: 1 }, { a: "Papai Brilha", b: "brinca de bola no quintal", aImagem: brilhaImg, aQuantidade: 1, bImagem: bolaImg, bQuantidade: 1 }, { a: "Vovô Coruja", b: "conta história antes de dormir", aImagem: corujaImg, aQuantidade: 1, bImagem: livroImg, bQuantidade: 1 }] },
+    { tipo: "arrastar", titulo: "Fase 4 · Presentes de amor pra família", instrucao: "Cada pessoa da família recebe 1 coração de carinho. Toque no coração e depois na pessoa.", itemImagem: coracaoImg, alvosVisuais: [{ nome: "Mamãe", cor: "#F472B6", capacidade: 1, imagemUrl: brilhaImg }, { nome: "Papai", cor: "#3B82F6", capacidade: 1, imagemUrl: brilhaImg }, { nome: "Vovô Coruja", cor: "#A78BFA", capacidade: 1, imagemUrl: corujaImg }], pares: [{ item: "Coração pra Mamãe", alvo: "Mamãe" }, { item: "Coração pro Papai", alvo: "Papai" }, { item: "Coração pro Vovô", alvo: "Vovô Coruja" }] }
   ],
 
   niveis: {
     dominioMinimo: 70,
-    facil: [
-      {
-        pergunta: "Praticar minha família é uma atitude:",
-        opcoes: ["BOA", "Ruim"],
-        correta: 0,
-        explicacao: "Boa! Sempre.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
-      },
-      {
-        pergunta: "Quantas estrelas você acende nesta missão?",
-        opcoes: ["0", "1", "5"],
-        correta: 1,
-        explicacao: "1 estrela — a de Afeto!",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
-      },
-    ],
-    medio: [
-      {
-        pergunta: "Quando você pratica minha família, o coração fica:",
-        opcoes: ["Feliz", "Triste"],
-        correta: 0,
-        explicacao: "Feliz! Boa atitude acende o coração.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-      },
-      {
-        pergunta: "Onde posso praticar?",
-        opcoes: ["Só na escola", "Em todo lugar"],
-        correta: 1,
-        explicacao: "Em qualquer lugar — casa, escola, parque.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
-      },
-    ],
-    dificil: [
-      {
-        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
-        opcoes: ["Mostro com carinho", "Rio dele"],
-        correta: 0,
-        explicacao: "Ensinar com carinho é o melhor.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
-      },
-      {
-        pergunta: "Praticar boas atitudes serve pra:",
-        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
-        correta: 1,
-        explicacao: "É pra viver melhor com todo mundo.",
-        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
-      },
-    ],
+    facil: [{ pergunta: "Qual imagem mostra a CASA da família?", opcoes: ["A casinha", "Uma flor", "Uma bola"], correta: 0, explicacao: "A casa é onde a família mora junta.", visual: { tipo: "grupos", grupos: [{ imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" }, { imagemUrl: florImg, quantidade: 1, rotulo: "Flor" }, { imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola" }] } }, { pergunta: "Quantas pessoas tem na família do Brilha?", opcoes: ["1", "2", "3"], correta: 2, explicacao: "Mamãe, Papai e Vovô — 3 pessoas.", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Mamãe" }, { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Papai" }, { imagemUrl: corujaImg, quantidade: 1, rotulo: "Vovô" }] } }],
+    medio: [{ pergunta: "Quem CONTA HISTÓRIA pro Brilha antes de dormir?", opcoes: ["Mamãe", "Vovô Coruja", "Papai"], correta: 1, explicacao: "O Vovô Coruja adora contar histórias.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Vovô Coruja" } }, { pergunta: "O Brilha ganhou um abraço. Como ele se sente?", opcoes: ["Feliz", "Triste", "Bravo"], correta: 0, explicacao: "Abraço de família deixa a gente FELIZ.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Brilha depois do abraço" } }],
+    dificil: [{ pergunta: "Toda família tem que ter o mesmo número de pessoas?", opcoes: ["Não — cada família é do seu jeito", "Sim, tem que ser igual"], correta: 0, explicacao: "Cada família é única, pode ser pequena ou grande.", visual: { tipo: "comparar", lados: [{ imagemUrl: brilhaImg, quantidade: 2, rotulo: "Família 1", cor: "#FBBF24" }, { imagemUrl: lupiImg, quantidade: 3, rotulo: "Família 2", cor: "#F472B6" }] } }, { pergunta: "O que faz um grupo de pessoas ser uma FAMÍLIA?", opcoes: ["O amor e o cuidado", "Morar no mesmo prédio"], correta: 0, explicacao: "Família é feita de amor, não do endereço.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Amor" } }],
   },
 
-  proximaHabilidade: { codigo: "EI03EO03", titulo: "Meus Amigos — laços da amizade" },
+  proximaHabilidade: {
+    codigo: "EI03EO03",
+    titulo: "Meus Amigos — brincar junto",
+  },
 };
 
-void piuImg;
-void bravoImg;
+// Mantém imports usados em outras cenas do mesmo lote.
+void piuImg; void confusoImg; void bravoImg; void tranquiloImg; void solImg; void livroImg;
+void ursinhoImg; void boloImg; void presenteImg; void bolaImg; void balaoImg;
+void florImg; void estrelaImg; void coracaoImg; void casaImg; void arvoreImg;
 
 export default aula;

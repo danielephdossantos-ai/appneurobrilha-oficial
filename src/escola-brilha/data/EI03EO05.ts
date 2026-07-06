@@ -7,23 +7,28 @@ import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
+import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
+import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
 import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
+import livroImg from "@/assets/neuro-treino/objetos/livro.png";
+import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
 
 /**
  * EI03EO05 — Mundo 1 · Amigos da Floresta Encantada
- * Educação Infantil · Campo O Eu, o Outro e o Nós
- * Tema: "Compartilhar" — spec EI-01 do usuário.
- * Estrela: ⭐ Cooperação.
- * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
+ * Educação Infantil (4 e 5 anos) · Campo O Eu, o Outro e o Nós
+ * Tema: "Compartilhar"
+ * Estrela recompensa: ⭐ Cooperação
+ * Medalha: 🏅 Guardião da Cooperação
  */
 const aula: Aula = {
   codigo: "EI03EO05",
@@ -33,297 +38,109 @@ const aula: Aula = {
 
   narrativa: {
     titulo: "Compartilhar",
-    contexto: "O Brilha ganhou um monte de frutinhas da árvore mágica. A Fifi e o Lupi olham com fominha. A Coruja Sábia diz: 'Quando a gente divide, todo mundo fica feliz — inclusive quem deu.'",
-    problema: "Será que dividir DIMINUI o que a gente tem? Ou AUMENTA a alegria?",
-    convite: "Vem ver a mágica de compartilhar!",
+    contexto: "O Brilha ganhou um monte de brinquedos novos: bola, balão, ursinho. A Fifi chegou perto e olhou com desejo. O Brilha ficou com dúvida: 'divido ou não?'.",
+    problema: "A quinta estrela só acende quando alguém aprende a COMPARTILHAR. Bora ajudar o Brilha a decidir?",
+    convite: "Vamos dividir os brinquedos com os amigos!",
   },
 
-  conhecimentosPrevios: [
-    "Reconhecer o próprio nome quando alguém chama.",
-    "Nomear alguém de quem gosta.",
-    "Apontar carinhas de sentimento simples.",
-  ],
+  conhecimentosPrevios: ["Emprestar um brinquedo por alguns minutos.", "Esperar a vez.", "Dizer 'obrigado' e 'de nada'."],
 
-  missao: "Aprender que DIVIDIR brinquedo, lanche e brincadeira faz todo mundo (inclusive eu!) ficar mais feliz.",
+  missao: "Entender que compartilhar deixa a brincadeira MELHOR — não pior.",
 
-  objetivos: [
-    "Reconhecer o tema 'Compartilhar' no dia a dia.",
-    "Praticar a atitude em cenas com os amigos da floresta.",
-  ],
+  objetivos: ["Decidir quando e como dividir.", "Perceber que dividir gera novos amigos."],
 
-  motivacao: "Dividir NÃO tira nada de você — MULTIPLICA a alegria.",
+  motivacao: "Brinquedo dividido é brincadeira dobrada. Quem compartilha ganha um amigo de bônus!",
 
-  explicacao: "COMPARTILHAR é:\n\n• Dar UM PEDAÇO pro amigo.\n• Emprestar o brinquedo por um tempinho.\n• Chamar pra brincar junto.\n\nQuando divido, tenho MENOS na mão — mas MAIS alegria no peito.",
+  explicacao: "COMPARTILHAR é dar um pedacinho do meu pra você poder ter também.\n\n• Um brinquedo → dois amigos brincando.\n• Um lanche → dois amigos alimentados.\n• Um sorriso → o dia de todo mundo melhor.\n\nCompartilhar NÃO é dar tudo. É dividir, esperar a vez e devolver.",
 
   explicacaoAtiva: [
-    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
-    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
-    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
-    {
-      texto: "Bora começar? Toque na Fifi pra ir junto!",
-      imagem: fifiImg,
-      imagemAlt: "Fifi",
-      checagem: {
-        pergunta: "Você tá pronto pra aprender sobre Compartilhar?",
-        opcoes: ["Sim, bora!", "Ainda não"],
-        correta: 0,
-        explicacao: "Isso! Bora acender mais uma estrela.",
-      },
-    },
+    { texto: "Este é o ursinho do Brilha. Ele pode ser dividido!", imagem: ursinhoImg, imagemAlt: "Ursinho" },
+    { texto: "Esta é a Fifi. Ela quer brincar de ursinho junto.", imagem: fifiImg, imagemAlt: "Fifi" },
+    { texto: "Este é o balão. Um balão pra cada amigo = alegria dupla!", imagem: balaoImg, imagemAlt: "Balão", checagem: { pergunta: "Quando divido o brinquedo, eu FICO SEM ele pra sempre?", opcoes: ["Não, o amigo devolve depois", "Sim, perco pra sempre"], correta: 0, explicacao: "Dividir é temporário — o brinquedo volta pra você." } }
   ],
 
   explicacoesNiveis: {
-    nivel1: "Compartilhar é uma atitude boa que a gente pratica todo dia.",
-    nivel2: "Os amigos da floresta mostram cenas de compartilhar — a gente aprende junto.",
-    nivel3: "Praticar compartilhar deixa a floresta (e a gente) mais feliz.",
-    nivel4: "Em casa, você pode praticar compartilhar com a família também.",
+    nivel1: "Compartilhar = dividir com alguém.",
+    nivel2: "Um brinquedo dividido = 2 crianças brincando juntas.",
+    nivel3: "Compartilhar cria amigos, não perde brinquedos.",
+    nivel4: "Em casa e na escola, dividir lanche, jogo e espaço é atitude bonita.",
   },
 
   exemploResolvido: {
-    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar compartilhar?",
-    passos: [
-      "Toque na estrela apagada.",
-      "Repita: 'vou acender!'",
-      "Cada boa atitude acende UMA estrela.",
-    ],
-    resposta: "1 estrela — e ela vai acender no final da missão.",
-    interativo: {
-      tipo: "contagem",
-      imagemUrl: estrelaImg,
-      quantidade: 1,
-      nomeItem: "estrela",
-      nomeItemPlural: "estrelas",
-      pergunta: "Quantas estrelas vamos acender nesta missão?",
-    },
+    enunciado: "O Brilha tinha 1 ursinho. Chegou a Fifi. Agora o ursinho é de quantos?",
+    passos: ["Toque no ursinho.", "Toque no Brilha e na Fifi.", "Conte: 2 amigos, 1 ursinho pra dividir."],
+    resposta: "1 ursinho pra 2 amigos = dividir!",
+    interativo: { tipo: "contagem", imagemUrl: ursinhoImg, quantidade: 1, nomeItem: "ursinho", nomeItemPlural: "ursinhos", pergunta: "Quantos ursinhos existem pra dividir entre 2 amigos?" },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos aparecem pra praticar compartilhar. Quantos amigos você vê?",
-    resposta: "3 amigos — todos participando juntos.",
-    explicacao: "Cada amigo mostra um jeito diferente de viver compartilhar.",
+    enunciado: "Três brinquedos aparecem em fila. Qual está no MEIO pra dividir primeiro?",
+    resposta: "O balão está no meio.",
+    explicacao: "Fila: Bola (1º), Balão (2º), Ursinho (3º). O balão é o do meio.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
-      participantes: [
-        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
-        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
-      ],
-      respostaCerta: "Lupi",
+      pergunta: "Toque em cada elemento pra descobrir. Quem está no 2º lugar (meio)?",
+      participantes: [{ nome: "Bola", imagemUrl: bolaImg, posicao: 1 }, { nome: "Balão", imagemUrl: balaoImg, posicao: 2 }, { nome: "Ursinho", imagemUrl: ursinhoImg, posicao: 3 }],
+      respostaCerta: "Balão",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Por que a gente pratica compartilhar?", resposta: "Dividir NÃO tira nada de você — MULTIPLICA a alegria.", dica: "Pensa em como o coração fica." },
-    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
-    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
+    { enunciado: "🎁 A Fifi pediu pra brincar com seu ursinho. O que você faz?", resposta: "Empresto por um tempinho e depois ele volta pra mim.", dica: "Dividir não é perder." },
+    { enunciado: "🍪 Você tem 2 biscoitos. Um amigo tá sem. O que rola?", resposta: "Ofereço 1 biscoito. Ele fica feliz e a gente lancha junto.", dica: "Dividir comida é gesto lindo." },
+    { enunciado: "🎈 Se a gente só divide quando quer receber algo em troca, tá certo?", resposta: "Não. A gente divide porque é gostoso ver o amigo feliz também.", dica: "Compartilhar por amor, não por troca." }
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: 3 cenas mostram compartilhar. Responda cada uma!",
-    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
+    enunciado: "Três situações. Você escolhe: DIVIDIR ou GUARDAR SÓ PRA MIM?",
+    resposta: "Sempre que dá, dividir é o melhor caminho.",
     visual: {
-      cena: [
-        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
-      ],
-      perguntas: [
-        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar compartilhar?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
-        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
-        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
-      ],
+      cena: [{ personagem: "Ursinho", itemImagemUrl: ursinhoImg, quantidade: 1, cor: "#F59E0B" }, { personagem: "Balão", itemImagemUrl: balaoImg, quantidade: 1, cor: "#F472B6" }, { personagem: "Bola", itemImagemUrl: bolaImg, quantidade: 1, cor: "#3B82F6" }],
+      perguntas: [{ pergunta: "Você tem 1 ursinho, a Fifi pediu emprestado. O que faz?", opcoes: ["Empresta", "Não empresta"], correta: 0, explicacao: "Emprestar é atitude bonita." }, { pergunta: "Você tem 2 balões, o Lupi tá sem. O que faz?", opcoes: ["Dá 1 balão", "Fica com os 2"], correta: 0, explicacao: "Um pra cada — igualzinho!" }, { pergunta: "A bola é de todos no parque. Você joga sozinho?", opcoes: ["Chama os amigos pra jogar junto", "Joga só"], correta: 0, explicacao: "Bola é mais gostosa em grupo." }],
     },
   },
 
   revisao: {
-    pontos: [
-      "Compartilhar é uma atitude BOA da floresta.",
-      "A gente pratica no dia a dia com amigos e família.",
-      "Cada boa atitude acende uma estrela.",
-      "Quando todos praticam, a floresta brilha!",
-    ],
-    dica: "Hoje, pratique compartilhar com alguém da sua casa.",
+    pontos: ["Compartilhar = dividir com carinho.", "Dividir não é perder — o brinquedo volta.", "Um brinquedo dividido = dois amigos felizes.", "Compartilhar cria amizade."],
+    dica: "Hoje, ofereça um pedacinho do seu lanche pra alguém.",
   },
 
   quiz: [
-    {
-      pergunta: "Praticar compartilhar deixa a gente:",
-      opcoes: ["Mais feliz", "Mais triste"],
-      correta: 0,
-      explicacao: "Mais feliz! Boa atitude acende o coração.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
-    },
-    {
-      pergunta: "Quantos amigos da floresta apareceram na missão?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
-      visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
-          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
-          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantas estrelas acendemos ao terminar?",
-      opcoes: ["Nenhuma", "1", "Muitas"],
-      correta: 1,
-      explicacao: "1 estrela — a estrela Cooperação!",
-      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Cooperação" },
-    },
+    { pergunta: "Se eu dividir, eu fico sem pra sempre?", opcoes: ["Não, volta pra mim", "Sim, perco pra sempre"], correta: 0, explicacao: "Dividir é temporário.", visual: { tipo: "itens", imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Volta pra mim" } },
+    { pergunta: "Um brinquedo dividido deixa quantas crianças felizes?", opcoes: ["1", "2", "0"], correta: 1, explicacao: "As duas ficam felizes — o dono e o amigo.", visual: { tipo: "grupos", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" }] } },
+    { pergunta: "Quantos brinquedos aparecem na cena pra dividir?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "Bola, balão e ursinho — 3 brinquedos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola" }, { imagemUrl: balaoImg, quantidade: 1, rotulo: "Balão" }, { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Ursinho" }] } }
   ],
 
-  conclusao: "🏅 Medalha: Guardião da Cooperação! ⭐ Estrela Cooperação ACESA na Árvore da Amizade. Missão em Casa: pratique compartilhar com alguém da família hoje. +100 XP · +50 moedas.",
+  conclusao: "🏅 Medalha conquistada: Guardião da Cooperação! A QUINTA ESTRELA ⭐ acendeu. Missão em Casa: divida um brinquedo ou um lanche com alguém hoje.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
+    texto: "Você sabia que dividir libera no cérebro a mesma sensação boa de ganhar um presente? Quem dá também sente alegria — é ciência!",
   },
 
   interativas: [
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Boas-vindas do Brilha",
-      instrucao: "O Brilha veio te receber. Toque nele!",
-      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
-      pergunta: "Quantos Brilhas apareceram?",
-      opcoes: ["1", "2", "3"],
-      correta: 0,
-      acerto: "Isso! Um Brilha lindo pra começar.",
-      erro: "Toque bem no meio da estrela.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Os amigos da floresta",
-      instrucao: "Toque em cada amigo pra contar.",
-      grupos: [
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
-        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
-      ],
-      pergunta: "Quantos amigos apareceram?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 amigos, cada um do seu jeito!",
-      erro: "Aponte um por um.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Cada amigo com seu par",
-      instrucao: "Ligue cada amigo ao objeto que combina.",
-      pares: [
-        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
-        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Carinhas de sentimento",
-      instrucao: "Quantas carinhas de sentimento aparecem?",
-      grupos: [
-        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
-      ],
-      pergunta: "Quantas carinhas?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 sentimentos — todos valem!",
-      erro: "Conte de novo, uma a uma.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 5 · Presente pra cada amigo",
-      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
-      itemImagem: balaoImg,
-      alvosVisuais: [
-        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
-        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
-        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
-        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
-      ],
-      pares: [
-        { item: "Balão 1", alvo: "Brilha" },
-        { item: "Balão 2", alvo: "Lupi" },
-        { item: "Balão 3", alvo: "Fifi" },
-        { item: "Balão 4", alvo: "Téo" },
-      ],
-    },
-    {
-      tipo: "ligar",
-      titulo: "Minijogo · Amigo e o que ele leva",
-      instrucao: "Ligue cada amigo ao objeto da cena.",
-      pares: [
-        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
-        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
-        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
-      ],
-    },
+    { tipo: "contarQuiz", titulo: "Fase 1 · Brinquedos pra dividir", instrucao: "Estes são os brinquedos do Brilha.", grupos: [{ imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola" }, { imagemUrl: balaoImg, quantidade: 1, rotulo: "Balão" }, { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Ursinho" }], pergunta: "Quantos brinquedos podem ser divididos?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 brinquedos = 3 chances de dividir!", erro: "Aponte: bola, balão, ursinho." },
+    { tipo: "contarQuiz", titulo: "Fase 2 · Amigos que querem brincar", instrucao: "Estes amigos querem brincar junto.", grupos: [{ imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }], pergunta: "Quantos amigos querem participar?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 amigos — dá pra cada um receber um brinquedo!", erro: "Fifi, Lupi e Téo." },
+    { tipo: "ligar", titulo: "Fase 3 · Um brinquedo pra cada amigo", instrucao: "Ligue cada amigo ao brinquedo que ele vai receber.", pares: [{ a: "Fifi", b: "fica com a bola", aImagem: fifiImg, aQuantidade: 1, bImagem: bolaImg, bQuantidade: 1 }, { a: "Lupi", b: "fica com o balão", aImagem: lupiImg, aQuantidade: 1, bImagem: balaoImg, bQuantidade: 1 }, { a: "Téo", b: "fica com o ursinho", aImagem: teoImg, aQuantidade: 1, bImagem: ursinhoImg, bQuantidade: 1 }] },
+    { tipo: "arrastar", titulo: "Fase 4 · Dividindo com carinho", instrucao: "Arraste 1 balão pra cada amigo — dividindo!", itemImagem: balaoImg, alvosVisuais: [{ nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg }, { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg }, { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg }], pares: [{ item: "Balão pra Fifi", alvo: "Fifi" }, { item: "Balão pro Lupi", alvo: "Lupi" }, { item: "Balão pro Téo", alvo: "Téo" }] }
   ],
 
   niveis: {
     dominioMinimo: 70,
-    facil: [
-      {
-        pergunta: "Praticar compartilhar é uma atitude:",
-        opcoes: ["BOA", "Ruim"],
-        correta: 0,
-        explicacao: "Boa! Sempre.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
-      },
-      {
-        pergunta: "Quantas estrelas você acende nesta missão?",
-        opcoes: ["0", "1", "5"],
-        correta: 1,
-        explicacao: "1 estrela — a de Cooperação!",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
-      },
-    ],
-    medio: [
-      {
-        pergunta: "Quando você pratica compartilhar, o coração fica:",
-        opcoes: ["Feliz", "Triste"],
-        correta: 0,
-        explicacao: "Feliz! Boa atitude acende o coração.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-      },
-      {
-        pergunta: "Onde posso praticar?",
-        opcoes: ["Só na escola", "Em todo lugar"],
-        correta: 1,
-        explicacao: "Em qualquer lugar — casa, escola, parque.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
-      },
-    ],
-    dificil: [
-      {
-        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
-        opcoes: ["Mostro com carinho", "Rio dele"],
-        correta: 0,
-        explicacao: "Ensinar com carinho é o melhor.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
-      },
-      {
-        pergunta: "Praticar boas atitudes serve pra:",
-        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
-        correta: 1,
-        explicacao: "É pra viver melhor com todo mundo.",
-        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
-      },
-    ],
+    facil: [{ pergunta: "Compartilhar é…", opcoes: ["Dividir com o amigo", "Guardar tudo"], correta: 0, explicacao: "Compartilhar = dividir.", visual: { tipo: "itens", imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Dividir" } }, { pergunta: "Quantos brinquedos tem pra dividir?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 brinquedos na cena.", visual: { tipo: "grupos", grupos: [{ imagemUrl: bolaImg, quantidade: 1, rotulo: "Bola" }, { imagemUrl: balaoImg, quantidade: 1, rotulo: "Balão" }, { imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Ursinho" }] } }],
+    medio: [{ pergunta: "A Fifi pediu o ursinho emprestado. Você…", opcoes: ["Empresta com carinho", "Nega e sai"], correta: 0, explicacao: "Emprestar mostra amizade.", visual: { tipo: "itens", imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi pedindo" } }, { pergunta: "Depois de brincar, o Lupi devolve o balão?", opcoes: ["Sim, devolve", "Não devolve"], correta: 0, explicacao: "Amigo bom sempre devolve.", visual: { tipo: "itens", imagemUrl: balaoImg, quantidade: 1, rotulo: "Devolvido" } }],
+    dificil: [{ pergunta: "Dividir é a mesma coisa que perder pra sempre?", opcoes: ["Não — é emprestar", "Sim — perco tudo"], correta: 0, explicacao: "É temporário e o brinquedo volta.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Divide" } }, { pergunta: "Um brinquedo dividido faz o quê?", opcoes: ["Deixa dois amigos felizes", "Estraga a brincadeira"], correta: 0, explicacao: "Dobra a alegria.", visual: { tipo: "comparar", lados: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" }] } }],
   },
 
-  proximaHabilidade: { codigo: "EI03EO06", titulo: "Respeito às Diferenças — cada um é único" },
+  proximaHabilidade: {
+    codigo: "EI03EO06",
+    titulo: "Respeito às Diferenças",
+  },
 };
 
-void piuImg;
-void bravoImg;
+// Mantém imports usados em outras cenas do mesmo lote.
+void piuImg; void confusoImg; void bravoImg; void tranquiloImg; void solImg; void livroImg;
+void ursinhoImg; void boloImg; void presenteImg; void bolaImg; void balaoImg;
+void florImg; void estrelaImg; void coracaoImg; void casaImg; void arvoreImg;
 
 export default aula;
