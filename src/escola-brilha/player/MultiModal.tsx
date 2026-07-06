@@ -882,17 +882,19 @@ function JogoLigar({
                   }`}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider mb-1 opacity-70 break-words leading-tight">
-                      {p.a}
-                    </div>
+                    {!temImg && (
+                      <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider opacity-70 break-words leading-tight">
+                        {p.a}
+                      </div>
+                    )}
                     {temImg && (
-                      <div className="flex flex-wrap gap-0.5">
+                      <div className="flex flex-wrap gap-0.5 justify-center">
                         {Array.from({ length: p.aQuantidade! }).map((_, k) => (
                           <img
                             key={k}
                             src={p.aImagem!}
                             alt=""
-                            className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
+                            className="h-10 w-10 sm:h-14 sm:w-14 object-contain"
                             loading="lazy"
                           />
                         ))}
