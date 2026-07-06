@@ -1,5 +1,5 @@
 import type { Aula } from "../types";
-import brilhaImg from "@/assets/escola-brilha/ei-mundo1/brilha.png";
+import brilhaImg from "@/assets/escola-brilha/mascotes/brilha.png";
 import corujaImg from "@/assets/escola-brilha/ei-mundo1/coruja.png";
 import lupiImg from "@/assets/escola-brilha/ei-mundo1/lupi.png";
 import fifiImg from "@/assets/escola-brilha/ei-mundo1/fifi.png";
