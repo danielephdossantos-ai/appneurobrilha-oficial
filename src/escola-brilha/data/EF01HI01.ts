@@ -247,23 +247,16 @@ const aula: Aula = {
       erro: "Antes você engatinhava. AGORA você já ANDA — isso é crescer!",
     },
 
-    // FASE 3 — Organizar minha história em ordem
+    // FASE 3 — Minha História: ordenar acontecimentos na linha do tempo
     {
-      tipo: "arrastar",
-      titulo: "Fase 3 · Minha História Em Ordem",
-      instrucao: "Arraste cada momento pra fase certa da vida.",
-      pares: [
-        { item: "👶 NASCI", alvo: "PRIMEIRO" },
-        { item: "🍼 MAMADEIRA", alvo: "PRIMEIRO" },
-        { item: "🎂 ANIVERSÁRIO", alvo: "DEPOIS" },
-        { item: "🚶 APRENDI A ANDAR", alvo: "DEPOIS" },
-        { item: "🏫 ENTREI NA ESCOLA", alvo: "AGORA" },
-        { item: "🎒 GANHEI MOCHILA", alvo: "AGORA" },
-      ],
-      alvosVisuais: [
-        { nome: "PRIMEIRO", cor: "#F472B6", capacidade: 2 },
-        { nome: "DEPOIS", cor: "#FBBF24", capacidade: 2 },
-        { nome: "AGORA", cor: "#34D399", capacidade: 2 },
+      tipo: "ordenar",
+      titulo: "Fase 3 · Minha História",
+      instrucao: "Arraste os cartões pra ORDEM certa: o que veio primeiro, depois e agora.",
+      itens: ["NASCI", "ANIVERSÁRIO", "ESCOLA"],
+      imagens: [
+        { imagemUrl: bebeImg, quantidade: 1, rotulo: "👶 NASCI", cor: "#F472B6" },
+        { imagemUrl: boloImg, quantidade: 1, rotulo: "🎂 ANIVERSÁRIO", cor: "#FBBF24" },
+        { imagemUrl: escolaImg, quantidade: 1, rotulo: "🏫 ENTREI NA ESCOLA", cor: "#34D399" },
       ],
     },
 
