@@ -129,8 +129,102 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
           cenas={jogo.cenas}
         />
       );
+    case "escolherFigura":
+      return <JogoEscolherFigura jogo={jogo} />;
   }
 }
+
+/* --- Escolher Figura (tocar imagem = resposta) --- */
+function JogoEscolherFigura({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "escolherFigura" }>;
+}) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const { speak } = useDeviceTTS();
+  const acertou = escolha !== null && escolha === jogo.correta;
+
+  function tocar(i: number) {
+    if (escolha !== null && acertou) return;
+    const op = jogo.opcoes[i];
+    setEscolha(i);
+    speak(op.nome);
+  }
+
+  const cols =
+    jogo.opcoes.length <= 2
+      ? "grid-cols-2"
+      : jogo.opcoes.length === 3
+        ? "grid-cols-3"
+        : "grid-cols-2 sm:grid-cols-4";
+
+  return (
+    <Secao icon={Sparkles} rotulo="Fase" cor="#FFC93C">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+      {jogo.pergunta && (
+        <p className="font-black text-base mb-3 text-center">{jogo.pergunta}</p>
+      )}
+      <div className={`grid gap-3 mb-3 ${cols}`}>
+        {jogo.opcoes.map((op, i) => {
+          const selecionada = escolha === i;
+          const certa = escolha !== null && i === jogo.correta;
+          const errada = selecionada && i !== jogo.correta;
+          const cls = certa
+            ? "ring-4 ring-emerald-400 bg-emerald-500/20"
+            : errada
+              ? "ring-4 ring-rose-400 bg-rose-500/20"
+              : selecionada
+                ? "ring-4 ring-amber-300 bg-amber-500/20"
+                : escolha !== null
+                  ? "opacity-40 bg-white/10"
+                  : "bg-white/15 hover:bg-white/25 active:scale-95";
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocar(i)}
+              disabled={escolha !== null && acertou}
+              className={`rounded-2xl p-3 flex flex-col items-center gap-2 transition ${cls}`}
+              aria-label={op.nome}
+            >
+              <img
+                src={op.imagemUrl}
+                alt={op.nome}
+                className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow"
+                draggable={false}
+              />
+              <span className="text-sm font-black text-white text-center">
+                {op.rotulo ?? op.nome}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <Status
+          ok={acertou}
+          texto={
+            acertou
+              ? jogo.acerto ?? `Muito bem! ${jogo.opcoes[jogo.correta].nome}!`
+              : jogo.erro ?? "Escute de novo e toque na figura certa."
+          }
+        />
+      )}
+      {escolha !== null && !acertou && (
+        <button
+          onClick={() => setEscolha(null)}
+          className="mt-2 w-full h-10 rounded-xl bg-white/15 font-black text-white"
+        >
+          Tentar de novo
+        </button>
+      )}
+    </Secao>
+  );
+}
+
 
 
 function Status({ ok, texto }: { ok: boolean; texto: string }) {

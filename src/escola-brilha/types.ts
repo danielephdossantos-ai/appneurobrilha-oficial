@@ -502,7 +502,30 @@ export type Aula = {
             }
         >;
       }
+    | {
+        /**
+         * Escolher a figura certa TOCANDO na imagem (sem ler texto).
+         * Ideal para Ed. Infantil / 1º Ano em Português: a professora
+         * fala a palavra, a criança toca na figura. Ao tocar, o TTS diz
+         * o nome da figura e valida a resposta.
+         */
+        tipo: "escolherFigura";
+        titulo: string;
+        instrucao?: string;
+        pergunta?: string;
+        opcoes: Array<{
+          nome: string;
+          imagemUrl: string;
+          /** Texto opcional exibido abaixo da imagem (associação visual↔texto). */
+          rotulo?: string;
+        }>;
+        /** Índice da opção correta em `opcoes`. */
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
   >;
+
 
 
   /**

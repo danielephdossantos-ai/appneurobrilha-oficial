@@ -210,34 +210,35 @@ const aula: Aula = {
 
   interativas: [
     {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Ouça e escolha",
+      tipo: "escolherFigura",
+      titulo: "Fase 1 · Ouça e toque na figura",
       instrucao:
-        "O Brilha falou a palavra 'SOL' (S · O · L). Veja as figuras abaixo e toque no botão com o nome certo.",
-
-      grupos: [
-        { imagemUrl: solImg, quantidade: 1, rotulo: "☀️ SOL" },
-        { imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BANANA" },
-        { imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽ BOLA" },
+        "O Brilha falou a palavra 'SOL' (S · O · L). Toque na figura certa — a professora vai falar o nome.",
+      opcoes: [
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
+        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
       ],
-      pergunta: "Qual figura combina com a palavra SOL?",
-      opcoes: ["Sol", "Banana", "Bola"],
       correta: 0,
       acerto: "Isso! SOL começa com o som SSS — é a estrela do dia!",
-      erro: "Escuta de novo: S · O · L. Que figura começa com o som SSS?",
+      erro: "Escute de novo: S · O · L. Toque na figura que começa com o som SSS.",
     },
+
     {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Complete a palavra",
+      tipo: "escolherFigura",
+      titulo: "Fase 2 · Ouça e toque na figura",
       instrucao:
-        "A palavra da figura é BA _ ANA. Qual letra falta no meio?",
-      grupos: [{ imagemUrl: bananaImg, quantidade: 1, rotulo: "BA _ ANA" }],
-      pergunta: "Qual letra completa a palavra BA_ANA?",
-      opcoes: ["N", "M", "L"],
-      correta: 0,
+        "O Brilha falou a palavra 'BANANA' (B · A · N · A · N · A). Toque na figura certa.",
+      opcoes: [
+        { nome: "MAÇÃ", imagemUrl: macaImg, rotulo: "🍎 MAÇÃ" },
+        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
+        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
+      ],
+      correta: 1,
       acerto: "Muito bem! BANANA — B · A · N · A · N · A.",
-      erro: "Fala devagar: ba-NA-na. Qual letra faz o som NNN?",
+      erro: "Escute: ba-NA-na. Toque na fruta amarelinha.",
     },
+
     {
       tipo: "ordenar",
       titulo: "Fase 3 · Monte a palavra",
@@ -263,23 +264,21 @@ const aula: Aula = {
       ],
     },
     {
-      tipo: "contarQuiz",
+      tipo: "escolherFigura",
       titulo: "Fase 5 · Oficina do Brilha",
       instrucao:
-        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Veja as figuras e toque no botão com o nome certo.",
-
-      grupos: [
-        { imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" },
-        { imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
-        { imagemUrl: sapoImg, quantidade: 1, rotulo: "🐸" },
+        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Toque na figura certa.",
+      opcoes: [
+        { nome: "CACHORRO", imagemUrl: cachorroImg, rotulo: "🐶 CACHORRO" },
+        { nome: "GATO", imagemUrl: gatoImg, rotulo: "🐱 GATO" },
+        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
       ],
-      pergunta: "Qual figura tem o nome CACHORRO?",
-      opcoes: ["Gato", "Cachorro", "Sapo"],
-      correta: 1,
+      correta: 0,
       acerto: "Excelente! CACHORRO começa com o som C — é o amigo que late.",
-      erro: "Fala devagar: ca-CHO-rro. Que animal é esse?",
+      erro: "Escute: ca-CHO-rro. Toque no animal que late.",
     },
   ],
+
 
   niveis: {
     dominioMinimo: 70,
