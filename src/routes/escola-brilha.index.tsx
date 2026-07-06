@@ -8,7 +8,7 @@ import { listAulas } from "@/escola-brilha/registry";
 import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
-import { temaDaDisciplina } from "@/escola-brilha/missoes-tema";
+import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
 
 
 
@@ -136,9 +136,10 @@ function EscolaBrilhaCatalogo() {
       if (filtro === "disponiveis" && !escritasSet.has(h.codigo)) continue;
       const series = expandirAno(h.ano);
       for (const s of series) {
-        const disc = h.componente || "Outros";
+        const disc = slugDisc(h.componente);
         (tree[s][disc] ||= []).push(h);
       }
+
     }
     // ordena habilidades por código dentro de cada disciplina
     for (const s of SERIES_ORDEM) {
