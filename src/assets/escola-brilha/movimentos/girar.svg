@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Girar leve">
+  <rect x="18" y="18" width="220" height="220" rx="42" fill="#F5F3FF"/>
+  <path d="M63 99c19-43 79-55 114-23" fill="none" stroke="#A78BFA" stroke-width="11" stroke-linecap="round"/>
+  <path d="M180 76l-3-31 27 17-24 14Z" fill="#A78BFA"/>
+  <circle cx="128" cy="82" r="22" fill="#FDE68A" stroke="#0d1f55" stroke-width="8"/>
+  <path d="M128 109c-25 20-25 51 0 79 25-28 25-59 0-79Z" fill="#60A5FA" stroke="#0d1f55" stroke-width="8"/>
+  <path d="M99 131l-34 21M157 131l34 21M116 185l-24 27M140 185l24 27" fill="none" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M99 131l-34 21M157 131l34 21M116 185l-24 27M140 185l24 27" fill="none" stroke="#0d1f55" stroke-width="6" stroke-linecap="round"/>
+</svg>

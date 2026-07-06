@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Dançar">
+  <rect x="18" y="18" width="220" height="220" rx="42" fill="#FCE7F3"/>
+  <circle cx="128" cy="65" r="24" fill="#FDE68A" stroke="#0d1f55" stroke-width="8"/>
+  <path d="M128 93c-30 30-30 67 0 96 30-29 30-66 0-96Z" fill="#F472B6" stroke="#0d1f55" stroke-width="8"/>
+  <path d="M98 113l-45-28M158 113l45-28M116 185l-31 34M140 185l31 34" fill="none" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <path d="M98 113l-45-28M158 113l45-28M116 185l-31 34M140 185l31 34" fill="none" stroke="#0d1f55" stroke-width="7" stroke-linecap="round"/>
+  <path d="M47 54c18-17 41-20 61-7M148 47c23-13 46-9 63 9" stroke="#FBBF24" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>
