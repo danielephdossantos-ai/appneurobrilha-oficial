@@ -11,6 +11,8 @@ import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
 import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
 import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
 import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
+import cerejeiraImg from "@/assets/neuro-treino/objetos/cerejeira.png";
+
 
 /**
  * EF01CI01 — Ciências · 1º Ano
