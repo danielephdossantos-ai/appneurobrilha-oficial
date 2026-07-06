@@ -183,11 +183,11 @@ const aula: Aula = {
       visual: { tipo: "itens", imagemUrl: bebeImg, quantidade: 1, rotulo: "👶" },
     },
     {
-      pergunta: "O tempo faz as pessoas:",
-      opcoes: ["Crescerem e mudarem", "Ficarem sempre iguais", "Pararem de aprender"],
+      pergunta: "Quem contou histórias da sua infância pra você?",
+      opcoes: ["A família", "Um desconhecido", "Ninguém"],
       correta: 0,
-      explicacao: "Com o tempo a gente muda e cresce.",
-      visual: { tipo: "itens", imagemUrl: criancaAndandoImg, quantidade: 1, rotulo: "🧒" },
+      explicacao: "A família guarda as lembranças da nossa infância.",
+      visual: { tipo: "itens", imagemUrl: albumImg, quantidade: 1, rotulo: "👨‍👩‍👧" },
     },
     {
       pergunta: "Uma lembrança pode ser:",
@@ -197,10 +197,10 @@ const aula: Aula = {
       visual: { tipo: "itens", imagemUrl: albumImg, quantidade: 1, rotulo: "💖" },
     },
     {
-      pergunta: "Hoje aprendemos sobre:",
-      opcoes: ["Nossa própria história", "Apenas números", "Apenas animais"],
+      pergunta: "Onde guardamos nossas lembranças da vida?",
+      opcoes: ["No álbum e na memória", "Só no armário", "Em lugar nenhum"],
       correta: 0,
-      explicacao: "A missão foi conhecer a SUA história.",
+      explicacao: "Fotos, objetos e memórias formam o nosso álbum de vida.",
       visual: { tipo: "itens", imagemUrl: albumImg, quantidade: 1, rotulo: "📖" },
     },
   ],
@@ -357,11 +357,11 @@ const aula: Aula = {
     dominioMinimo: 70,
     facil: [
       {
-        pergunta: "Todo mundo tem uma história?",
-        opcoes: ["Sim", "Não", "Só os adultos"],
+        pergunta: "Qual objeto lembra o seu ANIVERSÁRIO?",
+        opcoes: ["Bolo", "Mochila", "Chocalho"],
         correta: 0,
-        explicacao: "Todos têm história.",
-        visual: { tipo: "itens", imagemUrl: albumImg, quantidade: 1, rotulo: "📖" },
+        explicacao: "Bolo com velinha é a marca do aniversário.",
+        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "🎂" },
       },
       {
         pergunta: "Quem usa MAMADEIRA?",
@@ -371,11 +371,11 @@ const aula: Aula = {
         visual: { tipo: "itens", imagemUrl: mamadeiraImg, quantidade: 1, rotulo: "🍼" },
       },
       {
-        pergunta: "Você é:",
-        opcoes: ["Criança", "Bebê", "Idoso"],
+        pergunta: "O que levamos todo dia pra ESCOLA?",
+        opcoes: ["Mochila", "Chocalho", "Mamadeira"],
         correta: 0,
-        explicacao: "Você é criança agora.",
-        visual: { tipo: "itens", imagemUrl: meninoImg, quantidade: 1, rotulo: "🧒" },
+        explicacao: "A mochila é o kit da escola.",
+        visual: { tipo: "itens", imagemUrl: mochilaImg, quantidade: 1, rotulo: "🎒" },
       },
     ],
     medio: [
@@ -387,11 +387,11 @@ const aula: Aula = {
         visual: { tipo: "itens", imagemUrl: bebeEngatinhandoImg, quantidade: 1, rotulo: "👶" },
       },
       {
-        pergunta: "Qual desses é da ESCOLA?",
-        opcoes: ["Mochila", "Chocalho", "Mamadeira"],
+        pergunta: "Qual desses é um brinquedo de CRIANÇA maior?",
+        opcoes: ["Bola", "Chocalho", "Mamadeira"],
         correta: 0,
-        explicacao: "Mochila é da escola.",
-        visual: { tipo: "itens", imagemUrl: mochilaImg, quantidade: 1, rotulo: "🎒" },
+        explicacao: "Chocalho e mamadeira são de bebê. Bola é de criança.",
+        visual: { tipo: "itens", imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽" },
       },
       {
         pergunta: "O ANIVERSÁRIO comemora:",
