@@ -398,6 +398,16 @@ const aula: Aula = {
       { nome: "Pássaro", imagemUrl: passaroImg, rotulo: "🐦 Pássaro" },
       { nome: "Girassol", imagemUrl: girassolImg, rotulo: "🌻 Girassol" },
     ],
+    distratores: [
+      { nome: "Livro", imagemUrl: livroImg, rotulo: "📚" },
+      { nome: "Carro", imagemUrl: carroImg, rotulo: "🚗" },
+      { nome: "Pincel", imagemUrl: pincelImg, rotulo: "🖌️" },
+      { nome: "Cachorro", imagemUrl: cachorroImg, rotulo: "🐶" },
+      { nome: "Coruja", imagemUrl: corujaImg, rotulo: "🦉" },
+      { nome: "Chuva", imagemUrl: chuvaImg, rotulo: "💧" },
+      { nome: "Sol", imagemUrl: solImg, rotulo: "☀️" },
+      { nome: "Cerejeira", imagemUrl: cerejeiraImg, rotulo: "🌸" },
+    ],
     acerto: "🔦 Mapa iluminado! Você é um caçador de descobertas!",
   },
 
