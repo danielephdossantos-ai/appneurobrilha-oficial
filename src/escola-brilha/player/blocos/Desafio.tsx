@@ -104,7 +104,32 @@ function QuizSequencial({ perguntas, cena }: { perguntas: QuizItem[]; cena?: Cen
           exit={{ opacity: 0, y: -8 }}
         >
           <p className="font-black mb-3">{q.pergunta}</p>
-          {q.visual && <PerguntaVisual visual={q.visual} />}
+          {(() => {
+            const cenaAtual = cena?.[i];
+            if (q.visual) return <PerguntaVisual visual={q.visual} />;
+            if (cenaAtual) {
+              const cor = cenaAtual.cor ?? CORES[i % CORES.length];
+              return (
+                <div
+                  className="mb-3 rounded-2xl border-4 p-3 flex flex-col items-center gap-2"
+                  style={{ borderColor: cor, background: `${cor}18` }}
+                >
+                  <img
+                    src={cenaAtual.itemImagemUrl}
+                    alt={cenaAtual.personagem}
+                    className="h-24 w-24 object-contain drop-shadow"
+                  />
+                  <span
+                    className="text-[11px] font-black uppercase tracking-widest text-white px-3 py-1 rounded-full"
+                    style={{ background: cor }}
+                  >
+                    {cenaAtual.personagem}
+                  </span>
+                </div>
+              );
+            }
+            return null;
+          })()}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {q.opcoes.map((op, k) => {
               const revelado = escolha !== null;
