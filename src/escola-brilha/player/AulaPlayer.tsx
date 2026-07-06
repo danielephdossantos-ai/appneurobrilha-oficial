@@ -410,6 +410,8 @@ function renderBloco(
       return <Exercicios itens={a.exercicios} />;
     case "desafio":
       return <Desafio dados={a.desafio} />;
+    case "minijogo":
+      return a.minijogo ? <Minijogo dados={a.minijogo} /> : null;
     case "quiz":
       return (
         <Quiz
@@ -425,8 +427,11 @@ function renderBloco(
       return <Revisao dados={a.revisao} />;
     case "curiosidade":
       return a.curiosidade ? <Curiosidade dados={a.curiosidade} /> : null;
+    case "familia":
+      return a.missaoFamilia ? <MissaoFamilia dados={a.missaoFamilia} /> : null;
     case "conclusao":
       return <Conclusao texto={a.conclusao} acertos={ctx.acertos} total={a.quiz.length} codigoAtual={a.codigo} />;
+
 
     default:
       return null;
