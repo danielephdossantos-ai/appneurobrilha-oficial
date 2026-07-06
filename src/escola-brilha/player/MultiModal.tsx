@@ -1096,12 +1096,16 @@ function JogoContarQuiz({
       )}
 
       <div
-        className={`grid gap-3 mb-4 ${
+        className={`grid gap-2 sm:gap-3 mb-4 ${
           jogo.grupos.length === 1
             ? "grid-cols-1"
             : jogo.grupos.length === 2
               ? "grid-cols-2"
-              : "grid-cols-1 sm:grid-cols-3"
+              : jogo.grupos.length === 3
+                ? "grid-cols-3"
+                : jogo.grupos.length === 4
+                  ? "grid-cols-2 sm:grid-cols-4"
+                  : "grid-cols-3 sm:grid-cols-6"
         }`}
       >
         {jogo.grupos.map((g, i) => (
@@ -1111,10 +1115,11 @@ function JogoContarQuiz({
             quantidade={g.quantidade}
             rotulo={g.rotulo}
             itemSingular="item"
-            size={jogo.grupos.length === 1 ? "lg" : "md"}
+            size={jogo.grupos.length === 1 ? "lg" : jogo.grupos.length >= 5 ? "sm" : "md"}
           />
         ))}
       </div>
+
 
       <p className="font-black text-base mb-2 text-center">{jogo.pergunta}</p>
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-2">
