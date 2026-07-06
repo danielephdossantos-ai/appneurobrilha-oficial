@@ -131,7 +131,93 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       );
     case "escolherFigura":
       return <JogoEscolherFigura jogo={jogo} />;
+    case "escolherEscrita":
+      return <JogoEscolherEscrita jogo={jogo} />;
   }
+}
+
+/* --- Escolher Escrita (grafia correta com figura de referência + TTS por opção) --- */
+function JogoEscolherEscrita({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "escolherEscrita" }>;
+}) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  const { speak } = useDeviceTTS();
+  const acertou = escolha !== null && escolha === jogo.correta;
+
+  function tocar(i: number) {
+    if (escolha !== null && acertou) return;
+    setEscolha(i);
+    speak(jogo.opcoes[i]);
+  }
+
+  return (
+    <Secao icon={Sparkles} rotulo="Fase" cor="#FFC93C">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+      <div className="flex flex-col items-center gap-2 mb-4">
+        <img
+          src={jogo.figura.imagemUrl}
+          alt={jogo.figura.rotulo ?? "figura"}
+          className="w-32 h-32 sm:w-40 sm:h-40 object-contain drop-shadow"
+          draggable={false}
+        />
+        {jogo.figura.rotulo && (
+          <span className="text-sm font-black text-white/80">{jogo.figura.rotulo}</span>
+        )}
+      </div>
+      {jogo.pergunta && (
+        <p className="font-black text-base mb-3 text-center">{jogo.pergunta}</p>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+        {jogo.opcoes.map((op, i) => {
+          const selecionada = escolha === i;
+          const certa = escolha !== null && i === jogo.correta;
+          const errada = selecionada && i !== jogo.correta;
+          const cls = certa
+            ? "bg-[#22C55E] text-white border-white"
+            : errada
+              ? "bg-[#EF4444] text-white border-white"
+              : selecionada
+                ? "bg-[#FBBF24] text-[#0d1f55] border-white"
+                : "bg-white text-[#0d1f55] border-transparent active:scale-95";
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocar(i)}
+              disabled={escolha !== null && acertou}
+              className={`min-h-16 px-3 py-3 rounded-2xl font-black text-2xl tracking-wide leading-tight text-center border-4 transition-all ${cls}`}
+              aria-label={op}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <Status
+          ok={acertou}
+          texto={
+            acertou
+              ? jogo.acerto ?? `Isso! A escrita certa é ${jogo.opcoes[jogo.correta]}.`
+              : jogo.erro ?? "Toque em cada uma e escute — qual soa igual à figura?"
+          }
+        />
+      )}
+      {escolha !== null && !acertou && (
+        <button
+          onClick={() => setEscolha(null)}
+          className="mt-2 w-full h-10 rounded-xl bg-white/15 font-black text-white"
+        >
+          Tentar de novo
+        </button>
+      )}
+    </Secao>
+  );
 }
 
 /* --- Escolher Figura (tocar imagem = resposta) --- */
