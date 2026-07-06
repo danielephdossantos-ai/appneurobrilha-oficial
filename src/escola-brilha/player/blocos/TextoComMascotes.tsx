@@ -63,8 +63,8 @@ export function TextoComMascotes({
   }
 
   return (
-    <div className="flex items-start gap-3">
-      <div className="flex -space-x-3 shrink-0">
+    <div className="flex flex-col items-center gap-3 w-full">
+      <div className="flex -space-x-3 justify-center">
         {mascotes.map((m) => (
           <img
             key={m.key}
@@ -74,7 +74,7 @@ export function TextoComMascotes({
           />
         ))}
       </div>
-      <p className={className ?? "text-base leading-relaxed flex-1"}>{texto}</p>
+      <p className={className ?? "text-base leading-relaxed w-full text-center"}>{texto}</p>
     </div>
   );
 }
