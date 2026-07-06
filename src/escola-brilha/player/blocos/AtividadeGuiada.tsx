@@ -157,3 +157,71 @@ function CenaGuiada({
   );
 }
 
+
+function EscolherImagem({
+  visual,
+  explicacao,
+}: {
+  visual: Extract<NonNullable<Aula["atividadeGuiada"]["visual"]>, { tipo: "escolherImagem" }>;
+  explicacao: string;
+}) {
+  const [resp, setResp] = useState<string | null>(null);
+  const { speak } = useDeviceTTS();
+  const acertou = resp !== null && resp === visual.respostaCerta;
+  const errou = resp !== null && resp !== visual.respostaCerta;
+
+  function escolher(nome: string) {
+    if (resp !== null) return;
+    setResp(nome);
+    speak(nome === visual.respostaCerta ? "Muito bem!" : "Tente outra.");
+  }
+
+  return (
+    <div>
+      <p className="font-black mb-4 text-center">{visual.pergunta}</p>
+      <div className="grid grid-cols-3 gap-3 mb-3">
+        {visual.opcoes.map((op) => {
+          const isCorreta = op.nome === visual.respostaCerta;
+          const isEscolha = resp === op.nome;
+          const showState = resp !== null;
+          const ring = showState
+            ? isCorreta
+              ? "ring-4 ring-emerald-400 bg-emerald-500/20"
+              : isEscolha
+                ? "ring-4 ring-rose-400 bg-rose-500/20"
+                : "opacity-40 bg-white/10"
+            : "bg-white/15 hover:bg-white/25 active:scale-95";
+          return (
+            <button
+              key={op.nome}
+              type="button"
+              onClick={() => escolher(op.nome)}
+              disabled={resp !== null}
+              className={`rounded-2xl p-3 flex flex-col items-center gap-2 transition ${ring}`}
+            >
+              <img
+                src={op.imagemUrl}
+                alt={op.nome}
+                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow"
+                draggable={false}
+              />
+              <span className="text-xs font-black text-white text-center">{op.nome}</span>
+            </button>
+          );
+        })}
+      </div>
+      {acertou && (
+        <div className="flex items-center gap-2 rounded-xl p-2 border bg-[#22C55E]/15 border-[#22C55E]/30 text-[#86EFAC]">
+          <CheckCircle2 className="h-4 w-4" />
+          <span className="text-sm font-black">Muito bem! 🎉 {explicacao}</span>
+        </div>
+      )}
+      {errou && (
+        <div className="flex items-center gap-2 rounded-xl p-2 border bg-[#EF4444]/15 border-[#EF4444]/30 text-[#FCA5A5]">
+          <XCircle className="h-4 w-4" />
+          <span className="text-sm font-black">{explicacao}</span>
+        </div>
+      )}
+    </div>
+  );
+}
