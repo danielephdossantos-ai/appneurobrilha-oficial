@@ -7,23 +7,28 @@ import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
+import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
+import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
 import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
+import livroImg from "@/assets/neuro-treino/objetos/livro.png";
+import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
 
 /**
  * EI03EO09 — Mundo 1 · Amigos da Floresta Encantada
- * Educação Infantil · Campo O Eu, o Outro e o Nós
- * Tema: "Trabalhar em Grupo" — spec EI-01 do usuário.
- * Estrela: ⭐ Participação.
- * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
+ * Educação Infantil (4 e 5 anos) · Campo O Eu, o Outro e o Nós
+ * Tema: "Trabalhar em Grupo"
+ * Estrela recompensa: ⭐ Participação
+ * Medalha: 🏅 Guardião da Participação
  */
 const aula: Aula = {
   codigo: "EI03EO09",
@@ -33,297 +38,109 @@ const aula: Aula = {
 
   narrativa: {
     titulo: "Trabalhar em Grupo",
-    contexto: "A Floresta quer construir uma ponte nova pro rio. Sozinho, nenhum bichinho consegue. A Coruja Sábia bate palma: 'JUNTOS a gente consegue!' Cada um faz um pedaço.",
-    problema: "Uma coisa grande é difícil sozinho. Como o GRUPO pode ajudar?",
-    convite: "Bora construir juntos!",
+    contexto: "A Coruja Sábia propôs construir uma CASINHA nova no meio da floresta pra todos os amigos brincarem. Ninguém consegue construir sozinho.",
+    problema: "A nona estrela só acende quando todos os amigos trabalharem JUNTOS. Cada um tem que fazer uma parte.",
+    convite: "Bora construir a casinha em equipe!",
   },
 
-  conhecimentosPrevios: [
-    "Reconhecer o próprio nome quando alguém chama.",
-    "Nomear alguém de quem gosta.",
-    "Apontar carinhas de sentimento simples.",
-  ],
+  conhecimentosPrevios: ["Aceitar dividir tarefas.", "Esperar o amigo terminar a parte dele.", "Combinar antes de começar."],
 
-  missao: "Descobrir que EM GRUPO a gente faz coisas que sozinho não daria conta.",
+  missao: "Descobrir que JUNTOS conseguimos coisas que sozinhos não daríamos conta.",
 
-  objetivos: [
-    "Reconhecer o tema 'Trabalhar em Grupo' no dia a dia.",
-    "Praticar a atitude em cenas com os amigos da floresta.",
-  ],
+  objetivos: ["Participar de uma tarefa coletiva.", "Perceber o valor da colaboração."],
 
-  motivacao: "Uma mãozinha ajuda. Muitas mãozinhas CONSTROEM.",
+  motivacao: "Uma formiga sozinha carrega uma folha. Muitas formigas carregam uma árvore. Juntos, tudo fica possível!",
 
-  explicacao: "EM GRUPO a gente:\n\n• DIVIDE a tarefa em pedaços.\n• CADA UM faz uma parte.\n• AJUDA o amigo que trava.\n• COMEMORA junto quando termina.\n\nParticipar = fazer a MINHA parte pro grupo.",
+  explicacao: "TRABALHAR EM GRUPO é dividir uma tarefa entre todos:\n\n• Cada um faz uma parte.\n• Um ajuda o outro.\n• Ninguém carrega tudo sozinho.\n• Todos comemoram no final.\n\nQuando o grupo trabalha unido, faz coisas GRANDES.",
 
   explicacaoAtiva: [
-    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
-    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
-    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
-    {
-      texto: "Bora começar? Toque na Fifi pra ir junto!",
-      imagem: fifiImg,
-      imagemAlt: "Fifi",
-      checagem: {
-        pergunta: "Você tá pronto pra aprender sobre Trabalhar em Grupo?",
-        opcoes: ["Sim, bora!", "Ainda não"],
-        correta: 0,
-        explicacao: "Isso! Bora acender mais uma estrela.",
-      },
-    },
+    { texto: "Este é o desenho da casinha a construir.", imagem: casaImg, imagemAlt: "Casinha" },
+    { texto: "O Lupi carrega os blocos.", imagem: lupiImg, imagemAlt: "Lupi carregando" },
+    { texto: "A Fifi pinta as paredes. Cada um sua parte!", imagem: fifiImg, imagemAlt: "Fifi pintando", checagem: { pergunta: "Grupo trabalha melhor JUNTO ou cada um por si?", opcoes: ["Junto — todos ajudam", "Cada um por si"], correta: 0, explicacao: "Juntos a gente faz mais e melhor." } }
   ],
 
   explicacoesNiveis: {
-    nivel1: "Trabalhar em Grupo é uma atitude boa que a gente pratica todo dia.",
-    nivel2: "Os amigos da floresta mostram cenas de trabalhar em grupo — a gente aprende junto.",
-    nivel3: "Praticar trabalhar em grupo deixa a floresta (e a gente) mais feliz.",
-    nivel4: "Em casa, você pode praticar trabalhar em grupo com a família também.",
+    nivel1: "Grupo é vários amigos fazendo a mesma coisa juntos.",
+    nivel2: "Cada amigo faz uma parte, e no final tudo se junta.",
+    nivel3: "Se um amigo ficar sem fazer nada, o grupo trabalha mais devagar.",
+    nivel4: "Trabalhar em grupo ensina paciência, respeito e amizade.",
   },
 
   exemploResolvido: {
-    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar trabalhar em grupo?",
-    passos: [
-      "Toque na estrela apagada.",
-      "Repita: 'vou acender!'",
-      "Cada boa atitude acende UMA estrela.",
-    ],
-    resposta: "1 estrela — e ela vai acender no final da missão.",
-    interativo: {
-      tipo: "contagem",
-      imagemUrl: estrelaImg,
-      quantidade: 1,
-      nomeItem: "estrela",
-      nomeItemPlural: "estrelas",
-      pergunta: "Quantas estrelas vamos acender nesta missão?",
-    },
+    enunciado: "3 amigos vão construir a casinha. Cada um faz uma tarefa. Quantas mãos trabalhando?",
+    passos: ["Toque em cada amigo trabalhando.", "Conte: 1, 2, 3 amigos!"],
+    resposta: "3 amigos trabalhando juntos.",
+    interativo: { tipo: "contagem", imagemUrl: casaImg, quantidade: 3, nomeItem: "amigo no grupo", nomeItemPlural: "amigos no grupo", pergunta: "Quantos amigos trabalham no grupo?" },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos aparecem pra praticar trabalhar em grupo. Quantos amigos você vê?",
-    resposta: "3 amigos — todos participando juntos.",
-    explicacao: "Cada amigo mostra um jeito diferente de viver trabalhar em grupo.",
+    enunciado: "3 amigos em fila trabalhando. Quem é o SEGUNDO?",
+    resposta: "Fifi (2ª) pintando as paredes.",
+    explicacao: "Lupi (1º) carrega, Fifi (2ª) pinta, Téo (3º) organiza.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
-      participantes: [
-        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
-        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
-      ],
-      respostaCerta: "Lupi",
+      pergunta: "Toque em cada elemento pra descobrir. Quem está no 2º lugar (meio)?",
+      participantes: [{ nome: "Lupi carrega", imagemUrl: lupiImg, posicao: 1 }, { nome: "Fifi pinta", imagemUrl: fifiImg, posicao: 2 }, { nome: "Téo organiza", imagemUrl: teoImg, posicao: 3 }],
+      respostaCerta: "Fifi pinta",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Por que a gente pratica trabalhar em grupo?", resposta: "Uma mãozinha ajuda. Muitas mãozinhas CONSTROEM.", dica: "Pensa em como o coração fica." },
-    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
-    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
+    { enunciado: "👷 Numa construção, cada um deve fazer TUDO sozinho?", resposta: "Não! Dividir tarefa deixa mais rápido e todos participam.", dica: "Trabalho dividido = trabalho feito." },
+    { enunciado: "🤝 Um amigo do grupo não quer ajudar. O que fazer?", resposta: "Conversar com carinho e mostrar que a ajuda dele importa.", dica: "Todo mundo importa no grupo." },
+    { enunciado: "🏠 Terminaram a casinha. Quem comemora?", resposta: "TODOS! É vitória coletiva.", dica: "Trabalho em grupo, vitória em grupo." }
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: 3 cenas mostram trabalhar em grupo. Responda cada uma!",
-    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
+    enunciado: "3 tarefas do grupo. Cada amigo escolhe uma. É trabalho em grupo?",
+    resposta: "Sim — quando cada um faz sua parte, o grupo vence.",
     visual: {
-      cena: [
-        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
-      ],
-      perguntas: [
-        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar trabalhar em grupo?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
-        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
-        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
-      ],
+      cena: [{ personagem: "Lupi carregando", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" }, { personagem: "Fifi pintando", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }, { personagem: "Téo organizando", itemImagemUrl: teoImg, quantidade: 1, cor: "#34D399" }],
+      perguntas: [{ pergunta: "O Lupi carrega blocos. Isso é ajuda?", opcoes: ["Sim, é parte do grupo", "Não vale"], correta: 0, explicacao: "Toda tarefa vale." }, { pergunta: "A Fifi pinta. Vale como participação?", opcoes: ["Sim", "Não"], correta: 0, explicacao: "Cada função importa." }, { pergunta: "O Téo só organiza. Isso é preguiça?", opcoes: ["Não — organizar também é trabalho", "É preguiça"], correta: 0, explicacao: "Organizar é essencial." }],
     },
   },
 
   revisao: {
-    pontos: [
-      "Trabalhar em Grupo é uma atitude BOA da floresta.",
-      "A gente pratica no dia a dia com amigos e família.",
-      "Cada boa atitude acende uma estrela.",
-      "Quando todos praticam, a floresta brilha!",
-    ],
-    dica: "Hoje, pratique trabalhar em grupo com alguém da sua casa.",
+    pontos: ["Grupo = fazer junto.", "Cada um tem sua parte.", "Todos comemoram no fim.", "Junto a gente vai mais longe."],
+    dica: "Em casa, ajude a família a arrumar algo TODOS JUNTOS.",
   },
 
   quiz: [
-    {
-      pergunta: "Praticar trabalhar em grupo deixa a gente:",
-      opcoes: ["Mais feliz", "Mais triste"],
-      correta: 0,
-      explicacao: "Mais feliz! Boa atitude acende o coração.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
-    },
-    {
-      pergunta: "Quantos amigos da floresta apareceram na missão?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
-      visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
-          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
-          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantas estrelas acendemos ao terminar?",
-      opcoes: ["Nenhuma", "1", "Muitas"],
-      correta: 1,
-      explicacao: "1 estrela — a estrela Participação!",
-      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Participação" },
-    },
+    { pergunta: "Grupo funciona melhor quando…", opcoes: ["Todos ajudam", "Só um faz tudo"], correta: 0, explicacao: "Todos participando = grupo bom.", visual: { tipo: "grupos", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }] } },
+    { pergunta: "Terminaram a casinha. Quem venceu?", opcoes: ["Todos", "Só o Lupi"], correta: 0, explicacao: "Vitória coletiva.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casinha pronta!" } },
+    { pergunta: "Quantas tarefas foram divididas?", opcoes: ["1", "2", "3"], correta: 2, explicacao: "Carregar, pintar, organizar — 3 tarefas.", visual: { tipo: "grupos", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Carregar" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Pintar" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Organizar" }] } }
   ],
 
-  conclusao: "🏅 Medalha: Guardião da Participação! ⭐ Estrela Participação ACESA na Árvore da Amizade. Missão em Casa: pratique trabalhar em grupo com alguém da família hoje. +100 XP · +50 moedas.",
+  conclusao: "🏅 Medalha conquistada: Guardião da Participação! A NONA ESTRELA ⭐ acendeu. Missão em Casa: escolha uma tarefa da casa e faça JUNTO com alguém.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
+    texto: "Você sabia que as abelhas trabalham em equipe? Uma vai atrás do néctar, outra faz o mel, outra cuida da colmeia. Sozinha, nenhuma daria conta!",
   },
 
   interativas: [
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Boas-vindas do Brilha",
-      instrucao: "O Brilha veio te receber. Toque nele!",
-      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
-      pergunta: "Quantos Brilhas apareceram?",
-      opcoes: ["1", "2", "3"],
-      correta: 0,
-      acerto: "Isso! Um Brilha lindo pra começar.",
-      erro: "Toque bem no meio da estrela.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Os amigos da floresta",
-      instrucao: "Toque em cada amigo pra contar.",
-      grupos: [
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
-        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
-      ],
-      pergunta: "Quantos amigos apareceram?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 amigos, cada um do seu jeito!",
-      erro: "Aponte um por um.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Cada amigo com seu par",
-      instrucao: "Ligue cada amigo ao objeto que combina.",
-      pares: [
-        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
-        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Carinhas de sentimento",
-      instrucao: "Quantas carinhas de sentimento aparecem?",
-      grupos: [
-        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
-      ],
-      pergunta: "Quantas carinhas?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 sentimentos — todos valem!",
-      erro: "Conte de novo, uma a uma.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 5 · Presente pra cada amigo",
-      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
-      itemImagem: balaoImg,
-      alvosVisuais: [
-        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
-        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
-        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
-        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
-      ],
-      pares: [
-        { item: "Balão 1", alvo: "Brilha" },
-        { item: "Balão 2", alvo: "Lupi" },
-        { item: "Balão 3", alvo: "Fifi" },
-        { item: "Balão 4", alvo: "Téo" },
-      ],
-    },
-    {
-      tipo: "ligar",
-      titulo: "Minijogo · Amigo e o que ele leva",
-      instrucao: "Ligue cada amigo ao objeto da cena.",
-      pares: [
-        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
-        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
-        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
-      ],
-    },
+    { tipo: "contarQuiz", titulo: "Fase 1 · Amigos no canteiro de obras", instrucao: "Todos vieram construir juntos.", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }, { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }], pergunta: "Quantos amigos formam o grupo?", opcoes: ["3", "4", "5"], correta: 1, acerto: "4 amigos = time forte!", erro: "Aponte um por um." },
+    { tipo: "contarQuiz", titulo: "Fase 2 · Tarefas divididas", instrucao: "Cada amigo escolheu uma tarefa.", grupos: [{ imagemUrl: ursinhoImg, quantidade: 1, rotulo: "Carregar" }, { imagemUrl: florImg, quantidade: 1, rotulo: "Pintar" }, { imagemUrl: livroImg, quantidade: 1, rotulo: "Organizar" }], pergunta: "Quantas tarefas serão feitas em grupo?", opcoes: ["2", "3", "4"], correta: 1, acerto: "3 tarefas — uma pra cada!", erro: "Carregar, pintar, organizar = 3." },
+    { tipo: "ligar", titulo: "Fase 3 · Cada amigo com sua tarefa", instrucao: "Ligue o amigo à tarefa dele.", pares: [{ a: "Lupi", b: "carrega blocos", aImagem: lupiImg, aQuantidade: 1, bImagem: ursinhoImg, bQuantidade: 1 }, { a: "Fifi", b: "pinta a casa", aImagem: fifiImg, aQuantidade: 1, bImagem: florImg, bQuantidade: 1 }, { a: "Téo", b: "organiza os materiais", aImagem: teoImg, aQuantidade: 1, bImagem: livroImg, bQuantidade: 1 }] },
+    { tipo: "arrastar", titulo: "Fase 4 · Estrela pra cada participante", instrucao: "Dê 1 estrela de participação pra cada amigo do grupo.", itemImagem: estrelaImg, alvosVisuais: [{ nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg }, { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg }, { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg }, { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg }], pares: [{ item: "Estrela pro Lupi", alvo: "Lupi" }, { item: "Estrela pra Fifi", alvo: "Fifi" }, { item: "Estrela pro Téo", alvo: "Téo" }, { item: "Estrela pro Brilha", alvo: "Brilha" }] }
   ],
 
   niveis: {
     dominioMinimo: 70,
-    facil: [
-      {
-        pergunta: "Praticar trabalhar em grupo é uma atitude:",
-        opcoes: ["BOA", "Ruim"],
-        correta: 0,
-        explicacao: "Boa! Sempre.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
-      },
-      {
-        pergunta: "Quantas estrelas você acende nesta missão?",
-        opcoes: ["0", "1", "5"],
-        correta: 1,
-        explicacao: "1 estrela — a de Participação!",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
-      },
-    ],
-    medio: [
-      {
-        pergunta: "Quando você pratica trabalhar em grupo, o coração fica:",
-        opcoes: ["Feliz", "Triste"],
-        correta: 0,
-        explicacao: "Feliz! Boa atitude acende o coração.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-      },
-      {
-        pergunta: "Onde posso praticar?",
-        opcoes: ["Só na escola", "Em todo lugar"],
-        correta: 1,
-        explicacao: "Em qualquer lugar — casa, escola, parque.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
-      },
-    ],
-    dificil: [
-      {
-        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
-        opcoes: ["Mostro com carinho", "Rio dele"],
-        correta: 0,
-        explicacao: "Ensinar com carinho é o melhor.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
-      },
-      {
-        pergunta: "Praticar boas atitudes serve pra:",
-        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
-        correta: 1,
-        explicacao: "É pra viver melhor com todo mundo.",
-        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
-      },
-    ],
+    facil: [{ pergunta: "Trabalhar em grupo é…", opcoes: ["Fazer junto", "Fazer sozinho"], correta: 0, explicacao: "Grupo = junto.", visual: { tipo: "grupos", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }] } }, { pergunta: "Quantos amigos no grupo?", opcoes: ["2", "3", "4"], correta: 1, explicacao: "3 amigos no exemplo.", visual: { tipo: "grupos", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" }, { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" }] } }],
+    medio: [{ pergunta: "Cada um faz uma parte. Isso é…", opcoes: ["Divisão de tarefas", "Bagunça"], correta: 0, explicacao: "Dividir é organizar.", visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casinha" } }, { pergunta: "Quem comemora quando o grupo termina?", opcoes: ["Todos", "Só um"], correta: 0, explicacao: "Todos vencem juntos.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Todos!" } }],
+    dificil: [{ pergunta: "Se um amigo não ajudar, o grupo…", opcoes: ["Trabalha mais devagar", "Vai mais rápido"], correta: 0, explicacao: "Falta de um atrasa todos.", visual: { tipo: "itens", imagemUrl: tristeImg, quantidade: 1, rotulo: "Sem ajuda" } }, { pergunta: "Grupo unido consegue coisas…", opcoes: ["Maiores que sozinho", "Menores que sozinho"], correta: 0, explicacao: "Juntos = mais poder.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Grandes coisas" } }],
   },
 
-  proximaHabilidade: { codigo: "EI03EO10", titulo: "Festa da Amizade — floresta restaurada!" },
+  proximaHabilidade: {
+    codigo: "EI03EO10",
+    titulo: "Festa da Amizade — cena final",
+  },
 };
 
-void piuImg;
-void bravoImg;
+// Mantém imports usados em outras cenas do mesmo lote.
+void piuImg; void confusoImg; void bravoImg; void tranquiloImg; void solImg; void livroImg;
+void ursinhoImg; void boloImg; void presenteImg; void bolaImg; void balaoImg;
+void florImg; void estrelaImg; void coracaoImg; void casaImg; void arvoreImg;
 
 export default aula;

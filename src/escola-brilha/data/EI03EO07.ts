@@ -7,23 +7,28 @@ import teoImg from "@/assets/escola-brilha/ei-mundo1/teo.png";
 import piuImg from "@/assets/escola-brilha/ei-mundo1/piu.png";
 import felizImg from "@/assets/brilha-vida/emocoes/feliz.png";
 import tristeImg from "@/assets/brilha-vida/emocoes/triste.png";
-import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
 import tranquiloImg from "@/assets/brilha-vida/emocoes/tranquilo.png";
+import bravoImg from "@/assets/brilha-vida/emocoes/bravo.png";
+import confusoImg from "@/assets/brilha-vida/emocoes/confuso.png";
+import casaImg from "@/assets/neuro-treino/objetos/casa.png";
 import coracaoImg from "@/assets/neuro-treino/objetos/coracao.png";
 import estrelaImg from "@/assets/neuro-treino/objetos/estrela.png";
-import flor from "@/assets/neuro-treino/objetos/flor.png";
+import florImg from "@/assets/neuro-treino/objetos/flor.png";
 import balaoImg from "@/assets/neuro-treino/objetos/balao.png";
-import casaImg from "@/assets/neuro-treino/objetos/casa.png";
-import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
-import macaImg from "@/assets/neuro-treino/objetos/maca.png";
+import bolaImg from "@/assets/neuro-treino/objetos/bola.png";
 import boloImg from "@/assets/neuro-treino/objetos/bolo.png";
+import presenteImg from "@/assets/neuro-treino/objetos/presente.png";
+import ursinhoImg from "@/assets/neuro-treino/objetos/ursinho.png";
+import livroImg from "@/assets/neuro-treino/objetos/livro.png";
+import solImg from "@/assets/neuro-treino/objetos/sol.png";
+import arvoreImg from "@/assets/neuro-treino/objetos/arvore.png";
 
 /**
  * EI03EO07 — Mundo 1 · Amigos da Floresta Encantada
- * Educação Infantil · Campo O Eu, o Outro e o Nós
- * Tema: "Ajudar os Outros" — spec EI-01 do usuário.
- * Estrela: ⭐ Empatia.
- * Padrão TRAVADO EF01MA02 / EI03EO01 (visual, sem texto pra ler).
+ * Educação Infantil (4 e 5 anos) · Campo O Eu, o Outro e o Nós
+ * Tema: "Ajudar os Outros"
+ * Estrela recompensa: ⭐ Empatia
+ * Medalha: 🏅 Guardião da Empatia
  */
 const aula: Aula = {
   codigo: "EI03EO07",
@@ -33,297 +38,109 @@ const aula: Aula = {
 
   narrativa: {
     titulo: "Ajudar os Outros",
-    contexto: "O Lupi tropeça e cai perto da árvore. Chora um pouquinho. O Brilha vê de longe. O que fazer? A Coruja Sábia diz baixinho: 'Coloca-se no lugar do amigo. Se fosse você, ia querer o quê?'",
-    problema: "Quando um amigo cai ou fica triste, qual a MELHOR coisa a fazer?",
-    convite: "Bora aprender a ser mão amiga!",
+    contexto: "Correndo no gramado, o Lupi tropeçou numa raiz e caiu. Ficou triste, com o joelho ralado.",
+    problema: "A sétima estrela só acende quando um amigo AJUDA o outro. O Brilha viu tudo — o que ele deve fazer?",
+    convite: "Vamos correr pra ajudar o Lupi!",
   },
 
-  conhecimentosPrevios: [
-    "Reconhecer o próprio nome quando alguém chama.",
-    "Nomear alguém de quem gosta.",
-    "Apontar carinhas de sentimento simples.",
-  ],
+  conhecimentosPrevios: ["Perceber quando alguém está triste ou machucado.", "Perguntar 'você tá bem?'.", "Chamar um adulto quando precisa."],
 
-  missao: "Perceber quando alguém precisa e OFERECER ajuda — com gesto, palavra ou abraço.",
+  missao: "Aprender que AJUDAR é a coisa mais bonita que um amigo pode fazer.",
 
-  objetivos: [
-    "Reconhecer o tema 'Ajudar os Outros' no dia a dia.",
-    "Praticar a atitude em cenas com os amigos da floresta.",
-  ],
+  objetivos: ["Reconhecer quem precisa de ajuda.", "Escolher uma atitude de ajuda concreta."],
 
-  motivacao: "Ajudar o outro faz o meu coração ficar quentinho também.",
+  motivacao: "Quando você ajuda alguém, seu coração cresce por dentro. E o coração do amigo também.",
 
-  explicacao: "AJUDAR é:\n\n• PERGUNTAR 'você tá bem?'\n• ESTENDER a mão pra levantar.\n• CHAMAR um adulto se precisar.\n• DAR um abraço se o amigo quiser.\n\nEmpatia é sentir com o outro.",
+  explicacao: "AJUDAR é agir quando alguém precisa:\n\n• Amigo caiu → estender a mão.\n• Amigo chorou → dar abraço.\n• Amigo perdeu algo → ajudar a procurar.\n• Amigo tá cansado → oferecer água.\n\nAJUDAR não é obrigação — é presente. E o mais legal: quem ajuda também ganha alegria.",
 
   explicacaoAtiva: [
-    { texto: "Oi! O Brilha voltou. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha" },
-    { texto: "A Coruja Sábia tem uma missão nova pra hoje.", imagem: corujaImg, imagemAlt: "Coruja Sábia" },
-    { texto: "O Lupi e a Fifi vão brincar junto com você.", imagem: lupiImg, imagemAlt: "Lupi" },
-    {
-      texto: "Bora começar? Toque na Fifi pra ir junto!",
-      imagem: fifiImg,
-      imagemAlt: "Fifi",
-      checagem: {
-        pergunta: "Você tá pronto pra aprender sobre Ajudar os Outros?",
-        opcoes: ["Sim, bora!", "Ainda não"],
-        correta: 0,
-        explicacao: "Isso! Bora acender mais uma estrela.",
-      },
-    },
+    { texto: "O Lupi caiu. Olha a carinha dele.", imagem: tristeImg, imagemAlt: "Lupi triste" },
+    { texto: "O Brilha vem ajudar. Toque nele!", imagem: brilhaImg, imagemAlt: "Brilha ajudando" },
+    { texto: "Depois da ajuda, o Lupi fica feliz de novo.", imagem: felizImg, imagemAlt: "Lupi feliz", checagem: { pergunta: "Quando vejo um amigo caído, o que faço?", opcoes: ["Ajudo a levantar", "Rio dele"], correta: 0, explicacao: "Ajudar é o certo. Rir do sofrimento do outro machuca." } }
   ],
 
   explicacoesNiveis: {
-    nivel1: "Ajudar os Outros é uma atitude boa que a gente pratica todo dia.",
-    nivel2: "Os amigos da floresta mostram cenas de ajudar os outros — a gente aprende junto.",
-    nivel3: "Praticar ajudar os outros deixa a floresta (e a gente) mais feliz.",
-    nivel4: "Em casa, você pode praticar ajudar os outros com a família também.",
+    nivel1: "Ajudar é fazer algo bom por alguém que precisa.",
+    nivel2: "Levantar o amigo, dar a mão, buscar ajuda — tudo isso é ajudar.",
+    nivel3: "Ajudar deixa o amigo feliz E deixa quem ajuda feliz também.",
+    nivel4: "Em casa, ajudo guardando os brinquedos. Na escola, ajudo o coleguinha que não entende algo.",
   },
 
   exemploResolvido: {
-    enunciado: "A Coruja Sábia mostra 1 estrela apagada. Quantas estrelas faltam acender pra completar ajudar os outros?",
-    passos: [
-      "Toque na estrela apagada.",
-      "Repita: 'vou acender!'",
-      "Cada boa atitude acende UMA estrela.",
-    ],
-    resposta: "1 estrela — e ela vai acender no final da missão.",
-    interativo: {
-      tipo: "contagem",
-      imagemUrl: estrelaImg,
-      quantidade: 1,
-      nomeItem: "estrela",
-      nomeItemPlural: "estrelas",
-      pergunta: "Quantas estrelas vamos acender nesta missão?",
-    },
+    enunciado: "O Lupi caiu. O Brilha chegou pra ajudar. Quantos amigos temos na cena agora?",
+    passos: ["Toque no Lupi (caído).", "Toque no Brilha (ajudando).", "Conte: 2 amigos, 1 ajudando o outro."],
+    resposta: "2 amigos: 1 precisa de ajuda, 1 ajuda.",
+    interativo: { tipo: "contagem", imagemUrl: lupiImg, quantidade: 2, nomeItem: "amigo", nomeItemPlural: "amigos", pergunta: "Quantos amigos aparecem na cena da ajuda?" },
   },
 
   atividadeGuiada: {
-    enunciado: "3 amigos aparecem pra praticar ajudar os outros. Quantos amigos você vê?",
-    resposta: "3 amigos — todos participando juntos.",
-    explicacao: "Cada amigo mostra um jeito diferente de viver ajudar os outros.",
+    enunciado: "Três atitudes possíveis. Qual está no MEIO — e é a melhor pra AJUDAR?",
+    resposta: "Dar a mão pra levantar (a do meio).",
+    explicacao: "Rir (1º), dar a mão (2º), ignorar (3º). A do meio é a única atitude boa.",
     visual: {
       tipo: "podio",
-      pergunta: "Toque em cada amigo. Quem está no meio (2º)?",
-      participantes: [
-        { nome: "Brilha", imagemUrl: brilhaImg, posicao: 1 },
-        { nome: "Lupi", imagemUrl: lupiImg, posicao: 2 },
-        { nome: "Fifi", imagemUrl: fifiImg, posicao: 3 },
-      ],
-      respostaCerta: "Lupi",
+      pergunta: "Toque em cada elemento pra descobrir. Quem está no 2º lugar (meio)?",
+      participantes: [{ nome: "Rir", imagemUrl: confusoImg, posicao: 1 }, { nome: "Dar a mão", imagemUrl: coracaoImg, posicao: 2 }, { nome: "Ignorar", imagemUrl: tristeImg, posicao: 3 }],
+      respostaCerta: "Dar a mão",
     },
   },
 
   exercicios: [
-    { enunciado: "⭐ Por que a gente pratica ajudar os outros?", resposta: "Ajudar o outro faz o meu coração ficar quentinho também.", dica: "Pensa em como o coração fica." },
-    { enunciado: "🐰 O Lupi tá aprendendo. Como você ajuda?", resposta: "Mostrando o exemplo com carinho.", dica: "Ensinar é ajudar." },
-    { enunciado: "🦉 A Coruja pergunta: onde você pode praticar isso?", resposta: "Em casa, na escola, no parque — em todo lugar.", dica: "Todo dia tem chance." },
+    { enunciado: "🤝 O amigo caiu. O que você faz PRIMEIRO?", resposta: "Pergunto 'você tá bem?' e ofereço a mão.", dica: "Ajuda começa com uma pergunta gentil." },
+    { enunciado: "😢 O amigo chorou. O que ajuda?", resposta: "Um abraço e uma palavra doce: 'tô aqui com você'.", dica: "Presença já é ajuda enorme." },
+    { enunciado: "🎒 O amigo esqueceu o lanche. O que faço?", resposta: "Divido o meu com ele — assim ninguém fica sem.", dica: "Dividir é ajudar de forma prática." }
   ],
 
   desafio: {
-    enunciado: "Desafio Brilha: 3 cenas mostram ajudar os outros. Responda cada uma!",
-    resposta: "Cada cena tem um jeito diferente da atitude — todas valem.",
+    enunciado: "3 amigos precisam de ajuda. Escolha a MELHOR atitude em cada caso.",
+    resposta: "Toda atitude de ajuda deixa o mundo mais gentil.",
     visual: {
-      cena: [
-        { personagem: "Brilha na cena 1", itemImagemUrl: brilhaImg, quantidade: 1, cor: "#FBBF24" },
-        { personagem: "Lupi na cena 2", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" },
-        { personagem: "Fifi na cena 3", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" },
-      ],
-      perguntas: [
-        { pergunta: "O Brilha faz uma atitude boa. Isso é praticar ajudar os outros?", opcoes: ["Sim!", "Não"], correta: 0, explicacao: "Isso! Toda atitude boa conta." },
-        { pergunta: "O Lupi ajuda o amigo. Isso é bom?", opcoes: ["Sim, muito bom", "Não"], correta: 0, explicacao: "Ajudar é sempre bom." },
-        { pergunta: "A Fifi divide o brinquedo. E aí?", opcoes: ["Ela é generosa", "Ela é egoísta"], correta: 0, explicacao: "Dividir é generoso." },
-      ],
+      cena: [{ personagem: "Lupi caiu", itemImagemUrl: lupiImg, quantidade: 1, cor: "#F472B6" }, { personagem: "Fifi chorou", itemImagemUrl: fifiImg, quantidade: 1, cor: "#FB923C" }, { personagem: "Téo perdeu algo", itemImagemUrl: teoImg, quantidade: 1, cor: "#34D399" }],
+      perguntas: [{ pergunta: "O Lupi caiu. Melhor atitude?", opcoes: ["Dar a mão", "Rir dele"], correta: 0, explicacao: "Dar a mão = ajudar." }, { pergunta: "A Fifi tá chorando. Melhor atitude?", opcoes: ["Dar um abraço", "Ignorar"], correta: 0, explicacao: "Abraço é remédio pra tristeza." }, { pergunta: "O Téo perdeu o ursinho. Melhor atitude?", opcoes: ["Ajudar a procurar", "Sair correndo"], correta: 0, explicacao: "Procurar junto é atitude de amigo." }],
     },
   },
 
   revisao: {
-    pontos: [
-      "Ajudar os Outros é uma atitude BOA da floresta.",
-      "A gente pratica no dia a dia com amigos e família.",
-      "Cada boa atitude acende uma estrela.",
-      "Quando todos praticam, a floresta brilha!",
-    ],
-    dica: "Hoje, pratique ajudar os outros com alguém da sua casa.",
+    pontos: ["Ajudar é agir quando alguém precisa.", "Estender a mão, abraçar, dividir são jeitos de ajudar.", "Quem ajuda também recebe alegria.", "Ajudar constrói amizade forte."],
+    dica: "Hoje, ofereça ajuda pra alguém — mesmo que a pessoa não peça.",
   },
 
   quiz: [
-    {
-      pergunta: "Praticar ajudar os outros deixa a gente:",
-      opcoes: ["Mais feliz", "Mais triste"],
-      correta: 0,
-      explicacao: "Mais feliz! Boa atitude acende o coração.",
-      visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração feliz" },
-    },
-    {
-      pergunta: "Quantos amigos da floresta apareceram na missão?",
-      opcoes: ["2", "3", "4"],
-      correta: 1,
-      explicacao: "Brilha, Lupi e Fifi — 3 amigos.",
-      visual: {
-        tipo: "grupos",
-        grupos: [
-          { imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha", cor: "#FBBF24" },
-          { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi", cor: "#F472B6" },
-          { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi", cor: "#FB923C" },
-        ],
-      },
-    },
-    {
-      pergunta: "Quantas estrelas acendemos ao terminar?",
-      opcoes: ["Nenhuma", "1", "Muitas"],
-      correta: 1,
-      explicacao: "1 estrela — a estrela Empatia!",
-      visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela Empatia" },
-    },
+    { pergunta: "Amigo caiu. Você…", opcoes: ["Ajuda a levantar", "Ri"], correta: 0, explicacao: "Ajudar é atitude de amigo.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Ajudar" } },
+    { pergunta: "Amigo tá triste. Melhor atitude?", opcoes: ["Abraçar", "Fingir que não viu"], correta: 0, explicacao: "Abraço acalma o coração.", visual: { tipo: "comparar", lados: [{ imagemUrl: tristeImg, quantidade: 1, rotulo: "Antes", cor: "#60A5FA" }, { imagemUrl: felizImg, quantidade: 1, rotulo: "Depois do abraço", cor: "#FBBF24" }] } },
+    { pergunta: "Quantas atitudes de ajuda cabem numa cena?", opcoes: ["1", "3", "muitas"], correta: 2, explicacao: "Existem muitas formas de ajudar — a gente escolhe.", visual: { tipo: "grupos", grupos: [{ imagemUrl: coracaoImg, quantidade: 1, rotulo: "Abraço" }, { imagemUrl: balaoImg, quantidade: 1, rotulo: "Dividir" }, { imagemUrl: bolaImg, quantidade: 1, rotulo: "Brincar junto" }] } }
   ],
 
-  conclusao: "🏅 Medalha: Guardião da Empatia! ⭐ Estrela Empatia ACESA na Árvore da Amizade. Missão em Casa: pratique ajudar os outros com alguém da família hoje. +100 XP · +50 moedas.",
+  conclusao: "🏅 Medalha conquistada: Guardião da Empatia! A SÉTIMA ESTRELA ⭐ acendeu. Missão em Casa: ajude alguém da família hoje — arrumar mesa, guardar brinquedo, buscar algo.",
 
   curiosidade: {
     titulo: "Você sabia?",
-    texto: "Cada vez que a gente pratica uma boa atitude, uma pequena luz acende no coração — e no cérebro também! Isso é ciência de verdade.",
+    texto: "Você sabia que quando a gente ajuda alguém, o cérebro libera OXITOCINA — a mesma coisinha que a mamãe libera quando abraça o bebê? Ajudar dá amor no corpo inteiro!",
   },
 
   interativas: [
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Boas-vindas do Brilha",
-      instrucao: "O Brilha veio te receber. Toque nele!",
-      grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }],
-      pergunta: "Quantos Brilhas apareceram?",
-      opcoes: ["1", "2", "3"],
-      correta: 0,
-      acerto: "Isso! Um Brilha lindo pra começar.",
-      erro: "Toque bem no meio da estrela.",
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 2 · Os amigos da floresta",
-      instrucao: "Toque em cada amigo pra contar.",
-      grupos: [
-        { imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi" },
-        { imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi" },
-        { imagemUrl: teoImg, quantidade: 1, rotulo: "Téo" },
-        { imagemUrl: piuImg, quantidade: 1, rotulo: "Piu" },
-      ],
-      pergunta: "Quantos amigos apareceram?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 amigos, cada um do seu jeito!",
-      erro: "Aponte um por um.",
-    },
-    {
-      tipo: "ligar",
-      titulo: "Fase 3 · Cada amigo com seu par",
-      instrucao: "Ligue cada amigo ao objeto que combina.",
-      pares: [
-        { a: "Brilha", b: "estrela", aImagem: brilhaImg, aQuantidade: 1, bImagem: estrelaImg, bQuantidade: 1 },
-        { a: "Lupi", b: "flor", aImagem: lupiImg, aQuantidade: 1, bImagem: flor, bQuantidade: 1 },
-        { a: "Téo", b: "coração", aImagem: teoImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 },
-      ],
-    },
-    {
-      tipo: "contarQuiz",
-      titulo: "Fase 4 · Carinhas de sentimento",
-      instrucao: "Quantas carinhas de sentimento aparecem?",
-      grupos: [
-        { imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-        { imagemUrl: tristeImg, quantidade: 1, rotulo: "Triste" },
-        { imagemUrl: bravoImg, quantidade: 1, rotulo: "Bravo" },
-        { imagemUrl: tranquiloImg, quantidade: 1, rotulo: "Calmo" },
-      ],
-      pergunta: "Quantas carinhas?",
-      opcoes: ["3", "4", "5"],
-      correta: 1,
-      acerto: "4 sentimentos — todos valem!",
-      erro: "Conte de novo, uma a uma.",
-    },
-    {
-      tipo: "arrastar",
-      titulo: "Fase 5 · Presente pra cada amigo",
-      instrucao: "Cada amigo ganha 1 balão. Toque no balão e depois no amigo.",
-      itemImagem: balaoImg,
-      alvosVisuais: [
-        { nome: "Brilha", cor: "#FBBF24", capacidade: 1, imagemUrl: brilhaImg },
-        { nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg },
-        { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg },
-        { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg },
-      ],
-      pares: [
-        { item: "Balão 1", alvo: "Brilha" },
-        { item: "Balão 2", alvo: "Lupi" },
-        { item: "Balão 3", alvo: "Fifi" },
-        { item: "Balão 4", alvo: "Téo" },
-      ],
-    },
-    {
-      tipo: "ligar",
-      titulo: "Minijogo · Amigo e o que ele leva",
-      instrucao: "Ligue cada amigo ao objeto da cena.",
-      pares: [
-        { a: "Brilha vai pra casa", b: "casa", aImagem: brilhaImg, aQuantidade: 1, bImagem: casaImg, bQuantidade: 1 },
-        { a: "Fifi ganha presente", b: "presente", aImagem: fifiImg, aQuantidade: 1, bImagem: presenteImg, bQuantidade: 1 },
-        { a: "Lupi come maçã", b: "maçã", aImagem: lupiImg, aQuantidade: 1, bImagem: macaImg, bQuantidade: 1 },
-      ],
-    },
+    { tipo: "contarQuiz", titulo: "Fase 1 · Amigo precisando de ajuda", instrucao: "O Lupi caiu no chão.", grupos: [{ imagemUrl: lupiImg, quantidade: 1, rotulo: "Lupi caído" }, { imagemUrl: tristeImg, quantidade: 1, rotulo: "Carinha triste" }], pergunta: "Quantas coisas mostram que o Lupi precisa de ajuda?", opcoes: ["1", "2", "3"], correta: 1, acerto: "O Lupi caído + a carinha triste = 2 sinais.", erro: "Olha os dois: Lupi e carinha triste." },
+    { tipo: "contarQuiz", titulo: "Fase 2 · O Brilha corre pra ajudar", instrucao: "O Brilha vem ajudar com um coração de carinho.", grupos: [{ imagemUrl: brilhaImg, quantidade: 1, rotulo: "Brilha" }, { imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração de ajuda" }], pergunta: "Quantas coisas o Brilha traz?", opcoes: ["1", "2", "3"], correta: 1, acerto: "O Brilha e o coração — 2 coisas boas!", erro: "Brilha + coração = 2." },
+    { tipo: "ligar", titulo: "Fase 3 · Combinar problema com ajuda", instrucao: "Ligue cada situação à ajuda certa.", pares: [{ a: "Amigo caído", b: "dar a mão", aImagem: lupiImg, aQuantidade: 1, bImagem: coracaoImg, bQuantidade: 1 }, { a: "Amigo triste", b: "abraço quentinho", aImagem: tristeImg, aQuantidade: 1, bImagem: felizImg, bQuantidade: 1 }, { a: "Amigo com fome", b: "dividir lanche", aImagem: confusoImg, aQuantidade: 1, bImagem: boloImg, bQuantidade: 1 }] },
+    { tipo: "arrastar", titulo: "Fase 4 · Corações de ajuda pros amigos", instrucao: "Dê 1 coração pra cada amigo que precisa.", itemImagem: coracaoImg, alvosVisuais: [{ nome: "Lupi", cor: "#F472B6", capacidade: 1, imagemUrl: lupiImg }, { nome: "Fifi", cor: "#FB923C", capacidade: 1, imagemUrl: fifiImg }, { nome: "Téo", cor: "#34D399", capacidade: 1, imagemUrl: teoImg }], pares: [{ item: "Coração pro Lupi", alvo: "Lupi" }, { item: "Coração pra Fifi", alvo: "Fifi" }, { item: "Coração pro Téo", alvo: "Téo" }] }
   ],
 
   niveis: {
     dominioMinimo: 70,
-    facil: [
-      {
-        pergunta: "Praticar ajudar os outros é uma atitude:",
-        opcoes: ["BOA", "Ruim"],
-        correta: 0,
-        explicacao: "Boa! Sempre.",
-        visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Coração" },
-      },
-      {
-        pergunta: "Quantas estrelas você acende nesta missão?",
-        opcoes: ["0", "1", "5"],
-        correta: 1,
-        explicacao: "1 estrela — a de Empatia!",
-        visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "Estrela" },
-      },
-    ],
-    medio: [
-      {
-        pergunta: "Quando você pratica ajudar os outros, o coração fica:",
-        opcoes: ["Feliz", "Triste"],
-        correta: 0,
-        explicacao: "Feliz! Boa atitude acende o coração.",
-        visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" },
-      },
-      {
-        pergunta: "Onde posso praticar?",
-        opcoes: ["Só na escola", "Em todo lugar"],
-        correta: 1,
-        explicacao: "Em qualquer lugar — casa, escola, parque.",
-        visual: { tipo: "itens", imagemUrl: casaImg, quantidade: 1, rotulo: "Casa" },
-      },
-    ],
-    dificil: [
-      {
-        pergunta: "Um amigo NÃO conhece a atitude. Faço o quê?",
-        opcoes: ["Mostro com carinho", "Rio dele"],
-        correta: 0,
-        explicacao: "Ensinar com carinho é o melhor.",
-        visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "Coruja Sábia" },
-      },
-      {
-        pergunta: "Praticar boas atitudes serve pra:",
-        opcoes: ["Ganhar prêmio", "Fazer a floresta e a gente ficar bem"],
-        correta: 1,
-        explicacao: "É pra viver melhor com todo mundo.",
-        visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Festa" },
-      },
-    ],
+    facil: [{ pergunta: "Amigo caiu. Qual atitude?", opcoes: ["Ajudar", "Rir", "Ignorar"], correta: 0, explicacao: "Ajudar é o certo.", visual: { tipo: "grupos", grupos: [{ imagemUrl: coracaoImg, quantidade: 1, rotulo: "Ajudar" }, { imagemUrl: confusoImg, quantidade: 1, rotulo: "Rir" }, { imagemUrl: tristeImg, quantidade: 1, rotulo: "Ignorar" }] } }, { pergunta: "Ajudar deixa o amigo…", opcoes: ["Feliz", "Triste"], correta: 0, explicacao: "Ajuda vira sorriso.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Feliz" } }],
+    medio: [{ pergunta: "Amigo tá chorando. Melhor atitude?", opcoes: ["Abraçar", "Sair correndo"], correta: 0, explicacao: "Abraço acolhe.", visual: { tipo: "itens", imagemUrl: coracaoImg, quantidade: 1, rotulo: "Abraço" } }, { pergunta: "Quem ajuda, sente o quê?", opcoes: ["Alegria também", "Nada"], correta: 0, explicacao: "Quem ajuda também fica feliz.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Alegria" } }],
+    dificil: [{ pergunta: "Amigo esqueceu lanche. Melhor atitude?", opcoes: ["Dividir o meu", "Comer só o meu"], correta: 0, explicacao: "Dividir é ajudar.", visual: { tipo: "itens", imagemUrl: boloImg, quantidade: 1, rotulo: "Dividir" } }, { pergunta: "Ajudar é obrigação ou presente?", opcoes: ["Presente pro amigo", "Só obrigação"], correta: 0, explicacao: "Ajudar por amor é presente.", visual: { tipo: "itens", imagemUrl: presenteImg, quantidade: 1, rotulo: "Presente" } }],
   },
 
-  proximaHabilidade: { codigo: "EI03EO08", titulo: "Regras da Floresta — combinado bom pra todos" },
+  proximaHabilidade: {
+    codigo: "EI03EO08",
+    titulo: "Regras da Floresta",
+  },
 };
 
-void piuImg;
-void bravoImg;
+// Mantém imports usados em outras cenas do mesmo lote.
+void piuImg; void confusoImg; void bravoImg; void tranquiloImg; void solImg; void livroImg;
+void ursinhoImg; void boloImg; void presenteImg; void bolaImg; void balaoImg;
+void florImg; void estrelaImg; void coracaoImg; void casaImg; void arvoreImg;
 
 export default aula;
