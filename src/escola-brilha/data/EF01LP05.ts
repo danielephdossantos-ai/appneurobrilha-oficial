@@ -250,17 +250,19 @@ const aula: Aula = {
       erro: "Escute de novo: S... o... l. O primeiro som é /S/.",
     },
     {
-      tipo: "escolherImagem",
+      tipo: "escolherFigura",
       titulo: "Fase 4 · O Eco da Floresta",
       instrucao:
         "O Brilha falou uma palavra que começa com o som /S/. Qual dessas figuras é ela?",
       pergunta: "Qual figura começa com o som /S/?",
       opcoes: [
-        { nome: "sapo", imagemUrl: sapoImg },
-        { nome: "peixe", imagemUrl: peixeImg },
-        { nome: "pato", imagemUrl: patoImg },
+        { nome: "SAPO", imagemUrl: sapoImg, rotulo: "🐸 SAPO" },
+        { nome: "PEIXE", imagemUrl: peixeImg, rotulo: "🐟 PEIXE" },
+        { nome: "PATO", imagemUrl: patoImg, rotulo: "🦆 PATO" },
       ],
-      respostaCerta: "sapo",
+      correta: 0,
+      acerto: "🐸 SAPO começa com o som /S/ — letra S!",
+      erro: "Escute de novo: /S/... procure a figura que começa assim.",
     },
     {
       tipo: "escolherEscrita",
