@@ -22,6 +22,7 @@ type Posicionado = Item & {
 export function Minijogo({ dados }: { dados: NonNullable<Aula["minijogo"]> }) {
   if (dados.tipo === "esteira") return <MinijogoEsteira dados={dados} />;
   if (dados.tipo === "cacaElementos") return <MinijogoCaca dados={dados} />;
+  if (dados.tipo === "sequencia") return <MinijogoSequencia dados={dados} />;
   return null;
 }
 
