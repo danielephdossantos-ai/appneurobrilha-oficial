@@ -71,9 +71,13 @@ const aula: Aula = {
     resposta: "A mão bate palma.",
     explicacao: "As mãos se encontram e fazem barulho: palma-palma-palma!",
     visual: {
-      tipo: "podio",
+      tipo: "escolherImagem",
       pergunta: "Qual parte do corpo bate palma?",
-      participantes: [{ nome: "Mão", imagemUrl: maoImg, posicao: 1 }, { nome: "Pé", imagemUrl: peImg, posicao: 2 }, { nome: "Cabeça", imagemUrl: cabecaImg, posicao: 3 }],
+      opcoes: [
+        { nome: "Mão", imagemUrl: maoImg },
+        { nome: "Pé", imagemUrl: peImg },
+        { nome: "Cabeça", imagemUrl: cabecaImg },
+      ],
       respostaCerta: "Mão",
     },
   },

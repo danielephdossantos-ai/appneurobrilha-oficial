@@ -233,6 +233,17 @@ export type Aula = {
           sujeitoLabel?: string;
           opcoes: string[];
           correta: number;
+        }
+      | {
+          /**
+           * Escolha visual simples — mostra N imagens lado a lado (sem pódio,
+           * sem posição). A criança toca na imagem correta. Ideal para
+           * "qual parte do corpo faz X?", "qual objeto é Y?", etc.
+           */
+          tipo: "escolherImagem";
+          pergunta: string;
+          opcoes: Array<{ nome: string; imagemUrl: string }>;
+          respostaCerta: string;
         };
   };
 
