@@ -11,6 +11,8 @@ import corujaImg from "@/assets/neuro-treino/objetos/coruja.png";
 import sementeImg from "@/assets/neuro-treino/objetos/semente.png";
 import pincelImg from "@/assets/neuro-treino/objetos/pincel.png";
 import girassolImg from "@/assets/neuro-treino/objetos/girassol.png";
+import cerejeiraImg from "@/assets/neuro-treino/objetos/cerejeira.png";
+
 
 /**
  * EF01CI01 — Ciências · 1º Ano
@@ -259,19 +261,43 @@ const aula: Aula = {
       ],
     },
     {
-      tipo: "escolherFigura",
-      titulo: "Fase 4 · Laboratório da Lupa",
-      instrucao: "A lupa do Brilha achou nervuras. Que coisa tem nervuras?",
-      pergunta: "Onde tem NERVURAS?",
-      opcoes: [
-        { nome: "ÁRVORE", imagemUrl: arvoreImg, rotulo: "🍃 FOLHA" },
-        { nome: "CARRO", imagemUrl: carroImg, rotulo: "🚗 CARRO" },
-        { nome: "LIVRO", imagemUrl: livroImg, rotulo: "📚 LIVRO" },
+      tipo: "lupa",
+      titulo: "Fase 4 · Laboratório do Brilha",
+      instrucao:
+        "Toque em cada objeto pra passar a lupa e descobrir um segredo da natureza.",
+      itens: [
+        {
+          nome: "Folha da árvore",
+          imagemUrl: arvoreImg,
+          rotulo: "🍃 FOLHA",
+          descoberta:
+            "As folhas têm nervuras — caminhos pequenininhos que levam água pra planta inteira.",
+        },
+        {
+          nome: "Casca de árvore",
+          imagemUrl: cerejeiraImg,
+          rotulo: "🌳 CASCA",
+          descoberta:
+            "A casca protege o tronco como uma capinha, e tem rachaduras onde bichinhos moram.",
+        },
+        {
+          nome: "Flor",
+          imagemUrl: florImg,
+          rotulo: "🌸 FLOR",
+          descoberta:
+            "As pétalas coloridas chamam abelhas e borboletas pra levar o pólen.",
+        },
+        {
+          nome: "Girassol",
+          imagemUrl: girassolImg,
+          rotulo: "🌻 GIRASSOL",
+          descoberta:
+            "O girassol vira o rostinho pro sol o dia todo — parece que está olhando pra ele!",
+        },
       ],
-      correta: 0,
-      acerto: "🍃 Boa! As folhas têm nervuras que levam água.",
-      erro: "Nervuras aparecem nas folhas das árvores.",
+      acerto: "🔬 Missão do laboratório concluída! Você é um cientista de verdade.",
     },
+
     {
       tipo: "escolherEscrita",
       titulo: "Fase 5 · Diário do Cientista",

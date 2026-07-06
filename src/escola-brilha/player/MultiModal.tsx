@@ -11,7 +11,9 @@ import {
   Puzzle,
   CheckCircle2,
   RefreshCw,
+  Search,
 } from "lucide-react";
+
 import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
 import { OperacaoVisual } from "./blocos/OperacaoVisual";
@@ -135,8 +137,11 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoEscolherEscrita jogo={jogo} />;
     case "selecionarLetras":
       return <JogoSelecionarLetras jogo={jogo} />;
+    case "lupa":
+      return <JogoLupa jogo={jogo} />;
   }
 }
+
 
 /* --- Selecionar Letras (multi-select por categoria + TTS por cartão) --- */
 function JogoSelecionarLetras({
@@ -1539,6 +1544,125 @@ function JogoGraficoQuiz({
         >
           Tentar de novo
         </button>
+      )}
+    </Secao>
+  );
+}
+
+/* ------------------ Laboratório da Lupa ------------------
+ * A criança toca em cada objeto. Uma lupa animada percorre a
+ * imagem e o professor fala em voz alta o detalhe descoberto.
+ * A fase conclui quando TODOS os itens foram explorados.
+ */
+function JogoLupa({
+  jogo,
+}: {
+  jogo: Extract<NonNullable<Aula["interativas"]>[number], { tipo: "lupa" }>;
+}) {
+  const [ativo, setAtivo] = useState<number | null>(null);
+  const [descobertos, setDescobertos] = useState<Set<number>>(new Set());
+  const { speak } = useDeviceTTS();
+
+  function explorar(i: number) {
+    const item = jogo.itens[i];
+    setAtivo(i);
+    setDescobertos((prev) => {
+      const s = new Set(prev);
+      s.add(i);
+      return s;
+    });
+    speak(`${item.nome}. ${item.descoberta}`, { rate: 0.95 });
+  }
+
+  const concluiu = descobertos.size === jogo.itens.length;
+  const cols =
+    jogo.itens.length <= 2
+      ? "grid-cols-2"
+      : jogo.itens.length === 3
+        ? "grid-cols-3"
+        : "grid-cols-2 sm:grid-cols-4";
+
+  return (
+    <Secao icon={Search} rotulo="Laboratório da Lupa" cor="#22D3EE">
+      <p className="font-black text-lg mb-1">{jogo.titulo}</p>
+      {jogo.instrucao && (
+        <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
+      )}
+      <div className={`grid gap-3 mb-3 ${cols}`}>
+        {jogo.itens.map((item, i) => {
+          const jaViu = descobertos.has(i);
+          const isAtivo = ativo === i;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => explorar(i)}
+              className={`relative rounded-2xl p-3 flex flex-col items-center gap-2 overflow-hidden transition ${
+                isAtivo
+                  ? "ring-4 ring-cyan-300 bg-cyan-500/20"
+                  : jaViu
+                    ? "ring-2 ring-emerald-400/60 bg-emerald-500/10"
+                    : "bg-white/15 hover:bg-white/25 active:scale-95"
+              }`}
+              aria-label={`Explorar ${item.nome}`}
+            >
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32">
+                <img
+                  src={item.imagemUrl}
+                  alt={item.nome}
+                  className="w-full h-full object-contain drop-shadow"
+                  draggable={false}
+                />
+                {isAtivo && (
+                  <motion.div
+                    initial={{ x: -20, y: -20, opacity: 0 }}
+                    animate={{
+                      x: [-20, 30, 20, -10, -20],
+                      y: [-20, 10, 30, 20, -20],
+                      opacity: [0, 1, 1, 1, 1],
+                    }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                    className="absolute inset-0 grid place-items-center pointer-events-none"
+                  >
+                    <div className="h-14 w-14 rounded-full border-4 border-cyan-200 bg-cyan-100/20 backdrop-blur-[2px] shadow-[0_0_20px_rgba(34,211,238,0.7)] flex items-center justify-center">
+                      <Search className="h-6 w-6 text-cyan-50" />
+                    </div>
+                  </motion.div>
+                )}
+                {jaViu && !isAtivo && (
+                  <div className="absolute top-1 right-1 h-6 w-6 rounded-full bg-emerald-400 text-[#0d1f55] grid place-items-center">
+                    <CheckCircle2 className="h-4 w-4" />
+                  </div>
+                )}
+              </div>
+              <span className="text-sm font-black text-white text-center">
+                {item.rotulo ?? item.nome}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      {ativo !== null && (
+        <div className="rounded-xl bg-cyan-500/15 border-2 border-cyan-300/40 p-3">
+          <p className="text-xs font-black uppercase tracking-widest text-cyan-200 mb-1">
+            🔍 Brilha descobriu…
+          </p>
+          <p className="font-black text-white">{jogo.itens[ativo].descoberta}</p>
+        </div>
+      )}
+      {concluiu && (
+        <Status
+          ok
+          texto={
+            jogo.acerto ??
+            "Você explorou tudo com a lupa do Brilha! Que cientista incrível!"
+          }
+        />
+      )}
+      {!concluiu && (
+        <p className="mt-2 text-center text-xs font-black uppercase tracking-widest text-white/60">
+          Toque em cada objeto pra descobrir ({descobertos.size}/{jogo.itens.length})
+        </p>
       )}
     </Secao>
   );

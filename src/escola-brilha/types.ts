@@ -569,7 +569,28 @@ export type Aula = {
         acerto?: string;
         erro?: string;
       }
+    | {
+        /**
+         * Laboratório da Lupa — a criança toca em cada objeto e uma
+         * lupa animada percorre a imagem revelando um detalhe (voz + texto).
+         * Ideal para Ciências: explorar folhas, cascas, pedras, flores.
+         * A fase é concluída quando TODOS os objetos foram explorados.
+         */
+        tipo: "lupa";
+        titulo: string;
+        instrucao?: string;
+        itens: Array<{
+          nome: string;
+          imagemUrl: string;
+          /** Frase revelada (falada em voz alta) ao passar a lupa. */
+          descoberta: string;
+          /** Emoji/legenda curta exibida abaixo da imagem. */
+          rotulo?: string;
+        }>;
+        acerto?: string;
+      }
   >;
+
 
 
 
