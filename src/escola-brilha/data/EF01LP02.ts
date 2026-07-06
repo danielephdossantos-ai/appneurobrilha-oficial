@@ -213,7 +213,8 @@ const aula: Aula = {
       tipo: "contarQuiz",
       titulo: "Fase 1 · Ouça e escolha",
       instrucao:
-        "O Brilha falou a palavra 'SOL' (S · O · L). Toque na figura certa.",
+        "O Brilha falou a palavra 'SOL' (S · O · L). Veja as figuras abaixo e toque no botão com o nome certo.",
+
       grupos: [
         { imagemUrl: solImg, quantidade: 1, rotulo: "☀️ SOL" },
         { imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BANANA" },
@@ -265,7 +266,8 @@ const aula: Aula = {
       tipo: "contarQuiz",
       titulo: "Fase 5 · Oficina do Brilha",
       instrucao:
-        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Qual figura é?",
+        "O Brilha falou: 'CACHORRO' (C · A · C · H · O · R · R · O). Veja as figuras e toque no botão com o nome certo.",
+
       grupos: [
         { imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" },
         { imagemUrl: gatoImg, quantidade: 1, rotulo: "🐱" },
