@@ -619,7 +619,46 @@ export type Aula = {
   };
 
 
+  /**
+   * Minijogo Brilha (opcional) — mini-experiência lúdica temática da aula.
+   * Renderizado como bloco próprio antes do Quiz.
+   *
+   * Tipo "cacaElementos": a criança encontra N elementos escondidos no
+   * cenário dentro de um tempo limite. Cada acerto "ilumina" o mapa.
+   */
+  minijogo?:
+    | {
+        tipo: "cacaElementos";
+        titulo: string;
+        objetivo: string;
+        /** Tempo em segundos. Padrão: 90. */
+        tempoSegundos?: number;
+        /** Elementos a encontrar (imagem + rótulo curto). */
+        elementos: Array<{ nome: string; imagemUrl: string; rotulo?: string }>;
+        /** Frase falada quando o minijogo é concluído. */
+        acerto?: string;
+      };
+
+  /**
+   * Missão em Família (opcional) — atividade offline para fazer com um
+   * responsável. Renderizada como bloco próprio antes da Conclusão.
+   * A criança/família marcam "Feito!" e podem registrar cada item.
+   */
+  missaoFamilia?: {
+    titulo: string;
+    instrucao: string;
+    /** Campos que a família preenche depois da atividade. */
+    registros?: Array<{
+      label: string;
+      /** "texto" (livre) | "sim_nao" (radio) | "cor" (paleta rápida). */
+      tipo?: "texto" | "sim_nao" | "cor";
+    }>;
+    /** Habilita botão de anexar foto no Diário. Padrão: false. */
+    permitirFoto?: boolean;
+  };
+
   // Opcional — mantido pra compatibilidade, não é mais renderizado como bloco
   motivacao?: string;
   proximaHabilidade?: { codigo: string; titulo?: string };
+
 };
