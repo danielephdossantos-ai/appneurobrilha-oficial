@@ -1117,7 +1117,7 @@ function JogoContarQuiz({
       </div>
 
       <p className="font-black text-base mb-2 text-center">{jogo.pergunta}</p>
-      <div className="grid grid-cols-3 gap-2 mb-2">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-2">
         {jogo.opcoes.map((op, i) => {
           const selecionada = escolha === i;
           const certa = escolha !== null && i === jogo.correta;
@@ -1127,7 +1127,7 @@ function JogoContarQuiz({
               key={i}
               onClick={() => setEscolha(i)}
               disabled={escolha !== null && acertou}
-              className={`h-14 rounded-2xl font-black text-xl border-4 transition-all ${
+              className={`min-h-14 px-1.5 py-2 rounded-2xl font-black text-xs sm:text-base leading-tight text-center break-words min-w-0 border-4 transition-all ${
                 certa
                   ? "bg-[#22C55E] text-white border-white"
                   : errada
