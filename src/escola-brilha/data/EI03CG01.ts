@@ -99,9 +99,9 @@ const aula: Aula = {
   },
 
   quiz: [
-    { pergunta: "Com o que a gente ANDA?", opcoes: ["Com as pernas", "Com o cotovelo"], correta: 0, explicacao: "As pernas levam a gente pra qualquer lugar.", visual: { tipo: "itens", imagemUrl: fifiImg, quantidade: 1, rotulo: "Fifi caminhando" } },
-    { pergunta: "Com o que a gente OLHA o mundo?", opcoes: ["Com os olhos", "Com os pés"], correta: 0, explicacao: "Os olhos enxergam tudo.", visual: { tipo: "itens", imagemUrl: felizImg, quantidade: 1, rotulo: "Rostinho feliz" } },
-    { pergunta: "Quantos braços eu tenho?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "Todo mundo tem 2 braços.", visual: { tipo: "grupos", grupos: [{ imagemUrl: fifiImg, quantidade: 1, rotulo: "Braço direito", cor: "#F472B6" }, { imagemUrl: fifiImg, quantidade: 1, rotulo: "Braço esquerdo", cor: "#60A5FA" }] } }
+    { pergunta: "Com o que a gente ANDA?", opcoes: ["Com as pernas", "Com o cotovelo"], correta: 0, explicacao: "As pernas levam a gente pra qualquer lugar.", visual: { tipo: "itens", imagemUrl: peImg, quantidade: 2, rotulo: "Pés" } },
+    { pergunta: "Com o que a gente OLHA o mundo?", opcoes: ["Com os olhos", "Com os pés"], correta: 0, explicacao: "Os olhos enxergam tudo.", visual: { tipo: "itens", imagemUrl: olhoImg, quantidade: 2, rotulo: "Olhos" } },
+    { pergunta: "Quantas mãos eu tenho?", opcoes: ["1", "2", "3"], correta: 1, explicacao: "Todo mundo tem 2 mãos.", visual: { tipo: "grupos", grupos: [{ imagemUrl: maoImg, quantidade: 1, rotulo: "Mão direita", cor: "#F472B6" }, { imagemUrl: maoImg, quantidade: 1, rotulo: "Mão esquerda", cor: "#60A5FA" }] } }
   ],
 
   conclusao: "🏅 Medalha conquistada: Explorador do Corpo! A PRIMEIRA ESTRELA ⭐ do Mundo 2 acendeu. Missão em Casa: mostre pra sua família 3 movimentos que você aprendeu.",
