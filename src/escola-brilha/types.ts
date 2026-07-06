@@ -524,7 +524,29 @@ export type Aula = {
         acerto?: string;
         erro?: string;
       }
+    | {
+        /**
+         * Comparar escritas convencionais/não convencionais (EF01LP03+).
+         * Mostra UMA figura de referência no topo + várias grafias (texto)
+         * como botões grandes. Ao tocar, o TTS lê a grafia exatamente como
+         * está escrita (mesmo se estiver errada) pra criança ouvir a
+         * diferença sonora. Valida a escrita correta.
+         */
+        tipo: "escolherEscrita";
+        titulo: string;
+        instrucao?: string;
+        pergunta?: string;
+        /** Figura de referência mostrada no topo. */
+        figura: { imagemUrl: string; rotulo?: string };
+        /** Grafias candidatas. */
+        opcoes: string[];
+        /** Índice da grafia correta em `opcoes`. */
+        correta: number;
+        acerto?: string;
+        erro?: string;
+      }
   >;
+
 
 
 
