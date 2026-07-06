@@ -210,22 +210,20 @@ const aula: Aula = {
 
   interativas: [
     {
-      tipo: "contarQuiz",
-      titulo: "Fase 1 · Ouça e escolha",
+      tipo: "escolherFigura",
+      titulo: "Fase 1 · Ouça e toque na figura",
       instrucao:
-        "O Brilha falou a palavra 'SOL' (S · O · L). Veja as figuras abaixo e toque no botão com o nome certo.",
-
-      grupos: [
-        { imagemUrl: solImg, quantidade: 1, rotulo: "☀️ SOL" },
-        { imagemUrl: bananaImg, quantidade: 1, rotulo: "🍌 BANANA" },
-        { imagemUrl: bolaImg, quantidade: 1, rotulo: "⚽ BOLA" },
+        "O Brilha falou a palavra 'SOL' (S · O · L). Toque na figura certa — a professora vai falar o nome.",
+      opcoes: [
+        { nome: "SOL", imagemUrl: solImg, rotulo: "☀️ SOL" },
+        { nome: "BANANA", imagemUrl: bananaImg, rotulo: "🍌 BANANA" },
+        { nome: "BOLA", imagemUrl: bolaImg, rotulo: "⚽ BOLA" },
       ],
-      pergunta: "Qual figura combina com a palavra SOL?",
-      opcoes: ["Sol", "Banana", "Bola"],
       correta: 0,
       acerto: "Isso! SOL começa com o som SSS — é a estrela do dia!",
-      erro: "Escuta de novo: S · O · L. Que figura começa com o som SSS?",
+      erro: "Escute de novo: S · O · L. Toque na figura que começa com o som SSS.",
     },
+
     {
       tipo: "contarQuiz",
       titulo: "Fase 2 · Complete a palavra",
