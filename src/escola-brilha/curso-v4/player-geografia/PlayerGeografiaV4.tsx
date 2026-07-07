@@ -233,6 +233,7 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               if (j.tipo === "selecionarItens") return <SelecionarItens data={j.bloco} />;
               if (j.tipo === "mapaClicavel") return <MapaClicavel data={j.bloco} />;
               if (j.tipo === "orientacaoEspacial") return <OrientacaoEspacial data={j.bloco} />;
+              if (j.tipo === "galeriaExploracao") return <GaleriaInterativa cards={j.bloco.cards} instrucaoExtra={j.bloco.instrucao} />;
               return null;
             })()}
           </Secao>
