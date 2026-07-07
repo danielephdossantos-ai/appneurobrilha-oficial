@@ -16,8 +16,81 @@ import type { EnsinoVisualBloco } from "../../types";
 export function EnsinoVisual({ bloco }: { bloco: EnsinoVisualBloco }) {
   if (bloco.tipo === "maiusculaMinuscula") return <MaiusculaMinuscula bloco={bloco} />;
   if (bloco.tipo === "fraseComPonto") return <FraseComPonto bloco={bloco} />;
+  if (bloco.tipo === "alfabetoCompleto") return <AlfabetoCompleto bloco={bloco} />;
   return null;
 }
+
+// ---------- Alfabeto completo (26 letras clicáveis) ------------------
+
+const ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const EXEMPLOS_PADRAO: Record<string, string> = {
+  A: "ABELHA", B: "BOLA", C: "CASA", D: "DADO", E: "ESCOLA",
+  F: "FLOR", G: "GATO", H: "HIENA", I: "IGREJA", J: "JACARÉ",
+  K: "KIWI", L: "LIVRO", M: "MÃO", N: "NARIZ", O: "OVO",
+  P: "PATO", Q: "QUEIJO", R: "RATO", S: "SOL", T: "TATU",
+  U: "UVA", V: "VACA", W: "WAFFLE", X: "XÍCARA", Y: "IOGURTE", Z: "ZEBRA",
+};
+
+function AlfabetoCompleto({
+  bloco,
+}: {
+  bloco: Extract<EnsinoVisualBloco, { tipo: "alfabetoCompleto" }>;
+}) {
+  const [ativo, setAtivo] = useState<string | null>(null);
+
+  const falar = (letra: string) => {
+    stopSpeaking();
+    setAtivo(letra);
+    const nome = nomeDaLetra(letra);
+    const exemplo = bloco.exemplos?.[letra] ?? EXEMPLOS_PADRAO[letra];
+    const texto = exemplo
+      ? `${nome}. ${nome} de ${exemplo}.`
+      : `${nome}.`;
+    speakChunked(texto);
+    setTimeout(() => setAtivo(null), 2000);
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="rounded-xl bg-amber-500/10 border border-amber-300/30 p-3 text-sm text-amber-100">
+        🔤 <b>Toque em cada letra</b> pra ouvir o nome dela. O alfabeto tem <b>26 letras</b> na
+        ordem: <b>A → Z</b>. Essa ordem NUNCA muda.
+      </div>
+
+      <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-2">
+        {ALFABETO.map((L) => {
+          const isAtivo = ativo === L;
+          const exemplo = bloco.exemplos?.[L] ?? EXEMPLOS_PADRAO[L];
+          return (
+            <button
+              key={L}
+              onClick={() => falar(L)}
+              className={`aspect-square rounded-xl border-2 flex flex-col items-center justify-center transition transform ${
+                isAtivo
+                  ? "scale-110 border-amber-300 bg-amber-400/30 shadow-lg shadow-amber-400/40"
+                  : "border-white/15 bg-white/5 hover:bg-white/10"
+              }`}
+              title={exemplo ? `${L} de ${exemplo}` : L}
+            >
+              <div className="text-2xl md:text-3xl font-black text-emerald-300 leading-none">
+                {L}
+              </div>
+              <div className="text-lg md:text-xl font-black text-sky-300 leading-none mt-0.5">
+                {L.toLowerCase()}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="rounded-xl bg-emerald-500/10 border border-emerald-400/30 p-3 text-xs text-emerald-100">
+        💡 Cada letra tem 2 desenhos: a <b className="text-emerald-300">MAIÚSCULA</b> (letra
+        grande) e a <b className="text-sky-300">minúscula</b> (letra pequena). São a MESMA letra.
+      </div>
+    </div>
+  );
+}
+
 
 // ---------- Maiúscula × Minúscula ------------------------------------
 
