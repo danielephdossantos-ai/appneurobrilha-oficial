@@ -90,12 +90,12 @@ export const aula05: AulaGeografiaV4 = {
   momento06_euFaco: {
     enunciado: "Brilha monta o bairro dele:",
     passos: [
-      "— Coloco umas CASAS aqui.",
-      "— Perto delas, uma ESCOLA e uma PRAÇA.",
-      "— Um POSTO DE SAÚDE em outro canto.",
-      "— MERCADO e PADARIA no meio, pra ser fácil chegar.",
-      "— LIXEIRAS de reciclagem espalhadas.",
-      "Pronto — meu bairro tem tudo!",
+      { texto: "— Coloco umas CASAS aqui.", imagemUrl: casa },
+      { texto: "— Perto delas, uma ESCOLA e uma PRAÇA.", imagemUrl: escola },
+      { texto: "— Um POSTO DE SAÚDE em outro canto.", imagemUrl: postoSaude },
+      { texto: "— MERCADO e PADARIA no meio, pra ser fácil chegar.", imagemUrl: mercado },
+      { texto: "— LIXEIRAS de reciclagem espalhadas.", imagemUrl: lixeiraRec },
+      { texto: "Pronto — meu bairro tem tudo!", imagemUrl: bairro },
     ],
     visualUrl: brilha,
   },

@@ -182,13 +182,21 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <img src={aula.momento06_euFaco.visualUrl} alt="" className="w-32 h-32 object-contain mx-auto mb-3" />
             )}
             <ol className="space-y-2 max-w-xl mx-auto">
-              {aula.momento06_euFaco.passos.map((p, i) => (
-                <li key={i} className="flex gap-3 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
-                  <span className="w-7 h-7 shrink-0 rounded-full bg-amber-400 text-[#082414] font-black grid place-items-center text-sm">{i + 1}</span>
-                  <span className="text-white/90 leading-snug">{p}</span>
-                </li>
-              ))}
+              {aula.momento06_euFaco.passos.map((p, i) => {
+                const texto = typeof p === "string" ? p : p.texto;
+                const imagemUrl = typeof p === "string" ? undefined : p.imagemUrl;
+                return (
+                  <li key={i} className="flex gap-3 items-center bg-white/5 border border-white/10 rounded-xl px-3 py-2">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-amber-400 text-[#082414] font-black grid place-items-center text-sm">{i + 1}</span>
+                    {imagemUrl && (
+                      <img src={imagemUrl} alt="" className="w-14 h-14 object-contain shrink-0" />
+                    )}
+                    <span className="text-white/90 leading-snug">{texto}</span>
+                  </li>
+                );
+              })}
             </ol>
+
           </Secao>
 
           <Secao id="m7" label="🤝 Nós fazemos (junto)">
