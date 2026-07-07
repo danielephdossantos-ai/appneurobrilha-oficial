@@ -128,16 +128,13 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             {m3.mapa && <MapaClicavel data={m3.mapa} />}
             {m3.comparador && <ComparadorLadoALado data={m3.comparador} />}
             {m3.galeria && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {m3.galeria.map((f, i) => (
-                  <div key={i} className="rounded-2xl overflow-hidden bg-white/10 border border-white/20">
-                    <div className="aspect-square bg-white grid place-items-center">
-                      <img src={f.imagemUrl} alt={f.legenda} className="w-full h-full object-contain" />
-                    </div>
-                    <div className="text-xs text-white/80 text-center p-2">{f.legenda}</div>
-                  </div>
-                ))}
-              </div>
+              <GaleriaInterativa
+                cards={m3.galeria.map((f) => ({
+                  imagemUrl: f.imagemUrl,
+                  titulo: f.legenda,
+                  descricao: f.legenda,
+                }))}
+              />
             )}
           </Secao>
 
