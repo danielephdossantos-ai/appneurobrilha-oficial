@@ -1,0 +1,355 @@
+import type { AulaPortuguesV4 } from "../../types";
+import biblioteca from "@/assets/neuro-treino/objetos/biblioteca.png";
+import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
+import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import livro from "@/assets/neuro-treino/objetos/livro.png";
+import livros from "@/assets/neuro-treino/objetos/livros.png";
+import menina from "@/assets/neuro-treino/objetos/menina.png";
+import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import passaro from "@/assets/neuro-treino/objetos/passaro.png";
+import arvore from "@/assets/neuro-treino/objetos/arvore.png";
+
+/**
+ * Aula 1 — O Portal da Biblioteca
+ * -------------------------------------------------------------
+ * Missão inaugural da Unidade 1 (A Biblioteca Encantada).
+ * Brilha atravessa o portal da biblioteca esquecida, conhece
+ * a Bibliotecária Aurora e desperta o primeiro pequeno livro.
+ *
+ * Foco pedagógico:
+ *  - Familiarizar com a rotina de leitura (título, capa, texto).
+ *  - Localizar informações explícitas: quem, onde, o quê.
+ *  - Ler pequenas frases com atenção e responder com base no
+ *    que ESTÁ ESCRITO (não no que a criança imagina).
+ *
+ * BNCC (marcadas conforme o pedido da unidade — a mecânica cobre
+ * leitura inicial e vocabulário; ortografia/silabação será
+ * aprofundada em aulas específicas mais adiante):
+ *  EF02LP01 · EF02LP03 · EF02LP04
+ */
+export const aula01: AulaPortuguesV4 = {
+  slug: "aula-01-portal-biblioteca",
+  titulo: "O Portal da Biblioteca",
+  iconeTrilha: "📖",
+  bncc: ["EF02LP01", "EF02LP03", "EF02LP04"],
+  duracaoMin: 15,
+
+  // ------------------------------------------------------------
+  // 1 · MOTIVAÇÃO — a história abre a aula
+  // ------------------------------------------------------------
+  momento01_motivacao: {
+    titulo: "Brilha encontra a Biblioteca Encantada",
+    historia:
+      "Brilha estava passeando quando ouviu um sussurro vindo de uma casa antiga. Era uma BIBLIOTECA cheia de livros ADORMECIDOS. Uma senhora simpática abriu a porta: — Eu sou Aurora, a Bibliotecária. Pra acordar os livros, alguém precisa LER as histórias deles. Você me ajuda?",
+    imagemUrl: biblioteca,
+  },
+
+  // ------------------------------------------------------------
+  // 2 · PREVISÃO — o primeiro livro tem capa e título
+  // ------------------------------------------------------------
+  momento02_previsao: {
+    instrucao:
+      "Aurora tira o primeiro livro da estante. Olhe a capa e o título — sobre o que essa história pode falar?",
+    bloco: {
+      titulo: "O Passarinho da Janela",
+      capaImagemUrl: livro,
+      pistas: [
+        { imagemUrl: passaro, nome: "Um passarinho" },
+        { imagemUrl: arvore, nome: "Uma árvore" },
+      ],
+      pergunta: "Antes de ler: sobre o que essa história vai falar?",
+      hipoteses: [
+        {
+          texto: "Um passarinho que aparece perto de uma janela.",
+          imagemUrl: passaro,
+        },
+        {
+          texto: "Um cachorro que aprendeu a nadar.",
+          imagemUrl: livro,
+        },
+        {
+          texto: "Uma menina que virou uma flor.",
+          imagemUrl: livro,
+        },
+      ],
+      respostaCerta: 0,
+      feedbackAcerto:
+        "🎉 Muito bem! Bom leitor usa TÍTULO e IMAGEM da capa pra imaginar a história.",
+      feedbackErro:
+        "Olha o título de novo: 'O Passarinho da Janela'. As pistas na capa são um passarinho e uma árvore — a história combina com a primeira opção.",
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 3 · VOCABULÁRIO — 2 palavras chave que aparecerão na leitura
+  // ------------------------------------------------------------
+  momento03_vocabulario: {
+    instrucao: "Antes de entrar na história, conheça 2 palavras que vão aparecer nela.",
+    cards: [
+      {
+        palavra: "janela",
+        explicacao:
+          "É a abertura na parede da casa por onde a gente vê a rua e entra o vento.",
+        exemplo: "Da janela do quarto dá pra ver a árvore lá fora.",
+        imagemUrl: livro,
+      },
+      {
+        palavra: "poleiro",
+        explicacao: "É o galho ou barzinho onde o passarinho gosta de pousar.",
+        exemplo: "O canário voltou pro poleiro pra dormir.",
+        imagemUrl: passaro,
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // 4 · LEITURA GUIADA — texto curto (nível 2º ano começo)
+  // ------------------------------------------------------------
+  momento04_leituraGuiada: {
+    instrucao:
+      "Aurora leu a primeira vez pra você. Agora leia junto — pode apertar 🔊 pra ouvir se quiser.",
+    leitura: {
+      titulo: "O Passarinho da Janela",
+      imagemUrl: passaro,
+      legendaImagem: "O passarinho de Aurora",
+      destacar: ["janela", "poleiro", "Aurora"],
+      paragrafos: [
+        "Todo dia de manhã, um passarinho azul pousa na janela de Aurora.",
+        "Ele fica no poleiro que ela colocou perto do vidro e canta uma música bem baixinho.",
+        "Aurora abre a janela devagar, coloca um pouquinho de fruta e sorri. O passarinho é o amigo dela desde o inverno passado.",
+      ],
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 5 · COMPREENSÃO — o que ESTÁ escrito no texto
+  // ------------------------------------------------------------
+  momento05_compreensao: {
+    instrucao:
+      "Volte no texto se precisar. As respostas estão TODAS escritas nele.",
+    perguntas: [
+      {
+        pergunta: "De que cor é o passarinho?",
+        opcoes: ["Vermelho", "Azul", "Amarelo"],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso! Está escrito 'passarinho AZUL'.",
+        feedbackErro: "Procure no primeiro parágrafo — a cor está antes da palavra 'pousa'.",
+        ondeEstaNoTexto: "…um passarinho azul pousa na janela…",
+      },
+      {
+        pergunta: "Em que hora do dia o passarinho aparece?",
+        opcoes: ["De manhã", "À tarde", "De noite"],
+        correta: 0,
+        feedbackAcerto: "🎉 Boa! 'Todo dia de MANHÃ'.",
+        feedbackErro: "A primeira frase começa com 'Todo dia de …'. Olhe lá.",
+        ondeEstaNoTexto: "Todo dia de manhã, um passarinho azul pousa…",
+      },
+      {
+        pergunta: "O que Aurora coloca pro passarinho comer?",
+        opcoes: ["Pão", "Fruta", "Semente"],
+        correta: 1,
+        feedbackAcerto: "🎉 Muito bem! Está escrito 'pouquinho de FRUTA'.",
+        feedbackErro: "A resposta está no último parágrafo, logo depois de 'coloca'.",
+        ondeEstaNoTexto: "…coloca um pouquinho de fruta e sorri.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // 6 · PERSONAGENS & CENÁRIO — quem faz e onde acontece
+  // ------------------------------------------------------------
+  momento06_personagensCenario: {
+    instrucao: "Personagens são quem FAZ as ações. Cenário é ONDE acontece.",
+    perguntas: [
+      {
+        pergunta: "Quem são os personagens dessa história?",
+        opcoes: [
+          "Só o passarinho",
+          "Aurora e o passarinho",
+          "Aurora, o passarinho e Brilha",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🎉 Isso! No texto aparecem AURORA e o PASSARINHO. Brilha está na história MAIOR, mas não nessa página.",
+        feedbackErro:
+          "Volte no texto: quem aparece agindo? Aurora abre a janela; o passarinho pousa. São dois personagens.",
+      },
+      {
+        pergunta: "Onde acontece a história do passarinho?",
+        opcoes: [
+          "Na floresta",
+          "Na janela da casa de Aurora",
+          "Dentro de um livro fechado",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🎉 Certo! O passarinho pousa na JANELA de Aurora — é onde a história acontece.",
+        feedbackErro:
+          "A palavra que aparece TRÊS vezes no texto é 'janela'. É onde acontece.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // 7 · SEQUÊNCIA — reconstruir a ordem dos acontecimentos
+  // ------------------------------------------------------------
+  momento07_sequencia: {
+    instrucao: "As páginas dessa história embaralharam. Coloque na ordem certa.",
+    bloco: {
+      instrucao: "Começo → meio → fim.",
+      itens: [
+        {
+          id: "p1",
+          texto: "De manhã, o passarinho pousa na janela.",
+          imagemUrl: passaro,
+        },
+        {
+          id: "p2",
+          texto: "Aurora abre a janela devagarinho.",
+          imagemUrl: bibliotecaria,
+        },
+        {
+          id: "p3",
+          texto: "Aurora coloca uma frutinha e o passarinho come feliz.",
+          imagemUrl: estrela,
+        },
+      ],
+      ordemCerta: ["p1", "p2", "p3"],
+      feedbackAcerto: "🎉 Perfeito! Você contou a história do jeito certo.",
+      feedbackErro:
+        "Pense: o passarinho CHEGA primeiro. Depois Aurora ABRE a janela. Por último, ela COLOCA a fruta.",
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 8 · LEITURA INDEPENDENTE — texto novo, criança lê sozinha
+  // ------------------------------------------------------------
+  momento08_leituraIndependente: {
+    instrucao: "Agora leia sozinho. Depois responda as duas perguntas.",
+    leitura: {
+      titulo: "O nome do passarinho",
+      imagemUrl: livros,
+      destacar: ["Piu", "amigo"],
+      paragrafos: [
+        "Aurora deu um nome para o passarinho. Ele se chama Piu.",
+        "Piu é o primeiro amigo da biblioteca. Todo livro que Aurora conta, Piu escuta do poleiro.",
+      ],
+    },
+    perguntas: [
+      {
+        pergunta: "Qual é o nome do passarinho?",
+        opcoes: ["Piu", "Aurora", "Brilha"],
+        correta: 0,
+        feedbackAcerto: "🎉 Isso! O nome é PIU.",
+        feedbackErro: "Está na primeira frase: 'Ele se chama …'.",
+        ondeEstaNoTexto: "Ele se chama Piu.",
+      },
+      {
+        pergunta: "Piu é o primeiro amigo de quem?",
+        opcoes: ["Do cachorro", "Da biblioteca", "Da escola"],
+        correta: 1,
+        feedbackAcerto: "🎉 Boa! Da BIBLIOTECA.",
+        feedbackErro: "Está na segunda frase: 'primeiro amigo da …'.",
+        ondeEstaNoTexto: "Piu é o primeiro amigo da biblioteca.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // 9 · REVISÃO — o que aprendemos
+  // ------------------------------------------------------------
+  momento09_revisao: {
+    pontos: [
+      "Antes de ler, olhamos TÍTULO e IMAGEM da capa pra imaginar a história.",
+      "Palavras novas: JANELA (abertura na parede) e POLEIRO (onde o passarinho pousa).",
+      "As respostas estão ESCRITAS no texto — a gente volta pra procurar.",
+      "Personagens = quem FAZ as coisas. Cenário = ONDE acontece.",
+    ],
+    miniDesafio: {
+      pergunta: "Pra descobrir a resposta certa em um texto, o melhor é…",
+      opcoes: [
+        "Adivinhar do que a gente acha que é",
+        "Voltar no texto e procurar onde está escrito",
+        "Pular a pergunta",
+      ],
+      correta: 1,
+      feedbackAcerto: "🎉 Isso! Bom leitor VOLTA no texto pra procurar.",
+      feedbackErro: "Adivinhar não é ler. Bom leitor sempre VOLTA no texto.",
+    },
+  },
+
+  // ------------------------------------------------------------
+  // 10 · AVALIAÇÃO — 5 perguntas mistas registrando desempenho
+  // ------------------------------------------------------------
+  momento10_avaliacao: {
+    perguntas: [
+      {
+        pergunta: "1/5 — O que a gente faz ANTES de começar a ler um livro novo?",
+        opcoes: [
+          "Fecha o livro e vai brincar",
+          "Olha o título e a capa pra imaginar do que fala",
+          "Lê só a última página",
+        ],
+        correta: 1,
+        feedbackAcerto: "🎉 TÍTULO + CAPA.",
+        feedbackErro: "A gente olha TÍTULO e CAPA primeiro pra imaginar a história.",
+      },
+      {
+        pergunta: "2/5 — De que cor era o passarinho da Aurora?",
+        opcoes: ["Verde", "Azul", "Vermelho"],
+        correta: 1,
+        feedbackAcerto: "🎉 Azul!",
+        feedbackErro: "O texto diz 'passarinho AZUL'.",
+      },
+      {
+        pergunta: "3/5 — O que quer dizer POLEIRO?",
+        opcoes: [
+          "Uma comida de passarinho",
+          "O galho ou barzinho onde o passarinho pousa",
+          "Um tipo de janela",
+        ],
+        correta: 1,
+        feedbackAcerto: "🎉 Isso!",
+        feedbackErro: "Poleiro é onde o passarinho POUSA.",
+      },
+      {
+        pergunta: "4/5 — Aurora é a…",
+        opcoes: ["Professora", "Bibliotecária", "Cozinheira"],
+        correta: 1,
+        feedbackAcerto: "🎉 Bibliotecária!",
+        feedbackErro: "Aurora cuida dos LIVROS — ela é bibliotecária.",
+      },
+      {
+        pergunta: "5/5 — Qual o nome do passarinho?",
+        opcoes: ["Piu", "Brilha", "Aurora"],
+        correta: 0,
+        feedbackAcerto: "🎉 PIU! Livro despertado! 🌟",
+        feedbackErro: "O texto do 'nome do passarinho' diz: 'Ele se chama PIU'.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------
+  // 11 · MISSÃO EM FAMÍLIA — leitura em casa
+  // ------------------------------------------------------------
+  momento11_missaoFamilia: {
+    titulo: "🏠 10 minutinhos de leitura",
+    materiais: ["Um livro qualquer da casa (ou revista, gibi)"],
+    passos: [
+      "1) Escolham JUNTOS um livro que a criança curta.",
+      "2) Antes de abrir: olhem CAPA e TÍTULO. A criança imagina do que fala.",
+      "3) Leiam 10 minutinhos — pode ler junto, revezando frases.",
+      "4) No fim, conversem: quem era o personagem? Onde acontecia? Qual foi a parte preferida?",
+    ],
+    registro:
+      "🗣️ Um pequeno áudio ou frase escrita: 'A parte que eu mais gostei foi…'.",
+  },
+
+  // ------------------------------------------------------------
+  // Recompensas parciais (a medalha grande vem só no final da unidade)
+  // ------------------------------------------------------------
+  recompensa: {
+    xp: 100,
+    moedas: 60,
+  },
+};

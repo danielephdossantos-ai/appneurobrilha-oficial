@@ -1,16 +1,14 @@
 import type { CursoPortugues } from "../types";
-import { unidadeDemo } from "./unidade-demo";
+import { unidade1 } from "./unidade-1";
 
 /**
  * Curso: Língua Portuguesa 2º Ano — "A Biblioteca Encantada"
  * -----------------------------------------------------------
- * Contrato novo AulaPortuguesV4. Player próprio em
+ * Contrato AulaPortuguesV4. Player próprio em
  * `curso-v4/player-portugues/PlayerPortuguesV4.tsx`.
  *
- * Neste momento contém APENAS uma aula demo pra validar os 5 blocos
- * novos (leitura, previsão, vocabulário, ordenar sequência e quiz
- * texto). A Unidade 1 real será escrita depois que você aprovar
- * visualmente cada bloco.
+ * As unidades são adicionadas uma a uma conforme a criança avança
+ * na história. Cada unidade é uma nova ala da Biblioteca Encantada.
  */
 const curso: CursoPortugues = {
   slug: "portugues-2ano",
@@ -22,7 +20,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#a855f7",
   corSecundaria: "#1a0d3d",
   tipoAula: "portugues",
-  unidades: [unidadeDemo],
+  unidades: [unidade1],
 };
 
 export default curso;
