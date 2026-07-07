@@ -105,6 +105,8 @@ export const aula02: AulaPortuguesV4 = {
       },
     ],
   },
+
+  momento04_leituraGuiada: {
     instrucao:
       "Leia com Brilha. Preste atenção na PRIMEIRA letra de cada palavra.",
     leitura: {
