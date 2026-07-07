@@ -9,6 +9,7 @@ import { QuizTexto } from "./blocos/QuizTexto";
 import { OrdenarSequencia } from "./blocos/OrdenarSequencia";
 import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
+import { MontarPalavra } from "./blocos/MontarPalavra";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -180,16 +181,27 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </Secao>
 
           {/* Minijogo (opcional) */}
-          {aula.momento_minijogo && (
-            <Secao id="mmini" label={`🎮 ${aula.momento_minijogo.titulo}`}>
-              <Instrucao>{aula.momento_minijogo.instrucao}</Instrucao>
-              {aula.momento_minijogo.jogo.tipo === "arrastarParaAlvo" ? (
-                <ArrastarParaAlvo data={aula.momento_minijogo.jogo.bloco} />
-              ) : (
-                <SelecionarItens data={aula.momento_minijogo.jogo.bloco} />
-              )}
-            </Secao>
-          )}
+          {aula.momento_minijogo &&
+            (() => {
+              const jogo = aula.momento_minijogo.jogo;
+              return (
+                <Secao id="mmini" label={`🎮 ${aula.momento_minijogo.titulo}`}>
+                  <Instrucao>{aula.momento_minijogo.instrucao}</Instrucao>
+                  {jogo.tipo === "arrastarParaAlvo" && (
+                    <ArrastarParaAlvo data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "selecionarItens" && (
+                    <SelecionarItens data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "montarPalavra" && (
+                    <MontarPalavra data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "ordenarSequencia" && (
+                    <OrdenarSequencia data={jogo.bloco} />
+                  )}
+                </Secao>
+              );
+            })()}
 
           {/* M9 · Revisão */}
           <Secao id="m9" label="🔁 Revisão">

@@ -434,9 +434,33 @@ export type SelecionarItensData = {
   feedbackErro: string;
 };
 
+/**
+ * Montar palavras a partir de sílabas embaralhadas.
+ * Cada "palavra" da atividade tem um alvo (palavraCerta), as sílabas
+ * que a compõem, e opcionalmente imagem + frase de contexto.
+ */
+export type MontarPalavraData = {
+  instrucao: string;
+  palavras: Array<{
+    id: string;
+    /** ex.: "CASA" — o que a criança deve montar. */
+    palavraCerta: string;
+    /** ex.: ["CA","SA"] — na ORDEM correta (o componente embaralha). */
+    silabas: string[];
+    /** imagem que aparece quando acerta (opcional). */
+    imagemUrl?: string;
+    /** frase de contexto lida no acerto (opcional). */
+    frase?: string;
+  }>;
+  feedbackAcerto: string;
+  feedbackErro: string;
+};
+
 export type MinijogoPT =
   | { tipo: "arrastarParaAlvo"; titulo: string; bloco: ArrastarParaAlvoData }
-  | { tipo: "selecionarItens"; titulo: string; bloco: SelecionarItensData };
+  | { tipo: "selecionarItens"; titulo: string; bloco: SelecionarItensData }
+  | { tipo: "montarPalavra"; titulo: string; bloco: MontarPalavraData }
+  | { tipo: "ordenarSequencia"; titulo: string; bloco: OrdenarSequenciaData };
 
 /** Bloco opcional de minijogo pedagógico dentro da aula. */
 export type MomentoMinijogo = {
