@@ -262,9 +262,48 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Qual palavra é CACHORRO?", opcoes: ["CACHORRO", "CARRO", "CASA"], correta: 0, explicacao: "CA-CHOR-RO tem 3 sílabas." },
-      { pergunta: "Qual palavra é ÁRVORE?", opcoes: ["ÁRVORE", "AVIÃO", "AMIGO"], correta: 0, explicacao: "ÁR-VO-RE tem tronco e folhas." },
-      { pergunta: "Qual palavra é ESCOLA?", opcoes: ["ESCOLA", "ESTRELA", "ESCADA"], correta: 0, explicacao: "ES-CO-LA é o lugar de aprender." },
+      {
+        pergunta: "Leia a palavra e escolha a figura: CACHORRO",
+        opcoes: ["cachorro", "sol", "carro"],
+        correta: 0,
+        explicacao: "CA-CHOR-RO é o animal de estimação. 🐶",
+        visual: {
+          tipo: "opcoesImagem",
+          opcoes: [
+            { imagemUrl: cachorroImg, alt: "cachorro" },
+            { imagemUrl: solImg, alt: "sol" },
+            { imagemUrl: carroImg, alt: "carro" },
+          ],
+        },
+      },
+      {
+        pergunta: "Leia a palavra e escolha a figura: ÁRVORE",
+        opcoes: ["arvore", "casa", "peixe"],
+        correta: 0,
+        explicacao: "ÁR-VO-RE tem tronco e folhas. 🌳",
+        visual: {
+          tipo: "opcoesImagem",
+          opcoes: [
+            { imagemUrl: arvoreImg, alt: "arvore" },
+            { imagemUrl: casaImg, alt: "casa" },
+            { imagemUrl: peixeImg, alt: "peixe" },
+          ],
+        },
+      },
+      {
+        pergunta: "Leia a palavra e escolha a figura: ESCOLA",
+        opcoes: ["escola", "sol", "bola"],
+        correta: 0,
+        explicacao: "ES-CO-LA é o lugar de aprender. 🏫",
+        visual: {
+          tipo: "opcoesImagem",
+          opcoes: [
+            { imagemUrl: escolaImg, alt: "escola" },
+            { imagemUrl: solImg, alt: "sol" },
+            { imagemUrl: bolaImg, alt: "bola" },
+          ],
+        },
+      },
     ],
     medio: [
       { pergunta: "Quantas sílabas tem BI-CI-CLE-TA?", opcoes: ["4", "2", "6"], correta: 0, explicacao: "BI · CI · CLE · TA = 4 sílabas." },
