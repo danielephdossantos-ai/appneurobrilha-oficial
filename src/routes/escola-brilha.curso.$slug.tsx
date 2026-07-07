@@ -34,6 +34,7 @@ function TrilhaCurso() {
   const curso = getCursoAny(slug);
   const aulas = listAulasFlat(slug);
   const ehPortugues = curso?.tipoAula === "portugues";
+  const ehGeografia = curso?.tipoAula === "geografia";
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   // Admin/testador: TODAS as aulas ficam destravadas por padrão.
   // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
@@ -124,6 +125,11 @@ function TrilhaCurso() {
                         if (ehPortugues) {
                           navigate({
                             to: "/escola-brilha/aula-pt-v4/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                          });
+                        } else if (ehGeografia) {
+                          navigate({
+                            to: "/escola-brilha/aula-geo-v4/$curso/$aula",
                             params: { curso: slug, aula: a.slug },
                           });
                         } else {
