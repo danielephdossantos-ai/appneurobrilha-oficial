@@ -551,6 +551,176 @@ export type CursoPortugues = {
   unidades: UnidadePortugues[];
 };
 
+// =====================================================================
+// GEOGRAFIA — contrato paralelo. Paradigma "GeoScanner": criança
+// investiga FOTOGRAFIAS reais, marca pistas, forma hipóteses e só
+// depois recebe a explicação. Zero questionário, tudo visual.
+// =====================================================================
+
+/** Uma "pista" que o GeoScanner destaca sobre uma foto. */
+export type PistaGeo = {
+  /** Emoji do HUD do scanner. */
+  icone: string;
+  /** Rótulo curto (ex.: "sobre estacas"). */
+  rotulo: string;
+  /** Posição relativa na foto (0..100). Onde o pin aparece. */
+  x: number;
+  y: number;
+};
+
+/** Bloco: galeria com N fotos de lugares. Toque abre o investigador. */
+export type GaleriaLugaresData = {
+  instrucao: string;
+  lugares: Array<{
+    id: string;              // "ribeirinha"
+    nome: string;            // "Casa Ribeirinha"
+    emoji: string;           // 🌊
+    imagemUrl?: string;      // foto real; sem foto → placeholder ilustrado
+    corPlaceholder?: string; // gradiente pro placeholder
+  }>;
+};
+
+/** Bloco: uma foto ocupando a tela + pistas destacadas pelo scanner. */
+export type ModoInvestigadorData = {
+  lugarId: string;             // "ribeirinha"
+  nomeLugar: string;
+  emoji: string;
+  imagemUrl?: string;
+  corPlaceholder?: string;
+  pistas: PistaGeo[];
+  /** Frase de encerramento do Brilha quando todas as pistas foram vistas. */
+  fechamento: string;
+};
+
+/** Pergunta de HIPÓTESE — a criança escolhe ANTES de saber a resposta. */
+export type HipoteseData = {
+  imagemUrl?: string;
+  corPlaceholder?: string;
+  pergunta: string;
+  hipoteses: string[];
+  correta: number;
+  explicacao: string;         // só aparece depois da escolha
+};
+
+/** Comparar duas fotos lado a lado. */
+export type CompararLugaresData = {
+  pergunta: string;
+  a: { nome: string; emoji: string; imagemUrl?: string; corPlaceholder?: string };
+  b: { nome: string; emoji: string; imagemUrl?: string; corPlaceholder?: string };
+  correta: "a" | "b";
+  explicacao: string;
+};
+
+/** Painel final: tabela clima × construção × motivo. */
+export type PainelComparativoData = {
+  colunas: string[];         // ["Lugar","Clima","Construção","Motivo"]
+  linhas: Array<{ celulas: string[]; emoji: string }>;
+  sintese: string;
+};
+
+/** Investigação livre: foto + checkboxes de pistas visíveis. */
+export type InvestigacaoLivreData = {
+  imagemUrl?: string;
+  corPlaceholder?: string;
+  instrucao: string;
+  pistas: Array<{ id: string; icone: string; rotulo: string; existe: boolean }>;
+  conclusao: string;
+};
+
+/** Laboratório: sliders/toggles que mudam a moradia mostrada. */
+export type LaboratorioExploradorData = {
+  instrucao: string;
+  variaveis: Array<{
+    id: string;
+    rotulo: string;
+    opcoes: Array<{ valor: string; icone: string; rotulo: string }>;
+  }>;
+  /** Mapa "chave combinada" → texto do que muda na moradia. */
+  resultados: Array<{
+    quando: Record<string, string>;   // ex: { clima: "chuva", terreno: "rio" }
+    imagemUrl?: string;
+    corPlaceholder?: string;
+    descricao: string;
+  }>;
+  padraoTexto: string;                // fallback quando nenhuma regra bate
+};
+
+/** Minijogo: cenário sorteado + escolha de materiais/formato. */
+export type ArquitetoLugarCertoData = {
+  instrucao: string;
+  cenarios: Array<{
+    id: string;
+    contexto: string;                 // "Rio + muita chuva + pescadores"
+    icones: string[];                 // ["🌊","🌧","🎣"]
+    escolhas: Array<{
+      pergunta: string;
+      opcoes: Array<{ rotulo: string; icone: string; correta: boolean; feedback: string }>;
+    }>;
+    parabens: string;
+  }>;
+};
+
+/** Missão em família — visual de "diário do GeoExplorador". */
+export type MissaoFamiliaGeo = {
+  titulo: string;
+  passos: string[];
+  registro: string;
+};
+
+export type AulaGeografiaV4 = {
+  slug: string;
+  titulo: string;
+  iconeTrilha: string;
+  bncc: string[];
+  duracaoMin: number;
+
+  momento01_motivacao: {
+    titulo: string;
+    historia: string;
+    personagem?: string;              // "Aurora"
+    imagemUrl?: string;
+  };
+  momento02_galeria: { bloco: GaleriaLugaresData };
+  momento03_investigador: { blocos: ModoInvestigadorData[] };
+  momento04_hipoteses: { perguntas: HipoteseData[] };
+  momento05_comparar: { comparacoes: CompararLugaresData[] };
+  momento06_painel: { bloco: PainelComparativoData };
+  momento07_investigacaoLivre: { bloco: InvestigacaoLivreData };
+  momento08_laboratorio?: { bloco: LaboratorioExploradorData };
+  momento09_arquiteto?: { bloco: ArquitetoLugarCertoData };
+  momento10_missaoFamilia: MissaoFamiliaGeo;
+
+  recompensa: {
+    xp: number;
+    moedas: number;
+    medalha?: string;
+  };
+};
+
+export type UnidadeGeografia = {
+  slug: string;
+  numero: number;
+  titulo: string;
+  subtitulo: string;
+  descricao: string;
+  corTema: string;
+  aulas: AulaGeografiaV4[];
+};
+
+export type CursoGeografia = {
+  slug: string;
+  disciplina: string;
+  ano: string;
+  titulo: string;
+  descricao: string;
+  mascoteImagemUrl?: string;
+  corPrimaria: string;
+  corSecundaria: string;
+  tipoAula: "geografia";
+  unidades: UnidadeGeografia[];
+};
+
 /** Union usado pelo registry e pela trilha. */
-export type CursoAny = Curso | CursoPortugues;
+export type CursoAny = Curso | CursoPortugues | CursoGeografia;
+
 
