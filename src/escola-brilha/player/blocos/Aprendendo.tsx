@@ -37,8 +37,21 @@ export function Aprendendo({ dados }: { dados: AprendendoDados }) {
               type="button"
               onClick={() => {
                 setAtivo(aberto ? null : i);
+                // Evita soletração: se alguma sílaba é uma única letra,
+                // o TTS leria "s-a-po" em vez de "sá... po". Nesse caso
+                // pulamos a leitura de sílabas e só falamos a palavra.
+                const temLetraSolta = c.silabas.some(
+                  (s) => s.replace(/[^a-zA-ZÀ-ÿ]/g, "").length <= 1,
+                );
+                const silabasFala = temLetraSolta
+                  ? ""
+                  : c.silabas
+                      .map((s) => s.toLowerCase())
+                      .join("... ") + ".";
                 speak(
-                  `${c.palavra}. ${c.silabas.join(" - ")}. ${c.frase}`,
+                  [c.palavra + ".", silabasFala, c.frase]
+                    .filter(Boolean)
+                    .join(" "),
                 );
               }}
               className={`rounded-2xl p-3 flex flex-col items-center gap-2 border-2 transition-all active:scale-95 ${
