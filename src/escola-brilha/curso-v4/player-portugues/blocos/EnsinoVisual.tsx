@@ -35,7 +35,7 @@ function MaiusculaMinuscula({
     const texto = exemplo
       ? `${nome} maiúscula, ${nome} minúscula. Exemplo: ${exemplo}`
       : `${nome} maiúscula, ${nome} minúscula.`;
-    speak(texto);
+    speakChunked(texto);
     setTimeout(() => setAtivo(null), 2500);
   };
 
@@ -134,7 +134,7 @@ function FraseItem({ texto, explicacao }: { texto: string; explicacao?: string }
   const falar = () => {
     stopSpeaking();
     setTocando(true);
-    speak(texto);
+    speakChunked(texto);
     setTimeout(() => setTocando(false), Math.min(6000, texto.length * 90));
   };
 
