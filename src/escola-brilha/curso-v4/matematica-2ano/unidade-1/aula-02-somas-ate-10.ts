@@ -131,42 +131,58 @@ export const aula02_somasAte10: AulaV4 = {
     visualUrl: maca,
   },
 
-  // ===== FATIAS 2, 3, 4 — PLACEHOLDERS (não quebram o build) =========
+  // ===== FATIA 2 — 3 FASES DE PRÁTICA (guiada → independente → aplicação)
 
+  // Fase 1 — Nós fazemos juntos: 3 + 2 com maçãs (animação passo a passo)
   momento06_praticaGuiada: {
-    enunciado: "🚧 Fase 1 chega na próxima fatia (contagem guiada de coleções).",
-    dica: "Aguardando aprovação da Fatia 1 pra construir as 5 Fases.",
+    enunciado:
+      "Fase 1 — Vamos juntos! A cesta tem 3 maçãs e chegaram mais 2. Aperte pra ver a soma acontecer, contando cada maçã.",
+    dica: "Comece pelo número maior (3) e conte MAIS 2: quatro… cinco. A resposta é 5.",
+    interacao: {
+      tipo: "operacaoVisual",
+      operacao: "soma",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      a: 3,
+      b: 2,
+      legenda: "3 maçãs + 2 maçãs = 5 maçãs",
+    },
+  },
+
+  // Fase 2 — Você faz: contar 4 + 3 bananas e escolher o total
+  momento07_praticaIndependente: {
+    enunciado:
+      "Fase 2 — Agora é você! Toque em CADA banana pra contar. Depois escolha quantas ficaram no total.",
     interacao: {
       tipo: "contarQuiz",
-      grupos: [{ imagemUrl: maca, quantidade: 3, rotulo: "Maçãs" }],
-      pergunta: "Quantas maçãs? (placeholder)",
-      opcoes: ["2", "3", "4"],
+      grupos: [
+        { imagemUrl: banana, quantidade: 4, rotulo: "Primeiro grupo" },
+        { imagemUrl: banana, quantidade: 3, rotulo: "Chegaram mais" },
+      ],
+      pergunta: "Quantas bananas ficaram no total?",
+      opcoes: ["6", "7", "8"],
       correta: 1,
-      feedbackAcerto: "Boa!",
-      feedbackErro: "Conte de novo.",
+      feedbackAcerto:
+        "🎉 Isso! 4 bananas + 3 bananas = 7. Começou no 4 e contou +3: cinco, seis, sete.",
+      feedbackErro:
+        "Vamos junto: já tinha 4 bananas. Conte MAIS 3 a partir do 4: cinco… seis… sete. A resposta é 7.",
     },
   },
-  momento07_praticaIndependente: {
-    enunciado: "🚧 Chega na Fatia 2.",
-    interacao: {
-      tipo: "escolhaVisual",
-      pergunta: "Placeholder",
-      opcoes: [{ nome: "Ok", imagemUrl: maca }],
-      respostaCerta: "Ok",
-      feedbackAcerto: "—",
-      feedbackErro: "—",
-    },
-  },
+
+  // Fase 5 — Aplicação: problema do pomar 6 + 3
   momento08_aplicacao: {
-    contexto: "🚧 Fase 5 (problema do pomar 6+3) chega na Fatia 2.",
-    problema: "Placeholder",
+    contexto:
+      "Fase 5 — Problema do pomar! Seu Coelho colheu 6 maçãs de manhã. À tarde, colheu mais 3. Ele quer saber o total pra vender na feira.",
+    problema:
+      "6 maçãs de manhã + 3 maçãs à tarde. Quantas maçãs Seu Coelho tem pra vender?",
     interacao: {
-      tipo: "escolhaVisual",
-      pergunta: "Placeholder",
-      opcoes: [{ nome: "Ok", imagemUrl: maca }],
-      respostaCerta: "Ok",
-      feedbackAcerto: "—",
-      feedbackErro: "—",
+      tipo: "operacaoVisual",
+      operacao: "soma",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      a: 6,
+      b: 3,
+      legenda: "6 maçãs (manhã) + 3 maçãs (tarde) = 9 maçãs",
     },
   },
   momento09_revisao: {
