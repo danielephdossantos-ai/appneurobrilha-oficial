@@ -1064,3 +1064,45 @@ function GrupoImg({ url, n }: { url: string; n: number }) {
     </div>
   );
 }
+
+function ContaArmadaEmpilhada({
+  agrupamentos,
+}: {
+  agrupamentos: Array<{ tamanhoGrupo: number; qtdGrupos: number }>;
+}) {
+  // Expande em parcelas: [{10,x2},{3,x1}] → [10,10,3]
+  const parcelas: number[] = [];
+  agrupamentos.forEach((ag) => {
+    for (let i = 0; i < ag.qtdGrupos; i++) parcelas.push(ag.tamanhoGrupo);
+  });
+  if (parcelas.length < 2) return null;
+  const total = parcelas.reduce((a, b) => a + b, 0);
+  const largura = String(total).length;
+  const pad = (n: number) => String(n).padStart(largura, "\u00A0");
+  return (
+    <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 shrink-0">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 mb-2 text-center">
+        Conta armada
+      </div>
+      <div className="font-mono text-2xl font-black leading-tight text-right tabular-nums px-2">
+        {parcelas.map((p, i) => (
+          <div key={i} className="flex items-center justify-end gap-2">
+            <span className="text-amber-500 w-4">{i === parcelas.length - 1 ? "+" : "\u00A0"}</span>
+            <span>
+              {pad(p)
+                .split("")
+                .map((c, j) => (
+                  <span key={j}>{c}</span>
+                ))}
+            </span>
+          </div>
+        ))}
+        <div className="border-t-2 border-[#0d1f55] my-1 ml-6" />
+        <div className="flex items-center justify-end gap-2 text-emerald-600">
+          <span className="w-4">&nbsp;</span>
+          <span>{total}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
