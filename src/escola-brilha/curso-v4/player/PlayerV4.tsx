@@ -574,18 +574,103 @@ function TapContar({ i }: { i: Extract<Interacao, { tipo: "tapContar" }> }) {
 
 function ContarQuiz({ i }: { i: Extract<Interacao, { tipo: "contarQuiz" }> }) {
   const [escolha, setEscolha] = useState<number | null>(null);
+  // Contagem tocando junto (professor fala) — obrigatória até o 2º ano.
+  const totalItens = i.grupos.reduce((s, g) => s + g.quantidade, 0);
+  const [tocadas, setTocadas] = useState<Set<string>>(new Set());
+  const [somAtivo, setSomAtivo] = useState(true);
+  const somRef = useRef(true);
+  useEffect(() => { somRef.current = somAtivo; }, [somAtivo]);
+  useEffect(() => () => stopSpeaking(), []);
+
+  const tocar = (chave: string) => {
+    if (tocadas.has(chave) || escolha !== null) return;
+    const novo = new Set(tocadas);
+    novo.add(chave);
+    setTocadas(novo);
+    if (somRef.current) {
+      const n = novo.size;
+      const frase = n === totalItens
+        ? `${falarNumero(n)}! Contamos ${falarNumero(n)}.`
+        : falarNumero(n);
+      speakChunked(frase, { rate: 0.9, pitch: 1.1 });
+    }
+  };
+
+  const resetar = () => {
+    stopSpeaking();
+    setTocadas(new Set());
+  };
+
   return (
     <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
+      {/* Barra do professor + contador ao vivo */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1 rounded-lg bg-white/10 p-2 text-center">
+          <div className="text-[10px] uppercase tracking-widest text-amber-300 font-black">
+            👆 Toque em cada figura para contar junto
+          </div>
+          <div className="text-3xl font-black tabular-nums text-amber-300">
+            {tocadas.size}
+            <span className="text-sm text-white/50"> / {totalItens}</span>
+          </div>
+        </div>
+        <button
+          onClick={() => setSomAtivo((s) => !s)}
+          className={`h-11 w-11 rounded-xl grid place-items-center ${
+            somAtivo ? "bg-amber-400 text-[#0d1f55]" : "bg-white/10 text-white/60"
+          }`}
+          aria-label={somAtivo ? "Desligar voz" : "Ligar voz"}
+          title={somAtivo ? "Voz ligada" : "Voz desligada"}
+        >
+          🔊
+        </button>
+        <button
+          onClick={resetar}
+          disabled={tocadas.size === 0}
+          className="h-11 w-11 rounded-xl bg-white/10 grid place-items-center disabled:opacity-30"
+          aria-label="Reiniciar contagem"
+          title="Reiniciar"
+        >
+          🔄
+        </button>
+      </div>
+
       {i.grupos.map((g, gi) => (
         <div key={gi}>
           {g.rotulo && <div className="text-xs text-white/60 mb-1">{g.rotulo}</div>}
-          <div className="flex flex-wrap gap-1 justify-center">
-            {Array.from({ length: g.quantidade }).map((_, k) => (
-              <img key={k} src={g.imagemUrl} alt="" className="w-10 h-10 object-contain" />
-            ))}
+          <div className="flex flex-wrap gap-1 justify-center bg-white/5 rounded-lg p-2">
+            {Array.from({ length: g.quantidade }).map((_, k) => {
+              const chave = `${gi}-${k}`;
+              const pos = Array.from(tocadas).indexOf(chave);
+              const contada = pos !== -1;
+              return (
+                <button
+                  key={k}
+                  onClick={() => tocar(chave)}
+                  disabled={escolha !== null}
+                  className="relative w-10 h-10 grid place-items-center active:scale-90 transition"
+                  aria-label={`item ${k + 1}`}
+                >
+                  <img
+                    src={g.imagemUrl}
+                    alt=""
+                    className={`w-full h-full object-contain transition ${
+                      contada ? "drop-shadow-[0_0_6px_rgba(251,191,36,0.9)]" : ""
+                    }`}
+                    draggable={false}
+                  />
+                  {contada && (
+                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-emerald-500 text-white text-[9px] font-black grid place-items-center border border-white">
+                      {pos + 1}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       ))}
+
       <div className="font-semibold text-center">{i.pergunta}</div>
       <div className="grid grid-cols-3 gap-2">
         {i.opcoes.map((op, oi) => {
