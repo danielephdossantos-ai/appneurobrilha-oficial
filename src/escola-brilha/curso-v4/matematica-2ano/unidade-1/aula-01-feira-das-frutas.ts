@@ -33,7 +33,6 @@ export const aula01_feiraDasFrutas: AulaV4 = {
       "Antes de contar, olhe bem para as maçãs. Toque em cada uma que você vê:",
     cenas: [
       { tipo: "texto", texto: "🍎 Olha só quantas maçãs caíram!" },
-      { tipo: "grupoItens", imagemUrl: maca, quantidade: 12 },
       {
         tipo: "texto",
         texto: "E aí, seu chute: quantas parecem?",
