@@ -1,55 +1,147 @@
 import { useState } from "react";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { QuizTextoData } from "../../types";
 
 /**
- * Quiz de compreensão textual — opções em texto puro.
- * Feedback mostra onde a resposta está no texto (quando fornecido).
+ * Quiz VISUAL — não é mais questionário de texto.
+ * Cada opção vira um BOTÃO REDONDO GIGANTE que a criança toca.
+ * O professor lê a pergunta em voz alta, a criança escuta a opção
+ * quando toca. Feedback visual grande, celebração no acerto.
+ *
+ * Mesma estrutura de dados de antes (pergunta / opcoes / correta),
+ * então TODOS os quizzes do curso viram jogo automaticamente.
  */
+
+// Cores rotativas para as bolinhas — vivas mas legíveis.
+const CORES = [
+  { bg: "from-rose-400 to-pink-500", ring: "ring-rose-200" },
+  { bg: "from-sky-400 to-blue-500", ring: "ring-sky-200" },
+  { bg: "from-emerald-400 to-green-500", ring: "ring-emerald-200" },
+  { bg: "from-amber-400 to-orange-500", ring: "ring-amber-200" },
+];
+
 export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === quiz.correta;
 
+  function ouvirPergunta() {
+    stopSpeaking();
+    speakChunked(quiz.pergunta);
+  }
+
+  function tocar(i: number) {
+    if (escolha !== null) return;
+    stopSpeaking();
+    // Fala a opção que a criança tocou.
+    speakChunked(quiz.opcoes[i]);
+    setEscolha(i);
+    // Depois, o professor explica o que aconteceu.
+    const msg = i === quiz.correta ? quiz.feedbackAcerto : quiz.feedbackErro;
+    setTimeout(() => speakChunked(msg), 900);
+  }
+
+  function tentarDeNovo() {
+    stopSpeaking();
+    setEscolha(null);
+  }
+
   return (
-    <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
-      <div className="text-base font-bold text-white">❓ {quiz.pergunta}</div>
-      <div className="grid gap-2">
+    <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
+      {/* Pergunta com botão de ouvir */}
+      <div className="flex items-start gap-3 mb-4">
+        <button
+          onClick={ouvirPergunta}
+          aria-label="Ouvir a pergunta"
+          className="shrink-0 w-12 h-12 rounded-full bg-amber-400 text-[#0d1f55] text-2xl font-black grid place-items-center shadow-md active:scale-95"
+        >
+          🔊
+        </button>
+        <p className="text-lg sm:text-xl font-black leading-snug flex-1">
+          {quiz.pergunta}
+        </p>
+      </div>
+
+      {/* Bolas de opção — GRANDES pra tocar */}
+      <div
+        className={`grid gap-3 justify-items-center ${
+          quiz.opcoes.length <= 2
+            ? "grid-cols-2"
+            : quiz.opcoes.length === 3
+              ? "grid-cols-3"
+              : "grid-cols-2 sm:grid-cols-4"
+        }`}
+      >
         {quiz.opcoes.map((op, i) => {
+          const cor = CORES[i % CORES.length];
           const marcada = escolha === i;
           const certa = i === quiz.correta;
-          const cor =
-            escolha === null
-              ? "bg-white/10 hover:bg-white/20 text-white"
-              : marcada && certa
-                ? "bg-emerald-500 text-white"
-                : marcada && !certa
-                  ? "bg-rose-500 text-white"
-                  : certa
-                    ? "bg-emerald-500/40 text-white"
-                    : "bg-white/5 text-white/40";
+          const revelou = escolha !== null;
+
+          let estado = "";
+          if (!revelou) {
+            estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+          } else if (marcada && certa) {
+            estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-110";
+          } else if (marcada && !certa) {
+            estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
+          } else if (certa) {
+            estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
+          } else {
+            estado = "bg-slate-200 text-slate-400";
+          }
+
           return (
             <button
               key={i}
-              disabled={escolha !== null}
-              onClick={() => setEscolha(i)}
-              className={`text-left px-4 py-3 rounded-xl transition text-sm font-medium ${cor}`}
+              disabled={revelou}
+              onClick={() => tocar(i)}
+              className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full font-black shadow-xl transition-all duration-200 grid place-items-center text-center px-2 ${estado}`}
             >
-              {op}
+              <span className={op.length <= 3 ? "text-4xl sm:text-5xl" : "text-base sm:text-lg leading-tight"}>
+                {op}
+              </span>
+              {revelou && marcada && certa && (
+                <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+              )}
+              {revelou && marcada && !certa && (
+                <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+              )}
+              {revelou && !marcada && certa && (
+                <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+              )}
             </button>
           );
         })}
       </div>
 
+      {/* Feedback do professor */}
       {escolha !== null && (
         <div
-          className={`text-sm p-3 rounded-xl ${
-            acertou ? "bg-emerald-500/20 text-emerald-100" : "bg-amber-500/20 text-amber-100"
+          className={`mt-4 p-4 rounded-2xl text-base font-bold leading-snug ${
+            acertou
+              ? "bg-emerald-100 text-emerald-900 border-2 border-emerald-300"
+              : "bg-amber-100 text-amber-900 border-2 border-amber-300"
           }`}
         >
-          <div>{acertou ? quiz.feedbackAcerto : quiz.feedbackErro}</div>
-          {quiz.ondeEstaNoTexto && (
-            <div className="mt-2 text-xs italic text-white/70">
-              📖 No texto: "{quiz.ondeEstaNoTexto}"
+          <div className="flex items-start gap-2">
+            <span className="text-2xl">{acertou ? "🌟" : "🤔"}</span>
+            <div className="flex-1">
+              <div>{acertou ? quiz.feedbackAcerto : quiz.feedbackErro}</div>
+              {quiz.ondeEstaNoTexto && (
+                <div className="mt-2 text-xs italic text-[#0d1f55]/70">
+                  📖 No texto: "{quiz.ondeEstaNoTexto}"
+                </div>
+              )}
             </div>
+          </div>
+
+          {!acertou && (
+            <button
+              onClick={tentarDeNovo}
+              className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#0d1f55] font-black text-lg active:scale-95 shadow"
+            >
+              🔄 Tentar de novo
+            </button>
           )}
         </div>
       )}
