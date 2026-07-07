@@ -2,4 +2,6 @@
 - [Neuro-Treino mechanic bank typo pitfall](neuro-treino-typos.md) — Portuguese field names (outras/outros) must be consistent in bank arrays; one typo causes runtime "not iterable" crash for all variations using that bank entry.
 - [Supabase → Replit PG migration](supabase-migration.md) — Full migration complete: shim at src/database/supabase/client.ts + server fns in src/services/db/; schema pushed via drizzle-kit push.
 - [Português EF01LP* — tap image + speak name](portugues-tap-fala.md) — Padrão travado: aulas de Português usam `escolherFigura` (tocar imagem → TTS fala nome). NÃO alterar EI existentes. Matemática segue `contarQuiz`/`operacao`.
+- [Contar tocando junto](features/contar-tocando-junto.md) — Até o 2º ano, toda coleção contável (contarQuiz etc.) deve ter tap-a-tap com professor falando e contador ao vivo. Regra travada.
+
 
