@@ -34,11 +34,15 @@ function TrilhaCurso() {
   const curso = getCurso(slug);
   const aulas = listAulasFlat(slug);
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
-  const [modoLivre, setModoLivre] = useState(false);
+  // Admin/testador: TODAS as aulas ficam destravadas por padrão.
+  // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
+  const [modoLivre, setModoLivre] = useState(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setModoLivre(new URLSearchParams(window.location.search).has("livre"));
+    const params = new URLSearchParams(window.location.search);
+    // aluno=1 força fluxo travado; caso contrário admin fica sempre livre
+    setModoLivre(!params.has("aluno"));
     try {
       const raw = localStorage.getItem(CHAVE_PROGRESSO(slug));
       if (raw) setConcluidas(new Set(JSON.parse(raw)));
