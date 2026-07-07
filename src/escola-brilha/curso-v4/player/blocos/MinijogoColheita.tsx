@@ -129,19 +129,19 @@ export function MinijogoColheita({
       const dt = Math.min(0.05, (ts - ultimoTsRef.current) / 1000);
       ultimoTsRef.current = ts;
 
-      // spawn de frutas — mais rápido nos primeiros segundos
+      // spawn de frutas — devagar pro professor conseguir contar junto
       proxSpawnRef.current -= dt;
       if (proxSpawnRef.current <= 0) {
         frutasRef.current.push({
           id: proxIdRef.current++,
           x: 0.08 + Math.random() * 0.84,
           y: -FRUTA_TAM,
-          vy: 90 + Math.random() * 60,
+          vy: 30 + Math.random() * 20,   // velocidade inicial baixa
         });
-        proxSpawnRef.current = 0.55 + Math.random() * 0.45;
+        proxSpawnRef.current = 1.8 + Math.random() * 0.9; // 1.8s–2.7s entre frutas
       }
 
-      const gravidade = 260; // px/s²
+      const gravidade = 95; // px/s² — queda suave e previsível
       const cestaPx = cestaXRef.current * larguraPx;
       const cestaTop = CANVAS_H - CESTA_H - 8;
       const cestaEsq = cestaPx - CESTA_W / 2;
