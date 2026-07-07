@@ -848,6 +848,10 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
 }
 
 function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
+  const VELOCIDADE_VOZ = 0.78;
+  const TEMPO_POR_CARACTERE_MS = 145;
+  const PAUSA_ENTRE_PASSOS_MS = 1900;
+  const PAUSA_FINAL_MS = 900;
   const ehSoma = i.operacao === "soma";
   const quantidadeTirada = Math.min(i.b, i.a);
   const total = ehSoma ? i.a + i.b : Math.max(0, i.a - i.b);
@@ -877,11 +881,11 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
         if (!i.legenda) return 0;
         const u = new SpeechSynthesisUtterance(i.legenda);
         u.lang = "pt-BR";
-        u.rate = 0.95;
+        u.rate = VELOCIDADE_VOZ;
         window.speechSynthesis.speak(u);
-        // ~85ms por caractere é uma estimativa razoável pt-BR nessa taxa.
-        return Math.min(6000, Math.max(1200, i.legenda.length * 85));
-      } catch { return 1200; }
+        // Mais lento para a criança acompanhar a fala e ver cada fruta apagando.
+        return Math.min(11000, Math.max(2600, i.legenda.length * TEMPO_POR_CARACTERE_MS));
+      } catch { return 2600; }
     };
     const espera = falarIntro();
     const t = setTimeout(() => {
@@ -904,12 +908,12 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
             ehSoma ? `Total: ${total} ${i.itemPlural}!` : `Ficaram ${total} ${i.itemPlural}!`
           );
           u.lang = "pt-BR";
-          u.rate = 0.95;
+          u.rate = VELOCIDADE_VOZ;
           window.speechSynthesis.speak(u);
         } catch {}
         setTerminou(true);
         setContando(false);
-      }, 500);
+      }, PAUSA_FINAL_MS);
       return () => clearTimeout(t);
     }
     const t = setTimeout(() => {
@@ -919,11 +923,11 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
           ehSoma ? String(n) : `Tirou ${n}. Ficaram ${Math.max(0, i.a - n)}.`
         );
         u.lang = "pt-BR";
-        u.rate = 0.9;
+        u.rate = VELOCIDADE_VOZ;
         window.speechSynthesis.speak(u);
       } catch {}
       setPasso(n);
-    }, 900);
+    }, PAUSA_ENTRE_PASSOS_MS);
     return () => clearTimeout(t);
   }, [contando, passo, totalPassos, total, i.itemPlural, ehSoma, i.a]);
 
