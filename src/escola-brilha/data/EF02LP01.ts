@@ -48,6 +48,44 @@ const aula: Aula = {
   missao:
     "Ler palavras e pequenos textos com AUTONOMIA, compreendendo o que leu e ampliando o vocabulário.",
 
+  aprendendo: {
+    titulo: "Aprendendo",
+    instrucao:
+      "Brilha apresenta palavras com ilustração e narração. Toque em cada cartão para ouvir a palavra, ver as sílabas e a frase de exemplo.",
+    cards: [
+      {
+        palavra: "BOLA",
+        imagemUrl: bolaImg,
+        silabas: ["BO", "LA"],
+        frase: "A bola rolou pelo campo.",
+      },
+      {
+        palavra: "ÁRVORE",
+        imagemUrl: arvoreImg,
+        silabas: ["ÁR", "VO", "RE"],
+        frase: "A árvore tem folhas verdes.",
+      },
+      {
+        palavra: "BICICLETA",
+        imagemUrl: bicicletaImg,
+        silabas: ["BI", "CI", "CLE", "TA"],
+        frase: "Eu ando de bicicleta no parque.",
+      },
+      {
+        palavra: "CACHORRO",
+        imagemUrl: cachorroImg,
+        silabas: ["CA", "CHOR", "RO"],
+        frase: "O cachorro correu pelo quintal.",
+      },
+      {
+        palavra: "ESCOLA",
+        imagemUrl: escolaImg,
+        silabas: ["ES", "CO", "LA"],
+        frase: "A escola é um lugar de aprender.",
+      },
+    ],
+  },
+
   objetivos: [
     "Ler palavras com autonomia.",
     "Compreender palavras em diferentes contextos.",
