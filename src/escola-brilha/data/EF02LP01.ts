@@ -206,7 +206,7 @@ const aula: Aula = {
     },
     {
       tipo: "escolherFigura",
-      titulo: "Fase 5 · Quem Leu o Livro?",
+      titulo: "Fase 5 · Biblioteca Encantada",
       instrucao:
         "Toque pra ouvir. 'A menina Lili leu um livro embaixo da árvore.' QUEM leu o livro?",
       pergunta: "Personagem:",
