@@ -263,11 +263,66 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
 }
 
 function Modelagem({ m }: { m: AulaV4["momento05_modelagem"] }) {
+  const total = m.colecaoVisual?.grupos.reduce((s, n) => s + n, 0) ?? 0;
   return (
     <Card>
       <div className="text-sm text-amber-300">🧠 Brilha pensa em voz alta:</div>
       <div className="text-lg font-medium">{m.enunciado}</div>
-      {m.visualUrl && <img src={m.visualUrl} alt="" className="w-40 mx-auto" />}
+
+      {m.colecaoVisual && (
+        <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-4 border-2 border-amber-300/50">
+          <div className="text-xs font-black uppercase tracking-widest text-amber-600 mb-3">
+            Conte junto com o Brilha ({total}
+            {m.colecaoVisual.itemPlural ? ` ${m.colecaoVisual.itemPlural}` : ""})
+          </div>
+          <div className="flex flex-wrap gap-4 items-end justify-center">
+            {m.colecaoVisual.grupos.map((qtd, gi) => {
+              const acumulado = m.colecaoVisual!.grupos
+                .slice(0, gi + 1)
+                .reduce((s, n) => s + n, 0);
+              const eSolta = qtd < 5;
+              return (
+                <div key={gi} className="flex flex-col items-center">
+                  <div
+                    className={`grid gap-0.5 p-2 rounded-lg border-2 ${
+                      eSolta
+                        ? "border-dashed border-amber-400/60 bg-amber-50"
+                        : "border-amber-500 bg-amber-100"
+                    }`}
+                    style={{
+                      gridTemplateColumns: `repeat(${Math.min(5, qtd)}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {Array.from({ length: qtd }).map((_, ii) => (
+                      <img
+                        key={ii}
+                        src={m.colecaoVisual!.imagemUrl}
+                        alt=""
+                        className="w-7 h-7 object-contain"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-[11px] font-bold mt-1 text-[#0d1f55]/80">
+                    {eSolta ? `${qtd} solta${qtd > 1 ? "s" : ""}` : `pilha de ${qtd}`}
+                  </div>
+                  <div className="text-xs font-black text-amber-600">
+                    {acumulado}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 text-center text-sm font-bold text-[#0d1f55]">
+            {m.colecaoVisual.grupos.join(" + ")} ={" "}
+            <span className="text-emerald-600 text-lg">{total}</span>
+          </div>
+        </div>
+      )}
+
+      {!m.colecaoVisual && m.visualUrl && (
+        <img src={m.visualUrl} alt="" className="w-40 mx-auto" />
+      )}
+
       <div className="space-y-2 bg-white/5 rounded-lg p-4">
         {m.passos.map((p, i) => (
           <div key={i} className="flex gap-2">
