@@ -1,0 +1,323 @@
+import type { AulaPortuguesV4 } from "../../types";
+import bibliotecaria from "@/assets/neuro-treino/objetos/bibliotecario.png";
+import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
+import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import sol from "@/assets/neuro-treino/objetos/sol.png";
+import lua from "@/assets/neuro-treino/objetos/lua.png";
+import flor from "@/assets/neuro-treino/objetos/flor.png";
+import arvore from "@/assets/neuro-treino/objetos/arvore.png";
+import casa from "@/assets/neuro-treino/objetos/casa.png";
+
+/**
+ * Unidade 3 · Aula 3 — Palavras que se Parecem
+ * -------------------------------------------------------------
+ * A criança descobre que existem palavras com significado
+ * PARECIDO (sinônimos, tratados aqui como "amigas") e palavras
+ * com significado OPOSTO (antônimos, tratados como "opostas").
+ *
+ * BNCC: EF02LP15
+ */
+export const aula03: AulaPortuguesV4 = {
+  slug: "aula-03-palavras-parecidas",
+  titulo: "Palavras que se Parecem",
+  iconeTrilha: "🤝",
+  bncc: ["EF02LP15"],
+  duracaoMin: 15,
+
+  momento01_motivacao: {
+    titulo: "Duas palavras dançando juntas",
+    historia:
+      "Brilha vê duas palavras se abraçando na Oficina: FELIZ e ALEGRE. — Elas querem dizer QUASE a mesma coisa!, ri Aurora. Nesta aula você vai descobrir palavras AMIGAS (parecidas) e palavras OPOSTAS (diferentes).",
+    imagemUrl: bibliotecaria,
+  },
+
+  momento02_previsao: {
+    instrucao: "Antes de tudo, leia as duas palavras. Elas querem dizer a mesma coisa?",
+    bloco: {
+      titulo: "FELIZ e ALEGRE",
+      recado: {
+        icone: "🤝",
+        rotulo: "Duas palavras",
+        estilo: "cartaz",
+        linhas: ["FELIZ  ≈  ALEGRE"],
+      },
+      pergunta: "FELIZ e ALEGRE são…",
+      hipoteses: [
+        {
+          texto: "Palavras AMIGAS — querem dizer QUASE a mesma coisa.",
+          imagemUrl: estrela,
+        },
+        {
+          texto: "Palavras OPOSTAS — uma é o contrário da outra.",
+          imagemUrl: sol,
+        },
+        {
+          texto: "Não têm nada a ver.",
+          imagemUrl: casa,
+        },
+      ],
+      respostaCerta: 0,
+      feedbackAcerto:
+        "🎉 Isso! FELIZ e ALEGRE são AMIGAS — significam quase a mesma coisa.",
+      feedbackErro:
+        "Pensa: 'Estou FELIZ' ≈ 'Estou ALEGRE'. Dá pra trocar uma pela outra. Elas são AMIGAS.",
+    },
+  },
+
+  momento03_vocabulario: {
+    instrucao: "Duas palavrinhas pra hoje.",
+    cards: [
+      {
+        palavra: "amigas (parecidas)",
+        explicacao:
+          "Palavras AMIGAS querem dizer quase a MESMA coisa. Dá pra trocar uma pela outra.",
+        exemplo: "GRANDE ≈ ENORME. 'Um GRANDE cachorro' ou 'Um ENORME cachorro'.",
+        imagemUrl: estrela,
+      },
+      {
+        palavra: "opostas (contrárias)",
+        explicacao:
+          "Palavras OPOSTAS querem dizer o CONTRÁRIO. Uma é o oposto da outra.",
+        exemplo: "DIA ↔ NOITE. QUENTE ↔ FRIO. FELIZ ↔ TRISTE.",
+        imagemUrl: sol,
+      },
+    ],
+  },
+
+  momento04_leituraGuiada: {
+    instrucao: "Leia junto e pense se dá pra TROCAR uma palavra pela outra.",
+    leitura: {
+      titulo: "Como saber se são amigas ou opostas",
+      imagemUrl: brilha,
+      destacar: ["AMIGAS", "OPOSTAS", "trocar"],
+      paragrafos: [
+        "Se a gente pode TROCAR uma pela outra sem mudar o sentido, são AMIGAS.",
+        "Ex.: 'O gigante é GRANDE' = 'O gigante é ENORME'. Amigas.",
+        "Se uma diz uma coisa e a outra diz o CONTRÁRIO, são OPOSTAS.",
+        "Ex.: DIA e NOITE. QUENTE e FRIO. RÁPIDO e DEVAGAR.",
+      ],
+    },
+  },
+
+  momento05_compreensao: {
+    instrucao: "Pense: dá pra trocar uma pela outra?",
+    perguntas: [
+      {
+        pergunta: "GRANDE e ENORME são…",
+        opcoes: ["Amigas (parecidas)", "Opostas", "Nada a ver"],
+        correta: 0,
+        feedbackAcerto: "🎉 Amigas — querem dizer quase o mesmo.",
+        feedbackErro:
+          "'Um GRANDE elefante' ≈ 'Um ENORME elefante'. Trocáveis. Amigas.",
+      },
+      {
+        pergunta: "DIA e NOITE são…",
+        opcoes: ["Amigas", "Opostas", "Nada a ver"],
+        correta: 1,
+        feedbackAcerto: "🎉 OPOSTAS — uma é o contrário da outra.",
+        feedbackErro: "DIA tem sol ☀️, NOITE tem lua 🌙. São OPOSTAS.",
+      },
+      {
+        pergunta: "TRISTE é o CONTRÁRIO de qual palavra?",
+        opcoes: ["ALEGRE", "GRANDE", "DEVAGAR"],
+        correta: 0,
+        feedbackAcerto: "🎉 ALEGRE — oposta de TRISTE.",
+        feedbackErro: "Quem está TRISTE não está ALEGRE. Opostas.",
+      },
+    ],
+  },
+
+  momento06_personagensCenario: {
+    instrucao: "Vamos treinar mais pares.",
+    perguntas: [
+      {
+        pergunta: "QUENTE e FRIO são…",
+        opcoes: ["Amigas", "Opostas"],
+        correta: 1,
+        feedbackAcerto: "🎉 Opostas — temperaturas contrárias.",
+        feedbackErro: "Sopa QUENTE ≠ sorvete FRIO. São OPOSTAS.",
+      },
+      {
+        pergunta: "BONITO e LINDO são…",
+        opcoes: ["Amigas", "Opostas"],
+        correta: 0,
+        feedbackAcerto: "🎉 Amigas — significados parecidos.",
+        feedbackErro:
+          "'Um dia BONITO' ≈ 'Um dia LINDO'. Dá pra trocar. Amigas.",
+      },
+      {
+        pergunta: "Qual PAR é de OPOSTAS?",
+        opcoes: ["ALTO ↔ BAIXO", "ALEGRE ≈ FELIZ", "GRANDE ≈ ENORME"],
+        correta: 0,
+        feedbackAcerto: "🎉 ALTO ↔ BAIXO — opostas.",
+        feedbackErro:
+          "Alegre/feliz e grande/enorme são AMIGAS. ALTO e BAIXO são OPOSTAS.",
+      },
+    ],
+  },
+
+  momento07_sequencia: {
+    instrucao:
+      "Coloque os pares de AMIGAS na ordem em que a Aurora leu (do primeiro pro último).",
+    bloco: {
+      instrucao: "Ordem: FELIZ≈ALEGRE, GRANDE≈ENORME, BONITO≈LINDO.",
+      itens: [
+        { id: "p1", texto: "FELIZ ≈ ALEGRE" },
+        { id: "p2", texto: "GRANDE ≈ ENORME" },
+        { id: "p3", texto: "BONITO ≈ LINDO" },
+      ],
+      ordemCerta: ["p1", "p2", "p3"],
+      feedbackAcerto: "🎉 Ordem certa dos pares AMIGOS!",
+      feedbackErro:
+        "A ordem que apareceu na aula: 1º FELIZ, 2º GRANDE, 3º BONITO.",
+    },
+  },
+
+  momento08_leituraIndependente: {
+    instrucao: "Leia essas frases e escolha a palavra que ENCAIXA melhor.",
+    leitura: {
+      titulo: "Trocando palavras nas frases",
+      imagemUrl: sol,
+      destacar: ["quente", "frio", "grande"],
+      paragrafos: [
+        "1) O sol está muito ______.",
+        "2) O elefante é ______.",
+        "3) No inverno faz muito ______.",
+      ],
+    },
+    perguntas: [
+      {
+        pergunta: "1) O sol está muito ______.",
+        opcoes: ["QUENTE", "FRIO", "PEQUENO"],
+        correta: 0,
+        feedbackAcerto: "🎉 QUENTE — combina com sol.",
+        feedbackErro: "Sol esquenta. Fica QUENTE.",
+      },
+      {
+        pergunta: "2) O elefante é ______.",
+        opcoes: ["PEQUENINHO", "GRANDE", "MAGRO"],
+        correta: 1,
+        feedbackAcerto: "🎉 GRANDE — ou poderia usar a amiga ENORME.",
+        feedbackErro: "Elefante é ANIMAL BEM GRANDE. Ou ENORME.",
+      },
+      {
+        pergunta: "3) No inverno faz muito ______.",
+        opcoes: ["QUENTE", "FRIO", "GRANDE"],
+        correta: 1,
+        feedbackAcerto: "🎉 FRIO — oposto de quente.",
+        feedbackErro: "Inverno = tempo FRIO.",
+      },
+    ],
+  },
+
+  momento_minijogo: {
+    titulo: "Amigos das Palavras",
+    instrucao:
+      "Cada palavra da lista tem uma AMIGA (significado parecido). Encaixe cada uma no par certo.",
+    jogo: {
+      tipo: "arrastarParaAlvo",
+      titulo: "🤝 Amigos das Palavras",
+      bloco: {
+        instrucao: "Toque na palavra e depois na AMIGA dela.",
+        itens: [
+          { id: "i1", texto: "FELIZ", alvoId: "alegre" },
+          { id: "i2", texto: "GRANDE", alvoId: "enorme" },
+          { id: "i3", texto: "BONITO", alvoId: "lindo" },
+          { id: "i4", texto: "RÁPIDO", alvoId: "veloz" },
+          { id: "i5", texto: "CASA", alvoId: "lar" },
+        ],
+        alvos: [
+          { id: "alegre", nome: "ALEGRE", imagemUrl: estrela },
+          { id: "enorme", nome: "ENORME", imagemUrl: arvore },
+          { id: "lindo", nome: "LINDO", imagemUrl: flor },
+          { id: "veloz", nome: "VELOZ", imagemUrl: lua },
+          { id: "lar", nome: "LAR", imagemUrl: casa },
+        ],
+        feedbackAcerto:
+          "🎉 Todos os pares de AMIGAS encaixados! Você deixou o vocabulário mais rico.",
+        feedbackErro:
+          "Pense em CADA palavra: qual outra quer dizer QUASE a mesma coisa? FELIZ↔ALEGRE, GRANDE↔ENORME, RÁPIDO↔VELOZ, CASA↔LAR, BONITO↔LINDO.",
+      },
+    },
+  },
+
+  momento09_revisao: {
+    pontos: [
+      "Palavras AMIGAS têm significado PARECIDO (FELIZ ≈ ALEGRE).",
+      "Palavras OPOSTAS têm significado CONTRÁRIO (DIA ↔ NOITE).",
+      "Se dá pra TROCAR uma pela outra sem mudar o sentido, são amigas.",
+      "Conhecer amigas e opostas deixa o VOCABULÁRIO mais rico.",
+    ],
+    miniDesafio: {
+      pergunta: "ALTO é OPOSTO de qual palavra?",
+      opcoes: ["BAIXO", "GRANDE", "LINDO"],
+      correta: 0,
+      feedbackAcerto: "🎉 BAIXO — oposto de ALTO.",
+      feedbackErro:
+        "Torre é ALTA. Bebê é BAIXO. Opostos.",
+    },
+  },
+
+  momento10_avaliacao: {
+    perguntas: [
+      {
+        pergunta: "1/5 — FELIZ e ALEGRE são…",
+        opcoes: ["Amigas", "Opostas"],
+        correta: 0,
+        feedbackAcerto: "🎉 Amigas!",
+        feedbackErro: "Significados parecidos = AMIGAS.",
+      },
+      {
+        pergunta: "2/5 — DIA e NOITE são…",
+        opcoes: ["Amigas", "Opostas"],
+        correta: 1,
+        feedbackAcerto: "🎉 Opostas.",
+        feedbackErro: "Contrários = OPOSTAS.",
+      },
+      {
+        pergunta: "3/5 — Uma AMIGA de RÁPIDO é…",
+        opcoes: ["DEVAGAR", "VELOZ", "PARADO"],
+        correta: 1,
+        feedbackAcerto: "🎉 VELOZ.",
+        feedbackErro:
+          "RÁPIDO ≈ VELOZ. DEVAGAR e PARADO são OPOSTAS de rápido.",
+      },
+      {
+        pergunta: "4/5 — Uma OPOSTA de QUENTE é…",
+        opcoes: ["MORNO", "FRIO", "GOSTOSO"],
+        correta: 1,
+        feedbackAcerto: "🎉 FRIO.",
+        feedbackErro: "Contrário de QUENTE = FRIO.",
+      },
+      {
+        pergunta: "5/5 — Trocar palavras por AMIGAS deixa o texto…",
+        opcoes: [
+          "Mais rico e variado",
+          "Sempre errado",
+          "Menor",
+        ],
+        correta: 0,
+        feedbackAcerto: "🎉 Mais rico!",
+        feedbackErro:
+          "Trocando por AMIGAS a gente evita repetição e escreve mais bonito.",
+      },
+    ],
+  },
+
+  momento11_missaoFamilia: {
+    titulo: "🤝 Caça aos pares",
+    materiais: ["Papel", "Lápis"],
+    passos: [
+      "1) Achem em casa 3 pares de palavras AMIGAS (ex.: bonito/lindo, casa/lar, feliz/alegre).",
+      "2) Achem 3 pares de palavras OPOSTAS (ex.: quente/frio, alto/baixo, dia/noite).",
+      "3) A criança escreve cada par numa linha, com ≈ (amigas) ou ↔ (opostas).",
+      "4) Leiam juntos em voz alta.",
+    ],
+    registro:
+      "📸 Uma foto do papel com os 6 pares.",
+  },
+
+  recompensa: { xp: 120, moedas: 70 },
+};
+
+void brilha;
