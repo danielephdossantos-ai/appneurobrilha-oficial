@@ -101,7 +101,7 @@ export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma
             <span>{pad(a).split("").map((c, i) => <span key={i}>{c === " " ? "\u00A0" : c}</span>)}</span>
           </div>
           <div className="pr-2 flex items-center justify-end gap-3">
-            <span className="text-amber-500">+</span>
+            <span className="text-amber-500">{sinal}</span>
             <span>{pad(b).split("").map((c, i) => <span key={i}>{c === " " ? "\u00A0" : c}</span>)}</span>
           </div>
           <div className="border-t-4 border-[#0d1f55] my-2" />
