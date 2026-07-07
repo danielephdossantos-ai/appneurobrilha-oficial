@@ -300,33 +300,35 @@ function RodadaNivel({
           />
 
 
-          <div className="space-y-2">
-            {q.opcoes.map((op, k) => {
-              const certa = k === q.correta;
-              const sel = escolha === k;
-              const revelado = escolha !== null;
-              return (
-                <button
-                  key={k}
-                  onClick={() => escolher(k)}
-                  disabled={revelado}
-                  className={`w-full text-left px-3 py-2 rounded-xl font-black flex items-center justify-between ${
-                    revelado
-                      ? certa
-                        ? "bg-[#22C55E] text-[#0d1f55]"
-                        : sel
-                          ? "bg-[#EF4444] text-white"
-                          : "bg-white/15 text-white/70"
-                      : "bg-white text-[#0d1f55]"
-                  }`}
-                >
-                  <span>{op}</span>
-                  {revelado && certa && <CheckCircle2 className="h-4 w-4" />}
-                  {revelado && sel && !certa && <XCircle className="h-4 w-4" />}
-                </button>
-              );
-            })}
-          </div>
+          {q.visual?.tipo !== "opcoesImagem" && (
+            <div className="space-y-2">
+              {q.opcoes.map((op, k) => {
+                const certa = k === q.correta;
+                const sel = escolha === k;
+                const revelado = escolha !== null;
+                return (
+                  <button
+                    key={k}
+                    onClick={() => escolher(k)}
+                    disabled={revelado}
+                    className={`w-full text-left px-3 py-2 rounded-xl font-black flex items-center justify-between ${
+                      revelado
+                        ? certa
+                          ? "bg-[#22C55E] text-[#0d1f55]"
+                          : sel
+                            ? "bg-[#EF4444] text-white"
+                            : "bg-white/15 text-white/70"
+                        : "bg-white text-[#0d1f55]"
+                    }`}
+                  >
+                    <span>{op}</span>
+                    {revelado && certa && <CheckCircle2 className="h-4 w-4" />}
+                    {revelado && sel && !certa && <XCircle className="h-4 w-4" />}
+                  </button>
+                );
+              })}
+            </div>
+          )}
           {escolha !== null && (
             <div className="mt-3 rounded-xl bg-white/10 p-2 text-sm border border-white/15 flex gap-2 items-start">
               <Sparkles className="h-4 w-4 shrink-0 mt-0.5" />
@@ -639,10 +641,45 @@ function VisualQuestao({
       </div>
     );
   }
-  // cenaEntre
+  if (visual.tipo === "cenaEntre") {
+    return (
+      <div className="mb-3">
+        <CenaEntreView spec={visual} compact />
+      </div>
+    );
+  }
+  // opcoesImagem — grade de imagens clicáveis (substitui a lista de texto)
   return (
-    <div className="mb-3">
-      <CenaEntreView spec={visual} compact />
+    <div className="mb-3 grid grid-cols-3 gap-3">
+      {visual.opcoes.map((op, k) => {
+        const certa = k === correta;
+        const sel = escolha === k;
+        const revelado = escolha !== null;
+        const clicavel = podeClicar;
+        const cls = revelado
+          ? certa
+            ? "ring-4 ring-emerald-400 bg-emerald-500/20"
+            : sel
+              ? "ring-4 ring-rose-400 bg-rose-500/20"
+              : "opacity-40 bg-white/10"
+          : "bg-white/15 hover:bg-white/25 active:scale-95";
+        return (
+          <button
+            key={k}
+            type="button"
+            disabled={!clicavel}
+            onClick={clicavel ? () => onEscolher!(k) : undefined}
+            className={`rounded-2xl p-3 flex items-center justify-center transition ${cls}`}
+          >
+            <img
+              src={op.imagemUrl}
+              alt={op.alt}
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow"
+              draggable={false}
+            />
+          </button>
+        );
+      })}
     </div>
   );
 }
