@@ -221,6 +221,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 7, rotulo: "Antes do lanche" },
         ],
+        tirar: 2,
         feedbackAcerto:
           "🎉 Perfeito! 7 − 2 = 5. Voltou 2 casas do 7: seis, cinco.",
         feedbackErro:
