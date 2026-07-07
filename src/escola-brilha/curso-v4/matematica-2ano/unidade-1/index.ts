@@ -1,11 +1,12 @@
 import type { Unidade } from "../../types";
 import { aula01_feiraDasFrutas } from "./aula-01-feira-das-frutas";
 import { aula02_somasAte10 } from "./aula-02-somas-ate-10";
+import { aula03_subtracoesAte10 } from "./aula-03-subtracoes-ate-10";
 
 /**
  * Unidade 1 — "A Feira dos Números"
  * ----------------------------------
- * Progressão: contar → comparar → agrupar → posicionar → operar.
+ * Progressão: contar → somar → subtrair → comparar → agrupar.
  * Aulas são adicionadas uma a uma conforme forem validadas.
  */
 export const unidade1: Unidade = {
@@ -19,6 +20,7 @@ export const unidade1: Unidade = {
   aulas: [
     aula01_feiraDasFrutas,
     aula02_somasAte10,
+    aula03_subtracoesAte10,
   ],
 };
 
