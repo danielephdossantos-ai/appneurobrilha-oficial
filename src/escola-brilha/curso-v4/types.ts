@@ -195,6 +195,12 @@ export type MomentoAvaliacao = {
     feedbackAcerto: string; // NUNCA só "Certo!" — sempre explica o raciocínio
     feedbackErro: string;   // ensina no erro
     visualUrl?: string;
+    /** Grupos visuais para ajudar a contar (ex.: 2 maçãs + 3 maçãs). */
+    visualGrupos?: Array<{
+      imagemUrl: string;
+      quantidade: number;
+      rotulo?: string;
+    }>;
   }>;
 };
 
