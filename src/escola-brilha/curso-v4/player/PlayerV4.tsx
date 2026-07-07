@@ -397,7 +397,36 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
           <div className="font-medium mb-3">
             {qi + 1}. {q.pergunta}
           </div>
-          {q.visualUrl && <img src={q.visualUrl} alt="" className="w-40 mb-3" />}
+          {q.visualGrupos && q.visualGrupos.length > 0 ? (
+            <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
+              {q.visualGrupos.map((g, gi) => (
+                <div key={gi} className="flex items-center gap-2">
+                  <div className="rounded-2xl bg-white/5 border border-white/15 p-2">
+                    {g.rotulo && (
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-amber-200 text-center mb-1">
+                        {g.rotulo} · {g.quantidade}
+                      </div>
+                    )}
+                    <div className="flex flex-wrap justify-center gap-1 max-w-[220px]">
+                      {Array.from({ length: g.quantidade }).map((_, k) => (
+                        <img
+                          key={k}
+                          src={g.imagemUrl}
+                          alt=""
+                          className="h-10 w-10 object-contain drop-shadow"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {gi < q.visualGrupos!.length - 1 && (
+                    <div className="text-3xl font-black text-amber-300">+</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            q.visualUrl && <img src={q.visualUrl} alt="" className="w-40 mb-3" />
+          )}
           <div className="grid gap-2">
             {q.opcoes.map((op, oi) => {
               const escolhida = respostas[qi] === oi;
