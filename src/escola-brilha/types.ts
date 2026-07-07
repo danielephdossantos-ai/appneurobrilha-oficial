@@ -669,6 +669,75 @@ export type Aula = {
         }>;
         acerto?: string;
       }
+    | {
+        /**
+         * Contar sílabas com palma (EF02LP02).
+         * Mostra imagem+palavra; a criança toca N vezes = nº de sílabas.
+         * Cada toque acende uma bolinha e o TTS fala a sílaba correspondente.
+         * Acerta ao completar exatamente as sílabas do item.
+         * Avança para o próximo item automaticamente.
+         */
+        tipo: "contarSilabas";
+        titulo: string;
+        instrucao?: string;
+        itens: Array<{
+          palavra: string;
+          imagemUrl: string;
+          silabas: string[];
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Montar palavra com fichas de sílabas (EF02LP02).
+         * Mostra imagem-alvo + pool embaralhado de sílabas (corretas +
+         * distratores). A criança toca as sílabas NA ORDEM certa pra
+         * formar a palavra. Cada acerto encaixa; erro devolve a ficha.
+         */
+        tipo: "montarSilabas";
+        titulo: string;
+        instrucao?: string;
+        itens: Array<{
+          palavra: string;
+          imagemUrl: string;
+          silabas: string[];
+          distratores?: string[];
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
+    | {
+        /**
+         * Remover ou substituir sílaba (inicial/medial/final) — EF02LP02.
+         * Mostra a palavra original em fichas + operação; a criança
+         * toca a ficha da posição indicada e, se substituição, escolhe
+         * a sílaba nova. Depois seleciona a palavra formada em 3 opções.
+         */
+        tipo: "trocarSilaba";
+        titulo: string;
+        instrucao?: string;
+        itens: Array<{
+          palavraOrigem: string;
+          silabasOrigem: string[];
+          imagemOrigem?: string;
+          operacao: "remover" | "substituir";
+          posicao: "inicial" | "medial" | "final";
+          /** Índice da sílaba alvo em silabasOrigem. */
+          indicePosicao: number;
+          /** Só em "substituir": nova sílaba que a criança escolhe. */
+          silabaNova?: string;
+          /** Distratores de sílaba nova (só "substituir"). */
+          distratoresSilaba?: string[];
+          palavraFinal: string;
+          imagemFinal?: string;
+          /** Opções finais de palavra formada. */
+          opcoesResposta: string[];
+          correta: number;
+        }>;
+        acerto?: string;
+        erro?: string;
+      }
   >;
 
 
