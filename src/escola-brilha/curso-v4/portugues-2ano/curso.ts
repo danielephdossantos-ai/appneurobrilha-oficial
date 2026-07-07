@@ -2,6 +2,7 @@ import type { CursoPortugues } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
 import { unidade3 } from "./unidade-3";
+import { unidade4 } from "./unidade-4";
 
 /**
  * Curso: Língua Portuguesa 2º Ano — "A Biblioteca Encantada"
