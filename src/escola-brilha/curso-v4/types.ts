@@ -690,7 +690,13 @@ export type MomentoMinijogoGE = {
     | { tipo: "ordenarSequencia"; bloco: OrdenarSequenciaData }
     | { tipo: "selecionarItens"; bloco: SelecionarItensData }
     | { tipo: "mapaClicavel"; bloco: MapaClicavelData }
-    | { tipo: "orientacaoEspacial"; bloco: OrientacaoEspacialData };
+    | { tipo: "orientacaoEspacial"; bloco: OrientacaoEspacialData }
+    | { tipo: "galeriaExploracao"; bloco: GaleriaExploracaoData };
+};
+
+export type GaleriaExploracaoData = {
+  instrucao?: string;
+  cards: Array<{ imagemUrl: string; titulo: string; descricao: string }>;
 };
 
 export type MomentoQuizGE = {
