@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { speak, stopSpeaking } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { EnsinoVisualBloco } from "../../types";
 
 /**
