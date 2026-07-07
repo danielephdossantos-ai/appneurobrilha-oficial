@@ -653,9 +653,10 @@ export type MomentoEnsinoExplicitoGE = {
 
 export type MomentoEuFacoGE = {
   enunciado: string;
-  passos: string[];
+  passos: Array<string | { texto: string; imagemUrl?: string }>;
   visualUrl?: string;
 };
+
 
 export type MomentoNosFazemosGE = {
   enunciado: string;
