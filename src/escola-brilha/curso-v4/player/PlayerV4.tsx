@@ -4,6 +4,7 @@ import type { AulaV4, Interacao } from "../types";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
+import { MinijogoColheita } from "./blocos/MinijogoColheita";
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
