@@ -55,6 +55,15 @@ export type QuizItem = {
         /** Fila de 3 itens para ilustrar "entre" (o do meio é destacado). */
         tipo: "cenaEntre";
         fila: Array<{ img: string; label: string }>;
+      }
+    | {
+        /**
+         * Opções em IMAGEM (usado em Língua Portuguesa: criança lê a
+         * palavra na pergunta e escolhe a figura correta). Substitui a
+         * lista de opções em texto.
+         */
+        tipo: "opcoesImagem";
+        opcoes: Array<{ imagemUrl: string; alt: string }>;
       };
 };
 
