@@ -176,19 +176,21 @@ export const aula03_subtracoesAte10: AulaV4 = {
       "Revisão da aula: contamos tudo que tinha tocando cada fruta.",
       "Depois vimos que tirar de um grupo é uma SUBTRAÇÃO.",
       "E aprendemos a escrever a subtração na CONTA ARMADA (uma embaixo da outra).",
-      "🎮 Agora é hora de brincar: Colheita Relâmpago da Subtração!",
+      "🎯 Agora um mini-desafio pra fechar!",
     ],
     miniDesafio: {
-      tipo: "minijogoColheita",
-      imagemUrl: maca,
-      itemPlural: "maçãs",
-      alvoInicial: 10,
-      chegaramMais: -3,
-      duracaoSeg: 90,
+      tipo: "contarQuiz",
+      grupos: [
+        { imagemUrl: maca, quantidade: 9, rotulo: "Cesta cheia" },
+      ],
+      pergunta:
+        "Mini-desafio: a cesta tinha 9 maçãs e 4 caíram no chão. Quantas ficaram?",
+      opcoes: ["4", "5", "6"],
+      correta: 1,
       feedbackAcerto:
-        "🎉 Perfeito! Você tinha 10 maçãs e 3 caíram. 10 − 3 = 7. Ficaram 7 na cesta!",
+        "🎉 Perfeito! 9 − 4 = 5. Voltou 4 casas do 9: oito, sete, seis, cinco!",
       feedbackErro:
-        "Quase! Você tinha 10 maçãs e 3 caíram. Conte pra trás: nove, oito, sete. Sobraram 7.",
+        "Quase! Tinha 9, caíram 4. Conte pra trás a partir do 9: oito, sete, seis, cinco. Ficaram 5.",
     },
   },
 
