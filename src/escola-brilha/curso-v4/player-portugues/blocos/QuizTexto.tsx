@@ -106,13 +106,9 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
   function tocar(i: number) {
     if (escolha !== null) return;
     stopSpeaking();
-    // Fala a opção que a criança tocou.
-    speakChunked(quiz.opcoes[i]);
     setEscolha(i);
-    // Depois, o professor explica o que aconteceu.
-    const msg = i === quiz.correta ? quiz.feedbackAcerto : quiz.feedbackErro;
-    setTimeout(() => speakChunked(msg), 900);
   }
+
 
   function tentarDeNovo() {
     stopSpeaking();
