@@ -70,7 +70,10 @@ export const aula01_feiraDasFrutas: AulaV4 = {
       {
         texto: "Melhor ainda: AGRUPE de 5 em 5 ou de 10 em 10. Aí conta rapidinho!",
         exemplo: "5, 10, 15, 20... zááás, contou 20 sem se perder.",
-        imagemUrl: maca,
+        agrupamentos: [
+          { imagemUrl: maca, tamanhoGrupo: 5, qtdGrupos: 4, rotulo: "🍎 De 5 em 5 (4 pilhas de 5)" },
+          { imagemUrl: maca, tamanhoGrupo: 10, qtdGrupos: 2, rotulo: "🍎 De 10 em 10 (2 pilhas de 10)" },
+        ],
       },
     ],
   },

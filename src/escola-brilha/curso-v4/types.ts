@@ -91,8 +91,16 @@ export type MomentoExplicacao = {
     texto: string;          // frase curta, uma ideia por etapa
     imagemUrl?: string;
     exemplo?: string;
+    /** Visual de agrupamento: várias pilhas do mesmo tamanho para mostrar contagem por grupos. */
+    agrupamentos?: Array<{
+      imagemUrl: string;
+      tamanhoGrupo: number;   // ex.: 5 ou 10
+      qtdGrupos: number;      // ex.: 4 pilhas de 5
+      rotulo?: string;        // ex.: "de 5 em 5"
+    }>;
   }>;
 };
+
 
 /** "Eu faço" — Brilha resolve pensando em voz alta. */
 export type MomentoModelagem = {
