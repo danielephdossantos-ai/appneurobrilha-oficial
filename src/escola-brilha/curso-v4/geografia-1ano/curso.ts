@@ -1,4 +1,5 @@
 import type { CursoGeografia } from "../types";
+import { unidade1 } from "./unidade-1";
 
 /**
  * Curso: Geografia 1º Ano — "Pequenos Exploradores do Mundo"
@@ -25,16 +26,7 @@ const curso: CursoGeografia = {
   corSecundaria: "#082414",
   tipoAula: "geografia",
   unidades: [
-    {
-      slug: "unidade-1",
-      numero: 1,
-      titulo: "Meu Lugar no Mundo",
-      subtitulo: "Eu, minha casa, minha família e minha escola",
-      descricao:
-        "A primeira página do Grande Atlas fala do lugar mais importante: o SEU. Você descobre quem mora com você, os cômodos da casa, o caminho até a escola e sua sala.",
-      corTema: "#22c55e",
-      aulas: [],
-    },
+    unidade1,
     {
       slug: "unidade-2",
       numero: 2,

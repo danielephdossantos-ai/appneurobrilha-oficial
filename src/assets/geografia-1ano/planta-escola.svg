@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <pattern id="patio" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#fef3c7"/><path d="M0 0h20v20H0z" fill="none" stroke="#fde68a" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="600" height="400" fill="#ecfccb"/>
+  <!-- muro escola -->
+  <rect x="40" y="40" width="520" height="320" rx="10" fill="#fef3c7" stroke="#78350f" stroke-width="5"/>
+  <!-- pátio central -->
+  <rect x="220" y="150" width="180" height="140" fill="url(#patio)" stroke="#a16207" stroke-width="3"/>
+  <text x="310" y="225" text-anchor="middle" font-size="12" font-weight="bold" fill="#78350f">PÁTIO</text>
+  <!-- salas de aula (lado esquerdo) -->
+  <g stroke="#78350f" stroke-width="3" fill="#fff">
+    <rect x="60" y="80" width="140" height="80"/>
+    <rect x="60" y="180" width="140" height="80"/>
+    <rect x="60" y="280" width="140" height="60"/>
+  </g>
+  <text x="130" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">SALA 1</text>
+  <text x="130" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">SALA 2</text>
+  <text x="130" y="315" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">BIBLIOTECA</text>
+  <!-- direita: secretaria + banheiro + cantina -->
+  <g stroke="#78350f" stroke-width="3" fill="#fff">
+    <rect x="420" y="80" width="140" height="80"/>
+    <rect x="420" y="180" width="140" height="60"/>
+    <rect x="420" y="260" width="140" height="80"/>
+  </g>
+  <text x="490" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">SECRETARIA</text>
+  <text x="490" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#0891b2">BANHEIROS</text>
+  <text x="490" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">CANTINA</text>
+  <!-- portão principal -->
+  <rect x="280" y="355" width="60" height="10" fill="#1d4ed8"/>
+  <text x="310" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">↑ PORTÃO</text>
+</svg>

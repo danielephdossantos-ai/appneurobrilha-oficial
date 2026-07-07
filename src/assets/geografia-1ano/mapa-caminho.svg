@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <pattern id="grass2" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#bbf7d0"/><circle cx="5" cy="5" r="1.2" fill="#86efac"/></pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#grass2)"/>
+  <!-- rua sinuosa -->
+  <path d="M 60 340 Q 180 340 200 260 T 340 200 T 540 100" stroke="#94a3b8" stroke-width="42" fill="none" stroke-linecap="round"/>
+  <path d="M 60 340 Q 180 340 200 260 T 340 200 T 540 100" stroke="#fff" stroke-width="3" fill="none" stroke-dasharray="10 12"/>
+  <!-- casa (início) -->
+  <g transform="translate(30,290)">
+    <rect x="0" y="20" width="70" height="60" fill="#fef3c7" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-6,20 35,-8 76,20" fill="#dc2626" stroke="#7f1d1d" stroke-width="3"/>
+    <rect x="26" y="45" width="18" height="35" fill="#7c4a1a"/>
+    <text x="35" y="100" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#065f46">CASA</text>
+  </g>
+  <!-- árvores -->
+  <g fill="#166534" stroke="#052e16" stroke-width="2">
+    <circle cx="180" cy="150" r="22"/><rect x="176" y="170" width="8" height="16" fill="#7c4a1a"/>
+    <circle cx="380" cy="300" r="26"/><rect x="376" y="322" width="8" height="18" fill="#7c4a1a"/>
+    <circle cx="250" cy="80" r="18"/><rect x="246" y="96" width="8" height="14" fill="#7c4a1a"/>
+  </g>
+  <!-- faixa de pedestre -->
+  <g transform="translate(260,220) rotate(-15)">
+    <rect x="0" y="0" width="60" height="6" fill="#fff"/>
+    <rect x="0" y="12" width="60" height="6" fill="#fff"/>
+    <rect x="0" y="24" width="60" height="6" fill="#fff"/>
+  </g>
+  <!-- escola (chegada) -->
+  <g transform="translate(470,50)">
+    <rect x="0" y="20" width="100" height="70" fill="#fde68a" stroke="#78350f" stroke-width="3"/>
+    <polygon points="-6,20 50,-10 106,20" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="3"/>
+    <rect x="42" y="55" width="20" height="35" fill="#7c4a1a"/>
+    <rect x="12" y="35" width="18" height="18" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+    <rect x="72" y="35" width="18" height="18" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+    <text x="50" y="110" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a">ESCOLA</text>
+  </g>
+  <!-- bandeirinhas nos pontos -->
+</svg>
