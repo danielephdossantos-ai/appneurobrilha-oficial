@@ -278,16 +278,131 @@ const aula: AulaGeografiaV4 = {
     ],
   },
 
-  // Placeholders — Etapas B/C.
-  momento04_hipoteses: { perguntas: [] },
-  momento05_comparar: { comparacoes: [] },
+  momento04_hipoteses: {
+    perguntas: [
+      {
+        imagemUrl: ribeirinhaImg,
+        pergunta: "Por que essa casa fica ERGUIDA sobre estacas de madeira?",
+        hipoteses: [
+          "Pra ficar mais bonita, com estilo diferente.",
+          "Porque o rio sobe muito e a família não pode se molhar.",
+          "Porque a família não gosta de andar no chão.",
+        ],
+        correta: 1,
+        explicacao:
+          "Na Amazônia o rio SOBE e DESCE o ano todo. Na cheia ele pode subir 10 metros — a altura de um prédio de 3 andares. As estacas erguem a casa pra que a água passe por baixo e a família continue seca.",
+      },
+      {
+        imagemUrl: apartamentoImg,
+        pergunta: "Por que na cidade grande as pessoas moram em PRÉDIOS altos?",
+        hipoteses: [
+          "Porque na cidade sobra pouco chão e muita gente precisa morar.",
+          "Porque prédio é mais barato de construir do que casa.",
+          "Porque as pessoas gostam de olhar tudo de cima.",
+        ],
+        correta: 0,
+        explicacao:
+          "Na cidade grande mora MUITA gente e o espaço no chão acaba rápido. Empilhando andares, várias famílias moram no mesmo pedacinho de terra. Um prédio pode ter mais moradores do que uma rua inteira de casas.",
+      },
+      {
+        imagemUrl: aldeiaImg,
+        pergunta: "Por que a oca é feita de MADEIRA e PALHA, e não de tijolo?",
+        hipoteses: [
+          "Porque os povos indígenas ainda não descobriram o tijolo.",
+          "Porque a floresta oferece esses materiais e eles combinam com o clima quente.",
+          "Porque é mais rápido montar e desmontar quando muda de lugar.",
+        ],
+        correta: 1,
+        explicacao:
+          "A oca usa o que a FLORESTA oferece: madeira das árvores, palha das palmeiras, cipó pra amarrar. Além disso, palha deixa o ar passar — mantém a oca fresca no calor da mata. Cada povo constrói do jeito que combina com o lugar onde vive.",
+      },
+    ],
+  },
+
+  momento05_comparar: {
+    comparacoes: [
+      {
+        pergunta: "Qual moradia AGUENTA melhor uma enchente grande?",
+        a: { nome: "Casa na cidade", emoji: "🏠", imagemUrl: casaUrbanaImg },
+        b: { nome: "Casa ribeirinha", emoji: "🌊", imagemUrl: ribeirinhaImg },
+        correta: "b",
+        explicacao:
+          "A casa da cidade fica no chão — se a água subir, ela alaga. A ribeirinha é ERGUIDA sobre estacas justamente pra que o rio, quando enche, passe por baixo. Cada casa é construída pra vencer o desafio do seu lugar.",
+      },
+      {
+        pergunta: "Onde CABE mais gente morando no mesmo pedacinho de chão?",
+        a: { nome: "Apartamento", emoji: "🏢", imagemUrl: apartamentoImg },
+        b: { nome: "Sítio no campo", emoji: "🌾", imagemUrl: sitioImg },
+        correta: "a",
+        explicacao:
+          "No sítio uma família ocupa MUITO espaço — precisa de chão pra plantar e criar bichos. No prédio, empilhando andares, dezenas de famílias moram no mesmo tamanho de terreno. Por isso a cidade grande é cheia de prédios.",
+      },
+      {
+        pergunta: "Em qual desses lugares a família mora MAIS PERTO da natureza?",
+        a: { nome: "Apartamento na cidade", emoji: "🏢", imagemUrl: apartamentoImg },
+        b: { nome: "Aldeia indígena", emoji: "🛖", imagemUrl: aldeiaImg },
+        correta: "b",
+        explicacao:
+          "No apartamento a natureza fica espremida — quase só concreto e asfalto. Na aldeia a família vive DENTRO da floresta: a comida, o remédio, os materiais da casa, tudo vem dali. São dois jeitos bem diferentes de viver no Brasil.",
+      },
+    ],
+  },
+
   momento06_painel: {
     bloco: {
-      colunas: ["Lugar", "Clima", "Construção", "Motivo"],
-      linhas: [],
-      sintese: "Em construção — Etapa B.",
+      colunas: ["Lugar", "Onde fica", "Como é construída", "Por quê"],
+      linhas: [
+        {
+          emoji: "🏢",
+          celulas: [
+            "Apartamento",
+            "Cidade grande",
+            "Prédio alto com muitos andares",
+            "Muita gente, pouco chão — empilha famílias",
+          ],
+        },
+        {
+          emoji: "🏠",
+          celulas: [
+            "Casa na cidade",
+            "Bairro urbano",
+            "Tijolo, telhado inclinado, muro",
+            "Aguenta chuva e sol, protege a família",
+          ],
+        },
+        {
+          emoji: "🌾",
+          celulas: [
+            "Sítio",
+            "Campo (área rural)",
+            "Casa simples com varanda e quintal grande",
+            "Espaço pra plantar e criar animais",
+          ],
+        },
+        {
+          emoji: "🌊",
+          celulas: [
+            "Casa ribeirinha",
+            "Beira de rio na Amazônia",
+            "Madeira sobre estacas altas",
+            "Rio sobe e desce o ano todo",
+          ],
+        },
+        {
+          emoji: "🛖",
+          celulas: [
+            "Aldeia indígena",
+            "Dentro da floresta",
+            "Oca de madeira, cipó e palha",
+            "Usa o que a floresta oferece e é fresca no calor",
+          ],
+        },
+      ],
+      sintese:
+        "Cada lugar do Brasil pede um jeito diferente de morar. O CLIMA, o TERRENO e o TRABALHO da família decidem como a casa é construída. Não existe casa 'melhor' — existe a casa CERTA pra cada lugar.",
     },
   },
+
   momento07_investigacaoLivre: {
     bloco: {
       instrucao: "Em construção — Etapa C.",
@@ -295,6 +410,7 @@ const aula: AulaGeografiaV4 = {
       conclusao: "",
     },
   },
+
 
   momento10_missaoFamilia: {
     titulo: "Diário do GeoExplorador",

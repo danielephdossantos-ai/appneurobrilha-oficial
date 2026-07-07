@@ -5,6 +5,10 @@ import { stopSpeaking } from "@/lib/native-tts";
 import { Motivacao } from "./blocos/Motivacao";
 import { GaleriaLugares } from "./blocos/GaleriaLugares";
 import { ModoInvestigador } from "./blocos/ModoInvestigador";
+import { Hipotese } from "./blocos/Hipotese";
+import { CompararLugares } from "./blocos/CompararLugares";
+import { PainelComparativo } from "./blocos/PainelComparativo";
+
 
 /**
  * Player Geografia v4 — estética de campo/expedição.
@@ -122,10 +126,39 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
           </section>
 
           {/* Etapas B/C — placeholders só pra o esqueleto ficar visível */}
-          <EmBreve id="m4" label="🤔 Hipóteses" descricao="Você escolhe o porquê de cada moradia. Vem na Etapa B." />
-          <EmBreve id="m5" label="⚖️ Comparar" descricao="Duas fotos lado a lado. Vem na Etapa B." />
-          <EmBreve id="m6" label="📊 Painel comparativo" descricao="Tabela final com todas as descobertas. Vem na Etapa B." />
+          {/* M4 · Hipóteses */}
+          {aula.momento04_hipoteses.perguntas.length > 0 && (
+            <section id="m4" className="scroll-mt-24 space-y-4">
+              <div className="text-[11px] uppercase tracking-widest text-emerald-300">
+                🤔 Hora de palpitar
+              </div>
+              {aula.momento04_hipoteses.perguntas.map((h, i) => (
+                <Hipotese key={i} data={h} indice={i + 1} />
+              ))}
+            </section>
+          )}
+
+          {/* M5 · Comparar */}
+          {aula.momento05_comparar.comparacoes.length > 0 && (
+            <section id="m5" className="scroll-mt-24 space-y-4">
+              <div className="text-[11px] uppercase tracking-widest text-emerald-300">
+                ⚖️ Comparando dois lugares
+              </div>
+              {aula.momento05_comparar.comparacoes.map((c, i) => (
+                <CompararLugares key={i} data={c} indice={i + 1} />
+              ))}
+            </section>
+          )}
+
+          {/* M6 · Painel comparativo */}
+          {aula.momento06_painel.bloco.linhas.length > 0 && (
+            <Secao id="m6" label="📊 Painel do Explorador">
+              <PainelComparativo data={aula.momento06_painel.bloco} />
+            </Secao>
+          )}
+
           <EmBreve id="m7" label="🕵️ Investigação livre" descricao="Foto nova pra você caçar pistas sozinho. Vem na Etapa C." />
+
           <EmBreve id="m8" label="🧪 Laboratório do Explorador" descricao="Muda o clima e o terreno, veja a moradia mudar. Vem na Etapa C." />
           <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
 
