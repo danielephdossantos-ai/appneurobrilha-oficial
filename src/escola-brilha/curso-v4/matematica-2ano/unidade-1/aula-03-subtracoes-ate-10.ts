@@ -83,6 +83,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
           b: 3,
           resultado: 5,
           itemPlural: "maçãs",
+          operacao: "subtracao",
         },
       },
       // ---- Etapa 5 — Generalização com bananas -------------------
