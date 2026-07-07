@@ -63,6 +63,22 @@ export type Interacao =
       correta: number;
       feedbackAcerto: string;
       feedbackErro: string;
+    }
+  | {
+      /**
+       * Minijogo "Colheita Relâmpago" — frutas caem, criança move a cesta,
+       * professor fala 1, 2, 3... a cada fruta colhida. Depois de atingir
+       * `alvoInicial`, aparece a rodada extra `chegaramMais` e a pergunta
+       * "quantas ficaram?" (soma).
+       */
+      tipo: "minijogoColheita";
+      imagemUrl: string;
+      itemPlural: string;
+      alvoInicial: number;   // ex.: 8 maçãs
+      chegaramMais: number;  // ex.: +2 maçãs → total = 10
+      duracaoSeg?: number;   // padrão 90
+      feedbackAcerto: string;
+      feedbackErro: string;
     };
 
 // ---------- Os 11 momentos pedagógicos (contrato v4.1) ---------------
