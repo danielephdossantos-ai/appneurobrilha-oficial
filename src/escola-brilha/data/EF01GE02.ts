@@ -14,6 +14,7 @@ import setaCima from "@/assets/neuro-treino/objetos/seta-cima.png";
 import setaBaixo from "@/assets/neuro-treino/objetos/seta-baixo.png";
 import setaEsq from "@/assets/neuro-treino/objetos/seta-esquerda.png";
 import setaDir from "@/assets/neuro-treino/objetos/seta-direita.png";
+import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
 
 /**
  * EF01GE02 — Geografia · 1º Ano
