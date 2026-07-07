@@ -135,12 +135,23 @@ function embaralhar<T extends { id: string }>(
     [cp[i], cp[j]] = [cp[j], cp[i]];
   }
 
-  // Se caiu igual à ordem certa, rotaciona (mantém determinismo).
-  const igual = cp.every((it, i) => it.id === ordemCerta[i]);
-  if (igual) {
-    const primeiro = cp.shift()!;
-    cp.push(primeiro);
+  // Garante que NENHUM item caia na posição certa (derangement).
+  // Se algum coincidir, troca com o vizinho até não coincidir mais.
+  for (let tentativas = 0; tentativas < 8; tentativas++) {
+    let algumNoLugar = false;
+    for (let i = 0; i < cp.length; i++) {
+      if (cp[i].id === ordemCerta[i]) {
+        algumNoLugar = true;
+        const vizinho = i === cp.length - 1 ? i - 1 : i + 1;
+        [cp[i], cp[vizinho]] = [cp[vizinho], cp[i]];
+      }
+    }
+    if (!algumNoLugar) break;
   }
+
+  // Fallback extremo: se ainda estiver igual, inverte.
+  const igual = cp.every((it, i) => it.id === ordemCerta[i]);
+  if (igual) cp.reverse();
   return cp;
 }
 
