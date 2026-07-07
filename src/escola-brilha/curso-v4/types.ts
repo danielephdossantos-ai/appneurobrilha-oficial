@@ -341,12 +341,15 @@ export type OrdenarSequenciaData = {
 export type QuizTextoData = {
   pergunta: string;
   opcoes: string[];
+  /** URLs de imagens, uma por opção (mesmo índice de `opcoes`). Opcional — quando presente, o quiz vira visual. */
+  opcoesImagens?: Array<string | undefined | null>;
   correta: number;
   feedbackAcerto: string;                              // explica onde a resposta está no texto
   feedbackErro: string;
   /** Trecho do texto que respondeu a pergunta (mostrado no feedback). */
   ondeEstaNoTexto?: string;
 };
+
 
 // ---------- 11 momentos de Português ---------------------------------
 

@@ -21,6 +21,10 @@ import lixeiraRec from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
 import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
 import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
 import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import criancasGrupo from "@/assets/neuro-treino/objetos/criancas-grupo.png";
+import criancaAndando from "@/assets/neuro-treino/objetos/crianca-andando.png";
+import menino from "@/assets/neuro-treino/objetos/menino.png";
+import rua from "@/assets/neuro-treino/objetos/rua.png";
 
 /**
  * Aula 5 · Unidade 3 — Construindo um Bairro Melhor
@@ -118,9 +122,10 @@ export const aula05: AulaGeografiaV4 = {
     quiz: {
       pergunta: "Qual desses um bairro PRECISA ter?",
       opcoes: [
-        "Só casas, sem escola nem mercado",
-        "Casas + escola + saúde + mercado + praça",
+        "Só casas",
+        "Casas + escola + saúde + mercado",
       ],
+      opcoesImagens: [casa, bairro],
       correta: 1,
       feedbackAcerto: "Isso! Um bairro bom equilibra tudo.",
       feedbackErro: "Só casas não basta — precisa de escola, saúde e outros serviços.",
@@ -133,9 +138,10 @@ export const aula05: AulaGeografiaV4 = {
     quiz: {
       pergunta: "Se seu bairro NÃO tem um serviço, o que a gente faz?",
       opcoes: [
-        "Vai num bairro vizinho que tem",
+        "Vai num bairro vizinho",
         "Fica sem",
       ],
+      opcoesImagens: [mapaPercurso, menino],
       correta: 0,
       feedbackAcerto: "Certo! Bairros se ajudam — a gente vai onde o serviço existe.",
       feedbackErro: "A gente vai num bairro perto que tenha esse serviço.",
@@ -181,34 +187,39 @@ export const aula05: AulaGeografiaV4 = {
       {
         pergunta: "Onde estuda-se?",
         opcoes: ["Escola", "Padaria"],
+        opcoesImagens: [escola, padaria],
         correta: 0,
         feedbackAcerto: "Certo!",
         feedbackErro: "Estudar = escola.",
       },
       {
         pergunta: "Espaços públicos são de…",
-        opcoes: ["Uma pessoa só", "Todo mundo"],
+        opcoes: ["Uma pessoa", "Todo mundo"],
+        opcoesImagens: [menino, criancasGrupo],
         correta: 1,
         feedbackAcerto: "Isso!",
         feedbackErro: "Público = de todos.",
       },
       {
         pergunta: "Quem cuida da rua limpa?",
-        opcoes: ["Só o gari", "O gari E todos nós"],
+        opcoes: ["Só o gari", "Gari + todos nós"],
+        opcoesImagens: [funcionarioLimpeza, criancasGrupo],
         correta: 1,
         feedbackAcerto: "Perfeito!",
         feedbackErro: "TODOS cuidam — junto com o gari.",
       },
       {
         pergunta: "Onde eu atravesso a rua?",
-        opcoes: ["Onde quiser", "Na faixa de pedestre"],
+        opcoes: ["Em qualquer lugar", "Na faixa"],
+        opcoesImagens: [rua, mapaPercurso],
         correta: 1,
         feedbackAcerto: "Certo!",
         feedbackErro: "FAIXA — sempre.",
       },
       {
         pergunta: "Se um lugar é PERTO, dá pra ir…",
-        opcoes: ["A pé", "Só de avião"],
+        opcoes: ["A pé", "Só de bicicleta longa"],
+        opcoesImagens: [criancaAndando, bicicleta],
         correta: 0,
         feedbackAcerto: "Isso!",
         feedbackErro: "Perto = a pé ou de bike.",
