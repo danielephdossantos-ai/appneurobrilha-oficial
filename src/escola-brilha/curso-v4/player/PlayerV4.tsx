@@ -1,121 +1,129 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import type { AulaV4, Interacao } from "../types";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 /**
- * Player v4.1 — Escola Brilha
- * ----------------------------
- * Renderiza os 11 momentos pedagógicos em sequência linear.
- * Este é o esqueleto funcional: cada momento tem sua tela; a criança
- * avança tocando em "Continuar". Interações mais ricas (arrastar, tap
- * contar visual etc.) serão plugadas conforme cada aula for escrita.
+ * Player v4.1 — Escola Brilha (tela única com scroll)
+ * ---------------------------------------------------
+ * Todos os 11 momentos são renderizados em sequência numa única página
+ * rolável. A criança desce a tela livremente. Uma barra lateral mostra
+ * o progresso e permite pular para qualquer momento.
  */
 
 type Props = {
   aula: AulaV4;
   cursoSlug: string;
-  /** Rota para voltar (ex.: trilha do curso). */
   voltarPara: string;
-  /** Chamado quando aluno conclui todos os 11 momentos. */
   onConcluir?: () => void;
 };
 
-const NOMES: Record<number, string> = {
-  1: "🎬 Motivação",
-  2: "👀 Exploração",
-  3: "💡 Descoberta",
-  4: "📖 Explicação",
-  5: "🧠 Eu faço (Brilha resolve)",
-  6: "🤝 Nós fazemos",
-  7: "💪 Você faz",
-  8: "🌎 Na vida real",
-  9: "🔁 Revisão",
-  10: "✅ Vamos ver o que aprendeu",
-  11: "🏠 Missão em Família",
-};
+const MOMENTOS: Array<{ id: string; label: string; key: keyof AulaV4 }> = [
+  { id: "m1", label: "🎬 Motivação", key: "momento01_motivacao" },
+  { id: "m2", label: "👀 Exploração", key: "momento02_exploracao" },
+  { id: "m3", label: "💡 Descoberta", key: "momento03_descoberta" },
+  { id: "m4", label: "📖 Explicação", key: "momento04_explicacao" },
+  { id: "m5", label: "🧠 Brilha resolve", key: "momento05_modelagem" },
+  { id: "m6", label: "🤝 Nós fazemos", key: "momento06_praticaGuiada" },
+  { id: "m7", label: "💪 Você faz", key: "momento07_praticaIndependente" },
+  { id: "m8", label: "🌎 Na vida real", key: "momento08_aplicacao" },
+  { id: "m9", label: "🔁 Revisão", key: "momento09_revisao" },
+  { id: "m10", label: "✅ O que aprendeu", key: "momento10_avaliacao" },
+  { id: "m11", label: "🏠 Missão em Família", key: "momento11_missaoFamilia" },
+];
 
 export function PlayerV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
-  const [passo, setPasso] = useState(1);
+  const [ativo, setAtivo] = useState("m1");
 
-  const total = 11;
-  const proximo = () => {
-    if (passo < total) setPasso(passo + 1);
-    else onConcluir?.();
-  };
-  const anterior = () => passo > 1 && setPasso(passo - 1);
+  useEffect(() => {
+    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (vis[0]) setAtivo(vis[0].target.id);
+      },
+      { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [aula.slug]);
+
+  useEffect(() => () => stopSpeaking(), []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] to-[#1e3a8a] text-white">
-      <header className="sticky top-0 z-10 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Link
-            to="/escola-brilha/curso/$slug"
-            params={{ slug: cursoSlug }}
-            className="text-sm text-white/70 hover:text-white"
-          >
+      <header className="sticky top-0 z-20 bg-[#0d1f55]/95 backdrop-blur border-b border-white/10">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+          <Link to="/escola-brilha/curso/$slug" params={{ slug: cursoSlug }} className="text-sm text-white/70 hover:text-white">
             ← Trilha
           </Link>
-          <div className="flex-1">
-            <div className="text-xs text-white/60">
-              {aula.titulo} · Passo {passo} de {total}
-            </div>
-            <div className="h-1.5 bg-white/10 rounded-full mt-1 overflow-hidden">
-              <div
-                className="h-full bg-amber-400 transition-all"
-                style={{ width: `${(passo / total) * 100}%` }}
-              />
-            </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-bold truncate">{aula.titulo}</div>
+            <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6">
-        <div className="text-xs uppercase tracking-wider text-amber-300 mb-2">
-          {NOMES[passo]}
-        </div>
+      <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
+        {/* Índice lateral (desktop) */}
+        <aside className="hidden lg:block w-56 shrink-0">
+          <div className="sticky top-24 space-y-1">
+            {MOMENTOS.map((m) => (
+              <a
+                key={m.id}
+                href={`#${m.id}`}
+                className={`block text-xs px-3 py-2 rounded-lg transition ${
+                  ativo === m.id ? "bg-amber-400 text-[#0d1f55] font-bold" : "text-white/70 hover:bg-white/10"
+                }`}
+              >
+                {m.label}
+              </a>
+            ))}
+          </div>
+        </aside>
 
-        {passo === 1 && <Motivacao m={aula.momento01_motivacao} />}
-        {passo === 2 && <Exploracao m={aula.momento02_exploracao} />}
-        {passo === 3 && <Descoberta m={aula.momento03_descoberta} />}
-        {passo === 4 && <Explicacao m={aula.momento04_explicacao} />}
-        {passo === 5 && <Modelagem m={aula.momento05_modelagem} />}
-        {passo === 6 && <PraticaGuiada m={aula.momento06_praticaGuiada} />}
-        {passo === 7 && <PraticaIndep m={aula.momento07_praticaIndependente} />}
-        {passo === 8 && <Aplicacao m={aula.momento08_aplicacao} />}
-        {passo === 9 && <Revisao m={aula.momento09_revisao} />}
-        {passo === 10 && <Avaliacao m={aula.momento10_avaliacao} />}
-        {passo === 11 && <MissaoFamilia m={aula.momento11_missaoFamilia} />}
+        <main className="flex-1 space-y-8 min-w-0">
+          <Secao id="m1" label="🎬 Motivação"><Motivacao m={aula.momento01_motivacao} /></Secao>
+          <Secao id="m2" label="👀 Exploração"><Exploracao m={aula.momento02_exploracao} /></Secao>
+          <Secao id="m3" label="💡 Descoberta"><Descoberta m={aula.momento03_descoberta} /></Secao>
+          <Secao id="m4" label="📖 Explicação"><Explicacao m={aula.momento04_explicacao} /></Secao>
+          <Secao id="m5" label="🧠 Brilha resolve"><Modelagem m={aula.momento05_modelagem} /></Secao>
+          <Secao id="m6" label="🤝 Nós fazemos"><PraticaGuiada m={aula.momento06_praticaGuiada} /></Secao>
+          <Secao id="m7" label="💪 Você faz"><PraticaIndep m={aula.momento07_praticaIndependente} /></Secao>
+          <Secao id="m8" label="🌎 Na vida real"><Aplicacao m={aula.momento08_aplicacao} /></Secao>
+          <Secao id="m9" label="🔁 Revisão"><Revisao m={aula.momento09_revisao} /></Secao>
+          <Secao id="m10" label="✅ O que aprendeu"><Avaliacao m={aula.momento10_avaliacao} /></Secao>
+          <Secao id="m11" label="🏠 Missão em Família"><MissaoFamilia m={aula.momento11_missaoFamilia} /></Secao>
 
-        <div className="mt-8 flex items-center justify-between">
-          <button
-            onClick={anterior}
-            disabled={passo === 1}
-            className="px-4 py-2 rounded-lg bg-white/10 disabled:opacity-30"
-          >
-            ← Voltar
-          </button>
-          <button
-            onClick={proximo}
-            className="px-6 py-3 rounded-lg bg-amber-400 text-[#0d1f55] font-bold hover:bg-amber-300"
-          >
-            {passo === total ? "Concluir 🎉" : "Continuar →"}
-          </button>
-        </div>
-
-        <div className="mt-6 text-center">
-          <Link
-            to={voltarPara}
-            className="text-xs text-white/50 hover:text-white/80"
-          >
-            Sair para a trilha
-          </Link>
-        </div>
-      </main>
+          <div className="pt-6 flex flex-col items-center gap-3">
+            <button
+              onClick={() => onConcluir?.()}
+              className="px-8 py-4 rounded-xl bg-amber-400 text-[#0d1f55] font-black text-lg hover:bg-amber-300"
+            >
+              🎉 Concluir aula
+            </button>
+            <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
+              Sair para a trilha
+            </Link>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
 
-// ---------- Momentos (renderers mínimos, iteramos depois) ------------
+// ---------- Wrapper de seção ----------------------------------------
+function Secao({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+  return (
+    <section id={id} className="scroll-mt-24">
+      <div className="text-xs uppercase tracking-wider text-amber-300 mb-2">{label}</div>
+      {children}
+    </section>
+  );
+}
+
+// ---------- Momentos (renderers) ------------------------------------
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
@@ -368,24 +376,69 @@ function InteracaoView({ i }: { i: Interacao }) {
   );
 }
 
+/** Números por extenso pt-BR para o professor contar em voz alta. */
+const NUM_FALADO: Record<number, string> = {
+  1: "um", 2: "dois", 3: "três", 4: "quatro", 5: "cinco",
+  6: "seis", 7: "sete", 8: "oito", 9: "nove", 10: "dez",
+  11: "onze", 12: "doze", 13: "treze", 14: "quatorze", 15: "quinze",
+  16: "dezesseis", 17: "dezessete", 18: "dezoito", 19: "dezenove", 20: "vinte",
+  21: "vinte e um", 22: "vinte e dois", 23: "vinte e três", 24: "vinte e quatro",
+  25: "vinte e cinco", 26: "vinte e seis", 27: "vinte e sete", 28: "vinte e oito",
+  29: "vinte e nove", 30: "trinta",
+};
+function falarNumero(n: number) {
+  return NUM_FALADO[n] ?? String(n);
+}
+
 function TapContar({ i }: { i: Extract<Interacao, { tipo: "tapContar" }> }) {
   const [tocadas, setTocadas] = useState<Set<number>>(new Set());
+  const [somAtivo, setSomAtivo] = useState(true);
+  const somRef = useRef(true);
+  useEffect(() => { somRef.current = somAtivo; }, [somAtivo]);
+  useEffect(() => () => stopSpeaking(), []);
+
+  const handleTap = (k: number) => {
+    if (tocadas.has(k)) return;
+    const novo = new Set(tocadas);
+    novo.add(k);
+    setTocadas(novo);
+    if (somRef.current) {
+      const n = novo.size;
+      const frase = n === i.quantidade
+        ? `${falarNumero(n)}! Contamos ${falarNumero(n)} ${i.itemPlural}.`
+        : falarNumero(n);
+      speakChunked(frase, { rate: 0.9, pitch: 1.1 });
+    }
+  };
+
+  const resetar = () => {
+    stopSpeaking();
+    setTocadas(new Set());
+  };
+
   return (
     <div className="mt-3 bg-white/5 rounded-xl p-4">
-      <div className="text-sm mb-3">{i.pergunta ?? `Toque em cada ${i.itemPlural}:`}</div>
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="text-sm">{i.pergunta ?? `Toque em cada ${i.itemPlural}:`}</div>
+        <button
+          onClick={() => {
+            const novo = !somAtivo;
+            setSomAtivo(novo);
+            if (!novo) stopSpeaking();
+          }}
+          className="text-xs px-2 py-1 rounded-md bg-white/10 hover:bg-white/20 shrink-0"
+          title={somAtivo ? "Desligar voz do professor" : "Ligar voz do professor"}
+        >
+          {somAtivo ? "🔊 Voz ligada" : "🔇 Voz desligada"}
+        </button>
+      </div>
       <div className="flex flex-wrap gap-2 justify-center">
         {Array.from({ length: i.quantidade }).map((_, k) => {
           const tocada = tocadas.has(k);
           return (
             <button
               key={k}
-              onClick={() =>
-                setTocadas((s) => {
-                  const n = new Set(s);
-                  n.add(k);
-                  return n;
-                })
-              }
+              onClick={() => handleTap(k)}
               className={`transition-transform ${tocada ? "scale-110" : "opacity-60 hover:opacity-100"}`}
             >
               <div className="relative">
@@ -403,6 +456,13 @@ function TapContar({ i }: { i: Extract<Interacao, { tipo: "tapContar" }> }) {
       <div className="text-center mt-4 text-lg font-bold text-amber-300">
         Contei: {tocadas.size} {i.itemPlural}
       </div>
+      {tocadas.size > 0 && (
+        <div className="text-center mt-2">
+          <button onClick={resetar} className="text-xs text-white/60 hover:text-white underline">
+            recomeçar contagem
+          </button>
+        </div>
+      )}
     </div>
   );
 }
