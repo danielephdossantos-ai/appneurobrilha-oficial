@@ -1,5 +1,6 @@
 import type { Unidade } from "../../types";
 import { aula01_feiraDasFrutas } from "./aula-01-feira-das-frutas";
+import { aula02_somasAte10 } from "./aula-02-somas-ate-10";
 
 /**
  * Unidade 1 — "A Feira dos Números"
@@ -17,9 +18,7 @@ export const unidade1: Unidade = {
   corTema: "#f59e0b",
   aulas: [
     aula01_feiraDasFrutas,
-    // aula02_quemTemMais,
-    // aula03_amarradinhosDe10,
-    // aula04_cofreDaVila,
-    // aula05_padariaPaoQuente,
+    aula02_somasAte10,
   ],
 };
+
