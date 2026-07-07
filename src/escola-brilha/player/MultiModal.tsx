@@ -802,17 +802,25 @@ function JogoArrastar({
   return (
     <Secao icon={MousePointerClick} rotulo="Arraste" cor="#F472B6">
       <p className="font-black text-lg mb-1">{jogo.titulo}</p>
-      <p className="text-base text-white/80 mb-2">{jogo.instrucao}</p>
-      <p className="text-sm text-white/60 mb-3">
-        Toque no item abaixo e depois no prato certo.
-      </p>
+      <p className="text-base text-white/80 mb-3">{jogo.instrucao}</p>
 
       <div
-        className={`grid gap-2 sm:gap-3 mb-4 ${
+        className={`grid gap-2 sm:gap-3 mb-4 rounded-3xl ${
           alvos.length === 2
             ? "grid-cols-2"
             : "grid-cols-3"
-        }`}
+        } ${jogo.mapaFundo ? "p-3 sm:p-4 border-4 border-white/20" : ""}`}
+        style={
+          jogo.mapaFundo
+            ? {
+                backgroundImage: `url(${jogo.mapaFundo})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                boxShadow: "inset 0 0 0 9999px rgba(255,255,255,0.15)",
+              }
+            : undefined
+        }
       >
         {alvos.map((alvo) => {
           const podeReceber = selecionado !== null;
