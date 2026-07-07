@@ -305,6 +305,21 @@ export type PrevisaoTituloData = {
   titulo: string;                                    // "O Mistério da Chave Azul"
   capaImagemUrl?: string;
   pistas?: Array<{ imagemUrl: string; nome: string }>; // objetos que aparecem
+  /**
+   * Quando a previsão é sobre um TEXTO real (bilhete, cartaz, convite,
+   * lista, aviso), passe o texto completo aqui. O bloco vai renderizar o
+   * papelzinho/cartaz com as linhas visíveis, em vez de só uma "capa de livro".
+   */
+  recado?: {
+    /** rótulo opcional acima do papel (ex.: "Bilhete", "Cartaz da entrada"). */
+    rotulo?: string;
+    /** ícone/emoji opcional acima (📩 🎉 📝 📢). */
+    icone?: string;
+    /** cada string vira uma linha do papel. */
+    linhas: string[];
+    /** estilo visual: "papel" (padrão), "cartaz" (letras grandes). */
+    estilo?: "papel" | "cartaz";
+  };
   pergunta: string;                                  // "Sobre o que essa história vai falar?"
   hipoteses: Array<{ texto: string; imagemUrl?: string }>;
   respostaCerta: number;                             // índice da hipótese "esperada"

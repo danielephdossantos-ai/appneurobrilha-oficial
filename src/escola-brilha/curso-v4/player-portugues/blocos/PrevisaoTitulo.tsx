@@ -9,25 +9,32 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === data.respostaCerta;
 
+  const temRecado = !!data.recado && data.recado.linhas.length > 0;
+
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-4">
-      {/* Capa do livro */}
-      <div className="flex flex-col items-center gap-3">
-        {data.capaImagemUrl && (
-          <img
-            src={data.capaImagemUrl}
-            alt={data.titulo}
-            className="w-32 h-32 object-contain drop-shadow-lg"
-          />
-        )}
-        <div className="text-center">
-          <div className="text-[10px] uppercase tracking-widest text-amber-300">Título do livro</div>
-          <div className="text-xl font-black text-white">📖 {data.titulo}</div>
+      {temRecado ? (
+        /* Papel/cartaz com o TEXTO real que a criança vai ler */
+        <RecadoPapel recado={data.recado!} />
+      ) : (
+        /* Capa de livro (para previsões sobre histórias) */
+        <div className="flex flex-col items-center gap-3">
+          {data.capaImagemUrl && (
+            <img
+              src={data.capaImagemUrl}
+              alt={data.titulo}
+              className="w-32 h-32 object-contain drop-shadow-lg"
+            />
+          )}
+          <div className="text-center">
+            <div className="text-[10px] uppercase tracking-widest text-amber-300">Título do livro</div>
+            <div className="text-xl font-black text-white">📖 {data.titulo}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Pistas visuais */}
-      {data.pistas && data.pistas.length > 0 && (
+      {/* Pistas visuais — só quando NÃO tem recado (senão duplica) */}
+      {!temRecado && data.pistas && data.pistas.length > 0 && (
         <div>
           <div className="text-xs text-white/60 text-center mb-2">Pistas na capa:</div>
           <div className="flex flex-wrap justify-center gap-3">
