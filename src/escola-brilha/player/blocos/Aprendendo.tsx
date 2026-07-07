@@ -37,6 +37,11 @@ export function Aprendendo({ dados }: { dados: AprendendoDados }) {
               type="button"
               onClick={() => {
                 setAtivo(aberto ? null : i);
+                // Sanitiza a palavra pra leitura: "A / a" vira "A",
+                // remove barras, parênteses e duplicações tipo "a a".
+                const palavraFala = c.palavra
+                  .split(/[\/|·•\-–—()]+/)[0]
+                  .trim();
                 // Evita soletração: se alguma sílaba é uma única letra,
                 // o TTS leria "s-a-po" em vez de "sá... po". Nesse caso
                 // pulamos a leitura de sílabas e só falamos a palavra.
@@ -49,7 +54,7 @@ export function Aprendendo({ dados }: { dados: AprendendoDados }) {
                       .map((s) => s.toLowerCase())
                       .join("... ") + ".";
                 speak(
-                  [c.palavra + ".", silabasFala, c.frase]
+                  [palavraFala + ".", silabasFala, c.frase]
                     .filter(Boolean)
                     .join(" "),
                 );
