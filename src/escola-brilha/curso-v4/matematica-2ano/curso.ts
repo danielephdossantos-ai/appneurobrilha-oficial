@@ -5,6 +5,7 @@ import { unidade3 } from "./unidade-3";
 import { unidade4 } from "./unidade-4";
 import { unidade5 } from "./unidade-5";
 import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
  * Curso: Matemática 2º Ano — "A Vila dos Números"
@@ -22,7 +23,7 @@ const curso: Curso = {
     "Brilha chega numa vila mágica onde tudo é contado, agrupado e trocado. Cada aula é um novo lugar da vila — feira, oficina, cofre, padaria — e a criança aprende a pensar como um verdadeiro matemático da vila.",
   corPrimaria: "#f59e0b",  // amarelo/laranja da vila
   corSecundaria: "#0d1f55",
-  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
