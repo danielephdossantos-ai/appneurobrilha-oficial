@@ -335,6 +335,12 @@ export type Aula = {
           capacidade?: number;
           imagemUrl?: string;
         }>;
+        /**
+         * Fundo de MAPA (opcional). Quando presente, o tabuleiro de alvos é
+         * renderizado sobre uma ilustração de mapa — ideal para percursos
+         * (ex.: casa → praça). Os alvos viram "paradas" ao longo do trajeto.
+         */
+        mapaFundo?: string;
       }
     | {
         tipo: "ordenar";
