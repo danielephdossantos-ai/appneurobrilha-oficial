@@ -31,10 +31,20 @@ function MaiusculaMinuscula({
   const falarPar = (idx: number, maiuscula: string, minuscula: string, exemplo?: string) => {
     stopSpeaking();
     setAtivo(idx);
-    const nome = nomeDaLetra(maiuscula);
-    const texto = exemplo
-      ? `${nome} maiúscula, ${nome} minúscula. Exemplo: ${exemplo}`
-      : `${nome} maiúscula, ${nome} minúscula.`;
+    let texto: string;
+    if (exemplo) {
+      // "ANA / amor" → "ANA é maiúscula, amor é minúscula."
+      const partes = exemplo.split("/").map((s) => s.trim()).filter(Boolean);
+      if (partes.length >= 2) {
+        texto = `${partes[0]} é maiúscula. ${partes[1]} é minúscula.`;
+      } else {
+        texto = `${exemplo}.`;
+      }
+    } else {
+      const nome = nomeDaLetra(maiuscula);
+      texto = `${nome} maiúscula, ${nome} minúscula.`;
+    }
+    void minuscula;
     speakChunked(texto);
     setTimeout(() => setAtivo(null), 2500);
   };
