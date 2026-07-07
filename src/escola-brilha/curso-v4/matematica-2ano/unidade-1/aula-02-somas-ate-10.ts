@@ -16,7 +16,7 @@ import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
  *
  * ENTREGA POR FATIAS:
  *   ✅ Fatia 1 — momentos 01–05 (Aprendendo completo).
- *   ⏳ Fatia 2 — momentos 06–08 (Fases 1–5).
+ *   ✅ Fatia 2 — momentos 06–08 (3 Fases: guiada 3+2, independente 4+3, aplicação pomar 6+3).
  *   ⏳ Fatia 3 — momento 09 (Minijogo Colheita Relâmpago com física).
  *   ⏳ Fatia 4 — momentos 10–11 (Desafio + Curiosidade + Quiz de 5 perguntas).
  *
