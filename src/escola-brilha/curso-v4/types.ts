@@ -469,6 +469,30 @@ export type MomentoMinijogo = {
   jogo: MinijogoPT;
 };
 
+// ---------- Blocos de ENSINO VISUAL (equivalente ao "eu faço" da Mat.) --
+
+/**
+ * Ensino visual real — mostra a coisa acontecendo, com áudio.
+ * A criança de 7 anos VÊ antes de ser cobrada.
+ */
+export type EnsinoVisualBloco =
+  | {
+      tipo: "maiusculaMinuscula";
+      /** Pares como {maiuscula:"A", minuscula:"a", exemplo:"ANA"}. */
+      pares: Array<{ maiuscula: string; minuscula: string; exemplo?: string }>;
+    }
+  | {
+      tipo: "fraseComPonto";
+      /** Cada frase é mostrada com a 1ª letra em verde e a pontuação final em vermelho. */
+      frases: Array<{ texto: string; explicacao?: string }>;
+    };
+
+export type MomentoEnsinoVisual = {
+  titulo: string;
+  instrucao: string;
+  blocos: EnsinoVisualBloco[];
+};
+
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
@@ -479,6 +503,8 @@ export type AulaPortuguesV4 = {
   momento01_motivacao: MomentoMotivacaoPT;
   momento02_previsao: MomentoPrevisao;
   momento03_vocabulario: MomentoVocabulario;
+  /** Opcional — ensino visual do pré-requisito. Aparece antes da leitura guiada. */
+  momento_ensinoVisual?: MomentoEnsinoVisual;
   momento04_leituraGuiada: MomentoLeituraGuiada;
   momento05_compreensao: MomentoCompreensao;
   momento06_personagensCenario: MomentoPersonagensCenario;
