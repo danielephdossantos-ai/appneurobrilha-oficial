@@ -45,6 +45,11 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
     setEscolha(null);
   }
 
+  // Detecta palavra silabada tipo CA-SA, BA-NA-NA, JA-NE-LA na pergunta,
+  // pra virar um "contador de palmas" visual (acende quando toca).
+  const silabada = quiz.pergunta.match(/\b([A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4}(?:-[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4})+)\b/);
+  const silabas = silabada ? silabada[1].split("-") : null;
+
   return (
     <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
       {/* Pergunta com botão de ouvir */}
@@ -60,6 +65,9 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           {quiz.pergunta}
         </p>
       </div>
+
+      {silabas && <SilabasParaTocar silabas={silabas} />}
+
 
       {/* Bolas de opção — GRANDES pra tocar */}
       <div
