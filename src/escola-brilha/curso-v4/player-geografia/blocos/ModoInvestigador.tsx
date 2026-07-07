@@ -95,7 +95,7 @@ export function ModoInvestigador({ data }: { data: ModoInvestigadorData }) {
         })}
       </div>
 
-      {/* Rodapé: lista de pistas descobertas */}
+      {/* Rodapé: pistas descobertas + card de explicação */}
       <div className="p-4 space-y-3">
         {reveladas.size === 0 ? (
           <div className="flex items-center gap-2 text-emerald-200/80 text-sm">
@@ -106,15 +106,52 @@ export function ModoInvestigador({ data }: { data: ModoInvestigadorData }) {
           <div className="flex flex-wrap gap-2">
             {data.pistas.map((p, i) =>
               reveladas.has(i) ? (
-                <span
+                <button
                   key={i}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-emerald-100 text-xs font-bold"
+                  onClick={() => setSelecionada(i)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-bold transition ${
+                    selecionada === i
+                      ? "bg-emerald-400 text-slate-950 border-emerald-200"
+                      : "bg-emerald-400/15 border-emerald-400/40 text-emerald-100 hover:bg-emerald-400/25"
+                  }`}
                 >
                   <span className="text-base leading-none">{p.icone}</span>
                   {p.rotulo}
-                </span>
+                </button>
               ) : null,
             )}
+          </div>
+        )}
+
+        {/* Card de EXPLICAÇÃO da pista selecionada */}
+        {selecionada !== null && data.pistas[selecionada]?.explicacao && (
+          <div className="rounded-2xl border-2 border-emerald-400/50 bg-slate-900/80 overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-2 bg-emerald-500/15 border-b border-emerald-400/30">
+              <span className="text-2xl">{data.pistas[selecionada].icone}</span>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold">
+                  🔍 Descoberta {selecionada + 1}
+                </div>
+                <div className="text-white text-sm font-bold truncate">
+                  {data.pistas[selecionada].rotulo}
+                </div>
+              </div>
+            </div>
+            <div className="p-4 space-y-3">
+              <p className="text-white text-sm leading-relaxed">
+                {data.pistas[selecionada].explicacao}
+              </p>
+              {data.pistas[selecionada].curiosidade && (
+                <div className="rounded-xl bg-amber-400/10 border border-amber-300/40 p-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-1">
+                    💡 Curiosidade
+                  </div>
+                  <p className="text-amber-50 text-sm leading-relaxed">
+                    {data.pistas[selecionada].curiosidade}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -130,3 +167,4 @@ export function ModoInvestigador({ data }: { data: ModoInvestigadorData }) {
     </div>
   );
 }
+

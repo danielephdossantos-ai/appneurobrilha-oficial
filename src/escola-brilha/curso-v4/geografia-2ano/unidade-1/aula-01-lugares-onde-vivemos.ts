@@ -73,13 +73,68 @@ const aula: AulaGeografiaV4 = {
         fechamento:
           "Essa casa foi construída sobre estacas de madeira porque o rio sobe e desce o ano todo. Assim, quando a água enche, a família continua seca. O barco é o carro da porta de casa.",
         pistas: [
-          { icone: "🏠", rotulo: "casa de madeira", x: 55, y: 42 },
-          { icone: "⬆️", rotulo: "construída sobre estacas", x: 55, y: 72 },
-          { icone: "🌊", rotulo: "rio embaixo da casa", x: 30, y: 88 },
-          { icone: "🛶", rotulo: "canoa presa na escada", x: 82, y: 82 },
-          { icone: "🌳", rotulo: "floresta ao redor", x: 12, y: 25 },
-          { icone: "🌧️", rotulo: "região de muita chuva", x: 88, y: 15 },
+          {
+            icone: "🏠",
+            rotulo: "casa de madeira",
+            x: 55,
+            y: 42,
+            explicacao:
+              "A casa é feita de madeira porque a floresta amazônica tem MUITA árvore por perto. Fica mais fácil e barato construir com o material que já existe ali.",
+            curiosidade:
+              "Sabia? Os moradores escolhem madeiras que não estragam com a umidade, como itaúba e maçaranduba.",
+          },
+          {
+            icone: "⬆️",
+            rotulo: "construída sobre estacas",
+            x: 55,
+            y: 72,
+            explicacao:
+              "Essas 'perninhas' de madeira são chamadas de PALAFITAS. Elas erguem a casa bem alta pra que a água do rio, quando sobe, passe POR BAIXO — e não por dentro.",
+            curiosidade:
+              "Sabia? Na cheia, o rio pode subir mais de 10 metros. É a altura de um prédio de 3 andares!",
+          },
+          {
+            icone: "🌊",
+            rotulo: "rio embaixo da casa",
+            x: 30,
+            y: 88,
+            explicacao:
+              "O rio é o QUINTAL e a RUA dessas famílias. É por ele que chega comida, remédio, escola e visita. Sem o rio, ninguém sai de casa.",
+            curiosidade:
+              "Sabia? Existem escolas flutuantes na Amazônia — a criança vai estudar de barco.",
+          },
+          {
+            icone: "🛶",
+            rotulo: "canoa presa na escada",
+            x: 82,
+            y: 82,
+            explicacao:
+              "A canoa fica amarrada na escada igual a gente estaciona o carro na garagem. É o transporte principal da família ribeirinha.",
+            curiosidade:
+              "Sabia? Muitas crianças ribeirinhas aprendem a remar antes de aprender a andar de bicicleta.",
+          },
+          {
+            icone: "🌳",
+            rotulo: "floresta ao redor",
+            x: 12,
+            y: 25,
+            explicacao:
+              "A floresta dá tudo: madeira pra casa, frutas pra comer, remédio das plantas e sombra pro calor. A família vive JUNTO da floresta, não contra ela.",
+            curiosidade:
+              "Sabia? Do açaí ao guaraná, muita coisa que a gente come vem daí.",
+          },
+          {
+            icone: "🌧️",
+            rotulo: "região de muita chuva",
+            x: 88,
+            y: 15,
+            explicacao:
+              "Na Amazônia chove quase todo dia. Por isso o telhado é bem inclinado — pra água escorrer rápido e não empoçar em cima da casa.",
+            curiosidade:
+              "Sabia? Chove tanto que existem só duas estações: o 'inverno' (muita chuva) e o 'verão' (menos chuva). Frio de verdade não tem.",
+          },
         ],
+
       },
     ],
   },
