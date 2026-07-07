@@ -520,7 +520,9 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
+
     </Card>
   );
 }
