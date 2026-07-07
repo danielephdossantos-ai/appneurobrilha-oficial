@@ -171,8 +171,23 @@ export const aula02_somasAte10: AulaV4 = {
   },
   momento09_revisao: {
     pontos: [
-      "🚧 Minijogo 'Colheita Relâmpago' (frutas caindo com física) chega na Fatia 3.",
+      "Revisão da aula: contamos tocando cada fruta.",
+      "Depois vimos que juntar dois grupos é uma SOMA.",
+      "E aprendemos a escrever a soma na CONTA ARMADA (uma embaixo da outra).",
+      "🎮 Agora é hora de brincar: Colheita Relâmpago!",
     ],
+    miniDesafio: {
+      tipo: "minijogoColheita",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      alvoInicial: 8,
+      chegaramMais: 2,
+      duracaoSeg: 90,
+      feedbackAcerto:
+        "🎉 Perfeito! 8 maçãs + 2 maçãs que chegaram = 10 maçãs na cesta.",
+      feedbackErro:
+        "Quase! Você pegou 8 maçãs e chegaram mais 2. 8 + 2 = 10. Ficaram 10 maçãs na cesta.",
+    },
   },
   momento10_avaliacao: {
     perguntas: [

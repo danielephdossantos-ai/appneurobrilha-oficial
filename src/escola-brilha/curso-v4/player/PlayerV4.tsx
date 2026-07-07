@@ -4,6 +4,7 @@ import type { AulaV4, Interacao } from "../types";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import { FrutasParaNumero } from "./blocos/FrutasParaNumero";
 import { ContaArmada } from "./blocos/ContaArmada";
+import { MinijogoColheita } from "./blocos/MinijogoColheita";
 
 /**
  * Player v4.1 — Escola Brilha (tela única com scroll)
@@ -474,6 +475,7 @@ function InteracaoView({ i }: { i: Interacao }) {
   if (i.tipo === "contarQuiz") return <ContarQuiz i={i} />;
   if (i.tipo === "escolhaVisual") return <EscolhaVisual i={i} />;
   if (i.tipo === "operacaoVisual") return <OperacaoVisual i={i} />;
+  if (i.tipo === "minijogoColheita") return <MinijogoColheita {...i} />;
   return (
     <div className="bg-white/5 rounded-xl p-4 mt-3 text-xs text-white/50">
       Interação "{i.tipo}" ainda sem renderer.
