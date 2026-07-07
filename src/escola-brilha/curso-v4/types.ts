@@ -566,7 +566,12 @@ export type PistaGeo = {
   /** Posição relativa na foto (0..100). Onde o pin aparece. */
   x: number;
   y: number;
+  /** Explicação didática que aparece ao tocar o pin (2-4 linhas, linguagem de 7 anos). */
+  explicacao?: string;
+  /** Curiosidade "sabia?" opcional, ainda mais leve, pra fisgar. */
+  curiosidade?: string;
 };
+
 
 /** Bloco: galeria com N fotos de lugares. Toque abre o investigador. */
 export type GaleriaLugaresData = {
