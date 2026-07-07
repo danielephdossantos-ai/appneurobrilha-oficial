@@ -11,6 +11,7 @@ import { Missao } from "./blocos/Missao";
 import { Narrativa } from "./blocos/Narrativa";
 import { Objetivos } from "./blocos/Objetivos";
 import { Explicacao } from "./blocos/Explicacao";
+import { Aprendendo } from "./blocos/Aprendendo";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
 import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
 import { Exercicios } from "./blocos/Exercicios";
@@ -88,12 +89,13 @@ export function AulaPlayer({
     () =>
       BLOCOS_BASE.filter((b) => {
         if (b.id === "narrativa" && !aula.narrativa) return false;
+        if (b.id === "aprendendo" && !aula.aprendendo) return false;
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
         if (b.id === "minijogo" && !aula.minijogo) return false;
         if (b.id === "familia" && !aula.missaoFamilia) return false;
         return true;
       }),
-    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
+    [aula.narrativa, aula.aprendendo, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
   );
 
 
@@ -391,6 +393,8 @@ function renderBloco(
           </div>
         </>
       );
+    case "aprendendo":
+      return a.aprendendo ? <Aprendendo dados={a.aprendendo} /> : null;
     case "exemplo":
       return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
