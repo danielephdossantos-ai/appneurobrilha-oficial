@@ -850,7 +850,7 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
 function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
   const VELOCIDADE_VOZ = 0.78;
   const TEMPO_POR_CARACTERE_MS = 145;
-  const PAUSA_ENTRE_PASSOS_MS = 1900;
+  const PAUSA_ENTRE_PASSOS_MS = 2600;
   const PAUSA_FINAL_MS = 900;
   const ehSoma = i.operacao === "soma";
   const quantidadeTirada = Math.min(i.b, i.a);
@@ -1033,7 +1033,7 @@ function GrupoImgAnimado({
               src={url}
               alt=""
               className={
-                "w-9 h-9 object-contain transition-all duration-300 " +
+                "w-9 h-9 object-contain transition-all duration-1000 " +
                 (sumiu
                   ? "opacity-15 grayscale scale-75"
                   : contado
