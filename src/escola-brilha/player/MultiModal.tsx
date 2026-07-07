@@ -18,11 +18,6 @@ import { Secao } from "./blocos/Secao";
 import { TapCountGroup } from "./blocos/TapCountGroup";
 import { OperacaoVisual } from "./blocos/OperacaoVisual";
 import { PosicaoEspacial } from "./blocos/PosicaoEspacial";
-import {
-  JogoContarSilabas,
-  JogoMontarSilabas,
-  JogoTrocarSilaba,
-} from "./blocos/SilabasJogos";
 import { useDeviceTTS } from "@/hooks/useDeviceTTS";
 import type { Aula } from "../types";
 
@@ -148,12 +143,6 @@ function Interativa({ jogo }: { jogo: NonNullable<Aula["interativas"]>[number] }
       return <JogoSelecionarMultiplos jogo={jogo} />;
     case "album":
       return <JogoAlbum jogo={jogo} />;
-    case "contarSilabas":
-      return <JogoContarSilabas jogo={jogo} />;
-    case "montarSilabas":
-      return <JogoMontarSilabas jogo={jogo} />;
-    case "trocarSilaba":
-      return <JogoTrocarSilaba jogo={jogo} />;
   }
 }
 

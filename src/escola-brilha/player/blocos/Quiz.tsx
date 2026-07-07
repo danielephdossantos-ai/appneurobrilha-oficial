@@ -160,12 +160,10 @@ function QuizVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> }) {
       </div>
     );
   }
-  if (visual.tipo === "cenaEntre") {
-    return (
-      <div className="mb-4">
-        <CenaEntreView spec={visual} compact />
-      </div>
-    );
-  }
-  return null;
+  // cenaEntre
+  return (
+    <div className="mb-4">
+      <CenaEntreView spec={visual} compact />
+    </div>
+  );
 }

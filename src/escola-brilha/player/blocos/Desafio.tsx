@@ -211,7 +211,7 @@ function PerguntaVisual({ visual }: { visual: NonNullable<QuizItem["visual"]> })
       </div>
     );
   }
-  if (visual.tipo !== "comparar") return null;
+  // comparar
   return (
     <div className="mb-3 grid gap-2 grid-cols-2">
       {visual.lados.map((l, i) => (
