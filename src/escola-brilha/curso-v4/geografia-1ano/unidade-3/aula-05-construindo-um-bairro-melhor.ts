@@ -122,9 +122,10 @@ export const aula05: AulaGeografiaV4 = {
     quiz: {
       pergunta: "Qual desses um bairro PRECISA ter?",
       opcoes: [
-        "Só casas, sem escola nem mercado",
-        "Casas + escola + saúde + mercado + praça",
+        "Só casas",
+        "Casas + escola + saúde + mercado",
       ],
+      opcoesImagens: [casa, bairro],
       correta: 1,
       feedbackAcerto: "Isso! Um bairro bom equilibra tudo.",
       feedbackErro: "Só casas não basta — precisa de escola, saúde e outros serviços.",
@@ -137,9 +138,10 @@ export const aula05: AulaGeografiaV4 = {
     quiz: {
       pergunta: "Se seu bairro NÃO tem um serviço, o que a gente faz?",
       opcoes: [
-        "Vai num bairro vizinho que tem",
+        "Vai num bairro vizinho",
         "Fica sem",
       ],
+      opcoesImagens: [mapaPercurso, menino],
       correta: 0,
       feedbackAcerto: "Certo! Bairros se ajudam — a gente vai onde o serviço existe.",
       feedbackErro: "A gente vai num bairro perto que tenha esse serviço.",
