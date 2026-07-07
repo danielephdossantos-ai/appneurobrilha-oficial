@@ -1,6 +1,7 @@
 import type { CursoGeografia } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
+import { unidade3 } from "./unidade-3";
 
 /**
  * Curso: Geografia 1º Ano — "Pequenos Exploradores do Mundo"
