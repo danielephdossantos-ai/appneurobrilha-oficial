@@ -20,6 +20,80 @@ const CORES = [
   { bg: "from-amber-400 to-orange-500", ring: "ring-amber-200" },
 ];
 
+// Cores rotativas para as sílabas — cada palma acende de uma cor.
+const CORES_SILABA = [
+  "from-rose-400 to-pink-500",
+  "from-sky-400 to-blue-500",
+  "from-emerald-400 to-green-500",
+  "from-amber-400 to-orange-500",
+  "from-violet-400 to-purple-500",
+];
+
+function SilabasParaTocar({ silabas }: { silabas: string[] }) {
+  const [acesas, setAcesas] = useState<boolean[]>(() => silabas.map(() => false));
+
+  function tocarSilaba(i: number) {
+    setAcesas((prev) => {
+      const nova = [...prev];
+      nova[i] = !nova[i];
+      return nova;
+    });
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      try { navigator.vibrate?.(30); } catch { /* ignore */ }
+    }
+  }
+
+  function resetar() {
+    setAcesas(silabas.map(() => false));
+  }
+
+  const contadas = acesas.filter(Boolean).length;
+
+  return (
+    <div className="mb-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 p-3 border-2 border-indigo-200">
+      <div className="text-xs sm:text-sm font-bold text-indigo-700 mb-2 text-center">
+        👏 Toque em cada pedaço pra acender
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center items-center">
+        {silabas.map((s, i) => {
+          const cor = CORES_SILABA[i % CORES_SILABA.length];
+          const on = acesas[i];
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tocarSilaba(i)}
+              className={`min-w-16 h-16 sm:min-w-20 sm:h-20 px-3 rounded-2xl font-black text-2xl sm:text-3xl shadow-md transition-all duration-200 active:scale-95 ${
+                on
+                  ? `bg-gradient-to-br ${cor} text-white scale-110 ring-4 ring-white`
+                  : "bg-white text-slate-300 border-2 border-dashed border-slate-300"
+              }`}
+              aria-pressed={on}
+            >
+              {s}
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex items-center justify-center gap-3 mt-2">
+        <div className="text-lg font-black text-indigo-800">
+          👏 {contadas}
+        </div>
+        {contadas > 0 && (
+          <button
+            type="button"
+            onClick={resetar}
+            className="text-xs font-bold text-indigo-600 underline"
+          >
+            apagar
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
 export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === quiz.correta;
@@ -45,6 +119,11 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
     setEscolha(null);
   }
 
+  // Detecta palavra silabada tipo CA-SA, BA-NA-NA, JA-NE-LA na pergunta,
+  // pra virar um "contador de palmas" visual (acende quando toca).
+  const silabada = quiz.pergunta.match(/\b([A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4}(?:-[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{1,4})+)\b/);
+  const silabas = silabada ? silabada[1].split("-") : null;
+
   return (
     <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
       {/* Pergunta com botão de ouvir */}
@@ -60,6 +139,9 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           {quiz.pergunta}
         </p>
       </div>
+
+      {silabas && <SilabasParaTocar silabas={silabas} />}
+
 
       {/* Bolas de opção — GRANDES pra tocar */}
       <div
