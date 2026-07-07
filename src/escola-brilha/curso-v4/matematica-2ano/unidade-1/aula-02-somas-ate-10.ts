@@ -209,7 +209,7 @@ export const aula02_somasAte10: AulaV4 = {
     perguntas: [
       {
         pergunta:
-          "🚧 Quiz final de 5 perguntas + Desafio Brilha chegam na Fatia 4. Placeholder: 5 + 2 = ?",
+          "🚧 Em construção — o Quiz final de 5 perguntas + Desafio Brilha chegam na Fatia 4. Por enquanto, uma pergunta de aquecimento: quanto é 5 + 2?",
         opcoes: ["6", "7", "8"],
         correta: 1,
         feedbackAcerto: "🎉 Isso! Começamos no 5 e contamos +2: seis, sete. Total 7.",
@@ -218,10 +218,10 @@ export const aula02_somasAte10: AulaV4 = {
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "🚧 Missão em família + Curiosidade chegam na Fatia 4",
-    materiais: ["Aguardando aprovação da Fatia 1."],
-    passos: ["Fatia 1 valida Aprendendo (Etapas 1 a 5)."],
-    registro: "—",
+    titulo: "🚧 Em construção — Missão em família chega na Fatia 4",
+    materiais: ["Aguarde: aqui vai entrar a atividade prática pra fazer em casa com a família."],
+    passos: ["Fatias já entregues: 1 (Aprendendo) e 2 (3 Fases de prática). Faltam: minijogo Colheita Relâmpago e Quiz final + Missão em família."],
+    registro: "Em breve.",
   },
 
   recompensa: {
