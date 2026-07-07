@@ -203,6 +203,11 @@ export type MomentoAvaliacao = {
       quantidade: number;
       rotulo?: string;
     }>;
+    /** Quantidade a "tirar" visualmente (subtração). Quando definido em uma
+     * pergunta com UM único visualGrupo, o quiz mostra um botão pra apagar
+     * as últimas N imagens (fade + risco) e a criança conta o que sobrou. */
+    tirar?: number;
+
   }>;
 };
 

@@ -206,6 +206,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 5, rotulo: "Tinha" },
         ],
+        tirar: 2,
         feedbackAcerto:
           "🎉 Isso! Comece no 5 e volte 2: quatro, três. Sobraram 3.",
         feedbackErro:
@@ -220,6 +221,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 7, rotulo: "Antes do lanche" },
         ],
+        tirar: 2,
         feedbackAcerto:
           "🎉 Perfeito! 7 − 2 = 5. Voltou 2 casas do 7: seis, cinco.",
         feedbackErro:
@@ -233,6 +235,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 8, rotulo: "Tinha 8, tirou todas" },
         ],
+        tirar: 8,
         feedbackAcerto:
           "🎉 Isso! Se tira TUDO que tinha, sobra ZERO. 8 − 8 = 0. A cesta ficou vazia!",
         feedbackErro:
@@ -247,6 +250,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: banana, quantidade: 9, rotulo: "Brilha tinha" },
         ],
+        tirar: 1,
         feedbackAcerto:
           "🎉 Boa! 9 − 1 = 8. Truque esperto: tirar 1 é só falar o número ANTES: antes do 9 vem o 8.",
         feedbackErro:
@@ -261,6 +265,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 10, rotulo: "Cesta cheia" },
         ],
+        tirar: 5,
         feedbackAcerto:
           "🎉 Uau! 10 − 5 = 5. Tirou metade! Sobrou a outra metade. Você é campeão(ã) do pomar! 🏆",
         feedbackErro:
