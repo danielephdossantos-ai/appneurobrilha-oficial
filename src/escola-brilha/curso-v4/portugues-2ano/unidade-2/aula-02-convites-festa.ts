@@ -33,15 +33,24 @@ export const aula02: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao: "Antes de ler o convite: o que ele PRECISA ter pra alguém ir na festa?",
+    instrucao:
+      "Leia o convite que Aurora escreveu. Depois pense: o que TODO convite precisa ter?",
     bloco: {
       titulo: "O primeiro convite",
-      capaImagemUrl: festa,
-      pistas: [
-        { imagemUrl: calendario, nome: "Um calendário" },
-        { imagemUrl: relogio, nome: "Um relógio" },
-        { imagemUrl: biblioteca, nome: "A biblioteca" },
-      ],
+      recado: {
+        icone: "🎉",
+        rotulo: "O convite da Aurora",
+        estilo: "papel",
+        linhas: [
+          "Você está convidado!",
+          "🎉 Festa dos Livros",
+          "📅 Sábado, 20 de setembro",
+          "🕒 Das 15h às 18h",
+          "📍 Biblioteca da Aurora",
+          "",
+          "— Aurora",
+        ],
+      },
       pergunta: "Um convite precisa dizer principalmente…",
       hipoteses: [
         {

@@ -38,12 +38,23 @@ export const aula01: AulaPortuguesV4 = {
 
   momento02_previsao: {
     instrucao:
-      "Um papelzinho está preso na porta. Antes de ler, pensa: pra que serve esse tipo de papel?",
+      "Um papelzinho está preso na porta. Leia o que está escrito e pense: pra que serve esse tipo de papel?",
     bloco: {
       titulo: "O papelzinho da porta",
-      capaImagemUrl: papel,
-      pistas: [{ imagemUrl: papel, nome: "Um papel pequeno" }],
-      pergunta: "Pra que serve um papelzinho preso na porta?",
+      recado: {
+        icone: "📩",
+        rotulo: "Papelzinho preso na porta",
+        estilo: "papel",
+        linhas: [
+          "Brilha,",
+          "Fui buscar novos livros",
+          "na sala ao lado.",
+          "Espere por mim.",
+          "",
+          "Aurora.",
+        ],
+      },
+      pergunta: "Pra que serve um papelzinho pequeno assim, preso na porta?",
       hipoteses: [
         { texto: "Pra deixar um RECADO pra alguém.", imagemUrl: papel },
         { texto: "Pra contar uma história longa com personagens.", imagemUrl: livro },

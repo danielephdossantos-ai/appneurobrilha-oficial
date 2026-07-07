@@ -9,25 +9,32 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === data.respostaCerta;
 
+  const temRecado = !!data.recado && data.recado.linhas.length > 0;
+
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-4">
-      {/* Capa do livro */}
-      <div className="flex flex-col items-center gap-3">
-        {data.capaImagemUrl && (
-          <img
-            src={data.capaImagemUrl}
-            alt={data.titulo}
-            className="w-32 h-32 object-contain drop-shadow-lg"
-          />
-        )}
-        <div className="text-center">
-          <div className="text-[10px] uppercase tracking-widest text-amber-300">Título do livro</div>
-          <div className="text-xl font-black text-white">📖 {data.titulo}</div>
+      {temRecado ? (
+        /* Papel/cartaz com o TEXTO real que a criança vai ler */
+        <RecadoPapel recado={data.recado!} />
+      ) : (
+        /* Capa de livro (para previsões sobre histórias) */
+        <div className="flex flex-col items-center gap-3">
+          {data.capaImagemUrl && (
+            <img
+              src={data.capaImagemUrl}
+              alt={data.titulo}
+              className="w-32 h-32 object-contain drop-shadow-lg"
+            />
+          )}
+          <div className="text-center">
+            <div className="text-[10px] uppercase tracking-widest text-amber-300">Título do livro</div>
+            <div className="text-xl font-black text-white">📖 {data.titulo}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Pistas visuais */}
-      {data.pistas && data.pistas.length > 0 && (
+      {/* Pistas visuais — só quando NÃO tem recado (senão duplica) */}
+      {!temRecado && data.pistas && data.pistas.length > 0 && (
         <div>
           <div className="text-xs text-white/60 text-center mb-2">Pistas na capa:</div>
           <div className="flex flex-wrap justify-center gap-3">
@@ -88,6 +95,62 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
             {acertou ? data.feedbackAcerto : data.feedbackErro}
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Papelzinho / cartaz com o TEXTO REAL que a criança vai ler antes da
+ * previsão. Substitui a "capa de livro" quando a previsão é sobre um
+ * gênero textual do dia a dia (bilhete, cartaz, convite, lista).
+ */
+function RecadoPapel({
+  recado,
+}: {
+  recado: NonNullable<import("../../types").PrevisaoTituloData["recado"]>;
+}) {
+  const estilo = recado.estilo ?? "papel";
+  const ehCartaz = estilo === "cartaz";
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      {recado.rotulo && (
+        <div className="text-[10px] uppercase tracking-widest text-amber-300">
+          {recado.icone ? `${recado.icone} ` : ""}
+          {recado.rotulo}
+        </div>
+      )}
+
+      <div
+        className={
+          ehCartaz
+            ? // CARTAZ: fundo bem claro, letras GRANDES em maiúsculas, borda vermelha
+              "w-full max-w-md bg-amber-50 border-4 border-rose-500 rounded-lg p-5 shadow-xl text-center"
+            : // PAPEL: pauta suave, ligeira rotação, sensação de bilhete manuscrito
+              "w-full max-w-md bg-amber-50 border border-amber-200 rounded-md p-5 shadow-xl -rotate-1"
+        }
+        style={
+          ehCartaz
+            ? undefined
+            : {
+                backgroundImage:
+                  "repeating-linear-gradient(transparent, transparent 26px, rgba(59,30,107,0.15) 27px)",
+              }
+        }
+      >
+        {recado.linhas.map((linha, i) => (
+          <div
+            key={i}
+            className={
+              ehCartaz
+                ? "text-[#1a0d3d] font-black text-2xl leading-tight uppercase tracking-wide mb-1"
+                : "text-[#1a0d3d] font-medium text-base leading-7"
+            }
+          >
+            {linha || "\u00A0"}
+          </div>
+        ))}
       </div>
     </div>
   );

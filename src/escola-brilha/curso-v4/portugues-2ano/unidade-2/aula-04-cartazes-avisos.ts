@@ -32,11 +32,16 @@ export const aula04: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao: "Pra que serve um cartaz numa parede?",
+    instrucao:
+      "Leia o cartaz que apareceu na porta. Depois pense: pra que serve um cartaz assim?",
     bloco: {
       titulo: "O cartaz da entrada",
-      capaImagemUrl: papel,
-      pistas: [{ imagemUrl: biblioteca, nome: "A biblioteca" }],
+      recado: {
+        icone: "📢",
+        rotulo: "Cartaz da entrada",
+        estilo: "cartaz",
+        linhas: ["Silêncio", "Pessoas lendo"],
+      },
       pergunta: "Pra que serve esse cartaz?",
       hipoteses: [
         {

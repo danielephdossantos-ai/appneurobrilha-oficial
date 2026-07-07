@@ -37,15 +37,22 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento02_previsao: {
-    instrucao: "Pra que serve uma lista?",
+    instrucao:
+      "Aurora rabiscou uma lista. Leia o papel dela e pense: pra que serve uma lista?",
     bloco: {
       titulo: "A lista da biblioteca",
-      capaImagemUrl: papel,
-      pistas: [
-        { imagemUrl: livro, nome: "Livros" },
-        { imagemUrl: lapis, nome: "Lápis" },
-        { imagemUrl: papel, nome: "Papel" },
-      ],
+      recado: {
+        icone: "📝",
+        rotulo: "Lista da Aurora",
+        estilo: "papel",
+        linhas: [
+          "COMPRAR PRA BIBLIOTECA:",
+          "• Livros",
+          "• Lápis",
+          "• Papel",
+          "• Giz de cera",
+        ],
+      },
       pergunta: "Pra que a Aurora quer fazer uma lista?",
       hipoteses: [
         {
