@@ -136,9 +136,10 @@ function EscolaBrilhaCatalogo() {
       if (filtro === "disponiveis" && !escritasSet.has(h.codigo)) continue;
       const series = expandirAno(h.ano);
       const disc = slugDisc(h.componente);
+      const isArte = disc === "arte" || disc === "artes" || /^EF15AR/i.test(h.codigo);
       for (const s of series) {
         // Arte (Atelier das Cores) só disponível para 1º Ano — remover 2º-5º.
-        if (disc === "arte" && s !== "1º Ano") continue;
+        if (isArte && s !== "1º Ano") continue;
         (tree[s][disc] ||= []).push(h);
       }
 
