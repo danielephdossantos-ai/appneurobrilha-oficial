@@ -207,46 +207,50 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
                 <div className="text-sm text-white/70 mt-1">Ex.: {e.exemplo}</div>
               )}
               {e.agrupamentos && e.agrupamentos.length > 0 && (
-                <div className="mt-3 space-y-3">
-                  {e.agrupamentos.map((ag, idx) => {
-                    const total = ag.tamanhoGrupo * ag.qtdGrupos;
-                    return (
-                      <div key={idx} className="rounded-xl bg-white/5 p-3">
-                        {ag.rotulo && (
-                          <div className="text-xs text-amber-300 font-semibold mb-2">
-                            {ag.rotulo}
-                          </div>
-                        )}
-                        <div className="flex flex-wrap gap-3 items-end">
-                          {Array.from({ length: ag.qtdGrupos }).map((_, gi) => (
-                            <div key={gi} className="flex flex-col items-center">
-                              <div className="grid grid-cols-5 gap-0.5 p-1 rounded-lg bg-amber-400/10 border border-amber-300/30">
-                                {Array.from({ length: ag.tamanhoGrupo }).map((_, ii) => (
-                                  <img
-                                    key={ii}
-                                    src={ag.imagemUrl}
-                                    alt=""
-                                    className="w-6 h-6 object-contain"
-                                  />
-                                ))}
-                              </div>
-                              <div className="text-xs text-white/80 mt-1 font-bold">
-                                {ag.tamanhoGrupo * (gi + 1)}
-                              </div>
+                <div className="mt-3 flex flex-wrap gap-3 items-start">
+                  <div className="flex-1 min-w-[200px] space-y-3">
+                    {e.agrupamentos.map((ag, idx) => {
+                      const total = ag.tamanhoGrupo * ag.qtdGrupos;
+                      return (
+                        <div key={idx} className="rounded-xl bg-white/5 p-3">
+                          {ag.rotulo && (
+                            <div className="text-xs text-amber-300 font-semibold mb-2">
+                              {ag.rotulo}
                             </div>
-                          ))}
+                          )}
+                          <div className="flex flex-wrap gap-3 items-end">
+                            {Array.from({ length: ag.qtdGrupos }).map((_, gi) => (
+                              <div key={gi} className="flex flex-col items-center">
+                                <div className="grid grid-cols-5 gap-0.5 p-1 rounded-lg bg-amber-400/10 border border-amber-300/30">
+                                  {Array.from({ length: ag.tamanhoGrupo }).map((_, ii) => (
+                                    <img
+                                      key={ii}
+                                      src={ag.imagemUrl}
+                                      alt=""
+                                      className="w-6 h-6 object-contain"
+                                    />
+                                  ))}
+                                </div>
+                                <div className="text-xs text-white/80 mt-1 font-bold">
+                                  {ag.tamanhoGrupo * (gi + 1)}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-sm text-white/90 mt-2">
+                            {Array.from({ length: ag.qtdGrupos })
+                              .map(() => ag.tamanhoGrupo)
+                              .join(" + ")}{" "}
+                            = <span className="font-bold text-amber-300">{total}</span>
+                          </div>
                         </div>
-                        <div className="text-sm text-white/90 mt-2">
-                          {Array.from({ length: ag.qtdGrupos })
-                            .map(() => ag.tamanhoGrupo)
-                            .join(" + ")}{" "}
-                          = <span className="font-bold text-amber-300">{total}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
+                  <ContaArmadaEmpilhada agrupamentos={e.agrupamentos} />
                 </div>
               )}
+
               {e.frutasParaNumero && (
                 <FrutasParaNumero {...e.frutasParaNumero} />
               )}
