@@ -1,6 +1,9 @@
 import type { UnidadePortugues } from "../../types";
 import { aula01 } from "./aula-01-portal-biblioteca";
 import { aula02 } from "./aula-02-semente-curiosa";
+import { aula03 } from "./aula-03-coelho-lua";
+import { aula04 } from "./aula-04-mapa-raposa";
+import { aula05 } from "./aula-05-ultima-pagina";
 
 /**
  * Unidade 1 — A Biblioteca Encantada
@@ -26,5 +29,5 @@ export const unidade1: UnidadePortugues = {
   descricao:
     "Brilha atravessa o portal de uma antiga biblioteca esquecida. Pra despertar cada livro adormecido, precisa cumprir missões de leitura — observando, prevendo, lendo e explicando as histórias.",
   corTema: "#a855f7",
-  aulas: [aula01, aula02],
+  aulas: [aula01, aula02, aula03, aula04, aula05],
 };
