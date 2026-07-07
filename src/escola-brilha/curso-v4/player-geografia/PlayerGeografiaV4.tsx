@@ -5,6 +5,10 @@ import { stopSpeaking } from "@/lib/native-tts";
 import { Motivacao } from "./blocos/Motivacao";
 import { GaleriaLugares } from "./blocos/GaleriaLugares";
 import { ModoInvestigador } from "./blocos/ModoInvestigador";
+import { Hipotese } from "./blocos/Hipotese";
+import { CompararLugares } from "./blocos/CompararLugares";
+import { PainelComparativo } from "./blocos/PainelComparativo";
+
 
 /**
  * Player Geografia v4 — estética de campo/expedição.
