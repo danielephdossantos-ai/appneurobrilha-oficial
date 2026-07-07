@@ -207,55 +207,71 @@ export const aula02_somasAte10: AulaV4 = {
   },
   momento10_avaliacao: {
     perguntas: [
-      // 1 — bem fácil: soma pequena
+      // 1 — 2 + 3 com maçãs
       {
-        pergunta: "Pergunta 1 de 5 — Quanto é 2 + 3?",
+        pergunta: "Pergunta 1 de 5 — Quanto é 2 + 3? Toque nas maçãs pra contar tudo.",
         opcoes: ["4", "5", "6"],
         correta: 1,
-        visualUrl: maca,
+        visualGrupos: [
+          { imagemUrl: maca, quantidade: 2, rotulo: "Primeiro grupo" },
+          { imagemUrl: maca, quantidade: 3, rotulo: "Chegaram mais" },
+        ],
         feedbackAcerto:
-          "🎉 Isso! Começamos no 3 (o maior) e contamos +2: quatro, cinco. Total 5.",
+          "🎉 Isso! 2 maçãs + 3 maçãs = 5. Começamos no 3 (o maior) e contamos +2: quatro, cinco.",
         feedbackErro:
-          "Vamos juntos: comece pelo maior (3) e conte +2 nos dedos: quatro… cinco. A resposta é 5.",
+          "Vamos juntos: 2 maçãs no primeiro grupo, 3 maçãs no segundo. Conte todas: 1, 2, 3, 4, 5. A resposta é 5.",
       },
-      // 2 — soma média com maçãs
+      // 2 — 4 + 3 maçãs (contexto Seu Coelho)
       {
         pergunta: "Pergunta 2 de 5 — Seu Coelho colheu 4 maçãs e depois mais 3. Quantas maçãs ele tem?",
         opcoes: ["6", "7", "8"],
         correta: 1,
-        visualUrl: maca,
+        visualGrupos: [
+          { imagemUrl: maca, quantidade: 4, rotulo: "De manhã" },
+          { imagemUrl: maca, quantidade: 3, rotulo: "À tarde" },
+        ],
         feedbackAcerto:
           "🎉 Perfeito! 4 + 3 = 7. Começou no 4 e contou: cinco, seis, sete.",
         feedbackErro:
           "Pense: 4 maçãs já tinha. Chegaram mais 3. Conte a partir do 4: cinco, seis, sete. São 7 maçãs.",
       },
-      // 3 — chegando no 10
+      // 3 — 6 + 4 maçãs (chega no 10)
       {
-        pergunta: "Pergunta 3 de 5 — Quanto é 6 + 4?",
+        pergunta: "Pergunta 3 de 5 — Quanto é 6 + 4? Conte todas as maçãs.",
         opcoes: ["9", "10", "11"],
         correta: 1,
+        visualGrupos: [
+          { imagemUrl: maca, quantidade: 6, rotulo: "Cesta 1" },
+          { imagemUrl: maca, quantidade: 4, rotulo: "Cesta 2" },
+        ],
         feedbackAcerto:
           "🎉 Isso! 6 + 4 = 10. Uma dezena cheia — a cesta ficou cheinha!",
         feedbackErro:
           "Começa no 6 e conta MAIS 4 nos dedos: sete, oito, nove, dez. A resposta é 10.",
       },
-      // 4 — comutatividade escondida
+      // 4 — 2 + 6 bananas
       {
         pergunta: "Pergunta 4 de 5 — Brilha tem 2 bananas. A amiga dela deu mais 6. Quantas bananas ficaram?",
         opcoes: ["7", "8", "9"],
         correta: 1,
-        visualUrl: banana,
+        visualGrupos: [
+          { imagemUrl: banana, quantidade: 2, rotulo: "Brilha" },
+          { imagemUrl: banana, quantidade: 6, rotulo: "Amiga deu" },
+        ],
         feedbackAcerto:
           "🎉 Boa! 2 + 6 = 8. Truque esperto: começar pelo MAIOR (6) e contar +2: sete, oito. Fica mais fácil!",
         feedbackErro:
           "Dica de ouro: quando um número é bem maior, comece por ele. 6 + 2: sete, oito. Total 8.",
       },
-      // 5 — problema aplicado
+      // 5 — 5 + 5 maçãs
       {
-        pergunta: "Pergunta 5 de 5 — Na feira, uma cesta tem 5 maçãs e outra tem 5 maçãs. Se juntarmos as duas cestas, quantas maçãs teremos?",
+        pergunta: "Pergunta 5 de 5 — Uma cesta tem 5 maçãs e outra tem 5 maçãs. Se juntarmos as duas, quantas maçãs teremos?",
         opcoes: ["9", "10", "11"],
         correta: 1,
-        visualUrl: maca,
+        visualGrupos: [
+          { imagemUrl: maca, quantidade: 5, rotulo: "Cesta 1" },
+          { imagemUrl: maca, quantidade: 5, rotulo: "Cesta 2" },
+        ],
         feedbackAcerto:
           "🎉 Uau! 5 + 5 = 10. Duas mãos cheias — uma dezena! Você é campeão(ã) do pomar! 🏆",
         feedbackErro:
