@@ -1,23 +1,51 @@
 import { useState } from "react";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 import type { PrevisaoTituloData } from "../../types";
 
 /**
- * Bloco de Previsão — mostra título + capa + pistas (imagens de objetos)
- * e pede pra criança escolher uma hipótese do que vai acontecer.
+ * Bloco de Previsão — mostra título/recado + capa + pistas e pede pra criança
+ * escolher uma hipótese do que vai acontecer.
+ *
+ * As hipóteses são renderizadas como CARDS VISUAIS gigantes (mesmo tratamento
+ * do QuizTexto), não mais como lista de botões estilo questionário.
  */
+const CORES = [
+  { bg: "from-rose-400 to-pink-500" },
+  { bg: "from-sky-400 to-blue-500" },
+  { bg: "from-emerald-400 to-green-500" },
+  { bg: "from-amber-400 to-orange-500" },
+];
+
 export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const acertou = escolha !== null && escolha === data.respostaCerta;
 
   const temRecado = !!data.recado && data.recado.linhas.length > 0;
 
+  function ouvirPergunta() {
+    stopSpeaking();
+    speakChunked(data.pergunta);
+  }
+
+  function tocar(i: number) {
+    if (escolha !== null) return;
+    stopSpeaking();
+    speakChunked(data.hipoteses[i].texto);
+    setEscolha(i);
+    const msg = i === data.respostaCerta ? data.feedbackAcerto : data.feedbackErro;
+    setTimeout(() => speakChunked(msg), 900);
+  }
+
+  function tentarDeNovo() {
+    stopSpeaking();
+    setEscolha(null);
+  }
+
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-4">
       {temRecado ? (
-        /* Papel/cartaz com o TEXTO real que a criança vai ler */
         <RecadoPapel recado={data.recado!} />
       ) : (
-        /* Capa de livro (para previsões sobre histórias) */
         <div className="flex flex-col items-center gap-3">
           {data.capaImagemUrl && (
             <img
@@ -33,7 +61,6 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
         </div>
       )}
 
-      {/* Pistas visuais — só quando NÃO tem recado (senão duplica) */}
       {!temRecado && data.pistas && data.pistas.length > 0 && (
         <div>
           <div className="text-xs text-white/60 text-center mb-2">Pistas na capa:</div>
@@ -51,36 +78,67 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
         </div>
       )}
 
-      {/* Pergunta + hipóteses */}
-      <div className="pt-2">
-        <div className="text-sm font-bold text-white mb-3">🤔 {data.pergunta}</div>
-        <div className="grid gap-2">
+      {/* Pergunta + hipóteses VISUAIS */}
+      <div className="rounded-3xl bg-white text-[#0d1f55] p-4 shadow-lg border-2 border-white/60">
+        <div className="flex items-start gap-3 mb-4">
+          <button
+            onClick={ouvirPergunta}
+            aria-label="Ouvir a pergunta"
+            className="shrink-0 w-12 h-12 rounded-full bg-amber-400 text-[#0d1f55] text-2xl font-black grid place-items-center shadow-md active:scale-95"
+          >
+            🔊
+          </button>
+          <p className="text-lg sm:text-xl font-black leading-snug flex-1">
+            🤔 {data.pergunta}
+          </p>
+        </div>
+
+        <div
+          className={`grid gap-3 ${
+            data.hipoteses.length <= 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
+          }`}
+        >
           {data.hipoteses.map((h, i) => {
+            const cor = CORES[i % CORES.length];
             const marcada = escolha === i;
             const certa = i === data.respostaCerta;
-            const cor =
-              escolha === null
-                ? "bg-white/10 hover:bg-white/20 text-white"
-                : marcada && certa
-                  ? "bg-emerald-500 text-white"
-                  : marcada && !certa
-                    ? "bg-rose-500 text-white"
-                    : certa
-                      ? "bg-emerald-500/40 text-white"
-                      : "bg-white/5 text-white/40";
+            const revelou = escolha !== null;
+
+            let estado = "";
+            if (!revelou) {
+              estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+            } else if (marcada && certa) {
+              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
+            } else if (marcada && !certa) {
+              estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
+            } else if (certa) {
+              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
+            } else {
+              estado = "bg-slate-200 text-slate-400";
+            }
+
             return (
               <button
                 key={i}
-                disabled={escolha !== null}
-                onClick={() => setEscolha(i)}
-                className={`text-left px-4 py-3 rounded-xl transition ${cor}`}
+                disabled={revelou}
+                onClick={() => tocar(i)}
+                className={`relative rounded-[2rem] p-4 min-h-[140px] font-black shadow-xl transition-all duration-200 flex flex-col items-center justify-center gap-2 text-center ${estado}`}
               >
-                <div className="flex items-center gap-3">
-                  {h.imagemUrl && (
-                    <img src={h.imagemUrl} alt="" className="w-10 h-10 object-contain shrink-0" />
-                  )}
-                  <div className="text-sm font-medium">{h.texto}</div>
-                </div>
+                {h.imagemUrl && (
+                  <div className="w-20 h-20 rounded-2xl bg-white/90 grid place-items-center p-2">
+                    <img src={h.imagemUrl} alt="" className="w-full h-full object-contain" />
+                  </div>
+                )}
+                <span className="text-sm sm:text-base leading-snug">{h.texto}</span>
+                {revelou && marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+                )}
+                {revelou && marcada && !certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+                )}
+                {revelou && !marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+                )}
               </button>
             );
           })}
@@ -88,11 +146,24 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
 
         {escolha !== null && (
           <div
-            className={`mt-3 text-sm p-3 rounded-xl ${
-              acertou ? "bg-emerald-500/20 text-emerald-100" : "bg-amber-500/20 text-amber-100"
+            className={`mt-4 p-4 rounded-2xl text-base font-bold leading-snug ${
+              acertou
+                ? "bg-emerald-100 text-emerald-900 border-2 border-emerald-300"
+                : "bg-amber-100 text-amber-900 border-2 border-amber-300"
             }`}
           >
-            {acertou ? data.feedbackAcerto : data.feedbackErro}
+            <div className="flex items-start gap-2">
+              <span className="text-2xl">{acertou ? "🌟" : "🤔"}</span>
+              <div className="flex-1">{acertou ? data.feedbackAcerto : data.feedbackErro}</div>
+            </div>
+            {!acertou && (
+              <button
+                onClick={tentarDeNovo}
+                className="mt-3 w-full h-12 rounded-2xl bg-amber-400 text-[#0d1f55] font-black text-lg active:scale-95 shadow"
+              >
+                🔄 Tentar de novo
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -100,11 +171,6 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
   );
 }
 
-/**
- * Papelzinho / cartaz com o TEXTO REAL que a criança vai ler antes da
- * previsão. Substitui a "capa de livro" quando a previsão é sobre um
- * gênero textual do dia a dia (bilhete, cartaz, convite, lista).
- */
 function RecadoPapel({
   recado,
 }: {
@@ -125,10 +191,8 @@ function RecadoPapel({
       <div
         className={
           ehCartaz
-            ? // CARTAZ: fundo bem claro, letras GRANDES em maiúsculas, borda vermelha
-              "w-full max-w-md bg-amber-50 border-4 border-rose-500 rounded-lg p-5 shadow-xl text-center"
-            : // PAPEL: pauta suave, ligeira rotação, sensação de bilhete manuscrito
-              "w-full max-w-md bg-amber-50 border border-amber-200 rounded-md p-5 shadow-xl -rotate-1"
+            ? "w-full max-w-md bg-amber-50 border-4 border-rose-500 rounded-lg p-5 shadow-xl text-center"
+            : "w-full max-w-md bg-amber-50 border border-amber-200 rounded-md p-5 shadow-xl -rotate-1"
         }
         style={
           ehCartaz
