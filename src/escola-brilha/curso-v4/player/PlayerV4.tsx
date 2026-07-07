@@ -389,15 +389,68 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
   const [respostas, setRespostas] = useState<(number | null)[]>(
     m.perguntas.map(() => null),
   );
+  const [tirados, setTirados] = useState<boolean[]>(
+    m.perguntas.map(() => false),
+  );
   return (
     <Card>
       <div className="text-sm text-amber-300">✅ Mostra o que aprendeu:</div>
-      {m.perguntas.map((q, qi) => (
+      {m.perguntas.map((q, qi) => {
+        const grupoUnico = q.visualGrupos && q.visualGrupos.length === 1;
+        const ehSubtracaoInterativa =
+          grupoUnico && typeof q.tirar === "number" && q.tirar! > 0;
+        const jaTirou = tirados[qi];
+        return (
         <div key={qi} className="border-t border-white/10 pt-4">
           <div className="font-medium mb-3">
             {qi + 1}. {q.pergunta}
           </div>
-          {q.visualGrupos && q.visualGrupos.length > 0 ? (
+          {ehSubtracaoInterativa ? (
+            <div className="mb-3 flex flex-col items-center gap-3">
+              <div className="rounded-2xl bg-white/5 border border-white/15 p-3 w-full max-w-md">
+                {q.visualGrupos![0].rotulo && (
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-amber-200 text-center mb-2">
+                    {q.visualGrupos![0].rotulo} · {q.visualGrupos![0].quantidade}
+                  </div>
+                )}
+                <div className="flex flex-wrap justify-center gap-1">
+                  {Array.from({ length: q.visualGrupos![0].quantidade }).map((_, k) => {
+                    const total = q.visualGrupos![0].quantidade;
+                    const removida = jaTirou && k >= total - (q.tirar ?? 0);
+                    return (
+                      <div key={k} className="relative">
+                        <img
+                          src={q.visualGrupos![0].imagemUrl}
+                          alt=""
+                          className={`h-11 w-11 object-contain drop-shadow transition-all duration-500 ${
+                            removida ? "opacity-15 grayscale" : "opacity-100"
+                          }`}
+                        />
+                        {removida && (
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="h-0.5 w-10 bg-red-500 rotate-45 rounded" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <button
+                onClick={() =>
+                  setTirados((t) => t.map((v, i) => (i === qi ? !v : v)))
+                }
+                className="px-4 py-2 rounded-full bg-amber-400 text-slate-900 text-sm font-bold hover:bg-amber-300"
+              >
+                {jaTirou ? "🔄 Mostrar tudo de novo" : `✂️ Tirar ${q.tirar}`}
+              </button>
+              {jaTirou && (
+                <div className="text-xs text-emerald-200">
+                  Agora conte só as que ficaram acesas!
+                </div>
+              )}
+            </div>
+          ) : q.visualGrupos && q.visualGrupos.length > 0 ? (
             <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
               {q.visualGrupos.map((g, gi) => (
                 <div key={gi} className="flex items-center gap-2">
@@ -427,6 +480,7 @@ function Avaliacao({ m }: { m: AulaV4["momento10_avaliacao"] }) {
           ) : (
             q.visualUrl && <img src={q.visualUrl} alt="" className="w-40 mb-3" />
           )}
+
           <div className="grid gap-2">
             {q.opcoes.map((op, oi) => {
               const escolhida = respostas[qi] === oi;
