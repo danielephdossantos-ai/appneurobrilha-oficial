@@ -1,8 +1,6 @@
 import type { AulaV4 } from "../../types";
 import maca from "@/assets/neuro-treino/objetos/maca.png";
 import banana from "@/assets/neuro-treino/objetos/banana.png";
-import coelho from "@/assets/neuro-treino/objetos/coelho.png";
-import coruja from "@/assets/neuro-treino/objetos/coruja.png";
 import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
 
 /**
