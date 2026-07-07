@@ -152,7 +152,20 @@ export const aula01_feiraDasFrutas: AulaV4 = {
       "Contar UMA A UMA funciona bem só quando são pouquinhas.",
       "CHUTAR primeiro ajuda a saber se a contagem faz sentido.",
       "AGRUPAR de 5 em 5 ou de 10 em 10 é o jeito mais rápido e seguro.",
+      "🎮 Agora vamos brincar: Colheita Relâmpago!",
     ],
+    miniDesafio: {
+      tipo: "minijogoColheita",
+      imagemUrl: maca,
+      itemPlural: "maçãs",
+      alvoInicial: 10,      // uma pilha cheia de 10
+      chegaramMais: 3,      // + 3 soltas = 13, igual ao modelagem
+      duracaoSeg: 90,
+      feedbackAcerto:
+        "🎉 Boa! Uma pilha de 10 + 3 soltas = 13 maçãs. É o jeito dos matemáticos da vila!",
+      feedbackErro:
+        "Quase! Você tinha 10 maçãs e chegaram mais 3. 10 + 3 = 13. Ficaram 13 maçãs na cesta.",
+    },
   },
 
   momento10_avaliacao: {
