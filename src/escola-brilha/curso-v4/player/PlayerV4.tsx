@@ -354,17 +354,186 @@ function MissaoFamilia({ m }: { m: AulaV4["momento11_missaoFamilia"] }) {
   );
 }
 
-// ---------- Interações (skeleton — expandimos aula a aula) -----------
+// ---------- Interações ------------------------------------------------
 
 function InteracaoView({ i }: { i: Interacao }) {
+  if (i.tipo === "tapContar") return <TapContar i={i} />;
+  if (i.tipo === "contarQuiz") return <ContarQuiz i={i} />;
+  if (i.tipo === "escolhaVisual") return <EscolhaVisual i={i} />;
+  if (i.tipo === "operacaoVisual") return <OperacaoVisual i={i} />;
   return (
-    <div className="bg-white/5 rounded-xl p-4 mt-3">
-      <div className="text-xs text-white/50 mb-2">
-        Interação: {i.tipo} (renderer específico será plugado por aula)
+    <div className="bg-white/5 rounded-xl p-4 mt-3 text-xs text-white/50">
+      Interação "{i.tipo}" ainda sem renderer.
+    </div>
+  );
+}
+
+function TapContar({ i }: { i: Extract<Interacao, { tipo: "tapContar" }> }) {
+  const [tocadas, setTocadas] = useState<Set<number>>(new Set());
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4">
+      <div className="text-sm mb-3">{i.pergunta ?? `Toque em cada ${i.itemPlural}:`}</div>
+      <div className="flex flex-wrap gap-2 justify-center">
+        {Array.from({ length: i.quantidade }).map((_, k) => {
+          const tocada = tocadas.has(k);
+          return (
+            <button
+              key={k}
+              onClick={() =>
+                setTocadas((s) => {
+                  const n = new Set(s);
+                  n.add(k);
+                  return n;
+                })
+              }
+              className={`transition-transform ${tocada ? "scale-110" : "opacity-60 hover:opacity-100"}`}
+            >
+              <div className="relative">
+                <img src={i.imagemUrl} alt="" className="w-14 h-14 object-contain" />
+                {tocada && (
+                  <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-amber-400 text-[#0d1f55] font-bold text-xs grid place-items-center">
+                    {[...tocadas].sort((a, b) => a - b).indexOf(k) + 1}
+                  </div>
+                )}
+              </div>
+            </button>
+          );
+        })}
       </div>
-      <pre className="text-xs text-white/60 overflow-auto">
-        {JSON.stringify(i, null, 2)}
-      </pre>
+      <div className="text-center mt-4 text-lg font-bold text-amber-300">
+        Contei: {tocadas.size} {i.itemPlural}
+      </div>
+    </div>
+  );
+}
+
+function ContarQuiz({ i }: { i: Extract<Interacao, { tipo: "contarQuiz" }> }) {
+  const [escolha, setEscolha] = useState<number | null>(null);
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
+      {i.grupos.map((g, gi) => (
+        <div key={gi}>
+          {g.rotulo && <div className="text-xs text-white/60 mb-1">{g.rotulo}</div>}
+          <div className="flex flex-wrap gap-1 justify-center">
+            {Array.from({ length: g.quantidade }).map((_, k) => (
+              <img key={k} src={g.imagemUrl} alt="" className="w-10 h-10 object-contain" />
+            ))}
+          </div>
+        </div>
+      ))}
+      <div className="font-semibold text-center">{i.pergunta}</div>
+      <div className="grid grid-cols-3 gap-2">
+        {i.opcoes.map((op, oi) => {
+          const dado = escolha !== null;
+          const cert = i.correta === oi;
+          const esc = escolha === oi;
+          return (
+            <button
+              key={oi}
+              disabled={dado}
+              onClick={() => setEscolha(oi)}
+              className={`py-3 rounded-lg font-bold text-lg ${
+                !dado
+                  ? "bg-white/10 hover:bg-white/20"
+                  : cert
+                    ? "bg-emerald-500/30 border border-emerald-400"
+                    : esc
+                      ? "bg-red-500/30 border border-red-400"
+                      : "bg-white/5 opacity-50"
+              }`}
+            >
+              {op}
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <div
+          className={`p-3 rounded-lg text-sm ${
+            escolha === i.correta
+              ? "bg-emerald-500/10 text-emerald-200"
+              : "bg-amber-500/10 text-amber-200"
+          }`}
+        >
+          {escolha === i.correta ? i.feedbackAcerto : i.feedbackErro}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }> }) {
+  const [escolha, setEscolha] = useState<string | null>(null);
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4 space-y-4">
+      <div className="font-semibold text-center">{i.pergunta}</div>
+      <div className="grid grid-cols-3 gap-3">
+        {i.opcoes.map((op) => {
+          const dado = escolha !== null;
+          const cert = op.nome === i.respostaCerta;
+          const esc = escolha === op.nome;
+          return (
+            <button
+              key={op.nome}
+              disabled={dado}
+              onClick={() => setEscolha(op.nome)}
+              className={`p-3 rounded-xl flex flex-col items-center gap-2 ${
+                !dado
+                  ? "bg-white/10 hover:bg-white/20"
+                  : cert
+                    ? "bg-emerald-500/30 border border-emerald-400"
+                    : esc
+                      ? "bg-red-500/30 border border-red-400"
+                      : "bg-white/5 opacity-50"
+              }`}
+            >
+              <img src={op.imagemUrl} alt={op.nome} className="w-16 h-16 object-contain" />
+              <span className="text-xs font-medium text-center leading-tight">
+                {op.nome}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      {escolha !== null && (
+        <div
+          className={`p-3 rounded-lg text-sm ${
+            escolha === i.respostaCerta
+              ? "bg-emerald-500/10 text-emerald-200"
+              : "bg-amber-500/10 text-amber-200"
+          }`}
+        >
+          {escolha === i.respostaCerta ? i.feedbackAcerto : i.feedbackErro}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
+  const total = i.operacao === "soma" ? i.a + i.b : Math.max(0, i.a - i.b);
+  const sinal = i.operacao === "soma" ? "+" : "−";
+  return (
+    <div className="mt-3 bg-white/5 rounded-xl p-4">
+      {i.legenda && <div className="text-sm text-white/70 mb-3 text-center">{i.legenda}</div>}
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        <GrupoImg url={i.imagemUrl} n={i.a} />
+        <div className="text-3xl font-black">{sinal}</div>
+        <GrupoImg url={i.imagemUrl} n={i.b} />
+        <div className="text-3xl font-black">=</div>
+        <div className="text-3xl font-black text-amber-300">{total}</div>
+      </div>
+      <div className="text-center text-sm text-white/60 mt-2">{i.itemPlural}</div>
+    </div>
+  );
+}
+
+function GrupoImg({ url, n }: { url: string; n: number }) {
+  return (
+    <div className="flex flex-wrap gap-0.5 max-w-[140px] justify-center">
+      {Array.from({ length: n }).map((_, k) => (
+        <img key={k} src={url} alt="" className="w-8 h-8 object-contain" />
+      ))}
     </div>
   );
 }
