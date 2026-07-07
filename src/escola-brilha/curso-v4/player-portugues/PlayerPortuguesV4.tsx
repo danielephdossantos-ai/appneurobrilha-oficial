@@ -10,6 +10,7 @@ import { OrdenarSequencia } from "./blocos/OrdenarSequencia";
 import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
+import { EnsinoVisual } from "./blocos/EnsinoVisual";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -28,6 +29,7 @@ const MOMENTOS_BASE = [
   { id: "m1", label: "🎬 Motivação" },
   { id: "m2", label: "🔮 Previsão" },
   { id: "m3", label: "📚 Vocabulário" },
+  { id: "mev", label: "🧠 Ensino visual", opcional: true },
   { id: "m4", label: "📖 Leitura guiada" },
   { id: "m5", label: "🧠 Compreensão" },
   { id: "m6", label: "🎭 Personagens & lugar" },
@@ -43,7 +45,10 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
   const [ativo, setAtivo] = useState<string>("m1");
 
   const MOMENTOS = MOMENTOS_BASE.filter(
-    (m) => !("opcional" in m && m.opcional) || (m.id === "mmini" && !!aula.momento_minijogo),
+    (m) =>
+      !("opcional" in m && m.opcional) ||
+      (m.id === "mmini" && !!aula.momento_minijogo) ||
+      (m.id === "mev" && !!aula.momento_ensinoVisual),
   );
 
   useEffect(() => {
