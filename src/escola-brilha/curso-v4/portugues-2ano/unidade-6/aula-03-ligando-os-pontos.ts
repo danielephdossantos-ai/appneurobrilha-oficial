@@ -153,17 +153,17 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento07_sequencia: {
-    instrucao: "Toque nas setas e coloque na ordem: PORQUÊ → ENTÃO.",
+    instrucao: "Ordene: causa → seta → resultado.",
     bloco: {
       instrucao: "Do PORQUÊ até o ENTÃO.",
       itens: [
         { id: "c1", texto: "Choveu muito.", imagemUrl: chuva },
-        { id: "c2", texto: "A rua ficou cheia de poças.", imagemUrl: setaDir },
+        { id: "c2", texto: "→ (ligação)", imagemUrl: setaDir },
         { id: "c3", texto: "As crianças abriram o guarda-chuva.", imagemUrl: guardaChuva },
       ],
       ordemCerta: ["c1", "c2", "c3"],
-      feedbackAcerto: "🎉 Causa → o que aconteceu no meio → resultado!",
-      feedbackErro: "Primeiro a CAUSA (chuva), depois o que aconteceu (poças), depois o RESULTADO (guarda-chuva).",
+      feedbackAcerto: "🎉 Causa → resultado!",
+      feedbackErro: "Primeiro a CAUSA (chuva), depois o RESULTADO (guarda-chuva).",
     },
   },
 

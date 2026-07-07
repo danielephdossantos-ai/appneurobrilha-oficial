@@ -154,13 +154,10 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           const marcada = escolha === i;
           const certa = i === quiz.correta;
           const revelou = escolha !== null;
-          const imagem = quiz.opcoesImagens?.[i] || undefined;
 
           let estado = "";
           if (!revelou) {
-            estado = imagem
-              ? `bg-white ring-4 ${cor.ring} hover:scale-105 active:scale-95`
-              : `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+            estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
           } else if (marcada && certa) {
             estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-110";
           } else if (marcada && !certa) {
@@ -172,33 +169,22 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           }
 
           const curto = op.length <= 8;
-          const forma = imagem
-            ? "w-32 h-36 sm:w-40 sm:h-44 rounded-3xl p-2"
+          const forma = curto
+            ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
+            : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
+          const tamanhoTexto = op.length <= 3
+            ? "text-4xl sm:text-5xl"
             : curto
-              ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
-              : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
-          const tamanhoTexto = imagem
-            ? "text-xs sm:text-sm mt-1"
-            : op.length <= 3
-              ? "text-4xl sm:text-5xl"
-              : curto
-                ? "text-xl sm:text-2xl"
-                : "text-sm sm:text-base leading-snug";
+              ? "text-xl sm:text-2xl"
+              : "text-sm sm:text-base leading-snug";
           return (
             <button
               key={i}
               disabled={revelou}
               onClick={() => tocar(i)}
-              className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid ${imagem ? "grid-rows-[1fr_auto]" : "place-items-center"} text-center ${estado}`}
+              className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
             >
-              {imagem && (
-                <img
-                  src={imagem}
-                  alt=""
-                  className="w-full h-full object-contain min-h-0"
-                />
-              )}
-              <span className={`${tamanhoTexto} ${imagem ? "font-bold text-[#0d1f55]" : ""}`}>{op}</span>
+              <span className={tamanhoTexto}>{op}</span>
               {revelou && marcada && certa && (
                 <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
               )}
@@ -212,7 +198,6 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
           );
         })}
       </div>
-
 
       {/* Feedback do professor */}
       {escolha !== null && (
