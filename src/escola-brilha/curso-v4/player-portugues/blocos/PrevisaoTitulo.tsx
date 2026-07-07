@@ -99,3 +99,59 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
     </div>
   );
 }
+
+/**
+ * Papelzinho / cartaz com o TEXTO REAL que a criança vai ler antes da
+ * previsão. Substitui a "capa de livro" quando a previsão é sobre um
+ * gênero textual do dia a dia (bilhete, cartaz, convite, lista).
+ */
+function RecadoPapel({
+  recado,
+}: {
+  recado: NonNullable<import("../../types").PrevisaoTituloData["recado"]>;
+}) {
+  const estilo = recado.estilo ?? "papel";
+  const ehCartaz = estilo === "cartaz";
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      {recado.rotulo && (
+        <div className="text-[10px] uppercase tracking-widest text-amber-300">
+          {recado.icone ? `${recado.icone} ` : ""}
+          {recado.rotulo}
+        </div>
+      )}
+
+      <div
+        className={
+          ehCartaz
+            ? // CARTAZ: fundo bem claro, letras GRANDES em maiúsculas, borda vermelha
+              "w-full max-w-md bg-amber-50 border-4 border-rose-500 rounded-lg p-5 shadow-xl text-center"
+            : // PAPEL: pauta suave, ligeira rotação, sensação de bilhete manuscrito
+              "w-full max-w-md bg-amber-50 border border-amber-200 rounded-md p-5 shadow-xl -rotate-1"
+        }
+        style={
+          ehCartaz
+            ? undefined
+            : {
+                backgroundImage:
+                  "repeating-linear-gradient(transparent, transparent 26px, rgba(59,30,107,0.15) 27px)",
+              }
+        }
+      >
+        {recado.linhas.map((linha, i) => (
+          <div
+            key={i}
+            className={
+              ehCartaz
+                ? "text-[#1a0d3d] font-black text-2xl leading-tight uppercase tracking-wide mb-1"
+                : "text-[#1a0d3d] font-medium text-base leading-7"
+            }
+          >
+            {linha || "\u00A0"}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
