@@ -88,6 +88,24 @@ export const aula02: AulaPortuguesV4 = {
     ],
   },
 
+  momento_ensinoVisual: {
+    titulo: "O alfabeto inteiro",
+    instrucao:
+      "Antes de organizar o trem, conheça as 26 LETRAS do alfabeto. Toque em cada uma pra ouvir o nome e uma palavra que começa com ela.",
+    blocos: [
+      {
+        tipo: "alfabetoCompleto",
+        exemplos: {
+          A: "ABELHA", B: "BOLA", C: "CASA", D: "DADO", E: "ELEFANTE",
+          F: "FLOR", G: "GATO", H: "HIENA", I: "IGREJA", J: "JACARÉ",
+          L: "LIVRO", M: "MÃO", N: "NARIZ", O: "OVO", P: "PATO",
+          Q: "QUEIJO", R: "RATO", S: "SOL", T: "TATU", U: "UVA",
+          V: "VACA", X: "XÍCARA", Z: "ZEBRA",
+        },
+      },
+    ],
+  },
+
   momento04_leituraGuiada: {
     instrucao:
       "Leia com Brilha. Preste atenção na PRIMEIRA letra de cada palavra.",
