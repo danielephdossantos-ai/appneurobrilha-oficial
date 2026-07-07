@@ -23,7 +23,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#a855f7",
   corSecundaria: "#1a0d3d",
   tipoAula: "portugues",
-  unidades: [unidade1, unidade2, unidade3],
+  unidades: [unidade1, unidade2, unidade3, unidade4],
 };
 
 export default curso;
