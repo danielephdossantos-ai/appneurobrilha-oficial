@@ -235,6 +235,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 8, rotulo: "Tinha 8, tirou todas" },
         ],
+        tirar: 8,
         feedbackAcerto:
           "🎉 Isso! Se tira TUDO que tinha, sobra ZERO. 8 − 8 = 0. A cesta ficou vazia!",
         feedbackErro:
