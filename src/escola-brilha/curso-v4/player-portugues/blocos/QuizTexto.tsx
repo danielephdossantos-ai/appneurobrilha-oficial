@@ -90,16 +90,23 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
             estado = "bg-slate-200 text-slate-400";
           }
 
+          const curto = op.length <= 8;
+          const forma = curto
+            ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
+            : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
+          const tamanhoTexto = op.length <= 3
+            ? "text-4xl sm:text-5xl"
+            : curto
+              ? "text-xl sm:text-2xl"
+              : "text-sm sm:text-base leading-snug";
           return (
             <button
               key={i}
               disabled={revelou}
               onClick={() => tocar(i)}
-              className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full font-black shadow-xl transition-all duration-200 grid place-items-center text-center px-2 ${estado}`}
+              className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
             >
-              <span className={op.length <= 3 ? "text-4xl sm:text-5xl" : "text-base sm:text-lg leading-tight"}>
-                {op}
-              </span>
+              <span className={tamanhoTexto}>{op}</span>
               {revelou && marcada && certa && (
                 <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
               )}
