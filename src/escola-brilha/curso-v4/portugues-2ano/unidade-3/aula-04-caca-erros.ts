@@ -76,7 +76,51 @@ export const aula04: AulaPortuguesV4 = {
     ],
   },
 
-  momento04_leituraGuiada: {
+  momento_ensinoVisual: {
+    titulo: "Letra grande, letra pequena e o ponto",
+    instrucao:
+      "Antes de virar detetive, vamos aprender 2 coisas que TODO texto usa: MAIÚSCULA/minúscula e a PONTUAÇÃO no fim da frase. Toque em cada peça pra ouvir.",
+    blocos: [
+      {
+        tipo: "maiusculaMinuscula",
+        pares: [
+          { maiuscula: "A", minuscula: "a", exemplo: "ANA / amor" },
+          { maiuscula: "B", minuscula: "b", exemplo: "BOLA / bebê" },
+          { maiuscula: "C", minuscula: "c", exemplo: "CASA / cavalo" },
+          { maiuscula: "D", minuscula: "d", exemplo: "DADO / dedo" },
+          { maiuscula: "E", minuscula: "e", exemplo: "ESCOLA / elefante" },
+          { maiuscula: "G", minuscula: "g", exemplo: "GATO / girafa" },
+          { maiuscula: "L", minuscula: "l", exemplo: "LIVRO / lápis" },
+          { maiuscula: "M", minuscula: "m", exemplo: "MIGUEL / mão" },
+        ],
+      },
+      {
+        tipo: "fraseComPonto",
+        frases: [
+          {
+            texto: "O gato dorme.",
+            explicacao:
+              "Começa com O MAIÚSCULO (verde) porque é o começo da frase. Termina com PONTO (vermelho) porque é o fim.",
+          },
+          {
+            texto: "A Ana tem um livro.",
+            explicacao:
+              "Duas maiúsculas: A (começo) e Ana (nome de pessoa). Termina com PONTO.",
+          },
+          {
+            texto: "Onde está a bola?",
+            explicacao:
+              "Frase de PERGUNTA — termina com PONTO DE INTERROGAÇÃO (?).",
+          },
+          {
+            texto: "Que legal!",
+            explicacao:
+              "Frase de EMOÇÃO — termina com PONTO DE EXCLAMAÇÃO (!).",
+          },
+        ],
+      },
+    ],
+  },
     instrucao:
       "Leia com Brilha o que faz um bom detetive de palavras.",
     leitura: {

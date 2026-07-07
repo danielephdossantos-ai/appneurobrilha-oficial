@@ -140,6 +140,18 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </div>
           </Secao>
 
+          {/* ENSINO VISUAL (opcional) — ensina o pré-requisito ANTES de cobrar. */}
+          {aula.momento_ensinoVisual && (
+            <Secao id="mev" label={`🧠 ${aula.momento_ensinoVisual.titulo}`}>
+              <Instrucao>{aula.momento_ensinoVisual.instrucao}</Instrucao>
+              <div className="space-y-5">
+                {aula.momento_ensinoVisual.blocos.map((b, i) => (
+                  <EnsinoVisual key={i} bloco={b} />
+                ))}
+              </div>
+            </Secao>
+          )}
+
           {/* M4 · Leitura guiada */}
           <Secao id="m4" label="📖 Leitura guiada">
             <Instrucao>{aula.momento04_leituraGuiada.instrucao}</Instrucao>
