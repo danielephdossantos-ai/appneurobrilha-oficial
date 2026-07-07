@@ -765,9 +765,9 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
 function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
   const total = i.operacao === "soma" ? i.a + i.b : Math.max(0, i.a - i.b);
   const sinal = i.operacao === "soma" ? "+" : "−";
-  const [contando, setContando] = React.useState(false);
-  const [passo, setPasso] = React.useState(0); // quantas frutas já contadas
-  const [terminou, setTerminou] = React.useState(false);
+  const [contando, setContando] = useState(false);
+  const [passo, setPasso] = useState(0); // quantas frutas já contadas
+  const [terminou, setTerminou] = useState(false);
 
   // Para soma: conta A e depois B (total = a+b frutas destacadas)
   // Para subtração: conta A e "tira" B (mostra a, depois vai sumindo b)
@@ -782,7 +782,7 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
     setPasso(0);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!contando) return;
     if (passo >= totalPassos) {
       // fala o total final
