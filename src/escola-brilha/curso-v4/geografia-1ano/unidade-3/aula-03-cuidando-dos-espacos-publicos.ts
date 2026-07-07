@@ -154,8 +154,8 @@ export const aula03: AulaGeografiaV4 = {
           { id: "casca", texto: "Casca de banana", imagemUrl: banana, alvoId: "org" },
         ],
         alvos: [
-          { id: "rec", texto: "Reciclagem ♻️", imagemUrl: lixeiraRec },
-          { id: "org", texto: "Lixeira comum 🗑️", imagemUrl: lixeira },
+          { id: "rec", nome: "Reciclagem ♻️", imagemUrl: lixeiraRec },
+          { id: "org", nome: "Lixeira comum 🗑️", imagemUrl: lixeira },
         ],
         feedbackAcerto: "🎉 Praça limpa! O bairro agradece.",
         feedbackErro: "Quase! Papel/garrafa/lata = reciclagem. Casca = comum.",
