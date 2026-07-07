@@ -77,7 +77,6 @@ export const aula03: AulaGeografiaV4 = {
       "— Da árvore eu vejo a FAIXA DE PEDESTRE. Olho pros dois lados e atravesso.",
       "— Depois da faixa, subo a ruazinha e chego na ESCOLA. Pronto!",
     ],
-    visualUrl: brilha,
   },
 
   momento07_nosFazemos: {
@@ -203,7 +202,6 @@ export const aula03: AulaGeografiaV4 = {
         correta: 1,
         feedbackAcerto: "Isso! A BÚSSOLA mostra as direções (norte, sul, leste, oeste).",
         feedbackErro: "É a BÚSSOLA — ela aponta pro norte e ajuda a se orientar.",
-        visualUrl: bussola,
       },
     ],
   },

@@ -78,7 +78,6 @@ export const aula02: AulaGeografiaV4 = {
       "— A geladeira fica na COZINHA.",
       "— Então: se eu quero pegar leite, eu vou pra COZINHA!",
     ],
-    visualUrl: geladeira,
   },
 
   momento07_nosFazemos: {
@@ -202,7 +201,6 @@ export const aula02: AulaGeografiaV4 = {
           "Certo! Existem casas grandes e pequenas, antigas e modernas — cada uma organiza os cômodos de um jeito.",
         feedbackErro:
           "Olhe: existe casa antiga, casa moderna, apartamento, sobrado — todas diferentes.",
-        visualUrl: casaAntiga,
       },
       {
         pergunta: "Por que precisamos de cômodos separados?",
@@ -214,7 +212,6 @@ export const aula02: AulaGeografiaV4 = {
         correta: 0,
         feedbackAcerto: "Isso! Dormir no quarto, cozinhar na cozinha… cada coisa no seu lugar.",
         feedbackErro: "Cômodos separados servem pra ORGANIZAR as atividades da família.",
-        visualUrl: casaModerna,
       },
     ],
   },
