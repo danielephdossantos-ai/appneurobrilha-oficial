@@ -1,5 +1,6 @@
 import type { CursoPortugues } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Curso: Língua Portuguesa 2º Ano — "A Biblioteca Encantada"
@@ -20,7 +21,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#a855f7",
   corSecundaria: "#1a0d3d",
   tipoAula: "portugues",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
