@@ -861,10 +861,39 @@ function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" 
   const numeroAtual = ehSoma ? passo : Math.max(0, i.a - passo);
 
   const iniciar = () => {
+    try { window.speechSynthesis.cancel(); } catch {}
     setContando(true);
     setTerminou(false);
     setPasso(0);
   };
+
+  // Auto-play na subtração: o professor fala a legenda e as maçãs somem no mesmo ritmo.
+  useEffect(() => {
+    if (ehSoma) return;
+    let cancelado = false;
+    try { window.speechSynthesis.cancel(); } catch {}
+    const falarIntro = () => {
+      try {
+        if (!i.legenda) return 0;
+        const u = new SpeechSynthesisUtterance(i.legenda);
+        u.lang = "pt-BR";
+        u.rate = 0.95;
+        window.speechSynthesis.speak(u);
+        // ~85ms por caractere é uma estimativa razoável pt-BR nessa taxa.
+        return Math.min(6000, Math.max(1200, i.legenda.length * 85));
+      } catch { return 1200; }
+    };
+    const espera = falarIntro();
+    const t = setTimeout(() => {
+      if (cancelado) return;
+      setContando(true);
+      setTerminou(false);
+      setPasso(0);
+    }, espera);
+    return () => { cancelado = true; clearTimeout(t); try { window.speechSynthesis.cancel(); } catch {} };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   useEffect(() => {
     if (!contando) return;
