@@ -88,7 +88,11 @@ export const aula01_feiraDasFrutas: AulaV4 = {
       "Meu chute foi 25 e o certo é 23. Cheguei perto! 🎯",
     ],
     resposta: "23 maçãs",
-    visualUrl: maca,
+    colecaoVisual: {
+      imagemUrl: maca,
+      grupos: [10, 10, 3],
+      itemPlural: "maçãs",
+    },
   },
 
   momento06_praticaGuiada: {
