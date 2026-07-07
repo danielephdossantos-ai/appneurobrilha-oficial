@@ -34,6 +34,7 @@ function TrilhaCurso() {
   const curso = getCursoAny(slug);
   const aulas = listAulasFlat(slug);
   const ehPortugues = curso?.tipoAula === "portugues";
+  const ehGeografia = curso?.tipoAula === "geografia";
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   // Admin/testador: TODAS as aulas ficam destravadas por padrão.
   // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
