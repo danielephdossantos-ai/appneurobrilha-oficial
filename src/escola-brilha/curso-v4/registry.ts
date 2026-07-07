@@ -1,9 +1,17 @@
-import type { Curso, CursoPortugues, CursoAny, AulaV4, AulaPortuguesV4 } from "./types";
+import type {
+  Curso,
+  CursoPortugues,
+  CursoGeografia,
+  CursoAny,
+  AulaV4,
+  AulaPortuguesV4,
+  AulaGeografiaV4,
+} from "./types";
 
 /**
- * Auto-registro de cursos v4.1 (Matemática + Português).
+ * Auto-registro de cursos v4.1 (Matemática + Português + Geografia).
  * Cada curso vive em src/escola-brilha/curso-v4/<slug>/curso.ts e faz
- *   export default { ... } satisfies Curso | CursoPortugues;
+ *   export default { ... } satisfies Curso | CursoPortugues | CursoGeografia;
  */
 const modules = import.meta.glob<{ default: CursoAny }>("./*/curso.ts", { eager: true });
 
@@ -19,6 +27,9 @@ function isMatematica(c: CursoAny): c is Curso {
 function isPortugues(c: CursoAny): c is CursoPortugues {
   return c.tipoAula === "portugues";
 }
+function isGeografia(c: CursoAny): c is CursoGeografia {
+  return c.tipoAula === "geografia";
+}
 
 export function getCurso(slug: string): Curso | undefined {
   const c = registry[slug];
@@ -28,6 +39,11 @@ export function getCurso(slug: string): Curso | undefined {
 export function getCursoPortugues(slug: string): CursoPortugues | undefined {
   const c = registry[slug];
   return c && isPortugues(c) ? c : undefined;
+}
+
+export function getCursoGeografia(slug: string): CursoGeografia | undefined {
+  const c = registry[slug];
+  return c && isGeografia(c) ? c : undefined;
 }
 
 export function getCursoAny(slug: string): CursoAny | undefined {
@@ -66,9 +82,22 @@ export function getAulaPortuguesFromCurso(
   return undefined;
 }
 
+export function getAulaGeografiaFromCurso(
+  cursoSlug: string,
+  aulaSlug: string,
+): { curso: CursoGeografia; aula: AulaGeografiaV4; unidadeIdx: number; aulaIdx: number } | undefined {
+  const curso = getCursoGeografia(cursoSlug);
+  if (!curso) return undefined;
+  for (let u = 0; u < curso.unidades.length; u++) {
+    const unidade = curso.unidades[u];
+    const idx = unidade.aulas.findIndex((a) => a.slug === aulaSlug);
+    if (idx >= 0) return { curso, aula: unidade.aulas[idx], unidadeIdx: u, aulaIdx: idx };
+  }
+  return undefined;
+}
+
 /**
  * Retorna a lista PLANA de aulas na ordem oficial (para trilha e progresso).
- * Para cursos de Português, retorna AulaPortuguesV4[]; para Matemática, AulaV4[].
  */
 export function listAulasFlat(cursoSlug: string): Array<{ slug: string; titulo: string; iconeTrilha: string }> {
   const curso = registry[cursoSlug];
