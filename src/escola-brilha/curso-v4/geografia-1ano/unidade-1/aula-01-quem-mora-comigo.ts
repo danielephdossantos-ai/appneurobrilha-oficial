@@ -131,26 +131,21 @@ export const aula01: AulaGeografiaV4 = {
 
   momento10_minijogo: {
     titulo: "Minha Família",
-    instrucao: "Toque em TODAS as pessoas que podem morar em uma família (marque as certas):",
+    instrucao: "Cada família é diferente. Toque em cada pessoa e ouça quem ela pode ser na sua família:",
     jogo: {
-      tipo: "selecionarItens",
+      tipo: "galeriaExploracao",
       bloco: {
-        instrucao: "Marque as pessoas da família",
-        pergunta: "Quem PODE morar na sua casa e ser sua família?",
-        opcoes: [
-          { id: "1", texto: "Mãe", imagemUrl: mae, correto: true },
-          { id: "2", texto: "Pai", imagemUrl: pai, correto: true },
-          { id: "3", texto: "Avó", imagemUrl: avoM, correto: true },
-          { id: "4", texto: "Avô", imagemUrl: avoH, correto: true },
-          { id: "5", texto: "Irmão(ã)", imagemUrl: menino, correto: true },
-          { id: "6", texto: "Bebê", imagemUrl: bebe, correto: true },
-          { id: "7", texto: "Motorista de ônibus", imagemUrl: pai, correto: false },
-          { id: "8", texto: "Vendedor da padaria", imagemUrl: pai, correto: false },
+        instrucao: "Não existe família certa ou errada — a sua família é do jeito dela.",
+        cards: [
+          { imagemUrl: mae, titulo: "Mãe", descricao: "A mãe cuida, alimenta e ensina. Muita gente mora com a mãe." },
+          { imagemUrl: pai, titulo: "Pai", descricao: "O pai também cuida e protege. Algumas crianças moram com o pai." },
+          { imagemUrl: avoM, titulo: "Avó", descricao: "A avó é a mãe do seu pai ou da sua mãe. Muitas crianças moram com a avó." },
+          { imagemUrl: avoH, titulo: "Avô", descricao: "O avô é o pai do seu pai ou da sua mãe. Ele também pode morar com você." },
+          { imagemUrl: menino, titulo: "Irmão", descricao: "O irmão é filho dos mesmos pais que você." },
+          { imagemUrl: menina, titulo: "Irmã", descricao: "A irmã é filha dos mesmos pais que você." },
+          { imagemUrl: bebe, titulo: "Bebê", descricao: "Um irmãozinho ou irmãzinha bebê também faz parte da família." },
+          { imagemUrl: coracao, titulo: "Tios, primos e outros", descricao: "Tios, primos, madrasta, padrasto — todos que cuidam de você com amor são família." },
         ],
-        feedbackAcerto:
-          "Perfeito! Todos os que você marcou vivem em famílias. O motorista e o vendedor são pessoas boas, mas eles não moram na sua casa.",
-        feedbackErro:
-          "Quase! Lembre: família é quem MORA com você, cuida e ensina no dia a dia — não é toda pessoa que a gente conhece.",
       },
     },
   },
