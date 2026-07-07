@@ -303,23 +303,22 @@ const aula: Aula = {
       erro: "A coruja voa pra qualquer lugar — não fica parada. Escolha só os lugares FIXOS do caminho.",
     },
 
-    // FASE 4 — Monte o Percurso (arrastar setas → alvos ordenados)
+    // FASE 4 — Monte O Percurso (arrastar sobre o MAPA)
     {
       tipo: "arrastar",
-      titulo: "Fase 4 · Monte O Percurso",
+      titulo: "Fase 4 · Monte O Percurso Da Casa Até A Praça",
       instrucao:
-        "Leve Brilha da CASA 🏠 até a PRAÇA 🌳 arrastando cada seta pra sua etapa: 1º, 2º, 3º e 4º passo.",
+        "Olhe o MAPA 🗺️. Leve o Brilha da CASA 🏠 até a PRAÇA 🌳: arraste cada REFERÊNCIA pra sua parada certa (1ª, 2ª e 3ª parada do caminho).",
+      mapaFundo: mapaPercurso,
       pares: [
-        { item: "Suba a rua ⬆️", alvo: "1º passo", itemImagem: setaCima },
-        { item: "Vire à direita ➡️", alvo: "2º passo", itemImagem: setaDir },
-        { item: "Desça a ladeira ⬇️", alvo: "3º passo", itemImagem: setaBaixo },
-        { item: "Vire à esquerda ⬅️", alvo: "4º passo", itemImagem: setaEsq },
+        { item: "Árvore grande 🌳", alvo: "1ª parada", itemImagem: arvoreImg },
+        { item: "Ponto de ônibus 🚏", alvo: "2ª parada", itemImagem: onibusImg },
+        { item: "Padaria 🥖", alvo: "3ª parada", itemImagem: padariaImg },
       ],
       alvosVisuais: [
-        { nome: "1º passo", cor: "#F59E0B", imagemUrl: casaImg, capacidade: 1 },
-        { nome: "2º passo", cor: "#10B981", imagemUrl: arvoreImg, capacidade: 1 },
-        { nome: "3º passo", cor: "#0EA5E9", imagemUrl: onibusImg, capacidade: 1 },
-        { nome: "4º passo", cor: "#EF4444", imagemUrl: pracaImg, capacidade: 1 },
+        { nome: "1ª parada", cor: "#F59E0B", imagemUrl: casaImg, capacidade: 1 },
+        { nome: "2ª parada", cor: "#10B981", imagemUrl: onibusImg, capacidade: 1 },
+        { nome: "3ª parada", cor: "#EF4444", imagemUrl: pracaImg, capacidade: 1 },
       ],
     },
 
