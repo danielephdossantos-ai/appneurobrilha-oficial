@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { getCurso, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
+import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
 
 /**
  * Trilha do Curso v4.1 — estilo Duolingo.
@@ -31,8 +31,9 @@ const CHAVE_PROGRESSO = (slug: string) => `eb.v4.progresso.${slug}`;
 function TrilhaCurso() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
-  const curso = getCurso(slug);
+  const curso = getCursoAny(slug);
   const aulas = listAulasFlat(slug);
+  const ehPortugues = curso?.tipoAula === "portugues";
   const [concluidas, setConcluidas] = useState<Set<string>>(new Set());
   // Admin/testador: TODAS as aulas ficam destravadas por padrão.
   // Pra simular experiência real do aluno, adicione ?aluno=1 na URL.
@@ -119,13 +120,20 @@ function TrilhaCurso() {
                   <div key={a.slug} className={`flex ${align}`}>
                     <button
                       disabled={!desbloqueada}
-                      onClick={() =>
-                        navigate({
-                          to: "/escola-brilha/aula-v4/$curso/$aula",
-                          params: { curso: slug, aula: a.slug },
-                          search: modoLivre ? { livre: "1" } : undefined,
-                        })
-                      }
+                      onClick={() => {
+                        if (ehPortugues) {
+                          navigate({
+                            to: "/escola-brilha/aula-pt-v4/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                          });
+                        } else {
+                          navigate({
+                            to: "/escola-brilha/aula-v4/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                            search: modoLivre ? { livre: "1" } : undefined,
+                          });
+                        }
+                      }}
                       className={`group relative w-40 h-40 rounded-full grid place-items-center transition ${
                         desbloqueada
                           ? "bg-gradient-to-br from-amber-300 to-amber-500 text-[#0d1f55] shadow-xl hover:scale-105"

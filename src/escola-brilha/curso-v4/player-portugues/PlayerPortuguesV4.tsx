@@ -1,0 +1,275 @@
+import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
+import type { AulaPortuguesV4 } from "../types";
+import { stopSpeaking } from "@/lib/native-tts";
+import { PrevisaoTitulo } from "./blocos/PrevisaoTitulo";
+import { CardVocabulario } from "./blocos/CardVocabulario";
+import { LeituraIlustrada } from "./blocos/LeituraIlustrada";
+import { QuizTexto } from "./blocos/QuizTexto";
+import { OrdenarSequencia } from "./blocos/OrdenarSequencia";
+
+/**
+ * Player Português v4 — tela única com scroll, 11 momentos.
+ * Mesma estrutura do PlayerV4 de Matemática, mas com blocos próprios
+ * pra leitura, previsão, vocabulário, sequência e quiz textual.
+ */
+
+type Props = {
+  aula: AulaPortuguesV4;
+  cursoSlug: string;
+  voltarPara: string;
+  onConcluir?: () => void;
+};
+
+const MOMENTOS = [
+  { id: "m1", label: "🎬 Motivação" },
+  { id: "m2", label: "🔮 Previsão" },
+  { id: "m3", label: "📚 Vocabulário" },
+  { id: "m4", label: "📖 Leitura guiada" },
+  { id: "m5", label: "🧠 Compreensão" },
+  { id: "m6", label: "🎭 Personagens & lugar" },
+  { id: "m7", label: "🧩 Sequência" },
+  { id: "m8", label: "💪 Você lê" },
+  { id: "m9", label: "🔁 Revisão" },
+  { id: "m10", label: "✅ Avaliação" },
+  { id: "m11", label: "🏠 Missão em Família" },
+] as const;
+
+export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
+  const [ativo, setAtivo] = useState<string>("m1");
+
+  useEffect(() => {
+    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const vis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (vis[0]) setAtivo(vis[0].target.id);
+      },
+      { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [aula.slug]);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#3b1e6b] to-[#1a0d3d] text-white">
+      <header className="sticky top-0 z-20 bg-[#1a0d3d]/95 backdrop-blur border-b border-white/10">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+          <Link
+            to="/escola-brilha/curso/$slug"
+            params={{ slug: cursoSlug }}
+            className="text-sm text-white/70 hover:text-white"
+          >
+            ← Trilha
+          </Link>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-bold truncate">{aula.titulo}</div>
+            <div className="text-[10px] text-white/60">Role para descer a aula ↓</div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
+        <aside className="hidden lg:block w-56 shrink-0">
+          <div className="sticky top-24 space-y-1">
+            {MOMENTOS.map((m) => (
+              <a
+                key={m.id}
+                href={`#${m.id}`}
+                className={`block text-xs px-3 py-2 rounded-lg transition ${
+                  ativo === m.id
+                    ? "bg-amber-400 text-[#1a0d3d] font-bold"
+                    : "text-white/70 hover:bg-white/10"
+                }`}
+              >
+                {m.label}
+              </a>
+            ))}
+          </div>
+        </aside>
+
+        <main className="flex-1 space-y-8 min-w-0">
+          {/* M1 · Motivação */}
+          <Secao id="m1" label="🎬 Motivação">
+            {aula.momento01_motivacao.imagemUrl && (
+              <img
+                src={aula.momento01_motivacao.imagemUrl}
+                alt=""
+                className="w-24 h-24 object-contain mx-auto mb-3 drop-shadow"
+              />
+            )}
+            <h3 className="text-xl font-black text-amber-200 text-center">
+              {aula.momento01_motivacao.titulo}
+            </h3>
+            <p className="text-white/90 leading-relaxed text-center max-w-2xl mx-auto mt-2">
+              {aula.momento01_motivacao.historia}
+            </p>
+          </Secao>
+
+          {/* M2 · Previsão */}
+          <Secao id="m2" label="🔮 Previsão">
+            <Instrucao>{aula.momento02_previsao.instrucao}</Instrucao>
+            <PrevisaoTitulo data={aula.momento02_previsao.bloco} />
+          </Secao>
+
+          {/* M3 · Vocabulário */}
+          <Secao id="m3" label="📚 Palavras novas">
+            <Instrucao>{aula.momento03_vocabulario.instrucao}</Instrucao>
+            <div className="grid md:grid-cols-2 gap-3">
+              {aula.momento03_vocabulario.cards.map((c) => (
+                <CardVocabulario key={c.palavra} card={c} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M4 · Leitura guiada */}
+          <Secao id="m4" label="📖 Leitura guiada">
+            <Instrucao>{aula.momento04_leituraGuiada.instrucao}</Instrucao>
+            <LeituraIlustrada data={aula.momento04_leituraGuiada.leitura} />
+          </Secao>
+
+          {/* M5 · Compreensão */}
+          <Secao id="m5" label="🧠 Entendi?">
+            <Instrucao>{aula.momento05_compreensao.instrucao}</Instrucao>
+            <div className="space-y-3">
+              {aula.momento05_compreensao.perguntas.map((q, i) => (
+                <QuizTexto key={i} quiz={q} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M6 · Personagens & cenário */}
+          <Secao id="m6" label="🎭 Personagens e lugar">
+            <Instrucao>{aula.momento06_personagensCenario.instrucao}</Instrucao>
+            <div className="space-y-3">
+              {aula.momento06_personagensCenario.perguntas.map((q, i) => (
+                <QuizTexto key={i} quiz={q} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M7 · Sequência */}
+          <Secao id="m7" label="🧩 Ordem da história">
+            <Instrucao>{aula.momento07_sequencia.instrucao}</Instrucao>
+            <OrdenarSequencia data={aula.momento07_sequencia.bloco} />
+          </Secao>
+
+          {/* M8 · Leitura independente */}
+          <Secao id="m8" label="💪 Você lê sozinho">
+            <Instrucao>{aula.momento08_leituraIndependente.instrucao}</Instrucao>
+            <div className="space-y-4">
+              <LeituraIlustrada data={aula.momento08_leituraIndependente.leitura} />
+              <div className="space-y-3">
+                {aula.momento08_leituraIndependente.perguntas.map((q, i) => (
+                  <QuizTexto key={i} quiz={q} />
+                ))}
+              </div>
+            </div>
+          </Secao>
+
+          {/* M9 · Revisão */}
+          <Secao id="m9" label="🔁 Revisão">
+            <ul className="space-y-2">
+              {aula.momento09_revisao.pontos.map((p, i) => (
+                <li key={i} className="flex items-start gap-2 text-white/90">
+                  <span className="text-amber-300">✔</span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+            {aula.momento09_revisao.miniDesafio && (
+              <div className="mt-4">
+                <QuizTexto quiz={aula.momento09_revisao.miniDesafio} />
+              </div>
+            )}
+          </Secao>
+
+          {/* M10 · Avaliação */}
+          <Secao id="m10" label="✅ Avaliação">
+            <div className="space-y-3">
+              {aula.momento10_avaliacao.perguntas.map((q, i) => (
+                <QuizTexto key={i} quiz={q} />
+              ))}
+            </div>
+          </Secao>
+
+          {/* M11 · Missão em família */}
+          <Secao id="m11" label="🏠 Missão em Família">
+            <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
+              <h4 className="text-lg font-bold text-amber-200">
+                {aula.momento11_missaoFamilia.titulo}
+              </h4>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/60 mb-1">
+                  Materiais
+                </div>
+                <ul className="list-disc list-inside text-sm text-white/85">
+                  {aula.momento11_missaoFamilia.materiais.map((m, i) => (
+                    <li key={i}>{m}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-white/60 mb-1">
+                  Passo a passo
+                </div>
+                <ol className="list-decimal list-inside text-sm text-white/85 space-y-1">
+                  {aula.momento11_missaoFamilia.passos.map((p, i) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ol>
+              </div>
+              <div className="text-sm text-white/85 pt-1">
+                <span className="text-amber-200 font-bold">📸 Registro:</span>{" "}
+                {aula.momento11_missaoFamilia.registro}
+              </div>
+            </div>
+          </Secao>
+
+          <div className="pt-6 flex flex-col items-center gap-3">
+            <button
+              onClick={() => onConcluir?.()}
+              className="px-8 py-4 rounded-xl bg-amber-400 text-[#1a0d3d] font-black text-lg hover:bg-amber-300"
+            >
+              🎉 Concluir aula
+            </button>
+            <Link to={voltarPara} className="text-xs text-white/50 hover:text-white/80">
+              Sair para a trilha
+            </Link>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function Secao({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      id={id}
+      className="scroll-mt-24 rounded-3xl bg-white/5 border border-white/10 p-5 md:p-6"
+    >
+      <div className="text-[11px] uppercase tracking-widest text-amber-300 mb-3">
+        {label}
+      </div>
+      <div className="space-y-3">{children}</div>
+    </section>
+  );
+}
+
+function Instrucao({ children }: { children: React.ReactNode }) {
+  return <p className="text-sm text-white/80 italic">{children}</p>;
+}

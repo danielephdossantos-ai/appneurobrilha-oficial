@@ -273,5 +273,175 @@ export type Curso = {
   mascoteImagemUrl?: string;
   corPrimaria: string;
   corSecundaria: string;
+  /** Discriminador de player. Se ausente, assume "matematica" (compat). */
+  tipoAula?: "matematica";
   unidades: Unidade[];
 };
+
+// =====================================================================
+// LÍNGUA PORTUGUESA — contrato paralelo (não modifica AulaV4).
+// =====================================================================
+
+/** Card de vocabulário: palavra + explicação simples + exemplo. */
+export type CardVocabularioData = {
+  palavra: string;
+  explicacao: string;      // linguagem de 7 anos
+  exemplo: string;         // frase que usa a palavra
+  imagemUrl?: string;      // opcional, ajuda memória
+};
+
+/** Bloco de leitura ilustrada (com áudio TTS embutido no player). */
+export type LeituraIlustradaData = {
+  titulo?: string;
+  paragrafos: string[];    // 1 a 5 parágrafos curtos
+  imagemUrl?: string;      // ilustração ao lado
+  legendaImagem?: string;
+  /** Palavras a destacar amarelo no texto (pra reforçar vocabulário). */
+  destacar?: string[];
+};
+
+/** Bloco de previsão: título + capa + hipóteses. */
+export type PrevisaoTituloData = {
+  titulo: string;                                    // "O Mistério da Chave Azul"
+  capaImagemUrl?: string;
+  pistas?: Array<{ imagemUrl: string; nome: string }>; // objetos que aparecem
+  pergunta: string;                                  // "Sobre o que essa história vai falar?"
+  hipoteses: Array<{ texto: string; imagemUrl?: string }>;
+  respostaCerta: number;                             // índice da hipótese "esperada"
+  feedbackAcerto: string;
+  feedbackErro: string;
+};
+
+/** Bloco de ordenar sequência (páginas embaralhadas → ordem correta). */
+export type OrdenarSequenciaData = {
+  instrucao: string;                                   // "Coloque as páginas em ordem"
+  itens: Array<{ id: string; texto: string; imagemUrl?: string }>;
+  /** Ordem correta como lista dos ids na sequência esperada. */
+  ordemCerta: string[];
+  feedbackAcerto: string;
+  feedbackErro: string;
+};
+
+/** Quiz de compreensão textual (opções em texto, sem imagem obrigatória). */
+export type QuizTextoData = {
+  pergunta: string;
+  opcoes: string[];
+  correta: number;
+  feedbackAcerto: string;                              // explica onde a resposta está no texto
+  feedbackErro: string;
+  /** Trecho do texto que respondeu a pergunta (mostrado no feedback). */
+  ondeEstaNoTexto?: string;
+};
+
+// ---------- 11 momentos de Português ---------------------------------
+
+export type MomentoMotivacaoPT = {
+  titulo: string;
+  historia: string;
+  imagemUrl?: string;
+};
+
+export type MomentoPrevisao = {
+  instrucao: string;
+  bloco: PrevisaoTituloData;
+};
+
+export type MomentoVocabulario = {
+  instrucao: string;
+  cards: CardVocabularioData[];
+};
+
+export type MomentoLeituraGuiada = {
+  instrucao: string;                                   // "Vamos ler juntos"
+  leitura: LeituraIlustradaData;
+};
+
+export type MomentoCompreensao = {
+  instrucao: string;
+  perguntas: QuizTextoData[];                          // 2 a 4
+};
+
+export type MomentoPersonagensCenario = {
+  instrucao: string;
+  perguntas: QuizTextoData[];
+};
+
+export type MomentoSequencia = {
+  instrucao: string;
+  bloco: OrdenarSequenciaData;
+};
+
+export type MomentoLeituraIndependente = {
+  instrucao: string;
+  leitura: LeituraIlustradaData;
+  perguntas: QuizTextoData[];
+};
+
+export type MomentoRevisaoPT = {
+  pontos: string[];
+  miniDesafio?: QuizTextoData;
+};
+
+export type MomentoAvaliacaoPT = {
+  perguntas: QuizTextoData[];                          // 5 perguntas mistas
+};
+
+export type MomentoMissaoFamiliaPT = {
+  titulo: string;
+  materiais: string[];
+  passos: string[];
+  registro: string;
+};
+
+export type AulaPortuguesV4 = {
+  slug: string;
+  titulo: string;
+  iconeTrilha: string;
+  bncc: string[];
+  duracaoMin: number;
+
+  momento01_motivacao: MomentoMotivacaoPT;
+  momento02_previsao: MomentoPrevisao;
+  momento03_vocabulario: MomentoVocabulario;
+  momento04_leituraGuiada: MomentoLeituraGuiada;
+  momento05_compreensao: MomentoCompreensao;
+  momento06_personagensCenario: MomentoPersonagensCenario;
+  momento07_sequencia: MomentoSequencia;
+  momento08_leituraIndependente: MomentoLeituraIndependente;
+  momento09_revisao: MomentoRevisaoPT;
+  momento10_avaliacao: MomentoAvaliacaoPT;
+  momento11_missaoFamilia: MomentoMissaoFamiliaPT;
+
+  recompensa: {
+    xp: number;
+    moedas: number;
+    medalha?: string;
+  };
+};
+
+export type UnidadePortugues = {
+  slug: string;
+  numero: number;
+  titulo: string;
+  subtitulo: string;
+  descricao: string;
+  corTema: string;
+  aulas: AulaPortuguesV4[];
+};
+
+export type CursoPortugues = {
+  slug: string;
+  disciplina: string;
+  ano: string;
+  titulo: string;
+  descricao: string;
+  mascoteImagemUrl?: string;
+  corPrimaria: string;
+  corSecundaria: string;
+  tipoAula: "portugues";
+  unidades: UnidadePortugues[];
+};
+
+/** Union usado pelo registry e pela trilha. */
+export type CursoAny = Curso | CursoPortugues;
+
