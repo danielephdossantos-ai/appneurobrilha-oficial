@@ -85,7 +85,7 @@ function TrilhaCurso() {
           <p className="text-sm text-white/70 mt-1">{curso.descricao}</p>
           {modoLivre && (
             <div className="mt-3 inline-block bg-amber-400 text-[#0d1f55] text-xs font-bold px-3 py-1 rounded-full">
-              🔓 Modo revisão — todas as aulas destravadas
+              🔓 Modo admin — todas as aulas destravadas (use ?aluno=1 pra simular aluno)
             </div>
           )}
         </div>
