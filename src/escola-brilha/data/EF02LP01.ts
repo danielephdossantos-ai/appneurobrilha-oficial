@@ -262,19 +262,19 @@ const aula: Aula = {
   niveis: {
     dominioMinimo: 70,
     facil: [
-      { pergunta: "Palavra CACHORRO combina com:", opcoes: ["🐶", "☀️", "🚗"], correta: 0, explicacao: "Animal de estimação.", visual: { tipo: "itens", imagemUrl: cachorroImg, quantidade: 1, rotulo: "🐶" } },
-      { pergunta: "Palavra ÁRVORE combina com:", opcoes: ["🌳", "🏠", "🐟"], correta: 0, explicacao: "Tem tronco e folhas.", visual: { tipo: "itens", imagemUrl: arvoreImg, quantidade: 1, rotulo: "🌳" } },
-      { pergunta: "Palavra ESCOLA combina com:", opcoes: ["🏫", "☀️", "⚽"], correta: 0, explicacao: "Lugar de estudar.", visual: { tipo: "itens", imagemUrl: escolaImg, quantidade: 1, rotulo: "🏫" } },
+      { pergunta: "Qual palavra é CACHORRO?", opcoes: ["CACHORRO", "CARRO", "CASA"], correta: 0, explicacao: "CA-CHOR-RO tem 3 sílabas." },
+      { pergunta: "Qual palavra é ÁRVORE?", opcoes: ["ÁRVORE", "AVIÃO", "AMIGO"], correta: 0, explicacao: "ÁR-VO-RE tem tronco e folhas." },
+      { pergunta: "Qual palavra é ESCOLA?", opcoes: ["ESCOLA", "ESTRELA", "ESCADA"], correta: 0, explicacao: "ES-CO-LA é o lugar de aprender." },
     ],
     medio: [
-      { pergunta: "BI _ CI-CLE-TA (falta):", opcoes: ["BI", "PA", "TO"], correta: 0, explicacao: "BI-BI-CI-CLE-TA? Não — a sílaba que faltou é BI para completar o começo.", visual: { tipo: "itens", imagemUrl: bicicletaImg, quantidade: 1, rotulo: "🚲" } },
-      { pergunta: "'O cachorro corre no ____':", opcoes: ["PARQUE", "LIVRO", "SOL"], correta: 0, explicacao: "Lugar aberto pra correr.", visual: { tipo: "itens", imagemUrl: parqueImg, quantidade: 1, rotulo: "🌳" } },
-      { pergunta: "Onde a gente lê histórias?", opcoes: ["No LIVRO", "No carro", "No prato"], correta: 0, explicacao: "Livro = casa das histórias.", visual: { tipo: "itens", imagemUrl: livroImg, quantidade: 1, rotulo: "📖" } },
+      { pergunta: "Quantas sílabas tem BI-CI-CLE-TA?", opcoes: ["4", "2", "6"], correta: 0, explicacao: "BI · CI · CLE · TA = 4 sílabas." },
+      { pergunta: "'O cachorro corre no ____.' Complete:", opcoes: ["PARQUE", "LIVRO", "SOL"], correta: 0, explicacao: "Lugar aberto pra correr = PARQUE." },
+      { pergunta: "Onde a gente lê histórias?", opcoes: ["No LIVRO", "No carro", "No prato"], correta: 0, explicacao: "Livro = casa das histórias." },
     ],
     dificil: [
-      { pergunta: "Ler devagar ajuda a:", opcoes: ["Compreender melhor", "Esquecer", "Confundir"], correta: 0, explicacao: "Calma + atenção = compreensão.", visual: { tipo: "itens", imagemUrl: corujaImg, quantidade: 1, rotulo: "🦉" } },
-      { pergunta: "Vocabulário cresce quando:", opcoes: ["Leio bastante", "Não leio", "Fecho o livro"], correta: 0, explicacao: "Mais leitura, mais palavras.", visual: { tipo: "itens", imagemUrl: estrelaImg, quantidade: 1, rotulo: "⭐" } },
-      { pergunta: "Numa história, personagem é:", opcoes: ["Quem faz a ação", "Onde acontece", "Quando"], correta: 0, explicacao: "Personagem = QUEM.", visual: { tipo: "itens", imagemUrl: meninaImg, quantidade: 1, rotulo: "👧" } },
+      { pergunta: "Ler devagar ajuda a:", opcoes: ["Compreender melhor", "Esquecer", "Confundir"], correta: 0, explicacao: "Calma + atenção = compreensão." },
+      { pergunta: "Vocabulário cresce quando:", opcoes: ["Leio bastante", "Não leio", "Fecho o livro"], correta: 0, explicacao: "Mais leitura, mais palavras." },
+      { pergunta: "Numa história, personagem é:", opcoes: ["Quem faz a ação", "Onde acontece", "Quando aconteceu"], correta: 0, explicacao: "Personagem = QUEM." },
     ],
   },
 
