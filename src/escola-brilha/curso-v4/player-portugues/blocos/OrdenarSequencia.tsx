@@ -39,6 +39,10 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
     <div className="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
       <div className="text-sm font-bold text-white">🧩 {data.instrucao}</div>
 
+      <div className="rounded-xl bg-amber-400/15 border border-amber-300/40 p-2 text-center text-xs text-amber-100 font-semibold">
+        👉 Toque nas setas <span className="text-base">⬆️ ⬇️</span> para mover cada pedaço para cima ou para baixo.
+      </div>
+
       <ol className="space-y-2">
         {ordem.map((id, i) => {
           const item = porId.get(id);
@@ -58,29 +62,29 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
                     : "bg-white/10 border border-white/10"
               }`}
             >
-              <div className="w-8 h-8 rounded-full bg-amber-400 text-[#0d1f55] font-black grid place-items-center shrink-0">
+              <div className="w-10 h-10 rounded-full bg-amber-400 text-[#0d1f55] font-black text-lg grid place-items-center shrink-0">
                 {numero}
               </div>
               {item.imagemUrl && (
                 <img src={item.imagemUrl} alt="" className="w-12 h-12 object-contain shrink-0" />
               )}
-              <div className="flex-1 text-sm text-white font-medium">{item.texto}</div>
+              <div className="flex-1 text-lg text-white font-black tracking-wider">{item.texto}</div>
               <div className="flex flex-col gap-1 shrink-0">
                 <button
                   onClick={() => mover(i, -1)}
                   disabled={i === 0}
-                  className="w-8 h-8 rounded bg-white/10 hover:bg-white/20 disabled:opacity-30 text-white text-lg leading-none"
+                  className="w-12 h-12 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 disabled:opacity-25 disabled:bg-white/10 text-[#0d1f55] text-2xl font-black leading-none shadow-md"
                   aria-label="Mover pra cima"
                 >
-                  ↑
+                  ⬆️
                 </button>
                 <button
                   onClick={() => mover(i, 1)}
                   disabled={i === ordem.length - 1}
-                  className="w-8 h-8 rounded bg-white/10 hover:bg-white/20 disabled:opacity-30 text-white text-lg leading-none"
+                  className="w-12 h-12 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 disabled:opacity-25 disabled:bg-white/10 text-[#0d1f55] text-2xl font-black leading-none shadow-md"
                   aria-label="Mover pra baixo"
                 >
-                  ↓
+                  ⬇️
                 </button>
               </div>
             </li>
