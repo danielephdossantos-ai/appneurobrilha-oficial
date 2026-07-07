@@ -22,6 +22,7 @@ export const unidade1: Unidade = {
     aula01_feiraDasFrutas,
     aula02_somasAte10,
     aula03_subtracoesAte10,
+    aula04_compararQuantidades,
   ],
 };
 
