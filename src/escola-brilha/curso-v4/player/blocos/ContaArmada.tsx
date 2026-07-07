@@ -143,7 +143,7 @@ export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma
           animate={{ opacity: 1, y: 0 }}
           className="mt-3 rounded-xl bg-emerald-500 text-white p-3 text-center font-black text-lg"
         >
-          {a} + {b} = {r} {itemPlural && `${itemPlural}!`}
+          {a} {sinal} {b} = {r} {itemPlural && `${itemPlural}!`}
         </motion.div>
       )}
     </div>
