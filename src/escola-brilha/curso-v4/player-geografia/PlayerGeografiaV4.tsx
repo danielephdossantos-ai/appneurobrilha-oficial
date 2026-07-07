@@ -330,3 +330,63 @@ function Secao({
 function Instrucao({ children }: { children: React.ReactNode }) {
   return <p className="text-sm text-white/80 italic">{children}</p>;
 }
+
+function falar(texto: string) {
+  try {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "pt-BR";
+    u.rate = 0.95;
+    synth.speak(u);
+  } catch {
+    /* noop */
+  }
+}
+
+function GaleriaInterativa({
+  cards,
+  instrucaoExtra,
+}: {
+  cards: Array<{ imagemUrl: string; titulo: string; descricao: string }>;
+  instrucaoExtra?: string;
+}) {
+  const [aberto, setAberto] = useState<number | null>(null);
+  return (
+    <div>
+      {instrucaoExtra && <p className="text-sm text-white/80 italic mb-2">{instrucaoExtra}</p>}
+      <p className="text-xs text-amber-300 mb-2">👆 Toque em cada carta para descobrir.</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {cards.map((c, i) => {
+          const ativo = aberto === i;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => {
+                setAberto(ativo ? null : i);
+                if (!ativo) falar(`${c.titulo}. ${c.descricao}`);
+              }}
+              className={`text-left rounded-2xl overflow-hidden border transition-all ${
+                ativo
+                  ? "bg-amber-300 border-amber-200 scale-[1.02] shadow-lg"
+                  : "bg-white/10 border-white/20 hover:bg-white/15"
+              }`}
+            >
+              <div className="aspect-square bg-white grid place-items-center">
+                <img src={c.imagemUrl} alt={c.titulo} className="w-full h-full object-contain" />
+              </div>
+              <div className={`p-2 text-center ${ativo ? "text-[#082414]" : "text-white/85"}`}>
+                <div className="text-sm font-bold">{c.titulo}</div>
+                {ativo && (
+                  <div className="text-xs mt-1 leading-snug">{c.descricao}</div>
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
