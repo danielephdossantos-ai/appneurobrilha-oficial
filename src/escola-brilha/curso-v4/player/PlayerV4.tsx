@@ -246,7 +246,11 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
                   })}
                 </div>
               )}
-              {!e.agrupamentos && e.imagemUrl && (
+              {e.frutasParaNumero && (
+                <FrutasParaNumero {...e.frutasParaNumero} />
+              )}
+              {e.contaArmada && <ContaArmada {...e.contaArmada} />}
+              {!e.agrupamentos && !e.frutasParaNumero && !e.contaArmada && e.imagemUrl && (
                 <img src={e.imagemUrl} alt="" className="w-32 mt-2" />
               )}
             </div>
