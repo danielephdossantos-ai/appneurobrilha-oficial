@@ -451,22 +451,17 @@ const aula: Aula = {
 
   missaoFamilia: {
     titulo: "Missão Em Família · Um Percurso De Verdade",
-    passos: [
-      "Escolham um caminho CURTO: casa → padaria, casa → praça ou casa → escola.",
-      "Façam o percurso juntos e observem: quais lugares vocês passaram?",
-      "Anotem quais REFERÊNCIAS 📍 apareceram e qual foi o destino final.",
+    instrucao:
+      "Escolham um caminho CURTO (casa → padaria, casa → praça ou casa → escola), façam juntos e observem as referências e o destino final. Peça pra criança apontar as referências enquanto caminham.",
+    registros: [
+      { label: "Qual foi o caminho escolhido?", tipo: "texto" },
+      { label: "Que referências apareceram no caminho?", tipo: "texto" },
+      { label: "Qual foi o destino final?", tipo: "texto" },
     ],
-    dica: "Peça pra criança apontar as referências enquanto vocês caminham.",
+    permitirFoto: true,
   },
 
-  recompensas: {
-    xp: 180,
-    moedas: 100,
-    medalha: "Explorador dos Caminhos",
-    itemDesbloqueado: "🧭 Bússola Dourada do Brilha",
-  },
-
-  proximaHabilidade: "EF01GE03",
+  proximaHabilidade: { codigo: "EF01GE03" },
 };
 
 export default aula;
