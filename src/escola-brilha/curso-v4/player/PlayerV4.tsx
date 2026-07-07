@@ -207,46 +207,50 @@ function Explicacao({ m }: { m: AulaV4["momento04_explicacao"] }) {
                 <div className="text-sm text-white/70 mt-1">Ex.: {e.exemplo}</div>
               )}
               {e.agrupamentos && e.agrupamentos.length > 0 && (
-                <div className="mt-3 space-y-3">
-                  {e.agrupamentos.map((ag, idx) => {
-                    const total = ag.tamanhoGrupo * ag.qtdGrupos;
-                    return (
-                      <div key={idx} className="rounded-xl bg-white/5 p-3">
-                        {ag.rotulo && (
-                          <div className="text-xs text-amber-300 font-semibold mb-2">
-                            {ag.rotulo}
-                          </div>
-                        )}
-                        <div className="flex flex-wrap gap-3 items-end">
-                          {Array.from({ length: ag.qtdGrupos }).map((_, gi) => (
-                            <div key={gi} className="flex flex-col items-center">
-                              <div className="grid grid-cols-5 gap-0.5 p-1 rounded-lg bg-amber-400/10 border border-amber-300/30">
-                                {Array.from({ length: ag.tamanhoGrupo }).map((_, ii) => (
-                                  <img
-                                    key={ii}
-                                    src={ag.imagemUrl}
-                                    alt=""
-                                    className="w-6 h-6 object-contain"
-                                  />
-                                ))}
-                              </div>
-                              <div className="text-xs text-white/80 mt-1 font-bold">
-                                {ag.tamanhoGrupo * (gi + 1)}
-                              </div>
+                <div className="mt-3 flex flex-wrap gap-3 items-start">
+                  <div className="flex-1 min-w-[200px] space-y-3">
+                    {e.agrupamentos.map((ag, idx) => {
+                      const total = ag.tamanhoGrupo * ag.qtdGrupos;
+                      return (
+                        <div key={idx} className="rounded-xl bg-white/5 p-3">
+                          {ag.rotulo && (
+                            <div className="text-xs text-amber-300 font-semibold mb-2">
+                              {ag.rotulo}
                             </div>
-                          ))}
+                          )}
+                          <div className="flex flex-wrap gap-3 items-end">
+                            {Array.from({ length: ag.qtdGrupos }).map((_, gi) => (
+                              <div key={gi} className="flex flex-col items-center">
+                                <div className="grid grid-cols-5 gap-0.5 p-1 rounded-lg bg-amber-400/10 border border-amber-300/30">
+                                  {Array.from({ length: ag.tamanhoGrupo }).map((_, ii) => (
+                                    <img
+                                      key={ii}
+                                      src={ag.imagemUrl}
+                                      alt=""
+                                      className="w-6 h-6 object-contain"
+                                    />
+                                  ))}
+                                </div>
+                                <div className="text-xs text-white/80 mt-1 font-bold">
+                                  {ag.tamanhoGrupo * (gi + 1)}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-sm text-white/90 mt-2">
+                            {Array.from({ length: ag.qtdGrupos })
+                              .map(() => ag.tamanhoGrupo)
+                              .join(" + ")}{" "}
+                            = <span className="font-bold text-amber-300">{total}</span>
+                          </div>
                         </div>
-                        <div className="text-sm text-white/90 mt-2">
-                          {Array.from({ length: ag.qtdGrupos })
-                            .map(() => ag.tamanhoGrupo)
-                            .join(" + ")}{" "}
-                          = <span className="font-bold text-amber-300">{total}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
+                  <ContaArmadaEmpilhada agrupamentos={e.agrupamentos} />
                 </div>
               )}
+
               {e.frutasParaNumero && (
                 <FrutasParaNumero {...e.frutasParaNumero} />
               )}
@@ -1057,6 +1061,48 @@ function GrupoImg({ url, n }: { url: string; n: number }) {
       {Array.from({ length: n }).map((_, k) => (
         <img key={k} src={url} alt="" className="w-8 h-8 object-contain" />
       ))}
+    </div>
+  );
+}
+
+function ContaArmadaEmpilhada({
+  agrupamentos,
+}: {
+  agrupamentos: Array<{ tamanhoGrupo: number; qtdGrupos: number }>;
+}) {
+  // Expande em parcelas: [{10,x2},{3,x1}] → [10,10,3]
+  const parcelas: number[] = [];
+  agrupamentos.forEach((ag) => {
+    for (let i = 0; i < ag.qtdGrupos; i++) parcelas.push(ag.tamanhoGrupo);
+  });
+  if (parcelas.length < 2) return null;
+  const total = parcelas.reduce((a, b) => a + b, 0);
+  const largura = String(total).length;
+  const pad = (n: number) => String(n).padStart(largura, "\u00A0");
+  return (
+    <div className="rounded-2xl bg-white/95 text-[#0d1f55] p-3 border-2 border-amber-300/50 shrink-0">
+      <div className="text-[10px] font-black uppercase tracking-widest text-amber-600 mb-2 text-center">
+        Conta armada
+      </div>
+      <div className="font-mono text-2xl font-black leading-tight text-right tabular-nums px-2">
+        {parcelas.map((p, i) => (
+          <div key={i} className="flex items-center justify-end gap-2">
+            <span className="text-amber-500 w-4">{i === parcelas.length - 1 ? "+" : "\u00A0"}</span>
+            <span>
+              {pad(p)
+                .split("")
+                .map((c, j) => (
+                  <span key={j}>{c}</span>
+                ))}
+            </span>
+          </div>
+        ))}
+        <div className="border-t-2 border-[#0d1f55] my-1 ml-6" />
+        <div className="flex items-center justify-end gap-2 text-emerald-600">
+          <span className="w-4">&nbsp;</span>
+          <span>{total}</span>
+        </div>
+      </div>
     </div>
   );
 }
