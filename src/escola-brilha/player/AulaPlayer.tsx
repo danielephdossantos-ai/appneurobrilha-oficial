@@ -46,6 +46,7 @@ const BLOCOS_BASE = [
   { id: "missao",     nome: "Missão",         etapa: 1, etapaNome: "Descobrir"  },
   { id: "objetivos",  nome: "Objetivos",      etapa: 1, etapaNome: "Descobrir"  },
   { id: "explicacao", nome: "Explicação",     etapa: 2, etapaNome: "Entender"   },
+  { id: "aprendendo", nome: "Aprendendo",     etapa: 2, etapaNome: "Entender"   },
   { id: "exemplo",    nome: "Exemplo",        etapa: 2, etapaNome: "Entender"   },
   { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
   { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },

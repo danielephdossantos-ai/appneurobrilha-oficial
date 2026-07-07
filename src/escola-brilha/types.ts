@@ -288,6 +288,23 @@ export type Aula = {
     imagemUrl?: string;
   };
 
+  /**
+   * Aprendendo (opcional). Cards de palavras com ilustração + narração +
+   * divisão silábica + frase de exemplo. Usado no 2º Ano de Língua
+   * Portuguesa para apresentar vocabulário antes das atividades.
+   */
+  aprendendo?: {
+    titulo?: string;
+    instrucao?: string;
+    cards: Array<{
+      palavra: string;
+      emoji?: string;
+      imagemUrl?: string;
+      silabas: string[];
+      frase: string;
+    }>;
+  };
+
 
   // Opcional — diagnóstico rápido dos conhecimentos prévios (antes da aula).
   // Se ausente, o player pula direto pra Missão.
