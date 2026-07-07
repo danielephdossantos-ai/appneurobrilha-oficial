@@ -99,6 +99,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
           b: 2,
           resultado: 5,
           itemPlural: "bananas",
+          operacao: "subtracao",
         },
       },
     ],
