@@ -765,17 +765,142 @@ function EscolhaVisual({ i }: { i: Extract<Interacao, { tipo: "escolhaVisual" }>
 function OperacaoVisual({ i }: { i: Extract<Interacao, { tipo: "operacaoVisual" }> }) {
   const total = i.operacao === "soma" ? i.a + i.b : Math.max(0, i.a - i.b);
   const sinal = i.operacao === "soma" ? "+" : "−";
+  const [contando, setContando] = React.useState(false);
+  const [passo, setPasso] = React.useState(0); // quantas frutas já contadas
+  const [terminou, setTerminou] = React.useState(false);
+
+  // Para soma: conta A e depois B (total = a+b frutas destacadas)
+  // Para subtração: conta A e "tira" B (mostra a, depois vai sumindo b)
+  const totalPassos = i.operacao === "soma" ? i.a + i.b : i.a;
+  const numeroAtual = i.operacao === "soma"
+    ? passo
+    : Math.max(0, i.a - Math.max(0, passo - i.a));
+
+  const iniciar = () => {
+    setContando(true);
+    setTerminou(false);
+    setPasso(0);
+  };
+
+  React.useEffect(() => {
+    if (!contando) return;
+    if (passo >= totalPassos) {
+      // fala o total final
+      const t = setTimeout(() => {
+        try {
+          const u = new SpeechSynthesisUtterance(
+            i.operacao === "soma"
+              ? `Total: ${total} ${i.itemPlural}!`
+              : `Ficaram ${total} ${i.itemPlural}!`
+          );
+          u.lang = "pt-BR";
+          u.rate = 0.95;
+          window.speechSynthesis.speak(u);
+        } catch {}
+        setTerminou(true);
+        setContando(false);
+      }, 500);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      const n = passo + 1;
+      try {
+        const u = new SpeechSynthesisUtterance(String(n));
+        u.lang = "pt-BR";
+        u.rate = 0.9;
+        window.speechSynthesis.speak(u);
+      } catch {}
+      setPasso(n);
+    }, 900);
+    return () => clearTimeout(t);
+  }, [contando, passo, totalPassos, total, i.itemPlural, i.operacao]);
+
   return (
     <div className="mt-3 bg-white/5 rounded-xl p-4">
       {i.legenda && <div className="text-sm text-white/70 mb-3 text-center">{i.legenda}</div>}
       <div className="flex items-center justify-center gap-3 flex-wrap">
-        <GrupoImg url={i.imagemUrl} n={i.a} />
+        <GrupoImgAnimado
+          url={i.imagemUrl}
+          n={i.a}
+          destacadosAte={Math.min(passo, i.a)}
+          modo={i.operacao === "soma" ? "destacar" : (passo > i.a ? "sumir" : "destacar")}
+          sumirDepoisDe={i.operacao === "subtracao" ? Math.max(0, passo - i.a) : 0}
+        />
         <div className="text-3xl font-black">{sinal}</div>
-        <GrupoImg url={i.imagemUrl} n={i.b} />
+        <GrupoImgAnimado
+          url={i.imagemUrl}
+          n={i.b}
+          destacadosAte={i.operacao === "soma" ? Math.max(0, passo - i.a) : 0}
+          modo="destacar"
+          sumirDepoisDe={0}
+        />
         <div className="text-3xl font-black">=</div>
-        <div className="text-3xl font-black text-amber-300">{total}</div>
+        <div className="text-4xl font-black text-amber-300 min-w-[3rem] text-center">
+          {terminou ? total : (contando ? numeroAtual : "?")}
+        </div>
       </div>
       <div className="text-center text-sm text-white/60 mt-2">{i.itemPlural}</div>
+      <div className="flex justify-center mt-4">
+        {!contando && !terminou && (
+          <button
+            onClick={iniciar}
+            className="px-6 py-3 rounded-xl bg-amber-400 text-slate-900 font-black text-lg hover:bg-amber-300 transition-colors"
+          >
+            ▶ Contar!
+          </button>
+        )}
+        {contando && (
+          <div className="text-amber-300 font-bold text-lg animate-pulse">
+            Contando: {numeroAtual}...
+          </div>
+        )}
+        {terminou && (
+          <button
+            onClick={iniciar}
+            className="px-4 py-2 rounded-lg bg-white/10 text-white/80 text-sm hover:bg-white/20"
+          >
+            🔄 Contar de novo
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function GrupoImgAnimado({
+  url,
+  n,
+  destacadosAte,
+  modo,
+  sumirDepoisDe,
+}: {
+  url: string;
+  n: number;
+  destacadosAte: number;
+  modo: "destacar" | "sumir";
+  sumirDepoisDe: number;
+}) {
+  return (
+    <div className="flex flex-wrap gap-1 max-w-[160px] justify-center">
+      {Array.from({ length: n }).map((_, k) => {
+        const contado = k < destacadosAte;
+        const sumiu = modo === "sumir" && k < sumirDepoisDe;
+        return (
+          <img
+            key={k}
+            src={url}
+            alt=""
+            className={
+              "w-9 h-9 object-contain transition-all duration-300 " +
+              (sumiu
+                ? "opacity-10 grayscale scale-75"
+                : contado
+                ? "scale-110 drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]"
+                : "opacity-60")
+            }
+          />
+        );
+      })}
     </div>
   );
 }
