@@ -30,11 +30,9 @@ export function PrevisaoTitulo({ data }: { data: PrevisaoTituloData }) {
   function tocar(i: number) {
     if (escolha !== null) return;
     stopSpeaking();
-    speakChunked(data.hipoteses[i].texto);
     setEscolha(i);
-    const msg = i === data.respostaCerta ? data.feedbackAcerto : data.feedbackErro;
-    setTimeout(() => speakChunked(msg), 900);
   }
+
 
   function tentarDeNovo() {
     stopSpeaking();
