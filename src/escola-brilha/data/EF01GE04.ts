@@ -305,10 +305,10 @@ const aula: Aula = {
       instrucao:
         "Escute com o binóculo mágico e LIGUE cada SOM à paisagem certa 🔊➡️🗺️.",
       pares: [
-        { esquerda: "🐦 Canto dos passarinhos", direita: "🌳 Parque", esquerdaImagem: passaroImg, direitaImagem: parqueImg },
-        { esquerda: "🚗 Carros e buzinas", direita: "🏙️ Cidade", esquerdaImagem: carroImg, direitaImagem: cidadeImg },
-        { esquerda: "🌊 Ondas do mar", direita: "🏖️ Praia", esquerdaImagem: chuvaImg, direitaImagem: praiaImg },
-        { esquerda: "🐮 Animais da fazenda", direita: "🌾 Campo", esquerdaImagem: borboletaImg, direitaImagem: campoImg },
+        { a: "🐦 Canto dos passarinhos", b: "🌳 Parque", aImagem: passaroImg, bImagem: parqueImg },
+        { a: "🚗 Carros e buzinas", b: "🏙️ Cidade", aImagem: carroImg, bImagem: cidadeImg },
+        { a: "🌊 Ondas do mar", b: "🏖️ Praia", aImagem: chuvaImg, bImagem: praiaImg },
+        { a: "🐮 Animais da fazenda", b: "🌾 Campo", aImagem: borboletaImg, bImagem: campoImg },
       ],
     },
 
