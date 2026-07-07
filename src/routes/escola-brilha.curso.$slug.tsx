@@ -127,6 +127,11 @@ function TrilhaCurso() {
                             to: "/escola-brilha/aula-pt-v4/$curso/$aula",
                             params: { curso: slug, aula: a.slug },
                           });
+                        } else if (ehGeografia) {
+                          navigate({
+                            to: "/escola-brilha/aula-geo-v4/$curso/$aula",
+                            params: { curso: slug, aula: a.slug },
+                          });
                         } else {
                           navigate({
                             to: "/escola-brilha/aula-v4/$curso/$aula",
