@@ -250,6 +250,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: banana, quantidade: 9, rotulo: "Brilha tinha" },
         ],
+        tirar: 1,
         feedbackAcerto:
           "🎉 Boa! 9 − 1 = 8. Truque esperto: tirar 1 é só falar o número ANTES: antes do 9 vem o 8.",
         feedbackErro:
