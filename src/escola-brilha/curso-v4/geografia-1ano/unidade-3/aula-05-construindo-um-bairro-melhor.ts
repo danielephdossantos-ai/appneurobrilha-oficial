@@ -21,6 +21,10 @@ import lixeiraRec from "@/assets/neuro-treino/objetos/lixeira-reciclagem.png";
 import brilha from "@/assets/neuro-treino/objetos/esquilo-brilha.png";
 import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
 import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
+import criancasGrupo from "@/assets/neuro-treino/objetos/criancas-grupo.png";
+import criancaAndando from "@/assets/neuro-treino/objetos/crianca-andando.png";
+import menino from "@/assets/neuro-treino/objetos/menino.png";
+import rua from "@/assets/neuro-treino/objetos/rua.png";
 
 /**
  * Aula 5 · Unidade 3 — Construindo um Bairro Melhor
