@@ -7,6 +7,8 @@ import { CardVocabulario } from "./blocos/CardVocabulario";
 import { LeituraIlustrada } from "./blocos/LeituraIlustrada";
 import { QuizTexto } from "./blocos/QuizTexto";
 import { OrdenarSequencia } from "./blocos/OrdenarSequencia";
+import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
+import { SelecionarItens } from "./blocos/SelecionarItens";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -21,7 +23,7 @@ type Props = {
   onConcluir?: () => void;
 };
 
-const MOMENTOS = [
+const MOMENTOS_BASE = [
   { id: "m1", label: "🎬 Motivação" },
   { id: "m2", label: "🔮 Previsão" },
   { id: "m3", label: "📚 Vocabulário" },
@@ -30,6 +32,7 @@ const MOMENTOS = [
   { id: "m6", label: "🎭 Personagens & lugar" },
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
+  { id: "mmini", label: "🎮 Minijogo", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
   { id: "m10", label: "✅ Avaliação" },
   { id: "m11", label: "🏠 Missão em Família" },
@@ -37,6 +40,10 @@ const MOMENTOS = [
 
 export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
+
+  const MOMENTOS = MOMENTOS_BASE.filter(
+    (m) => !("opcional" in m && m.opcional) || (m.id === "mmini" && !!aula.momento_minijogo),
+  );
 
   useEffect(() => {
     const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(Boolean) as HTMLElement[];
@@ -171,6 +178,18 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               </div>
             </div>
           </Secao>
+
+          {/* Minijogo (opcional) */}
+          {aula.momento_minijogo && (
+            <Secao id="mmini" label={`🎮 ${aula.momento_minijogo.titulo}`}>
+              <Instrucao>{aula.momento_minijogo.instrucao}</Instrucao>
+              {aula.momento_minijogo.jogo.tipo === "arrastarParaAlvo" ? (
+                <ArrastarParaAlvo data={aula.momento_minijogo.jogo.bloco} />
+              ) : (
+                <SelecionarItens data={aula.momento_minijogo.jogo.bloco} />
+              )}
+            </Secao>
+          )}
 
           {/* M9 · Revisão */}
           <Secao id="m9" label="🔁 Revisão">

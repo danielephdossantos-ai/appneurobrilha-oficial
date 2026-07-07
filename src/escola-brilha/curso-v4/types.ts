@@ -393,6 +393,43 @@ export type MomentoMissaoFamiliaPT = {
   registro: string;
 };
 
+// ---------- Minijogos de Português (Unidade 2+) ---------------------
+
+/** Arrastar cada item para o "alvo" correto. Ex.: bilhete → destinatário. */
+export type ArrastarParaAlvoData = {
+  instrucao: string;
+  itens: Array<{
+    id: string;
+    texto: string;
+    imagemUrl?: string;
+    /** id do alvo correto. */
+    alvoId: string;
+  }>;
+  alvos: Array<{ id: string; nome: string; imagemUrl?: string; descricao?: string }>;
+  feedbackAcerto: string;
+  feedbackErro: string;
+};
+
+/** Selecionar (marcar) apenas os itens pedidos entre várias opções. */
+export type SelecionarItensData = {
+  instrucao: string;
+  pergunta: string;
+  opcoes: Array<{ id: string; texto: string; imagemUrl?: string; correto: boolean }>;
+  feedbackAcerto: string;
+  feedbackErro: string;
+};
+
+export type MinijogoPT =
+  | { tipo: "arrastarParaAlvo"; titulo: string; bloco: ArrastarParaAlvoData }
+  | { tipo: "selecionarItens"; titulo: string; bloco: SelecionarItensData };
+
+/** Bloco opcional de minijogo pedagógico dentro da aula. */
+export type MomentoMinijogo = {
+  titulo: string;
+  instrucao: string;
+  jogo: MinijogoPT;
+};
+
 export type AulaPortuguesV4 = {
   slug: string;
   titulo: string;
@@ -408,6 +445,8 @@ export type AulaPortuguesV4 = {
   momento06_personagensCenario: MomentoPersonagensCenario;
   momento07_sequencia: MomentoSequencia;
   momento08_leituraIndependente: MomentoLeituraIndependente;
+  /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
+  momento_minijogo?: MomentoMinijogo;
   momento09_revisao: MomentoRevisaoPT;
   momento10_avaliacao: MomentoAvaliacaoPT;
   momento11_missaoFamilia: MomentoMissaoFamiliaPT;
