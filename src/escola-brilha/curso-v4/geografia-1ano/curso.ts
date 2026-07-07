@@ -1,6 +1,7 @@
 import type { CursoGeografia } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
+import { unidade3 } from "./unidade-3";
 
 /**
  * Curso: Geografia 1º Ano — "Pequenos Exploradores do Mundo"
@@ -29,16 +30,7 @@ const curso: CursoGeografia = {
   unidades: [
     unidade1,
     unidade2,
-    {
-      slug: "unidade-3",
-      numero: 3,
-      titulo: "Descobrindo o Bairro",
-      subtitulo: "Ruas, praças, comércio e serviços",
-      descricao:
-        "O mapa mágico se expande: agora é o BAIRRO. Pontos de referência, faixa de pedestre, mobilidade.",
-      corTema: "#3b82f6",
-      aulas: [],
-    },
+    unidade3,
     {
       slug: "unidade-4",
       numero: 4,
