@@ -3,6 +3,7 @@ import { aula01_feiraDasFrutas } from "./aula-01-feira-das-frutas";
 import { aula02_somasAte10 } from "./aula-02-somas-ate-10";
 import { aula03_subtracoesAte10 } from "./aula-03-subtracoes-ate-10";
 import { aula04_compararQuantidades } from "./aula-04-comparar-quantidades";
+import { aula05_agruparDe10 } from "./aula-05-agrupar-de-10";
 
 /**
  * Unidade 1 — "A Feira dos Números"
@@ -23,6 +24,7 @@ export const unidade1: Unidade = {
     aula02_somasAte10,
     aula03_subtracoesAte10,
     aula04_compararQuantidades,
+    aula05_agruparDe10,
   ],
 };
 
