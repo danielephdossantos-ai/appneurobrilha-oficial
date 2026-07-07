@@ -478,13 +478,18 @@ export type MomentoMinijogo = {
 export type EnsinoVisualBloco =
   | {
       tipo: "maiusculaMinuscula";
-      /** Pares como {maiuscula:"A", minuscula:"a", exemplo:"ANA"}. */
+      /** Pares como {maiuscula:"A", minuscula:"a", exemplo:"ANA / amor"}. */
       pares: Array<{ maiuscula: string; minuscula: string; exemplo?: string }>;
     }
   | {
       tipo: "fraseComPonto";
       /** Cada frase é mostrada com a 1ª letra em verde e a pontuação final em vermelho. */
       frases: Array<{ texto: string; explicacao?: string }>;
+    }
+  | {
+      tipo: "alfabetoCompleto";
+      /** Palavra-exemplo opcional pra cada letra (A→ABELHA, B→BOLA…). */
+      exemplos?: Partial<Record<string, string>>;
     };
 
 export type MomentoEnsinoVisual = {
