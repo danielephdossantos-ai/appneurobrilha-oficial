@@ -8,6 +8,7 @@ type Props = {
   b: number;
   resultado?: number;
   itemPlural?: string;
+  operacao?: "soma" | "subtracao";
 };
 
 const NOME: Record<number, string> = {
@@ -19,17 +20,15 @@ const NOME: Record<number, string> = {
 const num = (n: number) => NOME[n] ?? String(n);
 
 /**
- * "Conta armada" — adição vertical animada.
- *   a
- * + b
- * ----
- *   r
- *
- * Ao apertar "resolver", conta em voz alta a partir de `a` somando `b`
- * (ex.: começa em 5, "seis... sete..." e o resultado aparece embaixo).
+ * "Conta armada" — adição ou subtração vertical animada.
+ * Soma: começa em `a`, conta pra frente somando `b`.
+ * Subtração: começa em `a`, conta pra trás tirando `b`.
  */
-export function ContaArmada({ a, b, resultado, itemPlural = "" }: Props) {
-  const r = resultado ?? a + b;
+export function ContaArmada({ a, b, resultado, itemPlural = "", operacao = "soma" }: Props) {
+  const ehSoma = operacao === "soma";
+  const r = resultado ?? (ehSoma ? a + b : a - b);
+  const sinal = ehSoma ? "+" : "−";
+  const palavra = ehSoma ? "mais" : "menos";
   const [contando, setContando] = useState(false);
   const [atual, setAtual] = useState<number | null>(null);
   const [mostrarResultado, setMostrarResultado] = useState(false);
@@ -44,7 +43,7 @@ export function ContaArmada({ a, b, resultado, itemPlural = "" }: Props) {
     speakChunked(`Começamos com ${num(a)}.`, { rate: 0.95 });
     await new Promise((res) => setTimeout(res, 900));
     for (let i = 1; i <= b; i++) {
-      const n = a + i;
+      const n = ehSoma ? a + i : a - i;
       setAtual(n);
       speakChunked(num(n), { rate: 0.9, pitch: 1.1 });
       await new Promise((res) => setTimeout(res, 700));
@@ -52,8 +51,8 @@ export function ContaArmada({ a, b, resultado, itemPlural = "" }: Props) {
     setMostrarResultado(true);
     speakChunked(
       itemPlural
-        ? `${num(a)} mais ${num(b)} é igual a ${num(r)}. ${num(r)} ${itemPlural}!`
-        : `${num(a)} mais ${num(b)} é igual a ${num(r)}.`,
+        ? `${num(a)} ${palavra} ${num(b)} é igual a ${num(r)}. ${num(r)} ${itemPlural}!`
+        : `${num(a)} ${palavra} ${num(b)} é igual a ${num(r)}.`,
       { rate: 0.9 },
     );
     setContando(false);
@@ -102,7 +101,7 @@ export function ContaArmada({ a, b, resultado, itemPlural = "" }: Props) {
             <span>{pad(a).split("").map((c, i) => <span key={i}>{c === " " ? "\u00A0" : c}</span>)}</span>
           </div>
           <div className="pr-2 flex items-center justify-end gap-3">
-            <span className="text-amber-500">+</span>
+            <span className="text-amber-500">{sinal}</span>
             <span>{pad(b).split("").map((c, i) => <span key={i}>{c === " " ? "\u00A0" : c}</span>)}</span>
           </div>
           <div className="border-t-4 border-[#0d1f55] my-2" />
@@ -144,7 +143,7 @@ export function ContaArmada({ a, b, resultado, itemPlural = "" }: Props) {
           animate={{ opacity: 1, y: 0 }}
           className="mt-3 rounded-xl bg-emerald-500 text-white p-3 text-center font-black text-lg"
         >
-          {a} + {b} = {r} {itemPlural && `${itemPlural}!`}
+          {a} {sinal} {b} = {r} {itemPlural && `${itemPlural}!`}
         </motion.div>
       )}
     </div>
