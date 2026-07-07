@@ -218,10 +218,21 @@ export const aula02_somasAte10: AulaV4 = {
     ],
   },
   momento11_missaoFamilia: {
-    titulo: "🚧 Em construção — Missão em família chega na Fatia 4",
-    materiais: ["Aguarde: aqui vai entrar a atividade prática pra fazer em casa com a família."],
-    passos: ["Fatias já entregues: 1 (Aprendendo) e 2 (3 Fases de prática). Faltam: minijogo Colheita Relâmpago e Quiz final + Missão em família."],
-    registro: "Em breve.",
+    titulo: "🍎 A Feira do Pomar em casa",
+    materiais: [
+      "10 frutas de verdade (maçãs, laranjas, bananas — o que tiver na cozinha)",
+      "2 pratos, cestas ou potes",
+      "Papel e lápis (opcional, pra escrever a conta)",
+    ],
+    passos: [
+      "1) Peça um adulto pra colocar algumas frutas no primeiro prato (ex.: 4). A criança conta em voz alta tocando cada uma: um, dois, três, quatro.",
+      "2) O adulto coloca MAIS algumas frutas no segundo prato (ex.: 3). A criança conta esse grupo também.",
+      "3) Agora a mágica da SOMA: a criança junta os dois pratos e conta TUDO tocando fruta por fruta, começando pelo maior grupo.",
+      "4) O adulto pergunta: 'Quanto deu no total?' A criança fala em voz alta: '4 mais 3 é igual a 7!'",
+      "5) Repitam 3 vezes com combinações diferentes (sempre somando até no máximo 10): 5+2, 6+3, 4+4. Cada acerto é uma comemoração!",
+    ],
+    registro:
+      "📸 Tire uma foto dos dois pratos ANTES de juntar e outra DEPOIS, com a criança mostrando com os dedos o resultado da soma.",
   },
 
   recompensa: {
