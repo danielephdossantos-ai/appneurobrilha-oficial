@@ -98,6 +98,30 @@ export type MomentoExplicacao = {
       qtdGrupos: number;      // ex.: 4 pilhas de 5
       rotulo?: string;        // ex.: "de 5 em 5"
     }>;
+    /**
+     * Anima "frutas → número": mostra grupos de frutas (ex.: 5 + 2),
+     * conta uma a uma tocando, e revela a soma como algarismos.
+     */
+    frutasParaNumero?: {
+      imagemUrl: string;
+      itemPlural: string;
+      grupos: number[];        // ex.: [5, 2] renderiza 🍎x5 + 🍎x2
+    };
+    /**
+     * Conta armada (adição vertical) com animação passo a passo do resultado.
+     *   a
+     * + b
+     * ----
+     *   r
+     */
+    contaArmada?: {
+      a: number;
+      b: number;
+      /** Opcional — inferido de a+b se ausente. */
+      resultado?: number;
+      /** Ex.: "maçãs" — para narração. */
+      itemPlural?: string;
+    };
   }>;
 };
 
