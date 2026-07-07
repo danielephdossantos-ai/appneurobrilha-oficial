@@ -11,6 +11,7 @@ type BlocoId =
   | "missao"
   | "objetivos"
   | "explicacao"
+  | "aprendendo"
   | "exemplo"
   | "guiada"
   | "exercicios"
@@ -224,6 +225,11 @@ const TEMPLATES: Record<BlocoId, Record<Faixa, string[]>> = {
     pequeno: ["Agora escuta com atenção, vou te contar o segredo!", "Presta atenção que fica fácil, viu?"],
     medio: ["Vou te explicar passo a passo, sem pressa.", "Se algo não fizer sentido, a gente lê de novo — sem drama."],
     grande: ["Foca aqui: vou explicar a lógica, não só o 'como'.", "Entende o porquê, não decora — isso serve pra vida toda."],
+  },
+  aprendendo: {
+    pequeno: ["Toca em cada palavrinha pra ouvir e ver a figura!", "Vamos ler juntinho? Toca nas figuras!"],
+    medio: ["Toque em cada cartão pra ouvir a palavra, ver as sílabas e a frase.", "Cada palavra tem uma figura, uma divisão e um exemplo. Explora!"],
+    grande: ["Explore os cartões: palavra, sílabas e frase de contexto ampliam o vocabulário.", "Toque pra ouvir a narração e reforçar a leitura."],
   },
   exemplo: {
     pequeno: ["Olha o exemplo! Assim fica bem mais fácil.", "Vou te mostrar como faz — é igual a um truque!"],

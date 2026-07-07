@@ -11,6 +11,7 @@ import { Missao } from "./blocos/Missao";
 import { Narrativa } from "./blocos/Narrativa";
 import { Objetivos } from "./blocos/Objetivos";
 import { Explicacao } from "./blocos/Explicacao";
+import { Aprendendo } from "./blocos/Aprendendo";
 import { ExemploResolvido } from "./blocos/ExemploResolvido";
 import { AtividadeGuiada } from "./blocos/AtividadeGuiada";
 import { Exercicios } from "./blocos/Exercicios";
@@ -46,6 +47,7 @@ const BLOCOS_BASE = [
   { id: "missao",     nome: "Missão",         etapa: 1, etapaNome: "Descobrir"  },
   { id: "objetivos",  nome: "Objetivos",      etapa: 1, etapaNome: "Descobrir"  },
   { id: "explicacao", nome: "Explicação",     etapa: 2, etapaNome: "Entender"   },
+  { id: "aprendendo", nome: "Aprendendo",     etapa: 2, etapaNome: "Entender"   },
   { id: "exemplo",    nome: "Exemplo",        etapa: 2, etapaNome: "Entender"   },
   { id: "guiada",     nome: "Prática Guiada", etapa: 3, etapaNome: "Explorar"   },
   { id: "exercicios", nome: "Exercícios",     etapa: 4, etapaNome: "Praticar"   },
@@ -87,12 +89,13 @@ export function AulaPlayer({
     () =>
       BLOCOS_BASE.filter((b) => {
         if (b.id === "narrativa" && !aula.narrativa) return false;
+        if (b.id === "aprendendo" && !aula.aprendendo) return false;
         if (b.id === "curiosidade" && !aula.curiosidade) return false;
         if (b.id === "minijogo" && !aula.minijogo) return false;
         if (b.id === "familia" && !aula.missaoFamilia) return false;
         return true;
       }),
-    [aula.narrativa, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
+    [aula.narrativa, aula.aprendendo, aula.curiosidade, aula.minijogo, aula.missaoFamilia],
   );
 
 
@@ -390,6 +393,8 @@ function renderBloco(
           </div>
         </>
       );
+    case "aprendendo":
+      return a.aprendendo ? <Aprendendo dados={a.aprendendo} /> : null;
     case "exemplo":
       return <ExemploResolvido dados={a.exemploResolvido} />;
     case "guiada":
