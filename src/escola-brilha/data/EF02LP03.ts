@@ -204,7 +204,7 @@ const aula: Aula = {
     medio: [
       { pergunta: "Complete: hoje aprendemos sobre…", opcoes: ["Sons Iguais, Letras Diferentes", "Só matemática", "Só música"], correta: 0, explicacao: "Sons Iguais, Letras Diferentes." },
       { pergunta: "VELA aparece no card:", opcoes: ["Sim","Não","Talvez"], correta: 0, explicacao: "Volte no Aprendendo." },
-      { pergunta: "PATO tem quantas sílabas?", opcoes: [str(sum(1 for c in p2 if c.isalpha())//3 or 2),"1","10"], correta: 0, explicacao: "Bata palma." }
+      { pergunta: "PATO tem quantas sílabas?", opcoes: ["2","1","10"], correta: 0, explicacao: "Bata palma." }
     ],
     dificil: [
       { pergunta: "Pra aprender melhor, eu:", opcoes: ["Leio e converso","Fecho o livro","Ignoro"], correta: 0, explicacao: "Ler + conversar." },
