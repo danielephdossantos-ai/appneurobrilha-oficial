@@ -121,6 +121,8 @@ export const aula04: AulaPortuguesV4 = {
       },
     ],
   },
+
+  momento04_leituraGuiada: {
     instrucao:
       "Leia com Brilha o que faz um bom detetive de palavras.",
     leitura: {
