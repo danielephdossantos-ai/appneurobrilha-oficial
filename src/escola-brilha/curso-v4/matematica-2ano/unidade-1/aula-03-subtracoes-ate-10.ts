@@ -265,6 +265,7 @@ export const aula03_subtracoesAte10: AulaV4 = {
         visualGrupos: [
           { imagemUrl: maca, quantidade: 10, rotulo: "Cesta cheia" },
         ],
+        tirar: 5,
         feedbackAcerto:
           "🎉 Uau! 10 − 5 = 5. Tirou metade! Sobrou a outra metade. Você é campeão(ã) do pomar! 🏆",
         feedbackErro:
