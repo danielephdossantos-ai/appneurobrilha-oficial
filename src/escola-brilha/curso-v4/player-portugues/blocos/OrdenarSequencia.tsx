@@ -7,8 +7,12 @@ import type { OrdenarSequenciaData } from "../../types";
  * bem no celular também.
  */
 export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
-  // Embaralha uma vez ao montar (deterministic p/ SSR: usa shuffle a partir do id).
-  const embaralhados = useMemo(() => embaralhar(data.itens), [data.itens]);
+  // Embaralha uma vez ao montar. Determinístico (SSR-safe) e sempre
+  // diferente da ordemCerta — senão a criança abre a atividade já resolvida.
+  const embaralhados = useMemo(
+    () => embaralhar(data.itens, data.ordemCerta),
+    [data.itens, data.ordemCerta],
+  );
   const [ordem, setOrdem] = useState(embaralhados.map((i) => i.id));
   const [conferiu, setConferiu] = useState(false);
 
@@ -106,12 +110,33 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
   );
 }
 
-/** Embaralhamento estável (baseado no id, não em Math.random) pra evitar
- * mismatch entre SSR e cliente. Ainda gera ordem diferente da correta. */
-function embaralhar<T extends { id: string }>(itens: T[]): T[] {
+/**
+ * Embaralhamento estável (determinístico → mesma ordem no SSR e no cliente)
+ * que garante ser DIFERENTE da ordem correta. Estratégia:
+ *   1) Fisher-Yates usando um PRNG semeado com hash(ordemCerta+ids).
+ *   2) Se, por azar, a ordem cair igual à correta, roda uma rotação.
+ */
+function embaralhar<T extends { id: string }>(
+  itens: T[],
+  ordemCerta: string[],
+): T[] {
+  if (itens.length <= 1) return [...itens];
+
+  const seed = hash(ordemCerta.join("|") + "::" + itens.map((i) => i.id).join(","));
+  const rand = mulberry32(seed || 1);
+
   const cp = [...itens];
-  // ordena por hash do id (determinístico mas diferente da ordem original)
-  cp.sort((a, b) => hash(a.id) - hash(b.id));
+  for (let i = cp.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [cp[i], cp[j]] = [cp[j], cp[i]];
+  }
+
+  // Se caiu igual à ordem certa, rotaciona (mantém determinismo).
+  const igual = cp.every((it, i) => it.id === ordemCerta[i]);
+  if (igual) {
+    const primeiro = cp.shift()!;
+    cp.push(primeiro);
+  }
   return cp;
 }
 
@@ -119,4 +144,16 @@ function hash(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
   return h;
+}
+
+/** PRNG determinístico simples (Mulberry32). */
+function mulberry32(seed: number) {
+  let a = seed >>> 0;
+  return function () {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
