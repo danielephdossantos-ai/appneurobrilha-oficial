@@ -133,10 +133,12 @@ export type MomentoExplicacao = {
     contaArmada?: {
       a: number;
       b: number;
-      /** Opcional — inferido de a+b se ausente. */
+      /** Opcional — inferido de a±b se ausente. */
       resultado?: number;
       /** Ex.: "maçãs" — para narração. */
       itemPlural?: string;
+      /** "soma" (padrão) ou "subtracao". */
+      operacao?: "soma" | "subtracao";
     };
   }>;
 };
