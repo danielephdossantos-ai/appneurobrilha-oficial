@@ -44,6 +44,13 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Apartamento na cidade grande",
         emoji: "🏢",
         imagemUrl: apartamentoImg,
+        pergunta: "Por que TANTAS famílias moram empilhadas no mesmo prédio?",
+        hipoteses: [
+          "Porque prédio é mais bonito do que casa.",
+          "Porque na cidade grande sobra pouco chão e muita gente precisa morar.",
+          "Porque as pessoas gostam de morar bem alto.",
+        ],
+        correta: 1,
         fechamento:
           "Na cidade grande mora MUITA gente e sobra pouco chão. Por isso as casas viram andares empilhados — assim várias famílias moram no mesmo pedacinho de terra.",
         pistas: [
@@ -94,6 +101,13 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Casa na cidade",
         emoji: "🏠",
         imagemUrl: casaUrbanaImg,
+        pergunta: "Por que essa casa tem MURO e PORTÃO na frente?",
+        hipoteses: [
+          "Pra separar a casa da rua e proteger a família na cidade.",
+          "Porque toda casa precisa ter muro, é uma regra.",
+          "Pra ficar mais bonita do que as casas vizinhas.",
+        ],
+        correta: 0,
         fechamento:
           "Essa casa também é da cidade, mas de um bairro mais tranquilo. A família tem quintal e portão, e o telhado de telha protege da chuva e do sol.",
         pistas: [
@@ -144,6 +158,13 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Sítio no campo",
         emoji: "🌾",
         imagemUrl: sitioImg,
+        pergunta: "Por que a família do sítio tem TANTO espaço em volta da casa?",
+        hipoteses: [
+          "Porque no campo ninguém quer morar perto dos outros.",
+          "Porque precisam de terra pra plantar e criar animais.",
+          "Porque não conseguiram terminar de construir mais casas.",
+        ],
+        correta: 1,
         fechamento:
           "No sítio a família vive junto da natureza. A casa é simples, tem muito espaço, e os animais fazem parte do dia a dia. Aqui, plantar e criar bicho é o trabalho principal.",
         pistas: [
@@ -194,6 +215,13 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Casa Ribeirinha",
         emoji: "🌊",
         imagemUrl: ribeirinhaImg,
+        pergunta: "Por que essa casa foi construída ACIMA da água, sobre estacas?",
+        hipoteses: [
+          "Pra ficar mais bonita, com um estilo diferente.",
+          "Porque o rio sobe muito e a família não pode se molhar.",
+          "Porque a família não gosta de andar no chão.",
+        ],
+        correta: 1,
         fechamento:
           "Essa casa foi construída sobre estacas de madeira porque o rio sobe e desce o ano todo. Assim, quando a água enche, a família continua seca. O barco é o carro da porta de casa.",
         pistas: [
@@ -240,6 +268,13 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Aldeia Indígena",
         emoji: "🛖",
         imagemUrl: aldeiaImg,
+        pergunta: "O que essa comunidade indígena mais VALORIZA no jeito de morar?",
+        hipoteses: [
+          "Ter cada família bem separada, longe uma da outra.",
+          "Viver junto da natureza, em comunidade, do jeito dos antepassados.",
+          "Construir casas cada vez mais altas e modernas.",
+        ],
+        correta: 1,
         fechamento:
           "Na aldeia, as casas (chamadas OCAS) são feitas com o que a floresta oferece: madeira, cipó e palha. Elas são redondas ou compridas, e ficam em roda pra família viver TODO MUNDO JUNTO.",
         pistas: [
