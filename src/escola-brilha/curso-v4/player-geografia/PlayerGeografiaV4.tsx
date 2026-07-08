@@ -216,16 +216,5 @@ function Secao({
   );
 }
 
-function EmBreve({ id, label, descricao }: { id: string; label: string; descricao: string }) {
-  return (
-    <section
-      id={id}
-      className="scroll-mt-24 rounded-3xl border border-dashed border-emerald-400/25 bg-white/[0.02] p-5 text-center"
-    >
-      <div className="text-[11px] uppercase tracking-widest text-emerald-300 mb-1">
-        {label}
-      </div>
-      <div className="text-white/60 text-sm">{descricao}</div>
-    </section>
-  );
-}
+
+
