@@ -223,6 +223,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                   {jogo.tipo === "laboratorioClima" && (
                     <LaboratorioClima data={jogo.bloco} />
                   )}
+                  {jogo.tipo === "arquitetoLugar" && (
+                    <ArquitetoLugar data={jogo.bloco} />
+                  )}
                 </Secao>
               );
             })()}
