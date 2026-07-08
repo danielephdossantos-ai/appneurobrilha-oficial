@@ -247,6 +247,7 @@ export const aula01: AulaPortuguesV4 = {
       {
         pergunta: "Como se chama a moradia dos povos indígenas da aldeia?",
         opcoes: ["Oca", "Prédio", "Apartamento"],
+        opcoesImagens: [ocaPalha, cidade, apartamento],
         correta: 0,
         feedbackAcerto: "🎉 Isso! OCA.",
         feedbackErro: "Está na primeira frase: '…moram numa …'.",
@@ -258,6 +259,11 @@ export const aula01: AulaPortuguesV4 = {
           "Concreto e vidro",
           "Madeira, folhas e cipó",
           "Ferro e plástico",
+        ],
+        opcoesImagens: [
+          materialConcretoVidro,
+          materialMadeiraFolhas,
+          materialFerroPlastico,
         ],
         correta: 1,
         feedbackAcerto:
