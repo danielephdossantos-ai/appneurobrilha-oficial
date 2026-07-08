@@ -83,7 +83,7 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
-            {MOMENTOS.map((m) => (
+            {momentos.map((m) => (
               <a
                 key={m.id}
                 href={`#${m.id}`}
