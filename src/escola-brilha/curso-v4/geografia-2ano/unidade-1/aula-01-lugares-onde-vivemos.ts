@@ -4,6 +4,7 @@ import apartamentoImg from "@/assets/geografia/moradias/apartamento.jpg";
 import casaUrbanaImg from "@/assets/geografia/moradias/casa-urbana.jpg";
 import sitioImg from "@/assets/geografia/moradias/sitio.jpg";
 import aldeiaImg from "@/assets/geografia/moradias/aldeia.jpg";
+import paisagemMistaImg from "@/assets/geografia/moradias/paisagem-mista.jpg";
 
 /**
  * EF02GE01 · Aula 01 — "Por que nem toda casa é igual?"
@@ -440,9 +441,21 @@ const aula: AulaGeografiaV4 = {
 
   momento07_investigacaoLivre: {
     bloco: {
-      instrucao: "Em construção — Etapa C.",
-      pistas: [],
-      conclusao: "",
+      imagemUrl: paisagemMistaImg,
+      instrucao:
+        "Foto nova! O GeoScanner desligou — agora é você. Marque só o que você REALMENTE está vendo na foto. Cuidado: tem coisa que NÃO aparece.",
+      pistas: [
+        { id: "rio", icone: "🌊", rotulo: "um rio passando", existe: true },
+        { id: "estrada", icone: "🛣️", rotulo: "uma estrada", existe: true },
+        { id: "arvores", icone: "🌳", rotulo: "árvores espalhadas", existe: true },
+        { id: "plantacao", icone: "🌾", rotulo: "plantação (roça)", existe: true },
+        { id: "predios", icone: "🏢", rotulo: "prédios altos ao fundo", existe: true },
+        { id: "praia", icone: "🏖️", rotulo: "praia com areia", existe: false },
+        { id: "montanha-neve", icone: "🏔️", rotulo: "montanha com neve", existe: false },
+        { id: "aviao", icone: "✈️", rotulo: "avião no céu", existe: false },
+      ],
+      conclusao:
+        "Boa observação, geoexplorador! Essa paisagem mistura CAMPO e CIDADE: tem rio, plantação e árvores (natureza), mas também estrada e prédios (feito por gente). A gente chama isso de área DE TRANSIÇÃO — nem totalmente rural, nem totalmente urbana. É assim que muitos lugares do Brasil realmente são.",
     },
   },
 
