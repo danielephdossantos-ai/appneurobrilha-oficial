@@ -1,56 +1,52 @@
-## O que vou construir
+## Problema
 
-Geografia é uma **nova disciplina** no curso-v4, com um paradigma visual **totalmente diferente** de Matemática e Português. Nada de leitura de texto — a criança **investiga fotografias reais** com o **GeoScanner** e descobre por que os lugares são como são.
+Nas perguntas de posição de EF01MA11 (Exemplo, Guiada, Desafio, Quiz, Níveis), o texto diz "Brilha em cima da árvore", "livro sobre a mesa", "coelho entrou na toca" — mas a tela mostra só **caixinhas coloridas separadas** com a imagem do Brilha e da árvore lado a lado, cada uma com contagem "1". A criança não vê a cena de verdade e não tem como responder olhando.
 
-Vou entregar **a Aula 1 completa e polida** primeiro, pra você validar cena por cena antes de eu escalar pras próximas aulas/unidades.
+Só a Fase Interativa (`PosicaoEspacial`) já mostra a cena real (Brilha em cima, dentro, atrás…). O resto usa `grupos` / `comparar`, que são visuais de contagem — não de posição.
 
-## Aula piloto — EF02GE01 · "Por que nem toda casa é igual?"
+## O que vou fazer
 
-10 momentos, todos visuais e interativos, seguindo a sua história do Aurora + GeoScanner:
+**1. Extrair o motor de cena do `PosicaoEspacial` num componente compartilhado `CenaPosicao`.**
+- Move `Piece` + `renderLayout` (em cima, embaixo, dentro, fora, direita, esquerda, atrás, frente, ao lado) e a variação "entre" (fila de 3) pra `src/escola-brilha/player/blocos/CenaPosicao.tsx`.
+- `PosicaoEspacial.tsx` passa a importar de lá (sem mudar comportamento).
 
-1. **Motivação** — Aurora entrega o GeoScanner. Só imagem + fala curta.
-2. **Galeria dos 5 lugares** — grade com 5 fotos reais (apartamento, casa urbana, sítio, ribeirinha, aldeia). Toque abre o Modo Investigador.
-3. **Modo Investigador** — foto grande, hotspots animados no GeoScanner destacando pistas (📍rio, 🌧chuva, 🪵madeira, ⬆estacas). Sem texto explicativo ainda.
-4. **Hipótese** — pergunta ("Por que essa casa fica acima da água?"), criança escolhe. Só depois vem a explicação.
-5. **Comparar** — 2 fotos lado a lado. "Qual suporta enchente?" / "Qual reúne mais famílias?"
-6. **Painel comparativo** — tabela visual (clima × construção × motivo) que se preenche com as descobertas da criança.
-7. **Investigação livre** — foto nova, criança marca as pistas que enxerga (☑ rio, ☑ estrada, ☑ plantação) e recebe leitura das pistas.
-8. **Laboratório do Explorador** — a criança muda ☀/🌧/🏞/🌊 e a moradia se adapta na tela.
-9. **Arquiteto do Lugar Certo (minijogo)** — cenário sorteado (rio + chuva + pescadores) → criança escolhe materiais e formato da casa.
-10. **Missão em família** — observar 2 casas da rua e registrar no Diário do GeoExplorador.
+**2. Ampliar `QuizItem.visual` com dois novos tipos:**
+- `{ tipo: "cena", posicao, referenciaImg, referenciaLabel, sujeitoImg, sujeitoLabel }`
+- `{ tipo: "cenaEntre", fila: [{ img, label }, …] }`
 
-Recompensas: 200 XP, 120 moedas, insígnia "Investigador das Moradias".
+**3. Renderizar as novas cenas em todos os blocos que usam `QuizItem`:**
+- `Quiz.tsx` (bloco Quiz)
+- `ProgressaoNiveis.tsx` (Fácil / Médio / Difícil)
+- `AtividadeGuiada.tsx` (prática guiada)
+- `Desafio.tsx` → `QuizSequencial` (hoje ignora `q.visual`; passa a renderizar)
 
-## Arquitetura técnica (para dev)
+**4. Reescrever as perguntas de EF01MA11 pra usar a cena real:**
+- **Exemplo resolvido**: troca o `interativo` de "toque na árvore" por uma cena mostrando o Brilha em cima da árvore (sem pedir toque enganoso).
+- **Atividade Guiada**: cena com o coelho DENTRO da toca.
+- **Desafio (4 perguntas)**: cada uma vira `cena`/`cenaEntre` com posição correspondente.
+- **Quiz (4 perguntas)**: livro EM CIMA da mesa, gato ENTRE cachorro e rato, presente FORA da caixa, estrela à ESQUERDA/DIREITA.
+- **Níveis (Fácil/Médio/Difícil)**: cada pergunta com a cena que o texto descreve.
 
-**Novo contrato + novo player, isolados** (não mexem em Matemática/Português):
+**5. Assets faltando**: usar o que já existe (`livro`, `casa` como mesa/caixa, `presente`, `gato`, `coelho`, `urso`, `raposa`, `estrela`, `arvore`, `brilha`, `bau`). Nenhuma imagem nova precisa ser gerada.
 
-- `src/escola-brilha/curso-v4/types.ts` — adicionar `AulaGeografiaV4`, `CursoGeografia`, blocos (`GaleriaLugares`, `ModoInvestigador`, `Hipotese`, `CompararLugares`, `PainelComparativo`, `InvestigacaoLivre`, `LaboratorioExplorador`, `ArquitetoLugarCerto`). Expandir `CursoAny`.
-- `src/escola-brilha/curso-v4/registry.ts` — adicionar `isGeografia`, `getCursoGeografia`, `getAulaGeografiaFromCurso`.
-- `src/escola-brilha/curso-v4/player-geografia/PlayerGeografiaV4.tsx` — player novo com estética de "campo de exploração" (fundo escura, foto ocupando quase tudo, HUD tipo scanner).
-- `src/escola-brilha/curso-v4/player-geografia/blocos/*.tsx` — um componente por bloco (10 blocos).
-- `src/escola-brilha/curso-v4/geografia-2ano/curso.ts` + `unidade-1/aula-01-lugares-onde-vivemos.ts`.
-- `src/routes/escola-brilha.aula-geo-v4.$curso.$aula.tsx` — nova rota espelhando o padrão de Português.
-- Cadastrar Geografia no listagem de cursos (mesma trilha) para aparecer no seletor.
+## Validação (uma cena de cada vez)
 
-**Assets**: 5 fotografias reais dos tipos de moradia. Vou gerar via `imagegen` em estilo fotográfico realista (não kawaii — Geografia pede realidade), salvar em `src/assets/geografia/moradias/` e subir como Lovable Assets.
+Vou seguir a regra do usuário: implementar tudo, mas ao entregar peço confirmação **bloco por bloco** (Exemplo → Guiada → Desafio → Quiz → Níveis), antes de considerar pronto. Se algo estiver estranho na cena, ajusto só aquela.
 
-## Fluxo de validação (respeitando sua regra)
+## Arquivos tocados
 
-Faço em **3 etapas separadas**, cada uma você valida antes da próxima:
+- `src/escola-brilha/player/blocos/CenaPosicao.tsx` (novo)
+- `src/escola-brilha/player/blocos/PosicaoEspacial.tsx` (usa o novo)
+- `src/escola-brilha/types.ts` (2 novos tipos em `QuizItem.visual`)
+- `src/escola-brilha/player/blocos/Quiz.tsx`
+- `src/escola-brilha/player/blocos/ProgressaoNiveis.tsx`
+- `src/escola-brilha/player/blocos/AtividadeGuiada.tsx`
+- `src/escola-brilha/player/blocos/Desafio.tsx`
+- `src/escola-brilha/data/EF01MA11.ts`
 
-1. **Etapa A — infra + galeria + Modo Investigador de 1 lugar** (Casa Ribeirinha completa). Você aprova o "visual novo".
-2. **Etapa B — resto dos 4 lugares + hipóteses + painel comparativo**.
-3. **Etapa C — Laboratório + Arquiteto + Missão em família + polimento**.
+## Fora do escopo
 
-Depois de aprovar as 3 etapas, escalo pras próximas aulas da Unidade 1 e para as outras unidades.
+- Não vou mexer em outras aulas (EF01MA01–10) — elas usam `grupos`/`comparar` corretamente pra contagem.
+- Não vou trocar o estilo visual do mascote nem gerar imagens novas.
 
-## Nesta rodada (Etapa A)
-
-- Tipos + registry + rota + curso stub.
-- Player Geografia (shell + HUD scanner).
-- Bloco `Motivação`, `GaleriaLugares` (5 fotos), `ModoInvestigador` funcionando na Casa Ribeirinha.
-- 1 fotografia real gerada (ribeirinha) + placeholders pra outras 4.
-- Aula acessível em `/escola-brilha/aula-geo-v4/geografia-2ano/aula-01-lugares-onde-vivemos`.
-
-Confirma que posso começar pela **Etapa A** desse jeito?
+Posso seguir?
