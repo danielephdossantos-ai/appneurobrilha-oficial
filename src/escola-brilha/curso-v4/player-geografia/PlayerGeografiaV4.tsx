@@ -8,9 +8,6 @@ import { ModoInvestigador } from "./blocos/ModoInvestigador";
 import { Hipotese } from "./blocos/Hipotese";
 import { CompararLugares } from "./blocos/CompararLugares";
 import { PainelComparativo } from "./blocos/PainelComparativo";
-import { InvestigacaoLivre } from "./blocos/InvestigacaoLivre";
-import { LaboratorioExplorador } from "./blocos/LaboratorioExplorador";
-import { ArquitetoLugarCerto } from "./blocos/ArquitetoLugarCerto";
 
 
 /**
@@ -160,20 +157,10 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </Secao>
           )}
 
-          <Secao id="m7" label="🕵️ Investigação Livre">
-            <InvestigacaoLivre data={aula.momento07_investigacaoLivre.bloco} />
-          </Secao>
+          <EmBreve id="m7" label="🕵️ Investigação livre" descricao="Foto nova pra você caçar pistas sozinho. Vem na Etapa C." />
 
-          {aula.momento08_laboratorio && (
-            <Secao id="m8" label="🧪 Laboratório do Explorador">
-              <LaboratorioExplorador data={aula.momento08_laboratorio.bloco} />
-            </Secao>
-          )}
-          {aula.momento09_arquiteto && (
-            <Secao id="m9" label="🏗️ Arquiteto do Lugar Certo">
-              <ArquitetoLugarCerto data={aula.momento09_arquiteto.bloco} />
-            </Secao>
-          )}
+          <EmBreve id="m8" label="🧪 Laboratório do Explorador" descricao="Muda o clima e o terreno, veja a moradia mudar. Vem na Etapa C." />
+          <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
 
           {/* M10 · Missão em família */}
           <Secao id="m10" label="🏠 Missão em Família">

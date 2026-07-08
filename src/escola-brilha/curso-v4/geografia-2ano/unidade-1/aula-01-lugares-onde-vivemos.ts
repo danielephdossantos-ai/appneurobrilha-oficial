@@ -4,7 +4,6 @@ import apartamentoImg from "@/assets/geografia/moradias/apartamento.jpg";
 import casaUrbanaImg from "@/assets/geografia/moradias/casa-urbana.jpg";
 import sitioImg from "@/assets/geografia/moradias/sitio.jpg";
 import aldeiaImg from "@/assets/geografia/moradias/aldeia.jpg";
-import paisagemMistaImg from "@/assets/geografia/moradias/paisagem-mista.jpg";
 
 /**
  * EF02GE01 · Aula 01 — "Por que nem toda casa é igual?"
@@ -45,13 +44,6 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Apartamento na cidade grande",
         emoji: "🏢",
         imagemUrl: apartamentoImg,
-        pergunta: "Por que TANTAS famílias moram empilhadas no mesmo prédio?",
-        hipoteses: [
-          "Porque prédio é mais bonito do que casa.",
-          "Porque na cidade grande sobra pouco chão e muita gente precisa morar.",
-          "Porque as pessoas gostam de morar bem alto.",
-        ],
-        correta: 1,
         fechamento:
           "Na cidade grande mora MUITA gente e sobra pouco chão. Por isso as casas viram andares empilhados — assim várias famílias moram no mesmo pedacinho de terra.",
         pistas: [
@@ -102,13 +94,6 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Casa na cidade",
         emoji: "🏠",
         imagemUrl: casaUrbanaImg,
-        pergunta: "Por que essa casa tem MURO e PORTÃO na frente?",
-        hipoteses: [
-          "Pra separar a casa da rua e proteger a família na cidade.",
-          "Porque toda casa precisa ter muro, é uma regra.",
-          "Pra ficar mais bonita do que as casas vizinhas.",
-        ],
-        correta: 0,
         fechamento:
           "Essa casa também é da cidade, mas de um bairro mais tranquilo. A família tem quintal e portão, e o telhado de telha protege da chuva e do sol.",
         pistas: [
@@ -159,13 +144,6 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Sítio no campo",
         emoji: "🌾",
         imagemUrl: sitioImg,
-        pergunta: "Por que a família do sítio tem TANTO espaço em volta da casa?",
-        hipoteses: [
-          "Porque no campo ninguém quer morar perto dos outros.",
-          "Porque precisam de terra pra plantar e criar animais.",
-          "Porque não conseguiram terminar de construir mais casas.",
-        ],
-        correta: 1,
         fechamento:
           "No sítio a família vive junto da natureza. A casa é simples, tem muito espaço, e os animais fazem parte do dia a dia. Aqui, plantar e criar bicho é o trabalho principal.",
         pistas: [
@@ -216,13 +194,6 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Casa Ribeirinha",
         emoji: "🌊",
         imagemUrl: ribeirinhaImg,
-        pergunta: "Por que essa casa foi construída ACIMA da água, sobre estacas?",
-        hipoteses: [
-          "Pra ficar mais bonita, com um estilo diferente.",
-          "Porque o rio sobe muito e a família não pode se molhar.",
-          "Porque a família não gosta de andar no chão.",
-        ],
-        correta: 1,
         fechamento:
           "Essa casa foi construída sobre estacas de madeira porque o rio sobe e desce o ano todo. Assim, quando a água enche, a família continua seca. O barco é o carro da porta de casa.",
         pistas: [
@@ -269,13 +240,6 @@ const aula: AulaGeografiaV4 = {
         nomeLugar: "Aldeia Indígena",
         emoji: "🛖",
         imagemUrl: aldeiaImg,
-        pergunta: "O que essa comunidade indígena mais VALORIZA no jeito de morar?",
-        hipoteses: [
-          "Ter cada família bem separada, longe uma da outra.",
-          "Viver junto da natureza, em comunidade, do jeito dos antepassados.",
-          "Construir casas cada vez mais altas e modernas.",
-        ],
-        correta: 1,
         fechamento:
           "Na aldeia, as casas (chamadas OCAS) são feitas com o que a floresta oferece: madeira, cipó e palha. Elas são redondas ou compridas, e ficam em roda pra família viver TODO MUNDO JUNTO.",
         pistas: [
@@ -441,401 +405,11 @@ const aula: AulaGeografiaV4 = {
 
   momento07_investigacaoLivre: {
     bloco: {
-      imagemUrl: paisagemMistaImg,
-      instrucao:
-        "Foto nova! O GeoScanner desligou — agora é você. Marque só o que você REALMENTE está vendo na foto. Cuidado: tem coisa que NÃO aparece.",
-      pistas: [
-        { id: "rio", icone: "🌊", rotulo: "um rio passando", existe: true },
-        { id: "estrada", icone: "🛣️", rotulo: "uma estrada", existe: true },
-        { id: "arvores", icone: "🌳", rotulo: "árvores espalhadas", existe: true },
-        { id: "plantacao", icone: "🌾", rotulo: "plantação (roça)", existe: true },
-        { id: "predios", icone: "🏘️", rotulo: "vilarejo ao longe", existe: true },
-        { id: "praia", icone: "🏖️", rotulo: "praia com areia", existe: false },
-        { id: "montanha-neve", icone: "🏔️", rotulo: "montanha com neve", existe: false },
-        { id: "aviao", icone: "✈️", rotulo: "avião no céu", existe: false },
-      ],
-      conclusao:
-        "Boa observação, geoexplorador! Essa paisagem mistura CAMPO e CIDADE: tem rio, plantação e árvores (natureza), mas também estrada e vilarejo (feito por gente). A gente chama isso de área DE TRANSIÇÃO — nem totalmente rural, nem totalmente urbana. É assim que muitos lugares do Brasil realmente são.",
+      instrucao: "Em construção — Etapa C.",
+      pistas: [],
+      conclusao: "",
     },
   },
-
-  momento08_laboratorio: {
-    bloco: {
-      instrucao:
-        "Você é o arquiteto. Escolha o TERRENO e o CLIMA — o laboratório mostra que casa aparece nesse lugar. Experimente combinações diferentes!",
-      variaveis: [
-        {
-          id: "terreno",
-          rotulo: "Terreno",
-          opcoes: [
-            { valor: "rio", icone: "🌊", rotulo: "Beira de rio" },
-            { valor: "cidade", icone: "🏙️", rotulo: "Cidade grande" },
-            { valor: "campo", icone: "🌾", rotulo: "Campo aberto" },
-            { valor: "floresta", icone: "🌳", rotulo: "Dentro da floresta" },
-          ],
-        },
-        {
-          id: "clima",
-          rotulo: "Clima",
-          opcoes: [
-            { valor: "chuvoso", icone: "🌧️", rotulo: "Muita chuva" },
-            { valor: "quente", icone: "☀️", rotulo: "Calor seco" },
-            { valor: "umido", icone: "🥵", rotulo: "Quente e úmido" },
-          ],
-        },
-      ],
-      resultados: [
-        {
-          quando: { terreno: "rio", clima: "chuvoso" },
-          imagemUrl: ribeirinhaImg,
-          descricao:
-            "🌊 Casa RIBEIRINHA sobre palafitas! Como o rio sobe muito com a chuva, a casa precisa ficar erguida em estacas de madeira pra família continuar seca na cheia.",
-        },
-        {
-          quando: { terreno: "rio", clima: "umido" },
-          imagemUrl: ribeirinhaImg,
-          descricao:
-            "🌊 Casa ribeirinha de madeira. No calor úmido, o telhado alto e as paredes de madeira deixam o ar passar — assim a casa fica fresca mesmo com o abafamento.",
-        },
-        {
-          quando: { terreno: "rio", clima: "quente" },
-          imagemUrl: ribeirinhaImg,
-          descricao:
-            "🌊 Casa perto do rio. Como o rio quase não sobe no clima seco, a casa pode ser mais baixa — mas ainda usa madeira pra ficar fresca no calor.",
-        },
-        {
-          quando: { terreno: "cidade", clima: "chuvoso" },
-          imagemUrl: casaUrbanaImg,
-          descricao:
-            "🏠 Casa da cidade com telhado bem inclinado. A telha vermelha faz a chuva escorrer rápido e o muro protege o quintal.",
-        },
-        {
-          quando: { terreno: "cidade", clima: "quente" },
-          imagemUrl: apartamentoImg,
-          descricao:
-            "🏢 Apartamento! Como muita gente quer morar na cidade e sobra pouco chão, os prédios crescem PRA CIMA — várias famílias no mesmo pedaço de terra.",
-        },
-        {
-          quando: { terreno: "cidade", clima: "umido" },
-          imagemUrl: apartamentoImg,
-          descricao:
-            "🏢 Prédio com muitas janelas. Nas cidades quentes e úmidas, as janelas grandes deixam o vento passar pra refrescar cada apartamento.",
-        },
-        {
-          quando: { terreno: "campo", clima: "chuvoso" },
-          imagemUrl: sitioImg,
-          descricao:
-            "🌾 Casa de sítio com varanda coberta. No campo com muita chuva, a varanda protege a família e ainda dá pra guardar ferramentas de trabalho.",
-        },
-        {
-          quando: { terreno: "campo", clima: "quente" },
-          imagemUrl: sitioImg,
-          descricao:
-            "🌾 Sítio com casa simples e árvore grande. No calor seco, a árvore vira 'ar condicionado natural' — faz sombra pra família e pros animais.",
-        },
-        {
-          quando: { terreno: "campo", clima: "umido" },
-          imagemUrl: sitioImg,
-          descricao:
-            "🌾 Casa de sítio com telhado alto. No calor úmido do campo, o telhado alto puxa o ar quente pra cima e mantém o dia a dia mais fresco.",
-        },
-        {
-          quando: { terreno: "floresta", clima: "umido" },
-          imagemUrl: aldeiaImg,
-          descricao:
-            "🛖 OCA indígena! Feita de madeira, cipó e palha da própria floresta. A palha deixa o ar passar — perfeita pro calor úmido da mata.",
-        },
-        {
-          quando: { terreno: "floresta", clima: "chuvoso" },
-          imagemUrl: aldeiaImg,
-          descricao:
-            "🛖 Oca com teto de palha bem inclinado. A chuva forte escorre rápido pelas folhas de palmeira sem molhar a família por dentro.",
-        },
-        {
-          quando: { terreno: "floresta", clima: "quente" },
-          imagemUrl: aldeiaImg,
-          descricao:
-            "🛖 Oca fresquinha! O teto de palha bloqueia o sol e a madeira não esquenta como o cimento. Mesmo com calor lá fora, dentro fica agradável.",
-        },
-      ],
-      padraoTexto:
-        "Escolha um TERRENO e um CLIMA pra ver que casa aparece nesse lugar.",
-    },
-  },
-
-  momento09_arquiteto: {
-    bloco: {
-      instrucao:
-        "Você virou ARQUITETO. Leia o desafio, escolha os materiais e o formato — e construa a casa CERTA pra cada lugar do Brasil.",
-      cenarios: [
-        {
-          id: "amazonia",
-          contexto:
-            "Uma família ribeirinha vai construir casa na beira do rio Amazonas. Chove quase todo dia e, na cheia, o rio sobe até 10 metros.",
-          icones: ["🌊", "🌧️", "🌳"],
-          escolhas: [
-            {
-              pergunta: "Que MATERIAL usar nas paredes?",
-              opcoes: [
-                {
-                  rotulo: "Madeira da floresta",
-                  icone: "🪵",
-                  correta: true,
-                  feedback:
-                    "Boa! A floresta está do lado — madeira sai barato, é leve pra levantar sobre estacas e resiste bem à umidade.",
-                },
-                {
-                  rotulo: "Tijolo e cimento",
-                  icone: "🧱",
-                  correta: false,
-                  feedback:
-                    "Difícil! Tijolo é PESADO e caro pra transportar de barco até o meio da Amazônia. Melhor usar o que a floresta oferece.",
-                },
-                {
-                  rotulo: "Vidro grosso",
-                  icone: "🪟",
-                  correta: false,
-                  feedback:
-                    "Ih! Vidro é frágil, esquenta muito no calor e não segura o peso da chuva forte da Amazônia.",
-                },
-              ],
-            },
-            {
-              pergunta: "Como levantar a casa?",
-              opcoes: [
-                {
-                  rotulo: "Direto no chão",
-                  icone: "🏠",
-                  correta: false,
-                  feedback:
-                    "Cuidado! Na cheia, o rio sobe MUITO. A casa no chão vira aquário rapidinho.",
-                },
-                {
-                  rotulo: "Sobre palafitas altas",
-                  icone: "⬆️",
-                  correta: true,
-                  feedback:
-                    "Exatamente! As palafitas erguem a casa pra que a água do rio passe POR BAIXO. A família continua seca.",
-                },
-                {
-                  rotulo: "Enterrada no chão",
-                  icone: "⬇️",
-                  correta: false,
-                  feedback:
-                    "Piorou! Cavando pra baixo, a casa alaga com a primeira chuva.",
-                },
-              ],
-            },
-            {
-              pergunta: "Que 'garagem' colocar na porta?",
-              opcoes: [
-                {
-                  rotulo: "Uma canoa",
-                  icone: "🛶",
-                  correta: true,
-                  feedback:
-                    "Isso! Na Amazônia o transporte é pela ÁGUA. A canoa é o carro da porta de casa.",
-                },
-                {
-                  rotulo: "Um carro esportivo",
-                  icone: "🏎️",
-                  correta: false,
-                  feedback:
-                    "Não dá! Não tem estrada de asfalto ali. As ruas são de água.",
-                },
-                {
-                  rotulo: "Um trem",
-                  icone: "🚂",
-                  correta: false,
-                  feedback:
-                    "Trem no meio da floresta? A canoa é o transporte certo.",
-                },
-              ],
-            },
-          ],
-          parabens:
-            "🏆 Você construiu uma casa RIBEIRINHA perfeita! Palafita de madeira + canoa na porta = família seca o ano todo, mesmo com o rio subindo.",
-        },
-        {
-          id: "cidade",
-          contexto:
-            "Em São Paulo, 200 famílias querem morar no mesmo pedacinho de chão. O espaço é pequeno, mas todo mundo precisa de moradia.",
-          icones: ["🏙️", "👨‍👩‍👧", "🚗"],
-          escolhas: [
-            {
-              pergunta: "Como fazer TODO MUNDO caber?",
-              opcoes: [
-                {
-                  rotulo: "Uma casa gigante no chão",
-                  icone: "🏘️",
-                  correta: false,
-                  feedback:
-                    "Não cabe! Uma casa espalhada ocuparia o terreno inteiro e só serviria pra uma família.",
-                },
-                {
-                  rotulo: "Prédio bem alto",
-                  icone: "🏢",
-                  correta: true,
-                  feedback:
-                    "Isso mesmo! Empilhando andares, cada família ganha o seu apartamento no mesmo pedacinho de terra.",
-                },
-                {
-                  rotulo: "Barracas de acampamento",
-                  icone: "⛺",
-                  correta: false,
-                  feedback:
-                    "Barraca não protege da chuva forte da cidade nem dura pra sempre. Precisa de algo firme.",
-                },
-              ],
-            },
-            {
-              pergunta: "O que precisa TER no prédio?",
-              opcoes: [
-                {
-                  rotulo: "Elevador",
-                  icone: "🛗",
-                  correta: true,
-                  feedback:
-                    "Sim! Sem elevador, subir 20 andares de escada todo dia seria impossível.",
-                },
-                {
-                  rotulo: "Piscina de rio no meio",
-                  icone: "🌊",
-                  correta: false,
-                  feedback:
-                    "Não faz sentido! Rio não sobe até o meio de um prédio.",
-                },
-                {
-                  rotulo: "Um campo de futebol dentro",
-                  icone: "⚽",
-                  correta: false,
-                  feedback:
-                    "Legal, mas não cabe! Prédio no centro da cidade não tem esse espaço todo.",
-                },
-              ],
-            },
-            {
-              pergunta: "Onde guardar os carros das famílias?",
-              opcoes: [
-                {
-                  rotulo: "Garagem embaixo do prédio",
-                  icone: "🚗",
-                  correta: true,
-                  feedback:
-                    "Perfeito! Os primeiros andares viram garagem — assim os carros ficam guardados sem ocupar a rua.",
-                },
-                {
-                  rotulo: "Em cima do telhado",
-                  icone: "🏗️",
-                  correta: false,
-                  feedback:
-                    "Como o carro subiria até lá? A garagem embaixo é a solução usada em toda cidade grande.",
-                },
-                {
-                  rotulo: "Na sala de cada apartamento",
-                  icone: "🚙",
-                  correta: false,
-                  feedback:
-                    "Imagina o carro dentro de casa! A garagem coletiva embaixo resolve pra todo mundo.",
-                },
-              ],
-            },
-          ],
-          parabens:
-            "🏆 Você construiu um PRÉDIO perfeito pra cidade! Muita gente + pouco chão = empilhar famílias e caber todo mundo com elevador e garagem.",
-        },
-        {
-          id: "sertao",
-          contexto:
-            "No sertão da Bahia faz calor forte, quase não chove e o vento seco sopra o dia todo. Uma família vai construir a casa dela ali.",
-          icones: ["☀️", "🌵", "💨"],
-          escolhas: [
-            {
-              pergunta: "Como deve ser as PAREDES?",
-              opcoes: [
-                {
-                  rotulo: "Bem grossas, de tijolo ou adobe",
-                  icone: "🧱",
-                  correta: true,
-                  feedback:
-                    "Isso! Parede grossa segura o calor do lado de fora — dentro fica fresquinho mesmo com sol forte.",
-                },
-                {
-                  rotulo: "De vidro transparente",
-                  icone: "🪟",
-                  correta: false,
-                  feedback:
-                    "Ih não! Vidro deixa o sol entrar direto e vira estufa. Ninguém aguentaria o calor.",
-                },
-                {
-                  rotulo: "De folhas de bananeira",
-                  icone: "🍃",
-                  correta: false,
-                  feedback:
-                    "Folha fina não segura o calor nem o vento seco. Precisa de material mais firme.",
-                },
-              ],
-            },
-            {
-              pergunta: "E o TELHADO?",
-              opcoes: [
-                {
-                  rotulo: "Telha de barro clara",
-                  icone: "🏘️",
-                  correta: true,
-                  feedback:
-                    "Perfeito! O barro é fresco e a cor clara REFLETE o sol, esquentando menos a casa por dentro.",
-                },
-                {
-                  rotulo: "Placa de metal escura",
-                  icone: "⬛",
-                  correta: false,
-                  feedback:
-                    "Escuro absorve o calor. Dentro viraria um forno no meio-dia.",
-                },
-                {
-                  rotulo: "Telhado de gelo",
-                  icone: "🧊",
-                  correta: false,
-                  feedback:
-                    "Derrete na primeira hora de sol! Precisa de material que suporta o calor.",
-                },
-              ],
-            },
-            {
-              pergunta: "Onde guardar a ÁGUA da chuva?",
-              opcoes: [
-                {
-                  rotulo: "Cisterna ao lado da casa",
-                  icone: "💧",
-                  correta: true,
-                  feedback:
-                    "Boa! No sertão chove pouco. Guardar a água da chuva na cisterna garante água pra família o ano todo.",
-                },
-                {
-                  rotulo: "Não precisa guardar",
-                  icone: "🚫",
-                  correta: false,
-                  feedback:
-                    "Precisa sim! No sertão pode passar meses sem chuva. Sem cisterna, a família fica sem água.",
-                },
-                {
-                  rotulo: "Num balde na sala",
-                  icone: "🪣",
-                  correta: false,
-                  feedback:
-                    "Balde é pouco! A cisterna guarda milhares de litros pra família aguentar a seca.",
-                },
-              ],
-            },
-          ],
-          parabens:
-            "🏆 Você construiu uma casa PERFEITA pro sertão! Paredes grossas + telha clara + cisterna = família fresca e com água mesmo no calor seco.",
-        },
-      ],
-    },
-  },
-
 
 
   momento10_missaoFamilia: {

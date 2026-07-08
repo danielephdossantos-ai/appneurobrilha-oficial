@@ -587,17 +587,13 @@ export type GaleriaLugaresData = {
 
 /** Bloco: uma foto ocupando a tela + pistas destacadas pelo scanner. */
 export type ModoInvestigadorData = {
-  lugarId: string;
+  lugarId: string;             // "ribeirinha"
   nomeLugar: string;
   emoji: string;
   imagemUrl?: string;
   corPlaceholder?: string;
   pistas: PistaGeo[];
-  /** Pergunta-hipótese que aparece DEPOIS de descobrir as pistas. */
-  pergunta: string;
-  hipoteses: string[];
-  correta: number;
-  /** Explicação que só aparece depois da criança escolher a hipótese. */
+  /** Frase de encerramento do Brilha quando todas as pistas foram vistas. */
   fechamento: string;
 };
 
