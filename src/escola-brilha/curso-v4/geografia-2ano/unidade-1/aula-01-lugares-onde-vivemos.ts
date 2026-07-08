@@ -294,7 +294,79 @@ export const aula01: AulaPortuguesV4 = {
     },
   },
 
-  // 9 · REVISÃO
+  // LABORATÓRIO — ativa clima e vê a casa ribeirinha reagir
+  momento_laboratorio: {
+    titulo: "Laboratório do Explorador",
+    instrucao:
+      "Aperte os botões e VEJA o que acontece com a casa ribeirinha em tempo real. Depois, toque em 🔊 pra ouvir a explicação.",
+    bloco: {
+      instrucao:
+        "Ligue e desligue Sol ☀️, Chuva 🌧️ e Rio 🌊. Observe o CÉU, a ÁGUA e a CASA.",
+      cena: "casaRibeirinha",
+      controles: [
+        { id: "sol", rotulo: "Sol", emoji: "☀️", ligadoInicial: true },
+        { id: "chuva", rotulo: "Chuva", emoji: "🌧️" },
+        { id: "rio", rotulo: "Rio", emoji: "🌊", ligadoInicial: true },
+      ],
+      explicacoes: {
+        sol: {
+          titulo: "Dia de sol",
+          texto:
+            "O céu está claro. O rio está calmo e baixo. A casa fica tranquila em cima das estacas.",
+        },
+        rio: {
+          titulo: "Só o rio",
+          texto:
+            "O rio está ali, embaixo da casa. As ESTACAS seguram a casa alta pra a água não encostar.",
+        },
+        chuva: {
+          titulo: "Só chuva",
+          texto:
+            "Começou a chover. A água vai enchendo aos poucos — por isso a casa precisa ficar ALTA.",
+        },
+        "rio+sol": {
+          titulo: "Sol + Rio",
+          texto:
+            "Dia bonito na beira do rio. A água está calma e a família pode até pescar!",
+        },
+        "chuva+rio": {
+          titulo: "Chuva + Rio (o rio enche!)",
+          texto:
+            "Chove muito e o rio ENCHE. Vê como a casa SOBE nas estacas? A água passa por baixo e a família fica SECA lá em cima.",
+        },
+        "chuva+sol": {
+          titulo: "Chuva com sol",
+          texto:
+            "Chuva e sol juntos! Isso forma arco-íris. A água sobe um pouco, mas logo o sol seca.",
+        },
+        "chuva+rio+sol": {
+          titulo: "Tudo ligado!",
+          texto:
+            "Chuva, rio e sol. O rio enche e a casa sobe nas estacas. Quando o sol voltar de vez, a água baixa.",
+        },
+        "": {
+          titulo: "Tudo desligado",
+          texto:
+            "Ligue pelo menos um controle pra ver o que acontece na cena!",
+        },
+      },
+      desafio: {
+        pergunta:
+          "Por que a casa ribeirinha precisa ficar em cima de ESTACAS ALTAS?",
+        opcoes: [
+          "Pra ficar mais bonita",
+          "Pra quando chover muito e o rio encher, a água passar por baixo",
+          "Pra pegar mais sol",
+        ],
+        correta: 1,
+        feedbackAcerto:
+          "🎉 Isso! Você viu no laboratório: quando o rio enche, a casa fica em segurança lá em cima.",
+        feedbackErro:
+          "Volte e ative CHUVA + RIO. Veja o que acontece com a água e a casa.",
+      },
+    },
+  },
+
   momento09_revisao: {
     pontos: [
       "MORADIA é o lugar onde uma família mora.",

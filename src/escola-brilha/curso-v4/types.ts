@@ -456,17 +456,56 @@ export type MontarPalavraData = {
   feedbackErro: string;
 };
 
+/**
+ * Laboratório interativo (Geografia / Ciências / Física).
+ * A criança liga/desliga "controles" (clima, terreno, força...) e vê a
+ * ilustração reagir em tempo real. Cada combinação pode disparar uma
+ * explicação curta que a criança ATIVA (com áudio próprio).
+ */
+export type LaboratorioClimaData = {
+  instrucao: string;
+  /** Cena visual — hoje só "casaRibeirinha", pronto pra crescer. */
+  cena: "casaRibeirinha";
+  controles: Array<{
+    id: "sol" | "chuva" | "rio";
+    rotulo: string;
+    emoji: string;
+    ligadoInicial?: boolean;
+  }>;
+  /**
+   * Explicações por combinação de controles ativos.
+   * Chave = ids ordenados alfabeticamente e unidos por "+".
+   * ex.: "chuva+rio", "sol", "chuva+rio+sol".
+   */
+  explicacoes: Record<string, { titulo: string; texto: string }>;
+  desafio: {
+    pergunta: string;
+    opcoes: string[];
+    correta: number;
+    feedbackAcerto: string;
+    feedbackErro: string;
+  };
+};
+
 export type MinijogoPT =
   | { tipo: "arrastarParaAlvo"; titulo: string; bloco: ArrastarParaAlvoData }
   | { tipo: "selecionarItens"; titulo: string; bloco: SelecionarItensData }
   | { tipo: "montarPalavra"; titulo: string; bloco: MontarPalavraData }
-  | { tipo: "ordenarSequencia"; titulo: string; bloco: OrdenarSequenciaData };
+  | { tipo: "ordenarSequencia"; titulo: string; bloco: OrdenarSequenciaData }
+  | { tipo: "laboratorioClima"; titulo: string; bloco: LaboratorioClimaData };
 
 /** Bloco opcional de minijogo pedagógico dentro da aula. */
 export type MomentoMinijogo = {
   titulo: string;
   instrucao: string;
   jogo: MinijogoPT;
+};
+
+/** Bloco opcional de LABORATÓRIO — aparece depois do minijogo. */
+export type MomentoLaboratorio = {
+  titulo: string;
+  instrucao: string;
+  bloco: LaboratorioClimaData;
 };
 
 // ---------- Blocos de ENSINO VISUAL (equivalente ao "eu faço" da Mat.) --
@@ -517,6 +556,8 @@ export type AulaPortuguesV4 = {
   momento08_leituraIndependente: MomentoLeituraIndependente;
   /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
   momento_minijogo?: MomentoMinijogo;
+  /** Opcional — laboratório interativo (Geografia/Ciências). Aparece depois do minijogo. */
+  momento_laboratorio?: MomentoLaboratorio;
   momento09_revisao: MomentoRevisaoPT;
   momento10_avaliacao: MomentoAvaliacaoPT;
   momento11_missaoFamilia: MomentoMissaoFamiliaPT;

@@ -11,6 +11,7 @@ import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
+import { LaboratorioClima } from "./blocos/LaboratorioClima";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -36,6 +37,7 @@ const MOMENTOS_BASE = [
   { id: "m7", label: "🧩 Sequência" },
   { id: "m8", label: "💪 Você lê" },
   { id: "mmini", label: "🎮 Minijogo", opcional: true },
+  { id: "mlab", label: "🔬 Laboratório", opcional: true },
   { id: "m9", label: "🔁 Revisão" },
   { id: "m10", label: "✅ Avaliação" },
   { id: "m11", label: "🏠 Missão em Família" },
@@ -48,6 +50,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
     (m) =>
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
+      (m.id === "mlab" && !!aula.momento_laboratorio) ||
       (m.id === "mev" && !!aula.momento_ensinoVisual),
   );
 
@@ -216,9 +219,23 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                   {jogo.tipo === "ordenarSequencia" && (
                     <OrdenarSequencia data={jogo.bloco} />
                   )}
+                  {jogo.tipo === "laboratorioClima" && (
+                    <LaboratorioClima data={jogo.bloco} />
+                  )}
                 </Secao>
               );
             })()}
+
+          {/* Laboratório do Explorador (opcional) */}
+          {aula.momento_laboratorio && (
+            <Secao
+              id="mlab"
+              label={`🔬 ${aula.momento_laboratorio.titulo}`}
+            >
+              <Instrucao>{aula.momento_laboratorio.instrucao}</Instrucao>
+              <LaboratorioClima data={aula.momento_laboratorio.bloco} />
+            </Secao>
+          )}
 
           {/* M9 · Revisão */}
           <Secao id="m9" label="🔁 Revisão">
