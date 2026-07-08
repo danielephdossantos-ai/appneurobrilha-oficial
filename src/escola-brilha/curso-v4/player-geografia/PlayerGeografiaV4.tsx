@@ -25,24 +25,23 @@ type Props = {
   onConcluir?: () => void;
 };
 
-const MOMENTOS = [
-  { id: "m1", label: "🛰️ Missão" },
-  { id: "m2", label: "📸 Galeria" },
-  { id: "m3", label: "🔎 Investigador" },
-  { id: "m4", label: "🤔 Hipóteses" },
-  { id: "m5", label: "⚖️ Comparar" },
-  { id: "m6", label: "📊 Painel" },
-  { id: "m7", label: "🕵️ Sozinho" },
-  { id: "m8", label: "🧪 Laboratório" },
-  { id: "m9", label: "🏗️ Arquiteto" },
-  { id: "m10", label: "🏠 Em Família" },
-] as const;
-
 export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
 
+  // Menu dinâmico: só mostra seções que têm conteúdo pra essa aula.
+  // Assim aulas infantis (2º ano) ficam curtas; 5º+ desbloqueia o resto.
+  const momentos = [
+    { id: "m1", label: "🛰️ Missão", show: true },
+    { id: "m2", label: "📸 Galeria", show: aula.momento02_galeria.bloco.lugares.length > 0 },
+    { id: "m3", label: "🔎 Investigador", show: aula.momento03_investigador.blocos.length > 0 },
+    { id: "m4", label: "🤔 Hipóteses", show: aula.momento04_hipoteses.perguntas.length > 0 },
+    { id: "m5", label: "⚖️ Comparar", show: aula.momento05_comparar.comparacoes.length > 0 },
+    { id: "m6", label: "📊 Painel", show: aula.momento06_painel.bloco.linhas.length > 0 },
+    { id: "m10", label: "🏠 Em Família", show: true },
+  ].filter((m) => m.show);
+
   useEffect(() => {
-    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(
+    const els = momentos.map((m) => document.getElementById(m.id)).filter(
       Boolean,
     ) as HTMLElement[];
     if (!els.length) return;
