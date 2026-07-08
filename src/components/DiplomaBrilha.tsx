@@ -49,20 +49,52 @@ export function DiplomaBrilha({
   });
 
   return (
-    <motion.div
-      className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4 print:bg-white print:static print:p-0"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onFechar}
-    >
+    <>
+      {/* CSS de impressão — isola SÓ o diploma na folha */}
+      <style>{`
+        @media print {
+          @page { size: A4 portrait; margin: 12mm; }
+          html, body { background: #fff !important; }
+          body * { visibility: hidden !important; }
+          #diploma-print-root, #diploma-print-root * { visibility: visible !important; }
+          #diploma-print-root {
+            position: fixed !important;
+            inset: 0 !important;
+            display: block !important;
+            background: #fff !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            z-index: 999999 !important;
+          }
+          #diploma-print-card {
+            position: static !important;
+            box-shadow: none !important;
+            transform: none !important;
+            margin: 0 auto !important;
+            max-width: 180mm !important;
+            width: 100% !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+        }
+      `}</style>
       <motion.div
-        initial={{ scale: 0.7, rotate: -4 }}
-        animate={{ scale: 1, rotate: 0 }}
-        exit={{ scale: 0.7, rotate: 4 }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative bg-[#fdf6e3] text-[#1a0d3d] rounded-2xl p-6 md:p-10 max-w-2xl w-full shadow-2xl border-8 border-double border-amber-500 print:shadow-none print:border-4"
+        id="diploma-print-root"
+        className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onFechar}
       >
+        <motion.div
+          id="diploma-print-card"
+          initial={{ scale: 0.7, rotate: -4 }}
+          animate={{ scale: 1, rotate: 0 }}
+          exit={{ scale: 0.7, rotate: 4 }}
+          onClick={(e) => e.stopPropagation()}
+          className="relative bg-[#fdf6e3] text-[#1a0d3d] rounded-2xl p-6 md:p-10 max-w-2xl w-full shadow-2xl border-8 border-double border-amber-500"
+        >
+
         {/* Selo colecionável no canto */}
         {numeroColecao !== undefined && (
           <div className="absolute -top-5 -right-5 bg-amber-500 text-white text-xs font-black uppercase tracking-widest rounded-full h-16 w-16 grid place-items-center shadow-lg border-4 border-[#fdf6e3] print:hidden">
@@ -152,5 +184,7 @@ export function DiplomaBrilha({
         </div>
       </motion.div>
     </motion.div>
+    </>
   );
 }
+
