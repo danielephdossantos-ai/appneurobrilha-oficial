@@ -10,6 +10,7 @@ import { CompararLugares } from "./blocos/CompararLugares";
 import { PainelComparativo } from "./blocos/PainelComparativo";
 import { InvestigacaoLivre } from "./blocos/InvestigacaoLivre";
 import { LaboratorioExplorador } from "./blocos/LaboratorioExplorador";
+import { ArquitetoLugarCerto } from "./blocos/ArquitetoLugarCerto";
 
 
 /**
