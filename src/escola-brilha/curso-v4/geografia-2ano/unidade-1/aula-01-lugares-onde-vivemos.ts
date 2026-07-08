@@ -5,6 +5,7 @@ import casaModerna from "@/assets/neuro-treino/objetos/casa-moderna.png";
 import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
 import arvore from "@/assets/neuro-treino/objetos/arvore.png";
+import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
 import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
 import coruja from "@/assets/neuro-treino/objetos/coruja.png";
 import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
