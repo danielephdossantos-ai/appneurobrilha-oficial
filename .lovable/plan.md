@@ -1,52 +1,52 @@
-## Problema
+## Unidade 1 · Geografia 2º Ano — "Os Lugares Onde Vivemos" (EF02GE01)
 
-Nas perguntas de posição de EF01MA11 (Exemplo, Guiada, Desafio, Quiz, Níveis), o texto diz "Brilha em cima da árvore", "livro sobre a mesa", "coelho entrou na toca" — mas a tela mostra só **caixinhas coloridas separadas** com a imagem do Brilha e da árvore lado a lado, cada uma com contagem "1". A criança não vê a cena de verdade e não tem como responder olhando.
+Vou construir uma aula 100% gamificada e customizada (fora do template padrão), com 6 cenas encadeadas: Galeria → GeoScanner → Painel Trunfo → Laboratório → Minijogo Arquiteto → Vitória.
 
-Só a Fase Interativa (`PosicaoEspacial`) já mostra a cena real (Brilha em cima, dentro, atrás…). O resto usa `grupos` / `comparar`, que são visuais de contagem — não de posição.
+### ⚠️ 2 pontos que preciso confirmar antes de codar
 
-## O que vou fazer
+**1. "Fotografias reais" × padrão visual travado**
+A memória do projeto diz explicitamente: *"Proibido emoji cru, ícones genéricos, **fotos**, 3D realista"* — o padrão travado é ilustração 2D kawaii/Pixar. Como resolver os 5 tipos de moradia (Apartamento, Casa Urbana, Fazenda, Ribeirinha, Aldeia)?
+- **A)** Gerar 5 ilustrações kawaii detalhadas (mantém o padrão travado). *Recomendado.*
+- **B)** Abrir exceção e gerar imagens fotorrealistas só nesta aula.
+- **C)** Você me envia 5 fotos reais (upload).
 
-**1. Extrair o motor de cena do `PosicaoEspacial` num componente compartilhado `CenaPosicao`.**
-- Move `Piece` + `renderLayout` (em cima, embaixo, dentro, fora, direita, esquerda, atrás, frente, ao lado) e a variação "entre" (fila de 3) pra `src/escola-brilha/player/blocos/CenaPosicao.tsx`.
-- `PosicaoEspacial.tsx` passa a importar de lá (sem mudar comportamento).
+**2. Onde encaixar a aula no app**
+- **A)** Nova rota `escola-brilha/geo-2ano/unidade-1` com player próprio (isolado do curso-v4). *Recomendado — a experiência é bem diferente do padrão de aula.*
+- **B)** Registrar como aula normal em `src/escola-brilha/data/EF02GE01.ts` usando os blocos existentes (perde muito do "wow").
+- **C)** Criar `curso-v4/geografia-2ano/unidade-1/aula-01…` seguindo o padrão de Português 2º Ano.
 
-**2. Ampliar `QuizItem.visual` com dois novos tipos:**
-- `{ tipo: "cena", posicao, referenciaImg, referenciaLabel, sujeitoImg, sujeitoLabel }`
-- `{ tipo: "cenaEntre", fila: [{ img, label }, …] }`
+### Escopo técnico (assumindo A+A acima)
 
-**3. Renderizar as novas cenas em todos os blocos que usam `QuizItem`:**
-- `Quiz.tsx` (bloco Quiz)
-- `ProgressaoNiveis.tsx` (Fácil / Médio / Difícil)
-- `AtividadeGuiada.tsx` (prática guiada)
-- `Desafio.tsx` → `QuizSequencial` (hoje ignora `q.visual`; passa a renderizar)
+**Nova pasta:** `src/escola-brilha/geo-2ano/unidade-1-lugares/`
 
-**4. Reescrever as perguntas de EF01MA11 pra usar a cena real:**
-- **Exemplo resolvido**: troca o `interativo` de "toque na árvore" por uma cena mostrando o Brilha em cima da árvore (sem pedir toque enganoso).
-- **Atividade Guiada**: cena com o coelho DENTRO da toca.
-- **Desafio (4 perguntas)**: cada uma vira `cena`/`cenaEntre` com posição correspondente.
-- **Quiz (4 perguntas)**: livro EM CIMA da mesa, gato ENTRE cachorro e rato, presente FORA da caixa, estrela à ESQUERDA/DIREITA.
-- **Níveis (Fácil/Médio/Difícil)**: cada pergunta com a cena que o texto descreve.
+```
+components/
+  GaleriaMoradias.tsx        cena 1 — grid 5 cards com hover/pulse, botão narração Aurora
+  GeoScanner.tsx             cena 2 — modal full-screen, mira animada, pins piscantes na imagem
+  PainelTrunfo.tsx           cena 3 — cards comparativos (clima/material/motivo) que acendem no clique
+  LaboratorioExplorador.tsx  cena 4 — toggles ☀️/🌧️/🌊 + ilustração reativa (casa ribeirinha sobe nas estacas)
+  ArquitetoMinijogo.tsx      cena 5 — drag-drop cenário↔material
+  VitoriaModal.tsx           cena 6 — confete + distintivo "Investigador das Moradias"
+  BarraXP.tsx                topbar fixa XP/moedas com contagem animada
+  hooks/useAurora.ts         wrapper de speakChunked (voz pt-BR, sem falar feedbacks)
+dados.ts                     as 5 moradias + pistas + comparativos + cenários
+assets/                      5 ilustrações geradas + camadas do laboratório
+index.tsx                    orquestrador de cenas + estado XP/coins
+```
 
-**5. Assets faltando**: usar o que já existe (`livro`, `casa` como mesa/caixa, `presente`, `gato`, `coelho`, `urso`, `raposa`, `estrela`, `arvore`, `brilha`, `bau`). Nenhuma imagem nova precisa ser gerada.
+**Rota:** nova entrada em `src/routes/escola-brilha.geo-2ano.$aula.tsx`.
 
-## Validação (uma cena de cada vez)
+**Bibliotecas:** `canvas-confetti` (add via bun), `framer-motion` (já no projeto — verifico).
 
-Vou seguir a regra do usuário: implementar tudo, mas ao entregar peço confirmação **bloco por bloco** (Exemplo → Guiada → Desafio → Quiz → Níveis), antes de considerar pronto. Se algo estiver estranho na cena, ajusto só aquela.
+**Áudio:** reutilizo `speakChunked` de `src/lib/native-tts.ts` para a Aurora. Sons eletrônicos dos pins: WebAudio inline (bleep sintetizado), sem asset.
 
-## Arquivos tocados
+**Padrões respeitados:**
+- Nenhuma leitura automática de feedback (só a Aurora nas intros, como fizemos em Português).
+- Tokens semânticos de `src/styles.css` (sem cores hardcoded).
+- Mobile-first: grid responsivo, drag-drop com fallback tap-to-place.
 
-- `src/escola-brilha/player/blocos/CenaPosicao.tsx` (novo)
-- `src/escola-brilha/player/blocos/PosicaoEspacial.tsx` (usa o novo)
-- `src/escola-brilha/types.ts` (2 novos tipos em `QuizItem.visual`)
-- `src/escola-brilha/player/blocos/Quiz.tsx`
-- `src/escola-brilha/player/blocos/ProgressaoNiveis.tsx`
-- `src/escola-brilha/player/blocos/AtividadeGuiada.tsx`
-- `src/escola-brilha/player/blocos/Desafio.tsx`
-- `src/escola-brilha/data/EF01MA11.ts`
+**Fora de escopo desta entrega:** persistência de XP no Supabase (uso estado local; se quiser gravar, faço num próximo passo).
 
-## Fora do escopo
+---
 
-- Não vou mexer em outras aulas (EF01MA01–10) — elas usam `grupos`/`comparar` corretamente pra contagem.
-- Não vou trocar o estilo visual do mascote nem gerar imagens novas.
-
-Posso seguir?
+Me diga suas escolhas nos 2 pontos (ex.: "1-A, 2-A") e eu já começo.
