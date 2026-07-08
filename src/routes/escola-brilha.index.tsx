@@ -158,6 +158,18 @@ function EscolaBrilhaCatalogo() {
   const contarSerie = (s: Serie) =>
     Object.values(arvore[s]).reduce((acc, arr) => acc + arr.length, 0);
 
+  // Mapa: Série -> disc slug -> Curso v4 correspondente
+  const cursoPorSerieDisc = useMemo(() => {
+    const map: Record<string, Record<string, ReturnType<typeof listCursos>[number]>> = {};
+    for (const c of listCursos()) {
+      const s = c.ano;
+      const d = slugDisc(c.disciplina);
+      (map[s] ||= {})[d] = c;
+    }
+    return map;
+  }, []);
+
+
   return (
     <Shell>
       <div className="max-w-3xl mx-auto pb-24">
