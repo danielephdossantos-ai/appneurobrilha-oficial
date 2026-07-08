@@ -8,6 +8,7 @@ import { ModoInvestigador } from "./blocos/ModoInvestigador";
 import { Hipotese } from "./blocos/Hipotese";
 import { CompararLugares } from "./blocos/CompararLugares";
 import { PainelComparativo } from "./blocos/PainelComparativo";
+import { InvestigacaoLivre } from "./blocos/InvestigacaoLivre";
 
 
 /**

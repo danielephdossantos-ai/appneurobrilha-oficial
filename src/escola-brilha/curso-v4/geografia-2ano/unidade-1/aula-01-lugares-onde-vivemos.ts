@@ -449,7 +449,7 @@ const aula: AulaGeografiaV4 = {
         { id: "estrada", icone: "🛣️", rotulo: "uma estrada", existe: true },
         { id: "arvores", icone: "🌳", rotulo: "árvores espalhadas", existe: true },
         { id: "plantacao", icone: "🌾", rotulo: "plantação (roça)", existe: true },
-        { id: "predios", icone: "🏢", rotulo: "prédios altos ao fundo", existe: true },
+        { id: "predios", icone: "🏘️", rotulo: "vilarejo ao longe", existe: true },
         { id: "praia", icone: "🏖️", rotulo: "praia com areia", existe: false },
         { id: "montanha-neve", icone: "🏔️", rotulo: "montanha com neve", existe: false },
         { id: "aviao", icone: "✈️", rotulo: "avião no céu", existe: false },
