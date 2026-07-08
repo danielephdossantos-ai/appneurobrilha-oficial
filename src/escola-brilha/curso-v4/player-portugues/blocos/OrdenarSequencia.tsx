@@ -54,7 +54,7 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
           return (
             <li
               key={id}
-              className={`flex items-center gap-3 p-3 rounded-xl transition ${
+              className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl transition ${
                 posicaoCerta
                   ? "bg-emerald-500/25 border border-emerald-400"
                   : posicaoErrada
@@ -62,14 +62,43 @@ export function OrdenarSequencia({ data }: { data: OrdenarSequenciaData }) {
                     : "bg-white/10 border border-white/10"
               }`}
             >
-              <div className="w-10 h-10 rounded-full bg-amber-400 text-[#0d1f55] font-black text-lg grid place-items-center shrink-0">
-                {numero}
+              {/* MOBILE: imagem em cima, texto embaixo. DESKTOP: layout horizontal original */}
+              <div className="flex sm:contents items-center gap-2 w-full">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-400 text-[#0d1f55] font-black text-base sm:text-lg grid place-items-center shrink-0">
+                  {numero}
+                </div>
+                {item.imagemUrl && (
+                  <div className="flex-1 sm:flex-none flex justify-center sm:block">
+                    <img
+                      src={item.imagemUrl}
+                      alt=""
+                      className="w-20 h-20 sm:w-12 sm:h-12 object-contain shrink-0"
+                    />
+                  </div>
+                )}
+                <div className="flex sm:hidden flex-col gap-1 shrink-0">
+                  <button
+                    onClick={() => mover(i, -1)}
+                    disabled={i === 0}
+                    className="w-10 h-10 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 disabled:opacity-25 disabled:bg-white/10 text-[#0d1f55] text-xl font-black leading-none shadow-md"
+                    aria-label="Mover pra cima"
+                  >
+                    ⬆️
+                  </button>
+                  <button
+                    onClick={() => mover(i, 1)}
+                    disabled={i === ordem.length - 1}
+                    className="w-10 h-10 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-95 disabled:opacity-25 disabled:bg-white/10 text-[#0d1f55] text-xl font-black leading-none shadow-md"
+                    aria-label="Mover pra baixo"
+                  >
+                    ⬇️
+                  </button>
+                </div>
               </div>
-              {item.imagemUrl && (
-                <img src={item.imagemUrl} alt="" className="w-12 h-12 object-contain shrink-0" />
-              )}
-              <div className="flex-1 text-lg text-white font-black tracking-wider">{item.texto}</div>
-              <div className="flex flex-col gap-1 shrink-0">
+              <div className="flex-1 text-center sm:text-left text-sm sm:text-lg text-white font-black tracking-wide sm:tracking-wider px-1 leading-snug break-words">
+                {item.texto}
+              </div>
+              <div className="hidden sm:flex flex-col gap-1 shrink-0">
                 <button
                   onClick={() => mover(i, -1)}
                   disabled={i === 0}
