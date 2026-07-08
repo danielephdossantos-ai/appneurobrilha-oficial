@@ -161,7 +161,7 @@ export function ArquitetoLugar({ data }: { data: ArquitetoLugarData }) {
               key={op.id}
               onClick={() => escolher(op.id)}
               disabled={respondeu}
-              className={`rounded-2xl p-2 md:p-3 flex flex-col items-center gap-2 ring-2 transition-all ${
+              className={`rounded-2xl p-2 md:p-3 flex flex-col items-stretch gap-2 ring-2 transition-all overflow-hidden ${
                 respondeu && certa
                   ? "bg-emerald-400/25 ring-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.5)]"
                   : respondeu && escolhida && !certa
@@ -171,14 +171,15 @@ export function ArquitetoLugar({ data }: { data: ArquitetoLugarData }) {
                   : "bg-white/10 ring-white/20 hover:bg-white/15 hover:ring-amber-300 active:scale-95"
               }`}
             >
-              <div className="h-16 md:h-20 w-full grid place-items-center">
+              <div className="relative w-full h-24 md:h-28 rounded-lg bg-white/5 overflow-hidden">
                 <img
                   src={op.imagemUrl}
-                  alt={op.nome}
-                  className="max-h-full max-w-full object-contain"
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-contain p-1"
                 />
               </div>
-              <div className="text-white text-xs md:text-sm font-semibold text-center leading-tight">
+              <div className="rounded-lg bg-black/50 px-2 py-1.5 text-white text-xs md:text-sm font-semibold text-center leading-tight">
                 {op.nome}
               </div>
             </button>
