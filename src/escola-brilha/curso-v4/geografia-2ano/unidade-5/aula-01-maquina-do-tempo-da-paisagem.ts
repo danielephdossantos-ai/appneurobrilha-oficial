@@ -231,11 +231,11 @@ export const aula01: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Do PASSADO → PRESENTE.",
       itens: [
-        { id: "s1", texto: "1) FLORESTA e RIO limpo.", imagemUrl: arvore },
-        { id: "s2", texto: "2) Primeiras CASAS.", imagemUrl: campo },
-        { id: "s3", texto: "3) Ruas de TERRA e praça pequena.", imagemUrl: rua },
-        { id: "s4", texto: "4) AVENIDAS DE ASFALTO.", imagemUrl: ponte },
-        { id: "s5", texto: "5) PRÉDIOS altos e semáforo.", imagemUrl: apartamento },
+        { id: "s1", texto: "1) FLORESTA e RIO limpo.", imagemUrl: campo },
+        { id: "s2", texto: "2) Primeiras CASAS (oca e casa antiga).", imagemUrl: oca },
+        { id: "s3", texto: "3) Ruas de TERRA e praça pequena.", imagemUrl: casaAntiga },
+        { id: "s4", texto: "4) AVENIDAS DE ASFALTO.", imagemUrl: rua },
+        { id: "s5", texto: "5) PRÉDIOS altos e cidade grande.", imagemUrl: cidade },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
       feedbackAcerto:
