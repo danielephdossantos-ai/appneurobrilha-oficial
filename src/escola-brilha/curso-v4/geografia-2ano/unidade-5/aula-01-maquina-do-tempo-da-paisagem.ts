@@ -314,13 +314,13 @@ export const aula01: AulaPortuguesV4 = {
           },
         ],
         itens: [
-          { id: "i1", texto: "Muita árvore junta (floresta)", alvoId: "ontem", imagemUrl: arvore },
+          { id: "i1", texto: "Muita árvore junta (floresta)", alvoId: "ontem", imagemUrl: campo },
           { id: "i2", texto: "Rio limpo com peixe", alvoId: "ontem", imagemUrl: rio },
-          { id: "i3", texto: "Ruas de terra", alvoId: "ontem", imagemUrl: campo },
-          { id: "i4", texto: "Poucas casas de madeira", alvoId: "ontem", imagemUrl: jardim },
+          { id: "i3", texto: "Oca de palha", alvoId: "ontem", imagemUrl: oca },
+          { id: "i4", texto: "Casa antiga simples", alvoId: "ontem", imagemUrl: casaAntiga },
           { id: "i5", texto: "Prédios altos", alvoId: "hoje", imagemUrl: apartamento },
           { id: "i6", texto: "Avenida de asfalto", alvoId: "hoje", imagemUrl: rua },
-          { id: "i7", texto: "Semáforo na esquina", alvoId: "hoje", imagemUrl: cidade },
+          { id: "i7", texto: "Praça arborizada", alvoId: "hoje", imagemUrl: praca },
           { id: "i8", texto: "Ponte de concreto", alvoId: "hoje", imagemUrl: ponte },
         ],
         feedbackAcerto:
