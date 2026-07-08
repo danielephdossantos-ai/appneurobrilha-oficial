@@ -346,6 +346,13 @@ export type QuizTextoData = {
   feedbackErro: string;
   /** Trecho do texto que respondeu a pergunta (mostrado no feedback). */
   ondeEstaNoTexto?: string;
+  /**
+   * Aditivo: URLs de imagem paralelas a `opcoes` (mesmo tamanho e ordem).
+   * Quando presente, o QuizTexto renderiza cada opção como card com
+   * imagem em cima + texto embaixo, no mesmo padrão do ArquitetoLugar.
+   * Ausente: mantém as bolinhas coloridas de sempre.
+   */
+  opcoesImagens?: string[];
 };
 
 // ---------- 11 momentos de Português ---------------------------------
