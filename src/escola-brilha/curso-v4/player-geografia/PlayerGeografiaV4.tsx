@@ -163,7 +163,11 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             <InvestigacaoLivre data={aula.momento07_investigacaoLivre.bloco} />
           </Secao>
 
-          <EmBreve id="m8" label="🧪 Laboratório do Explorador" descricao="Muda o clima e o terreno, veja a moradia mudar. Vem na Etapa C." />
+          {aula.momento08_laboratorio && (
+            <Secao id="m8" label="🧪 Laboratório do Explorador">
+              <LaboratorioExplorador data={aula.momento08_laboratorio.bloco} />
+            </Secao>
+          )}
           <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
 
           {/* M10 · Missão em família */}
