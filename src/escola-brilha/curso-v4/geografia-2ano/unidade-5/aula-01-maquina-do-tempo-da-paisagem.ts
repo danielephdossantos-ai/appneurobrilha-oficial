@@ -4,7 +4,6 @@ import predio from "@/assets/neuro-treino/objetos/predio.png";
 import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import campo from "@/assets/neuro-treino/objetos/campo.png";
 import rio from "@/assets/neuro-treino/objetos/lago.png";
-import chuva from "@/assets/neuro-treino/objetos/chuva.png";
 import vento from "@/assets/neuro-treino/objetos/vento.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
 import mapaPercurso from "@/assets/neuro-treino/objetos/mapa-percurso.png";
@@ -13,7 +12,10 @@ import rua from "@/assets/neuro-treino/objetos/rua.png";
 import ponte from "@/assets/neuro-treino/objetos/ponte.png";
 import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
 import flor from "@/assets/neuro-treino/objetos/flor.png";
-import jardim from "@/assets/neuro-treino/objetos/jardim.png";
+
+import praca from "@/assets/neuro-treino/objetos/praca.png";
+import oca from "@/assets/neuro-treino/objetos/oca.png";
+import casaAntiga from "@/assets/neuro-treino/objetos/casa-antiga.png";
 
 /**
  * Geografia · 2º Ano · Unidade 5 · Aula 01
@@ -181,31 +183,39 @@ export const aula01: AulaPortuguesV4 = {
       "Cada foto mostra a paisagem em um TEMPO. Descubra qual é ANTES e qual é HOJE.",
     perguntas: [
       {
-        pergunta: "Qual imagem mostra a paisagem ANTIGA (natureza)?",
-        opcoes: ["Muita árvore e rio", "Prédios altos", "Avenida com carros"],
-        opcoesImagens: [arvore, predio, rua],
+        pergunta: "Qual imagem mostra a paisagem ANTIGA (natureza/campo)?",
+        opcoes: [
+          "Campo aberto com árvores",
+          "Prédios altos",
+          "Avenida com carros",
+        ],
+        opcoesImagens: [campo, predio, rua],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Muita ÁRVORE = paisagem ANTIGA.",
+        feedbackAcerto: "🎉 Isso! CAMPO com árvores = paisagem ANTIGA.",
         feedbackErro:
-          "Antigamente tinha mais NATUREZA — árvores, rios, poucas casas.",
+          "Antigamente tinha mais NATUREZA — campo aberto, árvores, poucas casas.",
       },
       {
         pergunta: "Qual imagem mostra a paisagem MODERNA (cidade grande)?",
-        opcoes: ["Uma flor no campo", "Prédios altos e avenidas", "Só árvores"],
-        opcoesImagens: [flor, cidade, arvore],
+        opcoes: [
+          "Uma flor no campo",
+          "Cidade com prédios e avenidas",
+          "Um campo com árvores",
+        ],
+        opcoesImagens: [flor, cidade, campo],
         correta: 1,
-        feedbackAcerto: "🎉 Certo! PRÉDIOS + AVENIDAS = paisagem MODERNA.",
+        feedbackAcerto: "🎉 Certo! CIDADE com PRÉDIOS = paisagem MODERNA.",
         feedbackErro:
           "Paisagem MODERNA da cidade grande tem PRÉDIOS e AVENIDAS.",
       },
       {
         pergunta: "E a PRAÇA arborizada da cidade é...",
         opcoes: [
-          "Um pedaço da natureza preservado",
-          "Uma fábrica gigante",
+          "Uma praça com árvores (natureza preservada)",
+          "Um prédio de apartamentos",
           "Um rio poluído",
         ],
-        opcoesImagens: [jardim, predio, rio],
+        opcoesImagens: [praca, apartamento, rio],
         correta: 0,
         feedbackAcerto:
           "🎉 Isso! A PRAÇA guarda um pedacinho da natureza antiga.",
@@ -221,11 +231,11 @@ export const aula01: AulaPortuguesV4 = {
     bloco: {
       instrucao: "Do PASSADO → PRESENTE.",
       itens: [
-        { id: "s1", texto: "1) FLORESTA e RIO limpo.", imagemUrl: arvore },
-        { id: "s2", texto: "2) Primeiras CASAS.", imagemUrl: campo },
-        { id: "s3", texto: "3) Ruas de TERRA e praça pequena.", imagemUrl: rua },
-        { id: "s4", texto: "4) AVENIDAS DE ASFALTO.", imagemUrl: ponte },
-        { id: "s5", texto: "5) PRÉDIOS altos e semáforo.", imagemUrl: apartamento },
+        { id: "s1", texto: "1) FLORESTA e RIO limpo.", imagemUrl: campo },
+        { id: "s2", texto: "2) Primeiras CASAS (oca e casa antiga).", imagemUrl: oca },
+        { id: "s3", texto: "3) Ruas de TERRA e praça pequena.", imagemUrl: casaAntiga },
+        { id: "s4", texto: "4) AVENIDAS DE ASFALTO.", imagemUrl: rua },
+        { id: "s5", texto: "5) PRÉDIOS altos e cidade grande.", imagemUrl: cidade },
       ],
       ordemCerta: ["s1", "s2", "s3", "s4", "s5"],
       feedbackAcerto:
@@ -304,13 +314,13 @@ export const aula01: AulaPortuguesV4 = {
           },
         ],
         itens: [
-          { id: "i1", texto: "Muita árvore junta (floresta)", alvoId: "ontem", imagemUrl: arvore },
+          { id: "i1", texto: "Muita árvore junta (floresta)", alvoId: "ontem", imagemUrl: campo },
           { id: "i2", texto: "Rio limpo com peixe", alvoId: "ontem", imagemUrl: rio },
-          { id: "i3", texto: "Ruas de terra", alvoId: "ontem", imagemUrl: campo },
-          { id: "i4", texto: "Poucas casas de madeira", alvoId: "ontem", imagemUrl: jardim },
+          { id: "i3", texto: "Oca de palha", alvoId: "ontem", imagemUrl: oca },
+          { id: "i4", texto: "Casa antiga simples", alvoId: "ontem", imagemUrl: casaAntiga },
           { id: "i5", texto: "Prédios altos", alvoId: "hoje", imagemUrl: apartamento },
           { id: "i6", texto: "Avenida de asfalto", alvoId: "hoje", imagemUrl: rua },
-          { id: "i7", texto: "Semáforo na esquina", alvoId: "hoje", imagemUrl: cidade },
+          { id: "i7", texto: "Praça arborizada", alvoId: "hoje", imagemUrl: praca },
           { id: "i8", texto: "Ponte de concreto", alvoId: "hoje", imagemUrl: ponte },
         ],
         feedbackAcerto:

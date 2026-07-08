@@ -11,6 +11,7 @@ Ed. Infantil, 1º e 2º ano: toda categoria vira jogo visual interativo.
 Contas +/− nessa faixa: animação visual via `OperacaoVisual`.
 Aula EF01MA02 é gabarito TRAVADO.
 **Geografia 2º Ano**: aplica Regra de Ouro de UI (nenhum texto estático >2 linhas; explicação ativada por clique + áudio + feedback animado; listas viram grids/sliders/drag/carrossel/modal). Evolução pedagógica: Comparar → Explicar → Relacionar → Interpretar → Resolver.
+**Toda unidade nova**: trocar as ideias das atividades (não reciclar mecânica da unidade anterior) e revisar 1 a 1 se cada `imagemUrl` bate com o texto da opção/pista. Formato de tela NUNCA muda. Ver [Nova unidade — atividades e imagens](mem://preferences/nova-unidade-atividades-e-imagens).
 
 ## Memories
 - [Sistema de Ensino Digital](mem://preferences/sistema-ensino-digital) — Framework mestre.
