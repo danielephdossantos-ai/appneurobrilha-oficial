@@ -70,8 +70,8 @@ export const aula03: AulaPortuguesV4 = {
       pistas: [
         { imagemUrl: vaca, nome: "Uma vaca" },
         { imagemUrl: padaria, nome: "Uma padaria" },
-        { imagemUrl: caminhao(trem), nome: "Um transporte" } as any,
-      ].map((p) => ({ imagemUrl: p.imagemUrl, nome: p.nome })),
+        { imagemUrl: trem, nome: "Um transporte" },
+      ],
       pergunta: "Sobre o que essa missão vai falar?",
       hipoteses: [
         {
