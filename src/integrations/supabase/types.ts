@@ -4359,6 +4359,36 @@ export type Database = {
           },
         ]
       }
+      missao_familia_registros: {
+        Row: {
+          aula_slug: string
+          criado_em: string
+          curso_slug: string
+          foto_path: string
+          id: string
+          legenda: string | null
+          user_id: string
+        }
+        Insert: {
+          aula_slug: string
+          criado_em?: string
+          curso_slug: string
+          foto_path: string
+          id?: string
+          legenda?: string | null
+          user_id: string
+        }
+        Update: {
+          aula_slug?: string
+          criado_em?: string
+          curso_slug?: string
+          foto_path?: string
+          id?: string
+          legenda?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       missoes_pendentes: {
         Row: {
           codigo_bncc: string

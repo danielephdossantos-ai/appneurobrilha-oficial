@@ -13,6 +13,7 @@ import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
 import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
+import { MissaoFamiliaFoto } from "./blocos/MissaoFamiliaFoto";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -297,6 +298,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                 <span className="text-amber-200 font-bold">📸 Registro:</span>{" "}
                 {aula.momento11_missaoFamilia.registro}
               </div>
+              <MissaoFamiliaFoto cursoSlug={cursoSlug} aulaSlug={aula.slug} />
             </div>
           </Secao>
 
