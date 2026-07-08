@@ -192,39 +192,7 @@ function EscolaBrilhaCatalogo() {
           </p>
         </div>
 
-        {/* Cursos v4 — novas aulas do Escola Brilha */}
-        {listCursos().length > 0 && (
-          <div className="mb-4">
-            <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/60 mb-2">
-              ✨ Novos cursos
-            </div>
-            <div className="grid gap-2">
-              {listCursos().map((c) => {
-                const totalAulas = c.unidades.reduce((s, u) => s + u.aulas.length, 0);
-                return (
-                  <Link
-                    key={c.slug}
-                    to="/escola-brilha/curso/$slug"
-                    params={{ slug: c.slug }}
-                    className="rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${c.corPrimaria}, ${c.corSecundaria})`,
-                    }}
-                  >
-                    <div className="text-[10px] uppercase tracking-widest opacity-80">
-                      {c.disciplina} · {c.ano}
-                    </div>
-                    <div className="text-lg leading-tight mt-0.5">{c.titulo}</div>
-                    <div className="text-[11px] font-bold opacity-90 mt-1">
-                      {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
-                      {totalAulas === 1 ? "" : "eis"} →
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {/* Cursos v4 agora aparecem DENTRO da sua série, no mesmo padrão visual do 1º Ano */}
 
 
         {/* Próxima missão recomendada — experiência contínua */}
