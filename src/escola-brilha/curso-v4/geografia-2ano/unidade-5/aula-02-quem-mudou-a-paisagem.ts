@@ -280,25 +280,25 @@ export const aula02: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "🔍 Detetive: Natureza × Pessoas",
+    titulo: "🔍 Quem Mudou a Paisagem?",
     instrucao:
-      "Cada CARTELA é uma MUDANÇA. Coloque na causa certa: NATUREZA ou PESSOAS.",
+      "Arraste cada carta pra CAIXA VERDE (Forças da Natureza) ou CAIXA AZUL (Ações das Pessoas).",
     jogo: {
       tipo: "arrastarParaAlvo",
-      titulo: "Arrastar para o Alvo",
+      titulo: "Quem Mudou a Paisagem?",
       bloco: {
-        instrucao: "Toque na cartela e depois no cartaz certo.",
+        instrucao: "Toque na carta e depois na caixa da causa certa.",
         alvos: [
           {
             id: "natureza",
-            nome: "🌿 NATUREZA",
-            descricao: "Chuva, vento, sol, rio.",
+            nome: "🌿 Forças da Natureza",
+            descricao: "Chuva, vento, sol, rio — sem ninguém mexer.",
             imagemUrl: chuva,
           },
           {
             id: "pessoas",
-            nome: "👷 PESSOAS",
-            descricao: "Construir, plantar, asfaltar.",
+            nome: "👷 Ações das Pessoas",
+            descricao: "Construir, plantar, asfaltar, fazer ponte.",
             imagemUrl: funcionarioLimpeza,
           },
         ],
