@@ -2,6 +2,7 @@ import type { CursoPortugues } from "../types";
 import { unidade1 } from "./unidade-1";
 import { unidade2 } from "./unidade-2";
 import { unidade3 } from "./unidade-3";
+import { unidade4 } from "./unidade-4";
 
 /**
  * Curso: Geografia 2º Ano — "Explorador dos Lugares"
@@ -21,7 +22,7 @@ const curso: CursoPortugues = {
   corPrimaria: "#0EA5E9",
   corSecundaria: "#0f172a",
   tipoAula: "portugues",
-  unidades: [unidade1, unidade2, unidade3],
+  unidades: [unidade1, unidade2, unidade3, unidade4],
 };
 
 export default curso;
