@@ -120,7 +120,7 @@ export function ArquitetoLugar({ data }: { data: ArquitetoLugarData }) {
         <div className="mt-4 h-32 rounded-xl bg-white/10 ring-2 ring-dashed ring-white/25 grid place-items-center overflow-hidden relative">
           {!respondeu && (
             <div className="text-white/60 text-sm">
-              👇 Escolha o material embaixo
+              👇 Escolha a resposta certa embaixo
             </div>
           )}
           {respondeu && acertou && opcaoEscolhida && (
