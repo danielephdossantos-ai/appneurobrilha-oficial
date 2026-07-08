@@ -294,25 +294,25 @@ export const aula03: AulaPortuguesV4 = {
   },
 
   momento_minijogo: {
-    titulo: "🌍 Cuidar × Destruir",
+    titulo: "🌍 Preservar é Preciso",
     instrucao:
-      "Cada CARTELA é uma ATITUDE. Coloque em CUIDAR ou DESTRUIR.",
+      "Cada atitude PRESERVA ou POLUI a natureza? Arraste pra caixa certa.",
     jogo: {
       tipo: "arrastarParaAlvo",
-      titulo: "Arrastar para o Alvo",
+      titulo: "Preservar é Preciso",
       bloco: {
         instrucao: "Toque na atitude e depois no cartaz certo.",
         alvos: [
           {
             id: "cuidar",
-            nome: "🌿 CUIDAR",
-            descricao: "Atitudes que PROTEGEM a natureza.",
+            nome: "🌿 PRESERVAR",
+            descricao: "Atitudes que CUIDAM da natureza.",
             imagemUrl: planta,
           },
           {
             id: "destruir",
-            nome: "❌ DESTRUIR",
-            descricao: "Atitudes que POLUEM/estragam.",
+            nome: "❌ POLUIR",
+            descricao: "Atitudes que ESTRAGAM a natureza.",
             imagemUrl: garrafa,
           },
         ],
