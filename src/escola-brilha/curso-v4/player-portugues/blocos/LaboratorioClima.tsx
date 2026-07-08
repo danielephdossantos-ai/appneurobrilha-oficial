@@ -37,9 +37,7 @@ export function LaboratorioClima({ data }: { data: LaboratorioClimaData }) {
     stopSpeaking();
     setFalando(true);
     try {
-      await speakChunked(`${explicacao.titulo}. ${explicacao.texto}`, {
-        lang: "pt-BR",
-      });
+      await speakChunked(`${explicacao.titulo}. ${explicacao.texto}`);
     } finally {
       setFalando(false);
     }
