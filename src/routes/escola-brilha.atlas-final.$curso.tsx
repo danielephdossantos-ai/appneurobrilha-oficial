@@ -6,6 +6,8 @@ import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
 import { useAppState } from "@/core/store";
 import { DiplomaBrilha } from "@/components/DiplomaBrilha";
 import { PERSONAGENS } from "@/escola-brilha/mascotes-personagens";
+import { AlbumRecordacoes } from "@/components/AlbumRecordacoes";
+
 
 
 /**
@@ -433,6 +435,13 @@ function AtlasFinal() {
           ))}
         </div>
       </section>
+
+      {/* ÁLBUM DE RECORDAÇÕES — fotos das Missões em Família do curso */}
+      <AlbumRecordacoes
+        cursoSlug={cursoSlug}
+        tituloPorAula={Object.fromEntries(aulas.map((a) => [a.slug, a.titulo]))}
+      />
+
 
       {/* CERTIFICADO */}
       <section className="max-w-5xl mx-auto mt-12 text-center">
