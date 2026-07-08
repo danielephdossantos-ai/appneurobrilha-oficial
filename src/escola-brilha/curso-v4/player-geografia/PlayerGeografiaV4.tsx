@@ -10,6 +10,7 @@ import { CompararLugares } from "./blocos/CompararLugares";
 import { PainelComparativo } from "./blocos/PainelComparativo";
 import { InvestigacaoLivre } from "./blocos/InvestigacaoLivre";
 import { LaboratorioExplorador } from "./blocos/LaboratorioExplorador";
+import { ArquitetoLugarCerto } from "./blocos/ArquitetoLugarCerto";
 
 
 /**
@@ -168,7 +169,11 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
               <LaboratorioExplorador data={aula.momento08_laboratorio.bloco} />
             </Secao>
           )}
-          <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
+          {aula.momento09_arquiteto && (
+            <Secao id="m9" label="🏗️ Arquiteto do Lugar Certo">
+              <ArquitetoLugarCerto data={aula.momento09_arquiteto.bloco} />
+            </Secao>
+          )}
 
           {/* M10 · Missão em família */}
           <Secao id="m10" label="🏠 Missão em Família">

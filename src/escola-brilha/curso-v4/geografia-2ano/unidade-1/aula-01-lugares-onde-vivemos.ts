@@ -563,6 +563,280 @@ const aula: AulaGeografiaV4 = {
     },
   },
 
+  momento09_arquiteto: {
+    bloco: {
+      instrucao:
+        "Você virou ARQUITETO. Leia o desafio, escolha os materiais e o formato — e construa a casa CERTA pra cada lugar do Brasil.",
+      cenarios: [
+        {
+          id: "amazonia",
+          contexto:
+            "Uma família ribeirinha vai construir casa na beira do rio Amazonas. Chove quase todo dia e, na cheia, o rio sobe até 10 metros.",
+          icones: ["🌊", "🌧️", "🌳"],
+          escolhas: [
+            {
+              pergunta: "Que MATERIAL usar nas paredes?",
+              opcoes: [
+                {
+                  rotulo: "Madeira da floresta",
+                  icone: "🪵",
+                  correta: true,
+                  feedback:
+                    "Boa! A floresta está do lado — madeira sai barato, é leve pra levantar sobre estacas e resiste bem à umidade.",
+                },
+                {
+                  rotulo: "Tijolo e cimento",
+                  icone: "🧱",
+                  correta: false,
+                  feedback:
+                    "Difícil! Tijolo é PESADO e caro pra transportar de barco até o meio da Amazônia. Melhor usar o que a floresta oferece.",
+                },
+                {
+                  rotulo: "Vidro grosso",
+                  icone: "🪟",
+                  correta: false,
+                  feedback:
+                    "Ih! Vidro é frágil, esquenta muito no calor e não segura o peso da chuva forte da Amazônia.",
+                },
+              ],
+            },
+            {
+              pergunta: "Como levantar a casa?",
+              opcoes: [
+                {
+                  rotulo: "Direto no chão",
+                  icone: "🏠",
+                  correta: false,
+                  feedback:
+                    "Cuidado! Na cheia, o rio sobe MUITO. A casa no chão vira aquário rapidinho.",
+                },
+                {
+                  rotulo: "Sobre palafitas altas",
+                  icone: "⬆️",
+                  correta: true,
+                  feedback:
+                    "Exatamente! As palafitas erguem a casa pra que a água do rio passe POR BAIXO. A família continua seca.",
+                },
+                {
+                  rotulo: "Enterrada no chão",
+                  icone: "⬇️",
+                  correta: false,
+                  feedback:
+                    "Piorou! Cavando pra baixo, a casa alaga com a primeira chuva.",
+                },
+              ],
+            },
+            {
+              pergunta: "Que 'garagem' colocar na porta?",
+              opcoes: [
+                {
+                  rotulo: "Uma canoa",
+                  icone: "🛶",
+                  correta: true,
+                  feedback:
+                    "Isso! Na Amazônia o transporte é pela ÁGUA. A canoa é o carro da porta de casa.",
+                },
+                {
+                  rotulo: "Um carro esportivo",
+                  icone: "🏎️",
+                  correta: false,
+                  feedback:
+                    "Não dá! Não tem estrada de asfalto ali. As ruas são de água.",
+                },
+                {
+                  rotulo: "Um trem",
+                  icone: "🚂",
+                  correta: false,
+                  feedback:
+                    "Trem no meio da floresta? A canoa é o transporte certo.",
+                },
+              ],
+            },
+          ],
+          parabens:
+            "🏆 Você construiu uma casa RIBEIRINHA perfeita! Palafita de madeira + canoa na porta = família seca o ano todo, mesmo com o rio subindo.",
+        },
+        {
+          id: "cidade",
+          contexto:
+            "Em São Paulo, 200 famílias querem morar no mesmo pedacinho de chão. O espaço é pequeno, mas todo mundo precisa de moradia.",
+          icones: ["🏙️", "👨‍👩‍👧", "🚗"],
+          escolhas: [
+            {
+              pergunta: "Como fazer TODO MUNDO caber?",
+              opcoes: [
+                {
+                  rotulo: "Uma casa gigante no chão",
+                  icone: "🏘️",
+                  correta: false,
+                  feedback:
+                    "Não cabe! Uma casa espalhada ocuparia o terreno inteiro e só serviria pra uma família.",
+                },
+                {
+                  rotulo: "Prédio bem alto",
+                  icone: "🏢",
+                  correta: true,
+                  feedback:
+                    "Isso mesmo! Empilhando andares, cada família ganha o seu apartamento no mesmo pedacinho de terra.",
+                },
+                {
+                  rotulo: "Barracas de acampamento",
+                  icone: "⛺",
+                  correta: false,
+                  feedback:
+                    "Barraca não protege da chuva forte da cidade nem dura pra sempre. Precisa de algo firme.",
+                },
+              ],
+            },
+            {
+              pergunta: "O que precisa TER no prédio?",
+              opcoes: [
+                {
+                  rotulo: "Elevador",
+                  icone: "🛗",
+                  correta: true,
+                  feedback:
+                    "Sim! Sem elevador, subir 20 andares de escada todo dia seria impossível.",
+                },
+                {
+                  rotulo: "Piscina de rio no meio",
+                  icone: "🌊",
+                  correta: false,
+                  feedback:
+                    "Não faz sentido! Rio não sobe até o meio de um prédio.",
+                },
+                {
+                  rotulo: "Um campo de futebol dentro",
+                  icone: "⚽",
+                  correta: false,
+                  feedback:
+                    "Legal, mas não cabe! Prédio no centro da cidade não tem esse espaço todo.",
+                },
+              ],
+            },
+            {
+              pergunta: "Onde guardar os carros das famílias?",
+              opcoes: [
+                {
+                  rotulo: "Garagem embaixo do prédio",
+                  icone: "🚗",
+                  correta: true,
+                  feedback:
+                    "Perfeito! Os primeiros andares viram garagem — assim os carros ficam guardados sem ocupar a rua.",
+                },
+                {
+                  rotulo: "Em cima do telhado",
+                  icone: "🏗️",
+                  correta: false,
+                  feedback:
+                    "Como o carro subiria até lá? A garagem embaixo é a solução usada em toda cidade grande.",
+                },
+                {
+                  rotulo: "Na sala de cada apartamento",
+                  icone: "🚙",
+                  correta: false,
+                  feedback:
+                    "Imagina o carro dentro de casa! A garagem coletiva embaixo resolve pra todo mundo.",
+                },
+              ],
+            },
+          ],
+          parabens:
+            "🏆 Você construiu um PRÉDIO perfeito pra cidade! Muita gente + pouco chão = empilhar famílias e caber todo mundo com elevador e garagem.",
+        },
+        {
+          id: "sertao",
+          contexto:
+            "No sertão da Bahia faz calor forte, quase não chove e o vento seco sopra o dia todo. Uma família vai construir a casa dela ali.",
+          icones: ["☀️", "🌵", "💨"],
+          escolhas: [
+            {
+              pergunta: "Como deve ser as PAREDES?",
+              opcoes: [
+                {
+                  rotulo: "Bem grossas, de tijolo ou adobe",
+                  icone: "🧱",
+                  correta: true,
+                  feedback:
+                    "Isso! Parede grossa segura o calor do lado de fora — dentro fica fresquinho mesmo com sol forte.",
+                },
+                {
+                  rotulo: "De vidro transparente",
+                  icone: "🪟",
+                  correta: false,
+                  feedback:
+                    "Ih não! Vidro deixa o sol entrar direto e vira estufa. Ninguém aguentaria o calor.",
+                },
+                {
+                  rotulo: "De folhas de bananeira",
+                  icone: "🍃",
+                  correta: false,
+                  feedback:
+                    "Folha fina não segura o calor nem o vento seco. Precisa de material mais firme.",
+                },
+              ],
+            },
+            {
+              pergunta: "E o TELHADO?",
+              opcoes: [
+                {
+                  rotulo: "Telha de barro clara",
+                  icone: "🏘️",
+                  correta: true,
+                  feedback:
+                    "Perfeito! O barro é fresco e a cor clara REFLETE o sol, esquentando menos a casa por dentro.",
+                },
+                {
+                  rotulo: "Placa de metal escura",
+                  icone: "⬛",
+                  correta: false,
+                  feedback:
+                    "Escuro absorve o calor. Dentro viraria um forno no meio-dia.",
+                },
+                {
+                  rotulo: "Telhado de gelo",
+                  icone: "🧊",
+                  correta: false,
+                  feedback:
+                    "Derrete na primeira hora de sol! Precisa de material que suporta o calor.",
+                },
+              ],
+            },
+            {
+              pergunta: "Onde guardar a ÁGUA da chuva?",
+              opcoes: [
+                {
+                  rotulo: "Cisterna ao lado da casa",
+                  icone: "💧",
+                  correta: true,
+                  feedback:
+                    "Boa! No sertão chove pouco. Guardar a água da chuva na cisterna garante água pra família o ano todo.",
+                },
+                {
+                  rotulo: "Não precisa guardar",
+                  icone: "🚫",
+                  correta: false,
+                  feedback:
+                    "Precisa sim! No sertão pode passar meses sem chuva. Sem cisterna, a família fica sem água.",
+                },
+                {
+                  rotulo: "Num balde na sala",
+                  icone: "🪣",
+                  correta: false,
+                  feedback:
+                    "Balde é pouco! A cisterna guarda milhares de litros pra família aguentar a seca.",
+                },
+              ],
+            },
+          ],
+          parabens:
+            "🏆 Você construiu uma casa PERFEITA pro sertão! Paredes grossas + telha clara + cisterna = família fresca e com água mesmo no calor seco.",
+        },
+      ],
+    },
+  },
+
+
 
   momento10_missaoFamilia: {
     titulo: "Diário do GeoExplorador",
