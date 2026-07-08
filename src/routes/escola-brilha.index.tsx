@@ -313,6 +313,32 @@ function EscolaBrilhaCatalogo() {
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
+                        const usaTrilhaDuo = serie === "Educação Infantil" || serie === "1º Ano";
+                        const serieSlug =
+                          serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
+                        if (usaTrilhaDuo) {
+                          return (
+                            <Link
+                              key={disc}
+                              to="/escola-brilha/trilha/$serie/$disc"
+                              params={{ serie: serieSlug, disc }}
+                              className="w-full flex items-center gap-3 p-3 rounded-xl bg-white border border-[#0d1f55]/10 active:scale-[0.995]"
+                            >
+                              <div className="h-9 w-9 rounded-lg bg-[#9B6CFF]/15 grid place-items-center shrink-0 text-lg">
+                                {tema.emoji}
+                              </div>
+                              <div className="flex-1 text-left">
+                                <div className="text-sm font-black text-[#0d1f55]">{tema.nome}</div>
+                                <div className="text-[10px] text-[#0d1f55]/55 font-black uppercase tracking-widest">
+                                  Trilha Duolingo · {lista.length} aula{lista.length === 1 ? "" : "s"} · Diploma
+                                </div>
+                              </div>
+                              <div className="text-[#0d1f55]/50">
+                                <ChevronRight className="h-4 w-4" />
+                              </div>
+                            </Link>
+                          );
+                        }
                         return (
                           <div key={disc} className="rounded-xl bg-white border border-[#0d1f55]/10 overflow-hidden">
                             <button
@@ -398,6 +424,7 @@ function EscolaBrilhaCatalogo() {
                           </div>
                         );
                       })}
+
                     </div>
                   )}
                 </div>
