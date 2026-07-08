@@ -171,15 +171,15 @@ export function ArquitetoLugar({ data }: { data: ArquitetoLugarData }) {
                   : "bg-white/10 ring-white/20 hover:bg-white/15 hover:ring-amber-300 active:scale-95"
               }`}
             >
-              <div className="h-20 md:h-24 w-full grid place-items-center overflow-hidden">
+              <div className="relative w-full h-24 md:h-28 rounded-lg bg-white/5 overflow-hidden">
                 <img
                   src={op.imagemUrl}
                   alt=""
                   aria-hidden="true"
-                  className="max-h-full max-w-full object-contain"
+                  className="absolute inset-0 w-full h-full object-contain p-1"
                 />
               </div>
-              <div className="rounded-lg bg-black/40 px-2 py-1.5 text-white text-xs md:text-sm font-semibold text-center leading-tight">
+              <div className="rounded-lg bg-black/50 px-2 py-1.5 text-white text-xs md:text-sm font-semibold text-center leading-tight">
                 {op.nome}
               </div>
             </button>
