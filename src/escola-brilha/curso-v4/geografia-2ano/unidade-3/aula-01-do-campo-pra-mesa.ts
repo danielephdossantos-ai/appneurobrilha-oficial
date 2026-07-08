@@ -275,6 +275,7 @@ export const aula01: AulaPortuguesV4 = {
       "Cada CARTELA é uma etapa da viagem do alimento. Coloque cada cartela no LUGAR CERTO da rota.",
     jogo: {
       tipo: "arrastarParaAlvo",
+      titulo: "Arrastar para o Alvo",
       bloco: {
         instrucao: "Toque na cartela e depois no lugar da rota onde ela vai.",
         alvos: [

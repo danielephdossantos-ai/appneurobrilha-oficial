@@ -270,6 +270,7 @@ export const aula04: AulaPortuguesV4 = {
       "Cada CARTELA é uma coisa que se usa no dia a dia. Coloque cada uma no LUGAR que oferece essa coisa.",
     jogo: {
       tipo: "arrastarParaAlvo",
+      titulo: "Arrastar para o Alvo",
       bloco: {
         instrucao: "Toque na cartela e depois no LUGAR que oferece.",
         alvos: [

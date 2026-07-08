@@ -245,6 +245,7 @@ export const aula02: AulaPortuguesV4 = {
       "Arraste CADA produto do mercado até o seu produtor lá no CAMPO.",
     jogo: {
       tipo: "arrastarParaAlvo",
+      titulo: "Arrastar para o Alvo",
       bloco: {
         instrucao: "Toque no produto e depois na sua ORIGEM.",
         alvos: [
