@@ -217,9 +217,23 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                   {jogo.tipo === "ordenarSequencia" && (
                     <OrdenarSequencia data={jogo.bloco} />
                   )}
+                  {jogo.tipo === "laboratorioClima" && (
+                    <LaboratorioClima data={jogo.bloco} />
+                  )}
                 </Secao>
               );
             })()}
+
+          {/* Laboratório do Explorador (opcional) */}
+          {aula.momento_laboratorio && (
+            <Secao
+              id="mlab"
+              label={`🔬 ${aula.momento_laboratorio.titulo}`}
+            >
+              <Instrucao>{aula.momento_laboratorio.instrucao}</Instrucao>
+              <LaboratorioClima data={aula.momento_laboratorio.bloco} />
+            </Secao>
+          )}
 
           {/* M9 · Revisão */}
           <Secao id="m9" label="🔁 Revisão">
