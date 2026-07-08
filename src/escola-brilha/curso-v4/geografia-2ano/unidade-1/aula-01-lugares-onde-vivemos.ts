@@ -6,7 +6,6 @@ import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
 import arvore from "@/assets/neuro-treino/objetos/arvore.png";
 import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
-import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
 import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
 import materialMadeiraFolhas from "@/assets/neuro-treino/objetos/material-madeira-folhas.png";
 import materialConcretoVidro from "@/assets/neuro-treino/objetos/material-concreto-vidro.png";
