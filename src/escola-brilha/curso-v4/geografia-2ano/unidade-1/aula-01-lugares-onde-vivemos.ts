@@ -455,7 +455,111 @@ const aula: AulaGeografiaV4 = {
         { id: "aviao", icone: "✈️", rotulo: "avião no céu", existe: false },
       ],
       conclusao:
-        "Boa observação, geoexplorador! Essa paisagem mistura CAMPO e CIDADE: tem rio, plantação e árvores (natureza), mas também estrada e prédios (feito por gente). A gente chama isso de área DE TRANSIÇÃO — nem totalmente rural, nem totalmente urbana. É assim que muitos lugares do Brasil realmente são.",
+        "Boa observação, geoexplorador! Essa paisagem mistura CAMPO e CIDADE: tem rio, plantação e árvores (natureza), mas também estrada e vilarejo (feito por gente). A gente chama isso de área DE TRANSIÇÃO — nem totalmente rural, nem totalmente urbana. É assim que muitos lugares do Brasil realmente são.",
+    },
+  },
+
+  momento08_laboratorio: {
+    bloco: {
+      instrucao:
+        "Você é o arquiteto. Escolha o TERRENO e o CLIMA — o laboratório mostra que casa aparece nesse lugar. Experimente combinações diferentes!",
+      variaveis: [
+        {
+          id: "terreno",
+          rotulo: "Terreno",
+          opcoes: [
+            { valor: "rio", icone: "🌊", rotulo: "Beira de rio" },
+            { valor: "cidade", icone: "🏙️", rotulo: "Cidade grande" },
+            { valor: "campo", icone: "🌾", rotulo: "Campo aberto" },
+            { valor: "floresta", icone: "🌳", rotulo: "Dentro da floresta" },
+          ],
+        },
+        {
+          id: "clima",
+          rotulo: "Clima",
+          opcoes: [
+            { valor: "chuvoso", icone: "🌧️", rotulo: "Muita chuva" },
+            { valor: "quente", icone: "☀️", rotulo: "Calor seco" },
+            { valor: "umido", icone: "🥵", rotulo: "Quente e úmido" },
+          ],
+        },
+      ],
+      resultados: [
+        {
+          quando: { terreno: "rio", clima: "chuvoso" },
+          imagemUrl: ribeirinhaImg,
+          descricao:
+            "🌊 Casa RIBEIRINHA sobre palafitas! Como o rio sobe muito com a chuva, a casa precisa ficar erguida em estacas de madeira pra família continuar seca na cheia.",
+        },
+        {
+          quando: { terreno: "rio", clima: "umido" },
+          imagemUrl: ribeirinhaImg,
+          descricao:
+            "🌊 Casa ribeirinha de madeira. No calor úmido, o telhado alto e as paredes de madeira deixam o ar passar — assim a casa fica fresca mesmo com o abafamento.",
+        },
+        {
+          quando: { terreno: "rio", clima: "quente" },
+          imagemUrl: ribeirinhaImg,
+          descricao:
+            "🌊 Casa perto do rio. Como o rio quase não sobe no clima seco, a casa pode ser mais baixa — mas ainda usa madeira pra ficar fresca no calor.",
+        },
+        {
+          quando: { terreno: "cidade", clima: "chuvoso" },
+          imagemUrl: casaUrbanaImg,
+          descricao:
+            "🏠 Casa da cidade com telhado bem inclinado. A telha vermelha faz a chuva escorrer rápido e o muro protege o quintal.",
+        },
+        {
+          quando: { terreno: "cidade", clima: "quente" },
+          imagemUrl: apartamentoImg,
+          descricao:
+            "🏢 Apartamento! Como muita gente quer morar na cidade e sobra pouco chão, os prédios crescem PRA CIMA — várias famílias no mesmo pedaço de terra.",
+        },
+        {
+          quando: { terreno: "cidade", clima: "umido" },
+          imagemUrl: apartamentoImg,
+          descricao:
+            "🏢 Prédio com muitas janelas. Nas cidades quentes e úmidas, as janelas grandes deixam o vento passar pra refrescar cada apartamento.",
+        },
+        {
+          quando: { terreno: "campo", clima: "chuvoso" },
+          imagemUrl: sitioImg,
+          descricao:
+            "🌾 Casa de sítio com varanda coberta. No campo com muita chuva, a varanda protege a família e ainda dá pra guardar ferramentas de trabalho.",
+        },
+        {
+          quando: { terreno: "campo", clima: "quente" },
+          imagemUrl: sitioImg,
+          descricao:
+            "🌾 Sítio com casa simples e árvore grande. No calor seco, a árvore vira 'ar condicionado natural' — faz sombra pra família e pros animais.",
+        },
+        {
+          quando: { terreno: "campo", clima: "umido" },
+          imagemUrl: sitioImg,
+          descricao:
+            "🌾 Casa de sítio com telhado alto. No calor úmido do campo, o telhado alto puxa o ar quente pra cima e mantém o dia a dia mais fresco.",
+        },
+        {
+          quando: { terreno: "floresta", clima: "umido" },
+          imagemUrl: aldeiaImg,
+          descricao:
+            "🛖 OCA indígena! Feita de madeira, cipó e palha da própria floresta. A palha deixa o ar passar — perfeita pro calor úmido da mata.",
+        },
+        {
+          quando: { terreno: "floresta", clima: "chuvoso" },
+          imagemUrl: aldeiaImg,
+          descricao:
+            "🛖 Oca com teto de palha bem inclinado. A chuva forte escorre rápido pelas folhas de palmeira sem molhar a família por dentro.",
+        },
+        {
+          quando: { terreno: "floresta", clima: "quente" },
+          imagemUrl: aldeiaImg,
+          descricao:
+            "🛖 Oca fresquinha! O teto de palha bloqueia o sol e a madeira não esquenta como o cimento. Mesmo com calor lá fora, dentro fica agradável.",
+        },
+      ],
+      padraoTexto:
+        "Escolha um TERRENO e um CLIMA pra ver que casa aparece nesse lugar.",
     },
   },
 
