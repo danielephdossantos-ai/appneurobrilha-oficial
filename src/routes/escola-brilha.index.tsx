@@ -323,6 +323,30 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
+                        const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
+                        if (cursoV4) {
+                          const totalAulas = cursoV4.unidades.reduce((s, u) => s + u.aulas.length, 0);
+                          return (
+                            <Link
+                              key={disc}
+                              to="/escola-brilha/curso/$slug"
+                              params={{ slug: cursoV4.slug }}
+                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                              style={{
+                                background: `linear-gradient(135deg, ${cursoV4.corPrimaria}, ${cursoV4.corSecundaria})`,
+                              }}
+                            >
+                              <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                {cursoV4.disciplina} · {cursoV4.ano}
+                              </div>
+                              <div className="text-lg leading-tight mt-0.5">{cursoV4.titulo}</div>
+                              <div className="text-[11px] font-bold opacity-90 mt-1">
+                                {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
+                                {totalAulas === 1 ? "" : "eis"} →
+                              </div>
+                            </Link>
+                          );
+                        }
                         return (
                           <div key={disc} className="rounded-xl bg-white border border-[#0d1f55]/10 overflow-hidden">
                             <button
