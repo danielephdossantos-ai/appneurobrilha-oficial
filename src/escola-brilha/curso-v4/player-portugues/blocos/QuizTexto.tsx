@@ -200,12 +200,12 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
         </div>
       ) : (
         <div
-          className={`grid gap-3 justify-items-center ${
+          className={`grid gap-3 justify-items-stretch sm:justify-items-center ${
             quiz.opcoes.length <= 2
-              ? "grid-cols-2"
+              ? "grid-cols-1 sm:grid-cols-2"
               : quiz.opcoes.length === 3
-                ? "grid-cols-3"
-                : "grid-cols-2 sm:grid-cols-4"
+                ? "grid-cols-1 sm:grid-cols-3"
+                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
           }`}
         >
           {quiz.opcoes.map((op, i) => {
@@ -218,7 +218,7 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
             if (!revelou) {
               estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
             } else if (marcada && certa) {
-              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-110";
+              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-105";
             } else if (marcada && !certa) {
               estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
             } else if (certa) {
@@ -227,15 +227,21 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
               estado = "bg-slate-200 text-slate-400";
             }
 
+            // No CELULAR: sempre pílula larga (uma resposta por linha, texto
+            // dentro do quadrado). No DESKTOP (sm+): mantém o formato antigo —
+            // bolinha se o texto for curto, pílula se for longo.
             const curto = op.length <= 8;
-            const forma = curto
-              ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
-              : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
-            const tamanhoTexto = op.length <= 3
-              ? "text-4xl sm:text-5xl"
+            const superCurto = op.length <= 3;
+            const forma = superCurto
+              ? "w-full min-h-20 rounded-3xl px-4 py-4 sm:w-28 sm:h-28 sm:min-h-0 sm:rounded-full"
               : curto
-                ? "text-xl sm:text-2xl"
-                : "text-sm sm:text-base leading-snug";
+                ? "w-full min-h-20 rounded-3xl px-4 py-4 sm:w-28 sm:h-28 sm:min-h-0 sm:rounded-full"
+                : "w-full min-h-24 sm:min-h-28 rounded-3xl sm:rounded-[2rem] px-4 py-4";
+            const tamanhoTexto = superCurto
+              ? "text-3xl sm:text-5xl"
+              : curto
+                ? "text-lg sm:text-2xl"
+                : "text-base sm:text-base leading-snug";
             return (
               <button
                 key={i}
@@ -243,7 +249,7 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
                 onClick={() => tocar(i)}
                 className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
               >
-                <span className={tamanhoTexto}>{op}</span>
+                <span className={`${tamanhoTexto} break-words px-1`}>{op}</span>
                 {revelou && marcada && certa && (
                   <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
                 )}
