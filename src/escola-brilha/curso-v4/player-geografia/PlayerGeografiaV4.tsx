@@ -25,23 +25,24 @@ type Props = {
   onConcluir?: () => void;
 };
 
+const MOMENTOS = [
+  { id: "m1", label: "🛰️ Missão" },
+  { id: "m2", label: "📸 Galeria" },
+  { id: "m3", label: "🔎 Investigador" },
+  { id: "m4", label: "🤔 Hipóteses" },
+  { id: "m5", label: "⚖️ Comparar" },
+  { id: "m6", label: "📊 Painel" },
+  { id: "m7", label: "🕵️ Sozinho" },
+  { id: "m8", label: "🧪 Laboratório" },
+  { id: "m9", label: "🏗️ Arquiteto" },
+  { id: "m10", label: "🏠 Em Família" },
+] as const;
+
 export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: Props) {
   const [ativo, setAtivo] = useState<string>("m1");
 
-  // Menu dinâmico: só mostra seções que têm conteúdo pra essa aula.
-  // Assim aulas infantis (2º ano) ficam curtas; 5º+ desbloqueia o resto.
-  const momentos = [
-    { id: "m1", label: "🛰️ Missão", show: true },
-    { id: "m2", label: "📸 Galeria", show: aula.momento02_galeria.bloco.lugares.length > 0 },
-    { id: "m3", label: "🔎 Investigador", show: aula.momento03_investigador.blocos.length > 0 },
-    { id: "m4", label: "🤔 Hipóteses", show: aula.momento04_hipoteses.perguntas.length > 0 },
-    { id: "m5", label: "⚖️ Comparar", show: aula.momento05_comparar.comparacoes.length > 0 },
-    { id: "m6", label: "📊 Painel", show: aula.momento06_painel.bloco.linhas.length > 0 },
-    { id: "m10", label: "🏠 Em Família", show: true },
-  ].filter((m) => m.show);
-
   useEffect(() => {
-    const els = momentos.map((m) => document.getElementById(m.id)).filter(
+    const els = MOMENTOS.map((m) => document.getElementById(m.id)).filter(
       Boolean,
     ) as HTMLElement[];
     if (!els.length) return;
@@ -83,7 +84,7 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
       <div className="max-w-5xl mx-auto px-4 py-6 lg:flex lg:gap-6">
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24 space-y-1">
-            {momentos.map((m) => (
+            {MOMENTOS.map((m) => (
               <a
                 key={m.id}
                 href={`#${m.id}`}
@@ -156,8 +157,10 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </Secao>
           )}
 
+          <EmBreve id="m7" label="🕵️ Investigação livre" descricao="Foto nova pra você caçar pistas sozinho. Vem na Etapa C." />
 
-
+          <EmBreve id="m8" label="🧪 Laboratório do Explorador" descricao="Muda o clima e o terreno, veja a moradia mudar. Vem na Etapa C." />
+          <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
 
           {/* M10 · Missão em família */}
           <Secao id="m10" label="🏠 Missão em Família">
@@ -216,5 +219,16 @@ function Secao({
   );
 }
 
-
-
+function EmBreve({ id, label, descricao }: { id: string; label: string; descricao: string }) {
+  return (
+    <section
+      id={id}
+      className="scroll-mt-24 rounded-3xl border border-dashed border-emerald-400/25 bg-white/[0.02] p-5 text-center"
+    >
+      <div className="text-[11px] uppercase tracking-widest text-emerald-300 mb-1">
+        {label}
+      </div>
+      <div className="text-white/60 text-sm">{descricao}</div>
+    </section>
+  );
+}
