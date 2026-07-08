@@ -158,7 +158,9 @@ export function PlayerGeografiaV4({ aula, cursoSlug, voltarPara, onConcluir }: P
             </Secao>
           )}
 
-          <EmBreve id="m7" label="🕵️ Investigação livre" descricao="Foto nova pra você caçar pistas sozinho. Vem na Etapa C." />
+          <Secao id="m7" label="🕵️ Investigação Livre">
+            <InvestigacaoLivre data={aula.momento07_investigacaoLivre.bloco} />
+          </Secao>
 
           <EmBreve id="m8" label="🧪 Laboratório do Explorador" descricao="Muda o clima e o terreno, veja a moradia mudar. Vem na Etapa C." />
           <EmBreve id="m9" label="🏗️ Arquiteto do Lugar Certo" descricao="Minijogo: construa a casa certa. Vem na Etapa C." />
