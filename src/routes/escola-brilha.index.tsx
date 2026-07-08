@@ -10,6 +10,7 @@ import { RevisoesRecomendadas } from "@/escola-brilha/RevisoesRecomendadas";
 import { ProximaMissao } from "@/escola-brilha/ProximaMissao";
 import { MasteryBadge, type NivelDominio } from "@/escola-brilha/MasteryBadge";
 import { temaDaDisciplina, slugDisc } from "@/escola-brilha/missoes-tema";
+import { mascoteDaDisciplina } from "@/escola-brilha/mascotes-disciplina";
 
 
 
@@ -317,24 +318,27 @@ function EscolaBrilhaCatalogo() {
                         const serieSlug =
                           serie === "Educação Infantil" ? "educacao-infantil" : "1ano";
                         if (usaTrilhaDuo) {
+                          const masc = mascoteDaDisciplina(disc);
+                          const serieLabel = serie === "Educação Infantil" ? "Educação Infantil" : "1º Ano";
                           return (
                             <Link
                               key={disc}
                               to="/escola-brilha/trilha/$serie/$disc"
                               params={{ serie: serieSlug, disc }}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl bg-white border border-[#0d1f55]/10 active:scale-[0.995]"
+                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                              style={{
+                                background: `linear-gradient(135deg, ${masc.corPrimaria}, ${masc.corSecundaria})`,
+                              }}
                             >
-                              <div className="h-9 w-9 rounded-lg bg-[#9B6CFF]/15 grid place-items-center shrink-0 text-lg">
-                                {tema.emoji}
+                              <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                {tema.nome} · {serieLabel}
                               </div>
-                              <div className="flex-1 text-left">
-                                <div className="text-sm font-black text-[#0d1f55]">{tema.nome}</div>
-                                <div className="text-[10px] text-[#0d1f55]/55 font-black uppercase tracking-widest">
-                                  Trilha Duolingo · {lista.length} aula{lista.length === 1 ? "" : "s"} · Diploma
-                                </div>
+                              <div className="text-lg leading-tight mt-0.5">
+                                {tema.emoji} {tema.nome} com {masc.nome}
                               </div>
-                              <div className="text-[#0d1f55]/50">
-                                <ChevronRight className="h-4 w-4" />
+                              <div className="text-[11px] font-bold opacity-90 mt-1">
+                                {lista.length} aula{lista.length === 1 ? "" : "s"} disponível
+                                {lista.length === 1 ? "" : "eis"} · Diploma →
                               </div>
                             </Link>
                           );
