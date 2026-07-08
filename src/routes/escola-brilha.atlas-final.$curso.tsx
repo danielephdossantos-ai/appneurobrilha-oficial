@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { getCursoAny, listAulasFlat } from "@/escola-brilha/curso-v4/registry";
 import { useAppState } from "@/core/store";
+import { DiplomaBrilha } from "@/components/DiplomaBrilha";
+import { PERSONAGENS } from "@/escola-brilha/mascotes-personagens";
+
 
 /**
  * Grande Projeto Final — "Meu Atlas do Município"
@@ -286,6 +289,11 @@ function AtlasFinal() {
           onClick={() => falar(narracaoIntro)}
           className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-sm"
         >
+          <img
+            src={PERSONAGENS.aurora.img}
+            alt="Aurora"
+            className="h-6 w-6 object-contain"
+          />
           🔊 Ouvir Aurora e Brilha
         </button>
       </section>
@@ -438,73 +446,19 @@ function AtlasFinal() {
         </motion.button>
       </section>
 
-      {/* MODAL DIPLOMA */}
+      {/* MODAL DIPLOMA — componente padrão do app */}
       <AnimatePresence>
         {diplomaAberto && (
-          <motion.div
-            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setDiplomaAberto(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.7, rotate: -4 }}
-              animate={{ scale: 1, rotate: 0 }}
-              exit={{ scale: 0.7, rotate: 4 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative bg-[#fdf6e3] text-[#1a0d3d] rounded-2xl p-8 md:p-12 max-w-xl w-full shadow-2xl border-8 border-double border-amber-500"
-            >
-              <div className="absolute -top-4 -right-4 text-5xl">🎖️</div>
-              <div className="text-center space-y-4">
-                <div className="text-xs uppercase tracking-[0.3em] text-amber-700">
-                  Escola Brilha · SPEB 1.0
-                </div>
-                <h2 className="text-2xl md:text-3xl font-black">
-                  Diploma de Grande Explorador
-                </h2>
-                <div className="text-sm text-[#1a0d3d]/70">
-                  Concedido a
-                </div>
-                <div className="text-3xl md:text-4xl font-black tracking-wide border-y-2 border-amber-500 py-3 my-2">
-                  {nome}
-                </div>
-                <p className="text-sm md:text-base">
-                  Por concluir com sucesso o curso <b>{curso.titulo}</b>,
-                  desvendando todos os mistérios do município e conquistando
-                  as 5 medalhas do Atlas.
-                </p>
-                <div className="flex justify-around pt-6 text-xs">
-                  <div>
-                    <div className="text-2xl">🐦</div>
-                    <div className="border-t border-[#1a0d3d]/40 mt-1 pt-1 px-3">
-                      Aurora
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-2xl">✨</div>
-                    <div className="border-t border-[#1a0d3d]/40 mt-1 pt-1 px-3">
-                      Brilha
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-2 justify-center pt-4">
-                  <button
-                    onClick={() => window.print()}
-                    className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-full text-sm"
-                  >
-                    🖨️ Salvar / Imprimir
-                  </button>
-                  <button
-                    onClick={() => setDiplomaAberto(false)}
-                    className="bg-white/60 hover:bg-white text-[#1a0d3d] font-bold px-4 py-2 rounded-full text-sm border border-[#1a0d3d]/20"
-                  >
-                    Fechar
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          <DiplomaBrilha
+            aluno={nome}
+            titulo="Grande Explorador do Município"
+            curso={curso.titulo}
+            descricao={`Por concluir com sucesso o curso ${curso.titulo}, desvendando todos os mistérios do município e conquistando as ${paginas.length} medalhas do Atlas.`}
+            mascote={PERSONAGENS.aurora}
+            numeroColecao={1}
+            totalColecao={30}
+            onFechar={() => setDiplomaAberto(false)}
+          />
         )}
       </AnimatePresence>
     </div>
