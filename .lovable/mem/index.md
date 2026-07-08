@@ -21,3 +21,4 @@ Aula EF01MA02 é gabarito TRAVADO.
 - [Contas +/− animadas](mem://features/operacao-visual) — OperacaoVisual.
 - [Formato por disciplina](mem://preferences/formato-por-disciplina) — Mecânica por disciplina.
 - [Geografia 2º Ano UI interativa](mem://preferences/geo-2ano-ui-interativa) — Regra de Ouro de UI + 5 movimentos pedagógicos.
+- [Blocos aditivos por disciplina](mem://preferences/blocos-aditivos) — Novos tipos de bloco/minijogo são PERMITIDOS quando aditivos ao player padrão (referência: `LaboratorioClima`).
