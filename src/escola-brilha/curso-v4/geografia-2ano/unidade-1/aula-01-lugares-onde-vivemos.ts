@@ -5,6 +5,7 @@ import casaModerna from "@/assets/neuro-treino/objetos/casa-moderna.png";
 import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
 import arvore from "@/assets/neuro-treino/objetos/arvore.png";
+import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
 import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
 import coruja from "@/assets/neuro-treino/objetos/coruja.png";
 import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
@@ -288,7 +289,7 @@ export const aula01: AulaPortuguesV4 = {
             opcoes: [
               { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
-              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
             ],
             correta: "ribeirinha",
             feedbackAcerto:
@@ -328,7 +329,7 @@ export const aula01: AulaPortuguesV4 = {
             opcoes: [
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
-              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
             ],
             correta: "fazenda",
             feedbackAcerto:
@@ -346,7 +347,7 @@ export const aula01: AulaPortuguesV4 = {
                 "É uma aldeia de povos indígenas. Constroem com o que a FLORESTA oferece.",
             },
             opcoes: [
-              { id: "oca", nome: "Oca de madeira e palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de madeira e palha", imagemUrl: ocaPalha },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
             ],
