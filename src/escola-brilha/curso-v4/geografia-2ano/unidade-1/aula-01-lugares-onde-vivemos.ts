@@ -289,7 +289,7 @@ export const aula01: AulaPortuguesV4 = {
             opcoes: [
               { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
-              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
             ],
             correta: "ribeirinha",
             feedbackAcerto:
@@ -329,7 +329,7 @@ export const aula01: AulaPortuguesV4 = {
             opcoes: [
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
-              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de palha", imagemUrl: ocaPalha },
             ],
             correta: "fazenda",
             feedbackAcerto:
@@ -347,7 +347,7 @@ export const aula01: AulaPortuguesV4 = {
                 "É uma aldeia de povos indígenas. Constroem com o que a FLORESTA oferece.",
             },
             opcoes: [
-              { id: "oca", nome: "Oca de madeira e palha", imagemUrl: arvore },
+              { id: "oca", nome: "Oca de madeira e palha", imagemUrl: ocaPalha },
               { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
               { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
             ],
