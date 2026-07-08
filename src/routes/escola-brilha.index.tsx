@@ -292,7 +292,7 @@ function EscolaBrilhaCatalogo() {
                         </div>
                       )}
                       {disciplinas.map((disc) => {
-                        const lista = arvore[serie][disc];
+                        const lista = arvore[serie][disc] ?? [];
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
