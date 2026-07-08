@@ -121,38 +121,6 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
-  // ENSINO VISUAL (opcional) — quebra o conceito de município em 3 passos
-  momento_ensinoVisual: {
-    titulo: "Entendendo o município passo a passo",
-    instrucao:
-      "Toca em cada card pra Aurora te contar o que é cada parte do município.",
-    blocos: [
-      {
-        titulo: "1) Um município tem DOIS pedaços",
-        texto:
-          "Imagine um mapa GRANDE. Uma parte é cheia de prédios e ruas — é a ZONA URBANA (cidade). A outra parte é cheia de plantação e árvore — é a ZONA RURAL (campo).",
-        imagemUrl: mapa,
-      },
-      {
-        titulo: "2) Zona URBANA = cidade",
-        texto:
-          "Casa colada com casa, prédio, rua, escola, hospital, mercado, praça. Tudo pertinho.",
-        imagemUrl: cidade,
-      },
-      {
-        titulo: "3) Zona RURAL = campo",
-        texto:
-          "Casa longe uma da outra, muita terra, plantação, vaca, galinha, rio, árvore.",
-        imagemUrl: campo,
-      },
-      {
-        titulo: "4) Os dois pedaços = UM município",
-        texto:
-          "A cidade AJUDA o campo (leva remédio, escola). O campo AJUDA a cidade (leva comida). Juntos formam UM lugar só.",
-        imagemUrl: mapaPercurso,
-      },
-    ],
-  },
 
   // 4 · LEITURA GUIADA
   momento04_leituraGuiada: {
