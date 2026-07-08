@@ -184,5 +184,7 @@ export function DiplomaBrilha({
         </div>
       </motion.div>
     </motion.div>
+    </>
   );
 }
+
