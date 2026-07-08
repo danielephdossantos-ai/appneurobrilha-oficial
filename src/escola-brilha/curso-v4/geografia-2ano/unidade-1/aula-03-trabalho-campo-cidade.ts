@@ -485,7 +485,3 @@ export const aula03: AulaPortuguesV4 = {
   },
 };
 
-// helper só pra manter o array `pistas` legível acima
-function caminhao(img: string) {
-  return img;
-}
