@@ -6,6 +6,10 @@ import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
 import arvore from "@/assets/neuro-treino/objetos/arvore.png";
 import ocaPalha from "@/assets/neuro-treino/objetos/oca-palha.png";
+import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
+import materialMadeiraFolhas from "@/assets/neuro-treino/objetos/material-madeira-folhas.png";
+import materialConcretoVidro from "@/assets/neuro-treino/objetos/material-concreto-vidro.png";
+import materialFerroPlastico from "@/assets/neuro-treino/objetos/material-ferro-plastico.png";
 import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
 import coruja from "@/assets/neuro-treino/objetos/coruja.png";
 import estrela from "@/assets/neuro-treino/objetos/estrela-brilhante.png";
@@ -243,6 +247,7 @@ export const aula01: AulaPortuguesV4 = {
       {
         pergunta: "Como se chama a moradia dos povos indígenas da aldeia?",
         opcoes: ["Oca", "Prédio", "Apartamento"],
+        opcoesImagens: [ocaPalha, cidade, apartamento],
         correta: 0,
         feedbackAcerto: "🎉 Isso! OCA.",
         feedbackErro: "Está na primeira frase: '…moram numa …'.",
@@ -254,6 +259,11 @@ export const aula01: AulaPortuguesV4 = {
           "Concreto e vidro",
           "Madeira, folhas e cipó",
           "Ferro e plástico",
+        ],
+        opcoesImagens: [
+          materialConcretoVidro,
+          materialMadeiraFolhas,
+          materialFerroPlastico,
         ],
         correta: 1,
         feedbackAcerto:

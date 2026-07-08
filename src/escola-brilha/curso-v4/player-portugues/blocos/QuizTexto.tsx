@@ -139,65 +139,125 @@ export function QuizTexto({ quiz }: { quiz: QuizTextoData }) {
       {silabas && <SilabasParaTocar silabas={silabas} />}
 
 
-      {/* Bolas de opção — GRANDES pra tocar */}
-      <div
-        className={`grid gap-3 justify-items-center ${
-          quiz.opcoes.length <= 2
-            ? "grid-cols-2"
-            : quiz.opcoes.length === 3
-              ? "grid-cols-3"
-              : "grid-cols-2 sm:grid-cols-4"
-        }`}
-      >
-        {quiz.opcoes.map((op, i) => {
-          const cor = CORES[i % CORES.length];
-          const marcada = escolha === i;
-          const certa = i === quiz.correta;
-          const revelou = escolha !== null;
+      {/* Se a pergunta tem opcoesImagens (mesmo tamanho de opcoes),
+          renderiza cards ilustrados no padrão ArquitetoLugar:
+          imagem em cima + rótulo em pill escura embaixo. */}
+      {quiz.opcoesImagens && quiz.opcoesImagens.length === quiz.opcoes.length ? (
+        <div
+          className={`grid gap-3 ${
+            quiz.opcoes.length <= 2
+              ? "grid-cols-2"
+              : quiz.opcoes.length === 3
+                ? "grid-cols-3"
+                : "grid-cols-2 sm:grid-cols-4"
+          }`}
+        >
+          {quiz.opcoes.map((op, i) => {
+            const marcada = escolha === i;
+            const certa = i === quiz.correta;
+            const revelou = escolha !== null;
 
-          let estado = "";
-          if (!revelou) {
-            estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
-          } else if (marcada && certa) {
-            estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-110";
-          } else if (marcada && !certa) {
-            estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
-          } else if (certa) {
-            estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
-          } else {
-            estado = "bg-slate-200 text-slate-400";
-          }
+            let borda = "border-4 border-transparent bg-white hover:scale-105 active:scale-95";
+            if (revelou && marcada && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-8 ring-emerald-200 scale-105";
+            else if (revelou && marcada && !certa) borda = "border-4 border-rose-500 bg-rose-50 ring-8 ring-rose-200 animate-pulse";
+            else if (revelou && certa) borda = "border-4 border-emerald-500 bg-emerald-50 ring-4 ring-emerald-200";
+            else if (revelou) borda = "border-4 border-transparent bg-slate-100 opacity-60";
 
-          const curto = op.length <= 8;
-          const forma = curto
-            ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
-            : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
-          const tamanhoTexto = op.length <= 3
-            ? "text-4xl sm:text-5xl"
-            : curto
-              ? "text-xl sm:text-2xl"
-              : "text-sm sm:text-base leading-snug";
-          return (
-            <button
-              key={i}
-              disabled={revelou}
-              onClick={() => tocar(i)}
-              className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
-            >
-              <span className={tamanhoTexto}>{op}</span>
-              {revelou && marcada && certa && (
-                <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
-              )}
-              {revelou && marcada && !certa && (
-                <span className="absolute -top-2 -right-2 text-3xl">💭</span>
-              )}
-              {revelou && !marcada && certa && (
-                <span className="absolute -top-2 -right-2 text-2xl">✅</span>
-              )}
-            </button>
-          );
-        })}
-      </div>
+            return (
+              <button
+                key={i}
+                disabled={revelou}
+                onClick={() => tocar(i)}
+                className={`relative flex flex-col items-stretch rounded-3xl shadow-xl overflow-hidden transition-all duration-200 ${borda}`}
+              >
+                <div className="relative w-full h-24 md:h-28 bg-slate-50">
+                  <img
+                    src={quiz.opcoesImagens![i]}
+                    alt={op}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="absolute inset-0 w-full h-full object-contain p-1"
+                  />
+                </div>
+                <div className="bg-black/70 px-2 py-1.5">
+                  <span className="block text-white text-xs sm:text-sm font-black leading-tight text-center">
+                    {op}
+                  </span>
+                </div>
+                {revelou && marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+                )}
+                {revelou && marcada && !certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+                )}
+                {revelou && !marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div
+          className={`grid gap-3 justify-items-center ${
+            quiz.opcoes.length <= 2
+              ? "grid-cols-2"
+              : quiz.opcoes.length === 3
+                ? "grid-cols-3"
+                : "grid-cols-2 sm:grid-cols-4"
+          }`}
+        >
+          {quiz.opcoes.map((op, i) => {
+            const cor = CORES[i % CORES.length];
+            const marcada = escolha === i;
+            const certa = i === quiz.correta;
+            const revelou = escolha !== null;
+
+            let estado = "";
+            if (!revelou) {
+              estado = `bg-gradient-to-br ${cor.bg} text-white hover:scale-105 active:scale-95`;
+            } else if (marcada && certa) {
+              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200 scale-110";
+            } else if (marcada && !certa) {
+              estado = "bg-gradient-to-br from-rose-400 to-red-600 text-white ring-8 ring-rose-200 animate-pulse";
+            } else if (certa) {
+              estado = "bg-gradient-to-br from-emerald-400 to-green-600 text-white ring-8 ring-emerald-200";
+            } else {
+              estado = "bg-slate-200 text-slate-400";
+            }
+
+            const curto = op.length <= 8;
+            const forma = curto
+              ? "w-24 h-24 sm:w-28 sm:h-28 rounded-full"
+              : "min-h-24 sm:min-h-28 w-full rounded-[2rem] px-4 py-4";
+            const tamanhoTexto = op.length <= 3
+              ? "text-4xl sm:text-5xl"
+              : curto
+                ? "text-xl sm:text-2xl"
+                : "text-sm sm:text-base leading-snug";
+            return (
+              <button
+                key={i}
+                disabled={revelou}
+                onClick={() => tocar(i)}
+                className={`relative ${forma} font-black shadow-xl transition-all duration-200 grid place-items-center text-center ${estado}`}
+              >
+                <span className={tamanhoTexto}>{op}</span>
+                {revelou && marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">🎉</span>
+                )}
+                {revelou && marcada && !certa && (
+                  <span className="absolute -top-2 -right-2 text-3xl">💭</span>
+                )}
+                {revelou && !marcada && certa && (
+                  <span className="absolute -top-2 -right-2 text-2xl">✅</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Feedback do professor */}
       {escolha !== null && (
