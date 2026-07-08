@@ -11,6 +11,7 @@ import { ArrastarParaAlvo } from "./blocos/ArrastarParaAlvo";
 import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
+import { LaboratorioClima } from "./blocos/LaboratorioClima";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
