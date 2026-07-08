@@ -50,6 +50,7 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
     (m) =>
       !("opcional" in m && m.opcional) ||
       (m.id === "mmini" && !!aula.momento_minijogo) ||
+      (m.id === "mlab" && !!aula.momento_laboratorio) ||
       (m.id === "mev" && !!aula.momento_ensinoVisual),
   );
 
