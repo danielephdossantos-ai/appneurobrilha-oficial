@@ -258,7 +258,9 @@ function EscolaBrilhaCatalogo() {
         ) : (
           <div className="space-y-2">
             {SERIES_ORDEM.map((serie) => {
-              const disciplinas = Object.keys(arvore[serie]).sort((a, b) => a.localeCompare(b));
+              const discsArvore = Object.keys(arvore[serie]);
+              const discsCurso = Object.keys(cursoPorSerieDisc[serie] ?? {});
+              const disciplinas = Array.from(new Set([...discsArvore, ...discsCurso])).sort((a, b) => a.localeCompare(b));
               const total = contarSerie(serie);
               const aberta = serieAberta === serie;
               return (
@@ -290,7 +292,7 @@ function EscolaBrilhaCatalogo() {
                         </div>
                       )}
                       {disciplinas.map((disc) => {
-                        const lista = arvore[serie][disc];
+                        const lista = arvore[serie][disc] ?? [];
                         const chave = `${serie}::${disc}`;
                         const discAtiva = discAberta === chave;
                         const tema = temaDaDisciplina(disc);
