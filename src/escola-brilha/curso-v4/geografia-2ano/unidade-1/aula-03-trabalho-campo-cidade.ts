@@ -2,26 +2,18 @@ import type { AulaPortuguesV4 } from "../../types";
 import campo from "@/assets/neuro-treino/objetos/campo.png";
 import cidade from "@/assets/neuro-treino/objetos/cidade.png";
 import vaca from "@/assets/neuro-treino/objetos/vaca.png";
-import galinha from "@/assets/neuro-treino/objetos/galinha.png";
 import semente from "@/assets/neuro-treino/objetos/semente.png";
-import plantaPequena from "@/assets/neuro-treino/objetos/planta-pequena.png";
 import regador from "@/assets/neuro-treino/objetos/regador.png";
-import arvore from "@/assets/neuro-treino/objetos/arvore.png";
 import padaria from "@/assets/neuro-treino/objetos/padaria.png";
 import mercado from "@/assets/neuro-treino/objetos/mercado.png";
 import postoSaude from "@/assets/neuro-treino/objetos/posto-saude.png";
 import escola from "@/assets/neuro-treino/objetos/escola.png";
 import professora from "@/assets/neuro-treino/objetos/professora.png";
 import cozinheira from "@/assets/neuro-treino/objetos/cozinheira.png";
-import funcionarioLimpeza from "@/assets/neuro-treino/objetos/funcionario-limpeza.png";
-import artesao from "@/assets/neuro-treino/objetos/artesao.png";
 import trem from "@/assets/neuro-treino/objetos/trem.png";
 import carro from "@/assets/neuro-treino/objetos/carro.png";
 import maca from "@/assets/neuro-treino/objetos/maca.png";
-import banana from "@/assets/neuro-treino/objetos/banana.png";
 import mapa from "@/assets/neuro-treino/objetos/mapa.png";
-import bairro from "@/assets/neuro-treino/objetos/bairro.png";
-import familia from "@/assets/neuro-treino/objetos/familia-tradicional.png";
 
 /**
  * Geografia · 2º Ano · Unidade 1 · Aula 03
