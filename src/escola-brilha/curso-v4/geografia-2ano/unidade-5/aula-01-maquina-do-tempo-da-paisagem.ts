@@ -183,31 +183,39 @@ export const aula01: AulaPortuguesV4 = {
       "Cada foto mostra a paisagem em um TEMPO. Descubra qual é ANTES e qual é HOJE.",
     perguntas: [
       {
-        pergunta: "Qual imagem mostra a paisagem ANTIGA (natureza)?",
-        opcoes: ["Muita árvore e rio", "Prédios altos", "Avenida com carros"],
-        opcoesImagens: [arvore, predio, rua],
+        pergunta: "Qual imagem mostra a paisagem ANTIGA (natureza/campo)?",
+        opcoes: [
+          "Campo aberto com árvores",
+          "Prédios altos",
+          "Avenida com carros",
+        ],
+        opcoesImagens: [campo, predio, rua],
         correta: 0,
-        feedbackAcerto: "🎉 Isso! Muita ÁRVORE = paisagem ANTIGA.",
+        feedbackAcerto: "🎉 Isso! CAMPO com árvores = paisagem ANTIGA.",
         feedbackErro:
-          "Antigamente tinha mais NATUREZA — árvores, rios, poucas casas.",
+          "Antigamente tinha mais NATUREZA — campo aberto, árvores, poucas casas.",
       },
       {
         pergunta: "Qual imagem mostra a paisagem MODERNA (cidade grande)?",
-        opcoes: ["Uma flor no campo", "Prédios altos e avenidas", "Só árvores"],
-        opcoesImagens: [flor, cidade, arvore],
+        opcoes: [
+          "Uma flor no campo",
+          "Cidade com prédios e avenidas",
+          "Um campo com árvores",
+        ],
+        opcoesImagens: [flor, cidade, campo],
         correta: 1,
-        feedbackAcerto: "🎉 Certo! PRÉDIOS + AVENIDAS = paisagem MODERNA.",
+        feedbackAcerto: "🎉 Certo! CIDADE com PRÉDIOS = paisagem MODERNA.",
         feedbackErro:
           "Paisagem MODERNA da cidade grande tem PRÉDIOS e AVENIDAS.",
       },
       {
         pergunta: "E a PRAÇA arborizada da cidade é...",
         opcoes: [
-          "Um pedaço da natureza preservado",
-          "Uma fábrica gigante",
+          "Uma praça com árvores (natureza preservada)",
+          "Um prédio de apartamentos",
           "Um rio poluído",
         ],
-        opcoesImagens: [jardim, predio, rio],
+        opcoesImagens: [praca, apartamento, rio],
         correta: 0,
         feedbackAcerto:
           "🎉 Isso! A PRAÇA guarda um pedacinho da natureza antiga.",
