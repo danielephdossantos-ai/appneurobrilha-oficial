@@ -556,6 +556,8 @@ export type AulaPortuguesV4 = {
   momento08_leituraIndependente: MomentoLeituraIndependente;
   /** Opcional — quando presente, aparece entre a leitura independente e a revisão. */
   momento_minijogo?: MomentoMinijogo;
+  /** Opcional — laboratório interativo (Geografia/Ciências). Aparece depois do minijogo. */
+  momento_laboratorio?: MomentoLaboratorio;
   momento09_revisao: MomentoRevisaoPT;
   momento10_avaliacao: MomentoAvaliacaoPT;
   momento11_missaoFamilia: MomentoMissaoFamiliaPT;
