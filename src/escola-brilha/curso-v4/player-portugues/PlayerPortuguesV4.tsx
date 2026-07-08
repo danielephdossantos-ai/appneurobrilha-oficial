@@ -12,6 +12,7 @@ import { SelecionarItens } from "./blocos/SelecionarItens";
 import { MontarPalavra } from "./blocos/MontarPalavra";
 import { EnsinoVisual } from "./blocos/EnsinoVisual";
 import { LaboratorioClima } from "./blocos/LaboratorioClima";
+import { ArquitetoLugar } from "./blocos/ArquitetoLugar";
 
 /**
  * Player Português v4 — tela única com scroll, 11 momentos.
@@ -221,6 +222,9 @@ export function PlayerPortuguesV4({ aula, cursoSlug, voltarPara, onConcluir }: P
                   )}
                   {jogo.tipo === "laboratorioClima" && (
                     <LaboratorioClima data={jogo.bloco} />
+                  )}
+                  {jogo.tipo === "arquitetoLugar" && (
+                    <ArquitetoLugar data={jogo.bloco} />
                   )}
                 </Secao>
               );

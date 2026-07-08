@@ -487,12 +487,46 @@ export type LaboratorioClimaData = {
   };
 };
 
+/**
+ * Arquiteto do Lugar Certo (Geografia).
+ * Rodadas sequenciais: mostra UM cenário (lugar + moradores) no topo e
+ * 3 tipos de moradia embaixo. Criança escolhe a que combina com o lugar.
+ * Cada rodada tem feedback próprio e animação de construção no acerto.
+ */
+export type ArquitetoLugarData = {
+  instrucao: string;
+  rodadas: Array<{
+    id: string;
+    /** Cenário mostrado no topo. */
+    cenario: {
+      nome: string;
+      /** Emoji do lugar (ex.: 🌊, 🏙️, 🌾, 🌳). */
+      emojiLugar: string;
+      /** Emoji dos moradores (ex.: 🎣, 👨‍👩‍👧, 👩‍🌾). */
+      emojiMorador: string;
+      pista: string;
+    };
+    /** 3 opções de moradia. Uma correta, duas distratoras. */
+    opcoes: Array<{
+      id: string;
+      nome: string;
+      imagemUrl: string;
+    }>;
+    /** id da opção certa. */
+    correta: string;
+    feedbackAcerto: string;
+    feedbackErro: string;
+  }>;
+  feedbackFinal: string;
+};
+
 export type MinijogoPT =
   | { tipo: "arrastarParaAlvo"; titulo: string; bloco: ArrastarParaAlvoData }
   | { tipo: "selecionarItens"; titulo: string; bloco: SelecionarItensData }
   | { tipo: "montarPalavra"; titulo: string; bloco: MontarPalavraData }
   | { tipo: "ordenarSequencia"; titulo: string; bloco: OrdenarSequenciaData }
-  | { tipo: "laboratorioClima"; titulo: string; bloco: LaboratorioClimaData };
+  | { tipo: "laboratorioClima"; titulo: string; bloco: LaboratorioClimaData }
+  | { tipo: "arquitetoLugar"; titulo: string; bloco: ArquitetoLugarData };
 
 /** Bloco opcional de minijogo pedagógico dentro da aula. */
 export type MomentoMinijogo = {

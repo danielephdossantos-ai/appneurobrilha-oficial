@@ -264,35 +264,105 @@ export const aula01: AulaPortuguesV4 = {
     ],
   },
 
-  // MINIJOGO opcional — arrastar cada moradia pro lugar certo
+  // MINIJOGO — Arquiteto do Lugar Certo (rodadas sequenciais)
   momento_minijogo: {
-    titulo: "🧩 Cada casa no lugar certo",
+    titulo: "🏗️ Arquiteto do Lugar Certo",
     instrucao:
-      "Arraste cada MORADIA pro LUGAR onde ela costuma ficar.",
+      "Cada família mora num LUGAR diferente. Escolha a MORADIA que combina com o cenário!",
     jogo: {
-      tipo: "arrastarParaAlvo",
-      titulo: "Cada casa no lugar certo",
+      tipo: "arquitetoLugar",
+      titulo: "Arquiteto do Lugar Certo",
       bloco: {
-        instrucao: "Arraste cada moradia pro lugar dela.",
-        itens: [
-          { id: "apto", texto: "Prédio de apartamentos", imagemUrl: cidade, alvoId: "cidade" },
-          { id: "fazenda", texto: "Casa de fazenda", imagemUrl: casaModerna, alvoId: "campo" },
-          { id: "ribeirinha", texto: "Casa ribeirinha", imagemUrl: casaAntiga, alvoId: "rio" },
-          { id: "oca", texto: "Oca da aldeia", imagemUrl: arvore, alvoId: "floresta" },
+        instrucao:
+          "Olhe o LUGAR e QUEM mora ali. Depois toque na moradia certa embaixo.",
+        rodadas: [
+          {
+            id: "r1",
+            cenario: {
+              nome: "Beira do rio",
+              emojiLugar: "🌊",
+              emojiMorador: "🎣",
+              pista:
+                "É uma família de PESCADORES que mora perto do rio. Quando chove, o rio ENCHE.",
+            },
+            opcoes: [
+              { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
+              { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
+              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+            ],
+            correta: "ribeirinha",
+            feedbackAcerto:
+              "🎉 Perfeito! Casa RIBEIRINHA em ESTACAS — quando o rio enche, a água passa por baixo.",
+            feedbackErro:
+              "Lembre: perto do RIO, a casa fica em ESTACAS pra a água não entrar.",
+          },
+          {
+            id: "r2",
+            cenario: {
+              nome: "Cidade grande",
+              emojiLugar: "🏙️",
+              emojiMorador: "👨‍👩‍👧",
+              pista:
+                "MUITA gente quer morar aqui, mas o chão é POUCO. Como resolver?",
+            },
+            opcoes: [
+              { id: "apto", nome: "Prédio de apartamentos", imagemUrl: cidade },
+              { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
+              { id: "ribeirinha", nome: "Casa em estacas", imagemUrl: casaAntiga },
+            ],
+            correta: "apto",
+            feedbackAcerto:
+              "🎉 Isso! Na CIDADE GRANDE, os PRÉDIOS crescem pra cima — cabem várias famílias em pouco chão.",
+            feedbackErro:
+              "Na cidade tem MUITA gente e POUCO chão — precisa de PRÉDIO pra crescer pra cima.",
+          },
+          {
+            id: "r3",
+            cenario: {
+              nome: "Campo",
+              emojiLugar: "🌾",
+              emojiMorador: "👩‍🌾",
+              pista:
+                "A família PLANTA e cria animais. Precisa de MUITO espaço.",
+            },
+            opcoes: [
+              { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
+              { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
+              { id: "oca", nome: "Oca de palha", imagemUrl: arvore },
+            ],
+            correta: "fazenda",
+            feedbackAcerto:
+              "🎉 Boa! No CAMPO cabe casa com QUINTAL, plantação e animais.",
+            feedbackErro:
+              "No campo a família precisa de ESPAÇO — a casa de fazenda tem quintal grande.",
+          },
+          {
+            id: "r4",
+            cenario: {
+              nome: "Floresta / Aldeia",
+              emojiLugar: "🌳",
+              emojiMorador: "🏹",
+              pista:
+                "É uma aldeia de povos indígenas. Constroem com o que a FLORESTA oferece.",
+            },
+            opcoes: [
+              { id: "oca", nome: "Oca de madeira e palha", imagemUrl: arvore },
+              { id: "apto", nome: "Prédio alto", imagemUrl: cidade },
+              { id: "fazenda", nome: "Casa de fazenda", imagemUrl: casaModerna },
+            ],
+            correta: "oca",
+            feedbackAcerto:
+              "🎉 Perfeito! A OCA é feita de MADEIRA, FOLHAS e CIPÓ — tudo da floresta.",
+            feedbackErro:
+              "Na aldeia, a família usa o que a FLORESTA oferece: madeira, folhas e cipó.",
+          },
         ],
-        alvos: [
-          { id: "cidade", nome: "Cidade grande", imagemUrl: cidade },
-          { id: "campo", nome: "Campo / fazenda", imagemUrl: casa },
-          { id: "rio", nome: "Beira do rio", imagemUrl: casaAntiga },
-          { id: "floresta", nome: "Floresta / aldeia", imagemUrl: arvore },
-        ],
-        feedbackAcerto:
-          "🎉 Cada casa foi feita pro LUGAR dela — você é um Investigador de Moradias!",
-        feedbackErro:
-          "Pense no NOME de cada moradia: ribeirinha → beira do RIO; oca → aldeia na FLORESTA; prédio → cidade grande; fazenda → campo.",
+        feedbackFinal:
+          "Você virou um verdadeiro ARQUITETO! Cada moradia foi feita pro LUGAR onde a família vive.",
       },
     },
   },
+
 
   // LABORATÓRIO — ativa clima e vê a casa ribeirinha reagir
   momento_laboratorio: {
