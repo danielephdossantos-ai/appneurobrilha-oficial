@@ -163,7 +163,74 @@ function TrilhaCurso() {
             </div>
           </section>
         ))}
+
+        {/* Atlas Final — destravado só quando todas as aulas estão concluídas */}
+        <AtlasFinalCard
+          cursoSlug={slug}
+          totalAulas={aulas.length}
+          concluidas={concluidas.size}
+          modoLivre={modoLivre}
+        />
       </main>
     </div>
+  );
+}
+
+function AtlasFinalCard({
+  cursoSlug,
+  totalAulas,
+  concluidas,
+  modoLivre,
+}: {
+  cursoSlug: string;
+  totalAulas: number;
+  concluidas: number;
+  modoLivre: boolean;
+}) {
+  const destravado = modoLivre || (totalAulas > 0 && concluidas >= totalAulas);
+  const percent = totalAulas === 0 ? 0 : Math.round((concluidas / totalAulas) * 100);
+  return (
+    <section className="pt-6">
+      <div className="text-center mb-4">
+        <div className="text-xs uppercase text-amber-300 tracking-widest">
+          Grande Projeto Final
+        </div>
+        <h2 className="text-2xl font-black">🌍 Meu Atlas do Município</h2>
+      </div>
+      <Link
+        to="/escola-brilha/atlas-final/$curso"
+        params={{ curso: cursoSlug }}
+        search={modoLivre ? { livre: "1" } : undefined}
+        aria-disabled={!destravado}
+        className={`block rounded-2xl p-6 text-center transition ${
+          destravado
+            ? "bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 text-[#1a0d3d] font-black shadow-2xl hover:scale-[1.02]"
+            : "bg-white/5 text-white/50 border border-dashed border-white/20 cursor-not-allowed"
+        }`}
+        onClick={(e) => {
+          if (!destravado) e.preventDefault();
+        }}
+      >
+        <div className="text-5xl mb-2">{destravado ? "🎓" : "🔒"}</div>
+        <div className="text-lg">
+          {destravado
+            ? "Abrir meu Livro Mágico do Explorador!"
+            : "Trancado — termine todas as aulas pra destravar"}
+        </div>
+        {!destravado && (
+          <div className="mt-3 max-w-xs mx-auto">
+            <div className="bg-white/10 rounded-full h-2 overflow-hidden">
+              <div
+                className="h-full bg-amber-400 transition-all"
+                style={{ width: `${percent}%` }}
+              />
+            </div>
+            <div className="text-xs mt-1">
+              {concluidas} de {totalAulas} aulas ({percent}%)
+            </div>
+          </div>
+        )}
+      </Link>
+    </section>
   );
 }
