@@ -12,7 +12,7 @@ import rua from "@/assets/neuro-treino/objetos/rua.png";
 import ponte from "@/assets/neuro-treino/objetos/ponte.png";
 import apartamento from "@/assets/neuro-treino/objetos/apartamento.png";
 import flor from "@/assets/neuro-treino/objetos/flor.png";
-import jardim from "@/assets/neuro-treino/objetos/jardim.png";
+
 import praca from "@/assets/neuro-treino/objetos/praca.png";
 import oca from "@/assets/neuro-treino/objetos/oca.png";
 import casaAntiga from "@/assets/neuro-treino/objetos/casa-antiga.png";
