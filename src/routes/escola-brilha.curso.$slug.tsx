@@ -201,7 +201,7 @@ function AtlasFinalCard({
         to="/escola-brilha/atlas-final/$curso"
         params={{ curso: cursoSlug }}
         search={modoLivre ? { livre: "1" } : undefined}
-        disabled={!destravado}
+        aria-disabled={!destravado}
         className={`block rounded-2xl p-6 text-center transition ${
           destravado
             ? "bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 text-[#1a0d3d] font-black shadow-2xl hover:scale-[1.02]"
