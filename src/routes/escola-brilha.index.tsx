@@ -158,6 +158,18 @@ function EscolaBrilhaCatalogo() {
   const contarSerie = (s: Serie) =>
     Object.values(arvore[s]).reduce((acc, arr) => acc + arr.length, 0);
 
+  // Mapa: Série -> disc slug -> Curso v4 correspondente
+  const cursoPorSerieDisc = useMemo(() => {
+    const map: Record<string, Record<string, ReturnType<typeof listCursos>[number]>> = {};
+    for (const c of listCursos()) {
+      const s = c.ano;
+      const d = slugDisc(c.disciplina);
+      (map[s] ||= {})[d] = c;
+    }
+    return map;
+  }, []);
+
+
   return (
     <Shell>
       <div className="max-w-3xl mx-auto pb-24">
@@ -192,39 +204,7 @@ function EscolaBrilhaCatalogo() {
           </p>
         </div>
 
-        {/* Cursos v4 — novas aulas do Escola Brilha */}
-        {listCursos().length > 0 && (
-          <div className="mb-4">
-            <div className="text-[10px] font-black uppercase tracking-widest text-[#0d1f55]/60 mb-2">
-              ✨ Novos cursos
-            </div>
-            <div className="grid gap-2">
-              {listCursos().map((c) => {
-                const totalAulas = c.unidades.reduce((s, u) => s + u.aulas.length, 0);
-                return (
-                  <Link
-                    key={c.slug}
-                    to="/escola-brilha/curso/$slug"
-                    params={{ slug: c.slug }}
-                    className="rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${c.corPrimaria}, ${c.corSecundaria})`,
-                    }}
-                  >
-                    <div className="text-[10px] uppercase tracking-widest opacity-80">
-                      {c.disciplina} · {c.ano}
-                    </div>
-                    <div className="text-lg leading-tight mt-0.5">{c.titulo}</div>
-                    <div className="text-[11px] font-bold opacity-90 mt-1">
-                      {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
-                      {totalAulas === 1 ? "" : "eis"} →
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {/* Cursos v4 agora aparecem DENTRO da sua série, no mesmo padrão visual do 1º Ano */}
 
 
         {/* Próxima missão recomendada — experiência contínua */}
@@ -339,6 +319,30 @@ function EscolaBrilhaCatalogo() {
                               <div className="text-[11px] font-bold opacity-90 mt-1">
                                 {lista.length} aula{lista.length === 1 ? "" : "s"} disponível
                                 {lista.length === 1 ? "" : "eis"} · Diploma →
+                              </div>
+                            </Link>
+                          );
+                        }
+                        const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
+                        if (cursoV4) {
+                          const totalAulas = cursoV4.unidades.reduce((s, u) => s + u.aulas.length, 0);
+                          return (
+                            <Link
+                              key={disc}
+                              to="/escola-brilha/curso/$slug"
+                              params={{ slug: cursoV4.slug }}
+                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                              style={{
+                                background: `linear-gradient(135deg, ${cursoV4.corPrimaria}, ${cursoV4.corSecundaria})`,
+                              }}
+                            >
+                              <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                {cursoV4.disciplina} · {cursoV4.ano}
+                              </div>
+                              <div className="text-lg leading-tight mt-0.5">{cursoV4.titulo}</div>
+                              <div className="text-[11px] font-bold opacity-90 mt-1">
+                                {totalAulas} aula{totalAulas === 1 ? "" : "s"} disponível
+                                {totalAulas === 1 ? "" : "eis"} →
                               </div>
                             </Link>
                           );
