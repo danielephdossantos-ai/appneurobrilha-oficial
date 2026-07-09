@@ -583,6 +583,182 @@ function CadernosCampo({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 4 — Aurora narra o mapa (balões clicáveis + TTS)
+// ─────────────────────────────────────────────────────────────────────
+function NarrarMapa({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "narrarMapa" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [ativo, setAtivo] = useState<string | null>(null);
+  const [visitados, setVisitados] = useState<Record<string, boolean>>({});
+  const total = cena.pontos.length;
+  const visitadosCount = Object.values(visitados).filter(Boolean).length;
+  const todosVistos = visitadosCount === total;
+  const pontoAtivo = cena.pontos.find((p) => p.id === ativo) ?? null;
+
+  const falar = (texto: string) => {
+    try {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const tocar = (id: string, texto: string) => {
+    setAtivo(id);
+    setVisitados((prev) => ({ ...prev, [id]: true }));
+    falar(texto);
+  };
+
+  useEffect(() => {
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🗺️ {cena.instrucao}
+      </div>
+
+      {/* Mapa com balões flutuantes */}
+      <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
+        <img
+          src={cena.mapaUrl}
+          alt="Mapa"
+          className="w-full aspect-[4/3] object-cover select-none"
+          draggable={false}
+        />
+        {cena.pontos.map((p) => {
+          const visto = !!visitados[p.id];
+          const isAtivo = ativo === p.id;
+          return (
+            <button
+              key={p.id}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className="absolute -translate-x-1/2 -translate-y-1/2 group"
+              style={{ left: `${p.x}%`, top: `${p.y}%` }}
+              aria-label={p.titulo}
+            >
+              <motion.span
+                animate={
+                  isAtivo
+                    ? { scale: [1, 1.15, 1] }
+                    : { y: [0, -6, 0] }
+                }
+                transition={{
+                  duration: isAtivo ? 0.6 : 2.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className={`block w-12 h-12 sm:w-14 sm:h-14 rounded-full grid place-items-center text-2xl sm:text-3xl shadow-2xl border-2 bg-gradient-to-br ${p.cor} ${
+                  visto ? "border-emerald-300" : "border-white/80"
+                }`}
+                style={{
+                  boxShadow: isAtivo
+                    ? "0 0 0 6px rgba(52,211,153,.35), 0 8px 24px rgba(0,0,0,.5)"
+                    : "0 6px 16px rgba(0,0,0,.5)",
+                }}
+              >
+                {p.emoji}
+              </motion.span>
+              {visto && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-[#0d1f55] text-[11px] font-black grid place-items-center border-2 border-[#0f172a]">
+                  ✓
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Balão de fala do ponto ativo */}
+      {pontoAtivo && (
+        <motion.div
+          key={pontoAtivo.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white text-[#0d1f55] rounded-2xl p-4 shadow-xl border-2 border-emerald-300"
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-2xl">{pontoAtivo.emoji}</span>
+            <div className="font-black text-lg">{pontoAtivo.titulo}</div>
+            <button
+              onClick={() =>
+                falar(`${pontoAtivo.titulo}. ${pontoAtivo.texto}`)
+              }
+              className="ml-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold rounded-full px-3 py-1"
+            >
+              🔊 ouvir
+            </button>
+          </div>
+          <p className="text-sm leading-snug">{pontoAtivo.texto}</p>
+        </motion.div>
+      )}
+
+      <div className="text-center text-xs text-white/60">
+        {visitadosCount} / {total} pontos descobertos
+      </div>
+
+      {todosVistos && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!todosVistos}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          todosVistos
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {todosVistos ? "Continuar" : "🗺️ Toque em todos os balões"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 function CenaPlaceholder({
