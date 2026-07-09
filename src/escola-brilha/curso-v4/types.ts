@@ -656,6 +656,20 @@ export type CenaGeoV1 =
       feedbackErro: string;
       falaFinal: string;              // Aurora fecha explicando
     }
+  | {
+      tipo: "cadernosCampo";
+      aurora: string;
+      instrucao: string;
+      cadernos: Array<{
+        id: string;
+        capa: string;         // ex.: "Município"
+        emoji: string;        // ícone grande da capa
+        cor: string;          // gradient tailwind ex.: "from-emerald-400 to-teal-600"
+        conteudo: string;     // texto revelado ao abrir
+        exemplo?: string;     // frase de exemplo do cotidiano
+      }>;
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {
