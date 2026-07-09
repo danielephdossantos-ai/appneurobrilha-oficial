@@ -3,6 +3,7 @@ import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
 import fotoIndigena from "@/assets/geografia-3ano/comunidade-indigena.jpg";
 import fotoQuilombola from "@/assets/geografia-3ano/comunidade-quilombola.jpg";
 import fotoRibeirinha from "@/assets/geografia-3ano/comunidade-ribeirinha.jpg";
+import balaoComunidades from "@/assets/geografia-3ano/balao-comunidades-tradicionais.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 2 · Aula 01
@@ -28,6 +29,7 @@ export const aula01: AulaGeoV1 = {
     instrucao:
       "Arraste os BINÓCULOS sobre o mapa. Nosso balão está sobrevoando o município procurando comunidades incríveis pra visitar.",
     mapaUrl: mapaMunicipio,
+    imagemDestaqueUrl: balaoComunidades,
     aurora:
       "Explorador, nosso município tem comunidades incríveis com jeitos únicos de viver e cuidar da terra! Prepara o binóculo, porque hoje a gente vai visitá-las de balão pra aprender com elas.",
     falaFinal:

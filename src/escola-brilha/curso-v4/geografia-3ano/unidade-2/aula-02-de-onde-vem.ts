@@ -4,6 +4,7 @@ import fotoFazenda from "@/assets/geografia-3ano/origem-fazenda-leite.jpg";
 import fotoHorta from "@/assets/geografia-3ano/origem-horta.jpg";
 import fotoRoca from "@/assets/geografia-3ano/origem-roca-mandioca.jpg";
 import fotoFeira from "@/assets/geografia-3ano/origem-feira-cidade.jpg";
+import rotaAlimentos from "@/assets/geografia-3ano/rota-alimentos-campo-cidade.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 2 · Aula 02
@@ -26,6 +27,7 @@ export const aula02: AulaGeoV1 = {
     instrucao:
       "Arraste os BINÓCULOS sobre o mapa. Hoje a gente vai descobrir de ONDE vem cada coisa que aparece na feira da cidade.",
     mapaUrl: mapaMunicipio,
+    imagemDestaqueUrl: rotaAlimentos,
     aurora:
       "Explorador, olha só: o leite do seu café, o alface do almoço e a farinha do pão viajaram MUITO antes de chegar em você. Vamos de balão seguir a rota deles!",
     falaFinal:
