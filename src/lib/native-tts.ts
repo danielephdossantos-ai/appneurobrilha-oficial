@@ -100,10 +100,6 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
     }
     const currentRunId = speechRunId;
     const chunks = chunkText(sanitizeForSpeech(text));
-    if (chunks.length === 0) {
-      finish();
-      return;
-    }
     const voice = pickPtBrVoice();
     let i = 0;
     let finished = false;
@@ -115,6 +111,10 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       resolve();
     };
     activeSpeechResolvers.add(finish);
+    if (chunks.length === 0) {
+      finish();
+      return;
+    }
     const speakNext = () => {
       if (currentRunId !== speechRunId || finished) return;
       if (i >= chunks.length) {
