@@ -443,7 +443,7 @@ function VotoExplorador({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {revelado ? "Próxima cena →" : "🗳️ Escolha uma opção pra continuar"}
+        {revelado ? "Continuar" : "🗳️ Escolha uma opção pra continuar"}
       </button>
     </div>
   );
