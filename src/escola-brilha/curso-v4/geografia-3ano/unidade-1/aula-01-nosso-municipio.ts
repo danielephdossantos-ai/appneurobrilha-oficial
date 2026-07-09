@@ -208,9 +208,33 @@ export const aula01: AulaGeoV1 = {
       "Radar afiado! Você já sabe reconhecer zona urbana, zona rural e a fronteira no seu município.",
   },
   cena06_personagensLugar: {
-    tipo: "placeholder",
-    titulo: "Mapa de Camadas",
-    descricao: "Toggle 🏙️ Urbana / 🌾 Rural que acende ou apaga metade do mapa.",
+    tipo: "mapaCamadas",
+    aurora:
+      "Cada município tem CAMADAS. Vou te dar dois interruptores: um acende a ZONA URBANA no mapa, outro acende a ZONA RURAL. Liga os dois pra ver o município INTEIRO iluminado!",
+    instrucao: "Toque nos interruptores pra acender cada parte do mapa",
+    mapaUrl: mapaMunicipio,
+    camadas: [
+      {
+        id: "urbana",
+        rotulo: "Zona Urbana",
+        emoji: "🏙️",
+        cor: "from-sky-500 to-indigo-600",
+        rect: { x: 55, y: 40, w: 40, h: 45 },
+        descricao:
+          "Aqui é a parte com muitas casas juntas, ruas e prédios. É onde ficam a escola, a padaria e a praça.",
+      },
+      {
+        id: "rural",
+        rotulo: "Zona Rural",
+        emoji: "🌾",
+        cor: "from-lime-500 to-emerald-700",
+        rect: { x: 5, y: 15, w: 45, h: 55 },
+        descricao:
+          "Aqui é o campo — plantações, sítios, matas e o rio passando. É de onde vem grande parte da comida da cidade.",
+      },
+    ],
+    falaFinal:
+      "Viu? As duas camadas juntas formam o município INTEIRO. Cidade + campo iluminados no mesmo mapa.",
   },
   cena07_sequencia: {
     tipo: "placeholder",

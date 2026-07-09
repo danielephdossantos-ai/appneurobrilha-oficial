@@ -142,6 +142,8 @@ function CenaRenderer({
       return <NarrarMapa cena={cena} onProxima={onProxima} />;
     case "quizRadar":
       return <QuizRadar cena={cena} onProxima={onProxima} />;
+    case "mapaCamadas":
+      return <MapaCamadas cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
@@ -1048,6 +1050,177 @@ function QuizRadar({
           </button>
         </>
       )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Cena 6 — Mapa de Camadas (toggles Urbana/Rural acendem partes do mapa)
+// ─────────────────────────────────────────────────────────────────────
+function MapaCamadas({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "mapaCamadas" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [ligadas, setLigadas] = useState<Record<string, boolean>>({});
+  const totalLigadas = Object.values(ligadas).filter(Boolean).length;
+  const todasLigadas = totalLigadas === cena.camadas.length;
+
+  const alternar = (id: string) =>
+    setLigadas((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🗺️ {cena.instrucao}
+      </div>
+
+      {/* Mapa com camadas */}
+      <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/40">
+        <img
+          src={cena.mapaUrl}
+          alt="Mapa do município"
+          className="w-full aspect-[4/3] object-cover select-none"
+          draggable={false}
+        />
+        {/* véu escuro global — some quando TUDO está ligado */}
+        <div
+          className="absolute inset-0 bg-black pointer-events-none transition-opacity duration-500"
+          style={{ opacity: todasLigadas ? 0 : 0.55 }}
+        />
+        {/* recortes iluminados por camada */}
+        {cena.camadas.map((c) => {
+          const on = !!ligadas[c.id];
+          return (
+            <motion.div
+              key={c.id}
+              className="absolute pointer-events-none rounded-2xl"
+              style={{
+                left: `${c.rect.x}%`,
+                top: `${c.rect.y}%`,
+                width: `${c.rect.w}%`,
+                height: `${c.rect.h}%`,
+              }}
+              animate={{
+                boxShadow: on
+                  ? "0 0 0 3px rgba(255,255,255,.9), 0 0 40px 8px rgba(52,211,153,.55), inset 0 0 60px rgba(255,255,255,.25)"
+                  : "0 0 0 2px rgba(255,255,255,.15)",
+                background: on
+                  ? "rgba(255,255,255,0)"
+                  : "rgba(0,0,0,.35)",
+              }}
+              transition={{ duration: 0.4 }}
+            >
+              {on && (
+                <div className="absolute -top-2 left-2 bg-black/70 text-white text-[11px] font-bold px-2 py-0.5 rounded-full backdrop-blur">
+                  {c.emoji} {c.rotulo}
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Toggles */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {cena.camadas.map((c) => {
+          const on = !!ligadas[c.id];
+          return (
+            <button
+              key={c.id}
+              onClick={() => alternar(c.id)}
+              className={`relative rounded-2xl p-4 border-2 text-left transition-all bg-gradient-to-br ${c.cor} ${
+                on ? "border-white ring-4 ring-white/40 shadow-2xl" : "border-white/20 opacity-70"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="text-4xl">{c.emoji}</div>
+                <div className="flex-1">
+                  <div className="text-white font-black text-lg leading-tight">
+                    {c.rotulo}
+                  </div>
+                  <div className="text-white/85 text-xs mt-0.5">
+                    {on ? "✅ acesa no mapa" : "toque pra acender"}
+                  </div>
+                </div>
+                {/* switch visual */}
+                <div
+                  className={`w-11 h-6 rounded-full p-0.5 transition-colors ${
+                    on ? "bg-emerald-300" : "bg-white/25"
+                  }`}
+                >
+                  <motion.div
+                    className="w-5 h-5 rounded-full bg-white shadow"
+                    animate={{ x: on ? 20 : 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  />
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Descrições das camadas ligadas */}
+      <div className="space-y-2">
+        {cena.camadas
+          .filter((c) => ligadas[c.id])
+          .map((c) => (
+            <motion.div
+              key={c.id}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="bg-white/10 border border-white/15 rounded-xl p-3 flex items-start gap-2 text-sm"
+            >
+              <div className="text-xl shrink-0">{c.emoji}</div>
+              <div>
+                <div className="font-bold text-emerald-300">{c.rotulo}</div>
+                <div className="text-white/85 leading-snug">{c.descricao}</div>
+              </div>
+            </motion.div>
+          ))}
+      </div>
+
+      {todasLigadas && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!todasLigadas}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          todasLigadas
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {todasLigadas ? "Continuar" : "🔦 Acenda todas as camadas do mapa"}
+      </button>
     </div>
   );
 }
