@@ -113,8 +113,8 @@ export const aula01: AulaGeoV1 = {
     pontos: [
       {
         id: "urbana",
-        x: 30,
-        y: 40,
+        x: 75,
+        y: 55,
         emoji: "🏙️",
         cor: "from-sky-400 to-indigo-500",
         titulo: "Zona Urbana",
@@ -123,8 +123,8 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "rural",
-        x: 72,
-        y: 60,
+        x: 25,
+        y: 35,
         emoji: "🌾",
         cor: "from-lime-400 to-emerald-600",
         titulo: "Zona Rural",
@@ -133,8 +133,8 @@ export const aula01: AulaGeoV1 = {
       },
       {
         id: "rio",
-        x: 55,
-        y: 78,
+        x: 35,
+        y: 65,
         emoji: "🌊",
         cor: "from-cyan-400 to-blue-600",
         titulo: "Rio do Município",
