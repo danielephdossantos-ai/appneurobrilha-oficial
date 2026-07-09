@@ -386,42 +386,32 @@ export const aula03: AulaGeoV1 = {
   cena10_revisao: {
     tipo: "pizzaMunicipio",
     aurora:
-      "Bora fechar a aula com uma pizza dividida em 3 fatias — cada uma é um tipo de representação. Toca em cada fatia pra ouvir pra que serve.",
+      "Bora fechar a aula com uma pizza dividida em 2 fatias: de um lado tudo que é REAL/3D (foto de cima + maquete), do outro o MAPA plano 2D com símbolos. Toca em cada fatia pra ouvir.",
     instrucao: "🍕 Toque nas fatias pra ouvir cada tipo de representação",
     fatias: [
       {
-        id: "fatia-vista",
-        rotulo: "Vista de Cima (Foto)",
-        emoji: "👁️",
-        percentual: 33,
-        cor: "#0ea5e9",
-        descricao:
-          "Foto tirada de drone ou de balão. Mostra o lugar do jeitinho que ele é, só que visto de cima. Serve pra fotografar de VERDADE o município e não deixar detalhe escapar.",
-        exemplos: ["Foto de drone", "Vista de cima do bairro", "Imagem de satélite"],
-      },
-      {
-        id: "fatia-maquete",
-        rotulo: "Maquete (3D)",
+        id: "fatia-3d",
+        rotulo: "Representações 3D (Foto + Maquete)",
         emoji: "🏛️",
-        percentual: 33,
+        percentual: 50,
         cor: "#f59e0b",
         descricao:
-          "Modelo em 3 dimensões, pequenininho. Tem altura, largura e profundidade. Serve pra você IMAGINAR como o lugar é antes de ir lá, ou pro arquiteto planejar uma construção nova.",
-        exemplos: ["Maquete da escola", "Modelo da cidade", "Miniatura do bairro"],
+          "Aqui entram a VISTA DE CIMA (foto tirada de drone, mostra o lugar do jeito que é) e a MAQUETE (modelo 3D em miniatura, tem altura). As duas ajudam você a IMAGINAR o município como ele é de verdade.",
+        exemplos: ["Foto de drone", "Imagem de satélite", "Maquete da escola", "Miniatura da cidade"],
       },
       {
-        id: "fatia-mapa",
-        rotulo: "Mapa (2D com símbolos)",
+        id: "fatia-2d",
+        rotulo: "Representação 2D (Mapa com símbolos)",
         emoji: "🗺️",
-        percentual: 34,
+        percentual: 50,
         cor: "#22c55e",
         descricao:
-          "Desenho plano no papel com símbolos e legenda. Serve pra achar CAMINHO, ver o município inteiro de uma vez e planejar viagem. É o que a gente usa no celular todo dia.",
-        exemplos: ["Mapa do celular", "Mapa da cidade", "Mapa do Brasil"],
+          "O MAPA é plano no papel, usa símbolos (quadrado = casa, linha azul = rio) e tem uma LEGENDA que explica tudo. Serve pra achar caminho, ver o município inteiro de uma vez e planejar viagem.",
+        exemplos: ["Mapa do celular", "Mapa da cidade", "Mapa do Brasil", "Legenda com símbolos"],
       },
     ],
     falaFinal:
-      "3 fatias, 3 jeitos de representar o mesmo lugar. Um bom cartógrafo usa todos os 3 — cada um pra uma coisa diferente.",
+      "3D pra IMAGINAR, 2D pra ORIENTAR. Cada representação serve pra uma coisa — e um bom cartógrafo usa as duas.",
   },
 
   cena11_avaliacao: {
