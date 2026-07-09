@@ -448,33 +448,23 @@ export const aula03: AulaGeoV1 = {
     fatias: [
       {
         id: "fatia-campo",
-        rotulo: "Campo (matéria-prima)",
+        rotulo: "Campo (planta e colhe)",
         emoji: "🌾",
-        percentual: 34,
+        percentual: 50,
         cor: "from-yellow-500 to-amber-700",
         descricao:
-          "O CAMPO planta e colhe o trigo. É de lá que sai a MATÉRIA-PRIMA. Sem lavoura, não tem grão. Sem grão, não tem farinha nem pão.",
+          "O CAMPO planta e colhe o trigo. É de lá que sai a MATÉRIA-PRIMA. Sem lavoura, não tem grão. Sem grão, não tem farinha nem pão na sua mesa.",
         exemplos: ["Sementes de trigo", "Colheita dourada", "Silos de armazenagem"],
       },
       {
-        id: "fatia-industria",
-        rotulo: "Indústria (moinho)",
+        id: "fatia-cidade",
+        rotulo: "Cidade (transforma e vende)",
         emoji: "🏭",
-        percentual: 33,
-        cor: "from-amber-500 to-orange-700",
+        percentual: 50,
+        cor: "from-amber-500 to-red-700",
         descricao:
-          "A INDÚSTRIA transforma. O moinho moí o trigo duro e vira farinha branca e macia. Sem essa etapa, o padeiro não teria com o que fazer a massa.",
-        exemplos: ["Máquinas moedoras", "Ensacamento de farinha", "Caminhões saindo carregados"],
-      },
-      {
-        id: "fatia-comercio",
-        rotulo: "Padaria (comércio)",
-        emoji: "🥖",
-        percentual: 33,
-        cor: "from-rose-500 to-red-700",
-        descricao:
-          "A PADARIA da cidade faz o pão e VENDE. Recebe a farinha, mistura, assa e entrega quente pra sua família de manhã cedo.",
-        exemplos: ["Massa fresca", "Forno quente", "Balcão do café da manhã"],
+          "A CIDADE transforma e vende. O MOINHO moí o trigo em farinha, a PADARIA vira pão quentinho. Sem essas duas etapas, o grão nunca chegaria ao seu café da manhã.",
+        exemplos: ["Moinho industrial", "Farinha ensacada", "Padaria do bairro"],
       },
     ],
     falaFinal:

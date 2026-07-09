@@ -447,34 +447,24 @@ export const aula04: AulaGeoV1 = {
     instrucao: "Toque em cada fatia pra ouvir a Aurora explicar",
     fatias: [
       {
-        id: "fatia-leite",
-        rotulo: "Rota do Leite",
-        emoji: "🥛",
-        percentual: 33,
-        cor: "from-sky-500 to-blue-700",
+        id: "fatia-campo",
+        rotulo: "Campo (produz)",
+        emoji: "🌾",
+        percentual: 50,
+        cor: "from-emerald-500 to-green-700",
         descricao:
-          "Fazenda → caminhão resfriado → FÁBRICA → mercado. O leite passa pela indústria pra ficar seguro pra beber.",
-        exemplos: ["Ordenha no curral", "Caminhão gelado", "Laticínio da cidade"],
+          "O CAMPO é o começo de TUDO: leite da fazenda, verdura do sítio, trigo da lavoura. Sem essa mão que cuida da terra, a cidade não teria nada pra vender nem pra comer.",
+        exemplos: ["Rota do Leite 🥛", "Feira do Bairro 🍅", "Rota do Pão 🥖"],
       },
       {
-        id: "fatia-feira",
-        rotulo: "Feira do Bairro",
-        emoji: "🍅",
-        percentual: 34,
-        cor: "from-rose-500 to-pink-700",
+        id: "fatia-cidade",
+        rotulo: "Cidade (transforma e vende)",
+        emoji: "🏙️",
+        percentual: 50,
+        cor: "from-sky-500 to-indigo-700",
         descricao:
-          "Sítio → caminhonete → entreposto → barraca. Sem fábrica no meio. Fresquinho direto do produtor pra sua sacola.",
-        exemplos: ["Colheita ao amanhecer", "CEASA de madrugada", "Barraca na rua"],
-      },
-      {
-        id: "fatia-pao",
-        rotulo: "Rota do Pão",
-        emoji: "🥖",
-        percentual: 33,
-        cor: "from-amber-500 to-orange-700",
-        descricao:
-          "Lavoura → silo → MOINHO → padaria. Aqui a fábrica é essencial: o grão duro precisa virar farinha antes de virar pão.",
-        exemplos: ["Trigo dourado", "Moinho na cidade", "Pão quente no bairro"],
+          "A CIDADE oferece rodovia, fábrica, mercado, feira, supermercado e padaria. Sem essa estrutura, o alimento do campo estragaria antes de chegar à sua mesa.",
+        exemplos: ["Laticínio e moinho 🏭", "Mercado e feira 🏛️", "Supermercado do bairro 🛒"],
       },
     ],
     falaFinal:
