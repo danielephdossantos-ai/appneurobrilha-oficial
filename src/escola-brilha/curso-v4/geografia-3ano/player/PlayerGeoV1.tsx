@@ -761,6 +761,250 @@ function NarrarMapa({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 5 — Quiz do Radar (radar gira e "pousa" no card certo)
+// ─────────────────────────────────────────────────────────────────────
+function QuizRadar({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "quizRadar" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [idx, setIdx] = useState(0);
+  const [escolha, setEscolha] = useState<string | null>(null);
+  const [revelado, setRevelado] = useState(false);
+  const [acertos, setAcertos] = useState(0);
+  const [finalizado, setFinalizado] = useState(false);
+
+  const p = cena.perguntas[idx];
+  const total = cena.perguntas.length;
+  const acertou = escolha === p?.correta;
+
+  const escolher = (id: string) => {
+    if (revelado) return;
+    setEscolha(id);
+    setTimeout(() => {
+      setRevelado(true);
+      if (id === p.correta) setAcertos((n) => n + 1);
+    }, 900); // tempo do radar "girar" antes de revelar
+  };
+
+  const proxima = () => {
+    if (idx + 1 < total) {
+      setIdx(idx + 1);
+      setEscolha(null);
+      setRevelado(false);
+    } else {
+      setFinalizado(true);
+    }
+  };
+
+  // ângulo do radar apontando pro card escolhido (0=cima, 120=dir-baixo, 240=esq-baixo)
+  const anguloDoCard = (cardId: string) => {
+    const i = p.cards.findIndex((c) => c.id === cardId);
+    if (i < 0) return 0;
+    return (i * 360) / p.cards.length;
+  };
+  const anguloAtual = escolha ? anguloDoCard(escolha) : null;
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        📡 {cena.instrucao}
+      </div>
+
+      <div className="flex items-center justify-between text-xs text-white/70 px-1">
+        <span className="uppercase tracking-widest text-emerald-300/80 font-bold">
+          Pergunta {idx + 1} / {total}
+        </span>
+        <span>✓ {acertos}</span>
+      </div>
+
+      {!finalizado && p && (
+        <>
+          {/* Radar */}
+          <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
+            {/* anéis */}
+            {[0.33, 0.66, 1].map((r, i) => (
+              <div
+                key={i}
+                className="absolute rounded-full border border-emerald-400/25"
+                style={{
+                  left: `${50 - 50 * r}%`,
+                  top: `${50 - 50 * r}%`,
+                  width: `${100 * r}%`,
+                  height: `${100 * r}%`,
+                }}
+              />
+            ))}
+            {/* cruz */}
+            <div className="absolute inset-0">
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-400/20" />
+              <div className="absolute top-1/2 left-0 right-0 h-px bg-emerald-400/20" />
+            </div>
+            {/* ponteiro */}
+            <motion.div
+              className="absolute left-1/2 top-1/2 origin-top-left"
+              style={{
+                width: "50%",
+                height: 2,
+                background:
+                  "linear-gradient(90deg, rgba(52,211,153,1) 0%, rgba(52,211,153,0) 100%)",
+                transformOrigin: "0% 50%",
+              }}
+              animate={{
+                rotate:
+                  anguloAtual !== null
+                    ? revelado
+                      ? anguloAtual - 90
+                      : [0, 360, 720, anguloAtual - 90]
+                    : [0, 360],
+              }}
+              transition={{
+                duration: anguloAtual !== null && !revelado ? 0.9 : 2.5,
+                ease: anguloAtual !== null && !revelado ? "easeOut" : "linear",
+                repeat: anguloAtual === null ? Infinity : 0,
+              }}
+            />
+            {/* centro */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
+          </div>
+
+          <div className="text-center text-lg font-black leading-tight px-2">
+            {p.pergunta}
+          </div>
+
+          {/* Cards de resposta */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {p.cards.map((c) => {
+              const escolhido = escolha === c.id;
+              const certoRevelado = revelado && c.id === p.correta;
+              const erradoRevelado = revelado && escolhido && c.id !== p.correta;
+              return (
+                <motion.button
+                  key={c.id}
+                  onClick={() => escolher(c.id)}
+                  disabled={revelado}
+                  whileTap={{ scale: revelado ? 1 : 0.96 }}
+                  className={`relative rounded-2xl p-4 border-2 bg-gradient-to-br ${c.cor} ${
+                    escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
+                  } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
+                    erradoRevelado ? "opacity-60" : ""
+                  }`}
+                >
+                  <div className="text-4xl mb-1">{c.emoji}</div>
+                  <div className="text-white font-black text-base leading-tight">
+                    {c.titulo}
+                  </div>
+                  {certoRevelado && (
+                    <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
+                      ✓
+                    </div>
+                  )}
+                  {erradoRevelado && (
+                    <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
+                      ✕
+                    </div>
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {revelado && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`rounded-2xl p-4 flex items-start gap-3 border ${
+                acertou
+                  ? "bg-emerald-500/15 border-emerald-400/40"
+                  : "bg-rose-500/15 border-rose-400/40"
+              }`}
+            >
+              <img
+                src={aurora.img}
+                alt=""
+                className="w-12 h-12 shrink-0 rounded-full bg-white/10 p-1"
+              />
+              <div className="text-sm leading-snug">
+                <div
+                  className={`text-xs font-bold ${
+                    acertou ? "text-emerald-300" : "text-rose-300"
+                  }`}
+                >
+                  {acertou ? "🎯 Radar pousou no lugar certo!" : "Radar errou o alvo!"}
+                </div>
+                <div className="mt-1">
+                  {acertou ? p.feedbackAcerto : p.feedbackErro}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          <button
+            onClick={proxima}
+            disabled={!revelado}
+            className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+              revelado
+                ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+                : "bg-white/10 text-white/40 cursor-not-allowed"
+            }`}
+          >
+            {revelado
+              ? idx + 1 < total
+                ? "Próxima pergunta →"
+                : "Ver resultado"
+              : "📡 Escolha um card pra ativar o radar"}
+          </button>
+        </>
+      )}
+
+      {finalizado && (
+        <>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-gradient-to-br from-emerald-500/20 to-amber-400/20 border-2 border-emerald-400/40 rounded-2xl p-6 text-center"
+          >
+            <div className="text-5xl mb-2">📡</div>
+            <div className="text-2xl font-black">
+              {acertos} / {total}
+            </div>
+            <div className="text-sm text-white/80 mt-1">acertos no radar</div>
+          </motion.div>
+          <div className="bg-white/10 border border-white/15 rounded-2xl p-4 flex items-start gap-3">
+            <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+            <div className="text-sm leading-snug">
+              <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+              {cena.falaFinal}
+            </div>
+          </div>
+          <button
+            onClick={onProxima}
+            className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+          >
+            Continuar
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 function CenaPlaceholder({
