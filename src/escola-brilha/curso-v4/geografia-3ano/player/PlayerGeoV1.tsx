@@ -150,6 +150,8 @@ function CenaRenderer({
       return <VoceLeSozinho cena={cena} onProxima={onProxima} />;
     case "construtorMarcos":
       return <ConstrutorMarcos cena={cena} onProxima={onProxima} />;
+    case "pizzaMunicipio":
+      return <PizzaMunicipio cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
