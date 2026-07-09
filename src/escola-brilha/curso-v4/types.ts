@@ -633,6 +633,61 @@ export type CursoPortugues = {
   unidades: UnidadePortugues[];
 };
 
+// =====================================================================
+// GEOGRAFIA 3º–9º — Player customizado (exceção formal ao padrão único).
+// Ver .lovable/mem/constraints/geografia-3ao9-player-custom.md
+// =====================================================================
+
+export type CenaGeoV1 =
+  | { tipo: "mesaCartografo"; instrucao: string; mapaUrl: string; aurora: string; falaFinal: string }
+  | { tipo: "placeholder"; titulo: string; descricao: string };
+
+export type AulaGeoV1 = {
+  slug: string;
+  titulo: string;
+  iconeTrilha: string;
+  bncc: string[];
+  duracaoMin: number;
+
+  cena01_motivacao: CenaGeoV1;
+  cena02_previsao: CenaGeoV1;
+  cena03_vocabulario: CenaGeoV1;
+  cena04_leituraGuiada: CenaGeoV1;
+  cena05_compreensao: CenaGeoV1;
+  cena06_personagensLugar: CenaGeoV1;
+  cena07_sequencia: CenaGeoV1;
+  cena08_voceLe: CenaGeoV1;
+  cena09_minijogo: CenaGeoV1;
+  cena10_revisao: CenaGeoV1;
+  cena11_avaliacao: CenaGeoV1;
+
+  recompensa: { xp: number; moedas: number; medalha?: string };
+};
+
+export type UnidadeGeoV1 = {
+  slug: string;
+  numero: number;
+  titulo: string;
+  subtitulo: string;
+  descricao: string;
+  corTema: string;
+  aulas: AulaGeoV1[];
+};
+
+export type CursoGeoV1 = {
+  slug: string;
+  disciplina: string;
+  ano: string;
+  titulo: string;
+  descricao: string;
+  mascoteImagemUrl?: string;
+  corPrimaria: string;
+  corSecundaria: string;
+  tipoAula: "geo-v1";
+  unidades: UnidadeGeoV1[];
+};
+
 /** Union usado pelo registry e pela trilha. */
-export type CursoAny = Curso | CursoPortugues;
+export type CursoAny = Curso | CursoPortugues | CursoGeoV1;
+
 

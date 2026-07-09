@@ -1,4 +1,4 @@
-import type { Curso, CursoPortugues, CursoAny, AulaV4, AulaPortuguesV4 } from "./types";
+import type { Curso, CursoPortugues, CursoAny, AulaV4, AulaPortuguesV4, CursoGeoV1, AulaGeoV1 } from "./types";
 
 /**
  * Auto-registro de cursos v4.1 (Matemática + Português).
@@ -19,6 +19,29 @@ function isMatematica(c: CursoAny): c is Curso {
 function isPortugues(c: CursoAny): c is CursoPortugues {
   return c.tipoAula === "portugues";
 }
+function isGeoV1(c: CursoAny): c is CursoGeoV1 {
+  return c.tipoAula === "geo-v1";
+}
+
+export function getCursoGeoV1(slug: string): CursoGeoV1 | undefined {
+  const c = registry[slug];
+  return c && isGeoV1(c) ? c : undefined;
+}
+
+export function getAulaGeoV1FromCurso(
+  cursoSlug: string,
+  aulaSlug: string,
+): { curso: CursoGeoV1; aula: AulaGeoV1; unidadeIdx: number; aulaIdx: number } | undefined {
+  const curso = getCursoGeoV1(cursoSlug);
+  if (!curso) return undefined;
+  for (let u = 0; u < curso.unidades.length; u++) {
+    const unidade = curso.unidades[u];
+    const idx = unidade.aulas.findIndex((a) => a.slug === aulaSlug);
+    if (idx >= 0) return { curso, aula: unidade.aulas[idx], unidadeIdx: u, aulaIdx: idx };
+  }
+  return undefined;
+}
+
 
 export function getCurso(slug: string): Curso | undefined {
   const c = registry[slug];
