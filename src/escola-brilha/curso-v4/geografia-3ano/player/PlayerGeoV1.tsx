@@ -2199,6 +2199,18 @@ function SeloAtlas({
   ultima?: boolean;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const falar = (texto: string) => {
+    try {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = 'pt-BR';
+      u.rate = 0.95;
+      u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    } catch { /* ignore */ }
+  };
+
   const [idx, setIdx] = useState(0);
   const [respostas, setRespostas] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState<null | { ok: boolean; texto: string }>(null);
@@ -2210,11 +2222,11 @@ function SeloAtlas({
 
   useEffect(() => {
     if (!atual) return;
-    falarPT(atual.pergunta);
+    falar(atual.pergunta);
   }, [atual?.id]);
 
   useEffect(() => {
-    if (conquistado) falarPT(cena.falaFinal);
+    if (conquistado) falar(cena.falaFinal);
   }, [conquistado]);
 
   function escolher(opcaoId: string) {
@@ -2225,7 +2237,7 @@ function SeloAtlas({
     if (ok) setAcertos((a) => a + 1);
     const texto = ok ? atual.feedbackAcerto : atual.feedbackErro;
     setFeedback({ ok, texto });
-    falarPT(texto);
+    falar(texto);
     setTimeout(() => {
       setFeedback(null);
       if (idx + 1 < total) {
@@ -2274,7 +2286,7 @@ function SeloAtlas({
         </div>
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-3 items-start text-left">
-          <img src={aurora.imagem} alt="" className="w-12 h-12" />
+          <img src={aurora.img} alt="" className="w-12 h-12" />
           <p className="text-sm text-white/90 leading-relaxed">{cena.falaFinal}</p>
         </div>
 
@@ -2291,7 +2303,7 @@ function SeloAtlas({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <img src={aurora.imagem} alt="" className="w-14 h-14" />
+        <img src={aurora.img} alt="" className="w-14 h-14" />
         <div className="flex-1">
           <div className="text-xs uppercase tracking-widest text-amber-300">
             Selo do Atlas — Prova final
@@ -2321,7 +2333,7 @@ function SeloAtlas({
           Pergunta {idx + 1}/{total}
         </div>
         <button
-          onClick={() => falarPT(atual.pergunta)}
+          onClick={() => falar(atual.pergunta)}
           className="w-full text-left text-lg font-bold leading-snug hover:text-amber-200 transition"
         >
           🔊 {atual.pergunta}
