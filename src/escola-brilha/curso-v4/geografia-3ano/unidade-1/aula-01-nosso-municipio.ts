@@ -408,9 +408,34 @@ export const aula01: AulaGeoV1 = {
       "Construtor de Marcos oficial! Você já sabe: fronteira é UM MARCO combinado — rio, placa, muro, ponte — que separa dois municípios, cada um com sua prefeitura.",
   },
   cena10_revisao: {
-    tipo: "placeholder",
-    titulo: "Pizza do Município",
-    descricao: "Pizza clicável (urbana × rural) que fala % ao tocar.",
+    tipo: "pizzaMunicipio",
+    aurora:
+      "Chegou a hora de olhar o município de cima, tipo desenho de pizza! Cada fatia é uma zona. Toca em cada fatia e eu conto o que tem lá — e quanto do município é aquilo.",
+    instrucao: "🍕 Toque nas fatias pra ouvir sobre cada zona",
+    fatias: [
+      {
+        id: "urbana",
+        rotulo: "Zona Urbana",
+        emoji: "🏙️",
+        percentual: 35,
+        cor: "#4f46e5",
+        descricao:
+          "Zona Urbana: cerca de 35% do município. É onde ficam as ruas asfaltadas, prédios, casas coladas, escola, hospital, mercado e a prefeitura. É a parte cidade.",
+        exemplos: ["Prédios e casas coladas", "Escola e hospital", "Prefeitura e mercado"],
+      },
+      {
+        id: "rural",
+        rotulo: "Zona Rural",
+        emoji: "🌾",
+        percentual: 65,
+        cor: "#16a34a",
+        descricao:
+          "Zona Rural: cerca de 65% do município. É onde tem plantação, sítio, fazenda, animais e muito verde. É de lá que sai a maior parte da comida que chega na cidade.",
+        exemplos: ["Plantações e sítios", "Fazendas e animais", "Matas e rios"],
+      },
+    ],
+    falaFinal:
+      "Sacou? Na maioria dos municípios a zona rural é MAIOR em espaço, mas a zona urbana tem MAIS gente morando junta. As duas trabalham em parceria!",
   },
   cena11_avaliacao: {
     tipo: "placeholder",
