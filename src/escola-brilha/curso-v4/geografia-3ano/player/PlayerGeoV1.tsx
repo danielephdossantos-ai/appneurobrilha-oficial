@@ -1951,6 +1951,239 @@ function ConstrutorMarcos({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 10 — Pizza do Município (revisão: fatias clicáveis com TTS)
+// ─────────────────────────────────────────────────────────────────────
+function PizzaMunicipio({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "pizzaMunicipio" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [tocadas, setTocadas] = useState<Set<string>>(new Set());
+  const [ativa, setAtiva] = useState<string | null>(null);
+
+  const fatias = cena.fatias;
+  const [f1, f2] = fatias;
+  // ângulo da fatia 1 (em graus). Fatia 2 é o resto.
+  const anguloF1 = (f1.percentual / 100) * 360;
+
+  const falar = (texto: string) => {
+    try {
+      window.speechSynthesis?.cancel();
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      window.speechSynthesis?.speak(u);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const tocar = (id: string) => {
+    const fatia = fatias.find((x) => x.id === id);
+    if (!fatia) return;
+    setAtiva(id);
+    setTocadas((s) => new Set(s).add(id));
+    falar(fatia.descricao);
+  };
+
+  useEffect(() => {
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
+
+  const todasTocadas = tocadas.size === fatias.length;
+  const fatiaAtiva = fatias.find((x) => x.id === ativa);
+
+  // gradiente cônico: f1 do 0° até anguloF1, f2 do anguloF1 até 360°
+  const conic = `conic-gradient(${f1.cor} 0deg ${anguloF1}deg, ${f2.cor} ${anguloF1}deg 360deg)`;
+
+  return (
+    <div className="space-y-5">
+      {/* Aurora */}
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      {/* Instrução */}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        {cena.instrucao}
+      </div>
+
+      {/* Pizza SVG-like via conic-gradient */}
+      <div className="flex justify-center">
+        <div className="relative">
+          <motion.div
+            className="w-64 h-64 sm:w-72 sm:h-72 rounded-full shadow-2xl border-4 border-white/30"
+            style={{ background: conic }}
+            animate={ativa ? { scale: [1, 1.04, 1] } : {}}
+            transition={{ duration: 0.4 }}
+          />
+          {/* Botões invisíveis sobre cada fatia */}
+          <div className="absolute inset-0">
+            {fatias.map((f, i) => {
+              // posiciona rótulo no meio de cada fatia
+              const inicio = i === 0 ? 0 : anguloF1;
+              const meio = inicio + (f.percentual / 100) * 360 / 2;
+              const rad = ((meio - 90) * Math.PI) / 180;
+              const r = 38; // % do raio
+              const x = 50 + r * Math.cos(rad);
+              const y = 50 + r * Math.sin(rad);
+              const tocada = tocadas.has(f.id);
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => tocar(f.id)}
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 rounded-2xl px-2 py-1.5 backdrop-blur-sm transition ${
+                    ativa === f.id
+                      ? "bg-white/90 text-[#0d1f55] scale-110 shadow-xl"
+                      : "bg-black/50 text-white hover:bg-black/70 active:scale-95"
+                  }`}
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                >
+                  <div className="text-3xl leading-none">{f.emoji}</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide">
+                    {f.percentual}%
+                  </div>
+                  {tocada && (
+                    <div className="text-[9px] font-bold text-emerald-400">✓</div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          {/* Selo central */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0d1f55] border-4 border-white/40 grid place-items-center text-2xl sm:text-3xl shadow-inner">
+              🏘️
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Legenda */}
+      <div className="grid grid-cols-2 gap-2">
+        {fatias.map((f) => (
+          <button
+            key={`leg-${f.id}`}
+            onClick={() => tocar(f.id)}
+            className={`text-left rounded-2xl border p-3 transition ${
+              ativa === f.id
+                ? "bg-white/15 border-white/40"
+                : "bg-white/5 border-white/15 hover:bg-white/10"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className="w-4 h-4 rounded"
+                style={{ background: f.cor }}
+              />
+              <span className="font-black text-sm">{f.emoji} {f.rotulo}</span>
+            </div>
+            <div className="text-[11px] uppercase tracking-widest text-white/60 mt-1">
+              {f.percentual}% do município
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Card da fatia ativa */}
+      {fatiaAtiva && (
+        <motion.div
+          key={fatiaAtiva.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-2xl border border-white/20 bg-white/10 p-4 space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">{fatiaAtiva.emoji}</span>
+              <span className="font-black">{fatiaAtiva.rotulo}</span>
+            </div>
+            <button
+              onClick={() => falar(fatiaAtiva.descricao)}
+              className="text-xs bg-white/10 border border-white/20 px-2 py-1 rounded-lg hover:bg-white/20"
+            >
+              🔊 ouvir
+            </button>
+          </div>
+          <div className="text-sm text-white/90 leading-snug">
+            {fatiaAtiva.descricao}
+          </div>
+          <ul className="grid grid-cols-1 gap-1.5">
+            {fatiaAtiva.exemplos.map((ex, i) => (
+              <li
+                key={i}
+                className="text-xs bg-black/30 rounded-lg px-2 py-1.5 border border-white/10"
+              >
+                • {ex}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
+
+      {/* Progresso das fatias */}
+      <div className="flex items-center justify-center gap-2 text-xs text-white/60">
+        {fatias.map((f) => (
+          <span
+            key={`dot-${f.id}`}
+            className={`px-2 py-1 rounded-full border ${
+              tocadas.has(f.id)
+                ? "bg-emerald-500/25 border-emerald-400/50 text-emerald-100"
+                : "bg-white/5 border-white/15"
+            }`}
+          >
+            {tocadas.has(f.id) ? "✓" : "•"} {f.rotulo}
+          </span>
+        ))}
+      </div>
+
+      {todasTocadas && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-3 text-sm text-emerald-100"
+        >
+          <span className="font-bold">🍕 </span>
+          {cena.falaFinal}
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!todasTocadas}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          todasTocadas
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed border border-white/10"
+        }`}
+      >
+        {todasTocadas ? "Continuar" : "Toque nas 2 fatias pra liberar"}
+      </button>
+    </div>
+  );
+}
+
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 
