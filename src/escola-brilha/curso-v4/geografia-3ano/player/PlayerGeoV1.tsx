@@ -82,6 +82,8 @@ function CenaRenderer({ cena, onProxima }: { cena: CenaGeoV1; onProxima: () => v
   switch (cena.tipo) {
     case "mesaCartografo":
       return <MesaCartografo cena={cena} onProxima={onProxima} />;
+    case "votoExplorador":
+      return <VotoExplorador cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return <CenaPlaceholder titulo={cena.titulo} descricao={cena.descricao} onProxima={onProxima} />;
   }
