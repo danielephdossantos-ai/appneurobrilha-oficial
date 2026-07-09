@@ -146,6 +146,8 @@ function CenaRenderer({
       return <MapaCamadas cena={cena} onProxima={onProxima} />;
     case "linhaEstrada":
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
+    case "voceLeSozinho":
+      return <VoceLeSozinho cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
