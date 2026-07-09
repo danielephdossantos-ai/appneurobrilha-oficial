@@ -683,6 +683,7 @@ export type CenaGeoV1 =
         cor: string;    // gradient tailwind ex.: "from-sky-400 to-indigo-500"
         titulo: string; // ex.: "Zona Urbana"
         texto: string;  // Aurora conta o que é esse ponto
+        fotoUrl?: string; // opcional: foto real exibida no painel ativo
       }>;
       falaFinal: string;
     }
