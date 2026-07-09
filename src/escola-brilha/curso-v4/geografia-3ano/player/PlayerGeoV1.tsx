@@ -148,8 +148,8 @@ function CenaRenderer({
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
     case "voceLeSozinho":
       return <VoceLeSozinho cena={cena} onProxima={onProxima} />;
-    case "fronteirasVivas":
-      return <FronteirasVivas cena={cena} onProxima={onProxima} />;
+    case "construtorMarcos":
+      return <ConstrutorMarcos cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
@@ -1659,51 +1659,89 @@ function VoceLeSozinho({
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Cena 9 — Fronteiras Vivas (arrastar a linha até a fronteira certa)
+// Cena 9 — Construtor de Marcos (contra o tempo)
 // ─────────────────────────────────────────────────────────────────────
-function FronteirasVivas({
+function ConstrutorMarcos({
   cena,
   onProxima,
 }: {
-  cena: Extract<CenaGeoV1, { tipo: "fronteirasVivas" }>;
+  cena: Extract<CenaGeoV1, { tipo: "construtorMarcos" }>;
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
   const [rodadaIdx, setRodadaIdx] = useState(0);
-  const [linha, setLinha] = useState(50); // % horizontal
+  const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
+  const [feedback, setFeedback] = useState<"acerto" | "erro" | "tempo" | null>(null);
+  const [pecaTocada, setPecaTocada] = useState<string | null>(null);
   const [acertos, setAcertos] = useState(0);
-  const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
+  const [combo, setCombo] = useState(0);
+  const [comboMax, setComboMax] = useState(0);
   const [fim, setFim] = useState(false);
-  const areaRef = useRef<HTMLDivElement | null>(null);
 
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  const mover = (clientX: number) => {
-    if (travada) return;
-    const el = areaRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    setLinha(Math.max(2, Math.min(98, x)));
-  };
+  // relógio regressivo
+  useEffect(() => {
+    if (travada || fim) return;
+    if (tempo <= 0) {
+      setTravada(true);
+      setFeedback("tempo");
+      setCombo(0);
+      return;
+    }
+    const t = setTimeout(() => setTempo((n) => n - 1), 1000);
+    return () => clearTimeout(t);
+  }, [tempo, travada, fim]);
 
-  const confirmar = () => {
+  // fala a pista ao entrar na rodada
+  useEffect(() => {
+    if (fim) return;
+    try {
+      window.speechSynthesis?.cancel();
+      const u = new SpeechSynthesisUtterance(rodada.contexto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      window.speechSynthesis?.speak(u);
+    } catch {
+      /* ignore */
+    }
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rodadaIdx, fim]);
+
+  const escolher = (pecaId: string) => {
     if (travada) return;
-    const dist = Math.abs(linha - rodada.xCerto);
-    const ok = dist <= rodada.tolerancia;
+    setPecaTocada(pecaId);
     setTravada(true);
-    setFeedback(ok ? "acerto" : "erro");
-    if (ok) setAcertos((n) => n + 1);
+    if (pecaId === rodada.pecaCertaId) {
+      setFeedback("acerto");
+      setAcertos((n) => n + 1);
+      setCombo((c) => {
+        const novo = c + 1;
+        setComboMax((m) => Math.max(m, novo));
+        return novo;
+      });
+    } else {
+      setFeedback("erro");
+      setCombo(0);
+    }
   };
 
   const proximaRodada = () => {
     if (rodadaIdx + 1 < total) {
       setRodadaIdx(rodadaIdx + 1);
-      setLinha(50);
+      setTempo(cena.duracaoSegundos);
       setTravada(false);
       setFeedback(null);
+      setPecaTocada(null);
     } else {
       setFim(true);
     }
@@ -1717,12 +1755,15 @@ function FronteirasVivas({
           animate={{ opacity: 1, scale: 1 }}
           className="bg-gradient-to-br from-emerald-500/25 to-amber-400/25 border-2 border-emerald-400/50 rounded-3xl p-6 text-center space-y-3"
         >
-          <div className="text-6xl">🗺️</div>
+          <div className="text-6xl">🏗️</div>
           <div className="text-xs uppercase tracking-widest text-amber-300">
-            Fronteiras Vivas — placar
+            Construtor de Marcos — placar
           </div>
           <div className="text-4xl font-black text-white">
             {acertos} / {total}
+          </div>
+          <div className="text-sm text-amber-200 font-bold">
+            🔥 Combo máximo: {comboMax}
           </div>
           <div className="text-sm text-white/80 max-w-md mx-auto">
             {cena.falaFinal}
@@ -1738,8 +1779,12 @@ function FronteirasVivas({
     );
   }
 
+  const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
+  const tempoUrgente = tempo <= 5;
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
+      {/* Aurora */}
       <div className="flex items-start gap-3">
         <img
           src={aurora.img}
@@ -1754,44 +1799,44 @@ function FronteirasVivas({
         </div>
       </div>
 
+      {/* Instrução */}
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        🚧 {cena.instrucao}
+        {cena.instrucao}
       </div>
 
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/60">
+      {/* HUD: rodada + combo + relógio */}
+      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/70">
         <span>Rodada {rodadaIdx + 1} / {total}</span>
+        <span className="text-amber-300 font-bold">🔥 combo {combo}</span>
         <span>✓ {acertos}</span>
       </div>
+      <div className="h-3 rounded-full bg-white/10 overflow-hidden border border-white/15">
+        <motion.div
+          className={`h-full ${
+            tempoUrgente
+              ? "bg-gradient-to-r from-rose-500 to-orange-400"
+              : "bg-gradient-to-r from-emerald-400 to-amber-300"
+          }`}
+          animate={{ width: `${tempoPct}%` }}
+          transition={{ duration: 0.4, ease: "linear" }}
+        />
+      </div>
+      <div className={`text-center font-black text-lg ${tempoUrgente ? "text-rose-300 animate-pulse" : "text-white"}`}>
+        ⏱️ {tempo}s
+      </div>
 
-      {/* Duas terras + pista central */}
-      <div
-        ref={areaRef}
-        className="relative h-56 sm:h-64 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl touch-none select-none"
-        onMouseMove={(e) => mover(e.clientX)}
-        onTouchMove={(e) => {
-          const t = e.touches[0];
-          if (t) mover(t.clientX);
-        }}
-        onTouchStart={(e) => {
-          const t = e.touches[0];
-          if (t) mover(t.clientX);
-        }}
-        onClick={(e) => mover(e.clientX)}
-      >
-        {/* Lado A */}
+      {/* Cenário: 2 municípios + slot vazio no meio (fronteira apagada) */}
+      <div className="relative h-52 sm:h-60 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
         <div
-          className={`absolute inset-y-0 left-0 bg-gradient-to-br ${rodada.municipioA.cor} flex flex-col items-center justify-center gap-1`}
-          style={{ width: `${linha}%` }}
+          className={`absolute inset-y-0 left-0 w-1/2 bg-gradient-to-br ${rodada.municipioA.cor} flex flex-col items-center justify-center gap-1`}
         >
           <div className="text-4xl sm:text-5xl">{rodada.municipioA.emoji}</div>
           <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
             {rodada.municipioA.nome}
           </div>
         </div>
-        {/* Lado B */}
         <div
-          className={`absolute inset-y-0 right-0 bg-gradient-to-bl ${rodada.municipioB.cor} flex flex-col items-center justify-center gap-1`}
-          style={{ width: `${100 - linha}%` }}
+          className={`absolute inset-y-0 right-0 w-1/2 bg-gradient-to-bl ${rodada.municipioB.cor} flex flex-col items-center justify-center gap-1`}
         >
           <div className="text-4xl sm:text-5xl">{rodada.municipioB.emoji}</div>
           <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
@@ -1799,66 +1844,77 @@ function FronteirasVivas({
           </div>
         </div>
 
-        {/* Pista (rio, placa, muro) — fica no lugar certo, discreta */}
-        <div
-          className="absolute top-1 -translate-x-1/2 flex flex-col items-center pointer-events-none"
-          style={{ left: `${rodada.xCerto}%` }}
-        >
-          <div className="text-2xl sm:text-3xl drop-shadow-lg">
-            {rodada.pistaEmoji}
-          </div>
-          <div className="text-[9px] uppercase tracking-widest bg-black/60 text-amber-200 px-1.5 py-0.5 rounded font-bold">
-            {rodada.pistaRotulo}
-          </div>
-        </div>
-
-        {/* Linha pontilhada arrastável */}
+        {/* Slot central — a fronteira apagada */}
         <motion.div
-          className="absolute inset-y-0 pointer-events-none"
-          style={{ left: `${linha}%`, transform: "translateX(-50%)" }}
+          className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 flex items-center justify-center"
           animate={
-            feedback === "erro"
+            feedback === "erro" || feedback === "tempo"
               ? { x: [-6, 6, -4, 4, 0] }
               : feedback === "acerto"
-              ? { scale: [1, 1.05, 1] }
+              ? { scale: [1, 1.15, 1] }
               : {}
           }
           transition={{ duration: 0.5 }}
         >
           <div
-            className={`w-1 h-full ${
-              travada
-                ? feedback === "acerto"
-                  ? "bg-emerald-300"
-                  : "bg-rose-400"
-                : "bg-amber-200"
-            }`}
-            style={{
-              backgroundImage: travada
-                ? undefined
-                : "repeating-linear-gradient(to bottom,#fde68a 0 8px,transparent 8px 14px)",
-            }}
-          />
-          <div
-            className={`absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full grid place-items-center text-xs font-black ${
-              travada
-                ? feedback === "acerto"
-                  ? "bg-emerald-400 text-[#0d1f55]"
-                  : "bg-rose-400 text-white"
-                : "bg-amber-300 text-[#3a2410] animate-pulse"
+            className={`w-full h-3/4 rounded-2xl border-4 border-dashed grid place-items-center backdrop-blur-sm ${
+              feedback === "acerto"
+                ? "border-emerald-300 bg-emerald-400/30"
+                : feedback === "erro" || feedback === "tempo"
+                ? "border-rose-300 bg-rose-500/25"
+                : "border-amber-200 bg-black/40 animate-pulse"
             }`}
           >
-            🚧
+            {travada && pecaTocada ? (
+              <div className="text-5xl sm:text-6xl drop-shadow-lg">
+                {cena.pecas.find((p) => p.id === pecaTocada)?.emoji ??
+                  (feedback === "tempo"
+                    ? "⏰"
+                    : cena.pecas.find((p) => p.id === rodada.pecaCertaId)?.emoji)}
+              </div>
+            ) : (
+              <div className="text-3xl sm:text-4xl opacity-60">❔</div>
+            )}
           </div>
         </motion.div>
-
-        {!travada && (
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[11px] px-3 py-1 rounded-full pointer-events-none">
-            👆 arraste a linha até a fronteira
-          </div>
-        )}
       </div>
 
+      {/* Pista escrita */}
+      <div className="bg-white/10 border border-white/15 rounded-2xl p-3 text-sm text-white/95 leading-snug">
+        <span className="font-bold text-amber-300">Pista: </span>
+        {rodada.contexto}
+      </div>
+
+      {/* Peças (banco embaixo) */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+        {cena.pecas.map((p) => {
+          const certa = p.id === rodada.pecaCertaId;
+          const foiTocada = pecaTocada === p.id;
+          return (
+            <button
+              key={p.id}
+              onClick={() => escolher(p.id)}
+              disabled={travada}
+              className={`aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-bold text-[11px] sm:text-xs transition ${
+                travada
+                  ? foiTocada && certa
+                    ? "bg-emerald-400/30 border-emerald-300 text-emerald-100"
+                    : foiTocada && !certa
+                    ? "bg-rose-500/30 border-rose-300 text-rose-100"
+                    : certa && (feedback === "erro" || feedback === "tempo")
+                    ? "bg-emerald-400/20 border-emerald-300/60 text-emerald-100"
+                    : "bg-white/5 border-white/10 text-white/40"
+                  : "bg-white/10 border-white/25 text-white hover:bg-white/20 active:scale-95"
+              }`}
+            >
+              <div className="text-3xl sm:text-4xl">{p.emoji}</div>
+              <div>{p.rotulo}</div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Feedback */}
       {feedback && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -1870,26 +1926,24 @@ function FronteirasVivas({
           }`}
         >
           <span className="font-bold">
-            {feedback === "acerto" ? "🎯 " : "❌ "}
+            {feedback === "acerto"
+              ? "🎯 "
+              : feedback === "tempo"
+              ? "⏰ Tempo esgotado! "
+              : "❌ "}
           </span>
           {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
         </motion.div>
       )}
 
-      <button
-        onClick={travada ? proximaRodada : confirmar}
-        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
-          travada
-            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-            : "bg-white text-[#0d1f55] shadow-xl hover:scale-[1.01]"
-        }`}
-      >
-        {travada
-          ? rodadaIdx + 1 === total
-            ? "Ver placar →"
-            : "Próxima rodada →"
-          : "🚧 Marcar fronteira aqui"}
-      </button>
+      {travada && (
+        <button
+          onClick={proximaRodada}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+        >
+          {rodadaIdx + 1 === total ? "Ver placar →" : "Próxima rodada →"}
+        </button>
+      )}
     </div>
   );
 }

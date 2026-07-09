@@ -311,10 +311,17 @@ export const aula01: AulaGeoV1 = {
       "Leitura de cartógrafo profissional! Você já sabe explicar o município SEM ajuda: prefeitura, zona urbana, zona rural e fronteira. Guarda essas palavras — vamos usar no minijogo agora.",
   },
   cena09_minijogo: {
-    tipo: "fronteirasVivas",
+    tipo: "construtorMarcos",
     aurora:
-      "Chegou o minijogo do cartógrafo! Você vai ver DOIS municípios grudados. Sua missão é arrastar a LINHA PONTILHADA até o lugar certo da fronteira. Fica esperto na pista — pode ser um rio, uma placa ou um muro!",
-    instrucao: "Arraste a linha 🚧 até a fronteira e toque em MARCAR FRONTEIRA",
+      "Chegou o minijogo do cartógrafo contra o tempo! Cada rodada mostra DOIS municípios sem fronteira. Você lê a pista, olha as peças embaixo e toca na PEÇA CERTA pra fincar o marco no meio — antes do relógio zerar!",
+    instrucao: "⏱️ Leia a pista e toque na peça certa antes do tempo acabar!",
+    duracaoSegundos: 15,
+    pecas: [
+      { id: "rio", emoji: "🌊", rotulo: "Rio" },
+      { id: "placa", emoji: "🪧", rotulo: "Placa" },
+      { id: "muro", emoji: "🧱", rotulo: "Muro" },
+      { id: "ponte", emoji: "🌉", rotulo: "Ponte" },
+    ],
     rodadas: [
       {
         id: "r1",
@@ -328,14 +335,13 @@ export const aula01: AulaGeoV1 = {
           emoji: "🌾",
           cor: "from-lime-500 to-emerald-700",
         },
-        pistaEmoji: "🌊",
-        pistaRotulo: "rio",
-        xCerto: 55,
-        tolerancia: 6,
+        contexto:
+          "Entre os dois municípios corre uma água larga que os barcos atravessam. Que marco separa naturalmente as duas terras?",
+        pecaCertaId: "rio",
         feedbackAcerto:
-          "Perfeito! O RIO separa Riacho Doce de Serra Verde — a fronteira passa em cima do rio.",
+          "Combo! O RIO é um marco natural — a fronteira passa em cima da água.",
         feedbackErro:
-          "Olha a pista: o rio 🌊 marca onde um município acaba e o outro começa. Puxa a linha até ele.",
+          "Quase! Quando tem água correndo entre dois municípios, o marco é o RIO 🌊.",
       },
       {
         id: "r2",
@@ -349,14 +355,13 @@ export const aula01: AulaGeoV1 = {
           emoji: "🌲",
           cor: "from-emerald-600 to-teal-800",
         },
-        pistaEmoji: "🪧",
-        pistaRotulo: "placa",
-        xCerto: 40,
-        tolerancia: 6,
+        contexto:
+          "Uma estrada de terra liga os dois lados. O motorista precisa saber quando trocou de município. Qual peça avisa isso?",
+        pecaCertaId: "placa",
         feedbackAcerto:
-          "Isso! A PLACA 🪧 avisa o motorista: passou daqui, mudou de município. É a fronteira oficial.",
+          "Boa! A PLACA 🪧 na beira da estrada é o marco oficial: passou daqui, mudou de município.",
         feedbackErro:
-          "A placa 🪧 na beira da estrada é quem avisa que trocou de município. Leva a linha até a placa.",
+          "Repara: numa estrada quem avisa a mudança de município é a PLACA 🪧.",
       },
       {
         id: "r3",
@@ -370,18 +375,37 @@ export const aula01: AulaGeoV1 = {
           emoji: "🚜",
           cor: "from-yellow-500 to-lime-700",
         },
-        pistaEmoji: "🧱",
-        pistaRotulo: "muro",
-        xCerto: 68,
-        tolerancia: 6,
+        contexto:
+          "Aqui o povo levantou uma construção de tijolos separando os quintais dos dois municípios. Qual é o marco?",
+        pecaCertaId: "muro",
         feedbackAcerto:
-          "Boa! O MURO 🧱 aqui virou o marco: de um lado, Alto do Morro; do outro, Campo Novo.",
+          "Isso! O MURO 🧱 virou o marco combinado entre os dois municípios.",
         feedbackErro:
-          "Repara no muro 🧱 — ele é o marco da fronteira nessa rodada. Arraste a linha até bater nele.",
+          "A pista fala de tijolos separando quintais — é o MURO 🧱.",
+      },
+      {
+        id: "r4",
+        municipioA: {
+          nome: "Ilha Bela",
+          emoji: "🏝️",
+          cor: "from-cyan-500 to-blue-700",
+        },
+        municipioB: {
+          nome: "Costa Nova",
+          emoji: "🏖️",
+          cor: "from-amber-400 to-rose-500",
+        },
+        contexto:
+          "Já tem um rio entre eles, mas as pessoas construíram algo por cima pra atravessar de carro. Esse algo é o marco oficial. Qual peça é?",
+        pecaCertaId: "ponte",
+        feedbackAcerto:
+          "Combo perfeito! A PONTE 🌉 conecta os dois lados e é o marco combinado dessa fronteira.",
+        feedbackErro:
+          "Atravessar o rio de carro pede uma PONTE 🌉 — esse é o marco dessa rodada.",
       },
     ],
     falaFinal:
-      "Cartógrafo dos bons! Fronteira NÃO é uma linha visível no chão — é o marco combinado (rio, placa, muro) que separa DOIS municípios. Cada um com sua prefeitura e seu prefeito.",
+      "Construtor de Marcos oficial! Você já sabe: fronteira é UM MARCO combinado — rio, placa, muro, ponte — que separa dois municípios, cada um com sua prefeitura.",
   },
   cena10_revisao: {
     tipo: "placeholder",

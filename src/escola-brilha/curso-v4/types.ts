@@ -752,20 +752,21 @@ export type CenaGeoV1 =
       falaFinal: string;                 // fecha depois de "Li tudo"
     }
   | {
-      tipo: "fronteirasVivas";
+      tipo: "construtorMarcos";
       aurora: string;
       instrucao: string;
+      /** Segundos por rodada no relógio. */
+      duracaoSegundos: number;
+      /** Banco compartilhado de peças (marcos) que aparecem embaixo. */
+      pecas: Array<{ id: string; emoji: string; rotulo: string }>;
       rodadas: Array<{
         id: string;
-        municipioA: { nome: string; emoji: string; cor: string }; // gradient tailwind
+        municipioA: { nome: string; emoji: string; cor: string };
         municipioB: { nome: string; emoji: string; cor: string };
-        /** Pista visual no centro (rio, placa, muro, etc.) exibida em xCerto. */
-        pistaEmoji: string;
-        pistaRotulo: string;
-        /** Posição correta da fronteira em % (0-100) do eixo horizontal. */
-        xCerto: number;
-        /** Tolerância em % (ex.: 6 = ±6% de folga). */
-        tolerancia: number;
+        /** Frase curta que descreve a pista geográfica dessa rodada. */
+        contexto: string;
+        /** id da peça correta dentro de `pecas`. */
+        pecaCertaId: string;
         feedbackAcerto: string;
         feedbackErro: string;
       }>;
