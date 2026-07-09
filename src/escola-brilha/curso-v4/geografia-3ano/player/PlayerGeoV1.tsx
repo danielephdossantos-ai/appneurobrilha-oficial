@@ -140,6 +140,8 @@ function CenaRenderer({
       return <CadernosCampo cena={cena} onProxima={onProxima} />;
     case "narrarMapa":
       return <NarrarMapa cena={cena} onProxima={onProxima} />;
+    case "quizRadar":
+      return <QuizRadar cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
