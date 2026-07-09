@@ -721,6 +721,23 @@ export type CenaGeoV1 =
       }>;
       falaFinal: string;             // aparece quando as duas estiverem ligadas
     }
+  | {
+      tipo: "linhaEstrada";
+      aurora: string;
+      instrucao: string;
+      pergunta: string;              // ex.: "Como o leite chega até sua casa?"
+      paradas: Array<{
+        id: string;
+        emoji: string;
+        rotulo: string;              // ex.: "Fazenda"
+        descricao: string;           // texto lido quando acertada
+      }>;
+      /** Ordem correta como lista dos ids. */
+      ordemCerta: string[];
+      feedbackAcerto: string;        // aparece quando tudo em ordem
+      feedbackErro: string;          // aparece a cada toque errado
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {

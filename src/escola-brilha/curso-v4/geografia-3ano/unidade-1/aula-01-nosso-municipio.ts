@@ -237,9 +237,43 @@ export const aula01: AulaGeoV1 = {
       "Viu? As duas camadas juntas formam o município INTEIRO. Cidade + campo iluminados no mesmo mapa.",
   },
   cena07_sequencia: {
-    tipo: "placeholder",
-    titulo: "Linha da Estrada",
-    descricao: "Arrastar 4 pontos: fazenda → estrada → mercado → casa.",
+    tipo: "linhaEstrada",
+    aurora:
+      "Todo dia sai um caminhão do campo com comida pra cidade. Vamos montar o caminho da alface até a sua casa? Toque nas paradas na ORDEM certa.",
+    instrucao: "Toque nas paradas na ORDEM certa",
+    pergunta: "Como a alface chega até a sua casa?",
+    paradas: [
+      {
+        id: "fazenda",
+        emoji: "🌾",
+        rotulo: "Fazenda",
+        descricao: "A alface nasce e cresce na zona rural, na horta da fazenda.",
+      },
+      {
+        id: "estrada",
+        emoji: "🛣️",
+        rotulo: "Estrada",
+        descricao: "O caminhão pega a estrada que liga o campo até a cidade.",
+      },
+      {
+        id: "mercado",
+        emoji: "🏪",
+        rotulo: "Mercado",
+        descricao: "Na zona urbana, o mercado recebe a alface e coloca na prateleira.",
+      },
+      {
+        id: "casa",
+        emoji: "🏠",
+        rotulo: "Sua casa",
+        descricao: "A família compra a alface e leva pra casa — pronto pro almoço!",
+      },
+    ],
+    ordemCerta: ["fazenda", "estrada", "mercado", "casa"],
+    feedbackAcerto: "Caminho completo! Do campo até a mesa, sem pular nenhuma parada.",
+    feedbackErro:
+      "Essa não é a próxima parada. Pensa: onde a alface está agora e pra onde ela vai depois?",
+    falaFinal:
+      "Viu como campo e cidade dependem um do outro? Sem a fazenda não tem alface. Sem a estrada, ela não chega. Sem o mercado, a família não encontra.",
   },
   cena08_voceLe: {
     tipo: "placeholder",
