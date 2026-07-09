@@ -314,7 +314,7 @@ function MesaCartografo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {descoberto ? "Descobri! Próxima cena →" : "🔍 Continue explorando o mapa…"}
+        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
       </button>
     </div>
   );
