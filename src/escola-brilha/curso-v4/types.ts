@@ -822,6 +822,38 @@ export type CenaGeoV1 =
       };
       falaFinal: string;
     }
+  | {
+      /**
+       * Mapa do Brasil INTERATIVO — SVG real com os 27 UFs clicáveis.
+       * Cada estado acende ao ser tocado; abre popup com Nome/Capital/Sigla
+       * e Aurora narra. Usado do 3º ao 9º ano.
+       */
+      tipo: "mapaBrasilInterativo";
+      aurora: string;
+      instrucao: string;
+      /** Desafio pedagógico opcional — se ausente, missão é tocar em todos. */
+      missao?:
+        | { tipo: "todos" }
+        | {
+            /** Acender só os UFs listados (ex.: 5 mais populosos). */
+            tipo: "selecionar";
+            siglas: string[];
+            pergunta: string;
+          }
+        | {
+            /** 2+ grupos coloridos (ex.: populosos vs maiores em tamanho). */
+            tipo: "grupos";
+            grupos: Array<{
+              id: string;
+              rotulo: string;
+              emoji: string;
+              cor: string;                 // gradient tailwind
+              siglas: string[];            // UFs desse grupo
+              descricao: string;
+            }>;
+          };
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 
