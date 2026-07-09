@@ -38,11 +38,39 @@ function AulaGeoV1Page() {
   const navigate = useNavigate();
   const dados = getAulaGeoV1FromCurso(curso, aula);
   const [mostrarFinal, setMostrarFinal] = useState(false);
+  const [proximaPendente, setProximaPendente] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Sempre rolar ao topo quando a aula muda (inclusive na navegação inline).
   useEffect(() => {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [aula]);
+
+  const tocarCheck = () => {
+    try {
+      const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!AC) return;
+      const ctx = new AC();
+      const now = ctx.currentTime;
+      const notes = [
+        { f: 880, t: 0 },
+        { f: 1318, t: 0.12 },
+      ];
+      notes.forEach(({ f, t }) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, now + t);
+        g.gain.exponentialRampToValueAtTime(0.25, now + t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + t + 0.28);
+        osc.connect(g).connect(ctx.destination);
+        osc.start(now + t);
+        osc.stop(now + t + 0.3);
+      });
+    } catch {
+      /* ignore */
+    }
+  };
 
   if (!dados) {
     return (
@@ -68,14 +96,18 @@ function AulaGeoV1Page() {
     marcarConcluida(curso, aula);
     const proxima = getProximaAulaGeoV1(curso, aula);
     if (proxima) {
-      // Carrega a próxima aula inline — o `key={aula}` no Player garante remontagem limpa.
-      navigate({
-        to: "/escola-brilha/aula-geo-v1/$curso/$aula",
-        params: { curso, aula: proxima.aula.slug },
-        replace: false,
-      });
+      tocarCheck();
+      setProximaPendente(proxima.aula.slug);
+      if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      setTimeout(() => {
+        navigate({
+          to: "/escola-brilha/aula-geo-v1/$curso/$aula",
+          params: { curso, aula: proxima.aula.slug },
+          replace: false,
+        });
+        setProximaPendente(null);
+      }, 2000);
     } else {
-      // Última aula do curso → comemoração final.
       setMostrarFinal(true);
       if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     }
@@ -86,7 +118,69 @@ function AulaGeoV1Page() {
     return <CelebracaoFinalCurso curso={curso} titulo={cursoInfo?.titulo ?? "Curso"} onSair={sair} />;
   }
 
-  return <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />;
+  return (
+    <>
+      <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />
+      <AnimatePresence>
+        {proximaPendente && <MissaoDesbloqueada />}
+      </AnimatePresence>
+      <audio ref={audioRef} preload="auto" />
+    </>
+  );
+}
+
+function MissaoDesbloqueada() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0d1f55]/85 backdrop-blur-md"
+    >
+      <motion.div
+        initial={{ scale: 0.5, rotate: -8, opacity: 0 }}
+        animate={{ scale: 1, rotate: 0, opacity: 1 }}
+        exit={{ scale: 1.1, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 14 }}
+        className="relative bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 rounded-3xl px-10 py-8 shadow-2xl text-center max-w-sm mx-6"
+      >
+        {/* Halo brilhante */}
+        <motion.div
+          className="absolute inset-0 rounded-3xl"
+          animate={{ boxShadow: ["0 0 0px #fde68a", "0 0 60px #fde68a", "0 0 0px #fde68a"] }}
+          transition={{ duration: 1.4, repeat: Infinity }}
+        />
+        <div className="relative">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: [0, 1.2, 1] }}
+            transition={{ duration: 0.5, times: [0, 0.6, 1] }}
+            className="mx-auto w-24 h-24 rounded-full bg-white/30 flex items-center justify-center text-6xl mb-3 border-4 border-white/60"
+          >
+            🛡️
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 300 }}
+            className="absolute top-0 right-0 w-12 h-12 rounded-full bg-emerald-500 border-4 border-white flex items-center justify-center text-2xl text-white shadow-lg"
+          >
+            ✔
+          </motion.div>
+          <div className="text-xs uppercase tracking-[0.3em] text-[#5b3a00] font-bold">
+            Escola Brilha
+          </div>
+          <div className="text-2xl font-black text-[#3d2500] mt-1">
+            Missão Desbloqueada!
+          </div>
+          <div className="text-sm text-[#5b3a00] mt-2 font-semibold">
+            Preparando a próxima aventura…
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
 }
 
 function CelebracaoFinalCurso({
