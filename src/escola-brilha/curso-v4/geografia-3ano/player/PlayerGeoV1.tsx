@@ -2187,8 +2187,198 @@ function PizzaMunicipio({
 
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 11 — Selo do Atlas (avaliação final + insígnia colecionável)
+// ─────────────────────────────────────────────────────────────────────
+function SeloAtlas({
+  cena,
+  onProxima,
+  ultima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "seloAtlas" }>;
+  onProxima: () => void;
+  ultima?: boolean;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [idx, setIdx] = useState(0);
+  const [respostas, setRespostas] = useState<Record<string, string>>({});
+  const [feedback, setFeedback] = useState<null | { ok: boolean; texto: string }>(null);
+  const [conquistado, setConquistado] = useState(false);
+  const [acertos, setAcertos] = useState(0);
+
+  const total = cena.perguntas.length;
+  const atual = cena.perguntas[idx];
+
+  useEffect(() => {
+    if (!atual) return;
+    falarPT(atual.pergunta);
+  }, [atual?.id]);
+
+  useEffect(() => {
+    if (conquistado) falarPT(cena.falaFinal);
+  }, [conquistado]);
+
+  function escolher(opcaoId: string) {
+    if (respostas[atual.id]) return;
+    const opc = atual.opcoes.find((o) => o.id === opcaoId);
+    const ok = !!opc?.correta;
+    setRespostas((r) => ({ ...r, [atual.id]: opcaoId }));
+    if (ok) setAcertos((a) => a + 1);
+    const texto = ok ? atual.feedbackAcerto : atual.feedbackErro;
+    setFeedback({ ok, texto });
+    falarPT(texto);
+    setTimeout(() => {
+      setFeedback(null);
+      if (idx + 1 < total) {
+        setIdx(idx + 1);
+      } else {
+        setConquistado(true);
+      }
+    }, 2200);
+  }
+
+  if (conquistado) {
+    return (
+      <div className="space-y-5 text-center py-4">
+        <div className="text-xs uppercase tracking-[0.25em] text-amber-300">
+          🏅 Selo conquistado
+        </div>
+
+        <motion.div
+          initial={{ scale: 0.4, rotate: -20, opacity: 0 }}
+          animate={{ scale: 1, rotate: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 180, damping: 12 }}
+          className="mx-auto relative w-56 h-56"
+        >
+          <div
+            className={`absolute inset-0 rounded-full bg-gradient-to-br ${cena.selo.cor} shadow-[0_0_60px_rgba(255,200,80,0.55)] blur-[2px]`}
+          />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-2 rounded-full border-4 border-dashed border-white/50"
+          />
+          <div className="absolute inset-6 rounded-full bg-[#0d1f55] flex flex-col items-center justify-center border-4 border-white/20">
+            <div className="text-6xl">{cena.selo.emoji}</div>
+            <div className="mt-1 text-[10px] uppercase tracking-widest text-amber-200">
+              Atlas Municipal
+            </div>
+          </div>
+        </motion.div>
+
+        <div>
+          <h2 className="text-2xl font-black text-amber-100">{cena.selo.nome}</h2>
+          <p className="text-sm text-white/70">{cena.selo.subtitulo}</p>
+          <div className="mt-2 text-xs text-emerald-300 font-bold">
+            Acertos: {acertos}/{total}
+          </div>
+        </div>
+
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-3 items-start text-left">
+          <img src={aurora.imagem} alt="" className="w-12 h-12" />
+          <p className="text-sm text-white/90 leading-relaxed">{cena.falaFinal}</p>
+        </div>
+
+        <button
+          onClick={onProxima}
+          className={`w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r ${cena.selo.cor} text-[#0d1f55] shadow-xl hover:scale-[1.01] transition`}
+        >
+          {ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-3">
+        <img src={aurora.imagem} alt="" className="w-14 h-14" />
+        <div className="flex-1">
+          <div className="text-xs uppercase tracking-widest text-amber-300">
+            Selo do Atlas — Prova final
+          </div>
+          <div className="text-sm text-white/80">{cena.instrucao}</div>
+        </div>
+      </div>
+
+      {/* progresso */}
+      <div className="flex gap-1.5">
+        {cena.perguntas.map((_, i) => (
+          <div
+            key={i}
+            className={`h-2 flex-1 rounded-full transition ${
+              i < idx
+                ? "bg-emerald-400"
+                : i === idx
+                ? "bg-amber-300"
+                : "bg-white/15"
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="bg-white/5 border border-white/15 rounded-2xl p-5 space-y-4">
+        <div className="text-xs text-amber-200 font-bold">
+          Pergunta {idx + 1}/{total}
+        </div>
+        <button
+          onClick={() => falarPT(atual.pergunta)}
+          className="w-full text-left text-lg font-bold leading-snug hover:text-amber-200 transition"
+        >
+          🔊 {atual.pergunta}
+        </button>
+
+        <div className="grid gap-2">
+          {atual.opcoes.map((o) => {
+            const escolhida = respostas[atual.id] === o.id;
+            const revelada = !!respostas[atual.id];
+            const estaCerta = !!o.correta;
+            return (
+              <button
+                key={o.id}
+                onClick={() => escolher(o.id)}
+                disabled={revelada}
+                className={`w-full text-left px-4 py-3 rounded-xl border-2 font-semibold text-sm transition ${
+                  revelada
+                    ? estaCerta
+                      ? "bg-emerald-500/25 border-emerald-400 text-emerald-100"
+                      : escolhida
+                      ? "bg-rose-500/25 border-rose-400 text-rose-100"
+                      : "bg-white/5 border-white/10 text-white/50"
+                    : "bg-white/10 border-white/20 hover:bg-white/15 hover:border-amber-300"
+                }`}
+              >
+                {revelada && estaCerta ? "✅ " : revelada && escolhida ? "❌ " : ""}
+                {o.texto}
+              </button>
+            );
+          })}
+        </div>
+
+        {feedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`rounded-xl p-3 text-sm border ${
+              feedback.ok
+                ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
+                : "bg-rose-500/15 border-rose-400/40 text-rose-100"
+            }`}
+          >
+            {feedback.ok ? "🎯 " : "💡 "}
+            {feedback.texto}
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
+
+
 
 function CenaPlaceholder({
   titulo,
