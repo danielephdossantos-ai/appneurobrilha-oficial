@@ -751,6 +751,26 @@ export type CenaGeoV1 =
       }>;
       falaFinal: string;                 // fecha depois de "Li tudo"
     }
+  | {
+      tipo: "fronteirasVivas";
+      aurora: string;
+      instrucao: string;
+      rodadas: Array<{
+        id: string;
+        municipioA: { nome: string; emoji: string; cor: string }; // gradient tailwind
+        municipioB: { nome: string; emoji: string; cor: string };
+        /** Pista visual no centro (rio, placa, muro, etc.) exibida em xCerto. */
+        pistaEmoji: string;
+        pistaRotulo: string;
+        /** Posição correta da fronteira em % (0-100) do eixo horizontal. */
+        xCerto: number;
+        /** Tolerância em % (ex.: 6 = ±6% de folga). */
+        tolerancia: number;
+        feedbackAcerto: string;
+        feedbackErro: string;
+      }>;
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {

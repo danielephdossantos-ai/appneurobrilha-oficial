@@ -311,9 +311,77 @@ export const aula01: AulaGeoV1 = {
       "Leitura de cartógrafo profissional! Você já sabe explicar o município SEM ajuda: prefeitura, zona urbana, zona rural e fronteira. Guarda essas palavras — vamos usar no minijogo agora.",
   },
   cena09_minijogo: {
-    tipo: "placeholder",
-    titulo: "Fronteiras Vivas",
-    descricao: "Arrastar a linha pontilhada até a fronteira certa entre 2 municípios.",
+    tipo: "fronteirasVivas",
+    aurora:
+      "Chegou o minijogo do cartógrafo! Você vai ver DOIS municípios grudados. Sua missão é arrastar a LINHA PONTILHADA até o lugar certo da fronteira. Fica esperto na pista — pode ser um rio, uma placa ou um muro!",
+    instrucao: "Arraste a linha 🚧 até a fronteira e toque em MARCAR FRONTEIRA",
+    rodadas: [
+      {
+        id: "r1",
+        municipioA: {
+          nome: "Riacho Doce",
+          emoji: "🏙️",
+          cor: "from-sky-500 to-indigo-700",
+        },
+        municipioB: {
+          nome: "Serra Verde",
+          emoji: "🌾",
+          cor: "from-lime-500 to-emerald-700",
+        },
+        pistaEmoji: "🌊",
+        pistaRotulo: "rio",
+        xCerto: 55,
+        tolerancia: 6,
+        feedbackAcerto:
+          "Perfeito! O RIO separa Riacho Doce de Serra Verde — a fronteira passa em cima do rio.",
+        feedbackErro:
+          "Olha a pista: o rio 🌊 marca onde um município acaba e o outro começa. Puxa a linha até ele.",
+      },
+      {
+        id: "r2",
+        municipioA: {
+          nome: "Vila do Sol",
+          emoji: "🌻",
+          cor: "from-amber-500 to-orange-600",
+        },
+        municipioB: {
+          nome: "Bosque Azul",
+          emoji: "🌲",
+          cor: "from-emerald-600 to-teal-800",
+        },
+        pistaEmoji: "🪧",
+        pistaRotulo: "placa",
+        xCerto: 40,
+        tolerancia: 6,
+        feedbackAcerto:
+          "Isso! A PLACA 🪧 avisa o motorista: passou daqui, mudou de município. É a fronteira oficial.",
+        feedbackErro:
+          "A placa 🪧 na beira da estrada é quem avisa que trocou de município. Leva a linha até a placa.",
+      },
+      {
+        id: "r3",
+        municipioA: {
+          nome: "Alto do Morro",
+          emoji: "⛰️",
+          cor: "from-stone-500 to-stone-800",
+        },
+        municipioB: {
+          nome: "Campo Novo",
+          emoji: "🚜",
+          cor: "from-yellow-500 to-lime-700",
+        },
+        pistaEmoji: "🧱",
+        pistaRotulo: "muro",
+        xCerto: 68,
+        tolerancia: 6,
+        feedbackAcerto:
+          "Boa! O MURO 🧱 aqui virou o marco: de um lado, Alto do Morro; do outro, Campo Novo.",
+        feedbackErro:
+          "Repara no muro 🧱 — ele é o marco da fronteira nessa rodada. Arraste a linha até bater nele.",
+      },
+    ],
+    falaFinal:
+      "Cartógrafo dos bons! Fronteira NÃO é uma linha visível no chão — é o marco combinado (rio, placa, muro) que separa DOIS municípios. Cada um com sua prefeitura e seu prefeito.",
   },
   cena10_revisao: {
     tipo: "placeholder",
