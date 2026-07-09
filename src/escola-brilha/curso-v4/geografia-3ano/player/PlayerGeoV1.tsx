@@ -142,6 +142,8 @@ function CenaRenderer({
       return <NarrarMapa cena={cena} onProxima={onProxima} />;
     case "quizRadar":
       return <QuizRadar cena={cena} onProxima={onProxima} />;
+    case "mapaCamadas":
+      return <MapaCamadas cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
