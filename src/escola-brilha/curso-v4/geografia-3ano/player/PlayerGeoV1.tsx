@@ -2493,6 +2493,7 @@ function CenaPlaceholder({
       </button>
     </div>
   );
+}
 
 // ─────────────────────────────────────────────────────────────────────
 // MapaBrasilInterativo — SVG real dos 27 UFs, cada estado clicável.
