@@ -82,6 +82,8 @@ function CenaRenderer({ cena, onProxima }: { cena: CenaGeoV1; onProxima: () => v
   switch (cena.tipo) {
     case "mesaCartografo":
       return <MesaCartografo cena={cena} onProxima={onProxima} />;
+    case "votoExplorador":
+      return <VotoExplorador cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return <CenaPlaceholder titulo={cena.titulo} descricao={cena.descricao} onProxima={onProxima} />;
   }
@@ -252,6 +254,135 @@ function MesaCartografo({
         }`}
       >
         {descoberto ? "Descobri! Próxima cena →" : "🔍 Continue explorando o mapa…"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Cena 2 — Voto do Explorador (2 cards grandes, escolhe antes de saber)
+// ─────────────────────────────────────────────────────────────────────
+function VotoExplorador({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "votoExplorador" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [voto, setVoto] = useState<string | null>(null);
+  const [revelado, setRevelado] = useState(false);
+  const acertou = voto === cena.respostaCerta;
+
+  const votar = (id: string) => {
+    if (revelado) return;
+    setVoto(id);
+    setTimeout(() => setRevelado(true), 350);
+  };
+
+  return (
+    <div className="space-y-5">
+      {/* Aurora fala */}
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      {/* Pergunta grande */}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl px-4 py-4 text-center shadow-lg">
+        <div className="text-[11px] uppercase tracking-widest text-amber-800/80 font-bold mb-1">
+          🗳️ Voto do Explorador
+        </div>
+        <div className="text-base sm:text-lg font-black leading-tight">
+          {cena.pergunta}
+        </div>
+      </div>
+
+      {/* Cards de voto — empilhados no mobile, lado a lado no desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {cena.opcoes.map((op) => {
+          const escolhido = voto === op.id;
+          const certoRevelado = revelado && op.id === cena.respostaCerta;
+          const erradoRevelado = revelado && escolhido && op.id !== cena.respostaCerta;
+          return (
+            <motion.button
+              key={op.id}
+              onClick={() => votar(op.id)}
+              disabled={revelado}
+              whileTap={{ scale: revelado ? 1 : 0.97 }}
+              className={`relative rounded-3xl p-5 text-left overflow-hidden border-2 transition-all bg-gradient-to-br ${op.cor} ${
+                escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
+              } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
+                erradoRevelado ? "opacity-60" : ""
+              }`}
+            >
+              <div className="text-5xl mb-2">{op.emoji}</div>
+              <div className="text-white font-black text-lg leading-tight">
+                {op.titulo}
+              </div>
+              {op.subtitulo && (
+                <div className="text-white/85 text-xs mt-1 font-medium">
+                  {op.subtitulo}
+                </div>
+              )}
+              {certoRevelado && (
+                <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                  ✓
+                </div>
+              )}
+              {erradoRevelado && (
+                <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                  ✕
+                </div>
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {revelado && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`rounded-2xl p-4 flex items-start gap-3 border ${
+            acertou
+              ? "bg-emerald-500/15 border-emerald-400/40"
+              : "bg-rose-500/15 border-rose-400/40"
+          }`}
+        >
+          <img src={aurora.img} alt="" className="w-12 h-12 shrink-0 rounded-full bg-white/10 p-1" />
+          <div className="text-sm leading-snug space-y-2">
+            <div className={`text-xs font-bold ${acertou ? "text-emerald-300" : "text-rose-300"}`}>
+              {acertou ? "🎉 Boa, explorador!" : "Quase!"}
+            </div>
+            <div>{acertou ? cena.feedbackAcerto : cena.feedbackErro}</div>
+            <div className="text-white/90 border-t border-white/10 pt-2">
+              <span className="text-emerald-300 text-xs font-bold">Aurora: </span>
+              {cena.falaFinal}
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!revelado}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          revelado
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {revelado ? "Próxima cena →" : "🗳️ Escolha uma opção pra continuar"}
       </button>
     </div>
   );

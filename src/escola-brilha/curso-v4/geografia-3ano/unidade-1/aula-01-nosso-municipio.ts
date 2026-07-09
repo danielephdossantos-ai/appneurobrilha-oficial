@@ -30,10 +30,33 @@ export const aula01: AulaGeoV1 = {
   },
 
   cena02_previsao: {
-    tipo: "placeholder",
-    titulo: "Voto do Explorador",
-    descricao:
-      "Em breve: 2 cards grandes — ‘só cidade’ vs ‘cidade + campo juntos’. A criança vota antes de descobrir.",
+    tipo: "votoExplorador",
+    aurora:
+      "Antes de abrir o mapa inteiro, quero seu palpite, explorador! O que você acha que tem dentro do nosso município?",
+    pergunta: "O que forma o nosso município?",
+    opcoes: [
+      {
+        id: "so-cidade",
+        titulo: "Só cidade",
+        subtitulo: "prédios, ruas e praças",
+        emoji: "🏙️",
+        cor: "from-sky-400 to-indigo-500",
+      },
+      {
+        id: "cidade-campo",
+        titulo: "Cidade + campo juntos",
+        subtitulo: "casas, plantações e rio",
+        emoji: "🏙️🌾",
+        cor: "from-emerald-400 to-amber-500",
+      },
+    ],
+    respostaCerta: "cidade-campo",
+    feedbackAcerto:
+      "Isso mesmo! O município é feito da cidade E do campo — os dois pedaços juntos.",
+    feedbackErro:
+      "Quase! Só a cidade é uma parte. O município inteiro tem cidade E campo dentro dele.",
+    falaFinal:
+      "Guarda esse palpite. Nas próximas cenas você vai ver com seus olhos: casas juntas de um lado, plantações do outro — tudo dentro do mesmo município.",
   },
   cena03_vocabulario: {
     tipo: "placeholder",

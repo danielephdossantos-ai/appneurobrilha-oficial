@@ -640,6 +640,22 @@ export type CursoPortugues = {
 
 export type CenaGeoV1 =
   | { tipo: "mesaCartografo"; instrucao: string; mapaUrl: string; aurora: string; falaFinal: string }
+  | {
+      tipo: "votoExplorador";
+      aurora: string;                // fala inicial da Aurora
+      pergunta: string;               // pergunta grande no topo
+      opcoes: Array<{
+        id: string;
+        titulo: string;               // ex.: "Só cidade"
+        subtitulo?: string;           // ex.: "prédios, ruas, praças"
+        emoji: string;                // ícone grande no card
+        cor: string;                  // gradient tailwind, ex.: "from-sky-400 to-indigo-500"
+      }>;
+      respostaCerta: string;          // id da opção correta
+      feedbackAcerto: string;
+      feedbackErro: string;
+      falaFinal: string;              // Aurora fecha explicando
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {
