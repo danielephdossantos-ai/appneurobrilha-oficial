@@ -438,10 +438,54 @@ export const aula01: AulaGeoV1 = {
       "Sacou? Na maioria dos municípios a zona rural é MAIOR em espaço, mas a zona urbana tem MAIS gente morando junta. As duas trabalham em parceria!",
   },
   cena11_avaliacao: {
-    tipo: "placeholder",
-    titulo: "Selo do Atlas",
-    descricao: "Adicionar página no Atlas Municipal — insígnia ‘Mestre dos Mapas e Fronteiras’.",
+    tipo: "seloAtlas",
+    aurora: "Chegou a hora da verdade, explorador! Responda 3 perguntas pra ganhar sua insígnia oficial.",
+    instrucao: "Toque na resposta certa. Você tem 1 chance por pergunta.",
+    perguntas: [
+      {
+        id: "p1",
+        pergunta: "O que é um MUNICÍPIO?",
+        opcoes: [
+          { id: "a", texto: "Só a parte da cidade com prédios." },
+          { id: "b", texto: "A zona urbana e a zona rural juntas, com o mesmo prefeito.", correta: true },
+          { id: "c", texto: "Um país pequeno dentro de outro país." },
+        ],
+        feedbackAcerto: "Isso! Município é urbano + rural juntos, com uma prefeitura só.",
+        feedbackErro: "Quase! Município junta a zona urbana E a rural — as duas partes.",
+      },
+      {
+        id: "p2",
+        pergunta: "Qual dessas coisas mostra que um lugar é ZONA RURAL?",
+        opcoes: [
+          { id: "a", texto: "Plantação, gado e muito espaço aberto.", correta: true },
+          { id: "b", texto: "Semáforo, ônibus e prédios altos." },
+          { id: "c", texto: "Shopping, cinema e metrô." },
+        ],
+        feedbackAcerto: "Perfeito! Plantação, gado e espaço aberto são marcas do campo.",
+        feedbackErro: "Ops! Semáforo e prédios são marcas da zona URBANA, não da rural.",
+      },
+      {
+        id: "p3",
+        pergunta: "O que separa um município do outro?",
+        opcoes: [
+          { id: "a", texto: "Uma parede alta com portão." },
+          { id: "b", texto: "Nada, é só continuar andando." },
+          { id: "c", texto: "Uma FRONTEIRA, marcada por rios, placas ou linhas no mapa.", correta: true },
+        ],
+        feedbackAcerto: "Exato! A fronteira pode ser um rio, uma placa ou uma linha no mapa.",
+        feedbackErro: "Quase! Fronteira nem sempre é parede — pode ser rio, placa ou linha no mapa.",
+      },
+    ],
+    selo: {
+      nome: "Mestre dos Mapas e Fronteiras",
+      subtitulo: "Insígnia oficial do Atlas Municipal — Aula 01",
+      emoji: "🗺️",
+      cor: "from-amber-300 to-orange-500",
+    },
+    falaFinal:
+      "Sua primeira página do Atlas Municipal está pronta! Você já sabe o que é município, reconhece zona urbana e rural, e entende como funcionam as fronteiras. Guarde essa insígnia — a próxima aula te espera!",
   },
+
 
   recompensa: { xp: 100, moedas: 20, medalha: "Cartógrafo Iniciante" },
 };
