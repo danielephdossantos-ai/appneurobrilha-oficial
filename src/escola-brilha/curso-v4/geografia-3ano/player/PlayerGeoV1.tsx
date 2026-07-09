@@ -148,8 +148,8 @@ function CenaRenderer({
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
     case "voceLeSozinho":
       return <VoceLeSozinho cena={cena} onProxima={onProxima} />;
-    case "fronteirasVivas":
-      return <FronteirasVivas cena={cena} onProxima={onProxima} />;
+    case "construtorMarcos":
+      return <ConstrutorMarcos cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
