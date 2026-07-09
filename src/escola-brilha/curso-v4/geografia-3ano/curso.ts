@@ -1,5 +1,6 @@
 import type { CursoGeoV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
 
 /**
  * Curso: Geografia 3º Ano — "Cartógrafo do Município"
@@ -14,11 +15,11 @@ const curso: CursoGeoV1 = {
   ano: "3º Ano",
   titulo: "Cartógrafo do Município",
   descricao:
-    "Brilha vira cartógrafo com Aurora. Descobre o município camada por camada — cidade, campo, fronteiras e o Atlas Municipal.",
+    "Brilha vira cartógrafo com Aurora. Descobre o município camada por camada — cidade, campo, fronteiras, comunidades e o Atlas Municipal.",
   corPrimaria: "#22c55e",
   corSecundaria: "#0f172a",
   tipoAula: "geo-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2],
 };
 
 export default curso;
