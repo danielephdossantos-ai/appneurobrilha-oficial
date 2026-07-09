@@ -156,9 +156,56 @@ export const aula01: AulaGeoV1 = {
       "Viu como o município é grande? Cidade, campo, rio e fronteira — tudo faz parte do MESMO lugar onde a gente vive.",
   },
   cena05_compreensao: {
-    tipo: "placeholder",
-    titulo: "Quiz do Radar",
-    descricao: "Radar gira e pousa no card certo (3 perguntas).",
+    tipo: "quizRadar",
+    aurora:
+      "Agora liguei o radar do cartógrafo! Vou fazer 3 perguntas — você escolhe o card certo e o radar pousa nele. Bora testar o que você aprendeu?",
+    instrucao: "Toque no card certo pra o radar pousar",
+    perguntas: [
+      {
+        id: "q1",
+        pergunta: "Onde tem muitas casas juntas, ruas de asfalto e prédios?",
+        cards: [
+          { id: "urbana", emoji: "🏙️", titulo: "Zona Urbana", cor: "from-sky-400 to-indigo-500" },
+          { id: "rural", emoji: "🌾", titulo: "Zona Rural", cor: "from-lime-400 to-emerald-600" },
+          { id: "fronteira", emoji: "🚧", titulo: "Fronteira", cor: "from-amber-400 to-rose-600" },
+        ],
+        correta: "urbana",
+        feedbackAcerto:
+          "Isso! Casas juntas, asfalto e prédios são marcas da ZONA URBANA — a cidade.",
+        feedbackErro:
+          "Quase! Onde tem MUITAS casas grudadas, prédios e asfalto é a ZONA URBANA (cidade).",
+      },
+      {
+        id: "q2",
+        pergunta: "Em qual pedaço do município ficam plantações, sítios e animais?",
+        cards: [
+          { id: "urbana", emoji: "🏙️", titulo: "Zona Urbana", cor: "from-sky-400 to-indigo-500" },
+          { id: "rural", emoji: "🌾", titulo: "Zona Rural", cor: "from-lime-400 to-emerald-600" },
+          { id: "rio", emoji: "🌊", titulo: "Só no Rio", cor: "from-cyan-400 to-blue-600" },
+        ],
+        correta: "rural",
+        feedbackAcerto:
+          "Boa! Plantação, sítio e animais moram na ZONA RURAL — o campo do município.",
+        feedbackErro:
+          "Não é aí. Plantações, sítios e animais ficam no CAMPO — a ZONA RURAL.",
+      },
+      {
+        id: "q3",
+        pergunta: "O que separa UM município do outro?",
+        cards: [
+          { id: "fronteira", emoji: "🚧", titulo: "A Fronteira", cor: "from-amber-400 to-rose-600" },
+          { id: "rio", emoji: "🌊", titulo: "O Rio", cor: "from-cyan-400 to-blue-600" },
+          { id: "praca", emoji: "🌳", titulo: "A Praça", cor: "from-emerald-400 to-teal-600" },
+        ],
+        correta: "fronteira",
+        feedbackAcerto:
+          "Exato! A FRONTEIRA é a linha imaginária que marca onde acaba um município e começa outro.",
+        feedbackErro:
+          "Ainda não. Rio e praça ficam DENTRO do município. Quem separa municípios é a FRONTEIRA.",
+      },
+    ],
+    falaFinal:
+      "Radar afiado! Você já sabe reconhecer zona urbana, zona rural e a fronteira no seu município.",
   },
   cena06_personagensLugar: {
     tipo: "placeholder",
