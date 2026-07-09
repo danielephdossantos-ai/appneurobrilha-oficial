@@ -314,7 +314,7 @@ function MesaCartografo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {descoberto ? "Descobri! Próxima cena →" : "🔍 Continue explorando o mapa…"}
+        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
       </button>
     </div>
   );
@@ -443,7 +443,7 @@ function VotoExplorador({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {revelado ? "Próxima cena →" : "🗳️ Escolha uma opção pra continuar"}
+        {revelado ? "Continuar" : "🗳️ Escolha uma opção pra continuar"}
       </button>
     </div>
   );
@@ -574,7 +574,7 @@ function CadernosCampo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {todosAbertos ? "Rolar pra próxima cena ↓" : "📓 Abra todos os cadernos"}
+        {todosAbertos ? "Continuar" : "📓 Abra todos os cadernos"}
       </button>
     </div>
   );
@@ -608,7 +608,7 @@ function CenaPlaceholder({
         onClick={onProxima}
         className="mx-auto block px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-sm font-semibold hover:bg-white/15"
       >
-        {ultima ? "✅ Concluir aula" : "Rolar pra próxima ↓"}
+        {ultima ? "✅ Concluir aula" : "Continuar"}
       </button>
     </div>
   );
