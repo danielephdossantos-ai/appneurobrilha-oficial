@@ -288,6 +288,3 @@ function CenaPlaceholder({
     </div>
   );
 }
-
-// evita warning de import não usado quando useEffect não é chamado
-void useEffect;
