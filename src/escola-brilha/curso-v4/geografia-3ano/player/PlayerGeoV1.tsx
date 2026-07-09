@@ -146,6 +146,8 @@ function CenaRenderer({
       return <MapaCamadas cena={cena} onProxima={onProxima} />;
     case "linhaEstrada":
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
+    case "voceLeSozinho":
+      return <VoceLeSozinho cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
@@ -1415,8 +1417,249 @@ function LinhaEstrada({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 8 — Você lê sozinho (pergaminho SEM áudio; a criança lê e marca)
+// ─────────────────────────────────────────────────────────────────────
+function VoceLeSozinho({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "voceLeSozinho" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const [marcadas, setMarcadas] = useState<Record<string, Set<string>>>({});
+  const [concluido, setConcluido] = useState(false);
+
+  const total = cena.paragrafos.length;
+  const paragrafo = cena.paragrafos[paginaAtual];
+  const marcadasDaPagina = marcadas[paragrafo.id] ?? new Set<string>();
+  const todasMarcadasNaPagina = paragrafo.chaves.every((c) =>
+    marcadasDaPagina.has(c),
+  );
+
+  const marcarChave = (chave: string) => {
+    setMarcadas((prev) => {
+      const atual = new Set(prev[paragrafo.id] ?? []);
+      if (atual.has(chave)) atual.delete(chave);
+      else atual.add(chave);
+      return { ...prev, [paragrafo.id]: atual };
+    });
+  };
+
+  const avancar = () => {
+    if (paginaAtual + 1 < total) {
+      setPaginaAtual(paginaAtual + 1);
+    } else {
+      setConcluido(true);
+    }
+  };
+
+  // renderiza o texto do parágrafo com as palavras-chave viradas em botões
+  const renderTexto = () => {
+    let restante = paragrafo.texto;
+    const partes: Array<{ tipo: "texto" | "chave"; conteudo: string }> = [];
+    // ordena chaves da mais longa pra menor pra não quebrar substrings
+    const chavesOrdenadas = [...paragrafo.chaves].sort(
+      (a, b) => b.length - a.length,
+    );
+    // varre por ocorrência da PRIMEIRA chave encontrada por vez
+    let seguranca = 0;
+    while (restante.length > 0 && seguranca < 200) {
+      seguranca++;
+      let posEncontrada = -1;
+      let chaveEncontrada = "";
+      for (const chave of chavesOrdenadas) {
+        const idx = restante.toLowerCase().indexOf(chave.toLowerCase());
+        if (idx !== -1 && (posEncontrada === -1 || idx < posEncontrada)) {
+          posEncontrada = idx;
+          chaveEncontrada = chave;
+        }
+      }
+      if (posEncontrada === -1) {
+        partes.push({ tipo: "texto", conteudo: restante });
+        break;
+      }
+      if (posEncontrada > 0) {
+        partes.push({
+          tipo: "texto",
+          conteudo: restante.slice(0, posEncontrada),
+        });
+      }
+      partes.push({
+        tipo: "chave",
+        conteudo: restante.slice(
+          posEncontrada,
+          posEncontrada + chaveEncontrada.length,
+        ),
+      });
+      restante = restante.slice(posEncontrada + chaveEncontrada.length);
+    }
+    return partes.map((p, i) => {
+      if (p.tipo === "texto") {
+        return <span key={i}>{p.conteudo}</span>;
+      }
+      const chaveNorm = paragrafo.chaves.find(
+        (c) => c.toLowerCase() === p.conteudo.toLowerCase(),
+      )!;
+      const ativa = marcadasDaPagina.has(chaveNorm);
+      return (
+        <button
+          key={i}
+          type="button"
+          onClick={() => marcarChave(chaveNorm)}
+          className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded-md font-black transition ${
+            ativa
+              ? "bg-emerald-400 text-[#3a2410] shadow"
+              : "bg-amber-300/60 text-[#3a2410] underline decoration-dotted underline-offset-4 hover:bg-amber-300"
+          }`}
+        >
+          {p.conteudo}
+          {ativa ? " ✓" : ""}
+        </button>
+      );
+    });
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+          <div className="text-white/50 text-[11px] mt-2">
+            🔇 nesta cena, VOCÊ lê — sem voz da Aurora.
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        📖 Leia com calma e TOQUE nas palavras-chave conforme for lendo.
+      </div>
+
+      {/* Pergaminho / livro */}
+      <div
+        className="relative rounded-3xl p-5 shadow-2xl"
+        style={{
+          background:
+            "radial-gradient(ellipse at top,#fdf6e3 0%,#f2e5c1 60%,#e5d3a3 100%)",
+          boxShadow:
+            "inset 0 0 30px rgba(120,80,20,.25), 0 20px 40px rgba(0,0,0,.4)",
+        }}
+      >
+        <div className="text-center mb-3">
+          <div className="text-[10px] uppercase tracking-widest text-[#6b4a1c]/70 font-bold">
+            {cena.tituloLivro}
+          </div>
+          {cena.subtitulo && (
+            <div className="text-[#3a2410] font-black text-sm mt-0.5">
+              {cena.subtitulo}
+            </div>
+          )}
+          <div className="mt-1 text-[10px] text-[#6b4a1c]/70">
+            Página {paginaAtual + 1} de {total}
+          </div>
+        </div>
+
+        <motion.div
+          key={paragrafo.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[#2a1a08] text-lg sm:text-xl leading-relaxed font-medium"
+          style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+        >
+          {renderTexto()}
+        </motion.div>
+
+        {/* Marcador de progresso das chaves */}
+        <div className="mt-4 flex items-center gap-2 justify-center flex-wrap">
+          {paragrafo.chaves.map((c) => {
+            const ok = marcadasDaPagina.has(c);
+            return (
+              <span
+                key={c}
+                className={`text-[10px] font-bold px-2 py-1 rounded-full border ${
+                  ok
+                    ? "bg-emerald-500 text-white border-emerald-600"
+                    : "bg-white/50 text-[#6b4a1c] border-[#6b4a1c]/30"
+                }`}
+              >
+                {ok ? "✓ " : "○ "}
+                {c}
+              </span>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 flex items-center justify-between gap-2">
+          <button
+            onClick={() => setPaginaAtual(Math.max(0, paginaAtual - 1))}
+            disabled={paginaAtual === 0}
+            className="px-3 py-2 rounded-xl bg-[#3a2410]/10 border border-[#3a2410]/20 text-[#3a2410] text-xs font-bold disabled:opacity-30"
+          >
+            ← anterior
+          </button>
+          <div className="text-[10px] text-[#6b4a1c]/80">
+            {todasMarcadasNaPagina
+              ? "✅ tudo marcado — pode virar a página"
+              : "toque nas palavras destacadas"}
+          </div>
+          <button
+            onClick={avancar}
+            disabled={!todasMarcadasNaPagina || concluido}
+            className={`px-3 py-2 rounded-xl text-xs font-black transition ${
+              todasMarcadasNaPagina && !concluido
+                ? "bg-emerald-500 text-white shadow hover:bg-emerald-600"
+                : "bg-[#3a2410]/10 text-[#3a2410]/40 cursor-not-allowed"
+            }`}
+          >
+            {paginaAtual + 1 === total ? "li tudo ✓" : "próxima página →"}
+          </button>
+        </div>
+      </div>
+
+      {concluido && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">
+              📖 Leitura completa!
+            </div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!concluido}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          concluido
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {concluido ? "Continuar" : "📖 Leia todas as páginas pra continuar"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
+
 function CenaPlaceholder({
   titulo,
   descricao,

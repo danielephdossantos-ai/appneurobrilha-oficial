@@ -738,6 +738,19 @@ export type CenaGeoV1 =
       feedbackErro: string;          // aparece a cada toque errado
       falaFinal: string;
     }
+  | {
+      tipo: "voceLeSozinho";
+      aurora: string;                    // fala curta de apresentação (SEM áudio na cena)
+      tituloLivro: string;               // ex.: "Diário do Cartógrafo"
+      subtitulo?: string;                // ex.: "Página 3 — Nosso Município"
+      paragrafos: Array<{
+        id: string;
+        texto: string;                   // parágrafo curto, letras grandes
+        /** Palavras-chave desse parágrafo que a criança precisa marcar ao ler. */
+        chaves: string[];
+      }>;
+      falaFinal: string;                 // fecha depois de "Li tudo"
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {

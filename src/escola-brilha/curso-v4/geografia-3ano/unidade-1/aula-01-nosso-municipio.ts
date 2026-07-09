@@ -276,9 +276,39 @@ export const aula01: AulaGeoV1 = {
       "Viu como campo e cidade dependem um do outro? Sem a fazenda não tem alface. Sem a estrada, ela não chega. Sem o mercado, a família não encontra.",
   },
   cena08_voceLe: {
-    tipo: "placeholder",
-    titulo: "Você lê sozinho",
-    descricao: "Balão sem áudio; botão ‘li’ libera a próxima cena.",
+    tipo: "voceLeSozinho",
+    aurora:
+      "Agora é sua vez, explorador! Eu vou ficar CALADA. Você lê o Diário do Cartógrafo com seus próprios olhos e vai TOCANDO nas palavras importantes conforme for lendo. Assim eu sei que você entendeu.",
+    tituloLivro: "📔 Diário do Cartógrafo",
+    subtitulo: "Página 3 — O nosso Município",
+    paragrafos: [
+      {
+        id: "p1",
+        texto:
+          "O município é o pedaço da terra onde a gente mora. Ele tem UMA prefeitura só e é comandado por um prefeito. Dentro dele cabem casas, escolas, praças, plantações e rios.",
+        chaves: ["município", "prefeitura", "prefeito"],
+      },
+      {
+        id: "p2",
+        texto:
+          "Toda cidade fica na zona urbana. Ali as casas ficam bem juntinhas, tem ruas de asfalto, prédios e semáforos. É onde a maioria das pessoas do município mora e trabalha.",
+        chaves: ["zona urbana", "asfalto"],
+      },
+      {
+        id: "p3",
+        texto:
+          "Já a zona rural é o campo. Ali tem plantação, sítio, fazenda, animais e muito verde. É de lá que sai grande parte da comida que chega até o mercado da cidade.",
+        chaves: ["zona rural", "campo", "plantação"],
+      },
+      {
+        id: "p4",
+        texto:
+          "Todo município tem uma fronteira. Ela é uma linha imaginária que marca onde acaba o nosso município e começa outro, com outra prefeitura. Passou da placa, mudou de município!",
+        chaves: ["fronteira", "linha imaginária"],
+      },
+    ],
+    falaFinal:
+      "Leitura de cartógrafo profissional! Você já sabe explicar o município SEM ajuda: prefeitura, zona urbana, zona rural e fronteira. Guarda essas palavras — vamos usar no minijogo agora.",
   },
   cena09_minijogo: {
     tipo: "placeholder",
