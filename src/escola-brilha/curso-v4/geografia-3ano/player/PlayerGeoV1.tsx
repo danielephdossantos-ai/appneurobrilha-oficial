@@ -682,6 +682,37 @@ function NarrarMapa({
         🗺️ {cena.instrucao}
       </div>
 
+      {/* Tira de fotos reais das comunidades — sempre visível */}
+      {cena.pontos.some((p) => p.fotoUrl) && (
+        <div className="grid grid-cols-3 gap-2">
+          {cena.pontos.map((p) => (
+            <button
+              key={`thumb-${p.id}`}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className={`relative rounded-xl overflow-hidden border-2 shadow-lg transition ${
+                ativo === p.id ? "border-emerald-300 scale-[1.02]" : "border-white/20"
+              }`}
+            >
+              {p.fotoUrl ? (
+                <img
+                  src={p.fotoUrl}
+                  alt={p.titulo}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover"
+                />
+              ) : (
+                <div className={`w-full aspect-square grid place-items-center text-3xl bg-gradient-to-br ${p.cor}`}>
+                  {p.emoji}
+                </div>
+              )}
+              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] font-bold py-1 text-center">
+                {p.emoji} {p.titulo}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Mapa com balões flutuantes */}
       <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
         <img
