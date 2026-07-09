@@ -2,6 +2,30 @@
 // O Chrome desktop trunca utterances longas (~200 chars / 15s).
 // Quebrar em frases curtas e enfileirar resolve.
 
+/**
+ * Remove emojis, pictogramas e símbolos decorativos antes de falar.
+ * O TTS lê emoji ("🏫" vira "escola") o que polui a narração e às vezes
+ * duplica palavras (título "🏫 — ESCOLA" ficava "escola escola").
+ * Também converte separadores visuais (— · • | →) em pausa curta.
+ */
+export function sanitizeForSpeech(text: string): string {
+  if (!text) return "";
+  let out = text;
+  // Remove qualquer símbolo/pictograma/emoji unicode
+  out = out.replace(/\p{Extended_Pictographic}/gu, " ");
+  out = out.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, " ");
+  // Separadores decorativos viram vírgula pra dar respiro
+  out = out.replace(/[—–·•|→←↔✦✧★☆]/g, ",");
+  // Colapsa espaços e vírgulas duplicadas
+  out = out.replace(/\s*,\s*,+/g, ",");
+  out = out.replace(/\s+/g, " ").replace(/\s+([,.!?;:])/g, "$1").trim();
+  // Remove vírgula no fim
+  out = out.replace(/[,\s]+$/g, "");
+  return out;
+}
+
+
+
 export function pickPtBrVoice(): SpeechSynthesisVoice | null {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
   const voices = window.speechSynthesis.getVoices();
@@ -75,7 +99,7 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       resolveActiveSpeech();
     }
     const currentRunId = speechRunId;
-    const chunks = chunkText(text);
+    const chunks = chunkText(sanitizeForSpeech(text));
     const voice = pickPtBrVoice();
     let i = 0;
     let finished = false;
@@ -87,6 +111,10 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       resolve();
     };
     activeSpeechResolvers.add(finish);
+    if (chunks.length === 0) {
+      finish();
+      return;
+    }
     const speakNext = () => {
       if (currentRunId !== speechRunId || finished) return;
       if (i >= chunks.length) {
