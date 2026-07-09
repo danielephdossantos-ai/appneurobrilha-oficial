@@ -78,6 +78,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É um grupo de pessoas que vive há muito tempo em um lugar, mantendo os saberes dos antepassados: jeito de plantar, pescar, festejar, curar e criar os filhos.",
         exemplo: "Indígenas, quilombolas e ribeirinhos são comunidades tradicionais do Brasil.",
+        fotoUrl: fotoIndigena,
       },
       {
         id: "natureza",
@@ -87,6 +88,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a relação de CUIDADO que essas comunidades têm com o rio, a floresta e a terra. Tiram só o que precisam pra viver e protegem pra que dure pra sempre.",
         exemplo: "O ribeirinho só pesca o peixe que a família vai comer — não tira tudo do rio.",
+        fotoUrl: fotoRibeirinha,
       },
       {
         id: "cultura",
@@ -96,6 +98,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a mistura de festa, dança, música, comida, artesanato e história que a comunidade mantém e passa dos avós pros netos, sem deixar morrer.",
         exemplo: "O jongo quilombola, o grafismo indígena e a canoa ribeirinha são cultura viva.",
+        fotoUrl: fotoQuilombola,
       },
       {
         id: "troca",
