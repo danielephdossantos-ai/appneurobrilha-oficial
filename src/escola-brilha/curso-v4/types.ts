@@ -686,6 +686,25 @@ export type CenaGeoV1 =
       }>;
       falaFinal: string;
     }
+  | {
+      tipo: "quizRadar";
+      aurora: string;
+      instrucao: string;
+      perguntas: Array<{
+        id: string;
+        pergunta: string;         // ex.: "Onde tem prédios juntos?"
+        cards: Array<{
+          id: string;
+          emoji: string;          // ícone grande
+          titulo: string;         // ex.: "Zona Urbana"
+          cor: string;            // gradient tailwind
+        }>;
+        correta: string;          // id do card certo
+        feedbackAcerto: string;
+        feedbackErro: string;
+      }>;
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {
