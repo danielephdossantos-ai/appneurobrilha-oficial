@@ -152,6 +152,9 @@ function CenaRenderer({
       return <ConstrutorMarcos cena={cena} onProxima={onProxima} />;
     case "pizzaMunicipio":
       return <PizzaMunicipio cena={cena} onProxima={onProxima} />;
+    case "seloAtlas":
+      return <SeloAtlas cena={cena} onProxima={onProxima} ultima={ultima} />;
+
     case "placeholder":
       return (
         <CenaPlaceholder
