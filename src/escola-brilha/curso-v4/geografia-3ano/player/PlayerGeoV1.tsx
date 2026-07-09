@@ -574,7 +574,7 @@ function CadernosCampo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {todosAbertos ? "Rolar pra próxima cena ↓" : "📓 Abra todos os cadernos"}
+        {todosAbertos ? "Continuar" : "📓 Abra todos os cadernos"}
       </button>
     </div>
   );
