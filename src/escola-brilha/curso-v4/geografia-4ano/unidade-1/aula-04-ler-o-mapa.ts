@@ -7,6 +7,10 @@ import mapaEstados from "@/assets/geografia-4ano/mapa-brasil-estados.jpg";
 import rosaDosVentos from "@/assets/geografia-4ano/rosa-dos-ventos.jpg";
 import norte from "@/assets/geografia-4ano/regiao-norte-amazonia.jpg";
 import sudeste from "@/assets/geografia-4ano/regiao-sudeste-metropole.jpg";
+import simboloEscola from "@/assets/geografia-4ano/simbolo-escola.jpg";
+import simboloHospital from "@/assets/geografia-4ano/simbolo-hospital.jpg";
+import simboloParque from "@/assets/geografia-4ano/simbolo-parque.jpg";
+import simboloRio from "@/assets/geografia-4ano/simbolo-rio.jpg";
 
 /**
  * Geografia · 4º Ano · Unidade 1 · Aula 04
