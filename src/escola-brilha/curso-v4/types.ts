@@ -695,6 +695,7 @@ export type CenaGeoV1 =
       perguntas: Array<{
         id: string;
         pergunta: string;
+        fotoUrl?: string;    // opcional: foto real exibida acima da pergunta
         cards: Array<{
           id: string;
           emoji: string;
