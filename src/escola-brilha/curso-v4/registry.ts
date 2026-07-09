@@ -42,6 +42,24 @@ export function getAulaGeoV1FromCurso(
   return undefined;
 }
 
+/**
+ * Retorna a próxima aula GeoV1 na ordem oficial (unidade → aula).
+ * `undefined` significa que era a última aula do curso.
+ */
+export function getProximaAulaGeoV1(
+  cursoSlug: string,
+  aulaSlug: string,
+): { aula: AulaGeoV1; unidadeIdx: number; aulaIdx: number } | undefined {
+  const curso = getCursoGeoV1(cursoSlug);
+  if (!curso) return undefined;
+  const flat: Array<{ aula: AulaGeoV1; unidadeIdx: number; aulaIdx: number }> = [];
+  curso.unidades.forEach((u, ui) => u.aulas.forEach((a, ai) => flat.push({ aula: a, unidadeIdx: ui, aulaIdx: ai })));
+  const i = flat.findIndex((x) => x.aula.slug === aulaSlug);
+  if (i < 0 || i + 1 >= flat.length) return undefined;
+  return flat[i + 1];
+}
+
+
 
 export function getCurso(slug: string): Curso | undefined {
   const c = registry[slug];
