@@ -692,18 +692,34 @@ export type CenaGeoV1 =
       instrucao: string;
       perguntas: Array<{
         id: string;
-        pergunta: string;         // ex.: "Onde tem prédios juntos?"
+        pergunta: string;
         cards: Array<{
           id: string;
-          emoji: string;          // ícone grande
-          titulo: string;         // ex.: "Zona Urbana"
-          cor: string;            // gradient tailwind
+          emoji: string;
+          titulo: string;
+          cor: string;
         }>;
-        correta: string;          // id do card certo
+        correta: string;
         feedbackAcerto: string;
         feedbackErro: string;
       }>;
       falaFinal: string;
+    }
+  | {
+      tipo: "mapaCamadas";
+      aurora: string;
+      instrucao: string;
+      mapaUrl: string;
+      camadas: Array<{
+        id: string;
+        rotulo: string;              // ex.: "Zona Urbana"
+        emoji: string;
+        cor: string;                 // gradient tailwind
+        /** Retângulo da camada em % (0-100) sobre o mapa. */
+        rect: { x: number; y: number; w: number; h: number };
+        descricao: string;           // texto revelado quando ligada
+      }>;
+      falaFinal: string;             // aparece quando as duas estiverem ligadas
     }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
