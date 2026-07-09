@@ -382,42 +382,32 @@ export const aula02: AulaGeoV1 = {
   cena10_revisao: {
     tipo: "pizzaMunicipio",
     aurora:
-      "Bora olhar TUDO o que chega na feira da cidade como uma pizza dividida em 3 fatias — cada fatia é um lugar de origem. Toca em cada uma pra ouvir.",
-    instrucao: "🍕 Toque nas fatias pra ouvir sobre cada origem",
+      "Bora olhar TUDO o que chega na feira da cidade como uma pizza dividida em 2 fatias — de um lado o CAMPO que produz, do outro a CIDADE que transforma e vende. Toca em cada fatia pra ouvir.",
+    instrucao: "🍕 Toque nas fatias pra ouvir cada lado da rota",
     fatias: [
       {
-        id: "fatia-fazenda",
-        rotulo: "Fazenda",
-        emoji: "🐄",
-        percentual: 40,
+        id: "fatia-campo",
+        rotulo: "Campo (Fazenda + Horta + Roça)",
+        emoji: "🚜",
+        percentual: 70,
         cor: "#16a34a",
         descricao:
-          "Da FAZENDA vem o leite, o queijo, a manteiga, o iogurte, o ovo e a carne. Quase metade do que aparece na feira nasce de bicho criado no campo.",
-        exemplos: ["Leite fresco", "Queijo minas", "Ovo caipira", "Manteiga da roça"],
+          "70% da comida que chega na feira NASCE no campo: leite e queijo vêm da FAZENDA, alface e tomate vêm da HORTA, mandioca e milho vêm da ROÇA. Sem o campo produzindo, a feira fica vazia.",
+        exemplos: ["Leite da fazenda", "Alface da horta", "Mandioca da roça", "Queijo, ovo, farinha"],
       },
       {
-        id: "fatia-horta",
-        rotulo: "Horta",
-        emoji: "🥬",
+        id: "fatia-cidade",
+        rotulo: "Cidade (Transformação + Venda)",
+        emoji: "🏙️",
         percentual: 30,
-        cor: "#84cc16",
+        cor: "#0ea5e9",
         descricao:
-          "Da HORTA vêm as verduras, os temperos e os legumes pequenos: alface, tomate, cheiro-verde, couve, pimentão e rúcula. Colhido de manhã, chega na feira à tarde.",
-        exemplos: ["Alface", "Tomate", "Cheiro-verde", "Couve"],
-      },
-      {
-        id: "fatia-roca",
-        rotulo: "Roça",
-        emoji: "🌽",
-        percentual: 30,
-        cor: "#f59e0b",
-        descricao:
-          "Da ROÇA vêm a mandioca, o milho, o feijão, o arroz e a farinha. É a plantação GRANDE, colhida uma vez por safra e transformada na padaria e no moinho da cidade.",
-        exemplos: ["Mandioca", "Milho", "Farinha", "Feijão"],
+          "30% do trabalho é da CIDADE: o laticínio transforma leite em queijo, a padaria transforma farinha em pão, o mercado vende tudo pronto pra família levar pra casa. A cidade não produz a matéria-prima — ela transforma e entrega.",
+        exemplos: ["Laticínio faz queijo", "Padaria faz pão", "Mercado vende", "Restaurante prepara"],
       },
     ],
     falaFinal:
-      "Sacou? Fazenda + Horta + Roça = 100% da comida que chega na feira. Sem NENHUMA delas, o cardápio da cidade seria muito mais pobre.",
+      "Sacou? Campo + Cidade = 100% da comida na sua mesa. O campo faz nascer, a cidade transforma e entrega. Sem NENHUM dos dois lados, ninguém come.",
   },
 
   cena11_avaliacao: {
