@@ -608,7 +608,7 @@ function CenaPlaceholder({
         onClick={onProxima}
         className="mx-auto block px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-sm font-semibold hover:bg-white/15"
       >
-        {ultima ? "✅ Concluir aula" : "Rolar pra próxima ↓"}
+        {ultima ? "✅ Concluir aula" : "Continuar"}
       </button>
     </div>
   );
