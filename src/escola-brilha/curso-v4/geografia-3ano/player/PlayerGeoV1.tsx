@@ -515,23 +515,32 @@ function CadernosCampo({
               style={{ perspective: "1000px" }}
             >
               <motion.div
-                className="relative w-full min-h-[180px] rounded-2xl"
+                className={`relative w-full rounded-2xl ${c.fotoUrl ? "min-h-[360px]" : "min-h-[200px]"}`}
                 style={{ transformStyle: "preserve-3d" }}
                 animate={{ rotateY: aberto ? 180 : 0 }}
                 transition={{ duration: 0.55, ease: "easeInOut" }}
               >
                 {/* Capa */}
                 <div
-                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20`}
+                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20 overflow-hidden`}
                   style={{ backfaceVisibility: "hidden" }}
                 >
-                  <div className="text-5xl">{c.emoji}</div>
+                  {c.fotoUrl ? (
+                    <img
+                      src={c.fotoUrl}
+                      alt={c.capa}
+                      loading="lazy"
+                      className="w-full h-32 object-cover rounded-xl border-2 border-white/30 shadow-lg"
+                    />
+                  ) : (
+                    <div className="text-5xl">{c.emoji}</div>
+                  )}
                   <div>
                     <div className="text-white/80 text-[10px] uppercase tracking-widest font-bold">
-                      Caderno de campo
+                      {c.fotoUrl ? "📸 Foto real" : "Caderno de campo"}
                     </div>
                     <div className="text-white font-black text-xl leading-tight mt-1">
-                      {c.capa}
+                      {c.emoji} {c.capa}
                     </div>
                     <div className="text-white/80 text-xs mt-2">👆 toque pra abrir</div>
                   </div>
@@ -672,6 +681,37 @@ function NarrarMapa({
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
         🗺️ {cena.instrucao}
       </div>
+
+      {/* Tira de fotos reais das comunidades — sempre visível */}
+      {cena.pontos.some((p) => p.fotoUrl) && (
+        <div className="grid grid-cols-3 gap-2">
+          {cena.pontos.map((p) => (
+            <button
+              key={`thumb-${p.id}`}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className={`relative rounded-xl overflow-hidden border-2 shadow-lg transition ${
+                ativo === p.id ? "border-emerald-300 scale-[1.02]" : "border-white/20"
+              }`}
+            >
+              {p.fotoUrl ? (
+                <img
+                  src={p.fotoUrl}
+                  alt={p.titulo}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover"
+                />
+              ) : (
+                <div className={`w-full aspect-square grid place-items-center text-3xl bg-gradient-to-br ${p.cor}`}>
+                  {p.emoji}
+                </div>
+              )}
+              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] font-bold py-1 text-center">
+                {p.emoji} {p.titulo}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Mapa com balões flutuantes */}
       <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
