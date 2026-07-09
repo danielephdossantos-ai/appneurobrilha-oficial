@@ -247,33 +247,57 @@ export const aula01: AulaGeoV1 = {
   },
 
   cena06_personagensLugar: {
-    tipo: "mapaCamadas",
+    tipo: "mapaBrasilInterativo",
     aurora:
-      "Duas camadas pra você comparar. Um interruptor acende as regiões do NORTE do Brasil. O outro acende as do SUL. Liga os dois pra ver o país inteiro.",
-    instrucao: "Toque nos interruptores pra acender cada camada",
-    mapaUrl: mapaBrasil,
-    camadas: [
-      {
-        id: "metade-norte",
-        rotulo: "Metade Norte (Norte + Nordeste)",
-        emoji: "🌳",
-        cor: "from-emerald-500 to-green-700",
-        rect: { x: 15, y: 5, w: 80, h: 45 },
-        descricao:
-          "A METADE NORTE do país é quente o ano todo. Tem a Amazônia (Norte) e o Nordeste com praias e sertão. Aqui vivem cerca de 82 milhões de brasileiros.",
-      },
-      {
-        id: "metade-sul",
-        rotulo: "Metade Sul (Centro-Oeste + Sudeste + Sul)",
-        emoji: "🏙️",
-        cor: "from-sky-500 to-blue-700",
-        rect: { x: 25, y: 45, w: 65, h: 50 },
-        descricao:
-          "A METADE SUL concentra as grandes cidades (Sudeste), as fazendas (Centro-Oeste) e o frio (Sul). Aqui vivem cerca de 121 milhões de brasileiros — a maior parte da população.",
-      },
-    ],
+      "Mapa do Brasil de verdade! Cada cor é uma REGIÃO. Toque em CADA ESTADO pra ouvir o nome, a sigla e a capital. Você pode explorar TODOS os 27 — Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+    instrucao: "Toque em cada estado do mapa (todos os 27!)",
+    missao: {
+      tipo: "grupos",
+      grupos: [
+        {
+          id: "norte",
+          rotulo: "Região Norte",
+          emoji: "🌳",
+          cor: "from-emerald-500 to-green-700",
+          siglas: ["AC", "AP", "AM", "PA", "RO", "RR", "TO"],
+          descricao: "7 estados. É a MAIOR região, com a Amazônia e o rio Amazonas.",
+        },
+        {
+          id: "nordeste",
+          rotulo: "Região Nordeste",
+          emoji: "🏖️",
+          cor: "from-amber-400 to-orange-600",
+          siglas: ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"],
+          descricao: "9 estados. Litoral com praias e sertão quente.",
+        },
+        {
+          id: "centro-oeste",
+          rotulo: "Região Centro-Oeste",
+          emoji: "⭐",
+          cor: "from-orange-500 to-red-600",
+          siglas: ["DF", "GO", "MT", "MS"],
+          descricao: "3 estados + o Distrito Federal (Brasília). Cerrado e fazendas.",
+        },
+        {
+          id: "sudeste",
+          rotulo: "Região Sudeste",
+          emoji: "🏙️",
+          cor: "from-red-500 to-rose-700",
+          siglas: ["ES", "MG", "RJ", "SP"],
+          descricao: "4 estados. Concentra as maiores cidades e mais gente do Brasil.",
+        },
+        {
+          id: "sul",
+          rotulo: "Região Sul",
+          emoji: "🍇",
+          cor: "from-sky-500 to-blue-700",
+          siglas: ["PR", "RS", "SC"],
+          descricao: "3 estados. A menor região e a mais fria — pode até nevar!",
+        },
+      ],
+    },
     falaFinal:
-      "Percebeu? O Brasil todo tem 5 regiões, 26 estados e 1 Distrito Federal — mais de 200 milhões de brasileiros no total!",
+      "Você tocou nos 27! 5 regiões, 26 estados e 1 Distrito Federal — mais de 200 milhões de brasileiros no total!",
   },
 
   cena07_sequencia: {
