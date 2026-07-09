@@ -915,6 +915,18 @@ function QuizRadar({
             </div>
           </motion.div>
 
+          {p.fotoUrl && (
+            <motion.img
+              key={`${p.id}-foto`}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              src={p.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-emerald-400/30 shadow-xl"
+            />
+          )}
+
           {/* Radar */}
           <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
             {/* anéis */}
