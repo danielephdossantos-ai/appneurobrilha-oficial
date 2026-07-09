@@ -23,18 +23,3 @@ const curso: CursoGeoV1 = {
 };
 
 export default curso;
- */
-const curso: CursoGeoV1 = {
-  slug: "geografia-3ano",
-  disciplina: "Geografia",
-  ano: "3º Ano",
-  titulo: "Cartógrafo do Município",
-  descricao:
-    "Brilha vira cartógrafo com Aurora. Descobre o município camada por camada — cidade, campo, fronteiras e o Atlas Municipal.",
-  corPrimaria: "#22c55e",
-  corSecundaria: "#0f172a",
-  tipoAula: "geo-v1",
-  unidades: [unidade1],
-};
-
-export default curso;
