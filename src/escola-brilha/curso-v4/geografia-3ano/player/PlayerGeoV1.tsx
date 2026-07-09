@@ -808,6 +808,35 @@ function QuizRadar({
   };
   const anguloAtual = escolha ? anguloDoCard(escolha) : null;
 
+  const falar = (texto: string) => {
+    try {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  // Fala a pergunta a cada vez que idx muda
+  useEffect(() => {
+    if (finalizado) return;
+    const atual = cena.perguntas[idx];
+    if (atual) falar(atual.pergunta);
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx, finalizado]);
+
   return (
     <div className="space-y-5">
       <div className="flex items-start gap-3">
@@ -835,6 +864,28 @@ function QuizRadar({
 
       {!finalizado && p && (
         <>
+          {/* PERGUNTA em destaque (escrita + botão pra ouvir de novo) */}
+          <motion.div
+            key={p.id}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 shadow-xl"
+          >
+            <div className="flex items-start gap-3">
+              <div className="text-3xl shrink-0">❓</div>
+              <div className="flex-1 text-white font-black text-lg sm:text-xl leading-snug">
+                {p.pergunta}
+              </div>
+              <button
+                onClick={() => falar(p.pergunta)}
+                className="shrink-0 bg-white/15 hover:bg-white/25 border border-white/25 rounded-full px-3 py-1.5 text-xs font-bold flex items-center gap-1"
+                aria-label="Ouvir a pergunta"
+              >
+                🔊 ouvir
+              </button>
+            </div>
+          </motion.div>
+
           {/* Radar */}
           <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
             {/* anéis */}
@@ -883,9 +934,6 @@ function QuizRadar({
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
           </div>
 
-          <div className="text-center text-lg font-black leading-tight px-2">
-            {p.pergunta}
-          </div>
 
           {/* Cards de resposta */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
