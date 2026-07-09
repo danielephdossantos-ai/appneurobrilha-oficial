@@ -99,7 +99,11 @@ export function speakChunked(text: string, opts: SpeakOpts = {}): Promise<void> 
       resolveActiveSpeech();
     }
     const currentRunId = speechRunId;
-    const chunks = chunkText(text);
+    const chunks = chunkText(sanitizeForSpeech(text));
+    if (chunks.length === 0) {
+      finish();
+      return;
+    }
     const voice = pickPtBrVoice();
     let i = 0;
     let finished = false;
