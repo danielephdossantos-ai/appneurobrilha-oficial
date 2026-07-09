@@ -59,9 +59,50 @@ export const aula01: AulaGeoV1 = {
       "Guarda esse palpite. Nas próximas cenas você vai ver com seus olhos: casas juntas de um lado, plantações do outro — tudo dentro do mesmo município.",
   },
   cena03_vocabulario: {
-    tipo: "placeholder",
-    titulo: "Cadernos de Campo",
-    descricao: "4 cadernos que abrem: município, zona urbana, zona rural, fronteira.",
+    tipo: "cadernosCampo",
+    aurora:
+      "Todo cartógrafo tem um caderno de campo. Aqui estão os meus: toca em cada um pra descobrir 4 palavras importantes que a gente vai usar hoje.",
+    instrucao: "Toque em cada caderno pra abrir",
+    cadernos: [
+      {
+        id: "municipio",
+        capa: "Município",
+        emoji: "🗺️",
+        cor: "from-emerald-500 to-teal-700",
+        conteudo:
+          "É o pedaço do país que tem UMA prefeitura, UM prefeito, e junta cidade + campo.",
+        exemplo: "A gente mora no município de _______ (fala o seu!).",
+      },
+      {
+        id: "zona-urbana",
+        capa: "Zona Urbana",
+        emoji: "🏙️",
+        cor: "from-sky-500 to-indigo-700",
+        conteudo:
+          "É a parte do município com muitas casas juntas, ruas, prédios, praças e lojas. É a CIDADE.",
+        exemplo: "Padaria, escola no meio dos prédios, semáforo — zona urbana.",
+      },
+      {
+        id: "zona-rural",
+        capa: "Zona Rural",
+        emoji: "🌾",
+        cor: "from-lime-500 to-emerald-700",
+        conteudo:
+          "É a parte do município com plantações, animais, matas e rios. É o CAMPO.",
+        exemplo: "Sítio, fazenda, roça de milho — zona rural.",
+      },
+      {
+        id: "fronteira",
+        capa: "Fronteira",
+        emoji: "🚧",
+        cor: "from-amber-500 to-rose-600",
+        conteudo:
+          "É a linha imaginária que separa UM município do outro. Do outro lado, começa outra prefeitura.",
+        exemplo: "A placa 'Bem-vindo a...' avisa que você cruzou uma fronteira.",
+      },
+    ],
+    falaFinal:
+      "Agora você tem as 4 palavras do cartógrafo. Vamos usar TODAS elas nas próximas cenas!",
   },
   cena04_leituraGuiada: {
     tipo: "placeholder",

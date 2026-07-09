@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
@@ -6,12 +6,12 @@ import lupaImg from "@/assets/geografia-3ano/lupa.png";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
- * Exceção formal ao padrão visual único (docs: .lovable/mem/constraints/
- * geografia-3ao9-player-custom.md).
  *
- * O esqueleto dos 11 momentos é FIXO. Cada cena tem UI própria (só
- * mesaCartografo entregue nesta entrega; as demais aparecem como
- * placeholder navegável enquanto a gente aprova cena por cena).
+ * Navegação por SCROLL: todas as 11 cenas ficam empilhadas na página.
+ * A criança sobe e desce livremente. A barra de progresso reflete a
+ * cena mais visível no viewport (via IntersectionObserver). Cada bloco
+ * ainda tem um botão "próxima cena" que faz smooth-scroll pra próxima
+ * seção — mas rolar com o dedo também funciona.
  */
 export function PlayerGeoV1({
   aula,
@@ -35,14 +35,36 @@ export function PlayerGeoV1({
     { chave: "10", rotulo: "🔁 Revisão", cena: aula.cena10_revisao },
     { chave: "11", rotulo: "✅ Avaliação", cena: aula.cena11_avaliacao },
   ];
-  const [idx, setIdx] = useState(0);
-  const total = cenas.length;
-  const atual = cenas[idx];
-  const percent = Math.round(((idx + 1) / total) * 100);
 
-  const proxima = () => {
-    if (idx + 1 < total) setIdx(idx + 1);
-    else onConcluir();
+  const total = cenas.length;
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const [ativo, setAtivo] = useState(0);
+  const atual = cenas[ativo];
+  const percent = Math.round(((ativo + 1) / total) * 100);
+
+  // rastrear cena mais visível
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // pega a entry com maior intersecção visível
+        const visiveis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visiveis[0]) {
+          const i = Number(visiveis[0].target.getAttribute("data-cena-idx"));
+          if (!Number.isNaN(i)) setAtivo(i);
+        }
+      },
+      { rootMargin: "-30% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    sectionRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const irPara = (i: number) => {
+    const el = sectionRefs.current[i];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else if (i >= total) onConcluir();
   };
 
   return (
@@ -62,7 +84,7 @@ export function PlayerGeoV1({
             />
           </div>
           <div className="text-xs text-white/60 shrink-0">
-            {idx + 1} / {total}
+            {ativo + 1} / {total}
           </div>
         </div>
         <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
@@ -71,21 +93,60 @@ export function PlayerGeoV1({
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6">
-        <CenaRenderer cena={atual.cena} onProxima={proxima} />
+      <main className="max-w-3xl mx-auto px-4 py-6 space-y-10">
+        {cenas.map((c, i) => (
+          <section
+            key={c.chave}
+            data-cena-idx={i}
+            ref={(el) => {
+              sectionRefs.current[i] = el;
+            }}
+            className="scroll-mt-28"
+          >
+            <div className="text-[11px] uppercase tracking-[0.2em] text-amber-300/80 mb-3 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-amber-300/20 border border-amber-300/40 grid place-items-center text-amber-200 text-[10px] font-black">
+                {i + 1}
+              </span>
+              {c.rotulo}
+            </div>
+            <CenaRenderer
+              cena={c.cena}
+              onProxima={() => (i + 1 < total ? irPara(i + 1) : onConcluir())}
+              ultima={i + 1 === total}
+            />
+          </section>
+        ))}
+        <div className="h-24" />
       </main>
     </div>
   );
 }
 
-function CenaRenderer({ cena, onProxima }: { cena: CenaGeoV1; onProxima: () => void }) {
+function CenaRenderer({
+  cena,
+  onProxima,
+  ultima,
+}: {
+  cena: CenaGeoV1;
+  onProxima: () => void;
+  ultima?: boolean;
+}) {
   switch (cena.tipo) {
     case "mesaCartografo":
       return <MesaCartografo cena={cena} onProxima={onProxima} />;
     case "votoExplorador":
       return <VotoExplorador cena={cena} onProxima={onProxima} />;
+    case "cadernosCampo":
+      return <CadernosCampo cena={cena} onProxima={onProxima} />;
     case "placeholder":
-      return <CenaPlaceholder titulo={cena.titulo} descricao={cena.descricao} onProxima={onProxima} />;
+      return (
+        <CenaPlaceholder
+          titulo={cena.titulo}
+          descricao={cena.descricao}
+          onProxima={onProxima}
+          ultima={ultima}
+        />
+      );
   }
 }
 
@@ -389,32 +450,165 @@ function VotoExplorador({
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Placeholder — cenas 2 a 11 (a construir cena por cena)
+// Cena 3 — Cadernos de Campo (4 flip cards de vocabulário)
+// ─────────────────────────────────────────────────────────────────────
+function CadernosCampo({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "cadernosCampo" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [abertos, setAbertos] = useState<Record<string, boolean>>({});
+  const totalAbertos = Object.values(abertos).filter(Boolean).length;
+  const todosAbertos = totalAbertos === cena.cadernos.length;
+
+  const abrir = (id: string) =>
+    setAbertos((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        📓 {cena.instrucao}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {cena.cadernos.map((c) => {
+          const aberto = !!abertos[c.id];
+          return (
+            <button
+              key={c.id}
+              onClick={() => abrir(c.id)}
+              className="relative text-left"
+              style={{ perspective: "1000px" }}
+            >
+              <motion.div
+                className="relative w-full min-h-[180px] rounded-2xl"
+                style={{ transformStyle: "preserve-3d" }}
+                animate={{ rotateY: aberto ? 180 : 0 }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
+              >
+                {/* Capa */}
+                <div
+                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20`}
+                  style={{ backfaceVisibility: "hidden" }}
+                >
+                  <div className="text-5xl">{c.emoji}</div>
+                  <div>
+                    <div className="text-white/80 text-[10px] uppercase tracking-widest font-bold">
+                      Caderno de campo
+                    </div>
+                    <div className="text-white font-black text-xl leading-tight mt-1">
+                      {c.capa}
+                    </div>
+                    <div className="text-white/80 text-xs mt-2">👆 toque pra abrir</div>
+                  </div>
+                </div>
+                {/* Verso — página escrita */}
+                <div
+                  className="absolute inset-0 rounded-2xl p-4 bg-amber-50 text-[#2a1a08] shadow-lg border-2 border-amber-900/20"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                    backgroundImage:
+                      "repeating-linear-gradient(transparent 0 22px, rgba(120,53,15,.12) 22px 23px)",
+                  }}
+                >
+                  <div className="text-[10px] uppercase tracking-widest text-amber-800 font-bold">
+                    {c.capa}
+                  </div>
+                  <p className="text-sm font-semibold mt-1 leading-snug">
+                    {c.conteudo}
+                  </p>
+                  {c.exemplo && (
+                    <p className="text-xs italic text-amber-900/80 mt-2 border-t border-amber-900/20 pt-2">
+                      Ex.: {c.exemplo}
+                    </p>
+                  )}
+                </div>
+              </motion.div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="text-center text-xs text-white/60">
+        {totalAbertos} / {cena.cadernos.length} cadernos abertos
+      </div>
+
+      {todosAbertos && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!todosAbertos}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          todosAbertos
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {todosAbertos ? "Rolar pra próxima cena ↓" : "📓 Abra todos os cadernos"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 function CenaPlaceholder({
   titulo,
   descricao,
   onProxima,
+  ultima,
 }: {
   titulo: string;
   descricao: string;
   onProxima: () => void;
+  ultima?: boolean;
 }) {
   return (
-    <div className="text-center py-16 space-y-6">
-      <div className="text-6xl">🚧</div>
+    <div className="text-center py-12 space-y-5 bg-white/5 border border-white/10 rounded-2xl">
+      <div className="text-5xl">🚧</div>
       <div>
         <div className="text-xs uppercase tracking-widest text-amber-300">
           Cena em construção
         </div>
-        <h2 className="text-2xl font-black mt-1">{titulo}</h2>
-        <p className="text-sm text-white/70 max-w-md mx-auto mt-2">{descricao}</p>
+        <h2 className="text-xl font-black mt-1">{titulo}</h2>
+        <p className="text-sm text-white/70 max-w-md mx-auto mt-2 px-4">{descricao}</p>
       </div>
       <button
         onClick={onProxima}
         className="mx-auto block px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-sm font-semibold hover:bg-white/15"
       >
-        Pular por enquanto →
+        {ultima ? "✅ Concluir aula" : "Rolar pra próxima ↓"}
       </button>
     </div>
   );
