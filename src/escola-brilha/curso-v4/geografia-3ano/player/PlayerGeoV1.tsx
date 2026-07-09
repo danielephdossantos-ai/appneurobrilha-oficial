@@ -515,7 +515,7 @@ function CadernosCampo({
               style={{ perspective: "1000px" }}
             >
               <motion.div
-                className="relative w-full min-h-[180px] rounded-2xl"
+                className={`relative w-full rounded-2xl ${c.fotoUrl ? "min-h-[360px]" : "min-h-[200px]"}`}
                 style={{ transformStyle: "preserve-3d" }}
                 animate={{ rotateY: aberto ? 180 : 0 }}
                 transition={{ duration: 0.55, ease: "easeInOut" }}
