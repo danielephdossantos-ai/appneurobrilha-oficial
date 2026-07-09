@@ -144,6 +144,8 @@ function CenaRenderer({
       return <QuizRadar cena={cena} onProxima={onProxima} />;
     case "mapaCamadas":
       return <MapaCamadas cena={cena} onProxima={onProxima} />;
+    case "mapaBrasilInterativo":
+      return <MapaBrasilInterativo cena={cena} onProxima={onProxima} />;
     case "linhaEstrada":
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
     case "voceLeSozinho":
