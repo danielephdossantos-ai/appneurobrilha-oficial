@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PlayerGeoV1 } from "@/escola-brilha/curso-v4/geografia-3ano/player/PlayerGeoV1";
 import {
   getAulaGeoV1FromCurso,
