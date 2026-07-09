@@ -78,6 +78,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É um grupo de pessoas que vive há muito tempo em um lugar, mantendo os saberes dos antepassados: jeito de plantar, pescar, festejar, curar e criar os filhos.",
         exemplo: "Indígenas, quilombolas e ribeirinhos são comunidades tradicionais do Brasil.",
+        fotoUrl: fotoIndigena,
       },
       {
         id: "natureza",
@@ -87,6 +88,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a relação de CUIDADO que essas comunidades têm com o rio, a floresta e a terra. Tiram só o que precisam pra viver e protegem pra que dure pra sempre.",
         exemplo: "O ribeirinho só pesca o peixe que a família vai comer — não tira tudo do rio.",
+        fotoUrl: fotoRibeirinha,
       },
       {
         id: "cultura",
@@ -96,6 +98,7 @@ export const aula01: AulaGeoV1 = {
         conteudo:
           "É a mistura de festa, dança, música, comida, artesanato e história que a comunidade mantém e passa dos avós pros netos, sem deixar morrer.",
         exemplo: "O jongo quilombola, o grafismo indígena e a canoa ribeirinha são cultura viva.",
+        fotoUrl: fotoQuilombola,
       },
       {
         id: "troca",
@@ -165,6 +168,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q1",
         pergunta: "Qual comunidade planta MANDIOCA sem veneno e tece cesto de palha?",
+        fotoUrl: fotoIndigena,
         cards: [
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-400 to-lime-600" },
           { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },
@@ -177,6 +181,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q2",
         pergunta: "Onde tem MUTIRÃO de colheita, jongo e produção de MEL pra vender na cidade?",
+        fotoUrl: fotoQuilombola,
         cards: [
           { id: "ribeirinha", emoji: "🛶", titulo: "Ribeirinha", cor: "from-sky-500 to-blue-700" },
           { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },
@@ -189,6 +194,7 @@ export const aula01: AulaGeoV1 = {
       {
         id: "q3",
         pergunta: "Qual comunidade vive do CICLO DAS ÁGUAS, mora em PALAFITA e pesca de canoa?",
+        fotoUrl: fotoRibeirinha,
         cards: [
           { id: "indigena", emoji: "🪶", titulo: "Indígena", cor: "from-emerald-400 to-lime-600" },
           { id: "quilombola", emoji: "🥁", titulo: "Quilombola", cor: "from-orange-500 to-red-600" },

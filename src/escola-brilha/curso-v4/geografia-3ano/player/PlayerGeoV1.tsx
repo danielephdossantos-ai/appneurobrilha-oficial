@@ -549,7 +549,15 @@ function CadernosCampo({
                   <div className="text-[10px] uppercase tracking-widest text-amber-800 font-bold">
                     {c.capa}
                   </div>
-                  <p className="text-sm font-semibold mt-1 leading-snug">
+                  {c.fotoUrl && (
+                    <img
+                      src={c.fotoUrl}
+                      alt={c.capa}
+                      loading="lazy"
+                      className="w-full aspect-[3/2] object-cover rounded-lg mt-1 border-2 border-amber-900/20"
+                    />
+                  )}
+                  <p className="text-sm font-semibold mt-2 leading-snug">
                     {c.conteudo}
                   </p>
                   {c.exemplo && (
@@ -906,6 +914,18 @@ function QuizRadar({
               </button>
             </div>
           </motion.div>
+
+          {p.fotoUrl && (
+            <motion.img
+              key={`${p.id}-foto`}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              src={p.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-emerald-400/30 shadow-xl"
+            />
+          )}
 
           {/* Radar */}
           <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">

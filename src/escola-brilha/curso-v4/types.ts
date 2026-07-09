@@ -667,6 +667,7 @@ export type CenaGeoV1 =
         cor: string;          // gradient tailwind ex.: "from-emerald-400 to-teal-600"
         conteudo: string;     // texto revelado ao abrir
         exemplo?: string;     // frase de exemplo do cotidiano
+        fotoUrl?: string;     // opcional: foto real exibida quando o caderno abre
       }>;
       falaFinal: string;
     }
@@ -694,6 +695,7 @@ export type CenaGeoV1 =
       perguntas: Array<{
         id: string;
         pergunta: string;
+        fotoUrl?: string;    // opcional: foto real exibida acima da pergunta
         cards: Array<{
           id: string;
           emoji: string;
