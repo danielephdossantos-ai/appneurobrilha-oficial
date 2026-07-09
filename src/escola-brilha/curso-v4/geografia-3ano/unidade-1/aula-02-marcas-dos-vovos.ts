@@ -1,5 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
 import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
+import feiraHerancas from "@/assets/geografia-3ano/herancas-feira-municipio.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 02
@@ -22,6 +23,7 @@ export const aula02: AulaGeoV1 = {
     instrucao:
       "Arraste a LUPA sobre o mapa da FEIRA do município. Você vai descobrir MARCAS deixadas por diferentes grupos de vovôs que ajudaram a formar o nosso lugar.",
     mapaUrl: mapaMunicipio,
+    imagemDestaqueUrl: feiraHerancas,
     aurora:
       "Brilha, hoje a mesa do cartógrafo virou uma feira! Cada canto do município guarda uma MARCA deixada por um povo diferente. Passa a lupa devagar e vamos encontrar essas marcas.",
     falaFinal:

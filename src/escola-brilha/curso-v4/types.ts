@@ -639,7 +639,7 @@ export type CursoPortugues = {
 // =====================================================================
 
 export type CenaGeoV1 =
-  | { tipo: "mesaCartografo"; instrucao: string; mapaUrl: string; aurora: string; falaFinal: string }
+  | { tipo: "mesaCartografo"; instrucao: string; mapaUrl: string; imagemDestaqueUrl?: string; aurora: string; falaFinal: string }
   | {
       tipo: "votoExplorador";
       aurora: string;                // fala inicial da Aurora

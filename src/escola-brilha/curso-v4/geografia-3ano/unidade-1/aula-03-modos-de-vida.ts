@@ -1,5 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
 import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
+import modosDeVida from "@/assets/geografia-3ano/modos-de-vida-comunidades.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 03
@@ -20,6 +21,7 @@ export const aula03: AulaGeoV1 = {
     instrucao:
       "Arraste a LUPA sobre o mapa. Hoje você vai espiar CASAS diferentes: cada uma tem um jeito próprio de acordar, trabalhar e viver.",
     mapaUrl: mapaMunicipio,
+    imagemDestaqueUrl: modosDeVida,
     aurora:
       "Brilha, cada família do município acorda de um jeito. Uns pescam no rio, outros plantam roça, outros abrem loja no centro. Vamos descobrir esses MODOS de vida?",
     falaFinal:

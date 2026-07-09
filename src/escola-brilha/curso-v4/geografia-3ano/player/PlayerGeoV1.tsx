@@ -178,6 +178,7 @@ function MesaCartografo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const imagemCena = cena.imagemDestaqueUrl ?? cena.mapaUrl;
   const areaRef = useRef<HTMLDivElement | null>(null);
   const [pos, setPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
   const [revelado, setRevelado] = useState<Array<{ x: number; y: number }>>([
@@ -254,8 +255,8 @@ function MesaCartografo({
         >
           {/* mapa base */}
           <img
-            src={cena.mapaUrl}
-            alt="Mapa do município"
+            src={imagemCena}
+            alt="Imagem da missão de Geografia"
             className="absolute inset-0 w-full h-full object-cover"
             draggable={false}
           />

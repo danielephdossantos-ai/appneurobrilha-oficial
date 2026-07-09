@@ -1,5 +1,6 @@
 import type { AulaGeoV1 } from "../../types";
 import mapaMunicipio from "@/assets/geografia-3ano/mapa-municipio.jpg";
+import paisagemTransformacao from "@/assets/geografia-3ano/paisagem-transformacao-antes-agora.jpg";
 
 /**
  * Geografia · 3º Ano · Unidade 1 · Aula 04
@@ -20,6 +21,7 @@ export const aula04: AulaGeoV1 = {
     instrucao:
       "Arraste a LUPA sobre o mapa. Hoje você vai comparar o município de ANTES com o de AGORA e descobrir o que MUDOU.",
     mapaUrl: mapaMunicipio,
+    imagemDestaqueUrl: paisagemTransformacao,
     aurora:
       "Brilha, olha bem: esse mesmo lugar era MUITO diferente há 50 anos. Tinha mais mata, menos rua, menos prédio. Vamos investigar o que MUDA numa paisagem?",
     falaFinal:
