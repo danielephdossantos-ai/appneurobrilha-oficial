@@ -138,6 +138,8 @@ function CenaRenderer({
       return <VotoExplorador cena={cena} onProxima={onProxima} />;
     case "cadernosCampo":
       return <CadernosCampo cena={cena} onProxima={onProxima} />;
+    case "narrarMapa":
+      return <NarrarMapa cena={cena} onProxima={onProxima} />;
     case "placeholder":
       return (
         <CenaPlaceholder
