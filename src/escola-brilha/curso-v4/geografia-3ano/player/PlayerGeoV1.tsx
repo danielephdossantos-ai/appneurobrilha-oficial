@@ -522,16 +522,25 @@ function CadernosCampo({
               >
                 {/* Capa */}
                 <div
-                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20`}
+                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20 overflow-hidden`}
                   style={{ backfaceVisibility: "hidden" }}
                 >
-                  <div className="text-5xl">{c.emoji}</div>
+                  {c.fotoUrl ? (
+                    <img
+                      src={c.fotoUrl}
+                      alt={c.capa}
+                      loading="lazy"
+                      className="w-full h-32 object-cover rounded-xl border-2 border-white/30 shadow-lg"
+                    />
+                  ) : (
+                    <div className="text-5xl">{c.emoji}</div>
+                  )}
                   <div>
                     <div className="text-white/80 text-[10px] uppercase tracking-widest font-bold">
-                      Caderno de campo
+                      {c.fotoUrl ? "📸 Foto real" : "Caderno de campo"}
                     </div>
                     <div className="text-white font-black text-xl leading-tight mt-1">
-                      {c.capa}
+                      {c.emoji} {c.capa}
                     </div>
                     <div className="text-white/80 text-xs mt-2">👆 toque pra abrir</div>
                   </div>
