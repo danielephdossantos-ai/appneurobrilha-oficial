@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
@@ -6,12 +6,12 @@ import lupaImg from "@/assets/geografia-3ano/lupa.png";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
- * Exceção formal ao padrão visual único (docs: .lovable/mem/constraints/
- * geografia-3ao9-player-custom.md).
  *
- * O esqueleto dos 11 momentos é FIXO. Cada cena tem UI própria (só
- * mesaCartografo entregue nesta entrega; as demais aparecem como
- * placeholder navegável enquanto a gente aprova cena por cena).
+ * Navegação por SCROLL: todas as 11 cenas ficam empilhadas na página.
+ * A criança sobe e desce livremente. A barra de progresso reflete a
+ * cena mais visível no viewport (via IntersectionObserver). Cada bloco
+ * ainda tem um botão "próxima cena" que faz smooth-scroll pra próxima
+ * seção — mas rolar com o dedo também funciona.
  */
 export function PlayerGeoV1({
   aula,
@@ -35,14 +35,36 @@ export function PlayerGeoV1({
     { chave: "10", rotulo: "🔁 Revisão", cena: aula.cena10_revisao },
     { chave: "11", rotulo: "✅ Avaliação", cena: aula.cena11_avaliacao },
   ];
-  const [idx, setIdx] = useState(0);
-  const total = cenas.length;
-  const atual = cenas[idx];
-  const percent = Math.round(((idx + 1) / total) * 100);
 
-  const proxima = () => {
-    if (idx + 1 < total) setIdx(idx + 1);
-    else onConcluir();
+  const total = cenas.length;
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const [ativo, setAtivo] = useState(0);
+  const atual = cenas[ativo];
+  const percent = Math.round(((ativo + 1) / total) * 100);
+
+  // rastrear cena mais visível
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // pega a entry com maior intersecção visível
+        const visiveis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visiveis[0]) {
+          const i = Number(visiveis[0].target.getAttribute("data-cena-idx"));
+          if (!Number.isNaN(i)) setAtivo(i);
+        }
+      },
+      { rootMargin: "-30% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    sectionRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const irPara = (i: number) => {
+    const el = sectionRefs.current[i];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else if (i >= total) onConcluir();
   };
 
   return (
@@ -62,7 +84,7 @@ export function PlayerGeoV1({
             />
           </div>
           <div className="text-xs text-white/60 shrink-0">
-            {idx + 1} / {total}
+            {ativo + 1} / {total}
           </div>
         </div>
         <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
@@ -71,21 +93,60 @@ export function PlayerGeoV1({
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 py-6">
-        <CenaRenderer cena={atual.cena} onProxima={proxima} />
+      <main className="max-w-3xl mx-auto px-4 py-6 space-y-10">
+        {cenas.map((c, i) => (
+          <section
+            key={c.chave}
+            data-cena-idx={i}
+            ref={(el) => {
+              sectionRefs.current[i] = el;
+            }}
+            className="scroll-mt-28"
+          >
+            <div className="text-[11px] uppercase tracking-[0.2em] text-amber-300/80 mb-3 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-amber-300/20 border border-amber-300/40 grid place-items-center text-amber-200 text-[10px] font-black">
+                {i + 1}
+              </span>
+              {c.rotulo}
+            </div>
+            <CenaRenderer
+              cena={c.cena}
+              onProxima={() => (i + 1 < total ? irPara(i + 1) : onConcluir())}
+              ultima={i + 1 === total}
+            />
+          </section>
+        ))}
+        <div className="h-24" />
       </main>
     </div>
   );
 }
 
-function CenaRenderer({ cena, onProxima }: { cena: CenaGeoV1; onProxima: () => void }) {
+function CenaRenderer({
+  cena,
+  onProxima,
+  ultima,
+}: {
+  cena: CenaGeoV1;
+  onProxima: () => void;
+  ultima?: boolean;
+}) {
   switch (cena.tipo) {
     case "mesaCartografo":
       return <MesaCartografo cena={cena} onProxima={onProxima} />;
     case "votoExplorador":
       return <VotoExplorador cena={cena} onProxima={onProxima} />;
+    case "cadernosCampo":
+      return <CadernosCampo cena={cena} onProxima={onProxima} />;
     case "placeholder":
-      return <CenaPlaceholder titulo={cena.titulo} descricao={cena.descricao} onProxima={onProxima} />;
+      return (
+        <CenaPlaceholder
+          titulo={cena.titulo}
+          descricao={cena.descricao}
+          onProxima={onProxima}
+          ultima={ultima}
+        />
+      );
   }
 }
 
