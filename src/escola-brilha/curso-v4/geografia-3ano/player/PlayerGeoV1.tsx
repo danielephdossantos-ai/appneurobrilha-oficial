@@ -1659,6 +1659,242 @@ function VoceLeSozinho({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 9 — Fronteiras Vivas (arrastar a linha até a fronteira certa)
+// ─────────────────────────────────────────────────────────────────────
+function FronteirasVivas({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "fronteirasVivas" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [rodadaIdx, setRodadaIdx] = useState(0);
+  const [linha, setLinha] = useState(50); // % horizontal
+  const [travada, setTravada] = useState(false);
+  const [acertos, setAcertos] = useState(0);
+  const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
+  const [fim, setFim] = useState(false);
+  const areaRef = useRef<HTMLDivElement | null>(null);
+
+  const rodada = cena.rodadas[rodadaIdx];
+  const total = cena.rodadas.length;
+
+  const mover = (clientX: number) => {
+    if (travada) return;
+    const el = areaRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    setLinha(Math.max(2, Math.min(98, x)));
+  };
+
+  const confirmar = () => {
+    if (travada) return;
+    const dist = Math.abs(linha - rodada.xCerto);
+    const ok = dist <= rodada.tolerancia;
+    setTravada(true);
+    setFeedback(ok ? "acerto" : "erro");
+    if (ok) setAcertos((n) => n + 1);
+  };
+
+  const proximaRodada = () => {
+    if (rodadaIdx + 1 < total) {
+      setRodadaIdx(rodadaIdx + 1);
+      setLinha(50);
+      setTravada(false);
+      setFeedback(null);
+    } else {
+      setFim(true);
+    }
+  };
+
+  if (fim) {
+    return (
+      <div className="space-y-5">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-gradient-to-br from-emerald-500/25 to-amber-400/25 border-2 border-emerald-400/50 rounded-3xl p-6 text-center space-y-3"
+        >
+          <div className="text-6xl">🗺️</div>
+          <div className="text-xs uppercase tracking-widest text-amber-300">
+            Fronteiras Vivas — placar
+          </div>
+          <div className="text-4xl font-black text-white">
+            {acertos} / {total}
+          </div>
+          <div className="text-sm text-white/80 max-w-md mx-auto">
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+        <button
+          onClick={onProxima}
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+        >
+          Continuar
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🚧 {cena.instrucao}
+      </div>
+
+      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/60">
+        <span>Rodada {rodadaIdx + 1} / {total}</span>
+        <span>✓ {acertos}</span>
+      </div>
+
+      {/* Duas terras + pista central */}
+      <div
+        ref={areaRef}
+        className="relative h-56 sm:h-64 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl touch-none select-none"
+        onMouseMove={(e) => mover(e.clientX)}
+        onTouchMove={(e) => {
+          const t = e.touches[0];
+          if (t) mover(t.clientX);
+        }}
+        onTouchStart={(e) => {
+          const t = e.touches[0];
+          if (t) mover(t.clientX);
+        }}
+        onClick={(e) => mover(e.clientX)}
+      >
+        {/* Lado A */}
+        <div
+          className={`absolute inset-y-0 left-0 bg-gradient-to-br ${rodada.municipioA.cor} flex flex-col items-center justify-center gap-1`}
+          style={{ width: `${linha}%` }}
+        >
+          <div className="text-4xl sm:text-5xl">{rodada.municipioA.emoji}</div>
+          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
+            {rodada.municipioA.nome}
+          </div>
+        </div>
+        {/* Lado B */}
+        <div
+          className={`absolute inset-y-0 right-0 bg-gradient-to-bl ${rodada.municipioB.cor} flex flex-col items-center justify-center gap-1`}
+          style={{ width: `${100 - linha}%` }}
+        >
+          <div className="text-4xl sm:text-5xl">{rodada.municipioB.emoji}</div>
+          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
+            {rodada.municipioB.nome}
+          </div>
+        </div>
+
+        {/* Pista (rio, placa, muro) — fica no lugar certo, discreta */}
+        <div
+          className="absolute top-1 -translate-x-1/2 flex flex-col items-center pointer-events-none"
+          style={{ left: `${rodada.xCerto}%` }}
+        >
+          <div className="text-2xl sm:text-3xl drop-shadow-lg">
+            {rodada.pistaEmoji}
+          </div>
+          <div className="text-[9px] uppercase tracking-widest bg-black/60 text-amber-200 px-1.5 py-0.5 rounded font-bold">
+            {rodada.pistaRotulo}
+          </div>
+        </div>
+
+        {/* Linha pontilhada arrastável */}
+        <motion.div
+          className="absolute inset-y-0 pointer-events-none"
+          style={{ left: `${linha}%`, transform: "translateX(-50%)" }}
+          animate={
+            feedback === "erro"
+              ? { x: [-6, 6, -4, 4, 0] }
+              : feedback === "acerto"
+              ? { scale: [1, 1.05, 1] }
+              : {}
+          }
+          transition={{ duration: 0.5 }}
+        >
+          <div
+            className={`w-1 h-full ${
+              travada
+                ? feedback === "acerto"
+                  ? "bg-emerald-300"
+                  : "bg-rose-400"
+                : "bg-amber-200"
+            }`}
+            style={{
+              backgroundImage: travada
+                ? undefined
+                : "repeating-linear-gradient(to bottom,#fde68a 0 8px,transparent 8px 14px)",
+            }}
+          />
+          <div
+            className={`absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full grid place-items-center text-xs font-black ${
+              travada
+                ? feedback === "acerto"
+                  ? "bg-emerald-400 text-[#0d1f55]"
+                  : "bg-rose-400 text-white"
+                : "bg-amber-300 text-[#3a2410] animate-pulse"
+            }`}
+          >
+            🚧
+          </div>
+        </motion.div>
+
+        {!travada && (
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[11px] px-3 py-1 rounded-full pointer-events-none">
+            👆 arraste a linha até a fronteira
+          </div>
+        )}
+      </div>
+
+      {feedback && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`rounded-2xl p-3 border text-sm ${
+            feedback === "acerto"
+              ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
+              : "bg-rose-500/15 border-rose-400/40 text-rose-100"
+          }`}
+        >
+          <span className="font-bold">
+            {feedback === "acerto" ? "🎯 " : "❌ "}
+          </span>
+          {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
+        </motion.div>
+      )}
+
+      <button
+        onClick={travada ? proximaRodada : confirmar}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          travada
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+        }`}
+      >
+        {travada
+          ? rodadaIdx + 1 === total
+            ? "Ver placar →"
+            : "Próxima rodada →"
+          : "🚧 Marcar fronteira aqui"}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 
