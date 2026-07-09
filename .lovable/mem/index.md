@@ -25,3 +25,4 @@ Aula EF01MA02 é gabarito TRAVADO.
 - [Geografia 2º Ano UI interativa](mem://preferences/geo-2ano-ui-interativa) — Regra de Ouro de UI + 5 movimentos pedagógicos.
 - [Blocos aditivos por disciplina](mem://preferences/blocos-aditivos) — Novos tipos de bloco/minijogo são PERMITIDOS quando aditivos ao player padrão (referência: `LaboratorioClima`).
 - [Diploma padrão + coleção de mascotes](mem://preferences/diploma-padrao-e-colecao-mascotes) — DiplomaBrilha fixo (Esquilo Brilha + 1 mascote colecionável); personagens (Aurora, ...) sempre puxam do mapa PERSONAGENS.
+- [Geografia 3º–9º player custom (exceção)](mem://constraints/geografia-3ao9-player-custom) — Única exceção ao padrão visual único: Geografia do 3º ao 9º pode ter cenas próprias. Fazer cena por cena com aprovação.
