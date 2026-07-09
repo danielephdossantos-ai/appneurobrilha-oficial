@@ -670,6 +670,22 @@ export type CenaGeoV1 =
       }>;
       falaFinal: string;
     }
+  | {
+      tipo: "narrarMapa";
+      aurora: string;
+      instrucao: string;
+      mapaUrl: string;
+      pontos: Array<{
+        id: string;
+        x: number;      // 0-100 (% no mapa)
+        y: number;      // 0-100
+        emoji: string;  // ícone do balão (🏙️ 🌾 🌉 🚧 ...)
+        cor: string;    // gradient tailwind ex.: "from-sky-400 to-indigo-500"
+        titulo: string; // ex.: "Zona Urbana"
+        texto: string;  // Aurora conta o que é esse ponto
+      }>;
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
 
 export type AulaGeoV1 = {
