@@ -799,7 +799,28 @@ export type CenaGeoV1 =
       ];
       falaFinal: string;
     }
+  | {
+      tipo: "seloAtlas";
+      aurora: string;
+      instrucao: string;
+      /** 3 perguntas curtas de fechamento. */
+      perguntas: Array<{
+        id: string;
+        pergunta: string;
+        opcoes: Array<{ id: string; texto: string; correta?: boolean }>;
+        feedbackAcerto: string;
+        feedbackErro: string;
+      }>;
+      selo: {
+        nome: string;         // "Mestre dos Mapas e Fronteiras"
+        subtitulo: string;    // "Insígnia oficial do Atlas Municipal"
+        emoji: string;        // "🏅"
+        cor: string;          // tailwind stop, ex "from-amber-300 to-orange-500"
+      };
+      falaFinal: string;
+    }
   | { tipo: "placeholder"; titulo: string; descricao: string };
+
 
 export type AulaGeoV1 = {
   slug: string;
