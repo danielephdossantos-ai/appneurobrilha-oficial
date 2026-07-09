@@ -237,33 +237,35 @@ export const aula02: AulaGeoV1 = {
   },
 
   cena06_personagensLugar: {
-    tipo: "mapaCamadas",
+    tipo: "mapaBrasilInterativo",
     aurora:
-      "Duas camadas pra comparar. Uma acende os 5 estados MAIS POPULOSOS do Brasil (onde vive mais gente). A outra acende os 5 MAIORES em tamanho.",
-    instrucao: "Toque nos interruptores pra acender cada camada",
-    mapaUrl: mapaEstados,
-    camadas: [
-      {
-        id: "populosos",
-        rotulo: "Mais POPULOSOS (SP, MG, RJ, BA, RS)",
-        emoji: "👥",
-        cor: "from-red-500 to-rose-700",
-        rect: { x: 40, y: 40, w: 45, h: 55 },
-        descricao:
-          "São Paulo, Minas Gerais e Rio de Janeiro (Sudeste) + Bahia (Nordeste) + Rio Grande do Sul (Sul) concentram MAIS DA METADE da população brasileira.",
-      },
-      {
-        id: "grandes",
-        rotulo: "Maiores em TAMANHO (AM, PA, MT, MG, BA)",
-        emoji: "📏",
-        cor: "from-emerald-500 to-green-700",
-        rect: { x: 15, y: 10, w: 75, h: 55 },
-        descricao:
-          "Amazonas, Pará, Mato Grosso, Minas Gerais e Bahia são os 5 MAIORES em quilômetros quadrados. O Amazonas sozinho é 4 vezes maior que a Alemanha!",
-      },
-    ],
+      "Agora o mapa é SEU. Toca em CADA estado pra descobrir o nome, a capital e a sigla. Compare dois grupos: os 5 mais POPULOSOS × os 5 MAIORES em tamanho.",
+    instrucao: "Toque em cada estado colorido no mapa",
+    missao: {
+      tipo: "grupos",
+      grupos: [
+        {
+          id: "populosos",
+          rotulo: "5 mais POPULOSOS",
+          emoji: "👥",
+          cor: "from-red-500 to-rose-700",
+          siglas: ["SP", "MG", "RJ", "BA", "RS"],
+          descricao:
+            "SP, MG, RJ (Sudeste) + BA (Nordeste) + RS (Sul) concentram mais da METADE da população brasileira.",
+        },
+        {
+          id: "grandes",
+          rotulo: "5 MAIORES em tamanho",
+          emoji: "📏",
+          cor: "from-emerald-500 to-green-700",
+          siglas: ["AM", "PA", "MT", "MG", "BA"],
+          descricao:
+            "AM, PA, MT, MG e BA são os 5 maiores em km². O Amazonas sozinho é 4× maior que a Alemanha!",
+        },
+      ],
+    },
     falaFinal:
-      "Grande em TAMANHO nem sempre é grande em POPULAÇÃO. O Amazonas é enorme, mas tem menos gente que SP.",
+      "Percebeu? Grande em TAMANHO nem sempre é grande em POPULAÇÃO. MG e BA aparecem nos DOIS grupos — são gigantes e cheios de gente.",
   },
 
   cena07_sequencia: {
