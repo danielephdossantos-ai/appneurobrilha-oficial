@@ -736,6 +736,14 @@ function NarrarMapa({
               🔊 ouvir
             </button>
           </div>
+          {pontoAtivo.fotoUrl && (
+            <img
+              src={pontoAtivo.fotoUrl}
+              alt={pontoAtivo.titulo}
+              loading="lazy"
+              className="w-full aspect-[3/2] object-cover rounded-xl mb-2 border-2 border-emerald-200"
+            />
+          )}
           <p className="text-sm leading-snug">{pontoAtivo.texto}</p>
         </motion.div>
       )}
