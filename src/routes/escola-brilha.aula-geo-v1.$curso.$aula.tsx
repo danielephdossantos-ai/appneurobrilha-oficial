@@ -193,28 +193,36 @@ function CelebracaoFinalCurso({
   onSair: () => void;
 }) {
   const navigate = useNavigate();
-  const confetes = Array.from({ length: 60 }, (_, i) => i);
+  const confetes = Array.from({ length: 140 }, (_, i) => i);
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white overflow-hidden relative">
-      {/* Chuva de confetes */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#0d1f55] via-[#1a0d3d] to-[#0d1f55] text-white relative">
+      {/* Chuva de confetes — fixed cobre a viewport toda */}
+      <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
         {confetes.map((i) => {
-          const cor = ["#FFC93C", "#22C55E", "#4C9EFF", "#F472B6", "#FB923C"][i % 5];
-          const left = (i * 37) % 100;
-          const delay = (i % 20) * 0.15;
-          const dur = 3 + (i % 5);
+          const cor = ["#FFC93C", "#22C55E", "#4C9EFF", "#F472B6", "#FB923C", "#A78BFA", "#F87171"][i % 7];
+          const left = (i * 17 + (i % 7) * 3) % 100;
+          const delay = (i % 25) * 0.12;
+          const dur = 3 + (i % 6) * 0.5;
+          const size = 6 + (i % 4) * 3;
+          const shape = i % 3 === 0 ? "rounded-full" : "rounded-sm";
           return (
             <motion.div
               key={i}
-              initial={{ y: -40, rotate: 0, opacity: 0 }}
-              animate={{ y: "110vh", rotate: 720, opacity: [0, 1, 1, 0] }}
+              initial={{ y: -60, x: 0, rotate: 0, opacity: 0 }}
+              animate={{
+                y: "110vh",
+                x: [0, 20, -20, 10, 0],
+                rotate: 720,
+                opacity: [0, 1, 1, 1, 0],
+              }}
               transition={{ duration: dur, delay, repeat: Infinity, ease: "linear" }}
-              className="absolute w-3 h-3 rounded-sm"
-              style={{ left: `${left}%`, background: cor }}
+              className={`absolute ${shape}`}
+              style={{ left: `${left}%`, top: 0, width: size, height: size, background: cor }}
             />
           );
         })}
       </div>
+
 
       <div className="relative max-w-2xl mx-auto px-6 py-16 text-center space-y-8">
         <motion.div
