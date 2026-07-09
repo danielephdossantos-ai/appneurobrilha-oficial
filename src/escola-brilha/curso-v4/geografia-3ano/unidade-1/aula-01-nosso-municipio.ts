@@ -105,9 +105,55 @@ export const aula01: AulaGeoV1 = {
       "Agora você tem as 4 palavras do cartógrafo. Vamos usar TODAS elas nas próximas cenas!",
   },
   cena04_leituraGuiada: {
-    tipo: "placeholder",
-    titulo: "Aurora narra o mapa",
-    descricao: "Balões flutuando sobre o mapa, Aurora lê em voz alta.",
+    tipo: "narrarMapa",
+    aurora:
+      "Agora que você conhece as palavras, deixa eu te apresentar o mapa DE VERDADE. Toca em cada balão que eu conto o que tem naquele pedaço do município.",
+    instrucao: "Toque em cada balão pra ouvir a Aurora contar",
+    mapaUrl: mapaMunicipio,
+    pontos: [
+      {
+        id: "urbana",
+        x: 30,
+        y: 40,
+        emoji: "🏙️",
+        cor: "from-sky-400 to-indigo-500",
+        titulo: "Zona Urbana",
+        texto:
+          "Esse pedaço é a CIDADE. Tem muitas casas juntinhas, ruas de asfalto, prédios, praça, escola e mercado. É onde a maioria das pessoas do município mora.",
+      },
+      {
+        id: "rural",
+        x: 72,
+        y: 60,
+        emoji: "🌾",
+        cor: "from-lime-400 to-emerald-600",
+        titulo: "Zona Rural",
+        texto:
+          "Esse pedaço é o CAMPO. Tem plantação, sítio, fazenda, animais e muito verde. É de onde vem grande parte da comida que a gente come na cidade.",
+      },
+      {
+        id: "rio",
+        x: 55,
+        y: 78,
+        emoji: "🌊",
+        cor: "from-cyan-400 to-blue-600",
+        titulo: "Rio do Município",
+        texto:
+          "O rio atravessa o município INTEIRO. Ele passa pelo campo e chega perto da cidade. Serve pra beber, pra plantar e pra dar vida pros bichos.",
+      },
+      {
+        id: "fronteira",
+        x: 90,
+        y: 20,
+        emoji: "🚧",
+        cor: "from-amber-400 to-rose-600",
+        titulo: "Fronteira",
+        texto:
+          "Aqui é a FRONTEIRA. Depois dessa linha, começa OUTRO município, com outra prefeitura. Tudo que está antes dela ainda é o nosso município.",
+      },
+    ],
+    falaFinal:
+      "Viu como o município é grande? Cidade, campo, rio e fronteira — tudo faz parte do MESMO lugar onde a gente vive.",
   },
   cena05_compreensao: {
     tipo: "placeholder",
