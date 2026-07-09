@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 import lupaImg from "@/assets/geografia-3ano/lupa.png";
+import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
@@ -144,6 +145,8 @@ function CenaRenderer({
       return <QuizRadar cena={cena} onProxima={onProxima} />;
     case "mapaCamadas":
       return <MapaCamadas cena={cena} onProxima={onProxima} />;
+    case "mapaBrasilInterativo":
+      return <MapaBrasilInterativo cena={cena} onProxima={onProxima} />;
     case "linhaEstrada":
       return <LinhaEstrada cena={cena} onProxima={onProxima} />;
     case "voceLeSozinho":
@@ -2491,3 +2494,258 @@ function CenaPlaceholder({
     </div>
   );
 }
+
+// ─────────────────────────────────────────────────────────────────────
+// MapaBrasilInterativo — SVG real dos 27 UFs, cada estado clicável.
+// Reusável do 3º ao 9º ano.
+// ─────────────────────────────────────────────────────────────────────
+
+const REGIAO_COR: Record<EstadoBr["regiao"], string> = {
+  norte: "#059669",         // emerald-600
+  nordeste: "#f59e0b",      // amber-500
+  "centro-oeste": "#ea580c",// orange-600
+  sudeste: "#dc2626",       // red-600
+  sul: "#0284c7",           // sky-600
+};
+
+const REGIAO_ROTULO: Record<EstadoBr["regiao"], string> = {
+  norte: "Norte",
+  nordeste: "Nordeste",
+  "centro-oeste": "Centro-Oeste",
+  sudeste: "Sudeste",
+  sul: "Sul",
+};
+
+function MapaBrasilInterativo({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "mapaBrasilInterativo" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const [visitadas, setVisitadas] = useState<Record<string, boolean>>({});
+  const [ativa, setAtiva] = useState<string | null>(null);
+
+  const estadoAtivo = ativa ? BR_ESTADOS.find((e) => e.sigla === ativa) : null;
+
+  // Missão: determina quais estados "contam" pra liberar o botão.
+  const missao = cena.missao ?? { tipo: "todos" as const };
+  const alvoSiglas =
+    missao.tipo === "todos"
+      ? BR_ESTADOS.map((e) => e.sigla)
+      : missao.tipo === "selecionar"
+      ? missao.siglas
+      : missao.grupos.flatMap((g) => g.siglas);
+
+  const acertosCount = alvoSiglas.filter((s) => visitadas[s]).length;
+  const missaoCompleta = acertosCount === alvoSiglas.length;
+
+  // Cor de cada UF segundo a missão
+  const corDoEstado = (uf: EstadoBr): string => {
+    if (missao.tipo === "grupos") {
+      for (const g of missao.grupos) {
+        if (g.siglas.includes(uf.sigla)) {
+          // usa a cor sólida do gradient (extrai o "to-XXX")
+          return REGIAO_COR[uf.regiao];
+        }
+      }
+      return "#334155"; // slate-700 pros que não estão em nenhum grupo
+    }
+    if (missao.tipo === "selecionar") {
+      return missao.siglas.includes(uf.sigla) ? REGIAO_COR[uf.regiao] : "#475569";
+    }
+    return REGIAO_COR[uf.regiao];
+  };
+
+  const grupoDoEstado = (uf: EstadoBr) => {
+    if (missao.tipo !== "grupos") return null;
+    return missao.grupos.find((g) => g.siglas.includes(uf.sigla)) ?? null;
+  };
+
+  const falar = (texto: string) => {
+    try {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(texto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
+
+  const tocarEstado = (uf: EstadoBr) => {
+    setAtiva(uf.sigla);
+    setVisitadas((prev) => ({ ...prev, [uf.sigla]: true }));
+    const grupo = grupoDoEstado(uf);
+    const extra = grupo ? ` Faz parte do grupo: ${grupo.rotulo}.` : "";
+    falar(
+      `${uf.nome}. Sigla ${uf.sigla.split("").join(" ")}. Capital ${uf.capital}. Região ${REGIAO_ROTULO[uf.regiao]}.${extra}`,
+    );
+  };
+
+  return (
+    <div className="space-y-5">
+      {/* Aurora */}
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      {/* Instrução */}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🗺️ {cena.instrucao}
+      </div>
+
+      {/* Legenda de grupos (quando tipo=grupos) */}
+      {missao.tipo === "grupos" && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {missao.grupos.map((g) => {
+            const done = g.siglas.every((s) => visitadas[s]);
+            return (
+              <div
+                key={g.id}
+                className={`rounded-2xl p-3 border-2 bg-gradient-to-br ${g.cor} ${
+                  done ? "border-white ring-2 ring-white/40" : "border-white/20"
+                }`}
+              >
+                <div className="flex items-center gap-2 text-white">
+                  <div className="text-2xl">{g.emoji}</div>
+                  <div className="flex-1">
+                    <div className="font-black text-sm leading-tight">{g.rotulo}</div>
+                    <div className="text-white/85 text-[11px]">
+                      {g.siglas.filter((s) => visitadas[s]).length}/{g.siglas.length} tocados
+                    </div>
+                  </div>
+                  {done && <div className="text-lg">✅</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Mapa SVG interativo */}
+      <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-slate-900">
+        <svg
+          viewBox={BR_VIEWBOX}
+          className="w-full h-auto select-none"
+          style={{ aspectRatio: "1 / 1", touchAction: "manipulation" }}
+        >
+          {BR_ESTADOS.map((uf) => {
+            const isAtiva = ativa === uf.sigla;
+            const isVisitada = !!visitadas[uf.sigla];
+            const corBase = corDoEstado(uf);
+            return (
+              <g key={uf.sigla}>
+                <path
+                  d={uf.d}
+                  fill={corBase}
+                  fillOpacity={isVisitada ? 0.95 : 0.55}
+                  stroke={isAtiva ? "#ffffff" : "rgba(255,255,255,0.35)"}
+                  strokeWidth={isAtiva ? 0.35 : 0.12}
+                  strokeLinejoin="round"
+                  className="cursor-pointer transition-all duration-200 hover:brightness-125"
+                  onClick={() => tocarEstado(uf)}
+                  style={{
+                    filter: isAtiva
+                      ? "drop-shadow(0 0 3px rgba(255,255,255,0.9))"
+                      : undefined,
+                  }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* Contador flutuante */}
+        <div className="absolute top-2 right-2 bg-black/70 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur">
+          {acertosCount}/{alvoSiglas.length}
+        </div>
+      </div>
+
+      {/* Popup do estado tocado */}
+      {estadoAtivo && (
+        <motion.div
+          key={estadoAtivo.sigla}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-2xl p-4 border-2 border-white/25 shadow-2xl text-white"
+          style={{ background: `linear-gradient(135deg, ${REGIAO_COR[estadoAtivo.regiao]}, rgba(0,0,0,0.5))` }}
+        >
+          <div className="flex items-start gap-3">
+            <div className="bg-white/20 rounded-2xl px-3 py-2 text-center min-w-[64px] backdrop-blur">
+              <div className="text-[10px] uppercase opacity-80 font-bold">Sigla</div>
+              <div className="text-2xl font-black leading-none">{estadoAtivo.sigla}</div>
+            </div>
+            <div className="flex-1">
+              <div className="text-xl font-black leading-tight">{estadoAtivo.nome}</div>
+              <div className="text-sm opacity-95 mt-1">
+                🏙️ Capital: <span className="font-bold">{estadoAtivo.capital}</span>
+              </div>
+              <div className="text-xs opacity-80 mt-1">
+                📍 Região {REGIAO_ROTULO[estadoAtivo.regiao]}
+              </div>
+            </div>
+            <button
+              onClick={() => falar(`${estadoAtivo.nome}. Capital ${estadoAtivo.capital}.`)}
+              className="bg-white/20 rounded-full w-9 h-9 flex items-center justify-center hover:bg-white/30"
+              aria-label="Ouvir de novo"
+            >
+              🔊
+            </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Missão pergunta (quando selecionar) */}
+      {missao.tipo === "selecionar" && (
+        <div className="bg-white/5 border border-white/15 rounded-2xl p-3 text-sm">
+          <div className="text-emerald-300 font-bold text-xs mb-1">🎯 Missão</div>
+          {missao.pergunta}
+        </div>
+      )}
+
+      {/* Botão próxima quando missão completa */}
+      {missaoCompleta && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-3"
+        >
+          <div className="bg-emerald-500/20 border-2 border-emerald-400 rounded-2xl p-4 text-center">
+            <div className="text-2xl mb-1">🎉</div>
+            <div className="text-emerald-200 font-bold text-sm">{cena.falaFinal}</div>
+          </div>
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-500 text-white font-black shadow-xl hover:brightness-110"
+          >
+            Continuar ↓
+          </button>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
