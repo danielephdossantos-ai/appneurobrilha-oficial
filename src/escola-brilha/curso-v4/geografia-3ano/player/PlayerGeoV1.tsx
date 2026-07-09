@@ -1228,6 +1228,193 @@ function MapaCamadas({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Cena 7 — Linha da Estrada (tocar as paradas em ordem)
+// ─────────────────────────────────────────────────────────────────────
+function LinhaEstrada({
+  cena,
+  onProxima,
+}: {
+  cena: Extract<CenaGeoV1, { tipo: "linhaEstrada" }>;
+  onProxima: () => void;
+}) {
+  const aurora = PERSONAGENS.aurora;
+  const total = cena.ordemCerta.length;
+  const [passo, setPasso] = useState(0);       // próxima posição a preencher
+  const [colocados, setColocados] = useState<string[]>([]); // ids em ordem
+  const [erro, setErro] = useState<string | null>(null);
+  const concluido = passo === total;
+
+  const proxIdEsperado = cena.ordemCerta[passo];
+  const paradaPorId = (id: string) => cena.paradas.find((p) => p.id === id)!;
+
+  const tentar = (id: string) => {
+    if (concluido || colocados.includes(id)) return;
+    if (id === proxIdEsperado) {
+      setColocados((prev) => [...prev, id]);
+      setPasso((n) => n + 1);
+      setErro(null);
+    } else {
+      setErro(id);
+      setTimeout(() => setErro(null), 700);
+    }
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">{aurora.nome}</div>
+          {cena.aurora}
+        </div>
+      </div>
+
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🛣️ {cena.instrucao}
+      </div>
+
+      <div className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 text-center">
+        <div className="text-white font-black text-lg leading-snug">
+          {cena.pergunta}
+        </div>
+      </div>
+
+      {/* Estrada com paradas em ordem */}
+      <div className="relative bg-gradient-to-b from-emerald-900/40 to-emerald-950/60 border border-white/15 rounded-2xl p-4">
+        {/* trilho vertical */}
+        <div className="absolute left-9 top-6 bottom-6 w-1 bg-white/15 rounded-full" />
+        <div
+          className="absolute left-9 top-6 w-1 bg-gradient-to-b from-emerald-300 to-amber-300 rounded-full transition-all duration-500"
+          style={{
+            height: `calc(${(passo / total) * 100}% - ${passo === total ? 12 : 0}px)`,
+            maxHeight: "calc(100% - 12px)",
+          }}
+        />
+
+        <div className="space-y-3 relative">
+          {cena.ordemCerta.map((id, i) => {
+            const preenchido = i < passo;
+            const ativo = i === passo;
+            const p = paradaPorId(id);
+            return (
+              <div key={i} className="flex items-center gap-3 min-h-[56px]">
+                <div
+                  className={`w-10 h-10 rounded-full grid place-items-center text-lg font-black shrink-0 border-2 transition-all ${
+                    preenchido
+                      ? "bg-emerald-400 border-white text-[#0d1f55]"
+                      : ativo
+                      ? "bg-white/10 border-emerald-300 text-emerald-300 animate-pulse"
+                      : "bg-white/5 border-white/20 text-white/40"
+                  }`}
+                >
+                  {preenchido ? "✓" : i + 1}
+                </div>
+                {preenchido ? (
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex-1 bg-white/10 border border-emerald-400/40 rounded-xl p-2 flex items-center gap-2"
+                  >
+                    <span className="text-2xl">{p.emoji}</span>
+                    <div className="text-sm">
+                      <div className="font-bold text-emerald-300">{p.rotulo}</div>
+                      <div className="text-white/80 text-xs leading-snug">
+                        {p.descricao}
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div className="flex-1 border-2 border-dashed border-white/20 rounded-xl p-2 text-white/40 text-xs italic">
+                    {ativo ? "toque a próxima parada abaixo…" : "aguardando…"}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Banco de paradas */}
+      <div>
+        <div className="text-xs uppercase tracking-widest text-white/60 font-bold mb-2 text-center">
+          🚚 Paradas do caminho
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {cena.paradas.map((p) => {
+            const usado = colocados.includes(p.id);
+            const errando = erro === p.id;
+            return (
+              <motion.button
+                key={p.id}
+                onClick={() => tentar(p.id)}
+                disabled={usado || concluido}
+                whileTap={{ scale: usado ? 1 : 0.94 }}
+                animate={errando ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
+                transition={{ duration: 0.4 }}
+                className={`rounded-2xl p-3 border-2 transition-all ${
+                  usado
+                    ? "bg-emerald-500/10 border-emerald-400/40 opacity-40"
+                    : errando
+                    ? "bg-rose-500/25 border-rose-400"
+                    : "bg-white/10 border-white/25 hover:bg-white/15"
+                }`}
+              >
+                <div className="text-3xl">{p.emoji}</div>
+                <div className="text-white font-bold text-xs mt-1 leading-tight">
+                  {p.rotulo}
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+      </div>
+
+      {erro && (
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-rose-500/15 border border-rose-400/40 rounded-2xl p-3 text-sm text-rose-100"
+        >
+          ❌ {cena.feedbackErro}
+        </motion.div>
+      )}
+
+      {concluido && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug space-y-1">
+            <div className="text-emerald-300 text-xs font-bold">
+              🎉 {cena.feedbackAcerto}
+            </div>
+            <div>{cena.falaFinal}</div>
+          </div>
+        </motion.div>
+      )}
+
+      <button
+        onClick={onProxima}
+        disabled={!concluido}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          concluido
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
+      >
+        {concluido ? "Continuar" : `🛣️ Monte o caminho (${passo}/${total})`}
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Placeholder — cenas em construção
 // ─────────────────────────────────────────────────────────────────────
 function CenaPlaceholder({
