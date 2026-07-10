@@ -446,7 +446,99 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "O mecanismo de subducção, onde uma placa oceânica mais densa mergulha sob uma placa continental, fundindo a rocha em magma e gerando fossas oceânicas profundas e arcos vulcânicos.",
       imagem_analise: "https://images.unsplash.com/photo-1541417904950-b855846fe074?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Por que o Círculo de Fogo do Pacífico concentra tantos vulcões e terremotos?",
+        opcoes: [
+          {
+            texto: "Porque fica sobre grandes limites de placas tectônicas que se chocam ou se afastam.",
+            correta: true,
+            explicacao:
+              "Correto. As bordas das placas do Pacífico colidem com placas continentais (subducção) e liberam energia como terremotos, além de gerarem magma que vira vulcão. Cerca de 90% dos terremotos do mundo acontecem ali.",
+          },
+          {
+            texto: "Porque o oceano Pacífico é o mais profundo do mundo, e a pressão da água causa terremotos.",
+            correta: false,
+            explicacao:
+              "A profundidade do oceano é uma CONSEQUÊNCIA das fossas oceânicas (subducção), não a causa. Os terremotos vêm do movimento das placas, não da pressão da água.",
+          },
+          {
+            texto: "Porque o clima quente e úmido do Pacífico derrete a crosta terrestre.",
+            correta: false,
+            explicacao:
+              "A crosta terrestre não é afetada pelo clima superficial. O magma vem do manto, a centenas de km abaixo — muito mais quente que qualquer clima.",
+          },
+        ],
+      },
+      {
+        pergunta: "O Himalaia continua CRESCENDO em altura todo ano. Por quê?",
+        opcoes: [
+          {
+            texto: "Porque a Placa Indiana continua empurrando a Placa Euroasiática — é um limite convergente ainda ativo.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. Há ~50 milhões de anos a Índia colide com a Ásia, e o choque continua. O Everest cresce cerca de 4 mm por ano — geologicamente, é um relevo JOVEM.",
+          },
+          {
+            texto: "Porque o gelo do topo das montanhas se acumula e aumenta a altitude.",
+            correta: false,
+            explicacao:
+              "O gelo se acumula e derrete no ciclo anual, não aumenta a altura da rocha. O crescimento real vem do choque tectônico embaixo.",
+          },
+          {
+            texto: "Porque o Sol aquece as rochas e elas se expandem para cima.",
+            correta: false,
+            explicacao:
+              "A dilatação térmica das rochas é imperceptível em escala geológica. O que faz o Himalaia crescer é a força colossal do choque de placas.",
+          },
+        ],
+      },
+      {
+        pergunta: "Qual tipo de limite tectônico está formando NOVA crosta oceânica no meio do Atlântico?",
+        opcoes: [
+          {
+            texto: "Limite DIVERGENTE — as placas Sul-Americana e Africana estão se afastando, e magma sobe para preencher o vazio.",
+            correta: true,
+            explicacao:
+              "Perfeito. É a Dorsal Meso-Atlântica: uma cordilheira submarina onde nasce crosta nova. Por isso a América do Sul e a África se separam alguns centímetros por ano.",
+          },
+          {
+            texto: "Limite CONVERGENTE — as placas se chocam e formam vulcões no meio do oceano.",
+            correta: false,
+            explicacao:
+              "Convergente é o oposto: placas se chocam. No Atlântico, a Placa Sul-Americana e a Africana se AFASTAM (divergente). Você trocou os conceitos.",
+          },
+          {
+            texto: "Limite TRANSFORMANTE — as placas deslizam lateralmente uma pela outra.",
+            correta: false,
+            explicacao:
+              "Transformante é deslizamento lateral (como a Falha de San Andreas). No Atlântico, o movimento é de afastamento, não de deslizamento.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Classifique cada fenômeno geológico no tipo de limite tectônico que o produz.",
+      categorias: [
+        { id: "divergente", titulo: "Divergente (afastamento)", cor: "cyan" },
+        { id: "convergente", titulo: "Convergente (choque)", cor: "amber" },
+        { id: "transformante", titulo: "Transformante (deslizamento)", cor: "emerald" },
+      ],
+      cartoes: [
+        { texto: "Dorsal Meso-Atlântica — nasce crosta nova no oceano.", categoriaId: "divergente" },
+        { texto: "Cordilheira do Himalaia — Índia colidindo com Ásia.", categoriaId: "convergente" },
+        { texto: "Falha de San Andreas (Califórnia) — placas deslizando lateralmente.", categoriaId: "transformante" },
+        { texto: "Fossa das Marianas — subducção de placa oceânica.", categoriaId: "convergente" },
+        { texto: "Vale do Rift, na África — o continente rachando ao meio.", categoriaId: "divergente" },
+        { texto: "Cordilheira dos Andes — placa oceânica mergulhando sob a Sul-Americana.", categoriaId: "convergente" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "A ausência de cadeias montanhosas de dobramentos modernos (como os Andes) e de vulcanismo ativo no território brasileiro é explicada cientificamente por qual característica geológica?",
       opcoes: [
