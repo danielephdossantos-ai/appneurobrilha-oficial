@@ -63,8 +63,8 @@ export const aula01: AulaGeoV1 = {
 
   cena03_vocabulario: {
     tipo: "cadernosCampo",
-    aurora: "4 palavras da astronomia geográfica. Abra cada caderno.",
-    instrucao: "Toque em cada caderno pra abrir",
+    aurora: "4 palavras da astronomia geográfica.",
+    instrucao: "",
     cadernos: [
       {
         id: "rotacao",

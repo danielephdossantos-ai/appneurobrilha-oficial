@@ -37,7 +37,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "4 conceitos que o GPS usa o tempo todo.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "latitude", capa: "1. Latitude", emoji: "↕️", cor: "from-sky-500 to-blue-700",
         conteudo: "LATITUDE mede a distância NORTE ou SUL do Equador (0°). Vai de 0° (Equador) até 90° (Polos).",

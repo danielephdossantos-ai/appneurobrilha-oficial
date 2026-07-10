@@ -38,7 +38,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "4 grandes ideias que amarram tudo que você aprendeu.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "movim", capa: "1. Movimentos da Terra", emoji: "🌍", cor: "from-sky-500 to-indigo-700",
         conteudo: "ROTAÇÃO + TRANSLAÇÃO + INCLINAÇÃO criam dia/noite, estações e climas. Nossa vida inteira depende disso.",

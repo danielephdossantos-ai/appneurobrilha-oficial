@@ -37,7 +37,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "4 palavras da tectônica.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "placa", capa: "1. Placa tectônica", emoji: "🧩", cor: "from-sky-500 to-blue-700",
         conteudo: "PLACA é uma peça gigante da crosta da Terra. Existem 15 grandes. A do Brasil é a Sul-Americana. Elas se movem 2 a 10 cm por ano.",

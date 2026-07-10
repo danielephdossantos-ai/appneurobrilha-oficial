@@ -38,7 +38,7 @@ export const aula01: AulaGeoV1 = {
   cena03_vocabulario: {
     tipo: "cadernosCampo",
     aurora: "6 biomas, 4 palavras-chave pra entender.",
-    instrucao: "Toque em cada caderno",
+    instrucao: "",
     cadernos: [
       { id: "bioma", capa: "1. Bioma", emoji: "🌿", cor: "from-emerald-500 to-green-700",
         conteudo: "BIOMA é um conjunto de ecossistemas com CLIMA, SOLO e VEGETAÇÃO parecidos, ocupando uma grande região.",
