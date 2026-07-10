@@ -9,6 +9,12 @@ import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
 const TeenContext = createContext(false);
 export const useTeen = () => useContext(TeenContext);
 
+const stripDecorativeEmoji = (value = "") =>
+  value
+    .replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
@@ -88,7 +94,7 @@ export function PlayerGeoV1({
           </button>
           <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all"
+              className={`h-full transition-all ${teen ? "bg-cyan-400" : "bg-gradient-to-r from-emerald-400 to-amber-300"}`}
               style={{ width: `${percent}%` }}
             />
           </div>
@@ -96,8 +102,8 @@ export function PlayerGeoV1({
             {ativo + 1} / {total}
           </div>
         </div>
-        <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
-          <span>{atual.rotulo}</span>
+        <div className={`max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest ${teen ? "text-cyan-300/75" : "text-emerald-300/80"}`}>
+          <span>{teen ? stripDecorativeEmoji(atual.rotulo) : atual.rotulo}</span>
           <span className="text-white/40">{aula.titulo}</span>
         </div>
       </header>
@@ -112,11 +118,11 @@ export function PlayerGeoV1({
             }}
             className="scroll-mt-28"
           >
-            <div className="text-[11px] uppercase tracking-[0.2em] text-amber-300/80 mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-300/20 border border-amber-300/40 grid place-items-center text-amber-200 text-[10px] font-black">
+            <div className={`text-[11px] uppercase tracking-[0.2em] mb-3 flex items-center gap-2 ${teen ? "text-cyan-300/70" : "text-amber-300/80"}`}>
+              <span className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-black ${teen ? "bg-slate-900 border border-slate-700 text-cyan-300" : "bg-amber-300/20 border border-amber-300/40 text-amber-200"}`}>
                 {i + 1}
               </span>
-              {c.rotulo}
+              {teen ? stripDecorativeEmoji(c.rotulo) : c.rotulo}
             </div>
             <CenaRenderer
               cena={c.cena}
@@ -241,7 +247,6 @@ function MesaCartografo({
           {!tocouTeen && (
             <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] grid place-items-center">
               <div className="text-center text-slate-100">
-                <div className="text-4xl mb-2">👆</div>
                 <div className="text-sm font-mono uppercase tracking-widest text-cyan-300">
                   Toque para começar
                 </div>
@@ -255,19 +260,12 @@ function MesaCartografo({
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-start gap-3"
+              className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4"
             >
-              <img
-                src={aurora.img}
-                alt={aurora.nome}
-                className="w-14 h-14 rounded-full bg-white/5 p-1 shrink-0"
-              />
-              <div className="bg-slate-900/70 border border-cyan-500/25 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug text-slate-100">
-                <div className="text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-1">
-                  {aurora.nome}
-                </div>
-                {cena.aurora}
+              <div className="text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-2">
+                Contexto da missão
               </div>
+              <p className="text-sm leading-relaxed text-slate-100">{stripDecorativeEmoji(cena.aurora)}</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -275,7 +273,7 @@ function MesaCartografo({
               transition={{ delay: 0.4 }}
               className="bg-slate-900/60 border border-slate-700/60 rounded-xl px-4 py-2.5 text-[13px] text-slate-300 text-center"
             >
-              {cena.falaFinal}
+              {stripDecorativeEmoji(cena.falaFinal)}
             </motion.div>
           </>
         )}
@@ -630,6 +628,55 @@ function CadernosCampo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Vocabulário técnico
+          </div>
+          <p className="text-slate-200 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {cena.cadernos.map((c, i) => (
+            <div
+              key={c.id}
+              className="rounded-lg p-4 bg-slate-900/75 border border-slate-700 shadow-lg"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="text-[11px] uppercase tracking-widest text-cyan-300/80 font-mono">
+                  {stripDecorativeEmoji(c.capa)}
+                </div>
+              </div>
+              <p className="text-sm text-slate-100 leading-relaxed font-medium">{c.conteudo}</p>
+              {c.exemplo && (
+                <p className="text-xs text-slate-400 mt-3 border-t border-slate-700 pt-3 leading-relaxed">
+                  Caso real: {stripDecorativeEmoji(c.exemplo)}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/25 p-4 text-sm text-slate-200 leading-relaxed">
+          {stripDecorativeEmoji(cena.falaFinal)}
+        </div>
+
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          Continuar →
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
@@ -1132,6 +1179,7 @@ function QuizRadar({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [idx, setIdx] = useState(0);
   const [escolha, setEscolha] = useState<string | null>(null);
   const [revelado, setRevelado] = useState(false);
@@ -1197,6 +1245,130 @@ function QuizRadar({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx, finalizado]);
+
+  if (teen) {
+    if (finalizado) {
+      return (
+        <div className="space-y-5">
+          <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 text-center">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono mb-3">
+              Checagem concluída
+            </div>
+            <div className="text-4xl font-black text-white">{acertos}/{total}</div>
+            <p className="text-sm text-slate-300 mt-3 leading-relaxed">{stripDecorativeEmoji(cena.falaFinal)}</p>
+          </div>
+          <button
+            onClick={onProxima}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            Continuar →
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Checagem de compreensão
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="flex items-center justify-between text-xs text-slate-400 px-1 font-mono uppercase tracking-widest">
+          <span>Questão {idx + 1}/{total}</span>
+          <span>Acertos {acertos}</span>
+        </div>
+
+        {p && (
+          <>
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-xl bg-slate-950/80 border border-slate-700 p-5"
+            >
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs shrink-0">
+                  Q{idx + 1}
+                </div>
+                <div className="flex-1 text-white font-semibold text-base sm:text-lg leading-snug">
+                  {stripDecorativeEmoji(p.pergunta)}
+                </div>
+                <button
+                  onClick={() => falar(p.pergunta)}
+                  className="shrink-0 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-md px-3 py-1.5 text-xs font-semibold text-cyan-200"
+                  aria-label="Ouvir a pergunta"
+                >
+                  Ouvir
+                </button>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 gap-2">
+              {p.cards.map((c, cardIndex) => {
+                const escolhido = escolha === c.id;
+                const certoRevelado = revelado && c.id === p.correta;
+                const erradoRevelado = revelado && escolhido && c.id !== p.correta;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => escolher(c.id)}
+                    disabled={revelado}
+                    className={`relative rounded-lg px-4 py-3 border text-left transition bg-slate-900/70 flex items-center gap-3 ${
+                      certoRevelado
+                        ? "border-emerald-400 bg-emerald-950/35"
+                        : erradoRevelado
+                        ? "border-rose-400 bg-rose-950/30 opacity-80"
+                        : escolhido
+                        ? "border-cyan-400 ring-2 ring-cyan-400/30"
+                        : "border-slate-700 hover:border-slate-500"
+                    }`}
+                  >
+                    <span className="w-7 h-7 rounded-md bg-slate-950 border border-slate-700 grid place-items-center text-[11px] font-mono text-cyan-300 shrink-0">
+                      {String.fromCharCode(65 + cardIndex)}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-100 leading-snug">
+                      {stripDecorativeEmoji(c.titulo)}
+                    </span>
+                    {certoRevelado && <span className="ml-auto text-emerald-300 font-bold">✓</span>}
+                    {erradoRevelado && <span className="ml-auto text-rose-300 font-bold">✕</span>}
+                  </button>
+                );
+              })}
+            </div>
+
+            {revelado && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`rounded-lg p-4 border-l-2 text-sm leading-relaxed ${
+                  acertou
+                    ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                    : "bg-rose-950/35 border-rose-500 text-rose-100"
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-widest font-mono mb-2">
+                  {acertou ? "Resposta validada" : "Correção comentada"}
+                </div>
+                {acertou ? p.feedbackAcerto : p.feedbackErro}
+              </motion.div>
+            )}
+
+            {revelado && (
+              <button
+                onClick={proxima}
+                className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              >
+                {idx + 1 === total ? "Ver resultado →" : "Próxima questão →"}
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
@@ -1607,6 +1779,7 @@ function LinhaEstrada({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const total = cena.ordemCerta.length;
   const [passo, setPasso] = useState(0);       // próxima posição a preencher
   const [colocados, setColocados] = useState<string[]>([]); // ids em ordem
@@ -1627,6 +1800,112 @@ function LinhaEstrada({
       setTimeout(() => setErro(null), 700);
     }
   };
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Sequência lógica
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5">
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Problema</div>
+          <div className="text-white font-semibold text-lg leading-snug">{stripDecorativeEmoji(cena.pergunta)}</div>
+        </div>
+
+        <div className="relative bg-slate-900/65 border border-slate-700 rounded-xl p-4">
+          <div className="absolute left-9 top-6 bottom-6 w-px bg-slate-700" />
+          <div
+            className="absolute left-9 top-6 w-px bg-cyan-400 transition-all duration-500"
+            style={{ height: `calc(${(passo / total) * 100}% - ${passo === total ? 12 : 0}px)`, maxHeight: "calc(100% - 12px)" }}
+          />
+          <div className="space-y-3 relative">
+            {cena.ordemCerta.map((id, i) => {
+              const preenchido = i < passo;
+              const ativo = i === passo;
+              const p = paradaPorId(id);
+              return (
+                <div key={i} className="flex items-start gap-3 min-h-[56px]">
+                  <div className={`w-10 h-10 rounded-md grid place-items-center text-xs font-mono shrink-0 border transition-all ${
+                    preenchido
+                      ? "bg-cyan-500/15 border-cyan-400 text-cyan-200"
+                      : ativo
+                      ? "bg-slate-950 border-cyan-500 text-cyan-300"
+                      : "bg-slate-950/60 border-slate-700 text-slate-500"
+                  }`}>
+                    {preenchido ? "✓" : String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className={`flex-1 rounded-lg border p-3 ${preenchido ? "bg-slate-950/70 border-cyan-500/30" : "bg-slate-950/40 border-slate-700 border-dashed"}`}>
+                    {preenchido ? (
+                      <>
+                        <div className="font-semibold text-cyan-200 text-sm">{stripDecorativeEmoji(p.rotulo)}</div>
+                        <div className="text-slate-400 text-xs leading-relaxed mt-1">{stripDecorativeEmoji(p.descricao)}</div>
+                      </>
+                    ) : (
+                      <div className="text-slate-500 text-xs italic">{ativo ? "selecione o próximo item abaixo" : "aguardando etapa anterior"}</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {cena.paradas.map((p) => {
+            const usado = colocados.includes(p.id);
+            const errando = erro === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => tentar(p.id)}
+                disabled={usado || concluido}
+                className={`rounded-lg p-3 border text-left transition-all ${
+                  usado
+                    ? "bg-cyan-500/10 border-cyan-500/30 text-slate-500"
+                    : errando
+                    ? "bg-rose-950/40 border-rose-500 text-rose-100"
+                    : "bg-slate-900/70 border-slate-700 text-slate-100 hover:border-slate-500"
+                }`}
+              >
+                <div className="text-[11px] uppercase tracking-widest text-cyan-300/70 font-mono mb-1">Item</div>
+                <div className="font-semibold text-xs leading-tight">{stripDecorativeEmoji(p.rotulo)}</div>
+              </button>
+            );
+          })}
+        </div>
+
+        {erro && (
+          <div className="bg-rose-950/35 border-l-2 border-rose-500 rounded-lg p-3 text-sm text-rose-100">
+            {stripDecorativeEmoji(cena.feedbackErro)}
+          </div>
+        )}
+
+        {concluido && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+            <div className="font-mono uppercase tracking-widest text-[10px] mb-2">Sequência validada</div>
+            <div>{stripDecorativeEmoji(cena.feedbackAcerto)}</div>
+            <div className="text-slate-300 mt-2">{stripDecorativeEmoji(cena.falaFinal)}</div>
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            concluido
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar →" : `Ordene a sequência (${passo}/${total})`}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
@@ -1794,6 +2073,7 @@ function VoceLeSozinho({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [paginaAtual, setPaginaAtual] = useState(0);
   const [marcadas, setMarcadas] = useState<Record<string, Set<string>>>({});
   const [concluido, setConcluido] = useState(false);
@@ -1814,6 +2094,51 @@ function VoceLeSozinho({
     });
   };
 
+  const renderTextoTeen = () => {
+    let restante = paragrafo.texto;
+    const partes: Array<{ tipo: "texto" | "chave"; conteudo: string }> = [];
+    const chavesOrdenadas = [...paragrafo.chaves].sort((a, b) => b.length - a.length);
+    let seguranca = 0;
+    while (restante.length > 0 && seguranca < 200) {
+      seguranca++;
+      let posEncontrada = -1;
+      let chaveEncontrada = "";
+      for (const chave of chavesOrdenadas) {
+        const idx = restante.toLowerCase().indexOf(chave.toLowerCase());
+        if (idx !== -1 && (posEncontrada === -1 || idx < posEncontrada)) {
+          posEncontrada = idx;
+          chaveEncontrada = chave;
+        }
+      }
+      if (posEncontrada === -1) {
+        partes.push({ tipo: "texto", conteudo: restante });
+        break;
+      }
+      if (posEncontrada > 0) partes.push({ tipo: "texto", conteudo: restante.slice(0, posEncontrada) });
+      partes.push({ tipo: "chave", conteudo: restante.slice(posEncontrada, posEncontrada + chaveEncontrada.length) });
+      restante = restante.slice(posEncontrada + chaveEncontrada.length);
+    }
+    return partes.map((p, i) => {
+      if (p.tipo === "texto") return <span key={i}>{p.conteudo}</span>;
+      const chaveNorm = paragrafo.chaves.find((c) => c.toLowerCase() === p.conteudo.toLowerCase())!;
+      const ativa = marcadasDaPagina.has(chaveNorm);
+      return (
+        <button
+          key={i}
+          type="button"
+          onClick={() => marcarChave(chaveNorm)}
+          className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded font-semibold transition ${
+            ativa
+              ? "bg-cyan-500 text-slate-950"
+              : "bg-cyan-500/10 text-cyan-200 border border-cyan-500/25 hover:bg-cyan-500/20"
+          }`}
+        >
+          {p.conteudo}{ativa ? " ✓" : ""}
+        </button>
+      );
+    });
+  };
+
   const avancar = () => {
     if (paginaAtual + 1 < total) {
       setPaginaAtual(paginaAtual + 1);
@@ -1821,6 +2146,100 @@ function VoceLeSozinho({
       setConcluido(true);
     }
   };
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Leitura independente
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl p-5 bg-slate-950/80 border border-slate-700 shadow-2xl">
+          <div className="flex items-start justify-between gap-3 mb-4">
+            <div>
+              <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">
+                {stripDecorativeEmoji(cena.tituloLivro)}
+              </div>
+              {cena.subtitulo && <div className="text-slate-300 font-semibold text-sm mt-1">{stripDecorativeEmoji(cena.subtitulo)}</div>}
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono shrink-0">{paginaAtual + 1}/{total}</div>
+          </div>
+
+          <motion.div
+            key={paragrafo.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-slate-100 text-lg sm:text-xl leading-relaxed font-medium"
+          >
+            {renderTextoTeen()}
+          </motion.div>
+
+          <div className="mt-5 flex items-center gap-2 flex-wrap">
+            {paragrafo.chaves.map((c) => {
+              const ok = marcadasDaPagina.has(c);
+              return (
+                <span
+                  key={c}
+                  className={`text-[10px] font-mono uppercase tracking-wide px-2 py-1 rounded border ${
+                    ok
+                      ? "bg-cyan-500/15 text-cyan-200 border-cyan-500/40"
+                      : "bg-slate-900 text-slate-500 border-slate-700"
+                  }`}
+                >
+                  {ok ? "✓ " : "• "}{c}
+                </span>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 flex items-center justify-between gap-2">
+            <button
+              onClick={() => setPaginaAtual(Math.max(0, paginaAtual - 1))}
+              disabled={paginaAtual === 0}
+              className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs font-semibold disabled:opacity-30"
+            >
+              ← anterior
+            </button>
+            <div className="text-[10px] text-slate-500 font-mono text-center">
+              {todasMarcadasNaPagina ? "página validada" : "marque os termos-chave"}
+            </div>
+            <button
+              onClick={avancar}
+              disabled={!todasMarcadasNaPagina || concluido}
+              className={`px-3 py-2 rounded-lg text-xs font-semibold transition ${
+                todasMarcadasNaPagina && !concluido
+                  ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                  : "bg-slate-900 text-slate-600 border border-slate-700 cursor-not-allowed"
+              }`}
+            >
+              {paginaAtual + 1 === total ? "finalizar ✓" : "próxima →"}
+            </button>
+          </div>
+        </div>
+
+        {concluido && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!concluido}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            concluido
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {concluido ? "Continuar →" : "Conclua a leitura"}
+        </button>
+      </div>
+    );
+  }
 
   // renderiza o texto do parágrafo com as palavras-chave viradas em botões
   const renderTexto = () => {
@@ -2034,6 +2453,7 @@ function ConstrutorMarcos({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
@@ -2112,6 +2532,31 @@ function ConstrutorMarcos({
     }
   };
 
+  if (teen && fim) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 text-center space-y-3">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono">
+            Simulador finalizado
+          </div>
+          <div className="text-4xl font-black text-white">{acertos}/{total}</div>
+          <div className="text-xs text-slate-400 font-mono uppercase tracking-widest">
+            Melhor sequência: {comboMax}
+          </div>
+          <div className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        </div>
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          Continuar →
+        </button>
+      </div>
+    );
+  }
+
   if (fim) {
     return (
       <div className="space-y-5">
@@ -2146,6 +2591,105 @@ function ConstrutorMarcos({
 
   const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
   const tempoUrgente = tempo <= 5;
+
+  if (teen) {
+    return (
+      <div className="space-y-4">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Simulador cronometrado
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-slate-400 font-mono">
+          <span>Rodada {rodadaIdx + 1}/{total}</span>
+          <span>Sequência {combo}</span>
+          <span>Acertos {acertos}</span>
+        </div>
+        <div className="h-2 rounded-full bg-slate-800 overflow-hidden border border-slate-700">
+          <motion.div
+            className={tempoUrgente ? "h-full bg-rose-500" : "h-full bg-cyan-400"}
+            animate={{ width: `${tempoPct}%` }}
+            transition={{ duration: 0.4, ease: "linear" }}
+          />
+        </div>
+        <div className={`text-center font-mono text-sm ${tempoUrgente ? "text-rose-300" : "text-slate-300"}`}>
+          Tempo: {tempo}s
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5 space-y-3">
+          <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">Caso real</div>
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+            <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
+              <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação A</div>
+              <div className="text-white font-semibold leading-snug">{stripDecorativeEmoji(rodada.municipioA.nome)}</div>
+            </div>
+            <div className="hidden sm:grid place-items-center text-cyan-400 font-mono">→</div>
+            <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
+              <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação B</div>
+              <div className="text-white font-semibold leading-snug">{stripDecorativeEmoji(rodada.municipioB.nome)}</div>
+            </div>
+          </div>
+          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 leading-relaxed">
+            <span className="font-semibold text-cyan-300">Pista: </span>
+            {stripDecorativeEmoji(rodada.contexto)}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          {cena.pecas.map((p) => {
+            const certa = p.id === rodada.pecaCertaId;
+            const foiTocada = pecaTocada === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => escolher(p.id)}
+                disabled={travada}
+                className={`min-h-20 rounded-lg border px-3 py-3 text-left transition ${
+                  travada
+                    ? foiTocada && certa
+                      ? "bg-emerald-950/40 border-emerald-400 text-emerald-100"
+                      : foiTocada && !certa
+                      ? "bg-rose-950/40 border-rose-400 text-rose-100"
+                      : certa && (feedback === "erro" || feedback === "tempo")
+                      ? "bg-emerald-950/30 border-emerald-500/60 text-emerald-100"
+                      : "bg-slate-900/40 border-slate-800 text-slate-500"
+                    : "bg-slate-900/70 border-slate-700 text-slate-100 hover:border-cyan-500/50"
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-widest text-cyan-300/70 font-mono mb-1">Conceito</div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">{stripDecorativeEmoji(p.rotulo)}</div>
+              </button>
+            );
+          })}
+        </div>
+
+        {feedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`rounded-lg p-3 border-l-2 text-sm leading-relaxed ${
+              feedback === "acerto"
+                ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                : "bg-rose-950/35 border-rose-500 text-rose-100"
+            }`}
+          >
+            {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
+          </motion.div>
+        )}
+
+        {travada && (
+          <button
+            onClick={proximaRodada}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            {rodadaIdx + 1 === total ? "Ver placar →" : "Próxima rodada →"}
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -2324,6 +2868,7 @@ function PizzaMunicipio({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [tocadas, setTocadas] = useState<Set<string>>(new Set());
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -2367,6 +2912,133 @@ function PizzaMunicipio({
 
   // gradiente cônico: f1 do 0° até anguloF1, f2 do anguloF1 até 360°
   const conic = `conic-gradient(${f1.cor} 0deg ${anguloF1}deg, ${f2.cor} ${anguloF1}deg 360deg)`;
+
+  if (teen) {
+    const radius = 72;
+    const circumference = 2 * Math.PI * radius;
+    let offsetAcc = 0;
+    const coresTeen = ["#22d3ee", "#64748b"];
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Revisão com gráfico
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5">
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-4 text-center">
+            Gráfico de setores — toque na legenda
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-5">
+            <svg viewBox="0 0 200 200" className="w-60 h-60 shrink-0" role="img" aria-label="Gráfico de setores">
+              <circle cx="100" cy="100" r={radius} fill="none" stroke="#0f172a" strokeWidth="42" />
+              {fatias.map((f, index) => {
+                const slice = (f.percentual / 100) * circumference;
+                const gap = 2;
+                const dash = Math.max(0, slice - gap);
+                const currentOffset = offsetAcc;
+                offsetAcc += slice;
+                const active = ativa === f.id;
+                return (
+                  <circle
+                    key={f.id}
+                    cx="100"
+                    cy="100"
+                    r={radius}
+                    fill="none"
+                    stroke={coresTeen[index % coresTeen.length]}
+                    strokeWidth={active ? 46 : 40}
+                    strokeDasharray={`${dash} ${circumference - dash}`}
+                    strokeDashoffset={-currentOffset}
+                    transform="rotate(-90 100 100)"
+                    strokeLinecap="butt"
+                    className="cursor-pointer transition-all"
+                    opacity={tocadas.has(f.id) || active ? 1 : 0.72}
+                    onClick={() => tocar(f.id)}
+                  />
+                );
+              })}
+              <circle cx="100" cy="100" r="44" fill="#020617" stroke="#334155" strokeWidth="1" />
+              <text x="100" y="94" textAnchor="middle" fill="#94a3b8" fontSize="9" fontWeight="700" letterSpacing="1">
+                TOTAL
+              </text>
+              <text x="100" y="112" textAnchor="middle" fill="#e2e8f0" fontSize="18" fontWeight="800">
+                100%
+              </text>
+            </svg>
+
+            <div className="flex-1 w-full space-y-2">
+              {fatias.map((f, index) => (
+                <button
+                  key={f.id}
+                  onClick={() => tocar(f.id)}
+                  className={`w-full text-left rounded-lg border p-3 transition ${
+                    ativa === f.id
+                      ? "bg-cyan-500/10 border-cyan-400"
+                      : "bg-slate-900 border-slate-700 hover:border-slate-500"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-sm" style={{ background: coresTeen[index % coresTeen.length] }} />
+                    <span className="font-semibold text-sm text-slate-100 flex-1">{stripDecorativeEmoji(f.rotulo)}</span>
+                    <span className="font-mono text-cyan-300 text-sm">{f.percentual}%</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {fatiaAtiva && (
+          <motion.div
+            key={fatiaAtiva.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-lg border border-slate-700 bg-slate-900/75 p-4 space-y-3"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="font-semibold text-cyan-200">{stripDecorativeEmoji(fatiaAtiva.rotulo)}</div>
+              <button
+                onClick={() => falar(fatiaAtiva.descricao)}
+                className="text-xs bg-slate-800 border border-slate-700 px-2 py-1 rounded-md hover:bg-slate-700 text-slate-200"
+              >
+                Ouvir
+              </button>
+            </div>
+            <div className="text-sm text-slate-200 leading-relaxed">{stripDecorativeEmoji(fatiaAtiva.descricao)}</div>
+            <ul className="grid grid-cols-1 gap-1.5">
+              {fatiaAtiva.exemplos.map((ex, i) => (
+                <li key={i} className="text-xs bg-slate-950 rounded-md px-2 py-1.5 border border-slate-800 text-slate-400">
+                  • {stripDecorativeEmoji(ex)}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+
+        {todasTocadas && (
+          <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-3 text-sm text-emerald-100 leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        )}
+
+        <button
+          onClick={onProxima}
+          disabled={!todasTocadas}
+          className={`w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border ${
+            todasTocadas
+              ? "bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+              : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
+          }`}
+        >
+          {todasTocadas ? "Continuar →" : "Analise os dois setores"}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
@@ -2559,6 +3231,7 @@ function SeloAtlas({
   ultima?: boolean;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const falar = (texto: string) => {
     try {
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -2606,6 +3279,40 @@ function SeloAtlas({
         setConquistado(true);
       }
     }, 2200);
+  }
+
+  if (teen && conquistado) {
+    return (
+      <div className="space-y-5 text-center py-4">
+        <div className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-mono">
+          Avaliação concluída
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mx-auto w-full max-w-sm rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6"
+        >
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-3">Insígnia</div>
+          <h2 className="text-2xl font-black text-white">{stripDecorativeEmoji(cena.selo.nome)}</h2>
+          <p className="text-sm text-slate-400 mt-1">{stripDecorativeEmoji(cena.selo.subtitulo)}</p>
+          <div className="mt-4 inline-flex items-center rounded-md border border-cyan-500/30 bg-cyan-500/10 px-3 py-2 text-cyan-200 font-mono text-sm">
+            Acertos {acertos}/{total}
+          </div>
+        </motion.div>
+
+        <div className="bg-slate-900/70 border border-slate-700 rounded-lg p-4 text-sm text-slate-200 leading-relaxed text-left">
+          {stripDecorativeEmoji(cena.falaFinal)}
+        </div>
+
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          {ultima ? "Concluir aula e guardar no Atlas" : "Continuar →"}
+        </button>
+      </div>
+    );
   }
 
   if (conquistado) {
@@ -2656,6 +3363,86 @@ function SeloAtlas({
         >
           {ultima ? "✅ Concluir aula e guardar no Atlas" : "Continuar"}
         </button>
+      </div>
+    );
+  }
+
+  if (teen) {
+    return (
+      <div className="space-y-4">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Avaliação final
+          </div>
+          <p className="text-sm text-slate-300 leading-relaxed">{stripDecorativeEmoji(cena.instrucao)}</p>
+        </div>
+
+        <div className="flex gap-1.5">
+          {cena.perguntas.map((_, i) => (
+            <div
+              key={i}
+              className={`h-2 flex-1 rounded-full transition ${
+                i < idx ? "bg-cyan-400" : i === idx ? "bg-cyan-300/60" : "bg-slate-800"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="bg-slate-950/80 border border-slate-700 rounded-xl p-5 space-y-4">
+          <div className="text-xs text-cyan-300/80 font-mono uppercase tracking-widest">
+            Pergunta {idx + 1}/{total}
+          </div>
+          <button
+            onClick={() => falar(atual.pergunta)}
+            className="w-full text-left text-lg font-semibold leading-snug hover:text-cyan-200 transition text-white"
+          >
+            {stripDecorativeEmoji(atual.pergunta)}
+          </button>
+
+          <div className="grid gap-2">
+            {atual.opcoes.map((o, optionIndex) => {
+              const escolhida = respostas[atual.id] === o.id;
+              const revelada = !!respostas[atual.id];
+              const estaCerta = !!o.correta;
+              return (
+                <button
+                  key={o.id}
+                  onClick={() => escolher(o.id)}
+                  disabled={revelada}
+                  className={`w-full text-left px-4 py-3 rounded-lg border font-semibold text-sm transition flex items-center gap-3 ${
+                    revelada
+                      ? estaCerta
+                        ? "bg-emerald-950/35 border-emerald-400 text-emerald-100"
+                        : escolhida
+                        ? "bg-rose-950/35 border-rose-400 text-rose-100"
+                        : "bg-slate-900/50 border-slate-800 text-slate-500"
+                      : "bg-slate-900 border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 text-slate-100"
+                  }`}
+                >
+                  <span className="w-7 h-7 rounded-md bg-slate-950 border border-slate-700 grid place-items-center text-[11px] font-mono text-cyan-300 shrink-0">
+                    {String.fromCharCode(65 + optionIndex)}
+                  </span>
+                  <span className="flex-1">{stripDecorativeEmoji(o.texto)}</span>
+                  {revelada && estaCerta ? <span className="text-emerald-300">✓</span> : revelada && escolhida ? <span className="text-rose-300">✕</span> : null}
+                </button>
+              );
+            })}
+          </div>
+
+          {feedback && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`rounded-lg p-3 text-sm border-l-2 leading-relaxed ${
+                feedback.ok
+                  ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                  : "bg-rose-950/35 border-rose-500 text-rose-100"
+              }`}
+            >
+              {stripDecorativeEmoji(feedback.texto)}
+            </motion.div>
+          )}
+        </div>
       </div>
     );
   }
@@ -2836,6 +3623,7 @@ function MapaBrasilInterativo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [visitadas, setVisitadas] = useState<Record<string, boolean>>({});
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -2908,6 +3696,156 @@ function MapaBrasilInterativo({
       `${uf.nome}. Sigla ${uf.sigla.split("").join(" ")}. Capital ${uf.capital}. Região ${REGIAO_ROTULO[uf.regiao]}.${extra}`,
     );
   };
+
+  if (teen) {
+    const corTeen = (uf: EstadoBr) => {
+      if (missao.tipo === "selecionar") {
+        return missao.siglas.includes(uf.sigla) ? "#0891b2" : "#334155";
+      }
+      if (missao.tipo === "grupos") {
+        return alvoSiglas.includes(uf.sigla) ? "#0e7490" : "#334155";
+      }
+      return "#475569";
+    };
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Mapa político do Brasil
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        {missao.tipo === "grupos" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {missao.grupos.map((g) => {
+              const done = g.siglas.every((s) => visitadas[s]);
+              return (
+                <div
+                  key={g.id}
+                  className={`rounded-lg p-3 border bg-slate-900/70 ${done ? "border-cyan-400" : "border-slate-700"}`}
+                >
+                  <div className="flex items-center gap-2 text-white">
+                    <div className="flex-1">
+                      <div className="font-semibold text-sm leading-tight">{stripDecorativeEmoji(g.rotulo)}</div>
+                      <div className="text-slate-400 text-[11px] font-mono mt-1">
+                        {g.siglas.filter((s) => visitadas[s]).length}/{g.siglas.length} estados
+                      </div>
+                    </div>
+                    {done && <div className="text-cyan-300 font-bold">✓</div>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-950 p-2">
+          <svg
+            viewBox={BR_VIEWBOX}
+            className="w-full h-auto select-none"
+            style={{ aspectRatio: "1 / 1", touchAction: "manipulation" }}
+          >
+            {BR_ESTADOS.map((uf) => {
+              const isAtiva = ativa === uf.sigla;
+              const isVisitada = !!visitadas[uf.sigla];
+              const corBase = corTeen(uf);
+              return (
+                <g key={uf.sigla}>
+                  <path
+                    d={uf.d}
+                    fill={corBase}
+                    fillOpacity={isVisitada ? 0.95 : 0.7}
+                    stroke={isAtiva ? "#67e8f9" : "rgba(148,163,184,0.5)"}
+                    strokeWidth={isAtiva ? 0.35 : 0.12}
+                    strokeLinejoin="round"
+                    className="cursor-pointer transition-all duration-200 hover:brightness-125"
+                    onClick={() => tocarEstado(uf)}
+                    style={{ filter: isAtiva ? "drop-shadow(0 0 4px rgba(103,232,249,0.8))" : undefined }}
+                  />
+                  {(() => {
+                    const c = centroidDoPath(uf.d);
+                    const fs = c.w < 2.5 ? 0.55 : c.w < 4 ? 0.75 : 1.05;
+                    return (
+                      <text
+                        x={c.x}
+                        y={c.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={fs}
+                        fontWeight={800}
+                        fill="#f8fafc"
+                        stroke="#020617"
+                        strokeWidth={fs * 0.14}
+                        paintOrder="stroke"
+                        style={{ pointerEvents: "none", letterSpacing: "0.02em" }}
+                      >
+                        {uf.sigla}
+                      </text>
+                    );
+                  })()}
+                </g>
+              );
+            })}
+          </svg>
+
+          <div className="absolute top-3 right-3 bg-slate-950/85 text-cyan-200 text-xs font-mono px-3 py-1.5 rounded-md border border-slate-700 backdrop-blur">
+            {acertosCount}/{alvoSiglas.length}
+          </div>
+        </div>
+
+        {estadoAtivo && (
+          <motion.div
+            key={estadoAtivo.sigla}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-lg p-4 border border-slate-700 bg-slate-900/80 text-white"
+          >
+            <div className="flex items-start gap-3">
+              <div className="bg-slate-950 border border-cyan-500/30 rounded-md px-3 py-2 text-center min-w-[64px]">
+                <div className="text-[10px] uppercase opacity-70 font-mono">Sigla</div>
+                <div className="text-2xl font-black leading-none text-cyan-200">{estadoAtivo.sigla}</div>
+              </div>
+              <div className="flex-1">
+                <div className="text-xl font-black leading-tight">{estadoAtivo.nome}</div>
+                <div className="text-sm text-slate-300 mt-1">Capital: <span className="font-bold">{estadoAtivo.capital}</span></div>
+                <div className="text-xs text-slate-500 mt-1">Região {REGIAO_ROTULO[estadoAtivo.regiao]}</div>
+              </div>
+              <button
+                onClick={() => falar(`${estadoAtivo.nome}. Capital ${estadoAtivo.capital}.`)}
+                className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-xs text-slate-200 hover:bg-slate-700"
+                aria-label="Ouvir de novo"
+              >
+                Ouvir
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {missao.tipo === "selecionar" && (
+          <div className="bg-slate-900/70 border border-slate-700 rounded-lg p-3 text-sm text-slate-200">
+            <div className="text-cyan-300 font-mono uppercase tracking-widest text-[10px] mb-1">Missão</div>
+            {stripDecorativeEmoji(missao.pergunta)}
+          </div>
+        )}
+
+        {missaoCompleta && (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+            <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+              {stripDecorativeEmoji(cena.falaFinal)}
+            </div>
+            <button
+              onClick={onProxima}
+              className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+            >
+              Continuar →
+            </button>
+          </motion.div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">

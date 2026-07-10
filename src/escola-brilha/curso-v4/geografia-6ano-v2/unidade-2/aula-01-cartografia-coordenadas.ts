@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🧭",
   bncc: ["EF06GE04", "EF06GE05"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "Um GPS acha qualquer lugar do planeta com 2 números. Como?",
     mapaUrl: cartografia,
     imagemDestaqueUrl: cartografia,
