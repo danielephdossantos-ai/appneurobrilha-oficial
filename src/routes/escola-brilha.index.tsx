@@ -358,13 +358,31 @@ function EscolaBrilhaCatalogo() {
                                   style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}
                                 >
                                   <div className="text-[10px] uppercase tracking-widest opacity-90">
-                                    🧪 PILOTO · Geografia · 6º Ano
+                                    Geografia · 6º Ano
                                   </div>
                                   <div className="text-lg leading-tight mt-0.5">
-                                    🌍 Explorador Planetário (formato 5º Ano)
+                                    🌍 Explorador Planetário
                                   </div>
                                   <div className="text-[11px] font-bold opacity-90 mt-1">
-                                    7 unidades · 11 cenas visuais · linguagem teen →
+                                    7 unidades · 11 cenas visuais →
+                                  </div>
+                                </Link>
+                              )}
+                              {serie === "7º Ano" && (
+                                <Link
+                                  to="/escola-brilha/curso/$slug"
+                                  params={{ slug: "geografia-7ano-v2" }}
+                                  className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #16a34a, #065f46)" }}
+                                >
+                                  <div className="text-[10px] uppercase tracking-widest opacity-90">
+                                    Geografia · 7º Ano
+                                  </div>
+                                  <div className="text-lg leading-tight mt-0.5">
+                                    🇧🇷 Território Brasileiro
+                                  </div>
+                                  <div className="text-[11px] font-bold opacity-90 mt-1">
+                                    7 unidades · 11 cenas visuais →
                                   </div>
                                 </Link>
                               )}
