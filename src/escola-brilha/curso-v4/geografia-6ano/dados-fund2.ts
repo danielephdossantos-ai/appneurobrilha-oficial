@@ -28,37 +28,39 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
   {
     unidade: 1,
     slug: "unidade-1-terra-no-espaco",
-    titulo: "A Terra no Espaço e Dinâmicas Orbitais",
+    titulo: "A Terra no Espaço: Movimentos e Estações do Ano",
     habilidade: "EF06GE03",
     introducao_academica:
-      "A compreensão do planeta Terra como um corpo celeste dinâmico no espaço é a base da climatologia e da astronomia geográfica. Analisaremos como as interações gravitacionais, a excentricidade da órbita e os movimentos de inclinação axial determinam os ciclos cronológicos e os padrões de iluminação solar na superfície terrestre.",
+      "Você já reparou que em algumas épocas do ano o dia amanhece mais cedo ou o inverno parece congelar a cidade? Isso não acontece por acaso. A Terra não está parada no espaço: ela gira, inclina-se e viaja ao redor do Sol. Vamos entender passo a passo como esses movimentos criam o ritmo da vida no nosso planeta.",
     conteudo_pedagogico: {
-      conceito_chave: "Movimentos Planetários e Obliquidade do Eixo",
+      conceito_chave: "Rotação, Translação e a Inclinação da Terra",
       texto_teorico:
-        "A Terra realiza múltiplos movimentos complexos. A Rotação, realizada em torno do seu próprio eixo imaginário com duração aproximada de 23h 56m, estabelece a alternância entre os períodos iluminados (dia) e escuros (noite) e a força de Coriolis. A Translação é o movimento elíptico ao redor do Sol (365 dias e 6 horas). A inclinação de 23°27' do eixo terrestre (obliquidade) em relação ao plano da eclíptica é a variável responsável pela distribuição desigual de energia solar nos hemisférios ao longo do ano, gerando os solstícios e equinócios.",
+        "Para entender a Geografia, imagine a Terra como um pião que gira meio 'deitado'. 1) Movimento de Rotação (o giro do pião): a Terra gira em torno de si mesma como um pião, e esse giro demora cerca de 24 horas — enquanto um lado está de frente para o Sol (Dia), o outro está no escuro (Noite). Esse movimento ainda cria uma força invisível chamada Efeito de Coriolis, que desvia correntes de ar e ventos. 2) Movimento de Translação (a grande viagem): ao mesmo tempo em que gira sobre si, a Terra viaja ao redor do Sol, e essa viagem demora 365 dias e 6 horas — o nosso ano. 3) A Inclinação do Eixo (o segredo das estações): o planeta não gira 'em pé'; o eixo é inclinado em 23°27'. Por causa dessa inclinação, enquanto a Terra viaja ao redor do Sol, um hemisfério recebe mais luz e calor diretamente do que o outro — é isso que dá origem às quatro estações do ano.",
       exemplo_visual:
-        "Análise dos Solstícios (máxima desigualdade de iluminação entre os hemisférios, marcando o início do Verão/Inverno) e Equinócios (iluminação igual em ambos os hemisférios, marcando o início da Primavera/Outono).",
+        "Imagine segurar uma lanterna (Sol) apontada para uma bola de futebol (Terra): se você inclinar a bola para a frente, a parte de cima recebe muito mais luz do que a de baixo. É isso que acontece entre o Solstício (máxima desigualdade de luz, início do Verão ou Inverno) e o Equinócio (luz igual nos dois lados, início da Primavera ou Outono).",
       imagem_analise: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200",
     },
     desafio_critico: {
       pergunta:
-        "Considerando o movimento de Translação e a inclinação estável do eixo terrestre, qual seria a consequência direta para o planeta caso a obliquidade do eixo fosse reduzida a zero grau (eixo perfeitamente vertical)?",
+        "Imagine que cientistas descobriram um novo planeta idêntico à Terra, mas com uma única diferença: o seu eixo de rotação é perfeitamente reto (vertical, sem nenhuma inclinação). Se você fosse morar nesse planeta, o que aconteceria com o clima ao longo do ano?",
       opcoes: [
         {
           texto:
-            "Haveria uma extinção das estações do ano, fazendo com que os dias e as noites tivessem sempre a mesma duração em todas as latitudes ao longo de todo o ano.",
+            "As estações do ano deixariam de existir, e todas as cidades teriam exatamente o mesmo clima e a mesma quantidade de luz do sol de janeiro a dezembro.",
           correta: true,
         },
         {
-          texto: "O planeta perderia sua atmosfera devido à aceleração da velocidade orbital ao redor do Sol.",
+          texto:
+            "O planeta congelaria por completo porque a falta de inclinação impediria a luz do Sol de chegar até a Linha do Equador.",
           correta: false,
         },
       ],
       explicacao_professor:
-        "Sem a inclinação do eixo, os raios solares atingiriam a Terra sempre com a mesma angulação em cada latitude durante o ano todo. Não haveria variação térmica sazonal, eliminando as estações do ano.",
+        "Excelente análise! Se o eixo da Terra fosse perfeitamente reto, os raios solares atingiriam os mesmos lugares com a mesma força o ano inteiro. Sem variação de luz e calor ao longo dos meses, as estações do ano (Primavera, Verão, Outono e Inverno) simplesmente deixariam de existir.",
     },
-    recompensas: { xp: 500, moedas: 300, titulo: "Especialista em Dinâmicas Orbitais" },
+    recompensas: { xp: 500, moedas: 300, titulo: "Explorador das Dinâmicas Planetárias" },
   },
+
   {
     unidade: 2,
     slug: "unidade-2-cartografia-avancada",
