@@ -9,21 +9,25 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import {
+  ArrowLeft,
   BookOpen,
   Compass,
   FileText,
   Focus,
+  Headphones,
   Lightbulb,
   ListOrdered,
   Map,
-  
+  Pause,
   Sparkles,
   Target,
   Trophy,
   Volume2,
   VolumeX,
 } from "lucide-react";
+
 import type { UnidadeFund2 } from "./dados-fund2";
 import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
