@@ -8,6 +8,62 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Orbit, Compass, Sparkles, Snowflake, Flame } from "lucide-react";
 import type { RoteiroVisual } from "./dados-fund2";
+import planetaTerra from "@/assets/geo-fund2/planeta-terra.png";
+
+/** Terra realista reutilizável (foto NASA-style com borda atmosférica). */
+function TerraReal({
+  size = 96,
+  spin = 0,
+  className = "",
+  shadow,
+}: {
+  size?: number;
+  /** duração em segundos de uma rotação completa; 0 = sem giro */
+  spin?: number;
+  className?: string;
+  /** sombreamento de hemisfério para simular iluminação do Sol */
+  shadow?: "norte" | "sul" | "leste" | "oeste" | null;
+}) {
+  const shadowGradient =
+    shadow === "norte"
+      ? "radial-gradient(ellipse 120% 80% at 50% 110%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "sul"
+      ? "radial-gradient(ellipse 120% 80% at 50% -10%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "leste"
+      ? "radial-gradient(ellipse 80% 120% at -10% 50%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "oeste"
+      ? "radial-gradient(ellipse 80% 120% at 110% 50%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : null;
+  return (
+    <div
+      className={`relative rounded-full ${className}`}
+      style={{
+        width: size,
+        height: size,
+        boxShadow: "0 0 28px rgba(56,189,248,0.35), inset 0 0 12px rgba(191,219,254,0.15)",
+      }}
+    >
+      <motion.img
+        src={planetaTerra}
+        alt="Planeta Terra"
+        width={size}
+        height={size}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full rounded-full object-cover select-none pointer-events-none"
+        animate={spin > 0 ? { rotate: 360 } : undefined}
+        transition={spin > 0 ? { duration: spin, repeat: Infinity, ease: "linear" } : undefined}
+      />
+      {shadowGradient && (
+        <div
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{ background: shadowGradient, mixBlendMode: "multiply" }}
+        />
+      )}
+      {/* Halo atmosférico */}
+      <div className="absolute inset-0 rounded-full ring-1 ring-cyan-200/30 pointer-events-none" />
+    </div>
+  );
+}
 
 export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
   if (roteiro.tipo === "terra-orbita") return <TerraOrbita legenda={roteiro.legenda} />;
