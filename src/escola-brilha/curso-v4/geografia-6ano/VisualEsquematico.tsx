@@ -8,6 +8,62 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Orbit, Compass, Sparkles, Snowflake, Flame } from "lucide-react";
 import type { RoteiroVisual } from "./dados-fund2";
+import planetaTerra from "@/assets/geo-fund2/planeta-terra.png";
+
+/** Terra realista reutilizável (foto NASA-style com borda atmosférica). */
+function TerraReal({
+  size = 96,
+  spin = 0,
+  className = "",
+  shadow,
+}: {
+  size?: number;
+  /** duração em segundos de uma rotação completa; 0 = sem giro */
+  spin?: number;
+  className?: string;
+  /** sombreamento de hemisfério para simular iluminação do Sol */
+  shadow?: "norte" | "sul" | "leste" | "oeste" | null;
+}) {
+  const shadowGradient =
+    shadow === "norte"
+      ? "radial-gradient(ellipse 120% 80% at 50% 110%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "sul"
+      ? "radial-gradient(ellipse 120% 80% at 50% -10%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "leste"
+      ? "radial-gradient(ellipse 80% 120% at -10% 50%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : shadow === "oeste"
+      ? "radial-gradient(ellipse 80% 120% at 110% 50%, transparent 40%, rgba(2,6,23,0.85) 85%)"
+      : null;
+  return (
+    <div
+      className={`relative rounded-full ${className}`}
+      style={{
+        width: size,
+        height: size,
+        boxShadow: "0 0 28px rgba(56,189,248,0.35), inset 0 0 12px rgba(191,219,254,0.15)",
+      }}
+    >
+      <motion.img
+        src={planetaTerra}
+        alt="Planeta Terra"
+        width={size}
+        height={size}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full rounded-full object-cover select-none pointer-events-none"
+        animate={spin > 0 ? { rotate: 360 } : undefined}
+        transition={spin > 0 ? { duration: spin, repeat: Infinity, ease: "linear" } : undefined}
+      />
+      {shadowGradient && (
+        <div
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{ background: shadowGradient, mixBlendMode: "multiply" }}
+        />
+      )}
+      {/* Halo atmosférico */}
+      <div className="absolute inset-0 rounded-full ring-1 ring-cyan-200/30 pointer-events-none" />
+    </div>
+  );
+}
 
 export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
   if (roteiro.tipo === "terra-orbita") return <TerraOrbita legenda={roteiro.legenda} />;
@@ -38,29 +94,15 @@ function PalcoPiao() {
       {/* Chão / reflexo */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-40 h-2 rounded-full bg-cyan-400/20 blur-md" />
 
-      {/* Pião inclinado que gira em torno do próprio eixo (rotação) e faz precessão suave (translação) */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: "50% 60%" }}
-        className="relative"
-      >
-        <div className="rotate-[18deg]">
-          {/* Eixo do pião */}
-          <div className="absolute left-1/2 -top-6 h-6 w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-400 to-red-500 shadow-[0_0_8px_rgba(248,113,113,0.7)]" />
-          {/* Corpo esférico = Terra */}
-          <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 border-2 border-cyan-200/60 shadow-xl shadow-cyan-500/30 overflow-hidden">
-            {/* "continentes" abstratos */}
-            <div className="absolute top-3 left-4 h-4 w-6 rounded-full bg-emerald-500/70" />
-            <div className="absolute top-10 left-10 h-5 w-8 rounded-[40%] bg-emerald-600/70" />
-            <div className="absolute bottom-3 right-3 h-3 w-5 rounded-full bg-emerald-500/60" />
-            {/* linha do equador */}
-            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-cyan-200/40" />
-          </div>
-          {/* Ponta do pião */}
-          <div className="mx-auto -mt-1 h-4 w-4 rotate-45 bg-gradient-to-br from-slate-300 to-slate-500 shadow-md" />
-        </div>
-      </motion.div>
+      {/* Pião inclinado: Terra real girando com eixo inclinado ~23° */}
+      <div className="relative" style={{ transform: "rotate(18deg)" }}>
+        {/* Eixo do pião (prolongado acima e abaixo) */}
+        <div className="absolute left-1/2 -top-8 h-[calc(100%+4rem)] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-400 via-red-500 to-red-500 shadow-[0_0_10px_rgba(248,113,113,0.7)]" />
+        {/* Terra real girando */}
+        <TerraReal size={110} spin={6} />
+        {/* Ponta metálica do pião */}
+        <div className="mx-auto -mt-2 h-4 w-4 rotate-45 bg-gradient-to-br from-slate-300 to-slate-500 shadow-md" />
+      </div>
 
       {/* Marca de ângulo */}
       <div className="absolute top-3 right-3 font-mono text-[10px] text-red-300 border border-red-400/40 rounded px-1.5 py-0.5 bg-slate-950/60">
@@ -142,25 +184,24 @@ function PalcoRotacao() {
       exit={{ opacity: 0 }}
       className="grid grid-cols-2 gap-3 h-full"
     >
-      {/* Dia */}
-      <div className="relative rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-400/30 p-4 flex flex-col items-center justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          <Sun className="h-12 w-12 text-amber-300" strokeWidth={1.5} />
-        </motion.div>
-        <div className="mt-3 text-amber-200 font-serif text-lg">DIA</div>
-        <div className="text-amber-100/70 text-[11px] text-center mt-1">Lado da Terra virado para o Sol</div>
-      </div>
-      {/* Noite */}
-      <div className="relative rounded-lg bg-gradient-to-br from-indigo-900/60 to-slate-900 border border-indigo-400/30 p-4 flex flex-col items-center justify-center">
+      {/* Dia — Terra real iluminada pelo Sol */}
+      <div className="relative rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-400/30 p-3 flex flex-col items-center justify-center gap-1">
         <div className="relative">
-          <Moon className="h-12 w-12 text-indigo-200" strokeWidth={1.5} />
-          <Sparkles className="absolute -top-1 -right-2 h-3 w-3 text-indigo-300 animate-pulse" />
+          <Sun className="absolute -left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-amber-300" strokeWidth={1.5} />
+          <TerraReal size={72} spin={10} shadow="oeste" />
         </div>
-        <div className="mt-3 text-indigo-100 font-serif text-lg">NOITE</div>
-        <div className="text-indigo-200/70 text-[11px] text-center mt-1">Lado oposto, no escuro</div>
+        <div className="mt-1 text-amber-200 font-serif text-base">DIA</div>
+        <div className="text-amber-100/70 text-[10px] text-center leading-tight">Lado virado para o Sol</div>
+      </div>
+      {/* Noite — Terra real no escuro */}
+      <div className="relative rounded-lg bg-gradient-to-br from-indigo-900/60 to-slate-900 border border-indigo-400/30 p-3 flex flex-col items-center justify-center gap-1">
+        <div className="relative">
+          <TerraReal size={72} spin={10} shadow="leste" />
+          <Moon className="absolute -right-6 top-1/2 -translate-y-1/2 h-5 w-5 text-indigo-200" strokeWidth={1.5} />
+          <Sparkles className="absolute -top-1 -right-8 h-3 w-3 text-indigo-300 animate-pulse" />
+        </div>
+        <div className="mt-1 text-indigo-100 font-serif text-base">NOITE</div>
+        <div className="text-indigo-200/70 text-[10px] text-center leading-tight">Lado oposto, no escuro</div>
       </div>
       <div className="col-span-2 text-center text-slate-400 text-xs">
         A Terra gira <span className="text-cyan-300 font-medium">24 horas</span> em torno do próprio eixo.
@@ -197,8 +238,8 @@ function PalcoTranslacao() {
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         className="absolute inset-x-6 inset-y-8"
       >
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 h-6 w-6 border-2 border-cyan-200 shadow-lg shadow-cyan-500/50" />
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+          <TerraReal size={36} spin={12} />
         </div>
       </motion.div>
 
@@ -273,28 +314,22 @@ function PalcoInclinacao() {
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">N</div>
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 rotate-[23deg] text-[9px] font-mono text-red-300">S</div>
 
-            {/* Corpo Terra com sombreamento condicional */}
-            <div
-              className="relative h-24 w-24 rounded-full overflow-hidden border-2 border-cyan-200/50 shadow-lg shadow-cyan-500/30"
-              style={{
-                background: veraoSul
-                  ? "radial-gradient(circle at 30% 75%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)"
-                  : "radial-gradient(circle at 30% 25%, #93c5fd 0%, #2563eb 45%, #0f172a 90%)",
-              }}
-            >
+            {/* Corpo Terra real com sombreamento condicional do hemisfério */}
+            <div className="relative h-24 w-24">
+              <TerraReal size={96} shadow={veraoSul ? "norte" : "sul"} />
               {/* Marcação hemisfério iluminado */}
               <div
                 className={[
-                  "absolute left-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
-                  veraoSul ? "bottom-2 bg-rose-500/80 text-white" : "bottom-2 bg-slate-950/70 text-sky-200",
+                  "absolute left-1 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm z-10",
+                  veraoSul ? "bottom-1 bg-rose-500/90 text-white" : "bottom-1 bg-slate-950/80 text-sky-200",
                 ].join(" ")}
               >
                 HS {veraoSul ? "☀" : "❄"}
               </div>
               <div
                 className={[
-                  "absolute right-2 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm",
-                  veraoSul ? "top-2 bg-slate-950/70 text-sky-200" : "top-2 bg-rose-500/80 text-white",
+                  "absolute right-1 text-[9px] font-mono font-bold rounded px-1 backdrop-blur-sm z-10",
+                  veraoSul ? "top-1 bg-slate-950/80 text-sky-200" : "top-1 bg-rose-500/90 text-white",
                 ].join(" ")}
               >
                 HN {veraoSul ? "❄" : "☀"}
