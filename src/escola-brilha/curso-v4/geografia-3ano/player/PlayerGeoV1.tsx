@@ -3623,6 +3623,7 @@ function MapaBrasilInterativo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [visitadas, setVisitadas] = useState<Record<string, boolean>>({});
   const [ativa, setAtiva] = useState<string | null>(null);
 
@@ -3695,6 +3696,156 @@ function MapaBrasilInterativo({
       `${uf.nome}. Sigla ${uf.sigla.split("").join(" ")}. Capital ${uf.capital}. Região ${REGIAO_ROTULO[uf.regiao]}.${extra}`,
     );
   };
+
+  if (teen) {
+    const corTeen = (uf: EstadoBr) => {
+      if (missao.tipo === "selecionar") {
+        return missao.siglas.includes(uf.sigla) ? "#0891b2" : "#334155";
+      }
+      if (missao.tipo === "grupos") {
+        return alvoSiglas.includes(uf.sigla) ? "#0e7490" : "#334155";
+      }
+      return "#475569";
+    };
+
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Mapa político do Brasil
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        {missao.tipo === "grupos" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {missao.grupos.map((g) => {
+              const done = g.siglas.every((s) => visitadas[s]);
+              return (
+                <div
+                  key={g.id}
+                  className={`rounded-lg p-3 border bg-slate-900/70 ${done ? "border-cyan-400" : "border-slate-700"}`}
+                >
+                  <div className="flex items-center gap-2 text-white">
+                    <div className="flex-1">
+                      <div className="font-semibold text-sm leading-tight">{stripDecorativeEmoji(g.rotulo)}</div>
+                      <div className="text-slate-400 text-[11px] font-mono mt-1">
+                        {g.siglas.filter((s) => visitadas[s]).length}/{g.siglas.length} estados
+                      </div>
+                    </div>
+                    {done && <div className="text-cyan-300 font-bold">✓</div>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-950 p-2">
+          <svg
+            viewBox={BR_VIEWBOX}
+            className="w-full h-auto select-none"
+            style={{ aspectRatio: "1 / 1", touchAction: "manipulation" }}
+          >
+            {BR_ESTADOS.map((uf) => {
+              const isAtiva = ativa === uf.sigla;
+              const isVisitada = !!visitadas[uf.sigla];
+              const corBase = corTeen(uf);
+              return (
+                <g key={uf.sigla}>
+                  <path
+                    d={uf.d}
+                    fill={corBase}
+                    fillOpacity={isVisitada ? 0.95 : 0.7}
+                    stroke={isAtiva ? "#67e8f9" : "rgba(148,163,184,0.5)"}
+                    strokeWidth={isAtiva ? 0.35 : 0.12}
+                    strokeLinejoin="round"
+                    className="cursor-pointer transition-all duration-200 hover:brightness-125"
+                    onClick={() => tocarEstado(uf)}
+                    style={{ filter: isAtiva ? "drop-shadow(0 0 4px rgba(103,232,249,0.8))" : undefined }}
+                  />
+                  {(() => {
+                    const c = centroidDoPath(uf.d);
+                    const fs = c.w < 2.5 ? 0.55 : c.w < 4 ? 0.75 : 1.05;
+                    return (
+                      <text
+                        x={c.x}
+                        y={c.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={fs}
+                        fontWeight={800}
+                        fill="#f8fafc"
+                        stroke="#020617"
+                        strokeWidth={fs * 0.14}
+                        paintOrder="stroke"
+                        style={{ pointerEvents: "none", letterSpacing: "0.02em" }}
+                      >
+                        {uf.sigla}
+                      </text>
+                    );
+                  })()}
+                </g>
+              );
+            })}
+          </svg>
+
+          <div className="absolute top-3 right-3 bg-slate-950/85 text-cyan-200 text-xs font-mono px-3 py-1.5 rounded-md border border-slate-700 backdrop-blur">
+            {acertosCount}/{alvoSiglas.length}
+          </div>
+        </div>
+
+        {estadoAtivo && (
+          <motion.div
+            key={estadoAtivo.sigla}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-lg p-4 border border-slate-700 bg-slate-900/80 text-white"
+          >
+            <div className="flex items-start gap-3">
+              <div className="bg-slate-950 border border-cyan-500/30 rounded-md px-3 py-2 text-center min-w-[64px]">
+                <div className="text-[10px] uppercase opacity-70 font-mono">Sigla</div>
+                <div className="text-2xl font-black leading-none text-cyan-200">{estadoAtivo.sigla}</div>
+              </div>
+              <div className="flex-1">
+                <div className="text-xl font-black leading-tight">{estadoAtivo.nome}</div>
+                <div className="text-sm text-slate-300 mt-1">Capital: <span className="font-bold">{estadoAtivo.capital}</span></div>
+                <div className="text-xs text-slate-500 mt-1">Região {REGIAO_ROTULO[estadoAtivo.regiao]}</div>
+              </div>
+              <button
+                onClick={() => falar(`${estadoAtivo.nome}. Capital ${estadoAtivo.capital}.`)}
+                className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-xs text-slate-200 hover:bg-slate-700"
+                aria-label="Ouvir de novo"
+              >
+                Ouvir
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {missao.tipo === "selecionar" && (
+          <div className="bg-slate-900/70 border border-slate-700 rounded-lg p-3 text-sm text-slate-200">
+            <div className="text-cyan-300 font-mono uppercase tracking-widest text-[10px] mb-1">Missão</div>
+            {stripDecorativeEmoji(missao.pergunta)}
+          </div>
+        )}
+
+        {missaoCompleta && (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+            <div className="bg-emerald-950/35 border-l-2 border-emerald-500 rounded-lg p-4 text-sm text-emerald-100 leading-relaxed">
+              {stripDecorativeEmoji(cena.falaFinal)}
+            </div>
+            <button
+              onClick={onProxima}
+              className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+            >
+              Continuar →
+            </button>
+          </motion.div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
