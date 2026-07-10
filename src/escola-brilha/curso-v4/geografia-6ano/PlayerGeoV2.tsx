@@ -395,8 +395,17 @@ export function PlayerGeoV2({
     <div ref={containerRef} className="min-h-screen bg-slate-950 text-slate-100">
       {/* Header dashboard */}
       <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-        <div className="mx-auto max-w-4xl px-4 py-3 flex items-center gap-3">
-          <div className="rounded border border-cyan-500/40 bg-cyan-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-cyan-300">
+        <div className="mx-auto max-w-4xl px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3">
+          <Link
+            to="/escola-brilha"
+            onClick={() => stopSpeaking()}
+            className="flex items-center gap-1 rounded border border-slate-700 px-2 py-1.5 text-[11px] font-mono uppercase tracking-widest text-slate-300 hover:text-cyan-300 hover:border-cyan-500/60"
+            aria-label="Sair da aula"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Sair</span>
+          </Link>
+          <div className="rounded border border-cyan-500/40 bg-cyan-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-cyan-300 hidden sm:block">
             Geo · 6º ano
           </div>
           <div className="flex-1 min-w-0">
@@ -408,9 +417,40 @@ export function PlayerGeoV2({
           <button
             type="button"
             onClick={() => {
+              if (narrando === -1) {
+                stopSpeaking();
+                setNarrando(null);
+                return;
+              }
+              if (!audioLigado) setAudioLigado(true);
+              const textoCompleto = momentos
+                .map((m) => (m.narracao ? `${m.titulo}. ${m.narracao}` : ""))
+                .filter(Boolean)
+                .join(" ");
+              stopSpeaking();
+              setNarrando(-1);
+              speakChunked(textoCompleto, { onEnd: () => setNarrando(null) });
+            }}
+            className={[
+              "flex items-center gap-1 rounded border px-2 py-1.5 text-[11px] font-mono uppercase tracking-widest transition",
+              narrando === -1
+                ? "border-cyan-400 bg-cyan-500/20 text-cyan-200"
+                : "border-slate-700 text-slate-300 hover:text-cyan-300 hover:border-cyan-500/60",
+            ].join(" ")}
+            aria-label={narrando === -1 ? "Pausar leitura" : "Ouvir aula inteira"}
+          >
+            {narrando === -1 ? <Pause className="h-3.5 w-3.5" /> : <Headphones className="h-3.5 w-3.5" />}
+            <span className="hidden sm:inline">{narrando === -1 ? "Pausar" : "Ouvir aula"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
               const novo = !audioLigado;
               setAudioLigado(novo);
-              if (!novo) stopSpeaking();
+              if (!novo) {
+                stopSpeaking();
+                setNarrando(null);
+              }
             }}
             className="rounded border border-slate-700 p-1.5 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/60"
             aria-label={audioLigado ? "Desativar áudio" : "Ativar áudio"}
@@ -426,6 +466,7 @@ export function PlayerGeoV2({
           />
         </div>
       </header>
+
 
       {/* Título hero */}
       <section className="mx-auto max-w-4xl px-4 pt-8 pb-6">
