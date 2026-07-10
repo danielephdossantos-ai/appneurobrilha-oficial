@@ -71,7 +71,7 @@ function TrilhaFund2() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    setModoLivre(!params.has("aluno"));
+    void params;
     // hydrate progresso local
     const set = new Set<string>();
     for (const u of unidades) {
