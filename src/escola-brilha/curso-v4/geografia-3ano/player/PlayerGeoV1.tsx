@@ -1,9 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 import lupaImg from "@/assets/geografia-3ano/lupa.png";
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
+
+/** Modo TEEN (6º ano+) — desliga mascote infantil e cores kawaii. */
+const TeenContext = createContext(false);
+export const useTeen = () => useContext(TeenContext);
+
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
