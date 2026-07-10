@@ -25,7 +25,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import type { UnidadeFund2 } from "./dados-fund2";
-import { VisualEsquematico } from "./VisualEsquematico";
+import { VisualEsquematico, MiniPalco } from "./VisualEsquematico";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 
