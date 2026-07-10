@@ -67,20 +67,30 @@ function TerraReal({
 
 export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
   if (roteiro.tipo === "terra-orbita") return <TerraOrbita legenda={roteiro.legenda} />;
+  if (roteiro.tipo === "globo-coordenadas") return <GloboCoordenadas legenda={roteiro.legenda} />;
   return <Generico roteiro={roteiro} />;
 }
 
 /** Mini animação embutida em cada etapa do passo a passo. */
-export function MiniPalco({ tipo }: { tipo: "rotacao" | "translacao" | "inclinacao" | "piao" }) {
+export function MiniPalco({
+  tipo,
+}: {
+  tipo: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
+}) {
+  const alto = tipo === "piao" || tipo === "projecoes";
   return (
-    <div className={`relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden ${tipo === "piao" ? "h-[260px]" : "h-[180px]"}`}>
+    <div className={`relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden ${alto ? "h-[260px]" : "h-[180px]"}`}>
       {tipo === "rotacao" && <PalcoRotacao />}
       {tipo === "translacao" && <PalcoTranslacao />}
       {tipo === "inclinacao" && <PalcoInclinacao />}
       {tipo === "piao" && <PalcoPiao />}
+      {tipo === "latitude" && <PalcoLatitude />}
+      {tipo === "longitude" && <PalcoLongitude />}
+      {tipo === "projecoes" && <PalcoProjecoes />}
     </div>
   );
 }
+
 
 /** --- Palco 0: Pião (metáfora — Terra como pião inclinado que gira) --- */
 function PalcoPiao() {
