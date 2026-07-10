@@ -386,6 +386,24 @@ function EscolaBrilhaCatalogo() {
                                   </div>
                                 </Link>
                               )}
+                              {serie === "8º Ano" && (
+                                <Link
+                                  to="/escola-brilha/curso/$slug"
+                                  params={{ slug: "geografia-8ano-v2" }}
+                                  className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #dc2626, #7c2d12)" }}
+                                >
+                                  <div className="text-[10px] uppercase tracking-widest opacity-90">
+                                    Geografia · 8º Ano
+                                  </div>
+                                  <div className="text-lg leading-tight mt-0.5">
+                                    🌎 Mundo Contemporâneo
+                                  </div>
+                                  <div className="text-[11px] font-bold opacity-90 mt-1">
+                                    7 unidades · 11 cenas visuais →
+                                  </div>
+                                </Link>
+                              )}
                             </div>
                           );
                         }
