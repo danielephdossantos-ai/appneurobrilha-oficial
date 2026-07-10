@@ -17,7 +17,7 @@ import {
   Lightbulb,
   ListOrdered,
   Map,
-  ScrollText,
+  
   Sparkles,
   Target,
   Trophy,
