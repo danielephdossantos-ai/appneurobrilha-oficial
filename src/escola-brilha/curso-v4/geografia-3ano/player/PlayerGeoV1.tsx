@@ -539,127 +539,49 @@ function NarrarMapa({
         </div>
       </div>
 
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        🗺️ {cena.instrucao}
+      <div className="text-white/70 text-sm text-center">
+        Toque em cada item pra ouvir o professor ler.
       </div>
 
-      {/* Tira de fotos reais das comunidades — sempre visível */}
-      {cena.pontos.some((p) => p.fotoUrl) && (
-        <div className="grid grid-cols-3 gap-2">
-          {cena.pontos.map((p) => (
-            <button
-              key={`thumb-${p.id}`}
-              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
-              className={`relative rounded-xl overflow-hidden border-2 shadow-lg transition ${
-                ativo === p.id ? "border-emerald-300 scale-[1.02]" : "border-white/20"
-              }`}
-            >
-              {p.fotoUrl ? (
-                <img
-                  src={p.fotoUrl}
-                  alt={p.titulo}
-                  loading="lazy"
-                  className="w-full aspect-square object-cover"
-                />
-              ) : (
-                <div className={`w-full aspect-square grid place-items-center text-3xl bg-gradient-to-br ${p.cor}`}>
-                  {p.emoji}
-                </div>
-              )}
-              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] font-bold py-1 text-center">
-                {p.emoji} {p.titulo}
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Mapa com balões flutuantes */}
-      <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
-        <img
-          src={cena.mapaUrl}
-          alt="Mapa"
-          className="w-full aspect-[4/3] object-cover select-none"
-          draggable={false}
-        />
+      <ul className="divide-y divide-white/10 border border-white/10 rounded-2xl overflow-hidden">
         {cena.pontos.map((p) => {
           const visto = !!visitados[p.id];
           const isAtivo = ativo === p.id;
           return (
-            <button
-              key={p.id}
-              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
-              className="absolute -translate-x-1/2 -translate-y-1/2 group"
-              style={{ left: `${p.x}%`, top: `${p.y}%` }}
-              aria-label={p.titulo}
-            >
-              <motion.span
-                animate={
-                  isAtivo
-                    ? { scale: [1, 1.15, 1] }
-                    : { y: [0, -6, 0] }
-                }
-                transition={{
-                  duration: isAtivo ? 0.6 : 2.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className={`block w-12 h-12 sm:w-14 sm:h-14 rounded-full grid place-items-center text-2xl sm:text-3xl shadow-2xl border-2 bg-gradient-to-br ${p.cor} ${
-                  visto ? "border-emerald-300" : "border-white/80"
+            <li key={p.id}>
+              <button
+                onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+                className={`w-full text-left px-4 py-3 transition ${
+                  isAtivo ? "bg-white/10" : "hover:bg-white/5"
                 }`}
-                style={{
-                  boxShadow: isAtivo
-                    ? "0 0 0 6px rgba(52,211,153,.35), 0 8px 24px rgba(0,0,0,.5)"
-                    : "0 6px 16px rgba(0,0,0,.5)",
-                }}
               >
-                {p.emoji}
-              </motion.span>
-              {visto && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-[#0d1f55] text-[11px] font-black grid place-items-center border-2 border-[#0f172a]">
-                  ✓
-                </span>
-              )}
-            </button>
+                <div className="flex items-start gap-3">
+                  <span className="flex-1 text-white text-[15px] leading-snug font-medium">
+                    {p.titulo}
+                  </span>
+                  <span
+                    className={`text-xs shrink-0 mt-1 ${
+                      visto ? "text-emerald-300" : "text-white/40"
+                    }`}
+                  >
+                    {visto ? "✓ lido" : "🔊"}
+                  </span>
+                </div>
+                {isAtivo && (
+                  <p className="text-white/70 text-sm leading-snug mt-2">
+                    {p.texto}
+                  </p>
+                )}
+              </button>
+            </li>
           );
         })}
-      </div>
-
-      {/* Balão de fala do ponto ativo */}
-      {pontoAtivo && (
-        <motion.div
-          key={pontoAtivo.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white text-[#0d1f55] rounded-2xl p-4 shadow-xl border-2 border-emerald-300"
-        >
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl">{pontoAtivo.emoji}</span>
-            <div className="font-black text-lg">{pontoAtivo.titulo}</div>
-            <button
-              onClick={() =>
-                falar(`${pontoAtivo.titulo}. ${pontoAtivo.texto}`)
-              }
-              className="ml-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold rounded-full px-3 py-1"
-            >
-              🔊 ouvir
-            </button>
-          </div>
-          {pontoAtivo.fotoUrl && (
-            <img
-              src={pontoAtivo.fotoUrl}
-              alt={pontoAtivo.titulo}
-              loading="lazy"
-              className="w-full aspect-[3/2] object-cover rounded-xl mb-2 border-2 border-emerald-200"
-            />
-          )}
-          <p className="text-sm leading-snug">{pontoAtivo.texto}</p>
-        </motion.div>
-      )}
+      </ul>
 
       <div className="text-center text-xs text-white/60">
-        {visitadosCount} / {total} pontos descobertos
+        {visitadosCount} / {total} lidos
       </div>
+
 
       {todosVistos && (
         <motion.div
