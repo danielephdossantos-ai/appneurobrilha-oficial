@@ -318,7 +318,99 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "Comparação entre a Projeção de Mercator (preserva as formas mas distorce as áreas, expandindo as regiões polares) e a Projeção de Peters (preserva a proporção das áreas mas achata os contornos).",
       imagem_analise: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Um GPS mostra a coordenada −22,9° / −43,2°. O que o sinal de menos significa?",
+        opcoes: [
+          {
+            texto: "Latitude negativa = Hemisfério Sul; Longitude negativa = a Oeste de Greenwich.",
+            correta: true,
+            explicacao:
+              "Exato. Essas coordenadas são do Rio de Janeiro: 22,9° ao Sul do Equador e 43,2° a Oeste do Meridiano de Greenwich. O sinal é a convenção matemática dos hemisférios.",
+          },
+          {
+            texto: "Que o GPS perdeu o sinal e está mostrando valores inválidos.",
+            correta: false,
+            explicacao:
+              "Não. Coordenadas negativas são totalmente válidas — são o padrão para indicar Sul (latitude) e Oeste (longitude). Todo GPS do mundo usa essa convenção.",
+          },
+          {
+            texto: "Que o ponto fica abaixo do nível do mar.",
+            correta: false,
+            explicacao:
+              "Cuidado: latitude e longitude são posições HORIZONTAIS na superfície da Terra. Altitude (profundidade) é um terceiro número, medido em metros, não em graus.",
+          },
+        ],
+      },
+      {
+        pergunta: "Por que na Projeção de Mercator a Groenlândia parece do tamanho da África?",
+        opcoes: [
+          {
+            texto: "Porque a projeção estica as áreas próximas aos polos para preservar as formas e os ângulos de navegação.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. Mercator foi desenhada para marinheiros: mantém formas locais e ângulos precisos, mas o custo é distorcer o TAMANHO das regiões polares. A África real é ~14× maior que a Groenlândia.",
+          },
+          {
+            texto: "Porque a Groenlândia realmente é do tamanho da África, só que coberta de gelo.",
+            correta: false,
+            explicacao:
+              "Não. Groenlândia tem ~2,2 milhões km²; África tem ~30 milhões km². A ilusão é 100% da projeção — na Projeção de Peters ou num globo real, você vê o tamanho verdadeiro.",
+          },
+          {
+            texto: "Porque a Terra é achatada nos polos, então tudo lá em cima fica maior.",
+            correta: false,
+            explicacao:
+              "A Terra é levemente achatada nos polos, mas o efeito é pequeno (~40 km numa esfera de 12.700 km). A distorção que você vê no mapa é matemática da projeção, não geometria do planeta.",
+          },
+        ],
+      },
+      {
+        pergunta: "São Paulo está a ~46° O e o Cairo (Egito) a ~31° L. Quantos fusos horários (aproximadamente) separam as duas cidades?",
+        opcoes: [
+          {
+            texto: "Aproximadamente 5 fusos, porque a diferença total é ~77° de longitude e cada fuso vale 15°.",
+            correta: true,
+            explicacao:
+              "Perfeito. 46 + 31 = 77° de diferença. 77 ÷ 15 ≈ 5,1. Por isso, quando é meio-dia em São Paulo, no Cairo já são ~17h. Longitude e fuso horário andam sempre juntos.",
+          },
+          {
+            texto: "Nenhum, porque estão na mesma latitude aproximada.",
+            correta: false,
+            explicacao:
+              "Cuidado com a mistura: LATITUDE (Norte-Sul) não influencia fuso. Quem manda no fuso é a LONGITUDE (Leste-Oeste), porque a Terra gira em torno do próprio eixo — não Norte-Sul.",
+          },
+          {
+            texto: "12 fusos, porque estão em hemisférios diferentes.",
+            correta: false,
+            explicacao:
+              "12 fusos seria meio mundo de distância (~180°). Aqui a diferença real é bem menor: ~77°, o que dá cerca de 5 fusos. Hemisférios opostos em latitude não mudam a hora.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Cada frase abaixo pertence a UM dos três conceitos-chave da cartografia. Classifique cada cartão na categoria correta.",
+      categorias: [
+        { id: "latitude", titulo: "Latitude (Paralelos)", cor: "cyan" },
+        { id: "longitude", titulo: "Longitude (Meridianos)", cor: "amber" },
+        { id: "projecoes", titulo: "Projeções Cartográficas", cor: "emerald" },
+      ],
+      cartoes: [
+        { texto: "A Linha do Equador (0°) é o marco zero desse sistema.", categoriaId: "latitude" },
+        { texto: "O Meridiano de Greenwich (0°) é o marco zero desse sistema.", categoriaId: "longitude" },
+        { texto: "Define os fusos horários do planeta.", categoriaId: "longitude" },
+        { texto: "Quanto maior o valor, mais frio tende a ser o clima da região.", categoriaId: "latitude" },
+        { texto: "A de Mercator distorce o tamanho da Groenlândia.", categoriaId: "projecoes" },
+        { texto: "A de Peters preserva as áreas proporcionais dos continentes.", categoriaId: "projecoes" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "Um avião decola de Tóquio (Japão, ~35°N / 139°L) rumo a Buenos Aires (Argentina, ~34°S / 58°O). Durante o voo, o piloto muda de hemisfério tanto na Latitude quanto na Longitude. Qual afirmação explica corretamente essa mudança dupla?",
       opcoes: [
