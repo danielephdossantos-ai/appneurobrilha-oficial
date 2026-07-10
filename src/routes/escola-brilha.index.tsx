@@ -327,9 +327,11 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
-                        if ((serie === "6º Ano" || serie === "7º Ano") && disc === "geografia") {
-                          const serieSlugFund2 = serie === "6º Ano" ? "6ano" : "7ano";
-                          const serieLabelFund2 = serie === "6º Ano" ? "6º Ano" : "7º Ano";
+                        if ((serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano") && disc === "geografia") {
+                          const serieSlugFund2 =
+                            serie === "6º Ano" ? "6ano" : serie === "7º Ano" ? "7ano" : "8ano";
+                          const serieLabelFund2 = serie;
+
                           return (
                             <Link
                               key={disc}
