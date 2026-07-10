@@ -182,148 +182,67 @@ function MesaCartografo({
 }) {
   const aurora = PERSONAGENS.aurora;
   const imagemCena = cena.imagemDestaqueUrl ?? cena.mapaUrl;
-  const areaRef = useRef<HTMLDivElement | null>(null);
-  const [pos, setPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
-  const [revelado, setRevelado] = useState<Array<{ x: number; y: number }>>([
-    { x: 50, y: 50 },
-  ]);
   const [descoberto, setDescoberto] = useState(false);
-
-  const R = 80; // raio de revelação em px
-
-  const mover = (clientX: number, clientY: number) => {
-    const el = areaRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    const y = ((clientY - rect.top) / rect.height) * 100;
-    const cx = Math.max(0, Math.min(100, x));
-    const cy = Math.max(0, Math.min(100, y));
-    setPos({ x: cx, y: cy });
-    setRevelado((prev) => {
-      const last = prev[prev.length - 1];
-      if (Math.hypot(last.x - cx, last.y - cy) < 3) return prev;
-      const next = [...prev, { x: cx, y: cy }];
-      if (next.length > 40 && !descoberto) setDescoberto(true);
-      return next;
-    });
-  };
 
   return (
     <div className="space-y-5">
-      {/* Aurora fala */}
-      <div className="flex items-start gap-3">
-        <img
-          src={aurora.img}
-          alt={aurora.nome}
-          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
-        />
-        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-emerald-300 text-xs font-bold mb-1">
-            {aurora.nome}
-          </div>
-          {cena.aurora}
-        </div>
-      </div>
-
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
         {cena.instrucao}
       </div>
 
-      {/* Mesa de madeira com o mapa embaixo da névoa */}
-      <div
-        className="relative rounded-3xl p-4 shadow-2xl select-none"
-        style={{
-          background:
-            "repeating-linear-gradient(115deg,#7a4a1e 0 14px,#8b5a2b 14px 28px,#6b3d18 28px 42px)",
-          boxShadow: "inset 0 0 40px rgba(0,0,0,.45)",
-        }}
+      {/* Imagem limpa, sem moldura. Clique/toque revela a explicação. */}
+      <button
+        type="button"
+        onClick={() => setDescoberto(true)}
+        className="block w-full rounded-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-300 relative"
+        aria-label={descoberto ? "Imagem da missão" : "Toque para ouvir a explicação"}
       >
-        {/* fita adesiva decorativa */}
-        <div className="absolute -top-2 left-8 w-16 h-5 bg-amber-200/70 rotate-[-4deg] rounded-sm" />
-        <div className="absolute -top-2 right-10 w-16 h-5 bg-amber-200/70 rotate-[5deg] rounded-sm" />
-
-        <div
-          ref={areaRef}
-          className="relative aspect-[4/3] rounded-xl overflow-hidden touch-none cursor-none"
-          onMouseMove={(e) => mover(e.clientX, e.clientY)}
-          onTouchMove={(e) => {
-            const t = e.touches[0];
-            if (t) mover(t.clientX, t.clientY);
-          }}
-          onTouchStart={(e) => {
-            const t = e.touches[0];
-            if (t) mover(t.clientX, t.clientY);
-          }}
-        >
-          {/* mapa base */}
-          <img
-            src={imagemCena}
-            alt="Imagem da missão de Geografia"
-            className="absolute inset-0 w-full h-full object-cover"
-            draggable={false}
-          />
-          {/* névoa por cima com "buracos" onde a lupa passou (via SVG mask) */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <mask id="nevoa-mask">
-                <rect x="0" y="0" width="100" height="100" fill="white" />
-                {revelado.map((p, i) => (
-                  <circle key={i} cx={p.x} cy={p.y} r={12} fill="black" />
-                ))}
-              </mask>
-            </defs>
-            <rect
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              fill="#0b1220"
-              opacity="0.92"
-              mask="url(#nevoa-mask)"
-            />
-          </svg>
-
-          {/* lupa que segue o cursor */}
-          <motion.img
-            src={lupaImg}
-            alt=""
-            aria-hidden
-            className="absolute pointer-events-none drop-shadow-2xl"
-            style={{
-              width: R * 2,
-              height: R * 2,
-              left: `calc(${pos.x}% - ${R}px)`,
-              top: `calc(${pos.y}% - ${R}px)`,
-            }}
-            animate={{ rotate: [-4, 4, -4] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
-
-          {!descoberto && (
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
-              👆 arrasta a lupa pelo mapa
-            </div>
-          )}
-        </div>
-      </div>
+        <img
+          src={imagemCena}
+          alt="Imagem da missão de Geografia"
+          className="w-full h-auto object-contain"
+          draggable={false}
+        />
+        {!descoberto && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full animate-pulse">
+            👆 toque na imagem
+          </div>
+        )}
+      </button>
 
       {descoberto && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
-        >
-          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
-          <div className="text-sm leading-snug">
-            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
-            {cena.falaFinal}
-          </div>
-        </motion.div>
+        <>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-start gap-3"
+          >
+            <img
+              src={aurora.img}
+              alt={aurora.nome}
+              className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+            />
+            <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+              <div className="text-emerald-300 text-xs font-bold mb-1">
+                {aurora.nome}
+              </div>
+              {cena.aurora}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+          >
+            <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+            <div className="text-sm leading-snug">
+              <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+              {cena.falaFinal}
+            </div>
+          </motion.div>
+        </>
       )}
 
       <button
@@ -335,11 +254,12 @@ function MesaCartografo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
+        {descoberto ? "Continuar" : "👆 toque na imagem para começar"}
       </button>
     </div>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 2 — Voto do Explorador (2 cards grandes, escolhe antes de saber)
