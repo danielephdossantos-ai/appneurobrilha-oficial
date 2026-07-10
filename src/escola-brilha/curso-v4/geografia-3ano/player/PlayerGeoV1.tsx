@@ -2461,6 +2461,7 @@ function ConstrutorMarcos({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
   const [rodadaIdx, setRodadaIdx] = useState(0);
   const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
@@ -2539,6 +2540,31 @@ function ConstrutorMarcos({
     }
   };
 
+  if (teen && fim) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/80 p-6 text-center space-y-3">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80 font-mono">
+            Simulador finalizado
+          </div>
+          <div className="text-4xl font-black text-white">{acertos}/{total}</div>
+          <div className="text-xs text-slate-400 font-mono uppercase tracking-widest">
+            Melhor sequência: {comboMax}
+          </div>
+          <div className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+            {stripDecorativeEmoji(cena.falaFinal)}
+          </div>
+        </div>
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          Continuar →
+        </button>
+      </div>
+    );
+  }
+
   if (fim) {
     return (
       <div className="space-y-5">
@@ -2573,6 +2599,105 @@ function ConstrutorMarcos({
 
   const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
   const tempoUrgente = tempo <= 5;
+
+  if (teen) {
+    return (
+      <div className="space-y-4">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Simulador cronometrado
+          </div>
+          <p className="text-slate-300 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-slate-400 font-mono">
+          <span>Rodada {rodadaIdx + 1}/{total}</span>
+          <span>Sequência {combo}</span>
+          <span>Acertos {acertos}</span>
+        </div>
+        <div className="h-2 rounded-full bg-slate-800 overflow-hidden border border-slate-700">
+          <motion.div
+            className={tempoUrgente ? "h-full bg-rose-500" : "h-full bg-cyan-400"}
+            animate={{ width: `${tempoPct}%` }}
+            transition={{ duration: 0.4, ease: "linear" }}
+          />
+        </div>
+        <div className={`text-center font-mono text-sm ${tempoUrgente ? "text-rose-300" : "text-slate-300"}`}>
+          Tempo: {tempo}s
+        </div>
+
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700 p-5 space-y-3">
+          <div className="text-[10px] uppercase tracking-widest text-cyan-300/75 font-mono">Caso real</div>
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+            <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
+              <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação A</div>
+              <div className="text-white font-semibold leading-snug">{stripDecorativeEmoji(rodada.municipioA.nome)}</div>
+            </div>
+            <div className="hidden sm:grid place-items-center text-cyan-400 font-mono">→</div>
+            <div className="rounded-lg bg-slate-900 border border-slate-700 p-4">
+              <div className="text-[10px] uppercase tracking-widest text-slate-500 font-mono mb-2">Situação B</div>
+              <div className="text-white font-semibold leading-snug">{stripDecorativeEmoji(rodada.municipioB.nome)}</div>
+            </div>
+          </div>
+          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 leading-relaxed">
+            <span className="font-semibold text-cyan-300">Pista: </span>
+            {stripDecorativeEmoji(rodada.contexto)}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          {cena.pecas.map((p) => {
+            const certa = p.id === rodada.pecaCertaId;
+            const foiTocada = pecaTocada === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => escolher(p.id)}
+                disabled={travada}
+                className={`min-h-20 rounded-lg border px-3 py-3 text-left transition ${
+                  travada
+                    ? foiTocada && certa
+                      ? "bg-emerald-950/40 border-emerald-400 text-emerald-100"
+                      : foiTocada && !certa
+                      ? "bg-rose-950/40 border-rose-400 text-rose-100"
+                      : certa && (feedback === "erro" || feedback === "tempo")
+                      ? "bg-emerald-950/30 border-emerald-500/60 text-emerald-100"
+                      : "bg-slate-900/40 border-slate-800 text-slate-500"
+                    : "bg-slate-900/70 border-slate-700 text-slate-100 hover:border-cyan-500/50"
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-widest text-cyan-300/70 font-mono mb-1">Conceito</div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">{stripDecorativeEmoji(p.rotulo)}</div>
+              </button>
+            );
+          })}
+        </div>
+
+        {feedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`rounded-lg p-3 border-l-2 text-sm leading-relaxed ${
+              feedback === "acerto"
+                ? "bg-emerald-950/35 border-emerald-500 text-emerald-100"
+                : "bg-rose-950/35 border-rose-500 text-rose-100"
+            }`}
+          >
+            {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
+          </motion.div>
+        )}
+
+        {travada && (
+          <button
+            onClick={proximaRodada}
+            className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+          >
+            {rodadaIdx + 1 === total ? "Ver placar →" : "Próxima rodada →"}
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
