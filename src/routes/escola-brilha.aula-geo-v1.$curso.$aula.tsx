@@ -122,14 +122,47 @@ function AulaGeoV1Page() {
     <>
       <PlayerGeoV1 key={aula} aula={dados.aula} onSair={sair} onConcluir={concluir} />
       <AnimatePresence>
-        {proximaPendente && <MissaoDesbloqueada />}
+        {proximaPendente && <MissaoDesbloqueada teen={curso === "geografia-6ano-v2"} />}
       </AnimatePresence>
       <audio ref={audioRef} preload="auto" />
     </>
   );
 }
 
-function MissaoDesbloqueada() {
+function MissaoDesbloqueada({ teen = false }: { teen?: boolean }) {
+  if (teen) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/90 backdrop-blur-md"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.35 }}
+          className="relative mx-6 w-full max-w-sm rounded-xl border border-cyan-500/25 bg-slate-900/90 px-8 py-7 text-center shadow-[0_0_60px_-28px_rgba(34,211,238,0.8)]"
+        >
+          <div className="mx-auto mb-4 h-12 w-12 rounded-lg border border-cyan-500/35 bg-cyan-500/10 grid place-items-center">
+            <div className="h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.9)]" />
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.3em] text-cyan-300/80 font-mono">
+            Explorador Planetário
+          </div>
+          <div className="text-2xl font-black text-white mt-2">
+            Próxima missão liberada
+          </div>
+          <div className="text-sm text-slate-400 mt-2 font-medium">
+            Carregando novo módulo de investigação…
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
