@@ -4,6 +4,7 @@ import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
 
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
+import { MinijogoVisual } from "./MinijogoVisuais";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
