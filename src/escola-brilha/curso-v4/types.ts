@@ -779,16 +779,27 @@ export type CenaGeoV1 =
       tipo: "pizzaMunicipio";
       aurora: string;
       instrucao: string;
-      /** 2 ou mais fatias somando 100. */
-      fatias: Array<{
-        id: string;
-        rotulo: string;         // "Zona Urbana"
-        emoji: string;
-        percentual: number;     // 0-100
-        cor: string;            // hex ou tailwind stop
-        descricao: string;      // frase falada ao tocar
-        exemplos: string[];     // 2-3 exemplos curtos
-      }>;
+      /** Duas fatias somando 100. */
+      fatias: [
+        {
+          id: string;
+          rotulo: string;         // "Zona Urbana"
+          emoji: string;
+          percentual: number;     // 0-100
+          cor: string;            // hex ou tailwind stop
+          descricao: string;      // frase falada ao tocar
+          exemplos: string[];     // 2-3 exemplos curtos
+        },
+        {
+          id: string;
+          rotulo: string;
+          emoji: string;
+          percentual: number;
+          cor: string;
+          descricao: string;
+          exemplos: string[];
+        },
+      ];
       falaFinal: string;
     }
   | {

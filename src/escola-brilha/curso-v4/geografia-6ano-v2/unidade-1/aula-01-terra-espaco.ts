@@ -4,7 +4,7 @@ import orbitaEstacoes from "@/assets/geografia-6ano/orbita-estacoes.jpg";
 import rotacaoDiaNoite from "@/assets/geografia-6ano/rotacao-dia-noite.jpg";
 
 /**
- * Geografia · 6º Ano · Unidade 1 · Aula 01
+ * Geografia · 6º Ano (PILOTO v2 — formato 5º Ano) · Unidade 1 · Aula 01
  * "A Terra no Espaço: Rotação, Translação e Inclinação"
  * BNCC EF06GE01
  *

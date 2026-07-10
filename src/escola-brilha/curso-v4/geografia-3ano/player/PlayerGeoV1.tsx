@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { AulaGeoV1, CenaGeoV1 } from "@/escola-brilha/curso-v4/types";
 import { PERSONAGENS, ESQUILO_BRILHA } from "@/escola-brilha/mascotes-personagens";
-
+import lupaImg from "@/assets/geografia-3ano/lupa.png";
 import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
-import { MinijogoVisual } from "./MinijogoVisuais";
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
@@ -183,67 +182,148 @@ function MesaCartografo({
 }) {
   const aurora = PERSONAGENS.aurora;
   const imagemCena = cena.imagemDestaqueUrl ?? cena.mapaUrl;
+  const areaRef = useRef<HTMLDivElement | null>(null);
+  const [pos, setPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
+  const [revelado, setRevelado] = useState<Array<{ x: number; y: number }>>([
+    { x: 50, y: 50 },
+  ]);
   const [descoberto, setDescoberto] = useState(false);
+
+  const R = 80; // raio de revelação em px
+
+  const mover = (clientX: number, clientY: number) => {
+    const el = areaRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    const cx = Math.max(0, Math.min(100, x));
+    const cy = Math.max(0, Math.min(100, y));
+    setPos({ x: cx, y: cy });
+    setRevelado((prev) => {
+      const last = prev[prev.length - 1];
+      if (Math.hypot(last.x - cx, last.y - cy) < 3) return prev;
+      const next = [...prev, { x: cx, y: cy }];
+      if (next.length > 40 && !descoberto) setDescoberto(true);
+      return next;
+    });
+  };
 
   return (
     <div className="space-y-5">
+      {/* Aurora fala */}
+      <div className="flex items-start gap-3">
+        <img
+          src={aurora.img}
+          alt={aurora.nome}
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+        />
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
+            {aurora.nome}
+          </div>
+          {cena.aurora}
+        </div>
+      </div>
+
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
         {cena.instrucao}
       </div>
 
-      {/* Imagem limpa, sem moldura. Clique/toque revela a explicação. */}
-      <button
-        type="button"
-        onClick={() => setDescoberto(true)}
-        className="block w-full rounded-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-300 relative"
-        aria-label={descoberto ? "Imagem da missão" : "Toque para ouvir a explicação"}
+      {/* Mesa de madeira com o mapa embaixo da névoa */}
+      <div
+        className="relative rounded-3xl p-4 shadow-2xl select-none"
+        style={{
+          background:
+            "repeating-linear-gradient(115deg,#7a4a1e 0 14px,#8b5a2b 14px 28px,#6b3d18 28px 42px)",
+          boxShadow: "inset 0 0 40px rgba(0,0,0,.45)",
+        }}
       >
-        <img
-          src={imagemCena}
-          alt="Imagem da missão de Geografia"
-          className="w-full h-auto object-contain"
-          draggable={false}
-        />
-        {!descoberto && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full animate-pulse">
-            👆 toque na imagem
-          </div>
-        )}
-      </button>
+        {/* fita adesiva decorativa */}
+        <div className="absolute -top-2 left-8 w-16 h-5 bg-amber-200/70 rotate-[-4deg] rounded-sm" />
+        <div className="absolute -top-2 right-10 w-16 h-5 bg-amber-200/70 rotate-[5deg] rounded-sm" />
+
+        <div
+          ref={areaRef}
+          className="relative aspect-[4/3] rounded-xl overflow-hidden touch-none cursor-none"
+          onMouseMove={(e) => mover(e.clientX, e.clientY)}
+          onTouchMove={(e) => {
+            const t = e.touches[0];
+            if (t) mover(t.clientX, t.clientY);
+          }}
+          onTouchStart={(e) => {
+            const t = e.touches[0];
+            if (t) mover(t.clientX, t.clientY);
+          }}
+        >
+          {/* mapa base */}
+          <img
+            src={imagemCena}
+            alt="Imagem da missão de Geografia"
+            className="absolute inset-0 w-full h-full object-cover"
+            draggable={false}
+          />
+          {/* névoa por cima com "buracos" onde a lupa passou (via SVG mask) */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <mask id="nevoa-mask">
+                <rect x="0" y="0" width="100" height="100" fill="white" />
+                {revelado.map((p, i) => (
+                  <circle key={i} cx={p.x} cy={p.y} r={12} fill="black" />
+                ))}
+              </mask>
+            </defs>
+            <rect
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              fill="#0b1220"
+              opacity="0.92"
+              mask="url(#nevoa-mask)"
+            />
+          </svg>
+
+          {/* lupa que segue o cursor */}
+          <motion.img
+            src={lupaImg}
+            alt=""
+            aria-hidden
+            className="absolute pointer-events-none drop-shadow-2xl"
+            style={{
+              width: R * 2,
+              height: R * 2,
+              left: `calc(${pos.x}% - ${R}px)`,
+              top: `calc(${pos.y}% - ${R}px)`,
+            }}
+            animate={{ rotate: [-4, 4, -4] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {!descoberto && (
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
+              👆 arrasta a lupa pelo mapa
+            </div>
+          )}
+        </div>
+      </div>
 
       {descoberto && (
-        <>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-start gap-3"
-          >
-            <img
-              src={aurora.img}
-              alt={aurora.nome}
-              className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
-            />
-            <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-              <div className="text-emerald-300 text-xs font-bold mb-1">
-                {aurora.nome}
-              </div>
-              {cena.aurora}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
-          >
-            <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
-            <div className="text-sm leading-snug">
-              <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
-              {cena.falaFinal}
-            </div>
-          </motion.div>
-        </>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
       )}
 
       <button
@@ -255,12 +335,11 @@ function MesaCartografo({
             : "bg-white/10 text-white/40 cursor-not-allowed"
         }`}
       >
-        {descoberto ? "Continuar" : "👆 toque na imagem para começar"}
+        {descoberto ? "Continuar" : "🔍 Continue explorando o mapa…"}
       </button>
     </div>
   );
 }
-
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 2 — Voto do Explorador (2 cards grandes, escolhe antes de saber)
@@ -310,8 +389,8 @@ function VotoExplorador({
         </div>
       </div>
 
-      {/* Opções em lista de texto — visual sóbrio, sem cor/ícone */}
-      <div className="flex flex-col gap-2">
+      {/* Cards de voto — empilhados no mobile, lado a lado no desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {cena.opcoes.map((op) => {
           const escolhido = voto === op.id;
           const certoRevelado = revelado && op.id === cena.respostaCerta;
@@ -321,36 +400,36 @@ function VotoExplorador({
               key={op.id}
               onClick={() => votar(op.id)}
               disabled={revelado}
-              whileTap={{ scale: revelado ? 1 : 0.99 }}
-              className={`w-full text-left rounded-xl px-4 py-3 border transition-all bg-white/5 hover:bg-white/10 ${
-                escolhido ? "border-white/70" : "border-white/15"
-              } ${certoRevelado ? "border-emerald-400 bg-emerald-500/10" : ""} ${
-                erradoRevelado ? "border-rose-400 bg-rose-500/10 opacity-80" : ""
+              whileTap={{ scale: revelado ? 1 : 0.97 }}
+              className={`relative rounded-3xl p-5 text-left overflow-hidden border-2 transition-all bg-gradient-to-br ${op.cor} ${
+                escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
+              } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
+                erradoRevelado ? "opacity-60" : ""
               }`}
             >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="text-white font-semibold text-base leading-snug">
-                    {op.titulo}
-                  </div>
-                  {op.subtitulo && (
-                    <div className="text-white/60 text-sm mt-1 leading-snug">
-                      {op.subtitulo}
-                    </div>
-                  )}
-                </div>
-                {certoRevelado && (
-                  <span className="text-emerald-300 text-lg font-bold shrink-0">✓</span>
-                )}
-                {erradoRevelado && (
-                  <span className="text-rose-300 text-lg font-bold shrink-0">✕</span>
-                )}
+              <div className="text-5xl mb-2">{op.emoji}</div>
+              <div className="text-white font-black text-lg leading-tight">
+                {op.titulo}
               </div>
+              {op.subtitulo && (
+                <div className="text-white/85 text-xs mt-1 font-medium">
+                  {op.subtitulo}
+                </div>
+              )}
+              {certoRevelado && (
+                <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                  ✓
+                </div>
+              )}
+              {erradoRevelado && (
+                <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-8 h-8 grid place-items-center text-lg font-black shadow">
+                  ✕
+                </div>
+              )}
             </motion.button>
           );
         })}
       </div>
-
 
       {revelado && (
         <motion.div
@@ -402,6 +481,12 @@ function CadernosCampo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const [abertos, setAbertos] = useState<Record<string, boolean>>({});
+  const totalAbertos = Object.values(abertos).filter(Boolean).length;
+  const todosAbertos = totalAbertos === cena.cadernos.length;
+
+  const abrir = (id: string) =>
+    setAbertos((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
     <div className="space-y-5">
@@ -420,61 +505,118 @@ function CadernosCampo({
       </div>
 
       <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        {cena.instrucao}
+        📓 {cena.instrucao}
       </div>
 
-      {/* Cadernos sempre abertos: foto (se houver) + texto */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {cena.cadernos.map((c) => (
-          <div
-            key={c.id}
-            className="rounded-2xl p-4 bg-white/[0.04] border border-white/10"
-          >
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">
-              {c.capa}
-            </div>
-            {c.fotoUrl && (
-              <img
-                src={c.fotoUrl}
-                alt={c.capa}
-                loading="lazy"
-                className="w-full aspect-[3/2] object-cover rounded-lg mb-3 border border-white/10"
-              />
-            )}
-            <p className="text-white text-sm font-semibold leading-snug">
-              {c.conteudo}
-            </p>
-            {c.exemplo && (
-              <p className="text-xs italic text-white/60 mt-2 border-t border-white/10 pt-2">
-                Ex.: {c.exemplo}
-              </p>
-            )}
-          </div>
-        ))}
+        {cena.cadernos.map((c) => {
+          const aberto = !!abertos[c.id];
+          return (
+            <button
+              key={c.id}
+              onClick={() => abrir(c.id)}
+              className="relative text-left"
+              style={{ perspective: "1000px" }}
+            >
+              <motion.div
+                className={`relative w-full rounded-2xl ${c.fotoUrl ? "min-h-[360px]" : "min-h-[200px]"}`}
+                style={{ transformStyle: "preserve-3d" }}
+                animate={{ rotateY: aberto ? 180 : 0 }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
+              >
+                {/* Capa */}
+                <div
+                  className={`absolute inset-0 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br ${c.cor} shadow-lg border-2 border-white/20 overflow-hidden`}
+                  style={{ backfaceVisibility: "hidden" }}
+                >
+                  {c.fotoUrl ? (
+                    <img
+                      src={c.fotoUrl}
+                      alt={c.capa}
+                      loading="lazy"
+                      className="w-full h-32 object-cover rounded-xl border-2 border-white/30 shadow-lg"
+                    />
+                  ) : (
+                    <div className="text-5xl">{c.emoji}</div>
+                  )}
+                  <div>
+                    <div className="text-white/80 text-[10px] uppercase tracking-widest font-bold">
+                      {c.fotoUrl ? "📸 Foto real" : "Caderno de campo"}
+                    </div>
+                    <div className="text-white font-black text-xl leading-tight mt-1">
+                      {c.emoji} {c.capa}
+                    </div>
+                    <div className="text-white/80 text-xs mt-2">👆 toque pra abrir</div>
+                  </div>
+                </div>
+                {/* Verso — página escrita */}
+                <div
+                  className="absolute inset-0 rounded-2xl p-4 bg-amber-50 text-[#2a1a08] shadow-lg border-2 border-amber-900/20"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                    backgroundImage:
+                      "repeating-linear-gradient(transparent 0 22px, rgba(120,53,15,.12) 22px 23px)",
+                  }}
+                >
+                  <div className="text-[10px] uppercase tracking-widest text-amber-800 font-bold">
+                    {c.capa}
+                  </div>
+                  {c.fotoUrl && (
+                    <img
+                      src={c.fotoUrl}
+                      alt={c.capa}
+                      loading="lazy"
+                      className="w-full aspect-[3/2] object-cover rounded-lg mt-1 border-2 border-amber-900/20"
+                    />
+                  )}
+                  <p className="text-sm font-semibold mt-2 leading-snug">
+                    {c.conteudo}
+                  </p>
+                  {c.exemplo && (
+                    <p className="text-xs italic text-amber-900/80 mt-2 border-t border-amber-900/20 pt-2">
+                      Ex.: {c.exemplo}
+                    </p>
+                  )}
+                </div>
+              </motion.div>
+            </button>
+          );
+        })}
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
-      >
-        <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
-        <div className="text-sm leading-snug">
-          <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
-          {cena.falaFinal}
-        </div>
-      </motion.div>
+      <div className="text-center text-xs text-white/60">
+        {totalAbertos} / {cena.cadernos.length} cadernos abertos
+      </div>
+
+      {todosAbertos && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-emerald-500/15 border border-emerald-400/40 rounded-2xl p-4 flex items-start gap-3"
+        >
+          <img src={ESQUILO_BRILHA.img} alt="" className="w-12 h-12 shrink-0" />
+          <div className="text-sm leading-snug">
+            <div className="text-emerald-300 text-xs font-bold mb-1">Aurora</div>
+            {cena.falaFinal}
+          </div>
+        </motion.div>
+      )}
 
       <button
         onClick={onProxima}
-        className="w-full py-4 rounded-2xl font-black text-lg transition bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+        disabled={!todosAbertos}
+        className={`w-full py-4 rounded-2xl font-black text-lg transition ${
+          todosAbertos
+            ? "bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01]"
+            : "bg-white/10 text-white/40 cursor-not-allowed"
+        }`}
       >
-        Continuar
+        {todosAbertos ? "Continuar" : "📓 Abra todos os cadernos"}
       </button>
     </div>
   );
 }
-
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 4 — Aurora narra o mapa (balões clicáveis + TTS)
@@ -540,49 +682,127 @@ function NarrarMapa({
         </div>
       </div>
 
-      <div className="text-white/70 text-sm text-center">
-        Toque em cada item pra ouvir o professor ler.
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🗺️ {cena.instrucao}
       </div>
 
-      <ul className="divide-y divide-white/10 border border-white/10 rounded-2xl overflow-hidden">
+      {/* Tira de fotos reais das comunidades — sempre visível */}
+      {cena.pontos.some((p) => p.fotoUrl) && (
+        <div className="grid grid-cols-3 gap-2">
+          {cena.pontos.map((p) => (
+            <button
+              key={`thumb-${p.id}`}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className={`relative rounded-xl overflow-hidden border-2 shadow-lg transition ${
+                ativo === p.id ? "border-emerald-300 scale-[1.02]" : "border-white/20"
+              }`}
+            >
+              {p.fotoUrl ? (
+                <img
+                  src={p.fotoUrl}
+                  alt={p.titulo}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover"
+                />
+              ) : (
+                <div className={`w-full aspect-square grid place-items-center text-3xl bg-gradient-to-br ${p.cor}`}>
+                  {p.emoji}
+                </div>
+              )}
+              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-white text-[10px] font-bold py-1 text-center">
+                {p.emoji} {p.titulo}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Mapa com balões flutuantes */}
+      <div className="relative rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-black/30">
+        <img
+          src={cena.mapaUrl}
+          alt="Mapa"
+          className="w-full aspect-[4/3] object-cover select-none"
+          draggable={false}
+        />
         {cena.pontos.map((p) => {
           const visto = !!visitados[p.id];
           const isAtivo = ativo === p.id;
           return (
-            <li key={p.id}>
-              <button
-                onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
-                className={`w-full text-left px-4 py-3 transition ${
-                  isAtivo ? "bg-white/10" : "hover:bg-white/5"
+            <button
+              key={p.id}
+              onClick={() => tocar(p.id, `${p.titulo}. ${p.texto}`)}
+              className="absolute -translate-x-1/2 -translate-y-1/2 group"
+              style={{ left: `${p.x}%`, top: `${p.y}%` }}
+              aria-label={p.titulo}
+            >
+              <motion.span
+                animate={
+                  isAtivo
+                    ? { scale: [1, 1.15, 1] }
+                    : { y: [0, -6, 0] }
+                }
+                transition={{
+                  duration: isAtivo ? 0.6 : 2.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className={`block w-12 h-12 sm:w-14 sm:h-14 rounded-full grid place-items-center text-2xl sm:text-3xl shadow-2xl border-2 bg-gradient-to-br ${p.cor} ${
+                  visto ? "border-emerald-300" : "border-white/80"
                 }`}
+                style={{
+                  boxShadow: isAtivo
+                    ? "0 0 0 6px rgba(52,211,153,.35), 0 8px 24px rgba(0,0,0,.5)"
+                    : "0 6px 16px rgba(0,0,0,.5)",
+                }}
               >
-                <div className="flex items-start gap-3">
-                  <span className="flex-1 text-white text-[15px] leading-snug font-medium">
-                    {p.titulo}
-                  </span>
-                  <span
-                    className={`text-xs shrink-0 mt-1 ${
-                      visto ? "text-emerald-300" : "text-white/40"
-                    }`}
-                  >
-                    {visto ? "✓ lido" : "🔊"}
-                  </span>
-                </div>
-                {isAtivo && (
-                  <p className="text-white/70 text-sm leading-snug mt-2">
-                    {p.texto}
-                  </p>
-                )}
-              </button>
-            </li>
+                {p.emoji}
+              </motion.span>
+              {visto && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-[#0d1f55] text-[11px] font-black grid place-items-center border-2 border-[#0f172a]">
+                  ✓
+                </span>
+              )}
+            </button>
           );
         })}
-      </ul>
-
-      <div className="text-center text-xs text-white/60">
-        {visitadosCount} / {total} lidos
       </div>
 
+      {/* Balão de fala do ponto ativo */}
+      {pontoAtivo && (
+        <motion.div
+          key={pontoAtivo.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white text-[#0d1f55] rounded-2xl p-4 shadow-xl border-2 border-emerald-300"
+        >
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-2xl">{pontoAtivo.emoji}</span>
+            <div className="font-black text-lg">{pontoAtivo.titulo}</div>
+            <button
+              onClick={() =>
+                falar(`${pontoAtivo.titulo}. ${pontoAtivo.texto}`)
+              }
+              className="ml-auto text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold rounded-full px-3 py-1"
+            >
+              🔊 ouvir
+            </button>
+          </div>
+          {pontoAtivo.fotoUrl && (
+            <img
+              src={pontoAtivo.fotoUrl}
+              alt={pontoAtivo.titulo}
+              loading="lazy"
+              className="w-full aspect-[3/2] object-cover rounded-xl mb-2 border-2 border-emerald-200"
+            />
+          )}
+          <p className="text-sm leading-snug">{pontoAtivo.texto}</p>
+        </motion.div>
+      )}
+
+      <div className="text-center text-xs text-white/60">
+        {visitadosCount} / {total} pontos descobertos
+      </div>
 
       {todosVistos && (
         <motion.div
@@ -704,10 +924,12 @@ function QuizRadar({
         </div>
       </div>
 
-      <div className="text-white/70 text-sm text-center">{cena.instrucao}</div>
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        📡 {cena.instrucao}
+      </div>
 
-      <div className="flex items-center justify-between text-xs text-white/60 px-1">
-        <span className="uppercase tracking-widest font-bold">
+      <div className="flex items-center justify-between text-xs text-white/70 px-1">
+        <span className="uppercase tracking-widest text-emerald-300/80 font-bold">
           Pergunta {idx + 1} / {total}
         </span>
         <span>✓ {acertos}</span>
@@ -715,23 +937,24 @@ function QuizRadar({
 
       {!finalizado && p && (
         <>
-          {/* Pergunta — sóbria, só texto */}
+          {/* PERGUNTA em destaque (escrita + botão pra ouvir de novo) */}
           <motion.div
             key={p.id}
-            initial={{ opacity: 0, y: -6 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="border-b border-white/15 pb-4"
+            className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 shadow-xl"
           >
             <div className="flex items-start gap-3">
-              <div className="flex-1 text-white font-semibold text-lg leading-snug">
+              <div className="text-3xl shrink-0">❓</div>
+              <div className="flex-1 text-white font-black text-lg sm:text-xl leading-snug">
                 {p.pergunta}
               </div>
               <button
                 onClick={() => falar(p.pergunta)}
-                className="shrink-0 text-white/60 hover:text-white text-xs underline underline-offset-2"
+                className="shrink-0 bg-white/15 hover:bg-white/25 border border-white/25 rounded-full px-3 py-1.5 text-xs font-bold flex items-center gap-1"
                 aria-label="Ouvir a pergunta"
               >
-                ouvir
+                🔊 ouvir
               </button>
             </div>
           </motion.div>
@@ -739,47 +962,100 @@ function QuizRadar({
           {p.fotoUrl && (
             <motion.img
               key={`${p.id}-foto`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
               src={p.fotoUrl}
               alt=""
               loading="lazy"
-              className="w-full aspect-[16/9] object-cover rounded-xl"
+              className="w-full aspect-[16/9] object-cover rounded-2xl border-2 border-emerald-400/30 shadow-xl"
             />
           )}
 
-          {/* Opções — lista vertical, texto puro */}
-          <ul className="divide-y divide-white/10 border border-white/10 rounded-2xl overflow-hidden">
+          {/* Radar */}
+          <div className="relative mx-auto w-52 h-52 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-emerald-400/40 shadow-2xl overflow-hidden">
+            {/* anéis */}
+            {[0.33, 0.66, 1].map((r, i) => (
+              <div
+                key={i}
+                className="absolute rounded-full border border-emerald-400/25"
+                style={{
+                  left: `${50 - 50 * r}%`,
+                  top: `${50 - 50 * r}%`,
+                  width: `${100 * r}%`,
+                  height: `${100 * r}%`,
+                }}
+              />
+            ))}
+            {/* cruz */}
+            <div className="absolute inset-0">
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-400/20" />
+              <div className="absolute top-1/2 left-0 right-0 h-px bg-emerald-400/20" />
+            </div>
+            {/* ponteiro */}
+            <motion.div
+              className="absolute left-1/2 top-1/2 origin-top-left"
+              style={{
+                width: "50%",
+                height: 2,
+                background:
+                  "linear-gradient(90deg, rgba(52,211,153,1) 0%, rgba(52,211,153,0) 100%)",
+                transformOrigin: "0% 50%",
+              }}
+              animate={{
+                rotate:
+                  anguloAtual !== null
+                    ? revelado
+                      ? anguloAtual - 90
+                      : [0, 360, 720, anguloAtual - 90]
+                    : [0, 360],
+              }}
+              transition={{
+                duration: anguloAtual !== null && !revelado ? 0.9 : 2.5,
+                ease: anguloAtual !== null && !revelado ? "easeOut" : "linear",
+                repeat: anguloAtual === null ? Infinity : 0,
+              }}
+            />
+            {/* centro */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
+          </div>
+
+
+          {/* Cards de resposta */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {p.cards.map((c) => {
               const escolhido = escolha === c.id;
               const certoRevelado = revelado && c.id === p.correta;
               const erradoRevelado = revelado && escolhido && c.id !== p.correta;
               return (
-                <li key={c.id}>
-                  <button
-                    onClick={() => escolher(c.id)}
-                    disabled={revelado}
-                    className={`w-full text-left px-4 py-4 transition flex items-center gap-3 ${
-                      revelado ? "cursor-default" : "hover:bg-white/5"
-                    } ${escolhido && !revelado ? "bg-white/10" : ""} ${
-                      certoRevelado ? "bg-emerald-500/10" : ""
-                    } ${erradoRevelado ? "opacity-60" : ""}`}
-                  >
-                    <span className="flex-1 text-white text-[15px] leading-snug">
-                      {c.titulo}
-                    </span>
-                    {certoRevelado && (
-                      <span className="text-emerald-300 text-sm shrink-0">✓</span>
-                    )}
-                    {erradoRevelado && (
-                      <span className="text-rose-300 text-sm shrink-0">✕</span>
-                    )}
-                  </button>
-                </li>
+                <motion.button
+                  key={c.id}
+                  onClick={() => escolher(c.id)}
+                  disabled={revelado}
+                  whileTap={{ scale: revelado ? 1 : 0.96 }}
+                  className={`relative rounded-2xl p-4 border-2 bg-gradient-to-br ${c.cor} ${
+                    escolhido ? "border-white ring-4 ring-white/40" : "border-white/20"
+                  } ${certoRevelado ? "ring-4 ring-emerald-300" : ""} ${
+                    erradoRevelado ? "opacity-60" : ""
+                  }`}
+                >
+                  <div className="text-4xl mb-1">{c.emoji}</div>
+                  <div className="text-white font-black text-base leading-tight">
+                    {c.titulo}
+                  </div>
+                  {certoRevelado && (
+                    <div className="absolute top-2 right-2 bg-emerald-400 text-[#0d1f55] rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
+                      ✓
+                    </div>
+                  )}
+                  {erradoRevelado && (
+                    <div className="absolute top-2 right-2 bg-rose-400 text-white rounded-full w-7 h-7 grid place-items-center text-sm font-black shadow">
+                      ✕
+                    </div>
+                  )}
+                </motion.button>
               );
             })}
-          </ul>
-
+          </div>
 
           {revelado && (
             <motion.div
@@ -824,8 +1100,7 @@ function QuizRadar({
               ? idx + 1 < total
                 ? "Próxima pergunta →"
                 : "Ver resultado"
-              : "Escolha uma resposta"}
-
+              : "📡 Escolha um card pra ativar o radar"}
           </button>
         </>
       )}
@@ -1065,40 +1340,6 @@ function LinhaEstrada({
     }
   };
 
-  const slotRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const handleDragEnd = (
-    id: string,
-    e: MouseEvent | TouchEvent | PointerEvent,
-    info: { point: { x: number; y: number } },
-  ) => {
-    if (concluido || colocados.includes(id)) return;
-    const { x, y } = getPointerXY(e, info);
-    let melhorIdx = -1;
-    let melhorDist = Infinity;
-    slotRefs.current.forEach((el, idx) => {
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      const dentro =
-        x >= r.left - 24 && x <= r.right + 24 &&
-        y >= r.top - 24 && y <= r.bottom + 24;
-      if (!dentro) return;
-      const cx = (r.left + r.right) / 2;
-      const cy = (r.top + r.bottom) / 2;
-      const d = Math.hypot(x - cx, y - cy);
-      if (d < melhorDist) { melhorDist = d; melhorIdx = idx; }
-    });
-    if (melhorIdx === -1) return;
-    if (melhorIdx === passo && id === proxIdEsperado) {
-      setColocados((prev) => [...prev, id]);
-      setPasso((n) => n + 1);
-      setErro(null);
-    } else {
-      setErro(id);
-      setTimeout(() => setErro(null), 700);
-    }
-  };
-
   return (
     <div className="space-y-5">
       <div className="flex items-start gap-3">
@@ -1113,120 +1354,113 @@ function LinhaEstrada({
         </div>
       </div>
 
-      <div className="text-sm text-white/70 text-center">
-        {cena.instrucao}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        🛣️ {cena.instrucao}
       </div>
 
-      <div className="text-white font-semibold text-base text-center leading-snug">
-        {cena.pergunta}
-      </div>
-
-      {/* Legenda — entender cada item ANTES de arrastar */}
-      <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-3 space-y-2">
-        <div className="text-xs font-bold text-emerald-300 uppercase tracking-wider text-center">
-          📖 Entenda cada item antes de arrastar
+      <div className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 text-center">
+        <div className="text-white font-black text-lg leading-snug">
+          {cena.pergunta}
         </div>
-        <ul className="space-y-1.5">
-          {cena.paradas.map((p) => {
-            const rotuloLimpo = p.rotulo.replace(/^\s*\d+[.)-]\s*/, "");
+      </div>
+
+      {/* Estrada com paradas em ordem */}
+      <div className="relative bg-gradient-to-b from-emerald-900/40 to-emerald-950/60 border border-white/15 rounded-2xl p-4">
+        {/* trilho vertical */}
+        <div className="absolute left-9 top-6 bottom-6 w-1 bg-white/15 rounded-full" />
+        <div
+          className="absolute left-9 top-6 w-1 bg-gradient-to-b from-emerald-300 to-amber-300 rounded-full transition-all duration-500"
+          style={{
+            height: `calc(${(passo / total) * 100}% - ${passo === total ? 12 : 0}px)`,
+            maxHeight: "calc(100% - 12px)",
+          }}
+        />
+
+        <div className="space-y-3 relative">
+          {cena.ordemCerta.map((id, i) => {
+            const preenchido = i < passo;
+            const ativo = i === passo;
+            const p = paradaPorId(id);
             return (
-              <li
-                key={p.id}
-                className="flex items-start gap-2 text-sm leading-snug"
-              >
-                <span className="text-lg leading-none shrink-0 w-6 text-center">
-                  {p.emoji}
-                </span>
-                <span className="flex-1">
-                  <span className="text-white font-semibold">{rotuloLimpo}</span>
-                  <span className="text-white/60"> — {p.descricao}</span>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="text-[11px] text-white/40 text-center pt-1 border-t border-white/10">
-          Agora arraste cada nome pro lugar certo abaixo, na ordem pedida.
-        </div>
-      </div>
-
-      {/* Slots numerados — destino */}
-      <div className="space-y-2">
-        {cena.ordemCerta.map((id, i) => {
-          const preenchido = i < passo;
-          const ativo = i === passo && !concluido;
-          const p = preenchido ? paradaPorId(cena.ordemCerta[i]) : null;
-          return (
-            <div
-              key={i}
-              ref={(el) => { slotRefs.current[i] = el; }}
-              className={`flex items-center gap-3 rounded-lg px-3 py-3 border transition ${
-                preenchido
-                  ? "border-white/30 bg-white/5"
-                  : ativo
-                  ? "border-dashed border-white/40 bg-white/[0.03]"
-                  : "border-dashed border-white/15 bg-transparent"
-              }`}
-            >
-              <div className="text-white/50 text-sm font-mono w-5 shrink-0">
-                {i + 1}.
-              </div>
-              <div className="flex-1 text-sm">
-                {preenchido && p ? (
-                  <span className="text-white font-medium">{p.rotulo}</span>
-                ) : (
-                  <span className="text-white/30 italic">
-                    {ativo ? "arraste a resposta aqui" : "—"}
-                  </span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Banco — arraste para cima */}
-      {!concluido && (
-        <div className="pt-2 border-t border-white/10">
-          <div className="text-xs text-white/50 mb-2 text-center">
-            Arraste para o lugar certo
-          </div>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {cena.paradas.map((p) => {
-              const usado = colocados.includes(p.id);
-              const errando = erro === p.id;
-              if (usado) return null;
-              return (
-                <motion.div
-                  key={p.id}
-                  drag
-                  dragSnapToOrigin
-                  dragMomentum={false}
-                  whileDrag={{ scale: 1.05, zIndex: 50 }}
-                  onDragEnd={(e, info) => handleDragEnd(p.id, e, info)}
-                  animate={errando ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className={`cursor-grab active:cursor-grabbing select-none px-4 py-2 rounded-md border text-sm font-medium touch-none ${
-                    errando
-                      ? "bg-rose-500/15 border-rose-400/60 text-rose-100"
-                      : "bg-white/10 border-white/25 text-white hover:bg-white/15"
+              <div key={i} className="flex items-center gap-3 min-h-[56px]">
+                <div
+                  className={`w-10 h-10 rounded-full grid place-items-center text-lg font-black shrink-0 border-2 transition-all ${
+                    preenchido
+                      ? "bg-emerald-400 border-white text-[#0d1f55]"
+                      : ativo
+                      ? "bg-white/10 border-emerald-300 text-emerald-300 animate-pulse"
+                      : "bg-white/5 border-white/20 text-white/40"
                   }`}
                 >
-                  {p.rotulo}
-                </motion.div>
-              );
-            })}
-          </div>
+                  {preenchido ? "✓" : i + 1}
+                </div>
+                {preenchido ? (
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex-1 bg-white/10 border border-emerald-400/40 rounded-xl p-2 flex items-center gap-2"
+                  >
+                    <span className="text-2xl">{p.emoji}</span>
+                    <div className="text-sm">
+                      <div className="font-bold text-emerald-300">{p.rotulo}</div>
+                      <div className="text-white/80 text-xs leading-snug">
+                        {p.descricao}
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div className="flex-1 border-2 border-dashed border-white/20 rounded-xl p-2 text-white/40 text-xs italic">
+                    {ativo ? "toque a próxima parada abaixo…" : "aguardando…"}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
-      )}
+      </div>
+
+      {/* Banco de paradas */}
+      <div>
+        <div className="text-xs uppercase tracking-widest text-white/60 font-bold mb-2 text-center">
+          🚚 Paradas do caminho
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {cena.paradas.map((p) => {
+            const usado = colocados.includes(p.id);
+            const errando = erro === p.id;
+            return (
+              <motion.button
+                key={p.id}
+                onClick={() => tentar(p.id)}
+                disabled={usado || concluido}
+                whileTap={{ scale: usado ? 1 : 0.94 }}
+                animate={errando ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
+                transition={{ duration: 0.4 }}
+                className={`rounded-2xl p-3 border-2 transition-all ${
+                  usado
+                    ? "bg-emerald-500/10 border-emerald-400/40 opacity-40"
+                    : errando
+                    ? "bg-rose-500/25 border-rose-400"
+                    : "bg-white/10 border-white/25 hover:bg-white/15"
+                }`}
+              >
+                <div className="text-3xl">{p.emoji}</div>
+                <div className="text-white font-bold text-xs mt-1 leading-tight">
+                  {p.rotulo}
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+      </div>
 
       {erro && (
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-rose-200/80 text-center"
+          className="bg-rose-500/15 border border-rose-400/40 rounded-2xl p-3 text-sm text-rose-100"
         >
-          {cena.feedbackErro}
+          ❌ {cena.feedbackErro}
         </motion.div>
       )}
 
@@ -1502,7 +1736,7 @@ function VoceLeSozinho({
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Cena 9 — Minijogo (versão sóbria, drag-and-drop, sem visual infantil)
+// Cena 9 — Construtor de Marcos (contra o tempo)
 // ─────────────────────────────────────────────────────────────────────
 function ConstrutorMarcos({
   cena,
@@ -1513,50 +1747,78 @@ function ConstrutorMarcos({
 }) {
   const aurora = PERSONAGENS.aurora;
   const [rodadaIdx, setRodadaIdx] = useState(0);
+  const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
-  const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
-  const [pecaSolta, setPecaSolta] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<"acerto" | "erro" | "tempo" | null>(null);
+  const [pecaTocada, setPecaTocada] = useState<string | null>(null);
   const [acertos, setAcertos] = useState(0);
+  const [combo, setCombo] = useState(0);
+  const [comboMax, setComboMax] = useState(0);
   const [fim, setFim] = useState(false);
-  const [shakeSlot, setShakeSlot] = useState(0);
-
-  const slotRef = useRef<HTMLDivElement>(null);
 
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  const tentarSoltar = (
-    pecaId: string,
-    e: MouseEvent | TouchEvent | PointerEvent,
-    info: { point: { x: number; y: number } },
-  ) => {
-    if (travada || !slotRef.current) return false;
-    const r = slotRef.current.getBoundingClientRect();
-    const { x, y } = getPointerXY(e, info);
-    const margem = 24;
-    const dentro =
-      x >= r.left - margem && x <= r.right + margem &&
-      y >= r.top - margem && y <= r.bottom + margem;
-    if (!dentro) return false;
+  // relógio regressivo
+  useEffect(() => {
+    if (travada || fim) return;
+    if (tempo <= 0) {
+      setTravada(true);
+      setFeedback("tempo");
+      setCombo(0);
+      return;
+    }
+    const t = setTimeout(() => setTempo((n) => n - 1), 1000);
+    return () => clearTimeout(t);
+  }, [tempo, travada, fim]);
 
-    setPecaSolta(pecaId);
+  // fala a pista ao entrar na rodada
+  useEffect(() => {
+    if (fim) return;
+    try {
+      window.speechSynthesis?.cancel();
+      const u = new SpeechSynthesisUtterance(rodada.contexto);
+      u.lang = "pt-BR";
+      u.rate = 0.95;
+      window.speechSynthesis?.speak(u);
+    } catch {
+      /* ignore */
+    }
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rodadaIdx, fim]);
+
+  const escolher = (pecaId: string) => {
+    if (travada) return;
+    setPecaTocada(pecaId);
     setTravada(true);
     if (pecaId === rodada.pecaCertaId) {
       setFeedback("acerto");
       setAcertos((n) => n + 1);
+      setCombo((c) => {
+        const novo = c + 1;
+        setComboMax((m) => Math.max(m, novo));
+        return novo;
+      });
     } else {
       setFeedback("erro");
-      setShakeSlot((s) => s + 1);
+      setCombo(0);
     }
-    return true;
   };
 
   const proximaRodada = () => {
     if (rodadaIdx + 1 < total) {
       setRodadaIdx(rodadaIdx + 1);
+      setTempo(cena.duracaoSegundos);
       setTravada(false);
       setFeedback(null);
-      setPecaSolta(null);
+      setPecaTocada(null);
     } else {
       setFim(true);
     }
@@ -1565,20 +1827,28 @@ function ConstrutorMarcos({
   if (fim) {
     return (
       <div className="space-y-5">
-        <div className="border border-white/20 rounded-2xl p-6 text-center space-y-3 bg-white/[0.03]">
-          <div className="text-[11px] uppercase tracking-widest text-white/60">
-            Minijogo — resultado
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-gradient-to-br from-emerald-500/25 to-amber-400/25 border-2 border-emerald-400/50 rounded-3xl p-6 text-center space-y-3"
+        >
+          <div className="text-6xl">🏗️</div>
+          <div className="text-xs uppercase tracking-widest text-amber-300">
+            Construtor de Marcos — placar
           </div>
-          <div className="text-4xl font-light text-white tabular-nums">
+          <div className="text-4xl font-black text-white">
             {acertos} / {total}
           </div>
-          <div className="text-sm text-white/70 max-w-md mx-auto leading-relaxed">
+          <div className="text-sm text-amber-200 font-bold">
+            🔥 Combo máximo: {comboMax}
+          </div>
+          <div className="text-sm text-white/80 max-w-md mx-auto">
             {cena.falaFinal}
           </div>
-        </div>
+        </motion.div>
         <button
           onClick={onProxima}
-          className="w-full py-3.5 rounded-xl font-semibold text-sm bg-white text-[#0d1f55] hover:bg-white/90 transition"
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
         >
           Continuar
         </button>
@@ -1586,7 +1856,8 @@ function ConstrutorMarcos({
     );
   }
 
-  const pecaCerta = cena.pecas.find((p) => p.id === rodada.pecaCertaId);
+  const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
+  const tempoUrgente = tempo <= 5;
 
   return (
     <div className="space-y-4">
@@ -1595,86 +1866,127 @@ function ConstrutorMarcos({
         <img
           src={aurora.img}
           alt={aurora.nome}
-          className="w-14 h-14 rounded-full bg-white/10 p-1 shrink-0"
+          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
         />
-        <div className="bg-white/[0.06] border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-1">
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
             {aurora.nome}
           </div>
-          <div className="text-white/90">{cena.aurora}</div>
+          {cena.aurora}
         </div>
       </div>
 
-      {/* HUD sóbrio */}
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/50">
+      {/* Instrução */}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+        {cena.instrucao}
+      </div>
+
+      {/* HUD: rodada + combo + relógio */}
+      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/70">
         <span>Rodada {rodadaIdx + 1} / {total}</span>
-        <span className="tabular-nums">✓ {acertos}</span>
+        <span className="text-amber-300 font-bold">🔥 combo {combo}</span>
+        <span>✓ {acertos}</span>
+      </div>
+      <div className="h-3 rounded-full bg-white/10 overflow-hidden border border-white/15">
+        <motion.div
+          className={`h-full ${
+            tempoUrgente
+              ? "bg-gradient-to-r from-rose-500 to-orange-400"
+              : "bg-gradient-to-r from-emerald-400 to-amber-300"
+          }`}
+          animate={{ width: `${tempoPct}%` }}
+          transition={{ duration: 0.4, ease: "linear" }}
+        />
+      </div>
+      <div className={`text-center font-black text-lg ${tempoUrgente ? "text-rose-300 animate-pulse" : "text-white"}`}>
+        ⏱️ {tempo}s
       </div>
 
-      {/* Visual interativo do conceito da rodada */}
-      <div className="rounded-2xl border border-white/15 bg-gradient-to-b from-[#0a1230] to-[#050a1c] p-3">
-        <MinijogoVisual conceito={rodada.pecaCertaId} />
+      {/* Cenário: 2 municípios + slot vazio no meio (fronteira apagada) */}
+      <div className="relative h-52 sm:h-60 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
+        <div
+          className={`absolute inset-y-0 left-0 w-1/2 bg-gradient-to-br ${rodada.municipioA.cor} flex flex-col items-center justify-center gap-1`}
+        >
+          <div className="text-4xl sm:text-5xl">{rodada.municipioA.emoji}</div>
+          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
+            {rodada.municipioA.nome}
+          </div>
+        </div>
+        <div
+          className={`absolute inset-y-0 right-0 w-1/2 bg-gradient-to-bl ${rodada.municipioB.cor} flex flex-col items-center justify-center gap-1`}
+        >
+          <div className="text-4xl sm:text-5xl">{rodada.municipioB.emoji}</div>
+          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
+            {rodada.municipioB.nome}
+          </div>
+        </div>
+
+        {/* Slot central — a fronteira apagada */}
+        <motion.div
+          className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 flex items-center justify-center"
+          animate={
+            feedback === "erro" || feedback === "tempo"
+              ? { x: [-6, 6, -4, 4, 0] }
+              : feedback === "acerto"
+              ? { scale: [1, 1.15, 1] }
+              : {}
+          }
+          transition={{ duration: 0.5 }}
+        >
+          <div
+            className={`w-full h-3/4 rounded-2xl border-4 border-dashed grid place-items-center backdrop-blur-sm ${
+              feedback === "acerto"
+                ? "border-emerald-300 bg-emerald-400/30"
+                : feedback === "erro" || feedback === "tempo"
+                ? "border-rose-300 bg-rose-500/25"
+                : "border-amber-200 bg-black/40 animate-pulse"
+            }`}
+          >
+            {travada && pecaTocada ? (
+              <div className="text-5xl sm:text-6xl drop-shadow-lg">
+                {cena.pecas.find((p) => p.id === pecaTocada)?.emoji ??
+                  (feedback === "tempo"
+                    ? "⏰"
+                    : cena.pecas.find((p) => p.id === rodada.pecaCertaId)?.emoji)}
+              </div>
+            ) : (
+              <div className="text-3xl sm:text-4xl opacity-60">❔</div>
+            )}
+          </div>
+        </motion.div>
       </div>
 
-      {/* Contexto (texto puro) */}
-      <div className="border border-white/15 rounded-xl p-4 text-sm text-white/90 leading-relaxed">
+      {/* Pista escrita */}
+      <div className="bg-white/10 border border-white/15 rounded-2xl p-3 text-sm text-white/95 leading-snug">
+        <span className="font-bold text-amber-300">Pista: </span>
         {rodada.contexto}
       </div>
 
-      {/* Slot central — arraste a resposta aqui */}
-      <motion.div
-        ref={slotRef}
-        animate={feedback === "erro" ? { x: [-6, 6, -4, 4, 0] } : {}}
-        key={shakeSlot}
-        transition={{ duration: 0.4 }}
-        className={`rounded-xl border-2 border-dashed px-4 py-6 text-center transition-colors ${
-          feedback === "acerto"
-            ? "border-emerald-400/60 bg-emerald-400/5"
-            : feedback === "erro"
-            ? "border-rose-400/60 bg-rose-400/5"
-            : "border-white/25 bg-white/[0.02]"
-        }`}
-      >
-        {travada && pecaSolta ? (
-          <div className="text-white text-sm font-medium">
-            {cena.pecas.find((p) => p.id === pecaSolta)?.rotulo}
-          </div>
-        ) : (
-          <div className="text-white/40 text-xs uppercase tracking-widest">
-            Arraste a resposta até aqui
-          </div>
-        )}
-      </motion.div>
-
-      {/* Banco de peças arrastáveis (texto puro) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      {/* Peças (banco embaixo) */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-3">
         {cena.pecas.map((p) => {
-          const usada = travada && pecaSolta === p.id;
-          const certaDestacada =
-            travada && feedback === "erro" && p.id === rodada.pecaCertaId;
+          const certa = p.id === rodada.pecaCertaId;
+          const foiTocada = pecaTocada === p.id;
           return (
-            <motion.button
+            <button
               key={p.id}
-              drag={!travada}
-              dragSnapToOrigin
-              dragMomentum={false}
-              whileDrag={{ scale: 1.05, zIndex: 50 }}
-              onDragEnd={(e, info) => tentarSoltar(p.id, e, info)}
+              onClick={() => escolher(p.id)}
               disabled={travada}
-              className={`text-left px-4 py-3 rounded-xl border text-sm transition-colors touch-none ${
-                usada
-                  ? feedback === "acerto"
-                    ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-100"
-                    : "border-rose-400/50 bg-rose-400/10 text-rose-100"
-                  : certaDestacada
-                  ? "border-emerald-400/40 bg-emerald-400/5 text-emerald-100/90"
-                  : travada
-                  ? "border-white/10 bg-white/[0.02] text-white/40"
-                  : "border-white/20 bg-white/[0.04] text-white/90 hover:bg-white/[0.08] cursor-grab active:cursor-grabbing"
+              className={`aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-bold text-[11px] sm:text-xs transition ${
+                travada
+                  ? foiTocada && certa
+                    ? "bg-emerald-400/30 border-emerald-300 text-emerald-100"
+                    : foiTocada && !certa
+                    ? "bg-rose-500/30 border-rose-300 text-rose-100"
+                    : certa && (feedback === "erro" || feedback === "tempo")
+                    ? "bg-emerald-400/20 border-emerald-300/60 text-emerald-100"
+                    : "bg-white/5 border-white/10 text-white/40"
+                  : "bg-white/10 border-white/25 text-white hover:bg-white/20 active:scale-95"
               }`}
             >
-              {p.rotulo}
-            </motion.button>
+              <div className="text-3xl sm:text-4xl">{p.emoji}</div>
+              <div>{p.rotulo}</div>
+            </button>
           );
         })}
       </div>
@@ -1682,17 +1994,21 @@ function ConstrutorMarcos({
       {/* Feedback */}
       {feedback && (
         <motion.div
-          initial={{ opacity: 0, y: 6 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-xl p-3.5 border text-sm leading-relaxed ${
+          className={`rounded-2xl p-3 border text-sm ${
             feedback === "acerto"
-              ? "border-emerald-400/40 bg-emerald-400/[0.06] text-emerald-100"
-              : "border-rose-400/40 bg-rose-400/[0.06] text-rose-100"
+              ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
+              : "bg-rose-500/15 border-rose-400/40 text-rose-100"
           }`}
         >
-          <div className="text-[11px] uppercase tracking-widest opacity-70 mb-1">
-            {feedback === "acerto" ? "Correto" : `Resposta: ${pecaCerta?.rotulo}`}
-          </div>
+          <span className="font-bold">
+            {feedback === "acerto"
+              ? "🎯 "
+              : feedback === "tempo"
+              ? "⏰ Tempo esgotado! "
+              : "❌ "}
+          </span>
           {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
         </motion.div>
       )}
@@ -1700,15 +2016,14 @@ function ConstrutorMarcos({
       {travada && (
         <button
           onClick={proximaRodada}
-          className="w-full py-3.5 rounded-xl font-semibold text-sm bg-white text-[#0d1f55] hover:bg-white/90 transition"
+          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
         >
-          {rodadaIdx + 1 === total ? "Ver resultado →" : "Próxima rodada →"}
+          {rodadaIdx + 1 === total ? "Ver placar →" : "Próxima rodada →"}
         </button>
       )}
     </div>
   );
 }
-
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 10 — Pizza do Município (revisão: fatias clicáveis com TTS)
@@ -1725,6 +2040,9 @@ function PizzaMunicipio({
   const [ativa, setAtiva] = useState<string | null>(null);
 
   const fatias = cena.fatias;
+  const [f1, f2] = fatias;
+  // ângulo da fatia 1 (em graus). Fatia 2 é o resto.
+  const anguloF1 = (f1.percentual / 100) * 360;
 
   const falar = (texto: string) => {
     try {
@@ -1759,36 +2077,8 @@ function PizzaMunicipio({
   const todasTocadas = tocadas.size === fatias.length;
   const fatiaAtiva = fatias.find((x) => x.id === ativa);
 
-  // Geometria do gráfico (SVG) — pizza proporcional para N fatias
-  const CX = 130;
-  const CY = 130;
-  const R = 108;
-  const total = fatias.reduce((s, f) => s + f.percentual, 0) || 100;
-
-  let acc = 0;
-  const setores = fatias.map((f) => {
-    const inicio = (acc / total) * 360;
-    acc += f.percentual;
-    const fim = (acc / total) * 360;
-    const meio = (inicio + fim) / 2;
-    const grande = fim - inicio > 180 ? 1 : 0;
-
-    // ângulos em radianos, começando do topo (-90°)
-    const rad = (a: number) => ((a - 90) * Math.PI) / 180;
-    const x1 = CX + R * Math.cos(rad(inicio));
-    const y1 = CY + R * Math.sin(rad(inicio));
-    const x2 = CX + R * Math.cos(rad(fim));
-    const y2 = CY + R * Math.sin(rad(fim));
-
-    const path = `M ${CX} ${CY} L ${x1} ${y1} A ${R} ${R} 0 ${grande} 1 ${x2} ${y2} Z`;
-
-    // rótulo posicionado no meio da fatia
-    const rr = R * 0.62;
-    const lx = CX + rr * Math.cos(rad(meio));
-    const ly = CY + rr * Math.sin(rad(meio));
-
-    return { f, path, lx, ly, inicio, fim };
-  });
+  // gradiente cônico: f1 do 0° até anguloF1, f2 do anguloF1 até 360°
+  const conic = `conic-gradient(${f1.cor} 0deg ${anguloF1}deg, ${f2.cor} ${anguloF1}deg 360deg)`;
 
   return (
     <div className="space-y-5">
@@ -1799,71 +2089,69 @@ function PizzaMunicipio({
           alt={aurora.nome}
           className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
         />
-        <div className="bg-white/[0.06] border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-1">
+        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-emerald-300 text-xs font-bold mb-1">
             {aurora.nome}
           </div>
-          <div className="text-white/90">{cena.aurora}</div>
+          {cena.aurora}
         </div>
       </div>
 
-      {/* Instrução sóbria */}
-      <div className="text-[11px] uppercase tracking-widest text-white/50 text-center">
+      {/* Instrução */}
+      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
         {cena.instrucao}
       </div>
 
-      {/* Gráfico de pizza real — SVG, proporcional */}
+      {/* Pizza SVG-like via conic-gradient */}
       <div className="flex justify-center">
-        <svg viewBox="0 0 260 260" className="w-64 h-64 sm:w-72 sm:h-72">
-          {setores.map(({ f, path, lx, ly }) => {
-            const selecionada = ativa === f.id;
-            const tocada = tocadas.has(f.id);
-            return (
-              <g key={f.id}>
-                <path
-                  d={path}
-                  fill={f.cor}
-                  stroke="#0d1f55"
-                  strokeWidth={2}
-                  style={{
-                    cursor: "pointer",
-                    opacity: ativa && !selecionada ? 0.55 : 1,
-                    transform: selecionada ? `scale(1.04)` : "scale(1)",
-                    transformOrigin: `${CX}px ${CY}px`,
-                    transition: "opacity .2s, transform .2s",
-                  }}
+        <div className="relative">
+          <motion.div
+            className="w-64 h-64 sm:w-72 sm:h-72 rounded-full shadow-2xl border-4 border-white/30"
+            style={{ background: conic }}
+            animate={ativa ? { scale: [1, 1.04, 1] } : {}}
+            transition={{ duration: 0.4 }}
+          />
+          {/* Botões invisíveis sobre cada fatia */}
+          <div className="absolute inset-0">
+            {fatias.map((f, i) => {
+              // posiciona rótulo no meio de cada fatia
+              const inicio = i === 0 ? 0 : anguloF1;
+              const meio = inicio + (f.percentual / 100) * 360 / 2;
+              const rad = ((meio - 90) * Math.PI) / 180;
+              const r = 38; // % do raio
+              const x = 50 + r * Math.cos(rad);
+              const y = 50 + r * Math.sin(rad);
+              const tocada = tocadas.has(f.id);
+              return (
+                <button
+                  key={f.id}
                   onClick={() => tocar(f.id)}
-                />
-                <text
-                  x={lx}
-                  y={ly - 2}
-                  textAnchor="middle"
-                  fontSize={16}
-                  fontWeight={700}
-                  fill="#fff"
-                  pointerEvents="none"
-                  style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 rounded-2xl px-2 py-1.5 backdrop-blur-sm transition ${
+                    ativa === f.id
+                      ? "bg-white/90 text-[#0d1f55] scale-110 shadow-xl"
+                      : "bg-black/50 text-white hover:bg-black/70 active:scale-95"
+                  }`}
+                  style={{ left: `${x}%`, top: `${y}%` }}
                 >
-                  {Math.round((f.percentual / total) * 100)}%
-                </text>
-                {tocada && (
-                  <text
-                    x={lx}
-                    y={ly + 14}
-                    textAnchor="middle"
-                    fontSize={11}
-                    fill="#a7f3d0"
-                    pointerEvents="none"
-                  >
-                    ✓
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+                  <div className="text-3xl leading-none">{f.emoji}</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide">
+                    {f.percentual}%
+                  </div>
+                  {tocada && (
+                    <div className="text-[9px] font-bold text-emerald-400">✓</div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          {/* Selo central */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0d1f55] border-4 border-white/40 grid place-items-center text-2xl sm:text-3xl shadow-inner">
+              🏘️
+            </div>
+          </div>
+        </div>
       </div>
-
 
       {/* Legenda */}
       <div className="grid grid-cols-2 gap-2">
@@ -2461,21 +2749,3 @@ function MapaBrasilInterativo({
   );
 }
 
-
-// Extrai coordenadas do ponteiro em espaço da viewport (compatível com getBoundingClientRect).
-// framer-motion pode entregar info.point em coords de página em alguns cenários;
-// o evento nativo (clientX/Y ou changedTouches) é sempre viewport.
-function getPointerXY(
-  e: MouseEvent | TouchEvent | PointerEvent,
-  info: { point: { x: number; y: number } },
-): { x: number; y: number } {
-  const anyE = e as any;
-  if (typeof anyE?.clientX === "number" && typeof anyE?.clientY === "number") {
-    return { x: anyE.clientX, y: anyE.clientY };
-  }
-  const t = anyE?.changedTouches?.[0] ?? anyE?.touches?.[0];
-  if (t && typeof t.clientX === "number") {
-    return { x: t.clientX, y: t.clientY };
-  }
-  return { x: info.point.x, y: info.point.y };
-}

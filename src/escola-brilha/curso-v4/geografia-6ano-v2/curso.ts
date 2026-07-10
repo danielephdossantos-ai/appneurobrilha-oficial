@@ -8,7 +8,7 @@ import { unidade6 } from "./unidade-6";
 import { unidade7 } from "./unidade-7";
 
 /**
- * Curso: Geografia 6º Ano — Explorador Planetário
+ * Curso: Geografia 6º Ano (v2 — formato do 5º Ano)
  * 7 unidades, 11 cenas visuais interativas cada, linguagem adolescente.
  */
 const curso: CursoGeoV1 = {
@@ -17,7 +17,7 @@ const curso: CursoGeoV1 = {
   ano: "6º Ano",
   titulo: "Explorador Planetário",
   descricao:
-    "Do movimento da Terra aos biomas brasileiros: 11 cenas visuais por aula com linguagem adolescente.",
+    "6º Ano no formato do 5º Ano: 11 cenas visuais por aula com linguagem adolescente. Do movimento da Terra aos biomas brasileiros.",
   corPrimaria: "#0ea5e9",
   corSecundaria: "#0f172a",
   tipoAula: "geo-v1",
