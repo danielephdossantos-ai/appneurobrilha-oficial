@@ -1064,6 +1064,31 @@ function LinhaEstrada({
     }
   };
 
+  const slotRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleDragEnd = (
+    id: string,
+    _e: MouseEvent | TouchEvent | PointerEvent,
+    info: { point: { x: number; y: number } },
+  ) => {
+    if (concluido || colocados.includes(id)) return;
+    const { x, y } = info.point;
+    const alvoIdx = slotRefs.current.findIndex((el) => {
+      if (!el) return false;
+      const r = el.getBoundingClientRect();
+      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    });
+    if (alvoIdx === -1) return;
+    if (alvoIdx === passo && id === proxIdEsperado) {
+      setColocados((prev) => [...prev, id]);
+      setPasso((n) => n + 1);
+      setErro(null);
+    } else {
+      setErro(id);
+      setTimeout(() => setErro(null), 700);
+    }
+  };
+
   return (
     <div className="space-y-5">
       <div className="flex items-start gap-3">
@@ -1078,113 +1103,91 @@ function LinhaEstrada({
         </div>
       </div>
 
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        🛣️ {cena.instrucao}
+      <div className="text-sm text-white/70 text-center">
+        {cena.instrucao}
       </div>
 
-      <div className="bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border-2 border-emerald-400/40 rounded-2xl p-4 text-center">
-        <div className="text-white font-black text-lg leading-snug">
-          {cena.pergunta}
-        </div>
+      <div className="text-white font-semibold text-base text-center leading-snug">
+        {cena.pergunta}
       </div>
 
-      {/* Estrada com paradas em ordem */}
-      <div className="relative bg-gradient-to-b from-emerald-900/40 to-emerald-950/60 border border-white/15 rounded-2xl p-4">
-        {/* trilho vertical */}
-        <div className="absolute left-9 top-6 bottom-6 w-1 bg-white/15 rounded-full" />
-        <div
-          className="absolute left-9 top-6 w-1 bg-gradient-to-b from-emerald-300 to-amber-300 rounded-full transition-all duration-500"
-          style={{
-            height: `calc(${(passo / total) * 100}% - ${passo === total ? 12 : 0}px)`,
-            maxHeight: "calc(100% - 12px)",
-          }}
-        />
-
-        <div className="space-y-3 relative">
-          {cena.ordemCerta.map((id, i) => {
-            const preenchido = i < passo;
-            const ativo = i === passo;
-            const p = paradaPorId(id);
-            return (
-              <div key={i} className="flex items-center gap-3 min-h-[56px]">
-                <div
-                  className={`w-10 h-10 rounded-full grid place-items-center text-lg font-black shrink-0 border-2 transition-all ${
-                    preenchido
-                      ? "bg-emerald-400 border-white text-[#0d1f55]"
-                      : ativo
-                      ? "bg-white/10 border-emerald-300 text-emerald-300 animate-pulse"
-                      : "bg-white/5 border-white/20 text-white/40"
-                  }`}
-                >
-                  {preenchido ? "✓" : i + 1}
-                </div>
-                {preenchido ? (
-                  <motion.div
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex-1 bg-white/10 border border-emerald-400/40 rounded-xl p-2 flex items-center gap-2"
-                  >
-                    <span className="text-2xl">{p.emoji}</span>
-                    <div className="text-sm">
-                      <div className="font-bold text-emerald-300">{p.rotulo}</div>
-                      <div className="text-white/80 text-xs leading-snug">
-                        {p.descricao}
-                      </div>
-                    </div>
-                  </motion.div>
+      {/* Slots numerados — destino */}
+      <div className="space-y-2">
+        {cena.ordemCerta.map((id, i) => {
+          const preenchido = i < passo;
+          const ativo = i === passo && !concluido;
+          const p = preenchido ? paradaPorId(cena.ordemCerta[i]) : null;
+          return (
+            <div
+              key={i}
+              ref={(el) => (slotRefs.current[i] = el)}
+              className={`flex items-center gap-3 rounded-lg px-3 py-3 border transition ${
+                preenchido
+                  ? "border-white/30 bg-white/5"
+                  : ativo
+                  ? "border-dashed border-white/40 bg-white/[0.03]"
+                  : "border-dashed border-white/15 bg-transparent"
+              }`}
+            >
+              <div className="text-white/50 text-sm font-mono w-5 shrink-0">
+                {i + 1}.
+              </div>
+              <div className="flex-1 text-sm">
+                {preenchido && p ? (
+                  <span className="text-white font-medium">{p.rotulo}</span>
                 ) : (
-                  <div className="flex-1 border-2 border-dashed border-white/20 rounded-xl p-2 text-white/40 text-xs italic">
-                    {ativo ? "toque a próxima parada abaixo…" : "aguardando…"}
-                  </div>
+                  <span className="text-white/30 italic">
+                    {ativo ? "arraste a resposta aqui" : "—"}
+                  </span>
                 )}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Banco de paradas */}
-      <div>
-        <div className="text-xs uppercase tracking-widest text-white/60 font-bold mb-2 text-center">
-          🚚 Paradas do caminho
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {cena.paradas.map((p) => {
-            const usado = colocados.includes(p.id);
-            const errando = erro === p.id;
-            return (
-              <motion.button
-                key={p.id}
-                onClick={() => tentar(p.id)}
-                disabled={usado || concluido}
-                whileTap={{ scale: usado ? 1 : 0.94 }}
-                animate={errando ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
-                transition={{ duration: 0.4 }}
-                className={`rounded-2xl p-3 border-2 transition-all ${
-                  usado
-                    ? "bg-emerald-500/10 border-emerald-400/40 opacity-40"
-                    : errando
-                    ? "bg-rose-500/25 border-rose-400"
-                    : "bg-white/10 border-white/25 hover:bg-white/15"
-                }`}
-              >
-                <div className="text-3xl">{p.emoji}</div>
-                <div className="text-white font-bold text-xs mt-1 leading-tight">
+      {/* Banco — arraste para cima */}
+      {!concluido && (
+        <div className="pt-2 border-t border-white/10">
+          <div className="text-xs text-white/50 mb-2 text-center">
+            Arraste para o lugar certo
+          </div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {cena.paradas.map((p) => {
+              const usado = colocados.includes(p.id);
+              const errando = erro === p.id;
+              if (usado) return null;
+              return (
+                <motion.div
+                  key={p.id}
+                  drag
+                  dragSnapToOrigin
+                  dragMomentum={false}
+                  whileDrag={{ scale: 1.05, zIndex: 50 }}
+                  onDragEnd={(e, info) => handleDragEnd(p.id, e, info)}
+                  animate={errando ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className={`cursor-grab active:cursor-grabbing select-none px-4 py-2 rounded-md border text-sm font-medium touch-none ${
+                    errando
+                      ? "bg-rose-500/15 border-rose-400/60 text-rose-100"
+                      : "bg-white/10 border-white/25 text-white hover:bg-white/15"
+                  }`}
+                >
                   {p.rotulo}
-                </div>
-              </motion.button>
-            );
-          })}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {erro && (
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-rose-500/15 border border-rose-400/40 rounded-2xl p-3 text-sm text-rose-100"
+          className="text-sm text-rose-200/80 text-center"
         >
-          ❌ {cena.feedbackErro}
+          {cena.feedbackErro}
         </motion.div>
       )}
 
