@@ -774,6 +774,7 @@ export type CenaGeoV1 =
         pecaCertaId: string;
         feedbackAcerto: string;
         feedbackErro: string;
+        fotoUrl?: string;               // opcional: imagem da rodada
       }>;
       falaFinal: string;
     }
