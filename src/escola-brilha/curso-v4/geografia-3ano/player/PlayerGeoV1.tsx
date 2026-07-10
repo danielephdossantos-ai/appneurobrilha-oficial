@@ -2869,6 +2869,11 @@ function MapaBrasilInterativo({
                   );
                 })()}
               </g>
+            );
+          })}
+        </svg>
+
+
 
 
         {/* Contador flutuante */}
