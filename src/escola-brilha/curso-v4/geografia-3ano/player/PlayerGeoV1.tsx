@@ -9,6 +9,12 @@ import { BR_ESTADOS, BR_VIEWBOX, type EstadoBr } from "./brStates";
 const TeenContext = createContext(false);
 export const useTeen = () => useContext(TeenContext);
 
+const stripDecorativeEmoji = (value = "") =>
+  value
+    .replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
 
 /**
  * PlayerGeoV1 — player 100% customizado da Geografia 3º–9º.
@@ -96,8 +102,8 @@ export function PlayerGeoV1({
             {ativo + 1} / {total}
           </div>
         </div>
-        <div className="max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest text-emerald-300/80">
-          <span>{atual.rotulo}</span>
+        <div className={`max-w-3xl mx-auto px-4 pb-2 flex items-center justify-between text-[11px] uppercase tracking-widest ${teen ? "text-cyan-300/75" : "text-emerald-300/80"}`}>
+          <span>{teen ? stripDecorativeEmoji(atual.rotulo) : atual.rotulo}</span>
           <span className="text-white/40">{aula.titulo}</span>
         </div>
       </header>
@@ -112,11 +118,11 @@ export function PlayerGeoV1({
             }}
             className="scroll-mt-28"
           >
-            <div className="text-[11px] uppercase tracking-[0.2em] text-amber-300/80 mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-300/20 border border-amber-300/40 grid place-items-center text-amber-200 text-[10px] font-black">
+            <div className={`text-[11px] uppercase tracking-[0.2em] mb-3 flex items-center gap-2 ${teen ? "text-cyan-300/70" : "text-amber-300/80"}`}>
+              <span className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-black ${teen ? "bg-slate-900 border border-slate-700 text-cyan-300" : "bg-amber-300/20 border border-amber-300/40 text-amber-200"}`}>
                 {i + 1}
               </span>
-              {c.rotulo}
+              {teen ? stripDecorativeEmoji(c.rotulo) : c.rotulo}
             </div>
             <CenaRenderer
               cena={c.cena}
