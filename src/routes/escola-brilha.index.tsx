@@ -327,9 +327,9 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
-                        if ((serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano") && disc === "geografia") {
+                        if ((serie === "6º Ano" || serie === "7º Ano" || serie === "8º Ano" || serie === "9º Ano") && disc === "geografia") {
                           const serieSlugFund2 =
-                            serie === "6º Ano" ? "6ano" : serie === "7º Ano" ? "7ano" : "8ano";
+                            serie === "6º Ano" ? "6ano" : serie === "7º Ano" ? "7ano" : serie === "8º Ano" ? "8ano" : "9ano";
                           const serieLabelFund2 = serie;
 
                           return (
