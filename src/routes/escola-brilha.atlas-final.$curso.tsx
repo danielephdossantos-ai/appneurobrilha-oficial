@@ -252,6 +252,58 @@ function AtlasFinal() {
     );
   }
 
+  if (serieFund2) {
+    return (
+      <div className="min-h-screen text-white bg-[radial-gradient(ellipse_at_top,#3b1b7a_0%,#1a0d3d_45%,#0a1642_100%)] px-4 pb-16">
+        <header className="max-w-5xl mx-auto pt-6 flex items-center justify-between">
+          <Link
+            to="/escola-brilha/curso/$slug"
+            params={{ slug: cursoSlug }}
+            className="text-sm text-white/70 hover:text-white"
+          >
+            ← Voltar
+          </Link>
+          <div className="text-xs uppercase tracking-widest text-amber-300">
+            Conclusão do Curso
+          </div>
+        </header>
+
+        <section className="max-w-2xl mx-auto text-center mt-10 space-y-6">
+          <div className="text-6xl">🎓</div>
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+            Parabéns, {nome}!
+          </h1>
+          <p className="text-white/80">
+            Você concluiu <b>{curso.titulo}</b>. Gere seu diploma oficial abaixo.
+          </p>
+          <motion.button
+            onClick={abrirDiploma}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 1.6, repeat: Infinity }}
+            className="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-[#1a0d3d] font-black text-lg px-8 py-4 rounded-full shadow-2xl"
+          >
+            🎓 Gerar Meu Diploma
+          </motion.button>
+        </section>
+
+        <AnimatePresence>
+          {diplomaAberto && (
+            <DiplomaBrilha
+              aluno={nome}
+              titulo={`Concluinte de ${curso.titulo}`}
+              curso={curso.titulo}
+              descricao={`Por concluir com sucesso o curso ${curso.titulo}, dominando os conteúdos das ${totalAulas} aulas.`}
+              mascote={PERSONAGENS.aurora}
+              numeroColecao={1}
+              totalColecao={30}
+              onFechar={() => setDiplomaAberto(false)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen text-white bg-[radial-gradient(ellipse_at_top,#3b1b7a_0%,#1a0d3d_45%,#0a1642_100%)] px-4 pb-16">
       {/* HEADER — Globo + narração */}
