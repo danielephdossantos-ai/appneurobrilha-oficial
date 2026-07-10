@@ -122,8 +122,8 @@ export const aula01: AulaGeoV1 = {
 
   cena04_leituraGuiada: {
     tipo: "narrarMapa",
-    aurora: "Cada infográfico mostra uma posição real da Terra na órbita. Toque em um pra ouvir o que acontece naquela data.",
-    instrucao: "Toque em cada infográfico pra ouvir",
+    aurora: "Cada card abaixo é uma posição real da Terra na órbita ao longo do ano. Toque em um card pra ouvir o que acontece naquela data — solstício ou equinócio.",
+    instrucao: "Toque nos 4 cards pra ouvir cada posição",
     mapaUrl: translacaoOrbita,
     pontos: [
       {
