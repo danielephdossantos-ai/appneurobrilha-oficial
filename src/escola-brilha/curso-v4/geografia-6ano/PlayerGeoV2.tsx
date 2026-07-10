@@ -516,3 +516,88 @@ export function PlayerGeoV2({
     </div>
   );
 }
+
+/* ============================================================
+   PASSO A PASSO em ABAS — cada passo com texto + visual animado
+   ============================================================ */
+function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
+  const [ativa, setAtiva] = useState(0);
+  const etapa = etapas[ativa];
+
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-950/60 overflow-hidden">
+      {/* Abas */}
+      <div className="flex border-b border-slate-800 bg-slate-900/60">
+        {etapas.map((e, i) => {
+          const isActive = i === ativa;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setAtiva(i)}
+              className={[
+                "flex-1 min-w-0 px-3 py-3 text-left transition border-b-2 flex items-start gap-2",
+                isActive
+                  ? "border-cyan-400 bg-slate-950 text-cyan-100"
+                  : "border-transparent text-slate-400 hover:text-cyan-200 hover:bg-slate-900",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "flex-shrink-0 h-6 w-6 rounded-full font-mono font-bold text-xs flex items-center justify-center",
+                  isActive ? "bg-cyan-500 text-slate-950" : "bg-slate-800 text-slate-400",
+                ].join(" ")}
+              >
+                {i + 1}
+              </span>
+              <span className="min-w-0 text-[12px] leading-tight font-medium truncate">
+                {e.titulo.replace(/^Movimento de |^Inclinação /, "").split(" — ")[0]}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Painel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={ativa}
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -12 }}
+          transition={{ duration: 0.25 }}
+          className="grid md:grid-cols-2 gap-4 p-4"
+        >
+          {/* Coluna texto */}
+          <div className="space-y-3">
+            <div className="text-cyan-300 font-serif text-[17px] leading-snug">{etapa.titulo}</div>
+            <p className="text-slate-200 text-[14px] leading-relaxed">{etapa.texto}</p>
+            {etapa.exemplo_real && (
+              <div className="rounded-xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent p-4">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400 text-slate-950">
+                    <Globe2 className="h-3.5 w-3.5" strokeWidth={2.5} />
+                  </div>
+                  <div className="text-emerald-300 font-serif text-[13px]">Exemplo Real</div>
+                </div>
+                <p className="text-emerald-50/90 text-[13px] leading-relaxed">{etapa.exemplo_real}</p>
+              </div>
+            )}
+          </div>
+          {/* Coluna visual */}
+          <div className="flex items-stretch">
+            {etapa.visual ? (
+              <div className="w-full">
+                <MiniPalco tipo={etapa.visual} />
+              </div>
+            ) : (
+              <div className="w-full rounded-lg border border-dashed border-slate-700 bg-slate-900/40 flex items-center justify-center min-h-[180px] text-slate-500 text-xs italic">
+                Sem visual associado a este passo
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
