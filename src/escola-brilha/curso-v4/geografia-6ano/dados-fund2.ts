@@ -515,7 +515,98 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "O efeito da Continentalidade versus Maritimidade: cidades no interior do continente apresentam alta amplitude térmica (grande diferença entre a temperatura máxima e mínima do dia) devido à baixa retenção de calor pelo solo seco.",
       imagem_analise: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Duas cidades na mesma latitude, mas uma no litoral e outra no interior. Qual tende a ter maior amplitude térmica (mais diferença entre dia e noite)?",
+        opcoes: [
+          {
+            texto: "A do interior, porque o continente esquenta e esfria mais rápido que a água do mar.",
+            correta: true,
+            explicacao:
+              "Correto. Água tem alta capacidade de reter calor: o mar 'segura' a temperatura da cidade litorânea (maritimidade). Já o continente esfria rápido à noite e esquenta rápido de dia (continentalidade).",
+          },
+          {
+            texto: "A do litoral, porque o vento marítimo agita muito o ar.",
+            correta: false,
+            explicacao:
+              "Ao contrário: o mar suaviza a temperatura. Cidades litorâneas têm dias e noites com temperaturas próximas — pouca amplitude térmica.",
+          },
+          {
+            texto: "As duas têm a mesma amplitude, porque estão na mesma latitude.",
+            correta: false,
+            explicacao:
+              "Latitude é UM fator climático, mas não o único. Maritimidade/continentalidade também pesa muito, e é isso que diferencia as duas cidades aqui.",
+          },
+        ],
+      },
+      {
+        pergunta: "Por que subir uma montanha muito alta faz o ar ficar frio, mesmo em regiões tropicais?",
+        opcoes: [
+          {
+            texto: "Porque a cada 1000 m de altitude, a temperatura cai cerca de 6°C (gradiente térmico vertical).",
+            correta: true,
+            explicacao:
+              "Exato. Por isso o Kilimanjaro (África, na linha do Equador!) tem geleiras no cume: os ~5.900 m fazem cair ~35°C em relação ao pé da montanha.",
+          },
+          {
+            texto: "Porque no alto da montanha o Sol está mais distante.",
+            correta: false,
+            explicacao:
+              "A diferença de altitude é insignificante frente à distância Terra-Sol (150 milhões de km). O frio vem da rarefação do ar, não da distância do Sol.",
+          },
+          {
+            texto: "Porque os ventos polares sopram sempre de cima para baixo nas montanhas.",
+            correta: false,
+            explicacao:
+              "Não. O frio da altitude é constante em todas as regiões, inclusive nos trópicos. É pura física do ar rarefeito.",
+          },
+        ],
+      },
+      {
+        pergunta: "'Elemento climático' e 'fator climático' — qual é a diferença?",
+        opcoes: [
+          {
+            texto: "Elemento é o que se mede (temperatura, umidade, pressão); fator é o que influencia essas medidas (latitude, altitude, mar).",
+            correta: true,
+            explicacao:
+              "Perfeito. Elementos são os 'ingredientes' do clima; fatores são as 'condições' que determinam quanto de cada ingrediente vai ter em cada lugar.",
+          },
+          {
+            texto: "São sinônimos: os dois termos significam a mesma coisa.",
+            correta: false,
+            explicacao:
+              "Não são sinônimos. Em prova de vestibular ou ENEM, essa distinção costuma valer ponto — decore a diferença.",
+          },
+          {
+            texto: "Elemento é o clima natural; fator é o clima modificado pelo humano.",
+            correta: false,
+            explicacao:
+              "A ação humana influencia o clima (aquecimento global, ilhas de calor urbanas), mas não é isso que define 'fator climático' no sentido técnico. Fator é geográfico: latitude, altitude, continentalidade.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Classifique cada item como ELEMENTO climático (o que se mede) ou FATOR climático (o que influencia).",
+      categorias: [
+        { id: "elemento", titulo: "Elemento Climático", cor: "cyan" },
+        { id: "fator", titulo: "Fator Climático", cor: "amber" },
+      ],
+      cartoes: [
+        { texto: "Temperatura do ar em graus Celsius.", categoriaId: "elemento" },
+        { texto: "Latitude da cidade em relação ao Equador.", categoriaId: "fator" },
+        { texto: "Umidade relativa do ar em porcentagem.", categoriaId: "elemento" },
+        { texto: "Altitude do terreno em metros.", categoriaId: "fator" },
+        { texto: "Pressão atmosférica em hectopascais.", categoriaId: "elemento" },
+        { texto: "Proximidade do mar (maritimidade).", categoriaId: "fator" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "Duas cidades localizadas exatamente na mesma latitude e no mesmo hemisfério apresentam médias térmicas anuais completamente distintas, sendo uma delas muito mais fria e úmida que a outra. Qual fator geográfico justifica isoladamente essa disparidade?",
       opcoes: [
