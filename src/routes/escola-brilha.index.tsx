@@ -364,7 +364,7 @@ function EscolaBrilhaCatalogo() {
                                     🌍 Explorador Planetário (formato 5º Ano)
                                   </div>
                                   <div className="text-[11px] font-bold opacity-90 mt-1">
-                                    1 aula · 11 cenas visuais · linguagem teen →
+                                    7 unidades · 11 cenas visuais · linguagem teen →
                                   </div>
                                 </Link>
                               )}
