@@ -140,7 +140,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-sky-500 to-blue-700",
         titulo: "🏫 — ESCOLA",
         texto:
-          "Prédio azul com bandeirinha. Significa ESCOLA. Aparece em mapas de cidade pra mostrar onde as crianças estudam.",
+          "Significa ESCOLA. Mostra no mapa onde as crianças estudam.",
         fotoUrl: simboloEscola,
       },
       {
@@ -151,7 +151,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-red-500 to-rose-700",
         titulo: "🏥 — HOSPITAL",
         texto:
-          "Prédio com CRUZ VERMELHA. Significa HOSPITAL ou posto de saúde. Símbolo universal — funciona em qualquer país.",
+          "Significa HOSPITAL ou posto de saúde. É um símbolo universal, funciona em qualquer país.",
         fotoUrl: simboloHospital,
       },
       {
@@ -162,7 +162,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-emerald-500 to-green-700",
         titulo: "🌳 — PARQUE / ÁREA VERDE",
         texto:
-          "Árvore ou mancha verde. Mostra parques, praças e áreas de mata. Verde no mapa quase sempre é natureza.",
+          "Marca parques, praças e áreas de mata: lugares de natureza pra passear e brincar.",
         fotoUrl: simboloParque,
       },
       {
@@ -173,7 +173,7 @@ export const aula04: AulaGeoV1 = {
         cor: "from-cyan-500 to-blue-700",
         titulo: "🌊 — RIO / ÁGUA",
         texto:
-          "Linha AZUL serpenteando. Sempre representa ÁGUA: rios, lagos, mar. Quanto mais grossa a linha, maior o rio.",
+          "Representa ÁGUA: rios, lagos e mar. Quanto mais grossa a marcação, maior é o rio.",
         fotoUrl: simboloRio,
       },
     ],
