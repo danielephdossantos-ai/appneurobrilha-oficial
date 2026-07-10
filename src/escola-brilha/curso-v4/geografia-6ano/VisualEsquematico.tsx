@@ -15,13 +15,62 @@ export function VisualEsquematico({ roteiro }: { roteiro: RoteiroVisual }) {
 }
 
 /** Mini animação embutida em cada etapa do passo a passo. */
-export function MiniPalco({ tipo }: { tipo: "rotacao" | "translacao" | "inclinacao" }) {
+export function MiniPalco({ tipo }: { tipo: "rotacao" | "translacao" | "inclinacao" | "piao" }) {
   return (
-    <div className="relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden h-[180px]">
+    <div className={`relative rounded-lg border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60 p-3 overflow-hidden ${tipo === "piao" ? "h-[260px]" : "h-[180px]"}`}>
       {tipo === "rotacao" && <PalcoRotacao />}
       {tipo === "translacao" && <PalcoTranslacao />}
       {tipo === "inclinacao" && <PalcoInclinacao />}
+      {tipo === "piao" && <PalcoPiao />}
     </div>
+  );
+}
+
+/** --- Palco 0: Pião (metáfora — Terra como pião inclinado que gira) --- */
+function PalcoPiao() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative h-full flex flex-col items-center justify-center gap-2"
+    >
+      {/* Chão / reflexo */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-40 h-2 rounded-full bg-cyan-400/20 blur-md" />
+
+      {/* Pião inclinado que gira em torno do próprio eixo (rotação) e faz precessão suave (translação) */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        style={{ transformOrigin: "50% 60%" }}
+        className="relative"
+      >
+        <div className="rotate-[18deg]">
+          {/* Eixo do pião */}
+          <div className="absolute left-1/2 -top-6 h-6 w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-400 to-red-500 shadow-[0_0_8px_rgba(248,113,113,0.7)]" />
+          {/* Corpo esférico = Terra */}
+          <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 border-2 border-cyan-200/60 shadow-xl shadow-cyan-500/30 overflow-hidden">
+            {/* "continentes" abstratos */}
+            <div className="absolute top-3 left-4 h-4 w-6 rounded-full bg-emerald-500/70" />
+            <div className="absolute top-10 left-10 h-5 w-8 rounded-[40%] bg-emerald-600/70" />
+            <div className="absolute bottom-3 right-3 h-3 w-5 rounded-full bg-emerald-500/60" />
+            {/* linha do equador */}
+            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-cyan-200/40" />
+          </div>
+          {/* Ponta do pião */}
+          <div className="mx-auto -mt-1 h-4 w-4 rotate-45 bg-gradient-to-br from-slate-300 to-slate-500 shadow-md" />
+        </div>
+      </motion.div>
+
+      {/* Marca de ângulo */}
+      <div className="absolute top-3 right-3 font-mono text-[10px] text-red-300 border border-red-400/40 rounded px-1.5 py-0.5 bg-slate-950/60">
+        eixo ≈ 23°
+      </div>
+
+      <div className="text-center text-slate-300 text-xs mt-2 max-w-[260px]">
+        A Terra é como um <span className="text-cyan-300 font-medium">pião inclinado</span> que gira sem parar — desse giro nascem o dia, a noite e as estações.
+      </div>
+    </motion.div>
   );
 }
 
