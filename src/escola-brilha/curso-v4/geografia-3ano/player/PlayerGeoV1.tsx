@@ -973,6 +973,14 @@ function NarrarMapa({
             <div className="text-sm font-bold text-slate-100 mb-1">
               {pontoAtivo.titulo}
             </div>
+            {pontoAtivo.fotoUrl && (
+              <img
+                src={pontoAtivo.fotoUrl}
+                alt=""
+                loading="lazy"
+                className="w-full aspect-[16/9] object-cover rounded-md border border-slate-700 my-2"
+              />
+            )}
             <p className="text-sm text-slate-300 leading-snug">
               {pontoAtivo.texto}
             </p>
