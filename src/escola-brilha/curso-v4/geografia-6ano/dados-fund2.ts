@@ -584,7 +584,99 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "A cartografia digital moderna sobrepondo mapas de relevo, adensamento urbano e áreas de preservação permanente para o planejamento de uma cidade sustentável.",
       imagem_analise: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Qual afirmação melhor define o conceito de 'espaço geográfico'?",
+        opcoes: [
+          {
+            texto: "A natureza modificada pelo trabalho humano ao longo do tempo, unindo dinâmicas naturais e sociais.",
+            correta: true,
+            explicacao:
+              "Correto. Espaço geográfico não é só natureza nem só sociedade — é o resultado da relação entre as duas. Milton Santos define assim: um sistema de objetos e ações em constante transformação.",
+          },
+          {
+            texto: "Apenas o território físico delimitado por fronteiras políticas de um país.",
+            correta: false,
+            explicacao:
+              "Isso é território, não espaço geográfico. O espaço é mais amplo: engloba relações econômicas, culturais e ambientais, mesmo que atravessem fronteiras.",
+          },
+          {
+            texto: "A paisagem natural intocada pelo ser humano.",
+            correta: false,
+            explicacao:
+              "Ao contrário: o espaço geográfico se constitui justamente pela ação humana sobre a natureza. Paisagem intocada é objeto de estudo da Ecologia, não a categoria central da Geografia.",
+          },
+        ],
+      },
+      {
+        pergunta: "Um pesquisador quer entender por que uma cidade cresceu ao lado de um rio. Que abordagem geográfica é a mais completa?",
+        opcoes: [
+          {
+            texto: "Cruzar dados físicos (hidrografia, relevo) com dados sociais (economia, história, migrações).",
+            correta: true,
+            explicacao:
+              "Perfeito. A Geografia é integradora: nem só rio, nem só gente. É a interação entre a base natural e o trabalho humano que explica o crescimento urbano.",
+          },
+          {
+            texto: "Estudar apenas a vazão do rio e a qualidade da água.",
+            correta: false,
+            explicacao:
+              "Essa é a Hidrologia (ciência auxiliar). A Geografia usa esses dados, mas conecta ao contexto social — senão perde o poder explicativo.",
+          },
+          {
+            texto: "Analisar somente os dados populacionais e econômicos.",
+            correta: false,
+            explicacao:
+              "Isso é Demografia ou Economia. Sem a base física (por que ali e não em outro lugar?), a análise fica incompleta.",
+          },
+        ],
+      },
+      {
+        pergunta: "O que caracteriza o Antropoceno como período geológico?",
+        opcoes: [
+          {
+            texto: "É a época em que a ação humana passou a ser o principal agente modificador do planeta.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. Mudanças climáticas, desmatamento, plásticos nos oceanos — o impacto humano se tornou geológico, comparável ao de forças naturais.",
+          },
+          {
+            texto: "É o período em que os continentes se moveram mais rapidamente na história.",
+            correta: false,
+            explicacao:
+              "Não. A tectônica de placas segue seu ritmo lento (~cm/ano) independente da ação humana. O Antropoceno se define pela influência humana, não geológica.",
+          },
+          {
+            texto: "É a era em que os dinossauros foram extintos por atividade vulcânica.",
+            correta: false,
+            explicacao:
+              "Isso foi há 66 milhões de anos, no fim do Cretáceo. Antropoceno é recente: começa aproximadamente com a Revolução Industrial (séc. XVIII-XIX).",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Classifique cada elemento na dimensão da Geografia que ele representa.",
+      categorias: [
+        { id: "fisica", titulo: "Dinâmica Física", cor: "cyan" },
+        { id: "humana", titulo: "Dinâmica Humana", cor: "amber" },
+        { id: "integrada", titulo: "Análise Integrada", cor: "emerald" },
+      ],
+      cartoes: [
+        { texto: "Erosão de encostas por chuvas fortes.", categoriaId: "fisica" },
+        { texto: "Migração do campo para a cidade.", categoriaId: "humana" },
+        { texto: "Enchente urbana provocada por chuva + impermeabilização do solo.", categoriaId: "integrada" },
+        { texto: "Movimento das placas tectônicas.", categoriaId: "fisica" },
+        { texto: "Rede global de comércio e fluxos financeiros.", categoriaId: "humana" },
+        { texto: "Aquecimento global acelerado pela queima de combustíveis fósseis.", categoriaId: "integrada" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "A categoria fundamental de análise da Geografia que define o objeto de estudo desta ciência como 'a natureza transformada pelo trabalho humano ao longo do tempo histórico' é denominada:",
       opcoes: [
