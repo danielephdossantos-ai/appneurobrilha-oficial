@@ -253,15 +253,19 @@ export function PlayerGeoV2({
       corpo: (
         <div className="space-y-4">
           <p className="text-slate-100 text-[15px] leading-relaxed">{unidade.desafio_critico.pergunta}</p>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {unidade.desafio_critico.opcoes.map((op, i) => {
               const selected = respostaIdx === i;
               const revealCorrect = mostrarFeedback && op.correta;
               const revealWrong = mostrarFeedback && selected && !op.correta;
               return (
-                <button
+                <motion.button
                   key={i}
                   type="button"
+                  whileHover={mostrarFeedback ? undefined : { scale: 1.015 }}
+                  whileTap={mostrarFeedback ? undefined : { scale: 0.985 }}
+                  animate={revealCorrect ? { scale: [1, 1.04, 1] } : {}}
+                  transition={{ duration: 0.5, times: [0, 0.5, 1] }}
                   onClick={() => {
                     if (mostrarFeedback) return;
                     setRespostaIdx(i);
@@ -275,22 +279,41 @@ export function PlayerGeoV2({
                       );
                     }
                   }}
+                  disabled={mostrarFeedback}
                   className={[
-                    "w-full text-left rounded-lg border px-4 py-3 text-sm leading-relaxed transition",
+                    "w-full text-left rounded-xl border-2 border-b-4 px-5 py-4 text-[15px] leading-relaxed transition-colors flex items-start gap-4",
+                    "disabled:cursor-default",
                     revealCorrect
-                      ? "border-emerald-400 bg-emerald-500/10 text-emerald-100"
+                      ? "border-emerald-400 border-b-emerald-600 bg-emerald-500/15 text-emerald-50 shadow-lg shadow-emerald-500/20"
                       : revealWrong
-                        ? "border-red-400 bg-red-500/10 text-red-100"
+                        ? "border-red-400 border-b-red-600 bg-red-500/15 text-red-50"
                         : selected
-                          ? "border-cyan-400 bg-cyan-500/5 text-slate-100"
-                          : "border-slate-700 bg-slate-900/40 text-slate-200 hover:border-cyan-500/60 hover:bg-slate-900/70",
+                          ? "border-cyan-400 border-b-cyan-600 bg-cyan-500/10 text-slate-50"
+                          : "border-slate-700 border-b-slate-800 bg-slate-900/60 text-slate-200 hover:border-cyan-500/70 hover:bg-slate-900",
                   ].join(" ")}
                 >
-                  <span className="mr-2 font-mono text-xs text-slate-500">
-                    {String.fromCharCode(65 + i)})
+                  <span
+                    className={[
+                      "flex-shrink-0 h-9 w-9 rounded-full border-2 flex items-center justify-center font-mono font-bold text-sm transition",
+                      revealCorrect
+                        ? "border-emerald-400 bg-emerald-500 text-white"
+                        : revealWrong
+                          ? "border-red-400 bg-red-500 text-white"
+                          : selected
+                            ? "border-cyan-400 bg-cyan-500/30 text-cyan-100"
+                            : "border-slate-600 bg-slate-950 text-slate-400",
+                    ].join(" ")}
+                  >
+                    {revealCorrect ? (
+                      <Check className="h-4 w-4" strokeWidth={3} />
+                    ) : revealWrong ? (
+                      <X className="h-4 w-4" strokeWidth={3} />
+                    ) : (
+                      String.fromCharCode(65 + i)
+                    )}
                   </span>
-                  {op.texto}
-                </button>
+                  <span className="flex-1 pt-1">{op.texto}</span>
+                </motion.button>
               );
             })}
           </div>
