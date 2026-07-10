@@ -644,22 +644,32 @@ function CadernosCampo({
           {cena.cadernos.map((c, i) => (
             <div
               key={c.id}
-              className="rounded-lg p-4 bg-slate-900/75 border border-slate-700 shadow-lg"
+              className="rounded-lg overflow-hidden bg-slate-900/75 border border-slate-700 shadow-lg flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="text-[11px] uppercase tracking-widest text-cyan-300/80 font-mono">
-                  {stripDecorativeEmoji(c.capa)}
-                </div>
-              </div>
-              <p className="text-sm text-slate-100 leading-relaxed font-medium">{c.conteudo}</p>
-              {c.exemplo && (
-                <p className="text-xs text-slate-400 mt-3 border-t border-slate-700 pt-3 leading-relaxed">
-                  Caso real: {stripDecorativeEmoji(c.exemplo)}
-                </p>
+              {c.fotoUrl && (
+                <img
+                  src={c.fotoUrl}
+                  alt={c.capa}
+                  loading="lazy"
+                  className="w-full aspect-[16/10] object-cover border-b border-slate-700"
+                />
               )}
+              <div className="p-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="text-[11px] uppercase tracking-widest text-cyan-300/80 font-mono">
+                    {stripDecorativeEmoji(c.capa)}
+                  </div>
+                </div>
+                <p className="text-sm text-slate-100 leading-relaxed font-medium">{c.conteudo}</p>
+                {c.exemplo && (
+                  <p className="text-xs text-slate-400 mt-3 border-t border-slate-700 pt-3 leading-relaxed">
+                    Caso real: {stripDecorativeEmoji(c.exemplo)}
+                  </p>
+                )}
+              </div>
             </div>
           ))}
         </div>
