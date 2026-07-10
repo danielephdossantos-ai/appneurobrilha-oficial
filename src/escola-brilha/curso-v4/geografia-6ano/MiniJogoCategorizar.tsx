@@ -86,10 +86,14 @@ export function MiniJogoCategorizar({
       setSelecionado((s) => {
         if (s === null) return null;
         for (let k = 1; k <= total; k++) {
-          const cand = (s + k) % total;
+          const cand: number = (s + k) % total;
           if (respostas[cand] === undefined && cand !== s) return cand;
         }
-        // Nenhum próximo aberto: verifica se ainda tem algum
+        for (let cand2 = 0; cand2 < total; cand2++) {
+          if (respostas[cand2] === undefined && cand2 !== s) return cand2;
+        }
+        return s;
+      });
         for (let cand = 0; cand < total; cand++) {
           if (respostas[cand] === undefined && cand !== s) return cand;
         }
