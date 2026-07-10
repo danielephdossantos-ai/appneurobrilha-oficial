@@ -38,12 +38,6 @@ type Momento = {
   narracao?: string;
 };
 
-function splitMeio(texto: string): [string, string] {
-  const frases = texto.split(/(?<=[\.!?])\s+/);
-  const meio = Math.ceil(frases.length / 2);
-  return [frases.slice(0, meio).join(" "), frases.slice(meio).join(" ")];
-}
-
 export function PlayerGeoV2({
   unidade,
   numeroTotal,
@@ -66,10 +60,7 @@ export function PlayerGeoV2({
     return () => stopSpeaking();
   }, [unidade.slug]);
 
-  const [teoricoA, teoricoB] = useMemo(
-    () => splitMeio(unidade.conteudo_pedagogico.texto_teorico),
-    [unidade.conteudo_pedagogico.texto_teorico],
-  );
+
 
   const momentos: Momento[] = [
     {
