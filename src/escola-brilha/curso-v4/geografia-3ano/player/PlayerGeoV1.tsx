@@ -1120,7 +1120,7 @@ function LinhaEstrada({
           return (
             <div
               key={i}
-              ref={(el) => (slotRefs.current[i] = el)}
+              ref={(el) => { slotRefs.current[i] = el; }}
               className={`flex items-center gap-3 rounded-lg px-3 py-3 border transition ${
                 preenchido
                   ? "border-white/30 bg-white/5"
