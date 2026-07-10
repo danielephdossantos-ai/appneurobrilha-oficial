@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🌋",
   bncc: ["EF06GE02", "EF06GE03"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "Terremotos e vulcões não são aleatórios. Eles têm mapa.",
     mapaUrl: tectonica,
     imagemDestaqueUrl: tectonica,

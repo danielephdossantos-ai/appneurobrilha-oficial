@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🌐",
   bncc: ["EF06GE01", "EF06GE03", "EF06GE12", "EF06GE13"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "Tudo conectado: movimentos, rochas, clima, vida.",
     mapaUrl: sintese,
     imagemDestaqueUrl: sintese,

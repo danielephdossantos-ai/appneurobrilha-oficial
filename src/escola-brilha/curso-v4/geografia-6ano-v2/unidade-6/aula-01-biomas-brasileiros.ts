@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🌳",
   bncc: ["EF06GE13"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "6 biomas, 1 país. Cada um com plantas, bichos e vidas únicas.",
     mapaUrl: biomas,
     imagemDestaqueUrl: biomas,

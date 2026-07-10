@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "🌦️",
   bncc: ["EF06GE12"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "Tempo é hoje. Clima é a média de décadas.",
     mapaUrl: clima,
     imagemDestaqueUrl: clima,

@@ -7,9 +7,11 @@ export const aula01: AulaGeoV1 = {
   iconeTrilha: "⛰️",
   bncc: ["EF06GE03", "EF06GE11"],
   duracaoMin: 25,
+  estilo: "teen",
 
   cena01_motivacao: {
     tipo: "mesaCartografo",
+    estilo: "teen",
     instrucao: "Olhe: o Brasil não é plano. Tem 4 tipos de relevo.",
     mapaUrl: relevo,
     imagemDestaqueUrl: relevo,
