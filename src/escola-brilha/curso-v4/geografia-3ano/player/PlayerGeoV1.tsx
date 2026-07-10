@@ -1463,7 +1463,7 @@ function VoceLeSozinho({
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Cena 9 — Construtor de Marcos (contra o tempo)
+// Cena 9 — Minijogo (versão sóbria, drag-and-drop, sem visual infantil)
 // ─────────────────────────────────────────────────────────────────────
 function ConstrutorMarcos({
   cena,
@@ -1474,78 +1474,46 @@ function ConstrutorMarcos({
 }) {
   const aurora = PERSONAGENS.aurora;
   const [rodadaIdx, setRodadaIdx] = useState(0);
-  const [tempo, setTempo] = useState(cena.duracaoSegundos);
   const [travada, setTravada] = useState(false);
-  const [feedback, setFeedback] = useState<"acerto" | "erro" | "tempo" | null>(null);
-  const [pecaTocada, setPecaTocada] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<"acerto" | "erro" | null>(null);
+  const [pecaSolta, setPecaSolta] = useState<string | null>(null);
   const [acertos, setAcertos] = useState(0);
-  const [combo, setCombo] = useState(0);
-  const [comboMax, setComboMax] = useState(0);
   const [fim, setFim] = useState(false);
+  const [shakeSlot, setShakeSlot] = useState(0);
+
+  const slotRef = useRef<HTMLDivElement>(null);
 
   const rodada = cena.rodadas[rodadaIdx];
   const total = cena.rodadas.length;
 
-  // relógio regressivo
-  useEffect(() => {
-    if (travada || fim) return;
-    if (tempo <= 0) {
-      setTravada(true);
-      setFeedback("tempo");
-      setCombo(0);
-      return;
-    }
-    const t = setTimeout(() => setTempo((n) => n - 1), 1000);
-    return () => clearTimeout(t);
-  }, [tempo, travada, fim]);
+  const tentarSoltar = (pecaId: string, info: { point: { x: number; y: number } }) => {
+    if (travada || !slotRef.current) return false;
+    const r = slotRef.current.getBoundingClientRect();
+    const dentro =
+      info.point.x >= r.left &&
+      info.point.x <= r.right &&
+      info.point.y >= r.top &&
+      info.point.y <= r.bottom;
+    if (!dentro) return false;
 
-  // fala a pista ao entrar na rodada
-  useEffect(() => {
-    if (fim) return;
-    try {
-      window.speechSynthesis?.cancel();
-      const u = new SpeechSynthesisUtterance(rodada.contexto);
-      u.lang = "pt-BR";
-      u.rate = 0.95;
-      window.speechSynthesis?.speak(u);
-    } catch {
-      /* ignore */
-    }
-    return () => {
-      try {
-        window.speechSynthesis?.cancel();
-      } catch {
-        /* ignore */
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rodadaIdx, fim]);
-
-  const escolher = (pecaId: string) => {
-    if (travada) return;
-    setPecaTocada(pecaId);
+    setPecaSolta(pecaId);
     setTravada(true);
     if (pecaId === rodada.pecaCertaId) {
       setFeedback("acerto");
       setAcertos((n) => n + 1);
-      setCombo((c) => {
-        const novo = c + 1;
-        setComboMax((m) => Math.max(m, novo));
-        return novo;
-      });
     } else {
       setFeedback("erro");
-      setCombo(0);
+      setShakeSlot((s) => s + 1);
     }
+    return true;
   };
 
   const proximaRodada = () => {
     if (rodadaIdx + 1 < total) {
       setRodadaIdx(rodadaIdx + 1);
-      setTempo(cena.duracaoSegundos);
       setTravada(false);
       setFeedback(null);
-      setPecaTocada(null);
+      setPecaSolta(null);
     } else {
       setFim(true);
     }
@@ -1554,28 +1522,20 @@ function ConstrutorMarcos({
   if (fim) {
     return (
       <div className="space-y-5">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-gradient-to-br from-emerald-500/25 to-amber-400/25 border-2 border-emerald-400/50 rounded-3xl p-6 text-center space-y-3"
-        >
-          <div className="text-6xl">🏗️</div>
-          <div className="text-xs uppercase tracking-widest text-amber-300">
-            Construtor de Marcos — placar
+        <div className="border border-white/20 rounded-2xl p-6 text-center space-y-3 bg-white/[0.03]">
+          <div className="text-[11px] uppercase tracking-widest text-white/60">
+            Minijogo — resultado
           </div>
-          <div className="text-4xl font-black text-white">
+          <div className="text-4xl font-light text-white tabular-nums">
             {acertos} / {total}
           </div>
-          <div className="text-sm text-amber-200 font-bold">
-            🔥 Combo máximo: {comboMax}
-          </div>
-          <div className="text-sm text-white/80 max-w-md mx-auto">
+          <div className="text-sm text-white/70 max-w-md mx-auto leading-relaxed">
             {cena.falaFinal}
           </div>
-        </motion.div>
+        </div>
         <button
           onClick={onProxima}
-          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+          className="w-full py-3.5 rounded-xl font-semibold text-sm bg-white text-[#0d1f55] hover:bg-white/90 transition"
         >
           Continuar
         </button>
@@ -1583,8 +1543,7 @@ function ConstrutorMarcos({
     );
   }
 
-  const tempoPct = Math.max(0, Math.min(100, (tempo / cena.duracaoSegundos) * 100));
-  const tempoUrgente = tempo <= 5;
+  const pecaCerta = cena.pecas.find((p) => p.id === rodada.pecaCertaId);
 
   return (
     <div className="space-y-4">
@@ -1593,127 +1552,81 @@ function ConstrutorMarcos({
         <img
           src={aurora.img}
           alt={aurora.nome}
-          className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
+          className="w-14 h-14 rounded-full bg-white/10 p-1 shrink-0"
         />
-        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-emerald-300 text-xs font-bold mb-1">
+        <div className="bg-white/[0.06] border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-1">
             {aurora.nome}
           </div>
-          {cena.aurora}
+          <div className="text-white/90">{cena.aurora}</div>
         </div>
       </div>
 
-      {/* Instrução */}
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
-        {cena.instrucao}
-      </div>
-
-      {/* HUD: rodada + combo + relógio */}
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/70">
+      {/* HUD sóbrio */}
+      <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-white/50">
         <span>Rodada {rodadaIdx + 1} / {total}</span>
-        <span className="text-amber-300 font-bold">🔥 combo {combo}</span>
-        <span>✓ {acertos}</span>
-      </div>
-      <div className="h-3 rounded-full bg-white/10 overflow-hidden border border-white/15">
-        <motion.div
-          className={`h-full ${
-            tempoUrgente
-              ? "bg-gradient-to-r from-rose-500 to-orange-400"
-              : "bg-gradient-to-r from-emerald-400 to-amber-300"
-          }`}
-          animate={{ width: `${tempoPct}%` }}
-          transition={{ duration: 0.4, ease: "linear" }}
-        />
-      </div>
-      <div className={`text-center font-black text-lg ${tempoUrgente ? "text-rose-300 animate-pulse" : "text-white"}`}>
-        ⏱️ {tempo}s
+        <span className="tabular-nums">✓ {acertos}</span>
       </div>
 
-      {/* Cenário: 2 municípios + slot vazio no meio (fronteira apagada) */}
-      <div className="relative h-52 sm:h-60 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
-        <div
-          className={`absolute inset-y-0 left-0 w-1/2 bg-gradient-to-br ${rodada.municipioA.cor} flex flex-col items-center justify-center gap-1`}
-        >
-          <div className="text-4xl sm:text-5xl">{rodada.municipioA.emoji}</div>
-          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
-            {rodada.municipioA.nome}
-          </div>
-        </div>
-        <div
-          className={`absolute inset-y-0 right-0 w-1/2 bg-gradient-to-bl ${rodada.municipioB.cor} flex flex-col items-center justify-center gap-1`}
-        >
-          <div className="text-4xl sm:text-5xl">{rodada.municipioB.emoji}</div>
-          <div className="text-white font-black text-xs sm:text-sm drop-shadow px-2 text-center">
-            {rodada.municipioB.nome}
-          </div>
-        </div>
-
-        {/* Slot central — a fronteira apagada */}
-        <motion.div
-          className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 flex items-center justify-center"
-          animate={
-            feedback === "erro" || feedback === "tempo"
-              ? { x: [-6, 6, -4, 4, 0] }
-              : feedback === "acerto"
-              ? { scale: [1, 1.15, 1] }
-              : {}
-          }
-          transition={{ duration: 0.5 }}
-        >
-          <div
-            className={`w-full h-3/4 rounded-2xl border-4 border-dashed grid place-items-center backdrop-blur-sm ${
-              feedback === "acerto"
-                ? "border-emerald-300 bg-emerald-400/30"
-                : feedback === "erro" || feedback === "tempo"
-                ? "border-rose-300 bg-rose-500/25"
-                : "border-amber-200 bg-black/40 animate-pulse"
-            }`}
-          >
-            {travada && pecaTocada ? (
-              <div className="text-5xl sm:text-6xl drop-shadow-lg">
-                {cena.pecas.find((p) => p.id === pecaTocada)?.emoji ??
-                  (feedback === "tempo"
-                    ? "⏰"
-                    : cena.pecas.find((p) => p.id === rodada.pecaCertaId)?.emoji)}
-              </div>
-            ) : (
-              <div className="text-3xl sm:text-4xl opacity-60">❔</div>
-            )}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Pista escrita */}
-      <div className="bg-white/10 border border-white/15 rounded-2xl p-3 text-sm text-white/95 leading-snug">
-        <span className="font-bold text-amber-300">Pista: </span>
+      {/* Contexto (texto puro) */}
+      <div className="border border-white/15 rounded-xl p-4 text-sm text-white/90 leading-relaxed">
         {rodada.contexto}
       </div>
 
-      {/* Peças (banco embaixo) */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+      {/* Slot central — arraste a resposta aqui */}
+      <motion.div
+        ref={slotRef}
+        animate={feedback === "erro" ? { x: [-6, 6, -4, 4, 0] } : {}}
+        key={shakeSlot}
+        transition={{ duration: 0.4 }}
+        className={`rounded-xl border-2 border-dashed px-4 py-6 text-center transition-colors ${
+          feedback === "acerto"
+            ? "border-emerald-400/60 bg-emerald-400/5"
+            : feedback === "erro"
+            ? "border-rose-400/60 bg-rose-400/5"
+            : "border-white/25 bg-white/[0.02]"
+        }`}
+      >
+        {travada && pecaSolta ? (
+          <div className="text-white text-sm font-medium">
+            {cena.pecas.find((p) => p.id === pecaSolta)?.rotulo}
+          </div>
+        ) : (
+          <div className="text-white/40 text-xs uppercase tracking-widest">
+            Arraste a resposta até aqui
+          </div>
+        )}
+      </motion.div>
+
+      {/* Banco de peças arrastáveis (texto puro) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {cena.pecas.map((p) => {
-          const certa = p.id === rodada.pecaCertaId;
-          const foiTocada = pecaTocada === p.id;
+          const usada = travada && pecaSolta === p.id;
+          const certaDestacada =
+            travada && feedback === "erro" && p.id === rodada.pecaCertaId;
           return (
-            <button
+            <motion.button
               key={p.id}
-              onClick={() => escolher(p.id)}
+              drag={!travada}
+              dragSnapToOrigin
+              dragMomentum={false}
+              whileDrag={{ scale: 1.05, zIndex: 50 }}
+              onDragEnd={(_, info) => tentarSoltar(p.id, info)}
               disabled={travada}
-              className={`aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-bold text-[11px] sm:text-xs transition ${
-                travada
-                  ? foiTocada && certa
-                    ? "bg-emerald-400/30 border-emerald-300 text-emerald-100"
-                    : foiTocada && !certa
-                    ? "bg-rose-500/30 border-rose-300 text-rose-100"
-                    : certa && (feedback === "erro" || feedback === "tempo")
-                    ? "bg-emerald-400/20 border-emerald-300/60 text-emerald-100"
-                    : "bg-white/5 border-white/10 text-white/40"
-                  : "bg-white/10 border-white/25 text-white hover:bg-white/20 active:scale-95"
+              className={`text-left px-4 py-3 rounded-xl border text-sm transition-colors touch-none ${
+                usada
+                  ? feedback === "acerto"
+                    ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-100"
+                    : "border-rose-400/50 bg-rose-400/10 text-rose-100"
+                  : certaDestacada
+                  ? "border-emerald-400/40 bg-emerald-400/5 text-emerald-100/90"
+                  : travada
+                  ? "border-white/10 bg-white/[0.02] text-white/40"
+                  : "border-white/20 bg-white/[0.04] text-white/90 hover:bg-white/[0.08] cursor-grab active:cursor-grabbing"
               }`}
             >
-              <div className="text-3xl sm:text-4xl">{p.emoji}</div>
-              <div>{p.rotulo}</div>
-            </button>
+              {p.rotulo}
+            </motion.button>
           );
         })}
       </div>
@@ -1721,21 +1634,17 @@ function ConstrutorMarcos({
       {/* Feedback */}
       {feedback && (
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`rounded-2xl p-3 border text-sm ${
+          className={`rounded-xl p-3.5 border text-sm leading-relaxed ${
             feedback === "acerto"
-              ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
-              : "bg-rose-500/15 border-rose-400/40 text-rose-100"
+              ? "border-emerald-400/40 bg-emerald-400/[0.06] text-emerald-100"
+              : "border-rose-400/40 bg-rose-400/[0.06] text-rose-100"
           }`}
         >
-          <span className="font-bold">
-            {feedback === "acerto"
-              ? "🎯 "
-              : feedback === "tempo"
-              ? "⏰ Tempo esgotado! "
-              : "❌ "}
-          </span>
+          <div className="text-[11px] uppercase tracking-widest opacity-70 mb-1">
+            {feedback === "acerto" ? "Correto" : `Resposta: ${pecaCerta?.rotulo}`}
+          </div>
           {feedback === "acerto" ? rodada.feedbackAcerto : rodada.feedbackErro}
         </motion.div>
       )}
@@ -1743,14 +1652,15 @@ function ConstrutorMarcos({
       {travada && (
         <button
           onClick={proximaRodada}
-          className="w-full py-4 rounded-2xl font-black text-lg bg-gradient-to-r from-emerald-400 to-amber-300 text-[#0d1f55] shadow-xl hover:scale-[1.01] transition"
+          className="w-full py-3.5 rounded-xl font-semibold text-sm bg-white text-[#0d1f55] hover:bg-white/90 transition"
         >
-          {rodadaIdx + 1 === total ? "Ver placar →" : "Próxima rodada →"}
+          {rodadaIdx + 1 === total ? "Ver resultado →" : "Próxima rodada →"}
         </button>
       )}
     </div>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────────────
 // Cena 10 — Pizza do Município (revisão: fatias clicáveis com TTS)
