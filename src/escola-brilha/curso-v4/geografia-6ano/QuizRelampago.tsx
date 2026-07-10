@@ -25,7 +25,7 @@ export function QuizRelampago({
   const escolha = escolhas[idx];
   const respondida = escolha !== null;
 
-  const acertos = escolhas.reduce((acc, esc, i) => {
+  const acertos: number = escolhas.reduce<number>((acc, esc, i) => {
     if (esc === null) return acc;
     return perguntas[i].opcoes[esc].correta ? acc + 1 : acc;
   }, 0);
