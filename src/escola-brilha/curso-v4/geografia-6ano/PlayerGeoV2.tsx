@@ -99,6 +99,7 @@ export function PlayerGeoV2({
       titulo: "Entenda por etapas",
       corpo: unidade.conteudo_pedagogico.etapas_teoricas?.length ? (
         <div className="space-y-3">
+          <MiniPalco tipo="piao" />
           <p className="text-slate-300 text-[14px] leading-relaxed">
             {unidade.conteudo_pedagogico.texto_teorico}
           </p>
