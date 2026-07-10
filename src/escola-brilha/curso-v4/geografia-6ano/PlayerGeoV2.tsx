@@ -23,7 +23,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import type { UnidadeFund2 } from "./dados-fund2";
-import { speakChunked, cancelSpeech } from "@/lib/native-tts";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Momento = {
   n: number;
@@ -59,7 +59,7 @@ export function PlayerGeoV2({
 
   useEffect(() => {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-    return () => cancelSpeech();
+    return () => stopSpeaking();
   }, [unidade.slug]);
 
   const [teoricoA, teoricoB] = useMemo(
@@ -233,7 +233,7 @@ export function PlayerGeoV2({
                     if (mostrarFeedback) return;
                     setRespostaIdx(i);
                     setMostrarFeedback(true);
-                    cancelSpeech();
+                    stopSpeaking();
                     if (audioLigado) {
                       speakChunked(
                         op.correta
@@ -303,7 +303,7 @@ export function PlayerGeoV2({
             type="button"
             disabled={!mostrarFeedback}
             onClick={() => {
-              cancelSpeech();
+              stopSpeaking();
               onConcluir();
             }}
             className={[
@@ -327,7 +327,7 @@ export function PlayerGeoV2({
 
   const narrar = (n: number, texto?: string) => {
     if (!texto || !audioLigado) return;
-    cancelSpeech();
+    stopSpeaking();
     setNarrando(n);
     speakChunked(texto, { onEnd: () => setNarrando(null) });
   };
@@ -351,7 +351,7 @@ export function PlayerGeoV2({
             onClick={() => {
               const novo = !audioLigado;
               setAudioLigado(novo);
-              if (!novo) cancelSpeech();
+              if (!novo) stopSpeaking();
             }}
             className="rounded border border-slate-700 p-1.5 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/60"
             aria-label={audioLigado ? "Desativar áudio" : "Ativar áudio"}
