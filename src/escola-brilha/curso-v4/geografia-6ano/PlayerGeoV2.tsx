@@ -28,7 +28,6 @@ import type { UnidadeFund2 } from "./dados-fund2";
 import { VisualEsquematico } from "./VisualEsquematico";
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
-import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Momento = {
   n: number;
