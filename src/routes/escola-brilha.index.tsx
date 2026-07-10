@@ -333,23 +333,42 @@ function EscolaBrilhaCatalogo() {
                           const serieLabelFund2 = serie;
 
                           return (
-                            <Link
-                              key={disc}
-                              to="/escola-brilha/trilha-fund2/$serie/$disc"
-                              params={{ serie: serieSlugFund2, disc: "geografia" }}
-                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
-                              style={{ background: "linear-gradient(135deg, #0f172a, #0891b2)" }}
-                            >
-                              <div className="text-[10px] uppercase tracking-widest opacity-80">
-                                Geografia · {serieLabelFund2} · Fund. 2
-                              </div>
-                              <div className="text-lg leading-tight mt-0.5">
-                                🛰️ Trilha Acadêmica — Dashboard Científico
-                              </div>
-                              <div className="text-[11px] font-bold opacity-90 mt-1">
-                                7 unidades · Certificado Mestre em Análises →
-                              </div>
-                            </Link>
+                            <div key={disc} className="space-y-2">
+                              <Link
+                                to="/escola-brilha/trilha-fund2/$serie/$disc"
+                                params={{ serie: serieSlugFund2, disc: "geografia" }}
+                                className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                style={{ background: "linear-gradient(135deg, #0f172a, #0891b2)" }}
+                              >
+                                <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                  Geografia · {serieLabelFund2} · Fund. 2
+                                </div>
+                                <div className="text-lg leading-tight mt-0.5">
+                                  🛰️ Trilha Acadêmica — Dashboard Científico
+                                </div>
+                                <div className="text-[11px] font-bold opacity-90 mt-1">
+                                  7 unidades · Certificado Mestre em Análises →
+                                </div>
+                              </Link>
+                              {serie === "6º Ano" && (
+                                <Link
+                                  to="/escola-brilha/curso/$slug"
+                                  params={{ slug: "geografia-6ano-v2" }}
+                                  className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #0ea5e9, #6366f1)" }}
+                                >
+                                  <div className="text-[10px] uppercase tracking-widest opacity-90">
+                                    🧪 PILOTO · Geografia · 6º Ano
+                                  </div>
+                                  <div className="text-lg leading-tight mt-0.5">
+                                    🌍 Explorador Planetário (formato 5º Ano)
+                                  </div>
+                                  <div className="text-[11px] font-bold opacity-90 mt-1">
+                                    1 aula · 11 cenas visuais · linguagem teen →
+                                  </div>
+                                </Link>
+                              )}
+                            </div>
                           );
                         }
 
