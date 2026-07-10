@@ -1,21 +1,27 @@
 import type { CursoGeoV1 } from "../types";
 import { unidade1 } from "./unidade-1";
+import { unidade2 } from "./unidade-2";
+import { unidade3 } from "./unidade-3";
+import { unidade4 } from "./unidade-4";
+import { unidade5 } from "./unidade-5";
+import { unidade6 } from "./unidade-6";
+import { unidade7 } from "./unidade-7";
 
 /**
- * Curso PILOTO: Geografia 6º Ano — formato 5º Ano (PlayerGeoV1)
- * 11 cenas visuais + linguagem adolescente. Apenas Unidade 1 pra validação.
+ * Curso: Geografia 6º Ano (v2 — formato do 5º Ano)
+ * 7 unidades, 11 cenas visuais interativas cada, linguagem adolescente.
  */
 const curso: CursoGeoV1 = {
   slug: "geografia-6ano-v2",
   disciplina: "Geografia",
-  ano: "6º Ano (Piloto)",
+  ano: "6º Ano",
   titulo: "Explorador Planetário",
   descricao:
-    "Piloto do 6º Ano no formato do 5º Ano: 11 cenas visuais interativas com linguagem adolescente. A Terra no espaço, Rotação, Translação e Inclinação.",
+    "6º Ano no formato do 5º Ano: 11 cenas visuais por aula com linguagem adolescente. Do movimento da Terra aos biomas brasileiros.",
   corPrimaria: "#0ea5e9",
   corSecundaria: "#0f172a",
   tipoAula: "geo-v1",
-  unidades: [unidade1],
+  unidades: [unidade1, unidade2, unidade3, unidade4, unidade5, unidade6, unidade7],
 };
 
 export default curso;
