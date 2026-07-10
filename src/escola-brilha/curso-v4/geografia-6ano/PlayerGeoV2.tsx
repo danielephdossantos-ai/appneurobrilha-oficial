@@ -138,8 +138,10 @@ export function PlayerGeoV2({
         ? [
             unidade.conteudo_pedagogico.texto_teorico,
             ...unidade.conteudo_pedagogico.etapas_teoricas.map(
-              (e, i) => `Passo ${i + 1}: ${e.titulo}. ${e.texto}`,
+              (e, i) =>
+                `Passo ${i + 1}: ${e.titulo}. ${e.texto}${e.exemplo_real ? ` Exemplo real: ${e.exemplo_real}` : ""}`,
             ),
+
           ].join(" ")
         : unidade.conteudo_pedagogico.texto_teorico,
     },
