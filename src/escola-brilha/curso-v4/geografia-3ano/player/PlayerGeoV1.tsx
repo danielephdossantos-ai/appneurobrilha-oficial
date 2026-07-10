@@ -1696,9 +1696,6 @@ function PizzaMunicipio({
   const [ativa, setAtiva] = useState<string | null>(null);
 
   const fatias = cena.fatias;
-  const [f1, f2] = fatias;
-  // ângulo da fatia 1 (em graus). Fatia 2 é o resto.
-  const anguloF1 = (f1.percentual / 100) * 360;
 
   const falar = (texto: string) => {
     try {
@@ -1733,8 +1730,39 @@ function PizzaMunicipio({
   const todasTocadas = tocadas.size === fatias.length;
   const fatiaAtiva = fatias.find((x) => x.id === ativa);
 
-  // gradiente cônico: f1 do 0° até anguloF1, f2 do anguloF1 até 360°
-  const conic = `conic-gradient(${f1.cor} 0deg ${anguloF1}deg, ${f2.cor} ${anguloF1}deg 360deg)`;
+  // Geometria do gráfico (SVG) — pizza proporcional para N fatias
+  const CX = 130;
+  const CY = 130;
+  const R = 108;
+  const total = fatias.reduce((s, f) => s + f.percentual, 0) || 100;
+
+  let acc = 0;
+  const setores = fatias.map((f) => {
+    const inicio = (acc / total) * 360;
+    acc += f.percentual;
+    const fim = (acc / total) * 360;
+    const meio = (inicio + fim) / 2;
+    const grande = fim - inicio > 180 ? 1 : 0;
+
+    // ângulos em radianos, começando do topo (-90°)
+    const rad = (a: number) => ((a - 90) * Math.PI) / 180;
+    const x1 = CX + R * Math.cos(rad(inicio));
+    const y1 = CY + R * Math.sin(rad(inicio));
+    const x2 = CX + R * Math.cos(rad(fim));
+    const y2 = CY + R * Math.sin(rad(fim));
+
+    const path =
+      fatias.length === 1
+        ? `M ${CX - R} ${CY} a ${R} ${R} 0 1 0 ${R * 2} 0 a ${R} ${R} 0 1 0 ${-R * 2} 0`
+        : `M ${CX} ${CY} L ${x1} ${y1} A ${R} ${R} 0 ${grande} 1 ${x2} ${y2} Z`;
+
+    // rótulo posicionado no meio da fatia
+    const rr = R * 0.62;
+    const lx = CX + rr * Math.cos(rad(meio));
+    const ly = CY + rr * Math.sin(rad(meio));
+
+    return { f, path, lx, ly, inicio, fim };
+  });
 
   return (
     <div className="space-y-5">
@@ -1745,69 +1773,71 @@ function PizzaMunicipio({
           alt={aurora.nome}
           className="w-16 h-16 rounded-full bg-white/10 p-1 shrink-0"
         />
-        <div className="bg-white/10 border border-white/15 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
-          <div className="text-emerald-300 text-xs font-bold mb-1">
+        <div className="bg-white/[0.06] border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-snug">
+          <div className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-1">
             {aurora.nome}
           </div>
-          {cena.aurora}
+          <div className="text-white/90">{cena.aurora}</div>
         </div>
       </div>
 
-      {/* Instrução */}
-      <div className="bg-amber-100/95 text-[#3a2410] rounded-2xl p-3 text-sm font-semibold text-center shadow-lg">
+      {/* Instrução sóbria */}
+      <div className="text-[11px] uppercase tracking-widest text-white/50 text-center">
         {cena.instrucao}
       </div>
 
-      {/* Pizza SVG-like via conic-gradient */}
+      {/* Gráfico de pizza real — SVG, proporcional */}
       <div className="flex justify-center">
-        <div className="relative">
-          <motion.div
-            className="w-64 h-64 sm:w-72 sm:h-72 rounded-full shadow-2xl border-4 border-white/30"
-            style={{ background: conic }}
-            animate={ativa ? { scale: [1, 1.04, 1] } : {}}
-            transition={{ duration: 0.4 }}
-          />
-          {/* Botões invisíveis sobre cada fatia */}
-          <div className="absolute inset-0">
-            {fatias.map((f, i) => {
-              // posiciona rótulo no meio de cada fatia
-              const inicio = i === 0 ? 0 : anguloF1;
-              const meio = inicio + (f.percentual / 100) * 360 / 2;
-              const rad = ((meio - 90) * Math.PI) / 180;
-              const r = 38; // % do raio
-              const x = 50 + r * Math.cos(rad);
-              const y = 50 + r * Math.sin(rad);
-              const tocada = tocadas.has(f.id);
-              return (
-                <button
-                  key={f.id}
+        <svg viewBox="0 0 260 260" className="w-64 h-64 sm:w-72 sm:h-72">
+          {setores.map(({ f, path, lx, ly }) => {
+            const selecionada = ativa === f.id;
+            const tocada = tocadas.has(f.id);
+            return (
+              <g key={f.id}>
+                <path
+                  d={path}
+                  fill={f.cor}
+                  stroke="#0d1f55"
+                  strokeWidth={2}
+                  style={{
+                    cursor: "pointer",
+                    opacity: ativa && !selecionada ? 0.55 : 1,
+                    transform: selecionada ? `scale(1.04)` : "scale(1)",
+                    transformOrigin: `${CX}px ${CY}px`,
+                    transition: "opacity .2s, transform .2s",
+                  }}
                   onClick={() => tocar(f.id)}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5 rounded-2xl px-2 py-1.5 backdrop-blur-sm transition ${
-                    ativa === f.id
-                      ? "bg-white/90 text-[#0d1f55] scale-110 shadow-xl"
-                      : "bg-black/50 text-white hover:bg-black/70 active:scale-95"
-                  }`}
-                  style={{ left: `${x}%`, top: `${y}%` }}
+                />
+                <text
+                  x={lx}
+                  y={ly - 2}
+                  textAnchor="middle"
+                  fontSize={16}
+                  fontWeight={700}
+                  fill="#fff"
+                  pointerEvents="none"
+                  style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}
                 >
-                  <div className="text-3xl leading-none">{f.emoji}</div>
-                  <div className="text-[10px] font-black uppercase tracking-wide">
-                    {f.percentual}%
-                  </div>
-                  {tocada && (
-                    <div className="text-[9px] font-bold text-emerald-400">✓</div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          {/* Selo central */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0d1f55] border-4 border-white/40 grid place-items-center text-2xl sm:text-3xl shadow-inner">
-              🏘️
-            </div>
-          </div>
-        </div>
+                  {Math.round((f.percentual / total) * 100)}%
+                </text>
+                {tocada && (
+                  <text
+                    x={lx}
+                    y={ly + 14}
+                    textAnchor="middle"
+                    fontSize={11}
+                    fill="#a7f3d0"
+                    pointerEvents="none"
+                  >
+                    ✓
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
       </div>
+
 
       {/* Legenda */}
       <div className="grid grid-cols-2 gap-2">
