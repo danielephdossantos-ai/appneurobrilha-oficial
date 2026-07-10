@@ -1,5 +1,6 @@
 import type { UnidadeGeoV1 } from "../../types";
 import { aula01 } from "./aula-01-biomas-mundiais";
+import { aula02 } from "./aula-02-biomas-brasileiros";
 
 export const unidade6: UnidadeGeoV1 = {
   slug: "unidade-6",
@@ -8,5 +9,5 @@ export const unidade6: UnidadeGeoV1 = {
   subtitulo: "Da tundra à savana",
   descricao: "Brilha percorre florestas, desertos e tundras para entender como o clima molda a vida.",
   corTema: "#16a34a",
-  aulas: [aula01],
+  aulas: [aula01, aula02],
 };
