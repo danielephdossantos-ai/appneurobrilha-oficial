@@ -295,24 +295,28 @@ export const aula01: AulaGeoV1 = {
         texto:
           "A ROTAÇÃO é o giro da Terra em torno do próprio eixo. Dura cerca de 24 horas e causa o ciclo do DIA e da NOITE. No Equador, a superfície gira a 1.670 km/h.",
         chaves: ["rotação", "24 horas", "dia", "noite", "1.670"],
+        fotoUrl: rotacaoDiaNoite,
       },
       {
         id: "p2",
         texto:
           "A TRANSLAÇÃO é a volta da Terra ao redor do SOL. Dura 365 dias e 6 horas — origem do ano BISSEXTO. A Terra percorre 940 milhões de km a 107.000 km/h.",
         chaves: ["translação", "365", "sol", "bissexto", "107.000"],
+        fotoUrl: translacaoOrbita,
       },
       {
         id: "p3",
         texto:
           "O EIXO da Terra está INCLINADO em 23,5°. Essa inclinação é FIXA e é a verdadeira causa das ESTAÇÕES do ano. A distância ao Sol muda muito pouco (só 3%).",
         chaves: ["eixo", "23,5", "inclinado", "estações", "3%"],
+        fotoUrl: eixoInclinado,
       },
       {
         id: "p4",
         texto:
           "As estações são INVERTIDAS entre os hemisférios: quando é verão no SUL, é inverno no NORTE. Nos EQUINÓCIOS (março e setembro), dia e noite duram IGUAL no planeta inteiro.",
         chaves: ["invertidas", "verão", "inverno", "hemisférios", "equinócios"],
+        fotoUrl: quatroEstacoes,
       },
     ],
     falaFinal: "Leu tudo? Boa. Agora um minijogo cronometrado.",
