@@ -14,15 +14,20 @@ import {
   Compass,
   FileText,
   Focus,
-  LineChart,
+  Lightbulb,
+  ListOrdered,
   Map,
   ScrollText,
+  Sparkles,
   Target,
   Trophy,
   Volume2,
   VolumeX,
 } from "lucide-react";
 import type { UnidadeFund2 } from "./dados-fund2";
+import { VisualEsquematico } from "./VisualEsquematico";
+import { speakChunked, stopSpeaking } from "@/lib/native-tts";
+
 import { speakChunked, stopSpeaking } from "@/lib/native-tts";
 
 type Momento = {
