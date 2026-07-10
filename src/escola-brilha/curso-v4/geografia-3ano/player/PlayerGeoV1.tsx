@@ -1068,18 +1068,27 @@ function LinhaEstrada({
 
   const handleDragEnd = (
     id: string,
-    _e: MouseEvent | TouchEvent | PointerEvent,
+    e: MouseEvent | TouchEvent | PointerEvent,
     info: { point: { x: number; y: number } },
   ) => {
     if (concluido || colocados.includes(id)) return;
-    const { x, y } = info.point;
-    const alvoIdx = slotRefs.current.findIndex((el) => {
-      if (!el) return false;
+    const { x, y } = getPointerXY(e, info);
+    let melhorIdx = -1;
+    let melhorDist = Infinity;
+    slotRefs.current.forEach((el, idx) => {
+      if (!el) return;
       const r = el.getBoundingClientRect();
-      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+      const dentro =
+        x >= r.left - 24 && x <= r.right + 24 &&
+        y >= r.top - 24 && y <= r.bottom + 24;
+      if (!dentro) return;
+      const cx = (r.left + r.right) / 2;
+      const cy = (r.top + r.bottom) / 2;
+      const d = Math.hypot(x - cx, y - cy);
+      if (d < melhorDist) { melhorDist = d; melhorIdx = idx; }
     });
-    if (alvoIdx === -1) return;
-    if (alvoIdx === passo && id === proxIdEsperado) {
+    if (melhorIdx === -1) return;
+    if (melhorIdx === passo && id === proxIdEsperado) {
       setColocados((prev) => [...prev, id]);
       setPasso((n) => n + 1);
       setErro(null);
