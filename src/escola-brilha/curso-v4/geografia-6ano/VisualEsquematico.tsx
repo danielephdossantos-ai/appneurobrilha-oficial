@@ -94,29 +94,15 @@ function PalcoPiao() {
       {/* Chão / reflexo */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-40 h-2 rounded-full bg-cyan-400/20 blur-md" />
 
-      {/* Pião inclinado que gira em torno do próprio eixo (rotação) e faz precessão suave (translação) */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: "50% 60%" }}
-        className="relative"
-      >
-        <div className="rotate-[18deg]">
-          {/* Eixo do pião */}
-          <div className="absolute left-1/2 -top-6 h-6 w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-400 to-red-500 shadow-[0_0_8px_rgba(248,113,113,0.7)]" />
-          {/* Corpo esférico = Terra */}
-          <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 border-2 border-cyan-200/60 shadow-xl shadow-cyan-500/30 overflow-hidden">
-            {/* "continentes" abstratos */}
-            <div className="absolute top-3 left-4 h-4 w-6 rounded-full bg-emerald-500/70" />
-            <div className="absolute top-10 left-10 h-5 w-8 rounded-[40%] bg-emerald-600/70" />
-            <div className="absolute bottom-3 right-3 h-3 w-5 rounded-full bg-emerald-500/60" />
-            {/* linha do equador */}
-            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-cyan-200/40" />
-          </div>
-          {/* Ponta do pião */}
-          <div className="mx-auto -mt-1 h-4 w-4 rotate-45 bg-gradient-to-br from-slate-300 to-slate-500 shadow-md" />
-        </div>
-      </motion.div>
+      {/* Pião inclinado: Terra real girando com eixo inclinado ~23° */}
+      <div className="relative" style={{ transform: "rotate(18deg)" }}>
+        {/* Eixo do pião (prolongado acima e abaixo) */}
+        <div className="absolute left-1/2 -top-8 h-[calc(100%+4rem)] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-400 via-red-500 to-red-500 shadow-[0_0_10px_rgba(248,113,113,0.7)]" />
+        {/* Terra real girando */}
+        <TerraReal size={110} spin={6} />
+        {/* Ponta metálica do pião */}
+        <div className="mx-auto -mt-2 h-4 w-4 rotate-45 bg-gradient-to-br from-slate-300 to-slate-500 shadow-md" />
+      </div>
 
       {/* Marca de ângulo */}
       <div className="absolute top-3 right-3 font-mono text-[10px] text-red-300 border border-red-400/40 rounded px-1.5 py-0.5 bg-slate-950/60">
