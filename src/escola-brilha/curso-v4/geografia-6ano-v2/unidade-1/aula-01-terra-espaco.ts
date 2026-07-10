@@ -6,6 +6,10 @@ import rotacaoReal from "@/assets/geografia-6ano/rotacao-real.jpg";
 import translacaoOrbita from "@/assets/geografia-6ano/translacao-orbita.jpg";
 import eixoInclinado from "@/assets/geografia-6ano/eixo-inclinado.jpg";
 import quatroEstacoes from "@/assets/geografia-6ano/quatro-estacoes.jpg";
+import estacaoVerao from "@/assets/geografia-6ano/estacao-verao.jpg";
+import estacaoOutono from "@/assets/geografia-6ano/estacao-outono.jpg";
+import estacaoInverno from "@/assets/geografia-6ano/estacao-inverno.jpg";
+import estacaoPrimavera from "@/assets/geografia-6ano/estacao-primavera.jpg";
 
 /**
  * Geografia · 6º Ano (PILOTO v2 — formato 5º Ano) · Unidade 1 · Aula 01
