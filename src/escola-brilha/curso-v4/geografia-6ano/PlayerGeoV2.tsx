@@ -586,7 +586,7 @@ function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -12 }}
           transition={{ duration: 0.25 }}
-          className="grid md:grid-cols-2 gap-4 p-4"
+          className={`grid gap-4 p-4 ${etapa.visual ? "md:grid-cols-2" : "md:grid-cols-1"}`}
         >
           {/* Coluna texto */}
           <div className="space-y-3">
@@ -622,18 +622,15 @@ function PassoAPassoTabs({ etapas }: { etapas: EtapaTeorica[] }) {
               </div>
             )}
           </div>
-          {/* Coluna visual */}
-          <div className="flex items-stretch">
-            {etapa.visual ? (
+          {/* Coluna visual — só renderiza quando há visual */}
+          {etapa.visual && (
+            <div className="flex items-stretch">
               <div className="w-full">
                 <MiniPalco tipo={etapa.visual} />
               </div>
-            ) : (
-              <div className="w-full rounded-lg border border-dashed border-slate-700 bg-slate-900/40 flex items-center justify-center min-h-[180px] text-slate-500 text-xs italic">
-                Sem visual associado a este passo
-              </div>
-            )}
-          </div>
+            </div>
+          )}
+
         </motion.div>
       </AnimatePresence>
     </div>
