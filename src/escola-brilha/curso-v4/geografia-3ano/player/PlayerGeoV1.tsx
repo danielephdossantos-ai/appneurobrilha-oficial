@@ -636,6 +636,55 @@ function CadernosCampo({
   onProxima: () => void;
 }) {
   const aurora = PERSONAGENS.aurora;
+  const teen = useTeen();
+
+  if (teen) {
+    return (
+      <div className="space-y-5">
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-mono mb-2">
+            Vocabulário técnico
+          </div>
+          <p className="text-slate-200 text-sm leading-relaxed">{stripDecorativeEmoji(cena.aurora)}</p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {cena.cadernos.map((c, i) => (
+            <div
+              key={c.id}
+              className="rounded-lg p-4 bg-slate-900/75 border border-slate-700 shadow-lg"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-md bg-cyan-500/10 border border-cyan-500/30 grid place-items-center text-cyan-300 font-mono text-xs">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="text-[11px] uppercase tracking-widest text-cyan-300/80 font-mono">
+                  {stripDecorativeEmoji(c.capa)}
+                </div>
+              </div>
+              <p className="text-sm text-slate-100 leading-relaxed font-medium">{c.conteudo}</p>
+              {c.exemplo && (
+                <p className="text-xs text-slate-400 mt-3 border-t border-slate-700 pt-3 leading-relaxed">
+                  Caso real: {stripDecorativeEmoji(c.exemplo)}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/25 p-4 text-sm text-slate-200 leading-relaxed">
+          {stripDecorativeEmoji(cena.falaFinal)}
+        </div>
+
+        <button
+          onClick={onProxima}
+          className="w-full py-3 rounded-lg font-semibold text-sm tracking-wide transition border bg-cyan-500 hover:bg-cyan-400 border-cyan-400 text-slate-950"
+        >
+          Continuar →
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-5">
