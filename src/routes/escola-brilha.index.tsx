@@ -327,7 +327,29 @@ function EscolaBrilhaCatalogo() {
                             </Link>
                           );
                         }
+                        if (serie === "6º Ano" && disc === "geografia") {
+                          return (
+                            <Link
+                              key={disc}
+                              to="/escola-brilha/geo-6ano/$unidade"
+                              params={{ unidade: "unidade-1-terra-no-espaco" }}
+                              className="block rounded-2xl p-4 text-white font-black active:scale-[0.98] shadow-lg"
+                              style={{ background: "linear-gradient(135deg, #0f172a, #0891b2)" }}
+                            >
+                              <div className="text-[10px] uppercase tracking-widest opacity-80">
+                                Geografia · 6º Ano · Fund. 2
+                              </div>
+                              <div className="text-lg leading-tight mt-0.5">
+                                🛰️ Dashboard Científico/Geopolítico
+                              </div>
+                              <div className="text-[11px] font-bold opacity-90 mt-1">
+                                7 unidades · Certificado Mestre em Análises →
+                              </div>
+                            </Link>
+                          );
+                        }
                         const cursoV4 = cursoPorSerieDisc[serie]?.[disc];
+
                         if (cursoV4) {
                           const totalAulas = cursoV4.unidades.reduce((s, u) => s + u.aulas.length, 0);
                           return (
