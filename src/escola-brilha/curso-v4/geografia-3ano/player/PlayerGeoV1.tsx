@@ -2093,7 +2093,68 @@ function VoceLeSozinho({
     }
   };
 
+  const [chaveAberta, setChaveAberta] = useState<string | null>(null);
+
+  const renderTextoTeenAbertoNormal = () => {
+    const definicoes = paragrafo.definicoes ?? {};
+    let restante = paragrafo.texto;
+    const partes: Array<{ tipo: "texto" | "chave"; conteudo: string }> = [];
+    const chavesOrdenadas = [...paragrafo.chaves].sort((a, b) => b.length - a.length);
+    let seguranca = 0;
+    while (restante.length > 0 && seguranca < 200) {
+      seguranca++;
+      let posEncontrada = -1;
+      let chaveEncontrada = "";
+      for (const chave of chavesOrdenadas) {
+        const idx = restante.toLowerCase().indexOf(chave.toLowerCase());
+        if (idx !== -1 && (posEncontrada === -1 || idx < posEncontrada)) {
+          posEncontrada = idx;
+          chaveEncontrada = chave;
+        }
+      }
+      if (posEncontrada === -1) {
+        partes.push({ tipo: "texto", conteudo: restante });
+        break;
+      }
+      if (posEncontrada > 0) partes.push({ tipo: "texto", conteudo: restante.slice(0, posEncontrada) });
+      partes.push({ tipo: "chave", conteudo: restante.slice(posEncontrada, posEncontrada + chaveEncontrada.length) });
+      restante = restante.slice(posEncontrada + chaveEncontrada.length);
+    }
+    return partes.map((p, i) => {
+      if (p.tipo === "texto") return <span key={i}>{p.conteudo}</span>;
+      const chaveNorm = paragrafo.chaves.find((c) => c.toLowerCase() === p.conteudo.toLowerCase())!;
+      const temDef = !!definicoes[chaveNorm];
+      const ativa = chaveAberta === `${paragrafo.id}::${chaveNorm}`;
+      return (
+        <button
+          key={i}
+          type="button"
+          onClick={() => {
+            if (!temDef) return;
+            const k = `${paragrafo.id}::${chaveNorm}`;
+            setChaveAberta((prev) => (prev === k ? null : k));
+          }}
+          className={`inline-block align-baseline mx-0.5 px-1.5 py-0.5 rounded font-semibold transition ${
+            ativa
+              ? "bg-cyan-400 text-slate-950"
+              : temDef
+                ? "bg-cyan-500/15 text-cyan-200 border border-cyan-500/40 hover:bg-cyan-500/25 cursor-pointer"
+                : "bg-cyan-500/10 text-cyan-200 border border-cyan-500/20 cursor-default"
+          }`}
+          title={temDef ? "Toque pra ver a definição" : undefined}
+        >
+          {p.conteudo}
+        </button>
+      );
+    });
+  };
+
   if (teen) {
+    const definicoes = paragrafo.definicoes ?? {};
+    const chaveSelecionada = chaveAberta?.startsWith(`${paragrafo.id}::`)
+      ? chaveAberta.slice(paragrafo.id.length + 2)
+      : null;
+    const defAtiva = chaveSelecionada ? definicoes[chaveSelecionada] : null;
     return (
       <div className="space-y-5">
         <div className="rounded-xl border border-cyan-500/25 bg-slate-900/70 px-5 py-4">
@@ -2132,46 +2193,73 @@ function VoceLeSozinho({
             animate={{ opacity: 1, y: 0 }}
             className="text-slate-100 text-lg sm:text-xl leading-relaxed font-medium"
           >
-            {renderTextoTeen()}
+            {renderTextoTeenAbertoNormal()}
           </motion.div>
 
+          {defAtiva && chaveSelecionada && (
+            <motion.div
+              key={`${paragrafo.id}-def-${chaveSelecionada}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 rounded-lg border-l-2 border-cyan-400 bg-slate-900/80 px-4 py-3"
+            >
+              <div className="text-[10px] uppercase tracking-[0.2em] font-mono text-cyan-300/80 mb-1">
+                {chaveSelecionada}
+              </div>
+              <p className="text-sm text-slate-200 leading-relaxed">{defAtiva}</p>
+            </motion.div>
+          )}
+
           <div className="mt-5 flex items-center gap-2 flex-wrap">
+            <span className="text-[10px] font-mono uppercase tracking-wide text-slate-500">
+              Termos-chave (toque pra definição):
+            </span>
             {paragrafo.chaves.map((c) => {
-              const ok = marcadasDaPagina.has(c);
+              const temDef = !!definicoes[c];
+              const ativa = chaveAberta === `${paragrafo.id}::${c}`;
               return (
-                <span
+                <button
                   key={c}
-                  className={`text-[10px] font-mono uppercase tracking-wide px-2 py-1 rounded border ${
-                    ok
-                      ? "bg-cyan-500/15 text-cyan-200 border-cyan-500/40"
-                      : "bg-slate-900 text-slate-500 border-slate-700"
+                  type="button"
+                  onClick={() => {
+                    if (!temDef) return;
+                    const k = `${paragrafo.id}::${c}`;
+                    setChaveAberta((prev) => (prev === k ? null : k));
+                  }}
+                  className={`text-[10px] font-mono uppercase tracking-wide px-2 py-1 rounded border transition ${
+                    ativa
+                      ? "bg-cyan-400 text-slate-950 border-cyan-300"
+                      : temDef
+                        ? "bg-slate-900 text-cyan-200 border-cyan-500/40 hover:bg-slate-800"
+                        : "bg-slate-900 text-slate-500 border-slate-700"
                   }`}
                 >
-                  {ok ? "✓ " : "• "}{c}
-                </span>
+                  {c}
+                </button>
               );
             })}
           </div>
 
           <div className="mt-5 flex items-center justify-between gap-2">
             <button
-              onClick={() => setPaginaAtual(Math.max(0, paginaAtual - 1))}
+              onClick={() => {
+                setChaveAberta(null);
+                setPaginaAtual(Math.max(0, paginaAtual - 1));
+              }}
               disabled={paginaAtual === 0}
               className="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs font-semibold disabled:opacity-30"
             >
               ← anterior
             </button>
             <div className="text-[10px] text-slate-500 font-mono text-center">
-              {todasMarcadasNaPagina ? "página validada" : "marque os termos-chave"}
+              {paginaAtual + 1} de {total}
             </div>
             <button
-              onClick={avancar}
-              disabled={!todasMarcadasNaPagina || concluido}
-              className={`px-3 py-2 rounded-lg text-xs font-semibold transition ${
-                todasMarcadasNaPagina && !concluido
-                  ? "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
-                  : "bg-slate-900 text-slate-600 border border-slate-700 cursor-not-allowed"
-              }`}
+              onClick={() => {
+                setChaveAberta(null);
+                avancar();
+              }}
+              className="px-3 py-2 rounded-lg text-xs font-semibold transition bg-cyan-500 text-slate-950 hover:bg-cyan-400"
             >
               {paginaAtual + 1 === total ? "finalizar ✓" : "próxima →"}
             </button>
@@ -2193,11 +2281,12 @@ function VoceLeSozinho({
               : "bg-slate-800/50 border-slate-700 text-slate-500 cursor-not-allowed"
           }`}
         >
-          {concluido ? "Continuar →" : "Conclua a leitura"}
+          {concluido ? "Continuar →" : "Termine a leitura (todas as páginas)"}
         </button>
       </div>
     );
   }
+
 
   // renderiza o texto do parágrafo com as palavras-chave viradas em botões
   const renderTexto = () => {

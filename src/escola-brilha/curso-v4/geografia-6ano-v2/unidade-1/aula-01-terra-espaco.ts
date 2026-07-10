@@ -292,7 +292,7 @@ export const aula01: AulaGeoV1 = {
 
   cena08_voceLe: {
     tipo: "voceLeSozinho",
-    aurora: "Sua vez. Leia com atenção e marque as palavras-chave em cada parágrafo.",
+    aurora: "Leia com calma. Os TERMOS-CHAVE ficam destacados — toque em qualquer um pra ver a definição rápida antes de continuar.",
     tituloLivro: "📘 Manual do Explorador Planetário",
     subtitulo: "Capítulo 1 — Movimentos da Terra",
     paragrafos: [
@@ -300,32 +300,60 @@ export const aula01: AulaGeoV1 = {
         id: "p1",
         texto:
           "A ROTAÇÃO é o giro da Terra em torno do próprio eixo. Dura cerca de 24 horas e causa o ciclo do DIA e da NOITE. No Equador, a superfície gira a 1.670 km/h.",
-        chaves: ["rotação", "24 horas", "dia", "noite", "1.670"],
+        chaves: ["ROTAÇÃO", "24 horas", "DIA", "NOITE", "1.670 km/h"],
+        definicoes: {
+          "ROTAÇÃO": "Movimento em que a Terra gira em torno do próprio eixo, como um pião. É esse giro que faz o Sol parecer 'nascer' e 'se pôr'.",
+          "24 horas": "Tempo aproximado de UMA rotação completa da Terra. É por isso que o dia tem 24h e o Sol volta pra mesma posição a cada 24h.",
+          "DIA": "Lado da Terra que está iluminado pelo Sol naquele momento. Como a Terra gira, esse lado muda o tempo todo.",
+          "NOITE": "Lado da Terra que está na sombra, virado para longe do Sol. Rotação = revezamento contínuo entre dia e noite.",
+          "1.670 km/h": "Velocidade da superfície da Terra no Equador por causa da rotação. Nos polos essa velocidade cai a quase zero.",
+        },
         fotoUrl: rotacaoDiaNoite,
       },
       {
         id: "p2",
         texto:
           "A TRANSLAÇÃO é a volta da Terra ao redor do SOL. Dura 365 dias e 6 horas — origem do ano BISSEXTO. A Terra percorre 940 milhões de km a 107.000 km/h.",
-        chaves: ["translação", "365", "sol", "bissexto", "107.000"],
+        chaves: ["TRANSLAÇÃO", "365 dias", "SOL", "BISSEXTO", "107.000 km/h"],
+        definicoes: {
+          "TRANSLAÇÃO": "Movimento em que a Terra dá uma volta INTEIRA em torno do Sol, seguindo uma órbita elíptica.",
+          "365 dias": "Tempo aproximado de UMA translação completa = 1 ano. Na verdade são 365 dias e cerca de 6 horas.",
+          "SOL": "Estrela no centro do Sistema Solar. Sua gravidade prende a Terra em órbita e fornece a luz e o calor que temos.",
+          "BISSEXTO": "A cada 4 anos, essas 6 horas 'sobrando' viram um dia extra (29 de fevereiro). Sem isso, o calendário desalinharia com as estações.",
+          "107.000 km/h": "Velocidade média da Terra na órbita — mais de 100 vezes mais rápido do que um avião comercial.",
+        },
         fotoUrl: translacaoOrbita,
       },
       {
         id: "p3",
         texto:
           "O EIXO da Terra está INCLINADO em 23,5°. Essa inclinação é FIXA e é a verdadeira causa das ESTAÇÕES do ano. A distância ao Sol muda muito pouco (só 3%).",
-        chaves: ["eixo", "23,5", "inclinado", "estações", "3%"],
+        chaves: ["EIXO", "INCLINADO", "23,5°", "FIXA", "ESTAÇÕES"],
+        definicoes: {
+          "EIXO": "Linha imaginária que atravessa o planeta de polo a polo. É em torno dele que a Terra gira (rotação).",
+          "INCLINADO": "Em vez de ficar 'em pé', o eixo aponta meio de lado em relação ao plano da órbita — como um pião torto.",
+          "23,5°": "Ângulo exato dessa inclinação. Se fosse 0°, não existiriam estações do ano.",
+          "FIXA": "A direção da inclinação NÃO muda durante o ano. É por isso que hemisférios diferentes recebem sol direto em épocas diferentes.",
+          "ESTAÇÕES": "Verão, outono, inverno e primavera. Existem por causa da inclinação — NÃO por causa da distância ao Sol.",
+        },
         fotoUrl: eixoInclinado,
       },
       {
         id: "p4",
         texto:
           "As estações são INVERTIDAS entre os hemisférios: quando é verão no SUL, é inverno no NORTE. Nos EQUINÓCIOS (março e setembro), dia e noite duram IGUAL no planeta inteiro.",
-        chaves: ["invertidas", "verão", "inverno", "hemisférios", "equinócios"],
+        chaves: ["INVERTIDAS", "HEMISFÉRIOS", "SUL", "NORTE", "EQUINÓCIOS"],
+        definicoes: {
+          "INVERTIDAS": "Enquanto um hemisfério vive verão, o outro vive inverno — no MESMO dia. Isso é efeito direto da inclinação do eixo.",
+          "HEMISFÉRIOS": "As duas metades da Terra separadas pela linha do Equador: hemisfério norte e hemisfério sul.",
+          "SUL": "Hemisfério onde fica o Brasil. Verão aqui vai de dezembro a março; inverno de junho a setembro.",
+          "NORTE": "Hemisfério onde ficam EUA, Europa, Japão. As estações são opostas às nossas.",
+          "EQUINÓCIOS": "Dois dias por ano (por volta de 20/mar e 22/set) em que dia e noite duram IGUAL no planeta inteiro. Marcam início do outono/primavera.",
+        },
         fotoUrl: quatroEstacoes,
       },
     ],
-    falaFinal: "Leu tudo? Boa. Agora um minijogo cronometrado.",
+    falaFinal: "Leu tudo com as definições? Boa. Agora um minijogo cronometrado.",
   },
 
   cena09_minijogo: {
