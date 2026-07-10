@@ -2209,6 +2209,18 @@ function VoceLeSozinho({
             <div className="text-[10px] text-slate-500 font-mono shrink-0">{paginaAtual + 1}/{total}</div>
           </div>
 
+          {paragrafo.fotoUrl && (
+            <motion.img
+              key={`${paragrafo.id}-foto`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              src={paragrafo.fotoUrl}
+              alt=""
+              loading="lazy"
+              className="w-full aspect-[16/9] object-cover rounded-lg border border-slate-700 mb-4"
+            />
+          )}
+
           <motion.div
             key={paragrafo.id}
             initial={{ opacity: 0, y: 8 }}
