@@ -481,7 +481,99 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "A formação de voçorocas (grandes fendas no solo) decorrente do desmatamento da vegetação nativa, deixando o solo desprotegido contra o impacto direto das águas pluviais.",
       imagem_analise: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Qual a diferença entre INTEMPERISMO e EROSÃO?",
+        opcoes: [
+          {
+            texto: "Intemperismo é o desgaste no LUGAR (rocha vira sedimento); erosão é o TRANSPORTE desse material para longe.",
+            correta: true,
+            explicacao:
+              "Correto. Primeiro a rocha se decompõe onde está (intemperismo), depois a água, vento ou gelo carregam os fragmentos (erosão). São etapas encadeadas.",
+          },
+          {
+            texto: "São sinônimos: os dois significam 'desgaste do solo'.",
+            correta: false,
+            explicacao:
+              "Não. É uma diferença clássica de vestibular: intemperismo = decomposição in loco; erosão = movimento. Confundir custa ponto na prova.",
+          },
+          {
+            texto: "Intemperismo é feito pelo humano; erosão é natural.",
+            correta: false,
+            explicacao:
+              "Ambos podem ser naturais OU acelerados pela ação humana. A diferença está na etapa do processo (decompor vs transportar), não em quem faz.",
+          },
+        ],
+      },
+      {
+        pergunta: "Uma voçoroca (fenda gigante no solo) é um exemplo de:",
+        opcoes: [
+          {
+            texto: "Erosão acelerada pela ação humana (desmatamento + escoamento superficial da chuva).",
+            correta: true,
+            explicacao:
+              "Perfeito. Voçorocas se formam quando o solo perde a cobertura vegetal e a água da chuva 'cava' o terreno rapidamente. É um dos exemplos mais visíveis de erosão antrópica.",
+          },
+          {
+            texto: "Um tipo de vulcão que expele lama ao invés de lava.",
+            correta: false,
+            explicacao:
+              "Não. Voçoroca é um problema de superfície, ligado à erosão do solo — nada tem a ver com atividade vulcânica.",
+          },
+          {
+            texto: "Uma formação natural que só ocorre em regiões desérticas.",
+            correta: false,
+            explicacao:
+              "Voçorocas ocorrem em qualquer clima onde o solo esteja exposto — muito comuns em áreas tropicais desmatadas do Brasil (Cerrado, Mata Atlântica).",
+          },
+        ],
+      },
+      {
+        pergunta: "O relevo brasileiro é considerado geologicamente ANTIGO. O que isso significa?",
+        opcoes: [
+          {
+            texto: "Foi formado há milhões de anos e já passou por muito desgaste erosivo — por isso não temos montanhas altas nem vulcões ativos.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. Nosso relevo mais alto (Pico da Neblina, ~2.995 m) é baixo comparado ao Himalaia (~8.848 m). Terreno antigo = mais tempo sob ação da erosão = mais 'gasto'.",
+          },
+          {
+            texto: "Significa que o Brasil foi o primeiro continente a existir no planeta.",
+            correta: false,
+            explicacao:
+              "Não. 'Antigo' aqui é um termo geológico sobre as ROCHAS e ESTRUTURAS do subsolo, não sobre a ordem cronológica de aparecimento dos continentes.",
+          },
+          {
+            texto: "Que o Brasil vai sofrer terremotos fortes em breve por causa da idade.",
+            correta: false,
+            explicacao:
+              "Ao contrário: por estar no meio da placa (não nas bordas), o Brasil é uma das regiões mais ESTÁVEIS do mundo. Terremotos fortes acontecem nas bordas das placas.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Classifique cada agente de modelagem do relevo em INTERNO (endógeno), EXTERNO (exógeno) ou HUMANO (antrópico).",
+      categorias: [
+        { id: "interno", titulo: "Agente Interno", cor: "cyan" },
+        { id: "externo", titulo: "Agente Externo", cor: "amber" },
+        { id: "humano", titulo: "Agente Humano", cor: "emerald" },
+      ],
+      cartoes: [
+        { texto: "Terremoto causado pelo movimento das placas.", categoriaId: "interno" },
+        { texto: "Erupção vulcânica com liberação de magma.", categoriaId: "interno" },
+        { texto: "Vento carregando areia no deserto.", categoriaId: "externo" },
+        { texto: "Chuva desgastando uma encosta de morro.", categoriaId: "externo" },
+        { texto: "Terraplanagem para construir um bairro.", categoriaId: "humano" },
+        { texto: "Mineração a céu aberto abrindo crateras.", categoriaId: "humano" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "Em encostas de morros urbanos, a retirada da cobertura vegetal original para a construção de moradias informais frequentemente resulta em desmoronamentos durante o período de chuvas intensas. Esse desastre socioambiental é provocado por:",
       opcoes: [
