@@ -8,7 +8,7 @@ export type EtapaTeorica = {
   titulo: string;
   texto: string;
   /** Chave da mini animação embutida no card do passo. */
-  visual?: "rotacao" | "translacao" | "inclinacao" | "piao";
+  visual?: "rotacao" | "translacao" | "inclinacao" | "piao" | "latitude" | "longitude" | "projecoes";
   /** Exemplo real do dia-a-dia que materializa o conceito. */
   exemplo_real?: string;
 };
@@ -17,8 +17,9 @@ export type RoteiroVisual = {
   foco: string;
   descricao: string;
   legenda: string;
-  tipo?: "terra-orbita" | "generico";
+  tipo?: "terra-orbita" | "globo-coordenadas" | "generico";
 };
+
 
 export type UnidadeFund2 = {
   unidade: number;
