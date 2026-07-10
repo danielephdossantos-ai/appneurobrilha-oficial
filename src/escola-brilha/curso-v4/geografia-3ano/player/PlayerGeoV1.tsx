@@ -823,7 +823,8 @@ function QuizRadar({
               ? idx + 1 < total
                 ? "Próxima pergunta →"
                 : "Ver resultado"
-              : "📡 Escolha um card pra ativar o radar"}
+              : "Escolha uma resposta"}
+
           </button>
         </>
       )}
