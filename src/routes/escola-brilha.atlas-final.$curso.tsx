@@ -229,7 +229,7 @@ function AtlasFinal() {
           <h1 className="text-3xl font-black">Atlas ainda trancado</h1>
           <p className="text-white/80">
             Termine as {totalAulas} aulas do curso <b>{curso.titulo}</b> pra
-            destravar seu Livro Mágico do Explorador.
+            {serieFund2 ? " liberar seu Diploma." : " destravar seu Livro Mágico do Explorador."}
           </p>
           <div className="bg-white/10 rounded-full h-4 overflow-hidden">
             <div
