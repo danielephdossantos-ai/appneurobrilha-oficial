@@ -863,6 +863,9 @@ export type AulaGeoV1 = {
   iconeTrilha: string;
   bncc: string[];
   duracaoMin: number;
+  /** "teen" = paleta acadêmica escura, sem mascote infantil, cards sóbrios (6º ano+). */
+  estilo?: "teen";
+
 
   cena01_motivacao: CenaGeoV1;
   cena02_previsao: CenaGeoV1;
