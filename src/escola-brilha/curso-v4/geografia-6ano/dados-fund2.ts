@@ -50,11 +50,39 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
     conteudo_pedagogico: {
       conceito_chave: "Rotação, Translação e a Inclinação da Terra",
       texto_teorico:
-        "Para entender a Geografia, imagine a Terra como um pião que gira meio 'deitado'. 1) Movimento de Rotação (o giro do pião): a Terra gira em torno de si mesma como um pião, e esse giro demora cerca de 24 horas — enquanto um lado está de frente para o Sol (Dia), o outro está no escuro (Noite). Esse movimento ainda cria uma força invisível chamada Efeito de Coriolis, que desvia correntes de ar e ventos. 2) Movimento de Translação (a grande viagem): ao mesmo tempo em que gira sobre si, a Terra viaja ao redor do Sol, e essa viagem demora 365 dias e 6 horas — o nosso ano. 3) A Inclinação do Eixo (o segredo das estações): o planeta não gira 'em pé'; o eixo é inclinado em 23°27'. Por causa dessa inclinação, enquanto a Terra viaja ao redor do Sol, um hemisfério recebe mais luz e calor diretamente do que o outro — é isso que dá origem às quatro estações do ano.",
+        "Para entender a Geografia, imagine a Terra como um pião que gira meio 'deitado'. São três movimentos que, juntos, criam o dia, a noite e as estações do ano.",
+      etapas_teoricas: [
+        {
+          titulo: "Movimento de Rotação — o giro do pião",
+          texto:
+            "A Terra gira em torno de si mesma como um pião. Esse giro demora cerca de 24 horas: enquanto um lado está de frente para o Sol (Dia), o outro está no escuro (Noite). Esse movimento também cria uma força invisível chamada Efeito de Coriolis, que desvia correntes de ar e ventos.",
+        },
+        {
+          titulo: "Movimento de Translação — a grande viagem",
+          texto:
+            "Ao mesmo tempo em que gira sobre si, a Terra viaja ao redor do Sol. Essa viagem demora 365 dias e 6 horas — é o que chamamos de um ano.",
+        },
+        {
+          titulo: "Inclinação do Eixo — o segredo das estações",
+          texto:
+            "O planeta não gira 'em pé': o eixo é inclinado em 23°27'. Por causa disso, enquanto a Terra viaja ao redor do Sol, um hemisfério recebe mais luz e calor diretamente do que o outro — e é isso que dá origem às quatro estações do ano.",
+        },
+      ],
+      roteiro_visual_interativo: {
+        foco: "Simulador da Terra em órbita",
+        descricao:
+          "Explore os três movimentos em abas: veja o giro que separa Dia e Noite, a viagem anual ao redor do Sol e como a inclinação faz os hemisférios receberem mais ou menos calor.",
+        legenda:
+          "Observe: a inclinação faz os raios solares baterem com mais força no Hemisfério Sul em dezembro (Verão) e no Hemisfério Norte em junho (Inverno para nós).",
+        tipo: "terra-orbita",
+      },
+      exemplo_pratico_visual:
+        "Segure uma lanterna (Sol) apontada para uma bola de futebol (Terra). Se você inclinar a bola para a frente, a parte de cima recebe muito mais luz do que a de baixo. É exatamente isso que acontece entre o Solstício (máxima desigualdade de luz, início do Verão ou Inverno) e o Equinócio (luz igual nos dois lados, início da Primavera ou Outono).",
       exemplo_visual:
-        "Imagine segurar uma lanterna (Sol) apontada para uma bola de futebol (Terra): se você inclinar a bola para a frente, a parte de cima recebe muito mais luz do que a de baixo. É isso que acontece entre o Solstício (máxima desigualdade de luz, início do Verão ou Inverno) e o Equinócio (luz igual nos dois lados, início da Primavera ou Outono).",
+        "Solstícios e Equinócios: a inclinação constante do eixo distribui a luz solar de forma diferente em cada época do ano.",
       imagem_analise: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200",
     },
+
     desafio_critico: {
       pergunta:
         "Imagine que cientistas descobriram um novo planeta idêntico à Terra, mas com uma única diferença: o seu eixo de rotação é perfeitamente reto (vertical, sem nenhuma inclinação). Se você fosse morar nesse planeta, o que aconteceria com o clima ao longo do ano?",
