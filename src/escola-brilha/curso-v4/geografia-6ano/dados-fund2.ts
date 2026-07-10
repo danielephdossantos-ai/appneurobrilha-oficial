@@ -549,7 +549,99 @@ export const UNIDADES_6ANO: UnidadeFund2[] = [
         "A desertificação induzida em áreas periféricas de biomas frágeis, provocada pela superpastagem e técnicas agrícolas incorretas de manejo do solo.",
       imagem_analise: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=1200",
     },
+    quiz_relampago: [
+      {
+        pergunta: "Por que a Amazônia tem árvores altíssimas e a Tundra siberiana só tem musgos e liquens?",
+        opcoes: [
+          {
+            texto: "Porque o clima (temperatura, umidade, luz) de cada região determina o tipo de vegetação que consegue sobreviver ali.",
+            correta: true,
+            explicacao:
+              "Correto. A vegetação é o 'espelho' do clima. Amazônia = quente + úmido + luz o ano inteiro → floresta densa. Tundra = frio extremo + solo congelado → só plantas rasteiras.",
+          },
+          {
+            texto: "Porque na Amazônia o solo é muito rico em nutrientes e na Tundra é pobre.",
+            correta: false,
+            explicacao:
+              "Curiosidade: o solo amazônico é POBRE em nutrientes! A floresta se sustenta reciclando matéria orgânica na superfície. O que faz a diferença mesmo é o clima.",
+          },
+          {
+            texto: "Porque a Tundra foi desmatada pelo ser humano no passado.",
+            correta: false,
+            explicacao:
+              "Não. A Tundra sempre foi assim, por causa do clima polar. É um bioma naturalmente rasteiro, não uma floresta degradada.",
+          },
+        ],
+      },
+      {
+        pergunta: "O Cerrado tem árvores baixas, tortas e com casca grossa. Isso é uma adaptação a quê?",
+        opcoes: [
+          {
+            texto: "Ao clima com longa estação seca e à ocorrência natural de queimadas, que a casca grossa resiste.",
+            correta: true,
+            explicacao:
+              "Perfeito. O Cerrado é o 'savana' brasileiro: 5-6 meses de seca por ano. As árvores tortas guardam água nas raízes profundas e a casca grossa protege do fogo natural.",
+          },
+          {
+            texto: "Ao solo encharcado o ano inteiro, que impede o crescimento vertical.",
+            correta: false,
+            explicacao:
+              "Ao contrário: o Cerrado é seco. O bioma de solo encharcado é o Pantanal, que tem outra flora bem diferente.",
+          },
+          {
+            texto: "À baixa incidência de luz solar na região central do Brasil.",
+            correta: false,
+            explicacao:
+              "O Cerrado recebe MUITO sol — está em baixa latitude. O fator limitante é a água (seca prolongada), não a luz.",
+          },
+        ],
+      },
+      {
+        pergunta: "Qual é a maior ameaça atual à biodiversidade dos biomas tropicais?",
+        opcoes: [
+          {
+            texto: "A expansão desordenada da fronteira agrícola, mineração e pecuária, que fragmenta os ecossistemas.",
+            correta: true,
+            explicacao:
+              "Isso mesmo. Nos trópicos, a maior perda de biomas vem do avanço econômico sobre florestas — soja, gado, garimpo, madeira. Não é o clima natural, é a pressão humana.",
+          },
+          {
+            texto: "O resfriamento global, que está tornando os trópicos frios demais para muitas espécies.",
+            correta: false,
+            explicacao:
+              "O planeta está esquentando, não esfriando. E mesmo o aquecimento global afeta a biodiversidade, mas a ameaça mais imediata e direta é o desmatamento.",
+          },
+          {
+            texto: "A chegada de meteoros e a atividade vulcânica intensa nos últimos anos.",
+            correta: false,
+            explicacao:
+              "Sem base científica. A perda de biomas é um problema humano documentado (INPE, IBAMA), não astronômico ou geológico.",
+          },
+        ],
+      },
+    ],
+
+    mini_jogo: {
+      tipo: "categorizar",
+      instrucao:
+        "Cada característica pertence a um grande bioma. Classifique corretamente.",
+      categorias: [
+        { id: "equatorial", titulo: "Floresta Equatorial (Amazônia)", cor: "emerald" },
+        { id: "temperada", titulo: "Floresta Temperada", cor: "amber" },
+        { id: "polar", titulo: "Tundra Polar", cor: "cyan" },
+      ],
+      cartoes: [
+        { texto: "Árvores altas e folhas largas perenes o ano inteiro.", categoriaId: "equatorial" },
+        { texto: "Árvores decíduas que perdem as folhas no outono.", categoriaId: "temperada" },
+        { texto: "Solo permanentemente congelado (permafrost).", categoriaId: "polar" },
+        { texto: "Biodiversidade extrema, milhares de espécies por km².", categoriaId: "equatorial" },
+        { texto: "Quatro estações do ano bem marcadas.", categoriaId: "temperada" },
+        { texto: "Vegetação rasteira de musgos e liquens.", categoriaId: "polar" },
+      ],
+    },
+
     desafio_critico: {
+
       pergunta:
         "A vegetação do tipo Tundra, composta majoritariamente por musgos e liquens, apresenta um ciclo de vida extremamente curto e ausência de árvores de grande porte. Esse perfil botânico é uma adaptação direta a qual limitação ambiental?",
       opcoes: [
