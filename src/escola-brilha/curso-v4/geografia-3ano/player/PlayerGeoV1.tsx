@@ -1624,7 +1624,7 @@ function ConstrutorMarcos({
               dragSnapToOrigin
               dragMomentum={false}
               whileDrag={{ scale: 1.05, zIndex: 50 }}
-              onDragEnd={(_, info) => tentarSoltar(p.id, info)}
+              onDragEnd={(e, info) => tentarSoltar(p.id, e, info)}
               disabled={travada}
               className={`text-left px-4 py-3 rounded-xl border text-sm transition-colors touch-none ${
                 usada
