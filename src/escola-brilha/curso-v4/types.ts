@@ -750,8 +750,10 @@ export type CenaGeoV1 =
       paragrafos: Array<{
         id: string;
         texto: string;                   // parágrafo curto, letras grandes
-        /** Palavras-chave desse parágrafo que a criança precisa marcar ao ler. */
+        /** Palavras-chave desse parágrafo. No modo teen viram chips clicáveis com definição. */
         chaves: string[];
+        /** Opcional: definição curta para cada chave (teen). Ex.: { "rotação": "Giro da Terra no próprio eixo." } */
+        definicoes?: Record<string, string>;
         fotoUrl?: string;                // opcional: imagem de apoio ao parágrafo
       }>;
       falaFinal: string;                 // fecha depois de "Li tudo"
