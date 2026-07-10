@@ -4,7 +4,15 @@
  * Zero mascotes. Consumido pelo PlayerGeoV2 (Dashboard Científico).
  */
 
-export type EtapaTeorica = { titulo: string; texto: string };
+export type EtapaTeorica = {
+  titulo: string;
+  texto: string;
+  /** Chave da mini animação embutida no card do passo. */
+  visual?: "rotacao" | "translacao" | "inclinacao";
+  /** Exemplo real do dia-a-dia que materializa o conceito. */
+  exemplo_real?: string;
+};
+
 export type RoteiroVisual = {
   foco: string;
   descricao: string;
