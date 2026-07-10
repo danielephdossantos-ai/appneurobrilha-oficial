@@ -1121,6 +1121,35 @@ function LinhaEstrada({
         {cena.pergunta}
       </div>
 
+      {/* Legenda — entender cada item ANTES de arrastar */}
+      <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-3 space-y-2">
+        <div className="text-xs font-bold text-emerald-300 uppercase tracking-wider text-center">
+          📖 Entenda cada item antes de arrastar
+        </div>
+        <ul className="space-y-1.5">
+          {cena.paradas.map((p) => {
+            const rotuloLimpo = p.rotulo.replace(/^\s*\d+[.)-]\s*/, "");
+            return (
+              <li
+                key={p.id}
+                className="flex items-start gap-2 text-sm leading-snug"
+              >
+                <span className="text-lg leading-none shrink-0 w-6 text-center">
+                  {p.emoji}
+                </span>
+                <span className="flex-1">
+                  <span className="text-white font-semibold">{rotuloLimpo}</span>
+                  <span className="text-white/60"> — {p.descricao}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="text-[11px] text-white/40 text-center pt-1 border-t border-white/10">
+          Agora arraste cada nome pro lugar certo abaixo, na ordem pedida.
+        </div>
+      </div>
+
       {/* Slots numerados — destino */}
       <div className="space-y-2">
         {cena.ordemCerta.map((id, i) => {
